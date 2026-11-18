@@ -1,0 +1,373 @@
+{
+ "id": "core-047-rich-young-ruler",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El joven rico",
+ "passage": {
+  "refs": [
+   "MAR 10:17-27"
+  ],
+  "label": "Marcos 10:17-27"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "man",
+   "name": "uno",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "disciples",
+   "name": "discípulos",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús salía de camino cuando un hombre llegó corriendo y se arrodilló delante de él. Era joven, rico e importante. Y tenía una pregunta que le quitaba el sueño."
+  },
+  {
+   "type": "scripture",
+   "speaker": "man",
+   "ref": "MAR 10:17",
+   "label": "Marcos 10:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Y saliendo él para ir su camino, vino uno corriendo, é hincando la rodilla delante de él, le preguntó: Maestro bueno, ¿qué haré para poseer la vida eterna?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Y saliendo él para ir su camino, vino uno corriendo, é hincando la rodilla delante de él, le preguntó:"
+    },
+    {
+     "v": 17,
+     "speaker": "man",
+     "text": "Maestro bueno, ¿qué haré para poseer la vida eterna?"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Solo uno es bueno, y es Dios.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:18-19",
+   "label": "Marcos 10:18-19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y Jesús le dijo: ¿Por qué me dices bueno? Ninguno hay bueno, sino sólo uno, Dios."
+    },
+    {
+     "v": 19,
+     "text": "Los mandamientos sabes: No adulteres: No mates: No hurtes: No digas falso testimonio: No defraudes: Honra á tu padre y á tu madre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y Jesús le dijo: ¿Por qué me dices bueno? Ninguno hay bueno, sino sólo uno, Dios."
+    },
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Los mandamientos sabes: No adulteres: No mates: No hurtes: No digas falso testimonio: No defraudes: Honra á tu padre y á tu madre."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "man",
+   "ref": "MAR 10:20",
+   "label": "Marcos 10:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "El entonces respondiendo, le dijo: Maestro, todo esto he guardado desde mi mocedad."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "El entonces respondiendo, le dijo:"
+    },
+    {
+     "v": 20,
+     "speaker": "man",
+     "text": "Maestro, todo esto he guardado desde mi mocedad."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Él había guardado los mandamientos desde joven. Era un buen hombre en muchos sentidos. Y aun así sentía que le faltaba algo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:21",
+   "label": "Marcos 10:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Entonces Jesús mirándole, amóle, y díjole: Una cosa te falta: ve, vende todo lo que tienes, y da á los pobres, y tendrás tesoro en el cielo; y ven, sígueme, tomando tu cruz."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Entonces Jesús mirándole, amóle, y díjole: Una cosa te falta: ve, vende todo lo que tienes, y da á los pobres, y tendrás tesoro en el cielo; y ven, sígueme, tomando tu cruz."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús lo miró y lo amó. Eso dice la Biblia antes de cualquier otra cosa. Lo que le dijo después fue difícil, pero se lo dijo por amor."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Una cosa te falta. Jesús vio lo que ocupaba el primer lugar en el corazón de aquel hombre. Y lo invitó a soltarlo, para seguirlo a él."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:22",
+   "label": "Marcos 10:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Mas él, entristecido por esta palabra, se fué triste, porque tenía muchas posesiones."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Mas él, entristecido por esta palabra, se fué triste, porque tenía muchas posesiones."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Se fue triste. No enojado. Triste. Quería la vida eterna, pero no quería soltar lo que tenía. Y Jesús no corrió detrás de él para ofrecerle un trato más fácil."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:23-24",
+   "label": "Marcos 10:23-24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Entonces Jesús, mirando alrededor, dice á sus discípulos: ¡Cuán difícilmente entrarán en el reino de Dios los que tienen riquezas!"
+    },
+    {
+     "v": 24,
+     "text": "Y los discípulos se espantaron de sus palabras; mas Jesús respondiendo, les volvió á decir: ¡Hijos, cuán difícil es entrar en el reino de Dios, los que confían en las riquezas!"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Entonces Jesús, mirando alrededor, dice á sus discípulos: ¡Cuán difícilmente entrarán en el reino de Dios los que tienen riquezas!"
+    },
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y los discípulos se espantaron de sus palabras; mas Jesús respondiendo, les volvió á decir: ¡Hijos, cuán difícil es entrar en el reino de Dios, los que confían en las riquezas!"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:25",
+   "label": "Marcos 10:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Más fácil es pasar un camello por el ojo de una aguja, que el rico entrar en el reino de Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Más fácil es pasar un camello por el ojo de una aguja, que el rico entrar en el reino de Dios."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Que un camello pase por el hueco de una aguja. Es una imagen imposible a propósito. Los discípulos se quedaron asombrados. En aquel tiempo muchos pensaban que la riqueza era señal de que Dios estaba contento con alguien."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAR 10:26",
+   "label": "Marcos 10:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Y ellos se espantaban más, diciendo dentro de sí: ¿Y quién podrá salvarse?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y ellos se espantaban más, diciendo dentro de sí:"
+    },
+    {
+     "v": 26,
+     "speaker": "disciples",
+     "text": "¿Y quién podrá salvarse?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:27",
+   "label": "Marcos 10:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Entonces Jesús mirándolos, dice: Para los hombres es imposible; mas para Dios, no; porque todas las cosas son posibles para Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Entonces Jesús mirándolos, dice: Para los hombres es imposible; mas para Dios, no; porque todas las cosas son posibles para Dios."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Para los hombres es imposible, pero para Dios no. Esa es la buena noticia de esta historia. Nadie se gana el cielo con su bondad, ni con su dinero, ni con lo que deja. La salvación es obra de Dios."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los discípulos habían dejado sus redes, sus barcas y sus casas para seguir a Jesús. Pedro se lo dijo enseguida. Y Jesús les respondió que nada de lo que se deja por él se pierde, aunque también les habló de persecuciones. Seguirlo no es un negocio. Es una vida nueva."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús no le pide a todo el mundo exactamente lo mismo que a este hombre. Pero sí nos pregunta a todos qué ocupa el primer lugar en nuestro corazón. Para unos es el dinero. Para otros es el trabajo, la seguridad, la opinión de la gente, o una persona."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche puedes hacerte esa pregunta delante de Dios, sin miedo. Él te mira con el mismo amor con que miró a aquel joven. Y lo que para nosotros es imposible soltar, para él no es imposible."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 607,
+ "est_seconds": 337,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 10:17-27 (vv28-30 summarised with the persecutions kept, no hundredfold promise); salvation as God's work; not every listener told to sell all."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Wealth not mocked and poverty not romanticised; 'lo miró y lo amó' given its weight."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

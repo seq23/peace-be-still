@@ -1,0 +1,463 @@
+{
+ "id": "core-042-rahab",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Rahab y el cordón de grana",
+ "passage": {
+  "refs": [
+   "JOS 2:1-21"
+  ],
+  "label": "Josué 2:1-21"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "implied"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "rahab",
+   "name": "Rahab",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "spies",
+   "name": "ellos",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Después de cuarenta años en el desierto, el pueblo de Israel estaba por fin a la orilla del río Jordán. Del otro lado estaba la tierra prometida, y la primera ciudad era Jericó, con sus murallas altas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:1",
+   "label": "Josué 2:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y JOSUÉ, hijo de Nun, envió desde Sittim dos espías secretamente, diciéndoles: Andad, reconoced la tierra, y á Jericó. Los cuales fueron, y entráronse en casa de una mujer ramera que se llamaba Rahab, y posaron allí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y JOSUÉ, hijo de Nun, envió desde Sittim dos espías secretamente, diciéndoles: Andad, reconoced la tierra, y á Jericó. Los cuales fueron, y entráronse en casa de una mujer ramera que se llamaba Rahab, y posaron allí."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con una mujer que nadie en la ciudad tenía en cuenta.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rahab vivía en una casa construida en la misma muralla de la ciudad. La Biblia dice claramente cómo se ganaba la vida, y no la esconde. Pero tampoco la deja ahí."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:2-3",
+   "label": "Josué 2:2-3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y fué dado aviso al rey de Jericó, diciendo: He aquí que hombres de los hijos de Israel han venido aquí esta noche á espiar la tierra."
+    },
+    {
+     "v": 3,
+     "text": "Entonces el rey de Jericó envió á decir á Rahab: Saca fuera los hombres que han venido á ti, y han entrado en tu casa; porque han venido á espiar toda la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y fué dado aviso al rey de Jericó, diciendo: He aquí que hombres de los hijos de Israel han venido aquí esta noche á espiar la tierra."
+    },
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Entonces el rey de Jericó envió á decir á Rahab: Saca fuera los hombres que han venido á ti, y han entrado en tu casa; porque han venido á espiar toda la tierra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rahab tuvo que decidir en un instante. Si escondía a los espías, arriesgaba su vida. Si los entregaba, quedaba bien con el rey."
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:4",
+   "label": "Josué 2:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Mas la mujer había tomado los dos hombres, y los había escondido; y dijo: Verdad que hombres vinieron á mí, mas no supe de dónde eran:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Mas la mujer había tomado los dos hombres, y los había escondido; y dijo:"
+    },
+    {
+     "v": 4,
+     "speaker": "rahab",
+     "text": "Verdad que hombres vinieron á mí, mas no supe de dónde eran:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:5",
+   "label": "Josué 2:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y al cerrarse la puerta, siendo ya oscuro, esos hombres se salieron, y no sé á dónde se han ido: seguidlos apriesa, que los alcanzaréis."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "rahab",
+     "text": "Y al cerrarse la puerta, siendo ya oscuro, esos hombres se salieron, y no sé á dónde se han ido: seguidlos apriesa, que los alcanzaréis."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:6",
+   "label": "Josué 2:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Mas ella los había hecho subir al terrado, y habíalos escondido entre tascos de lino que en aquel terrado tenía puestos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Mas ella los había hecho subir al terrado, y habíalos escondido entre tascos de lino que en aquel terrado tenía puestos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los escondió en el techo, debajo de los tallos de lino que tenía puestos a secar. Y los soldados se fueron a buscarlos por el camino del río."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:8",
+   "label": "Josué 2:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Mas antes que ellos durmiesen, ella subió á ellos al terrado, y díjoles:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Mas antes que ellos durmiesen, ella subió á ellos al terrado, y díjoles:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:9",
+   "label": "Josué 2:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Sé que Jehová os ha dado esta tierra; porque el temor de vosotros ha caído sobre nosotros, y todos los moradores del país están desmayados por causa de vosotros;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "rahab",
+     "text": "Sé que Jehová os ha dado esta tierra; porque el temor de vosotros ha caído sobre nosotros, y todos los moradores del país están desmayados por causa de vosotros;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:11",
+   "label": "Josué 2:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Oyendo esto, ha desmayado nuestro corazón; ni ha quedado más espíritu en alguno por causa de vosotros: porque Jehová vuestro Dios es Dios arriba en los cielos y abajo en la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "rahab",
+     "text": "Oyendo esto, ha desmayado nuestro corazón; ni ha quedado más espíritu en alguno por causa de vosotros: porque Jehová vuestro Dios es Dios arriba en los cielos y abajo en la tierra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rahab no era israelita. No había crecido oyendo de Abraham ni de Moisés. Pero había oído lo que Dios había hecho en el mar Rojo, y creyó. El Dios de Israel es el Dios del cielo y de la tierra. Eso confesó una mujer de Jericó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:12-13",
+   "label": "Josué 2:12-13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Ruégoos pues ahora, me juréis por Jehová, que como he hecho misericordia con vosotros, así la haréis vosotros con la casa de mi padre, de lo cual me daréis una señal cierta;"
+    },
+    {
+     "v": 13,
+     "text": "Y que salvaréis la vida á mi padre y á mi madre, y á mis hermanos y hermanas, y á todo lo que es suyo; y que libraréis nuestras vidas de la muerte."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "rahab",
+     "text": "Ruégoos pues ahora, me juréis por Jehová, que como he hecho misericordia con vosotros, así la haréis vosotros con la casa de mi padre, de lo cual me daréis una señal cierta;"
+    },
+    {
+     "v": 13,
+     "speaker": "rahab",
+     "text": "Y que salvaréis la vida á mi padre y á mi madre, y á mis hermanos y hermanas, y á todo lo que es suyo; y que libraréis nuestras vidas de la muerte."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pidió por su familia. Por su padre, su madre, sus hermanos y hermanas. No solo por ella."
+  },
+  {
+   "type": "scripture",
+   "speaker": "spies",
+   "ref": "JOS 2:14",
+   "label": "Josué 2:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y ellos le respondieron: Nuestra alma por vosotros hasta la muerte, si no denunciareis este nuestro negocio: y cuando Jehová nos hubiere dado la tierra, nosotros haremos contigo misericordia y verdad."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y ellos le respondieron:"
+    },
+    {
+     "v": 14,
+     "speaker": "spies",
+     "text": "Nuestra alma por vosotros hasta la muerte, si no denunciareis este nuestro negocio: y cuando Jehová nos hubiere dado la tierra, nosotros haremos contigo misericordia y verdad."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:15",
+   "label": "Josué 2:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Entonces ella los hizo descender con una cuerda por la ventana; porque su casa estaba á la pared del muro, y ella vivía en el muro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Entonces ella los hizo descender con una cuerda por la ventana; porque su casa estaba á la pared del muro, y ella vivía en el muro."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los bajó con una cuerda por la ventana de su casa, que daba hacia afuera de la muralla. Y antes de irse, los hombres le dieron una señal."
+  },
+  {
+   "type": "scripture",
+   "speaker": "spies",
+   "ref": "JOS 2:18",
+   "label": "Josué 2:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "He aquí, cuando nosotros entráremos en la tierra, tú atarás este cordón de grana á la ventana por la cual nos descolgaste: y tú juntarás en tu casa tu padre y tu madre, tus hermanos y toda la familia de tu padre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "spies",
+     "text": "He aquí, cuando nosotros entráremos en la tierra, tú atarás este cordón de grana á la ventana por la cual nos descolgaste: y tú juntarás en tu casa tu padre y tu madre, tus hermanos y toda la familia de tu padre."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:21",
+   "label": "Josué 2:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Y ella respondió: Sea así como habéis dicho. Luego los despidió, y se fueron: y ella ató el cordón de grana á la ventana."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Y ella respondió:"
+    },
+    {
+     "v": 21,
+     "speaker": "rahab",
+     "text": "Sea así como habéis dicho."
+    },
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Luego los despidió, y se fueron: y ella ató el cordón de grana á la ventana."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un cordón rojo en la ventana. Mientras toda la ciudad esperaba la guerra, en una casa de la muralla había una señal de que allí vivían personas que Dios iba a proteger."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y así fue. Cuando cayeron los muros de Jericó, Rahab y toda su familia fueron salvadas. Se quedó a vivir con el pueblo de Israel. Y siglos después, el evangelio de Mateo la nombra entre los antepasados del rey David y de Jesús."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rahab no tenía un buen nombre, ni el pueblo correcto, ni el pasado que otros esperaban. Pero tuvo fe en el Dios de Israel, y Dios la recibió."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nadie está demasiado lejos para Dios. No importa de dónde vengas ni lo que digan de ti. El mismo Dios que vio a Rahab en su ventana te ve a ti. Y su misericordia alcanza también a tu casa."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 813,
+ "est_seconds": 449,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Josh 2:1-21 (her rescue in 6:22-25 and Matt 1:5 told in words); her trade named as the text names it (tag sexual: implied, adult shelf); her faith credited to what she heard of God."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Rahab shown with dignity and courage, never as a joke; a foreign woman welcomed; 'nadie está demasiado lejos' kind, not shaming."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,379 @@
+{
+ "id": "core-041-talents",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Los talentos",
+ "passage": {
+  "refs": [
+   "MAT 25:14-29"
+  ],
+  "label": "Mateo 25:14-29"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús contaba historias para que la gente entendiera cómo es el reino de Dios. Un día, poco antes de su muerte, les contó a sus discípulos la historia de un hombre que se fue de viaje."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:14-15",
+   "label": "Mateo 25:14-15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Porque el reino de los cielos es como un hombre que partiéndose lejos llamó á sus siervos, y les entregó sus bienes."
+    },
+    {
+     "v": 15,
+     "text": "Y á éste dió cinco talentos, y al otro dos, y al otro uno: á cada uno conforme á su facultad; y luego se partió lejos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Porque el reino de los cielos es como un hombre que partiéndose lejos llamó á sus siervos, y les entregó sus bienes."
+    },
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y á éste dió cinco talentos, y al otro dos, y al otro uno: á cada uno conforme á su facultad; y luego se partió lejos."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno y generoso, el que confía sus bienes a sus siervos.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un talento era muchísimo dinero. Era el salario de unos quince o veinte años de trabajo. Así que aun el que recibió uno solo recibió una fortuna. Y el señor le dio a cada uno según su capacidad."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:16-18",
+   "label": "Mateo 25:16-18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y el que había recibido cinco talentos se fué, y granjeó con ellos, é hizo otros cinco talentos."
+    },
+    {
+     "v": 17,
+     "text": "Asimismo el que había recibido dos, ganó también él otros dos."
+    },
+    {
+     "v": 18,
+     "text": "Mas el que había recibido uno, fué y cavó en la tierra, y escondió el dinero de su señor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y el que había recibido cinco talentos se fué, y granjeó con ellos, é hizo otros cinco talentos."
+    },
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Asimismo el que había recibido dos, ganó también él otros dos."
+    },
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Mas el que había recibido uno, fué y cavó en la tierra, y escondió el dinero de su señor."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dos de ellos se pusieron a trabajar enseguida. El tercero hizo un hoyo en la tierra y escondió el dinero. No lo perdió. No lo gastó. Pero tampoco hizo nada con él."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:19",
+   "label": "Mateo 25:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y después de mucho tiempo, vino el señor de aquellos siervos, é hizo cuentas con ellos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y después de mucho tiempo, vino el señor de aquellos siervos, é hizo cuentas con ellos."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:20-21",
+   "label": "Mateo 25:20-21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y llegando el que había recibido cinco talentos, trajo otros cinco talentos, diciendo: Señor, cinco talentos me entregaste; he aquí otros cinco talentos he ganado sobre ellos."
+    },
+    {
+     "v": 21,
+     "text": "Y su señor le dijo: Bien, buen siervo y fiel; sobre poco has sido fiel, sobre mucho te pondré: entra en el gozo de tu señor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y llegando el que había recibido cinco talentos, trajo otros cinco talentos, diciendo: Señor, cinco talentos me entregaste; he aquí otros cinco talentos he ganado sobre ellos."
+    },
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Y su señor le dijo: Bien, buen siervo y fiel; sobre poco has sido fiel, sobre mucho te pondré: entra en el gozo de tu señor."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Bien, buen siervo y fiel. El señor no le dijo que había sido brillante ni exitoso. Le dijo que había sido fiel. Y lo invitó a entrar en su gozo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:22-23",
+   "label": "Mateo 25:22-23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Y llegando también el que había recibido dos talentos, dijo: Señor, dos talentos me entregaste; he aquí otros dos talentos he ganado sobre ellos."
+    },
+    {
+     "v": 23,
+     "text": "Su señor le dijo: Bien, buen siervo y fiel; sobre poco has sido fiel, sobre mucho te pondré: entra en el gozo de tu señor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Y llegando también el que había recibido dos talentos, dijo: Señor, dos talentos me entregaste; he aquí otros dos talentos he ganado sobre ellos."
+    },
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Su señor le dijo: Bien, buen siervo y fiel; sobre poco has sido fiel, sobre mucho te pondré: entra en el gozo de tu señor."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El que recibió dos escuchó exactamente las mismas palabras que el que recibió cinco. Al señor no le importaba cuánto había ganado cada uno, sino que hubieran sido fieles con lo que les tocó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:24-25",
+   "label": "Mateo 25:24-25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Y llegando también el que había recibido un talento, dijo: Señor, te conocía que eres hombre duro, que siegas donde no sembraste, y recoges donde no esparciste;"
+    },
+    {
+     "v": 25,
+     "text": "Y tuve miedo, y fuí, y escondí tu talento en la tierra: he aquí tienes lo que es tuyo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y llegando también el que había recibido un talento, dijo: Señor, te conocía que eres hombre duro, que siegas donde no sembraste, y recoges donde no esparciste;"
+    },
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Y tuve miedo, y fuí, y escondí tu talento en la tierra: he aquí tienes lo que es tuyo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y tuve miedo. Ahí está el corazón del problema. El tercer siervo no conocía a su señor de verdad. Lo veía como un hombre duro, y el miedo lo paralizó. Guardó el talento bajo tierra para no arriesgarse."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:26-27",
+   "label": "Mateo 25:26-27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Y respondiendo su señor, le dijo: Malo y negligente siervo, sabías que siego donde no sembré y que recojo donde no esparcí;"
+    },
+    {
+     "v": 27,
+     "text": "Por tanto te convenía dar mi dinero á los banqueros, y viniendo yo, hubiera recibido lo que es mío con usura."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y respondiendo su señor, le dijo: Malo y negligente siervo, sabías que siego donde no sembré y que recojo donde no esparcí;"
+    },
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Por tanto te convenía dar mi dinero á los banqueros, y viniendo yo, hubiera recibido lo que es mío con usura."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:28-29",
+   "label": "Mateo 25:28-29",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Quitadle pues el talento, y dadlo al que tiene diez talentos."
+    },
+    {
+     "v": 29,
+     "text": "Porque á cualquiera que tuviere, le será dado, y tendrá más; y al que no tuviere, aun lo que tiene le será quitado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Quitadle pues el talento, y dadlo al que tiene diez talentos."
+    },
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Porque á cualquiera que tuviere, le será dado, y tendrá más; y al que no tuviere, aun lo que tiene le será quitado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es una parte dura de la historia. Jesús la contó así para que la tomáramos en serio. Lo que Dios pone en nuestras manos no es para enterrarlo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia no se trata solo de dinero. Se trata de todo lo que Dios nos ha dado. El tiempo, los dones, la fe, las personas que nos rodean, la vida misma. A unos les toca más y a otros menos. Pero a todos nos toca algo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y no se trata de compararnos. El que tenía dos no tenía que ganar diez. Solo tenía que ser fiel con sus dos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tal vez sientes que lo que tienes es poco. Una voz para cantar en el coro, unas manos para cocinar, un poco de tiempo para visitar a un enfermo, una palabra amable. No lo entierres por miedo. Úsalo para Dios, aunque sea poco. El Señor que te lo dio no es un amo duro. Es el que dice bien, buen siervo y fiel, y te invita a su gozo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 741,
+ "est_seconds": 410,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Matt 25:14-29; the talent's value explained; Jesus's parable read only as scripture; faithfulness over success, no money-growth promise or prosperity reading."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Gifts named in everyday church life (choir, cooking, visiting the sick); the hard ending kept without threat."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

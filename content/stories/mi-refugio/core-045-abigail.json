@@ -1,0 +1,444 @@
+{
+ "id": "core-045-abigail",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Abigail sale al encuentro de David",
+ "passage": {
+  "refs": [
+   "1SA 25:14-35"
+  ],
+  "label": "1 Samuel 25:14-35"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "servant",
+   "name": "criados",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "abigail",
+   "name": "Abigail",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "david",
+   "name": "David",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "David todavía no era rey. Vivía en el desierto con sus hombres, huyendo de Saúl. Durante meses protegieron a los pastores de un hombre rico llamado Nabal. Nunca les quitaron nada."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuando llegó el tiempo de trasquilar las ovejas, que era tiempo de fiesta, David mandó a pedirle a Nabal un poco de comida para sus hombres. Nabal los insultó y los echó. Y David se enojó tanto que tomó la espada y salió con cuatrocientos hombres."
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "1SA 25:14",
+   "label": "1 Samuel 25:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y uno de los criados dió aviso á Abigail mujer de Nabal, diciendo: He aquí David envió mensajeros del desierto que saludasen á nuestro amo, y él los ha zaherido."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y uno de los criados dió aviso á Abigail mujer de Nabal, diciendo:"
+    },
+    {
+     "v": 14,
+     "speaker": "servant",
+     "text": "He aquí David envió mensajeros del desierto que saludasen á nuestro amo, y él los ha zaherido."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno por las personas que nos detienen antes de hacer un daño.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "1SA 25:15-16",
+   "label": "1 Samuel 25:15-16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Mas aquellos hombres nos han sido muy buenos, y nunca nos han hecho fuerza, ni ninguna cosa nos ha faltado en todo el tiempo que hemos conversado con ellos, mientras hemos estado en el campo."
+    },
+    {
+     "v": 16,
+     "text": "Hannos sido por muro de día y de noche, todos los días que hemos estado con ellos apacentando las ovejas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "servant",
+     "text": "Mas aquellos hombres nos han sido muy buenos, y nunca nos han hecho fuerza, ni ninguna cosa nos ha faltado en todo el tiempo que hemos conversado con ellos, mientras hemos estado en el campo."
+    },
+    {
+     "v": 16,
+     "speaker": "servant",
+     "text": "Hannos sido por muro de día y de noche, todos los días que hemos estado con ellos apacentando las ovejas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "1SA 25:17",
+   "label": "1 Samuel 25:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Ahora pues, entiende y mira lo que has de hacer, porque el mal está del todo resuelto contra nuestro amo y contra toda su casa: pues él es un hombre tan malo, que no hay quien pueda hablarle."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "servant",
+     "text": "Ahora pues, entiende y mira lo que has de hacer, porque el mal está del todo resuelto contra nuestro amo y contra toda su casa: pues él es un hombre tan malo, que no hay quien pueda hablarle."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El criado no fue con Nabal. Fue con Abigail, la esposa de Nabal. Sabía que ella era sabia y que lo escucharía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 25:18-19",
+   "label": "1 Samuel 25:18-19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Entonces Abigail tomó luego doscientos panes, y dos cueros de vino, y cinco ovejas guisadas, y cinco medidas de grano tostado, y cien hilos de uvas pasas, y doscientos panes de higos secos, y cargólo en asnos;"
+    },
+    {
+     "v": 19,
+     "text": "Y dijo á sus criados: Id delante de mí, que yo os seguiré luego. Y nada declaró á su marido Nabal."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Entonces Abigail tomó luego doscientos panes, y dos cueros de vino, y cinco ovejas guisadas, y cinco medidas de grano tostado, y cien hilos de uvas pasas, y doscientos panes de higos secos, y cargólo en asnos;"
+    },
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y dijo á sus criados: Id delante de mí, que yo os seguiré luego. Y nada declaró á su marido Nabal."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abigail no perdió tiempo. Doscientos panes, vino, carne, grano, pasas e higos. Lo cargó todo en burros y salió a buscar a David."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 25:20",
+   "label": "1 Samuel 25:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y sentándose sobre un asno descendió por una parte secreta del monte, y he aquí David y los suyos que venían frente á ella, y ella les fué al encuentro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y sentándose sobre un asno descendió por una parte secreta del monte, y he aquí David y los suyos que venían frente á ella, y ella les fué al encuentro."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 25:23",
+   "label": "1 Samuel 25:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Y como Abigail vió á David, apeóse prestamente del asno, y postrándose delante de David sobre su rostro, inclinóse á tierra;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Y como Abigail vió á David, apeóse prestamente del asno, y postrándose delante de David sobre su rostro, inclinóse á tierra;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abigail",
+   "ref": "1SA 25:24",
+   "label": "1 Samuel 25:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Y echóse á sus pies, y dijo: Señor mío, sobre mí sea el pecado; mas ruégote hable tu sierva en tus oídos, y oye las palabras de tu sierva."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y echóse á sus pies, y dijo:"
+    },
+    {
+     "v": 24,
+     "speaker": "abigail",
+     "text": "Señor mío, sobre mí sea el pecado; mas ruégote hable tu sierva en tus oídos, y oye las palabras de tu sierva."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abigail se bajó del burro y se inclinó en el camino, delante de un hombre armado y furioso. Y le pidió permiso para hablar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "abigail",
+   "ref": "1SA 25:26",
+   "label": "1 Samuel 25:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Ahora pues, señor mío, vive Jehová y vive tu alma, que Jehová te ha estorbado que vinieses á derramar sangre, y vengarte por tu propia mano. Sean pues como Nabal tus enemigos, y todos los que procuran mal contra mi señor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "abigail",
+     "text": "Ahora pues, señor mío, vive Jehová y vive tu alma, que Jehová te ha estorbado que vinieses á derramar sangre, y vengarte por tu propia mano. Sean pues como Nabal tus enemigos, y todos los que procuran mal contra mi señor."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abigail",
+   "ref": "1SA 25:28",
+   "label": "1 Samuel 25:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Y yo te ruego que perdones á tu sierva esta ofensa; pues Jehová de cierto hará casa firme á mi señor, por cuanto mi señor hace las guerras de Jehová, y mal no se ha hallado en ti en tus días."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "abigail",
+     "text": "Y yo te ruego que perdones á tu sierva esta ofensa; pues Jehová de cierto hará casa firme á mi señor, por cuanto mi señor hace las guerras de Jehová, y mal no se ha hallado en ti en tus días."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abigail no solo trajo comida. Le recordó a David quién era. Le recordó que Dios tenía planes para él, que algún día sería rey, y que no tenía que vengarse por su propia mano. No le convenía cargar con esa sangre en su conciencia."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 25:32",
+   "label": "1 Samuel 25:32",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Y dijo David á Abigail: Bendito sea Jehová Dios de Israel, que te envió para que hoy me encontrases;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "Y dijo David á Abigail:"
+    },
+    {
+     "v": 32,
+     "speaker": "david",
+     "text": "Bendito sea Jehová Dios de Israel, que te envió para que hoy me encontrases;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 25:33",
+   "label": "1 Samuel 25:33",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 33,
+     "text": "Y bendito sea tu razonamiento, y bendita tú, que me has estorbado hoy el ir á derramar sangre, y á vengarme por mi propia mano:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "david",
+     "text": "Y bendito sea tu razonamiento, y bendita tú, que me has estorbado hoy el ir á derramar sangre, y á vengarme por mi propia mano:"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "David la escuchó. El guerrero, el que había vencido a Goliat, se dejó corregir por una mujer que le habló con sabiduría y humildad. Y le dio gracias a Dios por haberla enviado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 25:35",
+   "label": "1 Samuel 25:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Y recibió David de su mano lo que le había traído, y díjole: Sube en paz á tu casa, y mira que he oído tu voz, y tenídote respeto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Y recibió David de su mano lo que le había traído, y díjole:"
+    },
+    {
+     "v": 35,
+     "speaker": "david",
+     "text": "Sube en paz á tu casa, y mira que he oído tu voz, y tenídote respeto."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La venganza no se hizo. Más tarde Dios mismo se encargó de Nabal. Y David aprendió que no le tocaba a él hacerse justicia con la espada."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay días en que el enojo nos ciega, como a David. Sentimos que tenemos derecho a responder con el mismo mal que nos hicieron. Y Dios, en su misericordia, a veces pone en el camino a alguien que nos detiene."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y hay días en que nos toca ser Abigail. Hablar con calma, llevar paz donde hay enojo, recordarle a otro quién es delante de Dios. Que el Señor te dé oídos para escuchar a tu Abigail, y sabiduría para ser la Abigail de alguien más."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 781,
+ "est_seconds": 432,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Sam 25:14-35 (vv2-13 and Nabal's death in vv37-38 told in words); the crude idiom of vv22 and 34 not quoted; vengeance left to God, as v26 and v33."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Abigail shown as wise, brave and humble; David corrected by a woman with no mockery of either."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

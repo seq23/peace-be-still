@@ -1,0 +1,411 @@
+{
+ "id": "core-044-nicodemus",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Nicodemo viene de noche",
+ "passage": {
+  "refs": [
+   "JOH 3:1-17"
+  ],
+  "label": "Juan 3:1-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "nicodemus",
+   "name": "Nicodemo",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nicodemo era un hombre respetado. Era fariseo, un maestro de la ley, uno de los líderes del pueblo judío. Conocía las Escrituras desde niño. Y había visto lo que hacía Jesús."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:1",
+   "label": "Juan 3:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y HABÍA un hombre de los Fariseos que se llamaba Nicodemo, príncipe de los Judíos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y HABÍA un hombre de los Fariseos que se llamaba Nicodemo, príncipe de los Judíos."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "nicodemus",
+   "ref": "JOH 3:2",
+   "label": "Juan 3:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Este vino á Jesús de noche, y díjole: Rabbí, sabemos que has venido de Dios por maestro; porque nadie puede hacer estas señales que tú haces, si no fuere Dios con él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Este vino á Jesús de noche, y díjole:"
+    },
+    {
+     "v": 2,
+     "speaker": "nicodemus",
+     "text": "Rabbí, sabemos que has venido de Dios por maestro; porque nadie puede hacer estas señales que tú haces, si no fuere Dios con él."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Jesús recibió a Nicodemo aun de noche, con todas sus preguntas.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Vino de noche. Tal vez no quería que lo vieran los otros líderes. Tal vez de noche había más tiempo para hablar. Pero vino. Tenía preguntas, y fue a buscar a Jesús."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:3",
+   "label": "Juan 3:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Respondió Jesús, y díjole: De cierto, de cierto te digo, que el que no naciere otra vez, no puede ver el reino de Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Respondió Jesús, y díjole: De cierto, de cierto te digo, que el que no naciere otra vez, no puede ver el reino de Dios."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "nicodemus",
+   "ref": "JOH 3:4",
+   "label": "Juan 3:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Dícele Nicodemo: ¿Cómo puede el hombre nacer siendo viejo? ¿puede entrar otra vez en el vientre de su madre, y nacer?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Dícele Nicodemo:"
+    },
+    {
+     "v": 4,
+     "speaker": "nicodemus",
+     "text": "¿Cómo puede el hombre nacer siendo viejo? ¿puede entrar otra vez en el vientre de su madre, y nacer?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nicodemo no entendía. Pensaba en nacer de nuevo como un bebé. ¿Cómo va a volver a nacer un hombre viejo? Era una pregunta honesta."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:5-6",
+   "label": "Juan 3:5-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Respondió Jesús: De cierto, de cierto te digo, que el que no naciere de agua y del Espíritu, no puede entrar en el reino de Dios."
+    },
+    {
+     "v": 6,
+     "text": "Lo que es nacido de la carne, carne es; y lo que es nacido del Espíritu, espíritu es."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Respondió Jesús: De cierto, de cierto te digo, que el que no naciere de agua y del Espíritu, no puede entrar en el reino de Dios."
+    },
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Lo que es nacido de la carne, carne es; y lo que es nacido del Espíritu, espíritu es."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:7-8",
+   "label": "Juan 3:7-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "No te maravilles de que te dije: Os es necesario nacer otra vez."
+    },
+    {
+     "v": 8,
+     "text": "El viento de donde quiere sopla, y oyes su sonido; mas ni sabes de dónde viene, ni á dónde vaya: así es todo aquel que es nacido del Espíritu."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "No te maravilles de que te dije: Os es necesario nacer otra vez."
+    },
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "El viento de donde quiere sopla, y oyes su sonido; mas ni sabes de dónde viene, ni á dónde vaya: así es todo aquel que es nacido del Espíritu."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús le habló del viento. No se ve, pero se oye. No sabemos de dónde viene ni adónde va, pero sentimos que está ahí. Así es la obra del Espíritu de Dios en una persona."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nicodemus",
+   "ref": "JOH 3:9",
+   "label": "Juan 3:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Respondió Nicodemo, y díjole: ¿Cómo puede esto hacerse?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Respondió Nicodemo, y díjole:"
+    },
+    {
+     "v": 9,
+     "speaker": "nicodemus",
+     "text": "¿Cómo puede esto hacerse?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:10",
+   "label": "Juan 3:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Respondió Jesús, y díjole: ¿Tú eres el maestro de Israel, y no sabes esto?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Respondió Jesús, y díjole: ¿Tú eres el maestro de Israel, y no sabes esto?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El maestro de Israel tenía que aprender como un alumno. Y Jesús tuvo paciencia con él. Le recordó una historia que Nicodemo conocía muy bien. En el desierto, cuando el pueblo estaba enfermo por las serpientes, Moisés levantó una serpiente de bronce en un asta, y los que la miraban vivían."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:14-15",
+   "label": "Juan 3:14-15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del hombre sea levantado;"
+    },
+    {
+     "v": 15,
+     "text": "Para que todo aquel que en él creyere, no se pierda, sino que tenga vida eterna."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del hombre sea levantado;"
+    },
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Para que todo aquel que en él creyere, no se pierda, sino que tenga vida eterna."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:16",
+   "label": "Juan 3:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Porque de tal manera amó Dios al mundo, que ha dado á su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Porque de tal manera amó Dios al mundo, que ha dado á su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:17",
+   "label": "Juan 3:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Porque no envió Dios á su Hijo al mundo para que condene al mundo, mas para que el mundo sea salvo por él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Porque no envió Dios á su Hijo al mundo para que condene al mundo, mas para que el mundo sea salvo por él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "De tal manera amó Dios al mundo. No a un pueblo solamente. Al mundo. Y no envió a su Hijo para condenar, sino para salvar."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La Biblia no nos dice qué pensó Nicodemo esa noche. Pero más adelante en el evangelio lo volvemos a ver. Una vez defendió a Jesús delante de los otros líderes. Y después de la cruz, cuando casi todos se habían ido, Nicodemo llegó con mirra y áloe para ayudar a sepultar el cuerpo de Jesús. El hombre que vino de noche terminó a la luz del día."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A veces la fe empieza así. Con preguntas, de noche, sin entender todo. Jesús no despidió a Nicodemo por sus dudas. Lo recibió, le habló con paciencia y le mostró el amor de Dios."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche tienes preguntas, puedes hacer lo que hizo Nicodemo. Ir a Jesús con ellas. No tienes que esperar a entenderlo todo. Él recibe a los que vienen de noche."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 647,
+ "est_seconds": 359,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 3:1-17 (Num 21 and John 7:50-51, 19:39 told in words); 'agua y Espíritu' left in scripture without a baptism ruling (S04); no statement of the listener's salvation status."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A respected elder with questions shown with respect; doubt welcomed."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

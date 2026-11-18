@@ -1,0 +1,503 @@
+{
+ "id": "core-048-rebekah",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Rebeca junto al pozo",
+ "passage": {
+  "refs": [
+   "GEN 24:10-27"
+  ],
+  "label": "Génesis 24:10-27"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "servant",
+   "name": "criado",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "rebekah",
+   "name": "Rebeca",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abraham ya era muy viejo. Su esposa Sara había muerto, y su hijo Isaac no estaba casado. Así que Abraham llamó a su criado de más confianza y lo envió de vuelta a la tierra de su familia, muy lejos, a buscar una esposa para Isaac."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:10-11",
+   "label": "Génesis 24:10-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y el criado tomó diez camellos de los camellos de su señor, y fuése, pues tenía á su disposición todos los bienes de su señor: y puesto en camino, llegó á Mesopotamia, á la ciudad de Nachôr."
+    },
+    {
+     "v": 11,
+     "text": "E hizo arrodillar los camellos fuera de la ciudad, junto á un pozo de agua, á la hora de la tarde, á la hora en que salen las mozas por agua."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y el criado tomó diez camellos de los camellos de su señor, y fuése, pues tenía á su disposición todos los bienes de su señor: y puesto en camino, llegó á Mesopotamia, á la ciudad de Nachôr."
+    },
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "E hizo arrodillar los camellos fuera de la ciudad, junto á un pozo de agua, á la hora de la tarde, á la hora en que salen las mozas por agua."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno en los caminos largos, guiando a los que oran.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El criado llegó cansado después de muchos días de viaje. Se detuvo junto al pozo a la hora en que las muchachas salían a sacar agua. Y antes de hacer cualquier otra cosa, oró."
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:12",
+   "label": "Génesis 24:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y dijo: Jehová, Dios de mi señor Abraham, dame, te ruego, el tener hoy buen encuentro, y haz misericordia con mi señor Abraham."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y dijo:"
+    },
+    {
+     "v": 12,
+     "speaker": "servant",
+     "text": "Jehová, Dios de mi señor Abraham, dame, te ruego, el tener hoy buen encuentro, y haz misericordia con mi señor Abraham."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:13-14",
+   "label": "Génesis 24:13-14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "He aquí yo estoy junto á la fuente de agua, y las hijas de los varones de esta ciudad salen por agua:"
+    },
+    {
+     "v": 14,
+     "text": "Sea, pues, que la moza á quien yo dijere: Baja tu cántaro, te ruego, para que yo beba; y ella respondiere: Bebe, y también daré de beber á tus camellos: que sea ésta la que tú has destinado para tu siervo Isaac; y en esto conoceré que habrás hecho misericordia con mi señor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "servant",
+     "text": "He aquí yo estoy junto á la fuente de agua, y las hijas de los varones de esta ciudad salen por agua:"
+    },
+    {
+     "v": 14,
+     "speaker": "servant",
+     "text": "Sea, pues, que la moza á quien yo dijere: Baja tu cántaro, te ruego, para que yo beba; y ella respondiere: Bebe, y también daré de beber á tus camellos: que sea ésta la que tú has destinado para tu siervo Isaac; y en esto conoceré que habrás hecho misericordia con mi señor."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fue una oración muy concreta. Pidió una señal. Una muchacha que no solo le diera agua a él, sino también a sus diez camellos. Eso era mucho trabajo. Un camello sediento puede beber muchísima agua."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:15",
+   "label": "Génesis 24:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y aconteció que antes que él acabase de hablar, he aquí Rebeca, que había nacido á Bethuel, hijo de Milca, mujer de Nachôr hermano de Abraham, la cual salía con su cántaro sobre su hombro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y aconteció que antes que él acabase de hablar, he aquí Rebeca, que había nacido á Bethuel, hijo de Milca, mujer de Nachôr hermano de Abraham, la cual salía con su cántaro sobre su hombro."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Antes de que terminara de orar, ya venía Rebeca con su cántaro al hombro."
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:17",
+   "label": "Génesis 24:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Entonces el criado corrió hacia ella, y dijo: Ruégote que me des á beber un poco de agua de tu cántaro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Entonces el criado corrió hacia ella, y dijo:"
+    },
+    {
+     "v": 17,
+     "speaker": "servant",
+     "text": "Ruégote que me des á beber un poco de agua de tu cántaro."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rebekah",
+   "ref": "GEN 24:18",
+   "label": "Génesis 24:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y ella respondió: Bebe, señor mío: y dióse prisa á bajar su cántaro sobre su mano, y le dió á beber."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y ella respondió:"
+    },
+    {
+     "v": 18,
+     "speaker": "rebekah",
+     "text": "Bebe, señor mío:"
+    },
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "y dióse prisa á bajar su cántaro sobre su mano, y le dió á beber."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rebekah",
+   "ref": "GEN 24:19",
+   "label": "Génesis 24:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y cuando acabó de darle á beber, dijo: También para tus camellos sacaré agua, hasta que acaben de beber."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y cuando acabó de darle á beber, dijo:"
+    },
+    {
+     "v": 19,
+     "speaker": "rebekah",
+     "text": "También para tus camellos sacaré agua, hasta que acaben de beber."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:20",
+   "label": "Génesis 24:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y dióse prisa, y vació su cántaro en la pila, y corrió otra vez al pozo para sacar agua, y sacó para todos sus camellos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y dióse prisa, y vació su cántaro en la pila, y corrió otra vez al pozo para sacar agua, y sacó para todos sus camellos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagina a Rebeca bajando al pozo y subiendo con el cántaro lleno, una y otra vez, hasta que los diez camellos quedaron satisfechos. Nadie se lo pidió. Ella lo ofreció. Así era su corazón."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:21",
+   "label": "Génesis 24:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Y el hombre estaba maravillado de ella, callando, para saber si Jehová había prosperado ó no su viaje."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Y el hombre estaba maravillado de ella, callando, para saber si Jehová había prosperado ó no su viaje."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El criado la miraba en silencio, sin decir nada, preguntándose si Dios había contestado su oración."
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:23",
+   "label": "Génesis 24:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Y dijo: ¿De quién eres hija? Ruégote me digas, ¿hay lugar en casa de tu padre donde posemos?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Y dijo:"
+    },
+    {
+     "v": 23,
+     "speaker": "servant",
+     "text": "¿De quién eres hija? Ruégote me digas, ¿hay lugar en casa de tu padre donde posemos?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rebekah",
+   "ref": "GEN 24:24",
+   "label": "Génesis 24:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Y ella respondió: Soy hija de Bethuel, hijo de Milca, el cual parió ella á Nachôr."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y ella respondió:"
+    },
+    {
+     "v": 24,
+     "speaker": "rebekah",
+     "text": "Soy hija de Bethuel, hijo de Milca, el cual parió ella á Nachôr."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rebekah",
+   "ref": "GEN 24:25",
+   "label": "Génesis 24:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Y añadió: También hay en nuestra casa paja y mucho forraje, y lugar para posar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Y añadió:"
+    },
+    {
+     "v": 25,
+     "speaker": "rebekah",
+     "text": "También hay en nuestra casa paja y mucho forraje, y lugar para posar."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rebeca era de la familia de Abraham. Dios lo había llevado directo a la casa correcta."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:26",
+   "label": "Génesis 24:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "El hombre entonces se inclinó, y adoró á Jehová."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "El hombre entonces se inclinó, y adoró á Jehová."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:27",
+   "label": "Génesis 24:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Y dijo: Bendito sea Jehová, Dios de mi amo Abraham, que no apartó su misericordia y su verdad de mi amo, guiándome Jehová en el camino á casa de los hermanos de mi amo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Y dijo:"
+    },
+    {
+     "v": 27,
+     "speaker": "servant",
+     "text": "Bendito sea Jehová, Dios de mi amo Abraham, que no apartó su misericordia y su verdad de mi amo, guiándome Jehová en el camino á casa de los hermanos de mi amo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lo primero que hizo aquel hombre cuando vio la respuesta fue adorar. Se inclinó allí mismo, junto al pozo, y le dio gracias a Dios."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rebeca aceptó ir. Dejó su casa y viajó a una tierra lejana para casarse con Isaac, a quien no conocía. Y la Biblia dice que Isaac la amó, y que ella fue un consuelo para él después de la muerte de su madre."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia nos enseña a orar antes de decidir, a pedirle a Dios que nos guíe en el camino. Y nos muestra que la bondad sencilla, como dar agua a un desconocido y a sus camellos, puede ser parte de lo que Dios está haciendo. Si esta noche tienes una decisión por delante, pídele que te guíe. Él conoce el camino."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 749,
+ "est_seconds": 415,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 24:10-27 (Isaac's love, v67, told in words); v16's description of her not quoted; prayer before decisions, no promise of a spouse."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Rebekah's generosity and agency honoured; the servant's worship shown; natural Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,431 @@
+{
+ "id": "core-049-samson",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "La última oración de Sansón",
+ "passage": {
+  "refs": [
+   "JDG 16:4-30"
+  ],
+  "label": "Jueces 16:4-30"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "strong",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "delilah",
+   "name": "Dalila",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "samson",
+   "name": "Samsón",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samsón fue un juez de Israel, apartado para Dios desde antes de nacer. Nunca se cortaba el cabello, como señal de esa promesa. Dios le había dado una fuerza enorme para defender a su pueblo de los filisteos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero Samsón tenía un punto débil. Muchas veces se dejaba llevar por lo que quería, sin pensar en Dios."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 16:4-5",
+   "label": "Jueces 16:4-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Después de esto aconteció que se enamoró de una mujer en el valle de Sorec, la cual se llamaba Dalila."
+    },
+    {
+     "v": 5,
+     "text": "Y vinieron á ella los príncipes de los Filisteos, y dijéronle: Engáñale y sabe en qué consiste su grande fuerza, y cómo lo podríamos vencer, para que lo atemos y lo atormentemos; y cada uno de nosotros te dará mil y cien siclos de plata."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Después de esto aconteció que se enamoró de una mujer en el valle de Sorec, la cual se llamaba Dalila."
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y vinieron á ella los príncipes de los Filisteos, y dijéronle: Engáñale y sabe en qué consiste su grande fuerza, y cómo lo podríamos vencer, para que lo atemos y lo atormentemos; y cada uno de nosotros te dará mil y cien siclos de plata."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno aun con el que se alejó, cuando vuelve a llamarlo.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los jefes de los filisteos le ofrecieron a Dalila mucho dinero para que descubriera el secreto de la fuerza de Samsón."
+  },
+  {
+   "type": "scripture",
+   "speaker": "delilah",
+   "ref": "JDG 16:6",
+   "label": "Jueces 16:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y Dalila dijo á Samsón: Yo te ruego que me declares en qué consiste tu grande fuerza, y cómo podrás ser atado para ser atormentado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y Dalila dijo á Samsón:"
+    },
+    {
+     "v": 6,
+     "speaker": "delilah",
+     "text": "Yo te ruego que me declares en qué consiste tu grande fuerza, y cómo podrás ser atado para ser atormentado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tres veces le preguntó. Tres veces Samsón le mintió. Y tres veces ella lo entregó a los filisteos, que estaban escondidos esperando. Samsón tuvo que haberse dado cuenta. Pero se quedó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "delilah",
+   "ref": "JDG 16:15",
+   "label": "Jueces 16:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y ella le dijo: ¿Cómo dices, Yo te amo, pues que tu corazón no está conmigo? Ya me has engañado tres veces, y no me has aún descubierto en qué está tu gran fuerza."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y ella le dijo:"
+    },
+    {
+     "v": 15,
+     "speaker": "delilah",
+     "text": "¿Cómo dices, Yo te amo, pues que tu corazón no está conmigo? Ya me has engañado tres veces, y no me has aún descubierto en qué está tu gran fuerza."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 16:16-17",
+   "label": "Jueces 16:16-17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y aconteció que, apretándole ella cada día con sus palabras é importunándole, su alma fué reducida á mortal angustia."
+    },
+    {
+     "v": 17,
+     "text": "Descubrióle pues todo su corazón, y díjole: Nunca á mi cabeza llegó navaja; porque soy Nazareo de Dios desde el vientre de mi madre. Si fuere rapado, mi fuerza se apartará de mí, y seré debilitado, y como todos los hombres."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y aconteció que, apretándole ella cada día con sus palabras é importunándole, su alma fué reducida á mortal angustia."
+    },
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Descubrióle pues todo su corazón, y díjole: Nunca á mi cabeza llegó navaja; porque soy Nazareo de Dios desde el vientre de mi madre. Si fuere rapado, mi fuerza se apartará de mí, y seré debilitado, y como todos los hombres."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Al fin le contó todo. Su cabello era la señal de que estaba consagrado a Dios."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 16:19-20",
+   "label": "Jueces 16:19-20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y ella hizo que él se durmiese sobre sus rodillas; y llamado un hombre, rapóle siete guedejas de su cabeza, y comenzó á afligirlo, pues su fuerza se apartó de él."
+    },
+    {
+     "v": 20,
+     "text": "Y díjole: ¡Samsón, los Filisteos sobre ti! Y luego que despertó él de su sueño, se dijo: Esta vez saldré como las otras, y me escaparé: no sabiendo que Jehová ya se había de él apartado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y ella hizo que él se durmiese sobre sus rodillas; y llamado un hombre, rapóle siete guedejas de su cabeza, y comenzó á afligirlo, pues su fuerza se apartó de él."
+    },
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y díjole: ¡Samsón, los Filisteos sobre ti! Y luego que despertó él de su sueño, se dijo: Esta vez saldré como las otras, y me escaparé: no sabiendo que Jehová ya se había de él apartado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No sabía que Jehová ya se había apartado de él. Esa es una de las frases más tristes de la Biblia. Samsón pensó que todo seguía igual."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 16:21",
+   "label": "Jueces 16:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Mas los Filisteos echaron mano de él, y sacáronle los ojos, y le llevaron á Gaza; y le ataron con cadenas, para que moliese en la cárcel."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Mas los Filisteos echaron mano de él, y sacáronle los ojos, y le llevaron á Gaza; y le ataron con cadenas, para que moliese en la cárcel."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lo dejaron ciego, encadenado, moliendo grano en la cárcel como un animal. El hombre más fuerte de Israel estaba quebrado y humillado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 16:22",
+   "label": "Jueces 16:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Y el cabello de su cabeza comenzó á crecer, después que fué rapado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Y el cabello de su cabeza comenzó á crecer, después que fué rapado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero el cabello volvió a crecer. Una frase pequeña, casi escondida. Dios no había terminado con Samsón."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un día los filisteos hicieron una gran fiesta en el templo de su dios. Sacaron a Samsón de la cárcel para burlarse de él. Lo pusieron entre las columnas del templo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "samson",
+   "ref": "JDG 16:26",
+   "label": "Jueces 16:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Y Samsón dijo al mozo que le guiaba de la mano: Acércame, y hazme tentar las columnas sobre que se sustenta la casa, para que me apoye sobre ellas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y Samsón dijo al mozo que le guiaba de la mano:"
+    },
+    {
+     "v": 26,
+     "speaker": "samson",
+     "text": "Acércame, y hazme tentar las columnas sobre que se sustenta la casa, para que me apoye sobre ellas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "samson",
+   "ref": "JDG 16:28",
+   "label": "Jueces 16:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Entonces clamó Samsón á Jehová, y dijo: Señor Jehová, acuérdate ahora de mí, y esfuérzame, te ruego, solamente esta vez, oh Dios, para que de una vez tome venganza de los Filisteos, por mis dos ojos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Entonces clamó Samsón á Jehová, y dijo:"
+    },
+    {
+     "v": 28,
+     "speaker": "samson",
+     "text": "Señor Jehová, acuérdate ahora de mí, y esfuérzame, te ruego, solamente esta vez, oh Dios, para que de una vez tome venganza de los Filisteos, por mis dos ojos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Acuérdate de mí. Después de todo lo que había hecho, Samsón todavía sabía a quién clamar. Ciego, sin fuerzas, en el lugar más oscuro de su vida, oró."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 16:29-30",
+   "label": "Jueces 16:29-30",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Asió luego Samsón las dos columnas del medio sobre las cuales se sustentaba la casa, y estribó en ellas, la una con la mano derecha, y la otra con la izquierda;"
+    },
+    {
+     "v": 30,
+     "text": "Y dijo Samsón: Muera yo con los Filisteos. Y estribando con esfuerzo, cayó la casa sobre los príncipes, y sobre todo el pueblo que estaba en ella. Y fueron muchos más los que de ellos mató muriendo, que los que había muerto en su vida."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Asió luego Samsón las dos columnas del medio sobre las cuales se sustentaba la casa, y estribó en ellas, la una con la mano derecha, y la otra con la izquierda;"
+    },
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "Y dijo Samsón: Muera yo con los Filisteos. Y estribando con esfuerzo, cayó la casa sobre los príncipes, y sobre todo el pueblo que estaba en ella. Y fueron muchos más los que de ellos mató muriendo, que los que había muerto en su vida."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fue un final terrible, de guerra y de muerte, en un tiempo de mucha violencia. La Biblia lo cuenta sin adornarlo, y no lo pone como ejemplo de cómo vivir."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero en esta historia hay algo que sí nos habla. Aun después de haberse alejado, aun después de haberlo perdido todo por sus propias decisiones, Samsón pudo clamar a Dios. Y Dios lo escuchó."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche sientes que te alejaste demasiado, que tus decisiones te llevaron a un lugar oscuro, todavía puedes orar como Samsón. Señor, acuérdate de mí. Nunca es tarde para volver a llamar a Dios."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 810,
+ "est_seconds": 448,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Judg 16:4-30; the blinding and the temple collapse are the KJV/RV1909's own words (tag violence: strong, adult shelf); says plainly his end is not a model for life; the hope is that he could still cry to God."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Delilah shown without slurs; Samson's failure named without contempt; would not be screenshot to mock."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

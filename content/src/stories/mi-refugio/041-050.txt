@@ -1,0 +1,294 @@
+# Mi Refugio, historias 41-50 (español de las Américas, Reina-Valera 1909). Escritas por Claude (sin borrador de modelo gratuito), con la lectura pastoral y cultural de Claude.
+
+=== core-041-talents | Los talentos
+passage: MAT 25:14-29
+shelf: adult
+violence: none
+sexual: none
+N: Jesús contaba historias para que la gente entendiera cómo es el reino de Dios. Un día, poco antes de su muerte, les contó a sus discípulos la historia de un hombre que se fue de viaje.
+S: MAT 25:14-15
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno y generoso, el que confía sus bienes a sus siervos.
+N: Un talento era muchísimo dinero. Era el salario de unos quince o veinte años de trabajo. Así que aun el que recibió uno solo recibió una fortuna. Y el señor le dio a cada uno según su capacidad.
+S: MAT 25:16-18
+N: Dos de ellos se pusieron a trabajar enseguida. El tercero hizo un hoyo en la tierra y escondió el dinero. No lo perdió. No lo gastó. Pero tampoco hizo nada con él.
+S: MAT 25:19
+S: MAT 25:20-21
+N: Bien, buen siervo y fiel. El señor no le dijo que había sido brillante ni exitoso. Le dijo que había sido fiel. Y lo invitó a entrar en su gozo.
+S: MAT 25:22-23
+N: El que recibió dos escuchó exactamente las mismas palabras que el que recibió cinco. Al señor no le importaba cuánto había ganado cada uno, sino que hubieran sido fieles con lo que les tocó.
+S: MAT 25:24-25
+N: Y tuve miedo. Ahí está el corazón del problema. El tercer siervo no conocía a su señor de verdad. Lo veía como un hombre duro, y el miedo lo paralizó. Guardó el talento bajo tierra para no arriesgarse.
+S: MAT 25:26-27
+S: MAT 25:28-29
+N: Es una parte dura de la historia. Jesús la contó así para que la tomáramos en serio. Lo que Dios pone en nuestras manos no es para enterrarlo.
+N: Esta historia no se trata solo de dinero. Se trata de todo lo que Dios nos ha dado. El tiempo, los dones, la fe, las personas que nos rodean, la vida misma. A unos les toca más y a otros menos. Pero a todos nos toca algo.
+N: Y no se trata de compararnos. El que tenía dos no tenía que ganar diez. Solo tenía que ser fiel con sus dos.
+N: Tal vez sientes que lo que tienes es poco. Una voz para cantar en el coro, unas manos para cocinar, un poco de tiempo para visitar a un enfermo, una palabra amable. No lo entierres por miedo. Úsalo para Dios, aunque sea poco. El Señor que te lo dio no es un amo duro. Es el que dice bien, buen siervo y fiel, y te invita a su gozo.
+
+=== core-042-rahab | Rahab y el cordón de grana
+passage: JOS 2:1-21
+shelf: adult
+violence: none
+sexual: implied
+cast: rahab|Rahab|adult|f; spies|ellos|adult|group
+N: Después de cuarenta años en el desierto, el pueblo de Israel estaba por fin a la orilla del río Jordán. Del otro lado estaba la tierra prometida, y la primera ciudad era Jericó, con sus murallas altas.
+S: JOS 2:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con una mujer que nadie en la ciudad tenía en cuenta.
+N: Rahab vivía en una casa construida en la misma muralla de la ciudad. La Biblia dice claramente cómo se ganaba la vida, y no la esconde. Pero tampoco la deja ahí.
+S: JOS 2:2-3
+N: Rahab tuvo que decidir en un instante. Si escondía a los espías, arriesgaba su vida. Si los entregaba, quedaba bien con el rey.
+S: JOS 2:4 @rahab
+S: JOS 2:5 @rahab whole
+S: JOS 2:6
+N: Los escondió en el techo, debajo de los tallos de lino que tenía puestos a secar. Y los soldados se fueron a buscarlos por el camino del río.
+S: JOS 2:8
+S: JOS 2:9 @rahab whole
+S: JOS 2:11 @rahab whole
+N: Rahab no era israelita. No había crecido oyendo de Abraham ni de Moisés. Pero había oído lo que Dios había hecho en el mar Rojo, y creyó. El Dios de Israel es el Dios del cielo y de la tierra. Eso confesó una mujer de Jericó.
+S: JOS 2:12-13 @rahab whole
+N: Pidió por su familia. Por su padre, su madre, sus hermanos y hermanas. No solo por ella.
+S: JOS 2:14 @spies
+S: JOS 2:15
+N: Los bajó con una cuerda por la ventana de su casa, que daba hacia afuera de la muralla. Y antes de irse, los hombres le dieron una señal.
+S: JOS 2:18 @spies whole
+S: JOS 2:21 @rahab after "Y ella respondió: " until "Luego los"
+N: Un cordón rojo en la ventana. Mientras toda la ciudad esperaba la guerra, en una casa de la muralla había una señal de que allí vivían personas que Dios iba a proteger.
+N: Y así fue. Cuando cayeron los muros de Jericó, Rahab y toda su familia fueron salvadas. Se quedó a vivir con el pueblo de Israel. Y siglos después, el evangelio de Mateo la nombra entre los antepasados del rey David y de Jesús.
+N: Rahab no tenía un buen nombre, ni el pueblo correcto, ni el pasado que otros esperaban. Pero tuvo fe en el Dios de Israel, y Dios la recibió.
+N: Nadie está demasiado lejos para Dios. No importa de dónde vengas ni lo que digan de ti. El mismo Dios que vio a Rahab en su ventana te ve a ti. Y su misericordia alcanza también a tu casa.
+
+=== core-043-jericho | Los muros de Jericó
+passage: JOS 6:1-20
+shelf: adult
+violence: mild
+sexual: none
+cast: joshua|Josué|adult|m
+N: Moisés había muerto, y ahora Josué guiaba al pueblo. Habían cruzado el Jordán. Y delante de ellos estaba Jericó, una ciudad con murallas tan altas y gruesas que parecía imposible entrar.
+S: JOS 6:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno delante de los muros que nosotros no podemos derribar.
+S: JOS 6:2
+N: Dios le dijo que ya le había entregado la ciudad. Dios habló como si ya hubiera pasado. Los muros seguían de pie, pero para Dios la ciudad ya estaba entregada.
+N: Y luego les dio un plan muy extraño. Nada de escaleras ni de máquinas de guerra. Solo caminar alrededor de la ciudad, una vez al día durante seis días, con los sacerdotes tocando trompetas de cuerno de carnero delante del arca. Y el séptimo día, siete vueltas.
+S: JOS 6:6 @joshua after "les dijo: "
+S: JOS 6:7 @joshua after "Y dijo al pueblo: "
+S: JOS 6:10 @joshua after "diciendo: "
+N: Ni una palabra. Imagina a miles de personas caminando en silencio alrededor de la ciudad. Solo se oían las trompetas y los pasos. Y desde arriba de la muralla, la gente de Jericó mirando sin entender.
+S: JOS 6:11
+N: Y lo mismo al día siguiente. Y al siguiente. Seis días caminando y regresando al campamento. Los muros no se movían. No había ninguna señal de que algo estuviera cambiando.
+S: JOS 6:14
+N: Es difícil obedecer cuando no vemos resultados. Pero el pueblo siguió caminando. Un día, y otro día, y otro más.
+S: JOS 6:15
+S: JOS 6:16 @joshua after "Josué dijo al pueblo: "
+S: JOS 6:17 @joshua whole
+N: Aun en ese momento, Josué se acordó de Rahab, la mujer que había escondido a los espías. Su casa con el cordón rojo sería protegida.
+S: JOS 6:20
+N: El muro cayó. No lo derribaron ellos con su fuerza. Lo derribó Dios, cuando el pueblo hizo lo que él dijo, de la manera que él dijo, en el tiempo que él dijo.
+N: Muchos tenemos muros delante. Problemas que llevan años sin moverse. Oraciones que parecen no tener respuesta. Y a veces lo único que nos toca es seguir caminando, seguir obedeciendo, un día a la vez, aunque todavía no veamos nada.
+N: Esta historia no nos dice cuánto tiempo va a durar tu espera. Pero nos recuerda que Dios ve los muros que nosotros vemos, y que él es más grande que todos ellos. Esta noche descansa. Mañana, sigue caminando.
+
+=== core-044-nicodemus | Nicodemo viene de noche
+passage: JOH 3:1-17
+shelf: adult
+violence: none
+sexual: none
+cast: nicodemus|Nicodemo|elder|m
+N: Nicodemo era un hombre respetado. Era fariseo, un maestro de la ley, uno de los líderes del pueblo judío. Conocía las Escrituras desde niño. Y había visto lo que hacía Jesús.
+S: JOH 3:1
+S: JOH 3:2 @nicodemus after "díjole: "
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Jesús recibió a Nicodemo aun de noche, con todas sus preguntas.
+N: Vino de noche. Tal vez no quería que lo vieran los otros líderes. Tal vez de noche había más tiempo para hablar. Pero vino. Tenía preguntas, y fue a buscar a Jesús.
+S: JOH 3:3
+S: JOH 3:4 @nicodemus after "Dícele Nicodemo: "
+N: Nicodemo no entendía. Pensaba en nacer de nuevo como un bebé. ¿Cómo va a volver a nacer un hombre viejo? Era una pregunta honesta.
+S: JOH 3:5-6
+S: JOH 3:7-8
+N: Jesús le habló del viento. No se ve, pero se oye. No sabemos de dónde viene ni adónde va, pero sentimos que está ahí. Así es la obra del Espíritu de Dios en una persona.
+S: JOH 3:9 @nicodemus after "Respondió Nicodemo, y díjole: "
+S: JOH 3:10
+N: El maestro de Israel tenía que aprender como un alumno. Y Jesús tuvo paciencia con él. Le recordó una historia que Nicodemo conocía muy bien. En el desierto, cuando el pueblo estaba enfermo por las serpientes, Moisés levantó una serpiente de bronce en un asta, y los que la miraban vivían.
+S: JOH 3:14-15
+S: JOH 3:16
+S: JOH 3:17
+N: De tal manera amó Dios al mundo. No a un pueblo solamente. Al mundo. Y no envió a su Hijo para condenar, sino para salvar.
+N: La Biblia no nos dice qué pensó Nicodemo esa noche. Pero más adelante en el evangelio lo volvemos a ver. Una vez defendió a Jesús delante de los otros líderes. Y después de la cruz, cuando casi todos se habían ido, Nicodemo llegó con mirra y áloe para ayudar a sepultar el cuerpo de Jesús. El hombre que vino de noche terminó a la luz del día.
+N: A veces la fe empieza así. Con preguntas, de noche, sin entender todo. Jesús no despidió a Nicodemo por sus dudas. Lo recibió, le habló con paciencia y le mostró el amor de Dios.
+N: Si esta noche tienes preguntas, puedes hacer lo que hizo Nicodemo. Ir a Jesús con ellas. No tienes que esperar a entenderlo todo. Él recibe a los que vienen de noche.
+
+=== core-045-abigail | Abigail sale al encuentro de David
+passage: 1SA 25:14-35
+shelf: adult
+violence: mild
+sexual: none
+cast: servant|criados|adult|m; abigail|Abigail|adult|f; david|David|adult|m
+N: David todavía no era rey. Vivía en el desierto con sus hombres, huyendo de Saúl. Durante meses protegieron a los pastores de un hombre rico llamado Nabal. Nunca les quitaron nada.
+N: Cuando llegó el tiempo de trasquilar las ovejas, que era tiempo de fiesta, David mandó a pedirle a Nabal un poco de comida para sus hombres. Nabal los insultó y los echó. Y David se enojó tanto que tomó la espada y salió con cuatrocientos hombres.
+S: 1SA 25:14 @servant after "diciendo: "
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno por las personas que nos detienen antes de hacer un daño.
+S: 1SA 25:15-16 @servant whole
+S: 1SA 25:17 @servant whole
+N: El criado no fue con Nabal. Fue con Abigail, la esposa de Nabal. Sabía que ella era sabia y que lo escucharía.
+S: 1SA 25:18-19
+N: Abigail no perdió tiempo. Doscientos panes, vino, carne, grano, pasas e higos. Lo cargó todo en burros y salió a buscar a David.
+S: 1SA 25:20
+S: 1SA 25:23
+S: 1SA 25:24 @abigail after "y dijo: "
+N: Abigail se bajó del burro y se inclinó en el camino, delante de un hombre armado y furioso. Y le pidió permiso para hablar.
+S: 1SA 25:26 @abigail whole
+S: 1SA 25:28 @abigail whole
+N: Abigail no solo trajo comida. Le recordó a David quién era. Le recordó que Dios tenía planes para él, que algún día sería rey, y que no tenía que vengarse por su propia mano. No le convenía cargar con esa sangre en su conciencia.
+S: 1SA 25:32 @david after "Y dijo David á Abigail: "
+S: 1SA 25:33 @david whole
+N: David la escuchó. El guerrero, el que había vencido a Goliat, se dejó corregir por una mujer que le habló con sabiduría y humildad. Y le dio gracias a Dios por haberla enviado.
+S: 1SA 25:35 @david after "díjole: "
+N: La venganza no se hizo. Más tarde Dios mismo se encargó de Nabal. Y David aprendió que no le tocaba a él hacerse justicia con la espada.
+N: Hay días en que el enojo nos ciega, como a David. Sentimos que tenemos derecho a responder con el mismo mal que nos hicieron. Y Dios, en su misericordia, a veces pone en el camino a alguien que nos detiene.
+N: Y hay días en que nos toca ser Abigail. Hablar con calma, llevar paz donde hay enojo, recordarle a otro quién es delante de Dios. Que el Señor te dé oídos para escuchar a tu Abigail, y sabiduría para ser la Abigail de alguien más.
+
+=== core-046-still-small-voice | Elías y el silbo apacible
+passage: 1KI 19:1-15
+shelf: adult
+violence: mild
+sexual: none
+cast: elijah|Elías|adult|m
+N: Elías acababa de ver uno de los momentos más grandes de su vida. En el monte Carmelo, delante de todo el pueblo, Dios había mandado fuego del cielo. Y después de tres años de sequía, por fin había llovido.
+N: Pero al día siguiente llegó una amenaza.
+S: 1KI 19:1-2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con su siervo cansado, aun debajo del enebro.
+S: 1KI 19:3
+N: El mismo hombre que no tuvo miedo delante de cientos de profetas falsos ahora huía por su vida. Caminó hasta el desierto, solo, y se sentó debajo de un arbusto.
+S: 1KI 19:4 @elijah after "deseando morirse, dijo: "
+N: Elías estaba agotado. Ya no quería vivir. La Biblia no esconde que hasta los profetas llegan a ese lugar. Y Dios no lo regañó.
+S: 1KI 19:5-6
+S: 1KI 19:7-8
+N: Lo primero que Dios le dio a Elías no fue un sermón. Fue pan caliente, agua y descanso. Durmió. Comió. Volvió a dormir. Y el ángel le habló con cariño, porque el camino era largo para él.
+N: Con la fuerza de esa comida, Elías caminó cuarenta días hasta Horeb, el monte de Dios. Allí se metió en una cueva.
+S: 1KI 19:9
+S: 1KI 19:10 @elijah after "Y él respondió: "
+N: Elías se sentía solo. Creía que era el único fiel que quedaba. Y Dios le pidió que saliera.
+S: 1KI 19:11
+S: 1KI 19:12
+N: Viento, terremoto, fuego. Todo eso pasó, y Dios no estaba en ninguno. Y después del fuego, un silbo apacible y delicado. Un susurro suave.
+S: 1KI 19:13
+N: Elías se cubrió la cara con su manto y salió a la entrada de la cueva. Dios le habló en el silencio. Y le dio un trabajo nuevo, y le dijo que no estaba tan solo como pensaba. Había siete mil en Israel que seguían siendo fieles.
+S: 1KI 19:15
+N: Si alguna vez te sientes como Elías debajo de aquel arbusto, tan cansado que ya no quieres vivir, no lo cargues solo. Habla con alguien hoy. Llama o envía un texto al 988, y oprime 2 para español. Busca a tu pastor, a tu doctor, a una persona de confianza.
+N: Dios cuidó de Elías con pan, con agua, con sueño y con una voz suave. No le pidió que fuera fuerte. Lo levantó poco a poco. Y esta noche, el mismo Dios que habló en el silbo apacible sabe hablarle a tu corazón cansado.
+
+=== core-047-rich-young-ruler | El joven rico
+passage: MAR 10:17-27
+shelf: adult
+violence: none
+sexual: none
+cast: man|uno|adult|m; disciples|discípulos|adult|group
+N: Jesús salía de camino cuando un hombre llegó corriendo y se arrodilló delante de él. Era joven, rico e importante. Y tenía una pregunta que le quitaba el sueño.
+S: MAR 10:17 @man after "le preguntó: "
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Solo uno es bueno, y es Dios.
+S: MAR 10:18-19
+S: MAR 10:20 @man after "le dijo: "
+N: Él había guardado los mandamientos desde joven. Era un buen hombre en muchos sentidos. Y aun así sentía que le faltaba algo.
+S: MAR 10:21
+N: Jesús lo miró y lo amó. Eso dice la Biblia antes de cualquier otra cosa. Lo que le dijo después fue difícil, pero se lo dijo por amor.
+N: Una cosa te falta. Jesús vio lo que ocupaba el primer lugar en el corazón de aquel hombre. Y lo invitó a soltarlo, para seguirlo a él.
+S: MAR 10:22
+N: Se fue triste. No enojado. Triste. Quería la vida eterna, pero no quería soltar lo que tenía. Y Jesús no corrió detrás de él para ofrecerle un trato más fácil.
+S: MAR 10:23-24
+S: MAR 10:25
+N: Que un camello pase por el hueco de una aguja. Es una imagen imposible a propósito. Los discípulos se quedaron asombrados. En aquel tiempo muchos pensaban que la riqueza era señal de que Dios estaba contento con alguien.
+S: MAR 10:26 @disciples after "dentro de sí: "
+S: MAR 10:27
+N: Para los hombres es imposible, pero para Dios no. Esa es la buena noticia de esta historia. Nadie se gana el cielo con su bondad, ni con su dinero, ni con lo que deja. La salvación es obra de Dios.
+N: Los discípulos habían dejado sus redes, sus barcas y sus casas para seguir a Jesús. Pedro se lo dijo enseguida. Y Jesús les respondió que nada de lo que se deja por él se pierde, aunque también les habló de persecuciones. Seguirlo no es un negocio. Es una vida nueva.
+N: Jesús no le pide a todo el mundo exactamente lo mismo que a este hombre. Pero sí nos pregunta a todos qué ocupa el primer lugar en nuestro corazón. Para unos es el dinero. Para otros es el trabajo, la seguridad, la opinión de la gente, o una persona.
+N: Esta noche puedes hacerte esa pregunta delante de Dios, sin miedo. Él te mira con el mismo amor con que miró a aquel joven. Y lo que para nosotros es imposible soltar, para él no es imposible.
+
+=== core-048-rebekah | Rebeca junto al pozo
+passage: GEN 24:10-27
+shelf: adult
+violence: none
+sexual: none
+cast: servant|criado|adult|m; rebekah|Rebeca|adult|f
+N: Abraham ya era muy viejo. Su esposa Sara había muerto, y su hijo Isaac no estaba casado. Así que Abraham llamó a su criado de más confianza y lo envió de vuelta a la tierra de su familia, muy lejos, a buscar una esposa para Isaac.
+S: GEN 24:10-11
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno en los caminos largos, guiando a los que oran.
+N: El criado llegó cansado después de muchos días de viaje. Se detuvo junto al pozo a la hora en que las muchachas salían a sacar agua. Y antes de hacer cualquier otra cosa, oró.
+S: GEN 24:12 @servant after "Y dijo: "
+S: GEN 24:13-14 @servant whole
+N: Fue una oración muy concreta. Pidió una señal. Una muchacha que no solo le diera agua a él, sino también a sus diez camellos. Eso era mucho trabajo. Un camello sediento puede beber muchísima agua.
+S: GEN 24:15
+N: Antes de que terminara de orar, ya venía Rebeca con su cántaro al hombro.
+S: GEN 24:17 @servant after "y dijo: "
+S: GEN 24:18 @rebekah after "Y ella respondió: " until "y dióse prisa"
+S: GEN 24:19 @rebekah after "dijo: "
+S: GEN 24:20
+N: Imagina a Rebeca bajando al pozo y subiendo con el cántaro lleno, una y otra vez, hasta que los diez camellos quedaron satisfechos. Nadie se lo pidió. Ella lo ofreció. Así era su corazón.
+S: GEN 24:21
+N: El criado la miraba en silencio, sin decir nada, preguntándose si Dios había contestado su oración.
+S: GEN 24:23 @servant after "Y dijo: "
+S: GEN 24:24 @rebekah after "Y ella respondió: "
+S: GEN 24:25 @rebekah after "Y añadió: "
+N: Rebeca era de la familia de Abraham. Dios lo había llevado directo a la casa correcta.
+S: GEN 24:26
+S: GEN 24:27 @servant after "Y dijo: "
+N: Lo primero que hizo aquel hombre cuando vio la respuesta fue adorar. Se inclinó allí mismo, junto al pozo, y le dio gracias a Dios.
+N: Rebeca aceptó ir. Dejó su casa y viajó a una tierra lejana para casarse con Isaac, a quien no conocía. Y la Biblia dice que Isaac la amó, y que ella fue un consuelo para él después de la muerte de su madre.
+N: Esta historia nos enseña a orar antes de decidir, a pedirle a Dios que nos guíe en el camino. Y nos muestra que la bondad sencilla, como dar agua a un desconocido y a sus camellos, puede ser parte de lo que Dios está haciendo. Si esta noche tienes una decisión por delante, pídele que te guíe. Él conoce el camino.
+
+=== core-049-samson | La última oración de Sansón
+passage: JDG 16:4-30
+shelf: adult
+violence: strong
+sexual: none
+cast: delilah|Dalila|adult|f; samson|Samsón|adult|m
+N: Samsón fue un juez de Israel, apartado para Dios desde antes de nacer. Nunca se cortaba el cabello, como señal de esa promesa. Dios le había dado una fuerza enorme para defender a su pueblo de los filisteos.
+N: Pero Samsón tenía un punto débil. Muchas veces se dejaba llevar por lo que quería, sin pensar en Dios.
+S: JDG 16:4-5
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno aun con el que se alejó, cuando vuelve a llamarlo.
+N: Los jefes de los filisteos le ofrecieron a Dalila mucho dinero para que descubriera el secreto de la fuerza de Samsón.
+S: JDG 16:6 @delilah after "Dalila dijo á Samsón: "
+N: Tres veces le preguntó. Tres veces Samsón le mintió. Y tres veces ella lo entregó a los filisteos, que estaban escondidos esperando. Samsón tuvo que haberse dado cuenta. Pero se quedó.
+S: JDG 16:15 @delilah after "Y ella le dijo: "
+S: JDG 16:16-17
+N: Al fin le contó todo. Su cabello era la señal de que estaba consagrado a Dios.
+S: JDG 16:19-20
+N: No sabía que Jehová ya se había apartado de él. Esa es una de las frases más tristes de la Biblia. Samsón pensó que todo seguía igual.
+S: JDG 16:21
+N: Lo dejaron ciego, encadenado, moliendo grano en la cárcel como un animal. El hombre más fuerte de Israel estaba quebrado y humillado.
+S: JDG 16:22
+N: Pero el cabello volvió a crecer. Una frase pequeña, casi escondida. Dios no había terminado con Samsón.
+N: Un día los filisteos hicieron una gran fiesta en el templo de su dios. Sacaron a Samsón de la cárcel para burlarse de él. Lo pusieron entre las columnas del templo.
+S: JDG 16:26 @samson after "dijo al mozo que le guiaba de la mano: "
+S: JDG 16:28 @samson after "y dijo: "
+N: Acuérdate de mí. Después de todo lo que había hecho, Samsón todavía sabía a quién clamar. Ciego, sin fuerzas, en el lugar más oscuro de su vida, oró.
+S: JDG 16:29-30
+N: Fue un final terrible, de guerra y de muerte, en un tiempo de mucha violencia. La Biblia lo cuenta sin adornarlo, y no lo pone como ejemplo de cómo vivir.
+N: Pero en esta historia hay algo que sí nos habla. Aun después de haberse alejado, aun después de haberlo perdido todo por sus propias decisiones, Samsón pudo clamar a Dios. Y Dios lo escuchó.
+N: Si esta noche sientes que te alejaste demasiado, que tus decisiones te llevaron a un lugar oscuro, todavía puedes orar como Samsón. Señor, acuérdate de mí. Nunca es tarde para volver a llamar a Dios.
+
+=== core-050-wise-men | Los magos y la estrella
+passage: MAT 2:1-12
+shelf: adult
+violence: none
+sexual: none
+cast: magi|magos|adult|group; herod|Herodes|adult|m
+N: Después del nacimiento de Jesús, muy lejos de Bethlehem, en las tierras del oriente, unos hombres sabios que estudiaban las estrellas vieron algo nuevo en el cielo. Entendieron que había nacido un rey. Y emprendieron un largo viaje para conocerlo.
+S: MAT 2:1
+S: MAT 2:2 @magi after "Diciendo: "
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con los que vinieron de lejos buscando a Jesús.
+N: Ellos no eran judíos. Venían de otro pueblo, de otra tierra, de otra cultura. Pero Dios los guió hasta su Hijo.
+S: MAT 2:3
+N: Herodes se asustó. Él era el rey, y no quería que hubiera otro. Y con él se turbó toda Jerusalén.
+S: MAT 2:4-5
+S: MAT 2:6
+N: Los sacerdotes sabían la respuesta. Estaba escrita en sus Escrituras desde hacía siglos. Bethlehem. Pero ninguno de ellos fue a buscar al niño. Los que vinieron de lejos fueron los que se pusieron en camino.
+S: MAT 2:7
+S: MAT 2:8 @herod after "dijo: "
+N: Herodes dijo que también quería adorarlo. Pero no era verdad. Tenía otros planes en el corazón.
+S: MAT 2:9-10
+N: La estrella volvió a aparecer delante de ellos. Y se llenaron de alegría. Después de tanto camino, tanto tiempo, tantas preguntas, por fin estaban cerca.
+S: MAT 2:11
+N: Entraron en una casa sencilla. No un palacio. Encontraron al niño en brazos de María. Y aquellos hombres sabios e importantes se arrodillaron delante de un niño pequeño.
+N: Le dieron oro, incienso y mirra. Regalos para un rey. Pero lo primero que le dieron fue su adoración.
+S: MAT 2:12
+N: Regresaron a casa por otra ruta, avisados en un sueño. Dios los protegió de Herodes y protegió al niño.
+N: Esta historia nos dice que Dios llama a personas de todas las naciones. Gente de lejos, de otros idiomas y otras tierras, que llegan buscando a Jesús. Y él los recibe.
+N: Tal vez tú también has venido de lejos. De otro país, de otra historia, de un camino largo. Dios ve a los que buscan. Y los que lo encuentran nunca vuelven por el mismo camino.
