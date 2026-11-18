@@ -1,0 +1,315 @@
+{
+ "id": "core-008-ruth-naomi",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Ruth y Noemi",
+ "passage": {
+  "refs": [
+   "RUT 1:1-22"
+  ],
+  "label": "Rut 1:1-22"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "naomi",
+   "name": "Noemi",
+   "age": "elder",
+   "gender": "f"
+  },
+  {
+   "id": "ruth",
+   "name": "Ruth",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hubo un tiempo de hambre en Israel. Una familia de Belén se fue a vivir a Moab, una tierra extranjera, buscando comida. Eran Elimelech, su esposa Noemi y sus dos hijos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Allí murió Elimelec. Los hijos se casaron con mujeres moabitas, Orpha y Ruth. Y unos diez años después, murieron también los dos hijos. Noemi se quedó sola, lejos de su tierra, con sus dos nueras viudas."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuando supo que en Israel ya había pan otra vez, decidió volver a casa. Sus nueras salieron con ella. Pero en el camino, Noemi se detuvo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:8",
+   "label": "Rut 1:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y Noemi dijo á sus dos nueras: Andad, volveos cada una á la casa de su madre: Jehová haga con vosotras misericordia, como la habéis hecho con los muertos y conmigo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y Noemi dijo á sus dos nueras:"
+    },
+    {
+     "v": 8,
+     "speaker": "naomi",
+     "text": "Andad, volveos cada una á la casa de su madre: Jehová haga con vosotras misericordia, como la habéis hecho con los muertos y conmigo."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun en el camino largo, con el corazón vacío.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Noemi las amaba. No quería que se quedaran viudas y solas en un país donde serían extranjeras. Les dijo que volvieran y buscaran un nuevo hogar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "RUT 1:14",
+   "label": "Rut 1:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Mas ellas alzando otra vez su voz, lloraron: y Orpha besó á su suegra, mas Ruth se quedó con ella."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Mas ellas alzando otra vez su voz, lloraron: y Orpha besó á su suegra, mas Ruth se quedó con ella."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Orpha se despidió con un beso y regresó. Nadie la culpa. Pero Ruth se aferró a su suegra y no la soltó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ruth",
+   "ref": "RUT 1:16",
+   "label": "Rut 1:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y Ruth respondió: No me ruegues que te deje, y me aparte de ti: porque donde quiera que tú fueres, iré yo; y donde quiera que vivieres, viviré. Tu pueblo será mi pueblo, y tu Dios mi Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y Ruth respondió:"
+    },
+    {
+     "v": 16,
+     "speaker": "ruth",
+     "text": "No me ruegues que te deje, y me aparte de ti: porque donde quiera que tú fueres, iré yo; y donde quiera que vivieres, viviré. Tu pueblo será mi pueblo, y tu Dios mi Dios."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "ruth",
+   "ref": "RUT 1:17",
+   "label": "Rut 1:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Donde tú murieres, moriré yo, y allí seré sepultada: así me haga Jehová, y así me dé, que sólo la muerte hará separación entre mí y ti."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "ruth",
+     "text": "Donde tú murieres, moriré yo, y allí seré sepultada: así me haga Jehová, y así me dé, que sólo la muerte hará separación entre mí y ti."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ruth dejó su tierra, su familia y sus dioses. Escogió a Noemi, al pueblo de Noemi y al Dios de Noemi. Cuando Noemi vio que estaba decidida, no le dijo nada más."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Las dos caminaron juntas hasta Belén. Cuando llegaron, todo el pueblo se alborotó. Las mujeres se preguntaban si de verdad era Noemi."
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:20",
+   "label": "Rut 1:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y ella les respondía: No me llaméis Noemi, sino llamadme Mara: porque en grande amargura me ha puesto el Todopoderoso."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y ella les respondía:"
+    },
+    {
+     "v": 20,
+     "speaker": "naomi",
+     "text": "No me llaméis Noemi, sino llamadme Mara: porque en grande amargura me ha puesto el Todopoderoso."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:21",
+   "label": "Rut 1:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Yo me fuí llena, mas vacía me ha vuelto Jehová. ¿Por qué me llamaréis Noemi, ya que Jehová ha dado testimonio contra mí, y el Todopoderoso me ha afligido?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "naomi",
+     "text": "Yo me fuí llena, mas vacía me ha vuelto Jehová. ¿Por qué me llamaréis Noemi, ya que Jehová ha dado testimonio contra mí, y el Todopoderoso me ha afligido?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Noemi significa agradable. Mara significa amarga. Ella sentía que había vuelto con las manos vacías. Pero no estaba vacía del todo. A su lado caminaba Ruth."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "RUT 1:22",
+   "label": "Rut 1:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Así volvió Noemi y Ruth Moabita su nuera con ella; volvió de los campos de Moab, y llegaron á Beth-lehem en el principio de la siega de las cebadas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Así volvió Noemi y Ruth Moabita su nuera con ella; volvió de los campos de Moab, y llegaron á Beth-lehem en el principio de la siega de las cebadas."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ruth no tenía ninguna obligación. Era joven, podía volver con su familia y empezar de nuevo. Pero el amor la hizo quedarse. Prometió acompañar a Noemi hasta la muerte."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Llegaron justo al comienzo de la cosecha. Dios ya estaba preparando algo. En los campos de Belén, Ruth conocería a Booz, y de su familia nacería el rey David. Y de la familia de David vendría Jesús. A veces, en nuestra amargura, no vemos a la persona que Dios puso a nuestro lado. Pero él no nos deja solos en el camino de regreso."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 535,
+ "est_seconds": 298,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 535 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Ruth 1 (vv1-7, 9-13, 15, 18-19 told in words); RV1909 spellings Noemi, Ruth, Orpha, Elimelech, Booz; David and Jesus from Ruth 4 and Matt 1, stated without references."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Two widows shown with dignity; Naomi's bitterness honoured, not corrected."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

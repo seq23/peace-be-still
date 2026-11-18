@@ -1,0 +1,310 @@
+{
+ "id": "core-005-david-goliath",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "David y Goliath",
+ "passage": {
+  "refs": [
+   "1SA 17:4-50"
+  ],
+  "label": "1 Samuel 17:4-50"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "david",
+   "name": "David",
+   "age": "teen",
+   "gender": "m"
+  },
+  {
+   "id": "saul",
+   "name": "Saúl",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El ejército de Israel y el ejército de los filisteos estaban frente a frente, cada uno en un monte, con un valle en medio. Todos los días salía un gigante del campamento filisteo. Se llamaba Goliath. Era enorme, con armadura de bronce y una lanza pesadísima. Y gritaba lo mismo cada mañana. Mándenme a un hombre que pelee conmigo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Durante cuarenta días nadie se atrevió. Ni siquiera el rey Saúl."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un día llegó David, el hijo menor de Isaí. No era soldado. Era un muchacho que cuidaba las ovejas de su padre. Había venido a traerles comida a sus hermanos. Y oyó al gigante burlarse del Dios de Israel."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 17:32",
+   "label": "1 Samuel 17:32",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Y dijo David á Saúl: No desmaye ninguno á causa de él; tu siervo irá y peleará con este Filisteo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "Y dijo David á Saúl:"
+    },
+    {
+     "v": 32,
+     "speaker": "david",
+     "text": "No desmaye ninguno á causa de él; tu siervo irá y peleará con este Filisteo."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Un muchacho con fe dio un paso al frente cuando nadie más quería.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "saul",
+   "ref": "1SA 17:33",
+   "label": "1 Samuel 17:33",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 33,
+     "text": "Y dijo Saúl á David: No podrás tú ir contra aquel Filisteo, para pelear con él; porque tú eres mozo, y él un hombre de guerra desde su juventud."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "Y dijo Saúl á David:"
+    },
+    {
+     "v": 33,
+     "speaker": "saul",
+     "text": "No podrás tú ir contra aquel Filisteo, para pelear con él; porque tú eres mozo, y él un hombre de guerra desde su juventud."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Saúl tenía razón según lo que se veía. Pero David le contó lo que nadie había visto. Mientras cuidaba las ovejas, vino un león y otro día un oso, y él los enfrentó para rescatar a un cordero."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 17:37",
+   "label": "1 Samuel 17:37",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 37,
+     "text": "Y añadió David: Jehová que me ha librado de las garras del león y de las garras del oso, él también me librará de la mano de este Filisteo. Y dijo Saúl á David: Ve, y Jehová sea contigo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Y añadió David:"
+    },
+    {
+     "v": 37,
+     "speaker": "david",
+     "text": "Jehová que me ha librado de las garras del león y de las garras del oso, él también me librará de la mano de este Filisteo."
+    },
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Y dijo Saúl á David: Ve, y Jehová sea contigo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Saúl quiso ponerle su propia armadura, pero a David le quedaba grande y no podía caminar. Se la quitó. Tomó su vara, su honda, y escogió cinco piedras lisas del arroyo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuando Goliat vio que le mandaban a un muchacho, se rió de él y lo maldijo. Pero David no se dejó intimidar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 17:45",
+   "label": "1 Samuel 17:45",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 45,
+     "text": "Entonces dijo David al Filisteo: Tú vienes á mí con espada y lanza y escudo; mas yo vengo á ti en el nombre de Jehová de los ejércitos, el Dios de los escuadrones de Israel, que tú has provocado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 45,
+     "speaker": "narrator",
+     "text": "Entonces dijo David al Filisteo:"
+    },
+    {
+     "v": 45,
+     "speaker": "david",
+     "text": "Tú vienes á mí con espada y lanza y escudo; mas yo vengo á ti en el nombre de Jehová de los ejércitos, el Dios de los escuadrones de Israel, que tú has provocado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "David sabía que la pelea no se trataba de él. Se trataba del nombre de Dios."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 17:47",
+   "label": "1 Samuel 17:47",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 47,
+     "text": "Y sabrá toda esta congregación que Jehová no salva con espada y lanza; porque de Jehová es la guerra, y él os entregará en nuestras manos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 47,
+     "speaker": "david",
+     "text": "Y sabrá toda esta congregación que Jehová no salva con espada y lanza; porque de Jehová es la guerra, y él os entregará en nuestras manos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Entonces David corrió hacia el gigante."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 17:49",
+   "label": "1 Samuel 17:49",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 49,
+     "text": "Y metiendo David su mano en el saco, tomó de allí una piedra, y tirósela con la honda, é hirió al Filisteo en la frente: y la piedra quedó hincada en la frente, y cayó en tierra sobre su rostro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 49,
+     "speaker": "narrator",
+     "text": "Y metiendo David su mano en el saco, tomó de allí una piedra, y tirósela con la honda, é hirió al Filisteo en la frente: y la piedra quedó hincada en la frente, y cayó en tierra sobre su rostro."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Una piedra. Un muchacho con una honda. Y el gigante que había asustado a todo un ejército cayó al suelo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Todo el ejército vio lo que pasó. Los soldados que llevaban cuarenta días escondidos de miedo se levantaron con un grito y salieron detrás de los filisteos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "David no era el más grande ni el más fuerte. Pero conocía a su Dios. Lo había visto ser fiel en el campo, con las ovejas, cuando nadie estaba mirando. Hay gigantes que nos parecen imposibles. El miedo, la deuda, una enfermedad, una pérdida. La historia de David nos recuerda que la batalla es de Dios, y que él no necesita que seamos grandes. Necesita que confiemos en él."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 562,
+ "est_seconds": 313,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 562 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Sam 17 (vv4-31, 34-36, 38-44, 48, 52 told in words); RV1909 spelling Goliath; the battle credited to the LORD as v47."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Giants named as everyday fears (debt, illness, loss) without promising they fall."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,320 @@
+{
+ "id": "core-009-fiery-furnace",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El horno de fuego",
+ "passage": {
+  "refs": [
+   "DAN 3:1-28"
+  ],
+  "label": "Daniel 3:1-28"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "nebuchadnezzar",
+   "name": "Nabucodonosor",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "the-three",
+   "name": "Sadrach, Mesach, y Abed-nego",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El rey Nabucodonosor de Babilonia hizo una estatua de oro enorme. Reunió a todos los líderes del reino y dio una orden. Cuando sonara la música, todos tenían que arrodillarse y adorar la estatua. El que no lo hiciera sería echado en un horno de fuego."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Sonó la música, y todo el mundo se arrodilló. Todos menos tres jóvenes judíos. Sadrach, Mesach y Abed-nego."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nebuchadnezzar",
+   "ref": "DAN 3:15",
+   "label": "Daniel 3:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Ahora pues, ¿estáis prestos para que en oyendo el son de la bocina, del pífano, del tamboril, del arpa, del salterio, de la zampoña, y de todo instrumento músico, os postréis, y adoréis la estatua que he hecho? Porque si no la adorareis, en la misma hora seréis echados en medio de un horno de fuego ardiendo: ¿y qué dios será aquel que os libre de mis manos?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "nebuchadnezzar",
+     "text": "Ahora pues, ¿estáis prestos para que en oyendo el son de la bocina, del pífano, del tamboril, del arpa, del salterio, de la zampoña, y de todo instrumento músico, os postréis, y adoréis la estatua que he hecho? Porque si no la adorareis, en la misma hora seréis echados en medio de un horno de fuego ardiendo: ¿y qué dios será aquel que os libre de mis manos?"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Ellos lo dijeron delante del rey, con el fuego ya encendido.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El rey les dio otra oportunidad. Y luego les hizo una pregunta. ¿Qué dios los va a librar de mi mano?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "the-three",
+   "ref": "DAN 3:16",
+   "label": "Daniel 3:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Sadrach, Mesach, y Abed-nego respondieron y dijeron al rey Nabucodonosor: No cuidamos de responderte sobre este negocio."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Sadrach, Mesach, y Abed-nego respondieron y dijeron al rey Nabucodonosor:"
+    },
+    {
+     "v": 16,
+     "speaker": "the-three",
+     "text": "No cuidamos de responderte sobre este negocio."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "the-three",
+   "ref": "DAN 3:17",
+   "label": "Daniel 3:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "He aquí nuestro Dios á quien honramos, puede librarnos del horno de fuego ardiendo; y de tu mano, oh rey, nos librará."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "the-three",
+     "text": "He aquí nuestro Dios á quien honramos, puede librarnos del horno de fuego ardiendo; y de tu mano, oh rey, nos librará."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "the-three",
+   "ref": "DAN 3:18",
+   "label": "Daniel 3:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y si no, sepas, oh rey, que tu dios no adoraremos, ni tampoco honraremos la estatua que has levantado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "the-three",
+     "text": "Y si no, sepas, oh rey, que tu dios no adoraremos, ni tampoco honraremos la estatua que has levantado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y si no. Esas tres palabras dicen mucho. Ellos sabían que Dios podía salvarlos. Pero aunque no lo hiciera, igual no iban a adorar la estatua. Su fe no dependía del resultado."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El rey se puso furioso. Mandó calentar el horno siete veces más de lo normal. El fuego estaba tan fuerte que mató a los soldados que los echaron adentro. Y los tres cayeron atados en medio de las llamas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nebuchadnezzar",
+   "ref": "DAN 3:24",
+   "label": "Daniel 3:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Entonces el rey Nabucodonosor se espantó, y levantóse apriesa, y habló, y dijo á los de su consejo: ¿No echaron tres varones atados dentro del fuego? Ellos respondieron y dijeron al rey: Es verdad, oh rey."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Entonces el rey Nabucodonosor se espantó, y levantóse apriesa, y habló, y dijo á los de su consejo:"
+    },
+    {
+     "v": 24,
+     "speaker": "nebuchadnezzar",
+     "text": "¿No echaron tres varones atados dentro del fuego?"
+    },
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Ellos respondieron y dijeron al rey: Es verdad, oh rey."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "nebuchadnezzar",
+   "ref": "DAN 3:25",
+   "label": "Daniel 3:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Respondió él y dijo: He aquí que yo veo cuatro varones sueltos, que se pasean en medio del fuego, y ningún daño hay en ellos: y el parecer del cuarto es semejante á hijo de los dioses."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Respondió él y dijo:"
+    },
+    {
+     "v": 25,
+     "speaker": "nebuchadnezzar",
+     "text": "He aquí que yo veo cuatro varones sueltos, que se pasean en medio del fuego, y ningún daño hay en ellos: y el parecer del cuarto es semejante á hijo de los dioses."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuatro hombres. Sueltos. Caminando en medio del fuego. No estaban solos allí adentro."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El rey se acercó a la puerta del horno y los llamó para que salieran. Y salieron. No se les había quemado ni un cabello. Su ropa ni siquiera olía a humo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nebuchadnezzar",
+   "ref": "DAN 3:28",
+   "label": "Daniel 3:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Nabucodonosor habló y dijo: Bendito el Dios de ellos, de Sadrach, Mesach, y Abed-nego, que envió su ángel, y libró sus siervos que esperaron en él, y el mandamiento del rey mudaron, y entregaron sus cuerpos antes que sirviesen ni adorasen otro dios que su Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Nabucodonosor habló y dijo:"
+    },
+    {
+     "v": 28,
+     "speaker": "nebuchadnezzar",
+     "text": "Bendito el Dios de ellos, de Sadrach, Mesach, y Abed-nego, que envió su ángel, y libró sus siervos que esperaron en él, y el mandamiento del rey mudaron, y entregaron sus cuerpos antes que sirviesen ni adorasen otro dios que su Dios."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El mismo rey que los había condenado ahora bendecía a su Dios. Los tres jóvenes no dieron un discurso. Su fidelidad habló por ellos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios no los libró de entrar al fuego. Los acompañó en el fuego. A veces oramos para que Dios nos saque del problema, y él decide caminar con nosotros en medio de él. Su fe no era una apuesta. Era confianza. Y si no, igual seguimos con él."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 547,
+ "est_seconds": 304,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 547 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Dan 3 (vv1-14, 19-23, 26-27 told in words); RV1909 spellings Sadrach, Mesach, Abed-nego, Nabucodonosor; 'y si no' as the heart (v18), no promise of rescue."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Courage without bravado; plain Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

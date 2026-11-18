@@ -106,7 +106,8 @@ function finalize(item, checks, review) {
 //   until "phrase"   speech stops before this phrase; the rest of the verse is narration (another speaker)
 const INTRO = {
   en: /\b(?:said|saith|say|saying|answered|spake|cried)(?: moreover)?(?: (?:the |his )?[A-Za-z-]+(?: of [A-Z][a-z]+)?)?(?: (?:unto|to|before|one to) [^,:;]{1,40})?,\s+/,
-  es: /\b(?:dijo|dijeron|dice|dicen|dec[íi]a|dec[íi]an|respondi[óo]|respondieron|respond[íi]a|habl[óo]|diciendo|clam[óo]|clamaron|a[ñn]adi[óo])\b[^:.]{0,80}:\s+/,
+  // (?!\p{L}) not \b: JS \b is ASCII-only, so "respondió:" and "añadió:" were never cut.
+  es: /\b(?:dijo|dijeron|dice|dicen|dec[íi]a|dec[íi]an|respondi[óo]|respondieron|respond[íi]a|habl[óo]|diciendo|clam[óo]|clamaron|a[ñn]adi[óo])(?!\p{L})[^:.]{0,80}:\s+/u,
 };
 const RESUME = {
   en: /[.?!:;,]\s+(?=(?:[Aa]nd|Then|But|So) (?:he|she|they|his|her|the|[A-Z][a-z]+)\b[^,]{0,40}?\b(?:said|saith|answered|came|could|cried|spake)\b)/,
@@ -374,14 +375,18 @@ N: The same voice that spoke to the sea still calls to the frightened heart.
   const es = parseItems(`=== t-es | Calla, enmudece
 passage: MAR 4:35-41
 cast: discipulos|los discípulos|adult|group
-N: El día terminó. Jesús dijo que cruzaran al otro lado del lago.
+N: El día terminó. Jesús dijo que cruzaran al otro lado del lago. Hacía años que los demás pescaban allí.
 N: Vino un viento muy fuerte. Las olas llenaban la barca.
 S: MAR 4:39
 N: Alguien diga amén. La misma voz que habló al mar todavía nos llama esta noche.
 `)[0];
   const ses = buildStory(es, "mi-refugio");
   const okes = checkStory(ses);
-  if (isFail(okes.S12_latin_american) || isFail(okes.S12_no_english) || isFail(okes.S01_word_for_word)) throw new Error(`SELFTEST good Spanish fails ${JSON.stringify(okes)}`);
+  if (isFail(okes.S12_latin_american) || isFail(okes.S12_no_english) || isFail(okes.S01_word_for_word) || isFail(okes.S08_voice_code)) throw new Error(`SELFTEST good Spanish fails ${JSON.stringify(okes)}`);
+  const cut = speechSegments([{ v: 9, text: "Y él les respondió: Hebreo soy." }], "jonas", "es", {});
+  if (cut.length !== 2 || cut[1].text !== "Hebreo soy.") throw new Error(`SELFTEST Spanish respondió not cut ${JSON.stringify(cut)}`);
+  ses.blocks[0].text += " Os lo digo.";
+  if (!isFail(checkStory(ses).S12_latin_american)) throw new Error("SELFTEST bare os not caught");
   ses.blocks[0].text += " Vosotros sabéis que vale, cogedlo.";
   if (!isFail(checkStory(ses).S12_latin_american)) throw new Error("SELFTEST vosotros not caught");
   ses.blocks[0].text += " The night was long.";

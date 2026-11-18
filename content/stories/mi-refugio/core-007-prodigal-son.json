@@ -1,0 +1,426 @@
+{
+ "id": "core-007-prodigal-son",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El hijo que volvió a casa",
+ "passage": {
+  "refs": [
+   "LUK 15:11-32"
+  ],
+  "label": "Lucas 15:11-32"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "younger-son",
+   "name": "menor",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "father",
+   "name": "padre",
+   "age": "elder",
+   "gender": "m"
+  },
+  {
+   "id": "elder-son",
+   "name": "mayor",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús contó una historia sobre un padre que tenía dos hijos. Un día el menor le dijo a su papá que quería su parte de la herencia ya, sin esperar. Era como decirle que no podía esperar a que se muriera. Y el padre se la dio."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:13",
+   "label": "Lucas 15:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y no muchos días después, juntándolo todo el hijo menor, partió lejos á una provincia apartada; y allí desperdició su hacienda viviendo perdidamente."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y no muchos días después, juntándolo todo el hijo menor, partió lejos á una provincia apartada; y allí desperdició su hacienda viviendo perdidamente."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aunque el hijo se fue lejos, el padre seguía siendo bueno.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lo gastó todo. Y cuando ya no le quedaba nada, vino una gran hambre a esa tierra. Terminó cuidando cerdos, y tenía tanta hambre que hasta la comida de los cerdos le parecía buena. Nadie le daba nada."
+  },
+  {
+   "type": "scripture",
+   "speaker": "younger-son",
+   "ref": "LUK 15:17",
+   "label": "Lucas 15:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Y volviendo en sí, dijo: ¡Cuántos jornaleros en casa de mi padre tienen abundancia de pan, y yo aquí perezco de hambre!"
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Y volviendo en sí, dijo:"
+    },
+    {
+     "v": 17,
+     "speaker": "younger-son",
+     "text": "¡Cuántos jornaleros en casa de mi padre tienen abundancia de pan, y yo aquí perezco de hambre!"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "younger-son",
+   "ref": "LUK 15:18",
+   "label": "Lucas 15:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Me levantaré, é iré á mi padre, y le diré: Padre, he pecado contra el cielo, y contra ti;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "younger-son",
+     "text": "Me levantaré, é iré á mi padre, y le diré: Padre, he pecado contra el cielo, y contra ti;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "younger-son",
+   "ref": "LUK 15:19",
+   "label": "Lucas 15:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Ya no soy digno de ser llamado tu hijo; hazme como á uno de tus jornaleros."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "younger-son",
+     "text": "Ya no soy digno de ser llamado tu hijo; hazme como á uno de tus jornaleros."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Volvió en sí. Ese fue el comienzo. Ensayó lo que le iba a decir a su papá, y emprendió el camino a casa."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:20",
+   "label": "Lucas 15:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y levantándose, vino á su padre. Y como aun estuviese lejos, viólo su padre, y fué movido á misericordia, y corrió, y echóse sobre su cuello, y besóle."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y levantándose, vino á su padre. Y como aun estuviese lejos, viólo su padre, y fué movido á misericordia, y corrió, y echóse sobre su cuello, y besóle."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El padre lo vio cuando todavía estaba lejos. Eso quiere decir que estaba mirando el camino. Quizás todos los días. Y cuando lo vio, no esperó. Corrió. Un hombre mayor, corriendo por el camino para abrazar al hijo que lo había deshonrado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "younger-son",
+   "ref": "LUK 15:21",
+   "label": "Lucas 15:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Y el hijo le dijo: Padre, he pecado contra el cielo, y contra ti, y ya no soy digno de ser llamado tu hijo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Y el hijo le dijo:"
+    },
+    {
+     "v": 21,
+     "speaker": "younger-son",
+     "text": "Padre, he pecado contra el cielo, y contra ti, y ya no soy digno de ser llamado tu hijo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El hijo empezó su discurso, pero el padre no lo dejó terminar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:22",
+   "label": "Lucas 15:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Mas el padre dijo á sus siervos: Sacad el principal vestido, y vestidle; y poned un anillo en su mano, y zapatos en sus pies."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Mas el padre dijo á sus siervos:"
+    },
+    {
+     "v": 22,
+     "speaker": "father",
+     "text": "Sacad el principal vestido, y vestidle; y poned un anillo en su mano, y zapatos en sus pies."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:23",
+   "label": "Lucas 15:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Y traed el becerro grueso, y matadlo, y comamos, y hagamos fiesta:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "father",
+     "text": "Y traed el becerro grueso, y matadlo, y comamos, y hagamos fiesta:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:24",
+   "label": "Lucas 15:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Porque este mi hijo muerto era, y ha revivido; habíase perdido, y es hallado. Y comenzaron á regocijarse."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "father",
+     "text": "Porque este mi hijo muerto era, y ha revivido; habíase perdido, y es hallado."
+    },
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y comenzaron á regocijarse."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero había otro hijo. El mayor venía del campo, oyó la música, y cuando supo lo que pasaba, se enojó y no quiso entrar. El padre salió a buscarlo a él también."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elder-son",
+   "ref": "LUK 15:29",
+   "label": "Lucas 15:29",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Mas él respondiendo, dijo al padre: He aquí tantos años te sirvo, no habiendo traspasado jamás tu mandamiento, y nunca me has dado un cabrito para gozarme con mis amigos:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Mas él respondiendo, dijo al padre:"
+    },
+    {
+     "v": 29,
+     "speaker": "elder-son",
+     "text": "He aquí tantos años te sirvo, no habiendo traspasado jamás tu mandamiento, y nunca me has dado un cabrito para gozarme con mis amigos:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:31",
+   "label": "Lucas 15:31",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 31,
+     "text": "El entonces le dijo: Hijo, tú siempre estás conmigo, y todas mis cosas son tuyas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "El entonces le dijo:"
+    },
+    {
+     "v": 31,
+     "speaker": "father",
+     "text": "Hijo, tú siempre estás conmigo, y todas mis cosas son tuyas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:32",
+   "label": "Lucas 15:32",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Mas era menester hacer fiesta y holgarnos, porque este tu hermano muerto era, y ha revivido; habíase perdido, y es hallado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "father",
+     "text": "Mas era menester hacer fiesta y holgarnos, porque este tu hermano muerto era, y ha revivido; habíase perdido, y es hallado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El padre no le pidió explicaciones. No le dio una lista de condiciones. Le puso ropa nueva, un anillo y zapatos. Eran señales de que seguía siendo su hijo, no un empleado."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús terminó la historia ahí, con el hijo mayor afuera y la puerta abierta. Algunos de nosotros somos el hijo que se fue. Otros somos el que se quedó y se resintió. Pero la historia es sobre el padre. Un padre que corre hacia el que vuelve y sale a buscar al que no quiere entrar. Así es el amor de Dios. Siempre hay lugar en la mesa."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 576,
+ "est_seconds": 320,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 15:11-32; the father's words as RV1909 scripture; the open ending kept as Jesus left it."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Natural Spanish for a family story; the elder brother also sought, not scorned."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
