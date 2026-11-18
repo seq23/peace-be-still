@@ -1,0 +1,279 @@
+{
+ "id": "core-003-lions-den",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Didn't My Lord Deliver Daniel",
+ "passage": {
+  "refs": [
+   "DAN 6:1-23"
+  ],
+  "label": "Daniel 6:1-23"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "king",
+   "name": "the king",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "daniel",
+   "name": "Daniel",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Daniel had served in Babylon a long, long time. King Darius thought so much of him that he planned to set him over the whole kingdom. And you know how that goes. The other leaders got jealous. They went looking for something wrong with him, and they could not find a thing. He was faithful. He was honest."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So they figured the only way to catch Daniel was through his God. They talked the king into signing a law. Thirty days, nobody could pray to any god or any man but the king. Anybody who did would go to the lions."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "DAN 6:10",
+   "label": "Daniel 6:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Now when Daniel knew that the writing was signed, he went into his house; and his windows being open in his chamber toward Jerusalem, he kneeled upon his knees three times a day, and prayed, and gave thanks before his God, as he did aforetime."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Now when Daniel knew that the writing was signed, he went into his house; and his windows being open in his chamber toward Jerusalem, he kneeled upon his knees three times a day, and prayed, and gave thanks before his God, as he did aforetime."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look at what he did, Church. He did not hide. He did not change his schedule. He went home, opened his windows toward Jerusalem, got down on his knees, and prayed like he always had. A church mother I knew used to say, baby, you cannot start praying in the storm if you never prayed in the sunshine. Daniel had prayed in the sunshine."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The men found him praying and ran to the king. The king was sick about it, because he loved Daniel. He worked till the sun went down to find a way out. But a law of the Medes and Persians could not be changed."
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "DAN 6:16",
+   "label": "Daniel 6:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Then the king commanded, and they brought Daniel, and cast him into the den of lions. Now the king spake and said unto Daniel, Thy God whom thou servest continually, he will deliver thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Then the king commanded, and they brought Daniel, and cast him into the den of lions. Now the king spake and said unto Daniel,"
+    },
+    {
+     "v": 16,
+     "speaker": "king",
+     "text": "Thy God whom thou servest continually, he will deliver thee."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Even the king who signed that order was hoping in Daniel's God. They rolled a stone over the mouth of the den and sealed it with the king's own ring. Then the king went home to his palace. No supper. No music. No sleep."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Think about that. The man in the lions' den had more peace than the man in the palace."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "DAN 6:19",
+   "label": "Daniel 6:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Then the king arose very early in the morning, and went in haste unto the den of lions."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Then the king arose very early in the morning, and went in haste unto the den of lions."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "DAN 6:20",
+   "label": "Daniel 6:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And when he came to the den, he cried with a lamentable voice unto Daniel: and the king spake and said to Daniel, O Daniel, servant of the living God, is thy God, whom thou servest continually, able to deliver thee from the lions?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And when he came to the den, he cried with a lamentable voice unto Daniel: and the king spake and said to Daniel,"
+    },
+    {
+     "v": 20,
+     "speaker": "king",
+     "text": "O Daniel, servant of the living God, is thy God, whom thou servest continually, able to deliver thee from the lions?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "daniel",
+   "ref": "DAN 6:21",
+   "label": "Daniel 6:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Then said Daniel unto the king, O king, live for ever."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Then said Daniel unto the king,"
+    },
+    {
+     "v": 21,
+     "speaker": "daniel",
+     "text": "O king, live for ever."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "daniel",
+   "ref": "DAN 6:22",
+   "label": "Daniel 6:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "My God hath sent his angel, and hath shut the lions’ mouths, that they have not hurt me: forasmuch as before him innocency was found in me; and also before thee, O king, have I done no hurt."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "daniel",
+     "text": "My God hath sent his angel, and hath shut the lions’ mouths, that they have not hurt me: forasmuch as before him innocency was found in me; and also before thee, O king, have I done no hurt."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "DAN 6:23",
+   "label": "Daniel 6:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Then was the king exceeding glad for him, and commanded that they should take Daniel up out of the den. So Daniel was taken up out of the den, and no manner of hurt was found upon him, because he believed in his God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Then was the king exceeding glad for him, and commanded that they should take Daniel up out of the den. So Daniel was taken up out of the den, and no manner of hurt was found upon him, because he believed in his God."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The old spiritual asks it plain: didn't my Lord deliver Daniel? And the answer comes right back. He did. The story does not say the den was not real or that the lions were not hungry. It says God sent his angel and shut their mouths, and Daniel trusted his God. Somebody is praying with the windows open tonight. Keep on praying."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 567,
+ "est_seconds": 309,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.5",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Daniel 6; 'keep on praying' encourages without promising the listener's rescue."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The church mother's saying rings true and is used once; the spiritual title is public domain."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

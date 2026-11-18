@@ -1,0 +1,295 @@
+{
+ "id": "core-008-ruth-naomi",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Whither Thou Goest",
+ "passage": {
+  "refs": [
+   "RUT 1:1-22"
+  ],
+  "label": "Ruth 1:1-22"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "naomi",
+   "name": "Naomi",
+   "age": "elder",
+   "gender": "f"
+  },
+  {
+   "id": "ruth",
+   "name": "Ruth",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "orpah",
+   "name": "Orpah",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Way back, when the judges ruled, a famine hit the land. A man from Bethlehem named Elimelech took his wife Naomi and their two sons over to Moab to find bread."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Elimelech died. The boys married women from Moab, Orpah and Ruth. And about ten years later, both of those sons died too. Three widows, Church. Nothing in their hands."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Naomi heard that the LORD had visited his people back home and given them bread. So she started for home, and her daughters-in-law walked with her."
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:8",
+   "label": "Ruth 1:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And Naomi said unto her two daughters in law, Go, return each to her mother’s house: the LORD deal kindly with you, as ye have dealt with the dead, and with me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And Naomi said unto her two daughters in law,"
+    },
+    {
+     "v": 8,
+     "speaker": "naomi",
+     "text": "Go, return each to her mother’s house: the LORD deal kindly with you, as ye have dealt with the dead, and with me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They cried, and they said they would go with her. Naomi told them to go on back. She had no more sons to give them. She felt like the hand of the LORD had gone out against her."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "RUT 1:14",
+   "label": "Ruth 1:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And they lifted up their voice, and wept again: and Orpah kissed her mother in law; but Ruth clave unto her."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And they lifted up their voice, and wept again: and Orpah kissed her mother in law; but Ruth clave unto her."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Orpah kissed her and went home, and nobody in this story fusses at her for it. She went back to her own people. But Ruth held on to that old woman and would not let go."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ruth",
+   "ref": "RUT 1:16",
+   "label": "Ruth 1:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And Ruth said, Intreat me not to leave thee, or to return from following after thee: for whither thou goest, I will go; and where thou lodgest, I will lodge: thy people shall be my people, and thy God my God:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And Ruth said,"
+    },
+    {
+     "v": 16,
+     "speaker": "ruth",
+     "text": "Intreat me not to leave thee, or to return from following after thee: for whither thou goest, I will go; and where thou lodgest, I will lodge: thy people shall be my people, and thy God my God:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "ruth",
+   "ref": "RUT 1:17",
+   "label": "Ruth 1:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Where thou diest, will I die, and there will I be buried: the LORD do so to me, and more also, if ought but death part thee and me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "ruth",
+     "text": "Where thou diest, will I die, and there will I be buried: the LORD do so to me, and more also, if ought but death part thee and me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Those are some of the most loved words in the whole Bible, and they came out of the mouth of a widow from Moab. Not a prophet. Not a priest. A young woman from across the border who would not let an old woman walk that road by herself. We read them at weddings now. She said them on a dusty road to her mother-in-law."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When they came to Bethlehem, the whole town was stirred. The women asked, is this Naomi?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:20",
+   "label": "Ruth 1:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And she said unto them, Call me not Naomi, call me Mara: for the Almighty hath dealt very bitterly with me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And she said unto them,"
+    },
+    {
+     "v": 20,
+     "speaker": "naomi",
+     "text": "Call me not Naomi, call me Mara: for the Almighty hath dealt very bitterly with me."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:21",
+   "label": "Ruth 1:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "I went out full, and the LORD hath brought me home again empty: why then call ye me Naomi, seeing the LORD hath testified against me, and the Almighty hath afflicted me?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "naomi",
+     "text": "I went out full, and the LORD hath brought me home again empty: why then call ye me Naomi, seeing the LORD hath testified against me, and the Almighty hath afflicted me?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She told the truth about her grief. She did not dress it up for church, and the Bible lets her say it. But read the last line slow."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "RUT 1:22",
+   "label": "Ruth 1:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "So Naomi returned, and Ruth the Moabitess, her daughter in law, with her, which returned out of the country of Moab: and they came to Beth-lehem in the beginning of barley harvest."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "So Naomi returned, and Ruth the Moabitess, her daughter in law, with her, which returned out of the country of Moab: and they came to Beth-lehem in the beginning of barley harvest."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The beginning of barley harvest. Naomi came home empty, with Ruth by her side, right when the fields were turning gold. She could not see it yet. Grief cannot always see the harvest coming. But her story was already turning."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 518,
+ "est_seconds": 283,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.6",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Ruth 1; Naomi's lament is allowed to stand."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Two women's loyalty told with tenderness; the wedding line is accurate and kind."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

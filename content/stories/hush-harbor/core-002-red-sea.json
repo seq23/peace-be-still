@@ -1,0 +1,264 @@
+{
+ "id": "core-002-red-sea",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Stand Still and See",
+ "passage": {
+  "refs": [
+   "EXO 14:5-31"
+  ],
+  "label": "Exodus 14:5-31"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "moses",
+   "name": "Moses",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "israelites",
+   "name": "the children of Israel",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Picture it, Church. A whole people camped by the sea. Mothers with babies on their hips. Old men leaning on their staffs. Children asleep on bundles. Behind them, Egypt, and every year they spent serving there. In front of them, water as far as the eye could see."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And Pharaoh changed his mind. He wanted his workers back. He hitched up his chariots and came after them with his horsemen."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Somebody looked back and saw the dust rising on the road. The people were sore afraid. They cried out to the LORD, and then they turned around on Moses."
+  },
+  {
+   "type": "scripture",
+   "speaker": "israelites",
+   "ref": "EXO 14:11",
+   "label": "Exodus 14:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And they said unto Moses, Because there were no graves in Egypt, hast thou taken us away to die in the wilderness? wherefore hast thou dealt thus with us, to carry us forth out of Egypt?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And they said unto Moses,"
+    },
+    {
+     "v": 11,
+     "speaker": "israelites",
+     "text": "Because there were no graves in Egypt, hast thou taken us away to die in the wilderness? wherefore hast thou dealt thus with us, to carry us forth out of Egypt?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fear will do that to you. It will make bondage look safe, just because you know its name. But Moses did not answer fear with more fear."
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 14:13",
+   "label": "Exodus 14:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And Moses said unto the people, Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And Moses said unto the people,"
+    },
+    {
+     "v": 13,
+     "speaker": "moses",
+     "text": "Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 14:14",
+   "label": "Exodus 14:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "The LORD shall fight for you, and ye shall hold your peace."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "moses",
+     "text": "The LORD shall fight for you, and ye shall hold your peace."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Stand still. Not because there was nothing to do. Because this part was not theirs to do. Then the LORD told Moses to have the people go forward, and to lift that rod over the water."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Night came down. The angel of God moved from the front of the camp to the back, and the pillar of cloud went with him. It stood right between Israel and Egypt. On Egypt's side it was cloud and darkness. On Israel's side it gave light all night long. Same cloud, Church. Darkness on one side, light on the other."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 14:21",
+   "label": "Exodus 14:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And Moses stretched out his hand over the sea; and the LORD caused the sea to go back by a strong east wind all that night, and made the sea dry land, and the waters were divided."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And Moses stretched out his hand over the sea; and the LORD caused the sea to go back by a strong east wind all that night, and made the sea dry land, and the waters were divided."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 14:22",
+   "label": "Exodus 14:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And the children of Israel went into the midst of the sea upon the dry ground: and the waters were a wall unto them on their right hand, and on their left."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And the children of Israel went into the midst of the sea upon the dry ground: and the waters were a wall unto them on their right hand, and on their left."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Can you see them walking? Feet on dry ground where fish had been swimming that morning. Water standing up like walls on either side. Grandmothers holding children's hands. The old folks sang about this in the fields, \"Go Down, Moses\" and \"Oh, Mary, Don't You Weep,\" and they sang it when there was no sea in sight and no way out that they could see."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The Egyptians came in after them. Their chariot wheels came off, and they drove heavy. When the morning came, Moses stretched out his hand again, and the waters went back to their place. Israel stood safe on the far shore."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 14:31",
+   "label": "Exodus 14:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And Israel saw that great work which the LORD did upon the Egyptians: and the people feared the LORD, and believed the LORD, and his servant Moses."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And Israel saw that great work which the LORD did upon the Egyptians: and the people feared the LORD, and believed the LORD, and his servant Moses."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look at what the people learned. Not that they were strong. Not that Moses was clever. They saw the great work the LORD had done, and they trusted him. They could not see a way through that water. The story tells us who made one."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 560,
+ "est_seconds": 305,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.0",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exodus 14; the spirituals are named, not used as doctrine; credit stays with the LORD."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The field songs are honoured as history, sung in hope; elders and children shown with dignity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
