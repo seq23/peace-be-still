@@ -1,0 +1,206 @@
+{
+ "id": "pn-27-psalm-56",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 56: What Time I Am Afraid",
+ "main": [
+  "PSA 56:3-13"
+ ],
+ "companions": [
+  "ISA 41:10"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello. This is Psalm Nights. [pause 11]\n\nFind a comfortable way to lie. Let your breathing slow. [pause 14]\n\nTonight we read most of Psalm 56. David wrote it when he was captured in a foreign city. He was afraid, and he said so. [pause 13]\n\nWe will read it twice. [pause 16]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 56:3-13",
+   "label": "Psalm 56:3-13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "What time I am afraid, I will trust in thee."
+    },
+    {
+     "v": 4,
+     "text": "In God I will praise his word, in God I have put my trust; I will not fear what flesh can do unto me."
+    },
+    {
+     "v": 5,
+     "text": "Every day they wrest my words: all their thoughts are against me for evil."
+    },
+    {
+     "v": 6,
+     "text": "They gather themselves together, they hide themselves, they mark my steps, when they wait for my soul."
+    },
+    {
+     "v": 7,
+     "text": "Shall they escape by iniquity? in thine anger cast down the people, O God."
+    },
+    {
+     "v": 8,
+     "text": "Thou tellest my wanderings: put thou my tears into thy bottle: are they not in thy book?"
+    },
+    {
+     "v": 9,
+     "text": "When I cry unto thee, then shall mine enemies turn back: this I know; for God is for me."
+    },
+    {
+     "v": 10,
+     "text": "In God will I praise his word: in the LORD will I praise his word."
+    },
+    {
+     "v": 11,
+     "text": "In God have I put my trust: I will not be afraid what man can do unto me."
+    },
+    {
+     "v": 12,
+     "text": "Thy vows are upon me, O God: I will render praises unto thee."
+    },
+    {
+     "v": 13,
+     "text": "For thou hast delivered my soul from death: wilt not thou deliver my feet from falling, that I may walk before God in the light of the living?"
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "When afraid, I will trust. Not if I am afraid. When. David does not pretend he is never scared. [pause 14]\n\nThen a tender picture. God counts our wanderings and puts our tears in his bottle. God keeps count of the nights you could not sleep. He keeps every tear. None of them are lost. [pause 16]\n\nTrust in God, and no fear of what people can do. [pause 14]\n\nAnd at the end, the light of the living. [pause 18]\n\nOne companion verse. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 41:10",
+   "label": "Isaiah 41:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Fear not, God says through Isaiah. Do not be dismayed. Strength, help, and his right hand holding you up. [pause 16]\n\nHere is Psalm 56 again. If you are afraid tonight, say the first line with it. [pause 18]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 56:3-13",
+   "label": "Psalm 56:3-13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "What time I am afraid, I will trust in thee."
+    },
+    {
+     "v": 4,
+     "text": "In God I will praise his word, in God I have put my trust; I will not fear what flesh can do unto me."
+    },
+    {
+     "v": 5,
+     "text": "Every day they wrest my words: all their thoughts are against me for evil."
+    },
+    {
+     "v": 6,
+     "text": "They gather themselves together, they hide themselves, they mark my steps, when they wait for my soul."
+    },
+    {
+     "v": 7,
+     "text": "Shall they escape by iniquity? in thine anger cast down the people, O God."
+    },
+    {
+     "v": 8,
+     "text": "Thou tellest my wanderings: put thou my tears into thy bottle: are they not in thy book?"
+    },
+    {
+     "v": 9,
+     "text": "When I cry unto thee, then shall mine enemies turn back: this I know; for God is for me."
+    },
+    {
+     "v": 10,
+     "text": "In God will I praise his word: in the LORD will I praise his word."
+    },
+    {
+     "v": 11,
+     "text": "In God have I put my trust: I will not be afraid what man can do unto me."
+    },
+    {
+     "v": 12,
+     "text": "Thy vows are upon me, O God: I will render praises unto thee."
+    },
+    {
+     "v": 13,
+     "text": "For thou hast delivered my soul from death: wilt not thou deliver my feet from falling, that I may walk before God in the light of the living?"
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "We will stop here. [pause 8]\n\nLet the room be dark and still around you. Let the pillow be cool. [pause 10]\n\nYou have read his words tonight. You can stop thinking about them now and simply rest in them. [pause 12]\n\nEvery part of you that is tired, let it be tired. You do not have to be strong right now. [pause 15]\n\nHe is awake, so you can sleep. [pause 15]\n\nLet the last words you heard tonight be the ones that stay. Let the rest drift away. [pause 20]\n\nIt is all right to stop now. [pause 20]\n\nRest well. [pause 45]"
+  }
+ ],
+ "words": 660,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 814,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only; Jesus's and God's words given indirectly outside scripture (light of the world, fear not). Each night keeps its psalm's point (God gives his beloved sleep, waiting for morning, confession and the hiding place, mercy to the heavens, fret not, out of the pit, tears in his bottle, wings in the cave, the Lord good to all, into thine hand). Psalm 127's 'giveth sleep' framed as God's gift, not a promise to the listener; no outcome promises in the new rest."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,208 @@
+{
+ "id": "pn-27-psalm-56",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 56: En el día que temo",
+ "main": [
+  "PSA 56:3-13"
+ ],
+ "companions": [
+  "ISA 41:10"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola. Esta es una noche de Salmos. [pause 16]\n\nBusca una manera cómoda de acostarte. Deja que tu respiración se haga lenta. [pause 19]\n\nEsta noche leemos casi todo el Salmo cincuenta y seis. David lo escribió cuando lo capturaron en una ciudad extranjera. Tenía miedo, y lo dijo. [pause 18]\n\nLo vamos a leer dos veces. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 56:3-13",
+   "label": "Salmos 56:3-13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "En el día que temo, yo en ti confío."
+    },
+    {
+     "v": 4,
+     "text": "En Dios alabaré su palabra: en Dios he confiado, no temeré lo que la carne me hiciere."
+    },
+    {
+     "v": 5,
+     "text": "Todos los días me contristan mis negocios; contra mí son todos sus pensamientos para mal."
+    },
+    {
+     "v": 6,
+     "text": "Reúnense, escóndense, miran ellos atentamente mis pasos, esperando mi vida."
+    },
+    {
+     "v": 7,
+     "text": "¿Escaparán ellos por la iniquidad? Oh Dios, derriba en tu furor los pueblos."
+    },
+    {
+     "v": 8,
+     "text": "Mis huídas has tú contado: pon mis lágrimas en tu redoma: ¿no están ellas en tu libro?"
+    },
+    {
+     "v": 9,
+     "text": "Serán luego vueltos atrás mis enemigos el día que yo clamare: en esto conozco que Dios es por mí."
+    },
+    {
+     "v": 10,
+     "text": "En Dios alabaré su palabra; en Jehová alabaré su palabra."
+    },
+    {
+     "v": 11,
+     "text": "En Dios he confiado: no temeré lo que me hará el hombre."
+    },
+    {
+     "v": 12,
+     "text": "Sobre mí, oh Dios, están tus votos: te tributaré alabanzas."
+    },
+    {
+     "v": 13,
+     "text": "Porque has librado mi vida de la muerte, y mis pies de caída, para que ande delante de Dios en la luz de los que viven."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "En el día que temo, en ti confío. No si tengo miedo. Cuando. David no finge que nunca tiene miedo. [pause 19]\n\nLuego una imagen muy tierna. Dios cuenta nuestros pasos de un lado a otro y pone nuestras lágrimas en su redoma. Dios lleva la cuenta de las noches que no pudiste dormir. Guarda cada lágrima. Ninguna se pierde. [pause 21]\n\nConfiar en Dios, y no temer lo que la gente pueda hacer. [pause 19]\n\nY al final, la luz de los que viven. [pause 23]\n\nUn versículo para acompañarlo. [pause 17]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 41:10",
+   "label": "Isaías 41:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "No temas, que yo soy contigo; no desmayes, que yo soy tu Dios que te esfuerzo: siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "No temas, dice Dios por medio de Isaías. No desmayes. Fuerza, ayuda, y su mano derecha sosteniéndote. [pause 21]\n\nAquí está el Salmo cincuenta y seis otra vez. Si tienes miedo esta noche, di la primera línea junto con él. [pause 23]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 56:3-13",
+   "label": "Salmos 56:3-13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "En el día que temo, yo en ti confío."
+    },
+    {
+     "v": 4,
+     "text": "En Dios alabaré su palabra: en Dios he confiado, no temeré lo que la carne me hiciere."
+    },
+    {
+     "v": 5,
+     "text": "Todos los días me contristan mis negocios; contra mí son todos sus pensamientos para mal."
+    },
+    {
+     "v": 6,
+     "text": "Reúnense, escóndense, miran ellos atentamente mis pasos, esperando mi vida."
+    },
+    {
+     "v": 7,
+     "text": "¿Escaparán ellos por la iniquidad? Oh Dios, derriba en tu furor los pueblos."
+    },
+    {
+     "v": 8,
+     "text": "Mis huídas has tú contado: pon mis lágrimas en tu redoma: ¿no están ellas en tu libro?"
+    },
+    {
+     "v": 9,
+     "text": "Serán luego vueltos atrás mis enemigos el día que yo clamare: en esto conozco que Dios es por mí."
+    },
+    {
+     "v": 10,
+     "text": "En Dios alabaré su palabra; en Jehová alabaré su palabra."
+    },
+    {
+     "v": 11,
+     "text": "En Dios he confiado: no temeré lo que me hará el hombre."
+    },
+    {
+     "v": 12,
+     "text": "Sobre mí, oh Dios, están tus votos: te tributaré alabanzas."
+    },
+    {
+     "v": 13,
+     "text": "Porque has librado mi vida de la muerte, y mis pies de caída, para que ande delante de Dios en la luz de los que viven."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí vamos a terminar. [pause 8]\n\nDeja que el cuarto esté oscuro y quieto a tu alrededor. Que la almohada esté fresca. [pause 10]\n\nEsta noche escuchaste su Palabra. Ya no tienes que pensar en ella. Solo descansa en ella. [pause 12]\n\nTodo lo que en ti está cansado, deja que esté cansado. No tienes que ser fuerte ahora. [pause 15]\n\nQue las últimas palabras que oíste sean las que se queden contigo. Lo demás, déjalo ir. [pause 20]\n\nÉl está despierto, así que tú puedes dormir. [pause 20]\n\nQue descanses. [pause 45]"
+  }
+ ],
+ "words": 595,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 811,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

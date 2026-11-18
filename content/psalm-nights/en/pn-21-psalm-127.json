@@ -1,0 +1,184 @@
+{
+ "id": "pn-21-psalm-127",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 127: He Giveth His Beloved Sleep",
+ "main": [
+  "PSA 127:1-2"
+ ],
+ "companions": [
+  "PSA 4:8",
+  "MAT 6:25-27",
+  "MAT 6:34",
+  "1PE 5:7"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello, and welcome to Psalm Nights. [pause 22]\n\nPut down whatever you were holding. Let your arms rest beside you. [pause 25]\n\nTonight's psalm is a short one, Psalm 127. Only two verses tonight. But they are two verses for anyone who works too hard and worries too late. [pause 24]\n\nWe will read them slowly, and then again. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 127:1-2",
+   "label": "Psalm 127:1-2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees for Solomon. Except the LORD build the house, they labour in vain that build it: except the LORD keep the city, the watchman waketh but in vain."
+    },
+    {
+     "v": 2,
+     "text": "It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Except the Lord build the house. We can work and plan and stay up late, and still the real building belongs to God. [pause 25]\n\nThen the line about bread. Eating the bread of sorrows. That is worry, chewed over and over, late into the night. [pause 25]\n\nAnd then, so gently. He giveth his beloved sleep. Beloved. That is what he calls you. [pause 25]\n\nSome companion verses now, from the words of Jesus and from Peter. [pause 23]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Psalm 4:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 6:25-27",
+   "label": "Matthew 6:25-27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Therefore I say unto you, Take no thought for your life, what ye shall eat, or what ye shall drink; nor yet for your body, what ye shall put on. Is not the life more than meat, and the body than raiment?"
+    },
+    {
+     "v": 26,
+     "text": "Behold the fowls of the air: for they sow not, neither do they reap, nor gather into barns; yet your heavenly Father feedeth them. Are ye not much better than they?"
+    },
+    {
+     "v": 27,
+     "text": "Which of you by taking thought can add one cubit unto his stature?"
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 6:34",
+   "label": "Matthew 6:34",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 34,
+     "text": "Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "1PE 5:7",
+   "label": "1 Peter 5:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Casting all your care upon him; for he careth for you."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Jesus pointed to the birds of the air. They do not plant or store up food, and still they are fed. Which of you, he asked, can add one hour to your life by worrying? [pause 25]\n\nTomorrow can take care of itself. Today's trouble is enough for today. [pause 25]\n\nAnd Peter says, cast all your care on him, because he cares for you. All of it. Even the small worries. Even the ones you are embarrassed by. [pause 25]\n\nHere is Psalm 127 again. Two verses. Let the word beloved be the last one you hear. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 127:1-2",
+   "label": "Psalm 127:1-2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees for Solomon. Except the LORD build the house, they labour in vain that build it: except the LORD keep the city, the watchman waketh but in vain."
+    },
+    {
+     "v": 2,
+     "text": "It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "The reading is done. [pause 8]\n\nLet the last verse settle like dust after a long day on the road. [pause 12]\n\nYou have prayed tonight, even if you said nothing. Listening is a kind of prayer. [pause 12]\n\nLet go of the clock. Let go of tomorrow's list. [pause 15]\n\nUnder the same sky, many others are lying down tonight, and the same God is with each one. [pause 20]\n\nPeace to you. [pause 45]"
+  }
+ ],
+ "words": 537,
+ "rest_part": "rest6",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 815,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only; Jesus's and God's words given indirectly outside scripture (light of the world, fear not). Each night keeps its psalm's point (God gives his beloved sleep, waiting for morning, confession and the hiding place, mercy to the heavens, fret not, out of the pit, tears in his bottle, wings in the cave, the Lord good to all, into thine hand). Psalm 127's 'giveth sleep' framed as God's gift, not a promise to the listener; no outcome promises in the new rest."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

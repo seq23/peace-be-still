@@ -1,0 +1,206 @@
+{
+ "id": "pn-23-psalm-32",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 32: Thou Art My Hiding Place",
+ "main": [
+  "PSA 32:1-11"
+ ],
+ "companions": [
+  "1JO 1:9"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello. This is Psalm Nights. [pause 10]\n\nLet your body settle. Let your breathing find its pace. [pause 13]\n\nTonight we read Psalm 32. It is a psalm about the weight of keeping something inside, and the relief of letting it out before God. [pause 12]\n\nWe will read it twice. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 32:1-11",
+   "label": "Psalm 32:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David, Maschil. Blessed is he whose transgression is forgiven, whose sin is covered."
+    },
+    {
+     "v": 2,
+     "text": "Blessed is the man unto whom the LORD imputeth not iniquity, and in whose spirit there is no guile."
+    },
+    {
+     "v": 3,
+     "text": "When I kept silence, my bones waxed old through my roaring all the day long."
+    },
+    {
+     "v": 4,
+     "text": "For day and night thy hand was heavy upon me: my moisture is turned into the drought of summer. Selah."
+    },
+    {
+     "v": 5,
+     "text": "I acknowledged my sin unto thee, and mine iniquity have I not hid. I said, I will confess my transgressions unto the LORD; and thou forgavest the iniquity of my sin. Selah."
+    },
+    {
+     "v": 6,
+     "text": "For this shall every one that is godly pray unto thee in a time when thou mayest be found: surely in the floods of great waters they shall not come nigh unto him."
+    },
+    {
+     "v": 7,
+     "text": "Thou art my hiding place; thou shalt preserve me from trouble; thou shalt compass me about with songs of deliverance. Selah."
+    },
+    {
+     "v": 8,
+     "text": "I will instruct thee and teach thee in the way which thou shalt go: I will guide thee with mine eye."
+    },
+    {
+     "v": 9,
+     "text": "Be ye not as the horse, or as the mule, which have no understanding: whose mouth must be held in with bit and bridle, lest they come near unto thee."
+    },
+    {
+     "v": 10,
+     "text": "Many sorrows shall be to the wicked: but he that trusteth in the LORD, mercy shall compass him about."
+    },
+    {
+     "v": 11,
+     "text": "Be glad in the LORD, and rejoice, ye righteous: and shout for joy, all ye that are upright in heart."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Blessed is he whose transgression is forgiven. The psalm begins with relief. Happy is the one whose sin is covered. [pause 13]\n\nThen David remembers what silence cost him. While he kept silent, his bones grew old. Day and night, the weight was heavy on him. Some things we carry make us tired in the body too. [pause 15]\n\nAnd then he said it. I will confess. And the weight was lifted. [pause 13]\n\nThou art my hiding place. Not hiding from God. Hiding in God. [pause 17]\n\nOne companion verse. [pause 11]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "1JO 1:9",
+   "label": "1 John 1:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "If we confess, he is faithful and just to forgive. If there is something on your heart tonight, you can tell him. He already knows, and he is not leaving. [pause 15]\n\nHere is Psalm 32 again. Listen for the hiding place. [pause 17]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 32:1-11",
+   "label": "Psalm 32:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David, Maschil. Blessed is he whose transgression is forgiven, whose sin is covered."
+    },
+    {
+     "v": 2,
+     "text": "Blessed is the man unto whom the LORD imputeth not iniquity, and in whose spirit there is no guile."
+    },
+    {
+     "v": 3,
+     "text": "When I kept silence, my bones waxed old through my roaring all the day long."
+    },
+    {
+     "v": 4,
+     "text": "For day and night thy hand was heavy upon me: my moisture is turned into the drought of summer. Selah."
+    },
+    {
+     "v": 5,
+     "text": "I acknowledged my sin unto thee, and mine iniquity have I not hid. I said, I will confess my transgressions unto the LORD; and thou forgavest the iniquity of my sin. Selah."
+    },
+    {
+     "v": 6,
+     "text": "For this shall every one that is godly pray unto thee in a time when thou mayest be found: surely in the floods of great waters they shall not come nigh unto him."
+    },
+    {
+     "v": 7,
+     "text": "Thou art my hiding place; thou shalt preserve me from trouble; thou shalt compass me about with songs of deliverance. Selah."
+    },
+    {
+     "v": 8,
+     "text": "I will instruct thee and teach thee in the way which thou shalt go: I will guide thee with mine eye."
+    },
+    {
+     "v": 9,
+     "text": "Be ye not as the horse, or as the mule, which have no understanding: whose mouth must be held in with bit and bridle, lest they come near unto thee."
+    },
+    {
+     "v": 10,
+     "text": "Many sorrows shall be to the wicked: but he that trusteth in the LORD, mercy shall compass him about."
+    },
+    {
+     "v": 11,
+     "text": "Be glad in the LORD, and rejoice, ye righteous: and shout for joy, all ye that are upright in heart."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is all for tonight. [pause 8]\n\nLet the quiet come in like a tide. Slowly. No hurry. [pause 12]\n\nYour work is done for today. What is left can wait for the light. [pause 12]\n\nIf you are still awake a while, that is all right. Lie still and let the words you heard be near you. [pause 15]\n\nHe knows your name. He knows this night. [pause 20]\n\nRest. [pause 45]"
+  }
+ ],
+ "words": 743,
+ "rest_part": "rest5",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 811,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only; Jesus's and God's words given indirectly outside scripture (light of the world, fear not). Each night keeps its psalm's point (God gives his beloved sleep, waiting for morning, confession and the hiding place, mercy to the heavens, fret not, out of the pit, tears in his bottle, wings in the cave, the Lord good to all, into thine hand). Psalm 127's 'giveth sleep' framed as God's gift, not a promise to the listener; no outcome promises in the new rest."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

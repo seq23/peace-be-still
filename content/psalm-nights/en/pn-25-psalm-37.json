@@ -1,0 +1,210 @@
+{
+ "id": "pn-25-psalm-37",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 37: Rest in the Lord",
+ "main": [
+  "PSA 37:1-11"
+ ],
+ "companions": [
+  "PHI 4:6-7"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello, and welcome to Psalm Nights. [pause 7]\n\nLet your hands open. Let your forehead smooth out. [pause 10]\n\nTonight we read the first part of Psalm 37. It begins with a word we need some nights. Fret not. Do not get worked up. [pause 9]\n\nWe will read it twice. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 37:1-11",
+   "label": "Psalm 37:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David. Fret not thyself because of evildoers, neither be thou envious against the workers of iniquity."
+    },
+    {
+     "v": 2,
+     "text": "For they shall soon be cut down like the grass, and wither as the green herb."
+    },
+    {
+     "v": 3,
+     "text": "Trust in the LORD, and do good; so shalt thou dwell in the land, and verily thou shalt be fed."
+    },
+    {
+     "v": 4,
+     "text": "Delight thyself also in the LORD; and he shall give thee the desires of thine heart."
+    },
+    {
+     "v": 5,
+     "text": "Commit thy way unto the LORD; trust also in him; and he shall bring it to pass."
+    },
+    {
+     "v": 6,
+     "text": "And he shall bring forth thy righteousness as the light, and thy judgment as the noonday."
+    },
+    {
+     "v": 7,
+     "text": "Rest in the LORD, and wait patiently for him: fret not thyself because of him who prospereth in his way, because of the man who bringeth wicked devices to pass."
+    },
+    {
+     "v": 8,
+     "text": "Cease from anger, and forsake wrath: fret not thyself in any wise to do evil."
+    },
+    {
+     "v": 9,
+     "text": "For evildoers shall be cut off: but those that wait upon the LORD, they shall inherit the earth."
+    },
+    {
+     "v": 10,
+     "text": "For yet a little while, and the wicked shall not be: yea, thou shalt diligently consider his place, and it shall not be."
+    },
+    {
+     "v": 11,
+     "text": "But the meek shall inherit the earth; and shall delight themselves in the abundance of peace."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Fret not thyself. Some nights we lie awake upset about what others have done. People who did wrong and seem to get away with it. The psalm says, do not let it eat at you. [pause 12]\n\nThen four small instructions. Trust in the Lord. Delight thyself in him. Commit thy way. Rest in the Lord. [pause 10]\n\nRest in the Lord, and wait for him. That is the whole night's work. Rest, and wait. [pause 10]\n\nAnd the meek shall inherit the earth. Jesus said it again, years later, on a mountain. [pause 14]\n\nA companion passage from Paul. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PHI 4:6-7",
+   "label": "Philippians 4:6-7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God."
+    },
+    {
+     "v": 7,
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Be careful for nothing. In the old English, careful means full of care. Full of worry. Instead, prayer, with thanks. And a peace that keeps the heart. [pause 12]\n\nHere is Psalm 37 again. When you hear rest in the Lord, let your body rest too. [pause 14]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 37:1-11",
+   "label": "Psalm 37:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David. Fret not thyself because of evildoers, neither be thou envious against the workers of iniquity."
+    },
+    {
+     "v": 2,
+     "text": "For they shall soon be cut down like the grass, and wither as the green herb."
+    },
+    {
+     "v": 3,
+     "text": "Trust in the LORD, and do good; so shalt thou dwell in the land, and verily thou shalt be fed."
+    },
+    {
+     "v": 4,
+     "text": "Delight thyself also in the LORD; and he shall give thee the desires of thine heart."
+    },
+    {
+     "v": 5,
+     "text": "Commit thy way unto the LORD; trust also in him; and he shall bring it to pass."
+    },
+    {
+     "v": 6,
+     "text": "And he shall bring forth thy righteousness as the light, and thy judgment as the noonday."
+    },
+    {
+     "v": 7,
+     "text": "Rest in the LORD, and wait patiently for him: fret not thyself because of him who prospereth in his way, because of the man who bringeth wicked devices to pass."
+    },
+    {
+     "v": 8,
+     "text": "Cease from anger, and forsake wrath: fret not thyself in any wise to do evil."
+    },
+    {
+     "v": 9,
+     "text": "For evildoers shall be cut off: but those that wait upon the LORD, they shall inherit the earth."
+    },
+    {
+     "v": 10,
+     "text": "For yet a little while, and the wicked shall not be: yea, thou shalt diligently consider his place, and it shall not be."
+    },
+    {
+     "v": 11,
+     "text": "But the meek shall inherit the earth; and shall delight themselves in the abundance of peace."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Now let the words go quiet. [pause 8]\n\nYou do not have to hold on to them. They will be there in the morning. [pause 10]\n\nLet your shoulders drop. Let your hands open. Let the bed hold the weight of you. [pause 12]\n\nIf a worry comes back, you can hand it over again. As many times as it takes. [pause 12]\n\nThe night is long and quiet, and you are not alone in it. [pause 15]\n\nFeel the quiet of the room. The small sounds. The dark. Nothing is asked of you here. [pause 20]\n\nYou are held, the psalm said. You are known. You are kept. [pause 20]\n\nRest now. [pause 45]"
+  }
+ ],
+ "words": 732,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 811,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only; Jesus's and God's words given indirectly outside scripture (light of the world, fear not). Each night keeps its psalm's point (God gives his beloved sleep, waiting for morning, confession and the hiding place, mercy to the heavens, fret not, out of the pit, tears in his bottle, wings in the cave, the Lord good to all, into thine hand). Psalm 127's 'giveth sleep' framed as God's gift, not a promise to the listener; no outcome promises in the new rest."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

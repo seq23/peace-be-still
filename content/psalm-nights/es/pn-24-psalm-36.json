@@ -1,0 +1,188 @@
+{
+ "id": "pn-24-psalm-36",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 36: En tu luz veremos la luz",
+ "main": [
+  "PSA 36:5-9"
+ ],
+ "companions": [
+  "PSA 17:8",
+  "PSA 4:8",
+  "JOH 8:12"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 25]\n\nQue se apaguen las luces, una por una. Cierra los ojos cuando estén listos. [pause 25]\n\nEsta noche leemos una parte del Salmo treinta y seis. Cinco versículos sobre lo grande que es la bondad de Dios. Más grande que el cielo. Más profunda que el mar. [pause 25]\n\nLos vamos a leer despacio, y luego otra vez. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 36:5-9",
+   "label": "Salmos 36:5-9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Jehová, hasta los cielos es tu misericordia; tu verdad hasta las nubes."
+    },
+    {
+     "v": 6,
+     "text": "Tu justicia como los montes de Dios, tus juicios abismo grande: oh Jehová, al hombre y al animal conservas."
+    },
+    {
+     "v": 7,
+     "text": "¡Cuán ilustre, oh Dios, es tu misericordia! Por eso los hijos de los hombres se amparan bajo la sombra de tus alas."
+    },
+    {
+     "v": 8,
+     "text": "Embriagarse han de la grosura de tu casa; y tú los abrevarás del torrente de tus delicias."
+    },
+    {
+     "v": 9,
+     "text": "Porque contigo está el manantial de la vida: en tu luz veremos la luz."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Su misericordia llega hasta los cielos. Mira hacia arriba en una noche clara y el cielo no se acaba. Hasta allá llega su misericordia. [pause 25]\n\nSus juicios son un abismo grande. Hay cosas de Dios cuyo fondo no podemos tocar. Y está bien. [pause 25]\n\nLas personas se refugian a la sombra de sus alas. Luego un río de delicias, y un manantial de vida. [pause 25]\n\nY en su luz, vemos la luz. [pause 25]\n\nUnos versículos para acompañarlo. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 17:8",
+   "label": "Salmos 17:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Guárdame como lo negro de la niñeta del ojo, escóndeme con la sombra de tus alas,"
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "JOH 8:12",
+   "label": "Juan 8:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y hablóles Jesús otra vez, diciendo: Yo soy la luz del mundo: el que me sigue, no andará en tinieblas, mas tendrá la lumbre de la vida."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Guárdame como a la niña de tus ojos. Escóndeme bajo tus alas. Una oración antigua para la noche. [pause 25]\n\nY Jesús dijo que él es la luz del mundo, y que quien lo sigue no camina en oscuridad. [pause 25]\n\nAquí está la lectura del Salmo treinta y seis otra vez. Piensa en el cielo encima del techo. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 36:5-9",
+   "label": "Salmos 36:5-9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Jehová, hasta los cielos es tu misericordia; tu verdad hasta las nubes."
+    },
+    {
+     "v": 6,
+     "text": "Tu justicia como los montes de Dios, tus juicios abismo grande: oh Jehová, al hombre y al animal conservas."
+    },
+    {
+     "v": 7,
+     "text": "¡Cuán ilustre, oh Dios, es tu misericordia! Por eso los hijos de los hombres se amparan bajo la sombra de tus alas."
+    },
+    {
+     "v": 8,
+     "text": "Embriagarse han de la grosura de tu casa; y tú los abrevarás del torrente de tus delicias."
+    },
+    {
+     "v": 9,
+     "text": "Porque contigo está el manantial de la vida: en tu luz veremos la luz."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ya terminó la lectura. [pause 8]\n\nDeja que el último versículo se asiente, como el polvo después de un día largo de camino. [pause 12]\n\nEsta noche oraste, aunque no hayas dicho nada. Escuchar también es una manera de orar. [pause 12]\n\nSuelta el reloj. Suelta la lista de mañana. [pause 15]\n\nBajo el mismo cielo, muchos otros se están acostando esta noche, y el mismo Dios está con cada uno. [pause 20]\n\nPaz para ti. [pause 45]"
+  }
+ ],
+ "words": 483,
+ "rest_part": "rest6",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 793,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

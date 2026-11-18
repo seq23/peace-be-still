@@ -1,0 +1,188 @@
+{
+ "id": "pn-22-psalm-130",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 130: Esperando la mañana",
+ "main": [
+  "PSA 130:1-8"
+ ],
+ "companions": [
+  "LAM 3:25-26"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 25]\n\nDeja que la oscuridad sea lo que es. No tienes que llenarla. [pause 25]\n\nEl salmo de esta noche es el Salmo ciento treinta. Empieza desde lo profundo. Es un salmo para los lugares bajos, y para las noches largas esperando la mañana. [pause 25]\n\nLo vamos a leer dos veces. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 130:1-8",
+   "label": "Salmos 130:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Cántico gradual. DE los profundos, oh Jehová, á ti clamo."
+    },
+    {
+     "v": 2,
+     "text": "Señor, oye mi voz; estén atentos tus oídos á la voz de mi súplica."
+    },
+    {
+     "v": 3,
+     "text": "Jah, si mirares á los pecados, ¿quién, oh Señor, podrá mantenerse?"
+    },
+    {
+     "v": 4,
+     "text": "Empero hay perdón cerca de ti, para que seas temido."
+    },
+    {
+     "v": 5,
+     "text": "Esperé yo á Jehová, esperó mi alma; en su palabra he esperado."
+    },
+    {
+     "v": 6,
+     "text": "Mi alma espera á Jehová más que los centinelas á la mañana, más que los vigilantes á la mañana."
+    },
+    {
+     "v": 7,
+     "text": "Espere Israel á Jehová; porque en Jehová hay misericordia, y abundante redención con él."
+    },
+    {
+     "v": 8,
+     "text": "Y él redimirá á Israel de todos sus pecados."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "De lo profundo. El salmo no espera a que las cosas mejoren para orar. Ora desde el fondo. [pause 25]\n\nSi Dios llevara la cuenta de cada pecado, nadie podría estar en pie. Pero en él hay perdón. [pause 25]\n\nLuego la línea más hermosa. Esperar al Señor más que los centinelas esperan la mañana. El guardia en la muralla de la ciudad, cansado, con frío, mirando hacia el oriente buscando la primera luz gris. [pause 25]\n\nEl salmo lo dice dos veces. Más que los centinelas. Como alguien que sabe que la mañana viene, y la está esperando. [pause 25]\n\nUn pasaje de Lamentaciones para acompañarlo. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "LAM 3:25-26",
+   "label": "Lamentaciones 3:25-26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Bueno es Jehová á los que en él esperan, al alma que le buscare."
+    },
+    {
+     "v": 26,
+     "text": "Bueno es esperar callando en la salud de Jehová."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Bueno es el Señor con los que en él esperan. Es bueno esperar en silencio. En silencio. Esta noche puedes esperar en silencio. [pause 25]\n\nAquí está el Salmo ciento treinta otra vez. Sé el centinela que espera la luz. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 130:1-8",
+   "label": "Salmos 130:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Cántico gradual. DE los profundos, oh Jehová, á ti clamo."
+    },
+    {
+     "v": 2,
+     "text": "Señor, oye mi voz; estén atentos tus oídos á la voz de mi súplica."
+    },
+    {
+     "v": 3,
+     "text": "Jah, si mirares á los pecados, ¿quién, oh Señor, podrá mantenerse?"
+    },
+    {
+     "v": 4,
+     "text": "Empero hay perdón cerca de ti, para que seas temido."
+    },
+    {
+     "v": 5,
+     "text": "Esperé yo á Jehová, esperó mi alma; en su palabra he esperado."
+    },
+    {
+     "v": 6,
+     "text": "Mi alma espera á Jehová más que los centinelas á la mañana, más que los vigilantes á la mañana."
+    },
+    {
+     "v": 7,
+     "text": "Espere Israel á Jehová; porque en Jehová hay misericordia, y abundante redención con él."
+    },
+    {
+     "v": 8,
+     "text": "Y él redimirá á Israel de todos sus pecados."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí termina la lectura. [pause 8]\n\nVoltéate un poco, si quieres, hasta que tu cuerpo encuentre el lugar que le gusta. [pause 10]\n\nNo tienes que recordar nada. No tienes que contestar nada. [pause 12]\n\nSi alguien que amas está lejos esta noche, también puedes dejarlo en las manos de Dios. [pause 15]\n\nSuelta el aire despacio. Y otra vez. [pause 20]\n\nLa noche está en sus manos. Tú estás en sus manos. [pause 20]\n\nQue duermas bien. [pause 45]"
+  }
+ ],
+ "words": 480,
+ "rest_part": "rest4",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 792,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

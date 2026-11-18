@@ -1,0 +1,206 @@
+{
+ "id": "pn-28-psalm-57",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 57: In the Shadow of Thy Wings",
+ "main": [
+  "PSA 57:1-11"
+ ],
+ "companions": [
+  "RUT 2:12"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 9]\n\nLet the covers be warm around you. [pause 12]\n\nTonight's psalm is Psalm 57. The heading says David wrote it when he hid from Saul in a cave. A dark cave, an enemy outside. And this is the song he sang there. [pause 11]\n\nWe will read it twice. [pause 14]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 57:1-11",
+   "label": "Psalm 57:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, Al-taschith, Michtam of David, when he fled from Saul in the cave. Be merciful unto me, O God, be merciful unto me: for my soul trusteth in thee: yea, in the shadow of thy wings will I make my refuge, until these calamities be overpast."
+    },
+    {
+     "v": 2,
+     "text": "I will cry unto God most high; unto God that performeth all things for me."
+    },
+    {
+     "v": 3,
+     "text": "He shall send from heaven, and save me from the reproach of him that would swallow me up. Selah. God shall send forth his mercy and his truth."
+    },
+    {
+     "v": 4,
+     "text": "My soul is among lions: and I lie even among them that are set on fire, even the sons of men, whose teeth are spears and arrows, and their tongue a sharp sword."
+    },
+    {
+     "v": 5,
+     "text": "Be thou exalted, O God, above the heavens; let thy glory be above all the earth."
+    },
+    {
+     "v": 6,
+     "text": "They have prepared a net for my steps; my soul is bowed down: they have digged a pit before me, into the midst whereof they are fallen themselves. Selah."
+    },
+    {
+     "v": 7,
+     "text": "My heart is fixed, O God, my heart is fixed: I will sing and give praise."
+    },
+    {
+     "v": 8,
+     "text": "Awake up, my glory; awake, psaltery and harp: I myself will awake early."
+    },
+    {
+     "v": 9,
+     "text": "I will praise thee, O Lord, among the people: I will sing unto thee among the nations."
+    },
+    {
+     "v": 10,
+     "text": "For thy mercy is great unto the heavens, and thy truth unto the clouds."
+    },
+    {
+     "v": 11,
+     "text": "Be thou exalted, O God, above the heavens: let thy glory be above all the earth."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Be merciful unto me, O God. Twice, at the start. Then, a refuge in the shadow of his wings, until the trouble has passed over. Until they pass. They will pass. [pause 14]\n\nIn the middle, David describes lions. Danger all around. And then he lifts his eyes. God, be lifted high above the heavens. [pause 12]\n\nThen a line about the dawn. I myself will awake early. David in a cave, deciding to wake the morning with a song. [pause 16]\n\nA companion verse, from the story of Ruth. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "RUT 2:12",
+   "label": "Ruth 2:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "The LORD recompense thy work, and a full reward be given thee of the LORD God of Israel, under whose wings thou art come to trust."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Boaz said it to Ruth, a foreign widow who had come with nothing. You have come to trust under his wings. The same wings David sang about. [pause 14]\n\nHere is Psalm 57 again. Picture yourself under those wings, until the night is overpast. [pause 16]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 57:1-11",
+   "label": "Psalm 57:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, Al-taschith, Michtam of David, when he fled from Saul in the cave. Be merciful unto me, O God, be merciful unto me: for my soul trusteth in thee: yea, in the shadow of thy wings will I make my refuge, until these calamities be overpast."
+    },
+    {
+     "v": 2,
+     "text": "I will cry unto God most high; unto God that performeth all things for me."
+    },
+    {
+     "v": 3,
+     "text": "He shall send from heaven, and save me from the reproach of him that would swallow me up. Selah. God shall send forth his mercy and his truth."
+    },
+    {
+     "v": 4,
+     "text": "My soul is among lions: and I lie even among them that are set on fire, even the sons of men, whose teeth are spears and arrows, and their tongue a sharp sword."
+    },
+    {
+     "v": 5,
+     "text": "Be thou exalted, O God, above the heavens; let thy glory be above all the earth."
+    },
+    {
+     "v": 6,
+     "text": "They have prepared a net for my steps; my soul is bowed down: they have digged a pit before me, into the midst whereof they are fallen themselves. Selah."
+    },
+    {
+     "v": 7,
+     "text": "My heart is fixed, O God, my heart is fixed: I will sing and give praise."
+    },
+    {
+     "v": 8,
+     "text": "Awake up, my glory; awake, psaltery and harp: I myself will awake early."
+    },
+    {
+     "v": 9,
+     "text": "I will praise thee, O Lord, among the people: I will sing unto thee among the nations."
+    },
+    {
+     "v": 10,
+     "text": "For thy mercy is great unto the heavens, and thy truth unto the clouds."
+    },
+    {
+     "v": 11,
+     "text": "Be thou exalted, O God, above the heavens: let thy glory be above all the earth."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Let the reading end here. [pause 8]\n\nTurn a little, if you want to, until your body finds the place it likes. [pause 10]\n\nThere is nothing you need to remember. Nothing you need to say back. [pause 12]\n\nIf someone you love is far away tonight, you can leave them in God's hands too. [pause 15]\n\nBreathe out slowly. Then again. [pause 20]\n\nThe night is held. You are held. [pause 20]\n\nSleep well. [pause 45]"
+  }
+ ],
+ "words": 756,
+ "rest_part": "rest4",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 814,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only; Jesus's and God's words given indirectly outside scripture (light of the world, fear not). Each night keeps its psalm's point (God gives his beloved sleep, waiting for morning, confession and the hiding place, mercy to the heavens, fret not, out of the pit, tears in his bottle, wings in the cave, the Lord good to all, into thine hand). Psalm 127's 'giveth sleep' framed as God's gift, not a promise to the listener; no outcome promises in the new rest."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

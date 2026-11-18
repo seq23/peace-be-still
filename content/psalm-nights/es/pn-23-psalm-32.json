@@ -1,0 +1,208 @@
+{
+ "id": "pn-23-psalm-32",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 32: Tú eres mi refugio",
+ "main": [
+  "PSA 32:1-11"
+ ],
+ "companions": [
+  "1JO 1:9"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola. Esta es una noche de Salmos. [pause 15]\n\nDeja que tu cuerpo se acomode. Que tu respiración encuentre su ritmo. [pause 18]\n\nEsta noche leemos el Salmo treinta y dos. Es un salmo sobre lo pesado que es guardar algo por dentro, y el alivio de sacarlo delante de Dios. [pause 17]\n\nLo vamos a leer dos veces. [pause 20]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 32:1-11",
+   "label": "Salmos 32:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David: Masquil. BIENAVENTURADO aquel cuyas iniquidades son perdonadas, y borrados sus pecados."
+    },
+    {
+     "v": 2,
+     "text": "Bienaventurado el hombre á quien no imputa Jehová la iniquidad, y en cuyo espíritu no hay superchería."
+    },
+    {
+     "v": 3,
+     "text": "Mientras callé, envejeciéronse mis huesos en mi gemir todo el día."
+    },
+    {
+     "v": 4,
+     "text": "Porque de día y de noche se agravó sobre mí tu mano; volvióse mi verdor en sequedades de estío. (Selah.)"
+    },
+    {
+     "v": 5,
+     "text": "Mi pecado te declaré, y no encubrí mi iniquidad. Confesaré, dije, contra mí mis rebeliones á Jehová; y tú perdonaste la maldad de mi pecado. (Selah.)"
+    },
+    {
+     "v": 6,
+     "text": "Por esto orará á ti todo santo en el tiempo de poder hallarte: ciertamente en la inundación de muchas aguas no llegarán éstas á él."
+    },
+    {
+     "v": 7,
+     "text": "Tú eres mi refugio; me guardarás de angustia; con cánticos de liberación me rodearás. (Selah.)"
+    },
+    {
+     "v": 8,
+     "text": "Te haré entender, y te enseñaré el camino en que debes andar: sobre ti fijaré mis ojos."
+    },
+    {
+     "v": 9,
+     "text": "No seáis como el caballo, ó como el mulo, sin entendimiento: con cabestro y con freno su boca ha de ser reprimida, para que no lleguen á ti."
+    },
+    {
+     "v": 10,
+     "text": "Muchos dolores para el impío; mas el que espera en Jehová, lo cercará misericordia."
+    },
+    {
+     "v": 11,
+     "text": "Alegraos en Jehová, y gozaos, justos: y cantad todos vosotros los rectos de corazón."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Bienaventurado aquel cuya maldad ha sido perdonada. El salmo empieza con alivio. Feliz el que tiene su pecado cubierto. [pause 18]\n\nLuego David recuerda lo que le costó callar. Mientras calló, sus huesos se envejecieron. De día y de noche el peso era grande. Algunas cosas que cargamos también cansan el cuerpo. [pause 20]\n\nY entonces lo dijo. Voy a confesar. Y el peso se levantó. [pause 18]\n\nTú eres mi refugio. No esconderse de Dios. Esconderse en Dios. [pause 22]\n\nUn versículo para acompañarlo. [pause 16]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "1JO 1:9",
+   "label": "1 Juan 1:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Si confesamos nuestros pecados, él es fiel y justo para que nos perdone nuestros pecados, y nos limpie de toda maldad."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Si confesamos, él es fiel y justo para perdonar. Si hay algo en tu corazón esta noche, se lo puedes decir. Él ya lo sabe, y no se va a ir. [pause 20]\n\nAquí está el Salmo treinta y dos otra vez. Escucha la palabra refugio. [pause 22]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 32:1-11",
+   "label": "Salmos 32:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David: Masquil. BIENAVENTURADO aquel cuyas iniquidades son perdonadas, y borrados sus pecados."
+    },
+    {
+     "v": 2,
+     "text": "Bienaventurado el hombre á quien no imputa Jehová la iniquidad, y en cuyo espíritu no hay superchería."
+    },
+    {
+     "v": 3,
+     "text": "Mientras callé, envejeciéronse mis huesos en mi gemir todo el día."
+    },
+    {
+     "v": 4,
+     "text": "Porque de día y de noche se agravó sobre mí tu mano; volvióse mi verdor en sequedades de estío. (Selah.)"
+    },
+    {
+     "v": 5,
+     "text": "Mi pecado te declaré, y no encubrí mi iniquidad. Confesaré, dije, contra mí mis rebeliones á Jehová; y tú perdonaste la maldad de mi pecado. (Selah.)"
+    },
+    {
+     "v": 6,
+     "text": "Por esto orará á ti todo santo en el tiempo de poder hallarte: ciertamente en la inundación de muchas aguas no llegarán éstas á él."
+    },
+    {
+     "v": 7,
+     "text": "Tú eres mi refugio; me guardarás de angustia; con cánticos de liberación me rodearás. (Selah.)"
+    },
+    {
+     "v": 8,
+     "text": "Te haré entender, y te enseñaré el camino en que debes andar: sobre ti fijaré mis ojos."
+    },
+    {
+     "v": 9,
+     "text": "No seáis como el caballo, ó como el mulo, sin entendimiento: con cabestro y con freno su boca ha de ser reprimida, para que no lleguen á ti."
+    },
+    {
+     "v": 10,
+     "text": "Muchos dolores para el impío; mas el que espera en Jehová, lo cercará misericordia."
+    },
+    {
+     "v": 11,
+     "text": "Alegraos en Jehová, y gozaos, justos: y cantad todos vosotros los rectos de corazón."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Eso es todo por esta noche. [pause 8]\n\nDeja que la calma llegue como la marea. Despacio. Sin prisa. [pause 12]\n\nTu trabajo de hoy ya terminó. Lo que falta puede esperar a que salga el sol. [pause 12]\n\nSi todavía te quedas despierto un rato, está bien. Quédate quieto y deja que las palabras que oíste se queden cerca. [pause 15]\n\nÉl sabe tu nombre. Él conoce esta noche. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 660,
+ "rest_part": "rest5",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 817,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

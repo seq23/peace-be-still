@@ -1,0 +1,208 @@
+{
+ "id": "pn-28-psalm-57",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 57: A la sombra de tus alas",
+ "main": [
+  "PSA 57:1-11"
+ ],
+ "companions": [
+  "RUT 2:12"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nQue las cobijas te calienten. [pause 17]\n\nEl salmo de esta noche es el Salmo cincuenta y siete. El título dice que David lo escribió cuando se escondía de Saúl en una cueva. Una cueva oscura, un enemigo afuera. Y este es el canto que cantó ahí. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 57:1-11",
+   "label": "Salmos 57:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: sobre No destruyas: Michtam de David, cuando huyó de delante de Saúl á la cueva. TEN misericordia de mí, oh Dios, ten misericordia de mí; porque en ti ha confiado mi alma, y en la sombra de tus alas me ampararé, hasta que pasen los quebrantos."
+    },
+    {
+     "v": 2,
+     "text": "Clamaré al Dios Altísimo, al Dios que me favorece."
+    },
+    {
+     "v": 3,
+     "text": "El enviará desde los cielos, y me salvará de la infamia del que me apura (Selah); Dios enviará su misericordia y su verdad."
+    },
+    {
+     "v": 4,
+     "text": "Mi vida está entre leones; estoy echado entre hijos de hombres encendidos: sus dientes son lanzas y saetas, y su lengua cuchillo agudo."
+    },
+    {
+     "v": 5,
+     "text": "Ensálzate sobre los cielos, oh Dios; sobre toda la tierra tu gloria."
+    },
+    {
+     "v": 6,
+     "text": "Red han armado á mis pasos; hase abatido mi alma: hoyo han cavado delante de mí; en medio de él han caído. (Selah.)"
+    },
+    {
+     "v": 7,
+     "text": "Pronto está mi corazón, oh Dios, mi corazón está dispuesto: cantaré, y trovaré salmos."
+    },
+    {
+     "v": 8,
+     "text": "Despierta, oh gloria mía; despierta, salterio y arpa: levantaréme de mañana."
+    },
+    {
+     "v": 9,
+     "text": "Alabarte he en los pueblos, oh Señor; cantaré de ti en las naciones."
+    },
+    {
+     "v": 10,
+     "text": "Porque grande es hasta los cielos tu misericordia, y hasta las nubes tu verdad."
+    },
+    {
+     "v": 11,
+     "text": "Ensálzate sobre los cielos, oh Dios; sobre toda la tierra tu gloria."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Ten misericordia de mí, oh Dios. Dos veces, al principio. Luego, un refugio a la sombra de sus alas, hasta que pase el quebranto. Hasta que pase. Va a pasar. [pause 19]\n\nEn medio, David describe leones. Peligro por todos lados. Y luego levanta los ojos. Dios, que seas exaltado sobre los cielos. [pause 17]\n\nLuego una línea sobre el amanecer. Me despertaré de mañana. David en una cueva, decidiendo despertar a la mañana con un canto. [pause 21]\n\nUn versículo para acompañarlo, de la historia de Rut. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "RUT 2:12",
+   "label": "Rut 2:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Jehová galardone tu obra, y tu remuneración sea llena por Jehová Dios de Israel, que has venido para cubrirte debajo de sus alas."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Booz se lo dijo a Rut, una viuda extranjera que había llegado sin nada. Viniste a cobijarte bajo sus alas. Las mismas alas de las que cantó David. [pause 19]\n\nAquí está el Salmo cincuenta y siete otra vez. Imagínate bajo esas alas, hasta que pase la noche. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 57:1-11",
+   "label": "Salmos 57:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: sobre No destruyas: Michtam de David, cuando huyó de delante de Saúl á la cueva. TEN misericordia de mí, oh Dios, ten misericordia de mí; porque en ti ha confiado mi alma, y en la sombra de tus alas me ampararé, hasta que pasen los quebrantos."
+    },
+    {
+     "v": 2,
+     "text": "Clamaré al Dios Altísimo, al Dios que me favorece."
+    },
+    {
+     "v": 3,
+     "text": "El enviará desde los cielos, y me salvará de la infamia del que me apura (Selah); Dios enviará su misericordia y su verdad."
+    },
+    {
+     "v": 4,
+     "text": "Mi vida está entre leones; estoy echado entre hijos de hombres encendidos: sus dientes son lanzas y saetas, y su lengua cuchillo agudo."
+    },
+    {
+     "v": 5,
+     "text": "Ensálzate sobre los cielos, oh Dios; sobre toda la tierra tu gloria."
+    },
+    {
+     "v": 6,
+     "text": "Red han armado á mis pasos; hase abatido mi alma: hoyo han cavado delante de mí; en medio de él han caído. (Selah.)"
+    },
+    {
+     "v": 7,
+     "text": "Pronto está mi corazón, oh Dios, mi corazón está dispuesto: cantaré, y trovaré salmos."
+    },
+    {
+     "v": 8,
+     "text": "Despierta, oh gloria mía; despierta, salterio y arpa: levantaréme de mañana."
+    },
+    {
+     "v": 9,
+     "text": "Alabarte he en los pueblos, oh Señor; cantaré de ti en las naciones."
+    },
+    {
+     "v": 10,
+     "text": "Porque grande es hasta los cielos tu misericordia, y hasta las nubes tu verdad."
+    },
+    {
+     "v": 11,
+     "text": "Ensálzate sobre los cielos, oh Dios; sobre toda la tierra tu gloria."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí termina la lectura. [pause 8]\n\nVoltéate un poco, si quieres, hasta que tu cuerpo encuentre el lugar que le gusta. [pause 10]\n\nNo tienes que recordar nada. No tienes que contestar nada. [pause 12]\n\nSi alguien que amas está lejos esta noche, también puedes dejarlo en las manos de Dios. [pause 15]\n\nSuelta el aire despacio. Y otra vez. [pause 20]\n\nLa noche está en sus manos. Tú estás en sus manos. [pause 20]\n\nQue duermas bien. [pause 45]"
+  }
+ ],
+ "words": 683,
+ "rest_part": "rest4",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 820,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

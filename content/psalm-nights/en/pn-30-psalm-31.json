@@ -1,0 +1,190 @@
+{
+ "id": "pn-30-psalm-31",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 31: Into Thine Hand",
+ "main": [
+  "PSA 31:1-5"
+ ],
+ "companions": [
+  "PSA 31:14-15",
+  "LUK 23:46",
+  "PSA 4:8"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 21]\n\nLet this be the last thing you do today. Lie down. Listen. [pause 24]\n\nTonight we read the beginning of Psalm 31. It holds a line Jesus prayed on the cross, and a line many Christians have prayed at bedtime for centuries. Into thine hand I commit my spirit. [pause 23]\n\nWe will read it twice. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 31:1-5",
+   "label": "Psalm 31:1-5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, A Psalm of David. In thee, O LORD, do I put my trust; let me never be ashamed: deliver me in thy righteousness."
+    },
+    {
+     "v": 2,
+     "text": "Bow down thine ear to me; deliver me speedily: be thou my strong rock, for an house of defence to save me."
+    },
+    {
+     "v": 3,
+     "text": "For thou art my rock and my fortress; therefore for thy name’s sake lead me, and guide me."
+    },
+    {
+     "v": 4,
+     "text": "Pull me out of the net that they have laid privily for me: for thou art my strength."
+    },
+    {
+     "v": 5,
+     "text": "Into thine hand I commit my spirit: thou hast redeemed me, O LORD God of truth."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "In you, Lord, I trust. The psalm begins where every night can begin. Trust. [pause 24]\n\nA strong rock, a house of defence. A house. Somewhere to go in, and close the door. [pause 24]\n\nThen verse five. Into thine hand I commit my spirit. To commit is to hand something over and leave it there. Like a child handing a tired toy to her mother at the end of the day. [pause 25]\n\nSome companion verses now. [pause 22]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 31:14-15",
+   "label": "Psalm 31:14-15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "But I trusted in thee, O LORD: I said, Thou art my God."
+    },
+    {
+     "v": 15,
+     "text": "My times are in thy hand: deliver me from the hand of mine enemies, and from them that persecute me."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "LUK 23:46",
+   "label": "Luke 23:46",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 46,
+     "text": "And when Jesus had cried with a loud voice, he said, Father, into thy hands I commend my spirit: and having said thus, he gave up the ghost."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Psalm 4:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "My times are in thy hand. All of them. The past, this night, tomorrow. [pause 24]\n\nAnd Jesus, at the end of his suffering, prayed this same psalm. Father, into thy hands. If he could pray it then, you can pray it tonight. [pause 25]\n\nAnd our evening verse, one last time. Peace. Lying down. Sleep. [pause 24]\n\nHere is Psalm 31 again. When you hear verse five, hand him your spirit for the night. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 31:1-5",
+   "label": "Psalm 31:1-5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, A Psalm of David. In thee, O LORD, do I put my trust; let me never be ashamed: deliver me in thy righteousness."
+    },
+    {
+     "v": 2,
+     "text": "Bow down thine ear to me; deliver me speedily: be thou my strong rock, for an house of defence to save me."
+    },
+    {
+     "v": 3,
+     "text": "For thou art my rock and my fortress; therefore for thy name’s sake lead me, and guide me."
+    },
+    {
+     "v": 4,
+     "text": "Pull me out of the net that they have laid privily for me: for thou art my strength."
+    },
+    {
+     "v": 5,
+     "text": "Into thine hand I commit my spirit: thou hast redeemed me, O LORD God of truth."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "The reading is done. [pause 8]\n\nLet the last verse settle like dust after a long day on the road. [pause 12]\n\nYou have prayed tonight, even if you said nothing. Listening is a kind of prayer. [pause 12]\n\nLet go of the clock. Let go of tomorrow's list. [pause 15]\n\nUnder the same sky, many others are lying down tonight, and the same God is with each one. [pause 20]\n\nPeace to you. [pause 45]"
+  }
+ ],
+ "words": 543,
+ "rest_part": "rest6",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 817,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only; Jesus's and God's words given indirectly outside scripture (light of the world, fear not). Each night keeps its psalm's point (God gives his beloved sleep, waiting for morning, confession and the hiding place, mercy to the heavens, fret not, out of the pit, tears in his bottle, wings in the cave, the Lord good to all, into thine hand). Psalm 127's 'giveth sleep' framed as God's gift, not a promise to the listener; no outcome promises in the new rest."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

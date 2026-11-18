@@ -1,0 +1,192 @@
+{
+ "id": "pn-30-psalm-31",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 31: En tu mano encomiendo mi espíritu",
+ "main": [
+  "PSA 31:1-5"
+ ],
+ "companions": [
+  "PSA 31:14-15",
+  "LUK 23:46",
+  "PSA 4:8"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 25]\n\nQue esto sea lo último que hagas hoy. Acostarte. Escuchar. [pause 25]\n\nEsta noche leemos el principio del Salmo treinta y uno. Tiene una línea que Jesús oró en la cruz, y que muchos cristianos han orado antes de dormir por siglos. En tu mano encomiendo mi espíritu. [pause 25]\n\nLo vamos a leer dos veces. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 31:1-5",
+   "label": "Salmos 31:1-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: Salmo de David. EN ti, oh Jehová, he esperado; no sea yo confundido para siempre: líbrame en tu justicia."
+    },
+    {
+     "v": 2,
+     "text": "Inclina á mí tu oído, líbrame presto; séme por roca de fortaleza, por casa fuerte para salvarme."
+    },
+    {
+     "v": 3,
+     "text": "Porque tú eres mi roca y mi castillo; y por tu nombre me guiarás, y me encaminarás."
+    },
+    {
+     "v": 4,
+     "text": "Me sacarás de la red que han escondido para mí; porque tú eres mi fortaleza."
+    },
+    {
+     "v": 5,
+     "text": "En tu mano encomiendo mi espíritu: tú me has redimido, oh Jehová, Dios de verdad."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "En ti, Señor, confío. El salmo empieza donde puede empezar cada noche. Confianza. [pause 25]\n\nSé mi roca fuerte, una casa fuerte. Una casa. Un lugar donde entrar y cerrar la puerta. [pause 25]\n\nLuego el versículo cinco. En tu mano encomiendo mi espíritu. Encomendar es entregar algo y dejarlo ahí. Como una niña que al final del día le da a su mamá el juguete con el que ya se cansó de jugar. [pause 25]\n\nAhora unos versículos para acompañarlo. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 31:14-15",
+   "label": "Salmos 31:14-15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Mas yo en ti confié, oh Jehová: yo dije: Dios mío eres tú."
+    },
+    {
+     "v": 15,
+     "text": "En tu mano están mis tiempos: líbrame de la mano de mis enemigos, y de mis perseguidores."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "LUK 23:46",
+   "label": "Lucas 23:46",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 46,
+     "text": "Entonces Jesús, clamando á gran voz, dijo: Padre, en tus manos encomiendo mi espíritu. Y habiendo dicho esto, espiró."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "En tu mano están mis tiempos. Todos. Lo que pasó, esta noche, mañana. [pause 25]\n\nY Jesús, al final de su sufrimiento, oró este mismo salmo. Padre, en tus manos. Si él pudo orarlo entonces, tú lo puedes orar esta noche. [pause 25]\n\nY nuestro versículo de la noche, una última vez. Paz. Acostarse. Dormir. [pause 25]\n\nAquí está el Salmo treinta y uno otra vez. Cuando oigas el versículo cinco, entrégale tu espíritu por esta noche. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 31:1-5",
+   "label": "Salmos 31:1-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: Salmo de David. EN ti, oh Jehová, he esperado; no sea yo confundido para siempre: líbrame en tu justicia."
+    },
+    {
+     "v": 2,
+     "text": "Inclina á mí tu oído, líbrame presto; séme por roca de fortaleza, por casa fuerte para salvarme."
+    },
+    {
+     "v": 3,
+     "text": "Porque tú eres mi roca y mi castillo; y por tu nombre me guiarás, y me encaminarás."
+    },
+    {
+     "v": 4,
+     "text": "Me sacarás de la red que han escondido para mí; porque tú eres mi fortaleza."
+    },
+    {
+     "v": 5,
+     "text": "En tu mano encomiendo mi espíritu: tú me has redimido, oh Jehová, Dios de verdad."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ya terminó la lectura. [pause 8]\n\nDeja que el último versículo se asiente, como el polvo después de un día largo de camino. [pause 12]\n\nEsta noche oraste, aunque no hayas dicho nada. Escuchar también es una manera de orar. [pause 12]\n\nSuelta el reloj. Suelta la lista de mañana. [pause 15]\n\nBajo el mismo cielo, muchos otros se están acostando esta noche, y el mismo Dios está con cada uno. [pause 20]\n\nPaz para ti. [pause 45]"
+  }
+ ],
+ "words": 509,
+ "rest_part": "rest6",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 810,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
