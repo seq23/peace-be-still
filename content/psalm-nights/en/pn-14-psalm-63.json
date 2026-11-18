@@ -1,0 +1,196 @@
+{
+ "id": "pn-14-psalm-63",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 63: In the Night Watches",
+ "main": [
+  "PSA 63:1-8"
+ ],
+ "companions": [
+  "PSA 42:8",
+  "PSA 119:148"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 10]\n\nFind a comfortable way to lie. Let the pillow hold your head. [pause 14]\n\nTonight's psalm is Psalm 63. David wrote it in the wilderness of Judah, in a dry land with no water. And in that dry place he wrote about lying awake at night, thinking of God. [pause 12]\n\nIf you are awake tonight, this one is for you. We will read it twice. [pause 16]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 63:1-8",
+   "label": "Psalm 63:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David, when he was in the wilderness of Judah. O God, thou art my God; early will I seek thee: my soul thirsteth for thee, my flesh longeth for thee in a dry and thirsty land, where no water is;"
+    },
+    {
+     "v": 2,
+     "text": "To see thy power and thy glory, so as I have seen thee in the sanctuary."
+    },
+    {
+     "v": 3,
+     "text": "Because thy lovingkindness is better than life, my lips shall praise thee."
+    },
+    {
+     "v": 4,
+     "text": "Thus will I bless thee while I live: I will lift up my hands in thy name."
+    },
+    {
+     "v": 5,
+     "text": "My soul shall be satisfied as with marrow and fatness; and my mouth shall praise thee with joyful lips:"
+    },
+    {
+     "v": 6,
+     "text": "When I remember thee upon my bed, and meditate on thee in the night watches."
+    },
+    {
+     "v": 7,
+     "text": "Because thou hast been my help, therefore in the shadow of thy wings will I rejoice."
+    },
+    {
+     "v": 8,
+     "text": "My soul followeth hard after thee: thy right hand upholdeth me."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "O God, thou art my God. The psalm does not start with a request. It starts with a name. My God. [pause 14]\n\nMy soul thirsteth for thee. In a dry land, where no water is. Some nights feel like that. Dry. Empty. Far from what you need. [pause 14]\n\nThen verse six. Remembering God upon his bed, thinking of him through the night watches. A night watch was a part of the night, the way a guard counted the hours. David spent his sleepless hours remembering God. [pause 16]\n\nAnd joy, under the shadow of his wings. [pause 18]\n\nTwo short companion verses about the night. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 42:8",
+   "label": "Psalm 42:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Yet the LORD will command his lovingkindness in the daytime, and in the night his song shall be with me, and my prayer unto the God of my life."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 119:148",
+   "label": "Psalm 119:148",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 148,
+     "text": "Mine eyes prevent the night watches, that I might meditate in thy word."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "His song, in the night. A song in the night. [pause 14]\n\nMine eyes prevent the night watches. That means my eyes are open before the watchman calls, so I can think on your word. If you cannot sleep, you can still rest your mind on him. [pause 16]\n\nHere is Psalm 63 again. If your eyes are open, let the words be your night watch. [pause 18]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 63:1-8",
+   "label": "Psalm 63:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David, when he was in the wilderness of Judah. O God, thou art my God; early will I seek thee: my soul thirsteth for thee, my flesh longeth for thee in a dry and thirsty land, where no water is;"
+    },
+    {
+     "v": 2,
+     "text": "To see thy power and thy glory, so as I have seen thee in the sanctuary."
+    },
+    {
+     "v": 3,
+     "text": "Because thy lovingkindness is better than life, my lips shall praise thee."
+    },
+    {
+     "v": 4,
+     "text": "Thus will I bless thee while I live: I will lift up my hands in thy name."
+    },
+    {
+     "v": 5,
+     "text": "My soul shall be satisfied as with marrow and fatness; and my mouth shall praise thee with joyful lips:"
+    },
+    {
+     "v": 6,
+     "text": "When I remember thee upon my bed, and meditate on thee in the night watches."
+    },
+    {
+     "v": 7,
+     "text": "Because thou hast been my help, therefore in the shadow of thy wings will I rejoice."
+    },
+    {
+     "v": 8,
+     "text": "My soul followeth hard after thee: thy right hand upholdeth me."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is enough for tonight. [pause 8]\n\nLet your breathing slow down on its own. In, and out. Nothing to fix, nothing to finish. [pause 12]\n\nWhatever today was, it is over now. Tomorrow has not come yet. This is only the night, and the night belongs to God. [pause 12]\n\nLay down what you carried. One thing, and then another. [pause 15]\n\nStay here as long as you like. [pause 15]\n\nIf your mind wanders, let it wander back. There is no wrong way to rest. [pause 20]\n\nThe Lord is near. Nearer than your breath. [pause 20]\n\nGood night. [pause 45]"
+  }
+ ],
+ "words": 654,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 820,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only. Each night keeps its psalm's own point (contentment, tasting God's goodness, remembering benefits, night watches, honest sadness, the higher rock, longing for God's house, our short days, return to rest, surrounded like Jerusalem). Psalm 103's 'healeth' told as memory of who God has been, not a promise; Psalm 42 points a long sadness to a pastor, a doctor or a friend; no sleep or safety promise in the new rests."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

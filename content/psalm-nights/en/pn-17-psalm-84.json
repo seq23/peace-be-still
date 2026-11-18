@@ -1,0 +1,214 @@
+{
+ "id": "pn-17-psalm-84",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 84: How Amiable Are Thy Tabernacles",
+ "main": [
+  "PSA 84:1-12"
+ ],
+ "companions": [
+  "PSA 27:4"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello. This is Psalm Nights. [pause 9]\n\nLet the day go. Let the room be dim and soft. [pause 12]\n\nTonight we read Psalm 84. It is a song of longing for the house of God. Of pilgrims on the road, and of a small bird that found a home near the altar. [pause 11]\n\nWe will read it twice, slowly. [pause 14]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 84:1-12",
+   "label": "Psalm 84:1-12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician upon Gittith, A Psalm for the sons of Korah. How amiable are thy tabernacles, O LORD of hosts!"
+    },
+    {
+     "v": 2,
+     "text": "My soul longeth, yea, even fainteth for the courts of the LORD: my heart and my flesh crieth out for the living God."
+    },
+    {
+     "v": 3,
+     "text": "Yea, the sparrow hath found an house, and the swallow a nest for herself, where she may lay her young, even thine altars, O LORD of hosts, my King, and my God."
+    },
+    {
+     "v": 4,
+     "text": "Blessed are they that dwell in thy house: they will be still praising thee. Selah."
+    },
+    {
+     "v": 5,
+     "text": "Blessed is the man whose strength is in thee; in whose heart are the ways of them."
+    },
+    {
+     "v": 6,
+     "text": "Who passing through the valley of Baca make it a well; the rain also filleth the pools."
+    },
+    {
+     "v": 7,
+     "text": "They go from strength to strength, every one of them in Zion appeareth before God."
+    },
+    {
+     "v": 8,
+     "text": "O LORD God of hosts, hear my prayer: give ear, O God of Jacob. Selah."
+    },
+    {
+     "v": 9,
+     "text": "Behold, O God our shield, and look upon the face of thine anointed."
+    },
+    {
+     "v": 10,
+     "text": "For a day in thy courts is better than a thousand. I had rather be a doorkeeper in the house of my God, than to dwell in the tents of wickedness."
+    },
+    {
+     "v": 11,
+     "text": "For the LORD God is a sun and shield: the LORD will give grace and glory: no good thing will he withhold from them that walk uprightly."
+    },
+    {
+     "v": 12,
+     "text": "O LORD of hosts, blessed is the man that trusteth in thee."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "How amiable are thy tabernacles. How lovely is the place where you are. The psalmist misses it the way you miss home. [pause 12]\n\nYea, the sparrow hath found an house. A tiny bird, building her nest in the courts of God. If there is room for a sparrow, there is room for you. [pause 14]\n\nThe pilgrims pass through the valley of Baca, a valley of weeping, and make it a well. They go from strength to strength. [pause 12]\n\nOne day in his courts, better than a thousand. One day near God is worth more than a thousand anywhere else. [pause 16]\n\nOne companion verse. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 27:4",
+   "label": "Psalm 27:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "One thing have I desired of the LORD, that will I seek after; that I may dwell in the house of the LORD all the days of my life, to behold the beauty of the LORD, and to enquire in his temple."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "One thing have I desired. The same longing, in another psalm. To dwell in the house of the Lord, and behold his beauty. [pause 14]\n\nHere is Psalm 84 again. Think of the sparrow and her nest. [pause 16]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 84:1-12",
+   "label": "Psalm 84:1-12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician upon Gittith, A Psalm for the sons of Korah. How amiable are thy tabernacles, O LORD of hosts!"
+    },
+    {
+     "v": 2,
+     "text": "My soul longeth, yea, even fainteth for the courts of the LORD: my heart and my flesh crieth out for the living God."
+    },
+    {
+     "v": 3,
+     "text": "Yea, the sparrow hath found an house, and the swallow a nest for herself, where she may lay her young, even thine altars, O LORD of hosts, my King, and my God."
+    },
+    {
+     "v": 4,
+     "text": "Blessed are they that dwell in thy house: they will be still praising thee. Selah."
+    },
+    {
+     "v": 5,
+     "text": "Blessed is the man whose strength is in thee; in whose heart are the ways of them."
+    },
+    {
+     "v": 6,
+     "text": "Who passing through the valley of Baca make it a well; the rain also filleth the pools."
+    },
+    {
+     "v": 7,
+     "text": "They go from strength to strength, every one of them in Zion appeareth before God."
+    },
+    {
+     "v": 8,
+     "text": "O LORD God of hosts, hear my prayer: give ear, O God of Jacob. Selah."
+    },
+    {
+     "v": 9,
+     "text": "Behold, O God our shield, and look upon the face of thine anointed."
+    },
+    {
+     "v": 10,
+     "text": "For a day in thy courts is better than a thousand. I had rather be a doorkeeper in the house of my God, than to dwell in the tents of wickedness."
+    },
+    {
+     "v": 11,
+     "text": "For the LORD God is a sun and shield: the LORD will give grace and glory: no good thing will he withhold from them that walk uprightly."
+    },
+    {
+     "v": 12,
+     "text": "O LORD of hosts, blessed is the man that trusteth in thee."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is all for tonight. [pause 8]\n\nLet the quiet come in like a tide. Slowly. No hurry. [pause 12]\n\nYour work is done for today. What is left can wait for the light. [pause 12]\n\nIf you are still awake a while, that is all right. Lie still and let the words you heard be near you. [pause 15]\n\nHe knows your name. He knows this night. [pause 20]\n\nRest. [pause 45]"
+  }
+ ],
+ "words": 770,
+ "rest_part": "rest5",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 820,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only. Each night keeps its psalm's own point (contentment, tasting God's goodness, remembering benefits, night watches, honest sadness, the higher rock, longing for God's house, our short days, return to rest, surrounded like Jerusalem). Psalm 103's 'healeth' told as memory of who God has been, not a promise; Psalm 42 points a long sadness to a pastor, a doctor or a friend; no sleep or safety promise in the new rests."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,204 @@
+{
+ "id": "pn-19-psalm-116",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 116: Return unto Thy Rest",
+ "main": [
+  "PSA 116:1-9"
+ ],
+ "companions": [
+  "PSA 4:8",
+  "MAT 11:28"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello, and welcome to Psalm Nights. [pause 17]\n\nLie back. Let the bed take your weight. [pause 20]\n\nTonight we read the first part of Psalm 116. It was written by someone who had come very close to death, and was brought back. It is a thank you. [pause 19]\n\nWe will read it twice. [pause 22]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 116:1-9",
+   "label": "Psalm 116:1-9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "I love the LORD, because he hath heard my voice and my supplications."
+    },
+    {
+     "v": 2,
+     "text": "Because he hath inclined his ear unto me, therefore will I call upon him as long as I live."
+    },
+    {
+     "v": 3,
+     "text": "The sorrows of death compassed me, and the pains of hell gat hold upon me: I found trouble and sorrow."
+    },
+    {
+     "v": 4,
+     "text": "Then called I upon the name of the LORD; O LORD, I beseech thee, deliver my soul."
+    },
+    {
+     "v": 5,
+     "text": "Gracious is the LORD, and righteous; yea, our God is merciful."
+    },
+    {
+     "v": 6,
+     "text": "The LORD preserveth the simple: I was brought low, and he helped me."
+    },
+    {
+     "v": 7,
+     "text": "Return unto thy rest, O my soul; for the LORD hath dealt bountifully with thee."
+    },
+    {
+     "v": 8,
+     "text": "For thou hast delivered my soul from death, mine eyes from tears, and my feet from falling."
+    },
+    {
+     "v": 9,
+     "text": "I will walk before the LORD in the land of the living."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Love for the Lord, because he heard. The reason is simple. He heard me. [pause 20]\n\nHe inclined his ear. Picture someone bending down close so they can hear you whisper. That is the word. [pause 20]\n\nThe psalm remembers the sorrows, the trouble, the fear. And then it says, gracious is the Lord. [pause 20]\n\nThen verse seven. Return unto thy rest, O my soul. The psalmist speaks to himself, like calling a child back to bed. Come back to rest. [pause 24]\n\nTwo companion verses. [pause 18]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Psalm 4:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 11:28",
+   "label": "Matthew 11:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Peace. Lie down. Sleep. And the words of Jesus, inviting the weary to come and rest. [pause 22]\n\nHere is Psalm 116 again. When you hear verse seven, say it to your own soul. [pause 24]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 116:1-9",
+   "label": "Psalm 116:1-9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "I love the LORD, because he hath heard my voice and my supplications."
+    },
+    {
+     "v": 2,
+     "text": "Because he hath inclined his ear unto me, therefore will I call upon him as long as I live."
+    },
+    {
+     "v": 3,
+     "text": "The sorrows of death compassed me, and the pains of hell gat hold upon me: I found trouble and sorrow."
+    },
+    {
+     "v": 4,
+     "text": "Then called I upon the name of the LORD; O LORD, I beseech thee, deliver my soul."
+    },
+    {
+     "v": 5,
+     "text": "Gracious is the LORD, and righteous; yea, our God is merciful."
+    },
+    {
+     "v": 6,
+     "text": "The LORD preserveth the simple: I was brought low, and he helped me."
+    },
+    {
+     "v": 7,
+     "text": "Return unto thy rest, O my soul; for the LORD hath dealt bountifully with thee."
+    },
+    {
+     "v": 8,
+     "text": "For thou hast delivered my soul from death, mine eyes from tears, and my feet from falling."
+    },
+    {
+     "v": 9,
+     "text": "I will walk before the LORD in the land of the living."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is enough for tonight. [pause 8]\n\nLet your breathing slow down on its own. In, and out. Nothing to fix, nothing to finish. [pause 12]\n\nWhatever today was, it is over now. Tomorrow has not come yet. This is only the night, and the night belongs to God. [pause 12]\n\nLay down what you carried. One thing, and then another. [pause 15]\n\nStay here as long as you like. [pause 15]\n\nIf your mind wanders, let it wander back. There is no wrong way to rest. [pause 20]\n\nThe Lord is near. Nearer than your breath. [pause 20]\n\nGood night. [pause 45]"
+  }
+ ],
+ "words": 557,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 813,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only. Each night keeps its psalm's own point (contentment, tasting God's goodness, remembering benefits, night watches, honest sadness, the higher rock, longing for God's house, our short days, return to rest, surrounded like Jerusalem). Psalm 103's 'healeth' told as memory of who God has been, not a promise; Psalm 42 points a long sadness to a pastor, a doctor or a friend; no sleep or safety promise in the new rests."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

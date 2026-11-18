@@ -1,0 +1,226 @@
+{
+ "id": "pn-11-psalm-16",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 16: La senda de la vida",
+ "main": [
+  "PSA 16:1-11"
+ ],
+ "companions": [
+  "PSA 4:8",
+  "PSA 73:25-26"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 10]\n\nDeja que tu cuerpo se hunda en la cama. Que tus pies estén calientitos. [pause 13]\n\nEl salmo de esta noche es el Salmo dieciséis. Es un salmo de contentamiento. De alguien que mira su vida y dice que le tocó una parte hermosa. [pause 12]\n\nLo vamos a leer dos veces, despacio. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 16:1-11",
+   "label": "Salmos 16:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Michtham de David. GUÁRDAME, oh Dios, porque en ti he confiado."
+    },
+    {
+     "v": 2,
+     "text": "Dijiste, oh alma mía, á Jehová: Tú eres el Señor: mi bien á ti no aprovecha;"
+    },
+    {
+     "v": 3,
+     "text": "Sino á los santos que están en la tierra, y á los íntegros: toda mi afición en ellos."
+    },
+    {
+     "v": 4,
+     "text": "Multiplicaránse los dolores de aquellos que sirven diligentes á otro dios: no ofreceré yo sus libaciones de sangre, ni en mis labios tomaré sus nombres."
+    },
+    {
+     "v": 5,
+     "text": "Jehová es la porción de mi parte y de mi copa; tú sustentarás mi suerte."
+    },
+    {
+     "v": 6,
+     "text": "Las cuerdas me cayeron en lugares deleitosos, y es hermosa la heredad que me ha tocado."
+    },
+    {
+     "v": 7,
+     "text": "Bendeciré á Jehová que me aconseja: aun en las noches me enseñan mis riñones."
+    },
+    {
+     "v": 8,
+     "text": "A Jehová he puesto siempre delante de mí: porque está á mi diestra no seré conmovido."
+    },
+    {
+     "v": 9,
+     "text": "Alegróse por tanto mi corazón, y se gozó mi gloria: también mi carne reposará segura."
+    },
+    {
+     "v": 10,
+     "text": "Porque no dejarás mi alma en el sepulcro; ni permitirás que tu santo vea corrupción."
+    },
+    {
+     "v": 11,
+     "text": "Me mostrarás la senda de la vida: hartura de alegrías hay con tu rostro; deleites en tu diestra para siempre."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Guárdame, oh Dios. El salmo empieza con una oración corta. Cuídame. [pause 13]\n\nEn medio hay una línea sobre la noche. Aun de noche el corazón le enseña. Incluso de noche, Dios sigue enseñándole al corazón. [pause 13]\n\nLas cuerdas le cayeron en lugares deleitosos. En aquel tiempo la tierra se medía con cuerdas. El salmista mira la parte que le tocó y se alegra. No porque sea la más grande. Porque el Señor está en ella. [pause 15]\n\nY al final, hartura de alegría, en su presencia. [pause 17]\n\nDos pasajes para acompañarlo. [pause 11]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 73:25-26",
+   "label": "Salmos 73:25-26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "¿A quién tengo yo en los cielos? Y fuera de ti nada deseo en la tierra."
+    },
+    {
+     "v": 26,
+     "text": "Mi carne y mi corazón desfallecen: mas la roca de mi corazón y mi porción es Dios para siempre."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "El primero es el versículo de la noche al que siempre volvemos. Paz, acostarse, dormir. [pause 13]\n\nEl segundo es del Salmo setenta y tres. Mi carne y mi corazón pueden desfallecer. Dios es la roca de mi corazón. Cuando tu cuerpo está cansado y tu corazón gastado, él sigue siendo tu porción. [pause 15]\n\nAquí está el Salmo dieciséis otra vez. Escucha los lugares deleitosos. [pause 17]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 16:1-11",
+   "label": "Salmos 16:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Michtham de David. GUÁRDAME, oh Dios, porque en ti he confiado."
+    },
+    {
+     "v": 2,
+     "text": "Dijiste, oh alma mía, á Jehová: Tú eres el Señor: mi bien á ti no aprovecha;"
+    },
+    {
+     "v": 3,
+     "text": "Sino á los santos que están en la tierra, y á los íntegros: toda mi afición en ellos."
+    },
+    {
+     "v": 4,
+     "text": "Multiplicaránse los dolores de aquellos que sirven diligentes á otro dios: no ofreceré yo sus libaciones de sangre, ni en mis labios tomaré sus nombres."
+    },
+    {
+     "v": 5,
+     "text": "Jehová es la porción de mi parte y de mi copa; tú sustentarás mi suerte."
+    },
+    {
+     "v": 6,
+     "text": "Las cuerdas me cayeron en lugares deleitosos, y es hermosa la heredad que me ha tocado."
+    },
+    {
+     "v": 7,
+     "text": "Bendeciré á Jehová que me aconseja: aun en las noches me enseñan mis riñones."
+    },
+    {
+     "v": 8,
+     "text": "A Jehová he puesto siempre delante de mí: porque está á mi diestra no seré conmovido."
+    },
+    {
+     "v": 9,
+     "text": "Alegróse por tanto mi corazón, y se gozó mi gloria: también mi carne reposará segura."
+    },
+    {
+     "v": 10,
+     "text": "Porque no dejarás mi alma en el sepulcro; ni permitirás que tu santo vea corrupción."
+    },
+    {
+     "v": 11,
+     "text": "Me mostrarás la senda de la vida: hartura de alegrías hay con tu rostro; deleites en tu diestra para siempre."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí termina la lectura. [pause 8]\n\nVoltéate un poco, si quieres, hasta que tu cuerpo encuentre el lugar que le gusta. [pause 10]\n\nNo tienes que recordar nada. No tienes que contestar nada. [pause 12]\n\nSi alguien que amas está lejos esta noche, también puedes dejarlo en las manos de Dios. [pause 15]\n\nSuelta el aire despacio. Y otra vez. [pause 20]\n\nLa noche está en sus manos. Tú estás en sus manos. [pause 20]\n\nQue duermas bien. [pause 45]"
+  }
+ ],
+ "words": 685,
+ "rest_part": "rest4",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 819,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

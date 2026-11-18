@@ -376,7 +376,7 @@ N: The same voice that spoke to the sea still calls to the frightened heart.
   const es = parseItems(`=== t-es | Calla, enmudece
 passage: MAR 4:35-41
 cast: discipulos|los discípulos|adult|group
-N: El día terminó. Jesús dijo que cruzaran al otro lado del lago. Hacía años que los demás pescaban allí.
+N: El día terminó. Jesús dijo que cruzaran al otro lado del lago. Hacía años que los demás pescaban allí. Uno tenía dieciséis años.
 N: Vino un viento muy fuerte. Las olas llenaban la barca.
 S: MAR 4:39
 N: Alguien diga amén. La misma voz que habló al mar todavía nos llama esta noche.

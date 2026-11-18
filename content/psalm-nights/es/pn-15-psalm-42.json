@@ -1,0 +1,208 @@
+{
+ "id": "pn-15-psalm-42",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 42: Como el ciervo",
+ "main": [
+  "PSA 42:1-11"
+ ],
+ "companions": [
+  "PSA 43:5"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 3]\n\nQuédate quieto. Esta noche no tienes que sentirte de ninguna manera en particular. [pause 6]\n\nEsta noche leemos el Salmo cuarenta y dos. Es un salmo para las noches tristes. El que lo escribió está lejos de casa, triste, y lo dice con honestidad. Le habla a su propia alma y le pregunta por qué está tan abatida. [pause 5]\n\nLo vamos a leer dos veces. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 42:1-11",
+   "label": "Salmos 42:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: Masquil á los hijos de Coré. COMO el ciervo brama por las corrientes de las aguas, así clama por ti, oh Dios, el alma mía."
+    },
+    {
+     "v": 2,
+     "text": "Mi alma tiene sed de Dios, del Dios vivo: ¡cuándo vendré, y pareceré delante de Dios!"
+    },
+    {
+     "v": 3,
+     "text": "Fueron mis lágrimas mi pan de día y de noche, mientras me dicen todos los días: ¿Dónde está tu Dios?"
+    },
+    {
+     "v": 4,
+     "text": "Acordaréme de estas cosas, y derramaré sobre mí mi alma: cuando pasaré en el número, iré con ellos hasta la casa de Dios, con voz de alegría y de alabanza, haciendo fiesta la multitud."
+    },
+    {
+     "v": 5,
+     "text": "¿Por qué te abates, oh alma mía, y te conturbas en mí? Espera á Dios; porque aun le tengo de alabar por las saludes de su presencia."
+    },
+    {
+     "v": 6,
+     "text": "Dios mío, mi alma está en mí abatida: acordaréme por tanto de ti desde tierra del Jordán, y de los Hermonitas, desde el monte de Mizhar."
+    },
+    {
+     "v": 7,
+     "text": "Un abismo llama á otro á la voz de tus canales: todas tus ondas y tus olas han pasado sobre mí."
+    },
+    {
+     "v": 8,
+     "text": "De día mandará Jehová su misericordia, y de noche su canción será conmigo, y oración al Dios de mi vida."
+    },
+    {
+     "v": 9,
+     "text": "Diré á Dios: Roca mía, ¿por qué te has olvidado de mí? ¿Por qué andaré yo enlutado por la opresión del enemigo?"
+    },
+    {
+     "v": 10,
+     "text": "Mientras se están quebrantando mis huesos, mis enemigos me afrentan, diciéndome cada día: ¿Dónde está tu Dios?"
+    },
+    {
+     "v": 11,
+     "text": "¿Por qué te abates, oh alma mía, y por qué te conturbas en mí? Espera á Dios; porque aun le tengo de alabar; es él salvamento delante de mí, y el Dios mío."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Como el ciervo que busca las corrientes de agua. Un ciervo cansado y con sed, buscando un arroyo. Así puede sentirse el anhelo de Dios. [pause 6]\n\nLágrimas de día y de noche, como pan. Aquí no se finge nada. En algunas temporadas, las lágrimas son de lo que uno vive. La Biblia les hace lugar. [pause 8]\n\nLuego la pregunta, dos veces. ¿Por qué te abates, alma mía? Y la respuesta, dos veces. Espera en Dios. No porque la tristeza se haya ido. Porque Dios sigue siendo Dios. [pause 8]\n\nEl versículo ocho es para esta noche. De noche, su canción conmigo. [pause 10]\n\nUn versículo para acompañarlo, del salmo siguiente. [pause 4]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 43:5",
+   "label": "Salmos 43:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "¿Por qué te abates, oh alma mía, y por qué te conturbas en mí? Espera á Dios; porque aun le tengo de alabar; es él salvamento delante de mí, y el Dios mío."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "El Salmo cuarenta y tres termina con las mismas palabras. Como si el que lo escribió tuviera que decírselo a sí mismo una y otra vez. Espera en Dios. Todavía lo voy a alabar. [pause 8]\n\nSi esta noche estás triste, no tienes que sentirte mejor antes de descansar. Y si la tristeza se queda muchos días, cuéntaselo a alguien. Un pastor, un doctor, una amiga. Eso también es parte de esperar. [pause 8]\n\nAquí está el Salmo cuarenta y dos otra vez. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 42:1-11",
+   "label": "Salmos 42:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: Masquil á los hijos de Coré. COMO el ciervo brama por las corrientes de las aguas, así clama por ti, oh Dios, el alma mía."
+    },
+    {
+     "v": 2,
+     "text": "Mi alma tiene sed de Dios, del Dios vivo: ¡cuándo vendré, y pareceré delante de Dios!"
+    },
+    {
+     "v": 3,
+     "text": "Fueron mis lágrimas mi pan de día y de noche, mientras me dicen todos los días: ¿Dónde está tu Dios?"
+    },
+    {
+     "v": 4,
+     "text": "Acordaréme de estas cosas, y derramaré sobre mí mi alma: cuando pasaré en el número, iré con ellos hasta la casa de Dios, con voz de alegría y de alabanza, haciendo fiesta la multitud."
+    },
+    {
+     "v": 5,
+     "text": "¿Por qué te abates, oh alma mía, y te conturbas en mí? Espera á Dios; porque aun le tengo de alabar por las saludes de su presencia."
+    },
+    {
+     "v": 6,
+     "text": "Dios mío, mi alma está en mí abatida: acordaréme por tanto de ti desde tierra del Jordán, y de los Hermonitas, desde el monte de Mizhar."
+    },
+    {
+     "v": 7,
+     "text": "Un abismo llama á otro á la voz de tus canales: todas tus ondas y tus olas han pasado sobre mí."
+    },
+    {
+     "v": 8,
+     "text": "De día mandará Jehová su misericordia, y de noche su canción será conmigo, y oración al Dios de mi vida."
+    },
+    {
+     "v": 9,
+     "text": "Diré á Dios: Roca mía, ¿por qué te has olvidado de mí? ¿Por qué andaré yo enlutado por la opresión del enemigo?"
+    },
+    {
+     "v": 10,
+     "text": "Mientras se están quebrantando mis huesos, mis enemigos me afrentan, diciéndome cada día: ¿Dónde está tu Dios?"
+    },
+    {
+     "v": 11,
+     "text": "¿Por qué te abates, oh alma mía, y por qué te conturbas en mí? Espera á Dios; porque aun le tengo de alabar; es él salvamento delante de mí, y el Dios mío."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí vamos a terminar. [pause 8]\n\nDeja que el cuarto esté oscuro y quieto a tu alrededor. Que la almohada esté fresca. [pause 10]\n\nEsta noche escuchaste su Palabra. Ya no tienes que pensar en ella. Solo descansa en ella. [pause 12]\n\nTodo lo que en ti está cansado, deja que esté cansado. No tienes que ser fuerte ahora. [pause 15]\n\nQue las últimas palabras que oíste sean las que se queden contigo. Lo demás, déjalo ir. [pause 20]\n\nÉl está despierto, así que tú puedes dormir. [pause 20]\n\nQue descanses. [pause 45]"
+  }
+ ],
+ "words": 895,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 862,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

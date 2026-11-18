@@ -41,8 +41,8 @@ export const REDLINE = rx([
 ]);
 // S04: words that send a story to a careful read (a note, never a block).
 export const SPLIT = rx(["baptis\\w*", "\\btongues\\b", "predestin\\w*", "\\brapture\\b", "\\bsabbath\\b", "\\bcommunion\\b", "eternal security", "women preach\\w*", "bautism\\w*", "\\blenguas\\b", "\\bsábado\\b", "\\bpredestina\\w*"]);
-// S12: Spain-only Spanish and vosotros outside RV1909 blocks; English left in.
-export const SPAIN = rx(["\\bvosotr[oa]s\\b", "\\bos\\b", "\\bsois\\b", "\\bhab[ée]is\\b", "\\b\\p{L}{2,}(?:áis|éis)\\b", "\\bvale[,.!]", "\\bcog(?:er|e|es|ió|ido)\\b", "\\bordenador\\w*", "\\bm[óo]vil\\b", "\\bvuestr[oa]s?\\b"]);
+// S12: Spain-only Spanish (dieciséis / veintiséis end in -éis but are numbers, not vosotros forms) and vosotros outside RV1909 blocks; English left in.
+export const SPAIN = rx(["\\bvosotr[oa]s\\b", "\\bos\\b", "\\bsois\\b", "\\bhab[ée]is\\b", "\\b(?!(?:dieci|veinti)séis\\b)\\p{L}{2,}(?:áis|éis)\\b", "\\bvale[,.!]", "\\bcog(?:er|e|es|ió|ido)\\b", "\\bordenador\\w*", "\\bm[óo]vil\\b", "\\bvuestr[oa]s?\\b"]);
 export const ENGLISH = rx(["\\bthe\\b", "\\band\\b", "\\bwith\\b", "\\byou\\b", "\\byour\\b", "\\bof\\b", "\\bthat\\b", "\\bnight\\b", "\\blord\\b"]);
 // Mindset door (Imagination Nights): no God's Word cross-links, no scripture, no Neville without the disclaimer.
 export const FAITH_LINK = rx(["hush harbor", "psalm nights", "mi refugio", "young faith", "\\bkjv\\b", "\\bscripture\\b", "\\bbible\\b"]);

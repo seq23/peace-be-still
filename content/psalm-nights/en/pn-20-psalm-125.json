@@ -1,0 +1,184 @@
+{
+ "id": "pn-20-psalm-125",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 125: As the Mountains Are Round About",
+ "main": [
+  "PSA 125:1-5"
+ ],
+ "companions": [
+  "PSA 121:5-8",
+  "DEU 33:27"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 17]\n\nFind your place. Let the covers settle over you. [pause 20]\n\nTonight's psalm is Psalm 125. It is short, one of the songs pilgrims sang on the way to Jerusalem. It is a psalm about mountains, and about being surrounded. [pause 19]\n\nWe will read it slowly, and then again. [pause 22]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 125:1-5",
+   "label": "Psalm 125:1-5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees. They that trust in the LORD shall be as mount Zion, which cannot be removed, but abideth for ever."
+    },
+    {
+     "v": 2,
+     "text": "As the mountains are round about Jerusalem, so the LORD is round about his people from henceforth even for ever."
+    },
+    {
+     "v": 3,
+     "text": "For the rod of the wicked shall not rest upon the lot of the righteous; lest the righteous put forth their hands unto iniquity."
+    },
+    {
+     "v": 4,
+     "text": "Do good, O LORD, unto those that be good, and to them that are upright in their hearts."
+    },
+    {
+     "v": 5,
+     "text": "As for such as turn aside unto their crooked ways, the LORD shall lead them forth with the workers of iniquity: but peace shall be upon Israel."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Those who trust the Lord are like mount Zion, which cannot be moved. A mountain does not move in the wind. [pause 20]\n\nAs the mountains are round about Jerusalem. The city sat in a ring of hills. When you stood in its streets, you could see the mountains on every side. [pause 20]\n\nSo the Lord surrounds his people. On every side. Behind you. Ahead of you. Around this bed tonight. [pause 24]\n\nTwo companion passages. [pause 18]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 121:5-8",
+   "label": "Psalm 121:5-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "The LORD is thy keeper: the LORD is thy shade upon thy right hand."
+    },
+    {
+     "v": 6,
+     "text": "The sun shall not smite thee by day, nor the moon by night."
+    },
+    {
+     "v": 7,
+     "text": "The LORD shall preserve thee from all evil: he shall preserve thy soul."
+    },
+    {
+     "v": 8,
+     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "DEU 33:27",
+   "label": "Deuteronomy 33:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "The eternal God is thy refuge, and underneath are the everlasting arms: and he shall thrust out the enemy from before thee; and shall say, Destroy them."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "From Psalm 121, the Lord is your shade at your right hand. And from Deuteronomy, a verse many have leaned on. Underneath are the everlasting arms. [pause 22]\n\nUnderneath. As you lie down, you can picture that. Arms that hold you from below. [pause 22]\n\nHere is Psalm 125 again. Think of the mountains all around. [pause 24]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 125:1-5",
+   "label": "Psalm 125:1-5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees. They that trust in the LORD shall be as mount Zion, which cannot be removed, but abideth for ever."
+    },
+    {
+     "v": 2,
+     "text": "As the mountains are round about Jerusalem, so the LORD is round about his people from henceforth even for ever."
+    },
+    {
+     "v": 3,
+     "text": "For the rod of the wicked shall not rest upon the lot of the righteous; lest the righteous put forth their hands unto iniquity."
+    },
+    {
+     "v": 4,
+     "text": "Do good, O LORD, unto those that be good, and to them that are upright in their hearts."
+    },
+    {
+     "v": 5,
+     "text": "As for such as turn aside unto their crooked ways, the LORD shall lead them forth with the workers of iniquity: but peace shall be upon Israel."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "We will stop here. [pause 8]\n\nLet the room be dark and still around you. Let the pillow be cool. [pause 10]\n\nYou have read his words tonight. You can stop thinking about them now and simply rest in them. [pause 12]\n\nEvery part of you that is tired, let it be tired. You do not have to be strong right now. [pause 15]\n\nHe is awake, so you can sleep. [pause 15]\n\nLet the last words you heard tonight be the ones that stay. Let the rest drift away. [pause 20]\n\nIt is all right to stop now. [pause 20]\n\nRest well. [pause 45]"
+  }
+ ],
+ "words": 572,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 815,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only. Each night keeps its psalm's own point (contentment, tasting God's goodness, remembering benefits, night watches, honest sadness, the higher rock, longing for God's house, our short days, return to rest, surrounded like Jerusalem). Psalm 103's 'healeth' told as memory of who God has been, not a promise; Psalm 42 points a long sadness to a pastor, a doctor or a friend; no sleep or safety promise in the new rests."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

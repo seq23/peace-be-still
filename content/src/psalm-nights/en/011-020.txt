@@ -1,0 +1,181 @@
+# Psalm Nights 11-20 (English, KJV). Written by Claude (no free-model draft), with Claude's pastor and cultural read. New shared rests: _rest4, _rest5.
+
+=== _rest4
+text: Let the reading end here. [pause 8]
+text: Turn a little, if you want to, until your body finds the place it likes. [pause 10]
+text: There is nothing you need to remember. Nothing you need to say back. [pause 12]
+text: If someone you love is far away tonight, you can leave them in God's hands too. [pause 15]
+text: Breathe out slowly. Then again. [pause 20]
+text: The night is held. You are held. [pause 20]
+text: Sleep well. [pause 45]
+
+=== _rest5
+text: That is all for tonight. [pause 8]
+text: Let the quiet come in like a tide. Slowly. No hurry. [pause 12]
+text: Your work is done for today. What is left can wait for the light. [pause 12]
+text: If you are still awake a while, that is all right. Lie still and let the words you heard be near you. [pause 15]
+text: He knows your name. He knows this night. [pause 20]
+text: Rest. [pause 45]
+
+=== pn-11-psalm-16 | Psalm 16: The Path of Life
+main: PSA 16:1-11
+companions: PSA 4:8; PSA 73:25-26
+welcome: Hello, and welcome to Psalm Nights. [pause 7]
+welcome: Let your body sink into the bed. Let your feet be warm. [pause 10]
+welcome: Tonight's psalm is Psalm 16. It is a psalm of contentment. Of someone who looks at their life and says, the lines have fallen for me in pleasant places. [pause 9]
+welcome: We will read it twice, slowly. [pause 12]
+reflect1: Preserve me, O God. The psalm begins with a short prayer. Keep me. [pause 10]
+reflect1: In the middle there is a line about the night. My reins instruct me, in the night seasons. The old word reins means the deep places inside. Even at night, God is teaching the heart. [pause 10]
+reflect1: Pleasant places, the psalm says. In those days the land was measured out with lines. The psalmist looks at his portion and is glad. Not because it is the biggest. Because the Lord is in it. [pause 12]
+reflect1: And at the end, fulness of joy, in his presence. [pause 14]
+reflect1: Two companion passages. [pause 8]
+reflect2: The first is the evening verse we often return to. Peace, lying down, sleep. [pause 10]
+reflect2: The second is from Psalm 73. My flesh and my heart may fail. God is the strength of my heart. When your body is tired and your heart is worn, he is still your portion. [pause 12]
+reflect2: Here is Psalm 16 again. Listen for the pleasant places. [pause 14]
+rest: rest4
+
+=== pn-12-psalm-34 | Psalm 34: Taste and See
+main: PSA 34:1-10
+companions: PSA 34:17-18
+welcome: Welcome to Psalm Nights. [pause 16]
+welcome: Let the lights go down. Let your shoulders go down with them. [pause 19]
+welcome: Tonight we read the first part of Psalm 34. David wrote it after a frightening escape, when he had to pretend to be out of his mind to get away. And afterward, he sang. [pause 18]
+welcome: We will read it twice. [pause 21]
+reflect1: Bless the Lord, at all times. At all times. Not only when the day went well. [pause 19]
+reflect1: He sought the Lord, and was heard. David is not giving a lecture here. He is telling what happened to him. I looked for God, and God answered. [pause 19]
+reflect1: The angel of the Lord encamps around those who fear him. Encamps. Like a tent pitched around you for the night. [pause 19]
+reflect1: O taste and see. Faith is not only something you think. It is something you can taste, like bread, like water when you are thirsty. [pause 23]
+reflect1: Two more verses from later in the same psalm. [pause 17]
+reflect2: Near to the brokenhearted. If your heart is broken tonight, he is not far. He is nearer than you think. [pause 21]
+reflect2: Here is the beginning of Psalm 34 again. Let it taste like something good. [pause 23]
+rest: rest5
+
+=== pn-13-psalm-103 | Psalm 103: Bless the Lord, O My Soul
+main: PSA 103:1-14
+companions: LAM 3:22-23
+welcome: Hello. This is Psalm Nights. [pause 7]
+welcome: Settle in. Let your breath slow. [pause 10]
+welcome: Tonight we read Psalm 103, the first fourteen verses. It is a psalm where a man talks to his own soul and reminds it of everything God has done. [pause 9]
+welcome: We will read it slowly, and then once more. [pause 12]
+reflect1: Bless the Lord, O my soul. Sometimes we have to speak to our own soul. Remind it. Forget not all his benefits. [pause 10]
+reflect1: The psalm makes a list. He forgives. He heals. He redeems. He crowns with lovingkindness. These are not promises about tomorrow. They are a memory of who God has been. [pause 12]
+reflect1: Then comes a picture of distance. East from west, that is how far he has carried our sins away. You cannot walk to where the east ends. [pause 10]
+reflect1: And the last verse tonight is very gentle. He knoweth our frame. He remembers that we are dust. He knows how tired you are. He is not surprised. [pause 14]
+reflect1: A companion passage from Lamentations. [pause 8]
+reflect2: His compassions fail not. They are new every morning. Whatever was used up today, there will be new mercy when you wake. [pause 12]
+reflect2: Here is Psalm 103 again. Let your soul listen. [pause 14]
+rest: rest1
+
+=== pn-14-psalm-63 | Psalm 63: In the Night Watches
+main: PSA 63:1-8
+companions: PSA 42:8; PSA 119:148
+welcome: Welcome to Psalm Nights. [pause 10]
+welcome: Find a comfortable way to lie. Let the pillow hold your head. [pause 14]
+welcome: Tonight's psalm is Psalm 63. David wrote it in the wilderness of Judah, in a dry land with no water. And in that dry place he wrote about lying awake at night, thinking of God. [pause 12]
+welcome: If you are awake tonight, this one is for you. We will read it twice. [pause 16]
+reflect1: O God, thou art my God. The psalm does not start with a request. It starts with a name. My God. [pause 14]
+reflect1: My soul thirsteth for thee. In a dry land, where no water is. Some nights feel like that. Dry. Empty. Far from what you need. [pause 14]
+reflect1: Then verse six. Remembering God upon his bed, thinking of him through the night watches. A night watch was a part of the night, the way a guard counted the hours. David spent his sleepless hours remembering God. [pause 16]
+reflect1: And joy, under the shadow of his wings. [pause 18]
+reflect1: Two short companion verses about the night. [pause 12]
+reflect2: His song, in the night. A song in the night. [pause 14]
+reflect2: Mine eyes prevent the night watches. That means my eyes are open before the watchman calls, so I can think on your word. If you cannot sleep, you can still rest your mind on him. [pause 16]
+reflect2: Here is Psalm 63 again. If your eyes are open, let the words be your night watch. [pause 18]
+rest: rest2
+
+=== pn-15-psalm-42 | Psalm 42: As the Hart Panteth
+main: PSA 42:1-11
+companions: PSA 43:5
+welcome: Hello, and welcome to Psalm Nights. [pause 3]
+welcome: Let yourself be still. You do not have to feel any particular way tonight. [pause 6]
+welcome: Tonight we read Psalm 42. It is a psalm for low nights. The writer is far from home, sad, and honest about it. He talks to his own soul and asks it why it is so cast down. [pause 5]
+welcome: We will read it twice. [pause 8]
+reflect1: The hart, panting for the water brooks. A deer, tired and thirsty, looking for a stream. That is what longing for God can feel like. [pause 6]
+reflect1: Tears, day and night, for food. There is no pretending here. Some seasons, tears are what you live on. The Bible makes room for that. [pause 8]
+reflect1: Then the question, twice. Why so cast down, my soul? And the answer, twice. Hope thou in God. Not because the sadness is gone. Because God is still God. [pause 8]
+reflect1: Verse eight is for tonight. His song is with me in the night. [pause 10]
+reflect1: One companion verse, from the next psalm. [pause 4]
+reflect2: Psalm 43 ends with the same words. As if the writer had to say it to himself again and again. Hope in God. I shall yet praise him. [pause 8]
+reflect2: If you are low tonight, you do not have to feel better before you rest. And if the sadness stays for many days, tell someone. A pastor, a doctor, a friend. That is part of hoping too. [pause 8]
+reflect2: Here is Psalm 42 again. [pause 10]
+rest: rest3
+
+=== pn-16-psalm-61 | Psalm 61: The Rock That Is Higher Than I
+main: PSA 61:1-8
+companions: PSA 18:2; ISA 32:2
+welcome: Welcome to Psalm Nights. [pause 18]
+welcome: Pull the covers close. Let your breathing be slow and easy. [pause 21]
+welcome: Tonight's psalm is Psalm 61. It is a prayer from the ends of the earth, from someone who feels far away and overwhelmed. [pause 20]
+welcome: We will read it twice. [pause 23]
+reflect1: Crying out from the end of the earth. Wherever you are tonight, however far you feel, it is not too far to pray from. [pause 21]
+reflect1: When my heart is overwhelmed. Some nights the heart is simply too full. Then the prayer is short. Lead me to the higher rock. [pause 21]
+reflect1: A rock higher than you. Higher than your worry. Higher than your understanding. Somewhere to stand above the water. [pause 21]
+reflect1: And the shelter of his wings again. A tent. A strong tower. [pause 25]
+reflect1: Two companion passages. [pause 19]
+reflect2: Psalm 18 calls God a rock, a fortress, and a high tower. Isaiah pictures a hiding place from the wind, and the shade of a great rock when the land is tired and dry. [pause 23]
+reflect2: Here is Psalm 61 again. Let your heart be led to the rock. [pause 25]
+rest: rest4
+
+=== pn-17-psalm-84 | Psalm 84: How Amiable Are Thy Tabernacles
+main: PSA 84:1-12
+companions: PSA 27:4
+welcome: Hello. This is Psalm Nights. [pause 9]
+welcome: Let the day go. Let the room be dim and soft. [pause 12]
+welcome: Tonight we read Psalm 84. It is a song of longing for the house of God. Of pilgrims on the road, and of a small bird that found a home near the altar. [pause 11]
+welcome: We will read it twice, slowly. [pause 14]
+reflect1: How amiable are thy tabernacles. How lovely is the place where you are. The psalmist misses it the way you miss home. [pause 12]
+reflect1: Yea, the sparrow hath found an house. A tiny bird, building her nest in the courts of God. If there is room for a sparrow, there is room for you. [pause 14]
+reflect1: The pilgrims pass through the valley of Baca, a valley of weeping, and make it a well. They go from strength to strength. [pause 12]
+reflect1: One day in his courts, better than a thousand. One day near God is worth more than a thousand anywhere else. [pause 16]
+reflect1: One companion verse. [pause 10]
+reflect2: One thing have I desired. The same longing, in another psalm. To dwell in the house of the Lord, and behold his beauty. [pause 14]
+reflect2: Here is Psalm 84 again. Think of the sparrow and her nest. [pause 16]
+rest: rest5
+
+=== pn-18-psalm-90 | Psalm 90: Our Dwelling Place
+main: PSA 90:1-12
+companions: PSA 90:14; PSA 90:17
+welcome: Welcome to Psalm Nights. [pause 3]
+welcome: Let your body be heavy. Let your hands rest. [pause 6]
+welcome: Tonight's psalm is Psalm 90. Its heading calls it a prayer of Moses. It is the oldest voice in the Psalms, and it speaks about time. Our short days, and God who is from everlasting to everlasting. [pause 5]
+welcome: We will read it twice. [pause 8]
+reflect1: Our dwelling place, in every generation. Before your grandparents. Before their grandparents. God has been home to his people all along. [pause 6]
+reflect1: A thousand years to God are like yesterday, like a watch in the night. A watch in the night. To God, all of history is like a few hours of the dark. [pause 8]
+reflect1: The psalm is honest about how short life is. Like grass in the morning, gone by evening. And so it asks for wisdom. Teach us to number our days. [pause 8]
+reflect1: Two more lines from the end of the psalm. [pause 4]
+reflect2: Satisfy us early with thy mercy. A prayer for the morning. [pause 6]
+reflect2: And establish the work of our hands. Whatever you did today, small or large, you can ask God to make it count. [pause 8]
+reflect2: Here is Psalm 90 again. Let the long time of God hold your short night. [pause 10]
+rest: rest1
+
+=== pn-19-psalm-116 | Psalm 116: Return unto Thy Rest
+main: PSA 116:1-9
+companions: PSA 4:8; MAT 11:28
+welcome: Hello, and welcome to Psalm Nights. [pause 17]
+welcome: Lie back. Let the bed take your weight. [pause 20]
+welcome: Tonight we read the first part of Psalm 116. It was written by someone who had come very close to death, and was brought back. It is a thank you. [pause 19]
+welcome: We will read it twice. [pause 22]
+reflect1: Love for the Lord, because he heard. The reason is simple. He heard me. [pause 20]
+reflect1: He inclined his ear. Picture someone bending down close so they can hear you whisper. That is the word. [pause 20]
+reflect1: The psalm remembers the sorrows, the trouble, the fear. And then it says, gracious is the Lord. [pause 20]
+reflect1: Then verse seven. Return unto thy rest, O my soul. The psalmist speaks to himself, like calling a child back to bed. Come back to rest. [pause 24]
+reflect1: Two companion verses. [pause 18]
+reflect2: Peace. Lie down. Sleep. And the words of Jesus, inviting the weary to come and rest. [pause 22]
+reflect2: Here is Psalm 116 again. When you hear verse seven, say it to your own soul. [pause 24]
+rest: rest2
+
+=== pn-20-psalm-125 | Psalm 125: As the Mountains Are Round About
+main: PSA 125:1-5
+companions: PSA 121:5-8; DEU 33:27
+welcome: Welcome to Psalm Nights. [pause 17]
+welcome: Find your place. Let the covers settle over you. [pause 20]
+welcome: Tonight's psalm is Psalm 125. It is short, one of the songs pilgrims sang on the way to Jerusalem. It is a psalm about mountains, and about being surrounded. [pause 19]
+welcome: We will read it slowly, and then again. [pause 22]
+reflect1: Those who trust the Lord are like mount Zion, which cannot be moved. A mountain does not move in the wind. [pause 20]
+reflect1: As the mountains are round about Jerusalem. The city sat in a ring of hills. When you stood in its streets, you could see the mountains on every side. [pause 20]
+reflect1: So the Lord surrounds his people. On every side. Behind you. Ahead of you. Around this bed tonight. [pause 24]
+reflect1: Two companion passages. [pause 18]
+reflect2: From Psalm 121, the Lord is your shade at your right hand. And from Deuteronomy, a verse many have leaned on. Underneath are the everlasting arms. [pause 22]
+reflect2: Underneath. As you lie down, you can picture that. Arms that hold you from below. [pause 22]
+reflect2: Here is Psalm 125 again. Think of the mountains all around. [pause 24]
+rest: rest3

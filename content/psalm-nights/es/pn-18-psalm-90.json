@@ -1,0 +1,230 @@
+{
+ "id": "pn-18-psalm-90",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 90: Nuestro refugio",
+ "main": [
+  "PSA 90:1-12"
+ ],
+ "companions": [
+  "PSA 90:14",
+  "PSA 90:17"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 8]\n\nDeja que tu cuerpo se ponga pesado. Que tus manos descansen. [pause 11]\n\nEl salmo de esta noche es el Salmo noventa. El título dice que es una oración de Moisés. Es la voz más antigua de los Salmos, y habla del tiempo. De nuestros días cortos, y de Dios, que es desde siempre y para siempre. [pause 10]\n\nLo vamos a leer dos veces. [pause 13]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 90:1-12",
+   "label": "Salmos 90:1-12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Oración de Moisés varón de Dios. SEÑOR, tú nos has sido refugio en generación y en generación."
+    },
+    {
+     "v": 2,
+     "text": "Antes que naciesen los montes, y formases la tierra y el mundo, y desde el siglo y hasta el siglo, tú eres Dios."
+    },
+    {
+     "v": 3,
+     "text": "Vuelves al hombre hasta ser quebrantado, y dices: Convertíos, hijos de los hombres."
+    },
+    {
+     "v": 4,
+     "text": "Porque mil años delante de tus ojos, son como el día de ayer, que pasó, y como una de las vigilias de la noche."
+    },
+    {
+     "v": 5,
+     "text": "Háceslos pasar como avenida de aguas; son como sueño; como la hierba que crece en la mañana:"
+    },
+    {
+     "v": 6,
+     "text": "En la mañana florece y crece; á la tarde es cortada, y se seca."
+    },
+    {
+     "v": 7,
+     "text": "Porque con tu furor somos consumidos, y con tu ira somos conturbados."
+    },
+    {
+     "v": 8,
+     "text": "Pusiste nuestras maldades delante de ti, nuestros yerros á la luz de tu rostro."
+    },
+    {
+     "v": 9,
+     "text": "Porque todos nuestros días declinan á causa de tu ira; acabamos nuestros años como un pensamiento."
+    },
+    {
+     "v": 10,
+     "text": "Los días de nuestra edad son setenta años; que si en los más robustos son ochenta años, con todo su fortaleza es molestia y trabajo; porque es cortado presto, y volamos."
+    },
+    {
+     "v": 11,
+     "text": "¿Quién conoce la fortaleza de tu ira, y tu indignación según que debes ser temido?"
+    },
+    {
+     "v": 12,
+     "text": "Enséñanos de tal modo á contar nuestros días, que traigamos al corazón sabiduría."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Señor, tú nos has sido refugio de generación en generación. Antes de tus abuelos. Antes de los abuelos de ellos. Dios ha sido el hogar de su pueblo todo el tiempo. [pause 11]\n\nMil años para Dios son como el día de ayer, como una vela de la noche. Una vela de la noche. Para Dios, toda la historia es como unas pocas horas de la oscuridad. [pause 13]\n\nEl salmo es honesto sobre lo corta que es la vida. Como la hierba en la mañana, que en la tarde ya se secó. Y por eso pide sabiduría. Enséñanos a contar nuestros días. [pause 13]\n\nDos líneas más, del final del salmo. [pause 9]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 90:14",
+   "label": "Salmos 90:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Sácianos presto de tu misericordia: y cantaremos y nos alegraremos todos nuestros días."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 90:17",
+   "label": "Salmos 90:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Y sea la luz de Jehová nuestro Dios sobre nosotros: y ordena en nosotros la obra de nuestras manos, la obra de nuestras manos confirma."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Sácianos de mañana con tu misericordia. Una oración para la mañana. [pause 11]\n\nY la obra de nuestras manos, confírmala. Lo que hayas hecho hoy, pequeño o grande, puedes pedirle a Dios que cuente. [pause 13]\n\nAquí está el Salmo noventa otra vez. Que el tiempo largo de Dios sostenga tu noche corta. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 90:1-12",
+   "label": "Salmos 90:1-12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Oración de Moisés varón de Dios. SEÑOR, tú nos has sido refugio en generación y en generación."
+    },
+    {
+     "v": 2,
+     "text": "Antes que naciesen los montes, y formases la tierra y el mundo, y desde el siglo y hasta el siglo, tú eres Dios."
+    },
+    {
+     "v": 3,
+     "text": "Vuelves al hombre hasta ser quebrantado, y dices: Convertíos, hijos de los hombres."
+    },
+    {
+     "v": 4,
+     "text": "Porque mil años delante de tus ojos, son como el día de ayer, que pasó, y como una de las vigilias de la noche."
+    },
+    {
+     "v": 5,
+     "text": "Háceslos pasar como avenida de aguas; son como sueño; como la hierba que crece en la mañana:"
+    },
+    {
+     "v": 6,
+     "text": "En la mañana florece y crece; á la tarde es cortada, y se seca."
+    },
+    {
+     "v": 7,
+     "text": "Porque con tu furor somos consumidos, y con tu ira somos conturbados."
+    },
+    {
+     "v": 8,
+     "text": "Pusiste nuestras maldades delante de ti, nuestros yerros á la luz de tu rostro."
+    },
+    {
+     "v": 9,
+     "text": "Porque todos nuestros días declinan á causa de tu ira; acabamos nuestros años como un pensamiento."
+    },
+    {
+     "v": 10,
+     "text": "Los días de nuestra edad son setenta años; que si en los más robustos son ochenta años, con todo su fortaleza es molestia y trabajo; porque es cortado presto, y volamos."
+    },
+    {
+     "v": 11,
+     "text": "¿Quién conoce la fortaleza de tu ira, y tu indignación según que debes ser temido?"
+    },
+    {
+     "v": 12,
+     "text": "Enséñanos de tal modo á contar nuestros días, que traigamos al corazón sabiduría."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ahora deja que las palabras se queden en silencio. [pause 8]\n\nNo tienes que sostenerlas. Mañana van a seguir ahí. [pause 10]\n\nSuelta los hombros. Abre las manos. Deja que la cama cargue tu peso. [pause 12]\n\nSi vuelve una preocupación, puedes entregarla otra vez. Las veces que haga falta. [pause 12]\n\nSiente la calma del cuarto. Los ruidos pequeños. La oscuridad. Aquí no se te pide nada. [pause 20]\n\nLa noche es larga y tranquila, y no estás solo en ella. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 754,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 817,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

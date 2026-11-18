@@ -1,0 +1,204 @@
+{
+ "id": "pn-12-psalm-34",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 34: Prueben y vean",
+ "main": [
+  "PSA 34:1-10"
+ ],
+ "companions": [
+  "PSA 34:17-18"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 19]\n\nQue bajen las luces. Y que bajen los hombros también. [pause 22]\n\nEsta noche leemos la primera parte del Salmo treinta y cuatro. David lo escribió después de escapar de un gran peligro, cuando tuvo que fingirse loco para salvar su vida. Y después, cantó. [pause 21]\n\nLo vamos a leer dos veces. [pause 24]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 34:1-10",
+   "label": "Salmos 34:1-10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David, cuando mudó su semblante delante de Abimelech, y él lo echó, y fuése. BENDECIRÉ á Jehová en todo tiempo; su alabanza será siempre en mi boca."
+    },
+    {
+     "v": 2,
+     "text": "En Jehová se gloriará mi alma: oiránlo los mansos, y se alegrarán."
+    },
+    {
+     "v": 3,
+     "text": "Engrandeced á Jehová conmigo, y ensalcemos su nombre á una."
+    },
+    {
+     "v": 4,
+     "text": "Busqué á Jehová, y él me oyó, y libróme de todos mis temores."
+    },
+    {
+     "v": 5,
+     "text": "A él miraron y fueron alumbrados: y sus rostros no se avergonzaron."
+    },
+    {
+     "v": 6,
+     "text": "Este pobre clamó, y oyóle Jehová, y librólo de todas sus angustias."
+    },
+    {
+     "v": 7,
+     "text": "El ángel de Jehová acampa en derredor de los que le temen, y los defiende."
+    },
+    {
+     "v": 8,
+     "text": "Gustad, y ved que es bueno Jehová: dichoso el hombre que confiará en él."
+    },
+    {
+     "v": 9,
+     "text": "Temed á Jehová, vosotros sus santos; porque no hay falta para los que le temen."
+    },
+    {
+     "v": 10,
+     "text": "Los leoncillos necesitaron, y tuvieron hambre; pero los que buscan á Jehová, no tendrán falta de ningún bien."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Bendecir al Señor en todo tiempo. En todo tiempo. No solo cuando el día salió bien. [pause 22]\n\nBusqué al Señor, y él me oyó. David no está dando una clase. Está contando lo que le pasó. Busqué a Dios, y Dios me respondió. [pause 22]\n\nEl ángel del Señor acampa alrededor de los que le temen. Acampa. Como una tienda levantada a tu alrededor para pasar la noche. [pause 22]\n\nPrueben y vean. La fe no es solo algo que se piensa. Es algo que se prueba, como el pan, como el agua cuando tienes sed. [pause 25]\n\nDos versículos más, del mismo salmo. [pause 20]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 34:17-18",
+   "label": "Salmos 34:17-18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Clamaron los justos, y Jehová oyó, y librólos de todas sus angustias."
+    },
+    {
+     "v": 18,
+     "text": "Cercano está Jehová á los quebrantados de corazón; y salvará á los contritos de espíritu."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Cercano está el Señor a los quebrantados de corazón. Si esta noche tienes el corazón roto, él no está lejos. Está más cerca de lo que piensas. [pause 24]\n\nAquí está el principio del Salmo treinta y cuatro otra vez. Que sepa a algo bueno. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 34:1-10",
+   "label": "Salmos 34:1-10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David, cuando mudó su semblante delante de Abimelech, y él lo echó, y fuése. BENDECIRÉ á Jehová en todo tiempo; su alabanza será siempre en mi boca."
+    },
+    {
+     "v": 2,
+     "text": "En Jehová se gloriará mi alma: oiránlo los mansos, y se alegrarán."
+    },
+    {
+     "v": 3,
+     "text": "Engrandeced á Jehová conmigo, y ensalcemos su nombre á una."
+    },
+    {
+     "v": 4,
+     "text": "Busqué á Jehová, y él me oyó, y libróme de todos mis temores."
+    },
+    {
+     "v": 5,
+     "text": "A él miraron y fueron alumbrados: y sus rostros no se avergonzaron."
+    },
+    {
+     "v": 6,
+     "text": "Este pobre clamó, y oyóle Jehová, y librólo de todas sus angustias."
+    },
+    {
+     "v": 7,
+     "text": "El ángel de Jehová acampa en derredor de los que le temen, y los defiende."
+    },
+    {
+     "v": 8,
+     "text": "Gustad, y ved que es bueno Jehová: dichoso el hombre que confiará en él."
+    },
+    {
+     "v": 9,
+     "text": "Temed á Jehová, vosotros sus santos; porque no hay falta para los que le temen."
+    },
+    {
+     "v": 10,
+     "text": "Los leoncillos necesitaron, y tuvieron hambre; pero los que buscan á Jehová, no tendrán falta de ningún bien."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Eso es todo por esta noche. [pause 8]\n\nDeja que la calma llegue como la marea. Despacio. Sin prisa. [pause 12]\n\nTu trabajo de hoy ya terminó. Lo que falta puede esperar a que salga el sol. [pause 12]\n\nSi todavía te quedas despierto un rato, está bien. Quédate quieto y deja que las palabras que oíste se queden cerca. [pause 15]\n\nÉl sabe tu nombre. Él conoce esta noche. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 588,
+ "rest_part": "rest5",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 812,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

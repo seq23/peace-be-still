@@ -1,0 +1,216 @@
+{
+ "id": "pn-17-psalm-84",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 84: Cuán amables son tus moradas",
+ "main": [
+  "PSA 84:1-12"
+ ],
+ "companions": [
+  "PSA 27:4"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola. Esta es una noche de Salmos. [pause 12]\n\nDeja ir el día. Que el cuarto esté oscuro y suave. [pause 15]\n\nEsta noche leemos el Salmo ochenta y cuatro. Es un canto de anhelo por la casa de Dios. De peregrinos en el camino, y de un pajarito que encontró casa cerca del altar. [pause 14]\n\nLo vamos a leer dos veces, despacio. [pause 17]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 84:1-12",
+   "label": "Salmos 84:1-12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: sobre Gittith: Salmo para los hijos de Coré. ¡CUÁN amables son tus moradas, oh Jehová de los ejércitos!"
+    },
+    {
+     "v": 2,
+     "text": "Codicia y aun ardientemente desea mi alma los atrios de Jehová: mi corazón y mi carne cantan al Dios vivo."
+    },
+    {
+     "v": 3,
+     "text": "Aun el gorrión halla casa, y la golondrina nido para sí, donde ponga sus pollos en tus altares, oh Jehová de los ejércitos, rey mío, y Dios mío."
+    },
+    {
+     "v": 4,
+     "text": "Bienaventurados los que habitan en tu casa: perpetuamente te alabarán. (Selah.)"
+    },
+    {
+     "v": 5,
+     "text": "Bienaventurado el hombre que tiene su fortaleza en ti; en cuyo corazón están tus caminos."
+    },
+    {
+     "v": 6,
+     "text": "Atravesando el valle de Baca pónenle por fuente, cuando la lluvia llena los estanques."
+    },
+    {
+     "v": 7,
+     "text": "Irán de fortaleza en fortaleza, verán á Dios en Sión."
+    },
+    {
+     "v": 8,
+     "text": "Jehová Dios de los ejércitos, oye mi oración: escucha, oh Dios de Jacob. (Selah.)"
+    },
+    {
+     "v": 9,
+     "text": "Mira, oh Dios, escudo nuestro, y pon los ojos en el rostro de tu ungido."
+    },
+    {
+     "v": 10,
+     "text": "Porque mejor es un día en tus atrios que mil fuera de ellos: escogería antes estar á la puerta de la casa de mi Dios, que habitar en las moradas de maldad."
+    },
+    {
+     "v": 11,
+     "text": "Porque sol y escudo es Jehová Dios: gracia y gloria dará Jehová: no quitará el bien á los que en integridad andan."
+    },
+    {
+     "v": 12,
+     "text": "Jehová de los ejércitos, dichoso el hombre que en ti confía."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Cuán amables son tus moradas. Qué hermoso es el lugar donde tú estás. El salmista lo extraña como uno extraña su casa. [pause 15]\n\nAun el gorrión halla casa. Un pajarito haciendo su nido en los atrios de Dios. Si hay lugar para un gorrión, hay lugar para ti. [pause 17]\n\nLos peregrinos pasan por el valle de lágrimas y lo convierten en fuente. Van de poder en poder. [pause 15]\n\nMejor es un día en sus atrios que mil fuera. Un día cerca de Dios vale más que mil en cualquier otro lugar. [pause 19]\n\nUn versículo para acompañarlo. [pause 13]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 27:4",
+   "label": "Salmos 27:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Una cosa he demandado á Jehová, ésta buscaré: que esté yo en la casa de Jehová todos los días de mi vida, para contemplar la hermosura de Jehová, y para inquirir en su templo."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Una cosa he pedido. El mismo anhelo, en otro salmo. Estar en la casa del Señor, y contemplar su hermosura. [pause 17]\n\nAquí está el Salmo ochenta y cuatro otra vez. Piensa en el gorrión y su nido. [pause 19]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 84:1-12",
+   "label": "Salmos 84:1-12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: sobre Gittith: Salmo para los hijos de Coré. ¡CUÁN amables son tus moradas, oh Jehová de los ejércitos!"
+    },
+    {
+     "v": 2,
+     "text": "Codicia y aun ardientemente desea mi alma los atrios de Jehová: mi corazón y mi carne cantan al Dios vivo."
+    },
+    {
+     "v": 3,
+     "text": "Aun el gorrión halla casa, y la golondrina nido para sí, donde ponga sus pollos en tus altares, oh Jehová de los ejércitos, rey mío, y Dios mío."
+    },
+    {
+     "v": 4,
+     "text": "Bienaventurados los que habitan en tu casa: perpetuamente te alabarán. (Selah.)"
+    },
+    {
+     "v": 5,
+     "text": "Bienaventurado el hombre que tiene su fortaleza en ti; en cuyo corazón están tus caminos."
+    },
+    {
+     "v": 6,
+     "text": "Atravesando el valle de Baca pónenle por fuente, cuando la lluvia llena los estanques."
+    },
+    {
+     "v": 7,
+     "text": "Irán de fortaleza en fortaleza, verán á Dios en Sión."
+    },
+    {
+     "v": 8,
+     "text": "Jehová Dios de los ejércitos, oye mi oración: escucha, oh Dios de Jacob. (Selah.)"
+    },
+    {
+     "v": 9,
+     "text": "Mira, oh Dios, escudo nuestro, y pon los ojos en el rostro de tu ungido."
+    },
+    {
+     "v": 10,
+     "text": "Porque mejor es un día en tus atrios que mil fuera de ellos: escogería antes estar á la puerta de la casa de mi Dios, que habitar en las moradas de maldad."
+    },
+    {
+     "v": 11,
+     "text": "Porque sol y escudo es Jehová Dios: gracia y gloria dará Jehová: no quitará el bien á los que en integridad andan."
+    },
+    {
+     "v": 12,
+     "text": "Jehová de los ejércitos, dichoso el hombre que en ti confía."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Eso es todo por esta noche. [pause 8]\n\nDeja que la calma llegue como la marea. Despacio. Sin prisa. [pause 12]\n\nTu trabajo de hoy ya terminó. Lo que falta puede esperar a que salga el sol. [pause 12]\n\nSi todavía te quedas despierto un rato, está bien. Quédate quieto y deja que las palabras que oíste se queden cerca. [pause 15]\n\nÉl sabe tu nombre. Él conoce esta noche. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 709,
+ "rest_part": "rest5",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 816,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
