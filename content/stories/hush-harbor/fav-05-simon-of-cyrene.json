@@ -1,0 +1,232 @@
+{
+ "id": "fav-05-simon-of-cyrene",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Simon of Cyrene Carries the Cross",
+ "passage": {
+  "refs": [
+   "MAR 15:20-22",
+   "LUK 23:26-27"
+  ],
+  "label": "Mark 15:20-22; Luke 23:26-27"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, it was the morning of the cross. Jesus had been beaten. The soldiers had mocked him, put a purple robe on him and a crown of thorns on his head, and bowed down in front of him laughing."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 15:20",
+   "label": "Mark 15:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And when they had mocked him, they took off the purple from him, and put his own clothes on him, and led him out to crucify him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And when they had mocked him, they took off the purple from him, and put his own clothes on him, and led him out to crucify him."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he carried it. [PAUSE 3s | screen: \"He carried it\"] He carried it. [PAUSE 3s | screen: \"He carried it\"] On that road, a stranger carried the cross behind Jesus.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He carried it"
+    },
+    {
+     "seconds": 3,
+     "screen": "He carried it"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus was so weak from the beating that he could not carry that heavy cross the whole way. So the soldiers looked around for somebody."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 15:21",
+   "label": "Mark 15:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And they compel one Simon a Cyrenian, who passed by, coming out of the country, the father of Alexander and Rufus, to bear his cross."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And they compel one Simon a Cyrenian, who passed by, coming out of the country, the father of Alexander and Rufus, to bear his cross."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Simon was from Cyrene, a city on the coast of North Africa. He had come a long way, maybe for the Passover. He was just coming in from the country. He was not looking for trouble. And Roman soldiers grabbed him off the road and put the cross on his back."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:26",
+   "label": "Luke 23:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And as they led him away, they laid hold upon one Simon, a Cyrenian, coming out of the country, and on him they laid the cross, that he might bear it after Jesus."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And as they led him away, they laid hold upon one Simon, a Cyrenian, coming out of the country, and on him they laid the cross, that he might bear it after Jesus."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "After Jesus. Behind him. Simon walked in the very footsteps of the Lord, carrying the weight of his cross. Every step up that hill, he could see the back of the man the cross was meant for. Torn up, bleeding, still walking. Simon carried the wood, and Jesus carried everything else."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He did not volunteer. He was compelled. Church, some of us did not choose the cross we are carrying either. It got laid on us on an ordinary day while we were minding our business. But look who Simon was walking behind."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:27",
+   "label": "Luke 23:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And there followed him a great company of people, and of women, which also bewailed and lamented him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And there followed him a great company of people, and of women, which also bewailed and lamented him."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 15:22",
+   "label": "Mark 15:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And they bring him unto the place Golgotha, which is, being interpreted, The place of a skull."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And they bring him unto the place Golgotha, which is, being interpreted, The place of a skull."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mark tells us something Luke does not. Simon was the father of Alexander and Rufus. Mark names those boys like his readers already knew them. And Paul, writing to the church in Rome, sends greetings to a Rufus, chosen in the Lord, and to his mother, who had been like a mother to Paul too. Nobody can say for sure it is the same family. But it is worth wondering whether the man forced to carry the cross went home and told his boys about the one he carried it for."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The old hymn asks, must Jesus bear the cross alone, and all the world go free? And it answers, no, there is a cross for everyone. Simon of Cyrene, a man from Africa, was the first to carry it. Church, when your load is heavy, remember whose footsteps you are walking in. You are not carrying it alone. He went up that hill first."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 505,
+ "est_seconds": 281,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.9",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 15:20-22 and Luke 23:26-27; crucifixion morning tagged violence mild, no wound detail; Rufus of Rom 16:13 offered only as 'nobody can say for sure'; 'Must Jesus Bear the Cross Alone' is a public-domain hymn."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Simon shown from North Africa without any claim about his colour; compelled, not servile; 'he carried it' at the turn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

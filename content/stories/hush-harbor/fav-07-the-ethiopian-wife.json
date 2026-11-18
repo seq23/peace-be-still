@@ -1,0 +1,465 @@
+{
+ "id": "fav-07-the-ethiopian-wife",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Moses and the Ethiopian Woman",
+ "passage": {
+  "refs": [
+   "NUM 12:1-15"
+  ],
+  "label": "Numbers 12:1-15"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "siblings",
+   "name": "Miriam and Aaron",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "aaron",
+   "name": "Aaron",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "moses",
+   "name": "Moses",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:1",
+   "label": "Numbers 12:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And Miriam and Aaron spake against Moses because of the Ethiopian woman whom he had married: for he had married an Ethiopian woman."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And Miriam and Aaron spake against Moses because of the Ethiopian woman whom he had married: for he had married an Ethiopian woman."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, the LORD heard it. [PAUSE 3s | screen: \"The LORD heard it\"] The LORD heard it. [PAUSE 3s | screen: \"The LORD heard it\"] What they said about Moses and his wife did not stay between them.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "The LORD heard it"
+    },
+    {
+     "seconds": 3,
+     "screen": "The LORD heard it"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Moses had married an Ethiopian woman, a Cushite, from the land south of Egypt. And his own sister and brother started talking."
+  },
+  {
+   "type": "scripture",
+   "speaker": "siblings",
+   "ref": "NUM 12:2",
+   "label": "Numbers 12:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And they said, Hath the LORD indeed spoken only by Moses? hath he not spoken also by us? And the LORD heard it."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And they said,"
+    },
+    {
+     "v": 2,
+     "speaker": "siblings",
+     "text": "Hath the LORD indeed spoken only by Moses? hath he not spoken also by us?"
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And the LORD heard it."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look at that. They started with his wife, and then it turned into, who does he think he is? That is how it goes sometimes. Folks pick at the one he loves when what they really want is his place."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:3",
+   "label": "Numbers 12:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "(Now the man Moses was very meek, above all the men which were upon the face of the earth.)"
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "(Now the man Moses was very meek, above all the men which were upon the face of the earth.)"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:4",
+   "label": "Numbers 12:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And the LORD spake suddenly unto Moses, and unto Aaron, and unto Miriam, Come out ye three unto the tabernacle of the congregation. And they three came out."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And the LORD spake suddenly unto Moses, and unto Aaron, and unto Miriam, Come out ye three unto the tabernacle of the congregation. And they three came out."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:5",
+   "label": "Numbers 12:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And the LORD came down in the pillar of the cloud, and stood in the door of the tabernacle, and called Aaron and Miriam: and they both came forth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And the LORD came down in the pillar of the cloud, and stood in the door of the tabernacle, and called Aaron and Miriam: and they both came forth."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:6",
+   "label": "Numbers 12:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And he said, Hear now my words: If there be a prophet among you, I the LORD will make myself known unto him in a vision, and will speak unto him in a dream."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And he said, Hear now my words: If there be a prophet among you, I the LORD will make myself known unto him in a vision, and will speak unto him in a dream."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:7",
+   "label": "Numbers 12:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "My servant Moses is not so, who is faithful in all mine house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "My servant Moses is not so, who is faithful in all mine house."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:8",
+   "label": "Numbers 12:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "With him will I speak mouth to mouth, even apparently, and not in dark speeches; and the similitude of the LORD shall he behold: wherefore then were ye not afraid to speak against my servant Moses?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "With him will I speak mouth to mouth, even apparently, and not in dark speeches; and the similitude of the LORD shall he behold: wherefore then were ye not afraid to speak against my servant Moses?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God came down himself and stood up for Moses. Mouth to mouth, God said, I speak with him. Why were you not afraid to speak against my servant? And God never said one word against that Ethiopian woman. Not one."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:9",
+   "label": "Numbers 12:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And the anger of the LORD was kindled against them; and he departed."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And the anger of the LORD was kindled against them; and he departed."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:10",
+   "label": "Numbers 12:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And the cloud departed from off the tabernacle; and, behold, Miriam became leprous, white as snow: and Aaron looked upon Miriam, and, behold, she was leprous."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And the cloud departed from off the tabernacle; and, behold, Miriam became leprous, white as snow: and Aaron looked upon Miriam, and, behold, she was leprous."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "aaron",
+   "ref": "NUM 12:11",
+   "label": "Numbers 12:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And Aaron said unto Moses, Alas, my lord, I beseech thee, lay not the sin upon us, wherein we have done foolishly, and wherein we have sinned."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And Aaron said unto Moses,"
+    },
+    {
+     "v": 11,
+     "speaker": "aaron",
+     "text": "Alas, my lord, I beseech thee, lay not the sin upon us, wherein we have done foolishly, and wherein we have sinned."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "aaron",
+   "ref": "NUM 12:12",
+   "label": "Numbers 12:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Let her not be as one dead, of whom the flesh is half consumed when he cometh out of his mother’s womb."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "aaron",
+     "text": "Let her not be as one dead, of whom the flesh is half consumed when he cometh out of his mother’s womb."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And here is the meekness of Moses. His sister spoke against him and against his wife. And the first thing Moses did was pray for her."
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "NUM 12:13",
+   "label": "Numbers 12:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And Moses cried unto the LORD, saying, Heal her now, O God, I beseech thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And Moses cried unto the LORD, saying,"
+    },
+    {
+     "v": 13,
+     "speaker": "moses",
+     "text": "Heal her now, O God, I beseech thee."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:14",
+   "label": "Numbers 12:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And the LORD said unto Moses, If her father had but spit in her face, should she not be ashamed seven days? let her be shut out from the camp seven days, and after that let her be received in again."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And the LORD said unto Moses, If her father had but spit in her face, should she not be ashamed seven days? let her be shut out from the camp seven days, and after that let her be received in again."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 12:15",
+   "label": "Numbers 12:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And Miriam was shut out from the camp seven days: and the people journeyed not till Miriam was brought in again."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And Miriam was shut out from the camp seven days: and the people journeyed not till Miriam was brought in again."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The whole camp waited for her. Nobody moved on without Miriam. She was shut out seven days, and then she was brought back in."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, this story says two things plain. God does not take it lightly when folks speak against the ones he has chosen. And God did not see anything wrong with a man of God marrying a woman from Africa. The ones who had a problem with it were the ones who got corrected. And even then, the man they wronged prayed for their healing, and the camp waited until they could come home."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 623,
+ "est_seconds": 346,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.5",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Num 12:1-15; God's words read by the narrator; says only what the text says (God rebukes the speakers and says nothing against the wife); no reading of the leprosy as a racial sign."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The Cushite wife defended with dignity; Miriam not demonised, the camp waits for her; 'the LORD heard it' at the turn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

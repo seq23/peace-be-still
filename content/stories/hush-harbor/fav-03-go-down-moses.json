@@ -1,0 +1,300 @@
+{
+ "id": "fav-03-go-down-moses",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Let My People Go",
+ "passage": {
+  "refs": [
+   "EXO 5:1-2",
+   "EXO 7:14-16",
+   "EXO 12:31-32"
+  ],
+  "label": "Exodus 5:1-2; Exodus 7:14-16; Exodus 12:31-32"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "pharaoh",
+   "name": "Pharaoh",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, for four hundred years the children of Israel had been in Egypt. Pharaoh made them slaves. He worked them hard making bricks in the hot sun, and he set taskmasters over them to beat them. They cried out to God, and God heard them. He sent Moses, with his brother Aaron, to stand in front of the most powerful man in the world."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 5:1",
+   "label": "Exodus 5:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And afterward Moses and Aaron went in, and told Pharaoh, Thus saith the LORD God of Israel, Let my people go, that they may hold a feast unto me in the wilderness."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And afterward Moses and Aaron went in, and told Pharaoh, Thus saith the LORD God of Israel, Let my people go, that they may hold a feast unto me in the wilderness."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, let my people go. [PAUSE 3s | screen: \"Let my people go\"] Let my people go. [PAUSE 3s | screen: \"Let my people go\"] That was not Moses talking. That was God.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Let my people go"
+    },
+    {
+     "seconds": 3,
+     "screen": "Let my people go"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "pharaoh",
+   "ref": "EXO 5:2",
+   "label": "Exodus 5:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And Pharaoh said, Who is the LORD, that I should obey his voice to let Israel go? I know not the LORD, neither will I let Israel go."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And Pharaoh said,"
+    },
+    {
+     "v": 2,
+     "speaker": "pharaoh",
+     "text": "Who is the LORD, that I should obey his voice to let Israel go? I know not the LORD, neither will I let Israel go."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Who is the LORD? Pharaoh had never been told no. He had gods of his own and an army behind him. He did not know the God of a slave people, and he did not care to."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And it got worse before it got better. Pharaoh stopped giving them straw and still made them make the same number of bricks. The people were beaten when they came up short. Even the Hebrews turned on Moses. You have made us hated in Pharaoh's eyes, they said."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "But God was not done."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 7:14",
+   "label": "Exodus 7:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And the LORD said unto Moses, Pharaoh’s heart is hardened, he refuseth to let the people go."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And the LORD said unto Moses, Pharaoh’s heart is hardened, he refuseth to let the people go."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 7:15",
+   "label": "Exodus 7:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Get thee unto Pharaoh in the morning; lo, he goeth out unto the water; and thou shalt stand by the river’s brink against he come; and the rod which was turned to a serpent shalt thou take in thine hand."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Get thee unto Pharaoh in the morning; lo, he goeth out unto the water; and thou shalt stand by the river’s brink against he come; and the rod which was turned to a serpent shalt thou take in thine hand."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 7:16",
+   "label": "Exodus 7:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And thou shalt say unto him, The LORD God of the Hebrews hath sent me unto thee, saying, Let my people go, that they may serve me in the wilderness: and, behold, hitherto thou wouldest not hear."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And thou shalt say unto him, The LORD God of the Hebrews hath sent me unto thee, saying, Let my people go, that they may serve me in the wilderness: and, behold, hitherto thou wouldest not hear."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Go stand by the river in the morning and tell him again. God kept sending Moses back. Blood in the river. Frogs. Lice. Flies. Sickness on the cattle. Boils. Hail. Locusts. Darkness so thick you could feel it. Over and over Pharaoh said yes, and then went back on his word."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then came the night of the Passover. The people put the blood of a lamb on their doorposts and ate standing up, ready to go. And at midnight the firstborn of Egypt died, and there was a great cry in all the land."
+  },
+  {
+   "type": "scripture",
+   "speaker": "pharaoh",
+   "ref": "EXO 12:31",
+   "label": "Exodus 12:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And he called for Moses and Aaron by night, and said, Rise up, and get you forth from among my people, both ye and the children of Israel; and go, serve the LORD, as ye have said."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And he called for Moses and Aaron by night, and said,"
+    },
+    {
+     "v": 31,
+     "speaker": "pharaoh",
+     "text": "Rise up, and get you forth from among my people, both ye and the children of Israel; and go, serve the LORD, as ye have said."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "pharaoh",
+   "ref": "EXO 12:32",
+   "label": "Exodus 12:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Also take your flocks and your herds, as ye have said, and be gone; and bless me also."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "pharaoh",
+     "text": "Also take your flocks and your herds, as ye have said, and be gone; and bless me also."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The same man who said, who is the LORD, now said, go serve the LORD, and bless me too. Church, God knows how to make a hard heart open the door."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Enslaved Black folks in this country sang this story in the fields. Go down, Moses, way down in Egypt's land. They sang it under the eye of the overseer, and everybody singing knew what they meant. Pharaoh had a name, and so did freedom. The God who heard Israel's cry in Egypt is the God they trusted to hear theirs."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That song still belongs to the church. When it feels like the bricks are getting heavier and the straw is gone, remember. God heard the cry of a people in chains, and he did not forget them. He is still the God who says, let my people go."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 618,
+ "est_seconds": 343,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.1",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exod 5:1-2, 7:14-16, 12:31-32; God's word through Moses read by the narrator; the plagues and Passover told in order from Exod 5:6-12:30 without invented speech."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The freedom story told as enslaved Black Americans sang it ('Go Down, Moses', traditional), in the third person, never a narrator claiming 'our people'; Pharaoh not caricatured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

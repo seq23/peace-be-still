@@ -1,0 +1,419 @@
+{
+ "id": "fav-09-midnight-hymns",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Paul and Silas Sing at Midnight",
+ "passage": {
+  "refs": [
+   "ACT 16:22-34"
+  ],
+  "label": "Acts 16:22-34"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "paul",
+   "name": "Paul",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "keeper",
+   "name": "keeper of the prison",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Paul and Silas were in the city of Philippi, preaching Jesus. They set a young servant girl free from a spirit that had her telling fortunes, and the men who made money off her were furious. They dragged Paul and Silas into the marketplace in front of the rulers."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:22",
+   "label": "Acts 16:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And the multitude rose up together against them: and the magistrates rent off their clothes, and commanded to beat them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And the multitude rose up together against them: and the magistrates rent off their clothes, and commanded to beat them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:23",
+   "label": "Acts 16:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And when they had laid many stripes upon them, they cast them into prison, charging the jailor to keep them safely:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And when they had laid many stripes upon them, they cast them into prison, charging the jailor to keep them safely:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:24",
+   "label": "Acts 16:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Who, having received such a charge, thrust them into the inner prison, and made their feet fast in the stocks."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Who, having received such a charge, thrust them into the inner prison, and made their feet fast in the stocks."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Beaten bloody. Thrown in the deepest part of the jail. Feet locked in the stocks. No light. No bed. No idea what morning would bring."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:25",
+   "label": "Acts 16:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "And at midnight Paul and Silas prayed, and sang praises unto God: and the prisoners heard them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "And at midnight Paul and Silas prayed, and sang praises unto God: and the prisoners heard them."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, at midnight. [PAUSE 3s | screen: \"At midnight\"] At midnight. [PAUSE 3s | screen: \"At midnight\"] At the darkest hour, in chains, they prayed and they sang.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "At midnight"
+    },
+    {
+     "seconds": 3,
+     "screen": "At midnight"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, they did not wait till they got out to praise God. They sang in the dark. With their backs torn up and their feet in the stocks, they sang. And the prisoners heard them. Somebody is always listening to how you handle your midnight."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:26",
+   "label": "Acts 16:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And suddenly there was a great earthquake, so that the foundations of the prison were shaken: and immediately all the doors were opened, and every one’s bands were loosed."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And suddenly there was a great earthquake, so that the foundations of the prison were shaken: and immediately all the doors were opened, and every one’s bands were loosed."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Every door opened. Every chain fell off. Not just for Paul and Silas. For everybody in that jail."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:27",
+   "label": "Acts 16:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And the keeper of the prison awaking out of his sleep, and seeing the prison doors open, he drew out his sword, and would have killed himself, supposing that the prisoners had been fled."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And the keeper of the prison awaking out of his sleep, and seeing the prison doors open, he drew out his sword, and would have killed himself, supposing that the prisoners had been fled."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The jailer woke up, saw the doors standing open, and thought he had lost every prisoner. He knew what Rome would do to him. In his despair he was ready to end his own life."
+  },
+  {
+   "type": "scripture",
+   "speaker": "paul",
+   "ref": "ACT 16:28",
+   "label": "Acts 16:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "But Paul cried with a loud voice, saying, Do thyself no harm: for we are all here."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "But Paul cried with a loud voice, saying,"
+    },
+    {
+     "v": 28,
+     "speaker": "paul",
+     "text": "Do thyself no harm: for we are all here."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Do thyself no harm. Before anything else, Paul cared about that man's life. The man who locked him up."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:29",
+   "label": "Acts 16:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Then he called for a light, and sprang in, and came trembling, and fell down before Paul and Silas,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Then he called for a light, and sprang in, and came trembling, and fell down before Paul and Silas,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "keeper",
+   "ref": "ACT 16:30",
+   "label": "Acts 16:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And brought them out, and said, Sirs, what must I do to be saved?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And brought them out, and said,"
+    },
+    {
+     "v": 30,
+     "speaker": "keeper",
+     "text": "Sirs, what must I do to be saved?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:31",
+   "label": "Acts 16:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And they said, Believe on the Lord Jesus Christ, and thou shalt be saved, and thy house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And they said, Believe on the Lord Jesus Christ, and thou shalt be saved, and thy house."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:32",
+   "label": "Acts 16:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "And they spake unto him the word of the Lord, and to all that were in his house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "And they spake unto him the word of the Lord, and to all that were in his house."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:33",
+   "label": "Acts 16:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "And he took them the same hour of the night, and washed their stripes; and was baptized, he and all his, straightway."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "And he took them the same hour of the night, and washed their stripes; and was baptized, he and all his, straightway."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The same hands that locked them in the stocks were now washing their wounds. The same night. That is what Jesus does, Church."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 16:34",
+   "label": "Acts 16:34",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 34,
+     "text": "And when he had brought them into his house, he set meat before them, and rejoiced, believing in God with all his house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "And when he had brought them into his house, he set meat before them, and rejoiced, believing in God with all his house."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The old saints knew this story in their bones. Sing at midnight. Pray in chains. Praise God in a place that was never meant for praise. That jailer's whole house rejoiced before the sun came up. Whatever midnight you are in, you can still pray, and you can still sing. And you never know who is listening, or whose chains might fall."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 569,
+ "est_seconds": 316,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Acts 16:22-34; the jailer's despair told gently and Paul's 'do thyself no harm' kept as care; baptism left in the verse; no promise that the listener's chains will fall."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The old saints' singing in chains named in the third person; 'at midnight' at the turn; warm and real."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
