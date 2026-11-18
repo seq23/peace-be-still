@@ -1,0 +1,409 @@
+{
+ "id": "core-057-damascus-road",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Saulo en el camino a Damasco",
+ "passage": {
+  "refs": [
+   "ACT 9:1-19"
+  ],
+  "label": "Hechos 9:1-19"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "saul",
+   "name": "Saulo",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "ananias",
+   "name": "Ananías",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Después de la resurrección de Jesús, sus seguidores empezaron a crecer en número. Y algunos líderes religiosos los perseguían. Uno de los más duros era un joven llamado Saulo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:1-2",
+   "label": "Hechos 9:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y SAULO, respirando aún amenazas y muerte contra los discípulos del Señor, vino al príncipe de los sacerdotes,"
+    },
+    {
+     "v": 2,
+     "text": "Y demandó de él letras para Damasco á las sinagogas, para que si hallase algunos hombres ó mujeres de esta secta, los trajese presos á Jerusalem."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y SAULO, respirando aún amenazas y muerte contra los discípulos del Señor, vino al príncipe de los sacerdotes,"
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y demandó de él letras para Damasco á las sinagogas, para que si hallase algunos hombres ó mujeres de esta secta, los trajese presos á Jerusalem."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno aun con el que lo perseguía, porque nadie está fuera de su alcance.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Saulo iba camino a Damasco con cartas para arrestar a hombres y mujeres que seguían a Jesús. Estaba convencido de que hacía lo correcto. Y en el camino, todo cambió."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:3-4",
+   "label": "Hechos 9:3-4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y yendo por el camino, aconteció que llegando cerca de Damasco, súbitamente le cercó un resplandor de luz del cielo;"
+    },
+    {
+     "v": 4,
+     "text": "Y cayendo en tierra, oyó una voz que le decía: Saulo, Saulo, ¿por qué me persigues?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y yendo por el camino, aconteció que llegando cerca de Damasco, súbitamente le cercó un resplandor de luz del cielo;"
+    },
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y cayendo en tierra, oyó una voz que le decía: Saulo, Saulo, ¿por qué me persigues?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:5-6",
+   "label": "Hechos 9:5-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y él dijo: ¿Quién eres, Señor? Y él dijo: Yo soy Jesús á quien tú persigues: dura cosa te es dar coces contra el aguijón."
+    },
+    {
+     "v": 6,
+     "text": "El, temblando y temeroso, dijo: Señor, ¿qué quieres que haga? Y el Señor le dice: Levántate y entra en la ciudad, y se te dirá lo que te conviene hacer."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y él dijo: ¿Quién eres, Señor? Y él dijo: Yo soy Jesús á quien tú persigues: dura cosa te es dar coces contra el aguijón."
+    },
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "El, temblando y temeroso, dijo: Señor, ¿qué quieres que haga? Y el Señor le dice: Levántate y entra en la ciudad, y se te dirá lo que te conviene hacer."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Una luz del cielo, más fuerte que el sol del mediodía. Saulo cayó al suelo. Y la voz le preguntó por qué lo perseguía. Saulo no perseguía solo a unas personas. Perseguía a Jesús mismo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:8-9",
+   "label": "Hechos 9:8-9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Entonces Saulo se levantó de tierra, y abriendo los ojos, no veía á nadie: así que, llevándole por la mano, metiéronle en Damasco;"
+    },
+    {
+     "v": 9,
+     "text": "Donde estuvo tres días sin ver, y no comió, ni bebió."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Entonces Saulo se levantó de tierra, y abriendo los ojos, no veía á nadie: así que, llevándole por la mano, metiéronle en Damasco;"
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Donde estuvo tres días sin ver, y no comió, ni bebió."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tres días ciego. Sin comer, sin beber. El hombre que había salido tan seguro ahora tenía que ser llevado de la mano. Tres días en oscuridad, pensando, orando."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y en Damasco había un discípulo llamado Ananías. Dios le habló en una visión y le pidió que fuera a buscar a Saulo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ananias",
+   "ref": "ACT 9:13",
+   "label": "Hechos 9:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Entonces Ananías respondió: Señor, he oído á muchos acerca de este hombre, cuántos males ha hecho á tus santos en Jerusalem:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Entonces Ananías respondió:"
+    },
+    {
+     "v": 13,
+     "speaker": "ananias",
+     "text": "Señor, he oído á muchos acerca de este hombre, cuántos males ha hecho á tus santos en Jerusalem:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "ananias",
+   "ref": "ACT 9:14",
+   "label": "Hechos 9:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y aun aquí tiene facultad de los príncipes de los sacerdotes de prender á todos los que invocan tu nombre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "ananias",
+     "text": "Y aun aquí tiene facultad de los príncipes de los sacerdotes de prender á todos los que invocan tu nombre."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ananías tenía miedo, y con razón. Saulo había venido a arrestar a gente como él. Pero Dios le dijo que lo había escogido para llevar su nombre a muchas naciones."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:15-16",
+   "label": "Hechos 9:15-16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y le dijo el Señor: Ve: porque instrumento escogido me es éste, para que lleve mi nombre en presencia de los Gentiles, y de reyes, y de los hijos de Israel:"
+    },
+    {
+     "v": 16,
+     "text": "Porque yo le mostraré cuánto le sea menester que padezca por mi nombre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y le dijo el Señor: Ve: porque instrumento escogido me es éste, para que lleve mi nombre en presencia de los Gentiles, y de reyes, y de los hijos de Israel:"
+    },
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Porque yo le mostraré cuánto le sea menester que padezca por mi nombre."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y Ananías fue. Entró en la casa donde estaba aquel hombre peligroso. Le puso las manos encima. Y lo primero que le dijo fue una palabra que Saulo no esperaba."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ananias",
+   "ref": "ACT 9:17",
+   "label": "Hechos 9:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Ananías entonces fué, y entró en la casa, y poniéndole las manos encima, dijo: Saulo hermano, el Señor Jesús, que te apareció en el camino por donde venías, me ha enviado para que recibas la vista y seas lleno de Espíritu Santo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Ananías entonces fué, y entró en la casa, y poniéndole las manos encima, dijo:"
+    },
+    {
+     "v": 17,
+     "speaker": "ananias",
+     "text": "Saulo hermano, el Señor Jesús, que te apareció en el camino por donde venías, me ha enviado para que recibas la vista y seas lleno de Espíritu Santo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hermano. Saulo hermano. Ananías no lo llamó enemigo ni perseguidor. Lo llamó hermano."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:18-19",
+   "label": "Hechos 9:18-19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y luego le cayeron de los ojos como escamas, y recibió al punto la vista: y levantándose, fué bautizado."
+    },
+    {
+     "v": 19,
+     "text": "Y como comió, fué confortado. Y estuvo Saulo por algunos días con los discípulos que estaban en Damasco."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y luego le cayeron de los ojos como escamas, y recibió al punto la vista: y levantándose, fué bautizado."
+    },
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y como comió, fué confortado. Y estuvo Saulo por algunos días con los discípulos que estaban en Damasco."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Saulo, a quien más tarde conocemos como Pablo, llegó a ser uno de los apóstoles más grandes. Escribió muchas de las cartas del Nuevo Testamento. Y nunca olvidó de dónde lo había sacado Dios."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia tiene dos milagros. Uno es un perseguidor que se vuelve hermano. El otro es un hombre con miedo que obedece y le abre los brazos a su enemigo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tal vez piensas en alguien que parece estar muy lejos de Dios. Nadie está fuera de su alcance. Y tal vez Dios te está pidiendo que seas Ananías para alguien, que llames hermano a quien no esperabas."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 684,
+ "est_seconds": 379,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Acts 9:1-19; Jesus's words left in scripture; 'fué bautizado' kept in the text without comment (S04); the name Paul from Acts 13:9 told in words."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ananias's fear honoured; 'Saulo hermano' given its weight; no group is cast as enemies."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

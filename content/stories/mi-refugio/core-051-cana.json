@@ -1,0 +1,373 @@
+{
+ "id": "core-051-cana",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El agua hecha vino en Caná",
+ "passage": {
+  "refs": [
+   "JOH 2:1-11"
+  ],
+  "label": "Juan 2:1-11"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "mother",
+   "name": "madre",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "steward",
+   "name": "maestresala",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En el pueblo de Caná, en Galilea, había una boda. Las bodas de aquel tiempo duraban varios días, con toda la familia, los vecinos y los amigos. Era una fiesta grande para todo el pueblo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:1-2",
+   "label": "Juan 2:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y AL tercer día hiciéronse unas bodas en Caná de Galilea; y estaba allí la madre de Jesús."
+    },
+    {
+     "v": 2,
+     "text": "Y fué también llamado Jesús y sus discípulos á las bodas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y AL tercer día hiciéronse unas bodas en Caná de Galilea; y estaba allí la madre de Jesús."
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y fué también llamado Jesús y sus discípulos á las bodas."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Jesús fue a la fiesta, y se ocupó de lo que le faltaba a una familia.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y en medio de la fiesta, se acabó el vino. Para los novios y sus familias eso era una vergüenza muy grande. Los invitados se iban a dar cuenta. Iban a quedar mal delante de todo el pueblo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mother",
+   "ref": "JOH 2:3",
+   "label": "Juan 2:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y faltando el vino, la madre de Jesús le dijo: Vino no tienen."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y faltando el vino, la madre de Jesús le dijo:"
+    },
+    {
+     "v": 3,
+     "speaker": "mother",
+     "text": "Vino no tienen."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "María se dio cuenta antes que muchos. Y no hizo un escándalo ni le echó la culpa a nadie. Fue con su hijo y le dijo lo que pasaba. No tienen vino."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:4",
+   "label": "Juan 2:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y dícele Jesús: ¿Qué tengo yo contigo, mujer? aun no ha venido mi hora."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y dícele Jesús: ¿Qué tengo yo contigo, mujer? aun no ha venido mi hora."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "mother",
+   "ref": "JOH 2:5",
+   "label": "Juan 2:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Su madre dice á los que servían: Haced todo lo que os dijere."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Su madre dice á los que servían:"
+    },
+    {
+     "v": 5,
+     "speaker": "mother",
+     "text": "Haced todo lo que os dijere."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hagan todo lo que él les diga. María no sabía exactamente qué iba a hacer Jesús. Pero confiaba en él. Y les dijo a los sirvientes que hicieran lo que él dijera, aunque no lo entendieran."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:6",
+   "label": "Juan 2:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y estaban allí seis tinajuelas de piedra para agua, conforme á la purificación de los Judíos, que cabían en cada una dos ó tres cántaros."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y estaban allí seis tinajuelas de piedra para agua, conforme á la purificación de los Judíos, que cabían en cada una dos ó tres cántaros."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:7-8",
+   "label": "Juan 2:7-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Díceles Jesús: Henchid estas tinajuelas de agua. E hinchiéronlas hasta arriba."
+    },
+    {
+     "v": 8,
+     "text": "Y díceles: Sacad ahora, y presentad al maestresala. Y presentáronle."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Díceles Jesús: Henchid estas tinajuelas de agua. E hinchiéronlas hasta arriba."
+    },
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y díceles: Sacad ahora, y presentad al maestresala. Y presentáronle."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Llenar seis tinajas grandes de piedra con agua era mucho trabajo. Había que ir al pozo una y otra vez. Y luego, sacar un poco y llevárselo al encargado de la fiesta, como si fuera vino. Los sirvientes obedecieron."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:9",
+   "label": "Juan 2:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y como el maestresala gustó el agua hecha vino, que no sabía de dónde era (mas lo sabían los sirvientes que habían sacado el agua), el maestresala llama al esposo,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y como el maestresala gustó el agua hecha vino, que no sabía de dónde era (mas lo sabían los sirvientes que habían sacado el agua), el maestresala llama al esposo,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "steward",
+   "ref": "JOH 2:10",
+   "label": "Juan 2:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y dícele: Todo hombre pone primero el buen vino, y cuando están satisfechos, entonces lo que es peor; mas tú has guardado el buen vino hasta ahora."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y dícele:"
+    },
+    {
+     "v": 10,
+     "speaker": "steward",
+     "text": "Todo hombre pone primero el buen vino, y cuando están satisfechos, entonces lo que es peor; mas tú has guardado el buen vino hasta ahora."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El encargado no sabía de dónde había salido. Pero los sirvientes sí lo sabían. Ellos habían llenado las tinajas con sus propias manos. Ellos vieron el milagro de cerca."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y no era cualquier vino. Era el mejor de toda la fiesta. Jesús no solo resolvió el problema. Lo hizo con abundancia y con alegría."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:11",
+   "label": "Juan 2:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Este principio de señales hizo Jesús en Caná de Galilea, y manifestó su gloria; y sus discípulos creyeron en él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Este principio de señales hizo Jesús en Caná de Galilea, y manifestó su gloria; y sus discípulos creyeron en él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El primer milagro de Jesús no fue en el templo ni delante de los poderosos. Fue en una boda de pueblo, para que una familia no pasara vergüenza. Y lo vieron primero los sirvientes."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A Jesús le importan las cosas de nuestra casa. Los momentos de alegría, las fiestas de la familia, y también lo que nos falta y nos da vergüenza."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche puedes hacer lo que hizo María. Decirle a Jesús lo que falta, sin rodeos. Y luego, como los sirvientes, hacer lo que él diga, aunque no lo entiendas todavía. Él sabe guardar el buen vino para el final."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 562,
+ "est_seconds": 313,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 562 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:27",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 2:1-11; Mary's words kept as scripture, no Marian doctrine added (S04); wine named plainly as the text does; no promise of abundance to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A village wedding and family honour told the way a Latin American family would feel it; the servants honoured as first witnesses."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
