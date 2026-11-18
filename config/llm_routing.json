@@ -6,7 +6,7 @@
   },
   "policy": {
     "max_cost_usd": 0,
-    "paid_fallback": false,
+    "fallback_to_paid": false,
     "on_reported_cost": "NAMED STOP [PAID_MODEL]: a response with a non-zero usage.cost stops the run",
     "read_by": "the search-loop engine (seq23/search-loop) via search-loop.config.json llm.routing_file; this repository makes no other model call"
   },
