@@ -1,0 +1,10 @@
+{
+  "@id": "https://peacebestillapp.com/#org",
+  "name": "Peace Be Still",
+  "url": "https://peacebestillapp.com/",
+  "logo": "https://peacebestillapp.com/icon-512.png",
+  "description": "A coming-soon phone app for the end of the day: the King James Bible to read and hear, whispered Psalms for sleep, Bible chat and daily declarations. A great calm, every night.",
+  "sameAs": [],
+  "parentOrganization": { "name": "Spry Labs" },
+  "profiles_pending": ["App Store listing (at launch)", "Google Play listing (at launch)"]
+}

@@ -15,5 +15,11 @@
     { "pattern": "peacebestillapp.com", "custom_domain": true },
     { "pattern": "www.peacebestillapp.com", "custom_domain": true }
   ],
+  "d1_databases": [
+    { "binding": "DB", "database_name": "peace-be-still", "database_id": "4ae8e428-96d0-4053-967d-088978a526b2", "migrations_dir": "migrations" }
+  ],
+  "ratelimits": [
+    { "name": "WAITLIST_RL", "namespace_id": "1101", "simple": { "limit": 5, "period": 60 } }
+  ],
   "observability": { "enabled": true }
 }

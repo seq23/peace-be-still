@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - run: node site/scripts/check-site.mjs
+      - run: node site/scripts/check-site.mjs && node site/scripts/check-site.mjs --self-test && node --test site/test/*.test.mjs
   deploy:
     needs: check
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -25,6 +25,14 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Apply database migrations (additive only)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: site
+          wranglerVersion: "4.76.0"
+          command: d1 migrations apply peace-be-still --remote
       - name: Deploy to Cloudflare (peacebestillapp.com)
         uses: cloudflare/wrangler-action@v3
         with:
@@ -36,8 +44,10 @@ jobs:
       - name: Smoke test the live site
         run: |
           sleep 10
-          for u in https://peacebestillapp.com/ https://peacebestillapp.com/es/ https://peacebestillapp.com/privacy https://peacebestillapp.com/terms https://peacebestillapp.com/sitemap.xml; do
+          for u in https://peacebestillapp.com/ https://peacebestillapp.com/es/ https://peacebestillapp.com/privacy https://peacebestillapp.com/terms https://peacebestillapp.com/sitemap.xml https://peacebestillapp.com/questions/ https://peacebestillapp.com/about; do
             code=$(curl -s -o /dev/null -w '%{http_code}' "$u"); echo "$code $u"; [ "$code" = 200 ] || exit 1
           done
           loc=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' https://www.peacebestillapp.com/); echo "www: $loc"
           [ "$loc" = "301 https://peacebestillapp.com/" ] || exit 1
+          wl=$(curl -s -o /dev/null -w '%{http_code}' https://peacebestillapp.com/api/waitlist); echo "waitlist GET: $wl"
+          [ "$wl" = 405 ] || exit 1

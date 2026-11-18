@@ -1,0 +1,193 @@
+{
+  "schema": "search-loop-config-v1",
+  "site": "peacebestillapp.com",
+  "base_url": "https://peacebestillapp.com",
+  "site_name": "Peace Be Still",
+  "publisher": {
+    "name": "Peace Be Still",
+    "url": "https://peacebestillapp.com",
+    "logo": "https://peacebestillapp.com/icon-512.png"
+  },
+  "audience": "Christians, many of them Black women and Spanish-speaking families, who read or listen to scripture at bedtime and in the morning: whispered Bible readings, Psalms for sleep, Bible chat and daily prayers or declarations; plus people looking for a Bible app with no trial and no surprise charges",
+  "voice": "warm, unhurried and plain, like a grandmother's front porch after dark; short sentences; scripture quoted word for word from the King James Version (English) or Reina-Valera 1909 (Spanish) with book, chapter and verse, never paraphrased; never promise sleep, healing or any outcome (say 'a nightly practice'); never 'manifest', law of attraction or mindset-practice words on these pages; never the phrase 'Black Bible Stories' (say 'Bible stories with Black faces'); never 'Speak Life'; never speak as God or Jesus; the app is coming soon with no launch date, never 'available now'; no ads, no trial, $7.99 a month or $39.99 a year; never disparage another app",
+  "topics": [
+    "psalms for sleep",
+    "whispered bible for sleep",
+    "bible verses for sleep",
+    "psalm 91 for sleep",
+    "bible asmr",
+    "bible app for black women",
+    "african american bible app",
+    "bible stories with black faces",
+    "daily devotional for black women",
+    "morning prayer for black women",
+    "bible app no subscription",
+    "free bible chat app",
+    "kjv bible audio for sleep",
+    "bedtime prayer",
+    "psalm 23 for sleep",
+    "salmos para dormir",
+    "biblia en español para dormir",
+    "oración para dormir"
+  ],
+  "find": {
+    "priority_topics": 4,
+    "exclude_words": [
+      "black bible stories",
+      "speak life",
+      "manifest",
+      "manifesting",
+      "law of attraction",
+      "law of assumption",
+      "neville",
+      "abraham hicks",
+      "tarot",
+      "horoscope",
+      "crystal",
+      "chakra",
+      "lyrics",
+      "download apk",
+      "mod apk",
+      "jobs",
+      "for sale",
+      "insomnia",
+      "cure",
+      "pdf"
+    ]
+  },
+  "action": {
+    "label": "Tell me when Peace Be Still launches",
+    "url": "https://peacebestillapp.com/#waitlist"
+  },
+  "allowed_link_targets": [
+    "https://peacebestillapp.com",
+    "https://www.biblegateway.com",
+    "https://support.apple.com",
+    "https://support.google.com",
+    "https://ebible.org"
+  ],
+  "mode": "slow",
+  "cap": {
+    "max_live_pages": 10,
+    "min_pages": 10,
+    "grow_share": 0.1,
+    "max_per_day": 3
+  },
+  "distinct": {
+    "sitemap_files": [
+      "site/public/sitemap.xml"
+    ]
+  },
+  "menu_pages_need_approval": false,
+  "health_gate": "health",
+  "health": {
+    "real_facts": {
+      "services": [
+        "a coming-soon phone app (App Store and Google Play)",
+        "the whole King James Bible to read and to hear",
+        "whispered Psalms for sleep with a sleep timer (Psalm Nights)",
+        "Bible chat that is AI, labelled as AI, quoting KJV verses word for word",
+        "a daily Bible story; Bible stories with Black faces in Hush Harbor",
+        "Mi Refugio: Biblia y chat en español con la Reina-Valera 1909",
+        "a free lane forever; paid lane $7.99 a month or $39.99 a year; no trial; no ads"
+      ],
+      "hours": null
+    }
+  },
+  "gate": {
+    "banned_patterns": [
+      "black\\s+bible\\s+stories",
+      "speak\\s+life",
+      "\\bmanifest",
+      "law of attraction",
+      "law of assumption",
+      "living in the end",
+      "imagination nights",
+      "neville",
+      "abraham[- ]hicks",
+      "\\bcures?\\b",
+      "insomnia",
+      "\\bheals?\\b",
+      "guarantee",
+      "apps\\.apple\\.com",
+      "play\\.google\\.com/store"
+    ]
+  },
+  "protected_paths": [
+    "site/src",
+    "site/scripts",
+    "site/test",
+    "site/migrations",
+    "site/content",
+    "site/wrangler.jsonc",
+    "site/public/index.html",
+    "site/public/es/index.html",
+    "site/public/about.html",
+    "site/public/privacy.html",
+    "site/public/terms.html",
+    "site/public/es/privacidad.html",
+    "site/public/es/terminos.html",
+    "site/public/404.html",
+    "site/public/styles.css",
+    "site/public/fonts",
+    "site/public/brand",
+    "site/public/llms.txt",
+    "site/public/robots.txt",
+    "site/public/questions/index.html",
+    "site/public/questions/law-of-assumption-sleep-meditation",
+    "site/public/es/preguntas",
+    "entity.json",
+    ".github"
+  ],
+  "output": {
+    "dir": "site/public/questions",
+    "format": "dir-index",
+    "url_prefix": "/questions/",
+    "redirects": {
+      "file": "site/public/_redirects",
+      "format": "lines"
+    }
+  },
+  "template": {
+    "section_name": "Questions",
+    "stylesheets": [
+      "/styles.css"
+    ],
+    "og_image": {
+      "url": "https://peacebestillapp.com/og.png",
+      "width": 1200,
+      "height": 630
+    },
+    "header_html": "<a class=\"skip\" href=\"#main\">Skip to the page</a><header class=\"wrap site-head\"><a class=\"brand\" href=\"/\" aria-label=\"Peace Be Still, home\"><picture><source srcset=\"/brand/pbs-wordmark-dark.svg\" media=\"(prefers-color-scheme: dark)\"><img src=\"/brand/pbs-wordmark-light.svg\" alt=\"Peace Be Still\" width=\"225\" height=\"36\"></picture></a><a class=\"lang\" href=\"/es/\" hreflang=\"es\" lang=\"es\">Español ›</a></header>",
+    "footer_html": "<footer class=\"site-foot\"><div class=\"wrap\"><span>Peace Be Still · a Spry Labs app</span><nav aria-label=\"Footer\"><a href=\"/questions/\">Questions</a><a href=\"/about\">About</a><a href=\"/privacy\">Privacy</a><a href=\"/terms\">Terms</a><a href=\"/es/\" hreflang=\"es\" lang=\"es\">Español</a></nav></div></footer>"
+  },
+  "related": {
+    "max_pages_per_new_page": 0,
+    "scan_dirs": [
+      "site/public/questions"
+    ],
+    "skip_dirs": [
+      "node_modules",
+      ".search-loop-engine",
+      "site/public/questions/law-of-assumption-sleep-meditation"
+    ]
+  },
+  "gsc": {
+    "site_url": "sc-domain:peacebestillapp.com"
+  },
+  "indexnow": {
+    "key": "6be8e4669379ab1898f6f22fd42d67ee",
+    "key_location": "https://peacebestillapp.com/6be8e4669379ab1898f6f22fd42d67ee.txt"
+  },
+  "analytics": {
+    "ai_referrals": "cloudflare",
+    "ai_bot_hits": "cloudflare",
+    "zone": "peacebestillapp.com"
+  },
+  "conversions": {
+    "source": "none"
+  },
+  "shares_audience_with": [],
+  "ledger_dir": "data/search-loop",
+  "publication_policy": "Faith and sleep searches only (the God's Word door); the engine never writes Mindset pages and never links between doors (related links off). Mode slow, cap 10 live pages to start, the health gate and banned patterns run before anything publishes. Every page ends in the launch waitlist."
+}
