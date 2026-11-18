@@ -1,0 +1,234 @@
+{
+ "id": "pn-13-psalm-103",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 103: Bless the Lord, O My Soul",
+ "main": [
+  "PSA 103:1-14"
+ ],
+ "companions": [
+  "LAM 3:22-23"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello. This is Psalm Nights. [pause 7]\n\nSettle in. Let your breath slow. [pause 10]\n\nTonight we read Psalm 103, the first fourteen verses. It is a psalm where a man talks to his own soul and reminds it of everything God has done. [pause 9]\n\nWe will read it slowly, and then once more. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 103:1-14",
+   "label": "Psalm 103:1-14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David. Bless the LORD, O my soul: and all that is within me, bless his holy name."
+    },
+    {
+     "v": 2,
+     "text": "Bless the LORD, O my soul, and forget not all his benefits:"
+    },
+    {
+     "v": 3,
+     "text": "Who forgiveth all thine iniquities; who healeth all thy diseases;"
+    },
+    {
+     "v": 4,
+     "text": "Who redeemeth thy life from destruction; who crowneth thee with lovingkindness and tender mercies;"
+    },
+    {
+     "v": 5,
+     "text": "Who satisfieth thy mouth with good things; so that thy youth is renewed like the eagle’s."
+    },
+    {
+     "v": 6,
+     "text": "The LORD executeth righteousness and judgment for all that are oppressed."
+    },
+    {
+     "v": 7,
+     "text": "He made known his ways unto Moses, his acts unto the children of Israel."
+    },
+    {
+     "v": 8,
+     "text": "The LORD is merciful and gracious, slow to anger, and plenteous in mercy."
+    },
+    {
+     "v": 9,
+     "text": "He will not always chide: neither will he keep his anger for ever."
+    },
+    {
+     "v": 10,
+     "text": "He hath not dealt with us after our sins; nor rewarded us according to our iniquities."
+    },
+    {
+     "v": 11,
+     "text": "For as the heaven is high above the earth, so great is his mercy toward them that fear him."
+    },
+    {
+     "v": 12,
+     "text": "As far as the east is from the west, so far hath he removed our transgressions from us."
+    },
+    {
+     "v": 13,
+     "text": "Like as a father pitieth his children, so the LORD pitieth them that fear him."
+    },
+    {
+     "v": 14,
+     "text": "For he knoweth our frame; he remembereth that we are dust."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Bless the Lord, O my soul. Sometimes we have to speak to our own soul. Remind it. Forget not all his benefits. [pause 10]\n\nThe psalm makes a list. He forgives. He heals. He redeems. He crowns with lovingkindness. These are not promises about tomorrow. They are a memory of who God has been. [pause 12]\n\nThen comes a picture of distance. East from west, that is how far he has carried our sins away. You cannot walk to where the east ends. [pause 10]\n\nAnd the last verse tonight is very gentle. He knoweth our frame. He remembers that we are dust. He knows how tired you are. He is not surprised. [pause 14]\n\nA companion passage from Lamentations. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "LAM 3:22-23",
+   "label": "Lamentations 3:22-23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "It is of the LORD’s mercies that we are not consumed, because his compassions fail not."
+    },
+    {
+     "v": 23,
+     "text": "They are new every morning: great is thy faithfulness."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "His compassions fail not. They are new every morning. Whatever was used up today, there will be new mercy when you wake. [pause 12]\n\nHere is Psalm 103 again. Let your soul listen. [pause 14]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 103:1-14",
+   "label": "Psalm 103:1-14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David. Bless the LORD, O my soul: and all that is within me, bless his holy name."
+    },
+    {
+     "v": 2,
+     "text": "Bless the LORD, O my soul, and forget not all his benefits:"
+    },
+    {
+     "v": 3,
+     "text": "Who forgiveth all thine iniquities; who healeth all thy diseases;"
+    },
+    {
+     "v": 4,
+     "text": "Who redeemeth thy life from destruction; who crowneth thee with lovingkindness and tender mercies;"
+    },
+    {
+     "v": 5,
+     "text": "Who satisfieth thy mouth with good things; so that thy youth is renewed like the eagle’s."
+    },
+    {
+     "v": 6,
+     "text": "The LORD executeth righteousness and judgment for all that are oppressed."
+    },
+    {
+     "v": 7,
+     "text": "He made known his ways unto Moses, his acts unto the children of Israel."
+    },
+    {
+     "v": 8,
+     "text": "The LORD is merciful and gracious, slow to anger, and plenteous in mercy."
+    },
+    {
+     "v": 9,
+     "text": "He will not always chide: neither will he keep his anger for ever."
+    },
+    {
+     "v": 10,
+     "text": "He hath not dealt with us after our sins; nor rewarded us according to our iniquities."
+    },
+    {
+     "v": 11,
+     "text": "For as the heaven is high above the earth, so great is his mercy toward them that fear him."
+    },
+    {
+     "v": 12,
+     "text": "As far as the east is from the west, so far hath he removed our transgressions from us."
+    },
+    {
+     "v": 13,
+     "text": "Like as a father pitieth his children, so the LORD pitieth them that fear him."
+    },
+    {
+     "v": 14,
+     "text": "For he knoweth our frame; he remembereth that we are dust."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Now let the words go quiet. [pause 8]\n\nYou do not have to hold on to them. They will be there in the morning. [pause 10]\n\nLet your shoulders drop. Let your hands open. Let the bed hold the weight of you. [pause 12]\n\nIf a worry comes back, you can hand it over again. As many times as it takes. [pause 12]\n\nThe night is long and quiet, and you are not alone in it. [pause 15]\n\nFeel the quiet of the room. The small sounds. The dark. Nothing is asked of you here. [pause 20]\n\nYou are held, the psalm said. You are known. You are kept. [pause 20]\n\nRest now. [pause 45]"
+  }
+ ],
+ "words": 720,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 813,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only. Each night keeps its psalm's own point (contentment, tasting God's goodness, remembering benefits, night watches, honest sadness, the higher rock, longing for God's house, our short days, return to rest, surrounded like Jerusalem). Psalm 103's 'healeth' told as memory of who God has been, not a promise; Psalm 42 points a long sadness to a pastor, a doctor or a friend; no sleep or safety promise in the new rests."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

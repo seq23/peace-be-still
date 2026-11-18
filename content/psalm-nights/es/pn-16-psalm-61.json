@@ -1,0 +1,198 @@
+{
+ "id": "pn-16-psalm-61",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 61: La peña más alta que yo",
+ "main": [
+  "PSA 61:1-8"
+ ],
+ "companions": [
+  "PSA 18:2",
+  "ISA 32:2"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 20]\n\nTápate bien. Deja que tu respiración sea lenta y tranquila. [pause 23]\n\nEl salmo de esta noche es el Salmo sesenta y uno. Es una oración desde el cabo de la tierra, de alguien que se siente lejos y abrumado. [pause 22]\n\nLo vamos a leer dos veces. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 61:1-8",
+   "label": "Salmos 61:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: sobre Neginoth: Salmo de David. OYE, oh Dios, mi clamor; á mi oración atiende."
+    },
+    {
+     "v": 2,
+     "text": "Desde el cabo de la tierra clamaré á ti, cuando mi corazón desmayare: á la peña más alta que yo me conduzcas."
+    },
+    {
+     "v": 3,
+     "text": "Porque tú has sido mi refugio, y torre de fortaleza delante del enemigo."
+    },
+    {
+     "v": 4,
+     "text": "Yo habitaré en tu tabernáculo para siempre: estaré seguro bajo la cubierta de tus alas."
+    },
+    {
+     "v": 5,
+     "text": "Porque tú, oh Dios, has oído mis votos, has dado heredad á los que temen tu nombre."
+    },
+    {
+     "v": 6,
+     "text": "Días sobre días añadirás al rey: sus años serán como generación y generación."
+    },
+    {
+     "v": 7,
+     "text": "Estará para siempre delante de Dios: misericordia y verdad prepara que lo conserven."
+    },
+    {
+     "v": 8,
+     "text": "Así cantaré tu nombre para siempre, pagando mis votos cada día."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Desde el cabo de la tierra clamaré. Dondequiera que estés esta noche, por lejos que te sientas, no es demasiado lejos para orar. [pause 23]\n\nCuando mi corazón desmaya. Algunas noches el corazón simplemente está demasiado lleno. Entonces la oración es corta. Llévame a la peña más alta. [pause 23]\n\nUna peña más alta que tú. Más alta que tu preocupación. Más alta que lo que entiendes. Un lugar para pararte encima del agua. [pause 23]\n\nY otra vez el refugio de sus alas. Una tienda. Una torre fuerte. [pause 25]\n\nDos pasajes para acompañarlo. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 18:2",
+   "label": "Salmos 18:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Jehová, roca mía y castillo mío, y mi libertador; Dios mío, fuerte mío, en él confiaré; escudo mío, y el cuerno de mi salud, mi refugio."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 32:2",
+   "label": "Isaías 32:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y será aquel varón como escondedero contra el viento, y como acogida contra el turbión; como arroyos de aguas en tierra de sequedad, como sombra de gran peñasco en tierra calurosa."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "El Salmo dieciocho llama a Dios roca, castillo y alto refugio. Isaías pinta un escondedero contra el viento, y la sombra de una gran peña en una tierra cansada. [pause 25]\n\nAquí está el Salmo sesenta y uno otra vez. Deja que tu corazón sea llevado a la peña. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 61:1-8",
+   "label": "Salmos 61:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: sobre Neginoth: Salmo de David. OYE, oh Dios, mi clamor; á mi oración atiende."
+    },
+    {
+     "v": 2,
+     "text": "Desde el cabo de la tierra clamaré á ti, cuando mi corazón desmayare: á la peña más alta que yo me conduzcas."
+    },
+    {
+     "v": 3,
+     "text": "Porque tú has sido mi refugio, y torre de fortaleza delante del enemigo."
+    },
+    {
+     "v": 4,
+     "text": "Yo habitaré en tu tabernáculo para siempre: estaré seguro bajo la cubierta de tus alas."
+    },
+    {
+     "v": 5,
+     "text": "Porque tú, oh Dios, has oído mis votos, has dado heredad á los que temen tu nombre."
+    },
+    {
+     "v": 6,
+     "text": "Días sobre días añadirás al rey: sus años serán como generación y generación."
+    },
+    {
+     "v": 7,
+     "text": "Estará para siempre delante de Dios: misericordia y verdad prepara que lo conserven."
+    },
+    {
+     "v": 8,
+     "text": "Así cantaré tu nombre para siempre, pagando mis votos cada día."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí termina la lectura. [pause 8]\n\nVoltéate un poco, si quieres, hasta que tu cuerpo encuentre el lugar que le gusta. [pause 10]\n\nNo tienes que recordar nada. No tienes que contestar nada. [pause 12]\n\nSi alguien que amas está lejos esta noche, también puedes dejarlo en las manos de Dios. [pause 15]\n\nSuelta el aire despacio. Y otra vez. [pause 20]\n\nLa noche está en sus manos. Tú estás en sus manos. [pause 20]\n\nQue duermas bien. [pause 45]"
+  }
+ ],
+ "words": 552,
+ "rest_part": "rest4",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 815,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

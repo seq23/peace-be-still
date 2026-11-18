@@ -1,0 +1,196 @@
+{
+ "id": "pn-16-psalm-61",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 61: The Rock That Is Higher Than I",
+ "main": [
+  "PSA 61:1-8"
+ ],
+ "companions": [
+  "PSA 18:2",
+  "ISA 32:2"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 18]\n\nPull the covers close. Let your breathing be slow and easy. [pause 21]\n\nTonight's psalm is Psalm 61. It is a prayer from the ends of the earth, from someone who feels far away and overwhelmed. [pause 20]\n\nWe will read it twice. [pause 23]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 61:1-8",
+   "label": "Psalm 61:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician upon Neginah, A Psalm of David. Hear my cry, O God; attend unto my prayer."
+    },
+    {
+     "v": 2,
+     "text": "From the end of the earth will I cry unto thee, when my heart is overwhelmed: lead me to the rock that is higher than I."
+    },
+    {
+     "v": 3,
+     "text": "For thou hast been a shelter for me, and a strong tower from the enemy."
+    },
+    {
+     "v": 4,
+     "text": "I will abide in thy tabernacle for ever: I will trust in the covert of thy wings. Selah."
+    },
+    {
+     "v": 5,
+     "text": "For thou, O God, hast heard my vows: thou hast given me the heritage of those that fear thy name."
+    },
+    {
+     "v": 6,
+     "text": "Thou wilt prolong the king’s life: and his years as many generations."
+    },
+    {
+     "v": 7,
+     "text": "He shall abide before God for ever: O prepare mercy and truth, which may preserve him."
+    },
+    {
+     "v": 8,
+     "text": "So will I sing praise unto thy name for ever, that I may daily perform my vows."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Crying out from the end of the earth. Wherever you are tonight, however far you feel, it is not too far to pray from. [pause 21]\n\nWhen my heart is overwhelmed. Some nights the heart is simply too full. Then the prayer is short. Lead me to the higher rock. [pause 21]\n\nA rock higher than you. Higher than your worry. Higher than your understanding. Somewhere to stand above the water. [pause 21]\n\nAnd the shelter of his wings again. A tent. A strong tower. [pause 25]\n\nTwo companion passages. [pause 19]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 18:2",
+   "label": "Psalm 18:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "The LORD is my rock, and my fortress, and my deliverer; my God, my strength, in whom I will trust; my buckler, and the horn of my salvation, and my high tower."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 32:2",
+   "label": "Isaiah 32:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And a man shall be as an hiding place from the wind, and a covert from the tempest; as rivers of water in a dry place, as the shadow of a great rock in a weary land."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Psalm 18 calls God a rock, a fortress, and a high tower. Isaiah pictures a hiding place from the wind, and the shade of a great rock when the land is tired and dry. [pause 23]\n\nHere is Psalm 61 again. Let your heart be led to the rock. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 61:1-8",
+   "label": "Psalm 61:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician upon Neginah, A Psalm of David. Hear my cry, O God; attend unto my prayer."
+    },
+    {
+     "v": 2,
+     "text": "From the end of the earth will I cry unto thee, when my heart is overwhelmed: lead me to the rock that is higher than I."
+    },
+    {
+     "v": 3,
+     "text": "For thou hast been a shelter for me, and a strong tower from the enemy."
+    },
+    {
+     "v": 4,
+     "text": "I will abide in thy tabernacle for ever: I will trust in the covert of thy wings. Selah."
+    },
+    {
+     "v": 5,
+     "text": "For thou, O God, hast heard my vows: thou hast given me the heritage of those that fear thy name."
+    },
+    {
+     "v": 6,
+     "text": "Thou wilt prolong the king’s life: and his years as many generations."
+    },
+    {
+     "v": 7,
+     "text": "He shall abide before God for ever: O prepare mercy and truth, which may preserve him."
+    },
+    {
+     "v": 8,
+     "text": "So will I sing praise unto thy name for ever, that I may daily perform my vows."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Let the reading end here. [pause 8]\n\nTurn a little, if you want to, until your body finds the place it likes. [pause 10]\n\nThere is nothing you need to remember. Nothing you need to say back. [pause 12]\n\nIf someone you love is far away tonight, you can leave them in God's hands too. [pause 15]\n\nBreathe out slowly. Then again. [pause 20]\n\nThe night is held. You are held. [pause 20]\n\nSleep well. [pause 45]"
+  }
+ ],
+ "words": 590,
+ "rest_part": "rest4",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 820,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only. Each night keeps its psalm's own point (contentment, tasting God's goodness, remembering benefits, night watches, honest sadness, the higher rock, longing for God's house, our short days, return to rest, surrounded like Jerusalem). Psalm 103's 'healeth' told as memory of who God has been, not a promise; Psalm 42 points a long sadness to a pastor, a doctor or a friend; no sleep or safety promise in the new rests."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

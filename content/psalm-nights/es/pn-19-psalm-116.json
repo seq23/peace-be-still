@@ -1,0 +1,206 @@
+{
+ "id": "pn-19-psalm-116",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 116: Vuelve, alma mía, a tu reposo",
+ "main": [
+  "PSA 116:1-9"
+ ],
+ "companions": [
+  "PSA 4:8",
+  "MAT 11:28"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 21]\n\nRecuéstate. Deja que la cama cargue tu peso. [pause 24]\n\nEsta noche leemos la primera parte del Salmo ciento dieciséis. Lo escribió alguien que estuvo muy cerca de la muerte, y fue rescatado. Es un gracias. [pause 23]\n\nLo vamos a leer dos veces. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 116:1-9",
+   "label": "Salmos 116:1-9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Amo á Jehová, pues ha oído mi voz y mis súplicas."
+    },
+    {
+     "v": 2,
+     "text": "Porque ha inclinado á mí su oído, invocaréle por tanto en todos mis días."
+    },
+    {
+     "v": 3,
+     "text": "Rodeáronme los dolores de la muerte, me encontraron las angustias del sepulcro: angustia y dolor había yo hallado."
+    },
+    {
+     "v": 4,
+     "text": "Entonces invoqué el nombre de Jehová, diciendo: Libra ahora, oh Jehová, mi alma."
+    },
+    {
+     "v": 5,
+     "text": "Clemente es Jehová y justo; sí, misericordioso es nuestro Dios."
+    },
+    {
+     "v": 6,
+     "text": "Jehová guarda á los sinceros: estaba yo postrado, y salvóme."
+    },
+    {
+     "v": 7,
+     "text": "Vuelve, oh alma mía, á tu reposo; porque Jehová te ha hecho bien."
+    },
+    {
+     "v": 8,
+     "text": "Pues tú has librado mi alma de la muerte, mis ojos de lágrimas, y mis pies de desbarrar."
+    },
+    {
+     "v": 9,
+     "text": "Andaré delante de Jehová en la tierra de los vivientes."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Amo al Señor, porque me oyó. La razón es sencilla. Me escuchó. [pause 24]\n\nInclinó a mí su oído. Imagina a alguien que se agacha para oírte cuando hablas bajito. Esa es la palabra. [pause 24]\n\nEl salmo recuerda los dolores, la angustia, el miedo. Y luego dice, clemente es el Señor. [pause 24]\n\nLuego el versículo siete. Vuelve, oh alma mía, a tu reposo. El salmista se habla a sí mismo, como quien llama a un niño para que vuelva a la cama. Vuelve a descansar. [pause 25]\n\nDos versículos para acompañarlo. [pause 22]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 11:28",
+   "label": "Mateo 11:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Venid á mí todos los que estáis trabajados y cargados, que yo os haré descansar."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Paz. Acostarse. Dormir. Y las palabras de Jesús, invitando a los cansados a venir y descansar. [pause 25]\n\nAquí está el Salmo ciento dieciséis otra vez. Cuando oigas el versículo siete, díselo a tu propia alma. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 116:1-9",
+   "label": "Salmos 116:1-9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Amo á Jehová, pues ha oído mi voz y mis súplicas."
+    },
+    {
+     "v": 2,
+     "text": "Porque ha inclinado á mí su oído, invocaréle por tanto en todos mis días."
+    },
+    {
+     "v": 3,
+     "text": "Rodeáronme los dolores de la muerte, me encontraron las angustias del sepulcro: angustia y dolor había yo hallado."
+    },
+    {
+     "v": 4,
+     "text": "Entonces invoqué el nombre de Jehová, diciendo: Libra ahora, oh Jehová, mi alma."
+    },
+    {
+     "v": 5,
+     "text": "Clemente es Jehová y justo; sí, misericordioso es nuestro Dios."
+    },
+    {
+     "v": 6,
+     "text": "Jehová guarda á los sinceros: estaba yo postrado, y salvóme."
+    },
+    {
+     "v": 7,
+     "text": "Vuelve, oh alma mía, á tu reposo; porque Jehová te ha hecho bien."
+    },
+    {
+     "v": 8,
+     "text": "Pues tú has librado mi alma de la muerte, mis ojos de lágrimas, y mis pies de desbarrar."
+    },
+    {
+     "v": 9,
+     "text": "Andaré delante de Jehová en la tierra de los vivientes."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ya es suficiente por esta noche. [pause 8]\n\nDeja que tu respiración se haga lenta sola. Entra el aire, sale el aire. No hay nada que arreglar ni nada que terminar. [pause 12]\n\nLo que haya sido el día de hoy, ya pasó. Mañana todavía no llega. Esto es solo la noche, y la noche también es de Dios. [pause 12]\n\nDeja lo que cargaste. Una cosa, y luego otra. [pause 15]\n\nSi tu mente se va a otra parte, déjala volver despacio. No hay una manera equivocada de descansar. [pause 20]\n\nEl Señor está cerca. Más cerca que tu respiración. [pause 20]\n\nBuenas noches. [pause 45]"
+  }
+ ],
+ "words": 526,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 812,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

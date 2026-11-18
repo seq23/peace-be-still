@@ -1,0 +1,206 @@
+{
+ "id": "pn-15-psalm-42",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 42: As the Hart Panteth",
+ "main": [
+  "PSA 42:1-11"
+ ],
+ "companions": [
+  "PSA 43:5"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello, and welcome to Psalm Nights. [pause 3]\n\nLet yourself be still. You do not have to feel any particular way tonight. [pause 6]\n\nTonight we read Psalm 42. It is a psalm for low nights. The writer is far from home, sad, and honest about it. He talks to his own soul and asks it why it is so cast down. [pause 5]\n\nWe will read it twice. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 42:1-11",
+   "label": "Psalm 42:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, Maschil, for the sons of Korah. As the hart panteth after the water brooks, so panteth my soul after thee, O God."
+    },
+    {
+     "v": 2,
+     "text": "My soul thirsteth for God, for the living God: when shall I come and appear before God?"
+    },
+    {
+     "v": 3,
+     "text": "My tears have been my meat day and night, while they continually say unto me, Where is thy God?"
+    },
+    {
+     "v": 4,
+     "text": "When I remember these things, I pour out my soul in me: for I had gone with the multitude, I went with them to the house of God, with the voice of joy and praise, with a multitude that kept holyday."
+    },
+    {
+     "v": 5,
+     "text": "Why art thou cast down, O my soul? and why art thou disquieted in me? hope thou in God: for I shall yet praise him for the help of his countenance."
+    },
+    {
+     "v": 6,
+     "text": "O my God, my soul is cast down within me: therefore will I remember thee from the land of Jordan, and of the Hermonites, from the hill Mizar."
+    },
+    {
+     "v": 7,
+     "text": "Deep calleth unto deep at the noise of thy waterspouts: all thy waves and thy billows are gone over me."
+    },
+    {
+     "v": 8,
+     "text": "Yet the LORD will command his lovingkindness in the daytime, and in the night his song shall be with me, and my prayer unto the God of my life."
+    },
+    {
+     "v": 9,
+     "text": "I will say unto God my rock, Why hast thou forgotten me? why go I mourning because of the oppression of the enemy?"
+    },
+    {
+     "v": 10,
+     "text": "As with a sword in my bones, mine enemies reproach me; while they say daily unto me, Where is thy God?"
+    },
+    {
+     "v": 11,
+     "text": "Why art thou cast down, O my soul? and why art thou disquieted within me? hope thou in God: for I shall yet praise him, who is the health of my countenance, and my God."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "The hart, panting for the water brooks. A deer, tired and thirsty, looking for a stream. That is what longing for God can feel like. [pause 6]\n\nTears, day and night, for food. There is no pretending here. Some seasons, tears are what you live on. The Bible makes room for that. [pause 8]\n\nThen the question, twice. Why so cast down, my soul? And the answer, twice. Hope thou in God. Not because the sadness is gone. Because God is still God. [pause 8]\n\nVerse eight is for tonight. His song is with me in the night. [pause 10]\n\nOne companion verse, from the next psalm. [pause 4]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 43:5",
+   "label": "Psalm 43:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Why art thou cast down, O my soul? and why art thou disquieted within me? hope in God: for I shall yet praise him, who is the health of my countenance, and my God."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Psalm 43 ends with the same words. As if the writer had to say it to himself again and again. Hope in God. I shall yet praise him. [pause 8]\n\nIf you are low tonight, you do not have to feel better before you rest. And if the sadness stays for many days, tell someone. A pastor, a doctor, a friend. That is part of hoping too. [pause 8]\n\nHere is Psalm 42 again. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 42:1-11",
+   "label": "Psalm 42:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, Maschil, for the sons of Korah. As the hart panteth after the water brooks, so panteth my soul after thee, O God."
+    },
+    {
+     "v": 2,
+     "text": "My soul thirsteth for God, for the living God: when shall I come and appear before God?"
+    },
+    {
+     "v": 3,
+     "text": "My tears have been my meat day and night, while they continually say unto me, Where is thy God?"
+    },
+    {
+     "v": 4,
+     "text": "When I remember these things, I pour out my soul in me: for I had gone with the multitude, I went with them to the house of God, with the voice of joy and praise, with a multitude that kept holyday."
+    },
+    {
+     "v": 5,
+     "text": "Why art thou cast down, O my soul? and why art thou disquieted in me? hope thou in God: for I shall yet praise him for the help of his countenance."
+    },
+    {
+     "v": 6,
+     "text": "O my God, my soul is cast down within me: therefore will I remember thee from the land of Jordan, and of the Hermonites, from the hill Mizar."
+    },
+    {
+     "v": 7,
+     "text": "Deep calleth unto deep at the noise of thy waterspouts: all thy waves and thy billows are gone over me."
+    },
+    {
+     "v": 8,
+     "text": "Yet the LORD will command his lovingkindness in the daytime, and in the night his song shall be with me, and my prayer unto the God of my life."
+    },
+    {
+     "v": 9,
+     "text": "I will say unto God my rock, Why hast thou forgotten me? why go I mourning because of the oppression of the enemy?"
+    },
+    {
+     "v": 10,
+     "text": "As with a sword in my bones, mine enemies reproach me; while they say daily unto me, Where is thy God?"
+    },
+    {
+     "v": 11,
+     "text": "Why art thou cast down, O my soul? and why art thou disquieted within me? hope thou in God: for I shall yet praise him, who is the health of my countenance, and my God."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "We will stop here. [pause 8]\n\nLet the room be dark and still around you. Let the pillow be cool. [pause 10]\n\nYou have read his words tonight. You can stop thinking about them now and simply rest in them. [pause 12]\n\nEvery part of you that is tired, let it be tired. You do not have to be strong right now. [pause 15]\n\nHe is awake, so you can sleep. [pause 15]\n\nLet the last words you heard tonight be the ones that stay. Let the rest drift away. [pause 20]\n\nIt is all right to stop now. [pause 20]\n\nRest well. [pause 45]"
+  }
+ ],
+ "words": 935,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 905,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only. Each night keeps its psalm's own point (contentment, tasting God's goodness, remembering benefits, night watches, honest sadness, the higher rock, longing for God's house, our short days, return to rest, surrounded like Jerusalem). Psalm 103's 'healeth' told as memory of who God has been, not a promise; Psalm 42 points a long sadness to a pastor, a doctor or a friend; no sleep or safety promise in the new rests."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

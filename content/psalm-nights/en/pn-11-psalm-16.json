@@ -1,0 +1,224 @@
+{
+ "id": "pn-11-psalm-16",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 16: The Path of Life",
+ "main": [
+  "PSA 16:1-11"
+ ],
+ "companions": [
+  "PSA 4:8",
+  "PSA 73:25-26"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello, and welcome to Psalm Nights. [pause 7]\n\nLet your body sink into the bed. Let your feet be warm. [pause 10]\n\nTonight's psalm is Psalm 16. It is a psalm of contentment. Of someone who looks at their life and says, the lines have fallen for me in pleasant places. [pause 9]\n\nWe will read it twice, slowly. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 16:1-11",
+   "label": "Psalm 16:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Michtam of David. Preserve me, O God: for in thee do I put my trust."
+    },
+    {
+     "v": 2,
+     "text": "O my soul, thou hast said unto the LORD, Thou art my Lord: my goodness extendeth not to thee;"
+    },
+    {
+     "v": 3,
+     "text": "But to the saints that are in the earth, and to the excellent, in whom is all my delight."
+    },
+    {
+     "v": 4,
+     "text": "Their sorrows shall be multiplied that hasten after another god: their drink offerings of blood will I not offer, nor take up their names into my lips."
+    },
+    {
+     "v": 5,
+     "text": "The LORD is the portion of mine inheritance and of my cup: thou maintainest my lot."
+    },
+    {
+     "v": 6,
+     "text": "The lines are fallen unto me in pleasant places; yea, I have a goodly heritage."
+    },
+    {
+     "v": 7,
+     "text": "I will bless the LORD, who hath given me counsel: my reins also instruct me in the night seasons."
+    },
+    {
+     "v": 8,
+     "text": "I have set the LORD always before me: because he is at my right hand, I shall not be moved."
+    },
+    {
+     "v": 9,
+     "text": "Therefore my heart is glad, and my glory rejoiceth: my flesh also shall rest in hope."
+    },
+    {
+     "v": 10,
+     "text": "For thou wilt not leave my soul in hell; neither wilt thou suffer thine Holy One to see corruption."
+    },
+    {
+     "v": 11,
+     "text": "Thou wilt shew me the path of life: in thy presence is fulness of joy; at thy right hand there are pleasures for evermore."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Preserve me, O God. The psalm begins with a short prayer. Keep me. [pause 10]\n\nIn the middle there is a line about the night. My reins instruct me, in the night seasons. The old word reins means the deep places inside. Even at night, God is teaching the heart. [pause 10]\n\nPleasant places, the psalm says. In those days the land was measured out with lines. The psalmist looks at his portion and is glad. Not because it is the biggest. Because the Lord is in it. [pause 12]\n\nAnd at the end, fulness of joy, in his presence. [pause 14]\n\nTwo companion passages. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Psalm 4:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 73:25-26",
+   "label": "Psalm 73:25-26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Whom have I in heaven but thee? and there is none upon earth that I desire beside thee."
+    },
+    {
+     "v": 26,
+     "text": "My flesh and my heart faileth: but God is the strength of my heart, and my portion for ever."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "The first is the evening verse we often return to. Peace, lying down, sleep. [pause 10]\n\nThe second is from Psalm 73. My flesh and my heart may fail. God is the strength of my heart. When your body is tired and your heart is worn, he is still your portion. [pause 12]\n\nHere is Psalm 16 again. Listen for the pleasant places. [pause 14]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 16:1-11",
+   "label": "Psalm 16:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Michtam of David. Preserve me, O God: for in thee do I put my trust."
+    },
+    {
+     "v": 2,
+     "text": "O my soul, thou hast said unto the LORD, Thou art my Lord: my goodness extendeth not to thee;"
+    },
+    {
+     "v": 3,
+     "text": "But to the saints that are in the earth, and to the excellent, in whom is all my delight."
+    },
+    {
+     "v": 4,
+     "text": "Their sorrows shall be multiplied that hasten after another god: their drink offerings of blood will I not offer, nor take up their names into my lips."
+    },
+    {
+     "v": 5,
+     "text": "The LORD is the portion of mine inheritance and of my cup: thou maintainest my lot."
+    },
+    {
+     "v": 6,
+     "text": "The lines are fallen unto me in pleasant places; yea, I have a goodly heritage."
+    },
+    {
+     "v": 7,
+     "text": "I will bless the LORD, who hath given me counsel: my reins also instruct me in the night seasons."
+    },
+    {
+     "v": 8,
+     "text": "I have set the LORD always before me: because he is at my right hand, I shall not be moved."
+    },
+    {
+     "v": 9,
+     "text": "Therefore my heart is glad, and my glory rejoiceth: my flesh also shall rest in hope."
+    },
+    {
+     "v": 10,
+     "text": "For thou wilt not leave my soul in hell; neither wilt thou suffer thine Holy One to see corruption."
+    },
+    {
+     "v": 11,
+     "text": "Thou wilt shew me the path of life: in thy presence is fulness of joy; at thy right hand there are pleasures for evermore."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Let the reading end here. [pause 8]\n\nTurn a little, if you want to, until your body finds the place it likes. [pause 10]\n\nThere is nothing you need to remember. Nothing you need to say back. [pause 12]\n\nIf someone you love is far away tonight, you can leave them in God's hands too. [pause 15]\n\nBreathe out slowly. Then again. [pause 20]\n\nThe night is held. You are held. [pause 20]\n\nSleep well. [pause 45]"
+  }
+ ],
+ "words": 746,
+ "rest_part": "rest4",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 819,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only. Each night keeps its psalm's own point (contentment, tasting God's goodness, remembering benefits, night watches, honest sadness, the higher rock, longing for God's house, our short days, return to rest, surrounded like Jerusalem). Psalm 103's 'healeth' told as memory of who God has been, not a promise; Psalm 42 points a long sadness to a pastor, a doctor or a friend; no sleep or safety promise in the new rests."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

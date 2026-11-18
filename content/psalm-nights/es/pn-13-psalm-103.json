@@ -1,0 +1,236 @@
+{
+ "id": "pn-13-psalm-103",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 103: Bendice, alma mía",
+ "main": [
+  "PSA 103:1-14"
+ ],
+ "companions": [
+  "LAM 3:22-23"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola. Esta es una noche de Salmos. [pause 11]\n\nAcomódate. Deja que tu respiración se haga lenta. [pause 14]\n\nEsta noche leemos el Salmo ciento tres, los primeros catorce versículos. Es un salmo donde un hombre le habla a su propia alma y le recuerda todo lo que Dios ha hecho. [pause 13]\n\nLo vamos a leer despacio, y luego otra vez. [pause 16]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 103:1-14",
+   "label": "Salmos 103:1-14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. BENDICE, alma mía, á Jehová; y bendigan todas mis entrañas su santo nombre."
+    },
+    {
+     "v": 2,
+     "text": "Bendice, alma mía á Jehová, y no olvides ninguno de sus beneficios."
+    },
+    {
+     "v": 3,
+     "text": "El es quien perdona todas tus iniquidades, el que sana todas tus dolencias;"
+    },
+    {
+     "v": 4,
+     "text": "El que rescata del hoyo tu vida, el que te corona de favores y misericordias;"
+    },
+    {
+     "v": 5,
+     "text": "El que sacia de bien tu boca de modo que te rejuvenezcas como el águila."
+    },
+    {
+     "v": 6,
+     "text": "Jehová el que hace justicia y derecho á todos los que padecen violencia."
+    },
+    {
+     "v": 7,
+     "text": "Sus caminos notificó á Moisés, y á los hijos de Israel sus obras."
+    },
+    {
+     "v": 8,
+     "text": "Misericordioso y clemente es Jehová; lento para la ira, y grande en misericordia."
+    },
+    {
+     "v": 9,
+     "text": "No contenderá para siempre, ni para siempre guardará el enojo."
+    },
+    {
+     "v": 10,
+     "text": "No ha hecho con nosotros conforme á nuestras iniquidades; ni nos ha pagado conforme á nuestros pecados."
+    },
+    {
+     "v": 11,
+     "text": "Porque como la altura de los cielos sobre la tierra, engrandeció su misericordia sobre los que le temen."
+    },
+    {
+     "v": 12,
+     "text": "Cuanto está lejos el oriente del occidente, hizo alejar de nosotros nuestras rebeliones."
+    },
+    {
+     "v": 13,
+     "text": "Como el padre se compadece de los hijos, se compadece Jehová de los que le temen."
+    },
+    {
+     "v": 14,
+     "text": "Porque él conoce nuestra condición; acuérdase que somos polvo."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Bendice, alma mía, al Señor. A veces tenemos que hablarle a nuestra propia alma. Recordarle. No olvides ninguno de sus beneficios. [pause 14]\n\nEl salmo hace una lista. Él perdona. Él sana. Él rescata. Él corona de misericordia. No son promesas sobre mañana. Son la memoria de quién ha sido Dios. [pause 16]\n\nLuego viene una imagen de distancia. Tan lejos como está el oriente del occidente, así de lejos echó nuestras rebeliones. Nadie puede caminar hasta donde se acaba el oriente. [pause 14]\n\nY el último versículo de esta noche es muy tierno. Él conoce de qué estamos hechos. Se acuerda de que somos polvo. Sabe lo cansado que estás. No le sorprende. [pause 18]\n\nUn pasaje de Lamentaciones para acompañarlo. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "LAM 3:22-23",
+   "label": "Lamentaciones 3:22-23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Es por la misericordia de Jehová que no somos consumidos, porque nunca decayeron sus misericordias."
+    },
+    {
+     "v": 23,
+     "text": "Nuevas son cada mañana; grande es tu fidelidad."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Sus misericordias no se acaban. Son nuevas cada mañana. Lo que se gastó hoy, mañana habrá misericordia nueva cuando despiertes. [pause 16]\n\nAquí está el Salmo ciento tres otra vez. Deja que tu alma escuche. [pause 18]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 103:1-14",
+   "label": "Salmos 103:1-14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. BENDICE, alma mía, á Jehová; y bendigan todas mis entrañas su santo nombre."
+    },
+    {
+     "v": 2,
+     "text": "Bendice, alma mía á Jehová, y no olvides ninguno de sus beneficios."
+    },
+    {
+     "v": 3,
+     "text": "El es quien perdona todas tus iniquidades, el que sana todas tus dolencias;"
+    },
+    {
+     "v": 4,
+     "text": "El que rescata del hoyo tu vida, el que te corona de favores y misericordias;"
+    },
+    {
+     "v": 5,
+     "text": "El que sacia de bien tu boca de modo que te rejuvenezcas como el águila."
+    },
+    {
+     "v": 6,
+     "text": "Jehová el que hace justicia y derecho á todos los que padecen violencia."
+    },
+    {
+     "v": 7,
+     "text": "Sus caminos notificó á Moisés, y á los hijos de Israel sus obras."
+    },
+    {
+     "v": 8,
+     "text": "Misericordioso y clemente es Jehová; lento para la ira, y grande en misericordia."
+    },
+    {
+     "v": 9,
+     "text": "No contenderá para siempre, ni para siempre guardará el enojo."
+    },
+    {
+     "v": 10,
+     "text": "No ha hecho con nosotros conforme á nuestras iniquidades; ni nos ha pagado conforme á nuestros pecados."
+    },
+    {
+     "v": 11,
+     "text": "Porque como la altura de los cielos sobre la tierra, engrandeció su misericordia sobre los que le temen."
+    },
+    {
+     "v": 12,
+     "text": "Cuanto está lejos el oriente del occidente, hizo alejar de nosotros nuestras rebeliones."
+    },
+    {
+     "v": 13,
+     "text": "Como el padre se compadece de los hijos, se compadece Jehová de los que le temen."
+    },
+    {
+     "v": 14,
+     "text": "Porque él conoce nuestra condición; acuérdase que somos polvo."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ahora deja que las palabras se queden en silencio. [pause 8]\n\nNo tienes que sostenerlas. Mañana van a seguir ahí. [pause 10]\n\nSuelta los hombros. Abre las manos. Deja que la cama cargue tu peso. [pause 12]\n\nSi vuelve una preocupación, puedes entregarla otra vez. Las veces que haga falta. [pause 12]\n\nSiente la calma del cuarto. Los ruidos pequeños. La oscuridad. Aquí no se te pide nada. [pause 20]\n\nLa noche es larga y tranquila, y no estás solo en ella. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 685,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 817,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

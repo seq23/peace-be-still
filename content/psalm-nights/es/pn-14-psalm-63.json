@@ -1,0 +1,198 @@
+{
+ "id": "pn-14-psalm-63",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 63: En las velas de la noche",
+ "main": [
+  "PSA 63:1-8"
+ ],
+ "companions": [
+  "PSA 42:8",
+  "PSA 119:148"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 13]\n\nBusca una manera cómoda de acostarte. Deja que la almohada sostenga tu cabeza. [pause 16]\n\nEl salmo de esta noche es el Salmo sesenta y tres. David lo escribió en el desierto de Judá, en tierra seca, sin agua. Y en ese lugar seco escribió sobre quedarse despierto de noche pensando en Dios. [pause 15]\n\nSi esta noche estás despierto, este salmo es para ti. Lo vamos a leer dos veces. [pause 18]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 63:1-8",
+   "label": "Salmos 63:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David, estando en el desierto de Judá. DIOS, Dios mío eres tú: levantaréme á ti de mañana: mi alma tiene sed de ti, mi carne te desea, en tierra de sequedad y transida sin aguas;"
+    },
+    {
+     "v": 2,
+     "text": "Para ver tu fortaleza y tu gloria, así como te he mirado en el santuario."
+    },
+    {
+     "v": 3,
+     "text": "Porque mejor es tu misericordia que la vida: mis labios te alabarán."
+    },
+    {
+     "v": 4,
+     "text": "Así te bendeciré en mi vida: en tu nombre alzaré mis manos."
+    },
+    {
+     "v": 5,
+     "text": "Como de meollo y de grosura será saciada mi alma; y con labios de júbilo te alabará mi boca,"
+    },
+    {
+     "v": 6,
+     "text": "Cuando me acordaré de ti en mi lecho, cuando meditaré de ti en las velas de la noche."
+    },
+    {
+     "v": 7,
+     "text": "Porque has sido mi socorro; y así en la sombra de tus alas me regocijaré."
+    },
+    {
+     "v": 8,
+     "text": "Está mi alma apegada á ti: tu diestra me ha sostenido."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Dios, Dios mío eres tú. El salmo no empieza con una petición. Empieza con un nombre. Mi Dios. [pause 16]\n\nMi alma tiene sed de ti. En tierra seca, sin agua. Algunas noches se sienten así. Secas. Vacías. Lejos de lo que necesitas. [pause 16]\n\nLuego el versículo seis. Acordarse de Dios en la cama, pensar en él en las velas de la noche. Una vela era una parte de la noche, como los guardias contaban las horas. David pasaba sus horas sin sueño acordándose de Dios. [pause 18]\n\nY alegría, a la sombra de sus alas. [pause 20]\n\nDos versículos cortos sobre la noche. [pause 14]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 42:8",
+   "label": "Salmos 42:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "De día mandará Jehová su misericordia, y de noche su canción será conmigo, y oración al Dios de mi vida."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 119:148",
+   "label": "Salmos 119:148",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 148,
+     "text": "Previnieron mis ojos las vigilias de la noche, para meditar en tus dichos."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "De noche, su canción conmigo. Una canción en la noche. [pause 16]\n\nMis ojos se adelantan a las velas de la noche, para meditar en su palabra. Si no puedes dormir, todavía puedes descansar tu mente en él. [pause 18]\n\nAquí está el Salmo sesenta y tres otra vez. Si tienes los ojos abiertos, que estas palabras sean tu vela de la noche. [pause 20]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 63:1-8",
+   "label": "Salmos 63:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David, estando en el desierto de Judá. DIOS, Dios mío eres tú: levantaréme á ti de mañana: mi alma tiene sed de ti, mi carne te desea, en tierra de sequedad y transida sin aguas;"
+    },
+    {
+     "v": 2,
+     "text": "Para ver tu fortaleza y tu gloria, así como te he mirado en el santuario."
+    },
+    {
+     "v": 3,
+     "text": "Porque mejor es tu misericordia que la vida: mis labios te alabarán."
+    },
+    {
+     "v": 4,
+     "text": "Así te bendeciré en mi vida: en tu nombre alzaré mis manos."
+    },
+    {
+     "v": 5,
+     "text": "Como de meollo y de grosura será saciada mi alma; y con labios de júbilo te alabará mi boca,"
+    },
+    {
+     "v": 6,
+     "text": "Cuando me acordaré de ti en mi lecho, cuando meditaré de ti en las velas de la noche."
+    },
+    {
+     "v": 7,
+     "text": "Porque has sido mi socorro; y así en la sombra de tus alas me regocijaré."
+    },
+    {
+     "v": 8,
+     "text": "Está mi alma apegada á ti: tu diestra me ha sostenido."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ya es suficiente por esta noche. [pause 8]\n\nDeja que tu respiración se haga lenta sola. Entra el aire, sale el aire. No hay nada que arreglar ni nada que terminar. [pause 12]\n\nLo que haya sido el día de hoy, ya pasó. Mañana todavía no llega. Esto es solo la noche, y la noche también es de Dios. [pause 12]\n\nDeja lo que cargaste. Una cosa, y luego otra. [pause 15]\n\nSi tu mente se va a otra parte, déjala volver despacio. No hay una manera equivocada de descansar. [pause 20]\n\nEl Señor está cerca. Más cerca que tu respiración. [pause 20]\n\nBuenas noches. [pause 45]"
+  }
+ ],
+ "words": 636,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 817,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

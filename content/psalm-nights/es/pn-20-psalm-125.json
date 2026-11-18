@@ -1,0 +1,186 @@
+{
+ "id": "pn-20-psalm-125",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 125: Como los montes alrededor",
+ "main": [
+  "PSA 125:1-5"
+ ],
+ "companions": [
+  "PSA 121:5-8",
+  "DEU 33:27"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 22]\n\nBusca tu lugar. Deja que las cobijas se acomoden encima de ti. [pause 25]\n\nEl salmo de esta noche es el Salmo ciento veinticinco. Es corto, uno de los cantos que los peregrinos cantaban de camino a Jerusalén. Es un salmo de montes, y de estar rodeado. [pause 24]\n\nLo vamos a leer despacio, y luego otra vez. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 125:1-5",
+   "label": "Salmos 125:1-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Cántico gradual. LOS que confían en Jehová son como el monte de Sión, que no deslizará: estará para siempre."
+    },
+    {
+     "v": 2,
+     "text": "Como Jerusalem tiene montes alrededor de ella, así Jehová alrededor de su pueblo desde ahora y para siempre."
+    },
+    {
+     "v": 3,
+     "text": "Porque no reposará la vara de la impiedad sobre la suerte de los justos; porque no extiendan los justos sus manos á la iniquidad."
+    },
+    {
+     "v": 4,
+     "text": "Haz bien, oh Jehová, á los buenos, y á los que son rectos en sus corazones."
+    },
+    {
+     "v": 5,
+     "text": "Mas á los que se apartan tras sus perversidades, Jehová los llevará con los que obran iniquidad: y paz sea sobre Israel."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Quien confía en el Señor es firme como el monte de Sión. Un monte no se mueve con el viento. [pause 25]\n\nComo Jerusalén tiene montes alrededor. La ciudad estaba en un círculo de cerros. Desde sus calles se veían montes por todos lados. [pause 25]\n\nAsí el Señor rodea a su pueblo. Por todos lados. Detrás de ti. Delante de ti. Alrededor de esta cama esta noche. [pause 25]\n\nDos pasajes para acompañarlo. [pause 23]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 121:5-8",
+   "label": "Salmos 121:5-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Jehová es tu guardador: Jehová es tu sombra á tu mano derecha."
+    },
+    {
+     "v": 6,
+     "text": "El sol no te fatigará de día, ni la luna de noche."
+    },
+    {
+     "v": 7,
+     "text": "Jehová te guardará de todo mal: él guardará tu alma."
+    },
+    {
+     "v": 8,
+     "text": "Jehová guardará tu salida y tu entrada, desde ahora y para siempre."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "DEU 33:27",
+   "label": "Deuteronomio 33:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "El eterno Dios es tu refugio, y acá abajo los brazos eternos; él echará de delante de ti al enemigo, y dirá: Destruye."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Del Salmo ciento veintiuno, el Señor es tu sombra a tu mano derecha. Y de Deuteronomio, un versículo en el que muchos se han apoyado. Los brazos eternos, debajo. [pause 25]\n\nDebajo. Mientras te acuestas, lo puedes imaginar. Unos brazos que te sostienen desde abajo. [pause 25]\n\nAquí está el Salmo ciento veinticinco otra vez. Piensa en los montes alrededor. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 125:1-5",
+   "label": "Salmos 125:1-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Cántico gradual. LOS que confían en Jehová son como el monte de Sión, que no deslizará: estará para siempre."
+    },
+    {
+     "v": 2,
+     "text": "Como Jerusalem tiene montes alrededor de ella, así Jehová alrededor de su pueblo desde ahora y para siempre."
+    },
+    {
+     "v": 3,
+     "text": "Porque no reposará la vara de la impiedad sobre la suerte de los justos; porque no extiendan los justos sus manos á la iniquidad."
+    },
+    {
+     "v": 4,
+     "text": "Haz bien, oh Jehová, á los buenos, y á los que son rectos en sus corazones."
+    },
+    {
+     "v": 5,
+     "text": "Mas á los que se apartan tras sus perversidades, Jehová los llevará con los que obran iniquidad: y paz sea sobre Israel."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí vamos a terminar. [pause 8]\n\nDeja que el cuarto esté oscuro y quieto a tu alrededor. Que la almohada esté fresca. [pause 10]\n\nEsta noche escuchaste su Palabra. Ya no tienes que pensar en ella. Solo descansa en ella. [pause 12]\n\nTodo lo que en ti está cansado, deja que esté cansado. No tienes que ser fuerte ahora. [pause 15]\n\nQue las últimas palabras que oíste sean las que se queden contigo. Lo demás, déjalo ir. [pause 20]\n\nÉl está despierto, así que tú puedes dormir. [pause 20]\n\nQue descanses. [pause 45]"
+  }
+ ],
+ "words": 533,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 813,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:41:58",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 guardada pegada por código; solo ecos cortos. Cada noche se queda en el punto de su salmo; el Salmo 103 ('sana') como memoria, no promesa; el Salmo 42 manda la tristeza larga a un pastor, un doctor o una amiga; sin promesas de sueño ni seguridad."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
