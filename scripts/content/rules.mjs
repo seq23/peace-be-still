@@ -6,7 +6,10 @@ import { verses, label, words, pauses, sentences, fkGrade, fernandezHuerta, scri
 
 export const GATE_VERSION = "library-1";
 
-const rx = (list) => new RegExp(`(?:${list.join("|")})`, "iu");
+// JS \b is ASCII-only even with the u flag, so "años" and "demás" tripped \bos\b and \bdem\b in Spanish.
+// Every list pattern's \b is a Unicode letter boundary instead.
+const UB = "(?:(?<=[\\p{L}\\p{N}_])(?![\\p{L}\\p{N}_])|(?<![\\p{L}\\p{N}_])(?=[\\p{L}\\p{N}_]))";
+const rx = (list) => new RegExp(`(?:${list.join("|").replaceAll("\\b", UB)})`, "iu");
 // S14 + repo rules, every kind and both doors.
 export const NEVER = rx([
   "black[\\s\\W_]*bible[\\s\\W_]*stor(?:y|ies)", "speak\\s+life", "\\burban\\b", "\\bmanifest\\w*", "\\bmanifestar\\w*",
@@ -47,7 +50,7 @@ export const FAITH_LINK = rx(["hush harbor", "psalm nights", "mi refugio", "youn
 // Narration markers that must never sit inside a character's voice.
 export const NARRATION = {
   en: /\b(?:[Aa]nd|Then|But|So) (?:(?!hast\b|hath\b|have\b|has\b|had\b|thou\b|ye\b|we\b|I\b)[\w-]+ ){0,4}(?:said|saith|answered|spake)\b|\b(?:said|saith|spake|answered) (?:unto|to) (?:him|her|them|the)\b|\band (?:say|says) unto\b|\b(?:[Aa]nd) (?:they|he|she) (?:cried|came)\b|\bcould not answer\b/,
-  es: /\b(?:dijo|dijeron|respondi[óo]|respondieron|habl[óo])\b[^:]{0,80}:/i,
+  es: /\b(?:dijo|dijeron|respondi[óo]|respondieron|habl[óo])(?!\p{L})[^:]{0,80}:/iu,
 };
 export const FIRST_PERSON = /\bmy (?:grand(?:mother|father|mama|daddy|ma|pa)|mama|mother|daddy|father|aunt|uncle|pastor|church|momma)\b|\bwhen I was (?:a child|little|young|a girl|a boy)\b|\bI remember\b|\bI (?:knew|grew up|used to)\b|\bmi (?:abuela|abuelo|mamá|madre|padre|tía|pastor)\b|\bcuando (?:yo )?era (?:niña|niño|pequeña|pequeño)\b|\b(?:yo )?recuerdo\b/i;
 const CALLOUT = "(?:can I get an? (?:amen|witness)|somebody (?:ought to|say) (?:say )?amen|say amen|alguien diga amén|¿me dicen amén\\?)";

@@ -1,0 +1,336 @@
+{
+ "id": "core-004-jonah",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Jonás y el gran pez",
+ "passage": {
+  "refs": [
+   "JON 1:1-16",
+   "JON 2:1-10",
+   "JON 3:1-3"
+  ],
+  "label": "Jonás 1:1-16; Jonás 2:1-10; Jonás 3:1-3"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jonah",
+   "name": "Jonás",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios le habló a Jonás y le dio un encargo. Tenía que ir a Nínive, una ciudad grande y muy mala, y advertirles que Dios había visto su maldad. Pero Jonás no quería ir. Nínive era la capital de los enemigos de su pueblo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 1:3",
+   "label": "Jonás 1:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y Jonás se levantó para huir de la presencia de Jehová á Tarsis, y descendió á Joppe; y halló un navío que partía para Tarsis; y pagando su pasaje entró en él, para irse con ellos á Tarsis de delante de Jehová."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y Jonás se levantó para huir de la presencia de Jehová á Tarsis, y descendió á Joppe; y halló un navío que partía para Tarsis; y pagando su pasaje entró en él, para irse con ellos á Tarsis de delante de Jehová."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun cuando nosotros corremos en la dirección contraria.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nínive quedaba al este. Jonás compró un pasaje en un barco que iba lo más lejos posible hacia el oeste. Creyó que podía alejarse de Dios."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 1:4",
+   "label": "Jonás 1:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Mas Jehová hizo levantar un gran viento en la mar, é hízose una tan gran tempestad en la mar, que pensóse se rompería la nave."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Mas Jehová hizo levantar un gran viento en la mar, é hízose una tan gran tempestad en la mar, que pensóse se rompería la nave."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los marineros tenían miedo. Cada uno clamaba a su dios y tiraban la carga al mar para aligerar el barco. Y Jonás, mientras tanto, estaba dormido en el fondo del barco. Lo despertaron y le preguntaron quién era y de dónde venía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonah",
+   "ref": "JON 1:9",
+   "label": "Jonás 1:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y él les respondió: Hebreo soy, y temo á Jehová, Dios de los cielos, que hizo la mar y la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y él les respondió:"
+    },
+    {
+     "v": 9,
+     "speaker": "jonah",
+     "text": "Hebreo soy, y temo á Jehová, Dios de los cielos, que hizo la mar y la tierra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los marineros se asustaron todavía más. Jonás les había contado que estaba huyendo de ese mismo Dios. Le preguntaron qué tenían que hacer con él para que el mar se calmara."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonah",
+   "ref": "JON 1:12",
+   "label": "Jonás 1:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "El les respondió: Tomadme, y echadme á la mar, y la mar se os quietará: porque yo sé que por mí ha venido esta grande tempestad sobre vosotros."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "El les respondió:"
+    },
+    {
+     "v": 12,
+     "speaker": "jonah",
+     "text": "Tomadme, y echadme á la mar, y la mar se os quietará: porque yo sé que por mí ha venido esta grande tempestad sobre vosotros."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los marineros no querían hacerlo. Remaron con todas sus fuerzas para llegar a tierra, pero no pudieron. Al fin, orando a Dios, tiraron a Jonás al mar. Y el mar se calmó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 2:1",
+   "label": "Jonás 2:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Mas Jehová había prevenido un gran pez que tragase á Jonás: y estuvo Jonás en el vientre del pez tres días y tres noches."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Mas Jehová había prevenido un gran pez que tragase á Jonás: y estuvo Jonás en el vientre del pez tres días y tres noches."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tres días y tres noches en la oscuridad. Parecía el final. Pero Dios había preparado ese pez. No era un castigo para destruirlo. Era la manera en que Dios lo detuvo y lo guardó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 2:2",
+   "label": "Jonás 2:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y oró Jonás desde el vientre del pez á Jehová su Dios,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y oró Jonás desde el vientre del pez á Jehová su Dios,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonah",
+   "ref": "JON 2:3",
+   "label": "Jonás 2:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y dijo: Clamé de mi tribulación á Jehová, y él me oyó; del vientre del sepulcro clamé, y mi voz oiste."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y dijo:"
+    },
+    {
+     "v": 3,
+     "speaker": "jonah",
+     "text": "Clamé de mi tribulación á Jehová, y él me oyó; del vientre del sepulcro clamé, y mi voz oiste."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Allí, en el lugar más bajo y más oscuro, Jonás oró. Y Dios lo escuchó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonah",
+   "ref": "JON 2:10",
+   "label": "Jonás 2:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Yo empero con voz de alabanza te sacrificaré; pagaré lo que prometí. La salvación pertenece á Jehová. Y mandó Jehová al pez, y vomitó á Jonás en tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "jonah",
+     "text": "Yo empero con voz de alabanza te sacrificaré; pagaré lo que prometí. La salvación pertenece á Jehová."
+    },
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y mandó Jehová al pez, y vomitó á Jonás en tierra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Después Dios le habló a Jonás por segunda vez. Y esta vez Jonás se levantó y fue a Nínive."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuando Jonás por fin llegó a Nínive y dio el mensaje, la ciudad entera se arrepintió, desde el rey hasta el más pequeño. Y Dios tuvo compasión de ellos. El mismo Dios que le tuvo paciencia a Jonás tuvo misericordia de sus enemigos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios no se rindió con Jonás. Lo buscó en el barco, lo guardó en el pez, y le dio otra oportunidad. Si alguna vez has corrido lejos de Dios, esta historia es para ti. Desde el lugar más profundo, todavía puedes orar. Y el Dios de las segundas oportunidades todavía escucha."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 564,
+ "est_seconds": 314,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 564 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Jonah 1-3 in RV1909 versification (the fish is RV1909 2:1, the prayer 2:2-10); Nineveh's repentance (3:5-10) told in words; second chances without a promise of outcome."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Warm, plain; the sailors shown with respect."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

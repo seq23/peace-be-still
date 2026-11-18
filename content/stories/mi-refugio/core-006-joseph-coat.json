@@ -1,0 +1,407 @@
+{
+ "id": "core-006-joseph-coat",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "José y su túnica de colores",
+ "passage": {
+  "refs": [
+   "GEN 37:3-28",
+   "GEN 39:2"
+  ],
+  "label": "Génesis 37:3-28; Génesis 39:2"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "joseph",
+   "name": "José",
+   "age": "teen",
+   "gender": "m"
+  },
+  {
+   "id": "brothers",
+   "name": "sus hermanos",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "judah",
+   "name": "Judá",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob, a quien Dios también llamó Israel, tenía doce hijos. José era uno de los menores. Le había nacido cuando ya era viejo, y no escondía que lo quería más que a los otros."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:3",
+   "label": "Génesis 37:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y amaba Israel á José más que á todos sus hijos, porque le había tenido en su vejez: y le hizo una ropa de diversos colores."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y amaba Israel á José más que á todos sus hijos, porque le había tenido en su vejez: y le hizo una ropa de diversos colores."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:4",
+   "label": "Génesis 37:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y viendo sus hermanos que su padre lo amaba más que á todos sus hermanos, aborrecíanle, y no le podían hablar pacíficamente."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y viendo sus hermanos que su padre lo amaba más que á todos sus hermanos, aborrecíanle, y no le podían hablar pacíficamente."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun en una familia herida, Dios estaba obrando.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Una túnica especial, de muchos colores. Cada vez que los hermanos la veían, les recordaba que su padre tenía un favorito. Y el resentimiento creció."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Para colmo, José tuvo unos sueños, y se los contó a sus hermanos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 37:7",
+   "label": "Génesis 37:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "He aquí que atábamos manojos en medio del campo, y he aquí que mi manojo se levantaba, y estaba derecho, y que vuestros manojos estaban alrededor, y se inclinaban al mío."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "joseph",
+     "text": "He aquí que atábamos manojos en medio del campo, y he aquí que mi manojo se levantaba, y estaba derecho, y que vuestros manojos estaban alrededor, y se inclinaban al mío."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En otro sueño, el sol, la luna y once estrellas se inclinaban ante él. Sus hermanos lo odiaron todavía más."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un día, Jacob mandó a José a ver cómo estaban sus hermanos, que cuidaban los rebaños lejos de casa. Ellos lo vieron venir desde lejos, con su túnica de colores."
+  },
+  {
+   "type": "scripture",
+   "speaker": "brothers",
+   "ref": "GEN 37:19",
+   "label": "Génesis 37:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y dijeron el uno al otro: He aquí viene el soñador;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y dijeron el uno al otro:"
+    },
+    {
+     "v": 19,
+     "speaker": "brothers",
+     "text": "He aquí viene el soñador;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "brothers",
+   "ref": "GEN 37:20",
+   "label": "Génesis 37:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Ahora pues, venid, y matémoslo y echémosle en una cisterna, y diremos: Alguna mala bestia le devoró: y veremos qué serán sus sueños."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "brothers",
+     "text": "Ahora pues, venid, y matémoslo y echémosle en una cisterna, y diremos: Alguna mala bestia le devoró: y veremos qué serán sus sueños."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rubén, el mayor, no quiso que lo mataran. Les dijo que mejor lo echaran en un pozo, pensando volver después para rescatarlo y llevarlo a casa."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:23",
+   "label": "Génesis 37:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Y sucedió que, cuando llegó José á sus hermanos, ellos hicieron desnudar á José su ropa, la ropa de colores que tenía sobre sí;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Y sucedió que, cuando llegó José á sus hermanos, ellos hicieron desnudar á José su ropa, la ropa de colores que tenía sobre sí;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:24",
+   "label": "Génesis 37:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Y tomáronlo, y echáronle en la cisterna; mas la cisterna estaba vacía, no había en ella agua."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y tomáronlo, y echáronle en la cisterna; mas la cisterna estaba vacía, no había en ella agua."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Le quitaron la túnica. Lo tiraron al pozo seco. Y luego se sentaron a comer, mientras su hermano estaba allí abajo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "judah",
+   "ref": "GEN 37:26",
+   "label": "Génesis 37:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Entonces Judá dijo á sus hermanos: ¿Qué provecho el que matemos á nuestro hermano y encubramos su muerte?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Entonces Judá dijo á sus hermanos:"
+    },
+    {
+     "v": 26,
+     "speaker": "judah",
+     "text": "¿Qué provecho el que matemos á nuestro hermano y encubramos su muerte?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "judah",
+   "ref": "GEN 37:27",
+   "label": "Génesis 37:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Venid, y vendámosle á los Ismaelitas, y no sea nuestra mano sobre él; que nuestro hermano es nuestra carne. Y sus hermanos acordaron con él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "judah",
+     "text": "Venid, y vendámosle á los Ismaelitas, y no sea nuestra mano sobre él; que nuestro hermano es nuestra carne."
+    },
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Y sus hermanos acordaron con él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No lo mataron. Pero lo vendieron como si fuera mercancía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:28",
+   "label": "Génesis 37:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Y como pasaban los Midianitas mercaderes, sacaron ellos á José de la cisterna, y trajéronle arriba, y le vendieron á los Ismaelitas por veinte piezas de plata. Y llevaron á José á Egipto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Y como pasaban los Midianitas mercaderes, sacaron ellos á José de la cisterna, y trajéronle arriba, y le vendieron á los Ismaelitas por veinte piezas de plata. Y llevaron á José á Egipto."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fue una traición terrible. José era apenas un muchacho, vendido por sus propios hermanos, llevado como esclavo a un país extraño. Desde afuera parecía que su historia había terminado en ese pozo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 39:2",
+   "label": "Génesis 39:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Mas Jehová fué con José, y fué varón prosperado: y estaba en la casa de su señor el Egipcio."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Mas Jehová fué con José, y fué varón prosperado: y estaba en la casa de su señor el Egipcio."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagina a José en ese pozo, oscuro y seco, oyendo a sus hermanos hablar arriba. Imagina el camino a Egipto, atado, sin saber si volvería a ver a su padre."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero la Biblia dice que Jehová estaba con José. En Egipto, en la casa de su amo, después en la cárcel, y al final en el palacio. Muchos años después, José pudo decirles a sus hermanos que Dios había convertido en bien lo que ellos quisieron para mal. Cuando la familia nos hiere, Dios no se va. Él sigue con nosotros, aun en el pozo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 581,
+ "est_seconds": 323,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 37:3-28 and 39:2; Reuben (v21-22) and the second dream (v9) told in words; Gen 50:20 echoed in our own words."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Family wounds named gently; no blame beyond the text."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

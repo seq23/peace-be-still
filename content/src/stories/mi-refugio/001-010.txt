@@ -1,0 +1,264 @@
+# Mi Refugio, historias 1-10 (español de las Américas, Reina-Valera 1909). Escritas por Claude (sin borrador de modelo gratuito), con la lectura pastoral y cultural de Claude.
+
+=== core-001-peace-be-still | Calla, enmudece
+passage: MAR 4:1; MAR 4:35-41
+shelf: adult
+violence: none
+sexual: none
+cast: disciples|los discípulos|adult|group
+N: Jesús había pasado todo el día enseñando junto al mar de Galilea. Había tanta gente que tuvo que subirse a una barca y hablarles desde el agua. Cuando cayó la tarde, estaba cansado.
+S: MAR 4:35
+S: MAR 4:36
+N: Varios de sus discípulos eran pescadores. Conocían ese lago desde niños. Sabían que el viento podía bajar de los montes de repente y levantar olas en pocos minutos.
+S: MAR 4:37
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] También en medio de la tormenta, cuando el agua ya está entrando en la barca.
+N: Las olas golpeaban la barca y el agua seguía entrando. Aquellos hombres que sabían navegar tuvieron miedo. Y Jesús, ¿dónde estaba?
+S: MAR 4:38 @disciples
+N: Estaba dormido, con la cabeza sobre una almohada, en la parte de atrás. Ellos lo despertaron con una pregunta que muchos hemos hecho alguna vez. Señor, ¿no te importa lo que me está pasando?
+S: MAR 4:39
+N: Tres palabras. Calla, enmudece. Y el viento se detuvo. El mar, que un momento antes rugía, quedó quieto como un espejo. Hubo una gran calma.
+S: MAR 4:40
+N: Jesús no les preguntó por qué lo despertaron. Les preguntó por qué tenían tanto miedo. Él estaba en la barca con ellos todo el tiempo, aun cuando parecía que dormía.
+S: MAR 4:41 @disciples after "el uno al otro. "
+N: Aquella noche los discípulos aprendieron algo nuevo de su Maestro. El que dormía en la barca era el mismo que manda al viento y al mar.
+N: Piensa en esos hombres. Habían dejado sus redes para seguir a Jesús. Lo habían visto sanar enfermos y enseñar a multitudes. Y aun así, cuando el agua empezó a subir, el miedo fue más fuerte que todo lo que habían visto.
+N: Jesús no los regañó por despertarlo. No los dejó solos con el viento. Se levantó y habló. Y lo que ellos no podían controlar con todas sus fuerzas, él lo calmó con una palabra.
+N: Después de la calma vino otra clase de temor. Ya no era miedo a la tormenta. Era el asombro de estar delante de alguien tan grande.
+N: Hay noches en que la tormenta llega sin avisar. Una noticia, una cuenta, una enfermedad, una preocupación que no nos deja dormir. A veces parece que Dios está dormido. Pero él sigue en la barca. Y la misma voz que le habló al mar todavía puede traer calma a un corazón asustado.
+
+=== core-002-red-sea | Moisés y el mar Rojo
+passage: EXO 14:5-31
+shelf: adult
+violence: mild
+sexual: none
+cast: moses|Moisés|adult|m; israelites|los hijos de Israel|adult|group
+N: Después de muchos años de esclavitud en Egipto, por fin el pueblo de Israel había salido libre. Pero apenas se habían ido, el rey Faraón cambió de idea. Juntó sus carros de guerra y salió a perseguirlos.
+N: El pueblo acampó junto al mar. Delante tenían el agua. Detrás venía el ejército de Egipto. No había por dónde escapar.
+S: EXO 14:10
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun cuando el mar está delante y el enemigo viene detrás.
+N: Tuvieron mucho miedo. Y el miedo los hizo hablar.
+S: EXO 14:11 @israelites
+S: EXO 14:12 @israelites whole
+N: Es fácil juzgarlos, pero muchos hemos hablado así. Cuando el camino se pone difícil, el pasado empieza a parecer mejor de lo que fue. Hasta la esclavitud les parecía mejor que el miedo.
+S: EXO 14:13 @moses
+S: EXO 14:14 @moses whole
+N: Quédense quietos. No era el momento de correr ni de pelear. Era el momento de ver lo que Dios iba a hacer.
+N: Entonces Dios le dijo a Moisés que levantara su vara y extendiera la mano sobre el mar. La nube que los guiaba se puso detrás del pueblo, entre ellos y los egipcios. Para Egipto era oscuridad. Para Israel era luz.
+S: EXO 14:21
+S: EXO 14:22
+N: Toda la noche sopló el viento. Y el pueblo caminó por en medio del mar, en tierra seca, con una pared de agua a cada lado. Ancianos, niños, familias enteras, con sus animales y sus cosas.
+N: Cuando los egipcios entraron detrás de ellos, las ruedas de sus carros se trabaron. Y al amanecer, cuando Moisés volvió a extender la mano, el agua regresó a su lugar. El pueblo de Israel quedó a salvo del otro lado.
+S: EXO 14:31
+N: Moisés también tenía razones para tener miedo. Pero había escuchado a Dios, y eso le dio palabras para su pueblo.
+N: La noche que parecía el final fue la noche en que Dios abrió un camino donde no había camino. Ellos no hicieron el milagro. Solo tuvieron que dar el siguiente paso cuando Dios lo abrió. A veces lo único que nos toca es quedarnos quietos, confiar, y caminar cuando él dice que caminemos.
+
+=== core-003-lions-den | Daniel en el foso de los leones
+passage: DAN 6:1-23
+shelf: adult
+violence: mild
+sexual: none
+cast: king|el rey|adult|m; daniel|Daniel|elder|m
+N: Daniel ya era un hombre mayor. Había vivido casi toda su vida lejos de su tierra, sirviendo a reyes extranjeros. El rey Darío lo respetaba tanto que pensaba ponerlo sobre todo el reino.
+N: Eso no les gustó a los otros gobernadores. Buscaron algo malo en Daniel y no encontraron nada. Así que buscaron una trampa en su fe. Convencieron al rey de firmar una ley. Durante treinta días nadie podía orar a ningún dios ni a ningún hombre, sino solo al rey. El que no obedeciera iría al foso de los leones.
+S: DAN 6:10
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Daniel siguió orando, igual que antes, con las ventanas abiertas.
+N: Daniel no escondió su fe ni hizo un escándalo. Simplemente hizo lo mismo que hacía todos los días. Abrió sus ventanas hacia Jerusalén, se arrodilló y oró tres veces al día.
+N: Sus enemigos lo vieron y fueron corriendo al rey. El rey se dio cuenta de que lo habían engañado. Pasó todo el día buscando una manera de salvar a Daniel, pero su propia ley no se podía cambiar.
+S: DAN 6:16 @king after "dijo á Daniel: "
+N: Hasta el rey sabía en quién confiaba Daniel. Pusieron una piedra sobre la boca del foso y la sellaron. Esa noche el rey no comió. No quiso música. No pudo dormir.
+S: DAN 6:19
+S: DAN 6:20 @king after "y hablando el rey dijo á Daniel: "
+N: Imagina el silencio mientras el rey esperaba una respuesta. Y entonces, desde abajo, se oyó una voz tranquila.
+S: DAN 6:21 @daniel after "habló Daniel con el rey: "
+S: DAN 6:22 @daniel whole
+N: Daniel no dijo que había sido valiente. Dijo que Dios había enviado su ángel. Daniel había pasado la noche entera, entre leones, y sin un rasguño.
+S: DAN 6:23
+N: Los hombres que lo acusaron pensaron que habían ganado. Pero esa noche, en el foso, Daniel no estaba solo.
+N: Porque creyó en su Dios. Eso es lo que dice la Biblia. Daniel no salvó su vida por ser fuerte ni por tener amigos importantes. Confió en Dios en lo pequeño, en sus oraciones de cada día, y por eso pudo confiar en él en el foso. La fe que se practica en los días normales es la que nos sostiene en las noches difíciles.
+
+=== core-004-jonah | Jonás y el gran pez
+passage: JON 1:1-16; JON 2:1-10; JON 3:1-3
+shelf: adult
+violence: mild
+sexual: none
+cast: jonah|Jonás|adult|m
+N: Dios le habló a Jonás y le dio un encargo. Tenía que ir a Nínive, una ciudad grande y muy mala, y advertirles que Dios había visto su maldad. Pero Jonás no quería ir. Nínive era la capital de los enemigos de su pueblo.
+S: JON 1:3
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun cuando nosotros corremos en la dirección contraria.
+N: Nínive quedaba al este. Jonás compró un pasaje en un barco que iba lo más lejos posible hacia el oeste. Creyó que podía alejarse de Dios.
+S: JON 1:4
+N: Los marineros tenían miedo. Cada uno clamaba a su dios y tiraban la carga al mar para aligerar el barco. Y Jonás, mientras tanto, estaba dormido en el fondo del barco. Lo despertaron y le preguntaron quién era y de dónde venía.
+S: JON 1:9 @jonah
+N: Los marineros se asustaron todavía más. Jonás les había contado que estaba huyendo de ese mismo Dios. Le preguntaron qué tenían que hacer con él para que el mar se calmara.
+S: JON 1:12 @jonah
+N: Los marineros no querían hacerlo. Remaron con todas sus fuerzas para llegar a tierra, pero no pudieron. Al fin, orando a Dios, tiraron a Jonás al mar. Y el mar se calmó.
+S: JON 2:1
+N: Tres días y tres noches en la oscuridad. Parecía el final. Pero Dios había preparado ese pez. No era un castigo para destruirlo. Era la manera en que Dios lo detuvo y lo guardó.
+S: JON 2:2
+S: JON 2:3 @jonah after "Y dijo: "
+N: Allí, en el lugar más bajo y más oscuro, Jonás oró. Y Dios lo escuchó.
+S: JON 2:10 @jonah until "Y mandó Jehová"
+N: Después Dios le habló a Jonás por segunda vez. Y esta vez Jonás se levantó y fue a Nínive.
+N: Cuando Jonás por fin llegó a Nínive y dio el mensaje, la ciudad entera se arrepintió, desde el rey hasta el más pequeño. Y Dios tuvo compasión de ellos. El mismo Dios que le tuvo paciencia a Jonás tuvo misericordia de sus enemigos.
+N: Dios no se rindió con Jonás. Lo buscó en el barco, lo guardó en el pez, y le dio otra oportunidad. Si alguna vez has corrido lejos de Dios, esta historia es para ti. Desde el lugar más profundo, todavía puedes orar. Y el Dios de las segundas oportunidades todavía escucha.
+
+=== core-005-david-goliath | David y Goliath
+passage: 1SA 17:4-50
+shelf: adult
+violence: mild
+sexual: none
+cast: david|David|teen|m; saul|Saúl|adult|m
+N: El ejército de Israel y el ejército de los filisteos estaban frente a frente, cada uno en un monte, con un valle en medio. Todos los días salía un gigante del campamento filisteo. Se llamaba Goliath. Era enorme, con armadura de bronce y una lanza pesadísima. Y gritaba lo mismo cada mañana. Mándenme a un hombre que pelee conmigo.
+N: Durante cuarenta días nadie se atrevió. Ni siquiera el rey Saúl.
+N: Un día llegó David, el hijo menor de Isaí. No era soldado. Era un muchacho que cuidaba las ovejas de su padre. Había venido a traerles comida a sus hermanos. Y oyó al gigante burlarse del Dios de Israel.
+S: 1SA 17:32 @david
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Un muchacho con fe dio un paso al frente cuando nadie más quería.
+S: 1SA 17:33 @saul
+N: Saúl tenía razón según lo que se veía. Pero David le contó lo que nadie había visto. Mientras cuidaba las ovejas, vino un león y otro día un oso, y él los enfrentó para rescatar a un cordero.
+S: 1SA 17:37 @david until "Y dijo Saúl"
+N: Saúl quiso ponerle su propia armadura, pero a David le quedaba grande y no podía caminar. Se la quitó. Tomó su vara, su honda, y escogió cinco piedras lisas del arroyo.
+N: Cuando Goliat vio que le mandaban a un muchacho, se rió de él y lo maldijo. Pero David no se dejó intimidar.
+S: 1SA 17:45 @david
+N: David sabía que la pelea no se trataba de él. Se trataba del nombre de Dios.
+S: 1SA 17:47 @david whole
+N: Entonces David corrió hacia el gigante.
+S: 1SA 17:49
+N: Una piedra. Un muchacho con una honda. Y el gigante que había asustado a todo un ejército cayó al suelo.
+N: Todo el ejército vio lo que pasó. Los soldados que llevaban cuarenta días escondidos de miedo se levantaron con un grito y salieron detrás de los filisteos.
+N: David no era el más grande ni el más fuerte. Pero conocía a su Dios. Lo había visto ser fiel en el campo, con las ovejas, cuando nadie estaba mirando. Hay gigantes que nos parecen imposibles. El miedo, la deuda, una enfermedad, una pérdida. La historia de David nos recuerda que la batalla es de Dios, y que él no necesita que seamos grandes. Necesita que confiemos en él.
+
+=== core-006-joseph-coat | José y su túnica de colores
+passage: GEN 37:3-28; GEN 39:2
+shelf: adult
+violence: mild
+sexual: none
+cast: joseph|José|teen|m; brothers|sus hermanos|adult|group; judah|Judá|adult|m
+N: Jacob, a quien Dios también llamó Israel, tenía doce hijos. José era uno de los menores. Le había nacido cuando ya era viejo, y no escondía que lo quería más que a los otros.
+S: GEN 37:3
+S: GEN 37:4
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun en una familia herida, Dios estaba obrando.
+N: Una túnica especial, de muchos colores. Cada vez que los hermanos la veían, les recordaba que su padre tenía un favorito. Y el resentimiento creció.
+N: Para colmo, José tuvo unos sueños, y se los contó a sus hermanos.
+S: GEN 37:7 @joseph whole
+N: En otro sueño, el sol, la luna y once estrellas se inclinaban ante él. Sus hermanos lo odiaron todavía más.
+N: Un día, Jacob mandó a José a ver cómo estaban sus hermanos, que cuidaban los rebaños lejos de casa. Ellos lo vieron venir desde lejos, con su túnica de colores.
+S: GEN 37:19 @brothers
+S: GEN 37:20 @brothers whole
+N: Rubén, el mayor, no quiso que lo mataran. Les dijo que mejor lo echaran en un pozo, pensando volver después para rescatarlo y llevarlo a casa.
+S: GEN 37:23
+S: GEN 37:24
+N: Le quitaron la túnica. Lo tiraron al pozo seco. Y luego se sentaron a comer, mientras su hermano estaba allí abajo.
+S: GEN 37:26 @judah
+S: GEN 37:27 @judah until "Y sus hermanos"
+N: No lo mataron. Pero lo vendieron como si fuera mercancía.
+S: GEN 37:28
+N: Fue una traición terrible. José era apenas un muchacho, vendido por sus propios hermanos, llevado como esclavo a un país extraño. Desde afuera parecía que su historia había terminado en ese pozo.
+S: GEN 39:2
+N: Imagina a José en ese pozo, oscuro y seco, oyendo a sus hermanos hablar arriba. Imagina el camino a Egipto, atado, sin saber si volvería a ver a su padre.
+N: Pero la Biblia dice que Jehová estaba con José. En Egipto, en la casa de su amo, después en la cárcel, y al final en el palacio. Muchos años después, José pudo decirles a sus hermanos que Dios había convertido en bien lo que ellos quisieron para mal. Cuando la familia nos hiere, Dios no se va. Él sigue con nosotros, aun en el pozo.
+
+=== core-007-prodigal-son | El hijo que volvió a casa
+passage: LUK 15:11-32
+shelf: adult
+violence: none
+sexual: none
+cast: younger-son|menor|adult|m; father|padre|elder|m; elder-son|mayor|adult|m
+N: Jesús contó una historia sobre un padre que tenía dos hijos. Un día el menor le dijo a su papá que quería su parte de la herencia ya, sin esperar. Era como decirle que no podía esperar a que se muriera. Y el padre se la dio.
+S: LUK 15:13
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aunque el hijo se fue lejos, el padre seguía siendo bueno.
+N: Lo gastó todo. Y cuando ya no le quedaba nada, vino una gran hambre a esa tierra. Terminó cuidando cerdos, y tenía tanta hambre que hasta la comida de los cerdos le parecía buena. Nadie le daba nada.
+S: LUK 15:17 @younger-son
+S: LUK 15:18 @younger-son whole
+S: LUK 15:19 @younger-son whole
+N: Volvió en sí. Ese fue el comienzo. Ensayó lo que le iba a decir a su papá, y emprendió el camino a casa.
+S: LUK 15:20
+N: El padre lo vio cuando todavía estaba lejos. Eso quiere decir que estaba mirando el camino. Quizás todos los días. Y cuando lo vio, no esperó. Corrió. Un hombre mayor, corriendo por el camino para abrazar al hijo que lo había deshonrado.
+S: LUK 15:21 @younger-son
+N: El hijo empezó su discurso, pero el padre no lo dejó terminar.
+S: LUK 15:22 @father
+S: LUK 15:23 @father whole
+S: LUK 15:24 @father until "Y comenzaron"
+N: Pero había otro hijo. El mayor venía del campo, oyó la música, y cuando supo lo que pasaba, se enojó y no quiso entrar. El padre salió a buscarlo a él también.
+S: LUK 15:29 @elder-son after "dijo al padre: "
+S: LUK 15:31 @father
+S: LUK 15:32 @father whole
+N: El padre no le pidió explicaciones. No le dio una lista de condiciones. Le puso ropa nueva, un anillo y zapatos. Eran señales de que seguía siendo su hijo, no un empleado.
+N: Jesús terminó la historia ahí, con el hijo mayor afuera y la puerta abierta. Algunos de nosotros somos el hijo que se fue. Otros somos el que se quedó y se resintió. Pero la historia es sobre el padre. Un padre que corre hacia el que vuelve y sale a buscar al que no quiere entrar. Así es el amor de Dios. Siempre hay lugar en la mesa.
+
+=== core-008-ruth-naomi | Ruth y Noemi
+passage: RUT 1:1-22
+shelf: adult
+violence: none
+sexual: none
+cast: naomi|Noemi|elder|f; ruth|Ruth|adult|f
+N: Hubo un tiempo de hambre en Israel. Una familia de Belén se fue a vivir a Moab, una tierra extranjera, buscando comida. Eran Elimelech, su esposa Noemi y sus dos hijos.
+N: Allí murió Elimelec. Los hijos se casaron con mujeres moabitas, Orpha y Ruth. Y unos diez años después, murieron también los dos hijos. Noemi se quedó sola, lejos de su tierra, con sus dos nueras viudas.
+N: Cuando supo que en Israel ya había pan otra vez, decidió volver a casa. Sus nueras salieron con ella. Pero en el camino, Noemi se detuvo.
+S: RUT 1:8 @naomi
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun en el camino largo, con el corazón vacío.
+N: Noemi las amaba. No quería que se quedaran viudas y solas en un país donde serían extranjeras. Les dijo que volvieran y buscaran un nuevo hogar.
+S: RUT 1:14
+N: Orpha se despidió con un beso y regresó. Nadie la culpa. Pero Ruth se aferró a su suegra y no la soltó.
+S: RUT 1:16 @ruth
+S: RUT 1:17 @ruth whole
+N: Ruth dejó su tierra, su familia y sus dioses. Escogió a Noemi, al pueblo de Noemi y al Dios de Noemi. Cuando Noemi vio que estaba decidida, no le dijo nada más.
+N: Las dos caminaron juntas hasta Belén. Cuando llegaron, todo el pueblo se alborotó. Las mujeres se preguntaban si de verdad era Noemi.
+S: RUT 1:20 @naomi
+S: RUT 1:21 @naomi whole
+N: Noemi significa agradable. Mara significa amarga. Ella sentía que había vuelto con las manos vacías. Pero no estaba vacía del todo. A su lado caminaba Ruth.
+S: RUT 1:22
+N: Ruth no tenía ninguna obligación. Era joven, podía volver con su familia y empezar de nuevo. Pero el amor la hizo quedarse. Prometió acompañar a Noemi hasta la muerte.
+N: Llegaron justo al comienzo de la cosecha. Dios ya estaba preparando algo. En los campos de Belén, Ruth conocería a Booz, y de su familia nacería el rey David. Y de la familia de David vendría Jesús. A veces, en nuestra amargura, no vemos a la persona que Dios puso a nuestro lado. Pero él no nos deja solos en el camino de regreso.
+
+=== core-009-fiery-furnace | El horno de fuego
+passage: DAN 3:1-28
+shelf: adult
+violence: mild
+sexual: none
+cast: nebuchadnezzar|Nabucodonosor|adult|m; the-three|Sadrach, Mesach, y Abed-nego|adult|group
+N: El rey Nabucodonosor de Babilonia hizo una estatua de oro enorme. Reunió a todos los líderes del reino y dio una orden. Cuando sonara la música, todos tenían que arrodillarse y adorar la estatua. El que no lo hiciera sería echado en un horno de fuego.
+N: Sonó la música, y todo el mundo se arrodilló. Todos menos tres jóvenes judíos. Sadrach, Mesach y Abed-nego.
+S: DAN 3:15 @nebuchadnezzar whole
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Ellos lo dijeron delante del rey, con el fuego ya encendido.
+N: El rey les dio otra oportunidad. Y luego les hizo una pregunta. ¿Qué dios los va a librar de mi mano?
+S: DAN 3:16 @the-three
+S: DAN 3:17 @the-three whole
+S: DAN 3:18 @the-three whole
+N: Y si no. Esas tres palabras dicen mucho. Ellos sabían que Dios podía salvarlos. Pero aunque no lo hiciera, igual no iban a adorar la estatua. Su fe no dependía del resultado.
+N: El rey se puso furioso. Mandó calentar el horno siete veces más de lo normal. El fuego estaba tan fuerte que mató a los soldados que los echaron adentro. Y los tres cayeron atados en medio de las llamas.
+S: DAN 3:24 @nebuchadnezzar after "dijo á los de su consejo: " until "Ellos respondieron"
+S: DAN 3:25 @nebuchadnezzar
+N: Cuatro hombres. Sueltos. Caminando en medio del fuego. No estaban solos allí adentro.
+N: El rey se acercó a la puerta del horno y los llamó para que salieran. Y salieron. No se les había quemado ni un cabello. Su ropa ni siquiera olía a humo.
+S: DAN 3:28 @nebuchadnezzar
+N: El mismo rey que los había condenado ahora bendecía a su Dios. Los tres jóvenes no dieron un discurso. Su fidelidad habló por ellos.
+N: Dios no los libró de entrar al fuego. Los acompañó en el fuego. A veces oramos para que Dios nos saque del problema, y él decide caminar con nosotros en medio de él. Su fe no era una apuesta. Era confianza. Y si no, igual seguimos con él.
+
+=== core-010-hem-of-his-garment | La mujer que tocó su manto
+passage: MAR 5:22-34; MAR 5:42
+shelf: adult
+violence: none
+sexual: none
+cast: woman|mujer|adult|f; disciples|sus discípulos|adult|group
+N: Jesús iba de camino a la casa de un hombre llamado Jairo, cuya hija estaba muy enferma. Una multitud lo seguía, apretándolo por todos lados. Y en medio de esa multitud había una mujer que nadie notaba.
+S: MAR 5:25
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Doce años de espera, y Dios no se había olvidado de ella.
+N: Doce años. Según la ley de aquel tiempo, una mujer con esa enfermedad se consideraba impura. No podía entrar al templo. Mucha gente no quería ni que la tocara. Doce años de soledad además del dolor.
+S: MAR 5:26
+N: Había ido a todos los médicos. Había gastado todo lo que tenía. Y en vez de mejorar, estaba peor.
+S: MAR 5:27
+S: MAR 5:28 @woman after "Porque decía: "
+N: No pidió nada en voz alta. No se atrevió a ponerse delante de él. Solo se acercó por detrás y extendió la mano.
+S: MAR 5:29
+S: MAR 5:30
+N: Jesús se detuvo. Toda esa gente, y él quería saber quién lo había tocado.
+S: MAR 5:31 @disciples after "Y le dijeron sus discípulos: "
+S: MAR 5:32
+N: Jesús no estaba enojado. Quería ver su cara. Quería que ella supiera que no era una más en la multitud.
+S: MAR 5:33
+S: MAR 5:34
+N: Imagina lo que era vivir así. Cada día escondiéndose. Cada día sintiendo que estorbaba. Sin poder abrazar a nadie sin que la miraran mal. Y cada médico nuevo le daba un poco de esperanza, y luego se la quitaba.
+N: Ella sintió en su cuerpo que estaba sana. Pudo haberse ido en silencio. Nadie se habría enterado. Pero Jesús no quería que se fuera escondida.
+N: Ella llegó temblando. Tenía miedo de que la regañaran por tocar a un maestro siendo impura. Le contó toda la verdad, delante de todos. Y en vez de un regaño, recibió una bendición.
+N: Jesús le dijo que se fuera en paz. Por primera vez en doce años, podía volver a su casa, a su gente y a la casa de Dios sin vergüenza.
+N: Hija. Así la llamó Jesús. Ella había venido escondida, sintiéndose rechazada por todos. Se fue con un nombre de familia. Jesús no solo sanó su cuerpo. Le devolvió su lugar. Él no se cansa de detenerse por la persona que todos los demás pasan de largo.

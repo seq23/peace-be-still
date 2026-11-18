@@ -1,0 +1,330 @@
+{
+ "id": "core-002-red-sea",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Moisés y el mar Rojo",
+ "passage": {
+  "refs": [
+   "EXO 14:5-31"
+  ],
+  "label": "Éxodo 14:5-31"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "moses",
+   "name": "Moisés",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "israelites",
+   "name": "los hijos de Israel",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Después de muchos años de esclavitud en Egipto, por fin el pueblo de Israel había salido libre. Pero apenas se habían ido, el rey Faraón cambió de idea. Juntó sus carros de guerra y salió a perseguirlos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El pueblo acampó junto al mar. Delante tenían el agua. Detrás venía el ejército de Egipto. No había por dónde escapar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 14:10",
+   "label": "Éxodo 14:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y cuando Faraón se hubo acercado, los hijos de Israel alzaron sus ojos, y he aquí los Egipcios que venían tras ellos; por lo que temieron en gran manera, y clamaron los hijos de Israel á Jehová."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y cuando Faraón se hubo acercado, los hijos de Israel alzaron sus ojos, y he aquí los Egipcios que venían tras ellos; por lo que temieron en gran manera, y clamaron los hijos de Israel á Jehová."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun cuando el mar está delante y el enemigo viene detrás.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tuvieron mucho miedo. Y el miedo los hizo hablar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "israelites",
+   "ref": "EXO 14:11",
+   "label": "Éxodo 14:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Y dijeron á Moisés: ¿No había sepulcros en Egipto, que nos has sacado para que muramos en el desierto? ¿Por qué lo has hecho así con nosotros, que nos has sacado de Egipto?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y dijeron á Moisés:"
+    },
+    {
+     "v": 11,
+     "speaker": "israelites",
+     "text": "¿No había sepulcros en Egipto, que nos has sacado para que muramos en el desierto? ¿Por qué lo has hecho así con nosotros, que nos has sacado de Egipto?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "israelites",
+   "ref": "EXO 14:12",
+   "label": "Éxodo 14:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "¿No es esto lo que te hablamos en Egipto, diciendo: Déjanos servir á los Egipcios? Que mejor nos fuera servir á los Egipcios, que morir nosotros en el desierto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "israelites",
+     "text": "¿No es esto lo que te hablamos en Egipto, diciendo: Déjanos servir á los Egipcios? Que mejor nos fuera servir á los Egipcios, que morir nosotros en el desierto."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es fácil juzgarlos, pero muchos hemos hablado así. Cuando el camino se pone difícil, el pasado empieza a parecer mejor de lo que fue. Hasta la esclavitud les parecía mejor que el miedo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 14:13",
+   "label": "Éxodo 14:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y Moisés dijo al pueblo: No temáis; estáos quedos, y ved la salud de Jehová, que él hará hoy con vosotros; porque los Egipcios que hoy habéis visto, nunca más para siempre los veréis."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y Moisés dijo al pueblo:"
+    },
+    {
+     "v": 13,
+     "speaker": "moses",
+     "text": "No temáis; estáos quedos, y ved la salud de Jehová, que él hará hoy con vosotros; porque los Egipcios que hoy habéis visto, nunca más para siempre los veréis."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 14:14",
+   "label": "Éxodo 14:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Jehová peleará por vosotros, y vosotros estaréis quedos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "moses",
+     "text": "Jehová peleará por vosotros, y vosotros estaréis quedos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Quédense quietos. No era el momento de correr ni de pelear. Era el momento de ver lo que Dios iba a hacer."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Entonces Dios le dijo a Moisés que levantara su vara y extendiera la mano sobre el mar. La nube que los guiaba se puso detrás del pueblo, entre ellos y los egipcios. Para Egipto era oscuridad. Para Israel era luz."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 14:21",
+   "label": "Éxodo 14:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Y extendió Moisés su mano sobre la mar, é hizo Jehová que la mar se retirase por recio viento oriental toda aquella noche; y tornó la mar en seco, y las aguas quedaron divididas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Y extendió Moisés su mano sobre la mar, é hizo Jehová que la mar se retirase por recio viento oriental toda aquella noche; y tornó la mar en seco, y las aguas quedaron divididas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 14:22",
+   "label": "Éxodo 14:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Entonces los hijos de Israel entraron por medio de la mar en seco, teniendo las aguas como muro á su diestra y á su siniestra:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Entonces los hijos de Israel entraron por medio de la mar en seco, teniendo las aguas como muro á su diestra y á su siniestra:"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Toda la noche sopló el viento. Y el pueblo caminó por en medio del mar, en tierra seca, con una pared de agua a cada lado. Ancianos, niños, familias enteras, con sus animales y sus cosas."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuando los egipcios entraron detrás de ellos, las ruedas de sus carros se trabaron. Y al amanecer, cuando Moisés volvió a extender la mano, el agua regresó a su lugar. El pueblo de Israel quedó a salvo del otro lado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 14:31",
+   "label": "Éxodo 14:31",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 31,
+     "text": "Y vió Israel aquel grande hecho que Jehová ejecutó contra los Egipcios: y el pueblo temió á Jehová, y creyeron á Jehová y á Moisés su siervo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "Y vió Israel aquel grande hecho que Jehová ejecutó contra los Egipcios: y el pueblo temió á Jehová, y creyeron á Jehová y á Moisés su siervo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moisés también tenía razones para tener miedo. Pero había escuchado a Dios, y eso le dio palabras para su pueblo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La noche que parecía el final fue la noche en que Dios abrió un camino donde no había camino. Ellos no hicieron el milagro. Solo tuvieron que dar el siguiente paso cuando Dios lo abrió. A veces lo único que nos toca es quedarnos quietos, confiar, y caminar cuando él dice que caminemos."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 567,
+ "est_seconds": 315,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 567 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exod 14 (vv5-9, 15-20, 23-28 told in words); God's command to Moses told, not voiced; the pillar of cloud as the text gives it."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Families, elders and children in the crossing; the people's fear understood, not mocked."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

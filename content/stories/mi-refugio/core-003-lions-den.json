@@ -1,0 +1,310 @@
+{
+ "id": "core-003-lions-den",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Daniel en el foso de los leones",
+ "passage": {
+  "refs": [
+   "DAN 6:1-23"
+  ],
+  "label": "Daniel 6:1-23"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "king",
+   "name": "el rey",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "daniel",
+   "name": "Daniel",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Daniel ya era un hombre mayor. Había vivido casi toda su vida lejos de su tierra, sirviendo a reyes extranjeros. El rey Darío lo respetaba tanto que pensaba ponerlo sobre todo el reino."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Eso no les gustó a los otros gobernadores. Buscaron algo malo en Daniel y no encontraron nada. Así que buscaron una trampa en su fe. Convencieron al rey de firmar una ley. Durante treinta días nadie podía orar a ningún dios ni a ningún hombre, sino solo al rey. El que no obedeciera iría al foso de los leones."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "DAN 6:10",
+   "label": "Daniel 6:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y Daniel, cuando supo que la escritura estaba firmada, entróse en su casa, y abiertas las ventanas de su cámara que estaban hacia Jerusalem, hincábase de rodillas tres veces al día, y oraba, y confesaba delante de su Dios, como lo solía hacer antes."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y Daniel, cuando supo que la escritura estaba firmada, entróse en su casa, y abiertas las ventanas de su cámara que estaban hacia Jerusalem, hincábase de rodillas tres veces al día, y oraba, y confesaba delante de su Dios, como lo solía hacer antes."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Daniel siguió orando, igual que antes, con las ventanas abiertas.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Daniel no escondió su fe ni hizo un escándalo. Simplemente hizo lo mismo que hacía todos los días. Abrió sus ventanas hacia Jerusalén, se arrodilló y oró tres veces al día."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Sus enemigos lo vieron y fueron corriendo al rey. El rey se dio cuenta de que lo habían engañado. Pasó todo el día buscando una manera de salvar a Daniel, pero su propia ley no se podía cambiar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "DAN 6:16",
+   "label": "Daniel 6:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Entonces el rey mandó, y trajeron á Daniel, y echáronle en el foso de los leones. Y hablando el rey dijo á Daniel: El Dios tuyo, á quien tú continuamente sirves, él te libre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Entonces el rey mandó, y trajeron á Daniel, y echáronle en el foso de los leones. Y hablando el rey dijo á Daniel:"
+    },
+    {
+     "v": 16,
+     "speaker": "king",
+     "text": "El Dios tuyo, á quien tú continuamente sirves, él te libre."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hasta el rey sabía en quién confiaba Daniel. Pusieron una piedra sobre la boca del foso y la sellaron. Esa noche el rey no comió. No quiso música. No pudo dormir."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "DAN 6:19",
+   "label": "Daniel 6:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "El rey, por tanto, se levantó muy de mañana, y fué apriesa al foso de los leones:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "El rey, por tanto, se levantó muy de mañana, y fué apriesa al foso de los leones:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "DAN 6:20",
+   "label": "Daniel 6:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y llegándose cerca del foso llamó á voces á Daniel con voz triste: y hablando el rey dijo á Daniel: Daniel, siervo del Dios viviente, el Dios tuyo, á quien tú continuamente sirves ¿te ha podido librar de los leones?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y llegándose cerca del foso llamó á voces á Daniel con voz triste: y hablando el rey dijo á Daniel:"
+    },
+    {
+     "v": 20,
+     "speaker": "king",
+     "text": "Daniel, siervo del Dios viviente, el Dios tuyo, á quien tú continuamente sirves ¿te ha podido librar de los leones?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagina el silencio mientras el rey esperaba una respuesta. Y entonces, desde abajo, se oyó una voz tranquila."
+  },
+  {
+   "type": "scripture",
+   "speaker": "daniel",
+   "ref": "DAN 6:21",
+   "label": "Daniel 6:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Entonces habló Daniel con el rey: oh rey, para siempre vive."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Entonces habló Daniel con el rey:"
+    },
+    {
+     "v": 21,
+     "speaker": "daniel",
+     "text": "oh rey, para siempre vive."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "daniel",
+   "ref": "DAN 6:22",
+   "label": "Daniel 6:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "El Dios mío envió su ángel, el cual cerró la boca de los leones, para que no me hiciesen mal: porque delante de él se halló en mí justicia: y aun delante de ti, oh rey, yo no he hecho lo que no debiese."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "daniel",
+     "text": "El Dios mío envió su ángel, el cual cerró la boca de los leones, para que no me hiciesen mal: porque delante de él se halló en mí justicia: y aun delante de ti, oh rey, yo no he hecho lo que no debiese."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Daniel no dijo que había sido valiente. Dijo que Dios había enviado su ángel. Daniel había pasado la noche entera, entre leones, y sin un rasguño."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "DAN 6:23",
+   "label": "Daniel 6:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Entonces se alegró el rey en gran manera á causa de él, y mandó sacar á Daniel del foso: y fué Daniel sacado del foso, y ninguna lesión se halló en él, porque creyó en su Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Entonces se alegró el rey en gran manera á causa de él, y mandó sacar á Daniel del foso: y fué Daniel sacado del foso, y ninguna lesión se halló en él, porque creyó en su Dios."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los hombres que lo acusaron pensaron que habían ganado. Pero esa noche, en el foso, Daniel no estaba solo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Porque creyó en su Dios. Eso es lo que dice la Biblia. Daniel no salvó su vida por ser fuerte ni por tener amigos importantes. Confió en Dios en lo pequeño, en sus oraciones de cada día, y por eso pudo confiar en él en el foso. La fe que se practica en los días normales es la que nos sostiene en las noches difíciles."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 575,
+ "est_seconds": 320,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Dan 6:1-23 (vv1-9 and 11-15, 17-18 told in words); Daniel's courage credited to God as v22-23."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Daily prayer honoured; natural Spanish, no Spain-only forms."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

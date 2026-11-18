@@ -1,0 +1,310 @@
+{
+ "id": "core-001-peace-be-still",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Calla, enmudece",
+ "passage": {
+  "refs": [
+   "MAR 4:1",
+   "MAR 4:35-41"
+  ],
+  "label": "Marcos 4:1; Marcos 4:35-41"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "disciples",
+   "name": "los discípulos",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús había pasado todo el día enseñando junto al mar de Galilea. Había tanta gente que tuvo que subirse a una barca y hablarles desde el agua. Cuando cayó la tarde, estaba cansado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:35",
+   "label": "Marcos 4:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Y les dijo aquel día cuando fué tarde: Pasemos de la otra parte."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Y les dijo aquel día cuando fué tarde: Pasemos de la otra parte."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:36",
+   "label": "Marcos 4:36",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 36,
+     "text": "Y despachando la multitud, le tomaron como estaba, en el barco; y había también con él otros barquitos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "Y despachando la multitud, le tomaron como estaba, en el barco; y había también con él otros barquitos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Varios de sus discípulos eran pescadores. Conocían ese lago desde niños. Sabían que el viento podía bajar de los montes de repente y levantar olas en pocos minutos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:37",
+   "label": "Marcos 4:37",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 37,
+     "text": "Y se levantó una grande tempestad de viento, y echaba las olas en el barco, de tal manera que ya se henchía."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Y se levantó una grande tempestad de viento, y echaba las olas en el barco, de tal manera que ya se henchía."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] También en medio de la tormenta, cuando el agua ya está entrando en la barca.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Las olas golpeaban la barca y el agua seguía entrando. Aquellos hombres que sabían navegar tuvieron miedo. Y Jesús, ¿dónde estaba?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAR 4:38",
+   "label": "Marcos 4:38",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 38,
+     "text": "Y él estaba en la popa, durmiendo sobre un cabezal, y le despertaron, y le dicen: ¿Maestro, no tienes cuidado que perecemos?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "Y él estaba en la popa, durmiendo sobre un cabezal, y le despertaron, y le dicen:"
+    },
+    {
+     "v": 38,
+     "speaker": "disciples",
+     "text": "¿Maestro, no tienes cuidado que perecemos?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Estaba dormido, con la cabeza sobre una almohada, en la parte de atrás. Ellos lo despertaron con una pregunta que muchos hemos hecho alguna vez. Señor, ¿no te importa lo que me está pasando?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:39",
+   "label": "Marcos 4:39",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 39,
+     "text": "Y levantándose, increpó al viento, y dijo á la mar: Calla, enmudece. Y cesó el viento, y fué hecha grande bonanza."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "Y levantándose, increpó al viento, y dijo á la mar: Calla, enmudece. Y cesó el viento, y fué hecha grande bonanza."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tres palabras. Calla, enmudece. Y el viento se detuvo. El mar, que un momento antes rugía, quedó quieto como un espejo. Hubo una gran calma."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:40",
+   "label": "Marcos 4:40",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 40,
+     "text": "Y á ellos dijo: ¿Por qué estáis así amedrentados? ¿Cómo no tenéis fe?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "Y á ellos dijo: ¿Por qué estáis así amedrentados? ¿Cómo no tenéis fe?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús no les preguntó por qué lo despertaron. Les preguntó por qué tenían tanto miedo. Él estaba en la barca con ellos todo el tiempo, aun cuando parecía que dormía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAR 4:41",
+   "label": "Marcos 4:41",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 41,
+     "text": "Y temieron con gran temor, y decían el uno al otro. ¿Quién es éste, que aun el viento y la mar le obedecen?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "Y temieron con gran temor, y decían el uno al otro."
+    },
+    {
+     "v": 41,
+     "speaker": "disciples",
+     "text": "¿Quién es éste, que aun el viento y la mar le obedecen?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Aquella noche los discípulos aprendieron algo nuevo de su Maestro. El que dormía en la barca era el mismo que manda al viento y al mar."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Piensa en esos hombres. Habían dejado sus redes para seguir a Jesús. Lo habían visto sanar enfermos y enseñar a multitudes. Y aun así, cuando el agua empezó a subir, el miedo fue más fuerte que todo lo que habían visto."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús no los regañó por despertarlo. No los dejó solos con el viento. Se levantó y habló. Y lo que ellos no podían controlar con todas sus fuerzas, él lo calmó con una palabra."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Después de la calma vino otra clase de temor. Ya no era miedo a la tormenta. Era el asombro de estar delante de alguien tan grande."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay noches en que la tormenta llega sin avisar. Una noticia, una cuenta, una enfermedad, una preocupación que no nos deja dormir. A veces parece que Dios está dormido. Pero él sigue en la barca. Y la misma voz que le habló al mar todavía puede traer calma a un corazón asustado."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 515,
+ "est_seconds": 287,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 515 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:04:30",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 4:35-41 (4:1 for the setting); Jesus's words only as RV1909 scripture; no promised calm for the listener, only the voice that can bring it."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, warm Spanish an abuela would read aloud; 'Dios es bueno / todo el tiempo' tied to the storm; the night's worries named without pity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
