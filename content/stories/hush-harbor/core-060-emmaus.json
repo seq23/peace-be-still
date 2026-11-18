@@ -1,0 +1,599 @@
+{
+ "id": "core-060-emmaus",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Abide with Us",
+ "passage": {
+  "refs": [
+   "LUK 24:13-35"
+  ],
+  "label": "Luke 24:13-35"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "cleopas",
+   "name": "Cleopas",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "two",
+   "name": "two of them",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was the Sunday after the cross. Some of the women had come back from the tomb that morning with a strange report, but most of the disciples did not believe them. That afternoon, two of his followers started the long walk home."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:13",
+   "label": "Luke 24:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And, behold, two of them went that same day to a village called Emmaus, which was from Jerusalem about threescore furlongs."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And, behold, two of them went that same day to a village called Emmaus, which was from Jerusalem about threescore furlongs."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:14",
+   "label": "Luke 24:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And they talked together of all these things which had happened."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And they talked together of all these things which had happened."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:15",
+   "label": "Luke 24:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And it came to pass, that, while they communed together and reasoned, Jesus himself drew near, and went with them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And it came to pass, that, while they communed together and reasoned, Jesus himself drew near, and went with them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:16",
+   "label": "Luke 24:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "But their eyes were holden that they should not know him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "But their eyes were holden that they should not know him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They did not know him. Their hearts were too heavy, and something held their eyes."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:17",
+   "label": "Luke 24:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And he said unto them, What manner of communications are these that ye have one to another, as ye walk, and are sad?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And he said unto them, What manner of communications are these that ye have one to another, as ye walk, and are sad?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "cleopas",
+   "ref": "LUK 24:18",
+   "label": "Luke 24:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And the one of them, whose name was Cleopas, answering said unto him, Art thou only a stranger in Jerusalem, and hast not known the things which are come to pass there in these days?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And the one of them, whose name was Cleopas, answering said unto him,"
+    },
+    {
+     "v": 18,
+     "speaker": "cleopas",
+     "text": "Art thou only a stranger in Jerusalem, and hast not known the things which are come to pass there in these days?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And Jesus asked them, what things? He let them tell it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:19",
+   "label": "Luke 24:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And he said unto them, What things? And they said unto him, Concerning Jesus of Nazareth, which was a prophet mighty in deed and word before God and all the people:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And he said unto them, What things? And they said unto him,"
+    },
+    {
+     "v": 19,
+     "speaker": "two",
+     "text": "Concerning Jesus of Nazareth, which was a prophet mighty in deed and word before God and all the people:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:20",
+   "label": "Luke 24:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And how the chief priests and our rulers delivered him to be condemned to death, and have crucified him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "two",
+     "text": "And how the chief priests and our rulers delivered him to be condemned to death, and have crucified him."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:21",
+   "label": "Luke 24:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "But we trusted that it had been he which should have redeemed Israel: and beside all this, to day is the third day since these things were done."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "two",
+     "text": "But we trusted that it had been he which should have redeemed Israel: and beside all this, to day is the third day since these things were done."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "We trusted. Church, those are some of the saddest words two people can say. They believed he was the one, and now he was dead, and their hope was buried with him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:22",
+   "label": "Luke 24:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Yea, and certain women also of our company made us astonished, which were early at the sepulchre;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "two",
+     "text": "Yea, and certain women also of our company made us astonished, which were early at the sepulchre;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:23",
+   "label": "Luke 24:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And when they found not his body, they came, saying, that they had also seen a vision of angels, which said that he was alive."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "two",
+     "text": "And when they found not his body, they came, saying, that they had also seen a vision of angels, which said that he was alive."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:24",
+   "label": "Luke 24:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And certain of them which were with us went to the sepulchre, and found it even so as the women had said: but him they saw not."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "two",
+     "text": "And certain of them which were with us went to the sepulchre, and found it even so as the women had said: but him they saw not."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then the stranger started talking. He went back to the beginning, to Moses and all the prophets, and showed them how the scriptures had been pointing all along to a Messiah who would suffer and then enter his glory."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:27",
+   "label": "Luke 24:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:28",
+   "label": "Luke 24:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "And they drew nigh unto the village, whither they went: and he made as though he would have gone further."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "And they drew nigh unto the village, whither they went: and he made as though he would have gone further."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:29",
+   "label": "Luke 24:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "But they constrained him, saying, Abide with us: for it is toward evening, and the day is far spent. And he went in to tarry with them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "But they constrained him, saying,"
+    },
+    {
+     "v": 29,
+     "speaker": "two",
+     "text": "Abide with us: for it is toward evening, and the day is far spent."
+    },
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "And he went in to tarry with them."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, abide with us. [PAUSE 3s | screen: \"Abide with us\"] Abide with us. [PAUSE 3s | screen: \"Abide with us\"] Evening was coming, and they did not want him to go.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Abide with us"
+    },
+    {
+     "seconds": 3,
+     "screen": "Abide with us"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:30",
+   "label": "Luke 24:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And it came to pass, as he sat at meat with them, he took bread, and blessed it, and brake, and gave to them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And it came to pass, as he sat at meat with them, he took bread, and blessed it, and brake, and gave to them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:31",
+   "label": "Luke 24:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And their eyes were opened, and they knew him; and he vanished out of their sight."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And their eyes were opened, and they knew him; and he vanished out of their sight."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The moment he broke that bread, they knew him. And then he was gone."
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:32",
+   "label": "Luke 24:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "And they said one to another, Did not our heart burn within us, while he talked with us by the way, and while he opened to us the scriptures?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "And they said one to another,"
+    },
+    {
+     "v": 32,
+     "speaker": "two",
+     "text": "Did not our heart burn within us, while he talked with us by the way, and while he opened to us the scriptures?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was about seven miles back to Jerusalem, and night was falling. They got straight up and went anyway. That kind of news will not wait till morning."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:33",
+   "label": "Luke 24:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "And they rose up the same hour, and returned to Jerusalem, and found the eleven gathered together, and them that were with them,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "And they rose up the same hour, and returned to Jerusalem, and found the eleven gathered together, and them that were with them,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:34",
+   "label": "Luke 24:34",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 34,
+     "text": "Saying, The Lord is risen indeed, and hath appeared to Simon."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "Saying,"
+    },
+    {
+     "v": 34,
+     "speaker": "two",
+     "text": "The Lord is risen indeed, and hath appeared to Simon."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:35",
+   "label": "Luke 24:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "And they told what things were done in the way, and how he was known of them in breaking of bread."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "And they told what things were done in the way, and how he was known of them in breaking of bread."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They started that day walking away from Jerusalem, sad and done. And Jesus came alongside them before they ever knew it was him. He listened to their broken hopes, opened the word to them, and stayed when they asked him to. Some days we are on that Emmaus road too, Church. He still draws near, even before we know it is him."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 726,
+ "est_seconds": 402,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:54:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 24:13-35; breaking of bread told as the text tells it, no position on communion."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Abide with us' at the turn, the disciples' own plea; grief honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

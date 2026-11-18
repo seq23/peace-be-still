@@ -1,0 +1,497 @@
+{
+ "id": "core-058-at-the-cross",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Father, Forgive Them",
+ "passage": {
+  "refs": [
+   "LUK 23:33-47"
+  ],
+  "label": "Luke 23:33-47"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "rulers",
+   "name": "rulers",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "soldiers",
+   "name": "soldiers",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "railer",
+   "name": "one of the malefactors",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "other",
+   "name": "the other",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "centurion",
+   "name": "centurion",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, they arrested Jesus in the night. They questioned him, beat him and sentenced him. Then they led him outside the city to a hill, with two other men who were to die beside him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:33",
+   "label": "Luke 23:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "And when they were come to the place, which is called Calvary, there they crucified him, and the malefactors, one on the right hand, and the other on the left."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "And when they were come to the place, which is called Calvary, there they crucified him, and the malefactors, one on the right hand, and the other on the left."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And the first thing he said from that cross was a prayer."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:34",
+   "label": "Luke 23:34",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 34,
+     "text": "Then said Jesus, Father, forgive them; for they know not what they do. And they parted his raiment, and cast lots."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "Then said Jesus, Father, forgive them; for they know not what they do. And they parted his raiment, and cast lots."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, Father, forgive them. [PAUSE 3s | screen: \"Father, forgive them\"] Father, forgive them. [PAUSE 3s | screen: \"Father, forgive them\"] He prayed for the very ones who nailed him there.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Father, forgive them"
+    },
+    {
+     "seconds": 3,
+     "screen": "Father, forgive them"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rulers",
+   "ref": "LUK 23:35",
+   "label": "Luke 23:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "And the people stood beholding. And the rulers also with them derided him, saying, He saved others; let him save himself, if he be Christ, the chosen of God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "And the people stood beholding. And the rulers also with them derided him, saying,"
+    },
+    {
+     "v": 35,
+     "speaker": "rulers",
+     "text": "He saved others; let him save himself, if he be Christ, the chosen of God."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:36",
+   "label": "Luke 23:36",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 36,
+     "text": "And the soldiers also mocked him, coming to him, and offering him vinegar,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "And the soldiers also mocked him, coming to him, and offering him vinegar,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "soldiers",
+   "ref": "LUK 23:37",
+   "label": "Luke 23:37",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 37,
+     "text": "And saying, If thou be the king of the Jews, save thyself."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "And saying,"
+    },
+    {
+     "v": 37,
+     "speaker": "soldiers",
+     "text": "If thou be the king of the Jews, save thyself."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:38",
+   "label": "Luke 23:38",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 38,
+     "text": "And a superscription also was written over him in letters of Greek, and Latin, and Hebrew, THIS IS THE KING OF THE JEWS."
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "And a superscription also was written over him in letters of Greek, and Latin, and Hebrew, THIS IS THE KING OF THE JEWS."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Save yourself. Over and over. The rulers. The soldiers. And then one of the men dying right beside him. They could not understand he was staying on that cross on purpose. He saved others by not saving himself."
+  },
+  {
+   "type": "scripture",
+   "speaker": "railer",
+   "ref": "LUK 23:39",
+   "label": "Luke 23:39",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 39,
+     "text": "And one of the malefactors which were hanged railed on him, saying, If thou be Christ, save thyself and us."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "And one of the malefactors which were hanged railed on him, saying,"
+    },
+    {
+     "v": 39,
+     "speaker": "railer",
+     "text": "If thou be Christ, save thyself and us."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "other",
+   "ref": "LUK 23:40",
+   "label": "Luke 23:40",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 40,
+     "text": "But the other answering rebuked him, saying, Dost not thou fear God, seeing thou art in the same condemnation?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "But the other answering rebuked him, saying,"
+    },
+    {
+     "v": 40,
+     "speaker": "other",
+     "text": "Dost not thou fear God, seeing thou art in the same condemnation?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "other",
+   "ref": "LUK 23:41",
+   "label": "Luke 23:41",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 41,
+     "text": "And we indeed justly; for we receive the due reward of our deeds: but this man hath done nothing amiss."
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "other",
+     "text": "And we indeed justly; for we receive the due reward of our deeds: but this man hath done nothing amiss."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That second man had nothing left to bring. No good works. No time to make it right. Just a few words."
+  },
+  {
+   "type": "scripture",
+   "speaker": "other",
+   "ref": "LUK 23:42",
+   "label": "Luke 23:42",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 42,
+     "text": "And he said unto Jesus, Lord, remember me when thou comest into thy kingdom."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "And he said unto Jesus,"
+    },
+    {
+     "v": 42,
+     "speaker": "other",
+     "text": "Lord, remember me when thou comest into thy kingdom."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:43",
+   "label": "Luke 23:43",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 43,
+     "text": "And Jesus said unto him, Verily I say unto thee, To day shalt thou be with me in paradise."
+    }
+   ],
+   "segments": [
+    {
+     "v": 43,
+     "speaker": "narrator",
+     "text": "And Jesus said unto him, Verily I say unto thee, To day shalt thou be with me in paradise."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "To day. Not someday. A dying man only asked to be remembered, and Jesus gave him a promise."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:44",
+   "label": "Luke 23:44",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 44,
+     "text": "And it was about the sixth hour, and there was a darkness over all the earth until the ninth hour."
+    }
+   ],
+   "segments": [
+    {
+     "v": 44,
+     "speaker": "narrator",
+     "text": "And it was about the sixth hour, and there was a darkness over all the earth until the ninth hour."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:45",
+   "label": "Luke 23:45",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 45,
+     "text": "And the sun was darkened, and the veil of the temple was rent in the midst."
+    }
+   ],
+   "segments": [
+    {
+     "v": 45,
+     "speaker": "narrator",
+     "text": "And the sun was darkened, and the veil of the temple was rent in the midst."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Darkness at noon. And the thick veil in the temple, hanging before the holy of holies, tore right down the middle."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:46",
+   "label": "Luke 23:46",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 46,
+     "text": "And when Jesus had cried with a loud voice, he said, Father, into thy hands I commend my spirit: and having said thus, he gave up the ghost."
+    }
+   ],
+   "segments": [
+    {
+     "v": 46,
+     "speaker": "narrator",
+     "text": "And when Jesus had cried with a loud voice, he said, Father, into thy hands I commend my spirit: and having said thus, he gave up the ghost."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He did not have his life taken from him like a man who lost. He placed it in his Father's hands."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:47",
+   "label": "Luke 23:47",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 47,
+     "text": "Now when the centurion saw what was done, he glorified God, saying, Certainly this was a righteous man."
+    }
+   ],
+   "segments": [
+    {
+     "v": 47,
+     "speaker": "narrator",
+     "text": "Now when the centurion saw what was done, he glorified God, saying, Certainly this was a righteous man."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A Roman soldier who had seen plenty of men die watched this one and gave glory to God."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The old spiritual asks, were you there when they crucified my Lord? Sometimes it causes us to tremble. The cross is the hardest place in the story, and it is where the love of God shows most clear. He forgave. He welcomed a dying man with empty hands. He trusted his Father all the way. Sunday is coming. But tonight, it is right to stand here a while and be still."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 579,
+ "est_seconds": 322,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:54:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 23:33-47, violence mild and off the page; no blame of 'the Jews'; 'Were You There' is a traditional spiritual (public domain), named with its own line."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Father, forgive them' at the turn; reverent Good Friday cadence; 'Sunday is coming' as the church says it."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

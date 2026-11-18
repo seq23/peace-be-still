@@ -1,0 +1,474 @@
+{
+ "id": "core-052-balaam",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "When the Donkey Spoke",
+ "passage": {
+  "refs": [
+   "NUM 22:21-35"
+  ],
+  "label": "Numbers 22:21-35"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "ass",
+   "name": "ass",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "balaam",
+   "name": "Balaam",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Israel was camped on the plains of Moab, and Balak the king of Moab was scared to death of them. So he sent for a man named Balaam, who was known for speaking blessings and curses. Balak offered him a big reward to come and curse God's people."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God had told Balaam plainly not to curse the people he had blessed. Then God let him go with the king's men, on one condition. He could only say what God gave him to say."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:21",
+   "label": "Numbers 22:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And Balaam rose up in the morning, and saddled his ass, and went with the princes of Moab."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And Balaam rose up in the morning, and saddled his ass, and went with the princes of Moab."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:22",
+   "label": "Numbers 22:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And God’s anger was kindled because he went: and the angel of the LORD stood in the way for an adversary against him. Now he was riding upon his ass, and his two servants were with him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And God’s anger was kindled because he went: and the angel of the LORD stood in the way for an adversary against him. Now he was riding upon his ass, and his two servants were with him."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, God is in the way. [PAUSE 3s | screen: \"God is in the way\"] God is in the way. [PAUSE 3s | screen: \"God is in the way\"] Balaam could not see it yet, but his donkey could.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "God is in the way"
+    },
+    {
+     "seconds": 3,
+     "screen": "God is in the way"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:23",
+   "label": "Numbers 22:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And the ass saw the angel of the LORD standing in the way, and his sword drawn in his hand: and the ass turned aside out of the way, and went into the field: and Balaam smote the ass, to turn her into the way."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And the ass saw the angel of the LORD standing in the way, and his sword drawn in his hand: and the ass turned aside out of the way, and went into the field: and Balaam smote the ass, to turn her into the way."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:24",
+   "label": "Numbers 22:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "But the angel of the LORD stood in a path of the vineyards, a wall being on this side, and a wall on that side."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "But the angel of the LORD stood in a path of the vineyards, a wall being on this side, and a wall on that side."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:25",
+   "label": "Numbers 22:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "And when the ass saw the angel of the LORD, she thrust herself unto the wall, and crushed Balaam’s foot against the wall: and he smote her again."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "And when the ass saw the angel of the LORD, she thrust herself unto the wall, and crushed Balaam’s foot against the wall: and he smote her again."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:26",
+   "label": "Numbers 22:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And the angel of the LORD went further, and stood in a narrow place, where was no way to turn either to the right hand or to the left."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD went further, and stood in a narrow place, where was no way to turn either to the right hand or to the left."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:27",
+   "label": "Numbers 22:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And when the ass saw the angel of the LORD, she fell down under Balaam: and Balaam’s anger was kindled, and he smote the ass with a staff."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And when the ass saw the angel of the LORD, she fell down under Balaam: and Balaam’s anger was kindled, and he smote the ass with a staff."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Three times that donkey saved his life, and three times he beat her for it. He was so set on where he was going, he never once asked why she would not go."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ass",
+   "ref": "NUM 22:28",
+   "label": "Numbers 22:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "And the LORD opened the mouth of the ass, and she said unto Balaam, What have I done unto thee, that thou hast smitten me these three times?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "And the LORD opened the mouth of the ass, and she said unto Balaam,"
+    },
+    {
+     "v": 28,
+     "speaker": "ass",
+     "text": "What have I done unto thee, that thou hast smitten me these three times?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "balaam",
+   "ref": "NUM 22:29",
+   "label": "Numbers 22:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "And Balaam said unto the ass, Because thou hast mocked me: I would there were a sword in mine hand, for now would I kill thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "And Balaam said unto the ass,"
+    },
+    {
+     "v": 29,
+     "speaker": "balaam",
+     "text": "Because thou hast mocked me: I would there were a sword in mine hand, for now would I kill thee."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, the man was so mad he did not even stop to notice his donkey was talking to him. He just argued right back."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ass",
+   "ref": "NUM 22:30",
+   "label": "Numbers 22:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And the ass said unto Balaam, Am not I thine ass, upon which thou hast ridden ever since I was thine unto this day? was I ever wont to do so unto thee? And he said, Nay."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And the ass said unto Balaam,"
+    },
+    {
+     "v": 30,
+     "speaker": "ass",
+     "text": "Am not I thine ass, upon which thou hast ridden ever since I was thine unto this day? was I ever wont to do so unto thee?"
+    },
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And he said, Nay."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She had carried him faithfully for years. She had never acted like this. Something had to be wrong."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:31",
+   "label": "Numbers 22:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "Then the LORD opened the eyes of Balaam, and he saw the angel of the LORD standing in the way, and his sword drawn in his hand: and he bowed down his head, and fell flat on his face."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "Then the LORD opened the eyes of Balaam, and he saw the angel of the LORD standing in the way, and his sword drawn in his hand: and he bowed down his head, and fell flat on his face."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:32",
+   "label": "Numbers 22:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "And the angel of the LORD said unto him, Wherefore hast thou smitten thine ass these three times? behold, I went out to withstand thee, because thy way is perverse before me:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD said unto him, Wherefore hast thou smitten thine ass these three times? behold, I went out to withstand thee, because thy way is perverse before me:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:33",
+   "label": "Numbers 22:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "And the ass saw me, and turned from me these three times: unless she had turned from me, surely now also I had slain thee, and saved her alive."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "And the ass saw me, and turned from me these three times: unless she had turned from me, surely now also I had slain thee, and saved her alive."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The donkey he was beating was the one keeping him alive."
+  },
+  {
+   "type": "scripture",
+   "speaker": "balaam",
+   "ref": "NUM 22:34",
+   "label": "Numbers 22:34",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 34,
+     "text": "And Balaam said unto the angel of the LORD, I have sinned; for I knew not that thou stoodest in the way against me: now therefore, if it displease thee, I will get me back again."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "And Balaam said unto the angel of the LORD,"
+    },
+    {
+     "v": 34,
+     "speaker": "balaam",
+     "text": "I have sinned; for I knew not that thou stoodest in the way against me: now therefore, if it displease thee, I will get me back again."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:35",
+   "label": "Numbers 22:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "And the angel of the LORD said unto Balaam, Go with the men: but only the word that I shall speak unto thee, that thou shalt speak. So Balaam went with the princes of Balak."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD said unto Balaam, Go with the men: but only the word that I shall speak unto thee, that thou shalt speak. So Balaam went with the princes of Balak."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Later on, when Balaam stood on the hills over Israel's camp, he opened his mouth to curse them for the king. And every single time, blessing came out instead. God would not let his people be cursed."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Now that story is funny, and it is supposed to be. A famous man who claimed he could see what others could not was out-seen by his own donkey. Sometimes the thing blocking your road is not against you, Church. It might be the mercy of God, standing in the way."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 756,
+ "est_seconds": 418,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.3",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:54:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Num 22:21-35; the angel of the LORD read only by the narrator; set-up and blessings (22:1-20, 23-24) told without invented speech."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'God is in the way' at the turn; humour aimed at pride, never at any people."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

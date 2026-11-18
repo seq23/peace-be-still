@@ -1,0 +1,569 @@
+{
+ "id": "core-057-damascus-road",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Brother Saul",
+ "passage": {
+  "refs": [
+   "ACT 9:1-19"
+  ],
+  "label": "Acts 9:1-19"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "saul",
+   "name": "Saul",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "ananias",
+   "name": "Ananias",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "After Jesus rose and went back to the Father, his followers started telling everybody. Some leaders wanted them shut down. And one young man was fiercer about it than anybody."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:1",
+   "label": "Acts 9:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And Saul, yet breathing out threatenings and slaughter against the disciples of the Lord, went unto the high priest,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And Saul, yet breathing out threatenings and slaughter against the disciples of the Lord, went unto the high priest,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:2",
+   "label": "Acts 9:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And desired of him letters to Damascus to the synagogues, that if he found any of this way, whether they were men or women, he might bring them bound unto Jerusalem."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And desired of him letters to Damascus to the synagogues, that if he found any of this way, whether they were men or women, he might bring them bound unto Jerusalem."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The way was what the first believers called their new life in Jesus. And Saul wanted every one of them in chains."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:3",
+   "label": "Acts 9:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And as he journeyed, he came near Damascus: and suddenly there shined round about him a light from heaven:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And as he journeyed, he came near Damascus: and suddenly there shined round about him a light from heaven:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:4",
+   "label": "Acts 9:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And he fell to the earth, and heard a voice saying unto him, Saul, Saul, why persecutest thou me?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And he fell to the earth, and heard a voice saying unto him, Saul, Saul, why persecutest thou me?"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he knows my name. [PAUSE 3s | screen: \"He knows my name\"] He knows my name. [PAUSE 3s | screen: \"He knows my name\"] Saul, Saul. The Lord called him by name on that road.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He knows my name"
+    },
+    {
+     "seconds": 3,
+     "screen": "He knows my name"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "saul",
+   "ref": "ACT 9:5",
+   "label": "Acts 9:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And he said, Who art thou, Lord? And the Lord said, I am Jesus whom thou persecutest: it is hard for thee to kick against the pricks."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And he said,"
+    },
+    {
+     "v": 5,
+     "speaker": "saul",
+     "text": "Who art thou, Lord?"
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And the Lord said, I am Jesus whom thou persecutest: it is hard for thee to kick against the pricks."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Saul thought he was fighting a few people who had gone wrong. Jesus told him, when you hurt them, you are hurting me."
+  },
+  {
+   "type": "scripture",
+   "speaker": "saul",
+   "ref": "ACT 9:6",
+   "label": "Acts 9:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And he trembling and astonished said, Lord, what wilt thou have me to do? And the Lord said unto him, Arise, and go into the city, and it shall be told thee what thou must do."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And he trembling and astonished said,"
+    },
+    {
+     "v": 6,
+     "speaker": "saul",
+     "text": "Lord, what wilt thou have me to do?"
+    },
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And the Lord said unto him, Arise, and go into the city, and it shall be told thee what thou must do."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:7",
+   "label": "Acts 9:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And the men which journeyed with him stood speechless, hearing a voice, but seeing no man."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And the men which journeyed with him stood speechless, hearing a voice, but seeing no man."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:8",
+   "label": "Acts 9:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And Saul arose from the earth; and when his eyes were opened, he saw no man: but they led him by the hand, and brought him into Damascus."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And Saul arose from the earth; and when his eyes were opened, he saw no man: but they led him by the hand, and brought him into Damascus."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:9",
+   "label": "Acts 9:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And he was three days without sight, and neither did eat nor drink."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And he was three days without sight, and neither did eat nor drink."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The man who set out to drag folks back in chains had to be led by the hand. Three days in the dark. No food. No water."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ananias",
+   "ref": "ACT 9:10",
+   "label": "Acts 9:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And there was a certain disciple at Damascus, named Ananias; and to him said the Lord in a vision, Ananias. And he said, Behold, I am here, Lord."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And there was a certain disciple at Damascus, named Ananias; and to him said the Lord in a vision, Ananias. And he said,"
+    },
+    {
+     "v": 10,
+     "speaker": "ananias",
+     "text": "Behold, I am here, Lord."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:11",
+   "label": "Acts 9:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And the Lord said unto him, Arise, and go into the street which is called Straight, and enquire in the house of Judas for one called Saul, of Tarsus: for, behold, he prayeth,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And the Lord said unto him, Arise, and go into the street which is called Straight, and enquire in the house of Judas for one called Saul, of Tarsus: for, behold, he prayeth,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:12",
+   "label": "Acts 9:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And hath seen in a vision a man named Ananias coming in, and putting his hand on him, that he might receive his sight."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And hath seen in a vision a man named Ananias coming in, and putting his hand on him, that he might receive his sight."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ananias knew that name. Everybody in the church knew that name."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ananias",
+   "ref": "ACT 9:13",
+   "label": "Acts 9:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Then Ananias answered, Lord, I have heard by many of this man, how much evil he hath done to thy saints at Jerusalem:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Then Ananias answered,"
+    },
+    {
+     "v": 13,
+     "speaker": "ananias",
+     "text": "Lord, I have heard by many of this man, how much evil he hath done to thy saints at Jerusalem:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "ananias",
+   "ref": "ACT 9:14",
+   "label": "Acts 9:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And here he hath authority from the chief priests to bind all that call on thy name."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "ananias",
+     "text": "And here he hath authority from the chief priests to bind all that call on thy name."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, that is an honest fear. God was sending him to the house of the man who came to lock up people like him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:15",
+   "label": "Acts 9:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "But the Lord said unto him, Go thy way: for he is a chosen vessel unto me, to bear my name before the Gentiles, and kings, and the children of Israel:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "But the Lord said unto him, Go thy way: for he is a chosen vessel unto me, to bear my name before the Gentiles, and kings, and the children of Israel:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:16",
+   "label": "Acts 9:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "For I will shew him how great things he must suffer for my name’s sake."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "For I will shew him how great things he must suffer for my name’s sake."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So Ananias went. Afraid, maybe. But he went. And he did not stand off at a distance."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ananias",
+   "ref": "ACT 9:17",
+   "label": "Acts 9:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And Ananias went his way, and entered into the house; and putting his hands on him said, Brother Saul, the Lord, even Jesus, that appeared unto thee in the way as thou camest, hath sent me, that thou mightest receive thy sight, and be filled with the Holy Ghost."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And Ananias went his way, and entered into the house; and putting his hands on him said,"
+    },
+    {
+     "v": 17,
+     "speaker": "ananias",
+     "text": "Brother Saul, the Lord, even Jesus, that appeared unto thee in the way as thou camest, hath sent me, that thou mightest receive thy sight, and be filled with the Holy Ghost."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Brother Saul. The first word Saul heard from a believer was brother. The man who came to hunt them got called family."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:18",
+   "label": "Acts 9:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And immediately there fell from his eyes as it had been scales: and he received sight forthwith, and arose, and was baptized."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And immediately there fell from his eyes as it had been scales: and he received sight forthwith, and arose, and was baptized."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 9:19",
+   "label": "Acts 9:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And when he had received meat, he was strengthened. Then was Saul certain days with the disciples which were at Damascus."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And when he had received meat, he was strengthened. Then was Saul certain days with the disciples which were at Damascus."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Saul became Paul, who carried the good news across the world and wrote a good part of the New Testament. But that day he was a blind man in a borrowed room, and God sent an ordinary believer to lay hands on him. Nobody is too far gone for God to turn around. And sometimes God sends one of us to be the first to say, brother."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 739,
+ "est_seconds": 409,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.5",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:54:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Acts 9:1-19; the Lord's words read by the narrator; v18 baptism left in the verse without comment."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'He knows my name' at the turn; Ananias the ordinary believer honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

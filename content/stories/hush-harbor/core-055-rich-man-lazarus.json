@@ -1,0 +1,439 @@
+{
+ "id": "core-055-rich-man-lazarus",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Man at the Gate",
+ "passage": {
+  "refs": [
+   "LUK 16:19-31"
+  ],
+  "label": "Luke 16:19-31"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "richman",
+   "name": "rich man",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "abraham",
+   "name": "Abraham",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus told this story to some folks who loved money and were proud of how religious they were."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 16:19",
+   "label": "Luke 16:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "There was a certain rich man, which was clothed in purple and fine linen, and fared sumptuously every day:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "There was a certain rich man, which was clothed in purple and fine linen, and fared sumptuously every day:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 16:20",
+   "label": "Luke 16:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And there was a certain beggar named Lazarus, which was laid at his gate, full of sores,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And there was a certain beggar named Lazarus, which was laid at his gate, full of sores,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 16:21",
+   "label": "Luke 16:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And desiring to be fed with the crumbs which fell from the rich man’s table: moreover the dogs came and licked his sores."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And desiring to be fed with the crumbs which fell from the rich man’s table: moreover the dogs came and licked his sores."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Every day that rich man went in and out of his gate. Every day Lazarus lay there, hungry and sick. The only ones who came near him were the street dogs. The rich man never hit him. He just never saw him."
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, God sees. [PAUSE 3s | screen: \"God sees\"] God sees. [PAUSE 3s | screen: \"God sees\"] The rich man walked past him every day, but God saw Lazarus.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "God sees"
+    },
+    {
+     "seconds": 3,
+     "screen": "God sees"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice who gets a name in this story. The rich man has none. The beggar is called Lazarus, which means God helps."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 16:22",
+   "label": "Luke 16:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And it came to pass, that the beggar died, and was carried by the angels into Abraham’s bosom: the rich man also died, and was buried;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And it came to pass, that the beggar died, and was carried by the angels into Abraham’s bosom: the rich man also died, and was buried;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 16:23",
+   "label": "Luke 16:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And in hell he lift up his eyes, being in torments, and seeth Abraham afar off, and Lazarus in his bosom."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And in hell he lift up his eyes, being in torments, and seeth Abraham afar off, and Lazarus in his bosom."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Now everything was turned upside down. The man who had everything was the one begging."
+  },
+  {
+   "type": "scripture",
+   "speaker": "richman",
+   "ref": "LUK 16:24",
+   "label": "Luke 16:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And he cried and said, Father Abraham, have mercy on me, and send Lazarus, that he may dip the tip of his finger in water, and cool my tongue; for I am tormented in this flame."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "And he cried and said,"
+    },
+    {
+     "v": 24,
+     "speaker": "richman",
+     "text": "Father Abraham, have mercy on me, and send Lazarus, that he may dip the tip of his finger in water, and cool my tongue; for I am tormented in this flame."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Even now, he talked about Lazarus like somebody who could be sent to wait on him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "abraham",
+   "ref": "LUK 16:25",
+   "label": "Luke 16:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "But Abraham said, Son, remember that thou in thy lifetime receivedst thy good things, and likewise Lazarus evil things: but now he is comforted, and thou art tormented."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "But Abraham said,"
+    },
+    {
+     "v": 25,
+     "speaker": "abraham",
+     "text": "Son, remember that thou in thy lifetime receivedst thy good things, and likewise Lazarus evil things: but now he is comforted, and thou art tormented."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abraham",
+   "ref": "LUK 16:26",
+   "label": "Luke 16:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And beside all this, between us and you there is a great gulf fixed: so that they which would pass from hence to you cannot; neither can they pass to us, that would come from thence."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "abraham",
+     "text": "And beside all this, between us and you there is a great gulf fixed: so that they which would pass from hence to you cannot; neither can they pass to us, that would come from thence."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then the rich man thought about his brothers, still living the way he had lived."
+  },
+  {
+   "type": "scripture",
+   "speaker": "richman",
+   "ref": "LUK 16:27",
+   "label": "Luke 16:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Then he said, I pray thee therefore, father, that thou wouldest send him to my father’s house:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Then he said,"
+    },
+    {
+     "v": 27,
+     "speaker": "richman",
+     "text": "I pray thee therefore, father, that thou wouldest send him to my father’s house:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "richman",
+   "ref": "LUK 16:28",
+   "label": "Luke 16:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "For I have five brethren; that he may testify unto them, lest they also come into this place of torment."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "richman",
+     "text": "For I have five brethren; that he may testify unto them, lest they also come into this place of torment."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abraham",
+   "ref": "LUK 16:29",
+   "label": "Luke 16:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Abraham saith unto him, They have Moses and the prophets; let them hear them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Abraham saith unto him,"
+    },
+    {
+     "v": 29,
+     "speaker": "abraham",
+     "text": "They have Moses and the prophets; let them hear them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "richman",
+   "ref": "LUK 16:30",
+   "label": "Luke 16:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And he said, Nay, father Abraham: but if one went unto them from the dead, they will repent."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And he said,"
+    },
+    {
+     "v": 30,
+     "speaker": "richman",
+     "text": "Nay, father Abraham: but if one went unto them from the dead, they will repent."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abraham",
+   "ref": "LUK 16:31",
+   "label": "Luke 16:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And he said unto him, If they hear not Moses and the prophets, neither will they be persuaded, though one rose from the dead."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And he said unto him,"
+    },
+    {
+     "v": 31,
+     "speaker": "abraham",
+     "text": "If they hear not Moses and the prophets, neither will they be persuaded, though one rose from the dead."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moses and the prophets. They already had the word. God's word had told them all along to care for the poor and the stranger at the gate. A miracle would not change a heart that would not hear that."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, this story is not a map of the life to come. It is a warning for the life we are living now. The rich man's problem was not his money. It was that a hungry man lay at his door every day and he never once opened it. So the story asks us plainly. Who is lying at our gate? And will we see them while there is still time?"
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 559,
+ "est_seconds": 311,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.9",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:54:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 16:19-31; says it is not a map of the life to come; no one told she is bound anywhere; the sin named is neglect."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'God sees' at the turn; the poor man has the name and the dignity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
