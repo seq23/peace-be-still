@@ -1,0 +1,31 @@
+{
+  "about": "QUALITY.md A03/A04. 'guide' is the respelling a person checks against (from QUALITY.md). 'engine' is what Kokoro is actually given (espeak-ng reads it as the guide says; checked with espeak-ng --ipa on 18 Nov 2026). LORD and other ALL-CAPS words are said as ordinary words in code (lib/text.py speech_text). A name the engine already says right needs no engine entry.",
+  "en": {
+    "guide": {
+      "Melchizedek": "mel-KIZ-uh-dek", "Nebuchadnezzar": "neb-yoo-kud-NEZ-er", "Habakkuk": "huh-BAK-uk",
+      "Zerubbabel": "zuh-RUB-uh-bul", "Shadrach": "SHAD-rak", "Meshach": "MEE-shak", "Abednego": "uh-BED-nee-go",
+      "Belshazzar": "bel-SHAZ-er", "Mephibosheth": "meh-FIB-oh-sheth", "Jehoshaphat": "jeh-HOSH-uh-fat",
+      "Ahasuerus": "uh-haz-yoo-EER-us", "Bathsheba": "bath-SHEE-buh", "Elijah": "ee-LY-juh", "Elisha": "ee-LY-shuh",
+      "Isaiah": "eye-ZAY-uh", "Ezekiel": "ee-ZEE-kee-ul", "Job": "JOHB", "Rahab": "RAY-hab", "Hagar": "HAY-gar",
+      "Boaz": "BOH-az", "Naomi": "nay-OH-mee", "Gideon": "GID-ee-un", "Deborah": "DEB-uh-ruh", "Sisera": "SIS-er-uh",
+      "Jael": "JAY-ul", "Uriah": "yoo-RY-uh", "Absalom": "AB-suh-lum", "Malachi": "MAL-uh-kye",
+      "Gethsemane": "geth-SEM-uh-nee", "Golgotha": "GOL-guh-thuh", "Zacchaeus": "zak-KEE-us",
+      "Nicodemus": "nik-oh-DEE-mus", "Barabbas": "buh-RAB-us", "Philippi": "FIL-uh-pie",
+      "Thessalonica": "thes-uh-luh-NY-kuh", "Onesimus": "oh-NES-ih-mus", "Tychicus": "TIK-ih-kus", "Selah": "SEE-luh"
+    },
+    "engine": {
+      "Melchizedek": "Melkizzadeck", "Melchisedec": "Melkizzadeck", "Nebuchadnezzar": "Nebyookudnezzer",
+      "Habakkuk": "Huh-backuk", "Zerubbabel": "Zuh-rubbable", "Shadrach": "Shaddrack", "Meshach": "Meeshack",
+      "Belshazzar": "Bell-shazzer", "Mephibosheth": "Meh-fibbo-sheth", "Jehoshaphat": "Jeh-hoshafat",
+      "Ahasuerus": "Uh-hazyoo-eerus", "Bathsheba": "Bath-sheeba", "Job": "Jobe", "Rahab": "Rayhab", "Hagar": "Haygar",
+      "Sisera": "Sissera", "Jael": "Jayul", "Uriah": "Yoo-rye-uh", "Gethsemane": "Geth-semmany",
+      "Golgotha": "Golgutha", "Zacchaeus": "Zack-keyus", "Onesimus": "Oh-nessimus", "Tychicus": "Tickicus",
+      "Selah": "Seelah", "Isaiah": "Eye-zayuh"
+    }
+  },
+  "es": {
+    "guide": {"Jehová": "je-o-VÁ", "Jesús": "je-SÚS", "Moisés": "moi-SÉS", "Sión": "SIÓN", "Getsemaní": "get-se-ma-NÍ",
+              "Gólgota": "GÓL-go-ta", "Nabucodonosor": "na-bu-co-do-no-SOR", "Selah": "SÉ-la"},
+    "engine": {}
+  }
+}
