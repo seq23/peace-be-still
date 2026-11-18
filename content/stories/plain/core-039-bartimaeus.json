@@ -286,7 +286,7 @@
    "route": "gemini-free",
    "model": "gemini-4-hydrogen",
    "drafted_at": "2026-11-18T20:15:14",
-   "changed_share": null,
+   "changed_share": 0.65,
    "note": "First draft by the free model; Claude did the pastor and cultural read and edited it."
   },
   "final": {
