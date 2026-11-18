@@ -1,0 +1,23 @@
+{
+  "schema": "search-loop-cap-v1",
+  "max_live_pages": 10,
+  "config_value": 10,
+  "reason": "held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data",
+  "last_eval_week": "2026-W47",
+  "history": [
+    {
+      "at": "2026-11-18T17:02:11.222Z",
+      "from": null,
+      "to": 10,
+      "reason": "set from the site config (cap.max_live_pages 10)"
+    },
+    {
+      "at": "2026-11-18T17:02:11.065Z",
+      "week": "2026-W47",
+      "from": 10,
+      "to": 10,
+      "reason": "held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data"
+    }
+  ],
+  "held": {}
+}

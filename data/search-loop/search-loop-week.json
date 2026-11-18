@@ -2,7 +2,7 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W47",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-18T17:00:37.633Z",
+  "generated_at": "2026-11-18T17:02:11.065Z",
   "state": "slow",
   "published": 0,
   "indexed": 0,
@@ -14,18 +14,67 @@
   "undone": 0,
   "merged": 0,
   "held_by_cap": 0,
-  "redirected": [],
+  "redirected": [
+    {
+      "query": "psalms for sleep with rain",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep and protection",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep and anxiety",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep and peace",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "same wording",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep audio",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep with music",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep and comfort",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms to help me sleep",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    }
+  ],
   "cap": {
     "max_live_pages": 10,
     "live": 0,
     "room": 10,
-    "why": "set from the site config (cap.max_live_pages 10)"
+    "why": "held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data"
   },
   "notes": [
     "site config lowers the mode to slow",
-    "FIND search_console: not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
-    "FIND easy_wins: not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
-    "FIND api.bing.com: not read: unavailable after 3 failures (last http 204)"
+    "NAMED NOTE [CAP_HELD_NO_DATA] cap held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data",
+    "BUILD distinct gate: 8 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD published 0 of quota 3: 8 draft(s) failed the gate and were dropped; 0 got no answer from the free model and stay queued"
   ],
   "lanes": {
     "ratio": {
@@ -53,5 +102,5 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44353736552"
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44354043655"
 }

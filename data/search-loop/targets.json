@@ -1961,6 +1961,78 @@
   ],
   "strengthen": [
     {
+      "query": "psalms to help me sleep",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep and comfort",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep with music",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep audio",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep and peace",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "same wording",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep and anxiety",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep and protection",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalms for sleep with rain",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
       "query": "how do i get the bible app",
       "variants": [
         "how do i get a bible app",

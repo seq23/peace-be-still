@@ -1,0 +1,167 @@
+{
+  "schema": "search-loop-pages-v1",
+  "pages": [],
+  "dropped": [
+    {
+      "query": "what is a good bible verse for sleeping",
+      "at": "2026-11-18",
+      "gate": 2,
+      "reason": [
+        "b2 meta description is 50 chars (aim 120-160)",
+        "b4 direct answer under the H1 is 24 words (aim 40-60)",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://www.kingjamesbibleonline.org/Psalm-23-1/ (HTTP 403: this site refuses automated checks, so cite a different publisher)",
+        "shape: the body needs at least one list or table (give one section \"bullets\")",
+        "banned word for this site: \"cure\""
+      ]
+    },
+    {
+      "query": "what is the bible verse about sleep",
+      "at": "2026-11-18",
+      "gate": 2,
+      "reason": [
+        "the answer was not the JSON object asked for, with every key filled"
+      ]
+    },
+    {
+      "query": "how to learn psalm 91",
+      "at": "2026-11-18",
+      "gate": 2,
+      "reason": [
+        "b4 direct answer under the H1 is 27 words (aim 40-60)",
+        "banned word for this site: \"guarantee\"",
+        "health: outcome or treatment claim \"guarantee\""
+      ]
+    },
+    {
+      "query": "what is the bible verse for sleep prayer",
+      "at": "2026-11-18",
+      "gate": 2,
+      "reason": [
+        "the answer was not the JSON object asked for, with every key filled"
+      ]
+    },
+    {
+      "query": "what is the bible verse for prayer before sleeping",
+      "at": "2026-11-18",
+      "gate": 2,
+      "reason": [
+        "b4 direct answer under the H1 is 25 words (aim 40-60)",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://en.wikipedia.org/wiki/Reina%E2%80%93Valera_Bible (HTTP 404)"
+      ]
+    },
+    {
+      "query": "how to use psalm 91",
+      "at": "2026-11-18",
+      "gate": 2,
+      "reason": [
+        "the answer was not the JSON object asked for, with every key filled"
+      ]
+    },
+    {
+      "query": "bible verses for sleep",
+      "at": "2026-11-18",
+      "gate": 2,
+      "reason": [
+        "b4 direct answer under the H1 is 21 words (aim 40-60)",
+        "b5 FAQ answer is 29 words (aim 40-60): \"Do I need to pay to use the app?\"",
+        "b5 FAQ answer is 28 words (aim 40-60): \"Will the app work on iPhone and Android?\"",
+        "b5 FAQ answer is 26 words (aim 40-60): \"Can I listen to the whole King James Bible in the \"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0); these failed the check, replace each with a page that exists: https://www.britannica.com/topic/King-James-Version (HTTP 403: this site refuses automated checks, so cite a different publisher); https://www.pewresearch.org/religion/2019/12/17/most-cited-bible-books/ (HTTP 404)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep 8 hours",
+      "at": "2026-11-18",
+      "gate": 2,
+      "reason": [
+        "b4 direct answer under the H1 is 29 words (aim 40-60)",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://en.wikipedia.org/wiki/King_James_Version_Bible (HTTP 404)",
+        "banned word for this site: \"cure\"",
+        "banned word for this site: \"insomnia\"",
+        "banned word for this site: \"heal\""
+      ]
+    }
+  ],
+  "redirected": [
+    {
+      "query": "psalms for sleep with rain",
+      "at": "2026-11-18",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "route": "/questions/psalms-for-sleep/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "matched_text": "psalms for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "psalms for sleep and protection",
+      "at": "2026-11-18",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "route": "/questions/psalms-for-sleep/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "matched_text": "psalms for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "psalms for sleep and anxiety",
+      "at": "2026-11-18",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "route": "/questions/psalms-for-sleep/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "matched_text": "psalms for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "psalms for sleep and peace",
+      "at": "2026-11-18",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "route": "/questions/psalms-for-sleep/",
+      "kind": "sitemap",
+      "matched_by": "same wording",
+      "matched_text": "psalms for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "psalms for sleep audio",
+      "at": "2026-11-18",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "route": "/questions/psalms-for-sleep/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "matched_text": "psalms for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "psalms for sleep with music",
+      "at": "2026-11-18",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "route": "/questions/psalms-for-sleep/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "matched_text": "psalms for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "psalms for sleep and comfort",
+      "at": "2026-11-18",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "route": "/questions/psalms-for-sleep/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "matched_text": "psalms for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "psalms to help me sleep",
+      "at": "2026-11-18",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "route": "/questions/psalms-for-sleep/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "matched_text": "psalms for sleep",
+      "stage": "search"
+    }
+  ]
+}
