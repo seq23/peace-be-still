@@ -1,0 +1,395 @@
+{
+ "id": "fav-17-mephibosheth",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "A Seat at the King's Table",
+ "passage": {
+  "refs": [
+   "2SA 9:1-13"
+  ],
+  "label": "2 Samuel 9:1-13"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "david",
+   "name": "David",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "ziba",
+   "name": "Ziba",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "mephibosheth",
+   "name": "Mephibosheth",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, years before, David and Jonathan made a covenant. Jonathan asked David to show kindness to his family forever. Now Jonathan was dead, King Saul was dead, and David was on the throne."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "2SA 9:1",
+   "label": "2 Samuel 9:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And David said, Is there yet any that is left of the house of Saul, that I may shew him kindness for Jonathan’s sake?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And David said,"
+    },
+    {
+     "v": 1,
+     "speaker": "david",
+     "text": "Is there yet any that is left of the house of Saul, that I may shew him kindness for Jonathan’s sake?"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, for Jonathan's sake. [PAUSE 3s | screen: \"For Jonathan's sake\"] For Jonathan's sake. [PAUSE 3s | screen: \"For Jonathan's sake\"] The king remembered his promise when nobody else would have.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "For Jonathan's sake"
+    },
+    {
+     "seconds": 3,
+     "screen": "For Jonathan's sake"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "In those days a new king usually got rid of the old king's family. Nobody expected David to go looking for Saul's family to bless them. But he did."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ziba",
+   "ref": "2SA 9:3",
+   "label": "2 Samuel 9:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And the king said, Is there not yet any of the house of Saul, that I may shew the kindness of God unto him? And Ziba said unto the king, Jonathan hath yet a son, which is lame on his feet."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And the king said, Is there not yet any of the house of Saul, that I may shew the kindness of God unto him? And Ziba said unto the king,"
+    },
+    {
+     "v": 3,
+     "speaker": "ziba",
+     "text": "Jonathan hath yet a son, which is lame on his feet."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "ziba",
+   "ref": "2SA 9:4",
+   "label": "2 Samuel 9:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And the king said unto him, Where is he? And Ziba said unto the king, Behold, he is in the house of Machir, the son of Ammiel, in Lo-debar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And the king said unto him, Where is he? And Ziba said unto the king,"
+    },
+    {
+     "v": 4,
+     "speaker": "ziba",
+     "text": "Behold, he is in the house of Machir, the son of Ammiel, in Lo-debar."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lo-debar. The name means no pasture. A dry, nothing place. That is where Jonathan's son was living. He had been dropped as a little boy when his nurse ran with him, the day the news came that his father and grandfather had died in battle. He had been lame in both feet ever since."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2SA 9:5",
+   "label": "2 Samuel 9:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Then king David sent, and fetched him out of the house of Machir, the son of Ammiel, from Lo-debar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Then king David sent, and fetched him out of the house of Machir, the son of Ammiel, from Lo-debar."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "mephibosheth",
+   "ref": "2SA 9:6",
+   "label": "2 Samuel 9:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Now when Mephibosheth, the son of Jonathan, the son of Saul, was come unto David, he fell on his face, and did reverence. And David said, Mephibosheth. And he answered, Behold thy servant!"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Now when Mephibosheth, the son of Jonathan, the son of Saul, was come unto David, he fell on his face, and did reverence. And David said, Mephibosheth. And he answered,"
+    },
+    {
+     "v": 6,
+     "speaker": "mephibosheth",
+     "text": "Behold thy servant!"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, he came in afraid. He fell on his face. He did not know if the king had sent for him to bless him or to finish off the last of Saul's line."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "2SA 9:7",
+   "label": "2 Samuel 9:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And David said unto him, Fear not: for I will surely shew thee kindness for Jonathan thy father’s sake, and will restore thee all the land of Saul thy father; and thou shalt eat bread at my table continually."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And David said unto him,"
+    },
+    {
+     "v": 7,
+     "speaker": "david",
+     "text": "Fear not: for I will surely shew thee kindness for Jonathan thy father’s sake, and will restore thee all the land of Saul thy father; and thou shalt eat bread at my table continually."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "mephibosheth",
+   "ref": "2SA 9:8",
+   "label": "2 Samuel 9:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And he bowed himself, and said, What is thy servant, that thou shouldest look upon such a dead dog as I am?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And he bowed himself, and said,"
+    },
+    {
+     "v": 8,
+     "speaker": "mephibosheth",
+     "text": "What is thy servant, that thou shouldest look upon such a dead dog as I am?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A dead dog. That is how low he saw himself. Some of us have called ourselves names like that. Not worth anything. Too broken to be wanted."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "2SA 9:9",
+   "label": "2 Samuel 9:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Then the king called to Ziba, Saul’s servant, and said unto him, I have given unto thy master’s son all that pertained to Saul and to all his house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Then the king called to Ziba, Saul’s servant, and said unto him,"
+    },
+    {
+     "v": 9,
+     "speaker": "david",
+     "text": "I have given unto thy master’s son all that pertained to Saul and to all his house."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "2SA 9:10",
+   "label": "2 Samuel 9:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Thou therefore, and thy sons, and thy servants, shall till the land for him, and thou shalt bring in the fruits, that thy master’s son may have food to eat: but Mephibosheth thy master’s son shall eat bread alway at my table. Now Ziba had fifteen sons and twenty servants."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "david",
+     "text": "Thou therefore, and thy sons, and thy servants, shall till the land for him, and thou shalt bring in the fruits, that thy master’s son may have food to eat: but Mephibosheth thy master’s son shall eat bread alway at my table."
+    },
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Now Ziba had fifteen sons and twenty servants."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Not once. Always. Continually. David gave him back his family's land and a permanent seat at the king's table, like one of the king's own sons."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2SA 9:13",
+   "label": "2 Samuel 9:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "So Mephibosheth dwelt in Jerusalem: for he did eat continually at the king’s table; and was lame on both his feet."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "So Mephibosheth dwelt in Jerusalem: for he did eat continually at the king’s table; and was lame on both his feet."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The Bible ends with it on purpose. He ate at the king's table, and he was lame on both his feet. His feet did not change. His place did. Under that table, nobody could see his feet. They just saw a son at the table."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, that is grace. We did not earn the seat. We were brought out of Lo-debar for somebody else's sake. And now there is a place at the King's table with your name on it, just as you are."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 615,
+ "est_seconds": 341,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.7",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 2 Sam 9:1-13; the covenant is 1 Sam 20:14-17, the fall 2 Sam 4:4; grace preached without a claim on anyone's salvation."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Disability honoured (his feet are part of him at the table, not fixed); 'for Jonathan's sake' at the turn; no shame."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

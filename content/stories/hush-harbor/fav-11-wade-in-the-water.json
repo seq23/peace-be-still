@@ -1,0 +1,328 @@
+{
+ "id": "fav-11-wade-in-the-water",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Troubled Water at Bethesda",
+ "passage": {
+  "refs": [
+   "JOH 5:1-9"
+  ],
+  "label": "John 5:1-9"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "man",
+   "name": "impotent man",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, there was a pool in Jerusalem by the sheep gate, with five covered porches all around it. And those porches were full of people nobody else wanted to look at."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 5:1",
+   "label": "John 5:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "After this there was a feast of the Jews; and Jesus went up to Jerusalem."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "After this there was a feast of the Jews; and Jesus went up to Jerusalem."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 5:2",
+   "label": "John 5:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Now there is at Jerusalem by the sheep market a pool, which is called in the Hebrew tongue Bethesda, having five porches."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Now there is at Jerusalem by the sheep market a pool, which is called in the Hebrew tongue Bethesda, having five porches."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 5:3",
+   "label": "John 5:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "In these lay a great multitude of impotent folk, of blind, halt, withered, waiting for the moving of the water."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "In these lay a great multitude of impotent folk, of blind, halt, withered, waiting for the moving of the water."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, waiting on the water. [PAUSE 3s | screen: \"Waiting on the water\"] Waiting on the water. [PAUSE 3s | screen: \"Waiting on the water\"] Every one of them was lying there waiting for the water to move.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Waiting on the water"
+    },
+    {
+     "seconds": 3,
+     "screen": "Waiting on the water"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 5:4",
+   "label": "John 5:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "For an angel went down at a certain season into the pool, and troubled the water: whosoever then first after the troubling of the water stepped in was made whole of whatsoever disease he had."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "For an angel went down at a certain season into the pool, and troubled the water: whosoever then first after the troubling of the water stepped in was made whole of whatsoever disease he had."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The blind, the lame, the ones whose bodies had withered. They lay there day after day, watching that water, hoping to be the first one in when it stirred."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 5:5",
+   "label": "John 5:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And a certain man was there, which had an infirmity thirty and eight years."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And a certain man was there, which had an infirmity thirty and eight years."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Thirty-eight years. Church, that is longer than some of us have been alive. Thirty-eight years of lying by that pool, watching other folks get there first."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 5:6",
+   "label": "John 5:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "When Jesus saw him lie, and knew that he had been now a long time in that case, he saith unto him, Wilt thou be made whole?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "When Jesus saw him lie, and knew that he had been now a long time in that case, he saith unto him, Wilt thou be made whole?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Now that is a strange question to ask a sick man. But Jesus asks it on purpose. After so long, a person can get used to the way things are. He wanted to hear what the man wanted."
+  },
+  {
+   "type": "scripture",
+   "speaker": "man",
+   "ref": "JOH 5:7",
+   "label": "John 5:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "The impotent man answered him, Sir, I have no man, when the water is troubled, to put me into the pool: but while I am coming, another steppeth down before me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "The impotent man answered him,"
+    },
+    {
+     "v": 7,
+     "speaker": "man",
+     "text": "Sir, I have no man, when the water is troubled, to put me into the pool: but while I am coming, another steppeth down before me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "I have no man. Hear the loneliness in that. Nobody to carry him. Nobody to watch out for him. Every time the water moved, somebody else stepped in ahead of him."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He did not even answer the question. He told Jesus why it had never worked. And Jesus did not need the pool."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 5:8",
+   "label": "John 5:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Jesus saith unto him, Rise, take up thy bed, and walk."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Jesus saith unto him, Rise, take up thy bed, and walk."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 5:9",
+   "label": "John 5:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And immediately the man was made whole, and took up his bed, and walked: and on the same day was the sabbath."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And immediately the man was made whole, and took up his bed, and walked: and on the same day was the sabbath."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rise. Take up thy bed. Walk. Three words of command, and the man who had no one to help him did all three. The mat he had been lying on for thirty-eight years, he picked up and carried."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The old saints used to sing about this water. Wade in the water, children. God's going to trouble the water. Enslaved men and women sang it, waiting for God to move. Church, some of us have been lying by the pool a long time, watching other people get their blessing first, with nobody to help us in. The good news is that Jesus walks right up to the ones nobody carries. He does not need you to get to the water first. He comes to where you are lying, and he asks, do you want to be made whole?"
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 538,
+ "est_seconds": 299,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.0",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 5:1-9; v4 kept as the KJV has it, no comment; Jesus's words only as scripture; 'impotent' left in the verse, 'sick' in narration; no promise of healing to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Wade in the Water' (traditional) named as the old saints' song, in the third person; no contested escape-code claim; the lonely man honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

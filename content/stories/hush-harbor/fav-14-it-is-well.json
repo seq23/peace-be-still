@@ -1,0 +1,543 @@
+{
+ "id": "fav-14-it-is-well",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "It Is Well",
+ "passage": {
+  "refs": [
+   "2KI 4:8-37"
+  ],
+  "label": "2 Kings 4:8-37"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "woman",
+   "name": "Shunammite",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:8",
+   "label": "2 Kings 4:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And it fell on a day, that Elisha passed to Shunem, where was a great woman; and she constrained him to eat bread. And so it was, that as oft as he passed by, he turned in thither to eat bread."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And it fell on a day, that Elisha passed to Shunem, where was a great woman; and she constrained him to eat bread. And so it was, that as oft as he passed by, he turned in thither to eat bread."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, it is well. [PAUSE 3s | screen: \"It is well\"] It is well. [PAUSE 3s | screen: \"It is well\"] Before this story is over, a mother is going to say it with her heart breaking.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "It is well"
+    },
+    {
+     "seconds": 3,
+     "screen": "It is well"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, the Bible calls her a great woman. She had means, and she had a generous heart. Every time the prophet Elisha came through Shunem, she fed him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "2KI 4:9",
+   "label": "2 Kings 4:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And she said unto her husband, Behold now, I perceive that this is an holy man of God, which passeth by us continually."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And she said unto her husband,"
+    },
+    {
+     "v": 9,
+     "speaker": "woman",
+     "text": "Behold now, I perceive that this is an holy man of God, which passeth by us continually."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "2KI 4:10",
+   "label": "2 Kings 4:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Let us make a little chamber, I pray thee, on the wall; and let us set for him there a bed, and a table, and a stool, and a candlestick: and it shall be, when he cometh to us, that he shall turn in thither."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "woman",
+     "text": "Let us make a little chamber, I pray thee, on the wall; and let us set for him there a bed, and a table, and a stool, and a candlestick: and it shall be, when he cometh to us, that he shall turn in thither."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A little room with a bed, a table, a stool and a lamp. She made a place for the man of God to rest. Elisha wanted to do something for her in return. She said she was content living among her own people. But his servant Gehazi noticed something. She had no son, and her husband was old."
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "2KI 4:16",
+   "label": "2 Kings 4:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And he said, About this season, according to the time of life, thou shalt embrace a son. And she said, Nay, my lord, thou man of God, do not lie unto thine handmaid."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And he said, About this season, according to the time of life, thou shalt embrace a son. And she said,"
+    },
+    {
+     "v": 16,
+     "speaker": "woman",
+     "text": "Nay, my lord, thou man of God, do not lie unto thine handmaid."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Do not lie to me. She had stopped hoping for that a long time ago, and she did not want her heart broken."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:17",
+   "label": "2 Kings 4:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And the woman conceived, and bare a son at that season that Elisha had said unto her, according to the time of life."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And the woman conceived, and bare a son at that season that Elisha had said unto her, according to the time of life."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:18",
+   "label": "2 Kings 4:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And when the child was grown, it fell on a day, that he went out to his father to the reapers."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And when the child was grown, it fell on a day, that he went out to his father to the reapers."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then one day out in the field, the boy cried to his father, my head, my head. They carried him to his mother."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:20",
+   "label": "2 Kings 4:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And when he had taken him, and brought him to his mother, he sat on her knees till noon, and then died."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And when he had taken him, and brought him to his mother, he sat on her knees till noon, and then died."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:21",
+   "label": "2 Kings 4:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And she went up, and laid him on the bed of the man of God, and shut the door upon him, and went out."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And she went up, and laid him on the bed of the man of God, and shut the door upon him, and went out."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, she did not scream. She did not tell anybody. She carried her son upstairs, laid him on the prophet's bed, and shut the door."
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "2KI 4:22",
+   "label": "2 Kings 4:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And she called unto her husband, and said, Send me, I pray thee, one of the young men, and one of the asses, that I may run to the man of God, and come again."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And she called unto her husband, and said,"
+    },
+    {
+     "v": 22,
+     "speaker": "woman",
+     "text": "Send me, I pray thee, one of the young men, and one of the asses, that I may run to the man of God, and come again."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "2KI 4:23",
+   "label": "2 Kings 4:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And he said, Wherefore wilt thou go to him to day? it is neither new moon, nor sabbath. And she said, It shall be well."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And he said, Wherefore wilt thou go to him to day? it is neither new moon, nor sabbath. And she said,"
+    },
+    {
+     "v": 23,
+     "speaker": "woman",
+     "text": "It shall be well."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It shall be well. Her husband asked why she would go to the prophet on an ordinary day. And she said, it shall be well. Her child was dead upstairs, and she said it shall be well."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:25",
+   "label": "2 Kings 4:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "So she went and came unto the man of God to mount Carmel. And it came to pass, when the man of God saw her afar off, that he said to Gehazi his servant, Behold, yonder is that Shunammite:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "So she went and came unto the man of God to mount Carmel. And it came to pass, when the man of God saw her afar off, that he said to Gehazi his servant, Behold, yonder is that Shunammite:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "2KI 4:26",
+   "label": "2 Kings 4:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Run now, I pray thee, to meet her, and say unto her, Is it well with thee? is it well with thy husband? is it well with the child? And she answered, It is well."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Run now, I pray thee, to meet her, and say unto her, Is it well with thee? is it well with thy husband? is it well with the child? And she answered,"
+    },
+    {
+     "v": 26,
+     "speaker": "woman",
+     "text": "It is well."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Is it well with the child? It is well. That is not denial, Church. She knew what was upstairs. That was a woman refusing to let go of God until she reached the man of God. She held her grief behind her teeth and rode."
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "2KI 4:28",
+   "label": "2 Kings 4:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Then she said, Did I desire a son of my lord? did I not say, Do not deceive me?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Then she said,"
+    },
+    {
+     "v": 28,
+     "speaker": "woman",
+     "text": "Did I desire a son of my lord? did I not say, Do not deceive me?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "2KI 4:30",
+   "label": "2 Kings 4:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And the mother of the child said, As the LORD liveth, and as thy soul liveth, I will not leave thee. And he arose, and followed her."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And the mother of the child said,"
+    },
+    {
+     "v": 30,
+     "speaker": "woman",
+     "text": "As the LORD liveth, and as thy soul liveth, I will not leave thee."
+    },
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And he arose, and followed her."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:33",
+   "label": "2 Kings 4:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "He went in therefore, and shut the door upon them twain, and prayed unto the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "He went in therefore, and shut the door upon them twain, and prayed unto the LORD."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:34",
+   "label": "2 Kings 4:34",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 34,
+     "text": "And he went up, and lay upon the child, and put his mouth upon his mouth, and his eyes upon his eyes, and his hands upon his hands: and he stretched himself upon the child; and the flesh of the child waxed warm."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "And he went up, and lay upon the child, and put his mouth upon his mouth, and his eyes upon his eyes, and his hands upon his hands: and he stretched himself upon the child; and the flesh of the child waxed warm."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:35",
+   "label": "2 Kings 4:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Then he returned, and walked in the house to and fro; and went up, and stretched himself upon him: and the child sneezed seven times, and the child opened his eyes."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Then he returned, and walked in the house to and fro; and went up, and stretched himself upon him: and the child sneezed seven times, and the child opened his eyes."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:37",
+   "label": "2 Kings 4:37",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 37,
+     "text": "Then she went in, and fell at his feet, and bowed herself to the ground, and took up her son, and went out."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Then she went in, and fell at his feet, and bowed herself to the ground, and took up her son, and went out."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She fell at his feet, and then she took up her son. A long time later, a man who lost his children at sea wrote a hymn, It Is Well with My Soul. Church, it is well is not something you say because everything is fine. It is what you say when you are holding on to God in the worst hour, and you will not let go. God does not promise every story ends like this one. But he can be trusted with the ones we carry upstairs."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 881,
+ "est_seconds": 487,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.6",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 2 Kings 4:8-37 (vv13-15, 19, 24, 29, 31 told in words or left out); the close says plainly that God does not promise every story ends this way."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A great woman shown with means, faith and grief; 'It Is Well with My Soul' (1873, public domain) named; 'it is well' at the turn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

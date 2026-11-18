@@ -1,0 +1,375 @@
+{
+ "id": "fav-15-naaman",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Naaman Dips Seven Times",
+ "passage": {
+  "refs": [
+   "2KI 5:1-14"
+  ],
+  "label": "2 Kings 5:1-14"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "maid",
+   "name": "little maid",
+   "age": "child",
+   "gender": "f"
+  },
+  {
+   "id": "naaman",
+   "name": "Naaman",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "servants",
+   "name": "servants",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 5:1",
+   "label": "2 Kings 5:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Now Naaman, captain of the host of the king of Syria, was a great man with his master, and honourable, because by him the LORD had given deliverance unto Syria: he was also a mighty man in valour, but he was a leper."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Now Naaman, captain of the host of the king of Syria, was a great man with his master, and honourable, because by him the LORD had given deliverance unto Syria: he was also a mighty man in valour, but he was a leper."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, but. [PAUSE 3s | screen: \"But\"] But. [PAUSE 3s | screen: \"But\"] He was great, he was honoured, he was mighty, but he was a leper.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "But"
+    },
+    {
+     "seconds": 3,
+     "screen": "But"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Naaman had everything. Rank, respect, victories. And under all that armour he had a sickness no money could fix."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 5:2",
+   "label": "2 Kings 5:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And the Syrians had gone out by companies, and had brought away captive out of the land of Israel a little maid; and she waited on Naaman’s wife."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And the Syrians had gone out by companies, and had brought away captive out of the land of Israel a little maid; and she waited on Naaman’s wife."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "maid",
+   "ref": "2KI 5:3",
+   "label": "2 Kings 5:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And she said unto her mistress, Would God my lord were with the prophet that is in Samaria! for he would recover him of his leprosy."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And she said unto her mistress,"
+    },
+    {
+     "v": 3,
+     "speaker": "maid",
+     "text": "Would God my lord were with the prophet that is in Samaria! for he would recover him of his leprosy."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look at that little girl. Taken from her home in Israel by raiders. Made a servant in a foreign house. She had every reason to be bitter. And she spoke up anyway, to help the man whose army took her. She knew there was a prophet in Israel, and she said so."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 5:4",
+   "label": "2 Kings 5:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And one went in, and told his lord, saying, Thus and thus said the maid that is of the land of Israel."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And one went in, and told his lord, saying, Thus and thus said the maid that is of the land of Israel."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So the king of Syria sent Naaman off with a letter and a fortune in silver and gold. The king of Israel read it and tore his clothes. Am I God? But Elisha sent word, let him come to me."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 5:9",
+   "label": "2 Kings 5:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "So Naaman came with his horses and with his chariot, and stood at the door of the house of Elisha."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "So Naaman came with his horses and with his chariot, and stood at the door of the house of Elisha."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 5:10",
+   "label": "2 Kings 5:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And Elisha sent a messenger unto him, saying, Go and wash in Jordan seven times, and thy flesh shall come again to thee, and thou shalt be clean."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And Elisha sent a messenger unto him, saying, Go and wash in Jordan seven times, and thy flesh shall come again to thee, and thou shalt be clean."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Elisha did not even come out to the door. He sent a messenger. Go wash in the Jordan seven times."
+  },
+  {
+   "type": "scripture",
+   "speaker": "naaman",
+   "ref": "2KI 5:11",
+   "label": "2 Kings 5:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "But Naaman was wroth, and went away, and said, Behold, I thought, He will surely come out to me, and stand, and call on the name of the LORD his God, and strike his hand over the place, and recover the leper."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "But Naaman was wroth, and went away, and said,"
+    },
+    {
+     "v": 11,
+     "speaker": "naaman",
+     "text": "Behold, I thought, He will surely come out to me, and stand, and call on the name of the LORD his God, and strike his hand over the place, and recover the leper."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "naaman",
+   "ref": "2KI 5:12",
+   "label": "2 Kings 5:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Are not Abana and Pharpar, rivers of Damascus, better than all the waters of Israel? may I not wash in them, and be clean? So he turned and went away in a rage."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "naaman",
+     "text": "Are not Abana and Pharpar, rivers of Damascus, better than all the waters of Israel? may I not wash in them, and be clean?"
+    },
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "So he turned and went away in a rage."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "I thought. Church, a lot of us have missed our healing on, I thought. I thought he would come out and make a show of it. I thought it would be some great thing. Naaman had the whole thing planned in his head, and God did not follow his plan."
+  },
+  {
+   "type": "scripture",
+   "speaker": "servants",
+   "ref": "2KI 5:13",
+   "label": "2 Kings 5:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And his servants came near, and spake unto him, and said, My father, if the prophet had bid thee do some great thing, wouldest thou not have done it? how much rather then, when he saith to thee, Wash, and be clean?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And his servants came near, and spake unto him, and said,"
+    },
+    {
+     "v": 13,
+     "speaker": "servants",
+     "text": "My father, if the prophet had bid thee do some great thing, wouldest thou not have done it? how much rather then, when he saith to thee, Wash, and be clean?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Thank God for servants with sense. If he had asked you to do some great thing, you would have done it. He just said wash."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 5:14",
+   "label": "2 Kings 5:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Then went he down, and dipped himself seven times in Jordan, according to the saying of the man of God: and his flesh came again like unto the flesh of a little child, and he was clean."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Then went he down, and dipped himself seven times in Jordan, according to the saying of the man of God: and his flesh came again like unto the flesh of a little child, and he was clean."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Seven times down into that muddy river. Nothing on the first dip. Nothing on the sixth. On the seventh, his skin came back like a little child's."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "This story is full of the little and the low. A captive girl who spoke up. Servants who talked sense. A plain river. And a proud man who had to come down off his chariot and go under the water seven times. Church, sometimes what God asks is simple, and the hard part is our pride. Go down to the water."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 638,
+ "est_seconds": 354,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.1",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 2 Kings 5:1-14 (vv5-8 told in words); Elisha's word through a messenger read by the narrator; no healing promise."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The captive girl and the servants honoured as the wise ones; 'but' at the turn, a real preaching device."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

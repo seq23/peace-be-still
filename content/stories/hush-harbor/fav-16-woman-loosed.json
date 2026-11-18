@@ -1,0 +1,303 @@
+{
+ "id": "fav-16-woman-loosed",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Woman, Thou Art Loosed",
+ "passage": {
+  "refs": [
+   "LUK 13:10-17"
+  ],
+  "label": "Luke 13:10-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "ruler",
+   "name": "ruler of the synagogue",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 13:10",
+   "label": "Luke 13:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And he was teaching in one of the synagogues on the sabbath."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And he was teaching in one of the synagogues on the sabbath."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 13:11",
+   "label": "Luke 13:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And, behold, there was a woman which had a spirit of infirmity eighteen years, and was bowed together, and could in no wise lift up herself."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And, behold, there was a woman which had a spirit of infirmity eighteen years, and was bowed together, and could in no wise lift up herself."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, eighteen years. [PAUSE 3s | screen: \"Eighteen years\"] Eighteen years. [PAUSE 3s | screen: \"Eighteen years\"] Bent over that long, and she still came to the house of God.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Eighteen years"
+    },
+    {
+     "seconds": 3,
+     "screen": "Eighteen years"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, picture her. Bent over so far she could not lift herself up. Eighteen years of looking at the ground. Eighteen years of seeing people's feet instead of their faces. And she was still in the synagogue that day."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 13:12",
+   "label": "Luke 13:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And when Jesus saw her, he called her to him, and said unto her, Woman, thou art loosed from thine infirmity."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And when Jesus saw her, he called her to him, and said unto her, Woman, thou art loosed from thine infirmity."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She did not ask him. She did not push through a crowd. Jesus saw her, and he called her to him."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Woman, thou art loosed. Black churches have preached that sentence for years, Church, because so many women have carried something that bent them over. Grief. Abuse. Shame. Work that never ends. Burdens folks could not see, that would not let them stand up straight."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 13:13",
+   "label": "Luke 13:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And he laid his hands on her: and immediately she was made straight, and glorified God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And he laid his hands on her: and immediately she was made straight, and glorified God."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She stood up straight and glorified God. Can you imagine the first time she looked up and saw the faces around her? The sky. The roof beams. The eyes of the people who had walked past her for eighteen years. And the face of the one who set her free."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ruler",
+   "ref": "LUK 13:14",
+   "label": "Luke 13:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And the ruler of the synagogue answered with indignation, because that Jesus had healed on the sabbath day, and said unto the people, There are six days in which men ought to work: in them therefore come and be healed, and not on the sabbath day."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And the ruler of the synagogue answered with indignation, because that Jesus had healed on the sabbath day, and said unto the people,"
+    },
+    {
+     "v": 14,
+     "speaker": "ruler",
+     "text": "There are six days in which men ought to work: in them therefore come and be healed, and not on the sabbath day."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Instead of rejoicing, the ruler of the synagogue got angry. He cared more about the rule than about the woman standing straight in front of him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 13:15",
+   "label": "Luke 13:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "The Lord then answered him, and said, Thou hypocrite, doth not each one of you on the sabbath loose his ox or his ass from the stall, and lead him away to watering?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "The Lord then answered him, and said, Thou hypocrite, doth not each one of you on the sabbath loose his ox or his ass from the stall, and lead him away to watering?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 13:16",
+   "label": "Luke 13:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And ought not this woman, being a daughter of Abraham, whom Satan hath bound, lo, these eighteen years, be loosed from this bond on the sabbath day?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And ought not this woman, being a daughter of Abraham, whom Satan hath bound, lo, these eighteen years, be loosed from this bond on the sabbath day?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A daughter of Abraham. Jesus gave her back her name and her place. Not a problem to be managed, not an interruption to the service. A daughter of Abraham, who deserved to be set free."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 13:17",
+   "label": "Luke 13:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And when he had said these things, all his adversaries were ashamed: and all the people rejoiced for all the glorious things that were done by him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And when he had said these things, all his adversaries were ashamed: and all the people rejoiced for all the glorious things that were done by him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, if something has had you bent over a long time, hear this. Jesus sees you, even in the back. He calls you by name. And if you are carrying abuse or a weight too heavy, tell somebody who can help you carry it. Get your pastor, a counselor, a doctor, a friend. The Lord who loosed that woman uses his people to help lift."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 511,
+ "est_seconds": 285,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.8",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 13:10-17; the Sabbath dispute told as the text tells it with no position on which day; 'whom Satan hath bound' left in the verse without a doctrine of illness; points women carrying abuse to a pastor, counselor, doctor or friend."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Woman, thou art loosed' named as a sentence Black churches preach, no person named; women's burdens listed with care, never pity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

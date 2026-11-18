@@ -1,0 +1,303 @@
+{
+ "id": "fav-12-jacob-wrestles",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "I Will Not Let Thee Go",
+ "passage": {
+  "refs": [
+   "GEN 32:24-30"
+  ],
+  "label": "Genesis 32:24-30"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jacob",
+   "name": "Jacob",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Jacob was on his way home to face his brother Esau, the brother he had cheated twenty years before. He had heard Esau was coming with four hundred men. That night, Jacob sent his wives, his children and everything he had across the river. And he stayed behind by himself."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 32:24",
+   "label": "Genesis 32:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And Jacob was left alone; and there wrestled a man with him until the breaking of the day."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "And Jacob was left alone; and there wrestled a man with him until the breaking of the day."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, till daybreak. [PAUSE 3s | screen: \"Till daybreak\"] Till daybreak. [PAUSE 3s | screen: \"Till daybreak\"] Jacob wrestled all night long, and he did not quit.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Till daybreak"
+    },
+    {
+     "seconds": 3,
+     "screen": "Till daybreak"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "All night long in the dark. Jacob did not know who he was fighting at first. He just knew he could not let go. Hour after hour, sweat and dust and the river running by. Nobody there to help him. Nobody to call. Just Jacob and the one who would not let him walk away the same."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 32:25",
+   "label": "Genesis 32:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "And when he saw that he prevailed not against him, he touched the hollow of his thigh; and the hollow of Jacob’s thigh was out of joint, as he wrestled with him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "And when he saw that he prevailed not against him, he touched the hollow of his thigh; and the hollow of Jacob’s thigh was out of joint, as he wrestled with him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "One touch, and Jacob's hip was out of joint. That man could have ended it any time he wanted. But Jacob, hurting, still would not turn him loose."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 32:26",
+   "label": "Genesis 32:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And he said, Let me go, for the day breaketh. And he said, I will not let thee go, except thou bless me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And he said, Let me go, for the day breaketh. And he said,"
+    },
+    {
+     "v": 26,
+     "speaker": "jacob",
+     "text": "I will not let thee go, except thou bless me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, that is a prayer. I will not let you go until you bless me. Jacob had spent his whole life grabbing blessings by tricks and schemes. Now he was holding on to God with both arms, and nothing else."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 32:27",
+   "label": "Genesis 32:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And he said unto him, What is thy name? And he said, Jacob."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And he said unto him, What is thy name? And he said,"
+    },
+    {
+     "v": 27,
+     "speaker": "jacob",
+     "text": "Jacob."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob. His name meant heel-grabber, the one who trips you up. Saying his own name was saying who he had been. A trickster. A man who took what was not his."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 32:28",
+   "label": "Genesis 32:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "And he said, Thy name shall be called no more Jacob, but Israel: for as a prince hast thou power with God and with men, and hast prevailed."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "And he said, Thy name shall be called no more Jacob, but Israel: for as a prince hast thou power with God and with men, and hast prevailed."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A new name. Israel. You wrestled with God and with men, and you prevailed. The man who came into that night as Jacob walked out as Israel."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 32:29",
+   "label": "Genesis 32:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "And Jacob asked him, and said, Tell me, I pray thee, thy name. And he said, Wherefore is it that thou dost ask after my name? And he blessed him there."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "And Jacob asked him, and said,"
+    },
+    {
+     "v": 29,
+     "speaker": "jacob",
+     "text": "Tell me, I pray thee, thy name."
+    },
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "And he said, Wherefore is it that thou dost ask after my name? And he blessed him there."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 32:30",
+   "label": "Genesis 32:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And Jacob called the name of the place Peniel: for I have seen God face to face, and my life is preserved."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And Jacob called the name of the place Peniel: for I have seen God face to face, and my life is preserved."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The sun came up on him limping. He carried that limp the rest of his life. But he also carried a blessing and a new name."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, some blessings come after a long night of holding on. You might come out of it limping. But hold on. Tell the Lord plainly, I will not let you go. Jacob found out that God does not mind you holding on to him. He changes your name while you do. Hold on till morning."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 502,
+ "est_seconds": 280,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.0",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 32:24-30; the wrestler's words read by the narrator (God is never voiced); the name meaning from Gen 25:26 and 27:36."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Till daybreak' at the turn; holding on to God preached plainly, the limp honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
