@@ -1,0 +1,394 @@
+{
+ "id": "core-034-jairus",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "La hija de Jairo",
+ "passage": {
+  "refs": [
+   "MAR 5:21-24",
+   "MAR 5:35-43"
+  ],
+  "label": "Marcos 5:21-24; Marcos 5:35-43"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jairus",
+   "name": "Jairo",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús acababa de cruzar el lago en una barca, y en la orilla ya lo esperaba una multitud. Entre toda esa gente, un hombre se abrió paso con desesperación."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:22",
+   "label": "Marcos 5:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Y vino uno de los príncipes de la sinagoga, llamado Jairo; y luego que le vió, se postró á sus pies,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Y vino uno de los príncipes de la sinagoga, llamado Jairo; y luego que le vió, se postró á sus pies,"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Jesús se detuvo por un padre que tenía a su hija enferma.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jairo era un hombre importante en su pueblo. Era uno de los encargados de la sinagoga. Pero ese día no le importó su posición. Se tiró a los pies de Jesús, delante de todos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jairus",
+   "ref": "MAR 5:23",
+   "label": "Marcos 5:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Y le rogaba mucho, diciendo: Mi hija está á la muerte: ven y pondrás las manos sobre ella para que sea salva, y vivirá."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Y le rogaba mucho, diciendo:"
+    },
+    {
+     "v": 23,
+     "speaker": "jairus",
+     "text": "Mi hija está á la muerte: ven y pondrás las manos sobre ella para que sea salva, y vivirá."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:24",
+   "label": "Marcos 5:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Y fué con él, y le seguía gran compañía, y le apretaban."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y fué con él, y le seguía gran compañía, y le apretaban."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús se fue con él. Pero en el camino, la gente lo apretaba por todos lados. Y una mujer enferma tocó su manto y fue sanada. Jesús se detuvo a buscarla y a hablar con ella."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagina a Jairo mientras tanto. Cada minuto contaba. Su hija se estaba muriendo, y Jesús estaba parado hablando con otra persona."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:35",
+   "label": "Marcos 5:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Hablando aún él, vinieron de casa del príncipe de la sinagoga, diciendo: Tu hija es muerta; ¿para qué fatigas más al Maestro?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Hablando aún él, vinieron de casa del príncipe de la sinagoga, diciendo: Tu hija es muerta; ¿para qué fatigas más al Maestro?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La peor noticia que un padre puede recibir. Y luego, la frase que dolía todavía más. ¿Para qué molestar más al Maestro? Ya no hay nada que hacer."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:36",
+   "label": "Marcos 5:36",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 36,
+     "text": "Mas luego Jesús, oyendo esta razón que se decía, dijo al príncipe de la sinagoga: No temas, cree solamente."
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "Mas luego Jesús, oyendo esta razón que se decía, dijo al príncipe de la sinagoga: No temas, cree solamente."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No temas, cree solamente. Jesús le habló a Jairo antes de que el miedo se lo tragara. No le dio una explicación. Le pidió que siguiera confiando."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:37-38",
+   "label": "Marcos 5:37-38",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 37,
+     "text": "Y no permitió que alguno viniese tras él sino Pedro, y Jacobo, y Juan hermano de Jacobo."
+    },
+    {
+     "v": 38,
+     "text": "Y vino á casa del príncipe de la sinagoga, y vió el alboroto, los que lloraban y gemían mucho."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Y no permitió que alguno viniese tras él sino Pedro, y Jacobo, y Juan hermano de Jacobo."
+    },
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "Y vino á casa del príncipe de la sinagoga, y vió el alboroto, los que lloraban y gemían mucho."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:39",
+   "label": "Marcos 5:39",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 39,
+     "text": "Y entrando, les dice: ¿Por qué alborotáis y lloráis? La muchacha no es muerta, mas duerme."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "Y entrando, les dice: ¿Por qué alborotáis y lloráis? La muchacha no es muerta, mas duerme."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:40",
+   "label": "Marcos 5:40",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 40,
+     "text": "Y hacían burla de él: mas él, echados fuera todos, toma al padre y á la madre de la muchacha, y á los que estaban con él, y entra donde la muchacha estaba."
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "Y hacían burla de él: mas él, echados fuera todos, toma al padre y á la madre de la muchacha, y á los que estaban con él, y entra donde la muchacha estaba."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La gente se burló. Ellos habían visto a la niña. Sabían que estaba muerta. Pero Jesús sacó a todos y se quedó solo con el papá, la mamá y tres de sus discípulos. Y entró al cuarto donde estaba la niña."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:41",
+   "label": "Marcos 5:41",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 41,
+     "text": "Y tomando la mano de la muchacha, le dice: Talitha cumi; que es, si lo interpretares: Muchacha, á ti digo, levántate."
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "Y tomando la mano de la muchacha, le dice: Talitha cumi; que es, si lo interpretares: Muchacha, á ti digo, levántate."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Talitha cumi. Son palabras en la lengua que hablaba Jesús en su casa. Las palabras sencillas que una mamá le diría a su hija para despertarla en la mañana. Niña, levántate."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:42",
+   "label": "Marcos 5:42",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 42,
+     "text": "Y luego la muchacha se levantó, y andaba; porque tenía doce años. Y se espantaron de grande espanto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "Y luego la muchacha se levantó, y andaba; porque tenía doce años. Y se espantaron de grande espanto."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:43",
+   "label": "Marcos 5:43",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 43,
+     "text": "Mas él les mandó mucho que nadie lo supiese, y dijo que le diesen de comer."
+    }
+   ],
+   "segments": [
+    {
+     "v": 43,
+     "speaker": "narrator",
+     "text": "Mas él les mandó mucho que nadie lo supiese, y dijo que le diesen de comer."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y lo primero que Jesús pidió después del milagro fue algo muy práctico. Que le dieran de comer. Él pensaba en todo, hasta en que la niña tendría hambre."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No todos los padres que oran por un hijo enfermo ven lo que vio Jairo. Esta historia no es una promesa de que siempre será así. Pero nos muestra a un Jesús que no se aleja cuando llegan las malas noticias, que entra al cuarto con la familia y que toma de la mano a la niña."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche estás preocupado por un hijo, por una hija, por alguien que amas, puedes hacer lo que hizo Jairo. Caer a los pies de Jesús y decirle lo que pasa. Y escuchar su voz, que todavía dice no temas, cree solamente."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 644,
+ "est_seconds": 357,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 5:21-24 and 35-43 (the woman of 5:25-34 named as the delay); states not every sick child is healed this way (no outcome promise); Talitha cumi explained, not invented."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A worried father shown with dignity; would not wound a parent who lost a child."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

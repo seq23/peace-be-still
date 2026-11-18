@@ -1,0 +1,462 @@
+{
+ "id": "core-040-ten-commandments",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Los diez mandamientos",
+ "passage": {
+  "refs": [
+   "EXO 19:16-20",
+   "EXO 20:1-17"
+  ],
+  "label": "Éxodo 19:16-20; Éxodo 20:1-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tres meses después de salir de Egipto, el pueblo de Israel llegó al desierto de Sinaí y acampó frente al monte. Dios le dijo a Moisés que se prepararan, porque al tercer día iba a descender sobre el monte a la vista de todos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 19:16",
+   "label": "Éxodo 19:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y aconteció al tercer día cuando vino la mañana, que vinieron truenos y relámpagos, y espesa nube sobre el monte, y sonido de bocina muy fuerte; y estremecióse todo el pueblo que estaba en el real."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y aconteció al tercer día cuando vino la mañana, que vinieron truenos y relámpagos, y espesa nube sobre el monte, y sonido de bocina muy fuerte; y estremecióse todo el pueblo que estaba en el real."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno y santo, el Dios que bajó al monte para hablarle a su pueblo.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 19:17-18",
+   "label": "Éxodo 19:17-18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Y Moisés sacó del real al pueblo á recibir á Dios; y pusiéronse á lo bajo del monte."
+    },
+    {
+     "v": 18,
+     "text": "Y todo el monte de Sinaí humeaba, porque Jehová había descendido sobre él en fuego: y el humo de él subía como el humo de un horno, y todo el monte se estremeció en gran manera."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Y Moisés sacó del real al pueblo á recibir á Dios; y pusiéronse á lo bajo del monte."
+    },
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y todo el monte de Sinaí humeaba, porque Jehová había descendido sobre él en fuego: y el humo de él subía como el humo de un horno, y todo el monte se estremeció en gran manera."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Truenos, relámpagos, una nube espesa, humo y fuego. El monte entero temblaba. Era un pueblo de antiguos esclavos, y el Dios que los había sacado de Egipto venía a hablarles."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 19:19-20",
+   "label": "Éxodo 19:19-20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y el sonido de la bocina iba esforzándose en extremo: Moisés hablaba, y Dios le respondía en voz."
+    },
+    {
+     "v": 20,
+     "text": "Y descendió Jehová sobre el monte de Sinaí, sobre la cumbre del monte: y llamó Jehová á Moisés á la cumbre del monte, y Moisés subió."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y el sonido de la bocina iba esforzándose en extremo: Moisés hablaba, y Dios le respondía en voz."
+    },
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y descendió Jehová sobre el monte de Sinaí, sobre la cumbre del monte: y llamó Jehová á Moisés á la cumbre del monte, y Moisés subió."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:1-2",
+   "label": "Éxodo 20:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y HABLÓ Dios todas estas palabras, diciendo:"
+    },
+    {
+     "v": 2,
+     "text": "Yo soy JEHOVÁ tu Dios, que te saqué de la tierra de Egipto, de casa de siervos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y HABLÓ Dios todas estas palabras, diciendo:"
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Yo soy JEHOVÁ tu Dios, que te saqué de la tierra de Egipto, de casa de siervos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mira cómo empieza. Antes de dar un solo mandamiento, Dios les recuerda quién es él y lo que ya hizo por ellos. Yo te saqué de la esclavitud. Primero vino la libertad, y después las palabras para vivir en ella."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:3",
+   "label": "Éxodo 20:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "No tendrás dioses ajenos delante de mí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "No tendrás dioses ajenos delante de mí."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:4-6",
+   "label": "Éxodo 20:4-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "No te harás imagen, ni ninguna semejanza de cosa que esté arriba en el cielo, ni abajo en la tierra, ni en las aguas debajo de la tierra:"
+    },
+    {
+     "v": 5,
+     "text": "No te inclinarás á ellas, ni las honrarás; porque yo soy Jehová tu Dios, fuerte, celoso, que visito la maldad de los padres sobre los hijos, sobre los terceros y sobre los cuartos, á los que me aborrecen,"
+    },
+    {
+     "v": 6,
+     "text": "Y que hago misericordia en millares á los que me aman, y guardan mis mandamientos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "No te harás imagen, ni ninguna semejanza de cosa que esté arriba en el cielo, ni abajo en la tierra, ni en las aguas debajo de la tierra:"
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "No te inclinarás á ellas, ni las honrarás; porque yo soy Jehová tu Dios, fuerte, celoso, que visito la maldad de los padres sobre los hijos, sobre los terceros y sobre los cuartos, á los que me aborrecen,"
+    },
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y que hago misericordia en millares á los que me aman, y guardan mis mandamientos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los primeros mandamientos tratan de Dios. Ningún otro dios delante de él. Ninguna imagen para adorar. Él no quería ser uno más entre muchos. Quería el corazón entero de su pueblo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:7",
+   "label": "Éxodo 20:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "No tomarás el nombre de Jehová tu Dios en vano; porque no dará por inocente Jehová al que tomare su nombre en vano."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "No tomarás el nombre de Jehová tu Dios en vano; porque no dará por inocente Jehová al que tomare su nombre en vano."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:8-11",
+   "label": "Éxodo 20:8-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Acordarte has del día del reposo, para santificarlo:"
+    },
+    {
+     "v": 9,
+     "text": "Seis días trabajarás, y harás toda tu obra;"
+    },
+    {
+     "v": 10,
+     "text": "Mas el séptimo día será reposo para Jehová tu Dios: no hagas en él obra alguna, tú, ni tu hijo, ni tu hija, ni tu siervo, ni tu criada ni tu bestia, ni tu extranjero que está dentro de tus puertas:"
+    },
+    {
+     "v": 11,
+     "text": "Porque en seis días hizo Jehová los cielos y la tierra, la mar y todas las cosas que en ellos hay, y reposó en el séptimo día: por tanto Jehová bendijo el día del reposo y lo santificó."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Acordarte has del día del reposo, para santificarlo:"
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Seis días trabajarás, y harás toda tu obra;"
+    },
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Mas el séptimo día será reposo para Jehová tu Dios: no hagas en él obra alguna, tú, ni tu hijo, ni tu hija, ni tu siervo, ni tu criada ni tu bestia, ni tu extranjero que está dentro de tus puertas:"
+    },
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Porque en seis días hizo Jehová los cielos y la tierra, la mar y todas las cosas que en ellos hay, y reposó en el séptimo día: por tanto Jehová bendijo el día del reposo y lo santificó."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un día de descanso cada semana. Para todos. No solo para los dueños, también para los siervos, los extranjeros y hasta los animales. Para un pueblo que había trabajado sin descanso como esclavos, esto era un regalo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:12",
+   "label": "Éxodo 20:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Honra á tu padre y á tu madre, porque tus días se alarguen en la tierra que Jehová tu Dios te da."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Honra á tu padre y á tu madre, porque tus días se alarguen en la tierra que Jehová tu Dios te da."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:13-16",
+   "label": "Éxodo 20:13-16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "No matarás."
+    },
+    {
+     "v": 14,
+     "text": "No cometerás adulterio."
+    },
+    {
+     "v": 15,
+     "text": "No hurtarás."
+    },
+    {
+     "v": 16,
+     "text": "No hablarás contra tu prójimo falso testimonio."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "No matarás."
+    },
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "No cometerás adulterio."
+    },
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "No hurtarás."
+    },
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "No hablarás contra tu prójimo falso testimonio."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:17",
+   "label": "Éxodo 20:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "No codiciarás la casa de tu prójimo, no codiciarás la mujer de tu prójimo, ni su siervo, ni su criada, ni su buey, ni su asno, ni cosa alguna de tu prójimo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "No codiciarás la casa de tu prójimo, no codiciarás la mujer de tu prójimo, ni su siervo, ni su criada, ni su buey, ni su asno, ni cosa alguna de tu prójimo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los demás mandamientos tratan de cómo vivir con los demás. Honrar a los padres. No matar, no robar, no mentir. No desear lo que es del vecino. Son palabras cortas, y sin embargo cuesta toda la vida aprender a vivirlas."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús, muchos siglos después, resumió todos estos mandamientos en dos. Amar a Dios con todo el corazón, y amar al prójimo como a uno mismo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los mandamientos no se dieron para que el pueblo se ganara el amor de Dios. Ya los había sacado de Egipto. Se dieron para que supieran vivir como un pueblo libre, cerca de él y en paz con los demás."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche puedes leer estas palabras no como una lista de cosas prohibidas, sino como la voz del Dios que te sacó de algo. Él te conoce. Y él sabe qué caminos dan vida."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 785,
+ "est_seconds": 434,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exod 19:16-20 and 20:1-17; God's words only as scripture; the day of rest told as a gift without ruling on which day (S04); grace before law, Jesus's summary from Matt 22 told in words."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Former slaves given rest named with dignity; no moralising tone; natural Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

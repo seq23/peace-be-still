@@ -1,0 +1,388 @@
+{
+ "id": "core-036-five-thousand",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Cinco panes y dos peces",
+ "passage": {
+  "refs": [
+   "JOH 6:1-14"
+  ],
+  "label": "Juan 6:1-14"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "philip",
+   "name": "Felipe",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "andrew",
+   "name": "Andrés",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "crowd",
+   "name": "hombres",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La gente había visto a Jesús sanar enfermos, y lo seguía a todas partes. Un día cruzó al otro lado del mar de Galilea y subió a un monte con sus discípulos. Pero la multitud lo siguió hasta allá."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:3-4",
+   "label": "Juan 6:3-4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y subió Jesús á un monte, y se sentó allí con sus discípulos."
+    },
+    {
+     "v": 4,
+     "text": "Y estaba cerca la Pascua, la fiesta de los Judíos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y subió Jesús á un monte, y se sentó allí con sus discípulos."
+    },
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y estaba cerca la Pascua, la fiesta de los Judíos."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con la multitud cansada y con hambre.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:5-6",
+   "label": "Juan 6:5-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y como alzó Jesús los ojos, y vió que había venido á él grande multitud, dice á Felipe: ¿De dónde compraremos pan para que coman éstos?"
+    },
+    {
+     "v": 6,
+     "text": "Mas esto decía para probarle; porque él sabía lo que había de hacer."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y como alzó Jesús los ojos, y vió que había venido á él grande multitud, dice á Felipe: ¿De dónde compraremos pan para que coman éstos?"
+    },
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Mas esto decía para probarle; porque él sabía lo que había de hacer."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús ya sabía lo que iba a hacer. Pero le hizo la pregunta a Felipe para ver qué contestaba. Y Felipe hizo cuentas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "philip",
+   "ref": "JOH 6:7",
+   "label": "Juan 6:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Respondióle Felipe: Doscientos denarios de pan no les bastarán, para que cada uno de ellos tome un poco."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Respondióle Felipe:"
+    },
+    {
+     "v": 7,
+     "speaker": "philip",
+     "text": "Doscientos denarios de pan no les bastarán, para que cada uno de ellos tome un poco."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Doscientos denarios era como el salario de ocho meses de trabajo. Y ni así alcanzaría. Felipe tenía razón en los números. Pero se olvidó de quién le estaba preguntando."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:8",
+   "label": "Juan 6:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Dícele uno de sus discípulos, Andrés, hermano de Simón Pedro:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Dícele uno de sus discípulos, Andrés, hermano de Simón Pedro:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "andrew",
+   "ref": "JOH 6:9",
+   "label": "Juan 6:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Un muchacho está aquí que tiene cinco panes de cebada y dos pececillos; ¿mas qué es esto entre tantos?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "andrew",
+     "text": "Un muchacho está aquí que tiene cinco panes de cebada y dos pececillos; ¿mas qué es esto entre tantos?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un muchacho. Cinco panes de cebada, el pan más sencillo, el pan de los pobres. Y dos pescaditos. Andrés lo trajo, aunque él mismo dudaba. ¿Qué es esto para tanta gente?"
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La Biblia no nos dice el nombre de ese muchacho. Pero sí nos dice que lo que tenía llegó a las manos de Jesús."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:10",
+   "label": "Juan 6:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Entonces Jesús dijo: Haced recostar la gente. Y había mucha hierba en aquel lugar: y recostáronse como número de cinco mil varones."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Entonces Jesús dijo: Haced recostar la gente. Y había mucha hierba en aquel lugar: y recostáronse como número de cinco mil varones."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:11",
+   "label": "Juan 6:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Y tomó Jesús aquellos panes, y habiendo dado gracias, repartió á los discípulos, y los discípulos á los que estaban recostados: asimismo de los peces, cuanto querían."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y tomó Jesús aquellos panes, y habiendo dado gracias, repartió á los discípulos, y los discípulos á los que estaban recostados: asimismo de los peces, cuanto querían."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús tomó los panes y dio gracias. Por algo tan pequeño, dio gracias. Y empezó a repartir. Y siguió repartiendo. Y el pan no se acababa."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:12-13",
+   "label": "Juan 6:12-13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y como fueron saciados, dijo á sus discípulos: Recoged los pedazos que han quedado, porque no se pierda nada."
+    },
+    {
+     "v": 13,
+     "text": "Cogieron pues, é hinchieron doce cestas de pedazos de los cinco panes de cebada, que sobraron á los que habían comido."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y como fueron saciados, dijo á sus discípulos: Recoged los pedazos que han quedado, porque no se pierda nada."
+    },
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Cogieron pues, é hinchieron doce cestas de pedazos de los cinco panes de cebada, que sobraron á los que habían comido."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cinco mil hombres, sin contar a las mujeres y a los niños. Todos comieron hasta quedar satisfechos. Y sobraron doce canastas."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fíjate en ese detalle. Jesús pidió que recogieran lo que sobró, para que no se perdiera nada. Al que da de comer a miles, también le importan las migajas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "crowd",
+   "ref": "JOH 6:14",
+   "label": "Juan 6:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Aquellos hombres entonces, como vieron la señal que Jesús había hecho, decían: Este verdaderamente es el profeta que había de venir al mundo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Aquellos hombres entonces, como vieron la señal que Jesús había hecho, decían:"
+    },
+    {
+     "v": 14,
+     "speaker": "crowd",
+     "text": "Este verdaderamente es el profeta que había de venir al mundo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ese día la gente comió pan de cebada y pescado en la hierba verde, sentados en grupos, como en un gran almuerzo familiar en el campo. Nadie se fue con hambre."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Felipe vio el problema. Andrés vio lo poco que había. El muchacho dio lo que tenía. Y Jesús hizo lo que solo él podía hacer."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A veces miramos lo que tenemos y decimos lo mismo que Andrés. ¿Qué es esto para tanto? Poco tiempo, poca fuerza, poca fe. Pero en las manos de Jesús, lo poco no se queda en poco. Esta noche puedes darle lo que tienes, aunque te parezca nada, y dar gracias como él dio gracias por cinco panes."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 582,
+ "est_seconds": 323,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 6:1-14 (women and children from Matt 14:21, named as setting); denarius value explained plainly; no prosperity reading of multiplication."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Barley bread as the poor's bread told without pity; the unnamed boy honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

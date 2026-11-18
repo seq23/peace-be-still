@@ -1,0 +1,393 @@
+{
+ "id": "core-033-gideon",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Gedeón y los trescientos",
+ "passage": {
+  "refs": [
+   "JDG 6:11-16",
+   "JDG 7:2-8"
+  ],
+  "label": "Jueces 6:11-16; Jueces 7:2-8"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "gideon",
+   "name": "Gedeón",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Durante siete años, los madianitas invadían la tierra de Israel en cada cosecha. Llegaban con sus camellos como una plaga de langostas y se llevaban todo. El pueblo vivía escondido en cuevas en los montes."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 6:11",
+   "label": "Jueces 6:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Y vino el ángel de Jehová, y sentóse debajo del alcornoque que está en Ophra, el cual era de Joas Abiezerita; y su hijo Gedeón estaba sacudiendo el trigo en el lagar, para hacerlo esconder de los Madianitas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y vino el ángel de Jehová, y sentóse debajo del alcornoque que está en Ophra, el cual era de Joas Abiezerita; y su hijo Gedeón estaba sacudiendo el trigo en el lagar, para hacerlo esconder de los Madianitas."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Dios fue a buscar a Gedeón al lugar donde se escondía.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Normalmente el trigo se sacudía en un lugar alto y abierto, donde el viento se lleva la paja. Gedeón lo hacía escondido, dentro de un lagar, para que nadie lo viera. Tenía miedo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 6:12",
+   "label": "Jueces 6:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y el ángel de Jehová se le apareció, y díjole: Jehová es contigo, varón esforzado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y el ángel de Jehová se le apareció, y díjole: Jehová es contigo, varón esforzado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Varón esforzado. Así le llamó el ángel a un hombre que estaba escondido. Dios no lo llamó por lo que era ese día. Lo llamó por lo que iba a ser."
+  },
+  {
+   "type": "scripture",
+   "speaker": "gideon",
+   "ref": "JDG 6:13",
+   "label": "Jueces 6:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y Gedeón le respondió: Ah, Señor mío, si Jehová es con nosotros, ¿por qué nos ha sobrevenido todo esto? ¿Y dónde están todas sus maravillas, que nuestros padres nos han contado, diciendo: ¿No nos sacó Jehová de Egipto? Y ahora Jehová nos ha desamparado, y nos ha entregado en mano de los Madianitas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y Gedeón le respondió:"
+    },
+    {
+     "v": 13,
+     "speaker": "gideon",
+     "text": "Ah, Señor mío, si Jehová es con nosotros, ¿por qué nos ha sobrevenido todo esto? ¿Y dónde están todas sus maravillas, que nuestros padres nos han contado, diciendo: ¿No nos sacó Jehová de Egipto? Y ahora Jehová nos ha desamparado, y nos ha entregado en mano de los Madianitas."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Gedeón fue honesto. Si Dios está con nosotros, ¿por qué nos pasa todo esto? Es una pregunta que muchos le han hecho a Dios. Y Dios no se enojó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 6:14",
+   "label": "Jueces 6:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y mirándole Jehová, díjole: Ve con esta tu fortaleza, y salvarás á Israel de la mano de los Madianitas. ¿No te envío yo?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y mirándole Jehová, díjole: Ve con esta tu fortaleza, y salvarás á Israel de la mano de los Madianitas. ¿No te envío yo?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "gideon",
+   "ref": "JDG 6:15",
+   "label": "Jueces 6:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Entonces le respondió: Ah, Señor mío, ¿con qué tengo de salvar á Israel? He aquí que mi familia es pobre en Manasés, y yo el menor en la casa de mi padre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Entonces le respondió:"
+    },
+    {
+     "v": 15,
+     "speaker": "gideon",
+     "text": "Ah, Señor mío, ¿con qué tengo de salvar á Israel? He aquí que mi familia es pobre en Manasés, y yo el menor en la casa de mi padre."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 6:16",
+   "label": "Jueces 6:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y Jehová le dijo: Porque yo seré contigo, y herirás á los Madianitas como á un solo hombre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y Jehová le dijo: Porque yo seré contigo, y herirás á los Madianitas como á un solo hombre."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mi familia es la más pobre, y yo el más pequeño. Gedeón miraba lo que no tenía. Dios le contestó con lo que sí tenía. Yo estaré contigo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Gedeón juntó un ejército de treinta y dos mil hombres. Y entonces Dios le dijo algo que nadie esperaba."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:2",
+   "label": "Jueces 7:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y Jehová dijo á Gedeón: El pueblo que está contigo es mucho para que yo dé á los Madianitas en su mano: porque no se alabe Israel contra mí, diciendo: Mi mano me ha salvado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y Jehová dijo á Gedeón: El pueblo que está contigo es mucho para que yo dé á los Madianitas en su mano: porque no se alabe Israel contra mí, diciendo: Mi mano me ha salvado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Eran demasiados. Si ganaban así, iban a pensar que lo habían logrado con su propia fuerza."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:3",
+   "label": "Jueces 7:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Haz pues ahora pregonar, que lo oiga el pueblo, diciendo: El que teme y se estremece, madrugue y vuélvase desde el monte de Galaad. Y volviéronse de los del pueblo veintidós mil: y quedaron diez mil."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Haz pues ahora pregonar, que lo oiga el pueblo, diciendo: El que teme y se estremece, madrugue y vuélvase desde el monte de Galaad. Y volviéronse de los del pueblo veintidós mil: y quedaron diez mil."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Veintidós mil hombres se fueron a su casa. Quedaron diez mil. Y Dios dijo que todavía eran muchos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:4-6",
+   "label": "Jueces 7:4-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y Jehová dijo á Gedeón: Aun es mucho el pueblo; llévalos á las aguas, y allí yo te los probaré; y del que yo te dijere: Vaya este contigo, vaya contigo: mas de cualquiera que yo te dijere: Este no vaya contigo, el tal no vaya."
+    },
+    {
+     "v": 5,
+     "text": "Entonces llevó el pueblo á las aguas: y Jehová dijo á Gedeón: Cualquiera que lamiere las aguas con su lengua como lame el perro, aquél pondrás aparte; asimismo cualquiera que se doblare sobre sus rodillas para beber."
+    },
+    {
+     "v": 6,
+     "text": "Y fué el número de los que lamieron las aguas, llegándola con la mano á la boca, trescientos hombres: y todo el resto del pueblo se dobló sobre sus rodillas para beber las aguas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y Jehová dijo á Gedeón: Aun es mucho el pueblo; llévalos á las aguas, y allí yo te los probaré; y del que yo te dijere: Vaya este contigo, vaya contigo: mas de cualquiera que yo te dijere: Este no vaya contigo, el tal no vaya."
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Entonces llevó el pueblo á las aguas: y Jehová dijo á Gedeón: Cualquiera que lamiere las aguas con su lengua como lame el perro, aquél pondrás aparte; asimismo cualquiera que se doblare sobre sus rodillas para beber."
+    },
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y fué el número de los que lamieron las aguas, llegándola con la mano á la boca, trescientos hombres: y todo el resto del pueblo se dobló sobre sus rodillas para beber las aguas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:7",
+   "label": "Jueces 7:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Entonces Jehová dijo á Gedeón: Con estos trescientos hombres que lamieron el agua os salvaré, y entregaré á los Madianitas en tus manos: y váyase toda la gente cada uno á su lugar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Entonces Jehová dijo á Gedeón: Con estos trescientos hombres que lamieron el agua os salvaré, y entregaré á los Madianitas en tus manos: y váyase toda la gente cada uno á su lugar."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Trescientos. De treinta y dos mil a trescientos. Contra un ejército tan grande que no se podía contar. Así Dios dejó claro que la victoria sería de él."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esa noche Gedeón y sus trescientos hombres rodearon el campamento enemigo con trompetas, cántaros y antorchas. Tocaron las trompetas, rompieron los cántaros y gritaron. Y Dios llenó de confusión al ejército de Madián, que huyó en la oscuridad."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Gedeón tenía miedo, tenía dudas y le pidió señales a Dios más de una vez. La Biblia no lo esconde. Pero Dios no buscó a un héroe sin miedo. Buscó a alguien que, con miedo y todo, obedeciera."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A veces sentimos que lo que tenemos es muy poco. Pocas fuerzas, poca ayuda, poco tiempo. La historia de Gedeón nos enseña que Dios no necesita mucho. Cuando lo que tenemos es poco, se ve más claro que la ayuda viene de él."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 785,
+ "est_seconds": 434,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Judg 6:11-16 and 7:2-8 (the night attack 7:16-22 and the fleece 6:36-40 told in words, battle off the page); credits victory to God; honest doubt allowed."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A frightened, poor man called 'varón esforzado' with dignity; no war glory; natural Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

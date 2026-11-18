@@ -1,0 +1,349 @@
+{
+ "id": "core-037-samuel",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Samuel oye su nombre",
+ "passage": {
+  "refs": [
+   "1SA 3:1-10"
+  ],
+  "label": "1 Samuel 3:1-10"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "samuel",
+   "name": "Samuel",
+   "age": "child",
+   "gender": "m"
+  },
+  {
+   "id": "eli",
+   "name": "Eli",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel era un niño que vivía en el templo de Dios en Silo. Su mamá, Anna, lo había llevado allí para que sirviera a Dios toda su vida, como lo había prometido. Y el niño ayudaba al anciano sacerdote Eli."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:1",
+   "label": "1 Samuel 3:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y EL joven Samuel ministraba á Jehová delante de Eli: y la palabra de Jehová era de estima en aquellos días; no había visión manifiesta."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y EL joven Samuel ministraba á Jehová delante de Eli: y la palabra de Jehová era de estima en aquellos días; no había visión manifiesta."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Dios todavía habla, aun en los tiempos en que casi nadie lo escucha.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En esos días Dios hablaba muy poco a su pueblo. Eli ya era muy viejo y casi no veía. Y una noche, antes de que se apagara la lámpara del templo, Samuel estaba acostado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:2-3",
+   "label": "1 Samuel 3:2-3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y aconteció un día, que estando Eli acostado en su aposento, cuando sus ojos comenzaban á oscurecerse, que no podía ver,"
+    },
+    {
+     "v": 3,
+     "text": "Samuel estaba durmiendo en el templo de Jehová, donde el arca de Dios estaba: y antes que la lámpara de Dios fuese apagada,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y aconteció un día, que estando Eli acostado en su aposento, cuando sus ojos comenzaban á oscurecerse, que no podía ver,"
+    },
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Samuel estaba durmiendo en el templo de Jehová, donde el arca de Dios estaba: y antes que la lámpara de Dios fuese apagada,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:4",
+   "label": "1 Samuel 3:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Jehová llamó á Samuel; y él respondió: Heme aquí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Jehová llamó á Samuel; y él respondió: Heme aquí."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel oyó que lo llamaban por su nombre. Pensó que era Eli. Se levantó corriendo y fue a su cuarto."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:5",
+   "label": "1 Samuel 3:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y corriendo luego á Eli, dijo: Heme aquí; ¿para qué me llamaste? Y Eli le dijo: Yo no he llamado; vuélvete á acostar. Y él se volvió, y acostóse."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y corriendo luego á Eli, dijo: Heme aquí; ¿para qué me llamaste? Y Eli le dijo: Yo no he llamado; vuélvete á acostar. Y él se volvió, y acostóse."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Eli le dijo que él no lo había llamado y que se volviera a acostar. Y pasó otra vez. Samuel oyó su nombre, se levantó y fue con Eli. Y otra vez Eli lo mandó a dormir."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:7",
+   "label": "1 Samuel 3:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y Samuel no había conocido aún á Jehová, ni la palabra de Jehová le había sido revelada."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Y Samuel no había conocido aún á Jehová, ni la palabra de Jehová le había sido revelada."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel todavía no conocía la voz de Dios. Nadie se la había enseñado. Por eso pensaba que era la voz de un hombre."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:8",
+   "label": "1 Samuel 3:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Jehová pues llamó la tercera vez á Samuel. Y él levantándose vino á Eli, y dijo: Heme aquí; ¿para qué me has llamado? Entonces entendió Eli que Jehová llamaba al joven."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Jehová pues llamó la tercera vez á Samuel. Y él levantándose vino á Eli, y dijo: Heme aquí; ¿para qué me has llamado? Entonces entendió Eli que Jehová llamaba al joven."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A la tercera vez, el anciano entendió. Quizás se acordó de los tiempos en que él mismo había escuchado a Dios. Y le dio al niño un consejo sencillo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "eli",
+   "ref": "1SA 3:9",
+   "label": "1 Samuel 3:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y dijo Eli á Samuel: Ve, y acuéstate: y si te llamare, dirás: Habla, Jehová, que tu siervo oye. Así se fué Samuel, y acostóse en su lugar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y dijo Eli á Samuel:"
+    },
+    {
+     "v": 9,
+     "speaker": "eli",
+     "text": "Ve, y acuéstate: y si te llamare, dirás: Habla, Jehová, que tu siervo oye."
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Así se fué Samuel, y acostóse en su lugar."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel volvió a su lugar y se acostó. Imagina al niño en la oscuridad, con los ojos abiertos, esperando."
+  },
+  {
+   "type": "scripture",
+   "speaker": "samuel",
+   "ref": "1SA 3:10",
+   "label": "1 Samuel 3:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y vino Jehová, y paróse, y llamó como las otras veces: ¡Samuel, Samuel! Entonces Samuel dijo: Habla, que tu siervo oye."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y vino Jehová, y paróse, y llamó como las otras veces: ¡Samuel, Samuel! Entonces Samuel dijo:"
+    },
+    {
+     "v": 10,
+     "speaker": "samuel",
+     "text": "Habla, que tu siervo oye."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Habla, que tu siervo oye. Esa fue la primera oración de Samuel como profeta. No le pidió nada a Dios. Solo le dijo que estaba escuchando."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios llamó a Samuel por su nombre, una y otra vez, con paciencia, hasta que el niño entendió. Ese niño llegó a ser uno de los profetas más grandes de Israel. Y empezó así, de noche, aprendiendo a escuchar."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "También es una historia sobre Eli. Un anciano que ya había cometido muchos errores, que ya no veía bien, pero que todavía pudo ayudar a un niño a reconocer la voz de Dios. Nunca es tarde para señalar a otro el camino."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche, cuando todo esté en silencio, puedes orar como Samuel. Habla, Señor, que tu siervo oye. No hace falta decir más. Dios conoce tu nombre. Y él tiene paciencia con los que todavía están aprendiendo a escuchar su voz."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 584,
+ "est_seconds": 325,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Sam 3:1-10 (Hannah's vow from 1 Sam 1 as setting); God never voiced; no claim that God speaks to the listener tonight, only the prayer of listening."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Old Eli's failures named without contempt; a child's faith shown with dignity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

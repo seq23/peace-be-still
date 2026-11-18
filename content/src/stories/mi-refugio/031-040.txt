@@ -1,0 +1,289 @@
+# Mi Refugio, historias 31-40 (español de las Américas, Reina-Valera 1909). Escritas por Claude (sin borrador de modelo gratuito), con la lectura pastoral y cultural de Claude.
+
+=== core-031-david-jonathan | David y Jonathán
+passage: 1SA 18:1-4; 1SA 20:35-42
+shelf: adult
+violence: none
+sexual: none
+cast: jonathan|Jonathán|adult|m
+N: David era un joven pastor que acababa de vencer al gigante Goliat. El rey Saúl lo llamó al palacio. Y allí David conoció a Jonathán, el hijo mayor del rey, el que un día debía heredar el trono.
+S: 1SA 18:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno por darnos amigos fieles en los días difíciles.
+S: 1SA 18:3-4
+N: Jonathán le dio a David su manto, su ropa, su espada, su arco y su cinturón. Eran las cosas de un príncipe. Era como decirle que lo honraba y que estaba de su lado, aunque sabía que el pueblo empezaba a amar a David más que a nadie.
+N: Con el tiempo, Saúl se llenó de celos. Veía que Dios estaba con David, y trató de matarlo más de una vez. David tuvo que esconderse. Y Jonathán quedó en medio, entre su padre y su amigo.
+N: Los dos se pusieron de acuerdo en una señal. David se escondería en el campo. Jonathán averiguaría qué pensaba hacer el rey. Y luego saldría a tirar flechas. Si las flechas caían más allá del muchacho que las recogía, era señal de que David tenía que huir.
+N: Jonathán descubrió la verdad. Su padre quería matar a David. Y cuando Jonathán lo defendió, el rey se enojó tanto con él que le arrojó una lanza a él también.
+S: 1SA 20:35
+S: 1SA 20:36 @jonathan until "Y como el muchacho"
+S: 1SA 20:37-39
+N: Una flecha que cayó lejos. Esa era la respuesta. David no podía volver.
+S: 1SA 20:40
+S: 1SA 20:41
+N: En aquel tiempo, los hombres se saludaban y se despedían así, con un beso, como hermanos. Lloraron juntos. Sabían que tal vez no se volverían a ver en mucho tiempo.
+S: 1SA 20:42 @jonathan after "Y Jonathán dijo á David: " until "Y él se levantó"
+N: Jonathán pudo pensar en sí mismo. David le iba a quitar el trono que le tocaba. Pero Jonathán no vio a David como un rival. Lo vio como el escogido de Dios, y como su hermano.
+N: La amistad de Jonathán costó mucho. Le costó la paz con su padre, la corona y su seguridad. Y aun así fue fiel.
+N: Una amistad así es un regalo de Dios. Un amigo que te dice la verdad, que te protege, que se alegra cuando a ti te va bien aunque a él no. Si tienes un amigo así, da gracias a Dios por él esta noche. Y si te toca ser ese amigo para alguien, que el Señor te dé un corazón como el de Jonathán.
+
+=== core-032-lazarus | Lázaro, ven fuera
+passage: JOH 11:17-44
+shelf: adult
+violence: none
+sexual: none
+cast: martha|Marta|adult|f; mary|María|adult|f; jews|Judíos|adult|group
+N: En el pueblo de Bethania vivían tres hermanos muy queridos por Jesús. Marta, María y Lázaro. Un día Lázaro se enfermó gravemente, y sus hermanas le mandaron a decir a Jesús que su amigo estaba enfermo.
+N: Jesús no llegó enseguida. Y cuando por fin llegó, ya era tarde.
+S: JOH 11:17
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun en el cuarto día, cuando parece que ya no hay nada que hacer.
+S: JOH 11:19-20
+S: JOH 11:21 @martha after "Y Marta dijo á Jesús: "
+S: JOH 11:22 @martha whole
+N: Marta le dijo lo que sentía. Si hubieras estado aquí. Muchos hemos dicho esas palabras alguna vez, en un hospital, junto a una tumba. Y Jesús no la regañó por decirlas.
+S: JOH 11:23
+S: JOH 11:24 @martha after "Marta le dice: "
+S: JOH 11:25-26
+S: JOH 11:27 @martha after "Dícele: "
+N: En medio del dolor, Marta hizo una de las confesiones más grandes de toda la Biblia. Tú eres el Cristo. Luego fue a buscar a su hermana.
+S: JOH 11:32 @mary after "diciéndole: "
+N: María dijo lo mismo que su hermana. Pero ella no pudo decir más. Solo lloraba a los pies de Jesús.
+S: JOH 11:33
+S: JOH 11:34
+S: JOH 11:35
+N: Jesús lloró. Es el versículo más corto de la Biblia. Él sabía lo que iba a hacer en unos minutos. Y aun así lloró con ellas. No les dijo que dejaran de llorar. Lloró con ellas.
+S: JOH 11:36 @jews after "Dijeron entonces los Judíos: "
+S: JOH 11:38
+S: JOH 11:39
+N: Marta, la de la fe tan grande, ahora tenía miedo. Ya hacía cuatro días. Ya olía mal. Y Jesús le recordó lo que le había dicho.
+S: JOH 11:40
+S: JOH 11:41
+S: JOH 11:43
+S: JOH 11:44
+N: Lázaro salió. Vivo. Todavía envuelto en las vendas con que lo habían enterrado. Y Jesús les pidió a los que estaban ahí que lo ayudaran a quitárselas.
+N: Esta historia no promete que todos los que amamos van a volver esta noche. Pero nos muestra dos cosas que no cambian. Jesús llora con los que lloran. Y él es la resurrección y la vida.
+N: Si estás de luto, no tienes que esconder tus lágrimas delante de Dios. Jesús lloró frente a una tumba. Él entiende. Y su palabra a Marta sigue en pie para todos los que creen en él.
+
+=== core-033-gideon | Gedeón y los trescientos
+passage: JDG 6:11-16; JDG 7:2-8
+shelf: adult
+violence: mild
+sexual: none
+cast: gideon|Gedeón|adult|m
+N: Durante siete años, los madianitas invadían la tierra de Israel en cada cosecha. Llegaban con sus camellos como una plaga de langostas y se llevaban todo. El pueblo vivía escondido en cuevas en los montes.
+S: JDG 6:11
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Dios fue a buscar a Gedeón al lugar donde se escondía.
+N: Normalmente el trigo se sacudía en un lugar alto y abierto, donde el viento se lleva la paja. Gedeón lo hacía escondido, dentro de un lagar, para que nadie lo viera. Tenía miedo.
+S: JDG 6:12
+N: Varón esforzado. Así le llamó el ángel a un hombre que estaba escondido. Dios no lo llamó por lo que era ese día. Lo llamó por lo que iba a ser.
+S: JDG 6:13 @gideon
+N: Gedeón fue honesto. Si Dios está con nosotros, ¿por qué nos pasa todo esto? Es una pregunta que muchos le han hecho a Dios. Y Dios no se enojó.
+S: JDG 6:14
+S: JDG 6:15 @gideon after "Entonces le respondió: "
+S: JDG 6:16
+N: Mi familia es la más pobre, y yo el más pequeño. Gedeón miraba lo que no tenía. Dios le contestó con lo que sí tenía. Yo estaré contigo.
+N: Gedeón juntó un ejército de treinta y dos mil hombres. Y entonces Dios le dijo algo que nadie esperaba.
+S: JDG 7:2
+N: Eran demasiados. Si ganaban así, iban a pensar que lo habían logrado con su propia fuerza.
+S: JDG 7:3
+N: Veintidós mil hombres se fueron a su casa. Quedaron diez mil. Y Dios dijo que todavía eran muchos.
+S: JDG 7:4-6
+S: JDG 7:7
+N: Trescientos. De treinta y dos mil a trescientos. Contra un ejército tan grande que no se podía contar. Así Dios dejó claro que la victoria sería de él.
+N: Esa noche Gedeón y sus trescientos hombres rodearon el campamento enemigo con trompetas, cántaros y antorchas. Tocaron las trompetas, rompieron los cántaros y gritaron. Y Dios llenó de confusión al ejército de Madián, que huyó en la oscuridad.
+N: Gedeón tenía miedo, tenía dudas y le pidió señales a Dios más de una vez. La Biblia no lo esconde. Pero Dios no buscó a un héroe sin miedo. Buscó a alguien que, con miedo y todo, obedeciera.
+N: A veces sentimos que lo que tenemos es muy poco. Pocas fuerzas, poca ayuda, poco tiempo. La historia de Gedeón nos enseña que Dios no necesita mucho. Cuando lo que tenemos es poco, se ve más claro que la ayuda viene de él.
+
+=== core-034-jairus | La hija de Jairo
+passage: MAR 5:21-24; MAR 5:35-43
+shelf: adult
+violence: none
+sexual: none
+cast: jairus|Jairo|adult|m
+N: Jesús acababa de cruzar el lago en una barca, y en la orilla ya lo esperaba una multitud. Entre toda esa gente, un hombre se abrió paso con desesperación.
+S: MAR 5:22
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Jesús se detuvo por un padre que tenía a su hija enferma.
+N: Jairo era un hombre importante en su pueblo. Era uno de los encargados de la sinagoga. Pero ese día no le importó su posición. Se tiró a los pies de Jesús, delante de todos.
+S: MAR 5:23 @jairus
+S: MAR 5:24
+N: Jesús se fue con él. Pero en el camino, la gente lo apretaba por todos lados. Y una mujer enferma tocó su manto y fue sanada. Jesús se detuvo a buscarla y a hablar con ella.
+N: Imagina a Jairo mientras tanto. Cada minuto contaba. Su hija se estaba muriendo, y Jesús estaba parado hablando con otra persona.
+S: MAR 5:35
+N: La peor noticia que un padre puede recibir. Y luego, la frase que dolía todavía más. ¿Para qué molestar más al Maestro? Ya no hay nada que hacer.
+S: MAR 5:36
+N: No temas, cree solamente. Jesús le habló a Jairo antes de que el miedo se lo tragara. No le dio una explicación. Le pidió que siguiera confiando.
+S: MAR 5:37-38
+S: MAR 5:39
+S: MAR 5:40
+N: La gente se burló. Ellos habían visto a la niña. Sabían que estaba muerta. Pero Jesús sacó a todos y se quedó solo con el papá, la mamá y tres de sus discípulos. Y entró al cuarto donde estaba la niña.
+S: MAR 5:41
+N: Talitha cumi. Son palabras en la lengua que hablaba Jesús en su casa. Las palabras sencillas que una mamá le diría a su hija para despertarla en la mañana. Niña, levántate.
+S: MAR 5:42
+S: MAR 5:43
+N: Y lo primero que Jesús pidió después del milagro fue algo muy práctico. Que le dieran de comer. Él pensaba en todo, hasta en que la niña tendría hambre.
+N: No todos los padres que oran por un hijo enfermo ven lo que vio Jairo. Esta historia no es una promesa de que siempre será así. Pero nos muestra a un Jesús que no se aleja cuando llegan las malas noticias, que entra al cuarto con la familia y que toma de la mano a la niña.
+N: Si esta noche estás preocupado por un hijo, por una hija, por alguien que amas, puedes hacer lo que hizo Jairo. Caer a los pies de Jesús y decirle lo que pasa. Y escuchar su voz, que todavía dice no temas, cree solamente.
+
+=== core-035-jacob-esau | Jacob y Esaú hacen las paces
+passage: GEN 32:6-12; GEN 33:1-11
+shelf: adult
+violence: none
+sexual: none
+cast: messengers|mensajeros|adult|group; jacob|Jacob|adult|m; esau|Esaú|adult|m
+N: Hacía veinte años que Jacob se había ido de su casa. Había engañado a su hermano Esaú y le había quitado la bendición de su padre. Esaú quedó tan enojado que juró matarlo. Y Jacob huyó.
+N: Ahora Dios le había dicho que regresara a su tierra. Jacob volvía con sus esposas, sus hijos y sus rebaños. Y en el camino, mandó mensajeros adelante para avisarle a su hermano.
+S: GEN 32:6 @messengers
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno aun con un hermano que tiene miedo de volver a casa.
+S: GEN 32:7
+N: Cuatrocientos hombres. Jacob pensó lo peor. Dividió a su gente en dos grupos para que al menos uno pudiera escapar. Y luego hizo lo que más necesitaba. Oró.
+S: GEN 32:9 @jacob after "Y dijo Jacob: "
+S: GEN 32:10 @jacob whole
+S: GEN 32:11 @jacob whole
+N: Jacob no le dijo a Dios que se lo merecía. Le dijo que era menor que todas sus misericordias. Le contó su miedo. Y le recordó lo que Dios le había prometido.
+N: Esa misma noche, solo junto al río, Jacob luchó hasta el amanecer, y Dios le cambió el nombre. A la mañana siguiente, cojeando, salió a encontrarse con su hermano.
+S: GEN 33:1
+S: GEN 33:3
+N: Siete veces se inclinó Jacob hasta el suelo. El que había tomado la bendición ahora venía con la cabeza baja, pidiendo gracia.
+S: GEN 33:4
+N: Esaú corrió. No sacó la espada. Corrió a abrazarlo, se le echó al cuello y lo besó. Y los dos hermanos lloraron.
+N: Veinte años de miedo terminaron en un abrazo. Jacob le presentó a sus esposas y a sus hijos. Y le quiso dar regalos, muchos animales, como muestra de paz.
+S: GEN 33:9 @esau after "Y dijo Esaú: "
+S: GEN 33:10 @jacob after "Y dijo Jacob: "
+S: GEN 33:11 @jacob until "Y porfió"
+N: Ver la cara de su hermano fue para Jacob como ver la cara de Dios. Jacob había visto a Dios la noche anterior. Y ahora, en el perdón de su hermano, volvió a ver su gracia.
+N: La Biblia no dice qué pasó en el corazón de Esaú durante esos veinte años. Solo sabemos que cuando vio a su hermano, corrió a abrazarlo.
+N: Hay familias con heridas viejas. Hermanos que no se hablan, palabras que nunca se pidieron perdón. Tal vez la reconciliación toma tiempo, y no siempre depende solo de nosotros. Pero esta historia nos dice que Dios puede ablandar corazones que llevan años endurecidos. Y que a veces, el encuentro que más tememos termina en un abrazo.
+
+=== core-036-five-thousand | Cinco panes y dos peces
+passage: JOH 6:1-14
+shelf: adult
+violence: none
+sexual: none
+cast: philip|Felipe|adult|m; andrew|Andrés|adult|m; crowd|hombres|adult|group
+N: La gente había visto a Jesús sanar enfermos, y lo seguía a todas partes. Un día cruzó al otro lado del mar de Galilea y subió a un monte con sus discípulos. Pero la multitud lo siguió hasta allá.
+S: JOH 6:3-4
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con la multitud cansada y con hambre.
+S: JOH 6:5-6
+N: Jesús ya sabía lo que iba a hacer. Pero le hizo la pregunta a Felipe para ver qué contestaba. Y Felipe hizo cuentas.
+S: JOH 6:7 @philip after "Respondióle Felipe: "
+N: Doscientos denarios era como el salario de ocho meses de trabajo. Y ni así alcanzaría. Felipe tenía razón en los números. Pero se olvidó de quién le estaba preguntando.
+S: JOH 6:8
+S: JOH 6:9 @andrew whole
+N: Un muchacho. Cinco panes de cebada, el pan más sencillo, el pan de los pobres. Y dos pescaditos. Andrés lo trajo, aunque él mismo dudaba. ¿Qué es esto para tanta gente?
+N: La Biblia no nos dice el nombre de ese muchacho. Pero sí nos dice que lo que tenía llegó a las manos de Jesús.
+S: JOH 6:10
+S: JOH 6:11
+N: Jesús tomó los panes y dio gracias. Por algo tan pequeño, dio gracias. Y empezó a repartir. Y siguió repartiendo. Y el pan no se acababa.
+S: JOH 6:12-13
+N: Cinco mil hombres, sin contar a las mujeres y a los niños. Todos comieron hasta quedar satisfechos. Y sobraron doce canastas.
+N: Fíjate en ese detalle. Jesús pidió que recogieran lo que sobró, para que no se perdiera nada. Al que da de comer a miles, también le importan las migajas.
+S: JOH 6:14 @crowd after "decían: "
+N: Ese día la gente comió pan de cebada y pescado en la hierba verde, sentados en grupos, como en un gran almuerzo familiar en el campo. Nadie se fue con hambre.
+N: Felipe vio el problema. Andrés vio lo poco que había. El muchacho dio lo que tenía. Y Jesús hizo lo que solo él podía hacer.
+N: A veces miramos lo que tenemos y decimos lo mismo que Andrés. ¿Qué es esto para tanto? Poco tiempo, poca fuerza, poca fe. Pero en las manos de Jesús, lo poco no se queda en poco. Esta noche puedes darle lo que tienes, aunque te parezca nada, y dar gracias como él dio gracias por cinco panes.
+
+=== core-037-samuel | Samuel oye su nombre
+passage: 1SA 3:1-10
+shelf: adult
+violence: none
+sexual: none
+cast: samuel|Samuel|child|m; eli|Eli|elder|m
+N: Samuel era un niño que vivía en el templo de Dios en Silo. Su mamá, Anna, lo había llevado allí para que sirviera a Dios toda su vida, como lo había prometido. Y el niño ayudaba al anciano sacerdote Eli.
+S: 1SA 3:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Dios todavía habla, aun en los tiempos en que casi nadie lo escucha.
+N: En esos días Dios hablaba muy poco a su pueblo. Eli ya era muy viejo y casi no veía. Y una noche, antes de que se apagara la lámpara del templo, Samuel estaba acostado.
+S: 1SA 3:2-3
+S: 1SA 3:4
+N: Samuel oyó que lo llamaban por su nombre. Pensó que era Eli. Se levantó corriendo y fue a su cuarto.
+S: 1SA 3:5
+N: Eli le dijo que él no lo había llamado y que se volviera a acostar. Y pasó otra vez. Samuel oyó su nombre, se levantó y fue con Eli. Y otra vez Eli lo mandó a dormir.
+S: 1SA 3:7
+N: Samuel todavía no conocía la voz de Dios. Nadie se la había enseñado. Por eso pensaba que era la voz de un hombre.
+S: 1SA 3:8
+N: A la tercera vez, el anciano entendió. Quizás se acordó de los tiempos en que él mismo había escuchado a Dios. Y le dio al niño un consejo sencillo.
+S: 1SA 3:9 @eli until "Así se fué"
+N: Samuel volvió a su lugar y se acostó. Imagina al niño en la oscuridad, con los ojos abiertos, esperando.
+S: 1SA 3:10 @samuel after "Entonces Samuel dijo: "
+N: Habla, que tu siervo oye. Esa fue la primera oración de Samuel como profeta. No le pidió nada a Dios. Solo le dijo que estaba escuchando.
+N: Dios llamó a Samuel por su nombre, una y otra vez, con paciencia, hasta que el niño entendió. Ese niño llegó a ser uno de los profetas más grandes de Israel. Y empezó así, de noche, aprendiendo a escuchar.
+N: También es una historia sobre Eli. Un anciano que ya había cometido muchos errores, que ya no veía bien, pero que todavía pudo ayudar a un niño a reconocer la voz de Dios. Nunca es tarde para señalar a otro el camino.
+N: Esta noche, cuando todo esté en silencio, puedes orar como Samuel. Habla, Señor, que tu siervo oye. No hace falta decir más. Dios conoce tu nombre. Y él tiene paciencia con los que todavía están aprendiendo a escuchar su voz.
+
+=== core-038-two-mothers | Salomón y las dos madres
+passage: 1KI 3:16-28
+shelf: adult
+violence: mild
+sexual: none
+cast: first-woman|mujer|adult|f; king|rey|adult|m
+N: Salomón era un rey joven. Al principio de su reinado, Dios le preguntó en un sueño qué quería, y Salomón no pidió riquezas ni una vida larga. Pidió sabiduría para gobernar bien a su pueblo. Y Dios se la dio.
+N: Poco después, dos mujeres llegaron al palacio con un problema que nadie más podía resolver.
+S: 1KI 3:17 @first-woman after "Y dijo la una mujer: "
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Dios da sabiduría para ver la verdad cuando nadie más la ve.
+S: 1KI 3:18 @first-woman whole
+S: 1KI 3:19-21 @first-woman whole
+N: Una de las dos mujeres había perdido a su bebé en la noche. Y la otra decía que le habían cambiado al niño mientras dormía. No había testigos. Solo las dos mujeres, un niño vivo y la palabra de una contra la otra.
+S: 1KI 3:22
+N: Ninguna cedía. Y el rey tenía que decidir. ¿Cómo saber cuál decía la verdad?
+S: 1KI 3:24 @king until "Y trajeron"
+S: 1KI 3:25 @king
+N: Todos en la sala se quedaron sin aliento. Pero Salomón no quería hacerle daño al niño. Sabía que una madre verdadera se iba a delatar a sí misma.
+S: 1KI 3:26
+N: La verdadera madre prefirió perder a su hijo antes que verlo morir. Su amor se notó en lo que estaba dispuesta a dejar. La otra, en cambio, ya no pensaba en el niño. Solo quería ganar.
+S: 1KI 3:27 @king
+S: 1KI 3:28
+N: Todo Israel supo que Dios le había dado sabiduría a su rey. Y aquella madre regresó a su casa con su hijo en los brazos.
+N: Es notable que la Biblia guarde esta historia. Eran dos mujeres sin nombre ni poder, de las que la gente no hacía caso. Y aun así el rey las escuchó, y Dios se ocupó de que se hiciera justicia para la madre y para el niño.
+N: También vemos cómo es el amor de una madre. No es el que grita más fuerte ni el que quiere ganar. Es el que pone primero la vida del otro.
+N: Si esta noche tienes que tomar una decisión difícil y no sabes qué hacer, puedes pedirle a Dios lo que pidió Salomón. Sabiduría. La Biblia dice que él la da con generosidad al que se la pide. Y si alguna vez te han acusado sin que nadie te creyera, recuerda que Dios ve la verdad aunque los demás no la vean.
+
+=== core-039-bartimaeus | El ciego Bartimeo
+passage: MAR 10:46-52
+shelf: adult
+violence: none
+sexual: none
+cast: bartimaeus|Bartimeo|adult|m
+N: Jesús iba camino a Jerusalén por última vez. Al salir de la ciudad de Jericó, lo seguía mucha gente. Y a la orilla del camino, sentado en el polvo, había un hombre ciego pidiendo limosna.
+S: MAR 10:46
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con el que estaba sentado a la orilla del camino.
+N: Bartimeo no veía, pero oía. Oyó el ruido de la multitud. Preguntó qué pasaba. Y cuando le dijeron que era Jesús de Nazaret el que pasaba, no se quedó callado.
+S: MAR 10:47 @bartimaeus after "dar voces y decir: "
+N: Hijo de David. Así llamaba el pueblo al Mesías prometido. Bartimeo era ciego, pero vio quién era Jesús antes que muchos que tenían buena vista.
+S: MAR 10:48 @bartimaeus after "daba mayores voces: "
+N: La gente lo mandaba a callar. Que no molestara. Que no hiciera escándalo. Y él gritó más fuerte. A veces la fe es así. No es tranquila ni bien educada. Es un grito que no se deja callar.
+S: MAR 10:49
+N: Jesús se detuvo. La multitud seguía caminando, y él se paró por un hombre que nadie quería oír. Y los mismos que lo mandaban a callar ahora le decían que tuviera ánimo, que Jesús lo llamaba.
+S: MAR 10:50
+N: Echó su capa. Para un mendigo ciego, esa capa era casi todo lo que tenía. Lo cubría del frío en la noche, y la extendía en el suelo para recibir las monedas. Y la dejó atrás para ir a Jesús.
+S: MAR 10:51
+N: Jesús le preguntó qué quería. Él ya lo sabía. Pero quiso que Bartimeo lo dijera con su propia boca. Y Bartimeo no dio rodeos. Maestro, que vuelva a ver.
+S: MAR 10:52
+N: Y lo primero que vio Bartimeo fue el rostro de Jesús. Y después, el camino. Y lo siguió por ese camino, que iba a Jerusalén.
+N: Bartimeo pasó de estar sentado a estar en camino. De pedir limosna a seguir a Jesús. La gente lo conocía como el ciego que mendigaba junto a la puerta de Jericó. Desde ese día lo conocieron como uno que andaba con Jesús.
+N: Hay momentos en que nos sentimos a la orilla del camino, mientras todos los demás pasan. Y hay voces que nos dicen que no molestemos a Dios, que nuestra necesidad no importa. Bartimeo no les hizo caso.
+N: Esta noche puedes hacer lo mismo que él. Llamar a Jesús por su nombre. Decirle exactamente lo que necesitas. Él no se cansa de oír a los que claman, y sabe detenerse por uno solo.
+
+=== core-040-ten-commandments | Los diez mandamientos
+passage: EXO 19:16-20; EXO 20:1-17
+shelf: adult
+violence: none
+sexual: none
+N: Tres meses después de salir de Egipto, el pueblo de Israel llegó al desierto de Sinaí y acampó frente al monte. Dios le dijo a Moisés que se prepararan, porque al tercer día iba a descender sobre el monte a la vista de todos.
+S: EXO 19:16
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno y santo, el Dios que bajó al monte para hablarle a su pueblo.
+S: EXO 19:17-18
+N: Truenos, relámpagos, una nube espesa, humo y fuego. El monte entero temblaba. Era un pueblo de antiguos esclavos, y el Dios que los había sacado de Egipto venía a hablarles.
+S: EXO 19:19-20
+S: EXO 20:1-2
+N: Mira cómo empieza. Antes de dar un solo mandamiento, Dios les recuerda quién es él y lo que ya hizo por ellos. Yo te saqué de la esclavitud. Primero vino la libertad, y después las palabras para vivir en ella.
+S: EXO 20:3
+S: EXO 20:4-6
+N: Los primeros mandamientos tratan de Dios. Ningún otro dios delante de él. Ninguna imagen para adorar. Él no quería ser uno más entre muchos. Quería el corazón entero de su pueblo.
+S: EXO 20:7
+S: EXO 20:8-11
+N: Un día de descanso cada semana. Para todos. No solo para los dueños, también para los siervos, los extranjeros y hasta los animales. Para un pueblo que había trabajado sin descanso como esclavos, esto era un regalo.
+S: EXO 20:12
+S: EXO 20:13-16
+S: EXO 20:17
+N: Los demás mandamientos tratan de cómo vivir con los demás. Honrar a los padres. No matar, no robar, no mentir. No desear lo que es del vecino. Son palabras cortas, y sin embargo cuesta toda la vida aprender a vivirlas.
+N: Jesús, muchos siglos después, resumió todos estos mandamientos en dos. Amar a Dios con todo el corazón, y amar al prójimo como a uno mismo.
+N: Los mandamientos no se dieron para que el pueblo se ganara el amor de Dios. Ya los había sacado de Egipto. Se dieron para que supieran vivir como un pueblo libre, cerca de él y en paz con los demás.
+N: Esta noche puedes leer estas palabras no como una lista de cosas prohibidas, sino como la voz del Dios que te sacó de algo. Él te conoce. Y él sabe qué caminos dan vida.

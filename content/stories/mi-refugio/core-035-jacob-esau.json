@@ -1,0 +1,417 @@
+{
+ "id": "core-035-jacob-esau",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Jacob y Esaú hacen las paces",
+ "passage": {
+  "refs": [
+   "GEN 32:6-12",
+   "GEN 33:1-11"
+  ],
+  "label": "Génesis 32:6-12; Génesis 33:1-11"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "messengers",
+   "name": "mensajeros",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "jacob",
+   "name": "Jacob",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "esau",
+   "name": "Esaú",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hacía veinte años que Jacob se había ido de su casa. Había engañado a su hermano Esaú y le había quitado la bendición de su padre. Esaú quedó tan enojado que juró matarlo. Y Jacob huyó."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ahora Dios le había dicho que regresara a su tierra. Jacob volvía con sus esposas, sus hijos y sus rebaños. Y en el camino, mandó mensajeros adelante para avisarle a su hermano."
+  },
+  {
+   "type": "scripture",
+   "speaker": "messengers",
+   "ref": "GEN 32:6",
+   "label": "Génesis 32:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y los mensajeros volvieron á Jacob, diciendo: Vinimos á tu hermano Esaú, y él también viene á recibirte, y cuatrocientos hombres con él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y los mensajeros volvieron á Jacob, diciendo:"
+    },
+    {
+     "v": 6,
+     "speaker": "messengers",
+     "text": "Vinimos á tu hermano Esaú, y él también viene á recibirte, y cuatrocientos hombres con él."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno aun con un hermano que tiene miedo de volver a casa.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 32:7",
+   "label": "Génesis 32:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Entonces Jacob tuvo gran temor, y angustióse; y partió el pueblo que tenía consigo, y las ovejas y las vacas y los camellos, en dos cuadrillas;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Entonces Jacob tuvo gran temor, y angustióse; y partió el pueblo que tenía consigo, y las ovejas y las vacas y los camellos, en dos cuadrillas;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuatrocientos hombres. Jacob pensó lo peor. Dividió a su gente en dos grupos para que al menos uno pudiera escapar. Y luego hizo lo que más necesitaba. Oró."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 32:9",
+   "label": "Génesis 32:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y dijo Jacob: Dios de mi padre Abraham, y Dios de mi padre Isaac, Jehová, que me dijiste: Vuélvete á tu tierra y á tu parentela, y yo te haré bien;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y dijo Jacob:"
+    },
+    {
+     "v": 9,
+     "speaker": "jacob",
+     "text": "Dios de mi padre Abraham, y Dios de mi padre Isaac, Jehová, que me dijiste: Vuélvete á tu tierra y á tu parentela, y yo te haré bien;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 32:10",
+   "label": "Génesis 32:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Menor soy que todas las misericordias, y que toda la verdad que has usado para con tu siervo; que con mi bordón pasé este Jordán, y ahora estoy sobre dos cuadrillas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "jacob",
+     "text": "Menor soy que todas las misericordias, y que toda la verdad que has usado para con tu siervo; que con mi bordón pasé este Jordán, y ahora estoy sobre dos cuadrillas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 32:11",
+   "label": "Génesis 32:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Líbrame ahora de la mano de mi hermano, de la mano de Esaú, porque le temo; no venga quizá, y me hiera la madre con los hijos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "jacob",
+     "text": "Líbrame ahora de la mano de mi hermano, de la mano de Esaú, porque le temo; no venga quizá, y me hiera la madre con los hijos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob no le dijo a Dios que se lo merecía. Le dijo que era menor que todas sus misericordias. Le contó su miedo. Y le recordó lo que Dios le había prometido."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esa misma noche, solo junto al río, Jacob luchó hasta el amanecer, y Dios le cambió el nombre. A la mañana siguiente, cojeando, salió a encontrarse con su hermano."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 33:1",
+   "label": "Génesis 33:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y ALZANDO Jacob sus ojos miró, y he aquí venía Esaú, y los cuatrocientos hombres con él: entonces repartió él los niños entre Lea y Rachêl y las dos siervas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y ALZANDO Jacob sus ojos miró, y he aquí venía Esaú, y los cuatrocientos hombres con él: entonces repartió él los niños entre Lea y Rachêl y las dos siervas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 33:3",
+   "label": "Génesis 33:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y él pasó delante de ellos, é inclinóse á tierra siete veces, hasta que llegó á su hermano."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y él pasó delante de ellos, é inclinóse á tierra siete veces, hasta que llegó á su hermano."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Siete veces se inclinó Jacob hasta el suelo. El que había tomado la bendición ahora venía con la cabeza baja, pidiendo gracia."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 33:4",
+   "label": "Génesis 33:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y Esaú corrió á su encuentro, y abrazóle, y echóse sobre su cuello, y le besó; y lloraron."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y Esaú corrió á su encuentro, y abrazóle, y echóse sobre su cuello, y le besó; y lloraron."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esaú corrió. No sacó la espada. Corrió a abrazarlo, se le echó al cuello y lo besó. Y los dos hermanos lloraron."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Veinte años de miedo terminaron en un abrazo. Jacob le presentó a sus esposas y a sus hijos. Y le quiso dar regalos, muchos animales, como muestra de paz."
+  },
+  {
+   "type": "scripture",
+   "speaker": "esau",
+   "ref": "GEN 33:9",
+   "label": "Génesis 33:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y dijo Esaú: Harto tengo yo, hermano mío: sea para ti lo que es tuyo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y dijo Esaú:"
+    },
+    {
+     "v": 9,
+     "speaker": "esau",
+     "text": "Harto tengo yo, hermano mío: sea para ti lo que es tuyo."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 33:10",
+   "label": "Génesis 33:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y dijo Jacob: No, yo te ruego, si he hallado ahora gracia en tus ojos, toma mi presente de mi mano, pues que así he visto tu rostro, como si hubiera visto el rostro de Dios; y hazme placer."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y dijo Jacob:"
+    },
+    {
+     "v": 10,
+     "speaker": "jacob",
+     "text": "No, yo te ruego, si he hallado ahora gracia en tus ojos, toma mi presente de mi mano, pues que así he visto tu rostro, como si hubiera visto el rostro de Dios; y hazme placer."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 33:11",
+   "label": "Génesis 33:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Toma, te ruego, mi dádiva que te es traída; porque Dios me ha hecho merced, y todo lo que hay aquí es mío. Y porfió con él, y tomóla."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "jacob",
+     "text": "Toma, te ruego, mi dádiva que te es traída; porque Dios me ha hecho merced, y todo lo que hay aquí es mío."
+    },
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y porfió con él, y tomóla."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ver la cara de su hermano fue para Jacob como ver la cara de Dios. Jacob había visto a Dios la noche anterior. Y ahora, en el perdón de su hermano, volvió a ver su gracia."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La Biblia no dice qué pasó en el corazón de Esaú durante esos veinte años. Solo sabemos que cuando vio a su hermano, corrió a abrazarlo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay familias con heridas viejas. Hermanos que no se hablan, palabras que nunca se pidieron perdón. Tal vez la reconciliación toma tiempo, y no siempre depende solo de nosotros. Pero esta historia nos dice que Dios puede ablandar corazones que llevan años endurecidos. Y que a veces, el encuentro que más tememos termina en un abrazo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 665,
+ "est_seconds": 369,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 32:6-12 and 33:1-11 (Jacob's flight from ch 27 and the wrestling of 32:24-30 told in words); reconciliation not promised, 'no siempre depende solo de nosotros'."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Family estrangement handled kindly; brothers' tears shown with dignity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
