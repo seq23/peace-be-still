@@ -105,6 +105,11 @@ class Text(unittest.TestCase):
         self.assertEqual(T.score_words("junto á aguas", "es"), T.score_words("junto a aguas", "es"))
         self.assertEqual(T.number_words(119, "es"), "ciento diecinueve")
 
+    def test_old_spellings_forgiven_but_missing_words_are_not(self):
+        self.assertEqual(T.score_words("thou hast shewed it for ever. Selah.", "en"),
+                         T.score_words("Thou haste showed it forever. Sila.", "en"))
+        self.assertNotEqual(T.score_words("thou hast shewed it", "en"), T.score_words("thou showed it", "en"))
+
     def test_real_respellings_load(self):
         p = T.load_pronunciations()
         self.assertEqual(p["en"]["engine"]["Job"], "Jobe")

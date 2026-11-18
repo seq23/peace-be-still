@@ -144,4 +144,14 @@ def score_words(text: str, lang: str) -> list[str]:
     s = re.sub(r"(\d),(\d)", r"\1\2", s)
     s = re.sub(r"\d+", lambda m: " " + number_words(int(m.group()), lang) + " ", s)
     s = re.sub(r"[^a-z0-9 ]+", " ", s.replace("-", " "))
-    return s.split()
+    s = re.sub(r"\bfor ever\b", "forever", s)
+    s = re.sub(r"\bcheek bone\b", "cheekbone", s)
+    return [SAME_WORD.get(w, w) for w in s.split()]
+
+
+# Old spellings a transcript writes the modern way, and "Selah" however it is heard. Applied to
+# the script AND the transcript, so only the spelling is forgiven, never a missing word
+# (Psalm 9, 18 Nov 2026: whisper small wrote hast -> haste x5, shew -> show, Selah -> sila).
+SAME_WORD = {"haste": "hast", "shew": "show", "shewed": "showed", "shewn": "shown", "sheweth": "showeth",
+             "marvellous": "marvelous", "alway": "always", "sila": "selah", "sheila": "selah", "sela": "selah",
+             "seela": "selah", "seelah": "selah", "sayla": "selah", "cela": "selah"}
