@@ -69,6 +69,8 @@ MAX_TRIES = 3        # renders per call before the story is a FAILED row
 PACE_S = float(os.environ.get("PBS_HH_PACE_S", "7"))
 DAILY_CAP = int(os.environ.get("PBS_HH_DAILY_CAP", "10"))   # per model; the free tier's own limit
 CALL_BAR = 0.95
+# The app's own AI Studio project (owner, 18 Nov 2026), free tier only; never the shared GEMINI_API_KEY.
+KEY_ENV = "PBS_GEMINI_API_KEY"
 PITCH_MIN_S = 1.5
 TARGET_WPM = 130.0   # the whole file; Gemini reads faster than a bedtime story wants (152 wpm on 18 Nov)
 MIN_TEMPO = 0.85    # turns shorter than this are too short for a pitch reading
@@ -365,6 +367,16 @@ def slow(x, factor: float, work: Path):
     return y
 
 
+def billed_quota(body: str) -> bool:
+    """True when a 429 names quotas and none of them is a FreeTier quota: the key is on billing."""
+    try:
+        err = json.loads(body).get("error", {})
+    except Exception:
+        return False
+    ids = [str(v.get("quotaId", "")) for d in err.get("details", []) or [] for v in d.get("violations", []) or []]
+    return bool(ids) and not any("FreeTier" in i for i in ids)
+
+
 def classify_429(body: str) -> tuple[str, float]:
     """("day" | "minute", seconds to wait) from a Gemini 429 body. Unknown shapes count as minute."""
     wait = 30.0
@@ -469,9 +481,9 @@ def to_wav(data: bytes, mime: str, path: Path) -> None:
 def gemini(body: dict, path: Path, prefer: str | None = None) -> str:
     """One TTS call on the first usable model; the audio lands at `path` (24 kHz wav). Returns the
     model used. Paced; a per-minute 429 waits; a per-day 429 parks the model and tries the next."""
-    key = os.environ.get("GEMINI_API_KEY")
+    key = os.environ.get(KEY_ENV)
     if not key:
-        raise NamedStop("KEY_MISSING", "GEMINI_API_KEY is not set; run through `npm run -s vault:run --` in ~/GitHub/boss-os")
+        raise NamedStop("KEY_MISSING", f"{KEY_ENV} is not set; run through `npm run -s vault:run --` in ~/GitHub/boss-os")
     data = json.dumps(body).encode()
     errors = 0
     while True:
@@ -498,6 +510,8 @@ def gemini(body: dict, path: Path, prefer: str | None = None) -> str:
             return model
         except urllib.error.HTTPError as e:
             msg = e.read().decode("utf-8", "replace")
+            if e.code == 429 and billed_quota(msg):
+                raise NamedStop("NOT_FREE_TIER", f"{model}'s 429 names no FreeTier quota: {KEY_ENV} looks billed; nothing more is called")
             kind, delay = classify_429(msg) if e.code == 429 else ("", 0.0)
             count_call(model, now, retry_after_s=delay if kind == "day" else None)
             if kind == "day":
@@ -759,9 +773,9 @@ def vet(model: str) -> dict:
 
 def _gemini_on(model: str, body: dict, path: Path) -> None:
     """One call on exactly this model (vetting); a 429 here just ends the vetting for today."""
-    key = os.environ.get("GEMINI_API_KEY")
+    key = os.environ.get(KEY_ENV)
     if not key:
-        raise NamedStop("KEY_MISSING", "GEMINI_API_KEY is not set")
+        raise NamedStop("KEY_MISSING", f"{KEY_ENV} is not set")
     now = dt.datetime.now(fill.CT)
     if calls_today(model, now) >= DAILY_CAP:
         raise NamedStop("DAILY_CAP", f"{model} has no calls left today for vetting", note=True)
@@ -772,7 +786,10 @@ def _gemini_on(model: str, body: dict, path: Path) -> None:
         with urllib.request.urlopen(req, timeout=300) as resp:
             d = json.load(resp)
     except urllib.error.HTTPError as e:
-        kind, delay = classify_429(e.read().decode("utf-8", "replace")) if e.code == 429 else ("", 0.0)
+        msg = e.read().decode("utf-8", "replace")
+        if e.code == 429 and billed_quota(msg):
+            raise NamedStop("NOT_FREE_TIER", f"{model}'s 429 names no FreeTier quota: {KEY_ENV} looks billed")
+        kind, delay = classify_429(msg) if e.code == 429 else ("", 0.0)
         count_call(model, now, retry_after_s=delay if kind == "day" else None)
         raise NamedStop("QUOTA_OUT", f"{model} refused a vetting call ({e.code}); try again after its reset", note=True)
     count_call(model, now)

@@ -211,6 +211,14 @@ class Quota(unittest.TestCase):
         self.assertEqual(H.classify_429(json.dumps(minute)), ("minute", 23.0))
         self.assertEqual(H.classify_429("not json")[0], "minute")
 
+    def test_a_billed_key_is_caught_from_its_429(self):
+        free = {"error": {"details": [{"violations": [{"quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier"}]}]}}
+        paid = {"error": {"details": [{"violations": [{"quotaId": "GenerateRequestsPerDayPerProjectPerModel"}]}]}}
+        self.assertFalse(H.billed_quota(json.dumps(free)))
+        self.assertTrue(H.billed_quota(json.dumps(paid)))
+        self.assertFalse(H.billed_quota("not json"))
+        self.assertEqual(H.KEY_ENV, "PBS_GEMINI_API_KEY")
+
     def test_quota_stops_are_notes(self):
         self.assertEqual(H.NamedStop("QUOTA_OUT", "x", note=True).exit_code, 0)
         self.assertEqual(H.NamedStop("KEY_MISSING", "x").exit_code, 9)

@@ -71,8 +71,8 @@ ${vv}
 }
 
 async function gemini(prompt) {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error("NAMED STOP [KEY_MISSING] GEMINI_API_KEY not set; run through npm run -s vault:run -- in ~/GitHub/boss-os");
+  const key = process.env.PBS_GEMINI_API_KEY; // the app's own free AI Studio project, never the shared key
+  if (!key) throw new Error("NAMED STOP [KEY_MISSING] PBS_GEMINI_API_KEY not set; run through npm run -s vault:run -- in ~/GitHub/boss-os");
   for (const model of GEMINI_TEXT_MODELS) {
     for (let attempt = 0; attempt < 3; attempt++) {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
@@ -86,6 +86,7 @@ async function gemini(prompt) {
         if (text) return { model, text };
       }
       const body = r.ok ? "" : await r.text();
+      if (r.status === 429 && /quotaId/.test(body) && !/FreeTier/.test(body)) throw new Error(`NAMED STOP [NOT_FREE_TIER] ${model}'s 429 names no FreeTier quota: PBS_GEMINI_API_KEY looks billed`);
       if (r.status === 429 && /PerDay/.test(body)) break;           // this model is out today: next
       if (r.status === 429) { await new Promise((s) => setTimeout(s, 40_000)); continue; }
       if (r.status === 404 || r.status === 400 || r.status === 403) break;
