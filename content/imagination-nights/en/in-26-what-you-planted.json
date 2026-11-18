@@ -1,0 +1,85 @@
+{
+ "id": "in-26-what-you-planted",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "What You Planted",
+ "theme": "patience",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hello, and welcome back to Imagination Nights. [pause 3]\n\nSettle into the bed. Pull the covers up to where you like them. [pause 8]\n\nTake one deep breath, and let it go with a sigh. [pause 8]\n\nNow let your breathing find its own pace. You do not have to control it. Just notice it. [pause 10]\n\nFeel your feet getting heavy. Your legs. Your back sinking into the mattress. [pause 10]\n\nNow let us relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThe day is finished. This part of the night is yours. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight we picture a garden, and the patience it takes to grow one. [pause 12]\n\nMost good things in life grow slowly. A child. A skill. A savings account. A friendship. A business. Some days it looks like nothing is happening at all, and that is usually when we want to give up. [pause 14]\n\nAnyone who has grown tomatoes or collards knows the secret. You plant, you water, you wait. Underneath the dirt, things are moving that you cannot see yet. [pause 14]\n\nTonight you will picture the day your garden is full, and you get to walk through it. Let the garden stand for whatever you are waiting on in your own life. [pause 14]\n\nThis is imagination and feeling, not a promise of any result. Real gardens have dry spells and real lives do too. But tonight you can rest with the feeling of patience rewarded, and let your body practice waiting without worry. [pause 8]\n\nBring to mind something you have planted in your life, and are waiting on. [pause 15]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "It is a warm morning. You walk out to the garden with a cup in your hand. [pause 20]\n\nNotice the green. Rows of leaves taller than you remember. [pause 23]\n\nKneel down. Feel the soil, cool and soft. Smell the earth. [pause 23]\n\nFind the first thing ready to pick. Turn it in your fingers. You grew this. [pause 25]\n\nRemember the days it was only dirt, and you watered it anyway. [pause 27]\n\nWalk the rows. Here is something you almost gave up on. It came up after all. [pause 27]\n\nFill a basket slowly. There is more than you need. [pause 27]\n\nPicture giving some away. A neighbor at the fence. A friend who stops by. [pause 27]\n\nSit on the step with the basket at your feet. The sun is on your arms. [pause 28]\n\nSay in your mind, I can wait well. Good things take their time. [pause 28]\n\nLet the garden grow quiet around you, and let the evening come down over it. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "We will end here for tonight. [pause 10]\n\nKeep the feeling, not the effort. Let the effort go. [pause 15]\n\nWhatever happens tomorrow, tonight you practiced feeling at peace. That is worth something on its own. [pause 20]\n\nLet sleep come when it comes. There is no rush. [pause 20]\n\nNotice the weight of the covers. The cool side of the pillow. The dark. [pause 25]\n\nLet each breath out be a little longer than the one before. [pause 25]\n\nNothing more to picture. Nothing more to try. Only rest. [pause 30]\n\nGood night. [pause 60]"
+  }
+ ],
+ "words": 562,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1142,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T17:06:59",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; every teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Quiet-house, hard-talk and kind-no nights each tell anyone afraid of someone at home or in their life to reach a trained person and keep safe, and the hard-talk night is limited to ordinary talks; friendship and hard-talk nights never picture making another person choose or agree; money night pictures bills covered and a little saved, not riches, and points to sound advice (no debt-free or wealth promise); rest night carries no sleep claim."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

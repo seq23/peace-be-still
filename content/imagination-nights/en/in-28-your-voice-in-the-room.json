@@ -1,0 +1,85 @@
+{
+ "id": "in-28-your-voice-in-the-room",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "Your Voice in the Room",
+ "theme": "sharing your gift",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hello, and welcome back to Imagination Nights. [pause 3]\n\nSettle into the bed. Pull the covers up to where you like them. [pause 8]\n\nTake one deep breath, and let it go with a sigh. [pause 8]\n\nNow let your breathing find its own pace. You do not have to control it. Just notice it. [pause 10]\n\nFeel your feet getting heavy. Your legs. Your back sinking into the mattress. [pause 10]\n\nNow let us relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThe day is finished. This part of the night is yours. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight is for anyone who has a gift they keep to themselves. A singing voice. A poem. A recipe. An idea at work. A story you want to tell. [pause 12]\n\nMany of us hold back because we are afraid of being seen. What if they laugh. What if it is not good enough. So the gift stays in the kitchen, or in the car, or in a notebook in the drawer. [pause 14]\n\nTonight you will picture sharing it with a room full of people, and feeling glad that you did. You choose the room. A family reunion. A meeting at work. A small open mic. A classroom. [pause 14]\n\nWe are not picturing fame or applause from the whole world. Just the moment you stop hiding, and a few faces in the room lean in. [pause 14]\n\nAs always, this is imagination and feeling, not a promise of how people will respond. It is a way to let your body practice being brave and calm at the same time. [pause 8]\n\nBring your gift to mind now. Whatever it is, it counts. [pause 15]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "You are waiting for your turn. Notice the room. The chairs. The light. The people talking softly. [pause 20]\n\nFeel your heart beating a little fast. Let it. That is just your body getting ready. [pause 23]\n\nHear your name. Stand up. Walk to the front, one easy step at a time. [pause 23]\n\nLook out at the faces. Find one friendly one, and let your eyes rest there. [pause 25]\n\nTake a breath, and begin. Hear your voice fill the room, clear and warm. [pause 27]\n\nNotice the moment the room gets quiet in the good way. They are listening. [pause 27]\n\nKeep going. Let yourself enjoy it. This is a thing you are good at. [pause 27]\n\nWhen you finish, there is a little pause, and then the sound of people clapping. Someone calls out, that was beautiful. [pause 27]\n\nWalk back to your seat. Feel your face warm and your hands steady. [pause 28]\n\nSay in your mind, my voice belongs in the room. [pause 28]\n\nLet the sound of that room fade softly into the quiet of this one. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "We will end here for tonight. [pause 10]\n\nKeep the feeling, not the effort. Let the effort go. [pause 15]\n\nWhatever happens tomorrow, tonight you practiced feeling at peace. That is worth something on its own. [pause 20]\n\nLet sleep come when it comes. There is no rush. [pause 20]\n\nNotice the weight of the covers. The cool side of the pillow. The dark. [pause 25]\n\nLet each breath out be a little longer than the one before. [pause 25]\n\nNothing more to picture. Nothing more to try. Only rest. [pause 30]\n\nGood night. [pause 60]"
+  }
+ ],
+ "words": 587,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1157,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T17:06:59",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; every teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Quiet-house, hard-talk and kind-no nights each tell anyone afraid of someone at home or in their life to reach a trained person and keep safe, and the hard-talk night is limited to ordinary talks; friendship and hard-talk nights never picture making another person choose or agree; money night pictures bills covered and a little saved, not riches, and points to sound advice (no debt-free or wealth promise); rest night carries no sleep claim."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
