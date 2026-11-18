@@ -1,0 +1,389 @@
+{
+ "id": "core-030-baby-moses",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Moisés en la canasta",
+ "passage": {
+  "refs": [
+   "EXO 2:1-10"
+  ],
+  "label": "Éxodo 2:1-10"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "sister",
+   "name": "hermana",
+   "age": "child",
+   "gender": "f"
+  },
+  {
+   "id": "pharaohs-daughter",
+   "name": "hija de Faraón",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los hijos de Israel vivían como esclavos en Egipto. El Faraón tenía miedo de que se hicieran demasiados, y dio una orden terrible. Todo niño varón que naciera de los hebreos debía ser echado al río."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En esos días, una mujer de la familia de Leví tuvo un hijo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:1-2",
+   "label": "Éxodo 2:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Un varón de la familia de Leví fué, y tomó por mujer una hija de Leví:"
+    },
+    {
+     "v": 2,
+     "text": "La cual concibió, y parió un hijo: y viéndolo que era hermoso, túvole escondido tres meses."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Un varón de la familia de Leví fué, y tomó por mujer una hija de Leví:"
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "La cual concibió, y parió un hijo: y viéndolo que era hermoso, túvole escondido tres meses."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con una madre que escondía a su bebé para salvarle la vida.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tres meses lo escondió. Tres meses tratando de que no llorara fuerte, mirando a la puerta, con miedo. Pero un bebé crece, y llegó el día en que ya no lo pudo esconder más."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:3",
+   "label": "Éxodo 2:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Pero no pudiendo ocultarle más tiempo, tomó una arquilla de juncos, y calafateóla con pez y betún, y colocó en ella al niño, y púsolo en un carrizal á la orilla del río:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Pero no pudiendo ocultarle más tiempo, tomó una arquilla de juncos, y calafateóla con pez y betún, y colocó en ella al niño, y púsolo en un carrizal á la orilla del río:"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ella hizo una canastita de juncos y la cubrió con brea para que no le entrara el agua. Puso a su hijo adentro, con cuidado, y lo dejó entre las cañas a la orilla del río. El mismo río donde el Faraón quería que murieran los niños."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:4",
+   "label": "Éxodo 2:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y paróse una hermana suya á lo lejos, para ver lo que le acontecería."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y paróse una hermana suya á lo lejos, para ver lo que le acontecería."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La hermana mayor del niño se quedó escondida a lo lejos, mirando. Una niña cuidando a su hermanito, sin saber qué iba a pasar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:5",
+   "label": "Éxodo 2:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y la hija de Faraón descendió á lavarse al río, y paseándose sus doncellas por la ribera del río, vió ella la arquilla en el carrizal, y envió una criada suya á que la tomase."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y la hija de Faraón descendió á lavarse al río, y paseándose sus doncellas por la ribera del río, vió ella la arquilla en el carrizal, y envió una criada suya á que la tomase."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "pharaohs-daughter",
+   "ref": "EXO 2:6",
+   "label": "Éxodo 2:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y como la abrió, vió al niño; y he aquí que el niño lloraba. Y teniendo compasión de él, dijo: De los niños de los Hebreos es éste."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y como la abrió, vió al niño; y he aquí que el niño lloraba. Y teniendo compasión de él, dijo:"
+    },
+    {
+     "v": 6,
+     "speaker": "pharaohs-daughter",
+     "text": "De los niños de los Hebreos es éste."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La hija del Faraón. La hija del mismo hombre que había dado la orden. Vio al bebé llorando y tuvo compasión de él. Sabía que era hebreo. Y aun así no lo entregó."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Entonces la hermana salió de su escondite. Una niña esclava hablándole a una princesa de Egipto. Hizo falta valor."
+  },
+  {
+   "type": "scripture",
+   "speaker": "sister",
+   "ref": "EXO 2:7",
+   "label": "Éxodo 2:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Entonces su hermana dijo á la hija de Faraón: ¿Iré á llamarte un ama de las Hebreas, para que te críe este niño?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Entonces su hermana dijo á la hija de Faraón:"
+    },
+    {
+     "v": 7,
+     "speaker": "sister",
+     "text": "¿Iré á llamarte un ama de las Hebreas, para que te críe este niño?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "pharaohs-daughter",
+   "ref": "EXO 2:8",
+   "label": "Éxodo 2:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y la hija de Faraón respondió: Ve. Entonces fué la doncella, y llamó á la madre del niño;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y la hija de Faraón respondió:"
+    },
+    {
+     "v": 8,
+     "speaker": "pharaohs-daughter",
+     "text": "Ve."
+    },
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Entonces fué la doncella, y llamó á la madre del niño;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y la niña fue corriendo a buscar a la mamá del bebé. A su propia mamá."
+  },
+  {
+   "type": "scripture",
+   "speaker": "pharaohs-daughter",
+   "ref": "EXO 2:9",
+   "label": "Éxodo 2:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "A la cual dijo la hija de Faraón: Lleva este niño, y críamelo, y yo te lo pagaré. Y la mujer tomó al niño, y criólo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "A la cual dijo la hija de Faraón:"
+    },
+    {
+     "v": 9,
+     "speaker": "pharaohs-daughter",
+     "text": "Lleva este niño, y críamelo, y yo te lo pagaré."
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y la mujer tomó al niño, y criólo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Aquella madre había soltado a su hijo en el río, y ahora se lo devolvían en los brazos. Y hasta le iban a pagar por criarlo. Pudo tenerlo cerca, darle de comer, cantarle y enseñarle de dónde venía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:10",
+   "label": "Éxodo 2:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y como creció el niño, ella lo trajo á la hija de Faraón, la cual lo prohijó, y púsole por nombre Moisés, diciendo: Porque de las aguas lo saqué."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y como creció el niño, ella lo trajo á la hija de Faraón, la cual lo prohijó, y púsole por nombre Moisés, diciendo: Porque de las aguas lo saqué."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moisés, porque de las aguas lo sacó. Ese niño un día sacaría a todo su pueblo de Egipto."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En esta historia Dios no habla en voz alta. No hay ángeles ni fuego del cielo. Hay una madre valiente, una hermana atenta y una princesa con compasión. Y por medio de ellas, Dios guardó la vida de un niño."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay noches en que, como esa madre, tenemos que soltar a alguien que amamos y dejarlo en las manos de Dios. Un hijo que crece, que se va, que está lejos. Él ve lo que nosotros ya no podemos ver desde la orilla. Y sabe cuidar a los que ponemos en sus manos."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 640,
+ "est_seconds": 355,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exod 2:1-10 (Pharaoh's order from 1:22); God not voiced; providence named without inventing speech; the mother left unnamed as in the passage."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A mother, a sister and an Egyptian princess each shown with dignity and courage; Egypt named as a place, no racial label."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,373 @@
+{
+ "id": "core-026-deborah",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Débora debajo de la palma",
+ "passage": {
+  "refs": [
+   "JDG 4:4-16"
+  ],
+  "label": "Jueces 4:4-16"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "deborah",
+   "name": "Débora",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "barak",
+   "name": "Barac",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Durante veinte años, un rey cananeo llamado Jabín oprimió al pueblo de Israel. Su capitán, Sísara, tenía novecientos carros de hierro. El pueblo clamaba a Dios."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 4:4-5",
+   "label": "Jueces 4:4-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y gobernaba en aquel tiempo á Israel una mujer, Débora, profetisa, mujer de Lapidoth:"
+    },
+    {
+     "v": 5,
+     "text": "La cual Débora habitaba debajo de una palma entre Rama y Beth-el, en el monte de Ephraim: y los hijos de Israel subían á ella á juicio."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y gobernaba en aquel tiempo á Israel una mujer, Débora, profetisa, mujer de Lapidoth:"
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "La cual Débora habitaba debajo de una palma entre Rama y Beth-el, en el monte de Ephraim: y los hijos de Israel subían á ella á juicio."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] En los años difíciles, Dios levantó a una mujer sabia debajo de una palma.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Débora se sentaba debajo de una palmera en los montes, y la gente subía a buscarla para que juzgara sus problemas. Escuchaba a Dios, y escuchaba a su pueblo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un día mandó a llamar a un hombre llamado Barac."
+  },
+  {
+   "type": "scripture",
+   "speaker": "deborah",
+   "ref": "JDG 4:6",
+   "label": "Jueces 4:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y ella envió á llamar á Barac hijo de Abinoam, de Cedes de Nephtalí, y díjole: ¿No te ha mandado Jehová Dios de Israel, diciendo: Ve, y haz gente en el monte de Tabor, y toma contigo diez mil hombres de los hijos de Nephtalí, y de los hijos de Zabulón:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y ella envió á llamar á Barac hijo de Abinoam, de Cedes de Nephtalí, y díjole:"
+    },
+    {
+     "v": 6,
+     "speaker": "deborah",
+     "text": "¿No te ha mandado Jehová Dios de Israel, diciendo: Ve, y haz gente en el monte de Tabor, y toma contigo diez mil hombres de los hijos de Nephtalí, y de los hijos de Zabulón:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "deborah",
+   "ref": "JDG 4:7",
+   "label": "Jueces 4:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y yo atraeré á ti al arroyo de Cisón á Sísara, capitán del ejército de Jabín, con sus carros y su ejército, y entregarélo en tus manos?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "deborah",
+     "text": "Y yo atraeré á ti al arroyo de Cisón á Sísara, capitán del ejército de Jabín, con sus carros y su ejército, y entregarélo en tus manos?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Débora no le dio una idea suya. Le recordó lo que Dios ya le había mandado. Pero Barac tenía miedo. Novecientos carros de hierro contra un pueblo sin armas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "barak",
+   "ref": "JDG 4:8",
+   "label": "Jueces 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y Barac le respondió: Si tú fueres conmigo, yo iré: pero si no fueres conmigo, no iré."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y Barac le respondió:"
+    },
+    {
+     "v": 8,
+     "speaker": "barak",
+     "text": "Si tú fueres conmigo, yo iré: pero si no fueres conmigo, no iré."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Barac no quería ir solo. Y Débora no se burló de él. Le dijo que iría."
+  },
+  {
+   "type": "scripture",
+   "speaker": "deborah",
+   "ref": "JDG 4:9",
+   "label": "Jueces 4:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y ella dijo: Iré contigo; mas no será tu honra en el camino que vas; porque en mano de mujer venderá Jehová á Sísara. Y levantándose Débora fué con Barac á Cedes."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y ella dijo:"
+    },
+    {
+     "v": 9,
+     "speaker": "deborah",
+     "text": "Iré contigo; mas no será tu honra en el camino que vas; porque en mano de mujer venderá Jehová á Sísara."
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y levantándose Débora fué con Barac á Cedes."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Débora fue con él. Subieron al monte de Tabor con diez mil hombres. Y abajo, en el valle, Sísara juntó todos sus carros junto al arroyo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 4:12-13",
+   "label": "Jueces 4:12-13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Vinieron pues las nuevas á Sísara como Barac hijo de Abinoam había subido al monte de Tabor."
+    },
+    {
+     "v": 13,
+     "text": "Y reunió Sísara todos sus carros, nuevecientos carros herrados, con todo el pueblo que con él estaba, desde Haroseth de las Gentes hasta el arroyo de Cisón."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Vinieron pues las nuevas á Sísara como Barac hijo de Abinoam había subido al monte de Tabor."
+    },
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y reunió Sísara todos sus carros, nuevecientos carros herrados, con todo el pueblo que con él estaba, desde Haroseth de las Gentes hasta el arroyo de Cisón."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Desde lo alto del monte se veía todo el ejército enemigo. Era el momento de bajar, y el momento de tener miedo. Y Débora habló otra vez."
+  },
+  {
+   "type": "scripture",
+   "speaker": "deborah",
+   "ref": "JDG 4:14",
+   "label": "Jueces 4:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Entonces Débora dijo á Barac: Levántate; porque este es el día en que Jehová ha entregado á Sísara en tus manos. ¿No ha salido Jehová delante de ti? Y Barac descendió del monte de Tabor, y diez mil hombres en pos de él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Entonces Débora dijo á Barac:"
+    },
+    {
+     "v": 14,
+     "speaker": "deborah",
+     "text": "Levántate; porque este es el día en que Jehová ha entregado á Sísara en tus manos. ¿No ha salido Jehová delante de ti?"
+    },
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y Barac descendió del monte de Tabor, y diez mil hombres en pos de él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "¿No ha salido Jehová delante de ti? Esa fue su palabra. Dios ya iba adelante. Y Barac bajó del monte con sus hombres detrás de él."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 4:15",
+   "label": "Jueces 4:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y Jehová desbarató á Sísara, y á todos sus carros y á todo su ejército, á filo de espada delante de Barac: y Sísara descendió del carro, y huyó á pie."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y Jehová desbarató á Sísara, y á todos sus carros y á todo su ejército, á filo de espada delante de Barac: y Sísara descendió del carro, y huyó á pie."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La Biblia dice más adelante, en el canto de Débora, que hasta el cielo peleó aquel día y que el arroyo de Cisón arrastró al enemigo. Lo que parecía imposible lo hizo Dios."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Débora fue jueza y profetisa en un tiempo en que el pueblo estaba cansado y con miedo. No fue con su propia fuerza. Su fuerza era saber que Dios iba delante. Y supo darle ánimo a otro para que hiciera lo que le tocaba."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche puede que tú seas Barac, con miedo de bajar del monte. O puede que seas Débora, llamada a animar a alguien que tiene miedo. En los dos casos, la palabra es la misma. Dios ya salió delante de ti."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 625,
+ "est_seconds": 347,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Judg 4:4-16 (the Song of Judg 5:20-21 named as scripture); Deborah's word credited to God's command; no ruling on women's leadership beyond the text; Jael's act (4:17-21) left out of a bedtime telling, battle kept off the page (violence mild)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Deborah shown as wise and steady, Barak's fear without mockery; balanced for men and women listeners."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,417 @@
+{
+ "id": "core-029-good-samaritan",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El buen samaritano",
+ "passage": {
+  "refs": [
+   "LUK 10:25-37"
+  ],
+  "label": "Lucas 10:25-37"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "lawyer",
+   "name": "doctor de la ley",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un día, mientras Jesús enseñaba, se levantó un hombre que conocía muy bien la ley de Moisés. Quería ponerlo a prueba."
+  },
+  {
+   "type": "scripture",
+   "speaker": "lawyer",
+   "ref": "LUK 10:25",
+   "label": "Lucas 10:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Y he aquí, un doctor de la ley se levantó, tentándole y diciendo: Maestro, ¿haciendo qué cosa poseeré la vida eterna?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Y he aquí, un doctor de la ley se levantó, tentándole y diciendo:"
+    },
+    {
+     "v": 25,
+     "speaker": "lawyer",
+     "text": "Maestro, ¿haciendo qué cosa poseeré la vida eterna?"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Y su bondad nos enseña a ver al que está tirado en el camino.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:26",
+   "label": "Lucas 10:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Y él le dijo: ¿Qué está escrito en la ley? ¿cómo lees?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y él le dijo: ¿Qué está escrito en la ley? ¿cómo lees?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "lawyer",
+   "ref": "LUK 10:27",
+   "label": "Lucas 10:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Y él respondiendo, dijo: Amarás al Señor tu Dios de todo tu corazón, y de toda tu alma, y de todas tus fuerzas, y de todo tu entendimiento; y á tu prójimo como á ti mismo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Y él respondiendo, dijo:"
+    },
+    {
+     "v": 27,
+     "speaker": "lawyer",
+     "text": "Amarás al Señor tu Dios de todo tu corazón, y de toda tu alma, y de todas tus fuerzas, y de todo tu entendimiento; y á tu prójimo como á ti mismo."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:28",
+   "label": "Lucas 10:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Y díjole: Bien has respondido: haz esto, y vivirás."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Y díjole: Bien has respondido: haz esto, y vivirás."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El hombre sabía la respuesta. Amar a Dios con todo, y al prójimo como a uno mismo. Pero quería dejar claro hasta dónde llegaba eso. Quería saber a quién le tocaba amar, y a quién no."
+  },
+  {
+   "type": "scripture",
+   "speaker": "lawyer",
+   "ref": "LUK 10:29",
+   "label": "Lucas 10:29",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Mas él, queriéndose justificar á sí mismo, dijo á Jesús: ¿Y quién es mi prójimo?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Mas él, queriéndose justificar á sí mismo, dijo á Jesús:"
+    },
+    {
+     "v": 29,
+     "speaker": "lawyer",
+     "text": "¿Y quién es mi prójimo?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús no le contestó con una definición. Le contó una historia."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:30",
+   "label": "Lucas 10:30",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 30,
+     "text": "Y respondiendo Jesús, dijo: Un hombre descendía de Jerusalem á Jericó, y cayó en manos de ladrones, los cuales le despojaron; é hiriéndole, se fueron, dejándole medio muerto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "Y respondiendo Jesús, dijo: Un hombre descendía de Jerusalem á Jericó, y cayó en manos de ladrones, los cuales le despojaron; é hiriéndole, se fueron, dejándole medio muerto."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El camino de Jerusalén a Jericó bajaba entre montes de piedra, solitario y peligroso. Ahí asaltaron a aquel hombre y lo dejaron tirado, medio muerto."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:31-32",
+   "label": "Lucas 10:31-32",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 31,
+     "text": "Y aconteció, que descendió un sacerdote por aquel camino, y viéndole, se pasó de un lado."
+    },
+    {
+     "v": 32,
+     "text": "Y asimismo un Levita, llegando cerca de aquel lugar, y viéndole, se pasó de un lado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "Y aconteció, que descendió un sacerdote por aquel camino, y viéndole, se pasó de un lado."
+    },
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "Y asimismo un Levita, llegando cerca de aquel lugar, y viéndole, se pasó de un lado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un sacerdote y un levita. Hombres que servían en el templo, que conocían la ley mejor que nadie. Lo vieron. Y se pasaron al otro lado del camino. Tal vez tenían prisa. Tal vez tenían miedo. La Biblia no dice por qué. Solo dice que siguieron de largo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:33",
+   "label": "Lucas 10:33",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 33,
+     "text": "Mas un Samaritano que transitaba, viniendo cerca de él, y viéndole, fué movido á misericordia;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "Mas un Samaritano que transitaba, viniendo cerca de él, y viéndole, fué movido á misericordia;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y aquí está lo que sorprendió a todos. Los judíos y los samaritanos no se trataban. Había siglos de desprecio entre ellos. Y el que se detuvo fue el samaritano."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:34-35",
+   "label": "Lucas 10:34-35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 34,
+     "text": "Y llegándose, vendó sus heridas, echándoles aceite y vino; y poniéndole sobre su cabalgadura, llevóle al mesón, y cuidó de él."
+    },
+    {
+     "v": 35,
+     "text": "Y otro día al partir, sacó dos denarios, y diólos al huésped, y le dijo: Cuídamele; y todo lo que de más gastares, yo cuando vuelva te lo pagaré."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "Y llegándose, vendó sus heridas, echándoles aceite y vino; y poniéndole sobre su cabalgadura, llevóle al mesón, y cuidó de él."
+    },
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Y otro día al partir, sacó dos denarios, y diólos al huésped, y le dijo: Cuídamele; y todo lo que de más gastares, yo cuando vuelva te lo pagaré."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Le limpió las heridas con aceite y vino, lo vendó, lo subió a su propio animal y lo llevó a una posada. Pasó la noche cuidándolo. Al otro día pagó de su bolsillo y prometió volver a pagar lo que faltara. No conocía a ese hombre. No le debía nada."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:36",
+   "label": "Lucas 10:36",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 36,
+     "text": "¿Quién, pues, de estos tres te parece que fué el prójimo de aquél que cayó en manos de los ladrones?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "¿Quién, pues, de estos tres te parece que fué el prójimo de aquél que cayó en manos de los ladrones?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "lawyer",
+   "ref": "LUK 10:37",
+   "label": "Lucas 10:37",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 37,
+     "text": "Y él dijo: El que usó con él de misericordia. Entonces Jesús le dijo: Ve, y haz tú lo mismo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Y él dijo:"
+    },
+    {
+     "v": 37,
+     "speaker": "lawyer",
+     "text": "El que usó con él de misericordia."
+    },
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Entonces Jesús le dijo: Ve, y haz tú lo mismo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El doctor de la ley ni siquiera pudo decir la palabra samaritano. Dijo el que tuvo misericordia. Y Jesús le dijo que fuera e hiciera lo mismo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El hombre había preguntado quién era su prójimo. Jesús le dio la vuelta a la pregunta. No preguntes quién merece tu ayuda. Pregunta de quién puedes ser prójimo tú."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A todos nos toca pasar por algún camino donde alguien está herido. A veces es un desconocido. A veces es alguien que nos enseñaron a evitar. Amar al prójimo es detenerse, acercarse y ayudar, aunque cueste. Y a veces, en la noche más dura, el que se detiene a ayudarnos a nosotros es la persona que menos esperábamos."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 625,
+ "est_seconds": 347,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 10:25-37; priest and Levite not caricatured (the text gives no reason, and the retelling says so); the lawyer's avoidance of 'samaritano' is the text's own wording."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Old enmity between peoples named plainly without blaming any modern group; invites mercy across lines; no politics."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

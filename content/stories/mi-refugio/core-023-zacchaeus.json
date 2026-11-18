@@ -1,0 +1,358 @@
+{
+ "id": "core-023-zacchaeus",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Zaqueo baja del árbol",
+ "passage": {
+  "refs": [
+   "LUK 19:1-10"
+  ],
+  "label": "Lucas 19:1-10"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "zacchaeus",
+   "name": "Zaqueo",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús iba de camino a Jerusalén y pasó por la ciudad de Jericó. La noticia corrió rápido, y la gente salió a la calle para verlo pasar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:1-2",
+   "label": "Lucas 19:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y HABIENDO entrado Jesús, iba pasando por Jericó;"
+    },
+    {
+     "v": 2,
+     "text": "Y he aquí un varón llamado Zaqueo, el cual era el principal de los publicanos, y era rico;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y HABIENDO entrado Jesús, iba pasando por Jericó;"
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y he aquí un varón llamado Zaqueo, el cual era el principal de los publicanos, y era rico;"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con el que la gente ya había dado por perdido.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los publicanos cobraban impuestos para Roma, el imperio que dominaba al pueblo judío. Muchos cobraban de más y se quedaban con la diferencia. La gente los veía como traidores y ladrones. Y Zaqueo era el jefe de todos ellos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:3",
+   "label": "Lucas 19:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y procuraba ver á Jesús quién fuese; mas no podía á causa de la multitud, porque era pequeño de estatura."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y procuraba ver á Jesús quién fuese; mas no podía á causa de la multitud, porque era pequeño de estatura."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Zaqueo quería ver a Jesús, pero era bajito, y la multitud no lo dejaba. Nadie le iba a hacer espacio a él."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:4",
+   "label": "Lucas 19:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y corriendo delante, subióse á un árbol sicómoro para verle; porque había de pasar por allí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y corriendo delante, subióse á un árbol sicómoro para verle; porque había de pasar por allí."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un hombre rico e importante, corriendo por la calle y subiéndose a un árbol como un niño. No le importó lo que dijeran. Quería ver quién era Jesús."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:5",
+   "label": "Lucas 19:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y como vino á aquel lugar Jesús, mirando, le vió, y díjole: Zaqueo, date priesa, desciende, porque hoy es necesario que pose en tu casa."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y como vino á aquel lugar Jesús, mirando, le vió, y díjole: Zaqueo, date priesa, desciende, porque hoy es necesario que pose en tu casa."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús se detuvo justo debajo de ese árbol. Miró hacia arriba. Y lo llamó por su nombre. Zaqueo, baja pronto. Hoy tengo que quedarme en tu casa."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "De todas las casas de Jericó, Jesús escogió la de él. No le pidió primero que cambiara. No le dio un sermón desde abajo. Le dijo que quería estar con él."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:6",
+   "label": "Lucas 19:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Entonces él descendió apriesa, y le recibió gozoso."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Entonces él descendió apriesa, y le recibió gozoso."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:7",
+   "label": "Lucas 19:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y viendo esto, todos murmuraban, diciendo que había entrado á posar con un hombre pecador."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Y viendo esto, todos murmuraban, diciendo que había entrado á posar con un hombre pecador."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La gente murmuraba. ¿Cómo se va a quedar con un pecador? Pero Jesús no había venido a buscar a los que ya estaban bien."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y en la casa, delante de todos, Zaqueo se puso de pie."
+  },
+  {
+   "type": "scripture",
+   "speaker": "zacchaeus",
+   "ref": "LUK 19:8",
+   "label": "Lucas 19:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Entonces Zaqueo, puesto en pie, dijo al Señor: He aquí, Señor, la mitad de mis bienes doy á los pobres; y si en algo he defraudado á alguno, lo vuelvo con el cuatro tanto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Entonces Zaqueo, puesto en pie, dijo al Señor:"
+    },
+    {
+     "v": 8,
+     "speaker": "zacchaeus",
+     "text": "He aquí, Señor, la mitad de mis bienes doy á los pobres; y si en algo he defraudado á alguno, lo vuelvo con el cuatro tanto."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nadie se lo exigió. Fue la gracia lo que le cambió el corazón. Un hombre que había vivido para juntar dinero ahora quería dar la mitad a los pobres y devolver cuatro veces lo que había quitado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:9",
+   "label": "Lucas 19:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y Jesús le dijo: Hoy ha venido la salvación á esta casa; por cuanto él también es hijo de Abraham."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y Jesús le dijo: Hoy ha venido la salvación á esta casa; por cuanto él también es hijo de Abraham."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:10",
+   "label": "Lucas 19:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Porque el Hijo del hombre vino á buscar y á salvar lo que se había perdido."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Porque el Hijo del hombre vino á buscar y á salvar lo que se había perdido."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús vino a buscar a los perdidos. Para eso vino. Zaqueo subió al árbol para verlo, pero en realidad era Jesús el que lo andaba buscando a él."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Zaqueo no se volvió perfecto en una tarde. Pero ya no era el mismo. La gente que lo veía con desprecio vio a un hombre devolviendo lo que había tomado y dando a los pobres. La gracia que recibió se volvió justicia para sus vecinos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay personas que la gente ya dio por perdidas. Tal vez alguien de tu familia. Tal vez tú mismo te has sentido así. La historia de Zaqueo dice que Jesús se detiene debajo de nuestro árbol, nos llama por nombre y quiere entrar a nuestra casa. Y cuando él entra, todo puede empezar de nuevo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 584,
+ "est_seconds": 325,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 19:1-10; publicans explained accurately; grace before change, restitution as fruit, salvation spoken only by Jesus in scripture."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Short stature told without a joke; no 'lost cause' shaming of family members; warm close."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,422 @@
+{
+ "id": "core-025-shepherds",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "La noche que oyeron los pastores",
+ "passage": {
+  "refs": [
+   "LUK 2:1-20"
+  ],
+  "label": "Lucas 2:1-20"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "shepherds",
+   "name": "pastores",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hace mucho tiempo, el emperador de Roma ordenó que se contara a toda la gente de su imperio. Cada uno tenía que ir a registrarse a la ciudad de su familia."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:4-5",
+   "label": "Lucas 2:4-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y subió José de Galilea, de la ciudad de Nazaret, á Judea, á la ciudad de David, que se llama Bethlehem, por cuanto era de la casa y familia de David;"
+    },
+    {
+     "v": 5,
+     "text": "Para ser empadronado con María su mujer, desposada con él, la cual estaba en cinta."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y subió José de Galilea, de la ciudad de Nazaret, á Judea, á la ciudad de David, que se llama Bethlehem, por cuanto era de la casa y familia de David;"
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Para ser empadronado con María su mujer, desposada con él, la cual estaba en cinta."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] En un viaje largo, en un pueblo lleno, en una noche sin lugar.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fue un viaje largo para una mujer a punto de dar a luz. Y cuando llegaron a Bethlehem, el pueblo estaba lleno."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:6-7",
+   "label": "Lucas 2:6-7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y aconteció que estando ellos allí, se cumplieron los días en que ella había de parir."
+    },
+    {
+     "v": 7,
+     "text": "Y parió á su hijo primogénito, y le envolvió en pañales, y acostóle en un pesebre, porque no había lugar para ellos en el mesón."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y aconteció que estando ellos allí, se cumplieron los días en que ella había de parir."
+    },
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Y parió á su hijo primogénito, y le envolvió en pañales, y acostóle en un pesebre, porque no había lugar para ellos en el mesón."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No había lugar para ellos. El Hijo de Dios nació donde dormían los animales, y su primera cama fue un pesebre, el cajón donde se les echaba de comer."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esa misma noche, en los campos cerca del pueblo, unos pastores cuidaban sus ovejas. Era un trabajo humilde, de noche, al frío. No eran gente importante. Nadie los habría invitado a una celebración en el palacio."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:8-9",
+   "label": "Lucas 2:8-9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y había pastores en la misma tierra, que velaban y guardaban las vigilias de la noche sobre su ganado."
+    },
+    {
+     "v": 9,
+     "text": "Y he aquí el ángel del Señor vino sobre ellos, y la claridad de Dios los cercó de resplandor; y tuvieron gran temor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y había pastores en la misma tierra, que velaban y guardaban las vigilias de la noche sobre su ganado."
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y he aquí el ángel del Señor vino sobre ellos, y la claridad de Dios los cercó de resplandor; y tuvieron gran temor."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:10-12",
+   "label": "Lucas 2:10-12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Mas el ángel les dijo: No temáis; porque he aquí os doy nuevas de gran gozo, que será para todo el pueblo:"
+    },
+    {
+     "v": 11,
+     "text": "Que os ha nacido hoy, en la ciudad de David, un Salvador, que es CRISTO el Señor."
+    },
+    {
+     "v": 12,
+     "text": "Y esto os será por señal: hallaréis al niño envuelto en pañales, echado en un pesebre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Mas el ángel les dijo: No temáis; porque he aquí os doy nuevas de gran gozo, que será para todo el pueblo:"
+    },
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Que os ha nacido hoy, en la ciudad de David, un Salvador, que es CRISTO el Señor."
+    },
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y esto os será por señal: hallaréis al niño envuelto en pañales, echado en un pesebre."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El primer anuncio del nacimiento de Jesús no fue para los reyes ni para los sacerdotes. Fue para unos pastores en el campo. Nuevas de gran gozo para todo el pueblo. Y la señal era sencilla. Un bebé envuelto en pañales, acostado en un pesebre."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:13-14",
+   "label": "Lucas 2:13-14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y repentinamente fué con el ángel una multitud de los ejércitos celestiales, que alababan á Dios, y decían:"
+    },
+    {
+     "v": 14,
+     "text": "Gloria en las alturas á Dios, y en la tierra paz, buena voluntad para con los hombres."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y repentinamente fué con el ángel una multitud de los ejércitos celestiales, que alababan á Dios, y decían:"
+    },
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Gloria en las alturas á Dios, y en la tierra paz, buena voluntad para con los hombres."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El cielo entero se llenó de alabanza. Y luego, otra vez, la noche quieta."
+  },
+  {
+   "type": "scripture",
+   "speaker": "shepherds",
+   "ref": "LUK 2:15",
+   "label": "Lucas 2:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y aconteció que como los ángeles se fueron de ellos al cielo, los pastores dijeron los unos á los otros: Pasemos pues hasta Bethlehem, y veamos esto que ha sucedido, que el Señor nos ha manifestado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y aconteció que como los ángeles se fueron de ellos al cielo, los pastores dijeron los unos á los otros:"
+    },
+    {
+     "v": 15,
+     "speaker": "shepherds",
+     "text": "Pasemos pues hasta Bethlehem, y veamos esto que ha sucedido, que el Señor nos ha manifestado."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:16",
+   "label": "Lucas 2:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y vinieron apriesa, y hallaron á María, y á José, y al niño acostado en el pesebre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y vinieron apriesa, y hallaron á María, y á José, y al niño acostado en el pesebre."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fueron corriendo. Dejaron las ovejas y bajaron al pueblo en la oscuridad, buscando a un recién nacido acostado en un pesebre. Y lo encontraron todo tal como el ángel les había dicho."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:17-18",
+   "label": "Lucas 2:17-18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Y viéndolo, hicieron notorio lo que les había sido dicho del niño."
+    },
+    {
+     "v": 18,
+     "text": "Y todos los que oyeron, se maravillaron de lo que los pastores les decían."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Y viéndolo, hicieron notorio lo que les había sido dicho del niño."
+    },
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y todos los que oyeron, se maravillaron de lo que los pastores les decían."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:19",
+   "label": "Lucas 2:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Mas María guardaba todas estas cosas, confiriéndolas en su corazón."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Mas María guardaba todas estas cosas, confiriéndolas en su corazón."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "María guardaba todo en su corazón. Una madre joven, cansada, lejos de su casa, escuchando a unos pastores contar lo que habían visto. No entendía todo. Pero lo guardaba."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:20",
+   "label": "Lucas 2:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y se volvieron los pastores glorificando y alabando á Dios de todas las cosas que habían oído y visto, como les había sido dicho."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y se volvieron los pastores glorificando y alabando á Dios de todas las cosas que habían oído y visto, como les había sido dicho."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los pastores volvieron a sus ovejas. Su trabajo era el mismo. El campo era el mismo. Pero ellos ya no eran los mismos. Volvieron alabando a Dios."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios escogió anunciar la mejor noticia del mundo de noche, a gente sencilla, en un campo. Si esta noche estás trabajando, o cuidando a alguien, o simplemente despierto cuando todos duermen, recuerda a los pastores. Dios sabe dónde estás. Y su paz llegó primero a los que velaban de noche."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 678,
+ "est_seconds": 376,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 2:1-20; 'establo' tradition replaced by the text's pesebre; the angel never voiced; Mary's pondering kept."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Night workers and carers named with respect; humble shepherds not romanticised; natural Christmas Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

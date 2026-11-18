@@ -1,0 +1,320 @@
+{
+ "id": "core-027-widows-oil",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El aceite de la viuda",
+ "passage": {
+  "refs": [
+   "2KI 4:1-7"
+  ],
+  "label": "2 Reyes 4:1-7"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "widow",
+   "name": "mujer",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "elisha",
+   "name": "Eliseo",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En los días del profeta Eliseo, había un grupo de hombres que servían a Dios y aprendían de los profetas. Uno de ellos murió y dejó a su esposa sola con dos hijos y muchas deudas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "widow",
+   "ref": "2KI 4:1",
+   "label": "2 Reyes 4:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Una mujer, de las mujeres de los hijos de los profetas, clamó á Eliseo, diciendo: Tu siervo mi marido es muerto; y tú sabes que tu siervo era temeroso de Jehová: y ha venido el acreedor para tomarse dos hijos míos por siervos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Una mujer, de las mujeres de los hijos de los profetas, clamó á Eliseo, diciendo:"
+    },
+    {
+     "v": 1,
+     "speaker": "widow",
+     "text": "Tu siervo mi marido es muerto; y tú sabes que tu siervo era temeroso de Jehová: y ha venido el acreedor para tomarse dos hijos míos por siervos."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con la viuda y con sus hijos, cuando el acreedor ya está en la puerta.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En aquel tiempo, si una familia no podía pagar, el acreedor podía llevarse a los hijos como esclavos hasta que se pagara la deuda. Esa madre ya había perdido a su esposo. Ahora estaba a punto de perder a sus hijos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ella no se escondió. Fue a buscar ayuda. Y Eliseo le hizo dos preguntas. ¿Qué quieres que haga por ti? ¿Y qué tienes en tu casa?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:2",
+   "label": "2 Reyes 4:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y Eliseo le dijo: ¿Qué te haré yo? Declárame qué tienes en casa. Y ella dijo: Tu sierva ninguna cosa tiene en casa, sino una botija de aceite."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y Eliseo le dijo: ¿Qué te haré yo? Declárame qué tienes en casa. Y ella dijo: Tu sierva ninguna cosa tiene en casa, sino una botija de aceite."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ninguna cosa, dijo ella. Solo una vasija de aceite. A veces, cuando estamos desesperados, lo poco que tenemos nos parece nada."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elisha",
+   "ref": "2KI 4:3",
+   "label": "2 Reyes 4:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y él le dijo: Ve, y pide para ti vasos prestados de todos tus vecinos, vasos vacíos, no pocos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y él le dijo:"
+    },
+    {
+     "v": 3,
+     "speaker": "elisha",
+     "text": "Ve, y pide para ti vasos prestados de todos tus vecinos, vasos vacíos, no pocos."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "elisha",
+   "ref": "2KI 4:4",
+   "label": "2 Reyes 4:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Entra luego, y cierra la puerta tras ti y tras tus hijos; y echa en todos los vasos, y en estando uno lleno, ponlo aparte."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "elisha",
+     "text": "Entra luego, y cierra la puerta tras ti y tras tus hijos; y echa en todos los vasos, y en estando uno lleno, ponlo aparte."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Eliseo le pidió que fuera con sus vecinos. Que tocara puertas y pidiera prestadas todas las vasijas vacías que pudiera, y no pocas. Tuvo que pedir ayuda. Y sus vecinos se la dieron."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Luego tenía que cerrar la puerta. Lo que Dios iba a hacer pasaría adentro, en la casa, con sus hijos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:5",
+   "label": "2 Reyes 4:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y partióse la mujer de él, y cerró la puerta tras sí y tras sus hijos; y ellos le llegaban los vasos, y ella echaba del aceite."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y partióse la mujer de él, y cerró la puerta tras sí y tras sus hijos; y ellos le llegaban los vasos, y ella echaba del aceite."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagina a esos dos muchachos trayendo vasija tras vasija. Y su mamá inclinando aquella vasija pequeña, y el aceite que seguía saliendo. Una, y otra, y otra más."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:6",
+   "label": "2 Reyes 4:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y como los vasos fueron llenos, dijo á un hijo suyo: Tráeme aún otro vaso. Y él dijo: No hay más vasos. Entonces cesó el aceite."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y como los vasos fueron llenos, dijo á un hijo suyo: Tráeme aún otro vaso. Y él dijo: No hay más vasos. Entonces cesó el aceite."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El aceite paró cuando ya no hubo dónde echarlo. Cuántas vasijas hubo dependió de cuántas pidieron."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elisha",
+   "ref": "2KI 4:7",
+   "label": "2 Reyes 4:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Vino ella luego, y contólo al varón de Dios, el cual dijo: Ve, y vende el aceite, y paga á tus acreedores; y tú y tus hijos vivid de lo que quedare."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Vino ella luego, y contólo al varón de Dios, el cual dijo:"
+    },
+    {
+     "v": 7,
+     "speaker": "elisha",
+     "text": "Ve, y vende el aceite, y paga á tus acreedores; y tú y tus hijos vivid de lo que quedare."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios le dio lo que necesitaba para pagar la deuda y vivir con sus hijos. Sus hijos se quedaron con ella."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia no es una fórmula para salir de deudas, ni una promesa de dinero. Es la historia de un Dios que ve a una viuda con miedo, que usa lo poco que ella tiene y la ayuda de sus vecinos, y que cuida de una familia que se había quedado sola."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche las cuentas te quitan el sueño, no tienes que cargar eso a solas. Puedes contarle a Dios lo que tienes y lo que te falta, como ella se lo contó a Eliseo. Y puedes pedir ayuda a tu iglesia y a quienes te rodean. Ella tocó puertas, y no se avergonzó de hacerlo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 584,
+ "est_seconds": 325,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 2 Kgs 4:1-7; states it is not a debt formula or a money promise; debt-slavery custom explained; points to church and neighbours for practical help."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A widowed mother shown with agency (she asks, knocks on doors) not as a poverty stereotype; no shame in asking for help."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
