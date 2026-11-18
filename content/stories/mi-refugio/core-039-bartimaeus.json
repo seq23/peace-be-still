@@ -1,0 +1,309 @@
+{
+ "id": "core-039-bartimaeus",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El ciego Bartimeo",
+ "passage": {
+  "refs": [
+   "MAR 10:46-52"
+  ],
+  "label": "Marcos 10:46-52"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "bartimaeus",
+   "name": "Bartimeo",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús iba camino a Jerusalén por última vez. Al salir de la ciudad de Jericó, lo seguía mucha gente. Y a la orilla del camino, sentado en el polvo, había un hombre ciego pidiendo limosna."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:46",
+   "label": "Marcos 10:46",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 46,
+     "text": "Entonces vienen á Jericó: y saliendo él de Jericó y sus discípulos y una gran compañía, Bartimeo el ciego, hijo de Timeo, estaba sentado junto al camino mendigando."
+    }
+   ],
+   "segments": [
+    {
+     "v": 46,
+     "speaker": "narrator",
+     "text": "Entonces vienen á Jericó: y saliendo él de Jericó y sus discípulos y una gran compañía, Bartimeo el ciego, hijo de Timeo, estaba sentado junto al camino mendigando."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con el que estaba sentado a la orilla del camino.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Bartimeo no veía, pero oía. Oyó el ruido de la multitud. Preguntó qué pasaba. Y cuando le dijeron que era Jesús de Nazaret el que pasaba, no se quedó callado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "bartimaeus",
+   "ref": "MAR 10:47",
+   "label": "Marcos 10:47",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 47,
+     "text": "Y oyendo que era Jesús el Nazareno, comenzó á dar voces y decir: Jesús, Hijo de David, ten misericordia de mí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 47,
+     "speaker": "narrator",
+     "text": "Y oyendo que era Jesús el Nazareno, comenzó á dar voces y decir:"
+    },
+    {
+     "v": 47,
+     "speaker": "bartimaeus",
+     "text": "Jesús, Hijo de David, ten misericordia de mí."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hijo de David. Así llamaba el pueblo al Mesías prometido. Bartimeo era ciego, pero vio quién era Jesús antes que muchos que tenían buena vista."
+  },
+  {
+   "type": "scripture",
+   "speaker": "bartimaeus",
+   "ref": "MAR 10:48",
+   "label": "Marcos 10:48",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 48,
+     "text": "Y muchos le reñían, que callase: mas él daba mayores voces: Hijo de David, ten misericordia de mí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 48,
+     "speaker": "narrator",
+     "text": "Y muchos le reñían, que callase: mas él daba mayores voces:"
+    },
+    {
+     "v": 48,
+     "speaker": "bartimaeus",
+     "text": "Hijo de David, ten misericordia de mí."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La gente lo mandaba a callar. Que no molestara. Que no hiciera escándalo. Y él gritó más fuerte. A veces la fe es así. No es tranquila ni bien educada. Es un grito que no se deja callar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:49",
+   "label": "Marcos 10:49",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 49,
+     "text": "Entonces Jesús parándose, mandó llamarle: y llaman al ciego, diciéndole: Ten confianza: levántate, te llama."
+    }
+   ],
+   "segments": [
+    {
+     "v": 49,
+     "speaker": "narrator",
+     "text": "Entonces Jesús parándose, mandó llamarle: y llaman al ciego, diciéndole: Ten confianza: levántate, te llama."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús se detuvo. La multitud seguía caminando, y él se paró por un hombre que nadie quería oír. Y los mismos que lo mandaban a callar ahora le decían que tuviera ánimo, que Jesús lo llamaba."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:50",
+   "label": "Marcos 10:50",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 50,
+     "text": "El entonces, echando su capa, se levantó, y vino á Jesús."
+    }
+   ],
+   "segments": [
+    {
+     "v": 50,
+     "speaker": "narrator",
+     "text": "El entonces, echando su capa, se levantó, y vino á Jesús."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Echó su capa. Para un mendigo ciego, esa capa era casi todo lo que tenía. Lo cubría del frío en la noche, y la extendía en el suelo para recibir las monedas. Y la dejó atrás para ir a Jesús."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:51",
+   "label": "Marcos 10:51",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 51,
+     "text": "Y respondiendo Jesús, le dice: ¿Qué quieres que te haga? Y el ciego le dice: Maestro, que cobre la vista."
+    }
+   ],
+   "segments": [
+    {
+     "v": 51,
+     "speaker": "narrator",
+     "text": "Y respondiendo Jesús, le dice: ¿Qué quieres que te haga? Y el ciego le dice: Maestro, que cobre la vista."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús le preguntó qué quería. Él ya lo sabía. Pero quiso que Bartimeo lo dijera con su propia boca. Y Bartimeo no dio rodeos. Maestro, que vuelva a ver."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:52",
+   "label": "Marcos 10:52",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 52,
+     "text": "Y Jesús le dijo: Ve, tu fe te ha salvado. Y luego cobró la vista, y seguía á Jesús en el camino."
+    }
+   ],
+   "segments": [
+    {
+     "v": 52,
+     "speaker": "narrator",
+     "text": "Y Jesús le dijo: Ve, tu fe te ha salvado. Y luego cobró la vista, y seguía á Jesús en el camino."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y lo primero que vio Bartimeo fue el rostro de Jesús. Y después, el camino. Y lo siguió por ese camino, que iba a Jerusalén."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Bartimeo pasó de estar sentado a estar en camino. De pedir limosna a seguir a Jesús. La gente lo conocía como el ciego que mendigaba junto a la puerta de Jericó. Desde ese día lo conocieron como uno que andaba con Jesús."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay momentos en que nos sentimos a la orilla del camino, mientras todos los demás pasan. Y hay voces que nos dicen que no molestemos a Dios, que nuestra necesidad no importa. Bartimeo no les hizo caso."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche puedes hacer lo mismo que él. Llamar a Jesús por su nombre. Decirle exactamente lo que necesitas. Él no se cansa de oír a los que claman, y sabe detenerse por uno solo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 536,
+ "est_seconds": 298,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 536 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 10:46-52; 'tu fe te ha salvado' left in scripture; no promise of healing for the listener; 'Hijo de David' explained accurately."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A blind beggar shown with agency and faith, not pity; the cloak detail respectful."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

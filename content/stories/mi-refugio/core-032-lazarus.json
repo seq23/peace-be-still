@@ -1,0 +1,589 @@
+{
+ "id": "core-032-lazarus",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Lázaro, ven fuera",
+ "passage": {
+  "refs": [
+   "JOH 11:17-44"
+  ],
+  "label": "Juan 11:17-44"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "martha",
+   "name": "Marta",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "mary",
+   "name": "María",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "jews",
+   "name": "Judíos",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En el pueblo de Bethania vivían tres hermanos muy queridos por Jesús. Marta, María y Lázaro. Un día Lázaro se enfermó gravemente, y sus hermanas le mandaron a decir a Jesús que su amigo estaba enfermo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús no llegó enseguida. Y cuando por fin llegó, ya era tarde."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:17",
+   "label": "Juan 11:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Vino pues Jesús, y halló que había ya cuatro días que estaba en el sepulcro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Vino pues Jesús, y halló que había ya cuatro días que estaba en el sepulcro."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun en el cuarto día, cuando parece que ya no hay nada que hacer.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:19-20",
+   "label": "Juan 11:19-20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y muchos de los Judíos habían venido á Marta y á María, á consolarlas de su hermano."
+    },
+    {
+     "v": 20,
+     "text": "Entonces Marta, como oyó que Jesús venía, salió á encontrarle; mas María se estuvo en casa."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y muchos de los Judíos habían venido á Marta y á María, á consolarlas de su hermano."
+    },
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Entonces Marta, como oyó que Jesús venía, salió á encontrarle; mas María se estuvo en casa."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "JOH 11:21",
+   "label": "Juan 11:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Y Marta dijo á Jesús: Señor, si hubieses estado aquí, mi hermano no fuera muerto;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Y Marta dijo á Jesús:"
+    },
+    {
+     "v": 21,
+     "speaker": "martha",
+     "text": "Señor, si hubieses estado aquí, mi hermano no fuera muerto;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "JOH 11:22",
+   "label": "Juan 11:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Mas también sé ahora, que todo lo que pidieres de Dios, te dará Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "martha",
+     "text": "Mas también sé ahora, que todo lo que pidieres de Dios, te dará Dios."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Marta le dijo lo que sentía. Si hubieras estado aquí. Muchos hemos dicho esas palabras alguna vez, en un hospital, junto a una tumba. Y Jesús no la regañó por decirlas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:23",
+   "label": "Juan 11:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Dícele Jesús: Resucitará tu hermano."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Dícele Jesús: Resucitará tu hermano."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "JOH 11:24",
+   "label": "Juan 11:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Marta le dice: Yo sé que resucitará en la resurrección en el día postrero."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Marta le dice:"
+    },
+    {
+     "v": 24,
+     "speaker": "martha",
+     "text": "Yo sé que resucitará en la resurrección en el día postrero."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:25-26",
+   "label": "Juan 11:25-26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Dícele Jesús: Yo soy la resurrección y la vida: el que cree en mí, aunque esté muerto, vivirá."
+    },
+    {
+     "v": 26,
+     "text": "Y todo aquel que vive y cree en mí, no morirá eternamente. ¿Crees esto?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Dícele Jesús: Yo soy la resurrección y la vida: el que cree en mí, aunque esté muerto, vivirá."
+    },
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y todo aquel que vive y cree en mí, no morirá eternamente. ¿Crees esto?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "JOH 11:27",
+   "label": "Juan 11:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Dícele: Sí, Señor; yo he creído que tú eres el Cristo, el Hijo de Dios, que has venido al mundo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Dícele:"
+    },
+    {
+     "v": 27,
+     "speaker": "martha",
+     "text": "Sí, Señor; yo he creído que tú eres el Cristo, el Hijo de Dios, que has venido al mundo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En medio del dolor, Marta hizo una de las confesiones más grandes de toda la Biblia. Tú eres el Cristo. Luego fue a buscar a su hermana."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mary",
+   "ref": "JOH 11:32",
+   "label": "Juan 11:32",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Mas María, como vino donde estaba Jesús, viéndole, derribóse á sus pies, diciéndole: Señor, si hubieras estado aquí, no fuera muerto mi hermano."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "Mas María, como vino donde estaba Jesús, viéndole, derribóse á sus pies, diciéndole:"
+    },
+    {
+     "v": 32,
+     "speaker": "mary",
+     "text": "Señor, si hubieras estado aquí, no fuera muerto mi hermano."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "María dijo lo mismo que su hermana. Pero ella no pudo decir más. Solo lloraba a los pies de Jesús."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:33",
+   "label": "Juan 11:33",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 33,
+     "text": "Jesús entonces, como la vió llorando, y á los Judíos que habían venido juntamente con ella llorando, se conmovió en espíritu, y turbóse,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "Jesús entonces, como la vió llorando, y á los Judíos que habían venido juntamente con ella llorando, se conmovió en espíritu, y turbóse,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:34",
+   "label": "Juan 11:34",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 34,
+     "text": "Y dijo: ¿Dónde le pusisteis? Dícenle: Señor, ven, y ve."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "Y dijo: ¿Dónde le pusisteis? Dícenle: Señor, ven, y ve."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:35",
+   "label": "Juan 11:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Y lloró Jesús."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Y lloró Jesús."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús lloró. Es el versículo más corto de la Biblia. Él sabía lo que iba a hacer en unos minutos. Y aun así lloró con ellas. No les dijo que dejaran de llorar. Lloró con ellas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jews",
+   "ref": "JOH 11:36",
+   "label": "Juan 11:36",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 36,
+     "text": "Dijeron entonces los Judíos: Mirad cómo le amaba."
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "Dijeron entonces los Judíos:"
+    },
+    {
+     "v": 36,
+     "speaker": "jews",
+     "text": "Mirad cómo le amaba."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:38",
+   "label": "Juan 11:38",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 38,
+     "text": "Y Jesús, conmoviéndose otra vez en sí mismo, vino al sepulcro. Era una cueva, la cual tenía una piedra encima."
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "Y Jesús, conmoviéndose otra vez en sí mismo, vino al sepulcro. Era una cueva, la cual tenía una piedra encima."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:39",
+   "label": "Juan 11:39",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 39,
+     "text": "Dice Jesús: Quitad la piedra. Marta, la hermana del que se había muerto, le dice: Señor, hiede ya, que es de cuatro días."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "Dice Jesús: Quitad la piedra. Marta, la hermana del que se había muerto, le dice: Señor, hiede ya, que es de cuatro días."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Marta, la de la fe tan grande, ahora tenía miedo. Ya hacía cuatro días. Ya olía mal. Y Jesús le recordó lo que le había dicho."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:40",
+   "label": "Juan 11:40",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 40,
+     "text": "Jesús le dice: ¿No te he dicho que, si creyeres, verás la gloria de Dios?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "Jesús le dice: ¿No te he dicho que, si creyeres, verás la gloria de Dios?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:41",
+   "label": "Juan 11:41",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 41,
+     "text": "Entonces quitaron la piedra de donde el muerto había sido puesto. Y Jesús, alzando los ojos arriba, dijo: Padre, gracias te doy que me has oído."
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "Entonces quitaron la piedra de donde el muerto había sido puesto. Y Jesús, alzando los ojos arriba, dijo: Padre, gracias te doy que me has oído."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:43",
+   "label": "Juan 11:43",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 43,
+     "text": "Y habiendo dicho estas cosas, clamó á gran voz: Lázaro, ven fuera."
+    }
+   ],
+   "segments": [
+    {
+     "v": 43,
+     "speaker": "narrator",
+     "text": "Y habiendo dicho estas cosas, clamó á gran voz: Lázaro, ven fuera."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:44",
+   "label": "Juan 11:44",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 44,
+     "text": "Y el que había estado muerto, salió, atadas las manos y los pies con vendas; y su rostro estaba envuelto en un sudario. Díceles Jesús: Desatadle, y dejadle ir."
+    }
+   ],
+   "segments": [
+    {
+     "v": 44,
+     "speaker": "narrator",
+     "text": "Y el que había estado muerto, salió, atadas las manos y los pies con vendas; y su rostro estaba envuelto en un sudario. Díceles Jesús: Desatadle, y dejadle ir."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lázaro salió. Vivo. Todavía envuelto en las vendas con que lo habían enterrado. Y Jesús les pidió a los que estaban ahí que lo ayudaran a quitárselas."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia no promete que todos los que amamos van a volver esta noche. Pero nos muestra dos cosas que no cambian. Jesús llora con los que lloran. Y él es la resurrección y la vida."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si estás de luto, no tienes que esconder tus lágrimas delante de Dios. Jesús lloró frente a una tumba. Él entiende. Y su palabra a Marta sigue en pie para todos los que creen en él."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 659,
+ "est_seconds": 365,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 11:17-44; Jesus's words only as scripture; says plainly this is not a promise that our dead return tonight; an uncited 'Lazarus died again' line removed; 'resurrección y vida' left in the text, not preached as a status claim."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Grief and the hospital and graveside named gently; Martha's faith honoured, Mary's tears not judged."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

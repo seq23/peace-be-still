@@ -1,0 +1,383 @@
+{
+ "id": "core-038-two-mothers",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salomón y las dos madres",
+ "passage": {
+  "refs": [
+   "1KI 3:16-28"
+  ],
+  "label": "1 Reyes 3:16-28"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "first-woman",
+   "name": "mujer",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "king",
+   "name": "rey",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Salomón era un rey joven. Al principio de su reinado, Dios le preguntó en un sueño qué quería, y Salomón no pidió riquezas ni una vida larga. Pidió sabiduría para gobernar bien a su pueblo. Y Dios se la dio."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Poco después, dos mujeres llegaron al palacio con un problema que nadie más podía resolver."
+  },
+  {
+   "type": "scripture",
+   "speaker": "first-woman",
+   "ref": "1KI 3:17",
+   "label": "1 Reyes 3:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Y dijo la una mujer: ¡Ah, señor mío! yo y esta mujer morábamos en una misma casa, y yo parí estando con ella en la casa."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Y dijo la una mujer:"
+    },
+    {
+     "v": 17,
+     "speaker": "first-woman",
+     "text": "¡Ah, señor mío! yo y esta mujer morábamos en una misma casa, y yo parí estando con ella en la casa."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Dios da sabiduría para ver la verdad cuando nadie más la ve.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "first-woman",
+   "ref": "1KI 3:18",
+   "label": "1 Reyes 3:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y aconteció al tercer día después que yo parí, que ésta parió también, y morábamos nosotras juntas; ninguno de fuera estaba en casa, sino nosotras dos en la casa."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "first-woman",
+     "text": "Y aconteció al tercer día después que yo parí, que ésta parió también, y morábamos nosotras juntas; ninguno de fuera estaba en casa, sino nosotras dos en la casa."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "first-woman",
+   "ref": "1KI 3:19-21",
+   "label": "1 Reyes 3:19-21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y una noche el hijo de esta mujer murió, porque ella se acostó sobre él."
+    },
+    {
+     "v": 20,
+     "text": "Y levantóse á media noche, y tomó á mi hijo de junto á mí, estando yo tu sierva durmiendo, y púsolo á su lado, y púsome á mi lado su hijo muerto."
+    },
+    {
+     "v": 21,
+     "text": "Y como yo me levanté por la mañana para dar el pecho á mi hijo, he aquí que estaba muerto: mas observéle por la mañana, y vi que no era mi hijo, que yo había parido."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "first-woman",
+     "text": "Y una noche el hijo de esta mujer murió, porque ella se acostó sobre él."
+    },
+    {
+     "v": 20,
+     "speaker": "first-woman",
+     "text": "Y levantóse á media noche, y tomó á mi hijo de junto á mí, estando yo tu sierva durmiendo, y púsolo á su lado, y púsome á mi lado su hijo muerto."
+    },
+    {
+     "v": 21,
+     "speaker": "first-woman",
+     "text": "Y como yo me levanté por la mañana para dar el pecho á mi hijo, he aquí que estaba muerto: mas observéle por la mañana, y vi que no era mi hijo, que yo había parido."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Una de las dos mujeres había perdido a su bebé en la noche. Y la otra decía que le habían cambiado al niño mientras dormía. No había testigos. Solo las dos mujeres, un niño vivo y la palabra de una contra la otra."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 3:22",
+   "label": "1 Reyes 3:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Entonces la otra mujer dijo: No; mi hijo es el que vive, y tu hijo es el muerto. Y la otra volvió á decir: No; tu hijo es el muerto, y mi hijo es el que vive. Así hablaban delante del rey."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Entonces la otra mujer dijo: No; mi hijo es el que vive, y tu hijo es el muerto. Y la otra volvió á decir: No; tu hijo es el muerto, y mi hijo es el que vive. Así hablaban delante del rey."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ninguna cedía. Y el rey tenía que decidir. ¿Cómo saber cuál decía la verdad?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "1KI 3:24",
+   "label": "1 Reyes 3:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Y dijo el rey: Traedme un cuchillo. Y trajeron al rey un cuchillo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y dijo el rey:"
+    },
+    {
+     "v": 24,
+     "speaker": "king",
+     "text": "Traedme un cuchillo."
+    },
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y trajeron al rey un cuchillo."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "1KI 3:25",
+   "label": "1 Reyes 3:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "En seguida el rey dijo: Partid por medio el niño vivo, y dad la mitad á la una, y la otra mitad á la otra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "En seguida el rey dijo:"
+    },
+    {
+     "v": 25,
+     "speaker": "king",
+     "text": "Partid por medio el niño vivo, y dad la mitad á la una, y la otra mitad á la otra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Todos en la sala se quedaron sin aliento. Pero Salomón no quería hacerle daño al niño. Sabía que una madre verdadera se iba a delatar a sí misma."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 3:26",
+   "label": "1 Reyes 3:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Entonces la mujer cuyo era el hijo vivo, habló al rey (porque sus entrañas se le conmovieron por su hijo), y dijo: ¡Ah, señor mío! dad á ésta el niño vivo, y no lo matéis. Mas la otra dijo: Ni á mí ni á ti; partidlo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Entonces la mujer cuyo era el hijo vivo, habló al rey (porque sus entrañas se le conmovieron por su hijo), y dijo: ¡Ah, señor mío! dad á ésta el niño vivo, y no lo matéis. Mas la otra dijo: Ni á mí ni á ti; partidlo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La verdadera madre prefirió perder a su hijo antes que verlo morir. Su amor se notó en lo que estaba dispuesta a dejar. La otra, en cambio, ya no pensaba en el niño. Solo quería ganar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "1KI 3:27",
+   "label": "1 Reyes 3:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Entonces el rey respondió, y dijo: Dad á aquélla el hijo vivo, y no lo matéis: ella es su madre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Entonces el rey respondió, y dijo:"
+    },
+    {
+     "v": 27,
+     "speaker": "king",
+     "text": "Dad á aquélla el hijo vivo, y no lo matéis: ella es su madre."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 3:28",
+   "label": "1 Reyes 3:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Y todo Israel oyó aquel juicio que había dado el rey: y temieron al rey, porque vieron que había en él sabiduría de Dios para juzgar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Y todo Israel oyó aquel juicio que había dado el rey: y temieron al rey, porque vieron que había en él sabiduría de Dios para juzgar."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Todo Israel supo que Dios le había dado sabiduría a su rey. Y aquella madre regresó a su casa con su hijo en los brazos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es notable que la Biblia guarde esta historia. Eran dos mujeres sin nombre ni poder, de las que la gente no hacía caso. Y aun así el rey las escuchó, y Dios se ocupó de que se hiciera justicia para la madre y para el niño."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "También vemos cómo es el amor de una madre. No es el que grita más fuerte ni el que quiere ganar. Es el que pone primero la vida del otro."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche tienes que tomar una decisión difícil y no sabes qué hacer, puedes pedirle a Dios lo que pidió Salomón. Sabiduría. La Biblia dice que él la da con generosidad al que se la pide. Y si alguna vez te han acusado sin que nadie te creyera, recuerda que Dios ve la verdad aunque los demás no la vean."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 678,
+ "est_seconds": 376,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Kgs 3:16-28 (the dream of 3:5-12 as setting; James 1:5 alluded to, not quoted); scripture starts at v17, so the women's trade is not voiced to a bedtime listener (sexual none, as the other tellings); the death of the infant told off the page."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Two poor women shown as people the king listened to; a mother's love named without sentimentality."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

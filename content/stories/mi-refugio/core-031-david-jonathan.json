@@ -1,0 +1,362 @@
+{
+ "id": "core-031-david-jonathan",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "David y Jonathán",
+ "passage": {
+  "refs": [
+   "1SA 18:1-4",
+   "1SA 20:35-42"
+  ],
+  "label": "1 Samuel 18:1-4; 1 Samuel 20:35-42"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jonathan",
+   "name": "Jonathán",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "David era un joven pastor que acababa de vencer al gigante Goliat. El rey Saúl lo llamó al palacio. Y allí David conoció a Jonathán, el hijo mayor del rey, el que un día debía heredar el trono."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 18:1",
+   "label": "1 Samuel 18:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y ASÍ que él hubo acabado de hablar con Saúl, el alma de Jonathán fué ligada con la de David, y amólo Jonathán como á su alma."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y ASÍ que él hubo acabado de hablar con Saúl, el alma de Jonathán fué ligada con la de David, y amólo Jonathán como á su alma."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno por darnos amigos fieles en los días difíciles.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 18:3-4",
+   "label": "1 Samuel 18:3-4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "E hicieron alianza Jonathán y David, porque él le amaba como á su alma."
+    },
+    {
+     "v": 4,
+     "text": "Y Jonathán se desnudó la ropa que tenía sobre sí, y dióla á David, y otras ropas suyas, hasta su espada, y su arco, y su talabarte."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "E hicieron alianza Jonathán y David, porque él le amaba como á su alma."
+    },
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y Jonathán se desnudó la ropa que tenía sobre sí, y dióla á David, y otras ropas suyas, hasta su espada, y su arco, y su talabarte."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jonathán le dio a David su manto, su ropa, su espada, su arco y su cinturón. Eran las cosas de un príncipe. Era como decirle que lo honraba y que estaba de su lado, aunque sabía que el pueblo empezaba a amar a David más que a nadie."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Con el tiempo, Saúl se llenó de celos. Veía que Dios estaba con David, y trató de matarlo más de una vez. David tuvo que esconderse. Y Jonathán quedó en medio, entre su padre y su amigo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los dos se pusieron de acuerdo en una señal. David se escondería en el campo. Jonathán averiguaría qué pensaba hacer el rey. Y luego saldría a tirar flechas. Si las flechas caían más allá del muchacho que las recogía, era señal de que David tenía que huir."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jonathán descubrió la verdad. Su padre quería matar a David. Y cuando Jonathán lo defendió, el rey se enojó tanto con él que le arrojó una lanza a él también."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 20:35",
+   "label": "1 Samuel 20:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Al otro día de mañana, salió Jonathán al campo, al tiempo aplazado con David, y un mozo pequeño con él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Al otro día de mañana, salió Jonathán al campo, al tiempo aplazado con David, y un mozo pequeño con él."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonathan",
+   "ref": "1SA 20:36",
+   "label": "1 Samuel 20:36",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 36,
+     "text": "Y dijo á su mozo: Corre y busca las saetas que yo tirare. Y como el muchacho iba corriendo, él tiraba la saeta que pasara más allá de él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "Y dijo á su mozo:"
+    },
+    {
+     "v": 36,
+     "speaker": "jonathan",
+     "text": "Corre y busca las saetas que yo tirare."
+    },
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "Y como el muchacho iba corriendo, él tiraba la saeta que pasara más allá de él."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 20:37-39",
+   "label": "1 Samuel 20:37-39",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 37,
+     "text": "Y llegando el muchacho adonde estaba la saeta que Jonathán había tirado, Jonathán dió voces tras el muchacho, diciendo: ¿No está la saeta más allá de ti?"
+    },
+    {
+     "v": 38,
+     "text": "Y tornó á gritar Jonathán tras el muchacho: Date priesa, aligera, no te pares. Y el muchacho de Jonathán cogió las saetas, y vínose á su señor."
+    },
+    {
+     "v": 39,
+     "text": "Empero ninguna cosa entendió el muchacho: solamente Jonathán y David entendían el negocio."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Y llegando el muchacho adonde estaba la saeta que Jonathán había tirado, Jonathán dió voces tras el muchacho, diciendo: ¿No está la saeta más allá de ti?"
+    },
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "Y tornó á gritar Jonathán tras el muchacho: Date priesa, aligera, no te pares. Y el muchacho de Jonathán cogió las saetas, y vínose á su señor."
+    },
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "Empero ninguna cosa entendió el muchacho: solamente Jonathán y David entendían el negocio."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Una flecha que cayó lejos. Esa era la respuesta. David no podía volver."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 20:40",
+   "label": "1 Samuel 20:40",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 40,
+     "text": "Luego dió Jonathán sus armas á su muchacho, y díjole: Vete y llévalas á la ciudad."
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "Luego dió Jonathán sus armas á su muchacho, y díjole: Vete y llévalas á la ciudad."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 20:41",
+   "label": "1 Samuel 20:41",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 41,
+     "text": "Y luego que el muchacho se hubo ido, se levantó David de la parte del mediodía, é inclinóse tres veces postrándose hasta la tierra: y besándose el uno al otro, lloraron el uno con el otro, aunque David lloró más."
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "Y luego que el muchacho se hubo ido, se levantó David de la parte del mediodía, é inclinóse tres veces postrándose hasta la tierra: y besándose el uno al otro, lloraron el uno con el otro, aunque David lloró más."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En aquel tiempo, los hombres se saludaban y se despedían así, con un beso, como hermanos. Lloraron juntos. Sabían que tal vez no se volverían a ver en mucho tiempo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonathan",
+   "ref": "1SA 20:42",
+   "label": "1 Samuel 20:42",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 42,
+     "text": "Y Jonathán dijo á David: Vete en paz, que ambos hemos jurado por el nombre de Jehová, diciendo: Jehová sea entre mí y ti, entre mi simiente y la simiente tuya, para siempre. Y él se levantó y fuése: y Jonathán se entró en la ciudad."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "Y Jonathán dijo á David:"
+    },
+    {
+     "v": 42,
+     "speaker": "jonathan",
+     "text": "Vete en paz, que ambos hemos jurado por el nombre de Jehová, diciendo: Jehová sea entre mí y ti, entre mi simiente y la simiente tuya, para siempre."
+    },
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "Y él se levantó y fuése: y Jonathán se entró en la ciudad."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jonathán pudo pensar en sí mismo. David le iba a quitar el trono que le tocaba. Pero Jonathán no vio a David como un rival. Lo vio como el escogido de Dios, y como su hermano."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La amistad de Jonathán costó mucho. Le costó la paz con su padre, la corona y su seguridad. Y aun así fue fiel."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Una amistad así es un regalo de Dios. Un amigo que te dice la verdad, que te protege, que se alegra cuando a ti te va bien aunque a él no. Si tienes un amigo así, da gracias a Dios por él esta noche. Y si te toca ser ese amigo para alguien, que el Señor te dé un corazón como el de Jonathán."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 679,
+ "est_seconds": 376,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:24:09",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Sam 18:1-4 and 20:35-42 (Saul's jealousy and the spear of 20:33 told in words); covenant friendship before God kept as the text frames it."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The farewell kiss explained as the period's greeting between men, with no modern reading imposed; friendship honoured for any listener."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
