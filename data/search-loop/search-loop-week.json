@@ -2,13 +2,13 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W47",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-18T17:02:11.065Z",
+  "generated_at": "2026-11-18T20:37:45.579Z",
   "state": "slow",
-  "published": 0,
-  "indexed": 0,
+  "published": 3,
+  "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
-  "ai_visitors": "not read: no day this week was collected",
-  "ai_bot_hits": "not read: no day this week was collected",
+  "ai_visitors": 0,
+  "ai_bot_hits": 42,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
@@ -62,19 +62,139 @@
       "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
       "matched_by": "high token overlap (0.67 >= 0.6)",
       "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep kjv",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep and peace",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "same wording",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep and rest",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep and anxiety",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep-and-anxiety/",
+      "matched_by": "same wording",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep protection",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep and comfort",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleeping at night",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 for sleep",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 meditation for sleep",
+      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 audio for sleep",
+      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 sleep meditation abide",
+      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 sleep rain",
+      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 23 for sleep",
+      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses to help me sleep",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses to relax and sleep",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "calming bible verses for sleep",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep when stressed",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep paralysis",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 bedtime prayer",
+      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible asmr sleep",
+      "strengthen": "https://peacebestillapp.com/questions/bible-asmr/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
     }
   ],
   "cap": {
     "max_live_pages": 10,
-    "live": 0,
-    "room": 10,
+    "live": 3,
+    "room": 7,
     "why": "held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data"
   },
   "notes": [
     "site config lowers the mode to slow",
-    "NAMED NOTE [CAP_HELD_NO_DATA] cap held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data",
-    "BUILD distinct gate: 8 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
-    "BUILD published 0 of quota 3: 8 draft(s) failed the gate and were dropped; 0 got no answer from the free model and stay queued"
+    "BUILD distinct gate: 20 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD gate notes (not blocking): 3 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json",
+    "IndexNow: 3 new page(s) not live yet; submitted when they answer 200"
   ],
   "lanes": {
     "ratio": {
@@ -88,7 +208,7 @@
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
     },
     "striking": {
-      "pages": 0,
+      "pages": 3,
       "measured": 0,
       "top3": 0,
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
@@ -102,5 +222,5 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44354043655"
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44393007290"
 }

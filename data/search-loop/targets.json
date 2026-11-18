@@ -1961,6 +1961,186 @@
   ],
   "strengthen": [
     {
+      "query": "bible asmr sleep",
+      "page": "/questions/bible-asmr/",
+      "url": "https://peacebestillapp.com/questions/bible-asmr/",
+      "score": 15,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 bedtime prayer",
+      "page": "/questions/psalm-91-prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep paralysis",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep when stressed",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "calming bible verses for sleep",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses to relax and sleep",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses to help me sleep",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 23 for sleep",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 sleep rain",
+      "page": "/questions/psalm-91-prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 sleep meditation abide",
+      "page": "/questions/psalm-91-prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 audio for sleep",
+      "page": "/questions/psalm-91-prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 meditation for sleep",
+      "page": "/questions/psalm-91-prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "psalm 91 for sleep",
+      "page": "/questions/psalms-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleeping at night",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep and comfort",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep protection",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep and anxiety",
+      "page": "/questions/bible-verses-for-sleep-and-anxiety/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep-and-anxiety/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "same wording",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep and rest",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep and peace",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "same wording",
+      "at": "2026-11-18"
+    },
+    {
+      "query": "bible verses for sleep kjv",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-18"
+    },
+    {
       "query": "psalms to help me sleep",
       "page": "/questions/psalms-for-sleep/",
       "url": "https://peacebestillapp.com/questions/psalms-for-sleep/",
