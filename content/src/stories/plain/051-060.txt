@@ -1,0 +1,315 @@
+# Plain telling, core stories 51-60. Written by Claude (no free-model draft), then Claude's pastor and cultural read.
+
+=== core-051-cana | Water into Wine at Cana
+passage: JOH 2:1-11
+shelf: adult
+violence: none
+sexual: none
+cast: mother|the mother of Jesus|adult|f; governor|governor of the feast|adult|m
+N: A wedding in a small village was a big event. Families planned for months. The feast could last for days, and the whole town came. Running out of food or wine would shame the new couple in front of everyone they knew.
+S: JOH 2:1
+S: JOH 2:2
+N: Partway through the celebration, something went wrong. Mary noticed before most people did.
+S: JOH 2:3 @mother after "the mother of Jesus saith unto him, "
+N: She did not tell him what to do. She simply told him the need.
+S: JOH 2:4
+N: Woman was not a rude word in that time. It was respectful, the way a son might speak to his mother in public. Still, Jesus told her his time had not yet come. Mary did not argue. She turned to the servants.
+S: JOH 2:5 @mother after "His mother saith unto the servants, "
+N: That is one of the best pieces of advice in the whole Bible, and it came from his mother.
+S: JOH 2:6
+N: These were big stone jars, used for washing hands before meals. Each one held about twenty or thirty gallons.
+S: JOH 2:7
+N: To the brim. The servants did not fill them halfway. They hauled water from the well, jar after jar, until there was no room left.
+S: JOH 2:8
+S: JOH 2:9
+N: The man in charge of the feast had no idea what had happened. The bride and groom did not know either. Only the servants knew, the ones who had carried the water.
+S: JOH 2:10 @governor after "And saith unto him, "
+N: Usually the best wine came out first, while people could still tell the difference. This was better than anything they had poured all night.
+S: JOH 2:11
+N: His first sign was not in a temple or in front of a crowd. It was at a family party, to save a young couple from embarrassment. Jesus cared about the ordinary joys of ordinary people. And the ones who saw it up close were the servants who did what he said, even when they could not see why.
+
+=== core-052-balaam | Balaam's Donkey
+passage: NUM 22:21-35
+shelf: adult
+violence: mild
+sexual: none
+cast: ass|ass|adult|f; balaam|Balaam|adult|m
+N: Israel was camped on the plains of Moab, and Balak, the king of Moab, was afraid of them. He sent for a man named Balaam, who was known for speaking blessings and curses. Balak offered him great rewards to come and curse Israel.
+N: God had told Balaam not to curse the people he had blessed. Then God let him go with the king's men, on one condition. He must say only what God told him to say.
+S: NUM 22:21
+S: NUM 22:22
+N: Balaam could not see what stood in the road. His donkey could.
+S: NUM 22:23
+S: NUM 22:24
+S: NUM 22:25
+S: NUM 22:26
+S: NUM 22:27
+N: Three times the donkey saved his life, and three times he beat her for it. He was so set on where he was going that he never stopped to ask why she would not go.
+S: NUM 22:28 @ass after "and she said unto Balaam, "
+S: NUM 22:29 @balaam after "And Balaam said unto the ass, "
+N: Balaam was so angry he did not even stop to wonder that a donkey was talking to him. He just argued back.
+S: NUM 22:30 @ass after "And the ass said unto Balaam, " until "And he said, Nay."
+N: She had carried him faithfully for years. She had never done anything like this before. Something had to be wrong.
+S: NUM 22:31
+S: NUM 22:32
+S: NUM 22:33
+N: The donkey that he beat was the one who kept him alive.
+S: NUM 22:34 @balaam after "And Balaam said unto the angel of the LORD, "
+S: NUM 22:35
+N: Later, when Balaam stood on the hills above Israel's camp, he opened his mouth to speak for the king. And every time, only blessing came out. God would not let his people be cursed.
+N: It is a funny story, and it is meant to be. A famous man who claimed to see what others could not was out-seen by his own donkey. Sometimes the thing that stops us on the road is not against us. It may be God's mercy, standing in the way.
+
+=== core-053-lost-sheep | The Lost Sheep
+passage: LUK 15:1-7
+shelf: adult
+violence: none
+sexual: none
+cast: pharisees|Pharisees|adult|group
+N: Wherever Jesus went, all kinds of people came close to listen. Some of them were the people everyone else stayed away from.
+S: LUK 15:1
+N: Publicans were tax collectors who worked for Rome. Most people saw them as traitors and cheats. Sinners meant anyone known for living wrong. And Jesus did not keep them at a distance. He sat down and ate with them.
+S: LUK 15:2 @pharisees after "murmured, saying, "
+N: The religious leaders meant it as a complaint. They could not understand why a teacher of God would sit at that table. So Jesus told them a story.
+S: LUK 15:3
+S: LUK 15:4
+N: A hundred sheep is a lot of sheep to look after. Losing one might not seem like much. A careful businessman might say, ninety-nine is good enough. But a shepherd does not think that way. He knows each one.
+N: So he goes out. Over the rocks, through the brush, calling into the dark, until he hears that one small cry. It may take all night. The ninety-nine are safe together. The one alone is the one in danger, and the shepherd will not rest until it is found.
+S: LUK 15:5
+N: He does not scold the sheep. He does not make it walk home on its own. He picks it up and carries it across his shoulders, and he is glad the whole way back.
+S: LUK 15:6
+N: He cannot keep the joy to himself. He calls his friends and neighbors and throws a celebration for one lost sheep.
+S: LUK 15:7
+N: The people who were grumbling thought the ones at the table were too far gone. Jesus told them heaven sees it the other way. When one person who wandered off comes home, heaven does not shrug. Heaven rejoices.
+N: This is one of three stories Jesus told that day. A lost sheep, a lost coin, and a lost son. Each one ends the same way, with something found and a party thrown.
+N: Some people hear this story and think of someone they love who has wandered off. Some people hear it and know they are the one that is lost. Either way, the story is clear about the shepherd. He does not wait for the sheep to find its own way back. He goes looking, and when he finds it, he carries it home with joy.
+
+=== core-054-rachel-leah | Rachel and Leah
+passage: GEN 29:9-30
+shelf: adult
+violence: none
+sexual: implied
+cast: laban|Laban|adult|m; jacob|Jacob|adult|m
+N: Jacob had run from home after he tricked his brother Esau. He traveled a long way east, to the land where his mother's family lived. At a well in the fields, he asked the shepherds if they knew a man named Laban. They did. And here came his daughter now.
+S: GEN 29:9
+S: GEN 29:10
+S: GEN 29:11
+N: He had come all that way alone, not knowing what he would find. Now he was standing in front of his own family. No wonder he wept.
+S: GEN 29:12
+S: GEN 29:13
+N: Jacob stayed and worked for a month. Then his uncle spoke to him about wages.
+S: GEN 29:15 @laban after "And Laban said unto Jacob, "
+S: GEN 29:16
+S: GEN 29:17
+N: The Bible says Leah had tender eyes. No one is sure exactly what that meant. What is clear is that Jacob only had eyes for her younger sister.
+S: GEN 29:18 @jacob after "and said, "
+S: GEN 29:19 @laban after "And Laban said, "
+S: GEN 29:20
+N: Seven years of work, and they felt like a few days. That is how much he loved her.
+N: When the seven years were over, Jacob asked for his bride, and Laban threw a wedding feast. But that night, Laban brought Leah instead of Rachel. In the dark, and under the veil, Jacob did not know.
+S: GEN 29:25 @jacob after "and he said to Laban, "
+N: Jacob had once fooled his own father in the dark by pretending to be his older brother. Now he was the one who had been fooled, by a father swapping the younger for the older.
+S: GEN 29:26 @laban after "And Laban said, "
+S: GEN 29:27 @laban whole
+S: GEN 29:28
+S: GEN 29:30
+N: It is not a happy story. Jacob was tricked. Rachel was kept waiting. And Leah was given to a man who did not want her, and she knew it.
+N: But the very next verse says that the LORD saw that Leah was not loved. He saw her. Leah's sons became fathers of tribes in Israel. One of them was Judah, and from Judah's family came King David, and in time, Jesus. The sister nobody chose was never overlooked by God.
+
+=== core-055-rich-man-lazarus | The Rich Man and Lazarus
+passage: LUK 16:19-31
+shelf: adult
+violence: none
+sexual: none
+cast: richman|rich man|adult|m; abraham|Abraham|elder|m
+N: Jesus told this story to people who loved money and were proud of how religious they were.
+S: LUK 16:19
+S: LUK 16:20
+S: LUK 16:21
+N: Every day, the rich man went in and out through that gate. Every day, Lazarus lay there, hungry and sick. The only ones who came near him were the street dogs. The rich man did not hurt him. He just never saw him.
+N: It is the only story Jesus told where a person in it has a name. The rich man has none. The beggar is called Lazarus, which means God helps.
+S: LUK 16:22
+S: LUK 16:23
+N: Now everything was turned around. The man who had everything was the one in need.
+S: LUK 16:24 @richman after "And he cried and said, "
+N: Even now, he talked about Lazarus as someone who could be sent to serve him.
+S: LUK 16:25 @abraham after "But Abraham said, "
+S: LUK 16:26 @abraham whole
+N: Then the rich man thought of his brothers, still living the way he had lived.
+S: LUK 16:27 @richman after "Then he said, "
+S: LUK 16:28 @richman whole
+S: LUK 16:29 @abraham after "Abraham saith unto him, "
+S: LUK 16:30 @richman after "And he said, "
+S: LUK 16:31 @abraham after "And he said unto him, "
+N: Moses and the prophets meant the scriptures they already had. God's word had told them all along to care for the poor and the stranger at the gate. A miracle would not change a heart that would not listen to that.
+N: Jesus himself would soon rise from the dead, and some still would not believe.
+N: This story is not a map of the life to come. It is a warning for the life we are living now. The rich man was not lost because he was rich. He was lost in his heart long before he died, because a hungry man lay at his door every day and he never once opened it. The story asks who is lying at our gate, and whether we will see them while there is still time.
+
+=== core-056-washing-feet | Jesus Washes Their Feet
+passage: JOH 13:1-17
+shelf: adult
+violence: none
+sexual: none
+cast: peter|Peter|adult|m
+N: It was the last night before the cross. Jesus and his friends were together for the Passover meal.
+S: JOH 13:1
+S: JOH 13:2
+S: JOH 13:3
+N: Jesus knew exactly who he was. He knew everything had been put into his hands. And here is what he did with those hands.
+S: JOH 13:4
+S: JOH 13:5
+N: The roads were dusty, and people walked everywhere in sandals. Washing feet was the lowest job in the house, the work of a servant. No one at that table had offered to do it. So the teacher got down on the floor and did it himself.
+S: JOH 13:6 @peter after "and Peter saith unto him, "
+S: JOH 13:7
+N: Peter could not bear the thought of his Lord kneeling in front of him like a servant.
+S: JOH 13:8 @peter after "Peter saith unto him, " until "Jesus answered him"
+N: So Peter swung all the way to the other side, the way Peter often did.
+S: JOH 13:9 @peter after "Simon Peter saith unto him, "
+S: JOH 13:10
+S: JOH 13:11
+N: Jesus knew that Judas would betray him that very night. He washed Judas's feet too.
+S: JOH 13:12
+S: JOH 13:13
+S: JOH 13:14
+S: JOH 13:15
+N: He did not only tell them to serve. He showed them, on his knees, with a towel and a bowl of water.
+S: JOH 13:16
+S: JOH 13:17
+N: Knowing it is not the same as doing it. Jesus said the blessing is in the doing.
+N: The one who had every right to be served chose to serve. He knelt in front of the friend who would deny him, and the friend who would betray him, and washed them all. Then he asked his friends to do the same for each other. Not to be seen, and not because anyone deserved it, but because that is what love looks like when it gets down on the floor.
+
+=== core-057-damascus-road | Saul on the Damascus Road
+passage: ACT 9:1-19
+shelf: adult
+violence: mild
+sexual: none
+cast: saul|Saul|adult|m; ananias|Ananias|adult|m
+N: After Jesus rose and went back to heaven, his followers began to tell everyone about him. Some leaders wanted them silenced. One young man was fiercer about it than anyone.
+S: ACT 9:1
+S: ACT 9:2
+N: The way was what the first believers called their new life in Jesus. Saul wanted every one of them in chains.
+S: ACT 9:3
+S: ACT 9:4
+S: ACT 9:5 @saul after "And he said, " until "And the Lord said"
+N: Saul thought he was fighting a few people who had gone wrong. Jesus said that when Saul hurt them, he was hurting Jesus.
+S: ACT 9:6 @saul after "And he trembling and astonished said, " until "And the Lord said"
+S: ACT 9:7
+S: ACT 9:8
+S: ACT 9:9
+N: The man who set out to drag others to Jerusalem had to be led by the hand. For three days he sat in the dark and did not eat.
+S: ACT 9:10 @ananias after "And he said, "
+S: ACT 9:11
+S: ACT 9:12
+N: Ananias knew that name. Everyone in the church knew that name.
+S: ACT 9:13 @ananias after "Then Ananias answered, "
+S: ACT 9:14 @ananias whole
+N: It was an honest fear. He was being asked to walk into the house of the man who came to arrest people like him.
+S: ACT 9:15
+S: ACT 9:16
+N: So Ananias went. He did not go halfway, and he did not keep his distance.
+S: ACT 9:17 @ananias after "putting his hands on him said, "
+N: Brother Saul. The first word Saul heard from a follower of Jesus was brother. The man he came to hunt called him family.
+S: ACT 9:18
+S: ACT 9:19
+N: Saul would become Paul, who carried the good news across the world and wrote many letters in the New Testament. But that day he was a blind man in a borrowed room, and God sent an ordinary believer, afraid and willing, to put his hands on him. No one is too far gone for God to turn around. And sometimes God sends one of us to be the first to say, brother.
+
+=== core-058-at-the-cross | At the Cross
+passage: LUK 23:33-47
+shelf: adult
+violence: mild
+sexual: none
+cast: rulers|rulers|adult|group; soldiers|soldiers|adult|group; railer|one of the malefactors|adult|m; other|the other|adult|m; centurion|centurion|adult|m
+N: Jesus had been arrested in the night, questioned, beaten and sentenced. Now they led him outside the city walls to a hill, with two other men who were to be put to death beside him.
+S: LUK 23:33
+N: The first words he spoke from the cross were a prayer.
+S: LUK 23:34
+N: He prayed for the very people who were putting him to death. Even there, he was forgiving.
+S: LUK 23:35 @rulers after "derided him, saying, "
+S: LUK 23:36
+S: LUK 23:37 @soldiers after "And saying, "
+S: LUK 23:38
+N: Save yourself. They said it over and over. The leaders, the soldiers, and then one of the men dying beside him. They could not understand that he was staying on that cross on purpose. He saved others by not saving himself.
+S: LUK 23:39 @railer after "railed on him, saying, "
+S: LUK 23:40 @other after "rebuked him, saying, "
+S: LUK 23:41 @other whole
+N: The second man had nothing left to offer. No good works, no time to fix his life. Only a few words.
+S: LUK 23:42 @other after "And he said unto Jesus, "
+S: LUK 23:43
+N: Today. Not someday. A dying man asked only to be remembered, and Jesus gave him a promise.
+S: LUK 23:44
+S: LUK 23:45
+N: Darkness at noon. The thick curtain in the temple, which hung before the holiest place, tore down the middle.
+S: LUK 23:46
+N: He did not have his life taken from him like a man who has lost. He gave it into his Father's hands.
+S: LUK 23:47
+N: A Roman soldier, who had seen many men die, watched this one and gave glory to God.
+N: The cross is the hardest place in the whole story, and it is where the love of God is seen most clearly. Jesus forgave the people who hurt him. He welcomed a dying man who had nothing to bring. And he trusted his Father all the way to the end. The story does not stop here. But it is right to stand here a while, and be still, and remember what he did.
+
+=== core-059-he-is-risen | Mary Magdalene at the Tomb
+passage: JOH 20:1-18
+shelf: adult
+violence: none
+sexual: none
+cast: mary|Mary Magdalene|adult|f
+N: Jesus had died on the cross on Friday. His friends laid his body in a tomb cut into the rock, and a great stone was rolled across the door. Then came the Sabbath, a day of rest and waiting. Sunday morning, before the sun was up, Mary went back.
+S: JOH 20:1
+S: JOH 20:2 @mary after "and saith unto them, "
+S: JOH 20:3
+S: JOH 20:4
+N: The two of them ran the whole way. The other disciple got there first, and the gospel makes a point of saying so. It is easy to hear a little smile in that.
+S: JOH 20:6
+S: JOH 20:7
+N: Grave robbers do not stop to fold the cloth. Whatever had happened in that tomb, it had not been done in a hurry.
+S: JOH 20:8
+S: JOH 20:9
+S: JOH 20:10
+N: The men went home. Mary could not leave.
+S: JOH 20:11
+S: JOH 20:12
+S: JOH 20:13 @mary after "She saith unto them, "
+N: She was so full of grief that even angels did not stop her. All she wanted was to find him.
+S: JOH 20:14
+S: JOH 20:15 @mary after "the gardener, saith unto him, "
+N: Her eyes were full of tears, and it was early, and the last thing she expected was to see him alive. She thought he was the man who kept the garden.
+N: Then he said one word.
+S: JOH 20:16 @mary after "and saith unto him, " until "which is to say"
+N: Her name. That was all it took. She had heard him say it many times before, and she knew that voice anywhere.
+S: JOH 20:17
+S: JOH 20:18
+N: The first person to see Jesus risen was a woman standing by a grave in tears. He did not first appear to a crowd or to the leaders. He came to the one who stayed, and he called her by her name. Then he sent her to tell the others. She went, and her message was the oldest good news there is. I have seen the Lord.
+
+=== core-060-emmaus | The Road to Emmaus
+passage: LUK 24:13-35
+shelf: adult
+violence: none
+sexual: none
+cast: cleopas|Cleopas|adult|m; two|two of them|adult|group
+N: It was the Sunday after Jesus died. Some of the women had come back from the tomb that morning with a strange report, but most of his friends did not believe them. That afternoon, two of his followers set out from Jerusalem to walk home.
+S: LUK 24:13
+S: LUK 24:14
+S: LUK 24:15
+S: LUK 24:16
+N: They did not know him. Their hearts were too heavy, and something kept their eyes from seeing.
+S: LUK 24:17
+S: LUK 24:18 @cleopas after "answering said unto him, "
+N: Jesus asked them what had happened. He let them tell it.
+S: LUK 24:19 @two after "And they said unto him, "
+S: LUK 24:20 @two whole
+S: LUK 24:21 @two whole
+N: We trusted. We had hoped. Those may be some of the saddest words two people can say together. They had believed he was the one, and now he was dead, and their hope had died with him.
+S: LUK 24:22 @two whole
+S: LUK 24:23 @two whole
+S: LUK 24:24 @two whole
+N: Then the stranger began to talk. He went back to the beginning, to Moses and the prophets, and showed them how the scriptures had pointed all along to a Messiah who would suffer and then enter his glory.
+S: LUK 24:27
+S: LUK 24:28
+S: LUK 24:29 @two after "saying, " until "And he went in"
+N: They did not want him to go. Evening was coming on, and they asked him to stay. He did.
+S: LUK 24:30
+S: LUK 24:31
+N: The moment he broke the bread, they knew him. And then he was gone.
+S: LUK 24:32 @two after "And they said one to another, "
+N: It had been a long walk, about seven miles. Now, with night falling, they got straight up and went all the way back.
+S: LUK 24:33
+S: LUK 24:34 @two after "Saying, "
+S: LUK 24:35
+N: They set out that day walking away from Jerusalem, sad and done. Jesus came alongside them on the road before they even knew it was him. He listened to their broken hopes, opened the scriptures to them, and stayed when they asked him to. Some days we are walking the Emmaus road too. He still draws near, sometimes before we know it is him.
