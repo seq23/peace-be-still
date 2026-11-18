@@ -1,0 +1,43 @@
+name: Site
+on:
+  pull_request:
+    paths: ["site/**", ".github/workflows/site.yml"]
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/site.yml"]
+  workflow_dispatch:
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node site/scripts/check-site.mjs
+  deploy:
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Cloudflare (peacebestillapp.com)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: site
+          wranglerVersion: "4.76.0"
+          command: deploy
+      - name: Smoke test the live site
+        run: |
+          sleep 10
+          for u in https://peacebestillapp.com/ https://peacebestillapp.com/es/ https://peacebestillapp.com/privacy https://peacebestillapp.com/terms https://peacebestillapp.com/sitemap.xml; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$u"); echo "$code $u"; [ "$code" = 200 ] || exit 1
+          done
+          loc=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' https://www.peacebestillapp.com/); echo "www: $loc"
+          [ "$loc" = "301 https://peacebestillapp.com/" ] || exit 1
