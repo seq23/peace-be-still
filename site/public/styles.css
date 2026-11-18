@@ -134,7 +134,7 @@ section{padding-top:56px;padding-bottom:56px}
 .site-foot nav a{min-height:44px;display:inline-flex;align-items:center}
 
 /* plain pages (privacy, terms) */
-.doc{max-width:42em;padding:24px 0 56px;display:flex;flex-direction:column;gap:18px}
+.doc{max-width:42em;padding-top:24px;padding-bottom:56px;display:flex;flex-direction:column;gap:18px}
 .doc h2{font-size:22px;margin-top:12px}
 .doc ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 
