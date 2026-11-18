@@ -1,4 +1,11 @@
 {
+ "gemini-3.1-flash-tts-preview": {
+  "at": "2026-11-18T13:45:00-06:00",
+  "by": "owner ear",
+  "note": "Owner listened to Hush Harbor story 1 rendered on this model and approved it (\"yes sounds great approved\", 18 Nov 2026). Similarity scores to be logged as the baseline after its quota resets (--vet); the owner's approval stands either way.",
+  "passed": true,
+  "roles": {}
+ },
  "gemini-3.8-flash-lite-tts": {
   "at": "2026-11-18T13:34:50-06:00",
   "passed": false,
