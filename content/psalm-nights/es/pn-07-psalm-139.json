@@ -1,0 +1,264 @@
+{
+ "id": "pn-07-psalm-139",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 139: Tú me has examinado",
+ "main": [
+  "PSA 139:1-18"
+ ],
+ "companions": [
+  "PSA 4:8"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola. Esta es una noche de Salmos. [pause 4]\n\nPonte cómodo. Cierra los ojos si quieren cerrarse. [pause 6]\n\nEsta noche leemos parte del Salmo ciento treinta y nueve. Es un salmo sobre ser conocido. Conocido por completo. Y no ser dejado. [pause 6]\n\nEs una lectura larga, así que vamos a ir despacio. [pause 9]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 139:1-18",
+   "label": "Salmos 139:1-18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: Salmo de David. OH Jehová, tú me has examinado y conocido."
+    },
+    {
+     "v": 2,
+     "text": "Tú has conocido mi sentarme y mi levantarme, has entendido desde lejos mis pensamientos."
+    },
+    {
+     "v": 3,
+     "text": "Mi senda y mi acostarme has rodeado, y estás impuesto en todos mis caminos."
+    },
+    {
+     "v": 4,
+     "text": "Pues aun no está la palabra en mi lengua, y he aquí, oh Jehová, tú la sabes toda."
+    },
+    {
+     "v": 5,
+     "text": "Detrás y delante me guarneciste, y sobre mí pusiste tu mano."
+    },
+    {
+     "v": 6,
+     "text": "Más maravillosa es la ciencia que mi capacidad; alta es, no puedo comprenderla."
+    },
+    {
+     "v": 7,
+     "text": "¿Adónde me iré de tu espíritu? ¿y adónde huiré de tu presencia?"
+    },
+    {
+     "v": 8,
+     "text": "Si subiere á los cielos, allí estás tú: y si en abismo hiciere mi estrado, he aquí allí tú estás."
+    },
+    {
+     "v": 9,
+     "text": "Si tomare las alas del alba, y habitare en el extremo de la mar,"
+    },
+    {
+     "v": 10,
+     "text": "Aun allí me guiará tu mano, y me asirá tu diestra."
+    },
+    {
+     "v": 11,
+     "text": "Si dijere: Ciertamente las tinieblas me encubrirán; aun la noche resplandecerá tocante á mí."
+    },
+    {
+     "v": 12,
+     "text": "Aun las tinieblas no encubren de ti, y la noche resplandece como el día: lo mismo te son las tinieblas que la luz."
+    },
+    {
+     "v": 13,
+     "text": "Porque tú poseiste mis riñones; cubrísteme en el vientre de mi madre."
+    },
+    {
+     "v": 14,
+     "text": "Te alabaré; porque formidables, maravillosas son tus obras: estoy maravillado, y mi alma lo conoce mucho."
+    },
+    {
+     "v": 15,
+     "text": "No fué encubierto de ti mi cuerpo, bien que en oculto fuí formado, y compaginado en lo más bajo de la tierra."
+    },
+    {
+     "v": 16,
+     "text": "Mi embrión vieron tus ojos, y en tu libro estaban escritas todas aquellas cosas que fueron luego formadas, sin faltar una de ellas."
+    },
+    {
+     "v": 17,
+     "text": "Así que ¡cuán preciosos me son, oh Dios, tus pensamientos! ¡cuán multiplicadas son sus cuentas!"
+    },
+    {
+     "v": 18,
+     "text": "Si los cuento, multiplícanse más que la arena: despierto, y aun estoy contigo."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Tú conoces mi sentarme y mi levantarme. Cuando te sientas al final del día, Dios lo sabe. Cuando te levantas en la mañana, él lo sabe. [pause 7]\n\nEl salmo va a todos los lugares adonde una persona podría ir. Los cielos. El sepulcro. El otro lado del mar. Y en todas partes, Dios ya está ahí. [pause 7]\n\nLuego dice algo para esta noche. Para Dios, las tinieblas y la luz son iguales. La oscuridad no te esconde de él. Te ve igual de claro en la noche. [pause 9]\n\nY al final, al despertar, todavía con él. [pause 11]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "En paz me acostaré, y dormiré. Un versículo corto para guardar. [pause 7]\n\nAhora el Salmo ciento treinta y nueve otra vez. Escucha la línea sobre las tinieblas. [pause 11]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 139:1-18",
+   "label": "Salmos 139:1-18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: Salmo de David. OH Jehová, tú me has examinado y conocido."
+    },
+    {
+     "v": 2,
+     "text": "Tú has conocido mi sentarme y mi levantarme, has entendido desde lejos mis pensamientos."
+    },
+    {
+     "v": 3,
+     "text": "Mi senda y mi acostarme has rodeado, y estás impuesto en todos mis caminos."
+    },
+    {
+     "v": 4,
+     "text": "Pues aun no está la palabra en mi lengua, y he aquí, oh Jehová, tú la sabes toda."
+    },
+    {
+     "v": 5,
+     "text": "Detrás y delante me guarneciste, y sobre mí pusiste tu mano."
+    },
+    {
+     "v": 6,
+     "text": "Más maravillosa es la ciencia que mi capacidad; alta es, no puedo comprenderla."
+    },
+    {
+     "v": 7,
+     "text": "¿Adónde me iré de tu espíritu? ¿y adónde huiré de tu presencia?"
+    },
+    {
+     "v": 8,
+     "text": "Si subiere á los cielos, allí estás tú: y si en abismo hiciere mi estrado, he aquí allí tú estás."
+    },
+    {
+     "v": 9,
+     "text": "Si tomare las alas del alba, y habitare en el extremo de la mar,"
+    },
+    {
+     "v": 10,
+     "text": "Aun allí me guiará tu mano, y me asirá tu diestra."
+    },
+    {
+     "v": 11,
+     "text": "Si dijere: Ciertamente las tinieblas me encubrirán; aun la noche resplandecerá tocante á mí."
+    },
+    {
+     "v": 12,
+     "text": "Aun las tinieblas no encubren de ti, y la noche resplandece como el día: lo mismo te son las tinieblas que la luz."
+    },
+    {
+     "v": 13,
+     "text": "Porque tú poseiste mis riñones; cubrísteme en el vientre de mi madre."
+    },
+    {
+     "v": 14,
+     "text": "Te alabaré; porque formidables, maravillosas son tus obras: estoy maravillado, y mi alma lo conoce mucho."
+    },
+    {
+     "v": 15,
+     "text": "No fué encubierto de ti mi cuerpo, bien que en oculto fuí formado, y compaginado en lo más bajo de la tierra."
+    },
+    {
+     "v": 16,
+     "text": "Mi embrión vieron tus ojos, y en tu libro estaban escritas todas aquellas cosas que fueron luego formadas, sin faltar una de ellas."
+    },
+    {
+     "v": 17,
+     "text": "Así que ¡cuán preciosos me son, oh Dios, tus pensamientos! ¡cuán multiplicadas son sus cuentas!"
+    },
+    {
+     "v": 18,
+     "text": "Si los cuento, multiplícanse más que la arena: despierto, y aun estoy contigo."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ahora deja que las palabras se queden en silencio. [pause 8]\n\nNo tienes que sostenerlas. Mañana van a seguir ahí. [pause 10]\n\nSuelta los hombros. Abre las manos. Deja que la cama cargue tu peso. [pause 12]\n\nSi vuelve una preocupación, puedes entregarla otra vez. Las veces que haga falta. [pause 12]\n\nSiente la calma del cuarto. Los ruidos pequeños. La oscuridad. Aquí no se te pide nada. [pause 20]\n\nLa noche es larga y tranquila, y no estás solo en ella. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 813,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 815,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Todo salmo y acompañante es RV1909 guardada, pegada por código; las reflexiones parafrasean en ecos cortos (sin 8+ palabras de escritura tecleada) y se quedan en el punto de cada salmo; ninguna promesa de sueño ni de protección (Salmo 91: 'no dice que nunca va a pasar nada difícil'; Proverbios 3:24 como imagen, no promesa). Dios nunca habla en primera persona fuera de la escritura."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

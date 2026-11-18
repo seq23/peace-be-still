@@ -1,0 +1,210 @@
+{
+ "id": "pn-01-psalm-23",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 23: Jehová es mi pastor",
+ "main": [
+  "PSA 23:1-6"
+ ],
+ "companions": [
+  "PSA 4:8",
+  "JOH 10:11",
+  "ISA 40:11",
+  "JOH 10:14"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola. Te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nAcuéstate como te sientas más a gusto. Tápate bien. Deja el teléfono en un lugar donde no lo tengas que alcanzar. [pause 17]\n\nEsta noche vamos a leer el Salmo veintitrés, despacio, dos veces. Tal vez sea el salmo más querido de todos. Muchos lo aprendieron de niños, y muchos lo han oído junto a la cama de alguien que aman. [pause 16]\n\nNo tienes que hacer nada más que escuchar. [pause 19]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 23:1-6",
+   "label": "Salmos 23:1-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. JEHOVÁ es mi pastor; nada me faltará."
+    },
+    {
+     "v": 2,
+     "text": "En lugares de delicados pastos me hará yacer: junto á aguas de reposo me pastoreará."
+    },
+    {
+     "v": 3,
+     "text": "Confortará mi alma; guiaráme por sendas de justicia por amor de su nombre."
+    },
+    {
+     "v": 4,
+     "text": "Aunque ande en valle de sombra de muerte, no temeré mal alguno; porque tú estarás conmigo: tu vara y tu cayado me infundirán aliento."
+    },
+    {
+     "v": 5,
+     "text": "Aderezarás mesa delante de mí, en presencia de mis angustiadores: ungiste mi cabeza con aceite: mi copa está rebosando."
+    },
+    {
+     "v": 6,
+     "text": "Ciertamente el bien y la misericordia me seguirán todos los días de mi vida: y en la casa de Jehová moraré por largos días."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "El salmo empieza con una palabra pequeña. Mi. [pause 16]\n\nNo un pastor lejano. Mi pastor. David había sido pastor de niño. Sabía lo que era contar las ovejas en la noche, buscarles agua, cargar a la que estaba herida. [pause 17]\n\nUn pastor no les pide a las ovejas que encuentren solas el pasto. Él las guía. Él va adelante. [pause 17]\n\nFíjate que el salmo no finge que no hay valle oscuro. Dice aunque ande en valle de sombra. El valle es real. Pero también es real el que camina contigo por él. [pause 21]\n\nAhora, unos versículos cortos para leer junto a él. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "JOH 10:11",
+   "label": "Juan 10:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Yo soy el buen pastor: el buen pastor su vida da por las ovejas."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 40:11",
+   "label": "Isaías 40:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Como pastor apacentará su rebaño; en su brazo cogerá los corderos, y en su seno los llevará; pastoreará suavemente las paridas."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "JOH 10:14",
+   "label": "Juan 10:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Yo soy el buen pastor; y conozco mis ovejas, y las mías me conocen."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "En paz me acostaré, y dormiré. Es una frase que puedes hacer tuya esta noche. [pause 17]\n\nY el buen pastor, dijo Jesús, da su vida por las ovejas. No se va cuando llega la noche. [pause 17]\n\nIsaías pinta al pastor cargando a los corderitos en su pecho, y guiando con cuidado a las que están criando. Con cuidado. Así te guía esta noche. [pause 19]\n\nAhora vamos a leer el Salmo veintitrés otra vez. Esta vez deja que cada línea llegue antes de que venga la siguiente. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 23:1-6",
+   "label": "Salmos 23:1-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. JEHOVÁ es mi pastor; nada me faltará."
+    },
+    {
+     "v": 2,
+     "text": "En lugares de delicados pastos me hará yacer: junto á aguas de reposo me pastoreará."
+    },
+    {
+     "v": 3,
+     "text": "Confortará mi alma; guiaráme por sendas de justicia por amor de su nombre."
+    },
+    {
+     "v": 4,
+     "text": "Aunque ande en valle de sombra de muerte, no temeré mal alguno; porque tú estarás conmigo: tu vara y tu cayado me infundirán aliento."
+    },
+    {
+     "v": 5,
+     "text": "Aderezarás mesa delante de mí, en presencia de mis angustiadores: ungiste mi cabeza con aceite: mi copa está rebosando."
+    },
+    {
+     "v": 6,
+     "text": "Ciertamente el bien y la misericordia me seguirán todos los días de mi vida: y en la casa de Jehová moraré por largos días."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ahora deja que las palabras se queden en silencio. [pause 8]\n\nNo tienes que sostenerlas. Mañana van a seguir ahí. [pause 10]\n\nSuelta los hombros. Abre las manos. Deja que la cama cargue tu peso. [pause 12]\n\nSi vuelve una preocupación, puedes entregarla otra vez. Las veces que haga falta. [pause 12]\n\nSiente la calma del cuarto. Los ruidos pequeños. La oscuridad. Aquí no se te pide nada. [pause 20]\n\nLa noche es larga y tranquila, y no estás solo en ella. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 605,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 820,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Todo salmo y acompañante es RV1909 guardada, pegada por código; las reflexiones parafrasean en ecos cortos (sin 8+ palabras de escritura tecleada) y se quedan en el punto de cada salmo; ninguna promesa de sueño ni de protección (Salmo 91: 'no dice que nunca va a pasar nada difícil'; Proverbios 3:24 como imagen, no promesa). Dios nunca habla en primera persona fuera de la escritura."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,195 @@
+# Noches de Salmos 1-10 (español de las Américas, Reina-Valera 1909). Escritas por Claude (sin borrador de modelo gratuito), con la lectura pastoral y cultural de Claude. Descansos compartidos: _rest1 a _rest3.
+
+=== _rest1
+text: Ahora deja que las palabras se queden en silencio. [pause 8]
+text: No tienes que sostenerlas. Mañana van a seguir ahí. [pause 10]
+text: Suelta los hombros. Abre las manos. Deja que la cama cargue tu peso. [pause 12]
+text: Si vuelve una preocupación, puedes entregarla otra vez. Las veces que haga falta. [pause 12]
+text: Siente la calma del cuarto. Los ruidos pequeños. La oscuridad. Aquí no se te pide nada. [pause 20]
+text: La noche es larga y tranquila, y no estás solo en ella. [pause 20]
+text: Descansa. [pause 45]
+
+=== _rest2
+text: Ya es suficiente por esta noche. [pause 8]
+text: Deja que tu respiración se haga lenta sola. Entra el aire, sale el aire. No hay nada que arreglar ni nada que terminar. [pause 12]
+text: Lo que haya sido el día de hoy, ya pasó. Mañana todavía no llega. Esto es solo la noche, y la noche también es de Dios. [pause 12]
+text: Deja lo que cargaste. Una cosa, y luego otra. [pause 15]
+text: Si tu mente se va a otra parte, déjala volver despacio. No hay una manera equivocada de descansar. [pause 20]
+text: El Señor está cerca. Más cerca que tu respiración. [pause 20]
+text: Buenas noches. [pause 45]
+
+=== _rest3
+text: Aquí vamos a terminar. [pause 8]
+text: Deja que el cuarto esté oscuro y quieto a tu alrededor. Que la almohada esté fresca. [pause 10]
+text: Esta noche escuchaste su Palabra. Ya no tienes que pensar en ella. Solo descansa en ella. [pause 12]
+text: Todo lo que en ti está cansado, deja que esté cansado. No tienes que ser fuerte ahora. [pause 15]
+text: Que las últimas palabras que oíste sean las que se queden contigo. Lo demás, déjalo ir. [pause 20]
+text: Él está despierto, así que tú puedes dormir. [pause 20]
+text: Que descanses. [pause 45]
+
+=== pn-01-psalm-23 | Salmo 23: Jehová es mi pastor
+main: PSA 23:1-6
+companions: PSA 4:8; JOH 10:11; ISA 40:11; JOH 10:14
+welcome: Hola. Te doy la bienvenida a esta noche de Salmos. [pause 14]
+welcome: Acuéstate como te sientas más a gusto. Tápate bien. Deja el teléfono en un lugar donde no lo tengas que alcanzar. [pause 17]
+welcome: Esta noche vamos a leer el Salmo veintitrés, despacio, dos veces. Tal vez sea el salmo más querido de todos. Muchos lo aprendieron de niños, y muchos lo han oído junto a la cama de alguien que aman. [pause 16]
+welcome: No tienes que hacer nada más que escuchar. [pause 19]
+reflect1: El salmo empieza con una palabra pequeña. Mi. [pause 16]
+reflect1: No un pastor lejano. Mi pastor. David había sido pastor de niño. Sabía lo que era contar las ovejas en la noche, buscarles agua, cargar a la que estaba herida. [pause 17]
+reflect1: Un pastor no les pide a las ovejas que encuentren solas el pasto. Él las guía. Él va adelante. [pause 17]
+reflect1: Fíjate que el salmo no finge que no hay valle oscuro. Dice aunque ande en valle de sombra. El valle es real. Pero también es real el que camina contigo por él. [pause 21]
+reflect1: Ahora, unos versículos cortos para leer junto a él. [pause 15]
+reflect2: En paz me acostaré, y dormiré. Es una frase que puedes hacer tuya esta noche. [pause 17]
+reflect2: Y el buen pastor, dijo Jesús, da su vida por las ovejas. No se va cuando llega la noche. [pause 17]
+reflect2: Isaías pinta al pastor cargando a los corderitos en su pecho, y guiando con cuidado a las que están criando. Con cuidado. Así te guía esta noche. [pause 19]
+reflect2: Ahora vamos a leer el Salmo veintitrés otra vez. Esta vez deja que cada línea llegue antes de que venga la siguiente. [pause 21]
+rest: rest1
+
+=== pn-02-psalm-4 | Salmo 4: En paz me acostaré
+main: PSA 4:1-8
+companions: PSA 3:5; PRO 3:24; PSA 127:2
+welcome: Te doy la bienvenida a esta noche de Salmos. [pause 9]
+welcome: Baja las luces, o apágalas. Deja que tu cuerpo se hunda un poco en la cama. [pause 12]
+welcome: El salmo de esta noche es el Salmo cuatro. Es un salmo para la noche. Empieza con un hombre que clama a Dios en medio de la angustia, y termina con ese mismo hombre acostándose a dormir. [pause 11]
+welcome: Ese es todo el camino de esta noche. De las preocupaciones del día a la calma de la cama. Lo vamos a leer dos veces. [pause 14]
+reflect1: El salmo dice que, en tu cama, hables con tu corazón y te quedes quieto. [pause 12]
+reflect1: Es un buen consejo para el final del día. No repasar todo otra vez. No volver a discutir con el día. Solo estar quieto, y dejar que Dios vea tu corazón como está. [pause 14]
+reflect1: En medio del salmo hay una línea sobre la alegría. Dios le dio más alegría en el corazón que la que sienten otros cuando su cosecha es grande. La cosecha de otros parecía más grande. Pero la alegría que Dios le dio era suficiente. [pause 14]
+reflect1: Ahora, unos versículos que hablan del sueño. [pause 10]
+reflect2: Me acosté, dormí, desperté. Palabras sencillas. David las escribió cuando huía para salvar su vida, y aun así descansó. [pause 12]
+reflect2: Y el proverbio habla de un sueño suave. No es una promesa para cada noche, sino una imagen de lo que puede ser descansar en Dios. [pause 12]
+reflect2: Y el Salmo ciento veintisiete dice que de nada sirve madrugar y acostarse tarde comiendo pan de preocupación. Él da sueño a sus amados. Por hoy ya puedes dejar de trabajar. [pause 14]
+reflect2: Aquí está el Salmo cuatro otra vez, desde el principio. Escucha el último versículo. Que sean tus propias palabras esta noche. [pause 16]
+rest: rest2
+
+=== pn-03-psalm-121 | Salmo 121: El que te guarda
+main: PSA 121:1-8
+companions: ISA 40:28-31; ISA 41:10
+welcome: Hola. Esta es una noche de Salmos. [pause 11]
+welcome: Acomódate. Deja que tu cabeza encuentre el lugar más suave de la almohada. [pause 14]
+welcome: Esta noche leemos el Salmo ciento veintiuno. Era un canto para los que iban de viaje. La gente lo cantaba en el largo camino de subida a Jerusalén, mirando los montes y preguntándose qué los esperaba allí. [pause 13]
+welcome: Lo vamos a leer despacio, y luego otra vez. [pause 16]
+reflect1: Alzo mis ojos a los montes. El viajero mira hacia arriba y hace la pregunta honesta. ¿De dónde me vendrá la ayuda? [pause 14]
+reflect1: Y la respuesta no son los montes. Es el que los hizo. [pause 14]
+reflect1: Escucha la palabra que se repite. Guardar. El que te guarda. Jehová es tu guardador. Una y otra vez en ocho versículos cortos. El salmo lo repite como se le repite algo a un niño que le tiene miedo a la oscuridad. [pause 14]
+reflect1: El que te guarda no se duerme. Tú puedes cerrar los ojos. Él no cierra los suyos. [pause 18]
+reflect1: Ahora, unas palabras de Isaías para los que esta noche están cansados. [pause 12]
+reflect2: Él da fuerzas al cansado. No al fuerte. Al cansado. Si esta noche estás agotado, esas palabras se escribieron pensando en ti. [pause 14]
+reflect2: Esperar en el Señor no es tiempo perdido. Así es como los cansados recobran fuerzas. [pause 14]
+reflect2: Y otra palabra de Isaías. No temas, porque yo estoy contigo. Él te sostiene con su mano. Esta noche no tienes que sostenerte tú solo. [pause 16]
+reflect2: Ahora el Salmo ciento veintiuno otra vez. Deja que la palabra guardar se quede contigo mientras escuchas. [pause 18]
+rest: rest3
+
+=== pn-04-psalm-91 | Salmo 91: Debajo de sus alas
+main: PSA 91:1-16
+companions: PSA 4:8
+welcome: Te doy la bienvenida a esta noche de Salmos. [pause 10]
+welcome: Ponte cómodo. No tienes que estar en ningún otro lugar. [pause 12]
+welcome: Esta noche leemos el Salmo noventa y uno. Muchas personas lo oran de noche, y lo oran por su familia. Está lleno de imágenes de refugio. Un lugar escondido. Una sombra. Unas alas. Un escudo. [pause 12]
+welcome: Lo vamos a leer dos veces, despacio. [pause 15]
+reflect1: El que habita al abrigo del Altísimo. El salmo empieza con el lugar donde vives, no con lo que temes. [pause 13]
+reflect1: La imagen del versículo cuatro es la de un ave que junta a sus pollitos debajo de sus alas. Las plumas encima de ellos, cálidas y cerca, mientras afuera sigue la noche. [pause 13]
+reflect1: Este salmo se ha orado en hospitales y en guerras, en tormentas y en noches largas esperando una llamada. No dice que nunca va a pasar nada difícil. Dice que Dios estará con él en la angustia. [pause 17]
+reflect1: Un versículo más para esta noche. [pause 11]
+reflect2: En paz. Acostarse. Dormir. Vivir confiado, porque solo el Señor da esa seguridad. [pause 13]
+reflect2: Aquí está el Salmo noventa y uno otra vez. Puedes imaginar esas alas mientras escuchas. [pause 17]
+rest: rest1
+
+=== pn-05-psalm-46 | Salmo 46: Quédense quietos
+main: PSA 46:1-11
+companions: ISA 26:3; PHI 4:6-7
+welcome: Hola, te doy la bienvenida. Esta es una noche de Salmos. [pause 6]
+welcome: Deja que el día se vaya. Afloja la quijada. Deja las manos abiertas. [pause 9]
+welcome: Esta noche leemos el Salmo cuarenta y seis. Es un salmo para cuando sientes que la tierra se mueve. Montes, aguas, naciones, todo alborotado. Y en medio de todo, un río tranquilo. [pause 8]
+welcome: Lo vamos a leer dos veces. [pause 11]
+reflect1: Refugio, fortaleza, ayuda en la angustia. Y muy cercana. No lejos. No para después. Aquí. [pause 9]
+reflect1: El salmo se imagina lo peor. La tierra que tiembla, los montes que caen al mar. Y luego dice, por tanto, no temeremos. [pause 9]
+reflect1: Después viene un río, cuyas corrientes alegran la ciudad de Dios. No una inundación. Un río. Constante y callado, mientras todo lo demás ruge. [pause 9]
+reflect1: Y al final, Dios habla. Quédense quietos, y sepan que él es Dios. Esta noche no tienes que arreglar el mundo. Puedes estar quieto. [pause 13]
+reflect1: Unas palabras de Isaías para acompañarlo. [pause 7]
+reflect2: Paz completa. Guardado en ella, con una mente que descansa en él. No es algo que tengas que fabricar. Es algo en lo que te pueden guardar. [pause 9]
+reflect2: Y Pablo, escribiendo desde una cárcel, nos dice que llevemos todo a Dios en oración, con gratitud, y que la paz de Dios guardará nuestros corazones. Una paz que no tiene que tener sentido. [pause 11]
+reflect2: Aquí está el Salmo cuarenta y seis otra vez. Cuando oigas que Dios dice que estemos quietos, deja que tu cuerpo responda. [pause 13]
+rest: rest2
+
+=== pn-06-psalm-131 | Salmo 131: Como un niño destetado
+main: PSA 131:1-3
+companions: MAT 11:28-30; ISA 30:15; PSA 62:1-2; PSA 116:7
+welcome: Te doy la bienvenida a esta noche de Salmos. [pause 14]
+welcome: Recuéstate. Deja que la almohada reciba tu cabeza. Deja que tu respiración encuentre su propio ritmo. [pause 17]
+welcome: El salmo de esta noche es uno de los más cortos de la Biblia. El Salmo ciento treinta y uno. Solo tres versículos. Es un salmo para las personas que piensan demasiado de noche. [pause 16]
+welcome: Lo vamos a leer despacio, y luego otra vez. [pause 19]
+reflect1: El salmista dice que no anda en cosas demasiado grandes ni demasiado altas para él. [pause 16]
+reflect1: Hay cosas que son muy grandes para resolverlas esta noche. El salmo te da permiso de dejarlas. No tienes que entenderlo todo antes de poder descansar. [pause 19]
+reflect1: Luego viene la imagen de un niño destetado. No un bebé que llora porque tiene hambre, sino un pequeño que ya comió y está contento, recostado en su mamá. Quieto. Tranquilo. Ahí. [pause 19]
+reflect1: Así es un alma que descansa en Dios. No porque todas las preguntas tengan respuesta. Porque alguien te sostiene. [pause 21]
+reflect1: Ahora, unos versículos más. [pause 15]
+reflect2: Vengan a mí todos los que están cansados y cargados. Jesús se lo dijo a gente cansada. No les pidió que primero estuvieran menos cansados. [pause 17]
+reflect2: En descanso y en reposo, dice Isaías. En quietud y en confianza, la fortaleza. La calma no es debilidad. Puede ser fuerza. [pause 19]
+reflect2: Y dos más de los Salmos. Mi alma espera en silencio a Dios. Y, vuelve, oh alma mía, a tu reposo. Te lo puedes decir a ti mismo esta noche. Vuelve a tu reposo. [pause 21]
+reflect2: Aquí está el Salmo ciento treinta y uno otra vez. Tres versículos. Que sean lentos. [pause 23]
+rest: rest3
+
+=== pn-07-psalm-139 | Salmo 139: Tú me has examinado
+main: PSA 139:1-18
+companions: PSA 4:8
+welcome: Hola. Esta es una noche de Salmos. [pause 4]
+welcome: Ponte cómodo. Cierra los ojos si quieren cerrarse. [pause 6]
+welcome: Esta noche leemos parte del Salmo ciento treinta y nueve. Es un salmo sobre ser conocido. Conocido por completo. Y no ser dejado. [pause 6]
+welcome: Es una lectura larga, así que vamos a ir despacio. [pause 9]
+reflect1: Tú conoces mi sentarme y mi levantarme. Cuando te sientas al final del día, Dios lo sabe. Cuando te levantas en la mañana, él lo sabe. [pause 7]
+reflect1: El salmo va a todos los lugares adonde una persona podría ir. Los cielos. El sepulcro. El otro lado del mar. Y en todas partes, Dios ya está ahí. [pause 7]
+reflect1: Luego dice algo para esta noche. Para Dios, las tinieblas y la luz son iguales. La oscuridad no te esconde de él. Te ve igual de claro en la noche. [pause 9]
+reflect1: Y al final, al despertar, todavía con él. [pause 11]
+reflect2: En paz me acostaré, y dormiré. Un versículo corto para guardar. [pause 7]
+reflect2: Ahora el Salmo ciento treinta y nueve otra vez. Escucha la línea sobre las tinieblas. [pause 11]
+rest: rest1
+
+=== pn-08-psalm-62 | Salmo 62: En Dios solamente
+main: PSA 62:1-8
+companions: ISA 26:3-4; PSA 18:2; MAT 11:28
+welcome: Te doy la bienvenida a esta noche de Salmos. [pause 13]
+welcome: Deja que tu cuerpo se acomode. Por hoy ya no queda nada que hacer. [pause 16]
+welcome: El salmo de esta noche es el Salmo sesenta y dos. David lo escribió cuando había gente tratando de derribarlo. Y sin embargo el salmo es tranquilo. Habla de esperar, y de una roca que no se mueve. [pause 15]
+welcome: Lo vamos a leer dos veces. [pause 18]
+reflect1: Mi alma espera en silencio a Dios. No ansiosa. No con prisa. Esperando. [pause 16]
+reflect1: Tres veces el salmo llama a Dios roca. Una roca no es rápida. No cambia de opinión. Puedes apoyar todo tu peso en ella y sigue firme. [pause 16]
+reflect1: Luego hay una línea para decir en el corazón. Confía en él en todo tiempo. Derrama delante de él tu corazón. [pause 16]
+reflect1: Puedes derramarlo esta noche. Todo. La preocupación, la herida, lo que no dijiste. Él lo puede sostener. [pause 20]
+reflect1: Unas palabras de Isaías para acompañarlo. [pause 14]
+reflect2: La fortaleza de los siglos. Una roca eterna. La misma imagen, en otro libro, siglos después. [pause 16]
+reflect2: El Salmo dieciocho junta las mismas imágenes. Roca, castillo, libertador, escudo, refugio alto. Y Jesús, en el evangelio, dice vengan a mí, y yo los haré descansar. [pause 18]
+reflect2: Aquí está el Salmo sesenta y dos otra vez. Deja que tu alma espere mientras escuchas. [pause 20]
+rest: rest2
+
+=== pn-09-psalm-3 | Salmo 3: Yo me acosté y dormí
+main: PSA 3:1-8
+companions: PSA 4:8; PSA 121:3-4; PRO 3:24
+welcome: Hola, te doy la bienvenida a esta noche de Salmos. [pause 14]
+welcome: Busca tu lugar. Que las cobijas se sientan pesadas y calientitas. [pause 17]
+welcome: Esta noche leemos el Salmo tres. El título dice que David lo escribió cuando huía de su propio hijo, Absalom. Su familia estaba rota, había perdido su ciudad, y dormía a la intemperie. [pause 16]
+welcome: Y aun así, este salmo tiene algunas de las palabras más tranquilas sobre el sueño en toda la Biblia. Lo vamos a leer dos veces. [pause 19]
+reflect1: Señor, cuántos son mis problemas. El salmo empieza con honestidad. Hay muchos problemas. Muchas voces que dicen que Dios no lo va a ayudar. [pause 17]
+reflect1: Luego David voltea. Pero tú, Señor, eres mi escudo. Un escudo alrededor. Y el que levanta mi cabeza. [pause 17]
+reflect1: Piensa en alguien que con cariño te levanta la barbilla cuando estás muy cansado o muy triste para mirar hacia arriba. Esa es la imagen. [pause 17]
+reflect1: Luego el versículo cinco. Se acostó, durmió, despertó, porque el Señor lo sostenía. En la peor semana de su vida, David durmió. [pause 21]
+reflect1: Unos versículos para acompañarlo. [pause 15]
+reflect2: En paz, acostarse y dormir. El Salmo tres y el Salmo cuatro están juntos, como una oración de la mañana y una de la noche. [pause 17]
+reflect2: Y el Salmo ciento veintiuno dice que el que guarda a Israel no se adormece ni se duerme. El proverbio habla de acostarse sin temor. Alguien está velando. [pause 19]
+reflect2: Aquí está el Salmo tres otra vez. Cuando llegues al versículo cinco, que sea tuyo. [pause 21]
+rest: rest3
+
+=== pn-10-psalm-27 | Salmo 27: Jehová es mi luz
+main: PSA 27:1-14
+companions: PSA 4:8
+welcome: Te doy la bienvenida a esta noche de Salmos. [pause 3]
+welcome: Deja que el cuarto quede en silencio a tu alrededor. Deja que tu respiración se haga lenta. [pause 5]
+welcome: Esta noche es el Salmo veintisiete. Empieza con luz y termina con espera. En medio hay miedo, hay anhelo, y hay un lugar tranquilo en la casa de Dios. [pause 5]
+welcome: Es un salmo largo. Vamos a tomarnos nuestro tiempo. [pause 8]
+reflect1: El Señor es mi luz. Puedes estar acostado en un cuarto oscuro y aun así tener luz. La luz no es solo lo que ven los ojos. [pause 6]
+reflect1: En medio del salmo, David dice la única cosa que quiere. Estar en la casa del Señor, y contemplar su hermosura. No una lista larga. Una sola cosa. [pause 6]
+reflect1: Y luego hay una línea que ha consolado a muchos que fueron dejados por las personas que amaban. Aunque padre y madre me dejen, el Señor me recogerá. [pause 8]
+reflect1: El salmo termina con esperar. Espera en el Señor. Esperar no es lo mismo que no pase nada. Es confianza sostenida en el tiempo. [pause 10]
+reflect2: En paz. Acostarse. Dormir. Seguridad en él. [pause 6]
+reflect2: Aquí está el Salmo veintisiete otra vez. Que la primera línea sea la que recuerdes. [pause 10]
+rest: rest1

@@ -1,0 +1,198 @@
+{
+ "id": "pn-06-psalm-131",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 131: Como un niño destetado",
+ "main": [
+  "PSA 131:1-3"
+ ],
+ "companions": [
+  "MAT 11:28-30",
+  "ISA 30:15",
+  "PSA 62:1-2",
+  "PSA 116:7"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nRecuéstate. Deja que la almohada reciba tu cabeza. Deja que tu respiración encuentre su propio ritmo. [pause 17]\n\nEl salmo de esta noche es uno de los más cortos de la Biblia. El Salmo ciento treinta y uno. Solo tres versículos. Es un salmo para las personas que piensan demasiado de noche. [pause 16]\n\nLo vamos a leer despacio, y luego otra vez. [pause 19]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 131:1-3",
+   "label": "Salmos 131:1-3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Cántico gradual: de David. JEHOVÁ, no se ha envanecido mi corazón, ni mis ojos se enaltecieron; ni anduve en grandezas, ni en cosas para mí demasiado sublimes."
+    },
+    {
+     "v": 2,
+     "text": "En verdad que me he comportado y he acallado mi alma, como un niño destetado de su madre: como un niño destetado está mi alma."
+    },
+    {
+     "v": 3,
+     "text": "Espera, oh Israel, en Jehová desde ahora y para siempre."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "El salmista dice que no anda en cosas demasiado grandes ni demasiado altas para él. [pause 16]\n\nHay cosas que son muy grandes para resolverlas esta noche. El salmo te da permiso de dejarlas. No tienes que entenderlo todo antes de poder descansar. [pause 19]\n\nLuego viene la imagen de un niño destetado. No un bebé que llora porque tiene hambre, sino un pequeño que ya comió y está contento, recostado en su mamá. Quieto. Tranquilo. Ahí. [pause 19]\n\nAsí es un alma que descansa en Dios. No porque todas las preguntas tengan respuesta. Porque alguien te sostiene. [pause 21]\n\nAhora, unos versículos más. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 11:28-30",
+   "label": "Mateo 11:28-30",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Venid á mí todos los que estáis trabajados y cargados, que yo os haré descansar."
+    },
+    {
+     "v": 29,
+     "text": "Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas."
+    },
+    {
+     "v": 30,
+     "text": "Porque mi yugo es fácil, y ligera mi carga."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 30:15",
+   "label": "Isaías 30:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Porque así dijo el Señor Jehová, el Santo de Israel: En descanso y en reposo seréis salvos; en quietud y en confianza será vuestra fortaleza. Y no quisisteis,"
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 62:1-2",
+   "label": "Salmos 62:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: á Jeduthún: Salmo de David. EN Dios solamente está acallada mi alma: de él viene mi salud."
+    },
+    {
+     "v": 2,
+     "text": "El solamente es mi fuerte, y mi salud; es mi refugio, no resbalaré mucho."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 116:7",
+   "label": "Salmos 116:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Vuelve, oh alma mía, á tu reposo; porque Jehová te ha hecho bien."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Vengan a mí todos los que están cansados y cargados. Jesús se lo dijo a gente cansada. No les pidió que primero estuvieran menos cansados. [pause 17]\n\nEn descanso y en reposo, dice Isaías. En quietud y en confianza, la fortaleza. La calma no es debilidad. Puede ser fuerza. [pause 19]\n\nY dos más de los Salmos. Mi alma espera en silencio a Dios. Y, vuelve, oh alma mía, a tu reposo. Te lo puedes decir a ti mismo esta noche. Vuelve a tu reposo. [pause 21]\n\nAquí está el Salmo ciento treinta y uno otra vez. Tres versículos. Que sean lentos. [pause 23]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 131:1-3",
+   "label": "Salmos 131:1-3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Cántico gradual: de David. JEHOVÁ, no se ha envanecido mi corazón, ni mis ojos se enaltecieron; ni anduve en grandezas, ni en cosas para mí demasiado sublimes."
+    },
+    {
+     "v": 2,
+     "text": "En verdad que me he comportado y he acallado mi alma, como un niño destetado de su madre: como un niño destetado está mi alma."
+    },
+    {
+     "v": 3,
+     "text": "Espera, oh Israel, en Jehová desde ahora y para siempre."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí vamos a terminar. [pause 8]\n\nDeja que el cuarto esté oscuro y quieto a tu alrededor. Que la almohada esté fresca. [pause 10]\n\nEsta noche escuchaste su Palabra. Ya no tienes que pensar en ella. Solo descansa en ella. [pause 12]\n\nTodo lo que en ti está cansado, deja que esté cansado. No tienes que ser fuerte ahora. [pause 15]\n\nQue las últimas palabras que oíste sean las que se queden contigo. Lo demás, déjalo ir. [pause 20]\n\nÉl está despierto, así que tú puedes dormir. [pause 20]\n\nQue descanses. [pause 45]"
+  }
+ ],
+ "words": 584,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 816,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Todo salmo y acompañante es RV1909 guardada, pegada por código; las reflexiones parafrasean en ecos cortos (sin 8+ palabras de escritura tecleada) y se quedan en el punto de cada salmo; ninguna promesa de sueño ni de protección (Salmo 91: 'no dice que nunca va a pasar nada difícil'; Proverbios 3:24 como imagen, no promesa). Dios nunca habla en primera persona fuera de la escritura."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

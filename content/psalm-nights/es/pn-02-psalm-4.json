@@ -1,0 +1,212 @@
+{
+ "id": "pn-02-psalm-4",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 4: En paz me acostaré",
+ "main": [
+  "PSA 4:1-8"
+ ],
+ "companions": [
+  "PSA 3:5",
+  "PRO 3:24",
+  "PSA 127:2"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 9]\n\nBaja las luces, o apágalas. Deja que tu cuerpo se hunda un poco en la cama. [pause 12]\n\nEl salmo de esta noche es el Salmo cuatro. Es un salmo para la noche. Empieza con un hombre que clama a Dios en medio de la angustia, y termina con ese mismo hombre acostándose a dormir. [pause 11]\n\nEse es todo el camino de esta noche. De las preocupaciones del día a la calma de la cama. Lo vamos a leer dos veces. [pause 14]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:1-8",
+   "label": "Salmos 4:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: sobre Neginoth: Salmo de David. RESPÓNDEME cuando clamo, oh Dios de mi justicia: estando en angustia, tú me hiciste ensanchar: ten misericordia de mí, y oye mi oración."
+    },
+    {
+     "v": 2,
+     "text": "Hijos de los hombres, ¿hasta cuándo volveréis mi honra en infamia, amaréis la vanidad, y buscaréis la mentira? (Selah.)"
+    },
+    {
+     "v": 3,
+     "text": "Sabed pues, que Jehová hizo apartar al pío para sí: Jehová oirá cuando yo á él clamare."
+    },
+    {
+     "v": 4,
+     "text": "Temblad, y no pequéis: conversad en vuestro corazón sobre vuestra cama, y desistid. (Selah.)"
+    },
+    {
+     "v": 5,
+     "text": "Ofreced sacrificios de justicia, y confiad en Jehová."
+    },
+    {
+     "v": 6,
+     "text": "Muchos dicen: ¿Quién nos mostrará el bien? Alza sobre nosotros, oh Jehová, la luz de tu rostro."
+    },
+    {
+     "v": 7,
+     "text": "Tú diste alegría en mi corazón, más que tienen ellos en el tiempo que se multiplicó su grano y su mosto."
+    },
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "El salmo dice que, en tu cama, hables con tu corazón y te quedes quieto. [pause 12]\n\nEs un buen consejo para el final del día. No repasar todo otra vez. No volver a discutir con el día. Solo estar quieto, y dejar que Dios vea tu corazón como está. [pause 14]\n\nEn medio del salmo hay una línea sobre la alegría. Dios le dio más alegría en el corazón que la que sienten otros cuando su cosecha es grande. La cosecha de otros parecía más grande. Pero la alegría que Dios le dio era suficiente. [pause 14]\n\nAhora, unos versículos que hablan del sueño. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 3:5",
+   "label": "Salmos 3:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Yo me acosté, y dormí, y desperté; porque Jehová me sostuvo."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PRO 3:24",
+   "label": "Proverbios 3:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Cuando te acostares, no tendrás temor; antes te acostarás, y tu sueño será suave."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 127:2",
+   "label": "Salmos 127:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Por demás os es el madrugar á levantaros, el veniros tarde á reposar, el comer pan de dolores: pues que á su amado dará Dios el sueño."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Me acosté, dormí, desperté. Palabras sencillas. David las escribió cuando huía para salvar su vida, y aun así descansó. [pause 12]\n\nY el proverbio habla de un sueño suave. No es una promesa para cada noche, sino una imagen de lo que puede ser descansar en Dios. [pause 12]\n\nY el Salmo ciento veintisiete dice que de nada sirve madrugar y acostarse tarde comiendo pan de preocupación. Él da sueño a sus amados. Por hoy ya puedes dejar de trabajar. [pause 14]\n\nAquí está el Salmo cuatro otra vez, desde el principio. Escucha el último versículo. Que sean tus propias palabras esta noche. [pause 16]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:1-8",
+   "label": "Salmos 4:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: sobre Neginoth: Salmo de David. RESPÓNDEME cuando clamo, oh Dios de mi justicia: estando en angustia, tú me hiciste ensanchar: ten misericordia de mí, y oye mi oración."
+    },
+    {
+     "v": 2,
+     "text": "Hijos de los hombres, ¿hasta cuándo volveréis mi honra en infamia, amaréis la vanidad, y buscaréis la mentira? (Selah.)"
+    },
+    {
+     "v": 3,
+     "text": "Sabed pues, que Jehová hizo apartar al pío para sí: Jehová oirá cuando yo á él clamare."
+    },
+    {
+     "v": 4,
+     "text": "Temblad, y no pequéis: conversad en vuestro corazón sobre vuestra cama, y desistid. (Selah.)"
+    },
+    {
+     "v": 5,
+     "text": "Ofreced sacrificios de justicia, y confiad en Jehová."
+    },
+    {
+     "v": 6,
+     "text": "Muchos dicen: ¿Quién nos mostrará el bien? Alza sobre nosotros, oh Jehová, la luz de tu rostro."
+    },
+    {
+     "v": 7,
+     "text": "Tú diste alegría en mi corazón, más que tienen ellos en el tiempo que se multiplicó su grano y su mosto."
+    },
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ya es suficiente por esta noche. [pause 8]\n\nDeja que tu respiración se haga lenta sola. Entra el aire, sale el aire. No hay nada que arreglar ni nada que terminar. [pause 12]\n\nLo que haya sido el día de hoy, ya pasó. Mañana todavía no llega. Esto es solo la noche, y la noche también es de Dios. [pause 12]\n\nDeja lo que cargaste. Una cosa, y luego otra. [pause 15]\n\nSi tu mente se va a otra parte, déjala volver despacio. No hay una manera equivocada de descansar. [pause 20]\n\nEl Señor está cerca. Más cerca que tu respiración. [pause 20]\n\nBuenas noches. [pause 45]"
+  }
+ ],
+ "words": 712,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 814,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Todo salmo y acompañante es RV1909 guardada, pegada por código; las reflexiones parafrasean en ecos cortos (sin 8+ palabras de escritura tecleada) y se quedan en el punto de cada salmo; ninguna promesa de sueño ni de protección (Salmo 91: 'no dice que nunca va a pasar nada difícil'; Proverbios 3:24 como imagen, no promesa). Dios nunca habla en primera persona fuera de la escritura."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

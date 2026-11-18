@@ -1,0 +1,224 @@
+{
+ "id": "pn-05-psalm-46",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 46: Be Still, and Know",
+ "main": [
+  "PSA 46:1-11"
+ ],
+ "companions": [
+  "ISA 26:3",
+  "PHI 4:6-7"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello, and welcome. This is Psalm Nights. [pause 3]\n\nLet the day fall away. Let your jaw loosen. Let your hands rest open. [pause 6]\n\nTonight we read Psalm 46. It is a psalm for when the ground feels like it is moving. Mountains, waters, nations, all in an uproar. And in the middle of it, a quiet river. [pause 5]\n\nWe will read it twice. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 46:1-11",
+   "label": "Psalm 46:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician for the sons of Korah, A Song upon Alamoth. God is our refuge and strength, a very present help in trouble."
+    },
+    {
+     "v": 2,
+     "text": "Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea;"
+    },
+    {
+     "v": 3,
+     "text": "Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof. Selah."
+    },
+    {
+     "v": 4,
+     "text": "There is a river, the streams whereof shall make glad the city of God, the holy place of the tabernacles of the most High."
+    },
+    {
+     "v": 5,
+     "text": "God is in the midst of her; she shall not be moved: God shall help her, and that right early."
+    },
+    {
+     "v": 6,
+     "text": "The heathen raged, the kingdoms were moved: he uttered his voice, the earth melted."
+    },
+    {
+     "v": 7,
+     "text": "The LORD of hosts is with us; the God of Jacob is our refuge. Selah."
+    },
+    {
+     "v": 8,
+     "text": "Come, behold the works of the LORD, what desolations he hath made in the earth."
+    },
+    {
+     "v": 9,
+     "text": "He maketh wars to cease unto the end of the earth; he breaketh the bow, and cutteth the spear in sunder; he burneth the chariot in the fire."
+    },
+    {
+     "v": 10,
+     "text": "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth."
+    },
+    {
+     "v": 11,
+     "text": "The LORD of hosts is with us; the God of Jacob is our refuge. Selah."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "A refuge, a strength, a help in trouble. And very present. Not far off. Not coming later. Here. [pause 6]\n\nThe psalm imagines the worst. The earth moving, the mountains falling into the sea. And then it says, therefore will not we fear. [pause 6]\n\nThen comes a river, whose streams make glad the city of God. Not a flood. A river. Steady and quiet, while everything else roars. [pause 6]\n\nAnd at the end, God speaks. Be still, and know. You do not have to fix the world tonight. You can be still. [pause 10]\n\nA companion verse from Isaiah. [pause 4]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 26:3",
+   "label": "Isaiah 26:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PHI 4:6-7",
+   "label": "Philippians 4:6-7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God."
+    },
+    {
+     "v": 7,
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Perfect peace. Kept in it, by a mind that rests on him. That is not something you have to make happen. It is something you can be kept in. [pause 6]\n\nAnd Paul, writing from a prison cell, tells us to bring everything to God in prayer, with thanks, and the peace of God will keep our hearts. A peace that does not have to make sense. [pause 8]\n\nHere is Psalm 46 again. When you hear be still, let your body answer. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 46:1-11",
+   "label": "Psalm 46:1-11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician for the sons of Korah, A Song upon Alamoth. God is our refuge and strength, a very present help in trouble."
+    },
+    {
+     "v": 2,
+     "text": "Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea;"
+    },
+    {
+     "v": 3,
+     "text": "Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof. Selah."
+    },
+    {
+     "v": 4,
+     "text": "There is a river, the streams whereof shall make glad the city of God, the holy place of the tabernacles of the most High."
+    },
+    {
+     "v": 5,
+     "text": "God is in the midst of her; she shall not be moved: God shall help her, and that right early."
+    },
+    {
+     "v": 6,
+     "text": "The heathen raged, the kingdoms were moved: he uttered his voice, the earth melted."
+    },
+    {
+     "v": 7,
+     "text": "The LORD of hosts is with us; the God of Jacob is our refuge. Selah."
+    },
+    {
+     "v": 8,
+     "text": "Come, behold the works of the LORD, what desolations he hath made in the earth."
+    },
+    {
+     "v": 9,
+     "text": "He maketh wars to cease unto the end of the earth; he breaketh the bow, and cutteth the spear in sunder; he burneth the chariot in the fire."
+    },
+    {
+     "v": 10,
+     "text": "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth."
+    },
+    {
+     "v": 11,
+     "text": "The LORD of hosts is with us; the God of Jacob is our refuge. Selah."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is enough for tonight. [pause 8]\n\nLet your breathing slow down on its own. In, and out. Nothing to fix, nothing to finish. [pause 12]\n\nWhatever today was, it is over now. Tomorrow has not come yet. This is only the night, and the night belongs to God. [pause 12]\n\nLay down what you carried. One thing, and then another. [pause 15]\n\nStay here as long as you like. [pause 15]\n\nIf your mind wanders, let it wander back. There is no wrong way to rest. [pause 20]\n\nThe Lord is near. Nearer than your breath. [pause 20]\n\nGood night. [pause 45]"
+  }
+ ],
+ "words": 811,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 829,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Every psalm and companion is stored KJV pasted by code; reflections paraphrase in short echoes (no 8+ word typed scripture) and stay with each psalm's own point (shepherd, evening rest, keeping, shelter, stillness, quiet soul, being known, waiting, a shield in flight, light and waiting). No promise of sleep or protection: Psalm 91 says plainly it does not promise nothing hard will happen; Proverbs 3:24 framed as 'not a promise for every night'. God never quoted in first person outside scripture. Headings (Ps 3, Absalom) used only as the text's own titles."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,210 @@
+{
+ "id": "pn-03-psalm-121",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 121: El que te guarda",
+ "main": [
+  "PSA 121:1-8"
+ ],
+ "companions": [
+  "ISA 40:28-31",
+  "ISA 41:10"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola. Esta es una noche de Salmos. [pause 11]\n\nAcomódate. Deja que tu cabeza encuentre el lugar más suave de la almohada. [pause 14]\n\nEsta noche leemos el Salmo ciento veintiuno. Era un canto para los que iban de viaje. La gente lo cantaba en el largo camino de subida a Jerusalén, mirando los montes y preguntándose qué los esperaba allí. [pause 13]\n\nLo vamos a leer despacio, y luego otra vez. [pause 16]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 121:1-8",
+   "label": "Salmos 121:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Cántico gradual. ALZARÉ mis ojos á los montes, de donde vendrá mi socorro."
+    },
+    {
+     "v": 2,
+     "text": "Mi socorro viene de Jehová, que hizo los cielos y la tierra."
+    },
+    {
+     "v": 3,
+     "text": "No dará tu pie al resbaladero; ni se dormirá el que te guarda."
+    },
+    {
+     "v": 4,
+     "text": "He aquí, no se adormecerá ni dormirá el que guarda á Israel."
+    },
+    {
+     "v": 5,
+     "text": "Jehová es tu guardador: Jehová es tu sombra á tu mano derecha."
+    },
+    {
+     "v": 6,
+     "text": "El sol no te fatigará de día, ni la luna de noche."
+    },
+    {
+     "v": 7,
+     "text": "Jehová te guardará de todo mal: él guardará tu alma."
+    },
+    {
+     "v": 8,
+     "text": "Jehová guardará tu salida y tu entrada, desde ahora y para siempre."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Alzo mis ojos a los montes. El viajero mira hacia arriba y hace la pregunta honesta. ¿De dónde me vendrá la ayuda? [pause 14]\n\nY la respuesta no son los montes. Es el que los hizo. [pause 14]\n\nEscucha la palabra que se repite. Guardar. El que te guarda. Jehová es tu guardador. Una y otra vez en ocho versículos cortos. El salmo lo repite como se le repite algo a un niño que le tiene miedo a la oscuridad. [pause 14]\n\nEl que te guarda no se duerme. Tú puedes cerrar los ojos. Él no cierra los suyos. [pause 18]\n\nAhora, unas palabras de Isaías para los que esta noche están cansados. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 40:28-31",
+   "label": "Isaías 40:28-31",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "¿No has sabido, no has oído que el Dios del siglo es Jehová, el cual crió los términos de la tierra? No se trabaja, ni se fatiga con cansancio, y su entendimiento no hay quien lo alcance."
+    },
+    {
+     "v": 29,
+     "text": "El da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas."
+    },
+    {
+     "v": 30,
+     "text": "Los mancebos se fatigan y se cansan, los mozos flaquean y caen:"
+    },
+    {
+     "v": 31,
+     "text": "Mas los que esperan á Jehová tendrán nuevas fuerzas; levantarán las alas como águilas; correrán, y no se cansarán; caminarán, y no se fatigarán."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 41:10",
+   "label": "Isaías 41:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "No temas, que yo soy contigo; no desmayes, que yo soy tu Dios que te esfuerzo: siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Él da fuerzas al cansado. No al fuerte. Al cansado. Si esta noche estás agotado, esas palabras se escribieron pensando en ti. [pause 14]\n\nEsperar en el Señor no es tiempo perdido. Así es como los cansados recobran fuerzas. [pause 14]\n\nY otra palabra de Isaías. No temas, porque yo estoy contigo. Él te sostiene con su mano. Esta noche no tienes que sostenerte tú solo. [pause 16]\n\nAhora el Salmo ciento veintiuno otra vez. Deja que la palabra guardar se quede contigo mientras escuchas. [pause 18]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 121:1-8",
+   "label": "Salmos 121:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Cántico gradual. ALZARÉ mis ojos á los montes, de donde vendrá mi socorro."
+    },
+    {
+     "v": 2,
+     "text": "Mi socorro viene de Jehová, que hizo los cielos y la tierra."
+    },
+    {
+     "v": 3,
+     "text": "No dará tu pie al resbaladero; ni se dormirá el que te guarda."
+    },
+    {
+     "v": 4,
+     "text": "He aquí, no se adormecerá ni dormirá el que guarda á Israel."
+    },
+    {
+     "v": 5,
+     "text": "Jehová es tu guardador: Jehová es tu sombra á tu mano derecha."
+    },
+    {
+     "v": 6,
+     "text": "El sol no te fatigará de día, ni la luna de noche."
+    },
+    {
+     "v": 7,
+     "text": "Jehová te guardará de todo mal: él guardará tu alma."
+    },
+    {
+     "v": 8,
+     "text": "Jehová guardará tu salida y tu entrada, desde ahora y para siempre."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí vamos a terminar. [pause 8]\n\nDeja que el cuarto esté oscuro y quieto a tu alrededor. Que la almohada esté fresca. [pause 10]\n\nEsta noche escuchaste su Palabra. Ya no tienes que pensar en ella. Solo descansa en ella. [pause 12]\n\nTodo lo que en ti está cansado, deja que esté cansado. No tienes que ser fuerte ahora. [pause 15]\n\nQue las últimas palabras que oíste sean las que se queden contigo. Lo demás, déjalo ir. [pause 20]\n\nÉl está despierto, así que tú puedes dormir. [pause 20]\n\nQue descanses. [pause 45]"
+  }
+ ],
+ "words": 636,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 811,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Todo salmo y acompañante es RV1909 guardada, pegada por código; las reflexiones parafrasean en ecos cortos (sin 8+ palabras de escritura tecleada) y se quedan en el punto de cada salmo; ninguna promesa de sueño ni de protección (Salmo 91: 'no dice que nunca va a pasar nada difícil'; Proverbios 3:24 como imagen, no promesa). Dios nunca habla en primera persona fuera de la escritura."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

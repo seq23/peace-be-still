@@ -1,0 +1,210 @@
+{
+ "id": "pn-02-psalm-4",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 4: In Peace I Will Lie Down",
+ "main": [
+  "PSA 4:1-8"
+ ],
+ "companions": [
+  "PSA 3:5",
+  "PRO 3:24",
+  "PSA 127:2"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 5]\n\nTurn the lights down low, or off. Let your body sink a little into the bed. [pause 8]\n\nTonight's psalm is Psalm 4. It is an evening psalm. It begins with a man calling out to God in trouble, and it ends with him lying down to sleep. [pause 7]\n\nThat is the whole journey of tonight. From the worries of the day to the quiet of the bed. We will read it twice. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:1-8",
+   "label": "Psalm 4:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician on Neginoth, A Psalm of David. Hear me when I call, O God of my righteousness: thou hast enlarged me when I was in distress; have mercy upon me, and hear my prayer."
+    },
+    {
+     "v": 2,
+     "text": "O ye sons of men, how long will ye turn my glory into shame? how long will ye love vanity, and seek after leasing? Selah."
+    },
+    {
+     "v": 3,
+     "text": "But know that the LORD hath set apart him that is godly for himself: the LORD will hear when I call unto him."
+    },
+    {
+     "v": 4,
+     "text": "Stand in awe, and sin not: commune with your own heart upon your bed, and be still. Selah."
+    },
+    {
+     "v": 5,
+     "text": "Offer the sacrifices of righteousness, and put your trust in the LORD."
+    },
+    {
+     "v": 6,
+     "text": "There be many that say, Who will shew us any good? LORD, lift thou up the light of thy countenance upon us."
+    },
+    {
+     "v": 7,
+     "text": "Thou hast put gladness in my heart, more than in the time that their corn and their wine increased."
+    },
+    {
+     "v": 8,
+     "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Upon your bed, the psalm says, speak with your own heart, and be still. [pause 8]\n\nThat is good advice for the end of a day. Not to replay everything. Not to argue with the day again. Just to be still, and let God see your heart as it is. [pause 10]\n\nThere is a line in the middle about gladness. God put gladness in his heart, more than other people felt when their harvest came in. Other people's harvest looked bigger. But the gladness God gave was enough. [pause 10]\n\nTwo companion verses now, both about sleep. [pause 6]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 3:5",
+   "label": "Psalm 3:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "I laid me down and slept; I awaked; for the LORD sustained me."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PRO 3:24",
+   "label": "Proverbs 3:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "When thou liest down, thou shalt not be afraid: yea, thou shalt lie down, and thy sleep shall be sweet."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 127:2",
+   "label": "Psalm 127:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "I lay down, I slept, I woke. Simple words. Lying down, sleeping, waking. David wrote them when he was running for his life, and still he rested. [pause 8]\n\nAnd the proverb speaks of sleep that is sweet. Not a promise for every night, but a picture of what rest in God can feel like. [pause 8]\n\nAnd Psalm 127 says it is no use getting up early and staying up late, eating the bread of worry. He gives his beloved sleep. You can stop working for today. [pause 10]\n\nHere is Psalm 4 again, from the beginning. Listen for that last verse. Let it be your own words tonight. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:1-8",
+   "label": "Psalm 4:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician on Neginoth, A Psalm of David. Hear me when I call, O God of my righteousness: thou hast enlarged me when I was in distress; have mercy upon me, and hear my prayer."
+    },
+    {
+     "v": 2,
+     "text": "O ye sons of men, how long will ye turn my glory into shame? how long will ye love vanity, and seek after leasing? Selah."
+    },
+    {
+     "v": 3,
+     "text": "But know that the LORD hath set apart him that is godly for himself: the LORD will hear when I call unto him."
+    },
+    {
+     "v": 4,
+     "text": "Stand in awe, and sin not: commune with your own heart upon your bed, and be still. Selah."
+    },
+    {
+     "v": 5,
+     "text": "Offer the sacrifices of righteousness, and put your trust in the LORD."
+    },
+    {
+     "v": 6,
+     "text": "There be many that say, Who will shew us any good? LORD, lift thou up the light of thy countenance upon us."
+    },
+    {
+     "v": 7,
+     "text": "Thou hast put gladness in my heart, more than in the time that their corn and their wine increased."
+    },
+    {
+     "v": 8,
+     "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is enough for tonight. [pause 8]\n\nLet your breathing slow down on its own. In, and out. Nothing to fix, nothing to finish. [pause 12]\n\nWhatever today was, it is over now. Tomorrow has not come yet. This is only the night, and the night belongs to God. [pause 12]\n\nLay down what you carried. One thing, and then another. [pause 15]\n\nStay here as long as you like. [pause 15]\n\nIf your mind wanders, let it wander back. There is no wrong way to rest. [pause 20]\n\nThe Lord is near. Nearer than your breath. [pause 20]\n\nGood night. [pause 45]"
+  }
+ ],
+ "words": 766,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 817,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Every psalm and companion is stored KJV pasted by code; reflections paraphrase in short echoes (no 8+ word typed scripture) and stay with each psalm's own point (shepherd, evening rest, keeping, shelter, stillness, quiet soul, being known, waiting, a shield in flight, light and waiting). No promise of sleep or protection: Psalm 91 says plainly it does not promise nothing hard will happen; Proverbs 3:24 framed as 'not a promise for every night'. God never quoted in first person outside scripture. Headings (Ps 3, Absalom) used only as the text's own titles."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,230 @@
+{
+ "id": "pn-10-psalm-27",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 27: The Lord Is My Light",
+ "main": [
+  "PSA 27:1-14"
+ ],
+ "companions": [
+  "PSA 4:8"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 3]\n\nLet the room be quiet around you. Let your breath slow down. [pause 5]\n\nTonight is Psalm 27. It begins with light and ends with waiting. In between there is fear, and longing, and a quiet place in the house of God. [pause 5]\n\nIt is a longer psalm. We will take our time. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 27:1-14",
+   "label": "Psalm 27:1-14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David. The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid?"
+    },
+    {
+     "v": 2,
+     "text": "When the wicked, even mine enemies and my foes, came upon me to eat up my flesh, they stumbled and fell."
+    },
+    {
+     "v": 3,
+     "text": "Though an host should encamp against me, my heart shall not fear: though war should rise against me, in this will I be confident."
+    },
+    {
+     "v": 4,
+     "text": "One thing have I desired of the LORD, that will I seek after; that I may dwell in the house of the LORD all the days of my life, to behold the beauty of the LORD, and to enquire in his temple."
+    },
+    {
+     "v": 5,
+     "text": "For in the time of trouble he shall hide me in his pavilion: in the secret of his tabernacle shall he hide me; he shall set me up upon a rock."
+    },
+    {
+     "v": 6,
+     "text": "And now shall mine head be lifted up above mine enemies round about me: therefore will I offer in his tabernacle sacrifices of joy; I will sing, yea, I will sing praises unto the LORD."
+    },
+    {
+     "v": 7,
+     "text": "Hear, O LORD, when I cry with my voice: have mercy also upon me, and answer me."
+    },
+    {
+     "v": 8,
+     "text": "When thou saidst, Seek ye my face; my heart said unto thee, Thy face, LORD, will I seek."
+    },
+    {
+     "v": 9,
+     "text": "Hide not thy face far from me; put not thy servant away in anger: thou hast been my help; leave me not, neither forsake me, O God of my salvation."
+    },
+    {
+     "v": 10,
+     "text": "When my father and my mother forsake me, then the LORD will take me up."
+    },
+    {
+     "v": 11,
+     "text": "Teach me thy way, O LORD, and lead me in a plain path, because of mine enemies."
+    },
+    {
+     "v": 12,
+     "text": "Deliver me not over unto the will of mine enemies: for false witnesses are risen up against me, and such as breathe out cruelty."
+    },
+    {
+     "v": 13,
+     "text": "I had fainted, unless I had believed to see the goodness of the LORD in the land of the living."
+    },
+    {
+     "v": 14,
+     "text": "Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "The Lord is my light. You can lie in a dark room and still have light. Light is not only what the eyes see. [pause 6]\n\nIn the middle of the psalm, David says the one thing he wants. To dwell in the house of the Lord, and to behold his beauty. Not a long list. One thing. [pause 6]\n\nAnd then there is a line that has comforted many who were left by people they loved. Even if father and mother leave, the Lord will take me in. [pause 8]\n\nThe psalm ends with wait. Wait, I say, on the Lord. Wait is not the same as nothing happening. It is trust, held over time. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Psalm 4:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "In peace. Lie down. Sleep. Safety in him. [pause 6]\n\nHere is Psalm 27 again. Let the first line be the one you remember. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 27:1-14",
+   "label": "Psalm 27:1-14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David. The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid?"
+    },
+    {
+     "v": 2,
+     "text": "When the wicked, even mine enemies and my foes, came upon me to eat up my flesh, they stumbled and fell."
+    },
+    {
+     "v": 3,
+     "text": "Though an host should encamp against me, my heart shall not fear: though war should rise against me, in this will I be confident."
+    },
+    {
+     "v": 4,
+     "text": "One thing have I desired of the LORD, that will I seek after; that I may dwell in the house of the LORD all the days of my life, to behold the beauty of the LORD, and to enquire in his temple."
+    },
+    {
+     "v": 5,
+     "text": "For in the time of trouble he shall hide me in his pavilion: in the secret of his tabernacle shall he hide me; he shall set me up upon a rock."
+    },
+    {
+     "v": 6,
+     "text": "And now shall mine head be lifted up above mine enemies round about me: therefore will I offer in his tabernacle sacrifices of joy; I will sing, yea, I will sing praises unto the LORD."
+    },
+    {
+     "v": 7,
+     "text": "Hear, O LORD, when I cry with my voice: have mercy also upon me, and answer me."
+    },
+    {
+     "v": 8,
+     "text": "When thou saidst, Seek ye my face; my heart said unto thee, Thy face, LORD, will I seek."
+    },
+    {
+     "v": 9,
+     "text": "Hide not thy face far from me; put not thy servant away in anger: thou hast been my help; leave me not, neither forsake me, O God of my salvation."
+    },
+    {
+     "v": 10,
+     "text": "When my father and my mother forsake me, then the LORD will take me up."
+    },
+    {
+     "v": 11,
+     "text": "Teach me thy way, O LORD, and lead me in a plain path, because of mine enemies."
+    },
+    {
+     "v": 12,
+     "text": "Deliver me not over unto the will of mine enemies: for false witnesses are risen up against me, and such as breathe out cruelty."
+    },
+    {
+     "v": 13,
+     "text": "I had fainted, unless I had believed to see the goodness of the LORD in the land of the living."
+    },
+    {
+     "v": 14,
+     "text": "Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Now let the words go quiet. [pause 8]\n\nYou do not have to hold on to them. They will be there in the morning. [pause 10]\n\nLet your shoulders drop. Let your hands open. Let the bed hold the weight of you. [pause 12]\n\nIf a worry comes back, you can hand it over again. As many times as it takes. [pause 12]\n\nThe night is long and quiet, and you are not alone in it. [pause 15]\n\nFeel the quiet of the room. The small sounds. The dark. Nothing is asked of you here. [pause 20]\n\nYou are held, the psalm said. You are known. You are kept. [pause 20]\n\nRest now. [pause 45]"
+  }
+ ],
+ "words": 992,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 920,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Every psalm and companion is stored KJV pasted by code; reflections paraphrase in short echoes (no 8+ word typed scripture) and stay with each psalm's own point (shepherd, evening rest, keeping, shelter, stillness, quiet soul, being known, waiting, a shield in flight, light and waiting). No promise of sleep or protection: Psalm 91 says plainly it does not promise nothing hard will happen; Proverbs 3:24 framed as 'not a promise for every night'. God never quoted in first person outside scripture. Headings (Ps 3, Absalom) used only as the text's own titles."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

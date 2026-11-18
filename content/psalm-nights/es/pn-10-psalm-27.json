@@ -1,0 +1,232 @@
+{
+ "id": "pn-10-psalm-27",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 27: Jehová es mi luz",
+ "main": [
+  "PSA 27:1-14"
+ ],
+ "companions": [
+  "PSA 4:8"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 3]\n\nDeja que el cuarto quede en silencio a tu alrededor. Deja que tu respiración se haga lenta. [pause 5]\n\nEsta noche es el Salmo veintisiete. Empieza con luz y termina con espera. En medio hay miedo, hay anhelo, y hay un lugar tranquilo en la casa de Dios. [pause 5]\n\nEs un salmo largo. Vamos a tomarnos nuestro tiempo. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 27:1-14",
+   "label": "Salmos 27:1-14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. JEHOVÁ es mi luz y mi salvación: ¿de quién temeré? Jehová es la fortaleza de mi vida: ¿de quién he de atemorizarme?"
+    },
+    {
+     "v": 2,
+     "text": "Cuando se allegaron contra mí los malignos, mis angustiadores y mis enemigos, para comer mis carnes, ellos tropezaron y cayeron."
+    },
+    {
+     "v": 3,
+     "text": "Aunque se asiente campo contra mí, no temerá mi corazón: aunque contra mí se levante guerra, yo en esto confío."
+    },
+    {
+     "v": 4,
+     "text": "Una cosa he demandado á Jehová, ésta buscaré: que esté yo en la casa de Jehová todos los días de mi vida, para contemplar la hermosura de Jehová, y para inquirir en su templo."
+    },
+    {
+     "v": 5,
+     "text": "Porque él me esconderá en su tabernáculo en el día del mal; ocultaráme en lo reservado de su pabellón; pondráme en alto sobre una roca."
+    },
+    {
+     "v": 6,
+     "text": "Y luego ensalzará mi cabeza sobre mis enemigos en derredor de mí: y yo sacrificaré en su tabernáculo sacrificios de júbilo: cantaré y salmearé á Jehová."
+    },
+    {
+     "v": 7,
+     "text": "Oye, oh Jehová, mi voz con que á ti clamo; y ten misericordia de mí, respóndeme."
+    },
+    {
+     "v": 8,
+     "text": "Mi corazón ha dicho de ti: Buscad mi rostro. Tu rostro buscaré, oh Jehová."
+    },
+    {
+     "v": 9,
+     "text": "No escondas tu rostro de mí, no apartes con ira á tu siervo: mi ayuda has sido; no me dejes y no me desampares, Dios de mi salud."
+    },
+    {
+     "v": 10,
+     "text": "Aunque mi padre y mi madre me dejaran, Jehová con todo me recogerá."
+    },
+    {
+     "v": 11,
+     "text": "Enséñame, oh Jehová, tu camino, y guíame por senda de rectitud, á causa de mis enemigos."
+    },
+    {
+     "v": 12,
+     "text": "No me entregues á la voluntad de mis enemigos; porque se han levantado contra mí testigos falsos, y los que respiran crueldad."
+    },
+    {
+     "v": 13,
+     "text": "Hubiera yo desmayado, si no creyese que tengo de ver la bondad de Jehová en la tierra de los vivientes."
+    },
+    {
+     "v": 14,
+     "text": "Aguarda á Jehová; esfuérzate, y aliéntese tu corazón: sí, espera á Jehová."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "El Señor es mi luz. Puedes estar acostado en un cuarto oscuro y aun así tener luz. La luz no es solo lo que ven los ojos. [pause 6]\n\nEn medio del salmo, David dice la única cosa que quiere. Estar en la casa del Señor, y contemplar su hermosura. No una lista larga. Una sola cosa. [pause 6]\n\nY luego hay una línea que ha consolado a muchos que fueron dejados por las personas que amaban. Aunque padre y madre me dejen, el Señor me recogerá. [pause 8]\n\nEl salmo termina con esperar. Espera en el Señor. Esperar no es lo mismo que no pase nada. Es confianza sostenida en el tiempo. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "En paz. Acostarse. Dormir. Seguridad en él. [pause 6]\n\nAquí está el Salmo veintisiete otra vez. Que la primera línea sea la que recuerdes. [pause 10]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 27:1-14",
+   "label": "Salmos 27:1-14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. JEHOVÁ es mi luz y mi salvación: ¿de quién temeré? Jehová es la fortaleza de mi vida: ¿de quién he de atemorizarme?"
+    },
+    {
+     "v": 2,
+     "text": "Cuando se allegaron contra mí los malignos, mis angustiadores y mis enemigos, para comer mis carnes, ellos tropezaron y cayeron."
+    },
+    {
+     "v": 3,
+     "text": "Aunque se asiente campo contra mí, no temerá mi corazón: aunque contra mí se levante guerra, yo en esto confío."
+    },
+    {
+     "v": 4,
+     "text": "Una cosa he demandado á Jehová, ésta buscaré: que esté yo en la casa de Jehová todos los días de mi vida, para contemplar la hermosura de Jehová, y para inquirir en su templo."
+    },
+    {
+     "v": 5,
+     "text": "Porque él me esconderá en su tabernáculo en el día del mal; ocultaráme en lo reservado de su pabellón; pondráme en alto sobre una roca."
+    },
+    {
+     "v": 6,
+     "text": "Y luego ensalzará mi cabeza sobre mis enemigos en derredor de mí: y yo sacrificaré en su tabernáculo sacrificios de júbilo: cantaré y salmearé á Jehová."
+    },
+    {
+     "v": 7,
+     "text": "Oye, oh Jehová, mi voz con que á ti clamo; y ten misericordia de mí, respóndeme."
+    },
+    {
+     "v": 8,
+     "text": "Mi corazón ha dicho de ti: Buscad mi rostro. Tu rostro buscaré, oh Jehová."
+    },
+    {
+     "v": 9,
+     "text": "No escondas tu rostro de mí, no apartes con ira á tu siervo: mi ayuda has sido; no me dejes y no me desampares, Dios de mi salud."
+    },
+    {
+     "v": 10,
+     "text": "Aunque mi padre y mi madre me dejaran, Jehová con todo me recogerá."
+    },
+    {
+     "v": 11,
+     "text": "Enséñame, oh Jehová, tu camino, y guíame por senda de rectitud, á causa de mis enemigos."
+    },
+    {
+     "v": 12,
+     "text": "No me entregues á la voluntad de mis enemigos; porque se han levantado contra mí testigos falsos, y los que respiran crueldad."
+    },
+    {
+     "v": 13,
+     "text": "Hubiera yo desmayado, si no creyese que tengo de ver la bondad de Jehová en la tierra de los vivientes."
+    },
+    {
+     "v": 14,
+     "text": "Aguarda á Jehová; esfuérzate, y aliéntese tu corazón: sí, espera á Jehová."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ahora deja que las palabras se queden en silencio. [pause 8]\n\nNo tienes que sostenerlas. Mañana van a seguir ahí. [pause 10]\n\nSuelta los hombros. Abre las manos. Deja que la cama cargue tu peso. [pause 12]\n\nSi vuelve una preocupación, puedes entregarla otra vez. Las veces que haga falta. [pause 12]\n\nSiente la calma del cuarto. Los ruidos pequeños. La oscuridad. Aquí no se te pide nada. [pause 20]\n\nLa noche es larga y tranquila, y no estás solo en ella. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 863,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 823,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Todo salmo y acompañante es RV1909 guardada, pegada por código; las reflexiones parafrasean en ecos cortos (sin 8+ palabras de escritura tecleada) y se quedan en el punto de cada salmo; ninguna promesa de sueño ni de protección (Salmo 91: 'no dice que nunca va a pasar nada difícil'; Proverbios 3:24 como imagen, no promesa). Dios nunca habla en primera persona fuera de la escritura."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

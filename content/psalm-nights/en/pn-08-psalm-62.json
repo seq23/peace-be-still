@@ -1,0 +1,214 @@
+{
+ "id": "pn-08-psalm-62",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 62: My Soul Waiteth",
+ "main": [
+  "PSA 62:1-8"
+ ],
+ "companions": [
+  "ISA 26:3-4",
+  "PSA 18:2",
+  "MAT 11:28"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 8]\n\nLet your body settle. There is nothing left to do today. [pause 11]\n\nTonight's psalm is Psalm 62. David wrote it when people were trying to pull him down. And yet the psalm is quiet. It is about waiting, and about a rock that does not move. [pause 10]\n\nWe will read it twice. [pause 13]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 62:1-8",
+   "label": "Psalm 62:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, to Jeduthun, A Psalm of David. Truly my soul waiteth upon God: from him cometh my salvation."
+    },
+    {
+     "v": 2,
+     "text": "He only is my rock and my salvation; he is my defence; I shall not be greatly moved."
+    },
+    {
+     "v": 3,
+     "text": "How long will ye imagine mischief against a man? ye shall be slain all of you: as a bowing wall shall ye be, and as a tottering fence."
+    },
+    {
+     "v": 4,
+     "text": "They only consult to cast him down from his excellency: they delight in lies: they bless with their mouth, but they curse inwardly. Selah."
+    },
+    {
+     "v": 5,
+     "text": "My soul, wait thou only upon God; for my expectation is from him."
+    },
+    {
+     "v": 6,
+     "text": "He only is my rock and my salvation: he is my defence; I shall not be moved."
+    },
+    {
+     "v": 7,
+     "text": "In God is my salvation and my glory: the rock of my strength, and my refuge, is in God."
+    },
+    {
+     "v": 8,
+     "text": "Trust in him at all times; ye people, pour out your heart before him: God is a refuge for us. Selah."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Truly my soul waiteth upon God. In older words, my soul is silent before God. Not anxious. Not rushing. Waiting. [pause 11]\n\nThree times the psalm calls God a rock. A rock is not quick. It does not change its mind. You can lean your whole weight on it and it stays. [pause 11]\n\nThen a line to say in your heart. Trust him at all times. Pour out your heart before him. [pause 11]\n\nYou can pour it out tonight. All of it. The worry, the hurt, the thing you did not say. He can hold it. [pause 15]\n\nA companion passage from Isaiah. [pause 9]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 26:3-4",
+   "label": "Isaiah 26:3-4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee."
+    },
+    {
+     "v": 4,
+     "text": "Trust ye in the LORD for ever: for in the LORD JEHOVAH is everlasting strength:"
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 18:2",
+   "label": "Psalm 18:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "The LORD is my rock, and my fortress, and my deliverer; my God, my strength, in whom I will trust; my buckler, and the horn of my salvation, and my high tower."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 11:28",
+   "label": "Matthew 11:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Everlasting strength. A rock of ages. The same picture, in another book, centuries apart. [pause 11]\n\nPsalm 18 piles up the same pictures. Rock, fortress, deliverer, shield, high tower. And Jesus, in the gospel, says come to me, and I will give you rest. [pause 13]\n\nHere is Psalm 62 again. Let your soul wait as you listen. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 62:1-8",
+   "label": "Psalm 62:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, to Jeduthun, A Psalm of David. Truly my soul waiteth upon God: from him cometh my salvation."
+    },
+    {
+     "v": 2,
+     "text": "He only is my rock and my salvation; he is my defence; I shall not be greatly moved."
+    },
+    {
+     "v": 3,
+     "text": "How long will ye imagine mischief against a man? ye shall be slain all of you: as a bowing wall shall ye be, and as a tottering fence."
+    },
+    {
+     "v": 4,
+     "text": "They only consult to cast him down from his excellency: they delight in lies: they bless with their mouth, but they curse inwardly. Selah."
+    },
+    {
+     "v": 5,
+     "text": "My soul, wait thou only upon God; for my expectation is from him."
+    },
+    {
+     "v": 6,
+     "text": "He only is my rock and my salvation: he is my defence; I shall not be moved."
+    },
+    {
+     "v": 7,
+     "text": "In God is my salvation and my glory: the rock of my strength, and my refuge, is in God."
+    },
+    {
+     "v": 8,
+     "text": "Trust in him at all times; ye people, pour out your heart before him: God is a refuge for us. Selah."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is enough for tonight. [pause 8]\n\nLet your breathing slow down on its own. In, and out. Nothing to fix, nothing to finish. [pause 12]\n\nWhatever today was, it is over now. Tomorrow has not come yet. This is only the night, and the night belongs to God. [pause 12]\n\nLay down what you carried. One thing, and then another. [pause 15]\n\nStay here as long as you like. [pause 15]\n\nIf your mind wanders, let it wander back. There is no wrong way to rest. [pause 20]\n\nThe Lord is near. Nearer than your breath. [pause 20]\n\nGood night. [pause 45]"
+  }
+ ],
+ "words": 696,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 813,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Every psalm and companion is stored KJV pasted by code; reflections paraphrase in short echoes (no 8+ word typed scripture) and stay with each psalm's own point (shepherd, evening rest, keeping, shelter, stillness, quiet soul, being known, waiting, a shield in flight, light and waiting). No promise of sleep or protection: Psalm 91 says plainly it does not promise nothing hard will happen; Proverbs 3:24 framed as 'not a promise for every night'. God never quoted in first person outside scripture. Headings (Ps 3, Absalom) used only as the text's own titles."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
