@@ -66,6 +66,18 @@
      "v": 8,
      "text": "And Naomi said unto her two daughters in law, Go, return each to her mother’s house: the LORD deal kindly with you, as ye have dealt with the dead, and with me."
     }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And Naomi said unto her two daughters in law,"
+    },
+    {
+     "v": 8,
+     "speaker": "naomi",
+     "text": "Go, return each to her mother’s house: the LORD deal kindly with you, as ye have dealt with the dead, and with me."
+    }
    ]
   },
   {
@@ -82,6 +94,13 @@
    "verses": [
     {
      "v": 14,
+     "text": "And they lifted up their voice, and wept again: and Orpah kissed her mother in law; but Ruth clave unto her."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
      "text": "And they lifted up their voice, and wept again: and Orpah kissed her mother in law; but Ruth clave unto her."
     }
    ]
@@ -102,6 +121,18 @@
      "v": 16,
      "text": "And Ruth said, Intreat me not to leave thee, or to return from following after thee: for whither thou goest, I will go; and where thou lodgest, I will lodge: thy people shall be my people, and thy God my God:"
     }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And Ruth said,"
+    },
+    {
+     "v": 16,
+     "speaker": "ruth",
+     "text": "Intreat me not to leave thee, or to return from following after thee: for whither thou goest, I will go; and where thou lodgest, I will lodge: thy people shall be my people, and thy God my God:"
+    }
    ]
   },
   {
@@ -113,6 +144,13 @@
    "verses": [
     {
      "v": 17,
+     "text": "Where thou diest, will I die, and there will I be buried: the LORD do so to me, and more also, if ought but death part thee and me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "ruth",
      "text": "Where thou diest, will I die, and there will I be buried: the LORD do so to me, and more also, if ought but death part thee and me."
     }
    ]
@@ -138,6 +176,18 @@
      "v": 20,
      "text": "And she said unto them, Call me not Naomi, call me Mara: for the Almighty hath dealt very bitterly with me."
     }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And she said unto them,"
+    },
+    {
+     "v": 20,
+     "speaker": "naomi",
+     "text": "Call me not Naomi, call me Mara: for the Almighty hath dealt very bitterly with me."
+    }
    ]
   },
   {
@@ -149,6 +199,13 @@
    "verses": [
     {
      "v": 21,
+     "text": "I went out full, and the LORD hath brought me home again empty: why then call ye me Naomi, seeing the LORD hath testified against me, and the Almighty hath afflicted me?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "naomi",
      "text": "I went out full, and the LORD hath brought me home again empty: why then call ye me Naomi, seeing the LORD hath testified against me, and the Almighty hath afflicted me?"
     }
    ]
@@ -167,6 +224,13 @@
    "verses": [
     {
      "v": 22,
+     "text": "So Naomi returned, and Ruth the Moabitess, her daughter in law, with her, which returned out of the country of Moab: and they came to Beth-lehem in the beginning of barley harvest."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
      "text": "So Naomi returned, and Ruth the Moabitess, her daughter in law, with her, which returned out of the country of Moab: and they came to Beth-lehem in the beginning of barley harvest."
     }
    ]
@@ -200,6 +264,7 @@
    "S02_no_refs_in_retelling": "pass",
    "S09_names": "pass",
    "speakers": "pass",
+   "voice_segments": "pass",
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",

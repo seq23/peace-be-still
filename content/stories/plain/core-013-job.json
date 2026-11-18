@@ -1,0 +1,235 @@
+{
+ "id": "core-013-job",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Job, Who Would Not Let Go",
+ "passage": {
+  "refs": [
+   "JOB 1:1-22",
+   "JOB 2:7-13",
+   "JOB 42:10-17"
+  ],
+  "label": "Job 1:1-22; Job 2:7-13; Job 42:10-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "job",
+   "name": "Job",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 1:1",
+   "label": "Job 1:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "There was a man in the land of Uz, whose name was Job; and that man was perfect and upright, and one that feared God, and eschewed evil."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "There was a man in the land of Uz, whose name was Job; and that man was perfect and upright, and one that feared God, and eschewed evil."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Job lived in the land of Uz. He had seven sons and three daughters, great flocks and herds, and many servants. He was known as the greatest man in all the east. He loved his children and prayed for them."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then, in a single day, it all fell apart. One messenger after another came running. Raiders had taken the oxen and the donkeys. Fire had fallen and burned up the sheep. The camels were gone. And while one messenger was still speaking, another came with the worst news of all. A great wind had struck the house where Job's children were gathered, and they had died."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Job stood up and tore his robe. He shaved his head. He fell down on the ground and worshipped."
+  },
+  {
+   "type": "scripture",
+   "speaker": "job",
+   "ref": "JOB 1:21",
+   "label": "Job 1:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And said, Naked came I out of my mother’s womb, and naked shall I return thither: the LORD gave, and the LORD hath taken away; blessed be the name of the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And said,"
+    },
+    {
+     "v": 21,
+     "speaker": "job",
+     "text": "Naked came I out of my mother’s womb, and naked shall I return thither: the LORD gave, and the LORD hath taken away; blessed be the name of the LORD."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 1:22",
+   "label": "Job 1:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "In all this Job sinned not, nor charged God foolishly."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "In all this Job sinned not, nor charged God foolishly."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Job was not pretending he felt no pain. He tore his robe. He sat on the ground. But in the middle of the worst day of his life, he still turned toward God."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Job's own body was struck with painful sores from the soles of his feet to the top of his head. He sat down among the ashes. Three friends heard what had happened and came to comfort him. When they saw him, they barely knew him. They wept aloud."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 2:13",
+   "label": "Job 2:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "So they sat down with him upon the ground seven days and seven nights, and none spake a word unto him: for they saw that his grief was very great."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "So they sat down with him upon the ground seven days and seven nights, and none spake a word unto him: for they saw that his grief was very great."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Seven days of silence. Before Job's friends said anything that went wrong, they did something right. They sat with him and did not try to explain his grief."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The book of Job is long. Job asks God hard questions, and his friends give him hard answers. In the end, God speaks, and Job is humbled before him. The book never gives a simple reason for Job's suffering. What it shows is a man who would not let go of God, even when he did not understand."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 42:10",
+   "label": "Job 42:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And the LORD turned the captivity of Job, when he prayed for his friends: also the LORD gave Job twice as much as he had before."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And the LORD turned the captivity of Job, when he prayed for his friends: also the LORD gave Job twice as much as he had before."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Job prayed for the very friends who had hurt him with their words. Then the LORD turned his captivity. His family came to comfort him. In time he had seven sons and three daughters again, and he lived to see his grandchildren and great-grandchildren."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Job's restored life did not erase his grief. Nothing in the story says it did. But it tells us that the God Job held on to through the dark had not let go of him either."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 499,
+ "est_seconds": 272,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 499 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.6",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Job 1-2 and 42; no reason for suffering invented; the satan scenes are left out, not reinterpreted; restoration not presented as a formula."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Grief told plainly; the friends' seven days of silence honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

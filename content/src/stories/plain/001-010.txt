@@ -101,7 +101,7 @@ N: Then a young shepherd named David came to the camp to bring food to his older
 S: 1SA 17:32 @david
 S: 1SA 17:33 @saul
 N: Saul was right about the facts. David was young, and Goliath was a trained warrior. But David had other facts. He told the king how he had kept his father's sheep, and how a lion and a bear had each come and carried off a lamb. He had gone after them and saved the lamb.
-S: 1SA 17:37 @david
+S: 1SA 17:37 @david until "And Saul said"
 N: Saul dressed David in his own armor, with a bronze helmet and a coat of mail. David tried to walk in it and could not. He took it all off. He could not fight in someone else's armor.
 N: Instead he picked up his staff. He picked five smooth stones from the stream and dropped them into his shepherd's bag. His sling was in his hand.
 N: Goliath looked at him and sneered. David was only a youth, with a ruddy face. The giant cursed him by his gods.
@@ -125,7 +125,7 @@ S: GEN 37:7 @joseph
 N: His brothers hated him even more. Then he dreamed that the sun, the moon and eleven stars bowed down to him. Even his father scolded him for that one, but Jacob kept thinking about it.
 N: One day the brothers were far away with the flocks, and Jacob sent Joseph to check on them. He found them at Dothan. They saw him coming from a long way off, wearing that coat.
 S: GEN 37:19 @brothers
-S: GEN 37:20 @brothers
+S: GEN 37:20 @brothers whole
 N: Reuben, the oldest, spoke up. He told them not to kill Joseph, but to throw him into a pit in the wilderness instead. He meant to come back later, rescue him, and bring him home to their father.
 S: GEN 37:23
 S: GEN 37:24
@@ -145,7 +145,7 @@ N: Jesus told a story about a man who had two sons. The younger son came to his 
 S: LUK 15:13
 N: Money goes quickly when someone is trying to fill an empty place with it. Soon it was all gone. Then a famine came to that land, and he had nothing. He took a job feeding pigs. He was so hungry he wanted to eat the pods the pigs were eating, and no one gave him anything.
 S: LUK 15:17 @younger-son
-S: LUK 15:18 @younger-son
+S: LUK 15:18 @younger-son whole
 S: LUK 15:19 @younger-son
 N: He came to himself. That is the turning point. Not the moment everything got fixed, but the moment he finally saw where he was.
 S: LUK 15:20
@@ -198,7 +198,7 @@ S: DAN 3:17 @the-three
 S: DAN 3:18 @the-three
 N: But if not. Some of the strongest faith in the Bible is in those three words. They believed God was able to save them. They did not claim to know what God would choose to do. And they decided ahead of time that they would not bow either way.
 N: The king was so angry his face changed. He ordered the furnace heated seven times hotter than usual. Strong soldiers tied up the three men, still in their coats and hats, and threw them into the fire.
-S: DAN 3:24 @nebuchadnezzar
+S: DAN 3:24 @nebuchadnezzar after "his counsellors, " until "They answered"
 S: DAN 3:25 @nebuchadnezzar
 N: Three men went in, and the king counted four. They were not kept out of the fire. They had company in it.
 N: The king came near the door of the furnace and called them out by name. They walked out of the fire. Not one hair on their heads was burned. Their coats were not scorched. They did not even smell of smoke.
@@ -216,7 +216,7 @@ N: Jesus went with him. A large crowd followed, pressing in on every side, so cl
 S: MAR 5:25
 S: MAR 5:26
 N: Twelve years. That is as long as Jairus's daughter had been alive. Twelve years of treatments and remedies, of hoping and being let down, and every coin she had was gone. Instead of getting better, she had grown worse. Many people know that kind of tired, the kind that sleep does not fix.
-S: MAR 5:27 @woman
+S: MAR 5:27
 S: MAR 5:28 @woman
 N: She did not ask for an appointment or wait in line. She did not call out his name. She had heard about Jesus, and that was enough to make her try. She came up behind him in the crowd, quietly, and reached out her hand.
 S: MAR 5:29

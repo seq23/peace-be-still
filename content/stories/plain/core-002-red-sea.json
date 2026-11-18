@@ -60,6 +60,18 @@
      "v": 11,
      "text": "And they said unto Moses, Because there were no graves in Egypt, hast thou taken us away to die in the wilderness? wherefore hast thou dealt thus with us, to carry us forth out of Egypt?"
     }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And they said unto Moses,"
+    },
+    {
+     "v": 11,
+     "speaker": "israelites",
+     "text": "Because there were no graves in Egypt, hast thou taken us away to die in the wilderness? wherefore hast thou dealt thus with us, to carry us forth out of Egypt?"
+    }
    ]
   },
   {
@@ -78,6 +90,18 @@
      "v": 13,
      "text": "And Moses said unto the people, Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever."
     }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And Moses said unto the people,"
+    },
+    {
+     "v": 13,
+     "speaker": "moses",
+     "text": "Fear ye not, stand still, and see the salvation of the LORD, which he will shew to you to day: for the Egyptians whom ye have seen to day, ye shall see them again no more for ever."
+    }
    ]
   },
   {
@@ -89,6 +113,13 @@
    "verses": [
     {
      "v": 14,
+     "text": "The LORD shall fight for you, and ye shall hold your peace."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "moses",
      "text": "The LORD shall fight for you, and ye shall hold your peace."
     }
    ]
@@ -114,6 +145,13 @@
      "v": 21,
      "text": "And Moses stretched out his hand over the sea; and the LORD caused the sea to go back by a strong east wind all that night, and made the sea dry land, and the waters were divided."
     }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And Moses stretched out his hand over the sea; and the LORD caused the sea to go back by a strong east wind all that night, and made the sea dry land, and the waters were divided."
+    }
    ]
   },
   {
@@ -125,6 +163,13 @@
    "verses": [
     {
      "v": 22,
+     "text": "And the children of Israel went into the midst of the sea upon the dry ground: and the waters were a wall unto them on their right hand, and on their left."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
      "text": "And the children of Israel went into the midst of the sea upon the dry ground: and the waters were a wall unto them on their right hand, and on their left."
     }
    ]
@@ -148,6 +193,13 @@
    "verses": [
     {
      "v": 31,
+     "text": "And Israel saw that great work which the LORD did upon the Egyptians: and the people feared the LORD, and believed the LORD, and his servant Moses."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
      "text": "And Israel saw that great work which the LORD did upon the Egyptians: and the people feared the LORD, and believed the LORD, and his servant Moses."
     }
    ]
@@ -181,6 +233,7 @@
    "S02_no_refs_in_retelling": "pass",
    "S09_names": "pass",
    "speakers": "pass",
+   "voice_segments": "pass",
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",

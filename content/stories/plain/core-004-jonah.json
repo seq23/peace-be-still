@@ -52,6 +52,13 @@
      "v": 3,
      "text": "But Jonah rose up to flee unto Tarshish from the presence of the LORD, and went down to Joppa; and he found a ship going to Tarshish: so he paid the fare thereof, and went down into it, to go with them unto Tarshish from the presence of the LORD."
     }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "But Jonah rose up to flee unto Tarshish from the presence of the LORD, and went down to Joppa; and he found a ship going to Tarshish: so he paid the fare thereof, and went down into it, to go with them unto Tarshish from the presence of the LORD."
+    }
    ]
   },
   {
@@ -68,6 +75,13 @@
    "verses": [
     {
      "v": 4,
+     "text": "But the LORD sent out a great wind into the sea, and there was a mighty tempest in the sea, so that the ship was like to be broken."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
      "text": "But the LORD sent out a great wind into the sea, and there was a mighty tempest in the sea, so that the ship was like to be broken."
     }
    ]
@@ -93,6 +107,18 @@
      "v": 9,
      "text": "And he said unto them, I am an Hebrew; and I fear the LORD, the God of heaven, which hath made the sea and the dry land."
     }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And he said unto them,"
+    },
+    {
+     "v": 9,
+     "speaker": "jonah",
+     "text": "I am an Hebrew; and I fear the LORD, the God of heaven, which hath made the sea and the dry land."
+    }
    ]
   },
   {
@@ -110,6 +136,18 @@
     {
      "v": 12,
      "text": "And he said unto them, Take me up, and cast me forth into the sea; so shall the sea be calm unto you: for I know that for my sake this great tempest is upon you."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And he said unto them,"
+    },
+    {
+     "v": 12,
+     "speaker": "jonah",
+     "text": "Take me up, and cast me forth into the sea; so shall the sea be calm unto you: for I know that for my sake this great tempest is upon you."
     }
    ]
   },
@@ -129,6 +167,13 @@
      "v": 17,
      "text": "Now the LORD had prepared a great fish to swallow up Jonah. And Jonah was in the belly of the fish three days and three nights."
     }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Now the LORD had prepared a great fish to swallow up Jonah. And Jonah was in the belly of the fish three days and three nights."
+    }
    ]
   },
   {
@@ -140,6 +185,13 @@
    "verses": [
     {
      "v": 1,
+     "text": "Then Jonah prayed unto the LORD his God out of the fish’s belly,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
      "text": "Then Jonah prayed unto the LORD his God out of the fish’s belly,"
     }
    ]
@@ -154,6 +206,28 @@
     {
      "v": 2,
      "text": "And said, I cried by reason of mine affliction unto the LORD, and he heard me; out of the belly of hell cried I, and thou heardest my voice."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And said,"
+    },
+    {
+     "v": 2,
+     "speaker": "jonah",
+     "text": "I cried by reason of mine affliction unto the LORD,"
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "and he heard me; out of the belly of hell cried I,"
+    },
+    {
+     "v": 2,
+     "speaker": "jonah",
+     "text": "and thou heardest my voice."
     }
    ]
   },
@@ -171,6 +245,13 @@
    "verses": [
     {
      "v": 10,
+     "text": "And the LORD spake unto the fish, and it vomited out Jonah upon the dry land."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
      "text": "And the LORD spake unto the fish, and it vomited out Jonah upon the dry land."
     }
    ]
@@ -204,6 +285,7 @@
    "S02_no_refs_in_retelling": "pass",
    "S09_names": "pass",
    "speakers": "pass",
+   "voice_segments": "pass",
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",

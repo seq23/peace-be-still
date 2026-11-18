@@ -2,11 +2,11 @@
  "gate_version": "library-1",
  "summary": {
   "story/plain": {
-   "passed": 10,
+   "passed": 20,
    "held": 0,
    "draft": 0,
    "never-ship": 0,
-   "rewritten": 1,
+   "rewritten": 6,
    "held_ids": []
   }
  }

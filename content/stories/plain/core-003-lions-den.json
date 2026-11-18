@@ -55,6 +55,13 @@
      "v": 10,
      "text": "Now when Daniel knew that the writing was signed, he went into his house; and his windows being open in his chamber toward Jerusalem, he kneeled upon his knees three times a day, and prayed, and gave thanks before his God, as he did aforetime."
     }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Now when Daniel knew that the writing was signed, he went into his house; and his windows being open in his chamber toward Jerusalem, he kneeled upon his knees three times a day, and prayed, and gave thanks before his God, as he did aforetime."
+    }
    ]
   },
   {
@@ -77,6 +84,18 @@
     {
      "v": 16,
      "text": "Then the king commanded, and they brought Daniel, and cast him into the den of lions. Now the king spake and said unto Daniel, Thy God whom thou servest continually, he will deliver thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Then the king commanded, and they brought Daniel, and cast him into the den of lions. Now the king spake and said unto Daniel,"
+    },
+    {
+     "v": 16,
+     "speaker": "king",
+     "text": "Thy God whom thou servest continually, he will deliver thee."
     }
    ]
   },
@@ -101,6 +120,13 @@
      "v": 19,
      "text": "Then the king arose very early in the morning, and went in haste unto the den of lions."
     }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Then the king arose very early in the morning, and went in haste unto the den of lions."
+    }
    ]
   },
   {
@@ -113,6 +139,18 @@
     {
      "v": 20,
      "text": "And when he came to the den, he cried with a lamentable voice unto Daniel: and the king spake and said to Daniel, O Daniel, servant of the living God, is thy God, whom thou servest continually, able to deliver thee from the lions?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And when he came to the den, he cried with a lamentable voice unto Daniel: and the king spake and said to Daniel,"
+    },
+    {
+     "v": 20,
+     "speaker": "king",
+     "text": "O Daniel, servant of the living God, is thy God, whom thou servest continually, able to deliver thee from the lions?"
     }
    ]
   },
@@ -127,6 +165,18 @@
      "v": 21,
      "text": "Then said Daniel unto the king, O king, live for ever."
     }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Then said Daniel unto the king,"
+    },
+    {
+     "v": 21,
+     "speaker": "daniel",
+     "text": "O king, live for ever."
+    }
    ]
   },
   {
@@ -140,6 +190,13 @@
      "v": 22,
      "text": "My God hath sent his angel, and hath shut the lions’ mouths, that they have not hurt me: forasmuch as before him innocency was found in me; and also before thee, O king, have I done no hurt."
     }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "daniel",
+     "text": "My God hath sent his angel, and hath shut the lions’ mouths, that they have not hurt me: forasmuch as before him innocency was found in me; and also before thee, O king, have I done no hurt."
+    }
    ]
   },
   {
@@ -151,6 +208,13 @@
    "verses": [
     {
      "v": 23,
+     "text": "Then was the king exceeding glad for him, and commanded that they should take Daniel up out of the den. So Daniel was taken up out of the den, and no manner of hurt was found upon him, because he believed in his God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
      "text": "Then was the king exceeding glad for him, and commanded that they should take Daniel up out of the den. So Daniel was taken up out of the den, and no manner of hurt was found upon him, because he believed in his God."
     }
    ]
@@ -184,6 +248,7 @@
    "S02_no_refs_in_retelling": "pass",
    "S09_names": "pass",
    "speakers": "pass",
+   "voice_segments": "pass",
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",

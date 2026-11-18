@@ -63,6 +63,13 @@
      "v": 3,
      "text": "Now Israel loved Joseph more than all his children, because he was the son of his old age: and he made him a coat of many colours."
     }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Now Israel loved Joseph more than all his children, because he was the son of his old age: and he made him a coat of many colours."
+    }
    ]
   },
   {
@@ -74,6 +81,13 @@
    "verses": [
     {
      "v": 4,
+     "text": "And when his brethren saw that their father loved him more than all his brethren, they hated him, and could not speak peaceably unto him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
      "text": "And when his brethren saw that their father loved him more than all his brethren, they hated him, and could not speak peaceably unto him."
     }
    ]
@@ -92,6 +106,13 @@
    "verses": [
     {
      "v": 7,
+     "text": "For, behold, we were binding sheaves in the field, and, lo, my sheaf arose, and also stood upright; and, behold, your sheaves stood round about, and made obeisance to my sheaf."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "joseph",
      "text": "For, behold, we were binding sheaves in the field, and, lo, my sheaf arose, and also stood upright; and, behold, your sheaves stood round about, and made obeisance to my sheaf."
     }
    ]
@@ -117,6 +138,18 @@
      "v": 19,
      "text": "And they said one to another, Behold, this dreamer cometh."
     }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And they said one to another,"
+    },
+    {
+     "v": 19,
+     "speaker": "brothers",
+     "text": "Behold, this dreamer cometh."
+    }
    ]
   },
   {
@@ -128,6 +161,13 @@
    "verses": [
     {
      "v": 20,
+     "text": "Come now therefore, and let us slay him, and cast him into some pit, and we will say, Some evil beast hath devoured him: and we shall see what will become of his dreams."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "brothers",
      "text": "Come now therefore, and let us slay him, and cast him into some pit, and we will say, Some evil beast hath devoured him: and we shall see what will become of his dreams."
     }
    ]
@@ -148,6 +188,13 @@
      "v": 23,
      "text": "And it came to pass, when Joseph was come unto his brethren, that they stript Joseph out of his coat, his coat of many colours that was on him;"
     }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And it came to pass, when Joseph was come unto his brethren, that they stript Joseph out of his coat, his coat of many colours that was on him;"
+    }
    ]
   },
   {
@@ -159,6 +206,13 @@
    "verses": [
     {
      "v": 24,
+     "text": "And they took him, and cast him into a pit: and the pit was empty, there was no water in it."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
      "text": "And they took him, and cast him into a pit: and the pit was empty, there was no water in it."
     }
    ]
@@ -179,6 +233,18 @@
      "v": 26,
      "text": "And Judah said unto his brethren, What profit is it if we slay our brother, and conceal his blood?"
     }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And Judah said unto his brethren,"
+    },
+    {
+     "v": 26,
+     "speaker": "judah",
+     "text": "What profit is it if we slay our brother, and conceal his blood?"
+    }
    ]
   },
   {
@@ -192,6 +258,13 @@
      "v": 27,
      "text": "Come, and let us sell him to the Ishmeelites, and let not our hand be upon him; for he is our brother and our flesh. And his brethren were content."
     }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "judah",
+     "text": "Come, and let us sell him to the Ishmeelites, and let not our hand be upon him; for he is our brother and our flesh. And his brethren were content."
+    }
    ]
   },
   {
@@ -203,6 +276,13 @@
    "verses": [
     {
      "v": 28,
+     "text": "Then there passed by Midianites merchantmen; and they drew and lifted up Joseph out of the pit, and sold Joseph to the Ishmeelites for twenty pieces of silver: and they brought Joseph into Egypt."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
      "text": "Then there passed by Midianites merchantmen; and they drew and lifted up Joseph out of the pit, and sold Joseph to the Ishmeelites for twenty pieces of silver: and they brought Joseph into Egypt."
     }
    ]
@@ -236,6 +316,7 @@
    "S02_no_refs_in_retelling": "pass",
    "S09_names": "pass",
    "speakers": "pass",
+   "voice_segments": "pass",
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",

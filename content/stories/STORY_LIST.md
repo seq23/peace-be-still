@@ -6,6 +6,8 @@ Chosen by evidence, not taste (owner, 18 Nov 2026: "How do we know we're picking
 - **Black favorites** (20, English, Hush Harbor only): Africans and people of colour in scripture, and the stories the Black church preaches and sings most that the core 60 does not already hold.
 - **Plain-voice telling: not written.** COMMON.md and PHASES.md ask for one story JSON per story ("Today's story") and name voices only for chat (Black church, plain modern, teen, Spanish); no brief asks for a second English telling. If English readers outside Hush Harbor should get a plain telling, that is a later batch.
 
+- **Approved model:** the owner approved the plain telling of story 1 (Jesus calms the storm) as the model for every plain telling ("Ok sure approved", 18 Nov 2026).
+
 ## Evidence sources (read 18 Nov 2026)
 - **search**: free Google and YouTube autocomplete (suggestqueries.google.com, client=firefox, and ds=yt). Seeds: "bible story about…", "bible story of…", "bible story a / d / j / m / r / s", "bible stories about…", "bible story about women", "famous bible stories", "black people in the bible", "african in the bible", "women in the bible", "historia biblica de…", "mujeres de la biblia". A story named in a suggestion means people type it. Raw answers: `story-list-evidence.json`.
 - **apps**: the stories the big Bible-story apps and shows all carry (Bible App for Kids, Superbook): expected, so a gap would be noticed.

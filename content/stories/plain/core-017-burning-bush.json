@@ -1,0 +1,279 @@
+{
+ "id": "core-017-burning-bush",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Moses and the Burning Bush",
+ "passage": {
+  "refs": [
+   "EXO 2:15",
+   "EXO 3:1-14"
+  ],
+  "label": "Exodus 2:15; Exodus 3:1-14"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "moses",
+   "name": "Moses",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moses was a long way from the palace where he had grown up. He had fled Egypt years before. Now he was a shepherd in the land of Midian, keeping the flock of his father-in-law, Jethro. One day he led the sheep to the far side of the wilderness and came to Horeb, the mountain of God."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:2",
+   "label": "Exodus 3:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And the angel of the LORD appeared unto him in a flame of fire out of the midst of a bush: and he looked, and, behold, the bush burned with fire, and the bush was not consumed."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD appeared unto him in a flame of fire out of the midst of a bush: and he looked, and, behold, the bush burned with fire, and the bush was not consumed."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A bush on fire in the desert was not unusual. But this one kept burning, and it was not burned up."
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 3:3",
+   "label": "Exodus 3:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And Moses said, I will now turn aside, and see this great sight, why the bush is not burnt."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And Moses said,"
+    },
+    {
+     "v": 3,
+     "speaker": "moses",
+     "text": "I will now turn aside, and see this great sight, why the bush is not burnt."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moses had to stop and turn aside to look. Sometimes the holy moments in our lives begin when we notice something and stop to look."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:4",
+   "label": "Exodus 3:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And when the LORD saw that he turned aside to see, God called unto him out of the midst of the bush, and said, Moses, Moses. And he said, Here am I."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And when the LORD saw that he turned aside to see, God called unto him out of the midst of the bush, and said, Moses, Moses. And he said, Here am I."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:5",
+   "label": "Exodus 3:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And he said, Draw not nigh hither: put off thy shoes from off thy feet, for the place whereon thou standest is holy ground."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And he said, Draw not nigh hither: put off thy shoes from off thy feet, for the place whereon thou standest is holy ground."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moses took off his sandals. Ordinary desert dirt had become holy ground, because God was there. Then God told Moses who was speaking. He was the God of Moses's father, and of Abraham, Isaac and Jacob before him. Moses covered his face. He was afraid to look upon God."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:7",
+   "label": "Exodus 3:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And the LORD said, I have surely seen the affliction of my people which are in Egypt, and have heard their cry by reason of their taskmasters; for I know their sorrows;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And the LORD said, I have surely seen the affliction of my people which are in Egypt, and have heard their cry by reason of their taskmasters; for I know their sorrows;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "I have seen. I have heard. I know. God had not forgotten his people in Egypt. Their cries had reached him. He told Moses he had come down to bring them out of Egypt and into a good land. Then he told Moses that he was sending him to Pharaoh."
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 3:11",
+   "label": "Exodus 3:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And Moses said unto God, Who am I, that I should go unto Pharaoh, and that I should bring forth the children of Israel out of Egypt?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And Moses said unto God,"
+    },
+    {
+     "v": 11,
+     "speaker": "moses",
+     "text": "Who am I, that I should go unto Pharaoh, and that I should bring forth the children of Israel out of Egypt?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Who am I? It is the question many of us ask when we are called to something bigger than ourselves. Moses had been away for years. He was a shepherd now. He did not feel like a leader."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God did not answer by telling Moses how capable he was. He answered by telling Moses that he would be with him. Then Moses asked another question. If the people asked him the name of the God who sent him, what should he say?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:14",
+   "label": "Exodus 3:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And God said unto Moses, I AM THAT I AM: and he said, Thus shalt thou say unto the children of Israel, I AM hath sent me unto you."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And God said unto Moses, I AM THAT I AM: and he said, Thus shalt thou say unto the children of Israel, I AM hath sent me unto you."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "I AM THAT I AM. God did not give Moses a small name that could be held or controlled. He gave a name that says he simply is."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moses still had more questions, and more doubts, in the chapters ahead. But this was where it began: a shepherd, a bush that would not burn up, and a God who had seen the suffering of his people and was coming to help them."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 556,
+ "est_seconds": 303,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.0",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exodus 3:1-14 with 2:15 as background; God's words only in KJV blocks, read by the narrator."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain and reverent."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Pastor pass: removed a borrowed line (Hebrews 13:8) added to the meaning of I AM.",
+  "person_read": false
+ },
+ "status": "passed"
+}

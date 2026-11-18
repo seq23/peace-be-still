@@ -1,0 +1,225 @@
+# Plain telling, core stories 11-20.
+
+=== core-011-noah | Noah and the Rainbow
+passage: GEN 6:5-22; GEN 7:1-24; GEN 8:1-22; GEN 9:8-17
+shelf: adult
+violence: mild
+sexual: none
+cast:
+N: In the days of Noah, the earth had grown violent and corrupt. The Bible says it grieved the LORD in his heart. But one man stood apart. The LORD looked on Noah with favor. Noah walked with God.
+N: God told Noah what was coming. A flood would cover the earth. Noah was to build an ark of gopher wood, a great boat with rooms inside, sealed with pitch inside and out. He was to bring his wife, his three sons and their wives, and two of every kind of living creature, male and female, with food for them all.
+S: GEN 6:22
+N: Picture the work of it. Cutting and fitting and sealing, day after day. Noah did not have a forecast. He had a word from God, and he built on it.
+N: When the ark was ready, the animals came, two by two. Noah's family went inside. Then something tender happens in the story.
+S: GEN 7:16
+N: The LORD shut him in. Noah did not have to close that great door himself. The rain fell for forty days and forty nights. The waters rose until even the mountains were covered. Everything outside the ark was lost. Inside, a family and a boat full of animals rode on the water, waiting.
+S: GEN 8:1
+N: God remembered Noah. The wind passed over the earth, and slowly the waters went down. The ark came to rest on the mountains of Ararat. Still Noah waited. After forty more days he opened the window and sent out a raven, and then a dove. The dove found no place to rest, so it came back to his hand. Seven days later, he sent her out again.
+S: GEN 8:11
+N: A single fresh leaf. That was how Noah knew the water was going down. Sometimes the first sign of a new season is very small.
+N: When the earth was dry, God told Noah to bring everyone out. Noah built an altar and worshipped. Then God made a promise, not only to Noah, but to every living creature.
+S: GEN 9:13
+S: GEN 9:15
+N: The rainbow is a sign of that promise. God set it in the clouds so that whenever it appears, he will remember his covenant. The next time you see one after a storm, you can remember this story: a family kept safe through the flood, a dove with a leaf, and a God who remembers.
+
+=== core-012-esther | Esther, for Such a Time as This
+passage: EST 2:5-17; EST 3:8-13; EST 4:1-17; EST 5:1-3
+shelf: adult
+violence: mild
+sexual: none
+cast: esther|Esther|adult|f; mordecai|Mordecai|elder|m; king|the king|adult|m
+N: Esther was a young Jewish woman living in the Persian capital of Shushan. Her parents had died, and her cousin Mordecai had raised her as his own daughter. In time, she was chosen as queen by King Ahasuerus. But on Mordecai's advice, she had never told anyone at the palace who her people were.
+N: Then a powerful official named Haman persuaded the king to sign a terrible order. On a single day, the Jews in every province of the kingdom were to be destroyed. Letters went out with the king's seal.
+N: When Mordecai heard, he tore his clothes and put on sackcloth and ashes. He cried with a loud and bitter cry in the middle of the city. Across the provinces, Jewish families fasted and wept.
+N: Esther sent a servant to find out what was wrong. Mordecai sent back a copy of the order and asked her to go to the king and plead for her people.
+N: But there was a problem. Anyone who went in to the king without being called could be put to death, unless the king held out his golden sceptre. And Esther had not been called in thirty days.
+S: EST 4:14 @mordecai
+N: For such a time as this. Mordecai did not promise Esther it would be easy or safe. He asked her to consider that her place in the palace might be part of something bigger than her own comfort.
+S: EST 4:16 @esther
+N: If I perish, I perish. Esther did not walk in alone. She asked her people to fast with her for three days, and she and her maidens fasted too. Then she chose to go.
+N: On the third day, Esther put on her royal robes and went to stand in the king's inner court. Imagine the silence. Every step could have been her last.
+S: EST 5:2
+S: EST 5:3 @king
+N: The king held out the sceptre. Esther came near and touched the top of it. The door that could have closed on her opened instead. Her courage began a turning that would save her people.
+N: Esther's story is not about being fearless. It is about being afraid and going anyway, after prayer and fasting, with others standing with her. She used the place she had been given for the good of her people.
+
+=== core-013-job | Job, Who Would Not Let Go
+passage: JOB 1:1-22; JOB 2:7-13; JOB 42:10-17
+shelf: adult
+violence: mild
+sexual: none
+cast: job|Job|adult|m
+S: JOB 1:1
+N: Job lived in the land of Uz. He had seven sons and three daughters, great flocks and herds, and many servants. He was known as the greatest man in all the east. He loved his children and prayed for them.
+N: Then, in a single day, it all fell apart. One messenger after another came running. Raiders had taken the oxen and the donkeys. Fire had fallen and burned up the sheep. The camels were gone. And while one messenger was still speaking, another came with the worst news of all. A great wind had struck the house where Job's children were gathered, and they had died.
+N: Job stood up and tore his robe. He shaved his head. He fell down on the ground and worshipped.
+S: JOB 1:21 @job
+S: JOB 1:22
+N: Job was not pretending he felt no pain. He tore his robe. He sat on the ground. But in the middle of the worst day of his life, he still turned toward God.
+N: Then Job's own body was struck with painful sores from the soles of his feet to the top of his head. He sat down among the ashes. Three friends heard what had happened and came to comfort him. When they saw him, they barely knew him. They wept aloud.
+S: JOB 2:13
+N: Seven days of silence. Before Job's friends said anything that went wrong, they did something right. They sat with him and did not try to explain his grief.
+N: The book of Job is long. Job asks God hard questions, and his friends give him hard answers. In the end, God speaks, and Job is humbled before him. The book never gives a simple reason for Job's suffering. What it shows is a man who would not let go of God, even when he did not understand.
+S: JOB 42:10
+N: Job prayed for the very friends who had hurt him with their words. Then the LORD turned his captivity. His family came to comfort him. In time he had seven sons and three daughters again, and he lived to see his grandchildren and great-grandchildren.
+N: Job's restored life did not erase his grief. Nothing in the story says it did. But it tells us that the God Job held on to through the dark had not let go of him either.
+
+=== core-014-creation | In the Beginning
+passage: GEN 1:1-31; GEN 2:1-3
+shelf: adult
+violence: none
+sexual: none
+cast:
+S: GEN 1:1
+S: GEN 1:2
+N: Before anything else, there was God. The earth was without shape and empty, and darkness covered the deep waters. But even there, in the dark, the Spirit of God was moving.
+S: GEN 1:3
+N: The first thing God made was light. He saw that it was good, and he divided the light from the darkness. He named the light Day and named the darkness Night. Evening came, then morning, and that was the first day.
+N: On the second day, God made the sky, the wide firmament, dividing the waters above from the waters below. On the third day, he gathered the seas into one place, and dry land appeared. Then the land grew green. Grass came up, and plants with seed, and trees with fruit, each after its own kind. God looked, and it was good.
+N: On the fourth day, God set lights in the sky: the sun to rule the day, the moon to rule the night, and the stars as well. On the fifth day, he filled the waters with living creatures, and the air with birds of every kind. He blessed them and told them to be fruitful and multiply.
+N: On the sixth day, God made the animals of the land: cattle, creeping things, and wild beasts, each after its own kind. And then he did something new.
+S: GEN 1:27
+N: People were made in the image of God, male and female. Every person you will ever meet carries that image. God blessed them and gave them the care of the earth, its fish and birds and living things, and gave them plants and fruit for food.
+S: GEN 1:31
+N: Notice the difference. After each day, God saw that it was good. When he looked at everything together, with people in it, he saw that it was very good.
+S: GEN 2:2
+N: On the seventh day, God rested. He blessed that day and set it apart. The story of creation ends not with more work but with rest.
+N: The world began with light coming into darkness, with order coming to what was empty, and with a God who called it good. At the end of a long day, it is a good story to remember. Light first. Then everything else. Then rest.
+
+=== core-015-woman-at-the-well | The Woman at the Well
+passage: JOH 4:5-30; JOH 4:39-42
+shelf: adult
+violence: none
+sexual: none
+cast: woman|woman|adult|f; samaritans|the Samaritans|adult|group
+N: Jesus and his disciples were walking through Samaria. Around noon they came to a town called Sychar, near the well that Jacob had dug long ago. Jesus was tired from the journey, so he sat down by the well while his disciples went into town to buy food.
+N: A Samaritan woman came to draw water. It was about the sixth hour, the middle of the day, and the sun was high.
+S: JOH 4:7
+S: JOH 4:9 @woman
+N: Jews and Samaritans did not mix. A Jewish teacher was not expected to speak to a Samaritan woman alone at a well, let alone ask her for a drink. Jesus crossed that line without a second thought.
+N: He told her that if she knew who was asking, she would have asked him, and he would have given her living water. She pointed out that he had no bucket, and the well was deep.
+S: JOH 4:13
+S: JOH 4:14
+S: JOH 4:15 @woman
+N: Then Jesus asked her to go and call her husband. She said she had no husband. Jesus told her she was right. She had had five husbands, and the man she was with now was not her husband. He did not shame her. He simply knew her story.
+N: She told him she could see he was a prophet. She asked him where people should worship. Jesus told her a time was coming when true worship would not depend on a mountain or a city, but on spirit and truth. She said she knew the Messiah was coming. And Jesus told her plainly that he was the one.
+N: Just then the disciples came back, surprised to find him talking with her. But no one asked him why.
+S: JOH 4:28
+S: JOH 4:29 @woman
+N: She left her water jar behind. She had come for water and found something more. And the woman who had come to the well alone at noon went straight back into town to talk to everyone.
+S: JOH 4:42 @samaritans
+N: A Samaritan woman with a complicated past became the one who carried this news to her whole town, and many believed because of what she said. Jesus met her where she was, told her the truth with kindness, and sent her home with good news to share.
+
+=== core-016-walks-on-water | Peter Walks on the Water
+passage: MAT 14:22-33
+shelf: adult
+violence: none
+sexual: none
+cast: peter|Peter|adult|m; disciples|the disciples|adult|group
+N: Jesus had just fed a great crowd. Afterwards he sent his disciples ahead of him in the boat to the other side of the lake while he sent the people home. Then he went up a mountain by himself to pray. When evening came, he was there alone.
+N: Out on the lake, the boat was in trouble. It was being tossed by the waves, because the wind was against them. The disciples rowed for hours and made little progress.
+S: MAT 14:25
+S: MAT 14:26 @disciples
+N: In the fourth watch of the night, in the hours before dawn, they saw a figure coming toward them across the water. They were terrified. Then they heard a voice they knew.
+S: MAT 14:27
+S: MAT 14:28 @peter
+N: Peter did not ask for the storm to stop. He asked to come to Jesus, where Jesus was, on the water.
+S: MAT 14:29
+N: Imagine Peter stepping over the side of the boat. The waves were still there. The wind was still blowing. And for a few steps, he walked toward Jesus on the water.
+S: MAT 14:30 @peter
+N: Peter looked at the wind and the waves, and fear took over. He began to sink. His prayer was three words long. It is one of the shortest prayers in the Bible, and one of the most honest.
+S: MAT 14:31
+N: Immediately. Jesus did not wait for Peter to sink further. He did not make him swim back to the boat. He reached out his hand and caught him. Then he gently asked him why he had doubted.
+N: People sometimes remember this story only for the sinking. But Peter was the one who got out of the boat. He walked on water, even briefly. When he started to sink, he knew whom to call, and the hand that caught him was already there.
+N: When they climbed into the boat together, the wind stopped.
+S: MAT 14:33 @disciples
+N: The disciples ended the night in worship. They had learned that the one walking on the water toward them was the Son of God. And they had watched him catch Peter the moment he cried out.
+
+=== core-017-burning-bush | Moses and the Burning Bush
+passage: EXO 2:15; EXO 3:1-14
+shelf: adult
+violence: none
+sexual: none
+cast: moses|Moses|adult|m
+N: Moses was a long way from the palace where he had grown up. He had fled Egypt years before. Now he was a shepherd in the land of Midian, keeping the flock of his father-in-law, Jethro. One day he led the sheep to the far side of the wilderness and came to Horeb, the mountain of God.
+S: EXO 3:2
+N: A bush on fire in the desert was not unusual. But this one kept burning, and it was not burned up.
+S: EXO 3:3 @moses
+N: Moses had to stop and turn aside to look. Sometimes the holy moments in our lives begin when we notice something and stop to look.
+S: EXO 3:4
+S: EXO 3:5
+N: Moses took off his sandals. Ordinary desert dirt had become holy ground, because God was there. Then God told Moses who was speaking. He was the God of Moses's father, and of Abraham, Isaac and Jacob before him. Moses covered his face. He was afraid to look upon God.
+S: EXO 3:7
+N: I have seen. I have heard. I know. God had not forgotten his people in Egypt. Their cries had reached him. He told Moses he had come down to bring them out of Egypt and into a good land. Then he told Moses that he was sending him to Pharaoh.
+S: EXO 3:11 @moses
+N: Who am I? It is the question many of us ask when we are called to something bigger than ourselves. Moses had been away for years. He was a shepherd now. He did not feel like a leader.
+N: God did not answer by telling Moses how capable he was. He answered by telling Moses that he would be with him. Then Moses asked another question. If the people asked him the name of the God who sent him, what should he say?
+S: EXO 3:14
+N: I AM THAT I AM. God did not give Moses a small name that could be held or controlled. He gave a name that says he simply is.
+N: Moses still had more questions, and more doubts, in the chapters ahead. But this was where it began: a shepherd, a bush that would not burn up, and a God who had seen the suffering of his people and was coming to help them.
+
+=== core-018-joseph-forgives | Joseph Forgives His Brothers
+passage: GEN 41:41-43; GEN 41:53-57; GEN 42:1-8; GEN 44:33; GEN 45:1-15; GEN 50:15-21
+shelf: adult
+violence: none
+sexual: none
+cast: joseph|Joseph|adult|m; brothers|his brethren|adult|group
+N: Years had passed since Joseph's brothers sold him. In Egypt, Joseph had been a slave, then a prisoner, and then, through God's hand, the second most powerful man in the land. He had stored up grain for seven years of plenty, and now a great famine had come.
+N: In Canaan, his father Jacob and his brothers were running out of food. Jacob sent ten of his sons down to Egypt to buy grain. They came and bowed before the governor of the land, with their faces to the ground. They did not know it was Joseph. But Joseph knew them.
+N: Over time, Joseph tested his brothers. He wanted to know whether they had changed. And when his brother Judah offered himself as a slave in place of their youngest brother, Benjamin, Joseph saw that they had.
+S: GEN 45:1
+N: Joseph could not hold back any longer. He sent everyone else out of the room. Then he wept so loudly that the Egyptians heard it, and the whole house of Pharaoh heard about it.
+S: GEN 45:3 @joseph
+N: His brothers were speechless. The brother they had sold was standing in front of them with power over their lives. They were terrified.
+S: GEN 45:4 @joseph
+S: GEN 45:5 @joseph
+N: Joseph did not pretend what they did was not wrong. He named it plainly: you sold me. But he also saw something larger at work. God had sent him ahead to save lives.
+N: He told them to hurry home and bring their father and their families to live near him, so he could care for them through the years of famine left. Then he threw his arms around his brother Benjamin, and the two of them wept together. He kissed all his brothers and wept over them. After that, his brothers talked with him.
+N: Years later, after their father Jacob died, the brothers grew afraid again. They wondered whether Joseph had only been kind for their father's sake. They sent word asking him to forgive them, and they came and fell down before him.
+S: GEN 50:19 @joseph
+S: GEN 50:20 @joseph
+S: GEN 50:21 @joseph until "And he comforted"
+N: You meant evil, Joseph said, but God meant good. Joseph's forgiveness did not deny the harm. It held the harm and the hope side by side, and it chose to care for the ones who had hurt him. He comforted them and spoke kindly to them.
+
+=== core-019-mary-martha | Mary and Martha
+passage: LUK 10:38-42
+shelf: adult
+violence: none
+sexual: none
+cast: martha|Martha|adult|f
+S: LUK 10:38
+N: Jesus was traveling with his disciples, and they came to a village. A woman named Martha opened her home to him. Hospitality mattered deeply. When a guest came, especially an honored teacher with his followers, there was food to prepare, water to draw and a home to make ready.
+S: LUK 10:39
+N: Martha had a sister named Mary. While Martha worked, Mary sat at the feet of Jesus and listened to him teach. She stayed close and took in every word.
+N: Imagine Martha's afternoon. Pots on the fire. Bread to bake. Guests to feed. She moved from task to task, and every time she passed the doorway, there was her sister, sitting and listening.
+S: LUK 10:40 @martha
+N: Martha did what many of us would do. She brought her frustration straight to Jesus. Lord, do you not care? It is the same question the disciples asked in the storm. It comes from a tired heart that feels alone with too much to do.
+N: Notice that Jesus did not scold her for serving. Serving is good. Feeding people is good. Opening your home is good. The trouble was not Martha's work. It was the worry and the weight she was carrying while she did it.
+S: LUK 10:41
+S: LUK 10:42
+N: Martha, Martha. He said her name twice, gently, the way you speak to someone you love. He saw how careful and troubled she was about many things. And he told her only one thing was needed.
+N: Mary had chosen to sit with him and listen. Jesus would not take that away from her. He was not asking Martha to stop caring for people. He was inviting her to come and sit down too.
+N: Most of us know Martha's day. The list that never ends, the feeling that everyone else is resting while we work. This story does not make Martha the villain. It shows Jesus seeing a busy, worried woman and inviting her to rest at his feet.
+N: The story ends there, with the invitation still open. We do not know whether Martha set down her work that day. But we know what Jesus offered her. He offered the good part, the one thing that is needed.
+
+=== core-020-widow-zarephath | Elijah and the Widow's Last Meal
+passage: 1KI 17:1-16
+shelf: adult
+violence: none
+sexual: none
+cast: elijah|Elijah|adult|m; widow|widow|adult|f
+N: The prophet Elijah had told King Ahab that there would be no rain in the land, except by God's word. The drought came. For a while, Elijah lived by a brook, and ravens brought him bread and meat morning and evening. But in time the brook dried up.
+N: Then God sent Elijah to a town called Zarephath, outside Israel, near Sidon. God told him a widow there would feed him.
+S: 1KI 17:10 @elijah
+N: Water was precious in a drought. Still, she went to get it. As she was going, Elijah called after her and asked her to bring a piece of bread as well.
+S: 1KI 17:12 @widow
+N: This is one of the saddest sentences in the Bible. She was gathering a few sticks to cook one last small meal for herself and her son. After that, she expected them both to starve. She was not being unkind to the stranger. She simply had nothing left to give.
+S: 1KI 17:13 @elijah
+S: 1KI 17:14
+N: Fear not. Elijah asked her to do something very hard: to make him a small cake first, and then make something for herself and her son. He told her what God had said, that her flour and oil would not run out until the rain came again.
+N: Imagine standing in her kitchen. Her son was hungry. There was barely enough for one meal. And a stranger from another country was asking her to trust the word of his God.
+S: 1KI 17:15
+S: 1KI 17:16
+N: She did what Elijah said. And it happened just as God had spoken through him. Day after day, she reached into the barrel and found enough flour. Day after day, there was oil in the jar. Not a great store of food. Just enough, each day, for the prophet, for the widow and for her son.
+N: This story is about God's care for a poor widow and her child in a foreign land, in the middle of a drought. She was not an Israelite. She was not wealthy or powerful. But God sent his prophet to her house and kept her family through the hard season.
+N: It does not promise that every empty cupboard will be filled. It tells what God did for one widow, one jar and one barrel. It shows a God who saw a mother in Zarephath gathering sticks for what she thought was her last meal.

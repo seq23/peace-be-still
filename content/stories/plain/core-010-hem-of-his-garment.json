@@ -56,6 +56,13 @@
      "v": 25,
      "text": "And a certain woman, which had an issue of blood twelve years,"
     }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "And a certain woman, which had an issue of blood twelve years,"
+    }
    ]
   },
   {
@@ -69,6 +76,13 @@
      "v": 26,
      "text": "And had suffered many things of many physicians, and had spent all that she had, and was nothing bettered, but rather grew worse,"
     }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And had suffered many things of many physicians, and had spent all that she had, and was nothing bettered, but rather grew worse,"
+    }
    ]
   },
   {
@@ -78,13 +92,20 @@
   },
   {
    "type": "scripture",
-   "speaker": "woman",
+   "speaker": "narrator",
    "ref": "MAR 5:27",
    "label": "Mark 5:27",
    "translation": "KJV",
    "verses": [
     {
      "v": 27,
+     "text": "When she had heard of Jesus, came in the press behind, and touched his garment."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
      "text": "When she had heard of Jesus, came in the press behind, and touched his garment."
     }
    ]
@@ -99,6 +120,18 @@
     {
      "v": 28,
      "text": "For she said, If I may touch but his clothes, I shall be whole."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "For she said,"
+    },
+    {
+     "v": 28,
+     "speaker": "woman",
+     "text": "If I may touch but his clothes, I shall be whole."
     }
    ]
   },
@@ -118,6 +151,13 @@
      "v": 29,
      "text": "And straightway the fountain of her blood was dried up; and she felt in her body that she was healed of that plague."
     }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "And straightway the fountain of her blood was dried up; and she felt in her body that she was healed of that plague."
+    }
    ]
   },
   {
@@ -129,6 +169,13 @@
    "verses": [
     {
      "v": 30,
+     "text": "And Jesus, immediately knowing in himself that virtue had gone out of him, turned him about in the press, and said, Who touched my clothes?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
      "text": "And Jesus, immediately knowing in himself that virtue had gone out of him, turned him about in the press, and said, Who touched my clothes?"
     }
    ]
@@ -144,6 +191,18 @@
      "v": 31,
      "text": "And his disciples said unto him, Thou seest the multitude thronging thee, and sayest thou, Who touched me?"
     }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And his disciples said unto him,"
+    },
+    {
+     "v": 31,
+     "speaker": "disciples",
+     "text": "Thou seest the multitude thronging thee, and sayest thou, Who touched me?"
+    }
    ]
   },
   {
@@ -155,6 +214,13 @@
    "verses": [
     {
      "v": 32,
+     "text": "And he looked round about to see her that had done this thing."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
      "text": "And he looked round about to see her that had done this thing."
     }
    ]
@@ -180,6 +246,13 @@
      "v": 33,
      "text": "But the woman fearing and trembling, knowing what was done in her, came and fell down before him, and told him all the truth."
     }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "But the woman fearing and trembling, knowing what was done in her, came and fell down before him, and told him all the truth."
+    }
    ]
   },
   {
@@ -191,6 +264,13 @@
    "verses": [
     {
      "v": 34,
+     "text": "And he said unto her, Daughter, thy faith hath made thee whole; go in peace, and be whole of thy plague."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
      "text": "And he said unto her, Daughter, thy faith hath made thee whole; go in peace, and be whole of thy plague."
     }
    ]
@@ -224,6 +304,7 @@
    "S02_no_refs_in_retelling": "pass",
    "S09_names": "pass",
    "speakers": "pass",
+   "voice_segments": "pass",
    "S10_shelf": "pass",
    "S11_length": "note: 493 words outside 500-900 words",
    "S11_sentence_length": "pass",

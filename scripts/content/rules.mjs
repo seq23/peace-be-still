@@ -44,6 +44,11 @@ export const ENGLISH = rx(["\\bthe\\b", "\\band\\b", "\\bwith\\b", "\\byou\\b", 
 // Mindset door (Imagination Nights): no God's Word cross-links, no scripture, no Neville without the disclaimer.
 export const FAITH_LINK = rx(["hush harbor", "psalm nights", "mi refugio", "young faith", "\\bkjv\\b", "\\bscripture\\b", "\\bbible\\b"]);
 // The characters never voiced: words of God (and of Jesus) are read by the narrator as quoted scripture.
+// Narration markers that must never sit inside a character's voice.
+export const NARRATION = {
+  en: /\b(?:[Aa]nd|Then|But|So) (?:(?!hast\b|hath\b|have\b|has\b|had\b|thou\b|ye\b|we\b|I\b)[\w-]+ ){0,4}(?:said|saith|answered|spake)\b|\b(?:said|saith|spake|answered) (?:unto|to) (?:him|her|them|the)\b|\band (?:say|says) unto\b|\b(?:[Aa]nd) (?:they|he|she) (?:cried|came)\b|\bcould not answer\b/,
+  es: /\b(?:dijo|dijeron|respondi[óo]|respondieron|habl[óo])\b[^:]{0,80}:/i,
+};
 export const NEVER_VOICED = new Set(["god", "lord", "jehovah", "jesus", "christ", "holy-spirit", "spirit", "angel-of-the-lord"]);
 
 // S10: sensitive passages force the content tags (and keep them off the family shelf).
@@ -147,6 +152,17 @@ export function checkStory(s) {
   const unknown = s.blocks.filter((b) => b.speaker !== "narrator" && !ids.has(b.speaker)).map((b) => b.speaker);
   const castBad = (s.cast || []).find((m) => !m.id || !m.name || !["child", "teen", "adult", "elder"].includes(m.age) || !["f", "m", "group"].includes(m.gender));
   c.speakers = divine.length ? fail(`never voiced as a character: ${divine.join(", ")}`) : unknown.length ? fail(`speaker not in cast: ${unknown.join(", ")}`) : castBad ? fail(`cast entry incomplete: ${JSON.stringify(castBad)}`) : pass;
+  // Character-voiced segments: verbatim halves of the verse, and no narration inside the voice.
+  const segBad = [];
+  for (const b of scr) {
+    if (!b.segments) { segBad.push(`${b.ref} has no segments`); continue; }
+    for (const x of b.verses) {
+      const parts = b.segments.filter((sg) => sg.v === x.v);
+      if (parts.map((sg) => sg.text).join(" ").replace(/\s+/g, " ") !== x.text.replace(/\s+/g, " ")) segBad.push(`${b.ref}:${x.v} segments are not the verse word for word`);
+      for (const sg of parts) if (sg.speaker !== "narrator" && NARRATION[lang].test(sg.text)) segBad.push(`${b.ref}:${x.v} narration in ${sg.speaker}'s voice: "${sg.text.slice(0, 50)}"`);
+    }
+  }
+  c.voice_segments = segBad.length ? fail(segBad[0]) : pass;
   // S10 shelf and tags.
   const tagsOk = ["family", "young-faith", "adult"].includes(s.shelf) && ["none", "mild", "strong"].includes(s.content?.violence) && ["none", "implied"].includes(s.content?.sexual);
   const sens = s.passage.refs.some((r) => { const p = parseRef(r); return SENSITIVE.some(([b, ch, v]) => b === p.book && (ch === 0 || ch === p.ch) && (!v || (p.a <= v && v <= p.z))); });

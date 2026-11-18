@@ -91,15 +91,74 @@ function finalize(item, checks, review) {
   return item;
 }
 
+
+// A verse voiced by a character carries only that character's words: the verse is cut (verbatim)
+// at each speech boundary; narration goes to the narrator. Source modifiers on an S: line:
+//   whole            the verse is all speech (no cut)
+//   after "phrase"   speech starts after this exact phrase (instead of the first introducer)
+//   until "phrase"   speech stops before this phrase; the rest of the verse is narration (another speaker)
+const INTRO = {
+  en: /\b(?:said|saith|say|saying|answered|spake|cried)(?: moreover)?(?: (?:the |his )?[A-Za-z-]+(?: of [A-Z][a-z]+)?)?(?: (?:unto|to|before|one to) [^,:;]{1,40})?,\s+/,
+  es: /\b(?:dijo|dijeron|dice|dicen|respondi[óo]|respondieron|habl[óo]|diciendo|clam[óo]|clamaron)\b[^:.]{0,80}:\s+/,
+};
+const RESUME = {
+  en: /[.?!:;,]\s+(?=(?:[Aa]nd|Then|But|So) (?:he|she|they|his|her|the|[A-Z][a-z]+)\b[^,]{0,40}?\b(?:said|saith|answered|came|could|cried|spake)\b)/,
+  es: /[.?!:;,]\s+(?=(?:Y|y|Entonces|Mas) [^,:]{0,40}?\b(?:dijo|dijeron|respondi[óo]|respondieron|clamaron|vinieron|llegaron|pudieron)\b)/,
+};
+function cutVerse(text, speaker, lang, after) {
+  const out = [];
+  let pos = 0, first = true;
+  while (pos < text.length) {
+    let start;
+    if (first && after) {
+      const i = text.indexOf(after);
+      if (i < 0) return null;
+      start = i + after.length;
+    } else {
+      const m = text.slice(pos).match(INTRO[lang]);
+      if (!m) { if (first) return [{ speaker, text }]; out.push({ speaker: "narrator", text: text.slice(pos) }); break; }
+      start = pos + m.index + m[0].length;
+      let again;
+      while ((again = text.slice(start).match(INTRO[lang])) && again.index === 0) start += again[0].length;
+      const lead = text.slice(start).match(/^(?:and )?(?:said|saying)\b[^,]*,\s+/i);
+      if (lead) start += lead[0].length;
+    }
+    first = false;
+    if (start > pos) out.push({ speaker: "narrator", text: text.slice(pos, start) });
+    const r = text.slice(start).match(RESUME[lang]);
+    const stop = r ? start + r.index + r[0].length : text.length;
+    out.push({ speaker, text: text.slice(start, stop) });
+    pos = stop;
+  }
+  return out;
+}
+export function speechSegments(vs, speaker, lang, mods, id = "") {
+  return vs.flatMap(({ v, text }) => {
+    if (speaker === "narrator" || mods.whole) return [{ v, speaker, text }];
+    let head = text, tail = "";
+    if (mods.until) {
+      const i = text.indexOf(mods.until);
+      if (i < 0) throw new Error(`SRC_SPLIT ${id}: until "${mods.until}" not in ${v}`);
+      head = text.slice(0, i); tail = text.slice(i);
+    }
+    const parts = cutVerse(head, speaker, lang, mods.after);
+    if (!parts) throw new Error(`SRC_SPLIT ${id}: after "${mods.after}" not in ${v}`);
+    if (tail) parts.push({ speaker: "narrator", text: tail });
+    return parts.map((x) => ({ v, speaker: x.speaker, text: x.text.trim() })).filter((x) => x.text);
+  });
+}
+
 // ------------------------------------------------------------------ builders
 function buildStory(it, telling) {
   const lang = TELLING_LANG[telling] || telling;
   const cast = (it.fields.cast?.[0] || "").split(";").map((s) => s.trim()).filter(Boolean).map((s) => { const [id, name, age, gender] = s.split("|").map((x) => x.trim()); return { id, name, age, gender }; });
   const blocks = it.seq.filter(([k]) => k === "N" || k === "S").map(([k, v]) => {
     if (k === "N") return { type: "retelling", speaker: "narrator", text: v };
-    const m = v.match(/^(\S+ \d+:\d+(?:-\d+)?)\s*(?:@(\S+))?$/);
+    const m = v.match(/^(\S+ \d+:\d+(?:-\d+)?)\s*(?:@(\S+))?\s*(.*)$/);
     if (!m) throw new Error(`SRC_SCRIPTURE ${it.id}: ${v}`);
-    return { type: "scripture", speaker: m[2] || "narrator", ...passage(m[1], lang) };
+    const mods = { whole: /\bwhole\b/.test(m[3]), after: (m[3].match(/after "([^"]+)"/) || [])[1], until: (m[3].match(/until "([^"]+)"/) || [])[1] };
+    const p = passage(m[1], lang), speaker = m[2] || "narrator";
+    return { type: "scripture", speaker, ...p, segments: speechSegments(p.verses, speaker, lang, mods, it.id) };
   });
   const refs = one(it, "passage", "").split(";").map((s) => s.trim()).filter(Boolean);
   const spoken = blocks.map((b) => (b.type === "retelling" ? b.text : b.verses.map((v) => v.text).join(" "))).join(" ");
@@ -292,6 +351,8 @@ N: Somebody ought to say amen. The same voice that spoke to the sea still calls 
     ["S10_shelf", (s) => { s.passage.refs = ["JDG 19:1-3"]; }],
     ["S10_shelf", (s) => { delete s.content.violence; }],
     ["S13_ai_label", (s) => { delete s.ai_label; }],
+    ["voice_segments", (s) => { s.blocks[2].segments = [{ v: 38, speaker: "disciples", text: s.blocks[2].verses[0].text }]; }],
+    ["voice_segments", (s) => { s.blocks[2].segments[1].text += " extra"; }],
   ];
   for (const [key, patch] of cases) { const c = mk(patch); if (!isFail(c[key])) throw new Error(`SELFTEST ${key} did not fail`); }
   // Spanish rules

@@ -56,6 +56,13 @@
      "v": 13,
      "text": "And not many days after the younger son gathered all together, and took his journey into a far country, and there wasted his substance with riotous living."
     }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And not many days after the younger son gathered all together, and took his journey into a far country, and there wasted his substance with riotous living."
+    }
    ]
   },
   {
@@ -74,6 +81,18 @@
      "v": 17,
      "text": "And when he came to himself, he said, How many hired servants of my father’s have bread enough and to spare, and I perish with hunger!"
     }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And when he came to himself, he said,"
+    },
+    {
+     "v": 17,
+     "speaker": "younger-son",
+     "text": "How many hired servants of my father’s have bread enough and to spare, and I perish with hunger!"
+    }
    ]
   },
   {
@@ -87,6 +106,13 @@
      "v": 18,
      "text": "I will arise and go to my father, and will say unto him, Father, I have sinned against heaven, and before thee,"
     }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "younger-son",
+     "text": "I will arise and go to my father, and will say unto him, Father, I have sinned against heaven, and before thee,"
+    }
    ]
   },
   {
@@ -98,6 +124,13 @@
    "verses": [
     {
      "v": 19,
+     "text": "And am no more worthy to be called thy son: make me as one of thy hired servants."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "younger-son",
      "text": "And am no more worthy to be called thy son: make me as one of thy hired servants."
     }
    ]
@@ -118,6 +151,13 @@
      "v": 20,
      "text": "And he arose, and came to his father. But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him."
     }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And he arose, and came to his father. But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him."
+    }
    ]
   },
   {
@@ -136,6 +176,18 @@
      "v": 21,
      "text": "And the son said unto him, Father, I have sinned against heaven, and in thy sight, and am no more worthy to be called thy son."
     }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And the son said unto him,"
+    },
+    {
+     "v": 21,
+     "speaker": "younger-son",
+     "text": "Father, I have sinned against heaven, and in thy sight, and am no more worthy to be called thy son."
+    }
    ]
   },
   {
@@ -148,6 +200,18 @@
     {
      "v": 22,
      "text": "But the father said to his servants, Bring forth the best robe, and put it on him; and put a ring on his hand, and shoes on his feet:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "But the father said to his servants,"
+    },
+    {
+     "v": 22,
+     "speaker": "father",
+     "text": "Bring forth the best robe, and put it on him; and put a ring on his hand, and shoes on his feet:"
     }
    ]
   },
@@ -162,6 +226,13 @@
      "v": 23,
      "text": "And bring hither the fatted calf, and kill it; and let us eat, and be merry:"
     }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "father",
+     "text": "And bring hither the fatted calf, and kill it; and let us eat, and be merry:"
+    }
    ]
   },
   {
@@ -173,6 +244,13 @@
    "verses": [
     {
      "v": 24,
+     "text": "For this my son was dead, and is alive again; he was lost, and is found. And they began to be merry."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "father",
      "text": "For this my son was dead, and is alive again; he was lost, and is found. And they began to be merry."
     }
    ]
@@ -193,6 +271,18 @@
      "v": 29,
      "text": "And he answering said to his father, Lo, these many years do I serve thee, neither transgressed I at any time thy commandment: and yet thou never gavest me a kid, that I might make merry with my friends:"
     }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "And he answering said to his father,"
+    },
+    {
+     "v": 29,
+     "speaker": "elder-son",
+     "text": "Lo, these many years do I serve thee, neither transgressed I at any time thy commandment: and yet thou never gavest me a kid, that I might make merry with my friends:"
+    }
    ]
   },
   {
@@ -206,6 +296,18 @@
      "v": 31,
      "text": "And he said unto him, Son, thou art ever with me, and all that I have is thine."
     }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And he said unto him,"
+    },
+    {
+     "v": 31,
+     "speaker": "father",
+     "text": "Son, thou art ever with me, and all that I have is thine."
+    }
    ]
   },
   {
@@ -217,6 +319,13 @@
    "verses": [
     {
      "v": 32,
+     "text": "It was meet that we should make merry, and be glad: for this thy brother was dead, and is alive again; and was lost, and is found."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "father",
      "text": "It was meet that we should make merry, and be glad: for this thy brother was dead, and is alive again; and was lost, and is found."
     }
    ]
@@ -250,6 +359,7 @@
    "S02_no_refs_in_retelling": "pass",
    "S09_names": "pass",
    "speakers": "pass",
+   "voice_segments": "pass",
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",

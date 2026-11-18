@@ -1,0 +1,314 @@
+{
+ "id": "core-018-joseph-forgives",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Joseph Forgives His Brothers",
+ "passage": {
+  "refs": [
+   "GEN 41:41-43",
+   "GEN 41:53-57",
+   "GEN 42:1-8",
+   "GEN 44:33",
+   "GEN 45:1-15",
+   "GEN 50:15-21"
+  ],
+  "label": "Genesis 41:41-43; Genesis 41:53-57; Genesis 42:1-8; Genesis 44:33; Genesis 45:1-15; Genesis 50:15-21"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "joseph",
+   "name": "Joseph",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "brothers",
+   "name": "his brethren",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Years had passed since Joseph's brothers sold him. In Egypt, Joseph had been a slave, then a prisoner, and then, through God's hand, the second most powerful man in the land. He had stored up grain for seven years of plenty, and now a great famine had come."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "In Canaan, his father Jacob and his brothers were running out of food. Jacob sent ten of his sons down to Egypt to buy grain. They came and bowed before the governor of the land, with their faces to the ground. They did not know it was Joseph. But Joseph knew them."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Over time, Joseph tested his brothers. He wanted to know whether they had changed. And when his brother Judah offered himself as a slave in place of their youngest brother, Benjamin, Joseph saw that they had."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 45:1",
+   "label": "Genesis 45:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Then Joseph could not refrain himself before all them that stood by him; and he cried, Cause every man to go out from me. And there stood no man with him, while Joseph made himself known unto his brethren."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Then Joseph could not refrain himself before all them that stood by him; and he cried, Cause every man to go out from me. And there stood no man with him, while Joseph made himself known unto his brethren."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Joseph could not hold back any longer. He sent everyone else out of the room. Then he wept so loudly that the Egyptians heard it, and the whole house of Pharaoh heard about it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 45:3",
+   "label": "Genesis 45:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And Joseph said unto his brethren, I am Joseph; doth my father yet live? And his brethren could not answer him; for they were troubled at his presence."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And Joseph said unto his brethren,"
+    },
+    {
+     "v": 3,
+     "speaker": "joseph",
+     "text": "I am Joseph; doth my father yet live?"
+    },
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And his brethren could not answer him; for they were troubled at his presence."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "His brothers were speechless. The brother they had sold was standing in front of them with power over their lives. They were terrified."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 45:4",
+   "label": "Genesis 45:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And Joseph said unto his brethren, Come near to me, I pray you. And they came near. And he said, I am Joseph your brother, whom ye sold into Egypt."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And Joseph said unto his brethren,"
+    },
+    {
+     "v": 4,
+     "speaker": "joseph",
+     "text": "Come near to me, I pray you."
+    },
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And they came near. And he said,"
+    },
+    {
+     "v": 4,
+     "speaker": "joseph",
+     "text": "I am Joseph your brother, whom ye sold into Egypt."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 45:5",
+   "label": "Genesis 45:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Now therefore be not grieved, nor angry with yourselves, that ye sold me hither: for God did send me before you to preserve life."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "joseph",
+     "text": "Now therefore be not grieved, nor angry with yourselves, that ye sold me hither: for God did send me before you to preserve life."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Joseph did not pretend what they did was not wrong. He named it plainly: you sold me. But he also saw something larger at work. God had sent him ahead to save lives."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He told them to hurry home and bring their father and their families to live near him, so he could care for them through the years of famine left. Then he threw his arms around his brother Benjamin, and the two of them wept together. He kissed all his brothers and wept over them. After that, his brothers talked with him."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Years later, after their father Jacob died, the brothers grew afraid again. They wondered whether Joseph had only been kind for their father's sake. They sent word asking him to forgive them, and they came and fell down before him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 50:19",
+   "label": "Genesis 50:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And Joseph said unto them, Fear not: for am I in the place of God?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And Joseph said unto them,"
+    },
+    {
+     "v": 19,
+     "speaker": "joseph",
+     "text": "Fear not: for am I in the place of God?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 50:20",
+   "label": "Genesis 50:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "But as for you, ye thought evil against me; but God meant it unto good, to bring to pass, as it is this day, to save much people alive."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "joseph",
+     "text": "But as for you, ye thought evil against me; but God meant it unto good, to bring to pass, as it is this day, to save much people alive."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 50:21",
+   "label": "Genesis 50:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Now therefore fear ye not: I will nourish you, and your little ones. And he comforted them, and spake kindly unto them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "joseph",
+     "text": "Now therefore fear ye not: I will nourish you, and your little ones."
+    },
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And he comforted them, and spake kindly unto them."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "You meant evil, Joseph said, but God meant good. Joseph's forgiveness did not deny the harm. It held the harm and the hope side by side, and it chose to care for the ones who had hurt him. He comforted them and spoke kindly to them."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 560,
+ "est_seconds": 305,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 4.0",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Genesis 41-50 as cited; forgiveness shown without excusing the brothers' sin."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Tender without melodrama; the slave years named honestly, not romanticised."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

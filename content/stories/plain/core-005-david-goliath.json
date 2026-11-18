@@ -66,6 +66,18 @@
      "v": 32,
      "text": "And David said to Saul, Let no man’s heart fail because of him; thy servant will go and fight with this Philistine."
     }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "And David said to Saul,"
+    },
+    {
+     "v": 32,
+     "speaker": "david",
+     "text": "Let no man’s heart fail because of him; thy servant will go and fight with this Philistine."
+    }
    ]
   },
   {
@@ -78,6 +90,18 @@
     {
      "v": 33,
      "text": "And Saul said to David, Thou art not able to go against this Philistine to fight with him: for thou art but a youth, and he a man of war from his youth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "And Saul said to David,"
+    },
+    {
+     "v": 33,
+     "speaker": "saul",
+     "text": "Thou art not able to go against this Philistine to fight with him: for thou art but a youth, and he a man of war from his youth."
     }
    ]
   },
@@ -96,6 +120,23 @@
     {
      "v": 37,
      "text": "David said moreover, The LORD that delivered me out of the paw of the lion, and out of the paw of the bear, he will deliver me out of the hand of this Philistine. And Saul said unto David, Go, and the LORD be with thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "David said moreover,"
+    },
+    {
+     "v": 37,
+     "speaker": "david",
+     "text": "The LORD that delivered me out of the paw of the lion, and out of the paw of the bear, he will deliver me out of the hand of this Philistine."
+    },
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "And Saul said unto David, Go, and the LORD be with thee."
     }
    ]
   },
@@ -125,6 +166,18 @@
      "v": 45,
      "text": "Then said David to the Philistine, Thou comest to me with a sword, and with a spear, and with a shield: but I come to thee in the name of the LORD of hosts, the God of the armies of Israel, whom thou hast defied."
     }
+   ],
+   "segments": [
+    {
+     "v": 45,
+     "speaker": "narrator",
+     "text": "Then said David to the Philistine,"
+    },
+    {
+     "v": 45,
+     "speaker": "david",
+     "text": "Thou comest to me with a sword, and with a spear, and with a shield: but I come to thee in the name of the LORD of hosts, the God of the armies of Israel, whom thou hast defied."
+    }
    ]
   },
   {
@@ -138,6 +191,13 @@
      "v": 47,
      "text": "And all this assembly shall know that the LORD saveth not with sword and spear: for the battle is the LORD’s, and he will give you into our hands."
     }
+   ],
+   "segments": [
+    {
+     "v": 47,
+     "speaker": "david",
+     "text": "And all this assembly shall know that the LORD saveth not with sword and spear: for the battle is the LORD’s, and he will give you into our hands."
+    }
    ]
   },
   {
@@ -149,6 +209,13 @@
    "verses": [
     {
      "v": 49,
+     "text": "And David put his hand in his bag, and took thence a stone, and slang it, and smote the Philistine in his forehead, that the stone sunk into his forehead; and he fell upon his face to the earth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 49,
+     "speaker": "narrator",
      "text": "And David put his hand in his bag, and took thence a stone, and slang it, and smote the Philistine in his forehead, that the stone sunk into his forehead; and he fell upon his face to the earth."
     }
    ]
@@ -187,6 +254,7 @@
    "S02_no_refs_in_retelling": "pass",
    "S09_names": "pass",
    "speakers": "pass",
+   "voice_segments": "pass",
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
