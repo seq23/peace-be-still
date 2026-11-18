@@ -77,18 +77,19 @@ function loadReviews(kind, lang, ids) {
 const REVIEW_DATE = "2026-11-18";
 // Free-model first drafts (scripts/content/draft.mjs): which route drafted a piece and how much of it Claude changed.
 const DRAFT_LOG = Object.fromEntries(read(join(SRC, "drafts", "log.tsv")).split("\n").filter((l) => l && !l.startsWith("#")).map((l) => {
-  const [id, , , model, at, share, note] = l.split("\t");
+  const [id, , telling, model, at, share, note] = l.split("\t");
+  const key = `${telling}/${id}`; // ids repeat across tellings (core-031 plain vs hush-harbor), so key by telling too
   // Since 18 Nov the free drafts were dropped (85% of sentences changed); route "claude" = written by Claude in the landing session.
-  if (model === "claude") return [id, { route: "claude", model, drafted_at: at, changed_share: null, note: note || "Written by Claude in the landing session, then Claude's pastor and cultural read." }];
-  return [id, { route: "gemini-free", model, drafted_at: at, changed_share: share === "" ? null : +share, note: note || "First draft by the free model; Claude did the pastor and cultural read and edited it." }];
+  if (model === "claude") return [key, { route: "claude", model, drafted_at: at, changed_share: null, note: note || "Written by Claude in the landing session, then Claude's pastor and cultural read." }];
+  return [key, { route: "gemini-free", model, drafted_at: at, changed_share: share === "" ? null : +share, note: note || "First draft by the free model; Claude did the pastor and cultural read and edited it." }];
 }));
-function finalize(item, checks, review) {
+function finalize(item, checks, review, telling = item.telling || item.lang) {
   const failed = Object.entries(checks).filter(([, v]) => isFail(v));
   const final = review ? { reviewer: "claude", date: REVIEW_DATE, pastor: review.pastor, cultural: review.cultural, verdict: review.pastor.verdict === "pass" && review.cultural.verdict === "pass" ? "pass" : [review.pastor.verdict, review.cultural.verdict].includes("never-ship") ? "never-ship" : "rewrite" } : null;
   item.qa = {
     gate_version: GATE_VERSION,
     checks,
-    first_reader: DRAFT_LOG[item.id] || { route: "none", note: "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)." },
+    first_reader: DRAFT_LOG[`${telling}/${item.id}`] || { route: "none", note: "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)." },
     final,
     rewritten: review?.rewritten || null,
     person_read: false,
@@ -243,7 +244,7 @@ export function buildAll() {
   const out = []; // {path, json}
   const summary = {};
   const add = (kind, lang, item, checks, review) => {
-    finalize(item, checks, review);
+    finalize(item, checks, review, lang);
     const s = (summary[`${kind}/${lang}`] ||= { passed: 0, held: 0, draft: 0, "never-ship": 0, rewritten: 0, held_ids: [] });
     s[item.status]++;
     if (item.qa.rewritten) s.rewritten++;
@@ -435,6 +436,12 @@ close: s
   if (st.status === "passed") throw new Error("SELFTEST one rewrite verdict still passed");
   const st2 = finalize(buildStory(good, "hush-harbor"), { a: "fail: x" }, { pastor: { verdict: "pass" }, cultural: { verdict: "pass" } });
   if (st2.status !== "held") throw new Error("SELFTEST failing check not held");
+  // Draft log: an id shared by two tellings keeps each telling's own record (no last-row-wins override).
+  for (const l of read(join(SRC, "drafts", "log.tsv")).split("\n").filter((x) => x && !x.startsWith("#"))) {
+    const [id, , telling, model] = l.split("\t");
+    if (DRAFT_LOG[`${telling}/${id}`]?.model !== model) throw new Error(`SELFTEST draft log ${telling}/${id} lost its own row`);
+  }
+  if (finalize(buildStory(good, "plain"), {}, null, "nope").qa.first_reader.route !== "none") throw new Error("SELFTEST draft log keyed without telling");
   void parseRef; void readdirSync;
   console.log(`OUTPUT library self-test: ${cases.length + 10} negative cases caught`);
 }

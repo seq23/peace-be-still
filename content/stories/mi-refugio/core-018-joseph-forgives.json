@@ -1,0 +1,400 @@
+{
+ "id": "core-018-joseph-forgives",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "José perdona a sus hermanos",
+ "passage": {
+  "refs": [
+   "GEN 45:1-15",
+   "GEN 50:19-21"
+  ],
+  "label": "Génesis 45:1-15; Génesis 50:19-21"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "joseph",
+   "name": "José",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Años atrás, los hermanos de José lo vendieron como esclavo. Lo llevaron a Egipto, y allí pasó por la cárcel y el olvido. Pero Dios estaba con él, y con el tiempo llegó a ser el gobernador de todo Egipto."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuando vino una gran hambre sobre la tierra, sus hermanos bajaron a Egipto a comprar comida. Se inclinaron delante del gobernador sin saber que era su hermano. José sí los reconoció."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 45:1",
+   "label": "Génesis 45:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "No podía ya José contenerse delante de todos los que estaban al lado suyo, y clamó: Haced salir de conmigo á todos. Y no quedó nadie con él, al darse á conocer José á sus hermanos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "No podía ya José contenerse delante de todos los que estaban al lado suyo, y clamó: Haced salir de conmigo á todos. Y no quedó nadie con él, al darse á conocer José á sus hermanos."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 45:2",
+   "label": "Génesis 45:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Entonces se dió á llorar á voz en grito; y oyeron los Egipcios, y oyó también la casa de Faraón."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Entonces se dió á llorar á voz en grito; y oyeron los Egipcios, y oyó también la casa de Faraón."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun después de los años de cárcel y de olvido.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "José lloró tan fuerte que lo oyeron fuera del cuarto. Llevaba mucho tiempo guardando ese dolor."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 45:3",
+   "label": "Génesis 45:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y dijo José á sus hermanos: Yo soy José: ¿vive aún mi padre? Y sus hermanos no pudieron responderle, porque estaban turbados delante de él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y dijo José á sus hermanos:"
+    },
+    {
+     "v": 3,
+     "speaker": "joseph",
+     "text": "Yo soy José: ¿vive aún mi padre?"
+    },
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y sus hermanos no pudieron responderle, porque estaban turbados delante de él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Sus hermanos se quedaron mudos. Tenían miedo. El hermano al que habían vendido ahora tenía todo el poder sobre ellos. Pero José les pidió que se acercaran."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 45:5",
+   "label": "Génesis 45:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Ahora pues, no os entristezcáis, ni os pese de haberme vendido acá; que para preservación de vida me envió Dios delante de vosotros:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "joseph",
+     "text": "Ahora pues, no os entristezcáis, ni os pese de haberme vendido acá; que para preservación de vida me envió Dios delante de vosotros:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 45:7",
+   "label": "Génesis 45:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y Dios me envió delante de vosotros, para que vosotros quedaseis en la tierra, y para daros vida por medio de grande salvamento."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "joseph",
+     "text": "Y Dios me envió delante de vosotros, para que vosotros quedaseis en la tierra, y para daros vida por medio de grande salvamento."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 45:8",
+   "label": "Génesis 45:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Así pues, no me enviasteis vosotros acá, sino Dios, que me ha puesto por padre de Faraón, y por señor de toda su casa, y por gobernador en toda la tierra de Egipto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "joseph",
+     "text": "Así pues, no me enviasteis vosotros acá, sino Dios, que me ha puesto por padre de Faraón, y por señor de toda su casa, y por gobernador en toda la tierra de Egipto."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "José no fingió que lo que le hicieron no había pasado. Les dijo claramente que lo habían vendido. Pero también vio algo más grande. Dios había usado aquellos años para salvar muchas vidas."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Les pidió que fueran por su padre Jacob, que trajeran a toda la familia y que vivieran cerca de él en la tierra de Gosén. Él cuidaría de ellos durante los años de hambre que faltaban."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 45:14",
+   "label": "Génesis 45:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y echóse sobre el cuello de Benjamín su hermano, y lloró; y también Benjamín lloró sobre su cuello."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y echóse sobre el cuello de Benjamín su hermano, y lloró; y también Benjamín lloró sobre su cuello."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 45:15",
+   "label": "Génesis 45:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y besó á todos sus hermanos, y lloró sobre ellos: y después sus hermanos hablaron con él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y besó á todos sus hermanos, y lloró sobre ellos: y después sus hermanos hablaron con él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abrazó a Benjamín, su hermano menor, y lloraron juntos. Luego besó a todos sus hermanos, uno por uno. Y después de tantos años, sus hermanos pudieron hablar con él."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pasó el tiempo. Murió Jacob, el padre de todos. Y los hermanos tuvieron miedo otra vez. Pensaron que tal vez José solo había esperado a que su padre muriera para vengarse. Fueron a pedirle perdón."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 50:19",
+   "label": "Génesis 50:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y respondióles José: No temáis: ¿estoy yo en lugar de Dios?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y respondióles José:"
+    },
+    {
+     "v": 19,
+     "speaker": "joseph",
+     "text": "No temáis: ¿estoy yo en lugar de Dios?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 50:20",
+   "label": "Génesis 50:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Vosotros pensasteis mal sobre mí, mas Dios lo encaminó á bien, para hacer lo que vemos hoy, para mantener en vida á mucho pueblo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "joseph",
+     "text": "Vosotros pensasteis mal sobre mí, mas Dios lo encaminó á bien, para hacer lo que vemos hoy, para mantener en vida á mucho pueblo."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 50:21",
+   "label": "Génesis 50:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Ahora, pues, no tengáis miedo; yo os sustentaré á vosotros y á vuestros hijos. Así los consoló, y les habló al corazón."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "joseph",
+     "text": "Ahora, pues, no tengáis miedo; yo os sustentaré á vosotros y á vuestros hijos."
+    },
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Así los consoló, y les habló al corazón."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "José los tranquilizó con palabras suaves. No solo los perdonó con palabras. Prometió cuidar de ellos y de sus hijos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Perdonar no es decir que el daño no importó. José lloró. Le dolió. Pero no dejó que el dolor tuviera la última palabra. Ustedes lo pensaron para mal, les dijo, pero Dios lo encaminó para bien."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si alguien te hizo daño, tal vez todavía no puedes decir esas palabras, y está bien que lleves ese dolor delante de Dios. El perdón a veces toma años. Pero el Dios que estuvo con José en la cárcel también está contigo. Y él sabe sacar bien aun de lo que otros pensaron para mal."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 638,
+ "est_seconds": 354,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 45:1-15 and 50:19-21 (Jacob's death and the brothers' fear, 50:15-18, told in words); forgiveness not rushed, harm named as real, no pressure on a hurt listener to forgive tonight."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Weeping men shown with dignity; family reconciliation in natural Spanish; would comfort someone carrying an old family wound."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

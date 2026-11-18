@@ -1,0 +1,512 @@
+{
+ "id": "core-015-woman-at-the-well",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "La mujer junto al pozo",
+ "passage": {
+  "refs": [
+   "JOH 4:5-30"
+  ],
+  "label": "Juan 4:5-30"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "woman",
+   "name": "mujer",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Era mediodía en Samaria. El sol caía fuerte y casi nadie salía a sacar agua a esa hora. Jesús venía cansado del camino y se sentó junto al pozo que Jacob había dejado a su familia hacía muchos siglos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:6",
+   "label": "Juan 4:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y estaba allí la fuente de Jacob. Pues Jesús, cansado del camino, así se sentó á la fuente. Era como la hora de sexta."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y estaba allí la fuente de Jacob. Pues Jesús, cansado del camino, así se sentó á la fuente. Era como la hora de sexta."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Sus discípulos se habían ido al pueblo a comprar comida. Jesús estaba solo cuando llegó una mujer con su cántaro."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:7",
+   "label": "Juan 4:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Vino una mujer de Samaria á sacar agua: y Jesús le dice: Dame de beber."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Vino una mujer de Samaria á sacar agua: y Jesús le dice: Dame de beber."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Jesús la estaba esperando a la hora en que nadie más venía.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:9",
+   "label": "Juan 4:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y la mujer Samaritana le dice: ¿Cómo tú, siendo Judío, me pides á mí de beber, que soy mujer Samaritana? porque los Judíos no se tratan con los Samaritanos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y la mujer Samaritana le dice:"
+    },
+    {
+     "v": 9,
+     "speaker": "woman",
+     "text": "¿Cómo tú, siendo Judío, me pides á mí de beber, que soy mujer Samaritana? porque los Judíos no se tratan con los Samaritanos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ella se sorprendió. Los judíos y los samaritanos no se trataban. Y un maestro judío no hablaba a solas con una mujer en público. Pero Jesús no se fijó en esas barreras. Le habló de un regalo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:10",
+   "label": "Juan 4:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Respondió Jesús y díjole: Si conocieses el don de Dios, y quién es el que te dice: Dame de beber: tú pedirías de él, y él te daría agua viva."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Respondió Jesús y díjole: Si conocieses el don de Dios, y quién es el que te dice: Dame de beber: tú pedirías de él, y él te daría agua viva."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:11",
+   "label": "Juan 4:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "La mujer le dice: Señor, no tienes con qué sacarla, y el pozo es hondo: ¿de dónde, pues, tienes el agua viva?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "La mujer le dice:"
+    },
+    {
+     "v": 11,
+     "speaker": "woman",
+     "text": "Señor, no tienes con qué sacarla, y el pozo es hondo: ¿de dónde, pues, tienes el agua viva?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:12",
+   "label": "Juan 4:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "¿Eres tú mayor que nuestro padre Jacob, que nos dió este pozo, del cual él bebió, y sus hijos, y sus ganados?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "woman",
+     "text": "¿Eres tú mayor que nuestro padre Jacob, que nos dió este pozo, del cual él bebió, y sus hijos, y sus ganados?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:13-14",
+   "label": "Juan 4:13-14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Respondió Jesús y díjole: Cualquiera que bebiere de esta agua, volverá á tener sed;"
+    },
+    {
+     "v": 14,
+     "text": "Mas el que bebiere del agua que yo le daré, para siempre no tendrá sed: mas el agua que yo le daré, será en él una fuente de agua que salte para vida eterna."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Respondió Jesús y díjole: Cualquiera que bebiere de esta agua, volverá á tener sed;"
+    },
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Mas el que bebiere del agua que yo le daré, para siempre no tendrá sed: mas el agua que yo le daré, será en él una fuente de agua que salte para vida eterna."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:15",
+   "label": "Juan 4:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "La mujer le dice: Señor, dame esta agua, para que no tenga sed, ni venga acá á sacarla."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "La mujer le dice:"
+    },
+    {
+     "v": 15,
+     "speaker": "woman",
+     "text": "Señor, dame esta agua, para que no tenga sed, ni venga acá á sacarla."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ella pensaba en agua de pozo, en no tener que venir más con el cántaro bajo el sol. Jesús le hablaba de otra sed, la que el agua no quita."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Entonces Jesús le pidió que fuera a llamar a su esposo. Ella le contestó que no tenía esposo. Y Jesús le dijo que era verdad, que había tenido cinco, y que el hombre con quien vivía ahora no era su esposo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús sabía todo de ella. Y lo dijo sin gritar, sin humillarla, sin irse. Siguió ahí, junto al pozo, hablando con ella."
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:19",
+   "label": "Juan 4:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Dícele la mujer: Señor, paréceme que tú eres profeta."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Dícele la mujer:"
+    },
+    {
+     "v": 19,
+     "speaker": "woman",
+     "text": "Señor, paréceme que tú eres profeta."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:20",
+   "label": "Juan 4:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Nuestros padres adoraron en este monte, y vosotros decís que en Jerusalem es el lugar donde es necesario adorar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "woman",
+     "text": "Nuestros padres adoraron en este monte, y vosotros decís que en Jerusalem es el lugar donde es necesario adorar."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:23-24",
+   "label": "Juan 4:23-24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Mas la hora viene, y ahora es, cuando los verdaderos adoradores adorarán al Padre en espíritu y en verdad; porque también el Padre tales adoradores busca que le adoren."
+    },
+    {
+     "v": 24,
+     "text": "Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que adoren."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Mas la hora viene, y ahora es, cuando los verdaderos adoradores adorarán al Padre en espíritu y en verdad; porque también el Padre tales adoradores busca que le adoren."
+    },
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que adoren."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:25",
+   "label": "Juan 4:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Dícele la mujer: Sé que el Mesías ha de venir, el cual se dice el Cristo: cuando él viniere nos declarará todas las cosas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Dícele la mujer:"
+    },
+    {
+     "v": 25,
+     "speaker": "woman",
+     "text": "Sé que el Mesías ha de venir, el cual se dice el Cristo: cuando él viniere nos declarará todas las cosas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:26",
+   "label": "Juan 4:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Dícele Jesús: Yo soy, que hablo contigo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Dícele Jesús: Yo soy, que hablo contigo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Yo soy, el que habla contigo. De todas las personas del mundo, Jesús se lo dijo primero, con estas palabras, a una mujer samaritana que venía sola a sacar agua al mediodía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:28",
+   "label": "Juan 4:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Entonces la mujer dejó su cántaro, y fué á la ciudad, y dijo á aquellos hombres:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Entonces la mujer dejó su cántaro, y fué á la ciudad, y dijo á aquellos hombres:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:29",
+   "label": "Juan 4:29",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Venid, ved un hombre que me ha dicho todo lo que he hecho: ¿si quizás es éste el Cristo?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "woman",
+     "text": "Venid, ved un hombre que me ha dicho todo lo que he hecho: ¿si quizás es éste el Cristo?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:30",
+   "label": "Juan 4:30",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 30,
+     "text": "Entonces salieron de la ciudad, y vinieron á él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "Entonces salieron de la ciudad, y vinieron á él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ella dejó el cántaro. Había venido por agua y se fue con algo mejor. Y la misma mujer que esquivaba a la gente fue corriendo a buscarla. Vengan a ver a alguien que conoce toda mi vida."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay cosas que cargamos y que preferimos que nadie sepa. Jesús ya las conoce. Y aun así se sienta a esperarnos junto al pozo, a la hora en que estamos solos, para ofrecernos agua viva."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 680,
+ "est_seconds": 377,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 4:5-30 (vv16-18 and 27 told in words); Jesus's words only as scripture; her past named without shaming, as the text does; 'living water' not turned into a promise."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The woman is never called by a slur or pity word; the barrier between Jews and Samaritans explained plainly; she is shown as the first messenger to her town."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

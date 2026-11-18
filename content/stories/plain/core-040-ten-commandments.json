@@ -456,11 +456,11 @@
    "S13_ai_label": "pass"
   },
   "first_reader": {
-   "route": "claude",
-   "model": "claude",
-   "drafted_at": "2026-11-18T15:46:51",
-   "changed_share": null,
-   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+   "route": "gemini-free",
+   "model": "gemini-4-hydrogen",
+   "drafted_at": "2026-11-18T20:16:21",
+   "changed_share": 1,
+   "note": "First draft by the free model; Claude did the pastor and cultural read and edited it."
   },
   "final": {
    "reviewer": "claude",

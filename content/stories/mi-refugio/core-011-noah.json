@@ -1,0 +1,437 @@
+{
+ "id": "core-011-noah",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Noé y el arco en las nubes",
+ "passage": {
+  "refs": [
+   "GEN 7:1-5",
+   "GEN 8:6-12",
+   "GEN 9:12-16"
+  ],
+  "label": "Génesis 7:1-5; Génesis 8:6-12; Génesis 9:12-16"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hubo un tiempo en que la tierra se llenó de violencia. La gente vivía como si Dios no existiera. Pero en medio de todo eso había un hombre que caminaba con Dios. Se llamaba Noé."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios le pidió que construyera un arca, una embarcación enorme de madera. Noé obedeció. Año tras año, tabla por tabla, siguió trabajando, aunque nadie a su alrededor entendía para qué."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 7:1",
+   "label": "Génesis 7:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y JEHOVÁ dijo á Noé: Entra tú y toda tu casa en el arca; porque á ti he visto justo delante de mí en esta generación."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y JEHOVÁ dijo á Noé: Entra tú y toda tu casa en el arca; porque á ti he visto justo delante de mí en esta generación."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Dios vio a Noé cuando nadie más lo veía, y le abrió la puerta del arca.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios le dijo que llevara consigo animales de toda especie, machos y hembras, y también aves del cielo, para que la vida siguiera sobre la tierra. Le dio siete días para prepararse."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 7:4",
+   "label": "Génesis 7:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Porque pasados aún siete días, yo haré llover sobre la tierra cuarenta días y cuarenta noches; y raeré toda sustancia que hice de sobre la faz de la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Porque pasados aún siete días, yo haré llover sobre la tierra cuarenta días y cuarenta noches; y raeré toda sustancia que hice de sobre la faz de la tierra."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 7:5",
+   "label": "Génesis 7:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "E hizo Noé conforme á todo lo que le mandó Jehová."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "E hizo Noé conforme á todo lo que le mandó Jehová."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Noé no discutió. Entró en el arca con su esposa, sus tres hijos y las esposas de ellos. Y empezó a llover."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El agua subió y subió hasta cubrir los montes más altos. Afuera no quedaba nada de lo que conocían. Adentro, el arca flotaba en silencio. Y Dios no se había olvidado de ellos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pasaron muchos meses. Poco a poco las aguas bajaron, y el arca se asentó sobre los montes. Pero Noé no salió corriendo. Primero quiso saber si la tierra ya estaba lista."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:6",
+   "label": "Génesis 8:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y sucedió que, al cabo de cuarenta días, abrió Noé la ventana del arca que había hecho,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y sucedió que, al cabo de cuarenta días, abrió Noé la ventana del arca que había hecho,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:7",
+   "label": "Génesis 8:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y envió al cuervo, el cual salió, y estuvo yendo y tornando hasta que las aguas se secaron de sobre la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Y envió al cuervo, el cual salió, y estuvo yendo y tornando hasta que las aguas se secaron de sobre la tierra."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:8",
+   "label": "Génesis 8:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Envió también de sí á la paloma, para ver si las aguas se habían retirado de sobre la faz de la tierra;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Envió también de sí á la paloma, para ver si las aguas se habían retirado de sobre la faz de la tierra;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:9",
+   "label": "Génesis 8:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y no halló la paloma donde sentar la planta de su pie, y volvióse á él al arca, porque las aguas estaban aún sobre la faz de toda la tierra: entonces él extendió su mano, y cogiéndola, hízola entrar consigo en el arca."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y no halló la paloma donde sentar la planta de su pie, y volvióse á él al arca, porque las aguas estaban aún sobre la faz de toda la tierra: entonces él extendió su mano, y cogiéndola, hízola entrar consigo en el arca."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La paloma no encontró dónde descansar y regresó. Noé extendió la mano y la metió con cuidado en el arca. No se desesperó. Esperó otros siete días."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:10",
+   "label": "Génesis 8:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y esperó aún otros siete días, y volvió á enviar la paloma fuera del arca."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y esperó aún otros siete días, y volvió á enviar la paloma fuera del arca."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:11",
+   "label": "Génesis 8:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Y la paloma volvió á él á la hora de la tarde; y he aquí que traía una hoja de oliva tomada en su pico: y entendió Noé que las aguas se habían retirado de sobre la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y la paloma volvió á él á la hora de la tarde; y he aquí que traía una hoja de oliva tomada en su pico: y entendió Noé que las aguas se habían retirado de sobre la tierra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Una hoja de olivo. Algo pequeño, verde y nuevo. Era la señal de que había vida otra vez allá afuera."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:12",
+   "label": "Génesis 8:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y esperó aún otros siete días, y envió la paloma, la cual no volvió ya más á él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y esperó aún otros siete días, y envió la paloma, la cual no volvió ya más á él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuando por fin salieron del arca, Noé levantó un altar y le dio gracias a Dios. Y Dios hizo un pacto, no solo con Noé, sino con toda la tierra y con todo ser viviente."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 9:12",
+   "label": "Génesis 9:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y dijo Dios: Esta será la señal del pacto que yo establezco entre mí y vosotros y toda alma viviente que está con vosotros, por siglos perpetuos:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y dijo Dios: Esta será la señal del pacto que yo establezco entre mí y vosotros y toda alma viviente que está con vosotros, por siglos perpetuos:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 9:13",
+   "label": "Génesis 9:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Mi arco pondré en las nubes, el cual será por señal de convenio entre mí y la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Mi arco pondré en las nubes, el cual será por señal de convenio entre mí y la tierra."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 9:14-16",
+   "label": "Génesis 9:14-16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y será que cuando haré venir nubes sobre la tierra, se dejará ver entonces mi arco en las nubes."
+    },
+    {
+     "v": 15,
+     "text": "Y acordarme he del pacto mío, que hay entre mí y vosotros y toda alma viviente de toda carne; y no serán más las aguas por diluvio para destruir toda carne."
+    },
+    {
+     "v": 16,
+     "text": "Y estará el arco en las nubes, y verlo he para acordarme del pacto perpetuo entre Dios y toda alma viviente, con toda carne que hay sobre la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y será que cuando haré venir nubes sobre la tierra, se dejará ver entonces mi arco en las nubes."
+    },
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y acordarme he del pacto mío, que hay entre mí y vosotros y toda alma viviente de toda carne; y no serán más las aguas por diluvio para destruir toda carne."
+    },
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y estará el arco en las nubes, y verlo he para acordarme del pacto perpetuo entre Dios y toda alma viviente, con toda carne que hay sobre la tierra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fíjate en algo. Dios no dijo que la gente tendría que acordarse del pacto. Dijo que él mismo vería el arco y se acordaría. La promesa descansa en su fidelidad, no en nuestra memoria."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Noé tuvo que esperar mucho. Esperó mientras construía, esperó mientras llovía, esperó mientras el agua bajaba. Y en cada espera, Dios estaba con él dentro del arca."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tal vez esta noche tú también estás esperando. Una noticia, una respuesta, que pase la tormenta. La historia de Noé nos enseña que Dios no se olvida de los suyos. Después de la lluvia, él pone su arco en las nubes."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 766,
+ "est_seconds": 424,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 7:1-5, 8:6-12, 9:12-16 (the family entering from 7:7, the altar from 8:20, told in words); God's covenant read only as RV1909; the closing names God's faithfulness, no promise of an outcome for the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Waiting named as the listener's real life (a noticia, una respuesta); plain warm Spanish; call and response tied to the open door of the ark."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

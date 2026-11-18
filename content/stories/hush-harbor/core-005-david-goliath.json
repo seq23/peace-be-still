@@ -279,11 +279,8 @@
    "S13_ai_label": "pass"
   },
   "first_reader": {
-   "route": "claude",
-   "model": "claude",
-   "drafted_at": "2026-11-18T16:04:30",
-   "changed_share": null,
-   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
   },
   "final": {
    "reviewer": "claude",

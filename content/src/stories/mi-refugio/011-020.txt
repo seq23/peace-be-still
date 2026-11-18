@@ -1,0 +1,294 @@
+# Mi Refugio, historias 11-20 (español de las Américas, Reina-Valera 1909). Escritas por Claude (sin borrador de modelo gratuito), con la lectura pastoral y cultural de Claude.
+
+=== core-011-noah | Noé y el arco en las nubes
+passage: GEN 7:1-5; GEN 8:6-12; GEN 9:12-16
+shelf: adult
+violence: mild
+sexual: none
+N: Hubo un tiempo en que la tierra se llenó de violencia. La gente vivía como si Dios no existiera. Pero en medio de todo eso había un hombre que caminaba con Dios. Se llamaba Noé.
+N: Dios le pidió que construyera un arca, una embarcación enorme de madera. Noé obedeció. Año tras año, tabla por tabla, siguió trabajando, aunque nadie a su alrededor entendía para qué.
+S: GEN 7:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Dios vio a Noé cuando nadie más lo veía, y le abrió la puerta del arca.
+N: Dios le dijo que llevara consigo animales de toda especie, machos y hembras, y también aves del cielo, para que la vida siguiera sobre la tierra. Le dio siete días para prepararse.
+S: GEN 7:4
+S: GEN 7:5
+N: Noé no discutió. Entró en el arca con su esposa, sus tres hijos y las esposas de ellos. Y empezó a llover.
+N: El agua subió y subió hasta cubrir los montes más altos. Afuera no quedaba nada de lo que conocían. Adentro, el arca flotaba en silencio. Y Dios no se había olvidado de ellos.
+N: Pasaron muchos meses. Poco a poco las aguas bajaron, y el arca se asentó sobre los montes. Pero Noé no salió corriendo. Primero quiso saber si la tierra ya estaba lista.
+S: GEN 8:6
+S: GEN 8:7
+S: GEN 8:8
+S: GEN 8:9
+N: La paloma no encontró dónde descansar y regresó. Noé extendió la mano y la metió con cuidado en el arca. No se desesperó. Esperó otros siete días.
+S: GEN 8:10
+S: GEN 8:11
+N: Una hoja de olivo. Algo pequeño, verde y nuevo. Era la señal de que había vida otra vez allá afuera.
+S: GEN 8:12
+N: Cuando por fin salieron del arca, Noé levantó un altar y le dio gracias a Dios. Y Dios hizo un pacto, no solo con Noé, sino con toda la tierra y con todo ser viviente.
+S: GEN 9:12
+S: GEN 9:13
+S: GEN 9:14-16
+N: Fíjate en algo. Dios no dijo que la gente tendría que acordarse del pacto. Dijo que él mismo vería el arco y se acordaría. La promesa descansa en su fidelidad, no en nuestra memoria.
+N: Noé tuvo que esperar mucho. Esperó mientras construía, esperó mientras llovía, esperó mientras el agua bajaba. Y en cada espera, Dios estaba con él dentro del arca.
+N: Tal vez esta noche tú también estás esperando. Una noticia, una respuesta, que pase la tormenta. La historia de Noé nos enseña que Dios no se olvida de los suyos. Después de la lluvia, él pone su arco en las nubes.
+
+=== core-012-esther | Esther, para esta hora
+passage: EST 4:1-17; EST 5:1-3
+shelf: adult
+violence: none
+sexual: none
+cast: esther|Esther|adult|f; mordecai|Mardochêo|elder|m; king|rey|adult|m
+N: Esther era una joven judía que vivía lejos de su tierra, en el gran reino de Persia. Había quedado huérfana, y su primo Mardochêo la crió como a una hija. Con el tiempo llegó a ser reina, pero no le había dicho a nadie en el palacio de qué pueblo venía.
+N: Un día un hombre poderoso llamado Amán convenció al rey de firmar una ley terrible. En una sola fecha, todos los judíos del reino serían destruidos. Hombres, mujeres, niños y ancianos.
+S: EST 4:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun cuando la noticia es mala y el decreto ya está firmado.
+S: EST 4:3
+N: Esther, dentro del palacio, no sabía lo que pasaba. Cuando le contaron que su primo estaba vestido de luto en la puerta, mandó a un sirviente a preguntarle por qué. Mardochêo le envió una copia del decreto y un mensaje. Que fuera al rey y pidiera por su pueblo.
+N: Pero había un problema. Nadie podía presentarse ante el rey sin ser llamado.
+S: EST 4:10
+S: EST 4:11 @esther whole
+N: Esther tenía miedo, y con razón. Su vida estaba en juego. Entonces llegó la respuesta de Mardochêo.
+S: EST 4:13 @mordecai after "respondiesen á Esther: "
+S: EST 4:14 @mordecai whole
+N: Mardochêo no le dijo que todo dependía de ella. Le dijo que Dios podía traer ayuda de otra parte. Pero también le hizo una pregunta que todavía nos llega al corazón. ¿Y si estás donde estás precisamente para este momento?
+S: EST 4:15
+S: EST 4:16 @esther whole
+S: EST 4:17
+N: Esther no corrió sola hacia el peligro. Primero pidió que su pueblo ayunara con ella tres días. Ella y sus doncellas también ayunarían. Se preparó en comunidad, delante de Dios.
+S: EST 5:1
+S: EST 5:2
+S: EST 5:3 @king after "Y dijo el rey: "
+N: El rey extendió el cetro. Esther tocó la punta, y vivió. Ese fue el primer paso de una larga historia en que Dios libró a su pueblo.
+N: Es curioso, pero en todo el libro de Esther el nombre de Dios no se menciona ni una vez. Y sin embargo su mano está en cada página. En una huérfana que llega a reina. En un primo fiel. En un rey que extiende el cetro.
+N: A veces no vemos a Dios obrando, y aun así está ahí. Y a veces nos toca a nosotros dar un paso con miedo, después de orar, sin saber cómo va a terminar. Esther no sabía. Pero fue. Y Dios ya estaba en el patio antes de que ella llegara.
+
+=== core-013-job | Job, que no soltó a Dios
+passage: JOB 1:13-22; JOB 42:10-17
+shelf: adult
+violence: mild
+sexual: none
+cast: messenger|mensajero|adult|m; job|Job|elder|m
+N: Job vivía en la tierra de Uz. Era un hombre recto, que temía a Dios y se apartaba del mal. Tenía siete hijos, tres hijas, muchos animales y muchos siervos. Era respetado por todos.
+N: Y un día, en pocas horas, lo perdió casi todo.
+S: JOB 1:13
+S: JOB 1:14 @messenger after "que le dijo: "
+S: JOB 1:15 @messenger whole
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Lo decimos también en los días que no entendemos.
+N: Y el mensajero todavía estaba hablando cuando llegó otro. Y luego otro. Las ovejas, los camellos, los siervos. Una mala noticia detrás de otra, sin tiempo para respirar.
+S: JOB 1:18 @messenger after "vino otro que dijo: "
+S: JOB 1:19 @messenger whole
+N: Sus hijos. Todos sus hijos. Ninguna pérdida se compara con esa.
+S: JOB 1:20
+S: JOB 1:21 @job after "Y dijo: "
+S: JOB 1:22
+N: Job no fingió que no le dolía. Rasgó su ropa y se rapó la cabeza, como se hacía en aquel tiempo cuando el dolor era muy grande. Lloró. Y llorando, se postró y adoró.
+N: Lo que viene después en el libro es largo. Job habló con sus amigos, discutió, lloró y le hizo a Dios preguntas muy duras. La Biblia no esconde su dolor ni su queja. Pero nunca soltó a Dios. Siguió hablándole, aunque fuera para preguntarle por qué.
+N: Y al final, Dios le respondió. No le dio todas las explicaciones. Le mostró quién es él. Y Job, que lo conocía de oídas, ahora lo conoció de verdad.
+S: JOB 42:10
+N: Fíjate cuándo cambió su situación. Fue mientras oraba por sus amigos, los mismos que lo habían juzgado.
+S: JOB 42:11
+S: JOB 42:12-13
+S: JOB 42:16-17
+N: La historia de Job no es una promesa de que todo lo que perdemos volverá igual, ni una fórmula para que vengan las bendiciones. Sus primeros hijos no volvieron. El dolor fue real.
+N: Es la historia de un hombre que, en la noche más oscura, siguió hablando con Dios. Si esta noche estás de luto, puedes llorar. Puedes preguntar. Puedes contarle a Dios todo lo que sientes, como Job. Y no tienes que pasar ese dolor solo. Busca a tu iglesia, a tu pastor, a alguien que te acompañe.
+
+=== core-014-creation | En el principio
+passage: GEN 1:1-5; GEN 1:26-31
+shelf: adult
+violence: none
+sexual: none
+N: Antes de todo, antes del primer amanecer, antes de los montes y del mar, Dios ya estaba.
+S: GEN 1:1
+S: GEN 1:2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Desde el principio, antes de que existiera la primera luz.
+N: Todo estaba oscuro y sin forma. No había nada ordenado, nada vivo. Pero el Espíritu de Dios se movía sobre las aguas, como quien cuida algo que va a nacer.
+N: Y entonces Dios habló.
+S: GEN 1:3
+S: GEN 1:4
+S: GEN 1:5
+N: Lo primero que Dios hizo fue la luz. Y la separó de la oscuridad. La noche no desapareció, pero ya no era todo lo que había. La tarde y la mañana, un día.
+N: Después vinieron los cielos y las aguas, la tierra seca, los árboles con su fruto, el sol, la luna y las estrellas. Los peces del mar, las aves del cielo, los animales del campo. Y cada vez, Dios miró lo que había hecho y vio que era bueno.
+N: Y al final del sexto día, Dios hizo algo diferente.
+S: GEN 1:26
+S: GEN 1:27
+N: A imagen de Dios. Eso se dijo del hombre y de la mujer. No de una sola nación, ni de un solo color de piel, ni de los ricos ni de los fuertes. De todo ser humano. Cada persona que has conocido lleva esa imagen.
+S: GEN 1:28
+N: Dios los bendijo. Antes de que trabajaran, antes de que lograran nada, ya los había bendecido. Les dio la tierra para cuidarla, y les dio de comer.
+S: GEN 1:29
+S: GEN 1:31
+N: Bueno en gran manera. Así vio Dios todo lo que había hecho. La creación entera, con el hombre y la mujer en medio de ella.
+N: Esta noche, cuando apagues la luz, piensa en esto. El mismo Dios que separó la luz de las tinieblas conoce tus noches. El mismo que dijo sea la luz, te hizo a ti a su imagen. No eres un accidente. Fuiste hecho con cuidado, por un Dios que mira su obra y dice que es buena.
+N: Y así como cada día de la creación empezó con la tarde, cada noche puede ser el principio de algo nuevo. La tarde y la mañana. Descansa. La luz vuelve.
+
+=== core-015-woman-at-the-well | La mujer junto al pozo
+passage: JOH 4:5-30
+shelf: adult
+violence: none
+sexual: none
+cast: woman|mujer|adult|f
+N: Era mediodía en Samaria. El sol caía fuerte y casi nadie salía a sacar agua a esa hora. Jesús venía cansado del camino y se sentó junto al pozo que Jacob había dejado a su familia hacía muchos siglos.
+S: JOH 4:6
+N: Sus discípulos se habían ido al pueblo a comprar comida. Jesús estaba solo cuando llegó una mujer con su cántaro.
+S: JOH 4:7
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Jesús la estaba esperando a la hora en que nadie más venía.
+S: JOH 4:9 @woman
+N: Ella se sorprendió. Los judíos y los samaritanos no se trataban. Y un maestro judío no hablaba a solas con una mujer en público. Pero Jesús no se fijó en esas barreras. Le habló de un regalo.
+S: JOH 4:10
+S: JOH 4:11 @woman
+S: JOH 4:12 @woman whole
+S: JOH 4:13-14
+S: JOH 4:15 @woman
+N: Ella pensaba en agua de pozo, en no tener que venir más con el cántaro bajo el sol. Jesús le hablaba de otra sed, la que el agua no quita.
+N: Entonces Jesús le pidió que fuera a llamar a su esposo. Ella le contestó que no tenía esposo. Y Jesús le dijo que era verdad, que había tenido cinco, y que el hombre con quien vivía ahora no era su esposo.
+N: Jesús sabía todo de ella. Y lo dijo sin gritar, sin humillarla, sin irse. Siguió ahí, junto al pozo, hablando con ella.
+S: JOH 4:19 @woman after "Dícele la mujer: "
+S: JOH 4:20 @woman whole
+S: JOH 4:23-24
+S: JOH 4:25 @woman after "Dícele la mujer: "
+S: JOH 4:26
+N: Yo soy, el que habla contigo. De todas las personas del mundo, Jesús se lo dijo primero, con estas palabras, a una mujer samaritana que venía sola a sacar agua al mediodía.
+S: JOH 4:28
+S: JOH 4:29 @woman whole
+S: JOH 4:30
+N: Ella dejó el cántaro. Había venido por agua y se fue con algo mejor. Y la misma mujer que esquivaba a la gente fue corriendo a buscarla. Vengan a ver a alguien que conoce toda mi vida.
+N: Hay cosas que cargamos y que preferimos que nadie sepa. Jesús ya las conoce. Y aun así se sienta a esperarnos junto al pozo, a la hora en que estamos solos, para ofrecernos agua viva.
+
+=== core-016-walks-on-water | Pedro camina sobre el agua
+passage: MAT 14:22-33
+shelf: adult
+violence: none
+sexual: none
+cast: disciples|discípulos|adult|group; peter|Pedro|adult|m
+N: Había sido un día enorme. Jesús había dado de comer a miles de personas con unos pocos panes y peces. Cuando terminó, les pidió a sus discípulos que se adelantaran en la barca hacia el otro lado del lago.
+S: MAT 14:22
+S: MAT 14:23
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Jesús subió al monte a orar, y desde allí no perdió de vista a los suyos.
+S: MAT 14:24
+N: El viento estaba en contra. Remaron toda la noche y casi no avanzaban. Estaban cansados, mojados y lejos de la orilla.
+S: MAT 14:25
+N: La cuarta vela era la última parte de la noche, entre las tres y las seis de la mañana. La hora más oscura, cuando el cansancio pesa más.
+S: MAT 14:26 @disciples until "Y dieron"
+S: MAT 14:27
+N: Soy yo, no tengan miedo. Era su voz. La conocían. Y Pedro, que siempre hablaba primero, se animó.
+S: MAT 14:28 @peter
+S: MAT 14:29
+N: Ven. Una sola palabra. Y Pedro sacó un pie de la barca, y luego el otro, y caminó sobre el agua hacia Jesús. Mientras lo miraba a él, el agua lo sostenía.
+S: MAT 14:30 @peter
+N: Pedro miró el viento. Las olas no habían cambiado. Lo que cambió fue hacia dónde miraba. Y empezó a hundirse. Pero aun hundiéndose, supo a quién gritarle. Tres palabras. Señor, sálvame.
+S: MAT 14:31
+N: Jesús no esperó a que Pedro se arreglara solo. En seguida extendió la mano y lo agarró. La pregunta vino después, con Pedro ya seguro en su mano.
+S: MAT 14:32
+S: MAT 14:33 @disciples
+N: Los que estaban en la barca vieron todo. El viento que se calmó, la mano que levantó a Pedro, el Maestro que caminaba sobre el agua. Y lo adoraron. Esa noche entendieron un poco más quién era el que iba con ellos.
+N: Es fácil fijarse en que Pedro se hundió. Pero fue el único que salió de la barca. Tuvo fe para dar el primer paso, y cuando le faltó, tuvo fe para pedir ayuda.
+N: A veces nosotros también empezamos bien y luego miramos el viento. Las cuentas, el diagnóstico, la soledad. Y sentimos que nos hundimos. Esa oración tan corta sirve para esas noches. Señor, sálvame. La mano de Jesús todavía está cerca.
+
+=== core-017-burning-bush | Moisés y la zarza ardiendo
+passage: EXO 3:1-14
+shelf: adult
+violence: none
+sexual: none
+cast: moses|Moisés|adult|m
+N: Moisés había crecido en el palacio de Faraón, pero ahora vivía muy lejos de Egipto. Hacía cuarenta años que había huido. Se había casado en Madián y cuidaba las ovejas de su suegro en el desierto. Era un pastor, ya mayor, sin grandes planes.
+S: EXO 3:1
+S: EXO 3:2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Dios no se había olvidado de Moisés allá en el desierto.
+N: Un arbusto en llamas, y el fuego no lo consumía. Moisés pudo seguir de largo. Pero se detuvo.
+S: EXO 3:3 @moses
+S: EXO 3:4
+N: Dios lo llamó por su nombre, dos veces. Y Moisés respondió como responden los que están dispuestos. Aquí estoy.
+S: EXO 3:5
+S: EXO 3:6
+N: Moisés se quitó las sandalias. El mismo suelo de siempre, en el mismo desierto de siempre, ahora era tierra santa. Porque Dios estaba ahí.
+S: EXO 3:7
+S: EXO 3:8
+N: Dios había visto. Había oído. Conocía el dolor de su pueblo en Egipto. Durante años les había parecido que nadie escuchaba sus gritos. Pero Dios los escuchaba.
+S: EXO 3:10
+N: Y aquí Moisés se asustó. Una cosa era ver la zarza. Otra cosa era volver a Egipto y pararse delante de Faraón.
+S: EXO 3:11 @moses
+S: EXO 3:12
+N: Moisés preguntó quién era él. Dios no le contestó con una lista de sus cualidades. Le contestó con su presencia. Yo estaré contigo.
+S: EXO 3:13 @moses
+S: EXO 3:14
+N: Yo soy el que soy. Dios no necesitaba otro nombre. Él es el que siempre ha sido y siempre será. El mismo Dios que guió a Abraham, a Isaac y a Jacob era también el Dios de Moisés, y es el mismo hoy.
+N: Moisés sentía que era demasiado viejo, que había fallado, que no sabía hablar bien. Y Dios lo llamó de todos modos. No porque Moisés fuera suficiente, sino porque Dios iba con él.
+N: Hay temporadas que se sienten como un desierto. Uno hace lo mismo de cada día y siente que tu tiempo ya pasó. Dios todavía puede llamarte por tu nombre en el lugar más común. Y lo que te da es lo mismo que le dio a Moisés. Yo estaré contigo.
+
+=== core-018-joseph-forgives | José perdona a sus hermanos
+passage: GEN 45:1-15; GEN 50:19-21
+shelf: adult
+violence: none
+sexual: none
+cast: joseph|José|adult|m
+N: Años atrás, los hermanos de José lo vendieron como esclavo. Lo llevaron a Egipto, y allí pasó por la cárcel y el olvido. Pero Dios estaba con él, y con el tiempo llegó a ser el gobernador de todo Egipto.
+N: Cuando vino una gran hambre sobre la tierra, sus hermanos bajaron a Egipto a comprar comida. Se inclinaron delante del gobernador sin saber que era su hermano. José sí los reconoció.
+S: GEN 45:1
+S: GEN 45:2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun después de los años de cárcel y de olvido.
+N: José lloró tan fuerte que lo oyeron fuera del cuarto. Llevaba mucho tiempo guardando ese dolor.
+S: GEN 45:3 @joseph until "Y sus hermanos"
+N: Sus hermanos se quedaron mudos. Tenían miedo. El hermano al que habían vendido ahora tenía todo el poder sobre ellos. Pero José les pidió que se acercaran.
+S: GEN 45:5 @joseph whole
+S: GEN 45:7 @joseph whole
+S: GEN 45:8 @joseph whole
+N: José no fingió que lo que le hicieron no había pasado. Les dijo claramente que lo habían vendido. Pero también vio algo más grande. Dios había usado aquellos años para salvar muchas vidas.
+N: Les pidió que fueran por su padre Jacob, que trajeran a toda la familia y que vivieran cerca de él en la tierra de Gosén. Él cuidaría de ellos durante los años de hambre que faltaban.
+S: GEN 45:14
+S: GEN 45:15
+N: Abrazó a Benjamín, su hermano menor, y lloraron juntos. Luego besó a todos sus hermanos, uno por uno. Y después de tantos años, sus hermanos pudieron hablar con él.
+N: Pasó el tiempo. Murió Jacob, el padre de todos. Y los hermanos tuvieron miedo otra vez. Pensaron que tal vez José solo había esperado a que su padre muriera para vengarse. Fueron a pedirle perdón.
+S: GEN 50:19 @joseph after "respondióles José: "
+S: GEN 50:20 @joseph whole
+S: GEN 50:21 @joseph until "Así los consoló"
+N: José los tranquilizó con palabras suaves. No solo los perdonó con palabras. Prometió cuidar de ellos y de sus hijos.
+N: Perdonar no es decir que el daño no importó. José lloró. Le dolió. Pero no dejó que el dolor tuviera la última palabra. Ustedes lo pensaron para mal, les dijo, pero Dios lo encaminó para bien.
+N: Si alguien te hizo daño, tal vez todavía no puedes decir esas palabras, y está bien que lleves ese dolor delante de Dios. El perdón a veces toma años. Pero el Dios que estuvo con José en la cárcel también está contigo. Y él sabe sacar bien aun de lo que otros pensaron para mal.
+
+=== core-019-mary-martha | Marta y María
+passage: LUK 10:38-42
+shelf: adult
+violence: none
+sexual: none
+cast: martha|Marta|adult|f
+N: Jesús iba de camino con sus discípulos, y llegaron a una aldea. Allí vivían dos hermanas, Marta y María, que eran amigas suyas.
+S: LUK 10:38
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Jesús entró en esa casa como amigo, y entra en la tuya también.
+N: Marta abrió la puerta. Era su casa, y ella sabía recibir bien. Pero recibir a Jesús y a todos los que venían con él no era poca cosa. Había que preparar comida, servir agua, buscar dónde sentar a todos.
+S: LUK 10:39
+N: María, en cambio, se sentó a los pies de Jesús. En aquel tiempo, sentarse así era el lugar de un discípulo, de alguien que viene a aprender del maestro. Y ella se quedó ahí, escuchando cada palabra.
+N: Mientras tanto, en la cocina, Marta trabajaba sola. Iba y venía. Y cada vez que pasaba por la sala y veía a su hermana sentada, se le iba subiendo el enojo.
+S: LUK 10:40 @martha
+N: Muchos entendemos a Marta. Ella no estaba haciendo nada malo. Estaba sirviendo, y servir es bueno. Pero estaba cansada, sola y frustrada. Y en lugar de pedirle ayuda a su hermana, le reclamó a Jesús. Señor, ¿no te importa?
+N: Es la misma pregunta que los discípulos le hicieron en la tormenta. A veces la hacemos nosotros cuando sentimos que cargamos todo y nadie lo nota.
+S: LUK 10:41
+S: LUK 10:42
+N: Marta, Marta. Jesús dijo su nombre dos veces, con cariño. No la regañó por cocinar. No le dijo que su trabajo no valía. Le dijo que estaba preocupada e inquieta por muchas cosas, y que una sola era necesaria.
+N: María había escogido estar cerca de él. Y eso nadie se lo iba a quitar.
+N: La Biblia no nos dice qué hizo Marta después. Tal vez se sentó también. Más adelante, en el evangelio de Juan, vemos a esta misma Marta hablando con Jesús con una fe muy firme, cuando murió su hermano Lázaro. Jesús la amaba.
+N: Jesús no le pidió a Marta que dejara de ser Marta. Su manera de servir era un regalo. Lo que quería era que no se perdiera lo más importante en medio de tanto afán. Primero estar con él, y después, desde ahí, servir con el corazón tranquilo.
+N: Hay días que se llenan de muchas cosas. El trabajo, la casa, los hijos, los padres que cuidamos, las cuentas. Todo eso importa. Pero en medio de todo, Jesús nos invita a sentarnos un momento a sus pies. Esta noche, antes de dormir, deja la lista a un lado. Escucha. Esa es la buena parte.
+
+=== core-020-widow-zarephath | Elías y la viuda de Sarepta
+passage: 1KI 17:8-16
+shelf: adult
+violence: none
+sexual: none
+cast: elijah|Elías|adult|m; widow|viuda|adult|f
+N: Hacía mucho tiempo que no llovía en Israel. Los campos estaban secos, los ríos se habían secado, y había hambre en toda la región. El profeta Elías había estado escondido junto a un arroyo, y cuando el arroyo se secó, Dios le habló otra vez.
+S: 1KI 17:8-9
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun en tiempo de sequía, cuando el arroyo ya se secó.
+N: Sarepta estaba fuera de Israel, en tierra extranjera. Y Dios no lo mandaba a la casa de un hombre rico, sino a la de una viuda. Alguien que, en aquel tiempo, tenía muy poco y casi nadie la protegía.
+S: 1KI 17:10 @elijah after "díjole: "
+S: 1KI 17:11 @elijah after "díjole: "
+N: Agua ya era mucho pedir en una sequía. Pero pan era más de lo que ella tenía.
+S: 1KI 17:12 @widow after "Y ella respondió: "
+N: Esa era toda la verdad de su casa. Un puñado de harina, un poco de aceite, y un hijo. Estaba juntando leña para preparar la última comida. No le quedaba esperanza.
+S: 1KI 17:13 @elijah after "Y Elías le dijo: "
+S: 1KI 17:14 @elijah whole
+N: No tengas miedo. Eso fue lo primero que le dijo Elías. Y luego le pidió algo difícil. Que primero le diera a él, con lo poco que le quedaba. No porque Elías tuviera más derecho, sino porque Dios había dado una palabra sobre esa harina y ese aceite.
+S: 1KI 17:15
+S: 1KI 17:16
+N: Ella fue e hizo lo que Elías le dijo. Y cada día, cuando metía la mano en la tinaja, había harina. Cada día, cuando inclinaba la botija, había aceite. No se llenó la casa de comida. Había lo suficiente para ese día. Y al día siguiente, otra vez.
+N: Dios no le dio a esa viuda una despensa llena. Le dio pan de cada día, durante toda la sequía. Y la vida de su hijo, de ella y del profeta fue sostenida.
+N: Esta historia no es una regla de que si damos dinero vamos a recibir más. Es la historia de una mujer que confió en la palabra de Dios cuando lo tenía todo en contra, y de un Dios que se acordó de una viuda extranjera que nadie más veía.
+N: Si tu tinaja también se ve casi vacía esta noche, recuérdalo. Dios conoce tu casa, tu mesa y lo que te hace falta. Él sabe cuidar de los suyos un día a la vez.

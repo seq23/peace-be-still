@@ -1,0 +1,429 @@
+{
+ "id": "core-017-burning-bush",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Moisés y la zarza ardiendo",
+ "passage": {
+  "refs": [
+   "EXO 3:1-14"
+  ],
+  "label": "Éxodo 3:1-14"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "moses",
+   "name": "Moisés",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moisés había crecido en el palacio de Faraón, pero ahora vivía muy lejos de Egipto. Hacía cuarenta años que había huido. Se había casado en Madián y cuidaba las ovejas de su suegro en el desierto. Era un pastor, ya mayor, sin grandes planes."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:1",
+   "label": "Éxodo 3:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y APACENTANDO Moisés las ovejas de Jethro su suegro, sacerdote de Madián, llevó las ovejas detrás del desierto, y vino á Horeb, monte de Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y APACENTANDO Moisés las ovejas de Jethro su suegro, sacerdote de Madián, llevó las ovejas detrás del desierto, y vino á Horeb, monte de Dios."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:2",
+   "label": "Éxodo 3:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y apareciósele el Angel de Jehová en una llama de fuego en medio de una zarza: y él miró, y vió que la zarza ardía en fuego, y la zarza no se consumía."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y apareciósele el Angel de Jehová en una llama de fuego en medio de una zarza: y él miró, y vió que la zarza ardía en fuego, y la zarza no se consumía."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Dios no se había olvidado de Moisés allá en el desierto.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un arbusto en llamas, y el fuego no lo consumía. Moisés pudo seguir de largo. Pero se detuvo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 3:3",
+   "label": "Éxodo 3:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Entonces Moisés dijo: Iré yo ahora, y veré esta grande visión, por qué causa la zarza no se quema."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Entonces Moisés dijo:"
+    },
+    {
+     "v": 3,
+     "speaker": "moses",
+     "text": "Iré yo ahora, y veré esta grande visión, por qué causa la zarza no se quema."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:4",
+   "label": "Éxodo 3:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y viendo Jehová que iba á ver, llamólo Dios de en medio de la zarza, y dijo: ¡Moisés, Moisés! Y él respondió: Heme aquí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y viendo Jehová que iba á ver, llamólo Dios de en medio de la zarza, y dijo: ¡Moisés, Moisés! Y él respondió: Heme aquí."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios lo llamó por su nombre, dos veces. Y Moisés respondió como responden los que están dispuestos. Aquí estoy."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:5",
+   "label": "Éxodo 3:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y dijo: No te llegues acá: quita tus zapatos de tus pies, porque el lugar en que tú estás, tierra santa es."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y dijo: No te llegues acá: quita tus zapatos de tus pies, porque el lugar en que tú estás, tierra santa es."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:6",
+   "label": "Éxodo 3:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y dijo: Yo soy el Dios de tu padre, Dios de Abraham, Dios de Isaac, Dios de Jacob. Entonces Moisés cubrió su rostro, porque tuvo miedo de mirar á Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y dijo: Yo soy el Dios de tu padre, Dios de Abraham, Dios de Isaac, Dios de Jacob. Entonces Moisés cubrió su rostro, porque tuvo miedo de mirar á Dios."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moisés se quitó las sandalias. El mismo suelo de siempre, en el mismo desierto de siempre, ahora era tierra santa. Porque Dios estaba ahí."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:7",
+   "label": "Éxodo 3:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y dijo Jehová: Bien he visto la aflicción de mi pueblo que está en Egipto, y he oído su clamor á causa de sus exactores; pues tengo conocidas sus angustias:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Y dijo Jehová: Bien he visto la aflicción de mi pueblo que está en Egipto, y he oído su clamor á causa de sus exactores; pues tengo conocidas sus angustias:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:8",
+   "label": "Éxodo 3:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y he descendido para librarlos de mano de los Egipcios, y sacarlos de aquella tierra á una tierra buena y ancha, á tierra que fluye leche y miel, á los lugares del Cananeo, del Hetheo, del Amorrheo, del Pherezeo, del Heveo, y del Jebuseo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y he descendido para librarlos de mano de los Egipcios, y sacarlos de aquella tierra á una tierra buena y ancha, á tierra que fluye leche y miel, á los lugares del Cananeo, del Hetheo, del Amorrheo, del Pherezeo, del Heveo, y del Jebuseo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios había visto. Había oído. Conocía el dolor de su pueblo en Egipto. Durante años les había parecido que nadie escuchaba sus gritos. Pero Dios los escuchaba."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:10",
+   "label": "Éxodo 3:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Ven por tanto ahora, y enviarte he á Faraón, para que saques á mi pueblo, los hijos de Israel, de Egipto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Ven por tanto ahora, y enviarte he á Faraón, para que saques á mi pueblo, los hijos de Israel, de Egipto."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y aquí Moisés se asustó. Una cosa era ver la zarza. Otra cosa era volver a Egipto y pararse delante de Faraón."
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 3:11",
+   "label": "Éxodo 3:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Entonces Moisés respondió á Dios: ¿Quién soy yo, para que vaya á Faraón, y saque de Egipto á los hijos de Israel?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Entonces Moisés respondió á Dios:"
+    },
+    {
+     "v": 11,
+     "speaker": "moses",
+     "text": "¿Quién soy yo, para que vaya á Faraón, y saque de Egipto á los hijos de Israel?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:12",
+   "label": "Éxodo 3:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y él le respondió: Ve, porque yo seré contigo; y esto te será por señal de que yo te he enviado: luego que hubieres sacado este pueblo de Egipto, serviréis á Dios sobre este monte."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y él le respondió: Ve, porque yo seré contigo; y esto te será por señal de que yo te he enviado: luego que hubieres sacado este pueblo de Egipto, serviréis á Dios sobre este monte."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moisés preguntó quién era él. Dios no le contestó con una lista de sus cualidades. Le contestó con su presencia. Yo estaré contigo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "moses",
+   "ref": "EXO 3:13",
+   "label": "Éxodo 3:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y dijo Moisés á Dios: He aquí que llego yo á los hijos de Israel, y les digo, El Dios de vuestros padres me ha enviado á vosotros; si ellos me preguntaren: ¿Cuál es su nombre? ¿qué les responderé?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y dijo Moisés á Dios:"
+    },
+    {
+     "v": 13,
+     "speaker": "moses",
+     "text": "He aquí que llego yo á los hijos de Israel, y les digo, El Dios de vuestros padres me ha enviado á vosotros; si ellos me preguntaren: ¿Cuál es su nombre? ¿qué les responderé?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 3:14",
+   "label": "Éxodo 3:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y respondió Dios á Moisés: YO SOY EL QUE SOY. Y dijo: Así dirás á los hijos de Israel: YO SOY me ha enviado á vosotros."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y respondió Dios á Moisés: YO SOY EL QUE SOY. Y dijo: Así dirás á los hijos de Israel: YO SOY me ha enviado á vosotros."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Yo soy el que soy. Dios no necesitaba otro nombre. Él es el que siempre ha sido y siempre será. El mismo Dios que guió a Abraham, a Isaac y a Jacob era también el Dios de Moisés, y es el mismo hoy."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moisés sentía que era demasiado viejo, que había fallado, que no sabía hablar bien. Y Dios lo llamó de todos modos. No porque Moisés fuera suficiente, sino porque Dios iba con él."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay temporadas que se sienten como un desierto. Uno hace lo mismo de cada día y siente que tu tiempo ya pasó. Dios todavía puede llamarte por tu nombre en el lugar más común. Y lo que te da es lo mismo que le dio a Moisés. Yo estaré contigo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 701,
+ "est_seconds": 388,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exod 3:1-14 (Moses's 40 years in Midian from Acts 7:30 and Exod 2, told in words); God never voiced, YO SOY read only as scripture; 'Yo estaré contigo' quoted as God's word to Moses, then applied as presence, not an outcome."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "An older man called by God: speaks to elders with dignity; the desert season named kindly."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
