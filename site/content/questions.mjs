@@ -52,7 +52,7 @@ ${v("Psalm 4:8 · KJV", "I will both lay me down in peace, and sleep: for thou, 
     description: "Six psalms people read or listen to at bedtime, each quoted from the King James Version, with what each one is about and how to use them for sleep.",
     h1: "Psalms for sleep: 6 bedtime psalms to read or hear tonight",
     definition: "Psalms for sleep are psalms people read or listen to at bedtime because they speak of rest, safety and trust in God. The most used are Psalm 4, 3, 23, 91, 121 and 127. Many people play one psalm read slowly, or whispered, with a sleep timer, so scripture is the last thing they hear before sleeping.",
-    quick: "Start with Psalm 4: its last verse is “I will both lay me down in peace, and sleep.” Then try Psalm 23 or Psalm 91. Read or listen to one psalm, slowly, with the lights low.",
+    quick: "Start with Psalm 4, the traditional evening psalm, which ends with lying down in peace. Then try Psalm 23 or Psalm 91. Read or listen to one psalm, slowly, with the lights low.",
     bestFor: "people who want a short list of bedtime psalms, quoted exactly, and a simple way to use them.",
     sections: [
       ["Which psalms are best to read before bed?", `<p>These six are the ones most often read at night, each with a verse from the King James Version:</p>
@@ -64,8 +64,8 @@ ${v("Psalm 4:8 · KJV", "I will both lay me down in peace, and sleep: for thou, 
 <tr><td>Psalm 121</td><td>The keeper who does not sleep</td><td>“Behold, he that keepeth Israel shall neither slumber nor sleep.” (121:4)</td></tr>
 <tr><td>Psalm 127</td><td>Letting go of worry</td><td>“It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep.” (127:2)</td></tr>
 </tbody></table>`],
-      ["Why is Psalm 4 called the bedtime psalm?", `<p>Psalm 4 is an evening prayer. David asks to be heard, tells the reader to “commune with your own heart upon your bed, and be still,” and ends with lying down in peace. That last verse has made it the traditional psalm for the end of the day.</p>
-${v("Psalm 4:8 · KJV", "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.")}`],
+      ["Why is Psalm 4 called the bedtime psalm?", `<p>Psalm 4 is an evening prayer. David asks to be heard, tells the reader to “commune with your own heart upon your bed, and be still,” and ends with lying down in peace and sleeping in safety. That closing verse, 4:8, has made it the traditional psalm for the end of the day.</p>
+${v("Psalm 4:4 · KJV", "Stand in awe, and sin not: commune with your own heart upon your bed, and be still. Selah.")}`],
       ["How do I use the psalms for sleep?", `<ol>
 <li>Choose one psalm for the night.</li>
 <li>Read it slowly, out loud or in your head, or play it read in a soft voice.</li>
