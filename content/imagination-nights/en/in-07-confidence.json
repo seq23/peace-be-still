@@ -1,0 +1,85 @@
+{
+ "id": "in-07-confidence",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "Walking In Like You Belong",
+ "theme": "confidence",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight is about confidence. About walking into a room and feeling that you belong there. [pause 5]\n\nConfidence is partly a feeling we practice. If we only ever imagine ourselves nervous, small or left out, that is the feeling we rehearse. Tonight we rehearse a different one. [pause 7]\n\nChoose a place where you usually feel unsure. A meeting. A family gathering. A class. A party. We will walk into it together, in your imagination, as the person you would like to be there. [pause 7]\n\nThis is not about pretending to be someone else. It is about letting yourself feel steady. [pause 7]\n\nChoose your room now. [pause 12]\n\nConfidence does not mean never being nervous. Even very confident people feel butterflies. It means you can feel the butterflies and still walk in, still speak, still stay. Tonight we practice that feeling, so it is a little more familiar the next time you need it. Your body learns from what it rehearses, and tonight it can rehearse being steady. [pause 7]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "You are standing just outside the door. Notice your feet on the ground. Steady. [pause 14]\n\nTake one slow breath. Feel your back straighten a little, not stiff, just tall. [pause 14]\n\nNow walk in. Notice that nobody gasps or stares. People simply look up, and some of them smile. [pause 17]\n\nSomeone says your name like they are glad you came. You say hello back, easily. [pause 17]\n\nFind a seat, or a place to stand. Feel how relaxed your hands are. You are not holding on to anything. [pause 17]\n\nSomeone asks your opinion. You answer. Your voice sounds the way you want it to sound. Calm and clear. [pause 17]\n\nNotice the room listening, then the talk moving on. It went fine. Better than fine. [pause 20]\n\nAt the end, you walk out into the evening air, and you think, that was easy. I belonged there. [pause 20]\n\nSay it in your mind. I belong. [pause 22]\n\nNow picture the next time you go into that room, a week later. It is even easier. People expect you. [pause 20]\n\nNotice how you stand when you wait in line, how you answer the phone, how you say no when you need to. Steady, in small ways. [pause 20]\n\nYou catch your reflection in a window as you pass. You look like someone who is at home in their own life. [pause 20]\n\nLet that steady feeling rest in your body as you drift. [pause 27]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 669,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1138,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:53:07",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Teachings in our own words only (living in the end, the drowsy state, revision, a friend's congratulations); no book quoted and the teacher is never named, so no affiliation line is needed; every teaching says plainly it is imagination and feeling, not a promise, and that the real daytime steps still matter ('not a guarantee' reworded so no promise word appears). The love night forbids picturing another person changing their mind and tells anyone in a frightening relationship to reach out for help; revision keeps apologies owed as real; work night pictures bills paid on time, not riches. No God's Word words, journeys or scripture (scripture_woven false)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

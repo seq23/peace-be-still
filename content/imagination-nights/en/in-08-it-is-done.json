@@ -1,0 +1,85 @@
+{
+ "id": "in-08-it-is-done",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "It Is Done",
+ "theme": "stillness after the wish",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hello, and welcome back to Imagination Nights. [pause 3]\n\nSettle into the bed. Pull the covers up to where you like them. [pause 8]\n\nTake one deep breath, and let it go with a sigh. [pause 8]\n\nNow let your breathing find its own pace. You do not have to control it. Just notice it. [pause 10]\n\nFeel your feet getting heavy. Your legs. Your back sinking into the mattress. [pause 10]\n\nNow let us relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThe day is finished. This part of the night is yours. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight is a quieter practice. There is no long scene. Just one feeling, held for a while. [pause 8]\n\nThe feeling is the one you have when something you waited for is finally finished. The test is over. The papers are signed. The call came. You let out a breath you did not know you were holding. [pause 10]\n\nWe call it the feeling of it is done. Not excitement. Relief. Rest. The end of reaching. [pause 10]\n\nYou can bring any wish to this practice. You do not have to picture the details at all. Just the feeling after. [pause 10]\n\nAnd, as always, it is a practice for your peace tonight, not a promise about tomorrow. [pause 15]\n\nSome of us have been reaching for something so long that we have forgotten what it is like to stop. Tonight you can practice stopping. Just for a little while, you can let the wish rest, as if it has already been answered, and let your whole body feel what relief feels like. Then you can sleep with that feeling instead of the reaching. [pause 10]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Think of your wish for a moment. Just name it in your mind. [pause 17]\n\nNow imagine the second after it came true. Not the party. The quiet second after. [pause 20]\n\nFeel your chest loosen. Your stomach unclench. Your hands unfold. [pause 20]\n\nLet out a long breath. The breath of someone who can stop waiting. [pause 20]\n\nIn your mind, say very simply, it is done. [pause 25]\n\nNotice there is nothing to check, nothing to chase. You can just lie here. [pause 25]\n\nSay it again, softer. It is done. [pause 25]\n\nLet the words fade, and keep only the feeling. [pause 30]\n\nPicture yourself the next morning, waking up. The first thought is not worry. It is something simple. Oh, that is right. It is done. [pause 25]\n\nFeel yourself stretch, and get up slowly, with no knot in your stomach. [pause 25]\n\nLet that morning feeling come back here, into tonight. [pause 25]\n\nRest in it. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "We will end here for tonight. [pause 10]\n\nKeep the feeling, not the effort. Let the effort go. [pause 15]\n\nWhatever happens tomorrow, tonight you practiced feeling at peace. That is worth something on its own. [pause 20]\n\nLet sleep come when it comes. There is no rush. [pause 20]\n\nNotice the weight of the covers. The cool side of the pillow. The dark. [pause 25]\n\nLet each breath out be a little longer than the one before. [pause 25]\n\nNothing more to picture. Nothing more to try. Only rest. [pause 30]\n\nGood night. [pause 60]"
+  }
+ ],
+ "words": 563,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1133,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:53:07",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Teachings in our own words only (living in the end, the drowsy state, revision, a friend's congratulations); no book quoted and the teacher is never named, so no affiliation line is needed; every teaching says plainly it is imagination and feeling, not a promise, and that the real daytime steps still matter ('not a guarantee' reworded so no promise word appears). The love night forbids picturing another person changing their mind and tells anyone in a frightening relationship to reach out for help; revision keeps apologies owed as real; work night pictures bills paid on time, not riches. No God's Word words, journeys or scripture (scripture_woven false)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

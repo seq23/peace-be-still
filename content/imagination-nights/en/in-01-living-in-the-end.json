@@ -1,0 +1,85 @@
+{
+ "id": "in-01-living-in-the-end",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "Living in the End",
+ "theme": "the method",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight we start with the simplest idea in this practice. It is called living in the end. [pause 3]\n\nMost of the time, when we want something, we picture the road to it. The worry, the steps, the waiting. Living in the end means skipping ahead in your imagination to the moment after. The moment when the thing you hoped for has already happened, and you are simply living there. [pause 5]\n\nYou do not picture yourself wanting it. You picture yourself having it, in an ordinary way. Not a big celebration. Just a normal evening after it is done. [pause 5]\n\nThe question to ask is a small one. If it were already true, what would I be doing tonight? Where would I be sitting? Who would I call? How would my body feel? [pause 5]\n\nThis is a practice of imagination and feeling. It is not a promise about what will happen, and it does not replace the real steps you take in the daytime. It is a way to spend the last minutes of the day feeling hopeful instead of afraid. [pause 5]\n\nChoose one wish now. Keep it simple. You do not have to say it out loud. [pause 10]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Picture an evening, some weeks from now. The wish has come true. It is not new anymore. It is just part of your life. [pause 10]\n\nYou are at home, at the end of the day. Notice where you are sitting. A couch. A kitchen chair. A porch step. [pause 10]\n\nNotice the light. Maybe it is the last orange light of evening through the window. Maybe it is a lamp. [pause 10]\n\nYou are not thinking about the wish. You are just living after it. You are relaxed in a way you have not been in a long time. [pause 12]\n\nYour phone buzzes. It is someone who knows. They are checking in, the way people do when something good has settled into your life. You smile at the screen. [pause 12]\n\nHear their voice. They say something simple. I am so glad for you. And you say, me too. It still feels good. [pause 15]\n\nPut the phone down. Look around the room. What is different now? Maybe something small. A new key on the counter. A name on a calendar. A letter on the table. [pause 15]\n\nFeel your shoulders. Notice that they are not tight. The worry you used to carry about this is not there. [pause 15]\n\nTake a breath in this scene. Breathe the way someone breathes when a long wait is over. [pause 15]\n\nStay here. You do not need to add anything. Just stay in the evening after. [pause 20]\n\nIf you want, say a quiet sentence in your mind, in the past tense. It happened. It is done. I am glad. [pause 20]\n\nNow let the evening move on a little. You get up and make something warm to drink. Notice the mug in your hands. [pause 15]\n\nYou stand at the window. Outside, the street is quiet. A car passes. Someone's porch light comes on. [pause 15]\n\nYou think about the time before, when you were still waiting. It feels far away now. Like a season that ended. [pause 18]\n\nYou are not proud or anxious. Just settled. This is simply your life now. [pause 18]\n\nLet the scene go a little soft around the edges, the way a room looks when you are almost asleep in it. [pause 20]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 828,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1223,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:53:07",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Teachings in our own words only (living in the end, the drowsy state, revision, a friend's congratulations); no book quoted and the teacher is never named, so no affiliation line is needed; every teaching says plainly it is imagination and feeling, not a promise, and that the real daytime steps still matter ('not a guarantee' reworded so no promise word appears). The love night forbids picturing another person changing their mind and tells anyone in a frightening relationship to reach out for help; revision keeps apologies owed as real; work night pictures bills paid on time, not riches. No God's Word words, journeys or scripture (scripture_woven false)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
