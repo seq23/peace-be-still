@@ -99,7 +99,7 @@ function finalize(item, checks, review) {
 //   until "phrase"   speech stops before this phrase; the rest of the verse is narration (another speaker)
 const INTRO = {
   en: /\b(?:said|saith|say|saying|answered|spake|cried)(?: moreover)?(?: (?:the |his )?[A-Za-z-]+(?: of [A-Z][a-z]+)?)?(?: (?:unto|to|before|one to) [^,:;]{1,40})?,\s+/,
-  es: /\b(?:dijo|dijeron|dice|dicen|respondi[óo]|respondieron|habl[óo]|diciendo|clam[óo]|clamaron)\b[^:.]{0,80}:\s+/,
+  es: /\b(?:dijo|dijeron|dice|dicen|dec[íi]a|dec[íi]an|respondi[óo]|respondieron|respond[íi]a|habl[óo]|diciendo|clam[óo]|clamaron|a[ñn]adi[óo])\b[^:.]{0,80}:\s+/,
 };
 const RESUME = {
   en: /[.?!:;,]\s+(?=(?:[Aa]nd|Then|But|So) (?:he|she|they|his|her|the|[A-Z][a-z]+)\b[^,]{0,40}?\b(?:said|saith|answered|came|could|cried|spake)\b)/,

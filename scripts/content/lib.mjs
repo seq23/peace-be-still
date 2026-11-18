@@ -54,7 +54,7 @@ export function bible(tr) {
   const map = new Map();
   for (const line of txt.split("\n")) {
     const m = line.match(/^([1-4A-Z]{3}) (\d+):(\d+) (.*)$/);
-    if (m) map.set(`${m[1]} ${m[2]}:${m[3]}`, display(m[4]));
+    if (m && m[4].trim()) map.set(`${m[1]} ${m[2]}:${m[3]}`, display(m[4]));
   }
   if (map.size < 30000) throw new Error(`BIBLE_INCOMPLETE ${tr} has ${map.size} verses`);
   return (cache[tr] = map);
