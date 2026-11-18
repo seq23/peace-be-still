@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<meta name="pbs:door" content="neutral">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Peace Be Still: Bible &amp; Whispered Sleep App, Coming Soon</title>
@@ -11,8 +12,9 @@
 <link rel="alternate" hreflang="x-default" href="https://peacebestillapp.com/">
 <meta name="theme-color" content="#F4F0E6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E1A22" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/libre-caslon-text-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/figtree-normal-400-700-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -211,6 +213,28 @@
     </div>
   </section>
 
+<!-- waitlist:start --><section class="wrap" id="waitlist" aria-labelledby="wl-h">
+  <div class="card waitlist-card">
+    <h2 id="wl-h">Tell me when it launches</h2>
+    <p>Leave your email and we will send one message when Peace Be Still is in the App Store and Google Play. That is the only thing your address is used for, and the list is deleted after the launch email.</p>
+    <form class="waitlist" method="post" action="/api/waitlist">
+      <label for="wl-email">Your email</label>
+      <input id="wl-email" name="email" type="email" required autocomplete="email" inputmode="email" maxlength="254">
+      <fieldset class="doors-pick"><legend>Which door interests you? (optional)</legend>
+        <label><input type="radio" name="door" value="gods-word"> God's Word</label>
+        <label><input type="radio" name="door" value="mindset"> Mindset &amp; imagination</label>
+        <label><input type="radio" name="door" value="" checked> Not sure yet</label>
+      </fieldset>
+      <label class="tick"><input type="checkbox" name="consent" value="yes" required> <span>Email me once when Peace Be Still launches. Nothing else.</span></label>
+      <input type="hidden" name="lang" value="en">
+      <input type="hidden" name="page" value="/">
+      <div class="hp" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn" type="submit">Tell me when it launches ›</button>
+      <p class="fine">What we keep and how to remove it: <a href="/privacy">Privacy</a>.</p>
+    </form>
+  </div>
+</section><!-- waitlist:end -->
+
   <section class="wrap closing" aria-label="Coming soon">
     <img src="/brand/pbs-mark-dark.svg" alt="" width="64" height="64">
     <h2>Coming soon to the App Store and Google Play</h2>
@@ -218,15 +242,17 @@
   </section>
 </main>
 
-<footer class="site-foot">
+<!-- footer:start --><footer class="site-foot">
   <div class="wrap">
     <span>Peace Be Still · a Spry Labs app · Updated 18 Nov 2026</span>
     <nav aria-label="Footer">
+      <a href="/questions/">Questions</a>
+      <a href="/about">About</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="/es/" hreflang="es" lang="es">Español</a>
     </nav>
   </div>
-</footer>
+</footer><!-- footer:end -->
 </body>
 </html>

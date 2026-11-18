@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>https://peacebestillapp.com/</loc><lastmod>2026-11-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://peacebestillapp.com/"/><xhtml:link rel="alternate" hreflang="es" href="https://peacebestillapp.com/es/"/></url>
-  <url><loc>https://peacebestillapp.com/es/</loc><lastmod>2026-11-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://peacebestillapp.com/"/><xhtml:link rel="alternate" hreflang="es" href="https://peacebestillapp.com/es/"/></url>
-  <url><loc>https://peacebestillapp.com/privacy</loc><lastmod>2026-11-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://peacebestillapp.com/privacy"/><xhtml:link rel="alternate" hreflang="es" href="https://peacebestillapp.com/es/privacidad"/></url>
-  <url><loc>https://peacebestillapp.com/es/privacidad</loc><lastmod>2026-11-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://peacebestillapp.com/privacy"/><xhtml:link rel="alternate" hreflang="es" href="https://peacebestillapp.com/es/privacidad"/></url>
-  <url><loc>https://peacebestillapp.com/terms</loc><lastmod>2026-11-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://peacebestillapp.com/terms"/><xhtml:link rel="alternate" hreflang="es" href="https://peacebestillapp.com/es/terminos"/></url>
-  <url><loc>https://peacebestillapp.com/es/terminos</loc><lastmod>2026-11-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://peacebestillapp.com/terms"/><xhtml:link rel="alternate" hreflang="es" href="https://peacebestillapp.com/es/terminos"/></url>
+  <url><loc>https://peacebestillapp.com/</loc><lastmod>2026-11-18</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://peacebestillapp.com/"/><xhtml:link rel="alternate" hreflang="es" href="https://peacebestillapp.com/es/"/></url>
+  <url><loc>https://peacebestillapp.com/about</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://peacebestillapp.com/es/</loc><lastmod>2026-11-18</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://peacebestillapp.com/"/><xhtml:link rel="alternate" hreflang="es" href="https://peacebestillapp.com/es/"/></url>
+  <url><loc>https://peacebestillapp.com/es/preguntas/</loc></url>
+  <url><loc>https://peacebestillapp.com/es/preguntas/salmos-para-dormir/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://peacebestillapp.com/questions/</loc></url>
+  <url><loc>https://peacebestillapp.com/questions/black-bible-app/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://peacebestillapp.com/questions/how-to-cancel-bible-chat-subscription/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://peacebestillapp.com/questions/how-to-cancel-haven-subscription/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://peacebestillapp.com/questions/law-of-assumption-sleep-meditation/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://peacebestillapp.com/questions/psalms-for-sleep/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://peacebestillapp.com/questions/whispered-bible-for-sleep/</loc><lastmod>2026-11-18</lastmod></url>
 </urlset>
