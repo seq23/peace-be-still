@@ -1,0 +1,399 @@
+{
+ "id": "core-037-samuel",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Speak, Lord",
+ "passage": {
+  "refs": [
+   "1SA 3:1-10"
+  ],
+  "label": "1 Samuel 3:1-10"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "samuel",
+   "name": "Samuel",
+   "age": "child",
+   "gender": "m"
+  },
+  {
+   "id": "eli",
+   "name": "Eli",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Remember Hannah, Church? She prayed so hard for a son that the priest thought she was drunk. God gave her that boy, and she named him Samuel. When he was weaned, she brought him to the house of the LORD to grow up serving the old priest Eli."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:1",
+   "label": "1 Samuel 3:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And the child Samuel ministered unto the LORD before Eli. And the word of the LORD was precious in those days; there was no open vision."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And the child Samuel ministered unto the LORD before Eli. And the word of the LORD was precious in those days; there was no open vision."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, in those days a word from God was precious. Rare. Folks were not hearing from heaven much at all."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:2",
+   "label": "1 Samuel 3:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And it came to pass at that time, when Eli was laid down in his place, and his eyes began to wax dim, that he could not see;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And it came to pass at that time, when Eli was laid down in his place, and his eyes began to wax dim, that he could not see;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:3",
+   "label": "1 Samuel 3:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And ere the lamp of God went out in the temple of the LORD, where the ark of God was, and Samuel was laid down to sleep;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And ere the lamp of God went out in the temple of the LORD, where the ark of God was, and Samuel was laid down to sleep;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was late, but not morning yet. The lamp in the temple was still burning. Old Eli was asleep in his place, and the boy Samuel was asleep in his."
+  },
+  {
+   "type": "scripture",
+   "speaker": "samuel",
+   "ref": "1SA 3:4",
+   "label": "1 Samuel 3:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "That the LORD called Samuel: and he answered, Here am I."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "That the LORD called Samuel: and he answered,"
+    },
+    {
+     "v": 4,
+     "speaker": "samuel",
+     "text": "Here am I."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "samuel",
+   "ref": "1SA 3:5",
+   "label": "1 Samuel 3:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And he ran unto Eli, and said, Here am I; for thou calledst me. And he said, I called not; lie down again. And he went and lay down."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And he ran unto Eli, and said,"
+    },
+    {
+     "v": 5,
+     "speaker": "samuel",
+     "text": "Here am I; for thou calledst me."
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And he said, I called not; lie down again. And he went and lay down."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel thought it was Eli calling. Eli told him no, go lie back down. So he did."
+  },
+  {
+   "type": "scripture",
+   "speaker": "samuel",
+   "ref": "1SA 3:6",
+   "label": "1 Samuel 3:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And the LORD called yet again, Samuel. And Samuel arose and went to Eli, and said, Here am I; for thou didst call me. And he answered, I called not, my son; lie down again."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And the LORD called yet again, Samuel. And Samuel arose and went to Eli, and said,"
+    },
+    {
+     "v": 6,
+     "speaker": "samuel",
+     "text": "Here am I; for thou didst call me."
+    },
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And he answered, I called not, my son; lie down again."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 3:7",
+   "label": "1 Samuel 3:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Now Samuel did not yet know the LORD, neither was the word of the LORD yet revealed unto him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Now Samuel did not yet know the LORD, neither was the word of the LORD yet revealed unto him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel had not yet come to know the LORD for himself. He grew up in church, but the word had not come to him yet. That can happen to any of us."
+  },
+  {
+   "type": "scripture",
+   "speaker": "samuel",
+   "ref": "1SA 3:8",
+   "label": "1 Samuel 3:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And the LORD called Samuel again the third time. And he arose and went to Eli, and said, Here am I; for thou didst call me. And Eli perceived that the LORD had called the child."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And the LORD called Samuel again the third time. And he arose and went to Eli, and said,"
+    },
+    {
+     "v": 8,
+     "speaker": "samuel",
+     "text": "Here am I; for thou didst call me."
+    },
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And Eli perceived that the LORD had called the child."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Three times. And on the third time, the old man understood. It was God calling that child. And Eli told him what to say."
+  },
+  {
+   "type": "scripture",
+   "speaker": "eli",
+   "ref": "1SA 3:9",
+   "label": "1 Samuel 3:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Therefore Eli said unto Samuel, Go, lie down: and it shall be, if he call thee, that thou shalt say, Speak, LORD; for thy servant heareth. So Samuel went and lay down in his place."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Therefore Eli said unto Samuel,"
+    },
+    {
+     "v": 9,
+     "speaker": "eli",
+     "text": "Go, lie down: and it shall be, if he call thee, that thou shalt say, Speak, LORD; for thy servant heareth."
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "So Samuel went and lay down in his place."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, speak, Lord. [PAUSE 3s | screen: \"Speak, Lord\"] Speak, Lord. [PAUSE 3s | screen: \"Speak, Lord\"] That old priest taught a little boy how to answer God.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Speak, Lord"
+    },
+    {
+     "seconds": 3,
+     "screen": "Speak, Lord"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "samuel",
+   "ref": "1SA 3:10",
+   "label": "1 Samuel 3:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And the LORD came, and stood, and called as at other times, Samuel, Samuel. Then Samuel answered, Speak; for thy servant heareth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And the LORD came, and stood, and called as at other times, Samuel, Samuel. Then Samuel answered,"
+    },
+    {
+     "v": 10,
+     "speaker": "samuel",
+     "text": "Speak; for thy servant heareth."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Thank God for the old saints who know the sound of God's voice and teach the young ones how to listen. Eli could not hear it himself that night. But he knew what it was, and he pointed that child in the right direction."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel grew up to be a prophet over all Israel. It started with a boy lying in the dark, saying, speak, for I am listening. God still speaks to children. And he still uses the old folks to help them know it is him."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 548,
+ "est_seconds": 305,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 1.5",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:46:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Sam 3:1-10; Hannah from 1 Sam 1; God's call read as scripture; Eli's instruction voiced by Eli; v1 put in narration in our own words (no typed verse)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The old saints teaching the young to hear God, without any invented person; 'speak, Lord' at the turn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

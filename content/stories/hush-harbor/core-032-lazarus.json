@@ -1,0 +1,435 @@
+{
+ "id": "core-032-lazarus",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Lazarus, Come Forth",
+ "passage": {
+  "refs": [
+   "JOH 11:17-44"
+  ],
+  "label": "John 11:17-44"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "martha",
+   "name": "Martha",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "mary",
+   "name": "Mary",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "jews",
+   "name": "the Jews",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lazarus was sick, and his sisters Martha and Mary sent word to Jesus. Lord, the one you love is sick. They knew he would come. But Jesus stayed where he was two more days. And by the time he got to Bethany, Lazarus was gone."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:17",
+   "label": "John 11:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Then when Jesus came, he found that he had lain in the grave four days already."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Then when Jesus came, he found that he had lain in the grave four days already."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Four days. Long enough that nobody was expecting anything anymore. The house was full of people from Jerusalem who had come to sit with the sisters. Somebody brought food. Somebody sat quiet in the corner. That is what you do when there is a death in the family."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Martha heard Jesus was coming, and she did not wait. She went out on the road to meet him. Mary stayed in the house."
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "JOH 11:21",
+   "label": "John 11:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Then said Martha unto Jesus, Lord, if thou hadst been here, my brother had not died."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Then said Martha unto Jesus,"
+    },
+    {
+     "v": 21,
+     "speaker": "martha",
+     "text": "Lord, if thou hadst been here, my brother had not died."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, she said what a lot of us have said. Lord, if you had been here. But hear her faith, even in the hurt. She told him she knew God would still give him whatever he asked."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:25",
+   "label": "John 11:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Jesus said unto her, I am the resurrection, and the life: he that believeth in me, though he were dead, yet shall he live:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Jesus said unto her, I am the resurrection, and the life: he that believeth in me, though he were dead, yet shall he live:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:26",
+   "label": "John 11:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And whosoever liveth and believeth in me shall never die. Believest thou this?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And whosoever liveth and believeth in me shall never die. Believest thou this?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "JOH 11:27",
+   "label": "John 11:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "She saith unto him, Yea, Lord: I believe that thou art the Christ, the Son of God, which should come into the world."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "She saith unto him,"
+    },
+    {
+     "v": 27,
+     "speaker": "martha",
+     "text": "Yea, Lord: I believe that thou art the Christ, the Son of God, which should come into the world."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, I believe. [PAUSE 3s | screen: \"I believe\"] I believe. [PAUSE 3s | screen: \"I believe\"] Martha said it at the edge of the grave, before she ever saw that stone move.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "I believe"
+    },
+    {
+     "seconds": 3,
+     "screen": "I believe"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Martha went and got her sister. Mary got up quick and went out to him, and the mourners followed her, thinking she was going to the grave to cry."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mary",
+   "ref": "JOH 11:32",
+   "label": "John 11:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Then when Mary was come where Jesus was, and saw him, she fell down at his feet, saying unto him, Lord, if thou hadst been here, my brother had not died."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "Then when Mary was come where Jesus was, and saw him, she fell down at his feet, saying unto him,"
+    },
+    {
+     "v": 32,
+     "speaker": "mary",
+     "text": "Lord, if thou hadst been here, my brother had not died."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The very same words. Those sisters had been saying it to each other for four days. If he had just been here."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And Jesus saw her crying. He saw everybody crying with her. He groaned in his spirit, and he was troubled. He asked where they had laid him, and they said, Lord, come and see."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:35",
+   "label": "John 11:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Jesus wept."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Jesus wept."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus wept. He knew what he was about to do. He knew that in a few minutes Lazarus would be walking. And still, he stood with those sisters and cried. Our Lord does not rush past our grief. He weeps with us."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jews",
+   "ref": "JOH 11:36",
+   "label": "John 11:36",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 36,
+     "text": "Then said the Jews, Behold how he loved him!"
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "Then said the Jews,"
+    },
+    {
+     "v": 36,
+     "speaker": "jews",
+     "text": "Behold how he loved him!"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They came to the grave. It was a cave with a stone laid over it, and Jesus told them to take it away."
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "JOH 11:39",
+   "label": "John 11:39",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 39,
+     "text": "Jesus said, Take ye away the stone. Martha, the sister of him that was dead, saith unto him, Lord, by this time he stinketh: for he hath been dead four days."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "Jesus said, Take ye away the stone. Martha, the sister of him that was dead, saith unto him,"
+    },
+    {
+     "v": 39,
+     "speaker": "martha",
+     "text": "Lord, by this time he stinketh: for he hath been dead four days."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:40",
+   "label": "John 11:40",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 40,
+     "text": "Jesus saith unto her, Said I not unto thee, that, if thou wouldest believe, thou shouldest see the glory of God?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "Jesus saith unto her, Said I not unto thee, that, if thou wouldest believe, thou shouldest see the glory of God?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So they rolled the stone away. Jesus lifted up his eyes and thanked the Father out loud, so the people would believe."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:43",
+   "label": "John 11:43",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 43,
+     "text": "And when he thus had spoken, he cried with a loud voice, Lazarus, come forth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 43,
+     "speaker": "narrator",
+     "text": "And when he thus had spoken, he cried with a loud voice, Lazarus, come forth."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 11:44",
+   "label": "John 11:44",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 44,
+     "text": "And he that was dead came forth, bound hand and foot with graveclothes: and his face was bound about with a napkin. Jesus saith unto them, Loose him, and let him go."
+    }
+   ],
+   "segments": [
+    {
+     "v": 44,
+     "speaker": "narrator",
+     "text": "And he that was dead came forth, bound hand and foot with graveclothes: and his face was bound about with a napkin. Jesus saith unto them, Loose him, and let him go."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Loose him, and let him go. The same Jesus who wept at that grave called a dead man out of it. He is the resurrection and the life, Church. Death does not get the last word with him."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 624,
+ "est_seconds": 346,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.3",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:46:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 11:17-44 (v3 and v6 in narration); Jesus's words only as scripture; no promise that a listener's dead will be raised now; the 'fourth day' folk belief left out as unprovable."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A house in grief drawn the way Black families keep it (food, quiet, sitting with the family) without stereotype; 'I believe' at Martha's confession."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

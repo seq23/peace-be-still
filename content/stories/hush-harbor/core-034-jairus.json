@@ -1,0 +1,380 @@
+{
+ "id": "core-034-jairus",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Be Not Afraid, Only Believe",
+ "passage": {
+  "refs": [
+   "MAR 5:21-24",
+   "MAR 5:35-43"
+  ],
+  "label": "Mark 5:21-24; Mark 5:35-43"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jairus",
+   "name": "Jairus",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "messengers",
+   "name": "people from Jairus's house",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus had just crossed back over the sea, and a crowd met him at the shore. Out of that crowd came a man the whole town knew. He was a leader in the synagogue, a man with a name and a position."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:22",
+   "label": "Mark 5:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And, behold, there cometh one of the rulers of the synagogue, Jairus by name; and when he saw him, he fell at his feet,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And, behold, there cometh one of the rulers of the synagogue, Jairus by name; and when he saw him, he fell at his feet,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jairus",
+   "ref": "MAR 5:23",
+   "label": "Mark 5:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And besought him greatly, saying, My little daughter lieth at the point of death: I pray thee, come and lay thy hands on her, that she may be healed; and she shall live."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And besought him greatly, saying,"
+    },
+    {
+     "v": 23,
+     "speaker": "jairus",
+     "text": "My little daughter lieth at the point of death: I pray thee, come and lay thy hands on her, that she may be healed; and she shall live."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, when your baby is sick, your title does not matter. Jairus got down in the dirt at the feet of Jesus and begged. My little daughter. That is a daddy's heart."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:24",
+   "label": "Mark 5:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And Jesus went with him; and much people followed him, and thronged him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "And Jesus went with him; and much people followed him, and thronged him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus went. But the crowd was so thick they could hardly move. And on the way, a woman who had been sick twelve years touched the hem of his garment, and Jesus stopped to find her. Jairus had to stand there and wait. Every minute counted, and the Lord had stopped."
+  },
+  {
+   "type": "scripture",
+   "speaker": "messengers",
+   "ref": "MAR 5:35",
+   "label": "Mark 5:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "While he yet spake, there came from the ruler of the synagogue’s house certain which said, Thy daughter is dead: why troublest thou the Master any further?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "While he yet spake, there came from the ruler of the synagogue’s house certain which said,"
+    },
+    {
+     "v": 35,
+     "speaker": "messengers",
+     "text": "Thy daughter is dead: why troublest thou the Master any further?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Too late. Don't trouble the Master. Those are hard words for a father to hear."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:36",
+   "label": "Mark 5:36",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 36,
+     "text": "As soon as Jesus heard the word that was spoken, he saith unto the ruler of the synagogue, Be not afraid, only believe."
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "As soon as Jesus heard the word that was spoken, he saith unto the ruler of the synagogue, Be not afraid, only believe."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, only believe. [PAUSE 3s | screen: \"Only believe\"] Only believe. [PAUSE 3s | screen: \"Only believe\"] Jesus said it to Jairus right after the worst news of his life.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Only believe"
+    },
+    {
+     "seconds": 3,
+     "screen": "Only believe"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus did not let that bad report have the last word. He took Peter, James and John, and he went on to the house."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:38",
+   "label": "Mark 5:38",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 38,
+     "text": "And he cometh to the house of the ruler of the synagogue, and seeth the tumult, and them that wept and wailed greatly."
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "And he cometh to the house of the ruler of the synagogue, and seeth the tumult, and them that wept and wailed greatly."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:39",
+   "label": "Mark 5:39",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 39,
+     "text": "And when he was come in, he saith unto them, Why make ye this ado, and weep? the damsel is not dead, but sleepeth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "And when he was come in, he saith unto them, Why make ye this ado, and weep? the damsel is not dead, but sleepeth."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:40",
+   "label": "Mark 5:40",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 40,
+     "text": "And they laughed him to scorn. But when he had put them all out, he taketh the father and the mother of the damsel, and them that were with him, and entereth in where the damsel was lying."
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "And they laughed him to scorn. But when he had put them all out, he taketh the father and the mother of the damsel, and them that were with him, and entereth in where the damsel was lying."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They laughed at him. People will laugh at your faith sometimes. Jesus did not argue. He just put them out, and kept the ones who believed close."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:41",
+   "label": "Mark 5:41",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 41,
+     "text": "And he took the damsel by the hand, and said unto her, Talitha cumi; which is, being interpreted, Damsel, I say unto thee, arise."
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "And he took the damsel by the hand, and said unto her, Talitha cumi; which is, being interpreted, Damsel, I say unto thee, arise."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Talitha cumi. Little girl, get up. He spoke to her the way a parent wakes a child in the morning. Gentle. Like she was only sleeping."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:42",
+   "label": "Mark 5:42",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 42,
+     "text": "And straightway the damsel arose, and walked; for she was of the age of twelve years. And they were astonished with a great astonishment."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "And straightway the damsel arose, and walked; for she was of the age of twelve years. And they were astonished with a great astonishment."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 5:43",
+   "label": "Mark 5:43",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 43,
+     "text": "And he charged them straitly that no man should know it; and commanded that something should be given her to eat."
+    }
+   ],
+   "segments": [
+    {
+     "v": 43,
+     "speaker": "narrator",
+     "text": "And he charged them straitly that no man should know it; and commanded that something should be given her to eat."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And then he told them to get her something to eat. Isn't that just like him? A miracle, and then a plate of food for a hungry child. The Lord who raised her up also cared that she had her supper. He sees the big things and the little things, and he does not forget either one."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 571,
+ "est_seconds": 317,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:46:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 5:21-24 and 35-43 (the woman of 25-34 named in passing; Peter, James, John from v37); no promise that a sick child will be healed."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A father's love shown with dignity; 'only believe' at the turn; the food at the end kept tender."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
