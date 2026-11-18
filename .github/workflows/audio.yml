@@ -1,0 +1,19 @@
+name: Audio
+on:
+  pull_request:
+    paths: ["audio/**", "!audio/manifest.jsonl", ".github/workflows/audio.yml"]
+  push:
+    branches: [main]
+    paths: ["audio/**", "!audio/manifest.jsonl", ".github/workflows/audio.yml"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Library fill behaviour tests (no audio engines in CI)
+        run: python -m unittest discover -s audio/tests -v
+      - name: Manifest rows are well formed and every voice is licensed (A09)
+        run: python audio/check_manifest.py && python audio/check_manifest.py --self-test

@@ -4,3 +4,10 @@ node_modules/
 .dev.vars
 .search-loop-engine/
 .search-loop-run.log
+
+# audio never goes in git (the library lives on Drive; only audio/manifest.jsonl is kept here)
+*.wav
+*.m4a
+*.mp3
+*.opus
+__pycache__/

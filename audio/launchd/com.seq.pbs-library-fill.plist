@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Peace Be Still library fill: every 15 minutes, day and night, while the library is incomplete.
+     No calendar hours (StartInterval), so there is no Central-time shift to make. Low priority:
+     Nice 15 and low-priority disk I/O, so her own apps always come first. A run holds a lock, so
+     a new start while one is working exits at once. Installed by audio/launchd/install.sh. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.seq.pbs-library-fill</string>
+  <key>ProgramArguments</key>
+  <array><string>/bin/zsh</string><string>__RUNNER__/audio/run.sh</string></array>
+  <key>StartInterval</key><integer>900</integer>
+  <key>RunAtLoad</key><true/>
+  <key>Nice</key><integer>15</integer>
+  <key>LowPriorityIO</key><true/>
+  <key>StandardOutPath</key><string>__HOME__/.peace-be-still/logs/library-fill.log</string>
+  <key>StandardErrorPath</key><string>__HOME__/.peace-be-still/logs/library-fill.log</string>
+</dict>
+</plist>
