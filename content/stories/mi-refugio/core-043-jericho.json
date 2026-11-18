@@ -1,0 +1,394 @@
+{
+ "id": "core-043-jericho",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Los muros de Jericó",
+ "passage": {
+  "refs": [
+   "JOS 6:1-20"
+  ],
+  "label": "Josué 6:1-20"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "joshua",
+   "name": "Josué",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Moisés había muerto, y ahora Josué guiaba al pueblo. Habían cruzado el Jordán. Y delante de ellos estaba Jericó, una ciudad con murallas tan altas y gruesas que parecía imposible entrar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:1",
+   "label": "Josué 6:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Empero Jericó estaba cerrada, bien cerrada, á causa de los hijos de Israel: nadie entraba, ni salía."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Empero Jericó estaba cerrada, bien cerrada, á causa de los hijos de Israel: nadie entraba, ni salía."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno delante de los muros que nosotros no podemos derribar.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:2",
+   "label": "Josué 6:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Mas Jehová dijo á Josué: Mira, yo he entregado en tu mano á Jericó y á su rey, con sus varones de guerra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Mas Jehová dijo á Josué: Mira, yo he entregado en tu mano á Jericó y á su rey, con sus varones de guerra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios le dijo que ya le había entregado la ciudad. Dios habló como si ya hubiera pasado. Los muros seguían de pie, pero para Dios la ciudad ya estaba entregada."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y luego les dio un plan muy extraño. Nada de escaleras ni de máquinas de guerra. Solo caminar alrededor de la ciudad, una vez al día durante seis días, con los sacerdotes tocando trompetas de cuerno de carnero delante del arca. Y el séptimo día, siete vueltas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:6",
+   "label": "Josué 6:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y llamando Josué hijo de Nun á los sacerdotes, les dijo: Llevad el arca del pacto, y siete sacerdotes lleven bocinas de cuernos de carneros delante del arca de Jehová."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y llamando Josué hijo de Nun á los sacerdotes, les dijo:"
+    },
+    {
+     "v": 6,
+     "speaker": "joshua",
+     "text": "Llevad el arca del pacto, y siete sacerdotes lleven bocinas de cuernos de carneros delante del arca de Jehová."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:7",
+   "label": "Josué 6:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y dijo al pueblo: Pasad, y rodead la ciudad; y los que están armados pasarán delante del arca de Jehová."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Y dijo al pueblo:"
+    },
+    {
+     "v": 7,
+     "speaker": "joshua",
+     "text": "Pasad, y rodead la ciudad; y los que están armados pasarán delante del arca de Jehová."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:10",
+   "label": "Josué 6:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y Josué mandó al pueblo, diciendo: Vosotros no daréis grita, ni se oirá vuestra voz, ni saldrá palabra de vuestra boca, hasta el día que yo os diga: Gritad: entonces daréis grita."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y Josué mandó al pueblo, diciendo:"
+    },
+    {
+     "v": 10,
+     "speaker": "joshua",
+     "text": "Vosotros no daréis grita, ni se oirá vuestra voz, ni saldrá palabra de vuestra boca, hasta el día que yo os diga: Gritad: entonces daréis grita."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ni una palabra. Imagina a miles de personas caminando en silencio alrededor de la ciudad. Solo se oían las trompetas y los pasos. Y desde arriba de la muralla, la gente de Jericó mirando sin entender."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:11",
+   "label": "Josué 6:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "El arca pues de Jehová dió una vuelta alrededor de la ciudad, y viniéronse al real, en el cual tuvieron la noche."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "El arca pues de Jehová dió una vuelta alrededor de la ciudad, y viniéronse al real, en el cual tuvieron la noche."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y lo mismo al día siguiente. Y al siguiente. Seis días caminando y regresando al campamento. Los muros no se movían. No había ninguna señal de que algo estuviera cambiando."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:14",
+   "label": "Josué 6:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Así dieron otra vuelta á la ciudad el segundo día, y volviéronse al real: de esta manera hicieron por seis días."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Así dieron otra vuelta á la ciudad el segundo día, y volviéronse al real: de esta manera hicieron por seis días."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es difícil obedecer cuando no vemos resultados. Pero el pueblo siguió caminando. Un día, y otro día, y otro más."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:15",
+   "label": "Josué 6:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y al séptimo día levantáronse cuando subía el alba, y dieron vuelta á la ciudad de la misma manera siete veces: solamente este día dieron vuelta alrededor de ella siete veces."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y al séptimo día levantáronse cuando subía el alba, y dieron vuelta á la ciudad de la misma manera siete veces: solamente este día dieron vuelta alrededor de ella siete veces."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:16",
+   "label": "Josué 6:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y como los sacerdotes hubieron tocado las bocinas la séptima vez, Josué dijo al pueblo: Dad grita, porque Jehová os ha entregado la ciudad."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y como los sacerdotes hubieron tocado las bocinas la séptima vez, Josué dijo al pueblo:"
+    },
+    {
+     "v": 16,
+     "speaker": "joshua",
+     "text": "Dad grita, porque Jehová os ha entregado la ciudad."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:17",
+   "label": "Josué 6:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Mas la ciudad será anatema á Jehová, ella con todas las cosas que están en ella: solamente Rahab la ramera vivirá, con todos los que estuvieren en casa con ella, por cuanto escondió los mensajeros que enviamos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "joshua",
+     "text": "Mas la ciudad será anatema á Jehová, ella con todas las cosas que están en ella: solamente Rahab la ramera vivirá, con todos los que estuvieren en casa con ella, por cuanto escondió los mensajeros que enviamos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Aun en ese momento, Josué se acordó de Rahab, la mujer que había escondido a los espías. Su casa con el cordón rojo sería protegida."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:20",
+   "label": "Josué 6:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Entonces el pueblo dió grita, y los sacerdotes tocaron las bocinas: y aconteció que como el pueblo hubo oído el sonido de la bocina, dió el pueblo grita con gran vocerío, y el muro cayó á plomo. El pueblo subió luego á la ciudad, cada uno en derecho de sí, y tomáronla."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Entonces el pueblo dió grita, y los sacerdotes tocaron las bocinas: y aconteció que como el pueblo hubo oído el sonido de la bocina, dió el pueblo grita con gran vocerío, y el muro cayó á plomo. El pueblo subió luego á la ciudad, cada uno en derecho de sí, y tomáronla."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El muro cayó. No lo derribaron ellos con su fuerza. Lo derribó Dios, cuando el pueblo hizo lo que él dijo, de la manera que él dijo, en el tiempo que él dijo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Muchos tenemos muros delante. Problemas que llevan años sin moverse. Oraciones que parecen no tener respuesta. Y a veces lo único que nos toca es seguir caminando, seguir obedeciendo, un día a la vez, aunque todavía no veamos nada."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia no nos dice cuánto tiempo va a durar tu espera. Pero nos recuerda que Dios ve los muros que nosotros vemos, y que él es más grande que todos ellos. Esta noche descansa. Mañana, sigue caminando."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 666,
+ "est_seconds": 369,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Josh 6:1-20 (the destruction of 6:21 left off the page, violence mild); obedience over method; no promise of when the listener's 'walls' fall."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Waiting named gently; natural Spanish; Rahab's house remembered."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

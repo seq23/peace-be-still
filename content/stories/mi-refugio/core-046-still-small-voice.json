@@ -1,0 +1,416 @@
+{
+ "id": "core-046-still-small-voice",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Elías y el silbo apacible",
+ "passage": {
+  "refs": [
+   "1KI 19:1-15"
+  ],
+  "label": "1 Reyes 19:1-15"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "elijah",
+   "name": "Elías",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Elías acababa de ver uno de los momentos más grandes de su vida. En el monte Carmelo, delante de todo el pueblo, Dios había mandado fuego del cielo. Y después de tres años de sequía, por fin había llovido."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero al día siguiente llegó una amenaza."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:1-2",
+   "label": "1 Reyes 19:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y ACHAB dió la nueva á Jezabel de todo lo que Elías había hecho, de como había muerto á cuchillo á todos los profetas."
+    },
+    {
+     "v": 2,
+     "text": "Entonces envió Jezabel á Elías un mensajero, diciendo: Así me hagan los dioses, y así me añadan, si mañana á estas horas yo no haya puesto tu persona como la de uno de ellos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y ACHAB dió la nueva á Jezabel de todo lo que Elías había hecho, de como había muerto á cuchillo á todos los profetas."
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Entonces envió Jezabel á Elías un mensajero, diciendo: Así me hagan los dioses, y así me añadan, si mañana á estas horas yo no haya puesto tu persona como la de uno de ellos."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con su siervo cansado, aun debajo del enebro.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:3",
+   "label": "1 Reyes 19:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Viendo pues el peligro, levantóse y fuése por salvar su vida, y vino á Beer-seba, que es en Judá, y dejó allí su criado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Viendo pues el peligro, levantóse y fuése por salvar su vida, y vino á Beer-seba, que es en Judá, y dejó allí su criado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El mismo hombre que no tuvo miedo delante de cientos de profetas falsos ahora huía por su vida. Caminó hasta el desierto, solo, y se sentó debajo de un arbusto."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elijah",
+   "ref": "1KI 19:4",
+   "label": "1 Reyes 19:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y él se fué por el desierto un día de camino, y vino y sentóse debajo de un enebro; y deseando morirse, dijo: Baste ya, oh Jehová, quita mi alma; que no soy yo mejor que mis padres."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y él se fué por el desierto un día de camino, y vino y sentóse debajo de un enebro; y deseando morirse, dijo:"
+    },
+    {
+     "v": 4,
+     "speaker": "elijah",
+     "text": "Baste ya, oh Jehová, quita mi alma; que no soy yo mejor que mis padres."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Elías estaba agotado. Ya no quería vivir. La Biblia no esconde que hasta los profetas llegan a ese lugar. Y Dios no lo regañó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:5-6",
+   "label": "1 Reyes 19:5-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y echándose debajo del enebro, quedóse dormido: y he aquí luego un ángel que le tocó, y le dijo: Levántate, come."
+    },
+    {
+     "v": 6,
+     "text": "Entonces él miró, y he aquí á su cabecera una torta cocida sobre las ascuas, y un vaso de agua: y comió y bebió, y volvióse á dormir."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y echándose debajo del enebro, quedóse dormido: y he aquí luego un ángel que le tocó, y le dijo: Levántate, come."
+    },
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Entonces él miró, y he aquí á su cabecera una torta cocida sobre las ascuas, y un vaso de agua: y comió y bebió, y volvióse á dormir."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:7-8",
+   "label": "1 Reyes 19:7-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y volviendo el ángel de Jehová la segunda vez, tocóle, diciendo: Levántate, come: porque gran camino te resta."
+    },
+    {
+     "v": 8,
+     "text": "Levantóse pues, y comió y bebió; y caminó con la fortaleza de aquella comida cuarenta días y cuarenta noches, hasta el monte de Dios, Horeb."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Y volviendo el ángel de Jehová la segunda vez, tocóle, diciendo: Levántate, come: porque gran camino te resta."
+    },
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Levantóse pues, y comió y bebió; y caminó con la fortaleza de aquella comida cuarenta días y cuarenta noches, hasta el monte de Dios, Horeb."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lo primero que Dios le dio a Elías no fue un sermón. Fue pan caliente, agua y descanso. Durmió. Comió. Volvió a dormir. Y el ángel le habló con cariño, porque el camino era largo para él."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Con la fuerza de esa comida, Elías caminó cuarenta días hasta Horeb, el monte de Dios. Allí se metió en una cueva."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:9",
+   "label": "1 Reyes 19:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y allí se metió en una cueva, donde tuvo la noche. Y fué á él palabra de Jehová, el cual le dijo: ¿Qué haces aquí, Elías?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y allí se metió en una cueva, donde tuvo la noche. Y fué á él palabra de Jehová, el cual le dijo: ¿Qué haces aquí, Elías?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "elijah",
+   "ref": "1KI 19:10",
+   "label": "1 Reyes 19:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y él respondió: Sentido he un vivo celo por Jehová Dios de los ejércitos; porque los hijos de Israel han dejado tu alianza, han derribado tus altares, y han muerto á cuchillo tus profetas: y yo solo he quedado, y me buscan para quitarme la vida."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y él respondió:"
+    },
+    {
+     "v": 10,
+     "speaker": "elijah",
+     "text": "Sentido he un vivo celo por Jehová Dios de los ejércitos; porque los hijos de Israel han dejado tu alianza, han derribado tus altares, y han muerto á cuchillo tus profetas: y yo solo he quedado, y me buscan para quitarme la vida."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Elías se sentía solo. Creía que era el único fiel que quedaba. Y Dios le pidió que saliera."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:11",
+   "label": "1 Reyes 19:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Y él le dijo: Sal fuera, y ponte en el monte delante de Jehová. Y he aquí Jehová que pasaba, y un grande y poderoso viento que rompía los montes, y quebraba las peñas delante de Jehová: mas Jehová no estaba en el viento. Y tras el viento un terremoto: mas Jehová no estaba en el terremoto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y él le dijo: Sal fuera, y ponte en el monte delante de Jehová. Y he aquí Jehová que pasaba, y un grande y poderoso viento que rompía los montes, y quebraba las peñas delante de Jehová: mas Jehová no estaba en el viento. Y tras el viento un terremoto: mas Jehová no estaba en el terremoto."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:12",
+   "label": "1 Reyes 19:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y tras el terremoto un fuego: mas Jehová no estaba en el fuego. Y tras el fuego un silbo apacible y delicado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y tras el terremoto un fuego: mas Jehová no estaba en el fuego. Y tras el fuego un silbo apacible y delicado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Viento, terremoto, fuego. Todo eso pasó, y Dios no estaba en ninguno. Y después del fuego, un silbo apacible y delicado. Un susurro suave."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:13",
+   "label": "1 Reyes 19:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y cuando lo oyó Elías, cubrió su rostro con su manto, y salió, y paróse á la puerta de la cueva. Y he aquí llegó una voz á él, diciendo: ¿Qué haces aquí, Elías?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y cuando lo oyó Elías, cubrió su rostro con su manto, y salió, y paróse á la puerta de la cueva. Y he aquí llegó una voz á él, diciendo: ¿Qué haces aquí, Elías?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Elías se cubrió la cara con su manto y salió a la entrada de la cueva. Dios le habló en el silencio. Y le dio un trabajo nuevo, y le dijo que no estaba tan solo como pensaba. Había siete mil en Israel que seguían siendo fieles."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 19:15",
+   "label": "1 Reyes 19:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y díjole Jehová: Ve, vuélvete por tu camino, por el desierto de Damasco: y llegarás, y ungirás á Hazael por rey de Siria;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y díjole Jehová: Ve, vuélvete por tu camino, por el desierto de Damasco: y llegarás, y ungirás á Hazael por rey de Siria;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si alguna vez te sientes como Elías debajo de aquel arbusto, tan cansado que ya no quieres vivir, no lo cargues solo. Habla con alguien hoy. Llama o envía un texto al 988, y oprime 2 para español. Busca a tu pastor, a tu doctor, a una persona de confianza."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios cuidó de Elías con pan, con agua, con sueño y con una voz suave. No le pidió que fuera fuerte. Lo levantó poco a poco. Y esta noche, el mismo Dios que habló en el silbo apacible sabe hablarle a tu corazón cansado."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 789,
+ "est_seconds": 436,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Kgs 19:1-15 (Carmel from ch 18 and the 7,000 of v18 told in words); Elijah's wish to die met first with rest and bread; points to 988 (oprime 2 para español), a pastor and a doctor."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Burnout and despair named without shame; a strong man allowed to be tired; the crisis line given plainly in Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

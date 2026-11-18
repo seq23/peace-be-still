@@ -1,0 +1,393 @@
+{
+ "id": "core-050-wise-men",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Los magos y la estrella",
+ "passage": {
+  "refs": [
+   "MAT 2:1-12"
+  ],
+  "label": "Mateo 2:1-12"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "magi",
+   "name": "magos",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "herod",
+   "name": "Herodes",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Después del nacimiento de Jesús, muy lejos de Bethlehem, en las tierras del oriente, unos hombres sabios que estudiaban las estrellas vieron algo nuevo en el cielo. Entendieron que había nacido un rey. Y emprendieron un largo viaje para conocerlo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:1",
+   "label": "Mateo 2:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y COMO fué nacido Jesús en Bethlehem de Judea en días del rey Herodes, he aquí unos magos vinieron del oriente á Jerusalem,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y COMO fué nacido Jesús en Bethlehem de Judea en días del rey Herodes, he aquí unos magos vinieron del oriente á Jerusalem,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "magi",
+   "ref": "MAT 2:2",
+   "label": "Mateo 2:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Diciendo: ¿Dónde está el Rey de los Judíos, que ha nacido? porque su estrella hemos visto en el oriente, y venimos á adorarle."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Diciendo:"
+    },
+    {
+     "v": 2,
+     "speaker": "magi",
+     "text": "¿Dónde está el Rey de los Judíos, que ha nacido? porque su estrella hemos visto en el oriente, y venimos á adorarle."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con los que vinieron de lejos buscando a Jesús.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ellos no eran judíos. Venían de otro pueblo, de otra tierra, de otra cultura. Pero Dios los guió hasta su Hijo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:3",
+   "label": "Mateo 2:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y oyendo esto el rey Herodes, se turbó, y toda Jerusalem con él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y oyendo esto el rey Herodes, se turbó, y toda Jerusalem con él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Herodes se asustó. Él era el rey, y no quería que hubiera otro. Y con él se turbó toda Jerusalén."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:4-5",
+   "label": "Mateo 2:4-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y convocados todos los príncipes de los sacerdotes, y los escribas del pueblo, les preguntó dónde había de nacer el Cristo."
+    },
+    {
+     "v": 5,
+     "text": "Y ellos le dijeron: En Bethlehem de Judea; porque así está escrito por el profeta:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y convocados todos los príncipes de los sacerdotes, y los escribas del pueblo, les preguntó dónde había de nacer el Cristo."
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y ellos le dijeron: En Bethlehem de Judea; porque así está escrito por el profeta:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:6",
+   "label": "Mateo 2:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y tú, Bethlehem, de tierra de Judá, no eres muy pequeña entre los príncipes de Judá; porque de ti saldrá un guiador, que apacentará á mi pueblo Israel."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y tú, Bethlehem, de tierra de Judá, no eres muy pequeña entre los príncipes de Judá; porque de ti saldrá un guiador, que apacentará á mi pueblo Israel."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los sacerdotes sabían la respuesta. Estaba escrita en sus Escrituras desde hacía siglos. Bethlehem. Pero ninguno de ellos fue a buscar al niño. Los que vinieron de lejos fueron los que se pusieron en camino."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:7",
+   "label": "Mateo 2:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Entonces Herodes, llamando en secreto á los magos, entendió de ellos diligentemente el tiempo del aparecimiento de la estrella;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Entonces Herodes, llamando en secreto á los magos, entendió de ellos diligentemente el tiempo del aparecimiento de la estrella;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "herod",
+   "ref": "MAT 2:8",
+   "label": "Mateo 2:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y enviándolos á Bethlehem, dijo: Andad allá, y preguntad con diligencia por el niño; y después que le hallareis, hacédmelo saber, para que yo también vaya y le adore."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y enviándolos á Bethlehem, dijo:"
+    },
+    {
+     "v": 8,
+     "speaker": "herod",
+     "text": "Andad allá, y preguntad con diligencia por el niño; y después que le hallareis, hacédmelo saber, para que yo también vaya y le adore."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Herodes dijo que también quería adorarlo. Pero no era verdad. Tenía otros planes en el corazón."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:9-10",
+   "label": "Mateo 2:9-10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y ellos, habiendo oído al rey, se fueron: y he aquí la estrella que habían visto en el oriente, iba delante de ellos, hasta que llegando, se puso sobre donde estaba el niño."
+    },
+    {
+     "v": 10,
+     "text": "Y vista la estrella, se regocijaron con muy grande gozo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y ellos, habiendo oído al rey, se fueron: y he aquí la estrella que habían visto en el oriente, iba delante de ellos, hasta que llegando, se puso sobre donde estaba el niño."
+    },
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y vista la estrella, se regocijaron con muy grande gozo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La estrella volvió a aparecer delante de ellos. Y se llenaron de alegría. Después de tanto camino, tanto tiempo, tantas preguntas, por fin estaban cerca."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:11",
+   "label": "Mateo 2:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Y entrando en la casa, vieron al niño con su madre María, y postrándose, le adoraron; y abriendo sus tesoros, le ofrecieron dones, oro é incienso y mirra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y entrando en la casa, vieron al niño con su madre María, y postrándose, le adoraron; y abriendo sus tesoros, le ofrecieron dones, oro é incienso y mirra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Entraron en una casa sencilla. No un palacio. Encontraron al niño en brazos de María. Y aquellos hombres sabios e importantes se arrodillaron delante de un niño pequeño."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Le dieron oro, incienso y mirra. Regalos para un rey. Pero lo primero que le dieron fue su adoración."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:12",
+   "label": "Mateo 2:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y siendo avisados por revelación en sueños que no volviesen á Herodes, se volvieron á su tierra por otro camino."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y siendo avisados por revelación en sueños que no volviesen á Herodes, se volvieron á su tierra por otro camino."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Regresaron a casa por otra ruta, avisados en un sueño. Dios los protegió de Herodes y protegió al niño."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia nos dice que Dios llama a personas de todas las naciones. Gente de lejos, de otros idiomas y otras tierras, que llegan buscando a Jesús. Y él los recibe."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tal vez tú también has venido de lejos. De otro país, de otra historia, de un camino largo. Dios ve a los que buscan. Y los que lo encuentran nunca vuelven por el mismo camino."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 579,
+ "est_seconds": 322,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:28:02",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Matt 2:1-12 (the slaughter of 2:16 not told); the magi named as from the east without an ethnicity claim; Herod's deceit as the text implies."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Speaks to immigrants with warmth ('has venido de lejos') without politics; worship before gifts."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
