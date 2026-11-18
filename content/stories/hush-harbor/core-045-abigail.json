@@ -1,0 +1,515 @@
+{
+ "id": "core-045-abigail",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Abigail in the Road",
+ "passage": {
+  "refs": [
+   "1SA 25:14-35"
+  ],
+  "label": "1 Samuel 25:14-35"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "youngman",
+   "name": "one of the young men",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "abigail",
+   "name": "Abigail",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "david",
+   "name": "David",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Before he was king, David was out in the wilderness with about six hundred men. They camped near the flocks of a rich man named Nabal, and they kept his shepherds safe day and night. At sheep-shearing time, David sent ten young men to ask Nabal kindly for whatever he could spare."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nabal sent them back with insults. Who is David? When David heard that, he told four hundred men to strap on their swords."
+  },
+  {
+   "type": "scripture",
+   "speaker": "youngman",
+   "ref": "1SA 25:14",
+   "label": "1 Samuel 25:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "But one of the young men told Abigail, Nabal’s wife, saying, Behold, David sent messengers out of the wilderness to salute our master; and he railed on them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "But one of the young men told Abigail, Nabal’s wife, saying,"
+    },
+    {
+     "v": 14,
+     "speaker": "youngman",
+     "text": "Behold, David sent messengers out of the wilderness to salute our master; and he railed on them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "youngman",
+   "ref": "1SA 25:15",
+   "label": "1 Samuel 25:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "But the men were very good unto us, and we were not hurt, neither missed we any thing, as long as we were conversant with them, when we were in the fields:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "youngman",
+     "text": "But the men were very good unto us, and we were not hurt, neither missed we any thing, as long as we were conversant with them, when we were in the fields:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "youngman",
+   "ref": "1SA 25:16",
+   "label": "1 Samuel 25:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "They were a wall unto us both by night and day, all the while we were with them keeping the sheep."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "youngman",
+     "text": "They were a wall unto us both by night and day, all the while we were with them keeping the sheep."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "youngman",
+   "ref": "1SA 25:17",
+   "label": "1 Samuel 25:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Now therefore know and consider what thou wilt do; for evil is determined against our master, and against all his household: for he is such a son of Belial, that a man cannot speak to him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "youngman",
+     "text": "Now therefore know and consider what thou wilt do; for evil is determined against our master, and against all his household: for he is such a son of Belial, that a man cannot speak to him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice that servant did not go to Nabal. He went to Abigail. He knew who would listen, and he knew who had sense."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 25:18",
+   "label": "1 Samuel 25:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Then Abigail made haste, and took two hundred loaves, and two bottles of wine, and five sheep ready dressed, and five measures of parched corn, and an hundred clusters of raisins, and two hundred cakes of figs, and laid them on asses."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Then Abigail made haste, and took two hundred loaves, and two bottles of wine, and five sheep ready dressed, and five measures of parched corn, and an hundred clusters of raisins, and two hundred cakes of figs, and laid them on asses."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, she made haste. [PAUSE 3s | screen: \"She made haste\"] She made haste. [PAUSE 3s | screen: \"She made haste\"] Abigail did not sit and worry. She got up and moved.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "She made haste"
+    },
+    {
+     "seconds": 3,
+     "screen": "She made haste"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Bread and wine, meat and grain, raisins and figs, loaded on donkeys. Church, some women do not panic. They pray while they pack."
+  },
+  {
+   "type": "scripture",
+   "speaker": "abigail",
+   "ref": "1SA 25:19",
+   "label": "1 Samuel 25:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And she said unto her servants, Go on before me; behold, I come after you. But she told not her husband Nabal."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And she said unto her servants,"
+    },
+    {
+     "v": 19,
+     "speaker": "abigail",
+     "text": "Go on before me; behold, I come after you."
+    },
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "But she told not her husband Nabal."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 25:20",
+   "label": "1 Samuel 25:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And it was so, as she rode on the ass, that she came down by the covert of the hill, and, behold, David and his men came down against her; and she met them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And it was so, as she rode on the ass, that she came down by the covert of the hill, and, behold, David and his men came down against her; and she met them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 25:21",
+   "label": "1 Samuel 25:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Now David had said, Surely in vain have I kept all that this fellow hath in the wilderness, so that nothing was missed of all that pertained unto him: and he hath requited me evil for good."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Now David had said,"
+    },
+    {
+     "v": 21,
+     "speaker": "david",
+     "text": "Surely in vain have I kept all that this fellow hath in the wilderness, so that nothing was missed of all that pertained unto him: and he hath requited me evil for good."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "David was hot. His anger was carrying him toward something he could never take back. He meant to wipe out every man in that house by morning."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 25:23",
+   "label": "1 Samuel 25:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And when Abigail saw David, she hasted, and lighted off the ass, and fell before David on her face, and bowed herself to the ground,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And when Abigail saw David, she hasted, and lighted off the ass, and fell before David on her face, and bowed herself to the ground,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abigail",
+   "ref": "1SA 25:24",
+   "label": "1 Samuel 25:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And fell at his feet, and said, Upon me, my lord, upon me let this iniquity be: and let thine handmaid, I pray thee, speak in thine audience, and hear the words of thine handmaid."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "And fell at his feet, and said,"
+    },
+    {
+     "v": 24,
+     "speaker": "abigail",
+     "text": "Upon me, my lord, upon me let this iniquity be: and let thine handmaid, I pray thee, speak in thine audience, and hear the words of thine handmaid."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abigail",
+   "ref": "1SA 25:25",
+   "label": "1 Samuel 25:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Let not my lord, I pray thee, regard this man of Belial, even Nabal: for as his name is, so is he; Nabal is his name, and folly is with him: but I thine handmaid saw not the young men of my lord, whom thou didst send."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "abigail",
+     "text": "Let not my lord, I pray thee, regard this man of Belial, even Nabal: for as his name is, so is he; Nabal is his name, and folly is with him: but I thine handmaid saw not the young men of my lord, whom thou didst send."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nabal means fool, and Abigail did not pretend otherwise. She took the blame on herself and asked David to hear her out."
+  },
+  {
+   "type": "scripture",
+   "speaker": "abigail",
+   "ref": "1SA 25:26",
+   "label": "1 Samuel 25:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Now therefore, my lord, as the LORD liveth, and as thy soul liveth, seeing the LORD hath withholden thee from coming to shed blood, and from avenging thyself with thine own hand, now let thine enemies, and they that seek evil to my lord, be as Nabal."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "abigail",
+     "text": "Now therefore, my lord, as the LORD liveth, and as thy soul liveth, seeing the LORD hath withholden thee from coming to shed blood, and from avenging thyself with thine own hand, now let thine enemies, and they that seek evil to my lord, be as Nabal."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abigail",
+   "ref": "1SA 25:28",
+   "label": "1 Samuel 25:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "I pray thee, forgive the trespass of thine handmaid: for the LORD will certainly make my lord a sure house; because my lord fighteth the battles of the LORD, and evil hath not been found in thee all thy days."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "abigail",
+     "text": "I pray thee, forgive the trespass of thine handmaid: for the LORD will certainly make my lord a sure house; because my lord fighteth the battles of the LORD, and evil hath not been found in thee all thy days."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She reminded David who he was. He fought the LORD's battles. He did not need to fight this one. One day he would sit on the throne, and she did not want him to get there with innocent blood on his hands."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 25:32",
+   "label": "1 Samuel 25:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "And David said to Abigail, Blessed be the LORD God of Israel, which sent thee this day to meet me:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "And David said to Abigail,"
+    },
+    {
+     "v": 32,
+     "speaker": "david",
+     "text": "Blessed be the LORD God of Israel, which sent thee this day to meet me:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 25:33",
+   "label": "1 Samuel 25:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "And blessed be thy advice, and blessed be thou, which hast kept me this day from coming to shed blood, and from avenging myself with mine own hand."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "david",
+     "text": "And blessed be thy advice, and blessed be thou, which hast kept me this day from coming to shed blood, and from avenging myself with mine own hand."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "David did not just say she was right. He said, blessed be the LORD who sent you. He saw God's hand in that woman standing in the road."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 25:35",
+   "label": "1 Samuel 25:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "So David received of her hand that which she had brought him, and said unto her, Go up in peace to thine house; see, I have hearkened to thy voice, and have accepted thy person."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "So David received of her hand that which she had brought him, and said unto her,"
+    },
+    {
+     "v": 35,
+     "speaker": "david",
+     "text": "Go up in peace to thine house; see, I have hearkened to thy voice, and have accepted thy person."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "One woman, some donkeys loaded with bread, and a few wise words turned four hundred swords around. Abigail had no army. She had wisdom and courage and good timing. Thank God for the women who step into the road and keep somebody from a mistake they cannot undo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 840,
+ "est_seconds": 464,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.9",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:49:15",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Sam 25:14-35 (v22 and v34 left out by verse choice); credit to God as David gives it."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'She made haste' at the turn; Abigail's wisdom and courage honoured; 'pray while they pack' warm, not a stereotype."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

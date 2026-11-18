@@ -1,0 +1,389 @@
+{
+ "id": "core-047-rich-young-ruler",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "One Thing Thou Lackest",
+ "passage": {
+  "refs": [
+   "MAR 10:17-27"
+  ],
+  "label": "Mark 10:17-27"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "man",
+   "name": "one",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "disciples",
+   "name": "disciples",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus was heading out on the road when a man came running up. Mark just calls him one who came. Matthew tells us he was young. Luke tells us he was a ruler. And all three tell us he was rich."
+  },
+  {
+   "type": "scripture",
+   "speaker": "man",
+   "ref": "MAR 10:17",
+   "label": "Mark 10:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And when he was gone forth into the way, there came one running, and kneeled to him, and asked him, Good Master, what shall I do that I may inherit eternal life?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And when he was gone forth into the way, there came one running, and kneeled to him, and asked him,"
+    },
+    {
+     "v": 17,
+     "speaker": "man",
+     "text": "Good Master, what shall I do that I may inherit eternal life?"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he came running. [PAUSE 3s | screen: \"He came running\"] He came running. [PAUSE 3s | screen: \"He came running\"] This man really wanted to know.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He came running"
+    },
+    {
+     "seconds": 3,
+     "screen": "He came running"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Running, and then kneeling in the dirt. A man with money and position, down on his knees in the road."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:18",
+   "label": "Mark 10:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And Jesus said unto him, Why callest thou me good? there is none good but one, that is, God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And Jesus said unto him, Why callest thou me good? there is none good but one, that is, God."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:19",
+   "label": "Mark 10:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Thou knowest the commandments, Do not commit adultery, Do not kill, Do not steal, Do not bear false witness, Defraud not, Honour thy father and mother."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Thou knowest the commandments, Do not commit adultery, Do not kill, Do not steal, Do not bear false witness, Defraud not, Honour thy father and mother."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus named the commandments about how we treat each other. The man checked every one of them off."
+  },
+  {
+   "type": "scripture",
+   "speaker": "man",
+   "ref": "MAR 10:20",
+   "label": "Mark 10:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And he answered and said unto him, Master, all these have I observed from my youth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And he answered and said unto him,"
+    },
+    {
+     "v": 20,
+     "speaker": "man",
+     "text": "Master, all these have I observed from my youth."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:21",
+   "label": "Mark 10:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Then Jesus beholding him loved him, and said unto him, One thing thou lackest: go thy way, sell whatsoever thou hast, and give to the poor, and thou shalt have treasure in heaven: and come, take up the cross, and follow me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Then Jesus beholding him loved him, and said unto him, One thing thou lackest: go thy way, sell whatsoever thou hast, and give to the poor, and thou shalt have treasure in heaven: and come, take up the cross, and follow me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, do not miss this. Before Jesus said the hard thing, Mark tells us he looked at him and loved him. The hard word came out of love."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There was one thing that man was holding tighter than anything else, and Jesus put his finger right on it. Let it go, and come follow me."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:22",
+   "label": "Mark 10:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And he was sad at that saying, and went away grieved: for he had great possessions."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And he was sad at that saying, and went away grieved: for he had great possessions."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He did not argue. He did not get mad. He was just sad. He went away grieved, and the Bible never says he came back."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:23",
+   "label": "Mark 10:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And Jesus looked round about, and saith unto his disciples, How hardly shall they that have riches enter into the kingdom of God!"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And Jesus looked round about, and saith unto his disciples, How hardly shall they that have riches enter into the kingdom of God!"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:24",
+   "label": "Mark 10:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And the disciples were astonished at his words. But Jesus answereth again, and saith unto them, Children, how hard is it for them that trust in riches to enter into the kingdom of God!"
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "And the disciples were astonished at his words. But Jesus answereth again, and saith unto them, Children, how hard is it for them that trust in riches to enter into the kingdom of God!"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:25",
+   "label": "Mark 10:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "It is easier for a camel to go through the eye of a needle, than for a rich man to enter into the kingdom of God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "It is easier for a camel to go through the eye of a needle, than for a rich man to enter into the kingdom of God."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The camel was the biggest animal folks knew. The eye of a needle, the smallest hole. Jesus was talking about something impossible, and the disciples heard him loud and clear."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAR 10:26",
+   "label": "Mark 10:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And they were astonished out of measure, saying among themselves, Who then can be saved?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And they were astonished out of measure, saying among themselves,"
+    },
+    {
+     "v": 26,
+     "speaker": "disciples",
+     "text": "Who then can be saved?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:27",
+   "label": "Mark 10:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And Jesus looking upon them saith, With men it is impossible, but not with God: for with God all things are possible."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And Jesus looking upon them saith, With men it is impossible, but not with God: for with God all things are possible."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There it is. Nobody can get into God's kingdom by being good enough or giving up enough. For people, it cannot be done. For God, nothing is impossible."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That young man came asking what he could do. Jesus showed him the real question was what he loved most. Money is not the only thing a heart can hold too tight. Every one of us has something. And the same Jesus who looked at that man with love is looking at us the same way, still saying, come, follow me."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 567,
+ "est_seconds": 315,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.8",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:49:15",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 10:17-27; 'young' and 'ruler' attributed to Matthew and Luke; no rule that all must sell everything; v27 told in our own words."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'He came running' at the turn; the rich man sincere and sad, not mocked."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

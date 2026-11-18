@@ -1,0 +1,428 @@
+{
+ "id": "core-044-nicodemus",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Ye Must Be Born Again",
+ "passage": {
+  "refs": [
+   "JOH 3:1-17"
+  ],
+  "label": "John 3:1-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "nicodemus",
+   "name": "Nicodemus",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:1",
+   "label": "John 3:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "There was a man of the Pharisees, named Nicodemus, a ruler of the Jews:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "There was a man of the Pharisees, named Nicodemus, a ruler of the Jews:"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he came by night. [PAUSE 3s | screen: \"He came by night\"] He came by night. [PAUSE 3s | screen: \"He came by night\"] Nicodemus had a question, and he brought it to Jesus in the dark.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He came by night"
+    },
+    {
+     "seconds": 3,
+     "screen": "He came by night"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Nicodemus was somebody. A Pharisee, a teacher of the law, a ruler of his people. Most of the leaders had no use for Jesus. But Nicodemus had seen enough to want to know more."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nicodemus",
+   "ref": "JOH 3:2",
+   "label": "John 3:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "The same came to Jesus by night, and said unto him, Rabbi, we know that thou art a teacher come from God: for no man can do these miracles that thou doest, except God be with him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "The same came to Jesus by night, and said unto him,"
+    },
+    {
+     "v": 2,
+     "speaker": "nicodemus",
+     "text": "Rabbi, we know that thou art a teacher come from God: for no man can do these miracles that thou doest, except God be with him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Maybe he came at night so nobody would see. Maybe night was just when it got quiet enough to talk. Either way, he came. And Jesus did not turn him away."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:3",
+   "label": "John 3:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nicodemus was a thinking man, and that did not add up."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nicodemus",
+   "ref": "JOH 3:4",
+   "label": "John 3:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Nicodemus saith unto him, How can a man be born when he is old? can he enter the second time into his mother’s womb, and be born?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Nicodemus saith unto him,"
+    },
+    {
+     "v": 4,
+     "speaker": "nicodemus",
+     "text": "How can a man be born when he is old? can he enter the second time into his mother’s womb, and be born?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus was not talking about being born the way a baby is born. He was talking about a new life that only God can give."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:5",
+   "label": "John 3:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Jesus answered, Verily, verily, I say unto thee, Except a man be born of water and of the Spirit, he cannot enter into the kingdom of God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Jesus answered, Verily, verily, I say unto thee, Except a man be born of water and of the Spirit, he cannot enter into the kingdom of God."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:6",
+   "label": "John 3:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "That which is born of the flesh is flesh; and that which is born of the Spirit is spirit."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "That which is born of the flesh is flesh; and that which is born of the Spirit is spirit."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:7",
+   "label": "John 3:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Marvel not that I said unto thee, Ye must be born again."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Marvel not that I said unto thee, Ye must be born again."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:8",
+   "label": "John 3:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "The wind bloweth where it listeth, and thou hearest the sound thereof, but canst not tell whence it cometh, and whither it goeth: so is every one that is born of the Spirit."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "The wind bloweth where it listeth, and thou hearest the sound thereof, but canst not tell whence it cometh, and whither it goeth: so is every one that is born of the Spirit."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "You cannot see the wind. You cannot tell it where to go. But you hear it moving through the trees, and you know it is there. That is how it is with the life God gives."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nicodemus",
+   "ref": "JOH 3:9",
+   "label": "John 3:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Nicodemus answered and said unto him, How can these things be?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Nicodemus answered and said unto him,"
+    },
+    {
+     "v": 9,
+     "speaker": "nicodemus",
+     "text": "How can these things be?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "How can these things be? Plenty of folks have asked that question since. Jesus told him even a master of Israel still had some learning to do. Then he took him back to a story Nicodemus knew by heart."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:14",
+   "label": "John 3:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And as Moses lifted up the serpent in the wilderness, even so must the Son of man be lifted up:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And as Moses lifted up the serpent in the wilderness, even so must the Son of man be lifted up:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:15",
+   "label": "John 3:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "That whosoever believeth in him should not perish, but have eternal life."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "That whosoever believeth in him should not perish, but have eternal life."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Out in the wilderness, when the people were dying of snakebites, God told Moses to lift up a serpent of brass on a pole. Whoever looked at it lived. Jesus said he would be lifted up just like that."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:16",
+   "label": "John 3:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 3:17",
+   "label": "John 3:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "For God sent not his Son into the world to condemn the world; but that the world through him might be saved."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "For God sent not his Son into the world to condemn the world; but that the world through him might be saved."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, the most famous verse in the Bible was first spoken to one man, in the dark, who came with questions. Not to condemn. To save."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "John does not tell us what Nicodemus said that night. But later he spoke up for Jesus in front of the other leaders. And after the cross, he came again, in the daylight this time, carrying a hundred pounds of spices to help bury the Lord."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nicodemus started with questions. If you have questions tonight, bring them. Jesus met him in the night and told him about a love big enough for the whole world."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 628,
+ "est_seconds": 349,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.3",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:49:15",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 3:1-17; water and Spirit not interpreted (no baptism position); John 7:50 and 19:39 for the later Nicodemus; no telling the listener she is saved or lost."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A seeker honoured; 'bring your questions' is the church's welcome, not a pitch."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
