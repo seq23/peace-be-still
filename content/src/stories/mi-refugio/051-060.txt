@@ -1,0 +1,288 @@
+# Mi Refugio, historias 51-60 (español de las Américas, Reina-Valera 1909). Escritas por Claude (sin borrador de modelo gratuito), con la lectura pastoral y cultural de Claude.
+
+=== core-051-cana | El agua hecha vino en Caná
+passage: JOH 2:1-11
+shelf: adult
+violence: none
+sexual: none
+cast: mother|madre|adult|f; steward|maestresala|adult|m
+N: En el pueblo de Caná, en Galilea, había una boda. Las bodas de aquel tiempo duraban varios días, con toda la familia, los vecinos y los amigos. Era una fiesta grande para todo el pueblo.
+S: JOH 2:1-2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Jesús fue a la fiesta, y se ocupó de lo que le faltaba a una familia.
+N: Y en medio de la fiesta, se acabó el vino. Para los novios y sus familias eso era una vergüenza muy grande. Los invitados se iban a dar cuenta. Iban a quedar mal delante de todo el pueblo.
+S: JOH 2:3 @mother after "le dijo: "
+N: María se dio cuenta antes que muchos. Y no hizo un escándalo ni le echó la culpa a nadie. Fue con su hijo y le dijo lo que pasaba. No tienen vino.
+S: JOH 2:4
+S: JOH 2:5 @mother after "dice á los que servían: "
+N: Hagan todo lo que él les diga. María no sabía exactamente qué iba a hacer Jesús. Pero confiaba en él. Y les dijo a los sirvientes que hicieran lo que él dijera, aunque no lo entendieran.
+S: JOH 2:6
+S: JOH 2:7-8
+N: Llenar seis tinajas grandes de piedra con agua era mucho trabajo. Había que ir al pozo una y otra vez. Y luego, sacar un poco y llevárselo al encargado de la fiesta, como si fuera vino. Los sirvientes obedecieron.
+S: JOH 2:9
+S: JOH 2:10 @steward after "Y dícele: "
+N: El encargado no sabía de dónde había salido. Pero los sirvientes sí lo sabían. Ellos habían llenado las tinajas con sus propias manos. Ellos vieron el milagro de cerca.
+N: Y no era cualquier vino. Era el mejor de toda la fiesta. Jesús no solo resolvió el problema. Lo hizo con abundancia y con alegría.
+S: JOH 2:11
+N: El primer milagro de Jesús no fue en el templo ni delante de los poderosos. Fue en una boda de pueblo, para que una familia no pasara vergüenza. Y lo vieron primero los sirvientes.
+N: A Jesús le importan las cosas de nuestra casa. Los momentos de alegría, las fiestas de la familia, y también lo que nos falta y nos da vergüenza.
+N: Esta noche puedes hacer lo que hizo María. Decirle a Jesús lo que falta, sin rodeos. Y luego, como los sirvientes, hacer lo que él diga, aunque no lo entiendas todavía. Él sabe guardar el buen vino para el final.
+
+=== core-052-balaam | La asna de Balaam
+passage: NUM 22:21-35
+shelf: adult
+violence: mild
+sexual: none
+cast: donkey|asna|adult|f; balaam|Balaam|adult|m
+N: Mientras Israel acampaba cerca de Moab, el rey Balac tuvo miedo. Mandó a buscar a un hombre llamado Balaam, que tenía fama de adivino, y le ofreció mucho dinero para que maldijera al pueblo de Israel.
+N: Dios le dijo a Balaam que no fuera, que ese pueblo era bendito. Pero el rey insistió con más dinero y más honores. Y Balaam se fue con los mensajeros.
+S: NUM 22:21-22
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno aun cuando nos detiene en el camino.
+S: NUM 22:23
+N: La asna vio lo que Balaam no podía ver. El ángel de Dios con una espada en el camino. Y se salió hacia el campo. Balaam, que no veía nada, le pegó.
+S: NUM 22:24-25
+S: NUM 22:26-27
+N: Tres veces la asna lo salvó. Tres veces Balaam le pegó. Estaba tan enojado y tan decidido a seguir su camino que no se detuvo a preguntarse por qué su asna, siempre tan tranquila, actuaba así.
+S: NUM 22:28 @donkey after "la cual dijo á Balaam: "
+S: NUM 22:29 @balaam after "Y Balaam respondió al asna: "
+N: Lo más curioso es que Balaam le contestó como si nada. Estaba tan enojado que no se sorprendió de que su asna hablara.
+S: NUM 22:30 @donkey after "Y el asna dijo á Balaam: " until "Y él respondió"
+S: NUM 22:31
+N: Por fin Dios le abrió los ojos. Y Balaam vio lo que la asna había visto todo el tiempo. Se inclinó hasta el suelo.
+S: NUM 22:32-33
+S: NUM 22:34 @balaam after "Entonces Balaam dijo al ángel de Jehová: "
+S: NUM 22:35
+N: Balaam siguió su camino. Pero ahora sabía que solo podría decir lo que Dios le diera. Y cuando llegó delante del rey Balac, en lugar de maldecir a Israel, lo bendijo una y otra vez.
+N: Es una historia que hace sonreír. Un hombre que se decía sabio, y una asna que veía más que él. Pero tiene una lección seria. A veces estamos tan decididos a seguir nuestro camino que no vemos que Dios nos está deteniendo.
+N: Las puertas que se cierran, los planes que no salen, los obstáculos que no entendemos. No siempre son castigo ni mala suerte. A veces son la misericordia de Dios poniéndose en medio del camino.
+N: Esta noche, si algo te ha detenido y estás frustrado, pídele a Dios que te abra los ojos como a Balaam. Que te ayude a ver lo que él ve. Y a seguirlo, aunque el camino cambie.
+
+=== core-053-lost-sheep | La oveja perdida
+passage: LUK 15:1-7
+shelf: adult
+violence: none
+sexual: none
+cast: pharisees|escribas|adult|group
+N: A Jesús lo seguía toda clase de gente. Y entre ellos venían muchos que los demás despreciaban. Cobradores de impuestos, gente con mala fama, personas que los religiosos no querían cerca.
+S: LUK 15:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con la oveja que se perdió, y con el que salió a buscarla.
+S: LUK 15:2 @pharisees after "diciendo: "
+N: Para ellos era una queja. Este recibe a los pecadores y come con ellos. Pero sin querer, dijeron una de las verdades más hermosas sobre Jesús. Sí, los recibe. Sí, come con ellos.
+N: Y Jesús les respondió con una historia.
+S: LUK 15:3-4
+N: Un pastor con cien ovejas. Al final del día las cuenta y le falta una. Noventa y nueve están a salvo. Muchos dirían que con eso basta. Pero el pastor no piensa así.
+N: Deja las noventa y nueve y sale a buscar la que se perdió. Por los montes, entre las piedras, de noche, llamándola. Hasta que la encuentra.
+S: LUK 15:5
+N: No la regaña. No la arrastra de regreso. La pone sobre sus hombros, contento. Una oveja perdida está asustada y cansada, y muchas veces no puede caminar. El pastor la carga.
+S: LUK 15:6
+S: LUK 15:7
+N: Gozo en el cielo. Por uno solo. Así de valiosa es cada persona para Dios.
+N: Los pastores de aquel tiempo conocían a cada oveja. Le ponían nombre, sabían cuál cojeaba, cuál se quedaba atrás, cuál se asustaba con facilidad. Por eso el pastor de la historia notó enseguida que faltaba una. No era un número para él. Era su oveja.
+N: Y cuando volvió a casa, no la escondió ni la castigó. Hizo fiesta. Llamó a los vecinos para que se alegraran con él. Así recibe Dios a los que vuelven.
+N: Jesús contó esta historia a los que se quejaban, no a los perdidos. Era una invitación para ellos también. Que se alegraran con él cuando uno vuelve a casa, en lugar de murmurar.
+N: Tal vez esta noche tú eres la oveja. Te alejaste, o te perdiste sin darte cuenta, y ya no sabes cómo volver. Jesús no está esperando que encuentres el camino solo. Él sale a buscarte. Y cuando te encuentra, no te avergüenza. Te carga sobre sus hombros.
+N: O tal vez tienes a alguien perdido. Un hijo, una hermana, un amigo. Puedes orar por esa persona sabiendo que el Buen Pastor la conoce por nombre, y que no deja de buscar.
+N: Y si eres de las noventa y nueve, de las que están en el redil, la invitación es la misma que para los fariseos. Alégrate cuando uno vuelve. Hazle espacio en la mesa.
+
+=== core-054-rachel-leah | Raquel y Lea
+passage: GEN 29:9-30
+shelf: adult
+violence: none
+sexual: implied
+cast: laban|Labán|elder|m; jacob|Jacob|adult|m
+N: Jacob había huido de su casa después de engañar a su hermano Esaú. Caminó muchos días hasta la tierra de la familia de su madre. Y junto a un pozo, en el campo, conoció a una pastora.
+S: GEN 29:9-10
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Dios ve a la que nadie mira, y la llama por su nombre.
+N: Era Rachêl, la hija de su tío Labán. Jacob quitó la piedra del pozo y les dio agua a sus ovejas. Y de la emoción, lloró. Había encontrado a su familia.
+S: GEN 29:13
+S: GEN 29:14 @laban after "Y Labán le dijo: "
+S: GEN 29:15 @laban after "Entonces dijo Labán á Jacob: "
+S: GEN 29:16-17
+N: Labán tenía dos hijas. Lea, la mayor, y Rachêl, la menor. Y la Biblia dice que Jacob se enamoró de Rachêl.
+S: GEN 29:18 @jacob after "y dijo: "
+S: GEN 29:19 @laban
+S: GEN 29:20
+N: Siete años, y le parecieron pocos días, porque la amaba. Es una de las frases más tiernas de la Biblia.
+N: Pero cuando llegó el día de la boda, Labán hizo una trampa. En la oscuridad de la noche, con la novia cubierta con el velo, le dio a Lea en lugar de Rachêl. Y Jacob no se dio cuenta hasta la mañana.
+S: GEN 29:25 @jacob after "y él dijo á Labán: "
+S: GEN 29:26 @laban
+S: GEN 29:27 @laban whole
+N: ¿Por qué me has engañado? Jacob, el que había engañado a su padre y a su hermano, ahora era el engañado. Trabajó otros siete años más por Rachêl.
+N: Y en medio de todo esto estaba Lea. Ella no escogió nada de lo que pasó. Su padre la usó en una trampa. Su esposo amaba a otra. Pocas historias de la Biblia son tan honestas sobre el dolor de una mujer que no se siente amada.
+N: Pero el versículo que sigue dice que Dios vio a Lea. Vio que era menospreciada, y le dio hijos. Y Lea fue poniendo nombres a sus hijos que contaban su historia con Dios. Uno de ellos se llamó Judá, que quiere decir alabanza. Esta vez, dijo, alabaré a Jehová.
+N: De Judá vino el rey David. Y de la familia de David vino Jesús. La mujer menos amada de la casa llegó a ser parte del plan más grande de Dios.
+N: Si esta noche te sientes como Lea, invisible, no escogida, menos que otra, recuerda que Dios te ve. Él no te mide como te miden los demás. Y tu historia, con todo su dolor, también puede terminar en alabanza.
+
+=== core-055-rich-man-lazarus | El rico y Lázaro
+passage: LUK 16:19-31
+shelf: adult
+violence: none
+sexual: none
+cast: richman|rico|adult|m; abraham|Abraham|elder|m
+N: Jesús contó una historia sobre dos hombres. Uno lo tenía todo. El otro no tenía nada. Y vivían a pocos pasos el uno del otro.
+S: LUK 16:19
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Dios sabe el nombre del que está sentado a la puerta.
+S: LUK 16:20-21
+N: Fíjate en un detalle. En la historia, el rico no tiene nombre. El pobre sí. Se llama Lázaro, que quiere decir Dios ayuda. Nadie en esa casa lo veía, pero Dios sabía su nombre.
+N: Todos los días el rico pasaba junto a él para entrar a su casa. Y todos los días lo dejaba ahí, enfermo y con hambre. No le hizo daño. Simplemente no lo vio.
+S: LUK 16:22
+N: Los dos murieron. Y en la historia que contó Jesús, todo cambió de lugar. Lázaro fue consolado. El rico quedó en tormento.
+S: LUK 16:24 @richman after "dijo: "
+S: LUK 16:25 @abraham after "Y díjole Abraham: "
+S: LUK 16:26 @abraham whole
+N: Aun ahí, el rico seguía viendo a Lázaro como alguien que podía mandar a hacer mandados. Envía a Lázaro. No había cambiado mucho.
+S: LUK 16:27 @richman after "Y dijo: "
+S: LUK 16:28 @richman whole
+S: LUK 16:29 @abraham after "Y Abraham le dice: "
+S: LUK 16:30 @richman after "El entonces dijo: "
+S: LUK 16:31 @abraham after "Mas Abraham le dijo: "
+N: Tienen a Moisés y a los profetas. Tienen la Palabra de Dios. Si no la escuchan, tampoco escucharían a alguien que volviera de los muertos.
+N: Jesús no contó esta historia para asustar. La contó para despertar el corazón mientras todavía hay tiempo. El problema del rico no fue tener dinero. Fue vivir sin ver al que tenía en la puerta.
+N: Esta historia nos pregunta a quién no estamos viendo. Al vecino que está solo, a la persona que pide en la esquina, al familiar enfermo que nadie visita. Lázaro está a la puerta de muchas casas todavía.
+N: Y si esta noche tú eres Lázaro, si te sientes olvidado, enfermo, ignorado por los que podrían ayudarte, esta historia es para ti también. Dios sabe tu nombre. Él no pasa de largo.
+
+=== core-056-washing-feet | Jesús les lava los pies
+passage: JOH 13:1-17
+shelf: adult
+violence: none
+sexual: none
+cast: peter|Pedro|adult|m
+N: Era la última noche de Jesús con sus discípulos antes de la cruz. Estaban juntos en un cuarto en Jerusalén para la cena de la Pascua. Jesús sabía lo que venía.
+S: JOH 13:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Los amó hasta el fin, y nos ama así también.
+N: En aquel tiempo la gente caminaba descalza o en sandalias por caminos de tierra. Al llegar a una casa, un sirviente lavaba los pies de los invitados. Era el trabajo más humilde de todos. Y esa noche no había ningún sirviente.
+S: JOH 13:4-5
+N: Ninguno de los discípulos se ofreció. Y entonces el Maestro se levantó de la mesa, se quitó el manto, se amarró una toalla a la cintura y se arrodilló delante de ellos con una vasija de agua.
+N: Uno por uno. Los pies de Juan. Los pies de Tomás. Los pies de Judas, que ya había decidido entregarlo. Jesús los lavó a todos.
+S: JOH 13:6 @peter after "y Pedro le dice: "
+S: JOH 13:7
+S: JOH 13:8 @peter after "Dícele Pedro: " until "Respondióle Jesús"
+N: Pedro no podía aceptarlo. ¿Cómo iba a dejar que su Señor hiciera el trabajo de un sirviente? Pero Jesús le dijo que si no lo dejaba lavarlo, no tendría parte con él.
+S: JOH 13:9 @peter after "Dícele Simón Pedro: "
+N: Y Pedro, como siempre, se fue al otro extremo. Entonces lávame todo. Así era Pedro. Todo o nada. Y Jesús lo amaba así.
+N: A veces es más difícil dejarnos servir que servir. Nos cuesta dejar que alguien nos vea en nuestra necesidad. Pero Jesús quiere lavar lo que está sucio en nosotros, y para eso tenemos que dejarlo acercarse.
+S: JOH 13:12
+S: JOH 13:13-15
+N: Ejemplo les he dado. Jesús no les dio un discurso sobre la humildad. Se arrodilló y lo hizo. Y luego les dijo que hicieran lo mismo unos con otros.
+S: JOH 13:16-17
+N: En muchas iglesias todavía se lavan los pies unos a otros para recordar esa noche. Y en todas las iglesias, Jesús nos llama a servir de la misma manera, con toalla y con agua, en las cosas pequeñas que nadie quiere hacer.
+N: Esta noche puedes pensar en dos cosas. ¿Dónde necesito dejar que Jesús me sirva, que me limpie, que me cuide? ¿Y a quién puedo servir mañana, con humildad, como él lo hizo? Él se arrodilló delante de los suyos. No hay trabajo demasiado pequeño para el amor.
+
+=== core-057-damascus-road | Saulo en el camino a Damasco
+passage: ACT 9:1-19
+shelf: adult
+violence: mild
+sexual: none
+cast: saul|Saulo|adult|m; ananias|Ananías|adult|m
+N: Después de la resurrección de Jesús, sus seguidores empezaron a crecer en número. Y algunos líderes religiosos los perseguían. Uno de los más duros era un joven llamado Saulo.
+S: ACT 9:1-2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno aun con el que lo perseguía, porque nadie está fuera de su alcance.
+N: Saulo iba camino a Damasco con cartas para arrestar a hombres y mujeres que seguían a Jesús. Estaba convencido de que hacía lo correcto. Y en el camino, todo cambió.
+S: ACT 9:3-4
+S: ACT 9:5-6
+N: Una luz del cielo, más fuerte que el sol del mediodía. Saulo cayó al suelo. Y la voz le preguntó por qué lo perseguía. Saulo no perseguía solo a unas personas. Perseguía a Jesús mismo.
+S: ACT 9:8-9
+N: Tres días ciego. Sin comer, sin beber. El hombre que había salido tan seguro ahora tenía que ser llevado de la mano. Tres días en oscuridad, pensando, orando.
+N: Y en Damasco había un discípulo llamado Ananías. Dios le habló en una visión y le pidió que fuera a buscar a Saulo.
+S: ACT 9:13 @ananias after "Entonces Ananías respondió: "
+S: ACT 9:14 @ananias whole
+N: Ananías tenía miedo, y con razón. Saulo había venido a arrestar a gente como él. Pero Dios le dijo que lo había escogido para llevar su nombre a muchas naciones.
+S: ACT 9:15-16
+N: Y Ananías fue. Entró en la casa donde estaba aquel hombre peligroso. Le puso las manos encima. Y lo primero que le dijo fue una palabra que Saulo no esperaba.
+S: ACT 9:17 @ananias after "dijo: "
+N: Hermano. Saulo hermano. Ananías no lo llamó enemigo ni perseguidor. Lo llamó hermano.
+S: ACT 9:18-19
+N: Saulo, a quien más tarde conocemos como Pablo, llegó a ser uno de los apóstoles más grandes. Escribió muchas de las cartas del Nuevo Testamento. Y nunca olvidó de dónde lo había sacado Dios.
+N: Esta historia tiene dos milagros. Uno es un perseguidor que se vuelve hermano. El otro es un hombre con miedo que obedece y le abre los brazos a su enemigo.
+N: Tal vez piensas en alguien que parece estar muy lejos de Dios. Nadie está fuera de su alcance. Y tal vez Dios te está pidiendo que seas Ananías para alguien, que llames hermano a quien no esperabas.
+
+=== core-058-at-the-cross | En la cruz
+passage: LUK 23:33-47
+shelf: adult
+violence: mild
+sexual: none
+cast: thief|malhechores|adult|m; centurion|centurión|adult|m
+N: Después de una noche sin dormir, de juicios injustos y de golpes, llevaron a Jesús fuera de Jerusalén, a un lugar llamado la Calavera. Con él llevaban a dos criminales.
+S: LUK 23:33
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun aquí, en la hora más oscura, su amor no se detuvo.
+S: LUK 23:34
+N: Padre, perdónalos. Lo primero que Jesús dijo en la cruz fue una oración por los que lo estaban crucificando. No pidió venganza. Pidió perdón para ellos.
+S: LUK 23:35
+S: LUK 23:36-37
+N: Se burlaban de él. Los líderes, los soldados, la gente que pasaba. Si eres el rey, sálvate a ti mismo. No entendían que precisamente porque era el rey, no se iba a salvar a sí mismo. Estaba ahí por otros.
+S: LUK 23:39
+S: LUK 23:40 @thief after "reprendióle, diciendo: "
+S: LUK 23:41 @thief whole
+S: LUK 23:42 @thief after "Y dijo á Jesús: "
+N: Un hombre que había hecho mal toda su vida, colgado en una cruz, sin nada que ofrecer. Y solo pidió una cosa. Acuérdate de mí.
+S: LUK 23:43
+N: Hoy. No algún día. No después de que se arreglara. Hoy estarás conmigo. Ese hombre no pudo hacer nada más que pedir, y Jesús lo recibió.
+S: LUK 23:44-45
+S: LUK 23:46
+N: Jesús oró con palabras de un salmo que conocía desde niño. Y entregó su espíritu en las manos de su Padre. No le quitaron la vida. Él la entregó.
+S: LUK 23:47 @centurion after "diciendo: "
+N: Un soldado romano, el que estaba a cargo de la crucifixión, fue el primero en decirlo en voz alta. Verdaderamente este hombre era justo.
+N: La cruz es el lugar donde el amor de Dios se ve más claro. Jesús perdonó a los que lo herían. Recibió a un hombre que no tenía nada. Y lo entregó todo.
+N: Si esta noche cargas con algo que hiciste, algo de lo que te avergüenzas, puedes orar como aquel hombre en la cruz. Jesús, acuérdate de mí. No necesitas palabras más bonitas. Él escucha esa oración.
+N: Y la historia no termina aquí. Pero esta noche, quédate un momento al pie de la cruz, y mira cuánto te ama.
+
+=== core-059-he-is-risen | María Magdalena en el sepulcro
+passage: JOH 20:1-18
+shelf: adult
+violence: none
+sexual: none
+cast: mary|María Magdalena|adult|f
+N: Jesús había muerto el viernes. Lo pusieron en una tumba cavada en la roca, y cerraron la entrada con una piedra grande. El día siguiente fue un día de silencio y de dolor para todos los que lo amaban.
+S: JOH 20:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno en la mañana del primer día, cuando todavía estaba oscuro.
+N: María Magdalena fue de madrugada, cuando todavía estaba oscuro. Jesús la había liberado de mucho sufrimiento, y ella lo había seguido desde entonces. Estuvo al pie de la cruz. Y ahora venía a la tumba.
+S: JOH 20:2 @mary after "y les dice: "
+S: JOH 20:3-4
+N: Pedro y el otro discípulo corrieron. Vieron las vendas en el suelo, y el paño de la cabeza doblado aparte. El cuerpo no estaba. Y se volvieron a su casa.
+N: Pero María se quedó.
+S: JOH 20:11-12
+S: JOH 20:13
+N: Se han llevado a mi Señor. María pensaba que alguien se había robado el cuerpo. Ni siquiera le quedaba eso. Lloraba tanto que ni los ángeles la sorprendieron.
+S: JOH 20:14
+S: JOH 20:15
+N: Él estaba ahí, a su lado, y ella no lo reconoció. Las lágrimas, la oscuridad, el dolor. Pensó que era el jardinero.
+S: JOH 20:16
+N: María. Una sola palabra. Su nombre. Y al oír su voz llamándola por su nombre, lo supo. Era él. Rabboni. Maestro.
+N: Jesús dijo una vez que sus ovejas conocen su voz, y que él las llama por su nombre. Esa mañana, en el jardín, María oyó esa voz.
+S: JOH 20:17
+S: JOH 20:18
+N: La primera persona que vio a Jesús resucitado fue una mujer que lloraba junto a la tumba. Y ella fue la primera en anunciarlo. He visto al Señor.
+N: Hay noches en que, como María, buscamos a Jesús entre lágrimas, y no lo reconocemos aunque esté cerca. El dolor nos nubla los ojos.
+N: Pero él conoce tu nombre. Y la mañana del primer día llega. La tumba está vacía. Y el mismo Jesús que llamó a María por su nombre sigue llamando a los suyos, uno por uno.
+
+=== core-060-emmaus | El camino a Emmaús
+passage: LUK 24:13-35
+shelf: adult
+violence: none
+sexual: none
+cast: cleopas|Cleofas|adult|m; two|ellos|adult|group; eleven|once|adult|group
+N: Era el domingo después de la crucifixión. Dos seguidores de Jesús caminaban de Jerusalén a un pueblo llamado Emmaús, a unas dos horas de camino. Iban tristes, hablando de todo lo que había pasado.
+S: LUK 24:13-14
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Jesús camina con los tristes, aunque no lo reconozcan.
+S: LUK 24:15-16
+S: LUK 24:17
+S: LUK 24:18 @cleopas after "le dijo: "
+N: Jesús les preguntó qué cosas. Y ellos le contaron todo.
+S: LUK 24:20 @two whole
+S: LUK 24:21 @two whole
+N: Nosotros esperábamos. Qué palabras tan tristes. Habían puesto toda su esperanza en Jesús, y lo habían visto morir. Y aunque unas mujeres decían que estaba vivo, ellos no lo podían creer.
+S: LUK 24:25-26
+S: LUK 24:27
+N: Y en el camino, Jesús les fue explicando las Escrituras, desde Moisés y todos los profetas. Todo lo que hablaba de él. Ellos lo escuchaban sin saber quién era.
+S: LUK 24:28
+S: LUK 24:29 @two after "diciendo: " until "Entró pues"
+N: Quédate con nosotros, porque se hace tarde. Ya caía la noche. Y lo invitaron a su mesa.
+S: LUK 24:30-31
+N: Al partir el pan, lo reconocieron. Tal vez vieron sus manos. Tal vez fue la manera en que daba gracias. Y en ese momento, desapareció.
+S: LUK 24:32 @two after "Y decían el uno al otro: "
+N: No esperaron a la mañana. Era de noche y estaban cansados, pero se levantaron y volvieron caminando a Jerusalén, las mismas dos horas de camino, para contarlo.
+S: LUK 24:33
+S: LUK 24:34 @eleven after "Que decían: "
+S: LUK 24:35
+N: Esta historia empieza con dos personas tristes que se alejan de Jerusalén, y termina con dos personas llenas de gozo que regresan corriendo. Lo que cambió fue que Jesús caminó con ellos.
+N: Hay caminos en la vida que se caminan con tristeza. Esperábamos algo, y no salió como pensábamos. En esos caminos, Jesús se acerca, aunque no lo reconozcamos al principio. Escucha. Explica. Se sienta a la mesa.
+N: Esta noche puedes decirle lo mismo que ellos. Quédate conmigo, Señor, que ya es tarde. Él acepta esa invitación. Y en la Palabra, en la oración y al partir el pan, todavía se da a conocer a los suyos.

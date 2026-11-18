@@ -1,0 +1,303 @@
+{
+ "id": "core-053-lost-sheep",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "La oveja perdida",
+ "passage": {
+  "refs": [
+   "LUK 15:1-7"
+  ],
+  "label": "Lucas 15:1-7"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "pharisees",
+   "name": "escribas",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A Jesús lo seguía toda clase de gente. Y entre ellos venían muchos que los demás despreciaban. Cobradores de impuestos, gente con mala fama, personas que los religiosos no querían cerca."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:1",
+   "label": "Lucas 15:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y SE llegaban á él todos los publicanos y pecadores á oirle."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y SE llegaban á él todos los publicanos y pecadores á oirle."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno con la oveja que se perdió, y con el que salió a buscarla.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "pharisees",
+   "ref": "LUK 15:2",
+   "label": "Lucas 15:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y murmuraban los Fariseos y los escribas, diciendo: Este á los pecadores recibe, y con ellos come."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y murmuraban los Fariseos y los escribas, diciendo:"
+    },
+    {
+     "v": 2,
+     "speaker": "pharisees",
+     "text": "Este á los pecadores recibe, y con ellos come."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Para ellos era una queja. Este recibe a los pecadores y come con ellos. Pero sin querer, dijeron una de las verdades más hermosas sobre Jesús. Sí, los recibe. Sí, come con ellos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y Jesús les respondió con una historia."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:3-4",
+   "label": "Lucas 15:3-4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y él les propuso esta parábola, diciendo:"
+    },
+    {
+     "v": 4,
+     "text": "¿Qué hombre de vosotros, teniendo cien ovejas, si perdiere una de ellas, no deja las noventa y nueve en el desierto, y va á la que se perdió, hasta que la halle?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y él les propuso esta parábola, diciendo:"
+    },
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "¿Qué hombre de vosotros, teniendo cien ovejas, si perdiere una de ellas, no deja las noventa y nueve en el desierto, y va á la que se perdió, hasta que la halle?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un pastor con cien ovejas. Al final del día las cuenta y le falta una. Noventa y nueve están a salvo. Muchos dirían que con eso basta. Pero el pastor no piensa así."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Deja las noventa y nueve y sale a buscar la que se perdió. Por los montes, entre las piedras, de noche, llamándola. Hasta que la encuentra."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:5",
+   "label": "Lucas 15:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y hallada, la pone sobre sus hombros gozoso;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y hallada, la pone sobre sus hombros gozoso;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No la regaña. No la arrastra de regreso. La pone sobre sus hombros, contento. Una oveja perdida está asustada y cansada, y muchas veces no puede caminar. El pastor la carga."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:6",
+   "label": "Lucas 15:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y viniendo á casa, junta á los amigos y á los vecinos, diciéndoles: Dadme el parabién, porque he hallado mi oveja que se había perdido."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y viniendo á casa, junta á los amigos y á los vecinos, diciéndoles: Dadme el parabién, porque he hallado mi oveja que se había perdido."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:7",
+   "label": "Lucas 15:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Os digo, que así habrá más gozo en el cielo de un pecador que se arrepiente, que de noventa y nueve justos, que no necesitan arrepentimiento."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Os digo, que así habrá más gozo en el cielo de un pecador que se arrepiente, que de noventa y nueve justos, que no necesitan arrepentimiento."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Gozo en el cielo. Por uno solo. Así de valiosa es cada persona para Dios."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los pastores de aquel tiempo conocían a cada oveja. Le ponían nombre, sabían cuál cojeaba, cuál se quedaba atrás, cuál se asustaba con facilidad. Por eso el pastor de la historia notó enseguida que faltaba una. No era un número para él. Era su oveja."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y cuando volvió a casa, no la escondió ni la castigó. Hizo fiesta. Llamó a los vecinos para que se alegraran con él. Así recibe Dios a los que vuelven."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús contó esta historia a los que se quejaban, no a los perdidos. Era una invitación para ellos también. Que se alegraran con él cuando uno vuelve a casa, en lugar de murmurar."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tal vez esta noche tú eres la oveja. Te alejaste, o te perdiste sin darte cuenta, y ya no sabes cómo volver. Jesús no está esperando que encuentres el camino solo. Él sale a buscarte. Y cuando te encuentra, no te avergüenza. Te carga sobre sus hombros."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "O tal vez tienes a alguien perdido. Un hijo, una hermana, un amigo. Puedes orar por esa persona sabiendo que el Buen Pastor la conoce por nombre, y que no deja de buscar."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y si eres de las noventa y nueve, de las que están en el redil, la invitación es la misma que para los fariseos. Alégrate cuando uno vuelve. Hazle espacio en la mesa."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 556,
+ "est_seconds": 309,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 556 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:27",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 15:1-7; the parable read as scripture; aimed, as Jesus aimed it, at the grumblers too; no salvation-status claim."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Shepherd life told plainly; prayer for a lost child or sibling offered with hope, not guilt."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

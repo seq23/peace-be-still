@@ -1,0 +1,390 @@
+{
+ "id": "core-056-washing-feet",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Jesús les lava los pies",
+ "passage": {
+  "refs": [
+   "JOH 13:1-17"
+  ],
+  "label": "Juan 13:1-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "peter",
+   "name": "Pedro",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Era la última noche de Jesús con sus discípulos antes de la cruz. Estaban juntos en un cuarto en Jerusalén para la cena de la Pascua. Jesús sabía lo que venía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:1",
+   "label": "Juan 13:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Antes de la fiesta de la Pascua, sabiendo Jesús que su hora había venido para que pasase de este mundo al Padre, como había amado á los suyos que estaban en el mundo, amólos hasta el fin."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Antes de la fiesta de la Pascua, sabiendo Jesús que su hora había venido para que pasase de este mundo al Padre, como había amado á los suyos que estaban en el mundo, amólos hasta el fin."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Los amó hasta el fin, y nos ama así también.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En aquel tiempo la gente caminaba descalza o en sandalias por caminos de tierra. Al llegar a una casa, un sirviente lavaba los pies de los invitados. Era el trabajo más humilde de todos. Y esa noche no había ningún sirviente."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:4-5",
+   "label": "Juan 13:4-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Levántase de la cena, y quítase su ropa, y tomando una toalla, ciñóse."
+    },
+    {
+     "v": 5,
+     "text": "Luego puso agua en un lebrillo, y comenzó á lavar los pies de los discípulos, y á limpiarlos con la toalla con que estaba ceñido."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Levántase de la cena, y quítase su ropa, y tomando una toalla, ciñóse."
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Luego puso agua en un lebrillo, y comenzó á lavar los pies de los discípulos, y á limpiarlos con la toalla con que estaba ceñido."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ninguno de los discípulos se ofreció. Y entonces el Maestro se levantó de la mesa, se quitó el manto, se amarró una toalla a la cintura y se arrodilló delante de ellos con una vasija de agua."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Uno por uno. Los pies de Juan. Los pies de Tomás. Los pies de Judas, que ya había decidido entregarlo. Jesús los lavó a todos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "JOH 13:6",
+   "label": "Juan 13:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Entonces vino á Simón Pedro; y Pedro le dice: ¿Señor, tú me lavas los pies?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Entonces vino á Simón Pedro; y Pedro le dice:"
+    },
+    {
+     "v": 6,
+     "speaker": "peter",
+     "text": "¿Señor, tú me lavas los pies?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:7",
+   "label": "Juan 13:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Respondió Jesús, y díjole: Lo que yo hago, tú no entiendes ahora; mas lo entenderás después."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Respondió Jesús, y díjole: Lo que yo hago, tú no entiendes ahora; mas lo entenderás después."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "JOH 13:8",
+   "label": "Juan 13:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Dícele Pedro: No me lavarás los pies jamás. Respondióle Jesús: Si no te lavare, no tendrás parte conmigo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Dícele Pedro:"
+    },
+    {
+     "v": 8,
+     "speaker": "peter",
+     "text": "No me lavarás los pies jamás."
+    },
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Respondióle Jesús: Si no te lavare, no tendrás parte conmigo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pedro no podía aceptarlo. ¿Cómo iba a dejar que su Señor hiciera el trabajo de un sirviente? Pero Jesús le dijo que si no lo dejaba lavarlo, no tendría parte con él."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "JOH 13:9",
+   "label": "Juan 13:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Dícele Simón Pedro: Señor, no sólo mis pies, mas aun las manos y la cabeza."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Dícele Simón Pedro:"
+    },
+    {
+     "v": 9,
+     "speaker": "peter",
+     "text": "Señor, no sólo mis pies, mas aun las manos y la cabeza."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y Pedro, como siempre, se fue al otro extremo. Entonces lávame todo. Así era Pedro. Todo o nada. Y Jesús lo amaba así."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A veces es más difícil dejarnos servir que servir. Nos cuesta dejar que alguien nos vea en nuestra necesidad. Pero Jesús quiere lavar lo que está sucio en nosotros, y para eso tenemos que dejarlo acercarse."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:12",
+   "label": "Juan 13:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Así que, después que les hubo lavado los pies, y tomado su ropa, volviéndose á sentar á la mesa, díjoles: ¿Sabéis lo que os he hecho?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Así que, después que les hubo lavado los pies, y tomado su ropa, volviéndose á sentar á la mesa, díjoles: ¿Sabéis lo que os he hecho?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:13-15",
+   "label": "Juan 13:13-15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Vosotros me llamáis, Maestro, y, Señor: y decís bien; porque lo soy."
+    },
+    {
+     "v": 14,
+     "text": "Pues si yo, el Señor y el Maestro, he lavado vuestros pies, vosotros también debéis lavar los pies los unos á los otros."
+    },
+    {
+     "v": 15,
+     "text": "Porque ejemplo os he dado, para que como yo os he hecho, vosotros también hagáis."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Vosotros me llamáis, Maestro, y, Señor: y decís bien; porque lo soy."
+    },
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Pues si yo, el Señor y el Maestro, he lavado vuestros pies, vosotros también debéis lavar los pies los unos á los otros."
+    },
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Porque ejemplo os he dado, para que como yo os he hecho, vosotros también hagáis."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ejemplo les he dado. Jesús no les dio un discurso sobre la humildad. Se arrodilló y lo hizo. Y luego les dijo que hicieran lo mismo unos con otros."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:16-17",
+   "label": "Juan 13:16-17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "De cierto, de cierto os digo: El siervo no es mayor que su señor, ni el apóstol es mayor que el que le envió."
+    },
+    {
+     "v": 17,
+     "text": "Si sabéis estas cosas, bienaventurados seréis, si las hiciereis."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "De cierto, de cierto os digo: El siervo no es mayor que su señor, ni el apóstol es mayor que el que le envió."
+    },
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Si sabéis estas cosas, bienaventurados seréis, si las hiciereis."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "En muchas iglesias todavía se lavan los pies unos a otros para recordar esa noche. Y en todas las iglesias, Jesús nos llama a servir de la misma manera, con toalla y con agua, en las cosas pequeñas que nadie quiere hacer."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche puedes pensar en dos cosas. ¿Dónde necesito dejar que Jesús me sirva, que me limpie, que me cuide? ¿Y a quién puedo servir mañana, con humildad, como él lo hizo? Él se arrodilló delante de los suyos. No hay trabajo demasiado pequeño para el amor."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 619,
+ "est_seconds": 344,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 13:1-17; Judas named without speculation; footwashing as practised by some churches mentioned neutrally, no ruling on it as an ordinance (S04)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Peter's all-or-nothing temper loved, not laughed at; service in small things honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,433 @@
+{
+ "id": "core-058-at-the-cross",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "En la cruz",
+ "passage": {
+  "refs": [
+   "LUK 23:33-47"
+  ],
+  "label": "Lucas 23:33-47"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "thief",
+   "name": "malhechores",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "centurion",
+   "name": "centurión",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Después de una noche sin dormir, de juicios injustos y de golpes, llevaron a Jesús fuera de Jerusalén, a un lugar llamado la Calavera. Con él llevaban a dos criminales."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:33",
+   "label": "Lucas 23:33",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 33,
+     "text": "Y como vinieron al lugar que se llama de la Calavera, le crucificaron allí, y á los malhechores, uno á la derecha, y otro á la izquierda."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "Y como vinieron al lugar que se llama de la Calavera, le crucificaron allí, y á los malhechores, uno á la derecha, y otro á la izquierda."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun aquí, en la hora más oscura, su amor no se detuvo.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:34",
+   "label": "Lucas 23:34",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 34,
+     "text": "Y Jesús decía: Padre, perdónalos, porque no saben lo que hacen. Y partiendo sus vestidos, echaron suertes."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "Y Jesús decía: Padre, perdónalos, porque no saben lo que hacen. Y partiendo sus vestidos, echaron suertes."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Padre, perdónalos. Lo primero que Jesús dijo en la cruz fue una oración por los que lo estaban crucificando. No pidió venganza. Pidió perdón para ellos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:35",
+   "label": "Lucas 23:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Y el pueblo estaba mirando; y se burlaban de él los príncipes con ellos, diciendo: A otros hizo salvos: sálvese á sí, si éste es el Mesías, el escogido de Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Y el pueblo estaba mirando; y se burlaban de él los príncipes con ellos, diciendo: A otros hizo salvos: sálvese á sí, si éste es el Mesías, el escogido de Dios."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:36-37",
+   "label": "Lucas 23:36-37",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 36,
+     "text": "Escarnecían de él también los soldados, llegándose y presentándole vinagre,"
+    },
+    {
+     "v": 37,
+     "text": "Y diciendo: Si tú eres el Rey de los Judíos, sálvate á ti mismo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "Escarnecían de él también los soldados, llegándose y presentándole vinagre,"
+    },
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Y diciendo: Si tú eres el Rey de los Judíos, sálvate á ti mismo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Se burlaban de él. Los líderes, los soldados, la gente que pasaba. Si eres el rey, sálvate a ti mismo. No entendían que precisamente porque era el rey, no se iba a salvar a sí mismo. Estaba ahí por otros."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:39",
+   "label": "Lucas 23:39",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 39,
+     "text": "Y uno de los malhechores que estaban colgados, le injuriaba, diciendo: Si tú eres el Cristo, sálvate á ti mismo y á nosotros."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "Y uno de los malhechores que estaban colgados, le injuriaba, diciendo: Si tú eres el Cristo, sálvate á ti mismo y á nosotros."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "thief",
+   "ref": "LUK 23:40",
+   "label": "Lucas 23:40",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 40,
+     "text": "Y respondiendo el otro, reprendióle, diciendo: ¿Ni aun tú temes á Dios, estando en la misma condenación?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "Y respondiendo el otro, reprendióle, diciendo:"
+    },
+    {
+     "v": 40,
+     "speaker": "thief",
+     "text": "¿Ni aun tú temes á Dios, estando en la misma condenación?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "thief",
+   "ref": "LUK 23:41",
+   "label": "Lucas 23:41",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 41,
+     "text": "Y nosotros, á la verdad, justamente padecemos; porque recibimos lo que merecieron nuestros hechos: mas éste ningún mal hizo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "thief",
+     "text": "Y nosotros, á la verdad, justamente padecemos; porque recibimos lo que merecieron nuestros hechos: mas éste ningún mal hizo."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "thief",
+   "ref": "LUK 23:42",
+   "label": "Lucas 23:42",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 42,
+     "text": "Y dijo á Jesús: Acuérdate de mí cuando vinieres á tu reino."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "Y dijo á Jesús:"
+    },
+    {
+     "v": 42,
+     "speaker": "thief",
+     "text": "Acuérdate de mí cuando vinieres á tu reino."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un hombre que había hecho mal toda su vida, colgado en una cruz, sin nada que ofrecer. Y solo pidió una cosa. Acuérdate de mí."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:43",
+   "label": "Lucas 23:43",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 43,
+     "text": "Entonces Jesús le dijo: De cierto te digo, que hoy estarás conmigo en el paraíso."
+    }
+   ],
+   "segments": [
+    {
+     "v": 43,
+     "speaker": "narrator",
+     "text": "Entonces Jesús le dijo: De cierto te digo, que hoy estarás conmigo en el paraíso."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hoy. No algún día. No después de que se arreglara. Hoy estarás conmigo. Ese hombre no pudo hacer nada más que pedir, y Jesús lo recibió."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:44-45",
+   "label": "Lucas 23:44-45",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 44,
+     "text": "Y cuando era como la hora de sexta, fueron hechas tinieblas sobre toda la tierra hasta la hora de nona."
+    },
+    {
+     "v": 45,
+     "text": "Y el sol se obscureció: y el velo del templo se rompió por medio."
+    }
+   ],
+   "segments": [
+    {
+     "v": 44,
+     "speaker": "narrator",
+     "text": "Y cuando era como la hora de sexta, fueron hechas tinieblas sobre toda la tierra hasta la hora de nona."
+    },
+    {
+     "v": 45,
+     "speaker": "narrator",
+     "text": "Y el sol se obscureció: y el velo del templo se rompió por medio."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 23:46",
+   "label": "Lucas 23:46",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 46,
+     "text": "Entonces Jesús, clamando á gran voz, dijo: Padre, en tus manos encomiendo mi espíritu. Y habiendo dicho esto, espiró."
+    }
+   ],
+   "segments": [
+    {
+     "v": 46,
+     "speaker": "narrator",
+     "text": "Entonces Jesús, clamando á gran voz, dijo: Padre, en tus manos encomiendo mi espíritu. Y habiendo dicho esto, espiró."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús oró con palabras de un salmo que conocía desde niño. Y entregó su espíritu en las manos de su Padre. No le quitaron la vida. Él la entregó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "centurion",
+   "ref": "LUK 23:47",
+   "label": "Lucas 23:47",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 47,
+     "text": "Y como el centurión vió lo que había acontecido, dió gloria á Dios, diciendo: Verdaderamente este hombre era justo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 47,
+     "speaker": "narrator",
+     "text": "Y como el centurión vió lo que había acontecido, dió gloria á Dios, diciendo:"
+    },
+    {
+     "v": 47,
+     "speaker": "centurion",
+     "text": "Verdaderamente este hombre era justo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un soldado romano, el que estaba a cargo de la crucifixión, fue el primero en decirlo en voz alta. Verdaderamente este hombre era justo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La cruz es el lugar donde el amor de Dios se ve más claro. Jesús perdonó a los que lo herían. Recibió a un hombre que no tenía nada. Y lo entregó todo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche cargas con algo que hiciste, algo de lo que te avergüenzas, puedes orar como aquel hombre en la cruz. Jesús, acuérdate de mí. No necesitas palabras más bonitas. Él escucha esa oración."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y la historia no termina aquí. Pero esta noche, quédate un momento al pie de la cruz, y mira cuánto te ama."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 577,
+ "est_seconds": 321,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 23:33-47 (Ps 31:5 named, not quoted); crucifixion kept off the page beyond the text's words (violence mild); 'hoy estarás conmigo' left to scripture, no status claim for the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The Roman centurion and the criminal shown with dignity; no blame placed on the Jewish people; reverent close."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

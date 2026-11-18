@@ -1,0 +1,441 @@
+{
+ "id": "core-052-balaam",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "La asna de Balaam",
+ "passage": {
+  "refs": [
+   "NUM 22:21-35"
+  ],
+  "label": "Números 22:21-35"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "donkey",
+   "name": "asna",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "balaam",
+   "name": "Balaam",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mientras Israel acampaba cerca de Moab, el rey Balac tuvo miedo. Mandó a buscar a un hombre llamado Balaam, que tenía fama de adivino, y le ofreció mucho dinero para que maldijera al pueblo de Israel."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios le dijo a Balaam que no fuera, que ese pueblo era bendito. Pero el rey insistió con más dinero y más honores. Y Balaam se fue con los mensajeros."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:21-22",
+   "label": "Números 22:21-22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Así Balaam se levantó por la mañana, y cinchó su asna, y fué con los príncipes de Moab."
+    },
+    {
+     "v": 22,
+     "text": "Y el furor de Dios se encendió porque él iba; y el ángel de Jehová se puso en el camino por adversario suyo. Iba, pues, él montado sobre su asna, y con él dos mozos suyos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Así Balaam se levantó por la mañana, y cinchó su asna, y fué con los príncipes de Moab."
+    },
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Y el furor de Dios se encendió porque él iba; y el ángel de Jehová se puso en el camino por adversario suyo. Iba, pues, él montado sobre su asna, y con él dos mozos suyos."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno aun cuando nos detiene en el camino.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:23",
+   "label": "Números 22:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Y el asna vió al ángel de Jehová, que estaba en el camino con su espada desnuda en su mano; y apartóse el asna del camino, é iba por el campo. Entonces hirió Balaam al asna para hacerla volver al camino."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Y el asna vió al ángel de Jehová, que estaba en el camino con su espada desnuda en su mano; y apartóse el asna del camino, é iba por el campo. Entonces hirió Balaam al asna para hacerla volver al camino."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La asna vio lo que Balaam no podía ver. El ángel de Dios con una espada en el camino. Y se salió hacia el campo. Balaam, que no veía nada, le pegó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:24-25",
+   "label": "Números 22:24-25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Mas el ángel de Jehová se puso en una senda de viñas que tenía pared de una parte y pared de otra."
+    },
+    {
+     "v": 25,
+     "text": "Y viendo el asna al ángel de Jehová, pegóse á la pared, y apretó contra la pared el pie de Balaam: y él volvió á herirla."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Mas el ángel de Jehová se puso en una senda de viñas que tenía pared de una parte y pared de otra."
+    },
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Y viendo el asna al ángel de Jehová, pegóse á la pared, y apretó contra la pared el pie de Balaam: y él volvió á herirla."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:26-27",
+   "label": "Números 22:26-27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Y el ángel de Jehová pasó más allá, y púsose en una angostura, donde no había camino para apartarse ni á diestra ni á siniestra."
+    },
+    {
+     "v": 27,
+     "text": "Y viendo el asna al ángel de Jehová, echóse debajo de Balaam: y enojóse Balaam, é hirió al asna con el palo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y el ángel de Jehová pasó más allá, y púsose en una angostura, donde no había camino para apartarse ni á diestra ni á siniestra."
+    },
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Y viendo el asna al ángel de Jehová, echóse debajo de Balaam: y enojóse Balaam, é hirió al asna con el palo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tres veces la asna lo salvó. Tres veces Balaam le pegó. Estaba tan enojado y tan decidido a seguir su camino que no se detuvo a preguntarse por qué su asna, siempre tan tranquila, actuaba así."
+  },
+  {
+   "type": "scripture",
+   "speaker": "donkey",
+   "ref": "NUM 22:28",
+   "label": "Números 22:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Entonces Jehová abrió la boca al asna, la cual dijo á Balaam: ¿Qué te he hecho, que me has herido estas tres veces?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Entonces Jehová abrió la boca al asna, la cual dijo á Balaam:"
+    },
+    {
+     "v": 28,
+     "speaker": "donkey",
+     "text": "¿Qué te he hecho, que me has herido estas tres veces?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "balaam",
+   "ref": "NUM 22:29",
+   "label": "Números 22:29",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Y Balaam respondió al asna: Porque te has burlado de mí: ¡ojalá tuviera espada en mi mano, que ahora te mataría!"
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Y Balaam respondió al asna:"
+    },
+    {
+     "v": 29,
+     "speaker": "balaam",
+     "text": "Porque te has burlado de mí: ¡ojalá tuviera espada en mi mano, que ahora te mataría!"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lo más curioso es que Balaam le contestó como si nada. Estaba tan enojado que no se sorprendió de que su asna hablara."
+  },
+  {
+   "type": "scripture",
+   "speaker": "donkey",
+   "ref": "NUM 22:30",
+   "label": "Números 22:30",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 30,
+     "text": "Y el asna dijo á Balaam: ¿No soy yo tu asna? sobre mí has cabalgado desde que tú me tienes hasta este día; ¿he acostumbrado á hacerlo así contigo? Y él respondió: No."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "Y el asna dijo á Balaam:"
+    },
+    {
+     "v": 30,
+     "speaker": "donkey",
+     "text": "¿No soy yo tu asna? sobre mí has cabalgado desde que tú me tienes hasta este día; ¿he acostumbrado á hacerlo así contigo?"
+    },
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "Y él respondió: No."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:31",
+   "label": "Números 22:31",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 31,
+     "text": "Entonces Jehová abrió los ojos á Balaam, y vió al ángel de Jehová que estaba en el camino, y tenía su espada desnuda en su mano. Y Balaam hizo reverencia, é inclinóse sobre su rostro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "Entonces Jehová abrió los ojos á Balaam, y vió al ángel de Jehová que estaba en el camino, y tenía su espada desnuda en su mano. Y Balaam hizo reverencia, é inclinóse sobre su rostro."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Por fin Dios le abrió los ojos. Y Balaam vio lo que la asna había visto todo el tiempo. Se inclinó hasta el suelo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:32-33",
+   "label": "Números 22:32-33",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Y el ángel de Jehová le dijo: ¿Por qué has herido tu asna estas tres veces? he aquí yo he salido para contrarrestarte, porque tu camino es perverso delante de mí:"
+    },
+    {
+     "v": 33,
+     "text": "El asna me ha visto, y hase apartado luego de delante de mí estas tres veces: y si de mí no se hubiera apartado, yo también ahora te mataría á ti, y á ella dejaría viva."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "Y el ángel de Jehová le dijo: ¿Por qué has herido tu asna estas tres veces? he aquí yo he salido para contrarrestarte, porque tu camino es perverso delante de mí:"
+    },
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "El asna me ha visto, y hase apartado luego de delante de mí estas tres veces: y si de mí no se hubiera apartado, yo también ahora te mataría á ti, y á ella dejaría viva."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "balaam",
+   "ref": "NUM 22:34",
+   "label": "Números 22:34",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 34,
+     "text": "Entonces Balaam dijo al ángel de Jehová: He pecado, que no sabía que tú te ponías delante de mí en el camino: mas ahora, si te parece mal, yo me volveré."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "Entonces Balaam dijo al ángel de Jehová:"
+    },
+    {
+     "v": 34,
+     "speaker": "balaam",
+     "text": "He pecado, que no sabía que tú te ponías delante de mí en el camino: mas ahora, si te parece mal, yo me volveré."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NUM 22:35",
+   "label": "Números 22:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Y el ángel de Jehová dijo á Balaam: Ve con esos hombres: empero la palabra que yo te dijere, esa hablarás. Así Balaam fué con los príncipes de Balac."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Y el ángel de Jehová dijo á Balaam: Ve con esos hombres: empero la palabra que yo te dijere, esa hablarás. Así Balaam fué con los príncipes de Balac."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Balaam siguió su camino. Pero ahora sabía que solo podría decir lo que Dios le diera. Y cuando llegó delante del rey Balac, en lugar de maldecir a Israel, lo bendijo una y otra vez."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es una historia que hace sonreír. Un hombre que se decía sabio, y una asna que veía más que él. Pero tiene una lección seria. A veces estamos tan decididos a seguir nuestro camino que no vemos que Dios nos está deteniendo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Las puertas que se cierran, los planes que no salen, los obstáculos que no entendemos. No siempre son castigo ni mala suerte. A veces son la misericordia de Dios poniéndose en medio del camino."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche, si algo te ha detenido y estás frustrado, pídele a Dios que te abra los ojos como a Balaam. Que te ayude a ver lo que él ve. Y a seguirlo, aunque el camino cambie."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 784,
+ "est_seconds": 434,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:27",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Num 22:21-35 (the hire of 22:1-20 and the blessings of chs 23-24 told in words); the angel never voiced; closed doors framed as possible mercy, never as a sign promised to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Gentle humour without mockery; the beaten animal shown with sympathy."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

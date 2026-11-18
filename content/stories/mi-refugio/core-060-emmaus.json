@@ -1,0 +1,527 @@
+{
+ "id": "core-060-emmaus",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El camino a Emmaús",
+ "passage": {
+  "refs": [
+   "LUK 24:13-35"
+  ],
+  "label": "Lucas 24:13-35"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "cleopas",
+   "name": "Cleofas",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "two",
+   "name": "ellos",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "eleven",
+   "name": "once",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Era el domingo después de la crucifixión. Dos seguidores de Jesús caminaban de Jerusalén a un pueblo llamado Emmaús, a unas dos horas de camino. Iban tristes, hablando de todo lo que había pasado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:13-14",
+   "label": "Lucas 24:13-14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y he aquí, dos de ellos iban el mismo día á una aldea que estaba de Jerusalem sesenta estadios, llamada Emmaús."
+    },
+    {
+     "v": 14,
+     "text": "E iban hablando entre sí de todas aquellas cosas que habían acaecido."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y he aquí, dos de ellos iban el mismo día á una aldea que estaba de Jerusalem sesenta estadios, llamada Emmaús."
+    },
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "E iban hablando entre sí de todas aquellas cosas que habían acaecido."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Jesús camina con los tristes, aunque no lo reconozcan.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:15-16",
+   "label": "Lucas 24:15-16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y aconteció que yendo hablando entre sí, y preguntándose el uno al otro, el mismo Jesús se llegó, é iba con ellos juntamente."
+    },
+    {
+     "v": 16,
+     "text": "Mas los ojos de ellos estaban embargados, para que no le conociesen."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y aconteció que yendo hablando entre sí, y preguntándose el uno al otro, el mismo Jesús se llegó, é iba con ellos juntamente."
+    },
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Mas los ojos de ellos estaban embargados, para que no le conociesen."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:17",
+   "label": "Lucas 24:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Y díjoles: ¿Qué pláticas son estas que tratáis entre vosotros andando, y estáis tristes?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Y díjoles: ¿Qué pláticas son estas que tratáis entre vosotros andando, y estáis tristes?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "cleopas",
+   "ref": "LUK 24:18",
+   "label": "Lucas 24:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y respondiendo el uno, que se llamaba Cleofas, le dijo: ¿Tú sólo peregrino eres en Jerusalem, y no has sabido las cosas que en ella han acontecido estos días?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y respondiendo el uno, que se llamaba Cleofas, le dijo:"
+    },
+    {
+     "v": 18,
+     "speaker": "cleopas",
+     "text": "¿Tú sólo peregrino eres en Jerusalem, y no has sabido las cosas que en ella han acontecido estos días?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús les preguntó qué cosas. Y ellos le contaron todo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:20",
+   "label": "Lucas 24:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y cómo le entregaron los príncipes de los sacerdotes y nuestros príncipes á condenación de muerte, y le crucificaron."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "two",
+     "text": "Y cómo le entregaron los príncipes de los sacerdotes y nuestros príncipes á condenación de muerte, y le crucificaron."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:21",
+   "label": "Lucas 24:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Mas nosotros esperábamos que él era el que había de redimir á Israel: y ahora sobre todo esto, hoy es el tercer día que esto ha acontecido."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "two",
+     "text": "Mas nosotros esperábamos que él era el que había de redimir á Israel: y ahora sobre todo esto, hoy es el tercer día que esto ha acontecido."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nosotros esperábamos. Qué palabras tan tristes. Habían puesto toda su esperanza en Jesús, y lo habían visto morir. Y aunque unas mujeres decían que estaba vivo, ellos no lo podían creer."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:25-26",
+   "label": "Lucas 24:25-26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Entonces él les dijo: ¡Oh insensatos, y tardos de corazón para creer todo lo que los profetas han dicho!"
+    },
+    {
+     "v": 26,
+     "text": "¿No era necesario que el Cristo padeciera estas cosas, y que entrara en su gloria?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Entonces él les dijo: ¡Oh insensatos, y tardos de corazón para creer todo lo que los profetas han dicho!"
+    },
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "¿No era necesario que el Cristo padeciera estas cosas, y que entrara en su gloria?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:27",
+   "label": "Lucas 24:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Y comenzando desde Moisés, y de todos los profetas, declarábales en todas las Escrituras lo que de él decían."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Y comenzando desde Moisés, y de todos los profetas, declarábales en todas las Escrituras lo que de él decían."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y en el camino, Jesús les fue explicando las Escrituras, desde Moisés y todos los profetas. Todo lo que hablaba de él. Ellos lo escuchaban sin saber quién era."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:28",
+   "label": "Lucas 24:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Y llegaron á la aldea á donde iban: y él hizo como que iba más lejos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Y llegaron á la aldea á donde iban: y él hizo como que iba más lejos."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:29",
+   "label": "Lucas 24:29",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Mas ellos le detuvieron por fuerza, diciendo: Quédate con nosotros, porque se hace tarde, y el día ya ha declinado. Entró pues á estarse con ellos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Mas ellos le detuvieron por fuerza, diciendo:"
+    },
+    {
+     "v": 29,
+     "speaker": "two",
+     "text": "Quédate con nosotros, porque se hace tarde, y el día ya ha declinado."
+    },
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Entró pues á estarse con ellos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Quédate con nosotros, porque se hace tarde. Ya caía la noche. Y lo invitaron a su mesa."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:30-31",
+   "label": "Lucas 24:30-31",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 30,
+     "text": "Y aconteció, que estando sentado con ellos á la mesa, tomando el pan, bendijo, y partió, y dióles."
+    },
+    {
+     "v": 31,
+     "text": "Entonces fueron abiertos los ojos de ellos, y le conocieron; mas él se desapareció de los ojos de ellos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "Y aconteció, que estando sentado con ellos á la mesa, tomando el pan, bendijo, y partió, y dióles."
+    },
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "Entonces fueron abiertos los ojos de ellos, y le conocieron; mas él se desapareció de los ojos de ellos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Al partir el pan, lo reconocieron. Tal vez vieron sus manos. Tal vez fue la manera en que daba gracias. Y en ese momento, desapareció."
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "LUK 24:32",
+   "label": "Lucas 24:32",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Y decían el uno al otro: ¿No ardía nuestro corazón en nosotros, mientras nos hablaba en el camino, y cuando nos abría las Escrituras?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "Y decían el uno al otro:"
+    },
+    {
+     "v": 32,
+     "speaker": "two",
+     "text": "¿No ardía nuestro corazón en nosotros, mientras nos hablaba en el camino, y cuando nos abría las Escrituras?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No esperaron a la mañana. Era de noche y estaban cansados, pero se levantaron y volvieron caminando a Jerusalén, las mismas dos horas de camino, para contarlo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:33",
+   "label": "Lucas 24:33",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 33,
+     "text": "Y levantándose en la misma hora, tornáronse á Jerusalem, y hallaron á los once reunidos, y á los que estaban con ellos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "Y levantándose en la misma hora, tornáronse á Jerusalem, y hallaron á los once reunidos, y á los que estaban con ellos."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "eleven",
+   "ref": "LUK 24:34",
+   "label": "Lucas 24:34",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 34,
+     "text": "Que decían: Ha resucitado el Señor verdaderamente, y ha aparecido á Simón."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "Que decían:"
+    },
+    {
+     "v": 34,
+     "speaker": "eleven",
+     "text": "Ha resucitado el Señor verdaderamente, y ha aparecido á Simón."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 24:35",
+   "label": "Lucas 24:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Entonces ellos contaban las cosas que les habían acontecido en el camino, y cómo había sido conocido de ellos al partir el pan."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Entonces ellos contaban las cosas que les habían acontecido en el camino, y cómo había sido conocido de ellos al partir el pan."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia empieza con dos personas tristes que se alejan de Jerusalén, y termina con dos personas llenas de gozo que regresan corriendo. Lo que cambió fue que Jesús caminó con ellos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay caminos en la vida que se caminan con tristeza. Esperábamos algo, y no salió como pensábamos. En esos caminos, Jesús se acerca, aunque no lo reconozcamos al principio. Escucha. Explica. Se sienta a la mesa."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta noche puedes decirle lo mismo que ellos. Quédate conmigo, Señor, que ya es tarde. Él acepta esa invitación. Y en la Palabra, en la oración y al partir el pan, todavía se da a conocer a los suyos."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 677,
+ "est_seconds": 375,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 24:13-35 (vv19 and 22-24 summarised); Jesus's words left in scripture; breaking bread named without a communion ruling (S04)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Disappointed hope named kindly ('nosotros esperábamos'); the walk back at night told with joy."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

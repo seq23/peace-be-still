@@ -1,0 +1,414 @@
+{
+ "id": "core-055-rich-man-lazarus",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "El rico y Lázaro",
+ "passage": {
+  "refs": [
+   "LUK 16:19-31"
+  ],
+  "label": "Lucas 16:19-31"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "richman",
+   "name": "rico",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "abraham",
+   "name": "Abraham",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús contó una historia sobre dos hombres. Uno lo tenía todo. El otro no tenía nada. Y vivían a pocos pasos el uno del otro."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 16:19",
+   "label": "Lucas 16:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Había un hombre rico, que se vestía de púrpura y de lino fino, y hacía cada día banquete con esplendidez."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Había un hombre rico, que se vestía de púrpura y de lino fino, y hacía cada día banquete con esplendidez."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Dios sabe el nombre del que está sentado a la puerta.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 16:20-21",
+   "label": "Lucas 16:20-21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Había también un mendigo llamado Lázaro, el cual estaba echado á la puerta de él, lleno de llagas,"
+    },
+    {
+     "v": 21,
+     "text": "Y deseando hartarse de las migajas que caían de la mesa del rico; y aun los perros venían y le lamían las llagas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Había también un mendigo llamado Lázaro, el cual estaba echado á la puerta de él, lleno de llagas,"
+    },
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Y deseando hartarse de las migajas que caían de la mesa del rico; y aun los perros venían y le lamían las llagas."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fíjate en un detalle. En la historia, el rico no tiene nombre. El pobre sí. Se llama Lázaro, que quiere decir Dios ayuda. Nadie en esa casa lo veía, pero Dios sabía su nombre."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Todos los días el rico pasaba junto a él para entrar a su casa. Y todos los días lo dejaba ahí, enfermo y con hambre. No le hizo daño. Simplemente no lo vio."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 16:22",
+   "label": "Lucas 16:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Y aconteció que murió el mendigo, y fué llevado por los ángeles al seno de Abraham: y murió también el rico, y fué sepultado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Y aconteció que murió el mendigo, y fué llevado por los ángeles al seno de Abraham: y murió también el rico, y fué sepultado."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los dos murieron. Y en la historia que contó Jesús, todo cambió de lugar. Lázaro fue consolado. El rico quedó en tormento."
+  },
+  {
+   "type": "scripture",
+   "speaker": "richman",
+   "ref": "LUK 16:24",
+   "label": "Lucas 16:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Entonces él, dando voces, dijo: Padre Abraham, ten misericordia de mí, y envía á Lázaro que moje la punta de su dedo en agua, y refresque mi lengua; porque soy atormentado en esta llama."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Entonces él, dando voces, dijo:"
+    },
+    {
+     "v": 24,
+     "speaker": "richman",
+     "text": "Padre Abraham, ten misericordia de mí, y envía á Lázaro que moje la punta de su dedo en agua, y refresque mi lengua; porque soy atormentado en esta llama."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abraham",
+   "ref": "LUK 16:25",
+   "label": "Lucas 16:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Y díjole Abraham: Hijo, acuérdate que recibiste tus bienes en tu vida, y Lázaro también males; mas ahora éste es consolado aquí, y tú atormentado."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Y díjole Abraham:"
+    },
+    {
+     "v": 25,
+     "speaker": "abraham",
+     "text": "Hijo, acuérdate que recibiste tus bienes en tu vida, y Lázaro también males; mas ahora éste es consolado aquí, y tú atormentado."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abraham",
+   "ref": "LUK 16:26",
+   "label": "Lucas 16:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Y además de todo esto, una grande sima está constituída entre nosotros y vosotros, que los que quisieren pasar de aquí á vosotros, no pueden, ni de allá pasar acá."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "abraham",
+     "text": "Y además de todo esto, una grande sima está constituída entre nosotros y vosotros, que los que quisieren pasar de aquí á vosotros, no pueden, ni de allá pasar acá."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Aun ahí, el rico seguía viendo a Lázaro como alguien que podía mandar a hacer mandados. Envía a Lázaro. No había cambiado mucho."
+  },
+  {
+   "type": "scripture",
+   "speaker": "richman",
+   "ref": "LUK 16:27",
+   "label": "Lucas 16:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Y dijo: Ruégote pues, padre, que le envíes á la casa de mi padre;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Y dijo:"
+    },
+    {
+     "v": 27,
+     "speaker": "richman",
+     "text": "Ruégote pues, padre, que le envíes á la casa de mi padre;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "richman",
+   "ref": "LUK 16:28",
+   "label": "Lucas 16:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Porque tengo cinco hermanos; para que les testifique, porque no vengan ellos también á este lugar de tormento."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "richman",
+     "text": "Porque tengo cinco hermanos; para que les testifique, porque no vengan ellos también á este lugar de tormento."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abraham",
+   "ref": "LUK 16:29",
+   "label": "Lucas 16:29",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Y Abraham le dice: A Moisés y á los profetas tienen: óiganlos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Y Abraham le dice:"
+    },
+    {
+     "v": 29,
+     "speaker": "abraham",
+     "text": "A Moisés y á los profetas tienen: óiganlos."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "richman",
+   "ref": "LUK 16:30",
+   "label": "Lucas 16:30",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 30,
+     "text": "El entonces dijo: No, padre Abraham: mas si alguno fuere á ellos de los muertos, se arrepentirán."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "El entonces dijo:"
+    },
+    {
+     "v": 30,
+     "speaker": "richman",
+     "text": "No, padre Abraham: mas si alguno fuere á ellos de los muertos, se arrepentirán."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abraham",
+   "ref": "LUK 16:31",
+   "label": "Lucas 16:31",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 31,
+     "text": "Mas Abraham le dijo: Si no oyen á Moisés y á los profetas, tampoco se persuadirán, si alguno se levantare de los muertos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "Mas Abraham le dijo:"
+    },
+    {
+     "v": 31,
+     "speaker": "abraham",
+     "text": "Si no oyen á Moisés y á los profetas, tampoco se persuadirán, si alguno se levantare de los muertos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tienen a Moisés y a los profetas. Tienen la Palabra de Dios. Si no la escuchan, tampoco escucharían a alguien que volviera de los muertos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús no contó esta historia para asustar. La contó para despertar el corazón mientras todavía hay tiempo. El problema del rico no fue tener dinero. Fue vivir sin ver al que tenía en la puerta."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia nos pregunta a quién no estamos viendo. Al vecino que está solo, a la persona que pide en la esquina, al familiar enfermo que nadie visita. Lázaro está a la puerta de muchas casas todavía."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y si esta noche tú eres Lázaro, si te sientes olvidado, enfermo, ignorado por los que podrían ayudarte, esta historia es para ti también. Dios sabe tu nombre. Él no pasa de largo."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 554,
+ "est_seconds": 308,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 554 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 16:19-31; Abraham's and the rich man's lines are the parable's own (scripture); no telling the listener they are lost or bound for hell; the point kept on seeing the poor."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The poor man named with dignity, not as a pity image; no politics; the sick and lonely named kindly."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

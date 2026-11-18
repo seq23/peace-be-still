@@ -1,0 +1,428 @@
+{
+ "id": "core-054-rachel-leah",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Raquel y Lea",
+ "passage": {
+  "refs": [
+   "GEN 29:9-30"
+  ],
+  "label": "Génesis 29:9-30"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "implied"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "laban",
+   "name": "Labán",
+   "age": "elder",
+   "gender": "m"
+  },
+  {
+   "id": "jacob",
+   "name": "Jacob",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob había huido de su casa después de engañar a su hermano Esaú. Caminó muchos días hasta la tierra de la familia de su madre. Y junto a un pozo, en el campo, conoció a una pastora."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:9-10",
+   "label": "Génesis 29:9-10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Estando aún él hablando con ellos, Rachêl vino con el ganado de su padre, porque ella era la pastora."
+    },
+    {
+     "v": 10,
+     "text": "Y sucedió que, como Jacob vió á Rachêl, hija de Labán hermano de su madre, y á las ovejas de Labán el hermano de su madre, llegóse Jacob, y removió la piedra de sobre la boca del pozo, y abrevó el ganado de Labán hermano de su madre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Estando aún él hablando con ellos, Rachêl vino con el ganado de su padre, porque ella era la pastora."
+    },
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y sucedió que, como Jacob vió á Rachêl, hija de Labán hermano de su madre, y á las ovejas de Labán el hermano de su madre, llegóse Jacob, y removió la piedra de sobre la boca del pozo, y abrevó el ganado de Labán hermano de su madre."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Dios ve a la que nadie mira, y la llama por su nombre.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Era Rachêl, la hija de su tío Labán. Jacob quitó la piedra del pozo y les dio agua a sus ovejas. Y de la emoción, lloró. Había encontrado a su familia."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:13",
+   "label": "Génesis 29:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y así que oyó Labán las nuevas de Jacob, hijo de su hermana, corrió á recibirlo, y abrazólo, y besólo, y trájole á su casa: y él contó á Labán todas estas cosas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y así que oyó Labán las nuevas de Jacob, hijo de su hermana, corrió á recibirlo, y abrazólo, y besólo, y trájole á su casa: y él contó á Labán todas estas cosas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:14",
+   "label": "Génesis 29:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y Labán le dijo: Ciertamente hueso mío y carne mía eres. Y estuvo con él el tiempo de un mes."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y Labán le dijo:"
+    },
+    {
+     "v": 14,
+     "speaker": "laban",
+     "text": "Ciertamente hueso mío y carne mía eres. Y estuvo con él el tiempo de un mes."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:15",
+   "label": "Génesis 29:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Entonces dijo Labán á Jacob: ¿Por ser tú mi hermano, me has de servir de balde? declárame qué será tu salario."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Entonces dijo Labán á Jacob:"
+    },
+    {
+     "v": 15,
+     "speaker": "laban",
+     "text": "¿Por ser tú mi hermano, me has de servir de balde? declárame qué será tu salario."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:16-17",
+   "label": "Génesis 29:16-17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y Labán tenía dos hijas: el nombre de la mayor era Lea, y el nombre de la menor, Rachêl."
+    },
+    {
+     "v": 17,
+     "text": "Y los ojos de Lea eran tiernos, pero Rachêl era de lindo semblante y de hermoso parecer."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y Labán tenía dos hijas: el nombre de la mayor era Lea, y el nombre de la menor, Rachêl."
+    },
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Y los ojos de Lea eran tiernos, pero Rachêl era de lindo semblante y de hermoso parecer."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Labán tenía dos hijas. Lea, la mayor, y Rachêl, la menor. Y la Biblia dice que Jacob se enamoró de Rachêl."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 29:18",
+   "label": "Génesis 29:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y Jacob amó á Rachêl, y dijo: Yo te serviré siete años por Rachêl tu hija menor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y Jacob amó á Rachêl, y dijo:"
+    },
+    {
+     "v": 18,
+     "speaker": "jacob",
+     "text": "Yo te serviré siete años por Rachêl tu hija menor."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:19",
+   "label": "Génesis 29:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y Labán respondió: Mejor es que te la dé á ti, que no que la dé á otro hombre: estáte conmigo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y Labán respondió:"
+    },
+    {
+     "v": 19,
+     "speaker": "laban",
+     "text": "Mejor es que te la dé á ti, que no que la dé á otro hombre: estáte conmigo."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:20",
+   "label": "Génesis 29:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Así sirvió Jacob por Rachêl siete años: y pareciéronle como pocos días, porque la amaba."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Así sirvió Jacob por Rachêl siete años: y pareciéronle como pocos días, porque la amaba."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Siete años, y le parecieron pocos días, porque la amaba. Es una de las frases más tiernas de la Biblia."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero cuando llegó el día de la boda, Labán hizo una trampa. En la oscuridad de la noche, con la novia cubierta con el velo, le dio a Lea en lugar de Rachêl. Y Jacob no se dio cuenta hasta la mañana."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 29:25",
+   "label": "Génesis 29:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Y venida la mañana, he aquí que era Lea: y él dijo á Labán: ¿Qué es esto que me has hecho? ¿no te he servido por Rachêl? ¿por qué, pues, me has engañado?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Y venida la mañana, he aquí que era Lea: y él dijo á Labán:"
+    },
+    {
+     "v": 25,
+     "speaker": "jacob",
+     "text": "¿Qué es esto que me has hecho? ¿no te he servido por Rachêl? ¿por qué, pues, me has engañado?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:26",
+   "label": "Génesis 29:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Y Labán respondió: No se hace así en nuestro lugar, que se dé la menor antes de la mayor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y Labán respondió:"
+    },
+    {
+     "v": 26,
+     "speaker": "laban",
+     "text": "No se hace así en nuestro lugar, que se dé la menor antes de la mayor."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:27",
+   "label": "Génesis 29:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Cumple la semana de ésta, y se te dará también la otra, por el servicio que hicieres conmigo otros siete años."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "laban",
+     "text": "Cumple la semana de ésta, y se te dará también la otra, por el servicio que hicieres conmigo otros siete años."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "¿Por qué me has engañado? Jacob, el que había engañado a su padre y a su hermano, ahora era el engañado. Trabajó otros siete años más por Rachêl."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y en medio de todo esto estaba Lea. Ella no escogió nada de lo que pasó. Su padre la usó en una trampa. Su esposo amaba a otra. Pocas historias de la Biblia son tan honestas sobre el dolor de una mujer que no se siente amada."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero el versículo que sigue dice que Dios vio a Lea. Vio que era menospreciada, y le dio hijos. Y Lea fue poniendo nombres a sus hijos que contaban su historia con Dios. Uno de ellos se llamó Judá, que quiere decir alabanza. Esta vez, dijo, alabaré a Jehová."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "De Judá vino el rey David. Y de la familia de David vino Jesús. La mujer menos amada de la casa llegó a ser parte del plan más grande de Dios."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche te sientes como Lea, invisible, no escogida, menos que otra, recuerda que Dios te ve. Él no te mide como te miden los demás. Y tu historia, con todo su dolor, también puede terminar en alabanza."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 679,
+ "est_seconds": 376,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:31:27",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 29:9-30 (29:31-35 told in words); the wedding-night deception told without the KJV/RV1909's own vv21,23,30 (tag sexual: implied, adult shelf); Leah's pain named as the text names it."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Leah's beauty not mocked; the unloved woman shown with dignity and her praise honoured; would comfort a woman who feels unchosen."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
