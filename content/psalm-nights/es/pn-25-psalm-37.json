@@ -1,0 +1,212 @@
+{
+ "id": "pn-25-psalm-37",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 37: Calla delante del Señor",
+ "main": [
+  "PSA 37:1-11"
+ ],
+ "companions": [
+  "PHI 4:6-7"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nAbre las manos. Deja que tu frente se relaje. [pause 17]\n\nEsta noche leemos la primera parte del Salmo treinta y siete. Empieza con una palabra que algunas noches necesitamos. No te impacientes. No te alteres. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 37:1-11",
+   "label": "Salmos 37:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. NO te impacientes á causa de los malignos, ni tengas envidia de los que hacen iniquidad."
+    },
+    {
+     "v": 2,
+     "text": "Porque como hierba serán presto cortados, y decaerán como verdor de renuevo."
+    },
+    {
+     "v": 3,
+     "text": "Espera en Jehová, y haz bien; vivirás en la tierra, y en verdad serás alimentado."
+    },
+    {
+     "v": 4,
+     "text": "Pon asimismo tu delicia en Jehová, y él te dará las peticiones de tu corazón."
+    },
+    {
+     "v": 5,
+     "text": "Encomienda á Jehová tu camino, y espera en él; y él hará."
+    },
+    {
+     "v": 6,
+     "text": "Y exhibirá tu justicia como la luz, y tus derechos como el medio día."
+    },
+    {
+     "v": 7,
+     "text": "Calla á Jehová, y espera en él: no te alteres con motivo del que prospera en su camino, por el hombre que hace maldades."
+    },
+    {
+     "v": 8,
+     "text": "Déjate de la ira, y depón el enojo: no te excites en manera alguna á hacer lo malo."
+    },
+    {
+     "v": 9,
+     "text": "Porque los malignos serán talados, mas los que esperan en Jehová, ellos heredarán la tierra."
+    },
+    {
+     "v": 10,
+     "text": "Pues de aquí á poco no será el malo: y contemplarás sobre su lugar, y no parecerá."
+    },
+    {
+     "v": 11,
+     "text": "Pero los mansos heredarán la tierra, y se recrearán con abundancia de paz."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "No te impacientes. Algunas noches nos quedamos despiertos molestos por lo que otros hicieron. Gente que hizo mal y parece que se salió con la suya. El salmo dice, no dejes que eso te consuma. [pause 19]\n\nLuego cuatro instrucciones pequeñas. Confía en el Señor. Deléitate en él. Encomienda tu camino. Calla delante de él. [pause 17]\n\nCalla delante del Señor, y espera en él. Ese es todo el trabajo de esta noche. Callar, y esperar. [pause 17]\n\nY los mansos heredarán la tierra. Jesús lo volvió a decir, años después, en un monte. [pause 21]\n\nUn pasaje de Pablo para acompañarlo. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PHI 4:6-7",
+   "label": "Filipenses 4:6-7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Por nada estéis afanosos; sino sean notorias vuestras peticiones delante de Dios en toda oración y ruego, con hacimiento de gracias."
+    },
+    {
+     "v": 7,
+     "text": "Y la paz de Dios, que sobrepuja todo entendimiento, guardará vuestros corazones y vuestros entendimientos en Cristo Jesús."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Por nada estén afanosos. En lugar del afán, oración, con gratitud. Y una paz que guarda el corazón. [pause 19]\n\nAquí está el Salmo treinta y siete otra vez. Cuando oigas calla delante del Señor, deja que tu cuerpo también descanse. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 37:1-11",
+   "label": "Salmos 37:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. NO te impacientes á causa de los malignos, ni tengas envidia de los que hacen iniquidad."
+    },
+    {
+     "v": 2,
+     "text": "Porque como hierba serán presto cortados, y decaerán como verdor de renuevo."
+    },
+    {
+     "v": 3,
+     "text": "Espera en Jehová, y haz bien; vivirás en la tierra, y en verdad serás alimentado."
+    },
+    {
+     "v": 4,
+     "text": "Pon asimismo tu delicia en Jehová, y él te dará las peticiones de tu corazón."
+    },
+    {
+     "v": 5,
+     "text": "Encomienda á Jehová tu camino, y espera en él; y él hará."
+    },
+    {
+     "v": 6,
+     "text": "Y exhibirá tu justicia como la luz, y tus derechos como el medio día."
+    },
+    {
+     "v": 7,
+     "text": "Calla á Jehová, y espera en él: no te alteres con motivo del que prospera en su camino, por el hombre que hace maldades."
+    },
+    {
+     "v": 8,
+     "text": "Déjate de la ira, y depón el enojo: no te excites en manera alguna á hacer lo malo."
+    },
+    {
+     "v": 9,
+     "text": "Porque los malignos serán talados, mas los que esperan en Jehová, ellos heredarán la tierra."
+    },
+    {
+     "v": 10,
+     "text": "Pues de aquí á poco no será el malo: y contemplarás sobre su lugar, y no parecerá."
+    },
+    {
+     "v": 11,
+     "text": "Pero los mansos heredarán la tierra, y se recrearán con abundancia de paz."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ahora deja que las palabras se queden en silencio. [pause 8]\n\nNo tienes que sostenerlas. Mañana van a seguir ahí. [pause 10]\n\nSuelta los hombros. Abre las manos. Deja que la cama cargue tu peso. [pause 12]\n\nSi vuelve una preocupación, puedes entregarla otra vez. Las veces que haga falta. [pause 12]\n\nSiente la calma del cuarto. Los ruidos pequeños. La oscuridad. Aquí no se te pide nada. [pause 20]\n\nLa noche es larga y tranquila, y no estás solo en ella. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 643,
+ "rest_part": "rest1",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 816,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

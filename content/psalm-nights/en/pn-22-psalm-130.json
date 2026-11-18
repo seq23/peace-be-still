@@ -1,0 +1,186 @@
+{
+ "id": "pn-22-psalm-130",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 130: Waiting for the Morning",
+ "main": [
+  "PSA 130:1-8"
+ ],
+ "companions": [
+  "LAM 3:25-26"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 22]\n\nLet the dark be what it is. You do not have to fill it. [pause 25]\n\nTonight's psalm is Psalm 130. It begins out of the depths. It is a psalm for the low places, and for long nights of waiting for morning. [pause 24]\n\nWe will read it twice. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 130:1-8",
+   "label": "Psalm 130:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees. Out of the depths have I cried unto thee, O LORD."
+    },
+    {
+     "v": 2,
+     "text": "Lord, hear my voice: let thine ears be attentive to the voice of my supplications."
+    },
+    {
+     "v": 3,
+     "text": "If thou, LORD, shouldest mark iniquities, O Lord, who shall stand?"
+    },
+    {
+     "v": 4,
+     "text": "But there is forgiveness with thee, that thou mayest be feared."
+    },
+    {
+     "v": 5,
+     "text": "I wait for the LORD, my soul doth wait, and in his word do I hope."
+    },
+    {
+     "v": 6,
+     "text": "My soul waiteth for the Lord more than they that watch for the morning: I say, more than they that watch for the morning."
+    },
+    {
+     "v": 7,
+     "text": "Let Israel hope in the LORD: for with the LORD there is mercy, and with him is plenteous redemption."
+    },
+    {
+     "v": 8,
+     "text": "And he shall redeem Israel from all his iniquities."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Out of the depths. The psalm does not wait until things are better to pray. It prays from the bottom. [pause 25]\n\nIf thou shouldest mark iniquities, who shall stand? If God kept a record of every wrong, no one could stand. But there is forgiveness with him. [pause 25]\n\nThen the most beautiful line. Waiting for the Lord, more than the watchmen wait for morning. The night watchman on the city wall, tired, cold, looking east for the first gray light. [pause 25]\n\nThe psalm says it twice. More than the watchmen. Like someone who knows morning is coming, and is waiting for it. [pause 25]\n\nA companion passage from Lamentations. [pause 23]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "LAM 3:25-26",
+   "label": "Lamentations 3:25-26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "The LORD is good unto them that wait for him, to the soul that seeketh him."
+    },
+    {
+     "v": 26,
+     "text": "It is good that a man should both hope and quietly wait for the salvation of the LORD."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "The Lord is good to them that wait for him. It is good to hope, and to wait quietly. Quietly. You can wait quietly tonight. [pause 25]\n\nHere is Psalm 130 again. Be the watchman, waiting for the light. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 130:1-8",
+   "label": "Psalm 130:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees. Out of the depths have I cried unto thee, O LORD."
+    },
+    {
+     "v": 2,
+     "text": "Lord, hear my voice: let thine ears be attentive to the voice of my supplications."
+    },
+    {
+     "v": 3,
+     "text": "If thou, LORD, shouldest mark iniquities, O Lord, who shall stand?"
+    },
+    {
+     "v": 4,
+     "text": "But there is forgiveness with thee, that thou mayest be feared."
+    },
+    {
+     "v": 5,
+     "text": "I wait for the LORD, my soul doth wait, and in his word do I hope."
+    },
+    {
+     "v": 6,
+     "text": "My soul waiteth for the Lord more than they that watch for the morning: I say, more than they that watch for the morning."
+    },
+    {
+     "v": 7,
+     "text": "Let Israel hope in the LORD: for with the LORD there is mercy, and with him is plenteous redemption."
+    },
+    {
+     "v": 8,
+     "text": "And he shall redeem Israel from all his iniquities."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Let the reading end here. [pause 8]\n\nTurn a little, if you want to, until your body finds the place it likes. [pause 10]\n\nThere is nothing you need to remember. Nothing you need to say back. [pause 12]\n\nIf someone you love is far away tonight, you can leave them in God's hands too. [pause 15]\n\nBreathe out slowly. Then again. [pause 20]\n\nThe night is held. You are held. [pause 20]\n\nSleep well. [pause 45]"
+  }
+ ],
+ "words": 528,
+ "rest_part": "rest4",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 815,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only; Jesus's and God's words given indirectly outside scripture (light of the world, fear not). Each night keeps its psalm's point (God gives his beloved sleep, waiting for morning, confession and the hiding place, mercy to the heavens, fret not, out of the pit, tears in his bottle, wings in the cave, the Lord good to all, into thine hand). Psalm 127's 'giveth sleep' framed as God's gift, not a promise to the listener; no outcome promises in the new rest."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

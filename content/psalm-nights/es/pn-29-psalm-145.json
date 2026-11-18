@@ -1,0 +1,232 @@
+{
+ "id": "pn-29-psalm-145",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 145: Bueno es el Señor para con todos",
+ "main": [
+  "PSA 145:8-21"
+ ],
+ "companions": [
+  "PSA 4:8"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nDeja tu cuerpo quieto. Deja que tu cara se suavice. [pause 17]\n\nEsta noche leemos la segunda mitad del Salmo ciento cuarenta y cinco. Es un salmo de alabanza, y está lleno de la palabra todos. Todas sus obras. Todos los que caen. Todos los que lo invocan. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 145:8-21",
+   "label": "Salmos 145:8-21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Clemente y misericordioso es Jehová, lento para la ira, y grande en misericordia."
+    },
+    {
+     "v": 9,
+     "text": "Bueno es Jehová para con todos; y sus misericordias sobre todas sus obras."
+    },
+    {
+     "v": 10,
+     "text": "Alábente, oh Jehová, todas tus obras; y tus santos te bendigan."
+    },
+    {
+     "v": 11,
+     "text": "La gloria de tu reino digan, y hablen de tu fortaleza;"
+    },
+    {
+     "v": 12,
+     "text": "Para notificar á los hijos de los hombres sus valentías, y la gloria de la magnificencia de su reino."
+    },
+    {
+     "v": 13,
+     "text": "Tu reino es reino de todos los siglos, y tu señorío en toda generación y generación."
+    },
+    {
+     "v": 14,
+     "text": "Sostiene Jehová á todos los que caen, y levanta á todos los oprimidos."
+    },
+    {
+     "v": 15,
+     "text": "Los ojos de todos esperan en ti, y tú les das su comida en su tiempo."
+    },
+    {
+     "v": 16,
+     "text": "Abres tu mano, y colmas de bendición á todo viviente."
+    },
+    {
+     "v": 17,
+     "text": "Justo es Jehová en todos sus caminos, y misericordioso en todas sus obras."
+    },
+    {
+     "v": 18,
+     "text": "Cercano está Jehová á todos los que le invocan, á todos los que le invocan de veras."
+    },
+    {
+     "v": 19,
+     "text": "Cumplirá el deseo de los que le temen; oirá asimismo el clamor de ellos, y los salvará."
+    },
+    {
+     "v": 20,
+     "text": "Jehová guarda á todos los que le aman; empero destruirá á todos los impíos."
+    },
+    {
+     "v": 21,
+     "text": "La alabanza de Jehová hablará mi boca; y bendiga toda carne su santo nombre por siglo y para siempre."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Clemente y misericordioso es el Señor. Estas palabras vienen del tiempo de Moisés, cuando Dios pasó delante de él y se describió a sí mismo. Lento para la ira. Grande en misericordia. [pause 17]\n\nÉl sostiene a todos los que caen. Levanta a todos los que están agobiados. Si hoy te caíste, si esta noche estás doblado por el peso, este versículo habla de ti. [pause 19]\n\nLos ojos de todos esperan en él. Como una familia esperando la cena, toda criatura mira hacia él. [pause 17]\n\nCerca está de todos los que lo invocan. Todos. Nadie está demasiado lejos. [pause 21]\n\nUn versículo para acompañarlo. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "En paz. Acostarse. Dormir. Seguro solo en él. [pause 17]\n\nAquí está el Salmo ciento cuarenta y cinco otra vez. Escucha la palabra todos. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 145:8-21",
+   "label": "Salmos 145:8-21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Clemente y misericordioso es Jehová, lento para la ira, y grande en misericordia."
+    },
+    {
+     "v": 9,
+     "text": "Bueno es Jehová para con todos; y sus misericordias sobre todas sus obras."
+    },
+    {
+     "v": 10,
+     "text": "Alábente, oh Jehová, todas tus obras; y tus santos te bendigan."
+    },
+    {
+     "v": 11,
+     "text": "La gloria de tu reino digan, y hablen de tu fortaleza;"
+    },
+    {
+     "v": 12,
+     "text": "Para notificar á los hijos de los hombres sus valentías, y la gloria de la magnificencia de su reino."
+    },
+    {
+     "v": 13,
+     "text": "Tu reino es reino de todos los siglos, y tu señorío en toda generación y generación."
+    },
+    {
+     "v": 14,
+     "text": "Sostiene Jehová á todos los que caen, y levanta á todos los oprimidos."
+    },
+    {
+     "v": 15,
+     "text": "Los ojos de todos esperan en ti, y tú les das su comida en su tiempo."
+    },
+    {
+     "v": 16,
+     "text": "Abres tu mano, y colmas de bendición á todo viviente."
+    },
+    {
+     "v": 17,
+     "text": "Justo es Jehová en todos sus caminos, y misericordioso en todas sus obras."
+    },
+    {
+     "v": 18,
+     "text": "Cercano está Jehová á todos los que le invocan, á todos los que le invocan de veras."
+    },
+    {
+     "v": 19,
+     "text": "Cumplirá el deseo de los que le temen; oirá asimismo el clamor de ellos, y los salvará."
+    },
+    {
+     "v": 20,
+     "text": "Jehová guarda á todos los que le aman; empero destruirá á todos los impíos."
+    },
+    {
+     "v": 21,
+     "text": "La alabanza de Jehová hablará mi boca; y bendiga toda carne su santo nombre por siglo y para siempre."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Eso es todo por esta noche. [pause 8]\n\nDeja que la calma llegue como la marea. Despacio. Sin prisa. [pause 12]\n\nTu trabajo de hoy ya terminó. Lo que falta puede esperar a que salga el sol. [pause 12]\n\nSi todavía te quedas despierto un rato, está bien. Quédate quieto y deja que las palabras que oíste se queden cerca. [pause 15]\n\nÉl sabe tu nombre. Él conoce esta noche. [pause 20]\n\nDescansa. [pause 45]"
+  }
+ ],
+ "words": 664,
+ "rest_part": "rest5",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 815,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

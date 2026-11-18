@@ -1,0 +1,162 @@
+{
+ "id": "pn-26-psalm-40",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 40: He Inclined unto Me",
+ "main": [
+  "PSA 40:1-5"
+ ],
+ "companions": [
+  "ISA 43:1-2"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 16]\n\nLet the bed hold you. Let the day be over. [pause 19]\n\nTonight we read the first part of Psalm 40. It is about waiting a long time, and then being lifted out of a pit and set on a rock. [pause 18]\n\nWe will read it twice. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 40:1-5",
+   "label": "Psalm 40:1-5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, A Psalm of David. I waited patiently for the LORD; and he inclined unto me, and heard my cry."
+    },
+    {
+     "v": 2,
+     "text": "He brought me up also out of an horrible pit, out of the miry clay, and set my feet upon a rock, and established my goings."
+    },
+    {
+     "v": 3,
+     "text": "And he hath put a new song in my mouth, even praise unto our God: many shall see it, and fear, and shall trust in the LORD."
+    },
+    {
+     "v": 4,
+     "text": "Blessed is that man that maketh the LORD his trust, and respecteth not the proud, nor such as turn aside to lies."
+    },
+    {
+     "v": 5,
+     "text": "Many, O LORD my God, are thy wonderful works which thou hast done, and thy thoughts which are to us-ward: they cannot be reckoned up in order unto thee: if I would declare and speak of them, they are more than can be numbered."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "I waited patiently for the Lord. In the old Hebrew, I waited, waited. Waiting on top of waiting. [pause 19]\n\nUp from a horrible pit, up from the miry clay. Mud that pulls your feet down. Some seasons are like that. Every step is hard. [pause 19]\n\nAnd then a rock under the feet. And a new song in the mouth. [pause 19]\n\nMany are his wonderful works. More than can be counted. [pause 23]\n\nA companion passage from Isaiah. [pause 17]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 43:1-2",
+   "label": "Isaiah 43:1-2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine."
+    },
+    {
+     "v": 2,
+     "text": "When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Fear not. Called by name. Through the waters, God with you. Not around the waters. Through them, together. [pause 21]\n\nHere is Psalm 40 again. Think of solid rock under your feet. [pause 23]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 40:1-5",
+   "label": "Psalm 40:1-5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, A Psalm of David. I waited patiently for the LORD; and he inclined unto me, and heard my cry."
+    },
+    {
+     "v": 2,
+     "text": "He brought me up also out of an horrible pit, out of the miry clay, and set my feet upon a rock, and established my goings."
+    },
+    {
+     "v": 3,
+     "text": "And he hath put a new song in my mouth, even praise unto our God: many shall see it, and fear, and shall trust in the LORD."
+    },
+    {
+     "v": 4,
+     "text": "Blessed is that man that maketh the LORD his trust, and respecteth not the proud, nor such as turn aside to lies."
+    },
+    {
+     "v": 5,
+     "text": "Many, O LORD my God, are thy wonderful works which thou hast done, and thy thoughts which are to us-ward: they cannot be reckoned up in order unto thee: if I would declare and speak of them, they are more than can be numbered."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is enough for tonight. [pause 8]\n\nLet your breathing slow down on its own. In, and out. Nothing to fix, nothing to finish. [pause 12]\n\nWhatever today was, it is over now. Tomorrow has not come yet. This is only the night, and the night belongs to God. [pause 12]\n\nLay down what you carried. One thing, and then another. [pause 15]\n\nStay here as long as you like. [pause 15]\n\nIf your mind wanders, let it wander back. There is no wrong way to rest. [pause 20]\n\nThe Lord is near. Nearer than your breath. [pause 20]\n\nGood night. [pause 45]"
+  }
+ ],
+ "words": 594,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 812,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Stored KJV pasted by code; short echoes only; Jesus's and God's words given indirectly outside scripture (light of the world, fear not). Each night keeps its psalm's point (God gives his beloved sleep, waiting for morning, confession and the hiding place, mercy to the heavens, fret not, out of the pit, tears in his bottle, wings in the cave, the Lord good to all, into thine hand). Psalm 127's 'giveth sleep' framed as God's gift, not a promise to the listener; no outcome promises in the new rest."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

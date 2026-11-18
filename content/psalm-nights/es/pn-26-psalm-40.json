@@ -1,0 +1,164 @@
+{
+ "id": "pn-26-psalm-40",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 40: Se inclinó a mí",
+ "main": [
+  "PSA 40:1-5"
+ ],
+ "companions": [
+  "ISA 43:1-2"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 23]\n\nDeja que la cama te sostenga. Que el día termine. [pause 25]\n\nEsta noche leemos la primera parte del Salmo cuarenta. Habla de esperar mucho tiempo, y luego ser sacado de un pozo y puesto sobre una roca. [pause 25]\n\nLo vamos a leer dos veces. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 40:1-5",
+   "label": "Salmos 40:1-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: Salmo de David. RESIGNADAMENTE esperé á Jehová, é inclinóse á mí, y oyó mi clamor."
+    },
+    {
+     "v": 2,
+     "text": "E hízome sacar de un lago de miseria, del lodo cenagoso; y puso mis pies sobre peña, y enderezó mis pasos."
+    },
+    {
+     "v": 3,
+     "text": "Puso luego en mi boca canción nueva, alabanza á nuestro Dios. Verán esto muchos, y temerán, y esperarán en Jehová."
+    },
+    {
+     "v": 4,
+     "text": "Bienaventurado el hombre que puso á Jehová por su confianza, y no mira á los soberbios, ni á los que declinan á la mentira."
+    },
+    {
+     "v": 5,
+     "text": "Aumentado has tú, oh Jehová Dios mío, tus maravillas; y tus pensamientos para con nosotros, no te los podremos contar: si yo anunciare y hablare de ellos, no pueden ser enarrados."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Resignadamente esperé. En el hebreo antiguo dice esperando, esperé. Espera sobre espera. [pause 25]\n\nMe sacó del pozo, del lodo cenagoso. Un lodo que te jala los pies hacia abajo. Algunas temporadas son así. Cada paso cuesta. [pause 25]\n\nY luego, una roca bajo los pies. Y un cántico nuevo en la boca. [pause 25]\n\nMuchas son sus maravillas. Más de las que se pueden contar. [pause 25]\n\nUn pasaje de Isaías para acompañarlo. [pause 24]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 43:1-2",
+   "label": "Isaías 43:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y AHORA, así dice Jehová Criador tuyo, oh Jacob, y Formador tuyo, oh Israel: No temas, porque yo te redimí; te puse nombre, mío eres tú."
+    },
+    {
+     "v": 2,
+     "text": "Cuando pasares por las aguas, yo seré contigo; y por los ríos, no te anegarán. Cuando pasares por el fuego, no te quemarás, ni la llama arderá en ti."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "No temas, dice Dios. Él te llamó por tu nombre. Cuando pases por las aguas, Dios contigo. No alrededor de las aguas. A través de ellas, juntos. [pause 25]\n\nAquí está el Salmo cuarenta otra vez. Piensa en roca firme bajo tus pies. [pause 25]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 40:1-5",
+   "label": "Salmos 40:1-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: Salmo de David. RESIGNADAMENTE esperé á Jehová, é inclinóse á mí, y oyó mi clamor."
+    },
+    {
+     "v": 2,
+     "text": "E hízome sacar de un lago de miseria, del lodo cenagoso; y puso mis pies sobre peña, y enderezó mis pasos."
+    },
+    {
+     "v": 3,
+     "text": "Puso luego en mi boca canción nueva, alabanza á nuestro Dios. Verán esto muchos, y temerán, y esperarán en Jehová."
+    },
+    {
+     "v": 4,
+     "text": "Bienaventurado el hombre que puso á Jehová por su confianza, y no mira á los soberbios, ni á los que declinan á la mentira."
+    },
+    {
+     "v": 5,
+     "text": "Aumentado has tú, oh Jehová Dios mío, tus maravillas; y tus pensamientos para con nosotros, no te los podremos contar: si yo anunciare y hablare de ellos, no pueden ser enarrados."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ya es suficiente por esta noche. [pause 8]\n\nDeja que tu respiración se haga lenta sola. Entra el aire, sale el aire. No hay nada que arreglar ni nada que terminar. [pause 12]\n\nLo que haya sido el día de hoy, ya pasó. Mañana todavía no llega. Esto es solo la noche, y la noche también es de Dios. [pause 12]\n\nDeja lo que cargaste. Una cosa, y luego otra. [pause 15]\n\nSi tu mente se va a otra parte, déjala volver despacio. No hay una manera equivocada de descansar. [pause 20]\n\nEl Señor está cerca. Más cerca que tu respiración. [pause 20]\n\nBuenas noches. [pause 45]"
+  }
+ ],
+ "words": 534,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 814,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:46:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "RV1909 pegada por código; ecos cortos; las palabras de Jesús y de Dios en estilo indirecto fuera de la escritura. Cada noche fiel a su salmo; 'a su amado dará sueño' como regalo de Dios, no promesa al oyente."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
