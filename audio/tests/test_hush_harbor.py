@@ -152,11 +152,49 @@ class Audio(unittest.TestCase):
         lens = sorted(round(len(r) / H.RATE, 2) for r in runs)
         self.assertEqual(lens, sorted([H.LEAD, 3.0, H.GAP, H.TAIL]))
 
+    def test_tempo_slows_speech_never_pauses(self):
+        import numpy as np
+        sec = np.full(H.RATE * 60, 0.3, dtype=np.float32)                 # one minute of "speech"
+        self.assertEqual(H.tempo_factor([sec], 100), 1.0)                  # already slow enough
+        f = H.tempo_factor([sec, 3.0, sec], 300)                           # 300 words in ~2.1 min: too fast
+        self.assertTrue(H.MIN_TEMPO <= f < 1.0)
+        self.assertEqual(H.tempo_factor([sec], 10000), H.MIN_TEMPO)        # never slower than the floor
+
     def test_pitch_of_a_tone(self):
         import numpy as np
         t = np.arange(H.RATE * 2) / H.RATE
         self.assertAlmostEqual(H.median_f0(0.3 * np.sin(2 * np.pi * 150 * t)), 150, delta=3)
         self.assertIsNone(H.median_f0(np.zeros(H.RATE)))
+
+
+class Vetting(unittest.TestCase):
+    def test_verdict(self):
+        band = [95, 240]
+        self.assertTrue(H.vet_verdict(0.5, [0.1, 0.3], 140, band))
+        self.assertFalse(H.vet_verdict(0.2, [0.1, 0.3], 140, band))     # an auditioned other voice is closer
+        self.assertFalse(H.vet_verdict(0.5, [0.1], 300, band))          # pitch out of the band
+        self.assertFalse(H.vet_verdict(0.5, [], 140, band))             # nothing to compare against
+
+    def test_unvetted_models_never_join_and_the_first_always_does(self):
+        import tempfile
+        old = H.VETTING
+        try:
+            with tempfile.TemporaryDirectory() as d:
+                H.VETTING = Path(d) / "v.json"
+                self.assertEqual(H.vetted_models(), [H.MODELS[0]])
+                H.VETTING.write_text(json.dumps({H.MODELS[1]: {"passed": True}, H.MODELS[2]: {"passed": False}}))
+                self.assertEqual(H.vetted_models(), [H.MODELS[0], H.MODELS[1]])
+        finally:
+            H.VETTING = old
+
+    def test_voiceprint_tells_two_tones_apart(self):
+        import numpy as np
+        t = np.arange(16000 * 2) / 16000
+        a, b = (0.3 * np.sin(2 * np.pi * f * t) + 0.01 * np.random.default_rng(1).standard_normal(len(t)) for f in (150, 900))
+        pa, pb = H.voiceprint(a), H.voiceprint(b)
+        pool = np.array([pa, pb, H.voiceprint(a[::-1].copy())])
+        mu, sd = pool.mean(0), pool.std(0) + 1e-9
+        self.assertGreater(H.similarity(pa, H.voiceprint(a[::-1].copy()), mu, sd), H.similarity(pa, pb, mu, sd))
 
 
 class Quota(unittest.TestCase):

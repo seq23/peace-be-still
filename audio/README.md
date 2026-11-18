@@ -28,7 +28,7 @@ checks, shelved, status, voice).
   code. Checks: word accuracy and per-voice pitch band per call (a miss renders again), then the fill's
   file checks (`qa.py`, -22 LUFS). Shelf `gdrive:Mac-Shelf/peace-be-still/stories/hush-harbor/en/`,
   a manifest row with the model used. The free key gives 10 calls a day per TTS model; the models in
-  `voices.json` are tried in turn, then `QUOTA_OUT` (a note, exit 0) and the next run resumes from the
+  `voices.json` are tried in turn (a model other than the first only after it passes vetting: `hush_harbor.py --vet MODEL` scores its four voices against her picked clips, logged in `hush-harbor/model-vetting.json`; one story never mixes models), then `QUOTA_OUT` (a note, exit 0) and the next run resumes from the
   calls cached in `~/.peace-be-still/hh-work/`. Output `OUTPUT <n> Hush Harbor stories shelved` and
   `hush harbor: X of Y stories voiced, N failed`. Mi Refugio stays on the Spanish Kokoro blend.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name

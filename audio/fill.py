@@ -237,12 +237,12 @@ def render(item: dict, pron: dict, wav: Path, speed: float) -> None:
         raise RuntimeError(f"render failed: {r.stderr.strip()[-300:]}")
 
 
-def encode(wav: Path, out: Path, level: str) -> None:
-    """Gain to the level's target, a peak limiter under its true-peak ceiling, AAC-LC mono 48 kbps."""
+def encode(wav: Path, out: Path, level: str, margin_db: float = 1.5) -> None:
+    """Gain to the level's target, a peak limiter `margin_db` under its true-peak ceiling, AAC-LC mono 48 kbps."""
     import qa
     target, tp = LEVEL_TARGET[level]
     gain = round(target - qa.loudness(wav)["lufs"], 2)
-    limit = round(10 ** ((tp - 1.5) / 20), 4)
+    limit = round(10 ** ((tp - margin_db) / 20), 4)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af",
                     f"volume={gain}dB,alimiter=limit={limit}:attack=5:release=50:level=false",
                     "-ac", "1", "-ar", "24000", "-c:a", "aac_at", "-b:a", "48k", "-movflags", "+faststart", str(out)],

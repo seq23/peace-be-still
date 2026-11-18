@@ -1,5 +1,5 @@
 {
-  "about": "Hush Harbor voices, locked by the owner 18 Nov 2026 (grandmother = 1, elder = 2, young woman 1, young man = 2). Engine Gemini TTS on the free AI Studio key (vault GEMINI_API_KEY, no-billing project). Style lines copied exactly from voice-samples/18_hush_gemini.py. f0_hz is the pitch band a rendered segment must sit in (median of voiced frames), set around the median measured on her picked samples 18 Nov 2026 (sample_f0_hz; about x0.7 to x1.5, wide enough for a story's range, narrow enough to catch a swapped or drifted voice); a segment outside it is rendered again. models: tried in order, each has its own free daily quota (10 calls a day each, 18 Nov 2026) and the same prebuilt voices; the first is the one her picks were made on. gemini-2.5-pro-preview-tts has no free quota (limit 0) and is left out.",
+  "about": "Hush Harbor voices, locked by the owner 18 Nov 2026 (grandmother = 1, elder = 2, young woman 1, young man = 2). Engine Gemini TTS on the free AI Studio key (vault GEMINI_API_KEY, no-billing project). Style lines copied exactly from voice-samples/18_hush_gemini.py. f0_hz is the pitch band a rendered segment must sit in (median of voiced frames), set around the median measured on her picked samples 18 Nov 2026 (sample_f0_hz; about x0.7 to x1.6; young_man widened to 260 Hz after Umbriel read an urgent line at 235 Hz on 18 Nov, wide enough for a story's range, narrow enough to catch a swapped or drifted voice); a segment outside it is rendered again. models: tried in order, each has its own free daily quota (10 calls a day each, 18 Nov 2026) and the same prebuilt voices; the first is the one her picks were made on. gemini-2.5-pro-preview-tts has no free quota (limit 0) and is left out.",
   "models": [
     "gemini-2.5-flash-preview-tts",
     "gemini-3.1-flash-tts-preview",
@@ -7,7 +7,7 @@
     "gemini-3.8-flash-lite-tts"
   ],
   "prompt": "Say this in the voice of {style}: {text}",
-  "prompt_multi": "TTS the following story told by {names}. {who} Read every line exactly as written, nothing added.\n\n{lines}",
+  "prompt_multi": "TTS the following story told by {names}. {who} Read it slowly, at a gentle bedtime pace, with a short rest between lines. Read every line exactly as written, nothing added.\n\n{lines}",
   "roles": {
     "grandmother": {
       "voice": "Gacrux",
@@ -15,7 +15,7 @@
       "style": "an elderly Black grandmother from the American South, in her seventies, telling a Bible story to her grandchildren on the porch after dark. Warm, unhurried, a little gravel and a smile in her voice, Black church cadence, never theatrical",
       "f0_hz": [
         95,
-        230
+        240
       ],
       "sample_f0_hz": 135
     },
@@ -25,7 +25,7 @@
       "style": "an older Black deacon from a Southern Baptist church, in his sixties, deep and steady, the cadence of a preacher reading scripture from the pulpit, warm, unhurried, not shouting",
       "f0_hz": [
         65,
-        140
+        150
       ],
       "sample_f0_hz": 90
     },
@@ -35,7 +35,7 @@
       "style": "a young Black American woman in her twenties, soft and sincere, from Atlanta, speaking these Bible words with quiet conviction, natural, not performed",
       "f0_hz": [
         120,
-        270
+        280
       ],
       "sample_f0_hz": 163
     },
@@ -45,9 +45,50 @@
       "style": "a young Black American man in his twenties, from Memphis, urgent but natural, not shouting",
       "f0_hz": [
         105,
-        230
+        260
       ],
       "sample_f0_hz": 163
+    }
+  },
+  "vetting": {
+    "about": "Before a model other than the first joins the rotation it renders these four lines exactly as the owner's picked samples were made (voice-samples/18_hush_gemini.py: prompt 'Say this in the voice of {desc}: {text}'). Each must sound like the picked clip: its voice print (MFCC mean and spread, z-scored over the reference clips) must be closer to the picked clip than any of the other voices auditioned for that role (same text, same model), and its median pitch must sit in the role's band. Scores are logged in model-vetting.json. Reference clips live on the Mac in ~/.peace-be-still/hh-reference/ (audio never goes in git).",
+    "prompt": "Say this in the voice of {desc}: {text}",
+    "roles": {
+      "grandmother": {
+        "clip": "grandmother-1",
+        "impostors": [
+          "grandmother-2",
+          "grandmother-3"
+        ],
+        "desc": "an elderly Black grandmother from the American South, in her seventies, telling a Bible story to her grandchildren on the porch after dark. Warm, unhurried, a little gravel and a smile in her voice, Black church cadence, never theatrical",
+        "text": "Church, it had been a long day by the Sea of Galilee. So many people came to hear Jesus that he had to teach them sitting in a boat. Now Galilee sits low, with hills all around it, and the wind can come down off those hills quick. That night it did."
+      },
+      "elder": {
+        "clip": "elder-2",
+        "impostors": [
+          "elder-1",
+          "elder-3"
+        ],
+        "desc": "an older Black deacon from a Southern Baptist church, in his sixties, deep and steady, the cadence of a preacher reading scripture from the pulpit, warm, unhurried, not shouting",
+        "text": "And he arose, and rebuked the wind, and said unto the sea, Peace, be still. And the wind ceased, and there was a great calm. Mm. Y'all hear that? A great calm."
+      },
+      "young_woman": {
+        "clip": "youngwoman-1",
+        "impostors": [
+          "youngwoman-2",
+          "youngwoman-3"
+        ],
+        "desc": "a young Black American woman in her twenties, soft and sincere, from Atlanta, speaking these Bible words with quiet conviction, natural, not performed",
+        "text": "Intreat me not to leave thee, or to return from following after thee: for whither thou goest, I will go; and where thou lodgest, I will lodge: thy people shall be my people, and thy God my God."
+      },
+      "young_man": {
+        "clip": "youngman-2",
+        "impostors": [
+          "youngman-1"
+        ],
+        "desc": "a young Black American man in his twenties, from Memphis, a fisherman scared in a storm, urgent but natural, not shouting",
+        "text": "Master, carest thou not that we perish? We bailed and we pulled and the boat kept filling up. And he was sleeping."
+      }
     }
   }
 }

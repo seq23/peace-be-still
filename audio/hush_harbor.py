@@ -69,9 +69,15 @@ MAX_TRIES = 3        # renders per call before the story is a FAILED row
 PACE_S = float(os.environ.get("PBS_HH_PACE_S", "7"))
 DAILY_CAP = int(os.environ.get("PBS_HH_DAILY_CAP", "10"))   # per model; the free tier's own limit
 CALL_BAR = 0.95
-PITCH_MIN_S = 1.5    # turns shorter than this are too short for a pitch reading
+PITCH_MIN_S = 1.5
+TARGET_WPM = 130.0   # the whole file; Gemini reads faster than a bedtime story wants (152 wpm on 18 Nov)
+MIN_TEMPO = 0.85    # turns shorter than this are too short for a pitch reading
 PAUSE = re.compile(r"\[PAUSE (\d+(?:\.\d+)?)s[^\]]*\]")
 MEN = {"elder", "young_man"}
+
+
+class ModelOut(Exception):
+    """The model a story started on is out for today: the story waits (its calls stay cached)."""
 
 
 class NamedStop(fill.NamedStop):
@@ -336,6 +342,29 @@ def join(parts: list, rate: int = RATE):
     return np.concatenate(out)
 
 
+def tempo_factor(parts: list, words: int, target_wpm: float = TARGET_WPM, rate: int = RATE) -> float:
+    """How much to slow the speech (1.0 = not at all, never below MIN_TEMPO) so the whole file,
+    pauses and gaps included, is at most target_wpm. Pauses are never stretched. Pure."""
+    speech = sum(len(trim(p, rate)) / rate for p in parts if not isinstance(p, float))
+    quiet = sum(p for p in parts if isinstance(p, float))
+    quiet += LEAD + TAIL + GAP * max(0, sum(not isinstance(p, float) for p in parts) - 1)
+    need = words / target_wpm * 60 - quiet
+    if speech <= 0 or need <= speech:
+        return 1.0
+    return round(max(MIN_TEMPO, speech / need), 3)
+
+
+def slow(x, factor: float, work: Path):
+    """Speech slowed by ffmpeg atempo (pitch kept)."""
+    a, b = work / "slow-in.wav", work / "slow-out.wav"
+    write_wav(a, x)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(a), "-af", f"atempo={factor}", str(b)], check=True, timeout=600)
+    y = read_wav(b)
+    a.unlink()
+    b.unlink()
+    return y
+
+
 def classify_429(body: str) -> tuple[str, float]:
     """("day" | "minute", seconds to wait) from a Gemini 429 body. Unknown shapes count as minute."""
     wait = 30.0
@@ -389,8 +418,11 @@ def usable_models(now: dt.datetime) -> list[str]:
     """The models that may be called now, in ladder order: not parked by a per-day 429 and under
     the daily cap."""
     st = _state()["models"]
+    vetted = vetted_models()
     out = []
     for m in MODELS:
+        if m not in vetted:
+            continue
         back = st.get(m, {}).get("back_at")
         if back and dt.datetime.fromisoformat(back) > now:
             continue
@@ -398,6 +430,19 @@ def usable_models(now: dt.datetime) -> list[str]:
             continue
         out.append(m)
     return out
+
+
+VETTING = AUDIO / "hush-harbor" / "model-vetting.json"
+REFERENCE = Path(os.environ.get("PBS_HH_REFERENCE", fill.HOME / "hh-reference"))
+
+
+def vetted_models() -> list[str]:
+    """The first model (the owner's picks were made on it) and every model whose vetting passed."""
+    try:
+        v = json.loads(VETTING.read_text("utf-8"))
+    except Exception:
+        v = {}
+    return [MODELS[0]] + [m for m in MODELS[1:] if (v.get(m) or {}).get("passed") is True]
 
 
 def next_back(now: dt.datetime) -> str:
@@ -421,7 +466,7 @@ def to_wav(data: bytes, mime: str, path: Path) -> None:
     src.unlink()
 
 
-def gemini(body: dict, path: Path) -> str:
+def gemini(body: dict, path: Path, prefer: str | None = None) -> str:
     """One TTS call on the first usable model; the audio lands at `path` (24 kHz wav). Returns the
     model used. Paced; a per-minute 429 waits; a per-day 429 parks the model and tries the next."""
     key = os.environ.get("GEMINI_API_KEY")
@@ -435,7 +480,9 @@ def gemini(body: dict, path: Path) -> str:
         if not models:
             raise NamedStop("QUOTA_OUT", f"every free Gemini TTS model's daily quota is used up ({', '.join(MODELS)}); "
                             f"rendered calls are kept and the first run after {next_back(now)} resumes", note=True)
-        model = models[0]
+        if prefer and prefer not in models:
+            raise ModelOut(prefer)
+        model = prefer or models[0]   # never two models inside one story
         wait = PACE_S - (time.monotonic() - _last_call[0])
         if wait > 0:
             time.sleep(wait)
@@ -526,7 +573,7 @@ def check_call(call: dict, path: Path) -> tuple[list[str], list | None]:
     return problems, None
 
 
-def render_call(call: dict, path: Path) -> tuple[list[str], dict]:
+def render_call(call: dict, path: Path, prefer: str | None = None) -> tuple[list[str], dict]:
     """Render until the call passes (or MAX_TRIES); keeps the passing wav at `path` and a `.ok`
     with its model and cut, so a resumed run trusts it. Returns (problems, info)."""
     ok = path.with_suffix(".ok")
@@ -535,7 +582,7 @@ def render_call(call: dict, path: Path) -> tuple[list[str], dict]:
     body = request_of(call["turns"])
     problems: list[str] = []
     for _ in range(MAX_TRIES):
-        model = gemini(body, path)
+        model = gemini(body, path, prefer)
         problems, cut = check_call(call, path)
         if not problems or problems == ["no clean cut after the response line"]:
             if problems:
@@ -553,20 +600,24 @@ def render_story_parts(story: dict, work: Path) -> tuple[list, list[str], list[s
     for split_b in (False, True):
         plan = calls_of(story, split_b)
         parts, models, problems = [], [], []
+        cached = sorted(work.glob("*.ok"))
+        if cached:
+            models.append(json.loads(cached[0].read_text())["model"])
         for i, c in enumerate(plan):
             if "silence" in c:
                 parts.append(float(c["silence"]))
                 continue
             h = hashlib.sha256(json.dumps(c, sort_keys=True).encode()).hexdigest()[:10]
             p = work / f"{i:02d}-{h}.wav"
-            bad, info = render_call(c, p)
+            bad, info = render_call(c, p, models[0] if models else None)
             if bad == ["no clean cut after the response line"] and not split_b:
                 p.unlink(missing_ok=True)
                 print("  call B could not be cut cleanly; rendering it as two calls", flush=True)
                 break
             if bad:
                 return [], [f"call {i}: {'; '.join(bad)}"], models, len(plan)
-            models.append(info["model"])
+            if info["model"] not in models:
+                models.append(info["model"])
             x = read_wav(p)
             if c.get("cut_after") is not None:
                 parts += [x[:info["cut"]], float(c["cut_silence"]), x[info["cut"]:]]
@@ -592,13 +643,22 @@ def make_story(story: dict, work: Path) -> dict:
         return {**row, "status": "FAILED", "seconds": 0, "sha256": None, "shelved": None,
                 "checks": {"problems": problems}, "work_s": round(time.monotonic() - t0, 1)}
     wav, out = work / "story.wav", work / file_of(story)
+    factor = tempo_factor(parts, len(T.score_words(spoken(story), "en")))
+    if factor < 1.0:
+        parts = [p if isinstance(p, float) else slow(trim(p), factor, work) for p in parts]
     write_wav(wav, join(parts))
-    fill.encode(wav, out, "sleep")
+    # Gemini's voices have sharper peaks than Kokoro's: AAC can overshoot the limiter, so a file
+    # whose only miss is its true peak is encoded again with more headroom (no new call).
+    for margin in (1.5, 3.0, 4.5):
+        fill.encode(wav, out, "sleep", margin)
+        res = qa.check(out, spoken(story), "en", "sleep")
+        if not res["problems"] or not all(p.startswith("A06 true peak") for p in res["problems"]):
+            break
     wav.unlink()
-    res = qa.check(out, spoken(story), "en", "sleep")
     checks = {k: res[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks["problems"] = res["problems"]
     checks["pauses_s"] = [p for p in parts if isinstance(p, float)]
+    checks["tempo"] = factor
     row.update({"seconds": res["seconds"], "checks": checks, "work_s": round(time.monotonic() - t0, 1),
                 "status": "passed" if res["pass"] else "FAILED"})
     if res["pass"]:
@@ -627,6 +687,99 @@ def todo(stories: list[dict], rows: list[dict], only: str | None = None) -> list
             and (not only or s["id"].startswith(only))]
 
 
+# ------------------------------------------------------------------ vetting another model
+def _mel_bank(rate: int = 16000, n: int = 40, nfft: int = 512):
+    import numpy as np
+    hz = lambda m: 700 * (10 ** (m / 2595) - 1)  # noqa: E731
+    mel = lambda f: 2595 * np.log10(1 + f / 700)  # noqa: E731
+    bins = np.floor((nfft + 1) * hz(np.linspace(mel(60), mel(7600), n + 2)) / rate).astype(int)
+    fb = np.zeros((n, nfft // 2 + 1))
+    for i in range(1, n + 1):
+        a, b, c = bins[i - 1], bins[i], bins[i + 1]
+        fb[i - 1, a:b] = (np.arange(a, b) - a) / max(b - a, 1)
+        fb[i - 1, b:c] = (c - np.arange(b, c)) / max(c - b, 1)
+    return fb
+
+
+def voiceprint(x16):
+    """MFCC 1-19 mean and spread over the louder 60% of 25 ms frames (16 kHz audio)."""
+    import numpy as np
+    from scipy.fft import dct
+    n, h = 400, 160
+    fr = np.lib.stride_tricks.sliding_window_view(np.asarray(x16, dtype=np.float64), n)[::h] * np.hamming(n)
+    p = np.abs(np.fft.rfft(fr, 512)) ** 2
+    e = p.sum(1)
+    c = dct(np.log(p[e > np.percentile(e, 40)] @ _mel_bank().T + 1e-10), type=2, axis=1, norm="ortho")[:, 1:20]
+    return np.concatenate([c.mean(0), c.std(0)])
+
+
+def similarity(a, b, mu, sd) -> float:
+    import numpy as np
+    za, zb = (a - mu) / sd, (b - mu) / sd
+    return round(float(za @ zb / (np.linalg.norm(za) * np.linalg.norm(zb))), 3)
+
+
+def vet_verdict(sim: float, impostor_sims: list[float], f0: float | None, band: list[float]) -> bool:
+    """Pure: closer to the picked clip than every other auditioned voice, and pitch in the band."""
+    return bool(impostor_sims) and sim > max(impostor_sims) and f0 is not None and band[0] <= f0 <= band[1]
+
+
+def vet(model: str) -> dict:
+    """Render the four sample lines on `model`, score them against the picked clips, log it."""
+    import numpy as np
+    import qa
+    ref = {f.stem: qa.decode(f, 16000) for f in sorted(REFERENCE.glob("*.m4a"))}
+    if len(ref) < 8:
+        raise NamedStop("REFERENCE_MISSING", f"the picked voice clips are not in {REFERENCE}")
+    prints = {k: voiceprint(v) for k, v in ref.items()}
+    pool = np.array(list(prints.values()))
+    mu, sd = pool.mean(0), pool.std(0) + 1e-9
+    V = VOICES["vetting"]
+    out_dir = REFERENCE / model
+    out_dir.mkdir(parents=True, exist_ok=True)
+    roles = {}
+    for role, r in V["roles"].items():
+        wav = out_dir / f"{role}.wav"
+        if not wav.exists():
+            body = {"contents": [{"parts": [{"text": V["prompt"].format(desc=r["desc"], text=r["text"])}]}],
+                    "generationConfig": {"responseModalities": ["AUDIO"], "speechConfig": {
+                        "voiceConfig": {"prebuiltVoiceConfig": {"voiceName": VOICES["roles"][role]["voice"]}}}}}
+            _gemini_on(model, body, wav)
+        x16 = qa.decode(wav, 16000)
+        sim = similarity(voiceprint(x16), prints[r["clip"]], mu, sd)
+        imp = [similarity(prints[i], prints[r["clip"]], mu, sd) for i in r["impostors"] if i in prints]
+        f0 = median_f0(read_wav(wav))
+        band = VOICES["roles"][role]["f0_hz"]
+        roles[role] = {"voice": VOICES["roles"][role]["voice"], "similarity": sim, "bar": max(imp) if imp else None,
+                       "impostors": dict(zip(r["impostors"], imp)), "f0_hz": round(f0) if f0 else None, "band": band,
+                       "passed": vet_verdict(sim, imp, f0, band)}
+    return {"passed": all(v["passed"] for v in roles.values()), "roles": roles,
+            "at": dt.datetime.now(fill.CT).isoformat(timespec="seconds")}
+
+
+def _gemini_on(model: str, body: dict, path: Path) -> None:
+    """One call on exactly this model (vetting); a 429 here just ends the vetting for today."""
+    key = os.environ.get("GEMINI_API_KEY")
+    if not key:
+        raise NamedStop("KEY_MISSING", "GEMINI_API_KEY is not set")
+    now = dt.datetime.now(fill.CT)
+    if calls_today(model, now) >= DAILY_CAP:
+        raise NamedStop("DAILY_CAP", f"{model} has no calls left today for vetting", note=True)
+    time.sleep(PACE_S)
+    req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                                 json.dumps(body).encode(), {"x-goog-api-key": key, "Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=300) as resp:
+            d = json.load(resp)
+    except urllib.error.HTTPError as e:
+        kind, delay = classify_429(e.read().decode("utf-8", "replace")) if e.code == 429 else ("", 0.0)
+        count_call(model, now, retry_after_s=delay if kind == "day" else None)
+        raise NamedStop("QUOTA_OUT", f"{model} refused a vetting call ({e.code}); try again after its reset", note=True)
+    count_call(model, now)
+    part = next(p for p in d["candidates"][0]["content"]["parts"] if "inlineData" in p)
+    to_wav(base64.b64decode(part["inlineData"]["data"]), part["inlineData"].get("mimeType", ""), path)
+
+
 # ------------------------------------------------------------------ the run
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
@@ -636,14 +789,26 @@ def main(argv=None) -> int:
     ap.add_argument("--commit", action="store_true", help="commit and push the manifest (the runner)")
     ap.add_argument("--keep", help="also copy each shelved file to this folder before the Mac copy is deleted")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--vet", metavar="MODEL", help="score MODEL's voices against the picked clips and log it in model-vetting.json")
     a = ap.parse_args(argv)
 
     fill.HOME.mkdir(parents=True, exist_ok=True)
-    lock = (fill.HOME / "hush-harbor.lock").open("w")
+    # One heavy job on the Mac at a time: the library fill's own lock (PBS_HH_LOCK only for a by-hand run).
+    lock = (fill.HOME / os.environ.get("PBS_HH_LOCK", "library-fill.lock")).open("w")
     try:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
-        print("OUTPUT 0 Hush Harbor stories shelved (note: another run holds the lock)")
+        if not a.dry_run:
+            print("OUTPUT 0 Hush Harbor stories shelved (note: the library fill or another render holds the Mac; the next run tries again)")
+            return 0
+    if a.vet:
+        result = vet(a.vet)
+        log = json.loads(VETTING.read_text("utf-8")) if VETTING.exists() else {}
+        log[a.vet] = result
+        VETTING.write_text(json.dumps(log, indent=1, sort_keys=True) + "\n")
+        for role, v in result["roles"].items():
+            print(f"  {role:12} {v['voice']:8} similarity {v['similarity']:+.3f} vs bar {v['bar']}  pitch {v['f0_hz']} Hz in {v['band']}  {'pass' if v['passed'] else 'FAIL'}")
+        print(f"OUTPUT vetting {a.vet}: {'passed, joins the rotation' if result['passed'] else 'failed, stays out of the rotation'}")
         return 0
     stories = load_stories()
     if not stories:
@@ -676,7 +841,11 @@ def main(argv=None) -> int:
             if a.max_minutes and (time.monotonic() - t_start) / 60 >= a.max_minutes:
                 break
             work = fill.HOME / "hh-work" / s["id"]
-            row = make_story(s, work)
+            try:
+                row = make_story(s, work)
+            except ModelOut as e:
+                print(f"note: {s['id']} started on {e} and waits for it (one model per story); its calls stay cached", flush=True)
+                continue
             if row["status"] == "passed":
                 local = Path(row.pop("_local"))
                 if a.keep:

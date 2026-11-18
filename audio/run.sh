@@ -9,8 +9,9 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 git pull --rebase --autostash -q || echo "note: git pull failed; running on the code already here"
 PY="${PBS_WHISPER_PY:-$HOME/Work/codex-briefs/peace-be-still/voice-samples/.venv/bin/python}"
 "$PY" audio/fill.py --commit --max-minutes 110; rc=$?
-# Then the Hush Harbor stories (Gemini, key from the Boss OS vault). Its quota stops are notes
-# (exit 0); it holds its own lock, so while a long fill run works, the next start still runs it.
+# Then the Hush Harbor stories (Gemini, key from the Boss OS vault). One queue: it takes the fill's
+# own lock, so the Mac never runs two renders at once; nice 15 comes from the launchd job. Its quota
+# stops are notes (exit 0).
 HH="$PWD/audio/hush_harbor.py"
 (cd "${BOSS_OS_REPO:-$HOME/GitHub/boss-os}" && npm run -s vault:run -- "$PY" "$HH" --commit --max-minutes 12); rc2=$?
 exit $(( rc > rc2 ? rc : rc2 ))

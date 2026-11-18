@@ -1,0 +1,132 @@
+{
+ "gemini-3.8-flash-lite-tts": {
+  "at": "2026-11-18T13:34:50-06:00",
+  "passed": false,
+  "roles": {
+   "elder": {
+    "band": [
+     65,
+     150
+    ],
+    "bar": 0.472,
+    "f0_hz": 118,
+    "impostors": {
+     "elder-1": 0.304,
+     "elder-3": 0.472
+    },
+    "passed": false,
+    "similarity": 0.415,
+    "voice": "Charon"
+   },
+   "grandmother": {
+    "band": [
+     95,
+     240
+    ],
+    "bar": 0.024,
+    "f0_hz": 128,
+    "impostors": {
+     "grandmother-2": -0.378,
+     "grandmother-3": 0.024
+    },
+    "passed": true,
+    "similarity": 0.048,
+    "voice": "Gacrux"
+   },
+   "young_man": {
+    "band": [
+     105,
+     260
+    ],
+    "bar": 0.154,
+    "f0_hz": 129,
+    "impostors": {
+     "youngman-1": 0.154
+    },
+    "passed": false,
+    "similarity": -0.071,
+    "voice": "Umbriel"
+   },
+   "young_woman": {
+    "band": [
+     120,
+     280
+    ],
+    "bar": 0.202,
+    "f0_hz": 163,
+    "impostors": {
+     "youngwoman-2": 0.202,
+     "youngwoman-3": 0.165
+    },
+    "passed": true,
+    "similarity": 0.5,
+    "voice": "Kore"
+   }
+  }
+ },
+ "gemini-3.8-flash-tts": {
+  "at": "2026-11-18T13:33:59-06:00",
+  "passed": false,
+  "roles": {
+   "elder": {
+    "band": [
+     65,
+     150
+    ],
+    "bar": 0.472,
+    "f0_hz": 97,
+    "impostors": {
+     "elder-1": 0.304,
+     "elder-3": 0.472
+    },
+    "passed": false,
+    "similarity": 0.443,
+    "voice": "Charon"
+   },
+   "grandmother": {
+    "band": [
+     95,
+     240
+    ],
+    "bar": 0.024,
+    "f0_hz": 121,
+    "impostors": {
+     "grandmother-2": -0.378,
+     "grandmother-3": 0.024
+    },
+    "passed": true,
+    "similarity": 0.065,
+    "voice": "Gacrux"
+   },
+   "young_man": {
+    "band": [
+     105,
+     260
+    ],
+    "bar": 0.154,
+    "f0_hz": 121,
+    "impostors": {
+     "youngman-1": 0.154
+    },
+    "passed": false,
+    "similarity": -0.116,
+    "voice": "Umbriel"
+   },
+   "young_woman": {
+    "band": [
+     120,
+     280
+    ],
+    "bar": 0.202,
+    "f0_hz": 145,
+    "impostors": {
+     "youngwoman-2": 0.202,
+     "youngwoman-3": 0.165
+    },
+    "passed": true,
+    "similarity": 0.4,
+    "voice": "Kore"
+   }
+  }
+ }
+}
