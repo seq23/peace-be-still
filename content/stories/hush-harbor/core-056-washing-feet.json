@@ -1,0 +1,508 @@
+{
+ "id": "core-056-washing-feet",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "He Took a Towel",
+ "passage": {
+  "refs": [
+   "JOH 13:1-17"
+  ],
+  "label": "John 13:1-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "peter",
+   "name": "Peter",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, it was the last night before the cross. Jesus and his disciples were gathered for the Passover supper."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:1",
+   "label": "John 13:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Now before the feast of the passover, when Jesus knew that his hour was come that he should depart out of this world unto the Father, having loved his own which were in the world, he loved them unto the end."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Now before the feast of the passover, when Jesus knew that his hour was come that he should depart out of this world unto the Father, having loved his own which were in the world, he loved them unto the end."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:2",
+   "label": "John 13:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And supper being ended, the devil having now put into the heart of Judas Iscariot, Simon’s son, to betray him;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And supper being ended, the devil having now put into the heart of Judas Iscariot, Simon’s son, to betray him;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:3",
+   "label": "John 13:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Jesus knowing that the Father had given all things into his hands, and that he was come from God, and went to God;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Jesus knowing that the Father had given all things into his hands, and that he was come from God, and went to God;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus knew exactly who he was. Everything had been put into his hands. And look what he did with those hands."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:4",
+   "label": "John 13:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "He riseth from supper, and laid aside his garments; and took a towel, and girded himself."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "He riseth from supper, and laid aside his garments; and took a towel, and girded himself."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:5",
+   "label": "John 13:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "After that he poureth water into a bason, and began to wash the disciples’ feet, and to wipe them with the towel wherewith he was girded."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "After that he poureth water into a bason, and began to wash the disciples’ feet, and to wipe them with the towel wherewith he was girded."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he took a towel. [PAUSE 3s | screen: \"He took a towel\"] He took a towel. [PAUSE 3s | screen: \"He took a towel\"] The Lord of glory got down on the floor with a towel and a basin.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He took a towel"
+    },
+    {
+     "seconds": 3,
+     "screen": "He took a towel"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The roads were dusty and everybody walked in sandals. Washing feet was the lowest job in the house, the job for a servant. Nobody at that table had offered. So the Master got down and did it himself."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "JOH 13:6",
+   "label": "John 13:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Then cometh he to Simon Peter: and Peter saith unto him, Lord, dost thou wash my feet?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Then cometh he to Simon Peter: and Peter saith unto him,"
+    },
+    {
+     "v": 6,
+     "speaker": "peter",
+     "text": "Lord, dost thou wash my feet?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:7",
+   "label": "John 13:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Jesus answered and said unto him, What I do thou knowest not now; but thou shalt know hereafter."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Jesus answered and said unto him, What I do thou knowest not now; but thou shalt know hereafter."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Peter could not stand the thought of his Lord kneeling in front of him like a servant."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "JOH 13:8",
+   "label": "John 13:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Peter saith unto him, Thou shalt never wash my feet. Jesus answered him, If I wash thee not, thou hast no part with me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Peter saith unto him,"
+    },
+    {
+     "v": 8,
+     "speaker": "peter",
+     "text": "Thou shalt never wash my feet."
+    },
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Jesus answered him, If I wash thee not, thou hast no part with me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So Peter went all the way the other direction, the way Peter always did."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "JOH 13:9",
+   "label": "John 13:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Simon Peter saith unto him, Lord, not my feet only, but also my hands and my head."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Simon Peter saith unto him,"
+    },
+    {
+     "v": 9,
+     "speaker": "peter",
+     "text": "Lord, not my feet only, but also my hands and my head."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:10",
+   "label": "John 13:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Jesus saith to him, He that is washed needeth not save to wash his feet, but is clean every whit: and ye are clean, but not all."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Jesus saith to him, He that is washed needeth not save to wash his feet, but is clean every whit: and ye are clean, but not all."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:11",
+   "label": "John 13:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "For he knew who should betray him; therefore said he, Ye are not all clean."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "For he knew who should betray him; therefore said he, Ye are not all clean."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus knew Judas would betray him that very night. And he washed Judas's feet too. Sit with that a minute, Church."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:12",
+   "label": "John 13:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "So after he had washed their feet, and had taken his garments, and was set down again, he said unto them, Know ye what I have done to you?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "So after he had washed their feet, and had taken his garments, and was set down again, he said unto them, Know ye what I have done to you?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:13",
+   "label": "John 13:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Ye call me Master and Lord: and ye say well; for so I am."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Ye call me Master and Lord: and ye say well; for so I am."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:14",
+   "label": "John 13:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "If I then, your Lord and Master, have washed your feet; ye also ought to wash one another’s feet."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "If I then, your Lord and Master, have washed your feet; ye also ought to wash one another’s feet."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:15",
+   "label": "John 13:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "For I have given you an example, that ye should do as I have done to you."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "For I have given you an example, that ye should do as I have done to you."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He did not just tell them to serve. He showed them, on his knees, with water and a towel."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:16",
+   "label": "John 13:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Verily, verily, I say unto you, The servant is not greater than his lord; neither he that is sent greater than he that sent him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Verily, verily, I say unto you, The servant is not greater than his lord; neither he that is sent greater than he that sent him."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 13:17",
+   "label": "John 13:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "If ye know these things, happy are ye if ye do them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "If ye know these things, happy are ye if ye do them."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Knowing it and doing it are two different things. The blessing is in the doing."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The one who had every right to be served chose to serve. He knelt in front of the friend who would deny him and the friend who would sell him out, and he washed them all. Then he told us to do the same for one another. Not to be seen. Not because anybody earned it. Because that is what love looks like when it gets down on the floor."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 623,
+ "est_seconds": 346,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.1",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:54:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 13:1-17; no position on foot washing as an ordinance."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'He took a towel' at the turn; service as love, not servitude."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

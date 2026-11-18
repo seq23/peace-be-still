@@ -1,0 +1,389 @@
+{
+ "id": "core-051-cana",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Whatsoever He Saith unto You, Do It",
+ "passage": {
+  "refs": [
+   "JOH 2:1-11"
+  ],
+  "label": "John 2:1-11"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "mother",
+   "name": "the mother of Jesus",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "governor",
+   "name": "governor of the feast",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, a wedding in a little village was a big deal. Families planned for months. The celebration could go on for days, and the whole town showed up. To run out of food or wine in the middle of it would shame that young couple in front of everybody they knew."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:1",
+   "label": "John 2:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And the third day there was a marriage in Cana of Galilee; and the mother of Jesus was there:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And the third day there was a marriage in Cana of Galilee; and the mother of Jesus was there:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:2",
+   "label": "John 2:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And both Jesus was called, and his disciples, to the marriage."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And both Jesus was called, and his disciples, to the marriage."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Somewhere in the middle of the feast, something went wrong. And Mary saw it before most folks did."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mother",
+   "ref": "JOH 2:3",
+   "label": "John 2:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And when they wanted wine, the mother of Jesus saith unto him, They have no wine."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And when they wanted wine, the mother of Jesus saith unto him,"
+    },
+    {
+     "v": 3,
+     "speaker": "mother",
+     "text": "They have no wine."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She did not tell him what to do. She just brought him the need. That is a good way to pray."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:4",
+   "label": "John 2:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Jesus saith unto her, Woman, what have I to do with thee? mine hour is not yet come."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Jesus saith unto her, Woman, what have I to do with thee? mine hour is not yet come."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Woman was not a rude word back then. It was respectful. Still, Jesus told her his hour had not come. And Mary did not argue with him. She turned around to the servants."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mother",
+   "ref": "JOH 2:5",
+   "label": "John 2:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "His mother saith unto the servants, Whatsoever he saith unto you, do it."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "His mother saith unto the servants,"
+    },
+    {
+     "v": 5,
+     "speaker": "mother",
+     "text": "Whatsoever he saith unto you, do it."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, do it. [PAUSE 3s | screen: \"Do it\"] Do it. [PAUSE 3s | screen: \"Do it\"] Whatever he tells you, his mother said, do it.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Do it"
+    },
+    {
+     "seconds": 3,
+     "screen": "Do it"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:6",
+   "label": "John 2:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And there were set there six waterpots of stone, after the manner of the purifying of the Jews, containing two or three firkins apiece."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And there were set there six waterpots of stone, after the manner of the purifying of the Jews, containing two or three firkins apiece."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Big stone jars, the kind they used for washing up before meals. Twenty, thirty gallons apiece."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:7",
+   "label": "John 2:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Jesus saith unto them, Fill the waterpots with water. And they filled them up to the brim."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Jesus saith unto them, Fill the waterpots with water. And they filled them up to the brim."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Up to the brim. They did not fill them halfway. They hauled water from the well, jar after jar, till there was no room left."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:8",
+   "label": "John 2:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And he saith unto them, Draw out now, and bear unto the governor of the feast. And they bare it."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And he saith unto them, Draw out now, and bear unto the governor of the feast. And they bare it."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:9",
+   "label": "John 2:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "When the ruler of the feast had tasted the water that was made wine, and knew not whence it was: (but the servants which drew the water knew;) the governor of the feast called the bridegroom,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "When the ruler of the feast had tasted the water that was made wine, and knew not whence it was: (but the servants which drew the water knew;) the governor of the feast called the bridegroom,"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The man running the feast did not know what had happened. The bride and groom did not know. But the servants knew. The ones who carried the water knew."
+  },
+  {
+   "type": "scripture",
+   "speaker": "governor",
+   "ref": "JOH 2:10",
+   "label": "John 2:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And saith unto him, Every man at the beginning doth set forth good wine; and when men have well drunk, then that which is worse: but thou hast kept the good wine until now."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And saith unto him,"
+    },
+    {
+     "v": 10,
+     "speaker": "governor",
+     "text": "Every man at the beginning doth set forth good wine; and when men have well drunk, then that which is worse: but thou hast kept the good wine until now."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He saved the best for last. Folks always put out the good wine first, while everybody can still tell. This was better than anything they had poured all night."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 2:11",
+   "label": "John 2:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "This beginning of miracles did Jesus in Cana of Galilee, and manifested forth his glory; and his disciples believed on him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "This beginning of miracles did Jesus in Cana of Galilee, and manifested forth his glory; and his disciples believed on him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "His first sign was not in the temple, and it was not in front of a crowd. It was at a family celebration, to keep a young couple from being embarrassed. Jesus cares about our ordinary joys. And the ones who saw his glory up close were the servants, the ones who did what he said even when they could not see why."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 533,
+ "est_seconds": 297,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.7",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:54:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 2:1-11; nothing for or against drinking; Mary's word kept as scripture; 'woman' explained as respectful."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Do it' at the turn, Mary's word; the servants honoured as the ones who saw; family celebration drawn warmly."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

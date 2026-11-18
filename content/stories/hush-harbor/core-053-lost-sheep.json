@@ -1,0 +1,293 @@
+{
+ "id": "core-053-lost-sheep",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "He Went After the One",
+ "passage": {
+  "refs": [
+   "LUK 15:1-7"
+  ],
+  "label": "Luke 15:1-7"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "pharisees",
+   "name": "Pharisees",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, everywhere Jesus went, all kinds of people came close to hear him. Some of them were the very folks everybody else kept away from."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:1",
+   "label": "Luke 15:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Then drew near unto him all the publicans and sinners for to hear him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Then drew near unto him all the publicans and sinners for to hear him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Publicans were tax collectors working for Rome. Most people saw them as traitors and cheats. Sinners meant anybody known for living wrong. And Jesus did not keep them at arm's length. He sat down and ate with them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "pharisees",
+   "ref": "LUK 15:2",
+   "label": "Luke 15:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And the Pharisees and scribes murmured, saying, This man receiveth sinners, and eateth with them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And the Pharisees and scribes murmured, saying,"
+    },
+    {
+     "v": 2,
+     "speaker": "pharisees",
+     "text": "This man receiveth sinners, and eateth with them."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They meant it as a complaint. But Church, that complaint is the gospel. This man receives sinners. Thank God he does. So Jesus told them a story."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:3",
+   "label": "Luke 15:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And he spake this parable unto them, saying,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And he spake this parable unto them, saying,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:4",
+   "label": "Luke 15:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "What man of you, having an hundred sheep, if he lose one of them, doth not leave the ninety and nine in the wilderness, and go after that which is lost, until he find it?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "What man of you, having an hundred sheep, if he lose one of them, doth not leave the ninety and nine in the wilderness, and go after that which is lost, until he find it?"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he went after the one. [PAUSE 3s | screen: \"He went after the one\"] He went after the one. [PAUSE 3s | screen: \"He went after the one\"] Ninety-nine safe at home, and he went looking for the one.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He went after the one"
+    },
+    {
+     "seconds": 3,
+     "screen": "He went after the one"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A hundred sheep is a lot of sheep. Losing one might not look like much. A businessman might say ninety-nine is good enough. But a shepherd does not count like that. He knows every one."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So he goes out. Over the rocks, through the brush, calling into the dark, until he hears that one little cry. It might take all night. He will not rest until it is found."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:5",
+   "label": "Luke 15:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And when he hath found it, he layeth it on his shoulders, rejoicing."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And when he hath found it, he layeth it on his shoulders, rejoicing."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He does not fuss at that sheep. He does not make it walk home on its own. He lifts it up on his shoulders and carries it, rejoicing the whole way."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:6",
+   "label": "Luke 15:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And when he cometh home, he calleth together his friends and neighbours, saying unto them, Rejoice with me; for I have found my sheep which was lost."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And when he cometh home, he calleth together his friends and neighbours, saying unto them, Rejoice with me; for I have found my sheep which was lost."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He cannot keep it to himself. He calls the neighbors and throws a party over one sheep. Church, think about that. The whole neighborhood stops what they are doing to celebrate one little lost thing brought home. That is how much the one matters to him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:7",
+   "label": "Luke 15:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "I say unto you, that likewise joy shall be in heaven over one sinner that repenteth, more than over ninety and nine just persons, which need no repentance."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "I say unto you, that likewise joy shall be in heaven over one sinner that repenteth, more than over ninety and nine just persons, which need no repentance."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The folks grumbling thought the ones at that table were too far gone. Jesus told them heaven sees it the other way. When one who wandered off comes home, heaven does not shrug. Heaven rejoices."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Some of us hear this and think about somebody we love who has wandered. Some of us hear it and know we are the one. Either way, Church, the story is clear about the shepherd. He does not wait for you to find your own way back. He comes looking. And when he finds you, he carries you home with joy."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 499,
+ "est_seconds": 278,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 499 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.7",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:54:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 15:1-7; the grumblers' complaint turned to praise without scorn for them; no claim on who is lost tonight."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'He went after the one' at the turn; tax collectors and sinners welcomed."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
