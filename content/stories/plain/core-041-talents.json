@@ -1,0 +1,511 @@
+{
+ "id": "core-041-talents",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Talents",
+ "passage": {
+  "refs": [
+   "MAT 25:14-29"
+  ],
+  "label": "Matthew 25:14-29"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "five",
+   "name": "servant",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "two",
+   "name": "servant",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "one",
+   "name": "servant",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "master",
+   "name": "lord",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus told this story to his friends near the end of his time with them. He was teaching them how to live while they waited for him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:14",
+   "label": "Matthew 25:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "For the kingdom of heaven is as a man travelling into a far country, who called his own servants, and delivered unto them his goods."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "For the kingdom of heaven is as a man travelling into a far country, who called his own servants, and delivered unto them his goods."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:15",
+   "label": "Matthew 25:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And unto one he gave five talents, to another two, and to another one; to every man according to his several ability; and straightway took his journey."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And unto one he gave five talents, to another two, and to another one; to every man according to his several ability; and straightway took his journey."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A talent was not a gift or a skill back then. It was a weight of silver, more than most workers earned in many years. Even one talent was a great deal to hold in your hands."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice that the master did not give the same amount to each man. He knew them. He gave to each what that man could carry."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:16",
+   "label": "Matthew 25:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Then he that had received the five talents went and traded with the same, and made them other five talents."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Then he that had received the five talents went and traded with the same, and made them other five talents."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:17",
+   "label": "Matthew 25:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And likewise he that had received two, he also gained other two."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And likewise he that had received two, he also gained other two."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:18",
+   "label": "Matthew 25:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "But he that had received one went and digged in the earth, and hid his lord’s money."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "But he that had received one went and digged in the earth, and hid his lord’s money."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Two of the servants went to work. The third dug a hole. He did not spend the money or lose it. He just buried it and walked away."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:19",
+   "label": "Matthew 25:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "After a long time the lord of those servants cometh, and reckoneth with them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "After a long time the lord of those servants cometh, and reckoneth with them."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The master was gone a long time. Long enough that the servants could have wondered if he was ever coming back. Then one day he was home, and he called them in one by one."
+  },
+  {
+   "type": "scripture",
+   "speaker": "five",
+   "ref": "MAT 25:20",
+   "label": "Matthew 25:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And so he that had received five talents came and brought other five talents, saying, Lord, thou deliveredst unto me five talents: behold, I have gained beside them five talents more."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And so he that had received five talents came and brought other five talents, saying,"
+    },
+    {
+     "v": 20,
+     "speaker": "five",
+     "text": "Lord, thou deliveredst unto me five talents: behold, I have gained beside them five talents more."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "master",
+   "ref": "MAT 25:21",
+   "label": "Matthew 25:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "His lord said unto him, Well done, thou good and faithful servant: thou hast been faithful over a few things, I will make thee ruler over many things: enter thou into the joy of thy lord."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "His lord said unto him,"
+    },
+    {
+     "v": 21,
+     "speaker": "master",
+     "text": "Well done, thou good and faithful servant: thou hast been faithful over a few things, I will make thee ruler over many things: enter thou into the joy of thy lord."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The master did not say, well done, you made me rich. He said, good and faithful. What pleased him was the faithfulness."
+  },
+  {
+   "type": "scripture",
+   "speaker": "two",
+   "ref": "MAT 25:22",
+   "label": "Matthew 25:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "He also that had received two talents came and said, Lord, thou deliveredst unto me two talents: behold, I have gained two other talents beside them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "He also that had received two talents came and said,"
+    },
+    {
+     "v": 22,
+     "speaker": "two",
+     "text": "Lord, thou deliveredst unto me two talents: behold, I have gained two other talents beside them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "master",
+   "ref": "MAT 25:23",
+   "label": "Matthew 25:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "His lord said unto him, Well done, good and faithful servant; thou hast been faithful over a few things, I will make thee ruler over many things: enter thou into the joy of thy lord."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "His lord said unto him,"
+    },
+    {
+     "v": 23,
+     "speaker": "master",
+     "text": "Well done, good and faithful servant; thou hast been faithful over a few things, I will make thee ruler over many things: enter thou into the joy of thy lord."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Listen closely. The man with two talents heard the very same words as the man with five. Same praise. Same joy. The master was not comparing them to each other. He was looking at what each one did with what he had been given."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then the third servant came in."
+  },
+  {
+   "type": "scripture",
+   "speaker": "one",
+   "ref": "MAT 25:24",
+   "label": "Matthew 25:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Then he which had received the one talent came and said, Lord, I knew thee that thou art an hard man, reaping where thou hast not sown, and gathering where thou hast not strawed:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Then he which had received the one talent came and said,"
+    },
+    {
+     "v": 24,
+     "speaker": "one",
+     "text": "Lord, I knew thee that thou art an hard man, reaping where thou hast not sown, and gathering where thou hast not strawed:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "one",
+   "ref": "MAT 25:25",
+   "label": "Matthew 25:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "And I was afraid, and went and hid thy talent in the earth: lo, there thou hast that is thine."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "one",
+     "text": "And I was afraid, and went and hid thy talent in the earth: lo, there thou hast that is thine."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He had decided ahead of time that his master was hard. That fear shaped everything he did. He was so afraid of getting it wrong that he did nothing at all."
+  },
+  {
+   "type": "scripture",
+   "speaker": "master",
+   "ref": "MAT 25:26",
+   "label": "Matthew 25:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "His lord answered and said unto him, Thou wicked and slothful servant, thou knewest that I reap where I sowed not, and gather where I have not strawed:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "His lord answered and said unto him,"
+    },
+    {
+     "v": 26,
+     "speaker": "master",
+     "text": "Thou wicked and slothful servant, thou knewest that I reap where I sowed not, and gather where I have not strawed:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "master",
+   "ref": "MAT 25:27",
+   "label": "Matthew 25:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Thou oughtest therefore to have put my money to the exchangers, and then at my coming I should have received mine own with usury."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "master",
+     "text": "Thou oughtest therefore to have put my money to the exchangers, and then at my coming I should have received mine own with usury."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "master",
+   "ref": "MAT 25:28",
+   "label": "Matthew 25:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Take therefore the talent from him, and give it unto him which hath ten talents."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "master",
+     "text": "Take therefore the talent from him, and give it unto him which hath ten talents."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 25:29",
+   "label": "Matthew 25:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "For unto every one that hath shall be given, and he shall have abundance: but from him that hath not shall be taken away even that which he hath."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "For unto every one that hath shall be given, and he shall have abundance: but from him that hath not shall be taken away even that which he hath."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "This is not a story about getting rich. It is a story about trust. The master handed his servants what was his and left it in their care. Two of them treated it as something to use while he was away. One of them treated it as something to fear."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Each of us has been given something to hold for a while. Time, a voice, a pair of hands, a little faith. It may not look like five talents. It does not need to. The story ends with a master who knows his servants by name, and who wants to say to each one of them, well done."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 756,
+ "est_seconds": 412,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.3",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:36:32",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Matt 25:14-29; stops before v30 (outer darkness) so the plain shelf does not threaten; the talent explained as money held in trust, and the close says outright it is not a story about getting rich (no prosperity reading); v29 left with the narrator, as the text does not mark the speaker."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain and warm; the third servant shown as afraid, not lazy-mocked; no class or money stereotypes."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

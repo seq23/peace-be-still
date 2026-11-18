@@ -195,6 +195,75 @@ def census_line(c: dict) -> str:
             f"{c['failed']} failed")
 
 
+# ------------------------------------------------------------------ text progress (the library text)
+# Targets (coordinator brief 18 Nov 2026): stories 200 = plain 60 + Hush Harbor 60 + favourites 20 + Mi Refugio 60,
+# by Sat 21 Nov; Psalm Nights 60 (30 en + 30 es), Imagination Nights 30, declarations 730 (365 en + es) by Mon 23 Nov.
+TEXT_TARGETS = {"plain": 60, "hh": 60, "fav": 20, "es": 60, "psalm": 60, "imagination": 30, "declarations": 730}
+
+
+def text_counts(root: Path) -> dict:
+    """Passed items counted from the content JSON in the repo, never a hand-kept number. Pure (reads files)."""
+    c = dict.fromkeys(TEXT_TARGETS, 0)
+    base = root / "content"
+
+    def passed(d: Path):
+        for f in sorted(d.glob("*.json")) if d.is_dir() else []:
+            try:
+                o = json.loads(f.read_text("utf-8"))
+            except Exception:
+                continue
+            if o.get("status") == "passed":
+                yield o
+    c["plain"] = sum(1 for _ in passed(base / "stories/plain"))
+    for o in passed(base / "stories/hush-harbor"):
+        c["fav" if str(o.get("id", "")).startswith("fav-") else "hh"] += 1
+    c["es"] = sum(1 for _ in passed(base / "stories/mi-refugio"))
+    c["psalm"] = sum(1 for lang in ("en", "es") for _ in passed(base / "psalm-nights" / lang))
+    c["imagination"] = sum(1 for _ in passed(base / "imagination-nights/en"))
+    for lang in ("en", "es"):
+        f = base / "morning-word" / f"{lang}.json"
+        try:
+            c["declarations"] += sum(1 for i in json.loads(f.read_text("utf-8")).get("items", []) if i.get("status") == "passed")
+        except Exception:
+            pass
+    return c
+
+
+def text_progress(counts: dict, state: dict, now: dt.datetime) -> tuple[str, dict]:
+    """The text line for her Notices, and the new state. BEHIND when the total has not grown for 24 h
+    while any target is unmet. Pure."""
+    total = sum(counts.values())
+    st = dict(state)
+    if total != st.get("total") or not st.get("grew_at"):
+        st = {"total": total, "grew_at": now.isoformat()}
+    met = all(counts[k] >= v for k, v in TEXT_TARGETS.items())
+    stalled = now - dt.datetime.fromisoformat(st["grew_at"]) >= dt.timedelta(hours=24)
+    stories = counts["plain"] + counts["hh"] + counts["fav"] + counts["es"]
+    t = TEXT_TARGETS
+    line = (f"text: stories {stories}/{t['plain'] + t['hh'] + t['fav'] + t['es']} "
+            f"({counts['plain']}/{counts['hh']}/{counts['fav']}/{counts['es']} plain/HH/favourites/es), "
+            f"Psalm Nights {counts['psalm']}/{t['psalm']}, Imagination {counts['imagination']}/{t['imagination']}, "
+            f"declarations {counts['declarations']}/{t['declarations']} · target stories Sat 21 Nov, rest Mon 23 Nov")
+    if stalled and not met:
+        line = "BEHIND (no new text in 24 h) " + line
+    return line, st
+
+
+def text_line(now: dt.datetime) -> str:
+    """Reads and updates the growth record in state.json; never stops the audio run."""
+    try:
+        st = json.loads(state_path().read_text())
+    except Exception:
+        st = {}
+    line, st["text"] = text_progress(text_counts(REPO), st.get("text") or {}, now)
+    try:
+        state_path().parent.mkdir(parents=True, exist_ok=True)
+        state_path().write_text(json.dumps(st, indent=1))
+    except Exception:
+        pass
+    return line
+
+
 def expected_end(items: list[dict], rows: list[dict], now: dt.datetime) -> dt.datetime | None:
     """Now + the words still to voice x the measured Mac seconds per word (passed rows). Pure."""
     timed = [r for r in rows if r.get("work_s") and r.get("checks", {}).get("words")]
@@ -425,7 +494,7 @@ def main(argv=None) -> int:
     if a.dry_run:
         print(f"plan: {len(items)} files ({c0['total']} scripture), {len(queue)} to do; next: "
               + ", ".join(i["file"] for i in queue[:3]))
-        print(census_line(c0))
+        print(census_line(c0) + "; " + text_line(now))
         return 0
 
     if not c0["complete"]:
@@ -473,7 +542,7 @@ def main(argv=None) -> int:
                                   "How We Know and Whisper Almanac can run again.", "complete", now))
     if a.commit and (made or failed_now):
         notes.append(git_commit(f"audio: library fill manifest ({census_line(c)})"))
-    line = census_line(c)
+    line = census_line(c) + "; " + text_line(now)
     if now.hour >= 5 and not stop:
         notes.append(morning_line(f"Peace Be Still {line}.", "daily", now))
     if stop:
