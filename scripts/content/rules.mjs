@@ -252,6 +252,7 @@ export function checkDeclaration(d, lang) {
   const c = commonText("declaration", lang, written, "gods-word");
   c.word_for_word = scriptureBlock(d, lang);
   c.length = band(d.est_seconds, 15, 25, " s");
-  c.first_person = /\b(I|my|me|I'm|I will)\b/.test(d.declaration) || (lang === "es" && /\b(yo|mi|me|mí)\b/i.test(d.declaration)) ? pass : note("not in the first person");
+  // Spanish: pronouns and possessives with a Unicode letter boundary (JS \b is ASCII-only, so "mí" never matched; "mis" and "conmigo" were missing).
+  c.first_person = /\b(I|my|me|I'm|I will)\b/.test(d.declaration) || (lang === "es" && /(?<![\p{L}])(?:yo|mi|mis|me|mí|conmigo)(?![\p{L}])/iu.test(d.declaration)) ? pass : note("not in the first person");
   return c;
 }
