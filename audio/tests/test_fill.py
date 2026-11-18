@@ -157,6 +157,30 @@ class Content(unittest.TestCase):
             self.assertEqual(items[0]["priority"], 3)
 
 
+class TextProgress(unittest.TestCase):
+    def test_counts_from_files_and_behind_after_24h(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            for tell, ids in (("plain", ["core-001", "core-002"]), ("hush-harbor", ["core-001", "fav-01-hagar"])):
+                (root / "content/stories" / tell).mkdir(parents=True)
+                for i in ids:
+                    (root / "content/stories" / tell / f"{i}.json").write_text(json.dumps({"id": i, "status": "passed"}))
+            (root / "content/stories/plain/core-003.json").write_text(json.dumps({"id": "core-003", "status": "draft"}))
+            c = fill.text_counts(root)
+            self.assertEqual((c["plain"], c["hh"], c["fav"], c["es"]), (2, 1, 1, 0))
+            line, st = fill.text_progress(c, {}, NOW)
+            self.assertIn("stories 4/200", line)
+            self.assertNotIn("BEHIND", line)
+            line, _ = fill.text_progress(c, st, NOW + dt.timedelta(hours=25))
+            self.assertIn("BEHIND", line)
+            c["es"] += 1
+            line, st2 = fill.text_progress(c, st, NOW + dt.timedelta(hours=25))
+            self.assertNotIn("BEHIND", line)
+            done = dict(fill.TEXT_TARGETS)
+            line, _ = fill.text_progress(done, {"total": sum(done.values()), "grew_at": NOW.isoformat()}, NOW + dt.timedelta(days=3))
+            self.assertNotIn("BEHIND", line)
+
+
 GOOD = dict(script="The Lord is my shepherd I shall not want " * 9 + "he leadeth me beside the still waters", lang="en", level="sleep", seconds=60.0,
             lufs=-22.0, true_peak=-3.0, clipped=0)
 

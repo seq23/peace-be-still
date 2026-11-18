@@ -78,6 +78,8 @@ const REVIEW_DATE = "2026-11-18";
 // Free-model first drafts (scripts/content/draft.mjs): which route drafted a piece and how much of it Claude changed.
 const DRAFT_LOG = Object.fromEntries(read(join(SRC, "drafts", "log.tsv")).split("\n").filter((l) => l && !l.startsWith("#")).map((l) => {
   const [id, , , model, at, share, note] = l.split("\t");
+  // Since 18 Nov the free drafts were dropped (85% of sentences changed); route "claude" = written by Claude in the landing session.
+  if (model === "claude") return [id, { route: "claude", model, drafted_at: at, changed_share: null, note: note || "Written by Claude in the landing session, then Claude's pastor and cultural read." }];
   return [id, { route: "gemini-free", model, drafted_at: at, changed_share: share === "" ? null : +share, note: note || "First draft by the free model; Claude did the pastor and cultural read and edited it." }];
 }));
 function finalize(item, checks, review) {

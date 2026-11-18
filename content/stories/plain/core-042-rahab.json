@@ -1,0 +1,485 @@
+{
+ "id": "core-042-rahab",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Rahab and the Scarlet Line",
+ "passage": {
+  "refs": [
+   "JOS 2:1-21"
+  ],
+  "label": "Joshua 2:1-21"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "king",
+   "name": "king",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "rahab",
+   "name": "Rahab",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "men",
+   "name": "the men",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Forty years after they left Egypt, the people of Israel camped across the Jordan River. On the other side stood Jericho, a city with high walls. Joshua was leading them now that Moses had died."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:1",
+   "label": "Joshua 2:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And Joshua the son of Nun sent out of Shittim two men to spy secretly, saying, Go view the land, even Jericho. And they went, and came into an harlot’s house, named Rahab, and lodged there."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And Joshua the son of Nun sent out of Shittim two men to spy secretly, saying, Go view the land, even Jericho. And they went, and came into an harlot’s house, named Rahab, and lodged there."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rahab's house was built right into the city wall. People came and went there, and two strangers would not stand out. But somebody noticed."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:2",
+   "label": "Joshua 2:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And it was told the king of Jericho, saying, Behold, there came men in hither to night of the children of Israel to search out the country."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And it was told the king of Jericho, saying, Behold, there came men in hither to night of the children of Israel to search out the country."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "JOS 2:3",
+   "label": "Joshua 2:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And the king of Jericho sent unto Rahab, saying, Bring forth the men that are come to thee, which are entered into thine house: for they be come to search out all the country."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And the king of Jericho sent unto Rahab, saying,"
+    },
+    {
+     "v": 3,
+     "speaker": "king",
+     "text": "Bring forth the men that are come to thee, which are entered into thine house: for they be come to search out all the country."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rahab had a choice to make, and she had only moments to make it. She could hand the two men over and be safe with her own king. She did not."
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:4",
+   "label": "Joshua 2:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And the woman took the two men, and hid them, and said thus, There came men unto me, but I wist not whence they were:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And the woman took the two men, and hid them, and said thus,"
+    },
+    {
+     "v": 4,
+     "speaker": "rahab",
+     "text": "There came men unto me, but I wist not whence they were:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:5",
+   "label": "Joshua 2:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And it came to pass about the time of shutting of the gate, when it was dark, that the men went out: whither the men went I wot not: pursue after them quickly; for ye shall overtake them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "rahab",
+     "text": "And it came to pass about the time of shutting of the gate, when it was dark, that the men went out: whither the men went I wot not: pursue after them quickly; for ye shall overtake them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:6",
+   "label": "Joshua 2:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "But she had brought them up to the roof of the house, and hid them with the stalks of flax, which she had laid in order upon the roof."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "But she had brought them up to the roof of the house, and hid them with the stalks of flax, which she had laid in order upon the roof."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The king's men ran off toward the river. The gate was shut behind them. Up on the roof, under the drying flax, the two spies lay still."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:8",
+   "label": "Joshua 2:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And before they were laid down, she came up unto them upon the roof;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And before they were laid down, she came up unto them upon the roof;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Rahab told them why she had done it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:9",
+   "label": "Joshua 2:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And she said unto the men, I know that the LORD hath given you the land, and that your terror is fallen upon us, and that all the inhabitants of the land faint because of you."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And she said unto the men,"
+    },
+    {
+     "v": 9,
+     "speaker": "rahab",
+     "text": "I know that the LORD hath given you the land, and that your terror is fallen upon us, and that all the inhabitants of the land faint because of you."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:11",
+   "label": "Joshua 2:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And as soon as we had heard these things, our hearts did melt, neither did there remain any more courage in any man, because of you: for the LORD your God, he is God in heaven above, and in earth beneath."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "rahab",
+     "text": "And as soon as we had heard these things, our hearts did melt, neither did there remain any more courage in any man, because of you: for the LORD your God, he is God in heaven above, and in earth beneath."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rahab had never been to Egypt. She had never seen the sea split open. She had only heard the stories, the same stories everyone in Jericho had heard. The others heard them and were afraid. Rahab heard them and believed. She said it plainly. The LORD your God is God in heaven and on earth."
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:12",
+   "label": "Joshua 2:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Now therefore, I pray you, swear unto me by the LORD, since I have shewed you kindness, that ye will also shew kindness unto my father’s house, and give me a true token:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "rahab",
+     "text": "Now therefore, I pray you, swear unto me by the LORD, since I have shewed you kindness, that ye will also shew kindness unto my father’s house, and give me a true token:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:13",
+   "label": "Joshua 2:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And that ye will save alive my father, and my mother, and my brethren, and my sisters, and all that they have, and deliver our lives from death."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "rahab",
+     "text": "And that ye will save alive my father, and my mother, and my brethren, and my sisters, and all that they have, and deliver our lives from death."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She was not only thinking of herself. She asked for her father and mother, her brothers and sisters, and everyone in her house."
+  },
+  {
+   "type": "scripture",
+   "speaker": "men",
+   "ref": "JOS 2:14",
+   "label": "Joshua 2:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And the men answered her, Our life for yours, if ye utter not this our business. And it shall be, when the LORD hath given us the land, that we will deal kindly and truly with thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And the men answered her,"
+    },
+    {
+     "v": 14,
+     "speaker": "men",
+     "text": "Our life for yours, if ye utter not this our business. And it shall be, when the LORD hath given us the land, that we will deal kindly and truly with thee."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 2:15",
+   "label": "Joshua 2:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Then she let them down by a cord through the window: for her house was upon the town wall, and she dwelt upon the wall."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Then she let them down by a cord through the window: for her house was upon the town wall, and she dwelt upon the wall."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The house on the wall had a window facing out. In the dark, she let them down the outside of the city on a rope. She told them to hide in the mountains for three days until the searchers gave up."
+  },
+  {
+   "type": "scripture",
+   "speaker": "men",
+   "ref": "JOS 2:18",
+   "label": "Joshua 2:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Behold, when we come into the land, thou shalt bind this line of scarlet thread in the window which thou didst let us down by: and thou shalt bring thy father, and thy mother, and thy brethren, and all thy father’s household, home unto thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "men",
+     "text": "Behold, when we come into the land, thou shalt bind this line of scarlet thread in the window which thou didst let us down by: and thou shalt bring thy father, and thy mother, and thy brethren, and all thy father’s household, home unto thee."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That was the sign. A line of scarlet thread in the window. Everyone inside the house with it would be safe."
+  },
+  {
+   "type": "scripture",
+   "speaker": "rahab",
+   "ref": "JOS 2:21",
+   "label": "Joshua 2:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And she said, According unto your words, so be it. And she sent them away, and they departed: and she bound the scarlet line in the window."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And she said,"
+    },
+    {
+     "v": 21,
+     "speaker": "rahab",
+     "text": "According unto your words, so be it."
+    },
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And she sent them away, and they departed: and she bound the scarlet line in the window."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She did not wait to tie it. As soon as the men were gone, the scarlet line went up in her window."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The people of Jericho knew Rahab by the work she did. God knew her by her faith. She was a woman on the edge of her city, and she trusted the God of Israel before she had ever met his people. Her story did not end at that window. She was kept safe, and she became part of Israel's family, a reminder that no one stands too far outside for God to bring them in."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 838,
+ "est_seconds": 457,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.2",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:36:32",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Josh 2:1-21 (verses 7, 10, 16-17, 19-20 summarised in narration, nothing added); her trade is left in the stored verse and named once, gently; her later place in Israel is Josh 6:25 and her faith Heb 11:31, stated without a reference in the text."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Rahab shown with agency, courage and faith, never as a joke or a type; her care for her family kept."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

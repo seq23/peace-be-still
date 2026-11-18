@@ -1,0 +1,433 @@
+{
+ "id": "core-043-jericho",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Walls of Jericho",
+ "passage": {
+  "refs": [
+   "JOS 6:1-20"
+  ],
+  "label": "Joshua 6:1-20"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "joshua",
+   "name": "Joshua",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Israel had crossed the Jordan River at last. Now the first city of the promised land stood in front of them, and its gates were shut tight."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:1",
+   "label": "Joshua 6:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Now Jericho was straitly shut up because of the children of Israel: none went out, and none came in."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Now Jericho was straitly shut up because of the children of Israel: none went out, and none came in."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No one went in. No one came out. The people of Jericho were waiting behind their walls."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:2",
+   "label": "Joshua 6:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And the LORD said unto Joshua, See, I have given into thine hand Jericho, and the king thereof, and the mighty men of valour."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And the LORD said unto Joshua, See, I have given into thine hand Jericho, and the king thereof, and the mighty men of valour."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:3",
+   "label": "Joshua 6:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And ye shall compass the city, all ye men of war, and go round about the city once. Thus shalt thou do six days."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And ye shall compass the city, all ye men of war, and go round about the city once. Thus shalt thou do six days."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:4",
+   "label": "Joshua 6:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And seven priests shall bear before the ark seven trumpets of rams’ horns: and the seventh day ye shall compass the city seven times, and the priests shall blow with the trumpets."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And seven priests shall bear before the ark seven trumpets of rams’ horns: and the seventh day ye shall compass the city seven times, and the priests shall blow with the trumpets."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:5",
+   "label": "Joshua 6:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And it shall come to pass, that when they make a long blast with the ram’s horn, and when ye hear the sound of the trumpet, all the people shall shout with a great shout; and the wall of the city shall fall down flat, and the people shall ascend up every man straight before him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And it shall come to pass, that when they make a long blast with the ram’s horn, and when ye hear the sound of the trumpet, all the people shall shout with a great shout; and the wall of the city shall fall down flat, and the people shall ascend up every man straight before him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was the strangest battle plan anyone had ever heard. No ladders, no battering rams. Just walking, trumpets, and one great shout at the end. Joshua did not argue with it. He went and told the priests."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:6",
+   "label": "Joshua 6:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And Joshua the son of Nun called the priests, and said unto them, Take up the ark of the covenant, and let seven priests bear seven trumpets of rams’ horns before the ark of the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And Joshua the son of Nun called the priests, and said unto them,"
+    },
+    {
+     "v": 6,
+     "speaker": "joshua",
+     "text": "Take up the ark of the covenant, and let seven priests bear seven trumpets of rams’ horns before the ark of the LORD."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:7",
+   "label": "Joshua 6:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And he said unto the people, Pass on, and compass the city, and let him that is armed pass on before the ark of the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And he said unto the people,"
+    },
+    {
+     "v": 7,
+     "speaker": "joshua",
+     "text": "Pass on, and compass the city, and let him that is armed pass on before the ark of the LORD."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:8",
+   "label": "Joshua 6:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And it came to pass, when Joshua had spoken unto the people, that the seven priests bearing the seven trumpets of rams’ horns passed on before the LORD, and blew with the trumpets: and the ark of the covenant of the LORD followed them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And it came to pass, when Joshua had spoken unto the people, that the seven priests bearing the seven trumpets of rams’ horns passed on before the LORD, and blew with the trumpets: and the ark of the covenant of the LORD followed them."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The ark of the covenant went in the middle, carried by the priests. It was the sign that God was with them. The whole march moved around it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:10",
+   "label": "Joshua 6:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And Joshua had commanded the people, saying, Ye shall not shout, nor make any noise with your voice, neither shall any word proceed out of your mouth, until the day I bid you shout; then shall ye shout."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And Joshua had commanded the people, saying,"
+    },
+    {
+     "v": 10,
+     "speaker": "joshua",
+     "text": "Ye shall not shout, nor make any noise with your voice, neither shall any word proceed out of your mouth, until the day I bid you shout; then shall ye shout."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Think about that. A whole army walking in silence. Only the trumpets sounding. The people on the walls must have watched them come around and wondered what this was."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:14",
+   "label": "Joshua 6:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And the second day they compassed the city once, and returned into the camp: so they did six days."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And the second day they compassed the city once, and returned into the camp: so they did six days."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Six days of the same thing. Out in the morning, once around the city, back to camp. Nothing happened. The walls stood just as high on the sixth day as they had on the first. It would have been easy to feel foolish. But they kept walking."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:15",
+   "label": "Joshua 6:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And it came to pass on the seventh day, that they rose early about the dawning of the day, and compassed the city after the same manner seven times: only on that day they compassed the city seven times."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And it came to pass on the seventh day, that they rose early about the dawning of the day, and compassed the city after the same manner seven times: only on that day they compassed the city seven times."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:16",
+   "label": "Joshua 6:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And it came to pass at the seventh time, when the priests blew with the trumpets, Joshua said unto the people, Shout; for the LORD hath given you the city."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And it came to pass at the seventh time, when the priests blew with the trumpets, Joshua said unto the people,"
+    },
+    {
+     "v": 16,
+     "speaker": "joshua",
+     "text": "Shout; for the LORD hath given you the city."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "joshua",
+   "ref": "JOS 6:17",
+   "label": "Joshua 6:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And the city shall be accursed, even it, and all that are therein, to the LORD: only Rahab the harlot shall live, she and all that are with her in the house, because she hid the messengers that we sent."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "joshua",
+     "text": "And the city shall be accursed, even it, and all that are therein, to the LORD: only Rahab the harlot shall live, she and all that are with her in the house, because she hid the messengers that we sent."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Even in that moment, Joshua remembered the woman on the wall. Rahab had hidden his spies, and the promise made to her would be kept."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOS 6:20",
+   "label": "Joshua 6:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "So the people shouted when the priests blew with the trumpets: and it came to pass, when the people heard the sound of the trumpet, and the people shouted with a great shout, that the wall fell down flat, so that the people went up into the city, every man straight before him, and they took the city."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "So the people shouted when the priests blew with the trumpets: and it came to pass, when the people heard the sound of the trumpet, and the people shouted with a great shout, that the wall fell down flat, so that the people went up into the city, every man straight before him, and they took the city."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The walls of Jericho did not come down because Israel was strong. They came down because God had said they would, and his people did what he asked, even when it made no sense to them."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Some walls take a long time. Some days you walk the same circle and see nothing change. The people of Israel walked six days with nothing to show for it. On the seventh, they found out that God had been keeping his word the whole time."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 777,
+ "est_seconds": 424,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.7",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:36:32",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Josh 6:1-20; God's commands read by the narrator as scripture; ends at v20, the slaughter of v21 not told; the close is about God keeping his word to Israel, with no promise that a listener's own walls will fall."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain; Rahab remembered by name; no triumphalism over the people of Jericho."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

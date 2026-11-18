@@ -1,0 +1,400 @@
+{
+ "id": "core-050-wise-men",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Wise Men and the Star",
+ "passage": {
+  "refs": [
+   "MAT 2:1-12"
+  ],
+  "label": "Matthew 2:1-12"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "wisemen",
+   "name": "wise men",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "priests",
+   "name": "chief priests",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "herod",
+   "name": "Herod",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus had been born in the little town of Bethlehem. Far away in the east, some men who studied the night sky had seen something new."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:1",
+   "label": "Matthew 2:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Now when Jesus was born in Bethlehem of Judaea in the days of Herod the king, behold, there came wise men from the east to Jerusalem,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Now when Jesus was born in Bethlehem of Judaea in the days of Herod the king, behold, there came wise men from the east to Jerusalem,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "wisemen",
+   "ref": "MAT 2:2",
+   "label": "Matthew 2:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Saying, Where is he that is born King of the Jews? for we have seen his star in the east, and are come to worship him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Saying,"
+    },
+    {
+     "v": 2,
+     "speaker": "wisemen",
+     "text": "Where is he that is born King of the Jews? for we have seen his star in the east, and are come to worship him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They had traveled a long way, following what they had seen. They came to the capital city and asked the obvious place, the king's palace. But the king there knew nothing about a new king."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:3",
+   "label": "Matthew 2:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "When Herod the king had heard these things, he was troubled, and all Jerusalem with him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "When Herod the king had heard these things, he was troubled, and all Jerusalem with him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Herod was a jealous and dangerous ruler. The news that another king had been born did not bring him joy. It frightened him. And when the king was troubled, the whole city held its breath."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:4",
+   "label": "Matthew 2:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And when he had gathered all the chief priests and scribes of the people together, he demanded of them where Christ should be born."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And when he had gathered all the chief priests and scribes of the people together, he demanded of them where Christ should be born."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "priests",
+   "ref": "MAT 2:5",
+   "label": "Matthew 2:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And they said unto him, In Bethlehem of Judaea: for thus it is written by the prophet,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And they said unto him,"
+    },
+    {
+     "v": 5,
+     "speaker": "priests",
+     "text": "In Bethlehem of Judaea: for thus it is written by the prophet,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "priests",
+   "ref": "MAT 2:6",
+   "label": "Matthew 2:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And thou Bethlehem, in the land of Juda, art not the least among the princes of Juda: for out of thee shall come a Governor, that shall rule my people Israel."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "priests",
+     "text": "And thou Bethlehem, in the land of Juda, art not the least among the princes of Juda: for out of thee shall come a Governor, that shall rule my people Israel."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The answer was in the scriptures all along. The teachers of the law knew exactly where to look. Yet not one of them went with the wise men to Bethlehem. It was only a few miles away."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:7",
+   "label": "Matthew 2:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Then Herod, when he had privily called the wise men, enquired of them diligently what time the star appeared."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Then Herod, when he had privily called the wise men, enquired of them diligently what time the star appeared."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "herod",
+   "ref": "MAT 2:8",
+   "label": "Matthew 2:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And he sent them to Bethlehem, and said, Go and search diligently for the young child; and when ye have found him, bring me word again, that I may come and worship him also."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And he sent them to Bethlehem, and said,"
+    },
+    {
+     "v": 8,
+     "speaker": "herod",
+     "text": "Go and search diligently for the young child; and when ye have found him, bring me word again, that I may come and worship him also."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Herod did not want to worship anyone. He wanted to find the child. But the wise men did not know that yet."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:9",
+   "label": "Matthew 2:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "When they had heard the king, they departed; and, lo, the star, which they saw in the east, went before them, till it came and stood over where the young child was."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "When they had heard the king, they departed; and, lo, the star, which they saw in the east, went before them, till it came and stood over where the young child was."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:10",
+   "label": "Matthew 2:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "When they saw the star, they rejoiced with exceeding great joy."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "When they saw the star, they rejoiced with exceeding great joy."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Exceeding great joy. They had come so far, and now the star went before them and stopped over one house in a small town."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:11",
+   "label": "Matthew 2:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And when they were come into the house, they saw the young child with Mary his mother, and fell down, and worshipped him: and when they had opened their treasures, they presented unto him gifts; gold, and frankincense, and myrrh."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And when they were come into the house, they saw the young child with Mary his mother, and fell down, and worshipped him: and when they had opened their treasures, they presented unto him gifts; gold, and frankincense, and myrrh."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Men of learning, perhaps men of wealth, kneeling down before a little child in an ordinary house. They opened their treasures and gave him gold, frankincense and myrrh, gifts fit for a king."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 2:12",
+   "label": "Matthew 2:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And being warned of God in a dream that they should not return to Herod, they departed into their own country another way."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And being warned of God in a dream that they should not return to Herod, they departed into their own country another way."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They went home a different way. God warned them, and they listened."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The people closest to the answer did not go looking. Strangers from far away followed a light all the way to the child. The story still asks the same question. Will we go and see for ourselves, and kneel, and bring him what we have?"
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 568,
+ "est_seconds": 310,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:36:32",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Matt 2:1-12; stops before v16 (the children of Bethlehem); the number and status of the wise men not invented ('perhaps'); the gifts named as the text names them."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Strangers from the east honoured; plain and reverent."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,519 @@
+{
+ "id": "core-048-rebekah",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Rebekah at the Well",
+ "passage": {
+  "refs": [
+   "GEN 24:10-27"
+  ],
+  "label": "Genesis 24:10-27"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "servant",
+   "name": "servant",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "rebekah",
+   "name": "Rebekah",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abraham was old, and his son Isaac was not yet married. Abraham did not want Isaac to marry a woman from the land where they were living. So he sent his oldest servant all the way back to the land of his family to find a wife for his son."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:10",
+   "label": "Genesis 24:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And the servant took ten camels of the camels of his master, and departed; for all the goods of his master were in his hand: and he arose, and went to Mesopotamia, unto the city of Nahor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And the servant took ten camels of the camels of his master, and departed; for all the goods of his master were in his hand: and he arose, and went to Mesopotamia, unto the city of Nahor."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:11",
+   "label": "Genesis 24:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And he made his camels to kneel down without the city by a well of water at the time of the evening, even the time that women go out to draw water."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And he made his camels to kneel down without the city by a well of water at the time of the evening, even the time that women go out to draw water."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was evening. The servant was a long way from home, standing at a strange well with ten thirsty camels. He did not know a single person in that town. So he prayed."
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:12",
+   "label": "Genesis 24:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And he said, O LORD God of my master Abraham, I pray thee, send me good speed this day, and shew kindness unto my master Abraham."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And he said,"
+    },
+    {
+     "v": 12,
+     "speaker": "servant",
+     "text": "O LORD God of my master Abraham, I pray thee, send me good speed this day, and shew kindness unto my master Abraham."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:13",
+   "label": "Genesis 24:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Behold, I stand here by the well of water; and the daughters of the men of the city come out to draw water:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "servant",
+     "text": "Behold, I stand here by the well of water; and the daughters of the men of the city come out to draw water:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:14",
+   "label": "Genesis 24:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And let it come to pass, that the damsel to whom I shall say, Let down thy pitcher, I pray thee, that I may drink; and she shall say, Drink, and I will give thy camels drink also: let the same be she that thou hast appointed for thy servant Isaac; and thereby shall I know that thou hast shewed kindness unto my master."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "servant",
+     "text": "And let it come to pass, that the damsel to whom I shall say, Let down thy pitcher, I pray thee, that I may drink; and she shall say, Drink, and I will give thy camels drink also: let the same be she that thou hast appointed for thy servant Isaac; and thereby shall I know that thou hast shewed kindness unto my master."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was a big thing to ask. Ten camels drink a lot of water after a long trip through the desert. A young woman who offered to water them all would be offering hours of hard work to a stranger."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:15",
+   "label": "Genesis 24:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And it came to pass, before he had done speaking, that, behold, Rebekah came out, who was born to Bethuel, son of Milcah, the wife of Nahor, Abraham’s brother, with her pitcher upon her shoulder."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And it came to pass, before he had done speaking, that, behold, Rebekah came out, who was born to Bethuel, son of Milcah, the wife of Nahor, Abraham’s brother, with her pitcher upon her shoulder."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He had not even finished praying."
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:17",
+   "label": "Genesis 24:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And the servant ran to meet her, and said, Let me, I pray thee, drink a little water of thy pitcher."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And the servant ran to meet her, and said,"
+    },
+    {
+     "v": 17,
+     "speaker": "servant",
+     "text": "Let me, I pray thee, drink a little water of thy pitcher."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rebekah",
+   "ref": "GEN 24:18",
+   "label": "Genesis 24:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And she said, Drink, my lord: and she hasted, and let down her pitcher upon her hand, and gave him drink."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And she said,"
+    },
+    {
+     "v": 18,
+     "speaker": "rebekah",
+     "text": "Drink, my lord:"
+    },
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "and she hasted, and let down her pitcher upon her hand, and gave him drink."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rebekah",
+   "ref": "GEN 24:19",
+   "label": "Genesis 24:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And when she had done giving him drink, she said, I will draw water for thy camels also, until they have done drinking."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And when she had done giving him drink, she said,"
+    },
+    {
+     "v": 19,
+     "speaker": "rebekah",
+     "text": "I will draw water for thy camels also, until they have done drinking."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:20",
+   "label": "Genesis 24:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And she hasted, and emptied her pitcher into the trough, and ran again unto the well to draw water, and drew for all his camels."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And she hasted, and emptied her pitcher into the trough, and ran again unto the well to draw water, and drew for all his camels."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Back and forth she went, from the well to the trough, again and again, until every camel had its fill. Nobody made her do it. Kindness was simply who she was."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:21",
+   "label": "Genesis 24:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And the man wondering at her held his peace, to wit whether the LORD had made his journey prosperous or not."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And the man wondering at her held his peace, to wit whether the LORD had made his journey prosperous or not."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The servant watched her and did not say a word. He was waiting to see if this was really God's answer."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:22",
+   "label": "Genesis 24:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And it came to pass, as the camels had done drinking, that the man took a golden earring of half a shekel weight, and two bracelets for her hands of ten shekels weight of gold;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And it came to pass, as the camels had done drinking, that the man took a golden earring of half a shekel weight, and two bracelets for her hands of ten shekels weight of gold;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:23",
+   "label": "Genesis 24:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And said, Whose daughter art thou? tell me, I pray thee: is there room in thy father’s house for us to lodge in?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And said,"
+    },
+    {
+     "v": 23,
+     "speaker": "servant",
+     "text": "Whose daughter art thou? tell me, I pray thee: is there room in thy father’s house for us to lodge in?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rebekah",
+   "ref": "GEN 24:24",
+   "label": "Genesis 24:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And she said unto him, I am the daughter of Bethuel the son of Milcah, which she bare unto Nahor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "And she said unto him,"
+    },
+    {
+     "v": 24,
+     "speaker": "rebekah",
+     "text": "I am the daughter of Bethuel the son of Milcah, which she bare unto Nahor."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "rebekah",
+   "ref": "GEN 24:25",
+   "label": "Genesis 24:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "She said moreover unto him, We have both straw and provender enough, and room to lodge in."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "She said moreover unto him,"
+    },
+    {
+     "v": 25,
+     "speaker": "rebekah",
+     "text": "We have both straw and provender enough, and room to lodge in."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Bethuel. Nahor. These were Abraham's own family. Out of all the women in that town, the one who came to the well was a relative of his master."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 24:26",
+   "label": "Genesis 24:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And the man bowed down his head, and worshipped the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And the man bowed down his head, and worshipped the LORD."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "servant",
+   "ref": "GEN 24:27",
+   "label": "Genesis 24:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And he said, Blessed be the LORD God of my master Abraham, who hath not left destitute my master of his mercy and his truth: I being in the way, the LORD led me to the house of my master’s brethren."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And he said,"
+    },
+    {
+     "v": 27,
+     "speaker": "servant",
+     "text": "Blessed be the LORD God of my master Abraham, who hath not left destitute my master of his mercy and his truth: I being in the way, the LORD led me to the house of my master’s brethren."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The first thing the servant did was not to celebrate or make plans. He bowed his head right there by the well and thanked God. Rebekah would go on to marry Isaac and become a mother in the family of promise. It began with a prayer at a well, and a young woman who was kind to a stranger and his tired camels."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 747,
+ "est_seconds": 407,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.9",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:36:32",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 24:10-27 (v16's description skipped, nothing changed); the servant's prayer and thanks kept as scripture; nothing invented about Rebekah beyond her kindness in the text."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Rebekah's kindness and work shown with dignity; no romance framing."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

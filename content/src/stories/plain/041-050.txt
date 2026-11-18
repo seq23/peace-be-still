@@ -1,0 +1,307 @@
+# Plain telling, core stories 41-50. Written by Claude (no free-model draft), then Claude's pastor and cultural read.
+
+=== core-041-talents | The Talents
+passage: MAT 25:14-29
+shelf: adult
+violence: none
+sexual: none
+cast: five|servant|adult|m; two|servant|adult|m; one|servant|adult|m; master|lord|adult|m
+N: Jesus told this story to his friends near the end of his time with them. He was teaching them how to live while they waited for him.
+S: MAT 25:14
+S: MAT 25:15
+N: A talent was not a gift or a skill back then. It was a weight of silver, more than most workers earned in many years. Even one talent was a great deal to hold in your hands.
+N: Notice that the master did not give the same amount to each man. He knew them. He gave to each what that man could carry.
+S: MAT 25:16
+S: MAT 25:17
+S: MAT 25:18
+N: Two of the servants went to work. The third dug a hole. He did not spend the money or lose it. He just buried it and walked away.
+S: MAT 25:19
+N: The master was gone a long time. Long enough that the servants could have wondered if he was ever coming back. Then one day he was home, and he called them in one by one.
+S: MAT 25:20 @five
+S: MAT 25:21 @master
+N: The master did not say, well done, you made me rich. He said, good and faithful. What pleased him was the faithfulness.
+S: MAT 25:22 @two
+S: MAT 25:23 @master
+N: Listen closely. The man with two talents heard the very same words as the man with five. Same praise. Same joy. The master was not comparing them to each other. He was looking at what each one did with what he had been given.
+N: Then the third servant came in.
+S: MAT 25:24 @one
+S: MAT 25:25 @one whole
+N: He had decided ahead of time that his master was hard. That fear shaped everything he did. He was so afraid of getting it wrong that he did nothing at all.
+S: MAT 25:26 @master
+S: MAT 25:27 @master whole
+S: MAT 25:28 @master whole
+S: MAT 25:29
+N: This is not a story about getting rich. It is a story about trust. The master handed his servants what was his and left it in their care. Two of them treated it as something to use while he was away. One of them treated it as something to fear.
+N: Each of us has been given something to hold for a while. Time, a voice, a pair of hands, a little faith. It may not look like five talents. It does not need to. The story ends with a master who knows his servants by name, and who wants to say to each one of them, well done.
+
+=== core-042-rahab | Rahab and the Scarlet Line
+passage: JOS 2:1-21
+shelf: adult
+violence: none
+sexual: none
+cast: king|king|adult|m; rahab|Rahab|adult|f; men|the men|adult|group
+N: Forty years after they left Egypt, the people of Israel camped across the Jordan River. On the other side stood Jericho, a city with high walls. Joshua was leading them now that Moses had died.
+S: JOS 2:1
+N: Rahab's house was built right into the city wall. People came and went there, and two strangers would not stand out. But somebody noticed.
+S: JOS 2:2
+S: JOS 2:3 @king
+N: Rahab had a choice to make, and she had only moments to make it. She could hand the two men over and be safe with her own king. She did not.
+S: JOS 2:4 @rahab after "and said thus, "
+S: JOS 2:5 @rahab whole
+S: JOS 2:6
+N: The king's men ran off toward the river. The gate was shut behind them. Up on the roof, under the drying flax, the two spies lay still.
+S: JOS 2:8
+N: Then Rahab told them why she had done it.
+S: JOS 2:9 @rahab after "And she said unto the men, "
+S: JOS 2:11 @rahab whole
+N: Rahab had never been to Egypt. She had never seen the sea split open. She had only heard the stories, the same stories everyone in Jericho had heard. The others heard them and were afraid. Rahab heard them and believed. She said it plainly. The LORD your God is God in heaven and on earth.
+S: JOS 2:12 @rahab whole
+S: JOS 2:13 @rahab whole
+N: She was not only thinking of herself. She asked for her father and mother, her brothers and sisters, and everyone in her house.
+S: JOS 2:14 @men after "And the men answered her, "
+S: JOS 2:15
+N: The house on the wall had a window facing out. In the dark, she let them down the outside of the city on a rope. She told them to hide in the mountains for three days until the searchers gave up.
+S: JOS 2:18 @men whole
+N: That was the sign. A line of scarlet thread in the window. Everyone inside the house with it would be safe.
+S: JOS 2:21 @rahab after "And she said, " until "And she sent them"
+N: She did not wait to tie it. As soon as the men were gone, the scarlet line went up in her window.
+N: The people of Jericho knew Rahab by the work she did. God knew her by her faith. She was a woman on the edge of her city, and she trusted the God of Israel before she had ever met his people. Her story did not end at that window. She was kept safe, and she became part of Israel's family, a reminder that no one stands too far outside for God to bring them in.
+
+=== core-043-jericho | The Walls of Jericho
+passage: JOS 6:1-20
+shelf: adult
+violence: mild
+sexual: none
+cast: joshua|Joshua|adult|m
+N: Israel had crossed the Jordan River at last. Now the first city of the promised land stood in front of them, and its gates were shut tight.
+S: JOS 6:1
+N: No one went in. No one came out. The people of Jericho were waiting behind their walls.
+S: JOS 6:2
+S: JOS 6:3
+S: JOS 6:4
+S: JOS 6:5
+N: It was the strangest battle plan anyone had ever heard. No ladders, no battering rams. Just walking, trumpets, and one great shout at the end. Joshua did not argue with it. He went and told the priests.
+S: JOS 6:6 @joshua after "and said unto them, "
+S: JOS 6:7 @joshua after "And he said unto the people, "
+S: JOS 6:8
+N: The ark of the covenant went in the middle, carried by the priests. It was the sign that God was with them. The whole march moved around it.
+S: JOS 6:10 @joshua after "saying, "
+N: Think about that. A whole army walking in silence. Only the trumpets sounding. The people on the walls must have watched them come around and wondered what this was.
+S: JOS 6:14
+N: Six days of the same thing. Out in the morning, once around the city, back to camp. Nothing happened. The walls stood just as high on the sixth day as they had on the first. It would have been easy to feel foolish. But they kept walking.
+S: JOS 6:15
+S: JOS 6:16 @joshua after "Joshua said unto the people, "
+S: JOS 6:17 @joshua whole
+N: Even in that moment, Joshua remembered the woman on the wall. Rahab had hidden his spies, and the promise made to her would be kept.
+S: JOS 6:20
+N: The walls of Jericho did not come down because Israel was strong. They came down because God had said they would, and his people did what he asked, even when it made no sense to them.
+N: Some walls take a long time. Some days you walk the same circle and see nothing change. The people of Israel walked six days with nothing to show for it. On the seventh, they found out that God had been keeping his word the whole time.
+
+=== core-044-nicodemus | Nicodemus Comes by Night
+passage: JOH 3:1-17
+shelf: adult
+violence: none
+sexual: none
+cast: nicodemus|Nicodemus|adult|m
+S: JOH 3:1
+N: Nicodemus was an important man. He was a teacher of the law and a leader of his people. Many of the leaders did not trust Jesus. But Nicodemus had seen enough to want to know more.
+S: JOH 3:2 @nicodemus after "and said unto him, "
+N: He came at night. Maybe he did not want to be seen. Maybe night was simply when there was quiet enough to talk. Either way, he came with an honest question in his heart.
+S: JOH 3:3
+N: Nicodemus was a careful thinker, and this made no sense to him.
+S: JOH 3:4 @nicodemus after "Nicodemus saith unto him, "
+N: Jesus was not talking about being born again the way a baby is born. He was talking about a new life that comes from God.
+S: JOH 3:5
+S: JOH 3:6
+S: JOH 3:7
+S: JOH 3:8
+N: You cannot see the wind. You cannot tell it where to go. But you hear it moving in the trees, and you know it is there. Jesus said the life God gives is like that.
+S: JOH 3:9 @nicodemus after "Nicodemus answered and said unto him, "
+N: It is a question many people have asked since. Jesus told him that even a teacher of Israel had more to learn. Then he pointed back to an old story Nicodemus knew well.
+S: JOH 3:14
+S: JOH 3:15
+N: Long ago in the wilderness, the people of Israel were dying from snakebites. God told Moses to make a serpent of bronze and lift it high on a pole. Whoever looked at it lived. Jesus said he would be lifted up in the same way.
+S: JOH 3:16
+S: JOH 3:17
+N: That is one of the best known verses in the whole Bible, and it was first spoken to one man, in the dark, who came with questions.
+N: John does not tell us what Nicodemus said that night. But later in the same gospel, he stood up for Jesus among the other leaders. And after the cross, he came again, this time in daylight, carrying spices to help bury the body of Jesus.
+N: Nicodemus started with questions. Jesus did not turn him away for them. He met him in the night and told him about a love big enough for the whole world.
+
+=== core-045-abigail | Abigail Rides to Meet David
+passage: 1SA 25:14-35
+shelf: adult
+violence: mild
+sexual: none
+cast: youngman|one of the young men|adult|m; abigail|Abigail|adult|f; david|David|adult|m
+N: Before he was king, David lived in the wilderness with about six hundred men. They camped near the flocks of a rich man named Nabal and kept his shepherds safe. When it was time to shear the sheep, David sent ten young men to Nabal to ask kindly for whatever he could spare.
+N: Nabal sent them away with insults. Who is David, he said. When David heard it, he told four hundred of his men to strap on their swords.
+S: 1SA 25:14 @youngman after "saying, "
+S: 1SA 25:15 @youngman whole
+S: 1SA 25:16 @youngman whole
+S: 1SA 25:17 @youngman whole
+N: The servant did not go to Nabal. He went to Abigail. He knew she would listen, and he knew she was wise.
+S: 1SA 25:18
+N: She did not stop to argue or to wring her hands. She loaded up bread and wine, meat and grain, raisins and figs, and she moved.
+S: 1SA 25:19 @abigail after "And she said unto her servants, " until "But she told not"
+S: 1SA 25:20
+S: 1SA 25:21 @david after "Now David had said, "
+N: David was angry, and his anger was carrying him toward something terrible. He meant to wipe out every man in Nabal's house before morning.
+S: 1SA 25:23
+S: 1SA 25:24 @abigail after "and said, "
+S: 1SA 25:25 @abigail whole
+N: The name Nabal means fool. Abigail did not pretend her husband had done right. She took the blame on herself and asked David to hear her out.
+S: 1SA 25:26 @abigail whole
+S: 1SA 25:28 @abigail whole
+N: She reminded David who he was. He fought the LORD's battles. He did not need to fight this one. One day he would be king, and she did not want him to carry this blood with him when that day came.
+S: 1SA 25:32 @david after "And David said to Abigail, "
+S: 1SA 25:33 @david whole
+N: David did not say, you are right. He said, blessed be the LORD who sent you. He saw God's hand in the woman standing in the road.
+S: 1SA 25:35 @david after "and said unto her, "
+N: One woman, a few donkeys loaded with bread, and a few honest words. That was enough to turn four hundred swords around. Abigail did not have an army. She had wisdom, and the courage to step into the road at the right moment. God used it to keep a future king from doing a wrong he could never take back.
+
+=== core-046-still-small-voice | Elijah and the Still Small Voice
+passage: 1KI 19:1-15
+shelf: adult
+violence: mild
+sexual: none
+cast: jezebel|Jezebel|adult|f; elijah|Elijah|adult|m
+N: Elijah had just seen God answer with fire on Mount Carmel. It was the greatest victory of his life. But the queen was not moved by it at all.
+S: 1KI 19:1
+S: 1KI 19:2 @jezebel after "saying, "
+S: 1KI 19:3
+S: 1KI 19:4 @elijah after "and said, "
+N: The same prophet who stood up to hundreds of false prophets now sat alone under a tree and asked to die. He was worn out, afraid, and sure he had failed.
+N: If you have ever been that tired, you are not the first. And notice what God did next. He did not scold Elijah. He did not give him a speech.
+S: 1KI 19:5
+S: 1KI 19:6
+S: 1KI 19:7
+N: Sleep, and warm bread, and water, and a gentle touch. Twice. God knew the journey was too much for him, and he took care of his body before anything else.
+S: 1KI 19:8
+S: 1KI 19:9
+S: 1KI 19:10 @elijah after "And he said, "
+N: Elijah poured it all out. He had done everything he could, and now he felt like the only one left.
+S: 1KI 19:11
+S: 1KI 19:12
+N: Wind that broke the rocks. An earthquake. A fire. All of it loud and frightening, and God was in none of it. Then, after all the noise, there was a still small voice.
+S: 1KI 19:13
+S: 1KI 19:14 @elijah after "And he said, "
+S: 1KI 19:15
+N: God did not leave Elijah sitting in the cave. He gave him rest, then he spoke to him quietly, then he gave him something to do. Soon after, God told him he was not alone after all. There were still seven thousand in Israel who had not turned away.
+N: Sometimes we look for God in the wind and the fire. Sometimes he comes in a quiet voice, after the noise has passed. And sometimes the first thing he gives a weary person is a meal and a good night's sleep. If tonight feels like Elijah's tree, you do not have to sit under it alone. Tell someone who loves you.
+
+=== core-047-rich-young-ruler | The Rich Young Ruler
+passage: MAR 10:17-27
+shelf: adult
+violence: none
+sexual: none
+cast: man|one|adult|m; disciples|disciples|adult|group
+N: Jesus was setting out on the road when a man came running up to him. Mark only calls him one who came. Other gospels tell us he was young, and a ruler, and very rich.
+S: MAR 10:17 @man after "and asked him, "
+N: He ran. He knelt in the dust. This was a man who really wanted an answer.
+S: MAR 10:18
+S: MAR 10:19
+N: Jesus named the commandments about how we treat other people. The man listened, and he could say yes to every one of them.
+S: MAR 10:20 @man after "And he answered and said unto him, "
+S: MAR 10:21
+N: Before Jesus said anything hard to him, Mark tells us that Jesus looked at him and loved him. The hard word came from love.
+N: There was one thing this man held tighter than anything else. Jesus put his finger right on it. He invited him to let it go and come follow him.
+S: MAR 10:22
+N: He did not argue. He did not get angry. He was simply sad. He went away, and the story does not say he ever came back.
+S: MAR 10:23
+S: MAR 10:24
+S: MAR 10:25
+N: A camel is the biggest animal people in that land knew. The eye of a needle is the smallest opening. Jesus meant something impossible, and his friends understood him.
+S: MAR 10:26 @disciples after "saying among themselves, "
+S: MAR 10:27
+N: That is where Jesus brought them. None of us can get into God's kingdom by being good enough or by giving up enough. It is impossible for people. It is not impossible for God.
+N: The young man came asking what he could do. Jesus showed him that the real question was what he loved most. Money is not the only thing a heart can hold too tightly. Each of us has something. And the same Jesus who looked at that young man with love looks at us the same way, and still says, come, follow me.
+
+=== core-048-rebekah | Rebekah at the Well
+passage: GEN 24:10-27
+shelf: adult
+violence: none
+sexual: none
+cast: servant|servant|adult|m; rebekah|Rebekah|adult|f
+N: Abraham was old, and his son Isaac was not yet married. Abraham did not want Isaac to marry a woman from the land where they were living. So he sent his oldest servant all the way back to the land of his family to find a wife for his son.
+S: GEN 24:10
+S: GEN 24:11
+N: It was evening. The servant was a long way from home, standing at a strange well with ten thirsty camels. He did not know a single person in that town. So he prayed.
+S: GEN 24:12 @servant after "And he said, "
+S: GEN 24:13 @servant whole
+S: GEN 24:14 @servant whole
+N: It was a big thing to ask. Ten camels drink a lot of water after a long trip through the desert. A young woman who offered to water them all would be offering hours of hard work to a stranger.
+S: GEN 24:15
+N: He had not even finished praying.
+S: GEN 24:17 @servant after "and said, "
+S: GEN 24:18 @rebekah after "And she said, " until "and she hasted"
+S: GEN 24:19 @rebekah after "she said, "
+S: GEN 24:20
+N: Back and forth she went, from the well to the trough, again and again, until every camel had its fill. Nobody made her do it. Kindness was simply who she was.
+S: GEN 24:21
+N: The servant watched her and did not say a word. He was waiting to see if this was really God's answer.
+S: GEN 24:22
+S: GEN 24:23 @servant after "And said, "
+S: GEN 24:24 @rebekah after "And she said unto him, "
+S: GEN 24:25 @rebekah after "She said moreover unto him, "
+N: Bethuel. Nahor. These were Abraham's own family. Out of all the women in that town, the one who came to the well was a relative of his master.
+S: GEN 24:26
+S: GEN 24:27 @servant after "And he said, "
+N: The first thing the servant did was not to celebrate or make plans. He bowed his head right there by the well and thanked God. Rebekah would go on to marry Isaac and become a mother in the family of promise. It began with a prayer at a well, and a young woman who was kind to a stranger and his tired camels.
+
+=== core-049-samson | Samson's Last Prayer
+passage: JDG 16:4-30
+shelf: adult
+violence: strong
+sexual: none
+cast: lords|the lords of the Philistines|adult|group; delilah|Delilah|adult|f; samson|Samson|adult|m
+N: Samson was the strongest man in Israel. Before he was born, God had set him apart. No razor was ever to touch his head. His long hair was the sign of that promise. For years he fought the Philistines, who ruled over Israel.
+S: JDG 16:4
+S: JDG 16:5 @lords after "and said unto her, "
+N: Eleven hundred pieces of silver from each of the lords. It was a fortune, and Delilah said yes.
+S: JDG 16:6 @delilah after "And Delilah said to Samson, "
+N: Samson played a game with her. He told her to bind him with fresh bowstrings, and he snapped them. He told her new ropes, and he broke those like thread. He told her to weave his hair into a loom, and he walked away with the whole thing. Each time, the Philistines were waiting in the room. Each time, Samson should have seen what was happening.
+S: JDG 16:15 @delilah after "And she said unto him, "
+S: JDG 16:16
+S: JDG 16:17 @samson after "and said unto her, "
+S: JDG 16:19
+S: JDG 16:20 @delilah after "And she said, " until "And he awoke"
+N: That is one of the saddest lines in the Bible. Samson thought he would get up and shake himself free like before. He did not know that the LORD had left him.
+S: JDG 16:21
+N: The strongest man in Israel, blind and in chains, pushing a grinding stone in a prison. Everything he had been was gone.
+S: JDG 16:22
+N: But the story does not stop there. A small line, easy to miss. His hair began to grow again.
+N: The Philistines held a great feast to thank their god for giving them Samson. They brought him out of the prison to make fun of him, and stood him between the pillars of the temple. Thousands of people were watching.
+S: JDG 16:26 @samson
+S: JDG 16:28 @samson after "and said, "
+N: For the first time in this story, Samson asked God for help. Not for a game or for pride. He prayed, remember me.
+S: JDG 16:29
+S: JDG 16:30 @samson after "And Samson said, " until "And he bowed"
+N: Samson's life was full of choices he should not have made. The Bible does not hide them. But at the very end, broken and blind, he called on God, and God heard him. Samson is listed later among the people of faith in the book of Hebrews. Not because he got everything right, but because at the last he turned to God and asked to be remembered.
+
+=== core-050-wise-men | The Wise Men and the Star
+passage: MAT 2:1-12
+shelf: adult
+violence: none
+sexual: none
+cast: wisemen|wise men|adult|group; priests|chief priests|adult|group; herod|Herod|adult|m
+N: Jesus had been born in the little town of Bethlehem. Far away in the east, some men who studied the night sky had seen something new.
+S: MAT 2:1
+S: MAT 2:2 @wisemen after "Saying, "
+N: They had traveled a long way, following what they had seen. They came to the capital city and asked the obvious place, the king's palace. But the king there knew nothing about a new king.
+S: MAT 2:3
+N: Herod was a jealous and dangerous ruler. The news that another king had been born did not bring him joy. It frightened him. And when the king was troubled, the whole city held its breath.
+S: MAT 2:4
+S: MAT 2:5 @priests after "And they said unto him, "
+S: MAT 2:6 @priests whole
+N: The answer was in the scriptures all along. The teachers of the law knew exactly where to look. Yet not one of them went with the wise men to Bethlehem. It was only a few miles away.
+S: MAT 2:7
+S: MAT 2:8 @herod after "and said, "
+N: Herod did not want to worship anyone. He wanted to find the child. But the wise men did not know that yet.
+S: MAT 2:9
+S: MAT 2:10
+N: Exceeding great joy. They had come so far, and now the star went before them and stopped over one house in a small town.
+S: MAT 2:11
+N: Men of learning, perhaps men of wealth, kneeling down before a little child in an ordinary house. They opened their treasures and gave him gold, frankincense and myrrh, gifts fit for a king.
+S: MAT 2:12
+N: They went home a different way. God warned them, and they listened.
+N: The people closest to the answer did not go looking. Strangers from far away followed a light all the way to the child. The story still asks the same question. Will we go and see for ourselves, and kneel, and bring him what we have?
