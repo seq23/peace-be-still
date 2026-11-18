@@ -1,0 +1,280 @@
+{
+ "id": "core-007-prodigal-son",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Son Who Came Home",
+ "passage": {
+  "refs": [
+   "LUK 15:11-32"
+  ],
+  "label": "Luke 15:11-32"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "younger-son",
+   "name": "the younger",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "father",
+   "name": "father",
+   "age": "elder",
+   "gender": "m"
+  },
+  {
+   "id": "elder-son",
+   "name": "elder son",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus told a story about a man who had two sons. The younger son came to his father and asked for his share of the family's wealth now, while his father was still alive. And the father divided what he had between them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:13",
+   "label": "Luke 15:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And not many days after the younger son gathered all together, and took his journey into a far country, and there wasted his substance with riotous living."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Money goes quickly when someone is trying to fill an empty place with it. Soon it was all gone. Then a famine came to that land, and he had nothing. He took a job feeding pigs. He was so hungry he wanted to eat the pods the pigs were eating, and no one gave him anything."
+  },
+  {
+   "type": "scripture",
+   "speaker": "younger-son",
+   "ref": "LUK 15:17",
+   "label": "Luke 15:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And when he came to himself, he said, How many hired servants of my father’s have bread enough and to spare, and I perish with hunger!"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "younger-son",
+   "ref": "LUK 15:18",
+   "label": "Luke 15:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "I will arise and go to my father, and will say unto him, Father, I have sinned against heaven, and before thee,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "younger-son",
+   "ref": "LUK 15:19",
+   "label": "Luke 15:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And am no more worthy to be called thy son: make me as one of thy hired servants."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He came to himself. That is the turning point. Not the moment everything got fixed, but the moment he finally saw where he was."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 15:20",
+   "label": "Luke 15:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And he arose, and came to his father. But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look at the father. He saw his son while he was still a long way off. That means he had been watching the road. He ran to his son, fell on his neck and kissed him. He did not even wait for the speech his son had practiced."
+  },
+  {
+   "type": "scripture",
+   "speaker": "younger-son",
+   "ref": "LUK 15:21",
+   "label": "Luke 15:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And the son said unto him, Father, I have sinned against heaven, and in thy sight, and am no more worthy to be called thy son."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:22",
+   "label": "Luke 15:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "But the father said to his servants, Bring forth the best robe, and put it on him; and put a ring on his hand, and shoes on his feet:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:23",
+   "label": "Luke 15:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And bring hither the fatted calf, and kill it; and let us eat, and be merry:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:24",
+   "label": "Luke 15:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "For this my son was dead, and is alive again; he was lost, and is found. And they began to be merry."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "But there is another son in this story. The older brother was out in the field. As he came near the house, he heard music and dancing. When he learned the reason, he was angry and would not go inside. So his father came out to him too."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elder-son",
+   "ref": "LUK 15:29",
+   "label": "Luke 15:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "And he answering said to his father, Lo, these many years do I serve thee, neither transgressed I at any time thy commandment: and yet thou never gavest me a kid, that I might make merry with my friends:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:31",
+   "label": "Luke 15:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And he said unto him, Son, thou art ever with me, and all that I have is thine."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "father",
+   "ref": "LUK 15:32",
+   "label": "Luke 15:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "It was meet that we should make merry, and be glad: for this thy brother was dead, and is alive again; and was lost, and is found."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The father went out to both of his sons. One had come home from a far country. The other was standing just outside the door. Jesus ends the story before we learn whether the older brother went in. The story leaves the door open, and it shows a father who comes out to meet them both."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 579,
+ "est_seconds": 316,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.0",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 15:11-32 after one fix; ends on the father going to both sons, no claim about the listener's standing."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain and kind; the elder son is not made a villain."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Pastor pass: removed an outside claim about what older men did in that culture; replaced with the verse's own action.",
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,198 @@
+{
+ "id": "core-001-peace-be-still",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Jesus Calms the Storm",
+ "passage": {
+  "refs": [
+   "MAR 4:1",
+   "MAR 4:35-41"
+  ],
+  "label": "Mark 4:1; Mark 4:35-41"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "disciples",
+   "name": "the disciples",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It had been a long day beside the Sea of Galilee. Crowds had pressed in to hear Jesus all day, so many that he had taught them sitting in a boat just off the shore. When evening came, he told his disciples they would cross the lake to the other side."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So they sent the crowd home and took him with them in the boat, just as he was. Other small boats went out with them onto the water. Jesus went to the back of the boat, laid his head on a cushion, and fell asleep."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The Sea of Galilee sits low, with hills all around it. Wind can rush down from those hills without warning. That night it did."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:37",
+   "label": "Mark 4:37",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 37,
+     "text": "And there arose a great storm of wind, and the waves beat into the ship, so that it was now full."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Some of these men had fished this lake their whole lives. They knew water, and they knew boats. They knew what a storm like this could do. That is why they were afraid. This was not a small worry. They thought they were going to die. They bailed and pulled and shouted over the wind, and still the boat kept filling."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And Jesus slept on. The disciples shook him awake."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAR 4:38",
+   "label": "Mark 4:38",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 38,
+     "text": "And he was in the hinder part of the ship, asleep on a pillow: and they awake him, and say unto him, Master, carest thou not that we perish?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It is an honest question. They had come to the right person, and they still could not understand why he seemed so quiet. Many people have asked the same thing in a hospital hallway, or late at night with the bills spread across the table."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Jesus stood up."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:39",
+   "label": "Mark 4:39",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 39,
+     "text": "And he arose, and rebuked the wind, and said unto the sea, Peace, be still. And the wind ceased, and there was a great calm."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There was no long speech. He spoke a few words, and the wind dropped the way a crying child grows quiet in its mother's arms. The waves went flat. The whole lake went still."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:40",
+   "label": "Mark 4:40",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 40,
+     "text": "And he said unto them, Why are ye so fearful? how is it that ye have no faith?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then he turned to his friends. He did not ask them to pretend they were never afraid. He asked them where their trust had gone, when he had been in the boat with them the whole time."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAR 4:41",
+   "label": "Mark 4:41",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 41,
+     "text": "And they feared exceedingly, and said one to another, What manner of man is this, that even the wind and the sea obey him?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That is the question the story leaves with us. Who is this, that the wind and the sea listen to him? The storm in the story was real. So was the calm. And the disciples learned that the one asleep in their boat was the one the storm obeyed."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 476,
+ "est_seconds": 260,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 476 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.3",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 4:1, 35-41; the closing names who the storm obeyed and promises no calm to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, warm, no stock phrases; the hospital and bills line is ordinary life, not a stereotype."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

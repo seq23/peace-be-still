@@ -1,0 +1,230 @@
+{
+ "id": "core-008-ruth-naomi",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Ruth and Naomi",
+ "passage": {
+  "refs": [
+   "RUT 1:1-22"
+  ],
+  "label": "Ruth 1:1-22"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "naomi",
+   "name": "Naomi",
+   "age": "elder",
+   "gender": "f"
+  },
+  {
+   "id": "ruth",
+   "name": "Ruth",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "orpah",
+   "name": "Orpah",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Long ago, when judges led Israel, a famine struck the land. A man from Bethlehem named Elimelech took his wife Naomi and their two sons to the country of Moab to find food."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Elimelech died. The two sons married women from Moab, Orpah and Ruth. About ten years later, both sons died as well. Three widows were left with nothing in their hands."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Naomi heard that the LORD had given his people bread again back home in Judah. So she started back, with her two daughters-in-law walking beside her."
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:8",
+   "label": "Ruth 1:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And Naomi said unto her two daughters in law, Go, return each to her mother’s house: the LORD deal kindly with you, as ye have dealt with the dead, and with me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They wept and said they would go with her. Naomi told them to turn back. She had no more sons to offer them. She felt that the hand of the LORD had gone out against her."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "RUT 1:14",
+   "label": "Ruth 1:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And they lifted up their voice, and wept again: and Orpah kissed her mother in law; but Ruth clave unto her."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Orpah kissed her and went home, and nothing in the story blames her for it. She went back to her own people, which was the sensible thing to do. But Ruth held on to Naomi and would not let go."
+  },
+  {
+   "type": "scripture",
+   "speaker": "ruth",
+   "ref": "RUT 1:16",
+   "label": "Ruth 1:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And Ruth said, Intreat me not to leave thee, or to return from following after thee: for whither thou goest, I will go; and where thou lodgest, I will lodge: thy people shall be my people, and thy God my God:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "ruth",
+   "ref": "RUT 1:17",
+   "label": "Ruth 1:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Where thou diest, will I die, and there will I be buried: the LORD do so to me, and more also, if ought but death part thee and me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "These are some of the most loved words in the Bible, and they were spoken by a young widow from Moab. She was not a prophet or a priest. She was a young woman from across the border who would not let an older woman walk that road alone."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When they reached Bethlehem, the whole town was stirred. The women asked each other whether this was really Naomi."
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:20",
+   "label": "Ruth 1:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And she said unto them, Call me not Naomi, call me Mara: for the Almighty hath dealt very bitterly with me."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "naomi",
+   "ref": "RUT 1:21",
+   "label": "Ruth 1:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "I went out full, and the LORD hath brought me home again empty: why then call ye me Naomi, seeing the LORD hath testified against me, and the Almighty hath afflicted me?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Naomi was honest about her grief. She did not dress it up, and the Bible lets her say it plainly. But read the last line slowly."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "RUT 1:22",
+   "label": "Ruth 1:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "So Naomi returned, and Ruth the Moabitess, her daughter in law, with her, which returned out of the country of Moab: and they came to Beth-lehem in the beginning of barley harvest."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They arrived at the beginning of the barley harvest. Naomi came home feeling empty, with Ruth at her side, just as the fields were turning gold. She could not see it yet. Grief often cannot. But her story was already turning."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 509,
+ "est_seconds": 278,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.5",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Ruth 1; lets Naomi's lament stand; the harvest line stays inside the text."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Orpah is not blamed; Ruth's loyalty is told with dignity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

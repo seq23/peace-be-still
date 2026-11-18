@@ -1,0 +1,217 @@
+{
+ "id": "core-005-david-goliath",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "David and Goliath",
+ "passage": {
+  "refs": [
+   "1SA 17:4-50"
+  ],
+  "label": "1 Samuel 17:4-50"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "david",
+   "name": "David",
+   "age": "teen",
+   "gender": "m"
+  },
+  {
+   "id": "saul",
+   "name": "Saul",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "goliath",
+   "name": "Goliath",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Two armies stood on two hills with a valley between them. Every morning and every evening, a champion walked out from the Philistine camp. His name was Goliath. He stood six cubits and a span, taller than any soldier there, and he wore armor of bronze from head to foot."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He shouted across the valley, daring Israel to send one man to fight him. For forty days, no one went."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then a young shepherd named David came to the camp to bring food to his older brothers. He heard the giant's challenge. He asked why anyone should be allowed to defy the armies of the living God."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 17:32",
+   "label": "1 Samuel 17:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "And David said to Saul, Let no man’s heart fail because of him; thy servant will go and fight with this Philistine."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "saul",
+   "ref": "1SA 17:33",
+   "label": "1 Samuel 17:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "And Saul said to David, Thou art not able to go against this Philistine to fight with him: for thou art but a youth, and he a man of war from his youth."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Saul was right about the facts. David was young, and Goliath was a trained warrior. But David had other facts. He told the king how he had kept his father's sheep, and how a lion and a bear had each come and carried off a lamb. He had gone after them and saved the lamb."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 17:37",
+   "label": "1 Samuel 17:37",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 37,
+     "text": "David said moreover, The LORD that delivered me out of the paw of the lion, and out of the paw of the bear, he will deliver me out of the hand of this Philistine. And Saul said unto David, Go, and the LORD be with thee."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Saul dressed David in his own armor, with a bronze helmet and a coat of mail. David tried to walk in it and could not. He took it all off. He could not fight in someone else's armor."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Instead he picked up his staff. He picked five smooth stones from the stream and dropped them into his shepherd's bag. His sling was in his hand."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Goliath looked at him and sneered. David was only a youth, with a ruddy face. The giant cursed him by his gods."
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 17:45",
+   "label": "1 Samuel 17:45",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 45,
+     "text": "Then said David to the Philistine, Thou comest to me with a sword, and with a spear, and with a shield: but I come to thee in the name of the LORD of hosts, the God of the armies of Israel, whom thou hast defied."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "david",
+   "ref": "1SA 17:47",
+   "label": "1 Samuel 17:47",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 47,
+     "text": "And all this assembly shall know that the LORD saveth not with sword and spear: for the battle is the LORD’s, and he will give you into our hands."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 17:49",
+   "label": "1 Samuel 17:49",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 49,
+     "text": "And David put his hand in his bag, and took thence a stone, and slang it, and smote the Philistine in his forehead, that the stone sunk into his forehead; and he fell upon his face to the earth."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "One stone, and the giant fell face down on the ground. David had no sword in his hand that day. He had a sling, a stone, and a trust in God he had learned out in the fields with the sheep."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The story does not promise that every hard fight ends this way. It shows where David's courage came from. He remembered how the LORD had been with him before, and he trusted him again."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 538,
+ "est_seconds": 293,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.8",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Samuel 17; the close says plainly the story does not promise every fight ends this way."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "No violence beyond the text; plain and vivid."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

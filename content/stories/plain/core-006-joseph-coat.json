@@ -1,0 +1,266 @@
+{
+ "id": "core-006-joseph-coat",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Joseph and the Coat",
+ "passage": {
+  "refs": [
+   "GEN 37:3-28",
+   "GEN 39:2"
+  ],
+  "label": "Genesis 37:3-28; Genesis 39:2"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "joseph",
+   "name": "Joseph",
+   "age": "teen",
+   "gender": "m"
+  },
+  {
+   "id": "brothers",
+   "name": "his brethren",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "reuben",
+   "name": "Reuben",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "judah",
+   "name": "Judah",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob, also called Israel, had twelve sons. Joseph was seventeen, born when his father was old, and Jacob loved him more than all the others. Everyone in the family knew it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:3",
+   "label": "Genesis 37:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Now Israel loved Joseph more than all his children, because he was the son of his old age: and he made him a coat of many colours."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:4",
+   "label": "Genesis 37:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And when his brethren saw that their father loved him more than all his brethren, they hated him, and could not speak peaceably unto him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A gift can be a blessing and a burden at once. Every time his brothers saw that coat, they saw what they had not been given. Then Joseph began to have dreams, and he told them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "joseph",
+   "ref": "GEN 37:7",
+   "label": "Genesis 37:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "For, behold, we were binding sheaves in the field, and, lo, my sheaf arose, and also stood upright; and, behold, your sheaves stood round about, and made obeisance to my sheaf."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "His brothers hated him even more. Then he dreamed that the sun, the moon and eleven stars bowed down to him. Even his father scolded him for that one, but Jacob kept thinking about it."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "One day the brothers were far away with the flocks, and Jacob sent Joseph to check on them. He found them at Dothan. They saw him coming from a long way off, wearing that coat."
+  },
+  {
+   "type": "scripture",
+   "speaker": "brothers",
+   "ref": "GEN 37:19",
+   "label": "Genesis 37:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And they said one to another, Behold, this dreamer cometh."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "brothers",
+   "ref": "GEN 37:20",
+   "label": "Genesis 37:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Come now therefore, and let us slay him, and cast him into some pit, and we will say, Some evil beast hath devoured him: and we shall see what will become of his dreams."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Reuben, the oldest, spoke up. He told them not to kill Joseph, but to throw him into a pit in the wilderness instead. He meant to come back later, rescue him, and bring him home to their father."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:23",
+   "label": "Genesis 37:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And it came to pass, when Joseph was come unto his brethren, that they stript Joseph out of his coat, his coat of many colours that was on him;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:24",
+   "label": "Genesis 37:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And they took him, and cast him into a pit: and the pit was empty, there was no water in it."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then the brothers sat down to eat. Their brother was in a dry pit nearby, and they ate their meal. While they ate, they saw a group of Ishmeelites coming from Gilead, their camels loaded with spices on the way down to Egypt."
+  },
+  {
+   "type": "scripture",
+   "speaker": "judah",
+   "ref": "GEN 37:26",
+   "label": "Genesis 37:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And Judah said unto his brethren, What profit is it if we slay our brother, and conceal his blood?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "judah",
+   "ref": "GEN 37:27",
+   "label": "Genesis 37:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Come, and let us sell him to the Ishmeelites, and let not our hand be upon him; for he is our brother and our flesh. And his brethren were content."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 37:28",
+   "label": "Genesis 37:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Then there passed by Midianites merchantmen; and they drew and lifted up Joseph out of the pit, and sold Joseph to the Ishmeelites for twenty pieces of silver: and they brought Joseph into Egypt."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Twenty pieces of silver. That was the price jealousy put on a brother. It is a hard story to sit with. But it does not end in that pit. Joseph was taken down to Egypt, and a little later the Bible tells us that the LORD was with Joseph there. The rest of his story is still to come."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 537,
+ "est_seconds": 293,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.7",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Genesis 37 with 39:2 named as later; does not soften the brothers' sin."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The sale of a free person is told as the wrong it was; no servitude framing of Joseph's worth."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
