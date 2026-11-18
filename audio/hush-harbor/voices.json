@@ -90,5 +90,36 @@
         "text": "Master, carest thou not that we perish? We bailed and we pulled and the boat kept filling up. And he was sleeping."
       }
     }
+  },
+  "clone": {
+    "about": "Clone lane (owner, 18 Nov 2026: \"Use the clones\"): Chatterbox (MIT) zero-shot clones of her four picked Gemini clips. floor = the clone test's similarity on an unseen line (voice-samples/clone/scores.json, Resemblyzer) minus 0.05, never below the closest other Gemini voice + 0.03. Test page: https://claude.ai/artifact/JwSS3WsBd77E7vZciVmyhp",
+    "engine": "chatterbox",
+    "shelf": "gdrive:Mac-Shelf/peace-be-still/voices/hush-harbor",
+    "ref": {
+      "grandmother": "grandmother-1.m4a",
+      "elder": "elder-2.m4a",
+      "young_woman": "youngwoman-1.m4a",
+      "young_man": "youngman-2.m4a"
+    },
+    "test_scores": {
+      "new": {
+        "grandmother": 0.938,
+        "elder": 0.922,
+        "young_woman": 0.885,
+        "young_man": 0.901
+      },
+      "other": {
+        "grandmother": 0.797,
+        "elder": 0.797,
+        "young_woman": 0.771,
+        "young_man": 0.778
+      }
+    },
+    "floor": {
+      "grandmother": 0.888,
+      "elder": 0.872,
+      "young_woman": 0.835,
+      "young_man": 0.851
+    }
   }
 }

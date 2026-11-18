@@ -648,6 +648,7 @@ def make_story(story: dict, work: Path) -> dict:
     import qa
     t0 = time.monotonic()
     work.mkdir(parents=True, exist_ok=True)
+    (work / "engine").write_text("gemini")   # one engine per story: the clone lane skips it now
     parts, problems, models, ncalls = render_story_parts(story, work)
     row = {"file": f"stories/hush-harbor/en/{file_of(story)}", "kind": "stories", "lang": "en",
            "ref": f"content/stories/hush-harbor/{story['id']}.json", "text": "script", "voice": VOICE_ID,
@@ -692,6 +693,12 @@ def census(stories: list[dict], rows: list[dict]) -> dict:
 
 def census_line(c: dict) -> str:
     return f"hush harbor: {c['passed']} of {c['total']} stories voiced, {c['failed']} failed"
+
+
+def taken_by_clone(work: Path) -> bool:
+    """The clone lane (hush_clone.py, highest story first) started this story: one engine per story."""
+    f = work / "engine"
+    return f.exists() and f.read_text().strip() == "clone"
 
 
 def todo(stories: list[dict], rows: list[dict], only: str | None = None) -> list[dict]:
@@ -833,7 +840,7 @@ def main(argv=None) -> int:
         print("OUTPUT 0 Hush Harbor stories shelved")
         return 2
     rows = fill.read_manifest()
-    queue = todo(stories, rows, a.only)
+    queue = [s for s in todo(stories, rows, a.only) if not taken_by_clone(fill.HOME / "hh-work" / s["id"])]
     now = dt.datetime.now(fill.CT)
     if a.dry_run:
         print(f"plan: {len(stories)} stories, {len(queue)} to do; models usable now: {', '.join(usable_models(now)) or 'none'}")

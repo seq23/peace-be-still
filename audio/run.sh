@@ -14,6 +14,10 @@ PY="${PBS_WHISPER_PY:-$HOME/Work/codex-briefs/peace-be-still/voice-samples/.venv
 # stops are notes (exit 0).
 HH="$PWD/audio/hush_harbor.py"
 (cd "${BOSS_OS_REPO:-$HOME/GitHub/boss-os}" && npm run -s vault:run -- "$PY" "$HH" --commit --max-minutes 12); rc2=$?
+# Then ONE clone-lane story (Chatterbox on the Mac, highest story number first), so the Mac alternates:
+# a Bible chunk, then a clone story. Same lock, nice 15, no key.
+"$PY" audio/hush_clone.py --commit --limit 1; rc3=$?
+(( rc3 > rc2 )) && rc2=$rc3
 # Push any manifest commit this run made (a push that failed inside fill.py is retried here), so the
 # runner is never left ahead of origin when a PR also touches the manifest.
 git push -q 2>/dev/null || echo "note: manifest push failed; the next run pushes it"
