@@ -1,0 +1,85 @@
+{
+ "id": "in-20-a-year-from-now",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "A Year from Now",
+ "theme": "living in the end, the long view",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hello, and welcome back to Imagination Nights. [pause 3]\n\nSettle into the bed. Pull the covers up to where you like them. [pause 8]\n\nTake one deep breath, and let it go with a sigh. [pause 8]\n\nNow let your breathing find its own pace. You do not have to control it. Just notice it. [pause 10]\n\nFeel your feet getting heavy. Your legs. Your back sinking into the mattress. [pause 10]\n\nNow let us relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThe day is finished. This part of the night is yours. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight we finish this set with a longer view. A year from now. [pause 13]\n\nPicture yourself a year from tonight, lying in bed, thinking back over the year. The wishes you carried this year have had time to grow. Some of them are part of your ordinary life now. [pause 15]\n\nIn this practice you look back, not forward. You remember the year as if it has already happened. You notice how you changed. How you got through the hard parts. What surprised you. [pause 15]\n\nLooking back from the end is the heart of living in the end. It lets your mind rest in the finished picture instead of the unfinished road. [pause 15]\n\nYou do not have to fill in every month. Let your mind skip around, the way memory does. A smell, a face, a moment of laughter. Whatever comes up is enough. [pause 5]\n\nAs always, this is imagination and feeling, not a promise. Real life will have its own turns. But tonight you can fall asleep looking back on a good year. [pause 20]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "It is a year from tonight. You are lying in bed, much like now. [pause 22]\n\nNotice the room. Is it the same room, or a different one? [pause 25]\n\nLet your mind drift back over the year. Start with the spring. What happened? [pause 25]\n\nThen the summer. A day you remember. A meal. A trip. A conversation. [pause 25]\n\nThen the fall. Something you finished. Something you let go. [pause 25]\n\nThen the winter. A quiet night, much like this one. [pause 28]\n\nNow think of the wish you have carried this year. Picture it as part of your life now. Ordinary. Familiar. [pause 28]\n\nNotice how you feel about the person you were a year ago. Be kind to them. They were doing their best. [pause 28]\n\nSay in your mind, it was a good year. I am glad I kept going. [pause 30]\n\nLet the whole year rest in your chest, like a long breath out. [pause 30]\n\nAnd let the year from now and this night become one quiet night. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "We will end here for tonight. [pause 10]\n\nKeep the feeling, not the effort. Let the effort go. [pause 15]\n\nWhatever happens tomorrow, tonight you practiced feeling at peace. That is worth something on its own. [pause 20]\n\nLet sleep come when it comes. There is no rush. [pause 20]\n\nNotice the weight of the covers. The cool side of the pillow. The dark. [pause 25]\n\nLet each breath out be a little longer than the one before. [pause 25]\n\nNothing more to picture. Nothing more to try. Only rest. [pause 30]\n\nGood night. [pause 60]"
+  }
+ ],
+ "words": 573,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1166,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:55:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; each teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Self-worth night gives 988 for thoughts of self-harm; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health or body promise and offers a non-walking version; family night never pictures forcing anyone to change; business night pictures ordinary enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

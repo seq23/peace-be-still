@@ -1,0 +1,85 @@
+{
+ "id": "in-18-revising-an-old-memory",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "Revising an Old Memory",
+ "theme": "revision of the past",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hello, and welcome back to Imagination Nights. [pause 3]\n\nSettle into the bed. Pull the covers up to where you like them. [pause 8]\n\nTake one deep breath, and let it go with a sigh. [pause 8]\n\nNow let your breathing find its own pace. You do not have to control it. Just notice it. [pause 10]\n\nFeel your feet getting heavy. Your legs. Your back sinking into the mattress. [pause 10]\n\nNow let us relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThe day is finished. This part of the night is yours. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight we use revision again, but on an older memory. A moment from your past that still stings when you think about it. [pause 14]\n\nChoose something small and mild. A time you were embarrassed. A time you did not speak up. A goodbye that went badly. Please do not choose a memory of being badly hurt or abused. Those memories deserve care from a trained person, not a bedtime exercise. If one comes up, set it gently aside for now. [pause 16]\n\nIn revision, you replay the old moment in your imagination, but you let it go the way you wish it had. You are not lying to yourself about what happened. You are giving your mind a kinder picture to rest on, and practicing the person you are now. [pause 16]\n\nThis is imagination and feeling, not a promise about anything outside you. It is simply a way to set down an old weight before sleep. [pause 21]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Go back to that moment. Notice how old you were. Notice the place. [pause 23]\n\nLet the moment begin as it began. Then, just before it went wrong, pause it. [pause 26]\n\nPicture yourself today stepping into the scene, beside your younger self. [pause 26]\n\nPut a hand on their shoulder. Say, I am here. We can do this differently. [pause 26]\n\nNow let the moment play on in a new way. Hear your younger self speak up calmly. Or see the other person respond kindly. Or simply see yourself walk away with your head up. [pause 29]\n\nLet it end gently. [pause 26]\n\nLook at your younger self. Tell them, you did your best. I am proud of you. [pause 29]\n\nPlay the new version once more, from the start, so it becomes familiar. [pause 29]\n\nThen let the scene fade, like a photograph left in the sun. [pause 30]\n\nSay quietly, that is finished. I can rest. [pause 30]\n\nLet the old weight go, and let your body be light. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "We will end here for tonight. [pause 10]\n\nKeep the feeling, not the effort. Let the effort go. [pause 15]\n\nWhatever happens tomorrow, tonight you practiced feeling at peace. That is worth something on its own. [pause 20]\n\nLet sleep come when it comes. There is no rush. [pause 20]\n\nNotice the weight of the covers. The cool side of the pillow. The dark. [pause 25]\n\nLet each breath out be a little longer than the one before. [pause 25]\n\nNothing more to picture. Nothing more to try. Only rest. [pause 30]\n\nGood night. [pause 60]"
+  }
+ ],
+ "words": 554,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1142,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:55:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; each teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Self-worth night gives 988 for thoughts of self-harm; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health or body promise and offers a non-walking version; family night never pictures forcing anyone to change; business night pictures ordinary enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

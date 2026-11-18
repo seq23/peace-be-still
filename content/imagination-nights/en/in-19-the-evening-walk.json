@@ -1,0 +1,85 @@
+{
+ "id": "in-19-the-evening-walk",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "The Evening Walk",
+ "theme": "a calm body",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's scene is simple. A walk at the end of the day, feeling calm and at home in your own body. [pause 12]\n\nWe are not picturing a change in your health or your body, and this practice makes no promise about either. Those belong with your doctor and your daily care. What we picture is how it feels to move through an evening without hurry, breathing easily, noticing the world. [pause 14]\n\nA slow walk is one of the oldest ways people settle their minds. Even imagining one can slow the breath and soften the shoulders. [pause 14]\n\nChoose a place you would like to walk. A neighborhood street. A park. A path by the water. It can be real or made up. [pause 14]\n\nIf walking is hard for you, picture a gentle way of moving that suits your body. Rolling down a smooth path. Sitting on a porch while the evening moves around you. The ease is what matters, not the steps. [pause 5]\n\nLet the feeling of an easy evening be the whole wish tonight. [pause 20]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "You step outside. The day's heat has gone. The air is soft. [pause 22]\n\nFeel your feet on the ground. One, then the other. No hurry. [pause 24]\n\nNotice the sky. The last color in the west. The first star. [pause 24]\n\nHear the sounds around you. A dog somewhere. Leaves. Someone's music through an open window. [pause 24]\n\nBreathe in the evening air. Let it out slowly. [pause 24]\n\nPass a neighbor. You nod. They nod back. It is that kind of evening. [pause 28]\n\nNotice how your arms swing. How easy each step is. [pause 28]\n\nStop for a moment and look at something small. A flower by a fence. A puddle holding the sky. [pause 28]\n\nTurn toward home. The windows are lit. Yours is one of them. [pause 30]\n\nSay in your mind, I am at ease. [pause 30]\n\nStep inside, and let the walk carry you all the way to bed. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 593,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1170,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:55:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; each teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Self-worth night gives 988 for thoughts of self-harm; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health or body promise and offers a non-walking version; family night never pictures forcing anyone to change; business night pictures ordinary enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
