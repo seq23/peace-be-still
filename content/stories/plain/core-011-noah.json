@@ -1,0 +1,246 @@
+{
+ "id": "core-011-noah",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Noah and the Rainbow",
+ "passage": {
+  "refs": [
+   "GEN 6:5-22",
+   "GEN 7:1-24",
+   "GEN 8:1-22",
+   "GEN 9:8-17"
+  ],
+  "label": "Genesis 6:5-22; Genesis 7:1-24; Genesis 8:1-22; Genesis 9:8-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "In the days of Noah, the earth had grown violent and corrupt. The Bible says it grieved the LORD in his heart. But one man stood apart. The LORD looked on Noah with favor. Noah walked with God."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God told Noah what was coming. A flood would cover the earth. Noah was to build an ark of gopher wood, a great boat with rooms inside, sealed with pitch inside and out. He was to bring his wife, his three sons and their wives, and two of every kind of living creature, male and female, with food for them all."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 6:22",
+   "label": "Genesis 6:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Thus did Noah; according to all that God commanded him, so did he."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Thus did Noah; according to all that God commanded him, so did he."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Picture the work of it. Cutting and fitting and sealing, day after day. Noah did not have a forecast. He had a word from God, and he built on it."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When the ark was ready, the animals came, two by two. Noah's family went inside. Then something tender happens in the story."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 7:16",
+   "label": "Genesis 7:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And they that went in, went in male and female of all flesh, as God had commanded him: and the LORD shut him in."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And they that went in, went in male and female of all flesh, as God had commanded him: and the LORD shut him in."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The LORD shut him in. Noah did not have to close that great door himself. The rain fell for forty days and forty nights. The waters rose until even the mountains were covered. Everything outside the ark was lost. Inside, a family and a boat full of animals rode on the water, waiting."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:1",
+   "label": "Genesis 8:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And God remembered Noah, and every living thing, and all the cattle that was with him in the ark: and God made a wind to pass over the earth, and the waters asswaged;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And God remembered Noah, and every living thing, and all the cattle that was with him in the ark: and God made a wind to pass over the earth, and the waters asswaged;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God remembered Noah. The wind passed over the earth, and slowly the waters went down. The ark came to rest on the mountains of Ararat. Still Noah waited. After forty more days he opened the window and sent out a raven, and then a dove. The dove found no place to rest, so it came back to his hand. Seven days later, he sent her out again."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 8:11",
+   "label": "Genesis 8:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And the dove came in to him in the evening; and, lo, in her mouth was an olive leaf pluckt off: so Noah knew that the waters were abated from off the earth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And the dove came in to him in the evening; and, lo, in her mouth was an olive leaf pluckt off: so Noah knew that the waters were abated from off the earth."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A single fresh leaf. That was how Noah knew the water was going down. Sometimes the first sign of a new season is very small."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When the earth was dry, God told Noah to bring everyone out. Noah built an altar and worshipped. Then God made a promise, not only to Noah, but to every living creature."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 9:13",
+   "label": "Genesis 9:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 9:15",
+   "label": "Genesis 9:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And I will remember my covenant, which is between me and you and every living creature of all flesh; and the waters shall no more become a flood to destroy all flesh."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And I will remember my covenant, which is between me and you and every living creature of all flesh; and the waters shall no more become a flood to destroy all flesh."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The rainbow is a sign of that promise. God set it in the clouds so that whenever it appears, he will remember his covenant. The next time you see one after a storm, you can remember this story: a family kept safe through the flood, a dove with a leaf, and a God who remembers."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 541,
+ "est_seconds": 295,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.3",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Genesis 6-9; the rainbow is told as God's covenant, not a promise about the listener's storms."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain and gentle; the loss in the flood is stated without spectacle."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Pastor pass: cut an invented detail (years of building far from any sea); Genesis gives neither.",
+  "person_read": false
+ },
+ "status": "passed"
+}

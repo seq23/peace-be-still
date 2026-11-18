@@ -1,0 +1,231 @@
+# Hush Harbor telling (Black church voice), core stories 1-10. Same scripture blocks as the plain telling.
+# Voice rules (QUALITY.md S08): preaching cadence, call and response once or twice at most, hymns and spirituals
+# named (public-domain words only), a church mother's wisdom, plain grammar; never eye-dialect or slang.
+
+=== core-001-peace-be-still | Peace, Be Still
+passage: MAR 4:1; MAR 4:35-41
+shelf: adult
+violence: none
+sexual: none
+cast: disciples|the disciples|adult|group
+N: Church, it had been a long day by the Sea of Galilee. So many people came to hear Jesus that he had to teach them sitting in a boat, just off the shore. And when the evening came, he told his disciples, let us cross over to the other side.
+N: They sent the people home and took him with them, just as he was, tired from the day. Other little boats went out with them. And Jesus went to the back of the boat, laid his head down on a pillow, and went to sleep.
+N: Now Galilee sits low, with hills all around it, and the wind can come down off those hills quick. That night it did.
+S: MAR 4:37
+N: These were fishermen, some of them. They knew that water. They knew boats. And they were scared. Not a little worried. Scared for their lives. They bailed and pulled and hollered over the wind, and the boat kept filling up.
+N: And where was Jesus? Asleep on a pillow.
+S: MAR 4:38 @disciples
+N: Hear that question. Master, don't you care? That is not a question from people with no faith. That is a question from people who came to the right one and still could not understand why he was so quiet. Some of us have asked it in a hospital hallway. Some of us have asked it at the kitchen table with the bills spread out. The old saints asked it in the fields, and they kept on singing anyhow.
+N: Then he got up.
+S: MAR 4:39
+N: No long speech to that storm. A few words, and the wind laid down like a fussing baby in its mother's arms. The waves went flat. The whole lake went still, the kind of still you can hear.
+S: MAR 4:40
+N: He did not ask them to pretend they were never afraid. He asked them where their faith had gone, when he had been right there in the boat with them the whole time.
+S: MAR 4:41 @disciples
+N: What manner of man is this? That is the question the story leaves with us tonight. The church mothers used to hum "Jesus, Lover of My Soul" when the storms rolled through, that old Wesley hymn about hiding till the storm of life is past. They never said the storm would not come. They told us who was in the boat.
+
+=== core-002-red-sea | Stand Still and See
+passage: EXO 14:5-31
+shelf: adult
+violence: mild
+sexual: none
+cast: moses|Moses|adult|m; israelites|the children of Israel|adult|group
+N: Picture it, Church. A whole people camped by the sea. Mothers with babies on their hips. Old men leaning on their staffs. Children asleep on bundles. Behind them, Egypt, and every year they spent serving there. In front of them, water as far as the eye could see.
+N: And Pharaoh changed his mind. He wanted his workers back. He hitched up his chariots and came after them with his horsemen.
+N: Somebody looked back and saw the dust rising on the road. The people were sore afraid. They cried out to the LORD, and then they turned around on Moses.
+S: EXO 14:11 @israelites
+N: Fear will do that to you. It will make bondage look safe, just because you know its name. But Moses did not answer fear with more fear.
+S: EXO 14:13 @moses
+S: EXO 14:14 @moses
+N: Stand still. Not because there was nothing to do. Because this part was not theirs to do. Then the LORD told Moses to have the people go forward, and to lift that rod over the water.
+N: Night came down. The angel of God moved from the front of the camp to the back, and the pillar of cloud went with him. It stood right between Israel and Egypt. On Egypt's side it was cloud and darkness. On Israel's side it gave light all night long. Same cloud, Church. Darkness on one side, light on the other.
+S: EXO 14:21
+S: EXO 14:22
+N: Can you see them walking? Feet on dry ground where fish had been swimming that morning. Water standing up like walls on either side. Grandmothers holding children's hands. The old folks sang about this in the fields, "Go Down, Moses" and "Oh, Mary, Don't You Weep," and they sang it when there was no sea in sight and no way out that they could see.
+N: The Egyptians came in after them. Their chariot wheels came off, and they drove heavy. When the morning came, Moses stretched out his hand again, and the waters went back to their place. Israel stood safe on the far shore.
+S: EXO 14:31
+N: Look at what the people learned. Not that they were strong. Not that Moses was clever. They saw the great work the LORD had done, and they trusted him. They could not see a way through that water. The story tells us who made one.
+
+=== core-003-lions-den | Didn't My Lord Deliver Daniel
+passage: DAN 6:1-23
+shelf: adult
+violence: mild
+sexual: none
+cast: king|the king|adult|m; daniel|Daniel|elder|m
+N: Daniel had served in Babylon a long, long time. King Darius thought so much of him that he planned to set him over the whole kingdom. And you know how that goes. The other leaders got jealous. They went looking for something wrong with him, and they could not find a thing. He was faithful. He was honest.
+N: So they figured the only way to catch Daniel was through his God. They talked the king into signing a law. Thirty days, nobody could pray to any god or any man but the king. Anybody who did would go to the lions.
+S: DAN 6:10
+N: Look at what he did, Church. He did not hide. He did not change his schedule. He went home, opened his windows toward Jerusalem, got down on his knees, and prayed like he always had. The church mothers used to say, baby, you cannot start praying in the storm if you never prayed in the sunshine. Daniel had prayed in the sunshine.
+N: The men found him praying and ran to the king. The king was sick about it, because he loved Daniel. He worked till the sun went down to find a way out. But a law of the Medes and Persians could not be changed.
+S: DAN 6:16 @king
+N: Even the king who signed that order was hoping in Daniel's God. They rolled a stone over the mouth of the den and sealed it with the king's own ring. Then the king went home to his palace. No supper. No music. No sleep.
+N: Think about that. The man in the lions' den had more peace than the man in the palace.
+S: DAN 6:19
+S: DAN 6:20 @king
+S: DAN 6:21 @daniel
+S: DAN 6:22 @daniel
+S: DAN 6:23
+N: The old spiritual asks it plain: didn't my Lord deliver Daniel? And the answer comes right back. He did. The story does not say the den was not real or that the lions were not hungry. It says God sent his angel and shut their mouths, and Daniel trusted his God. Somebody is praying with the windows open tonight. Keep on praying.
+
+=== core-004-jonah | Jonah Ran, and God Called Again
+passage: JON 1:1-17; JON 2:1-10; JON 3:1-3
+shelf: adult
+violence: mild
+sexual: none
+cast: jonah|Jonah|adult|m; mariners|the mariners|adult|group
+N: The word of the LORD came to Jonah. God told him to go to the great city of Nineveh and speak against it, because its wickedness had reached him. And Jonah did not want to go. Not one bit.
+S: JON 1:3
+N: Running from God costs something, Church. Jonah paid the fare himself. Down to Joppa. Down into the ship. Down into the bottom of the ship to sleep. Every step was down.
+S: JON 1:4
+N: Those sailors were scared. Every man cried out to his own god. They threw the cargo overboard to lighten the ship. And Jonah? Sound asleep down below.
+N: The captain shook him awake and told him to call on his God. Then the sailors cast lots to see whose fault this storm was, and the lot fell on Jonah. They asked him who he was and where he came from.
+S: JON 1:9 @jonah
+N: Now those men were more afraid than ever. They asked him what they should do to him, so the sea would calm down.
+S: JON 1:12 @jonah
+N: And here is something. Those sailors did not want to do it. They rowed hard to get back to land, and the storm only got worse. They prayed to the LORD not to hold this man's life against them. Then they took Jonah and threw him into the sea, and the sea stopped its raging. Men who started the day praying to every god they knew ended it offering a sacrifice to the LORD.
+S: JON 1:17
+S: JON 2:1
+S: JON 2:2 @jonah
+N: Somebody ought to say amen. Jonah prayed from inside that fish, the lowest place a man can be, and God heard him there. Not in the temple. Not dressed for church. Not with his life in order. From the bottom.
+S: JON 2:10
+N: And there is a second chance in this story. The word of the LORD came to Jonah again, and this time he went. Running had not stopped God from calling. If you have been running, this story says God still knows your name.
+
+=== core-005-david-goliath | David and the Giant
+passage: 1SA 17:4-50
+shelf: adult
+violence: mild
+sexual: none
+cast: david|David|teen|m; saul|Saul|adult|m; goliath|Goliath|adult|m
+N: Two armies on two hills with a valley in between. Every morning and every evening, a champion came out of the Philistine camp. His name was Goliath. Six cubits and a span tall, taller than any man on either side, covered in armor head to toe.
+N: He hollered across that valley, daring Israel to send one man to fight him. Forty days of that. Forty days, and nobody went.
+N: Then a shepherd boy named David came to camp, carrying food to his big brothers. He heard the giant talking. And he wanted to know why anybody should be allowed to defy the armies of the living God.
+S: 1SA 17:32 @david
+S: 1SA 17:33 @saul
+N: Saul was not wrong about the facts. David was young. Goliath was trained. But David had some facts of his own. He told the king how he kept his father's sheep, and how a lion came, and a bear came, and each one took a lamb, and he went after them and brought that lamb back.
+S: 1SA 17:37 @david until "And Saul said"
+N: So Saul put his own armor on David, a helmet of brass and a coat of mail. David tried to walk in it and could not. He took it off. Church, you cannot fight your battle in somebody else's armor.
+N: David picked up his staff. He picked five smooth stones from the brook and dropped them in his shepherd's bag. His sling was in his hand.
+N: The giant looked at him and sneered. Just a youth, ruddy in the face. And he cursed David by his gods.
+S: 1SA 17:45 @david
+S: 1SA 17:47 @david
+S: 1SA 17:49
+N: One stone. And the giant fell on his face to the earth. David had no sword in his hand that day. He had a sling, a stone, and a God he had already met out on the hillside with the sheep.
+N: Our grandmothers used to say, the giants don't get smaller, baby, your God gets bigger in your eyes. The story does not promise every battle ends like this one. It shows us where David's courage came from: the LORD who had been with him before.
+
+=== core-006-joseph-coat | Joseph and the Coat
+passage: GEN 37:3-28; GEN 39:2
+shelf: adult
+violence: mild
+sexual: none
+cast: joseph|Joseph|teen|m; brothers|his brethren|adult|group; reuben|Reuben|adult|m; judah|Judah|adult|m
+N: Jacob, the one they called Israel, had twelve sons. Joseph was seventeen, born to him when he was old, and Jacob loved him more than all the rest. And everybody in that house knew it.
+S: GEN 37:3
+S: GEN 37:4
+N: A coat can be a blessing and a burden at the same time. Every time those brothers saw it, they saw what they had not been given. Then Joseph started dreaming, and he told them about it.
+S: GEN 37:7 @joseph
+N: They hated him even more. Then he dreamed that the sun and the moon and eleven stars bowed down to him. Even his daddy fussed at him for that one. But Jacob kept it in his heart.
+N: One day the brothers were way off with the flocks, and Jacob sent Joseph to see about them. He found them at Dothan. They saw him coming from a long way off, in that coat.
+S: GEN 37:19 @brothers
+S: GEN 37:20 @brothers whole
+N: Reuben, the oldest, spoke up. He told them not to kill him, but to put him in a pit out there in the wilderness. Reuben meant to come back later and take him home to their father.
+S: GEN 37:23
+S: GEN 37:24
+N: Then they sat down to eat. Can you imagine? Their own brother down in a dry pit, and they sat down to supper. While they were eating, they saw a company of Ishmeelites coming from Gilead, camels loaded with spices, headed down to Egypt.
+S: GEN 37:26 @judah
+S: GEN 37:27 @judah
+S: GEN 37:28
+N: Twenty pieces of silver. That is what jealousy said a brother was worth. It is a hard story to sit with, Church. But it does not end in that pit. Joseph went down to Egypt, and a little later the Bible tells us the LORD was with Joseph there. Hold on to that. We are coming back for the rest.
+
+=== core-007-prodigal-son | The Son Who Came Home
+passage: LUK 15:11-32
+shelf: adult
+violence: none
+sexual: none
+cast: younger-son|the younger|adult|m; father|father|elder|m; elder-son|elder son|adult|m
+N: Jesus told a story about a man who had two sons. The younger one came to his daddy and asked for his share of the inheritance right now, while the old man was still living. And the father divided it between them.
+S: LUK 15:13
+N: Riotous living, the King James calls it. Money goes fast when you are trying to fill a hole with it. Then a famine came to that land, and he started to be in want. He hired himself out to a man who sent him to feed the hogs. He was so hungry he wanted to eat what the hogs were eating, and nobody gave him a thing.
+S: LUK 15:17 @younger-son
+S: LUK 15:18 @younger-son whole
+S: LUK 15:19 @younger-son
+N: He came to himself. Some of us know that moment. Not the moment you get fixed. The moment you finally see where you are.
+S: LUK 15:20
+N: Look at that father. A great way off. That means he was looking. That means he had been watching that road. And he ran to that boy, threw his arms around him, and kissed him. He did not even wait for the speech.
+S: LUK 15:21 @younger-son
+S: LUK 15:22 @father
+S: LUK 15:23 @father
+S: LUK 15:24 @father
+N: But there is another son in this story. The elder son was out in the field, and when he came near the house he heard music and dancing. When he found out why, he got angry and would not go in. So the father went out to him too.
+S: LUK 15:29 @elder-son
+S: LUK 15:31 @father
+S: LUK 15:32 @father
+N: That father went out to both of his sons. One came home from a far country. One was standing right outside the door. The story ends before we find out if the elder son went in. Maybe that is on purpose. Whichever son you are tonight, the story shows a father who comes out to meet them both.
+
+=== core-008-ruth-naomi | Whither Thou Goest
+passage: RUT 1:1-22
+shelf: adult
+violence: none
+sexual: none
+cast: naomi|Naomi|elder|f; ruth|Ruth|adult|f; orpah|Orpah|adult|f
+N: Way back, when the judges ruled, a famine hit the land. A man from Bethlehem named Elimelech took his wife Naomi and their two sons over to Moab to find bread.
+N: Then Elimelech died. The boys married women from Moab, Orpah and Ruth. And about ten years later, both of those sons died too. Three widows, Church. Nothing in their hands.
+N: Naomi heard that the LORD had visited his people back home and given them bread. So she started for home, and her daughters-in-law walked with her.
+S: RUT 1:8 @naomi
+N: They cried, and they said they would go with her. Naomi told them to go on back. She had no more sons to give them. She felt like the hand of the LORD had gone out against her.
+S: RUT 1:14
+N: Orpah kissed her and went home, and nobody in this story fusses at her for it. She went back to her own people. But Ruth held on to that old woman and would not let go.
+S: RUT 1:16 @ruth
+S: RUT 1:17 @ruth
+N: Those are some of the most loved words in the whole Bible, and they came out of the mouth of a widow from Moab. Not a prophet. Not a priest. A young woman from across the border who would not let an old woman walk that road by herself. We read them at weddings now. She said them on a dusty road to her mother-in-law.
+N: When they came to Bethlehem, the whole town was stirred. The women asked, is this Naomi?
+S: RUT 1:20 @naomi
+S: RUT 1:21 @naomi
+N: She told the truth about her grief. She did not dress it up for church, and the Bible lets her say it. But read the last line slow.
+S: RUT 1:22
+N: The beginning of barley harvest. Naomi came home empty, with Ruth by her side, right when the fields were turning gold. She could not see it yet. Grief cannot always see the harvest coming. But her story was already turning.
+
+=== core-009-fiery-furnace | But If Not
+passage: DAN 3:1-28
+shelf: adult
+violence: mild
+sexual: none
+cast: nebuchadnezzar|Nebuchadnezzar|adult|m; the-three|Shadrach, Meshach, and Abed-nego|adult|group
+N: King Nebuchadnezzar made himself an image of gold, sixty cubits high, and set it up on the plain of Dura. When the music played, everybody had to fall down and worship it. Anybody who would not bow would be thrown into a burning fiery furnace that same hour.
+N: Three young Hebrew men who served the king would not bow: Shadrach, Meshach, and Abed-nego. Somebody told on them. The king was full of rage, and he had them brought in.
+S: DAN 3:15 @nebuchadnezzar
+N: Who is that God? That is the question on the table. Now listen to how those three young men answered.
+S: DAN 3:16 @the-three
+S: DAN 3:17 @the-three
+S: DAN 3:18 @the-three
+N: But if not. Church, some of the strongest faith in the Bible lives in those three little words. They believed God was able. They did not claim to know what God would do. And they made up their minds ahead of time that they would not bow either way.
+N: The king got so mad his face changed. He told them to heat the furnace seven times hotter than usual. Strong men from his army tied up those three, still in their coats and hats, and threw them in.
+S: DAN 3:24 @nebuchadnezzar after "his counsellors, " until "They answered"
+S: DAN 3:25 @nebuchadnezzar
+N: Four. They went in three, and the king counted four. The old folks would tell you he did not keep them out of the fire. He met them in it.
+N: The king came near the door of that furnace and called them out by name. They walked out. Not a hair on their heads was burned. Their coats were not scorched. They did not even smell like smoke.
+S: DAN 3:28 @nebuchadnezzar
+N: A king who started the day building an idol ended it blessing the God of three young men who would not bow. Their faith was not loud. It was steady. And when they stood in that fire, they were not by themselves.
+
+=== core-010-hem-of-his-garment | If I May Touch But His Clothes
+passage: MAR 5:22-34; MAR 5:42
+shelf: adult
+violence: none
+sexual: none
+cast: woman|woman|adult|f; disciples|his disciples|adult|group
+N: Jesus had just come back across the lake, and the people were waiting on the shore. A ruler of the synagogue named Jairus pushed through and fell down at his feet. His little girl was dying, and he begged Jesus to come lay his hands on her so she would live.
+N: Jesus went with him. And the crowd went too, pressing in from every side, so close you could hardly walk. Somewhere in that crowd was a woman nobody was looking at.
+S: MAR 5:25
+S: MAR 5:26
+N: Twelve years. That is as long as Jairus's baby girl had been alive. Twelve years of doctors and remedies, of hoping and being let down. Every coin she had, gone. And instead of getting better, she got worse. Somebody knows that kind of tired, the kind sleep does not fix.
+S: MAR 5:27
+S: MAR 5:28 @woman
+N: She did not make an appointment. She did not get in line. She did not even call his name. She had heard about Jesus, and that was enough. She came up behind him in that crowd, quiet, and she reached.
+S: MAR 5:29
+S: MAR 5:30
+S: MAR 5:31 @disciples
+S: MAR 5:32
+N: The disciples thought that was a strange question, with all those people pushing on him. But Jesus kept looking. A crowd pressing in is not the same as a hand reaching out in faith. He knew the difference.
+N: And she knew she had been found. She was afraid, and she was trembling. But she did not run.
+S: MAR 5:33
+S: MAR 5:34
+N: He could have let her slip away healed and nameless. But he called her daughter. He let her tell all the truth in front of everybody, while a worried father waited and a whole town watched. Then he sent her home in peace. That is the story, Church. Not only the healing. The being seen.

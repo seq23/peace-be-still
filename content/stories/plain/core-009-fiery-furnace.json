@@ -1,0 +1,296 @@
+{
+ "id": "core-009-fiery-furnace",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Shadrach, Meshach and Abed-nego",
+ "passage": {
+  "refs": [
+   "DAN 3:1-28"
+  ],
+  "label": "Daniel 3:1-28"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "nebuchadnezzar",
+   "name": "Nebuchadnezzar",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "the-three",
+   "name": "Shadrach, Meshach, and Abed-nego",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "King Nebuchadnezzar made an image of gold, sixty cubits high, and set it up on the plain of Dura. When the music played, everyone was to fall down and worship it. Anyone who refused would be thrown into a burning furnace that same hour."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Three young Hebrew men who served the king would not bow: Shadrach, Meshach, and Abed-nego. Someone reported them. The king was furious and had them brought before him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nebuchadnezzar",
+   "ref": "DAN 3:15",
+   "label": "Daniel 3:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Now if ye be ready that at what time ye hear the sound of the cornet, flute, harp, sackbut, psaltery, and dulcimer, and all kinds of musick, ye fall down and worship the image which I have made; well: but if ye worship not, ye shall be cast the same hour into the midst of a burning fiery furnace; and who is that God that shall deliver you out of my hands?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "nebuchadnezzar",
+     "text": "Now if ye be ready that at what time ye hear the sound of the cornet, flute, harp, sackbut, psaltery, and dulcimer, and all kinds of musick, ye fall down and worship the image which I have made; well: but if ye worship not, ye shall be cast the same hour into the midst of a burning fiery furnace; and who is that God that shall deliver you out of my hands?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Who is that God? That is the question the king put on the table. Listen to how they answered him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "the-three",
+   "ref": "DAN 3:16",
+   "label": "Daniel 3:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Shadrach, Meshach, and Abed-nego, answered and said to the king, O Nebuchadnezzar, we are not careful to answer thee in this matter."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Shadrach, Meshach, and Abed-nego, answered and said to the king,"
+    },
+    {
+     "v": 16,
+     "speaker": "the-three",
+     "text": "O Nebuchadnezzar, we are not careful to answer thee in this matter."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "the-three",
+   "ref": "DAN 3:17",
+   "label": "Daniel 3:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "If it be so, our God whom we serve is able to deliver us from the burning fiery furnace, and he will deliver us out of thine hand, O king."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "the-three",
+     "text": "If it be so, our God whom we serve is able to deliver us from the burning fiery furnace, and he will deliver us out of thine hand, O king."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "the-three",
+   "ref": "DAN 3:18",
+   "label": "Daniel 3:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "But if not, be it known unto thee, O king, that we will not serve thy gods, nor worship the golden image which thou hast set up."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "the-three",
+     "text": "But if not, be it known unto thee, O king, that we will not serve thy gods, nor worship the golden image which thou hast set up."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "But if not. Some of the strongest faith in the Bible is in those three words. They believed God was able to save them. They did not claim to know what God would choose to do. And they decided ahead of time that they would not bow either way."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The king was so angry his face changed. He ordered the furnace heated seven times hotter than usual. Strong soldiers tied up the three men, still in their coats and hats, and threw them into the fire."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nebuchadnezzar",
+   "ref": "DAN 3:24",
+   "label": "Daniel 3:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Then Nebuchadnezzar the king was astonied, and rose up in haste, and spake, and said unto his counsellors, Did not we cast three men bound into the midst of the fire? They answered and said unto the king, True, O king."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Then Nebuchadnezzar the king was astonied, and rose up in haste, and spake, and said unto his counsellors,"
+    },
+    {
+     "v": 24,
+     "speaker": "nebuchadnezzar",
+     "text": "Did not we cast three men bound into the midst of the fire?"
+    },
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "They answered and said unto the king, True, O king."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "nebuchadnezzar",
+   "ref": "DAN 3:25",
+   "label": "Daniel 3:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "He answered and said, Lo, I see four men loose, walking in the midst of the fire, and they have no hurt; and the form of the fourth is like the Son of God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "He answered and said,"
+    },
+    {
+     "v": 25,
+     "speaker": "nebuchadnezzar",
+     "text": "Lo, I see four men loose, walking in the midst of the fire, and they have no hurt; and the form of the fourth is like the Son of God."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Three men went in, and the king counted four. They were not kept out of the fire. They had company in it."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The king came near the door of the furnace and called them out by name. They walked out of the fire. Not one hair on their heads was burned. Their coats were not scorched. They did not even smell of smoke."
+  },
+  {
+   "type": "scripture",
+   "speaker": "nebuchadnezzar",
+   "ref": "DAN 3:28",
+   "label": "Daniel 3:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Then Nebuchadnezzar spake, and said, Blessed be the God of Shadrach, Meshach, and Abed-nego, who hath sent his angel, and delivered his servants that trusted in him, and have changed the king’s word, and yielded their bodies, that they might not serve nor worship any god, except their own God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Then Nebuchadnezzar spake, and said,"
+    },
+    {
+     "v": 28,
+     "speaker": "nebuchadnezzar",
+     "text": "Blessed be the God of Shadrach, Meshach, and Abed-nego, who hath sent his angel, and delivered his servants that trusted in him, and have changed the king’s word, and yielded their bodies, that they might not serve nor worship any god, except their own God."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A king who began the day building an idol ended it praising the God of three young men who would not bow. Their faith was not loud. It was steady. And when they stood in the fire, they were not alone."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 558,
+ "est_seconds": 304,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Daniel 3; 'but if not' carried without promising rescue; no speculation on who the fourth was."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Steady and plain; the king is not caricatured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

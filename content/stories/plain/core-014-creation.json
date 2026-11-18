@@ -1,0 +1,244 @@
+{
+ "id": "core-014-creation",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "In the Beginning",
+ "passage": {
+  "refs": [
+   "GEN 1:1-31",
+   "GEN 2:1-3"
+  ],
+  "label": "Genesis 1:1-31; Genesis 2:1-3"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 1:1",
+   "label": "Genesis 1:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "In the beginning God created the heaven and the earth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "In the beginning God created the heaven and the earth."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 1:2",
+   "label": "Genesis 1:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Before anything else, there was God. The earth was without shape and empty, and darkness covered the deep waters. But even there, in the dark, the Spirit of God was moving."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 1:3",
+   "label": "Genesis 1:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And God said, Let there be light: and there was light."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And God said, Let there be light: and there was light."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The first thing God made was light. He saw that it was good, and he divided the light from the darkness. He named the light Day and named the darkness Night. Evening came, then morning, and that was the first day."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "On the second day, God made the sky, the wide firmament, dividing the waters above from the waters below. On the third day, he gathered the seas into one place, and dry land appeared. Then the land grew green. Grass came up, and plants with seed, and trees with fruit, each after its own kind. God looked, and it was good."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "On the fourth day, God set lights in the sky: the sun to rule the day, the moon to rule the night, and the stars as well. On the fifth day, he filled the waters with living creatures, and the air with birds of every kind. He blessed them and told them to be fruitful and multiply."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "On the sixth day, God made the animals of the land: cattle, creeping things, and wild beasts, each after its own kind. And then he did something new."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 1:27",
+   "label": "Genesis 1:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "So God created man in his own image, in the image of God created he him; male and female created he them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "So God created man in his own image, in the image of God created he him; male and female created he them."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "People were made in the image of God, male and female. Every person you will ever meet carries that image. God blessed them and gave them the care of the earth, its fish and birds and living things, and gave them plants and fruit for food."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 1:31",
+   "label": "Genesis 1:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice the difference. After each day, God saw that it was good. When he looked at everything together, with people in it, he saw that it was very good."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 2:2",
+   "label": "Genesis 2:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "On the seventh day, God rested. He blessed that day and set it apart. The story of creation ends not with more work but with rest."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The world began with light coming into darkness, with order coming to what was empty, and with a God who called it good. At the end of a long day, it is a good story to remember. Light first. Then everything else. Then rest."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 488,
+ "est_seconds": 266,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 488 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.6",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Genesis 1:1-2:3; 'care of the earth' summarises dominion without taking a side on how the days are read."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Calm and plain; 'every person carries that image' said without any race claim."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

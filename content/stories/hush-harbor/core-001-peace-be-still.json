@@ -1,0 +1,246 @@
+{
+ "id": "core-001-peace-be-still",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Peace, Be Still",
+ "passage": {
+  "refs": [
+   "MAR 4:1",
+   "MAR 4:35-41"
+  ],
+  "label": "Mark 4:1; Mark 4:35-41"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "disciples",
+   "name": "the disciples",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, it had been a long day by the Sea of Galilee. So many people came to hear Jesus that he had to teach them sitting in a boat, just off the shore. And when the evening came, he told his disciples, let us cross over to the other side."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They sent the people home and took him with them, just as he was, tired from the day. Other little boats went out with them. And Jesus went to the back of the boat, laid his head down on a pillow, and went to sleep."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Now Galilee sits low, with hills all around it, and the wind can come down off those hills quick. That night it did."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:37",
+   "label": "Mark 4:37",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 37,
+     "text": "And there arose a great storm of wind, and the waves beat into the ship, so that it was now full."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "And there arose a great storm of wind, and the waves beat into the ship, so that it was now full."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "These were fishermen, some of them. They knew that water. They knew boats. And they were scared. Not a little worried. Scared for their lives. They bailed and pulled and hollered over the wind, and the boat kept filling up."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And where was Jesus? Asleep on a pillow."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAR 4:38",
+   "label": "Mark 4:38",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 38,
+     "text": "And he was in the hinder part of the ship, asleep on a pillow: and they awake him, and say unto him, Master, carest thou not that we perish?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "And he was in the hinder part of the ship, asleep on a pillow: and they awake him, and say unto him,"
+    },
+    {
+     "v": 38,
+     "speaker": "disciples",
+     "text": "Master, carest thou not that we perish?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hear that question. Master, don't you care? That is not a question from people with no faith. That is a question from people who came to the right one and still could not understand why he was so quiet. Some of us have asked it in a hospital hallway. Some of us have asked it at the kitchen table with the bills spread out. The old saints asked it in the fields, and they kept on singing anyhow."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then he got up."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:39",
+   "label": "Mark 4:39",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 39,
+     "text": "And he arose, and rebuked the wind, and said unto the sea, Peace, be still. And the wind ceased, and there was a great calm."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "And he arose, and rebuked the wind, and said unto the sea, Peace, be still. And the wind ceased, and there was a great calm."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No long speech to that storm. A few words, and the wind laid down like a fussing baby in its mother's arms. The waves went flat. The whole lake went still, the kind of still you can hear."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 4:40",
+   "label": "Mark 4:40",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 40,
+     "text": "And he said unto them, Why are ye so fearful? how is it that ye have no faith?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "And he said unto them, Why are ye so fearful? how is it that ye have no faith?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He did not ask them to pretend they were never afraid. He asked them where their faith had gone, when he had been right there in the boat with them the whole time."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAR 4:41",
+   "label": "Mark 4:41",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 41,
+     "text": "And they feared exceedingly, and said one to another, What manner of man is this, that even the wind and the sea obey him?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "And they feared exceedingly, and said one to another,"
+    },
+    {
+     "v": 41,
+     "speaker": "disciples",
+     "text": "What manner of man is this, that even the wind and the sea obey him?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "What manner of man is this? That is the question the story leaves with us tonight. The church mothers used to hum \"Jesus, Lover of My Soul\" when the storms rolled through, that old Wesley hymn about hiding till the storm of life is past. They never said the storm would not come. They told us who was in the boat."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 497,
+ "est_seconds": 271,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 497 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Same scripture and claims as the approved plain telling; the hymn line is Wesley (1740, public domain); no promised calm."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Warm preaching cadence; the church mothers and the old saints are the community's memory, not an invented narrator's; ends on the story's truth; no dialect spellings."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Cultural pass (coordinator review 18 Nov): the AI narrator had a first-person grandmother (invented person, R-PRF-02) and ended on 'Can I get an amen?'; now 'the church mothers' and the ending is the story's truth.",
+  "person_read": false
+ },
+ "status": "passed"
+}

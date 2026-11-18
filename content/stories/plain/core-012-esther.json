@@ -1,0 +1,235 @@
+{
+ "id": "core-012-esther",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Esther, for Such a Time as This",
+ "passage": {
+  "refs": [
+   "EST 2:5-17",
+   "EST 3:8-13",
+   "EST 4:1-17",
+   "EST 5:1-3"
+  ],
+  "label": "Esther 2:5-17; Esther 3:8-13; Esther 4:1-17; Esther 5:1-3"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "esther",
+   "name": "Esther",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "mordecai",
+   "name": "Mordecai",
+   "age": "elder",
+   "gender": "m"
+  },
+  {
+   "id": "king",
+   "name": "the king",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esther was a young Jewish woman living in the Persian capital of Shushan. Her parents had died, and her cousin Mordecai had raised her as his own daughter. In time, she was chosen as queen by King Ahasuerus. But on Mordecai's advice, she had never told anyone at the palace who her people were."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then a powerful official named Haman persuaded the king to sign a terrible order. On a single day, the Jews in every province of the kingdom were to be destroyed. Letters went out with the king's seal."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When Mordecai heard, he tore his clothes and put on sackcloth and ashes. He cried with a loud and bitter cry in the middle of the city. Across the provinces, Jewish families fasted and wept."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esther sent a servant to find out what was wrong. Mordecai sent back a copy of the order and asked her to go to the king and plead for her people."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "But there was a problem. Anyone who went in to the king without being called could be put to death, unless the king held out his golden sceptre. And Esther had not been called in thirty days."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mordecai",
+   "ref": "EST 4:14",
+   "label": "Esther 4:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "For if thou altogether holdest thy peace at this time, then shall there enlargement and deliverance arise to the Jews from another place; but thou and thy father’s house shall be destroyed: and who knoweth whether thou art come to the kingdom for such a time as this?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "mordecai",
+     "text": "For if thou altogether holdest thy peace at this time, then shall there enlargement and deliverance arise to the Jews from another place; but thou and thy father’s house shall be destroyed: and who knoweth whether thou art come to the kingdom for such a time as this?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "For such a time as this. Mordecai did not promise Esther it would be easy or safe. He asked her to consider that her place in the palace might be part of something bigger than her own comfort."
+  },
+  {
+   "type": "scripture",
+   "speaker": "esther",
+   "ref": "EST 4:16",
+   "label": "Esther 4:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Go, gather together all the Jews that are present in Shushan, and fast ye for me, and neither eat nor drink three days, night or day: I also and my maidens will fast likewise; and so will I go in unto the king, which is not according to the law: and if I perish, I perish."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "esther",
+     "text": "Go, gather together all the Jews that are present in Shushan, and fast ye for me, and neither eat nor drink three days, night or day: I also and my maidens will fast likewise; and so will I go in unto the king, which is not according to the law: and if I perish, I perish."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "If I perish, I perish. Esther did not walk in alone. She asked her people to fast with her for three days, and she and her maidens fasted too. Then she chose to go."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "On the third day, Esther put on her royal robes and went to stand in the king's inner court. Imagine the silence. Every step could have been her last."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EST 5:2",
+   "label": "Esther 5:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And it was so, when the king saw Esther the queen standing in the court, that she obtained favour in his sight: and the king held out to Esther the golden sceptre that was in his hand. So Esther drew near, and touched the top of the sceptre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And it was so, when the king saw Esther the queen standing in the court, that she obtained favour in his sight: and the king held out to Esther the golden sceptre that was in his hand. So Esther drew near, and touched the top of the sceptre."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "EST 5:3",
+   "label": "Esther 5:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Then said the king unto her, What wilt thou, queen Esther? and what is thy request? it shall be even given thee to the half of the kingdom."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Then said the king unto her,"
+    },
+    {
+     "v": 3,
+     "speaker": "king",
+     "text": "What wilt thou, queen Esther? and what is thy request? it shall be even given thee to the half of the kingdom."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The king held out the sceptre. Esther came near and touched the top of it. The door that could have closed on her opened instead. Her courage began a turning that would save her people."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esther's story is not about being fearless. It is about being afraid and going anyway, after prayer and fasting, with others standing with her. She used the place she had been given for the good of her people."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 548,
+ "est_seconds": 299,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Esther 2-5; the harem context is left out rather than retold; 'if I perish' kept without promising safety to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Esther shown as brave and wise, an orphan raised by family; no exoticising of the court."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

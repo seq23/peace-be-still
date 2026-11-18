@@ -1,0 +1,312 @@
+{
+ "id": "core-015-woman-at-the-well",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Woman at the Well",
+ "passage": {
+  "refs": [
+   "JOH 4:5-30",
+   "JOH 4:39-42"
+  ],
+  "label": "John 4:5-30; John 4:39-42"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "woman",
+   "name": "woman",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "samaritans",
+   "name": "the Samaritans",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus and his disciples were walking through Samaria. Around noon they came to a town called Sychar, near the well that Jacob had dug long ago. Jesus was tired from the journey, so he sat down by the well while his disciples went into town to buy food."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A Samaritan woman came to draw water. It was about the sixth hour, the middle of the day, and the sun was high."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:7",
+   "label": "John 4:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "There cometh a woman of Samaria to draw water: Jesus saith unto her, Give me to drink."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "There cometh a woman of Samaria to draw water: Jesus saith unto her, Give me to drink."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:9",
+   "label": "John 4:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Then saith the woman of Samaria unto him, How is it that thou, being a Jew, askest drink of me, which am a woman of Samaria? for the Jews have no dealings with the Samaritans."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Then saith the woman of Samaria unto him,"
+    },
+    {
+     "v": 9,
+     "speaker": "woman",
+     "text": "How is it that thou, being a Jew, askest drink of me, which am a woman of Samaria? for the Jews have no dealings with the Samaritans."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jews and Samaritans did not mix. A Jewish teacher was not expected to speak to a Samaritan woman alone at a well, let alone ask her for a drink. Jesus crossed that line without a second thought."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He told her that if she knew who was asking, she would have asked him, and he would have given her living water. She pointed out that he had no bucket, and the well was deep."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:13",
+   "label": "John 4:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Jesus answered and said unto her, Whosoever drinketh of this water shall thirst again:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Jesus answered and said unto her, Whosoever drinketh of this water shall thirst again:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:14",
+   "label": "John 4:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "But whosoever drinketh of the water that I shall give him shall never thirst; but the water that I shall give him shall be in him a well of water springing up into everlasting life."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "But whosoever drinketh of the water that I shall give him shall never thirst; but the water that I shall give him shall be in him a well of water springing up into everlasting life."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:15",
+   "label": "John 4:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "The woman saith unto him, Sir, give me this water, that I thirst not, neither come hither to draw."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "The woman saith unto him,"
+    },
+    {
+     "v": 15,
+     "speaker": "woman",
+     "text": "Sir, give me this water, that I thirst not, neither come hither to draw."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Jesus asked her to go and call her husband. She said she had no husband. Jesus told her she was right. She had had five husbands, and the man she was with now was not her husband. He did not shame her. He simply knew her story."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She told him she could see he was a prophet. She asked him where people should worship. Jesus told her a time was coming when true worship would not depend on a mountain or a city, but on spirit and truth. She said she knew the Messiah was coming. And Jesus told her plainly that he was the one."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Just then the disciples came back, surprised to find him talking with her. But no one asked him why."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 4:28",
+   "label": "John 4:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "The woman then left her waterpot, and went her way into the city, and saith to the men,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "The woman then left her waterpot, and went her way into the city, and saith to the men,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "JOH 4:29",
+   "label": "John 4:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Come, see a man, which told me all things that ever I did: is not this the Christ?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "woman",
+     "text": "Come, see a man, which told me all things that ever I did: is not this the Christ?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She left her water jar behind. She had come for water and found something more. And the woman who had come to the well alone at noon went straight back into town to talk to everyone."
+  },
+  {
+   "type": "scripture",
+   "speaker": "samaritans",
+   "ref": "JOH 4:42",
+   "label": "John 4:42",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 42,
+     "text": "And said unto the woman, Now we believe, not because of thy saying: for we have heard him ourselves, and know that this is indeed the Christ, the Saviour of the world."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "And said unto the woman,"
+    },
+    {
+     "v": 42,
+     "speaker": "samaritans",
+     "text": "Now we believe, not because of thy saying: for we have heard him ourselves, and know that this is indeed the Christ, the Saviour of the world."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A Samaritan woman with a complicated past became the one who carried this news to her whole town, and many believed because of what she said. Jesus met her where she was, told her the truth with kindness, and sent her home with good news to share."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 541,
+ "est_seconds": 295,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 4; her marriages stated without moralising, as Jesus does; Jesus's identity stated as the text states it."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "She is not made a sinner-stereotype; she becomes the town's witness."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Pastor pass: removed an outside claim about when women drew water and an overstated 'first witness in John'; replaced with the sixth hour and verse 39.",
+  "person_read": false
+ },
+ "status": "passed"
+}

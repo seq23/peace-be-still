@@ -1,0 +1,318 @@
+{
+ "id": "core-004-jonah",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Jonah and the Great Fish",
+ "passage": {
+  "refs": [
+   "JON 1:1-17",
+   "JON 2:1-10",
+   "JON 3:1-3"
+  ],
+  "label": "Jonah 1:1-17; Jonah 2:1-10; Jonah 3:1-3"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jonah",
+   "name": "Jonah",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "mariners",
+   "name": "the mariners",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The word of the LORD came to Jonah. God told him to go to the great city of Nineveh and speak against it, because its wickedness had reached him. Jonah did not want to go."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 1:3",
+   "label": "Jonah 1:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "But Jonah rose up to flee unto Tarshish from the presence of the LORD, and went down to Joppa; and he found a ship going to Tarshish: so he paid the fare thereof, and went down into it, to go with them unto Tarshish from the presence of the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "But Jonah rose up to flee unto Tarshish from the presence of the LORD, and went down to Joppa; and he found a ship going to Tarshish: so he paid the fare thereof, and went down into it, to go with them unto Tarshish from the presence of the LORD."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Running from God turned out to be costly. Jonah paid the fare himself. He went down to Joppa, down into the ship, and then down into the lowest part of it to sleep. Every step took him further down."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 1:4",
+   "label": "Jonah 1:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "But the LORD sent out a great wind into the sea, and there was a mighty tempest in the sea, so that the ship was like to be broken."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "But the LORD sent out a great wind into the sea, and there was a mighty tempest in the sea, so that the ship was like to be broken."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The sailors were terrified. Each one cried out to his own god. They threw the cargo overboard to lighten the ship. And Jonah was fast asleep below."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The captain woke him and told him to call on his God. Then the sailors cast lots to learn who had brought this trouble on them, and the lot fell on Jonah. They asked him who he was and where he came from."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonah",
+   "ref": "JON 1:9",
+   "label": "Jonah 1:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And he said unto them, I am an Hebrew; and I fear the LORD, the God of heaven, which hath made the sea and the dry land."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And he said unto them,"
+    },
+    {
+     "v": 9,
+     "speaker": "jonah",
+     "text": "I am an Hebrew; and I fear the LORD, the God of heaven, which hath made the sea and the dry land."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Now the men were even more afraid. They asked Jonah what they should do, so the sea would calm down."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonah",
+   "ref": "JON 1:12",
+   "label": "Jonah 1:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And he said unto them, Take me up, and cast me forth into the sea; so shall the sea be calm unto you: for I know that for my sake this great tempest is upon you."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And he said unto them,"
+    },
+    {
+     "v": 12,
+     "speaker": "jonah",
+     "text": "Take me up, and cast me forth into the sea; so shall the sea be calm unto you: for I know that for my sake this great tempest is upon you."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The sailors did not want to do it. They rowed hard to get back to land, but the storm only grew worse. They prayed to the LORD not to hold this man's life against them. Then they lifted Jonah and threw him into the sea, and the sea grew calm. The same sailors who had started the day praying to every god they knew now offered a sacrifice to the LORD."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 1:17",
+   "label": "Jonah 1:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Now the LORD had prepared a great fish to swallow up Jonah. And Jonah was in the belly of the fish three days and three nights."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Now the LORD had prepared a great fish to swallow up Jonah. And Jonah was in the belly of the fish three days and three nights."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 2:1",
+   "label": "Jonah 2:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Then Jonah prayed unto the LORD his God out of the fish’s belly,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Then Jonah prayed unto the LORD his God out of the fish’s belly,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonah",
+   "ref": "JON 2:2",
+   "label": "Jonah 2:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And said, I cried by reason of mine affliction unto the LORD, and he heard me; out of the belly of hell cried I, and thou heardest my voice."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And said,"
+    },
+    {
+     "v": 2,
+     "speaker": "jonah",
+     "text": "I cried by reason of mine affliction unto the LORD,"
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "and he heard me; out of the belly of hell cried I,"
+    },
+    {
+     "v": 2,
+     "speaker": "jonah",
+     "text": "and thou heardest my voice."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jonah prayed from inside the fish, about as low as a person can go, and God heard him there. He was not in the temple. His life was not in order. He prayed from the bottom, and he was heard."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JON 2:10",
+   "label": "Jonah 2:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And the LORD spake unto the fish, and it vomited out Jonah upon the dry land."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And the LORD spake unto the fish, and it vomited out Jonah upon the dry land."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There is a second chance in this story. The word of the LORD came to Jonah again, and this time he went to Nineveh. Running had not stopped God from calling him. The story shows a God who keeps speaking to people who ran."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 545,
+ "est_seconds": 297,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.0",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Jonah 1-2 and 3:1-3; God's charge paraphrased in the third person, never as God speaking."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Neutral voice; the sailors are treated with respect."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

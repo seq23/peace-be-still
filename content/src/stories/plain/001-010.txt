@@ -1,0 +1,230 @@
+# Plain telling, core stories 1-10. Scripture lines (S:) are references only; the build pastes the stored KJV.
+# Words of God and of Jesus are read by the narrator, never by a character voice.
+
+=== core-001-peace-be-still | Jesus Calms the Storm
+passage: MAR 4:1; MAR 4:35-41
+shelf: adult
+violence: none
+sexual: none
+cast: disciples|the disciples|adult|group
+N: It had been a long day beside the Sea of Galilee. Crowds had pressed in to hear Jesus all day, so many that he had taught them sitting in a boat just off the shore. When evening came, he told his disciples they would cross the lake to the other side.
+N: So they sent the crowd home and took him with them in the boat, just as he was. Other small boats went out with them onto the water. Jesus went to the back of the boat, laid his head on a cushion, and fell asleep.
+N: The Sea of Galilee sits low, with hills all around it. Wind can rush down from those hills without warning. That night it did.
+S: MAR 4:37
+N: Some of these men had fished this lake their whole lives. They knew water, and they knew boats. They knew what a storm like this could do. That is why they were afraid. This was not a small worry. They thought they were going to die. They bailed and pulled and shouted over the wind, and still the boat kept filling.
+N: And Jesus slept on. The disciples shook him awake.
+S: MAR 4:38 @disciples
+N: It is an honest question. They had come to the right person, and they still could not understand why he seemed so quiet. Many people have asked the same thing in a hospital hallway, or late at night with the bills spread across the table.
+N: Then Jesus stood up.
+S: MAR 4:39
+N: There was no long speech. He spoke a few words, and the wind dropped the way a crying child grows quiet in its mother's arms. The waves went flat. The whole lake went still.
+S: MAR 4:40
+N: Then he turned to his friends. He did not ask them to pretend they were never afraid. He asked them where their trust had gone, when he had been in the boat with them the whole time.
+S: MAR 4:41 @disciples
+N: That is the question the story leaves with us. Who is this, that the wind and the sea listen to him? The storm in the story was real. So was the calm. And the disciples learned that the one asleep in their boat was the one the storm obeyed.
+
+=== core-002-red-sea | Moses and the Red Sea
+passage: EXO 14:5-31
+shelf: adult
+violence: mild
+sexual: none
+cast: moses|Moses|adult|m; israelites|the children of Israel|adult|group
+N: The people of Israel had finally left Egypt. Picture them camped beside the sea: mothers with babies on their hips, old men leaning on walking sticks, children asleep on bundles. Behind them were the years they had served in Egypt. In front of them was water as far as they could see.
+N: Then Pharaoh changed his mind. He wanted his workers back. He gathered his chariots and his horsemen and went after them.
+N: Someone looked back and saw the dust rising on the road. The people were terribly afraid. They cried out to the LORD, and then they turned on Moses.
+S: EXO 14:11 @israelites
+N: Fear can do that. It can make the old hard life look safe, simply because it is familiar. But Moses did not answer their fear with more fear.
+S: EXO 14:13 @moses
+S: EXO 14:14 @moses
+N: Stand still, he told them. Not because there was nothing to do. Because this part was not theirs to do. Then the LORD told Moses to have the people go forward, and to lift his rod over the water.
+N: Night came on. The angel of God, who had gone ahead of the camp, moved behind it, and the pillar of cloud moved with him. It stood between Israel and Egypt. On the Egyptian side it was cloud and darkness. On Israel's side it gave light all night long. The same cloud was darkness to one camp and light to the other.
+S: EXO 14:21
+S: EXO 14:22
+N: Imagine walking that path. Dry ground under your feet where fish had been swimming that morning. Water standing like walls on your right and on your left. Families walking together through the night.
+N: The Egyptians followed them into the sea. Their chariot wheels came off, and they could barely drive. In the morning Moses stretched out his hand again, and the water returned to its place. Israel stood safe on the far shore.
+S: EXO 14:31
+N: Notice what the people learned that night. Not that they were strong, and not that Moses was clever. They saw what the LORD had done, and they trusted him. They could not see a way through the water. The story tells us who made one.
+
+=== core-003-lions-den | Daniel in the Lions' Den
+passage: DAN 6:1-23
+shelf: adult
+violence: mild
+sexual: none
+cast: king|the king|adult|m; daniel|Daniel|elder|m
+N: Daniel had served in Babylon for a long time. King Darius thought so highly of him that he planned to put him over the whole kingdom. The other leaders grew jealous. They searched for something wrong in his work and found nothing. He was faithful and honest.
+N: So they decided the only way to trap Daniel was through his faith. They talked the king into signing a law. For thirty days, no one could pray to any god or any person except the king. Anyone who did would be thrown to the lions.
+S: DAN 6:10
+N: Daniel did not hide, and he did not change his habits. He went home, opened his windows toward Jerusalem, and knelt to pray, just as he always had. His prayer life had not started in this crisis. It was already there, and it held.
+N: The men found him praying and hurried to the king. The king was deeply upset, because he cared about Daniel. He worked until sunset to find a way to save him. But the men reminded him that a law of the Medes and Persians could not be changed.
+S: DAN 6:16 @king
+N: Even the king who signed the order was hoping in Daniel's God. A stone was laid over the mouth of the den and sealed with the king's own ring. Then the king went back to his palace. He would not eat. He sent the musicians away. He could not sleep.
+N: It is a striking picture. The man in the lions' den was at peace, and the man in the palace was not.
+S: DAN 6:19
+S: DAN 6:20 @king
+S: DAN 6:21 @daniel
+S: DAN 6:22 @daniel
+S: DAN 6:23
+N: The story does not pretend the lions were not real or not hungry. It says God sent his angel and shut their mouths, and that Daniel trusted his God. Daniel kept praying with the windows open, even when it was dangerous. His quiet faithfulness is the heart of the story.
+
+=== core-004-jonah | Jonah and the Great Fish
+passage: JON 1:1-17; JON 2:1-10; JON 3:1-3
+shelf: adult
+violence: mild
+sexual: none
+cast: jonah|Jonah|adult|m; mariners|the mariners|adult|group
+N: The word of the LORD came to Jonah. God told him to go to the great city of Nineveh and speak against it, because its wickedness had reached him. Jonah did not want to go.
+S: JON 1:3
+N: Running from God turned out to be costly. Jonah paid the fare himself. He went down to Joppa, down into the ship, and then down into the lowest part of it to sleep. Every step took him further down.
+S: JON 1:4
+N: The sailors were terrified. Each one cried out to his own god. They threw the cargo overboard to lighten the ship. And Jonah was fast asleep below.
+N: The captain woke him and told him to call on his God. Then the sailors cast lots to learn who had brought this trouble on them, and the lot fell on Jonah. They asked him who he was and where he came from.
+S: JON 1:9 @jonah
+N: Now the men were even more afraid. They asked Jonah what they should do, so the sea would calm down.
+S: JON 1:12 @jonah
+N: The sailors did not want to do it. They rowed hard to get back to land, but the storm only grew worse. They prayed to the LORD not to hold this man's life against them. Then they lifted Jonah and threw him into the sea, and the sea grew calm. The same sailors who had started the day praying to every god they knew now offered a sacrifice to the LORD.
+S: JON 1:17
+S: JON 2:1
+S: JON 2:2 @jonah
+N: Jonah prayed from inside the fish, about as low as a person can go, and God heard him there. He was not in the temple. His life was not in order. He prayed from the bottom, and he was heard.
+S: JON 2:10
+N: There is a second chance in this story. The word of the LORD came to Jonah again, and this time he went to Nineveh. Running had not stopped God from calling him. The story shows a God who keeps speaking to people who ran.
+
+=== core-005-david-goliath | David and Goliath
+passage: 1SA 17:4-50
+shelf: adult
+violence: mild
+sexual: none
+cast: david|David|teen|m; saul|Saul|adult|m; goliath|Goliath|adult|m
+N: Two armies stood on two hills with a valley between them. Every morning and every evening, a champion walked out from the Philistine camp. His name was Goliath. He stood six cubits and a span, taller than any soldier there, and he wore armor of bronze from head to foot.
+N: He shouted across the valley, daring Israel to send one man to fight him. For forty days, no one went.
+N: Then a young shepherd named David came to the camp to bring food to his older brothers. He heard the giant's challenge. He asked why anyone should be allowed to defy the armies of the living God.
+S: 1SA 17:32 @david
+S: 1SA 17:33 @saul
+N: Saul was right about the facts. David was young, and Goliath was a trained warrior. But David had other facts. He told the king how he had kept his father's sheep, and how a lion and a bear had each come and carried off a lamb. He had gone after them and saved the lamb.
+S: 1SA 17:37 @david until "And Saul said"
+N: Saul dressed David in his own armor, with a bronze helmet and a coat of mail. David tried to walk in it and could not. He took it all off. He could not fight in someone else's armor.
+N: Instead he picked up his staff. He picked five smooth stones from the stream and dropped them into his shepherd's bag. His sling was in his hand.
+N: Goliath looked at him and sneered. David was only a youth, with a ruddy face. The giant cursed him by his gods.
+S: 1SA 17:45 @david
+S: 1SA 17:47 @david
+S: 1SA 17:49
+N: One stone, and the giant fell face down on the ground. David had no sword in his hand that day. He had a sling, a stone, and a trust in God he had learned out in the fields with the sheep.
+N: The story does not promise that every hard fight ends this way. It shows where David's courage came from. He remembered how the LORD had been with him before, and he trusted him again.
+
+=== core-006-joseph-coat | Joseph and the Coat
+passage: GEN 37:3-28; GEN 39:2
+shelf: adult
+violence: mild
+sexual: none
+cast: joseph|Joseph|teen|m; brothers|his brethren|adult|group; reuben|Reuben|adult|m; judah|Judah|adult|m
+N: Jacob, also called Israel, had twelve sons. Joseph was seventeen, born when his father was old, and Jacob loved him more than all the others. Everyone in the family knew it.
+S: GEN 37:3
+S: GEN 37:4
+N: A gift can be a blessing and a burden at once. Every time his brothers saw that coat, they saw what they had not been given. Then Joseph began to have dreams, and he told them.
+S: GEN 37:7 @joseph
+N: His brothers hated him even more. Then he dreamed that the sun, the moon and eleven stars bowed down to him. Even his father scolded him for that one, but Jacob kept thinking about it.
+N: One day the brothers were far away with the flocks, and Jacob sent Joseph to check on them. He found them at Dothan. They saw him coming from a long way off, wearing that coat.
+S: GEN 37:19 @brothers
+S: GEN 37:20 @brothers whole
+N: Reuben, the oldest, spoke up. He told them not to kill Joseph, but to throw him into a pit in the wilderness instead. He meant to come back later, rescue him, and bring him home to their father.
+S: GEN 37:23
+S: GEN 37:24
+N: Then the brothers sat down to eat. Their brother was in a dry pit nearby, and they ate their meal. While they ate, they saw a group of Ishmeelites coming from Gilead, their camels loaded with spices on the way down to Egypt.
+S: GEN 37:26 @judah
+S: GEN 37:27 @judah
+S: GEN 37:28
+N: Twenty pieces of silver. That was the price jealousy put on a brother. It is a hard story to sit with. But it does not end in that pit. Joseph was taken down to Egypt, and a little later the Bible tells us that the LORD was with Joseph there. The rest of his story is still to come.
+
+=== core-007-prodigal-son | The Son Who Came Home
+passage: LUK 15:11-32
+shelf: adult
+violence: none
+sexual: none
+cast: younger-son|the younger|adult|m; father|father|elder|m; elder-son|elder son|adult|m
+N: Jesus told a story about a man who had two sons. The younger son came to his father and asked for his share of the family's wealth now, while his father was still alive. And the father divided what he had between them.
+S: LUK 15:13
+N: Money goes quickly when someone is trying to fill an empty place with it. Soon it was all gone. Then a famine came to that land, and he had nothing. He took a job feeding pigs. He was so hungry he wanted to eat the pods the pigs were eating, and no one gave him anything.
+S: LUK 15:17 @younger-son
+S: LUK 15:18 @younger-son whole
+S: LUK 15:19 @younger-son
+N: He came to himself. That is the turning point. Not the moment everything got fixed, but the moment he finally saw where he was.
+S: LUK 15:20
+N: Look at the father. He saw his son while he was still a long way off. That means he had been watching the road. He ran to his son, fell on his neck and kissed him. He did not even wait for the speech his son had practiced.
+S: LUK 15:21 @younger-son
+S: LUK 15:22 @father
+S: LUK 15:23 @father
+S: LUK 15:24 @father
+N: But there is another son in this story. The older brother was out in the field. As he came near the house, he heard music and dancing. When he learned the reason, he was angry and would not go inside. So his father came out to him too.
+S: LUK 15:29 @elder-son
+S: LUK 15:31 @father
+S: LUK 15:32 @father
+N: The father went out to both of his sons. One had come home from a far country. The other was standing just outside the door. Jesus ends the story before we learn whether the older brother went in. The story leaves the door open, and it shows a father who comes out to meet them both.
+
+=== core-008-ruth-naomi | Ruth and Naomi
+passage: RUT 1:1-22
+shelf: adult
+violence: none
+sexual: none
+cast: naomi|Naomi|elder|f; ruth|Ruth|adult|f; orpah|Orpah|adult|f
+N: Long ago, when judges led Israel, a famine struck the land. A man from Bethlehem named Elimelech took his wife Naomi and their two sons to the country of Moab to find food.
+N: Then Elimelech died. The two sons married women from Moab, Orpah and Ruth. About ten years later, both sons died as well. Three widows were left with nothing in their hands.
+N: Naomi heard that the LORD had given his people bread again back home in Judah. So she started back, with her two daughters-in-law walking beside her.
+S: RUT 1:8 @naomi
+N: They wept and said they would go with her. Naomi told them to turn back. She had no more sons to offer them. She felt that the hand of the LORD had gone out against her.
+S: RUT 1:14
+N: Orpah kissed her and went home, and nothing in the story blames her for it. She went back to her own people, which was the sensible thing to do. But Ruth held on to Naomi and would not let go.
+S: RUT 1:16 @ruth
+S: RUT 1:17 @ruth
+N: These are some of the most loved words in the Bible, and they were spoken by a young widow from Moab. She was not a prophet or a priest. She was a young woman from across the border who would not let an older woman walk that road alone.
+N: When they reached Bethlehem, the whole town was stirred. The women asked each other whether this was really Naomi.
+S: RUT 1:20 @naomi
+S: RUT 1:21 @naomi
+N: Naomi was honest about her grief. She did not dress it up, and the Bible lets her say it plainly. But read the last line slowly.
+S: RUT 1:22
+N: They arrived at the beginning of the barley harvest. Naomi came home feeling empty, with Ruth at her side, just as the fields were turning gold. She could not see it yet. Grief often cannot. But her story was already turning.
+
+=== core-009-fiery-furnace | Shadrach, Meshach and Abed-nego
+passage: DAN 3:1-28
+shelf: adult
+violence: mild
+sexual: none
+cast: nebuchadnezzar|Nebuchadnezzar|adult|m; the-three|Shadrach, Meshach, and Abed-nego|adult|group
+N: King Nebuchadnezzar made an image of gold, sixty cubits high, and set it up on the plain of Dura. When the music played, everyone was to fall down and worship it. Anyone who refused would be thrown into a burning furnace that same hour.
+N: Three young Hebrew men who served the king would not bow: Shadrach, Meshach, and Abed-nego. Someone reported them. The king was furious and had them brought before him.
+S: DAN 3:15 @nebuchadnezzar
+N: Who is that God? That is the question the king put on the table. Listen to how they answered him.
+S: DAN 3:16 @the-three
+S: DAN 3:17 @the-three
+S: DAN 3:18 @the-three
+N: But if not. Some of the strongest faith in the Bible is in those three words. They believed God was able to save them. They did not claim to know what God would choose to do. And they decided ahead of time that they would not bow either way.
+N: The king was so angry his face changed. He ordered the furnace heated seven times hotter than usual. Strong soldiers tied up the three men, still in their coats and hats, and threw them into the fire.
+S: DAN 3:24 @nebuchadnezzar after "his counsellors, " until "They answered"
+S: DAN 3:25 @nebuchadnezzar
+N: Three men went in, and the king counted four. They were not kept out of the fire. They had company in it.
+N: The king came near the door of the furnace and called them out by name. They walked out of the fire. Not one hair on their heads was burned. Their coats were not scorched. They did not even smell of smoke.
+S: DAN 3:28 @nebuchadnezzar
+N: A king who began the day building an idol ended it praising the God of three young men who would not bow. Their faith was not loud. It was steady. And when they stood in the fire, they were not alone.
+
+=== core-010-hem-of-his-garment | The Woman Who Touched His Hem
+passage: MAR 5:22-34; MAR 5:42
+shelf: adult
+violence: none
+sexual: none
+cast: woman|woman|adult|f; disciples|his disciples|adult|group
+N: Jesus had just crossed the lake, and a crowd was waiting for him on the shore. A leader of the synagogue named Jairus pushed through, fell at his feet, and begged him to come. His little daughter was dying, and he wanted Jesus to lay his hands on her so she would live.
+N: Jesus went with him. A large crowd followed, pressing in on every side, so close it was hard to walk. Somewhere in that crowd was a woman nobody was looking at.
+S: MAR 5:25
+S: MAR 5:26
+N: Twelve years. That is as long as Jairus's daughter had been alive. Twelve years of treatments and remedies, of hoping and being let down, and every coin she had was gone. Instead of getting better, she had grown worse. Many people know that kind of tired, the kind that sleep does not fix.
+S: MAR 5:27
+S: MAR 5:28 @woman
+N: She did not ask for an appointment or wait in line. She did not call out his name. She had heard about Jesus, and that was enough to make her try. She came up behind him in the crowd, quietly, and reached out her hand.
+S: MAR 5:29
+S: MAR 5:30
+S: MAR 5:31 @disciples
+S: MAR 5:32
+N: His disciples thought it was an odd question, with so many people pushing against him. But Jesus kept looking. A crowd pressing in is not the same as a hand reaching out in faith. He knew the difference.
+N: The woman knew she had been found. She was afraid, and she was trembling. But she did not run.
+S: MAR 5:33
+S: MAR 5:34
+N: He could have let her slip away, healed and unnamed. Instead he called her daughter. He let her tell the whole truth in front of everyone, while an anxious father waited and a whole town watched. Then he sent her home in peace. The healing matters in this story. So does the moment she was seen, named and blessed by the one she had reached for.
