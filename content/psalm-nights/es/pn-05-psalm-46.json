@@ -1,0 +1,226 @@
+{
+ "id": "pn-05-psalm-46",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 46: Quédense quietos",
+ "main": [
+  "PSA 46:1-11"
+ ],
+ "companions": [
+  "ISA 26:3",
+  "PHI 4:6-7"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola, te doy la bienvenida. Esta es una noche de Salmos. [pause 6]\n\nDeja que el día se vaya. Afloja la quijada. Deja las manos abiertas. [pause 9]\n\nEsta noche leemos el Salmo cuarenta y seis. Es un salmo para cuando sientes que la tierra se mueve. Montes, aguas, naciones, todo alborotado. Y en medio de todo, un río tranquilo. [pause 8]\n\nLo vamos a leer dos veces. [pause 11]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 46:1-11",
+   "label": "Salmos 46:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: de los hijos de Coré: Salmo sobre Alamoth. DIOS es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones."
+    },
+    {
+     "v": 2,
+     "text": "Por tanto no temeremos aunque la tierra sea removida; aunque se traspasen los montes al corazón de la mar."
+    },
+    {
+     "v": 3,
+     "text": "Bramarán, turbaránse sus aguas; temblarán los montes á causa de su braveza. (Selah.)"
+    },
+    {
+     "v": 4,
+     "text": "Del río sus conductos alegrarán la ciudad de Dios, el santuario de las tiendas del Altísimo."
+    },
+    {
+     "v": 5,
+     "text": "Dios está en medio de ella; no será conmovida: Dios la ayudará al clarear la mañana."
+    },
+    {
+     "v": 6,
+     "text": "Bramaron las gentes, titubearon los reinos; dió él su voz, derritióse la tierra."
+    },
+    {
+     "v": 7,
+     "text": "Jehová de los ejércitos es con nosotros; nuestro refugio es el Dios de Jacob. (Selah.)"
+    },
+    {
+     "v": 8,
+     "text": "Venid, ved las obras de Jehová, que ha puesto asolamientos en la tierra."
+    },
+    {
+     "v": 9,
+     "text": "Que hace cesar las guerras hasta los fines de la tierra: que quiebra el arco, corta la lanza, y quema los carros en el fuego."
+    },
+    {
+     "v": 10,
+     "text": "Estad quietos, y conoced que yo soy Dios: ensalzado he de ser entre las gentes, ensalzado seré en la tierra."
+    },
+    {
+     "v": 11,
+     "text": "Jehová de los ejércitos es con nosotros; nuestro refugio es el Dios de Jacob. (Selah.)"
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Refugio, fortaleza, ayuda en la angustia. Y muy cercana. No lejos. No para después. Aquí. [pause 9]\n\nEl salmo se imagina lo peor. La tierra que tiembla, los montes que caen al mar. Y luego dice, por tanto, no temeremos. [pause 9]\n\nDespués viene un río, cuyas corrientes alegran la ciudad de Dios. No una inundación. Un río. Constante y callado, mientras todo lo demás ruge. [pause 9]\n\nY al final, Dios habla. Quédense quietos, y sepan que él es Dios. Esta noche no tienes que arreglar el mundo. Puedes estar quieto. [pause 13]\n\nUnas palabras de Isaías para acompañarlo. [pause 7]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 26:3",
+   "label": "Isaías 26:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Tú le guardarás en completa paz, cuyo pensamiento en ti persevera; porque en ti se ha confiado."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PHI 4:6-7",
+   "label": "Filipenses 4:6-7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Por nada estéis afanosos; sino sean notorias vuestras peticiones delante de Dios en toda oración y ruego, con hacimiento de gracias."
+    },
+    {
+     "v": 7,
+     "text": "Y la paz de Dios, que sobrepuja todo entendimiento, guardará vuestros corazones y vuestros entendimientos en Cristo Jesús."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Paz completa. Guardado en ella, con una mente que descansa en él. No es algo que tengas que fabricar. Es algo en lo que te pueden guardar. [pause 9]\n\nY Pablo, escribiendo desde una cárcel, nos dice que llevemos todo a Dios en oración, con gratitud, y que la paz de Dios guardará nuestros corazones. Una paz que no tiene que tener sentido. [pause 11]\n\nAquí está el Salmo cuarenta y seis otra vez. Cuando oigas que Dios dice que estemos quietos, deja que tu cuerpo responda. [pause 13]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 46:1-11",
+   "label": "Salmos 46:1-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Al Músico principal: de los hijos de Coré: Salmo sobre Alamoth. DIOS es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones."
+    },
+    {
+     "v": 2,
+     "text": "Por tanto no temeremos aunque la tierra sea removida; aunque se traspasen los montes al corazón de la mar."
+    },
+    {
+     "v": 3,
+     "text": "Bramarán, turbaránse sus aguas; temblarán los montes á causa de su braveza. (Selah.)"
+    },
+    {
+     "v": 4,
+     "text": "Del río sus conductos alegrarán la ciudad de Dios, el santuario de las tiendas del Altísimo."
+    },
+    {
+     "v": 5,
+     "text": "Dios está en medio de ella; no será conmovida: Dios la ayudará al clarear la mañana."
+    },
+    {
+     "v": 6,
+     "text": "Bramaron las gentes, titubearon los reinos; dió él su voz, derritióse la tierra."
+    },
+    {
+     "v": 7,
+     "text": "Jehová de los ejércitos es con nosotros; nuestro refugio es el Dios de Jacob. (Selah.)"
+    },
+    {
+     "v": 8,
+     "text": "Venid, ved las obras de Jehová, que ha puesto asolamientos en la tierra."
+    },
+    {
+     "v": 9,
+     "text": "Que hace cesar las guerras hasta los fines de la tierra: que quiebra el arco, corta la lanza, y quema los carros en el fuego."
+    },
+    {
+     "v": 10,
+     "text": "Estad quietos, y conoced que yo soy Dios: ensalzado he de ser entre las gentes, ensalzado seré en la tierra."
+    },
+    {
+     "v": 11,
+     "text": "Jehová de los ejércitos es con nosotros; nuestro refugio es el Dios de Jacob. (Selah.)"
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Ya es suficiente por esta noche. [pause 8]\n\nDeja que tu respiración se haga lenta sola. Entra el aire, sale el aire. No hay nada que arreglar ni nada que terminar. [pause 12]\n\nLo que haya sido el día de hoy, ya pasó. Mañana todavía no llega. Esto es solo la noche, y la noche también es de Dios. [pause 12]\n\nDeja lo que cargaste. Una cosa, y luego otra. [pause 15]\n\nSi tu mente se va a otra parte, déjala volver despacio. No hay una manera equivocada de descansar. [pause 20]\n\nEl Señor está cerca. Más cerca que tu respiración. [pause 20]\n\nBuenas noches. [pause 45]"
+  }
+ ],
+ "words": 762,
+ "rest_part": "rest2",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 817,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Todo salmo y acompañante es RV1909 guardada, pegada por código; las reflexiones parafrasean en ecos cortos (sin 8+ palabras de escritura tecleada) y se quedan en el punto de cada salmo; ninguna promesa de sueño ni de protección (Salmo 91: 'no dice que nunca va a pasar nada difícil'; Proverbios 3:24 como imagen, no promesa). Dios nunca habla en primera persona fuera de la escritura."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

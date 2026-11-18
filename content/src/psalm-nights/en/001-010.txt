@@ -1,0 +1,198 @@
+# Psalm Nights 1-10 (English, KJV). Written by Claude (no free-model draft), with Claude's pastor and cultural read. Shared rests: _rest1 to _rest3.
+
+=== _rest1
+text: Now let the words go quiet. [pause 8]
+text: You do not have to hold on to them. They will be there in the morning. [pause 10]
+text: Let your shoulders drop. Let your hands open. Let the bed hold the weight of you. [pause 12]
+text: If a worry comes back, you can hand it over again. As many times as it takes. [pause 12]
+text: The night is long and quiet, and you are not alone in it. [pause 15]
+text: Feel the quiet of the room. The small sounds. The dark. Nothing is asked of you here. [pause 20]
+text: You are held, the psalm said. You are known. You are kept. [pause 20]
+text: Rest now. [pause 45]
+
+=== _rest2
+text: That is enough for tonight. [pause 8]
+text: Let your breathing slow down on its own. In, and out. Nothing to fix, nothing to finish. [pause 12]
+text: Whatever today was, it is over now. Tomorrow has not come yet. This is only the night, and the night belongs to God. [pause 12]
+text: Lay down what you carried. One thing, and then another. [pause 15]
+text: Stay here as long as you like. [pause 15]
+text: If your mind wanders, let it wander back. There is no wrong way to rest. [pause 20]
+text: The Lord is near. Nearer than your breath. [pause 20]
+text: Good night. [pause 45]
+
+=== _rest3
+text: We will stop here. [pause 8]
+text: Let the room be dark and still around you. Let the pillow be cool. [pause 10]
+text: You have read his words tonight. You can stop thinking about them now and simply rest in them. [pause 12]
+text: Every part of you that is tired, let it be tired. You do not have to be strong right now. [pause 15]
+text: He is awake, so you can sleep. [pause 15]
+text: Let the last words you heard tonight be the ones that stay. Let the rest drift away. [pause 20]
+text: It is all right to stop now. [pause 20]
+text: Rest well. [pause 45]
+
+=== pn-01-psalm-23 | Psalm 23: The Lord Is My Shepherd
+main: PSA 23:1-6
+companions: PSA 4:8; JOH 10:11; ISA 40:11; JOH 10:14
+welcome: Hello, and welcome to Psalm Nights. [pause 8]
+welcome: Find a way to lie down that feels easy. Pull the covers up. Let your phone rest somewhere you will not have to reach for it. [pause 11]
+welcome: Tonight we are reading the twenty-third Psalm, slowly, twice. It may be the most loved psalm there is. Many people learned it as children, and many have heard it at the bedside of someone they love. [pause 10]
+welcome: You do not have to do anything but listen. [pause 13]
+reflect1: The psalm begins with one small word. My. [pause 10]
+reflect1: Not a shepherd somewhere far away. My shepherd. David had been a shepherd boy. He knew what it was to count the sheep at night, to find water for them, to carry the one that was hurt. [pause 11]
+reflect1: A shepherd does not ask the sheep to find the pasture on their own. He leads. He goes first. [pause 11]
+reflect1: Notice that the psalm does not pretend there is no dark valley. It says yea, though I walk through it. The valley is real. But so is the one who walks it with you. [pause 15]
+reflect1: Here are two more short passages to sit beside it. [pause 9]
+reflect2: Lie down in peace, and sleep. That is a line you can borrow tonight. [pause 11]
+reflect2: And the good shepherd, Jesus said, gives his life for the sheep. He does not leave when the night comes. [pause 11]
+reflect2: And Isaiah pictures the shepherd carrying the lambs close to his chest, leading gently those with young. Gently. That is how he leads you tonight. [pause 13]
+reflect2: Now we will read the twenty-third Psalm once more. This time, you might let it be a little slower in your mind. Let each line land before the next one comes. [pause 15]
+rest: rest1
+
+=== pn-02-psalm-4 | Psalm 4: In Peace I Will Lie Down
+main: PSA 4:1-8
+companions: PSA 3:5; PRO 3:24; PSA 127:2
+welcome: Welcome to Psalm Nights. [pause 5]
+welcome: Turn the lights down low, or off. Let your body sink a little into the bed. [pause 8]
+welcome: Tonight's psalm is Psalm 4. It is an evening psalm. It begins with a man calling out to God in trouble, and it ends with him lying down to sleep. [pause 7]
+welcome: That is the whole journey of tonight. From the worries of the day to the quiet of the bed. We will read it twice. [pause 10]
+reflect1: Upon your bed, the psalm says, speak with your own heart, and be still. [pause 8]
+reflect1: That is good advice for the end of a day. Not to replay everything. Not to argue with the day again. Just to be still, and let God see your heart as it is. [pause 10]
+reflect1: There is a line in the middle about gladness. God put gladness in his heart, more than other people felt when their harvest came in. Other people's harvest looked bigger. But the gladness God gave was enough. [pause 10]
+reflect1: Two companion verses now, both about sleep. [pause 6]
+reflect2: I lay down, I slept, I woke. Simple words. Lying down, sleeping, waking. David wrote them when he was running for his life, and still he rested. [pause 8]
+reflect2: And the proverb speaks of sleep that is sweet. Not a promise for every night, but a picture of what rest in God can feel like. [pause 8]
+reflect2: And Psalm 127 says it is no use getting up early and staying up late, eating the bread of worry. He gives his beloved sleep. You can stop working for today. [pause 10]
+reflect2: Here is Psalm 4 again, from the beginning. Listen for that last verse. Let it be your own words tonight. [pause 12]
+rest: rest2
+
+=== pn-03-psalm-121 | Psalm 121: He That Keepeth Thee
+main: PSA 121:1-8
+companions: ISA 40:28-31; ISA 41:10
+welcome: Hello. This is Psalm Nights. [pause 7]
+welcome: Settle in. Let your head find the softest part of the pillow. [pause 10]
+welcome: Tonight we read Psalm 121. It was a song for travelers. People sang it on the long walk up to Jerusalem, looking at the hills ahead and wondering what was waiting in them. [pause 9]
+welcome: We will read it slowly, and then once more. [pause 12]
+reflect1: Lifting my eyes to the hills. The traveler looks up and asks the honest question. Where does my help come from? [pause 10]
+reflect1: And the answer is not the hills. It is the one who made them. [pause 10]
+reflect1: Listen to the word that keeps coming back. Keep. Keepeth. Preserve. Six times in eight short verses. The psalm says it over and over, the way you would say something to a child who is afraid of the dark. [pause 10]
+reflect1: He that keepeth thee will not slumber. You can close your eyes. He does not close his. [pause 14]
+reflect1: Here is a companion passage from Isaiah, for the ones who are tired tonight. [pause 8]
+reflect2: He giveth power to the faint. Not to the strong. To the faint. If you are worn out tonight, that verse was written with you in mind. [pause 10]
+reflect2: Waiting on the Lord is not wasted time. It is how the tired are renewed. [pause 10]
+reflect2: One more word from Isaiah. Fear not, for I am with thee. He holds you with his hand. You do not have to hold yourself up tonight. [pause 12]
+reflect2: Now Psalm 121 again. Let the word keep sit with you as you listen. [pause 14]
+rest: rest3
+
+=== pn-04-psalm-91 | Psalm 91: Under His Wings
+main: PSA 91:1-16
+companions: PSA 4:8
+welcome: Welcome to Psalm Nights. [pause 3]
+welcome: Get comfortable. There is nowhere else you need to be. [pause 5]
+welcome: Tonight is Psalm 91. It is a psalm many people pray at night, and over their families. It is full of pictures of shelter. A secret place. A shadow. Wings. A shield. [pause 5]
+welcome: We will read it twice, slowly. [pause 8]
+reflect1: He that dwelleth in the secret place. The psalm starts with where you live, not with what you fear. [pause 6]
+reflect1: The picture in verse four is a bird gathering her young under her wings. Feathers over them, warm and close, while the night goes on outside. [pause 6]
+reflect1: This psalm has been prayed in hospitals and in war, in storms and in long nights waiting for a phone call. It does not say that nothing hard will ever happen. It says, I will be with him in trouble. [pause 10]
+reflect1: One companion verse tonight. [pause 4]
+reflect2: In peace. Lying down. Sleeping. Dwelling in safety, because of the Lord alone. [pause 6]
+reflect2: Here is Psalm 91 once more. You might picture those wings as you listen. [pause 10]
+rest: rest1
+
+=== pn-05-psalm-46 | Psalm 46: Be Still, and Know
+main: PSA 46:1-11
+companions: ISA 26:3; PHI 4:6-7
+welcome: Hello, and welcome. This is Psalm Nights. [pause 3]
+welcome: Let the day fall away. Let your jaw loosen. Let your hands rest open. [pause 6]
+welcome: Tonight we read Psalm 46. It is a psalm for when the ground feels like it is moving. Mountains, waters, nations, all in an uproar. And in the middle of it, a quiet river. [pause 5]
+welcome: We will read it twice. [pause 8]
+reflect1: A refuge, a strength, a help in trouble. And very present. Not far off. Not coming later. Here. [pause 6]
+reflect1: The psalm imagines the worst. The earth moving, the mountains falling into the sea. And then it says, therefore will not we fear. [pause 6]
+reflect1: Then comes a river, whose streams make glad the city of God. Not a flood. A river. Steady and quiet, while everything else roars. [pause 6]
+reflect1: And at the end, God speaks. Be still, and know. You do not have to fix the world tonight. You can be still. [pause 10]
+reflect1: A companion verse from Isaiah. [pause 4]
+reflect2: Perfect peace. Kept in it, by a mind that rests on him. That is not something you have to make happen. It is something you can be kept in. [pause 6]
+reflect2: And Paul, writing from a prison cell, tells us to bring everything to God in prayer, with thanks, and the peace of God will keep our hearts. A peace that does not have to make sense. [pause 8]
+reflect2: Here is Psalm 46 again. When you hear be still, let your body answer. [pause 10]
+rest: rest2
+
+=== pn-06-psalm-131 | Psalm 131: Like a Weaned Child
+main: PSA 131:1-3
+companions: MAT 11:28-30; ISA 30:15; PSA 62:1-2; PSA 116:7
+welcome: Welcome to Psalm Nights. [pause 12]
+welcome: Lie back. Let the pillow take your head. Let your breathing find its own pace. [pause 15]
+welcome: Tonight's psalm is one of the shortest in the Bible. Psalm 131. Only three verses. It is a psalm for people who think too much at night. [pause 14]
+welcome: We will read it slowly, and then again. [pause 17]
+reflect1: The psalmist says he does not busy himself with great matters, with things too high for him. [pause 14]
+reflect1: Some things are too big to figure out tonight. The psalm gives you permission to put them down. You do not have to understand everything before you can rest. [pause 17]
+reflect1: Then comes the picture of a weaned child. Not a baby crying to be fed, but a little one who is full and content, leaning against her mother. Quiet. Calm. Just there. [pause 17]
+reflect1: That is the picture of a soul at rest in God. Not because every question is answered. Because you are held. [pause 19]
+reflect1: Two companion passages now. [pause 13]
+reflect2: Come unto me, all who are weary and heavy laden. Jesus said it to tired people. He did not ask them to be less tired first. [pause 15]
+reflect2: In returning and rest, Isaiah says. In quietness and confidence, strength. Quiet is not weakness. It can be strength. [pause 17]
+reflect2: And two more from the Psalms. My soul waits in silence for God. And, return to your rest, O my soul. You can say that to yourself tonight. Return to your rest. [pause 19]
+reflect2: Here is Psalm 131 again. Three verses. Let them be slow. [pause 21]
+rest: rest3
+
+=== pn-07-psalm-139 | Psalm 139: Thou Hast Searched Me
+main: PSA 139:1-18
+companions: PSA 4:8
+welcome: Hello. This is Psalm Nights. [pause 3]
+welcome: Make yourself comfortable. Let your eyes close if they want to. [pause 5]
+welcome: Tonight we read part of Psalm 139. It is a psalm about being known. Completely known. And not being left. [pause 5]
+welcome: It is a long reading, so we will go slowly. [pause 8]
+reflect1: Thou knowest my downsitting and mine uprising. When you sit down at the end of the day, God knows. When you get up in the morning, he knows. [pause 6]
+reflect1: The psalm goes everywhere a person could go. The heavens. The grave. The far side of the sea. And everywhere, God is already there. [pause 6]
+reflect1: Then it says something for tonight. To God, the darkness and the light are alike. The dark does not hide you from him. He sees you just as clearly at night. [pause 8]
+reflect1: And at the end, waking up, still with him. [pause 10]
+reflect2: Lie down in peace, and sleep. A short verse to hold onto. [pause 6]
+reflect2: Now Psalm 139 once more. Listen for the line about the darkness. [pause 10]
+rest: rest1
+
+=== pn-08-psalm-62 | Psalm 62: My Soul Waiteth
+main: PSA 62:1-8
+companions: ISA 26:3-4; PSA 18:2; MAT 11:28
+welcome: Welcome to Psalm Nights. [pause 8]
+welcome: Let your body settle. There is nothing left to do today. [pause 11]
+welcome: Tonight's psalm is Psalm 62. David wrote it when people were trying to pull him down. And yet the psalm is quiet. It is about waiting, and about a rock that does not move. [pause 10]
+welcome: We will read it twice. [pause 13]
+reflect1: Truly my soul waiteth upon God. In older words, my soul is silent before God. Not anxious. Not rushing. Waiting. [pause 11]
+reflect1: Three times the psalm calls God a rock. A rock is not quick. It does not change its mind. You can lean your whole weight on it and it stays. [pause 11]
+reflect1: Then a line to say in your heart. Trust him at all times. Pour out your heart before him. [pause 11]
+reflect1: You can pour it out tonight. All of it. The worry, the hurt, the thing you did not say. He can hold it. [pause 15]
+reflect1: A companion passage from Isaiah. [pause 9]
+reflect2: Everlasting strength. A rock of ages. The same picture, in another book, centuries apart. [pause 11]
+reflect2: Psalm 18 piles up the same pictures. Rock, fortress, deliverer, shield, high tower. And Jesus, in the gospel, says come to me, and I will give you rest. [pause 13]
+reflect2: Here is Psalm 62 again. Let your soul wait as you listen. [pause 15]
+rest: rest2
+
+=== pn-09-psalm-3 | Psalm 3: I Laid Me Down and Slept
+main: PSA 3:1-8
+companions: PSA 4:8; PSA 121:3-4; PRO 3:24
+welcome: Hello, and welcome to Psalm Nights. [pause 9]
+welcome: Find your place. Let the covers be heavy and warm. [pause 12]
+welcome: Tonight we read Psalm 3. The heading says David wrote it when he fled from his own son, Absalom. His family was broken, his city was lost, and he was sleeping in the open. [pause 11]
+welcome: And still, this psalm has some of the most peaceful words about sleep in the whole Bible. We will read it twice. [pause 14]
+reflect1: Lord, how many are my troubles. The psalm starts honest. There are many troubles. Many voices saying there is no help in God. [pause 12]
+reflect1: Then David turns. But you, Lord, are my shield. A shield all around. And the lifter up of my head. [pause 12]
+reflect1: Think of someone gently lifting your chin when you are too tired or too sad to look up. That is the picture. [pause 12]
+reflect1: Then verse five. He lay down, he slept, he woke, because the Lord held him up. In the worst week of his life, David slept. [pause 16]
+reflect1: A companion verse, from the very next psalm. [pause 10]
+reflect2: In peace, lying down and sleeping. Psalm 3 and Psalm 4 sit side by side, like a morning and an evening prayer. [pause 12]
+reflect2: And Psalm 121 tells us the one who keeps Israel never slumbers or sleeps. The proverb speaks of lying down without fear. Someone is keeping watch. [pause 14]
+reflect2: Here is Psalm 3 again. When you reach verse five, let it be yours. [pause 16]
+rest: rest3
+
+=== pn-10-psalm-27 | Psalm 27: The Lord Is My Light
+main: PSA 27:1-14
+companions: PSA 4:8
+welcome: Welcome to Psalm Nights. [pause 3]
+welcome: Let the room be quiet around you. Let your breath slow down. [pause 5]
+welcome: Tonight is Psalm 27. It begins with light and ends with waiting. In between there is fear, and longing, and a quiet place in the house of God. [pause 5]
+welcome: It is a longer psalm. We will take our time. [pause 8]
+reflect1: The Lord is my light. You can lie in a dark room and still have light. Light is not only what the eyes see. [pause 6]
+reflect1: In the middle of the psalm, David says the one thing he wants. To dwell in the house of the Lord, and to behold his beauty. Not a long list. One thing. [pause 6]
+reflect1: And then there is a line that has comforted many who were left by people they loved. Even if father and mother leave, the Lord will take me in. [pause 8]
+reflect1: The psalm ends with wait. Wait, I say, on the Lord. Wait is not the same as nothing happening. It is trust, held over time. [pause 10]
+reflect2: In peace. Lie down. Sleep. Safety in him. [pause 6]
+reflect2: Here is Psalm 27 again. Let the first line be the one you remember. [pause 10]
+rest: rest1

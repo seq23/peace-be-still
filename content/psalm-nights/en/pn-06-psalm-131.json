@@ -1,0 +1,196 @@
+{
+ "id": "pn-06-psalm-131",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 131: Like a Weaned Child",
+ "main": [
+  "PSA 131:1-3"
+ ],
+ "companions": [
+  "MAT 11:28-30",
+  "ISA 30:15",
+  "PSA 62:1-2",
+  "PSA 116:7"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Welcome to Psalm Nights. [pause 12]\n\nLie back. Let the pillow take your head. Let your breathing find its own pace. [pause 15]\n\nTonight's psalm is one of the shortest in the Bible. Psalm 131. Only three verses. It is a psalm for people who think too much at night. [pause 14]\n\nWe will read it slowly, and then again. [pause 17]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 131:1-3",
+   "label": "Psalm 131:1-3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees of David. LORD, my heart is not haughty, nor mine eyes lofty: neither do I exercise myself in great matters, or in things too high for me."
+    },
+    {
+     "v": 2,
+     "text": "Surely I have behaved and quieted myself, as a child that is weaned of his mother: my soul is even as a weaned child."
+    },
+    {
+     "v": 3,
+     "text": "Let Israel hope in the LORD from henceforth and for ever."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "The psalmist says he does not busy himself with great matters, with things too high for him. [pause 14]\n\nSome things are too big to figure out tonight. The psalm gives you permission to put them down. You do not have to understand everything before you can rest. [pause 17]\n\nThen comes the picture of a weaned child. Not a baby crying to be fed, but a little one who is full and content, leaning against her mother. Quiet. Calm. Just there. [pause 17]\n\nThat is the picture of a soul at rest in God. Not because every question is answered. Because you are held. [pause 19]\n\nTwo companion passages now. [pause 13]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 11:28-30",
+   "label": "Matthew 11:28-30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."
+    },
+    {
+     "v": 29,
+     "text": "Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls."
+    },
+    {
+     "v": 30,
+     "text": "For my yoke is easy, and my burden is light."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 30:15",
+   "label": "Isaiah 30:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "For thus saith the Lord GOD, the Holy One of Israel; In returning and rest shall ye be saved; in quietness and in confidence shall be your strength: and ye would not."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 62:1-2",
+   "label": "Psalm 62:1-2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, to Jeduthun, A Psalm of David. Truly my soul waiteth upon God: from him cometh my salvation."
+    },
+    {
+     "v": 2,
+     "text": "He only is my rock and my salvation; he is my defence; I shall not be greatly moved."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 116:7",
+   "label": "Psalm 116:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Return unto thy rest, O my soul; for the LORD hath dealt bountifully with thee."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Come unto me, all who are weary and heavy laden. Jesus said it to tired people. He did not ask them to be less tired first. [pause 15]\n\nIn returning and rest, Isaiah says. In quietness and confidence, strength. Quiet is not weakness. It can be strength. [pause 17]\n\nAnd two more from the Psalms. My soul waits in silence for God. And, return to your rest, O my soul. You can say that to yourself tonight. Return to your rest. [pause 19]\n\nHere is Psalm 131 again. Three verses. Let them be slow. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 131:1-3",
+   "label": "Psalm 131:1-3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees of David. LORD, my heart is not haughty, nor mine eyes lofty: neither do I exercise myself in great matters, or in things too high for me."
+    },
+    {
+     "v": 2,
+     "text": "Surely I have behaved and quieted myself, as a child that is weaned of his mother: my soul is even as a weaned child."
+    },
+    {
+     "v": 3,
+     "text": "Let Israel hope in the LORD from henceforth and for ever."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "We will stop here. [pause 8]\n\nLet the room be dark and still around you. Let the pillow be cool. [pause 10]\n\nYou have read his words tonight. You can stop thinking about them now and simply rest in them. [pause 12]\n\nEvery part of you that is tired, let it be tired. You do not have to be strong right now. [pause 15]\n\nHe is awake, so you can sleep. [pause 15]\n\nLet the last words you heard tonight be the ones that stay. Let the rest drift away. [pause 20]\n\nIt is all right to stop now. [pause 20]\n\nRest well. [pause 45]"
+  }
+ ],
+ "words": 604,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 821,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Every psalm and companion is stored KJV pasted by code; reflections paraphrase in short echoes (no 8+ word typed scripture) and stay with each psalm's own point (shepherd, evening rest, keeping, shelter, stillness, quiet soul, being known, waiting, a shield in flight, light and waiting). No promise of sleep or protection: Psalm 91 says plainly it does not promise nothing hard will happen; Proverbs 3:24 framed as 'not a promise for every night'. God never quoted in first person outside scripture. Headings (Ps 3, Absalom) used only as the text's own titles."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

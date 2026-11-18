@@ -1,0 +1,208 @@
+{
+ "id": "pn-03-psalm-121",
+ "kind": "psalm-night",
+ "journey": "psalm-nights",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 121: He That Keepeth Thee",
+ "main": [
+  "PSA 121:1-8"
+ ],
+ "companions": [
+  "ISA 40:28-31",
+  "ISA 41:10"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hello. This is Psalm Nights. [pause 7]\n\nSettle in. Let your head find the softest part of the pillow. [pause 10]\n\nTonight we read Psalm 121. It was a song for travelers. People sang it on the long walk up to Jerusalem, looking at the hills ahead and wondering what was waiting in them. [pause 9]\n\nWe will read it slowly, and then once more. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 121:1-8",
+   "label": "Psalm 121:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees. I will lift up mine eyes unto the hills, from whence cometh my help."
+    },
+    {
+     "v": 2,
+     "text": "My help cometh from the LORD, which made heaven and earth."
+    },
+    {
+     "v": 3,
+     "text": "He will not suffer thy foot to be moved: he that keepeth thee will not slumber."
+    },
+    {
+     "v": 4,
+     "text": "Behold, he that keepeth Israel shall neither slumber nor sleep."
+    },
+    {
+     "v": 5,
+     "text": "The LORD is thy keeper: the LORD is thy shade upon thy right hand."
+    },
+    {
+     "v": 6,
+     "text": "The sun shall not smite thee by day, nor the moon by night."
+    },
+    {
+     "v": 7,
+     "text": "The LORD shall preserve thee from all evil: he shall preserve thy soul."
+    },
+    {
+     "v": 8,
+     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Lifting my eyes to the hills. The traveler looks up and asks the honest question. Where does my help come from? [pause 10]\n\nAnd the answer is not the hills. It is the one who made them. [pause 10]\n\nListen to the word that keeps coming back. Keep. Keepeth. Preserve. Six times in eight short verses. The psalm says it over and over, the way you would say something to a child who is afraid of the dark. [pause 10]\n\nHe that keepeth thee will not slumber. You can close your eyes. He does not close his. [pause 14]\n\nHere is a companion passage from Isaiah, for the ones who are tired tonight. [pause 8]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 40:28-31",
+   "label": "Isaiah 40:28-31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Hast thou not known? hast thou not heard, that the everlasting God, the LORD, the Creator of the ends of the earth, fainteth not, neither is weary? there is no searching of his understanding."
+    },
+    {
+     "v": 29,
+     "text": "He giveth power to the faint; and to them that have no might he increaseth strength."
+    },
+    {
+     "v": 30,
+     "text": "Even the youths shall faint and be weary, and the young men shall utterly fall:"
+    },
+    {
+     "v": 31,
+     "text": "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ISA 41:10",
+   "label": "Isaiah 41:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "He giveth power to the faint. Not to the strong. To the faint. If you are worn out tonight, that verse was written with you in mind. [pause 10]\n\nWaiting on the Lord is not wasted time. It is how the tired are renewed. [pause 10]\n\nOne more word from Isaiah. Fear not, for I am with thee. He holds you with his hand. You do not have to hold yourself up tonight. [pause 12]\n\nNow Psalm 121 again. Let the word keep sit with you as you listen. [pause 14]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 121:1-8",
+   "label": "Psalm 121:1-8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Song of degrees. I will lift up mine eyes unto the hills, from whence cometh my help."
+    },
+    {
+     "v": 2,
+     "text": "My help cometh from the LORD, which made heaven and earth."
+    },
+    {
+     "v": 3,
+     "text": "He will not suffer thy foot to be moved: he that keepeth thee will not slumber."
+    },
+    {
+     "v": 4,
+     "text": "Behold, he that keepeth Israel shall neither slumber nor sleep."
+    },
+    {
+     "v": 5,
+     "text": "The LORD is thy keeper: the LORD is thy shade upon thy right hand."
+    },
+    {
+     "v": 6,
+     "text": "The sun shall not smite thee by day, nor the moon by night."
+    },
+    {
+     "v": 7,
+     "text": "The LORD shall preserve thee from all evil: he shall preserve thy soul."
+    },
+    {
+     "v": 8,
+     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "We will stop here. [pause 8]\n\nLet the room be dark and still around you. Let the pillow be cool. [pause 10]\n\nYou have read his words tonight. You can stop thinking about them now and simply rest in them. [pause 12]\n\nEvery part of you that is tired, let it be tired. You do not have to be strong right now. [pause 15]\n\nHe is awake, so you can sleep. [pause 15]\n\nLet the last words you heard tonight be the ones that stay. Let the rest drift away. [pause 20]\n\nIt is all right to stop now. [pause 20]\n\nRest well. [pause 45]"
+  }
+ ],
+ "words": 699,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 816,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Every psalm and companion is stored KJV pasted by code; reflections paraphrase in short echoes (no 8+ word typed scripture) and stay with each psalm's own point (shepherd, evening rest, keeping, shelter, stillness, quiet soul, being known, waiting, a shield in flight, light and waiting). No promise of sleep or protection: Psalm 91 says plainly it does not promise nothing hard will happen; Proverbs 3:24 framed as 'not a promise for every night'. God never quoted in first person outside scripture. Headings (Ps 3, Absalom) used only as the text's own titles."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

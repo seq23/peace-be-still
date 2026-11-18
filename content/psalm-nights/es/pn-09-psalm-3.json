@@ -1,0 +1,216 @@
+{
+ "id": "pn-09-psalm-3",
+ "kind": "psalm-night",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 3: Yo me acosté y dormí",
+ "main": [
+  "PSA 3:1-8"
+ ],
+ "companions": [
+  "PSA 4:8",
+  "PSA 121:3-4",
+  "PRO 3:24"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nBusca tu lugar. Que las cobijas se sientan pesadas y calientitas. [pause 17]\n\nEsta noche leemos el Salmo tres. El título dice que David lo escribió cuando huía de su propio hijo, Absalom. Su familia estaba rota, había perdido su ciudad, y dormía a la intemperie. [pause 16]\n\nY aun así, este salmo tiene algunas de las palabras más tranquilas sobre el sueño en toda la Biblia. Lo vamos a leer dos veces. [pause 19]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 3:1-8",
+   "label": "Salmos 3:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David, cuando huía de delante de Absalom su hijo. ¡OH Jehová, cuánto se han multiplicado mis enemigos! muchos se levantan contra mí."
+    },
+    {
+     "v": 2,
+     "text": "Muchos dicen de mi vida: No hay para él salud en Dios. (Selah.)"
+    },
+    {
+     "v": 3,
+     "text": "Mas tú, Jehová, eres escudo alrededor de mí: mi gloria, y el que ensalza mi cabeza."
+    },
+    {
+     "v": 4,
+     "text": "Con mi voz clamé á Jehová, y él me respondió desde el monte de su santidad. (Selah.)"
+    },
+    {
+     "v": 5,
+     "text": "Yo me acosté, y dormí, y desperté; porque Jehová me sostuvo."
+    },
+    {
+     "v": 6,
+     "text": "No temeré de diez millares de pueblos, que pusieren cerco contra mí."
+    },
+    {
+     "v": 7,
+     "text": "Levántate, Jehová; sálvame, Dios mío: porque tú heriste á todos mis enemigos en la quijada; los dientes de los malos quebrantaste."
+    },
+    {
+     "v": 8,
+     "text": "De Jehová es la salud: sobre tu pueblo será tu bendición. (Selah.)"
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Señor, cuántos son mis problemas. El salmo empieza con honestidad. Hay muchos problemas. Muchas voces que dicen que Dios no lo va a ayudar. [pause 17]\n\nLuego David voltea. Pero tú, Señor, eres mi escudo. Un escudo alrededor. Y el que levanta mi cabeza. [pause 17]\n\nPiensa en alguien que con cariño te levanta la barbilla cuando estás muy cansado o muy triste para mirar hacia arriba. Esa es la imagen. [pause 17]\n\nLuego el versículo cinco. Se acostó, durmió, despertó, porque el Señor lo sostenía. En la peor semana de su vida, David durmió. [pause 21]\n\nUnos versículos para acompañarlo. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 4:8",
+   "label": "Salmos 4:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 121:3-4",
+   "label": "Salmos 121:3-4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "No dará tu pie al resbaladero; ni se dormirá el que te guarda."
+    },
+    {
+     "v": 4,
+     "text": "He aquí, no se adormecerá ni dormirá el que guarda á Israel."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PRO 3:24",
+   "label": "Proverbios 3:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Cuando te acostares, no tendrás temor; antes te acostarás, y tu sueño será suave."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "En paz, acostarse y dormir. El Salmo tres y el Salmo cuatro están juntos, como una oración de la mañana y una de la noche. [pause 17]\n\nY el Salmo ciento veintiuno dice que el que guarda a Israel no se adormece ni se duerme. El proverbio habla de acostarse sin temor. Alguien está velando. [pause 19]\n\nAquí está el Salmo tres otra vez. Cuando llegues al versículo cinco, que sea tuyo. [pause 21]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 3:1-8",
+   "label": "Salmos 3:1-8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David, cuando huía de delante de Absalom su hijo. ¡OH Jehová, cuánto se han multiplicado mis enemigos! muchos se levantan contra mí."
+    },
+    {
+     "v": 2,
+     "text": "Muchos dicen de mi vida: No hay para él salud en Dios. (Selah.)"
+    },
+    {
+     "v": 3,
+     "text": "Mas tú, Jehová, eres escudo alrededor de mí: mi gloria, y el que ensalza mi cabeza."
+    },
+    {
+     "v": 4,
+     "text": "Con mi voz clamé á Jehová, y él me respondió desde el monte de su santidad. (Selah.)"
+    },
+    {
+     "v": 5,
+     "text": "Yo me acosté, y dormí, y desperté; porque Jehová me sostuvo."
+    },
+    {
+     "v": 6,
+     "text": "No temeré de diez millares de pueblos, que pusieren cerco contra mí."
+    },
+    {
+     "v": 7,
+     "text": "Levántate, Jehová; sálvame, Dios mío: porque tú heriste á todos mis enemigos en la quijada; los dientes de los malos quebrantaste."
+    },
+    {
+     "v": 8,
+     "text": "De Jehová es la salud: sobre tu pueblo será tu bendición. (Selah.)"
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Aquí vamos a terminar. [pause 8]\n\nDeja que el cuarto esté oscuro y quieto a tu alrededor. Que la almohada esté fresca. [pause 10]\n\nEsta noche escuchaste su Palabra. Ya no tienes que pensar en ella. Solo descansa en ella. [pause 12]\n\nTodo lo que en ti está cansado, deja que esté cansado. No tienes que ser fuerte ahora. [pause 15]\n\nQue las últimas palabras que oíste sean las que se queden contigo. Lo demás, déjalo ir. [pause 20]\n\nÉl está despierto, así que tú puedes dormir. [pause 20]\n\nQue descanses. [pause 45]"
+  }
+ ],
+ "words": 625,
+ "rest_part": "rest3",
+ "pacing": {
+  "words_per_minute": 100,
+  "quiet_between_verses_s": 1.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 821,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:37:50",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Todo salmo y acompañante es RV1909 guardada, pegada por código; las reflexiones parafrasean en ecos cortos (sin 8+ palabras de escritura tecleada) y se quedan en el punto de cada salmo; ninguna promesa de sueño ni de protección (Salmo 91: 'no dice que nunca va a pasar nada difícil'; Proverbios 3:24 como imagen, no promesa). Dios nunca habla en primera persona fuera de la escritura."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
