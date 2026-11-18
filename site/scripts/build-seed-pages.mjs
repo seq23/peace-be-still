@@ -12,7 +12,7 @@ import { applyCta } from "./apply-cta.mjs";
 const pub = new URL("../public/", import.meta.url).pathname;
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-const text = (html) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+const text = (html) => html.replace(/<q\b[^>]*>/g, "“").replace(/<\/q>/g, "”").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
 function render(p) {
   const es = p.lang === "es";
@@ -38,7 +38,13 @@ function render(p) {
   };
   const sections = p.sections.map(([h, body]) => `  <section class="qa"><h2>${h}</h2>\n${body}\n  </section>`).join("\n");
   const faq = p.faq.map(([q, a]) => `      <div><h3>${q}</h3><p>${a}</p></div>`).join("\n");
-  const sources = p.sources?.length ? `  <section class="qa"><h2>${es ? "Fuentes" : "Sources"}</h2><ul>${p.sources.map(([n, u]) => `<li><a href="${u}">${n}</a></li>`).join("")}</ul></section>` : "";
+  // Another app's own store listing is linked as a sourced fact (check-site allows exactly this shape).
+  const srcLink = (n, u) => /^https:\/\/apps\.apple\.com\//.test(u) ? `<a class="src" rel="nofollow noopener" href="${u}">${n}</a>` : `<a href="${u}">${n}</a>`;
+  const sources = p.sources?.length ? `  <section class="qa"><h2>${es ? "Fuentes" : "Sources"}</h2><ul>${p.sources.map(([n, u]) => `<li>${srcLink(n, u)}</li>`).join("")}</ul></section>` : "";
+  const related = (p.related || []).map((r) => BY_PATH.get(r));
+  const relatedHtml = related.length ? `  <section class="qa related"><h2>${es ? "Sigue leyendo" : "Keep reading"}</h2><ul>${related.map((r) => `<li><a href="${r.path}">${r.indexLabel || r.h1}</a></li>`).join("")}</ul></section>` : "";
+  const pick = p.pick ? `  <aside class="pick" aria-label="${es ? "Nuestra recomendación" : "Our pick"}"><span class="lab">${es ? "Nuestra recomendación" : "Our pick"}</span>${p.pick}</aside>\n  <p class="muted disclosure">${es ? "Nosotros hacemos Peace Be Still, así que toma nuestra recomendación con eso en mente; cada dato sobre otras apps enlaza a su propia ficha." : "We make Peace Be Still, so weigh our pick accordingly; every fact about other apps links to their own listing."}</p>\n` : "";
+  const naNames = typeof p.notAffiliated === "string" ? p.notAffiliated : "Bible Chat";
   return `<!doctype html>
 <html lang="${p.lang}">
 <head>
@@ -73,14 +79,15 @@ ${headerHtml(p.lang, null)}
   <h1>${p.h1}</h1>
   <p class="lead" id="what">${p.definition}</p>
   <section class="qa"><h2>${es ? "Respuesta rápida" : "Quick answer"}</h2><p>${p.quick}</p><p class="muted">${es ? "Para quién es esta página" : "What this page is best for"}: ${p.bestFor}</p></section>
-${sections}
+${pick}${sections}
   <section class="qa" id="faq"><h2>${es ? "Preguntas frecuentes" : "Frequently asked questions"}</h2>
     <div class="faq">
 ${faq}
     </div>
   </section>
+${relatedHtml}
 ${sources}
-${p.notAffiliated ? `  <p class="muted not-affiliated">${es ? "Peace Be Still no está afiliada con Bible Chat ni con ninguna app nombrada aquí." : "Peace Be Still is not affiliated with Bible Chat or any app named here."}</p>\n` : ""}  <p class="byline">${es ? "Por" : "By"} Peace Be Still · ${es ? "una app de Spry Labs" : "a Spry Labs app"} · ${es ? "Publicado" : "Published"} ${p.publishedText} · ${es ? "Actualizado" : "Updated"} ${p.updatedText}</p>
+${p.notAffiliated ? `  <p class="muted not-affiliated">${es ? `Peace Be Still no está afiliada con ${naNames} ni con ninguna app nombrada aquí.` : `Peace Be Still is not affiliated with ${naNames} or any app named here.`} ${es ? "Los nombres se usan solo para identificar las apps." : "Names are used only to identify the apps."}</p>\n` : ""}  <p class="byline">${es ? "Por" : "By"} Peace Be Still · ${es ? "una app de Spry Labs" : "a Spry Labs app"} · ${es ? "Publicado" : "Published"} ${p.publishedText} · ${es ? "Actualizado" : "Updated"} ${p.updatedText}</p>
 </main>
 ${storeCtaHtml(p.lang)}
 ${footerHtml(p.lang)}
@@ -94,7 +101,9 @@ function renderIndex(lang, list) {
   const path = es ? "/es/preguntas/" : "/questions/";
   const title = es ? "Preguntas sobre la Biblia y el sueño · Peace Be Still" : "Bible, sleep and app questions · Peace Be Still";
   const desc = es ? "Respuestas claras sobre Salmos para dormir, la Biblia en español para dormir y la app Peace Be Still, que llega muy pronto al App Store y Google Play." : "Plain answers about whispered scripture, Psalms for sleep, Bible apps and cancelling subscriptions, from Peace Be Still, a coming-soon app.";
-  const items = list.map((p) => `    <li><span class="door-lab">${p.door === "faith" ? (es ? "Palabra de Dios" : "God's Word") : p.door === "mindset" ? (es ? "Mentalidad" : "Mindset") : (es ? "Para todos" : "For everyone")}</span><a href="${p.path}">${p.indexLabel || p.h1}</a><span class="muted">${p.indexNote || p.description}</span></li>`).join("\n");
+  const groups = [...new Set(list.map((p) => p.group || (es ? "Más preguntas" : "More questions")))];
+  const li = (p) => `    <li><span class="door-lab">${p.door === "faith" ? (es ? "Palabra de Dios" : "God's Word") : p.door === "mindset" ? (es ? "Mentalidad" : "Mindset") : (es ? "Para todos" : "For everyone")}</span><a href="${p.path}">${p.indexLabel || p.h1}</a><span class="muted">${p.indexNote || p.description}</span></li>`;
+  const items = groups.map((g) => `  <h2 class="qgroup">${g}</h2>\n  <ul class="qlist">\n${list.filter((p) => (p.group || (es ? "Más preguntas" : "More questions")) === g).map(li).join("\n")}\n  </ul>`).join("\n");
   return `<!doctype html>
 <html lang="${lang}">
 <head>
@@ -118,7 +127,7 @@ function renderIndex(lang, list) {
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, isPartOf: { "@id": `${BASE}/#site` }, publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
+<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, dateModified: UPDATED, isPartOf: { "@id": `${BASE}/#site` }, publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
 </head>
 <body>
 ${headerHtml(lang, null)}
@@ -126,9 +135,7 @@ ${headerHtml(lang, null)}
   <nav class="crumbs" aria-label="${es ? "Ruta" : "Breadcrumb"}"><a href="${es ? "/es/" : "/"}">Peace Be Still</a></nav>
   <h1>${es ? "Preguntas" : "Questions"}</h1>
   <p class="lead">${es ? "Respuestas claras, con versículos citados palabra por palabra." : "Plain answers, with every verse quoted word for word."}</p>
-  <ul class="qlist">
 ${items}
-  </ul>
   <p class="byline">${es ? "Por Peace Be Still · una app de Spry Labs · Actualizado el 18 nov 2026" : "By Peace Be Still · a Spry Labs app · Updated 18 Nov 2026"}</p>
 </main>
 ${storeCtaHtml(lang)}
@@ -144,6 +151,15 @@ function write(path, html) {
   writeFileSync(file, html);
 }
 
+const UPDATED = PAGES.map((p) => p.updated).sort().at(-1);
+const BY_PATH = new Map(PAGES.map((p) => [p.path, p]));
+// Internal links are checked here: every related path must be a built page, and a faith page never
+// links a mindset page (or the reverse).
+for (const p of PAGES) for (const r of p.related || []) {
+  const t = BY_PATH.get(r);
+  if (!t) { console.error(`NAMED STOP [RELATED_MISSING] ${p.path} links ${r}, which is not a page`); process.exit(1); }
+  if (t.door !== "neutral" && p.door !== "neutral" && t.door !== p.door) { console.error(`NAMED STOP [DOOR_LINK] ${p.path} (${p.door}) links ${r} (${t.door})`); process.exit(1); }
+}
 if (PAGES.length === 0) { console.error("NAMED STOP [NO_SEED_PAGES] content/questions.mjs holds no pages"); process.exit(1); }
 for (const p of PAGES) write(p.path, render(p));
 write("/questions/", renderIndex("en", PAGES.filter((p) => p.lang === "en")));
@@ -159,6 +175,15 @@ for (const [f, lang, path] of STATIC) {
   s = s.replace(/<!-- waitlist:start -->[\s\S]*?<!-- waitlist:end -->/, storeCtaHtml(lang));
   if (!s.includes("<!-- footer:start -->")) { console.error(`NAMED STOP [NO_FOOTER_MARKER] ${f}`); process.exit(1); }
   if (s !== before) { writeFileSync(file, s); filled++; }
+}
+// llms.txt: the question and landing pages list, between markers, from PAGES.
+{
+  const f = join(pub, "llms.txt");
+  const s = readFileSync(f, "utf8");
+  const list = PAGES.map((p) => `- [${p.indexLabel || p.h1}](${BASE}${p.path})`).join("\n");
+  const out = s.replace(/<!-- pages:start -->[\s\S]*?<!-- pages:end -->/, `<!-- pages:start -->\n${list}\n<!-- pages:end -->`);
+  if (!out.includes("<!-- pages:start -->")) { console.error("NAMED STOP [NO_LLMS_MARKER] llms.txt has no pages markers"); process.exit(1); }
+  writeFileSync(f, out);
 }
 const cta = applyCta();
 console.log(`OUTPUT build-seed-pages: ${PAGES.length} pages + 2 indexes; store CTA on ${cta} pages`);
