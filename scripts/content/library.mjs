@@ -75,13 +75,18 @@ function loadReviews(kind, lang, ids) {
 }
 
 const REVIEW_DATE = "2026-11-18";
+// Free-model first drafts (scripts/content/draft.mjs): which route drafted a piece and how much of it Claude changed.
+const DRAFT_LOG = Object.fromEntries(read(join(SRC, "drafts", "log.tsv")).split("\n").filter((l) => l && !l.startsWith("#")).map((l) => {
+  const [id, , , model, at, share, note] = l.split("\t");
+  return [id, { route: "gemini-free", model, drafted_at: at, changed_share: share === "" ? null : +share, note: note || "First draft by the free model; Claude did the pastor and cultural read and edited it." }];
+}));
 function finalize(item, checks, review) {
   const failed = Object.entries(checks).filter(([, v]) => isFail(v));
   const final = review ? { reviewer: "claude", date: REVIEW_DATE, pastor: review.pastor, cultural: review.cultural, verdict: review.pastor.verdict === "pass" && review.cultural.verdict === "pass" ? "pass" : [review.pastor.verdict, review.cultural.verdict].includes("never-ship") ? "never-ship" : "rewrite" } : null;
   item.qa = {
     gate_version: GATE_VERSION,
     checks,
-    first_reader: { route: "none", note: "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)." },
+    first_reader: DRAFT_LOG[item.id] || { route: "none", note: "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)." },
     final,
     rewritten: review?.rewritten || null,
     person_read: false,

@@ -1,0 +1,31 @@
+=== core-033-gideon | Gideon and the Three Hundred
+passage: JDG 6:11-16; JDG 7:2-8
+shelf: adult
+violence: none
+sexual: none
+cast: gideon|Gideon|adult|m
+N: It was a hard season in Israel. Farmers usually threshed wheat out in the open air, where the breeze carried the chaff away. Gideon was down by a winepress instead, trying to keep his grain safe from the Midianites.
+S: JDG 6:11
+N: Under a nearby oak tree sat an angel of the Lord. He watched Gideon at his quiet work, and greeted him in a way that must have sounded strange to a man in hiding.
+S: JDG 6:12
+N: Gideon did not feel brave or strong. He looked at his people's trouble and remembered the old stories about God rescuing Israel from Egypt. Those days felt far away. So Gideon asked an honest question.
+S: JDG 6:13 @gideon after "And Gideon said unto him,"
+N: The Lord did not scold him for asking. Instead, he looked at Gideon and gave him a task far bigger than anything Gideon had planned.
+S: JDG 6:14
+N: Gideon knew where he came from. His family had little standing in Manasseh, and among his own kin he felt like the smallest of all. He told the Lord plainly how little he had to offer.
+S: JDG 6:15 @gideon after "And he said unto him,"
+N: The Lord did not argue with him. Instead, he gave Gideon the one promise that mattered most. Gideon would not have to face this alone.
+S: JDG 6:16
+N: Later, the time came to face the Midianites. Thirty-two thousand men from Israel gathered with Gideon near Mount Gilead. Anyone looking at those numbers might have thought it was a good start. Yet the Lord saw a danger in a crowd that size.
+S: JDG 7:2
+N: So Gideon gave the men an open door to leave. Anyone who was afraid could pack up and go home early in the morning. More than two out of every three men walked away.
+S: JDG 7:3
+N: Ten thousand men stayed behind. That was much smaller, yet the Lord told Gideon there were still too many. He led them down to the water to test them.
+S: JDG 7:5
+N: There by the water's edge, the men drank in different ways. Most dropped onto their knees. Only a small handful brought water up to their mouths with their hands.
+S: JDG 7:6
+N: Only three hundred men had lapped water from their hands. Now the Lord made his choice clear.
+S: JDG 7:7
+N: So Gideon sent nine thousand seven hundred men back to their tents. Down in the valley, the Midianite army lay waiting. Up on the hill stood Gideon, who had once hidden in a winepress, with just three hundred men beside him.
+S: JDG 7:8
+N: Gideon began this story feeling too small and too weak. In the end, God made his army small on purpose. Not so Israel would feel helpless, and not so they could boast. It was so everyone would know who truly saved them. God does not need big numbers to keep his word.

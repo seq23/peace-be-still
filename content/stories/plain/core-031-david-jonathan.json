@@ -1,0 +1,414 @@
+{
+ "id": "core-031-david-jonathan",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "David and Jonathan",
+ "passage": {
+  "refs": [
+   "1SA 18:1-4",
+   "1SA 20:35-42"
+  ],
+  "label": "1 Samuel 18:1-4; 1 Samuel 20:35-42"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jonathan",
+   "name": "Jonathan",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "David was still young when King Saul brought him to court, fresh from the field where he had faced Goliath. He had just finished speaking with the king. The king's son Jonathan was there, listening."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 18:1",
+   "label": "1 Samuel 18:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And it came to pass, when he had made an end of speaking unto Saul, that the soul of Jonathan was knit with the soul of David, and Jonathan loved him as his own soul."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And it came to pass, when he had made an end of speaking unto Saul, that the soul of Jonathan was knit with the soul of David, and Jonathan loved him as his own soul."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 18:2",
+   "label": "1 Samuel 18:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And Saul took him that day, and would let him go no more home to his father’s house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And Saul took him that day, and would let him go no more home to his father’s house."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jonathan was the king's son. By the usual way of things, David might have looked like a rival. Jonathan did not see him that way."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 18:3",
+   "label": "1 Samuel 18:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Then Jonathan and David made a covenant, because he loved him as his own soul."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Then Jonathan and David made a covenant, because he loved him as his own soul."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 18:4",
+   "label": "1 Samuel 18:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And Jonathan stripped himself of the robe that was upon him, and gave it to David, and his garments, even to his sword, and to his bow, and to his girdle."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And Jonathan stripped himself of the robe that was upon him, and gave it to David, and his garments, even to his sword, and to his bow, and to his girdle."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A robe, a sword, a bow, a belt. Jonathan held nothing back. It was his way of saying, what is mine is yours."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Time passed, and the days grew dark. King Saul turned against David and wanted him dead. Jonathan pleaded for his friend, and his father's anger turned on him too. So the two friends made a plan. David would hide in the countryside, and Jonathan would come out with his bow and send him word by where his arrows fell."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 20:35",
+   "label": "1 Samuel 20:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "And it came to pass in the morning, that Jonathan went out into the field at the time appointed with David, and a little lad with him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "And it came to pass in the morning, that Jonathan went out into the field at the time appointed with David, and a little lad with him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The field was quiet and wide in the early light. Jonathan fitted an arrow to his bow."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonathan",
+   "ref": "1SA 20:36",
+   "label": "1 Samuel 20:36",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 36,
+     "text": "And he said unto his lad, Run, find out now the arrows which I shoot. And as the lad ran, he shot an arrow beyond him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "And he said unto his lad,"
+    },
+    {
+     "v": 36,
+     "speaker": "jonathan",
+     "text": "Run, find out now the arrows which I shoot."
+    },
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "And as the lad ran, he shot an arrow beyond him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The boy ran to where the first arrow had landed."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonathan",
+   "ref": "1SA 20:37",
+   "label": "1 Samuel 20:37",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 37,
+     "text": "And when the lad was come to the place of the arrow which Jonathan had shot, Jonathan cried after the lad, and said, Is not the arrow beyond thee?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "And when the lad was come to the place of the arrow which Jonathan had shot, Jonathan cried after the lad, and said,"
+    },
+    {
+     "v": 37,
+     "speaker": "jonathan",
+     "text": "Is not the arrow beyond thee?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonathan",
+   "ref": "1SA 20:38",
+   "label": "1 Samuel 20:38",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 38,
+     "text": "And Jonathan cried after the lad, Make speed, haste, stay not. And Jonathan’s lad gathered up the arrows, and came to his master."
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "jonathan",
+     "text": "And Jonathan cried after the lad, Make speed, haste, stay not."
+    },
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "And Jonathan’s lad gathered up the arrows, and came to his master."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That was the sign. The arrow beyond meant danger. David could not come back."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 20:39",
+   "label": "1 Samuel 20:39",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 39,
+     "text": "But the lad knew not any thing: only Jonathan and David knew the matter."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "But the lad knew not any thing: only Jonathan and David knew the matter."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonathan",
+   "ref": "1SA 20:40",
+   "label": "1 Samuel 20:40",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 40,
+     "text": "And Jonathan gave his artillery unto his lad, and said unto him, Go, carry them to the city."
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "And Jonathan gave his artillery unto his lad, and said unto him,"
+    },
+    {
+     "v": 40,
+     "speaker": "jonathan",
+     "text": "Go, carry them to the city."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When the boy was out of sight, David came out from his hiding place."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 20:41",
+   "label": "1 Samuel 20:41",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 41,
+     "text": "And as soon as the lad was gone, David arose out of a place toward the south, and fell on his face to the ground, and bowed himself three times: and they kissed one another, and wept one with another, until David exceeded."
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "And as soon as the lad was gone, David arose out of a place toward the south, and fell on his face to the ground, and bowed himself three times: and they kissed one another, and wept one with another, until David exceeded."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Two grown men, a soldier and a prince, holding each other in an empty field and weeping. There was no shame in it. They knew this goodbye might be the last."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jonathan",
+   "ref": "1SA 20:42",
+   "label": "1 Samuel 20:42",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 42,
+     "text": "And Jonathan said to David, Go in peace, forasmuch as we have sworn both of us in the name of the LORD, saying, The LORD be between me and thee, and between my seed and thy seed for ever. And he arose and departed: and Jonathan went into the city."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "And Jonathan said to David,"
+    },
+    {
+     "v": 42,
+     "speaker": "jonathan",
+     "text": "Go in peace, forasmuch as we have sworn both of us in the name of the LORD, saying, The LORD be between me and thee, and between my seed and thy seed for ever."
+    },
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "And he arose and departed: and Jonathan went into the city."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They could not stay together. The road ahead was hard for both of them. But their promise did not end in that field. They had put it in the LORD's keeping, and that is where it stayed. A faithful friend is a gift from God, and even a goodbye can be held in his hands."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 612,
+ "est_seconds": 334,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "gemini-free",
+   "model": "gemini-4-hydrogen",
+   "drafted_at": "2026-11-18T19:45:04",
+   "changed_share": null,
+   "note": "First draft by the free model; Claude did the pastor and cultural read and edited it."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Sam 18:1-4 and 20:35-42; Saul's turn against David is the chapters' own context (19-20), told briefly; the covenant is put in the LORD's keeping as v42 says, no promise to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain and warm; two men weeping is shown with dignity and without comment on anything the text does not say."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Free draft paraphrased each verse right before it; cut the repeats, fixed the arrow-signal speech cuts, added why David hid.",
+  "person_read": false
+ },
+ "status": "passed"
+}

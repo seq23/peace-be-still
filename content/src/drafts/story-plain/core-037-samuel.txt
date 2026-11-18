@@ -1,0 +1,32 @@
+=== core-037-samuel | Samuel Hears His Name
+passage: 1SA 3:1-10
+shelf: adult
+violence: none
+sexual: none
+cast: samuel|Samuel|child|m; eli|Eli|elder|m
+N: Long ago, in Israel, a young boy named Samuel lived in the house of the Lord at Shiloh. He had been dedicated to God’s service from a very young age. He worked every day alongside the high priest, an old man named Eli. In those days, it was rare for people to hear a direct message from the Lord. There were no frequent visions or voices from heaven. The world felt quiet, and people went about their daily lives without hearing much from the Almighty. Samuel was just a child, learning the ways of the temple and doing his work faithfully.
+S: 1SA 3:1
+N: Eli was now very old. His eyes were failing him, and the world was becoming a blur of shadows. He spent most of his time resting in his own room. Samuel was the one who helped the old man and kept the holy place in order. He was learning the rhythms of his service, even in a time when it felt like God was far away.
+S: 1SA 3:2
+N: One night, the air in the temple was still. The great gold lampstand, the lamp of God, was still burning. It was meant to stay lit until the morning light. Samuel had finished his duties for the day. He found his spot to sleep near the room where the Ark of God was kept. The shadows were long and the building was peaceful. Samuel closed his eyes, ready for rest.
+S: 1SA 3:3
+N: As the boy was resting, a voice broke the silence. It was clear and direct. It called out his name. Samuel woke up at once. He was a dutiful boy, and he thought Eli must be calling him for help in the night. Perhaps the old man needed water or help moving. Samuel did not hesitate to respond.
+S: 1SA 3:4
+N: He jumped up and ran to Eli’s bedside. He was ready to do whatever was needed. But Eli was confused. He had been asleep himself. He told the boy he had not said a word. He told Samuel to go back to bed.
+S: 1SA 3:5 after "and said," until "calledst me" @samuel
+S: 1SA 3:5 after "And he said," until "down again" @eli
+N: Samuel obeyed. He walked back through the dark halls to his mat and lay down again, listening to the sound of the quiet night. Then it happened a second time. The same voice called out, "Samuel." Again, the boy arose and went to Eli. He was sure he had heard it this time. He was sure the old priest needed him.
+S: 1SA 3:6 after "and said," until "didst call me" @samuel
+S: 1SA 3:6 after "And he answered," until "down again" @eli
+N: Samuel did not yet know the Lord in a personal way. He knew how to help with the lamps and the sacred tasks, but he had never heard God’s voice for himself. The word of the Lord had not yet been revealed to him. He was a boy doing his duty, unaware that he was about to experience something that would change his life.
+S: 1SA 3:7
+N: For a third time, the voice called Samuel’s name. Without a hint of frustration, the boy got up from his bed and went to Eli once more. He stood by the old priest, certain that he had been called.
+S: 1SA 3:8 until "the third time"
+S: 1SA 3:8 after "and said," until "didst call me" @samuel
+N: It was then that Eli finally understood. He realized it was not a mistake or a dream. He perceived that it was the Lord who was calling the child in the middle of the night. Eli did not take the moment for himself. Instead, he became a guide. He told Samuel exactly what to do if he heard the voice again. He told him to stay in his place and listen.
+S: 1SA 3:9 after "unto Samuel," until "servant heareth" @eli
+N: Samuel went back to his room. He lay down in the dark, his heart likely beating a little faster as he waited. Then, the Lord came and stood there, just as He had before. He called out Samuel’s name twice.
+S: 1SA 3:10 until "Samuel, Samuel"
+N: This time, Samuel did not run to Eli. He stayed right where he was. He was ready to listen. He spoke the words that Eli had taught him, offering himself as a servant who was ready to hear.
+S: 1SA 3:10 after "Samuel answered," @samuel
+N: That night changed everything for Samuel. It was the start of a long life of listening to God. He learned that the Lord was not just a name or a memory from the past, but a living presence who knew him by name. The story reminds us that sometimes the most important things happen in the quiet. When the world is still and the lamps are low, there is space to hear. Samuel found that when he stayed still and listened, he could finally hear the voice that had been calling him all along.

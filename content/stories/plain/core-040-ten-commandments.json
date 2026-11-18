@@ -1,0 +1,482 @@
+{
+ "id": "core-040-ten-commandments",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Ten Commandments",
+ "passage": {
+  "refs": [
+   "EXO 19:16-20",
+   "EXO 20:1-17"
+  ],
+  "label": "Exodus 19:16-20; Exodus 20:1-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Three months after they left Egypt, the people of Israel camped at the foot of Mount Sinai. Moses told them to get ready, because on the third day God would meet with them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 19:16",
+   "label": "Exodus 19:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And it came to pass on the third day in the morning, that there were thunders and lightnings, and a thick cloud upon the mount, and the voice of the trumpet exceeding loud; so that all the people that was in the camp trembled."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And it came to pass on the third day in the morning, that there were thunders and lightnings, and a thick cloud upon the mount, and the voice of the trumpet exceeding loud; so that all the people that was in the camp trembled."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 19:17",
+   "label": "Exodus 19:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And Moses brought forth the people out of the camp to meet with God; and they stood at the nether part of the mount."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And Moses brought forth the people out of the camp to meet with God; and they stood at the nether part of the mount."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 19:18",
+   "label": "Exodus 19:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And mount Sinai was altogether on a smoke, because the LORD descended upon it in fire: and the smoke thereof ascended as the smoke of a furnace, and the whole mount quaked greatly."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And mount Sinai was altogether on a smoke, because the LORD descended upon it in fire: and the smoke thereof ascended as the smoke of a furnace, and the whole mount quaked greatly."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fire, smoke, and a mountain shaking under their feet. These people had seen God part the sea. Now they were about to hear his voice."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 19:19",
+   "label": "Exodus 19:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And when the voice of the trumpet sounded long, and waxed louder and louder, Moses spake, and God answered him by a voice."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And when the voice of the trumpet sounded long, and waxed louder and louder, Moses spake, and God answered him by a voice."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 19:20",
+   "label": "Exodus 19:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And the LORD came down upon mount Sinai, on the top of the mount: and the LORD called Moses up to the top of the mount; and Moses went up."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And the LORD came down upon mount Sinai, on the top of the mount: and the LORD called Moses up to the top of the mount; and Moses went up."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:1",
+   "label": "Exodus 20:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And God spake all these words, saying,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And God spake all these words, saying,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:2",
+   "label": "Exodus 20:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "I am the LORD thy God, which have brought thee out of the land of Egypt, out of the house of bondage."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "I am the LORD thy God, which have brought thee out of the land of Egypt, out of the house of bondage."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Before a single rule, God told them who he was and what he had already done. He had brought them out of slavery. Everything that followed came after that rescue."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:3",
+   "label": "Exodus 20:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Thou shalt have no other gods before me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Thou shalt have no other gods before me."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:4",
+   "label": "Exodus 20:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Thou shalt not make unto thee any graven image, or any likeness of any thing that is in heaven above, or that is in the earth beneath, or that is in the water under the earth:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Thou shalt not make unto thee any graven image, or any likeness of any thing that is in heaven above, or that is in the earth beneath, or that is in the water under the earth:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:6",
+   "label": "Exodus 20:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And shewing mercy unto thousands of them that love me, and keep my commandments."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And shewing mercy unto thousands of them that love me, and keep my commandments."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then God spoke about his name, and about a day of rest."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:7",
+   "label": "Exodus 20:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Thou shalt not take the name of the LORD thy God in vain; for the LORD will not hold him guiltless that taketh his name in vain."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Thou shalt not take the name of the LORD thy God in vain; for the LORD will not hold him guiltless that taketh his name in vain."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:8",
+   "label": "Exodus 20:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Remember the sabbath day, to keep it holy."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Remember the sabbath day, to keep it holy."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Six days of work, and then a day to stop. Sons and daughters, servants, strangers, even the animals would rest, because God rested on the seventh day after he made the world."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then God turned to how people live with each other, beginning at home."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:12",
+   "label": "Exodus 20:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Honour thy father and thy mother: that thy days may be long upon the land which the LORD thy God giveth thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Honour thy father and thy mother: that thy days may be long upon the land which the LORD thy God giveth thee."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:13",
+   "label": "Exodus 20:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Thou shalt not kill."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Thou shalt not kill."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:14",
+   "label": "Exodus 20:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Thou shalt not commit adultery."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Thou shalt not commit adultery."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:15",
+   "label": "Exodus 20:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Thou shalt not steal."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Thou shalt not steal."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:16",
+   "label": "Exodus 20:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Thou shalt not bear false witness against thy neighbour."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Thou shalt not bear false witness against thy neighbour."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The last word goes past what people do, all the way to the heart, where wanting what belongs to someone else begins."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 20:17",
+   "label": "Exodus 20:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Thou shalt not covet thy neighbour’s house, thou shalt not covet thy neighbour’s wife, nor his manservant, nor his maidservant, nor his ox, nor his ass, nor any thing that is thy neighbour’s."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Thou shalt not covet thy neighbour’s house, thou shalt not covet thy neighbour’s wife, nor his manservant, nor his maidservant, nor his ox, nor his ass, nor any thing that is thy neighbour’s."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "On a shaking mountain, God gave his people words to live by. He did not give them to earn their way out of Egypt. He had already brought them out. These were the words of the God who rescued them, showing them how to love him and how to live in peace with their neighbors."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 575,
+ "est_seconds": 314,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "gemini-free",
+   "model": "gemini-4-hydrogen",
+   "drafted_at": "2026-11-18T20:16:21",
+   "changed_share": null,
+   "note": "First draft by the free model; Claude did the pastor and cultural read and edited it."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exodus 19:16-20 and 20:1-17, the commandments themselves as scripture blocks, never paraphrased in God's voice; the sabbath is the text's own word with no position on which day; the rescue comes before the law, as 20:2 says."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain and reverent; no moralising beyond the text."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Free draft retold each commandment in narration before quoting it; rewritten around the verses.",
+  "person_read": false
+ },
+ "status": "passed"
+}

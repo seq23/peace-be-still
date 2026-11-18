@@ -1,0 +1,375 @@
+{
+ "id": "core-036-five-thousand",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Five Loaves and Two Fishes",
+ "passage": {
+  "refs": [
+   "JOH 6:1-14"
+  ],
+  "label": "John 6:1-14"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "philip",
+   "name": "Philip",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "andrew",
+   "name": "Andrew",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "men",
+   "name": "the men",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus crossed to the far side of the Sea of Galilee, a wide lake also called Tiberias. He was not alone for long. People had heard about the sick being healed, and a huge crowd followed him around the water."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:2",
+   "label": "John 6:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And a great multitude followed him, because they saw his miracles which he did on them that were diseased."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And a great multitude followed him, because they saw his miracles which he did on them that were diseased."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:3",
+   "label": "John 6:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And Jesus went up into a mountain, and there he sat with his disciples."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And Jesus went up into a mountain, and there he sat with his disciples."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was almost time for the Passover, the great feast of the year."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "From the hillside, Jesus looked up and saw the crowd still coming."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:5",
+   "label": "John 6:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "When Jesus then lifted up his eyes, and saw a great company come unto him, he saith unto Philip, Whence shall we buy bread, that these may eat?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "When Jesus then lifted up his eyes, and saw a great company come unto him, he saith unto Philip, Whence shall we buy bread, that these may eat?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus asked to test him. He already knew what he would do. Philip looked out over the crowd and counted the cost in his head."
+  },
+  {
+   "type": "scripture",
+   "speaker": "philip",
+   "ref": "JOH 6:7",
+   "label": "John 6:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Philip answered him, Two hundred pennyworth of bread is not sufficient for them, that every one of them may take a little."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Philip answered him,"
+    },
+    {
+     "v": 7,
+     "speaker": "philip",
+     "text": "Two hundred pennyworth of bread is not sufficient for them, that every one of them may take a little."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It is easy to understand why Philip felt that way. We look at what is in our hands, and it seems far too small for the need in front of us."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Andrew, Simon Peter's brother, spoke up. He had found a boy in the crowd who had some food with him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "andrew",
+   "ref": "JOH 6:9",
+   "label": "John 6:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "There is a lad here, which hath five barley loaves, and two small fishes: but what are they among so many?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "andrew",
+     "text": "There is a lad here, which hath five barley loaves, and two small fishes: but what are they among so many?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Five loaves of barley bread and two little fish. Barley bread was plain food, the bread of ordinary people. It was one boy's lunch, and a mountainside full of hungry people."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus did not send anyone away."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:10",
+   "label": "John 6:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And Jesus said, Make the men sit down. Now there was much grass in the place. So the men sat down, in number about five thousand."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And Jesus said, Make the men sit down. Now there was much grass in the place. So the men sat down, in number about five thousand."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Thousands of people sat down on the soft green grass and waited."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:11",
+   "label": "John 6:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And Jesus took the loaves; and when he had given thanks, he distributed to the disciples, and the disciples to them that were set down; and likewise of the fishes as much as they would."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And Jesus took the loaves; and when he had given thanks, he distributed to the disciples, and the disciples to them that were set down; and likewise of the fishes as much as they would."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No one had to hold back or worry that the food would run out. Everyone ate until they were full."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:12",
+   "label": "John 6:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "When they were filled, he said unto his disciples, Gather up the fragments that remain, that nothing be lost."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "When they were filled, he said unto his disciples, Gather up the fragments that remain, that nothing be lost."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There was more left over than they had started with."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:13",
+   "label": "John 6:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Therefore they gathered them together, and filled twelve baskets with the fragments of the five barley loaves, which remained over and above unto them that had eaten."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Therefore they gathered them together, and filled twelve baskets with the fragments of the five barley loaves, which remained over and above unto them that had eaten."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The people looked at those twelve full baskets and began to talk about the one who had fed them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "men",
+   "ref": "JOH 6:14",
+   "label": "John 6:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Then those men, when they had seen the miracle that Jesus did, said, This is of a truth that prophet that should come into the world."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Then those men, when they had seen the miracle that Jesus did, said,"
+    },
+    {
+     "v": 14,
+     "speaker": "men",
+     "text": "This is of a truth that prophet that should come into the world."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The boy only had five small loaves and two fish. Philip only saw an impossible bill to pay. Yet when that small meal was placed in Jesus' hands, he thanked God and made it more than enough. That is where the story leaves us, with a quiet hillside and twelve full baskets. Nothing is too small when it is placed in his hands."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 540,
+ "est_seconds": 295,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "gemini-free",
+   "model": "gemini-4-hydrogen",
+   "drafted_at": "2026-11-18T19:55:59",
+   "changed_share": null,
+   "note": "First draft by the free model; Claude did the pastor and cultural read and edited it."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 6:1-14; the boy's lunch and the twelve baskets as given; no promise of provision to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, warm; barley bread named as ordinary people's food without a poverty stereotype."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Light edit: repeats cut.",
+  "person_read": false
+ },
+ "status": "passed"
+}

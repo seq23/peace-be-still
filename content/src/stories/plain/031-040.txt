@@ -1,0 +1,295 @@
+# Plain telling, core stories 31-40. First drafts by the free Gemini route (content/src/drafts/), then Claude's pastor and cultural read and edit.
+
+=== core-031-david-jonathan | David and Jonathan
+passage: 1SA 18:1-4; 1SA 20:35-42
+shelf: adult
+violence: none
+sexual: none
+cast: jonathan|Jonathan|adult|m
+N: David was still young when King Saul brought him to court, fresh from the field where he had faced Goliath. He had just finished speaking with the king. The king's son Jonathan was there, listening.
+S: 1SA 18:1
+S: 1SA 18:2
+N: Jonathan was the king's son. By the usual way of things, David might have looked like a rival. Jonathan did not see him that way.
+S: 1SA 18:3
+S: 1SA 18:4
+N: A robe, a sword, a bow, a belt. Jonathan held nothing back. It was his way of saying, what is mine is yours.
+N: Time passed, and the days grew dark. King Saul turned against David and wanted him dead. Jonathan pleaded for his friend, and his father's anger turned on him too. So the two friends made a plan. David would hide in the countryside, and Jonathan would come out with his bow and send him word by where his arrows fell.
+S: 1SA 20:35
+N: The field was quiet and wide in the early light. Jonathan fitted an arrow to his bow.
+S: 1SA 20:36 @jonathan after "unto his lad, " until "And as the lad"
+N: The boy ran to where the first arrow had landed.
+S: 1SA 20:37 @jonathan after "and said, "
+S: 1SA 20:38 @jonathan until "And Jonathan’s lad"
+N: That was the sign. The arrow beyond meant danger. David could not come back.
+S: 1SA 20:39
+S: 1SA 20:40 @jonathan after "said unto him, "
+N: When the boy was out of sight, David came out from his hiding place.
+S: 1SA 20:41
+N: Two grown men, a soldier and a prince, holding each other in an empty field and weeping. There was no shame in it. They knew this goodbye might be the last.
+S: 1SA 20:42 @jonathan until "And he arose"
+N: They could not stay together. The road ahead was hard for both of them. But their promise did not end in that field. They had put it in the LORD's keeping, and that is where it stayed. A faithful friend is a gift from God, and even a goodbye can be held in his hands.
+
+=== core-032-lazarus | Lazarus, Come Forth
+passage: JOH 11:17-44
+shelf: adult
+violence: none
+sexual: none
+cast: martha|Martha|adult|f; mary|Mary|adult|f; jews|the Jews|adult|group
+N: Lazarus was sick, and his sisters, Martha and Mary, sent word to Jesus. By the time Jesus reached their village of Bethany, Lazarus had died.
+S: JOH 11:17
+N: Bethany was close to Jerusalem, only a short walk away. Many friends had come out from the city to sit with the two sisters. A house in grief is heavy and slow, full of tears and quiet visits.
+N: When Martha heard that Jesus was coming, she went out to meet him on the road. Mary stayed in the house. Martha said what had been sitting on her heart.
+S: JOH 11:21 @martha after "Then said Martha unto Jesus, "
+N: Even in her pain, Martha still trusted him. She said she knew God would give him whatever he asked. Jesus told her that her brother would rise again. Martha said yes, she knew he would rise at the last day. Then Jesus turned her eyes from a far-off day to himself.
+S: JOH 11:25
+S: JOH 11:26
+N: He asked her if she believed this. Martha did not hold back.
+S: JOH 11:27 @martha after "She saith unto him, "
+N: Then Martha went home and quietly told her sister that the Master had come and was calling for her. Mary got up at once and went out to him.
+N: The friends who had been comforting her saw her hurry out, and they followed, thinking she was going to the grave to weep. When Mary came to Jesus, she fell down at his feet and said the very same words her sister had said.
+S: JOH 11:32 @mary after "saying unto him, "
+N: Jesus saw her weeping. He saw the friends weeping with her. He did not hurry their sorrow or tell them to stop. He groaned in his spirit and was troubled, and he asked where they had laid him. They said, come and see.
+S: JOH 11:35
+N: Two words, and the shortest verse in the whole Bible. Jesus knew what he was about to do, and still he wept with them.
+S: JOH 11:36 @jews after "Then said the Jews, "
+N: Some of them wondered why the man who had opened the eyes of the blind could not have kept his friend from dying. Jesus, groaning again, came to the grave. It was a cave, with a stone laid across it.
+S: JOH 11:39 @martha after "saith unto him, "
+N: It was an honest worry. Four days is a long time. Jesus answered her gently, reminding her of what he had told her on the road.
+S: JOH 11:40
+N: So they took away the stone. Jesus lifted up his eyes and thanked his Father for hearing him. He prayed out loud, so that the people standing there might believe that the Father had sent him.
+S: JOH 11:43
+S: JOH 11:44
+N: The same Jesus who wept at the grave called a dead man out of it. He did not skip past their grief, and death did not have the last word. The one who weeps with us is the resurrection and the life.
+
+=== core-033-gideon | Gideon and the Three Hundred
+passage: JDG 6:11-16; JDG 7:2-8
+shelf: adult
+violence: none
+sexual: none
+cast: gideon|Gideon|adult|m
+N: It was a hard season in Israel. Farmers usually threshed wheat out in the open air, where the breeze carried the chaff away. Gideon was down by a winepress instead, trying to keep his grain safe from the Midianites.
+S: JDG 6:11
+S: JDG 6:12
+N: Mighty man of valour. It must have sounded strange to a man hiding his wheat in a winepress.
+N: Gideon did not feel mighty. He remembered the old stories of God bringing Israel out of Egypt, and those days felt far away. So he asked an honest question.
+S: JDG 6:13 @gideon after "And Gideon said unto him, "
+N: The LORD did not scold him for asking. He gave him a task far bigger than anything Gideon had planned.
+S: JDG 6:14
+N: Gideon knew where he came from, and he said so plainly.
+S: JDG 6:15 @gideon after "And he said unto him, "
+N: The LORD did not argue with him about how small he was. He gave him the one promise that mattered. Gideon would not go alone.
+S: JDG 6:16
+N: Later, the time came to face the Midianites. Thirty-two thousand men gathered with Gideon. It looked like a good start. But the LORD saw a danger in a crowd that size.
+S: JDG 7:2
+N: So Gideon gave the men an open door to leave. Anyone who was afraid could pack up and go home early in the morning. More than two out of every three men walked away.
+S: JDG 7:3
+N: Ten thousand stayed. Still the LORD said there were too many, and he told Gideon to bring them down to the water.
+S: JDG 7:5
+N: There by the water's edge, the men drank in different ways. Most knelt down to drink. A few cupped the water in their hands and brought it up to their mouths.
+S: JDG 7:6
+N: Three hundred. That was all.
+S: JDG 7:7
+N: So Gideon sent nine thousand seven hundred men back to their tents. Down in the valley, the Midianite army lay waiting. Up on the hill stood Gideon, who had once hidden in a winepress, with just three hundred men beside him.
+S: JDG 7:8
+N: Gideon began this story feeling too small. Then God made his army small on purpose, so that no one could say, my own hand saved me. The victory would belong to the LORD. God does not need big numbers to keep his word.
+
+=== core-034-jairus | Jesus Raises Jairus's Daughter
+passage: MAR 5:21-24; MAR 5:35-43
+shelf: adult
+violence: none
+sexual: none
+cast: jairus|Jairus|adult|m; messengers|people from Jairus's house|adult|group
+N: Jesus had crossed the Sea of Galilee again in a boat. As soon as he stepped onto the shore, a large crowd gathered around him near the water. People pressed close, eager to see him and hear him.
+N: Into that crowd came a man named Jairus. He was a leader of the local synagogue, a man people knew and respected. None of that mattered to him now.
+S: MAR 5:22
+S: MAR 5:23 @jairus after "saying, "
+S: MAR 5:24
+N: Every step must have felt slow to Jairus, with the crowd pressing in from every side. When someone you love is sick at home, every minute is heavy. On the way, Jesus stopped to heal a woman who had touched his clothes. And while he was still speaking, people came from Jairus's house with the news every parent dreads.
+S: MAR 5:35 @messengers after "which said, "
+N: Why trouble the Master any further? To them, it was over. But Jesus heard what they told the father.
+S: MAR 5:36
+N: Jesus let no one follow him the rest of the way except Peter, James, and John.
+S: MAR 5:38
+N: Jesus stepped inside, into the middle of all that noise.
+S: MAR 5:39
+S: MAR 5:40
+N: The room was quiet now. Just a mother and a father, three friends, and Jesus beside the bed.
+S: MAR 5:41
+N: Talitha cumi. Little girl, get up. The words a parent might say on any ordinary morning.
+S: MAR 5:42
+N: Everyone in the room was astonished. And in the middle of it all, Jesus thought of something simple.
+S: MAR 5:43
+N: That is how the story ends, with a quiet room and a meal for a twelve-year-old girl. The news from the house had sounded final, and the fear was real. But Jesus told Jairus, be not afraid, only believe. And even death listened when Jesus spoke.
+
+=== core-035-jacob-esau | Jacob and Esau Make Peace
+passage: GEN 32:6-12; GEN 33:1-11
+shelf: adult
+violence: mild
+sexual: none
+cast: messengers|the messengers|adult|group; jacob|Jacob|adult|m; esau|Esau|adult|m
+N: Years before, Jacob had tricked his brother Esau out of their father's blessing, and he had run for his life. He crossed the Jordan with nothing but a walking stick. Now he was on his way home. He had a large family now, servants, and herds of animals. He sent messengers ahead to tell Esau he was coming, and they came back with word.
+S: GEN 32:6 @messengers after "saying,"
+N: Four hundred men. That did not sound like a warm welcome.
+S: GEN 32:7
+N: If Esau struck one camp, Jacob thought, the other might escape.
+N: Plans were not enough to calm his heart. So Jacob prayed.
+S: GEN 32:9 @jacob after "And Jacob said,"
+N: He told God he did not deserve any of the kindness God had shown him. And then he said plainly what he was afraid of.
+S: GEN 32:11 @jacob
+S: GEN 33:1
+N: He put the two servant women and their children in front, Leah and her children behind them, and Rachel and Joseph at the very back.
+N: But Jacob did not hide behind them.
+S: GEN 33:3
+N: Jacob had braced himself for anger. He had braced himself for a fight. Instead, Esau broke into a run.
+S: GEN 33:4
+N: Twenty years of fear, and it ended with a brother's arms around his neck. After a while, Esau looked up and saw the women and children waiting behind Jacob. When he asked who they were, Jacob told him they were the children God had kindly given him. One by one, the mothers and children came forward and bowed to Esau.
+N: Esau also asked about the herds of animals he had met along the way. Jacob explained that they were meant as a gift, hoping his brother would look kindly on him. Esau did not want to take them.
+S: GEN 33:9 @esau after "And Esau said,"
+N: But Jacob wanted him to take it. To be welcomed like this, when he had expected anger, was like seeing the face of God.
+S: GEN 33:10 @jacob after "And Jacob said,"
+N: Jacob had more than enough, and he knew it was because God had been good to him.
+S: GEN 33:11 @jacob until "And he urged him"
+N: Jacob urged him, and Esau took it. There was no attack that day, and no one ran for their life. Two brothers stood in peace on the open road. The meeting Jacob feared most became the place where he met grace.
+
+=== core-036-five-thousand | Five Loaves and Two Fishes
+passage: JOH 6:1-14
+shelf: adult
+violence: none
+sexual: none
+cast: philip|Philip|adult|m; andrew|Andrew|adult|m; men|the men|adult|group
+N: Jesus crossed to the far side of the Sea of Galilee, a wide lake also called Tiberias. He was not alone for long. People had heard about the sick being healed, and a huge crowd followed him around the water.
+S: JOH 6:2
+S: JOH 6:3
+N: It was almost time for the Passover, the great feast of the year.
+N: From the hillside, Jesus looked up and saw the crowd still coming.
+S: JOH 6:5
+N: Jesus asked to test him. He already knew what he would do. Philip looked out over the crowd and counted the cost in his head.
+S: JOH 6:7 @philip after "Philip answered him,"
+N: It is easy to understand why Philip felt that way. We look at what is in our hands, and it seems far too small for the need in front of us.
+N: Then Andrew, Simon Peter's brother, spoke up. He had found a boy in the crowd who had some food with him.
+S: JOH 6:9 @andrew
+N: Five loaves of barley bread and two little fish. Barley bread was plain food, the bread of ordinary people. It was one boy's lunch, and a mountainside full of hungry people.
+N: Jesus did not send anyone away.
+S: JOH 6:10
+N: Thousands of people sat down on the soft green grass and waited.
+S: JOH 6:11
+N: No one had to hold back or worry that the food would run out. Everyone ate until they were full.
+S: JOH 6:12
+N: There was more left over than they had started with.
+S: JOH 6:13
+N: The people looked at those twelve full baskets and began to talk about the one who had fed them.
+S: JOH 6:14 @men after "said,"
+N: The boy only had five small loaves and two fish. Philip only saw an impossible bill to pay. Yet when that small meal was placed in Jesus' hands, he thanked God and made it more than enough. That is where the story leaves us, with a quiet hillside and twelve full baskets. Nothing is too small when it is placed in his hands.
+
+=== core-037-samuel | Samuel Hears His Name
+passage: 1SA 3:1-10
+shelf: adult
+violence: none
+sexual: none
+cast: samuel|Samuel|child|m; eli|Eli|elder|m
+N: Samuel was a boy who lived in the house of the LORD at Shiloh. His mother, Hannah, had given him to God's service when he was small, and he grew up helping the old priest Eli.
+S: 1SA 3:1
+N: Those were quiet years. People did not often hear from God. Eli was old now, and his eyes were failing.
+S: 1SA 3:2
+S: 1SA 3:3
+N: The lamp in the temple was still burning low. Everything was still. And then a voice called the boy's name.
+S: 1SA 3:4 @samuel after "he answered, "
+N: Samuel thought it was Eli. Who else would call him in the night? He got up and ran to the old man's side.
+S: 1SA 3:5 @samuel after "and said, " until "And he said"
+N: So Samuel lay back down in the dark. Then it came again.
+S: 1SA 3:6 @samuel after "and said, " until "And he answered"
+S: 1SA 3:7
+N: Samuel knew how to trim the lamps and open the doors. He did not yet know the voice of the LORD for himself. A third time, the call came.
+S: 1SA 3:8 @samuel after "and said, " until "And Eli perceived"
+N: Now the old priest understood. This was not a dream, and it was not a mistake. Eli did not keep the moment for himself. He told the boy what to say.
+S: 1SA 3:9 @eli after "unto Samuel, " until "So Samuel went"
+N: Samuel went back to his place and lay down. Maybe his heart was beating a little faster now, waiting in the dark.
+S: 1SA 3:10 @samuel after "Then Samuel answered, "
+N: This time he did not run. He stayed where he was, and he listened. It was the first night of a long life of listening. The God who had seemed so quiet in those days knew a little boy's name, and called it more than once, until the boy understood who was speaking.
+
+=== core-038-two-mothers | Solomon and the Two Mothers
+passage: 1KI 3:16-28
+shelf: adult
+violence: mild
+sexual: none
+cast: woman1|the one woman|adult|f; mother|the woman|adult|f; solomon|the king|adult|m
+N: Solomon was young when he became king, and he had asked God for one thing: an understanding heart, to judge the people well. Not long after, two women came to stand before him.
+S: 1KI 3:16
+N: They lived together in the same house, and each had a baby. No one else had been there to see what happened. The first woman spoke.
+S: 1KI 3:17 @woman1 after "the one woman said, "
+S: 1KI 3:18 @woman1
+S: 1KI 3:19 @woman1
+S: 1KI 3:20 @woman1
+N: In the morning, she said, she woke to feed her son and found a dead child in her arms. When she looked closely, it was not her boy.
+N: The other woman pushed back at once. No, the living child was hers. Back and forth they went, each telling the same story in reverse. There were no witnesses. It was one word against another.
+S: 1KI 3:23 @solomon after "Then said the king, "
+N: Any judge might have felt stuck. Instead, the king gave a startling command.
+S: 1KI 3:24 @solomon after "And the king said, " until "And they brought"
+N: The room must have gone very quiet.
+S: 1KI 3:25 @solomon after "And the king said, "
+N: In that moment, what was hidden came into the light.
+S: 1KI 3:26 @mother after "and she said, " until "But the other said"
+N: She would rather lose her son than see him harmed. The other woman wanted the child cut in two, so that neither of them would have him.
+S: 1KI 3:27 @solomon after "answered and said, "
+N: Solomon never meant to use the sword. He was looking for love, the kind that gives itself away, and it showed him the true mother.
+S: 1KI 3:28
+N: The people saw more than a clever king. They saw God's own wisdom at work in him. The story ends quietly, with a child safe in his mother's arms.
+
+=== core-039-bartimaeus | Blind Bartimæus
+passage: MAR 10:46-52
+shelf: adult
+violence: none
+sexual: none
+cast: bartimaeus|Bartimæus|adult|m; crowd|the crowd|adult|group
+N: Jesus was on the road again, moving through Jericho with his disciples and a large crowd. Everywhere he went, people followed him.
+S: MAR 10:46
+N: Bartimæus could not see the crowd, only hear it. He sat in his usual place beside the road, begging for what little people might spare. Most days, people walked right past him without stopping.
+N: Then he heard who was passing by. He had never seen Jesus's face, but he knew enough to hope. He did not wait for someone to notice him.
+S: MAR 10:47 @bartimaeus after "and say, "
+N: Perhaps the people thought a beggar had no business calling out to a teacher. Perhaps they just wanted to keep moving. Bartimæus knew this moment would pass in seconds, and he might never get another one.
+S: MAR 10:48 @bartimaeus after "great deal, "
+N: A crowd can be loud enough to drown out one voice. Yet Jesus heard him. In the middle of all those footsteps and talking people, Jesus stopped walking.
+S: MAR 10:49 @crowd after "saying unto him, "
+N: The same people who had told him to hush were now telling him to get up.
+N: Bartimæus did not hesitate. 
+S: MAR 10:50
+N: He threw off his cloak so nothing would slow him down, and found his way by the sound of the voices.
+N: Everyone there could guess what a blind beggar wanted. Even so, Jesus did not assume. He asked, and gave the man room to speak for himself.
+S: MAR 10:51 @bartimaeus after "The blind man said unto him, "
+N: He did not ask for silver. He asked for the one thing he could not give himself.
+S: MAR 10:52
+N: Notice what he did next. Jesus told him to go his way. And Bartimæus chose to walk down the road behind Jesus. The man who had sat blind in the dust beside the road was now walking on it, seeing clearly, following the one who had stopped for him. That is the quiet truth the story leaves with us. No crowd is too loud, and no person at the edge of the road is too small, for Jesus to stop and listen.
+
+=== core-040-ten-commandments | The Ten Commandments
+passage: EXO 19:16-20; EXO 20:1-17
+shelf: adult
+violence: none
+sexual: none
+cast:
+N: Three months after they left Egypt, the people of Israel camped at the foot of Mount Sinai. Moses told them to get ready, because on the third day God would meet with them.
+S: EXO 19:16
+S: EXO 19:17
+S: EXO 19:18
+N: Fire, smoke, and a mountain shaking under their feet. These people had seen God part the sea. Now they were about to hear his voice.
+S: EXO 19:19
+S: EXO 19:20
+S: EXO 20:1
+S: EXO 20:2
+N: Before a single rule, God told them who he was and what he had already done. He had brought them out of slavery. Everything that followed came after that rescue.
+S: EXO 20:3
+S: EXO 20:4
+S: EXO 20:6
+N: Then God spoke about his name, and about a day of rest.
+S: EXO 20:7
+S: EXO 20:8
+N: Six days of work, and then a day to stop. Sons and daughters, servants, strangers, even the animals would rest, because God rested on the seventh day after he made the world.
+N: Then God turned to how people live with each other, beginning at home.
+S: EXO 20:12
+S: EXO 20:13
+S: EXO 20:14
+S: EXO 20:15
+S: EXO 20:16
+N: The last word goes past what people do, all the way to the heart, where wanting what belongs to someone else begins.
+S: EXO 20:17
+N: On a shaking mountain, God gave his people words to live by. He did not give them to earn their way out of Egypt. He had already brought them out. These were the words of the God who rescued them, showing them how to love him and how to live in peace with their neighbors.
+
