@@ -24,7 +24,7 @@ function render(p) {
     "@graph": [
       { "@type": "Article", "@id": `${url}#article`, headline: p.h1, description: p.description, inLanguage: p.lang, url,
         datePublished: p.published, dateModified: p.updated, image: `${BASE}/${es ? "og-es.png" : "og.png"}`,
-        author: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/` },
+        author: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
         publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: { "@type": "ImageObject", url: `${BASE}/icon-512.png` }, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
         isPartOf: { "@id": `${BASE}/#site` },
         speakable: { "@type": "SpeakableSpecification", cssSelector: ["#what", "#faq"] } },
@@ -117,7 +117,7 @@ function renderIndex(lang, list) {
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, isPartOf: { "@id": `${BASE}/#site` }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
+<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, isPartOf: { "@id": `${BASE}/#site` }, publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
 </head>
 <body>
 ${headerHtml(lang, null)}
@@ -128,6 +128,7 @@ ${headerHtml(lang, null)}
   <ul class="qlist">
 ${items}
   </ul>
+  <p class="byline">${es ? "Por Peace Be Still · una app de Spry Labs · Actualizado el 18 nov 2026" : "By Peace Be Still · a Spry Labs app · Updated 18 Nov 2026"}</p>
 </main>
 ${waitlistHtml(lang, path, "neutral")}
 ${footerHtml(lang)}
