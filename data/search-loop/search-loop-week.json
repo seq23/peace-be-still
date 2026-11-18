@@ -1,0 +1,57 @@
+{
+  "schema": "search-loop-week-v1",
+  "week": "2026-W47",
+  "site": "peacebestillapp.com",
+  "generated_at": "2026-11-18T17:00:37.633Z",
+  "state": "slow",
+  "published": 0,
+  "indexed": 0,
+  "pace": 3,
+  "ai_visitors": "not read: no day this week was collected",
+  "ai_bot_hits": "not read: no day this week was collected",
+  "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
+  "wins": 0,
+  "undone": 0,
+  "merged": 0,
+  "held_by_cap": 0,
+  "redirected": [],
+  "cap": {
+    "max_live_pages": 10,
+    "live": 0,
+    "room": 10,
+    "why": "set from the site config (cap.max_live_pages 10)"
+  },
+  "notes": [
+    "site config lowers the mode to slow",
+    "FIND search_console: not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
+    "FIND easy_wins: not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
+    "FIND api.bing.com: not read: unavailable after 3 failures (last http 204)"
+  ],
+  "lanes": {
+    "ratio": {
+      "can_be_one": 2,
+      "striking": 1
+    },
+    "can_be_one": {
+      "pages": 0,
+      "measured": 0,
+      "top3": 0,
+      "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
+    },
+    "striking": {
+      "pages": 0,
+      "measured": 0,
+      "top3": 0,
+      "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
+    },
+    "weights": {
+      "neighbour": 35,
+      "unanswered": 30,
+      "weak_top10": 40,
+      "demand": 10
+    },
+    "weight_changes": [],
+    "competition": "ok: 15 top-10 read(s) via brave"
+  },
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44353736552"
+}

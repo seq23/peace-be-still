@@ -1,0 +1,2000 @@
+{
+  "schema": "search-loop-targets-v1",
+  "site": "peacebestillapp.com",
+  "week": "2026-W47",
+  "generated_at": "2026-11-18T17:00:37.633Z",
+  "sources": {
+    "search_console": "not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
+    "bing_webmaster": "ok: 0 rows",
+    "easy_wins": "not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
+    "suggestqueries.google.com": "ok",
+    "api.bing.com": "not read: unavailable after 3 failures (last http 204)",
+    "relevance_screen": "ok: kept 81 of 130 (free model)",
+    "top10": "ok: 15 top-10 read(s) via brave"
+  },
+  "targets": [
+    {
+      "query": "what is a good bible verse for sleeping",
+      "variants": [],
+      "signals": {
+        "words": 8,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.31,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 4,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 4 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 30,
+        "can_be_one": 22.4
+      },
+      "score": 22.4,
+      "kind": "new",
+      "lane": "can_be_one",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "weak top 10 (0.31): 0 directories, 0 forums, 0 off-target national, 4 thin or old, 0 answer the exact question",
+        "people search it (autocomplete or impressions)"
+      ]
+    },
+    {
+      "query": "what is the bible verse for sleep prayer",
+      "variants": [],
+      "signals": {
+        "words": 8,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 1 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 30,
+        "can_be_one": 13.2
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "what is the bible verse about sleep",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.31,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 3,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 3 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 30,
+        "can_be_one": 22.4
+      },
+      "score": 22.4,
+      "kind": "new",
+      "lane": "can_be_one",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "weak top 10 (0.31): 0 directories, 0 forums, 0 off-target national, 3 thin or old, 0 answer the exact question",
+        "people search it (autocomplete or impressions)"
+      ]
+    },
+    {
+      "query": "how to learn psalm 91",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.31,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 3,
+            "exact_answer": 1
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 3 thin or old, 1 answer the exact question"
+          ]
+        }
+      },
+      "priority": "psalm 91 for sleep",
+      "scores": {
+        "striking": 30,
+        "can_be_one": 22.4
+      },
+      "score": 22.4,
+      "kind": "new",
+      "lane": "can_be_one",
+      "reasons": [
+        "priority topic \"psalm 91 for sleep\" (find.priority_topics): built before other searches",
+        "weak top 10 (0.31): 0 directories, 0 forums, 0 off-target national, 3 thin or old, 1 answer the exact question",
+        "people search it (autocomplete or impressions)"
+      ]
+    },
+    {
+      "query": "what is the bible verse for prayer before sleeping",
+      "variants": [],
+      "signals": {
+        "words": 9,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.15,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 2,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 2 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 30,
+        "can_be_one": 16
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)",
+        "can-be-#1 score 16 too (taken by the striking lane's turn)"
+      ]
+    },
+    {
+      "query": "how to use psalm 91",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 1
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 1 thin or old, 1 answer the exact question"
+          ]
+        }
+      },
+      "priority": "psalm 91 for sleep",
+      "scores": {
+        "striking": 30,
+        "can_be_one": 13.2
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalm 91 for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "psalms for sleep with rain",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 2,
+            "exact_answer": 10
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 2 thin or old, 10 answer the exact question"
+          ]
+        }
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "psalms for sleep and protection",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalms for sleep and anxiety",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalms for sleep and peace",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalms for sleep audio",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalms for sleep with music",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalms for sleep and comfort",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalms to help me sleep",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep",
+      "variants": [
+        "how to sleep bible verses"
+      ],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep 8 hours",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep kjv",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep and peace",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep and rest",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep and anxiety",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleepless nights",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "bible verses for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"bible verses for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep protection",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep and comfort",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleeping at night",
+      "variants": [
+        "bible verses to sleep at night"
+      ],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 for sleep",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 for sleep and protection",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 for sleeping 8 hours",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 prayer for sleep",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 meditation for sleep",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 audio for sleep",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 sleep meditation abide",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 sleep rain",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 23 for sleep",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 23 sleep meditation",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses to help me sleep",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses to relax and sleep",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "calming bible verses for sleep",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep when stressed",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible verses for sleep paralysis",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "psalm 91 bedtime prayer",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "psalm 91 for sleep",
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"psalm 91 for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible asmr sleep",
+      "variants": [],
+      "signals": {
+        "words": 3,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "priority": "whispered bible for sleep",
+      "scores": {
+        "striking": 15,
+        "can_be_one": 0
+      },
+      "score": 15,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "does the bible app cost money",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.15,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 0 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 16
+      },
+      "score": 16,
+      "kind": "new",
+      "lane": "can_be_one",
+      "reasons": [
+        "weak top 10 (0.15): 0 directories, 1 forums, 0 off-target national, 0 thin or old, 0 answer the exact question",
+        "people search it (autocomplete or impressions)"
+      ]
+    },
+    {
+      "query": "is there a bible app that doesnt require internet",
+      "variants": [],
+      "signals": {
+        "words": 9,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 2,
+            "exact_answer": 1
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 2 thin or old, 1 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 13.2
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "does the holy bible app cost money",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "is the bible app free",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 5
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 5 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "is the holy bible app free",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 1
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 1 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "is there a free bible chat app",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 1 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 13.2
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "what are some free bible chat apps",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 1 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 13.2
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "is bible chat app free to use",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 1 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 13.2
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "bible app for black women",
+      "variants": [
+        "best bible app for black women"
+      ],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible study app for black women",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "african american bible app",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "daily devotional for black women",
+      "variants": [
+        "best daily devotional for black women"
+      ],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "daily devotional for black women 2026",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "daily devotional for black women 2025",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "daily devotional for black women app",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "daily devotional for black woman",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "free daily devotional for black women",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "daily devotional books for black women",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "morning prayer for black women",
+      "variants": [
+        "good morning prayer for black women"
+      ],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "daily prayer for black women",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bible app no subscription",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "free bible app no subscription",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "free bible chat app no subscription",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "free bible chat app",
+      "variants": [
+        "best free bible chat app",
+        "what is a free bible chat app"
+      ],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "free christian chat apps",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "free bible talk app",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "free bible ai chat app",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "haven bible chat app free",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for kids",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for adults",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for protection",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for toddlers",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for family",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "bedtime prayers for little ones",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "salmos para dormir en paz",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "salmos para dormir tranquilo y protegido",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "salmos para dormir en paz y tranquilidad",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "salmos para dormir tranquilo",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "salmos para dormir",
+      "variants": [],
+      "signals": {
+        "words": 3,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 15,
+        "can_be_one": 0
+      },
+      "score": 15,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "daily devotional tips",
+      "variants": [
+        "how do i start a daily devotional",
+        "what is a good daily devotional",
+        "daily devotional definition",
+        "what is a daily devotional"
+      ],
+      "signals": {
+        "words": 3,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 15,
+        "can_be_one": 0
+      },
+      "score": 15,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    }
+  ],
+  "strengthen": [
+    {
+      "query": "how do i get the bible app",
+      "variants": [
+        "how do i get a bible app",
+        "what is a bible app"
+      ],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "score": 30,
+      "page": "/site/public/questions/black-bible-app/"
+    },
+    {
+      "query": "psalms for sleep",
+      "variants": [
+        "what psalm is for sleep"
+      ],
+      "signals": {
+        "words": 3,
+        "question": false,
+        "google_suggest": true
+      },
+      "priority": "psalms for sleep",
+      "scores": {
+        "striking": 15,
+        "can_be_one": 0
+      },
+      "score": 15,
+      "page": "/site/public/questions/psalms-for-sleep/"
+    }
+  ]
+}

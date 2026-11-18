@@ -1,0 +1,75 @@
+{
+  "schema": "search-loop-discovery-v1",
+  "site": "peacebestillapp.com",
+  "week": "2026-W47",
+  "generated_at": "2026-11-18T17:00:37.633Z",
+  "paid_calls": 0,
+  "cost_usd": 0,
+  "hosts": {
+    "ssl.bing.com": {
+      "calls": 1,
+      "ok": 0,
+      "failed": 1,
+      "cost_usd": 0
+    },
+    "suggestqueries.google.com": {
+      "calls": 77,
+      "ok": 77,
+      "failed": 0,
+      "cost_usd": 0
+    },
+    "api.bing.com": {
+      "calls": 3,
+      "ok": 0,
+      "failed": 3,
+      "cost_usd": 0
+    },
+    "api.search.brave.com": {
+      "calls": 15,
+      "ok": 15,
+      "failed": 0,
+      "cost_usd": 0
+    }
+  },
+  "sources": {
+    "search_console": "not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
+    "bing_webmaster": "ok: 0 rows",
+    "easy_wins": "not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
+    "suggestqueries.google.com": "ok",
+    "api.bing.com": "not read: unavailable after 3 failures (last http 204)",
+    "relevance_screen": "ok: kept 81 of 130 (free model)",
+    "top10": "ok: 15 top-10 read(s) via brave"
+  },
+  "seeds": {
+    "planned": 126,
+    "asked": 77,
+    "topics": 18,
+    "topics_asked": 18,
+    "priority_topics": 4,
+    "priority_targets": 41
+  },
+  "notes": [
+    "autocomplete stopped at its budget of 80 calls (77 of 126 planned questions asked)"
+  ],
+  "competition": "ok: 15 top-10 read(s) via brave",
+  "lanes": {
+    "ratio": {
+      "can_be_one": 2,
+      "striking": 1
+    },
+    "can_be_one": 4,
+    "striking": 77,
+    "weights": {
+      "neighbour": 35,
+      "unanswered": 30,
+      "weak_top10": 40,
+      "demand": 10
+    }
+  },
+  "counts": {
+    "candidates": 132,
+    "targets": 81,
+    "strengthen_candidates": 2,
+    "dropped_shared_audience": 0
+  }
+}
