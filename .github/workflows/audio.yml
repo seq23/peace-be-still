@@ -14,6 +14,6 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - name: Library fill behaviour tests (no audio engines in CI)
-        run: python -m unittest discover -s audio/tests -v
+        run: pip install -q numpy && python -m unittest discover -s audio/tests -v
       - name: Manifest rows are well formed and every voice is licensed (A09)
         run: python audio/check_manifest.py && python audio/check_manifest.py --self-test

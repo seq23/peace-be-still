@@ -21,6 +21,16 @@ checks, shelved, status, voice).
 - **Output**: `OUTPUT <n> files shelved` and `library fill: X of Y files, Z hours shelved, N failed`,
   once a day into the morning email's Notices. Stops: `DRIVE_UNREACHABLE`, `SHELF_HASH_MISMATCH`,
   `SHELF_NOT_VERIFIED`, `MAC_BUDGET` (5 GB), `SCRIPTURE_MISSING`, `NOTHING_SHELVED`.
+- **Hush Harbor stories** (`hush_harbor.py`, same launchd job, after the fill step in `run.sh`):
+  the four locked Gemini voices in `hush-harbor/voices.json` (grandmother Gacrux narrates and reads
+  Jesus's and God's words; Charon elder men; Kore women; Umbriel other men and groups). Two
+  multi-speaker calls per story, split at the call and response; the 3 s pauses are silence put in by
+  code. Checks: word accuracy and per-voice pitch band per call (a miss renders again), then the fill's
+  file checks (`qa.py`, -22 LUFS). Shelf `gdrive:Mac-Shelf/peace-be-still/stories/hush-harbor/en/`,
+  a manifest row with the model used. The free key gives 10 calls a day per TTS model; the models in
+  `voices.json` are tried in turn, then `QUOTA_OUT` (a note, exit 0) and the next run resumes from the
+  calls cached in `~/.peace-be-still/hh-work/`. Output `OUTPUT <n> Hush Harbor stories shelved` and
+  `hush harbor: X of Y stories voiced, N failed`. Mi Refugio stays on the Spanish Kokoro blend.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
   reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing, R2 upload, the player.
-- Tests: `python3 -m unittest discover -s audio/tests` and `python3 audio/check_manifest.py --self-test`.
+- Tests: `python3 -m unittest discover -s audio/tests` (needs numpy) and `python3 audio/check_manifest.py --self-test`.

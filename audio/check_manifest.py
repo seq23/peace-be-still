@@ -12,7 +12,7 @@ FIELDS = ("file", "kind", "lang", "ref", "seconds", "sha256", "checks", "shelved
 
 
 def problems(rows, voices_md):
-    licensed = set(re.findall(r"`(kokoro:[^`]+)`", voices_md))
+    licensed = set(re.findall(r"`((?:kokoro|gemini):[^`]+)`", voices_md))
     out, seen = [], set()
     for n, r in enumerate(rows, 1):
         where = f"row {n} ({r.get('file')})"
@@ -46,11 +46,13 @@ def main():
         broken = [("missing field", [{k: v for k, v in good.items() if k != "ref"}]),
                   ("twice", [good, good]),
                   ("unlicensed voice", [{**good, "voice": "kokoro:af_heart"}]),
+                  ("unlicensed gemini voice", [{**good, "voice": "gemini:someone-else"}]),
                   ("no hash", [{**good, "sha256": None}]),
                   ("not shelved", [{**good, "shelved": None}]),
                   ("failed silently", [{**good, "status": "FAILED"}]),
                   ("unknown status", [{**good, "status": "skipped"}])]
         assert not problems([good], voices), problems([good], voices)
+        assert not problems([{**good, "voice": "gemini:hush-harbor"}], voices)
         missed = [n for n, rows in broken if not problems(rows, voices)]
         if missed:
             print(f"NAMED STOP [SELF_TEST_BLIND] not caught: {', '.join(missed)}")

@@ -1,0 +1,53 @@
+{
+  "about": "Hush Harbor voices, locked by the owner 18 Nov 2026 (grandmother = 1, elder = 2, young woman 1, young man = 2). Engine Gemini TTS on the free AI Studio key (vault GEMINI_API_KEY, no-billing project). Style lines copied exactly from voice-samples/18_hush_gemini.py. f0_hz is the pitch band a rendered segment must sit in (median of voiced frames), set around the median measured on her picked samples 18 Nov 2026 (sample_f0_hz; about x0.7 to x1.5, wide enough for a story's range, narrow enough to catch a swapped or drifted voice); a segment outside it is rendered again. models: tried in order, each has its own free daily quota (10 calls a day each, 18 Nov 2026) and the same prebuilt voices; the first is the one her picks were made on. gemini-2.5-pro-preview-tts has no free quota (limit 0) and is left out.",
+  "models": [
+    "gemini-2.5-flash-preview-tts",
+    "gemini-3.1-flash-tts-preview",
+    "gemini-3.8-flash-tts",
+    "gemini-3.8-flash-lite-tts"
+  ],
+  "prompt": "Say this in the voice of {style}: {text}",
+  "prompt_multi": "TTS the following story told by {names}. {who} Read every line exactly as written, nothing added.\n\n{lines}",
+  "roles": {
+    "grandmother": {
+      "voice": "Gacrux",
+      "reads": "the narrator, and every word Jesus or God says",
+      "style": "an elderly Black grandmother from the American South, in her seventies, telling a Bible story to her grandchildren on the porch after dark. Warm, unhurried, a little gravel and a smile in her voice, Black church cadence, never theatrical",
+      "f0_hz": [
+        95,
+        230
+      ],
+      "sample_f0_hz": 135
+    },
+    "elder": {
+      "voice": "Charon",
+      "reads": "elder and deacon parts (cast age elder, men)",
+      "style": "an older Black deacon from a Southern Baptist church, in his sixties, deep and steady, the cadence of a preacher reading scripture from the pulpit, warm, unhurried, not shouting",
+      "f0_hz": [
+        65,
+        140
+      ],
+      "sample_f0_hz": 90
+    },
+    "young_woman": {
+      "voice": "Kore",
+      "reads": "women's lines",
+      "style": "a young Black American woman in her twenties, soft and sincere, from Atlanta, speaking these Bible words with quiet conviction, natural, not performed",
+      "f0_hz": [
+        120,
+        270
+      ],
+      "sample_f0_hz": 163
+    },
+    "young_man": {
+      "voice": "Umbriel",
+      "reads": "men's lines that are not an elder's, and groups",
+      "style": "a young Black American man in his twenties, from Memphis, urgent but natural, not shouting",
+      "f0_hz": [
+        105,
+        230
+      ],
+      "sample_f0_hz": 163
+    }
+  }
+}
