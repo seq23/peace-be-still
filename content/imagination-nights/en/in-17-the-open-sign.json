@@ -1,0 +1,85 @@
+{
+ "id": "in-17-the-open-sign",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "The Open Sign",
+ "theme": "your own business",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's wish is for anyone who dreams of running something of their own. A shop. A salon. A food truck. A small online business. A practice. [pause 11]\n\nWhen you start something, most of the picture is worry. Money, customers, rules, time. Tonight we step past all that, to a normal working day when the thing is up and running and people are coming. [pause 13]\n\nWe are not picturing fame or riches. We are picturing ordinary success. A steady line of people. A regular who knows your name. Enough. [pause 13]\n\nThis is a practice of imagination and feeling, not a promise of any result. Keep doing the real work in the daytime, and get good advice when you need it. Tonight is for the feeling of having built something. [pause 13]\n\nIf you already run something and it is struggling, you can use this scene too. Picture a good, ordinary day a few months from now, when things have steadied. Picture the bills paid and the regulars coming back. Let your body remember that a business can feel calm. [pause 5]\n\nPicture your business now, however it looks to you. [pause 18]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "It is early morning. You are unlocking the door of your place, or opening your laptop to your shop. [pause 20]\n\nTurn on the lights. Notice the first thing you see. Your name. Your colors. Your things in their places. [pause 23]\n\nFlip the sign to open, or press the button that says live. [pause 23]\n\nThe first person of the day arrives. They smile. They have been here before. [pause 23]\n\nHear them say, I told my sister about you. She is coming next week. [pause 23]\n\nFeel yourself doing the work you are good at. Your hands know what to do. [pause 26]\n\nMidday, there is a little rush. It is busy in the good way. [pause 26]\n\nAt closing, you count up the day. It was a good day. Not wild. Just good. Enough to feel steady. [pause 26]\n\nFlip the sign back to closed. Stand for a moment in the quiet room you built. [pause 28]\n\nSay in your mind, this is mine. I made this. [pause 28]\n\nLet the quiet of that room become the quiet of this one. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 634,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1172,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:55:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; each teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Self-worth night gives 988 for thoughts of self-harm; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health or body promise and offers a non-walking version; family night never pictures forcing anyone to change; business night pictures ordinary enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

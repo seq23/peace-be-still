@@ -1,0 +1,85 @@
+{
+ "id": "in-16-at-peace-with-yourself",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "At Peace with Yourself",
+ "theme": "self-worth",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hello, and welcome back to Imagination Nights. [pause 3]\n\nSettle into the bed. Pull the covers up to where you like them. [pause 8]\n\nTake one deep breath, and let it go with a sigh. [pause 8]\n\nNow let your breathing find its own pace. You do not have to control it. Just notice it. [pause 10]\n\nFeel your feet getting heavy. Your legs. Your back sinking into the mattress. [pause 10]\n\nNow let us relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThe day is finished. This part of the night is yours. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's wish is not about getting something. It is about how you feel about yourself. [pause 16]\n\nMany of us talk to ourselves at night in ways we would never talk to a friend. We list our mistakes. We call ourselves names. We wonder why we are like this. [pause 18]\n\nTonight we practice a different voice. We picture a version of you, some months from now, who has made peace with who you are. Not perfect. Just kind to yourself, steady and unashamed. [pause 18]\n\nIf the voice in your head has been very hard on you for a long time, or if you have thoughts of hurting yourself, please talk to someone in the daytime. In the United States you can call or text 988 at any hour. You deserve help and you deserve kindness. [pause 18]\n\nThis is imagination and feeling, not a promise. But practicing a kind voice is a good way to end the day. [pause 23]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "You are standing in front of a mirror, some months from now. [pause 25]\n\nLook at your own face. Notice that you do not look away. [pause 28]\n\nNotice your eyes. They look rested. [pause 28]\n\nHear yourself say, in your mind, good morning. And mean it. [pause 28]\n\nPicture yourself making a small mistake later that day. Spilling something. Forgetting a name. [pause 28]\n\nHear how you speak to yourself now. That is all right. Everybody does that. You laugh a little and move on. [pause 30]\n\nPicture someone giving you a compliment. Notice that you can say thank you without arguing. [pause 30]\n\nIn the evening, picture sitting quietly by yourself. It feels like good company. [pause 30]\n\nSay softly, I am enough as I am, and I am still growing. [pause 30]\n\nLet that kind voice stay with you, like a hand on your back, as you drift. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "We will end here for tonight. [pause 10]\n\nKeep the feeling, not the effort. Let the effort go. [pause 15]\n\nWhatever happens tomorrow, tonight you practiced feeling at peace. That is worth something on its own. [pause 20]\n\nLet sleep come when it comes. There is no rush. [pause 20]\n\nNotice the weight of the covers. The cool side of the pillow. The dark. [pause 25]\n\nLet each breath out be a little longer than the one before. [pause 25]\n\nNothing more to picture. Nothing more to try. Only rest. [pause 30]\n\nGood night. [pause 60]"
+  }
+ ],
+ "words": 535,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1140,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:55:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; each teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Self-worth night gives 988 for thoughts of self-harm; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health or body promise and offers a non-walking version; family night never pictures forcing anyone to change; business night pictures ordinary enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

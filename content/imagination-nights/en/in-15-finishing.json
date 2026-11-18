@@ -1,0 +1,85 @@
+{
+ "id": "in-15-finishing",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "The Day You Finished",
+ "theme": "finishing something hard",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight is for anyone working toward a finish line. A degree. A certificate. A book. A long project. Paying something off. Getting through a hard season. [pause 11]\n\nWhen we are in the middle of something long, the end can feel unreal. We see only the next assignment, the next shift, the next payment. Tonight we step forward to the finish. [pause 13]\n\nPicture the day it is done. Not the stress of the last week, but the moment you know it is over. Maybe you are holding a paper. Maybe you just close a laptop. Maybe someone hugs you. [pause 13]\n\nLet yourself feel proud. Many of us are not used to that feeling. It is all right to practice it. [pause 13]\n\nIf you have started and stopped before, that is not a mark against you. Many people finish on the second or third try. Tonight you can picture this time as the time you get to the end. [pause 5]\n\nThis is imagination and feeling, not a promise of any result. Keep doing the work in the daytime. Tonight, rest with the end in view. [pause 18]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "It is the day it is finished. Notice where you are. A hall. An office. Your own kitchen table. [pause 20]\n\nFeel what is in your hands. A diploma. The last page. The final receipt. [pause 23]\n\nNotice the quiet in your chest where the pressure used to be. [pause 23]\n\nSomeone near you says, you did it. Hear the words. Let them land. [pause 23]\n\nThink back for a moment to the hardest night of the whole thing. The one where you almost quit. [pause 23]\n\nNow look at yourself today, on the other side of it. Let yourself be a little amazed. [pause 26]\n\nPicture going home that evening. Taking off your shoes. Nothing due tomorrow. [pause 26]\n\nSomeone calls to congratulate you. You hear yourself say, thank you. I am really proud. [pause 26]\n\nBefore bed, you put the proof of it somewhere you will see it. On the fridge. On a shelf. [pause 28]\n\nSay quietly, I finished. [pause 28]\n\nLet that sentence be the last one in your mind tonight. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 621,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1165,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:55:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; each teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Self-worth night gives 988 for thoughts of self-harm; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health or body promise and offers a non-walking version; family night never pictures forcing anyone to change; business night pictures ordinary enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

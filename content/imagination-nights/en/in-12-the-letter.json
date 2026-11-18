@@ -1,0 +1,85 @@
+{
+ "id": "in-12-the-letter",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "The Letter You Open",
+ "theme": "good news arriving",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hello, and welcome back to Imagination Nights. [pause 3]\n\nSettle into the bed. Pull the covers up to where you like them. [pause 8]\n\nTake one deep breath, and let it go with a sigh. [pause 8]\n\nNow let your breathing find its own pace. You do not have to control it. Just notice it. [pause 10]\n\nFeel your feet getting heavy. Your legs. Your back sinking into the mattress. [pause 10]\n\nNow let us relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThe day is finished. This part of the night is yours. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's scene is about opening good news. A letter, an email, a message. The moment you read the words you hoped for. [pause 13]\n\nMany of us have opened news that disappointed us. We remember that feeling, and we brace for it again. So tonight we rehearse the other feeling. The quick breath. The second read, just to be sure. The laugh that slips out. [pause 15]\n\nThe trick is to make the moment small and specific. Not a whole story. Just your hands, the screen or the paper, and a few words you can almost see. [pause 15]\n\nYou choose what the news is. An acceptance. An approval. A yes. Keep it private if you like. Nobody else needs to know what you picture. [pause 15]\n\nIf you have opened a lot of hard news lately, go slowly. You can picture the envelope for a while before you open it. Let your breathing settle first. There is no rush in imagination. [pause 5]\n\nRemember, this is a practice of imagination. It is not a promise of any result. It is a way to let your body practice relief instead of dread. [pause 20]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "You are sitting somewhere you often sit. A kitchen chair. The edge of the bed. Your car before you go inside. [pause 22]\n\nA message comes in. You see who it is from. Your stomach flutters. [pause 25]\n\nOpen it. Let your eyes find the first line. [pause 25]\n\nThere it is. The word you hoped for. Read it slowly. [pause 25]\n\nRead it again, just to be sure. It still says the same thing. [pause 25]\n\nFeel the breath leave your body all at once. Feel your hand go to your mouth, or your heart. [pause 28]\n\nMaybe you laugh. Maybe your eyes fill. Let whichever one comes come. [pause 28]\n\nNow picture who you tell first. Hear yourself say it out loud for the first time. It happened. [pause 28]\n\nHear them answer. Hear the joy in their voice. [pause 28]\n\nLater that night, you read the message one more time before bed. It feels calmer now. Real. [pause 30]\n\nSet the phone down. Lie back. Let the words stay in your mind as you drift. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "We will end here for tonight. [pause 10]\n\nKeep the feeling, not the effort. Let the effort go. [pause 15]\n\nWhatever happens tomorrow, tonight you practiced feeling at peace. That is worth something on its own. [pause 20]\n\nLet sleep come when it comes. There is no rush. [pause 20]\n\nNotice the weight of the covers. The cool side of the pillow. The dark. [pause 25]\n\nLet each breath out be a little longer than the one before. [pause 25]\n\nNothing more to picture. Nothing more to try. Only rest. [pause 30]\n\nGood night. [pause 60]"
+  }
+ ],
+ "words": 590,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1174,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:55:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; each teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Self-worth night gives 988 for thoughts of self-harm; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health or body promise and offers a non-walking version; family night never pictures forcing anyone to change; business night pictures ordinary enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
