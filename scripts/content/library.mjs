@@ -431,6 +431,10 @@ close: s
   if (isFail(checkDeclaration(d, "en").word_for_word)) throw new Error("SELFTEST good declaration fails");
   d.verses[0].text = "This is the day the Lord has made; let us rejoice.";
   if (!isFail(checkDeclaration(d, "en").word_for_word)) throw new Error("SELFTEST NIV wording not caught");
+  const [de] = buildDeclarations("2 | PSA 118:24 | Hoy busco algo bueno para mí.", "es");
+  if (checkDeclaration(de, "es").first_person !== "pass") throw new Error("SELFTEST Spanish mí not read as first person");
+  de.declaration = "Hoy hay algo bueno.";
+  if (checkDeclaration(de, "es").first_person === "pass") throw new Error("SELFTEST Spanish no first person passed");
   // Reviews gate the status
   const st = finalize(buildStory(good, "hush-harbor"), { a: "pass" }, { pastor: { verdict: "pass" }, cultural: { verdict: "rewrite", note: "x" } });
   if (st.status === "passed") throw new Error("SELFTEST one rewrite verdict still passed");
