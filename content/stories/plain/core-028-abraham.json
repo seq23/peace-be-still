@@ -1,0 +1,281 @@
+{
+ "id": "core-028-abraham",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Abraham Counts the Stars",
+ "passage": {
+  "refs": [
+   "GEN 12:1-8",
+   "GEN 15:1-6"
+  ],
+  "label": "Genesis 12:1-8; Genesis 15:1-6"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "abram",
+   "name": "Abram",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 12:1",
+   "label": "Genesis 12:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Now the LORD had said unto Abram, Get thee out of thy country, and from thy kindred, and from thy father’s house, unto a land that I will shew thee:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Now the LORD had said unto Abram, Get thee out of thy country, and from thy kindred, and from thy father’s house, unto a land that I will shew thee:"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That was all Abram was given at the start. Leave your country, your relatives and your father's house, and go to a land I will show you. No map. No address. Just a word from God and a promise."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 12:2",
+   "label": "Genesis 12:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And I will make of thee a great nation, and I will bless thee, and make thy name great; and thou shalt be a blessing:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And I will make of thee a great nation, and I will bless thee, and make thy name great; and thou shalt be a blessing:"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God promised to make him a great nation, to bless him, and that through him all the families of the earth would be blessed. There was just one problem. Abram and his wife Sarai had no children, and they were not young."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 12:4",
+   "label": "Genesis 12:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "So Abram departed, as the LORD had spoken unto him; and Lot went with him: and Abram was seventy and five years old when he departed out of Haran."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "So Abram departed, as the LORD had spoken unto him; and Lot went with him: and Abram was seventy and five years old when he departed out of Haran."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Seventy-five years old. Abram packed up his household, his wife Sarai, his nephew Lot, everything they owned and the people who worked for them, and set out for the land of Canaan. Many people his age would be settling down. Abram started over."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Years went by. Abram moved through the land God had promised. He built altars and called on the name of the LORD. But there was still no child."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 15:1",
+   "label": "Genesis 15:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "After these things the word of the LORD came unto Abram in a vision, saying, Fear not, Abram: I am thy shield, and thy exceeding great reward."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "After these things the word of the LORD came unto Abram in a vision, saying, Fear not, Abram: I am thy shield, and thy exceeding great reward."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fear not, Abram. God came to him in a vision and told him he was his shield and his great reward. But Abram was honest about what was on his heart."
+  },
+  {
+   "type": "scripture",
+   "speaker": "abram",
+   "ref": "GEN 15:2",
+   "label": "Genesis 15:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And Abram said, Lord GOD, what wilt thou give me, seeing I go childless, and the steward of my house is this Eliezer of Damascus?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And Abram said,"
+    },
+    {
+     "v": 2,
+     "speaker": "abram",
+     "text": "Lord GOD, what wilt thou give me, seeing I go childless, and the steward of my house is this Eliezer of Damascus?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He reminded God that he was still childless. As things stood, a servant from Damascus would inherit everything. He was asking the question he had carried for years. What about the promise?"
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God told him that servant would not be his heir. A son of his own would be."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 15:5",
+   "label": "Genesis 15:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And he brought him forth abroad, and said, Look now toward heaven, and tell the stars, if thou be able to number them: and he said unto him, So shall thy seed be."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And he brought him forth abroad, and said, Look now toward heaven, and tell the stars, if thou be able to number them: and he said unto him, So shall thy seed be."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagine that night. An old man stepping out of his tent. The desert sky, with no city lights, and more stars than anyone could count. And God telling him, so shall thy seed be."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 15:6",
+   "label": "Genesis 15:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And he believed in the LORD; and he counted it to him for righteousness."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And he believed in the LORD; and he counted it to him for righteousness."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He believed in the LORD. Abram did not have a child yet. He had a sky full of stars and a word from God. And he believed. God counted that trust as righteousness."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abram's story is not a story of instant answers. More years would pass before the promised son was born. But on that night, he looked up, he listened, and he trusted the God who had called him out of his father's house."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 524,
+ "est_seconds": 286,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.6",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Genesis 12:1-8 and 15:1-6; faith counted as righteousness stated as the text states it; no outcome promise."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "An old man starting over told with dignity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

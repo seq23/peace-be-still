@@ -175,6 +175,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: \"Yes he will\"] Yes he will. [PAUSE 3s | screen: \"Won’t he do it?\"] He did it for them on that dry ground.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Yes he will"
+    },
+    {
+     "seconds": 3,
+     "screen": "Won’t he do it?"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "Can you see them walking? Feet on dry ground where fish had been swimming that morning. Water standing up like walls on either side. Grandmothers holding children's hands. The old folks sang about this in the fields, \"Go Down, Moses\" and \"Oh, Mary, Don't You Weep,\" and they sang it when there was no sea in sight and no way out that they could see."
@@ -215,8 +230,8 @@
   "file": null,
   "qa": null
  },
- "words": 560,
- "est_seconds": 305,
+ "words": 588,
+ "est_seconds": 327,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -237,9 +252,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.0",
+   "S11_reading_level": "note: grade 1.8",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

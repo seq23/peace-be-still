@@ -256,6 +256,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say he was lost, you say, and is found. He was lost. [PAUSE 3s | screen: \"And is found\"] And is found. [PAUSE 3s | screen: \"He was lost\"] That is a father’s joy.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "And is found"
+    },
+    {
+     "seconds": 3,
+     "screen": "He was lost"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "But there is another son in this story. The elder son was out in the field, and when he came near the house he heard music and dancing. When he found out why, he got angry and would not go in. So the father went out to him too."
@@ -341,8 +356,8 @@
   "file": null,
   "qa": null
  },
- "words": 587,
- "est_seconds": 320,
+ "words": 609,
+ "est_seconds": 338,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -363,9 +378,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.4",
+   "S11_reading_level": "note: grade 2.2",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

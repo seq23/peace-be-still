@@ -200,6 +200,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say amen. [PAUSE 3s | screen: \"Amen\"] Amen. [PAUSE 3s | screen: \"Amen\"] Day after day, that barrel had meal in it.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Amen"
+    },
+    {
+     "seconds": 3,
+     "screen": "Amen"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "She did what Elijah said. And it happened just like God said through him. Day after day, she reached in that barrel and there was meal. Day after day, there was oil in the cruse. Not a storehouse. Just enough, every day, for the prophet, the widow and her son."
@@ -220,8 +235,8 @@
   "file": null,
   "qa": null
  },
- "words": 630,
- "est_seconds": 344,
+ "words": 647,
+ "est_seconds": 359,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -242,9 +257,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 3.6",
+   "S11_reading_level": "note: grade 3.5",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

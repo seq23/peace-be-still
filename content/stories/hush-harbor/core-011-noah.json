@@ -135,6 +135,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say God is faithful, you say, all the time. God is faithful. [PAUSE 3s | screen: \"All the time\"] All the time. [PAUSE 3s | screen: \"God is faithful\"] One olive leaf, and Noah knew.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "All the time"
+    },
+    {
+     "seconds": 3,
+     "screen": "God is faithful"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "One fresh leaf. That is how Noah knew the water was going down. Sometimes the first sign of a new season is small, Church. Do not despise a small leaf."
@@ -195,8 +210,8 @@
   "file": null,
   "qa": null
  },
- "words": 542,
- "est_seconds": 296,
+ "words": 565,
+ "est_seconds": 314,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -217,9 +232,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.4",
+   "S11_reading_level": "note: grade 2.3",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

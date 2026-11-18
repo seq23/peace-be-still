@@ -127,13 +127,13 @@ function scriptureBlock(b, lang) {
 // ---------------------------------------------------------------- stories (S01-S15 code part)
 export function checkStory(s) {
   const lang = s.lang, tr = TRANSLATION[lang];
-  const ret = s.blocks.filter((b) => b.type === "retelling");
+  const ret = s.blocks.filter((b) => b.type === "retelling" || b.type === "call_response");
   const scr = s.blocks.filter((b) => b.type === "scripture");
   const written = [s.title, ...ret.map((b) => b.text)];
   const c = {};
   const bad = scr.map((b) => scriptureBlock(b, lang)).filter(isFail);
   c.S01_word_for_word = !scr.length ? fail("no scripture block") : bad.length ? bad[0] : pass;
-  const shapeBad = s.blocks.find((b) => !["retelling", "scripture"].includes(b.type) || (b.type === "retelling" && !b.text) || (b.type === "scripture" && !b.ref));
+  const shapeBad = s.blocks.find((b) => !["retelling", "scripture", "call_response"].includes(b.type) || (b.type !== "scripture" && !b.text) || (b.type === "scripture" && !b.ref));
   c.S02_scripture_apart = shapeBad ? fail("block is neither scripture (ref) nor retelling (text)") : ret.length < 3 ? fail("fewer than 3 retelling blocks") : pass;
   const t = commonText("story", lang, written, "gods-word");
   c.S05_redlines = t.theology_redlines;
@@ -191,9 +191,22 @@ export function checkStory(s) {
   // and at most one call-out per story, never as the last line.
   const fpm = listHits(FIRST_PERSON, written);
   c.no_invented_memories = fpm.length ? fail(`first-person memory: ${fpm.join(", ")}`) : pass;
-  const calls = written.reduce((a, t) => a + (String(t).match(CALLOUT_G) || []).length, 0);
-  const last = ret.length ? ret[ret.length - 1].text.trim() : "";
-  c.callouts = calls > 1 ? fail(`${calls} call-outs (at most one)`) : CALLOUT_END.test(last) ? fail("ends on a call-out") : pass;
+  // Call and response (owner 18 Nov 2026): Hush Harbor and Mi Refugio carry exactly ONE "say it with me"
+  // block (teach, 3 s pause with the response on screen, answer, 3 s pause, tie-back), after the first
+  // verse and never last; the plain telling has none. No other call-outs in the retelling.
+  const cr = s.blocks.map((b, i) => [b, i]).filter(([b]) => b.type === "call_response");
+  const calls = s.blocks.filter((b) => b.type === "retelling").reduce((a, b) => a + (String(b.text).match(CALLOUT_G) || []).length, 0);
+  const firstVerse = s.blocks.findIndex((b) => b.type === "scripture");
+  if (s.telling === "plain") c.call_response = cr.length ? fail("the plain telling has no call and response") : calls ? fail("call-out in the plain telling") : pass;
+  else {
+    const [blk, i] = cr[0] || [];
+    c.call_response = cr.length !== 1 ? fail(`${cr.length} call-and-response blocks (exactly one)`)
+      : calls ? fail("a call-out outside the call-and-response block")
+      : blk.pauses.length < 2 || blk.pauses.some((p) => p.seconds < 3 || !p.screen) ? fail("call and response needs two 3 s pauses with screen text")
+      : i === s.blocks.length - 1 ? fail("call and response is the last paragraph")
+      : i < firstVerse ? fail("call and response comes before the first verse")
+      : pass;
+  }
   c.S13_ai_label = s.ai_label && scr.every((b) => b.translation === tr) ? pass : fail("AI label key or translation tag missing");
   return c;
 }

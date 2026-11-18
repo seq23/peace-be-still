@@ -221,6 +221,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say whose battle is it, you say, the LORD's. Whose battle is it? [PAUSE 3s | screen: \"The LORD’s\"] The LORD's. [PAUSE 3s | screen: \"Whose battle is it?\"] That is what David told the giant.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "The LORD’s"
+    },
+    {
+     "seconds": 3,
+     "screen": "Whose battle is it?"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "One stone. And the giant fell on his face to the earth. David had no sword in his hand that day. He had a sling, a stone, and a God he had already met out on the hillside with the sheep."
@@ -236,8 +251,8 @@
   "file": null,
   "qa": null
  },
- "words": 550,
- "est_seconds": 300,
+ "words": 574,
+ "est_seconds": 319,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -258,9 +273,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 3.0",
+   "S11_reading_level": "note: grade 2.8",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

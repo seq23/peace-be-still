@@ -18,6 +18,7 @@ S: MAR 4:38 @disciples
 N: Hear that question. Master, don't you care? That is not a question from people with no faith. That is a question from people who came to the right one and still could not understand why he was so quiet. Some of us have asked it in a hospital hallway. Some of us have asked it at the kitchen table with the bills spread out. The old saints asked it in the fields, and they kept on singing anyhow.
 N: Then he got up.
 S: MAR 4:39
+C: When I say God is good, you say, all the time. God is good. [PAUSE 3s | screen: "All the time"] And all the time. [PAUSE 3s | screen: "God is good"] He was good in that storm, and he was good when it went still.
 N: No long speech to that storm. A few words, and the wind laid down like a fussing baby in its mother's arms. The waves went flat. The whole lake went still, the kind of still you can hear.
 S: MAR 4:40
 N: He did not ask them to pretend they were never afraid. He asked them where their faith had gone, when he had been right there in the boat with them the whole time.
@@ -41,6 +42,7 @@ N: Stand still. Not because there was nothing to do. Because this part was not t
 N: Night came down. The angel of God moved from the front of the camp to the back, and the pillar of cloud went with him. It stood right between Israel and Egypt. On Egypt's side it was cloud and darkness. On Israel's side it gave light all night long. Same cloud, Church. Darkness on one side, light on the other.
 S: EXO 14:21
 S: EXO 14:22
+C: When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: "Yes he will"] Yes he will. [PAUSE 3s | screen: "Won’t he do it?"] He did it for them on that dry ground.
 N: Can you see them walking? Feet on dry ground where fish had been swimming that morning. Water standing up like walls on either side. Grandmothers holding children's hands. The old folks sang about this in the fields, "Go Down, Moses" and "Oh, Mary, Don't You Weep," and they sang it when there was no sea in sight and no way out that they could see.
 N: The Egyptians came in after them. Their chariot wheels came off, and they drove heavy. When the morning came, Moses stretched out his hand again, and the waters went back to their place. Israel stood safe on the far shore.
 S: EXO 14:31
@@ -64,6 +66,7 @@ S: DAN 6:19
 S: DAN 6:20 @king
 S: DAN 6:21 @daniel
 S: DAN 6:22 @daniel
+C: When I say our God is able, you say, yes he is. Our God is able. [PAUSE 3s | screen: "Yes he is"] Yes he is. [PAUSE 3s | screen: "Our God is able"] Daniel’s God was able in that den.
 S: DAN 6:23
 N: The old spiritual asks it plain: didn't my Lord deliver Daniel? And the answer comes right back. He did. The story does not say the den was not real or that the lions were not hungry. It says God sent his angel and shut their mouths, and Daniel trusted his God. Somebody is praying with the windows open tonight. Keep on praying.
 
@@ -86,7 +89,8 @@ N: And here is something. Those sailors did not want to do it. They rowed hard t
 S: JON 1:17
 S: JON 2:1
 S: JON 2:2 @jonah
-N: Somebody ought to say amen. Jonah prayed from inside that fish, the lowest place a man can be, and God heard him there. Not in the temple. Not dressed for church. Not with his life in order. From the bottom.
+C: Say it with me. Somebody say, thank you, Lord. [PAUSE 3s | screen: "Thank you, Lord"] Thank you, Lord. [PAUSE 3s | screen: "Thank you, Lord"] Jonah found his thank you in the belly of that fish.
+N: Jonah prayed from inside that fish, the lowest place a man can be, and God heard him there. Not in the temple. Not dressed for church. Not with his life in order. From the bottom.
 S: JON 2:10
 N: And there is a second chance in this story. The word of the LORD came to Jonah again, and this time he went. Running had not stopped God from calling. If you have been running, this story says God still knows your name.
 
@@ -109,6 +113,7 @@ N: The giant looked at him and sneered. Just a youth, ruddy in the face. And he 
 S: 1SA 17:45 @david
 S: 1SA 17:47 @david
 S: 1SA 17:49
+C: When I say whose battle is it, you say, the LORD's. Whose battle is it? [PAUSE 3s | screen: "The LORD’s"] The LORD's. [PAUSE 3s | screen: "Whose battle is it?"] That is what David told the giant.
 N: One stone. And the giant fell on his face to the earth. David had no sword in his hand that day. He had a sling, a stone, and a God he had already met out on the hillside with the sheep.
 N: Our grandmothers used to say, the giants don't get smaller, baby, your God gets bigger in your eyes. The story does not promise every battle ends like this one. It shows us where David's courage came from: the LORD who had been with him before.
 
@@ -134,6 +139,7 @@ N: Then they sat down to eat. Can you imagine? Their own brother down in a dry p
 S: GEN 37:26 @judah
 S: GEN 37:27 @judah
 S: GEN 37:28
+C: Say it with me. Somebody say, it is not over. [PAUSE 3s | screen: "It is not over"] It is not over. [PAUSE 3s | screen: "It is not over"] Not for Joseph, and not down in that pit.
 N: Twenty pieces of silver. That is what jealousy said a brother was worth. It is a hard story to sit with, Church. But it does not end in that pit. Joseph went down to Egypt, and a little later the Bible tells us the LORD was with Joseph there. Hold on to that. We are coming back for the rest.
 
 === core-007-prodigal-son | The Son Who Came Home
@@ -155,6 +161,7 @@ S: LUK 15:21 @younger-son
 S: LUK 15:22 @father
 S: LUK 15:23 @father
 S: LUK 15:24 @father
+C: When I say he was lost, you say, and is found. He was lost. [PAUSE 3s | screen: "And is found"] And is found. [PAUSE 3s | screen: "He was lost"] That is a father’s joy.
 N: But there is another son in this story. The elder son was out in the field, and when he came near the house he heard music and dancing. When he found out why, he got angry and would not go in. So the father went out to him too.
 S: LUK 15:29 @elder-son
 S: LUK 15:31 @father
@@ -176,6 +183,7 @@ S: RUT 1:14
 N: Orpah kissed her and went home, and nobody in this story fusses at her for it. She went back to her own people. But Ruth held on to that old woman and would not let go.
 S: RUT 1:16 @ruth
 S: RUT 1:17 @ruth
+C: Say it with me. Somebody say, your God, my God. [PAUSE 3s | screen: "Your God, my God"] Your God, my God. [PAUSE 3s | screen: "Your God, my God"] Ruth chose Naomi's people and Naomi's God, on a dusty road.
 N: Those are some of the most loved words in the whole Bible, and they came out of the mouth of a widow from Moab. Not a prophet. Not a priest. A young woman from across the border who would not let an old woman walk that road by herself. We read them at weddings now. She said them on a dusty road to her mother-in-law.
 N: When they came to Bethlehem, the whole town was stirred. The women asked, is this Naomi?
 S: RUT 1:20 @naomi
@@ -201,6 +209,7 @@ N: But if not. Church, some of the strongest faith in the Bible lives in those t
 N: The king got so mad his face changed. He told them to heat the furnace seven times hotter than usual. Strong men from his army tied up those three, still in their coats and hats, and threw them in.
 S: DAN 3:24 @nebuchadnezzar after "his counsellors, " until "They answered"
 S: DAN 3:25 @nebuchadnezzar
+C: Say it with me. Somebody say, look at God. [PAUSE 3s | screen: "Look at God"] Look at God. [PAUSE 3s | screen: "Look at God"] Three went in, and the king counted four.
 N: Four. They went in three, and the king counted four. The old folks would tell you he did not keep them out of the fire. He met them in it.
 N: The king came near the door of that furnace and called them out by name. They walked out. Not a hair on their heads was burned. Their coats were not scorched. They did not even smell like smoke.
 S: DAN 3:28 @nebuchadnezzar
@@ -228,4 +237,5 @@ N: The disciples thought that was a strange question, with all those people push
 N: And she knew she had been found. She was afraid, and she was trembling. But she did not run.
 S: MAR 5:33
 S: MAR 5:34
+C: When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: "Hallelujah"] Hallelujah. [PAUSE 3s | screen: "Glory"] Twelve years, and one hand reaching in faith.
 N: He could have let her slip away healed and nameless. But he called her daughter. He let her tell all the truth in front of everybody, while a worried father waited and a whole town watched. Then he sent her home in peace. That is the story, Church. Not only the healing. The being seen.

@@ -1,0 +1,301 @@
+{
+ "id": "core-027-widows-oil",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Widow's Oil",
+ "passage": {
+  "refs": [
+   "2KI 4:1-7"
+  ],
+  "label": "2 Kings 4:1-7"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "widow",
+   "name": "woman",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "elisha",
+   "name": "Elisha",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "widow",
+   "ref": "2KI 4:1",
+   "label": "2 Kings 4:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Now there cried a certain woman of the wives of the sons of the prophets unto Elisha, saying, Thy servant my husband is dead; and thou knowest that thy servant did fear the LORD: and the creditor is come to take unto him my two sons to be bondmen."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Now there cried a certain woman of the wives of the sons of the prophets unto Elisha, saying,"
+    },
+    {
+     "v": 1,
+     "speaker": "widow",
+     "text": "Thy servant my husband is dead; and thou knowest that thy servant did fear the LORD: and the creditor is come to take unto him my two sons to be bondmen."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Her husband had been one of the prophets, a man who feared the LORD. Now he was gone, and he had left a debt she could not pay. The creditor was coming to take her two sons as bondmen to work off what was owed."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She did not sit quietly with her trouble. She cried out to the prophet Elisha."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elisha",
+   "ref": "2KI 4:2",
+   "label": "2 Kings 4:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And Elisha said unto her, What shall I do for thee? tell me, what hast thou in the house? And she said, Thine handmaid hath not any thing in the house, save a pot of oil."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And Elisha said unto her,"
+    },
+    {
+     "v": 2,
+     "speaker": "elisha",
+     "text": "What shall I do for thee? tell me, what hast thou in the house?"
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And she said, Thine handmaid hath not any thing in the house, save a pot of oil."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She told him she had nothing in the house except one pot of oil. That is all. A single pot, and two sons, and a debt she could not pay."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elisha",
+   "ref": "2KI 4:3",
+   "label": "2 Kings 4:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Then he said, Go, borrow thee vessels abroad of all thy neighbours, even empty vessels; borrow not a few."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Then he said,"
+    },
+    {
+     "v": 3,
+     "speaker": "elisha",
+     "text": "Go, borrow thee vessels abroad of all thy neighbours, even empty vessels; borrow not a few."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "elisha",
+   "ref": "2KI 4:4",
+   "label": "2 Kings 4:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And when thou art come in, thou shalt shut the door upon thee and upon thy sons, and shalt pour out into all those vessels, and thou shalt set aside that which is full."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "elisha",
+     "text": "And when thou art come in, thou shalt shut the door upon thee and upon thy sons, and shalt pour out into all those vessels, and thou shalt set aside that which is full."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was a strange instruction. Borrow empty jars from all the neighbors. Not a few. Then go inside, close the door, and start pouring."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Think of what that meant. She had to go door to door and ask. Her neighbors would see her need. Then she had to trust God behind a closed door, with only her sons as witnesses."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:5",
+   "label": "2 Kings 4:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "So she went from him, and shut the door upon her and upon her sons, who brought the vessels to her; and she poured out."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "So she went from him, and shut the door upon her and upon her sons, who brought the vessels to her; and she poured out."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2KI 4:6",
+   "label": "2 Kings 4:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And it came to pass, when the vessels were full, that she said unto her son, Bring me yet a vessel. And he said unto her, There is not a vessel more. And the oil stayed."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And it came to pass, when the vessels were full, that she said unto her son, Bring me yet a vessel. And he said unto her, There is not a vessel more. And the oil stayed."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The oil kept flowing as long as there was an empty jar to fill. When the last jar was full, it stopped. The amount matched the room she had made for it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elisha",
+   "ref": "2KI 4:7",
+   "label": "2 Kings 4:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Then she came and told the man of God. And he said, Go, sell the oil, and pay thy debt, and live thou and thy children of the rest."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Then she came and told the man of God. And he said,"
+    },
+    {
+     "v": 7,
+     "speaker": "elisha",
+     "text": "Go, sell the oil, and pay thy debt, and live thou and thy children of the rest."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She went and told Elisha, the man of God. He told her to sell the oil, pay the debt, and live on what was left with her sons. Her boys were free. The household was saved."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "This is a story about God's care for a widow and her children in a desperate hour. It is not a promise that giving or pouring will make anyone rich. Elisha did not ask her for money, and she did not pay for a miracle. She brought her need to God's prophet, followed what she was told, and God provided enough to keep her family together."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice, too, the neighbors. Their empty jars became part of the miracle. Sometimes God's help comes through a community willing to lend what they have."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 537,
+ "est_seconds": 293,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.8",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 2 Kings 4:1-7; says outright it is not a promise that giving or pouring makes anyone rich; no seed-faith reading."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The widow is resourceful, not pitiable; the neighbours' jars honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

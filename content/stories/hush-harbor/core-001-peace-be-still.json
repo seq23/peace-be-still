@@ -130,6 +130,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say God is good, you say, all the time. God is good. [PAUSE 3s | screen: \"All the time\"] And all the time. [PAUSE 3s | screen: \"God is good\"] He was good in that storm, and he was good when it went still.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "All the time"
+    },
+    {
+     "seconds": 3,
+     "screen": "God is good"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "No long speech to that storm. A few words, and the wind laid down like a fussing baby in its mother's arms. The waves went flat. The whole lake went still, the kind of still you can hear."
@@ -195,8 +210,8 @@
   "file": null,
   "qa": null
  },
- "words": 497,
- "est_seconds": 271,
+ "words": 529,
+ "est_seconds": 295,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -215,11 +230,11 @@
    "speakers": "pass",
    "voice_segments": "pass",
    "S10_shelf": "pass",
-   "S11_length": "note: 497 words outside 500-900 words",
+   "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.4",
+   "S11_reading_level": "note: grade 2.2",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

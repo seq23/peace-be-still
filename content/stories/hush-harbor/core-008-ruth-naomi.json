@@ -156,6 +156,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, your God, my God. [PAUSE 3s | screen: \"Your God, my God\"] Your God, my God. [PAUSE 3s | screen: \"Your God, my God\"] Ruth chose Naomi's people and Naomi's God, on a dusty road.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Your God, my God"
+    },
+    {
+     "seconds": 3,
+     "screen": "Your God, my God"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "Those are some of the most loved words in the whole Bible, and they came out of the mouth of a widow from Moab. Not a prophet. Not a priest. A young woman from across the border who would not let an old woman walk that road by herself. We read them at weddings now. She said them on a dusty road to her mother-in-law."
@@ -246,8 +261,8 @@
   "file": null,
   "qa": null
  },
- "words": 518,
- "est_seconds": 283,
+ "words": 543,
+ "est_seconds": 302,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -270,7 +285,7 @@
    "S11_sentence_length": "pass",
    "S11_reading_level": "note: grade 2.6",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

@@ -1,0 +1,340 @@
+{
+ "id": "core-025-shepherds",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Night the Shepherds Heard",
+ "passage": {
+  "refs": [
+   "LUK 2:1-20"
+  ],
+  "label": "Luke 2:1-20"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "shepherds",
+   "name": "shepherds",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "In those days, Caesar Augustus ordered a census of the whole Roman world. Everyone had to go to their own town to be counted. So Joseph went up from Nazareth in Galilee to Bethlehem, the city of David, because he was of David's family line. He took Mary with him. She was expecting a child."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:6",
+   "label": "Luke 2:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And so it was, that, while they were there, the days were accomplished that she should be delivered."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And so it was, that, while they were there, the days were accomplished that she should be delivered."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:7",
+   "label": "Luke 2:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And she brought forth her firstborn son, and wrapped him in swaddling clothes, and laid him in a manger; because there was no room for them in the inn."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And she brought forth her firstborn son, and wrapped him in swaddling clothes, and laid him in a manger; because there was no room for them in the inn."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The Son of God was born where the animals were fed and laid in a feeding trough, because there was no room anywhere else. Heaven's King arrived quietly, among the animals, with no one important there to see."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:8",
+   "label": "Luke 2:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And there were in the same country shepherds abiding in the field, keeping watch over their flock by night."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And there were in the same country shepherds abiding in the field, keeping watch over their flock by night."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Shepherds were working people. They slept outside with their flocks. Of all the people God could have told first, he told them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:9",
+   "label": "Luke 2:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And, lo, the angel of the Lord came upon them, and the glory of the Lord shone round about them: and they were sore afraid."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And, lo, the angel of the Lord came upon them, and the glory of the Lord shone round about them: and they were sore afraid."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:10",
+   "label": "Luke 2:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And the angel said unto them, Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And the angel said unto them, Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:11",
+   "label": "Luke 2:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "For unto you is born this day in the city of David a Saviour, which is Christ the Lord."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "For unto you is born this day in the city of David a Saviour, which is Christ the Lord."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Good news of great joy, for all people. Not only to the important or the powerful, but to all people, starting with shepherds on a hillside at night."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The angel told them how they would know him. They would find a newborn baby, wrapped up snug and lying in a manger."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:13",
+   "label": "Luke 2:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And suddenly there was with the angel a multitude of the heavenly host praising God, and saying,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And suddenly there was with the angel a multitude of the heavenly host praising God, and saying,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:14",
+   "label": "Luke 2:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Glory to God in the highest, and on earth peace, good will toward men."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Glory to God in the highest, and on earth peace, good will toward men."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagine the silence after the angels went back into heaven. The dark hillside. The sheep. And a group of shepherds looking at each other."
+  },
+  {
+   "type": "scripture",
+   "speaker": "shepherds",
+   "ref": "LUK 2:15",
+   "label": "Luke 2:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And it came to pass, as the angels were gone away from them into heaven, the shepherds said one to another, Let us now go even unto Bethlehem, and see this thing which is come to pass, which the Lord hath made known unto us."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And it came to pass, as the angels were gone away from them into heaven, the shepherds said one to another,"
+    },
+    {
+     "v": 15,
+     "speaker": "shepherds",
+     "text": "Let us now go even unto Bethlehem, and see this thing which is come to pass, which the Lord hath made known unto us."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They did not wait for morning. They hurried into Bethlehem and found Mary and Joseph, with the baby in the manger, just as they had been told."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then they told everyone what they had heard about this child. Everyone who heard them wondered at what the shepherds said. And the shepherds went back to their fields glorifying and praising God for all they had heard and seen."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 2:19",
+   "label": "Luke 2:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "But Mary kept all these things, and pondered them in her heart."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "But Mary kept all these things, and pondered them in her heart."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mary treasured all of it and turned it over in her heart. While the shepherds were telling everyone, she held the night quietly and thought it over."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The first Christmas was not loud. It was a young mother, a manger, a few shepherds and a sky full of praise. The good news came first to ordinary people on a working night, and they went to see for themselves."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 547,
+ "est_seconds": 298,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 2:1-20; angels' words only in KJV blocks; no extra-biblical detail (no innkeeper, no animals named)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Working people honoured as the first to hear; plain and warm."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
