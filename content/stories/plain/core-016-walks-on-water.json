@@ -299,7 +299,7 @@
    "S11_sentence_length": "pass",
    "S11_reading_level": "note: grade 3.1",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

@@ -232,9 +232,24 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, thank you, Lord. [PAUSE 3s | screen: \"Thank you, Lord\"] Thank you, Lord. [PAUSE 3s | screen: \"Thank you, Lord\"] Jonah found his thank you in the belly of that fish.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Thank you, Lord"
+    },
+    {
+     "seconds": 3,
+     "screen": "Thank you, Lord"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
-   "text": "Somebody ought to say amen. Jonah prayed from inside that fish, the lowest place a man can be, and God heard him there. Not in the temple. Not dressed for church. Not with his life in order. From the bottom."
+   "text": "Jonah prayed from inside that fish, the lowest place a man can be, and God heard him there. Not in the temple. Not dressed for church. Not with his life in order. From the bottom."
   },
   {
    "type": "scripture",
@@ -267,8 +282,8 @@
   "file": null,
   "qa": null
  },
- "words": 545,
- "est_seconds": 297,
+ "words": 563,
+ "est_seconds": 313,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -289,9 +304,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.2",
+   "S11_reading_level": "note: grade 2.1",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

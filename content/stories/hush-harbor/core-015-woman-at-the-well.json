@@ -251,9 +251,24 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, come and see. [PAUSE 3s | screen: \"Come and see\"] Come and see. [PAUSE 3s | screen: \"Come and see\"] That was her whole sermon.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Come and see"
+    },
+    {
+     "seconds": 3,
+     "screen": "Come and see"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
-   "text": "A Samaritan woman with a complicated past became the one who carried this news to her whole town, and many believed because of what she said. Can I get a witness? Jesus met her where she was, told her the truth with kindness, and sent her home with a testimony."
+   "text": "A Samaritan woman with a complicated past became the one who carried this news to her whole town, and many believed because of what she said. Jesus met her where she was, told her the truth with kindness, and sent her home with a testimony."
   }
  ],
  "illustration": {
@@ -261,8 +276,8 @@
   "file": null,
   "qa": null
  },
- "words": 544,
- "est_seconds": 297,
+ "words": 556,
+ "est_seconds": 309,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -283,9 +298,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 3.8",
+   "S11_reading_level": "note: grade 3.6",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

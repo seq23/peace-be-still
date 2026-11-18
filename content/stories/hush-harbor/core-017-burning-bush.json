@@ -155,6 +155,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he heard their cry. [PAUSE 3s | screen: \"He heard their cry\"] He heard their cry. [PAUSE 3s | screen: \"He heard their cry\"] Not one cry in Egypt was lost on him.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He heard their cry"
+    },
+    {
+     "seconds": 3,
+     "screen": "He heard their cry"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "I have seen. I have heard. I know. Church, God had not forgotten his people down in Egypt. Their crying had reached him. He told Moses he had come down to bring them out, into a good land. Then he told Moses he was sending him to Pharaoh."
@@ -230,8 +245,8 @@
   "file": null,
   "qa": null
  },
- "words": 549,
- "est_seconds": 299,
+ "words": 572,
+ "est_seconds": 318,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -252,9 +267,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.5",
+   "S11_reading_level": "note: grade 2.4",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

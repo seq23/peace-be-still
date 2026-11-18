@@ -169,6 +169,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say yes. [PAUSE 3s | screen: \"Yes\"] Yes. [PAUSE 3s | screen: \"Yes\"] Esther said yes when it could have cost her everything.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Yes"
+    },
+    {
+     "seconds": 3,
+     "screen": "Yes"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "The king held out the sceptre, and Esther came near and touched the top of it. The door that could have closed on her opened instead. Her courage started a turning that would save her people."
@@ -176,7 +191,7 @@
   {
    "type": "retelling",
    "speaker": "narrator",
-   "text": "Esther's story is not about having no fear. It is about being afraid and going anyway, after prayer and fasting, with folks standing behind you. Somebody ought to say amen. She used the place she had been given for the good of her people."
+   "text": "Esther's story is not about having no fear. It is about being afraid and going anyway, after prayer and fasting, with folks standing behind you. She used the place she had been given for the good of her people."
   }
  ],
  "illustration": {
@@ -184,8 +199,8 @@
   "file": null,
   "qa": null
  },
- "words": 574,
- "est_seconds": 313,
+ "words": 587,
+ "est_seconds": 326,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -206,9 +221,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "pass",
+   "S11_reading_level": "note: grade 3.9",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

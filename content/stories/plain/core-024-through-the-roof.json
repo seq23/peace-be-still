@@ -1,0 +1,276 @@
+{
+ "id": "core-024-through-the-roof",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Friends Who Opened the Roof",
+ "passage": {
+  "refs": [
+   "MAR 2:1-12"
+  ],
+  "label": "Mark 2:1-12"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "scribes",
+   "name": "the scribes",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "crowd",
+   "name": "they all",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus came back to Capernaum, and word spread that he was in a house there. So many people gathered that there was no room left, not even around the door. Jesus spoke the word to them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:3",
+   "label": "Mark 2:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And they come unto him, bringing one sick of the palsy, which was borne of four."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And they come unto him, bringing one sick of the palsy, which was borne of four."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Four friends carried a man who could not walk. They carried him on a mat, hoping to get him to Jesus. But when they arrived, they could not get through the crowd."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:4",
+   "label": "Mark 2:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And when they could not come nigh unto him for the press, they uncovered the roof where he was: and when they had broken it up, they let down the bed wherein the sick of the palsy lay."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And when they could not come nigh unto him for the press, they uncovered the roof where he was: and when they had broken it up, they let down the bed wherein the sick of the palsy lay."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Most people would have turned back. These friends climbed up onto the roof and opened it right above where Jesus was. Imagine the dust and pieces falling, everyone looking up, and then a man on a mat being lowered down on ropes, right into the middle of the room."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:5",
+   "label": "Mark 2:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "When Jesus saw their faith, he said unto the sick of the palsy, Son, thy sins be forgiven thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "When Jesus saw their faith, he said unto the sick of the palsy, Son, thy sins be forgiven thee."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice whose faith Jesus saw. Their faith. The man on the mat could not get himself there. His friends carried him, refused to give up, and found another way in. Sometimes faith looks like friends who will carry you when you cannot walk."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "But Jesus said something no one expected. Before he said anything about the man's legs, he said his sins were forgiven."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:6",
+   "label": "Mark 2:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "But there were certain of the scribes sitting there, and reasoning in their hearts,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "But there were certain of the scribes sitting there, and reasoning in their hearts,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "scribes",
+   "ref": "MAR 2:7",
+   "label": "Mark 2:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Why doth this man thus speak blasphemies? who can forgive sins but God only?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "scribes",
+     "text": "Why doth this man thus speak blasphemies? who can forgive sins but God only?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus knew what they were thinking. He asked them which was easier, to tell this man his sins were forgiven, or to tell him to get up and walk. Then he said he would show them that the Son of man had power on earth to forgive sins."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:11",
+   "label": "Mark 2:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "I say unto thee, Arise, and take up thy bed, and go thy way into thine house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "I say unto thee, Arise, and take up thy bed, and go thy way into thine house."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "crowd",
+   "ref": "MAR 2:12",
+   "label": "Mark 2:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And immediately he arose, took up the bed, and went forth before them all; insomuch that they were all amazed, and glorified God, saying, We never saw it on this fashion."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And immediately he arose, took up the bed, and went forth before them all; insomuch that they were all amazed, and glorified God, saying,"
+    },
+    {
+     "v": 12,
+     "speaker": "crowd",
+     "text": "We never saw it on this fashion."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The man who was carried in walked out, carrying his own mat. He went out in front of all of them. The crowd that had blocked the door now stepped aside to let him through."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "This story gives us two pictures. One is of Jesus, who sees the whole person and speaks to the deepest need first. The other is of four friends whose names we never learn. They did not preach or argue. They carried, they climbed, they made a hole in a roof. And Jesus saw their faith."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 468,
+ "est_seconds": 255,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 468 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.3",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 2:1-12; forgiveness and healing both kept, no promise of healing to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Disability shown with dignity; the man is not a prop, his friends are honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Pastor pass: cut an invented 'long way' and a flat-roof claim; the text says they uncovered the roof.",
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -91,6 +91,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say blessed be, you say, the name of the LORD. Blessed be. [PAUSE 3s | screen: \"The name of the LORD\"] The name of the LORD. [PAUSE 3s | screen: \"Blessed be\"] Job said it on the worst day of his life.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "The name of the LORD"
+    },
+    {
+     "seconds": 3,
+     "screen": "Blessed be"
+    }
+   ]
+  },
+  {
    "type": "scripture",
    "speaker": "narrator",
    "ref": "JOB 1:22",
@@ -186,8 +201,8 @@
   "file": null,
   "qa": null
  },
- "words": 528,
- "est_seconds": 288,
+ "words": 557,
+ "est_seconds": 310,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -208,9 +223,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.3",
+   "S11_reading_level": "note: grade 2.2",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

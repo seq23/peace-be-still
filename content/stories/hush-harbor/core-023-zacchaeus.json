@@ -1,0 +1,341 @@
+{
+ "id": "core-023-zacchaeus",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Zacchaeus, Come Down",
+ "passage": {
+  "refs": [
+   "LUK 19:1-10"
+  ],
+  "label": "Luke 19:1-10"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "zacchaeus",
+   "name": "Zacchæus",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "crowd",
+   "name": "they",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus was passing through Jericho on his way to Jerusalem, and the crowds lined the road to see him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:2",
+   "label": "Luke 19:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And, behold, there was a man named Zacchæus, which was the chief among the publicans, and he was rich."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And, behold, there was a man named Zacchæus, which was the chief among the publicans, and he was rich."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Zacchaeus was the chief of the tax collectors, and he was rich. The people of Jericho did not think much of him. Wait till you hear what the crowd called him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:3",
+   "label": "Luke 19:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And he sought to see Jesus who he was; and could not for the press, because he was little of stature."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And he sought to see Jesus who he was; and could not for the press, because he was little of stature."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:4",
+   "label": "Luke 19:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And he ran before, and climbed up into a sycomore tree to see him: for he was to pass that way."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And he ran before, and climbed up into a sycomore tree to see him: for he was to pass that way."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Picture it. A grown man, a wealthy man, running ahead of the crowd and climbing up a tree like a little boy. He did not care how it looked. He wanted to see Jesus."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Jesus came to that spot, stopped, and looked up."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:5",
+   "label": "Luke 19:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And when Jesus came to the place, he looked up, and saw him, and said unto him, Zacchæus, make haste, and come down; for to day I must abide at thy house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And when Jesus came to the place, he looked up, and saw him, and said unto him, Zacchæus, make haste, and come down; for to day I must abide at thy house."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He called him by name, Church. Out of that whole crowd, he picked the one most of them would have walked right past. And he did not just say hello. He invited himself to dinner. Today I must abide at thy house."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:6",
+   "label": "Luke 19:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And he made haste, and came down, and received him joyfully."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And he made haste, and came down, and received him joyfully."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, make haste. [PAUSE 3s | screen: \"Make haste\"] Make haste. [PAUSE 3s | screen: \"Make haste\"] Zacchaeus came down that tree, and he came down joyful.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Make haste"
+    },
+    {
+     "seconds": 3,
+     "screen": "Make haste"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "crowd",
+   "ref": "LUK 19:7",
+   "label": "Luke 19:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And when they saw it, they all murmured, saying, That he was gone to be guest with a man that is a sinner."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And when they saw it, they all murmured, saying,"
+    },
+    {
+     "v": 7,
+     "speaker": "crowd",
+     "text": "That he was gone to be guest with a man that is a sinner."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The crowd fussed. To them, Zacchaeus was a sinner, and a good teacher had no business eating at his table. But Jesus was not worried about what the crowd thought."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Something happened in Zacchaeus when Jesus called his name and came to his house. Nobody in the story tells him what to do next. He stood up on his own."
+  },
+  {
+   "type": "scripture",
+   "speaker": "zacchaeus",
+   "ref": "LUK 19:8",
+   "label": "Luke 19:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And Zacchæus stood, and said unto the Lord; Behold, Lord, the half of my goods I give to the poor; and if I have taken any thing from any man by false accusation, I restore him fourfold."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And Zacchæus stood, and said unto the Lord;"
+    },
+    {
+     "v": 8,
+     "speaker": "zacchaeus",
+     "text": "Behold, Lord, the half of my goods I give to the poor; and if I have taken any thing from any man by false accusation, I restore him fourfold."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Half of everything to the poor. Four times back to anybody he cheated. That is not a little apology. That is a turned-around life. Grace came first, and the change came after."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:9",
+   "label": "Luke 19:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And Jesus said unto him, This day is salvation come to this house, forsomuch as he also is a son of Abraham."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And Jesus said unto him, This day is salvation come to this house, forsomuch as he also is a son of Abraham."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 19:10",
+   "label": "Luke 19:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "For the Son of man is come to seek and to save that which was lost."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "For the Son of man is come to seek and to save that which was lost."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Zacchaeus went looking for Jesus, but the story shows that Jesus was looking for him too. A short man up a sycamore tree, looked down on by his whole town, was seen, called by name and welcomed home."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 488,
+ "est_seconds": 272,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 488 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.1",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 19:1-10; grace before change; no prosperity reading."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Make haste' call is the verse's own word; his height told without mockery."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

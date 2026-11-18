@@ -153,6 +153,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say all the time, you say, God is good. All the time. [PAUSE 3s | screen: \"God is good\"] God is good. [PAUSE 3s | screen: \"All the time\"] He looked at all he made and called it very good.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "God is good"
+    },
+    {
+     "seconds": 3,
+     "screen": "All the time"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "Notice the difference. After each day, God saw that it was good. But when he looked at all of it together, with people in it, he saw that it was very good."
@@ -193,8 +208,8 @@
   "file": null,
   "qa": null
  },
- "words": 493,
- "est_seconds": 269,
+ "words": 521,
+ "est_seconds": 290,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -213,11 +228,11 @@
    "speakers": "pass",
    "voice_segments": "pass",
    "S10_shelf": "pass",
-   "S11_length": "note: 493 words outside 500-900 words",
+   "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.5",
+   "S11_reading_level": "note: grade 2.3",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

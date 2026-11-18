@@ -99,7 +99,7 @@ function finalize(item, checks, review) {
 //   until "phrase"   speech stops before this phrase; the rest of the verse is narration (another speaker)
 const INTRO = {
   en: /\b(?:said|saith|say|saying|answered|spake|cried)(?: moreover)?(?: (?:the |his )?[A-Za-z-]+(?: of [A-Z][a-z]+)?)?(?: (?:unto|to|before|one to) [^,:;]{1,40})?,\s+/,
-  es: /\b(?:dijo|dijeron|dice|dicen|respondi[óo]|respondieron|habl[óo]|diciendo|clam[óo]|clamaron)\b[^:.]{0,80}:\s+/,
+  es: /\b(?:dijo|dijeron|dice|dicen|dec[íi]a|dec[íi]an|respondi[óo]|respondieron|respond[íi]a|habl[óo]|diciendo|clam[óo]|clamaron|a[ñn]adi[óo])\b[^:.]{0,80}:\s+/,
 };
 const RESUME = {
   en: /[.?!:;,]\s+(?=(?:[Aa]nd|Then|But|So) (?:he|she|they|his|her|the|[A-Z][a-z]+)\b[^,]{0,40}?\b(?:said|saith|answered|came|could|cried|spake)\b)/,
@@ -152,8 +152,9 @@ export function speechSegments(vs, speaker, lang, mods, id = "") {
 function buildStory(it, telling) {
   const lang = TELLING_LANG[telling] || telling;
   const cast = (it.fields.cast?.[0] || "").split(";").map((s) => s.trim()).filter(Boolean).map((s) => { const [id, name, age, gender] = s.split("|").map((x) => x.trim()); return { id, name, age, gender }; });
-  const blocks = it.seq.filter(([k]) => k === "N" || k === "S").map(([k, v]) => {
+  const blocks = it.seq.filter(([k]) => k === "N" || k === "S" || k === "C").map(([k, v]) => {
     if (k === "N") return { type: "retelling", speaker: "narrator", text: v };
+    if (k === "C") return { type: "call_response", speaker: "narrator", text: v, pauses: [...v.matchAll(/\[PAUSE (\d+)s \| screen: "([^"]+)"\]/g)].map((m) => ({ seconds: +m[1], screen: m[2] })) };
     const m = v.match(/^(\S+ \d+:\d+(?:-\d+)?)\s*(?:@(\S+))?\s*(.*)$/);
     if (!m) throw new Error(`SRC_SCRIPTURE ${it.id}: ${v}`);
     const mods = { whole: /\bwhole\b/.test(m[3]), after: (m[3].match(/after "([^"]+)"/) || [])[1], until: (m[3].match(/until "([^"]+)"/) || [])[1] };
@@ -161,15 +162,16 @@ function buildStory(it, telling) {
     return { type: "scripture", speaker, ...p, segments: speechSegments(p.verses, speaker, lang, mods, it.id) };
   });
   const refs = one(it, "passage", "").split(";").map((s) => s.trim()).filter(Boolean);
-  const spoken = blocks.map((b) => (b.type === "retelling" ? b.text : b.verses.map((v) => v.text).join(" "))).join(" ");
+  const spoken = blocks.map((b) => (b.type === "scripture" ? b.verses.map((v) => v.text).join(" ") : b.text.replace(/\[PAUSE[^\]]*\]/g, " "))).join(" ");
   const n = words(spoken).length;
+  const quiet = blocks.filter((b) => b.pauses).reduce((a, b) => a + b.pauses.reduce((x, p) => x + p.seconds, 0), 0);
   return {
     id: it.id, kind: "story", telling, journey: JOURNEY.story[telling], door: "gods-word", lang, title: it.title,
     passage: { refs, label: refs.map((r) => label(r, lang)).join("; ") },
     shelf: one(it, "shelf", "adult"), content: { violence: one(it, "violence", "none"), sexual: one(it, "sexual", "none") },
     ai_label: AI_LABEL.story, cast, framing_names: [], blocks,
     illustration: { status: "none", file: null, qa: null },
-    words: n, est_seconds: Math.round((n / 110) * 60),
+    words: n, est_seconds: Math.round((n / 110) * 60 + quiet),
   };
 }
 
@@ -329,7 +331,8 @@ N: The day was done, and the lake lay wide and dark. Jesus said they should cros
 N: A great storm of wind came up. The waves beat into the boat, and it was now full.
 S: MAR 4:38 @disciples
 S: MAR 4:39
-N: Somebody ought to say amen. The same voice that spoke to the sea still calls to the frightened heart.
+C: When I say God is good, you say, all the time. God is good. [PAUSE 3s | screen: "All the time"] And all the time. [PAUSE 3s | screen: "God is good"] He was good in that boat.
+N: The same voice that spoke to the sea still calls to the frightened heart.
 `)[0];
   const mk = (patch) => { const s = buildStory(good, "hush-harbor"); patch(s); return checkStory(s); };
   const base = mk(() => {});
@@ -352,7 +355,10 @@ N: Somebody ought to say amen. The same voice that spoke to the sea still calls 
     ["S10_shelf", (s) => { delete s.content.violence; }],
     ["S13_ai_label", (s) => { delete s.ai_label; }],
     ["no_invented_memories", (s) => { s.blocks[0].text += " My grandmother used to hum it."; }],
-    ["callouts", (s) => { s.blocks[s.blocks.length - 1].text += " Can I get an amen?"; }],
+    ["call_response", (s) => { s.blocks[s.blocks.length - 1].text += " Can I get an amen?"; }],
+    ["call_response", (s) => { s.blocks.pop(); }],
+    ["call_response", (s) => { s.blocks[s.blocks.length - 2].pauses = []; }],
+    ["call_response", (s) => { s.blocks.splice(0, 0, s.blocks[s.blocks.length - 2]); }],
     ["voice_segments", (s) => { s.blocks[2].segments = [{ v: 38, speaker: "disciples", text: s.blocks[2].verses[0].text }]; }],
     ["voice_segments", (s) => { s.blocks[2].segments[1].text += " extra"; }],
   ];

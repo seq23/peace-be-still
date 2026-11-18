@@ -200,6 +200,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, look at God. [PAUSE 3s | screen: \"Look at God\"] Look at God. [PAUSE 3s | screen: \"Look at God\"] Three went in, and the king counted four.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Look at God"
+    },
+    {
+     "seconds": 3,
+     "screen": "Look at God"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "Four. They went in three, and the king counted four. The old folks would tell you he did not keep them out of the fire. He met them in it."
@@ -245,8 +260,8 @@
   "file": null,
   "qa": null
  },
- "words": 573,
- "est_seconds": 313,
+ "words": 593,
+ "est_seconds": 329,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -267,9 +282,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.2",
+   "S11_reading_level": "note: grade 2.0",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

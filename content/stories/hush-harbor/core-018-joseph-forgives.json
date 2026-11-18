@@ -230,6 +230,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say they meant it for evil, you say, God meant it for good. They meant it for evil. [PAUSE 3s | screen: \"God meant it for good\"] God meant it for good. [PAUSE 3s | screen: \"They meant it for evil\"] That is what Joseph told his brothers.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "God meant it for good"
+    },
+    {
+     "seconds": 3,
+     "screen": "They meant it for evil"
+    }
+   ]
+  },
+  {
    "type": "scripture",
    "speaker": "joseph",
    "ref": "GEN 50:21",
@@ -265,8 +280,8 @@
   "file": null,
   "qa": null
  },
- "words": 562,
- "est_seconds": 307,
+ "words": 594,
+ "est_seconds": 330,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -287,9 +302,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 3.6",
+   "S11_reading_level": "note: grade 3.4",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

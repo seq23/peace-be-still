@@ -1,0 +1,291 @@
+{
+ "id": "core-024-through-the-roof",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "They Tore Up the Roof",
+ "passage": {
+  "refs": [
+   "MAR 2:1-12"
+  ],
+  "label": "Mark 2:1-12"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "scribes",
+   "name": "the scribes",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "crowd",
+   "name": "they all",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus came back to Capernaum, and the word got out that he was in a house there. So many people packed in that there was no room left, not even around the door. And Jesus preached the word to them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:3",
+   "label": "Mark 2:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And they come unto him, bringing one sick of the palsy, which was borne of four."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And they come unto him, bringing one sick of the palsy, which was borne of four."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Four friends were carrying a man who could not walk. They carried him on a mat, hoping to get him to Jesus. But when they got there, they could not get through that crowd."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:4",
+   "label": "Mark 2:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And when they could not come nigh unto him for the press, they uncovered the roof where he was: and when they had broken it up, they let down the bed wherein the sick of the palsy lay."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And when they could not come nigh unto him for the press, they uncovered the roof where he was: and when they had broken it up, they let down the bed wherein the sick of the palsy lay."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Now most folks would have turned around and gone home. These four went up. They climbed onto that roof and opened it up right over where Jesus was. Can you see the dust coming down, everybody looking up, and then a man on a mat coming down on ropes into the middle of the room?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:5",
+   "label": "Mark 2:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "When Jesus saw their faith, he said unto the sick of the palsy, Son, thy sins be forgiven thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "When Jesus saw their faith, he said unto the sick of the palsy, Son, thy sins be forgiven thee."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look whose faith Jesus saw. Their faith. The man on the mat could not get himself there. His friends carried him, would not quit, and found another way in. Church, everybody needs some friends who will carry you when you cannot walk, and tear up a roof if they have to."
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, carry somebody. [PAUSE 3s | screen: \"Carry somebody\"] Carry somebody. [PAUSE 3s | screen: \"Carry somebody\"] Four friends carried one man all the way to Jesus.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Carry somebody"
+    },
+    {
+     "seconds": 3,
+     "screen": "Carry somebody"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "But Jesus said something nobody expected. Before he said a word about that man's legs, he said his sins were forgiven."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:6",
+   "label": "Mark 2:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "But there were certain of the scribes sitting there, and reasoning in their hearts,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "But there were certain of the scribes sitting there, and reasoning in their hearts,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "scribes",
+   "ref": "MAR 2:7",
+   "label": "Mark 2:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Why doth this man thus speak blasphemies? who can forgive sins but God only?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "scribes",
+     "text": "Why doth this man thus speak blasphemies? who can forgive sins but God only?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus knew what they were thinking. He asked them which was easier, to tell this man his sins were forgiven, or to tell him to get up and walk. Then he said he would show them that the Son of man had power on earth to forgive sins."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:11",
+   "label": "Mark 2:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "I say unto thee, Arise, and take up thy bed, and go thy way into thine house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "I say unto thee, Arise, and take up thy bed, and go thy way into thine house."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "crowd",
+   "ref": "MAR 2:12",
+   "label": "Mark 2:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And immediately he arose, took up the bed, and went forth before them all; insomuch that they were all amazed, and glorified God, saying, We never saw it on this fashion."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And immediately he arose, took up the bed, and went forth before them all; insomuch that they were all amazed, and glorified God, saying,"
+    },
+    {
+     "v": 12,
+     "speaker": "crowd",
+     "text": "We never saw it on this fashion."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The man who got carried in walked out carrying his own mat, right in front of all of them. The same crowd that blocked the door had to step aside and let him through."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "This story gives us two pictures. One is Jesus, who sees the whole person and speaks to the deepest need first. The other is four friends whose names we never learn. They did not preach. They did not argue. They carried, they climbed, and they made a hole in a roof. And Jesus saw their faith."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 508,
+ "est_seconds": 283,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 2:1-12; no promise of healing to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Disability shown with dignity; 'carry somebody' honours the friends, not pity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

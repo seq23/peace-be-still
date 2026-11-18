@@ -237,12 +237,12 @@ def render(item: dict, pron: dict, wav: Path, speed: float) -> None:
         raise RuntimeError(f"render failed: {r.stderr.strip()[-300:]}")
 
 
-def encode(wav: Path, out: Path, level: str) -> None:
-    """Gain to the level's target, a peak limiter under its true-peak ceiling, AAC-LC mono 48 kbps."""
+def encode(wav: Path, out: Path, level: str, margin_db: float = 1.5) -> None:
+    """Gain to the level's target, a peak limiter `margin_db` under its true-peak ceiling, AAC-LC mono 48 kbps."""
     import qa
     target, tp = LEVEL_TARGET[level]
     gain = round(target - qa.loudness(wav)["lufs"], 2)
-    limit = round(10 ** ((tp - 1.5) / 20), 4)
+    limit = round(10 ** ((tp - margin_db) / 20), 4)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af",
                     f"volume={gain}dB,alimiter=limit={limit}:attack=5:release=50:level=false",
                     "-ac", "1", "-ar", "24000", "-c:a", "aac_at", "-b:a", "48k", "-movflags", "+faststart", str(out)],
@@ -269,20 +269,21 @@ def rclone(*args: str, timeout: int = 600) -> subprocess.CompletedProcess:
     return subprocess.run(["rclone", *args], capture_output=True, text=True, timeout=timeout)
 
 
-def drive_reachable() -> None:
+def drive_reachable(shelf: str | None = None) -> None:
+    shelf = shelf or SHELF
     try:
-        r = rclone("lsjson", "--max-depth", "1", SHELF.rsplit("/", 1)[0], timeout=120)
+        r = rclone("lsjson", "--max-depth", "1", shelf.split("/", 1)[0], timeout=120)
     except subprocess.TimeoutExpired:
-        raise NamedStop("DRIVE_UNREACHABLE", f"rclone could not list {SHELF} in 2 minutes; nothing was voiced. "
+        raise NamedStop("DRIVE_UNREACHABLE", f"rclone could not list {shelf} in 2 minutes; nothing was voiced. "
                         "Check the Mac's network and `rclone lsd gdrive:` (re-auth with `rclone config reconnect gdrive:`).")
     if r.returncode != 0:
-        raise NamedStop("DRIVE_UNREACHABLE", f"rclone could not reach {SHELF}: {r.stderr.strip()[-200:]}; nothing was voiced. "
+        raise NamedStop("DRIVE_UNREACHABLE", f"rclone could not reach {shelf}: {r.stderr.strip()[-200:]}; nothing was voiced. "
                         "Re-auth with `rclone config reconnect gdrive:` on the Mac.")
 
 
-def shelve(local: Path, rel: str) -> str:
+def shelve(local: Path, rel: str, shelf: str | None = None) -> str:
     """rclone copy + size and md5 check; returns the Drive path. Any miss is a NAMED STOP."""
-    dest = f"{SHELF}/{rel}"
+    dest = f"{shelf or SHELF}/{rel}"
     try:
         r = rclone("copyto", str(local), dest, timeout=1800)
     except subprocess.TimeoutExpired:

@@ -225,6 +225,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, immediately. [PAUSE 3s | screen: \"Immediately\"] Immediately. [PAUSE 3s | screen: \"Immediately\"] Jesus did not wait to reach for Peter.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Immediately"
+    },
+    {
+     "seconds": 3,
+     "screen": "Immediately"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "Immediately. Jesus did not wait for Peter to sink further. He did not make him swim back to the boat. He reached out his hand and caught him. Then he asked him, gentle, why he doubted."
@@ -275,8 +290,8 @@
   "file": null,
   "qa": null
  },
- "words": 504,
- "est_seconds": 275,
+ "words": 520,
+ "est_seconds": 290,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -297,9 +312,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.8",
+   "S11_reading_level": "note: grade 3.1",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

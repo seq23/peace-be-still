@@ -159,6 +159,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, one thing is needful. [PAUSE 3s | screen: \"One thing is needful\"] One thing is needful. [PAUSE 3s | screen: \"One thing is needful\"] Sit down a minute, Martha.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "One thing is needful"
+    },
+    {
+     "seconds": 3,
+     "screen": "One thing is needful"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "Martha, Martha. He said her name twice, soft, the way you talk to somebody you love. He saw how careful and troubled she was about so many things. And he told her only one thing was needed."
@@ -184,8 +199,8 @@
   "file": null,
   "qa": null
  },
- "words": 483,
- "est_seconds": 263,
+ "words": 502,
+ "est_seconds": 280,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -204,11 +219,11 @@
    "speakers": "pass",
    "voice_segments": "pass",
    "S10_shelf": "pass",
-   "S11_length": "note: 483 words outside 500-900 words",
+   "S11_length": "pass",
    "S11_sentence_length": "pass",
    "S11_reading_level": "note: grade 3.4",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

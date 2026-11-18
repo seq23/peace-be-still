@@ -276,6 +276,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: \"Hallelujah\"] Hallelujah. [PAUSE 3s | screen: \"Glory\"] Twelve years, and one hand reaching in faith.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Hallelujah"
+    },
+    {
+     "seconds": 3,
+     "screen": "Glory"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "He could have let her slip away healed and nameless. But he called her daughter. He let her tell all the truth in front of everybody, while a worried father waited and a whole town watched. Then he sent her home in peace. That is the story, Church. Not only the healing. The being seen."
@@ -286,8 +301,8 @@
   "file": null,
   "qa": null
  },
- "words": 472,
- "est_seconds": 257,
+ "words": 489,
+ "est_seconds": 273,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -306,11 +321,11 @@
    "speakers": "pass",
    "voice_segments": "pass",
    "S10_shelf": "pass",
-   "S11_length": "note: 472 words outside 500-900 words",
+   "S11_length": "note: 489 words outside 500-900 words",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 2.8",
+   "S11_reading_level": "note: grade 2.9",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

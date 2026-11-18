@@ -288,6 +288,21 @@
    ]
   },
   {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, it is not over. [PAUSE 3s | screen: \"It is not over\"] It is not over. [PAUSE 3s | screen: \"It is not over\"] Not for Joseph, and not down in that pit.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "It is not over"
+    },
+    {
+     "seconds": 3,
+     "screen": "It is not over"
+    }
+   ]
+  },
+  {
    "type": "retelling",
    "speaker": "narrator",
    "text": "Twenty pieces of silver. That is what jealousy said a brother was worth. It is a hard story to sit with, Church. But it does not end in that pit. Joseph went down to Egypt, and a little later the Bible tells us the LORD was with Joseph there. Hold on to that. We are coming back for the rest."
@@ -298,8 +313,8 @@
   "file": null,
   "qa": null
  },
- "words": 545,
- "est_seconds": 297,
+ "words": 568,
+ "est_seconds": 316,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -320,9 +335,9 @@
    "S10_shelf": "pass",
    "S11_length": "pass",
    "S11_sentence_length": "pass",
-   "S11_reading_level": "note: grade 3.0",
+   "S11_reading_level": "note: grade 2.9",
    "no_invented_memories": "pass",
-   "callouts": "pass",
+   "call_response": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {

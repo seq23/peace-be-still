@@ -1,0 +1,333 @@
+{
+ "id": "core-022-hannah",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Hannah Poured Out Her Soul",
+ "passage": {
+  "refs": [
+   "1SA 1:1-20",
+   "1SA 1:24-28"
+  ],
+  "label": "1 Samuel 1:1-20; 1 Samuel 1:24-28"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "hannah",
+   "name": "Hannah",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "elkanah",
+   "name": "Elkanah",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "eli",
+   "name": "Eli",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A man named Elkanah lived up in the hill country of Ephraim. He had two wives, Hannah and Peninnah. Peninnah had children. Hannah had none."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Every year the family went up to Shiloh to worship the LORD and offer sacrifices. Elkanah gave portions to Peninnah and all her children. To Hannah he gave a worthy portion, because he loved her. But year after year, Peninnah provoked her and made her feel her empty arms. And Hannah would cry and could not eat."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elkanah",
+   "ref": "1SA 1:8",
+   "label": "1 Samuel 1:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Then said Elkanah her husband to her, Hannah, why weepest thou? and why eatest thou not? and why is thy heart grieved? am not I better to thee than ten sons?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Then said Elkanah her husband to her,"
+    },
+    {
+     "v": 8,
+     "speaker": "elkanah",
+     "text": "Hannah, why weepest thou? and why eatest thou not? and why is thy heart grieved? am not I better to thee than ten sons?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Elkanah loved her, and he meant well, bless him. But his love could not reach the ache she was carrying. Some sorrows only God can hold."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "One year, after they had eaten in Shiloh, Hannah got up and went to the house of the LORD. Eli the priest was sitting near the doorpost of the temple."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 1:10",
+   "label": "1 Samuel 1:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And she was in bitterness of soul, and prayed unto the LORD, and wept sore."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And she was in bitterness of soul, and prayed unto the LORD, and wept sore."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "hannah",
+   "ref": "1SA 1:11",
+   "label": "1 Samuel 1:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And she vowed a vow, and said, O LORD of hosts, if thou wilt indeed look on the affliction of thine handmaid, and remember me, and not forget thine handmaid, but wilt give unto thine handmaid a man child, then I will give him unto the LORD all the days of his life, and there shall no razor come upon his head."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And she vowed a vow, and said,"
+    },
+    {
+     "v": 11,
+     "speaker": "hannah",
+     "text": "O LORD of hosts, if thou wilt indeed look on the affliction of thine handmaid, and remember me, and not forget thine handmaid, but wilt give unto thine handmaid a man child, then I will give him unto the LORD all the days of his life, and there shall no razor come upon his head."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hannah prayed without a sound. Her lips moved, but nothing came out. Eli was watching her mouth, and he thought she was drunk. He told her to put away her wine."
+  },
+  {
+   "type": "scripture",
+   "speaker": "hannah",
+   "ref": "1SA 1:15",
+   "label": "1 Samuel 1:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And Hannah answered and said, No, my lord, I am a woman of a sorrowful spirit: I have drunk neither wine nor strong drink, but have poured out my soul before the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And Hannah answered and said,"
+    },
+    {
+     "v": 15,
+     "speaker": "hannah",
+     "text": "No, my lord, I am a woman of a sorrowful spirit: I have drunk neither wine nor strong drink, but have poured out my soul before the LORD."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, she did not hide her heart. She told that priest she was a woman of a sorrowful spirit, and that she had poured out her soul before the LORD. Some of us have prayed like that, with no words left, just groaning. That is still prayer."
+  },
+  {
+   "type": "scripture",
+   "speaker": "eli",
+   "ref": "1SA 1:17",
+   "label": "1 Samuel 1:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Then Eli answered and said, Go in peace: and the God of Israel grant thee thy petition that thou hast asked of him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Then Eli answered and said,"
+    },
+    {
+     "v": 17,
+     "speaker": "eli",
+     "text": "Go in peace: and the God of Israel grant thee thy petition that thou hast asked of him."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "hannah",
+   "ref": "1SA 1:18",
+   "label": "1 Samuel 1:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And she said, Let thine handmaid find grace in thy sight. So the woman went her way, and did eat, and her countenance was no more sad."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And she said,"
+    },
+    {
+     "v": 18,
+     "speaker": "hannah",
+     "text": "Let thine handmaid find grace in thy sight."
+    },
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "So the woman went her way, and did eat, and her countenance was no more sad."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say God is good, you say, all the time. God is good. [PAUSE 3s | screen: \"All the time\"] And all the time. [PAUSE 3s | screen: \"God is good\"] Hannah got up from that altar before anything changed.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "All the time"
+    },
+    {
+     "seconds": 3,
+     "screen": "God is good"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nothing had changed yet. No baby. No sign. But Hannah went her way, ate her food, and her face was not sad anymore. She had laid her burden down at the altar, and she walked away lighter."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Early the next morning, the family worshipped before the LORD and went home to Ramah."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 1:20",
+   "label": "1 Samuel 1:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Wherefore it came to pass, when the time was come about after Hannah had conceived, that she bare a son, and called his name Samuel, saying, Because I have asked him of the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Wherefore it came to pass, when the time was come about after Hannah had conceived, that she bare a son, and called his name Samuel, saying, Because I have asked him of the LORD."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel means asked of God. Hannah gave him that name so she would never forget. Later she kept her promise and brought that boy back to Shiloh to serve the LORD with Eli."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hannah's story does not promise every praying woman a child. Many faithful women in our churches have prayed that prayer and waited a long time, or are waiting still, and they are no less faithful. What the story shows is a woman who took her whole grief to God, honest, and found peace before anything changed."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 609,
+ "est_seconds": 338,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.5",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Samuel 1; says plainly the story does not promise every praying woman a child, and that waiting women are no less faithful."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Childless women in the church honoured, not pitied; 'bless him' is warm, not mocking."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

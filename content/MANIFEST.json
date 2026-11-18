@@ -2,15 +2,15 @@
  "gate_version": "library-1",
  "summary": {
   "story/plain": {
-   "passed": 20,
+   "passed": 30,
    "held": 0,
    "draft": 0,
    "never-ship": 0,
-   "rewritten": 6,
+   "rewritten": 8,
    "held_ids": []
   },
   "story/hush-harbor": {
-   "passed": 20,
+   "passed": 30,
    "held": 0,
    "draft": 0,
    "never-ship": 0,
