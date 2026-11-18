@@ -1,0 +1,85 @@
+{
+ "id": "in-09-thank-you-already",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "Thank You, Already",
+ "theme": "gratitude",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's practice is about saying thank you. Not for what you have now, though that is good too, but for the wish, as if it has already arrived. [pause 7]\n\nWhen something good comes into our lives, one of the first things we feel is thankful. Tonight we start with that feeling, and let the rest of the picture grow around it. [pause 9]\n\nYou might picture writing a thank you note to someone who helped. Or telling a friend how grateful you are. Or simply sitting quietly with a full heart. [pause 9]\n\nThis is imagination and feeling, not a promise. Gratitude tonight is good for its own sake, whatever tomorrow brings. [pause 9]\n\nBring your wish to mind, and imagine it is already part of your life. [pause 14]\n\nGratitude is a feeling the body knows well. It softens the chest and slows the breath. When we picture our wish with gratitude instead of longing, the picture changes. It stops feeling like something far away and starts feeling like something we are already living with. [pause 9]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "You are sitting somewhere comfortable, with a pen and a card in front of you. [pause 16]\n\nYou are writing to someone who was part of your good news. A friend. A teacher. A neighbor. Someone who believed you could do it. [pause 19]\n\nWatch your hand write the first words. Thank you. [pause 19]\n\nKeep writing. Tell them what happened. Tell them how it feels now. [pause 19]\n\nNotice how easily the words come. You are not straining to believe it. You are just remembering it. [pause 19]\n\nFold the card. Picture them opening it, and smiling. [pause 22]\n\nNow let the thank you turn inward. Say it quietly in your mind. Thank you. Thank you. It happened. [pause 22]\n\nFeel that warmth spread from your chest to your hands. [pause 24]\n\nPicture another thank you. This time spoken. You are on the phone, telling someone what it meant that they helped. [pause 22]\n\nHear yourself say, I could not have done it without you. Hear them laugh and say, you did it. [pause 22]\n\nNow picture a small, quiet thank you at the end of an ordinary day in your new life. Just you, looking out the window, glad. [pause 22]\n\nLet the gratitude be the last thing you feel before sleep. [pause 29]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 647,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1145,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:53:07",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Teachings in our own words only (living in the end, the drowsy state, revision, a friend's congratulations); no book quoted and the teacher is never named, so no affiliation line is needed; every teaching says plainly it is imagination and feeling, not a promise, and that the real daytime steps still matter ('not a guarantee' reworded so no promise word appears). The love night forbids picturing another person changing their mind and tells anyone in a frightening relationship to reach out for help; revision keeps apologies owed as real; work night pictures bills paid on time, not riches. No God's Word words, journeys or scripture (scripture_woven false)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

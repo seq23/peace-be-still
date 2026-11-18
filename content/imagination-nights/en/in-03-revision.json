@@ -1,0 +1,85 @@
+{
+ "id": "in-03-revision",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "Rewriting Today",
+ "theme": "revising the day",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's practice is called revision. It is for the days that did not go the way you wanted. [pause 5]\n\nMost of us replay a bad moment at night. The argument. The mistake at work. The thing we wish we had said. We play it over and over, and every time we feel worse. [pause 7]\n\nRevision turns that habit around. You still replay the moment, but this time you change it in your imagination. You let it go the way you wish it had. You hear the kinder words. You see yourself calm. [pause 7]\n\nThis does not erase what happened, and it is not pretending. If you owe someone an apology or a phone call, that is still yours to make tomorrow. Revision is a way to stop carrying the moment to bed with you, and to practice the person you want to be next time. [pause 7]\n\nThink of one moment from today you would like to rewrite. Something small is best. [pause 12]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Go back to the start of that moment. Notice where you were. The room. The time of day. Who was there. [pause 14]\n\nLet it begin the way it began. But this time, before the hard part comes, take a breath in the scene. [pause 14]\n\nNow let it go differently. If you spoke sharply, hear yourself speaking gently. If you were ignored, see the other person turn and listen. [pause 17]\n\nHear the new words. Let them be ordinary words. Nothing dramatic. Just the way you wish it had gone. [pause 17]\n\nWatch the other person's face soften. Watch your own shoulders drop. [pause 17]\n\nLet the moment end well. Maybe a nod. A laugh. A thank you. [pause 17]\n\nNow play the new version once more, from the beginning. Let it feel familiar this time. [pause 20]\n\nAnd once more, slower. Let it become the version you remember. [pause 22]\n\nNotice how you feel toward the other person now. A little softer. A little more patient. [pause 20]\n\nNotice how you feel toward yourself. You were tired today. You did your best. In this version, you let yourself be kind to you as well. [pause 20]\n\nIf there is something to make right tomorrow, picture yourself doing it calmly. A short message. A kind word. Then let that go too. [pause 20]\n\nThe day is closing like a book. The last page you read was a good one. [pause 22]\n\nWhen it ends, let it fade. The day is finished, and the last version you saw was a kind one. [pause 22]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 683,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1135,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:53:07",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Teachings in our own words only (living in the end, the drowsy state, revision, a friend's congratulations); no book quoted and the teacher is never named, so no affiliation line is needed; every teaching says plainly it is imagination and feeling, not a promise, and that the real daytime steps still matter ('not a guarantee' reworded so no promise word appears). The love night forbids picturing another person changing their mind and tells anyone in a frightening relationship to reach out for help; revision keeps apologies owed as real; work night pictures bills paid on time, not riches. No God's Word words, journeys or scripture (scripture_woven false)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
