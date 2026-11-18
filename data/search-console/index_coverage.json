@@ -1,0 +1,86 @@
+{
+ "schema": "pbs-index-coverage-v1",
+ "site": "https://peacebestillapp.com",
+ "urls": {
+  "https://peacebestillapp.com/es/": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/questions/": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/about": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/": {
+   "verdict": "NEUTRAL",
+   "state": "Discovered - currently not indexed",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/": {
+   "verdict": "NEUTRAL",
+   "state": "Discovered - currently not indexed",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/questions/how-to-cancel-bible-chat-subscription/": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/questions/black-bible-app/": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/salmos-para-dormir/": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/questions/how-to-cancel-haven-subscription/": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/questions/law-of-assumption-sleep-meditation/": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/questions/psalms-for-sleep/": {
+   "verdict": "NEUTRAL",
+   "state": "Discovered - currently not indexed",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  },
+  "https://peacebestillapp.com/questions/whispered-bible-for-sleep/": {
+   "verdict": "NEUTRAL",
+   "state": "URL is unknown to Google",
+   "last_crawl": null,
+   "inspected_at": "2026-11-18T17:05:16.638Z"
+  }
+ },
+ "property": "sc-domain:peacebestillapp.com",
+ "generated_at": "2026-11-18T17:05:16.638Z",
+ "sitemap_urls": 12,
+ "inspected": 12,
+ "states": {
+  "URL is unknown to Google": 9,
+  "Discovered - currently not indexed": 3
+ }
+}
