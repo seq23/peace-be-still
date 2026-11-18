@@ -5,11 +5,15 @@
 // - no outcome or health promises; no launch date; no other app is disparaged.
 const D = { published: "2026-11-18", updated: "2026-11-18", publishedText: "18 Nov 2026", updatedText: "18 Nov 2026" };
 const DES = { published: "2026-11-18", updated: "2026-11-18", publishedText: "18 nov 2026", updatedText: "18 nov 2026" };
-const v = (ref, text) => `<blockquote class="verse"><p>“${text}”</p><cite>${ref}</cite></blockquote>`;
+import { SLEEP } from "./blitz-sleep.mjs";
+import { BLACK } from "./blitz-black.mjs";
+import { APPS } from "./blitz-apps.mjs";
+import { ES } from "./blitz-es.mjs";
+import { V } from "./scripture.mjs";
 
 export const PAGES = [
   {
-    ...D, lang: "en", door: "faith", path: "/questions/whispered-bible-for-sleep/",
+    ...D, lang: "en", door: "faith", group: "Sleep, prayer and Bible verses", path: "/questions/whispered-bible-for-sleep/",
     title: "Whispered Bible for sleep: how it works · Peace Be Still",
     description: "A whispered Bible for sleep is scripture read softly at bedtime. Here is what it sounds like, which passages people choose, and how to set it up tonight.",
     h1: "Whispered Bible for sleep: what it is and how to use it",
@@ -27,7 +31,7 @@ export const PAGES = [
 <li><strong>Psalm 121</strong> and <strong>Psalm 127</strong>, about the Lord who keeps you and gives his beloved sleep.</li>
 <li><strong>Matthew 11:28–30</strong>, Jesus's invitation to the weary.</li>
 </ul>
-${v("Psalm 4:8 · KJV", "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.")}`],
+${V("PSA 4:8")}`],
       ["How do I set up a whispered Bible for sleep tonight?", `<ol>
 <li>Choose one passage, not a playlist. One psalm read slowly fills 10 to 20 minutes.</li>
 <li>Set a sleep timer (30 minutes is a common choice) so the audio fades out instead of stopping hard.</li>
@@ -46,110 +50,11 @@ ${v("Psalm 4:8 · KJV", "I will both lay me down in peace, and sleep: for thou, 
     ],
     sources: [["Psalm 4:8 (KJV), Bible Gateway", "https://www.biblegateway.com/passage/?search=Psalm%204%3A8&version=KJV"]],
   },
+
+
+
   {
-    ...D, lang: "en", door: "faith", path: "/questions/psalms-for-sleep/",
-    title: "Psalms for sleep: 6 bedtime psalms (KJV) · Peace Be Still",
-    description: "Six psalms people read or listen to at bedtime, each quoted from the King James Version, with what each one is about and how to use them for sleep.",
-    h1: "Psalms for sleep: 6 bedtime psalms to read or hear tonight",
-    definition: "Psalms for sleep are psalms people read or listen to at bedtime because they speak of rest, safety and trust in God. The most used are Psalm 4, 3, 23, 91, 121 and 127. Many people play one psalm read slowly, or whispered, with a sleep timer, so scripture is the last thing they hear before sleeping.",
-    quick: "Start with Psalm 4, the traditional evening psalm, which ends with lying down in peace. Then try Psalm 23 or Psalm 91. Read or listen to one psalm, slowly, with the lights low.",
-    bestFor: "people who want a short list of bedtime psalms, quoted exactly, and a simple way to use them.",
-    sections: [
-      ["Which psalms are best to read before bed?", `<p>These six are the ones most often read at night, each with a verse from the King James Version:</p>
-<table class="t"><thead><tr><th>Psalm</th><th>What it is about</th><th>Bedtime verse (KJV)</th></tr></thead><tbody>
-<tr><td>Psalm 4</td><td>Peace after a hard day</td><td>“I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.” (4:8)</td></tr>
-<tr><td>Psalm 3</td><td>Rest in trouble</td><td>“I laid me down and slept; I awaked; for the LORD sustained me.” (3:5)</td></tr>
-<tr><td>Psalm 23</td><td>The shepherd who leads to still waters</td><td>“He maketh me to lie down in green pastures: he leadeth me beside the still waters.” (23:2)</td></tr>
-<tr><td>Psalm 91</td><td>Shelter and protection</td><td>“He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.” (91:1)</td></tr>
-<tr><td>Psalm 121</td><td>The keeper who does not sleep</td><td>“Behold, he that keepeth Israel shall neither slumber nor sleep.” (121:4)</td></tr>
-<tr><td>Psalm 127</td><td>Letting go of worry</td><td>“It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep.” (127:2)</td></tr>
-</tbody></table>`],
-      ["Why is Psalm 4 called the bedtime psalm?", `<p>Psalm 4 is an evening prayer. David asks to be heard, tells the reader to “commune with your own heart upon your bed, and be still,” and ends with lying down in peace and sleeping in safety. That closing verse, 4:8, has made it the traditional psalm for the end of the day.</p>
-${v("Psalm 4:4 · KJV", "Stand in awe, and sin not: commune with your own heart upon your bed, and be still. Selah.")}`],
-      ["How do I use the psalms for sleep?", `<ol>
-<li>Choose one psalm for the night.</li>
-<li>Read it slowly, out loud or in your head, or play it read in a soft voice.</li>
-<li>Stay with one verse that stands out and repeat it as you settle.</li>
-<li>Use a sleep timer if you listen, so the audio fades out and nothing plays next.</li>
-</ol>`],
-      ["Is Psalm 91 good to read at night?", `<p>Yes. Psalm 91 is one of the most-played psalms at bedtime; on YouTube, Psalm 91 sleep readings have gathered millions of views. It speaks of shelter “under the shadow of the Almighty” and of not being afraid “for the terror by night.”</p>`],
-      ["How does Peace Be Still do it?", `<p>Peace Be Still is a phone app that is coming soon to the App Store and Google Play. Its Psalm Nights journey reads a King James psalm in a whisper on an always-dark screen, with a sleep timer that fades out and nothing playing afterwards. The first night is free, then one a week; the paid lane ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`],
-    ],
-    faq: [
-      ["What psalm do you read before bed?", "Psalm 4 is the traditional bedtime psalm. Its last verse reads: “I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.” Psalm 23 and Psalm 91 are the next most read at night."],
-      ["Which psalm is for peace of mind at night?", "Many people turn to Psalm 4 for peace at the end of the day, and to Psalm 121, which says the Lord who keeps you “shall neither slumber nor sleep.” Read one slowly and stay with the verse that stands out to you."],
-      ["Can I listen to psalms while I sleep?", "Yes. Many people play a psalm read slowly or whispered, with a sleep timer so the audio fades out. Keep the screen dark and turn off autoplay so nothing new starts once the reading ends."],
-      ["Are these verses quoted exactly?", "Yes. Every verse on this page is quoted word for word from the King James Version, which is in the public domain in the United States, with the psalm and verse number."],
-    ],
-    sources: [["Psalm 4 (KJV), Bible Gateway", "https://www.biblegateway.com/passage/?search=Psalm%204&version=KJV"], ["Psalm 91 (KJV), Bible Gateway", "https://www.biblegateway.com/passage/?search=Psalm%2091&version=KJV"]],
-  },
-  {
-    ...D, lang: "en", door: "faith", path: "/questions/black-bible-app/",
-    title: "Bible app for Black believers: what to look for · Peace Be Still",
-    description: "What a Bible app for Black believers should have: exact scripture, a church voice that feels like home, Bible stories with Black faces. Plus Hush Harbor.",
-    h1: "A Bible app for Black believers: what to look for",
-    definition: "A Black Bible app is a Bible app made with Black believers in mind: the same scripture, but with a voice that sounds like the Black church, Bible stories drawn with Black faces and names, and room for the songs and history that shaped that faith. People search for it because most Bible apps' art and voices rarely look or sound like them.",
-    quick: "Look for three things: scripture quoted word for word from a named translation, a voice and art that feel like home, and clear prices with no surprise charges. Peace Be Still's Hush Harbor journey is built around all three and is coming soon.",
-    bestFor: "Black Christians, and the people who love them, looking for a Bible app that feels like their own church.",
-    sections: [
-      ["What do people mean by a Black Bible app?", `<p>Searches like “African American Bible app”, “Bible app for Black women” and “best Bible app for Black people” come from the same wish: to read and talk about scripture in a space that reflects your family, your church and your history. The Bible is the same; the setting, the faces and the voice are what change.</p>`],
-      ["What should a Bible app for Black believers have?", `<ul>
-<li><strong>Exact scripture.</strong> Every verse quoted word for word from a named translation, with book, chapter and verse. An AI should never write a verse from memory.</li>
-<li><strong>A voice that feels like home.</strong> Warm, plain, church-family language, without stereotypes.</li>
-<li><strong>Faces and names that look like you.</strong> Bible Stories with Black Faces, faithful to the text.</li>
-<li><strong>History told truthfully.</strong> Hush harbors were the hidden places where enslaved people met to worship in secret; that history belongs in the story.</li>
-<li><strong>Honest prices.</strong> The price in dollars before you tap, no trial that turns into a charge, and an easy way to cancel.</li>
-</ul>`],
-      ["What is Hush Harbor in Peace Be Still?", `<p><strong>Hush Harbor · Black Bible Chat &amp; Stories</strong> is a journey inside Peace Be Still, a phone app coming soon to the App Store and Google Play. You talk through what is on your heart in a Black church voice, and the answer comes back with real King James verses. Each day there is a short Bible story drawn with Black faces and names, to read or to hear. The chat is AI and says so on every answer; it is not a pastor or a person.</p>
-${v("Matthew 11:28 · KJV", "Come unto me, all ye that labour and are heavy laden, and I will give you rest.")}`],
-      ["Is it free?", `<p>Yes, there is a free lane that stays free: the whole King James Bible to read and to hear, today's story, one chat a day of up to 10 messages, and a daily declaration. The paid lane is $7.99 a month or $39.99 a year, with no trial and no ads, and you can cancel in two taps.</p>`],
-    ],
-    faq: [
-      ["Is there a Bible app made for Black people?", "Peace Be Still, coming soon to the App Store and Google Play, has a journey called Hush Harbor · Black Bible Chat & Stories: a chat in a Black church voice that answers with exact King James verses, and a daily Bible story drawn with Black faces and names."],
-      ["What is a hush harbor?", "Hush harbors were hidden places, often in woods or swamps, where enslaved African Americans gathered to worship, pray and sing away from those who enslaved them. The journey takes its name from that history of faith kept alive in secret."],
-      ["Which Bible translation does Hush Harbor use?", "The King James Version, quoted word for word from a stored copy with book, chapter and verse. The AI chooses which verses to show, but the words always come from the stored text, never from the AI's memory."],
-      ["Is Hush Harbor only for Black users?", "No. Everyone is welcome in every journey. Hush Harbor is made with Black believers in mind, in its voice, its art and its stories, and the rest of Peace Be Still is open to everyone."],
-    ],
-    sources: [],
-  },
-  {
-    ...DES, lang: "es", door: "faith", path: "/es/preguntas/salmos-para-dormir/",
-    title: "Salmos para dormir: 5 salmos (Reina-Valera 1909) · Peace Be Still",
-    description: "Cinco salmos que se leen o escuchan antes de dormir, citados de la Reina-Valera 1909, y cómo usarlos esta noche. También la Biblia en español para dormir.",
-    h1: "Salmos para dormir: 5 salmos para leer o escuchar esta noche",
-    definition: "Los Salmos para dormir son salmos que se leen o escuchan antes de acostarse porque hablan de descanso, refugio y confianza en Dios. Los más usados son el Salmo 4, el 3, el 23, el 91 y el 127. Muchas personas escuchan un solo salmo leído despacio o en susurro, con un temporizador, para que la Palabra sea lo último que oyen.",
-    quick: "Empieza con el Salmo 4: su último versículo dice “En paz me acostaré, y asimismo dormiré”. Luego prueba el Salmo 23 o el 91. Lee o escucha un solo salmo, despacio y con poca luz.",
-    bestFor: "quien quiere una lista corta de salmos para la noche, citados con exactitud, y una forma sencilla de usarlos.",
-    sections: [
-      ["¿Qué salmos leer antes de dormir?", `<p>Estos cinco son los que más se leen de noche, cada uno con un versículo de la Reina-Valera 1909:</p>
-<table class="t"><thead><tr><th>Salmo</th><th>De qué trata</th><th>Versículo (RV 1909)</th></tr></thead><tbody>
-<tr><td>Salmo 4</td><td>Paz al final del día</td><td>“En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado.” (4:8)</td></tr>
-<tr><td>Salmo 3</td><td>Descanso en medio de la angustia</td><td>“Yo me acosté, y dormí, y desperté; porque Jehová me sostuvo.” (3:5)</td></tr>
-<tr><td>Salmo 23</td><td>El pastor que lleva a aguas de reposo</td><td>“En lugares de delicados pastos me hará yacer: junto á aguas de reposo me pastoreará.” (23:2)</td></tr>
-<tr><td>Salmo 91</td><td>Refugio y protección</td><td>“EL que habita al abrigo del Altísimo, morará bajo la sombra del Omnipotente.” (91:1)</td></tr>
-<tr><td>Salmo 127</td><td>Soltar la preocupación</td><td>“Por demás os es el madrugar á levantaros, el veniros tarde á reposar, el comer pan de dolores: pues que á su amado dará Dios el sueño.” (127:2)</td></tr>
-</tbody></table>
-<p class="muted">Los versículos se citan tal como están en la Reina-Valera 1909, con su ortografía antigua (“á”).</p>`],
-      ["¿Cómo usar los Salmos para dormir?", `<ol>
-<li>Elige un solo salmo para la noche.</li>
-<li>Léelo despacio, en voz alta o en silencio, o escúchalo leído en voz baja.</li>
-<li>Quédate con el versículo que más te hable y repítelo al acostarte.</li>
-<li>Si lo escuchas, usa un temporizador para que el audio se apague solo y no siga nada después.</li>
-</ol>`],
-      ["¿Hay una Biblia en español para dormir?", `<p>Sí. Muchas personas escuchan la Biblia en español leída despacio para dormir, sobre todo los Salmos y los Evangelios. La Reina-Valera 1909 es de dominio público en Estados Unidos, así que se puede leer, grabar y compartir libremente.</p>
-${v("Salmo 91:2 · RV 1909", "Diré yo á Jehová: Esperanza mía, y castillo mío; mi Dios, en él confiaré.")}`],
-      ["¿Qué hará Peace Be Still?", `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae todo en español: chat bíblico, historias y Salmos susurrados para dormir, con la Reina-Valera 1909 palabra por palabra. La pantalla siempre está oscura y un temporizador apaga la voz poco a poco. La primera noche es gratis y luego una por semana; la parte de pago cuesta $7.99 al mes o $39.99 al año, sin prueba.</p>`],
-    ],
-    faq: [
-      ["¿Qué salmo leer para dormir tranquilo?", "El Salmo 4 es el salmo tradicional de la noche. Su último versículo dice: “En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me harás estar confiado.” Después del 4, los más leídos de noche son el Salmo 23 y el Salmo 91."],
-      ["¿Qué dice el Salmo 91 para la noche?", "El Salmo 91 habla de refugio: “EL que habita al abrigo del Altísimo, morará bajo la sombra del Omnipotente.” También dice que no temerás “de espanto nocturno”. Por eso muchas personas lo leen o lo escuchan antes de dormir."],
-      ["¿Puedo escuchar la Biblia mientras duermo?", "Sí. Muchas personas ponen un salmo leído despacio o en susurro con un temporizador, para que el audio se apague solo. Deja la pantalla oscura y quita la reproducción automática para que no empiece nada nuevo."],
-      ["¿Qué versión de la Biblia se usa aquí?", "La Reina-Valera 1909, de dominio público en Estados Unidos, citada palabra por palabra con libro, capítulo y versículo. Se respeta su ortografía original, como “á” y “fué”."],
-    ],
-    sources: [["Reina-Valera 1909, eBible.org", "https://ebible.org/find/details.php?id=spaRV1909"]],
-  },
-  {
-    ...D, lang: "en", door: "mindset", path: "/questions/law-of-assumption-sleep-meditation/",
+    ...D, lang: "en", door: "mindset", group: "Mindset", path: "/questions/law-of-assumption-sleep-meditation/",
     title: "Law of assumption sleep meditation: how it works · Peace Be Still",
     description: "A law of assumption sleep meditation is a night practice: picture a scene you hope for as if it is already true, and fall asleep inside it. Here is how.",
     h1: "Law of assumption sleep meditation: how the nightly practice works",
@@ -180,7 +85,7 @@ ${v("Salmo 91:2 · RV 1909", "Diré yo á Jehová: Esperanza mía, y castillo m�
     sources: [],
   },
   {
-    ...D, lang: "en", door: "neutral", path: "/questions/how-to-cancel-bible-chat-subscription/",
+    ...D, lang: "en", door: "neutral", group: "Cancelling a subscription", path: "/questions/how-to-cancel-bible-chat-subscription/",
     title: "How to cancel a Bible Chat subscription · Peace Be Still",
     description: "Cancel a Bible Chat subscription bought in the App Store or Google Play, with Apple's and Google's own steps. Deleting the app does not cancel it.",
     h1: "How to cancel a Bible Chat subscription on iPhone or Android",
@@ -216,7 +121,7 @@ ${v("Salmo 91:2 · RV 1909", "Diré yo á Jehová: Esperanza mía, y castillo m�
     sources: [["Apple Support: Cancel a subscription from Apple", "https://support.apple.com/en-us/118428"], ["Google Play Help: Cancel, pause, or change a subscription", "https://support.google.com/googleplay/answer/7018481"], ["Apple: Request a refund", "https://reportaproblem.apple.com/"]],
   },
   {
-    ...D, lang: "en", door: "neutral", path: "/questions/how-to-cancel-haven-subscription/",
+    ...D, lang: "en", door: "neutral", group: "Cancelling a subscription", path: "/questions/how-to-cancel-haven-subscription/",
     title: "How to cancel a Haven subscription · Peace Be Still",
     description: "Cancel a Haven subscription bought in the App Store or Google Play, with Apple's and Google's own steps, and what happens after you cancel.",
     h1: "How to cancel a Haven subscription on iPhone or Android",
@@ -254,7 +159,7 @@ ${v("Salmo 91:2 · RV 1909", "Diré yo á Jehová: Esperanza mía, y castillo m�
   // ---- Landing pages for "Bible chat" searches (owner ask 18 Nov 2026). Competitor facts only from
   // their own App Store listings, checked 18 Nov 2026; unknown = "not listed". Nominative use only.
   {
-    ...D, lang: "en", door: "faith", path: "/black-bible-chat/",
+    ...D, lang: "en", door: "faith", group: "Bible apps", path: "/black-bible-chat/",
     title: "Black Bible chat: Hush Harbor in Peace Be Still · Peace Be Still",
     description: "A Black Bible chat that talks like the Black church and answers with exact King James verses. Hush Harbor is a journey in Peace Be Still, coming soon.",
     h1: "Black Bible chat: a Bible chat in a Black church voice",
@@ -274,7 +179,7 @@ ${v("Salmo 91:2 · RV 1909", "Diré yo á Jehová: Esperanza mía, y castillo m�
       ["Is the Black Bible chat a real pastor?", `<p>No. It is an AI helper, and it says so on every answer. It is not a pastor, a prophet or a person, and it never speaks as God or Jesus. Before your first chat, the app tells you that what you type goes to free AI providers that may learn from it, so leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows the 988 Suicide &amp; Crisis Lifeline and other help straight away.</p>`],
       ["What does it cost?", `<p>The free lane stays free: the whole King James Bible to read and hear, today's story, one chat a day of up to 10 messages, and a daily declaration. The paid lane is $7.99 a month or $39.99 a year and adds unlimited chat (fair use 100 messages a day), chat that remembers what you are carrying, and every past story. There is no trial, no weekly plan and no ads, and you can cancel in two taps.</p>`],
       ["Is the black version of Bible chat a different Bible?", `<p>No. The Bible is the same King James Version in every journey. What changes is the voice of the chat and the stories, and the faces in the pictures. The words of scripture are never changed.</p>
-${v("Mark 4:39 · KJV", "And he arose, and rebuked the wind, and said unto the sea, Peace, be still. And the wind ceased, and there was a great calm.")}`],
+${V("MAR 4:39")}`],
     ],
     faq: [
       ["Is there a Black Bible chat app?", "Peace Be Still, coming soon to the App Store and Google Play, has a journey called Hush Harbor · Black Bible Chat & Stories: a Bible chat in a Black church voice with exact King James verses, and daily Bible stories with Black faces."],
@@ -286,7 +191,7 @@ ${v("Mark 4:39 · KJV", "And he arose, and rebuked the wind, and said unto the s
     notAffiliated: true,
   },
   {
-    ...D, lang: "en", door: "neutral", path: "/free-bible-chat/",
+    ...D, lang: "en", door: "neutral", group: "Bible apps", path: "/free-bible-chat/",
     title: "Free Bible chat: what stays free in Peace Be Still · Peace Be Still",
     description: "What a free Bible chat should include, and exactly what the free lane of Peace Be Still holds forever: one chat a day, the whole KJV, no ads, no trial.",
     h1: "Free Bible chat: what is really free, and for how long",
@@ -310,7 +215,7 @@ ${v("Mark 4:39 · KJV", "And he arose, and rebuked the wind, and said unto the s
 <li>Promise you money, healing or a result. A Bible chat can pray with you and point you to scripture; it cannot promise outcomes.</li>
 <li>Hide where your words go. Before your first chat, the app says what you type goes to free AI providers that may learn from it, and to leave out names.</li>
 </ul>`],
-      ["Is Peace Be Still out yet?", `<p>Not yet. It is coming soon to the App Store and Google Play. Leave your email below and we will send one message on launch day.</p>`],
+      ["Is Peace Be Still out yet?", `<p>Not yet. It is coming soon to the App Store and Google Play: search “Peace Be Still”. There is no waitlist and no launch date to wait for.</p>`],
     ],
     faq: [
       ["Is there a Bible chat app that is free without a subscription?", "Yes. Peace Be Still, coming soon, has a free lane with one chat a day of up to 10 messages, the whole King James Bible and today's story, with no subscription, no trial and no ads."],
@@ -323,7 +228,7 @@ ${v("Mark 4:39 · KJV", "And he arose, and rebuked the wind, and said unto the s
     alt: "/es/chat-biblico-gratis/",
   },
   {
-    ...D, lang: "en", door: "neutral", path: "/bible-chat-alternative/",
+    ...D, lang: "en", door: "neutral", group: "Bible apps compared", path: "/bible-chat-alternative/",
     title: "Bible chat alternative: what to compare before you pay · Peace Be Still",
     description: "What to check in any Bible chat app (price, trial, weekly plans, ads, renewal, verse accuracy) and a sourced comparison of four apps, checked 18 Nov 2026.",
     h1: "Looking for a Bible chat alternative? What to compare first",
@@ -365,7 +270,7 @@ ${v("Mark 4:39 · KJV", "And he arose, and rebuked the wind, and said unto the s
     notAffiliated: true,
   },
   {
-    ...D, lang: "en", door: "neutral", path: "/bible-chat-cancel-subscription/",
+    ...D, lang: "en", door: "neutral", group: "Cancelling a subscription", path: "/bible-chat-cancel-subscription/",
     title: "Bible chat cancel subscription: iPhone and Android steps · Peace Be Still",
     description: "Cancel any Bible chat app's subscription on iPhone or Android with Apple's and Google's own steps, and how to ask for a refund. Deleting the app does not cancel.",
     h1: "How to cancel a Bible chat subscription, and ask for a refund",
@@ -403,7 +308,7 @@ ${v("Mark 4:39 · KJV", "And he arose, and rebuked the wind, and said unto the s
     notAffiliated: true,
   },
   {
-    ...DES, lang: "es", door: "neutral", path: "/es/chat-biblico-gratis/",
+    ...DES, lang: "es", door: "neutral", group: "Chat bíblico", path: "/es/chat-biblico-gratis/",
     title: "Chat bíblico gratis: lo que siempre es gratis en Peace Be Still · Peace Be Still",
     description: "Qué incluye gratis para siempre Peace Be Still: un chat al día, la Biblia completa en Reina-Valera 1909, sin anuncios y sin prueba gratuita.",
     h1: "Chat bíblico gratis: qué es gratis de verdad, y por cuánto tiempo",
@@ -422,7 +327,7 @@ ${v("Mark 4:39 · KJV", "And he arose, and rebuked the wind, and said unto the s
       ["¿Hay prueba gratuita?", `<p>No. Peace Be Still no tiene prueba, así que nada se convierte en un cobro por sorpresa. Lo gratis no es una prueba: no se acaba. El plan pagado empieza solo cuando tú lo eliges, con el precio en dólares a la vista antes de tocar.</p>`],
       ["¿Hay anuncios?", `<p>No. Peace Be Still no tiene anuncios, ni en lo gratis ni en lo pagado, nunca.</p>`],
       ["¿Qué Biblia usa?", `<p>Mi Refugio usa la Reina-Valera 1909, palabra por palabra, con libro, capítulo y versículo. La inteligencia artificial nunca escribe un versículo de memoria: solo nombra la cita, y la app pega el texto guardado.</p>
-${v("Salmos 91:2 · RV 1909", "Diré yo á Jehová: Esperanza mía, y castillo mío; mi Dios, en él confiaré.")}`],
+${V("PSA 91:2", "es")}`],
     ],
     faq: [
       ["¿Hay un chat bíblico gratis en español?", "Sí. Mi Refugio, el camino en español de Peace Be Still, que llega muy pronto, tiene un chat gratis al día de hasta 10 mensajes, con la Reina-Valera 1909, sin suscripción, sin prueba y sin anuncios."],
@@ -433,4 +338,8 @@ ${v("Salmos 91:2 · RV 1909", "Diré yo á Jehová: Esperanza mía, y castillo m
     notAffiliated: true,
     alt: "/free-bible-chat/",
   },
+  ...SLEEP,
+  ...BLACK,
+  ...APPS,
+  ...ES,
 ];

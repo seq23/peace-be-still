@@ -7,6 +7,8 @@
 // 3) security headers on every response
 export const APEX = "peacebestillapp.com";
 const MAX_BODY = 2048;
+// 18 Nov 2026: the Black Bible app question page became the /black-bible-app/ landing page.
+export const MOVED = { "/questions/black-bible-app/": "/black-bible-app/" };
 
 const HEADERS = {
   "Content-Security-Policy":
@@ -102,6 +104,9 @@ async function route(request, env) {
     return Response.redirect(url.toString(), 301);
   }
   const p = url.pathname;
+  // Pages that moved (one canonical page per search): 301 to the new home.
+  const moved = MOVED[p.endsWith("/") ? p : p + "/"];
+  if (moved) return Response.redirect(`https://${APEX}${moved}`, 301);
   if (p === "/api/waitlist" || p === "/api/waitlist/remove") {
     if (request.method !== "POST") return new Response("Method not allowed", { status: 405, headers: { Allow: "POST" } });
     return p === "/api/waitlist" ? closed(url.searchParams.get("lang") === "es" ? "es" : "en") : remove(request, env);

@@ -76,3 +76,12 @@ test("www redirects to the apex with path and query", async () => {
   assert.equal(res.status, 301);
   assert.equal(res.headers.get("Location"), "https://peacebestillapp.com/es/?a=1");
 });
+
+test("a moved page answers 301 to its new home, with or without the trailing slash", async () => {
+  for (const path of ["/questions/black-bible-app/", "/questions/black-bible-app"]) {
+    const res = await worker.fetch(new Request(`https://peacebestillapp.com${path}`), env());
+    assert.equal(res.status, 301);
+    assert.equal(res.headers.get("Location"), "https://peacebestillapp.com/black-bible-app/");
+  }
+  assert.equal((await worker.fetch(new Request("https://peacebestillapp.com/black-bible-app/"), env())).status, 200);
+});
