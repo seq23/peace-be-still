@@ -8,6 +8,14 @@ name: Search Loop
 on:
   schedule:
     - cron: "37 10 * * *"  # 10:37 UTC: its own minute (no other caller uses :37)
+  # A change to the engine's config or routing is checked on the PR (search-loop v1.12.0
+  # stage validate: config + model-routing checks only, no network, no model call; peace-be-still
+  # 18 Nov 2026 failed every scheduled run on a routing file nothing checked before merge).
+  pull_request:
+    paths:
+      - search-loop.config.json
+      - config/llm_routing.json
+      - .github/workflows/search-loop.yml
   workflow_dispatch:
     inputs:
       stage:
@@ -21,7 +29,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: search-loop
+  group: ${{ github.event_name == 'pull_request' && format('search-loop-pr-{0}', github.ref) || 'search-loop' }}
   cancel-in-progress: false
 
 jobs:
@@ -29,7 +37,7 @@ jobs:
     uses: seq23/search-loop/.github/workflows/search-loop.yml@v1
     with:
       engine_ref: v1
-      stage: ${{ inputs.stage || 'auto' }}
+      stage: ${{ github.event_name == 'pull_request' && 'validate' || inputs.stage || 'auto' }}
       # New pages join site/public/sitemap.xml; the safety check refuses a page that breaks the
       # trademark, claims or two-door rules before it is committed. Pure node, no install.
       post_build_command: node site/scripts/apply-cta.mjs && node site/scripts/build-sitemap.mjs && node site/scripts/check-site.mjs
