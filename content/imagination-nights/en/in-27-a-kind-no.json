@@ -1,0 +1,85 @@
+{
+ "id": "in-27-a-kind-no",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "A Kind No",
+ "theme": "boundaries",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's scene is about a small word that a lot of us find hard to say. No. [pause 12]\n\nMany women especially are raised to say yes. Yes to the extra shift. Yes to the favor. Yes to the person who always asks and never offers. Over time, all those yeses can leave us tired and quietly resentful. [pause 14]\n\nSaying no is not being unkind. It is telling the truth about what you can give. A kind no protects the yes you want to give with your whole heart. [pause 14]\n\nTonight you will picture saying no to something, gently and clearly, and feeling at peace afterward. Not guilty. Not shaking. At peace. [pause 14]\n\nAs always, this is imagination and feeling. It is not a promise about how anyone will react. If someone in your life will not accept a no, and that frightens you, please talk with a person trained to help. [pause 8]\n\nThink of one request you would like to say no to. Just name it to yourself. [pause 15]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Your phone rings, or someone comes to your door. You already know what they are about to ask. [pause 20]\n\nNotice the old feeling start to rise. The quick yes on the tip of your tongue. [pause 23]\n\nTake one breath first. Feel your feet on the floor. [pause 23]\n\nHear yourself say it. Thank you for thinking of me. I cannot do that this time. [pause 25]\n\nNotice that your voice is warm and steady. You do not explain for a long time. You do not apologize three times. [pause 27]\n\nLet them answer. Maybe they understand right away. Maybe they are surprised. Either way, you stay calm. [pause 27]\n\nSay goodbye kindly. Put the phone down, or close the door. [pause 27]\n\nNow notice the time you just kept. An evening. A rest. A little room to breathe. [pause 27]\n\nFeel how light your chest is. You told the truth, and you were kind. [pause 28]\n\nSay in your mind, my no is kind. My yes is true. [pause 28]\n\nLet that freed-up evening stretch out in front of you, and drift into it. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 617,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1175,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T17:06:59",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; every teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Quiet-house, hard-talk and kind-no nights each tell anyone afraid of someone at home or in their life to reach a trained person and keep safe, and the hard-talk night is limited to ordinary talks; friendship and hard-talk nights never picture making another person choose or agree; money night pictures bills covered and a little saved, not riches, and points to sound advice (no debt-free or wealth promise); rest night carries no sleep claim."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

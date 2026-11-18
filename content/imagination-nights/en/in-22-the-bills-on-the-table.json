@@ -1,0 +1,85 @@
+{
+ "id": "in-22-the-bills-on-the-table",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "The Bills on the Table",
+ "theme": "calm about money",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hello, and welcome back to Imagination Nights. [pause 3]\n\nSettle into the bed. Pull the covers up to where you like them. [pause 8]\n\nTake one deep breath, and let it go with a sigh. [pause 8]\n\nNow let your breathing find its own pace. You do not have to control it. Just notice it. [pause 10]\n\nFeel your feet getting heavy. Your legs. Your back sinking into the mattress. [pause 10]\n\nNow let us relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThe day is finished. This part of the night is yours. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's scene is about money, and the feeling of being calm about it. [pause 12]\n\nFor many of us, money is the thing we think about at two in the morning. The bill that came in. The payment that is late. The number in the account that never seems to stretch far enough. [pause 14]\n\nWe are not picturing riches tonight. We are picturing something smaller and closer. Sitting at the table on a normal evening, opening the bills, and feeling steady. Each one covered. A little left over, put aside. [pause 14]\n\nYou do not have to know how you get there. That is daytime work, and it is good to get sound advice from someone you trust. Tonight is only for the feeling of the evening when the numbers make sense. [pause 14]\n\nThis is imagination and feeling, not a promise of any result. It is a way to let your body practice a quiet breath in the place where it usually holds tight. [pause 8]\n\nBring that table to mind now. The one where the mail always lands. [pause 15]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "It is a weeknight. The dishes are done. You sit down at the table with the mail and a cup of something warm. [pause 22]\n\nNotice the pile. A few envelopes. Your phone with the bank app open. [pause 23]\n\nOpen the first bill. Read the amount. Feel your chest stay soft. You know it is covered. [pause 25]\n\nPay it. Watch the screen say paid. Set it aside. [pause 25]\n\nOpen the next one. The same steady feeling. Paid. Set aside. [pause 25]\n\nLook at the account when you are done. There is still some there. Not a fortune. Enough. [pause 27]\n\nMove a little into savings. Watch that number grow by a small step. [pause 27]\n\nLean back in your chair. Notice that your jaw is loose. Your hands are still. [pause 27]\n\nSay in your mind, I am steady. I have enough for tonight. [pause 28]\n\nStack the paid bills neatly, turn off the kitchen light, and walk to bed with nothing hanging over you. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "We will end here for tonight. [pause 10]\n\nKeep the feeling, not the effort. Let the effort go. [pause 15]\n\nWhatever happens tomorrow, tonight you practiced feeling at peace. That is worth something on its own. [pause 20]\n\nLet sleep come when it comes. There is no rush. [pause 20]\n\nNotice the weight of the covers. The cool side of the pillow. The dark. [pause 25]\n\nLet each breath out be a little longer than the one before. [pause 25]\n\nNothing more to picture. Nothing more to try. Only rest. [pause 30]\n\nGood night. [pause 60]"
+  }
+ ],
+ "words": 571,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1120,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T17:06:59",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; every teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Quiet-house, hard-talk and kind-no nights each tell anyone afraid of someone at home or in their life to reach a trained person and keep safe, and the hard-talk night is limited to ordinary talks; friendship and hard-talk nights never picture making another person choose or agree; money night pictures bills covered and a little saved, not riches, and points to sound advice (no debt-free or wealth promise); rest night carries no sleep claim."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

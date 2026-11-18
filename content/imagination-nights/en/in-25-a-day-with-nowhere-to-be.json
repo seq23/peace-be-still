@@ -1,0 +1,85 @@
+{
+ "id": "in-25-a-day-with-nowhere-to-be",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "en",
+ "title": "A Day with Nowhere to Be",
+ "theme": "rest",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Welcome to Imagination Nights. [pause 3]\n\nLie down in a way that feels easy. Let the bed take all of your weight. [pause 8]\n\nBreathe in slowly through your nose. And let it out through your mouth, a little longer than it went in. [pause 8]\n\nAgain. In. And a long, slow breath out. [pause 10]\n\nLet your forehead go soft. Your jaw. Your shoulders. Your hands. [pause 10]\n\nNow we will relax the body, one part at a time. You do not have to do anything. Just notice each part as I name it, and let it get heavy. [pause 8]\n\nYour feet. Let them be warm and heavy. [pause 15]\n\nYour calves and your knees. Heavy. [pause 15]\n\nYour hips and your lower back. Let them sink. [pause 15]\n\nYour belly. Let it rise and fall on its own. [pause 15]\n\nYour chest. Your shoulders. Your arms, all the way down to your fingertips. [pause 15]\n\nYour neck. Your face. The little muscles around your eyes. [pause 15]\n\nYour whole body, heavy and warm, held by the bed. [pause 15]\n\nThere is nothing to do tonight but imagine. And imagining is something you already know how to do. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Tonight's wish is a simple one, and for many people it feels out of reach. A whole day with nowhere to be. [pause 12]\n\nSome of us have not had a real day off in years. Even on the days we are home, we are working. Laundry, errands, caring for someone, answering messages. Rest starts to feel like something we have to earn. [pause 14]\n\nTonight we picture a day that asks nothing of you. No alarm. No list. Just slow hours, one after another, with time to notice them. [pause 14]\n\nYou do not have to figure out how to make that day happen in real life. That is for another time. Tonight you only have to let yourself enjoy it in imagination, without guilt. [pause 14]\n\nAs always, this is imagination and feeling, not a promise. It is a way to remind your body that rest is allowed, even before the calendar agrees. [pause 8]\n\nLet yourself picture waking on that day now. [pause 15]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "You wake without an alarm. The light is already up. Nobody is calling your name. [pause 20]\n\nLie still for a while. Notice the covers. The pillow. The plain fact that you do not have to get up. [pause 23]\n\nWhen you are ready, get up slowly. Make breakfast the long way. Taste it. [pause 23]\n\nSit by a window with a book, or music, or nothing at all. [pause 25]\n\nLet an hour go by. Notice that you did not check the time. [pause 27]\n\nIn the afternoon, take a nap with the window cracked. Hear the street sounds come and go. [pause 27]\n\nWake up soft and unhurried. Step outside for a minute and feel the air. [pause 27]\n\nIn the evening, eat something simple. Wash one plate. Leave the rest for tomorrow. [pause 27]\n\nNotice how your body feels at the end of a day like this. Loose. Full. Quiet. [pause 28]\n\nSay in your mind, I am allowed to rest. [pause 28]\n\nLet that easy day carry you down into this easy night. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Now let the scene stay with you as you drift. [pause 10]\n\nYou do not have to hold it tightly. Just let it be there, warm and quiet, like a lamp left on in another room. [pause 15]\n\nIf your mind wanders, come back to one small detail. A sound. A word. A feeling in your hands. [pause 20]\n\nThis is only imagination, and imagination is allowed to be kind. [pause 20]\n\nYou might notice that your breathing is slower now than when we began. Let it stay slow. [pause 25]\n\nLet your body grow heavier still. There is nowhere to go. [pause 25]\n\nIf you are still awake, that is fine. Lie quietly with the scene, and let the quiet do its work. [pause 30]\n\nRest now. [pause 60]"
+  }
+ ],
+ "words": 600,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1165,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T17:06:59",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words only, no teacher named or quoted, no faith words; every teaching says it is imagination and feeling, not a promise, and keeps the daytime work real. Quiet-house, hard-talk and kind-no nights each tell anyone afraid of someone at home or in their life to reach a trained person and keep safe, and the hard-talk night is limited to ordinary talks; friendship and hard-talk nights never picture making another person choose or agree; money night pictures bills covered and a little saved, not riches, and points to sound advice (no debt-free or wealth promise); rest night carries no sleep claim."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
