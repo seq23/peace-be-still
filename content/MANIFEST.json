@@ -48,6 +48,14 @@
    "never-ship": 0,
    "rewritten": 0,
    "held_ids": []
+  },
+  "declaration/en": {
+   "passed": 90,
+   "held": 0,
+   "draft": 0,
+   "never-ship": 0,
+   "rewritten": 0,
+   "held_ids": []
   }
  }
 }
