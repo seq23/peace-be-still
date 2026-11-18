@@ -3,7 +3,7 @@ name: Search Loop
 # The shared search growth engine (seq23/search-loop) on peacebestillapp.com: finds easy
 # faith and sleep searches, publishes one gated page per search under /questions/
 # (site/public/questions/), checks each page at 2/4/8 weeks, and uploads the weekly report
-# artifact "search-loop-week". Every page ends in the launch waitlist. Pages land on main,
+# artifact "search-loop-week". Every page ends in the store call to action (site/config/store.json). Pages land on main,
 # and the push runs the Site workflow (safety check, deploy).
 on:
   schedule:
@@ -32,7 +32,7 @@ jobs:
       stage: ${{ inputs.stage || 'auto' }}
       # New pages join site/public/sitemap.xml; the safety check refuses a page that breaks the
       # trademark, claims or two-door rules before it is committed. Pure node, no install.
-      post_build_command: node site/scripts/build-sitemap.mjs && node site/scripts/check-site.mjs
+      post_build_command: node site/scripts/apply-cta.mjs && node site/scripts/build-sitemap.mjs && node site/scripts/check-site.mjs
     secrets:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}

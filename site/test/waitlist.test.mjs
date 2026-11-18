@@ -1,7 +1,8 @@
-// Behaviour of the launch waitlist (app-security: honeypot, rate limit, consent, same-origin, removal).
+// Behaviour of the closed launch waitlist: sign-ups refused and nothing stored (owner 18 Nov 2026), the
+// remove link still deletes a stored row, same-origin enforced, www redirect.
 import test from "node:test";
 import assert from "node:assert/strict";
-import worker, { DAILY_CEILING } from "../src/app.js";
+import worker from "../src/app.js";
 
 function fakeDb() {
   const rows = [];
@@ -43,63 +44,29 @@ const post = (path, fields, headers = {}) => new Request(`https://peacebestillap
 });
 const good = { email: "Reader@Example.org", consent: "yes", lang: "en", door: "gods-word", page: "/questions/psalms-for-sleep/" };
 
-test("a valid sign-up is stored once, lower-cased, with consent text, ISO created_at and a remove link", async () => {
+const seeded = () => { const e = env(); e.DB.rows.push({ email: "reader@example.org", remove_token: "a".repeat(48), created_at: "2026-11-01T00:00:00Z" }); return e; };
+
+test("sign-ups are closed: a valid post answers 410, stores nothing, and points to the stores", async () => {
   const e = env();
   const res = await worker.fetch(post("/api/waitlist", good), e);
-  assert.equal(res.status, 200);
-  assert.equal(e.DB.rows.length, 1);
-  const r = e.DB.rows[0];
-  assert.equal(r.email, "reader@example.org");
-  assert.equal(r.door, "gods-word");
-  assert.equal(r.source_path, "/questions/psalms-for-sleep/");
-  assert.match(r.created_at, /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z$/);
-  assert.ok(r.consent_text.length > 10);
-  assert.ok((await res.text()).includes(`/waitlist/remove?t=${r.remove_token}`));
-  const again = await worker.fetch(post("/api/waitlist", good), e);
-  assert.equal(again.status, 200);
-  assert.equal(e.DB.rows.length, 1);
-  assert.ok(!(await again.text()).includes("remove?t="), "a duplicate never reveals the remove link");
-});
-
-test("the honeypot answers like success and stores nothing", async () => {
-  const e = env();
-  const res = await worker.fetch(post("/api/waitlist", { ...good, website: "http://spam.example" }), e);
-  assert.equal(res.status, 200);
+  assert.equal(res.status, 410);
   assert.equal(e.DB.rows.length, 0);
-});
-
-test("no consent, a bad email, or an oversized body is refused and stores nothing", async () => {
-  const e = env();
-  assert.equal((await worker.fetch(post("/api/waitlist", { ...good, consent: "" }), e)).status, 400);
-  assert.equal((await worker.fetch(post("/api/waitlist", { ...good, email: "not-an-email" }), e)).status, 400);
-  assert.equal((await worker.fetch(post("/api/waitlist", { ...good, email: "x".repeat(3000) + "@a.org" }), e)).status, 413);
-  assert.equal(e.DB.rows.length, 0);
-});
-
-test("over the per-IP limit answers 429; over the daily ceiling answers 503", async () => {
-  const e = env({ WAITLIST_RL: { limit: async ({ key }) => ({ success: !key.includes("203.0.113.9") }) } });
-  assert.equal((await worker.fetch(post("/api/waitlist", good), e)).status, 429);
-  const f = env();
-  const now = new Date().toISOString();
-  for (let i = 0; i < DAILY_CEILING; i++) f.DB.rows.push({ email: `p${i}@example.org`, created_at: now });
-  assert.equal((await worker.fetch(post("/api/waitlist", { ...good, email: "late@example.org" }), f)).status, 503);
+  assert.match(await res.text(), /App Store and Google Play/);
 });
 
 test("a cross-site post is refused; GET on the endpoint is not allowed", async () => {
-  const e = env();
-  assert.equal((await worker.fetch(post("/api/waitlist", good, { Origin: "https://evil.example", "Sec-Fetch-Site": "cross-site" }), e)).status, 403);
+  const e = seeded();
+  assert.equal((await worker.fetch(post("/api/waitlist/remove", { t: "a".repeat(48), lang: "en" }, { Origin: "https://evil.example", "Sec-Fetch-Site": "cross-site" }), e)).status, 403);
   assert.equal((await worker.fetch(new Request("https://peacebestillapp.com/api/waitlist"), e)).status, 405);
-  assert.equal(e.DB.rows.length, 0);
+  assert.equal(e.DB.rows.length, 1);
 });
 
-test("the remove link deletes the row; an unknown token changes nothing and says the same", async () => {
-  const e = env();
-  await worker.fetch(post("/api/waitlist", good), e);
-  const tok = e.DB.rows[0].remove_token;
+test("the remove link still deletes a stored row; an unknown token changes nothing and says the same", async () => {
+  const e = seeded();
   const unknown = await worker.fetch(post("/api/waitlist/remove", { t: "0".repeat(48), lang: "en" }), e);
   assert.equal(unknown.status, 200);
   assert.equal(e.DB.rows.length, 1);
-  const res = await worker.fetch(post("/api/waitlist/remove", { t: tok, lang: "en" }), e);
+  const res = await worker.fetch(post("/api/waitlist/remove", { t: "a".repeat(48), lang: "en" }), e);
   assert.equal(res.status, 200);
   assert.equal(e.DB.rows.length, 0);
 });

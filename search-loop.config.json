@@ -9,7 +9,7 @@
     "logo": "https://peacebestillapp.com/icon-512.png"
   },
   "audience": "Christians, many of them Black women and Spanish-speaking families, who read or listen to scripture at bedtime and in the morning: whispered Bible readings, Psalms for sleep, Bible chat and daily prayers or declarations; plus people looking for a Bible app with no trial and no surprise charges",
-  "voice": "warm, unhurried and plain, like a grandmother's front porch after dark; short sentences; scripture quoted word for word from the King James Version (English) or Reina-Valera 1909 (Spanish) with book, chapter and verse, never paraphrased; never promise sleep, healing or any outcome (say 'a nightly practice'); never 'manifest', law of attraction or mindset-practice words on these pages; never the phrase 'Black Bible Stories' (say 'Bible stories with Black faces'); never 'Speak Life'; never speak as God or Jesus; the app is coming soon with no launch date, never 'available now'; no ads, no trial, $7.99 a month or $39.99 a year; never disparage another app",
+  "voice": "warm, unhurried and plain, like a grandmother's front porch after dark; short sentences; scripture quoted word for word from the King James Version (English) or Reina-Valera 1909 (Spanish) with book, chapter and verse, never paraphrased; never promise sleep, healing or any outcome (say 'a nightly practice'); never 'manifest', law of attraction or mindset-practice words on these pages; never the phrase 'Black Bible Stories' (say 'Bible stories with Black faces'); never 'Speak Life'; never speak as God or Jesus; coming soon to the App Store and Google Play; never a launch date; never 'available now' until site/config/store.json has that store's URL; no ads, no trial, $7.99 a month or $39.99 a year; never disparage another app",
   "topics": [
     "psalms for sleep",
     "whispered bible for sleep",
@@ -28,7 +28,15 @@
     "psalm 23 for sleep",
     "salmos para dormir",
     "biblia en español para dormir",
-    "oración para dormir"
+    "oración para dormir",
+    "black bible chat",
+    "black version of bible chat",
+    "free bible chat",
+    "bible chat alternative",
+    "bible chat cancel subscription",
+    "bible chat app free",
+    "bible chat without subscription",
+    "bible chat for black women"
   ],
   "find": {
     "priority_topics": 4,
@@ -56,8 +64,8 @@
     ]
   },
   "action": {
-    "label": "Tell me when Peace Be Still launches",
-    "url": "https://peacebestillapp.com/#waitlist"
+    "label": "Look for Peace Be Still in the App Store and Google Play",
+    "url": "https://peacebestillapp.com/#get-the-app"
   },
   "allowed_link_targets": [
     "https://peacebestillapp.com",

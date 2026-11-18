@@ -1,65 +1,54 @@
 // Shared page parts: header, footer and the one action (the launch waitlist).
 export const BASE = "https://peacebestillapp.com";
 
-const WL = {
+import { readFileSync } from "node:fs";
+
+// THE store call to action (owner 18 Nov 2026: no waitlist). Every page renders it through this one
+// function, between <!-- cta:start --> and <!-- cta:end -->. Per store, from site/config/store.json:
+// null -> "coming soon" text (never a date, never "available now"); a URL -> that store's official
+// badge (Apple and Google marketing artwork, unaltered) linking to the listing.
+export function storeConfig() {
+  return JSON.parse(readFileSync(new URL("../config/store.json", import.meta.url), "utf8"));
+}
+const CTA = {
   en: {
-    h: "Tell me when it launches",
-    p: "Leave your email and we will send one message when Peace Be Still is in the App Store and Google Play. That is the only thing your address is used for, and the list is deleted after the launch email.",
-    email: "Your email",
-    door: "Which door interests you? (optional)",
-    gw: "God's Word",
-    ms: "Mindset &amp; imagination",
-    both: "Not sure yet",
-    consent: "Email me once when Peace Be Still launches. Nothing else.",
-    btn: "Tell me when it launches ›",
-    fine: 'What we keep and how to remove it: <a href="/privacy">Privacy</a>.',
-    hp: "Leave this empty",
+    soonH: "Look for Peace Be Still in the App Store and Google Play",
+    liveH: "Get Peace Be Still",
+    p: "Free to download, with a free lane that stays free. No ads, no trial.",
+    iosSoon: "Coming soon to the App Store · search “Peace Be Still”",
+    playSoon: "Coming soon to Google Play · search “Peace Be Still”",
+    iosAlt: "Download on the App Store",
+    playAlt: "Get it on Google Play",
   },
   es: {
-    h: "Avísame cuando salga",
-    p: "Deja tu correo y te enviaremos un solo mensaje cuando Peace Be Still esté en el App Store y Google Play. Es lo único para lo que usamos tu dirección, y la lista se borra después del correo del lanzamiento.",
-    email: "Tu correo",
-    door: "¿Qué puerta te interesa? (opcional)",
-    gw: "La Palabra de Dios",
-    ms: "Mentalidad e imaginación",
-    both: "Todavía no sé",
-    consent: "Escríbanme una sola vez cuando salga Peace Be Still. Nada más.",
-    btn: "Avísame cuando salga ›",
-    fine: 'Lo que guardamos y cómo quitarlo: <a href="/es/privacidad">Privacidad</a>.',
-    hp: "Deja esto vacío",
+    soonH: "Busca Peace Be Still en el App Store y Google Play",
+    liveH: "Descarga Peace Be Still",
+    p: "Gratis para descargar, con un camino gratis que siempre es gratis. Sin anuncios, sin prueba.",
+    iosSoon: "Muy pronto en el App Store · busca “Peace Be Still”",
+    playSoon: "Muy pronto en Google Play · busca “Peace Be Still”",
+    iosAlt: "Descárgalo en el App Store",
+    playAlt: "Disponible en Google Play",
   },
 };
-
-// door: "faith" | "mindset" -> fixed hidden value (a door page never shows the other door);
-// "neutral" -> optional choice.
-export function waitlistHtml(lang, path, door) {
-  const t = WL[lang];
-  const doorField = door === "faith"
-    ? '<input type="hidden" name="door" value="gods-word">'
-    : door === "mindset"
-      ? '<input type="hidden" name="door" value="mindset">'
-      : `<fieldset class="doors-pick"><legend>${t.door}</legend>
-        <label><input type="radio" name="door" value="gods-word"> ${t.gw}</label>
-        <label><input type="radio" name="door" value="mindset"> ${t.ms}</label>
-        <label><input type="radio" name="door" value="" checked> ${t.both}</label>
-      </fieldset>`;
-  return `<section class="wrap" id="waitlist" aria-labelledby="wl-h">
-  <div class="card waitlist-card">
-    <h2 id="wl-h">${t.h}</h2>
+export function storeCtaHtml(lang, store = storeConfig()) {
+  const t = CTA[lang === "es" ? "es" : "en"];
+  const ios = store.app_store_url
+    ? `<a class="store-badge" href="${store.app_store_url}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
+    : `<span class="store-soon">${t.iosSoon}</span>`;
+  const play = store.play_url
+    ? `<a class="store-badge" href="${store.play_url}"><img src="/brand/stores/google-play-${lang === "es" ? "es" : "en"}.png" alt="${t.playAlt}" width="135" height="52"></a>`
+    : `<span class="store-soon">${t.playSoon}</span>`;
+  const h = store.app_store_url || store.play_url ? t.liveH : t.soonH;
+  return `<!-- cta:start --><section class="wrap" id="get-the-app" aria-labelledby="cta-h">
+  <div class="card cta-card">
+    <h2 id="cta-h">${h}</h2>
     <p>${t.p}</p>
-    <form class="waitlist" method="post" action="/api/waitlist">
-      <label for="wl-email">${t.email}</label>
-      <input id="wl-email" name="email" type="email" required autocomplete="email" inputmode="email" maxlength="254">
-      ${doorField}
-      <label class="tick"><input type="checkbox" name="consent" value="yes" required> <span>${t.consent}</span></label>
-      <input type="hidden" name="lang" value="${lang}">
-      <input type="hidden" name="page" value="${path}">
-      <div class="hp" aria-hidden="true"><label>${t.hp} <input name="website" tabindex="-1" autocomplete="off"></label></div>
-      <button class="btn" type="submit">${t.btn}</button>
-      <p class="fine">${t.fine}</p>
-    </form>
+    <ul class="stores">
+      <li>${ios}</li>
+      <li>${play}</li>
+    </ul>
   </div>
-</section>`;
+</section><!-- cta:end -->`;
 }
 
 export function headerHtml(lang, altPath) {
