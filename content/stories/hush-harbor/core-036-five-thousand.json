@@ -1,0 +1,370 @@
+{
+ "id": "core-036-five-thousand",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Five Loaves and Two Fishes",
+ "passage": {
+  "refs": [
+   "JOH 6:1-14"
+  ],
+  "label": "John 6:1-14"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "philip",
+   "name": "Philip",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "andrew",
+   "name": "Andrew",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "men",
+   "name": "the men",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus crossed over the Sea of Galilee, and the people would not let him alone. They walked around the shore to find him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:2",
+   "label": "John 6:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And a great multitude followed him, because they saw his miracles which he did on them that were diseased."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And a great multitude followed him, because they saw his miracles which he did on them that were diseased."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:3",
+   "label": "John 6:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And Jesus went up into a mountain, and there he sat with his disciples."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And Jesus went up into a mountain, and there he sat with his disciples."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He sat down on the mountain with his disciples. It was near the Passover, and the roads were full of people."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:5",
+   "label": "John 6:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "When Jesus then lifted up his eyes, and saw a great company come unto him, he saith unto Philip, Whence shall we buy bread, that these may eat?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "When Jesus then lifted up his eyes, and saw a great company come unto him, he saith unto Philip, Whence shall we buy bread, that these may eat?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Now Jesus already knew what he was going to do. He was testing Philip, to see what Philip would say."
+  },
+  {
+   "type": "scripture",
+   "speaker": "philip",
+   "ref": "JOH 6:7",
+   "label": "John 6:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Philip answered him, Two hundred pennyworth of bread is not sufficient for them, that every one of them may take a little."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Philip answered him,"
+    },
+    {
+     "v": 7,
+     "speaker": "philip",
+     "text": "Two hundred pennyworth of bread is not sufficient for them, that every one of them may take a little."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Philip did the math. Two hundred pennyworth was most of a year's wages, and it still would not be enough for everybody to get even a little. Church, sometimes we do the math and leave God out of it."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Andrew came up with something."
+  },
+  {
+   "type": "scripture",
+   "speaker": "andrew",
+   "ref": "JOH 6:9",
+   "label": "John 6:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "There is a lad here, which hath five barley loaves, and two small fishes: but what are they among so many?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "andrew",
+     "text": "There is a lad here, which hath five barley loaves, and two small fishes: but what are they among so many?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Five barley loaves. Barley was the bread poor folks ate. Two small fish. One little boy's lunch. Andrew brought it, but he did not think much of it. What are they among so many?"
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say God is able, you say, yes he is. Our God is able. [PAUSE 3s | screen: \"Yes he is\"] Yes he is. [PAUSE 3s | screen: \"Our God is able\"] Five loaves and two fish was all he needed.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Yes he is"
+    },
+    {
+     "seconds": 3,
+     "screen": "Our God is able"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:10",
+   "label": "John 6:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And Jesus said, Make the men sit down. Now there was much grass in the place. So the men sat down, in number about five thousand."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And Jesus said, Make the men sit down. Now there was much grass in the place. So the men sat down, in number about five thousand."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:11",
+   "label": "John 6:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And Jesus took the loaves; and when he had given thanks, he distributed to the disciples, and the disciples to them that were set down; and likewise of the fishes as much as they would."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And Jesus took the loaves; and when he had given thanks, he distributed to the disciples, and the disciples to them that were set down; and likewise of the fishes as much as they would."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He gave thanks for what looked like not enough. Then he started passing it out. And it kept on coming. Everybody ate as much as they wanted."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:12",
+   "label": "John 6:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "When they were filled, he said unto his disciples, Gather up the fragments that remain, that nothing be lost."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "When they were filled, he said unto his disciples, Gather up the fragments that remain, that nothing be lost."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 6:13",
+   "label": "John 6:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Therefore they gathered them together, and filled twelve baskets with the fragments of the five barley loaves, which remained over and above unto them that had eaten."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Therefore they gathered them together, and filled twelve baskets with the fragments of the five barley loaves, which remained over and above unto them that had eaten."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Twelve baskets left over. More at the end than at the beginning. That little boy's lunch fed a whole hillside, and there was plenty to spare."
+  },
+  {
+   "type": "scripture",
+   "speaker": "men",
+   "ref": "JOH 6:14",
+   "label": "John 6:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Then those men, when they had seen the miracle that Jesus did, said, This is of a truth that prophet that should come into the world."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Then those men, when they had seen the miracle that Jesus did, said,"
+    },
+    {
+     "v": 14,
+     "speaker": "men",
+     "text": "This is of a truth that prophet that should come into the world."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Do not look down on what is in your hands because it looks small. That boy did not have much. He gave what he had, and Jesus blessed it and broke it. The Lord who fed five thousand on a hillside still knows how to take a little and make it enough."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 512,
+ "est_seconds": 285,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.5",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:46:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 6:1-14; the boy and barley from v9; 'two hundred pennyworth' explained as most of a year's wages; no promise of provision beyond the story's own."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Our God is able / yes he is', a real church pair; the boy's small gift honoured; no poverty-only framing."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,391 @@
+{
+ "id": "core-035-jacob-esau",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Esau Ran to Meet Him",
+ "passage": {
+  "refs": [
+   "GEN 32:6-12",
+   "GEN 33:1-11"
+  ],
+  "label": "Genesis 32:6-12; Genesis 33:1-11"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "messengers",
+   "name": "the messengers",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "jacob",
+   "name": "Jacob",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "esau",
+   "name": "Esau",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Twenty years before, Jacob had tricked his brother Esau out of their father's blessing. Esau was so angry he swore he would kill him, and Jacob ran for his life. Now God had told Jacob to go back home. And going home meant facing his brother."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob sent messengers ahead with a kind word for Esau. Then the messengers came back."
+  },
+  {
+   "type": "scripture",
+   "speaker": "messengers",
+   "ref": "GEN 32:6",
+   "label": "Genesis 32:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And the messengers returned to Jacob, saying, We came to thy brother Esau, and also he cometh to meet thee, and four hundred men with him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And the messengers returned to Jacob, saying,"
+    },
+    {
+     "v": 6,
+     "speaker": "messengers",
+     "text": "We came to thy brother Esau, and also he cometh to meet thee, and four hundred men with him."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 32:7",
+   "label": "Genesis 32:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Then Jacob was greatly afraid and distressed: and he divided the people that was with him, and the flocks, and herds, and the camels, into two bands;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Then Jacob was greatly afraid and distressed: and he divided the people that was with him, and the flocks, and herds, and the camels, into two bands;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Four hundred men. Jacob figured his brother was coming for war. Church, guilt will make you expect the worst. Jacob split his whole household in two, so that if Esau struck one camp, the other might get away. And then he did what he should have done first. He prayed."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 32:9",
+   "label": "Genesis 32:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And Jacob said, O God of my father Abraham, and God of my father Isaac, the LORD which saidst unto me, Return unto thy country, and to thy kindred, and I will deal well with thee:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And Jacob said,"
+    },
+    {
+     "v": 9,
+     "speaker": "jacob",
+     "text": "O God of my father Abraham, and God of my father Isaac, the LORD which saidst unto me, Return unto thy country, and to thy kindred, and I will deal well with thee:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 32:11",
+   "label": "Genesis 32:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Deliver me, I pray thee, from the hand of my brother, from the hand of Esau: for I fear him, lest he will come and smite me, and the mother with the children."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "jacob",
+     "text": "Deliver me, I pray thee, from the hand of my brother, from the hand of Esau: for I fear him, lest he will come and smite me, and the mother with the children."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That is a real prayer. No fancy words. Lord, I am scared. Deliver me. Jacob reminded God of his promise and laid his fear right out there."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The next morning, Jacob looked up and saw them coming."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 33:1",
+   "label": "Genesis 33:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And Jacob lifted up his eyes, and looked, and, behold, Esau came, and with him four hundred men. And he divided the children unto Leah, and unto Rachel, and unto the two handmaids."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And Jacob lifted up his eyes, and looked, and, behold, Esau came, and with him four hundred men. And he divided the children unto Leah, and unto Rachel, and unto the two handmaids."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 33:3",
+   "label": "Genesis 33:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And he passed over before them, and bowed himself to the ground seven times, until he came near to his brother."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And he passed over before them, and bowed himself to the ground seven times, until he came near to his brother."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Seven times he bowed down to the ground, walking toward the brother he had wronged. He did not know what was waiting for him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 33:4",
+   "label": "Genesis 33:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And Esau ran to meet him, and embraced him, and fell on his neck, and kissed him: and they wept."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And Esau ran to meet him, and embraced him, and fell on his neck, and kissed him: and they wept."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, Esau ran. [PAUSE 3s | screen: \"Esau ran\"] Esau ran. [PAUSE 3s | screen: \"Esau ran\"] Jacob came bowing, and his brother came running to hug his neck.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Esau ran"
+    },
+    {
+     "seconds": 3,
+     "screen": "Esau ran"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Twenty years of hurt, and Esau ran. Not to fight him. To hold him. They wept on each other's necks like they were boys again."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob had sent big gifts ahead, flocks and herds. Esau asked what all that was for."
+  },
+  {
+   "type": "scripture",
+   "speaker": "esau",
+   "ref": "GEN 33:9",
+   "label": "Genesis 33:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And Esau said, I have enough, my brother; keep that thou hast unto thyself."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And Esau said,"
+    },
+    {
+     "v": 9,
+     "speaker": "esau",
+     "text": "I have enough, my brother; keep that thou hast unto thyself."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 33:10",
+   "label": "Genesis 33:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And Jacob said, Nay, I pray thee, if now I have found grace in thy sight, then receive my present at my hand: for therefore I have seen thy face, as though I had seen the face of God, and thou wast pleased with me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And Jacob said,"
+    },
+    {
+     "v": 10,
+     "speaker": "jacob",
+     "text": "Nay, I pray thee, if now I have found grace in thy sight, then receive my present at my hand: for therefore I have seen thy face, as though I had seen the face of God, and thou wast pleased with me."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 33:11",
+   "label": "Genesis 33:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Take, I pray thee, my blessing that is brought to thee; because God hath dealt graciously with me, and because I have enough. And he urged him, and he took it."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "jacob",
+     "text": "Take, I pray thee, my blessing that is brought to thee; because God hath dealt graciously with me, and because I have enough."
+    },
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And he urged him, and he took it."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Seeing your face is like seeing the face of God. That is what forgiveness looks like when it shows up. Jacob had been afraid of his brother's face for twenty years. When he finally saw it, there was grace in it."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Some of us have a brother or a sister we have not spoken to in a long time. The road home might be shorter than we think. Pray first, like Jacob. Then go."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 595,
+ "est_seconds": 331,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.5",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:46:51",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 32:6-12 and 33:1-11 (32:7-8 split camps, 33:3 seven bows); reconciliation urged gently, with prayer first, never as a guarantee."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Family estrangement spoken to plainly and kindly; 'Esau ran' as the response."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
