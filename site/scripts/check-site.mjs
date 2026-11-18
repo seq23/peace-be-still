@@ -5,9 +5,11 @@
 // (2) no outcome/health promises or manifesting words on any page;
 // (3) mindset-practice words only on pages marked <meta name="pbs:door" content="mindset">,
 //     and a faith page never links a mindset page (or the reverse);
-// (4) the /privacy promise: the only form posts to our own waitlist endpoint, no email
+// (4) the /privacy promise: no forms or inputs at all (sign-ups closed 18 Nov 2026), no email
 //     addresses, no third-party scripts;
-// (5) no Apple/Google store badges or store links while the app is not live.
+// (5) store badges and store links only inside the one store CTA (<!-- cta:start -->…<!-- cta:end -->,
+//     from site/config/store.json), or as a sourced fact link <a class="src" rel="nofollow noopener">;
+//     never "available now" while store.json has no URL.
 // Exits 1 on any finding, and 1 if it read zero pages (rule 0). --self-test proves it can fail.
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
@@ -22,7 +24,7 @@ const banned = [
   [/\bcures?\b|insomnia|\bheals?\b|guarantee/i, "outcome or health promise"],
   [/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i, "an email address"],
   [/<script(?![^>]*application\/ld\+json)[^>]*>/i, "a script other than JSON-LD"],
-  [/apps\.apple\.com|play\.google\.com\/store|download on the app store|get it on google play/i, "a store link or badge before launch"],
+
 ];
 const mindsetOnly = /law of assumption|living in the end|imagination nights/i;
 
@@ -36,12 +38,16 @@ export function check(files) {
     const url = "/" + name.replace(/index\.html$/, "").replace(/\.html$/, "");
     urlToDoor.set(url, doorOf.get(name));
   }
+  let live = false;
+  try { const st = JSON.parse(readFileSync(new URL("../config/store.json", import.meta.url), "utf8")); live = Boolean(st.app_store_url || st.play_url); } catch {}
   for (const [name, text] of files) {
+    const outside = text.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, "").replace(/<a class="src" rel="nofollow noopener" href="https:\/\/apps\.apple\.com\/[^"]+">/g, "");
+    const store = outside.match(/apps\.apple\.com|play\.google\.com\/store|download on the app store|get it on google play|\/brand\/stores\//i);
+    if (store) findings.push(`${name}: a store link or badge outside the store CTA (${store[0]})`);
+    if (!live && /available now|disponible ya/i.test(text)) findings.push(`${name}: "available now" while no store URL is set`);
     for (const [re, why] of banned) if (re.test(text)) findings.push(`${name}: ${why} (${text.match(re)[0]})`);
-    for (const m of text.matchAll(/<form\b[^>]*>/gi)) {
-      if (!/action="\/api\/waitlist(\/remove)?"/.test(m[0])) findings.push(`${name}: a form that does not post to the waitlist (${m[0]})`);
-    }
-    if (/<input\b/i.test(text) && !/<form\b/i.test(text)) findings.push(`${name}: an input outside the waitlist form`);
+    if (/<form\b/i.test(text)) findings.push(`${name}: a form (sign-ups are closed; the site collects nothing)`);
+    if (/<input\b/i.test(text)) findings.push(`${name}: an input (the site collects nothing)`);
     const door = doorOf.get(name);
     if (name.endsWith(".html") && door !== "mindset" && mindsetOnly.test(text)) {
       // Home pages describe both doors by name; only the practice words are kept to mindset pages.
@@ -73,14 +79,15 @@ function readAll() {
 if (process.argv.includes("--self-test")) {
   const bad = check([
     ["a.html", '<meta name="pbs:door" content="faith"><p>Black Bible Stories</p><a href="/b">x</a><form action="https://x.example">'],
+    ["d.html", '<p>Available now!</p><a href="https://apps.apple.com/us/app/x/id1">get</a>'],
     ["b.html", '<meta name="pbs:door" content="mindset"><p>law of assumption</p>'],
     ["c.html", "<p>the law of assumption</p><script src=\"https://t.example/x.js\"></script>"],
   ]);
-  const want = ["registered trademark", "a faith page links a mindset page", "does not post to the waitlist", "mindset-practice words on a neutral page", "a script other than JSON-LD"];
+  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD"];
   const missing = want.filter((w) => !bad.some((f) => f.includes(w)));
   if (missing.length) { console.error(`check-site --self-test: did not catch: ${missing.join("; ")}`); process.exit(1); }
   if (bad.some((f) => f.startsWith("b.html"))) { console.error("check-site --self-test: flagged a clean mindset page"); process.exit(1); }
-  console.log("OUTPUT check-site --self-test: caught all 5 planted faults");
+  console.log("OUTPUT check-site --self-test: caught all 7 planted faults");
   process.exit(0);
 }
 

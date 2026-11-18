@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 // Builds the hand-written seed question pages (page-shape: answer first, question headings, FAQ,
-// schema, dates, ending in the waitlist) from site/content/questions.mjs, plus the two
+// schema, dates, ending in the store call to action) from site/content/questions.mjs, plus the two
 // question indexes. The search-loop engine adds its own pages to the same folder later.
 // Run: node site/scripts/build-seed-pages.mjs   (then node site/scripts/build-sitemap.mjs)
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PAGES } from "../content/questions.mjs";
-import { waitlistHtml, headerHtml, footerHtml, BASE } from "../content/parts.mjs";
+import { storeCtaHtml, headerHtml, footerHtml, BASE } from "../content/parts.mjs";
+import { applyCta } from "./apply-cta.mjs";
 
 const pub = new URL("../public/", import.meta.url).pathname;
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
@@ -46,7 +47,7 @@ function render(p) {
 <title>${esc(p.title)}</title>
 <meta name="description" content="${esc(p.description)}">
 <meta name="pbs:door" content="${p.door}">
-<link rel="canonical" href="${url}">
+<link rel="canonical" href="${url}">${p.alt ? `\n<link rel="alternate" hreflang="${p.lang}" href="${url}">\n<link rel="alternate" hreflang="${es ? "en" : "es"}" href="${BASE}${p.alt}">` : ""}
 <meta name="theme-color" content="#F4F0E6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E1A22" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -79,9 +80,9 @@ ${faq}
     </div>
   </section>
 ${sources}
-  <p class="byline">${es ? "Por" : "By"} Peace Be Still · ${es ? "una app de Spry Labs" : "a Spry Labs app"} · ${es ? "Publicado" : "Published"} ${p.publishedText} · ${es ? "Actualizado" : "Updated"} ${p.updatedText}</p>
+${p.notAffiliated ? `  <p class="muted not-affiliated">${es ? "Peace Be Still no está afiliada con Bible Chat ni con ninguna app nombrada aquí." : "Peace Be Still is not affiliated with Bible Chat or any app named here."}</p>\n` : ""}  <p class="byline">${es ? "Por" : "By"} Peace Be Still · ${es ? "una app de Spry Labs" : "a Spry Labs app"} · ${es ? "Publicado" : "Published"} ${p.publishedText} · ${es ? "Actualizado" : "Updated"} ${p.updatedText}</p>
 </main>
-${waitlistHtml(p.lang, p.path, p.door)}
+${storeCtaHtml(p.lang)}
 ${footerHtml(p.lang)}
 </body>
 </html>
@@ -130,7 +131,7 @@ ${items}
   </ul>
   <p class="byline">${es ? "Por Peace Be Still · una app de Spry Labs · Actualizado el 18 nov 2026" : "By Peace Be Still · a Spry Labs app · Updated 18 Nov 2026"}</p>
 </main>
-${waitlistHtml(lang, path, "neutral")}
+${storeCtaHtml(lang)}
 ${footerHtml(lang)}
 </body>
 </html>
@@ -155,8 +156,9 @@ for (const [f, lang, path] of STATIC) {
   let s = readFileSync(file, "utf8");
   const before = s;
   s = s.replace(/<!-- footer:start -->[\s\S]*?<!-- footer:end -->/, `<!-- footer:start -->${footerHtml(lang)}<!-- footer:end -->`);
-  s = s.replace(/<!-- waitlist:start -->[\s\S]*?<!-- waitlist:end -->/, `<!-- waitlist:start -->${waitlistHtml(lang, path, "neutral")}<!-- waitlist:end -->`);
+  s = s.replace(/<!-- waitlist:start -->[\s\S]*?<!-- waitlist:end -->/, storeCtaHtml(lang));
   if (!s.includes("<!-- footer:start -->")) { console.error(`NAMED STOP [NO_FOOTER_MARKER] ${f}`); process.exit(1); }
   if (s !== before) { writeFileSync(file, s); filled++; }
 }
-console.log(`OUTPUT build-seed-pages: ${PAGES.length} pages + 2 indexes`);
+const cta = applyCta();
+console.log(`OUTPUT build-seed-pages: ${PAGES.length} pages + 2 indexes; store CTA on ${cta} pages`);

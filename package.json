@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "store:set": "node site/scripts/store-set.mjs"
+  }
+}
