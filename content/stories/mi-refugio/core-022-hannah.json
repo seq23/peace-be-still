@@ -1,0 +1,408 @@
+{
+ "id": "core-022-hannah",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "La oración de Ana",
+ "passage": {
+  "refs": [
+   "1SA 1:9-20"
+  ],
+  "label": "1 Samuel 1:9-20"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "hannah",
+   "name": "Anna",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "eli",
+   "name": "Eli",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Anna era la esposa de Elcana, y no podía tener hijos. Cada año la familia subía a Silo para adorar a Dios. Y cada año la otra esposa de Elcana, que sí tenía hijos, la hacía sufrir y se burlaba de ella. Anna lloraba y no podía comer."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Elcana la amaba. Le preguntaba por qué estaba triste, si él no valía para ella más que diez hijos. Pero el dolor de Anna era tan hondo que ni el cariño de su esposo lo alcanzaba."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 1:9-10",
+   "label": "1 Samuel 1:9-10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y levantóse Anna después que hubo comido y bebido en Silo; y mientras el sacerdote Eli estaba sentado en una silla junto á un pilar del templo de Jehová,"
+    },
+    {
+     "v": 10,
+     "text": "Ella con amargura de alma oró á Jehová, y lloró abundantemente."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y levantóse Anna después que hubo comido y bebido en Silo; y mientras el sacerdote Eli estaba sentado en una silla junto á un pilar del templo de Jehová,"
+    },
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Ella con amargura de alma oró á Jehová, y lloró abundantemente."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun cuando oramos llorando y no tenemos palabras.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Anna no fue a quejarse con la otra mujer. Fue a la casa de Dios y le contó todo a él."
+  },
+  {
+   "type": "scripture",
+   "speaker": "hannah",
+   "ref": "1SA 1:11",
+   "label": "1 Samuel 1:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "E hizo voto, diciendo: Jehová de los ejércitos, si te dignares mirar la aflicción de tu sierva, y te acordares de mí, y no te olvidares de tu sierva, mas dieres á tu sierva un hijo varón, yo lo dedicaré á Jehová todos los días de su vida, y no subirá navaja sobre su cabeza."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "E hizo voto, diciendo:"
+    },
+    {
+     "v": 11,
+     "speaker": "hannah",
+     "text": "Jehová de los ejércitos, si te dignares mirar la aflicción de tu sierva, y te acordares de mí, y no te olvidares de tu sierva, mas dieres á tu sierva un hijo varón, yo lo dedicaré á Jehová todos los días de su vida, y no subirá navaja sobre su cabeza."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 1:12-13",
+   "label": "1 Samuel 1:12-13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y fué que como ella orase largamente delante de Jehová, Eli estaba observando la boca de ella."
+    },
+    {
+     "v": 13,
+     "text": "Mas Anna hablaba en su corazón, y solamente se movían sus labios, y su voz no se oía; y túvola Eli por borracha."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y fué que como ella orase largamente delante de Jehová, Eli estaba observando la boca de ella."
+    },
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Mas Anna hablaba en su corazón, y solamente se movían sus labios, y su voz no se oía; y túvola Eli por borracha."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ella oraba en silencio. Movía los labios, pero no se oía nada. Y el sacerdote, que la miraba desde lejos, pensó lo peor."
+  },
+  {
+   "type": "scripture",
+   "speaker": "eli",
+   "ref": "1SA 1:14",
+   "label": "1 Samuel 1:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Entonces le dijo Eli: ¿Hasta cuándo estarás borracha?; digiere tu vino."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Entonces le dijo Eli:"
+    },
+    {
+     "v": 14,
+     "speaker": "eli",
+     "text": "¿Hasta cuándo estarás borracha?; digiere tu vino."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagina lo que se siente. Estás derramando tu corazón delante de Dios, y la persona que debía entenderte te juzga. Anna pudo enojarse o irse. Pero le contestó con respeto y con la verdad."
+  },
+  {
+   "type": "scripture",
+   "speaker": "hannah",
+   "ref": "1SA 1:15",
+   "label": "1 Samuel 1:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y Anna le respondió, diciendo: No, señor mío: mas yo soy una mujer trabajada de espíritu: no he bebido vino ni sidra, sino que he derramado mi alma delante de Jehová."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y Anna le respondió, diciendo:"
+    },
+    {
+     "v": 15,
+     "speaker": "hannah",
+     "text": "No, señor mío: mas yo soy una mujer trabajada de espíritu: no he bebido vino ni sidra, sino que he derramado mi alma delante de Jehová."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "hannah",
+   "ref": "1SA 1:16",
+   "label": "1 Samuel 1:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "No tengas á tu sierva por una mujer impía: porque por la magnitud de mis congojas y de mi aflicción he hablado hasta ahora."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "hannah",
+     "text": "No tengas á tu sierva por una mujer impía: porque por la magnitud de mis congojas y de mi aflicción he hablado hasta ahora."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He derramado mi alma delante de Jehová. Así se ora cuando duele. Sin adornos, sin esconder nada."
+  },
+  {
+   "type": "scripture",
+   "speaker": "eli",
+   "ref": "1SA 1:17",
+   "label": "1 Samuel 1:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Y Eli respondió, y dijo: Ve en paz, y el Dios de Israel te otorgue la petición que le has hecho."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Y Eli respondió, y dijo:"
+    },
+    {
+     "v": 17,
+     "speaker": "eli",
+     "text": "Ve en paz, y el Dios de Israel te otorgue la petición que le has hecho."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "hannah",
+   "ref": "1SA 1:18",
+   "label": "1 Samuel 1:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y ella dijo: Halle tu sierva gracia delante de tus ojos. Y fuése la mujer su camino, y comió, y no estuvo más triste."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y ella dijo:"
+    },
+    {
+     "v": 18,
+     "speaker": "hannah",
+     "text": "Halle tu sierva gracia delante de tus ojos."
+    },
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y fuése la mujer su camino, y comió, y no estuvo más triste."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Algo cambió en ella antes de que cambiara su situación. Comió, y ya no estaba triste. Todavía no tenía en brazos al hijo que pedía. Pero había dejado su carga delante de Dios."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 1:19",
+   "label": "1 Samuel 1:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y levantándose de mañana, adoraron delante de Jehová, y volviéronse, y vinieron á su casa en Ramatha. Y Elcana conoció á Anna su mujer, y Jehová se acordó de ella."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "Y levantándose de mañana, adoraron delante de Jehová, y volviéronse, y vinieron á su casa en Ramatha. Y Elcana conoció á Anna su mujer, y Jehová se acordó de ella."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1SA 1:20",
+   "label": "1 Samuel 1:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Y fué que corrido el tiempo, después de haber concebido Anna, parió un hijo, y púsole por nombre Samuel, diciendo: Por cuanto lo demandé á Jehová."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Y fué que corrido el tiempo, después de haber concebido Anna, parió un hijo, y púsole por nombre Samuel, diciendo: Por cuanto lo demandé á Jehová."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Samuel. Su nombre le recordaba cada día que lo había pedido a Dios. Y Anna cumplió su promesa. Cuando el niño creció un poco, lo llevó al templo para que sirviera a Dios toda su vida. Ese niño llegó a ser uno de los grandes profetas de Israel."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Muchas mujeres han orado como Anna y no han recibido lo que pedían de la misma manera. La Biblia no promete que toda oración termina igual. Pero esta historia nos muestra que Dios escucha a la que ora en silencio, con lágrimas, cuando nadie más entiende."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche tienes un dolor que no te deja comer ni dormir, no tienes que arreglar tus palabras. Puedes derramar tu alma delante de Dios. Él ve tu aflicción. Y no te tiene por menos por llorar delante de él."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 675,
+ "est_seconds": 374,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Sam 1:9-20 (vv1-8 and 24-28 told in words); says plainly not every prayer ends the same (no fertility promise); lament and silent prayer honoured."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Childlessness handled with tenderness; the rival wife not named or mocked; would comfort a woman who has waited for a child."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

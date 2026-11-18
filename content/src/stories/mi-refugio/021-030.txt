@@ -1,0 +1,287 @@
+# Mi Refugio, historias 21-30 (español de las Américas, Reina-Valera 1909). Escritas por Claude (sin borrador de modelo gratuito), con la lectura pastoral y cultural de Claude.
+
+=== core-021-adam-eve | Adán y Eva en el huerto
+passage: GEN 2:15-25; GEN 3:1-13
+shelf: adult
+violence: none
+sexual: none
+cast: adam|Adam|adult|m; woman|mujer|adult|f
+N: Al principio, Dios plantó un huerto en Edén, lleno de árboles hermosos y de buen fruto. Por en medio corría un río. Y allí puso al primer hombre.
+S: GEN 2:15
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Desde el primer día le dio al hombre un hogar y un trabajo con sentido.
+S: GEN 2:16-17
+N: Dios le dio libertad para comer de todos los árboles, menos de uno. Un solo límite, en medio de un huerto entero de regalos.
+S: GEN 2:18
+N: Que el hombre estuviera solo no era bueno. Es la primera vez en la Biblia que Dios dice que algo no es bueno. Y no era el pecado. Era la soledad.
+N: Adam les puso nombre a todos los animales, uno por uno. Pero entre todos ellos no había nadie como él. Entonces Dios lo hizo dormir profundamente, tomó una de sus costillas y de ella formó a la mujer. Y se la trajo.
+S: GEN 2:23 @adam after "Y dijo Adam: "
+S: GEN 2:24-25
+N: Estaban juntos, en paz con Dios y en paz el uno con el otro. No tenían nada que esconder.
+S: GEN 3:1
+N: La serpiente no empezó con una mentira grande. Empezó con una pregunta. Torció un poquito lo que Dios había dicho, como si Dios les hubiera prohibido todo.
+S: GEN 3:2 @woman
+S: GEN 3:3
+S: GEN 3:4-5
+N: Ahí estaba la mentira. Que Dios les estaba negando algo bueno. Que no se podía confiar en él.
+S: GEN 3:6
+S: GEN 3:7
+N: Se les abrieron los ojos, sí. Pero lo primero que vieron fue su propia vergüenza. Y por primera vez quisieron esconderse.
+S: GEN 3:8
+S: GEN 3:9
+N: ¿Dónde estás tú? Dios sabía dónde estaban. La pregunta no era para él. Era para ellos. Era Dios buscándolos, llamándolos por la tarde, en vez de dejarlos solos entre los árboles.
+S: GEN 3:10 @adam
+S: GEN 3:12 @adam
+S: GEN 3:13
+N: El hombre culpó a la mujer, y también a Dios que se la había dado. La mujer culpó a la serpiente. Es una historia muy antigua y muy conocida. Cuando nos equivocamos, lo primero que queremos es escondernos y señalar a otro.
+N: Pero lo que más importa en esta historia es lo que hizo Dios. Bajó al huerto. Llamó. Preguntó. Y unos versículos más adelante, antes de que salieran del huerto, él mismo les hizo ropa de pieles y los vistió.
+N: Si esta noche tienes algo que esconder, algo de lo que te avergüenzas, escucha esa pregunta como la oyeron ellos. ¿Dónde estás tú? No es la voz de alguien que quiere avergonzarte. Es la voz de un Dios que sigue buscando a los suyos.
+
+=== core-022-hannah | La oración de Ana
+passage: 1SA 1:9-20
+shelf: adult
+violence: none
+sexual: none
+cast: hannah|Anna|adult|f; eli|Eli|elder|m
+N: Anna era la esposa de Elcana, y no podía tener hijos. Cada año la familia subía a Silo para adorar a Dios. Y cada año la otra esposa de Elcana, que sí tenía hijos, la hacía sufrir y se burlaba de ella. Anna lloraba y no podía comer.
+N: Elcana la amaba. Le preguntaba por qué estaba triste, si él no valía para ella más que diez hijos. Pero el dolor de Anna era tan hondo que ni el cariño de su esposo lo alcanzaba.
+S: 1SA 1:9-10
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun cuando oramos llorando y no tenemos palabras.
+N: Anna no fue a quejarse con la otra mujer. Fue a la casa de Dios y le contó todo a él.
+S: 1SA 1:11 @hannah
+S: 1SA 1:12-13
+N: Ella oraba en silencio. Movía los labios, pero no se oía nada. Y el sacerdote, que la miraba desde lejos, pensó lo peor.
+S: 1SA 1:14 @eli after "Entonces le dijo Eli: "
+N: Imagina lo que se siente. Estás derramando tu corazón delante de Dios, y la persona que debía entenderte te juzga. Anna pudo enojarse o irse. Pero le contestó con respeto y con la verdad.
+S: 1SA 1:15 @hannah
+S: 1SA 1:16 @hannah whole
+N: He derramado mi alma delante de Jehová. Así se ora cuando duele. Sin adornos, sin esconder nada.
+S: 1SA 1:17 @eli
+S: 1SA 1:18 @hannah until "Y fuése"
+N: Algo cambió en ella antes de que cambiara su situación. Comió, y ya no estaba triste. Todavía no tenía en brazos al hijo que pedía. Pero había dejado su carga delante de Dios.
+S: 1SA 1:19
+S: 1SA 1:20
+N: Samuel. Su nombre le recordaba cada día que lo había pedido a Dios. Y Anna cumplió su promesa. Cuando el niño creció un poco, lo llevó al templo para que sirviera a Dios toda su vida. Ese niño llegó a ser uno de los grandes profetas de Israel.
+N: Muchas mujeres han orado como Anna y no han recibido lo que pedían de la misma manera. La Biblia no promete que toda oración termina igual. Pero esta historia nos muestra que Dios escucha a la que ora en silencio, con lágrimas, cuando nadie más entiende.
+N: Si esta noche tienes un dolor que no te deja comer ni dormir, no tienes que arreglar tus palabras. Puedes derramar tu alma delante de Dios. Él ve tu aflicción. Y no te tiene por menos por llorar delante de él.
+
+=== core-023-zacchaeus | Zaqueo baja del árbol
+passage: LUK 19:1-10
+shelf: adult
+violence: none
+sexual: none
+cast: zacchaeus|Zaqueo|adult|m
+N: Jesús iba de camino a Jerusalén y pasó por la ciudad de Jericó. La noticia corrió rápido, y la gente salió a la calle para verlo pasar.
+S: LUK 19:1-2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con el que la gente ya había dado por perdido.
+N: Los publicanos cobraban impuestos para Roma, el imperio que dominaba al pueblo judío. Muchos cobraban de más y se quedaban con la diferencia. La gente los veía como traidores y ladrones. Y Zaqueo era el jefe de todos ellos.
+S: LUK 19:3
+N: Zaqueo quería ver a Jesús, pero era bajito, y la multitud no lo dejaba. Nadie le iba a hacer espacio a él.
+S: LUK 19:4
+N: Un hombre rico e importante, corriendo por la calle y subiéndose a un árbol como un niño. No le importó lo que dijeran. Quería ver quién era Jesús.
+S: LUK 19:5
+N: Jesús se detuvo justo debajo de ese árbol. Miró hacia arriba. Y lo llamó por su nombre. Zaqueo, baja pronto. Hoy tengo que quedarme en tu casa.
+N: De todas las casas de Jericó, Jesús escogió la de él. No le pidió primero que cambiara. No le dio un sermón desde abajo. Le dijo que quería estar con él.
+S: LUK 19:6
+S: LUK 19:7
+N: La gente murmuraba. ¿Cómo se va a quedar con un pecador? Pero Jesús no había venido a buscar a los que ya estaban bien.
+N: Y en la casa, delante de todos, Zaqueo se puso de pie.
+S: LUK 19:8 @zacchaeus after "dijo al Señor: "
+N: Nadie se lo exigió. Fue la gracia lo que le cambió el corazón. Un hombre que había vivido para juntar dinero ahora quería dar la mitad a los pobres y devolver cuatro veces lo que había quitado.
+S: LUK 19:9
+S: LUK 19:10
+N: Jesús vino a buscar a los perdidos. Para eso vino. Zaqueo subió al árbol para verlo, pero en realidad era Jesús el que lo andaba buscando a él.
+N: Zaqueo no se volvió perfecto en una tarde. Pero ya no era el mismo. La gente que lo veía con desprecio vio a un hombre devolviendo lo que había tomado y dando a los pobres. La gracia que recibió se volvió justicia para sus vecinos.
+N: Hay personas que la gente ya dio por perdidas. Tal vez alguien de tu familia. Tal vez tú mismo te has sentido así. La historia de Zaqueo dice que Jesús se detiene debajo de nuestro árbol, nos llama por nombre y quiere entrar a nuestra casa. Y cuando él entra, todo puede empezar de nuevo.
+
+=== core-024-through-the-roof | Los amigos que abrieron el techo
+passage: MAR 2:1-12
+shelf: adult
+violence: none
+sexual: none
+cast: scribes|escribas|adult|group
+N: Jesús había vuelto a Capernaum, el pueblo junto al lago donde vivían Pedro y otros de sus discípulos. Apenas se supo que estaba en casa, empezó a llegar gente.
+S: MAR 2:1-2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Y gracias a Dios por los amigos que no se rinden.
+N: La casa estaba llena. La gente se amontonaba en la puerta y hasta afuera. Nadie más podía entrar.
+S: MAR 2:3-4
+N: Cuatro hombres traían a un amigo que no podía caminar, acostado en su camilla. Llegaron y no pudieron pasar. Podían haberse dado la vuelta. Pero no lo hicieron.
+N: Las casas de aquel tiempo tenían el techo plano, hecho de vigas, ramas y barro, y una escalera por fuera. Así que subieron con su amigo, abrieron un hueco en el techo y lo bajaron, poco a poco, con cuerdas, hasta quedar delante de Jesús.
+N: Imagina el polvo cayendo, la gente mirando hacia arriba, y un hombre acostado bajando en medio de todos.
+S: MAR 2:5
+N: Jesús vio la fe de ellos. De los cuatro amigos. Su fe se notaba en lo que hicieron. Y lo primero que Jesús le dijo al hombre no fue sobre sus piernas. Fue sobre su corazón. Hijo, tus pecados te son perdonados.
+S: MAR 2:6
+S: MAR 2:7 @scribes after "Decían: "
+N: Tenían razón en algo. Solo Dios puede perdonar pecados. Lo que no entendían era quién estaba delante de ellos.
+S: MAR 2:8-9
+S: MAR 2:10-11
+S: MAR 2:12
+N: El hombre que bajaron por el techo salió por la puerta, caminando, con su camilla debajo del brazo. Y la misma multitud que no dejaba pasar a nadie tuvo que abrirle paso.
+N: Esta historia tiene muchas cosas lindas, pero hay una que es fácil pasar por alto. Ese hombre no llegó solo. Llegó porque tenía amigos que lo cargaron cuando él no podía caminar, que no se rindieron cuando la puerta estaba cerrada, y que buscaron otro camino.
+N: Hay temporadas en que somos el que necesita que lo carguen. Y hay temporadas en que nos toca cargar a otro. Si esta noche piensas en alguien que ya no puede llegar solo, llévalo delante de Jesús en oración. Y si eres tú el que no puede más, deja que otros te ayuden. Para eso es la iglesia.
+
+=== core-025-shepherds | La noche que oyeron los pastores
+passage: LUK 2:1-20
+shelf: adult
+violence: none
+sexual: none
+cast: shepherds|pastores|adult|group
+N: Hace mucho tiempo, el emperador de Roma ordenó que se contara a toda la gente de su imperio. Cada uno tenía que ir a registrarse a la ciudad de su familia.
+S: LUK 2:4-5
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] En un viaje largo, en un pueblo lleno, en una noche sin lugar.
+N: Fue un viaje largo para una mujer a punto de dar a luz. Y cuando llegaron a Bethlehem, el pueblo estaba lleno.
+S: LUK 2:6-7
+N: No había lugar para ellos. El Hijo de Dios nació donde dormían los animales, y su primera cama fue un pesebre, el cajón donde se les echaba de comer.
+N: Esa misma noche, en los campos cerca del pueblo, unos pastores cuidaban sus ovejas. Era un trabajo humilde, de noche, al frío. No eran gente importante. Nadie los habría invitado a una celebración en el palacio.
+S: LUK 2:8-9
+S: LUK 2:10-12
+N: El primer anuncio del nacimiento de Jesús no fue para los reyes ni para los sacerdotes. Fue para unos pastores en el campo. Nuevas de gran gozo para todo el pueblo. Y la señal era sencilla. Un bebé envuelto en pañales, acostado en un pesebre.
+S: LUK 2:13-14
+N: El cielo entero se llenó de alabanza. Y luego, otra vez, la noche quieta.
+S: LUK 2:15 @shepherds after "los unos á los otros: "
+S: LUK 2:16
+N: Fueron corriendo. Dejaron las ovejas y bajaron al pueblo en la oscuridad, buscando a un recién nacido acostado en un pesebre. Y lo encontraron todo tal como el ángel les había dicho.
+S: LUK 2:17-18
+S: LUK 2:19
+N: María guardaba todo en su corazón. Una madre joven, cansada, lejos de su casa, escuchando a unos pastores contar lo que habían visto. No entendía todo. Pero lo guardaba.
+S: LUK 2:20
+N: Los pastores volvieron a sus ovejas. Su trabajo era el mismo. El campo era el mismo. Pero ellos ya no eran los mismos. Volvieron alabando a Dios.
+N: Dios escogió anunciar la mejor noticia del mundo de noche, a gente sencilla, en un campo. Si esta noche estás trabajando, o cuidando a alguien, o simplemente despierto cuando todos duermen, recuerda a los pastores. Dios sabe dónde estás. Y su paz llegó primero a los que velaban de noche.
+
+=== core-026-deborah | Débora debajo de la palma
+passage: JDG 4:4-16
+shelf: adult
+violence: mild
+sexual: none
+cast: deborah|Débora|adult|f; barak|Barac|adult|m
+N: Durante veinte años, un rey cananeo llamado Jabín oprimió al pueblo de Israel. Su capitán, Sísara, tenía novecientos carros de hierro. El pueblo clamaba a Dios.
+S: JDG 4:4-5
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] En los años difíciles, Dios levantó a una mujer sabia debajo de una palma.
+N: Débora se sentaba debajo de una palmera en los montes, y la gente subía a buscarla para que juzgara sus problemas. Escuchaba a Dios, y escuchaba a su pueblo.
+N: Un día mandó a llamar a un hombre llamado Barac.
+S: JDG 4:6 @deborah after "díjole: "
+S: JDG 4:7 @deborah whole
+N: Débora no le dio una idea suya. Le recordó lo que Dios ya le había mandado. Pero Barac tenía miedo. Novecientos carros de hierro contra un pueblo sin armas.
+S: JDG 4:8 @barak
+N: Barac no quería ir solo. Y Débora no se burló de él. Le dijo que iría.
+S: JDG 4:9 @deborah until "Y levantándose"
+N: Débora fue con él. Subieron al monte de Tabor con diez mil hombres. Y abajo, en el valle, Sísara juntó todos sus carros junto al arroyo.
+S: JDG 4:12-13
+N: Desde lo alto del monte se veía todo el ejército enemigo. Era el momento de bajar, y el momento de tener miedo. Y Débora habló otra vez.
+S: JDG 4:14 @deborah until "Y Barac descendió"
+N: ¿No ha salido Jehová delante de ti? Esa fue su palabra. Dios ya iba adelante. Y Barac bajó del monte con sus hombres detrás de él.
+S: JDG 4:15
+N: La Biblia dice más adelante, en el canto de Débora, que hasta el cielo peleó aquel día y que el arroyo de Cisón arrastró al enemigo. Lo que parecía imposible lo hizo Dios.
+N: Débora fue jueza y profetisa en un tiempo en que el pueblo estaba cansado y con miedo. No fue con su propia fuerza. Su fuerza era saber que Dios iba delante. Y supo darle ánimo a otro para que hiciera lo que le tocaba.
+N: Esta noche puede que tú seas Barac, con miedo de bajar del monte. O puede que seas Débora, llamada a animar a alguien que tiene miedo. En los dos casos, la palabra es la misma. Dios ya salió delante de ti.
+
+=== core-027-widows-oil | El aceite de la viuda
+passage: 2KI 4:1-7
+shelf: adult
+violence: none
+sexual: none
+cast: widow|mujer|adult|f; elisha|Eliseo|adult|m
+N: En los días del profeta Eliseo, había un grupo de hombres que servían a Dios y aprendían de los profetas. Uno de ellos murió y dejó a su esposa sola con dos hijos y muchas deudas.
+S: 2KI 4:1 @widow
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con la viuda y con sus hijos, cuando el acreedor ya está en la puerta.
+N: En aquel tiempo, si una familia no podía pagar, el acreedor podía llevarse a los hijos como esclavos hasta que se pagara la deuda. Esa madre ya había perdido a su esposo. Ahora estaba a punto de perder a sus hijos.
+N: Ella no se escondió. Fue a buscar ayuda. Y Eliseo le hizo dos preguntas. ¿Qué quieres que haga por ti? ¿Y qué tienes en tu casa?
+S: 2KI 4:2
+N: Ninguna cosa, dijo ella. Solo una vasija de aceite. A veces, cuando estamos desesperados, lo poco que tenemos nos parece nada.
+S: 2KI 4:3 @elisha
+S: 2KI 4:4 @elisha whole
+N: Eliseo le pidió que fuera con sus vecinos. Que tocara puertas y pidiera prestadas todas las vasijas vacías que pudiera, y no pocas. Tuvo que pedir ayuda. Y sus vecinos se la dieron.
+N: Luego tenía que cerrar la puerta. Lo que Dios iba a hacer pasaría adentro, en la casa, con sus hijos.
+S: 2KI 4:5
+N: Imagina a esos dos muchachos trayendo vasija tras vasija. Y su mamá inclinando aquella vasija pequeña, y el aceite que seguía saliendo. Una, y otra, y otra más.
+S: 2KI 4:6
+N: El aceite paró cuando ya no hubo dónde echarlo. Cuántas vasijas hubo dependió de cuántas pidieron.
+S: 2KI 4:7 @elisha after "el cual dijo: "
+N: Dios le dio lo que necesitaba para pagar la deuda y vivir con sus hijos. Sus hijos se quedaron con ella.
+N: Esta historia no es una fórmula para salir de deudas, ni una promesa de dinero. Es la historia de un Dios que ve a una viuda con miedo, que usa lo poco que ella tiene y la ayuda de sus vecinos, y que cuida de una familia que se había quedado sola.
+N: Si esta noche las cuentas te quitan el sueño, no tienes que cargar eso a solas. Puedes contarle a Dios lo que tienes y lo que te falta, como ella se lo contó a Eliseo. Y puedes pedir ayuda a tu iglesia y a quienes te rodean. Ella tocó puertas, y no se avergonzó de hacerlo.
+
+=== core-028-abraham | Abram cuenta las estrellas
+passage: GEN 12:1-4; GEN 15:1-6
+shelf: adult
+violence: none
+sexual: none
+cast: abram|Abram|elder|m
+N: Abram vivía en Harán con su familia. Ya no era joven. Tenía su casa, su gente, su vida hecha. Y un día Dios le habló.
+S: GEN 12:1
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno también cuando nos llama a un camino que no conocemos.
+N: Dios no le dio un mapa. Solo le dijo que se fuera a la tierra que él le iba a mostrar. Abram no sabía adónde iba. Solo sabía quién lo llamaba.
+S: GEN 12:2-3
+N: Dios le prometió que haría de él una nación grande, y que en él serían benditas todas las familias de la tierra. No solo su familia. Todas.
+S: GEN 12:4
+N: Setenta y cinco años. A esa edad muchos piensan que ya es tarde para empezar algo nuevo. Abram empacó, juntó a su esposa Sarai, a su sobrino Lot y todo lo que tenía, y se puso en camino.
+N: Pasaron los años. Abram vivió en tiendas, de un lugar a otro. Hubo hambre, hubo peligros, hubo guerras. Y la promesa de una gran familia seguía sin cumplirse. Abram y Sarai seguían sin hijos.
+S: GEN 15:1
+S: GEN 15:2 @abram
+S: GEN 15:3 @abram after "Dijo más Abram: "
+N: Abram le habló a Dios con honestidad. No escondió su desánimo. Le dijo lo que veía. Mira que no me has dado hijos. Y Dios no se ofendió por su pregunta.
+S: GEN 15:4
+S: GEN 15:5
+N: Esa noche Dios lo sacó afuera de la tienda. Lejos de las lámparas del campamento, el cielo del desierto estaba lleno de estrellas. Miles y miles. Cuéntalas, le dijo, si puedes.
+N: Abram miró hacia arriba. No tenía ningún hijo todavía. Solo tenía la palabra de Dios y un cielo lleno de estrellas.
+S: GEN 15:6
+N: Creyó. Eso fue todo. No vio primero y luego creyó. Creyó primero, en la oscuridad, con las manos vacías. Y Dios le contó esa fe por justicia.
+N: Tuvieron que pasar muchos años más antes de que naciera Isaac. Abram no fue perfecto en la espera. Pero volvía a confiar.
+N: Hay promesas de Dios que se tardan, y noches en que lo único que tenemos es su palabra. Si esta noche puedes ver el cielo, sal un momento y mira las estrellas. El mismo Dios que las llamó por nombre conoce tu espera. Y es fiel a lo que él ha dicho.
+
+=== core-029-good-samaritan | El buen samaritano
+passage: LUK 10:25-37
+shelf: adult
+violence: mild
+sexual: none
+cast: lawyer|doctor de la ley|adult|m
+N: Un día, mientras Jesús enseñaba, se levantó un hombre que conocía muy bien la ley de Moisés. Quería ponerlo a prueba.
+S: LUK 10:25 @lawyer
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Y su bondad nos enseña a ver al que está tirado en el camino.
+S: LUK 10:26
+S: LUK 10:27 @lawyer
+S: LUK 10:28
+N: El hombre sabía la respuesta. Amar a Dios con todo, y al prójimo como a uno mismo. Pero quería dejar claro hasta dónde llegaba eso. Quería saber a quién le tocaba amar, y a quién no.
+S: LUK 10:29 @lawyer
+N: Jesús no le contestó con una definición. Le contó una historia.
+S: LUK 10:30
+N: El camino de Jerusalén a Jericó bajaba entre montes de piedra, solitario y peligroso. Ahí asaltaron a aquel hombre y lo dejaron tirado, medio muerto.
+S: LUK 10:31-32
+N: Un sacerdote y un levita. Hombres que servían en el templo, que conocían la ley mejor que nadie. Lo vieron. Y se pasaron al otro lado del camino. Tal vez tenían prisa. Tal vez tenían miedo. La Biblia no dice por qué. Solo dice que siguieron de largo.
+S: LUK 10:33
+N: Y aquí está lo que sorprendió a todos. Los judíos y los samaritanos no se trataban. Había siglos de desprecio entre ellos. Y el que se detuvo fue el samaritano.
+S: LUK 10:34-35
+N: Le limpió las heridas con aceite y vino, lo vendó, lo subió a su propio animal y lo llevó a una posada. Pasó la noche cuidándolo. Al otro día pagó de su bolsillo y prometió volver a pagar lo que faltara. No conocía a ese hombre. No le debía nada.
+S: LUK 10:36
+S: LUK 10:37 @lawyer until "Entonces Jesús"
+N: El doctor de la ley ni siquiera pudo decir la palabra samaritano. Dijo el que tuvo misericordia. Y Jesús le dijo que fuera e hiciera lo mismo.
+N: El hombre había preguntado quién era su prójimo. Jesús le dio la vuelta a la pregunta. No preguntes quién merece tu ayuda. Pregunta de quién puedes ser prójimo tú.
+N: A todos nos toca pasar por algún camino donde alguien está herido. A veces es un desconocido. A veces es alguien que nos enseñaron a evitar. Amar al prójimo es detenerse, acercarse y ayudar, aunque cueste. Y a veces, en la noche más dura, el que se detiene a ayudarnos a nosotros es la persona que menos esperábamos.
+
+=== core-030-baby-moses | Moisés en la canasta
+passage: EXO 2:1-10
+shelf: adult
+violence: mild
+sexual: none
+cast: sister|hermana|child|f; pharaohs-daughter|hija de Faraón|adult|f
+N: Los hijos de Israel vivían como esclavos en Egipto. El Faraón tenía miedo de que se hicieran demasiados, y dio una orden terrible. Todo niño varón que naciera de los hebreos debía ser echado al río.
+N: En esos días, una mujer de la familia de Leví tuvo un hijo.
+S: EXO 2:1-2
+C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con una madre que escondía a su bebé para salvarle la vida.
+N: Tres meses lo escondió. Tres meses tratando de que no llorara fuerte, mirando a la puerta, con miedo. Pero un bebé crece, y llegó el día en que ya no lo pudo esconder más.
+S: EXO 2:3
+N: Ella hizo una canastita de juncos y la cubrió con brea para que no le entrara el agua. Puso a su hijo adentro, con cuidado, y lo dejó entre las cañas a la orilla del río. El mismo río donde el Faraón quería que murieran los niños.
+S: EXO 2:4
+N: La hermana mayor del niño se quedó escondida a lo lejos, mirando. Una niña cuidando a su hermanito, sin saber qué iba a pasar.
+S: EXO 2:5
+S: EXO 2:6 @pharaohs-daughter
+N: La hija del Faraón. La hija del mismo hombre que había dado la orden. Vio al bebé llorando y tuvo compasión de él. Sabía que era hebreo. Y aun así no lo entregó.
+N: Entonces la hermana salió de su escondite. Una niña esclava hablándole a una princesa de Egipto. Hizo falta valor.
+S: EXO 2:7 @sister
+S: EXO 2:8 @pharaohs-daughter until "Entonces fué"
+N: Y la niña fue corriendo a buscar a la mamá del bebé. A su propia mamá.
+S: EXO 2:9 @pharaohs-daughter after "dijo la hija de Faraón: " until "Y la mujer"
+N: Aquella madre había soltado a su hijo en el río, y ahora se lo devolvían en los brazos. Y hasta le iban a pagar por criarlo. Pudo tenerlo cerca, darle de comer, cantarle y enseñarle de dónde venía.
+S: EXO 2:10
+N: Moisés, porque de las aguas lo sacó. Ese niño un día sacaría a todo su pueblo de Egipto.
+N: En esta historia Dios no habla en voz alta. No hay ángeles ni fuego del cielo. Hay una madre valiente, una hermana atenta y una princesa con compasión. Y por medio de ellas, Dios guardó la vida de un niño.
+N: Hay noches en que, como esa madre, tenemos que soltar a alguien que amamos y dejarlo en las manos de Dios. Un hijo que crece, que se va, que está lejos. Él ve lo que nosotros ya no podemos ver desde la orilla. Y sabe cuidar a los que ponemos en sus manos.

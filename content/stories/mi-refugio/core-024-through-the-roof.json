@@ -1,0 +1,355 @@
+{
+ "id": "core-024-through-the-roof",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Los amigos que abrieron el techo",
+ "passage": {
+  "refs": [
+   "MAR 2:1-12"
+  ],
+  "label": "Marcos 2:1-12"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "scribes",
+   "name": "escribas",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús había vuelto a Capernaum, el pueblo junto al lago donde vivían Pedro y otros de sus discípulos. Apenas se supo que estaba en casa, empezó a llegar gente."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:1-2",
+   "label": "Marcos 2:1-2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y ENTRÓ otra vez en Capernaum después de algunos días, y se oyó que estaba en casa."
+    },
+    {
+     "v": 2,
+     "text": "Y luego se juntaron á él muchos, que ya no cabían ni aun á la puerta; y les predicaba la palabra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y ENTRÓ otra vez en Capernaum después de algunos días, y se oyó que estaba en casa."
+    },
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y luego se juntaron á él muchos, que ya no cabían ni aun á la puerta; y les predicaba la palabra."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Y gracias a Dios por los amigos que no se rinden.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La casa estaba llena. La gente se amontonaba en la puerta y hasta afuera. Nadie más podía entrar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:3-4",
+   "label": "Marcos 2:3-4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Entonces vinieron á él unos trayendo un paralítico, que era traído por cuatro."
+    },
+    {
+     "v": 4,
+     "text": "Y como no podían llegar á él á causa del gentío, descubrieron el techo de donde estaba, y haciendo abertura, bajaron el lecho en que yacía el paralítico."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Entonces vinieron á él unos trayendo un paralítico, que era traído por cuatro."
+    },
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y como no podían llegar á él á causa del gentío, descubrieron el techo de donde estaba, y haciendo abertura, bajaron el lecho en que yacía el paralítico."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Cuatro hombres traían a un amigo que no podía caminar, acostado en su camilla. Llegaron y no pudieron pasar. Podían haberse dado la vuelta. Pero no lo hicieron."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Las casas de aquel tiempo tenían el techo plano, hecho de vigas, ramas y barro, y una escalera por fuera. Así que subieron con su amigo, abrieron un hueco en el techo y lo bajaron, poco a poco, con cuerdas, hasta quedar delante de Jesús."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagina el polvo cayendo, la gente mirando hacia arriba, y un hombre acostado bajando en medio de todos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:5",
+   "label": "Marcos 2:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y viendo Jesús la fe de ellos, dice al paralítico: Hijo, tus pecados te son perdonados."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y viendo Jesús la fe de ellos, dice al paralítico: Hijo, tus pecados te son perdonados."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús vio la fe de ellos. De los cuatro amigos. Su fe se notaba en lo que hicieron. Y lo primero que Jesús le dijo al hombre no fue sobre sus piernas. Fue sobre su corazón. Hijo, tus pecados te son perdonados."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:6",
+   "label": "Marcos 2:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y estaban allí sentados algunos de los escribas, los cuales pensando en sus corazones,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y estaban allí sentados algunos de los escribas, los cuales pensando en sus corazones,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "scribes",
+   "ref": "MAR 2:7",
+   "label": "Marcos 2:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Decían: ¿Por qué habla éste así? Blasfemias dice. ¿Quién puede perdonar pecados, sino solo Dios?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Decían:"
+    },
+    {
+     "v": 7,
+     "speaker": "scribes",
+     "text": "¿Por qué habla éste así? Blasfemias dice. ¿Quién puede perdonar pecados, sino solo Dios?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tenían razón en algo. Solo Dios puede perdonar pecados. Lo que no entendían era quién estaba delante de ellos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:8-9",
+   "label": "Marcos 2:8-9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y conociendo luego Jesús en su espíritu que pensaban así dentro de sí mismos, les dijo: ¿Por qué pensáis estas cosas en vuestros corazones?"
+    },
+    {
+     "v": 9,
+     "text": "¿Qué es más fácil, decir al paralítico: Tus pecados te son perdonados, ó decirle: Levántate, y toma tu lecho y anda?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y conociendo luego Jesús en su espíritu que pensaban así dentro de sí mismos, les dijo: ¿Por qué pensáis estas cosas en vuestros corazones?"
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "¿Qué es más fácil, decir al paralítico: Tus pecados te son perdonados, ó decirle: Levántate, y toma tu lecho y anda?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:10-11",
+   "label": "Marcos 2:10-11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Pues para que sepáis que el Hijo del hombre tiene potestad en la tierra de perdonar los pecados, (dice al paralítico):"
+    },
+    {
+     "v": 11,
+     "text": "A ti te digo: Levántate, y toma tu lecho, y vete á tu casa."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Pues para que sepáis que el Hijo del hombre tiene potestad en la tierra de perdonar los pecados, (dice al paralítico):"
+    },
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "A ti te digo: Levántate, y toma tu lecho, y vete á tu casa."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 2:12",
+   "label": "Marcos 2:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Entonces él se levantó luego, y tomando su lecho, se salió delante de todos, de manera que todos se asombraron, y glorificaron á Dios, diciendo: Nunca tal hemos visto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Entonces él se levantó luego, y tomando su lecho, se salió delante de todos, de manera que todos se asombraron, y glorificaron á Dios, diciendo: Nunca tal hemos visto."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El hombre que bajaron por el techo salió por la puerta, caminando, con su camilla debajo del brazo. Y la misma multitud que no dejaba pasar a nadie tuvo que abrirle paso."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia tiene muchas cosas lindas, pero hay una que es fácil pasar por alto. Ese hombre no llegó solo. Llegó porque tenía amigos que lo cargaron cuando él no podía caminar, que no se rindieron cuando la puerta estaba cerrada, y que buscaron otro camino."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay temporadas en que somos el que necesita que lo carguen. Y hay temporadas en que nos toca cargar a otro. Si esta noche piensas en alguien que ya no puede llegar solo, llévalo delante de Jesús en oración. Y si eres tú el que no puede más, deja que otros te ayuden. Para eso es la iglesia."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 597,
+ "est_seconds": 332,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 2:1-12; flat roofs explained; forgiveness before healing kept as the text orders it; no promise of physical healing for the listener; points to the church to carry one another."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The paralysed man shown with dignity, not as a pity picture; friendship and church community honoured."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

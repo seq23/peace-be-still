@@ -1,0 +1,538 @@
+{
+ "id": "core-021-adam-eve",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Adán y Eva en el huerto",
+ "passage": {
+  "refs": [
+   "GEN 2:15-25",
+   "GEN 3:1-13"
+  ],
+  "label": "Génesis 2:15-25; Génesis 3:1-13"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "adam",
+   "name": "Adam",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "woman",
+   "name": "mujer",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Al principio, Dios plantó un huerto en Edén, lleno de árboles hermosos y de buen fruto. Por en medio corría un río. Y allí puso al primer hombre."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 2:15",
+   "label": "Génesis 2:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Tomó, pues, Jehová Dios al hombre, y le puso en el huerto de Edén, para que lo labrara y lo guardase."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Tomó, pues, Jehová Dios al hombre, y le puso en el huerto de Edén, para que lo labrara y lo guardase."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Desde el primer día le dio al hombre un hogar y un trabajo con sentido.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 2:16-17",
+   "label": "Génesis 2:16-17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y mandó Jehová Dios al hombre, diciendo: De todo árbol del huerto comerás;"
+    },
+    {
+     "v": 17,
+     "text": "Mas del árbol de ciencia del bien y del mal no comerás de él; porque el día que de él comieres, morirás."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y mandó Jehová Dios al hombre, diciendo: De todo árbol del huerto comerás;"
+    },
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Mas del árbol de ciencia del bien y del mal no comerás de él; porque el día que de él comieres, morirás."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios le dio libertad para comer de todos los árboles, menos de uno. Un solo límite, en medio de un huerto entero de regalos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 2:18",
+   "label": "Génesis 2:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Y dijo Jehová Dios: No es bueno que el hombre esté solo; haréle ayuda idónea para él."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Y dijo Jehová Dios: No es bueno que el hombre esté solo; haréle ayuda idónea para él."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Que el hombre estuviera solo no era bueno. Es la primera vez en la Biblia que Dios dice que algo no es bueno. Y no era el pecado. Era la soledad."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Adam les puso nombre a todos los animales, uno por uno. Pero entre todos ellos no había nadie como él. Entonces Dios lo hizo dormir profundamente, tomó una de sus costillas y de ella formó a la mujer. Y se la trajo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "adam",
+   "ref": "GEN 2:23",
+   "label": "Génesis 2:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Y dijo Adam: Esto es ahora hueso de mis huesos, y carne de mi carne: ésta será llamada Varona, porque del varón fué tomada."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Y dijo Adam:"
+    },
+    {
+     "v": 23,
+     "speaker": "adam",
+     "text": "Esto es ahora hueso de mis huesos, y carne de mi carne: ésta será llamada Varona, porque del varón fué tomada."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 2:24-25",
+   "label": "Génesis 2:24-25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Por tanto, dejará el hombre á su padre y á su madre, y allegarse ha á su mujer, y serán una sola carne."
+    },
+    {
+     "v": 25,
+     "text": "Y estaban ambos desnudos, Adam y su mujer, y no se avergonzaban."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Por tanto, dejará el hombre á su padre y á su madre, y allegarse ha á su mujer, y serán una sola carne."
+    },
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Y estaban ambos desnudos, Adam y su mujer, y no se avergonzaban."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Estaban juntos, en paz con Dios y en paz el uno con el otro. No tenían nada que esconder."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:1",
+   "label": "Génesis 3:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Empero la serpiente era astuta, más que todos los animales del campo que Jehová Dios había hecho; la cual dijo á la mujer: ¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Empero la serpiente era astuta, más que todos los animales del campo que Jehová Dios había hecho; la cual dijo á la mujer: ¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La serpiente no empezó con una mentira grande. Empezó con una pregunta. Torció un poquito lo que Dios había dicho, como si Dios les hubiera prohibido todo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman",
+   "ref": "GEN 3:2",
+   "label": "Génesis 3:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y la mujer respondió á la serpiente: Del fruto de los árboles del huerto comemos;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y la mujer respondió á la serpiente:"
+    },
+    {
+     "v": 2,
+     "speaker": "woman",
+     "text": "Del fruto de los árboles del huerto comemos;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:3",
+   "label": "Génesis 3:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Mas del fruto del árbol que está en medio del huerto dijo Dios: No comeréis de él, ni le tocaréis, porque no muráis."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Mas del fruto del árbol que está en medio del huerto dijo Dios: No comeréis de él, ni le tocaréis, porque no muráis."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:4-5",
+   "label": "Génesis 3:4-5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Entonces la serpiente dijo á la mujer: No moriréis;"
+    },
+    {
+     "v": 5,
+     "text": "Mas sabe Dios que el día que comiereis de él, serán abiertos vuestros ojos, y seréis como dioses sabiendo el bien y el mal."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Entonces la serpiente dijo á la mujer: No moriréis;"
+    },
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Mas sabe Dios que el día que comiereis de él, serán abiertos vuestros ojos, y seréis como dioses sabiendo el bien y el mal."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ahí estaba la mentira. Que Dios les estaba negando algo bueno. Que no se podía confiar en él."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:6",
+   "label": "Génesis 3:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y vió la mujer que el árbol era bueno para comer, y que era agradable á los ojos, y árbol codiciable para alcanzar la sabiduría; y tomó de su fruto, y comió; y dió también á su marido, el cual comió así como ella."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y vió la mujer que el árbol era bueno para comer, y que era agradable á los ojos, y árbol codiciable para alcanzar la sabiduría; y tomó de su fruto, y comió; y dió también á su marido, el cual comió así como ella."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:7",
+   "label": "Génesis 3:7",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Y fueron abiertos los ojos de entrambos, y conocieron que estaban desnudos: entonces cosieron hojas de higuera, y se hicieron delantales."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Y fueron abiertos los ojos de entrambos, y conocieron que estaban desnudos: entonces cosieron hojas de higuera, y se hicieron delantales."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Se les abrieron los ojos, sí. Pero lo primero que vieron fue su propia vergüenza. Y por primera vez quisieron esconderse."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:8",
+   "label": "Génesis 3:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y oyeron la voz de Jehová Dios que se paseaba en el huerto al aire del día: y escondióse el hombre y su mujer de la presencia de Jehová Dios entre los árboles del huerto."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y oyeron la voz de Jehová Dios que se paseaba en el huerto al aire del día: y escondióse el hombre y su mujer de la presencia de Jehová Dios entre los árboles del huerto."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:9",
+   "label": "Génesis 3:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Y llamó Jehová Dios al hombre, y le dijo: ¿Dónde estás tú?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Y llamó Jehová Dios al hombre, y le dijo: ¿Dónde estás tú?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "¿Dónde estás tú? Dios sabía dónde estaban. La pregunta no era para él. Era para ellos. Era Dios buscándolos, llamándolos por la tarde, en vez de dejarlos solos entre los árboles."
+  },
+  {
+   "type": "scripture",
+   "speaker": "adam",
+   "ref": "GEN 3:10",
+   "label": "Génesis 3:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y él respondió: Oí tu voz en el huerto, y tuve miedo, porque estaba desnudo; y escondíme."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y él respondió:"
+    },
+    {
+     "v": 10,
+     "speaker": "adam",
+     "text": "Oí tu voz en el huerto, y tuve miedo, porque estaba desnudo; y escondíme."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "adam",
+   "ref": "GEN 3:12",
+   "label": "Génesis 3:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y el hombre respondió: La mujer que me diste por compañera me dió del árbol, y yo comí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y el hombre respondió:"
+    },
+    {
+     "v": 12,
+     "speaker": "adam",
+     "text": "La mujer que me diste por compañera me dió del árbol, y yo comí."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:13",
+   "label": "Génesis 3:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Entonces Jehová Dios dijo á la mujer: ¿Qué es lo que has hecho? Y dijo la mujer: La serpiente me engañó, y comí."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Entonces Jehová Dios dijo á la mujer: ¿Qué es lo que has hecho? Y dijo la mujer: La serpiente me engañó, y comí."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El hombre culpó a la mujer, y también a Dios que se la había dado. La mujer culpó a la serpiente. Es una historia muy antigua y muy conocida. Cuando nos equivocamos, lo primero que queremos es escondernos y señalar a otro."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero lo que más importa en esta historia es lo que hizo Dios. Bajó al huerto. Llamó. Preguntó. Y unos versículos más adelante, antes de que salieran del huerto, él mismo les hizo ropa de pieles y los vistió."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si esta noche tienes algo que esconder, algo de lo que te avergüenzas, escucha esa pregunta como la oyeron ellos. ¿Dónde estás tú? No es la voz de alguien que quiere avergonzarte. Es la voz de un Dios que sigue buscando a los suyos."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 807,
+ "est_seconds": 446,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 2:15-25 and 3:1-13 (the garments of skins, 3:21, named as later in the chapter); God never voiced; no ruling on gender roles or the fall's doctrine beyond the text; ends on God seeking, not on shame."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Nakedness told plainly as the KJV/RV1909 does, nothing sexual; blame-shifting named with a gentle, human touch; natural Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

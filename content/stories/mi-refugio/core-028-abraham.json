@@ -1,0 +1,359 @@
+{
+ "id": "core-028-abraham",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Abram cuenta las estrellas",
+ "passage": {
+  "refs": [
+   "GEN 12:1-4",
+   "GEN 15:1-6"
+  ],
+  "label": "Génesis 12:1-4; Génesis 15:1-6"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "abram",
+   "name": "Abram",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abram vivía en Harán con su familia. Ya no era joven. Tenía su casa, su gente, su vida hecha. Y un día Dios le habló."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 12:1",
+   "label": "Génesis 12:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Empero Jehová había dicho á Abram: Vete de tu tierra y de tu parentela, y de la casa de tu padre, á la tierra que te mostraré;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Empero Jehová había dicho á Abram: Vete de tu tierra y de tu parentela, y de la casa de tu padre, á la tierra que te mostraré;"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Bueno también cuando nos llama a un camino que no conocemos.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios no le dio un mapa. Solo le dijo que se fuera a la tierra que él le iba a mostrar. Abram no sabía adónde iba. Solo sabía quién lo llamaba."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 12:2-3",
+   "label": "Génesis 12:2-3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y haré de ti una nación grande, y bendecirte he, y engrandeceré tu nombre, y serás bendición:"
+    },
+    {
+     "v": 3,
+     "text": "Y bendeciré á los que te bendijeren, y á los que te maldijeren maldeciré: y serán benditas en ti todas las familias de la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y haré de ti una nación grande, y bendecirte he, y engrandeceré tu nombre, y serás bendición:"
+    },
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y bendeciré á los que te bendijeren, y á los que te maldijeren maldeciré: y serán benditas en ti todas las familias de la tierra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios le prometió que haría de él una nación grande, y que en él serían benditas todas las familias de la tierra. No solo su familia. Todas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 12:4",
+   "label": "Génesis 12:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y fuése Abram, como Jehová le dijo; y fué con él Lot: y era Abram de edad de setenta y cinco años cuando salió de Harán."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y fuése Abram, como Jehová le dijo; y fué con él Lot: y era Abram de edad de setenta y cinco años cuando salió de Harán."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Setenta y cinco años. A esa edad muchos piensan que ya es tarde para empezar algo nuevo. Abram empacó, juntó a su esposa Sarai, a su sobrino Lot y todo lo que tenía, y se puso en camino."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pasaron los años. Abram vivió en tiendas, de un lugar a otro. Hubo hambre, hubo peligros, hubo guerras. Y la promesa de una gran familia seguía sin cumplirse. Abram y Sarai seguían sin hijos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 15:1",
+   "label": "Génesis 15:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Después de estas cosas fué la palabra de Jehová á Abram en visión, diciendo: No temas, Abram; yo soy tu escudo, y tu galardón sobremanera grande."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Después de estas cosas fué la palabra de Jehová á Abram en visión, diciendo: No temas, Abram; yo soy tu escudo, y tu galardón sobremanera grande."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abram",
+   "ref": "GEN 15:2",
+   "label": "Génesis 15:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y respondió Abram: Señor Jehová ¿qué me has de dar, siendo así que ando sin hijo, y el mayordomo de mi casa es ese Damasceno Eliezer?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y respondió Abram:"
+    },
+    {
+     "v": 2,
+     "speaker": "abram",
+     "text": "Señor Jehová ¿qué me has de dar, siendo así que ando sin hijo, y el mayordomo de mi casa es ese Damasceno Eliezer?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "abram",
+   "ref": "GEN 15:3",
+   "label": "Génesis 15:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Dijo más Abram: Mira que no me has dado prole, y he aquí que es mi heredero uno nacido en mi casa."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Dijo más Abram:"
+    },
+    {
+     "v": 3,
+     "speaker": "abram",
+     "text": "Mira que no me has dado prole, y he aquí que es mi heredero uno nacido en mi casa."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abram le habló a Dios con honestidad. No escondió su desánimo. Le dijo lo que veía. Mira que no me has dado hijos. Y Dios no se ofendió por su pregunta."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 15:4",
+   "label": "Génesis 15:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y luego la palabra de Jehová fué á él diciendo: No te heredará éste, sino el que saldrá de tus entrañas será el que te herede."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Y luego la palabra de Jehová fué á él diciendo: No te heredará éste, sino el que saldrá de tus entrañas será el que te herede."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 15:5",
+   "label": "Génesis 15:5",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Y sacóle fuera, y dijo: Mira ahora á los cielos, y cuenta las estrellas, si las puedes contar. Y le dijo: Así será tu simiente."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Y sacóle fuera, y dijo: Mira ahora á los cielos, y cuenta las estrellas, si las puedes contar. Y le dijo: Así será tu simiente."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esa noche Dios lo sacó afuera de la tienda. Lejos de las lámparas del campamento, el cielo del desierto estaba lleno de estrellas. Miles y miles. Cuéntalas, le dijo, si puedes."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Abram miró hacia arriba. No tenía ningún hijo todavía. Solo tenía la palabra de Dios y un cielo lleno de estrellas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 15:6",
+   "label": "Génesis 15:6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Y creyó á Jehová, y contóselo por justicia."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Y creyó á Jehová, y contóselo por justicia."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Creyó. Eso fue todo. No vio primero y luego creyó. Creyó primero, en la oscuridad, con las manos vacías. Y Dios le contó esa fe por justicia."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Tuvieron que pasar muchos años más antes de que naciera Isaac. Abram no fue perfecto en la espera. Pero volvía a confiar."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay promesas de Dios que se tardan, y noches en que lo único que tenemos es su palabra. Si esta noche puedes ver el cielo, sal un momento y mira las estrellas. El mismo Dios que las llamó por nombre conoce tu espera. Y es fiel a lo que él ha dicho."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 596,
+ "est_seconds": 331,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:20:17",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 12:1-4 and 15:1-6; faith counted as righteousness as the text says; honest lament allowed; Isaac's later birth named without a promise to the listener."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "An older man starting over honoured; the desert sky scene is setting only; natural Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
