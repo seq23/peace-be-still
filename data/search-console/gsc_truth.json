@@ -1,0 +1,18 @@
+{
+ "schema": "pbs-gsc-truth-v1",
+ "site": "https://peacebestillapp.com",
+ "property": "sc-domain:peacebestillapp.com",
+ "window": {
+  "start": "2026-10-19",
+  "end": "2026-11-15"
+ },
+ "generated_at": "2026-11-18T17:05:16.638Z",
+ "totals": {
+  "rows": 0,
+  "clicks": 0,
+  "impressions": 0,
+  "queries": 0,
+  "pages": 0
+ },
+ "rows": []
+}

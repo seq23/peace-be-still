@@ -9,6 +9,7 @@ import { PAGES } from "../content/questions.mjs";
 import { waitlistHtml, headerHtml, footerHtml, BASE } from "../content/parts.mjs";
 
 const pub = new URL("../public/", import.meta.url).pathname;
+const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const text = (html) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
@@ -24,7 +25,7 @@ function render(p) {
       { "@type": "Article", "@id": `${url}#article`, headline: p.h1, description: p.description, inLanguage: p.lang, url,
         datePublished: p.published, dateModified: p.updated, image: `${BASE}/${es ? "og-es.png" : "og.png"}`,
         author: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/` },
-        publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: { "@type": "ImageObject", url: `${BASE}/icon-512.png` } },
+        publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: { "@type": "ImageObject", url: `${BASE}/icon-512.png` }, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
         isPartOf: { "@id": `${BASE}/#site` },
         speakable: { "@type": "SpeakableSpecification", cssSelector: ["#what", "#faq"] } },
       { "@type": "BreadcrumbList", itemListElement: [
@@ -90,8 +91,8 @@ ${footerHtml(p.lang)}
 function renderIndex(lang, list) {
   const es = lang === "es";
   const path = es ? "/es/preguntas/" : "/questions/";
-  const title = es ? "Preguntas sobre la Biblia y el sueño · Peace Be Still" : "Questions about the Bible, sleep and the app · Peace Be Still";
-  const desc = es ? "Respuestas claras sobre Salmos para dormir, la Biblia en español y la app Peace Be Still, que llega muy pronto." : "Plain answers about whispered scripture, Psalms for sleep, Bible apps and cancelling subscriptions, from Peace Be Still, a coming-soon app.";
+  const title = es ? "Preguntas sobre la Biblia y el sueño · Peace Be Still" : "Bible, sleep and app questions · Peace Be Still";
+  const desc = es ? "Respuestas claras sobre Salmos para dormir, la Biblia en español para dormir y la app Peace Be Still, que llega muy pronto al App Store y Google Play." : "Plain answers about whispered scripture, Psalms for sleep, Bible apps and cancelling subscriptions, from Peace Be Still, a coming-soon app.";
   const items = list.map((p) => `    <li><span class="door-lab">${p.door === "faith" ? (es ? "Palabra de Dios" : "God's Word") : p.door === "mindset" ? (es ? "Mentalidad" : "Mindset") : (es ? "Para todos" : "For everyone")}</span><a href="${p.path}">${p.indexLabel || p.h1}</a><span class="muted">${p.indexNote || p.description}</span></li>`).join("\n");
   return `<!doctype html>
 <html lang="${lang}">
@@ -113,6 +114,8 @@ function renderIndex(lang, list) {
 <meta property="og:description" content="${desc}">
 <meta property="og:url" content="${BASE}${path}">
 <meta property="og:image" content="${BASE}/${es ? "og-es.png" : "og.png"}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, isPartOf: { "@id": `${BASE}/#site` }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
 </head>

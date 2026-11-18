@@ -189,5 +189,8 @@
   },
   "shares_audience_with": [],
   "ledger_dir": "data/search-loop",
-  "publication_policy": "Faith and sleep searches only (the God's Word door); the engine never writes Mindset pages and never links between doors (related links off). Mode slow, cap 10 live pages to start, the health gate and banned patterns run before anything publishes. Every page ends in the launch waitlist."
+  "publication_policy": "Faith and sleep searches only (the God's Word door); the engine never writes Mindset pages and never links between doors (related links off). Mode slow, cap 10 live pages to start, the health gate and banned patterns run before anything publishes. Every page ends in the launch waitlist.",
+  "llm": {
+    "routing_file": "config/llm_routing.json"
+  }
 }

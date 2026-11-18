@@ -1,10 +1,26 @@
 {
+  "_note": "Peace Be Still's identity, and the only place its sameAs is written. The Organization node on the home page carries the same name, url, logo, sameAs and parentOrganization; scripts/entity-watch.mjs (weekly) fetches every sameAs URL and fails by name on a dead one or on drift. Store listings go in profiles_pending until they exist.",
   "@id": "https://peacebestillapp.com/#org",
   "name": "Peace Be Still",
   "url": "https://peacebestillapp.com/",
   "logo": "https://peacebestillapp.com/icon-512.png",
   "description": "A coming-soon phone app for the end of the day: the King James Bible to read and hear, whispered Psalms for sleep, Bible chat and daily declarations. A great calm, every night.",
-  "sameAs": [],
-  "parentOrganization": { "name": "Spry Labs" },
-  "profiles_pending": ["App Store listing (at launch)", "Google Play listing (at launch)"]
+  "sameAs": [
+    "https://github.com/seq23/peace-be-still"
+  ],
+  "parentOrganization": {
+    "@id": "https://billionairehighperformancecoach.com/spry-labs#organization",
+    "name": "Spry Labs",
+    "url": "https://billionairehighperformancecoach.com/spry-labs"
+  },
+  "profiles_pending": [
+    {
+      "name": "App Store listing",
+      "why": "the app is not in the store yet"
+    },
+    {
+      "name": "Google Play listing",
+      "why": "the app is not in the store yet"
+    }
+  ]
 }
