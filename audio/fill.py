@@ -153,9 +153,19 @@ def segments_of(item: dict, pron: dict) -> list[dict]:
 
 # ------------------------------------------------------------------ the manifest
 def read_manifest(path: Path = MANIFEST) -> list[dict]:
+    """Every row; a line that is not JSON (e.g. merge-conflict markers) is a NAMED STOP, never a traceback."""
     if not path.exists():
         return []
-    return [json.loads(line) for line in path.read_text("utf-8").splitlines() if line.strip()]
+    rows = []
+    for n, line in enumerate(path.read_text("utf-8").splitlines(), 1):
+        if not line.strip():
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            raise NamedStop("MANIFEST_CORRUPT", f"{path} line {n} is not JSON ({line[:40]!r}); a git merge likely left "
+                            "conflict markers. Keep every JSON row (union), delete the marker lines, commit, and the next run resumes.")
+    return rows
 
 
 def append_row(row: dict, path: Path = MANIFEST) -> None:

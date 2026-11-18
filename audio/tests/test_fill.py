@@ -75,6 +75,21 @@ class Plan(unittest.TestCase):
         self.assertFalse(fill.census([], [])["complete"])
 
 
+class Manifest(unittest.TestCase):
+    def test_conflict_markers_are_a_named_stop(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "m.jsonl"
+            p.write_text('{"file": "a"}\n<<<<<<< HEAD\n{"file": "b"}\n=======\n{"file": "c"}\n>>>>>>> x\n')
+            with self.assertRaises(fill.NamedStop) as e:
+                fill.read_manifest(p)
+            self.assertEqual(e.exception.code, "MANIFEST_CORRUPT")
+            p.write_text('{"file": "a"}\n\n{"file": "b"}\n')
+            self.assertEqual([r["file"] for r in fill.read_manifest(p)], ["a", "b"])
+
+    def test_manifest_merges_as_a_union(self):
+        self.assertIn("audio/manifest.jsonl merge=union", (AUDIO.parent / ".gitattributes").read_text())
+
+
 class ActiveFlag(unittest.TestCase):
     def test_written_while_incomplete_and_removed_when_done(self):
         items = fill.plan(bibles())
