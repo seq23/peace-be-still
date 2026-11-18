@@ -1,0 +1,498 @@
+{
+ "id": "core-059-he-is-risen",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Mary Magdalene at the Tomb",
+ "passage": {
+  "refs": [
+   "JOH 20:1-18"
+  ],
+  "label": "John 20:1-18"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "mary",
+   "name": "Mary Magdalene",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus had died on the cross on Friday. His friends laid his body in a tomb cut into the rock, and a great stone was rolled across the door. Then came the Sabbath, a day of rest and waiting. Sunday morning, before the sun was up, Mary went back."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:1",
+   "label": "John 20:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "The first day of the week cometh Mary Magdalene early, when it was yet dark, unto the sepulchre, and seeth the stone taken away from the sepulchre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "The first day of the week cometh Mary Magdalene early, when it was yet dark, unto the sepulchre, and seeth the stone taken away from the sepulchre."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "mary",
+   "ref": "JOH 20:2",
+   "label": "John 20:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Then she runneth, and cometh to Simon Peter, and to the other disciple, whom Jesus loved, and saith unto them, They have taken away the Lord out of the sepulchre, and we know not where they have laid him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Then she runneth, and cometh to Simon Peter, and to the other disciple, whom Jesus loved, and saith unto them,"
+    },
+    {
+     "v": 2,
+     "speaker": "mary",
+     "text": "They have taken away the Lord out of the sepulchre, and we know not where they have laid him."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:3",
+   "label": "John 20:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Peter therefore went forth, and that other disciple, and came to the sepulchre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Peter therefore went forth, and that other disciple, and came to the sepulchre."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:4",
+   "label": "John 20:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "So they ran both together: and the other disciple did outrun Peter, and came first to the sepulchre."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "So they ran both together: and the other disciple did outrun Peter, and came first to the sepulchre."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The two of them ran the whole way. The other disciple got there first, and the gospel makes a point of saying so. It is easy to hear a little smile in that."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:6",
+   "label": "John 20:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Then cometh Simon Peter following him, and went into the sepulchre, and seeth the linen clothes lie,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Then cometh Simon Peter following him, and went into the sepulchre, and seeth the linen clothes lie,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:7",
+   "label": "John 20:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And the napkin, that was about his head, not lying with the linen clothes, but wrapped together in a place by itself."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And the napkin, that was about his head, not lying with the linen clothes, but wrapped together in a place by itself."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Grave robbers do not stop to fold the cloth. Whatever had happened in that tomb, it had not been done in a hurry."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:8",
+   "label": "John 20:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Then went in also that other disciple, which came first to the sepulchre, and he saw, and believed."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Then went in also that other disciple, which came first to the sepulchre, and he saw, and believed."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:9",
+   "label": "John 20:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "For as yet they knew not the scripture, that he must rise again from the dead."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "For as yet they knew not the scripture, that he must rise again from the dead."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:10",
+   "label": "John 20:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Then the disciples went away again unto their own home."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Then the disciples went away again unto their own home."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The men went home. Mary could not leave."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:11",
+   "label": "John 20:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "But Mary stood without at the sepulchre weeping: and as she wept, she stooped down, and looked into the sepulchre,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "But Mary stood without at the sepulchre weeping: and as she wept, she stooped down, and looked into the sepulchre,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:12",
+   "label": "John 20:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And seeth two angels in white sitting, the one at the head, and the other at the feet, where the body of Jesus had lain."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And seeth two angels in white sitting, the one at the head, and the other at the feet, where the body of Jesus had lain."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "mary",
+   "ref": "JOH 20:13",
+   "label": "John 20:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And they say unto her, Woman, why weepest thou? She saith unto them, Because they have taken away my Lord, and I know not where they have laid him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And they say unto her, Woman, why weepest thou? She saith unto them,"
+    },
+    {
+     "v": 13,
+     "speaker": "mary",
+     "text": "Because they have taken away my Lord, and I know not where they have laid him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She was so full of grief that even angels did not stop her. All she wanted was to find him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:14",
+   "label": "John 20:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And when she had thus said, she turned herself back, and saw Jesus standing, and knew not that it was Jesus."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And when she had thus said, she turned herself back, and saw Jesus standing, and knew not that it was Jesus."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "mary",
+   "ref": "JOH 20:15",
+   "label": "John 20:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Jesus saith unto her, Woman, why weepest thou? whom seekest thou? She, supposing him to be the gardener, saith unto him, Sir, if thou have borne him hence, tell me where thou hast laid him, and I will take him away."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Jesus saith unto her, Woman, why weepest thou? whom seekest thou? She, supposing him to be the gardener, saith unto him,"
+    },
+    {
+     "v": 15,
+     "speaker": "mary",
+     "text": "Sir, if thou have borne him hence, tell me where thou hast laid him, and I will take him away."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Her eyes were full of tears, and it was early, and the last thing she expected was to see him alive. She thought he was the man who kept the garden."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then he said one word."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mary",
+   "ref": "JOH 20:16",
+   "label": "John 20:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Jesus saith unto her, Mary. She turned herself, and saith unto him, Rabboni; which is to say, Master."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Jesus saith unto her, Mary. She turned herself, and saith unto him,"
+    },
+    {
+     "v": 16,
+     "speaker": "mary",
+     "text": "Rabboni;"
+    },
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "which is to say, Master."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Her name. That was all it took. She had heard him say it many times before, and she knew that voice anywhere."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:17",
+   "label": "John 20:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Jesus saith unto her, Touch me not; for I am not yet ascended to my Father: but go to my brethren, and say unto them, I ascend unto my Father, and your Father; and to my God, and your God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Jesus saith unto her, Touch me not; for I am not yet ascended to my Father: but go to my brethren, and say unto them, I ascend unto my Father, and your Father; and to my God, and your God."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOH 20:18",
+   "label": "John 20:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Mary Magdalene came and told the disciples that she had seen the Lord, and that he had spoken these things unto her."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Mary Magdalene came and told the disciples that she had seen the Lord, and that he had spoken these things unto her."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The first person to see Jesus risen was a woman standing by a grave in tears. He did not first appear to a crowd or to the leaders. He came to the one who stayed, and he called her by her name. Then he sent her to tell the others. She went, and her message was the oldest good news there is. I have seen the Lord."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 654,
+ "est_seconds": 357,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "note: split-topic words for the pastor read: Sabbath",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:43:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to John 20:1-18; the Sabbath named only as the day between (no position on which day to keep); 'the other disciple' left unnamed as the text leaves him; Mary as first witness is the text."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Mary Magdalene shown as faithful and the first sent, never with the later legends about her past."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

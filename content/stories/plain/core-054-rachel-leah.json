@@ -1,0 +1,484 @@
+{
+ "id": "core-054-rachel-leah",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Rachel and Leah",
+ "passage": {
+  "refs": [
+   "GEN 29:9-30"
+  ],
+  "label": "Genesis 29:9-30"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "implied"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "laban",
+   "name": "Laban",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "jacob",
+   "name": "Jacob",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob had run from home after he tricked his brother Esau. He traveled a long way east, to the land where his mother's family lived. At a well in the fields, he asked the shepherds if they knew a man named Laban. They did. And here came his daughter now."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:9",
+   "label": "Genesis 29:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And while he yet spake with them, Rachel came with her father’s sheep: for she kept them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And while he yet spake with them, Rachel came with her father’s sheep: for she kept them."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:10",
+   "label": "Genesis 29:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And it came to pass, when Jacob saw Rachel the daughter of Laban his mother’s brother, and the sheep of Laban his mother’s brother, that Jacob went near, and rolled the stone from the well’s mouth, and watered the flock of Laban his mother’s brother."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And it came to pass, when Jacob saw Rachel the daughter of Laban his mother’s brother, and the sheep of Laban his mother’s brother, that Jacob went near, and rolled the stone from the well’s mouth, and watered the flock of Laban his mother’s brother."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:11",
+   "label": "Genesis 29:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And Jacob kissed Rachel, and lifted up his voice, and wept."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And Jacob kissed Rachel, and lifted up his voice, and wept."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He had come all that way alone, not knowing what he would find. Now he was standing in front of his own family. No wonder he wept."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:12",
+   "label": "Genesis 29:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And Jacob told Rachel that he was her father’s brother, and that he was Rebekah’s son: and she ran and told her father."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And Jacob told Rachel that he was her father’s brother, and that he was Rebekah’s son: and she ran and told her father."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:13",
+   "label": "Genesis 29:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And it came to pass, when Laban heard the tidings of Jacob his sister’s son, that he ran to meet him, and embraced him, and kissed him, and brought him to his house. And he told Laban all these things."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And it came to pass, when Laban heard the tidings of Jacob his sister’s son, that he ran to meet him, and embraced him, and kissed him, and brought him to his house. And he told Laban all these things."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob stayed and worked for a month. Then his uncle spoke to him about wages."
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:15",
+   "label": "Genesis 29:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And Laban said unto Jacob, Because thou art my brother, shouldest thou therefore serve me for nought? tell me, what shall thy wages be?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And Laban said unto Jacob,"
+    },
+    {
+     "v": 15,
+     "speaker": "laban",
+     "text": "Because thou art my brother, shouldest thou therefore serve me for nought? tell me, what shall thy wages be?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:16",
+   "label": "Genesis 29:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And Laban had two daughters: the name of the elder was Leah, and the name of the younger was Rachel."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And Laban had two daughters: the name of the elder was Leah, and the name of the younger was Rachel."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:17",
+   "label": "Genesis 29:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Leah was tender eyed; but Rachel was beautiful and well favoured."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Leah was tender eyed; but Rachel was beautiful and well favoured."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The Bible says Leah had tender eyes. No one is sure exactly what that meant. What is clear is that Jacob only had eyes for her younger sister."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 29:18",
+   "label": "Genesis 29:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And Jacob loved Rachel; and said, I will serve thee seven years for Rachel thy younger daughter."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And Jacob loved Rachel; and said,"
+    },
+    {
+     "v": 18,
+     "speaker": "jacob",
+     "text": "I will serve thee seven years for Rachel thy younger daughter."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:19",
+   "label": "Genesis 29:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And Laban said, It is better that I give her to thee, than that I should give her to another man: abide with me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And Laban said,"
+    },
+    {
+     "v": 19,
+     "speaker": "laban",
+     "text": "It is better that I give her to thee, than that I should give her to another man: abide with me."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:20",
+   "label": "Genesis 29:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And Jacob served seven years for Rachel; and they seemed unto him but a few days, for the love he had to her."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And Jacob served seven years for Rachel; and they seemed unto him but a few days, for the love he had to her."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Seven years of work, and they felt like a few days. That is how much he loved her."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When the seven years were over, Jacob asked for his bride, and Laban threw a wedding feast. But that night, Laban brought Leah instead of Rachel. In the dark, and under the veil, Jacob did not know."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jacob",
+   "ref": "GEN 29:25",
+   "label": "Genesis 29:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "And it came to pass, that in the morning, behold, it was Leah: and he said to Laban, What is this thou hast done unto me? did not I serve with thee for Rachel? wherefore then hast thou beguiled me?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "And it came to pass, that in the morning, behold, it was Leah: and he said to Laban,"
+    },
+    {
+     "v": 25,
+     "speaker": "jacob",
+     "text": "What is this thou hast done unto me? did not I serve with thee for Rachel? wherefore then hast thou beguiled me?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jacob had once fooled his own father in the dark by pretending to be his older brother. Now he was the one who had been fooled, by a father swapping the younger for the older."
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:26",
+   "label": "Genesis 29:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And Laban said, It must not be so done in our country, to give the younger before the firstborn."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And Laban said,"
+    },
+    {
+     "v": 26,
+     "speaker": "laban",
+     "text": "It must not be so done in our country, to give the younger before the firstborn."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "laban",
+   "ref": "GEN 29:27",
+   "label": "Genesis 29:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Fulfil her week, and we will give thee this also for the service which thou shalt serve with me yet seven other years."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "laban",
+     "text": "Fulfil her week, and we will give thee this also for the service which thou shalt serve with me yet seven other years."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:28",
+   "label": "Genesis 29:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "And Jacob did so, and fulfilled her week: and he gave him Rachel his daughter to wife also."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "And Jacob did so, and fulfilled her week: and he gave him Rachel his daughter to wife also."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 29:30",
+   "label": "Genesis 29:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And he went in also unto Rachel, and he loved also Rachel more than Leah, and served with him yet seven other years."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And he went in also unto Rachel, and he loved also Rachel more than Leah, and served with him yet seven other years."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It is not a happy story. Jacob was tricked. Rachel was kept waiting. And Leah was given to a man who did not want her, and she knew it."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "But the very next verse says that the LORD saw that Leah was not loved. He saw her. Leah's sons became fathers of tribes in Israel. One of them was Judah, and from Judah's family came King David, and in time, Jesus. The sister nobody chose was never overlooked by God."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 668,
+ "est_seconds": 364,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.1",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:43:04",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 29:9-30; tagged sexual implied (v23 left out of the verses, the swap told in one plain sentence); Leah seen by God is v31, Judah to David to Jesus is the genealogy (Ruth 4, Matt 1), stated without references; 'tender eyed' left uncertain as it is."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Leah treated with tenderness, never as a joke about looks; the hurt of all three told honestly; no romance gloss on Laban's trick."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
