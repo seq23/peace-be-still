@@ -22,7 +22,7 @@ N: No long speech to that storm. A few words, and the wind laid down like a fuss
 S: MAR 4:40
 N: He did not ask them to pretend they were never afraid. He asked them where their faith had gone, when he had been right there in the boat with them the whole time.
 S: MAR 4:41 @disciples
-N: What manner of man is this? That is the question the story leaves with us tonight. My grandmother used to hum "Jesus, Lover of My Soul" when the storms rolled through, that old Wesley hymn about hiding till the storm of life is past. She never told me the storm would not come. She told me who was in the boat. Can I get an amen?
+N: What manner of man is this? That is the question the story leaves with us tonight. The church mothers used to hum "Jesus, Lover of My Soul" when the storms rolled through, that old Wesley hymn about hiding till the storm of life is past. They never said the storm would not come. They told us who was in the boat.
 
 === core-002-red-sea | Stand Still and See
 passage: EXO 14:5-31
@@ -55,7 +55,7 @@ cast: king|the king|adult|m; daniel|Daniel|elder|m
 N: Daniel had served in Babylon a long, long time. King Darius thought so much of him that he planned to set him over the whole kingdom. And you know how that goes. The other leaders got jealous. They went looking for something wrong with him, and they could not find a thing. He was faithful. He was honest.
 N: So they figured the only way to catch Daniel was through his God. They talked the king into signing a law. Thirty days, nobody could pray to any god or any man but the king. Anybody who did would go to the lions.
 S: DAN 6:10
-N: Look at what he did, Church. He did not hide. He did not change his schedule. He went home, opened his windows toward Jerusalem, got down on his knees, and prayed like he always had. A church mother I knew used to say, baby, you cannot start praying in the storm if you never prayed in the sunshine. Daniel had prayed in the sunshine.
+N: Look at what he did, Church. He did not hide. He did not change his schedule. He went home, opened his windows toward Jerusalem, got down on his knees, and prayed like he always had. The church mothers used to say, baby, you cannot start praying in the storm if you never prayed in the sunshine. Daniel had prayed in the sunshine.
 N: The men found him praying and ran to the king. The king was sick about it, because he loved Daniel. He worked till the sun went down to find a way out. But a law of the Medes and Persians could not be changed.
 S: DAN 6:16 @king
 N: Even the king who signed that order was hoping in Daniel's God. They rolled a stone over the mouth of the den and sealed it with the king's own ring. Then the king went home to his palace. No supper. No music. No sleep.
@@ -110,7 +110,7 @@ S: 1SA 17:45 @david
 S: 1SA 17:47 @david
 S: 1SA 17:49
 N: One stone. And the giant fell on his face to the earth. David had no sword in his hand that day. He had a sling, a stone, and a God he had already met out on the hillside with the sheep.
-N: A church mother I knew used to say, the giants don't get smaller, baby, your God gets bigger in your eyes. The story does not promise every battle ends like this one. It shows us where David's courage came from: the LORD who had been with him before.
+N: Our grandmothers used to say, the giants don't get smaller, baby, your God gets bigger in your eyes. The story does not promise every battle ends like this one. It shows us where David's courage came from: the LORD who had been with him before.
 
 === core-006-joseph-coat | Joseph and the Coat
 passage: GEN 37:3-28; GEN 39:2

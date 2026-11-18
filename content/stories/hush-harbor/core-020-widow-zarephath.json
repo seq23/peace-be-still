@@ -1,0 +1,271 @@
+{
+ "id": "core-020-widow-zarephath",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Barrel and the Cruse",
+ "passage": {
+  "refs": [
+   "1KI 17:1-16"
+  ],
+  "label": "1 Kings 17:1-16"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "elijah",
+   "name": "Elijah",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "widow",
+   "name": "widow",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The prophet Elijah had told King Ahab there would be no rain in the land except by God's word. And the drought came. For a while, Elijah stayed by a brook, and the ravens brought him bread and meat morning and evening. But after a while, the brook dried up."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then God sent Elijah to a town called Zarephath, outside of Israel, up near Sidon. God told him a widow there would feed him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elijah",
+   "ref": "1KI 17:10",
+   "label": "1 Kings 17:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "So he arose and went to Zarephath. And when he came to the gate of the city, behold, the widow woman was there gathering of sticks: and he called to her, and said, Fetch me, I pray thee, a little water in a vessel, that I may drink."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "So he arose and went to Zarephath. And when he came to the gate of the city, behold, the widow woman was there gathering of sticks: and he called to her, and said,"
+    },
+    {
+     "v": 10,
+     "speaker": "elijah",
+     "text": "Fetch me, I pray thee, a little water in a vessel, that I may drink."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Water was precious in a drought. Still, she went to get it. And as she was going, Elijah called after her and asked her to bring a piece of bread too."
+  },
+  {
+   "type": "scripture",
+   "speaker": "widow",
+   "ref": "1KI 17:12",
+   "label": "1 Kings 17:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And she said, As the LORD thy God liveth, I have not a cake, but an handful of meal in a barrel, and a little oil in a cruse: and, behold, I am gathering two sticks, that I may go in and dress it for me and my son, that we may eat it, and die."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And she said,"
+    },
+    {
+     "v": 12,
+     "speaker": "widow",
+     "text": "As the LORD thy God liveth, I have not a cake, but an handful of meal in a barrel, and a little oil in a cruse: and, behold, I am gathering two sticks, that I may go in and dress it for me and my son, that we may eat it, and die."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, that might be one of the saddest sentences in the Bible. She was out picking up a few sticks to cook one last little meal for her and her son. After that, she figured they would both starve. She was not being stingy with the stranger. She just did not have anything left."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elijah",
+   "ref": "1KI 17:13",
+   "label": "1 Kings 17:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And Elijah said unto her, Fear not; go and do as thou hast said: but make me thereof a little cake first, and bring it unto me, and after make for thee and for thy son."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And Elijah said unto her,"
+    },
+    {
+     "v": 13,
+     "speaker": "elijah",
+     "text": "Fear not; go and do as thou hast said: but make me thereof a little cake first, and bring it unto me, and after make for thee and for thy son."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 17:14",
+   "label": "1 Kings 17:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "For thus saith the LORD God of Israel, The barrel of meal shall not waste, neither shall the cruse of oil fail, until the day that the LORD sendeth rain upon the earth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "For thus saith the LORD God of Israel, The barrel of meal shall not waste, neither shall the cruse of oil fail, until the day that the LORD sendeth rain upon the earth."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fear not. Elijah asked her to do something hard. Make him a little cake first, then make something for her and her boy. And he told her what God said, that her meal and her oil would not run out until the rain came back."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Picture her standing in that kitchen. Her child was hungry. There was barely enough for one meal. And a stranger from another country was asking her to trust the word of his God."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 17:15",
+   "label": "1 Kings 17:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And she went and did according to the saying of Elijah: and she, and he, and her house, did eat many days."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And she went and did according to the saying of Elijah: and she, and he, and her house, did eat many days."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 17:16",
+   "label": "1 Kings 17:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And the barrel of meal wasted not, neither did the cruse of oil fail, according to the word of the LORD, which he spake by Elijah."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And the barrel of meal wasted not, neither did the cruse of oil fail, according to the word of the LORD, which he spake by Elijah."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She did what Elijah said. And it happened just like God said through him. Day after day, she reached in that barrel and there was meal. Day after day, there was oil in the cruse. Not a storehouse. Just enough, every day, for the prophet, the widow and her son."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "This is a story about God taking care of a poor widow and her child in a foreign land in the middle of a drought. She was not an Israelite. She was not rich or powerful. But God sent his prophet to her door and kept her family through the hard season."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It does not promise that every empty cupboard will be filled. A lot of our grandmothers stretched one pot further than seemed possible, and they would be the first to tell you it was not a formula. This story tells what God did for one widow, one barrel and one cruse. And it shows a God who saw a mother gathering sticks for what she thought was her last meal."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 630,
+ "est_seconds": 344,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.6",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Kings 17:1-16; states plainly it is not a formula; no seed-faith reading."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The grandmothers who stretched a pot are honoured as a community, not pitied or mocked."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

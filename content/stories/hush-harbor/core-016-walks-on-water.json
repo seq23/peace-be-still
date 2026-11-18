@@ -1,0 +1,326 @@
+{
+ "id": "core-016-walks-on-water",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Lord, Save Me",
+ "passage": {
+  "refs": [
+   "MAT 14:22-33"
+  ],
+  "label": "Matthew 14:22-33"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "peter",
+   "name": "Peter",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "disciples",
+   "name": "the disciples",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus had just fed a great crowd. Afterward he sent his disciples on ahead in the boat while he sent the people home. Then he went up on a mountain by himself to pray. When evening came, he was up there alone."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Out on the water, the boat was in trouble. The waves were tossing it, because the wind was against them. Those men rowed for hours and barely moved."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:25",
+   "label": "Matthew 14:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "And in the fourth watch of the night Jesus went unto them, walking on the sea."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "And in the fourth watch of the night Jesus went unto them, walking on the sea."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAT 14:26",
+   "label": "Matthew 14:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And when the disciples saw him walking on the sea, they were troubled, saying, It is a spirit; and they cried out for fear."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And when the disciples saw him walking on the sea, they were troubled, saying,"
+    },
+    {
+     "v": 26,
+     "speaker": "disciples",
+     "text": "It is a spirit;"
+    },
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "and they cried out for fear."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "In the fourth watch of the night, in the hours before dawn, they saw somebody coming toward them, walking on the water. They were terrified. Then they heard a voice they knew."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:27",
+   "label": "Matthew 14:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "But straightway Jesus spake unto them, saying, Be of good cheer; it is I; be not afraid."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "But straightway Jesus spake unto them, saying, Be of good cheer; it is I; be not afraid."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "MAT 14:28",
+   "label": "Matthew 14:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "And Peter answered him and said, Lord, if it be thou, bid me come unto thee on the water."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "And Peter answered him and said,"
+    },
+    {
+     "v": 28,
+     "speaker": "peter",
+     "text": "Lord, if it be thou, bid me come unto thee on the water."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Peter did not ask for the storm to stop. He asked to come to Jesus, right where Jesus was, out on the water."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:29",
+   "label": "Matthew 14:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "And he said, Come. And when Peter was come down out of the ship, he walked on the water, to go to Jesus."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "And he said, Come. And when Peter was come down out of the ship, he walked on the water, to go to Jesus."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Imagine Peter swinging his leg over the side of that boat. The waves were still there. The wind was still blowing. And for a few steps, he walked on the water toward Jesus."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "MAT 14:30",
+   "label": "Matthew 14:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "But when he saw the wind boisterous, he was afraid; and beginning to sink, he cried, saying, Lord, save me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "But when he saw the wind boisterous, he was afraid; and beginning to sink, he cried, saying,"
+    },
+    {
+     "v": 30,
+     "speaker": "peter",
+     "text": "Lord, save me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Peter looked at the wind and the waves, and fear took over, and he started to go down. His prayer was three words long. Lord, save me. Church, that is one of the shortest prayers in the Bible and one of the truest. You do not need fancy words when you are going under."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:31",
+   "label": "Matthew 14:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And immediately Jesus stretched forth his hand, and caught him, and said unto him, O thou of little faith, wherefore didst thou doubt?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And immediately Jesus stretched forth his hand, and caught him, and said unto him, O thou of little faith, wherefore didst thou doubt?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Immediately. Jesus did not wait for Peter to sink further. He did not make him swim back to the boat. He reached out his hand and caught him. Then he asked him, gentle, why he doubted."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Folks remember this story for the sinking. But Peter was the one who got out of the boat. He walked on water, even if it was just a few steps. And when he started to sink, he knew whose name to call, and that hand was already there."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When they climbed back in the boat together, the wind stopped."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAT 14:33",
+   "label": "Matthew 14:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "Then they that were in the ship came and worshipped him, saying, Of a truth thou art the Son of God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "Then they that were in the ship came and worshipped him, saying,"
+    },
+    {
+     "v": 33,
+     "speaker": "disciples",
+     "text": "Of a truth thou art the Son of God."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The night ended in worship. They had learned that the one walking toward them on the water was the Son of God. And they had watched him catch Peter the moment he cried out."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 504,
+ "est_seconds": 275,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.8",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Matthew 14:22-33; closes on what the disciples saw, not a promise."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'You do not need fancy words when you are going under' is warm and true."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

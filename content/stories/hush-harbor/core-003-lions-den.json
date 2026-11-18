@@ -67,7 +67,7 @@
   {
    "type": "retelling",
    "speaker": "narrator",
-   "text": "Look at what he did, Church. He did not hide. He did not change his schedule. He went home, opened his windows toward Jerusalem, got down on his knees, and prayed like he always had. A church mother I knew used to say, baby, you cannot start praying in the storm if you never prayed in the sunshine. Daniel had prayed in the sunshine."
+   "text": "Look at what he did, Church. He did not hide. He did not change his schedule. He went home, opened his windows toward Jerusalem, got down on his knees, and prayed like he always had. The church mothers used to say, baby, you cannot start praying in the storm if you never prayed in the sunshine. Daniel had prayed in the sunshine."
   },
   {
    "type": "retelling",
@@ -230,8 +230,8 @@
   "file": null,
   "qa": null
  },
- "words": 567,
- "est_seconds": 309,
+ "words": 565,
+ "est_seconds": 308,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -253,6 +253,8 @@
    "S11_length": "pass",
    "S11_sentence_length": "pass",
    "S11_reading_level": "note: grade 2.5",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {
@@ -268,11 +270,11 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "The church mother's saying rings true and is used once; the spiritual title is public domain."
+    "note": "The church mothers' saying rings true and is used once; the spiritual title is public domain."
    },
    "verdict": "pass"
   },
-  "rewritten": null,
+  "rewritten": "Cultural pass: 'a church mother I knew' was a first-person memory for an AI narrator; now 'the church mothers'.",
   "person_read": false
  },
  "status": "passed"

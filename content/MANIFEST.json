@@ -10,11 +10,11 @@
    "held_ids": []
   },
   "story/hush-harbor": {
-   "passed": 10,
+   "passed": 20,
    "held": 0,
    "draft": 0,
    "never-ship": 0,
-   "rewritten": 1,
+   "rewritten": 4,
    "held_ids": []
   }
  }

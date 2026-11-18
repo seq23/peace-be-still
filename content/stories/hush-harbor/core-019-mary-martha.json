@@ -1,0 +1,235 @@
+{
+ "id": "core-019-mary-martha",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Martha, Martha",
+ "passage": {
+  "refs": [
+   "LUK 10:38-42"
+  ],
+  "label": "Luke 10:38-42"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "martha",
+   "name": "Martha",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:38",
+   "label": "Luke 10:38",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 38,
+     "text": "Now it came to pass, as they went, that he entered into a certain village: and a certain woman named Martha received him into her house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "Now it came to pass, as they went, that he entered into a certain village: and a certain woman named Martha received him into her house."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus and his disciples were on the road, and they came to a village. A woman named Martha opened up her home to him. And you know what that means. When company comes, especially a teacher with all his followers, there is food to cook, water to draw, and a house to get ready."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:39",
+   "label": "Luke 10:39",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 39,
+     "text": "And she had a sister called Mary, which also sat at Jesus’ feet, and heard his word."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "And she had a sister called Mary, which also sat at Jesus’ feet, and heard his word."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Martha had a sister named Mary. While Martha worked, Mary sat down at Jesus's feet and listened to him teach. She stayed close and took in every word."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Picture Martha's afternoon. Pots on the fire. Bread to bake. Folks to feed. She went from one thing to the next, and every time she passed that doorway, there was her sister, sitting down, listening."
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "LUK 10:40",
+   "label": "Luke 10:40",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 40,
+     "text": "But Martha was cumbered about much serving, and came to him, and said, Lord, dost thou not care that my sister hath left me to serve alone? bid her therefore that she help me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "But Martha was cumbered about much serving, and came to him, and said,"
+    },
+    {
+     "v": 40,
+     "speaker": "martha",
+     "text": "Lord, dost thou not care that my sister hath left me to serve alone? bid her therefore that she help me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Martha did what a lot of us would do. She took her frustration straight to Jesus. Lord, don't you care? Same question the disciples asked in the storm. It comes from a tired heart that feels like it is carrying everything by itself. Every church kitchen has a Martha, and thank God for her."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice Jesus did not fuss at her for serving. Serving is good. Feeding people is good. Opening your home is good. The trouble was not Martha's work. It was the worry and the weight she was carrying while she did it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:41",
+   "label": "Luke 10:41",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 41,
+     "text": "And Jesus answered and said unto her, Martha, Martha, thou art careful and troubled about many things:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "And Jesus answered and said unto her, Martha, Martha, thou art careful and troubled about many things:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:42",
+   "label": "Luke 10:42",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 42,
+     "text": "But one thing is needful: and Mary hath chosen that good part, which shall not be taken away from her."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "But one thing is needful: and Mary hath chosen that good part, which shall not be taken away from her."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Martha, Martha. He said her name twice, soft, the way you talk to somebody you love. He saw how careful and troubled she was about so many things. And he told her only one thing was needed."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mary had chosen to sit with him and listen, and Jesus would not take that away from her. He was not telling Martha to stop caring for folks. He was inviting her to come and sit down too."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Most of us know Martha's day. The list that never ends. Feeling like everybody else is resting while you work. This story does not make Martha the villain. It shows Jesus looking at a busy, worried woman and inviting her to rest at his feet."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The story stops right there, with the invitation still open. We do not know if Martha put down her dish towel that day. But we know what Jesus offered her. The good part. The one thing needful."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 483,
+ "est_seconds": 263,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 483 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.4",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 10:38-42; no doctrine of women's roles added."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Every church kitchen has a Martha, and thank God for her' honours service."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

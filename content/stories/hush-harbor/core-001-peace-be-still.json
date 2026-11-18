@@ -187,7 +187,7 @@
   {
    "type": "retelling",
    "speaker": "narrator",
-   "text": "What manner of man is this? That is the question the story leaves with us tonight. My grandmother used to hum \"Jesus, Lover of My Soul\" when the storms rolled through, that old Wesley hymn about hiding till the storm of life is past. She never told me the storm would not come. She told me who was in the boat. Can I get an amen?"
+   "text": "What manner of man is this? That is the question the story leaves with us tonight. The church mothers used to hum \"Jesus, Lover of My Soul\" when the storms rolled through, that old Wesley hymn about hiding till the storm of life is past. They never said the storm would not come. They told us who was in the boat."
   }
  ],
  "illustration": {
@@ -195,8 +195,8 @@
   "file": null,
   "qa": null
  },
- "words": 502,
- "est_seconds": 274,
+ "words": 497,
+ "est_seconds": 271,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -215,9 +215,11 @@
    "speakers": "pass",
    "voice_segments": "pass",
    "S10_shelf": "pass",
-   "S11_length": "pass",
+   "S11_length": "note: 497 words outside 500-900 words",
    "S11_sentence_length": "pass",
    "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {
@@ -233,11 +235,11 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm preaching cadence, one call and response; the grandmother and the fields are memory, not caricature; no dialect spellings."
+    "note": "Warm preaching cadence; the church mothers and the old saints are the community's memory, not an invented narrator's; ends on the story's truth; no dialect spellings."
    },
    "verdict": "pass"
   },
-  "rewritten": null,
+  "rewritten": "Cultural pass (coordinator review 18 Nov): the AI narrator had a first-person grandmother (invented person, R-PRF-02) and ended on 'Can I get an amen?'; now 'the church mothers' and the ending is the story's truth.",
   "person_read": false
  },
  "status": "passed"

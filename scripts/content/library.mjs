@@ -351,6 +351,8 @@ N: Somebody ought to say amen. The same voice that spoke to the sea still calls 
     ["S10_shelf", (s) => { s.passage.refs = ["JDG 19:1-3"]; }],
     ["S10_shelf", (s) => { delete s.content.violence; }],
     ["S13_ai_label", (s) => { delete s.ai_label; }],
+    ["no_invented_memories", (s) => { s.blocks[0].text += " My grandmother used to hum it."; }],
+    ["callouts", (s) => { s.blocks[s.blocks.length - 1].text += " Can I get an amen?"; }],
     ["voice_segments", (s) => { s.blocks[2].segments = [{ v: 38, speaker: "disciples", text: s.blocks[2].verses[0].text }]; }],
     ["voice_segments", (s) => { s.blocks[2].segments[1].text += " extra"; }],
   ];

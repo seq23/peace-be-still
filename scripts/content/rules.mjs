@@ -49,6 +49,10 @@ export const NARRATION = {
   en: /\b(?:[Aa]nd|Then|But|So) (?:(?!hast\b|hath\b|have\b|has\b|had\b|thou\b|ye\b|we\b|I\b)[\w-]+ ){0,4}(?:said|saith|answered|spake)\b|\b(?:said|saith|spake|answered) (?:unto|to) (?:him|her|them|the)\b|\band (?:say|says) unto\b|\b(?:[Aa]nd) (?:they|he|she) (?:cried|came)\b|\bcould not answer\b/,
   es: /\b(?:dijo|dijeron|respondi[óo]|respondieron|habl[óo])\b[^:]{0,80}:/i,
 };
+export const FIRST_PERSON = /\bmy (?:grand(?:mother|father|mama|daddy|ma|pa)|mama|mother|daddy|father|aunt|uncle|pastor|church|momma)\b|\bwhen I was (?:a child|little|young|a girl|a boy)\b|\bI remember\b|\bI (?:knew|grew up|used to)\b|\bmi (?:abuela|abuelo|mamá|madre|padre|tía|pastor)\b|\bcuando (?:yo )?era (?:niña|niño|pequeña|pequeño)\b|\b(?:yo )?recuerdo\b/i;
+const CALLOUT = "(?:can I get an? (?:amen|witness)|somebody (?:ought to|say) (?:say )?amen|say amen|alguien diga amén|¿me dicen amén\\?)";
+export const CALLOUT_G = new RegExp(CALLOUT, "gi");
+export const CALLOUT_END = new RegExp(CALLOUT + "[?.!]*$", "i");
 export const NEVER_VOICED = new Set(["god", "lord", "jehovah", "jesus", "christ", "holy-spirit", "spirit", "angel-of-the-lord"]);
 
 // S10: sensitive passages force the content tags (and keep them off the family shelf).
@@ -183,6 +187,13 @@ export function checkStory(s) {
     const fh = fernandezHuerta(rt);
     c.S11_reading_level = fh >= 70 ? pass : fh >= 52.5 ? note(`Fernández-Huerta ${fh.toFixed(0)}`) : fail(`Fernández-Huerta ${fh.toFixed(0)}`);
   }
+  // The narrator is a disclosed AI storyteller: no invented first-person life memories (risk R-PRF-02),
+  // and at most one call-out per story, never as the last line.
+  const fpm = listHits(FIRST_PERSON, written);
+  c.no_invented_memories = fpm.length ? fail(`first-person memory: ${fpm.join(", ")}`) : pass;
+  const calls = written.reduce((a, t) => a + (String(t).match(CALLOUT_G) || []).length, 0);
+  const last = ret.length ? ret[ret.length - 1].text.trim() : "";
+  c.callouts = calls > 1 ? fail(`${calls} call-outs (at most one)`) : CALLOUT_END.test(last) ? fail("ends on a call-out") : pass;
   c.S13_ai_label = s.ai_label && scr.every((b) => b.translation === tr) ? pass : fail("AI label key or translation tag missing");
   return c;
 }

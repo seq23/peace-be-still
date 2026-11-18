@@ -228,7 +228,7 @@
   {
    "type": "retelling",
    "speaker": "narrator",
-   "text": "A church mother I knew used to say, the giants don't get smaller, baby, your God gets bigger in your eyes. The story does not promise every battle ends like this one. It shows us where David's courage came from: the LORD who had been with him before."
+   "text": "Our grandmothers used to say, the giants don't get smaller, baby, your God gets bigger in your eyes. The story does not promise every battle ends like this one. It shows us where David's courage came from: the LORD who had been with him before."
   }
  ],
  "illustration": {
@@ -236,8 +236,8 @@
   "file": null,
   "qa": null
  },
- "words": 553,
- "est_seconds": 302,
+ "words": 550,
+ "est_seconds": 300,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -259,6 +259,8 @@
    "S11_length": "pass",
    "S11_sentence_length": "pass",
    "S11_reading_level": "note: grade 3.0",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {
@@ -274,11 +276,11 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "The church-mother saying is warm and true to the voice; the speaker is left unnamed."
+    "note": "The saying is given to 'our grandmothers', the community, not an invented person."
    },
    "verdict": "pass"
   },
-  "rewritten": "Cultural pass: dropped an invented framing name (Mother Johnson) not on an approved list; she is now 'a church mother I knew'.",
+  "rewritten": "Cultural pass: dropped an invented framing name (Mother Johnson), then the first-person 'a church mother I knew'; now 'our grandmothers'.",
   "person_read": false
  },
  "status": "passed"

@@ -284,6 +284,8 @@
    "S11_length": "pass",
    "S11_sentence_length": "pass",
    "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "callouts": "pass",
    "S13_ai_label": "pass"
   },
   "first_reader": {
