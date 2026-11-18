@@ -31,6 +31,13 @@ checks, shelved, status, voice).
   `voices.json` are tried in turn (a model other than the first only after it passes vetting: `hush_harbor.py --vet MODEL` scores its four voices against her picked clips, logged in `hush-harbor/model-vetting.json`; one story never mixes models), then `QUOTA_OUT` (a note, exit 0) and the next run resumes from the
   calls cached in `~/.peace-be-still/hh-work/`. Output `OUTPUT <n> Hush Harbor stories shelved` and
   `hush harbor: X of Y stories voiced, N failed`. Mi Refugio stays on the Spanish Kokoro blend.
+- **Hush Harbor clone lane** (`hush_clone.py` + `render_chatterbox.py`, owner: "Use the clones"):
+  Chatterbox (MIT) clones of her four picked clips (`gdrive:Mac-Shelf/peace-be-still/voices/hush-harbor/`),
+  one sentence at a time on the Mac's CPU. It works down from the highest story number while the
+  Gemini lane works up, and the first lane to start a story writes `engine` in its work folder, so a
+  story never mixes engines. Checks: each sentence's word accuracy, each turn's speaker similarity
+  over its role's floor (`voices.json` clone.floor), then the same file checks and shelf. `run.sh`
+  runs one clone story after each fill chunk, under the same lock, so the Mac alternates.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
   reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing, R2 upload, the player.
 - Tests: `python3 -m unittest discover -s audio/tests` (needs numpy) and `python3 audio/check_manifest.py --self-test`.

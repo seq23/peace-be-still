@@ -12,7 +12,7 @@ FIELDS = ("file", "kind", "lang", "ref", "seconds", "sha256", "checks", "shelved
 
 
 def problems(rows, voices_md):
-    licensed = set(re.findall(r"`((?:kokoro|gemini):[^`]+)`", voices_md))
+    licensed = set(re.findall(r"`((?:kokoro|gemini|chatterbox):[^`]+)`", voices_md))
     out, seen = [], set()
     for n, r in enumerate(rows, 1):
         where = f"row {n} ({r.get('file')})"
