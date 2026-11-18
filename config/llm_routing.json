@@ -6,7 +6,7 @@
   },
   "policy": {
     "max_cost_usd": 0,
-    "paid_fallback": false,
+    "fallback_to_paid": false,
     "on_reported_cost": "NAMED STOP [PAID_MODEL]: a response with a non-zero usage.cost stops the run",
     "read_by": "the search-loop engine (seq23/search-loop) via search-loop.config.json llm.routing_file; this repository makes no other model call"
   },
@@ -15,19 +15,35 @@
     "source": "https://openrouter.ai/api/v1/models (no key)",
     "filter": "pricing.prompt == \"0\" && pricing.completion == \"0\""
   },
-  "models": [
+  "search_loop": "The weekly search-loop engine (seq23/search-loop) runs its own $0 lanes; see its config/free-models.json.",
+  "free_models": [
     {
-      "id": "google/gemma-4-31b-it:free"
+      "id": "google/gemma-4-31b-it:free",
+      "pricing": {
+        "prompt": "0",
+        "completion": "0"
+      }
     },
     {
-      "id": "google/gemma-4-26b-a4b-it:free"
+      "id": "google/gemma-4-26b-a4b-it:free",
+      "pricing": {
+        "prompt": "0",
+        "completion": "0"
+      }
     },
     {
-      "id": "nvidia/nemotron-3-ultra-550b-a55b:free"
+      "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "pricing": {
+        "prompt": "0",
+        "completion": "0"
+      }
     },
     {
-      "id": "nvidia/nemotron-3.5-lightning:free"
+      "id": "nvidia/nemotron-3.5-lightning:free",
+      "pricing": {
+        "prompt": "0",
+        "completion": "0"
+      }
     }
-  ],
-  "search_loop": "The weekly search-loop engine (seq23/search-loop) runs its own $0 lanes; see its config/free-models.json."
+  ]
 }
