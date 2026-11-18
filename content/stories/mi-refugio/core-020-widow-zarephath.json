@@ -1,0 +1,344 @@
+{
+ "id": "core-020-widow-zarephath",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Elías y la viuda de Sarepta",
+ "passage": {
+  "refs": [
+   "1KI 17:8-16"
+  ],
+  "label": "1 Reyes 17:8-16"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "elijah",
+   "name": "Elías",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "widow",
+   "name": "viuda",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hacía mucho tiempo que no llovía en Israel. Los campos estaban secos, los ríos se habían secado, y había hambre en toda la región. El profeta Elías había estado escondido junto a un arroyo, y cuando el arroyo se secó, Dios le habló otra vez."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 17:8-9",
+   "label": "1 Reyes 17:8-9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Y fué á él palabra de Jehová, diciendo:"
+    },
+    {
+     "v": 9,
+     "text": "Levántate, vete á Sarepta de Sidón, y allí morarás: he aquí yo he mandado allí á una mujer viuda que te sustente."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Y fué á él palabra de Jehová, diciendo:"
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Levántate, vete á Sarepta de Sidón, y allí morarás: he aquí yo he mandado allí á una mujer viuda que te sustente."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun en tiempo de sequía, cuando el arroyo ya se secó.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Sarepta estaba fuera de Israel, en tierra extranjera. Y Dios no lo mandaba a la casa de un hombre rico, sino a la de una viuda. Alguien que, en aquel tiempo, tenía muy poco y casi nadie la protegía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elijah",
+   "ref": "1KI 17:10",
+   "label": "1 Reyes 17:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Entonces él se levantó, y se fué á Sarepta. Y como llegó á la puerta de la ciudad, he aquí una mujer viuda que estaba allí cogiendo serojas; y él la llamó, y díjole: Ruégote que me traigas una poca de agua en un vaso, para que beba."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Entonces él se levantó, y se fué á Sarepta. Y como llegó á la puerta de la ciudad, he aquí una mujer viuda que estaba allí cogiendo serojas; y él la llamó, y díjole:"
+    },
+    {
+     "v": 10,
+     "speaker": "elijah",
+     "text": "Ruégote que me traigas una poca de agua en un vaso, para que beba."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "elijah",
+   "ref": "1KI 17:11",
+   "label": "1 Reyes 17:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Y yendo ella para traérsela, él la volvió á llamar, y díjole: Ruégote que me traigas también un bocado de pan en tu mano."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y yendo ella para traérsela, él la volvió á llamar, y díjole:"
+    },
+    {
+     "v": 11,
+     "speaker": "elijah",
+     "text": "Ruégote que me traigas también un bocado de pan en tu mano."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Agua ya era mucho pedir en una sequía. Pero pan era más de lo que ella tenía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "widow",
+   "ref": "1KI 17:12",
+   "label": "1 Reyes 17:12",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y ella respondió: Vive Jehová Dios tuyo, que no tengo pan cocido; que solamente un puñado de harina tengo en la tinaja, y un poco de aceite en una botija: y ahora cogía dos serojas, para entrarme y aderezarlo para mí y para mi hijo, y que lo comamos, y nos muramos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y ella respondió:"
+    },
+    {
+     "v": 12,
+     "speaker": "widow",
+     "text": "Vive Jehová Dios tuyo, que no tengo pan cocido; que solamente un puñado de harina tengo en la tinaja, y un poco de aceite en una botija: y ahora cogía dos serojas, para entrarme y aderezarlo para mí y para mi hijo, y que lo comamos, y nos muramos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esa era toda la verdad de su casa. Un puñado de harina, un poco de aceite, y un hijo. Estaba juntando leña para preparar la última comida. No le quedaba esperanza."
+  },
+  {
+   "type": "scripture",
+   "speaker": "elijah",
+   "ref": "1KI 17:13",
+   "label": "1 Reyes 17:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y Elías le dijo: No hayas temor; ve, haz como has dicho: empero hazme á mí primero de ello una pequeña torta cocida debajo de la ceniza, y tráemela; y después harás para ti y para tu hijo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y Elías le dijo:"
+    },
+    {
+     "v": 13,
+     "speaker": "elijah",
+     "text": "No hayas temor; ve, haz como has dicho: empero hazme á mí primero de ello una pequeña torta cocida debajo de la ceniza, y tráemela; y después harás para ti y para tu hijo."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "elijah",
+   "ref": "1KI 17:14",
+   "label": "1 Reyes 17:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Porque Jehová Dios de Israel ha dicho así: La tinaja de la harina no escaseará, ni se disminuirá la botija del aceite, hasta aquel día que Jehová dará lluvia sobre la haz de la tierra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "elijah",
+     "text": "Porque Jehová Dios de Israel ha dicho así: La tinaja de la harina no escaseará, ni se disminuirá la botija del aceite, hasta aquel día que Jehová dará lluvia sobre la haz de la tierra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No tengas miedo. Eso fue lo primero que le dijo Elías. Y luego le pidió algo difícil. Que primero le diera a él, con lo poco que le quedaba. No porque Elías tuviera más derecho, sino porque Dios había dado una palabra sobre esa harina y ese aceite."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 17:15",
+   "label": "1 Reyes 17:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Entonces ella fué, é hizo como le dijo Elías; y comió él, y ella y su casa, muchos días."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Entonces ella fué, é hizo como le dijo Elías; y comió él, y ella y su casa, muchos días."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 17:16",
+   "label": "1 Reyes 17:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y la tinaja de la harina no escaseó, ni menguó la botija del aceite, conforme á la palabra de Jehová que había dicho por Elías."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y la tinaja de la harina no escaseó, ni menguó la botija del aceite, conforme á la palabra de Jehová que había dicho por Elías."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ella fue e hizo lo que Elías le dijo. Y cada día, cuando metía la mano en la tinaja, había harina. Cada día, cuando inclinaba la botija, había aceite. No se llenó la casa de comida. Había lo suficiente para ese día. Y al día siguiente, otra vez."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Dios no le dio a esa viuda una despensa llena. Le dio pan de cada día, durante toda la sequía. Y la vida de su hijo, de ella y del profeta fue sostenida."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esta historia no es una regla de que si damos dinero vamos a recibir más. Es la historia de una mujer que confió en la palabra de Dios cuando lo tenía todo en contra, y de un Dios que se acordó de una viuda extranjera que nadie más veía."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Si tu tinaja también se ve casi vacía esta noche, recuérdalo. Dios conoce tu casa, tu mesa y lo que te hace falta. Él sabe cuidar de los suyos un día a la vez."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 644,
+ "est_seconds": 357,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Kgs 17:8-16 (the brook of 17:3-7 named as setting); states plainly this is not a give-to-get rule (no prosperity reading); daily bread, not a full pantry."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "The widow shown with dignity and faith, not as a poverty picture; a foreign widow seen by God, natural Latin American Spanish."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

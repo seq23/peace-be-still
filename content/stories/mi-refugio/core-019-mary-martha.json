@@ -1,0 +1,264 @@
+{
+ "id": "core-019-mary-martha",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Marta y María",
+ "passage": {
+  "refs": [
+   "LUK 10:38-42"
+  ],
+  "label": "Lucas 10:38-42"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "martha",
+   "name": "Marta",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús iba de camino con sus discípulos, y llegaron a una aldea. Allí vivían dos hermanas, Marta y María, que eran amigas suyas."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:38",
+   "label": "Lucas 10:38",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 38,
+     "text": "Y aconteció que yendo, entró él en una aldea: y una mujer llamada Marta, le recibió en su casa."
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "Y aconteció que yendo, entró él en una aldea: y una mujer llamada Marta, le recibió en su casa."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Jesús entró en esa casa como amigo, y entra en la tuya también.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Marta abrió la puerta. Era su casa, y ella sabía recibir bien. Pero recibir a Jesús y a todos los que venían con él no era poca cosa. Había que preparar comida, servir agua, buscar dónde sentar a todos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:39",
+   "label": "Lucas 10:39",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 39,
+     "text": "Y ésta tenía una hermana que se llamaba María, la cual sentándose á los pies de Jesús, oía su palabra."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "Y ésta tenía una hermana que se llamaba María, la cual sentándose á los pies de Jesús, oía su palabra."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "María, en cambio, se sentó a los pies de Jesús. En aquel tiempo, sentarse así era el lugar de un discípulo, de alguien que viene a aprender del maestro. Y ella se quedó ahí, escuchando cada palabra."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mientras tanto, en la cocina, Marta trabajaba sola. Iba y venía. Y cada vez que pasaba por la sala y veía a su hermana sentada, se le iba subiendo el enojo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "martha",
+   "ref": "LUK 10:40",
+   "label": "Lucas 10:40",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 40,
+     "text": "Empero Marta se distraía en muchos servicios; y sobreviniendo, dice: Señor, ¿no tienes cuidado que mi hermana me deja servir sola? Dile pues, que me ayude."
+    }
+   ],
+   "segments": [
+    {
+     "v": 40,
+     "speaker": "narrator",
+     "text": "Empero Marta se distraía en muchos servicios; y sobreviniendo, dice:"
+    },
+    {
+     "v": 40,
+     "speaker": "martha",
+     "text": "Señor, ¿no tienes cuidado que mi hermana me deja servir sola? Dile pues, que me ayude."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Muchos entendemos a Marta. Ella no estaba haciendo nada malo. Estaba sirviendo, y servir es bueno. Pero estaba cansada, sola y frustrada. Y en lugar de pedirle ayuda a su hermana, le reclamó a Jesús. Señor, ¿no te importa?"
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es la misma pregunta que los discípulos le hicieron en la tormenta. A veces la hacemos nosotros cuando sentimos que cargamos todo y nadie lo nota."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:41",
+   "label": "Lucas 10:41",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 41,
+     "text": "Pero respondiendo Jesús, le dijo: Marta, Marta, cuidadosa estás, y con las muchas cosas estás turbada:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 41,
+     "speaker": "narrator",
+     "text": "Pero respondiendo Jesús, le dijo: Marta, Marta, cuidadosa estás, y con las muchas cosas estás turbada:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:42",
+   "label": "Lucas 10:42",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 42,
+     "text": "Empero una cosa es necesaria; y María escogió la buena parte, la cual no le será quitada."
+    }
+   ],
+   "segments": [
+    {
+     "v": 42,
+     "speaker": "narrator",
+     "text": "Empero una cosa es necesaria; y María escogió la buena parte, la cual no le será quitada."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Marta, Marta. Jesús dijo su nombre dos veces, con cariño. No la regañó por cocinar. No le dijo que su trabajo no valía. Le dijo que estaba preocupada e inquieta por muchas cosas, y que una sola era necesaria."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "María había escogido estar cerca de él. Y eso nadie se lo iba a quitar."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La Biblia no nos dice qué hizo Marta después. Tal vez se sentó también. Más adelante, en el evangelio de Juan, vemos a esta misma Marta hablando con Jesús con una fe muy firme, cuando murió su hermano Lázaro. Jesús la amaba."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús no le pidió a Marta que dejara de ser Marta. Su manera de servir era un regalo. Lo que quería era que no se perdiera lo más importante en medio de tanto afán. Primero estar con él, y después, desde ahí, servir con el corazón tranquilo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hay días que se llenan de muchas cosas. El trabajo, la casa, los hijos, los padres que cuidamos, las cuentas. Todo eso importa. Pero en medio de todo, Jesús nos invita a sentarnos un momento a sus pies. Esta noche, antes de dormir, deja la lista a un lado. Escucha. Esa es la buena parte."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 522,
+ "est_seconds": 291,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 522 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 10:38-42; Martha not condemned for serving, as Jesus does not; the mention of Martha's faith in John 11 is scripture, not invention; no ruling on women's roles (sitting at his feet explained as a disciple's place only)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Martha's tiredness recognised (cooking, children, the parents we care for) without the 'busy woman' joke; tender 'Marta, Marta'."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

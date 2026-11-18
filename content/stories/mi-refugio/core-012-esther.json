@@ -1,0 +1,417 @@
+{
+ "id": "core-012-esther",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Esther, para esta hora",
+ "passage": {
+  "refs": [
+   "EST 4:1-17",
+   "EST 5:1-3"
+  ],
+  "label": "Ester 4:1-17; Ester 5:1-3"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "esther",
+   "name": "Esther",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "mordecai",
+   "name": "Mardochêo",
+   "age": "elder",
+   "gender": "m"
+  },
+  {
+   "id": "king",
+   "name": "rey",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esther era una joven judía que vivía lejos de su tierra, en el gran reino de Persia. Había quedado huérfana, y su primo Mardochêo la crió como a una hija. Con el tiempo llegó a ser reina, pero no le había dicho a nadie en el palacio de qué pueblo venía."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Un día un hombre poderoso llamado Amán convenció al rey de firmar una ley terrible. En una sola fecha, todos los judíos del reino serían destruidos. Hombres, mujeres, niños y ancianos."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EST 4:1",
+   "label": "Ester 4:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Luego que supo Mardochêo todo lo que se había hecho, rasgó sus vestidos, y vistióse de saco y de ceniza, y fuése por medio de la ciudad clamando con grande y amargo clamor."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Luego que supo Mardochêo todo lo que se había hecho, rasgó sus vestidos, y vistióse de saco y de ceniza, y fuése por medio de la ciudad clamando con grande y amargo clamor."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Aun cuando la noticia es mala y el decreto ya está firmado.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EST 4:3",
+   "label": "Ester 4:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y en cada provincia y lugar donde el mandamiento del rey y su decreto llegaba, tenían los Judíos grande luto, y ayuno, y lloro, y lamentación: saco y ceniza era la cama de muchos."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y en cada provincia y lugar donde el mandamiento del rey y su decreto llegaba, tenían los Judíos grande luto, y ayuno, y lloro, y lamentación: saco y ceniza era la cama de muchos."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esther, dentro del palacio, no sabía lo que pasaba. Cuando le contaron que su primo estaba vestido de luto en la puerta, mandó a un sirviente a preguntarle por qué. Mardochêo le envió una copia del decreto y un mensaje. Que fuera al rey y pidiera por su pueblo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pero había un problema. Nadie podía presentarse ante el rey sin ser llamado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EST 4:10",
+   "label": "Ester 4:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Entonces Esther dijo á Atach, y mandóle decir á Mardochêo:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Entonces Esther dijo á Atach, y mandóle decir á Mardochêo:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "esther",
+   "ref": "EST 4:11",
+   "label": "Ester 4:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Todos los siervos del rey, y el pueblo de las provincias del rey saben, que cualquier hombre ó mujer que entra al rey al patio de adentro sin ser llamado, por una sola ley ha de morir: salvo aquel á quien el rey extendiere el cetro de oro, el cual vivirá: y yo no he sido llamada para entrar al rey estos treinta días."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "esther",
+     "text": "Todos los siervos del rey, y el pueblo de las provincias del rey saben, que cualquier hombre ó mujer que entra al rey al patio de adentro sin ser llamado, por una sola ley ha de morir: salvo aquel á quien el rey extendiere el cetro de oro, el cual vivirá: y yo no he sido llamada para entrar al rey estos treinta días."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esther tenía miedo, y con razón. Su vida estaba en juego. Entonces llegó la respuesta de Mardochêo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mordecai",
+   "ref": "EST 4:13",
+   "label": "Ester 4:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Entonces dijo Mardochêo que respondiesen á Esther: No pienses en tu alma, que escaparás en la casa del rey más que todos los Judíos:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Entonces dijo Mardochêo que respondiesen á Esther:"
+    },
+    {
+     "v": 13,
+     "speaker": "mordecai",
+     "text": "No pienses en tu alma, que escaparás en la casa del rey más que todos los Judíos:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "mordecai",
+   "ref": "EST 4:14",
+   "label": "Ester 4:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Porque si absolutamente callares en este tiempo, respiro y libertación tendrán los Judíos de otra parte; mas tú y la casa de tu padre pereceréis. ¿Y quién sabe si para esta hora te han hecho llegar al reino?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "mordecai",
+     "text": "Porque si absolutamente callares en este tiempo, respiro y libertación tendrán los Judíos de otra parte; mas tú y la casa de tu padre pereceréis. ¿Y quién sabe si para esta hora te han hecho llegar al reino?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mardochêo no le dijo que todo dependía de ella. Le dijo que Dios podía traer ayuda de otra parte. Pero también le hizo una pregunta que todavía nos llega al corazón. ¿Y si estás donde estás precisamente para este momento?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EST 4:15",
+   "label": "Ester 4:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Y Esther dijo que respondiesen á Mardochêo:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Y Esther dijo que respondiesen á Mardochêo:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "esther",
+   "ref": "EST 4:16",
+   "label": "Ester 4:16",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Ve, y junta á todos los Judíos que se hallan en Susán, y ayunad por mí, y no comáis ni bebáis en tres días, noche ni día: yo también con mis doncellas ayunaré igualmente, y así entraré al rey, aunque no sea conforme á la ley; y si perezco, que perezca."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "esther",
+     "text": "Ve, y junta á todos los Judíos que se hallan en Susán, y ayunad por mí, y no comáis ni bebáis en tres días, noche ni día: yo también con mis doncellas ayunaré igualmente, y así entraré al rey, aunque no sea conforme á la ley; y si perezco, que perezca."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EST 4:17",
+   "label": "Ester 4:17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Entonces se fué Mardochêo, é hizo conforme á todo lo que le mandó Esther."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Entonces se fué Mardochêo, é hizo conforme á todo lo que le mandó Esther."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Esther no corrió sola hacia el peligro. Primero pidió que su pueblo ayunara con ella tres días. Ella y sus doncellas también ayunarían. Se preparó en comunidad, delante de Dios."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EST 5:1",
+   "label": "Ester 5:1",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Y ACONTECIÓ que al tercer día se vistió Esther su vestido real, y púsose en el patio de adentro de la casa del rey, enfrente del aposento del rey: y estaba el rey sentado en su solio regio en el aposento real, enfrente de la puerta del aposento."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Y ACONTECIÓ que al tercer día se vistió Esther su vestido real, y púsose en el patio de adentro de la casa del rey, enfrente del aposento del rey: y estaba el rey sentado en su solio regio en el aposento real, enfrente de la puerta del aposento."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EST 5:2",
+   "label": "Ester 5:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Y fué que, como vió á la reina Esther que estaba en el patio, ella obtuvo gracia en sus ojos; y el rey extendió á Esther el cetro de oro que tenía en la mano. Entonces se llegó Esther, y tocó la punta del cetro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Y fué que, como vió á la reina Esther que estaba en el patio, ella obtuvo gracia en sus ojos; y el rey extendió á Esther el cetro de oro que tenía en la mano. Entonces se llegó Esther, y tocó la punta del cetro."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "king",
+   "ref": "EST 5:3",
+   "label": "Ester 5:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Y dijo el rey: ¿Qué tienes, reina Esther? ¿y cuál es tu petición? Hasta la mitad del reino, se te dará."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Y dijo el rey:"
+    },
+    {
+     "v": 3,
+     "speaker": "king",
+     "text": "¿Qué tienes, reina Esther? ¿y cuál es tu petición? Hasta la mitad del reino, se te dará."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El rey extendió el cetro. Esther tocó la punta, y vivió. Ese fue el primer paso de una larga historia en que Dios libró a su pueblo."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es curioso, pero en todo el libro de Esther el nombre de Dios no se menciona ni una vez. Y sin embargo su mano está en cada página. En una huérfana que llega a reina. En un primo fiel. En un rey que extiende el cetro."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A veces no vemos a Dios obrando, y aun así está ahí. Y a veces nos toca a nosotros dar un paso con miedo, después de orar, sin saber cómo va a terminar. Esther no sabía. Pero fue. Y Dios ya estaba en el patio antes de que ella llegara."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 773,
+ "est_seconds": 428,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Esth 4:1-17 and 5:1-3 (Amán's decree and Esther's orphan upbringing from chs 2-3, told in words); notes God is unnamed in the book without adding doctrine; Esther's fast credited to prayer and community, not to her courage alone."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "RV1909 spellings kept (Esther, Mardochêo, Amán); the fear honoured; no 'you were born for this' slogan pushed on the listener."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

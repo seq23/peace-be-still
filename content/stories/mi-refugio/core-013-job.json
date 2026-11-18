@@ -1,0 +1,434 @@
+{
+ "id": "core-013-job",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Job, que no soltó a Dios",
+ "passage": {
+  "refs": [
+   "JOB 1:13-22",
+   "JOB 42:10-17"
+  ],
+  "label": "Job 1:13-22; Job 42:10-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "messenger",
+   "name": "mensajero",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "job",
+   "name": "Job",
+   "age": "elder",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Job vivía en la tierra de Uz. Era un hombre recto, que temía a Dios y se apartaba del mal. Tenía siete hijos, tres hijas, muchos animales y muchos siervos. Era respetado por todos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y un día, en pocas horas, lo perdió casi todo."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 1:13",
+   "label": "Job 1:13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 13,
+     "text": "Y un día aconteció que sus hijos é hijas comían y bebían vino en casa de su hermano el primogénito,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y un día aconteció que sus hijos é hijas comían y bebían vino en casa de su hermano el primogénito,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "messenger",
+   "ref": "JOB 1:14",
+   "label": "Job 1:14",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Y vino un mensajero á Job, que le dijo: Estando arando los bueyes, y las asnas paciendo cerca de ellos,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Y vino un mensajero á Job, que le dijo:"
+    },
+    {
+     "v": 14,
+     "speaker": "messenger",
+     "text": "Estando arando los bueyes, y las asnas paciendo cerca de ellos,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "messenger",
+   "ref": "JOB 1:15",
+   "label": "Job 1:15",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Acometieron los Sabeos, y tomáronlos, é hirieron á los mozos á filo de espada: solamente escapé yo para traerte las nuevas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "messenger",
+     "text": "Acometieron los Sabeos, y tomáronlos, é hirieron á los mozos á filo de espada: solamente escapé yo para traerte las nuevas."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Lo decimos también en los días que no entendemos.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y el mensajero todavía estaba hablando cuando llegó otro. Y luego otro. Las ovejas, los camellos, los siervos. Una mala noticia detrás de otra, sin tiempo para respirar."
+  },
+  {
+   "type": "scripture",
+   "speaker": "messenger",
+   "ref": "JOB 1:18",
+   "label": "Job 1:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Entre tanto que éste hablaba, vino otro que dijo: Tus hijos y tus hijas estaban comiendo y bebiendo vino en casa de su hermano el primogénito;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Entre tanto que éste hablaba, vino otro que dijo:"
+    },
+    {
+     "v": 18,
+     "speaker": "messenger",
+     "text": "Tus hijos y tus hijas estaban comiendo y bebiendo vino en casa de su hermano el primogénito;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "messenger",
+   "ref": "JOB 1:19",
+   "label": "Job 1:19",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 19,
+     "text": "Y he aquí un gran viento que vino del lado del desierto, é hirió las cuatro esquinas de la casa, y cayó sobre los mozos, y murieron; y solamente escapé yo solo para traerte las nuevas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "messenger",
+     "text": "Y he aquí un gran viento que vino del lado del desierto, é hirió las cuatro esquinas de la casa, y cayó sobre los mozos, y murieron; y solamente escapé yo solo para traerte las nuevas."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Sus hijos. Todos sus hijos. Ninguna pérdida se compara con esa."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 1:20",
+   "label": "Job 1:20",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Entonces Job se levantó, y rasgó su manto, y trasquiló su cabeza, y cayendo en tierra adoró;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Entonces Job se levantó, y rasgó su manto, y trasquiló su cabeza, y cayendo en tierra adoró;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "job",
+   "ref": "JOB 1:21",
+   "label": "Job 1:21",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Y dijo: Desnudo salí del vientre de mi madre, y desnudo tornaré allá. Jehová dió, y Jehová quitó: sea el nombre de Jehová bendito."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Y dijo:"
+    },
+    {
+     "v": 21,
+     "speaker": "job",
+     "text": "Desnudo salí del vientre de mi madre, y desnudo tornaré allá. Jehová dió, y Jehová quitó: sea el nombre de Jehová bendito."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 1:22",
+   "label": "Job 1:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "En todo esto no pecó Job, ni atribuyó á Dios despropósito alguno."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "En todo esto no pecó Job, ni atribuyó á Dios despropósito alguno."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Job no fingió que no le dolía. Rasgó su ropa y se rapó la cabeza, como se hacía en aquel tiempo cuando el dolor era muy grande. Lloró. Y llorando, se postró y adoró."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lo que viene después en el libro es largo. Job habló con sus amigos, discutió, lloró y le hizo a Dios preguntas muy duras. La Biblia no esconde su dolor ni su queja. Pero nunca soltó a Dios. Siguió hablándole, aunque fuera para preguntarle por qué."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Y al final, Dios le respondió. No le dio todas las explicaciones. Le mostró quién es él. Y Job, que lo conocía de oídas, ahora lo conoció de verdad."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 42:10",
+   "label": "Job 42:10",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Y mudó Jehová la aflicción de Job, orando él por sus amigos: y aumentó al doble todas las cosas que habían sido de Job."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Y mudó Jehová la aflicción de Job, orando él por sus amigos: y aumentó al doble todas las cosas que habían sido de Job."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fíjate cuándo cambió su situación. Fue mientras oraba por sus amigos, los mismos que lo habían juzgado."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 42:11",
+   "label": "Job 42:11",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Y vinieron á él todos sus hermanos, y todas sus hermanas, y todos los que antes le habían conocido, y comieron con él pan en su casa, y condoliéronse de él, y consoláronle de todo aquel mal que sobre él había Jehová traído; y cada uno de ellos le dió una pieza de moneda, y un zarcillo de oro."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Y vinieron á él todos sus hermanos, y todas sus hermanas, y todos los que antes le habían conocido, y comieron con él pan en su casa, y condoliéronse de él, y consoláronle de todo aquel mal que sobre él había Jehová traído; y cada uno de ellos le dió una pieza de moneda, y un zarcillo de oro."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 42:12-13",
+   "label": "Job 42:12-13",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Y bendijo Jehová la postrimería de Job más que su principio; porque tuvo catorce mil ovejas, y seis mil camellos, y mil yuntas de bueyes, y mil asnas."
+    },
+    {
+     "v": 13,
+     "text": "Y tuvo siete hijos y tres hijas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Y bendijo Jehová la postrimería de Job más que su principio; porque tuvo catorce mil ovejas, y seis mil camellos, y mil yuntas de bueyes, y mil asnas."
+    },
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "Y tuvo siete hijos y tres hijas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JOB 42:16-17",
+   "label": "Job 42:16-17",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Y después de esto vivió Job ciento y cuarenta años, y vió á sus hijos, y á los hijos de sus hijos, hasta la cuarta generación."
+    },
+    {
+     "v": 17,
+     "text": "Murió pues Job viejo, y lleno de días."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Y después de esto vivió Job ciento y cuarenta años, y vió á sus hijos, y á los hijos de sus hijos, hasta la cuarta generación."
+    },
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Murió pues Job viejo, y lleno de días."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La historia de Job no es una promesa de que todo lo que perdemos volverá igual, ni una fórmula para que vengan las bendiciones. Sus primeros hijos no volvieron. El dolor fue real."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es la historia de un hombre que, en la noche más oscura, siguió hablando con Dios. Si esta noche estás de luto, puedes llorar. Puedes preguntar. Puedes contarle a Dios todo lo que sientes, como Job. Y no tienes que pasar ese dolor solo. Busca a tu iglesia, a tu pastor, a alguien que te acompañe."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 653,
+ "est_seconds": 362,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Job 1:13-22 and 42:10-17; says plainly the restored goods are not a promise or formula and the first children did not come back; lament allowed; points to iglesia and pastor for grief."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Mourning customs explained with respect; would not wound a grieving mother; Spanish an abuela would read aloud."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

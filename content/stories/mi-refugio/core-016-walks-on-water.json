@@ -1,0 +1,425 @@
+{
+ "id": "core-016-walks-on-water",
+ "kind": "story",
+ "telling": "mi-refugio",
+ "journey": "mi-refugio",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Pedro camina sobre el agua",
+ "passage": {
+  "refs": [
+   "MAT 14:22-33"
+  ],
+  "label": "Mateo 14:22-33"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "disciples",
+   "name": "discípulos",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "peter",
+   "name": "Pedro",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Había sido un día enorme. Jesús había dado de comer a miles de personas con unos pocos panes y peces. Cuando terminó, les pidió a sus discípulos que se adelantaran en la barca hacia el otro lado del lago."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:22",
+   "label": "Mateo 14:22",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 22,
+     "text": "Y luego Jesús hizo á sus discípulos entrar en el barco, é ir delante de él á la otra parte del lago, entre tanto que él despedía á las gentes."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "Y luego Jesús hizo á sus discípulos entrar en el barco, é ir delante de él á la otra parte del lago, entre tanto que él despedía á las gentes."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:23",
+   "label": "Mateo 14:23",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Y despedidas las gentes, subió al monte, apartado, á orar: y como fué la tarde del día, estaba allí solo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Y despedidas las gentes, subió al monte, apartado, á orar: y como fué la tarde del día, estaba allí solo."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: \"Todo el tiempo\"] Y todo el tiempo. [PAUSE 3s | screen: \"Dios es bueno\"] Jesús subió al monte a orar, y desde allí no perdió de vista a los suyos.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Todo el tiempo"
+    },
+    {
+     "seconds": 3,
+     "screen": "Dios es bueno"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:24",
+   "label": "Mateo 14:24",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 24,
+     "text": "Y ya el barco estaba en medio de la mar, atormentado de las ondas; porque el viento era contrario."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "Y ya el barco estaba en medio de la mar, atormentado de las ondas; porque el viento era contrario."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "El viento estaba en contra. Remaron toda la noche y casi no avanzaban. Estaban cansados, mojados y lejos de la orilla."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:25",
+   "label": "Mateo 14:25",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 25,
+     "text": "Mas á la cuarta vela de la noche, Jesús fué á ellos andando sobre la mar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "Mas á la cuarta vela de la noche, Jesús fué á ellos andando sobre la mar."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "La cuarta vela era la última parte de la noche, entre las tres y las seis de la mañana. La hora más oscura, cuando el cansancio pesa más."
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAT 14:26",
+   "label": "Mateo 14:26",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Y los discípulos, viéndole andar sobre la mar, se turbaron, diciendo: Fantasma es. Y dieron voces de miedo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y los discípulos, viéndole andar sobre la mar, se turbaron, diciendo:"
+    },
+    {
+     "v": 26,
+     "speaker": "disciples",
+     "text": "Fantasma es."
+    },
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Y dieron voces de miedo."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:27",
+   "label": "Mateo 14:27",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Mas luego Jesús les habló, diciendo: Confiad, yo soy; no tengáis miedo."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Mas luego Jesús les habló, diciendo: Confiad, yo soy; no tengáis miedo."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Soy yo, no tengan miedo. Era su voz. La conocían. Y Pedro, que siempre hablaba primero, se animó."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "MAT 14:28",
+   "label": "Mateo 14:28",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Entonces le respondió Pedro, y dijo: Señor, si tú eres, manda que yo vaya á ti sobre las aguas."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Entonces le respondió Pedro, y dijo:"
+    },
+    {
+     "v": 28,
+     "speaker": "peter",
+     "text": "Señor, si tú eres, manda que yo vaya á ti sobre las aguas."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:29",
+   "label": "Mateo 14:29",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Y él dijo: Ven. Y descendiendo Pedro del barco, andaba sobre las aguas para ir á Jesús."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Y él dijo: Ven. Y descendiendo Pedro del barco, andaba sobre las aguas para ir á Jesús."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ven. Una sola palabra. Y Pedro sacó un pie de la barca, y luego el otro, y caminó sobre el agua hacia Jesús. Mientras lo miraba a él, el agua lo sostenía."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "MAT 14:30",
+   "label": "Mateo 14:30",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 30,
+     "text": "Mas viendo el viento fuerte, tuvo miedo; y comenzándose á hundir, dió voces, diciendo: Señor, sálvame."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "Mas viendo el viento fuerte, tuvo miedo; y comenzándose á hundir, dió voces, diciendo:"
+    },
+    {
+     "v": 30,
+     "speaker": "peter",
+     "text": "Señor, sálvame."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Pedro miró el viento. Las olas no habían cambiado. Lo que cambió fue hacia dónde miraba. Y empezó a hundirse. Pero aun hundiéndose, supo a quién gritarle. Tres palabras. Señor, sálvame."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:31",
+   "label": "Mateo 14:31",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 31,
+     "text": "Y luego Jesús, extendiendo la mano, trabó de él, y le dice: Oh hombre de poca fe, ¿por qué dudaste?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "Y luego Jesús, extendiendo la mano, trabó de él, y le dice: Oh hombre de poca fe, ¿por qué dudaste?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesús no esperó a que Pedro se arreglara solo. En seguida extendió la mano y lo agarró. La pregunta vino después, con Pedro ya seguro en su mano."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAT 14:32",
+   "label": "Mateo 14:32",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Y como ellos entraron en el barco, sosegóse el viento."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "Y como ellos entraron en el barco, sosegóse el viento."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "disciples",
+   "ref": "MAT 14:33",
+   "label": "Mateo 14:33",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 33,
+     "text": "Entonces los que estaban en el barco, vinieron y le adoraron, diciendo: Verdaderamente eres Hijo de Dios."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "Entonces los que estaban en el barco, vinieron y le adoraron, diciendo:"
+    },
+    {
+     "v": 33,
+     "speaker": "disciples",
+     "text": "Verdaderamente eres Hijo de Dios."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Los que estaban en la barca vieron todo. El viento que se calmó, la mano que levantó a Pedro, el Maestro que caminaba sobre el agua. Y lo adoraron. Esa noche entendieron un poco más quién era el que iba con ellos."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Es fácil fijarse en que Pedro se hundió. Pero fue el único que salió de la barca. Tuvo fe para dar el primer paso, y cuando le faltó, tuvo fe para pedir ayuda."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A veces nosotros también empezamos bien y luego miramos el viento. Las cuentas, el diagnóstico, la soledad. Y sentimos que nos hundimos. Esa oración tan corta sirve para esas noches. Señor, sálvame. La mano de Jesús todavía está cerca."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 559,
+ "est_seconds": 311,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S12_latin_american": "pass",
+   "S12_no_english": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 559 words outside 575-1035 words",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:13:21",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Matt 14:22-33 (the feeding of 14:13-21 named as setting); the fourth watch explained correctly; 'Señor, sálvame' offered as a prayer, no promise of rescue from bills or diagnosis."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Peter shown with respect (the only one who stepped out); everyday troubles named without stereotype."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
