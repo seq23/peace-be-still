@@ -1,0 +1,319 @@
+{
+ "id": "fav-08-zipporah",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Moses and Zipporah at the Well",
+ "passage": {
+  "refs": [
+   "EXO 2:15-22"
+  ],
+  "label": "Exodus 2:15-22"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "reuel",
+   "name": "Reuel",
+   "age": "elder",
+   "gender": "m"
+  },
+  {
+   "id": "daughters",
+   "name": "daughters",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Moses grew up in Pharaoh's house, but he never forgot who his people were. One day he saw an Egyptian beating a Hebrew slave, and he struck the man down and buried him. Word got out."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:15",
+   "label": "Exodus 2:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Now when Pharaoh heard this thing, he sought to slay Moses. But Moses fled from the face of Pharaoh, and dwelt in the land of Midian: and he sat down by a well."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Now when Pharaoh heard this thing, he sought to slay Moses. But Moses fled from the face of Pharaoh, and dwelt in the land of Midian: and he sat down by a well."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he stood up. [PAUSE 3s | screen: \"He stood up\"] He stood up. [PAUSE 3s | screen: \"He stood up\"] Tired and on the run, Moses still stood up for somebody being pushed around.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He stood up"
+    },
+    {
+     "seconds": 3,
+     "screen": "He stood up"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A man on the run, sitting by a well in a strange land. Everything he had was gone. His home, his name, his place in the palace."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:16",
+   "label": "Exodus 2:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Now the priest of Midian had seven daughters: and they came and drew water, and filled the troughs to water their father’s flock."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Now the priest of Midian had seven daughters: and they came and drew water, and filled the troughs to water their father’s flock."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:17",
+   "label": "Exodus 2:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And the shepherds came and drove them away: but Moses stood up and helped them, and watered their flock."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And the shepherds came and drove them away: but Moses stood up and helped them, and watered their flock."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Even on the run, Moses could not stand to see somebody pushed around. Seven sisters doing honest work, and the shepherds ran them off. Moses stood up and helped them, and then he watered their whole flock himself."
+  },
+  {
+   "type": "scripture",
+   "speaker": "reuel",
+   "ref": "EXO 2:18",
+   "label": "Exodus 2:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And when they came to Reuel their father, he said, How is it that ye are come so soon to day?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And when they came to Reuel their father, he said,"
+    },
+    {
+     "v": 18,
+     "speaker": "reuel",
+     "text": "How is it that ye are come so soon to day?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "daughters",
+   "ref": "EXO 2:19",
+   "label": "Exodus 2:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And they said, An Egyptian delivered us out of the hand of the shepherds, and also drew water enough for us, and watered the flock."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And they said,"
+    },
+    {
+     "v": 19,
+     "speaker": "daughters",
+     "text": "An Egyptian delivered us out of the hand of the shepherds, and also drew water enough for us, and watered the flock."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "An Egyptian, they called him. That is what he looked like to them, with his Egyptian clothes and Egyptian ways. They did not know he was a Hebrew."
+  },
+  {
+   "type": "scripture",
+   "speaker": "reuel",
+   "ref": "EXO 2:20",
+   "label": "Exodus 2:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And he said unto his daughters, And where is he? why is it that ye have left the man? call him, that he may eat bread."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And he said unto his daughters,"
+    },
+    {
+     "v": 20,
+     "speaker": "reuel",
+     "text": "And where is he? why is it that ye have left the man? call him, that he may eat bread."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Call him, that he may eat bread. That is hospitality, Church. That old priest would not let a stranger who helped his girls sit out by the well hungry."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:21",
+   "label": "Exodus 2:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And Moses was content to dwell with the man: and he gave Moses Zipporah his daughter."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And Moses was content to dwell with the man: and he gave Moses Zipporah his daughter."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Zipporah. Her name means little bird. She became the wife of Moses, and she would stand with him through some hard days. Later on, when Moses went back to Egypt, it was Zipporah who acted quick to keep him alive on the road. Whether she is the same Ethiopian wife we read about in the book of Numbers, the Bible does not say plainly. Preachers have read it both ways."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EXO 2:22",
+   "label": "Exodus 2:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And she bare him a son, and he called his name Gershom: for he said, I have been a stranger in a strange land."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And she bare him a son, and he called his name Gershom: for he said, I have been a stranger in a strange land."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A stranger in a strange land. Moses named his first son for how it felt to be far from home. Church, a lot of us know that feeling. But God was not done with Moses. Out there in Midian, he got a family, a home, and forty years of quiet, getting ready for the day God would call him from a burning bush. Sometimes the place you ran to is where God is preparing you."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 517,
+ "est_seconds": 288,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.2",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Exod 2:15-22; 2:11-12 told in our own words; whether Zipporah is the Cushite of Num 12 left open, as the text leaves it; Exod 4:24-26 named only as her quick act."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Hospitality and the stranger honoured; Zipporah given her place; 'he stood up' at the turn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

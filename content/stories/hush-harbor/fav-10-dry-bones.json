@@ -1,0 +1,421 @@
+{
+ "id": "fav-10-dry-bones",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Can These Bones Live?",
+ "passage": {
+  "refs": [
+   "EZE 37:1-14"
+  ],
+  "label": "Ezekiel 37:1-14"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, the people of Israel had lost everything. Jerusalem was burned. The temple was gone. They had been carried off to Babylon, far from home. And they were saying, our bones are dried up and our hope is lost. That is where the prophet Ezekiel was when God showed him a valley."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:1",
+   "label": "Ezekiel 37:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "The hand of the LORD was upon me, and carried me out in the spirit of the LORD, and set me down in the midst of the valley which was full of bones,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "The hand of the LORD was upon me, and carried me out in the spirit of the LORD, and set me down in the midst of the valley which was full of bones,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:2",
+   "label": "Ezekiel 37:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And caused me to pass by them round about: and, behold, there were very many in the open valley; and, lo, they were very dry."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And caused me to pass by them round about: and, behold, there were very many in the open valley; and, lo, they were very dry."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, very dry. [PAUSE 3s | screen: \"Very dry\"] Very dry. [PAUSE 3s | screen: \"Very dry\"] Not just dead. Dead a long time.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Very dry"
+    },
+    {
+     "seconds": 3,
+     "screen": "Very dry"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Not a little dry. Very dry. These bones had been lying out in the sun so long there was nothing left on them."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:3",
+   "label": "Ezekiel 37:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And he said unto me, Son of man, can these bones live? And I answered, O Lord GOD, thou knowest."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And he said unto me, Son of man, can these bones live? And I answered, O Lord GOD, thou knowest."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Lord, you know. That is an honest answer, Church. Ezekiel did not pretend. He looked at that valley and could not see how. So he left it in God's hands."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:4",
+   "label": "Ezekiel 37:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Again he said unto me, Prophesy upon these bones, and say unto them, O ye dry bones, hear the word of the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "Again he said unto me, Prophesy upon these bones, and say unto them, O ye dry bones, hear the word of the LORD."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:5",
+   "label": "Ezekiel 37:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Thus saith the Lord GOD unto these bones; Behold, I will cause breath to enter into you, and ye shall live:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Thus saith the Lord GOD unto these bones; Behold, I will cause breath to enter into you, and ye shall live:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:6",
+   "label": "Ezekiel 37:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And I will lay sinews upon you, and will bring up flesh upon you, and cover you with skin, and put breath in you, and ye shall live; and ye shall know that I am the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And I will lay sinews upon you, and will bring up flesh upon you, and cover you with skin, and put breath in you, and ye shall live; and ye shall know that I am the LORD."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God told the prophet to preach to the bones. Talk to the dead things. Tell them what God says."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:7",
+   "label": "Ezekiel 37:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "So I prophesied as I was commanded: and as I prophesied, there was a noise, and behold a shaking, and the bones came together, bone to his bone."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "So I prophesied as I was commanded: and as I prophesied, there was a noise, and behold a shaking, and the bones came together, bone to his bone."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A noise. A rattling. Bone coming to bone. The old song sings it, toe bone to foot bone, foot bone to leg bone, all coming together at the word of the Lord."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:8",
+   "label": "Ezekiel 37:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And when I beheld, lo, the sinews and the flesh came up upon them, and the skin covered them above: but there was no breath in them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And when I beheld, lo, the sinews and the flesh came up upon them, and the skin covered them above: but there was no breath in them."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They had bodies now. But there was still no breath in them. Church, you can have everything in place and still need the breath of God."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:9",
+   "label": "Ezekiel 37:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Then said he unto me, Prophesy unto the wind, prophesy, son of man, and say to the wind, Thus saith the Lord GOD; Come from the four winds, O breath, and breathe upon these slain, that they may live."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "Then said he unto me, Prophesy unto the wind, prophesy, son of man, and say to the wind, Thus saith the Lord GOD; Come from the four winds, O breath, and breathe upon these slain, that they may live."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:10",
+   "label": "Ezekiel 37:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "So I prophesied as he commanded me, and the breath came into them, and they lived, and stood up upon their feet, an exceeding great army."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "So I prophesied as he commanded me, and the breath came into them, and they lived, and stood up upon their feet, an exceeding great army."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "An exceeding great army. Standing up on their feet, from a valley of dry bones."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:11",
+   "label": "Ezekiel 37:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "Then he said unto me, Son of man, these bones are the whole house of Israel: behold, they say, Our bones are dried, and our hope is lost: we are cut off for our parts."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "Then he said unto me, Son of man, these bones are the whole house of Israel: behold, they say, Our bones are dried, and our hope is lost: we are cut off for our parts."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:12",
+   "label": "Ezekiel 37:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "Therefore prophesy and say unto them, Thus saith the Lord GOD; Behold, O my people, I will open your graves, and cause you to come up out of your graves, and bring you into the land of Israel."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "Therefore prophesy and say unto them, Thus saith the Lord GOD; Behold, O my people, I will open your graves, and cause you to come up out of your graves, and bring you into the land of Israel."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:13",
+   "label": "Ezekiel 37:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And ye shall know that I am the LORD, when I have opened your graves, O my people, and brought you up out of your graves,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And ye shall know that I am the LORD, when I have opened your graves, O my people, and brought you up out of your graves,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "EZE 37:14",
+   "label": "Ezekiel 37:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And shall put my spirit in you, and ye shall live, and I shall place you in your own land: then shall ye know that I the LORD have spoken it, and performed it, saith the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And shall put my spirit in you, and ye shall live, and I shall place you in your own land: then shall ye know that I the LORD have spoken it, and performed it, saith the LORD."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God was not only talking about bones. He was talking about a people who had given up hope. He told them, I will put my spirit in you and you shall live, and I will bring you home."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Some of us are standing in a dry valley tonight. A dream that died. A family scattered. A hope that has been lying out in the sun so long it is very dry. Church, the question is the same one God asked Ezekiel. Can these bones live? And the answer is still the same. Lord, you know. Leave it in his hands, and listen for the wind."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 734,
+ "est_seconds": 406,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 1.6",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Ezek 37:1-14 (Ezekiel's first person stays in the stored verses, read by the narrator); applied to lost hope with 'Lord, you know', no promise of an outcome."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Very dry' at the turn; 'Dem Bones' (1928, public domain) echoed in plain spelling, no dialect; hopeful, not preachy."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

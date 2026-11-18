@@ -1,0 +1,348 @@
+{
+ "id": "fav-06-queen-of-sheba",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Queen of Sheba",
+ "passage": {
+  "refs": [
+   "1KI 10:1-10"
+  ],
+  "label": "1 Kings 10:1-10"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "queen",
+   "name": "queen of Sheba",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 10:1",
+   "label": "1 Kings 10:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "And when the queen of Sheba heard of the fame of Solomon concerning the name of the LORD, she came to prove him with hard questions."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "And when the queen of Sheba heard of the fame of Solomon concerning the name of the LORD, she came to prove him with hard questions."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, she came to see. [PAUSE 3s | screen: \"She came to see\"] She came to see. [PAUSE 3s | screen: \"She came to see\"] She heard about the name of the LORD, and she came to see for herself.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "She came to see"
+    },
+    {
+     "seconds": 3,
+     "screen": "She came to see"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Sheba was a rich kingdom far to the south of Israel, a land of spices and gold. Ethiopian Christians have told for centuries that she was their queen. Others say Sheba was across the Red Sea in Arabia. Either way, she was a ruler in her own right, and she had heard something about Solomon and about his God."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 10:2",
+   "label": "1 Kings 10:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And she came to Jerusalem with a very great train, with camels that bare spices, and very much gold, and precious stones: and when she was come to Solomon, she communed with him of all that was in her heart."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And she came to Jerusalem with a very great train, with camels that bare spices, and very much gold, and precious stones: and when she was come to Solomon, she communed with him of all that was in her heart."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She did not send a messenger. She came herself, with a great company, and she brought hard questions. And she opened her whole heart to him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 10:3",
+   "label": "1 Kings 10:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And Solomon told her all her questions: there was not any thing hid from the king, which he told her not."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And Solomon told her all her questions: there was not any thing hid from the king, which he told her not."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "This is a smart woman, Church. She did not believe everything she heard. She came to test it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 10:4",
+   "label": "1 Kings 10:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And when the queen of Sheba had seen all Solomon’s wisdom, and the house that he had built,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And when the queen of Sheba had seen all Solomon’s wisdom, and the house that he had built,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 10:5",
+   "label": "1 Kings 10:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And the meat of his table, and the sitting of his servants, and the attendance of his ministers, and their apparel, and his cupbearers, and his ascent by which he went up unto the house of the LORD; there was no more spirit in her."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And the meat of his table, and the sitting of his servants, and the attendance of his ministers, and their apparel, and his cupbearers, and his ascent by which he went up unto the house of the LORD; there was no more spirit in her."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There was no more spirit in her. It took her breath away. The wisdom, the order of the house, the way his servants carried themselves, and his way up to the house of the LORD."
+  },
+  {
+   "type": "scripture",
+   "speaker": "queen",
+   "ref": "1KI 10:6",
+   "label": "1 Kings 10:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And she said to the king, It was a true report that I heard in mine own land of thy acts and of thy wisdom."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And she said to the king,"
+    },
+    {
+     "v": 6,
+     "speaker": "queen",
+     "text": "It was a true report that I heard in mine own land of thy acts and of thy wisdom."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "queen",
+   "ref": "1KI 10:7",
+   "label": "1 Kings 10:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Howbeit I believed not the words, until I came, and mine eyes had seen it: and, behold, the half was not told me: thy wisdom and prosperity exceedeth the fame which I heard."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "queen",
+     "text": "Howbeit I believed not the words, until I came, and mine eyes had seen it: and, behold, the half was not told me: thy wisdom and prosperity exceedeth the fame which I heard."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The half was not told me. Church, there are some things you have to see for yourself."
+  },
+  {
+   "type": "scripture",
+   "speaker": "queen",
+   "ref": "1KI 10:8",
+   "label": "1 Kings 10:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Happy are thy men, happy are these thy servants, which stand continually before thee, and that hear thy wisdom."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "queen",
+     "text": "Happy are thy men, happy are these thy servants, which stand continually before thee, and that hear thy wisdom."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "queen",
+   "ref": "1KI 10:9",
+   "label": "1 Kings 10:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Blessed be the LORD thy God, which delighted in thee, to set thee on the throne of Israel: because the LORD loved Israel for ever, therefore made he thee king, to do judgment and justice."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "queen",
+     "text": "Blessed be the LORD thy God, which delighted in thee, to set thee on the throne of Israel: because the LORD loved Israel for ever, therefore made he thee king, to do judgment and justice."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hear what she did. She did not give Solomon the glory. She blessed the LORD his God. A queen from far away looked at all that wisdom and gave the praise to God."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 10:10",
+   "label": "1 Kings 10:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And she gave the king an hundred and twenty talents of gold, and of spices very great store, and precious stones: there came no more such abundance of spices as these which the queen of Sheba gave to king Solomon."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And she gave the king an hundred and twenty talents of gold, and of spices very great store, and precious stones: there came no more such abundance of spices as these which the queen of Sheba gave to king Solomon."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus himself remembered her, a thousand years later. He called her the queen of the south, and said she came from the far ends of the world just to hear Solomon's wisdom. He held her up as an example to folks who had wisdom right in front of them and would not listen."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She was a woman of power, learning and wealth, and she was not too proud to travel a long way and ask hard questions about God. Church, if she came that far to hear Solomon, how much more should we come to the one Jesus said is greater than Solomon?"
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 623,
+ "est_seconds": 346,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.7",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Kings 10:1-10; Sheba's place given both ways (Ethiopian tradition and Arabia), no ethnicity stated as history; Matt 12:42 in words."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A queen of power and learning, honoured; no exoticising or romance gloss; 'she came to see' at the turn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,454 @@
+{
+ "id": "fav-02-ethiopian",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Ethiopian on the Desert Road",
+ "passage": {
+  "refs": [
+   "ACT 8:26-39"
+  ],
+  "label": "Acts 8:26-39"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "philip",
+   "name": "Philip",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "eunuch",
+   "name": "eunuch",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:26",
+   "label": "Acts 8:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "And the angel of the Lord spake unto Philip, saying, Arise, and go toward the south unto the way that goeth down from Jerusalem unto Gaza, which is desert."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "And the angel of the Lord spake unto Philip, saying, Arise, and go toward the south unto the way that goeth down from Jerusalem unto Gaza, which is desert."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say God is good, you say, all the time. God is good. [PAUSE 3s | screen: \"All the time\"] And all the time. [PAUSE 3s | screen: \"God is good\"] He sent Philip down a desert road for one man.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "All the time"
+    },
+    {
+     "seconds": 3,
+     "screen": "God is good"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Philip had been preaching in the city, with crowds listening and folks getting free. And God told him to leave all that and go stand on a desert road. He did not tell him why."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:27",
+   "label": "Acts 8:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And he arose and went: and, behold, a man of Ethiopia, an eunuch of great authority under Candace queen of the Ethiopians, who had the charge of all her treasure, and had come to Jerusalem for to worship,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And he arose and went: and, behold, a man of Ethiopia, an eunuch of great authority under Candace queen of the Ethiopians, who had the charge of all her treasure, and had come to Jerusalem for to worship,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:28",
+   "label": "Acts 8:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "Was returning, and sitting in his chariot read Esaias the prophet."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "Was returning, and sitting in his chariot read Esaias the prophet."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Here is a man from Ethiopia, Church, an African man, a high official over all the treasure of Queen Candace. He had come a long, long way to worship in Jerusalem. And now he is riding home in his chariot, reading the scroll of Isaiah out loud."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:29",
+   "label": "Acts 8:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "Then the Spirit said unto Philip, Go near, and join thyself to this chariot."
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "Then the Spirit said unto Philip, Go near, and join thyself to this chariot."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "philip",
+   "ref": "ACT 8:30",
+   "label": "Acts 8:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And Philip ran thither to him, and heard him read the prophet Esaias, and said, Understandest thou what thou readest?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And Philip ran thither to him, and heard him read the prophet Esaias, and said,"
+    },
+    {
+     "v": 30,
+     "speaker": "philip",
+     "text": "Understandest thou what thou readest?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "eunuch",
+   "ref": "ACT 8:31",
+   "label": "Acts 8:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And he said, How can I, except some man should guide me? And he desired Philip that he would come up and sit with him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And he said,"
+    },
+    {
+     "v": 31,
+     "speaker": "eunuch",
+     "text": "How can I, except some man should guide me?"
+    },
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And he desired Philip that he would come up and sit with him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That is a humble man. A man of great authority, and he says plain, how can I understand unless somebody shows me? And he made room for Philip right there in his chariot."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:32",
+   "label": "Acts 8:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "The place of the scripture which he read was this, He was led as a sheep to the slaughter; and like a lamb dumb before his shearer, so opened he not his mouth:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "The place of the scripture which he read was this, He was led as a sheep to the slaughter; and like a lamb dumb before his shearer, so opened he not his mouth:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:33",
+   "label": "Acts 8:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "In his humiliation his judgment was taken away: and who shall declare his generation? for his life is taken from the earth."
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "In his humiliation his judgment was taken away: and who shall declare his generation? for his life is taken from the earth."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "eunuch",
+   "ref": "ACT 8:34",
+   "label": "Acts 8:34",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 34,
+     "text": "And the eunuch answered Philip, and said, I pray thee, of whom speaketh the prophet this? of himself, or of some other man?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "And the eunuch answered Philip, and said,"
+    },
+    {
+     "v": 34,
+     "speaker": "eunuch",
+     "text": "I pray thee, of whom speaketh the prophet this? of himself, or of some other man?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Who is the prophet talking about? That is the question, Church. A lamb led to the slaughter. A man who did not open his mouth. Whose life was taken from the earth."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:35",
+   "label": "Acts 8:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Then Philip opened his mouth, and began at the same scripture, and preached unto him Jesus."
+    }
+   ],
+   "segments": [
+    {
+     "v": 35,
+     "speaker": "narrator",
+     "text": "Then Philip opened his mouth, and began at the same scripture, and preached unto him Jesus."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Philip started right where the man was reading, and he told him about Jesus. The lamb was Jesus. The one who suffered and did not answer back was Jesus."
+  },
+  {
+   "type": "scripture",
+   "speaker": "eunuch",
+   "ref": "ACT 8:36",
+   "label": "Acts 8:36",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 36,
+     "text": "And as they went on their way, they came unto a certain water: and the eunuch said, See, here is water; what doth hinder me to be baptized?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "And as they went on their way, they came unto a certain water: and the eunuch said,"
+    },
+    {
+     "v": 36,
+     "speaker": "eunuch",
+     "text": "See, here is water; what doth hinder me to be baptized?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "philip",
+   "ref": "ACT 8:37",
+   "label": "Acts 8:37",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 37,
+     "text": "And Philip said, If thou believest with all thine heart, thou mayest. And he answered and said, I believe that Jesus Christ is the Son of God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "And Philip said,"
+    },
+    {
+     "v": 37,
+     "speaker": "philip",
+     "text": "If thou believest with all thine heart, thou mayest."
+    },
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "And he answered and said, I believe that Jesus Christ is the Son of God."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:38",
+   "label": "Acts 8:38",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 38,
+     "text": "And he commanded the chariot to stand still: and they went down both into the water, both Philip and the eunuch; and he baptized him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 38,
+     "speaker": "narrator",
+     "text": "And he commanded the chariot to stand still: and they went down both into the water, both Philip and the eunuch; and he baptized him."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 8:39",
+   "label": "Acts 8:39",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 39,
+     "text": "And when they were come up out of the water, the Spirit of the Lord caught away Philip, that the eunuch saw him no more: and he went on his way rejoicing."
+    }
+   ],
+   "segments": [
+    {
+     "v": 39,
+     "speaker": "narrator",
+     "text": "And when they were come up out of the water, the Spirit of the Lord caught away Philip, that the eunuch saw him no more: and he went on his way rejoicing."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He went on his way rejoicing. All the way back to Ethiopia, rejoicing. Church, the good news of Jesus went to Africa early, carried home by an African man who asked an honest question and believed. God sent a preacher down a desert road for one seeking heart. If you are reading and do not understand, keep reading, and keep asking. God knows how to send somebody to sit with you."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 619,
+ "est_seconds": 344,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.7",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Acts 8:26-39; v37 kept as the KJV has it, no comment; baptism (v36, v38) left in the verses with no position; 'Africa' is geography (Ethiopia/Cush), not a claim about anyone's colour."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "An African official shown with learning, authority and humility; 'God is good / all the time'; no exoticising."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,525 @@
+{
+ "id": "fav-01-hagar",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The God Who Sees Me",
+ "passage": {
+  "refs": [
+   "GEN 16:1-13",
+   "GEN 21:14-19"
+  ],
+  "label": "Genesis 16:1-13; Genesis 21:14-19"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "implied"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "sarai",
+   "name": "Sarai",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "hagar",
+   "name": "Hagar",
+   "age": "adult",
+   "gender": "f"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:1",
+   "label": "Genesis 16:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Now Sarai Abram’s wife bare him no children: and she had an handmaid, an Egyptian, whose name was Hagar."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Now Sarai Abram’s wife bare him no children: and she had an handmaid, an Egyptian, whose name was Hagar."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he sees me. [PAUSE 3s | screen: \"He sees me\"] He sees me. [PAUSE 3s | screen: \"He sees me\"] Hold on to that, Church, because before this story is over Hagar is going to say it herself.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He sees me"
+    },
+    {
+     "seconds": 3,
+     "screen": "He sees me"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Hagar was an Egyptian woman, a woman from Africa, living as a servant in somebody else's house in somebody else's land. She did not choose that house. She did not choose what happened to her in it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:2",
+   "label": "Genesis 16:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And Sarai said unto Abram, Behold now, the LORD hath restrained me from bearing: I pray thee, go in unto my maid; it may be that I may obtain children by her. And Abram hearkened to the voice of Sarai."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And Sarai said unto Abram, Behold now, the LORD hath restrained me from bearing: I pray thee, go in unto my maid; it may be that I may obtain children by her. And Abram hearkened to the voice of Sarai."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:3",
+   "label": "Genesis 16:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And Sarai Abram’s wife took Hagar her maid the Egyptian, after Abram had dwelt ten years in the land of Canaan, and gave her to her husband Abram to be his wife."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And Sarai Abram’s wife took Hagar her maid the Egyptian, after Abram had dwelt ten years in the land of Canaan, and gave her to her husband Abram to be his wife."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nobody asked Hagar what she wanted. Sarai made the plan, Abram went along with it, and Hagar was handed over. That is how the Bible tells it, plain."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:4",
+   "label": "Genesis 16:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And he went in unto Hagar, and she conceived: and when she saw that she had conceived, her mistress was despised in her eyes."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And he went in unto Hagar, and she conceived: and when she saw that she had conceived, her mistress was despised in her eyes."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When Hagar was carrying that child, things turned bitter between the two women. Sarai blamed Abram. Abram told Sarai to do whatever she wanted with her maid."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:6",
+   "label": "Genesis 16:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "But Abram said unto Sarai, Behold, thy maid is in thy hand; do to her as it pleaseth thee. And when Sarai dealt hardly with her, she fled from her face."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "But Abram said unto Sarai, Behold, thy maid is in thy hand; do to her as it pleaseth thee. And when Sarai dealt hardly with her, she fled from her face."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Sarai dealt hard with her, and Hagar ran. Pregnant and alone, she ran out into the wilderness, toward the road that led back to Egypt."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:7",
+   "label": "Genesis 16:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And the angel of the LORD found her by a fountain of water in the wilderness, by the fountain in the way to Shur."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD found her by a fountain of water in the wilderness, by the fountain in the way to Shur."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look at that. The angel of the LORD found her. She was not looking for God. God came looking for her. And he called her by her name."
+  },
+  {
+   "type": "scripture",
+   "speaker": "hagar",
+   "ref": "GEN 16:8",
+   "label": "Genesis 16:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And he said, Hagar, Sarai’s maid, whence camest thou? and whither wilt thou go? And she said, I flee from the face of my mistress Sarai."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And he said, Hagar, Sarai’s maid, whence camest thou? and whither wilt thou go? And she said,"
+    },
+    {
+     "v": 8,
+     "speaker": "hagar",
+     "text": "I flee from the face of my mistress Sarai."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Nobody in that house ever called her anything but the maid. Out in the wilderness, God asked her where she had come from and where she was going. He wanted to hear it from her."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:9",
+   "label": "Genesis 16:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And the angel of the LORD said unto her, Return to thy mistress, and submit thyself under her hands."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD said unto her, Return to thy mistress, and submit thyself under her hands."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That was a hard word, and the Bible does not make it soft. Her road back would not be easy. But she would not go back the same, because God did not send her back empty-handed."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:10",
+   "label": "Genesis 16:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And the angel of the LORD said unto her, I will multiply thy seed exceedingly, that it shall not be numbered for multitude."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD said unto her, I will multiply thy seed exceedingly, that it shall not be numbered for multitude."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:11",
+   "label": "Genesis 16:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And the angel of the LORD said unto her, Behold, thou art with child, and shalt bear a son, and shalt call his name Ishmael; because the LORD hath heard thy affliction."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD said unto her, Behold, thou art with child, and shalt bear a son, and shalt call his name Ishmael; because the LORD hath heard thy affliction."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ishmael means God hears. Every time she called that boy's name, she would remember that God heard her trouble."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 16:13",
+   "label": "Genesis 16:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And she called the name of the LORD that spake unto her, Thou God seest me: for she said, Have I also here looked after him that seeth me?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And she called the name of the LORD that spake unto her, Thou God seest me: for she said, Have I also here looked after him that seeth me?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Thou God seest me. Hagar gave God a name. A runaway servant woman from Africa, sitting by a spring in the desert, and she named him the God who sees."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Years later, after her son was grown into a boy, Abraham sent the two of them away for good."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 21:14",
+   "label": "Genesis 21:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And Abraham rose up early in the morning, and took bread, and a bottle of water, and gave it unto Hagar, putting it on her shoulder, and the child, and sent her away: and she departed, and wandered in the wilderness of Beer-sheba."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And Abraham rose up early in the morning, and took bread, and a bottle of water, and gave it unto Hagar, putting it on her shoulder, and the child, and sent her away: and she departed, and wandered in the wilderness of Beer-sheba."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 21:15",
+   "label": "Genesis 21:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And the water was spent in the bottle, and she cast the child under one of the shrubs."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And the water was spent in the bottle, and she cast the child under one of the shrubs."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "hagar",
+   "ref": "GEN 21:16",
+   "label": "Genesis 21:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And she went, and sat her down over against him a good way off, as it were a bowshot: for she said, Let me not see the death of the child. And she sat over against him, and lift up her voice, and wept."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And she went, and sat her down over against him a good way off, as it were a bowshot: for she said,"
+    },
+    {
+     "v": 16,
+     "speaker": "hagar",
+     "text": "Let me not see the death of the child."
+    },
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And she sat over against him, and lift up her voice, and wept."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She could not bear to watch her child die. She sat down a bowshot away and cried."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 21:17",
+   "label": "Genesis 21:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And God heard the voice of the lad; and the angel of God called to Hagar out of heaven, and said unto her, What aileth thee, Hagar? fear not; for God hath heard the voice of the lad where he is."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And God heard the voice of the lad; and the angel of God called to Hagar out of heaven, and said unto her, What aileth thee, Hagar? fear not; for God hath heard the voice of the lad where he is."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 21:18",
+   "label": "Genesis 21:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Arise, lift up the lad, and hold him in thine hand; for I will make him a great nation."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Arise, lift up the lad, and hold him in thine hand; for I will make him a great nation."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 21:19",
+   "label": "Genesis 21:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And God opened her eyes, and she saw a well of water; and she went, and filled the bottle with water, and gave the lad drink."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And God opened her eyes, and she saw a well of water; and she went, and filled the bottle with water, and gave the lad drink."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The well was there the whole time. God opened her eyes to see it. Church, there are women tonight who have been used, sent away, and left in a dry place with a child to raise. Hagar's God is still the God who sees. He knows your name. And he still knows where the water is."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 878,
+ "est_seconds": 485,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.1",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Gen 16:1-13 and 21:14-19 (16:12 left out); tagged sexual implied (16:4 in the verse, not dwelt on); 16:9's hard word kept and named as hard, never used to bless servitude; the angel's words read by the narrator."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Hagar honoured as an African woman God called by name, with agency and grief; no servant-only framing; 'he sees me' tied to 16:13; the close speaks to used and sent-away women without pity."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

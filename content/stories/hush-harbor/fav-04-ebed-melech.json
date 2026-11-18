@@ -1,0 +1,313 @@
+{
+ "id": "fav-04-ebed-melech",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Ebed-melech and the Prophet in the Pit",
+ "passage": {
+  "refs": [
+   "JER 38:6-13"
+  ],
+  "label": "Jeremiah 38:6-13"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "ebedmelech",
+   "name": "Ebed-melech",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Jerusalem was surrounded. The Babylonian army was camped outside the walls, and food was running out. The prophet Jeremiah kept telling the people what God had told him, and the princes did not like it one bit. They told King Zedekiah that Jeremiah was weakening the soldiers' hands. And the king, weak as he was, said, he is in your hand."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JER 38:6",
+   "label": "Jeremiah 38:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "Then took they Jeremiah, and cast him into the dungeon of Malchiah the son of Hammelech, that was in the court of the prison: and they let down Jeremiah with cords. And in the dungeon there was no water, but mire: so Jeremiah sunk in the mire."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "Then took they Jeremiah, and cast him into the dungeon of Malchiah the son of Hammelech, that was in the court of the prison: and they let down Jeremiah with cords. And in the dungeon there was no water, but mire: so Jeremiah sunk in the mire."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, somebody heard. [PAUSE 3s | screen: \"Somebody heard\"] Somebody heard. [PAUSE 3s | screen: \"Somebody heard\"] Jeremiah was down in that mud, and somebody heard about it.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Somebody heard"
+    },
+    {
+     "seconds": 3,
+     "screen": "Somebody heard"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No water. Just mud. Jeremiah sank down in it, in the dark, at the bottom of a pit. Left there to die quiet so nobody would have to answer for it."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JER 38:7",
+   "label": "Jeremiah 38:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "Now when Ebed-melech the Ethiopian, one of the eunuchs which was in the king’s house, heard that they had put Jeremiah in the dungeon; the king then sitting in the gate of Benjamin;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "Now when Ebed-melech the Ethiopian, one of the eunuchs which was in the king’s house, heard that they had put Jeremiah in the dungeon; the king then sitting in the gate of Benjamin;"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ebed-melech was an Ethiopian, an African man, a servant in the king's house. His name means servant of the king. He was not a prince. He had no army. But he heard what had been done, and he could not keep still."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JER 38:8",
+   "label": "Jeremiah 38:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Ebed-melech went forth out of the king’s house, and spake to the king, saying,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "Ebed-melech went forth out of the king’s house, and spake to the king, saying,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "ebedmelech",
+   "ref": "JER 38:9",
+   "label": "Jeremiah 38:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "My lord the king, these men have done evil in all that they have done to Jeremiah the prophet, whom they have cast into the dungeon; and he is like to die for hunger in the place where he is: for there is no more bread in the city."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "ebedmelech",
+     "text": "My lord the king, these men have done evil in all that they have done to Jeremiah the prophet, whom they have cast into the dungeon; and he is like to die for hunger in the place where he is: for there is no more bread in the city."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, he went out to the king in the gate, in front of everybody, and said it plain. These men have done evil. He put his own place on the line for a prophet who was not even his kin."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JER 38:10",
+   "label": "Jeremiah 38:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "Then the king commanded Ebed-melech the Ethiopian, saying, Take from hence thirty men with thee, and take up Jeremiah the prophet out of the dungeon, before he die."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "Then the king commanded Ebed-melech the Ethiopian, saying, Take from hence thirty men with thee, and take up Jeremiah the prophet out of the dungeon, before he die."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Thirty men. The same weak king who handed Jeremiah over now sent a crew to pull him out, because one man had the courage to speak up."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JER 38:11",
+   "label": "Jeremiah 38:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "So Ebed-melech took the men with him, and went into the house of the king under the treasury, and took thence old cast clouts and old rotten rags, and let them down by cords into the dungeon to Jeremiah."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "So Ebed-melech took the men with him, and went into the house of the king under the treasury, and took thence old cast clouts and old rotten rags, and let them down by cords into the dungeon to Jeremiah."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "ebedmelech",
+   "ref": "JER 38:12",
+   "label": "Jeremiah 38:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And Ebed-melech the Ethiopian said unto Jeremiah, Put now these old cast clouts and rotten rags under thine armholes under the cords. And Jeremiah did so."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And Ebed-melech the Ethiopian said unto Jeremiah,"
+    },
+    {
+     "v": 12,
+     "speaker": "ebedmelech",
+     "text": "Put now these old cast clouts and rotten rags under thine armholes under the cords."
+    },
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And Jeremiah did so."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look at the care in that. Old rags, so the ropes would not cut the man as they pulled him up out of the mud. Ebed-melech did not just do the right thing. He did it gently."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JER 38:13",
+   "label": "Jeremiah 38:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "So they drew up Jeremiah with cords, and took him up out of the dungeon: and Jeremiah remained in the court of the prison."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "So they drew up Jeremiah with cords, and took him up out of the dungeon: and Jeremiah remained in the court of the prison."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Later on, when the city fell, God sent a word through Jeremiah to Ebed-melech by name. Because you put your trust in me, God said, I will surely deliver you. And Ebed-melech came through it with his life."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Thank God for the ones who will not keep quiet when somebody is left in a pit. Ebed-melech had no title and no power. He had courage, compassion, and a handful of old rags. And God remembered him by name."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 598,
+ "est_seconds": 332,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.9",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T15:56:31",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Jer 38:6-13; the set-up (38:1-5) and God's word to him (39:15-18) told in words; nothing invented about him beyond the text."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "An Ethiopian with courage and gentleness; 'servant of the king' meaning given with dignity, no servitude framing; 'somebody heard' at the turn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
