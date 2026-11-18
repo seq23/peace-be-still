@@ -33,12 +33,24 @@ def bibles():
 
 
 class Plan(unittest.TestCase):
-    def test_psalms_first_then_chapters_both_languages(self):
+    def test_english_psalms_then_listening_order_then_spanish(self):
         files = [i["file"] for i in fill.plan(bibles())]
         self.assertEqual(files, ["en/psalms/kjv-psa-001.m4a", "en/psalms/kjv-psa-002.m4a",
+                                 "en/bible/kjv-gen-001.m4a", "en/bible/kjv-gen-002.m4a",
                                  "es/psalms/rv1909-psa-001.m4a", "es/psalms/rv1909-psa-002.m4a",
-                                 "en/bible/kjv-gen-001.m4a", "es/bible/rv1909-gen-001.m4a",
-                                 "en/bible/kjv-gen-002.m4a", "es/bible/rv1909-gen-002.m4a"])
+                                 "es/bible/rv1909-gen-001.m4a", "es/bible/rv1909-gen-002.m4a"])
+
+    def test_listening_order_books_come_before_canon_order(self):
+        order = fill.book_order()
+        self.assertEqual(order[:6], ["PSA", "MAT", "MAR", "LUK", "JOH", "PRO"])
+        self.assertEqual(sorted(order), sorted(T.CODES))
+        self.assertLess(order.index("EXO"), order.index("LEV"))
+        self.assertLess(order.index("DAN"), order.index("NUM"))
+        rest = [c for c in order if c not in fill.FIRST_BOOKS]
+        self.assertEqual(rest, [c for c in T.CODES if c in rest])
+        vpl = ["MAT 1:1 The book.", "LEV 1:1 And the LORD called.", "PSA 1:1 Blessed.", "GEN 1:1 In the beginning."]
+        b = {"en": T.parse_vpl(vpl), "es": T.parse_vpl(vpl)}
+        self.assertEqual([i["ref"] for i in fill.plan(b)][:4], ["PSA 1", "MAT 1", "GEN 1", "LEV 1"])
 
     def test_apocrypha_never_planned(self):
         self.assertNotIn("TOB", bibles()["en"])

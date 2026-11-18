@@ -1,8 +1,10 @@
 """THE LIBRARY FILL: voice the whole app library on her Mac, check every file, shelve it on Drive.
 
-Owner-approved 18 Nov 2026. Order (a partial library is still launchable):
-  1. Psalms, whole book: KJV (English) and RV1909 (Spanish), one file per psalm.
-  2. The rest of the 66 books, KJV and RV1909, one file per chapter (book by book, English then Spanish).
+Owner-approved 18 Nov 2026. Order (a partial library is still launchable), English first:
+  1. Psalms (KJV), one file per psalm.
+  2. Then, one file per chapter, the listening order in FIRST_BOOKS (Matthew, Mark, Luke, John,
+     Proverbs, Genesis, ...), then the rest of the 66 books in canon order.
+  The same order again in Spanish (RV1909). Files already in the manifest are never redone.
   3. Content scripts marked passed in content/ (stories, Psalm Nights, Imagination Nights, declarations).
 Text is the stored text word for word (lib/text.py says the only spoken-form changes).
 
@@ -72,18 +74,26 @@ class NamedStop(Exception):
 
 
 # ------------------------------------------------------------------ the plan
+# Listening order (owner, 18 Nov 2026): the books people reach for first, then the rest in canon
+# order. English whole, then Spanish in the same order.
+FIRST_BOOKS = ["PSA", "MAT", "MAR", "LUK", "JOH", "PRO", "GEN", "ROM", "ISA", "ACT", "EPH", "PHI", "JAM",
+               "1JO", "RUT", "EST", "DAN", "EXO"]
+
+
+def book_order() -> list[str]:
+    return FIRST_BOOKS + [c for c in T.CODES if c not in FIRST_BOOKS]
+
+
 def plan(bibles: dict, content: list | None = None) -> list[dict]:
-    """Every file the library needs, in priority order. Pure."""
+    """Every file the library needs, in recording order: English Psalms, then the listening-order
+    books, then the rest in canon order; then Spanish the same way. Pure."""
     items = []
     for lang in ("en", "es"):
-        for c in sorted(bibles[lang]["PSA"]):
-            items.append(_scripture_item(bibles, lang, "PSA", c, kind="psalms", priority=1))
-    for code in T.CODES:
-        if code == "PSA":
-            continue
-        for c in sorted(bibles["en"].get(code, {})):
-            for lang in ("en", "es"):
-                if c in bibles[lang].get(code, {}):
+        for code in book_order():
+            for c in sorted(bibles[lang].get(code, {})):
+                if code == "PSA":
+                    items.append(_scripture_item(bibles, lang, code, c, kind="psalms", priority=1))
+                else:
                     items.append(_scripture_item(bibles, lang, code, c, kind="bible", priority=2))
     return items + list(content or [])
 
