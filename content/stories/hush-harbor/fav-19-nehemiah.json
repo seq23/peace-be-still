@@ -1,0 +1,360 @@
+{
+ "id": "fav-19-nehemiah",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Let Us Rise Up and Build",
+ "passage": {
+  "refs": [
+   "NEH 2:11-20",
+   "NEH 6:15-16"
+  ],
+  "label": "Nehemiah 2:11-20; Nehemiah 6:15-16"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jews",
+   "name": "the Jews",
+   "age": "adult",
+   "gender": "group"
+  },
+  {
+   "id": "enemies",
+   "name": "Sanballat and Tobiah and Geshem",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Nehemiah was a Jew far from home, serving as cupbearer to the king of Persia. When he heard that the walls of Jerusalem were broken down and its gates burned, he sat down and wept, and fasted and prayed for days. Then God moved the king's heart to send him home to rebuild."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NEH 2:11",
+   "label": "Nehemiah 2:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "So I came to Jerusalem, and was there three days."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "So I came to Jerusalem, and was there three days."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, rise up and build. [PAUSE 3s | screen: \"Rise up and build\"] Rise up and build. [PAUSE 3s | screen: \"Rise up and build\"] Before anybody picked up a stone, Nehemiah had to go look at the ruins.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Rise up and build"
+    },
+    {
+     "seconds": 3,
+     "screen": "Rise up and build"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NEH 2:12",
+   "label": "Nehemiah 2:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And I arose in the night, I and some few men with me; neither told I any man what my God had put in my heart to do at Jerusalem: neither was there any beast with me, save the beast that I rode upon."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And I arose in the night, I and some few men with me; neither told I any man what my God had put in my heart to do at Jerusalem: neither was there any beast with me, save the beast that I rode upon."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NEH 2:13",
+   "label": "Nehemiah 2:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And I went out by night by the gate of the valley, even before the dragon well, and to the dung port, and viewed the walls of Jerusalem, which were broken down, and the gates thereof were consumed with fire."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And I went out by night by the gate of the valley, even before the dragon well, and to the dung port, and viewed the walls of Jerusalem, which were broken down, and the gates thereof were consumed with fire."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He went out by night, quiet, without telling anybody. He looked at every broken place with his own eyes. Church, sometimes before you build, you have to be honest about the damage."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NEH 2:15",
+   "label": "Nehemiah 2:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "Then went I up in the night by the brook, and viewed the wall, and turned back, and entered by the gate of the valley, and so returned."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "Then went I up in the night by the brook, and viewed the wall, and turned back, and entered by the gate of the valley, and so returned."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NEH 2:17",
+   "label": "Nehemiah 2:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Then said I unto them, Ye see the distress that we are in, how Jerusalem lieth waste, and the gates thereof are burned with fire: come, and let us build up the wall of Jerusalem, that we be no more a reproach."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Then said I unto them, Ye see the distress that we are in, how Jerusalem lieth waste, and the gates thereof are burned with fire: come, and let us build up the wall of Jerusalem, that we be no more a reproach."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jews",
+   "ref": "NEH 2:18",
+   "label": "Nehemiah 2:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Then I told them of the hand of my God which was good upon me; as also the king’s words that he had spoken unto me. And they said, Let us rise up and build. So they strengthened their hands for this good work."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "Then I told them of the hand of my God which was good upon me; as also the king’s words that he had spoken unto me. And they said,"
+    },
+    {
+     "v": 18,
+     "speaker": "jews",
+     "text": "Let us rise up and build."
+    },
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "So they strengthened their hands for this good work."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Let us rise up and build. When the people heard that God's hand was on this, they did not argue. They strengthened their hands for the good work."
+  },
+  {
+   "type": "scripture",
+   "speaker": "enemies",
+   "ref": "NEH 2:19",
+   "label": "Nehemiah 2:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "But when Sanballat the Horonite, and Tobiah the servant, the Ammonite, and Geshem the Arabian, heard it, they laughed us to scorn, and despised us, and said, What is this thing that ye do? will ye rebel against the king?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "But when Sanballat the Horonite, and Tobiah the servant, the Ammonite, and Geshem the Arabian, heard it, they laughed us to scorn, and despised us, and said,"
+    },
+    {
+     "v": 19,
+     "speaker": "enemies",
+     "text": "What is this thing that ye do? will ye rebel against the king?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Every time God's people start to build, somebody laughs. Somebody asks who you think you are."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NEH 2:20",
+   "label": "Nehemiah 2:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "Then answered I them, and said unto them, The God of heaven, he will prosper us; therefore we his servants will arise and build: but ye have no portion, nor right, nor memorial, in Jerusalem."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "Then answered I them, and said unto them, The God of heaven, he will prosper us; therefore we his servants will arise and build: but ye have no portion, nor right, nor memorial, in Jerusalem."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The God of heaven will prosper us. Nehemiah did not argue with them long. He told them whose work it was and went back to building. Later the enemies tried mocking, then threats, then lies, then tricks to draw Nehemiah away from the wall. He told them, I am doing a great work, I cannot come down. And the people kept building with a trowel in one hand and a sword close by."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NEH 6:15",
+   "label": "Nehemiah 6:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "So the wall was finished in the twenty and fifth day of the month Elul, in fifty and two days."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "So the wall was finished in the twenty and fifth day of the month Elul, in fifty and two days."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "NEH 6:16",
+   "label": "Nehemiah 6:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And it came to pass, that when all our enemies heard thereof, and all the heathen that were about us saw these things, they were much cast down in their own eyes: for they perceived that this work was wrought of our God."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And it came to pass, that when all our enemies heard thereof, and all the heathen that were about us saw these things, they were much cast down in their own eyes: for they perceived that this work was wrought of our God."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Fifty-two days. The wall that had lain broken for years went up in fifty-two days, and even the enemies could see God did it."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, some things in our lives and our communities have been broken a long time. Families. Neighborhoods. Hearts. It starts with somebody weeping over it and praying. Then looking at the damage honestly. Then saying to their neighbors, come on, let us rise up and build. Do not come down off the wall for the folks laughing at you. Keep building."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 662,
+ "est_seconds": 367,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.6",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Neh 2:11-20 and 6:15-16 (Nehemiah's first person stays in the verses); 1:4, 4:17 and 6:3 told in our own words; no prosperity reading of 2:20."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "'Rise up and build' at the turn; communities rebuilding honoured without stereotype."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

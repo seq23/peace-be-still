@@ -1,0 +1,434 @@
+{
+ "id": "fav-20-rhoda",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Rhoda at the Gate",
+ "passage": {
+  "refs": [
+   "ACT 12:5-17"
+  ],
+  "label": "Acts 12:5-17"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "peter",
+   "name": "Peter",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "church",
+   "name": "those praying",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, King Herod had already put the apostle James to death. When he saw how that pleased the crowd, he arrested Peter too, and meant to bring him out for trial after the Passover. Sixteen soldiers guarded him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:5",
+   "label": "Acts 12:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "Peter therefore was kept in prison: but prayer was made without ceasing of the church unto God for him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "Peter therefore was kept in prison: but prayer was made without ceasing of the church unto God for him."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, prayer was made. [PAUSE 3s | screen: \"Prayer was made\"] Prayer was made. [PAUSE 3s | screen: \"Prayer was made\"] Peter was in prison, but the church was on its knees.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Prayer was made"
+    },
+    {
+     "seconds": 3,
+     "screen": "Prayer was made"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Peter was in prison. But. The church was praying. Without ceasing. They could not break down the prison door. So they went to the One who could."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:6",
+   "label": "Acts 12:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And when Herod would have brought him forth, the same night Peter was sleeping between two soldiers, bound with two chains: and the keepers before the door kept the prison."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And when Herod would have brought him forth, the same night Peter was sleeping between two soldiers, bound with two chains: and the keepers before the door kept the prison."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Look at Peter. Chained between two soldiers, the night before he might die, and he is sleeping. That is peace."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:7",
+   "label": "Acts 12:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And, behold, the angel of the Lord came upon him, and a light shined in the prison: and he smote Peter on the side, and raised him up, saying, Arise up quickly. And his chains fell off from his hands."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And, behold, the angel of the Lord came upon him, and a light shined in the prison: and he smote Peter on the side, and raised him up, saying, Arise up quickly. And his chains fell off from his hands."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:8",
+   "label": "Acts 12:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And the angel said unto him, Gird thyself, and bind on thy sandals. And so he did. And he saith unto him, Cast thy garment about thee, and follow me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And the angel said unto him, Gird thyself, and bind on thy sandals. And so he did. And he saith unto him, Cast thy garment about thee, and follow me."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:9",
+   "label": "Acts 12:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And he went out, and followed him; and wist not that it was true which was done by the angel; but thought he saw a vision."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And he went out, and followed him; and wist not that it was true which was done by the angel; but thought he saw a vision."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:10",
+   "label": "Acts 12:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "When they were past the first and the second ward, they came unto the iron gate that leadeth unto the city; which opened to them of his own accord: and they went out, and passed on through one street; and forthwith the angel departed from him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "When they were past the first and the second ward, they came unto the iron gate that leadeth unto the city; which opened to them of his own accord: and they went out, and passed on through one street; and forthwith the angel departed from him."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "ACT 12:11",
+   "label": "Acts 12:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And when Peter was come to himself, he said, Now I know of a surety, that the Lord hath sent his angel, and hath delivered me out of the hand of Herod, and from all the expectation of the people of the Jews."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And when Peter was come to himself, he said,"
+    },
+    {
+     "v": 11,
+     "speaker": "peter",
+     "text": "Now I know of a surety, that the Lord hath sent his angel, and hath delivered me out of the hand of Herod, and from all the expectation of the people of the Jews."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:12",
+   "label": "Acts 12:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And when he had considered the thing, he came to the house of Mary the mother of John, whose surname was Mark; where many were gathered together praying."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And when he had considered the thing, he came to the house of Mary the mother of John, whose surname was Mark; where many were gathered together praying."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They were still praying. Middle of the night, and the house was full of folks praying for Peter."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:13",
+   "label": "Acts 12:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And as Peter knocked at the door of the gate, a damsel came to hearken, named Rhoda."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And as Peter knocked at the door of the gate, a damsel came to hearken, named Rhoda."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:14",
+   "label": "Acts 12:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And when she knew Peter’s voice, she opened not the gate for gladness, but ran in, and told how Peter stood before the gate."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And when she knew Peter’s voice, she opened not the gate for gladness, but ran in, and told how Peter stood before the gate."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Rhoda was a young servant girl. She heard that voice and got so excited she forgot to open the gate. She ran in to tell everybody."
+  },
+  {
+   "type": "scripture",
+   "speaker": "church",
+   "ref": "ACT 12:15",
+   "label": "Acts 12:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And they said unto her, Thou art mad. But she constantly affirmed that it was even so. Then said they, It is his angel."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And they said unto her,"
+    },
+    {
+     "v": 15,
+     "speaker": "church",
+     "text": "Thou art mad."
+    },
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "But she constantly affirmed that it was even so. Then said they, It is his angel."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, they were praying for Peter to get out, and when he got out, they told the girl she was crazy. But Rhoda would not back down. She kept saying, it is him. It is him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "ACT 12:16",
+   "label": "Acts 12:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "But Peter continued knocking: and when they had opened the door, and saw him, they were astonished."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "But Peter continued knocking: and when they had opened the door, and saw him, they were astonished."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "And Peter just kept on knocking."
+  },
+  {
+   "type": "scripture",
+   "speaker": "peter",
+   "ref": "ACT 12:17",
+   "label": "Acts 12:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "But he, beckoning unto them with the hand to hold their peace, declared unto them how the Lord had brought him out of the prison. And he said, Go shew these things unto James, and to the brethren. And he departed, and went into another place."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "But he, beckoning unto them with the hand to hold their peace, declared unto them how the Lord had brought him out of the prison. And he said,"
+    },
+    {
+     "v": 17,
+     "speaker": "peter",
+     "text": "Go shew these things unto James, and to the brethren."
+    },
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And he departed, and went into another place."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Thank God for the prayer meeting. Thank God for folks who pray in the night when the news is bad. And thank God for Rhoda, the young one nobody believed, who knew the answer when she heard it at the gate. Sometimes God answers while we are still praying. Keep praying. And when the knock comes, open the door."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 643,
+ "est_seconds": 357,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Acts 12:5-17; the angel read by the narrator; James's death (12:2) told in our own words; no promise that every prayer is answered this way."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Rhoda, the young servant nobody believed, honoured; the prayer meeting tradition warm and real; 'prayer was made' at the turn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

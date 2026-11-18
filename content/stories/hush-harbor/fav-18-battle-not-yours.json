@@ -1,0 +1,453 @@
+{
+ "id": "fav-18-battle-not-yours",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "The Battle Is Not Yours",
+ "passage": {
+  "refs": [
+   "2CH 20:1-22"
+  ],
+  "label": "2 Chronicles 20:1-22"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "jehoshaphat",
+   "name": "Jehoshaphat",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:1",
+   "label": "2 Chronicles 20:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "It came to pass after this also, that the children of Moab, and the children of Ammon, and with them other beside the Ammonites, came against Jehoshaphat to battle."
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "It came to pass after this also, that the children of Moab, and the children of Ammon, and with them other beside the Ammonites, came against Jehoshaphat to battle."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:2",
+   "label": "2 Chronicles 20:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Then there came some that told Jehoshaphat, saying, There cometh a great multitude against thee from beyond the sea on this side Syria; and, behold, they be in Hazazon-tamar, which is En-gedi."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "Then there came some that told Jehoshaphat, saying, There cometh a great multitude against thee from beyond the sea on this side Syria; and, behold, they be in Hazazon-tamar, which is En-gedi."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say God is good, you say, all the time. God is good. [PAUSE 3s | screen: \"All the time\"] And all the time. [PAUSE 3s | screen: \"God is good\"] Hold on to it, because Judah was about to find out.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "All the time"
+    },
+    {
+     "seconds": 3,
+     "screen": "God is good"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:3",
+   "label": "2 Chronicles 20:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "And Jehoshaphat feared, and set himself to seek the LORD, and proclaimed a fast throughout all Judah."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "And Jehoshaphat feared, and set himself to seek the LORD, and proclaimed a fast throughout all Judah."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, the king was afraid. The Bible does not hide it. Three armies were marching on Judah. And the first thing Jehoshaphat did with his fear was to seek the LORD. He called the whole nation to fast."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:4",
+   "label": "2 Chronicles 20:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And Judah gathered themselves together, to ask help of the LORD: even out of all the cities of Judah they came to seek the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And Judah gathered themselves together, to ask help of the LORD: even out of all the cities of Judah they came to seek the LORD."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jehoshaphat",
+   "ref": "2CH 20:6",
+   "label": "2 Chronicles 20:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And said, O LORD God of our fathers, art not thou God in heaven? and rulest not thou over all the kingdoms of the heathen? and in thine hand is there not power and might, so that none is able to withstand thee?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And said,"
+    },
+    {
+     "v": 6,
+     "speaker": "jehoshaphat",
+     "text": "O LORD God of our fathers, art not thou God in heaven? and rulest not thou over all the kingdoms of the heathen? and in thine hand is there not power and might, so that none is able to withstand thee?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "jehoshaphat",
+   "ref": "2CH 20:12",
+   "label": "2 Chronicles 20:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "O our God, wilt thou not judge them? for we have no might against this great company that cometh against us; neither know we what to do: but our eyes are upon thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "jehoshaphat",
+     "text": "O our God, wilt thou not judge them? for we have no might against this great company that cometh against us; neither know we what to do: but our eyes are upon thee."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "No strength. No plan. Just eyes turned up to God. Church, that is one of the most honest prayers in the Bible. A king saying in front of everybody, I don't know what to do."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:13",
+   "label": "2 Chronicles 20:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And all Judah stood before the LORD, with their little ones, their wives, and their children."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And all Judah stood before the LORD, with their little ones, their wives, and their children."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Men, women, children, little ones, standing before the LORD together. The whole church in the house, waiting."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:14",
+   "label": "2 Chronicles 20:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "Then upon Jahaziel the son of Zechariah, the son of Benaiah, the son of Jeiel, the son of Mattaniah, a Levite of the sons of Asaph, came the Spirit of the LORD in the midst of the congregation;"
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "Then upon Jahaziel the son of Zechariah, the son of Benaiah, the son of Jeiel, the son of Mattaniah, a Levite of the sons of Asaph, came the Spirit of the LORD in the midst of the congregation;"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:15",
+   "label": "2 Chronicles 20:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And he said, Hearken ye, all Judah, and ye inhabitants of Jerusalem, and thou king Jehoshaphat, Thus saith the LORD unto you, Be not afraid nor dismayed by reason of this great multitude; for the battle is not yours, but God’s."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And he said, Hearken ye, all Judah, and ye inhabitants of Jerusalem, and thou king Jehoshaphat, Thus saith the LORD unto you, Be not afraid nor dismayed by reason of this great multitude; for the battle is not yours, but God’s."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:17",
+   "label": "2 Chronicles 20:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "Ye shall not need to fight in this battle: set yourselves, stand ye still, and see the salvation of the LORD with you, O Judah and Jerusalem: fear not, nor be dismayed; to morrow go out against them: for the LORD will be with you."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "Ye shall not need to fight in this battle: set yourselves, stand ye still, and see the salvation of the LORD with you, O Judah and Jerusalem: fear not, nor be dismayed; to morrow go out against them: for the LORD will be with you."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The battle is not yours, but God's. Stand still and see. The old church sings it, and gospel choirs have sung it too. God did not tell them to stay home. He told them to go out and stand, and watch what he would do."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:18",
+   "label": "2 Chronicles 20:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And Jehoshaphat bowed his head with his face to the ground: and all Judah and the inhabitants of Jerusalem fell before the LORD, worshipping the LORD."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And Jehoshaphat bowed his head with his face to the ground: and all Judah and the inhabitants of Jerusalem fell before the LORD, worshipping the LORD."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:19",
+   "label": "2 Chronicles 20:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And the Levites, of the children of the Kohathites, and of the children of the Korhites, stood up to praise the LORD God of Israel with a loud voice on high."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "narrator",
+     "text": "And the Levites, of the children of the Kohathites, and of the children of the Korhites, stood up to praise the LORD God of Israel with a loud voice on high."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They had not won anything yet. The armies were still out there. And the Levites stood up and praised God with a loud voice anyway."
+  },
+  {
+   "type": "scripture",
+   "speaker": "jehoshaphat",
+   "ref": "2CH 20:20",
+   "label": "2 Chronicles 20:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And they rose early in the morning, and went forth into the wilderness of Tekoa: and as they went forth, Jehoshaphat stood and said, Hear me, O Judah, and ye inhabitants of Jerusalem; Believe in the LORD your God, so shall ye be established; believe his prophets, so shall ye prosper."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "narrator",
+     "text": "And they rose early in the morning, and went forth into the wilderness of Tekoa: and as they went forth, Jehoshaphat stood and said,"
+    },
+    {
+     "v": 20,
+     "speaker": "jehoshaphat",
+     "text": "Hear me, O Judah, and ye inhabitants of Jerusalem; Believe in the LORD your God, so shall ye be established; believe his prophets, so shall ye prosper."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:21",
+   "label": "2 Chronicles 20:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "And when he had consulted with the people, he appointed singers unto the LORD, and that should praise the beauty of holiness, as they went out before the army, and to say, Praise the LORD; for his mercy endureth for ever."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "And when he had consulted with the people, he appointed singers unto the LORD, and that should praise the beauty of holiness, as they went out before the army, and to say, Praise the LORD; for his mercy endureth for ever."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Who sends the choir out in front of the army? Jehoshaphat did. They marched out singing, praise the LORD, for his mercy endures forever."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "2CH 20:22",
+   "label": "2 Chronicles 20:22",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 22,
+     "text": "And when they began to sing and to praise, the LORD set ambushments against the children of Ammon, Moab, and mount Seir, which were come against Judah; and they were smitten."
+    }
+   ],
+   "segments": [
+    {
+     "v": 22,
+     "speaker": "narrator",
+     "text": "And when they began to sing and to praise, the LORD set ambushments against the children of Ammon, Moab, and mount Seir, which were come against Judah; and they were smitten."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When they began to sing, God moved. Church, Judah did not have to swing a sword that day. The enemy turned on each other. It took the people three days to carry away everything that was left."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There are battles that are too big for us. God never promised we would not face them. But he can teach us how to stand in them. Seek him first. Tell him the truth, that you do not know what to do. Keep your eyes on him. And sing before you see it. The battle belongs to the Lord."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 808,
+ "est_seconds": 447,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 1.8",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "claude",
+   "model": "claude",
+   "drafted_at": "2026-11-18T16:00:28",
+   "changed_share": null,
+   "note": "Written by Claude in the landing session, then Claude's pastor and cultural read."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 2 Chr 20:1-22 (vv23-25 told in words); Jahaziel's prophecy read by the narrator; 'prosper' (v20) left in the verse and the close says God never promised we would not face battles; 'The Battle Is Not Yours' named only as what choirs sing."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Praise before the victory, preached plainly; 'God is good / all the time'."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
