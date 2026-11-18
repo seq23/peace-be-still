@@ -1,0 +1,322 @@
+{
+ "id": "core-026-deborah",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Deborah Under the Palm Tree",
+ "passage": {
+  "refs": [
+   "JDG 4:1-16",
+   "JDG 5:1-3"
+  ],
+  "label": "Judges 4:1-16; Judges 5:1-3"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "deborah",
+   "name": "Deborah",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "barak",
+   "name": "Barak",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "After a long season of peace, the people of Israel turned away from the LORD again. They fell under the rule of Jabin, a king of Canaan. His captain was Sisera, and Sisera had nine hundred chariots of iron. For twenty years he oppressed Israel hard, and the people cried out to the LORD."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 4:4",
+   "label": "Judges 4:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And Deborah, a prophetess, the wife of Lapidoth, she judged Israel at that time."
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And Deborah, a prophetess, the wife of Lapidoth, she judged Israel at that time."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 4:5",
+   "label": "Judges 4:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "And she dwelt under the palm tree of Deborah between Ramah and Beth-el in mount Ephraim: and the children of Israel came up to her for judgment."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "And she dwelt under the palm tree of Deborah between Ramah and Beth-el in mount Ephraim: and the children of Israel came up to her for judgment."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, Deborah was a prophetess and a judge. People came to her for wisdom and for justice. She sat under her palm tree up in the hill country, and Israel brought their troubles to her."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "One day she sent for a man named Barak. She told him God had given him a command: gather ten thousand men at Mount Tabor. God would draw Sisera and his chariots down to the river Kishon and hand him over to Barak."
+  },
+  {
+   "type": "scripture",
+   "speaker": "barak",
+   "ref": "JDG 4:8",
+   "label": "Judges 4:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "And Barak said unto her, If thou wilt go with me, then I will go: but if thou wilt not go with me, then I will not go."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "And Barak said unto her,"
+    },
+    {
+     "v": 8,
+     "speaker": "barak",
+     "text": "If thou wilt go with me, then I will go: but if thou wilt not go with me, then I will not go."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Barak would only go if Deborah went with him. Some folks hear fear in that. Others hear wisdom, a man who wanted God's prophet close by in the fight."
+  },
+  {
+   "type": "scripture",
+   "speaker": "deborah",
+   "ref": "JDG 4:9",
+   "label": "Judges 4:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And she said, I will surely go with thee: notwithstanding the journey that thou takest shall not be for thine honour; for the LORD shall sell Sisera into the hand of a woman. And Deborah arose, and went with Barak to Kedesh."
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And she said,"
+    },
+    {
+     "v": 9,
+     "speaker": "deborah",
+     "text": "I will surely go with thee: notwithstanding the journey that thou takest shall not be for thine honour; for the LORD shall sell Sisera into the hand of a woman."
+    },
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And Deborah arose, and went with Barak to Kedesh."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Deborah said yes. She also told him the honor would not be his, because the LORD would hand Sisera over to a woman. Then Deborah got up and went with Barak to Kedesh."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Barak gathered his ten thousand, and Deborah went up with him. When Sisera heard, he gathered every chariot and all his army by the river."
+  },
+  {
+   "type": "scripture",
+   "speaker": "deborah",
+   "ref": "JDG 4:14",
+   "label": "Judges 4:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And Deborah said unto Barak, Up; for this is the day in which the LORD hath delivered Sisera into thine hand: is not the LORD gone out before thee? So Barak went down from mount Tabor, and ten thousand men after him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And Deborah said unto Barak,"
+    },
+    {
+     "v": 14,
+     "speaker": "deborah",
+     "text": "Up; for this is the day in which the LORD hath delivered Sisera into thine hand: is not the LORD gone out before thee?"
+    },
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "So Barak went down from mount Tabor, and ten thousand men after him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Up. This is the day. Deborah did not hesitate. She saw what God was doing and told Barak to move. And Barak went down from Mount Tabor with ten thousand men behind him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 4:15",
+   "label": "Judges 4:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And the LORD discomfited Sisera, and all his chariots, and all his host, with the edge of the sword before Barak; so that Sisera lighted down off his chariot, and fled away on his feet."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And the LORD discomfited Sisera, and all his chariots, and all his host, with the edge of the sword before Barak; so that Sisera lighted down off his chariot, and fled away on his feet."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: \"Yes he will\"] Yes he will. [PAUSE 3s | screen: \"Won’t he do it?\"] Twenty years of iron chariots, and the LORD went out before them.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "Yes he will"
+    },
+    {
+     "seconds": 3,
+     "screen": "Won’t he do it?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The LORD threw Sisera's great army into confusion. Those chariots that had scared Israel for twenty years were no help now. Sisera himself jumped down from his chariot and ran away on foot, and Barak's men chased the army down."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "When it was over, Deborah and Barak sang together. Their song is one of the oldest in the whole Bible."
+  },
+  {
+   "type": "scripture",
+   "speaker": "deborah",
+   "ref": "JDG 5:3",
+   "label": "Judges 5:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Hear, O ye kings; give ear, O ye princes; I, even I, will sing unto the LORD; I will sing praise to the LORD God of Israel."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "deborah",
+     "text": "Hear, O ye kings; give ear, O ye princes; I, even I, will sing unto the LORD; I will sing praise to the LORD God of Israel."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Deborah was a judge, a prophet and a leader, called by God in a hard time. She sat under that palm tree and listened to folks' troubles, and when the day came, she stood up and said go. And her song gave the glory to the LORD."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 605,
+ "est_seconds": 336,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "pass",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Judges 4:1-16 and 5:1-3; Jael's act not retold; Barak's request given two readings."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A woman judge with full authority; 'won't he do it' tied to the LORD going out before them, in the story's past."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

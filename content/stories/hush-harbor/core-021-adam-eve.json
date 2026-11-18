@@ -1,0 +1,423 @@
+{
+ "id": "core-021-adam-eve",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Where Art Thou?",
+ "passage": {
+  "refs": [
+   "GEN 2:7-25",
+   "GEN 3:1-23"
+  ],
+  "label": "Genesis 2:7-25; Genesis 3:1-23"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "adam",
+   "name": "Adam",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "eve",
+   "name": "Eve",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "serpent",
+   "name": "serpent",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Church, in the beginning God shaped the first man out of the earth and gave him breath, and the man became a living soul. Then God planted a garden in Eden, toward the east, and put the man there to work it and keep it. Every tree that was pleasant to see and good for food grew in that garden."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God gave him one boundary. Eat freely from every tree in the garden but one: the tree that gave the knowledge of good and evil. Eat from that one, and you will die."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 2:18",
+   "label": "Genesis 2:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And the LORD God said, It is not good that the man should be alone; I will make him an help meet for him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "narrator",
+     "text": "And the LORD God said, It is not good that the man should be alone; I will make him an help meet for him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God brought the animals to the man, and the man named every one of them. But among them all, there was no partner fit for him. So God put him into a deep sleep, took one of his ribs, made a woman, and brought her to him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "adam",
+   "ref": "GEN 2:23",
+   "label": "Genesis 2:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "And Adam said, This is now bone of my bones, and flesh of my flesh: she shall be called Woman, because she was taken out of Man."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "And Adam said,"
+    },
+    {
+     "v": 23,
+     "speaker": "adam",
+     "text": "This is now bone of my bones, and flesh of my flesh: she shall be called Woman, because she was taken out of Man."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They were together in that garden, and they had nothing to hide from each other or from God."
+  },
+  {
+   "type": "scripture",
+   "speaker": "serpent",
+   "ref": "GEN 3:1",
+   "label": "Genesis 3:1",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Now the serpent was more subtil than any beast of the field which the LORD God had made. And he said unto the woman, Yea, hath God said, Ye shall not eat of every tree of the garden?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 1,
+     "speaker": "narrator",
+     "text": "Now the serpent was more subtil than any beast of the field which the LORD God had made. And he said unto the woman,"
+    },
+    {
+     "v": 1,
+     "speaker": "serpent",
+     "text": "Yea, hath God said, Ye shall not eat of every tree of the garden?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Hear how that question twists what God said. God had given them every tree but one. The serpent made it sound like God was holding everything back. That is how the enemy still talks, Church. He takes a gift and makes it sound like a cage."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The woman answered that they could eat from the trees, but not from the tree in the middle of the garden, or they would die."
+  },
+  {
+   "type": "scripture",
+   "speaker": "serpent",
+   "ref": "GEN 3:4",
+   "label": "Genesis 3:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And the serpent said unto the woman, Ye shall not surely die:"
+    }
+   ],
+   "segments": [
+    {
+     "v": 4,
+     "speaker": "narrator",
+     "text": "And the serpent said unto the woman,"
+    },
+    {
+     "v": 4,
+     "speaker": "serpent",
+     "text": "Ye shall not surely die:"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "serpent",
+   "ref": "GEN 3:5",
+   "label": "Genesis 3:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "For God doth know that in the day ye eat thereof, then your eyes shall be opened, and ye shall be as gods, knowing good and evil."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "serpent",
+     "text": "For God doth know that in the day ye eat thereof, then your eyes shall be opened, and ye shall be as gods, knowing good and evil."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:6",
+   "label": "Genesis 3:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And when the woman saw that the tree was good for food, and that it was pleasant to the eyes, and a tree to be desired to make one wise, she took of the fruit thereof, and did eat, and gave also unto her husband with her; and he did eat."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And when the woman saw that the tree was good for food, and that it was pleasant to the eyes, and a tree to be desired to make one wise, she took of the fruit thereof, and did eat, and gave also unto her husband with her; and he did eat."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "In one moment, everything changed. Their eyes were opened, and they knew they were naked. They sewed fig leaves together to cover themselves. Then, in the cool of the day, they heard God walking in the garden, and they hid from him among the trees."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:9",
+   "label": "Genesis 3:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "And the LORD God called unto Adam, and said unto him, Where art thou?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 9,
+     "speaker": "narrator",
+     "text": "And the LORD God called unto Adam, and said unto him, Where art thou?"
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he came looking. [PAUSE 3s | screen: \"He came looking\"] He came looking. [PAUSE 3s | screen: \"He came looking\"] They were hiding, and God came walking in the cool of the day.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He came looking"
+    },
+    {
+     "seconds": 3,
+     "screen": "He came looking"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God knew where Adam was. That question was not for God's sake. It was an invitation to come out."
+  },
+  {
+   "type": "scripture",
+   "speaker": "adam",
+   "ref": "GEN 3:10",
+   "label": "Genesis 3:10",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 10,
+     "text": "And he said, I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself."
+    }
+   ],
+   "segments": [
+    {
+     "v": 10,
+     "speaker": "narrator",
+     "text": "And he said,"
+    },
+    {
+     "v": 10,
+     "speaker": "adam",
+     "text": "I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "God asked him if he had eaten from the tree he was told not to eat from."
+  },
+  {
+   "type": "scripture",
+   "speaker": "adam",
+   "ref": "GEN 3:12",
+   "label": "Genesis 3:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And the man said, The woman whom thou gavest to be with me, she gave me of the tree, and I did eat."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And the man said,"
+    },
+    {
+     "v": 12,
+     "speaker": "adam",
+     "text": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "eve",
+   "ref": "GEN 3:13",
+   "label": "Genesis 3:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And the LORD God said unto the woman, What is this that thou hast done? And the woman said, The serpent beguiled me, and I did eat."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And the LORD God said unto the woman, What is this that thou hast done? And the woman said,"
+    },
+    {
+     "v": 13,
+     "speaker": "eve",
+     "text": "The serpent beguiled me, and I did eat."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The man blamed the woman, and almost blamed God for giving her to him. The woman blamed the serpent. And folks have been passing the blame ever since."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There were consequences. Life outside the garden would be hard. Work would be sweat and struggle, and in the end they would go back to the dust they came from. Adam named his wife Eve, the mother of everyone who would ever live."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "GEN 3:21",
+   "label": "Genesis 3:21",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 21,
+     "text": "Unto Adam also and to his wife did the LORD God make coats of skins, and clothed them."
+    }
+   ],
+   "segments": [
+    {
+     "v": 21,
+     "speaker": "narrator",
+     "text": "Unto Adam also and to his wife did the LORD God make coats of skins, and clothed them."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Before they left the garden, God made them coats of skins and clothed them himself. Their choices were real, and so was what they lost. But even as they walked out of Eden, God was still taking care of them."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 729,
+ "est_seconds": 404,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.4",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Genesis 2:7-3:23; calling the serpent's voice 'the enemy' is the common church reading, kept to one line, no doctrine of the fall built on it."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Neither the man nor the woman is the villain; the call 'he came looking' sits at God's question."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

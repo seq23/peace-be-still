@@ -1,0 +1,375 @@
+{
+ "id": "core-029-good-samaritan",
+ "kind": "story",
+ "telling": "hush-harbor",
+ "journey": "hush-harbor",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Go, and Do Thou Likewise",
+ "passage": {
+  "refs": [
+   "LUK 10:25-37"
+  ],
+  "label": "Luke 10:25-37"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "lawyer",
+   "name": "lawyer",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "scripture",
+   "speaker": "lawyer",
+   "ref": "LUK 10:25",
+   "label": "Luke 10:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "And, behold, a certain lawyer stood up, and tempted him, saying, Master, what shall I do to inherit eternal life?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "And, behold, a certain lawyer stood up, and tempted him, saying,"
+    },
+    {
+     "v": 25,
+     "speaker": "lawyer",
+     "text": "Master, what shall I do to inherit eternal life?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "That question was a test. Jesus answered it with a question of his own. What is written in the law, and how do you read it?"
+  },
+  {
+   "type": "scripture",
+   "speaker": "lawyer",
+   "ref": "LUK 10:27",
+   "label": "Luke 10:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "And he answering said, Thou shalt love the Lord thy God with all thy heart, and with all thy soul, and with all thy strength, and with all thy mind; and thy neighbour as thyself."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "And he answering said,"
+    },
+    {
+     "v": 27,
+     "speaker": "lawyer",
+     "text": "Thou shalt love the Lord thy God with all thy heart, and with all thy soul, and with all thy strength, and with all thy mind; and thy neighbour as thyself."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus told him he answered right. Do this, and live. But the lawyer wanted to justify himself."
+  },
+  {
+   "type": "scripture",
+   "speaker": "lawyer",
+   "ref": "LUK 10:29",
+   "label": "Luke 10:29",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 29,
+     "text": "But he, willing to justify himself, said unto Jesus, And who is my neighbour?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 29,
+     "speaker": "narrator",
+     "text": "But he, willing to justify himself, said unto Jesus,"
+    },
+    {
+     "v": 29,
+     "speaker": "lawyer",
+     "text": "And who is my neighbour?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Who is my neighbor? Church, that is a question about where love gets to stop. And Jesus answered it with a story."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:30",
+   "label": "Luke 10:30",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 30,
+     "text": "And Jesus answering said, A certain man went down from Jerusalem to Jericho, and fell among thieves, which stripped him of his raiment, and wounded him, and departed, leaving him half dead."
+    }
+   ],
+   "segments": [
+    {
+     "v": 30,
+     "speaker": "narrator",
+     "text": "And Jesus answering said, A certain man went down from Jerusalem to Jericho, and fell among thieves, which stripped him of his raiment, and wounded him, and departed, leaving him half dead."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The road from Jerusalem down to Jericho was steep and lonely. A man traveling by himself got jumped, stripped, beaten and left half dead by the side of the road."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:31",
+   "label": "Luke 10:31",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 31,
+     "text": "And by chance there came down a certain priest that way: and when he saw him, he passed by on the other side."
+    }
+   ],
+   "segments": [
+    {
+     "v": 31,
+     "speaker": "narrator",
+     "text": "And by chance there came down a certain priest that way: and when he saw him, he passed by on the other side."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:32",
+   "label": "Luke 10:32",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "And likewise a Levite, when he was at the place, came and looked on him, and passed by on the other side."
+    }
+   ],
+   "segments": [
+    {
+     "v": 32,
+     "speaker": "narrator",
+     "text": "And likewise a Levite, when he was at the place, came and looked on him, and passed by on the other side."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A priest and a Levite. Church folks. They knew the law about loving your neighbor better than anybody. Both of them saw the man, and both of them crossed over to the other side."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then Jesus said something his listeners did not see coming. Jews and Samaritans did not get along. They kept away from each other. They did not eat together or worship together."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:33",
+   "label": "Luke 10:33",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 33,
+     "text": "But a certain Samaritan, as he journeyed, came where he was: and when he saw him, he had compassion on him,"
+    }
+   ],
+   "segments": [
+    {
+     "v": 33,
+     "speaker": "narrator",
+     "text": "But a certain Samaritan, as he journeyed, came where he was: and when he saw him, he had compassion on him,"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:34",
+   "label": "Luke 10:34",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 34,
+     "text": "And went to him, and bound up his wounds, pouring in oil and wine, and set him on his own beast, and brought him to an inn, and took care of him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 34,
+     "speaker": "narrator",
+     "text": "And went to him, and bound up his wounds, pouring in oil and wine, and set him on his own beast, and brought him to an inn, and took care of him."
+    }
+   ]
+  },
+  {
+   "type": "call_response",
+   "speaker": "narrator",
+   "text": "Say it with me. Somebody say, he went to him. [PAUSE 3s | screen: \"He went to him\"] He went to him. [PAUSE 3s | screen: \"He went to him\"] The others crossed the road. The Samaritan crossed it the other way.",
+   "pauses": [
+    {
+     "seconds": 3,
+     "screen": "He went to him"
+    },
+    {
+     "seconds": 3,
+     "screen": "He went to him"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He went to him. He cleaned and bandaged the wounds with oil and wine. He put him up on his own animal and walked. He brought him to an inn and stayed with him through the night."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The next day, the Samaritan paid the innkeeper two pence and asked him to look after the man. Whatever more it cost, he would pay it when he came back."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "LUK 10:36",
+   "label": "Luke 10:36",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 36,
+     "text": "Which now of these three, thinkest thou, was neighbour unto him that fell among the thieves?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 36,
+     "speaker": "narrator",
+     "text": "Which now of these three, thinkest thou, was neighbour unto him that fell among the thieves?"
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "lawyer",
+   "ref": "LUK 10:37",
+   "label": "Luke 10:37",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 37,
+     "text": "And he said, He that shewed mercy on him. Then said Jesus unto him, Go, and do thou likewise."
+    }
+   ],
+   "segments": [
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "And he said,"
+    },
+    {
+     "v": 37,
+     "speaker": "lawyer",
+     "text": "He that shewed mercy on him."
+    },
+    {
+     "v": 37,
+     "speaker": "narrator",
+     "text": "Then said Jesus unto him, Go, and do thou likewise."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice that lawyer could not bring himself to say the word Samaritan. He only said it was the one who showed mercy. Then Jesus told him to go and do the same."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The lawyer asked who his neighbor was, hoping for a short list. Jesus turned the question around. The question is not who deserves my help. It is whether I will be a neighbor to whoever is lying in front of me."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 560,
+ "est_seconds": 311,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.1",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Luke 10:25-37; 'church folks' for the priest and Levite is the parable's own sting, not added contempt."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Jews and Samaritans both described with respect."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
