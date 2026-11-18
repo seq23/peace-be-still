@@ -1,0 +1,404 @@
+{
+ "id": "core-033-gideon",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Gideon and the Three Hundred",
+ "passage": {
+  "refs": [
+   "JDG 6:11-16",
+   "JDG 7:2-8"
+  ],
+  "label": "Judges 6:11-16; Judges 7:2-8"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "gideon",
+   "name": "Gideon",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "It was a hard season in Israel. Farmers usually threshed wheat out in the open air, where the breeze carried the chaff away. Gideon was down by a winepress instead, trying to keep his grain safe from the Midianites."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 6:11",
+   "label": "Judges 6:11",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 11,
+     "text": "And there came an angel of the LORD, and sat under an oak which was in Ophrah, that pertained unto Joash the Abi-ezrite: and his son Gideon threshed wheat by the winepress, to hide it from the Midianites."
+    }
+   ],
+   "segments": [
+    {
+     "v": 11,
+     "speaker": "narrator",
+     "text": "And there came an angel of the LORD, and sat under an oak which was in Ophrah, that pertained unto Joash the Abi-ezrite: and his son Gideon threshed wheat by the winepress, to hide it from the Midianites."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 6:12",
+   "label": "Judges 6:12",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 12,
+     "text": "And the angel of the LORD appeared unto him, and said unto him, The LORD is with thee, thou mighty man of valour."
+    }
+   ],
+   "segments": [
+    {
+     "v": 12,
+     "speaker": "narrator",
+     "text": "And the angel of the LORD appeared unto him, and said unto him, The LORD is with thee, thou mighty man of valour."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Mighty man of valour. It must have sounded strange to a man hiding his wheat in a winepress."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Gideon did not feel mighty. He remembered the old stories of God bringing Israel out of Egypt, and those days felt far away. So he asked an honest question."
+  },
+  {
+   "type": "scripture",
+   "speaker": "gideon",
+   "ref": "JDG 6:13",
+   "label": "Judges 6:13",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 13,
+     "text": "And Gideon said unto him, Oh my Lord, if the LORD be with us, why then is all this befallen us? and where be all his miracles which our fathers told us of, saying, Did not the LORD bring us up from Egypt? but now the LORD hath forsaken us, and delivered us into the hands of the Midianites."
+    }
+   ],
+   "segments": [
+    {
+     "v": 13,
+     "speaker": "narrator",
+     "text": "And Gideon said unto him,"
+    },
+    {
+     "v": 13,
+     "speaker": "gideon",
+     "text": "Oh my Lord, if the LORD be with us, why then is all this befallen us? and where be all his miracles which our fathers told us of, saying, Did not the LORD bring us up from Egypt? but now the LORD hath forsaken us, and delivered us into the hands of the Midianites."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The LORD did not scold him for asking. He gave him a task far bigger than anything Gideon had planned."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 6:14",
+   "label": "Judges 6:14",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 14,
+     "text": "And the LORD looked upon him, and said, Go in this thy might, and thou shalt save Israel from the hand of the Midianites: have not I sent thee?"
+    }
+   ],
+   "segments": [
+    {
+     "v": 14,
+     "speaker": "narrator",
+     "text": "And the LORD looked upon him, and said, Go in this thy might, and thou shalt save Israel from the hand of the Midianites: have not I sent thee?"
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Gideon knew where he came from, and he said so plainly."
+  },
+  {
+   "type": "scripture",
+   "speaker": "gideon",
+   "ref": "JDG 6:15",
+   "label": "Judges 6:15",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 15,
+     "text": "And he said unto him, Oh my Lord, wherewith shall I save Israel? behold, my family is poor in Manasseh, and I am the least in my father’s house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 15,
+     "speaker": "narrator",
+     "text": "And he said unto him,"
+    },
+    {
+     "v": 15,
+     "speaker": "gideon",
+     "text": "Oh my Lord, wherewith shall I save Israel? behold, my family is poor in Manasseh, and I am the least in my father’s house."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The LORD did not argue with him about how small he was. He gave him the one promise that mattered. Gideon would not go alone."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 6:16",
+   "label": "Judges 6:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "And the LORD said unto him, Surely I will be with thee, and thou shalt smite the Midianites as one man."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "And the LORD said unto him, Surely I will be with thee, and thou shalt smite the Midianites as one man."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Later, the time came to face the Midianites. Thirty-two thousand men gathered with Gideon. It looked like a good start. But the LORD saw a danger in a crowd that size."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:2",
+   "label": "Judges 7:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "And the LORD said unto Gideon, The people that are with thee are too many for me to give the Midianites into their hands, lest Israel vaunt themselves against me, saying, Mine own hand hath saved me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 2,
+     "speaker": "narrator",
+     "text": "And the LORD said unto Gideon, The people that are with thee are too many for me to give the Midianites into their hands, lest Israel vaunt themselves against me, saying, Mine own hand hath saved me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So Gideon gave the men an open door to leave. Anyone who was afraid could pack up and go home early in the morning. More than two out of every three men walked away."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:3",
+   "label": "Judges 7:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Now therefore go to, proclaim in the ears of the people, saying, Whosoever is fearful and afraid, let him return and depart early from mount Gilead. And there returned of the people twenty and two thousand; and there remained ten thousand."
+    }
+   ],
+   "segments": [
+    {
+     "v": 3,
+     "speaker": "narrator",
+     "text": "Now therefore go to, proclaim in the ears of the people, saying, Whosoever is fearful and afraid, let him return and depart early from mount Gilead. And there returned of the people twenty and two thousand; and there remained ten thousand."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Ten thousand stayed. Still the LORD said there were too many, and he told Gideon to bring them down to the water."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:5",
+   "label": "Judges 7:5",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 5,
+     "text": "So he brought down the people unto the water: and the LORD said unto Gideon, Every one that lappeth of the water with his tongue, as a dog lappeth, him shalt thou set by himself; likewise every one that boweth down upon his knees to drink."
+    }
+   ],
+   "segments": [
+    {
+     "v": 5,
+     "speaker": "narrator",
+     "text": "So he brought down the people unto the water: and the LORD said unto Gideon, Every one that lappeth of the water with his tongue, as a dog lappeth, him shalt thou set by himself; likewise every one that boweth down upon his knees to drink."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "There by the water's edge, the men drank in different ways. Most knelt down to drink. A few cupped the water in their hands and brought it up to their mouths."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:6",
+   "label": "Judges 7:6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 6,
+     "text": "And the number of them that lapped, putting their hand to their mouth, were three hundred men: but all the rest of the people bowed down upon their knees to drink water."
+    }
+   ],
+   "segments": [
+    {
+     "v": 6,
+     "speaker": "narrator",
+     "text": "And the number of them that lapped, putting their hand to their mouth, were three hundred men: but all the rest of the people bowed down upon their knees to drink water."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Three hundred. That was all."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:7",
+   "label": "Judges 7:7",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 7,
+     "text": "And the LORD said unto Gideon, By the three hundred men that lapped will I save you, and deliver the Midianites into thine hand: and let all the other people go every man unto his place."
+    }
+   ],
+   "segments": [
+    {
+     "v": 7,
+     "speaker": "narrator",
+     "text": "And the LORD said unto Gideon, By the three hundred men that lapped will I save you, and deliver the Midianites into thine hand: and let all the other people go every man unto his place."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "So Gideon sent nine thousand seven hundred men back to their tents. Down in the valley, the Midianite army lay waiting. Up on the hill stood Gideon, who had once hidden in a winepress, with just three hundred men beside him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "JDG 7:8",
+   "label": "Judges 7:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "So the people took victuals in their hand, and their trumpets: and he sent all the rest of Israel every man unto his tent, and retained those three hundred men: and the host of Midian was beneath him in the valley."
+    }
+   ],
+   "segments": [
+    {
+     "v": 8,
+     "speaker": "narrator",
+     "text": "So the people took victuals in their hand, and their trumpets: and he sent all the rest of Israel every man unto his tent, and retained those three hundred men: and the host of Midian was beneath him in the valley."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Gideon began this story feeling too small. Then God made his army small on purpose, so that no one could say, my own hand saved me. The victory would belong to the LORD. God does not need big numbers to keep his word."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 781,
+ "est_seconds": 426,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.2",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "gemini-free",
+   "model": "gemini-4-hydrogen",
+   "drafted_at": "2026-11-18T19:48:30",
+   "changed_share": 0.7,
+   "note": "First draft by the free model; Claude did the pastor and cultural read and edited it."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Judges 6:11-16 and 7:2-8; the numbers match the text; the point is v2's (no one boasts, the LORD saves)."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain; Gideon's honest question is respected, not mocked."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Light edit: cut repeats, LORD as in the text.",
+  "person_read": false
+ },
+ "status": "passed"
+}

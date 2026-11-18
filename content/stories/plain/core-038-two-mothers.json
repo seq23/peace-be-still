@@ -1,0 +1,420 @@
+{
+ "id": "core-038-two-mothers",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Solomon and the Two Mothers",
+ "passage": {
+  "refs": [
+   "1KI 3:16-28"
+  ],
+  "label": "1 Kings 3:16-28"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "mild",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "woman1",
+   "name": "the one woman",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "mother",
+   "name": "the woman",
+   "age": "adult",
+   "gender": "f"
+  },
+  {
+   "id": "solomon",
+   "name": "the king",
+   "age": "adult",
+   "gender": "m"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Solomon was young when he became king, and he had asked God for one thing: an understanding heart, to judge the people well. Not long after, two women came to stand before him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 3:16",
+   "label": "1 Kings 3:16",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 16,
+     "text": "Then came there two women, that were harlots, unto the king, and stood before him."
+    }
+   ],
+   "segments": [
+    {
+     "v": 16,
+     "speaker": "narrator",
+     "text": "Then came there two women, that were harlots, unto the king, and stood before him."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "They lived together in the same house, and each had a baby. No one else had been there to see what happened. The first woman spoke."
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman1",
+   "ref": "1KI 3:17",
+   "label": "1 Kings 3:17",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 17,
+     "text": "And the one woman said, O my lord, I and this woman dwell in one house; and I was delivered of a child with her in the house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 17,
+     "speaker": "narrator",
+     "text": "And the one woman said,"
+    },
+    {
+     "v": 17,
+     "speaker": "woman1",
+     "text": "O my lord, I and this woman dwell in one house; and I was delivered of a child with her in the house."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman1",
+   "ref": "1KI 3:18",
+   "label": "1 Kings 3:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "And it came to pass the third day after that I was delivered, that this woman was delivered also: and we were together; there was no stranger with us in the house, save we two in the house."
+    }
+   ],
+   "segments": [
+    {
+     "v": 18,
+     "speaker": "woman1",
+     "text": "And it came to pass the third day after that I was delivered, that this woman was delivered also: and we were together; there was no stranger with us in the house, save we two in the house."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman1",
+   "ref": "1KI 3:19",
+   "label": "1 Kings 3:19",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 19,
+     "text": "And this woman’s child died in the night; because she overlaid it."
+    }
+   ],
+   "segments": [
+    {
+     "v": 19,
+     "speaker": "woman1",
+     "text": "And this woman’s child died in the night; because she overlaid it."
+    }
+   ]
+  },
+  {
+   "type": "scripture",
+   "speaker": "woman1",
+   "ref": "1KI 3:20",
+   "label": "1 Kings 3:20",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 20,
+     "text": "And she arose at midnight, and took my son from beside me, while thine handmaid slept, and laid it in her bosom, and laid her dead child in my bosom."
+    }
+   ],
+   "segments": [
+    {
+     "v": 20,
+     "speaker": "woman1",
+     "text": "And she arose at midnight, and took my son from beside me, while thine handmaid slept, and laid it in her bosom, and laid her dead child in my bosom."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "In the morning, she said, she woke to feed her son and found a dead child in her arms. When she looked closely, it was not her boy."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The other woman pushed back at once. No, the living child was hers. Back and forth they went, each telling the same story in reverse. There were no witnesses. It was one word against another."
+  },
+  {
+   "type": "scripture",
+   "speaker": "solomon",
+   "ref": "1KI 3:23",
+   "label": "1 Kings 3:23",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 23,
+     "text": "Then said the king, The one saith, This is my son that liveth, and thy son is the dead: and the other saith, Nay; but thy son is the dead, and my son is the living."
+    }
+   ],
+   "segments": [
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "Then said the king,"
+    },
+    {
+     "v": 23,
+     "speaker": "solomon",
+     "text": "The one saith, This is my son that liveth, and thy son is the dead:"
+    },
+    {
+     "v": 23,
+     "speaker": "narrator",
+     "text": "and the other saith,"
+    },
+    {
+     "v": 23,
+     "speaker": "solomon",
+     "text": "Nay; but thy son is the dead, and my son is the living."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Any judge might have felt stuck. Instead, the king gave a startling command."
+  },
+  {
+   "type": "scripture",
+   "speaker": "solomon",
+   "ref": "1KI 3:24",
+   "label": "1 Kings 3:24",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 24,
+     "text": "And the king said, Bring me a sword. And they brought a sword before the king."
+    }
+   ],
+   "segments": [
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "And the king said,"
+    },
+    {
+     "v": 24,
+     "speaker": "solomon",
+     "text": "Bring me a sword."
+    },
+    {
+     "v": 24,
+     "speaker": "narrator",
+     "text": "And they brought a sword before the king."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The room must have gone very quiet."
+  },
+  {
+   "type": "scripture",
+   "speaker": "solomon",
+   "ref": "1KI 3:25",
+   "label": "1 Kings 3:25",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 25,
+     "text": "And the king said, Divide the living child in two, and give half to the one, and half to the other."
+    }
+   ],
+   "segments": [
+    {
+     "v": 25,
+     "speaker": "narrator",
+     "text": "And the king said,"
+    },
+    {
+     "v": 25,
+     "speaker": "solomon",
+     "text": "Divide the living child in two, and give half to the one, and half to the other."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "In that moment, what was hidden came into the light."
+  },
+  {
+   "type": "scripture",
+   "speaker": "mother",
+   "ref": "1KI 3:26",
+   "label": "1 Kings 3:26",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 26,
+     "text": "Then spake the woman whose the living child was unto the king, for her bowels yearned upon her son, and she said, O my lord, give her the living child, and in no wise slay it. But the other said, Let it be neither mine nor thine, but divide it."
+    }
+   ],
+   "segments": [
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "Then spake the woman whose the living child was unto the king, for her bowels yearned upon her son, and she said,"
+    },
+    {
+     "v": 26,
+     "speaker": "mother",
+     "text": "O my lord, give her the living child, and in no wise slay it."
+    },
+    {
+     "v": 26,
+     "speaker": "narrator",
+     "text": "But the other said, Let it be neither mine nor thine, but divide it."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "She would rather lose her son than see him harmed. The other woman wanted the child cut in two, so that neither of them would have him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "solomon",
+   "ref": "1KI 3:27",
+   "label": "1 Kings 3:27",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 27,
+     "text": "Then the king answered and said, Give her the living child, and in no wise slay it: she is the mother thereof."
+    }
+   ],
+   "segments": [
+    {
+     "v": 27,
+     "speaker": "narrator",
+     "text": "Then the king answered and said,"
+    },
+    {
+     "v": 27,
+     "speaker": "solomon",
+     "text": "Give her the living child, and in no wise slay it: she is the mother thereof."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Solomon never meant to use the sword. He was looking for love, the kind that gives itself away, and it showed him the true mother."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "1KI 3:28",
+   "label": "1 Kings 3:28",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 28,
+     "text": "And all Israel heard of the judgment which the king had judged; and they feared the king: for they saw that the wisdom of God was in him, to do judgment."
+    }
+   ],
+   "segments": [
+    {
+     "v": 28,
+     "speaker": "narrator",
+     "text": "And all Israel heard of the judgment which the king had judged; and they feared the king: for they saw that the wisdom of God was in him, to do judgment."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The people saw more than a clever king. They saw God's own wisdom at work in him. The story ends quietly, with a child safe in his mother's arms."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 532,
+ "est_seconds": 290,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "pass",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 2.9",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "gemini-free",
+   "model": "gemini-4-hydrogen",
+   "drafted_at": "2026-11-18T20:12:26",
+   "changed_share": 0.91,
+   "note": "First draft by the free model; Claude did the pastor and cultural read and edited it."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to 1 Kings 3:16-28 (and 3:9 for the request); the speech of the one woman and the true mother kept separate, as the text does not say they are the same; the women's trade (v16) is left in the stored verse, not dwelt on."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Both women shown as people, not types; the king's wisdom credited to God as v28."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Moderate edit: speech cuts fixed, the real mother's plea (v26) added as scripture.",
+  "person_read": false
+ },
+ "status": "passed"
+}

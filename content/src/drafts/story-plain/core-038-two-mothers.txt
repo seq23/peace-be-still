@@ -1,0 +1,28 @@
+=== core-038-two-mothers | Solomon and the Two Mothers
+passage: 1KI 3:16-28
+shelf: adult
+violence: mild
+sexual: none
+cast: woman1|the first woman|adult|f; solomon|King Solomon|adult|m
+N: Two women came to stand before King Solomon. They lived together in the same house, and they carried a heavy sorrow between them. No one else had been there to see what happened. Only the king could judge between them.
+S: 1KI 3:16
+N: The first woman spoke up. She wanted the king to understand how closely their lives had been tied together.
+S: 1KI 3:17 @woman1 after "the one woman said,"
+N: Just three days after she gave birth, the other woman had a baby boy too. They were alone in that house. No one else was there to witness what came next.
+S: 1KI 3:19 @woman1
+N: Grief can make people do desperate things in the night. While the first mother was fast asleep, the other woman got up. She took the living baby away from his sleeping mother. In his place, she left her own dead baby.
+S: 1KI 3:21 @woman1
+N: As soon as the first woman finished, the second woman pushed back. She insisted that the living boy was hers. She claimed the dead child belonged to the other woman. Back and forth they went, each holding onto the same story in reverse. There were no neighbors and no witnesses to prove which woman was telling the truth.
+N: King Solomon listened quietly to both of them. He repeated their claims out loud so everyone could hear how tangled the case was.
+S: 1KI 3:23 @solomon after "Then said the king,"
+N: On the surface, it looked impossible. Two mothers stood in front of him, both claiming the same small boy. Any ordinary judge might have felt stuck. Instead, the king gave a startling command.
+S: 1KI 3:24 @solomon after "And the king said," until "Bring me a sword."
+N: Someone brought a sword and placed it before the king. The room must have gone very quiet. Then Solomon spoke again.
+S: 1KI 3:25 @solomon after "And the king said,"
+N: In that single moment, everything hidden came into the light. The real mother's heart broke with love for her son. She could not bear to see him harmed, even if it meant losing him forever. She begged the king to spare the boy's life and hand him over to the other woman.
+N: The other woman showed no such mercy. She told the king to cut the boy in two. Then neither of them would have him.
+N: Solomon did not need the sword at all. He had been looking for love, because real love always gives itself away. Love would rather lose a child than watch him hurt. Now the king knew without a doubt who the true mother was.
+S: 1KI 3:27 @solomon after "answered and said,"
+N: The boy was safe, and he was back where he belonged. Word of what happened that day soon spread across the whole nation.
+S: 1KI 3:28
+N: The people of Israel saw something deeper than cleverness in their king. They saw God's own wisdom at work in him. He knew how to look past loud arguments and find the truth in a mother's love. The story ends quietly, with a child safe with his mother and justice done in peace.

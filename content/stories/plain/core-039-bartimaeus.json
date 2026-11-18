@@ -1,0 +1,309 @@
+{
+ "id": "core-039-bartimaeus",
+ "kind": "story",
+ "telling": "plain",
+ "journey": "gods-word",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Blind Bartimæus",
+ "passage": {
+  "refs": [
+   "MAR 10:46-52"
+  ],
+  "label": "Mark 10:46-52"
+ },
+ "shelf": "adult",
+ "content": {
+  "violence": "none",
+  "sexual": "none"
+ },
+ "ai_label": "label.ai_retold_checked",
+ "cast": [
+  {
+   "id": "bartimaeus",
+   "name": "Bartimæus",
+   "age": "adult",
+   "gender": "m"
+  },
+  {
+   "id": "crowd",
+   "name": "the crowd",
+   "age": "adult",
+   "gender": "group"
+  }
+ ],
+ "framing_names": [],
+ "blocks": [
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Jesus was on the road again, moving through Jericho with his disciples and a large crowd. Everywhere he went, people followed him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:46",
+   "label": "Mark 10:46",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 46,
+     "text": "And they came to Jericho: and as he went out of Jericho with his disciples and a great number of people, blind Bartimæus, the son of Timæus, sat by the highway side begging."
+    }
+   ],
+   "segments": [
+    {
+     "v": 46,
+     "speaker": "narrator",
+     "text": "And they came to Jericho: and as he went out of Jericho with his disciples and a great number of people, blind Bartimæus, the son of Timæus, sat by the highway side begging."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Bartimæus could not see the crowd, only hear it. He sat in his usual place beside the road, begging for what little people might spare. Most days, people walked right past him without stopping."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Then he heard who was passing by. He had never seen Jesus's face, but he knew enough to hope. He did not wait for someone to notice him."
+  },
+  {
+   "type": "scripture",
+   "speaker": "bartimaeus",
+   "ref": "MAR 10:47",
+   "label": "Mark 10:47",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 47,
+     "text": "And when he heard that it was Jesus of Nazareth, he began to cry out, and say, Jesus, thou Son of David, have mercy on me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 47,
+     "speaker": "narrator",
+     "text": "And when he heard that it was Jesus of Nazareth, he began to cry out, and say,"
+    },
+    {
+     "v": 47,
+     "speaker": "bartimaeus",
+     "text": "Jesus, thou Son of David, have mercy on me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Perhaps the people thought a beggar had no business calling out to a teacher. Perhaps they just wanted to keep moving. Bartimæus knew this moment would pass in seconds, and he might never get another one."
+  },
+  {
+   "type": "scripture",
+   "speaker": "bartimaeus",
+   "ref": "MAR 10:48",
+   "label": "Mark 10:48",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 48,
+     "text": "And many charged him that he should hold his peace: but he cried the more a great deal, Thou Son of David, have mercy on me."
+    }
+   ],
+   "segments": [
+    {
+     "v": 48,
+     "speaker": "narrator",
+     "text": "And many charged him that he should hold his peace: but he cried the more a great deal,"
+    },
+    {
+     "v": 48,
+     "speaker": "bartimaeus",
+     "text": "Thou Son of David, have mercy on me."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "A crowd can be loud enough to drown out one voice. Yet Jesus heard him. In the middle of all those footsteps and talking people, Jesus stopped walking."
+  },
+  {
+   "type": "scripture",
+   "speaker": "crowd",
+   "ref": "MAR 10:49",
+   "label": "Mark 10:49",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 49,
+     "text": "And Jesus stood still, and commanded him to be called. And they call the blind man, saying unto him, Be of good comfort, rise; he calleth thee."
+    }
+   ],
+   "segments": [
+    {
+     "v": 49,
+     "speaker": "narrator",
+     "text": "And Jesus stood still, and commanded him to be called. And they call the blind man, saying unto him,"
+    },
+    {
+     "v": 49,
+     "speaker": "crowd",
+     "text": "Be of good comfort, rise; he calleth thee."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "The same people who had told him to hush were now telling him to get up."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Bartimæus did not hesitate."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:50",
+   "label": "Mark 10:50",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 50,
+     "text": "And he, casting away his garment, rose, and came to Jesus."
+    }
+   ],
+   "segments": [
+    {
+     "v": 50,
+     "speaker": "narrator",
+     "text": "And he, casting away his garment, rose, and came to Jesus."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He threw off his cloak so nothing would slow him down, and found his way by the sound of the voices."
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Everyone there could guess what a blind beggar wanted. Even so, Jesus did not assume. He asked, and gave the man room to speak for himself."
+  },
+  {
+   "type": "scripture",
+   "speaker": "bartimaeus",
+   "ref": "MAR 10:51",
+   "label": "Mark 10:51",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 51,
+     "text": "And Jesus answered and said unto him, What wilt thou that I should do unto thee? The blind man said unto him, Lord, that I might receive my sight."
+    }
+   ],
+   "segments": [
+    {
+     "v": 51,
+     "speaker": "narrator",
+     "text": "And Jesus answered and said unto him, What wilt thou that I should do unto thee? The blind man said unto him,"
+    },
+    {
+     "v": 51,
+     "speaker": "bartimaeus",
+     "text": "Lord, that I might receive my sight."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "He did not ask for silver. He asked for the one thing he could not give himself."
+  },
+  {
+   "type": "scripture",
+   "speaker": "narrator",
+   "ref": "MAR 10:52",
+   "label": "Mark 10:52",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 52,
+     "text": "And Jesus said unto him, Go thy way; thy faith hath made thee whole. And immediately he received his sight, and followed Jesus in the way."
+    }
+   ],
+   "segments": [
+    {
+     "v": 52,
+     "speaker": "narrator",
+     "text": "And Jesus said unto him, Go thy way; thy faith hath made thee whole. And immediately he received his sight, and followed Jesus in the way."
+    }
+   ]
+  },
+  {
+   "type": "retelling",
+   "speaker": "narrator",
+   "text": "Notice what he did next. Jesus told him to go his way. And Bartimæus chose to walk down the road behind Jesus. The man who had sat blind in the dust beside the road was now walking on it, seeing clearly, following the one who had stopped for him. That is the quiet truth the story leaves with us. No crowd is too loud, and no person at the edge of the road is too small, for Jesus to stop and listen."
+  }
+ ],
+ "illustration": {
+  "status": "none",
+  "file": null,
+  "qa": null
+ },
+ "words": 492,
+ "est_seconds": 268,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "S01_word_for_word": "pass",
+   "S02_scripture_apart": "pass",
+   "S05_redlines": "pass",
+   "S04_split_topics": "pass",
+   "S06_mindset": "pass",
+   "S07_promises": "pass",
+   "S08_voice_code": "pass",
+   "S14_never_words": "pass",
+   "S01_quoted_runs": "pass",
+   "S01_typed_scripture": "pass",
+   "S02_no_refs_in_retelling": "pass",
+   "S09_names": "pass",
+   "speakers": "pass",
+   "voice_segments": "pass",
+   "S10_shelf": "pass",
+   "S11_length": "note: 492 words outside 500-900 words",
+   "S11_sentence_length": "pass",
+   "S11_reading_level": "note: grade 3.8",
+   "no_invented_memories": "pass",
+   "call_response": "pass",
+   "S13_ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "gemini-free",
+   "model": "gemini-4-hydrogen",
+   "drafted_at": "2026-11-18T20:15:14",
+   "changed_share": 0.65,
+   "note": "First draft by the free model; Claude did the pastor and cultural read and edited it."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Faithful to Mark 10:46-52; Jesus's question and answer stay with the narrator; the name as spelled in the stored KJV."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "A blind beggar shown with agency and dignity; the crowd's change is told without scorn."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": "Moderate edit: verse split fixed, repeats cut.",
+  "person_read": false
+ },
+ "status": "passed"
+}

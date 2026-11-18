@@ -14,4 +14,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - run: node scripts/content/library.mjs --self-test && node scripts/content/library.mjs check
+      - run: node scripts/content/library.mjs --self-test && node scripts/content/draft.mjs --self-test && node scripts/content/library.mjs check

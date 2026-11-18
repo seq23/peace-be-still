@@ -14,4 +14,7 @@ PY="${PBS_WHISPER_PY:-$HOME/Work/codex-briefs/peace-be-still/voice-samples/.venv
 # stops are notes (exit 0).
 HH="$PWD/audio/hush_harbor.py"
 (cd "${BOSS_OS_REPO:-$HOME/GitHub/boss-os}" && npm run -s vault:run -- "$PY" "$HH" --commit --max-minutes 12); rc2=$?
+# Push any manifest commit this run made (a push that failed inside fill.py is retried here), so the
+# runner is never left ahead of origin when a PR also touches the manifest.
+git push -q 2>/dev/null || echo "note: manifest push failed; the next run pushes it"
 exit $(( rc > rc2 ? rc : rc2 ))

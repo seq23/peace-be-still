@@ -22,7 +22,7 @@ checks, shelved, status, voice).
   once a day into the morning email's Notices. Stops: `DRIVE_UNREACHABLE`, `SHELF_HASH_MISMATCH`,
   `SHELF_NOT_VERIFIED`, `MAC_BUDGET` (5 GB), `SCRIPTURE_MISSING`, `NOTHING_SHELVED`.
 - **Hush Harbor stories** (`hush_harbor.py`, same launchd job, after the fill step in `run.sh`):
-  the four locked Gemini voices in `hush-harbor/voices.json` (grandmother Gacrux narrates and reads
+  the four locked Gemini voices in `hush-harbor/voices.json` (key `PBS_GEMINI_API_KEY`, the app's own free-tier project) (grandmother Gacrux narrates and reads
   Jesus's and God's words; Charon elder men; Kore women; Umbriel other men and groups). Two
   multi-speaker calls per story, split at the call and response; the 3 s pauses are silence put in by
   code. Checks: word accuracy and per-voice pitch band per call (a miss renders again), then the fill's
