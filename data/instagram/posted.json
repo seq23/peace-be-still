@@ -1,4 +1,66 @@
 {
   "_comment": "One entry per picture post the loop has queued (scripts/instagram/ig_loop.mjs), one run per channel; committed by the daily run.",
-  "posts": {}
+  "posts": {
+    "p1": {
+      "runs": [
+        {
+          "channel": "instagram",
+          "buffer_id": "6afe620f59eff0b616d4e3fb",
+          "due_at": "2026-11-20T02:00:00.000Z",
+          "queued_at": "2026-11-19T02:42:22.175Z",
+          "recycled": false,
+          "format": "carousel"
+        },
+        {
+          "channel": "facebook",
+          "buffer_id": "6afe621059eff0b616d4e435",
+          "due_at": "2026-11-20T02:00:00.000Z",
+          "queued_at": "2026-11-19T02:42:22.175Z",
+          "recycled": false,
+          "format": "carousel"
+        }
+      ]
+    },
+    "p3": {
+      "runs": [
+        {
+          "channel": "instagram",
+          "buffer_id": "6afe621059eff0b616d4e4c6",
+          "due_at": "2026-11-23T02:00:00.000Z",
+          "queued_at": "2026-11-19T02:42:22.175Z",
+          "recycled": false,
+          "format": "carousel"
+        },
+        {
+          "channel": "facebook",
+          "buffer_id": "6afe6211b16549e9b81b4664",
+          "due_at": "2026-11-23T02:00:00.000Z",
+          "queued_at": "2026-11-19T02:42:22.175Z",
+          "recycled": false,
+          "format": "carousel"
+        }
+      ]
+    },
+    "p2": {
+      "runs": [
+        {
+          "channel": "instagram",
+          "buffer_id": "6afe621159eff0b616d4e50d",
+          "due_at": "2026-11-25T02:00:00.000Z",
+          "queued_at": "2026-11-19T02:42:22.175Z",
+          "recycled": false,
+          "format": "single"
+        },
+        {
+          "channel": "facebook",
+          "buffer_id": "6afe6211749099bdc704a2b8",
+          "due_at": "2026-11-25T02:00:00.000Z",
+          "queued_at": "2026-11-19T02:42:22.175Z",
+          "recycled": false,
+          "format": "single"
+        }
+      ]
+    }
+  },
+  "failed_seen": []
 }
