@@ -3,58 +3,52 @@
  "site": "https://peacebestillapp.com",
  "urls": {
   "https://peacebestillapp.com/es/": {
-   "verdict": "NEUTRAL",
-   "state": "URL is unknown to Google",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T13:02:57Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/questions/": {
-   "verdict": "NEUTRAL",
-   "state": "Discovered - currently not indexed",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T21:29:44Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/about": {
-   "verdict": "NEUTRAL",
-   "state": "URL is unknown to Google",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T23:52:49Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/es/preguntas/": {
-   "verdict": "NEUTRAL",
-   "state": "URL is unknown to Google",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T20:34:29Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/": {
-   "verdict": "NEUTRAL",
-   "state": "URL is unknown to Google",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:15:20Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/questions/how-to-cancel-bible-chat-subscription/": {
-   "verdict": "NEUTRAL",
-   "state": "Discovered - currently not indexed",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
-  },
-  "https://peacebestillapp.com/questions/black-bible-app/": {
-   "verdict": "NEUTRAL",
-   "state": "URL is unknown to Google",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:39:43Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/es/preguntas/salmos-para-dormir/": {
-   "verdict": "NEUTRAL",
-   "state": "Discovered - currently not indexed",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:37:56Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/questions/how-to-cancel-haven-subscription/": {
-   "verdict": "NEUTRAL",
-   "state": "URL is unknown to Google",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:24:44Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/questions/law-of-assumption-sleep-meditation/": {
    "verdict": "NEUTRAL",
@@ -63,24 +57,308 @@
    "inspected_at": "2026-11-18T17:07:47.174Z"
   },
   "https://peacebestillapp.com/questions/psalms-for-sleep/": {
-   "verdict": "NEUTRAL",
-   "state": "URL is unknown to Google",
-   "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:20:01Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   },
   "https://peacebestillapp.com/questions/whispered-bible-for-sleep/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:22:28Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/bible-chat-alternative/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:29:21Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/ai-bible-verse/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:35:52Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/black-bible-app/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T20:06:56Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/black-bible-chat/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T21:57:06Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/bible-chat-cancel-subscription/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:07:22Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/bible-app-for-women/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:17:36Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/bible-app-for-teens/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:42:59Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/ai-bible/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:28:46Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/chat-biblico-gratis/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:12:01Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/oracion-de-la-manana-de-hoy/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T23:27:40Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/oracion-de-la-manana/": {
    "verdict": "NEUTRAL",
-   "state": "URL is unknown to Google",
+   "state": "Crawled - currently not indexed",
+   "last_crawl": "2026-11-18T23:18:37Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/devocional-diario/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T23:05:04Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/oracion-de-la-noche/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:42:33Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/christian-ai/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:04:54Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/oracion-para-dormir/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:47:02Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/oracion-por-la-noche/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:52:01Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/salmo-4-8/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:43:24Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/versiculos-de-agradecimiento/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:50:22Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/versiculos-de-fe/": {
+   "verdict": "NEUTRAL",
+   "state": "Discovered - currently not indexed",
    "last_crawl": null,
-   "inspected_at": "2026-11-18T17:07:47.174Z"
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/versiculos-de-fortaleza/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T23:35:22Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/es/preguntas/versiculos-para-jovenes/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T23:09:36Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/bedtime-bible-stories/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:11:28Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/african-american-bible/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:41:19Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/free-bible-chat/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:47:22Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/bedtime-prayer/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:13:48Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/bible-asmr/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:32:31Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/bible-verses-for-sleep-and-anxiety/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:32:41Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/bible-verses-for-anxiety/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T23:23:08Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/bible-stories-for-adults/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:22:05Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/bible-verses-for-sleep/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:46:31Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/black-bible-verses/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:57:25Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/black-people-in-the-bible/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T03:39:03Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/black-history-in-the-bible/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T06:27:49Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/daily-bible-declarations/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:25:31Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/black-christian/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:50:07Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/glorify-app-reviews/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:39:26Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/hallow-app-review/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:19:34Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/haven-bible-chat/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:21:54Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/is-creed-bible-app-free/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:15:00Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/is-hallow-app-free/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-18T22:33:25Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/is-duomo-bible-app-free/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:18:26Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:29:06Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/prayer-for-sleep/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T00:15:39Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/was-bathsheba-black-in-the-bible/": {
+   "verdict": "NEUTRAL",
+   "state": "Discovered - currently not indexed",
+   "last_crawl": null,
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/was-jesus-black-in-the-bible/": {
+   "verdict": "PASS",
+   "state": "Submitted and indexed",
+   "last_crawl": "2026-11-19T01:36:28Z",
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/was-samson-black-in-the-bible/": {
+   "verdict": "NEUTRAL",
+   "state": "Discovered - currently not indexed",
+   "last_crawl": null,
+   "inspected_at": "2026-11-19T19:10:05.704Z"
+  },
+  "https://peacebestillapp.com/questions/who-are-black-people-in-the-bible/": {
+   "verdict": "NEUTRAL",
+   "state": "Discovered - currently not indexed",
+   "last_crawl": null,
+   "inspected_at": "2026-11-19T19:10:05.704Z"
   }
  },
  "property": "sc-domain:peacebestillapp.com",
- "generated_at": "2026-11-18T17:07:47.174Z",
- "sitemap_urls": 12,
- "inspected": 12,
+ "generated_at": "2026-11-19T19:10:05.704Z",
+ "sitemap_urls": 64,
+ "inspected": 58,
  "states": {
-  "URL is unknown to Google": 9,
-  "Discovered - currently not indexed": 3
+  "Submitted and indexed": 52,
+  "URL is unknown to Google": 1,
+  "Crawled - currently not indexed": 1,
+  "Discovered - currently not indexed": 4
  }
 }
