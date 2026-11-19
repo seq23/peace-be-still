@@ -2,6 +2,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "store:set": "node site/scripts/store-set.mjs"
+    "store:set": "node site/scripts/store-set.mjs",
+    "threads:queue": "node scripts/threads/threads_loop.mjs",
+    "validate:threads-loop": "node scripts/threads/validate.mjs"
   }
 }
