@@ -1,4 +1,45 @@
 {
   "_comment": "One entry per Threads post the loop has queued (scripts/threads/threads_loop.mjs); committed by the daily run.",
-  "posts": {}
+  "posts": {
+    "pbs01": {
+      "runs": [
+        {
+          "buffer_id": "6afe5ffd749099bdc703f724",
+          "due_at": "2026-11-19T03:30:00.000Z",
+          "queued_at": "2026-11-19T02:33:32.205Z",
+          "recycled": false
+        }
+      ]
+    },
+    "pbs02": {
+      "runs": [
+        {
+          "buffer_id": "6afe5ffdf6b6aa0cd4965b6f",
+          "due_at": "2026-11-20T03:30:00.000Z",
+          "queued_at": "2026-11-19T02:33:32.205Z",
+          "recycled": false
+        }
+      ]
+    },
+    "pbs03": {
+      "runs": [
+        {
+          "buffer_id": "6afe5ffd59eff0b616d43cbf",
+          "due_at": "2026-11-21T03:30:00.000Z",
+          "queued_at": "2026-11-19T02:33:32.205Z",
+          "recycled": false
+        }
+      ]
+    },
+    "pbs04": {
+      "runs": [
+        {
+          "buffer_id": "6afe5ffdb16549e9b81aa412",
+          "due_at": "2026-11-22T03:30:00.000Z",
+          "queued_at": "2026-11-19T02:33:32.205Z",
+          "recycled": false
+        }
+      ]
+    }
+  }
 }
