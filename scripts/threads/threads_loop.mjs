@@ -1,12 +1,13 @@
 // The daily Peace Be Still Threads job (.github/workflows/threads-posts.yml): one post a day at
-// 21:30 America/Chicago on Threads @peacebestillapp, through ApprovalPrep's free Buffer
-// (BUFFER_APPROVALPREP_ACCESS_TOKEN). That organisation also holds Threads @approvalprep, so the
-// channel is found by service "threads" AND name THREADS_CHANNEL_NAME, never by service alone.
+// 21:30 America/Chicago on Threads @peacebestillapp, through Peace Be Still's own free Buffer
+// (BUFFER_PEACEBESTILL_ACCESS_TOKEN, scripts/threads/buffer.mjs; until 19 Nov 2026 the ApprovalPrep
+// one). The channel is found by service "threads" AND name THREADS_CHANNEL_NAME, never by service alone.
 // Her yes 18 Nov 2026 to the posts, version 5: "yes". Same shape as approvalprep's loop
 // (approvalprep scripts/threads/threads_loop.mjs).
 //
-// Every run keeps the next 7 evening slots filled (customScheduled, dueAt 21:30 CT), within the
-// organisation's scheduled-post limit (10 on the free plan, SHARED with @approvalprep's queue).
+// Every run keeps the next 4 evening slots filled (customScheduled, dueAt 21:30 CT; days_ahead in
+// the bank), within the organisation's scheduled-post limit: 10 on the free plan, split 4 Threads +
+// 6 Instagram/Facebook (ORG_SPLIT in buffer.mjs) with the picture job.
 // Posts come from data/threads/posts.json in order; each run is recorded in data/threads/posted.json.
 //
 // Uninterruptible past the bank:
@@ -14,7 +15,7 @@
 //     post that has not run in 60+ days (if none is, the oldest anyway, NAMED NOTE
 //     THREADS_RECYCLE_UNDER_60); never two Question posts on consecutive days;
 //   - NAMED NOTE THREADS_BANK_LOW when fewer than 14 unposted remain;
-//   - NAMED NOTE THREADS_ORG_LIMIT when the shared organisation limit leaves fewer than 7 ahead;
+//   - NAMED NOTE THREADS_ORG_LIMIT when the organisation limit leaves fewer than days_ahead queued;
 //   - at queue time every post is re-checked (contentProblems): each quoted verse word for word
 //     against content/bible (KJV, or RV1909 for Spanish), the repo's banned-word lists
 //     (scripts/content/rules.mjs: never-words, Mindset/New Age words, outcome promises, theology
@@ -32,13 +33,13 @@
 //
 // Rule 0: every run prints `OUTPUT: queued N, scheduled ahead M, bank unposted K, recycled R`.
 // Zero queued with fewer than 7 ahead and no named note is NAMED STOP THREADS_NOTHING_QUEUED.
-// Other named stops (red): SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN,
+// Other named stops (red): SECRET_MISSING_BUFFER_PEACEBESTILL_ACCESS_TOKEN, BUFFER_ORG_AMBIGUOUS,
 // AMBIGUOUS_THREADS_CHANNEL, THREADS_QUEUE_PAUSED, THREADS_CONTENT_BLOCKED, and the Buffer
 // client's BUFFER_TOKEN_REFUSED / BUFFER_READ_FAILED / BUFFER_POST_REFUSED.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { NamedStop, bufferClient, createPost, pendingPosts } from './buffer.mjs';
+import { NamedStop, ORG_SPLIT, TOKEN_ENV, bufferClient, createPost, findOrganization, pendingPosts } from './buffer.mjs';
 import { BOOK, bible } from '../content/lib.mjs';
 import { NEVER, MINDSET, PROMISE, REDLINE, DIALECT } from '../content/rules.mjs';
 
@@ -46,7 +47,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 export const BANK_FILE = path.join(ROOT, 'data', 'threads', 'posts.json');
 export const LEDGER_FILE = path.join(ROOT, 'data', 'threads', 'posted.json');
 export const STORE_FILE = path.join(ROOT, 'site', 'config', 'store.json');
-export const TOKEN = 'BUFFER_APPROVALPREP_ACCESS_TOKEN';
+export const TOKEN = TOKEN_ENV;
+/** Said on every OUTPUT line: how the organisation's 10 scheduled posts are shared. */
+export const SPLIT = `Buffer split: Threads ${ORG_SPLIT.threads} + Instagram/Facebook ${ORG_SPLIT.pictures} of 10`;
 /** The Buffer channel name of Threads @peacebestillapp. Never match on service alone. */
 export const THREADS_CHANNEL_NAME = 'peacebestillapp';
 export const LINK = 'peacebestillapp.com/?utm_source=threads';
@@ -83,6 +86,8 @@ export function verseProblem(verse, lang) {
   return norm(stored) === norm(verse.quote) ? null : `${verse.book} ${verse.ch}:${verse.v} is not the ${tr} word for word`;
 }
 
+const threadsTags = (tags) => (tags.length !== 1 || tags[0] !== TAG ? `tags must be exactly ${TAG} (got ${tags.join(' ') || 'none'})` : null);
+
 export const storeLive = (store) => Boolean(store?.app_store_url);
 
 /** The text that goes out: "coming soon" until the App Store link is set, then "Free on iPhone". */
@@ -92,7 +97,8 @@ export function storeText(text, store) {
 }
 
 /** Every reason this post must not go out as `text`. Empty = fine. */
-export function contentProblems(post, text, store) {
+/** opts.tagRule(tags) -> a problem or null, opts.maxChars: the Instagram job's own (scripts/instagram/ig_loop.mjs). */
+export function contentProblems(post, text, store, { tagRule = threadsTags, maxChars = 500 } = {}) {
   const out = [];
   const verses = quotedVerses(text);
   for (const v of verses) { const p = verseProblem(v, post.lang); if (p) out.push(p); }
@@ -103,8 +109,9 @@ export function contentProblems(post, text, store) {
   if (faith) out.push(`faith-only block: "${faith[0]}"`);
   for (const [name, re] of Object.entries(LIST_CHECKS)) { const m = ours.match(re); if (m) out.push(`${name}: "${m[0]}"`); }
   const tags = text.match(/#[\p{L}\p{N}_]+/gu) ?? [];
-  if (tags.length !== 1 || tags[0] !== TAG) out.push(`tags must be exactly ${TAG} (got ${tags.join(' ') || 'none'})`);
-  if (text.length >= 500) out.push(`${text.length} characters`);
+  const tagProblem = tagRule(tags);
+  if (tagProblem) out.push(tagProblem);
+  if (text.length >= maxChars) out.push(`${text.length} characters`);
   if (storeLive(store)) { if (/coming (?:to iphone )?soon/i.test(text)) out.push('says coming soon though the store link is set'); }
   else if (/\b(?:in|on) the (?:app )?store\b|\bfree on iphone\b|\bdownload (?:it )?(?:now|today)\b|\bavailable now\b|\bget it (?:now|today)\b/i.test(text)) out.push('store wording before the store link is set (say coming soon)');
   return out;
@@ -153,7 +160,7 @@ export function planRun({ bank, ledger, pending, now, orgRoom, store }) {
   const open = slotsAhead(now, bank).filter((s) => !taken.has(s.date));
   const slots = open.slice(0, Math.max(0, orgRoom));
   const notes = [];
-  if (slots.length < open.length) notes.push(`THREADS_ORG_LIMIT ${open.length - slots.length} evening(s) left unqueued: the ApprovalPrep Buffer organisation is at its scheduled-post limit (shared with @approvalprep); the next run fills them`);
+  if (slots.length < open.length) notes.push(`THREADS_ORG_LIMIT ${open.length - slots.length} evening(s) left unqueued: the Peace Be Still Buffer is at its 10 scheduled-post limit (Threads keeps up to 4, Instagram/Facebook up to 6); the next run fills them`);
   const typeOn = new Map();
   const byId = new Map(bank.posts.map((p) => [p.id, p]));
   for (const [id, v] of Object.entries(ledger.posts ?? {})) for (const r of v.runs ?? []) if (byId.has(id)) typeOn.set(ctDate(r.due_at), byId.get(id).type);
@@ -214,14 +221,13 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
   const token = env[TOKEN];
   if (!token) throw new NamedStop(`SECRET_MISSING_${TOKEN}`, `${TOKEN} is not set (repository secret; from the Boss OS vault)`);
   const call = bufferClient(token, fetchImpl, TOKEN);
-  const org = (await call('{ account { organizations { id limits { scheduledPosts } } } }'))?.account?.organizations?.[0];
-  if (!org) throw new NamedStop('BUFFER_READ_FAILED', 'the token sees no Buffer organisation');
+  const org = await findOrganization(call);
   const { channels } = await call('query($o:OrganizationId!){ channels(input:{organizationId:$o}){ id service name isQueuePaused } }', { o: org.id });
   const ch = pickThreadsChannel(channels);
   if (!ch) {
     const left = unposted(bank, ledger).length;
-    const note = `THREADS_CHANNEL_NOT_CONNECTED no Threads channel named ${THREADS_CHANNEL_NAME} in the ApprovalPrep Buffer yet (waiting on Meta's security review, then she connects it); the next daily run retries`;
-    const output = `OUTPUT: queued 0, scheduled ahead 0, bank unposted ${left}, recycled 0`;
+    const note = `THREADS_CHANNEL_NOT_CONNECTED no Threads channel named ${THREADS_CHANNEL_NAME} in the Peace Be Still Buffer (disconnected or renamed); the next daily run retries`;
+    const output = `OUTPUT: queued 0, scheduled ahead 0, bank unposted ${left}, recycled 0 (${SPLIT})`;
     log(`NAMED NOTE ${note}`);
     log(output);
     summary([output, `NAMED NOTE ${note}`]);
@@ -258,7 +264,7 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
   const left = unposted(bank, ledger).length;
   if (left < (bank.bank_low_below ?? 14)) notes.push(`THREADS_BANK_LOW ${left} unposted left in data/threads/posts.json; recycling keeps posting, add new approved posts`);
   for (const n of notes) log(`NAMED NOTE ${n}`);
-  const output = `OUTPUT: queued ${queued}, scheduled ahead ${ahead}, bank unposted ${left}, recycled ${recycled}`;
+  const output = `OUTPUT: queued ${queued}, scheduled ahead ${ahead}, bank unposted ${left}, recycled ${recycled} (${SPLIT})`;
   log(output);
   summary([output, ...notes.map((n) => `NAMED NOTE ${n}`)]);
   if (plan.blocked.length) throw new NamedStop('THREADS_CONTENT_BLOCKED', `${plan.blocked.join('; ')}: fix or delete it in data/threads/posts.json (the others were queued)`);

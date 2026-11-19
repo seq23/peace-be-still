@@ -1,0 +1,1253 @@
+{
+  "_comment": "Peace Be Still picture posts for Instagram @peacebestillapp and the Facebook Page \"Peace Be Still\" (same picture + caption to both), read by scripts/instagram/ig_loop.mjs (daily job .github/workflows/instagram-posts.yml). p1-p9 approved by her 18 Nov 2026 word for word (\"yes to the IG samples\", https://claude.ai/artifact/FQW2wm78JkZ2n5XeWJChct), in the approved order; p10-p30 written to the same rules and hostile-reviewed. Verses on the pictures are read from content/bible by scripts/instagram/frames.mjs, never typed; captions are re-checked word for word at queue time. Pictures: npm run ig:render (site/public/social/ig, lock data/instagram/frames.lock.json). Add new posts at the end; never reuse an id.",
+  "slot_time_ct": "20:00",
+  "weekdays_ct": [
+    "Sun",
+    "Tue",
+    "Thu"
+  ],
+  "posts_ahead": 3,
+  "recycle_after_days": 60,
+  "bank_low_below": 9,
+  "posts": [
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p1",
+      "approved": "2026-11-18",
+      "kind": "Chat",
+      "title": "Meet Hush Harbor",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Meet",
+          "n": "1 / 3",
+          "wave": true,
+          "blocks": [
+            {
+              "title": "Hush Harbor"
+            },
+            {
+              "sub": "Black Bible Chat & Stories"
+            },
+            {
+              "kicker": "Tell it what’s on your heart. It answers like the church mothers who raised us."
+            },
+            {
+              "ai": "Swipe to see a chat ›",
+              "accent": true
+            }
+          ]
+        },
+        {
+          "theme": "linen",
+          "label": "A Hush Harbor chat",
+          "n": "2 / 3",
+          "chat": true,
+          "foot": [
+            "Hush Harbor",
+            "is AI"
+          ],
+          "blocks": [
+            {
+              "who": "You",
+              "right": true
+            },
+            {
+              "me": "Pastor preached 45 minutes on Romans and I still don’t get it."
+            },
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "That’s alright, baby. One verse, slow.",
+                {
+                  "verse": "ROM 8:28"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "3 / 3",
+          "foot": [
+            "Coming soon to iPhone",
+            "Search “Peace Be Still”"
+          ],
+          "blocks": [
+            {
+              "list": [
+                "The King James, word for word",
+                "A Bible story every day, out loud",
+                "Whispered Psalms when you can’t sleep",
+                "“Want to pray on it together?”"
+              ]
+            },
+            {
+              "ai": "Hush Harbor is AI, and it always says so."
+            }
+          ]
+        }
+      ],
+      "caption": "Meet Hush Harbor · Black Bible Chat & Stories.\n\nTell it what’s on your heart. It answers like the church mothers who raised us: the King James, word for word, then “Want to pray on it together?”\n\nSwipe to see how a chat goes. Somebody tells it Pastor preached 45 minutes on Romans and they still don’t get it. Hush Harbor says “That’s alright, baby. One verse, slow,” and reads:\n\n“And we know that all things work together for good to them that love God, to them who are the called according to his purpose.”\nRomans 8:28\n\nWhat would you tell it first?\n\nComing soon to iPhone. Search “Peace Be Still”, link in bio.\nHush Harbor is AI, and it always says so.\n\n#blackbiblechat #biblestorieswithblackfaces #kjv #christianwomen"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p3",
+      "approved": "2026-11-18",
+      "kind": "Chat",
+      "title": "Rent is due Friday",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "1 / 2",
+          "chat": true,
+          "foot": [
+            "Hush Harbor",
+            "is AI"
+          ],
+          "blocks": [
+            {
+              "who": "You",
+              "right": true
+            },
+            {
+              "me": "Rent is due Friday and I’m $200 short."
+            },
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "I hear you, baby. Set that worry down for a minute.",
+                {
+                  "verse": "PHI 4:19"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "2 / 2",
+          "chat": true,
+          "blocks": [
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "Want to pray on it together? Then we’ll make a plan for Friday."
+              ]
+            },
+            {
+              "btns": [
+                "Pray with me ›",
+                "Not now"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "Rent is due Friday and you’re $200 short. Here’s what Hush Harbor says.\n\n“But my God shall supply all your need according to his riches in glory by Christ Jesus.”\nPhilippians 4:19\n\nThen it asks if you want to pray on it together, and helps you make a plan for Friday.\n\nIf you’re carrying this one too, type “Amen” so the next person knows they’re not alone.\n\nHush Harbor · Black Bible Chat & Stories is AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #prayer"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p2",
+      "approved": "2026-11-18",
+      "kind": "Verse",
+      "title": "Where the name comes from",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Where our name comes from",
+          "wave": true,
+          "blocks": [
+            {
+              "verse": "MAR 4:39",
+              "size": 64,
+              "em": "Peace, be still."
+            }
+          ]
+        }
+      ],
+      "caption": "Where our name comes from.\n\n“And he arose, and rebuked the wind, and said unto the sea, Peace, be still. And the wind ceased, and there was a great calm.”\nMark 4:39\n\nThree words, and the sea obeyed. Whatever is loud in your house tonight, He still speaks to it.\n\nSave this one for the next storm.\n\nPeace Be Still, coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #scripture"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p5",
+      "approved": "2026-11-18",
+      "kind": "Story",
+      "title": "Daniel in the lions’ den",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Stories",
+          "n": "1 / 3",
+          "wave": true,
+          "blocks": [
+            {
+              "kicker": "Pull up a chair, baby."
+            },
+            {
+              "title": "Daniel and the night in the lions’ den",
+              "size": 92
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Stories",
+          "n": "2 / 3",
+          "blocks": [
+            {
+              "verse": "DAN 6:22",
+              "size": 50,
+              "em": "My God hath sent his angel, and hath shut the lions’ mouths"
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "3 / 3",
+          "foot": [
+            "Coming soon to iPhone",
+            "Search “Peace Be Still”"
+          ],
+          "blocks": [
+            {
+              "say": "A new Bible story every day, told the way Grandmother told it."
+            },
+            {
+              "body": "Bible stories with Black faces. Read to you out loud.",
+              "muted": true
+            },
+            {
+              "ai": "The storytelling voices are AI."
+            }
+          ]
+        }
+      ],
+      "caption": "Pull up a chair, baby. Let me tell you about a young man named Daniel, and a night in a den full of lions that never laid a paw on him…\n\n“My God hath sent his angel, and hath shut the lions’ mouths, that they have not hurt me: forasmuch as before him innocency was found in me; and also before thee, O king, have I done no hurt.”\nDaniel 6:22\n\nHush Harbor tells a new Bible story every day, out loud. Which one should it tell next?\n\nHush Harbor · Black Bible Chat & Stories. The voices are AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #biblestories #kjv"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p6",
+      "approved": "2026-11-18",
+      "kind": "Verse",
+      "title": "Say it back",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Morning Word · Say it back",
+          "blocks": [
+            {
+              "verse": "PSA 30:5",
+              "size": 56,
+              "em": "joy cometh in the morning"
+            },
+            {
+              "say": "Now you: ",
+              "accent": "Joy is coming in the morning.",
+              "size": 54
+            }
+          ]
+        }
+      ],
+      "caption": "Say it with me before you walk in that office.\n\n“For his anger endureth but a moment; in his favour is life: weeping may endure for a night, but joy cometh in the morning.”\nPsalm 30:5\n\nNow you: Joy is coming in the morning. Again. There you go.\n\nType it in the comments so somebody else walks in with it too.\n\nMorning Word · Daily Declarations, inside Hush Harbor · Black Bible Chat & Stories. Hush Harbor is AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #morningprayer"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p4",
+      "approved": "2026-11-18",
+      "kind": "Verse",
+      "title": "Psalm Nights",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Psalm Nights · Whispered Scripture for Sleep",
+          "wave": true,
+          "blocks": [
+            {
+              "verse": "PSA 4:8",
+              "size": 66,
+              "em": "I will both lay me down in peace, and sleep"
+            }
+          ]
+        }
+      ],
+      "caption": "Psalm Nights · Whispered Scripture for Sleep.\n\n“I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.”\nPsalm 4:8\n\nPut the phone down after this one.\n\nIn the app, a whole Psalm is whispered to you and the screen goes dark. The voice is AI.\nComing soon to iPhone.\n\n#blackbiblechat #biblestorieswithblackfaces #psalms #kjv #biblebeforebed",
+      "reel": {
+        "video": "p4-reel.mp4",
+        "cover": {
+          "theme": "night",
+          "label": "Psalm Nights · Whispered Scripture for Sleep",
+          "wave": true,
+          "css": ".wave{bottom:340px}body{padding:220px 92px 260px}",
+          "blocks": [
+            {
+              "verse": "PSA 4:8",
+              "size": 70,
+              "em": "I will both lay me down in peace, and sleep"
+            },
+            {
+              "ai": "Whispered by an AI voice · sound on"
+            }
+          ]
+        },
+        "caption": "Psalm 4:8, whispered. Turn the sound on and the lights down.\n\n“I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.”\nPsalm 4:8\n\nPsalm Nights · Whispered Scripture for Sleep, coming soon to iPhone in Peace Be Still.\n\n#blackbiblechat #biblestorieswithblackfaces #psalms #kjv\nMade with AI (the voice)."
+      }
+    },
+    {
+      "evergreen": true,
+      "lang": "es",
+      "id": "p7",
+      "approved": "2026-11-18",
+      "kind": "Chat",
+      "title": "Mi Refugio",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Mi Refugio · Biblia y Chat en Español",
+          "chat": true,
+          "foot": [
+            "Muy pronto",
+            "en iPhone"
+          ],
+          "blocks": [
+            {
+              "who": "Tú",
+              "right": true
+            },
+            {
+              "me": "Estoy cansada y no sé a quién contarle."
+            },
+            {
+              "who": "Mi Refugio"
+            },
+            {
+              "hh": [
+                "Aquí estoy. Escucha esto:",
+                {
+                  "verse": "PSA 91:2"
+                },
+                "¿Oramos?"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "Mi Refugio · Biblia y Chat en Español.\n\n“Diré yo á Jehová: Esperanza mía, y castillo mío; mi Dios, en él confiaré.”\nSalmos 91:2\n\nCuéntale lo que llevas en el corazón. Te contesta con la Reina-Valera 1909, palabra por palabra, y te pregunta: ¿oramos?\n\nMuy pronto en iPhone. Busca “Peace Be Still”. Mi Refugio es IA.\n#blackbiblechat #bibliaenespañol #reinavalera1909 #versiculodeldia"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p8",
+      "approved": "2026-11-18",
+      "kind": "Verse",
+      "title": "Young Faith",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Young Faith · Bible for Teens",
+          "foot": [
+            "For 13 and up",
+            "No chat under 13"
+          ],
+          "blocks": [
+            {
+              "kicker": "Real talk? Nobody has it all figured out. Keep this one in your pocket:"
+            },
+            {
+              "verse": "ISA 41:10",
+              "size": 50,
+              "em": "I will strengthen thee"
+            }
+          ]
+        }
+      ],
+      "caption": "Young Faith · Bible for Teens.\n\nEverybody at school looks like they have it figured out. Nobody does. Keep this one in your pocket:\n\n“Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.”\nIsaiah 41:10\n\nParents: teens get their own chat voice, built for 13 and up. No chat under 13. Young Faith is AI.\nComing soon to iPhone.\n\n#blackbiblechat #biblestorieswithblackfaces #christianteens #kjv"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p9",
+      "approved": "2026-11-18",
+      "kind": "About",
+      "title": "Free forever",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Peace Be Still · free forever",
+          "n": "1 / 2",
+          "blocks": [
+            {
+              "list": [
+                "The whole King James Bible, to read and to hear",
+                "A Hush Harbor chat every day",
+                "Today’s Bible story",
+                "A whispered Psalm Night every week",
+                "Your Morning Word",
+                "No ads"
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "2 / 2",
+          "mainStyle": "align-items:flex-start",
+          "foot": {
+            "only": "Link in bio"
+          },
+          "blocks": [
+            {
+              "mark": 200
+            },
+            {
+              "title": "Coming soon to iPhone",
+              "size": 96
+            },
+            {
+              "sub": "Search “Peace Be Still”"
+            },
+            {
+              "ai": "Hush Harbor is AI, and it always says so."
+            }
+          ]
+        }
+      ],
+      "caption": "Peace Be Still, free forever:\n\nThe whole King James Bible to read and hear. A Hush Harbor chat every day. Today’s Bible story. A whispered Psalm Night every week. Your Morning Word. No ads.\n\nMore if you want it: $7.99 a month.\n\nComing soon to iPhone. Search “Peace Be Still”, link in bio.\nHush Harbor · Black Bible Chat & Stories is AI, and it always says so.\n\n#blackbiblechat #biblestorieswithblackfaces #kjv #christianapp"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p10",
+      "kind": "Verse",
+      "title": "He giveth his beloved sleep",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Psalm Nights · Whispered Scripture for Sleep",
+          "wave": true,
+          "blocks": [
+            {
+              "verse": "PSA 127:2",
+              "size": 58,
+              "em": "for so he giveth his beloved sleep"
+            }
+          ]
+        }
+      ],
+      "caption": "Psalm Nights · Whispered Scripture for Sleep.\n\n“It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep.”\nPsalm 127:2\n\nUp late again, going over tomorrow? Read the last line one more time, slow.\n\nIn the app, a whole Psalm is whispered to you and the screen goes dark. The voice is AI.\nComing soon to iPhone.\n\n#blackbiblechat #biblestorieswithblackfaces #psalms #biblebeforebed"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p11",
+      "kind": "Chat",
+      "title": "The strong friend",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "1 / 2",
+          "chat": true,
+          "foot": [
+            "Hush Harbor",
+            "is AI"
+          ],
+          "blocks": [
+            {
+              "who": "You",
+              "right": true
+            },
+            {
+              "me": "I’m always the strong friend. Who checks on me?"
+            },
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "I see you, baby. Come sit down a minute.",
+                {
+                  "verse": "MAT 11:28"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "2 / 2",
+          "chat": true,
+          "blocks": [
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "You carry everybody. Want to pray on it together, and let Him carry you tonight?"
+              ]
+            },
+            {
+              "btns": [
+                "Pray with me ›",
+                "Not now"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "For the strong friend, the one everybody calls.\n\nSomebody told Hush Harbor, “I’m always the strong friend. Who checks on me?” It answered with this:\n\n“Come unto me, all ye that labour and are heavy laden, and I will give you rest.”\nMatthew 11:28\n\nThen it asked if they wanted to pray on it together.\n\nTag the strong friend in your life. Let them know somebody sees them.\n\nHush Harbor · Black Bible Chat & Stories. Hush Harbor is AI, and it always says so. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #christianwomen"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p12",
+      "kind": "Verse",
+      "title": "Be strong and of a good courage",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Verse for the week",
+          "wave": true,
+          "blocks": [
+            {
+              "verse": "JOS 1:9",
+              "size": 56,
+              "em": "Be strong and of a good courage"
+            }
+          ]
+        }
+      ],
+      "caption": "A verse for the week ahead.\n\n“Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.”\nJoshua 1:9\n\nNew job, new school, new city, first day of anything: He is already there.\n\nSave it for Monday morning.\n\nPeace Be Still, coming soon to iPhone. Search “Peace Be Still”, link in bio.\n#blackbiblechat #biblestorieswithblackfaces #kjv #scripture"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p13",
+      "kind": "Verse",
+      "title": "I can do all things",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Morning Word · Say it back",
+          "blocks": [
+            {
+              "verse": "PHI 4:13",
+              "size": 66,
+              "em": "through Christ"
+            },
+            {
+              "say": "Now you: ",
+              "accent": "Through Christ, I can.",
+              "size": 54
+            }
+          ]
+        }
+      ],
+      "caption": "Say it with me before the day starts.\n\n“I can do all things through Christ which strengtheneth me.”\nPhilippians 4:13\n\nNow you: Through Christ, I can. Again. There you go.\n\nNot by your own strength. Through Christ. That’s the whole verse.\n\nMorning Word · Daily Declarations, inside Hush Harbor · Black Bible Chat & Stories. Hush Harbor is AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #morningprayer"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p14",
+      "kind": "Verse",
+      "title": "They that wait upon the LORD",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Verse for tired days",
+          "blocks": [
+            {
+              "verse": "ISA 40:31",
+              "size": 54,
+              "em": "they shall run, and not be weary"
+            }
+          ]
+        }
+      ],
+      "caption": "For the tired days.\n\n“But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.”\nIsaiah 40:31\n\nRun, and not be weary. Walk, and not faint. Waiting on Him is not wasted time.\n\nSend this to somebody who has been running on empty.\n\nPeace Be Still, coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #scripture"
+    },
+    {
+      "evergreen": true,
+      "lang": "es",
+      "id": "p15",
+      "kind": "Chat",
+      "title": "Mi Refugio: venid á mí",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Mi Refugio · Biblia y Chat en Español",
+          "chat": true,
+          "foot": [
+            "Muy pronto",
+            "en iPhone"
+          ],
+          "blocks": [
+            {
+              "who": "Tú",
+              "right": true
+            },
+            {
+              "me": "Trabajo todo el día y llego a casa sin fuerzas."
+            },
+            {
+              "who": "Mi Refugio"
+            },
+            {
+              "hh": [
+                "Te escucho. Descansa un momento y lee esto:",
+                {
+                  "verse": "MAT 11:28"
+                },
+                "¿Oramos?"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "Mi Refugio · Biblia y Chat en Español.\n\n“Venid á mí todos los que estáis trabajados y cargados, que yo os haré descansar.”\nMateo 11:28\n\nCuéntale cómo llegaste hoy. Te contesta con la Reina-Valera 1909, palabra por palabra, y te pregunta: ¿oramos?\n\nMuy pronto en iPhone. Busca “Peace Be Still”. Mi Refugio es IA.\n#blackbiblechat #bibliaenespañol #reinavalera1909 #versiculodeldia"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p16",
+      "kind": "Verse",
+      "title": "Young Faith: let no man despise thy youth",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Young Faith · Bible for Teens",
+          "foot": [
+            "For 13 and up",
+            "No chat under 13"
+          ],
+          "blocks": [
+            {
+              "kicker": "Think you’re too young to matter? Paul wrote this to a young man:"
+            },
+            {
+              "verse": "1TI 4:12",
+              "size": 52,
+              "em": "be thou an example of the believers"
+            }
+          ]
+        }
+      ],
+      "caption": "Young Faith · Bible for Teens.\n\nThink you’re too young for God to use you? Paul wrote this to Timothy, a young man:\n\n“Let no man despise thy youth; but be thou an example of the believers, in word, in conversation, in charity, in spirit, in faith, in purity.”\n1 Timothy 4:12\n\nIn word, in how you treat people, in faith. You can start today.\n\nParents: teens get their own chat voice, built for 13 and up. No chat under 13. Young Faith is AI.\nComing soon to iPhone.\n\n#blackbiblechat #biblestorieswithblackfaces #christianteens #kjv"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p17",
+      "kind": "Chat",
+      "title": "I said something I shouldn’t have",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "1 / 2",
+          "chat": true,
+          "foot": [
+            "Hush Harbor",
+            "is AI"
+          ],
+          "blocks": [
+            {
+              "who": "You",
+              "right": true
+            },
+            {
+              "me": "My sister and I fell out over family plans. I said something I shouldn’t have."
+            },
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "Mm. We’ve all been there, baby.",
+                {
+                  "verse": "EPH 4:32"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "2 / 2",
+          "chat": true,
+          "blocks": [
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "Want to pray on it together first? Then we can write what you want to say to her."
+              ]
+            },
+            {
+              "btns": [
+                "Pray with me ›",
+                "Not now"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "Fell out with somebody in the family? Here’s what Hush Harbor says.\n\n“And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ’s sake hath forgiven you.”\nEphesians 4:32\n\nThen it offers to pray on it with you, and helps you find the words for the call.\n\nWho do you need to call this week? You don’t have to say their name.\n\nHush Harbor · Black Bible Chat & Stories is AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #prayer"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p18",
+      "kind": "Story",
+      "title": "The boy with five loaves",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Stories",
+          "n": "1 / 3",
+          "wave": true,
+          "blocks": [
+            {
+              "kicker": "Pull up a chair, baby."
+            },
+            {
+              "title": "The boy who brought his lunch",
+              "size": 92
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Stories",
+          "n": "2 / 3",
+          "blocks": [
+            {
+              "verse": "JOH 6:9",
+              "size": 56,
+              "em": "five barley loaves, and two small fishes"
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "3 / 3",
+          "foot": [
+            "Coming soon to iPhone",
+            "Search “Peace Be Still”"
+          ],
+          "blocks": [
+            {
+              "say": "Five loaves, two fishes, and a crowd of thousands. Jesus gave thanks, and everybody ate."
+            },
+            {
+              "body": "Bible stories with Black faces. Read to you out loud.",
+              "muted": true
+            },
+            {
+              "ai": "The storytelling voices are AI."
+            }
+          ]
+        }
+      ],
+      "caption": "Pull up a chair, baby. Let me tell you about a boy who brought his lunch to hear Jesus, and what Jesus did with it…\n\n“There is a lad here, which hath five barley loaves, and two small fishes: but what are they among so many?”\nJohn 6:9\n\nFive loaves and two small fishes. Jesus gave thanks, and the whole crowd ate. What you bring is never too small for Him.\n\nHush Harbor tells a new Bible story every day, out loud.\n\nHush Harbor · Black Bible Chat & Stories. The voices are AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #biblestories #kjv"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p19",
+      "kind": "About",
+      "title": "What’s inside",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Inside Peace Be Still",
+          "n": "1 / 2",
+          "blocks": [
+            {
+              "list": [
+                "Hush Harbor · Black Bible Chat & Stories",
+                "Psalm Nights · Whispered Scripture for Sleep",
+                "Morning Word · Daily Declarations",
+                "Mi Refugio · Biblia y Chat en Español",
+                "Young Faith · Bible for Teens"
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "2 / 2",
+          "foot": [
+            "Coming soon to iPhone",
+            "Search “Peace Be Still”"
+          ],
+          "blocks": [
+            {
+              "say": "The King James, word for word. Every verse, every night."
+            },
+            {
+              "ai": "Hush Harbor is AI, and it always says so."
+            }
+          ]
+        }
+      ],
+      "caption": "What’s inside Peace Be Still:\n\nHush Harbor · Black Bible Chat & Stories. Tell it what’s on your heart; it answers with the King James, word for word.\nPsalm Nights · Whispered Scripture for Sleep.\nMorning Word · Daily Declarations.\nMi Refugio · Biblia y Chat en Español, with the Reina-Valera 1909.\nYoung Faith · Bible for Teens, 13 and up.\n\nWhich one would you open first?\n\nHush Harbor is AI, and it always says so. Coming soon to iPhone. Search “Peace Be Still”, link in bio.\n#blackbiblechat #biblestorieswithblackfaces #kjv #christianapp"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p20",
+      "kind": "Verse",
+      "title": "The secret place",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Psalm Nights · Whispered Scripture for Sleep",
+          "wave": true,
+          "blocks": [
+            {
+              "verse": "PSA 91:1",
+              "size": 64,
+              "em": "the secret place of the most High"
+            }
+          ]
+        }
+      ],
+      "caption": "Psalm Nights · Whispered Scripture for Sleep.\n\n“He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.”\nPsalm 91:1\n\nLights down. Read it once more, slower. That’s where you rest tonight.\n\nIn the app, a whole Psalm is whispered to you and the screen goes dark. The voice is AI.\nComing soon to iPhone.\n\n#blackbiblechat #biblestorieswithblackfaces #psalms #kjv #biblebeforebed"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p21",
+      "kind": "Chat",
+      "title": "Waiting on the callback",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "1 / 2",
+          "chat": true,
+          "foot": [
+            "Hush Harbor",
+            "is AI"
+          ],
+          "blocks": [
+            {
+              "who": "You",
+              "right": true
+            },
+            {
+              "me": "Had the interview Monday. Still waiting on the call."
+            },
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "Waiting is hard, baby. Hold on to this one.",
+                {
+                  "verse": "PSA 27:14"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "2 / 2",
+          "chat": true,
+          "blocks": [
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "Want to pray on it together? Then we’ll write that thank-you note while you wait."
+              ]
+            },
+            {
+              "btns": [
+                "Pray with me ›",
+                "Not now"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "Waiting on a callback? Here’s what Hush Harbor says.\n\n“Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.”\nPsalm 27:14\n\nThen it offers to pray on it with you, and helps you write the thank-you note while you wait.\n\nWhat are you waiting on this week? Type “Waiting” and we’ll know we’re in it together.\n\nHush Harbor · Black Bible Chat & Stories is AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #prayer"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p22",
+      "kind": "Verse",
+      "title": "This is the day",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Morning Word · Say it back",
+          "blocks": [
+            {
+              "verse": "PSA 118:24",
+              "size": 62,
+              "em": "This is the day which the LORD hath made"
+            },
+            {
+              "say": "Now you: ",
+              "accent": "This is the day.",
+              "size": 54
+            }
+          ]
+        }
+      ],
+      "caption": "Say it with me before your feet hit the floor.\n\n“This is the day which the LORD hath made; we will rejoice and be glad in it.”\nPsalm 118:24\n\nNow you: This is the day. Again. There you go.\n\nType it in the comments so somebody else starts their day with it too.\n\nMorning Word · Daily Declarations, inside Hush Harbor · Black Bible Chat & Stories. Hush Harbor is AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #morningprayer"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p23",
+      "kind": "Story",
+      "title": "Zacchaeus, come down",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Stories",
+          "n": "1 / 3",
+          "wave": true,
+          "blocks": [
+            {
+              "kicker": "Pull up a chair, baby."
+            },
+            {
+              "title": "The little man in the sycamore tree",
+              "size": 92
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Stories",
+          "n": "2 / 3",
+          "blocks": [
+            {
+              "verse": "LUK 19:5",
+              "size": 52,
+              "em": "make haste, and come down"
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "3 / 3",
+          "foot": [
+            "Coming soon to iPhone",
+            "Search “Peace Be Still”"
+          ],
+          "blocks": [
+            {
+              "say": "Out of the whole crowd, Jesus looked up and called him by name."
+            },
+            {
+              "body": "Bible stories with Black faces. Read to you out loud.",
+              "muted": true
+            },
+            {
+              "ai": "The storytelling voices are AI."
+            }
+          ]
+        }
+      ],
+      "caption": "Pull up a chair, baby. Let me tell you about a short man who climbed a sycamore tree just to see Jesus pass by…\n\n“And when Jesus came to the place, he looked up, and saw him, and said unto him, Zacchæus, make haste, and come down; for to day I must abide at thy house.”\nLuke 19:5\n\nOut of the whole crowd, Jesus stopped, looked up, and called him by name.\n\nHush Harbor tells a new Bible story every day, out loud. Which story did your grandmother tell best?\n\nHush Harbor · Black Bible Chat & Stories. The voices are AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #biblestories #kjv"
+    },
+    {
+      "evergreen": true,
+      "lang": "es",
+      "id": "p24",
+      "kind": "Verse",
+      "title": "Mi Refugio: no temas",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Mi Refugio · Biblia y Chat en Español",
+          "foot": [
+            "Muy pronto",
+            "en iPhone"
+          ],
+          "wave": true,
+          "blocks": [
+            {
+              "verse": "ISA 41:10",
+              "size": 54,
+              "em": "No temas, que yo soy contigo"
+            }
+          ]
+        }
+      ],
+      "caption": "Mi Refugio · Biblia y Chat en Español.\n\n“No temas, que yo soy contigo; no desmayes, que yo soy tu Dios que te esfuerzo: siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia.”\nIsaías 41:10\n\nGuárdalo para cuando lo necesites, y envíaselo a alguien que lo necesita hoy.\n\nLa Reina-Valera 1909, palabra por palabra. Muy pronto en iPhone. Busca “Peace Be Still”. Mi Refugio es IA.\n#blackbiblechat #bibliaenespañol #reinavalera1909 #versiculodeldia"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p25",
+      "kind": "Chat",
+      "title": "Comparing myself online",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "1 / 2",
+          "chat": true,
+          "foot": [
+            "Hush Harbor",
+            "is AI"
+          ],
+          "blocks": [
+            {
+              "who": "You",
+              "right": true
+            },
+            {
+              "me": "I keep scrolling and comparing myself to everybody."
+            },
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "Put the phone face down for one minute, baby. Read this:",
+                {
+                  "verse": "PSA 139:14"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "linen",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "2 / 2",
+          "chat": true,
+          "blocks": [
+            {
+              "who": "Hush Harbor"
+            },
+            {
+              "hh": [
+                "Fearfully and wonderfully made. That’s you. Want to pray on it together?"
+              ]
+            },
+            {
+              "btns": [
+                "Pray with me ›",
+                "Not now"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "Caught comparing yourself to everybody online? Here’s what Hush Harbor says.\n\n“I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well.”\nPsalm 139:14\n\nFearfully and wonderfully made. That’s you, today, as you are.\n\nSave this for the next time the scroll gets loud.\n\nHush Harbor · Black Bible Chat & Stories. Hush Harbor is AI, and it always says so. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #christianwomen"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p26",
+      "kind": "Verse",
+      "title": "New every morning",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "Morning Word",
+          "wave": true,
+          "blocks": [
+            {
+              "verse": "LAM 3:23",
+              "size": 72,
+              "em": "great is thy faithfulness"
+            }
+          ]
+        }
+      ],
+      "caption": "Yesterday is done.\n\n“They are new every morning: great is thy faithfulness.”\nLamentations 3:23\n\nHis mercies did not run out overnight. They are new this morning.\n\nSend this to somebody who needs a fresh start today.\n\nPeace Be Still, coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #kjv #morningprayer"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p27",
+      "kind": "Verse",
+      "title": "Young Faith: trust in the LORD",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Young Faith · Bible for Teens",
+          "foot": [
+            "For 13 and up",
+            "No chat under 13"
+          ],
+          "blocks": [
+            {
+              "kicker": "Big decision coming up? Before you ask everybody else:"
+            },
+            {
+              "verse": "PRO 3:5",
+              "size": 60,
+              "em": "Trust in the LORD with all thine heart"
+            }
+          ]
+        }
+      ],
+      "caption": "Young Faith · Bible for Teens.\n\nPicking classes, picking friends, picking what’s next. Before you ask everybody else:\n\n“Trust in the LORD with all thine heart; and lean not unto thine own understanding.”\nProverbs 3:5\n\nParents: teens get their own chat voice, built for 13 and up. No chat under 13. Young Faith is AI.\nComing soon to iPhone.\n\n#blackbiblechat #biblestorieswithblackfaces #christianteens #kjv"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p28",
+      "kind": "About",
+      "title": "Is Hush Harbor a real person?",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "1 / 2",
+          "wave": true,
+          "blocks": [
+            {
+              "title": "Is Hush Harbor a real person?",
+              "size": 92
+            },
+            {
+              "ai": "Swipe for the honest answer ›",
+              "accent": true
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "2 / 2",
+          "foot": [
+            "Coming soon to iPhone",
+            "Search “Peace Be Still”"
+          ],
+          "blocks": [
+            {
+              "say": "No. Hush Harbor is AI, and it always says so."
+            },
+            {
+              "body": "It points you to the Word, word for word, and back to your church family and your pastor.",
+              "muted": true
+            },
+            {
+              "verse": "PSA 119:105",
+              "size": 44
+            }
+          ]
+        }
+      ],
+      "caption": "Is Hush Harbor a real person? No.\n\nHush Harbor is AI, and it always says so. It answers with the King James, word for word, and points you back to your church family and your pastor. It is not a pastor and never pretends to be.\n\n“Thy word is a lamp unto my feet, and a light unto my path.”\nPsalm 119:105\n\nThe Word is the lamp. Hush Harbor just helps you find the page.\n\nHush Harbor · Black Bible Chat & Stories. Coming soon to iPhone. Search “Peace Be Still”, link in bio.\n#blackbiblechat #biblestorieswithblackfaces #kjv #christianapp"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p29",
+      "kind": "Verse",
+      "title": "Beside the still waters",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Psalm Nights · Whispered Scripture for Sleep",
+          "wave": true,
+          "blocks": [
+            {
+              "verse": "PSA 23:2",
+              "size": 66,
+              "em": "he leadeth me beside the still waters"
+            }
+          ]
+        }
+      ],
+      "caption": "Psalm Nights · Whispered Scripture for Sleep.\n\n“He maketh me to lie down in green pastures: he leadeth me beside the still waters.”\nPsalm 23:2\n\nStill waters. Let the day go quiet with this one.\n\nIn the app, a whole Psalm is whispered to you and the screen goes dark. The voice is AI.\nComing soon to iPhone.\n\n#blackbiblechat #biblestorieswithblackfaces #psalms #kjv #biblebeforebed"
+    },
+    {
+      "evergreen": true,
+      "lang": "en",
+      "id": "p30",
+      "kind": "Story",
+      "title": "Let the children come",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Stories",
+          "n": "1 / 3",
+          "wave": true,
+          "blocks": [
+            {
+              "kicker": "Pull up a chair, baby."
+            },
+            {
+              "title": "The day Jesus made room for the children",
+              "size": 88
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Stories",
+          "n": "2 / 3",
+          "blocks": [
+            {
+              "verse": "MAR 10:14",
+              "size": 50,
+              "em": "Suffer the little children to come unto me"
+            }
+          ]
+        },
+        {
+          "theme": "night",
+          "label": "Hush Harbor · Black Bible Chat & Stories",
+          "n": "3 / 3",
+          "foot": [
+            "Coming soon to iPhone",
+            "Search “Peace Be Still”"
+          ],
+          "blocks": [
+            {
+              "say": "The grown folks said not now. Jesus said let them come."
+            },
+            {
+              "body": "Bible stories with Black faces. Read to you out loud.",
+              "muted": true
+            },
+            {
+              "ai": "Hush Harbor is AI. The storytelling voices are AI."
+            }
+          ]
+        }
+      ],
+      "caption": "Pull up a chair, baby. Let me tell you about the day the grown folks tried to send the children away, and what Jesus said…\n\n“But when Jesus saw it, he was much displeased, and said unto them, Suffer the little children to come unto me, and forbid them not: for of such is the kingdom of God.”\nMark 10:14\n\nThe grown folks said not now. Jesus said let them come.\n\nHush Harbor tells a new Bible story every day, out loud. Tag the one who first told you about Jesus.\n\nHush Harbor · Black Bible Chat & Stories. Hush Harbor is AI. Coming soon to iPhone.\n#blackbiblechat #biblestorieswithblackfaces #biblestories #kjv"
+    }
+  ]
+}
