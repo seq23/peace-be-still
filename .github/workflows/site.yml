@@ -51,3 +51,5 @@ jobs:
           [ "$loc" = "301 https://peacebestillapp.com/" ] || exit 1
           wl=$(curl -s -o /dev/null -w '%{http_code}' https://peacebestillapp.com/api/waitlist); echo "waitlist GET: $wl"
           [ "$wl" = 405 ] || exit 1
+          sv=$(curl -s https://peacebestillapp.com/api/social-visits); echo "social visits: $sv"
+          echo "$sv" | grep -q '"sources":{"threads":' || { echo "NAMED STOP: SOCIAL_VISITS_UNREADABLE - /api/social-visits does not answer counts"; exit 1; }
