@@ -12,7 +12,9 @@ Runs in the faster-whisper venv (PBS_WHISPER_PY, default
 """
 from __future__ import annotations
 
+
 import json
+import os
 import re
 import subprocess
 import sys
@@ -66,13 +68,24 @@ def clipped_samples(path: Path) -> int:
 _MODELS: dict = {}
 
 
+def whisper_model(size: str):
+    """faster-whisper on the Mac's graphics chip (MPS) when it loads, else the CPU (her call 19 Nov 2026:
+    "Do this"). Measured on kjv-luk-009: CPU 39.4 s, MPS 30.0 s, the same 1,473 words. PBS_WHISPER_DEVICE=cpu forces CPU."""
+    from faster_whisper import WhisperModel
+    if os.environ.get("PBS_WHISPER_DEVICE", "mps") == "mps":
+        try:
+            return WhisperModel(size, device="mps", compute_type="float16")
+        except Exception as e:  # an older ctranslate2 without MPS: the CPU still works
+            print(f"note: whisper on MPS unavailable ({str(e)[:80]}); using the CPU", file=sys.stderr)
+    return WhisperModel(size, device="cpu", compute_type="int8")
+
+
 def transcribe(path: Path, lang: str, model: str = "base") -> str:
     """faster-whisper, local. "base" first (QUALITY.md A01); a score under the bar is heard again
     by "small" before it counts, because base mishears the KJV's old words (Psalm 3, 18 Nov 2026:
     base 0.947 with "belongeth" -> "belongs", "Absalom" -> "upsalam"; small 0.98 on the same file)."""
     if model not in _MODELS:
-        from faster_whisper import WhisperModel
-        _MODELS[model] = WhisperModel(model, device="cpu", compute_type="int8")
+        _MODELS[model] = whisper_model(model)
     segs, _ = _MODELS[model].transcribe(decode(path, 16000), language=lang, beam_size=5,
                                         condition_on_previous_text=False)
     return " ".join(s.text.strip() for s in segs)
