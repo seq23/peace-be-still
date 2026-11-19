@@ -553,8 +553,7 @@ def heard_words(path: Path, model_size: str) -> tuple[str, list[tuple[str, float
     """faster-whisper transcript and (score word, start, end) for every word."""
     import qa
     if model_size not in qa._MODELS:
-        from faster_whisper import WhisperModel
-        qa._MODELS[model_size] = WhisperModel(model_size, device="cpu", compute_type="int8")
+        qa._MODELS[model_size] = qa.whisper_model(model_size)
     segs, _ = qa._MODELS[model_size].transcribe(qa.decode(path, 16000), language="en", beam_size=5,
                                                 condition_on_previous_text=False, word_timestamps=True)
     text, words = [], []
