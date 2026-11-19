@@ -28,7 +28,8 @@
 // Rule 0: every run prints `OUTPUT: queued N (instagram I, facebook F), scheduled ahead M, bank unposted K, recycled R (Buffer split ...)`.
 //
 // It also writes data/social/metrics.json (scorecard row pbs-social in Boss OS): posts sent per
-// channel and 28-day views from Buffer, follower counts "not read" (Buffer's API has none).
+// channel and 28-day views from Buffer, follower counts "not read" (Buffer's API has none), and
+// 28-day site visits per channel from the site's own counter (GET /api/social-visits).
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -72,6 +73,15 @@ export const igTags = (lang) => (tags) => {
 export function igStoreText(text, store) {
   if (!storeLive(store)) return text;
   return text.replace(/Coming soon to iPhone/g, 'Free on iPhone').replace(/coming soon to iPhone/g, 'free on iPhone').replace(/Muy pronto en iPhone/g, 'Gratis en iPhone');
+}
+
+/** Facebook posts carry a clickable link tagged utm_source=facebook (Instagram captions cannot hold a
+ *  link; its bio link is peacebestillapp.com/?utm_source=instagram). The link goes just above the hashtags. */
+export const FB_LINK = 'peacebestillapp.com/?utm_source=facebook';
+export function fbText(text) {
+  const t = text.replace(/, link in bio\./g, '.');
+  const i = t.lastIndexOf('\n#');
+  return i < 0 ? `${t}\n\n${FB_LINK}` : `${t.slice(0, i)}\n${FB_LINK}${t.slice(i)}`;
 }
 
 /** No italic verse words: in the King James, italics mark words the translators added. */
@@ -204,7 +214,7 @@ const imageUrl = (file, lock) => `${BASE_URL}/${SITE_DIR}/${file}.png?v=${(lock.
 
 /** The createPost input for one channel: the picture(s), or the Reel. */
 export function postInput({ post, channel, channelId, dueAt, text, lock, reel = false }) {
-  const base = { channelId, text, mode: 'customScheduled', dueAt, schedulingType: 'automatic', needsApproval: false, source: 'pbs-picture-loop' };
+  const base = { channelId, text: channel === 'facebook' ? fbText(text) : text, mode: 'customScheduled', dueAt, schedulingType: 'automatic', needsApproval: false, source: 'pbs-picture-loop' };
   if (reel) {
     const video = { url: `${BASE_URL}/${SITE_DIR}/${post.reel.video}`, thumbnailUrl: imageUrl(`${post.id}-reel`, lock) };
     const metadata = channel === 'instagram' ? { instagram: { type: 'reel', shouldShareToFeed: true, isAiGenerated: true } } : { facebook: { type: 'reel' } };
@@ -262,18 +272,36 @@ export async function readMetrics({ call, orgId, chans, ledgers, now }) {
   return out;
 }
 
+/** 28-day page views per channel, counted by the site (GET /api/social-visits; D1 table social_visits). */
+export async function readSocialVisits(fetchImpl) {
+  try {
+    const res = await fetchImpl(`${BASE_URL}/api/social-visits?days=28`);
+    if (res.status !== 200) return { why: `${BASE_URL}/api/social-visits answered ${res.status}` };
+    const body = await res.json();
+    const sources = body?.sources ?? {};
+    if (![THREADS_CHANNEL, ...CHANNELS].every((c) => Number.isFinite(sources[c.key])) || !Number.isFinite(body.total)) return { why: '/api/social-visits answered without a count per channel' };
+    return { total: body.total, sources, counting_since: body.counting_since ?? null };
+  } catch (e) { return { why: `/api/social-visits unreachable: ${e.message}` }; }
+}
+
 export function writeMetrics(file, m, now) {
   const prev = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
   const doc = {
     _comment: 'Written by scripts/instagram/ig_loop.mjs every run; read by the Boss OS scorecard row pbs-social. "not read" always comes with a _why.',
     updatedAt: new Date(now).toISOString(),
     first_post_at: m.first_post_at ?? prev.first_post_at ?? null,
-    social_visits_28d: 'not read',
-    social_visits_28d_why: 'peacebestillapp.com does not count visits by utm_source yet (no analytics on the site)',
+    ...(Number.isFinite(m.visits?.total)
+      ? { social_visits_28d: m.visits.total, social_visits_counting_since: m.visits.counting_since }
+      : { social_visits_28d: 'not read', social_visits_28d_why: m.visits?.why ?? 'social visits were not read this run' }),
     social_store_visits_28d: 'not read',
     social_store_visits_28d_why: 'the App Store link is not set yet (site/config/store.json), so there are no store-page visits to count',
     channels: m.channels ?? prev.channels ?? {},
   };
+  for (const [key, row] of Object.entries(doc.channels)) {
+    delete row.visits_28d; delete row.visits_28d_why;
+    if (Number.isFinite(m.visits?.sources?.[key])) row.visits_28d = m.visits.sources[key];
+    else { row.visits_28d = 'not read'; row.visits_28d_why = m.visits?.why ?? 'social visits were not read this run'; }
+  }
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, `${JSON.stringify(doc, null, 2)}\n`);
 }
@@ -325,10 +353,11 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
   notes.push(...plan.notes);
   const blocked = [...plan.blocked];
   const metrics = async () => {
+    const visits = await readSocialVisits(fetchImpl);
     try {
-      writeMetrics(metricsFile, await readMetrics({ call, orgId: org.id, chans, ledgers: [ledger, readJson(threadsLedgerFile, { posts: {} })], now }), now);
+      writeMetrics(metricsFile, { visits, ...await readMetrics({ call, orgId: org.id, chans, ledgers: [ledger, readJson(threadsLedgerFile, { posts: {} })], now }) }, now);
     } catch (e) {
-      writeMetrics(metricsFile, {}, now);
+      writeMetrics(metricsFile, { visits }, now);
       notes.push(`IG_METRICS_NOT_READ ${e.message.slice(0, 200)}`);
     }
   };

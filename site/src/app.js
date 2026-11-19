@@ -5,6 +5,9 @@
 //    nothing); the remove link (GET /waitlist/remove, POST /api/waitlist/remove) keeps working
 //    (D1 database "peace-be-still", table "waitlist"; nothing is ever emailed from here)
 // 3) security headers on every response
+// 4) social visit counts (scorecard row pbs-social): a page view tagged utm_source=threads|instagram|facebook
+//    (or ?src=, or arriving from those sites) adds 1 to a per-day, per-source count in D1 table social_visits.
+//    Counts only: no cookie, no IP, no user agent is stored. GET /api/social-visits?days=28 reads the totals.
 export const APEX = "peacebestillapp.com";
 const MAX_BODY = 2048;
 // 18 Nov 2026: the Black Bible app question page became the /black-bible-app/ landing page.
@@ -97,6 +100,55 @@ export async function remove(request, env) {
   return page(lang, T[lang].removedTitle, `<p class="lead">${T[lang].removed}</p>`);
 }
 
+// ---- social visit counts ------------------------------------------------------------------
+export const SOCIAL = ["threads", "instagram", "facebook"];
+const ALIAS = { threads: "threads", th: "threads", instagram: "instagram", ig: "instagram", facebook: "facebook", fb: "facebook" };
+const REF = [[/(^|\.)threads\.(net|com)$/, "threads"], [/(^|\.)instagram\.com$/, "instagram"], [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, "facebook"]];
+// Link-preview fetchers and scripts are not visits.
+const NOT_A_PERSON = /bot|crawl|spider|slurp|preview|facebookexternalhit|facebookcatalog|meta-external|embedly|curl|wget|python|httpclient|okhttp|go-http|headless|lighthouse/i;
+
+/** The social source of a page view, or null when it is not a person opening a page from Threads, Instagram or Facebook. */
+export function visitSource(request) {
+  if (request.method !== "GET") return null;
+  const url = new URL(request.url);
+  if (url.hostname !== APEX || url.pathname.startsWith("/api/")) return null;
+  if (/\.[a-z0-9]+$/i.test(url.pathname) && !url.pathname.endsWith(".html")) return null; // pictures, css, fonts
+  const dest = request.headers.get("Sec-Fetch-Dest");
+  if (dest && dest !== "document") return null;
+  if (NOT_A_PERSON.test(request.headers.get("User-Agent") || "")) return null;
+  const tag = (url.searchParams.get("utm_source") || url.searchParams.get("src") || "").toLowerCase();
+  if (tag) return ALIAS[tag] ?? null;
+  let host = "";
+  try { host = new URL(request.headers.get("Referer") || "").hostname; } catch { return null; }
+  for (const [re, src] of REF) if (re.test(host)) return src;
+  return null;
+}
+
+export async function countVisit(request, env) {
+  const src = visitSource(request);
+  if (!src || !env.DB) return false;
+  if (env.VISIT_RL) {
+    const { success } = await env.VISIT_RL.limit({ key: request.headers.get("CF-Connecting-IP") || "unknown" });
+    if (!success) return false;
+  }
+  const day = new Date().toISOString().slice(0, 10);
+  await env.DB.prepare("INSERT INTO social_visits (day, source, n) VALUES (?, ?, 1) ON CONFLICT(day, source) DO UPDATE SET n = n + 1").bind(day, src).run();
+  return true;
+}
+
+export async function readVisits(url, env) {
+  const days = Math.min(90, Math.max(1, Number.parseInt(url.searchParams.get("days") || "28", 10) || 28));
+  const since = new Date(Date.now() - (days - 1) * 86_400_000).toISOString().slice(0, 10);
+  const { results = [] } = await env.DB.prepare("SELECT source, SUM(n) AS n FROM social_visits WHERE day >= ? GROUP BY source").bind(since).all();
+  const first = await env.DB.prepare("SELECT MIN(day) AS day FROM social_visits").first();
+  const sources = Object.fromEntries(SOCIAL.map((s) => [s, 0]));
+  for (const r of results) if (SOCIAL.includes(r.source)) sources[r.source] = Number(r.n) || 0;
+  const total = SOCIAL.reduce((a, s) => a + sources[s], 0);
+  return new Response(JSON.stringify({ days, since, counting_since: first?.day ?? null, sources, total }), {
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, max-age=300" },
+  });
+}
+
 async function route(request, env) {
   const url = new URL(request.url);
   if (url.hostname === `www.${APEX}`) {
@@ -111,12 +163,19 @@ async function route(request, env) {
     if (request.method !== "POST") return new Response("Method not allowed", { status: 405, headers: { Allow: "POST" } });
     return p === "/api/waitlist" ? closed(url.searchParams.get("lang") === "es" ? "es" : "en") : remove(request, env);
   }
+  if (p === "/api/social-visits") {
+    if (request.method !== "GET") return new Response("Method not allowed", { status: 405, headers: { Allow: "GET" } });
+    return readVisits(url, env);
+  }
   if (p === "/waitlist/remove" || p === "/es/waitlist/remove") return removeForm(p.startsWith("/es/") ? "es" : "en", url.searchParams.get("t"));
   return env.ASSETS.fetch(request);
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
+    // Counting never slows or breaks a page: it runs after the response, and a failure is only logged.
+    const counting = countVisit(request, env).catch((e) => console.error(`social visit not counted: ${e.message}`));
+    if (ctx?.waitUntil) ctx.waitUntil(counting);
     const res = await route(request, env);
     if (res.status === 301 || res.status === 302) return res;
     const out = new Response(res.body, res);

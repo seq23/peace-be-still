@@ -25,7 +25,7 @@ import path from 'node:path';
 import { ORG_SPLIT, TOKEN_ENV } from '../threads/buffer.mjs';
 import { SPLIT, quotedVerses, slotUtc } from '../threads/threads_loop.mjs';
 import { frameHtml, postFrames } from './frames.mjs';
-import { HH_AI, HH_FULL, igProblems, igStoreText, italicProblem, main, planRun, slotsAhead } from './ig_loop.mjs';
+import { FB_LINK, HH_AI, HH_FULL, fbText, igProblems, igStoreText, italicProblem, main, planRun, slotsAhead } from './ig_loop.mjs';
 
 const bank = JSON.parse(fs.readFileSync('data/instagram/posts.json', 'utf8'));
 const lock = JSON.parse(fs.readFileSync('data/instagram/frames.lock.json', 'utf8'));
@@ -126,9 +126,10 @@ await check('recycles the oldest 60+ day evergreen post after the bank', () => {
 });
 
 // 6. end to end against a fake Buffer
-function fakeBuffer({ channels, scheduled = [], refuseReel = false, refuseAll = false, mediaStatus = 200, errors = [] }) {
+function fakeBuffer({ visits = null, channels, scheduled = [], refuseReel = false, refuseAll = false, mediaStatus = 200, errors = [] }) {
   const made = [];
   const fetchImpl = async (url, init) => {
+    if (String(url).includes('/api/social-visits')) return visits ?? { status: 200, json: async () => ({ days: 28, total: 7, counting_since: '2026-11-19', sources: { threads: 4, instagram: 2, facebook: 1 } }) };
     if (init?.method === 'HEAD') return { status: mediaStatus, headers: { get: () => (url.includes('.mp4') ? 'video/mp4' : 'image/png') } };
     const { query, variables } = JSON.parse(init.body);
     let data;
@@ -167,7 +168,11 @@ await check('not connected: green notes, the OUTPUT line, metrics written, never
   const m = JSON.parse(fs.readFileSync(metricsFile, 'utf8'));
   assert.equal(m.channels.instagram.posts_sent, 'not read'); assert.ok(m.channels.instagram.posts_sent_why);
   assert.equal(m.channels.threads.views_28d, 12);
-  assert.equal(m.social_visits_28d, 'not read'); assert.ok(m.social_visits_28d_why);
+  assert.equal(m.social_visits_28d, 7, 'site visit count not written'); assert.equal(m.channels.threads.visits_28d, 4); assert.equal(m.channels.facebook.visits_28d, 1);
+  const down = await run({ fetchImpl: fakeBuffer({ channels: [apIg, th], visits: { status: 503, json: async () => ({}) } }).fetchImpl });
+  const md = JSON.parse(fs.readFileSync(down.metricsFile, 'utf8'));
+  assert.equal(md.social_visits_28d, 'not read', 'a failed count read must not write a number'); assert.match(md.social_visits_28d_why, /503/);
+  assert.equal(md.channels.threads.visits_28d, 'not read'); assert.ok(md.channels.threads.visits_28d_why);
 });
 await check('named stops', async () => {
   assert.equal((await run({ env: {} })).e?.code, `SECRET_MISSING_${TOKEN_ENV}`);
@@ -187,7 +192,10 @@ await check('connected: the same post at 20:00 CT to instagram and facebook, roo
   assert.equal(f.made.length, ORG_SPLIT.pictures);
   assert.deepEqual(f.made.map((i) => i.channelId), ['ig', 'fb', 'ig', 'fb', 'ig', 'fb']);
   for (const i of f.made) { assert.equal(i.mode, 'customScheduled'); assert.match(new Date(i.dueAt).toLocaleString('en-US', { timeZone: 'America/Chicago', weekday: 'short' }), /^(Sun|Tue|Thu)/); assert.match(new Date(i.dueAt).toLocaleString('en-US', { timeZone: 'America/Chicago' }), /8:00:00 PM/); }
-  assert.equal(f.made[0].text, bank.posts[0].caption); assert.equal(f.made[1].text, bank.posts[0].caption);
+  assert.equal(f.made[0].text, bank.posts[0].caption, 'instagram gets the approved caption unchanged');
+  assert.equal(f.made[1].text, fbText(bank.posts[0].caption));
+  assert.ok(f.made[1].text.includes(FB_LINK) && !f.made[1].text.includes('link in bio'), 'facebook post has no tagged link');
+  assert.ok(f.made[1].text.indexOf(FB_LINK) < f.made[1].text.indexOf('#blackbiblechat'), 'link goes above the hashtags');
   assert.equal(f.made[0].assets.length, 3); assert.equal(f.made[0].metadata.instagram.type, 'post', 'a carousel is a post with several images'); assert.equal(f.made[1].metadata.facebook.type, 'post');
   assert.match(f.made[0].assets[0].image.url, /^https:\/\/peacebestillapp\.com\/social\/ig\/p1-1\.png\?v=[0-9a-f]{8}$/);
   assert.ok(f.made[0].assets[0].image.metadata.altText.includes('Hush Harbor'));
