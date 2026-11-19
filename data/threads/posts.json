@@ -1,7 +1,7 @@
 {
   "_comment": "Peace Be Still Threads @peacebestillapp post bank, read by scripts/threads/threads_loop.mjs (daily job .github/workflows/threads-posts.yml). Days 1-14 approved by her 18 Nov 2026 word for word (version 5, 'approved' date); days 15-60 written to the same voice and rules. Every quoted verse is the KJV (or RV1909 for lang es) word for word from content/bible, re-checked at queue time. 'Coming soon' wording switches to 'Free on iPhone' once site/config/store.json has app_store_url. Faith only: never Mindset, Imagination Nights, manifesting or law of assumption. `evergreen`: may be recycled once the bank has all gone out (day 9 names a holiday). Add new posts at the end; never reuse an id.",
   "slot_time_ct": "21:30",
-  "days_ahead": 7,
+  "days_ahead": 4,
   "recycle_after_days": 60,
   "bank_low_below": 14,
   "posts": [

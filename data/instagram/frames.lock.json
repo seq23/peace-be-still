@@ -1,0 +1,201 @@
+{
+  "_comment": "Written by scripts/instagram/render.mjs: the hash of each picture's HTML when its PNG was rendered. scripts/instagram/validate.mjs fails when a post changed without a re-render.",
+  "frames": {
+    "p1-1": {
+      "hash": "809018d1ccb8f4d0",
+      "store_live": false
+    },
+    "p1-2": {
+      "hash": "c75d3179653e49e2",
+      "store_live": false
+    },
+    "p1-3": {
+      "hash": "8c1deef72337b0b6",
+      "store_live": false
+    },
+    "p3-1": {
+      "hash": "b60ec707e87e3360",
+      "store_live": false
+    },
+    "p3-2": {
+      "hash": "7a57ae59cb659d0c",
+      "store_live": false
+    },
+    "p2-1": {
+      "hash": "621b7fb44eba403d",
+      "store_live": false
+    },
+    "p5-1": {
+      "hash": "294c9196b95b8df5",
+      "store_live": false
+    },
+    "p5-2": {
+      "hash": "39b6c61570511204",
+      "store_live": false
+    },
+    "p5-3": {
+      "hash": "1b8d86ffbce31bdb",
+      "store_live": false
+    },
+    "p6-1": {
+      "hash": "8943a8465ada30c1",
+      "store_live": false
+    },
+    "p4-1": {
+      "hash": "ab0abb2c48ed73b3",
+      "store_live": false
+    },
+    "p4-reel": {
+      "hash": "bda88de11c43caad",
+      "store_live": false
+    },
+    "p7-1": {
+      "hash": "4d788d38479da0a4",
+      "store_live": false
+    },
+    "p8-1": {
+      "hash": "d2ffdb4a914ba027",
+      "store_live": false
+    },
+    "p9-1": {
+      "hash": "91178441192be847",
+      "store_live": false
+    },
+    "p9-2": {
+      "hash": "af2c8ab2830a0143",
+      "store_live": false
+    },
+    "p10-1": {
+      "hash": "7f19b4e7e318ae7f",
+      "store_live": false
+    },
+    "p11-1": {
+      "hash": "f7673b4e3870e45c",
+      "store_live": false
+    },
+    "p11-2": {
+      "hash": "f545ca72f798d41e",
+      "store_live": false
+    },
+    "p12-1": {
+      "hash": "cef6ced39b7b50e2",
+      "store_live": false
+    },
+    "p13-1": {
+      "hash": "6fdc468345d06b9b",
+      "store_live": false
+    },
+    "p14-1": {
+      "hash": "a6ec1319de711fa9",
+      "store_live": false
+    },
+    "p15-1": {
+      "hash": "52c45da8d712c4db",
+      "store_live": false
+    },
+    "p16-1": {
+      "hash": "203c3cd82fdfb7fe",
+      "store_live": false
+    },
+    "p17-1": {
+      "hash": "850beccda831cd7f",
+      "store_live": false
+    },
+    "p17-2": {
+      "hash": "1a3c8db160be3769",
+      "store_live": false
+    },
+    "p18-1": {
+      "hash": "eca35f6498a81d3c",
+      "store_live": false
+    },
+    "p18-2": {
+      "hash": "2dcf398bd035f652",
+      "store_live": false
+    },
+    "p18-3": {
+      "hash": "f691f01dab1477d9",
+      "store_live": false
+    },
+    "p19-1": {
+      "hash": "9ed9b830461bbaf1",
+      "store_live": false
+    },
+    "p19-2": {
+      "hash": "8b3ab597932d53ea",
+      "store_live": false
+    },
+    "p20-1": {
+      "hash": "dcd6b4a4e44ab689",
+      "store_live": false
+    },
+    "p21-1": {
+      "hash": "402d0f960d0ffeec",
+      "store_live": false
+    },
+    "p21-2": {
+      "hash": "8aa8e051773d79ee",
+      "store_live": false
+    },
+    "p22-1": {
+      "hash": "592b9031b9f4a473",
+      "store_live": false
+    },
+    "p23-1": {
+      "hash": "e76c333112fcd033",
+      "store_live": false
+    },
+    "p23-2": {
+      "hash": "b04778a307a78ff0",
+      "store_live": false
+    },
+    "p23-3": {
+      "hash": "6f587193b4bfa4df",
+      "store_live": false
+    },
+    "p24-1": {
+      "hash": "1d2b6055cb4629fc",
+      "store_live": false
+    },
+    "p25-1": {
+      "hash": "f0aa6e74d5ee8543",
+      "store_live": false
+    },
+    "p25-2": {
+      "hash": "af7db2c6456d274d",
+      "store_live": false
+    },
+    "p26-1": {
+      "hash": "bbb5be42e8853ac7",
+      "store_live": false
+    },
+    "p27-1": {
+      "hash": "38d1eaf2c93a99ab",
+      "store_live": false
+    },
+    "p28-1": {
+      "hash": "b6d511fa9130f2c2",
+      "store_live": false
+    },
+    "p28-2": {
+      "hash": "319c009d55c76cbe",
+      "store_live": false
+    },
+    "p29-1": {
+      "hash": "924aace333be0e5c",
+      "store_live": false
+    },
+    "p30-1": {
+      "hash": "eda4703133d3f473",
+      "store_live": false
+    },
+    "p30-2": {
+      "hash": "a26ccc90b4bb49a6",
+      "store_live": false
+    },
+    "p30-3": {
+      "hash": "7e11eb5cc9a158a9",
+      "store_live": false
+    }
+  }
+}

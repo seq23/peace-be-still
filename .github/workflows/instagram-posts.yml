@@ -1,0 +1,60 @@
+name: Instagram + Facebook Posts
+# Peace Be Still's picture posts (her yes 18 Nov 2026, "yes to the IG samples"): Sun, Tue and Thu
+# at 20:00 CT, the same pictures and caption to Instagram @peacebestillapp and the Facebook Page
+# "Peace Be Still", through Peace Be Still's own free Buffer. Every morning it keeps the next 3
+# slots queued on each channel (at most 6 of the Buffer's 10 scheduled posts; Threads keeps 4),
+# from data/instagram/posts.json, records them in data/instagram/posted.json, and writes
+# data/social/metrics.json for the Boss OS scorecard row pbs-social. Pictures are committed under
+# site/public/social/ig (npm run ig:render) and served by the site deploy.
+# Notes, never red: IG_CHANNEL_NOT_CONNECTED, IG_ORG_LIMIT, IG_REEL_FELL_BACK, IG_BANK_LOW,
+# IG_RECYCLE_UNDER_60, IG_POST_VANISHED. Named stops (red): SECRET_MISSING_BUFFER_PEACEBESTILL_ACCESS_TOKEN,
+# BUFFER_ORG_AMBIGUOUS, AMBIGUOUS_IG_CHANNEL, IG_QUEUE_PAUSED, IG_CONTENT_BLOCKED, IG_PUBLISH_FAILED,
+# IG_NOTHING_QUEUED, BUFFER_TOKEN_REFUSED / BUFFER_READ_FAILED / BUFFER_POST_REFUSED.
+# Every run prints `OUTPUT: queued N (instagram I, facebook F), scheduled ahead M, bank unposted K, recycled R (Buffer split ...)`.
+# Logic and proof: scripts/instagram/ig_loop.mjs, scripts/instagram/validate.mjs.
+on:
+  schedule:
+    - cron: "45 8 * * *"  # daily 08:45 CT (after the 08:35 Threads run on the same Buffer)
+      timezone: America/Chicago
+  pull_request:
+    paths: ["scripts/instagram/**", "scripts/threads/**", "scripts/content/**", "data/instagram/posts.json", "data/instagram/frames.lock.json", "site/public/social/**", "content/bible/**", "site/config/store.json", ".github/workflows/instagram-posts.yml", ".github/workflows/threads-posts.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: instagram-posts-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+  cancel-in-progress: false
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/instagram/validate.mjs
+  post:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Queue the next 3 slots on Instagram and Facebook
+        timeout-minutes: 5
+        env:
+          BUFFER_PEACEBESTILL_ACCESS_TOKEN: ${{ secrets.BUFFER_PEACEBESTILL_ACCESS_TOKEN }}
+        run: node scripts/instagram/ig_loop.mjs
+      - name: Record what was queued and the metrics
+        if: always()
+        run: |
+          git config user.name "peace-be-still-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/instagram/posted.json data/social/metrics.json
+          git diff --cached --quiet && { echo "Nothing to record."; exit 0; }
+          git commit -m "chore(instagram): queued posts ledger and social metrics"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          echo "NAMED STOP: IG_LEDGER_PUSH_FAILED - the queued posts ledger could not be pushed to main"; exit 1

@@ -8,7 +8,7 @@
 //    misses a changed verse word (KJV and RV1909), a Mindset / Imagination Nights / manifest /
 //    law of assumption word, a second tag, or store wording in the wrong state;
 // 3. store wording does not switch "coming soon" to "Free on iPhone" once store.json is set;
-// 4. slots are not 21:30 America/Chicago (CST and CDT), or the window is not 7 days;
+// 4. slots are not 21:30 America/Chicago (CST and CDT), or the window is not 4 days (the Threads share of the 10-post Buffer limit);
 // 5. after the bank runs out it does not recycle the oldest 60+ day evergreen post, or puts two
 //    Questions on consecutive days, or overfills the shared organisation limit without a note;
 // 6. end to end against a fake Buffer: no @peacebestillapp channel is not the green
@@ -19,7 +19,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { LINK, TAG, contentProblems, main, planRun, quotedVerses, slotsAhead, slotUtc, storeText } from './threads_loop.mjs';
+import { LINK, SPLIT, TAG, contentProblems, main, planRun, quotedVerses, slotsAhead, slotUtc, storeText } from './threads_loop.mjs';
 
 const bank = JSON.parse(fs.readFileSync('data/threads/posts.json', 'utf8'));
 const LIVE = { app_store_url: 'https://apps.apple.com/app/id0000000000' };
@@ -86,7 +86,7 @@ await check('slots are 21:30 Central', () => {
   assert.equal(slotUtc('2026-11-18', '21:30'), '2026-11-19T03:30:00.000Z');
   assert.equal(slotUtc('2027-04-01', '21:30'), '2027-04-02T02:30:00.000Z');
   const s = slotsAhead(Date.parse('2026-11-18T20:00:00Z'), bank);
-  assert.equal(s.length, 7); assert.equal(s[0].date, '2026-11-18'); assert.equal(s[6].date, '2026-11-24');
+  assert.equal(s.length, 4); assert.equal(s[0].date, '2026-11-18'); assert.equal(s[3].date, '2026-11-21');
   assert.equal(slotsAhead(Date.parse('2026-11-19T03:20:00Z'), bank)[0].date, '2026-11-19', 'a slot under 15 minutes away is skipped');
 });
 
@@ -108,7 +108,7 @@ await check('recycles the oldest 60+ day evergreen post, never Question twice in
 await check('the shared organisation limit is respected and named', () => {
   const r = planRun({ bank, ledger: { posts: {} }, pending: [], now: NOW, orgRoom: 3, store: {} });
   assert.equal(r.picks.length, 3);
-  assert.ok(r.notes.some((n) => n.startsWith('THREADS_ORG_LIMIT 4 evening(s)')), JSON.stringify(r.notes));
+  assert.ok(r.notes.some((n) => n.startsWith('THREADS_ORG_LIMIT 1 evening(s)')), JSON.stringify(r.notes));
 });
 
 // 6. end to end against a fake Buffer
@@ -128,7 +128,7 @@ function fakeBuffer({ channels, scheduled = [] }) {
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pbs-threads-'));
 const notLive = path.join(tmp, 'store-null.json'); fs.writeFileSync(notLive, JSON.stringify({ app_store_url: null, play_url: null }));
 const live = path.join(tmp, 'store-live.json'); fs.writeFileSync(live, JSON.stringify(LIVE));
-const run = async (opts) => { const lines = []; const ledgerFile = path.join(tmp, `l${Math.random()}.json`); try { const r = await main({ now: NOW, env: { BUFFER_APPROVALPREP_ACCESS_TOKEN: 't' }, log: (l) => lines.push(l), ledgerFile, storeFile: notLive, ...opts }); return { r, lines, ledgerFile }; } catch (e) { return { e, lines, ledgerFile }; } };
+const run = async (opts) => { const lines = []; const ledgerFile = path.join(tmp, `l${Math.random()}.json`); try { const r = await main({ now: NOW, env: { BUFFER_PEACEBESTILL_ACCESS_TOKEN: 't' }, log: (l) => lines.push(l), ledgerFile, storeFile: notLive, ...opts }); return { r, lines, ledgerFile }; } catch (e) { return { e, lines, ledgerFile }; } };
 const ap = { id: 'ap', service: 'threads', name: 'approvalprep', isQueuePaused: false };
 const ig = { id: 'ig', service: 'instagram', name: 'peacebestillapp', isQueuePaused: false };
 const pbs = { id: 'pbs', service: 'threads', name: 'peacebestillapp', isQueuePaused: false };
@@ -138,23 +138,23 @@ await check('not connected yet: a green note, the OUTPUT line, and never the @ap
   assert.ok(!e, e?.message);
   assert.equal(fb.made.length, 0, 'posted while not connected');
   assert.ok(lines.some((l) => l.startsWith('NAMED NOTE THREADS_CHANNEL_NOT_CONNECTED')), lines.join(' | '));
-  assert.ok(lines.includes(`OUTPUT: queued 0, scheduled ahead 0, bank unposted ${bank.posts.length}, recycled 0`), lines.join(' | '));
+  assert.ok(lines.includes(`OUTPUT: queued 0, scheduled ahead 0, bank unposted ${bank.posts.length}, recycled 0 (${SPLIT})`), lines.join(' | '));
 });
 await check('named stops', async () => {
-  assert.equal((await run({ env: {} })).e?.code, 'SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN');
+  assert.equal((await run({ env: {} })).e?.code, 'SECRET_MISSING_BUFFER_PEACEBESTILL_ACCESS_TOKEN');
   assert.equal((await run({ fetchImpl: fakeBuffer({ channels: [ap, pbs, { ...pbs, id: 'pbs2' }] }).fetchImpl })).e?.code, 'AMBIGUOUS_THREADS_CHANNEL');
   assert.equal((await run({ fetchImpl: fakeBuffer({ channels: [{ ...pbs, isQueuePaused: true }] }).fetchImpl })).e?.code, 'THREADS_QUEUE_PAUSED');
 });
-await check('connected: 7 posts at 21:30 CT, only to @peacebestillapp, from the real bank', async () => {
+await check('connected: 4 posts at 21:30 CT, only to @peacebestillapp, from the real bank', async () => {
   const fb = fakeBuffer({ channels: [ap, ig, pbs] });
   const { r, e, lines, ledgerFile } = await run({ fetchImpl: fb.fetchImpl });
   assert.ok(!e, e?.message);
-  assert.equal(fb.made.length, 7);
+  assert.equal(fb.made.length, 4);
   for (const i of fb.made) { assert.equal(i.channelId, 'pbs'); assert.equal(i.mode, 'customScheduled'); assert.equal(i.metadata.threads.type, 'post'); assert.match(new Date(i.dueAt).toLocaleString('en-US', { timeZone: 'America/Chicago' }), /9:30:00 PM/); }
   assert.equal(fb.made[0].text, bank.posts[0].text);
-  assert.ok(lines.includes(`OUTPUT: queued 7, scheduled ahead 7, bank unposted ${bank.posts.length - 7}, recycled 0`), lines.join(' | '));
-  assert.equal(Object.keys(JSON.parse(fs.readFileSync(ledgerFile, 'utf8')).posts).length, 7);
-  assert.equal(r.queued, 7);
+  assert.ok(lines.includes(`OUTPUT: queued 4, scheduled ahead 4, bank unposted ${bank.posts.length - 4}, recycled 0 (${SPLIT})`), lines.join(' | '));
+  assert.equal(Object.keys(JSON.parse(fs.readFileSync(ledgerFile, 'utf8')).posts).length, 4);
+  assert.equal(r.queued, 4);
 });
 await check('store link set: the job reads store.json and says Free on iPhone', async () => {
   const fb = fakeBuffer({ channels: [pbs] });

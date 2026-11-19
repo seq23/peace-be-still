@@ -4,6 +4,9 @@
   "scripts": {
     "store:set": "node site/scripts/store-set.mjs",
     "threads:queue": "node scripts/threads/threads_loop.mjs",
-    "validate:threads-loop": "node scripts/threads/validate.mjs"
+    "validate:threads-loop": "node scripts/threads/validate.mjs",
+    "ig:queue": "node scripts/instagram/ig_loop.mjs",
+    "ig:render": "node scripts/instagram/render.mjs",
+    "validate:instagram-loop": "node scripts/instagram/validate.mjs"
   }
 }

@@ -1,9 +1,16 @@
-// Buffer GraphQL client for the Peace Be Still Threads job (scripts/threads/threads_loop.mjs).
-// The same calls as approvalprep scripts/brand_social/buffer_queue.mjs (copied, not shared: the
-// repos do not share code). The token is ApprovalPrep's own free Buffer, which also holds the
-// Threads @peacebestillapp channel.
+// Buffer GraphQL client for the Peace Be Still social jobs (scripts/threads/threads_loop.mjs and
+// scripts/instagram/ig_loop.mjs). The same calls as approvalprep scripts/brand_social/buffer_queue.mjs
+// (copied, not shared: the repos do not share code).
+//
+// Which Buffer: Peace Be Still's own free Buffer (19 Nov 2026; before that the ApprovalPrep one).
+// The ONE switch is TOKEN_ENV below plus the matching `secrets.` line in the two workflows
+// (scripts/instagram/validate.mjs fails if they disagree). No organisation or channel id is kept
+// in this public repo: the organisation is the one the token sees, channels are matched by
+// service AND exact name.
 export const API = 'https://api.buffer.com';
-export const TOKEN_ENV = 'BUFFER_APPROVALPREP_ACCESS_TOKEN';
+export const TOKEN_ENV = 'BUFFER_PEACEBESTILL_ACCESS_TOKEN';
+/** The free plan's scheduled-post limit, split between the two jobs so neither starves the other. */
+export const ORG_SPLIT = { threads: 4, pictures: 6 };
 
 export class NamedStop extends Error {
   constructor(code, why) { super(`${code} - ${why}`); this.code = code; }
@@ -22,6 +29,14 @@ export function bufferClient(token, fetchImpl = fetch, tokenEnv = TOKEN_ENV) {
     if (!res.ok || !body || body.errors?.length) throw new NamedStop('BUFFER_READ_FAILED', `api.buffer.com ${res.status}: ${JSON.stringify(body?.errors ?? body).slice(0, 300)}`);
     return body.data;
   };
+}
+
+/** The one organisation the token sees (a named stop when none, or several: never guess). */
+export async function findOrganization(call) {
+  const orgs = (await call('{ account { organizations { id limits { scheduledPosts } } } }'))?.account?.organizations ?? [];
+  if (!orgs.length) throw new NamedStop('BUFFER_READ_FAILED', 'the token sees no Buffer organisation');
+  if (orgs.length > 1) throw new NamedStop('BUFFER_ORG_AMBIGUOUS', `the token sees ${orgs.length} Buffer organisations; give Peace Be Still a token that sees only its own`);
+  return orgs[0];
 }
 
 export const PENDING_STATUSES = ['scheduled', 'sending', 'needs_approval'];

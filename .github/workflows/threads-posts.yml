@@ -1,12 +1,12 @@
 name: Threads Posts
-# Peace Be Still's daily Threads post (@peacebestillapp) through the ApprovalPrep free Buffer
-# (her yes 18 Nov 2026 to the posts, version 5). Every morning it keeps the next 7 evenings
+# Peace Be Still's daily Threads post (@peacebestillapp) through Peace Be Still's own free Buffer
+# (her yes 18 Nov 2026 to the posts, version 5). Every morning it keeps the next 4 evenings
 # filled, one post each at 21:30 CT (Buffer customScheduled), from data/threads/posts.json, then
 # records what it queued in data/threads/posted.json. After the bank runs out it recycles
 # evergreen posts (60+ days since they ran).
 # Notes, never red: THREADS_CHANNEL_NOT_CONNECTED (until she connects @peacebestillapp in Buffer
 # after Meta's review; the next run retries), THREADS_BANK_LOW, THREADS_ORG_LIMIT,
-# THREADS_RECYCLE_UNDER_60. Named stops (red): SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN,
+# THREADS_RECYCLE_UNDER_60. Named stops (red): SECRET_MISSING_BUFFER_PEACEBESTILL_ACCESS_TOKEN, BUFFER_ORG_AMBIGUOUS,
 # AMBIGUOUS_THREADS_CHANNEL, THREADS_QUEUE_PAUSED, THREADS_CONTENT_BLOCKED (a verse not word for
 # word, a faith-only or banned word, wrong store wording), THREADS_NOTHING_QUEUED, and the
 # Buffer client's BUFFER_TOKEN_REFUSED / BUFFER_READ_FAILED / BUFFER_POST_REFUSED.
@@ -14,10 +14,10 @@ name: Threads Posts
 # Logic and proof: scripts/threads/threads_loop.mjs, scripts/threads/validate.mjs.
 on:
   schedule:
-    - cron: "35 8 * * *"  # daily 08:35 CT (after ApprovalPrep's 08:25 run on the same Buffer)
+    - cron: "35 8 * * *"  # daily 08:35 CT (the picture job runs at 08:45 on the same Buffer)
       timezone: America/Chicago
   pull_request:
-    paths: ["scripts/threads/**", "scripts/content/**", "data/threads/posts.json", "content/bible/**", "site/config/store.json", ".github/workflows/threads-posts.yml"]
+    paths: ["scripts/threads/**", "scripts/instagram/**", "scripts/content/**", "data/threads/posts.json", "content/bible/**", "site/config/store.json", ".github/workflows/threads-posts.yml"]
   workflow_dispatch:
 permissions:
   contents: write
@@ -43,10 +43,10 @@ jobs:
         with: { ref: main }
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - name: Queue the next 7 evenings
+      - name: Queue the next 4 evenings
         timeout-minutes: 5
         env:
-          BUFFER_APPROVALPREP_ACCESS_TOKEN: ${{ secrets.BUFFER_APPROVALPREP_ACCESS_TOKEN }}
+          BUFFER_PEACEBESTILL_ACCESS_TOKEN: ${{ secrets.BUFFER_PEACEBESTILL_ACCESS_TOKEN }}
         run: node scripts/threads/threads_loop.mjs
       - name: Record what was queued
         if: always()
