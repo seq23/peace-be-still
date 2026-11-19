@@ -316,16 +316,36 @@ def render(item: dict, pron: dict, wav: Path, speed: float) -> None:
         raise RuntimeError(f"render failed: {r.stderr.strip()[-300:]}")
 
 
-def encode(wav: Path, out: Path, level: str, margin_db: float = 1.5) -> None:
-    """Gain to the level's target, a peak limiter `margin_db` under its true-peak ceiling, AAC-LC mono 48 kbps."""
+ENCODE_TRIES = 4
+
+
+def next_margin(margin_db: float, measured_tp: float, ceiling: float) -> float | None:
+    """The limiter margin for the next encode, or None when the file already sits under its ceiling.
+    The sample limiter cannot see the inter-sample overs the AAC encoder adds (19 Nov 2026: 53 of 63
+    failures were A06 true peak on 'read' chapters, each after 10-25 minutes of reading aloud), so the
+    measured overshoot of the ENCODED file is added to the margin, plus 0.5 dB headroom."""
+    if measured_tp <= ceiling - 0.2:
+        return None
+    return round(margin_db + (measured_tp - ceiling) + 0.7, 2)
+
+
+def encode(wav: Path, out: Path, level: str, margin_db: float = 1.5, *, run=subprocess.run, measure=None) -> None:
+    """Gain to the level's target, a peak limiter `margin_db` under its true-peak ceiling, AAC-LC mono 48 kbps.
+    Re-encodes (never re-renders) with a tighter limiter until the ENCODED file's true peak is under the ceiling."""
     import qa
+    measure = measure or (lambda p: qa.loudness(p))
     target, tp = LEVEL_TARGET[level]
-    gain = round(target - qa.loudness(wav)["lufs"], 2)
-    limit = round(10 ** ((tp - margin_db) / 20), 4)
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af",
-                    f"volume={gain}dB,alimiter=limit={limit}:attack=5:release=50:level=false",
-                    "-ac", "1", "-ar", "24000", "-c:a", "aac_at", "-b:a", "48k", "-movflags", "+faststart", str(out)],
-                   check=True, timeout=1800)
+    gain = round(target - measure(wav)["lufs"], 2)
+    for _ in range(ENCODE_TRIES):
+        limit = round(10 ** ((tp - margin_db) / 20), 4)
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af",
+             f"volume={gain}dB,alimiter=limit={limit}:attack=5:release=50:level=false",
+             "-ac", "1", "-ar", "24000", "-c:a", "aac_at", "-b:a", "48k", "-movflags", "+faststart", str(out)],
+            check=True, timeout=1800)
+        nxt = next_margin(margin_db, measure(out)["true_peak"], tp)
+        if nxt is None:
+            return
+        margin_db = nxt
 
 
 def sha256(path: Path) -> str:

@@ -210,3 +210,31 @@ class Bars(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EncodeTruePeak(unittest.TestCase):
+    """19 Nov 2026: 'read' chapters failed A06 true peak after 10-25 minutes of reading, because the
+    sample limiter cannot see the overs the AAC encoder adds. encode() must re-encode until the ENCODED
+    file is under the ceiling, never hand a too-loud file to the judge."""
+
+    def test_reencodes_until_the_encoded_file_is_under_the_ceiling(self):
+        peaks = iter([0.3, -0.6, -1.4])  # what each encoded file measures
+        calls = []
+        def measure(p):
+            if str(p).endswith(".wav"):
+                return {"lufs": -20.0, "true_peak": -3.0}
+            return {"lufs": -17.0, "true_peak": next(peaks)}
+        fill.encode(Path("in.wav"), Path("out.m4a"), "read", run=lambda *a, **k: calls.append(a[0]), measure=measure)
+        self.assertEqual(len(calls), 3)
+        limits = [float(c[c.index("-af") + 1].split("limit=")[1].split(":")[0]) for c in calls]
+        self.assertTrue(limits[0] > limits[1] > limits[2], limits)
+
+    def test_one_encode_when_already_under(self):
+        calls = []
+        measure = lambda p: {"lufs": -20.0, "true_peak": -3.0}
+        fill.encode(Path("in.wav"), Path("out.m4a"), "read", run=lambda *a, **k: calls.append(a[0]), measure=measure)
+        self.assertEqual(len(calls), 1)
+
+    def test_next_margin(self):
+        self.assertIsNone(fill.next_margin(1.5, -1.4, -1.0))
+        self.assertEqual(fill.next_margin(1.5, -0.1, -1.0), 3.1)
