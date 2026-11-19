@@ -2,13 +2,13 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W47",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-18T20:37:45.579Z",
+  "generated_at": "2026-11-19T19:07:58.878Z",
   "state": "slow",
-  "published": 3,
+  "published": 6,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
   "ai_visitors": 0,
-  "ai_bot_hits": 42,
+  "ai_bot_hits": 123,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
@@ -182,19 +182,67 @@
       "strengthen": "https://peacebestillapp.com/questions/bible-asmr/",
       "matched_by": "high token overlap (0.67 >= 0.6)",
       "at": "2026-11-18"
+    },
+    {
+      "query": "is the bible app free",
+      "strengthen": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "is the holy bible app free",
+      "strengthen": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "is there a free bible chat app",
+      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "what are some free bible chat apps",
+      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "is bible chat app free to use",
+      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "bible app for black women",
+      "strengthen": "https://peacebestillapp.com/bible-app-for-women/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "bible study app for black women",
+      "strengthen": "https://peacebestillapp.com/bible-app-for-women/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "african american bible app",
+      "strengthen": "https://peacebestillapp.com/site/public/questions/african-american-bible/",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-19"
     }
   ],
   "cap": {
     "max_live_pages": 10,
-    "live": 3,
-    "room": 7,
+    "live": 6,
+    "room": 4,
     "why": "held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data"
   },
   "notes": [
     "site config lowers the mode to slow",
-    "BUILD distinct gate: 20 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD distinct gate: 8 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
     "BUILD gate notes (not blocking): 3 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json",
-    "IndexNow: 3 new page(s) not live yet; submitted when they answer 200"
+    "CHECK runs weekly in mode=slow; last ran 2026-11-18"
   ],
   "lanes": {
     "ratio": {
@@ -208,7 +256,7 @@
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
     },
     "striking": {
-      "pages": 3,
+      "pages": 6,
       "measured": 0,
       "top3": 0,
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
@@ -222,5 +270,5 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44393007290"
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44595088678"
 }

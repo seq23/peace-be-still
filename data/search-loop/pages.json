@@ -39,7 +39,8 @@
         "b5 FAQ answer is 36 words (aim 40-60): \"How do the whispered Psalms work at bedtime?\"",
         "b5 FAQ answer is 36 words (aim 40-60): \"Are there Spanish scriptures available for bedtime\"",
         "b5 FAQ answer is 35 words (aim 40-60): \"How much does the app cost after I download it?\""
-      ]
+      ],
+      "indexnow_at": "2026-11-19"
     },
     {
       "slug": "psalm-91-prayer-for-sleep",
@@ -84,7 +85,8 @@
         "psalm 91 sleep meditation abide",
         "psalm 91 sleep rain",
         "psalm 91 bedtime prayer"
-      ]
+      ],
+      "indexnow_at": "2026-11-19"
     },
     {
       "slug": "is-there-a-bible-app-that-doesnt-require-internet",
@@ -134,6 +136,134 @@
       "checks": {},
       "gate_notes": [
         "b1 title does not put the search first"
+      ],
+      "indexnow_at": "2026-11-19"
+    },
+    {
+      "slug": "does-the-holy-bible-app-cost-money",
+      "query": "does the holy bible app cost money",
+      "lane": "striking",
+      "score": 30,
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "rel": "site/public/questions/does-the-holy-bible-app-cost-money/index.html",
+      "route": "/questions/does-the-holy-bible-app-cost-money/",
+      "url": "https://peacebestillapp.com/questions/does-the-holy-bible-app-cost-money/",
+      "published_at": "2026-11-19",
+      "status": "live",
+      "hash": "5f995cbffc409170e0752af3fb4b65bf5a6a395fff252b3960e73fd0653250f5",
+      "model": "free-route",
+      "facts": [
+        "https://peacebestillapp.com",
+        "https://en.wikipedia.org/wiki/King_James_Version"
+      ],
+      "linked_from": [],
+      "checks": {},
+      "gate_notes": [
+        "b5 FAQ answer is 37 words (aim 40-60): \"Is there a free version of the app?\"",
+        "b5 FAQ answer is 34 words (aim 40-60): \"Will I be charged after a free trial?\"",
+        "b5 FAQ answer is 31 words (aim 40-60): \"Are there advertisements in the app?\"",
+        "b5 FAQ answer is 36 words (aim 40-60): \"How do I get the app?\""
+      ]
+    },
+    {
+      "slug": "daily-devotional-for-black-woman",
+      "query": "daily devotional for black woman",
+      "lane": "striking",
+      "score": 25,
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "rel": "site/public/questions/daily-devotional-for-black-woman/index.html",
+      "route": "/questions/daily-devotional-for-black-woman/",
+      "url": "https://peacebestillapp.com/questions/daily-devotional-for-black-woman/",
+      "published_at": "2026-11-19",
+      "status": "live",
+      "hash": "ba919e982b0e990f82f5fbce30cb0fb5b8905a96a7d230502e80be7e0c2daa1b",
+      "model": "free-route",
+      "facts": [
+        "https://en.wikipedia.org/wiki/King_James_Version",
+        "https://peacebestillapp.com",
+        "https://www.biblegateway.com/versions/Reina-Valera-1909-RV1909-Biblia/"
+      ],
+      "linked_from": [],
+      "checks": {},
+      "gate_notes": [
+        "b5 FAQ answer is 39 words (aim 40-60): \"Is there a version of the app for Spanish speakers\""
+      ]
+    },
+    {
+      "slug": "free-daily-devotional-for-black-women",
+      "query": "free daily devotional for black women",
+      "lane": "striking",
+      "score": 25,
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "rel": "site/public/questions/free-daily-devotional-for-black-women/index.html",
+      "route": "/questions/free-daily-devotional-for-black-women/",
+      "url": "https://peacebestillapp.com/questions/free-daily-devotional-for-black-women/",
+      "published_at": "2026-11-19",
+      "status": "live",
+      "hash": "14b310a6894eaadc6c5ed4dfe9fabbd4ca021b912c810bfa8084fc2d7a5f3e9a",
+      "model": "free-route",
+      "facts": [
+        "https://en.wikipedia.org/wiki/King_James_Version",
+        "https://www.biblegateway.com/versions/Reina-Valera-1909-RVR1909/"
+      ],
+      "linked_from": [],
+      "checks": {},
+      "gate_notes": [
+        "b5 FAQ answer is 30 words (aim 40-60): \"Is there a cost to use the app?\"",
+        "b5 FAQ answer is 33 words (aim 40-60): \"Can I hear the Bible in Spanish?\"",
+        "b5 FAQ answer is 31 words (aim 40-60): \"How does the AI Bible chat work?\"",
+        "b5 FAQ answer is 31 words (aim 40-60): \"What is the nightly practice?\""
       ]
     }
   ],
@@ -256,6 +386,44 @@
         "b5 FAQ answer is 24 words (aim 40-60): \"Are there commercials during the audio readings or\"",
         "b5 FAQ answer is 24 words (aim 40-60): \"Where can I download the app when it is ready for \"",
         "b5 FAQ answer is 26 words (aim 40-60): \"Can I cancel my monthly subscription whenever I wa\""
+      ]
+    },
+    {
+      "query": "daily devotional for black women",
+      "at": "2026-11-19",
+      "gate": 2,
+      "reason": [
+        "invented: unsourced price \"You pay seven dollars and ninety-nine cents a month, or thirty-nine dollars and ninety-nine cents a \" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      ]
+    },
+    {
+      "query": "daily devotional for black women 2026",
+      "at": "2026-11-19",
+      "gate": 2,
+      "reason": [
+        "invented: unsourced price \"If you choose the paid lane, the cost is seven dollars and ninety-nine cents a month or thirty-nine \" (drop the amount, or move it into \"facts\" with a dated source that states it)",
+        "banned word for this site: \"cure\"",
+        "health: outcome or treatment claim \"cure\""
+      ]
+    },
+    {
+      "query": "daily devotional for black women 2025",
+      "at": "2026-11-19",
+      "gate": 2,
+      "reason": [
+        "off-audience: The search term asks for a printed book style daily devotional, whereas Peace Be Still is an app offering audio scriptur"
+      ]
+    },
+    {
+      "query": "daily devotional for black women app",
+      "at": "2026-11-19",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 23 words (aim 40-60): \"Are there ads in the app?\"",
+        "b5 FAQ answer is 20 words (aim 40-60): \"Can I use the app in Spanish?\"",
+        "b5 FAQ answer is 22 words (aim 40-60): \"How does the sleep timer work?\"",
+        "b5 FAQ answer is 20 words (aim 40-60): \"Is there a free version available?\"",
+        "invented: unsourced price \"If you prefer extra features, the paid lane costs seven dollars and ninety-nine cents a month or thi\" (drop the amount, or move it into \"facts\" with a dated source that states it)"
       ]
     }
   ],
@@ -538,6 +706,86 @@
       "kind": "sitemap",
       "matched_by": "high token overlap (0.67 >= 0.6)",
       "matched_text": "bible asmr",
+      "stage": "search"
+    },
+    {
+      "query": "is the bible app free",
+      "at": "2026-11-19",
+      "url": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
+      "route": "/site/public/questions/is-creed-bible-app-free/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "matched_text": "Is the Creed Bible app free?",
+      "stage": "search"
+    },
+    {
+      "query": "is the holy bible app free",
+      "at": "2026-11-19",
+      "url": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
+      "route": "/site/public/questions/is-creed-bible-app-free/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "Is the Creed Bible app free?",
+      "stage": "search"
+    },
+    {
+      "query": "is there a free bible chat app",
+      "at": "2026-11-19",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "route": "/free-bible-chat/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "free bible chat",
+      "stage": "search"
+    },
+    {
+      "query": "what are some free bible chat apps",
+      "at": "2026-11-19",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "route": "/free-bible-chat/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "free bible chat",
+      "stage": "search"
+    },
+    {
+      "query": "is bible chat app free to use",
+      "at": "2026-11-19",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "route": "/free-bible-chat/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "free bible chat",
+      "stage": "search"
+    },
+    {
+      "query": "bible app for black women",
+      "at": "2026-11-19",
+      "url": "https://peacebestillapp.com/bible-app-for-women/",
+      "route": "/bible-app-for-women/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "matched_text": "bible app for women",
+      "stage": "search"
+    },
+    {
+      "query": "bible study app for black women",
+      "at": "2026-11-19",
+      "url": "https://peacebestillapp.com/bible-app-for-women/",
+      "route": "/bible-app-for-women/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "bible app for women",
+      "stage": "search"
+    },
+    {
+      "query": "african american bible app",
+      "at": "2026-11-19",
+      "url": "https://peacebestillapp.com/site/public/questions/african-american-bible/",
+      "route": "/site/public/questions/african-american-bible/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "matched_text": "African American Bible: the editions, and the Bible apps · Peace Be Still",
       "stage": "search"
     }
   ]

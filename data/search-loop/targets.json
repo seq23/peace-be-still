@@ -1961,6 +1961,78 @@
   ],
   "strengthen": [
     {
+      "query": "african american bible app",
+      "page": "/site/public/questions/african-american-bible/",
+      "url": "https://peacebestillapp.com/site/public/questions/african-american-bible/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "bible study app for black women",
+      "page": "/bible-app-for-women/",
+      "url": "https://peacebestillapp.com/bible-app-for-women/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "bible app for black women",
+      "page": "/bible-app-for-women/",
+      "url": "https://peacebestillapp.com/bible-app-for-women/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "is bible chat app free to use",
+      "page": "/free-bible-chat/",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "score": 30,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "what are some free bible chat apps",
+      "page": "/free-bible-chat/",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "score": 30,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "is there a free bible chat app",
+      "page": "/free-bible-chat/",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "score": 30,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "is the holy bible app free",
+      "page": "/site/public/questions/is-creed-bible-app-free/",
+      "url": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
+      "score": 30,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
+      "query": "is the bible app free",
+      "page": "/site/public/questions/is-creed-bible-app-free/",
+      "url": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
+      "score": 30,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-19"
+    },
+    {
       "query": "bible asmr sleep",
       "page": "/questions/bible-asmr/",
       "url": "https://peacebestillapp.com/questions/bible-asmr/",
