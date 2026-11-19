@@ -126,7 +126,7 @@ await check('recycles the oldest 60+ day evergreen post after the bank', () => {
 });
 
 // 6. end to end against a fake Buffer
-function fakeBuffer({ channels, scheduled = [], refuseReel = false, mediaStatus = 200, errors = [] }) {
+function fakeBuffer({ channels, scheduled = [], refuseReel = false, refuseAll = false, mediaStatus = 200, errors = [] }) {
   const made = [];
   const fetchImpl = async (url, init) => {
     if (init?.method === 'HEAD') return { status: mediaStatus, headers: { get: () => (url.includes('.mp4') ? 'video/mp4' : 'image/png') } };
@@ -135,7 +135,8 @@ function fakeBuffer({ channels, scheduled = [], refuseReel = false, mediaStatus 
     if (query.includes('account')) data = { account: { organizations: [{ id: 'org', limits: { scheduledPosts: 10 } }] } };
     else if (query.includes('channels(')) data = { channels };
     else if (query.includes('createPost')) {
-      if (refuseReel && variables.i.assets[0]?.video) data = { createPost: { __typename: 'MutationError', message: 'reels not allowed' } };
+      if (refuseAll || (refuseReel && variables.i.assets[0]?.video)) data = { createPost: { __typename: 'MutationError', message: refuseAll ? 'Invalid post' : 'reels not allowed' } };
+      else if (variables.i.metadata?.instagram?.type === 'carousel') data = { createPost: { __typename: 'MutationError', message: "Instagram does not support the 'carousel' post type" } };
       else { made.push(variables.i); data = { createPost: { __typename: 'PostActionSuccess', post: { id: `b${made.length}`, dueAt: variables.i.dueAt } } }; }
     } else if (query.includes('aggregatedPostMetrics')) data = { aggregatedPostMetrics: { metrics: [{ type: 'views', value: 12 }] } };
     else if (query.includes('[sent]')) data = { posts: { edges: [{ node: { id: 'b1', channelId: 'ig', sentAt: '2026-11-20T02:00:05Z' } }], pageInfo: { hasNextPage: false } } };
@@ -172,6 +173,9 @@ await check('named stops', async () => {
   assert.equal((await run({ env: {} })).e?.code, `SECRET_MISSING_${TOKEN_ENV}`);
   assert.equal((await run({ fetchImpl: fakeBuffer({ channels: [ig, { ...ig, id: 'ig2' }] }).fetchImpl })).e?.code, 'AMBIGUOUS_IG_CHANNEL');
   assert.equal((await run({ fetchImpl: fakeBuffer({ channels: [{ ...ig, isQueuePaused: true }, fb] }).fetchImpl })).e?.code, 'IG_QUEUE_PAUSED');
+  const refused = await run({ fetchImpl: fakeBuffer({ channels: [ig, fb], refuseAll: true }).fetchImpl });
+  assert.equal(refused.e?.code, 'BUFFER_POST_REFUSED');
+  assert.ok(fs.existsSync(refused.metricsFile), 'metrics.json not written when Buffer refused a post');
   const f = fakeBuffer({ channels: [ig, fb], mediaStatus: 404 });
   const r = await run({ fetchImpl: f.fetchImpl });
   assert.equal(r.e?.code, 'IG_CONTENT_BLOCKED'); assert.equal(f.made.length, 0, 'queued a post whose picture does not open');
@@ -184,7 +188,7 @@ await check('connected: the same post at 20:00 CT to instagram and facebook, roo
   assert.deepEqual(f.made.map((i) => i.channelId), ['ig', 'fb', 'ig', 'fb', 'ig', 'fb']);
   for (const i of f.made) { assert.equal(i.mode, 'customScheduled'); assert.match(new Date(i.dueAt).toLocaleString('en-US', { timeZone: 'America/Chicago', weekday: 'short' }), /^(Sun|Tue|Thu)/); assert.match(new Date(i.dueAt).toLocaleString('en-US', { timeZone: 'America/Chicago' }), /8:00:00 PM/); }
   assert.equal(f.made[0].text, bank.posts[0].caption); assert.equal(f.made[1].text, bank.posts[0].caption);
-  assert.equal(f.made[0].assets.length, 3); assert.equal(f.made[0].metadata.instagram.type, 'carousel'); assert.equal(f.made[1].metadata.facebook.type, 'post');
+  assert.equal(f.made[0].assets.length, 3); assert.equal(f.made[0].metadata.instagram.type, 'post', 'a carousel is a post with several images'); assert.equal(f.made[1].metadata.facebook.type, 'post');
   assert.match(f.made[0].assets[0].image.url, /^https:\/\/peacebestillapp\.com\/social\/ig\/p1-1\.png\?v=[0-9a-f]{8}$/);
   assert.ok(f.made[0].assets[0].image.metadata.altText.includes('Hush Harbor'));
   assert.equal(f.made[4].metadata.instagram.type, 'post', 'p2 is a single picture');
@@ -234,7 +238,8 @@ await check('the Buffer token is one switch and no Buffer id is in the repo', ()
     assert.ok(y.includes(`${TOKEN_ENV}: \${{ secrets.${TOKEN_ENV} }}`), `${wf} does not pass secrets.${TOKEN_ENV}`);
   }
   const files = ['scripts/threads', 'scripts/instagram', 'data/instagram', 'data/threads', 'data/social', '.github/workflows'].flatMap((d) => (fs.existsSync(d) ? fs.readdirSync(d).map((f) => path.join(d, f)) : []));
-  for (const f of files) if (fs.statSync(f).isFile()) assert.ok(!/\b[0-9a-f]{24}\b/.test(fs.readFileSync(f, 'utf8')), `${f} holds a 24-hex Buffer id`);
+  // The ledgers (posted.json) hold Buffer POST ids by design; organisation and channel ids never.
+  for (const f of files) if (fs.statSync(f).isFile() && !f.endsWith('posted.json')) assert.ok(!/\b[0-9a-f]{24}\b/.test(fs.readFileSync(f, 'utf8')), `${f} holds a 24-hex Buffer id`);
 });
 
 if (fails.length) { console.error(`[validate:instagram-loop] FAIL\n- ${fails.join('\n- ')}`); process.exit(1); }

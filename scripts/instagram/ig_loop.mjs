@@ -210,9 +210,10 @@ export function postInput({ post, channel, channelId, dueAt, text, lock, reel = 
     const metadata = channel === 'instagram' ? { instagram: { type: 'reel', shouldShareToFeed: true, isAiGenerated: true } } : { facebook: { type: 'reel' } };
     return { ...base, assets: [{ video }], metadata };
   }
+  // A carousel is an Instagram 'post' with several images (Buffer refuses type 'carousel', 19 Nov 2026).
   const frames = postFrames({ ...post, reel: undefined });
   const assets = frames.map(({ file, frame }) => ({ image: { url: imageUrl(file, lock), metadata: { altText: frameText(frame, post.lang).slice(0, 500) } } }));
-  const metadata = channel === 'instagram' ? { instagram: { type: frames.length > 1 ? 'carousel' : 'post', shouldShareToFeed: true } } : { facebook: { type: 'post' } };
+  const metadata = channel === 'instagram' ? { instagram: { type: 'post', shouldShareToFeed: true } } : { facebook: { type: 'post' } };
   return { ...base, assets, metadata };
 }
 
@@ -323,9 +324,18 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
   const plan = live.length ? planRun({ bank, ledger, pending, now, room, channels: live.map((c) => c.key), store, lock }) : { jobs: [], notes: [], blocked: [] };
   notes.push(...plan.notes);
   const blocked = [...plan.blocked];
+  const metrics = async () => {
+    try {
+      writeMetrics(metricsFile, await readMetrics({ call, orgId: org.id, chans, ledgers: [ledger, readJson(threadsLedgerFile, { posts: {} })], now }), now);
+    } catch (e) {
+      writeMetrics(metricsFile, {}, now);
+      notes.push(`IG_METRICS_NOT_READ ${e.message.slice(0, 200)}`);
+    }
+  };
   const mediaChecked = new Map();
   const count = { instagram: 0, facebook: 0 };
   let recycled = 0;
+  try {
   for (const { post, slot, channel, recycled: re } of plan.jobs) {
     if (!mediaChecked.has(post.id)) mediaChecked.set(post.id, await mediaProblem(post, lock, fetchImpl));
     const media = mediaChecked.get(post.id);
@@ -349,19 +359,14 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
     if (re) recycled += 1;
     log(`queued ${post.id} (${format}${re ? ', recycled' : ''}) on ${channel} for ${slot.day} ${slot.date} 20:00 CT`);
   }
+  } catch (e) { writeLedger(ledger); await metrics(); throw e; }
   writeLedger(ledger);
   const queued = count.instagram + count.facebook;
   const ahead = pending.filter((p) => p.dueAt && Date.parse(p.dueAt) > now).length + queued;
   const left = unposted(bank, ledger).length;
   if (left < (bank.bank_low_below ?? 9)) notes.push(`IG_BANK_LOW ${left} unposted left in data/instagram/posts.json; recycling keeps posting, add new approved posts`);
 
-  try {
-    const m = await readMetrics({ call, orgId: org.id, chans, ledgers: [ledger, readJson(threadsLedgerFile, { posts: {} })], now });
-    writeMetrics(metricsFile, m, now);
-  } catch (e) {
-    writeMetrics(metricsFile, {}, now);
-    notes.push(`IG_METRICS_NOT_READ ${e.message.slice(0, 200)}`);
-  }
+  await metrics();
 
   for (const n of notes) log(`NAMED NOTE ${n}`);
   const output = `OUTPUT: queued ${queued} (instagram ${count.instagram}, facebook ${count.facebook}), scheduled ahead ${ahead}, bank unposted ${left}, recycled ${recycled} (${SPLIT})`;
