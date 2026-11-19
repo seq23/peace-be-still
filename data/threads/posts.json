@@ -1,0 +1,623 @@
+{
+  "_comment": "Peace Be Still Threads @peacebestillapp post bank, read by scripts/threads/threads_loop.mjs (daily job .github/workflows/threads-posts.yml). Days 1-14 approved by her 18 Nov 2026 word for word (version 5, 'approved' date); days 15-60 written to the same voice and rules. Every quoted verse is the KJV (or RV1909 for lang es) word for word from content/bible, re-checked at queue time. 'Coming soon' wording switches to 'Free on iPhone' once site/config/store.json has app_store_url. Faith only: never Mindset, Imagination Nights, manifesting or law of assumption. `evergreen`: may be recycled once the bank has all gone out (day 9 names a holiday). Add new posts at the end; never reuse an id.",
+  "slot_time_ct": "21:30",
+  "days_ahead": 7,
+  "recycle_after_days": 60,
+  "bank_low_below": 14,
+  "posts": [
+    {
+      "id": "pbs01",
+      "day": 1,
+      "type": "About",
+      "series": "Meet Hush Harbor",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Meet Hush Harbor · Black Bible Chat & Stories.\n\nTell it what's on your heart. It answers like the church mothers who raised us: King James, word for word, then \"Want to pray on it together?\"\n\nWhat would you tell it first?\n\npeacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs02",
+      "day": 2,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me: Rent is due Friday and I'm $200 short.\n\nHush Harbor: I hear you, baby. Set that worry down for a minute.\n\"But my God shall supply all your need according to his riches in glory by Christ Jesus.\"\nPhilippians 4:19\nWant to pray on it together?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs03",
+      "day": 3,
+      "type": "Question",
+      "series": "Say it back",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Hush Harbor starts every morning the same way. I'll start, you finish.\n\nGod is good...\n\nYou already know. Say it in the replies.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs04",
+      "day": 4,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me: Pastor preached 45 minutes on Romans and I still don't get it.\n\nHush Harbor: That's alright, baby. One verse, slow.\n\"And we know that all things work together for good to them that love God, to them who are the called according to his purpose.\"\nRomans 8:28\nAll things. Not just the good ones. Want me to walk you through the rest?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs05",
+      "day": 5,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me: He said he'd call Tuesday. It's Friday.\n\nHush Harbor: Mm-hm. Here's who you can wait on:\n\"But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.\"\nIsaiah 40:31\nNow turn that phone face down, baby.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs06",
+      "day": 6,
+      "type": "Chat",
+      "series": "Hush Harbor · Psalm Nights",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me: It's 2 a.m. and my mind won't hush.\n\nHush Harbor: Then let's not talk tonight. Lie back.\n\"It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep.\"\nPsalm 127:2\nWant me to whisper you a Psalm till you drift? Screen goes dark. I'll keep reading.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs07",
+      "day": 7,
+      "type": "Story",
+      "series": "Hush Harbor · Stories",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me: Tell me a Bible story like my grandmother used to.\n\nHush Harbor: Pull up a chair, baby. Let me tell you about a young man named Daniel, and a night in a den full of lions that never laid a paw on him...\n\nA new story every day. Which one should it tell next?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs08",
+      "day": 8,
+      "type": "Chat",
+      "series": "Hush Harbor · Morning Word",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me: Give me something to say before I walk in that office.\n\nHush Harbor: Say it with me, out loud:\n\"For his anger endureth but a moment; in his favour is life: weeping may endure for a night, but joy cometh in the morning.\"\nPsalm 30:5\nNow you: Joy is coming in the morning. Again. There you go.\n\nType it below so somebody else walks in with it too.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs09",
+      "day": 9,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": false,
+      "approved": "2026-11-18",
+      "text": "Me: My sister and I haven't spoken since Thanksgiving.\n\nHush Harbor: That's a long time to carry a heavy plate.\n\"And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ’s sake hath forgiven you.\"\nEphesians 4:32\nWant to pray on it before you text her?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs10",
+      "day": 10,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me: Work, the kids, Daddy's doctor visits. I can't do one more thing.\n\nHush Harbor: Then don't do one more thing tonight.\n\"Come unto me, all ye that labour and are heavy laden, and I will give you rest.\"\nMatthew 11:28\nThat's an invitation, not a chore. Want me to read you to sleep?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs11",
+      "day": 11,
+      "type": "Chat",
+      "series": "Mi Refugio",
+      "lang": "es",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Yo: Estoy cansada y no sé a quién contarle.\n\nMi Refugio: Aquí estoy, mi amor. Escucha esto:\n\"Diré yo á Jehová: Esperanza mía, y castillo mío; mi Dios, en él confiaré.\"\nSalmos 91:2\n¿Oramos juntas?\n\nHush Harbor también habla español: Mi Refugio · Biblia y Chat en Español.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs12",
+      "day": 12,
+      "type": "Chat",
+      "series": "Young Faith",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me (16): Everybody at school has it figured out but me.\n\nYoung Faith: Real talk? Nobody does. Keep this one in your pocket:\n\"Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.\"\nIsaiah 41:10\nWant to talk about what happened today?\n\nParents: teens get their own chat voice. No chat under 13.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs13",
+      "day": 13,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Me: I got laid off today.\n\nHush Harbor: Breathe first. Then hear what the Word has seen:\n\"I have been young, and now am old; yet have I not seen the righteous forsaken, nor his seed begging bread.\"\nPsalm 37:25\nThis is a hard day, not your last chapter. Let's pray, then let's make tomorrow's list.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs14",
+      "day": 14,
+      "type": "About",
+      "series": "Free forever",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "approved": "2026-11-18",
+      "text": "Peace Be Still, free forever:\n\nThe whole King James Bible to read AND hear. A Hush Harbor chat every day. Today's Bible story. A sleep night every week. Your Morning Word. No ads.\n\nMore if you want it: $7.99 a month. Coming to iPhone soon. Hush Harbor is AI, and it always says so.\n\npeacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs15",
+      "day": 15,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I have 47 tabs open and one nerve left.\n\nHush Harbor: Close 46 of them, baby. Keep this one open:\n\"Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee.\"\nIsaiah 26:3\nNow, want to pray on whatever is in tab 47?\n\nHush Harbor · Black Bible Chat & Stories\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs16",
+      "day": 16,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Me: I loaned out my good casserole dish in 2019. Still waiting.\n\nHush Harbor: Mm-hm. I know that dish.\n\"Withhold not good from them to whom it is due, when it is in the power of thine hand to do it.\"\nProverbs 3:27\nWant to pray on it, or just send that verse to whoever has it?\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs17",
+      "day": 17,
+      "type": "Question",
+      "series": "Say it back",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Say it back. Finish it the way your grandmother said it:\n\nHe may not come when you want him, but...\n\nYou know the rest. Say it in the replies.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs18",
+      "day": 18,
+      "type": "Chat",
+      "series": "Hush Harbor · Psalm Nights",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I'm in bed replaying something I said in 2014.\n\nHush Harbor: Leave 2014 where it is, baby. It's Psalm Nights.\n\"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.\"\nPsalm 4:8\nWant me to whisper the rest of Psalm 4 till you drift? Screen goes dark. I'll keep reading.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs19",
+      "day": 19,
+      "type": "Chat",
+      "series": "Hush Harbor · Morning Word",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: It's Monday and I already need a Tuesday.\n\nHush Harbor: Morning Word first. Say it out loud with me:\n\"This is the day which the LORD hath made; we will rejoice and be glad in it.\"\nPsalm 118:24\nNow you: This is the day. I will rejoice. Again, like you mean it.\n\nHush Harbor is AI. The verse is the King James, word for word.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs20",
+      "day": 20,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Me: My group chat has been arguing since 6 a.m.\n\nHush Harbor: And you've read every message, haven't you?\n\"Even a fool, when he holdeth his peace, is counted wise: and he that shutteth his lips is esteemed a man of understanding.\"\nProverbs 17:28\nMute it for an hour and come sit with me instead.\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs21",
+      "day": 21,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: Everybody calls me the strong friend. I'm tired, though.\n\nHush Harbor: Even the strong friend gets to sit down, baby.\n\"Bear ye one another’s burdens, and so fulfil the law of Christ.\"\nGalatians 6:2\nThat goes both ways. Who's been carrying you lately? Tell me.\n\nHush Harbor · Black Bible Chat & Stories\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs22",
+      "day": 22,
+      "type": "Question",
+      "series": "One line",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "One line: what verse did your mama quote when you got too grown?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs23",
+      "day": 23,
+      "type": "Story",
+      "series": "Hush Harbor · Stories",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: Tell me about the short man in the tree.\n\nHush Harbor: Zacchæus, baby. Too short to see over the crowd, so he climbed a sycamore. And Jesus stopped right under that tree and called him by name...\n\"And when Jesus came to the place, he looked up, and saw him, and said unto him, Zacchæus, make haste, and come down; for to day I must abide at thy house.\"\nLuke 19:5\nWant the rest? A new story every day.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs24",
+      "day": 24,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Me: My car is making a noise. A new noise.\n\nHush Harbor: Lord. Okay. Breathe before you call anybody.\n\"Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.\"\nPhilippians 4:6\nThen call the mechanic. Want to pray on it first?\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs25",
+      "day": 25,
+      "type": "Chat",
+      "series": "Young Faith",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me (15): My mom says I roll my eyes too much.\n\nYoung Faith: Real talk? An eye roll is usually words you didn't say. Try this first:\n\"Children, obey your parents in the Lord: for this is right.\"\nEphesians 6:1\nVerse 4 has a word for parents too. Want to practice what you'd say to her?\n\nParents: Young Faith is the teen voice of an AI Bible chat. No chat under 13.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs26",
+      "day": 26,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I told the Lord I'd be patient. Then I got in the DMV line.\n\nHush Harbor: Mm-hm. He heard both of those.\n\"Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.\"\nPsalm 27:14\nWant to pray while you wait on number 84?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs27",
+      "day": 27,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: My mother-in-law is staying with us for two weeks.\n\nHush Harbor: Two weeks. Alright. We're going to need a verse for every day, baby. Start here:\n\"A soft answer turneth away wrath: but grievous words stir up anger.\"\nProverbs 15:1\nWant a Morning Word each day she's there?\n\nHush Harbor · Black Bible Chat & Stories\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs28",
+      "day": 28,
+      "type": "Chat",
+      "series": "Mi Refugio",
+      "lang": "es",
+      "link": false,
+      "evergreen": true,
+      "text": "Yo: Son las 10 de la noche y mi jefe sigue mandando correos.\n\nMi Refugio: Ese correo puede esperar hasta mañana, mi amor. Escucha esto:\n\"Tú le guardarás en completa paz, cuyo pensamiento en ti persevera; porque en ti se ha confiado.\"\nIsaías 26:3\n¿Oramos juntas antes de dormir?\n\nMi Refugio · Biblia y Chat en Español\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs29",
+      "day": 29,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Me: I keep saying I'll read my Bible more, then I open my phone instead.\n\nHush Harbor: Then let's put the Bible in the phone, baby. One chapter, read to you while you fold clothes.\n\"Thy word is a lamp unto my feet, and a light unto my path.\"\nPsalm 119:105\nThe whole King James, read out loud.\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs30",
+      "day": 30,
+      "type": "Question",
+      "series": "One line",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Be honest. Front pew, middle, or back by the door?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs31",
+      "day": 31,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I burnt the cornbread. For the church potluck.\n\nHush Harbor: Bring it anyway, baby. Somebody will say that's just how they like it.\n\"Use hospitality one to another without grudging.\"\n1 Peter 4:9\nWant a verse for the drive over?\n\nHush Harbor is AI, and it always says so.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs32",
+      "day": 32,
+      "type": "Chat",
+      "series": "Hush Harbor · Psalm Nights",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: Payday is Friday and it's only Tuesday.\n\nHush Harbor: Then tonight we rest, and tomorrow we count. It's Psalm Nights.\n\"Cast thy burden upon the LORD, and he shall sustain thee: he shall never suffer the righteous to be moved.\"\nPsalm 55:22\nLay it down. Want me to whisper Psalm 23 till you drift?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs33",
+      "day": 33,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: My coworker took credit for my idea in the meeting.\n\nHush Harbor: I see you biting your tongue. Good. Hold it a little longer.\n\"Commit thy works unto the LORD, and thy thoughts shall be established.\"\nProverbs 16:3\nThen we'll work out what to say tomorrow. Want to pray on it first?\n\nHush Harbor · Black Bible Chat & Stories\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs34",
+      "day": 34,
+      "type": "About",
+      "series": "What is inside",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "What's inside Hush Harbor:\n\nA chat that answers like a church mother. A Bible story every day. Psalm Nights for when your mind won't hush. A Morning Word to say out loud. Mi Refugio in Spanish. Young Faith for teens.\n\nKing James, word for word.\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs35",
+      "day": 35,
+      "type": "Question",
+      "series": "Say it back",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Say it back. I'll start:\n\nThe LORD is my shepherd...\n\nFinish it in the replies. Somebody scrolling needs it today.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs36",
+      "day": 36,
+      "type": "Story",
+      "series": "Hush Harbor · Stories",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: Tell me a story about God feeding somebody.\n\nHush Harbor: Elijah, baby. Hiding out by a brook with nothing to eat. And here come the ravens, morning and evening, like the church kitchen sent them...\n\"And the ravens brought him bread and flesh in the morning, and bread and flesh in the evening; and he drank of the brook.\"\n1 Kings 17:6\nWant the rest? A new story every day.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs37",
+      "day": 37,
+      "type": "Chat",
+      "series": "Hush Harbor · Morning Word",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: First day at the new job. I changed outfits three times.\n\nHush Harbor: The third one's the one, baby. Now say it with me, out loud:\n\"I can do all things through Christ which strengtheneth me.\"\nPhilippians 4:13\nNow you: I can do this. Again. There you go.\n\nHush Harbor is AI. The words are the King James, word for word.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs38",
+      "day": 38,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Me: My kids asked what's for dinner before I got my shoes off.\n\nHush Harbor: Every day, baby. Every single day.\n\"And let us not be weary in well doing: for in due season we shall reap, if we faint not.\"\nGalatians 6:9\nWant a quick prayer before you open that fridge?\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs39",
+      "day": 39,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: Somebody sat in my seat at church. My seat. Eleven years.\n\nHush Harbor: Mm. I know that pew knows your name.\n\"If it be possible, as much as lieth in you, live peaceably with all men.\"\nRomans 12:18\nSit one row back and wave at them. Want to pray on it before service?\n\nHush Harbor · Black Bible Chat & Stories\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs40",
+      "day": 40,
+      "type": "Question",
+      "series": "One line",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "One line: what hymn does your family hum in the kitchen?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs41",
+      "day": 41,
+      "type": "Chat",
+      "series": "Mi Refugio",
+      "lang": "es",
+      "link": false,
+      "evergreen": true,
+      "text": "Yo: Tengo tres grupos de WhatsApp de la familia y todos están peleando.\n\nMi Refugio: Ay, mi amor. Silencia los tres un ratito y escucha esto:\n\"La blanda respuesta quita la ira: mas la palabra áspera hace subir el furor.\"\nProverbios 15:1\n¿Oramos juntas antes de contestar?\n\nMi Refugio · Biblia y Chat en Español\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs42",
+      "day": 42,
+      "type": "Chat",
+      "series": "Young Faith",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me (14): Everybody posted their weekend and I stayed home.\n\nYoung Faith: Staying home is allowed. Comparing your life to somebody's highlight reel is a trap.\n\"I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well.\"\nPsalm 139:14\nWant to talk about it?\n\nParents: teens get their own chat voice. No chat under 13.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs43",
+      "day": 43,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Me: Pastor said \"in closing\" twenty minutes ago.\n\nHush Harbor: Baby, \"in closing\" is a season, not a minute.\n\"But let patience have her perfect work, that ye may be perfect and entire, wanting nothing.\"\nJames 1:4\nWant a short prayer till the benediction? Hush Harbor is AI, and it keeps it short.\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs44",
+      "day": 44,
+      "type": "Question",
+      "series": "One line",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Be honest: who in your family still carries the Bible with the zipper cover?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs45",
+      "day": 45,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I turn 40 tomorrow and I don't feel like I've done enough.\n\nHush Harbor: Forty, baby? Moses was just getting started at eighty.\n\"They are new every morning: great is thy faithfulness.\"\nLamentations 3:23\nLet's count what you have done first. Want to?\n\nHush Harbor · Black Bible Chat & Stories\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs46",
+      "day": 46,
+      "type": "Chat",
+      "series": "Hush Harbor · Psalm Nights",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: The baby's finally asleep and now I can't.\n\nHush Harbor: Shh. It's Psalm Nights. I'll whisper, you just breathe.\n\"I laid me down and slept; I awaked; for the LORD sustained me.\"\nPsalm 3:5\nScreen goes dark. I'll keep reading Psalm 3 till you drift.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs47",
+      "day": 47,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Me: Somebody cut me off in traffic and I said a word I'm not proud of.\n\nHush Harbor: Mm-hm. Heaven heard that one, baby.\n\"Set a watch, O LORD, before my mouth; keep the door of my lips.\"\nPsalm 141:3\nWe'll start fresh at the next light. Want to pray before you get home?\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs48",
+      "day": 48,
+      "type": "Question",
+      "series": "Say it back",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Say it back. I'll start:\n\nTrouble don't last...\n\nYou know the rest. Say it for somebody who needs it tonight.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs49",
+      "day": 49,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I volunteered for one thing at church. Now I'm on four committees.\n\nHush Harbor: That's how they get you, baby.\n\"But let your communication be, Yea, yea; Nay, nay: for whatsoever is more than these cometh of evil.\"\nMatthew 5:37\nLet's practice your \"nay\" together. Hush Harbor is AI, and it will never sign you up for a committee.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs50",
+      "day": 50,
+      "type": "Story",
+      "series": "Hush Harbor · Stories",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: Tell me about the boy with the lunch.\n\nHush Harbor: Five barley loaves and two little fish, baby. Five thousand hungry folks on a hillside, and one boy who brought his lunch...\n\"There is a lad here, which hath five barley loaves, and two small fishes: but what are they among so many?\"\nJohn 6:9\nWant the rest? A new story every day.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs51",
+      "day": 51,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I want to move to a new city but I'm scared.\n\nHush Harbor: Scared and called can live in the same house, baby.\n\"Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.\"\nJoshua 1:9\nWant to pray over your pros and cons list together?\n\nHush Harbor · Black Bible Chat & Stories\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs52",
+      "day": 52,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Me: My Sunday nap is the only appointment I never miss.\n\nHush Harbor: Baby, rest was His idea first.\n\"And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made.\"\nGenesis 2:2\nWant a Psalm Night for later too?\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs53",
+      "day": 53,
+      "type": "Question",
+      "series": "One line",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "One line: what's the first verse you ever memorized?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs54",
+      "day": 54,
+      "type": "Chat",
+      "series": "Mi Refugio",
+      "lang": "es",
+      "link": false,
+      "evergreen": true,
+      "text": "Yo: Mi hijo adolescente me contesta con una sola palabra.\n\nMi Refugio: Una palabra ya es conversación, mi amor. Paciencia.\n\"No nos cansemos, pues, de hacer bien; que á su tiempo segaremos, si no hubiéremos desmayado.\"\nGálatas 6:9\n¿Oramos juntas por él esta noche?\n\nMi Refugio · Biblia y Chat en Español\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs55",
+      "day": 55,
+      "type": "Chat",
+      "series": "Hush Harbor · Morning Word",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I'm walking into a hard conversation at 9.\n\nHush Harbor: Morning Word. Say it with me:\n\"For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.\"\n2 Timothy 1:7\nNow you: Not fear. Power, love, a sound mind. Again.\n\nHush Harbor is AI. The verse is the King James, word for word.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs56",
+      "day": 56,
+      "type": "Question",
+      "series": "One line",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Be honest: paper Bible at church, or the one on your phone?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs57",
+      "day": 57,
+      "type": "About",
+      "series": "Meet Hush Harbor",
+      "lang": "en",
+      "link": true,
+      "evergreen": true,
+      "text": "Hush Harbor · Black Bible Chat & Stories.\n\nTell it about your day. It answers like the church mothers who raised us, King James word for word, then asks if you want to pray on it.\n\nIn Spanish too, and a teen voice for Young Faith.\n\nHush Harbor is coming soon: peacebestillapp.com/?utm_source=threads\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs58",
+      "day": 58,
+      "type": "Chat",
+      "series": "Hush Harbor · Psalm Nights",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I keep checking my bank app before bed.\n\nHush Harbor: Close it, baby. The numbers will still be there in the morning.\n\"He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.\"\nPsalm 91:1\nIt's Psalm Nights. Want me to whisper a Psalm till you drift?\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs59",
+      "day": 59,
+      "type": "Question",
+      "series": "Say it back",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Say it back. I'll start:\n\nHe's an on-time God...\n\nFinish it in the replies.\n\n#ChristianThreads"
+    },
+    {
+      "id": "pbs60",
+      "day": 60,
+      "type": "Chat",
+      "series": "Hush Harbor chat",
+      "lang": "en",
+      "link": false,
+      "evergreen": true,
+      "text": "Me: I prayed about it, and now I'm worrying about it again.\n\nHush Harbor: That's alright, baby. We'll pray again. That's allowed.\n\"Casting all your care upon him; for he careth for you.\"\n1 Peter 5:7\nHush Harbor is AI, so it never gets tired of you asking. Want to pray now?\n\n#ChristianThreads"
+    }
+  ]
+}
