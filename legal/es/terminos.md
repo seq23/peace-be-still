@@ -12,7 +12,7 @@ Estos términos se suman al [Contrato de Licencia de Usuario Final Estándar de 
 
 ## Edad
 
-Usted debe tener al menos 13 años para usar el chat. Si tiene de 13 a 17 años, uno de sus padres o un tutor debe aceptar estos términos junto con usted. Si Solicitar la compra (Ask to Buy) está activado en En familia (Family Sharing), uno de los padres aprueba cada compra antes de que se haga. Los menores de 13 años pueden usar la Biblia, el audio y las sesiones para dormir con el permiso de uno de sus padres; a ellos no se les ofrece el chat.
+Usted debe tener al menos 13 años para usar el chat. Si tiene de 13 a 17 años, uno de sus padres o un tutor debe aceptar estos términos junto con usted. Si Solicitar la compra (Ask to Buy) está activado en Compartir en familia (Family Sharing), uno de los padres aprueba cada compra antes de que se haga. Los menores de 13 años pueden usar la Biblia, el audio y las sesiones para dormir con el permiso de uno de sus padres; a ellos no se les ofrece el chat.
 
 ## La parte gratis y la parte de pago
 
@@ -48,7 +48,7 @@ En la medida en que la ley lo permita, no somos responsables de pérdidas indire
 
 Estos términos son entre usted y nosotros, no con Apple. Nosotros, y no Apple, somos los únicos responsables de la app y de su contenido.
 
-- Su licencia es una licencia intransferible para usar la app en productos de la marca Apple que usted tenga o controle, como lo permiten las Reglas de Uso (Usage Rules) de los Términos y Condiciones de los Servicios Multimedia de Apple (Apple Media Services Terms and Conditions), incluido En familia (Family Sharing).
+- Su licencia es una licencia intransferible para usar la app en productos de la marca Apple que usted tenga o controle, como lo permiten las Reglas de Uso (Usage Rules) de los Términos y Condiciones de los Servicios Multimedia de Apple (Apple Media Services Terms and Conditions), incluido Compartir en familia (Family Sharing).
 - Nosotros somos los únicos responsables del mantenimiento y del soporte. Apple no tiene ninguna obligación de dar mantenimiento ni soporte para la app.
 - Si la app no cumple con alguna garantía que se aplique, usted puede avisarle a Apple, y Apple le devolverá el precio de compra, si lo hubo. En la medida en que la ley lo permita, Apple no tiene ninguna otra obligación de garantía sobre la app.
 - Nosotros, y no Apple, somos responsables de cualquier reclamo suyo o de un tercero sobre la app o sobre su uso de ella, incluidos los reclamos por responsabilidad del producto, los reclamos de que la app no cumple un requisito legal o normativo, y los reclamos bajo leyes de protección al consumidor, de privacidad o similares.

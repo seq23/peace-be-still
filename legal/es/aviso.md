@@ -12,7 +12,7 @@ Si está en peligro inmediato, llame al 911. En los Estados Unidos, llame o env�
 
 ## El chat es IA, no una persona
 
-Las respuestas del chat las escribe una IA y van marcadas como IA. Pueden estar equivocadas. No son un pastor, un consejero, un médico, un abogado ni ningún otro profesional calificado, y no hablan en nombre de Dios ni de ninguna iglesia. Las Escrituras en una respuesta vienen palabra por palabra de la King James Version o de la Reina-Valera 1909 guardadas en la app; léalas en su propio lugar en la Biblia antes de apoyarse en la forma en que una respuesta las usa.
+Las respuestas del chat las escribe una IA y van marcadas como IA. Pueden estar equivocadas. No son un pastor, un consejero, un médico, un abogado ni ningún otro profesional calificado, y no hablan en nombre de Dios ni de ninguna iglesia. Las Escrituras en una respuesta vienen palabra por palabra de la King James Version o de la Reina-Valera 1909 guardadas en la app; léalas en su contexto, en la Biblia, antes de apoyarse en la forma en que una respuesta las usa.
 
 ## El sueño y la salud
 
