@@ -55,3 +55,9 @@ jobs:
           script: |
             const body = `Open the phone app preview: ${process.env.PREVIEW_URL}\n\nCommit: ${context.sha}. Free web preview; no Appetize minutes.`;
             await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
+      # The built app in a real browser at 390 x 844: tab labels fit, radios and the switch announce their
+      # state, the onboarding guard holds (scripts/preview/check.mjs). Chrome is on the runner image.
+      - name: Check the preview in a browser
+        run: |
+          npm i --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/pw" playwright-core@1.62.1
+          PW_DIR="$RUNNER_TEMP/pw" node scripts/preview/check.mjs dist

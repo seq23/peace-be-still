@@ -14,10 +14,11 @@ export default function DoorScreen() {
   const c = usePalette();
   const router = useRouter();
   const changing = !!settings.journey;
+  const greeting = partOfDay(new Date().getHours());
 
   function choose(door: Door) {
     // From Settings the door is only kept once a journey behind it is started; a first run saves it now.
-    if (changing) { router.push({ pathname: '/journeys', params: { door } }); return; }
+    if (changing) { router.push({ pathname: '/journeys', params: { door, change: '1' } }); return; }
     save({ ...settings, door });
     router.push(settings.age ? '/journeys' : '/age');
   }
@@ -40,7 +41,7 @@ export default function DoorScreen() {
       {changing ? <BackLink onPress={() => router.back()}>{t('common.back')}</BackLink> : null}
       <Logo label={t('brand.name')} door={settings.door} />
       <View style={{ gap: 10, marginTop: 20 }}>
-        <Body>{t(`greeting.${partOfDay(new Date().getHours())}`)}</Body>
+        {greeting ? <Body>{t(`greeting.${greeting}`)}</Body> : null}
         <Title>{t('door.title')}</Title>
         <Body>{t('door.intro')}</Body>
       </View>
