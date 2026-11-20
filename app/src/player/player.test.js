@@ -56,3 +56,24 @@ test('timer expiry prevents a pending load from starting playback', async () => 
  assert.equal(started, false);
  assert.equal(player.state().playing, false);
 });
+
+test('native sleep deadline follows timer changes and is cleared on disposal', () => {
+ const deadlines = [];
+ const player = createPlayer({ audio: { setSleepDeadline: value => deadlines.push(value), pause() {}, dispose() {} }, downloads: {}, clock: { setTimeout: () => 1, clearTimeout() {} }, now: () => 1000 });
+ player.setSleepTimer(15);
+ player.setSleepTimer(60);
+ player.setSleepTimer(null);
+ player.setSleepTimer(30);
+ player.dispose();
+ assert.deepEqual(deadlines, [null, 901000, null, 3601000, null, null, 1801000, null]);
+});
+
+test('native adapter delegates playback and deadline to the iOS module', async () => {
+ const { createNativeAdapters } = await import('./native.js');
+ const calls = [];
+ const native = { load: async uri => calls.push(['load', uri]), play: () => calls.push(['play']), pause: () => calls.push(['pause']), setSleepDeadline: value => calls.push(['deadline', value]), dispose: () => calls.push(['dispose']) };
+ class Directory { constructor() {} }
+ const { audio } = createNativeAdapters({ PeacePlayer: native, FileSystem: { Directory, Paths: { document: 'documents' } } });
+ await audio.load('https://audio.example.com/a.m4a'); await audio.play(); audio.setSleepDeadline(1234); audio.pause(); audio.dispose();
+ assert.deepEqual(calls, [['load', 'https://audio.example.com/a.m4a'], ['play'], ['deadline', 1234], ['pause'], ['dispose']]);
+});

@@ -20,7 +20,7 @@ export function createPlayer({ audio, downloads, clock = globalThis, now = Date.
   const listeners = new Set();
   const state = () => ({ track, deadline, dimmed, playing, error });
   const notify = () => { for (const listener of listeners) listener(state()); };
-  const clearTimer = () => { if (timer !== null) clock.clearTimeout(timer); timer = null; deadline = null; };
+  const clearTimer = () => { if (timer !== null) clock.clearTimeout(timer); timer = null; deadline = null; audio.setSleepDeadline?.(null); };
   const expire = () => { generation++; clearTimer(); audio.pause(); playing = false; notify(); };
   return {
     state,
@@ -43,7 +43,7 @@ export function createPlayer({ audio, downloads, clock = globalThis, now = Date.
     setSleepTimer(minutes) {
       if (minutes !== null && ![15, 30, 45, 60].includes(minutes)) throw new Error('Invalid sleep timer');
       clearTimer();
-      if (minutes !== null) { deadline = now() + minutes * 60000; timer = clock.setTimeout(expire, minutes * 60000); }
+      if (minutes !== null) { deadline = now() + minutes * 60000; audio.setSleepDeadline?.(deadline); timer = clock.setTimeout(expire, minutes * 60000); }
       notify();
     },
     // Call on foreground: elapsed wall time still counts if the OS suspended JS.
