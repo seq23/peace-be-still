@@ -23,6 +23,7 @@ let storePaid = false;
 let storeUser = '$RCAnonymousID:test';
 let purchaseError: string | undefined;
 let restorePaid = false;
+let restoreWait: Promise<void> | undefined;
 let introPrice: object | null = null;
 const packageFor = (plan: 'yearly' | 'monthly') => ({
   identifier: plan === 'yearly' ? '$rc_annual' : '$rc_monthly',
@@ -55,6 +56,7 @@ const packageFor = (plan: 'yearly' | 'monthly') => ({
   },
   restorePurchases: async () => {
     fakePurchaseCalls.push('restore');
+    await restoreWait;
     return customerInfo(storePaid = restorePaid);
   },
 };
@@ -71,6 +73,7 @@ let history = false;
   navigate: (href: unknown) => calls.push(['navigate', href]),
   back: () => calls.push(['back']),
   dismissAll: () => calls.push(['dismissAll']),
+  dismissTo: (href: unknown) => calls.push(['dismissTo', href]),
   canGoBack: () => history,
   canDismiss: () => history,
 };
@@ -84,6 +87,7 @@ const en = require('../src/i18n/en.json');
 const es = require('../src/i18n/es.json');
 const screens = {
   root: require('../app/_layout'),
+  onboarding: require('../app/(onboarding)/_layout').default,
   index: require('../app/index').default,
   door: require('../app/(onboarding)/door').default,
   age: require('../app/(onboarding)/age').default,
@@ -103,7 +107,7 @@ type Name = Exclude<keyof typeof screens, 'root'>;
 const base: Settings = { door: 'faith', age: 'adult', ageSetAt: 0, voice: 'plain', language: 'en' };
 const store = () => JSON.parse(saved!) as Settings;
 
-beforeEach(() => { calls = []; history = false; (globalThis as any).__pbsParams = {}; (globalThis as any).__pbsScheme = 'light'; (globalThis as any).__pbsLocale = 'en'; readFails = false; });
+beforeEach(() => { calls = []; history = false; (globalThis as any).__pbsParams = {}; (globalThis as any).__pbsSegments = []; (globalThis as any).__pbsScheme = 'light'; (globalThis as any).__pbsLocale = 'en'; readFails = false; });
 
 async function mount(name: Name, value: object | null = base, params: Record<string, string> = {}) {
   saved = value ? JSON.stringify(value) : null;
@@ -136,6 +140,25 @@ async function type(tree: ReactTestRenderer, value: string) {
   await act(async () => host(tree, 'TextInput')[0].props.onChangeText(value));
 }
 const thisYear = new Date().getFullYear();
+const radios = (tree: ReactTestRenderer) => host(tree, 'Pressable').filter(n => n.props.role === 'radio');
+const checked = (tree: ReactTestRenderer) => radios(tree).filter(n => n.props['aria-checked'] === true).map(textOf);
+
+test('the onboarding steps have one guard: a deep link never skips a step, and once onboarded they open only from Settings', async () => {
+  const at = async (step: string, value: object | null, params: Record<string, string> = {}) => {
+    (globalThis as any).__pbsSegments = ['(onboarding)', step];
+    return host(await mount('onboarding', value, params), 'Redirect')[0]?.props.href;
+  };
+  const done = { ...base, journey: 'psalm-nights' };
+  assert.equal(await at('journeys', null), '/door');
+  assert.equal(await at('age', null), '/door');
+  assert.equal(await at('journeys', { ...base, age: null }), '/age');
+  assert.equal(await at('door', { ...base, age: null }), undefined);
+  assert.equal(await at('journeys', base), undefined);
+  for (const step of ['door', 'age', 'journeys']) assert.equal(await at(step, done), '/today', step);
+  assert.equal(await at('door', done, { change: '1' }), undefined);
+  assert.equal(await at('journeys', done, { door: 'mindset', change: '1' }), undefined);
+  assert.equal(await at('age', done, { correct: '1' }), undefined);
+});
 
 test('a fresh install opens the front door, and the door choice is saved and moves on to the birth year', async () => {
   const index = await mount('index', null);
@@ -199,9 +222,10 @@ test('the birth year: a wrong year shows an error that clears as she types, and 
 test('a boundary year asks for the month with twelve tappable months, and skipping keeps the younger band', async () => {
   const tree = await mount('age', { ...base, age: null });
   await type(tree, String(thisYear - 13));
-  const months = host(tree, 'Pressable').filter(n => n.props.accessibilityRole === 'radio');
-  assert.equal(months.length, 13);
+  assert.equal(radios(tree).length, 13);
+  assert.deepEqual(checked(tree), []);
   await press(tree, 'Skip');
+  assert.deepEqual(checked(tree), ['Skip']);
   await press(tree, 'Continue');
   assert.equal(store().age, 'child');
   const adultish = await mount('age', { ...base, age: null });
@@ -217,6 +241,10 @@ test('a teen who mistyped can move up once after 7 days; a child never can', asy
   assert.match(strings(early), /once, 7 days after/);
   await type(early, '1990'); await press(early, 'Continue');
   assert.match(strings(early), /older age group from/);
+  // The wait is said once (the date replaces the rule) and in muted ink: wine is only for a wrong year.
+  assert.doesNotMatch(strings(early), /once, 7 days after/);
+  const wait = host(early, 'Text').find(n => /older age group from/.test(textOf(n)) && n.props.style)!;
+  assert.notEqual(JSON.stringify(wait.props.style).includes('#A3303A'), true);
   assert.equal(store().age, 'teen');
   const later = await mount('age', { ...teen, ageSetAt: Date.now() - RAISE_WAIT_MS - 1000 }, { correct: '1' });
   await type(later, '1990'); await press(later, 'Continue');
@@ -239,29 +267,48 @@ test('the picker shows Start for the first journey before any tap, and starting 
   const tree = await mount('journeys');
   const start = () => host(tree, 'Pressable').find(n => /^Start /.test(textOf(n)));
   assert.equal(textOf(start()!), 'Start Hush Harbor  ›');
+  assert.deepEqual(checked(tree).map(s => s.split(' · ')[0]), ['Hush Harbor']);
+  await press(tree, 'Mi Refugio');
+  assert.deepEqual(checked(tree).map(s => s.split(' · ')[0]), ['Mi Refugio']);
   await press(tree, 'Hush Harbor');
   await press(tree, 'Start Hush Harbor');
   assert.equal(store().journey, 'hush-harbor');
   assert.equal(store().voice, 'church');
-  assert.deepEqual(calls.at(-1), ['replace', '/today']);
+  // Start only saves; the onboarding layout's redirect (a replace) moves her to Today, so nothing is pushed
+  // or dismissed that back could return to.
+  assert.deepEqual(calls, []);
+  (globalThis as any).__pbsSegments = ['(onboarding)', 'journeys'];
+  assert.equal(host(await mount('onboarding', store()), 'Redirect')[0].props.href, '/today');
+});
+
+test('a teen\'s picker opens on Young Faith; a teen who picks Hush Harbor still gets the teen voice', async () => {
   const teen = await mount('journeys', { ...base, age: 'teen', voice: 'teen' });
+  assert.ok(host(teen, 'Pressable').some(n => textOf(n) === 'Start Young Faith  ›'));
+  await press(teen, 'Hush Harbor');
   await press(teen, 'Start Hush Harbor');
   assert.equal(store().voice, 'teen');
 });
 
 test('a child sees no chat-led journey, and Start names the first one she can pick', async () => {
   const tree = await mount('journeys', { ...base, age: 'child' });
-  assert.doesNotMatch(strings(tree), /Hush Harbor|Mi Refugio/);
+  assert.doesNotMatch(strings(tree), /Hush Harbor|Mi Refugio|Young Faith|13 to 17/);
   assert.ok(host(tree, 'Pressable').some(n => textOf(n) === 'Start Psalm Nights  ›'));
+  const es = strings(await mount('journeys', { ...base, age: 'child', language: 'es' }));
+  assert.doesNotMatch(es, /Young Faith|13 a 17/);
 });
 
 test('the Mindset picker asks the scripture question after its cards, with a switch, and keeps the answer', async () => {
   const tree = await mount('journeys', { ...base, door: 'mindset' });
   const order = texts(tree);
   assert.ok(order.indexOf('Weave scripture in') > order.findIndex(s => s.startsWith('Morning Word')));
-  const toggle = host(tree, 'Switch')[0];
-  assert.equal(toggle.props.accessibilityRole, 'switch');
-  await act(async () => toggle.props.onValueChange(true));
+  // The whole row is the one switch: role, state and label on it, and no second switch control inside.
+  assert.equal(host(tree, 'Switch').length, 0);
+  const toggles = host(tree, 'Pressable').filter(n => n.props.role === 'switch');
+  assert.equal(toggles.length, 1);
+  assert.equal(toggles[0].props['aria-label'], 'Weave scripture in');
+  assert.equal(toggles[0].props['aria-checked'], false);
+  await act(async () => toggles[0].props.onPress());
+  assert.equal(host(tree, 'Pressable').find(n => n.props.role === 'switch')!.props['aria-checked'], true);
   await press(tree, 'Start Imagination Nights');
   assert.equal(store().scripture, true); assert.equal(store().journey, 'imagination-nights');
 });
@@ -270,10 +317,16 @@ test('changing the door from Settings keeps the old journey until a new one is s
   const tree = await mount('door', { ...base, journey: 'psalm-nights' });
   await press(tree, 'With mindset');
   assert.equal(store().door, 'faith');
-  assert.deepEqual(calls, [['push', { pathname: '/journeys', params: { door: 'mindset' } }]]);
-  const picker = await mount('journeys', { ...base, journey: 'psalm-nights' }, { door: 'mindset' });
+  assert.deepEqual(calls, [['push', { pathname: '/journeys', params: { door: 'mindset', change: '1' } }]]);
+  calls = [];
+  const picker = await mount('journeys', { ...base, journey: 'psalm-nights' }, { door: 'mindset', change: '1' });
   await press(picker, 'Start Imagination Nights');
   assert.equal(store().door, 'mindset'); assert.equal(store().journey, 'imagination-nights');
+  assert.deepEqual(calls, [['dismissTo', '/today']]);
+  const settings = await mount('settings', { ...base, journey: 'psalm-nights' });
+  calls = [];
+  await press(settings, 'Your door');
+  assert.deepEqual(calls, [['push', { pathname: '/door', params: { change: '1' } }]]);
 });
 
 test('tabs follow the door and the age (expo-router Tabs, hidden with href null)', async () => {
@@ -282,6 +335,22 @@ test('tabs follow the door and the age (expo-router Tabs, hidden with href null)
   assert.deepEqual(await shown({ ...base, age: 'child', journey: 'psalm-nights' }), ['Today', 'Bible', 'Nights', 'More']);
   assert.deepEqual(await shown({ ...base, door: 'mindset', journey: 'imagination-nights' }), ['Today', 'Chat', 'Nights', 'More']);
   assert.deepEqual(await shown({ ...base, journey: 'mi-refugio' }), ['Hoy', 'Chat', 'Biblia', 'Noches', 'Más']);
+});
+
+test('the tab bar is tall enough for the icon and the whole label line, and leaves the inset padding to the navigator', async () => {
+  const options = host(await mount('tabs', { ...base, journey: 'psalm-nights' }), 'Tabs')[0].props.screenOptions;
+  const label = options.tabBarLabelStyle;
+  assert.ok(label.lineHeight >= label.fontSize * 1.3);
+  // The navigator's tab: 5 pt padding, a 28 pt icon box, the label, 5 pt padding (round 4 clipped at 66 - 16 pt).
+  assert.ok(options.tabBarStyle.height >= 5 + 28 + label.lineHeight + 5, String(options.tabBarStyle.height));
+  for (const key of ['paddingTop', 'paddingBottom']) assert.equal(options.tabBarStyle[key], undefined, key);
+});
+
+test('opening the tabs records today once, keeping only this week', async () => {
+  const day = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const now = new Date();
+  await mount('tabs', { ...base, journey: 'psalm-nights', opened: ['2020-01-01'] });
+  assert.deepEqual(store().opened, [day(now)]);
 });
 
 test('a typed link cannot open a hidden tab', async () => {
@@ -294,6 +363,7 @@ test('Today has the date, the week and the three items for the door, with no wel
   const faith = await mount('today', { ...base, journey: 'psalm-nights' });
   const shown = strings(faith);
   assert.match(shown, /1 day this week/);
+  assert.equal(host(faith, 'View').filter(n => n.props.testID === 'day-opened').length, 1);
   assert.match(shown, /Today's declaration.*Today's story.*Tonight: Psalm Nights/);
   assert.doesNotMatch(shown, /WELCOME|Welcome|Good to have you/);
   await press(faith, 'Open');
@@ -301,6 +371,17 @@ test('Today has the date, the week and the three items for the door, with no wel
   const mindset = strings(await mount('today', { ...base, door: 'mindset', journey: 'imagination-nights' }));
   assert.match(mindset, /Your scene.*Tonight: Imagination Nights/);
   assert.doesNotMatch(mindset, /Psalm|Bible/);
+});
+
+test('the week count is the days she opened the app this week, with those dots filled', async () => {
+  const day = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const now = new Date();
+  const week = Array.from({ length: 7 }, (_, i) => new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + i));
+  const other = week.find(d => day(d) !== day(now))!;
+  const tree = await mount('today', { ...base, journey: 'psalm-nights', opened: [day(other), day(now)] });
+  assert.match(strings(tree), /2 days this week/);
+  assert.equal(host(tree, 'View').filter(n => n.props.testID === 'day-opened').length, 2);
+  assert.equal(host(tree, 'View').find(n => n.props.role === 'img')!.props['aria-label'], '2 days this week');
 });
 
 test('More lists Settings, Saved verses and Journal, and opens Settings', async () => {
@@ -314,8 +395,8 @@ test('Settings: the voice choices follow the age, and a choice is saved and show
   const adult = await mount('settings', { ...base, journey: 'psalm-nights' });
   await press(adult, 'Black church');
   assert.equal(store().voice, 'church');
-  const selected = host(adult, 'Pressable').filter(n => n.props.accessibilityRole === 'radio' && n.props.accessibilityState.checked).map(textOf);
-  assert.deepEqual(selected, ['Black church', 'English']);
+  assert.deepEqual(checked(adult), ['Black church', 'English']);
+  assert.ok(radios(adult).every(n => typeof n.props['aria-checked'] === 'boolean'));
   const teen = strings(await mount('settings', { ...base, age: 'teen', voice: 'teen', journey: 'psalm-nights' }));
   assert.match(teen, /Teen/); assert.doesNotMatch(teen, /Plain modern/);
   const child = strings(await mount('settings', { ...base, age: 'child', journey: 'psalm-nights' }));
@@ -325,8 +406,13 @@ test('Settings: the voice choices follow the age, and a choice is saved and show
 test('Mi Refugio: the screens inside it are Spanish, Settings keeps the app language, and the saved language is untouched', async () => {
   const value = { ...base, journey: 'mi-refugio', voice: 'spanish' };
   assert.match(strings(await mount('today', value)), /La declaración de hoy/);
+  // Psalm Nights inside Mi Refugio is the Spanish one (whispered Salmos), named in Spanish.
+  assert.match(strings(await mount('today', value)), /Esta noche: Salmos para dormir/);
   assert.match(strings(await mount('more', value)), /Ajustes/);
-  assert.match(strings(await mount('settings', value)), /Settings/);
+  const settings = strings(await mount('settings', value));
+  assert.match(settings, /Settings/);
+  // The way back is named as the tab bar under it says it.
+  assert.match(settings, /←  Más/);
   assert.equal(store().language, 'en');
 });
 
@@ -382,7 +468,7 @@ test('the God\'s Word gate fails a screen when a banned word reaches its data', 
 
 test('Spanish screens show no English: no rendered text is an English string that has a Spanish one', async () => {
   // Names that stay as they are in Spanish: the app, the journeys, the language picker's own names.
-  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Psalm Nights', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español']);
+  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)']);
   const english = new Set(Object.values(en).flatMap(v => typeof v === 'string' ? [v] : Object.values(v as object) as string[]).filter(v => !sameInBoth.has(v)));
   const people = [
     { ...base, language: 'es', journey: 'psalm-nights' }, { ...base, language: 'es', door: 'mindset', journey: 'imagination-nights' },
@@ -415,6 +501,7 @@ async function mountPaid(value: Settings = readyForPaid, setup?: () => void) {
   chatRecord = JSON.stringify({ age: value.age, token: 'render-token', installId: 'render-install' });
   storePaid = false;
   restorePaid = false;
+  restoreWait = undefined;
   purchaseError = undefined;
   introPrice = null;
   listeners = new Set();
@@ -431,6 +518,7 @@ async function closePaid(tree: ReactTestRenderer) {
 }
 
 const paidControls = (tree: ReactTestRenderer) => host(tree, 'Pressable').filter(n => n.props.accessibilityRole === 'button');
+const restoreControl = (tree: ReactTestRenderer) => host(tree, 'Pressable').find(n => /restore purchases/i.test(textOf(n)))!;
 const gate = (tree: ReactTestRenderer) => texts(tree).at(-1);
 
 test('Settings opens the paid lane and its close control takes the visitor back', async () => {
@@ -439,6 +527,11 @@ test('Settings opens the paid lane and its close control takes the visitor back'
   assert.deepEqual(calls, [['push', '/paid']]);
   const tree = await mount('paid', readyForPaid);
   assert.equal(paidControls(tree).length, 0);
+  assert.equal(restoreControl(tree).props.accessibilityRole, 'link');
+  assert.equal(restoreControl(tree).props.accessibilityState.disabled, true);
+  const links = host(tree, 'View').find(n => n.props.style?.columnGap === 20);
+  assert.equal(links?.props.style.alignItems, 'center');
+  assert.doesNotMatch(strings(tree), /no trial/i);
   assert.equal(gate(tree), 'false true');
   await press(tree, /close/i);
   assert.deepEqual(calls.at(-1), ['replace', '/settings']);
@@ -451,11 +544,15 @@ test('the rendered paid lane discloses benefits, actual store prices, renewal te
     try {
       const es = locale === 'es';
       assert.deepEqual(faithContentIssues(strings(tree)), []);
-      const radios = () => host(tree, 'Pressable').filter(n => n.props.accessibilityRole === 'radio');
-      assert.equal(radios().length, 2);
-      assert.match(textOf(radios()[0]), /\$38\.49/);
-      assert.match(textOf(radios()[1]), /\$6\.29/);
-      assert.equal(radios()[0].props.accessibilityState.checked, true);
+      const choices = () => radios(tree);
+      assert.equal(choices().length, 2);
+      const group = host(tree, 'View').find(n => n.props.role === 'radiogroup');
+      assert.ok(group);
+      assert.notEqual(group.props.style.flexDirection, 'row');
+      assert.equal(host(tree, 'Text').find(n => n.props.accessibilityRole === 'header')?.props.style[0].fontSize, 30);
+      assert.match(textOf(choices()[0]), /\$38\.49/);
+      assert.match(textOf(choices()[1]), /\$6\.29/);
+      assert.equal(choices()[0].props['aria-checked'], true);
       assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
       for (const meaning of es
         ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /100 mensajes/, /24 horas/]
@@ -463,7 +560,7 @@ test('the rendered paid lane discloses benefits, actual store prices, renewal te
         assert.match(strings(tree), meaning);
       }
       await press(tree, /\$6\.29/);
-      assert.equal(radios()[1].props.accessibilityState.checked, true);
+      assert.equal(choices()[1].props['aria-checked'], true);
       assert.match(textOf(paidControls(tree)[0]), /\$6\.29/);
       assert.match(strings(tree), es ? /cada mes por \$6\.29/ : /monthly at \$6\.29/);
       const links: string[] = [];
@@ -501,7 +598,13 @@ test('restore checks the store and grants access only when paid is active', asyn
     assert.equal(gate(tree), 'false true');
     assert.match(strings(tree), /didn’t find.*active subscription/);
     restorePaid = true;
+    let finish!: () => void;
+    restoreWait = new Promise(resolve => { finish = resolve; });
     await press(tree, /restore purchases/i);
+    assert.equal(restoreControl(tree).props.accessibilityRole, 'link');
+    assert.equal(restoreControl(tree).props.accessibilityState.disabled, true);
+    assert.equal(restoreControl(tree).props.onPress, undefined);
+    await act(async () => finish());
     assert.deepEqual(fakePurchaseCalls, ['render-install', 'restore', 'restore']);
     assert.equal(gate(tree), 'true true');
     assert.match(strings(tree), /paid access is active/);
@@ -540,6 +643,9 @@ test('a storefront with an introductory offer cannot present a no-trial checkout
     assert.match(strings(tree), /prices are unavailable/);
     assert.equal(paidControls(tree).length, 0);
     assert.equal(gate(tree), 'false true');
+    introPrice = null;
+    await press(tree, /try again/i);
+    assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
   } finally { await closePaid(tree); }
 });
 
@@ -562,6 +668,31 @@ test('a first purchase provisions and persists the shared install identity befor
     assert.equal(gate(tree), 'true true');
   } finally {
     globalThis.fetch = fetch;
+    await closePaid(tree);
+  }
+});
+
+test('the web preview shows configured prices and renewal terms without opening checkout or granting access', async () => {
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+  fakePurchaseCalls.length = 0;
+  const tree = await mount('paid', readyForPaid);
+  try {
+    assert.equal(radios(tree).length, 2);
+    assert.match(textOf(radios(tree)[0]), /\$39\.99.*\$3\.33/);
+    assert.match(textOf(radios(tree)[1]), /\$7\.99/);
+    assert.match(textOf(paidControls(tree)[0]), /preview.*\$39\.99/i);
+    assert.match(strings(tree), /no trial.*renews yearly at \$39\.99/i);
+    await press(tree, /preview.*join/i);
+    assert.deepEqual(fakePurchaseCalls, []);
+    assert.equal(gate(tree), 'false true');
+    assert.equal(restoreControl(tree).props['aria-disabled'], true);
+    await press(tree, /\$7\.99/);
+    assert.match(textOf(paidControls(tree)[0]), /preview.*\$7\.99/i);
+    assert.match(strings(tree), /renews monthly at \$7\.99/i);
+  } finally {
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
     await closePaid(tree);
   }
 });

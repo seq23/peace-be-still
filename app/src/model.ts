@@ -23,6 +23,8 @@ export type Journey = {
   voice?: Voice;
   /** Every screen inside this journey uses this language, whatever the app language is. */
   language?: Language;
+  /** Only these age bands are offered it (Young Faith is for 13 to 17); absent means every band. */
+  ages?: readonly Age[];
 };
 
 export const journeys: readonly Journey[] = [
@@ -30,7 +32,7 @@ export const journeys: readonly Journey[] = [
   { id: 'mi-refugio', door: 'faith', name: 'journey.miRefugio.name', subtitle: 'journey.miRefugio.subtitle', purpose: 'journey.miRefugio.purpose', chat: true, voice: 'spanish', language: 'es' },
   { id: 'psalm-nights', door: 'faith', name: 'journey.psalmNights.name', subtitle: 'journey.psalmNights.subtitle', purpose: 'journey.psalmNights.purpose', chat: false },
   { id: 'morning-word', door: 'faith', name: 'journey.morningWord.name', subtitle: 'journey.morningWord.subtitle', purpose: 'journey.morningWord.purpose', chat: false },
-  { id: 'young-faith', door: 'faith', name: 'journey.youngFaith.name', subtitle: 'journey.youngFaith.subtitle', purpose: 'journey.youngFaith.purpose', chat: false, voice: 'teen' },
+  { id: 'young-faith', door: 'faith', name: 'journey.youngFaith.name', subtitle: 'journey.youngFaith.subtitle', purpose: 'journey.youngFaith.purpose', chat: false, voice: 'teen', ages: ['teen'] },
   { id: 'imagination-nights', door: 'mindset', name: 'journey.imaginationNights.name', purpose: 'journey.imaginationNights.purpose', chat: false },
   { id: 'living-in-the-end', door: 'mindset', name: 'journey.livingInTheEnd.name', purpose: 'journey.livingInTheEnd.purpose', chat: false },
   { id: 'morning-word-mindset', door: 'mindset', name: 'journey.morningWord.name', subtitle: 'journey.morningWord.subtitle', purpose: 'journey.morningWordMindset.purpose', chat: false },
@@ -40,9 +42,16 @@ export function journeyById(id: string | undefined): Journey | undefined {
   return journeys.find(journey => journey.id === id);
 }
 
-/** The journeys this person may pick behind a door: under-13s never see a chat-led one. */
+/** Whether this age band may have this journey: under-13s never a chat-led one, and a band-only journey only its band. */
+export function allowedFor(journey: Journey, age: Age | null): boolean {
+  if (age === 'child' && journey.chat) return false;
+  return !journey.ages || (!!age && journey.ages.includes(age));
+}
+
+/** The journeys this person may pick behind a door, the one made for their age band first (a teen opens on Young Faith). */
 export function journeysFor(door: Door, age: Age | null): Journey[] {
-  return journeys.filter(journey => journey.door === door && !(age === 'child' && journey.chat));
+  const allowed = journeys.filter(journey => journey.door === door && allowedFor(journey, age));
+  return [...allowed.filter(journey => journey.ages), ...allowed.filter(journey => !journey.ages)];
 }
 
 export type Settings = {
@@ -56,6 +65,8 @@ export type Settings = {
   language: Language;
   journey?: JourneyId;
   scripture?: boolean;
+  /** The days (local YYYY-MM-DD) the app was opened this week; Today counts and fills these. */
+  opened?: string[];
 };
 
 export const initial: Settings = { door: null, age: null, voice: 'plain', language: 'en' };
@@ -79,8 +90,9 @@ export function migrateSettings(raw: unknown, now = Date.now()): Settings {
     ageRaised: saved.ageRaised === true || undefined,
     voice: saved.voice === 'church' || saved.voice === 'teen' || saved.voice === 'spanish' ? saved.voice : 'plain',
     language: saved.language === 'es' ? 'es' : 'en',
-    journey: journey && journey.door === door && !(age === 'child' && journey.chat) ? journey.id : undefined,
+    journey: journey && journey.door === door && allowedFor(journey, age) ? journey.id : undefined,
     scripture: saved.scripture === true || undefined,
+    opened: Array.isArray(saved.opened) ? saved.opened.filter(day => typeof day === 'string' && DAY.test(day)) : undefined,
   };
 }
 
@@ -102,13 +114,13 @@ function voiceFor(age: Age, journey: Journey | undefined, current: Voice): Voice
   if (age === 'teen') return 'teen';
   if (age === 'child') return 'plain';
   const chosen = journey?.voice ?? current;
-  return chosen === 'teen' && journey?.id !== 'young-faith' ? 'plain' : chosen;
+  return chosen === 'teen' ? 'plain' : chosen;
 }
 
 /** First entry of a birth year. */
 export function withAge(settings: Settings, age: Age, now = Date.now()): Settings {
   const journey = journeyById(settings.journey);
-  const keep = journey && !(age === 'child' && journey.chat);
+  const keep = journey && allowedFor(journey, age);
   return { ...settings, age, ageSetAt: settings.ageSetAt ?? now, journey: keep ? journey.id : undefined, voice: voiceFor(age, keep ? journey : undefined, settings.voice) };
 }
 
@@ -137,7 +149,7 @@ export function correctAge(settings: Settings, age: Age, now = Date.now()): Corr
 /** Picking a journey (and with it, from Settings, a door). */
 export function chooseJourney(settings: Settings, id: JourneyId): Settings {
   const journey = journeyById(id);
-  if (!journey || !settings.age || (settings.age === 'child' && journey.chat)) return settings;
+  if (!journey || !settings.age || !allowedFor(journey, settings.age)) return settings;
   return { ...settings, door: journey.door, journey: journey.id, voice: voiceFor(settings.age, journey, settings.voice) };
 }
 
@@ -156,6 +168,21 @@ export function startRoute(settings: Settings): '/door' | '/age' | '/journeys' |
   if (!settings.age) return '/age';
   if (!settings.journey) return '/journeys';
   return '/today';
+}
+
+const STEPS = ['/door', '/age', '/journeys', '/today'] as const;
+
+/**
+ * Where an onboarding step sends her instead of showing itself, or null to show it. Before onboarding is done,
+ * a step after the first unfinished one goes back to that one. After, every step goes to Today unless it was
+ * opened from Settings.
+ */
+export function onboardingRoute(settings: Settings, step: string | undefined, fromSettings: boolean): ReturnType<typeof startRoute> | null {
+  const start = startRoute(settings);
+  const at = STEPS.indexOf(`/${step}` as (typeof STEPS)[number]);
+  if (at < 0) return null;
+  if (start === '/today') return fromSettings ? null : '/today';
+  return at > STEPS.indexOf(start) ? start : null;
 }
 
 export type Tab = 'today' | 'chat' | 'bible' | 'nights' | 'more';
@@ -181,7 +208,37 @@ export function faithContentIssues(text: string): string[] {
   return issues;
 }
 
-/** The greeting follows the clock: morning until noon, afternoon until 6 pm, then evening. */
-export function partOfDay(hour: number): 'morning' | 'afternoon' | 'evening' {
-  return hour >= 5 && hour < 12 ? 'morning' : hour >= 12 && hour < 18 ? 'afternoon' : 'evening';
+/**
+ * The front door asks "What do you need tonight?", so a greeting is shown only when it agrees: "Good evening"
+ * from 5 pm to 5 am, and no greeting line at other hours.
+ */
+export function partOfDay(hour: number): 'evening' | null {
+  return hour >= 17 || hour < 5 ? 'evening' : null;
+}
+
+const DAY = /^\d{4}-\d{2}-\d{2}$/;
+
+/** A local calendar day as YYYY-MM-DD. */
+export function dayKey(date: Date): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+
+/** The seven days (Sunday first) of the week holding `now`. */
+export function weekOf(now: Date): Date[] {
+  return Array.from({ length: 7 }, (_, i) => new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + i));
+}
+
+/** Records that the app was opened today, keeping only this week's days. Returns null when nothing changes. */
+export function markOpened(settings: Settings, now = new Date()): Settings | null {
+  const week = new Set(weekOf(now).map(dayKey));
+  const today = dayKey(now);
+  const kept = (settings.opened ?? []).filter(day => week.has(day));
+  if (kept.includes(today) && kept.length === (settings.opened ?? []).length) return null;
+  return { ...settings, opened: [...new Set([...kept, today])].sort() };
+}
+
+/** Which days of this week were opened (today always counts: she is looking at it). */
+export function openedThisWeek(settings: Settings, now = new Date()): Set<string> {
+  const week = new Set(weekOf(now).map(dayKey));
+  return new Set([...(settings.opened ?? []).filter(day => week.has(day)), dayKey(now)]);
 }

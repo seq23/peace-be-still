@@ -1,14 +1,15 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import type { CustomerInfo, PurchasesPackage } from 'react-native-purchases';
 import { installId } from '../chat/api';
 import { canUse, type Feature, type User } from '../gates';
 import { useSettings } from '../settings';
-import { connectStore, hasPaid, type PurchaseStore } from './revenuecat';
+import { connectStore, hasPaid, previewStore, type PurchaseStore } from './revenuecat';
 
 type Status = 'idle' | 'buying' | 'restoring' | 'pending' | 'failed' | 'unconfirmed' | 'nothingToRestore' | 'restoreFailed';
 type State = {
   store: PurchaseStore | null;
+  preview: typeof previewStore | null;
   paid: boolean;
   status: Status;
   buy: (pkg: PurchasesPackage) => Promise<void>;
@@ -18,6 +19,7 @@ const Context = createContext<State | null>(null);
 
 export function PurchasesProvider({ children }: { children: React.ReactNode }) {
   const { settings: { age } } = useSettings();
+  const preview = Platform.OS === 'web' && process.env.EXPO_PUBLIC_PBS_PREVIEW === '1' ? previewStore : null;
   const [store, setStore] = useState<PurchaseStore | null>(null);
   const [paid, setPaid] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
@@ -25,7 +27,7 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
   const pending = useRef(false);
 
   useEffect(() => {
-    if (!age || age === 'child') return;
+    if (preview || !age || age === 'child') return;
     let live = true;
     let cleanup = () => {};
     void connectStore().then(async sdk => {
@@ -59,7 +61,7 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
       refresh();
     }).catch(() => { if (live) setStatus('failed'); });
     return () => { live = false; cleanup(); };
-  }, [age]);
+  }, [age, preview]);
 
   async function transact(pkg?: PurchasesPackage) {
     if (!store || !age || age === 'child' || inFlight.current || (pkg && (paid || pending.current))) return;
@@ -95,7 +97,7 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
   }
 
   const allowed = !!age && age !== 'child';
-  return <Context.Provider value={{ store: allowed ? store : null, paid: allowed && paid, status, buy: transact, restore: transact }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ store: allowed ? store : null, preview: allowed ? preview : null, paid: allowed && paid, status, buy: transact, restore: transact }}>{children}</Context.Provider>;
 }
 
 export function usePurchases() {

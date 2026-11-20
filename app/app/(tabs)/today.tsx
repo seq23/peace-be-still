@@ -1,4 +1,4 @@
-// Screen 6: Today. The date and the week dots with the day count at the top, then the day's three items
+// Screen 6: Today. The date, the day count and the week dots at the top (WeekStrip), then the day's three items
 // in the mock-up's order. Items still being built say so with a small tag, never a fake verse or count.
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -6,6 +6,7 @@ import { Text, View } from 'react-native';
 import { journeyById } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { Body, Card, Label, Screen, Tag, TextLink, styles, usePalette } from '../../src/ui';
+import { WeekStrip } from '../../src/ui/week';
 import { fonts } from '../../src/theme/tokens';
 import type { Key } from '../../src/i18n';
 
@@ -14,10 +15,7 @@ export default function Today() {
   const t = useT('journey');
   const c = usePalette();
   const router = useRouter();
-  const now = new Date();
   const faith = settings.door !== 'mindset';
-  const date = new Intl.DateTimeFormat(t.locale, { weekday: 'short', day: 'numeric', month: 'short' }).format(now);
-  const week = Array.from({ length: 7 }, (_, i) => new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + i));
   const nights = faith ? journeyById('psalm-nights')! : journeyById('imagination-nights')!;
 
   const item = (label: Key, text: string, extra?: React.ReactNode) => (
@@ -35,21 +33,7 @@ export default function Today() {
 
   return (
     <Screen edges={['top']}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
-        <Label>{date}</Label>
-        <Body size={14}>{t('today.week', { count: 1 })}</Body>
-      </View>
-      <View accessible accessibilityLabel={date} style={{ flexDirection: 'row', gap: 8 }}>
-        {week.map(day => {
-          const isToday = day.getDate() === now.getDate();
-          return (
-            <View key={day.toISOString()} style={{ width: 30, alignItems: 'center', gap: 3 }}>
-              <View style={{ width: 14, height: 14, borderRadius: 7, borderWidth: isToday ? 2 : 1.5, borderColor: isToday ? c.accent : c.line, borderStyle: isToday ? 'solid' : 'dashed' }} />
-              <Text style={{ fontFamily: fonts.mono, fontSize: 11, color: c.muted }}>{new Intl.DateTimeFormat(t.locale, { weekday: 'narrow' }).format(day)}</Text>
-            </View>
-          );
-        })}
-      </View>
+      <WeekStrip />
       {item('today.declaration.label', t(faith ? 'today.declaration.faith' : 'today.declaration.mindset'))}
       {faith ? item('today.story.label', t('today.story.text')) : item('today.scene.label', t('today.scene.text'))}
       <Card style={{ paddingVertical: 12 }}>

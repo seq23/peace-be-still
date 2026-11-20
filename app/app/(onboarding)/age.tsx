@@ -18,7 +18,10 @@ export default function AgeScreen() {
   const correcting = useLocalSearchParams<{ correct?: string }>().correct === '1' && !!settings.age;
   const [year, setYear] = useState('');
   const [month, setMonth] = useState<number | 'skip' | null>(null);
+  // Wine is only for a year that cannot be right. A refusal to move up is not an error: it replaces the rule
+  // line with the date (or the reason) in muted ink, so the rule is said once.
   const [problem, setProblem] = useState<string | null>(null);
+  const [refusal, setRefusal] = useState<string | null>(null);
   const boundary = needsBirthMonth(Number(year));
   const monthName = (m: number) => new Intl.DateTimeFormat(t.locale, { month: 'short' }).format(new Date(2000, m - 1, 15));
 
@@ -26,6 +29,7 @@ export default function AgeScreen() {
     setYear(value.replace(/\D/g, ''));
     setMonth(null);
     setProblem(null);
+    setRefusal(null);
   }
 
   function next() {
@@ -39,7 +43,7 @@ export default function AgeScreen() {
     }
     const result = correctAge(settings, age);
     if (!result.ok) {
-      setProblem(result.reason === 'wait'
+      setRefusal(result.reason === 'wait'
         ? t('age.blocked.wait', { date: new Intl.DateTimeFormat(t.locale, { day: 'numeric', month: 'long' }).format(new Date(result.until)) })
         : t(result.reason === 'child' ? 'age.blocked.child' : 'age.blocked.used'));
       return;
@@ -50,7 +54,7 @@ export default function AgeScreen() {
   }
 
   const chip = (key: string, text: string, selected: boolean, onPress: () => void) => (
-    <Pressable key={key} accessibilityRole="radio" accessibilityState={{ checked: selected }} onPress={onPress}
+    <Pressable key={key} role="radio" aria-checked={selected} onPress={onPress}
       style={{ minWidth: 72, minHeight: 44, paddingHorizontal: 12, borderRadius: 999, borderWidth: selected ? 2 : 1, borderColor: selected ? c.accent : c.line, backgroundColor: c.card, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontFamily: selected ? fonts.strong : fonts.body, fontSize: 15, color: c.ink }}>{text}</Text>
     </Pressable>
@@ -70,14 +74,15 @@ export default function AgeScreen() {
       {boundary ? (
         <View style={{ gap: 10 }}>
           <Body muted={false}>{t('age.month')}</Body>
-          <View accessibilityRole="radiogroup" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+          <View role="radiogroup" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
             {MONTHS.map(m => chip(String(m), monthName(m), month === m, () => setMonth(m)))}
             {chip('skip', t('age.monthSkip'), month === 'skip', () => setMonth('skip'))}
           </View>
         </View>
       ) : null}
       {problem ? <Text accessibilityRole="alert" style={{ fontFamily: fonts.body, fontSize: 15, color: c.wine }}>{problem}</Text> : null}
-      {correcting && settings.age === 'teen' && !settings.ageRaised ? <Body size={14}>{t('age.raiseOnce')}</Body> : null}
+      {refusal ? <Body size={14}><Text accessibilityRole="alert">{refusal}</Text></Body>
+        : correcting && settings.age === 'teen' && !settings.ageRaised ? <Body size={14}>{t('age.raiseOnce')}</Body> : null}
     </Screen>
   );
 }

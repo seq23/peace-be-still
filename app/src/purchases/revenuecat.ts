@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 import type Purchases from 'react-native-purchases';
-import type { CustomerInfo, PurchasesOfferings, PurchasesPackage } from 'react-native-purchases';
+import type { CustomerInfo, PurchasesPackage } from 'react-native-purchases';
 import products from '../config/products.json';
 
 export type Store = Pick<typeof Purchases,
@@ -13,7 +13,13 @@ export function hasPaid(info: CustomerInfo): boolean {
   return !!info.entitlements.active[products.entitlement]?.isActive;
 }
 
-export function plansFrom({ current }: PurchasesOfferings) {
+type PlanPackage = Pick<PurchasesPackage, 'identifier'> & {
+  product: Pick<PurchasesPackage['product'], 'identifier' | 'subscriptionPeriod' | 'introPrice' | 'priceString' | 'pricePerMonthString'>;
+};
+
+export function plansFrom<T extends PlanPackage>({ current }: {
+  current: { identifier: string; availablePackages: T[] } | null;
+}) {
   if (current?.identifier !== products.offering) return null;
   const find = (plan: Plan, identifier: string, period: string) => current.availablePackages.find(pkg =>
     pkg.identifier === identifier && pkg.product.identifier === products.products[plan].id &&
@@ -22,6 +28,29 @@ export function plansFrom({ current }: PurchasesOfferings) {
   const monthly = find('monthly', '$rc_monthly', 'P1M');
   return yearly && monthly ? { yearly, monthly } : null;
 }
+
+// The read-only storefront double used by the web preview. It has no checkout or account API.
+export const previewStore = {
+  async getOfferings() {
+    const dollars = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+    const availablePackages = (['yearly', 'monthly'] as const).map(plan => {
+      const product = products.products[plan];
+      const price = Number(product.usPrice);
+      const annual = plan === 'yearly';
+      return {
+        identifier: annual ? '$rc_annual' : '$rc_monthly',
+        product: {
+          identifier: product.id,
+          subscriptionPeriod: annual ? 'P1Y' : 'P1M',
+          introPrice: null,
+          priceString: dollars.format(price),
+          pricePerMonthString: annual ? dollars.format(price / 12) : null,
+        },
+      };
+    });
+    return { current: { identifier: products.offering, availablePackages } };
+  },
+};
 
 type Outcome = 'active' | 'unconfirmed' | 'pending' | 'cancelled' | 'failed';
 export type PurchaseStore = Store & {
