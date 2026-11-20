@@ -1,7 +1,9 @@
 import type { ExpoConfig } from 'expo/config';
 const config: ExpoConfig = {
   name: 'Peace Be Still', slug: 'peace-be-still', scheme: 'peacebestill', version: '1.0.0',
-  orientation: 'portrait', userInterfaceStyle: 'automatic', plugins: ['expo-router', ['expo-audio', { enableBackgroundPlayback: true }], ['expo-splash-screen', { image: './assets/icon.png', resizeMode: 'contain', backgroundColor: '#0E1A22' }]],
+  orientation: 'portrait', userInterfaceStyle: 'automatic', plugins: [
+    // One web bundle: the app is small, and lazy route chunks showed a blank screen while a slow phone fetched them.
+    ['expo-router', { asyncRoutes: { web: false, default: 'development' } }], ['expo-audio', { enableBackgroundPlayback: true }], ['expo-splash-screen', { image: './assets/icon.png', resizeMode: 'contain', backgroundColor: '#0E1A22' }]],
   icon: './assets/icon.png',
   ios: { bundleIdentifier: 'com.peacebestillapp.mobile' },
   android: { package: 'com.peacebestillapp.mobile' },
