@@ -6,7 +6,7 @@ import * as ExpoBrightness from 'expo-brightness';
 import { Directory, File, Paths } from 'expo-file-system';
 import type { Brightness } from './dimmer';
 import type { DownloadFiles } from './downloads';
-import type { AudioOutput, Store } from './player';
+import type { AudioOutput, AudioStatus, Store } from './player';
 
 /** Once at start: plays with the ringer switch off, keeps playing when the screen locks, pauses for a call. */
 export function prepareAudioSession(): Promise<void> {
@@ -15,22 +15,33 @@ export function prepareAudioSession(): Promise<void> {
 
 export function expoAudioOutput(): AudioOutput {
   const player = createAudioPlayer(null, { updateInterval: 1000 });
+  // Our own view of "the current source is ready": replace() resets it, so an old item's status never counts.
+  let ready = false;
+  let last = { playing: false, isLoaded: false };
+  const listeners = new Set<(status: AudioStatus) => void>();
+  player.addListener('playbackStatusUpdate', (status) => {
+    if (status.isLoaded) ready = true;
+    const changed = status.playing !== last.playing || status.isLoaded !== last.isLoaded;
+    last = { playing: status.playing, isLoaded: status.isLoaded };
+    if (!changed && !status.didJustFinish) return;
+    const forwarded = { playing: status.playing, isLoaded: ready, didJustFinish: status.didJustFinish };
+    for (const listener of listeners) listener(forwarded);
+  });
   return {
     load(uri, title) {
+      ready = false;
       player.replace({ uri });
       player.setActiveForLockScreen(true, { title, artist: 'Peace Be Still' }, { showSeekBackward: true, showSeekForward: true });
     },
     play: () => player.play(),
     pause: () => player.pause(),
     seekTo: (seconds) => player.seekTo(seconds),
+    get isLoaded() { return ready; },
     get currentTime() { return player.currentTime; },
     get volume() { return player.volume; },
     set volume(value: number) { player.volume = Math.max(0, Math.min(1, value)); },
-    onFinish(listener) {
-      const subscription = player.addListener('playbackStatusUpdate', (status) => { if (status.didJustFinish) listener(); });
-      return () => subscription.remove();
-    },
-    dispose() { player.clearLockScreenControls(); player.remove(); },
+    onStatus(listener) { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    dispose() { listeners.clear(); player.clearLockScreenControls(); player.remove(); },
   };
 }
 

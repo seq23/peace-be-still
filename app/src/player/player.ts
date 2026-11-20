@@ -8,12 +8,18 @@ export interface AudioOutput {
   load(uri: string, title: string): void;
   play(): void;
   pause(): void;
+  /** Only honoured once the new source reports loaded (iOS drops a seek on an item that is not ready). */
   seekTo(seconds: number): Promise<void>;
+  /** True once the source given to the last load() is ready. */
+  readonly isLoaded: boolean;
   readonly currentTime: number;
   volume: number;
-  onFinish(listener: () => void): () => void;
+  /** Native status: fires when playing or loaded changes, or the track ends, whoever caused it (lock screen, call, AirPods). */
+  onStatus(listener: (status: AudioStatus) => void): () => void;
   dispose(): void;
 }
+
+export type AudioStatus = { playing: boolean; isLoaded: boolean; didJustFinish: boolean };
 
 /** AsyncStorage's shape. */
 export interface Store {
@@ -39,6 +45,8 @@ export const SAVE_EVERY_MS = 10_000;
 /** A saved spot is used only past the first 5 s and before the last 10 s. */
 export const RESUME_MIN_S = 5;
 export const RESUME_TAIL_S = 10;
+/** How long to wait for a source to load before giving up on the saved spot and starting at 0. */
+export const LOAD_WAIT_MS = 10_000;
 
 const positionKey = (track: Track) => `pbs.player.position:${track.file}`;
 type Saved = { file: string; positionSeconds: number; savedAt: number };
@@ -93,12 +101,33 @@ export function createPlayer(options: {
     }
   };
 
-  const unsubscribeFinish = audio.onFinish(() => {
-    const track = loaded;
-    stopSaving();
-    loaded = null;
-    if (track) void store.removeItem(positionKey(track)).catch(() => undefined);
-    set({ playing: false });
+  let loadWaiters: Array<() => void> = [];
+  /** Resolves true once the loaded source is ready, false after LOAD_WAIT_MS. */
+  const whenLoaded = (): Promise<boolean> => {
+    if (audio.isLoaded) return Promise.resolve(true);
+    return new Promise((resolve) => {
+      const waiter = () => { clearTimeout(timeout); resolve(true); };
+      const timeout = setTimeout(() => { loadWaiters = loadWaiters.filter((w) => w !== waiter); resolve(false); }, LOAD_WAIT_MS);
+      loadWaiters.push(waiter);
+    });
+  };
+
+  // The lock screen, a call, AirPods coming out, Siri and Control Center play or pause the native player
+  // directly; its status is the truth, so the saver, the dimmer (via state.playing) and the screen follow it.
+  const unsubscribeStatus = audio.onStatus((status) => {
+    if (status.isLoaded && loadWaiters.length) { const waiters = loadWaiters; loadWaiters = []; for (const w of waiters) w(); }
+    if (!loaded) return;
+    if (status.didJustFinish) {
+      const track = loaded;
+      stopSaving();
+      loaded = null;
+      void store.removeItem(positionKey(track)).catch(() => undefined);
+      set({ playing: false });
+      return;
+    }
+    if (status.playing === state.playing) return;
+    if (status.playing) { startSaving(); set({ playing: true }); }
+    else { stopSaving(); void savePosition(); set({ playing: false }); }
   });
 
   return {
@@ -107,7 +136,7 @@ export function createPlayer(options: {
 
     async play(track: Track, user: User): Promise<void> {
       const current = ++generation;
-      if (state.playing) { stopSaving(); await savePosition(); }
+      if (state.playing) { stopSaving(); await savePosition(); set({ playing: false }); }
       const local = canUse(FEATURES.OFFLINE, user) ? downloads.find(track) : null;
       const uri = local ?? (baseUrl ? trackUrl(track, baseUrl) : null);
       if (!uri) { audio.pause(); loaded = null; set({ track, playing: false, error: 'audio-not-ready' }); return; }
@@ -117,7 +146,10 @@ export function createPlayer(options: {
         audio.load(uri, trackTitle(track, lang));
         loaded = track;
         if (!state.fading) audio.volume = 1;
-        if (at > 0) await audio.seekTo(at);
+        if (at > 0 && (await whenLoaded())) {
+          if (current !== generation) return;
+          await audio.seekTo(at);
+        }
         if (current !== generation) return;
         audio.play();
         startSaving();
@@ -171,7 +203,8 @@ export function createPlayer(options: {
       generation++;
       stopSleep();
       stopSaving();
-      unsubscribeFinish();
+      unsubscribeStatus();
+      loadWaiters = [];
       listeners.clear();
       await savePosition();
       audio.dispose();

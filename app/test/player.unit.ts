@@ -5,7 +5,7 @@ import { buildLibrary, MANIFEST } from '../src/player/build-library';
 import { createDimmer } from '../src/player/dimmer';
 import { createDownloads, type DownloadFiles } from '../src/player/downloads';
 import { audioBaseUrl, readManifest, trackTitle, type Track } from '../src/player/library';
-import { createPlayer, FADE_MS, type AudioOutput, type Store } from '../src/player/player';
+import { createPlayer, FADE_MS, LOAD_WAIT_MS, type AudioOutput, type AudioStatus, type Store } from '../src/player/player';
 
 const BASE = 'https://audio.test/';
 const PAID = { paid: true };
@@ -19,21 +19,36 @@ function track(over: Partial<Track> = {}): Track {
   return { file: 'en/psalms/kjv-psa-023.m4a', kind: 'psalms', lang: 'en', ref: 'PSA 23', seconds: 600, sha256: 'a'.repeat(64), voice: 'kokoro:af_nicole', titles: { en: 'Psalm 23', es: 'Salmo 23' }, ...over };
 }
 
-/** An output whose position moves with the (mocked) wall clock while it plays. */
-function fakeAudio() {
+/**
+ * An output whose position moves with the (mocked) wall clock while it plays. Like iOS, a seek before the
+ * source reports loaded is dropped. `autoLoad` reports loaded on the next microtask; otherwise call loaded().
+ * outsidePause/outsidePlay are the lock screen, a call or AirPods acting on the native player directly.
+ */
+function fakeAudio({ autoLoad = true } = {}) {
   let startedAt: number | null = null;
   let base = 0;
-  const finishers = new Set<() => void>();
+  let ready = false;
+  const listeners = new Set<(status: AudioStatus) => void>();
+  const emit = (didJustFinish = false) => queueMicrotask(() => {
+    for (const l of listeners) l({ playing: startedAt !== null, isLoaded: ready, didJustFinish });
+  });
   const audio = {
     uri: null as string | null, volume: 1, seeks: [] as number[], titles: [] as string[], disposed: false,
-    load(uri: string, title: string) { audio.uri = uri; audio.titles.push(title); base = 0; startedAt = null; },
-    play() { if (startedAt === null) startedAt = Date.now(); },
-    pause() { if (startedAt !== null) { base += (Date.now() - startedAt) / 1000; startedAt = null; } },
-    async seekTo(seconds: number) { base = seconds; if (startedAt !== null) startedAt = Date.now(); audio.seeks.push(seconds); },
+    load(uri: string, title: string) {
+      audio.uri = uri; audio.titles.push(title); base = 0; startedAt = null; ready = false;
+      if (autoLoad) queueMicrotask(() => audio.loaded());
+    },
+    loaded() { ready = true; emit(); },
+    play() { if (startedAt === null) { startedAt = Date.now(); emit(); } },
+    pause() { if (startedAt !== null) { base += (Date.now() - startedAt) / 1000; startedAt = null; emit(); } },
+    async seekTo(seconds: number) { if (!ready) return; base = seconds; if (startedAt !== null) startedAt = Date.now(); audio.seeks.push(seconds); },
+    get isLoaded() { return ready; },
     get currentTime() { return base + (startedAt === null ? 0 : (Date.now() - startedAt) / 1000); },
     get isPlaying() { return startedAt !== null; },
-    onFinish(listener: () => void) { finishers.add(listener); return () => { finishers.delete(listener); }; },
-    finish() { startedAt = null; for (const listener of finishers) listener(); },
+    onStatus(listener: (status: AudioStatus) => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    outsidePause() { audio.pause(); },
+    outsidePlay() { audio.play(); },
+    finish() { startedAt = null; emit(true); },
     dispose() { audio.disposed = true; },
   };
   return audio satisfies AudioOutput;
@@ -62,8 +77,8 @@ function fakeFiles(body: (url: string) => string | Error = () => 'a'.repeat(64))
   return { files, api };
 }
 
-function setup({ baseUrl = BASE as string | null, store = memoryStore(), files = fakeFiles() } = {}) {
-  const audio = fakeAudio();
+function setup({ baseUrl = BASE as string | null, store = memoryStore(), files = fakeFiles(), autoLoad = true } = {}) {
+  const audio = fakeAudio({ autoLoad });
   const downloads = createDownloads(files.api);
   const player = createPlayer({ audio, store, downloads, baseUrl, lang: 'en' });
   return { audio, store, files, downloads, player };
@@ -227,6 +242,55 @@ test('a spot in the last 10 seconds, or a finished track, starts again from the 
   second.audio.finish();
   await flush();
   assert.equal(store.data.size, 0);
+});
+
+test('the saved spot is applied only after the track reports loaded', async () => {
+  const store = memoryStore();
+  store.data.set('pbs.player.position:en/psalms/kjv-psa-023.m4a', JSON.stringify({ positionSeconds: 120 }));
+  const { audio, player } = setup({ store, autoLoad: false });
+  const playing = player.play(track(), FREE);
+  await flush();
+  assert.equal(audio.isPlaying, false, 'waits for the load before playing');
+  audio.loaded();
+  await playing;
+  assert.deepEqual(audio.seeks, [120]);
+  assert.equal(Math.round(audio.currentTime), 120);
+});
+
+test('a track that never reports loaded starts from the top after the wait', async () => {
+  const store = memoryStore();
+  store.data.set('pbs.player.position:en/psalms/kjv-psa-023.m4a', JSON.stringify({ positionSeconds: 120 }));
+  const { audio, player } = setup({ store, autoLoad: false });
+  const playing = player.play(track(), FREE);
+  await flush();
+  mock.timers.tick(LOAD_WAIT_MS);
+  await playing;
+  assert.deepEqual(audio.seeks, []);
+  assert.equal(player.getState().playing, true);
+});
+
+// ── outside control (lock screen, calls, AirPods) ────────────────────────
+
+test('a pause from outside the app updates the state and keeps her place; an outside play resumes saving', async () => {
+  const store = memoryStore();
+  const key = 'pbs.player.position:en/psalms/kjv-psa-023.m4a';
+  const { audio, player } = setup({ store });
+  await player.play(track(), FREE);
+  await flush();
+  mock.timers.tick(33_000);
+  audio.outsidePause();
+  await flush();
+  assert.equal(player.getState().playing, false);
+  assert.equal(JSON.parse(store.data.get(key)!).positionSeconds, 33);
+  mock.timers.tick(30_000);
+  await flush();
+  assert.equal(JSON.parse(store.data.get(key)!).positionSeconds, 33, 'no saving while paused');
+  audio.outsidePlay();
+  await flush();
+  assert.equal(player.getState().playing, true);
+  mock.timers.tick(10_000);
+  await flush();
+  assert.equal(JSON.parse(store.data.get(key)!).positionSeconds, 43);
 });
 
 // ── offline (paid) ───────────────────────────────────────────────────────
