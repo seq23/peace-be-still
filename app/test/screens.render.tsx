@@ -279,10 +279,13 @@ test('tabs follow the door and the age (expo-router Tabs, hidden with href null)
   assert.deepEqual(await shown({ ...base, journey: 'mi-refugio' }), ['Hoy', 'Chat', 'Biblia', 'Noches', 'Más']);
 });
 
-test('the tab bar has no fixed height or padding that could clip a label, and the label line fits its 12 px text', async () => {
+test('the tab bar is tall enough for the icon and the whole label line, and leaves the inset padding to the navigator', async () => {
   const options = host(await mount('tabs', { ...base, journey: 'psalm-nights' }), 'Tabs')[0].props.screenOptions;
-  for (const key of ['height', 'minHeight', 'maxHeight', 'paddingTop', 'paddingBottom']) assert.equal(options.tabBarStyle[key], undefined, key);
-  assert.ok(options.tabBarLabelStyle.lineHeight >= options.tabBarLabelStyle.fontSize * 1.3);
+  const label = options.tabBarLabelStyle;
+  assert.ok(label.lineHeight >= label.fontSize * 1.3);
+  // The navigator's tab: 5 pt padding, a 28 pt icon box, the label, 5 pt padding (round 4 clipped at 66 - 16 pt).
+  assert.ok(options.tabBarStyle.height >= 5 + 28 + label.lineHeight + 5, String(options.tabBarStyle.height));
+  for (const key of ['paddingTop', 'paddingBottom']) assert.equal(options.tabBarStyle[key], undefined, key);
 });
 
 test('opening the tabs records today once, keeping only this week', async () => {
