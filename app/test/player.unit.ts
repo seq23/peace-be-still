@@ -1,7 +1,7 @@
 import { strict as assert } from 'node:assert';
 import { readFileSync } from 'node:fs';
 import { beforeEach, afterEach, mock, test } from 'node:test';
-import { buildLibrary, MANIFEST, REPO } from '../src/player/build-library';
+import { buildLibrary, keyScripture, MANIFEST, REPO } from '../src/player/build-library';
 import { createDimmer } from '../src/player/dimmer';
 import { createDownloads, type DownloadFiles } from '../src/player/downloads';
 import { audioBaseUrl, hasCallAndResponse, readManifest, trackTitle, type Track } from '../src/player/library';
@@ -104,10 +104,24 @@ test('the real manifest yields one track for every passed row, with readable tit
     if (hasCallAndResponse(t)) {
       fields.push('responsePauses', 'scriptureRef');
       const story = JSON.parse(readFileSync(`${REPO}/${t.ref}`, 'utf8'));
-      assert.equal(t.scriptureRef, story.blocks.find((block: { type: string }) => block.type === 'scripture').ref);
+      // The key verse is the one the call and response answers: the last Scripture before it.
+      const call = story.blocks.findIndex((block: { type: string }) => block.type === 'call_response');
+      const before = story.blocks.slice(0, call).filter((block: { type: string }) => block.type === 'scripture');
+      assert.ok(call > 0 && before.length, `${t.ref} has Scripture before its call and response`);
+      assert.equal(t.scriptureRef, before.at(-1).ref);
     }
     assert.deepEqual(Object.keys(t).sort(), fields.sort());
   }
+});
+
+test('a story shows the verse its call and response answers, else its first Scripture, else none', () => {
+  const s = (ref: string) => ({ type: 'scripture', ref });
+  const call = { type: 'call_response' };
+  assert.equal(keyScripture([s('MAR 4:37'), { type: 'retelling' }, s('MAR 4:39'), call, s('MAR 4:40')]), 'MAR 4:39');
+  assert.equal(keyScripture([s('RUT 1:8'), s('RUT 1:16')]), 'RUT 1:8');
+  assert.equal(keyScripture([call, s('GEN 1:1')]), 'GEN 1:1');
+  assert.equal(keyScripture([{ type: 'retelling' }]), undefined);
+  assert.equal(keyScripture(undefined), undefined);
 });
 
 test('a bad passed row is held and the rest ship; failed rows never ship', () => {

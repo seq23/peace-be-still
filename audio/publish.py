@@ -10,8 +10,8 @@ Per file (a manifest row with status passed, a sha256 and a Drive `shelved` path
 The served manifest `manifest.jsonl` at the bucket root is the ledger: one public row per file that is
 in R2 (file, kind, lang, ref, seconds, sha256, voice, status, and a story's title; never checks or
 Drive paths). A file whose ledger sha256 equals the manifest's is done, so every run is idempotent and
-a run cut off by its time box resumes where it stopped. The app reads <audioBaseUrl>/manifest.jsonl
-to check which tracks from the bundled catalog it can stream.
+a run cut off by its time box resumes where it stopped. The app reads <audioBaseUrl>/manifest.jsonl,
+with the copy bundled in the release as the offline fallback, so new audio needs no app release.
 
 Where (her ruling 20 Nov 2026): her SECOND Cloudflare account, which holds only this bucket, so its own
 free 10 GB is the app's. Free tier only: the bucket's stored bytes (summed from the S3 listing; the key is
@@ -202,8 +202,7 @@ def main(argv=None) -> int:
     connect()
     cands = candidates(fill.read_manifest())
     in_r2 = r2_listing()
-    previous_ledger = read_ledger()
-    ledger = {f: r for f, r in previous_ledger.items() if f in in_r2}
+    ledger = {f: r for f, r in read_ledger().items() if f in in_r2}
     queue = todo(cands, ledger, in_r2)
     if a.limit:
         queue = queue[:a.limit]
@@ -216,7 +215,7 @@ def main(argv=None) -> int:
 
     stop: NamedStop | None = None
     held: list[str] = []
-    made, t0, dirty = 0, time.monotonic(), ledger != previous_ledger
+    made, t0, dirty = 0, time.monotonic(), False
     try:
         for row in batch:
             if a.max_minutes and (time.monotonic() - t0) / 60 >= a.max_minutes:
@@ -224,10 +223,10 @@ def main(argv=None) -> int:
             try:
                 publish_one(row)
             except NamedStop as e:
-                if e.exit_code == 0 or e.code == "R2_HASH_MISMATCH":
-                    dirty = ledger.pop(row["file"], None) is not None or dirty
                 if e.exit_code == 0:      # one bad shelf copy: hold that file, carry on
                     held.append(str(e))
+                    ledger.pop(row["file"], None)
+                    dirty = True
                     continue
                 raise
             ledger[row["file"]] = public_row(row)

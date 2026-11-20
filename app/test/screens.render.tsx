@@ -90,9 +90,12 @@ const texts = (tree: ReactTestRenderer) => tree.root.findAll(n => (n.type as unk
 const strings = (tree: ReactTestRenderer) => texts(tree).join(' | ');
 const host = (tree: ReactTestRenderer, type: string) => tree.root.findAll(n => (n.type as unknown) === type);
 const textOf = (node: ReactTestInstance) => node.findAll(n => (n.type as unknown) === 'Text').map(t => t.children.filter(x => typeof x === 'string').join('')).join(' ');
+// An icon button (the player's play/pause) is found by its spoken label, like a screen reader finds it.
+const labelOf = (node: ReactTestInstance) => node.props.accessibilityLabel ?? textOf(node);
+const button = (tree: ReactTestRenderer, label: string) => host(tree, 'Pressable').find(n => labelOf(n) === label);
 async function press(tree: ReactTestRenderer, text: string | RegExp) {
   const match = (s: string) => typeof text === 'string' ? s.includes(text) : text.test(s);
-  const target = host(tree, 'Pressable').find(n => match(textOf(n)));
+  const target = host(tree, 'Pressable').find(n => match(textOf(n)) || (typeof n.props.accessibilityLabel === 'string' && match(n.props.accessibilityLabel)));
   assert.ok(target, `No button "${text}" in: ${strings(tree)}`);
   assert.ok(!target.props.disabled, `Button "${text}" is disabled`);
   await act(async () => target.props.onPress());
@@ -542,7 +545,7 @@ test('the canonical catalog plays Psalm 1 and disables missing or outdated uploa
     const screen = await mount('listen', person, { track: available.sha256 });
     try {
       await press(screen, en['listen.play']);
-      assert.ok(texts(screen).includes(en['listen.pause']));
+      assert.ok(button(screen, en['listen.pause']));
       assert.equal(playable.source(), audioBase + available.file);
     } finally {
       await act(async () => screen.unmount());
@@ -556,7 +559,7 @@ test('the canonical catalog plays Psalm 1 and disables missing or outdated uploa
       const screen = await mount('listen', person, { track: unavailable.sha256 });
       try {
         assert.ok(texts(screen).includes(en['listen.audioNotReady']));
-        assert.equal(host(screen, 'Pressable').find(node => textOf(node) === en['listen.play'])?.props.disabled, true);
+        assert.equal(button(screen, en['listen.play'])?.props.disabled, true);
         for (const label of [en['listen.back15'], en['listen.forward15']]) {
           assert.equal(host(screen, 'Pressable').find(node => node.props.accessibilityLabel === label)?.props.disabled, true);
         }
@@ -566,6 +569,7 @@ test('the canonical catalog plays Psalm 1 and disables missing or outdated uploa
           assert.ok(supplied, 'Psalm 4 contains translator-supplied words');
           const italic = host(screen, 'Text').find(node => node.children.join('') === supplied);
           assert.equal(italic?.props.style?.fontFamily, 'LibreCaslonText_400Regular_Italic');
+          assert.doesNotMatch(strings(screen), /[\[\]]/, 'no KJV bracket reaches the screen');
           assert.equal(italic?.parent?.children.map(child => typeof child === 'string' ? child : child.children.join('')).join(''),
             stored.replace(/^¶\s*/, '').replace(/[\[\]]/g, ''));
         }
@@ -616,7 +620,7 @@ test('Now Playing reports the named configuration stop, with AI disclosure and d
   const tree = await mount('listen', { ...base, journey: 'psalm-nights' }, { track: track.sha256 });
   assert.ok(strings(tree).includes(en['listen.aiVoice']));
   assert.ok(texts(tree).includes(en['listen.audioNotReady']));
-  assert.equal(host(tree, 'Pressable').find(node => textOf(node) === en['listen.play'])?.props.disabled, true);
+  assert.equal(button(tree, en['listen.play'])?.props.disabled, true);
   assert.ok(!strings(tree).includes('CONFIG_AUDIO_BASE_URL'));
   assert.deepEqual(faithContentIssues(strings(tree)), []);
   await act(async () => tree.unmount());
@@ -644,7 +648,7 @@ test('Now Playing restores a saved position and renders pause, continue and the 
     await press(tree, new RegExp('^' + en['listen.play'] + '$'));
     assert.equal(player.position(), 12);
     await press(tree, new RegExp('^' + en['listen.pause'] + '$'));
-    assert.ok(texts(tree).includes(en['listen.resume']));
+    assert.ok(button(tree, en['listen.resume']));
     await press(tree, en['listen.resume']);
     assert.equal(player.position(), 12);
     assert.ok(texts(tree).includes(storedVerse('PSA', 23, 2)));
@@ -705,10 +709,16 @@ test('Hush Harbor cues follow the real pause positions and the Spanish player re
   const player = testPlayer(track);
   const english = await mount('listen', { ...base, journey: 'hush-harbor' }, { track: track.sha256 });
   const story = JSON.parse(readFileSync('../' + track.ref, 'utf8'));
-  const openingScripture = story.blocks.find((block: { type: string }) => block.type === 'scripture');
-  assert.equal(openingScripture.ref, 'MAR 4:37');
-  assert.ok(texts(english).includes(storedVerse('MAR', 4, 37).replace(/^¶\s*/, '')));
-  assert.ok(strings(english).includes(openingScripture.label + ' · KJV'));
+  // The middle of the story player holds its key verse (the one the call and response answers), never a hole.
+  const keyVerse = story.blocks.find((block: { ref?: string }) => block.ref === 'MAR 4:39');
+  assert.equal(track.scriptureRef, 'MAR 4:39');
+  const scripture = english.root.find(node => node.props.testID === 'scripture-text' && (node.type as unknown) === 'Text');
+  assert.equal(textOf(scripture).replace(/ /g, ''), storedVerse('MAR', 4, 39).replace(/^¶\s*/, '').replace(/ /g, ''));
+  assert.ok(strings(english).includes(keyVerse.label + ' · KJV'));
+  const order = texts(english);
+  const title = order.indexOf(trackTitle(track, 'en'));
+  const reference = order.findIndex(text => text.includes(keyVerse.label));
+  assert.ok(title >= 0 && title < reference && reference < order.indexOf('0:00'), `title, verse, then progress: ${order.join(' | ')}`);
   assert.ok(track.responsePauses, 'the real story carries both audio pause positions');
   const [first, second] = track.responsePauses;
   await press(english, en['listen.play']);

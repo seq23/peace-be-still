@@ -2,13 +2,15 @@ import { useIsFocused } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { bible, displayRuns, formatReference, parseReference, type Verse } from '../../bible';
+import Svg, { Path, Rect } from 'react-native-svg';
+import { bible, formatReference, parseReference, type Verse } from '../../bible';
 import { canUse } from '../../gates';
 import { hasCallAndResponse, trackTitle, type Track } from '../../player/library';
 import { SLEEP_MINUTES, type SleepMinutes } from '../../player/player';
 import { useDimmer, usePlayer } from '../../player/usePlayer';
 import { useSettings, useT } from '../../settings';
 import { dawn, fonts, night } from '../../theme/tokens';
+import { ScriptureText } from '../../ui/scripture';
 import { shelfOf } from './catalog';
 import { usePublishedAudio } from './availability';
 import { downloadAvailable, useOffline } from './offline';
@@ -120,21 +122,19 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         <Pressable onPress={close} accessibilityRole="button" style={styles.control}>
           <Text style={styles.link}>{t('listen.close')}</Text>
         </Pressable>
-        <View style={styles.heading}>
+        {/* Screen 4: the title block near the top, the verse under it, the controls at the foot. A track with
+            no verse (Imagination Nights) centres its title instead of leaving a hole. */}
+        <View style={[styles.heading, !excerptRef && styles.headingAlone]}>
           <Text style={styles.tag}>{label}</Text>
           <Text accessibilityRole="header" style={styles.title}>{trackTitle(track, t.locale)}</Text>
-          <Text style={styles.secondary}>{t('listen.aiVoice')}</Text>
+          <Text style={styles.note}>{t('listen.minutes', { minutes: Math.max(1, Math.round(track.seconds / 60)) })} · {t('listen.aiVoice')}</Text>
         </View>
         {verse && <View style={styles.verse}>
-          <Text style={styles.response}>
-            {displayRuns(verse.text).map((run, index) => run.italic
-              ? <Text key={index} style={styles.italic}>{run.text}</Text>
-              : run.text)}
-          </Text>
+          <ScriptureText text={verse.text} style={styles.verseText} testID="scripture-text" />
           <Text style={styles.reference}>{shelf === 'psalms' ? `${trackTitle(track, t.locale)}:${verse.verse}` : formatReference(verse, t.locale)} · {translation}</Text>
         </View>}
         {untimedResponses && <View style={styles.responses}>
-          <Text style={styles.secondary}>{t('listen.respondDuringPauses')}</Text>
+          <Text style={styles.note}>{t('listen.respondDuringPauses')}</Text>
           <Text style={styles.response}>{t('listen.responseFirst')}</Text>
           <Text style={styles.response}>{t('listen.responseSecond')}</Text>
         </View>}
@@ -147,34 +147,40 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
           <View accessibilityRole="progressbar" accessibilityLabel={t('listen.progress')}
             accessibilityValue={{ min: 0, max: 100, now: progress }} style={styles.rail}>
             <View style={[styles.fill, { width: `${progress}%` }]} />
+            <View style={[styles.thumb, { left: `${progress}%` }]} />
           </View>
           <View style={styles.times}>
             <Text style={styles.time}>{clock(position)}</Text>
             <Text style={styles.time}>{clock(track.seconds)}</Text>
           </View>
         </View>
-        {unavailable && <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.audioNotReady')}</Text>}
+        {unavailable && <Text accessibilityRole="alert" style={styles.note}>{t('listen.audioNotReady')}</Text>}
         {!unavailable && current && state.error === 'play-failed' &&
-          <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.playFailed')}</Text>}
+          <Text accessibilityRole="alert" style={styles.note}>{t('listen.playFailed')}</Text>}
         <View style={styles.transport}>
           {!protectedPauses && <Pressable disabled={!current || unavailable || playPending || !!state.error}
             accessibilityRole="button" accessibilityLabel={t('listen.back15')} style={styles.skip}
             onPress={() => { void player.skip(-15).catch(() => undefined); }}>
-            <Text style={styles.link}>−15</Text>
+            <Text style={styles.skipText}>−15</Text>
           </Pressable>}
           <Pressable onPress={() => void toggle()} disabled={playPending || (unavailable && !playing)} accessibilityRole="button"
+            accessibilityLabel={playing ? t('listen.pause') : current && !state.error && !unavailable ? t('listen.resume') : t('listen.play')}
             accessibilityState={{ busy: playPending, disabled: unavailable && !playing }} style={[styles.play, unavailable && !playing && styles.disabled]}>
-            <Text style={styles.playText}>{playing ? t('listen.pause') : current && !state.error && !unavailable ? t('listen.resume') : t('listen.play')}</Text>
+            <Svg width={26} height={28} viewBox="0 0 26 28">
+              {playing
+                ? <><Rect x={3} y={2} width={7} height={24} rx={2} fill={night.bg} /><Rect x={16} y={2} width={7} height={24} rx={2} fill={night.bg} /></>
+                : <Path d="M6 3.2v21.6c0 1 1.1 1.6 1.9 1.1l16.6-10.8c.8-.5.8-1.7 0-2.2L7.9 2.1C7.1 1.6 6 2.2 6 3.2z" fill={night.bg} />}
+            </Svg>
           </Pressable>
           {!protectedPauses && <Pressable disabled={!current || unavailable || playPending || !!state.error}
             accessibilityRole="button" accessibilityLabel={t('listen.forward15')} style={styles.skip}
             onPress={() => { void player.skip(15).catch(() => undefined); }}>
-            <Text style={styles.link}>+15</Text>
+            <Text style={styles.skipText}>+15</Text>
           </Pressable>}
         </View>
         <Pressable onPress={() => setTimerOpen(true)} accessibilityRole="button" style={styles.timer}>
           <Text style={styles.main}>{t('listen.timer')}</Text>
-          <Text accessibilityLiveRegion="polite" style={styles.link}>
+          <Text accessibilityLiveRegion="polite" style={styles.timerValue}>
             {state.fading ? t('listen.fading') : t('listen.timerSummary', { setting: minutes === null ? t('listen.timerOff') : t('listen.minutes', { minutes }) })}
           </Text>
         </Pressable>
@@ -182,12 +188,12 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
           {t(shelf === 'psalms' ? 'listen.psalmAllowance' : 'listen.nightAllowance')}
         </Text>}
         {offlineAllowed ? (
-          <Pressable accessibilityRole="button" accessibilityState={{ busy: downloading }} style={styles.control}
+          <Pressable accessibilityRole="button" accessibilityState={{ busy: downloading }} style={[styles.control, styles.centered]}
             disabled={downloading || !canStream || saved} onPress={() => void download()}>
             <Text style={styles.link}>{saved ? t('listen.downloaded') : downloading ? t('listen.downloading') : t('listen.download')}</Text>
           </Pressable>
-        ) : <Text style={styles.secondary}>{t('listen.paidDownload')}</Text>}
-        {downloadFailed && <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.downloadFailed')}</Text>}
+        ) : <Text style={styles.note}>{t('listen.paidDownload')}</Text>}
+        {downloadFailed && <Text accessibilityRole="alert" style={styles.note}>{t('listen.downloadFailed')}</Text>}
       </ScrollView>
       {dimmed && response === null && <Pressable accessibilityRole="button" accessibilityLabel={t('listen.brighten')} onPress={touch} style={styles.dim} />}
       {timerOpen && <Modal visible transparent animationType="slide" onRequestClose={() => setTimerOpen(false)}>
@@ -219,30 +225,35 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: night.bg },
   content: { width: '100%', maxWidth: 520, alignSelf: 'center', flexGrow: 1, padding: 24, gap: 18 },
   control: { minHeight: 44, justifyContent: 'center' },
-  heading: { gap: 12, marginVertical: 28 },
-  title: { fontFamily: fonts.serif, color: night.ink, fontSize: 30, lineHeight: 39 },
-  tag: { fontFamily: fonts.mono, color: night.muted, fontSize: 12, textTransform: 'uppercase', letterSpacing: 1.4 },
+  centered: { alignSelf: 'center' },
+  heading: { gap: 6, marginTop: 34, alignItems: 'center' },
+  headingAlone: { marginVertical: 'auto' },
+  title: { fontFamily: fonts.serif, color: night.ink, fontSize: 21, lineHeight: 27, textAlign: 'center' },
+  tag: { fontFamily: fonts.mono, color: night.muted, fontSize: 12, textTransform: 'uppercase', letterSpacing: 1.4, textAlign: 'center' },
   main: { color: night.ink, fontFamily: fonts.body, fontSize: 16 },
   secondary: { color: night.muted, fontFamily: fonts.body, fontSize: 14, lineHeight: 20 },
+  note: { color: night.muted, fontFamily: fonts.body, fontSize: 14, lineHeight: 20, textAlign: 'center' },
   link: { color: night.glow, fontFamily: fonts.strong, fontSize: 16 },
-  verse: { gap: 12, marginBottom: 20 },
-  reference: { color: dawn, fontFamily: fonts.mono, fontSize: 12 },
-  progress: { gap: 8, marginTop: 'auto' },
-  rail: { height: 4, borderRadius: 2, backgroundColor: night.line },
+  verse: { gap: 12, marginTop: 22, marginBottom: 20 },
+  verseText: { color: night.ink, fontFamily: fonts.serif, fontSize: 21, lineHeight: 31, textAlign: 'center' },
+  reference: { color: dawn, fontFamily: fonts.mono, fontSize: 12, textTransform: 'uppercase', letterSpacing: 1.4, textAlign: 'center' },
+  progress: { gap: 10, marginTop: 'auto' },
+  rail: { height: 4, borderRadius: 2, backgroundColor: night.line, justifyContent: 'center' },
   fill: { height: 4, borderRadius: 2, backgroundColor: night.glow },
+  thumb: { position: 'absolute', width: 14, height: 14, marginLeft: -7, borderRadius: 7, backgroundColor: night.glow },
   times: { flexDirection: 'row', justifyContent: 'space-between' },
   time: { color: night.muted, fontFamily: fonts.mono, fontSize: 12 },
-  transport: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 12 },
-  skip: { minWidth: 44, minHeight: 44, borderRadius: 22, borderWidth: 1, borderColor: night.line,
+  transport: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 34 },
+  skip: { width: 56, height: 56, borderRadius: 28, borderWidth: 1.5, borderColor: night.line,
     alignItems: 'center', justifyContent: 'center' },
+  skipText: { color: night.ink, fontFamily: fonts.mono, fontSize: 13 },
   disabled: { opacity: 0.55 },
   allowance: { color: night.muted, fontFamily: fonts.body, fontSize: 14, lineHeight: 20, textAlign: 'center' },
   cue: { minHeight: 30 },
   responses: { gap: 8, marginBottom: 16 },
-  response: { color: night.ink, fontFamily: fonts.serif, fontSize: 21, lineHeight: 30 },
-  italic: { fontFamily: 'LibreCaslonText_400Regular_Italic' },
-  play: { minHeight: 56, paddingHorizontal: 32, borderRadius: 28, backgroundColor: night.glow, alignSelf: 'center', justifyContent: 'center' },
-  playText: { color: night.bg, fontFamily: fonts.strong, fontSize: 17 },
+  response: { color: night.ink, fontFamily: fonts.serif, fontSize: 21, lineHeight: 30, textAlign: 'center' },
+  play: { width: 84, height: 84, borderRadius: 42, backgroundColor: night.glow, alignItems: 'center', justifyContent: 'center' },
+  timerValue: { color: night.glow, fontFamily: fonts.mono, fontSize: 13 },
   timer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, minHeight: 52, paddingHorizontal: 14,
     borderRadius: 16, borderWidth: 1, borderColor: night.line, backgroundColor: night.raised },
   dim: { ...StyleSheet.absoluteFill, backgroundColor: 'rgba(14,26,34,0.88)' },
