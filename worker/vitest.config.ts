@@ -60,5 +60,6 @@ export default defineConfig({
       };
     }),
   ],
-  test: { setupFiles: ['./test/setup.ts'], include: ['test/**/*.test.ts'] },
+  // Each test runs the real endpoint on workerd + D1; 30 s keeps a loaded runner from failing on time alone.
+  test: { setupFiles: ['./test/setup.ts'], include: ['test/**/*.test.ts'], testTimeout: 30_000 },
 });

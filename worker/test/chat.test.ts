@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { buildChatRequest } from '../../app/src/chat/contract';
 import { initial, type Settings } from '../../app/src/model';
 import { centralDay } from '../src/day';
+import { ipHash } from '../src/iphash';
 import { RungError } from '../src/providers/types';
 import { call, chat, chatBody, conv, deps, freshIp, good, NOW, scripted, throwing, tokenFor } from './helpers';
 
@@ -62,19 +63,20 @@ describe('order of checks', () => {
   it('a child is refused a token', async () => {
     expect((await call(deps(), '/api/token', { body: { age: 'child' }, ip: freshIp() })).status).toBe(403);
   });
+  // The day's count is set just under the limit in D1, so the per-minute burst limit stays out of the way.
+  const issuedToday = async (ip: string, n: number) => env.DB.prepare('INSERT OR REPLACE INTO token_ip_day VALUES (?, ?, ?)').bind(centralDay(NOW), await ipHash(env.IP_HASH_SECRET, centralDay(NOW), ip), n).run();
   it('a shared IPv4 (church Wi-Fi, CGNAT) gets 20 install tokens a day; the 21st is refused as network_limit', async () => {
     const ip = '192.0.2.77';
-    const statuses = [];
-    for (let i = 0; i < 21; i++) statuses.push((await call(deps({ now: () => NOW + i * 61_000 }), '/api/token', { body: { age: 'adult' }, ip })).status);
-    expect(statuses.slice(0, 20).every(s => s === 200)).toBe(true);
-    const last = await call(deps({ now: () => NOW + 22 * 61_000 }), '/api/token', { body: { age: 'adult' }, ip });
+    await issuedToday(ip, 19);
+    expect((await call(deps(), '/api/token', { body: { age: 'adult' }, ip })).status).toBe(200);
+    const last = await call(deps(), '/api/token', { body: { age: 'adult' }, ip });
     expect(last.status).toBe(429);
     expect(((await last.json()) as { kind: string }).kind).toBe('network_limit');
   });
-  it('one IPv6 /64 gets 3 install tokens a day', async () => {
-    const statuses = [];
-    for (let i = 0; i < 4; i++) statuses.push((await call(deps({ now: () => NOW + i * 61_000 }), '/api/token', { body: { age: 'adult' }, ip: `2001:db8:77:1::${i + 1}` })).status);
-    expect(statuses).toEqual([200, 200, 200, 429]);
+  it('one IPv6 /64 gets 3 install tokens a day (another address in the same /64 counts too)', async () => {
+    await issuedToday('2001:db8:77:1::1', 2);
+    expect((await call(deps(), '/api/token', { body: { age: 'adult' }, ip: '2001:db8:77:1::2' })).status).toBe(200);
+    expect((await call(deps(), '/api/token', { body: { age: 'adult' }, ip: '2001:db8:77:1::3' })).status).toBe(429);
   });
 });
 

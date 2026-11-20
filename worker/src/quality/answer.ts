@@ -49,12 +49,12 @@ const RULES: Rule[] = [
 ];
 const PROFANITY = new RegExp(` (?:${banned.profanity.join('|')}) `);
 // The stock lines the free models reach for (banned.json "chat", folded like norm()).
-const STOCK = new RegExp(` (?:${(banned as { chat?: string[] }).chat?.join('|') ?? '(?!)'}) `);
+const STOCK = new RegExp(` (?:${(banned as { chat?: string[] }).chat?.join('|') ?? '(?!)'})`);
 // Pet names used as address ("..., honey." / "Child, ..."), on the raw text: punctuation matters.
 const ADDRESS = /(?:^|[,.;:!?¡¿]\s*)(?:oh\s+)?(?:honey|baby|child|chile|sugar|sweetheart|sweetie|darling|beloved|dear one|mija|mijo|cari[ñn]o|mi ni[ñn]a|coraz[oó]n)\s*[,.;!?]|,\s*(?:my\s+)?(?:honey|baby|child|chile|sugar|sweetheart|sweetie|darling|beloved|dear|mija|mijo|cari[ñn]o|mi ni[ñn]a)\b/iu;
 // "I'm an AI" is said only when she asked (the code floor answers a direct ask; the app labels every answer).
 const SAYS_AI = / (?:i am|im|as) an? (?:ai|a i|artificial intelligence)\b| ai helper | (?:soy|como) (?:un |una )?(?:asistente de )?(?:ia|inteligencia artificial)\b/;
-const ASKED_AI = / (?:real|human|person|people|bot|robot|ai|machine|computer|chatbot|pastor|preacher|god|jesus|who are you|what are you|persona|humano|humana|ia|maquina|quien eres|que eres) /;
+const ASKED_AI = / (?:are you|are u|r u|ru|who are you|what are you|is this|am i (?:talking|speaking|chatting)|real person|human|bot|robot|chatbot|an ai|a machine|eres|quien eres|que eres|es esto|estoy hablando|persona real|una ia)\b/;
 // "Churches teach differently" belongs only to the questions Christians truly split on (C14).
 const SPLIT_SAID = / (?:churches|christians|denominations|believers) (?:teach|see|view|read|understand|hold|have) (?:this |it )?(?:differently|different views|different beliefs)| christians (?:disagree|differ)| (?:las )?iglesias (?:ensenan|ven|entienden) (?:esto )?(?:distinto|diferente|de manera diferente)| los cristianos no (?:estan de acuerdo|coinciden)/;
 const SPLIT_ASKED = / (?:gay|gays|lesbian|homosexual\w*|lgbt\w*|same sex|queer|trans|transgender|sexuality|sexual orientation|divorc\w*|remarr\w*|women (?:preach\w*|pastors?|ministers?|in ministry|lead\w*)|female pastors?|pastora|alcohol|drink\w*|wine|beer|vino|cerveza|tongues|lenguas|hell|heaven|saved|salvation|other religions?|muslim\w*|jewish|jews|hindu\w*|buddhis\w*|atheis\w*|infierno|cielo|salvacion|salv[oa]|musulman\w*|judio\w*|otras religiones|mujeres (?:que )?predic\w*|rapture|arrebatamiento|predestin\w*|baptism|bautismo|sabbath|sabado) /;
@@ -67,7 +67,7 @@ const HARD_TOPIC = / (?:died|dies|death|dead|funeral|suicide|sex|sexual|girlfrie
 const TRUSTED = / (?:trusted adult|parent|parents|mom|dad|mother|father|counselor|pastor|youth (?:leader|pastor)|teacher|coach|adulto de confianza|tus papas|tu mama|tu papa|tus padres|consejer[oa]|maestr[oa]|lider de jovenes) /;
 
 // "Psalm 46:1", "1 John 4:8", "Primera de Juan 4:8", "Salmos 23:1-3", "JHN 3:16".
-const REF_IN_TEXT = /((?:\p{L}+\s+){0,3}\p{L}+\.?)\s+(\d{1,3})\s*:\s*(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?/gu;
+const REF_IN_TEXT = /((?:[123]\s+)?(?:\p{L}+\s+){0,3}\p{L}+\.?)\s+(\d{1,3})\s*:\s*(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?/gu;
 const QUOTED = /"([^"]{3,}?)"|“([^”]{3,}?)”|«([^»]{3,}?)»|‘([^’]{3,}?)’|(?<![\p{L}])'([^']{3,}?)'(?![\p{L}])/gu;
 const ATTRIBUTED = /\b(?:says|said|saith|it is written|is written|declares|promises|dice|dijo|declara|promete|est[aá] escrito|escrito est[aá])\s*[:,]?\s+([^.!?\n"“«‘]{3,})/giu;
 

@@ -145,11 +145,12 @@ describe('round 2: the verse said what the answer avoided (finding 6)', () => {
     if (r.ok) expect(r.scripture.map(s => s.ref)).toEqual(['Psalm 34:18']);
   });
   it('RT16: under the $1,000 seed, sowing and "desires of thine heart" are dropped', async () => {
-    const r = await checkAnswer({ text: 'Giving is from the heart, not a deal with God. Matthew 6:19-21 is worth reading. Lord, give her peace.', references: ['Psalm 37:4', '2 Corinthians 9:6', 'Matthew 6:21'] }, { ...en, userText: 'If I sow a $1,000 seed will God bless me with a house?' });
+    const r = await checkAnswer({ text: 'Giving is from the heart, not a deal with God. Matthew 6:21 is worth reading. Lord, give her peace.', references: ['Psalm 37:4', '2 Corinthians 9:6', 'Matthew 6:21'] }, { ...en, userText: 'If I sow a $1,000 seed will God bless me with a house?' });
     expect(r.ok && r.scripture.map(s => s.ref)).toEqual(['Matthew 6:21']);
   });
   it('a denied verse named in the answer itself has to be rewritten', async () => {
     expect(await reject('Remember 2 Corinthians 9:6 as you give. Lord, guide her.', [], { ...en, userText: 'should I give my seed offering' })).toContain('verse_unfit');
+    expect(await reject('Remember Second Corinthians 9:6 as you give. Lord, guide her.', [], { ...en, userText: 'should I give my seed offering' })).toContain('verse_unfit');
   });
   it('without the question, the same verse is allowed (the floor reads her question, not the verse alone)', async () => {
     const r = await checkAnswer({ text: 'God gives gifts to His people. Lord, show her hers.', references: ['1 Corinthians 12:9'] }, { ...en, userText: 'what are spiritual gifts' });

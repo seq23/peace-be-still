@@ -58,7 +58,7 @@ const sure: Array<[CrisisKind, RegExp]> = [
     W` ${people} (?:\w+ )?(?:hits|hit|beats|beat|chokes|choked|punches|punched|kicks|kicked|slaps|slapped|touches|touched|rapes|raped|molests|molested|abuses|abused|forces|forced) me`,
     W`(?:i was|i got|i am being|im being|been) (?:raped|molested|sexually abused|abused|assaulted|beaten)`, W`(?:molested|raped|sexually abused) me`, W`sexual(?:ly)? abus`,
     W`(?:kill|hurt|beat) me if i (?:leave|tell|go|try)`, W`threaten\w* to (?:kill|hurt) me`, W`(?:said|says) (?:hed|he would|he will|shed|she would|theyd) kill me`,
-    W` (?:me|nos) (?:pega|pegan|golpea|golpean|golpeo|viola|violo|violaron|maltrata|maltrato)`, W` ${people} me (?:toca|tocan|toco|tocaba)`, W`abuso de mi`, W`abusaron de mi`, W`abuso sexual`,
+    W` (?:me|nos) (?:pega|pegan|pego|pegaba|golpea|golpean|golpeo|golpeaba|viola|violo|violaron|maltrata|maltrato|maltrataba)`, W` ${people} me (?:toca|tocan|toco|tocaba)`, W`abuso de mi`, W`abusaron de mi`, W`abuso sexual`,
     W`me (?:va|van) a matar si`, W`amenaz\w* con matarme`,
   ].join('|'))],
 ];
@@ -82,14 +82,19 @@ const ambiguous: Array<[CrisisKind, RegExp]> = [
 export function floor(turns: Turn[]): { sure: CrisisKind | null; ambiguous: CrisisKind | null } {
   const users = turns.filter(t => t.role === 'user').slice(-2);
   const newest = users[users.length - 1]?.text ?? '';
-  // The newest message, and the newest joined with the one before it ("i want to" + "die").
-  const raw = users.length === 2 ? [newest, `${users[0].text} ${newest}`] : [newest];
-  const folded = raw.map(normalise);
-  const written = raw.map(t => asWritten(t).trimEnd());
-  for (const [kind, re] of sure) if (folded.some(t => re.test(t))) return { sure: kind, ambiguous: null };
-  if (written.some(t => spanishSelf.test(t))) return { sure: 'selfharm', ambiguous: null };
-  if (written.some(t => spanishUnclear.test(t))) return { sure: null, ambiguous: /me (?:lastimó|cortó|pegó|pego)/u.test(written.join(' ')) ? 'abuse' : 'selfharm' };
-  for (const [kind, re] of ambiguous) if (folded.some(t => re.test(t))) return { sure: null, ambiguous: kind };
+  const previous = users.length === 2 ? users[0].text : null;
+  // The newest message; and the newest joined with the one before it, which counts only when the
+  // phrase SPANS the two ("i want to" + "die"): a phrase wholly inside the older message does not
+  // stick to every later one (round 2, s01). Older turns are for the model read.
+  const hit = (re: RegExp, form: (s: string) => string) => {
+    if (re.test(form(newest))) return true;
+    return previous !== null && re.test(form(`${previous} ${newest}`)) && !re.test(form(previous));
+  };
+  const written = (s: string) => asWritten(s).trimEnd();
+  for (const [kind, re] of sure) if (hit(re, normalise)) return { sure: kind, ambiguous: null };
+  if (hit(spanishSelf, written)) return { sure: 'selfharm', ambiguous: null };
+  if (hit(spanishUnclear, written)) return { sure: null, ambiguous: /me (?:lastimó|cortó|pegó|pego)/u.test(written(newest)) ? 'abuse' : 'selfharm' };
+  for (const [kind, re] of ambiguous) if (hit(re, normalise)) return { sure: null, ambiguous: kind };
   return { sure: null, ambiguous: null };
 }
 
