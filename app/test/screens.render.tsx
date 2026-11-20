@@ -54,6 +54,7 @@ const screens = {
   chat: require('../app/(tabs)/chat').default,
   bible: require('../app/(tabs)/bible').default,
   nights: require('../app/(tabs)/nights').default,
+  madeForYou: require('../app/made-for-you').default,
   listen: require('../app/listen/[track]').default,
   more: require('../app/(tabs)/more').default,
   settings: require('../app/settings').default,
@@ -747,5 +748,88 @@ test('Hush Harbor cues follow the real pause positions and the Spanish player re
   } finally {
     await act(async () => spanish.unmount());
     await player.dispose();
+  }
+});
+
+
+test('the Nights entry leads to the subscription gate, and children cannot open a direct link', async () => {
+  const person = { ...base, journey: 'psalm-nights' };
+  const nights = await mount('nights', person);
+  await press(nights, 'Made for you');
+  assert.deepEqual(calls.pop(), ['push', '/made-for-you']);
+  const locked = await mount('madeForYou', person);
+  assert.match(strings(locked), /subscription/i);
+  assert.equal(host(locked, 'TextInput').length, 0);
+  await press(locked, /subscription plans/i);
+  assert.deepEqual(calls.pop(), ['push', '/paid']);
+  const child = await mount('madeForYou', { ...person, age: 'child' });
+  assert.equal(host(child, 'Redirect')[0]?.props.href, '/nights');
+  const spanish = await mount('madeForYou', { ...person, journey: 'mi-refugio' });
+  assert.match(strings(spanish), /suscripción/i);
+  assert.equal(host(spanish, 'TextInput').length, 0);
+});
+
+test('paid sessions render the form, pending, error and shared playback in both languages', async () => {
+  const { MadeForYouScreen } = require('../src/madeForYou/Screen') as typeof import('../src/madeForYou/Screen');
+  for (const lang of ['en', 'es'] as const) {
+    const faith = lang === 'es';
+    const context = { age: 'adult', lang, door: faith ? 'faith' : 'mindset', kind: faith ? 'psalm' : 'imagination' } as const;
+    const ready = { id: 'night-one', day: '2026-11-20', path: 'private/session.m4a', seconds: 650, sha256: 'a'.repeat(64) };
+    const stream = 'https://private.example/session.m4a?signature=fixture';
+    const player = testPlayer(audioTracks[0]);
+    type Api = NonNullable<React.ComponentProps<typeof MadeForYouScreen>['api']>;
+    let shelf: Awaited<ReturnType<Api['list']>> = { ready: [], pending: null };
+    let fail = true;
+    let posted: unknown;
+    const api: Api = {
+      async list() {
+        if (fail) throw new Error('unavailable');
+        return shelf;
+      },
+      async submit(actual, note) {
+        posted = [actual, note];
+        shelf = { ready: [], pending: { id: ready.id, day: ready.day } };
+        return { status: 'pending' as const, ...shelf.pending! };
+      },
+      async play(_actual, id) {
+        assert.equal(id, ready.id);
+        return { url: stream };
+      },
+    };
+    let tree!: ReactTestRenderer;
+    await act(async () => {
+      tree = create(<MadeForYouScreen paid context={context} close={() => {}} plans={() => {}} api={api} />);
+    });
+    const translated = faith
+      ? { retry: /volver a consultar/i, request: /preparar mi sesión/i, pending: /esta noche/i, error: /no pudimos/i,
+          play: es['listen.play'], pause: es['listen.pause'], ai: es['listen.aiVoice'], close: es['listen.close'] }
+      : { retry: /check again/i, request: /make my session/i, pending: /ready tonight/i, error: /couldn’t load/i,
+          play: en['listen.play'], pause: en['listen.pause'], ai: en['listen.aiVoice'], close: en['listen.close'] };
+    assert.match(strings(tree), translated.error);
+    assert.equal(host(tree, 'TextInput').length, 0);
+    fail = false;
+    await press(tree, translated.retry);
+    assert.equal(host(tree, 'TextInput')[0].props.maxLength, 500);
+    assert.match(strings(tree), /IA|AI/);
+    const note = faith ? 'La lluvia' : 'Rain at the window';
+    await type(tree, note);
+    await press(tree, translated.request);
+    assert.deepEqual(posted, [context, note]);
+    assert.match(strings(tree), translated.pending);
+    assert.equal(host(tree, 'TextInput').length, 0);
+    shelf = { ready: [ready], pending: null };
+    await press(tree, translated.retry);
+    await press(tree, /20/);
+    assert.ok(texts(tree).includes(translated.ai));
+    await press(tree, translated.play);
+    assert.equal(player.source(), stream);
+    assert.ok(player.getState().playing);
+    await press(tree, translated.pause);
+    assert.ok(!player.getState().playing);
+    await press(tree, translated.close);
+    const section = strings(tree);
+    if (faith) assert.deepEqual(faithContentIssues(section), []);
+    else assert.doesNotMatch(section, /psalm|bible|scripture/i);
+    await act(async () => { tree.unmount(); await player.dispose(); });
   }
 });
