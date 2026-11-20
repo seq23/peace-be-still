@@ -46,5 +46,7 @@ checks, shelved, status, voice).
   over its role's floor (`voices.json` clone.floor), then the same file checks and shelf. `run.sh`
   runs one clone story after each fill chunk, under the same lock, so the Mac alternates.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
-  reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing, R2 upload, the player.
+  reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing, R2 upload.
+- **R2 layout** (the app reads it): bucket `peace-be-still-audio`, object key = the manifest `file` exactly
+  (`en/psalms/…`, `stories/hush-harbor/en/…`), never the `shelved` path. The app's player is in `app/src/player/`.
 - Tests: `python3 -m unittest discover -s audio/tests` (needs numpy) and `python3 audio/check_manifest.py --self-test`.

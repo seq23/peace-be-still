@@ -1,5 +1,16 @@
-# Player integration
+# Player (engine only; the player screen is a later phase)
 
-This lane is independent of the app shell. Install this directory as a local Expo module and install `expo-file-system`; obtain `PeacePlayer` with `requireNativeModule('PeacePlayer')` and pass it and FileSystem to `createNativeAdapters`. Add `audio` to the iOS `UIBackgroundModes` in the app configuration. A native build is required. Keep one `createPlayer` instance alive across navigation. Feed `readManifest` the published JSONL and HTTPS R2 base URL; feed its tracks to `createPlayerScreen(React, ReactNative)`. Call `foreground()` when the app returns to the foreground and `dispose()` only when the player is destroyed. Replace the local `canUse` stub with Phase 2A's gate and use its translations for screen text.
-
-The iOS module owns AVPlayer and its sleep deadline on the native main queue, so the deadline continues while background audio is active even if JavaScript is suspended. Foreground reconciliation updates the screen after a native expiry. Integration and behavior on a physical device need verification in the app shell.
+- `library.ts` + `build-library.ts`: `npm install` (postinstall) and `npm run library` turn `audio/manifest.jsonl`
+  into `library.json` (git-ignored, bundled): passed rows only, a readable title per track, no checks or Drive paths.
+  A bad row is held and logged (`HELD manifest line N`); zero tracks stops with `AUDIO_LIBRARY_EMPTY`.
+- Audio host: ONE value, `app.config.ts` `extra.audioBaseUrl` (env `PBS_AUDIO_BASE_URL`, https). The R2 object key
+  equals the manifest `file`. Unset → `usePlayer().stop === 'CONFIG_AUDIO_BASE_URL'` and play shows `audio-not-ready`.
+- `player.ts`: expo-audio through `adapters.ts` (background audio, lock-screen title, calls pause it), sleep timer
+  15/30/45/60 on wall-clock time with a 30 s fade, her place saved per track (every 10 s, pause, timer end,
+  background) and restored by any later player.
+- `dimmer.ts`: real screen brightness (expo-brightness) after 15 s without a touch while playing; restored on touch,
+  leaving the screen, background and unmount. `dimmed` also drives the dark overlay the web preview needs.
+- `downloads.ts`: paid only (`gate.ts`, swapped for lane 2A's `canUse` when it lands); `<sha256>.part`, hashed,
+  renamed only when it matches the manifest.
+- `books.ts`: book names until lane 2A's shared book list lands.
+- Tests: `app/test/player.unit.ts`.
