@@ -24,6 +24,22 @@ def row(file, sha="a" * 64, status="passed", **kw):
 
 
 class Selection(unittest.TestCase):
+    def test_missing_object_is_removed_from_public_ledger_without_an_upload(self):
+        available = publish.public_row(row("available.m4a"))
+        missing = publish.public_row(row("missing.m4a"))
+        with tempfile.TemporaryDirectory() as home, mock.patch.object(fill, "HOME", Path(home)), \
+                mock.patch.object(publish, "connect"), \
+                mock.patch.object(fill, "read_manifest", return_value=[row("available.m4a")]), \
+                mock.patch.object(publish, "r2_listing", return_value={
+                    "available.m4a": {"Size": 10}, publish.SERVED: {"Size": 100}}), \
+                mock.patch.object(publish, "read_ledger", return_value={
+                    "available.m4a": available, "missing.m4a": missing}), \
+                mock.patch.object(publish, "publish_one") as upload, \
+                mock.patch.object(publish, "write_ledger") as write:
+            self.assertEqual(publish.main([]), 0)
+        upload.assert_not_called()
+        write.assert_called_once_with({"available.m4a": available})
+
     def test_only_the_latest_passed_shelved_row_per_file(self):
         rows = [row("a.m4a", status="FAILED", sha256=None, shelved=None), row("a.m4a", sha="b" * 64),
                 row("c.m4a"), row("c.m4a", status="FAILED", sha256=None, shelved=None)]

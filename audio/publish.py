@@ -202,7 +202,8 @@ def main(argv=None) -> int:
     connect()
     cands = candidates(fill.read_manifest())
     in_r2 = r2_listing()
-    ledger = {f: r for f, r in read_ledger().items() if f in in_r2}
+    previous_ledger = read_ledger()
+    ledger = {f: r for f, r in previous_ledger.items() if f in in_r2}
     queue = todo(cands, ledger, in_r2)
     if a.limit:
         queue = queue[:a.limit]
@@ -215,7 +216,7 @@ def main(argv=None) -> int:
 
     stop: NamedStop | None = None
     held: list[str] = []
-    made, t0, dirty = 0, time.monotonic(), False
+    made, t0, dirty = 0, time.monotonic(), ledger != previous_ledger
     try:
         for row in batch:
             if a.max_minutes and (time.monotonic() - t0) / 60 >= a.max_minutes:
@@ -223,10 +224,10 @@ def main(argv=None) -> int:
             try:
                 publish_one(row)
             except NamedStop as e:
+                if e.exit_code == 0 or e.code == "R2_HASH_MISMATCH":
+                    dirty = ledger.pop(row["file"], None) is not None or dirty
                 if e.exit_code == 0:      # one bad shelf copy: hold that file, carry on
                     held.append(str(e))
-                    ledger.pop(row["file"], None)
-                    dirty = True
                     continue
                 raise
             ledger[row["file"]] = public_row(row)
