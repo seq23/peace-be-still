@@ -3,11 +3,17 @@ export type Age = 'child' | 'teen' | 'adult';
 export type Voice = 'plain' | 'church' | 'teen' | 'spanish';
 export type Settings = { door: Door | null; age: Age | null; voice: Voice; language: 'en' | 'es'; journey?: string };
 export const initial: Settings = { door: null, age: null, voice: 'plain', language: 'en' };
-export function ageBand(year: number, now = new Date().getFullYear()): Age | null {
-  if (!Number.isInteger(year) || year < 1900 || year > now) return null;
+export function ageBand(year: number, now = new Date().getFullYear(), month?: number, currentMonth = new Date().getMonth() + 1): Age | null {
+  if (!Number.isInteger(year) || year < 1900 || year > now || (month !== undefined && (!Number.isInteger(month) || month < 1 || month > 12))) return null;
   const age = now - year;
-  // A birth year alone cannot establish whether this year's birthday has passed.
-  return age <= 13 ? 'child' : age <= 18 ? 'teen' : 'adult';
+  const birthdayPassed = month !== undefined && month < currentMonth;
+  if (age < 13 || (age === 13 && !birthdayPassed)) return 'child';
+  if (age < 18 || (age === 18 && !birthdayPassed)) return 'teen';
+  return 'adult';
+}
+export function correctAge(settings: Settings, age: Age): Settings {
+  const rank: Record<Age, number> = { child: 0, teen: 1, adult: 2 };
+  return settings.age && rank[age] > rank[settings.age] ? settings : withAge(settings, age);
 }
 export function withAge(settings: Settings, age: Age): Settings {
   return { ...settings, age, voice: age === 'teen' ? 'teen' : settings.voice === 'teen' ? 'plain' : settings.voice };

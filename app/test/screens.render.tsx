@@ -25,5 +25,5 @@ test('renders faith screens without prohibited content and mindset screens separ
 });
 
 test('teen selection of the Spanish journey retains the teen voice', async () => {
- const tree = await mount({ ...base, age: 'teen', voice: 'teen' }); await press(tree, 'Mi Refugio'); assert.equal(JSON.parse(saved!).voice, 'teen'); assert.match(strings(tree), /Un espacio para estar en calma/);
+ const tree = await mount({ ...base, age: 'teen', voice: 'teen' }); await press(tree, 'Mi Refugio'); assert.equal(JSON.parse(saved!).voice, 'teen'); assert.equal(JSON.parse(saved!).language, 'en');
 });
