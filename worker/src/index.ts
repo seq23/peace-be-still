@@ -144,7 +144,8 @@ export const realDeps: Deps = {
 // newest message is checked by the floor before any model; an EARLIER message the floor is sure
 // about was answered with crisis lines, so its words are replaced by a note before the risk read,
 // the answer or the memory summary sees the history. The risk model still knows it happened.
-export const CRISIS_NOTE = '(An earlier message here was about her safety and was answered with crisis lines. Its words are not shown.)';
+// Not exported: every named export of the Worker entry module must be a handler, or workerd refuses to start.
+const CRISIS_NOTE = '(An earlier message here was about her safety and was answered with crisis lines. Its words are not shown.)';
 function withoutCrisisWords(turns: Turn[]): Turn[] {
   return turns.map((t, i) => t.role === 'user' && i < turns.length - 1 && floor([t]).sure ? { role: 'user', text: CRISIS_NOTE } : t);
 }
