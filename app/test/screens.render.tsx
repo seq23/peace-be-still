@@ -473,6 +473,9 @@ for (const locale of ['en', 'es'] as const) {
     await act(async () => verseNode.props.onPress());
     assert.equal(verseNode.props.accessibilityState.selected, true);
     assert.equal(verseNode.props['aria-expanded'], true);
+    await act(async () => verseNode.props.onPress());
+    assert.deepEqual(verseNode.props.accessibilityState, { expanded: false, selected: false });
+    await act(async () => verseNode.props.onPress());
     const linked = await mount('biblePage', person, { page: 'chapter', book: 'JHN', chapter: '3', verse: '16' });
     assert.ok(host(linked, 'Text').some(node => node.props.accessibilityState?.selected && textOf(node).replace(/\s+/g, ' ').includes(shownVerse)));
     await press(chapter, copy['reader.save']);
@@ -527,6 +530,12 @@ for (const locale of ['en', 'es'] as const) {
     assert.ok(extras);
     const renderDaily = (page: 'story' | 'declaration', date: Date) => mount('dailyPage', person, {}, () =>
       <Daily page={page} now={date} back={() => {}} read={() => {}} />);
+    for (let day = 0; day < 7; day++) {
+      const production = strings(await renderDaily('story', dateOf(day)));
+      assert.ok(production.includes(copy['daily.noStory']));
+      assert.ok(!production.includes(copy[`daily.draft.${day}`]));
+      assert.ok(!production.includes(copy[`daily.retelling.${day}`]));
+    }
     try {
       process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
       const previewToday = await mount('today', person);
@@ -542,6 +551,7 @@ for (const locale of ['en', 'es'] as const) {
       for (let day = 0; day < 7; day++) {
         const preview = await renderDaily('story', dateOf(day));
         assert.ok(strings(preview).includes(copy['daily.draft']));
+        assert.ok(strings(preview).includes(copy[`daily.draft.${day}`]));
         assert.ok(strings(preview).includes(copy[`daily.retelling.${day}`]));
         assert.ok(strings(preview).includes(copy['daily.storyAudioUnavailable']));
         assert.deepEqual(faithContentIssues(strings(preview)), []);
@@ -559,6 +569,9 @@ for (const locale of ['en', 'es'] as const) {
       const screen = await renderDaily('declaration', date);
       assert.ok(strings(screen).includes(copy[row.line]));
       assert.ok(host(screen, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
+      if (day === now.getDay()) {
+        assert.ok(host(today, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
+      }
       assert.ok(strings(screen).includes(formatReference(ref, locale)));
       assert.ok(strings(screen).includes(copy['daily.prayer']));
     }

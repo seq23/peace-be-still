@@ -51,7 +51,7 @@ export function Daily({ page, back, read, now = new Date() }: {
   if (!canUse(pages[page].feature, user) || (settings.door !== 'faith' && (page === 'story' || page === 'plans'))) return null;
   return <Screen>
     <TextLink onPress={back}>{t('common.back')}</TextLink>
-    <Title>{t(pages[page].title)}</Title>
+    <Title>{t(page === 'story' && story ? story[1] : pages[page].title)}</Title>
     {state.failed && <Body>{t('reader.storageError')}</Body>}
     {state.failed && !state.ready && <TextLink onPress={() => void state.retry()}>{t('reader.retry')}</TextLink>}
     {page === 'declaration' && <Card>
