@@ -328,7 +328,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // A draft that passed every check but repeated a recent answer: shown if no later try does better.
   // Variety is quality, not safety, and must never cost her a real answer (round 5: rewrites for
   // variety used up the tries, and 7 of 64 fell back).
-  let spare: { text: string; scripture: Scripture[]; shape: Shape } | null = null;
+  // Every such draft is kept: round 6 r4-01 fell back when the last one failed the judge
+  // (verse_read_in) and the earlier ones were never read.
+  const spares: Array<{ text: string; scripture: Scripture[]; shape: Shape }> = [];
   // Three tries, then the fallback verse. Measured round 3: with two tries 4 of 45 answers fell back
   // (grief, a teen's dating question, translation requests), each refused on a fixable point.
   // One number per answer drives its plan; a rewrite shifts the moves but keeps the closing word.
@@ -360,7 +362,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       const shape = await hashShape(plainShape, env.IP_HASH_SECRET!);
       const scripture = withNamed(checked.scripture);
       problems = repeats(shape, recent);
-      if (problems.length) { variety = varietyObjection(shape, plainShape.said, recent); spare = { text: checked.text, scripture, shape }; }
+      if (problems.length) { variety = varietyObjection(shape, plainShape.said, recent); spares.push({ text: checked.text, scripture, shape }); }
       else {
         const j = await judge(checked.text, scripture);
         if (j.verdict === 'fail') problems = j.which.map(w => `judge:${w}`);
@@ -375,10 +377,12 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     objection = variety || problems.map(objectionText).join(' ');
     if (attempt === 0) tally(metrics, 'regenerated');
   }
-  if (spare) {
+  // Newest first: it was written with the most guidance.
+  for (const spare of spares.reverse()) {
     const j = await judge(spare.text, spare.scripture);
     if (j.verdict !== 'fail') { tally(metrics, 'variety_waived'); return show(spare.text, spare.scripture, spare.shape); }
     for (const w of j.which) tally(metrics, `gate:judge:${w}`);
+    logCode('CHAT_GATE', { attempt: 'spare', problems: j.which.map(w => `judge:${w}`).join(',') });
   }
   tally(metrics, 'fallback');
   const verse = await refugeVerse(env.DB, v.translation);

@@ -159,4 +159,17 @@ describe('the plan code chooses before the model writes (round 5 rebuild)', () =
     const r = await chat(deps({ rungList: [scripted('workers-ai', [first]).rung], judge: async () => ({ verdict: 'fail', which: ['condemns'], voice: 2 }) }), 'I still cry every day.', { token, body: { conversation } });
     expect(r.body.kind).toBe('fallback');
   });
+  it('every spare is tried: when the newest fails the judge, an earlier one that passes is shown (round 6 r4-01)', async () => {
+    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const d = deps({ rungList: [scripted('workers-ai', [first]).rung] });
+    const token = await tokenFor(d);
+    const conversation = crypto.randomUUID();
+    await chat(d, 'My mama died last week.', { token, body: { conversation } });
+    const early = good('Loss takes time to carry. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const late = good('Loss takes time to carry, friend. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const judge = async (_env: unknown, input: { text: string }) => (input.text.includes('friend') ? { verdict: 'fail' as const, which: ['verse_read_in'], voice: 4 } : { verdict: 'pass' as const, voice: 5 });
+    const r = await chat(deps({ rungList: [scripted('workers-ai', [early, late, late]).rung], judge }), 'I still cry every day.', { token, body: { conversation } });
+    expect(r.body.kind).toBe('answer');
+    expect(r.body.text).toBe('Loss takes time to carry. Lord, hold her close tonight.');
+  });
 });
