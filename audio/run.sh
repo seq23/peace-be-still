@@ -30,6 +30,13 @@ fi
 rc3=0
 (( $(left) > 0 )) && { "$PY" audio/hush_clone.py --commit --max-minutes "$(cap 45)"; rc3=$?; }
 (( rc3 > rc2 )) && rc2=$rc3
+# Then publish: every shelved, passed file not yet in R2 streams Drive -> R2 (hash-checked) and the
+# served manifest is rewritten, so the app gets new audio with no release (audio/publish.py). This
+# same step is the backfill. Key from the vault; free-tier cap is its own named stop.
+PUB="$PWD/audio/publish.py"
+rc4=0
+(( $(left) > 0 )) && { (cd "${BOSS_OS_REPO:-$HOME/GitHub/boss-os}" && npm run -s vault:run -- "$PY" "$PUB" --max-minutes "$(cap 20)"); rc4=$?; }
+(( rc4 > rc2 )) && rc2=$rc4
 # Push any manifest commit this run made (a push that failed inside fill.py is retried here), so the
 # runner is never left ahead of origin when a PR also touches the manifest.
 git push -q 2>/dev/null || echo "note: manifest push failed; the next run pushes it"
