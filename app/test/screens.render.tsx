@@ -46,6 +46,27 @@ test('Mi Refugio uses Spanish at home without changing the saved app language', 
  assert.match(strings(tree), /Settings/);
 });
 
+test('a Spanish phone starts in Spanish without changing a saved language', async () => {
+ (globalThis as any).__pbsLocale = 'es';
+ try {
+  const first = await mount();
+  assert.match(strings(first), /¿Qué necesitas esta noche/);
+  const returning = await mount({ ...base, journey: 'Psalm Nights' });
+  assert.match(strings(returning), /Good to have you here/);
+ } finally { (globalThis as any).__pbsLocale = 'en'; }
+});
+
+test('a month left over from a boundary year does not invalidate a different year', async () => {
+ const tree = await mount();
+ await press(tree, "God's Word");
+ const yearInput = () => tree.root.findAllByType('TextInput' as any)[0];
+ await act(async () => yearInput().props.onChangeText(String(new Date().getFullYear() - 13)));
+ await act(async () => tree.root.findAllByType('TextInput' as any)[1].props.onChangeText('99'));
+ await act(async () => yearInput().props.onChangeText('1990'));
+ await press(tree, 'Continue');
+ assert.equal(JSON.parse(saved!).age, 'adult');
+});
+
 test('settings choices expose their selected state', async () => {
  const tree = await mount({ ...base, journey: 'Psalm Nights' });
  await press(tree, 'Settings');

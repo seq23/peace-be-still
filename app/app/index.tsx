@@ -6,6 +6,7 @@ import { SplineSansMono_500Medium } from '@expo-google-fonts/spline-sans-mono';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, useColorScheme } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getLocales } from 'expo-localization';
 import { colors } from '../src/theme/tokens';
 import { ageBand, faithJourneys, initial, mindsetJourneys, Settings, withAge, correctAge } from '../src/model';
 
@@ -27,10 +28,10 @@ export default function Index() {
   const [placeholder, setPlaceholder] = useState('');
   const dark = useColorScheme() === 'dark';
   const c = dark ? colors.dark : colors.light;
-  useEffect(() => { AsyncStorage.getItem(KEY).then(value => { if (value) { const saved = JSON.parse(value) as Settings; setSettings(saved); if (saved.journey) setSelected(saved.journey); if (saved.door && saved.age) setPage(saved.journey ? 'home' : 'journeys'); else if (saved.door) setPage('age'); } else if (Intl.DateTimeFormat().resolvedOptions().locale.toLowerCase().startsWith('es')) setSettings({ ...initial, language: 'es' }); }).catch(() => { setStorageError(true); setReadFailed(true); }).finally(() => setLoaded(true)); }, []);
+  useEffect(() => { AsyncStorage.getItem(KEY).then(value => { if (value) { const saved = JSON.parse(value) as Settings; setSettings(saved); if (saved.journey) setSelected(saved.journey); if (saved.door && saved.age) setPage(saved.journey ? 'home' : 'journeys'); else if (saved.door) setPage('age'); } else if (getLocales()[0]?.languageCode === 'es') setSettings({ ...initial, language: 'es' }); }).catch(() => { setStorageError(true); setReadFailed(true); }).finally(() => setLoaded(true)); }, []);
   function save(next: Settings) { setSettings(next); void AsyncStorage.setItem(KEY, JSON.stringify(next)).then(() => setStorageError(false)).catch(() => setStorageError(true)); }
   function chooseDoor(door: Settings['door']) { save({ ...settings, door, journey: undefined }); setSelected(''); setPage(settings.age ? 'journeys' : 'age'); }
-  function chooseAge() { const age = ageBand(Number(year), undefined, month ? Number(month) : undefined); if (!age) { setError(true); return; } const next = correcting ? correctAge(settings, age) : withAge(settings, age); if (correcting && next.age !== age) { setCorrectionBlocked(true); return; } save(next); if (!next.journey) setSelected(''); setCorrectionBlocked(false); setError(false); setPage(correcting && next.journey ? 'settings' : 'journeys'); setCorrecting(false); }
+  function chooseAge() { const boundary = [13, 18].includes(new Date().getFullYear() - Number(year)); const age = ageBand(Number(year), undefined, boundary && month ? Number(month) : undefined); if (!age) { setError(true); return; } const next = correcting ? correctAge(settings, age) : withAge(settings, age); if (correcting && next.age !== age) { setCorrectionBlocked(true); return; } save(next); if (!next.journey) setSelected(''); setCorrectionBlocked(false); setError(false); setPage(correcting && next.journey ? 'settings' : 'journeys'); setCorrecting(false); }
   const t = (text: string) => (settings.language === 'es' || (settings.journey === 'Mi Refugio' && ['home', 'placeholder'].includes(page))) ? (text.startsWith('Start ') ? `Comenzar ${text.slice(6)}` : (translations as Record<string, string>)[text] ?? text) : text;
   const title = (text: string) => <Text style={[styles.title,{color:c.ink}]}>{t(text)}</Text>;
   const label = (text: string) => <Text style={[styles.label,{color:c.muted}]}>{t(text)}</Text>;
