@@ -10,7 +10,7 @@ test('faith journey names exclude the other door vocabulary', () => {
 });
 
 test('faith content gate rejects banned vocabulary, marks, emoji and sparkles', () => {
-  for (const value of ['manifestar', 'el universo', 'energía', 'law of assumption', 'Black—Bible\nStories', 'Speak Life', 'urban', '✨', 'sparkles']) assert.ok(faithContentIssues(value).length, value);
+  for (const value of ['mindset', 'mentalidad', 'manifestar', 'el universo', 'energía', 'law of assumption', 'Black—Bible\nStories', 'Speak Life', 'urban', '✨', 'sparkles']) assert.ok(faithContentIssues(value).length, value);
   for (const [name, detail] of faithJourneys) assert.deepEqual(faithContentIssues(`${name} ${detail}`), []);
 });
 
