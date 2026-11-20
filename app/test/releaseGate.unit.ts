@@ -29,17 +29,29 @@ const FAITH_WORDS = words(banned.faith);
 // UI list targets filler like "a safe space", not this sentence.
 const LOCKED_UI_EXCEPTIONS = ['Each one is its own space'];
 // Words that only appear when scripture is being quoted; a caption with them must declare its verse.
+const COUNT = /\b\d[\d,.]*\+?\s*k?\s+(?:of (?:your|our|the)\b|people|listeners|users|members|others|readers|believers|women|families|churches|downloads|reviews|ratings)/iu;
 const ARCHAIC = /\b(?:thy|thee|thou|hath|unto|maketh|leadeth|shalt|saith|ye|strengtheneth)\b|á Jehová/iu;
 
-type Kind = 'faith' | 'mindset' | 'neutral' | 'legal' | 'body';
+type Kind = 'faith' | 'mindset' | 'neutral' | 'legal' | 'body' | 'shows';
 type Item = { where: string; text: string; kind: Kind };
+
+// Truth rules for store copy and screenshot notes (legal pages may say "not real people").
+function truthIssues(text: string): string[] {
+  const out: string[] = [];
+  // Every spoken voice in the app is made by an AI voice engine (legal/disclaimer.md), so store
+  // copy never calls a voice, reading or whisper "real" or "human". Legal pages may say "not real people".
+  if (/\b(?:real|human)\s+(?:\p{L}+\s+)?(?:voices?|readings?|readers?|narrat\p{L}*|whisper\p{L}*|speakers?)\b/iu.test(text)) out.push('claims a real or human voice; the voices are AI');
+  // No invented social proof: a count of people in a caption or screenshot needs a real feature behind it.
+  if (COUNT.test(text)) out.push('invented count of people');
+  return out;
+}
 
 function issues({ text, kind }: Item): string[] {
   const out: string[] = [];
+  if (kind === 'shows') return truthIssues(text);
   const uiText = LOCKED_UI_EXCEPTIONS.reduce((t, locked) => t.replace(locked, ''), text);
   if (NEVER.test(text)) out.push('never-word');
-  // Every spoken voice in the app is made by an AI voice engine (legal/disclaimer.md).
-  if (/\b(?:real|human)\s+voices?\b/i.test(text)) out.push('claims a real or human voice; the voices are AI');
+  if (kind !== 'legal') out.push(...truthIssues(text));
   if (UI.test(uiText)) out.push('UI word, em dash, exclamation or emoji');
   if ((kind === 'faith' || kind === 'body' || kind === 'legal') && (MINDSET.test(text) || FAITH_WORDS.test(text))) out.push('mindset word where the God\'s Word door can see it');
   if (kind === 'mindset' && FAITH_LINK.test(text)) out.push('God\'s Word word on the Mindset page');
@@ -109,6 +121,7 @@ function visibleItems(): Item[] {
     items.push({ where: `${p.slug} title`, text: p.text.split('\n')[0].replace(/^# /, ''), kind });
     items.push({ where: `${p.slug} promotional text`, text: field(p.text, 'Promotional text') ?? '', kind });
     for (const [n, caption] of p.captions) items.push({ where: `${p.slug} screenshot ${n}`, text: caption, kind });
+    for (const [n] of p.captions) { const shows = field(p.text, `Screenshot ${n} shows`); if (shows) items.push({ where: `${p.slug} screenshot ${n} shows`, text: shows, kind: 'shows' }); }
   }
   for (const e of events) {
     items.push({ where: `event ${e.name}`, text: e.name, kind: 'faith' });
@@ -135,6 +148,12 @@ test('each rule catches its bad line and passes a clean one', () => {
   assert.ok(issues({ where: 'm', text: 'A real voice, and no quiz before you start.', kind: 'mindset' }).length);
   assert.ok(issues({ where: 'n', text: 'Read by a human voice', kind: 'neutral' }).length);
   assert.deepEqual(issues({ where: 'm', text: 'A calm voice, and no quiz before you start.', kind: 'mindset' }), []);
+  assert.ok(issues({ where: 'f', text: 'Real whispered readings of the Psalms', kind: 'faith' }).length);
+  assert.ok(issues({ where: 'f', text: 'Psalms read by a real human narrator', kind: 'faith' }).length);
+  assert.deepEqual(issues({ where: 'f', text: 'Real questions, plain answers', kind: 'faith' }), []);
+  assert.ok(issues({ where: 'f', text: 'Today with "12 of your group did today\'s story"', kind: 'faith' }).length);
+  assert.ok(issues({ where: 'n', text: 'Loved by 10,000 listeners', kind: 'neutral' }).length);
+  assert.deepEqual(issues({ where: 'f', text: 'A 3-minute story, every day', kind: 'faith' }), []);
   assert.deepEqual(issues({ where: 'f', text: 'Fall asleep to whispered Psalms', kind: 'faith' }), []);
   assert.deepEqual(issues({ where: 'm', text: 'Fall asleep inside the scene you hope for', kind: 'mindset' }), []);
   assert.ok(keywordIssues('x'.repeat(101), 'Peace Be Still', 'Whispered sleep').length);

@@ -4,7 +4,7 @@ Door: God's Word
 Deep link: https://peacebestillapp.com/open/psalm-nights
 Keywords locale: en-US
 Keywords assigned: asmr
-Promotional text: Real whispered readings of the Psalms and other scripture, for ASMR listeners who want God's Word at night. No ads, ever. Your first night is free.
+Promotional text: Soft whispered readings of the Psalms and other scripture, for ASMR listeners who want God's Word at night. No ads, ever. Your first night is free.
 Screenshot 1: Scripture, whispered close
 Screenshot 1 shows: Psalm Night player (screen 4)
 Screenshot 2: No music swells. No ads.
