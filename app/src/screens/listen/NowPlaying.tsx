@@ -17,7 +17,11 @@ function clock(seconds: number) {
   return [Math.floor(seconds / 60), String(Math.floor(seconds % 60)).padStart(2, '0')].join(':');
 }
 
-export function NowPlaying({ track, close }: { track: Track; close: () => void }) {
+export function NowPlaying({ track, close, privateStream }: {
+  track: Track;
+  close: () => void;
+  privateStream?: { label: string; url: (signal: AbortSignal) => Promise<string> };
+}) {
   const t = useT('journey');
   const { settings } = useSettings();
   const user = useOffline(settings.age);
@@ -35,17 +39,22 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const [downloaded, setDownloaded] = useState(false);
   const [downloadFailed, setDownloadFailed] = useState(false);
   const playRequest = useRef(false);
+  const signing = useRef<AbortController | null>(null);
+  const [sourceFailed, setSourceFailed] = useState(false);
+  useEffect(() => () => signing.current?.abort(), []);
   const pausedHere = useRef(false);
   const downloadRequest = useRef(false);
-  const current = state.track?.file === track.file;
+  const current = privateStream
+    ? state.track?.kind === track.kind && state.track.ref === track.ref && state.track.sha256 === track.sha256
+    : state.track?.file === track.file;
   const playing = current && state.playing;
   const response = current ? state.response : null;
   const focused = useIsFocused();
   const { dimmed, touch } = useDimmer(focused && playing && response === null);
-  const offlineAllowed = canUse('offline', user);
+  const offlineAllowed = !privateStream && canUse('offline', user);
   const saved = offlineAllowed && (downloaded || downloadAvailable(track, user));
-  const published = usePublishedAudio();
-  const canStream = !stop && published?.get(track.file) === track.sha256;
+  const published = usePublishedAudio(!privateStream);
+  const canStream = !!privateStream || (!stop && published?.get(track.file) === track.sha256);
   const unavailable = !saved && !canStream;
   const shelf = shelfOf(track);
   const protectedPauses = hasCallAndResponse(track);
@@ -64,10 +73,10 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
     }).catch(() => undefined);
     return () => { active = false; };
   }, [excerptRef, track, translation]);
-  const label = shelf === 'psalms' ? t('journey.psalmNights.name')
+  const label = privateStream?.label ?? (shelf === 'psalms' ? t('journey.psalmNights.name')
     : shelf === 'imagination' ? t('journey.imaginationNights.name')
     : shelf === 'hushHarbor' ? [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')
-    : shelf === 'miRefugio' ? [t('journey.miRefugio.name'), t('journey.miRefugio.subtitle')].join(' · ') : t('listen.bibleByBook');
+    : shelf === 'miRefugio' ? [t('journey.miRefugio.name'), t('journey.miRefugio.subtitle')].join(' · ') : t('listen.bibleByBook'));
   const minutes = state.sleepEndsAt === null ? null : Math.max(1, Math.ceil((state.sleepEndsAt - now) / 60_000));
   const position = current ? Math.min(track.seconds, state.position) : 0;
   const progress = Math.floor(position / track.seconds * 100);
@@ -77,6 +86,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
     touch();
     playRequest.current = true;
     setPlayPending(true);
+    setSourceFailed(false);
     try {
       if (playing) {
         await player.pause();
@@ -84,10 +94,20 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
       } else if (current && pausedHere.current) {
         player.resume();
         pausedHere.current = false;
+      } else if (privateStream) {
+        const controller = new AbortController();
+        signing.current = controller;
+        try {
+          const file = await privateStream.url(controller.signal);
+          if (!controller.signal.aborted) await player.play({ ...track, file }, null);
+        } catch {
+          if (!controller.signal.aborted) setSourceFailed(true);
+        }
       } else {
         await player.play(track, user);
       }
     } finally {
+      signing.current = null;
       playRequest.current = false;
       setPlayPending(false);
     }
@@ -154,7 +174,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
           </View>
         </View>
         {unavailable && <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.audioNotReady')}</Text>}
-        {!unavailable && current && state.error === 'play-failed' &&
+        {!unavailable && (sourceFailed || (current && state.error === 'play-failed')) &&
           <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.playFailed')}</Text>}
         <View style={styles.transport}>
           {!protectedPauses && <Pressable disabled={!current || unavailable || playPending || !!state.error}
@@ -181,12 +201,12 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         {(shelf === 'psalms' || shelf === 'imagination') && <Text style={styles.allowance}>
           {t(shelf === 'psalms' ? 'listen.psalmAllowance' : 'listen.nightAllowance')}
         </Text>}
-        {offlineAllowed ? (
+        {!privateStream && (offlineAllowed ? (
           <Pressable accessibilityRole="button" accessibilityState={{ busy: downloading }} style={styles.control}
             disabled={downloading || !canStream || saved} onPress={() => void download()}>
             <Text style={styles.link}>{saved ? t('listen.downloaded') : downloading ? t('listen.downloading') : t('listen.download')}</Text>
           </Pressable>
-        ) : <Text style={styles.secondary}>{t('listen.paidDownload')}</Text>}
+        ) : <Text style={styles.secondary}>{t('listen.paidDownload')}</Text>)}
         {downloadFailed && <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.downloadFailed')}</Text>}
       </ScrollView>
       {dimmed && response === null && <Pressable accessibilityRole="button" accessibilityLabel={t('listen.brighten')} onPress={touch} style={styles.dim} />}

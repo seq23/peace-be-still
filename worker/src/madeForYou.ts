@@ -48,6 +48,7 @@ export type MadeForYouDependencies<CrisisKind = string> = {
 const root = '/api/made-for-you';
 const dayMs = 86_400_000;
 const retention = 7 * dayMs;
+const noteLifetime = retention - 3_600_000;
 const leaseMs = 30 * 60_000;
 const kind = (value: unknown): value is Kind => value === 'psalm' || value === 'imagination';
 const lang = (value: unknown): value is Lang => value === 'en' || value === 'es';
@@ -110,7 +111,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
       const row = await db.prepare(`UPDATE made_for_you SET lease = ?, lease_until = ?
         WHERE id = (SELECT id FROM made_for_you WHERE text IS NOT NULL AND created_at > ?
         AND (lease_until IS NULL OR lease_until <= ?) ORDER BY created_at, id LIMIT 1)
-        RETURNING *`).bind(lease, now + leaseMs, now - retention, now).first<Row>();
+        RETURNING *`).bind(lease, now + leaseMs, now - noteLifetime, now).first<Row>();
       if (!row?.text) return json({ job: null });
       const input = { kind: row.kind, lang: row.lang, teen: !!row.teen, text: row.text };
       const verses = row.kind === 'psalm' ? await deps.psalm(row.lang === 'es' ? 'RV1909' : 'KJV') : [];
@@ -151,7 +152,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     const published = await db.prepare(`UPDATE made_for_you SET audio_path = ?, seconds = ?, sha256 = ?,
       text = NULL, lease = NULL, lease_until = NULL WHERE id = ? AND lease = ? AND lease_until > ?
       AND created_at > ? AND text IS NOT NULL RETURNING id`)
-      .bind(audioPath(row), data.seconds, data.sha256, id, data.lease, deps.now(), deps.now() - retention).first();
+      .bind(audioPath(row), data.seconds, data.sha256, id, data.lease, deps.now(), deps.now() - noteLifetime).first();
     return published ? json({ published: true }) : error(409, 'LEASE_EXPIRED');
   }
 
@@ -172,19 +173,27 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
           const channel = url.searchParams.get('kind');
           const language = url.searchParams.get('lang');
           if (!kind(channel) || !lang(language)) return error(400, 'BAD_REQUEST');
-          const current = db.prepare(`SELECT id, day FROM made_for_you WHERE install_id = ? AND kind = ? AND lang = ?
+          const current = db.prepare(`SELECT id, day, created_at <= ? AS delayed FROM made_for_you WHERE install_id = ? AND kind = ? AND lang = ?
             AND text IS NOT NULL AND created_at > ? ORDER BY created_at DESC LIMIT 1`)
-            .bind(who.installId, channel, language, now - retention);
+            .bind(now - dayMs, who.installId, channel, language, now - noteLifetime);
+          const latest = db.prepare(`SELECT audio_path IS NULL AND (text IS NULL OR created_at <= ?) AS expired
+            FROM made_for_you WHERE install_id = ? AND kind = ? AND lang = ?
+            ORDER BY created_at DESC, id DESC LIMIT 1`)
+            .bind(now - noteLifetime, who.installId, channel, language);
           const shelf = db.prepare(`SELECT id, day, audio_path, seconds, sha256 FROM made_for_you WHERE install_id = ?
             AND kind = ? AND lang = ? AND audio_path IS NOT NULL ORDER BY created_at DESC, id DESC LIMIT 30`)
             .bind(who.installId, channel, language);
-          const [pending, rows] = await Promise.all([current.first(), shelf.all<{ id: string; day: string; audio_path: string; seconds: number; sha256: string }>()]);
+          const [pending, last, rows] = await Promise.all([
+            current.first<{ id: string; day: string; delayed: number }>(),
+            latest.first<{ expired: number }>(),
+            shelf.all<{ id: string; day: string; audio_path: string; seconds: number; sha256: string }>(),
+          ]);
           const play = url.searchParams.get('play');
           if (play !== null) {
             const row = rows.results.find(item => item.id === play);
             return row ? json({ url: await deps.playUrl(row.audio_path) }) : error(404, 'NOT_FOUND');
           }
-          return json({ pending, ready: rows.results.map(({ audio_path, ...item }) => ({ ...item, path: audio_path })) });
+          return json({ pending: pending && { ...pending, delayed: !!pending.delayed }, expired: !!last?.expired, ready: rows.results.map(({ audio_path, ...item }) => ({ ...item, path: audio_path })) });
         }
         if (request.method !== 'POST') return error(405, 'METHOD');
         const input = await body(request);
@@ -210,9 +219,13 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     async scheduled() {
       // Called by phase 3's hourly cleanup. Reserve an hour for the interval between ticks.
       await db.prepare(`UPDATE made_for_you SET text = NULL, lease = NULL, lease_until = NULL
-        WHERE text IS NOT NULL AND created_at <= ?`).bind(deps.now() - retention + 3_600_000).run();
-      await db.prepare('DELETE FROM made_for_you WHERE text IS NULL AND audio_path IS NULL AND created_at <= ?')
-        .bind(deps.now() - retention).run();
+        WHERE text IS NOT NULL AND created_at <= ?`).bind(deps.now() - noteLifetime).run();
+      // Keep the latest expired receipt per install and channel so the shelf can explain what happened.
+      await db.prepare(`DELETE FROM made_for_you AS old
+        WHERE text IS NULL AND audio_path IS NULL AND EXISTS (
+          SELECT 1 FROM made_for_you AS newer WHERE newer.install_id = old.install_id
+          AND newer.kind = old.kind AND newer.lang = old.lang AND newer.day > old.day
+        )`).run();
     },
   };
 }

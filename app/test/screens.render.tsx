@@ -17,8 +17,13 @@ const quiet = console.error;
 console.error = (...args: unknown[]) => { if (!String(args[0]).includes('react-test-renderer is deprecated')) quiet(...args); };
 let saved: string | null = null;
 let readFails = false;
+let sessionToken = false;
 (globalThis as any).__pbsStorage = {
-  getItem: async () => { if (readFails) throw new Error('unavailable'); return saved; },
+  getItem: async (key: string) => {
+    if (readFails) throw new Error('unavailable');
+    if (key === 'peace-be-still-chat-token' && sessionToken) return JSON.stringify({ age: 'adult', token: 'test-install' });
+    return saved;
+  },
   setItem: async (_key: string, value: string) => { saved = value; },
 };
 type Call = [string, unknown?];
@@ -769,18 +774,32 @@ test('the Nights entry leads to the subscription gate, and children cannot open 
   assert.equal(host(spanish, 'TextInput').length, 0);
 });
 
-test('paid sessions render the form, pending, error and shared playback in both languages', async () => {
+test('paid sessions render requests, delay, expiry, shelf and shared playback in both languages', async t => {
+  sessionToken = true;
+  t.after(() => { sessionToken = false; });
   const { MadeForYouScreen } = require('../src/madeForYou/Screen') as typeof import('../src/madeForYou/Screen');
   for (const lang of ['en', 'es'] as const) {
     const faith = lang === 'es';
     const context = { age: 'adult', lang, door: faith ? 'faith' : 'mindset', kind: faith ? 'psalm' : 'imagination' } as const;
     const ready = { id: 'night-one', day: '2026-11-20', path: 'private/session.m4a', seconds: 650, sha256: 'a'.repeat(64) };
     const stream = 'https://private.example/session.m4a?signature=fixture';
-    const player = testPlayer(audioTracks[0]);
+    const player = testPlayer(audioTracks[0], null);
     type Api = NonNullable<React.ComponentProps<typeof MadeForYouScreen>['api']>;
-    let shelf: Awaited<ReturnType<Api['list']>> = { ready: [], pending: null };
+    let shelf: Awaited<ReturnType<Api['list']>> = { ready: [], pending: null, expired: false };
     let fail = true;
     let posted: unknown;
+    const fetchMock = mock.method(globalThis, 'fetch', async (input: string, init: RequestInit) => {
+      const url = new URL(input);
+      assert.equal(url.pathname, '/api/made-for-you');
+      assert.equal(url.searchParams.get('kind'), context.kind);
+      assert.equal(url.searchParams.get('lang'), lang);
+      assert.equal(new Headers(init.headers).get('authorization'), 'Bearer test-install');
+      if (url.searchParams.has('play')) {
+        assert.equal(url.searchParams.get('play'), ready.id);
+        return Response.json({ url: stream });
+      }
+      return Response.json(shelf);
+    });
     const api: Api = {
       async list() {
         if (fail) throw new Error('unavailable');
@@ -788,17 +807,16 @@ test('paid sessions render the form, pending, error and shared playback in both 
       },
       async submit(actual, note) {
         posted = [actual, note];
-        shelf = { ready: [], pending: { id: ready.id, day: ready.day } };
+        shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: false }, expired: false };
         return { status: 'pending' as const, ...shelf.pending! };
       },
-      async play(_actual, id) {
-        assert.equal(id, ready.id);
-        return { url: stream };
-      },
+      async play() { throw new Error('The shelf must open the listen route'); },
     };
     let tree!: ReactTestRenderer;
+    let opened: string | undefined;
     await act(async () => {
-      tree = create(<MadeForYouScreen paid context={context} close={() => {}} plans={() => {}} api={api} />);
+      tree = create(<MadeForYouScreen paid context={context} close={() => {}} plans={() => {}}
+        play={row => { opened = row.id; }} api={api} />);
     });
     const translated = faith
       ? { retry: /volver a consultar/i, request: /preparar mi sesión/i, pending: /esta noche/i, error: /no pudimos/i,
@@ -817,19 +835,89 @@ test('paid sessions render the form, pending, error and shared playback in both 
     assert.deepEqual(posted, [context, note]);
     assert.match(strings(tree), translated.pending);
     assert.equal(host(tree, 'TextInput').length, 0);
-    shelf = { ready: [ready], pending: null };
+    shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true }, expired: false };
+    await press(tree, translated.retry);
+    assert.doesNotMatch(strings(tree), translated.pending);
+    assert.match(strings(tree), faith ? /tardando/ : /taking longer/);
+    shelf = { ready: [], pending: null, expired: true };
+    await press(tree, translated.retry);
+    assert.match(strings(tree), faith ? /se borró/ : /note was erased/);
+    assert.equal(host(tree, 'TextInput').length, 1);
+    await type(tree, note);
+    await press(tree, translated.request);
+    shelf = { ready: [ready], pending: null, expired: false };
     await press(tree, translated.retry);
     await press(tree, /20/);
-    assert.ok(texts(tree).includes(translated.ai));
-    await press(tree, translated.play);
+    assert.equal(opened, ready.id);
+    Object.assign(globalThis, { __pbsPlatform: 'ios', __pbsPaid: true });
+    const person = { ...base, door: context.door, language: lang, journey: faith ? 'mi-refugio' : 'imagination-nights' };
+    const listen = await mount('listen', person, { track: `made-for-you-${opened}` });
+    assert.ok(texts(listen).includes(translated.ai));
+    assert.ok(texts(listen).includes('0:00'));
+    assert.ok(texts(listen).includes('10:50'));
+    await press(listen, translated.play);
     assert.equal(player.source(), stream);
     assert.ok(player.getState().playing);
-    await press(tree, translated.pause);
+    await press(listen, '+15');
+    assert.equal(player.position(), 15);
+    await press(listen, '−15');
+    assert.equal(player.position(), 0);
+    await press(listen, translated.pause);
     assert.ok(!player.getState().playing);
-    await press(tree, translated.close);
-    const section = strings(tree);
+    const locale = faith ? es : en;
+    await press(listen, locale['listen.timer']);
+    assert.ok(texts(listen).includes(locale['listen.timerFade']));
+    await press(listen, locale['listen.minutes'].replace('%{minutes}', '15'));
+    assert.ok(player.getState().sleepEndsAt);
+    await press(listen, translated.close);
+    assert.deepEqual(calls.pop(), ['replace', '/made-for-you']);
+    const section = strings(listen);
     if (faith) assert.deepEqual(faithContentIssues(section), []);
     else assert.doesNotMatch(section, /psalm|bible|scripture/i);
-    await act(async () => { tree.unmount(); await player.dispose(); });
+    await act(async () => { listen.unmount(); tree.unmount(); await player.dispose(); });
+    fetchMock.mock.restore();
   }
+});
+
+test('web preview routes render paid states and play a public fixture without calling the paid API', async t => {
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+  const location = Object.getOwnPropertyDescriptor(globalThis, 'location');
+  Object.defineProperty(globalThis, 'location', { configurable: true, value: { origin: 'https://preview.example' } });
+  t.after(() => {
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
+    if (location) Object.defineProperty(globalThis, 'location', location);
+    else Reflect.deleteProperty(globalThis, 'location');
+  });
+  const fetchMock = t.mock.method(globalThis, 'fetch', () => { throw new Error('Unexpected preview fetch'); });
+  const person = { ...base, journey: 'mi-refugio' };
+  const form = await mount('madeForYou', person, { state: 'form' });
+  assert.equal(host(form, 'TextInput').length, 1);
+  await type(form, 'Quiero descansar');
+  await press(form, /preparar mi sesión/i);
+  assert.match(strings(form), /vista previa/i);
+  assert.equal(host(form, 'TextInput')[0].props.value, '');
+  const pending = await mount('madeForYou', person, { state: 'pending' });
+  assert.match(strings(pending), /esta noche/i);
+  assert.equal(host(pending, 'TextInput').length, 0);
+  const error = await mount('madeForYou', person, { state: 'error' });
+  assert.ok(host(error, 'Text').some(node => node.props.accessibilityRole === 'alert'));
+
+  const ready = await mount('madeForYou', person, { state: 'ready' });
+  await press(ready, /20/);
+  const navigation = calls.pop();
+  assert.deepEqual(navigation, ['push', { pathname: '/listen/[track]', params: { track: 'made-for-you-preview-session' } }]);
+  const player = testPlayer(audioTracks[0], null);
+  const listen = await mount('listen', person, { track: 'made-for-you-preview-session' });
+  await press(listen, es['listen.play']);
+  assert.equal(player.source(), 'https://preview.example/made-for-you-preview/psalm-es.mp3');
+  assert.ok(readFileSync('public/made-for-you-preview/psalm-es.mp3').length > 0);
+  assert.ok(player.getState().playing);
+
+  await act(async () => {
+    for (const tree of [form, pending, error, ready, listen]) tree.unmount();
+    await player.dispose();
+  });
+  assert.equal(fetchMock.mock.callCount(), 0);
 });

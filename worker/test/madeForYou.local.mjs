@@ -1,5 +1,5 @@
 // From the repository root: node --test worker/test/madeForYou.local.mjs
-// Uses the chat lane's installed Miniflare and the app's existing esbuild.
+// Uses CI's pinned Miniflare and the app's existing esbuild.
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
 import { readFileSync } from 'node:fs';
@@ -67,9 +67,9 @@ test('a seeded D1 row travels through the local Worker, Mac template and QA seam
   const seed = await request(id.owner, { now, body: note });
   assert.equal(seed.status, 202);
   const { id: job, day: submittedDay } = await seed.json();
-  assert.deepEqual((await (await request(id.owner, { now })).json()).pending, { id: job, day: submittedDay });
-  assert.deepEqual((await (await request(id.other, { now })).json()), { pending: null, ready: [] });
-  assert.deepEqual((await (await request(id.owner, { now, params: '?kind=imagination&lang=es' })).json()), { pending: null, ready: [] });
+  assert.deepEqual((await (await request(id.owner, { now })).json()).pending, { id: job, day: submittedDay, delayed: false });
+  assert.deepEqual((await (await request(id.other, { now })).json()), { pending: null, expired: false, ready: [] });
+  assert.deepEqual((await (await request(id.owner, { now, params: '?kind=imagination&lang=es' })).json()), { pending: null, expired: false, ready: [] });
   const conflict = await request(id.owner, { now, body: { ...note, door: 'mindset', kind: 'imagination' } });
   assert.equal(conflict.status, 429);
   assert.deepEqual(await conflict.json(), { error: 'DAILY_LIMIT' });
@@ -117,11 +117,22 @@ assert process_one(make_request(base + '/api', secret), voice, put)
   ]);
   assert.deepEqual(race.map(response => response.status).sort(), [202, 429]);
   const expired = await (await race.find(response => response.ok).json()).id;
+  const delayed = await (await request(id.other, { now: now + day })).json();
+  assert.equal(delayed.pending.id, expired);
+  assert.equal(delayed.pending.delayed, true);
+  assert.equal(delayed.expired, false);
   const early = await fetch(new URL('/_test-cleanup', url), { headers: { 'x-test-now': String(now + 6 * day) } });
   assert.equal(early.status, 204);
   assert.equal((await db.prepare('SELECT text FROM made_for_you WHERE id = ?').bind(expired).first()).text, note.text);
   const cleanup = await fetch(new URL('/_test-cleanup', url), { headers: { 'x-test-now': String(now + 7 * day) } });
   assert.equal(cleanup.status, 204);
-  assert.equal(await db.prepare('SELECT text FROM made_for_you WHERE id = ?').bind(expired).first(), null);
+  const erased = await db.prepare('SELECT text, lease, audio_path FROM made_for_you WHERE id = ?').bind(expired).first();
+  assert.deepEqual(erased, { text: null, lease: null, audio_path: null });
+  assert.deepEqual(await (await request(id.other, { now: now + 8 * day })).json(),
+    { pending: null, expired: true, ready: [] });
+  assert.equal((await request(id.other, { now: now + 8 * day, body: note })).status, 202);
+  const retry = await (await request(id.other, { now: now + 8 * day })).json();
+  assert.equal(retry.expired, false);
+  assert.equal(retry.pending.delayed, false);
   assert.equal((await db.prepare('SELECT audio_path FROM made_for_you WHERE id = ?').bind(job).first()).audio_path, after.audio_path);
 });

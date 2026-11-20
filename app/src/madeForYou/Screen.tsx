@@ -1,22 +1,22 @@
 import { useIsFocused } from 'expo-router';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text, TextInput } from 'react-native';
 import { t } from '../i18n';
 import { fonts } from '../theme/tokens';
 import { BackLink, Body, Card, Label, PillButton, Screen, TextLink, Title, usePalette } from '../ui';
 import { madeForYouApi, SessionError, type Ready, type SessionContext, type Shelf } from './api';
 import { madeForYouCopy } from './copy';
-import { MadeForYouPlayback } from './Playback';
 
 type Props = {
   paid: boolean;
   context: SessionContext;
   close: () => void;
   plans: () => void;
+  play: (row: Ready) => void;
   api?: typeof madeForYouApi;
 };
 
-export function MadeForYouScreen({ paid, context, close, plans, api = madeForYouApi }: Props) {
+export function MadeForYouScreen({ paid, context, close, plans, play, api = madeForYouApi }: Props) {
   const copy = madeForYouCopy(context.lang);
   const back = t('common.back', { locale: context.lang });
   if (!paid) return <Screen>
@@ -25,10 +25,10 @@ export function MadeForYouScreen({ paid, context, close, plans, api = madeForYou
     <Body>{copy('locked')}</Body>
     <PillButton onPress={plans}>{copy('plans')}</PillButton>
   </Screen>;
-  return <Sessions context={context} close={close} api={api} />;
+  return <Sessions context={context} close={close} play={play} api={api} />;
 }
 
-function Sessions({ context, close, api }: Pick<Props, 'context' | 'close'> & { api: typeof madeForYouApi }) {
+function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close' | 'play'> & { api: typeof madeForYouApi }) {
   const { age, door, kind, lang } = context;
   const copy = madeForYouCopy(lang);
   const palette = usePalette();
@@ -38,9 +38,8 @@ function Sessions({ context, close, api }: Pick<Props, 'context' | 'close'> & { 
   const [revision, refresh] = useState(0);
   const [text, setText] = useState('');
   const [sending, setSending] = useState(false);
-  const [notice, setNotice] = useState<'limit' | 'failed' | null>(null);
+  const [notice, setNotice] = useState<'limit' | 'failed' | 'preview' | null>(null);
   const [crisis, setCrisis] = useState('');
-  const [selected, setSelected] = useState<Ready | null>(null);
   const submission = useRef(false);
   const requestVersion = useRef(0);
 
@@ -57,13 +56,6 @@ function Sessions({ context, close, api }: Pick<Props, 'context' | 'close'> & { 
     return () => controller.abort();
   }, [age, api, door, focused, kind, lang, revision]);
 
-  const source = useCallback(async (id: string) => {
-    const { url } = await api.play({ age, door, kind, lang }, id);
-    const parsed = new URL(url);
-    if (parsed.protocol !== 'https:' || parsed.username || parsed.password) throw new Error('Invalid audio URL');
-    return parsed.href;
-  }, [age, api, door, kind, lang]);
-
   async function submit() {
     const note = text.trim();
     if (submission.current || !note || note.length > 500) return;
@@ -75,9 +67,10 @@ function Sessions({ context, close, api }: Pick<Props, 'context' | 'close'> & { 
       const response = await api.submit(context, note);
       setText('');
       if (response.status === 'crisis') setCrisis(response.text);
+      else if (response.status === 'preview') setNotice('preview');
       else {
         ++requestVersion.current;
-        setShelf(previous => ({ ready: previous?.ready ?? [], pending: response }));
+        setShelf(previous => ({ ready: previous?.ready ?? [], pending: { ...response, delayed: false }, expired: false }));
         refresh(value => value + 1);
       }
     } catch (error) {
@@ -88,8 +81,6 @@ function Sessions({ context, close, api }: Pick<Props, 'context' | 'close'> & { 
     }
   }
 
-  if (selected) return <MadeForYouPlayback key={selected.id} row={selected} lang={lang}
-    source={source} close={() => setSelected(null)} />;
   const journey = t(kind === 'psalm' ? 'journey.psalmNights.name' : 'journey.imaginationNights.name', { locale: lang });
   const date = (day: string) => new Intl.DateTimeFormat(lang, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(day));
 
@@ -98,8 +89,9 @@ function Sessions({ context, close, api }: Pick<Props, 'context' | 'close'> & { 
     <Title>{copy('title')}</Title>
     <Label>{journey}</Label>
     {loadFailed && <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{copy('error')}</Text>}
-    {shelf?.pending && <Card><Body muted={false}>{copy('pending')}</Body></Card>}
-    {shelf?.ready.map(row => <Card key={row.id} onPress={() => setSelected(row)}>
+    {shelf?.pending && <Card><Body muted={false}>{copy(shelf.pending.delayed ? 'delayed' : 'pending')}</Body></Card>}
+    {shelf?.expired && <Card><Body muted={false}>{copy('expired')}</Body></Card>}
+    {shelf?.ready.map(row => <Card key={row.id} onPress={() => play(row)}>
       <Body muted={false}>{date(row.day)}</Body>
     </Card>)}
     {(loadFailed || shelf?.pending) && <TextLink onPress={() => refresh(value => value + 1)}>{copy('refresh')}</TextLink>}
@@ -114,7 +106,8 @@ function Sessions({ context, close, api }: Pick<Props, 'context' | 'close'> & { 
           }} />
         <Body size={14}>{copy('counter', text.length)}</Body>
         <Body size={14}>{copy('privacy')}</Body>
-        {notice && <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{copy(notice)}</Text>}
+        {notice === 'preview' ? <Body>{copy(notice)}</Body> : notice &&
+          <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{copy(notice)}</Text>}
         {sending ? <Body>{copy('sending')}</Body> : !!text.trim() && <PillButton onPress={() => void submit()}>{copy('submit')}</PillButton>}
       </React.Fragment>}
   </Screen>;

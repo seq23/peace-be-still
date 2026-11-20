@@ -33,6 +33,35 @@ class MadeForYouTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             sessions.session_item(scene)
 
+    def test_one_nightly_run_claims_and_publishes_two_sessions(self):
+        first = self.job()
+        second = self.job()
+        second_id = "10000000-0000-4000-a000-000000000002"
+        second.update(id=second_id, path=second["path"].replace(first["id"] + ".m4a", second_id + ".m4a"))
+        jobs = iter([first, second])
+        published = []
+        put = Mock()
+
+        def call(target, payload):
+            if target == "claim":
+                return {"job": next(jobs, None)}
+            published.append(target)
+            self.assertEqual(payload["seconds"], 680)
+            return {"published": True}
+
+        def voice(_item, directory):
+            return {"status": "passed", "seconds": 680, "sha256": "hash", "_local": directory / "session.m4a"}
+
+        with patch.dict(sessions.os.environ, {
+            "PBS_MADE_FOR_YOU_API": "https://fixture.example/api",
+            "PBS_MADE_FOR_YOU_RUNNER_SECRET": "fixture",
+            "PBS_MADE_FOR_YOU_PRIVATE_BUCKET": "fixture-private",
+        }), patch.object(sessions.publish, "connect"), patch.object(sessions, "make_request", return_value=call), \
+                patch.object(sessions, "render_session", side_effect=voice), patch.object(sessions, "upload", put):
+            self.assertEqual(sessions.work(), 0)
+        self.assertEqual(published, [first["id"], second_id])
+        self.assertEqual(put.call_count, 2)
+
     def test_qa_failure_cannot_upload_or_acknowledge(self):
         call = Mock(return_value={"job": self.job()})
         put = Mock()

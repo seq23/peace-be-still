@@ -50,7 +50,7 @@ export const RESUME_TAIL_S = 10;
 /** How long to wait for a source to load before giving up on the saved spot and starting at 0. */
 export const LOAD_WAIT_MS = 10_000;
 
-const positionKey = (track: Track) => `pbs.player.position:${track.file}`;
+const positionKey = (track: Track) => `pbs.player.position:${track.kind === 'made-for-you' ? track.ref : track.file}`;
 type Saved = { file: string; positionSeconds: number; savedAt: number };
 
 export function createPlayer(options: {
@@ -155,7 +155,7 @@ export function createPlayer(options: {
       const current = ++generation;
       if (state.playing) { stopSaving(); await savePosition(); set({ playing: false }); }
       const local = canUse(FEATURES.OFFLINE, user) ? downloads.find(track) : null;
-      const uri = local ?? (baseUrl ? trackUrl(track, baseUrl) : null);
+      const uri = track.kind === 'made-for-you' ? track.file : local ?? (baseUrl ? trackUrl(track, baseUrl) : null);
       if (!uri) { audio.pause(); loaded = null; set({ track, playing: false, position: 0, response: null, error: 'audio-not-ready' }); return; }
       try {
         const at = await startAt(track);

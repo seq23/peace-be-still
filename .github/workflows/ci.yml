@@ -19,3 +19,18 @@ jobs:
           cache-dependency-path: app/package-lock.json
       - run: npm ci --no-audit --no-fund
       - run: npm run typecheck && npm test
+  made-for-you-worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --prefix app --no-audit --no-fund
+      - run: npm install --prefix worker --no-save --package-lock=false --no-audit --no-fund miniflare@5.20261118.0-beta
+      - run: node --test worker/test/madeForYou.local.mjs

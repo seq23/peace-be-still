@@ -5,12 +5,12 @@ import { audioBaseUrl } from '../../player/library';
 
 const base = audioBaseUrl(Constants.expoConfig?.extra?.audioBaseUrl);
 
-export function usePublishedAudio() {
+export function usePublishedAudio(enabled = true) {
   const focused = useIsFocused();
   const [published, setPublished] = useState<ReadonlyMap<string, string> | null>(null);
 
   useEffect(() => {
-    if (!focused || !base) return;
+    if (!enabled || !focused || !base) return;
     let active = true;
     const request = new AbortController();
     const timeout = setTimeout(() => request.abort(), 8000);
@@ -41,7 +41,7 @@ export function usePublishedAudio() {
       clearTimeout(timeout);
       request.abort();
     };
-  }, [focused]);
+  }, [enabled, focused]);
 
   return published;
 }

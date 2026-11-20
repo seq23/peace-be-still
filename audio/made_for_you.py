@@ -12,6 +12,7 @@ import subprocess
 import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from urllib.error import HTTPError
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
@@ -101,8 +102,14 @@ def make_request(base: str, secret: str):
             data=json.dumps(body).encode(), method="POST",
             headers={"Authorization": f"Bearer {secret}", "Content-Type": "application/json"},
         )
-        with urlopen(request, timeout=120) as response:
-            return json.load(response)
+        try:
+            with urlopen(request, timeout=120) as response:
+                return json.load(response)
+        except HTTPError as error:
+            with error:
+                if error.code == 503 and json.load(error).get("error") in {"PSALM_UNAVAILABLE", "NO_APPROVED_DRAFT"}:
+                    raise fill.NamedStop("MADE_FOR_YOU_DRAFT", "Session has no approved script.") from None
+            raise
     return call
 
 
@@ -133,7 +140,10 @@ def process_one(call, render, put) -> bool:
     job = call("claim", {}).get("job")
     if job is None:
         return False
-    item = session_item(job)
+    try:
+        item = session_item(job)
+    except (KeyError, TypeError, ValueError):
+        raise fill.NamedStop("MADE_FOR_YOU_DRAFT", "Session has no approved script.") from None
     with TemporaryDirectory(prefix="pbs-private-audio-") as directory:
         row = render(item, Path(directory))
         if row["status"] != "passed":
@@ -142,6 +152,26 @@ def process_one(call, render, put) -> bool:
         if call(job["id"], {"lease": job["lease"], "seconds": row["seconds"], "sha256": row["sha256"]}).get("published") is not True:
             raise fill.NamedStop("MADE_FOR_YOU_PUBLISH", "The Worker did not confirm publication.")
     return True
+
+
+def drain_queue(call, render, put) -> int:
+    published = 0
+    held = None
+    while True:
+        try:
+            if not process_one(call, render, put):
+                break
+        except fill.NamedStop as error:
+            if error.code not in {"MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA"}:
+                raise
+            # The held row keeps its lease, so the next claim advances to another request.
+            held = error
+            continue
+        published += 1
+        print(f"OUTPUT {published} private session(s) published", flush=True)
+    if held:
+        raise held
+    return published
 
 
 def work() -> int:
@@ -153,9 +183,7 @@ def work() -> int:
     if not bucket or bucket == publish.BUCKET:
         raise fill.NamedStop("MADE_FOR_YOU_PRIVATE_BUCKET", "Configure a separate private R2 bucket.")
     publish.connect()
-    if process_one(make_request(base, secret), render_session, lambda item, local: upload(item, local, bucket)):
-        print("OUTPUT 1 private session published")
-    else:
+    if not drain_queue(make_request(base, secret), render_session, lambda item, local: upload(item, local, bucket)):
         print("OUTPUT 0 private sessions (queue empty)")
     return 0
 
@@ -194,14 +222,14 @@ def main() -> int:
                         except ProcessLookupError:
                             pass
                         child.wait()
-                        print("OUTPUT 0 private sessions (render window ended)")
+                        print("Render window ended; unfinished sessions can be claimed again.", flush=True)
                         return 0
     except fill.NamedStop as error:
         # Existing publisher exceptions may include storage details. Do not log customer data or URLs.
-        print(f"OUTPUT 0 private sessions (NAMED STOP [{error.code}])", file=sys.stderr)
+        print(f"NAMED STOP [{error.code}] in private session rendering", file=sys.stderr)
         return error.exit_code
     except Exception:
-        print("OUTPUT 0 private sessions (NAMED STOP [MADE_FOR_YOU_RUN_FAILED])", file=sys.stderr)
+        print("NAMED STOP [MADE_FOR_YOU_RUN_FAILED] in private session rendering", file=sys.stderr)
         return 1
 
 

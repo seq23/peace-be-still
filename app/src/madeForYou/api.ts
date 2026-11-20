@@ -2,10 +2,11 @@ import type { Age, Door, Language } from '../model';
 import { madeForYouToken } from './paidStub';
 
 export type Kind = 'psalm' | 'imagination';
-type Pending = { id: string; day: string };
-export type Ready = Pending & { path: string; seconds: number; sha256: string };
-export type Shelf = { ready: Ready[]; pending: Pending | null };
-export type Submission = ({ status: 'pending' } & Pending) | { status: 'crisis'; text: string };
+type Receipt = { id: string; day: string };
+type Pending = Receipt & { delayed: boolean };
+export type Ready = Receipt & { path: string; seconds: number; sha256: string };
+export type Shelf = { ready: Ready[]; pending: Pending | null; expired: boolean };
+export type Submission = ({ status: 'pending' } & Receipt) | { status: 'crisis'; text: string } | { status: 'preview' };
 export type SessionContext = { age: Age; door: Door; lang: Language; kind: Kind };
 
 export class SessionError extends Error {
@@ -17,7 +18,7 @@ export const madeForYouApi = {
   submit: (context: SessionContext, text: string) => request<Submission>(context, {
     method: 'POST', body: JSON.stringify({ kind: context.kind, lang: context.lang, door: context.door, text }),
   }),
-  play: (context: SessionContext, id: string) => request<{ url: string }>(context, {}, id),
+  play: (context: SessionContext, id: string, signal?: AbortSignal) => request<{ url: string }>(context, { signal }, id),
 };
 
 async function request<T>({ age, kind, lang }: SessionContext, init: RequestInit, play?: string): Promise<T> {
