@@ -2,6 +2,7 @@
 // the Mindset door. Inside the tabs the journey's language applies (Mi Refugio is Spanish).
 import { Tabs } from 'expo-router';
 import React from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { tabsFor, type Tab } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { TabIcon } from '../../src/ui/art';
@@ -15,14 +16,15 @@ export default function TabsLayout() {
   const t = useT('journey');
   const c = usePalette();
   const shown = tabsFor(settings);
+  const insets = useSafeAreaInsets();
   return (
     <Tabs screenOptions={{
       headerShown: false,
       tabBarActiveTintColor: c.accent,
       tabBarInactiveTintColor: c.muted,
-      tabBarStyle: { backgroundColor: c.card, borderTopColor: c.line },
+      // Room for the icon and a 12 px label with Figtree's tall descenders, above the home indicator.
+      tabBarStyle: { backgroundColor: c.card, borderTopColor: c.line, height: 58 + insets.bottom, paddingTop: 6, paddingBottom: 6 + insets.bottom },
       tabBarLabelStyle: { fontFamily: fonts.body, fontSize: 12, lineHeight: 16 },
-      tabBarItemStyle: { paddingVertical: 4 },
       sceneStyle: { backgroundColor: c.bg },
     }}>
       {ALL.map(tab => (
