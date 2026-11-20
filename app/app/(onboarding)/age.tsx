@@ -66,7 +66,7 @@ export default function AgeScreen() {
       </View>
       <TextInput accessibilityLabel={t('age.year')} placeholder={t('age.year')} placeholderTextColor={c.muted}
         keyboardType="number-pad" inputMode="numeric" maxLength={4} value={year} onChangeText={changeYear} onSubmitEditing={next}
-        style={{ fontFamily: fonts.body, fontSize: 20, color: c.ink, backgroundColor: c.card, borderColor: problem ? c.wine : c.line, borderWidth: 1, borderRadius: 14, padding: 16 }} />
+        style={{ fontFamily: fonts.body, fontSize: 20, color: c.ink, backgroundColor: c.card, borderColor: problem ? c.wine : c.line, borderWidth: 1, borderRadius: 14, padding: 16, outlineColor: c.accent }} />
       {boundary ? (
         <View style={{ gap: 10 }}>
           <Body muted={false}>{t('age.month')}</Body>
