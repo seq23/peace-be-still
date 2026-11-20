@@ -17,7 +17,7 @@ is rendered as two calls instead (3 in all).
 
 Checks: each call's word accuracy vs its text (old spellings forgiven, as in the fill), and each
 turn's pitch (median F0 over its time span) inside its voice's band; a call that misses is rendered
-again (MAX_TRIES). The joined file: fill.encode (-22 LUFS, limiter, AAC m4a) then qa.check, the
+again (MAX_TRIES). The joined file: fill.master (-22 LUFS, two-pass loudnorm, AAC m4a) then qa.check, the
 library fill's own checks. Then gdrive:Mac-Shelf/peace-be-still/stories/hush-harbor/en/ + md5
 check, the Mac copy deleted, a manifest row (audio/manifest.jsonl, with the model(s) used).
 
@@ -649,7 +649,7 @@ def make_story(story: dict, work: Path) -> dict:
     work.mkdir(parents=True, exist_ok=True)
     (work / "engine").write_text("gemini")   # one engine per story: the clone lane skips it now
     parts, problems, models, ncalls = render_story_parts(story, work)
-    row = {"file": f"stories/hush-harbor/en/{file_of(story)}", "kind": "stories", "lang": "en",
+    row = {"file": row_file(story), "kind": "stories", "lang": "en",
            "ref": f"content/stories/hush-harbor/{story['id']}.json", "text": "script", "voice": VOICE_ID,
            "voices": {r: v["voice"] for r, v in VOICES["roles"].items()}, "models": sorted(set(models)),
            "calls": ncalls, "attempts": 1, "at": dt.datetime.now(fill.CT).isoformat(timespec="seconds")}
@@ -661,13 +661,8 @@ def make_story(story: dict, work: Path) -> dict:
     if factor < 1.0:
         parts = [p if isinstance(p, float) else slow(trim(p), factor, work) for p in parts]
     write_wav(wav, join(parts))
-    # Gemini's voices have sharper peaks than Kokoro's: AAC can overshoot the limiter, so a file
-    # whose only miss is its true peak is encoded again with more headroom (no new call).
-    for margin in (1.5, 3.0, 4.5):
-        fill.encode(wav, out, "sleep", margin)
-        res = qa.check(out, spoken(story), "en", "sleep")
-        if not res["problems"] or not all(p.startswith("A06 true peak") for p in res["problems"]):
-            break
+    fill.master(wav, out, "sleep")   # mastering misses are mastered again from this WAV (no new call)
+    res = qa.check(out, spoken(story), "en", "sleep")
     wav.unlink()
     checks = {k: res[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks["problems"] = res["problems"]
@@ -683,15 +678,20 @@ def make_story(story: dict, work: Path) -> dict:
     return row
 
 
+def row_file(story: dict) -> str:
+    return f"stories/hush-harbor/en/{file_of(story)}"
+
+
 def census(stories: list[dict], rows: list[dict]) -> dict:
-    files = {f"stories/hush-harbor/en/{file_of(s)}" for s in stories}
-    mine = [r for r in rows if r["file"] in files]
-    return {"total": len(files), "passed": sum(r.get("status") == "passed" for r in mine),
-            "failed": sum(r.get("status") == "FAILED" for r in mine)}
+    last = fill.latest(rows)
+    mine = [last[row_file(s)] for s in stories if row_file(s) in last]
+    return {"total": len(stories), "passed": sum(r.get("status") == "passed" for r in mine),
+            "failed": sum(r.get("status") == "FAILED" for r in mine), "given_up": fill.given_up(stories, rows, row_file)}
 
 
 def census_line(c: dict) -> str:
-    return f"hush harbor: {c['passed']} of {c['total']} stories voiced, {c['failed']} failed"
+    line = f"hush harbor: {c['passed']} of {c['total']} stories voiced, {c['failed']} failed"
+    return line + (f"; {fill.given_up_line(c['given_up'])}" if c.get("given_up") else "")
 
 
 def taken_by_clone(work: Path) -> bool:
@@ -701,10 +701,8 @@ def taken_by_clone(work: Path) -> bool:
 
 
 def todo(stories: list[dict], rows: list[dict], only: str | None = None) -> list[dict]:
-    """Story order: by number (core-001 first). Anything in the manifest is skipped (resume)."""
-    done = {r["file"] for r in rows}
-    return [s for s in stories if f"stories/hush-harbor/en/{file_of(s)}" not in done
-            and (not only or s["id"].startswith(only))]
+    """Story order: FAILED stories with tries left first (fill.todo), then by number (core-001 first)."""
+    return fill.todo([s for s in stories if not only or s["id"].startswith(only)], rows, key=row_file)
 
 
 # ------------------------------------------------------------------ vetting another model
@@ -878,7 +876,7 @@ def main(argv=None) -> int:
                 made += 1
             else:
                 failed += 1
-            fill.append_row(row)
+            row = fill.upsert_row(row)
             shutil.rmtree(work, ignore_errors=True)
             print(f"{row['status']:6} {row['file']}  {row['seconds']}s  {row['calls']} calls {row['models']}  "
                   f"acc {row['checks'].get('accuracy')}  {row['checks'].get('lufs')} LUFS  -> {row.get('shelved')}  "
