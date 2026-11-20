@@ -21,8 +21,9 @@ checks, shelved, status, voice).
   with a `NOTE` line outside it and caps each step to the minutes left before the next weekday 08:00
   (`fill.window_minutes`), so a batch never runs into her workday.
 - **Schedule**: launchd `com.seq.pbs-library-fill` (`launchd/install.sh`), every 15 minutes, Nice 15 +
-  low-priority I/O, from the runner clone `~/GitHub/.pbs-runner` via `run.sh`; a run lasts up to
-  110 minutes and pushes the manifest to main every 10 files.
+  low-priority I/O, from the runner clone `~/GitHub/.pbs-runner` via `run.sh`; each lane has its own
+  time box per run (Bible fill 60 minutes, Hush Harbor 12, clone lane 45) and the fill pushes the
+  manifest to main every 10 files.
 - **Pause flag**: `~/.peace-be-still/library-fill.active` exists while priorities 1–2 are incomplete
   (How We Know / Whisper Almanac pause on it); the run that completes them removes it.
 - **Output**: `OUTPUT <n> files shelved` and `library fill: X of Y files, Z hours shelved, N failed`,
@@ -42,9 +43,10 @@ checks, shelved, status, voice).
   Chatterbox (MIT) clones of her four picked clips (`gdrive:Mac-Shelf/peace-be-still/voices/hush-harbor/`),
   one sentence at a time on the Mac's CPU. It works down from the highest story number while the
   Gemini lane works up, and the first lane to start a story writes `engine` in its work folder, so a
-  story never mixes engines. Checks: each sentence's word accuracy, each turn's speaker similarity
-  over its role's floor (`voices.json` clone.floor), then the same file checks and shelf. `run.sh`
-  runs one clone story after each fill chunk, under the same lock, so the Mac alternates.
+  story never mixes engines. Checks: each sentence's word accuracy, speaker similarity over the role's
+  floor (`voices.json` clone.floor) measured on at least 6 s of speech (a role's short turns pooled:
+  a d-vector on a 2 s line is noise), then the same file checks and shelf. `run.sh` gives it 45
+  minutes after each fill chunk, under the same lock; a story the box cuts off carries on next run.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
   reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing, R2 upload, the player.
 - Tests: `python3 -m unittest discover -s audio/tests` (needs numpy) and `python3 audio/check_manifest.py --self-test`.

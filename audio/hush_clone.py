@@ -9,13 +9,15 @@ grandmother) -> every turn split into sentences -> render_chatterbox.py in the C
 (resumable: each sentence is a file) -> checks:
   sentence   word accuracy vs its text (faster-whisper, old spellings forgiven; one word of slack on
              a short sentence); a miss is rendered again with a new seed (MAX_TRIES)
-  turn       speaker similarity to her picked clip (Resemblyzer d-vector cosine) at or above the role's
+  voice      speaker similarity to her picked clip (Resemblyzer d-vector cosine) at or above the role's
              floor in voices.json clone.floor (the clone test's new-line score minus 0.05, never below
-             the closest other voice + 0.03); a miss re-renders the turn
+             the closest other voice + 0.03), measured on at least MIN_SIM_S of speech (a role's short
+             turns pooled, sim_groups), the length the floor was set on; a miss re-renders those turns
   file       join (pauses exactly 3.0 s, by code), tempo, fill.master at -22 LUFS, qa.check (the fill's
              checks), then the Drive shelf and a manifest row, as the Gemini lane does.
-One story per run (`--limit 1` from run.sh), at nice 15 under the library fill's lock, so the Mac
-alternates: a Bible chunk, then a clone story. OUTPUT line every run.
+Its own time box per run (`--max-minutes 45` from run.sh), at nice 15 under the library fill's lock,
+so the Mac alternates: a Bible chunk, then clone stories; a story the box cuts off carries on next run
+from its saved sentences. OUTPUT line every run.
 """
 from __future__ import annotations
 
@@ -104,16 +106,52 @@ def refs() -> dict:
     return out
 
 
-def render(items: list[dict]) -> None:
+def render(items: list[dict], deadline: float | None = None) -> bool:
+    """Render every item not on disk yet; False when the deadline stopped it first (the rest next run)."""
     if not items:
-        return
-    r = subprocess.run([CB_PY, str(AUDIO / "render_chatterbox.py")], input=json.dumps({"items": items}),
+        return True
+    r = subprocess.run([CB_PY, str(AUDIO / "render_chatterbox.py")], input=json.dumps({"items": items, "deadline": deadline}),
                        capture_output=True, text=True, timeout=6 * 3600)
     if r.returncode != 0:
         raise RuntimeError(f"chatterbox failed: {r.stderr.strip()[-300:]}")
+    return all(Path(i["out"]).exists() for i in items)
 
 
 _ENC = []
+MIN_SIM_S = 6.0   # speech a d-vector needs: the clone test's own passing grandmother clip (0.938 whole)
+                  # scores 0.78-0.85 on 2 s slices and 0.911+ on 6 s slices (measured 20 Nov 2026)
+
+
+def sim_groups(turns: list[tuple[int, str, float]]) -> tuple[list[list[int]], dict]:
+    """Which turns are judged together for speaker similarity, from (turn, role, speech seconds) in
+    story order. A turn with MIN_SIM_S of speech is judged alone; a role's shorter turns are pooled
+    in order until they reach it; a short remainder joins that role's last group. A role whose speech
+    never reaches MIN_SIM_S is returned as unmeasured {role: seconds}. Pure."""
+    groups, open_, by_role = [], {}, {}
+    for ti, role, secs in turns:
+        if secs >= MIN_SIM_S:
+            groups.append([ti])
+            by_role[role] = groups[-1]
+            continue
+        g = open_.setdefault(role, [[], 0.0])
+        g[0].append(ti)
+        g[1] += secs
+        if g[1] >= MIN_SIM_S:
+            groups.append(g[0])
+            by_role[role] = groups[-1]
+            del open_[role]
+    unmeasured = {}
+    for role, (tis, secs) in open_.items():
+        if role in by_role:
+            by_role[role].extend(tis)
+        else:
+            unmeasured[role] = round(secs, 1)
+    return [sorted(g) for g in groups], unmeasured
+
+
+def speech_seconds(x16) -> float:
+    from resemblyzer import preprocess_wav
+    return len(preprocess_wav(x16, source_sr=16000)) / 16000
 
 
 def similarity(wav_a: Path, x_b) -> float:
@@ -127,7 +165,9 @@ def similarity(wav_a: Path, x_b) -> float:
     return round(float(np.dot(a, b)), 3)
 
 
-def make_story(story: dict, work: Path) -> dict:
+def make_story(story: dict, work: Path, deadline: float | None = None) -> dict | None:
+    """The story's manifest row, or None when the time box (`deadline`, epoch seconds) ran out first:
+    every rendered sentence and check stays in `work` and the next run carries on."""
     import numpy as np
     import qa
     t0 = time.monotonic()
@@ -135,9 +175,11 @@ def make_story(story: dict, work: Path) -> dict:
     (work / "engine").write_text("clone")
     ref = refs()
     steps = plan(story)
-    seed = {}
     problems: list[str] = []
     sims: dict = {}
+    unmeasured: dict = {}
+    seeds = work / "seeds.json"   # a re-render gets a new seed, across runs too (a story can span runs)
+    seed = json.loads(seeds.read_text()) if seeds.exists() else {}
     for attempt in range(MAX_TRIES):
         items = []
         for ti, st in enumerate(steps):
@@ -145,35 +187,44 @@ def make_story(story: dict, work: Path) -> dict:
                 out = work / f"t{ti:03d}-s{si:03d}.wav"
                 items.append({"ref": str(ref[st["role"]]), "text": T.speech_text(s, "en", {}), "out": str(out),
                               "seed": 7 + seed.get(out.name, 0)})
-        render(items)
+        if not render(items, deadline):
+            return None
         bad = []
-        for ti, st in enumerate(steps):
-            if "sentences" not in st:
-                continue
-            files = [work / f"t{ti:03d}-s{si:03d}.wav" for si in range(len(st["sentences"]))]
-            for f, s in zip(files, st["sentences"]):
+
+        def again(files):
+            for f in files:
+                f.unlink(missing_ok=True)
+                f.with_suffix(".ok").unlink(missing_ok=True)
+                seed[f.name] = seed.get(f.name, 0) + 1
+        turn_files = {ti: [work / f"t{ti:03d}-s{si:03d}.wav" for si in range(len(st["sentences"]))]
+                      for ti, st in enumerate(steps) if "sentences" in st}
+        for ti, files in turn_files.items():
+            for f, s in zip(files, steps[ti]["sentences"]):
                 ok = f.with_suffix(".ok")
                 if ok.exists():
                     continue
                 heard = qa.transcribe(f, "en", "base")
                 if not sentence_ok(s, heard) and not sentence_ok(s, qa.transcribe(f, "en", "small")):
                     bad.append(f"t{ti}: \"{s[:40]}\" misheard")
-                    f.unlink()
-                    seed[f.name] = seed.get(f.name, 0) + 1
+                    again([f])
                 else:
                     ok.write_text("ok")
-            if all(f.exists() for f in files) and not (work / f"t{ti:03d}.sim").exists():
-                x = np.concatenate([qa.decode(f, 16000) for f in files])
-                sim = similarity(ref[st["role"]], x) if len(x) > 16000 * 1.5 else None
-                if sim is not None and not turn_ok(st["role"], sim):
-                    bad.append(f"t{ti} {st['role']} similarity {sim} < {CLONE['floor'][st['role']]}")
-                    for f in files:
-                        f.unlink()
-                        f.with_suffix(".ok").unlink(missing_ok=True)
-                        seed[f.name] = seed.get(f.name, 0) + 1
-                else:
-                    (work / f"t{ti:03d}.sim").write_text(json.dumps(sim))
-                    sims.setdefault(st["role"], []).append(sim)
+        # Speaker similarity on at least MIN_SIM_S of speech (sim_groups): a role's short turns are
+        # judged together, never a 2-second line on its own.
+        ready = {ti: np.concatenate([qa.decode(f, 16000) for f in files])
+                 for ti, files in turn_files.items() if all(f.exists() for f in files)}
+        groups, unmeasured = sim_groups([(ti, steps[ti]["role"], speech_seconds(x)) for ti, x in ready.items()])
+        for g in groups:
+            role = steps[g[0]]["role"]
+            cache = work / ("g" + "-".join(f"{t:03d}" for t in g) + ".sim")
+            sim = json.loads(cache.read_text()) if cache.exists() else similarity(ref[role], np.concatenate([ready[t] for t in g]))
+            if not turn_ok(role, sim):
+                bad.append(f"t{'+t'.join(map(str, g))} {role} similarity {sim} < {CLONE['floor'][role]}")
+                again([f for t in g for f in turn_files[t]])
+            else:
+                cache.write_text(json.dumps(sim))
+                sims.setdefault(role, []).append(sim)
+        seeds.write_text(json.dumps(seed))
         problems = bad
         if not bad:
             break
@@ -204,7 +255,7 @@ def make_story(story: dict, work: Path) -> dict:
     wav.unlink()
     checks = {k: res[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks.update(problems=res["problems"], pauses_s=[p for p in parts if isinstance(p, float)], tempo=factor,
-                  similarity={r: min(v for v in vs if v is not None) for r, vs in sims.items() if any(v is not None for v in vs)})
+                  similarity={r: min(vs) for r, vs in sims.items()}, similarity_unmeasured_s=unmeasured)
     row.update({"seconds": res["seconds"], "checks": checks, "work_s": round(time.monotonic() - t0, 1),
                 "status": "passed" if res["pass"] else "FAILED"})
     if res["pass"]:
@@ -217,7 +268,9 @@ def make_story(story: dict, work: Path) -> dict:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--limit", type=int, default=1, help="stories this run (run.sh: 1, so the Mac alternates)")
+    ap.add_argument("--limit", type=int, default=0, help="at most this many stories this run")
+    ap.add_argument("--max-minutes", type=float, default=0, help="the lane's time box (run.sh: 45); a story the box "
+                    "cuts off keeps its rendered sentences and carries on next run")
     ap.add_argument("--only", help="story ids starting with this")
     ap.add_argument("--commit", action="store_true")
     ap.add_argument("--keep", help="also copy each shelved file here")
@@ -242,9 +295,16 @@ def main(argv=None) -> int:
     try:
         if queue:
             fill.drive_reachable(H.SHELF)
-        for s in queue[: a.limit]:
+        deadline = time.time() + a.max_minutes * 60 if a.max_minutes else None
+        for s in queue:
+            if (a.limit and made + failed >= a.limit) or (deadline and time.time() >= deadline):
+                break
             work = fill.HOME / "hh-work" / s["id"]
-            row = make_story(s, work)
+            row = make_story(s, work, deadline)
+            if row is None:
+                print(f"note: the {a.max_minutes:g}-minute time box ended inside {s['id']}; its rendered sentences "
+                      "are kept and the next run carries on", flush=True)
+                break
             if row["status"] == "passed":
                 local = Path(row.pop("_local"))
                 if a.keep:
