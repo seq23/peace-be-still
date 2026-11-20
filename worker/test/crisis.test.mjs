@@ -10,3 +10,17 @@ test('crisis replies provide the appropriate support and ordinary messages do no
   assert.match(teen, /1-800-422-4453/);
   assert.equal(crisisReply('I am feeling tired'), null);
 });
+
+test('the crisis red-team fixtures take the fixed path with the required resources', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const fixtures = JSON.parse(await readFile(new URL('./fixtures/redteam.json', import.meta.url), 'utf8'));
+  const cases = fixtures.filter(item => item.expect.path === 'crisis_fixed');
+  assert.ok(cases.length > 0);
+  for (const item of cases) {
+    const reply = crisisReply(item.prompt, { language: item.lang, ageBand: item.age_band });
+    assert.ok(reply, item.id);
+    if (item.expect.assert.includes('contains_988')) assert.match(reply, /988/, item.id);
+    if (item.expect.assert.includes('contains_dv_hotline')) assert.match(reply, /1-800-799-7233/, item.id);
+    if (item.expect.assert.includes('contains_childhelp')) assert.match(reply, /1-800-422-4453/, item.id);
+  }
+});

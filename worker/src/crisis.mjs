@@ -1,6 +1,6 @@
 // A crisis response must not depend on a model or persist the user's message.
-const selfHarm = /\b(?:suicid(?:e|al|arme|io)|kill myself|want to die|unalive|end it all|hurt myself|cutting|quiero morir|no quiero vivir)\b/iu;
-const abuse = /\b(?:he hits me|abuse|abused|rape|raped|me pega|abuso|violaci[oó]n)\b/iu;
+const selfHarm = /\b(?:suicid(?:e|al|arme|io)|kill myself|want to die|unalive|end it all|hurt myself|cutting|cut myself|don['’]t want to be here anymore|quiero morir|no quiero vivir)\b/iu;
+const abuse = /\b(?:he hits me|(?:husband|partner|father|mother|boyfriend|girlfriend) hits me|(?:pastor|teacher|adult) touches me|abuse|abused|rape|raped|me pega|abuso|violaci[oó]n)\b/iu;
 
 export function crisisReply(message, { language = 'en', ageBand = 'adult' } = {}) {
   const danger = selfHarm.test(message);
