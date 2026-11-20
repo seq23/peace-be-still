@@ -64,7 +64,7 @@ export default function JourneysScreen() {
             <Body size={14}>{t('journeys.scripture.detail')}</Body>
           </View>
           <Switch accessibilityRole="switch" accessibilityLabel={t('journeys.scripture.title')} value={scripture} onValueChange={setScripture}
-            trackColor={{ true: c.accent, false: c.line }} thumbColor={c.card} style={{ minWidth: 51, minHeight: 44 }} />
+            trackColor={{ true: c.accent, false: c.line }} thumbColor="#FFFFFF" style={{ minWidth: 51, minHeight: 44 }} />
         </Card>
       ) : null}
     </Screen>

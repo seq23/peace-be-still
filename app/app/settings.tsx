@@ -43,7 +43,7 @@ export default function SettingsScreen() {
             <Body size={14}>{t('journeys.scripture.detail')}</Body>
           </View>
           <Switch accessibilityRole="switch" accessibilityLabel={t('journeys.scripture.title')} value={!!settings.scripture}
-            onValueChange={on => save({ ...settings, scripture: on || undefined })} trackColor={{ true: c.accent, false: c.line }} thumbColor={c.card} />
+            onValueChange={on => save({ ...settings, scripture: on || undefined })} trackColor={{ true: c.accent, false: c.line }} thumbColor="#FFFFFF" />
         </Card>
       ) : null}
       {voices.length ? (

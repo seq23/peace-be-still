@@ -25,7 +25,7 @@ export default function TabsLayout() {
       tabBarActiveTintColor: c.accent,
       tabBarInactiveTintColor: c.muted,
       // Room for the icon and a 12 px label with Figtree's tall descenders, above the home indicator.
-      tabBarStyle: { backgroundColor: c.card, borderTopColor: c.line, height: 58 + insets.bottom, paddingTop: 6, paddingBottom: 6 + insets.bottom },
+      tabBarStyle: { backgroundColor: c.card, borderTopColor: c.line, height: 66 + insets.bottom, paddingTop: 6, paddingBottom: 10 + insets.bottom },
       tabBarLabelStyle: { fontFamily: fonts.body, fontSize: 12, lineHeight: 16 },
       sceneStyle: { backgroundColor: c.bg },
     }}>
