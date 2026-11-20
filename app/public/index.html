@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="%LANG_ISO_CODE%">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#F4F0E6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0E1A22" media="(prefers-color-scheme: dark)" />
+    <title>%WEB_TITLE%</title>
+    <!-- react-native-web's root reset, plus the brand's linen (night in dark mode) so nothing flashes white before the app draws. -->
+    <style id="expo-reset">
+      html, body { height: 100%; }
+      body { overflow: hidden; background: #F4F0E6; }
+      @media (prefers-color-scheme: dark) { body { background: #0E1A22; } }
+      #root { display: flex; height: 100%; flex: 1; }
+    </style>
+  </head>
+  <body>
+    <noscript>Peace Be Still needs JavaScript to run.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
