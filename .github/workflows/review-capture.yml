@@ -45,7 +45,7 @@ jobs:
       - name: Install Playwright Chromium
         run: |
           npm i --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/pw" playwright@1.62.1
-          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --with-deps chromium
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install chromium  # the runner image already has Chrome's system libraries; --with-deps spent 6+ min in apt
       - name: Capture
         env:
           PW_DIR: ${{ runner.temp }}/pw
