@@ -172,9 +172,9 @@ export async function check(target) {
       const page = await context.newPage();
       const cdp = await context.newCDPSession(page);
       await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: 400, downloadThroughput: 50 * 1024, uploadThroughput: 50 * 1024 });
-      await page.goto(base + '/', { waitUntil: 'domcontentloaded', timeout: 60000 });
-      await page.waitForTimeout(1500);
-      const mark = await page.evaluate(() => { const svg = document.querySelector('#root .first-paint svg.mark.light'); const r = svg?.getBoundingClientRect(); return r ? r.width > 0 && r.height > 0 : false; });
+      // The HTML arrives long before the 380 KB bundle; the mark must be on screen while the bundle loads.
+      await page.goto(base + '/', { waitUntil: 'commit', timeout: 60000 });
+      const mark = await page.waitForSelector('#root .first-paint svg.mark.light', { state: 'visible', timeout: 10000 }).then(() => true, () => false);
       expect(mark, 'the first paint on a slow phone has no mark');
       const preloads = await page.evaluate(() => document.querySelectorAll('link[rel=preload][as=font]').length);
       expect(preloads >= 4, `the page preloads ${preloads} fonts (want 4)`);
