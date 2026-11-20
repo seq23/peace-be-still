@@ -56,6 +56,7 @@ const THREE_HOURS = 3 * 3600_000;
 // The regeneration is told in words what was wrong, never a line to copy.
 const OBJECTIONS: Record<string, string> = {
   stock_phrase: 'It used a stock phrase; say it in fresh words of your own.',
+  echo_opening: 'It opened by restating her question; open with something true and specific instead.',
   ends_with_question: 'It ended on a question; end on a short prayer or on one of the verses.',
   unasked_ai: 'It said it was an AI when she did not ask; do not mention it.',
   split_unasked: 'It said churches teach differently on something Christians do not split on; just answer.',
@@ -296,6 +297,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     }
     if (problems.some(p => RED_LINES.has(p) || p.startsWith('judge:'))) tally(metrics, 'red_line');
     for (const p of problems) tally(metrics, `gate:${p}`);
+    logCode('CHAT_GATE', { attempt, problems: problems.join(',') });
     objection = problems.map(objectionText).join(' ');
     if (attempt === 0) tally(metrics, 'regenerated');
   }
