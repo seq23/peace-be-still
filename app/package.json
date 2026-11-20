@@ -6,7 +6,7 @@
   "scripts": {
     "start": "expo start",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test test/*.unit.ts",
+    "test": "tsx --test test/*.unit.ts && node test/support/render-build.mjs",
     "preview:web": "expo export --platform web"
   },
   "dependencies": {
@@ -45,6 +45,9 @@
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@types/react": "~19.3.0",
+    "@types/react-test-renderer": "^19.3.1",
+    "esbuild": "^0.28.2",
+    "react-test-renderer": "^19.3.0",
     "tsx": "^4.21.0",
     "typescript": "~6.0.3"
   }
