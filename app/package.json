@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test test/*.unit.ts && node test/support/render-build.mjs",
     "prepreview:web": "npm run -s library",
-    "preview:web": "EXPO_PUBLIC_PBS_PREVIEW=1 expo export --platform web"
+    "preview:web": "expo export --platform web"
   },
   "dependencies": {
     "@expo-google-fonts/figtree": "^0.4.1",
