@@ -79,7 +79,11 @@ async function mount(name: Name, value: object | null = base, params: Record<str
   let tree!: ReactTestRenderer;
   // Like the root layout, a screen is drawn only once the saved settings are read.
   const Ready = () => (useSettings().ready ? <Screen /> : null);
-  await act(async () => { tree = create(<SettingsProvider><Ready /></SettingsProvider>); });
+  await act(async () => {
+    tree = create(<SettingsProvider><Ready /></SettingsProvider>, {
+      createNodeMock: element => element.type === 'ScrollView' ? { scrollTo: (options: unknown) => calls.push(['scrollTo', options]) } : null,
+    });
+  });
   return tree;
 }
 const scripture = (node: ReactTestInstance): boolean => node.props.testID === 'scripture-text' || (!!node.parent && scripture(node.parent));
@@ -452,6 +456,28 @@ test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does
   const mindset = { ...base, door: 'mindset', journey: 'imagination-nights' };
   for (const name of ['journeys', 'today', 'nights', 'more', 'settings'] as const) assert.equal(dawnIn(await mount(name, mindset)), 0, name);
   assert.ok(dawnIn(await mount('journeys', { ...base, journey: 'psalm-nights' })) > 0);
+});
+
+test('a Bible verse link scrolls the expanded verse into view once its row is laid out', async () => {
+  for (const journey of ['psalm-nights', 'mi-refugio'] as const) {
+    calls = [];
+    const tree = await mount('biblePage', { ...base, journey }, { page: 'chapter', book: 'PSA', chapter: '119', verse: '105' });
+    const verses = host(tree, 'Text').filter(node => node.props.testID === 'scripture-text');
+    const target = verses.find(node => node.props.accessibilityState.expanded);
+    assert.equal(target, verses[104]);
+    assert.ok(target);
+    const row = target.parent!;
+    const measured = verses.filter(node => node.parent?.props.onLayout);
+    assert.equal(measured.length, 1);
+    assert.equal(measured[0], target);
+    assert.deepEqual(calls, []);
+    const event = { nativeEvent: { layout: { x: 20, y: 6100, width: 350, height: 100 } } };
+    await act(async () => row.props.onLayout(event));
+    assert.deepEqual(calls, [['scrollTo', { y: 6088, animated: false }]]);
+    // A highlight or a font change can lay out the row again after the reader has moved on.
+    await act(async () => row.props.onLayout(event));
+    assert.equal(calls.length, 1);
+  }
 });
 
 for (const locale of ['en', 'es'] as const) {

@@ -14,7 +14,8 @@ export function BibleRoute({ page, book, chapter, verse, nested }: { page: Bible
   const code = bookCode(typeof book === 'string' ? book : '') ?? 'JOH';
   const positive = (n: string | undefined, max: number) => typeof n === 'string' && /^\d+$/.test(n) && Number(n) > 0 && Number(n) <= max ? Number(n) : undefined;
   const location: BibleLocation = { book: code, chapter: positive(chapter, 150) ?? (book ? 1 : 3), verse: positive(verse, 176) };
-  return <Reader page={page} location={location} open={bible} back={nested ? () => router.canGoBack() ? router.back() : router.replace('/bible') : undefined} go={(next, target = location) => {
+  const chapterKey = page === 'chapter' ? `${code}:${location.chapter}:${location.verse ?? ''}` : undefined;
+  return <Reader key={chapterKey} page={page} location={location} open={bible} back={nested ? () => router.canGoBack() ? router.back() : router.replace('/bible') : undefined} go={(next, target = location) => {
     router.push({ pathname: '/bible/[page]', params: { page: next, book: target.book, chapter: target.chapter, verse: target.verse } });
   }} />;
 }

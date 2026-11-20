@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Text, TextInput, View, type LayoutChangeEvent, type ScrollView } from 'react-native';
 import { BOOKS, displayRuns, formatReference, parseReference, startsParagraph, type Bible, type Translation, type Verse } from '../../bible/core';
 import { canUse } from '../../gates';
 import { useSettings, useT } from '../../settings';
@@ -48,6 +48,15 @@ export function Reader({ page, location = home, open, go, back }: {
   const request = `${translation}:${page}:${book}:${chapter}:${submitted}:${attempt}`;
   const [result, setResult] = useState<{ request: string; rows: Verse[]; next?: BibleLocation; previous?: BibleLocation; error?: true }>();
   const current = result?.request === request ? result : undefined;
+  const scroll = useRef<React.ComponentRef<typeof ScrollView>>(null);
+  const scrolledChapter = useRef<typeof current>(undefined);
+
+  function scrollToVerse({ nativeEvent: { layout } }: LayoutChangeEvent) {
+    if (!current || scrolledChapter.current === current || !scroll.current) return;
+    scrolledChapter.current = current;
+    // Verse rows are direct children of the scroll content, so y includes the reader heading.
+    scroll.current.scrollTo({ y: Math.max(0, layout.y - 12), animated: false });
+  }
 
   useEffect(() => {
     select(undefined);
@@ -91,7 +100,7 @@ export function Reader({ page, location = home, open, go, back }: {
   if (!canUse('bibleText', user) || (page === 'saved' && !savedAllowed)) return null;
 
   return (
-    <Screen edges={back ? ['top', 'bottom'] : ['top']}>
+    <Screen edges={back ? ['top', 'bottom'] : ['top']} scrollRef={scroll}>
       {back && <BackLink onPress={back}>{t('common.back')}</BackLink>}
       <Label>{translation === 'RV1909' ? t('reader.rv') : t('reader.kjv')}</Label>
       <Title>{page === 'chapter' ? formatReference(location, t.locale) : t(`reader.${page}`)}</Title>
@@ -115,7 +124,7 @@ export function Reader({ page, location = home, open, go, back }: {
         const key = keyOf(translation, verse);
         const mark = data.value[key];
         const expanded = page === 'chapter' && (selected ?? target) === verse.verse;
-        return <View key={key} style={{ paddingTop: startsParagraph(verse.text) ? 8 : 0, backgroundColor: mark?.highlight ? c.card : undefined, borderLeftWidth: mark?.highlight ? 3 : 0, borderColor: c.accent, paddingLeft: mark?.highlight ? 8 : 0 }}>
+        return <View key={key} onLayout={page === 'chapter' && verse.verse === target ? scrollToVerse : undefined} style={{ paddingTop: startsParagraph(verse.text) ? 8 : 0, backgroundColor: mark?.highlight ? c.card : undefined, borderLeftWidth: mark?.highlight ? 3 : 0, borderColor: c.accent, paddingLeft: mark?.highlight ? 8 : 0 }}>
           {page !== 'chapter' && <TextLink onPress={() => go('chapter', verse)}>{formatReference(verse, t.locale)}</TextLink>}
           <Text testID="scripture-text" onPress={page === 'chapter' ? () => select(expanded ? 0 : verse.verse) : undefined} accessibilityRole={page === 'chapter' ? 'button' : undefined} accessibilityState={page === 'chapter' ? { expanded, selected: expanded } : undefined} aria-expanded={page === 'chapter' ? expanded : undefined} style={{ fontFamily: fonts.serif, fontSize: 18, lineHeight: 30, color: c.ink }}>
             {page === 'chapter' && <Text style={{ fontFamily: fonts.mono, fontSize: 12, color: c.accent }}>{verse.verse}{'  '}</Text>}
