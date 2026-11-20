@@ -17,6 +17,9 @@ const paid = new Set([FEATURES.PAST_STORIES, FEATURES.CHAT_MEMORY, FEATURES.PERS
 export function canUse(feature, user) {
   if (!user) return false;
   if (free.has(feature)) return true;
+  if (feature === FEATURES.CHAT_MEMORY) {
+    return user.paid === true && (user.ageBand === 'teen' || user.ageBand === 'adult');
+  }
   if (feature === FEATURES.CHAT) {
     if (user.ageBand !== 'teen' && user.ageBand !== 'adult') return false;
     const messages = user.messagesToday;

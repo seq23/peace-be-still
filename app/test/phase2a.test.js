@@ -31,8 +31,8 @@ test('lookup, chapter and search return stored verses and reject unknown referen
 });
 test('every free and paid feature has the specified access', () => {
   const free = ['BIBLE_TEXT','BIBLE_AUDIO','TODAY_STORY','DAILY_DECLARATION','BASIC_PLANS','SAVED_VERSES','JOURNAL','STREAK','SHARE_CARDS'];
-  const premium = ['PAST_STORIES','CHAT_MEMORY','PERSONAL_SESSION','DECLARATION_TOPICS','LONG_PLANS','OFFLINE','RECORD_OWN_VOICE'];
-  assert.deepEqual(new Set([...free, ...premium, 'CHAT', 'SLEEP_SESSION']), new Set(Object.keys(FEATURES)));
+  const premium = ['PAST_STORIES','PERSONAL_SESSION','DECLARATION_TOPICS','LONG_PLANS','OFFLINE','RECORD_OWN_VOICE'];
+  assert.deepEqual(new Set([...free, ...premium, 'CHAT', 'CHAT_MEMORY', 'SLEEP_SESSION']), new Set(Object.keys(FEATURES)));
   for (const name of free) for (const paid of [false, true]) assert.equal(canUse(FEATURES[name], { paid }), true, name);
   for (const name of premium) for (const paid of [false, true]) assert.equal(canUse(FEATURES[name], { paid }), paid, name);
   assert.equal(canUse('unknown', { paid: true }), false);
@@ -46,6 +46,10 @@ test('chat and sleep enforce age and usage limits', () => {
   assert.equal(canUse(FEATURES.CHAT, { ...u, paid: true, messagesToday: 99 }), true);
   assert.equal(canUse(FEATURES.CHAT, { ...u, paid: true, messagesToday: 100 }), false);
   assert.equal(canUse(FEATURES.CHAT, { ...u, ageBand: 'child', paid: true }), false);
+  assert.equal(canUse(FEATURES.CHAT, { ...u, ageBand: 'teen' }), true);
+  assert.equal(canUse(FEATURES.CHAT_MEMORY, { ...u, ageBand: 'child', paid: true }), false);
+  assert.equal(canUse(FEATURES.CHAT_MEMORY, { ...u, ageBand: 'teen', paid: true }), true);
+  assert.equal(canUse(FEATURES.CHAT_MEMORY, { ...u, paid: false }), false);
   assert.equal(canUse(FEATURES.CHAT, { paid: true, ageBand: 'adult' }), false);
   assert.equal(canUse(FEATURES.SLEEP_SESSION, { hasUsedFirstSleep: false }), true);
   assert.equal(canUse(FEATURES.SLEEP_SESSION, { hasUsedFirstSleep: true, sleepSessionsThisWeek: 0 }), true);
