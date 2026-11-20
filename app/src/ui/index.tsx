@@ -42,13 +42,36 @@ export function Body({ children, muted = true, size = 16, style }: { children: R
   return <Text style={[{ fontFamily: fonts.body, fontSize: size, lineHeight: Math.round(size * 1.45), color: muted ? c.muted : c.ink }, style]}>{children}</Text>;
 }
 
-export function Card({ children, onPress, label, selected, role, style }: { children: React.ReactNode; onPress?: () => void; label?: string; selected?: boolean; role?: 'button' | 'radio' | 'link'; style?: StyleProp<ViewStyle> }) {
+export function Card({ children, onPress, label, selected, expanded, role, style }: { children: React.ReactNode; onPress?: () => void; label?: string; selected?: boolean; expanded?: boolean; role?: 'button' | 'radio' | 'link'; style?: StyleProp<ViewStyle> }) {
   const c = usePalette();
   const look = [styles.card, { backgroundColor: c.card, borderColor: selected ? c.accent : c.line, borderWidth: selected ? 2 : 1 }, style];
   if (!onPress) return <View style={look}>{children}</View>;
   return (
-    <Pressable accessibilityRole={role ?? 'button'} accessibilityLabel={label} accessibilityState={role === 'radio' ? { checked: !!selected } : undefined} onPress={onPress} style={({ pressed }) => [look, pressed && { opacity: 0.85 }]}>
+    // role + aria-checked are the props both React Native and react-native-web pass to the screen reader
+    // (react-native-web drops accessibilityState, so a selected radio was never announced).
+    <Pressable role={role ?? 'button'} aria-label={label} aria-checked={role === 'radio' ? !!selected : undefined} aria-expanded={expanded} onPress={onPress} style={({ pressed }) => [look, pressed && { opacity: 0.85 }]}>
       {children}
+    </Pressable>
+  );
+}
+
+/**
+ * An on/off row: the whole row is the one switch (role, state and label on it, 44 pt tall at least), and the
+ * drawn track inside it is decoration. The off track is muted ink, so it stands out from the card (3:1 and up).
+ */
+export function SwitchRow({ title, detail, value, onChange }: { title: string; detail?: string; value: boolean; onChange: (value: boolean) => void }) {
+  const c = usePalette();
+  return (
+    <Pressable role="switch" aria-checked={value} aria-label={title} accessibilityHint={detail} onPress={() => onChange(!value)}
+      style={({ pressed }) => [styles.card, styles.row, { gap: 12, minHeight: 44, backgroundColor: c.card, borderColor: c.line, borderWidth: 1 }, pressed && { opacity: 0.85 }]}>
+      <View style={styles.grow}>
+        <Text style={{ fontFamily: fonts.strong, fontSize: 16, color: c.ink }}>{title}</Text>
+        {detail ? <Body size={14}>{detail}</Body> : null}
+      </View>
+      <View testID="switch-track" aria-hidden importantForAccessibility="no-hide-descendants"
+        style={{ width: 51, height: 31, borderRadius: 16, padding: 2, justifyContent: 'center', alignItems: value ? 'flex-end' : 'flex-start', backgroundColor: value ? c.accent : c.muted }}>
+        <View style={{ width: 27, height: 27, borderRadius: 14, backgroundColor: value ? c.on : c.card }} />
+      </View>
     </Pressable>
   );
 }

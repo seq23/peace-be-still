@@ -2,8 +2,6 @@
   "brand.name": "Peace Be Still",
   "common.back": "Volver",
   "common.soon": "Pronto",
-  "greeting.morning": "Buenos días.",
-  "greeting.afternoon": "Buenas tardes.",
   "greeting.evening": "Buenas noches.",
   "door.title": "¿Qué necesitas esta noche?",
   "door.intro": "Elige cómo entrar. No necesitas una cuenta.",
@@ -33,13 +31,13 @@
   "journeys.scripture.title": "Incluir las Escrituras",
   "journeys.scripture.detail": "Añade versículos de la Biblia a tus sesiones",
   "journey.hushHarbor.name": "Hush Harbor",
-  "journey.hushHarbor.subtitle": "Chat bíblico e historias afroamericanas",
+  "journey.hushHarbor.subtitle": "Chat e historias bíblicas en voz afroamericana",
   "journey.hushHarbor.purpose": "Para hablar de lo que llevas en el corazón, como en familia",
   "journey.miRefugio.name": "Mi Refugio",
   "journey.miRefugio.subtitle": "Biblia y Chat en Español",
   "journey.miRefugio.purpose": "Escrituras y conversación en español",
-  "journey.psalmNights.name": "Psalm Nights",
-  "journey.psalmNights.subtitle": "Escrituras susurradas para dormir",
+  "journey.psalmNights.name": "Salmos para dormir",
+  "journey.psalmNights.subtitle": "Escrituras susurradas",
   "journey.psalmNights.purpose": "Para cuando no puedes dormir. La primera noche gratis, después una por semana",
   "journey.morningWord.name": "Morning Word",
   "journey.morningWord.subtitle": "Declaraciones diarias",
@@ -85,12 +83,12 @@
   "voice.plain": "Moderna y sencilla",
   "voice.church": "Iglesia afroamericana",
   "voice.teen": "Adolescente",
-  "voice.spanish": "Español",
+  "voice.spanish": "Español (Mi Refugio)",
   "language.en": "English",
   "language.es": "Español",
   "error.save": "No se pudo guardar tu elección en este dispositivo. Inténtalo de nuevo.",
   "error.read": "No se pudieron leer tus ajustes guardados. Cierra y vuelve a abrir la aplicación para intentarlo de nuevo.",
-  "notFound.title": "Esta página no está aquí.",
+  "notFound.title": "No encontramos esta página.",
   "notFound.link": "Ir a Hoy",
   "listen.bibleByBook": "Biblia por libro",
   "listen.emptyShelf": "El audio aún no está disponible aquí.",
@@ -114,5 +112,32 @@
   "listen.paidDownload": "Las descargas están incluidas en la suscripción.",
   "listen.downloadFailed": "La descarga no terminó. Inténtalo de nuevo.",
   "listen.brighten": "Iluminar la pantalla",
-  "listen.timerFade": "El volumen baja poco a poco antes de que se detenga el audio."
+  "listen.timerFade": "El volumen baja poco a poco antes de que se detenga el audio.",
+  "listen.notReady": "Aún no está disponible",
+  "listen.nights": {
+    "one": "%{count} noche",
+    "other": "%{count} noches"
+  },
+  "listen.whisperedNights": {
+    "one": "%{count} noche · susurrada",
+    "other": "%{count} noches · susurradas"
+  },
+  "listen.books": {
+    "one": "%{count} libro",
+    "other": "%{count} libros"
+  },
+  "listen.chapters": {
+    "one": "%{count} capítulo",
+    "other": "%{count} capítulos"
+  },
+  "listen.stories": {
+    "one": "%{count} historia",
+    "other": "%{count} historias"
+  },
+  "listen.progress": "Progreso del audio",
+  "listen.back15": "Retroceder 15 segundos",
+  "listen.forward15": "Avanzar 15 segundos",
+  "listen.timerSummary": "%{setting} · el sonido se desvanece",
+  "listen.psalmAllowance": "Tu primera noche es gratis. Después, una Noche de Salmos por semana.",
+  "listen.nightAllowance": "Tu primera noche es gratis. Después, una Noche de Imaginación por semana."
 }

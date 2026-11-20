@@ -2,8 +2,6 @@
   "brand.name": "Peace Be Still",
   "common.back": "Back",
   "common.soon": "Soon",
-  "greeting.morning": "Good morning.",
-  "greeting.afternoon": "Good afternoon.",
   "greeting.evening": "Good evening.",
   "door.title": "What do you need tonight?",
   "door.intro": "Pick the way in that fits you. No account needed.",
@@ -85,7 +83,7 @@
   "voice.plain": "Plain modern",
   "voice.church": "Black church",
   "voice.teen": "Teen",
-  "voice.spanish": "Spanish",
+  "voice.spanish": "Español (Mi Refugio)",
   "language.en": "English",
   "language.es": "Español",
   "error.save": "Your choice could not be saved on this device. Please try again.",
@@ -114,5 +112,32 @@
   "listen.paidDownload": "Downloads are included with a subscription.",
   "listen.downloadFailed": "The download did not finish. Try again.",
   "listen.brighten": "Brighten screen",
-  "listen.timerFade": "The sound fades out before playback stops."
+  "listen.timerFade": "The sound fades out before playback stops.",
+  "listen.notReady": "Not ready yet",
+  "listen.nights": {
+    "one": "%{count} night",
+    "other": "%{count} nights"
+  },
+  "listen.whisperedNights": {
+    "one": "%{count} night · whispered",
+    "other": "%{count} nights · whispered"
+  },
+  "listen.books": {
+    "one": "%{count} book",
+    "other": "%{count} books"
+  },
+  "listen.chapters": {
+    "one": "%{count} chapter",
+    "other": "%{count} chapters"
+  },
+  "listen.stories": {
+    "one": "%{count} story",
+    "other": "%{count} stories"
+  },
+  "listen.progress": "Playback progress",
+  "listen.back15": "Back 15 seconds",
+  "listen.forward15": "Forward 15 seconds",
+  "listen.timerSummary": "%{setting} · fades out",
+  "listen.psalmAllowance": "Your first night is free. After that, one Psalm Night a week.",
+  "listen.nightAllowance": "Your first night is free. After that, one Imagination Night a week."
 }

@@ -1,0 +1,64 @@
+name: Review capture
+# Screenshots, console errors and accessibility snapshots of a phone preview, for a reviewer to judge
+# without running a browser on the Mac (her call 20 Nov 2026: "run the PBS reviews on github too").
+# Run: gh workflow run review-capture.yml -f preview_url=https://<id>.peace-be-still-app-preview.pages.dev \
+#        -f routes=/,/door,/today -f label=pr51
+# Then: gh run download <run id> -n review-<label>
+on:
+  workflow_dispatch:
+    inputs:
+      preview_url:
+        description: Preview to capture (https, e.g. a Cloudflare Pages preview)
+        required: true
+        type: string
+      routes:
+        description: Comma list of routes
+        required: true
+        default: /,/door,/age,/journeys,/today,/chat,/bible,/nights,/more,/settings
+        type: string
+      label:
+        description: Names the artifact (review-<label>)
+        required: true
+        type: string
+      onboarded_storage:
+        description: Optional JSON object of localStorage key -> value for the onboarded pass (default an adult in Hush Harbor)
+        required: false
+        default: ''
+        type: string
+  # A change to this workflow or its script proves itself: one real capture of the live site's home page.
+  pull_request:
+    paths: ['.github/workflows/review-capture.yml', 'scripts/review-capture/**']
+permissions:
+  contents: read
+concurrency:
+  group: review-capture-${{ inputs.label || github.head_ref }}
+  cancel-in-progress: false
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install Playwright Chromium
+        run: |
+          npm i --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/pw" playwright@1.62.1
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install chromium  # the runner image already has Chrome's system libraries; --with-deps spent 6+ min in apt
+      - name: Capture
+        env:
+          PW_DIR: ${{ runner.temp }}/pw
+          PREVIEW_URL: ${{ inputs.preview_url || 'https://peacebestillapp.com' }}
+          ROUTES: ${{ inputs.routes || '/,/es/' }}
+          STORAGE: ${{ inputs.onboarded_storage }}
+        run: node scripts/review-capture/capture.mjs "$PREVIEW_URL" "$ROUTES" "$RUNNER_TEMP/review" "$STORAGE"
+      - name: Summary
+        if: always()
+        run: cat "$RUNNER_TEMP/review/summary.md" >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: review-${{ inputs.label || 'self-test' }}
+          path: ${{ runner.temp }}/review
+          if-no-files-found: error

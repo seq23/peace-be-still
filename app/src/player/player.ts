@@ -32,6 +32,7 @@ export type PlayerError = 'audio-not-ready' | 'play-failed' | 'download-incomple
 export type PlayerState = {
   track: Track | null;
   playing: boolean;
+  position: number;
   /** Wall-clock ms when the sleep timer ends, or null. */
   sleepEndsAt: number | null;
   fading: boolean;
@@ -56,7 +57,7 @@ export function createPlayer(options: {
   audio: AudioOutput; store: Store; downloads: Downloads; baseUrl: string | null; lang: Lang;
 }) {
   const { audio, store, downloads, baseUrl, lang } = options;
-  let state: PlayerState = { track: null, playing: false, sleepEndsAt: null, fading: false, response: null, error: null };
+  let state: PlayerState = { track: null, playing: false, position: 0, sleepEndsAt: null, fading: false, response: null, error: null };
   let generation = 0;
   /** The track whose audio is in the output; only its position is ever saved. */
   let loaded: Track | null = null;
@@ -132,16 +133,18 @@ export function createPlayer(options: {
       stopSaving();
       loaded = null;
       void store.removeItem(positionKey(track)).catch(() => undefined);
-      set({ playing: false, response: null });
+      set({ track: null, playing: false, position: 0, response: null });
       return;
     }
+    if (state.track !== loaded) return;
+    const position = Math.floor(audio.currentTime);
     const response = responseAt(loaded, audio.currentTime);
     if (status.playing === state.playing) {
-      if (state.track === loaded && state.response !== response) set({ response });
+      if (state.response !== response || state.position !== position) set({ position, response });
       return;
     }
-    if (status.playing) { startSaving(); set({ playing: true, response }); }
-    else { stopSaving(); void savePosition(); set({ playing: false, response }); }
+    if (status.playing) { startSaving(); set({ playing: true, position, response }); }
+    else { stopSaving(); void savePosition(); set({ playing: false, position, response }); }
   });
 
   return {
@@ -153,7 +156,7 @@ export function createPlayer(options: {
       if (state.playing) { stopSaving(); await savePosition(); set({ playing: false }); }
       const local = canUse(FEATURES.OFFLINE, user) ? downloads.find(track) : null;
       const uri = local ?? (baseUrl ? trackUrl(track, baseUrl) : null);
-      if (!uri) { audio.pause(); loaded = null; set({ track, playing: false, response: null, error: 'audio-not-ready' }); return; }
+      if (!uri) { audio.pause(); loaded = null; set({ track, playing: false, position: 0, response: null, error: 'audio-not-ready' }); return; }
       try {
         const at = await startAt(track);
         if (current !== generation) return;
@@ -167,9 +170,9 @@ export function createPlayer(options: {
         if (current !== generation) return;
         audio.play();
         startSaving();
-        set({ track, playing: true, response: responseAt(track, audio.currentTime), error: null });
+        set({ track, playing: true, position: Math.floor(audio.currentTime), response: responseAt(track, audio.currentTime), error: null });
       } catch {
-        if (current === generation) set({ track, playing: false, response: null, error: 'play-failed' });
+        if (current === generation) set({ track, playing: false, position: 0, response: null, error: 'play-failed' });
       }
     },
 
@@ -180,6 +183,18 @@ export function createPlayer(options: {
       audio.play();
       startSaving();
       set({ playing: true });
+    },
+
+    async skip(seconds: -15 | 15) {
+      const track = loaded;
+      if (!track || track !== state.track || !audio.isLoaded || hasCallAndResponse(track)) return;
+      const current = generation;
+      const target = Math.max(0, Math.min(track.seconds, audio.currentTime + seconds));
+      await audio.seekTo(target);
+      if (current === generation && loaded === track) {
+        set({ position: Math.floor(audio.currentTime) });
+        await savePosition(track);
+      }
     },
 
     async pause() {

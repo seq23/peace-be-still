@@ -23,6 +23,8 @@ const MOCKS = {
     const r = () => globalThis.__pbsRouter;
     exports.useRouter = () => r();
     exports.useIsFocused = () => true;
+    exports.useSegments = () => globalThis.__pbsSegments || [];
+    exports.useGlobalSearchParams = () => globalThis.__pbsParams || {};
     exports.useLocalSearchParams = () => globalThis.__pbsParams || {};
     exports.Redirect = props => React.createElement('Redirect', props);
     const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
@@ -36,7 +38,17 @@ const MOCKS = {
     addCustomerInfoUpdateListener() {}, removeCustomerInfoUpdateListener() {},
   };`,
   'expo-audio': '',
-  'expo-constants': '',
+  'expo-constants': `exports.__esModule = true; exports.default = { expoConfig: { extra: { audioBaseUrl: 'https://audio.test/' } } };`,
+  'bible-store': `const core = require('./src/bible/core');
+    const { DatabaseSync } = require('node:sqlite');
+    exports.parseReference = core.parseReference;
+    exports.bible = async translation => core.createBible({
+      async all(sql, params) {
+        const db = new DatabaseSync('src/bible/data/' + translation.toLowerCase() + '.db', { readOnly: true });
+        try { return db.prepare(sql).all(...params); }
+        finally { db.close(); }
+      },
+    });`,
   'expo-brightness': '',
   'expo-file-system': '',
   'player-hook': `const React = require('react');
@@ -54,6 +66,7 @@ await build({
   entryPoints: ['test/screens.render.tsx'], outfile: join(dir, 'screens.cjs'), bundle: true, platform: 'node', format: 'cjs',
   packages: 'external', external: ['react', 'react-test-renderer', 'i18n-js'], jsx: 'automatic', logLevel: 'warning',
   plugins: [{ name: 'native-mocks', setup(b) {
+    b.onResolve({ filter: /^\.\.\/\.\.\/bible$/ }, () => ({ path: 'bible-store', namespace: 'mock' }));
     b.onResolve({ filter: /\/player\/usePlayer$/ }, () => ({ path: 'player-hook', namespace: 'mock' }));
     b.onResolve({ filter: /^(expo-audio|expo-constants|expo-brightness|expo-file-system|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-font|expo-localization|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
     b.onLoad({ filter: /.*/, namespace: 'mock' }, args => ({

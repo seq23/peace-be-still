@@ -7,16 +7,21 @@
     <meta name="theme-color" content="#F4F0E6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0E1A22" media="(prefers-color-scheme: dark)" />
     <title>%WEB_TITLE%</title>
-    <!-- react-native-web's root reset, plus the brand's linen (night in dark mode) so nothing flashes white before the app draws. -->
+    <!-- react-native-web's root reset, plus the brand's linen (night in dark mode) so nothing flashes white before
+         the app draws, and the mark centred so a slow phone's first paint is the logo, never an empty screen.
+         The app replaces #root's content when it draws. The fonts are preloaded by scripts/preview/host.mjs. -->
     <style id="expo-reset">
       html, body { height: 100%; }
       body { overflow: hidden; background: #F4F0E6; }
       @media (prefers-color-scheme: dark) { body { background: #0E1A22; } }
       #root { display: flex; height: 100%; flex: 1; }
+      .first-paint { flex: 1; display: flex; align-items: center; justify-content: center; }
+      .mark.dark { display: none; }
+      @media (prefers-color-scheme: dark) { .mark.light { display: none; } .mark.dark { display: block; } }
     </style>
   </head>
   <body>
     <noscript>Peace Be Still needs JavaScript to run.</noscript>
-    <div id="root"></div>
+    <div id="root"><div class="first-paint"><svg class="mark light" width="72" height="72" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Peace Be Still"><title>Peace Be Still</title><rect width="64" height="64" rx="15" fill="#F4F0E6" stroke="#DCD5C6" stroke-width="1"></rect><path d="M14 27 q6 -8 12 0 t12 0 t12 0" fill="none" stroke="#0E1A22" stroke-opacity="0.55" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 41 H50" fill="none" stroke="#1D6A64" stroke-width="4.5" stroke-linecap="round"></path></svg><svg class="mark dark" width="72" height="72" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Peace Be Still"><title>Peace Be Still</title><rect width="64" height="64" rx="15" fill="#0E1A22"></rect><path d="M14 27 q6 -8 12 0 t12 0 t12 0" fill="none" stroke="#F4F0E6" stroke-opacity="0.62" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 41 H50" fill="none" stroke="#E0A33E" stroke-width="4.5" stroke-linecap="round"></path></svg></div></div>
   </body>
 </html>

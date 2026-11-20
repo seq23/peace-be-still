@@ -5,12 +5,15 @@ import { useSettings, useT } from '../../src/settings';
 import { tracks } from '../../src/player/usePlayer';
 import { trackTitle, type Track } from '../../src/player/library';
 import { byChapter, groupBible, shelfOf, trackBelongsToDoor } from '../../src/screens/listen/catalog';
-import { Body, Card, Chevron, Label, Screen, Title } from '../../src/ui';
+import { usePublishedAudio } from '../../src/screens/listen/availability';
+import { Body, Card, Chevron, Label, Screen, styles, Title } from '../../src/ui';
 
 export default function Nights() {
   const { settings } = useSettings();
   const t = useT('journey');
   const router = useRouter();
+  const published = usePublishedAudio();
+  const ready = (track: Track) => published?.get(track.file) === track.sha256;
   const visible = tracks.filter(track => track.lang === t.locale && trackBelongsToDoor(track, settings.door));
   const psalms = visible.filter(track => shelfOf(track) === 'psalms').sort(byChapter);
   const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), t.locale);
@@ -20,7 +23,13 @@ export default function Nights() {
   function row(track: Track) {
     return (
       <Card key={track.file} onPress={() => router.push({ pathname: '/listen/[track]', params: { track: track.sha256 } })}>
-        <Body muted={false} style={{ flex: 1 }}>{trackTitle(track, t.locale)}</Body><Chevron />
+        <View style={styles.row}>
+          <View style={styles.grow}>
+            <Body muted={false}>{trackTitle(track, t.locale)}</Body>
+            {!ready(track) && <Body size={14}>{t('listen.notReady')}</Body>}
+          </View>
+          <Chevron />
+        </View>
       </Card>
     );
   }
@@ -29,33 +38,41 @@ export default function Nights() {
     <Screen edges={['top']}>
       <Title>{t('tabs.nights')}</Title>
       {settings.door === 'mindset' ?
-        <Shelf title={t('journey.imaginationNights.name')}>{imagination.map(row)}</Shelf> : <>
-          <Shelf title={t('journey.psalmNights.name')}>{psalms.map(row)}</Shelf>
-          <Shelf title={t('listen.bibleByBook')}>{bible.map(book => (
-            <Disclosure key={book.code} title={book.title}>{book.chapters.map(row)}</Disclosure>
+        <Shelf title={t('journey.imaginationNights.name')} detail={t('listen.nights', { count: imagination.length })}>{imagination.map(row)}</Shelf> : <>
+          <Shelf title={t('journey.psalmNights.name')} detail={t('listen.whisperedNights', { count: psalms.length })}>{psalms.map(row)}</Shelf>
+          <Shelf title={t('listen.bibleByBook')} detail={t('listen.books', { count: bible.length })}>{bible.map(book => (
+            <Disclosure key={book.code} title={book.title} detail={t('listen.chapters', { count: book.chapters.length })}>{book.chapters.map(row)}</Disclosure>
           ))}</Shelf>
           <Shelf title={t.locale === 'es' ? t('journey.miRefugio.name') :
-            [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')}>{stories.map(row)}</Shelf>
+            [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')} detail={t('listen.stories', { count: stories.length })}>{stories.map(row)}</Shelf>
         </>}
     </Screen>
   );
 }
 
-function Shelf({ title, children }: { title: string; children: React.ReactNode[] }) {
+function Shelf({ title, detail, children }: { title: string; detail: string; children: React.ReactNode[] }) {
   const t = useT('journey');
   return (
     <View style={{ gap: 8, marginTop: 20 }}>
-      {children.length ? <Disclosure title={title}>{children}</Disclosure> :
+      {children.length ? <Disclosure title={title} detail={detail}>{children}</Disclosure> :
         <><Label>{title}</Label><Body>{t('listen.emptyShelf')}</Body></>}
     </View>
   );
 }
 
-function Disclosure({ title, children }: { title: string; children: React.ReactNode }) {
+function Disclosure({ title, detail, children }: { title: string; detail: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <View style={{ gap: 8 }}>
-      <Card onPress={() => setOpen(!open)}><Body muted={false} style={{ flex: 1 }}>{title}</Body><Chevron /></Card>
+      <Card onPress={() => setOpen(!open)} expanded={open}>
+        <View style={styles.row}>
+          <View style={styles.grow}>
+            <Body muted={false}>{title}</Body>
+            <Body size={14}>{detail}</Body>
+          </View>
+          <View style={{ transform: [{ rotate: open ? '90deg' : '0deg' }] }}><Chevron /></View>
+        </View>
+      </Card>
       {open && children}
     </View>
   );

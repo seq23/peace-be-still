@@ -2,14 +2,20 @@ import { useIsFocused } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { bible, parseReference, type Verse } from '../../bible';
 import { canUse } from '../../gates';
 import { hasCallAndResponse, trackTitle, type Track } from '../../player/library';
 import { SLEEP_MINUTES, type SleepMinutes } from '../../player/player';
 import { useDimmer, usePlayer } from '../../player/usePlayer';
 import { useSettings, useT } from '../../settings';
-import { fonts, night } from '../../theme/tokens';
+import { dawn, fonts, night } from '../../theme/tokens';
 import { shelfOf } from './catalog';
+import { usePublishedAudio } from './availability';
 import { downloadAvailable, useOffline } from './offline';
+
+function clock(seconds: number) {
+  return [Math.floor(seconds / 60), String(Math.floor(seconds % 60)).padStart(2, '0')].join(':');
+}
 
 export function NowPlaying({ track, close }: { track: Track; close: () => void }) {
   const t = useT('journey');
@@ -38,18 +44,35 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const { dimmed, touch } = useDimmer(focused && playing && response === null);
   const offlineAllowed = canUse('offline', user);
   const saved = offlineAllowed && (downloaded || downloadAvailable(track, user));
-  const unavailable = stop === 'CONFIG_AUDIO_BASE_URL' && !saved;
+  const published = usePublishedAudio();
+  const canStream = !stop && published?.get(track.file) === track.sha256;
+  const unavailable = !saved && !canStream;
   const shelf = shelfOf(track);
-  const untimedResponses = hasCallAndResponse(track) && !track.responsePauses;
+  const protectedPauses = hasCallAndResponse(track);
+  const untimedResponses = protectedPauses && !track.responsePauses;
+  const translation = track.lang === 'es' ? 'RV1909' : 'KJV';
+  const [verse, setVerse] = useState<Verse | null>(null);
+  useEffect(() => {
+    if (shelf !== 'psalms') return;
+    const ref = parseReference(track.ref);
+    if (!ref) return;
+    let active = true;
+    void bible(translation).then(async store => {
+      const verse = await store.verse(ref.book, ref.chapter, ref.chapter === 23 ? 2 : 1);
+      if (active) setVerse(verse);
+    }).catch(() => undefined);
+    return () => { active = false; };
+  }, [shelf, track.ref, translation]);
   const label = shelf === 'psalms' ? t('journey.psalmNights.name')
     : shelf === 'imagination' ? t('journey.imaginationNights.name')
-    : shelf === 'hushHarbor' ? t('journey.hushHarbor.name')
-    : shelf === 'miRefugio' ? t('journey.miRefugio.name') : t('listen.bibleByBook');
+    : shelf === 'hushHarbor' ? [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')
+    : shelf === 'miRefugio' ? [t('journey.miRefugio.name'), t('journey.miRefugio.subtitle')].join(' · ') : t('listen.bibleByBook');
   const minutes = state.sleepEndsAt === null ? null : Math.max(1, Math.ceil((state.sleepEndsAt - now) / 60_000));
-  const clock = [Math.floor(track.seconds / 60), String(Math.floor(track.seconds % 60)).padStart(2, '0')].join(':');
+  const position = current ? Math.min(track.seconds, state.position) : 0;
+  const progress = Math.floor(position / track.seconds * 100);
 
   async function toggle() {
-    if (playRequest.current) return;
+    if (playRequest.current || (unavailable && !playing)) return;
     touch();
     playRequest.current = true;
     setPlayPending(true);
@@ -70,7 +93,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   }
 
   async function download() {
-    if (!offlineAllowed || unavailable || saved || downloadRequest.current) return;
+    if (!offlineAllowed || !canStream || saved || downloadRequest.current) return;
     downloadRequest.current = true;
     setDownloading(true);
     setDownloadFailed(false);
@@ -99,8 +122,12 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         <View style={styles.heading}>
           <Text style={styles.tag}>{label}</Text>
           <Text accessibilityRole="header" style={styles.title}>{trackTitle(track, t.locale)}</Text>
-          <Text style={styles.secondary}>{[clock, t('listen.aiVoice')].join(' · ')}</Text>
+          <Text style={styles.secondary}>{t('listen.aiVoice')}</Text>
         </View>
+        {verse && <View style={styles.verse}>
+          <Text style={styles.response}>{verse.text}</Text>
+          <Text style={styles.reference}>{trackTitle(track, t.locale)}:{verse.verse} · {translation}</Text>
+        </View>}
         {untimedResponses && <View style={styles.responses}>
           <Text style={styles.secondary}>{t('listen.respondDuringPauses')}</Text>
           <Text style={styles.response}>{t('listen.responseFirst')}</Text>
@@ -111,25 +138,47 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
             {response === null ? '' : t(response === 0 ? 'listen.responseFirst' : 'listen.responseSecond')}
           </Text>
         </View>}
-        {unavailable ?
-          <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.audioNotReady')}</Text> :
-          <>
-            {current && state.error === 'play-failed' &&
-              <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.playFailed')}</Text>}
-            <Pressable onPress={() => void toggle()} disabled={playPending} accessibilityRole="button"
-              accessibilityState={{ busy: playPending }} style={styles.play}>
-              <Text style={styles.playText}>{playing ? t('listen.pause') : current && !state.error ? t('listen.resume') : t('listen.play')}</Text>
-            </Pressable>
-          </>}
+        <View style={styles.progress}>
+          <View accessibilityRole="progressbar" accessibilityLabel={t('listen.progress')}
+            accessibilityValue={{ min: 0, max: 100, now: progress }} style={styles.rail}>
+            <View style={[styles.fill, { width: `${progress}%` }]} />
+          </View>
+          <View style={styles.times}>
+            <Text style={styles.time}>{clock(position)}</Text>
+            <Text style={styles.time}>{clock(track.seconds)}</Text>
+          </View>
+        </View>
+        {unavailable && <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.audioNotReady')}</Text>}
+        {!unavailable && current && state.error === 'play-failed' &&
+          <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.playFailed')}</Text>}
+        <View style={styles.transport}>
+          {!protectedPauses && <Pressable disabled={!current || unavailable || playPending || !!state.error}
+            accessibilityRole="button" accessibilityLabel={t('listen.back15')} style={styles.skip}
+            onPress={() => { void player.skip(-15).catch(() => undefined); }}>
+            <Text style={styles.link}>−15</Text>
+          </Pressable>}
+          <Pressable onPress={() => void toggle()} disabled={playPending || (unavailable && !playing)} accessibilityRole="button"
+            accessibilityState={{ busy: playPending, disabled: unavailable && !playing }} style={[styles.play, unavailable && !playing && styles.disabled]}>
+            <Text style={styles.playText}>{playing ? t('listen.pause') : current && !state.error && !unavailable ? t('listen.resume') : t('listen.play')}</Text>
+          </Pressable>
+          {!protectedPauses && <Pressable disabled={!current || unavailable || playPending || !!state.error}
+            accessibilityRole="button" accessibilityLabel={t('listen.forward15')} style={styles.skip}
+            onPress={() => { void player.skip(15).catch(() => undefined); }}>
+            <Text style={styles.link}>+15</Text>
+          </Pressable>}
+        </View>
         <Pressable onPress={() => setTimerOpen(true)} accessibilityRole="button" style={styles.timer}>
           <Text style={styles.main}>{t('listen.timer')}</Text>
           <Text accessibilityLiveRegion="polite" style={styles.link}>
-            {state.fading ? t('listen.fading') : minutes === null ? t('listen.timerOff') : t('listen.minutes', { minutes })}
+            {state.fading ? t('listen.fading') : t('listen.timerSummary', { setting: minutes === null ? t('listen.timerOff') : t('listen.minutes', { minutes }) })}
           </Text>
         </Pressable>
+        {(shelf === 'psalms' || shelf === 'imagination') && <Text style={styles.allowance}>
+          {t(shelf === 'psalms' ? 'listen.psalmAllowance' : 'listen.nightAllowance')}
+        </Text>}
         {offlineAllowed ? (
           <Pressable accessibilityRole="button" accessibilityState={{ busy: downloading }} style={styles.control}
-            disabled={downloading || unavailable || saved} onPress={() => void download()}>
+            disabled={downloading || !canStream || saved} onPress={() => void download()}>
             <Text style={styles.link}>{saved ? t('listen.downloaded') : downloading ? t('listen.downloading') : t('listen.download')}</Text>
           </Pressable>
         ) : <Text style={styles.secondary}>{t('listen.paidDownload')}</Text>}
@@ -171,6 +220,17 @@ const styles = StyleSheet.create({
   main: { color: night.ink, fontFamily: fonts.body, fontSize: 16 },
   secondary: { color: night.muted, fontFamily: fonts.body, fontSize: 14, lineHeight: 20 },
   link: { color: night.glow, fontFamily: fonts.strong, fontSize: 16 },
+  verse: { gap: 8 },
+  reference: { color: dawn, fontFamily: fonts.mono, fontSize: 12 },
+  progress: { gap: 8, marginTop: 'auto' },
+  rail: { height: 4, borderRadius: 2, backgroundColor: night.line },
+  fill: { height: 4, borderRadius: 2, backgroundColor: night.glow },
+  times: { flexDirection: 'row', justifyContent: 'space-between' },
+  time: { color: night.muted, fontFamily: fonts.mono, fontSize: 12 },
+  transport: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 12 },
+  skip: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
+  disabled: { opacity: 0.55 },
+  allowance: { color: night.muted, fontFamily: fonts.body, fontSize: 14, lineHeight: 20, textAlign: 'center' },
   cue: { minHeight: 30 },
   responses: { gap: 8, marginBottom: 16 },
   response: { color: night.ink, fontFamily: fonts.serif, fontSize: 21, lineHeight: 30 },
