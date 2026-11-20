@@ -52,3 +52,20 @@ test('settings choices expose their selected state', async () => {
  const selected = tree.root.findAllByType('Pressable' as any).filter(n => n.props.accessibilityRole === 'radio' && n.props.accessibilityState.checked);
  assert.equal(selected.length, 2);
 });
+
+
+test('children do not see chat-led choices or chat settings', async () => {
+ const tree = await mount({ ...base, age: 'child' });
+ assert.doesNotMatch(strings(tree), /Hush Harbor|Mi Refugio/);
+ await press(tree, 'Psalm Nights'); await press(tree, 'Start Psalm Nights');
+ await press(tree, 'Settings');
+ assert.doesNotMatch(strings(tree), /Chat voice|Plain modern|Black church/);
+});
+
+test('birth-year correction cannot promote a child', async () => {
+ const tree = await mount({ ...base, age: 'child', journey: 'Psalm Nights' });
+ await press(tree, 'Settings'); await press(tree, 'Birth year');
+ await enterYear(tree, '1990');
+ assert.equal(JSON.parse(saved!).age, 'child');
+ assert.doesNotMatch(strings(tree), /Chat voice/);
+});
