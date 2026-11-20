@@ -1,12 +1,14 @@
-// From the repository root: node --test worker/test/madeForYou.local.mjs
+// Set PBS_CHAT_SOURCE to the Phase 3 checkout, then run from the repository root: node --test worker/test/madeForYou.local.mjs
 // Uses CI's pinned Miniflare and the app's existing esbuild.
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import { test } from 'node:test';
 import { promisify } from 'node:util';
 import { build } from '../../app/node_modules/esbuild/lib/main.js';
+import ts from '../../app/node_modules/typescript/lib/typescript.js';
 import * as miniflare from 'miniflare';
 
 const id = {
@@ -20,9 +22,22 @@ const day = 86_400_000;
 const at = Date.parse('2026-11-21T04:00:00Z');
 const schema = readFileSync('worker/migrations/0005_made_for_you.sql', 'utf8').replace(/\s+/g, ' ');
 const python = promisify(execFile);
+const chat = resolve(process.env.PBS_CHAT_SOURCE ?? '../.wt-peace-be-still-phase-3');
+const { config } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
+const rungs = ['workers-ai', ...config.vars.GEMINI_MODELS.split(',').map(model => `gemini-free:${model.trim()}`), 'openrouter-free'];
 
 test('a seeded D1 row travels through the local Worker, Mac template and QA seam, private audio and paid playback', async t => {
-  const bundle = await build({ entryPoints: ['worker/src/madeForYou.stub.ts'], bundle: true, format: 'esm', write: false });
+  const bundle = await build({
+    entryPoints: ['worker/src/madeForYou.stub.ts'], bundle: true, format: 'esm', write: false,
+    alias: { 'phase-3': chat },
+    plugins: [{
+      name: 'chat-config',
+      setup(build) {
+        build.onResolve({ filter: /^phase-3-config$/ }, () => ({ path: 'chat-config', namespace: 'fixture' }));
+        build.onLoad({ filter: /.*/, namespace: 'fixture' }, () => ({ contents: JSON.stringify(config.vars), loader: 'json' }));
+      },
+    }],
+  });
   const options = {
     modules: true, script: bundle.outputFiles[0].text, compatibilityDate: '2026-11-20',
     d1Databases: ['DB'], r2Buckets: ['AUDIO'],
@@ -31,7 +46,17 @@ test('a seeded D1 row travels through the local Worker, Mac template and QA seam
   t.after(() => worker.dispose());
   const url = await worker.ready;
   const db = await worker.getD1Database('DB');
-  for (const stmt of schema.split(';').filter(x => x.trim())) await db.prepare(stmt).run();
+  const chatLimits = readFileSync(resolve(chat, 'worker/migrations/0001_chat_limits.sql'), 'utf8');
+  const counterTable = chatLimits.match(/^CREATE TABLE IF NOT EXISTS chat_counts .+;$/m);
+  assert.ok(counterTable, 'Phase 3 counter table is required for the shared ladder');
+  const migrations = [
+    counterTable[0],
+    schema,
+    readFileSync('worker/migrations/0006_made_for_you_retry.sql', 'utf8'),
+  ];
+  for (const sql of migrations) {
+    for (const stmt of sql.replace(/^--.*$/gm, '').split(';').filter(x => x.trim())) await db.prepare(stmt).run();
+  }
   await db.prepare('CREATE TABLE bible_verses (translation TEXT, verse INTEGER, text TEXT)').run();
   const original = new DatabaseSync('app/src/bible/data/rv1909.db', { readOnly: true });
   const verses = original.prepare("SELECT text FROM verses WHERE book = 'PSA' AND chapter = 23 ORDER BY verse").all();
@@ -39,12 +64,12 @@ test('a seeded D1 row travels through the local Worker, Mac template and QA seam
   assert.equal(verses.length, 6);
   await db.batch(verses.map(({ text }, i) => db.prepare('INSERT INTO bible_verses VALUES (?, ?, ?)').bind('RV1909', i + 1, text)));
 
-  const request = (token, { now = at, params = '?kind=psalm&lang=es', path = '', body, reject } = {}) =>
+  const request = (token, { now = at, params = '?kind=psalm&lang=es', path = '', body, reject, blocked = [] } = {}) =>
     fetch(new URL('/api/made-for-you' + path + params, url), {
       method: body === undefined ? 'GET' : 'POST',
       headers: {
         authorization: `Bearer ${token}`, 'x-test-now': String(now),
-        'content-type': 'application/json', 'x-test-reject': reject ? 'yes' : 'no',
+        'content-type': 'application/json', 'x-test-reject': reject ? 'yes' : 'no', 'x-test-models-down': blocked.join(','),
       },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
@@ -67,7 +92,7 @@ test('a seeded D1 row travels through the local Worker, Mac template and QA seam
   const seed = await request(id.owner, { now, body: note });
   assert.equal(seed.status, 202);
   const { id: job, day: submittedDay } = await seed.json();
-  assert.deepEqual((await (await request(id.owner, { now })).json()).pending, { id: job, day: submittedDay, delayed: false });
+  assert.deepEqual((await (await request(id.owner, { now })).json()).pending, { id: job, day: submittedDay, delayed: false, retrying: false });
   assert.deepEqual((await (await request(id.other, { now })).json()), { pending: null, expired: false, ready: [] });
   assert.deepEqual((await (await request(id.owner, { now, params: '?kind=imagination&lang=es' })).json()), { pending: null, expired: false, ready: [] });
   const conflict = await request(id.owner, { now, body: { ...note, door: 'mindset', kind: 'imagination' } });
@@ -75,7 +100,25 @@ test('a seeded D1 row travels through the local Worker, Mac template and QA seam
   assert.deepEqual(await conflict.json(), { error: 'DAILY_LIMIT' });
   assert.equal((await request(id.owner, { now, path: '/runner/claim', body: {} })).status, 401);
 
-  const rejected = await request(secret, { now: now - 31 * 60_000, path: '/runner/claim', body: {}, reject: true });
+  const leaseWindow = 31 * 60_000;
+  let claimTime = now - (rungs.length + 2) * leaseWindow;
+  for (const [index, rung] of rungs.entries()) {
+    const fallback = await request(secret, {
+      now: claimTime, path: '/runner/claim', body: {}, blocked: rungs.slice(0, index),
+    });
+    assert.equal(fallback.status, 200);
+    const { job: draft } = await fallback.json();
+    assert.equal(draft.id, job);
+    assert.ok(draft.reflection.endsWith(`Fixture rung: ${rung}`), `Expected ${rung} to supply the draft`);
+    claimTime += leaseWindow;
+  }
+  const dry = await request(secret, { now: claimTime, path: '/runner/claim', body: {}, blocked: rungs });
+  assert.equal(dry.status, 503);
+  assert.deepEqual(await dry.json(), { error: 'MADE_FOR_YOU_NO_FREE_MODEL' });
+  assert.deepEqual((await (await request(id.owner, { now })).json()).pending,
+    { id: job, day: submittedDay, delayed: false, retrying: true });
+  assert.equal((await db.prepare('SELECT text FROM made_for_you WHERE id = ?').bind(job).first()).text, note.text);
+  const rejected = await request(secret, { now: claimTime + leaseWindow, path: '/runner/claim', body: {}, reject: true });
   assert.equal(rejected.status, 503);
   assert.deepEqual(await rejected.json(), { error: 'NO_APPROVED_DRAFT' });
 
@@ -100,9 +143,10 @@ def put(item, file):
 assert process_one(make_request(base + '/api', secret), voice, put)
 `;
   await python('python3', ['-c', runner, url.origin, secret, JSON.stringify(verses)]);
-  const after = await db.prepare('SELECT text, lease, audio_path FROM made_for_you WHERE id = ?').bind(job).first();
+  const after = await db.prepare('SELECT text, lease, audio_path, retry_code FROM made_for_you WHERE id = ?').bind(job).first();
   assert.equal(after.text, null);
   assert.equal(after.lease, null);
+  assert.equal(after.retry_code, null);
   assert.equal(after.audio_path, `made-for-you/${id.owner}/${job}.m4a`);
   const shelf = await (await request(id.owner, { now })).json();
   assert.equal(shelf.pending, null);

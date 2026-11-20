@@ -70,7 +70,7 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
       else if (response.status === 'preview') setNotice('preview');
       else {
         ++requestVersion.current;
-        setShelf(previous => ({ ready: previous?.ready ?? [], pending: { ...response, delayed: false }, expired: false }));
+        setShelf(previous => ({ ready: previous?.ready ?? [], pending: { ...response, delayed: false, retrying: false }, expired: false }));
         refresh(value => value + 1);
       }
     } catch (error) {
@@ -89,7 +89,7 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
     <Title>{copy('title')}</Title>
     <Label>{journey}</Label>
     {loadFailed && <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{copy('error')}</Text>}
-    {shelf?.pending && <Card><Body muted={false}>{copy(shelf.pending.delayed ? 'delayed' : 'pending')}</Body></Card>}
+    {shelf?.pending && <Card><Body muted={false}>{copy(shelf.pending.retrying ? 'retrying' : shelf.pending.delayed ? 'delayed' : 'pending')}</Body></Card>}
     {shelf?.expired && <Card><Body muted={false}>{copy('expired')}</Body></Card>}
     {shelf?.ready.map(row => <Card key={row.id} onPress={() => play(row)}>
       <Body muted={false}>{date(row.day)}</Body>

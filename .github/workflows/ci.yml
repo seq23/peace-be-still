@@ -21,8 +21,15 @@ jobs:
       - run: npm run typecheck && npm test
   made-for-you-worker:
     runs-on: ubuntu-latest
+    env:
+      PBS_CHAT_SOURCE: .phase-3
     steps:
       - uses: actions/checkout@v4
+      # Standalone lane tests use the shared chat code from the integration branch.
+      - uses: actions/checkout@v4
+        with:
+          ref: b23fa1db9862e65b403dd0f0f32848b295d8ef5b
+          path: .phase-3
       - uses: actions/setup-node@v4
         with:
           node-version: 24

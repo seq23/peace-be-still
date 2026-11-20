@@ -1,7 +1,9 @@
+import io
 import sys
 import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
+from urllib.error import HTTPError
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import fill
@@ -61,6 +63,21 @@ class MadeForYouTest(unittest.TestCase):
             self.assertEqual(sessions.work(), 0)
         self.assertEqual(published, [first["id"], second_id])
         self.assertEqual(put.call_count, 2)
+
+    def test_dry_model_chain_holds_the_request_and_advances_the_queue(self):
+        code = "MADE_FOR_YOU_NO_FREE_MODEL"
+        busy = HTTPError("https://fixture.example", 503, "Unavailable", {}, io.BytesIO(
+            b'{"error":"MADE_FOR_YOU_NO_FREE_MODEL"}',
+        ))
+        call = sessions.make_request("https://fixture.example/api", "fixture")
+        render, put = Mock(), Mock()
+        with patch.object(sessions, "urlopen", side_effect=[busy, io.BytesIO(b'{"job":null}')]) as request:
+            with self.assertRaises(fill.NamedStop) as stopped:
+                sessions.drain_queue(call, render, put)
+            self.assertEqual(stopped.exception.code, code)
+            self.assertEqual(request.call_count, 2)
+        render.assert_not_called()
+        put.assert_not_called()
 
     def test_qa_failure_cannot_upload_or_acknowledge(self):
         call = Mock(return_value={"job": self.job()})

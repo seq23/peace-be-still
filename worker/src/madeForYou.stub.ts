@@ -1,4 +1,9 @@
 // Local Worker only. Production adapters are supplied by the phase 3 router and private R2 signer.
+// The test bundler resolves these imports to the actual Phase 3 checkout.
+import { realDeps } from 'phase-3/worker/src/index';
+import { runLadder } from 'phase-3/worker/src/ladder';
+import { RungError } from 'phase-3/worker/src/providers/types';
+import chatConfig from 'phase-3-config';
 import { createMadeForYou, type MadeForYouDependencies } from './madeForYou';
 
 type Env = {
@@ -41,9 +46,16 @@ export default {
         return { fired: false, read: text === 'fixture unavailable' ? 'down' : 'none' };
       },
       crisisText: () => 'Fixed safety reply',
-      draft: async (_messages, _schema, valid) => {
-        const draft = { text: 'The rain on the window is soft. Let the room be quiet for a moment.' };
-        return valid(draft) ? draft : null;
+      draft: (messages, schema, valid) => {
+        const blocked = new Set(request.headers.get('x-test-models-down')?.split(','));
+        const rungs = realDeps.rungs(chatConfig, now).map(rung => ({
+          ...rung,
+          async call() {
+            if (blocked.has(rung.id)) throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
+            return { text: `Let the room be quiet for a moment. Fixture rung: ${rung.id}` };
+          },
+        }));
+        return runLadder(env.DB, rungs, messages, schema, 2400, new Map(), valid);
       },
       approve: async () => request.headers.get('x-test-reject') !== 'yes',
       psalm: async translation => {

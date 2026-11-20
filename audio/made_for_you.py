@@ -107,8 +107,12 @@ def make_request(base: str, secret: str):
                 return json.load(response)
         except HTTPError as error:
             with error:
-                if error.code == 503 and json.load(error).get("error") in {"PSALM_UNAVAILABLE", "NO_APPROVED_DRAFT"}:
-                    raise fill.NamedStop("MADE_FOR_YOU_DRAFT", "Session has no approved script.") from None
+                if error.code == 503:
+                    code = json.load(error).get("error")
+                    if code == "MADE_FOR_YOU_NO_FREE_MODEL":
+                        raise fill.NamedStop(code, "No free model could draft the session. It remains queued.") from None
+                    if code in {"PSALM_UNAVAILABLE", "NO_APPROVED_DRAFT"}:
+                        raise fill.NamedStop("MADE_FOR_YOU_DRAFT", "Session has no approved script.") from None
             raise
     return call
 
@@ -162,7 +166,7 @@ def drain_queue(call, render, put) -> int:
             if not process_one(call, render, put):
                 break
         except fill.NamedStop as error:
-            if error.code not in {"MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA"}:
+            if error.code not in {"MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA", "MADE_FOR_YOU_NO_FREE_MODEL"}:
                 raise
             # The held row keeps its lease, so the next claim advances to another request.
             held = error

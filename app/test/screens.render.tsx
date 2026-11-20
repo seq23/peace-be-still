@@ -807,7 +807,7 @@ test('paid sessions render requests, delay, expiry, shelf and shared playback in
       },
       async submit(actual, note) {
         posted = [actual, note];
-        shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: false }, expired: false };
+        shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: false, retrying: false }, expired: false };
         return { status: 'pending' as const, ...shelf.pending! };
       },
       async play() { throw new Error('The shelf must open the listen route'); },
@@ -835,10 +835,14 @@ test('paid sessions render requests, delay, expiry, shelf and shared playback in
     assert.deepEqual(posted, [context, note]);
     assert.match(strings(tree), translated.pending);
     assert.equal(host(tree, 'TextInput').length, 0);
-    shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true }, expired: false };
+    shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true, retrying: false }, expired: false };
     await press(tree, translated.retry);
     assert.doesNotMatch(strings(tree), translated.pending);
     assert.match(strings(tree), faith ? /tardando/ : /taking longer/);
+    shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true, retrying: true }, expired: false };
+    await press(tree, translated.retry);
+    assert.match(strings(tree), faith ? /intentaremos de nuevo/ : /we’ll try again/i);
+    assert.equal(host(tree, 'TextInput').length, 0);
     shelf = { ready: [], pending: null, expired: true };
     await press(tree, translated.retry);
     assert.match(strings(tree), faith ? /se borró/ : /note was erased/);
