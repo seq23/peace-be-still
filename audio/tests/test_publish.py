@@ -59,9 +59,8 @@ class FreeCap(unittest.TestCase):
         with tempfile.TemporaryDirectory() as home, mock.patch.object(publish.fill, "HOME", Path(home)), \
                 mock.patch.object(publish, "connect"), \
                 mock.patch.object(publish.fill, "read_manifest", return_value=[row("a.m4a")]), \
-                mock.patch.object(publish, "r2_listing", return_value={}), \
+                mock.patch.object(publish, "r2_listing", return_value={"x.m4a": {"Size": 9.6e9}}), \
                 mock.patch.object(publish, "read_ledger", return_value={}), \
-                mock.patch.object(publish, "account_usage", return_value=(11.1e9, 7000)), \
                 mock.patch.object(publish, "publish_one", side_effect=lambda r: calls.append(r)), \
                 mock.patch.object(publish, "write_ledger"), \
                 mock.patch.object(publish.fill, "morning_line", return_value="m"):
