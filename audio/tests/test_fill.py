@@ -101,6 +101,18 @@ class Plan(unittest.TestCase):
         self.assertFalse(fill.census([], [])["complete"])
 
 
+class RunWindow(unittest.TestCase):
+    def test_never_in_her_workday_and_a_batch_ends_by_eight(self):
+        at = lambda d, h, m=0: dt.datetime(2026, 11, d, h, m, tzinfo=fill.CT)   # 23 Nov 2026 is a Monday
+        self.assertEqual(fill.window_minutes(at(23, 12)), 0)            # Mon noon: no run
+        self.assertEqual(fill.window_minutes(at(23, 8)), 0)
+        self.assertEqual(fill.window_minutes(at(23, 16, 59)), 0)
+        self.assertEqual(fill.window_minutes(at(23, 7, 30)), 30)        # Mon 07:30: at most 30 minutes
+        self.assertEqual(fill.window_minutes(at(23, 17)), 15 * 60)      # Mon 17:00 -> Tue 08:00
+        self.assertEqual(fill.window_minutes(at(21, 12)), 44 * 60)      # Sat noon runs, until Mon 08:00
+        self.assertEqual(fill.window_minutes(at(20, 17)), 63 * 60)      # Fri 17:00 -> Mon 08:00
+
+
 class Manifest(unittest.TestCase):
     def test_conflict_markers_are_a_named_stop(self):
         with tempfile.TemporaryDirectory() as d:

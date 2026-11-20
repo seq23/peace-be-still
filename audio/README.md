@@ -17,6 +17,9 @@ checks, shelved, status, voice).
   new file; after 3 failed runs it is `NAMED STOP [FAILED_3_TRIES]` in the census line, naming the files.
 - **Spoken text**: stored text word for word; `[ ]`/`( )` marks dropped, ALL-CAPS said as words,
   names respelled from `pronunciations.json` (`engine`).
+- **Run window** (her pick, 20 Nov 2026): Mon–Fri 17:00–08:00 CT and all weekend. `run.sh` exits
+  with a `NOTE` line outside it and caps each step to the minutes left before the next weekday 08:00
+  (`fill.window_minutes`), so a batch never runs into her workday.
 - **Schedule**: launchd `com.seq.pbs-library-fill` (`launchd/install.sh`), every 15 minutes, Nice 15 +
   low-priority I/O, from the runner clone `~/GitHub/.pbs-runner` via `run.sh`; a run lasts up to
   110 minutes and pushes the manifest to main every 10 files.
