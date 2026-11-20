@@ -1,4 +1,52 @@
+// Root: fonts, the person's saved choices, and the stack. The tabs and Settings exist only once onboarding is
+// finished (Stack.Protected), so a deep link before that lands on the first unfinished step via the index.
+import { Figtree_400Regular, Figtree_600SemiBold } from '@expo-google-fonts/figtree';
+import { LibreCaslonText_400Regular } from '@expo-google-fonts/libre-caslon-text';
+import { SplineSansMono_500Medium } from '@expo-google-fonts/spline-sans-mono';
+import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { configureRevenueCat } from '../src/billing/revenuecat';
-export default function Layout() { useEffect(() => { void configureRevenueCat().catch(error => console.warn('RevenueCat initialization failed', error)); }, []); return <Stack screenOptions={{ headerShown: false }} />; }
+import { onboarded } from '../src/model';
+import { SettingsProvider, useSettings, useT } from '../src/settings';
+import { Body, Screen, usePalette } from '../src/ui';
+import { fonts } from '../src/theme/tokens';
+
+export default function RootLayout() {
+  const [fontsLoaded] = useFonts({ LibreCaslonText_400Regular, Figtree_400Regular, Figtree_600SemiBold, SplineSansMono_500Medium });
+  useEffect(() => { void configureRevenueCat().catch(error => console.warn('RevenueCat initialization failed', error)); }, []);
+  return (
+    <SafeAreaProvider>
+      <SettingsProvider>
+        <Root fontsLoaded={fontsLoaded} />
+      </SettingsProvider>
+    </SafeAreaProvider>
+  );
+}
+
+export function Root({ fontsLoaded }: { fontsLoaded: boolean }) {
+  const { settings, ready, readFailed, saveFailed } = useSettings();
+  const t = useT();
+  const c = usePalette();
+  if (!ready || !fontsLoaded) return <View style={{ flex: 1, backgroundColor: c.bg, justifyContent: 'center' }}><ActivityIndicator color={c.accent} /></View>;
+  // Nothing can be tapped: a failed read must never let anyone redo an age restriction.
+  if (readFailed) return <Screen><Body muted={false} style={{ marginTop: 40 }}><Text accessibilityRole="alert">{t('error.read')}</Text></Body></Screen>;
+  return (
+    <View style={{ flex: 1, backgroundColor: c.bg }}>
+      {saveFailed ? (
+        <SafeAreaView edges={['top']} style={{ backgroundColor: c.wine }}>
+          <Text accessibilityRole="alert" style={{ color: c.on, padding: 12, textAlign: 'center', fontFamily: fonts.body }}>{t('error.save')}</Text>
+        </SafeAreaView>
+      ) : null}
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: c.bg } }}>
+        <Stack.Screen name="index" />
+        <Stack.Protected guard={onboarded(settings)}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="settings" />
+        </Stack.Protected>
+      </Stack>
+    </View>
+  );
+}

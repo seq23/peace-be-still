@@ -4,11 +4,14 @@
   "private": true,
   "main": "expo-router/entry",
   "scripts": {
-    "postinstall": "npm run -s library",
     "library": "tsx src/player/build-library.ts",
+    "eas-build-post-install": "npm run -s library",
+    "prestart": "npm run -s library",
     "start": "expo start",
+    "pretypecheck": "npm run -s library",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test test/*.unit.ts && node test/support/render-build.mjs",
+    "prepreview:web": "npm run -s library",
     "preview:web": "expo export --platform web"
   },
   "dependencies": {

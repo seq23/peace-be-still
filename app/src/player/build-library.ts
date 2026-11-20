@@ -1,5 +1,5 @@
-// Builds app/src/player/library.json from the repo's audio/manifest.jsonl (runs on every npm install, so CI,
-// the web preview and EAS always bundle the current passed rows). Story titles come from the story JSON.
+// Builds app/src/player/library.json from the repo's audio/manifest.jsonl (npm run library: before start, typecheck,
+// the web export and EAS builds, never on install, so each bundles the current passed rows). Story titles come from the story JSON.
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -1,6 +1,6 @@
 # Player (engine only; the player screen is a later phase)
 
-- `library.ts` + `build-library.ts`: `npm install` (postinstall) and `npm run library` turn `audio/manifest.jsonl`
+- `library.ts` + `build-library.ts`: `npm run library` (run before start, typecheck, the web export and EAS builds; never on install) turns `audio/manifest.jsonl`
   into `library.json` (git-ignored, bundled): passed rows only, a readable title per track, no checks or Drive paths.
   A bad row is held and logged (`HELD manifest line N`); zero tracks stops with `AUDIO_LIBRARY_EMPTY`.
 - Audio host: ONE value, `app.config.ts` `extra.audioBaseUrl` (env `PBS_AUDIO_BASE_URL`, https). The R2 object key
