@@ -6,5 +6,7 @@ const config: ExpoConfig = {
   ios: { bundleIdentifier: 'com.peacebestillapp.mobile' },
   android: { package: 'com.peacebestillapp.mobile' },
   web: { bundler: 'metro' },
+  owner: 'seq23',
+  extra: { eas: { projectId: 'e23117dc-4272-4aaa-b88e-662733141a5c' } },
 };
 export default config;
