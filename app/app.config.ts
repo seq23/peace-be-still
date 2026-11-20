@@ -13,6 +13,6 @@ const config: ExpoConfig = {
     revenueCatIosKey: process.env.REVENUECAT_PBS_TEST_STORE === '1'
       ? process.env.REVENUECAT_PBS_TEST_PUBLIC_KEY
       : process.env.REVENUECAT_PBS_IOS_PUBLIC_KEY,
-    audioBaseUrl: process.env.PBS_AUDIO_BASE_URL ?? 'https://audio.peacebestillapp.com/' },
+    audioBaseUrl: process.env.PBS_AUDIO_BASE_URL ?? 'https://pbs-audio.professionalresourcelibrary.com/' },
 };
 export default config;

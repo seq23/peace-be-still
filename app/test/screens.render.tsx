@@ -691,15 +691,24 @@ test('the web preview shows configured prices and renewal terms without opening 
         assert.match(textOf(monthly), /\$7\.99/);
         assert.match(textOf(paidControls(tree)[0]), previewLabel);
         assert.match(textOf(paidControls(tree)[0]), /\$39\.99/);
-        assert.match(strings(tree), es ? /sin período de prueba.*cada año por \$39\.99/i : /no trial.*renews yearly at \$39\.99/i);
+        const yearlyDisclosure = es
+          ? /sin período de prueba.*cada año por \$39\.99/i
+          : /no trial.*renews yearly at \$39\.99/i;
+        assert.ok(texts(tree).some(line => yearlyDisclosure.test(line)));
         await press(tree, previewLabel);
         assert.deepEqual(fakePurchaseCalls, []);
         assert.equal(gate(tree), 'false true');
         const restore = host(tree, 'Pressable').find(n => (es ? /restaurar compras/i : /restore purchases/i).test(textOf(n)));
-        assert.equal(restore?.props['aria-disabled'], true);
+        assert.ok(restore);
+        assert.equal(restore.props.accessibilityRole, 'link');
+        assert.equal(restore.props['aria-disabled'], true);
+        assert.equal(restore.props.onPress, undefined);
         await press(tree, /\$7\.99/);
         assert.match(textOf(paidControls(tree)[0]), /\$7\.99/);
-        assert.match(strings(tree), es ? /cada mes por \$7\.99/i : /renews monthly at \$7\.99/i);
+        const monthlyDisclosure = es
+          ? /sin período de prueba.*cada mes por \$7\.99/i
+          : /no trial.*renews monthly at \$7\.99/i;
+        assert.ok(texts(tree).some(line => monthlyDisclosure.test(line)));
       } finally { await closePaid(tree); }
     }
   } finally {
