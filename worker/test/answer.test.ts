@@ -175,6 +175,8 @@ describe('round 2: partisan and Psalm headings (finding 7)', () => {
     expect(r.ok ? [] : r.problems).not.toContain('partisan');
     expect(await reject('Christians should vote Republican this year. Lord, bless her.')).toContain('partisan');
     expect(await reject('Vote for Trump. Lord, bless her.')).toContain('partisan');
+    const neutral = await checkAnswer({ text: 'Christians should vote with a clear conscience and pray for whoever leads. Lord, give her wisdom.', references: [] }, { ...en, userText: 'Who should Christians vote for?' });
+    expect(neutral.ok ? [] : neutral.problems).not.toContain('partisan');
   });
   it('Psalm 46:1 shows the verse without its heading, as "Psalm 46:1"', async () => {
     const r = await checkAnswer({ text: 'God is near. Lord, hold her.', references: ['Psalm 46:1'] }, en);
