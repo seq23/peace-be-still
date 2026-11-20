@@ -1,14 +1,23 @@
 // Variety across answers (hostile review round 4: "the quiet hours of the night make every shadow
 // stretch tall" in one answer and "the quiet hours have a way of making every shadow look taller"
 // in another; "<verse> reminds us" closed 14 of 56). One answer can be fine and still read as a
-// template to someone who chats every night, so each draft is compared with the last answers
-// she was given (her install) and the last answers anyone was given (the model's own habits):
+// template to someone who chats every night.
+// PRODUCED, not policed (round 5 rebuild): round 5 detected repeats after the draft and asked the
+// model to rewrite, and 25 of 53 answers still repeated ("May you find..." closed 14), while the
+// rewrites ate the tries real problems needed (7 fallbacks). So code now plans each answer BEFORE
+// the model writes (planFor): the opening move, the middle move, the habit words to leave out and
+// the first word of the last sentence, all from rotations driven by one counter with no identifier
+// (planSeq). The closing words come from a list of more than RECENT_ALL distinct stems, so within the
+// window no two answers are told to close the same way. The plan is code's own vocabulary: nothing
+// she or the model wrote is read back to steer it.
+// The after-check stays as the backstop: each draft is compared with the last answers she was given
+// (her install) and the last answers anyone was given:
 //  - the same opening shape (first three words, stemmed),
 //  - the same closing shape (first three words of the last sentence, a verse reference as REF),
 //  - the same image (two or more shared pairs of content words, stemmed).
-// A match is a rewrite, never a fallback: on the last try variety is waived (it is quality, not
-// safety). Nothing readable is kept: each opener, closer and pair is stored only as a keyed hash
-// (HMAC with IP_HASH_SECRET, 8 hex), never the words, and rows go after 14 days or with her memory.
+// A match is a rewrite on a NEW plan; if every try repeats, the last draft that passed everything
+// else is shown (index.ts), never the fallback. Nothing readable is kept: each opener, closer and
+// pair is stored only as a keyed hash (HMAC with IP_HASH_SECRET, 8 hex), never the words.
 // Self-contained (no app imports) so the red-team runner can load it under plain node.
 const fold = (text: string) => text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 
@@ -105,3 +114,97 @@ export async function saveShape(db: D1Database, installId: string, hashed: Shape
   const prune = (scope: string, keep: number) => db.prepare('DELETE FROM answer_shape WHERE scope = ? AND at < (SELECT min(at) FROM (SELECT at FROM answer_shape WHERE scope = ? ORDER BY at DESC LIMIT ?))').bind(scope, scope, keep);
   await db.batch([insert(installId), insert('all'), prune(installId, RECENT_MINE), prune('all', RECENT_ALL)]);
 }
+
+// ---- The plan (code chooses, before the model writes) ----
+export type Lane = 'en' | 'es' | 'mindset';
+export type Plan = { seq: number; text: string };
+
+/** The next number in one plain counter per lane (no identifier, never reset): drives every rotation. */
+export async function planSeq(db: D1Database, lane: Lane): Promise<number> {
+  const row = await db.prepare("INSERT INTO chat_counts (day, metric, n) VALUES ('seq', ?, 1) ON CONFLICT(day, metric) DO UPDATE SET n = n + 1 RETURNING n").bind(`plan:${lane}`).first<{ n: number }>();
+  return row?.n ?? Math.floor(Math.random() * 1e6);
+}
+
+// The last sentence's first word. Each list has more distinct stems than RECENT_ALL, so a counter
+// that steps once per draft never tells two answers in the window to close the same way. P = a
+// one-sentence prayer for her, V = one sentence of her own words about one of the verses.
+const CLOSE_EN: Array<[kind: 'P' | 'V', word: string]> = ([
+  'P Lord', 'P Carry', 'V Whatever', 'P Father', 'P Keep', 'P Gracious', 'V Even', 'P Meet', 'P Jesus', 'P Guard', 'V Nothing',
+  'P Faithful', 'P Lead', 'P Steady', 'V Because', 'P God', 'P Quiet', 'P Surround', 'V Today', 'P Merciful', 'P Cover', 'P Strengthen',
+  'V Wherever', 'P Holy', 'P Calm', 'P Settle', 'V Every', 'P Heavenly', 'P Draw', 'P Stay', 'V Before', 'P Shepherd', 'P Renew',
+  'P Sustain', 'V Still', 'P Watch', 'P Comfort', 'P Grant', 'V Here', 'P Give', 'P Help', 'P Be', 'V This', 'P Walk', 'P Anchor', 'P Open', 'P Teach', 'P Hold', 'P Shelter',
+] as const).map(s => s.split(' ') as ['P' | 'V', string]);
+// Spanish speaks to her as tú to the very end (the voice rubric), so its closings are a blessing or
+// a sentence about a verse, said to her: B = a short blessing, V = a sentence about one of the verses.
+const CLOSE_ES: Array<[kind: 'B' | 'V', word: string]> = ([
+  'B Que', 'V Hoy', 'V Aunque', 'B Descansa', 'V Mañana', 'V Cada', 'B Confía', 'V Nada', 'V Donde', 'B Lleva', 'V Mientras', 'V Aún',
+  'B Recuerda', 'V Con', 'V En', 'B Pon', 'V Puedes', 'V Dios', 'B Sigue', 'V Ahora', 'V Todo', 'B Entrega', 'V Jesús', 'V Él', 'B Respira',
+  'V Esta', 'V Tu', 'B Camina', 'V Tienes', 'V Si', 'B Guarda', 'V Mira', 'B Vuelve', 'V Lee', 'B Busca', 'V Ni', 'V Cuando', 'B Deja', 'V Sin', 'V Junto', 'B Abre', 'V Aquí',
+] as const).map(s => s.split(' ') as ['B' | 'V', string]);
+const CLOSE_MINDSET = ['Breathe', 'Notice', 'Tomorrow', 'Let', 'Whatever', 'Rest', 'Picture', 'Even', 'One', 'Before', 'Small', 'Today', 'Keep', 'Give', 'Hold', 'Stay', 'Come', 'Leave', 'Carry', 'Name', 'When', 'Here', 'Each', 'Nothing', 'Quiet', 'Settle', 'Allow', 'Tonight', 'Listen', 'Start', 'Begin', 'Trust', 'Look', 'Return', 'Close', 'Slow', 'Write', 'Set', 'Take', 'Ease', 'Know'];
+const OPEN_EN = [
+  'Open on one concrete thing she told you, in your own words (never by restating her question).',
+  'Open with one plain, true sentence about God that meets what she wrote.',
+  'Open by answering her plainly in a short first sentence.',
+  'Open with an honest, specific word about what is hard here, with no stock sympathy.',
+];
+const OPEN_ES = [
+  'Empieza con algo concreto que ella te contó, con tus propias palabras (nunca repitiendo su pregunta).',
+  'Empieza con una frase sencilla y verdadera sobre Dios que responda a lo que escribió.',
+  'Empieza respondiéndole directamente, en una primera frase corta.',
+  'Empieza con una palabra honesta y concreta sobre lo difícil de esto, sin frases hechas de consuelo.',
+];
+const MIDDLE_EN = [
+  'In the middle, tell in a sentence or two how one person in the Bible met something like this.',
+  'In the middle, give one concrete step she could take this week.',
+  'In the middle, say plainly what your verse meant to the people who first heard it.',
+  'In the middle, say one true thing about who God is that speaks to this.',
+  'In the middle, stay with the details she gave, in plain words, without pictures or metaphors.',
+];
+const MIDDLE_ES = [
+  'En el medio, cuenta en una o dos frases cómo una persona de la Biblia vivió algo parecido.',
+  'En el medio, da un paso concreto que pueda dar esta semana.',
+  'En el medio, di con sencillez qué significó tu versículo para quienes lo oyeron primero.',
+  'En el medio, di algo verdadero sobre quién es Dios que hable a esto.',
+  'En el medio, quédate con los detalles que ella dio, en palabras sencillas, sin imágenes ni metáforas.',
+];
+const MIDDLE_MINDSET = [
+  'In the middle, give one small thing she can picture or do in the next few minutes.',
+  'In the middle, stay with the details she gave, in plain words, without metaphors.',
+  'In the middle, name one thing that is in her hands and one that is not.',
+];
+// The words the free models lean on in answer after answer (measured: the shared pairs of the
+// round-4 and round-5 red teams). Each plan leaves out two of the three groups, a different two each time.
+const REST_EN = [
+  ['honor', 'bring', 'find', 'walk', 'path', 'journey', 'season', 'navigate'],
+  ['peace', 'wisdom', 'strength', 'steady', 'guide', 'light', 'gentle', 'space'],
+  ['please', 'consider', 'respect', 'others', 'life', 'care', 'heavy', 'ground'],
+];
+const REST_ES = [
+  ['encontrar', 'camino', 'paso', 'guía'],
+  ['paz', 'fuerza', 'carga', 'descanso'],
+  ['recibir', 'acompañamiento', 'cercano', 'conversar', 'sugiero'],
+];
+
+/** The plan for one draft, from the lane's counter: how it opens, what the middle does, the words it leaves out, how it closes. */
+export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'faith'): Plan {
+  const pick = <T>(list: readonly T[]) => list[seq % list.length];
+  const rest = (groups: string[][]) => groups.filter((_, i) => i !== seq % groups.length).flat().join(', ');
+  if (lane === 'es') {
+    const [kind, word] = pick(CLOSE_ES);
+    const close = kind === 'B'
+      ? `Termina con una bendición breve para ella, en una sola frase que le hable de tú y cuya primera palabra sea "${word}".`
+      : `Termina con una sola frase tuya, dicha a ella de tú, sobre lo que dice uno de tus versículos, con su referencia dentro o al final; su primera palabra es "${word}".`;
+    return { seq, text: `El plan de esta respuesta (síguelo; nunca lo menciones):\n- ${pick(OPEN_ES)}\n- ${door === 'mindset' ? MIDDLE_ES[[1, 4][seq % 2]] : pick(MIDDLE_ES)}\n- Esta vez no uses estas palabras: ${rest(REST_ES)}.\n- ${close} Nada después de esa frase.` };
+  }
+  if (lane === 'mindset' || door === 'mindset') {
+    return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${OPEN_EN[[0, 2, 3][seq % 3]]}\n- ${pick(MIDDLE_MINDSET)}\n- This time do not use these words: ${rest(REST_EN)}.\n- End on one calm sentence whose first word is "${pick(CLOSE_MINDSET)}". Nothing after that sentence.` };
+  }
+  const [kind, word] = pick(CLOSE_EN);
+  const close = kind === 'P'
+    ? `End with a short prayer for her in ONE sentence whose first word is "${word}".`
+    : `End with ONE sentence of your own about what one of your verses says, with its reference inside or at the end of the sentence, whose first word is "${word}".`;
+  return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${pick(OPEN_EN)}\n- ${pick(MIDDLE_EN)}\n- This time do not use these words: ${rest(REST_EN)}.\n- ${close} Nothing after that sentence.` };
+}
+/** For the tests: every closing word list has more distinct closing stems than the window. */
+export const closeStems = (lane: Lane) => (lane === 'es' ? CLOSE_ES.map(c => c[1]) : lane === 'mindset' ? CLOSE_MINDSET : CLOSE_EN.map(c => c[1])).map(w => stem(fold(w)));

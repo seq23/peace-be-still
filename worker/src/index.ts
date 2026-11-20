@@ -3,7 +3,8 @@
 // crisis (floor, then the model risk read on EVERY message; no read = no answer) -> paid status
 // (RevenueCat) -> daily admission (D1) -> free ladder -> crisis tripwire on the draft -> answer gate
 // (+ variety against her recent answers and everyone's, + judge with the verse texts) -> up to two
-// rewrites -> fixed fallback -> response. Crisis kinds: selfharm, abuse, child_abuse, medical (danger to
+// rewrites -> fixed fallback -> response. Every draft is written to a plan code chose first (how it
+// opens, the middle, how it closes: quality/variety.ts), so answers do not read like a template. Crisis kinds: selfharm, abuse, child_abuse, medical (danger to
 // her body from medicine or alcohol that is not a wish to die: Poison Control first).
 // POST /api/token/renew re-signs the SAME install id (paid status and memory follow it).
 import './env';
@@ -21,7 +22,7 @@ import { openRouter } from './providers/openrouter';
 import type { Message } from './providers/types';
 import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
-import { hashShape, recentShapes, repeats, saveShape, shapeOf, varietyObjection } from './quality/variety';
+import { hashShape, planFor, planSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, crisisText, fallbackText, identityText, limitText, noFreeModelText, oneTranslationText, type Lang } from './replies';
 import { lookup, refugeVerse, type Scripture } from './scripture';
@@ -313,13 +314,28 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const named = req.door === 'faith' ? namedReference(last) : null;
   const namedVerse = named ? await lookup(env.DB, v.translation, named) : null;
   const withNamed = (scripture: Scripture[]) => namedVerse && !scripture.some(s => s.ref === namedVerse.ref) ? [namedVerse, ...scripture].slice(0, 3) : scripture;
-  // Her recent answers and everyone's (keyed hashes only): the variety check (quality/variety.ts).
+  // Her recent answers and everyone's (keyed hashes only): the variety backstop (quality/variety.ts).
   const recent = await recentShapes(env.DB, who.installId);
+  const lane = v.lang === 'es' ? 'es' : req.door === 'mindset' ? 'mindset' : 'en';
+  const show = (text: string, scripture: Scripture[], shape: Shape) => {
+    ctx.waitUntil(saveShape(env.DB, who.installId, shape, now).catch(() => logCode('SHAPE_SAVE_FAILED')));
+    if (paid.paid) ctx.waitUntil(remember(env, rungs, { installId: who.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
+    return done({ kind: 'answer', ai: true, text, scripture });
+  };
+  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) });
   let objection: string | null = null;
+  // A draft that passed every check but repeated a recent answer: shown if no later try does better.
+  // Variety is quality, not safety, and must never cost her a real answer (round 5: rewrites for
+  // variety used up the tries, and 7 of 64 fell back).
+  let spare: { text: string; scripture: Scripture[]; shape: Shape } | null = null;
   // Three tries, then the fallback verse. Measured round 3: with two tries 4 of 45 answers fell back
   // (grief, a teen's dating question, translation requests), each refused on a fixable point.
   for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
-    const messages = objection ? [...system, { role: 'system' as const, content: `Your last answer was not used. ${objection} Write a new answer.` }, ...history] : [...system, ...history];
+    // Each try gets its own plan, so a rewrite for variety is also written to new moves.
+    const plan = planFor(await planSeq(env.DB, lane), lane, req.door);
+    const steer: Message[] = [{ role: 'system', content: plan.text }];
+    if (objection) steer.push({ role: 'system', content: `Your last answer was not used. ${objection} Write a new answer.` });
+    const messages = [...system, ...steer, ...history];
     const out = await runLadder(env.DB, rungs, messages, answerSchema, 700, metrics, isAnswer);
     if ('empty' in out) {
       if (attempt === 0) {
@@ -336,31 +352,31 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (trip) return crisisReply(trip, 'tripwire');
     const checked = await checkAnswer(out.data, gate);
     let problems = checked.ok ? [] : checked.problems;
-    const plainShape = checked.ok ? shapeOf(checked.text) : null;
-    const shape = plainShape ? await hashShape(plainShape, env.IP_HASH_SECRET!) : null;
-    // Variety is quality, not safety: on the last try it is waived rather than fall back.
     let variety = '';
-    if (shape && plainShape && attempt < ANSWER_TRIES - 1) {
+    if (checked.ok) {
+      const plainShape = shapeOf(checked.text);
+      const shape = await hashShape(plainShape, env.IP_HASH_SECRET!);
+      const scripture = withNamed(checked.scripture);
       problems = repeats(shape, recent);
-      if (problems.length) variety = varietyObjection(shape, plainShape.said, recent);
-    }
-    const scripture = checked.ok ? withNamed(checked.scripture) : [];
-    if (checked.ok && !problems.length) {
-      const j = await deps.judge(env, { voice: v.prompt, question: last, text: checked.text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) });
-      if (j.verdict === 'fail') problems = j.which.map(w => `judge:${w}`);
-      if (j.verdict === 'down') tally(metrics, 'judge_down');
-      if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);
-    }
-    if (checked.ok && !problems.length) {
-      ctx.waitUntil(saveShape(env.DB, who.installId, shape!, now).catch(() => logCode('SHAPE_SAVE_FAILED')));
-      if (paid.paid) ctx.waitUntil(remember(env, rungs, { installId: who.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: checked.text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
-      return done({ kind: 'answer', ai: true, text: checked.text, scripture });
+      if (problems.length) { variety = varietyObjection(shape, plainShape.said, recent); spare = { text: checked.text, scripture, shape }; }
+      else {
+        const j = await judge(checked.text, scripture);
+        if (j.verdict === 'fail') problems = j.which.map(w => `judge:${w}`);
+        if (j.verdict === 'down') tally(metrics, 'judge_down');
+        if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);
+        if (!problems.length) return show(checked.text, scripture, shape);
+      }
     }
     if (problems.some(p => RED_LINES.has(p) || p.startsWith('judge:'))) tally(metrics, 'red_line');
     for (const p of problems) tally(metrics, `gate:${p}`);
     logCode('CHAT_GATE', { attempt, problems: problems.join(',') });
     objection = variety || problems.map(objectionText).join(' ');
     if (attempt === 0) tally(metrics, 'regenerated');
+  }
+  if (spare) {
+    const j = await judge(spare.text, spare.scripture);
+    if (j.verdict !== 'fail') { tally(metrics, 'variety_waived'); return show(spare.text, spare.scripture, spare.shape); }
+    for (const w of j.which) tally(metrics, `gate:judge:${w}`);
   }
   tally(metrics, 'fallback');
   const verse = await refugeVerse(env.DB, v.translation);
