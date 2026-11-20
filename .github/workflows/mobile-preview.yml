@@ -60,4 +60,10 @@ jobs:
       - name: Check the preview in a browser
         run: |
           npm i --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/pw" playwright-core@1.62.1
-          PW_DIR="$RUNNER_TEMP/pw" node scripts/preview/check.mjs dist
+          PW_DIR="$RUNNER_TEMP/pw" SHOTS_DIR="$RUNNER_TEMP/shots" node scripts/preview/check.mjs dist
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: preview-shots-390x844
+          path: ${{ runner.temp }}/shots
+          if-no-files-found: warn
