@@ -21,7 +21,7 @@ import { openRouter } from './providers/openrouter';
 import type { Message } from './providers/types';
 import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
-import { hashShape, recentShapes, repeats, saveShape, shapeOf } from './quality/variety';
+import { hashShape, recentShapes, repeats, saveShape, shapeOf, varietyObjection } from './quality/variety';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, crisisText, fallbackText, identityText, limitText, noFreeModelText, oneTranslationText, type Lang } from './replies';
 import { lookup, refugeVerse, type Scripture } from './scripture';
@@ -243,7 +243,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const crisisReply = async (kind: CrisisKind, layer: string) => {
     tally(metrics, 'crisis'); tally(metrics, `crisis:${layer}`);
     await markCrisis(env.DB, day, who.installId, req.conversation, now);
-    return reply({ kind: 'crisis', ai: false, text: crisisText(kind, v.lang, band), scripture: [], remaining: null, limit: null, reminder: false, crisis: kind });
+    return reply({ kind: 'crisis', ai: false, text: crisisText(kind, v.lang, band, turns[turns.length - 1].text), scripture: [], remaining: null, limit: null, reminder: false, crisis: kind });
   };
   // Crisis: never reaches admission or a model that writes answers. The floor needs no model; every
   // other message is read by a model for risk first, and with no read there is no answer.
@@ -327,9 +327,14 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (trip) return crisisReply(trip, 'tripwire');
     const checked = await checkAnswer(out.data, gate);
     let problems = checked.ok ? [] : checked.problems;
-    const shape = checked.ok ? await hashShape(shapeOf(checked.text), env.IP_HASH_SECRET!) : null;
+    const plainShape = checked.ok ? shapeOf(checked.text) : null;
+    const shape = plainShape ? await hashShape(plainShape, env.IP_HASH_SECRET!) : null;
     // Variety is quality, not safety: on the last try it is waived rather than fall back.
-    if (shape && attempt < ANSWER_TRIES - 1) problems = repeats(shape, recent);
+    let variety = '';
+    if (shape && plainShape && attempt < ANSWER_TRIES - 1) {
+      problems = repeats(shape, recent);
+      if (problems.length) variety = varietyObjection(shape, plainShape.said, recent);
+    }
     const scripture = checked.ok ? withNamed(checked.scripture) : [];
     if (checked.ok && !problems.length) {
       const j = await deps.judge(env, { voice: v.prompt, question: last, text: checked.text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) });
@@ -345,7 +350,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (problems.some(p => RED_LINES.has(p) || p.startsWith('judge:'))) tally(metrics, 'red_line');
     for (const p of problems) tally(metrics, `gate:${p}`);
     logCode('CHAT_GATE', { attempt, problems: problems.join(',') });
-    objection = problems.map(objectionText).join(' ');
+    objection = variety || problems.map(objectionText).join(' ');
     if (attempt === 0) tally(metrics, 'regenerated');
   }
   tally(metrics, 'fallback');

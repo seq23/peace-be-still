@@ -13,6 +13,8 @@
 const fold = (text: string) => text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 
 export type Shape = { opener: string; closer: string; pairs: string[] };
+/** The draft's own words for each part (never stored): what the rewrite is told to avoid. */
+export type Said = { opener: string; closer: string; pairs: string[] };
 export const RECENT_MINE = 12;
 export const RECENT_ALL = 40;
 export const SHAPE_DAYS = 14;
@@ -30,18 +32,26 @@ const stem = (w: string) => w.slice(0, 4);
 const sentencesOf = (text: string) => text.replace(REF, ' REF ').split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
 const wordsOf = (s: string) => fold(s).split(' ').filter(Boolean);
 
-export function shapeOf(text: string): Shape {
+export function shapeOf(text: string): Shape & { said: Said } {
   const sentences = sentencesOf(text);
   const head = (s: string | undefined) => (s ? wordsOf(s).slice(0, 3).map(stem).join(' ') : '');
-  const pairs = new Set<string>();
+  const said = (s: string | undefined) => (s ? s.replace(/\bREF\b/g, '(verse)').split(/\s+/).filter(Boolean).slice(0, 3).join(' ') : '');
+  const pairs = new Map<string, string>();
   for (const s of sentences) {
-    const content = wordsOf(s).filter(w => w !== 'ref' && w.length > 2 && !STOP.has(w)).map(stem);
+    const content = wordsOf(s).filter(w => w !== 'ref' && w.length > 2 && !STOP.has(w));
     // Pairs one and two words apart: "every shadow stretch tall" and "every shadow look taller" share two.
-    for (let i = 0; i < content.length; i++) for (const j of [i + 1, i + 2]) if (j < content.length && content[i] !== content[j]) pairs.add(`${content[i]} ${content[j]}`);
+    for (let i = 0; i < content.length; i++) for (const j of [i + 1, i + 2]) {
+      if (j >= content.length || stem(content[i]) === stem(content[j])) continue;
+      const key = `${stem(content[i])} ${stem(content[j])}`;
+      if (!pairs.has(key)) pairs.set(key, `${content[i]} ${content[j]}`);
+    }
   }
-  const closer = sentences.length > 1 ? head(sentences.at(-1)) : '';
   // A last "sentence" that is only a reference is not a shape.
-  return { opener: head(sentences[0]), closer: closer.split(' ').length >= 2 ? closer : '', pairs: [...pairs] };
+  const closing = sentences.length > 1 && head(sentences.at(-1)).split(' ').length >= 2;
+  return {
+    opener: head(sentences[0]), closer: closing ? head(sentences.at(-1)) : '', pairs: [...pairs.keys()],
+    said: { opener: said(sentences[0]), closer: closing ? said(sentences.at(-1)) : '', pairs: [...pairs.values()] },
+  };
 }
 
 /** Problems for a draft against earlier answers (plain or hashed shapes, compared like for like). */
@@ -54,6 +64,24 @@ export function repeats(draft: Shape, recent: Shape[]): string[] {
     if (draft.pairs.filter(p => theirs.has(p)).length >= 2) problems.add('repeat_image');
   }
   return [...problems];
+}
+
+/**
+ * The rewrite is told exactly what came back, in the draft's own words (the earlier answers are
+ * only hashes): "It opened like a recent answer ("The quiet hours"); ... reused: quiet hours, hours shadow".
+ */
+export function varietyObjection(draft: Shape, said: Said, recent: Shape[]): string {
+  const parts: string[] = [];
+  if (draft.opener && recent.some(r => r.opener === draft.opener)) parts.push(`It opened like a recent answer ("${said.opener}..."); open another way, on what she said.`);
+  if (draft.closer && recent.some(r => r.closer === draft.closer)) parts.push(`It closed like a recent answer ("${said.closer}..."); close another way.`);
+  const shared = new Set<number>();
+  for (const r of recent) {
+    const theirs = new Set(r.pairs);
+    const hit = draft.pairs.map((p, i) => (theirs.has(p) ? i : -1)).filter(i => i >= 0);
+    if (hit.length >= 2) hit.forEach(i => shared.add(i));
+  }
+  if (shared.size) parts.push(`It reused wording from a recent answer (${[...shared].slice(0, 6).map(i => `"${said.pairs[i]}"`).join(', ')}); say those things in other words or leave them out.`);
+  return parts.join(' ');
 }
 
 const encoder = new TextEncoder();

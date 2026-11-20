@@ -2,7 +2,7 @@ import { env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
 import { cleanup } from '../src/cleanup';
 import { deleteMemory } from '../src/memory';
-import { hashShape, recentShapes, repeats, saveShape, shapeOf } from '../src/quality/variety';
+import { hashShape, recentShapes, repeats, saveShape, shapeOf, varietyObjection } from '../src/quality/variety';
 import { call, chat, deps, good, NOW, scripted, tokenFor } from './helpers';
 
 // Real answers from the round-3 and round-4 live runs (reviews/phase-3-live-r3, phase-3-fresh-gh).
@@ -31,6 +31,10 @@ describe('variety across answers (round 4 finding 2)', () => {
   });
   it('different answers pass (grief and job loss)', () => {
     expect(repeats(shapeOf(RT01), [shapeOf(q04), shapeOf(x09)])).toEqual([]);
+  });
+  it('the rewrite is told the words that came back, from the draft itself (x19 after q04)', () => {
+    const later = shapeOf(x19);
+    expect(varietyObjection(later, later.said, [shapeOf(q04)])).toMatch(/reused wording from a recent answer \(.*"quiet hours"/);
   });
   it('hashed shapes compare like plain ones and keep no words', async () => {
     const [a, b] = await Promise.all([hashShape(shapeOf(q04), 'k'.repeat(32)), hashShape(shapeOf(x19), 'k'.repeat(32))]);
@@ -69,7 +73,7 @@ describe('variety in the chat path', () => {
     expect(r.body.kind).toBe('answer');
     expect(r.body.text).toContain('May the Lord keep you near');
     expect(b.calls.length).toBe(2);
-    expect(b.calls[1].some(m => m.role === 'system' && /closed the same way/.test(m.content))).toBe(true);
+    expect(b.calls[1].some(m => m.role === 'system' && /closed like a recent answer \("Lord, hold her\.\.\."\)/.test(m.content))).toBe(true);
   });
   it('variety never causes a fallback: on the last try it is waived', async () => {
     const same = good('Grief can sit heavy for a while. Lord, hold her close tonight.', ['Psalm 34:18']);

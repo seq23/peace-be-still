@@ -223,6 +223,11 @@ describe('doctrine: the plain words of Scripture, warmly (round 4 finding 1, rul
     expect(r.ok ? [] : r.problems).toEqual([]);
     if (r.ok) expect(r.scripture[0].text).toMatch(/Marriage \[is\] honourable/);
   });
+  it('x16: handing back her own words ("Song of Solomon says love is beautiful") is not a made-up quotation', async () => {
+    const r = await checkAnswer({ text: 'You are right that the Song of Solomon says love is beautiful, and it celebrates that love inside marriage. Hebrews 13:4 keeps sex for marriage, so waiting until May honors God and each other. Talk with your pastor about it together. Lord, keep them close.', references: ['Hebrews 13:4'] }, { ...en, userText: x16 });
+    expect(r.ok ? [] : r.problems).toEqual([]);
+    expect(await reject('The Bible says love is patient and waits for the right time. Talk with your pastor. Lord, keep them close.', [], { ...en, userText: x16 })).toContain('non_store_scripture');
+  });
   it('the plain answer suggests her pastor for her own situation', async () => {
     expect(await reject('Scripture keeps sex for marriage, as Hebrews 13:4 says. Waiting is a gift. Lord, keep them close.', [], { ...en, userText: x16 })).toContain('missing_pastor');
   });

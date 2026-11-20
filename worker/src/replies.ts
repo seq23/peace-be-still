@@ -36,30 +36,67 @@ const trustedSafe = {
 // No one prays this message, so it never says "I am praying": it says what is true.
 const close = { en: 'Someone is ready to listen right now.', es: 'Hay alguien listo para escucharte ahora mismo.' };
 
-// Medical danger (round 4, x10: Xanax with wine got only 988): what to do, in the order it matters.
-// Poison Control (America's Poison Centers) is free, any hour, with interpreters in Spanish.
-const medical = {
-  en: [
-    "Please don't take any extra, and don't mix medicine with alcohol. Sleep, anxiety or pain pills taken with alcohol or in extra doses can slow or stop breathing.",
-    'If they have already been taken, call Poison Control now at 1-800-222-1222. It is free, any time.',
-    'If someone is very sleepy, hard to wake or breathing slowly, call 911 now.',
-    'If you stopped a medicine like insulin or seizure medicine, call your doctor today. A pharmacist can also tell you what is safe for sleep tonight.',
-    'If you are thinking about ending your life, call or text 988.',
-  ],
-  es: [
-    'Por favor, no tomes ninguna dosis extra y no mezcles medicinas con alcohol. Las pastillas para dormir, para la ansiedad o para el dolor, con alcohol o en dosis extra, pueden hacer que la respiración se vuelva lenta o se detenga.',
-    'Si ya se tomaron, llama ahora al Centro de Envenenamientos al 1-800-222-1222. Es gratis, a cualquier hora, y atienden en español.',
-    'Si alguien está muy dormido, no despierta bien o respira despacio, llama al 911 ahora.',
-    'Si dejaste una medicina como la insulina o la de las convulsiones, llama hoy a tu médico. Un farmacéutico también te puede decir qué es seguro para dormir esta noche.',
-    'Si estás pensando en quitarte la vida, llama al 988 y oprime 2 para español, o envía un texto al 988.',
-  ],
+// Medical danger (round 4, x10: Xanax with wine got only 988): what to do, in the order it matters,
+// for what she wrote: medicine mixed with alcohol or extra doses; a child who swallowed something;
+// a medicine she stopped. Poison Control (America's Poison Centers) is free, any hour, with
+// interpreters in Spanish.
+export type MedicalCase = 'mix' | 'child' | 'stopped';
+export function medicalCase(text: string): MedicalCase {
+  const t = ` ${text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ')} `;
+  if (/ (?:baby|toddler|son|daughter|kid|kids|child|grandbaby|grandson|granddaughter|\d+ (?:year|month) old|bebe|nino|nina|hijo|hija|nieto|nieta) /.test(t) && / (?:swallowed|ate|drank|got into|se tomo|se trago|se comio|se bebio|agarro) /.test(t)) return 'child';
+  if (/ (?:stopped|quit|stop taking|came off|dejo|deje|deje de tomar|ya no tomo|suspendi) /.test(t) && !/ (?:wine|alcohol|drink\w*|beer|vino|cerveza\w*|tragos?) /.test(t)) return 'stopped';
+  return 'mix';
+}
+const medical: Record<MedicalCase, Record<Lang, string[]>> = {
+  mix: {
+    en: [
+      "Please don't take any extra, and don't mix medicine with alcohol. Sleep, anxiety or pain pills taken with alcohol or in extra doses can slow or stop breathing.",
+      'If they have already been taken, call Poison Control now at 1-800-222-1222. It is free, any time.',
+      'If someone is very sleepy, hard to wake or breathing slowly, call 911 now.',
+      'A pharmacist can tell you what is safe for sleep tonight.',
+      'If you are thinking about ending your life, call or text 988.',
+    ],
+    es: [
+      'Por favor, no tomes ninguna dosis extra y no mezcles medicinas con alcohol. Las pastillas para dormir, para la ansiedad o para el dolor, con alcohol o en dosis extra, pueden hacer que la respiración se vuelva lenta o se detenga.',
+      'Si ya se tomaron, llama ahora al Centro de Envenenamientos al 1-800-222-1222. Es gratis, a cualquier hora, y atienden en español.',
+      'Si alguien está muy dormido, no despierta bien o respira despacio, llama al 911 ahora.',
+      'Un farmacéutico te puede decir qué es seguro para dormir esta noche.',
+      'Si estás pensando en quitarte la vida, llama al 988 y oprime 2 para español, o envía un texto al 988.',
+    ],
+  },
+  child: {
+    en: [
+      'Please call Poison Control now at 1-800-222-1222, even if your child seems fine. They will tell you exactly what to do. It is free, any time.',
+      'If your child is very sleepy, hard to wake, having trouble breathing or having a seizure, call 911 now.',
+      'Keep the bottle or package with you for the call.',
+    ],
+    es: [
+      'Por favor, llama ahora al Centro de Envenenamientos al 1-800-222-1222, aunque tu hijo o hija parezca estar bien. Te dirán exactamente qué hacer. Es gratis, a cualquier hora, y atienden en español.',
+      'Si está muy dormido, no despierta bien, le cuesta respirar o tiene una convulsión, llama al 911 ahora.',
+      'Ten a la mano el frasco o el paquete para la llamada.',
+    ],
+  },
+  stopped: {
+    en: [
+      'Please call your doctor today about the medicine you stopped. Stopping some medicines all at once, like insulin or blood pressure, heart or seizure medicine, can be dangerous. Faith and treatment go together.',
+      'If you feel very sick, faint, or have chest pain, confusion or trouble breathing, call 911 now.',
+      'If you have taken too much of anything, call Poison Control at 1-800-222-1222, any time.',
+      'If you are thinking about ending your life, call or text 988.',
+    ],
+    es: [
+      'Por favor, llama hoy a tu médico sobre la medicina que dejaste. Dejar de golpe algunas medicinas, como la insulina o las de la presión, el corazón o las convulsiones, puede ser peligroso. La fe y el tratamiento van juntos.',
+      'Si te sientes muy mal, te desmayas, o tienes dolor de pecho, confusión o te cuesta respirar, llama al 911 ahora.',
+      'Si tomaste demasiado de algo, llama al Centro de Envenenamientos al 1-800-222-1222, a cualquier hora.',
+      'Si estás pensando en quitarte la vida, llama al 988 y oprime 2 para español, o envía un texto al 988.',
+    ],
+  },
 };
 
 /** The fixed crisis reply. Abuse leads with the hotline for what is happening (Childhelp for a
  *  child or teen, the Domestic Violence Hotline for an adult), then 988 and 911. Medical danger
  *  leads with what not to do, then Poison Control, 911, her doctor, then 988. */
-export function crisisText(kind: CrisisKind, lang: Lang, band: Band): string {
-  if (kind === 'medical') return [...medical[lang], ...(band === 'teen' ? [trusted[lang]] : []), close[lang]].join(' ');
+export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = ''): string {
+  if (kind === 'medical') return [...medical[medicalCase(herText)][lang], ...(band === 'teen' ? [trusted[lang]] : []), close[lang]].join(' ');
   const child = kind === 'child_abuse' || (kind === 'abuse' && band === 'teen');
   const parts = kind === 'selfharm'
     ? [open[lang], lifeline[lang], danger[lang]]

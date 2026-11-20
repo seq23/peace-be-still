@@ -140,7 +140,10 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
     else if (words(run).length >= 6) text = text.replace(m[0], ''); // the app shows the stored text below
   }
   // "Jesus said that..." is a paraphrase in her own words, not a quotation.
-  for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1])) problems.push('non_store_scripture');
+  // Her own words handed back ("Song of Solomon says love is beautiful", x16) are not a quotation:
+  // a claim that starts with three words she wrote is hers, not a verse.
+  const hers = ` ${fold(ctx.userText)} `;
+  for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1]) && !hers.includes(` ${words(m[1]).slice(0, 3).join(' ')} `)) problems.push('non_store_scripture');
   text = text.replace(/\s+([,.;:!?])/g, '$1').replace(/\(\s*\)/g, '').replace(/\s{2,}/g, ' ').trim();
   const archaic = words(text).filter(w => ARCHAIC.has(w)).length;
   if (ctx.lang === 'en' && archaic >= 2) problems.push('scripture_like');
