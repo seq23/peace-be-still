@@ -16,25 +16,30 @@ export function canUse(feature, user) { return feature === 'offline' && user?.pa
 
 /** Playback is owned by the host's native audio adapter, independent of screen lifecycle. */
 export function createPlayer({ audio, downloads, clock = globalThis, now = Date.now }) {
-  let track = null, timer = null, deadline = null, dimmed = false, playing = false, error = null;
+  let track = null, timer = null, deadline = null, dimmed = false, playing = false, error = null, generation = 0;
   const listeners = new Set();
   const state = () => ({ track, deadline, dimmed, playing, error });
   const notify = () => { for (const listener of listeners) listener(state()); };
   const clearTimer = () => { if (timer !== null) clock.clearTimeout(timer); timer = null; deadline = null; };
-  const expire = () => { clearTimer(); audio.pause(); playing = false; notify(); };
+  const expire = () => { generation++; clearTimer(); audio.pause(); playing = false; notify(); };
   return {
     state,
     subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); },
     async play(item, user) {
+      const current = ++generation;
       error = null;
       try {
         const local = canUse('offline', user) ? await downloads.find(item) : null;
+        if (current !== generation) return;
         await audio.load(local || item.url);
-        track = item; await audio.play(); playing = true; notify();
+        if (current !== generation) return;
+        track = item; await audio.play();
+        if (current !== generation) { audio.pause(); return; }
+        playing = true; notify();
       } catch (cause) { playing = false; error = 'Unable to play this audio.'; notify(); throw cause; }
     },
     async resume() { if (!track) return; if (deadline !== null && now() >= deadline) { expire(); return; } await audio.play(); playing = true; notify(); },
-    pause() { audio.pause(); playing = false; notify(); },
+    pause() { generation++; audio.pause(); playing = false; notify(); },
     setSleepTimer(minutes) {
       if (minutes !== null && ![15, 30, 45, 60].includes(minutes)) throw new Error('Invalid sleep timer');
       clearTimer();
@@ -45,6 +50,6 @@ export function createPlayer({ audio, downloads, clock = globalThis, now = Date.
     foreground() { if (deadline !== null && now() >= deadline) expire(); },
     setDimmed(value) { dimmed = Boolean(value); notify(); },
     async download(item, user) { if (!canUse('offline', user)) throw new Error('Offline downloads require a paid membership'); return downloads.save(item); },
-    dispose() { clearTimer(); listeners.clear(); audio.dispose(); }
+    dispose() { generation++; clearTimer(); listeners.clear(); audio.dispose(); }
   };
 }

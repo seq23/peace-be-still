@@ -45,3 +45,14 @@ test('screen renders and updates playback, dimming, timer and access states', as
  await press('Pause'); assert.match(text(), /Resume/);
  await act(async () => tree.unmount());
 });
+
+test('timer expiry prevents a pending load from starting playback', async () => {
+ let finishLoad, started = false, callback;
+ const player = createPlayer({ audio: { load: () => new Promise(resolve => { finishLoad = resolve; }), play: () => { started = true; }, pause() {}, dispose() {} }, downloads: { find: async () => null }, clock: { setTimeout: fn => { callback = fn; return 1; }, clearTimeout() {} } });
+ const pending = player.play(tracks[0], {});
+ await Promise.resolve();
+ player.setSleepTimer(15); callback();
+ finishLoad(); await pending;
+ assert.equal(started, false);
+ assert.equal(player.state().playing, false);
+});
