@@ -17,7 +17,8 @@ export function correctAge(settings: Settings, age: Age): Settings {
   return settings.age && rank[age] > rank[settings.age] ? settings : withAge(settings, age);
 }
 export function withAge(settings: Settings, age: Age): Settings {
-  return { ...settings, age, voice: age === 'teen' ? 'teen' : settings.voice === 'teen' ? 'plain' : settings.voice };
+  const chatLed = settings.journey === 'Hush Harbor' || settings.journey === 'Mi Refugio';
+  return { ...settings, age, journey: age === 'child' && chatLed ? undefined : settings.journey, voice: age === 'teen' ? 'teen' : age === 'child' || settings.voice === 'teen' ? 'plain' : settings.voice };
 }
 export const faithJourneys = [
   ['Hush Harbor', 'Black Bible Chat & Stories'], ['Mi Refugio', 'Biblia y Chat en Español'],

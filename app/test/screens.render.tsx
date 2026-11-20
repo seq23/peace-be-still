@@ -70,6 +70,15 @@ test('birth-year correction cannot promote a child', async () => {
  assert.match(strings(tree), /older age group/);
 });
 
+test('correcting to a child clears a chat-led selection', async () => {
+ const tree = await mount({ ...base, journey: 'Hush Harbor', voice: 'church' });
+ await press(tree, 'Settings'); await press(tree, 'Birth year');
+ await enterYear(tree, '2020');
+ assert.equal(JSON.parse(saved!).age, 'child');
+ assert.equal(JSON.parse(saved!).journey, undefined);
+ assert.doesNotMatch(strings(tree), /Hush Harbor|Mi Refugio/);
+});
+
 
 test('a settings read failure does not permit resetting the age restriction', async () => {
  const storage = (globalThis as any).__pbsStorage;
