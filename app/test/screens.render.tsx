@@ -69,3 +69,15 @@ test('birth-year correction cannot promote a child', async () => {
  assert.equal(JSON.parse(saved!).age, 'child');
  assert.doesNotMatch(strings(tree), /Chat voice/);
 });
+
+
+test('a settings read failure does not permit resetting the age restriction', async () => {
+ const storage = (globalThis as any).__pbsStorage;
+ const getItem = storage.getItem;
+ storage.getItem = async () => { throw new Error('unavailable'); };
+ try {
+  const tree = await mount();
+  assert.match(strings(tree), /saved settings could not be read/);
+  assert.equal(tree.root.findAllByType('Pressable' as any).length, 0);
+ } finally { storage.getItem = getItem; }
+});
