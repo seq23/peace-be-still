@@ -7,12 +7,12 @@ import { readManifest, type ManifestRow, type Titles } from './library';
 
 export const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 export const MANIFEST = join(REPO, 'audio/manifest.jsonl');
-const STORIES = join(REPO, 'content/stories') + sep;
+const SCRIPT_ROOTS = ['stories', 'imagination-nights'].map(folder => join(REPO, 'content', folder) + sep);
 
-/** A story row's ref is its script's path in the repo; its title is the script's own title. */
-export function storyTitle(row: ManifestRow): Titles | null {
+/** Content rows point to the source script that supplies their display title. */
+export function scriptTitle(row: ManifestRow): Titles | null {
   const path = resolve(REPO, row.ref);
-  if (!path.startsWith(STORIES) || !path.endsWith('.json') || !existsSync(path)) return null;
+  if (!SCRIPT_ROOTS.some(root => path.startsWith(root)) || !path.endsWith('.json') || !existsSync(path)) return null;
   try {
     const title = JSON.parse(readFileSync(path, 'utf8')).title;
     return typeof title === 'string' && title.trim() ? { [row.lang]: title.trim() } : null;
@@ -20,7 +20,7 @@ export function storyTitle(row: ManifestRow): Titles | null {
 }
 
 export function buildLibrary(jsonl = readFileSync(MANIFEST, 'utf8')) {
-  return readManifest(jsonl, storyTitle);
+  return readManifest(jsonl, scriptTitle);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

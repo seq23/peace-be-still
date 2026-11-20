@@ -4,13 +4,16 @@ export type Lang = 'en' | 'es';
 export type Titles = Partial<Record<Lang, string>>;
 
 /** One line of audio/manifest.jsonl, as the Mac library fill writes it (only the fields the app reads). */
+export type ResponsePauses = readonly [number, number];
+export const RESPONSE_PAUSE_SECONDS = 3;
+
 export type ManifestRow = {
-  file: string; kind: string; lang: string; ref: string; seconds: number; sha256: string; voice: string; status: string;
+  file: string; kind: string; lang: string; ref: string; seconds: number; sha256: string; voice: string; status: string; checks?: { pause_starts_s?: unknown };
 };
 
 /** What ships in the app: passed rows only, no Drive paths, no checks, a readable title. The R2 key is `file`. */
 export type Track = {
-  file: string; kind: string; lang: Lang; ref: string; seconds: number; sha256: string; voice: string; titles: Titles;
+  file: string; kind: string; lang: Lang; ref: string; seconds: number; sha256: string; voice: string; titles: Titles; responsePauses?: ResponsePauses;
 };
 
 export type Skipped = { line: number; reason: string };
@@ -55,10 +58,26 @@ export function readManifest(jsonl: string, titleOf: (row: ManifestRow) => Title
     const titles = chapterTitles(full.ref) ?? titleOf(full);
     if (!titles || !Object.values(titles).some(Boolean)) { skipped.push({ line, reason: 'no readable title' }); return; }
     const { file, kind, ref, seconds, sha256, voice } = full;
-    tracks.push({ file, kind, lang: full.lang as Lang, ref, seconds, sha256, voice, titles });
+    const track: Track = { file, kind, lang: full.lang as Lang, ref, seconds, sha256, voice, titles };
+    const starts = full.checks?.pause_starts_s;
+    if (hasCallAndResponse(track) && Array.isArray(starts) && starts.length === 2) {
+      const [first, second] = starts;
+      if (typeof first === 'number' && typeof second === 'number' &&
+          first >= 0 && first + RESPONSE_PAUSE_SECONDS <= second && second + RESPONSE_PAUSE_SECONDS <= seconds) {
+        track.responsePauses = [first, second];
+      }
+    }
+    tracks.push(track);
   });
   if (!tracks.length) throw new LibraryEmptyError(skipped.length);
   return { tracks, skipped };
+}
+
+export function hasCallAndResponse(track: Track): boolean {
+  return track.kind === 'stories' && (
+    track.ref.startsWith('content/stories/hush-harbor/') ||
+    track.ref.startsWith('content/stories/mi-refugio/')
+  );
 }
 
 /** The title in the phone's language, else the track's own language. */

@@ -363,15 +363,20 @@ test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does
 function testPlayer(track: Track, baseUrl: string | null = 'https://audio.test/', position = 0,
   fetchHash: () => Promise<string> = async () => track.sha256) {
   let at = 0;
+  let playing = false;
+  let listener: ((status: { playing: boolean; isLoaded: boolean; didJustFinish: boolean }) => void) | undefined;
   const audio = {
     load: () => { at = 0; },
-    play() {},
-    pause() {},
+    play() { playing = true; },
+    pause() { playing = false; },
     isLoaded: true,
     get currentTime() { return at; },
     volume: 1,
     async seekTo(seconds: number) { at = seconds; },
-    onStatus: () => () => undefined,
+    onStatus: (notify: typeof listener) => {
+      listener = notify;
+      return () => { listener = undefined; };
+    },
     dispose() {},
   };
   const files = new Map<string, string>();
@@ -390,7 +395,10 @@ function testPlayer(track: Track, baseUrl: string | null = 'https://audio.test/'
   };
   const player = createPlayer({ audio, downloads, store, lang: 'en', baseUrl });
   Object.assign(globalThis, { __pbsPlayer: player });
-  return { ...player, position: () => at };
+  return {
+    ...player, position: () => at,
+    move(seconds: number) { at = seconds; listener?.({ playing, isLoaded: true, didJustFinish: false }); },
+  };
 }
 
 test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor stories', async () => {
@@ -512,12 +520,25 @@ test('a paid listener sees download in progress, failure and successful retry', 
   }
 });
 
-test('the Hush Harbor response lines and Spanish timer render in the player', async () => {
+test('Hush Harbor cues follow the real pause positions and the Spanish player renders its timer', async () => {
   const track = audioTracks.find(track => track.ref.startsWith('content/stories/hush-harbor/'))!;
   const player = testPlayer(track);
   const english = await mount('listen', { ...base, journey: 'hush-harbor' }, { track: track.sha256 });
-  assert.ok(texts(english).includes(en['listen.responseFirst']));
-  assert.ok(texts(english).includes(en['listen.responseSecond']));
+  assert.ok(track.responsePauses, 'the real story carries both audio pause positions');
+  const [first, second] = track.responsePauses;
+  await press(english, en['listen.play']);
+  const expectCue = async (position: number, cue: string | null) => {
+    await act(async () => player.move(position));
+    assert.deepEqual(
+      texts(english).filter(text => text === en['listen.responseFirst'] || text === en['listen.responseSecond']),
+      cue === null ? [] : [cue],
+    );
+  };
+  await expectCue(first - 0.25, null);
+  await expectCue(first, en['listen.responseFirst']);
+  await expectCue(first + 3, null);
+  await expectCue(second, en['listen.responseSecond']);
+  await expectCue(second + 3, null);
   assert.deepEqual(faithContentIssues(strings(english)), []);
   await act(async () => english.unmount());
 
@@ -528,6 +549,7 @@ test('the Hush Harbor response lines and Spanish timer render in the player', as
   let spanish!: ReactTestRenderer;
   await act(async () => { spanish = create(<SettingsProvider><Ready /></SettingsProvider>); });
   try {
+    await act(async () => player.move(first));
     assert.ok(texts(spanish).includes(es['listen.responseFirst']));
     assert.ok(strings(spanish).includes(es['listen.aiVoice']));
     await press(spanish, es['listen.timer']);

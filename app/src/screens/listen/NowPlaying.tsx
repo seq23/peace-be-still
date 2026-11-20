@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { canUse } from '../../gates';
-import { trackTitle, type Track } from '../../player/library';
+import { hasCallAndResponse, trackTitle, type Track } from '../../player/library';
 import { SLEEP_MINUTES, type SleepMinutes } from '../../player/player';
 import { useDimmer, usePlayer } from '../../player/usePlayer';
 import { useSettings, useT } from '../../settings';
@@ -33,13 +33,14 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const downloadRequest = useRef(false);
   const current = state.track?.file === track.file;
   const playing = current && state.playing;
+  const response = current ? state.response : null;
   const focused = useIsFocused();
-  const { dimmed, touch } = useDimmer(focused && playing);
+  const { dimmed, touch } = useDimmer(focused && playing && response === null);
   const offlineAllowed = canUse('offline', user);
   const saved = offlineAllowed && (downloaded || downloadAvailable(track, user));
   const unavailable = stop === 'CONFIG_AUDIO_BASE_URL' && !saved;
   const shelf = shelfOf(track);
-  const responses = shelf === 'hushHarbor' || shelf === 'miRefugio';
+  const untimedResponses = hasCallAndResponse(track) && !track.responsePauses;
   const label = shelf === 'psalms' ? t('journey.psalmNights.name')
     : shelf === 'imagination' ? t('journey.imaginationNights.name')
     : shelf === 'hushHarbor' ? t('journey.hushHarbor.name')
@@ -100,10 +101,15 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
           <Text accessibilityRole="header" style={styles.title}>{trackTitle(track, t.locale)}</Text>
           <Text style={styles.secondary}>{[clock, t('listen.aiVoice')].join(' · ')}</Text>
         </View>
-        {responses && <View style={styles.responses}>
+        {untimedResponses && <View style={styles.responses}>
           <Text style={styles.secondary}>{t('listen.respondDuringPauses')}</Text>
           <Text style={styles.response}>{t('listen.responseFirst')}</Text>
           <Text style={styles.response}>{t('listen.responseSecond')}</Text>
+        </View>}
+        {track.responsePauses && <View style={styles.cue}>
+          <Text accessibilityLiveRegion="polite" style={styles.response}>
+            {response === null ? '' : t(response === 0 ? 'listen.responseFirst' : 'listen.responseSecond')}
+          </Text>
         </View>}
         {unavailable ?
           <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.audioNotReady')}</Text> :
@@ -129,7 +135,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         ) : <Text style={styles.secondary}>{t('listen.paidDownload')}</Text>}
         {downloadFailed && <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.downloadFailed')}</Text>}
       </ScrollView>
-      {dimmed && <Pressable accessibilityRole="button" accessibilityLabel={t('listen.brighten')} onPress={touch} style={styles.dim} />}
+      {dimmed && response === null && <Pressable accessibilityRole="button" accessibilityLabel={t('listen.brighten')} onPress={touch} style={styles.dim} />}
       {timerOpen && <Modal visible transparent animationType="slide" onRequestClose={() => setTimerOpen(false)}>
         <View style={styles.modal}>
           <SafeAreaView edges={['bottom']} style={styles.sheet} accessibilityViewIsModal>
@@ -165,6 +171,7 @@ const styles = StyleSheet.create({
   main: { color: night.ink, fontFamily: fonts.body, fontSize: 16 },
   secondary: { color: night.muted, fontFamily: fonts.body, fontSize: 14, lineHeight: 20 },
   link: { color: night.glow, fontFamily: fonts.strong, fontSize: 16 },
+  cue: { minHeight: 30 },
   responses: { gap: 8, marginBottom: 16 },
   response: { color: night.ink, fontFamily: fonts.serif, fontSize: 21, lineHeight: 30 },
   play: { minHeight: 56, paddingHorizontal: 32, borderRadius: 28, backgroundColor: night.glow, alignSelf: 'center', justifyContent: 'center' },

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import * as ExpoBrightness from 'expo-brightness';
 import { Directory, File, Paths } from 'expo-file-system';
+import { Platform } from 'react-native';
 import type { Brightness } from './dimmer';
 import type { DownloadFiles } from './downloads';
 import type { AudioOutput, AudioStatus, Store } from './player';
@@ -14,29 +15,33 @@ export function prepareAudioSession(): Promise<void> {
 }
 
 export function expoAudioOutput(): AudioOutput {
-  const player = createAudioPlayer(null, { updateInterval: 1000 });
+  const player = createAudioPlayer(null, { updateInterval: 250 });
   // Our own view of "the current source is ready": replace() resets it, so an old item's status never counts.
   let ready = false;
-  let last = { playing: false, isLoaded: false };
   const listeners = new Set<(status: AudioStatus) => void>();
   player.addListener('playbackStatusUpdate', (status) => {
     if (status.isLoaded) ready = true;
-    const changed = status.playing !== last.playing || status.isLoaded !== last.isLoaded;
-    last = { playing: status.playing, isLoaded: status.isLoaded };
-    if (!changed && !status.didJustFinish) return;
     const forwarded = { playing: status.playing, isLoaded: ready, didJustFinish: status.didJustFinish };
     for (const listener of listeners) listener(forwarded);
   });
   return {
-    load(uri, title) {
+    load(uri, title, allowSeek) {
       ready = false;
-      last = { playing: last.playing, isLoaded: false };
       player.replace({ uri });
-      player.setActiveForLockScreen(true, { title, artist: 'Peace Be Still' }, { showSeekBackward: true, showSeekForward: true });
+      if (!allowSeek && Platform.OS === 'web') {
+        // Expo Web always installs seek-to when it registers a media session.
+        player.clearLockScreenControls();
+        return;
+      }
+      player.setActiveForLockScreen(true, { title, artist: 'Peace Be Still' }, {
+        showSeekBackward: allowSeek, showSeekForward: allowSeek,
+        // Expo's live presentation disables native scrubbing as well as hiding skip buttons.
+        isLiveStream: !allowSeek,
+      });
     },
     play: () => player.play(),
     pause: () => player.pause(),
-    seekTo: (seconds) => player.seekTo(seconds),
+    seekTo: (seconds) => player.seekTo(seconds, 0, 0),
     get isLoaded() { return ready; },
     get currentTime() { return player.currentTime; },
     get volume() { return player.volume; },
