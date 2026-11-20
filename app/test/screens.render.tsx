@@ -517,13 +517,20 @@ for (const locale of ['en', 'es'] as const) {
     const draft = await mount('dailyPage', person, { page: 'story' });
     assert.ok(strings(draft).includes(copy['daily.noStory']));
     await press(draft, copy['daily.readBible']);
-    assert.equal((calls.at(-1)?.[1] as { pathname: string }).pathname, '/bible/[page]');
+    const [action, destination] = calls.at(-1)!;
+    const passage = destination as { pathname: string; params: { page: string; book: string; chapter: number } };
+    assert.equal(action, 'push');
+    assert.equal(passage.pathname, '/bible/[page]');
+    assert.equal(passage.params.page, 'chapter');
     const today = await mount('today', person);
     assert.ok(!strings(today).includes(copy['daily.openStory']));
     assert.ok(!strings(today).includes(copy['daily.draft']));
     assert.ok(!strings(today).includes(copy['daily.listenStory']));
     await press(today, copy['daily.readBible']);
-    assert.deepEqual(calls.at(-1), ['push', '/bible']);
+    assert.deepEqual(calls.at(-1), ['push', {
+      pathname: '/bible/[page]',
+      params: { page: 'chapter', book: passage.params.book, chapter: passage.params.chapter },
+    }]);
     const extras = host(today, 'View').find(node => node.children.some(child =>
       typeof child !== 'string' && textOf(child) === copy['daily.more'],
     ) && textOf(node).includes(copy['daily.title.plans']) && textOf(node).includes(copy['daily.title.journal']));

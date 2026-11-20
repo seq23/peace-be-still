@@ -8,7 +8,8 @@ import { Body, Card, Label, Screen, TextLink, styles, usePalette } from '../../s
 import { fonts } from '../../src/theme/tokens';
 import { canUse } from '../../src/gates';
 import { daily, pages, type DailyPage } from '../../src/screens/daily/Daily';
-import { declaration, todayStory } from '../../src/screens/daily/content';
+import { declaration, storyPassage, todayStory } from '../../src/screens/daily/content';
+import { parseReference } from '../../src/bible/core';
 import { DeclarationVerse } from '../../src/screens/daily/DeclarationVerse';
 import { WeekStrip } from '../../src/ui/week';
 import type { Key } from '../../src/i18n';
@@ -22,6 +23,7 @@ export default function Today() {
   const user = { age: settings.age, paid: false };
   const record = daily.useRecord();
   const story = todayStory(now);
+  const passage = parseReference(storyPassage(now));
   const word = declaration(settings.door, now);
   const open = (page: DailyPage) => router.push({ pathname: '/today/[page]', params: { page } });
   const faith = settings.door !== 'mindset';
@@ -58,7 +60,9 @@ export default function Today() {
           </Pressable>
         </View>
         <Body size={14}>{t('daily.storyAudioUnavailable')}</Body>
-      </> : <TextLink onPress={() => router.push('/bible')}>{t('daily.readBible')}</TextLink>)}
+      </> : <TextLink onPress={() => router.push(passage
+        ? { pathname: '/bible/[page]', params: { page: 'chapter', book: passage.book, chapter: passage.chapter } }
+        : '/bible')}>{t('daily.readBible')}</TextLink>)}
       {!faith && canUse(pages.journal.feature, user) && item('today.scene.label', t('today.scene.text'), <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>)}
       <Card style={{ paddingVertical: 12 }}>
         <View style={styles.row}>
