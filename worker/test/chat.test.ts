@@ -50,6 +50,9 @@ describe('order of checks', () => {
     expect(payload.age).toBe('teen');
     expect(payload.kid).toBe('k1');
     expect(payload.iid).toMatch(/^[0-9a-f-]{36}$/);
+    const res = await call(d, '/api/token', { body: { age: 'adult' }, ip: freshIp() });
+    const issued = (await res.json()) as { token: string; installId: string };
+    expect(JSON.parse(atob(issued.token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'))).iid).toBe(issued.installId);
   });
   it('a teen token cannot be used as an adult: teen rules are forced whatever the voice', async () => {
     const rung = scripted('workers-ai', [good('That is hard. Please talk with a parent or counselor. Lord, be near.')]);

@@ -18,8 +18,9 @@ async function token(age: Age, fetcher: typeof fetch, fresh = false): Promise<st
   }
   const res = await fetcher(`${CHAT_API}/token`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ age }) });
   if (!res.ok) throw new ChatError(`token ${res.status}`);
-  const { token: value } = (await res.json()) as { token: string };
-  await AsyncStorage.setItem(TOKEN_KEY, JSON.stringify({ token: value, age }));
+  const { token: value, installId } = (await res.json()) as { token: string; installId: string };
+  // installId is the anonymous id RevenueCat should know her by (phase 5: Purchases.logIn(installId)).
+  await AsyncStorage.setItem(TOKEN_KEY, JSON.stringify({ token: value, age, installId }));
   return value;
 }
 
@@ -45,4 +46,9 @@ export async function deleteChatMemory(fetcher: typeof fetch = fetch): Promise<v
   if (!saved?.token) return; // never chatted: nothing is stored
   const res = await fetcher(`${CHAT_API}/memory`, { method: 'DELETE', headers: { authorization: `Bearer ${saved.token}` } });
   if (!res.ok && res.status !== 401) throw new ChatError(`memory ${res.status}`);
+}
+
+/** The anonymous install id from the server, once she has chatted; phase 5 logs RevenueCat in with it. */
+export async function installId(): Promise<string | null> {
+  return (JSON.parse((await AsyncStorage.getItem(TOKEN_KEY)) ?? 'null') as { installId?: string } | null)?.installId ?? null;
 }

@@ -17,8 +17,13 @@ const items = [
 if (!items.length) { console.error('NAMED STOP REDTEAM_EMPTY'); process.exit(3); }
 mkdirSync('redteam-out', { recursive: true });
 
+// Each item is its own install (free lane: one conversation a day per install). Locally, a distinct
+// cf-connecting-ip per item keeps the 3-tokens-per-IP limit out of the way; a 429 waits a minute.
+let n = 0;
 async function token(age) {
-  const res = await fetch(`${base}/token`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ age }) });
+  const ip = `198.18.${Math.floor(++n / 250)}.${n % 250 + 1}`;
+  let res = await fetch(`${base}/token`, { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip }, body: JSON.stringify({ age }) });
+  if (res.status === 429 && age !== 'child') { await new Promise(r => setTimeout(r, 61_000)); return token(age); }
   if (age === 'child') return res.status;
   if (!res.ok) throw new Error(`token ${res.status}`);
   return (await res.json()).token;

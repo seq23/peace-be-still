@@ -11,7 +11,7 @@ import { paidStatus, type Paid } from './entitlement';
 import { ipHash } from './iphash';
 import { runLadder, tally, type LadderRung, type Metrics } from './ladder';
 import { deleteMemory, markCrisis, readMemory, saveMemory } from './memory';
-import { memoryBlock, prompts, summaryPrompt, type PromptId } from './prompts';
+import { memoryBlock, prompts, spanishOnly, summaryPrompt, type PromptId } from './prompts';
 import { gemini } from './providers/gemini';
 import { openRouter } from './providers/openrouter';
 import type { Message } from './providers/types';
@@ -101,7 +101,7 @@ function parseChat(body: unknown): ChatRequest | null {
 export function voiceFor(req: ChatRequest, install: Install): { lang: Lang; translation: Translation; prompt: PromptId; teen: boolean } {
   const lang: Lang = req.journey === 'Mi Refugio' || req.voice === 'spanish' || req.language === 'es' ? 'es' : 'en';
   const teen = install.age === 'teen';
-  const prompt: PromptId = teen ? (lang === 'es' ? 'teen-es' : 'teen') : req.door === 'mindset' && lang === 'en' ? 'mindset' : lang === 'es' ? 'spanish' : req.voice === 'church' ? 'church' : 'plain';
+  const prompt: PromptId = teen ? (lang === 'es' ? 'teen-es' : 'teen') : req.door === 'mindset' ? 'mindset' : lang === 'es' ? 'spanish' : req.voice === 'church' ? 'church' : 'plain';
   return { lang, translation: lang === 'es' ? 'RV1909' : 'KJV', prompt, teen };
 }
 
@@ -122,7 +122,8 @@ async function token(request: Request, env: Env, deps: Deps): Promise<Response> 
   }
   try {
     const issued = await issueToken({ kid: env.CHAT_TOKEN_KID, secret: env.CHAT_TOKEN_SECRET }, body.age, now);
-    return json({ token: issued.token });
+    // The install id is also RevenueCat's app user id (phase 5 logs in with it), so paid status can be checked here.
+    return json({ token: issued.token, installId: issued.installId });
   } catch { return fail('CHAT_TOKEN_SECRET_MISSING', 503); }
 }
 
@@ -191,7 +192,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   if (IDENTITY.test(` ${last.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()} `)) return done({ kind: 'answer', ai: true, text: identityText[v.lang], scripture: [] });
 
   const memory = paid.paid ? await readMemory(env.DB, who.installId) : null;
-  const system: Message[] = [{ role: 'system', content: prompts[v.prompt] }];
+  const system: Message[] = [{ role: 'system', content: v.prompt === 'mindset' && v.lang === 'es' ? `${prompts.mindset}\n${spanishOnly}` : prompts[v.prompt] }];
   if (memory) system.push({ role: 'system', content: memoryBlock(memory, v.lang) });
   const history: Message[] = turns.map(t => ({ role: t.role, content: t.text }));
   const rungs = deps.rungs(env, now);

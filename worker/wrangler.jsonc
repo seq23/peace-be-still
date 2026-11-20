@@ -9,7 +9,6 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "peace-be-still-chat",
   "main": "src/index.ts",
-  "tsconfig": "./tsconfig.json",
   "compatibility_date": "2026-11-20",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": false,
