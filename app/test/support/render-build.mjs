@@ -25,7 +25,7 @@ const MOCKS = {
     exports.Redirect = props => React.createElement('Redirect', props);
     const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
     exports.Stack = layout('Stack'); exports.Tabs = layout('Tabs');`,
-  'expo-font': `exports.useFonts = () => [true];`,
+  'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
   'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`,
   '@react-native-async-storage/async-storage': `module.exports = { __esModule: true, default: globalThis.__pbsStorage };`,
   'react-native-purchases': `exports.default = { configure() {} };`,

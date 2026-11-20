@@ -112,6 +112,16 @@ test('the tabs and Settings exist only once onboarding is done, so a deep link b
   assert.equal(await guard({ ...base, journey: 'psalm-nights' }), true);
 });
 
+test('a font that fails to load (a slow phone) never holds the app on the spinner', async () => {
+  (globalThis as any).__pbsFonts = [false, new Error('timed out')];
+  try {
+    saved = JSON.stringify({ ...base, journey: 'psalm-nights' });
+    let tree!: ReactTestRenderer;
+    await act(async () => { tree = create(<screens.root.default />); });
+    assert.equal(host(tree, 'Stack').length, 1);
+  } finally { (globalThis as any).__pbsFonts = undefined; }
+});
+
 test('a deep link straight to Settings renders it, and its back link returns to More', async () => {
   const tree = await mount('settings', { ...base, journey: 'psalm-nights' });
   assert.match(strings(tree), /Settings/);

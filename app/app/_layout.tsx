@@ -15,12 +15,13 @@ import { Body, Screen, usePalette } from '../src/ui';
 import { fonts } from '../src/theme/tokens';
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({ LibreCaslonText_400Regular, Figtree_400Regular, Figtree_600SemiBold, SplineSansMono_500Medium });
+  const [fontsLoaded, fontError] = useFonts({ LibreCaslonText_400Regular, Figtree_400Regular, Figtree_600SemiBold, SplineSansMono_500Medium });
   useEffect(() => { void configureRevenueCat().catch(error => console.warn('RevenueCat initialization failed', error)); }, []);
   return (
     <SafeAreaProvider>
       <SettingsProvider>
-        <Root fontsLoaded={fontsLoaded} />
+        {/* A font that fails or times out (a slow phone) falls back to the system face; it never holds the app on a spinner. */}
+        <Root fontsLoaded={fontsLoaded || !!fontError} />
       </SettingsProvider>
     </SafeAreaProvider>
   );
