@@ -81,3 +81,26 @@ test('a settings read failure does not permit resetting the age restriction', as
   assert.equal(tree.root.findAllByType('Pressable' as any).length, 0);
  } finally { storage.getItem = getItem; }
 });
+
+test('faith screens in both languages and all age bands pass the shared content gate', async () => {
+ for (const language of ['en', 'es'] as const) for (const age of ['child', 'teen', 'adult'] as const) {
+  const check = (tree: ReactTestRenderer) => assert.deepEqual(faithContentIssues(strings(tree)), []);
+  const ageTree = await mount({ ...base, age: null, language });
+  check(ageTree);
+  const tree = await mount({ ...base, age, voice: age === 'teen' ? 'teen' : 'plain', language });
+  check(tree);
+  await press(tree, 'Psalm Nights'); await press(tree, language === 'es' ? 'Comenzar Psalm Nights' : 'Start Psalm Nights'); check(tree);
+  await press(tree, language === 'es' ? 'Hoy' : 'Today'); check(tree);
+  await press(tree, language === 'es' ? 'Volver al inicio' : 'Back home');
+  if (age !== 'child') { await press(tree, 'Chat'); check(tree); await press(tree, language === 'es' ? 'Volver al inicio' : 'Back home'); }
+  await press(tree, language === 'es' ? 'Guardados' : 'Saved'); check(tree);
+  await press(tree, language === 'es' ? 'Volver al inicio' : 'Back home');
+  await press(tree, language === 'es' ? 'Configuración' : 'Settings'); check(tree);
+ }
+});
+
+test('faith gate catches a prohibited word in rendered text', async () => {
+ let tree!: ReactTestRenderer;
+ await act(async () => { tree = create(React.createElement('Text', null, 'manifesting')); });
+ assert.ok(faithContentIssues(strings(tree)).length > 0);
+});
