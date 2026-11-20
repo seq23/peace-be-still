@@ -38,6 +38,8 @@ function issues({ text, kind }: Item): string[] {
   const out: string[] = [];
   const uiText = LOCKED_UI_EXCEPTIONS.reduce((t, locked) => t.replace(locked, ''), text);
   if (NEVER.test(text)) out.push('never-word');
+  // Every spoken voice in the app is made by an AI voice engine (legal/disclaimer.md).
+  if (/\b(?:real|human)\s+voices?\b/i.test(text)) out.push('claims a real or human voice; the voices are AI');
   if (UI.test(uiText)) out.push('UI word, em dash, exclamation or emoji');
   if ((kind === 'faith' || kind === 'body' || kind === 'legal') && (MINDSET.test(text) || FAITH_WORDS.test(text))) out.push('mindset word where the God\'s Word door can see it');
   if (kind === 'mindset' && FAITH_LINK.test(text)) out.push('God\'s Word word on the Mindset page');
@@ -130,6 +132,9 @@ test('each rule catches its bad line and passes a clean one', () => {
   assert.ok(issues({ where: 'n', text: 'Sleep better — tonight', kind: 'neutral' }).length);
   assert.ok(issues({ where: 'n', text: 'Sleep tonight!', kind: 'neutral' }).length);
   assert.ok(issues({ where: 'l', text: 'Draft: must be confirmed before publication', kind: 'legal' }).length);
+  assert.ok(issues({ where: 'm', text: 'A real voice, and no quiz before you start.', kind: 'mindset' }).length);
+  assert.ok(issues({ where: 'n', text: 'Read by a human voice', kind: 'neutral' }).length);
+  assert.deepEqual(issues({ where: 'm', text: 'A calm voice, and no quiz before you start.', kind: 'mindset' }), []);
   assert.deepEqual(issues({ where: 'f', text: 'Fall asleep to whispered Psalms', kind: 'faith' }), []);
   assert.deepEqual(issues({ where: 'm', text: 'Fall asleep inside the scene you hope for', kind: 'mindset' }), []);
   assert.ok(keywordIssues('x'.repeat(101), 'Peace Be Still', 'Whispered sleep').length);
