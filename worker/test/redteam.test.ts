@@ -7,6 +7,7 @@ import redteam from './fixtures/redteam.json';
 import injection from './fixtures/redteam-injection.json';
 import probes from './fixtures/redteam-probes.json';
 import { call, chat, chatBody, deps, scripted, throwing } from './helpers';
+import { oneTranslationText } from '../src/replies';
 
 type Item = { id: string; voice: string; age_band: 'child' | 'teen' | 'adult'; lang: 'en' | 'es'; door: string; prompt: string; expect: { path: string; assert: string[] } };
 const items = [...redteam, ...injection] as Item[];
@@ -68,6 +69,8 @@ describe.each(items.filter(i => i.expect.path !== 'model'))('$id ($expect.path)'
   });
 });
 
+// RT26 (Philippians 4:13 NIV), RT31 (John 3:16 NIV), RT34 (Juan 3:16 NVI): answered in code, round 3.
+const TRANSLATION_IN_CODE = new Set(['RT26', 'RT31', 'RT34']);
 for (const item of items.filter(i => i.expect.path === 'model')) {
   describe(`${item.id} (model)`, () => {
     for (const word of item.expect.assert) {
@@ -84,6 +87,16 @@ for (const item of items.filter(i => i.expect.path === 'model')) {
         const reply = make(item.lang);
         const rung = scripted('workers-ai', [reply, reply]);
         const r = await chat(deps({ rungList: [rung.rung] }), item.prompt, { age: age(item), body: body(item) });
+        if (TRANSLATION_IN_CODE.has(item.id)) {
+          // A named verse in another translation is answered in code from the store: no model reply,
+          // bad or good, can reach her, and the verse is the stored text in her translation.
+          expect(rung.calls.length).toBe(0);
+          expect(r.body).toMatchObject({ kind: 'answer', ai: true, fixed: true, text: oneTranslationText[item.lang] });
+          expect(r.body.scripture).toHaveLength(1);
+          expect(r.body.scripture[0].translation).toBe(item.lang === 'es' ? 'RV1909' : 'KJV');
+          expect(r.body.scripture[0].ref).toMatch(/^(John|Juan|Philippians|Filipenses) [34]:1[36]$/);
+          return;
+        }
         if (rung.calls.length === 0) {
           // "Are you God?" / "Eres Jesús": the honest reply comes from code, so no model reply can reach her.
           expect(r.body.text).toMatch(/\bAI\b|\bIA\b/);
