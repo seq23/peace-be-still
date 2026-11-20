@@ -18,6 +18,13 @@ export async function chat(input, { admit, providers, validate }) {
   }
   const admission = await admit(input);
   if (!admission?.allowed) return { status: 429, code: admission?.code || 'CHAT_LIMIT' };
+  // A direct question about the assistant's identity has a deterministic answer.
+  // Keep it behind admission so this path cannot bypass the daily limits.
+  if (/\b(?:are you (?:real|a (?:person|pastor)|god)|eres (?:real|una persona|un pastor|dios))\b/iu.test(input.message)) {
+    return { status: 200, kind: 'answer', ai: true, answer: { text: input.language === 'es'
+      ? 'Soy una ayuda de inteligencia artificial, no una persona ni un pastor.'
+      : 'I am an AI helper, not a person or a pastor.', scripture: [] } };
+  }
   const request = { ...input, voice: input.ageBand === 'teen' ? 'teen' : input.voice };
   for (let attempt = 0; attempt < 2; attempt++) {
     const result = await runLadder(providers, request);

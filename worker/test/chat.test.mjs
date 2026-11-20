@@ -39,3 +39,15 @@ test('refuses unconfigured or denied chat without invoking a model', async () =>
   const result = await chat(input, { admit: async () => ({ allowed: false }), providers: [forbidden], validate: forbidden });
   assert.equal(result.code, 'CHAT_LIMIT');
 });
+
+test('identity questions receive an honest AI disclosure after admission', async () => {
+  for (const [language, message] of [['en', 'Are you a pastor?'], ['es', '¿Eres una persona?']]) {
+    let admitted = 0;
+    const result = await chat({ ageBand: 'adult', door: 'gods-word', language, message }, {
+      admit: async () => { admitted++; return { allowed: true }; }, providers: [forbidden], validate: forbidden,
+    });
+    assert.equal(admitted, 1);
+    assert.equal(result.ai, true);
+    assert.match(result.answer.text, language === 'en' ? /AI helper.*not a person or a pastor/ : /inteligencia artificial.*no una persona ni un pastor/);
+  }
+});
