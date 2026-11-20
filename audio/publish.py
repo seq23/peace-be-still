@@ -10,8 +10,8 @@ Per file (a manifest row with status passed, a sha256 and a Drive `shelved` path
 The served manifest `manifest.jsonl` at the bucket root is the ledger: one public row per file that is
 in R2 (file, kind, lang, ref, seconds, sha256, voice, status, and a story's title; never checks or
 Drive paths). A file whose ledger sha256 equals the manifest's is done, so every run is idempotent and
-a run cut off by its time box resumes where it stopped. The app reads <audioBaseUrl>/manifest.jsonl,
-with the copy bundled in the release as the offline fallback, so new audio needs no app release.
+a run cut off by its time box resumes where it stopped. The app reads <audioBaseUrl>/manifest.jsonl
+to check which tracks from the bundled catalog it can stream.
 
 Where (her ruling 20 Nov 2026): her SECOND Cloudflare account, which holds only this bucket, so its own
 free 10 GB is the app's. Free tier only: the bucket's stored bytes (summed from the S3 listing; the key is
@@ -44,7 +44,7 @@ import fill  # noqa: E402
 from fill import NamedStop  # noqa: E402
 
 BUCKET = os.environ.get("PBS_R2_BUCKET", "peace-be-still-audio")
-PUBLIC_BASE = "https://pbs-audio.professionalresourcelibrary.com/"
+PUBLIC_BASE = "https://audio.peacebestillapp.com/"
 SERVED = "manifest.jsonl"
 FREE_CAP_BYTES = float(os.environ.get("PBS_R2_FREE_CAP_GB", "9.5")) * 1e9
 PUBLIC_FIELDS = ("file", "kind", "lang", "ref", "seconds", "sha256", "voice", "status")

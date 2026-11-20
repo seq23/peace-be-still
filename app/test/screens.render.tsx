@@ -522,24 +522,32 @@ test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor 
   assert.doesNotMatch(strings(tree), /\.m4a|\.json/);
 });
 
-test('an unpublished manifest row is marked in the shelf and cannot play from a deep link', async () => {
+test('missing and outdated uploads are marked in the shelf and cannot play from a deep link', async () => {
   const track = audioTracks.find(track => track.ref === 'PSA 4' && track.lang === 'en')!;
-  assert.ok(track);
-  publishedTracks = audioTracks.filter(row => row.file !== track.file);
+  const outdated = audioTracks.find(track => track.ref === 'PSA 23' && track.lang === 'en')!;
+  assert.ok(track && outdated);
+  publishedTracks = audioTracks.filter(row => row.file !== track.file).map(row =>
+    row.file === outdated.file ? { ...row, sha256: track.sha256 } : row);
   const person = { ...base, journey: 'psalm-nights' };
   const shelf = await mount('nights', person);
   await press(shelf, en['journey.psalmNights.name']);
-  const title = trackTitle(track, 'en');
-  assert.ok(host(shelf, 'View').some(node => textOf(node) === `${title} ${en['listen.notReady']}`));
-  assert.ok(!host(shelf, 'Pressable').some(node => textOf(node).includes(title + ' ') || textOf(node) === title));
-  const player = testPlayer(track);
-  const screen = await mount('listen', person, { track: track.sha256 });
   try {
-    assert.ok(texts(screen).includes(en['listen.audioNotReady']));
-    assert.equal(host(screen, 'Pressable').find(node => textOf(node) === en['listen.play'])?.props.disabled, true);
+    for (const unavailable of [track, outdated]) {
+      const title = trackTitle(unavailable, 'en');
+      assert.ok(host(shelf, 'View').some(node => textOf(node) === `${title} ${en['listen.notReady']}`));
+      assert.ok(!host(shelf, 'Pressable').some(node => textOf(node).includes(title + ' ') || textOf(node) === title));
+      const player = testPlayer(unavailable);
+      const screen = await mount('listen', person, { track: unavailable.sha256 });
+      try {
+        assert.ok(texts(screen).includes(en['listen.audioNotReady']));
+        assert.equal(host(screen, 'Pressable').find(node => textOf(node) === en['listen.play'])?.props.disabled, true);
+      } finally {
+        await act(async () => screen.unmount());
+        await player.dispose();
+      }
+    }
   } finally {
-    await act(async () => { screen.unmount(); shelf.unmount(); });
-    await player.dispose();
+    await act(async () => shelf.unmount());
   }
 });
 

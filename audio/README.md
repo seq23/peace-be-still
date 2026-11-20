@@ -49,11 +49,15 @@ checks, shelved, status, voice).
   minutes after each fill chunk, under the same lock; a story the box cuts off carries on next run.
 - **Served to the app (R2)** (`publish.py`, last step of `run.sh`, same window, keys from the vault): bucket
   `peace-be-still-audio` on her SECOND Cloudflare account (its own free 10 GB; her ruling 20 Nov 2026),
-  public only at `https://pbs-audio.professionalresourcelibrary.com/<file>` (R2 custom domain: no listing,
-  CORS GET/HEAD from `r2/cors.json`, set in that account's dashboard: the bucket key cannot change bucket settings). Each passed, shelved row streams Drive -> R2 under exactly its manifest
+  with `https://audio.peacebestillapp.com/<file>` as the app's public URL. Connect
+  `audio.peacebestillapp.com` under the bucket's Custom Domains once the zone is in the same
+  Cloudflare account. Apply the GET/HEAD policy from `r2/cors.json` to allow the web preview to
+  read the ledger and stream audio. The bucket key cannot change bucket settings.
+  Each passed, shelved row streams Drive -> R2 under exactly its manifest
   `file` (Drive SHA-256 = manifest, then R2 size + md5 = Drive; the Mac never holds the file).
   `manifest.jsonl` at the bucket root is what the app reads (public fields + story titles) and the ledger
-  that makes runs idempotent and resumable; the app's bundled copy is the offline fallback. The same step is
+  that makes runs idempotent and resumable. The app uses it to confirm streaming availability
+  for the exact file and hash from its bundled catalog. The same step is
   the backfill. Stops: `R2_FREE_STORAGE` (bucket + this batch over 9.5 GB), `R2_HASH_MISMATCH`,
   `R2_UNREACHABLE`, `R2_KEY_MISSING`; a Drive copy that is missing or not the manifest's file is HELD.
   Output `OUTPUT <n> files published to R2` and `r2: X of Y shelved files public`.
