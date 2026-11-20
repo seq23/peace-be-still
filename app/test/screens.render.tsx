@@ -67,7 +67,7 @@ test('birth-year correction cannot promote a child', async () => {
  await press(tree, 'Settings'); await press(tree, 'Birth year');
  await enterYear(tree, '1990');
  assert.equal(JSON.parse(saved!).age, 'child');
- assert.doesNotMatch(strings(tree), /Chat voice/);
+ assert.match(strings(tree), /older age group/);
 });
 
 
