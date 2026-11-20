@@ -86,21 +86,26 @@ export default function PaidScreen() {
       </View>
       {paid ? <Body muted={false}>{t('paid.active')}</Body> : null}
       {!paid && offers ? (
-        <View role="radiogroup" style={{ gap: 10 }}>
+        <View role="radiogroup" style={{ flexDirection: 'column', gap: 10 }}>
           {planOrder.map(plan => {
             const product = offers[plan].product;
+            const name = t(planCopy[plan].name);
+            const period = t(planCopy[plan].period);
+            const equivalent = plan === 'yearly' && product.pricePerMonthString
+              ? t('paid.equivalent', { price: product.pricePerMonthString })
+              : null;
             return (
               <Card key={plan} role="radio" selected={plan === selected} onPress={() => select(plan)}
-                label={t(planCopy[plan].join, { price: product.priceString })}>
-                <View style={[styles.row, { justifyContent: 'space-between' }]}>
-                  <Body size={15} muted={false}>{t(planCopy[plan].name)}</Body>
-                  <Text aria-hidden style={{ color: c.accent }}>{plan === selected ? '●' : '○'}</Text>
+                label={`${name}, ${product.priceString} ${period}${equivalent ? `, ${equivalent}` : ''}`}
+                style={styles.row}>
+                <Text aria-hidden style={{ color: plan === selected ? c.accent : c.muted }}>{plan === selected ? '●' : '○'}</Text>
+                <View style={styles.grow}>
+                  <Body size={15} muted={false}>{name}</Body>
+                  <Body size={14}>
+                    <Text style={{ fontFamily: fonts.mono, fontSize: 17, color: c.ink }}>{product.priceString}</Text>
+                    {` ${period}${equivalent ? `, ${equivalent}` : ''}`}
+                  </Body>
                 </View>
-                <Text style={{ fontFamily: fonts.mono, fontSize: 17, color: c.ink }}>{product.priceString}</Text>
-                <Body size={13}>{t(planCopy[plan].period)}</Body>
-                {plan === 'yearly' && product.pricePerMonthString ? (
-                  <Body size={13}>{t('paid.equivalent', { price: product.pricePerMonthString })}</Body>
-                ) : null}
               </Card>
             );
           })}

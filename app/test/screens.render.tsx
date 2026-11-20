@@ -526,6 +526,7 @@ test('Settings opens the paid lane and its close control takes the visitor back'
   await press(settings, /paid lane/i);
   assert.deepEqual(calls, [['push', '/paid']]);
   const tree = await mount('paid', readyForPaid);
+  assert.match(strings(tree), /App Store prices are unavailable/i);
   assert.equal(paidControls(tree).length, 0);
   assert.equal(restoreControl(tree).props.accessibilityRole, 'link');
   assert.equal(restoreControl(tree).props.accessibilityState.disabled, true);
@@ -548,10 +549,12 @@ test('the rendered paid lane discloses benefits, actual store prices, renewal te
       assert.equal(choices().length, 2);
       const group = host(tree, 'View').find(n => n.props.role === 'radiogroup');
       assert.ok(group);
-      assert.notEqual(group.props.style.flexDirection, 'row');
+      assert.equal(group.props.style.flexDirection, 'column');
       assert.equal(host(tree, 'Text').find(n => n.props.accessibilityRole === 'header')?.props.style[0].fontSize, 30);
       assert.match(textOf(choices()[0]), /\$38\.49/);
       assert.match(textOf(choices()[1]), /\$6\.29/);
+      assert.match(choices()[0].props['aria-label'], es ? /Anual.*\$38\.49.*al año/ : /Yearly.*\$38\.49.*a year/);
+      assert.match(choices()[1].props['aria-label'], es ? /Mensual.*\$6\.29.*al mes/ : /Monthly.*\$6\.29.*a month/);
       assert.equal(choices()[0].props['aria-checked'], true);
       assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
       for (const meaning of es
@@ -676,23 +679,31 @@ test('the web preview shows configured prices and renewal terms without opening 
   const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
   process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
   fakePurchaseCalls.length = 0;
-  const tree = await mount('paid', readyForPaid);
   try {
-    assert.equal(radios(tree).length, 2);
-    assert.match(textOf(radios(tree)[0]), /\$39\.99.*\$3\.33/);
-    assert.match(textOf(radios(tree)[1]), /\$7\.99/);
-    assert.match(textOf(paidControls(tree)[0]), /preview.*\$39\.99/i);
-    assert.match(strings(tree), /no trial.*renews yearly at \$39\.99/i);
-    await press(tree, /preview.*join/i);
-    assert.deepEqual(fakePurchaseCalls, []);
-    assert.equal(gate(tree), 'false true');
-    assert.equal(restoreControl(tree).props['aria-disabled'], true);
-    await press(tree, /\$7\.99/);
-    assert.match(textOf(paidControls(tree)[0]), /preview.*\$7\.99/i);
-    assert.match(strings(tree), /renews monthly at \$7\.99/i);
+    for (const language of ['en', 'es'] as const) {
+      const es = language === 'es';
+      const tree = await mount('paid', { ...readyForPaid, language });
+      const previewLabel = es ? /vista previa/i : /preview/i;
+      try {
+        const [yearly, monthly] = radios(tree);
+        assert.match(textOf(yearly), /\$39\.99/);
+        assert.match(textOf(yearly), /\$3\.33/);
+        assert.match(textOf(monthly), /\$7\.99/);
+        assert.match(textOf(paidControls(tree)[0]), previewLabel);
+        assert.match(textOf(paidControls(tree)[0]), /\$39\.99/);
+        assert.match(strings(tree), es ? /sin período de prueba.*cada año por \$39\.99/i : /no trial.*renews yearly at \$39\.99/i);
+        await press(tree, previewLabel);
+        assert.deepEqual(fakePurchaseCalls, []);
+        assert.equal(gate(tree), 'false true');
+        const restore = host(tree, 'Pressable').find(n => (es ? /restaurar compras/i : /restore purchases/i).test(textOf(n)));
+        assert.equal(restore?.props['aria-disabled'], true);
+        await press(tree, /\$7\.99/);
+        assert.match(textOf(paidControls(tree)[0]), /\$7\.99/);
+        assert.match(strings(tree), es ? /cada mes por \$7\.99/i : /renews monthly at \$7\.99/i);
+      } finally { await closePaid(tree); }
+    }
   } finally {
     if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
     else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
-    await closePaid(tree);
   }
 });
