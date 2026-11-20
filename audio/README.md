@@ -47,6 +47,16 @@ checks, shelved, status, voice).
   floor (`voices.json` clone.floor) measured on at least 6 s of speech (a role's short turns pooled:
   a d-vector on a 2 s line is noise), then the same file checks and shelf. `run.sh` gives it 45
   minutes after each fill chunk, under the same lock; a story the box cuts off carries on next run.
+- **Served to the app (R2)** (`publish.py`, last step of `run.sh`, same window, keys from the vault): bucket
+  `peace-be-still-audio` on her SECOND Cloudflare account (its own free 10 GB; her ruling 20 Nov 2026),
+  public only at `https://pbs-audio.professionalresourcelibrary.com/<file>` (R2 custom domain: no listing,
+  CORS GET/HEAD from `r2/cors.json`, set in that account's dashboard: the bucket key cannot change bucket settings). Each passed, shelved row streams Drive -> R2 under exactly its manifest
+  `file` (Drive SHA-256 = manifest, then R2 size + md5 = Drive; the Mac never holds the file).
+  `manifest.jsonl` at the bucket root is what the app reads (public fields + story titles) and the ledger
+  that makes runs idempotent and resumable; the app's bundled copy is the offline fallback. The same step is
+  the backfill. Stops: `R2_FREE_STORAGE` (bucket + this batch over 9.5 GB), `R2_HASH_MISMATCH`,
+  `R2_UNREACHABLE`, `R2_KEY_MISSING`; a Drive copy that is missing or not the manifest's file is HELD.
+  Output `OUTPUT <n> files published to R2` and `r2: X of Y shelved files public`.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
-  reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing, R2 upload, the player.
-- Tests: `python3 -m unittest discover -s audio/tests` (needs numpy) and `python3 audio/check_manifest.py --self-test`.
+  reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing.
+- Tests: `python3 -m unittest discover -s audio/tests` (needs numpy; `test_publish.py` covers the R2 step) and `python3 audio/check_manifest.py --self-test`.

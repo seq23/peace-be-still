@@ -190,7 +190,8 @@
         "b5 FAQ answer is 34 words (aim 40-60): \"Will I be charged after a free trial?\"",
         "b5 FAQ answer is 31 words (aim 40-60): \"Are there advertisements in the app?\"",
         "b5 FAQ answer is 36 words (aim 40-60): \"How do I get the app?\""
-      ]
+      ],
+      "indexnow_at": "2026-11-20"
     },
     {
       "slug": "daily-devotional-for-black-woman",
@@ -226,7 +227,8 @@
       "checks": {},
       "gate_notes": [
         "b5 FAQ answer is 39 words (aim 40-60): \"Is there a version of the app for Spanish speakers\""
-      ]
+      ],
+      "indexnow_at": "2026-11-20"
     },
     {
       "slug": "free-daily-devotional-for-black-women",
@@ -264,7 +266,44 @@
         "b5 FAQ answer is 33 words (aim 40-60): \"Can I hear the Bible in Spanish?\"",
         "b5 FAQ answer is 31 words (aim 40-60): \"How does the AI Bible chat work?\"",
         "b5 FAQ answer is 31 words (aim 40-60): \"What is the nightly practice?\""
-      ]
+      ],
+      "extra_queries": [
+        "daily devotional books for black women",
+        "daily prayer for black women"
+      ],
+      "indexnow_at": "2026-11-20"
+    },
+    {
+      "slug": "bedtime-prayer-for-adults",
+      "query": "bedtime prayer for adults",
+      "lane": "striking",
+      "score": 25,
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "rel": "site/public/questions/bedtime-prayer-for-adults/index.html",
+      "route": "/questions/bedtime-prayer-for-adults/",
+      "url": "https://peacebestillapp.com/questions/bedtime-prayer-for-adults/",
+      "published_at": "2026-11-20",
+      "status": "live",
+      "hash": "bec27a2225c815683a6a5a99615cacd40ed97635e382d7aa7cc3e5c9778f397b",
+      "model": "free-route",
+      "facts": [
+        "https://en.wikipedia.org/wiki/King_James_Version",
+        "https://en.wikipedia.org/wiki/Reina-Valera"
+      ],
+      "linked_from": [],
+      "checks": {}
     }
   ],
   "dropped": [
@@ -424,6 +463,80 @@
         "b5 FAQ answer is 22 words (aim 40-60): \"How does the sleep timer work?\"",
         "b5 FAQ answer is 20 words (aim 40-60): \"Is there a free version available?\"",
         "invented: unsourced price \"If you prefer extra features, the paid lane costs seven dollars and ninety-nine cents a month or thi\" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      ]
+    },
+    {
+      "query": "morning prayer for black women",
+      "at": "2026-11-20",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 28 words (aim 40-60): \"Can I listen to scripture instead of reading it in\"",
+        "b5 FAQ answer is 27 words (aim 40-60): \"Are there Spanish language options for morning dev\"",
+        "b5 FAQ answer is 21 words (aim 40-60): \"How do I download the Peace Be Still app?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0); these failed the check, replace each with a page that exists: https://www.loc.gov/exhibits/bible/the-king-james-bible.html (HTTP 404); https://www.biblesociety.org/ (no answer)",
+        "invented: unsourced price \"You can choose a free lane forever, or access the paid lane for seven dollars and ninety-nine cents \" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      ]
+    },
+    {
+      "query": "bible app no subscription",
+      "at": "2026-11-20",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 28 words (aim 40-60): \"Can I use the app without paying anything?\"",
+        "b5 FAQ answer is 24 words (aim 40-60): \"Are there any advertisements in the free version?\"",
+        "b5 FAQ answer is 23 words (aim 40-60): \"Is there support for Spanish-speaking families?\"",
+        "b5 FAQ answer is 25 words (aim 40-60): \"What do I do when I am ready to download?\""
+      ]
+    },
+    {
+      "query": "free bible app no subscription",
+      "at": "2026-11-20",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 29 words (aim 40-60): \"Will I be charged after a free trial ends?\"",
+        "b5 FAQ answer is 20 words (aim 40-60): \"Are there advertisements in the free version?\"",
+        "b5 FAQ answer is 22 words (aim 40-60): \"Where can I download the application?\""
+      ]
+    },
+    {
+      "query": "free christian chat apps",
+      "at": "2026-11-20",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 28 words (aim 40-60): \"Can I read the Bible in Spanish within the app?\"",
+        "invented: unsourced price \"For those who wish to support the ongoing work and unlock extra features, a paid lane is available a\" (drop the amount, or move it into \"facts\" with a dated source that states it)",
+        "banned word: \"unlock\" (reads as machine-written; say it plainly)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for kids",
+      "at": "2026-11-20",
+      "gate": 2,
+      "reason": [
+        "b2 meta description is 52 chars (aim 120-160)",
+        "b5 FAQ answer is 29 words (aim 40-60): \"Is there a free way to read bedtime stories from t\"",
+        "b5 FAQ answer is 28 words (aim 40-60): \"Where can I find the app when it is ready for down\"",
+        "b5 FAQ answer is 26 words (aim 40-60): \"Can I read scripture in Spanish for my family's ev\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0); these failed the check, replace each with a page that exists: https://www.unicef.org/parenting/child-development/benefits-of-reading-to-your-child (HTTP 404); https://www.cdc.gov/sleep/about/about-sleep.html (HTTP 404)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for protection",
+      "at": "2026-11-20",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 27 words (aim 40-60): \"Is there a Spanish option for bedtime prayers?\"",
+        "b5 FAQ answer is 29 words (aim 40-60): \"How can I share bedtime prayers with my children?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://www.loc.gov/ (HTTP 429)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for toddlers",
+      "at": "2026-11-20",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 29 words (aim 40-60): \"How can I help my toddler stop being afraid of the\"",
+        "b5 FAQ answer is 27 words (aim 40-60): \"Where can I find whispered scripture recordings fo\""
       ]
     }
   ],
@@ -786,6 +899,76 @@
       "kind": "page",
       "matched_by": "high token overlap (0.80 >= 0.6)",
       "matched_text": "African American Bible: the editions, and the Bible apps · Peace Be Still",
+      "stage": "search"
+    },
+    {
+      "query": "daily devotional books for black women",
+      "at": "2026-11-20",
+      "url": "https://peacebestillapp.com/questions/free-daily-devotional-for-black-women/",
+      "route": "/questions/free-daily-devotional-for-black-women/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "matched_text": "Daily devotional for Black women — Peace Be Still",
+      "stage": "search"
+    },
+    {
+      "query": "daily prayer for black women",
+      "at": "2026-11-20",
+      "url": "https://peacebestillapp.com/questions/free-daily-devotional-for-black-women/",
+      "route": "/questions/free-daily-devotional-for-black-women/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "Daily devotional for Black women — Peace Be Still",
+      "stage": "search"
+    },
+    {
+      "query": "free bible chat app no subscription",
+      "at": "2026-11-20",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "route": "/free-bible-chat/",
+      "kind": "sitemap",
+      "matched_by": "same 3 intent words plus modifiers",
+      "matched_text": "free bible chat",
+      "stage": "search"
+    },
+    {
+      "query": "free bible chat app",
+      "at": "2026-11-20",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "route": "/free-bible-chat/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "matched_text": "free bible chat",
+      "stage": "search"
+    },
+    {
+      "query": "free bible talk app",
+      "at": "2026-11-20",
+      "url": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+      "route": "/questions/is-creed-bible-app-free/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "Is the Creed Bible app free?",
+      "stage": "search"
+    },
+    {
+      "query": "free bible ai chat app",
+      "at": "2026-11-20",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "route": "/free-bible-chat/",
+      "kind": "sitemap",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "free bible chat",
+      "stage": "search"
+    },
+    {
+      "query": "haven bible chat app free",
+      "at": "2026-11-20",
+      "url": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
+      "route": "/questions/is-the-haven-bible-app-free/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "matched_text": "Is the Haven Bible app free?",
       "stage": "search"
     }
   ]

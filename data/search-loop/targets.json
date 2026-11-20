@@ -1961,6 +1961,69 @@
   ],
   "strengthen": [
     {
+      "query": "haven bible chat app free",
+      "page": "/questions/is-the-haven-bible-app-free/",
+      "url": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-20"
+    },
+    {
+      "query": "free bible ai chat app",
+      "page": "/free-bible-chat/",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-20"
+    },
+    {
+      "query": "free bible talk app",
+      "page": "/questions/is-creed-bible-app-free/",
+      "url": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-20"
+    },
+    {
+      "query": "free bible chat app",
+      "page": "/free-bible-chat/",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-20"
+    },
+    {
+      "query": "free bible chat app no subscription",
+      "page": "/free-bible-chat/",
+      "url": "https://peacebestillapp.com/free-bible-chat/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "same 3 intent words plus modifiers",
+      "at": "2026-11-20"
+    },
+    {
+      "query": "daily prayer for black women",
+      "page": "/questions/free-daily-devotional-for-black-women/",
+      "url": "https://peacebestillapp.com/questions/free-daily-devotional-for-black-women/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-20"
+    },
+    {
+      "query": "daily devotional books for black women",
+      "page": "/questions/free-daily-devotional-for-black-women/",
+      "url": "https://peacebestillapp.com/questions/free-daily-devotional-for-black-women/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-20"
+    },
+    {
       "query": "african american bible app",
       "page": "/site/public/questions/african-american-bible/",
       "url": "https://peacebestillapp.com/site/public/questions/african-american-bible/",
