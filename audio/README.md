@@ -7,15 +7,23 @@ checks, shelved, status, voice).
 - **Order**: (1) Psalms, KJV + RV1909, one file per psalm; (2) every other chapter of the 66 books,
   English and Spanish book by book; (3) scripts in `content/` marked `"status": "passed"`.
 - **Per file**: `render_kokoro.py` (Kokoro, voices in `VOICES.md`, 1.5 s quiet between psalm verses,
-  1.0 s between chapter verses) → AAC-LC mono 48 kbps `.m4a` → `qa.py` (word accuracy with
+  1.0 s between chapter verses) → `fill.master` (two-pass EBU R128 `loudnorm`, true-peak target 1 dB
+  under the ceiling, then AAC-LC mono 48 kbps `.m4a`; the ENCODED file is measured and, if AAC pushed it
+  outside the bars, mastered again from the kept WAV, at most 3 times) → `qa.py` (word accuracy with
   faster-whisper, loudness/true peak/0 clipped, last words present, words a minute) → `rclone copyto`
-  `gdrive:Mac-Shelf/peace-be-still/audio/<lang>/<kind>/` + md5 check → deleted from the Mac → manifest row.
-  A failed check is re-rendered once (speed 0.82), then a `FAILED` row names the problems.
+  `gdrive:Mac-Shelf/peace-be-still/audio/<lang>/<kind>/` + md5 check → deleted from the Mac → manifest row
+  (one row per file). Only a speech problem (A01, A07, length) is re-rendered (once, speed 0.82); a
+  mastering problem (A06) never costs a render. A `FAILED` row is tried again on later runs before any
+  new file; after 3 failed runs it is `NAMED STOP [FAILED_3_TRIES]` in the census line, naming the files.
 - **Spoken text**: stored text word for word; `[ ]`/`( )` marks dropped, ALL-CAPS said as words,
   names respelled from `pronunciations.json` (`engine`).
+- **Run window** (her pick, 20 Nov 2026): Mon–Fri 17:00–08:00 CT and all weekend. `run.sh` exits
+  with a `NOTE` line outside it and caps each step to the minutes left before the next weekday 08:00
+  (`fill.window_minutes`), so a batch never runs into her workday.
 - **Schedule**: launchd `com.seq.pbs-library-fill` (`launchd/install.sh`), every 15 minutes, Nice 15 +
-  low-priority I/O, from the runner clone `~/GitHub/.pbs-runner` via `run.sh`; a run lasts up to
-  110 minutes and pushes the manifest to main every 10 files.
+  low-priority I/O, from the runner clone `~/GitHub/.pbs-runner` via `run.sh`; each lane has its own
+  time box per run (Bible fill 60 minutes, Hush Harbor 12, clone lane 45) and the fill pushes the
+  manifest to main every 10 files.
 - **Pause flag**: `~/.peace-be-still/library-fill.active` exists while priorities 1–2 are incomplete
   (How We Know / Whisper Almanac pause on it); the run that completes them removes it.
 - **Output**: `OUTPUT <n> files shelved` and `library fill: X of Y files, Z hours shelved, N failed`,
@@ -35,9 +43,20 @@ checks, shelved, status, voice).
   Chatterbox (MIT) clones of her four picked clips (`gdrive:Mac-Shelf/peace-be-still/voices/hush-harbor/`),
   one sentence at a time on the Mac's CPU. It works down from the highest story number while the
   Gemini lane works up, and the first lane to start a story writes `engine` in its work folder, so a
-  story never mixes engines. Checks: each sentence's word accuracy, each turn's speaker similarity
-  over its role's floor (`voices.json` clone.floor), then the same file checks and shelf. `run.sh`
-  runs one clone story after each fill chunk, under the same lock, so the Mac alternates.
+  story never mixes engines. Checks: each sentence's word accuracy, speaker similarity over the role's
+  floor (`voices.json` clone.floor) measured on at least 6 s of speech (a role's short turns pooled:
+  a d-vector on a 2 s line is noise), then the same file checks and shelf. `run.sh` gives it 45
+  minutes after each fill chunk, under the same lock; a story the box cuts off carries on next run.
+- **Served to the app (R2)** (`publish.py`, last step of `run.sh`, same window, key from the vault): bucket
+  `peace-be-still-audio`, public only at `https://audio.peacebestillapp.com/<file>` (R2 custom domain:
+  no listing, r2.dev off, CORS GET/HEAD; set up by `r2/setup.sh`, idempotent). Each passed, shelved row
+  streams Drive -> R2 under exactly its manifest `file` (Drive SHA-256 = manifest, then R2 size + md5 =
+  Drive; the Mac never holds the file). `manifest.jsonl` at the bucket root is what the app reads (public
+  fields + story titles) and the ledger that makes runs idempotent and resumable; the app's bundled copy is
+  the offline fallback. The same step is the backfill. Stops: `R2_FREE_STORAGE` (the account's whole R2 +
+  this batch over 9.5 GB of the free 10 GB), `R2_FREE_OPS`, `R2_USAGE_UNREAD`, `R2_HASH_MISMATCH`,
+  `R2_UNREACHABLE`, `R2_KEY_MISSING`; a Drive copy that is missing or not the manifest's file is HELD.
+  Output `OUTPUT <n> files published to R2` and `r2: X of Y shelved files public`.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
-  reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing, R2 upload, the player.
-- Tests: `python3 -m unittest discover -s audio/tests` (needs numpy) and `python3 audio/check_manifest.py --self-test`.
+  reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing.
+- Tests: `python3 -m unittest discover -s audio/tests` (needs numpy; `test_publish.py` covers the R2 step) and `python3 audio/check_manifest.py --self-test`.

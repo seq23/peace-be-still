@@ -106,6 +106,12 @@ def ends_whole(script: str, transcript: str, lang: str) -> bool:
     return bool(last) and sum(w in tail for w in last) >= min(2, len(last))
 
 
+def speech_problems(problems: list[str]) -> list[str]:
+    """The problems a new render can fix. A06 (loudness, true peak, clipping) is mastering: the
+    fill masters again from the same WAV instead (fill.master)."""
+    return [p for p in problems if not p.startswith("A06")]
+
+
 def judge(*, script: str, transcript: str, lang: str, level: str, seconds: float, lufs: float,
           true_peak: float, clipped: int) -> dict:
     """Pure: the numbers in, pass/problems out. Kept apart from the measuring so it is tested."""
