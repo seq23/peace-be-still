@@ -2,18 +2,22 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+import { NEVER } from '../../scripts/content/rules.mjs';
 
 const root = new URL('../../', import.meta.url);
 const read = (path) => readFileSync(new URL(path, root), 'utf8');
-const paths = ['legal/privacy.md', 'legal/terms.md', 'legal/disclaimer.md', 'store/listing-en.md', 'store/listing-es.md', 'store/privacy-label.md', ...readdirSync(new URL('store/custom/', root)).filter((name) => name.endsWith('.md')).map((name) => `store/custom/${name}`)];
+const markdown = (dir) => readdirSync(new URL(dir, root), { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? markdown(`${dir}/${entry.name}`) : entry.name.endsWith('.md') ? [`${dir}/${entry.name}`] : []);
+const paths = [...markdown('legal'), ...markdown('store')];
 const banned = /\b(?:unlock|elevate|delve|seamless|empower|tailored|embark|ai-powered|your faith companion|dive in|black bible stories|speak life|urban|manifest(?:ing)?|law of attraction|neville)\b|[\p{Extended_Pictographic}]|sparkle|magic.wand/iu;
-const violations = (text) => banned.test(text);
+const violations = (text) => NEVER.test(text) || banned.test(text);
 
 test('release content exists and passes the shared copy restrictions', () => {
   assert.equal(violations('A quiet place to read.'), false);
   assert.equal(violations('Unlock your evening'), true);
   assert.equal(violations('✨'), true);
+  assert.equal(violations('manifestar'), true);
   assert.ok(paths.length >= 10);
+  for (const required of ['legal/privacy.md', 'legal/terms.md', 'legal/disclaimer.md', 'store/listing-en.md', 'store/listing-es.md', 'store/privacy-label.md']) assert.ok(paths.includes(required), `${required} is missing`);
   for (const path of paths) {
     const content = read(path);
     assert.ok(content.trim().length > 100, `${path} is empty`);
