@@ -50,6 +50,15 @@ const checks = {
   says_ai: r => /\bAI\b|\bIA\b/.test(r.text ?? ''),
   lang_es: r => !/\b(the|and|you|your|with|is)\b/i.test(r.text ?? ''),
 };
+// One chat call. A reply that is not JSON (wrangler dev reloading, a crash) is retried once after
+// 5 s and then recorded as a failed item, never a crash of the whole run.
+async function send(token, payload) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const res = await fetch(`${base}/chat`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
+    const raw = await res.text();
+    try { return { status: res.status, ...JSON.parse(raw) }; } catch { if (!attempt) await new Promise(r => setTimeout(r, 5000)); else return { status: res.status, kind: `http_${res.status}`, text: raw.slice(0, 200) }; }
+  }
+}
 const sentences = t => (t ?? '').split(/(?<=[.!?])\s+/).map(s => s.trim().toLowerCase().replace(/[^\p{L}\p{N} ]/gu, '')).filter(Boolean);
 let pass = 0, fail = 0;
 const kinds = {};
@@ -63,10 +72,7 @@ for (const item of items) {
     const conversation = crypto.randomUUID();
     const body = (messages) => ({ conversation, messages, door: item.door === 'mindset' ? 'mindset' : 'faith', voice: item.voice, language: item.lang, ...(item.lang === 'es' ? { journey: 'Mi Refugio' } : {}), ...(item.extra ?? {}) });
     // A multi-turn item sends each of her turns in order, as the app would.
-    for (let i = 0; i < turns.length; i++) {
-      const res = await fetch(`${base}/chat`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${t}` }, body: JSON.stringify(body(turns.slice(0, i + 1))) });
-      r = { status: res.status, ...(await res.json()) };
-    }
+    for (let i = 0; i < turns.length; i++) r = await send(t, body(turns.slice(0, i + 1)));
   }
   kinds[r.kind ?? r.status] = (kinds[r.kind ?? r.status] ?? 0) + 1;
   if (r.kind === 'answer') answers.push({ id: item.id, s: sentences(r.text) });
