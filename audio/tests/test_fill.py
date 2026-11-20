@@ -174,6 +174,9 @@ class Text(unittest.TestCase):
         self.assertEqual(T.score_words("thou hast shewed it for ever. Selah.", "en"),
                          T.score_words("Thou haste showed it forever. Sila.", "en"))
         self.assertNotEqual(T.score_words("thou hast shewed it", "en"), T.score_words("thou showed it", "en"))
+        self.assertEqual(T.score_words("he was honoured; that armour; go to day", "en"),
+                         T.score_words("He was honored, that armor, go today", "en"))
+        self.assertNotEqual(T.score_words("go to day", "en"), T.score_words("go", "en"))
 
     def test_real_respellings_load(self):
         p = T.load_pronunciations()

@@ -2,7 +2,8 @@
 (PBS_CHATTERBOX_PY, default ~/GitHub/how-we-know/.venv-tts/bin/python); hush_clone.py drives it.
 
 stdin: {"device": "cpu"|"mps" (optional), "items": [{"ref": wav, "text": sentence, "out": wav, "seed": n}, ...]}
-Renders every item whose `out` does not exist yet (so a stopped run resumes), grouped by reference so
+Renders every item whose `out` does not exist yet (so a stopped run resumes) until `deadline` (epoch
+seconds, optional: the lane's time box), grouped by reference so
 each voice is conditioned once. Settings are the clone test's (21_clone_chatterbox.py): exaggeration
 0.5, cfg_weight 0.4, temperature 0.7. Prints one JSON line per file, then {"done": n}.
 """
@@ -32,6 +33,8 @@ def main():
     m = ChatterboxTTS.from_pretrained(device=dev)
     done, ref = 0, None
     for it in sorted(todo, key=lambda i: i["ref"]):
+        if job.get("deadline") and time.time() >= job["deadline"]:
+            break
         if it["ref"] != ref:
             m.prepare_conditionals(it["ref"], exaggeration=0.5)
             ref = it["ref"]

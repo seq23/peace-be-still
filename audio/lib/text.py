@@ -145,6 +145,7 @@ def score_words(text: str, lang: str) -> list[str]:
     s = re.sub(r"\d+", lambda m: " " + number_words(int(m.group()), lang) + " ", s)
     s = re.sub(r"[^a-z0-9 ]+", " ", s.replace("-", " "))
     s = re.sub(r"\bfor ever\b", "forever", s)
+    s = re.sub(r"\bto (day|morrow)\b", r"to\1", s)   # KJV "to day" / "to morrow" are heard as one word
     s = re.sub(r"\bcheek bone\b", "cheekbone", s)
     return [SAME_WORD.get(w, w) for w in s.split()]
 
@@ -154,4 +155,7 @@ def score_words(text: str, lang: str) -> list[str]:
 # (Psalm 9, 18 Nov 2026: whisper small wrote hast -> haste x5, shew -> show, Selah -> sila).
 SAME_WORD = {"haste": "hast", "shew": "show", "shewed": "showed", "shewn": "shown", "sheweth": "showeth",
              "marvellous": "marvelous", "alway": "always", "sila": "selah", "sheila": "selah", "sela": "selah",
-             "seela": "selah", "seelah": "selah", "sayla": "selah", "cela": "selah"}
+             "seela": "selah", "seelah": "selah", "sayla": "selah", "cela": "selah",
+             # British spellings in the story scripts that a transcript writes the American way
+             "honoured": "honored", "honour": "honor", "armour": "armor", "colour": "color", "neighbour": "neighbor",
+             "labour": "labor", "favour": "favor", "saviour": "savior", "behaviour": "behavior"}
