@@ -25,10 +25,13 @@ on:
         required: false
         default: ''
         type: string
+  # A change to this workflow or its script proves itself: one real capture of the live site's home page.
+  pull_request:
+    paths: ['.github/workflows/review-capture.yml', 'scripts/review-capture/**']
 permissions:
   contents: read
 concurrency:
-  group: review-capture-${{ inputs.label }}
+  group: review-capture-${{ inputs.label || github.head_ref }}
   cancel-in-progress: false
 jobs:
   capture:
@@ -46,8 +49,8 @@ jobs:
       - name: Capture
         env:
           PW_DIR: ${{ runner.temp }}/pw
-          PREVIEW_URL: ${{ inputs.preview_url }}
-          ROUTES: ${{ inputs.routes }}
+          PREVIEW_URL: ${{ inputs.preview_url || 'https://peacebestillapp.com' }}
+          ROUTES: ${{ inputs.routes || '/,/es/' }}
           STORAGE: ${{ inputs.onboarded_storage }}
         run: node scripts/review-capture/capture.mjs "$PREVIEW_URL" "$ROUTES" "$RUNNER_TEMP/review" "$STORAGE"
       - name: Summary
@@ -56,6 +59,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: review-${{ inputs.label }}
+          name: review-${{ inputs.label || 'self-test' }}
           path: ${{ runner.temp }}/review
           if-no-files-found: error
