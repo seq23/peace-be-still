@@ -156,7 +156,7 @@ test('journey choices explain their purpose in both languages', async () => {
 
 test('tabs follow the door and hide chat for children', async () => {
  const child = await mount({ ...base, age: 'child', journey: 'Psalm Nights' });
- const names = (tree: ReactTestRenderer) => tree.root.findAllByProps({ accessibilityRole: 'tab' }).map(n => n.findAllByType('Text' as any).map(t => t.children.join('')).join(''));
+ const names = (tree: ReactTestRenderer) => tree.root.findAllByProps({ accessibilityRole: 'tab' }).filter(n => typeof n.type === 'string').map(n => n.findAllByType('Text' as any).map(t => t.children.join('')).join(''));
  assert.deepEqual(names(child), ['Today', 'Bible', 'Nights', 'More']);
  const mindset = await mount({ ...base, door: 'mindset', journey: 'Imagination Nights' });
  assert.deepEqual(names(mindset), ['Today', 'Chat', 'Nights', 'More']);

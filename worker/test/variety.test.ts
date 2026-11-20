@@ -61,10 +61,11 @@ describe('variety in the chat path', () => {
     const a = scripted('workers-ai', [first]);
     const d = deps({ rungList: [a.rung] });
     const token = await tokenFor(d);
-    expect((await chat(d, 'My mama died last week.', { token })).body.kind).toBe('answer');
+    const conversation = crypto.randomUUID(); // the free lane is one conversation a day
+    expect((await chat(d, 'My mama died last week.', { token, body: { conversation } })).body.kind).toBe('answer');
     const b = scripted('workers-ai', [again, fresh]);
     const d2 = deps({ rungList: [b.rung] });
-    const r = await chat(d2, 'I still cry every day.', { token });
+    const r = await chat(d2, 'I still cry every day.', { token, body: { conversation } });
     expect(r.body.kind).toBe('answer');
     expect(r.body.text).toContain('May the Lord keep you near');
     expect(b.calls.length).toBe(2);
@@ -74,8 +75,9 @@ describe('variety in the chat path', () => {
     const same = good('Grief can sit heavy for a while. Lord, hold her close tonight.', ['Psalm 34:18']);
     const d = deps({ rungList: [scripted('workers-ai', [same]).rung] });
     const token = await tokenFor(d);
-    await chat(d, 'My mama died.', { token });
-    const r = await chat(d, 'My mama died and I miss her.', { token });
+    const conversation = crypto.randomUUID();
+    await chat(d, 'My mama died.', { token, body: { conversation } });
+    const r = await chat(d, 'My mama died and I miss her.', { token, body: { conversation } });
     expect(r.body.kind).toBe('answer');
   });
   it('a crisis reply is never stored as a shape', async () => {
