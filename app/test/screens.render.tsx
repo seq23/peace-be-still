@@ -36,3 +36,19 @@ test('mindset scripture preference persists and can be changed in settings', asy
  const restored = await mount(JSON.parse(saved!));
  assert.equal(restored.root.findByProps({ accessibilityRole: 'switch' }).props.accessibilityState.checked, true);
 });
+
+test('Mi Refugio uses Spanish at home without changing the saved app language', async () => {
+ const tree = await mount(base);
+ await press(tree, 'Mi Refugio');
+ assert.match(strings(tree), /TE DAMOS LA BIENVENIDA/);
+ assert.equal(JSON.parse(saved!).language, 'en');
+ await press(tree, 'Configuración');
+ assert.match(strings(tree), /Settings/);
+});
+
+test('settings choices expose their selected state', async () => {
+ const tree = await mount({ ...base, journey: 'Psalm Nights' });
+ await press(tree, 'Settings');
+ const selected = tree.root.findAllByType('Pressable' as any).filter(n => n.props.accessibilityRole === 'radio' && n.props.accessibilityState.checked);
+ assert.equal(selected.length, 2);
+});
