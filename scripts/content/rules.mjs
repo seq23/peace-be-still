@@ -19,7 +19,7 @@ export const NEVER = rx([
 export const MINDSET = rx([
   "\\bthe universe\\b", "\\bvibration\\w*", "\\benerg(?:y|ies)\\b", "law of (?:attraction|assumption)", "\\bneville\\b",
   "abundance mindset", "\\bkarma\\b", "\\bchakras?\\b", "\\bauras?\\b", "\\bcrystals?\\b", "\\bmantras?\\b", "higher self",
-  "\\bthe source\\b", "\\balign\\w*", "\\battract\\w*", "\\bvisuali[sz]\\w*", "\\bmindset\\b",
+  "\\bthe source\\b", "\\balign\\w*", "\\battract\\w*", "\\bvisuali[sz]\\w*", "\\bmindset\\b", "\\bassumption\\b", "\\bsats\\b", "imagination nights",
   "\\bel universo\\b", "\\bvibraci\\w+", "\\benerg[íi]as?\\b", "ley de (?:la )?atracci[óo]n", "\\bcristales\\b",
 ]);
 // S08: eye dialect and slang pastiche (never in any voice).
