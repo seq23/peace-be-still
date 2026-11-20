@@ -1,0 +1,44 @@
+// The one chat contract between the app and the Worker (worker/src/index.ts imports these types).
+// A request is built from phase 1's Settings, so the door, voice and language ids cannot drift.
+import type { Settings } from '../model';
+
+export type ChatTurn = { role: 'user' | 'assistant'; text: string };
+export type ChatRequest = {
+  conversation: string;
+  messages: ChatTurn[];
+  door: NonNullable<Settings['door']>;
+  voice: Settings['voice'];
+  language: Settings['language'];
+  journey?: string;
+  scripture?: boolean;
+};
+export type ChatScripture = { ref: string; translation: 'KJV' | 'RV1909'; text: string; book: string; chapter: number; verse: number; endVerse?: number };
+export type ChatKind = 'answer' | 'crisis' | 'fallback' | 'limit' | 'no_free_model';
+export type ChatResponse = {
+  kind: ChatKind;
+  /** True for every answer written (or stood in for) by the AI helper; false for fixed human-written replies. */
+  ai: boolean;
+  text: string;
+  scripture: ChatScripture[];
+  /** Messages left today, for "N of 10 messages left today"; null when not counted (crisis). */
+  remaining: number | null;
+  /** Today's allowance the count is out of (10 free, 100 paid); null when not counted. */
+  limit: number | null;
+  /** Teens: time for the "you're talking with an AI, take a break" reminder (California SB 243). */
+  reminder: boolean;
+  crisis?: 'selfharm' | 'abuse';
+};
+
+/** Null when chat is closed to her (under 13, or no door chosen yet). Only the last 12 turns travel. */
+export function buildChatRequest(settings: Settings, conversation: string, messages: ChatTurn[]): ChatRequest | null {
+  if (!settings.door || settings.age === 'child' || settings.age === null) return null;
+  return {
+    conversation,
+    messages: messages.slice(-12),
+    door: settings.door,
+    voice: settings.age === 'teen' ? 'teen' : settings.voice,
+    language: settings.language,
+    ...(settings.journey ? { journey: settings.journey } : {}),
+    ...(settings.scripture ? { scripture: true } : {}),
+  };
+}

@@ -7,6 +7,9 @@
     "validate:threads-loop": "node scripts/threads/validate.mjs",
     "ig:queue": "node scripts/instagram/ig_loop.mjs",
     "ig:render": "node scripts/instagram/render.mjs",
-    "validate:instagram-loop": "node scripts/instagram/validate.mjs"
+    "validate:instagram-loop": "node scripts/instagram/validate.mjs",
+    "worker:deploy": "bash scripts/worker-deploy.sh",
+    "worker:bible-load": "node scripts/worker-bible-load.mjs",
+    "redteam": "node worker/scripts/redteam.mjs"
   }
 }

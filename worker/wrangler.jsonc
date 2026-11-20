@@ -1,0 +1,65 @@
+// The chat Worker. Separate from site/wrangler.jsonc (the site owns the custom domain);
+// this Worker only takes peacebestillapp.com/api/*. Workers on routes run before a
+// Custom Domain Worker, so /api/* reaches here and every other path stays the site's.
+// Deploy ONLY with `npm run worker:deploy` from the repo root (never a bare `wrangler deploy`).
+// Secrets (wrangler secret put, from the Boss OS vault; never in vars):
+//   CHAT_TOKEN_SECRET (32+ bytes), IP_HASH_SECRET (32+ bytes), PBS_GEMINI_API_KEY,
+//   OPENROUTER_API_KEY, REVENUECAT_SECRET_KEY. Optional during a rotation: CHAT_TOKEN_SECRET_PREVIOUS.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "peace-be-still-chat",
+  "main": "src/index.ts",
+  "tsconfig": "./tsconfig.json",
+  "compatibility_date": "2026-11-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "peacebestillapp.com/api/*", "zone_name": "peacebestillapp.com" }],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "peace-be-still-chat",
+      // NAMED STOP D1_DATABASE_ID_MISSING: the deploy script refuses this placeholder.
+      // Claude runs `npx wrangler d1 create peace-be-still-chat` once and commits the id here.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "ai": { "binding": "AI" },
+  // Burst limits on top of the D1 daily counters (Workers Rate Limiting, per location, per key).
+  "ratelimits": [
+    { "name": "CHAT_BURST", "namespace_id": "3101", "simple": { "limit": 12, "period": 60 } },
+    { "name": "TOKEN_BURST", "namespace_id": "3102", "simple": { "limit": 3, "period": 60 } }
+  ],
+  // Every hour on the hour (UTC). Day boundaries are decided in code in America/Chicago.
+  "triggers": { "crons": ["0 * * * *"] },
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "vars": {
+    // Free allowances, worked out 20 Nov 2026 (re-check monthly):
+    // - Workers AI: 10,000 neurons a day, reset 00:00 UTC (developers.cloudflare.com/workers-ai/platform/pricing).
+    //   Safety read, llama-guard-3-8b: 44,003 neurons per M input tokens; ~1,000 tokens (6 turns) = ~44 neurons.
+    //   Judge, llama-3.1-8b-instruct-fp8-fast: 4,119 in / 34,868 out per M; ~600 in + 40 out = ~4 neurons.
+    //   Answer, llama-3.3-70b-instruct-fp8-fast: 26,668 in / 204,805 out per M; ~1,400 in + 350 out = ~109 neurons.
+    //   150 messages x (44 + 4) = 7,200 neurons for safety and judging, leaving ~2,800 = 25 answer calls.
+    // - Gemini free (PBS_GEMINI_API_KEY project): per-model RPD is shown only in AI Studio
+    //   (aistudio.google.com/rate-limit). 200 is a floor below every flash-lite free quota published to date;
+    //   SUSPECTED until read in AI Studio. Resets midnight Pacific.
+    // - OpenRouter :free models: 50 requests a day with under 10 credits bought (openrouter.ai/docs/api-reference/limits).
+    // Answer capacity = 25 + 200 + 50 = 275 calls. A message uses 1 call, 2 with a regeneration, and a paid
+    // message adds 1 memory call: 150 messages a day fits with room for regenerations.
+    "CHAT_GLOBAL_MESSAGES_DAILY": "150",
+    "CHAT_IP_MESSAGES_DAILY": "120",
+    "TOKENS_PER_IP_DAILY": "3",
+    "WORKERS_AI_ANSWER_CALLS_DAILY": "25",
+    "WORKERS_AI_SAFETY_CALLS_DAILY": "170",
+    "GEMINI_CALLS_DAILY": "200",
+    "OPENROUTER_CALLS_DAILY": "50",
+    "WORKERS_AI_ANSWER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "WORKERS_AI_JUDGE_MODEL": "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
+    "WORKERS_AI_GUARD_MODEL": "@cf/meta/llama-guard-3-8b",
+    "GEMINI_MODEL": "gemini-3.5-flash-lite",
+    "OPENROUTER_MODELS": "google/gemma-4-31b-it:free,google/gemma-4-26b-a4b-it:free",
+    "REVENUECAT_ENTITLEMENT": "paid",
+    "CHAT_TOKEN_KID": "k1"
+  }
+}

@@ -80,5 +80,29 @@
   "%{count} of %{limit} messages left today": {
     "one": "%{count} of %{limit} messages left today",
     "other": "%{count} of %{limit} messages left today"
-  }
+  },
+  "BEFORE YOUR FIRST CHAT": "BEFORE YOUR FIRST CHAT",
+  "Chat answers are written by AI.": "Chat answers are written by AI.",
+  "Every answer is marked AI. It is not a pastor, a counselor or a person.": "Every answer is marked AI. It is not a pastor, a counselor or a person.",
+  "What you type goes to free AI providers, and they may learn from it. Please leave out names and anything that identifies you or someone else.": "What you type goes to free AI providers, and they may learn from it. Please leave out names and anything that identifies you or someone else.",
+  "If you are in danger or thinking about hurting yourself, call or text 988.": "If you are in danger or thinking about hurting yourself, call or text 988.",
+  "I understand": "I understand",
+  "One moment, then send that again.": "One moment, then send that again.",
+  "Chat couldn't reach us just now. Check your connection and try again.": "Chat couldn't reach us just now. Check your connection and try again.",
+  "AI · verses from Reina-Valera 1909": "AI · verses from Reina-Valera 1909",
+  "AI · verses from KJV": "AI · verses from KJV",
+  "+ New chat": "+ New chat",
+  "Say what is on your heart. You will get a short answer and a verse to hold on to.": "Say what is on your heart. You will get a short answer and a verse to hold on to.",
+  "AI · not a pastor or a person": "AI · not a pastor or a person",
+  "A reminder: you're talking with an AI, not a person. It's a good time to take a break.": "A reminder: you're talking with an AI, not a person. It's a good time to take a break.",
+  "Call 988": "Call 988",
+  "Text 988": "Text 988",
+  "Call 1-800-799-7233": "Call 1-800-799-7233",
+  "Call 1-800-422-4453": "Call 1-800-422-4453",
+  "Type what's on your heart": "Type what's on your heart",
+  "Send": "Send",
+  "Delete what chat remembers": "Delete what chat remembers",
+  "Paid chat keeps a short note of what you are carrying": "Paid chat keeps a short note of what you are carrying",
+  "Chat memory deleted.": "Chat memory deleted.",
+  "Chat memory couldn't be deleted. Try again.": "Chat memory couldn't be deleted. Try again."
 }

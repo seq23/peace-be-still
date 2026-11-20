@@ -21,11 +21,14 @@
     "higher self",
     "the source",
     "align",
-    "attract",
-    "visualize",
+    "visuali[sz](?:e|es|ed|ing|ation)",
     "urban",
     "speak life",
-    "black[\\W_]*bible[\\W_]*stories"
+    "black[\\W_]*bible[\\W_]*stories",
+    "visualizar",
+    "feel it real",
+    "attract(?:ion|ing)?",
+    "atraer"
   ],
   "ui": [
     "unlock",
@@ -43,5 +46,33 @@
     "sparkles?",
     "space",
     "journey"
+  ],
+  "profanity": [
+    "fuck\\w*",
+    "f\\*+k\\w*",
+    "shit\\w*",
+    "bitch\\w*",
+    "bastard",
+    "asshole",
+    "damn(?:ed|it)?",
+    "goddamn",
+    "hell no",
+    "crap",
+    "dick",
+    "piss(?:ed)?",
+    "wtf",
+    "mierda",
+    "carajo",
+    "pendej\\w*",
+    "cabr[oó]n\\w*",
+    "chingad\\w*",
+    "ching\\w*",
+    "put[ao]s?",
+    "joder",
+    "jodid\\w*",
+    "verga",
+    "co[nñ]o",
+    "culer\\w*",
+    "pinche"
   ]
 }
