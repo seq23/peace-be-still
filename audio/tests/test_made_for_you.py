@@ -1,4 +1,5 @@
 import io
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -70,14 +71,30 @@ class MadeForYouTest(unittest.TestCase):
             b'{"error":"MADE_FOR_YOU_NO_FREE_MODEL"}',
         ))
         call = sessions.make_request("https://fixture.example/api", "fixture")
-        render, put = Mock(), Mock()
-        with patch.object(sessions, "urlopen", side_effect=[busy, io.BytesIO(b'{"job":null}')]) as request:
+        render = Mock(side_effect=[
+            {"status": "FAILED"},
+            {"status": "passed", "seconds": 680, "sha256": "hash", "_local": "session.m4a"},
+        ])
+        put = Mock()
+        blocked, ready = self.job(), self.job()
+        ready_id = "10000000-0000-4000-a000-000000000002"
+        ready.update(id=ready_id, path=ready["path"].replace(blocked["id"] + ".m4a", ready_id + ".m4a"))
+        replies = [
+            busy,
+            io.BytesIO(json.dumps({"job": blocked}).encode()),
+            io.BytesIO(json.dumps({"job": ready}).encode()),
+            io.BytesIO(b'{"published":true}'),
+            io.BytesIO(b'{"job":null}'),
+        ]
+        with patch.object(sessions, "urlopen", side_effect=replies) as request:
             with self.assertRaises(fill.NamedStop) as stopped:
                 sessions.drain_queue(call, render, put)
             self.assertEqual(stopped.exception.code, code)
-            self.assertEqual(request.call_count, 2)
-        render.assert_not_called()
-        put.assert_not_called()
+            self.assertEqual([entry.args[0].full_url.rsplit("/", 1)[-1] for entry in request.call_args_list],
+                             ["claim", "claim", "claim", ready_id, "claim"])
+        self.assertEqual(render.call_count, 2)
+        self.assertEqual(put.call_args.args[0]["ref"], ready_id)
+        self.assertEqual(put.call_count, 1)
 
     def test_qa_failure_cannot_upload_or_acknowledge(self):
         call = Mock(return_value={"job": self.job()})

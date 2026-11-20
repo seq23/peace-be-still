@@ -169,7 +169,8 @@ def drain_queue(call, render, put) -> int:
             if error.code not in {"MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA", "MADE_FOR_YOU_NO_FREE_MODEL"}:
                 raise
             # The held row keeps its lease, so the next claim advances to another request.
-            held = error
+            if held is None or error.code == "MADE_FOR_YOU_NO_FREE_MODEL":
+                held = error
             continue
         published += 1
         print(f"OUTPUT {published} private session(s) published", flush=True)
