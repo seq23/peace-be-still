@@ -36,9 +36,11 @@
   "vars": {
     // Free allowances, re-measured 20 Nov 2026 (round-2 fix). Re-check monthly against chat_counts.
     // - Workers AI: 10,000 neurons a day, reset 00:00 UTC. Measured per call on her account:
-    //   risk read (llama-3.1-8b, ~480 tokens in) 2.6 neurons; judge (llama-3.3-70b, ~1,100 in) ~24 neurons;
+    //   risk screen (llama-3.1-8b, ~480 tokens in) 2.7 neurons on every message; risk confirm (llama-3.3-70b)
+    //   ~19 neurons, only when the screen flags risk; judge (llama-3.3-70b, ~1,100 in) ~24 neurons;
     //   an answer on llama-3.3-70b ~109 neurons. So Workers AI is kept for safety and judging:
-    //   400 risk reads (1,040) + 300 judge calls (7,200) + 10 answers (1,090) = 9,330 neurons.
+    //   400 screens (1,080) + 100 confirms (1,900) + 250 judge calls (6,000) + 5 answers (545) = 9,525 neurons.
+    //   The judge falls back to Gemini when its 250 are used.
     // - Gemini free (PBS_GEMINI_API_KEY project), one rung per model, each with its own daily quota
     //   (resets midnight Pacific). The per-model RPD is shown only in AI Studio (aistudio.google.com/rate-limit):
     //   200 per model is a floor, SUSPECTED until read there. A 429 that names a PerDay quota marks the rung
@@ -53,14 +55,16 @@
     "CHAT_IP_MESSAGES_DAILY": "120",
     "TOKENS_PER_IPV4_DAILY": "20",
     "TOKENS_PER_IPV6_DAILY": "3",
-    "WORKERS_AI_ANSWER_CALLS_DAILY": "10",
+    "WORKERS_AI_ANSWER_CALLS_DAILY": "5",
     "WORKERS_AI_RISK_CALLS_DAILY": "400",
-    "WORKERS_AI_JUDGE_CALLS_DAILY": "300",
+    "WORKERS_AI_JUDGE_CALLS_DAILY": "250",
+    "WORKERS_AI_RISK_CONFIRM_CALLS_DAILY": "100",
     "GEMINI_CALLS_DAILY": "200",
     "OPENROUTER_CALLS_DAILY": "900",
     "WORKERS_AI_ANSWER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "WORKERS_AI_JUDGE_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "WORKERS_AI_RISK_MODEL": "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
+    "WORKERS_AI_RISK_CONFIRM_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "GEMINI_MODELS": "gemini-3.5-flash-lite,gemini-3.1-flash-lite",
     "OPENROUTER_MODELS": "google/gemma-4-26b-a4b-it:free,nvidia/nemotron-3.5-super-vl:free,nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free",
     "REVENUECAT_ENTITLEMENT": "paid",

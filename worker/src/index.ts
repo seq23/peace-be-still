@@ -7,7 +7,7 @@
 import './env';
 import { cleanup } from './cleanup';
 import { bump, logCode, reserve } from './counts';
-import { detectCrisis, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type RiskVerdict, type Turn } from './crisis';
+import { confirmRisk, detectCrisis, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
 import { paidStatus, type Paid } from './entitlement';
 import { ipHash } from './iphash';
@@ -90,8 +90,11 @@ export const realDeps: Deps = {
   now: () => Date.now(),
   risk(env, turns) {
     const now = Date.now();
-    const first: LadderRung = { id: 'workers-ai-risk', call: workersAi(env.AI, env.WORKERS_AI_RISK_MODEL, { temperature: 0 }), cap: int(env.WORKERS_AI_RISK_CALLS_DAILY, 400), day: utcDay(now) };
-    return check(env, now, first, riskMessages(turns), riskSchema, 60, riskVerdict, v => v.verdict !== 'down', { verdict: 'down' } as RiskVerdict);
+    const read = (id: string, model: string, cap: number) => check(env, now, { id, call: workersAi(env.AI, model, { temperature: 0 }), cap, day: utcDay(now) }, riskMessages(turns), riskSchema, 60, riskVerdict, v => v.verdict !== 'down', { verdict: 'down' } as RiskVerdict);
+    return confirmRisk(
+      () => read('workers-ai-risk', env.WORKERS_AI_RISK_MODEL, int(env.WORKERS_AI_RISK_CALLS_DAILY, 400)),
+      () => read('workers-ai-risk-confirm', env.WORKERS_AI_RISK_CONFIRM_MODEL, int(env.WORKERS_AI_RISK_CONFIRM_CALLS_DAILY, 100)),
+    );
   },
   judge(env, input) {
     const now = Date.now();

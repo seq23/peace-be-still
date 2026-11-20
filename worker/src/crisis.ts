@@ -104,7 +104,7 @@ Return "risk":
 - "selfharm": they may hurt or kill themselves, said plainly or indirectly. Warning signs: wanting to die, sleep and never wake up, disappear for good, "no point going on", being tired of being alive, asking God to take them; goodbye letters or letters to their kids or family; giving things away; saving up or counting pills; asking how many pills would be deadly; buying a gun or planning a way (a bridge, a river, a car); self-harm such as cutting or burning; jokes about dying that leave the door open.
 - "child_abuse": a child or teen is being hurt, touched sexually, threatened or neglected by an adult or older person, or is afraid of an adult at home (for example an adult who comes into their room at night).
 - "abuse": an adult is being hit, choked, forced, sexually assaulted, stalked, controlled or threatened by a partner, family member or anyone else, including threats like "he'll kill me if I leave".
-- "none": anything else, including Bible study about violence, death, suicide, rape or abuse in scripture (Tamar, Goliath, the cross, Romans 6, "cut off your hand"), grief, sadness, doubt, stress, being tired of work or caregiving, hurt feelings, someone who hurt them with words or broke their heart, questions about dating, crushes, kissing, purity or sexual boundaries with a boyfriend or girlfriend their own age, and someone who says they already reached help and are safe now.
+- "none": anything else, including Bible study about violence, death, suicide, rape or abuse in scripture (Tamar, Goliath, the cross, Romans 6, "cut off your hand"), grief, sadness, doubt, stress, being tired of work or caregiving, hurt feelings, someone who hurt them with words or broke their heart, questions about dating, crushes, kissing, purity or sexual boundaries with a boyfriend or girlfriend their own age, loneliness, divorce, a breakup, a partner who left or cheated, parents or a couple who argue (with no hitting, threats or fear of being hurt), feeling abandoned by God, and someone who says they already reached help and are safe now. Being left, sad or lonely is not abuse; abuse needs someone hurting, forcing, threatening or controlling them.
 When unsure between none and a risk, choose the risk.
 Reply with JSON only: {"why": "a few words", "risk": "none" | "selfharm" | "child_abuse" | "abuse"}.`;
 export const riskSchema = { type: 'object', properties: { why: { type: 'string' }, risk: { type: 'string', enum: ['none', 'selfharm', 'child_abuse', 'abuse'] } }, required: ['why', 'risk'], additionalProperties: false };
@@ -121,6 +121,21 @@ export function riskVerdict(data: unknown): RiskVerdict {
   if (risk === 'none') return { verdict: 'none' };
   if (risk === 'selfharm' || risk === 'abuse' || risk === 'child_abuse') return { verdict: 'risk', kind: risk };
   return { verdict: 'down' };
+}
+
+/**
+ * The model read in two steps, measured 20 Nov 2026 on 54 live cases: the small model
+ * (llama-3.1-8b, 2.7 neurons) caught every real crisis but also flagged loneliness after a divorce,
+ * a husband who left and a question about depression meds; the large model (llama-3.3-70b,
+ * ~19 neurons) got all 54 right. So the small model screens every message and only its positives
+ * are confirmed by the large one. If the confirmation cannot run, the screen's verdict stands
+ * (fails toward safety).
+ */
+export async function confirmRisk(screen: () => Promise<RiskVerdict>, confirm: () => Promise<RiskVerdict>): Promise<RiskVerdict> {
+  const first = await screen();
+  if (first.verdict !== 'risk') return first;
+  const second = await confirm();
+  return second.verdict === 'down' ? first : second;
 }
 
 export async function detectCrisis(turns: Turn[], read: () => Promise<RiskVerdict>): Promise<CrisisResult> {

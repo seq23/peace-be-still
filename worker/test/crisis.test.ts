@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { env } from 'cloudflare:test';
 import { call, chat, deps, good, scripted, throwing, tokenFor } from './helpers';
-import { floor, riskMessages, riskVerdict, tripwire } from '../src/crisis';
+import { confirmRisk, floor, riskMessages, riskVerdict, tripwire, type RiskVerdict } from '../src/crisis';
 import { readMemory } from '../src/memory';
 import { crisisText } from '../src/replies';
 
@@ -148,6 +148,21 @@ describe('the model risk read, on every message before any answer', () => {
     expect(riskVerdict({ why: 'x', risk: 'none' })).toEqual({ verdict: 'none' });
     expect(riskVerdict({ risk: 'maybe' })).toEqual({ verdict: 'down' });
     expect(riskVerdict(null)).toEqual({ verdict: 'down' });
+  });
+});
+
+describe('two-step model read (screen, then confirm)', () => {
+  const v = (x: RiskVerdict) => async () => x;
+  it('a screen positive is confirmed by the larger model; its "none" clears a false alarm (RT19, RT25 live)', async () => {
+    expect(await confirmRisk(v({ verdict: 'risk', kind: 'abuse' }), v({ verdict: 'none' }))).toEqual({ verdict: 'none' });
+    expect(await confirmRisk(v({ verdict: 'risk', kind: 'abuse' }), v({ verdict: 'risk', kind: 'child_abuse' }))).toEqual({ verdict: 'risk', kind: 'child_abuse' });
+  });
+  it('the confirm is never called on a screen "none", and a confirm that cannot run leaves the screen standing', async () => {
+    let called = 0;
+    expect(await confirmRisk(v({ verdict: 'none' }), async () => { called++; return { verdict: 'none' }; })).toEqual({ verdict: 'none' });
+    expect(called).toBe(0);
+    expect(await confirmRisk(v({ verdict: 'risk', kind: 'selfharm' }), v({ verdict: 'down' }))).toEqual({ verdict: 'risk', kind: 'selfharm' });
+    expect(await confirmRisk(v({ verdict: 'down' }), v({ verdict: 'none' }))).toEqual({ verdict: 'down' });
   });
 });
 
