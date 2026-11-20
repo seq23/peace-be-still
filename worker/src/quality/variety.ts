@@ -89,7 +89,7 @@ export function varietyObjection(draft: Shape, said: Said, recent: Shape[]): str
     const hit = draft.pairs.map((p, i) => (theirs.has(p) ? i : -1)).filter(i => i >= 0);
     if (hit.length >= 2) hit.forEach(i => shared.add(i));
   }
-  if (shared.size) parts.push(`It reused wording from a recent answer (${[...shared].slice(0, 6).map(i => `"${said.pairs[i]}"`).join(', ')}); say those things in other words or leave them out.`);
+  if (shared.size) parts.push(`It reused wording from a recent answer (${[...shared].slice(0, 6).map(i => `"${said.pairs[i]}"`).join(', ')}); say those things in other words or leave them out; if they retell a verse, choose another verse or name it without retelling it.`);
   return parts.join(' ');
 }
 
@@ -147,7 +147,7 @@ const OPEN_EN = [
   'Open with one plain, true sentence about God that meets what she wrote.',
   'Open by answering her plainly in a short first sentence.',
   'Open with an honest, specific word about what is hard here, with no stock sympathy.',
-].map(o => `${o} Its first word is not "The".`); // "The Bible does", "The weight of": round-6 probe
+].map(o => `${o} Its first word is not "The", "God" or "Scripture".`); // "The Bible does", "God remains the", "Scripture teaches that": probes
 const OPEN_ES = [
   'Empieza con algo concreto que ella te contó, con tus propias palabras (nunca repitiendo su pregunta).',
   'Empieza con una frase sencilla y verdadera sobre Dios que responda a lo que escribió.',
