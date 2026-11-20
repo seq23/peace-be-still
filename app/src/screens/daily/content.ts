@@ -29,8 +29,8 @@ export function declaration(door: Door | null, now: Date): Declaration {
 }
 
 const drafts = [
-  ['Genesis 1', 'daily.draft.0'], ['Exodus 14', 'daily.draft.1'], ['Ruth 2', 'daily.draft.2'],
-  ['1 Samuel 17', 'daily.draft.3'], ['Daniel 6', 'daily.draft.4'], ['Mark 4', 'daily.draft.5'], ['John 20', 'daily.draft.6'],
+  ['Genesis 1', 'daily.draft.0', 'daily.retelling.0'], ['Exodus 14', 'daily.draft.1', 'daily.retelling.1'], ['Ruth 2', 'daily.draft.2', 'daily.retelling.2'],
+  ['1 Samuel 17', 'daily.draft.3', 'daily.retelling.3'], ['Daniel 6', 'daily.draft.4', 'daily.retelling.4'], ['Mark 4', 'daily.draft.5', 'daily.retelling.5'], ['John 20', 'daily.draft.6', 'daily.retelling.6'],
 ] as const;
 
 export function todayStory(date: Date) {

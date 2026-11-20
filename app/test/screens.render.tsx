@@ -518,6 +518,7 @@ for (const locale of ['en', 'es'] as const) {
     const today = await mount('today', person);
     assert.ok(!strings(today).includes(copy['daily.openStory']));
     assert.ok(!strings(today).includes(copy['daily.draft']));
+    assert.ok(!strings(today).includes(copy['daily.listenStory']));
     await press(today, copy['daily.readBible']);
     assert.deepEqual(calls.at(-1), ['push', '/bible']);
     const extras = host(today, 'View').find(node => node.children.some(child =>
@@ -530,14 +531,18 @@ for (const locale of ['en', 'es'] as const) {
       process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
       const previewToday = await mount('today', person);
       assert.ok(strings(previewToday).includes(copy['daily.draft']));
+      const listen = host(previewToday, 'Pressable').find(node => textOf(node) === copy['daily.listenStory']);
+      assert.equal(listen?.props.disabled, true);
+      assert.equal(listen.props['aria-disabled'], true);
+      assert.ok(strings(previewToday).includes(copy['daily.storyAudioUnavailable']));
       await press(previewToday, copy['daily.openStory']);
       assert.deepEqual(calls.at(-1), ['push', { pathname: '/today/[page]', params: { page: 'story' } }]);
       const previewRoute = await mount('dailyPage', person, { page: 'story' });
-      assert.ok(strings(previewRoute).includes(copy[`daily.draft.${now.getDay()}`]));
+      assert.ok(strings(previewRoute).includes(copy[`daily.retelling.${now.getDay()}`]));
       for (let day = 0; day < 7; day++) {
         const preview = await renderDaily('story', dateOf(day));
         assert.ok(strings(preview).includes(copy['daily.draft']));
-        assert.ok(strings(preview).includes(copy[`daily.draft.${day}`]));
+        assert.ok(strings(preview).includes(copy[`daily.retelling.${day}`]));
         assert.ok(strings(preview).includes(copy['daily.storyAudioUnavailable']));
         assert.deepEqual(faithContentIssues(strings(preview)), []);
       }

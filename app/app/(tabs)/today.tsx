@@ -1,7 +1,7 @@
 // Today keeps the date, week dots and the three daily cards in the shell's order.
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { dayKey, journeyById } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { Body, Card, Label, Screen, TextLink, styles, usePalette } from '../../src/ui';
@@ -50,7 +50,14 @@ export default function Today() {
       </>, record.value.declarations.includes(dayKey(now)))}
       {faith && canUse(pages.story.feature, user) && item('today.story.label', draftTitle ?? t('daily.noStory'), story ? <>
         <Label>{t('daily.draft')}</Label>
-        <TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink>
+        <View style={[styles.row, { flexWrap: 'wrap' }]}>
+          <TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink>
+          <Pressable disabled accessibilityRole="button" accessibilityState={{ disabled: true }} aria-disabled={true}
+            accessibilityHint={t('daily.storyAudioUnavailable')}>
+            <Body size={14}>{t('daily.listenStory')}</Body>
+          </Pressable>
+        </View>
+        <Body size={14}>{t('daily.storyAudioUnavailable')}</Body>
       </> : <TextLink onPress={() => router.push('/bible')}>{t('daily.readBible')}</TextLink>)}
       {!faith && canUse(pages.journal.feature, user) && item('today.scene.label', t('today.scene.text'), <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>)}
       <Card style={{ paddingVertical: 12 }}>

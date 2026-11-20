@@ -67,7 +67,8 @@ export function Daily({ page, back, read, now = new Date() }: {
     {page === 'story' && <Card>
       {story ? <>
         <Label>{t('daily.draft')}</Label>
-        <Body muted={false}>{t(story[1])}</Body>
+        <Label>{t('daily.retelling')}</Label>
+        <Body muted={false}>{t(story[2])}</Body>
         <Body size={14}>{t('daily.storyAudioUnavailable')}</Body>
       </> : <Body>{t('daily.noStory')}</Body>}
       {link(storyPassage(now), t('daily.readBible'))}
