@@ -13,6 +13,7 @@
 // answers within the Worker's 40-answer window, beyond 3% of answers (the last try waives variety). The OUTPUT line carries the ladder measure.
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { RECENT_ALL, repeats, shapeOf } from '../src/quality/variety.ts';
+import { requireHeadroom } from './neuron-headroom.mjs';
 
 const base = process.env.REDTEAM_URL ?? 'http://localhost:8787/api';
 const out = process.env.REDTEAM_OUT ?? 'redteam-out';
@@ -32,6 +33,9 @@ const items = [
 ].filter(i => !process.env.REDTEAM_ONLY || process.env.REDTEAM_ONLY.split(',').includes(i.id));
 const EXPECTED = process.env.REDTEAM_ONLY ? process.env.REDTEAM_ONLY.split(',').length : 98;
 if (items.length < EXPECTED) { console.error(`NAMED STOP REDTEAM_EMPTY: ${items.length} items, expected ${EXPECTED}`); process.exit(3); }
+// Every local run hits the account's real Workers AI (remote binding); a fresh local D1 resets the
+// chat's own caps, so the account ceiling is checked here instead.
+await requireHeadroom(items.filter(i => i.age_band !== 'child').length);
 mkdirSync(out, { recursive: true });
 
 // Each item is its own install (free lane: one conversation a day per install), on its own
