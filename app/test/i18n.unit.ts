@@ -16,11 +16,11 @@ test('strings follow the chosen language, per call or app-wide', () => {
   assert.equal(t('door.title'), 'What do you need tonight?');
 });
 
-test('values and plurals: the streak count and the Start button', () => {
-  assert.equal(t('daily.streak', { count: 1, locale: 'en' }), '1 day in a row');
-  assert.equal(t('daily.streak', { count: 4, locale: 'en' }), '4 days in a row');
-  assert.equal(t('daily.streak', { count: 1, locale: 'es' }), '1 día seguido');
-  assert.equal(t('daily.streak', { count: 4, locale: 'es' }), '4 días seguidos');
+test('values and plurals: the week count and the Start button', () => {
+  assert.equal(t('today.week', { count: 1, locale: 'en' }), '1 day this week');
+  assert.equal(t('today.week', { count: 4, locale: 'en' }), '4 days this week');
+  assert.equal(t('today.week', { count: 1, locale: 'es' }), '1 día esta semana');
+  assert.equal(t('today.week', { count: 4, locale: 'es' }), '4 días esta semana');
   // The whole sentence is one key, so Spanish never mixes languages ("Comenzar with one" was a prefix hack).
   assert.equal(t('journeys.start', { name: 'Mi Refugio', locale: 'es' }), 'Comenzar Mi Refugio');
   assert.equal(t('journeys.intro', { locale: 'es' }), 'Empieza con uno. Puedes añadir los demás cuando quieras.');

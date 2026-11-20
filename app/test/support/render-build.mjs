@@ -49,6 +49,8 @@ const MOCKS = {
     const r = () => globalThis.__pbsRouter;
     exports.useRouter = () => r();
     exports.useLocalSearchParams = () => globalThis.__pbsParams || {};
+    exports.useGlobalSearchParams = () => globalThis.__pbsParams || {};
+    exports.useSegments = () => globalThis.__pbsSegments || [];
     exports.Redirect = props => React.createElement('Redirect', props);
     const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
     exports.Stack = layout('Stack'); exports.Tabs = layout('Tabs');`,

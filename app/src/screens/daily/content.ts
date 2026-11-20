@@ -1,44 +1,30 @@
 import type { Key } from '../../i18n';
 import type { Door } from '../../model';
 
-export function dateKey(date: Date): string {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-}
-
-export function relativeDate(date: Date, days: number): Date {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
-}
-
-export function streak(days: readonly string[], now: Date): number {
-  const done = new Set(days);
-  const start = done.has(dateKey(now)) ? 0 : 1;
-  let offset = start;
-  while (done.has(dateKey(relativeDate(now, -offset)))) offset++;
-  return offset - start;
-}
+type Declaration = { line: Key; passage?: string };
 
 const declarations = {
   faith: [
-    'today.declaration.faith',
-    'daily.faith.1',
-    'daily.faith.2',
-    'daily.faith.3',
-    'daily.faith.4',
-    'daily.faith.5',
-    'daily.faith.6',
+    { line: 'today.declaration.faith', passage: 'Isaiah 41:10' },
+    { line: 'daily.faith.1', passage: '1 Peter 5:7' },
+    { line: 'daily.faith.2', passage: 'Psalm 116:1' },
+    { line: 'daily.faith.3', passage: 'James 1:5' },
+    { line: 'daily.faith.4', passage: 'Philippians 1:6' },
+    { line: 'daily.faith.5', passage: 'Micah 6:8' },
+    { line: 'daily.faith.6', passage: 'Matthew 6:34' },
   ],
   mindset: [
-    'today.declaration.mindset',
-    'daily.mindset.1',
-    'daily.mindset.2',
-    'daily.mindset.3',
-    'daily.mindset.4',
-    'daily.mindset.5',
-    'daily.mindset.6',
+    { line: 'today.declaration.mindset' },
+    { line: 'daily.mindset.1' },
+    { line: 'daily.mindset.2' },
+    { line: 'daily.mindset.3' },
+    { line: 'daily.mindset.4' },
+    { line: 'daily.mindset.5' },
+    { line: 'daily.mindset.6' },
   ],
-} as const satisfies Record<Door, readonly Key[]>;
+} as const satisfies Record<Door, readonly Declaration[]>;
 
-export function declaration(door: Door | null, now: Date): Key {
+export function declaration(door: Door | null, now: Date): Declaration {
   return declarations[door ?? 'faith'][now.getDay()];
 }
 
@@ -47,8 +33,12 @@ const drafts = [
   ['1 Samuel 17', 'daily.draft.3'], ['Daniel 6', 'daily.draft.4'], ['Mark 4', 'daily.draft.5'], ['John 20', 'daily.draft.6'],
 ] as const;
 
-export function todayStory(date: Date, development: boolean) {
-  return development ? drafts[date.getDay()] : undefined;
+export function todayStory(date: Date) {
+  return process.env.EXPO_PUBLIC_PBS_PREVIEW === '1' ? drafts[date.getDay()] : undefined;
+}
+
+export function storyPassage(date: Date) {
+  return drafts[date.getDay()][0];
 }
 
 export const plans = [

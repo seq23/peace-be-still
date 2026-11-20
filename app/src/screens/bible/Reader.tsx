@@ -117,7 +117,7 @@ export function Reader({ page, location = home, open, go, back }: {
         const expanded = page === 'chapter' && (selected ?? target) === verse.verse;
         return <View key={key} style={{ paddingTop: startsParagraph(verse.text) ? 8 : 0, backgroundColor: mark?.highlight ? c.card : undefined, borderLeftWidth: mark?.highlight ? 3 : 0, borderColor: c.accent, paddingLeft: mark?.highlight ? 8 : 0 }}>
           {page !== 'chapter' && <TextLink onPress={() => go('chapter', verse)}>{formatReference(verse, t.locale)}</TextLink>}
-          <Text testID="scripture-text" onPress={page === 'chapter' ? () => select(expanded ? 0 : verse.verse) : undefined} accessibilityRole={page === 'chapter' ? 'button' : undefined} accessibilityState={page === 'chapter' ? { expanded } : undefined} style={{ fontFamily: fonts.serif, fontSize: 18, lineHeight: 30, color: c.ink }}>
+          <Text testID="scripture-text" onPress={page === 'chapter' ? () => select(expanded ? 0 : verse.verse) : undefined} accessibilityRole={page === 'chapter' ? 'button' : undefined} accessibilityState={page === 'chapter' ? { expanded, selected: expanded } : undefined} aria-expanded={page === 'chapter' ? expanded : undefined} style={{ fontFamily: fonts.serif, fontSize: 18, lineHeight: 30, color: c.ink }}>
             {page === 'chapter' && <Text style={{ fontFamily: fonts.mono, fontSize: 12, color: c.accent }}>{verse.verse}{'  '}</Text>}
             {displayRuns(verse.text).map((run, index) => <Text key={index} style={run.italic ? { fontStyle: "italic" } : undefined}>{run.text}</Text>)}
           </Text>

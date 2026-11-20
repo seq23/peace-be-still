@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
 import {
-  ageBand, chooseJourney, correctAge, faithContentIssues, initial, journeyLanguage, journeys, journeysFor, migrateSettings,
-  needsBirthMonth, partOfDay, RAISE_WAIT_MS, startRoute, tabsFor, voicesFor, withAge, type Settings,
+  ageBand, chooseJourney, correctAge, faithContentIssues, initial, journeyLanguage, journeys, journeysFor, markOpened, migrateSettings,
+  needsBirthMonth, openedThisWeek, partOfDay, RAISE_WAIT_MS, startRoute, tabsFor, voicesFor, withAge, type Settings,
 } from '../src/model';
 import { t } from '../src/i18n';
 
@@ -66,7 +66,7 @@ test('saved records from the first previews (journeys by English name) migrate t
   assert.equal(migrateSettings({ door: 'faith', age: 'adult', journey: 'Morning Word' }).journey, 'morning-word');
   assert.equal(migrateSettings({ door: 'faith', age: 'child', journey: 'Mi Refugio' }).journey, undefined);
   assert.equal(migrateSettings({ door: 'faith', age: 'adult', journey: 'imagination-nights' }).journey, undefined);
-  assert.deepEqual(migrateSettings(null), { ...initial, ageSetAt: undefined, ageRaised: undefined, journey: undefined, scripture: undefined });
+  assert.deepEqual(migrateSettings(null), { ...initial, ageSetAt: undefined, ageRaised: undefined, journey: undefined, scripture: undefined, opened: undefined });
 });
 
 test('Mi Refugio screens are Spanish whatever the app language', () => {
@@ -75,8 +75,25 @@ test('Mi Refugio screens are Spanish whatever the app language', () => {
   assert.equal(journeyLanguage({ ...adult, language: 'es', journey: 'psalm-nights' }), 'es');
 });
 
-test('the greeting follows the hour', () => {
-  assert.deepEqual([6, 11, 12, 17, 18, 23, 2].map(partOfDay), ['morning', 'morning', 'afternoon', 'afternoon', 'evening', 'evening', 'evening']);
+test('the greeting agrees with "tonight": good evening from 5 pm to 5 am, no greeting at other hours', () => {
+  assert.deepEqual([4, 5, 6, 11, 12, 16, 17, 18, 23, 0].map(partOfDay), ['evening', null, null, null, null, null, 'evening', 'evening', 'evening', 'evening']);
+});
+
+test('the week count: the days opened this week, pruned to this week, today always included', () => {
+  const wed = new Date(2026, 10, 18, 9); // Wednesday 18 Nov 2026; the week is Sun 15 to Sat 21
+  const first = markOpened({ ...adult, opened: ['2026-11-10', '2026-11-16'] }, wed)!;
+  assert.deepEqual(first.opened, ['2026-11-16', '2026-11-18']);
+  assert.equal(markOpened(first, wed), null);
+  assert.deepEqual([...openedThisWeek({ ...adult, opened: ['2026-11-10', '2026-11-15'] }, wed)].sort(), ['2026-11-15', '2026-11-18']);
+  assert.deepEqual(migrateSettings({ ...adult, opened: ['2026-11-16', 7, 'soon'] }).opened, ['2026-11-16']);
+});
+
+test('Young Faith is offered to 13 to 17 year olds only, and a teen\'s picker opens on it', () => {
+  assert.ok(!journeysFor('faith', 'child').some(j => j.id === 'young-faith'));
+  assert.ok(!journeysFor('faith', 'adult').some(j => j.id === 'young-faith'));
+  assert.equal(journeysFor('faith', 'teen')[0].id, 'young-faith');
+  assert.equal(chooseJourney({ ...adult, age: 'child' }, 'young-faith').journey, undefined);
+  assert.equal(withAge({ ...adult, age: 'teen', journey: 'young-faith', voice: 'teen' }, 'adult').journey, undefined);
 });
 
 test('faith content gate rejects banned vocabulary, marks, emoji and sparkles; God\'s Word journeys pass it', () => {

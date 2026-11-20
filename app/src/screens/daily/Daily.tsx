@@ -6,11 +6,12 @@ import { useSettings, useT } from '../../settings';
 import { fonts } from '../../theme/tokens';
 import { Body, Card, Label, PillButton, Screen, TextLink, Title, usePalette } from '../../ui';
 import { ShareCard } from '../../share/ShareCard';
-import { dateKey, declaration, plans, todayStory } from './content';
+import { dayKey } from '../../model';
+import { DeclarationVerse } from './DeclarationVerse';
+import { declaration, plans, storyPassage, todayStory } from './content';
 import { localRecord } from './local';
 
 export const daily = localRecord('pbs-daily', {
-  days: [] as string[],
   declarations: [] as string[],
   journal: {} as Record<string, string>,
   plans: {} as Record<string, number[]>,
@@ -23,11 +24,10 @@ export const pages = {
 } as const satisfies Record<string, { feature: Feature; title: Parameters<ReturnType<typeof useT>>[0] }>;
 export type DailyPage = keyof typeof pages;
 
-export function Daily({ page, back, read, development = __DEV__, now = new Date() }: {
+export function Daily({ page, back, read, now = new Date() }: {
   page: DailyPage;
   back: () => void;
   read: (book: string, chapter: number, verse?: number) => void;
-  development?: boolean;
   now?: Date;
 }) {
   const t = useT('journey');
@@ -35,20 +35,18 @@ export function Daily({ page, back, read, development = __DEV__, now = new Date(
   const { settings } = useSettings();
   const user = { paid: false, age: settings.age };
   const state = daily.useRecord();
-  const today = dateKey(now);
-  const story = todayStory(now, development);
-  const line = t(declaration(settings.door, now));
+  const today = dayKey(now);
+  const story = todayStory(now);
+  const word = declaration(settings.door, now);
+  const line = t(word.line);
   const [note, edit] = useState<string>();
   const [share, setShare] = useState(false);
   const [selectedPlan, setPlan] = useState<string>();
   const plan = plans.find(item => item.id === selectedPlan);
-  const update = (change: (value: typeof state.value) => typeof state.value) => void daily.update(value => {
-    const next = change(value);
-    return { ...next, days: next.days.includes(today) ? next.days : [...next.days, today] };
-  });
-  const link = (passage: string) => {
+  const update = (change: (value: typeof state.value) => typeof state.value) => void daily.update(change);
+  const link = (passage: string, label?: string) => {
     const ref = parseReference(passage);
-    return ref && <TextLink onPress={() => read(ref.book, ref.chapter, ref.verse)}>{formatReference(ref, t.locale)}</TextLink>;
+    return ref && <TextLink onPress={() => read(ref.book, ref.chapter, ref.verse)}>{label ?? formatReference(ref, t.locale)}</TextLink>;
   };
   if (!canUse(pages[page].feature, user) || (settings.door !== 'faith' && (page === 'story' || page === 'plans'))) return null;
   return <Screen>
@@ -58,11 +56,22 @@ export function Daily({ page, back, read, development = __DEV__, now = new Date(
     {state.failed && !state.ready && <TextLink onPress={() => void state.retry()}>{t('reader.retry')}</TextLink>}
     {page === 'declaration' && <Card>
       <Body muted={false} size={21} style={{ fontFamily: fonts.serif }}>{line}</Body>
+      {word.passage && <>
+        <DeclarationVerse passage={word.passage} />
+        <Body>{t('daily.prayer')}</Body>
+      </>}
       {state.value.declarations.includes(today) ? <Label>{t('daily.done')}</Label> : state.ready && <PillButton onPress={() => update(value => ({ ...value, declarations: [...new Set([...value.declarations, today])] }))}>{t('daily.said')}</PillButton>}
       {canUse('shareCards', user) && !share && <TextLink onPress={() => setShare(true)}>{t('share.title')}</TextLink>}
     </Card>}
     {page === 'declaration' && share && <ShareCard text={line} credit={t('daily.title.declaration')} close={() => setShare(false)} />}
-    {page === 'story' && (story ? <Card><Label>{t('daily.draft')}</Label><Body muted={false}>{t(story[1])}</Body>{link(story[0])}</Card> : <Body>{t('daily.noStory')}</Body>)}
+    {page === 'story' && <Card>
+      {story ? <>
+        <Label>{t('daily.draft')}</Label>
+        <Body muted={false}>{t(story[1])}</Body>
+        <Body size={14}>{t('daily.storyAudioUnavailable')}</Body>
+      </> : <Body>{t('daily.noStory')}</Body>}
+      {link(storyPassage(now), t('daily.readBible'))}
+    </Card>}
     {page === 'journal' && state.ready && <>
       <TextInput
         accessibilityLabel={t('daily.note')}

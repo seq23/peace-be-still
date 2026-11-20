@@ -2,13 +2,15 @@
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Text, View } from 'react-native';
-import { journeyById } from '../../src/model';
+import { dayKey, journeyById } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { Body, Card, Label, Screen, TextLink, styles, usePalette } from '../../src/ui';
 import { fonts } from '../../src/theme/tokens';
 import { canUse } from '../../src/gates';
 import { daily, pages, type DailyPage } from '../../src/screens/daily/Daily';
-import { dateKey, declaration, relativeDate, streak, todayStory } from '../../src/screens/daily/content';
+import { declaration, todayStory } from '../../src/screens/daily/content';
+import { DeclarationVerse } from '../../src/screens/daily/DeclarationVerse';
+import { WeekStrip } from '../../src/ui/week';
 import type { Key } from '../../src/i18n';
 
 export default function Today() {
@@ -19,12 +21,10 @@ export default function Today() {
   const now = new Date();
   const user = { age: settings.age, paid: false };
   const record = daily.useRecord();
-  const count = streak(record.value.days, now);
-  const story = todayStory(now, __DEV__);
+  const story = todayStory(now);
+  const word = declaration(settings.door, now);
   const open = (page: DailyPage) => router.push({ pathname: '/today/[page]', params: { page } });
   const faith = settings.door !== 'mindset';
-  const date = new Intl.DateTimeFormat(t.locale, { weekday: 'short', day: 'numeric', month: 'short' }).format(now);
-  const week = Array.from({ length: 7 }, (_, i) => relativeDate(now, i - now.getDay()));
   const draftTitle = story ? t(story[1]) : undefined;
   const nights = faith ? journeyById('psalm-nights')! : journeyById('imagination-nights')!;
 
@@ -43,24 +43,15 @@ export default function Today() {
 
   return (
     <Screen edges={['top']}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
-        <Label>{date}</Label>
-        {canUse('streak', user) && <Body size={14}>{t('daily.streak', { count })}</Body>}
-      </View>
-      {canUse('streak', user) && <View accessible accessibilityLabel={t('daily.streak', { count })} style={{ flexDirection: 'row', gap: 8 }}>
-        {week.map(day => {
-          const isToday = dateKey(day) === dateKey(now);
-          const done = record.value.days.includes(dateKey(day));
-          return (
-            <View key={day.toISOString()} style={{ width: 30, alignItems: 'center', gap: 3 }}>
-              <View style={{ width: 14, height: 14, borderRadius: 7, borderWidth: isToday ? 2 : 1.5, borderColor: isToday ? c.accent : c.line, borderStyle: isToday || done ? 'solid' : 'dashed', backgroundColor: done ? c.accent : undefined }} />
-              <Text style={{ fontFamily: fonts.mono, fontSize: 11, color: c.muted }}>{new Intl.DateTimeFormat(t.locale, { weekday: 'narrow' }).format(day)}</Text>
-            </View>
-          );
-        })}
-      </View>}
-      {canUse(pages.declaration.feature, user) && item('today.declaration.label', t(declaration(settings.door, now)), <TextLink onPress={() => open('declaration')}>{t('daily.openDeclaration')}</TextLink>, record.value.declarations.includes(dateKey(now)))}
-      {faith && canUse(pages.story.feature, user) && item('today.story.label', draftTitle ?? t('daily.noStory'), story && <><Label>{t('daily.draft')}</Label><TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink></>)}
+      {canUse('streak', user) && <WeekStrip />}
+      {canUse(pages.declaration.feature, user) && item('today.declaration.label', t(word.line), <>
+        {word.passage && <DeclarationVerse passage={word.passage} />}
+        <TextLink onPress={() => open('declaration')}>{t('daily.openDeclaration')}</TextLink>
+      </>, record.value.declarations.includes(dayKey(now)))}
+      {faith && canUse(pages.story.feature, user) && item('today.story.label', draftTitle ?? t('daily.noStory'), story ? <>
+        <Label>{t('daily.draft')}</Label>
+        <TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink>
+      </> : <TextLink onPress={() => router.push('/bible')}>{t('daily.readBible')}</TextLink>)}
       {!faith && canUse(pages.journal.feature, user) && item('today.scene.label', t('today.scene.text'), <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>)}
       <Card style={{ paddingVertical: 12 }}>
         <View style={styles.row}>
@@ -72,10 +63,11 @@ export default function Today() {
           <TextLink onPress={() => router.navigate('/nights')}>{`${t('today.open')}  ›`}</TextLink>
         </View>
       </Card>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', columnGap: 18 }}>
-        {faith && canUse(pages.plans.feature, user) && <TextLink onPress={() => open('plans')}>{t('daily.title.plans')}</TextLink>}
-        {faith && canUse(pages.journal.feature, user) && <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>}
-      </View>
+      {faith && (canUse(pages.plans.feature, user) || canUse(pages.journal.feature, user)) && <Card>
+        <Label>{t('daily.more')}</Label>
+        {canUse(pages.plans.feature, user) && <TextLink onPress={() => open('plans')}>{t('daily.title.plans')}</TextLink>}
+        {canUse(pages.journal.feature, user) && <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>}
+      </Card>}
     </Screen>
   );
 }

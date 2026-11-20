@@ -2,8 +2,6 @@
   "brand.name": "Peace Be Still",
   "common.back": "Back",
   "common.soon": "Soon",
-  "greeting.morning": "Good morning.",
-  "greeting.afternoon": "Good afternoon.",
   "greeting.evening": "Good evening.",
   "door.title": "What do you need tonight?",
   "door.intro": "Pick the way in that fits you. No account needed.",
@@ -57,6 +55,10 @@
   "tabs.bible": "Bible",
   "tabs.nights": "Nights",
   "tabs.more": "More",
+  "today.week": {
+    "one": "%{count} day this week",
+    "other": "%{count} days this week"
+  },
   "today.declaration.label": "Today's declaration",
   "today.declaration.faith": "God is with me today.",
   "today.declaration.mindset": "I can begin again today.",
@@ -81,13 +83,15 @@
   "voice.plain": "Plain modern",
   "voice.church": "Black church",
   "voice.teen": "Teen",
-  "voice.spanish": "Spanish",
+  "voice.spanish": "Español (Mi Refugio)",
   "language.en": "English",
   "language.es": "Español",
   "error.save": "Your choice could not be saved on this device. Please try again.",
   "error.read": "Your saved settings could not be read. Close and reopen the app to try again.",
   "notFound.title": "This page isn't here.",
   "notFound.link": "Go to Today",
+  "greeting.morning": "Good morning.",
+  "greeting.afternoon": "Good afternoon.",
   "reader.kjv": "King James Version",
   "reader.rv": "Reina-Valera 1909",
   "reader.read": "Read chapter",
@@ -153,8 +157,9 @@
   "daily.draft.6": "Mary Magdalene goes to the tomb while it is still dark.",
   "reader.chooseBook": "Choose a book",
   "reader.closeBooks": "Close book list",
-  "daily.streak": {
-    "one": "%{count} day in a row",
-    "other": "%{count} days in a row"
-  }
+  "daily.readBible": "Read in Bible ›",
+  "daily.more": "More for today",
+  "daily.storyAudioUnavailable": "Audio is unavailable for this draft.",
+  "daily.prayer": "Lord, help me trust you in what today brings. Amen.",
+  "daily.verseUnavailable": "This verse could not be loaded."
 }
