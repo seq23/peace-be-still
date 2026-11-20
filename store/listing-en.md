@@ -1,11 +1,21 @@
-# Peace Be Still
+# App Store listing (en-US)
 
-Subtitle: Whispered sleep & daily words
+Name: Peace Be Still
+Subtitle: Whispered sleep & daily words  [29/30]  (re-confirmed 18 Nov 2026: "For app itself the original")
+Keywords: bible,black,women,stories,kids,psalms,asmr,kjv,declarations,teen,chat,prayer,manifest,assumption
+Promotional text: A great calm, every night. Whispered sessions to fall asleep to, a word for the morning, and a free lane that stays free. No trial. No ads, ever.
+Category: Reference; Health & Fitness
+Age rating: 13+
 
+Description first 3 lines:
 A great calm, every night.
+Peace Be Still is one quiet place for the end of the day and the start of the next: whispered sessions to fall asleep to, a word for the morning, and someone to talk things through with.
+Choose your way in: God's Word, or mindset & imagination. Each one is its own space, and you can switch any time in Settings.
 
-Find a quiet place to read, listen and reflect. Peace Be Still brings the King James Bible, audio, stories and daily declarations together in one app.
+Free: the whole Bible in text and audio, today's story, one chat a day of up to 10 messages, the first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, journal, streak and share cards.
 
-Read a chapter, save a verse or write in your journal. Hush Harbor · Black Bible Chat & Stories offers Bible stories with Black faces and a warm church voice. Psalm Nights · Whispered Scripture for Sleep gives you scripture to listen to at bedtime. Mi Refugio · Biblia y Chat en Español offers the Reina-Valera 1909 in Spanish.
+Paid: chat that remembers you, unlimited chat (fair use 100 messages a day), a session every night, sessions made for you, past stories, longer plans, declaration topics, offline downloads and recording in your own voice.
 
-The Bible, today's story and daily declaration are free. A subscription adds more listening, chat memory and offline downloads. AI chat is labelled and is available to people 13 and older. Subscription options are $7.99 monthly or $39.99 yearly in the United States, with no trial. Prices and renewal terms appear before purchase.
+Chat answers are written by AI and marked AI; what you type goes to free AI providers that may learn from it. Prices and renewal terms appear before purchase. No trial. Cancel any time in Settings > Apple ID > Subscriptions.
+
+Terms: https://peacebestillapp.com/terms · Privacy: https://peacebestillapp.com/privacy

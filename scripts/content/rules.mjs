@@ -45,7 +45,7 @@ export const SPLIT = rx(["baptis\\w*", "\\btongues\\b", "predestin\\w*", "\\brap
 export const SPAIN = rx(["\\bvosotr[oa]s\\b", "\\bos\\b", "\\bsois\\b", "\\bhab[ée]is\\b", "\\b(?!(?:dieci|veinti)séis\\b)\\p{L}{2,}(?:áis|éis)\\b", "\\bvale[,.!]", "\\bcog(?:er|e|es|ió|ido)\\b", "\\bordenador\\w*", "\\bm[óo]vil\\b", "\\bvuestr[oa]s?\\b"]);
 export const ENGLISH = rx(["\\bthe\\b", "\\band\\b", "\\bwith\\b", "\\byou\\b", "\\byour\\b", "\\bof\\b", "\\bthat\\b", "\\bnight\\b", "\\blord\\b"]);
 // Mindset door (Imagination Nights): no God's Word cross-links, no scripture, no Neville without the disclaimer.
-export const FAITH_LINK = rx(["hush harbor", "psalm nights", "mi refugio", "young faith", "\\bkjv\\b", "\\bscripture\\b", "\\bbible\\b"]);
+export const FAITH_LINK = rx(["hush harbor", "psalm nights", "mi refugio", "young faith", "\\bkjv\\b", "\\bscripture\\b", "\\bbible\\b", "\\bgod\\b", "\\bpsalms?\\b", "\\bprayer\\b", "\\bchurch\\b", "\\bjesus\\b", "\\bverse\\b", "king james"]);
 // The characters never voiced: words of God (and of Jesus) are read by the narrator as quoted scripture.
 // Narration markers that must never sit inside a character's voice.
 export const NARRATION = {

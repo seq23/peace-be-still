@@ -1,13 +1,13 @@
-# App Store privacy answers — draft
+# App Store privacy and age rating answers
 
-Do not submit these answers until the completed app, SDKs and provider retention and use have been audited. Apple requires disclosures to include third-party partners; an installation identifier is not automatically unlinked from a person or device.
+| Apple category | Purpose | Linked to user | Tracking |
+| --- | --- | --- | --- |
+| User Content > Other User Content: chat messages and paid memory | App Functionality | Yes, install id | No |
+| Identifiers > Device ID: anonymous install id | App Functionality | Yes | No |
+| Purchases > Purchase History | App Functionality | Yes | No |
+| Usage Data > Product Interaction: rate limits | App Functionality | Yes; daily totals have no identifier | No |
+| Sensitive Info: chat voice and space | App Functionality | Yes | No |
 
-| Candidate data | Purpose | Linked / tracking |
-| --- | --- | --- |
-| Chat text and paid memory | App functionality and personalization | Treat as linked to the installation; verify provider retention and whether any provider tracks |
-| Installation identifier, IP address and usage counts | App functionality, security and rate limits | Treat as linked; verify tracking with each provider |
-| Purchase history and identifiers processed by Apple and RevenueCat | App functionality and subscription access | Treat as linked; verify partner disclosures and tracking |
-| Journal, saved verses and voice recordings | On device as designed | Verify no off-device collection, backups or diagnostics include content |
-| Diagnostics | Undetermined | Audit the final build and SDKs before answering |
+Diagnostics are not collected. RevenueCat diagnostics are off and there is no crash SDK. Audio data, journal entries and saved verses stay on the device and are not collected. Coarse Location is not collected; IP addresses are used for rate limits, not location.
 
-No advertising or tracking is intended. This intention is not proof of the practices of each SDK or provider. Review [Apple's privacy details guidance](https://developer.apple.com/app-store/app-privacy-details/) and complete each applicable data type, purpose, linkage and tracking answer after the audit.
+Age rating: no mature themes, medical information, user-to-user messaging, public user-generated content, Dating and Relationships, or Shared Location. Override to Higher Age Rating: 13+.

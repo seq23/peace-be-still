@@ -1,11 +1,21 @@
-# Peace Be Still
+# App Store listing (es-MX)
 
-Subtítulo: Susurros y palabras diarias
+Name: Peace Be Still
+Subtitle: Dormir en paz y palabra diaria
+Keywords: biblia,español,salmos,hablada,reina,valera,oración,devocional,cristiana,audio,versículos,jesús
+Promotional text: Una gran calma, cada noche. Sesiones susurradas para dormir, una palabra para la mañana y una parte gratis que sigue gratis. Sin prueba. Sin anuncios.
+Category: Reference; Health & Fitness
+Age rating: 13+
 
-Un momento de calma cada noche.
+Description first 3 lines:
+Una gran calma, cada noche.
+Peace Be Still es un lugar tranquilo para cerrar el día y empezar el siguiente: sesiones susurradas para dormir, una palabra para la mañana y alguien con quien hablar.
+Elige tu camino: la Palabra de Dios, o mente e imaginación. Cada uno es su propio espacio, y puedes cambiar cuando quieras en Ajustes.
 
-Encuentra un lugar tranquilo para leer, escuchar y reflexionar. Peace Be Still reúne la Biblia, audio, relatos y declaraciones diarias en una sola aplicación.
+Gratis: toda la Biblia en texto y audio, la historia de hoy, un chat al día de hasta 10 mensajes, la primera noche de sueño y luego una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, diario, racha y tarjetas para compartir.
 
-Lee un capítulo, guarda un versículo o escribe en tu diario. Mi Refugio · Biblia y Chat en Español ofrece la Reina-Valera 1909. Escucha Salmos a la hora de descansar y conversa con un asistente de inteligencia artificial en español.
+De pago: chat con memoria, chat ilimitado (uso razonable de 100 mensajes al día), una sesión cada noche, sesiones hechas para ti, historias anteriores, planes más largos, temas de declaraciones, descargas sin conexión y grabaciones con tu propia voz.
 
-La Biblia, el relato de hoy y la declaración diaria son gratis. Una suscripción añade más audio, memoria para el chat y descargas sin conexión. El chat está identificado como inteligencia artificial y está disponible desde los 13 años. En Estados Unidos, las opciones son $7.99 al mes o $39.99 al año, sin prueba gratuita. El precio y las condiciones de renovación aparecen antes de comprar.
+Las respuestas del chat las escribe una IA y van marcadas como IA; lo que escribes va a proveedores gratuitos de IA que pueden aprender de ello. Los precios y las condiciones de renovación aparecen antes de la compra. Sin prueba gratuita. Cancela cuando quieras en Ajustes.
+
+Términos: https://peacebestillapp.com/terms · Privacidad: https://peacebestillapp.com/privacy

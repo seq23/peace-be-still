@@ -1,6 +1,8 @@
 # Disclaimer
 
-Draft for the planned Peace Be Still app. Confirm against the released product before publication.
+Effective: November 20, 2026
+
+Peace Be Still is operated by Spry Labs. Contact info@peacebestillapp.com.
 
 The app offers scripture, stories, audio and AI-assisted conversation for reflection. AI responses can be inaccurate and are not a substitute for a pastor, counselor, doctor, lawyer or other qualified professional. Do not change medical treatment based on an app response.
 

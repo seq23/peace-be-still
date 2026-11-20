@@ -1,3 +1,8 @@
-# Psalm Nights · Whispered Scripture for Sleep
+# Psalm Nights · Psalms for Sleep
 
-Let the Psalms accompany a quiet evening. Listen to scripture at bedtime and set a sleep timer. The first night is free; after that, one night a week is free. A subscription opens the full collection.
+Deep link: https://peacebestillapp.com/open/psalm-nights
+Keywords assigned: psalms,kjv
+Promotional text: Whispered Psalms from the King James Bible, with a sleep timer that fades out. Your first night is free, then one a week. The whole Bible is free to hear.
+Screenshot 1: Fall asleep to the Psalms, whispered
+Screenshot 2: The screen goes dark with you
+Screenshot 3: The whole King James Bible, read aloud free
