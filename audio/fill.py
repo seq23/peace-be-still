@@ -555,6 +555,22 @@ def git_commit(msg: str) -> str:
     return "manifest committed; push failed (the next run pushes it)"
 
 
+# ------------------------------------------------------------------ the run window
+def window_minutes(now: dt.datetime) -> int:
+    """Minutes the Mac may still spend on audio in this batch (her pick "A", 20 Nov 2026): 0 in her
+    workday (Mon-Fri 08:00-17:00 CT, Codex builds the app then); otherwise the minutes until the next
+    weekday 08:00 CT, so a batch never runs into a workday. Weekends are open all day. Pure."""
+    n = now.astimezone(CT)
+    if n.weekday() < 5 and 8 <= n.hour < 17:
+        return 0
+    end = n.replace(hour=8, minute=0, second=0, microsecond=0)
+    if n >= end:
+        end += dt.timedelta(days=1)
+    while end.weekday() >= 5:
+        end += dt.timedelta(days=1)
+    return int((end.timestamp() - n.timestamp()) // 60)
+
+
 # ------------------------------------------------------------------ the run
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
@@ -563,7 +579,11 @@ def main(argv=None) -> int:
     ap.add_argument("--only", help="only files whose path starts with this, e.g. en/psalms")
     ap.add_argument("--commit", action="store_true", help="commit and push the manifest (the runner)")
     ap.add_argument("--dry-run", action="store_true", help="print the plan and the census; voice nothing")
+    ap.add_argument("--window-minutes", action="store_true", help="print the run window's minutes left now (run.sh)")
     a = ap.parse_args(argv)
+    if a.window_minutes:
+        print(window_minutes(dt.datetime.now(CT)))
+        return 0
 
     HOME.mkdir(parents=True, exist_ok=True)
     lock = (HOME / "library-fill.lock").open("w")
