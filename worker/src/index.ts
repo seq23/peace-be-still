@@ -9,9 +9,9 @@
 import './env';
 import { cleanup } from './cleanup';
 import { bump, logCode, reserve } from './counts';
-import { confirmRisk, detectCrisis, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type RiskVerdict, type Turn } from './crisis';
+import { confirmRisk, detectCrisis, floor, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
-import { paidStatus, type Paid } from './entitlement';
+import { paidStatus, recheckMemory, type Paid } from './entitlement';
 import { ipHash } from './iphash';
 import { runLadder, tally, type LadderRung, type Metrics } from './ladder';
 import { deleteMemory, markCrisis, readMemory, saveMemory } from './memory';
@@ -139,6 +139,15 @@ export const realDeps: Deps = {
   paid: (env, installId, now) => paidStatus(env, installId, now),
 };
 
+// Privacy policy: "Messages that mention self-harm or abuse are never sent to an AI provider." The
+// newest message is checked by the floor before any model; an EARLIER message the floor is sure
+// about was answered with crisis lines, so its words are replaced by a note before the risk read,
+// the answer or the memory summary sees the history. The risk model still knows it happened.
+export const CRISIS_NOTE = '(An earlier message here was about her safety and was answered with crisis lines. Its words are not shown.)';
+function withoutCrisisWords(turns: Turn[]): Turn[] {
+  return turns.map((t, i) => t.role === 'user' && i < turns.length - 1 && floor([t]).sure ? { role: 'user', text: CRISIS_NOTE } : t);
+}
+
 function parseChat(body: unknown): ChatRequest | null {
   if (!body || typeof body !== 'object') return null;
   const b = body as Record<string, unknown>;
@@ -237,7 +246,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     for (const [metric, n] of metrics) await bump(env.DB, day, metric, n);
   };
   const reply = (body: ChatResponse) => { ctx.waitUntil(flush()); return json(body); };
-  const turns = req.messages.slice(-12);
+  const turns = withoutCrisisWords(req.messages.slice(-12));
   const band = v.teen ? 'teen' : 'adult';
 
   const crisisReply = async (kind: CrisisKind, layer: string) => {
@@ -372,7 +381,9 @@ async function remember(env: Env, rungs: LadderRung[], a: { installId: string; d
 export function createApp(deps: Deps = realDeps) {
   return {
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-      const { pathname } = new URL(request.url);
+      const { pathname, protocol } = new URL(request.url);
+      // Privacy policy: "Everything between the app and our service travels over HTTPS."
+      if (protocol !== 'https:') return json({ error: 'HTTPS_REQUIRED' }, 403);
       const country = (request.cf as { country?: string } | undefined)?.country;
       if (country && blockedCountries.has(country)) return json({ error: 'REGION_UNAVAILABLE' }, 403);
       try {
@@ -393,8 +404,10 @@ export function createApp(deps: Deps = realDeps) {
       }
     },
     async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
-      const removed = await cleanup(env.DB, deps.now());
-      logCode('CHAT_CLEANUP', removed);
+      const now = deps.now();
+      const rechecked = await recheckMemory(env, now).catch(() => { logCode('MEMORY_RECHECK_FAILED'); return 0; });
+      const removed = await cleanup(env.DB, now);
+      logCode('CHAT_CLEANUP', { ...removed, rechecked });
     },
   };
 }

@@ -32,7 +32,9 @@
   ],
   // Every hour on the hour (UTC). Day boundaries are decided in code in America/Chicago.
   "triggers": { "crons": ["0 * * * *"] },
-  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  // Console lines (codes only) are kept; invocation logs are off because they record the request
+  // (and so the client IP), and the privacy policy says IP addresses are stored only as one-way hashes.
+  "observability": { "enabled": true, "head_sampling_rate": 1, "logs": { "enabled": true, "invocation_logs": false } },
   "vars": {
     // Free allowances, re-measured 20 Nov 2026 (round-2 fix). Re-check monthly against chat_counts.
     // - Workers AI: 10,000 neurons a day, reset 00:00 UTC. Measured per call on her account:

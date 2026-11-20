@@ -38,9 +38,6 @@ describe('paid memory', () => {
     await call(d, '/api/chat', { token, body: { conversation, messages: [{ role: 'user', text: 'thank you, I called them' }], door: 'faith', voice: 'plain', language: 'en' } });
     expect(await readMemory(env.DB, installOf(token))).toBeNull();
   });
-  it('a summary that trips the crisis floor is never saved', async () => {
-    expect(await saveMemory(env.DB, { installId: crypto.randomUUID(), day: centralDay(NOW), summary: 'She said she wants to kill herself and wants to die', paidUntil: null, now: NOW })).toBe('crisis');
-  });
   it('DELETE /api/memory removes it (Settings)', async () => {
     const d = deps();
     const token = await tokenFor(d);

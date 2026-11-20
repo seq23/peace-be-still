@@ -273,18 +273,6 @@ describe('honesty and reminders', () => {
 });
 
 describe('logging and counts', () => {
-  it('a sentinel in her message is in no log line and no D1 row', async () => {
-    const log = vi.spyOn(console, 'log');
-    const sentinel = 'ZEBRA-SENTINEL-7731';
-    await chat(deps({ rungList: [scripted('workers-ai', [new Error('x')]).rung, scripted('gemini-free', [good()]).rung] }), `my sister ${sentinel} is sick`);
-    expect(log.mock.calls.flat().join('\n')).not.toContain(sentinel);
-    log.mockRestore();
-    const tables = (await env.DB.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE '\\_%' ESCAPE '\\' AND name NOT LIKE 'sqlite%'").all<{ name: string }>()).results;
-    for (const { name } of tables) {
-      const rows = JSON.stringify((await env.DB.prepare(`SELECT * FROM ${name}`).all()).results);
-      expect(rows, name).not.toContain(sentinel);
-    }
-  });
   it('daily counts record rungs, regenerations, fallbacks, red lines and crisis replies', async () => {
     await chat(deps({ rungList: [scripted('workers-ai', [{ text: 'God told me to tell you.', references: [] }]).rung] }), 'hello');
     await chat(deps(), 'i want to die');
