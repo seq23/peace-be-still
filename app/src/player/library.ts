@@ -1,0 +1,81 @@
+import { chapterTitles } from './books';
+
+export type Lang = 'en' | 'es';
+export type Titles = Partial<Record<Lang, string>>;
+
+/** One line of audio/manifest.jsonl, as the Mac library fill writes it (only the fields the app reads). */
+export type ManifestRow = {
+  file: string; kind: string; lang: string; ref: string; seconds: number; sha256: string; voice: string; status: string;
+};
+
+/** What ships in the app: passed rows only, no Drive paths, no checks, a readable title. The R2 key is `file`. */
+export type Track = {
+  file: string; kind: string; lang: Lang; ref: string; seconds: number; sha256: string; voice: string; titles: Titles;
+};
+
+export type Skipped = { line: number; reason: string };
+
+export class LibraryEmptyError extends Error {
+  readonly code = 'AUDIO_LIBRARY_EMPTY';
+  constructor(skipped: number) { super(`AUDIO_LIBRARY_EMPTY: no playable track (${skipped} rows skipped)`); }
+}
+
+const SAFE_FILE = /^[a-z0-9][a-z0-9_-]*(\/[a-z0-9][a-z0-9_-]*)*\.m4a$/i;
+const HASH = /^[a-f0-9]{64}$/;
+
+/** Why a passed row cannot ship, or null when it can. */
+function problem(row: Partial<ManifestRow>): string | null {
+  if (typeof row.file !== 'string' || !SAFE_FILE.test(row.file)) return 'unsafe or missing file path';
+  if (row.lang !== 'en' && row.lang !== 'es') return 'unknown language';
+  if (typeof row.kind !== 'string' || !row.kind) return 'missing kind';
+  if (typeof row.ref !== 'string' || !row.ref) return 'missing ref';
+  if (typeof row.seconds !== 'number' || !Number.isFinite(row.seconds) || row.seconds <= 0) return 'bad length';
+  if (typeof row.sha256 !== 'string' || !HASH.test(row.sha256)) return 'bad sha256';
+  if (typeof row.voice !== 'string' || !row.voice) return 'missing voice';
+  return null;
+}
+
+/**
+ * Passed rows become tracks; a bad passed row is held (skipped, with its line and reason) and the rest ship.
+ * `titleOf` gives a story its own title; scripture titles come from the book list.
+ * Throws AUDIO_LIBRARY_EMPTY only when nothing at all can play.
+ */
+export function readManifest(jsonl: string, titleOf: (row: ManifestRow) => Titles | null): { tracks: Track[]; skipped: Skipped[] } {
+  const tracks: Track[] = [];
+  const skipped: Skipped[] = [];
+  jsonl.split(/\r?\n/).forEach((text, index) => {
+    if (!text.trim()) return;
+    const line = index + 1;
+    let row: Partial<ManifestRow>;
+    try { row = JSON.parse(text); } catch { skipped.push({ line, reason: 'not JSON' }); return; }
+    if (row.status !== 'passed') return;
+    const reason = problem(row);
+    if (reason) { skipped.push({ line, reason }); return; }
+    const full = row as ManifestRow;
+    const titles = chapterTitles(full.ref) ?? titleOf(full);
+    if (!titles || !Object.values(titles).some(Boolean)) { skipped.push({ line, reason: 'no readable title' }); return; }
+    const { file, kind, ref, seconds, sha256, voice } = full;
+    tracks.push({ file, kind, lang: full.lang as Lang, ref, seconds, sha256, voice, titles });
+  });
+  if (!tracks.length) throw new LibraryEmptyError(skipped.length);
+  return { tracks, skipped };
+}
+
+/** The title in the phone's language, else the track's own language. */
+export function trackTitle(track: Track, lang: Lang): string {
+  return track.titles[lang] ?? track.titles[track.lang] ?? Object.values(track.titles)[0] ?? '';
+}
+
+/** The ONE audio base URL (app.config.ts extra.audioBaseUrl). Unset or not https → null: NAMED STOP CONFIG_AUDIO_BASE_URL. */
+export function audioBaseUrl(value: unknown): string | null {
+  if (typeof value !== 'string' || !value.trim()) return null;
+  try {
+    const url = new URL(value.trim());
+    return url.protocol === 'https:' ? url.href.replace(/\/?$/, '/') : null;
+  } catch { return null; }
+}
+
+/** The R2 object key equals the manifest `file`, so the URL is base + file. */
+export function trackUrl(track: Track, base: string): string {
+  return new URL(track.file, base).href;
+}
