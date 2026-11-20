@@ -21,7 +21,8 @@ export default function TabsLayout() {
       tabBarActiveTintColor: c.accent,
       tabBarInactiveTintColor: c.muted,
       tabBarStyle: { backgroundColor: c.card, borderTopColor: c.line },
-      tabBarLabelStyle: { fontFamily: fonts.body, fontSize: 12 },
+      tabBarLabelStyle: { fontFamily: fonts.body, fontSize: 12, lineHeight: 16 },
+      tabBarItemStyle: { paddingVertical: 4 },
       sceneStyle: { backgroundColor: c.bg },
     }}>
       {ALL.map(tab => (
