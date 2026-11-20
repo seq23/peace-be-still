@@ -118,7 +118,16 @@ class Units(unittest.TestCase):
         a = story([{"type": "retelling", "speaker": "narrator", "text": "One."}])
         rows = [{"file": f"stories/hush-harbor/en/{H.file_of(a)}", "status": "passed"}]
         self.assertEqual(H.todo([a], rows), [])
-        self.assertEqual(H.census([a], rows), {"total": 1, "passed": 1, "failed": 0})
+        self.assertEqual(H.census([a], rows), {"total": 1, "passed": 1, "failed": 0, "given_up": []})
+
+    def test_failed_story_is_tried_again_first_until_out_of_tries(self):
+        a = story([{"type": "retelling", "speaker": "narrator", "text": "One."}])
+        b = story([{"type": "retelling", "speaker": "narrator", "text": "Two."}])
+        rows = [{"file": H.row_file(b), "status": "FAILED", "tries": 1}]
+        self.assertEqual(H.todo([a, b], rows), [b, a])
+        rows[0]["tries"] = 3
+        self.assertEqual(H.todo([a, b], rows), [a])
+        self.assertIn("NAMED STOP [FAILED_3_TRIES]", H.census_line(H.census([a, b], rows)))
 
 
 class Checks(unittest.TestCase):
