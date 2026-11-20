@@ -17,9 +17,11 @@ type Entry = { role: 'user'; text: string } | { role: 'reply'; res: ChatResponse
 
 /** Tappable lines for a crisis reply: 988 always; the hotline the reply names. */
 export function crisisLinks(res: ChatResponse): Array<{ label: string; url: string }> {
-  const links = [{ label: 'Call 988', url: 'tel:988' }, { label: 'Text 988', url: 'sms:988' }];
-  if (res.text.includes('1-800-799-7233')) links.push({ label: 'Call 1-800-799-7233', url: 'tel:18007997233' });
-  if (res.text.includes('1-800-422-4453')) links.push({ label: 'Call 1-800-422-4453', url: 'tel:18004224453' });
+  // The hotline the reply leads with comes first, as in the text.
+  const links: Array<{ label: string; url: string }> = [];
+  if (res.text.includes('1-800-422-4453')) links.push({ label: 'Call 1-800-422-4453', url: 'tel:18004224453' }, { label: 'Text 1-800-422-4453', url: 'sms:18004224453' });
+  if (res.text.includes('1-800-799-7233')) links.push({ label: 'Call 1-800-799-7233', url: 'tel:18007997233' }, { label: 'Text START to 88788', url: 'sms:88788?body=START' });
+  links.push({ label: 'Call 988', url: 'tel:988' }, { label: 'Text 988', url: 'sms:988' });
   return links;
 }
 
@@ -61,9 +63,12 @@ export default function ChatScreen({ settings, c, locale }: { settings: Settings
       const res = await sendChat(settings, conversation, history);
       setEntries(list => [...list, { role: 'reply', res }]);
       if (res.remaining !== null && res.limit) setLeft({ remaining: res.remaining, limit: res.limit });
+      // 'busy' (a model failed for a moment) keeps chat open; only a used-up day closes it.
       if (res.kind === 'limit' || res.kind === 'no_free_model') setClosed(true);
     } catch (error) {
-      setEntries(list => [...list, { role: 'note', text: t(error instanceof ChatError && error.message === 'slow' ? 'One moment, then send that again.' : "Chat couldn't reach us just now. Check your connection and try again.") }]);
+      const why = error instanceof ChatError ? error.message : '';
+      if (why === 'network') setClosed(true); // no new install can start from this network today
+      setEntries(list => [...list, { role: 'note', text: t(why === 'slow' ? 'One moment, then send that again.' : why === 'network' ? "Chat can't start on this network today. Try again on another connection." : "Chat couldn't reach us just now. Check your connection and try again.") }]);
     } finally { setSending(false); }
   }
 

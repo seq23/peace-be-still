@@ -61,7 +61,7 @@ test('the crisis reply is not labelled AI and its numbers are tappable', async (
   const links = tree.root.findAllByType('Pressable' as any).filter(n => n.props.accessibilityRole === 'link');
   (globalThis as any).__pbsOpened = [];
   for (const l of links) await act(async () => l.props.onPress());
-  assert.deepEqual((globalThis as any).__pbsOpened, ['tel:988', 'sms:988', 'tel:18007997233']);
+  assert.deepEqual((globalThis as any).__pbsOpened, ['tel:18007997233', 'sms:88788?body=START', 'tel:988', 'sms:988']); // the hotline the reply leads with comes first
 });
 
 test('when the free models are out, the kind message shows and sending stops', async () => {
@@ -71,6 +71,40 @@ test('when the free models are out, the kind message shows and sending stops', a
   await say(tree, 'hello');
   assert.match(texts(tree), /resting until tomorrow/);
   assert.equal(tree.root.findByType('TextInput' as any).props.editable, false);
+});
+
+test('"busy" (a model failed for a moment) keeps chat open; a token refused on this network says so', async () => {
+  store.set('peace-be-still-chat-disclosure', 'yes');
+  replies.push({ kind: 'busy', ai: false, text: 'Chat is busy for a moment. Give it a minute and send that again.', scripture: [], remaining: 10, limit: 10, reminder: false });
+  const tree = await mount();
+  await say(tree, 'hello');
+  assert.match(texts(tree), /Give it a minute/);
+  assert.equal(tree.root.findByType('TextInput' as any).props.editable, true);
+});
+
+test('an expired token is renewed for the same install id, never replaced', async () => {
+  const { sendChat, installId } = require('../src/chat/api');
+  store.set('peace-be-still-chat-token', JSON.stringify({ token: 'old.tokenaaaaaa', age: 'adult', installId: 'iid-1' }));
+  const calls: string[] = [];
+  const fetcher = async (url: string, init: any) => {
+    calls.push(url.replace(/^.*\/api/, ''));
+    if (url.endsWith('/token/renew')) { assert.equal(init.headers.authorization, 'Bearer old.tokenaaaaaa'); return new Response(JSON.stringify({ token: 'new.tokenbbbbbb', installId: 'iid-1' })); }
+    if (url.endsWith('/token')) throw new Error('a new install id must not be made');
+    if (init.headers.authorization === 'Bearer old.tokenaaaaaa') return new Response('{}', { status: 401 });
+    return new Response(JSON.stringify({ kind: 'answer', ai: true, text: 'ok', scripture: [], remaining: 9, limit: 10, reminder: false }));
+  };
+  const res = await sendChat({ ...adult }, 'c', [{ role: 'user', text: 'hi' }], fetcher);
+  assert.equal(res.kind, 'answer');
+  assert.deepEqual(calls, ['/chat', '/token/renew', '/chat']);
+  assert.equal(await installId(), 'iid-1');
+});
+
+test('"Chat memory deleted." only after the server confirms; a 401 is a failure', async () => {
+  const { deleteChatMemory } = require('../src/chat/api');
+  store.set('peace-be-still-chat-token', JSON.stringify({ token: 'old.tokenaaaaaa', age: 'adult', installId: 'iid-1' }));
+  await assert.rejects(deleteChatMemory(async () => new Response('{}', { status: 401 })));
+  await assert.rejects(deleteChatMemory(async () => new Response('{}', { status: 500 })));
+  await deleteChatMemory(async () => new Response(JSON.stringify({ deleted: true })));
 });
 
 test('a child gets no Chat tab at all', async () => {

@@ -13,7 +13,7 @@ export type ChatRequest = {
   scripture?: boolean;
 };
 export type ChatScripture = { ref: string; translation: 'KJV' | 'RV1909'; text: string; book: string; chapter: number; verse: number; endVerse?: number };
-export type ChatKind = 'answer' | 'crisis' | 'fallback' | 'limit' | 'no_free_model';
+export type ChatKind = 'answer' | 'crisis' | 'fallback' | 'limit' | 'busy' | 'no_free_model';
 export type ChatResponse = {
   kind: ChatKind;
   /** True for every answer written (or stood in for) by the AI helper; false for fixed human-written replies. */
@@ -26,7 +26,7 @@ export type ChatResponse = {
   limit: number | null;
   /** Teens: time for the "you're talking with an AI, take a break" reminder (California SB 243). */
   reminder: boolean;
-  crisis?: 'selfharm' | 'abuse';
+  crisis?: 'selfharm' | 'abuse' | 'child_abuse';
 };
 
 /** Null when chat is closed to her (under 13, or no door chosen yet). Only the last 12 turns travel. */

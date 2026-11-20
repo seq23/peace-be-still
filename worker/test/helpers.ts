@@ -2,7 +2,10 @@ import { createExecutionContext, env, waitOnExecutionContext } from 'cloudflare:
 import { createApp, type ChatResponse, type Deps } from '../src/index';
 import type { LadderRung } from '../src/ladder';
 import { RungError, type Message } from '../src/providers/types';
-import type { GuardVerdict } from '../src/crisis';
+import type { RiskVerdict } from '../src/crisis';
+import { backoff } from '../src/providers/types';
+
+backoff.ms = () => 0; // retries are proven without real waits
 
 export const NOW = Date.parse('2026-11-20T18:00:00Z'); // noon Central
 
@@ -23,13 +26,14 @@ export function scripted(id: string, replies: Array<unknown | Error>, cap = 1000
 }
 export const throwing = (id = 'workers-ai') => scripted(id, [new Error('a model must not be called')]);
 
-export type TestDeps = Deps & { guardCalls: number };
-export function deps(over: Partial<Deps> & { rungList?: LadderRung[]; guardVerdict?: GuardVerdict; paidNow?: boolean } = {}): TestDeps {
+export type TestDeps = Deps & { riskCalls: number };
+/** Default: the risk read says "none" (so every crisis test proves the floor or tripwire ALONE). */
+export function deps(over: Partial<Deps> & { rungList?: LadderRung[]; riskVerdict?: RiskVerdict; paidNow?: boolean } = {}): TestDeps {
   const d: TestDeps = {
-    guardCalls: 0,
+    riskCalls: 0,
     now: over.now ?? (() => NOW),
-    guard: over.guard ?? (async () => { d.guardCalls++; return over.guardVerdict ?? { verdict: 'safe' }; }),
-    judge: over.judge ?? (async () => ({ verdict: 'pass' })),
+    risk: over.risk ?? (async () => { d.riskCalls++; return over.riskVerdict ?? { verdict: 'none' }; }),
+    judge: over.judge ?? (async () => ({ verdict: 'pass', voice: 5 })),
     rungs: over.rungs ?? (() => over.rungList ?? []),
     paid: over.paid ?? (async () => ({ paid: over.paidNow ?? false, paidUntil: over.paidNow ? NOW + 30 * 86400_000 : null })),
   };
@@ -72,4 +76,4 @@ export async function chat(d: Deps, text: string | string[], opts: { age?: 'teen
   return { status: res.status, body: (await res.json()) as ChatResponse & { error?: string }, token };
 }
 
-export const good = (text = 'You are not alone tonight. Psalm 34:18 is for nights like this. Lord, sit close to her tonight.', references = ['Psalm 34:18']) => ({ text, references });
+export const good = (text = 'You are not alone tonight, and God stays close to a broken heart. Psalm 34:18 says so. Lord, sit close to her tonight.', references = ['Psalm 34:18']) => ({ text, references });

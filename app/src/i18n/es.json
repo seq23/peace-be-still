@@ -104,5 +104,8 @@
   "Delete what chat remembers": "Borrar lo que el chat recuerda",
   "Paid chat keeps a short note of what you are carrying": "El chat de pago guarda una nota corta de lo que cargas",
   "Chat memory deleted.": "Se borró lo que el chat recordaba.",
-  "Chat memory couldn't be deleted. Try again.": "No se pudo borrar. Inténtalo de nuevo."
+  "Chat memory couldn't be deleted. Try again.": "No se pudo borrar. Inténtalo de nuevo.",
+  "Chat can't start on this network today. Try again on another connection.": "El chat no puede empezar en esta red hoy. Inténtalo con otra conexión.",
+  "Text 1-800-422-4453": "Enviar texto al 1-800-422-4453",
+  "Text START to 88788": "Enviar START al 88788"
 }

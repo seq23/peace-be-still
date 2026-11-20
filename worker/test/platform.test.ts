@@ -2,7 +2,7 @@ import { applyD1Migrations, env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
 import { blockedCountries } from '../src/index';
 import { ipHash, ipPrefix } from '../src/iphash';
-import { lookup } from '../src/scripture';
+import { lookup, psalmHeading } from '../src/scripture';
 import { excludedTerritories } from '../src/shared';
 import { issueToken, verifyToken } from '../src/token';
 
@@ -26,8 +26,23 @@ describe('the Bible lookup is the stored text', () => {
     expect(env.TEST_SAMPLE.length).toBe(400);
     for (const [translation, book, chapter, verse, text] of env.TEST_SAMPLE) {
       const got = await lookup(env.DB, translation as 'KJV' | 'RV1909', { book, chapter, verse });
-      expect(got?.text, `${translation} ${book} ${chapter}:${verse}`).toBe(text.replace(/^¶\s*/, ''));
+      const stored = text.replace(/^¶\s*/, '');
+      const heading = book === 'PSA' && verse === 1 ? psalmHeading(translation as 'KJV' | 'RV1909', stored) : null;
+      expect(got?.text, `${translation} ${book} ${chapter}:${verse}`).toBe(heading ? stored.slice(heading.length) : stored);
     }
+  });
+  it('Psalm headings: the same Psalms carry one in the KJV and the RV1909 (all 150, real data), and verse 1 starts with the verse', async () => {
+    const heads = (t: string) => env.TEST_PSALM_HEADS.filter(r => r[0] === t);
+    expect(heads('KJV').length).toBe(150);
+    expect(heads('RV1909').length).toBe(150);
+    const kjv = new Set(heads('KJV').filter(r => psalmHeading('KJV', r[4])).map(r => r[2]));
+    const rv = new Set(heads('RV1909').filter(r => psalmHeading('RV1909', r[4])).map(r => r[2]));
+    expect(kjv.size).toBe(115);
+    expect([...kjv].sort()).toEqual([...rv].sort());
+    expect((await lookup(env.DB, 'KJV', { book: 'PSA', chapter: 18, verse: 1 }))?.text).toBe('I will love thee, O LORD, my strength.');
+    expect((await lookup(env.DB, 'KJV', { book: 'PSA', chapter: 1, verse: 1 }))?.text.startsWith('Blessed [is] the man')).toBe(true);
+    expect((await lookup(env.DB, 'RV1909', { book: 'PSA', chapter: 51, verse: 1 }))?.text.startsWith('TEN piedad de mí')).toBe(true);
+    expect((await lookup(env.DB, 'RV1909', { book: 'PSA', chapter: 150, verse: 1 }))?.text.startsWith('Aleluya.')).toBe(true);
   });
 });
 

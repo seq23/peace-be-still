@@ -11,12 +11,28 @@ export const DISCLOSURE_KEY = 'peace-be-still-chat-disclosure';
 
 export class ChatError extends Error {}
 
-async function token(age: Age, fetcher: typeof fetch, fresh = false): Promise<string> {
-  if (!fresh) {
-    const saved = JSON.parse((await AsyncStorage.getItem(TOKEN_KEY)) ?? 'null') as { token: string; age: Age } | null;
-    if (saved?.token && saved.age === age) return saved.token; // a new age band needs a new token
+type Saved = { token: string; age: Age; installId?: string };
+const saved = async () => JSON.parse((await AsyncStorage.getItem(TOKEN_KEY)) ?? 'null') as Saved | null;
+
+/** Her token. After 30 days it is RENEWED for the same install id (her RevenueCat id and her memory
+ *  key), never replaced by a new id; a new id is made only for a first chat or a new age band. */
+async function token(age: Age, fetcher: typeof fetch, refresh = false): Promise<string> {
+  const old = await saved();
+  if (old?.token && old.age === age) {
+    if (!refresh) return old.token;
+    const res = await fetcher(`${CHAT_API}/token/renew`, { method: 'POST', headers: { authorization: `Bearer ${old.token}` } });
+    if (res.ok) {
+      const { token: value, installId } = (await res.json()) as { token: string; installId: string };
+      await AsyncStorage.setItem(TOKEN_KEY, JSON.stringify({ token: value, age, installId }));
+      return value;
+    }
+    if (res.status !== 401) throw new ChatError(res.status === 429 ? 'slow' : `renew ${res.status}`);
   }
   const res = await fetcher(`${CHAT_API}/token`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ age }) });
+  if (res.status === 429) {
+    const r = (await res.json().catch(() => null)) as { kind?: string } | null;
+    throw new ChatError(r?.kind === 'network_limit' ? 'network' : 'slow');
+  }
   if (!res.ok) throw new ChatError(`token ${res.status}`);
   const { token: value, installId } = (await res.json()) as { token: string; installId: string };
   // installId is the anonymous id RevenueCat should know her by (phase 5: Purchases.logIn(installId)).
@@ -27,13 +43,13 @@ async function token(age: Age, fetcher: typeof fetch, fresh = false): Promise<st
 export async function sendChat(settings: Settings, conversation: string, messages: ChatTurn[], fetcher: typeof fetch = fetch): Promise<ChatResponse> {
   const body = buildChatRequest(settings, conversation, messages);
   if (!body || !settings.age) throw new ChatError('chat closed');
-  for (const fresh of [false, true]) {
+  for (const refresh of [false, true]) {
     const res = await fetcher(`${CHAT_API}/chat`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${await token(settings.age, fetcher, fresh)}` },
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${await token(settings.age, fetcher, refresh)}` },
       body: JSON.stringify(body),
     });
-    if (res.status === 401 && !fresh) continue; // expired: get a new token once
+    if (res.status === 401 && !refresh) continue; // expired: renew once, same install id
     if (res.status === 429) { const r = (await res.json().catch(() => null)) as Partial<ChatResponse> | null; if (r?.kind === 'limit') throw new ChatError('slow'); }
     if (!res.ok) throw new ChatError(`chat ${res.status}`);
     return (await res.json()) as ChatResponse;
@@ -41,11 +57,15 @@ export async function sendChat(settings: Settings, conversation: string, message
   throw new ChatError('unauthorized');
 }
 
+/** Resolves only when the server confirmed the delete (200), or when she never chatted (nothing stored).
+ *  The server accepts an expired token here, so a 401 is a real failure and is shown as one. */
 export async function deleteChatMemory(fetcher: typeof fetch = fetch): Promise<void> {
-  const saved = JSON.parse((await AsyncStorage.getItem(TOKEN_KEY)) ?? 'null') as { token: string } | null;
-  if (!saved?.token) return; // never chatted: nothing is stored
-  const res = await fetcher(`${CHAT_API}/memory`, { method: 'DELETE', headers: { authorization: `Bearer ${saved.token}` } });
-  if (!res.ok && res.status !== 401) throw new ChatError(`memory ${res.status}`);
+  const old = await saved();
+  if (!old?.token) return; // never chatted: nothing is stored
+  const res = await fetcher(`${CHAT_API}/memory`, { method: 'DELETE', headers: { authorization: `Bearer ${old.token}` } });
+  if (res.status !== 200) throw new ChatError(`memory ${res.status}`);
+  const body = (await res.json().catch(() => null)) as { deleted?: boolean } | null;
+  if (body?.deleted !== true) throw new ChatError('memory not confirmed');
 }
 
 /** The anonymous install id from the server, once she has chatted; phase 5 logs RevenueCat in with it. */

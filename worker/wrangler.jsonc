@@ -24,7 +24,7 @@
       "migrations_dir": "migrations"
     }
   ],
-  "ai": { "binding": "AI" },
+  "ai": { "binding": "AI", "remote": true },
   // Burst limits on top of the D1 daily counters (Workers Rate Limiting, per location, per key).
   "ratelimits": [
     { "name": "CHAT_BURST", "namespace_id": "3101", "simple": { "limit": 12, "period": 60 } },
@@ -34,30 +34,35 @@
   "triggers": { "crons": ["0 * * * *"] },
   "observability": { "enabled": true, "head_sampling_rate": 1 },
   "vars": {
-    // Free allowances, worked out 20 Nov 2026 (re-check monthly):
-    // - Workers AI: 10,000 neurons a day, reset 00:00 UTC (developers.cloudflare.com/workers-ai/platform/pricing).
-    //   Safety read, llama-guard-3-8b: 44,003 neurons per M input tokens; ~1,000 tokens (6 turns) = ~44 neurons.
-    //   Judge, llama-3.1-8b-instruct-fp8-fast: 4,119 in / 34,868 out per M; ~600 in + 40 out = ~4 neurons.
-    //   Answer, llama-3.3-70b-instruct-fp8-fast: 26,668 in / 204,805 out per M; ~1,400 in + 350 out = ~109 neurons.
-    //   150 messages x (44 + 4) = 7,200 neurons for safety and judging, leaving ~2,800 = 25 answer calls.
-    // - Gemini free (PBS_GEMINI_API_KEY project): per-model RPD is shown only in AI Studio
-    //   (aistudio.google.com/rate-limit). 200 is a floor below every flash-lite free quota published to date;
-    //   SUSPECTED until read in AI Studio. Resets midnight Pacific.
-    // - OpenRouter :free models: 50 requests a day with under 10 credits bought (openrouter.ai/docs/api-reference/limits).
-    // Answer capacity = 25 + 200 + 50 = 275 calls. A message uses 1 call, 2 with a regeneration, and a paid
-    // message adds 1 memory call: 150 messages a day fits with room for regenerations.
-    "CHAT_GLOBAL_MESSAGES_DAILY": "150",
+    // Free allowances, re-measured 20 Nov 2026 (round-2 fix). Re-check monthly against chat_counts.
+    // - Workers AI: 10,000 neurons a day, reset 00:00 UTC. Measured per call on her account:
+    //   risk read (llama-3.1-8b, ~480 tokens in) 2.6 neurons; judge (llama-3.3-70b, ~1,100 in) ~24 neurons;
+    //   an answer on llama-3.3-70b ~109 neurons. So Workers AI is kept for safety and judging:
+    //   400 risk reads (1,040) + 300 judge calls (7,200) + 10 answers (1,090) = 9,330 neurons.
+    // - Gemini free (PBS_GEMINI_API_KEY project), one rung per model, each with its own daily quota
+    //   (resets midnight Pacific). The per-model RPD is shown only in AI Studio (aistudio.google.com/rate-limit):
+    //   200 per model is a floor, SUSPECTED until read there. A 429 that names a PerDay quota marks the rung
+    //   out for the day (measured); a 503 or a per-minute 429 is retried, never "resting".
+    // - OpenRouter: the vault key is off the free tier (1,000 free requests a day) with a $0 spend limit;
+    //   only ":free" ids run, with max_price 0. Free models are rate-limited upstream one by one, so the
+    //   rung rotates through OPENROUTER_MODELS. 900 keeps room under 1,000 for the rotation's own tries.
+    // Answer capacity on paper: 10 + 2 x 200 + 900 = 1,310 calls; a message takes ~1.3 (regenerations) and
+    // a paid one adds a memory call. The ceiling below is set from the judge's 300 calls (the first
+    // allowance to run out) and the live red team's measured rate (phase-3-result.md), not from paper.
+    "CHAT_GLOBAL_MESSAGES_DAILY": "220",
     "CHAT_IP_MESSAGES_DAILY": "120",
-    "TOKENS_PER_IP_DAILY": "3",
-    "WORKERS_AI_ANSWER_CALLS_DAILY": "25",
-    "WORKERS_AI_SAFETY_CALLS_DAILY": "170",
+    "TOKENS_PER_IPV4_DAILY": "20",
+    "TOKENS_PER_IPV6_DAILY": "3",
+    "WORKERS_AI_ANSWER_CALLS_DAILY": "10",
+    "WORKERS_AI_RISK_CALLS_DAILY": "400",
+    "WORKERS_AI_JUDGE_CALLS_DAILY": "300",
     "GEMINI_CALLS_DAILY": "200",
-    "OPENROUTER_CALLS_DAILY": "50",
+    "OPENROUTER_CALLS_DAILY": "900",
     "WORKERS_AI_ANSWER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-    "WORKERS_AI_JUDGE_MODEL": "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
-    "WORKERS_AI_GUARD_MODEL": "@cf/meta/llama-guard-3-8b",
-    "GEMINI_MODEL": "gemini-3.5-flash-lite",
-    "OPENROUTER_MODELS": "google/gemma-4-31b-it:free,google/gemma-4-26b-a4b-it:free",
+    "WORKERS_AI_JUDGE_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    "WORKERS_AI_RISK_MODEL": "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
+    "GEMINI_MODELS": "gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+    "OPENROUTER_MODELS": "google/gemma-4-26b-a4b-it:free,nvidia/nemotron-3.5-super-vl:free,nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free",
     "REVENUECAT_ENTITLEMENT": "paid",
     "CHAT_TOKEN_KID": "k1"
   }

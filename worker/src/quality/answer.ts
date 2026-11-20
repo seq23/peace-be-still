@@ -34,18 +34,35 @@ const RULES: Rule[] = [
   // C07 promises and medicine
   ['outcome_promise', / god (?:will|is going to|gonna) (?:heal|cure|fix|pay|provide the money|bring you a|give you a (?:husband|wife|house|job)) | you will be (?:healed|cured|rich|wealthy|debt free|blessed with) | (?:make|making) you (?:rich|wealthy) | (?:double|triple) your (?:income|money|salary|pay) | your (?:money|wealth|financial breakthrough|debt freedom) is coming | (?:debt|debts) (?:will be|is|are) (?:gone|cancelled|canceled|paid off|wiped) | dios te (?:sanara|curara|hara ric\w+|dara dinero) | te (?:hara|haran) ric[oa] | seras (?:sanada|sanado|curada|curado|rica|rico) /],
   ['stop_medicine', / (?:stop|quit|skip|drop|come off|get off|throw away|ditch) (?:taking )?(?:your |the |those |all )?(?:meds|medicine|medication|medications|pills|antidepressants|therapy|therapist|doctor|counseling|counselor|treatment) | (?:you )?(?:dont|do not) need (?:your |the |a )?(?:meds|medicine|medication|pills|doctor|therapist|therapy|counselor) | (?:trust|faith in) god instead of (?:your |the |a )?(?:meds|medicine|medication|doctor|therapy|treatment) | (?:deja|dejar|suspende|abandona) (?:de tomar )?(?:tus |los |la |el )?(?:medicinas|medicamentos|pastillas|terapia|tratamiento|medico) /, { negatable: true }],
-  // C14 respect
-  ['partisan', / vote (?:for|republican|democrat|blue|red|against) | (?:christians|you|believers|we) should (?:vote|support|back) | (?:republicans?|democrats?|gop|maga|liberals?|conservatives?|the left|the right) (?:are|is) (?:evil|godly|ungodly|right|wrong|the christian|satanic) | vota (?:por|republicano|democrata|en contra) | (?:trump|biden|harris|vance|obama|newsom|desantis) /],
+  // C14 respect. An endorsement shape, negatable: "the Bible doesn't tell you who to vote for" passes.
+  ['partisan', / (?:vote|voting) (?:for (?:the )?)?(?:republican|democrat|gop|blue|red|conservative|liberal|trump|biden|harris|vance|newsom|desantis)\w* | (?:christians|you|believers|we|everyone) (?:should|must|need to|ought to|have to) (?:vote|support|back) (?!your conscience|with|prayerfully)| (?:republicans?|democrats?|gop|maga|liberals?|conservatives?|the left|the right) (?:are|is) (?:evil|godly|ungodly|right|wrong|the christian|satanic|of god|of the devil) | vota (?:por (?:el |los )?)?(?:republican\w*|democrata\w*|trump|biden|harris) | (?:trump|biden|harris|vance|obama|newsom|desantis) (?:is|was|are) (?:gods|chosen|anointed|evil|the answer|right|wrong) /, { negatable: true }],
   ['ethnicity_claim', / (?:jesus|christ|moses|mary|adam|eve|abraham|david|solomon) (?:was|is) (?:definitely |certainly |clearly |actually |really )?(?:black|white|african|european|caucasian)\b| (?:jesus|cristo|moises|maria) era (?:definitivamente |claramente )?(?:negro|negra|blanco|blanca|africano|europeo) /],
   // C16 privacy
   ['personal_detail', / whats? (?:is )?(?:your|his|her|their) (?:full |last |real )?name | (?:tell me|share|give me|send me) (?:your|his|her) (?:full )?(?:name|address|phone|number) | what (?:church|congregation) do you (?:attend|go to) | where do you live | your (?:home )?address | your phone(?: number)? | como te llamas | tu (?:nombre completo|direccion|telefono|numero de telefono) | (?:a que|cual) iglesia (?:vas|asistes) | donde vives /],
   // C11 teens (secrecy applies to everyone)
   ['secrecy', / (?:dont|do not|no need to|you dont have to|you dont need to|never) tell (?:your )?(?:parents|mom|dad|mother|father|anyone|anybody|a teacher|adults?|grown ups) | keep (?:this|it) (?:a )?secret | our (?:little )?secret | no (?:le|les) (?:digas|cuentes) (?:nada )?a (?:tus papas|tu mama|tu papa|tus padres|nadie) | (?:guardalo|mantenlo) en secreto /],
   ['sexual_detail', / (?:oral|anal|intercourse|penetrat\w*|orgasm\w*|condoms?|foreplay|erection\w*|genital\w*|masturbat\w*|porn\w*|naked|nude|vagina|penis|ejaculat\w*|sexo oral|preservativos?|condon) /, { teenOnly: true }],
+  // C08/C09: the AI never plays a person with a body or a home, and never calls a grown woman pet names.
+  ['persona_roleplay', / (?:let me )?pour (?:you|us)| (?:a |your )?cup of (?:tea|coffee)| sit (?:down )?(?:here )?(?:at|with me at|around) (?:my|this|the) (?:kitchen )?table| (?:my|this) kitchen table| my (?:kitchen|porch|home|house)\b| pull up a chair| hold your hand| (?:stay|sit) (?:up )?(?:here )?with me tonight| (?:stay|be) (?:right )?here with you tonight| im (?:right )?here (?:beside|next to) you| te (?:sirvo|preparo) un (?:cafe|te|cafecito)| (?:mi|esta) (?:cocina|mesa)\b| me quedo contigo /],
   // C12 Latin American Spanish
   ['vosotros', / (?:vosotros|vosotras|vuestro|vuestra|vuestros|vuestras|sois|estais|habeis|teneis|podeis|sabeis|quereis|seais|os) /, { lang: 'es' }],
 ];
 const PROFANITY = new RegExp(` (?:${banned.profanity.join('|')}) `);
+// The stock lines the free models reach for (banned.json "chat", folded like norm()).
+const STOCK = new RegExp(` (?:${(banned as { chat?: string[] }).chat?.join('|') ?? '(?!)'}) `);
+// Pet names used as address ("..., honey." / "Child, ..."), on the raw text: punctuation matters.
+const ADDRESS = /(?:^|[,.;:!?¡¿]\s*)(?:oh\s+)?(?:honey|baby|child|chile|sugar|sweetheart|sweetie|darling|beloved|dear one|mija|mijo|cari[ñn]o|mi ni[ñn]a|coraz[oó]n)\s*[,.;!?]|,\s*(?:my\s+)?(?:honey|baby|child|chile|sugar|sweetheart|sweetie|darling|beloved|dear|mija|mijo|cari[ñn]o|mi ni[ñn]a)\b/iu;
+// "I'm an AI" is said only when she asked (the code floor answers a direct ask; the app labels every answer).
+const SAYS_AI = / (?:i am|im|as) an? (?:ai|a i|artificial intelligence)\b| ai helper | (?:soy|como) (?:un |una )?(?:asistente de )?(?:ia|inteligencia artificial)\b/;
+const ASKED_AI = / (?:real|human|person|people|bot|robot|ai|machine|computer|chatbot|pastor|preacher|god|jesus|who are you|what are you|persona|humano|humana|ia|maquina|quien eres|que eres) /;
+// "Churches teach differently" belongs only to the questions Christians truly split on (C14).
+const SPLIT_SAID = / (?:churches|christians|denominations|believers) (?:teach|see|view|read|understand|hold|have) (?:this |it )?(?:differently|different views|different beliefs)| christians (?:disagree|differ)| (?:las )?iglesias (?:ensenan|ven|entienden) (?:esto )?(?:distinto|diferente|de manera diferente)| los cristianos no (?:estan de acuerdo|coinciden)/;
+const SPLIT_ASKED = / (?:gay|gays|lesbian|homosexual\w*|lgbt\w*|same sex|queer|trans|transgender|sexuality|sexual orientation|divorc\w*|remarr\w*|women (?:preach\w*|pastors?|ministers?|in ministry|lead\w*)|female pastors?|pastora|alcohol|drink\w*|wine|beer|vino|cerveza|tongues|lenguas|hell|heaven|saved|salvation|other religions?|muslim\w*|jewish|jews|hindu\w*|buddhis\w*|atheis\w*|infierno|cielo|salvacion|salv[oa]|musulman\w*|judio\w*|otras religiones|mujeres (?:que )?predic\w*|rapture|arrebatamiento|predestin\w*|baptism|bautismo|sabbath|sabado) /;
+// C07 verse floor: verses whose printed words would promise what the answer must not.
+const MEDICINE_Q = / (?:meds|medication\w*|medicine\w*|pills|antidepressants?|prescription\w*|therapy|therapist|doctor\w*|diagnos\w*|cancer|chemo\w*|tumou?r|sick|sickness|illness|disease|surgery|insulin|medicament\w*|medicinas?|pastillas|terapia|medic[oa]s?|enferm\w*|cirugia) /;
+const MEDICINE_DENY = /\b(?:heal\w*|physician|cure\w*|sana\w*|sanidad|curar\w*|medico)\b/;
+const MONEY_Q = / (?:money|seed|sow|sowing|tithe\w*|offering\w*|give|giving|debt\w*|rent|bills?|broke|job|income|house|rich|wealth\w*|prosper\w*|bless me|dinero|semilla|sembrar|diezmo\w*|ofrenda\w*|deuda\w*|renta|trabajo|casa|rico|riqueza|prosper\w*) /;
+const MONEY_DENY = /\b(?:sow\w*|reap\w*|prosper\w*|desires of thine heart|borrower|lender|siembra\w*|sembr\w*|sieg\w*|cosech\w*|deseos de tu corazon|prestador|prestamista)\b/;
 const HARD_TOPIC = / (?:died|dies|death|dead|funeral|suicide|sex|sexual|girlfriend|boyfriend|dating|crush|pregnan\w*|abuse|divorce\w*|depress\w*|anxiety|anxious|scared|afraid|bull(?:y|ied|ying)|parents fight\w*|murio|muerte|novio|novia|sexo|embaraz\w*|divorcio|miedo|ansiedad|deprim\w*) /;
 const TRUSTED = / (?:trusted adult|parent|parents|mom|dad|mother|father|counselor|pastor|youth (?:leader|pastor)|teacher|coach|adulto de confianza|tus papas|tu mama|tu papa|tus padres|consejer[oa]|maestr[oa]|lider de jovenes) /;
 
@@ -79,12 +96,17 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   const scripture: Scripture[] = [];
   const seen = new Set<string>();
   const add = (s: Scripture | null) => { if (s && !seen.has(`${s.book} ${s.chapter}:${s.verse}`) && scripture.length < 3) { seen.add(`${s.book} ${s.chapter}:${s.verse}`); scripture.push(s); } };
+  const asked = norm(ctx.userText);
+  const unfit = (s: Scripture) => (MEDICINE_Q.test(asked) && MEDICINE_DENY.test(fold(s.text))) || (MONEY_Q.test(asked) && MONEY_DENY.test(fold(s.text)));
   if (ctx.door === 'faith') {
-    for (const raw of rawRefs) { const ref = parseReference(raw); add(ref ? await lookup(ctx.db, ctx.translation, ref) : null); }
+    // A verse whose words would promise healing or wealth to this question is dropped, not shown.
+    for (const raw of rawRefs) { const ref = parseReference(raw); const s = ref ? await lookup(ctx.db, ctx.translation, ref) : null; if (s && unfit(s)) notes.push('verse_dropped'); else add(s); }
     for (const r of refsInText(text)) {
       if (!r.book) continue;
       const s = await lookup(ctx.db, ctx.translation, { book: r.book, chapter: r.chapter, verse: r.verse, ...(r.end ? { endVerse: r.end } : {}) });
-      if (!s) problems.push('unknown_reference'); else add(s);
+      if (!s) problems.push('unknown_reference');
+      else if (unfit(s)) problems.push('verse_unfit'); // named in her answer: it has to be rewritten
+      else add(s);
     }
     if (rawRefs.length > 3) notes.push('over_3_refs');
   } else if (refsInText(text).some(r => r.book)) problems.push('scripture_in_mindset');
@@ -112,6 +134,10 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
     if (hit) problems.push(problem);
   }
   if (PROFANITY.test(n)) problems.push('profanity');
+  if (STOCK.test(n)) problems.push('stock_phrase');
+  if (ADDRESS.test(text)) problems.push('persona_roleplay');
+  if (SAYS_AI.test(n) && !ASKED_AI.test(asked)) problems.push('unasked_ai');
+  if (SPLIT_SAID.test(n) && !SPLIT_ASKED.test(asked)) problems.push('split_unasked');
   if (ctx.door === 'faith' && faithContentIssues(text).length) problems.push('mindset_word');
   if (ctx.teen && HARD_TOPIC.test(norm(ctx.userText)) && !TRUSTED.test(n)) problems.push('missing_trusted_adult');
 
@@ -126,6 +152,8 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   const count = words(text).length;
   if (count > limit * 1.25) problems.push('too_long'); else if (count > limit) notes.push('over_length');
   if ((text.match(/\?/g) ?? []).length >= 3) problems.push('question_string');
+  // C13: it ends with a verse or a short prayer, never on a question.
+  if (/[?？]["'”’)\]]*\s*$/.test(text)) problems.push('ends_with_question');
   if (!text) problems.push('empty');
 
   return problems.length ? { ok: false, problems: [...new Set(problems)] } : { ok: true, text, scripture, notes };

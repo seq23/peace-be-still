@@ -104,5 +104,8 @@
   "Delete what chat remembers": "Delete what chat remembers",
   "Paid chat keeps a short note of what you are carrying": "Paid chat keeps a short note of what you are carrying",
   "Chat memory deleted.": "Chat memory deleted.",
-  "Chat memory couldn't be deleted. Try again.": "Chat memory couldn't be deleted. Try again."
+  "Chat memory couldn't be deleted. Try again.": "Chat memory couldn't be deleted. Try again.",
+  "Chat can't start on this network today. Try again on another connection.": "Chat can't start on this network today. Try again on another connection.",
+  "Text 1-800-422-4453": "Text 1-800-422-4453",
+  "Text START to 88788": "Text START to 88788"
 }

@@ -1,15 +1,27 @@
 // The free model ladder, in the order of providers.mjs (the list the privacy policy names).
-// A rung that is out of its daily allowance, has no key, is rate-limited, fails or returns
-// malformed JSON is skipped and counted; all out = null, which the caller turns into the named
-// stop CHAT_NO_FREE_MODEL and the kind in-app message. Never fatal while another rung works.
+// A rung out of its daily allowance or without a key is skipped; a rung that fails, is
+// rate-limited or returns malformed JSON is counted and the next rung is tried. The outcome tells
+// the two empty cases apart, because she is told different things:
+//  - 'out':  every rung is really out for today (its counter is at the cap, the provider said its
+//            DAILY quota is used up, or it has no key) -> the named stop CHAT_NO_FREE_MODEL,
+//            "resting until tomorrow";
+//  - 'busy': at least one rung only failed for a moment -> "give it a minute", chat stays open.
 import { reserve, logCode } from './counts';
 import { RungError, type JsonSchema, type Message, type Rung } from './providers/types';
 
 export type LadderRung = { id: string; call: Rung; cap: number; day: string };
 export type Metrics = Map<string, number>;
 export const tally = (m: Metrics, key: string) => m.set(key, (m.get(key) ?? 0) + 1);
+export type LadderResult = { rung: string; data: unknown } | { empty: 'out' | 'busy' };
 
-export async function runLadder(db: D1Database, rungs: LadderRung[], messages: Message[], schema: JsonSchema, maxTokens: number, metrics: Metrics, valid: (data: unknown) => boolean): Promise<{ rung: string; data: unknown } | null> {
+/** The provider said today's quota is used up: no more calls to it until its day turns. */
+async function markOut(db: D1Database, rung: LadderRung): Promise<void> {
+  await db.prepare('INSERT INTO chat_counts (day, metric, n) VALUES (?, ?, ?) ON CONFLICT(day, metric) DO UPDATE SET n = max(n, excluded.n)')
+    .bind(rung.day, `calls:${rung.id}`, rung.cap).run();
+}
+
+export async function runLadder(db: D1Database, rungs: LadderRung[], messages: Message[], schema: JsonSchema, maxTokens: number, metrics: Metrics, valid: (data: unknown) => boolean): Promise<LadderResult> {
+  let busy = false;
   for (const rung of rungs) {
     if (!(await reserve(db, rung.day, `calls:${rung.id}`, rung.cap))) { tally(metrics, `capped:${rung.id}`); continue; }
     try {
@@ -19,9 +31,12 @@ export async function runLadder(db: D1Database, rungs: LadderRung[], messages: M
       return { rung: rung.id, data };
     } catch (error) {
       const kind = error instanceof RungError ? error.kind : 'failed';
-      tally(metrics, `${kind === 'rate_limited' ? '429' : kind === 'missing_key' ? 'missing' : kind === 'malformed' ? 'malformed' : 'fail'}:${rung.id}`);
+      const label = { rate_limited: '429', missing_key: 'missing', malformed: 'malformed', exhausted: 'exhausted', failed: 'fail' }[kind];
+      tally(metrics, `${label}:${rung.id}`);
       logCode(error instanceof RungError ? error.message : 'RUNG_ERROR', { rung: rung.id });
+      if (kind === 'exhausted') await markOut(db, rung);
+      else if (kind !== 'missing_key') busy = true;
     }
   }
-  return null;
+  return { empty: busy ? 'busy' : 'out' };
 }

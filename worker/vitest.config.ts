@@ -9,13 +9,15 @@ import { defineConfig } from 'vitest/config';
 
 const here = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 const chapters: Array<[string, number]> = [['PSA', 46], ['PSA', 34], ['PSA', 23], ['PSA', 91], ['PSA', 4], ['PSA', 151], ['ISA', 41], ['PHI', 4], ['JOH', 3], ['JOH', 11], ['JOH', 14], ['JOH', 15],
-  ['MAT', 11], ['MAT', 6], ['MAT', 24], ['ROM', 8], ['ROM', 6], ['ROM', 10], ['1PE', 5], ['2SA', 13], ['2CO', 12], ['HEB', 13], ['1TI', 4], ['PRO', 3], ['ECC', 3], ['EPH', 2], ['1JO', 1]];
+  ['MAT', 11], ['MAT', 6], ['MAT', 24], ['ROM', 8], ['ROM', 6], ['ROM', 10], ['1PE', 5], ['2SA', 13], ['2CO', 12], ['HEB', 13], ['1TI', 4], ['PRO', 3], ['ECC', 3], ['EPH', 2], ['1JO', 1],
+  ['1CO', 12], ['2CO', 9], ['PSA', 37], ['PSA', 13], ['PSA', 55], ['MAT', 9], ['MAT', 22], ['ROM', 1], ['PRO', 22], ['PSA', 101], ['1TH', 4]];
 const seed = Number(process.env.PBS_SEED ?? Date.now() % 2147483647);
 console.log(`worker tests: verse sample seed ${seed} (replay with PBS_SEED=${seed})`);
 
 function verses() {
   const rows: Array<[string, string, number, number, string]> = [];
   const sample: Array<[string, string, number, number, string]> = [];
+  const heads: Array<[string, string, number, number, string]> = [];
   let s = seed;
   const rand = () => (s = (s * 48271) % 2147483647) / 2147483647;
   for (const [translation, file] of [['KJV', 'kjv'], ['RV1909', 'rv1909']] as const) {
@@ -25,9 +27,11 @@ function verses() {
     const total = (db.prepare('SELECT max(id) AS n FROM verses').get() as { n: number }).n;
     const byId = db.prepare('SELECT book, chapter, verse, text FROM verses WHERE id = ?');
     for (let i = 0; i < 200; i++) { const r = byId.get(1 + Math.floor(rand() * total)) as { book: string; chapter: number; verse: number; text: string }; sample.push([translation, r.book, r.chapter, r.verse, r.text]); }
+    // Verse 1 of every Psalm: the heading check runs over all 150 in both translations.
+    for (const r of db.prepare("SELECT book, chapter, verse, text FROM verses WHERE book = 'PSA' AND verse = 1").all() as Array<{ book: string; chapter: number; verse: number; text: string }>) heads.push([translation, r.book, r.chapter, r.verse, r.text]);
     db.close();
   }
-  return { rows, sample };
+  return { rows, sample, heads };
 }
 
 export default defineConfig({
@@ -36,7 +40,7 @@ export default defineConfig({
   tsconfig: './tsconfig.json',
   plugins: [
     cloudflareTest(async () => {
-      const { rows, sample } = verses();
+      const { rows, sample, heads } = verses();
       return {
         wrangler: { configPath: './wrangler.jsonc' },
         remoteBindings: false,
@@ -45,6 +49,7 @@ export default defineConfig({
             TEST_MIGRATIONS: await readD1Migrations(here('./migrations')),
             TEST_VERSES: rows,
             TEST_SAMPLE: sample,
+            TEST_PSALM_HEADS: heads,
             CHAT_TOKEN_SECRET: 'test-secret-test-secret-test-secret-0001',
             IP_HASH_SECRET: 'test-ip-secret-test-ip-secret-test-0002',
             // Many tests share one IP and one day; the limits themselves are tested on D1 directly.

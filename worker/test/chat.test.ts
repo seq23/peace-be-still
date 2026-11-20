@@ -62,10 +62,18 @@ describe('order of checks', () => {
   it('a child is refused a token', async () => {
     expect((await call(deps(), '/api/token', { body: { age: 'child' }, ip: freshIp() })).status).toBe(403);
   });
-  it('one IP gets at most 3 install tokens a day', async () => {
-    const ip = freshIp();
+  it('a shared IPv4 (church Wi-Fi, CGNAT) gets 20 install tokens a day; the 21st is refused as network_limit', async () => {
+    const ip = '192.0.2.77';
     const statuses = [];
-    for (let i = 0; i < 4; i++) statuses.push((await call(deps({ now: () => NOW + i * 61_000 }), '/api/token', { body: { age: 'adult' }, ip })).status);
+    for (let i = 0; i < 21; i++) statuses.push((await call(deps({ now: () => NOW + i * 61_000 }), '/api/token', { body: { age: 'adult' }, ip })).status);
+    expect(statuses.slice(0, 20).every(s => s === 200)).toBe(true);
+    const last = await call(deps({ now: () => NOW + 22 * 61_000 }), '/api/token', { body: { age: 'adult' }, ip });
+    expect(last.status).toBe(429);
+    expect(((await last.json()) as { kind: string }).kind).toBe('network_limit');
+  });
+  it('one IPv6 /64 gets 3 install tokens a day', async () => {
+    const statuses = [];
+    for (let i = 0; i < 4; i++) statuses.push((await call(deps({ now: () => NOW + i * 61_000 }), '/api/token', { body: { age: 'adult' }, ip: `2001:db8:77:1::${i + 1}` })).status);
     expect(statuses).toEqual([200, 200, 200, 429]);
   });
 });
@@ -170,36 +178,58 @@ describe('the ladder', () => {
     expect(capped.calls.length).toBe(0);
     expect(ok.calls.length).toBe(1);
   });
-  it('all rungs out: the named stop CHAT_NO_FREE_MODEL with the kind message', async () => {
+  it('every rung really out for today (at its cap, or the provider said its daily quota is used): CHAT_NO_FREE_MODEL', async () => {
     const log = vi.spyOn(console, 'log');
-    const r = await chat(deps({ rungList: [scripted('workers-ai', [new Error('x')]).rung, scripted('gemini-free', [new Error('y')]).rung] }), 'hello');
+    const capped = scripted('workers-ai', [good()], 0);
+    const daily = scripted('gemini-free:m', [new RungError('exhausted', 'HTTP_429_DAILY')]);
+    const r = await chat(deps({ rungList: [capped.rung, daily.rung] }), 'hello');
     expect(r.body.kind).toBe('no_free_model');
     expect(r.body.ai).toBe(false);
     expect(log.mock.calls.flat().join('\n')).toMatch(/CHAT_NO_FREE_MODEL/);
     log.mockRestore();
+    // The exhausted rung is not called again today: its counter was set to its cap.
+    await chat(deps({ rungList: [daily.rung] }), 'hello again');
+    expect(daily.calls.length).toBe(1);
+  });
+  it('a rung that only failed (503, network, a per-minute 429) is "busy": chat stays open and the message is not charged', async () => {
+    const d = deps({ rungList: [scripted('gemini-free', [new RungError('failed', 'HTTP_503')]).rung, scripted('openrouter-free', [new RungError('rate_limited', 'HTTP_429')]).rung] });
+    const token = await tokenFor(d);
+    const conversation = conv();
+    const r = await call(d, '/api/chat', { token, body: { ...chatBody('hello'), conversation } });
+    const body = (await r.json()) as { kind: string; text: string; remaining: number };
+    expect(body.kind).toBe('busy');
+    expect(body.text).not.toMatch(/resting until tomorrow/);
+    expect(body.remaining).toBe(10);
+    const ok = deps({ rungList: [scripted('gemini-free', [good()]).rung] });
+    expect(((await (await call(ok, '/api/chat', { token, body: { ...chatBody('hello'), conversation } })).json()) as { remaining: number }).remaining).toBe(9);
   });
   it('a bad answer is regenerated once with the objection; a good second answer is used', async () => {
     const rung = scripted('workers-ai', [{ text: 'God will heal you by Friday.', references: [] }, good()]);
     const r = await chat(deps({ rungList: [rung.rung] }), 'pray for my back');
     expect(r.body.kind).toBe('answer');
-    expect(rung.calls[1].some(m => m.content.includes('outcome_promise'))).toBe(true);
+    expect(rung.calls[1].some(m => m.content.includes('outcome promise'))).toBe(true);
   });
   it('the judge can fail an answer the code floor passed', async () => {
     const rung = scripted('workers-ai', [good(), good()]);
-    const r = await chat(deps({ rungList: [rung.rung], judge: async () => ({ verdict: 'fail', which: ['prophecy'] }) }), 'hello');
+    const r = await chat(deps({ rungList: [rung.rung], judge: async () => ({ verdict: 'fail', which: ['prophecy'], voice: 5 }) }), 'hello');
     expect(r.body.kind).toBe('fallback');
   });
   it('the fallback carries Psalm 46:1 from the store in her translation', async () => {
     const bad = { text: 'Sow a seed.', references: [] };
     const en = await chat(deps({ rungList: [scripted('workers-ai', [bad]).rung] }), 'hello');
     expect(en.body.scripture[0].text).toContain('God [is] our refuge and strength');
+    // Psalm 46's heading is not part of the verse she is given, and one psalm is "Psalm".
+    expect(en.body.scripture[0].text).not.toMatch(/chief Musician|Alamoth/);
+    expect(en.body.scripture[0].text.startsWith('God [is] our refuge')).toBe(true);
+    expect(en.body.scripture[0].ref).toBe('Psalm 46:1');
     const es = await chat(deps({ rungList: [scripted('workers-ai', [{ text: 'Siembra una semilla de fe.', references: [] }]).rung] }), 'hola', { body: { language: 'es', voice: 'spanish' } });
-    expect(es.body.scripture[0].text).toContain('DIOS es nuestro amparo y fortaleza');
+    expect(es.body.scripture[0].text.startsWith('DIOS es nuestro amparo y fortaleza')).toBe(true);
+    expect(es.body.scripture[0].ref).toBe('Salmos 46:1');
   });
 });
 
 describe('honesty and reminders', () => {
-  it.each(['are you an AI?', 'is this a bot?', 'am I talking to a human?', 'are you a real pastor?', '¿eres una persona real?'])('"%s" gets the honest answer from code', async q => {
+  it.each(['are you an AI?', 'is this a bot?', 'am I talking to a human?', 'are you a real pastor?', '¿eres una persona real?', 'wait r u a real person or a bot', 'ru human', 'are u a bot'])('"%s" gets the honest answer from code', async q => {
     const rung = throwing();
     const r = await chat(deps({ rungList: [rung.rung] }), q);
     expect(r.body.text).toMatch(/\bAI\b|\bIA\b/);
@@ -240,5 +270,37 @@ describe('logging and counts', () => {
     expect(m.fallback).toBeGreaterThanOrEqual(1);
     expect(m.red_line).toBeGreaterThanOrEqual(1);
     expect(m.crisis).toBeGreaterThanOrEqual(1);
+  });
+});
+
+describe('the install id never changes (round 2, finding 8)', () => {
+  const iid = (token: string) => JSON.parse(atob(token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'))).iid as string;
+  it('an expired token is renewed for the SAME install id, so paid status and memory follow her', async () => {
+    const d = deps();
+    const token = await tokenFor(d);
+    const later = deps({ now: () => NOW + 45 * 86400_000, rungList: [scripted('gemini-free', [good()]).rung] });
+    expect((await call(later, '/api/chat', { body: chatBody('hi'), token })).status).toBe(401);
+    const res = await call(later, '/api/token/renew', { token });
+    expect(res.status).toBe(200);
+    const renewed = (await res.json()) as { token: string; installId: string };
+    expect(renewed.installId).toBe(iid(token));
+    expect(iid(renewed.token)).toBe(iid(token));
+    expect((await call(later, '/api/chat', { body: chatBody('hi'), token: renewed.token })).status).toBe(200);
+  });
+  it('a forged token or one over a year late is not renewed', async () => {
+    const d = deps();
+    const token = await tokenFor(d);
+    const forged = token.slice(0, -2) + (token.endsWith('AA') ? 'BB' : 'AA');
+    expect((await call(d, '/api/token/renew', { token: forged })).status).toBe(401);
+    expect((await call(deps({ now: () => NOW + 400 * 86400_000 }), '/api/token/renew', { token })).status).toBe(401);
+  });
+  it('DELETE /api/memory with an expired token still deletes the row', async () => {
+    const d = deps({ rungList: [scripted('gemini-free', [good(), { summary: 'She is grieving.' }]).rung], paidNow: true });
+    const token = await tokenFor(d);
+    await chat(d, 'my mama died', { token });
+    expect(await env.DB.prepare('SELECT 1 FROM chat_memory WHERE install_id = ?').bind(iid(token)).first()).not.toBeNull();
+    const res = await call(deps({ now: () => NOW + 60 * 86400_000 }), '/api/memory', { method: 'DELETE', token });
+    expect(res.status).toBe(200);
+    expect(await env.DB.prepare('SELECT 1 FROM chat_memory WHERE install_id = ?').bind(iid(token)).first()).toBeNull();
   });
 });
