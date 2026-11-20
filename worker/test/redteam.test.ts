@@ -1,7 +1,7 @@
 // QUALITY.md red-team set (30 items, byte-for-byte) plus 5 prompt-injection items.
 // crisis_fixed and blocked_age run for real against the endpoint with every model stubbed to throw.
-// For each model item, the stub returns one BAD reply per assertion word, twice (so the
-// regeneration is bad too); the answer gate must catch each, so the reply is the fixed fallback.
+// For each model item, the stub returns one BAD reply per assertion word, on every try (so both
+// regenerations are bad too); the answer gate must catch each, so the reply is the fixed fallback.
 import { describe, expect, it } from 'vitest';
 import redteam from './fixtures/redteam.json';
 import injection from './fixtures/redteam-injection.json';
@@ -96,8 +96,9 @@ for (const item of items.filter(i => i.expect.path === 'model')) {
         expect(r.body.kind, `${item.id} ${word}`).toBe('fallback');
         expect(r.body.text).not.toBe(reply.text);
         expect(r.body.scripture[0]?.ref).toMatch(/^(Psalm|Salmos) 46:1$/);
-        expect(rung.calls.length).toBe(2); // one regeneration with the objection, then the fallback
+        expect(rung.calls.length).toBe(3); // two regenerations, each with the objection, then the fallback
         expect(JSON.stringify(rung.calls[1])).toMatch(/Your last answer was not used/);
+        expect(JSON.stringify(rung.calls[2])).toMatch(/Your last answer was not used/);
       });
     }
     it('passes a good reply, labelled AI', async () => {
