@@ -30,6 +30,7 @@ export function expoAudioOutput(): AudioOutput {
   return {
     load(uri, title) {
       ready = false;
+      last = { playing: last.playing, isLoaded: false };
       player.replace({ uri });
       player.setActiveForLockScreen(true, { title, artist: 'Peace Be Still' }, { showSeekBackward: true, showSeekForward: true });
     },

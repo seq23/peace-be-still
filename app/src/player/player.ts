@@ -102,12 +102,12 @@ export function createPlayer(options: {
   };
 
   let loadWaiters: Array<() => void> = [];
-  /** Resolves true once the loaded source is ready, false after LOAD_WAIT_MS. */
+  /** Resolves true once the loaded source is ready; after LOAD_WAIT_MS, whether it is ready even if no event said so. */
   const whenLoaded = (): Promise<boolean> => {
     if (audio.isLoaded) return Promise.resolve(true);
     return new Promise((resolve) => {
       const waiter = () => { clearTimeout(timeout); resolve(true); };
-      const timeout = setTimeout(() => { loadWaiters = loadWaiters.filter((w) => w !== waiter); resolve(false); }, LOAD_WAIT_MS);
+      const timeout = setTimeout(() => { loadWaiters = loadWaiters.filter((w) => w !== waiter); resolve(audio.isLoaded); }, LOAD_WAIT_MS);
       loadWaiters.push(waiter);
     });
   };

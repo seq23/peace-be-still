@@ -39,6 +39,7 @@ function fakeAudio({ autoLoad = true } = {}) {
       if (autoLoad) queueMicrotask(() => audio.loaded());
     },
     loaded() { ready = true; emit(); },
+    loadedSilently() { ready = true; },
     play() { if (startedAt === null) { startedAt = Date.now(); emit(); } },
     pause() { if (startedAt !== null) { base += (Date.now() - startedAt) / 1000; startedAt = null; emit(); } },
     async seekTo(seconds: number) { if (!ready) return; base = seconds; if (startedAt !== null) startedAt = Date.now(); audio.seeks.push(seconds); },
@@ -267,6 +268,18 @@ test('a track that never reports loaded starts from the top after the wait', asy
   await playing;
   assert.deepEqual(audio.seeks, []);
   assert.equal(player.getState().playing, true);
+});
+
+test('a track that loads without a status event still resumes at its spot after the wait', async () => {
+  const store = memoryStore();
+  store.data.set('pbs.player.position:en/psalms/kjv-psa-023.m4a', JSON.stringify({ positionSeconds: 120 }));
+  const { audio, player } = setup({ store, autoLoad: false });
+  const playing = player.play(track(), FREE);
+  await flush();
+  audio.loadedSilently();
+  mock.timers.tick(LOAD_WAIT_MS);
+  await playing;
+  assert.deepEqual(audio.seeks, [120]);
 });
 
 // ── outside control (lock screen, calls, AirPods) ────────────────────────
