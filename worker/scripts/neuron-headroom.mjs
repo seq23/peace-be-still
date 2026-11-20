@@ -30,7 +30,11 @@ export async function requireHeadroom(items, env = process.env) {
   let used;
   try { used = await neuronsUsedToday(env.CLOUDFLARE_API_TOKEN, env.CLOUDFLARE_ACCOUNT_ID); }
   catch (e) { console.error(`NAMED STOP NEURON_READ_FAILED: ${e.message}`); process.exit(4); }
-  const fit = itemsThatFit(used);
-  if (items > fit) { console.error(`NAMED STOP NEURON_CEILING: the account has used ${Math.round(used)} of ${CEILING} neurons today (UTC); ${items} items need ~${items * NEURONS_PER_ITEM}, ${fit} fit. Run after 00:00 UTC (6 PM Central).`); process.exit(4); }
-  console.log(`neurons today ${Math.round(used)}; this run ~${items * NEURONS_PER_ITEM}; ceiling ${CEILING}`);
+  // A run the owner approved past the free allowance (her typed yes, with its cost) names its own
+  // ceiling for that one run; never set in a committed workflow.
+  const ceiling = Number(env.REDTEAM_NEURON_CEILING) > 0 ? Number(env.REDTEAM_NEURON_CEILING) : CEILING;
+  if (ceiling !== CEILING) console.log(`owner-approved ceiling for this run: ${ceiling} neurons (~$${(Math.max(0, used + items * NEURONS_PER_ITEM - 10_000) * 0.011 / 1000).toFixed(2)} past the free allowance)`);
+  const fit = itemsThatFit(used, { ceiling });
+  if (items > fit) { console.error(`NAMED STOP NEURON_CEILING: the account has used ${Math.round(used)} of ${ceiling} neurons today (UTC); ${items} items need ~${items * NEURONS_PER_ITEM}, ${fit} fit. Run after 00:00 UTC (6 PM Central).`); process.exit(4); }
+  console.log(`neurons today ${Math.round(used)}; this run ~${items * NEURONS_PER_ITEM}; ceiling ${ceiling}`);
 }
