@@ -1,0 +1,112 @@
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { AppState } from 'react-native';
+import type { CustomerInfo, PurchasesPackage } from 'react-native-purchases';
+import { installId } from '../chat/api';
+import { canUse, type Feature, type User } from '../gates';
+import { useSettings } from '../settings';
+import { connectStore, hasPaid, type PurchaseStore } from './revenuecat';
+
+type Status = 'idle' | 'buying' | 'restoring' | 'pending' | 'failed' | 'unconfirmed' | 'nothingToRestore' | 'restoreFailed';
+type State = {
+  store: PurchaseStore | null;
+  paid: boolean;
+  status: Status;
+  buy: (pkg: PurchasesPackage) => Promise<void>;
+  restore: () => Promise<void>;
+};
+const Context = createContext<State | null>(null);
+
+export function PurchasesProvider({ children }: { children: React.ReactNode }) {
+  const { settings: { age } } = useSettings();
+  const [store, setStore] = useState<PurchaseStore | null>(null);
+  const [paid, setPaid] = useState(false);
+  const [status, setStatus] = useState<Status>('idle');
+  const inFlight = useRef(false);
+  const pending = useRef(false);
+
+  useEffect(() => {
+    if (!age || age === 'child') return;
+    let live = true;
+    let cleanup = () => {};
+    void connectStore().then(async sdk => {
+      if (!sdk || !live) return;
+      const update = (info: CustomerInfo) => {
+        if (!live) return;
+        const active = hasPaid(info);
+        setPaid(active);
+        if (active) {
+          pending.current = false;
+          setStatus(current => current === 'pending' ? 'idle' : current);
+        }
+      };
+      const refresh = () => {
+        if (!inFlight.current) void sdk.getCustomerInfo().then(info => {
+          if (!inFlight.current) update(info);
+        }).catch(() => {});
+      };
+      const id = await installId();
+      if (id && await sdk.getAppUserID() !== id) await sdk.logIn(id);
+      if (!live) return;
+      sdk.addCustomerInfoUpdateListener(update);
+      const subscription = AppState.addEventListener('change', state => {
+        if (state === 'active') refresh();
+      });
+      cleanup = () => {
+        sdk.removeCustomerInfoUpdateListener(update);
+        subscription.remove();
+      };
+      setStore(sdk);
+      refresh();
+    }).catch(() => { if (live) setStatus('failed'); });
+    return () => { live = false; cleanup(); };
+  }, [age]);
+
+  async function transact(pkg?: PurchasesPackage) {
+    if (!store || !age || age === 'child' || inFlight.current || (pkg && (paid || pending.current))) return;
+    inFlight.current = true;
+    setStatus(pkg ? 'buying' : 'restoring');
+    try {
+      const id = await installId(age);
+      if (!id) throw new Error('Install identity unavailable');
+      if (await store.getAppUserID() !== id) {
+        const { customerInfo } = await store.logIn(id);
+        setPaid(hasPaid(customerInfo));
+        if (pkg && hasPaid(customerInfo)) {
+          setStatus('idle');
+          return;
+        }
+      }
+      if (pkg) {
+        const { outcome, info } = await store.buy(pkg);
+        if (info) setPaid(hasPaid(info));
+        pending.current = outcome === 'pending';
+        setStatus(outcome === 'active' || outcome === 'cancelled' ? 'idle' : outcome);
+      } else {
+        const active = hasPaid(await store.restorePurchases());
+        setPaid(active);
+        if (active) pending.current = false;
+        setStatus(active ? 'idle' : pending.current ? 'pending' : 'nothingToRestore');
+      }
+    } catch {
+      setStatus(pending.current ? 'pending' : pkg ? 'failed' : 'restoreFailed');
+    } finally {
+      inFlight.current = false;
+    }
+  }
+
+  const allowed = !!age && age !== 'child';
+  return <Context.Provider value={{ store: allowed ? store : null, paid: allowed && paid, status, buy: transact, restore: transact }}>{children}</Context.Provider>;
+}
+
+export function usePurchases() {
+  const value = useContext(Context);
+  if (!value) throw new Error('PurchasesProvider is required');
+  return value;
+}
+
+/** Bind the existing gates to the same entitlement all screens observe. */
+export function useCanUse() {
+  const { paid } = usePurchases();
+  const { settings: { age } } = useSettings();
+  return (feature: Feature, usage: Omit<User, 'paid' | 'age'> = {}) => canUse(feature, { ...usage, paid, age });
+}
