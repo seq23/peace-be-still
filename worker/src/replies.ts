@@ -66,6 +66,12 @@ export const limitText = {
   en: "That's today's chat. It opens again tomorrow, and your Bible is here any time.",
   es: 'Ese fue el chat de hoy. Mañana se abre de nuevo, y tu Biblia está aquí cuando quieras.',
 };
+// Asked for a verse in another translation: the app quotes only the KJV / RV1909, so it gives that
+// verse in those words and says so once, plainly.
+export const oneTranslationText = {
+  en: 'I quote only the King James Version here, so here is that verse in its words.',
+  es: 'Aquí cito solo la Reina-Valera 1909, así que este es ese versículo en sus palabras.',
+};
 // C08: asked whether it is real, a pastor, a person or God, it says plainly what it is.
 export const identityText = {
   en: "I'm an AI helper, not a pastor, not a person and not God. I can talk things through and point you to scripture, but for prayer and care, your pastor and the people who love you matter more than I can.",

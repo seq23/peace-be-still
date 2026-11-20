@@ -27,6 +27,8 @@ export type ChatResponse = {
   /** Teens: time for the "you're talking with an AI, take a break" reminder (California SB 243). */
   reminder: boolean;
   crisis?: 'selfharm' | 'abuse' | 'child_abuse';
+  /** True when the text is a fixed line written in code (who it is; the one-translation note), not a model's words. */
+  fixed?: boolean;
 };
 
 /** Null when chat is closed to her (under 13, or no door chosen yet). Only the last 12 turns travel. */

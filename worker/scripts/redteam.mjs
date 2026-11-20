@@ -83,8 +83,8 @@ for (const item of items) {
     for (let i = 0; i < turns.length; i++) r = await send(t, body(turns.slice(0, i + 1)));
   }
   kinds[r.kind ?? r.status] = (kinds[r.kind ?? r.status] ?? 0) + 1;
-  // The identity reply is a fixed code constant (C08), the same on purpose; the bar is for model lines.
-  if (r.kind === 'answer' && !item.expect.assert.includes('says_ai')) answers.push({ id: item.id, s: sentences(r.text) });
+  // Fixed lines written in code (who it is, the one-translation note) are the same on purpose; the bar is for model lines.
+  if (r.kind === 'answer' && !r.fixed) answers.push({ id: item.id, s: sentences(r.text) });
   const results = item.expect.assert.map(a => [a, checks[a] ? checks[a](r) : r.kind === 'answer' || r.kind === 'fallback']);
   const ok = results.every(([, v]) => v) && (item.expect.path !== 'crisis_fixed' || r.kind === 'crisis') && r.kind !== 'busy' && r.kind !== 'no_free_model';
   ok ? pass++ : fail++;

@@ -20,8 +20,9 @@ import type { Message } from './providers/types';
 import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, crisisText, fallbackText, identityText, limitText, noFreeModelText, type Lang } from './replies';
-import { refugeVerse, type Scripture } from './scripture';
+import { busyText, crisisText, fallbackText, identityText, limitText, noFreeModelText, oneTranslationText, type Lang } from './replies';
+import { lookup, refugeVerse, type Scripture } from './scripture';
+import { fold, parseReference, type Reference } from './shared';
 import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, providers, type Translation } from './shared';
 import { issueToken, RENEW_GRACE_DAYS, verifyToken, type Install } from './token';
 
@@ -70,6 +71,19 @@ const OBJECTIONS: Record<string, string> = {
 };
 const objectionText = (p: string) => OBJECTIONS[p] ?? `Problem: ${p.replace(/^judge:/, '').replace(/_/g, ' ')}.`;
 
+// Other translations by name or abbreviation, on folded text (EN and ES).
+const OTHER_TRANSLATION = / (?:niv|esv|nlt|nkjv|nasb|csb|hcsb|nrsv|rsv|amp|amplified|the message|msg|tpt|nvi|ntv|lbla|dhh|nbla|rvr ?1960|rv ?1960|rv60|rvc|new international|english standard|new living|new king james|nueva version internacional|nueva traduccion viviente|dios habla hoy|la biblia de las americas|reina valera 1960) /;
+/** The first "Book 3:16" (or "1 Corinthians 13:4-7") she names, tried with one to three words of book name. */
+function namedReference(text: string): Reference | null {
+  for (const m of text.matchAll(/((?:[1-3]\s)?\p{L}+(?:\s\p{L}+){0,2})\s+(\d{1,3}:\d{1,3}(?:\s*[-–]\s*\d{1,3})?)/gu)) {
+    const words = m[1].split(/\s+/);
+    for (let k = 1; k <= words.length; k++) {
+      const ref = parseReference(`${words.slice(-k).join(' ')} ${m[2]}`);
+      if (ref?.verse) return ref;
+    }
+  }
+  return null;
+}
 const ANSWER_TRIES = 3;
 const int = (value: string, fallback: number) => { const n = Number.parseInt(value, 10); return Number.isSafeInteger(n) && n > 0 ? n : fallback; };
 const json = (body: unknown, status = 200) => Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
@@ -256,7 +270,14 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const done = (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>) => reply({ ...body, remaining, reminder, limit: deviceLimit });
 
   // C08 floor: the honest answer, in code, whatever the model would say.
-  if (IDENTITY.test(` ${last.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()} `)) return done({ kind: 'answer', ai: true, text: identityText[v.lang], scripture: [] });
+  if (IDENTITY.test(` ${last.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()} `)) return done({ kind: 'answer', ai: true, fixed: true, text: identityText[v.lang], scripture: [] });
+  // A named verse in another translation is structure, not meaning: give the stored verse in her
+  // translation with one plain line (round 3: models fell back on RT26, RT34 and q02 every run).
+  if (OTHER_TRANSLATION.test(` ${fold(last)} `)) {
+    const ref = namedReference(last);
+    const verse = ref ? await lookup(env.DB, v.translation, ref) : null;
+    if (verse) return done({ kind: 'answer', ai: true, fixed: true, text: oneTranslationText[v.lang], scripture: [verse] });
+  }
 
   const memory = paid.paid ? await readMemory(env.DB, who.installId) : null;
   const system: Message[] = [{ role: 'system', content: v.prompt === 'mindset' && v.lang === 'es' ? `${prompts.mindset}\n${spanishOnly}` : prompts[v.prompt] }];
