@@ -1,12 +1,13 @@
 // The chat ladder's rungs, in the order they are tried. Phase 3's ladder builds its
 // providers from this list; the release gate fails if legal/privacy.md does not name
 // every `disclosedAs` here, so a new rung cannot ship undisclosed.
-// Workers AI also runs the safety read and the answer check on every message, so its free
-// neurons go there first and it is the last answer rung.
+// The order is the one legal/privacy.md promises ("tried in this order"). Workers AI also runs
+// the safety read and the answer check on every message, so its answer rung keeps a small daily
+// cap (WORKERS_AI_ANSWER_CALLS_DAILY) and the ladder moves on to Gemini once it is used.
 export const providers = [
+  { id: 'workers-ai', disclosedAs: 'Cloudflare Workers AI' },
   { id: 'gemini-free', disclosedAs: 'Google Gemini (free tier)' },
   { id: 'openrouter-free', disclosedAs: 'free models reached through OpenRouter' },
-  { id: 'workers-ai', disclosedAs: 'Cloudflare Workers AI' },
 ];
 
 // Google's Gemini API free tier may not serve user-facing apps in the EEA, the UK or
