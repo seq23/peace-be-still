@@ -18,7 +18,7 @@ Each chat message travels through our service to an AI provider, which writes th
 
 Each chat message is sent with your age group (teen or adult), the door you chose, the chat voice and the language, so the answer fits; none of these is linked to your name, because the app never asks for it. Your birth year itself never leaves your phone.
 
-Messages that mention self-harm or abuse are never sent to an AI provider; the app answers with crisis lines instead.
+Every message first goes through a word-based safety check in our own code. When that check recognizes a message as being about self-harm or abuse, our code answers with crisis lines and the message is not sent to any AI model. Every other message is first read by a safety model on Cloudflare Workers AI before an answer is written.
 
 We do not store chat text. It passes through our service to the provider and is gone from our service once the answer is returned.
 
@@ -32,7 +32,7 @@ If you are in the paid lane and ask for a session made for you, the scene or wor
 
 ## The anonymous install id and limits
 
-To keep chat fair and free, the app creates a random install id the first time you chat. It is not tied to your name, email, phone number or Apple account. Our service uses the install id and a one-way hash of your IP address to count messages each day (1 conversation of up to 10 messages a day in the free lane, up to 100 messages a day in the paid lane) and to stop abuse. Those counters are deleted within 48 hours. We also keep a count of all chat messages per day, with no text and no identifier, to stay inside the free AI allowances.
+To keep chat fair and free, our service creates a random install id the first time you chat. It is not tied to your name, email, phone number or Apple account. Our service uses the install id and a one-way hash of your IP address to count messages each day (1 conversation of up to 10 messages a day in the free lane, up to 100 messages a day in the paid lane) and to stop abuse. So that answers do not repeat, our service also keeps short records of recent answer patterns for each install id: keyed hashes of 8 characters, with no words in them. Those counters and records are deleted within 48 hours. We also keep a count of all chat messages per day, with no text and no identifier, to stay inside the free AI allowances.
 
 ## Audio and the Bible
 
@@ -72,7 +72,7 @@ Until November 18, 2026 the site had a form to hear when the app launches. It is
 
 ## Your choices and rights
 
-You can delete paid chat memory and made-for-you sessions in Settings at any time. Apple manages subscriptions in your iPhone's Settings. For anything else, write to info@peacebestillapp.com: you can ask what we hold about your install id and ask us to delete it, and we will answer within 30 days. We treat you the same whether or not you make a request. These rights apply wherever you live, including California and other states with privacy laws.
+You can delete paid chat memory and made-for-you sessions in Settings at any time. Apple manages subscriptions in your iPhone's Settings. For anything else, write to info@peacebestillapp.com: you can ask what we hold about your install id and ask us to delete it, and we will answer by hand within 30 days. We treat you the same whether or not you make a request. These rights apply wherever you live, including California and other states with privacy laws.
 
 ## Changes
 
