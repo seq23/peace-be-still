@@ -9,6 +9,6 @@ const config: ExpoConfig = {
   android: { package: 'com.peacebestillapp.mobile' },
   web: { bundler: 'metro' },
   // The ONE audio host: R2 bucket peace-be-still-audio (key = manifest `file`, audio/publish.py). PBS_AUDIO_BASE_URL overrides.
-  extra: { audioBaseUrl: process.env.PBS_AUDIO_BASE_URL ?? 'https://audio.peacebestillapp.com/' },
+  extra: { audioBaseUrl: process.env.PBS_AUDIO_BASE_URL ?? 'https://pbs-audio.professionalresourcelibrary.com/' },
 };
 export default config;

@@ -3,6 +3,8 @@
 // saved and where the app goes next.
 import React from 'react';
 import { test, beforeEach, mock } from 'node:test';
+import { readFileSync } from 'node:fs';
+import { DatabaseSync } from 'node:sqlite';
 import { strict as assert } from 'node:assert';
 import { create, act, type ReactTestRenderer, type ReactTestInstance } from 'react-test-renderer';
 import { createDownloads } from '../src/player/downloads';
@@ -62,13 +64,14 @@ type Name = Exclude<keyof typeof screens, 'root'>;
 const base: Settings = { door: 'faith', age: 'adult', ageSetAt: 0, voice: 'plain', language: 'en' };
 const store = () => JSON.parse(saved!) as Settings;
 
+const audioBase = 'https://pbs-audio.professionalresourcelibrary.com/';
 let publishedTracks: Track[];
 beforeEach(() => {
   Object.assign(globalThis, { __pbsPlatform: 'web', __pbsPaid: false, __pbsAudioStop: null });
   publishedTracks = audioTracks;
 });
 mock.method(globalThis, 'fetch', async (url: string) => {
-  assert.equal(url, 'https://audio.test/manifest.jsonl');
+  assert.equal(url, audioBase + 'manifest.jsonl');
   return new Response(publishedTracks.map(track => JSON.stringify({ ...track, status: 'passed' })).join('\n'));
 });
 beforeEach(() => { calls = []; history = false; (globalThis as any).__pbsParams = {}; (globalThis as any).__pbsSegments = []; (globalThis as any).__pbsScheme = 'light'; (globalThis as any).__pbsLocale = 'en'; readFails = false; });
@@ -451,13 +454,14 @@ test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does
   assert.ok(dawnIn(await mount('journeys', { ...base, journey: 'psalm-nights' })) > 0);
 });
 
-function testPlayer(track: Track, baseUrl: string | null = 'https://audio.test/', position = 0,
+function testPlayer(track: Track, baseUrl: string | null = audioBase, position = 0,
   fetchHash: () => Promise<string> = async () => track.sha256) {
   let at = 0;
+  let source: string | undefined;
   let playing = false;
   let listener: ((status: { playing: boolean; isLoaded: boolean; didJustFinish: boolean }) => void) | undefined;
   const audio = {
-    load: () => { at = 0; },
+    load: (uri: string) => { source = uri; at = 0; },
     play() { playing = true; },
     pause() { playing = false; },
     isLoaded: true,
@@ -487,7 +491,7 @@ function testPlayer(track: Track, baseUrl: string | null = 'https://audio.test/'
   const player = createPlayer({ audio, downloads, store, lang: 'en', baseUrl });
   Object.assign(globalThis, { __pbsPlayer: player });
   return {
-    ...player, position: () => at,
+    ...player, position: () => at, source: () => source,
     move(seconds: number) { at = seconds; listener?.({ playing, isLoaded: true, didJustFinish: false }); },
   };
 }
@@ -522,16 +526,28 @@ test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor 
   assert.doesNotMatch(strings(tree), /\.m4a|\.json/);
 });
 
-test('missing and outdated uploads are marked in the shelf and cannot play from a deep link', async () => {
+test('the canonical catalog plays Psalm 1 and disables missing or outdated uploads', async () => {
   const track = audioTracks.find(track => track.ref === 'PSA 4' && track.lang === 'en')!;
   const outdated = audioTracks.find(track => track.ref === 'PSA 23' && track.lang === 'en')!;
-  assert.ok(track && outdated);
-  publishedTracks = audioTracks.filter(row => row.file !== track.file).map(row =>
-    row.file === outdated.file ? { ...row, sha256: track.sha256 } : row);
+  const available = audioTracks.find(track => track.ref === 'PSA 1' && track.lang === 'en')!;
+  assert.ok(track && outdated && available);
+  publishedTracks = [available, { ...outdated, sha256: track.sha256 }];
   const person = { ...base, journey: 'psalm-nights' };
   const shelf = await mount('nights', person);
   await press(shelf, en['journey.psalmNights.name']);
   try {
+    await press(shelf, /^Psalm 1 ›$/);
+    assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: available.sha256 } }]);
+    const playable = testPlayer(available);
+    const screen = await mount('listen', person, { track: available.sha256 });
+    try {
+      await press(screen, en['listen.play']);
+      assert.ok(texts(screen).includes(en['listen.pause']));
+      assert.equal(playable.source(), audioBase + available.file);
+    } finally {
+      await act(async () => screen.unmount());
+      await playable.dispose();
+    }
     for (const unavailable of [track, outdated]) {
       const title = trackTitle(unavailable, 'en');
       assert.ok(host(shelf, 'View').some(node => textOf(node) === `${title} ${en['listen.notReady']}`));
@@ -541,6 +557,18 @@ test('missing and outdated uploads are marked in the shelf and cannot play from 
       try {
         assert.ok(texts(screen).includes(en['listen.audioNotReady']));
         assert.equal(host(screen, 'Pressable').find(node => textOf(node) === en['listen.play'])?.props.disabled, true);
+        for (const label of [en['listen.back15'], en['listen.forward15']]) {
+          assert.equal(host(screen, 'Pressable').find(node => node.props.accessibilityLabel === label)?.props.disabled, true);
+        }
+        if (unavailable === track) {
+          const stored = storedVerse('PSA', 4, 1);
+          const supplied = stored.match(/\[([^\]]+)\]/)?.[1];
+          assert.ok(supplied, 'Psalm 4 contains translator-supplied words');
+          const italic = host(screen, 'Text').find(node => node.children.join('') === supplied);
+          assert.equal(italic?.props.style?.fontFamily, 'LibreCaslonText_400Regular_Italic');
+          assert.equal(italic?.parent?.children.map(child => typeof child === 'string' ? child : child.children.join('')).join(''),
+            stored.replace(/^¶\s*/, '').replace(/[\[\]]/g, ''));
+        }
       } finally {
         await act(async () => screen.unmount());
         await player.dispose();
@@ -595,9 +623,20 @@ test('Now Playing reports the named configuration stop, with AI disclosure and d
   await player.dispose();
 });
 
+function storedVerse(book: string, chapter: number, verse: number) {
+  const db = new DatabaseSync('src/bible/data/kjv.db', { readOnly: true });
+  try {
+    const row = db.prepare('SELECT text FROM verses WHERE book = ? AND chapter = ? AND verse = ?').get(book, chapter, verse);
+    assert.equal(typeof row?.text, 'string');
+    return String(row?.text);
+  } finally {
+    db.close();
+  }
+}
+
 test('Now Playing restores a saved position and renders pause, continue and the timer sheet', async () => {
   const track = audioTracks.find(track => track.ref === 'PSA 23')!;
-  const player = testPlayer(track, 'https://audio.test/', 12);
+  const player = testPlayer(track, audioBase, 12);
   const tree = await mount('listen', { ...base, journey: 'psalm-nights' }, { track: track.sha256 });
   try {
     assert.ok(texts(tree).includes(en['listen.paidDownload']));
@@ -608,11 +647,7 @@ test('Now Playing restores a saved position and renders pause, continue and the 
     assert.ok(texts(tree).includes(en['listen.resume']));
     await press(tree, en['listen.resume']);
     assert.equal(player.position(), 12);
-    const { DatabaseSync } = require('node:sqlite') as typeof import('node:sqlite');
-    const db = new DatabaseSync('src/bible/data/kjv.db', { readOnly: true });
-    const verse = db.prepare("SELECT text FROM verses WHERE book = 'PSA' AND chapter = 23 AND verse = 2").get();
-    db.close();
-    assert.ok(texts(tree).includes(String(verse?.text)));
+    assert.ok(texts(tree).includes(storedVerse('PSA', 23, 2)));
     assert.ok(strings(tree).includes('Psalm 23:2 · KJV'));
     assert.ok(texts(tree).includes(en['listen.psalmAllowance']));
     assert.ok(texts(tree).includes('0:12'));
@@ -645,7 +680,7 @@ test('Now Playing restores a saved position and renders pause, continue and the 
 test('a paid listener sees download in progress, failure and successful retry', async () => {
   const track = audioTracks.find(track => track.kind === 'bible')!;
   let finish: ((hash: string) => void) | undefined;
-  const player = testPlayer(track, 'https://audio.test/', 0, () => new Promise(resolve => { finish = resolve; }));
+  const player = testPlayer(track, audioBase, 0, () => new Promise(resolve => { finish = resolve; }));
   (globalThis as any).__pbsPlatform = 'ios';
   (globalThis as any).__pbsPaid = true;
   const tree = await mount('listen', { ...base, journey: 'psalm-nights' }, { track: track.sha256 });
@@ -666,9 +701,14 @@ test('a paid listener sees download in progress, failure and successful retry', 
 });
 
 test('Hush Harbor cues follow the real pause positions and the Spanish player renders its timer', async () => {
-  const track = audioTracks.find(track => track.ref.startsWith('content/stories/hush-harbor/'))!;
+  const track = audioTracks.find(track => track.ref === 'content/stories/hush-harbor/core-001-peace-be-still.json')!;
   const player = testPlayer(track);
   const english = await mount('listen', { ...base, journey: 'hush-harbor' }, { track: track.sha256 });
+  const story = JSON.parse(readFileSync('../' + track.ref, 'utf8'));
+  const openingScripture = story.blocks.find((block: { type: string }) => block.type === 'scripture');
+  assert.equal(openingScripture.ref, 'MAR 4:37');
+  assert.ok(texts(english).includes(storedVerse('MAR', 4, 37).replace(/^¶\s*/, '')));
+  assert.ok(strings(english).includes(openingScripture.label + ' · KJV'));
   assert.ok(track.responsePauses, 'the real story carries both audio pause positions');
   const [first, second] = track.responsePauses;
   await press(english, en['listen.play']);

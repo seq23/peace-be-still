@@ -101,7 +101,11 @@ test('the real manifest yields one track for every passed row, with readable tit
       assert.doesNotMatch(title, /\/|\.json|\b[1-3]?[A-Z]{3}\b/, `${t.file} title "${title}" is readable`);
     }
     const fields = ['file', 'kind', 'lang', 'ref', 'seconds', 'sha256', 'titles', 'voice'];
-    if (hasCallAndResponse(t)) fields.push('responsePauses');
+    if (hasCallAndResponse(t)) {
+      fields.push('responsePauses', 'scriptureRef');
+      const story = JSON.parse(readFileSync(`${REPO}/${t.ref}`, 'utf8'));
+      assert.equal(t.scriptureRef, story.blocks.find((block: { type: string }) => block.type === 'scripture').ref);
+    }
     assert.deepEqual(Object.keys(t).sort(), fields.sort());
   }
 });
@@ -122,7 +126,7 @@ test('a manifest with nothing playable stops with AUDIO_LIBRARY_EMPTY', () => {
 test('a story gets its own title; a story with no readable title is held', () => {
   const row = { file: 'stories/hush-harbor/en/x.m4a', kind: 'stories', lang: 'en', ref: 'content/stories/hush-harbor/x.json', seconds: 200, sha256: 'c'.repeat(64), voice: 'v', status: 'passed' };
   const jsonl = JSON.stringify(row) + '\n' + JSON.stringify({ ...row, file: 'stories/hush-harbor/en/y.m4a' });
-  const { tracks, skipped } = readManifest(jsonl, (r) => (r.file.endsWith('x.m4a') ? { en: 'Peace, Be Still' } : null));
+  const { tracks, skipped } = readManifest(jsonl, (r) => (r.file.endsWith('x.m4a') ? { titles: { en: 'Peace, Be Still' } } : null));
   assert.equal(trackTitle(tracks[0], 'es'), 'Peace, Be Still');
   assert.equal(skipped.length, 1);
 });

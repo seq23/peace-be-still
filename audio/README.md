@@ -49,10 +49,8 @@ checks, shelved, status, voice).
   minutes after each fill chunk, under the same lock; a story the box cuts off carries on next run.
 - **Served to the app (R2)** (`publish.py`, last step of `run.sh`, same window, keys from the vault): bucket
   `peace-be-still-audio` on her SECOND Cloudflare account (its own free 10 GB; her ruling 20 Nov 2026),
-  with `https://audio.peacebestillapp.com/<file>` as the app's public URL. Connect
-  `audio.peacebestillapp.com` under the bucket's Custom Domains once the zone is in the same
-  Cloudflare account. Apply the GET/HEAD policy from `r2/cors.json` to allow the web preview to
-  read the ledger and stream audio. The bucket key cannot change bucket settings.
+  public only at `https://pbs-audio.professionalresourcelibrary.com/<file>` (R2 custom domain, no listing).
+  CORS GET/HEAD uses `r2/cors.json` in that account's dashboard. The bucket key cannot change bucket settings.
   Each passed, shelved row streams Drive -> R2 under exactly its manifest
   `file` (Drive SHA-256 = manifest, then R2 size + md5 = Drive; the Mac never holds the file).
   `manifest.jsonl` at the bucket root is what the app reads (public fields + story titles) and the ledger

@@ -3,24 +3,26 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readManifest, type ManifestRow, type Titles } from './library';
+import { readManifest, type ManifestRow } from './library';
 
 export const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 export const MANIFEST = join(REPO, 'audio/manifest.jsonl');
 const SCRIPT_ROOTS = ['stories', 'imagination-nights'].map(folder => join(REPO, 'content', folder) + sep);
 
-/** Content rows point to the source script that supplies their display title. */
-export function scriptTitle(row: ManifestRow): Titles | null {
+/** Content rows point to the source script that supplies its title and the first Scripture reference. */
+function scriptDisplay(row: ManifestRow) {
   const path = resolve(REPO, row.ref);
   if (!SCRIPT_ROOTS.some(root => path.startsWith(root)) || !path.endsWith('.json') || !existsSync(path)) return null;
   try {
-    const title = JSON.parse(readFileSync(path, 'utf8')).title;
-    return typeof title === 'string' && title.trim() ? { [row.lang]: title.trim() } : null;
+    const { title, blocks } = JSON.parse(readFileSync(path, 'utf8'));
+    if (typeof title !== 'string' || !title.trim()) return null;
+    const scripture = Array.isArray(blocks) ? blocks.find(block => block?.type === 'scripture' && typeof block.ref === 'string') : undefined;
+    return { titles: { [row.lang]: title.trim() }, scriptureRef: scripture?.ref as string | undefined };
   } catch { return null; }
 }
 
 export function buildLibrary(jsonl = readFileSync(MANIFEST, 'utf8')) {
-  return readManifest(jsonl, scriptTitle);
+  return readManifest(jsonl, scriptDisplay);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

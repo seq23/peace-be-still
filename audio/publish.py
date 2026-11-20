@@ -44,7 +44,7 @@ import fill  # noqa: E402
 from fill import NamedStop  # noqa: E402
 
 BUCKET = os.environ.get("PBS_R2_BUCKET", "peace-be-still-audio")
-PUBLIC_BASE = "https://audio.peacebestillapp.com/"
+PUBLIC_BASE = "https://pbs-audio.professionalresourcelibrary.com/"
 SERVED = "manifest.jsonl"
 FREE_CAP_BYTES = float(os.environ.get("PBS_R2_FREE_CAP_GB", "9.5")) * 1e9
 PUBLIC_FIELDS = ("file", "kind", "lang", "ref", "seconds", "sha256", "voice", "status")

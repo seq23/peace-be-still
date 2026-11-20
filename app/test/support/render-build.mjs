@@ -38,10 +38,10 @@ const MOCKS = {
     addCustomerInfoUpdateListener() {}, removeCustomerInfoUpdateListener() {},
   };`,
   'expo-audio': '',
-  'expo-constants': `exports.__esModule = true; exports.default = { expoConfig: { extra: { audioBaseUrl: 'https://audio.test/' } } };`,
+  'expo-constants': `exports.__esModule = true; exports.default = { expoConfig: { extra: { audioBaseUrl: require('./app.config').default.extra.audioBaseUrl } } };`,
   'bible-store': `const core = require('./src/bible/core');
     const { DatabaseSync } = require('node:sqlite');
-    exports.parseReference = core.parseReference;
+    Object.assign(exports, core);
     exports.bible = async translation => core.createBible({
       async all(sql, params) {
         const db = new DatabaseSync('src/bible/data/' + translation.toLowerCase() + '.db', { readOnly: true });

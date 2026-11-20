@@ -2,6 +2,7 @@ import { chapterTitles } from './books';
 
 export type Lang = 'en' | 'es';
 export type Titles = Partial<Record<Lang, string>>;
+type TrackDisplay = { titles: Titles; scriptureRef?: string };
 
 /** One line of audio/manifest.jsonl, as the Mac library fill writes it (only the fields the app reads). */
 export type ResponsePauses = readonly [number, number];
@@ -12,8 +13,8 @@ export type ManifestRow = {
 };
 
 /** What ships in the app: passed rows only, no Drive paths, no checks, a readable title. The R2 key is `file`. */
-export type Track = {
-  file: string; kind: string; lang: Lang; ref: string; seconds: number; sha256: string; voice: string; titles: Titles; responsePauses?: ResponsePauses;
+export type Track = TrackDisplay & {
+  file: string; kind: string; lang: Lang; ref: string; seconds: number; sha256: string; voice: string; responsePauses?: ResponsePauses;
 };
 
 export type Skipped = { line: number; reason: string };
@@ -40,10 +41,10 @@ function problem(row: Partial<ManifestRow>): string | null {
 
 /**
  * Passed rows become tracks; a bad passed row is held (skipped, with its line and reason) and the rest ship.
- * `titleOf` gives a story its own title; scripture titles come from the book list.
+ * `displayOf` supplies a story’s title and excerpt reference; scripture titles come from the book list.
  * Throws AUDIO_LIBRARY_EMPTY only when nothing at all can play.
  */
-export function readManifest(jsonl: string, titleOf: (row: ManifestRow) => Titles | null): { tracks: Track[]; skipped: Skipped[] } {
+export function readManifest(jsonl: string, displayOf: (row: ManifestRow) => TrackDisplay | null): { tracks: Track[]; skipped: Skipped[] } {
   const tracks: Track[] = [];
   const skipped: Skipped[] = [];
   jsonl.split(/\r?\n/).forEach((text, index) => {
@@ -55,10 +56,11 @@ export function readManifest(jsonl: string, titleOf: (row: ManifestRow) => Title
     const reason = problem(row);
     if (reason) { skipped.push({ line, reason }); return; }
     const full = row as ManifestRow;
-    const titles = chapterTitles(full.ref) ?? titleOf(full);
-    if (!titles || !Object.values(titles).some(Boolean)) { skipped.push({ line, reason: 'no readable title' }); return; }
+    const chapter = chapterTitles(full.ref);
+    const display = chapter ? { titles: chapter } : displayOf(full);
+    if (!display || !Object.values(display.titles).some(Boolean)) { skipped.push({ line, reason: 'no readable title' }); return; }
     const { file, kind, ref, seconds, sha256, voice } = full;
-    const track: Track = { file, kind, lang: full.lang as Lang, ref, seconds, sha256, voice, titles };
+    const track: Track = { file, kind, lang: full.lang as Lang, ref, seconds, sha256, voice, ...display };
     const starts = full.checks?.pause_starts_s;
     if (hasCallAndResponse(track) && Array.isArray(starts) && starts.length === 2) {
       const [first, second] = starts;

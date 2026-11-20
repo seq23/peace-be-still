@@ -2,7 +2,7 @@ import { useIsFocused } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { bible, parseReference, type Verse } from '../../bible';
+import { bible, displayRuns, formatReference, parseReference, type Verse } from '../../bible';
 import { canUse } from '../../gates';
 import { hasCallAndResponse, trackTitle, type Track } from '../../player/library';
 import { SLEEP_MINUTES, type SleepMinutes } from '../../player/player';
@@ -51,18 +51,19 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const protectedPauses = hasCallAndResponse(track);
   const untimedResponses = protectedPauses && !track.responsePauses;
   const translation = track.lang === 'es' ? 'RV1909' : 'KJV';
-  const [verse, setVerse] = useState<Verse | null>(null);
+  const excerptRef = shelf === 'psalms' ? track.ref : track.scriptureRef;
+  const [excerpt, setExcerpt] = useState<{ track: Track; verse: Verse } | null>(null);
+  const verse = excerpt?.track === track ? excerpt.verse : null;
   useEffect(() => {
-    if (shelf !== 'psalms') return;
-    const ref = parseReference(track.ref);
+    const ref = excerptRef && parseReference(excerptRef);
     if (!ref) return;
     let active = true;
     void bible(translation).then(async store => {
-      const verse = await store.verse(ref.book, ref.chapter, ref.chapter === 23 ? 2 : 1);
-      if (active) setVerse(verse);
+      const verse = await store.verse(ref.book, ref.chapter, ref.verse ?? (ref.book === 'PSA' && ref.chapter === 23 ? 2 : 1));
+      if (active) setExcerpt(verse ? { track, verse } : null);
     }).catch(() => undefined);
     return () => { active = false; };
-  }, [shelf, track.ref, translation]);
+  }, [excerptRef, track, translation]);
   const label = shelf === 'psalms' ? t('journey.psalmNights.name')
     : shelf === 'imagination' ? t('journey.imaginationNights.name')
     : shelf === 'hushHarbor' ? [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')
@@ -125,8 +126,12 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
           <Text style={styles.secondary}>{t('listen.aiVoice')}</Text>
         </View>
         {verse && <View style={styles.verse}>
-          <Text style={styles.response}>{verse.text}</Text>
-          <Text style={styles.reference}>{trackTitle(track, t.locale)}:{verse.verse} · {translation}</Text>
+          <Text style={styles.response}>
+            {displayRuns(verse.text).map((run, index) => run.italic
+              ? <Text key={index} style={styles.italic}>{run.text}</Text>
+              : run.text)}
+          </Text>
+          <Text style={styles.reference}>{shelf === 'psalms' ? `${trackTitle(track, t.locale)}:${verse.verse}` : formatReference(verse, t.locale)} · {translation}</Text>
         </View>}
         {untimedResponses && <View style={styles.responses}>
           <Text style={styles.secondary}>{t('listen.respondDuringPauses')}</Text>
@@ -235,6 +240,7 @@ const styles = StyleSheet.create({
   cue: { minHeight: 30 },
   responses: { gap: 8, marginBottom: 16 },
   response: { color: night.ink, fontFamily: fonts.serif, fontSize: 21, lineHeight: 30 },
+  italic: { fontFamily: 'LibreCaslonText_400Regular_Italic' },
   play: { minHeight: 56, paddingHorizontal: 32, borderRadius: 28, backgroundColor: night.glow, alignSelf: 'center', justifyContent: 'center' },
   playText: { color: night.bg, fontFamily: fonts.strong, fontSize: 17 },
   timer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, minHeight: 52, paddingHorizontal: 14,
