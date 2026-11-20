@@ -7,7 +7,7 @@ Unassigned keywords:
 Promotional text: Una gran calma, cada noche. Sesiones susurradas para dormir, una palabra para la mañana y una parte gratis que sigue gratis. Sin prueba. Sin anuncios.
 Category: Reference (primary), Health & Fitness (secondary)
 Age rating: 13+ (questionnaire answers in store/privacy-label.md)
-Privacy policy URL: https://peacebestillapp.com/privacy
+Privacy policy URL: https://peacebestillapp.com/es/privacidad
 Terms of use (EULA) URL: https://peacebestillapp.com/terms
 
 Description first 3 lines:
@@ -24,6 +24,6 @@ Las Escrituras se citan palabra por palabra de la Reina-Valera 1909, y de la Kin
 
 Las respuestas del chat las escribe una IA y van marcadas como IA; lo que escribes va a proveedores gratuitos de IA que pueden aprender de ello.
 
-Sin prueba gratuita. La parte de pago se renueva cada mes o cada año hasta que la canceles. Los precios y las condiciones de renovación aparecen antes de comprar. Cancela cuando quieras en Ajustes: toca tu nombre y luego Suscripciones.
+Sin prueba gratuita. La parte de pago se renueva cada mes o cada año hasta que la canceles. Los precios y las condiciones de renovación aparecen antes de comprar. Cancela cuando quieras en Ajustes (o Configuración) del iPhone: toca tu nombre y luego Suscripciones.
 
-Términos (en inglés): https://peacebestillapp.com/terms · Privacidad (en inglés): https://peacebestillapp.com/privacy
+Términos: https://peacebestillapp.com/es/terminos · Privacidad: https://peacebestillapp.com/es/privacidad
