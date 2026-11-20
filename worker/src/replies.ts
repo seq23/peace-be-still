@@ -36,9 +36,30 @@ const trustedSafe = {
 // No one prays this message, so it never says "I am praying": it says what is true.
 const close = { en: 'Someone is ready to listen right now.', es: 'Hay alguien listo para escucharte ahora mismo.' };
 
+// Medical danger (round 4, x10: Xanax with wine got only 988): what to do, in the order it matters.
+// Poison Control (America's Poison Centers) is free, any hour, with interpreters in Spanish.
+const medical = {
+  en: [
+    "Please don't take any extra, and don't mix medicine with alcohol. Sleep, anxiety or pain pills taken with alcohol or in extra doses can slow or stop breathing.",
+    'If they have already been taken, call Poison Control now at 1-800-222-1222. It is free, any time.',
+    'If someone is very sleepy, hard to wake or breathing slowly, call 911 now.',
+    'If you stopped a medicine like insulin or seizure medicine, call your doctor today. A pharmacist can also tell you what is safe for sleep tonight.',
+    'If you are thinking about ending your life, call or text 988.',
+  ],
+  es: [
+    'Por favor, no tomes ninguna dosis extra y no mezcles medicinas con alcohol. Las pastillas para dormir, para la ansiedad o para el dolor, con alcohol o en dosis extra, pueden hacer que la respiración se vuelva lenta o se detenga.',
+    'Si ya se tomaron, llama ahora al Centro de Envenenamientos al 1-800-222-1222. Es gratis, a cualquier hora, y atienden en español.',
+    'Si alguien está muy dormido, no despierta bien o respira despacio, llama al 911 ahora.',
+    'Si dejaste una medicina como la insulina o la de las convulsiones, llama hoy a tu médico. Un farmacéutico también te puede decir qué es seguro para dormir esta noche.',
+    'Si estás pensando en quitarte la vida, llama al 988 y oprime 2 para español, o envía un texto al 988.',
+  ],
+};
+
 /** The fixed crisis reply. Abuse leads with the hotline for what is happening (Childhelp for a
- *  child or teen, the Domestic Violence Hotline for an adult), then 988 and 911. */
+ *  child or teen, the Domestic Violence Hotline for an adult), then 988 and 911. Medical danger
+ *  leads with what not to do, then Poison Control, 911, her doctor, then 988. */
 export function crisisText(kind: CrisisKind, lang: Lang, band: Band): string {
+  if (kind === 'medical') return [...medical[lang], ...(band === 'teen' ? [trusted[lang]] : []), close[lang]].join(' ');
   const child = kind === 'child_abuse' || (kind === 'abuse' && band === 'teen');
   const parts = kind === 'selfharm'
     ? [open[lang], lifeline[lang], danger[lang]]

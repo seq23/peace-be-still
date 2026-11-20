@@ -11,7 +11,7 @@ const DAY = 86400_000;
 
 describe('paid memory', () => {
   it('after a paid answer, one ladder call writes the summary; it is sent next time as notes, not instructions', async () => {
-    const rung = scripted('workers-ai', [good(), { summary: 'She is grieving her mother and finds Psalm 34 a comfort.' }, good()]);
+    const rung = scripted('workers-ai', [good(), { summary: 'She is grieving her mother and finds Psalm 34 a comfort.' }, good('Sorrow does not keep a schedule, and God is patient with it. May the Lord keep you near.')]);
     const d = deps({ rungList: [rung.rung], paidNow: true });
     const token = await tokenFor(d);
     await chat(d, 'my mama died', { token });

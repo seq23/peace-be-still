@@ -15,10 +15,11 @@ import type { ChatResponse, ChatTurn } from './contract';
 type Palette = (typeof colors)['light'] | (typeof colors)['dark'];
 type Entry = { role: 'user'; text: string } | { role: 'reply'; res: ChatResponse } | { role: 'note'; text: string };
 
-/** Tappable lines for a crisis reply: 988 always; the hotline the reply names. */
+/** Tappable lines for a crisis reply: 988 always; the hotline the reply names (Poison Control and 911 first for medical danger). */
 export function crisisLinks(res: ChatResponse): Array<{ label: string; url: string }> {
   // The hotline the reply leads with comes first, as in the text.
   const links: Array<{ label: string; url: string }> = [];
+  if (res.text.includes('1-800-222-1222')) links.push({ label: 'Call Poison Control 1-800-222-1222', url: 'tel:18002221222' }, { label: 'Call 911', url: 'tel:911' });
   if (res.text.includes('1-800-422-4453')) links.push({ label: 'Call 1-800-422-4453', url: 'tel:18004224453' }, { label: 'Text 1-800-422-4453', url: 'sms:18004224453' });
   if (res.text.includes('1-800-799-7233')) links.push({ label: 'Call 1-800-799-7233', url: 'tel:18007997233' }, { label: 'Text START to 88788', url: 'sms:88788?body=START' });
   links.push({ label: 'Call 988', url: 'tel:988' }, { label: 'Text 988', url: 'sms:988' });

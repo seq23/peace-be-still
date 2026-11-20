@@ -55,11 +55,27 @@ const ADDRESS = /(?:^|[,.;:!?¡¿]\s*)(?:oh\s+)?(?:honey|baby|child|chile|sugar|
 // "I'm an AI" is said only when she asked (the code floor answers a direct ask; the app labels every answer).
 const SAYS_AI = / (?:i am|im|as) an? (?:ai|a i|artificial intelligence)\b| ai helper | (?:soy|como) (?:un |una )?(?:asistente de )?(?:ia|inteligencia artificial)\b/;
 const ASKED_AI = / (?:are you|are u|r u|ru|who are you|what are you|is this|am i (?:talking|speaking|chatting)|real person|human|bot|robot|chatbot|an ai|a machine|eres|quien eres|que eres|es esto|estoy hablando|persona real|una ia)\b/;
-// "Churches teach differently" belongs only to the questions Christians truly split on (C14).
+// DOCTRINE (coordinator ruling 20 Nov 2026, also in prompts.ts): answer from the plain words of
+// Scripture and historic Christian teaching, warmly, never shaming, and suggest her pastor for her
+// own situation. Sex belongs in marriage (Hebrews 13:4, 1 Corinthians 7:2-5): "churches differ" is
+// never a dodge on what Scripture plainly says (round 3 RT10 said "others emphasize mutual love and
+// commitment"; round 4 x16 fell back three times on the same question). A verse read as saying what
+// it does not (the Song of Solomon as permission) is meaning, so the judge reads it (verse_read_in). Only where faithful churches genuinely differ (how to baptize, the end times,
+// women preaching, tongues today, whether to drink at all, remarriage) is "churches differ" honest.
+// "Churches teach differently" belongs only to those questions (C14).
 const SPLIT_SAID = / (?:churches|christians|denominations|believers|communities|traditions|leaders|people of faith)(?: \w+){0,4} (?:teach|see|view|read|understand|hold|have|find|arrive|look|weigh)\w*(?: \w+){0,5} (?:differen\w*|diverse|various|a range of|not all|the same thing)| (?:christians|believers) (?:disagree|differ)| (?:do|does) not all (?:teach|agree|see)| (?:iglesias|cristianos|creyentes|tradiciones)(?: \w+){0,4} (?:ensenan|ven|entienden|leen|interpretan)\w*(?: \w+){0,4} (?:distint\w*|diferente\w*|de manera diferente)| los cristianos no (?:estan de acuerdo|coinciden)/;
 // C14's split questions only: sexuality, divorce, women preaching, alcohol, tongues, the fate of
 // people of other faiths, and voting (C10: no side, so "Christians vote differently" is the honest line). "Am I saved?" or "how does sex work" is answered, not deflected.
-const SPLIT_ASKED = / (?:gay|gays|lesbian|homosexual\w*|lgbt\w*|same sex|queer|transgender|sexual orientation|sex before marriage|premarital|cohabit\w*|living together|divorc\w*|remarr\w*|women (?:preach\w*|pastors?|ministers?|in ministry|lead\w*)|female pastors?|pastora|alcohol|drink\w*|wine|beer|vino|cerveza|tongues|lenguas|muslim\w*|jewish|jews|hindu\w*|buddhis\w*|atheis\w*|other religions?|other faiths?|musulman\w*|judio\w*|otras religiones|mujeres (?:que )?predic\w*|sexo antes del matrimonio|vivir juntos|homosexual\w*|vote|voting|votar|vot[oae]|elections?|elecciones|politic\w*|politica|candidates?|candidatos?|party|parties|partidos?) /;
+const SPLIT_ASKED = / (?:baptiz\w*|baptism\w*|baptis\w*|bautiz\w*|bautismo|sprinkl\w*|immersion|inmersion|rapture|millenni\w*|tribulation|end times|last days|antichrist|arrebatamiento|fin de los tiempos|milenio|tribulacion|communion|lords supper|santa cena|sabbath|predestin\w*|calvinis\w*|once saved|divorc\w*|remarr\w*|women (?:preach\w*|pastors?|ministers?|in ministry|lead\w*)|female pastors?|pastora|alcohol|drink\w*|wine|beer|vino|cerveza|tongues|lenguas|muslim\w*|jewish|jews|hindu\w*|buddhis\w*|atheis\w*|other religions?|other faiths?|musulman\w*|judio\w*|otras religiones|mujeres (?:que )?predic\w*|sexo antes del matrimonio|vivir juntos|homosexual\w*|vote|voting|votar|vot[oae]|elections?|elecciones|politic\w*|politica|candidates?|candidatos?|party|parties|partidos?) /;
+// What Scripture plainly says about sex and marriage (the ruling above): asked, the answer says it
+// kindly, never "churches differ", and points her to her pastor.
+const PLAIN_ASKED = / (?:sex before marriage|premarital|before (?:we re married|were married|we are married|we get married|marriage|the wedding)|sleep(?:ing)? together|slept together|(?:have|having|had) sex|hook ?up\w*|fornicat\w*|living together|live together|move in together|moving in together|cohabit\w*|shack\w* up|gay|gays|lesbian|homosexual\w*|same sex|sexo antes del matrimonio|relaciones (?:sexuales )?antes de (?:casarnos|casarme|casarse|la boda|el matrimonio)|dormir juntos|vivir juntos|union libre|fornicacion) /;
+const PASTOR = / (?:pastor|pastora|pastors|pastores|minister|ministro) /;
+// The night setting is hers to bring up: a prompt that said "at night" made "the quiet hours of the
+// night" open answers to questions about rent and fear (round 4, q04, RT22, x14, x20).
+// "Tonight" / "esta noche" is only when she is reading; the night as a scene is the habit.
+const NIGHT_OPEN = / (?:the night|the nights|at night|nighttime|midnight|quiet hours|small hours|dark hours|darkness|the dark|late hours?|(?:la|las|de|por la|en la) noches?|madrugada|oscuridad) /;
+const NIGHT_ASKED = / (?:night|nights|tonight|nighttime|midnight|sleep\w*|asleep|bed|bedtime|awake|insomnia|late|dark|\d+ ?am|noche|noches|dormir|duermo|dormida?o?|sueno|madrugada|desvel\w*|insomnio|cama) /;
 const ECHO_OPENING = /^ (?:you are|youre|you re|it sounds like you(?: are)?|so you are|estas|me preguntas|tu pregunta|preguntas) (?:\w+ )?(?:asking|wondering|hoping|looking|seeking|questioning|curious|preguntando|buscando|pensando)\b|^ (?:your question|the question of|when you ask|when you are asking|you want to (?:know|hear))\b/;
 // C07 verse floor: verses whose printed words would promise what the answer must not.
 const MEDICINE_Q = / (?:meds|medication\w*|medicine\w*|pills|antidepressants?|prescription\w*|therapy|therapist|doctor\w*|diagnos\w*|cancer|chemo\w*|tumou?r|sick|sickness|illness|disease|surgery|insulin|medicament\w*|medicinas?|pastillas|terapia|medic[oa]s?|enferm\w*|cirugia) /;
@@ -100,6 +116,7 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   const seen = new Set<string>();
   const add = (s: Scripture | null) => { if (s && !seen.has(`${s.book} ${s.chapter}:${s.verse}`) && scripture.length < 3) { seen.add(`${s.book} ${s.chapter}:${s.verse}`); scripture.push(s); } };
   const asked = norm(ctx.userText);
+  const plain = PLAIN_ASKED.test(asked);
   const unfit = (s: Scripture) => (MEDICINE_Q.test(asked) && MEDICINE_DENY.test(fold(s.text))) || (MONEY_Q.test(asked) && MONEY_DENY.test(fold(s.text)));
   if (ctx.door === 'faith') {
     // A verse whose words would promise healing or wealth to this question is dropped, not shown.
@@ -140,7 +157,10 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (STOCK.test(n)) problems.push('stock_phrase');
   if (ADDRESS.test(text)) problems.push('persona_roleplay');
   if (SAYS_AI.test(n) && !ASKED_AI.test(asked)) problems.push('unasked_ai');
-  if (SPLIT_SAID.test(n) && !SPLIT_ASKED.test(asked)) problems.push('split_unasked');
+  if (SPLIT_SAID.test(n) && plain) problems.push('split_dodge');
+  else if (SPLIT_SAID.test(n) && !SPLIT_ASKED.test(asked)) problems.push('split_unasked');
+  if (plain && !PASTOR.test(n)) problems.push('missing_pastor');
+  if (NIGHT_OPEN.test(norm(text.split(/(?<=[.!?])\s/)[0] ?? '')) && !NIGHT_ASKED.test(asked)) problems.push('night_opening');
   // Two words run together ("theSong of Solomon", RT10 round 3): a lowercase word glued to a capital.
   if (/\b[a-z]{2,}[A-Z][a-z]+/.test(text)) problems.push('glued_words');
   // Restating her question back to her is a machine tell (round 3: 11 of 30 answers opened that way).

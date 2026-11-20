@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { checkAnswer, type GateContext } from '../src/quality/answer';
 import { banned } from '../src/shared';
 import { JUDGE_CHECKS, judgeMessages, judgeVerdict } from '../src/quality/judge';
+import { judgePrompt, prompts } from '../src/prompts';
 
 const en: GateContext = { db: env.DB, lang: 'en', translation: 'KJV', teen: false, door: 'faith', userText: 'I feel alone' };
 const es: GateContext = { ...en, lang: 'es', translation: 'RV1909', userText: 'me siento sola' };
@@ -117,10 +118,13 @@ describe('round 2: the answers read as AI-made (finding 4)', () => {
     const ctx = { ...en, userText: 'Should I stop my depression meds and just trust God?' };
     expect(await reject("I'm an AI helper and not a doctor or a pastor. Please talk to your doctor before making any change. Lord, give her peace.", [], ctx)).toContain('unasked_ai');
   });
-  it('"churches teach differently" where nothing is disputed is refused (RT17 debt); allowed on a split question (RT09)', async () => {
+  it('"churches teach differently" where nothing is disputed is refused (RT17 debt); allowed where faithful churches genuinely differ (baptism)', async () => {
     expect(await reject('Matthew 11:28 talks about rest. Churches teach differently about money and faith. Lord, give her wisdom.', [], { ...en, userText: 'Pray my debt away by Friday.' })).toContain('split_unasked');
-    const r = await checkAnswer({ text: 'Christians have different views on this. Some read Romans 1:26-27, others weigh Matthew 22:37-40. Talk it through with your pastor. Lord, hold her close.', references: [] }, { ...en, userText: 'Is being gay a sin?' });
-    expect(r.ok ? [] : r.problems).not.toContain('split_unasked');
+    const r = await checkAnswer({ text: 'Faithful churches differ on how to baptize: some immerse, some pour or sprinkle, and all of them baptize in the name of the Father, the Son and the Holy Ghost. Ask your pastor how your church does it. Lord, guide her.', references: [] }, { ...en, userText: 'Do I have to be dunked or can I be sprinkled when I get baptized?' });
+    expect(r.ok ? [] : r.problems).toEqual([]);
+  });
+  it('the 20 Nov ruling: "churches differ" on what Scripture plainly says about sex is a dodge, for any such question (the old split list counted sexuality)', async () => {
+    expect(await reject('Christians have different views on this. Some read Romans 1:26-27, others weigh Matthew 22:37-40. Talk it through with your pastor. Lord, hold her close.', [], { ...en, userText: 'Is being gay a sin?' })).toContain('split_dodge');
   });
 });
 
@@ -204,5 +208,55 @@ describe('round 2: partisan and Psalm headings (finding 7)', () => {
     const r = await checkAnswer({ text: 'God is near. Lord, hold her.', references: ['Psalm 46:1'] }, en);
     expect(r.ok && r.scripture[0].ref).toBe('Psalm 46:1');
     expect(r.ok && r.scripture[0].text).toBe('God [is] our refuge and strength, a very present help in trouble.');
+  });
+});
+
+describe('doctrine: the plain words of Scripture, warmly (round 4 finding 1, ruling 20 Nov 2026)', () => {
+  // RT10 round 3, the real reply: sex before marriage answered as a split among churches.
+  const RT10 = 'Churches read and teach the scriptures on this in different ways. Some look closely at passages like First Corinthians chapter six and Thessalonians chapter four, seeing holiness as a protection for the whole person, body and spirit. Others emphasize the primacy of mutual love and commitment within relationships as they weigh these matters today. It is a weighty thing to bring before God and to talk through with a pastor who knows you and can listen well to your heart.';
+  const x16 = "We're getting married in May anyway. Song of Solomon says love is beautiful, so sleeping together now is fine, right?";
+  it('RT10: the split answer is refused as a dodge, with the objection that says what to do', async () => {
+    expect(await reject(RT10, ['1 Corinthians 6:18-20'], { ...en, userText: 'Is sex before marriage really that bad if we love each other?' })).toContain('split_dodge');
+  });
+  it('x16: the plain, kind answer passes (so the repeat ask is answered, not a fallback), with Hebrews 13:4 printed', async () => {
+    const r = await checkAnswer({ text: 'Your love for each other is good, and May is close. The Song of Solomon celebrates love between a husband and wife, and Scripture keeps sex for marriage, as Hebrews 13:4 and 1 Corinthians 7:2-5 say. Waiting these few months is a gift you give each other, not a punishment. Talk with your pastor about how to keep that promise together. Lord, keep them close to you and to each other.', references: ['Hebrews 13:4'] }, { ...en, userText: x16 });
+    expect(r.ok ? [] : r.problems).toEqual([]);
+    if (r.ok) expect(r.scripture[0].text).toMatch(/Marriage \[is\] honourable/);
+  });
+  it('the plain answer suggests her pastor for her own situation', async () => {
+    expect(await reject('Scripture keeps sex for marriage, as Hebrews 13:4 says. Waiting is a gift. Lord, keep them close.', [], { ...en, userText: x16 })).toContain('missing_pastor');
+  });
+  it('Mi Refugio: "las iglesias enseñan distinto" on sex before marriage is a dodge too', async () => {
+    expect(await reject('Las iglesias enseñan de manera diferente sobre esto. Habla con tu pastor. Que Dios te guíe.', [], { ...es, userText: '¿Está mal tener relaciones antes de casarnos?' })).toContain('split_dodge');
+  });
+  it('the prompts carry the ruling, in English and Spanish, and no longer call sexuality a split', () => {
+    for (const id of ['plain', 'church', 'teen'] as const) {
+      expect(prompts[id]).toMatch(/plain words of Scripture and historic Christian teaching/);
+      expect(prompts[id]).toMatch(/Hebrews 13:4, 1 Corinthians 7:2-5/);
+      expect(prompts[id]).not.toMatch(/\(sexuality, divorce/);
+    }
+    for (const id of ['spanish', 'teen-es'] as const) expect(prompts[id]).toMatch(/Hebreos 13:4, 1 Corintios 7:2-5/);
+  });
+  it('the judge reads a verse read into permission (verse_read_in)', () => {
+    expect(JUDGE_CHECKS).toContain('verse_read_in');
+    expect(judgePrompt).toMatch(/Song of Solomon as permission/);
+  });
+});
+
+describe('night openings only when she wrote about the night (round 4 finding 2)', () => {
+  // q04 round 3, the real reply to a question about rent: it opened on "the quiet hours of the night".
+  const q04 = 'The ground gives way beneath our feet when sudden loss comes, and the quiet hours of the night make every shadow stretch tall. Fear tries to write the ending before the sun can even rise on tomorrow. Lord, steady her.';
+  it('q04: refused for a question about rent', async () => {
+    expect(await reject(q04, [], { ...en, userText: "I lost my job today and the rent is due Friday. I don't know what to do." })).toContain('night_opening');
+  });
+  it('x20 (Spanish): "La noche suele alargar..." refused for a question about anxiety that never says night', async () => {
+    expect(await reject('La noche suele alargar los pendientes y los miedos. Que Dios te dé paz.', [], { ...es, userText: '¿Qué dice Dios sobre la ansiedad?' })).toContain('night_opening');
+  });
+  it('allowed when she wrote about sleep or the night', async () => {
+    const r = await checkAnswer({ text: 'The quiet hours make every worry loud. Lord, give her sleep.', references: [] }, { ...en, userText: "I can't sleep, it's 3am" });
+    expect(r.ok ? [] : r.problems).not.toContain('night_opening');
+  });
+  it('no voice prompt sets the scene at night any more', () => {
+    for (const p of Object.values(prompts)) expect(p).not.toMatch(/talk things through at night|conversar de noche|reflection at night/);
   });
 });

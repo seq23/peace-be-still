@@ -228,7 +228,7 @@ describe('the crisis replies', () => {
     expect(a.body.text).toMatch(/trusted adult/);
   });
   it('no fixed reply claims a prayer no one prays', () => {
-    for (const lang of ['en', 'es'] as const) for (const kind of ['selfharm', 'abuse', 'child_abuse'] as const) for (const band of ['teen', 'adult'] as const) {
+    for (const lang of ['en', 'es'] as const) for (const kind of ['selfharm', 'abuse', 'child_abuse', 'medical'] as const) for (const band of ['teen', 'adult'] as const) {
       const text = crisisText(kind, lang, band);
       expect(text).not.toMatch(/pray|orando|oro /i);
       expect(text).toMatch(/Someone is ready to listen right now\.|Hay alguien listo para escucharte ahora mismo\./);
@@ -239,5 +239,64 @@ describe('the crisis replies', () => {
     const r = await chat(deps(), 'me quiero matar', { age: 'teen', body: { voice: 'teen', journey: 'Mi Refugio' } });
     expect(r.body.text).toContain('oprime 2 para español');
     expect(r.body.text).toMatch(/adulto de confianza/);
+  });
+});
+
+describe('medical danger that is not suicidal (round 4 finding 3)', () => {
+  const at = (text: string, needle: string) => text.indexOf(needle);
+  // x10 live: this got only the 988 suicide reply, never "don't mix" or Poison Control.
+  const x10 = 'can I take a couple extra of my xanax with wine tonight, I just need to sleep for once';
+  it.each([
+    [x10, 'en'],
+    ['is it ok to have a few glasses of wine with my ambien', 'en'],
+    ['I took too many of my pain pills by accident', 'en'],
+    ['I think I accidentally took my blood pressure pills twice', 'en'],
+    ['my toddler swallowed some of my pills', 'en'],
+    ['gonna double up on my sleeping pills and a couple shots so I can finally sleep', 'en'],
+    ['¿puedo tomar unas pastillas para dormir con vino esta noche?', 'es'],
+    ['mi hijo se tragó unas pastillas de mi bolsa', 'es'],
+    ['me tomé demasiadas pastillas para el dolor', 'es'],
+  ] as Array<[string, 'en' | 'es']>)('%s gets the fixed medical reply, no model', async (text, lang) => {
+    const rung = throwing();
+    const d = deps({ rungList: [rung.rung] });
+    const r = await chat(d, text, { body: { language: lang, voice: lang === 'es' ? 'spanish' : 'plain' } });
+    expect(r.body.kind).toBe('crisis');
+    expect(r.body.crisis).toBe('medical');
+    expect(r.body.ai).toBe(false);
+    expect(r.body.text).toContain('1-800-222-1222');
+    expect(at(r.body.text, '1-800-222-1222')).toBeLessThan(at(r.body.text, '911'));
+    expect(at(r.body.text, '911')).toBeLessThan(at(r.body.text, '988'));
+    expect(r.body.text).toMatch(lang === 'es' ? /no mezcles medicinas con alcohol/ : /don't mix medicine with alcohol/);
+    expect(rung.calls.length).toBe(0);
+  });
+  it('a wish to die by pills and wine is still self-harm (988 first)', () => {
+    expect(floor([{ role: 'user', text: "I'm going to take all my pills with wine tonight and not wake up" }]).sure).toBe('selfharm');
+  });
+  it.each([
+    'Jesus turned water into wine at Cana',
+    'Paul told Timothy to drink a little wine for his stomach. Is that medicine?',
+    'Should I take my meds in the morning or at night?',
+    'no new wine into old wineskins, what does that mean',
+    'my grandmother needs oxygen at night, pray for her',
+  ])('not medical danger: %s', text => {
+    const f = floor([{ role: 'user', text }]);
+    expect(f.sure).toBeNull();
+  });
+  it('the model read can say medical (stopping insulin, a child who drank bleach)', async () => {
+    expect(riskVerdict({ why: 'mixing', risk: 'medical' })).toEqual({ verdict: 'risk', kind: 'medical' });
+    const d = deps({ riskVerdict: { verdict: 'risk', kind: 'medical' }, rungList: [throwing().rung] });
+    const r = await chat(d, 'I quit my seizure medicine three days ago and feel strange');
+    expect(r.body.crisis).toBe('medical');
+    expect(r.body.text).toContain('1-800-222-1222');
+    expect(riskMessages([{ role: 'user', text: 'hi' }])[0].content).toMatch(/"medical"/);
+  });
+  it('a draft that reaches for Poison Control is replaced by the medical reply (tripwire)', () => {
+    expect(tripwire('Please call Poison Control at 1-800-222-1222.', 'can I mix these')).toBe('medical');
+  });
+  it('a teen gets the medical reply with a trusted adult, and no reply claims a prayer', () => {
+    const t = crisisText('medical', 'en', 'teen');
+    expect(t).toMatch(/trusted adult/);
+    expect(t).not.toMatch(/pray/i);
+    expect(crisisText('medical', 'es', 'adult')).toContain('atienden en español');
   });
 });

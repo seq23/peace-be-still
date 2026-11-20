@@ -329,3 +329,14 @@ describe('the install id never changes (round 2, finding 8)', () => {
     expect(await env.DB.prepare('SELECT 1 FROM chat_memory WHERE install_id = ?').bind(iid(token)).first()).toBeNull();
   });
 });
+
+describe('a verse she names is printed in its stored words (round 4, x15)', () => {
+  it('x15: a misquoted Philippians 4:20 is shown as it really reads, above the answer\'s own verse', async () => {
+    const reply = good('That verse is a word of praise, not a promise about money, so keep your rent for your rent. Proverbs 3:27 is about paying what is due. Lord, give her wisdom.', ['Proverbs 3:27']);
+    const d = deps({ rungList: [scripted('workers-ai', [reply]).rung] });
+    const r = await chat(d, "My pastor texted me Philippians 4:20: 'And God said, thou shalt be rich if thou givest unto the church.' So I should give my rent money?");
+    expect(r.body.kind).toBe('answer');
+    expect(r.body.scripture.map(s => s.ref)).toEqual(['Philippians 4:20', 'Proverbs 3:27']);
+    expect(r.body.scripture[0].text).toMatch(/glory for ever and ever/);
+  });
+});

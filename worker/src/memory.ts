@@ -24,8 +24,12 @@ export async function saveMemory(db: D1Database, args: { installId: string; day:
   return 'saved';
 }
 
+/** "Delete memory" removes the summary and her install's answer shapes (keyed hashes, quality/variety.ts). */
 export async function deleteMemory(db: D1Database, installId: string): Promise<void> {
-  await db.prepare('DELETE FROM chat_memory WHERE install_id = ?').bind(installId).run();
+  await db.batch([
+    db.prepare('DELETE FROM chat_memory WHERE install_id = ?').bind(installId),
+    db.prepare('DELETE FROM answer_shape WHERE scope = ?').bind(installId),
+  ]);
 }
 
 /** Mark today's row for this device: the crisis layer fired, so nothing is remembered today. */

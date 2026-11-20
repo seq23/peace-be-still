@@ -12,10 +12,16 @@
 // are matched on the text as written and the unclear ones go to the model.
 // The floor reads only her newest message and the newest joined with the one before it: an old
 // crisis turn does not stick to every later message (the model read still sees the context).
+// MEDICAL DANGER (hostile review round 4, x10: "a couple extra of my xanax with wine tonight, I just
+// need to sleep" got only the 988 suicide reply, never "don't mix these" or Poison Control). A danger
+// to her body that is not a wish to die (mixing sleep, anxiety or pain pills with alcohol, extra
+// doses, a child who swallowed something, stopping insulin or seizure medicine) is its own kind,
+// 'medical', with its own fixed reply (replies.ts): don't mix or take more, Poison Control, 911,
+// then 988. A wish to die by any of these is still 'selfharm'.
 // Nothing here writes or keeps text.
 import type { Message } from './providers/types';
 
-export type CrisisKind = 'selfharm' | 'abuse' | 'child_abuse';
+export type CrisisKind = 'selfharm' | 'abuse' | 'child_abuse' | 'medical';
 export type Turn = { role: 'user' | 'assistant'; text: string };
 export type RiskVerdict = { verdict: 'none' } | { verdict: 'risk'; kind: CrisisKind } | { verdict: 'down' };
 export type CrisisResult = { fired: false; read: 'none' | 'down' } | { fired: true; kind: CrisisKind; layer: 'floor' | 'model' | 'floor+model-down' };
@@ -35,6 +41,9 @@ export function asWritten(text: string): string {
 const W = String.raw;
 const people = W`(?:he|she|they|dad|daddy|stepdad|step dad|father|stepfather|mom|mama|mother|stepmom|uncle|aunt|brother|sister|cousin|grandpa|grandfather|boyfriend|girlfriend|husband|wife|ex|partner|coach|teacher|pastor|youth pastor|priest|deacon|neighbor|babysitter|someone|somebody|a man|a guy|mi papa|mi padrastro|mi mama|mi madrastra|mi tio|mi hermano|mi primo|mi abuelo|mi novio|mi esposo|mi marido|mi pastor|el|ella)`;
 const adultAtHome = W`(?:moms?|mothers?|mamas?|dads?|fathers?) (?:boyfriend|girlfriend|husband|friend)|stepdad|step dad|stepfather|stepmom|uncle|cousin|grandpa|older brother|brother|babysitter|coach|youth pastor|pastor|teacher|a man|a grown up|an adult|he|she|they`;
+// Medicines that slow breathing (sedatives, sleep aids, opioids) and alcohol, EN and ES (folded).
+const sedative = W`(?:xanax|xannies|xans|alprazolam|valium|diazepam|ativan|lorazepam|klonopin|clonazepam|rivotril|benzos?|ambien|zolpidem|lunesta|sleeping pills?|sleep(?:ing)? (?:meds|medicine|aids?)|nyquil|benadryl|unisom|zzzquil|oxys?|oxies|oxycodone|oxycontin|percocets?|vicodin|norco|hydrocodone|fentanyl|morphine|tramadol|codeine|methadone|gabapentin|seroquel|trazodone|muscle relaxers?|pain ?pills?|pain ?killers?|anxiety (?:meds|pills|medicine)|my (?:meds|pills|prescription)|pastillas(?: para dormir| para la ansiedad| para el dolor)?|calmantes|tranquilizantes|somniferos|mis medicinas|mis medicamentos)(?= )`;
+const alcohol = W`(?:wine|alcohol|drinks?|drinking|beers?|liquor|vodka|whiske?y|tequila|rum|shots?|drunk|buzzed|vino|cervezas?|tragos?|copas?|licor|borrach[oa]|tomando alcohol)(?= )`;
 const sure: Array<[CrisisKind, RegExp]> = [
   ['selfharm', new RegExp([
     W`kill(?:ing)? my ?self`, W`kms`, W`unalive`, W`suicid(?:e|al)`, W`end(?:ing)? (?:my|it) (?:own )?life`, W`end(?:ing)? it all`,
@@ -45,7 +54,7 @@ const sure: Array<[CrisisKind, RegExp]> = [
     W`(?:goodbye|good bye|last|suicide) (?:letter|letters|note|notes)`, W`(?:wrote|written|writing|write) (?:\w+ )?letters? to my (?:kids|children|family|son|daughter|husband|wife|mom|mother)`,
     W`(?:saving|saved|stockpiling|hoarding|collecting) (?:up )?(?:my |all my |some )?(?:\w+ )?(?:pills|meds|medication|tablets)`,
     W`(?:hurt|hurting|harm|harming|cut|cutting|burn|burning) my ?self`, W`self harm`,
-    W`(?:take|taking|swallow|swallowing) (?:all )?(?:of )?(?:my|the|these|those) (?:pills|meds|medication)`, W`overdose`, W`hang my ?self`, W`shoot my ?self`, W`slit my wrists?`,
+    W`(?:take|taking|swallow|swallowing) all (?:of )?(?:my|the|these|those) (?:\w+ )?(?:pills|meds|medication)`, W`(?:swallow|swallowing) (?:my|the|these|those) (?:pills|meds)`, W`overdose`, W`hang my ?self`, W`shoot my ?self`, W`slit my wrists?`,
     W`(?:jump|jumping) off (?:a|the) (?:bridge|building|roof)`, W`(?:drive|driving) (?:my car )?(?:into|off) (?:a|the) (?:river|bridge|lake|wall|tree|cliff)`,
     W`(?:me )?quiero (?:matarme|morir|morirme|suicidarme)`, W`me quiero (?:matar|morir|suicidar)`, W`matarme`, W`suicidarme`, W`suicidio`, W`quitarme la vida`,
     W`(?:ganas|deseos) de (?:morir|morirme|matarme)`, W`no quiero (?:vivir|seguir viviendo|despertar)`, W`ya no quiero vivir`, W`desaparecer para siempre`,
@@ -60,6 +69,15 @@ const sure: Array<[CrisisKind, RegExp]> = [
     W`(?:kill|hurt|beat) me if i (?:leave|tell|go|try)`, W`threaten\w* to (?:kill|hurt) me`, W`(?:said|says) (?:hed|he would|he will|shed|she would|theyd) kill me`,
     W` (?:me|nos) (?:pega|pegan|pego|pegaba|golpea|golpean|golpeo|golpeaba|viola|violo|violaron|maltrata|maltrato|maltrataba)`, W` ${people} me (?:toca|tocan|toco|tocaba)`, W`abuso de mi`, W`abusaron de mi`, W`abuso sexual`,
     W`me (?:va|van) a matar si`, W`amenaz\w* con matarme`,
+  ].join('|'))],
+  ['medical', new RegExp([
+    W`${sedative}(?: \w+){0,6} (?:with|and|plus|after|on top of|con|y|despues de)(?: \w+){0,3} ${alcohol}`,
+    W`${alcohol}(?: \w+){0,6} (?:with|and|plus|then|after|con|y|despues de)(?: \w+){0,3} ${sedative}`,
+    W`(?:mix|mixing|mezclar|mezclo)(?: \w+){0,4} ${sedative}`,
+    W`(?:couple|few|handful|bunch|double|triple|extra|more|unas cuantas|varias|mas|doble)(?: extra| more| mas)?(?: of)?(?: my| the| mis| las| los)? ${sedative}`,
+    W`double (?:up on|dose|my dose)`, W`more than (?:prescribed|the bottle says|the label says|i should|my doctor)`, W`(?:took|taken|tomé|tome) (?:too many|too much|demasiadas|demasiado)`,
+    W`(?:accidentally|by accident|por accidente|sin querer) (?:took|take|taken|overdosed|me tome|tome)`,
+    W`(?:my |our |the |mi |el |la )?(?:baby|toddler|son|daughter|kid|child|grandbaby|grandson|granddaughter|bebe|nino|nina|hijo|hija|nieto|nieta) (?:swallowed|ate|drank|got into|se tomo|se trago|se comio|se bebio)`,
   ].join('|'))],
 ];
 // Accent-sensitive Spanish, on the text as written. "me corto"/"me lastimo" (I cut/hurt myself)
@@ -103,11 +121,12 @@ Read the newest message from the person, using earlier turns only as context. Ju
 Return "risk":
 - "selfharm": they may hurt or kill themselves, said plainly or indirectly. Warning signs: wanting to die, sleep and never wake up, disappear for good, "no point going on", being tired of being alive, asking God to take them; goodbye letters or letters to their kids or family; giving things away; saving up or counting pills; asking how many pills would be deadly; buying a gun or planning a way (a bridge, a river, a car); self-harm such as cutting or burning; jokes about dying that leave the door open.
 - "child_abuse": a child or teen is being hurt, touched sexually, threatened or neglected by an adult or older person, or is afraid of an adult at home (for example an adult who comes into their room at night).
+- "medical": their body is in danger from medicines, alcohol, drugs or poison, WITHOUT a wish to die: mixing sleep, anxiety or pain pills with alcohol, taking extra or double doses to sleep or cope, taking too many by accident, a child who swallowed pills or chemicals, having just stopped insulin, seizure, heart or blood-pressure medicine. If they want to die or let themselves die this way, it is "selfharm". Only ASKING whether to stop or change a medicine, with no sign they already did, is "none".
 - "abuse": an adult is being hit, choked, forced, sexually assaulted, stalked, controlled or threatened by a partner, family member or anyone else, including threats like "he'll kill me if I leave".
 - "none": anything else, including Bible study about violence, death, suicide, rape or abuse in scripture (Tamar, Goliath, the cross, Romans 6, "cut off your hand"), grief, sadness, doubt, stress, being tired of work or caregiving, hurt feelings, someone who hurt them with words or broke their heart, questions about dating, crushes, kissing, purity or sexual boundaries with a boyfriend or girlfriend their own age, loneliness, divorce, a breakup, a partner who left or cheated, parents or a couple who argue (with no hitting, threats or fear of being hurt), feeling abandoned by God, and someone who says they already reached help and are safe now. Being left, sad or lonely is not abuse; abuse needs someone hurting, forcing, threatening or controlling them.
 When unsure between none and a risk, choose the risk.
-Reply with JSON only: {"why": "a few words", "risk": "none" | "selfharm" | "child_abuse" | "abuse"}.`;
-export const riskSchema = { type: 'object', properties: { why: { type: 'string' }, risk: { type: 'string', enum: ['none', 'selfharm', 'child_abuse', 'abuse'] } }, required: ['why', 'risk'], additionalProperties: false };
+Reply with JSON only: {"why": "a few words", "risk": "none" | "selfharm" | "child_abuse" | "abuse" | "medical"}.`;
+export const riskSchema = { type: 'object', properties: { why: { type: 'string' }, risk: { type: 'string', enum: ['none', 'selfharm', 'child_abuse', 'abuse', 'medical'] } }, required: ['why', 'risk'], additionalProperties: false };
 
 /** The messages for one risk read: her last 6 turns as a quoted block (data, never instructions). */
 export function riskMessages(turns: Turn[]): Message[] {
@@ -119,7 +138,7 @@ export function riskMessages(turns: Turn[]): Message[] {
 export function riskVerdict(data: unknown): RiskVerdict {
   const risk = data && typeof data === 'object' ? (data as { risk?: unknown }).risk : undefined;
   if (risk === 'none') return { verdict: 'none' };
-  if (risk === 'selfharm' || risk === 'abuse' || risk === 'child_abuse') return { verdict: 'risk', kind: risk };
+  if (risk === 'selfharm' || risk === 'abuse' || risk === 'child_abuse' || risk === 'medical') return { verdict: 'risk', kind: risk };
   return { verdict: 'down' };
 }
 
@@ -150,6 +169,7 @@ export async function detectCrisis(turns: Turn[], read: () => Promise<RiskVerdic
 // (c) The answer-side tripwire: a draft that reaches for crisis help means the answer model read
 // danger the other layers missed. Words she wrote herself ("I called 988") are not counted.
 const TRIPWIRE: Array<[CrisisKind, RegExp]> = [
+  ['medical', /poison control|1 800 222 1222|centro de (?:control de )?(?:envenenamiento|toxicologia)/],
   ['child_abuse', /childhelp|1 800 422 4453/],
   ['abuse', /domestic violence hotline|1 800 799 7233|violencia domestica|(?:not|isnt|is not|no estas) (?:safe|segura?) (?:at home|with him|en casa|con el)/],
   ['selfharm', /\b988\b|suicid\w*|crisis (?:line|lifeline|hotline|text line)|emergency services|call 911|llama al 911|servicios de emergencia|linea de crisis|you are not safe|youre not safe|in danger|en peligro/],

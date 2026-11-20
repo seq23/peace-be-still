@@ -2,7 +2,9 @@
 // Order for a chat message: region -> signed token (age band inside) -> burst limit -> body ->
 // crisis (floor, then the model risk read on EVERY message; no read = no answer) -> paid status
 // (RevenueCat) -> daily admission (D1) -> free ladder -> crisis tripwire on the draft -> answer gate
-// (+ judge with the verse texts) -> one regeneration -> fixed fallback -> response.
+// (+ variety against her recent answers and everyone's, + judge with the verse texts) -> up to two
+// rewrites -> fixed fallback -> response. Crisis kinds: selfharm, abuse, child_abuse, medical (danger to
+// her body from medicine or alcohol that is not a wish to die: Poison Control first).
 // POST /api/token/renew re-signs the SAME install id (paid status and memory follow it).
 import './env';
 import { cleanup } from './cleanup';
@@ -19,6 +21,7 @@ import { openRouter } from './providers/openrouter';
 import type { Message } from './providers/types';
 import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
+import { hashShape, recentShapes, repeats, saveShape, shapeOf } from './quality/variety';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, crisisText, fallbackText, identityText, limitText, noFreeModelText, oneTranslationText, type Lang } from './replies';
 import { lookup, refugeVerse, type Scripture } from './scripture';
@@ -62,6 +65,13 @@ const OBJECTIONS: Record<string, string> = {
   ends_with_question: 'It ended on a question; end on a short prayer or on one of the verses.',
   unasked_ai: 'It said it was an AI when she did not ask; do not mention it.',
   split_unasked: 'It said churches teach differently on something Christians do not split on; just answer.',
+  split_dodge: 'It said churches differ where Scripture speaks plainly. Say kindly and without shame what Scripture and historic Christian teaching say, and suggest she talk with her pastor about her own situation.',
+  missing_pastor: 'Suggest, in a sentence of your own, that she talk this through with her pastor.',
+  night_opening: 'It opened on the night or the dark, which she did not mention; open on what she actually said.',
+  repeat_opening: 'It opened the same way as a recent answer; open differently, on what she said.',
+  repeat_closing: 'It closed the same way as a recent answer; close differently.',
+  repeat_image: 'It reused an image from a recent answer; use plain words or a different picture.',
+  'judge:verse_read_in': 'It used a verse to approve what the verse does not say, or called a plain teaching a matter churches differ on; say what Scripture plainly says, kindly.',
   persona_roleplay: 'It acted as a person with a body or a home, or used a pet name; do neither.',
   verse_unfit: 'It named a verse whose words would promise healing or wealth for this question; choose a different verse.',
   'judge:verse_implies_promise': 'A verse it chose reads as a promise of the outcome she asked about; choose verses about God\'s nearness instead.',
@@ -289,6 +299,13 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The newest message plus her earlier ones: an echo of what she wrote ("I called 988") is not a tripwire.
   const herWords = turns.filter(t => t.role === 'user').map(t => t.text).join('\n');
 
+  // A verse she named ("Philippians 4:20 says...") is printed in its stored words, so she can see
+  // what it really says (round 4, x15).
+  const named = req.door === 'faith' ? namedReference(last) : null;
+  const namedVerse = named ? await lookup(env.DB, v.translation, named) : null;
+  const withNamed = (scripture: Scripture[]) => namedVerse && !scripture.some(s => s.ref === namedVerse.ref) ? [namedVerse, ...scripture].slice(0, 3) : scripture;
+  // Her recent answers and everyone's (keyed hashes only): the variety check (quality/variety.ts).
+  const recent = await recentShapes(env.DB, who.installId);
   let objection: string | null = null;
   // Three tries, then the fallback verse. Measured round 3: with two tries 4 of 45 answers fell back
   // (grief, a teen's dating question, translation requests), each refused on a fixable point.
@@ -310,15 +327,20 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (trip) return crisisReply(trip, 'tripwire');
     const checked = await checkAnswer(out.data, gate);
     let problems = checked.ok ? [] : checked.problems;
-    if (checked.ok) {
-      const j = await deps.judge(env, { voice: v.prompt, question: last, text: checked.text, verses: checked.scripture.map(s => ({ ref: s.ref, text: s.text })) });
+    const shape = checked.ok ? await hashShape(shapeOf(checked.text), env.IP_HASH_SECRET!) : null;
+    // Variety is quality, not safety: on the last try it is waived rather than fall back.
+    if (shape && attempt < ANSWER_TRIES - 1) problems = repeats(shape, recent);
+    const scripture = checked.ok ? withNamed(checked.scripture) : [];
+    if (checked.ok && !problems.length) {
+      const j = await deps.judge(env, { voice: v.prompt, question: last, text: checked.text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) });
       if (j.verdict === 'fail') problems = j.which.map(w => `judge:${w}`);
       if (j.verdict === 'down') tally(metrics, 'judge_down');
       if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);
     }
     if (checked.ok && !problems.length) {
+      ctx.waitUntil(saveShape(env.DB, who.installId, shape!, now).catch(() => logCode('SHAPE_SAVE_FAILED')));
       if (paid.paid) ctx.waitUntil(remember(env, rungs, { installId: who.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: checked.text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
-      return done({ kind: 'answer', ai: true, text: checked.text, scripture: checked.scripture });
+      return done({ kind: 'answer', ai: true, text: checked.text, scripture });
     }
     if (problems.some(p => RED_LINES.has(p) || p.startsWith('judge:'))) tally(metrics, 'red_line');
     for (const p of problems) tally(metrics, `gate:${p}`);
