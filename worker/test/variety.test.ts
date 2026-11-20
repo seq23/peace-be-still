@@ -2,7 +2,9 @@ import { env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
 import { cleanup } from '../src/cleanup';
 import { deleteMemory } from '../src/memory';
-import { hashShape, recentShapes, repeats, saveShape, shapeOf, varietyObjection } from '../src/quality/variety';
+import { closeStems, hashShape, planFor, RECENT_ALL, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Lane } from '../src/quality/variety';
+import type { LadderRung } from '../src/ladder';
+import type { Message } from '../src/providers/types';
 import { call, chat, deps, good, NOW, scripted, tokenFor } from './helpers';
 
 // Real answers from the round-3 and round-4 live runs (reviews/phase-3-live-r3, phase-3-fresh-gh).
@@ -75,7 +77,7 @@ describe('variety in the chat path', () => {
     expect(b.calls.length).toBe(2);
     expect(b.calls[1].some(m => m.role === 'system' && /closed like a recent answer \("Lord, hold her\.\.\."\)/.test(m.content))).toBe(true);
   });
-  it('variety never causes a fallback: on the last try it is waived', async () => {
+  it('variety never causes a fallback: when every try repeats, the last clean draft is shown', async () => {
     const same = good('Grief can sit heavy for a while. Lord, hold her close tonight.', ['Psalm 34:18']);
     const d = deps({ rungList: [scripted('workers-ai', [same]).rung] });
     const token = await tokenFor(d);
@@ -88,5 +90,73 @@ describe('variety in the chat path', () => {
     const before = (await env.DB.prepare("SELECT count(*) AS n FROM answer_shape WHERE scope = 'all'").first<{ n: number }>())?.n ?? 0;
     await call(deps(), '/api/chat', { body: { conversation: crypto.randomUUID(), messages: [{ role: 'user', text: 'I want to kill myself' }], door: 'faith', voice: 'plain', language: 'en' }, token: await tokenFor(deps()) });
     expect((await env.DB.prepare("SELECT count(*) AS n FROM answer_shape WHERE scope = 'all'").first<{ n: number }>())?.n ?? 0).toBe(before);
+  });
+});
+
+// Round 5 (run 44830048621): the model closed 14 of 53 answers "May you find..." and rewrites asked
+// after the fact did not stop it. The plan is chosen by code before the model writes.
+// Four letters no other answer starts a word with (shapes compare 4-letter stems).
+const tag = (i: number) => `z${String.fromCharCode(97 + (i % 26))}${String.fromCharCode(97 + Math.floor(i / 26) % 26)}q`;
+const closingWord = (plan: string) => /(?:first word is|primera palabra (?:sea|es)) "([^"]+)"/.exec(plan)?.[1];
+describe('the plan code chooses before the model writes (round 5 rebuild)', () => {
+  it.each(['en', 'es', 'mindset'] as Lane[])('%s: any window of answers is told to close on different first words', lane => {
+    expect(new Set(closeStems(lane)).size).toBeGreaterThan(RECENT_ALL);
+    for (let start = 1; start < 200; start += 7) {
+      const words = Array.from({ length: RECENT_ALL + 1 }, (_, i) => closingWord(planFor(start + i, lane).text)!);
+      expect(new Set(words.map(w => shapeOf(`Intro sentence here. ${w} one two.`).closer.split(' ')[0])).size).toBe(RECENT_ALL + 1);
+    }
+  });
+  it('consecutive plans change the opening and middle moves too', () => {
+    const lines = (n: number) => planFor(n, 'en').text.split('\n');
+    for (let n = 1; n < 60; n++) { expect(lines(n)[1]).not.toBe(lines(n + 1)[1]); expect(lines(n)[2]).not.toBe(lines(n + 1)[2]); }
+  });
+  it('a model with the round-5 habit that follows its plan: 45 answers in a row, none repeats by the red team measure', async () => {
+    // Every draft keeps the habit's closing sentence ("... with her now.") except that it starts with
+    // the word its plan gave it: what a model that follows the plan does. Bodies differ (unique words).
+    const sent: Message[][] = [];
+    const rung: LadderRung = { id: 'workers-ai', cap: 1000, day: '2026-11-20', call: async messages => {
+      sent.push(messages);
+      const word = closingWord(messages.find(m => m.role === 'system' && m.content.startsWith('The plan'))!.content);
+      const t = tag(sent.length);
+      return { text: `${t}one ${t}two ${t}three. ${word} with her now.`, references: ['Psalm 34:18'] };
+    } };
+    const shown: string[] = [];
+    for (let i = 0; i < 45; i++) {
+      const r = await chat(deps({ rungList: [rung] }), `My mama died ${i} days ago.`);
+      expect(r.body.kind).toBe('answer');
+      shown.push(r.body.text);
+    }
+    const shapes = shown.map(t => shapeOf(t));
+    const repeated = shapes.filter((s, i) => repeats(s, shapes.slice(Math.max(0, i - RECENT_ALL), i)).includes('repeat_closing'));
+    expect(repeated).toEqual([]);
+    expect(shapes.filter((s, i) => repeats(s, shapes.slice(Math.max(0, i - RECENT_ALL), i)).length)).toEqual([]);
+    expect(sent.length).toBe(45); // no rewrites were needed
+  });
+  it('the same habit WITHOUT a plan repeats (the round-5 failure the plan replaces)', () => {
+    const shapes = Array.from({ length: 45 }, (_, i) => shapeOf(`${tag(i)}one ${tag(i)}two ${tag(i)}three. May you find her now.`));
+    expect(shapes.filter((s, i) => repeats(s, shapes.slice(0, i)).length).length).toBe(44);
+  });
+  it('a rewrite for variety does not use up the tries a real problem needs: the repeat is shown, not the fallback', async () => {
+    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const repeat = good('Loss takes time to carry. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const stock = good('Somebody needs to hear this: God is near. Lord, be near her.', ['Psalm 34:18']);
+    const d = deps({ rungList: [scripted('workers-ai', [first]).rung] });
+    const token = await tokenFor(d);
+    const conversation = crypto.randomUUID();
+    await chat(d, 'My mama died last week.', { token, body: { conversation } });
+    const b = scripted('workers-ai', [repeat, stock, stock]);
+    const r = await chat(deps({ rungList: [b.rung] }), 'I still cry every day.', { token, body: { conversation } });
+    expect(b.calls.length).toBe(3);
+    expect(r.body.kind).toBe('answer');
+    expect(r.body.text).toContain('Loss takes time to carry');
+  });
+  it('the spare still has to pass the judge', async () => {
+    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const d = deps({ rungList: [scripted('workers-ai', [first]).rung] });
+    const token = await tokenFor(d);
+    const conversation = crypto.randomUUID();
+    await chat(d, 'My mama died last week.', { token, body: { conversation } });
+    const r = await chat(deps({ rungList: [scripted('workers-ai', [first]).rung], judge: async () => ({ verdict: 'fail', which: ['condemns'], voice: 2 }) }), 'I still cry every day.', { token, body: { conversation } });
+    expect(r.body.kind).toBe('fallback');
   });
 });

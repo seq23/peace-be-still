@@ -31,6 +31,7 @@ count() { $W d1 execute peace-be-still-chat --local $CFG --json --command "SELEC
 [ "$(count)" -ge 62000 ] || node scripts/worker-bible-load.mjs --local </dev/null
 n=$(count)
 [ "$n" -ge 62000 ] || { echo "NAMED STOP BIBLE_NOT_LOADED: local D1 has $n verses"; exit 3; }
-echo "worker:dev: D1 ready ($n verses); starting wrangler dev on :8787 at nice 15"
+echo "worker:dev: D1 ready ($n verses); starting wrangler dev on https://localhost:8787 at nice 15"
 unset CI # wrangler dev itself stays interactive-safe without it
-exec nice -n 15 $W dev $CFG --port 8787 </dev/null
+# HTTPS: the Worker refuses plain HTTP (privacy policy), so the red team talks to it over TLS.
+exec nice -n 15 $W dev $CFG --port 8787 --local-protocol https </dev/null

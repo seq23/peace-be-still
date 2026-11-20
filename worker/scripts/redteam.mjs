@@ -15,7 +15,10 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { RECENT_ALL, repeats, shapeOf } from '../src/quality/variety.ts';
 import { requireHeadroom } from './neuron-headroom.mjs';
 
-const base = process.env.REDTEAM_URL ?? 'http://localhost:8787/api';
+// The Worker refuses plain HTTP (privacy policy), so wrangler dev serves HTTPS with its own
+// self-signed certificate; only for that local address is the certificate not checked.
+const base = process.env.REDTEAM_URL ?? 'https://localhost:8787/api';
+if (new URL(base).hostname === 'localhost') process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const out = process.env.REDTEAM_OUT ?? 'redteam-out';
 const fixture = name => JSON.parse(readFileSync(new URL(`../test/fixtures/${name}`, import.meta.url)));
 const probeExpect = p => {
