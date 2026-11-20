@@ -24,8 +24,13 @@ umask 077
   echo "PBS_GEMINI_API_KEY=$PBS_GEMINI_API_KEY"
   [ -n "${OPENROUTER_API_KEY:-}" ] && echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY"
 } > worker/.dev.vars
-$W d1 migrations apply peace-be-still-chat --local $CFG >/dev/null
-n=$($W d1 execute peace-be-still-chat --local $CFG --json --command "SELECT count(*) AS n FROM bible_verses" 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{console.log(JSON.parse(s)[0].results[0].n)}catch{console.log(0)}})')
-[ "${n:-0}" -ge 62000 ] || node scripts/worker-bible-load.mjs --local
+# CI=1 + no stdin: wrangler never waits on an "OK to proceed?" prompt.
+export CI=1
+$W d1 migrations apply peace-be-still-chat --local $CFG </dev/null | tail -1
+count() { $W d1 execute peace-be-still-chat --local $CFG --json --command "SELECT count(*) AS n FROM bible_verses" 2>/dev/null </dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{console.log(JSON.parse(s)[0].results[0].n)}catch{console.log(0)}})'; }
+[ "$(count)" -ge 62000 ] || node scripts/worker-bible-load.mjs --local </dev/null
+n=$(count)
+[ "$n" -ge 62000 ] || { echo "NAMED STOP BIBLE_NOT_LOADED: local D1 has $n verses"; exit 3; }
 echo "worker:dev: D1 ready ($n verses); starting wrangler dev on :8787 at nice 15"
-exec nice -n 15 $W dev $CFG --port 8787
+unset CI # wrangler dev itself stays interactive-safe without it
+exec nice -n 15 $W dev $CFG --port 8787 </dev/null
