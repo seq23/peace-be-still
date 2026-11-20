@@ -12,7 +12,7 @@ grandmother) -> every turn split into sentences -> render_chatterbox.py in the C
   turn       speaker similarity to her picked clip (Resemblyzer d-vector cosine) at or above the role's
              floor in voices.json clone.floor (the clone test's new-line score minus 0.05, never below
              the closest other voice + 0.03); a miss re-renders the turn
-  file       join (pauses exactly 3.0 s, by code), tempo, fill.encode at -22 LUFS, qa.check (the fill's
+  file       join (pauses exactly 3.0 s, by code), tempo, fill.master at -22 LUFS, qa.check (the fill's
              checks), then the Drive shelf and a manifest row, as the Gemini lane does.
 One story per run (`--limit 1` from run.sh), at nice 15 under the library fill's lock, so the Mac
 alternates: a Bible chunk, then a clone story. OUTPUT line every run.
@@ -74,9 +74,12 @@ def turn_ok(role: str, similarity: float) -> bool:
     return similarity >= CLONE["floor"][role]
 
 
-def lane_order(stories: list[dict]) -> list[dict]:
-    """Highest story number first, so the Gemini lane (lowest first) and this lane never meet."""
-    return sorted(stories, key=lambda s: s["id"], reverse=True)
+def lane_order(stories: list[dict], rows: list[dict] = ()) -> list[dict]:
+    """Stories to try again (a FAILED row) first, then the highest story number first, so the Gemini
+    lane (lowest first) and this lane never meet."""
+    last = fill.latest(rows)
+    retry = [s for s in stories if H.row_file(s) in last]
+    return retry + sorted((s for s in stories if H.row_file(s) not in last), key=lambda s: s["id"], reverse=True)
 
 
 def engine_of(work: Path) -> str | None:
@@ -175,7 +178,7 @@ def make_story(story: dict, work: Path) -> dict:
         if not bad:
             break
         print(f"  attempt {attempt + 1}: {'; '.join(bad[:4])}", flush=True)
-    row = {"file": f"stories/hush-harbor/en/{H.file_of(story)}", "kind": "stories", "lang": "en",
+    row = {"file": H.row_file(story), "kind": "stories", "lang": "en",
            "ref": f"content/stories/hush-harbor/{story['id']}.json", "text": "script", "voice": VOICE_ID,
            "engine": "clone", "models": ["chatterbox"], "voices": {r: Path(n).stem for r, n in CLONE["ref"].items()},
            "attempts": 1, "at": dt.datetime.now(fill.CT).isoformat(timespec="seconds")}
@@ -196,11 +199,8 @@ def make_story(story: dict, work: Path) -> dict:
         parts = [p if isinstance(p, float) else H.slow(p, factor, work) for p in parts]
     wav, out = work / "story.wav", work / H.file_of(story)
     H.write_wav(wav, H.join(parts))
-    for margin in (1.5, 3.0, 4.5):
-        fill.encode(wav, out, "sleep", margin)
-        res = qa.check(out, H.spoken(story), "en", "sleep")
-        if not res["problems"] or not all(p.startswith("A06 true peak") for p in res["problems"]):
-            break
+    fill.master(wav, out, "sleep")   # mastering misses are mastered again from this WAV (no re-render)
+    res = qa.check(out, H.spoken(story), "en", "sleep")
     wav.unlink()
     checks = {k: res[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks.update(problems=res["problems"], pauses_s=[p for p in parts if isinstance(p, float)], tempo=factor,
@@ -232,7 +232,7 @@ def main(argv=None) -> int:
             return 0
     stories = H.load_stories()
     rows = fill.read_manifest()
-    queue = [s for s in lane_order(H.todo(stories, rows, a.only)) if engine_of(fill.HOME / "hh-work" / s["id"]) in (None, "clone")]
+    queue = [s for s in lane_order(H.todo(stories, rows, a.only), rows) if engine_of(fill.HOME / "hh-work" / s["id"]) in (None, "clone")]
     if a.dry_run:
         print(f"clone lane: {len(queue)} stories to do; next: {', '.join(s['id'] for s in queue[:3])}")
         print(H.census_line(H.census(stories, rows)))
@@ -254,7 +254,7 @@ def main(argv=None) -> int:
                 made += 1
             else:
                 failed += 1
-            fill.append_row(row)
+            row = fill.upsert_row(row)
             shutil.rmtree(work, ignore_errors=True)
             print(f"{row['status']:6} {row['file']}  {row['seconds']}s  acc {row['checks'].get('accuracy')}  "
                   f"sim {row['checks'].get('similarity')}  -> {row.get('shelved')}  {'; '.join(row['checks']['problems'])}", flush=True)

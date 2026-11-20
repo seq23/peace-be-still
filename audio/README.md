@@ -7,10 +7,14 @@ checks, shelved, status, voice).
 - **Order**: (1) Psalms, KJV + RV1909, one file per psalm; (2) every other chapter of the 66 books,
   English and Spanish book by book; (3) scripts in `content/` marked `"status": "passed"`.
 - **Per file**: `render_kokoro.py` (Kokoro, voices in `VOICES.md`, 1.5 s quiet between psalm verses,
-  1.0 s between chapter verses) → AAC-LC mono 48 kbps `.m4a` → `qa.py` (word accuracy with
+  1.0 s between chapter verses) → `fill.master` (two-pass EBU R128 `loudnorm`, true-peak target 1 dB
+  under the ceiling, then AAC-LC mono 48 kbps `.m4a`; the ENCODED file is measured and, if AAC pushed it
+  outside the bars, mastered again from the kept WAV, at most 3 times) → `qa.py` (word accuracy with
   faster-whisper, loudness/true peak/0 clipped, last words present, words a minute) → `rclone copyto`
-  `gdrive:Mac-Shelf/peace-be-still/audio/<lang>/<kind>/` + md5 check → deleted from the Mac → manifest row.
-  A failed check is re-rendered once (speed 0.82), then a `FAILED` row names the problems.
+  `gdrive:Mac-Shelf/peace-be-still/audio/<lang>/<kind>/` + md5 check → deleted from the Mac → manifest row
+  (one row per file). Only a speech problem (A01, A07, length) is re-rendered (once, speed 0.82); a
+  mastering problem (A06) never costs a render. A `FAILED` row is tried again on later runs before any
+  new file; after 3 failed runs it is `NAMED STOP [FAILED_3_TRIES]` in the census line, naming the files.
 - **Spoken text**: stored text word for word; `[ ]`/`( )` marks dropped, ALL-CAPS said as words,
   names respelled from `pronunciations.json` (`engine`).
 - **Schedule**: launchd `com.seq.pbs-library-fill` (`launchd/install.sh`), every 15 minutes, Nice 15 +

@@ -24,6 +24,8 @@ class Clone(unittest.TestCase):
         stories = H.load_stories()
         self.assertEqual(C.lane_order(stories)[0]["id"], max(s["id"] for s in stories))
         self.assertEqual(H.todo(stories, [])[0]["id"], min(s["id"] for s in stories))
+        retry = [{"file": H.row_file(stories[0]), "status": "FAILED"}]
+        self.assertEqual(C.lane_order(H.todo(stories, retry), retry)[0]["id"], stories[0]["id"])  # a retry goes first
 
     def test_one_engine_per_story(self):
         with tempfile.TemporaryDirectory() as d:
