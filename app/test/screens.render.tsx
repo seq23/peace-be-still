@@ -123,3 +123,11 @@ test('opening a placeholder does not replace the selected journey', async () => 
  await press(tree, 'Start Psalm Nights');
  assert.equal(JSON.parse(saved!).journey, 'Psalm Nights');
 });
+
+
+test('journey choices explain their purpose in both languages', async () => {
+ const english = await mount(base);
+ assert.match(strings(english), /First night free, then one a week/);
+ const spanish = await mount({ ...base, language: 'es' });
+ assert.match(strings(spanish), /La primera noche gratis, después una por semana/);
+});

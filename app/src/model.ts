@@ -21,10 +21,13 @@ export function withAge(settings: Settings, age: Age): Settings {
   return { ...settings, age, journey: age === 'child' && chatLed ? undefined : settings.journey, voice: age === 'teen' ? 'teen' : age === 'child' || settings.voice === 'teen' ? 'plain' : settings.voice };
 }
 export const faithJourneys = [
-  ['Hush Harbor', 'Black Bible Chat & Stories'], ['Mi Refugio', 'Biblia y Chat en Español'],
-  ['Psalm Nights', 'Whispered Scripture for Sleep'], ['Morning Word', 'Daily Declarations'], ['Young Faith', 'Bible for Teens'],
+  ['Hush Harbor', 'Black Bible Chat & Stories', 'For when you want to talk it through, the way you would with family'],
+  ['Mi Refugio', 'Biblia y Chat en Español', 'Scripture and conversation in Spanish'],
+  ['Psalm Nights', 'Whispered Scripture for Sleep', "For when you can't sleep. First night free, then one a week"],
+  ['Morning Word', 'Daily Declarations', 'For mornings: one verse, one thing to say out loud, one short prayer'],
+  ['Young Faith', 'Bible for Teens', 'Ages 13 to 17. Plain words, real questions'],
 ] as const;
-export const mindsetJourneys = [['Imagination Nights', 'A quiet scene for sleep'], ['Morning Word', 'Daily declarations'], ['Living in the end', 'Write your scene']] as const;
+export const mindsetJourneys = [['Imagination Nights', '', 'Whispered night sessions: rest inside the scene you hope for'], ['Morning Word', 'Daily Declarations', 'One line to say out loud, morning and night'], ['Living in the end', '', 'Write your scene as if it is true now, then hear it whispered back']] as const;
 
 // Applied to faith-facing content, including future stories and chat.
 export function faithContentIssues(text: string): string[] {
