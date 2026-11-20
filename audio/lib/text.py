@@ -8,49 +8,25 @@ audio/pronunciations.json are respelled so the engine says them right (QUALITY.m
 """
 from __future__ import annotations
 
+import gzip
 import json
 import re
 import unicodedata
-import zipfile
 from pathlib import Path
 
 AUDIO = Path(__file__).resolve().parent.parent
 
-# (code in the eBible vpl files, English name, Spanish name). The 66-book Protestant canon in order;
-# the KJV file also carries the Apocrypha (1ES, TOB, ...), which is never voiced.
-BOOKS = [
-    ("GEN", "Genesis", "Génesis"), ("EXO", "Exodus", "Éxodo"), ("LEV", "Leviticus", "Levítico"),
-    ("NUM", "Numbers", "Números"), ("DEU", "Deuteronomy", "Deuteronomio"), ("JOS", "Joshua", "Josué"),
-    ("JDG", "Judges", "Jueces"), ("RUT", "Ruth", "Rut"), ("1SA", "First Samuel", "Primera de Samuel"),
-    ("2SA", "Second Samuel", "Segunda de Samuel"), ("1KI", "First Kings", "Primera de Reyes"),
-    ("2KI", "Second Kings", "Segunda de Reyes"), ("1CH", "First Chronicles", "Primera de Crónicas"),
-    ("2CH", "Second Chronicles", "Segunda de Crónicas"), ("EZR", "Ezra", "Esdras"),
-    ("NEH", "Nehemiah", "Nehemías"), ("EST", "Esther", "Ester"), ("JOB", "Job", "Job"),
-    ("PSA", "Psalms", "Salmos"), ("PRO", "Proverbs", "Proverbios"), ("ECC", "Ecclesiastes", "Eclesiastés"),
-    ("SOL", "Song of Solomon", "Cantares"), ("ISA", "Isaiah", "Isaías"), ("JER", "Jeremiah", "Jeremías"),
-    ("LAM", "Lamentations", "Lamentaciones"), ("EZE", "Ezekiel", "Ezequiel"), ("DAN", "Daniel", "Daniel"),
-    ("HOS", "Hosea", "Oseas"), ("JOE", "Joel", "Joel"), ("AMO", "Amos", "Amós"), ("OBA", "Obadiah", "Abdías"),
-    ("JON", "Jonah", "Jonás"), ("MIC", "Micah", "Miqueas"), ("NAH", "Nahum", "Nahúm"),
-    ("HAB", "Habakkuk", "Habacuc"), ("ZEP", "Zephaniah", "Sofonías"), ("HAG", "Haggai", "Hageo"),
-    ("ZEC", "Zechariah", "Zacarías"), ("MAL", "Malachi", "Malaquías"), ("MAT", "Matthew", "Mateo"),
-    ("MAR", "Mark", "Marcos"), ("LUK", "Luke", "Lucas"), ("JOH", "John", "Juan"), ("ACT", "Acts", "Hechos"),
-    ("ROM", "Romans", "Romanos"), ("1CO", "First Corinthians", "Primera de Corintios"),
-    ("2CO", "Second Corinthians", "Segunda de Corintios"), ("GAL", "Galatians", "Gálatas"),
-    ("EPH", "Ephesians", "Efesios"), ("PHI", "Philippians", "Filipenses"), ("COL", "Colossians", "Colosenses"),
-    ("1TH", "First Thessalonians", "Primera de Tesalonicenses"),
-    ("2TH", "Second Thessalonians", "Segunda de Tesalonicenses"), ("1TI", "First Timothy", "Primera de Timoteo"),
-    ("2TI", "Second Timothy", "Segunda de Timoteo"), ("TIT", "Titus", "Tito"), ("PHM", "Philemon", "Filemón"),
-    ("HEB", "Hebrews", "Hebreos"), ("JAM", "James", "Santiago"), ("1PE", "First Peter", "Primera de Pedro"),
-    ("2PE", "Second Peter", "Segunda de Pedro"), ("1JO", "First John", "Primera de Juan"),
-    ("2JO", "Second John", "Segunda de Juan"), ("3JO", "Third John", "Tercera de Juan"), ("JUD", "Jude", "Judas"),
-    ("REV", "Revelation", "Apocalipsis"),
-]
-CODES = [b[0] for b in BOOKS]
-NAME = {b[0]: {"en": b[1], "es": b[2]} for b in BOOKS}
+# The 66-book Protestant canon in order, shared with the app and the import script
+# (content/bible/books.json: eBible file code, USFM code, English and Spanish names).
+# The KJV file also carries the Apocrypha (1ES, TOB, ...), which is never voiced or imported.
+BOOKS = json.loads((AUDIO.parent / "content/bible/books.json").read_text("utf-8"))
+CODES = [b["code"] for b in BOOKS]
+NAME = {b["code"]: {"en": b["en"], "es": b["es"]} for b in BOOKS}
 
-# Where the stored text lives (the brief folder; override with PBS_SCRIPTURE_DIR).
-TRANSLATION = {"en": ("kjv", "kjv/kjv_vpl.zip", "eng-kjv_vpl.txt"),
-               "es": ("rv1909", "rv1909/spaRV1909_vpl.zip", "spaRV1909_vpl.txt")}
+# The one stored text: the committed eBible verse-per-line files, also read by the app's import
+# (scripts/import-bibles.py) and the Worker. TRANSLATION[lang][0] names the audio files.
+SCRIPTURE = AUDIO.parent / "content/bible"
+TRANSLATION = {"en": ("kjv", "kjv_vpl.txt.gz"), "es": ("rv1909", "rv1909_vpl.txt.gz")}
 
 VPL = re.compile(r"^([1-4A-Z]{3}) (\d+):(\d+) (.*)$")
 
@@ -67,10 +43,9 @@ def parse_vpl(lines) -> dict:
     return out
 
 
-def load_bible(lang: str, scripture_dir: Path) -> dict:
-    _, rel, member = TRANSLATION[lang]
-    with zipfile.ZipFile(scripture_dir / rel) as z:
-        return parse_vpl(z.read(member).decode("utf-8").splitlines())
+def load_bible(lang: str, scripture_dir: Path = SCRIPTURE) -> dict:
+    with gzip.open(scripture_dir / TRANSLATION[lang][1], "rt", encoding="utf-8") as f:
+        return parse_vpl(f)
 
 
 def load_pronunciations(path: Path | None = None) -> dict:
