@@ -1,21 +1,41 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import kjvSamples from './fixtures/KJV.json' with { type: 'json' };
-import rvSamples from './fixtures/RV1909.json' with { type: 'json' };
+import { readFileSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
+import { randomBytes } from 'node:crypto';
+import books from '../../content/bible/books.json' with { type: 'json' };
+import kjv from '../src/bible/KJV.json' with { type: 'json' };
+import rv1909 from '../src/bible/RV1909.json' with { type: 'json' };
 import { getVerse, getChapter, searchBible } from '../src/bible/index.js';
 import { FEATURES, canUse } from '../src/gates/index.js';
 import { resolveLanguage, translate } from '../src/i18n/index.js';
 import en from '../src/i18n/en.json' with { type: 'json' };
 import es from '../src/i18n/es.json' with { type: 'json' };
 
-for (const [translation, lines] of [['KJV', kjvSamples], ['RV1909', rvSamples]]) {
-  test(`${translation}: 200 reproducible random verses match the original archive`, () => {
-    assert.equal(lines.length, 200);
-    for (const line of lines) {
+for (const [translation, source, store] of [['KJV', 'kjv', kjv], ['RV1909', 'rv1909', rv1909]]) {
+  test(`${translation}: canonical store equals its archived source`, () => {
+    const codes = new Set(books.map(([code]) => code));
+    const raw = gunzipSync(readFileSync(new URL(`../../content/bible/${source}_vpl.txt.gz`, import.meta.url))).toString('utf8').replace(/^\uFEFF/, '');
+    const lines = raw.split(/\r?\n/).filter(Boolean).map(line => {
       const match = line.match(/^(\S+) (\d+):(\d+) (.*)$/);
       assert.ok(match, line);
-      assert.equal(getVerse(translation, match[1], +match[2], +match[3]), match[4]);
+      return match;
+    }).filter(match => codes.has(match[1]));
+    assert.deepEqual(new Set(Object.keys(store)), codes);
+    const count = Object.values(store).reduce((n, chapters) => n + Object.values(chapters).reduce((m, verses) => m + Object.keys(verses).length, 0), 0);
+    assert.equal(count, lines.length);
+    assert.ok(count > 30000);
+    for (const [, book, chapter, verse, text] of lines) assert.equal(getVerse(translation, book, +chapter, +verse), text);
+    const seed = randomBytes(4).readUInt32LE();
+    console.log(`${translation} random sample seed: ${seed}`);
+    let state = seed;
+    const shuffled = [...lines];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+      const j = state % (i + 1);
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
+    for (const [, book, chapter, verse, text] of shuffled.slice(0, 200)) assert.equal(getVerse(translation, book, +chapter, +verse), text);
   });
 }
 test('lookup, chapter and search return stored verses and reject unknown references', () => {

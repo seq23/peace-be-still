@@ -18,33 +18,7 @@ AUDIO = Path(__file__).resolve().parent.parent
 
 # (code in the eBible vpl files, English name, Spanish name). The 66-book Protestant canon in order;
 # the KJV file also carries the Apocrypha (1ES, TOB, ...), which is never voiced.
-BOOKS = [
-    ("GEN", "Genesis", "Génesis"), ("EXO", "Exodus", "Éxodo"), ("LEV", "Leviticus", "Levítico"),
-    ("NUM", "Numbers", "Números"), ("DEU", "Deuteronomy", "Deuteronomio"), ("JOS", "Joshua", "Josué"),
-    ("JDG", "Judges", "Jueces"), ("RUT", "Ruth", "Rut"), ("1SA", "First Samuel", "Primera de Samuel"),
-    ("2SA", "Second Samuel", "Segunda de Samuel"), ("1KI", "First Kings", "Primera de Reyes"),
-    ("2KI", "Second Kings", "Segunda de Reyes"), ("1CH", "First Chronicles", "Primera de Crónicas"),
-    ("2CH", "Second Chronicles", "Segunda de Crónicas"), ("EZR", "Ezra", "Esdras"),
-    ("NEH", "Nehemiah", "Nehemías"), ("EST", "Esther", "Ester"), ("JOB", "Job", "Job"),
-    ("PSA", "Psalms", "Salmos"), ("PRO", "Proverbs", "Proverbios"), ("ECC", "Ecclesiastes", "Eclesiastés"),
-    ("SOL", "Song of Solomon", "Cantares"), ("ISA", "Isaiah", "Isaías"), ("JER", "Jeremiah", "Jeremías"),
-    ("LAM", "Lamentations", "Lamentaciones"), ("EZE", "Ezekiel", "Ezequiel"), ("DAN", "Daniel", "Daniel"),
-    ("HOS", "Hosea", "Oseas"), ("JOE", "Joel", "Joel"), ("AMO", "Amos", "Amós"), ("OBA", "Obadiah", "Abdías"),
-    ("JON", "Jonah", "Jonás"), ("MIC", "Micah", "Miqueas"), ("NAH", "Nahum", "Nahúm"),
-    ("HAB", "Habakkuk", "Habacuc"), ("ZEP", "Zephaniah", "Sofonías"), ("HAG", "Haggai", "Hageo"),
-    ("ZEC", "Zechariah", "Zacarías"), ("MAL", "Malachi", "Malaquías"), ("MAT", "Matthew", "Mateo"),
-    ("MAR", "Mark", "Marcos"), ("LUK", "Luke", "Lucas"), ("JOH", "John", "Juan"), ("ACT", "Acts", "Hechos"),
-    ("ROM", "Romans", "Romanos"), ("1CO", "First Corinthians", "Primera de Corintios"),
-    ("2CO", "Second Corinthians", "Segunda de Corintios"), ("GAL", "Galatians", "Gálatas"),
-    ("EPH", "Ephesians", "Efesios"), ("PHI", "Philippians", "Filipenses"), ("COL", "Colossians", "Colosenses"),
-    ("1TH", "First Thessalonians", "Primera de Tesalonicenses"),
-    ("2TH", "Second Thessalonians", "Segunda de Tesalonicenses"), ("1TI", "First Timothy", "Primera de Timoteo"),
-    ("2TI", "Second Timothy", "Segunda de Timoteo"), ("TIT", "Titus", "Tito"), ("PHM", "Philemon", "Filemón"),
-    ("HEB", "Hebrews", "Hebreos"), ("JAM", "James", "Santiago"), ("1PE", "First Peter", "Primera de Pedro"),
-    ("2PE", "Second Peter", "Segunda de Pedro"), ("1JO", "First John", "Primera de Juan"),
-    ("2JO", "Second John", "Segunda de Juan"), ("3JO", "Third John", "Tercera de Juan"), ("JUD", "Jude", "Judas"),
-    ("REV", "Revelation", "Apocalipsis"),
-]
+BOOKS = json.loads((AUDIO.parent / "content/bible/books.json").read_text("utf-8"))
 CODES = [b[0] for b in BOOKS]
 NAME = {b[0]: {"en": b[1], "es": b[2]} for b in BOOKS}
 

@@ -1,22 +1,29 @@
 #!/usr/bin/env python3
-"""Build the bundled Bible indexes from the eBible verse-per-line archives."""
-import json, re, sys, zipfile
+"""Build the bundled Bible indexes from the committed eBible verse-per-line sources."""
+import gzip
+import json
+import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
-sources = Path(sys.argv[1]) if len(sys.argv) > 1 else Path.home() / 'Work/codex-briefs/peace-be-still'
-for name, archive, member in [('KJV', 'kjv/kjv_vpl.zip', 'eng-kjv_vpl.txt'), ('RV1909', 'rv1909/spaRV1909_vpl.zip', 'spaRV1909_vpl.txt')]:
+sys.path.insert(0, str(root))
+from audio.lib.text import CODES, parse_vpl
+
+for name, source in [('KJV', 'kjv'), ('RV1909', 'rv1909')]:
+    with gzip.open(root / 'content/bible' / f'{source}_vpl.txt.gz', 'rt', encoding='utf-8-sig') as f:
+        parsed = parse_vpl(f)
+    if set(parsed) != set(CODES):
+        raise ValueError(f'{name}: expected all 66 canonical books')
     books = {}
-    with zipfile.ZipFile(sources / archive) as z:
-        for line in z.read(member).decode('utf-8-sig').splitlines():
-            match = re.fullmatch(r'(\S+) (\d+):(\d+) (.*)', line)
-            if not match:
-                raise ValueError(f'{name}: invalid verse line: {line!r}')
-            book, chapter, verse, text = match.groups()
-            chapter_index = books.setdefault(book, {}).setdefault(chapter, {})
-            if verse in chapter_index:
-                raise ValueError(f'{name}: duplicate or empty verse {book} {chapter}:{verse}')
-            chapter_index[verse] = text
+    for book, chapters in parsed.items():
+        books[book] = {}
+        for chapter, verses in chapters.items():
+            index = {}
+            for verse, text in verses:
+                if str(verse) in index:
+                    raise ValueError(f'{name}: duplicate verse {book} {chapter}:{verse}')
+                index[str(verse)] = text
+            books[book][str(chapter)] = index
     if sum(len(c) for b in books.values() for c in b.values()) < 30000:
         raise ValueError(f'{name}: incomplete Bible')
     (root / 'app/src/bible' / f'{name}.json').write_text(json.dumps(books, ensure_ascii=False, separators=(',', ':')) + '\n')
