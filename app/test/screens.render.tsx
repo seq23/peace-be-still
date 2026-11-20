@@ -506,6 +506,9 @@ test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor 
   const psalmShelf = host(tree, 'Pressable').find(node => textOf(node).startsWith(en['journey.psalmNights.name'] + ' '));
   const count = audioTracks.filter(track => track.kind === 'psalms' && track.lang === 'en').length;
   assert.ok(psalmShelf && textOf(psalmShelf).includes(i18n.t('listen.whisperedNights', { locale: 'en', count })));
+  const cardRow = psalmShelf.findAll(node => (node.type as unknown) === 'View' && node.props.style?.flexDirection === 'row')[0];
+  assert.ok(cardRow, 'The shelf details and chevron should share a horizontal row');
+  assert.ok(textOf(cardRow).endsWith(' ›'));
   assert.equal(psalmShelf.props['aria-expanded'], false);
   await press(tree, en['journey.psalmNights.name']);
   assert.equal(psalmShelf.props['aria-expanded'], true);
@@ -526,8 +529,9 @@ test('an unpublished manifest row is marked in the shelf and cannot play from a 
   const person = { ...base, journey: 'psalm-nights' };
   const shelf = await mount('nights', person);
   await press(shelf, en['journey.psalmNights.name']);
-  const row = host(shelf, 'Pressable').find(node => textOf(node).startsWith(trackTitle(track, 'en') + ' '));
-  assert.ok(row && textOf(row).includes(en['listen.notReady']));
+  const title = trackTitle(track, 'en');
+  assert.ok(host(shelf, 'View').some(node => textOf(node) === `${title} ${en['listen.notReady']}`));
+  assert.ok(!host(shelf, 'Pressable').some(node => textOf(node).includes(title + ' ') || textOf(node) === title));
   const player = testPlayer(track);
   const screen = await mount('listen', person, { track: track.sha256 });
   try {
@@ -604,6 +608,8 @@ test('Now Playing restores a saved position and renders pause, continue and the 
     assert.ok(strings(tree).includes('Psalm 23:2 · KJV'));
     assert.ok(texts(tree).includes(en['listen.psalmAllowance']));
     assert.ok(texts(tree).includes('0:12'));
+    assert.ok(texts(tree).includes(`${Math.floor(track.seconds / 60)}:${String(Math.floor(track.seconds % 60)).padStart(2, '0')}`));
+    assert.ok(texts(tree).includes(i18n.t('listen.timerSummary', { locale: 'en', setting: en['listen.timerOff'] })));
     await press(tree, '+15');
     assert.equal(player.position(), 27);
     assert.ok(texts(tree).includes('0:27'));

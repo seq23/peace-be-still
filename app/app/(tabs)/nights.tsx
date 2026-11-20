@@ -6,6 +6,7 @@ import { tracks } from '../../src/player/usePlayer';
 import { trackTitle, type Track } from '../../src/player/library';
 import { byChapter, groupBible, shelfOf, trackBelongsToDoor } from '../../src/screens/listen/catalog';
 import { usePublishedAudio } from '../../src/screens/listen/availability';
+import { downloadAvailable, useOffline } from '../../src/screens/listen/offline';
 import { Body, Card, Chevron, Label, Screen, styles, Title } from '../../src/ui';
 
 export default function Nights() {
@@ -13,7 +14,7 @@ export default function Nights() {
   const t = useT('journey');
   const router = useRouter();
   const published = usePublishedAudio();
-  const ready = (track: Track) => published?.get(track.file) === track.sha256;
+  const user = useOffline(settings.age);
   const visible = tracks.filter(track => track.lang === t.locale && trackBelongsToDoor(track, settings.door));
   const psalms = visible.filter(track => shelfOf(track) === 'psalms').sort(byChapter);
   const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), t.locale);
@@ -21,14 +22,16 @@ export default function Nights() {
   const imagination = visible.filter(track => shelfOf(track) === 'imagination');
 
   function row(track: Track) {
+    const playable = published?.get(track.file) === track.sha256 || downloadAvailable(track, user);
+    const open = playable ? () => router.push({ pathname: '/listen/[track]', params: { track: track.sha256 } }) : undefined;
     return (
-      <Card key={track.file} onPress={() => router.push({ pathname: '/listen/[track]', params: { track: track.sha256 } })}>
+      <Card key={track.file} onPress={open}>
         <View style={styles.row}>
           <View style={styles.grow}>
             <Body muted={false}>{trackTitle(track, t.locale)}</Body>
-            {!ready(track) && <Body size={14}>{t('listen.notReady')}</Body>}
+            {!playable && <Body size={14}>{t('listen.notReady')}</Body>}
           </View>
-          <Chevron />
+          {playable && <Chevron />}
         </View>
       </Card>
     );
