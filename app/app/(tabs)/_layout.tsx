@@ -1,9 +1,9 @@
 // The tab bar (expo-router Tabs) follows the door and the age: tabsFor() hides Chat under 13 and Bible on
 // the Mindset door. Inside the tabs the journey's language applies (Mi Refugio is Spanish).
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { tabsFor, type Tab } from '../../src/model';
+import { onboarded, startRoute, tabsFor, type Tab } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { TabIcon } from '../../src/ui/art';
 import { usePalette } from '../../src/ui';
@@ -17,6 +17,8 @@ export default function TabsLayout() {
   const c = usePalette();
   const shown = tabsFor(settings);
   const insets = useSafeAreaInsets();
+  // The tabs exist only once onboarding is done; a deep link before that goes to the first unfinished step.
+  if (!onboarded(settings)) return <Redirect href={startRoute(settings)} />;
   return (
     <Tabs screenOptions={{
       headerShown: false,

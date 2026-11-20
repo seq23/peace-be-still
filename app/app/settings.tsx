@@ -1,8 +1,8 @@
 // Settings, pushed from More. App-level, so it follows the app language even inside Mi Refugio.
-import { useRouter } from 'expo-router';
+import { Redirect, useRouter } from 'expo-router';
 import React from 'react';
 import { Switch, Text, View } from 'react-native';
-import { voicesFor, type Language, type Voice } from '../src/model';
+import { onboarded, startRoute, voicesFor, type Language, type Voice } from '../src/model';
 import { useSettings, useT } from '../src/settings';
 import { BackLink, Body, Card, Chevron, Label, Screen, Title, styles, usePalette } from '../src/ui';
 import { fonts } from '../src/theme/tokens';
@@ -13,6 +13,7 @@ export default function SettingsScreen() {
   const c = usePalette();
   const router = useRouter();
   const voices = voicesFor(settings.age);
+  if (!onboarded(settings)) return <Redirect href={startRoute(settings)} />;
 
   const radio = (key: string, text: string, selected: boolean, onPress: () => void) => (
     <Card key={key} role="radio" selected={selected} onPress={onPress} label={text} style={{ paddingVertical: 14 }}>

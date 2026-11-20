@@ -1,5 +1,5 @@
-// Root: fonts, the person's saved choices, and the stack. The tabs and Settings exist only once onboarding is
-// finished (Stack.Protected), so a deep link before that lands on the first unfinished step via the index.
+// Root: fonts, the person's saved choices, and the stack. The tabs layout and Settings send anyone who has not
+// finished onboarding to the first unfinished step, so a deep link never skips the door or the birth year.
 import { Figtree_400Regular, Figtree_600SemiBold } from '@expo-google-fonts/figtree';
 import { LibreCaslonText_400Regular } from '@expo-google-fonts/libre-caslon-text';
 import { SplineSansMono_500Medium } from '@expo-google-fonts/spline-sans-mono';
@@ -9,7 +9,6 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { configureRevenueCat } from '../src/billing/revenuecat';
-import { onboarded } from '../src/model';
 import { SettingsProvider, useSettings, useT } from '../src/settings';
 import { Body, Screen, usePalette } from '../src/ui';
 import { fonts } from '../src/theme/tokens';
@@ -28,7 +27,7 @@ export default function RootLayout() {
 }
 
 export function Root({ fontsLoaded }: { fontsLoaded: boolean }) {
-  const { settings, ready, readFailed, saveFailed } = useSettings();
+  const { ready, readFailed, saveFailed } = useSettings();
   const t = useT();
   const c = usePalette();
   if (!ready || !fontsLoaded) return <View style={{ flex: 1, backgroundColor: c.bg, justifyContent: 'center' }}><ActivityIndicator color={c.accent} /></View>;
@@ -41,13 +40,7 @@ export function Root({ fontsLoaded }: { fontsLoaded: boolean }) {
           <Text accessibilityRole="alert" style={{ color: c.on, padding: 12, textAlign: 'center', fontFamily: fonts.body }}>{t('error.save')}</Text>
         </SafeAreaView>
       ) : null}
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: c.bg } }}>
-        <Stack.Screen name="index" />
-        <Stack.Protected guard={onboarded(settings)}>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="settings" />
-        </Stack.Protected>
-      </Stack>
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: c.bg } }} />
     </View>
   );
 }

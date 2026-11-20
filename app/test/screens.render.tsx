@@ -98,18 +98,12 @@ test('a returning person opens where they left off', async () => {
   }
 });
 
-test('the tabs and Settings exist only once onboarding is done, so a deep link before then goes to the door', async () => {
-  const guard = async (value: object | null) => {
-    saved = value ? JSON.stringify(value) : null;
-    let tree!: ReactTestRenderer;
-    await act(async () => { tree = create(<SettingsProvider><screens.root.Root fontsLoaded /></SettingsProvider>); });
-    const protectedGroup = host(tree, 'Stack.Protected')[0];
-    assert.deepEqual(protectedGroup.findAll(n => (n.type as unknown) === 'Stack.Screen').map(n => n.props.name), ['(tabs)', 'settings']);
-    return protectedGroup.props.guard;
-  };
-  assert.equal(await guard(null), false);
-  assert.equal(await guard(base), false);
-  assert.equal(await guard({ ...base, journey: 'psalm-nights' }), true);
+test('the tabs and Settings open only once onboarding is done; a deep link before then goes to the first unfinished step', async () => {
+  for (const name of ['tabs', 'settings'] as const) {
+    assert.equal(host(await mount(name, null), 'Redirect')[0]?.props.href, '/door', name);
+    assert.equal(host(await mount(name, base), 'Redirect')[0]?.props.href, '/journeys', name);
+    assert.equal(host(await mount(name, { ...base, journey: 'psalm-nights' }), 'Redirect').length, 0, name);
+  }
 });
 
 test('a font that fails to load (a slow phone) never holds the app on the spinner', async () => {
