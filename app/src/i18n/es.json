@@ -90,8 +90,6 @@
   "error.read": "No se pudieron leer tus ajustes guardados. Cierra y vuelve a abrir la aplicación para intentarlo de nuevo.",
   "notFound.title": "No encontramos esta página.",
   "notFound.link": "Ir a Hoy",
-  "greeting.morning": "Buenos días.",
-  "greeting.afternoon": "Buenas tardes.",
   "reader.kjv": "King James Version",
   "reader.rv": "Reina-Valera 1909",
   "reader.read": "Leer el capítulo",

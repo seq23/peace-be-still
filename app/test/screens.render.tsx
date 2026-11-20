@@ -429,7 +429,7 @@ test('the God\'s Word gate fails a screen when a banned word reaches its data', 
 
 test('Spanish screens show no English: no rendered text is an English string that has a Spanish one', async () => {
   // Names that stay as they are in Spanish: the app, the journeys, the language picker's own names.
-  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Psalm Nights', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)', 'Reina-Valera 1909', 'King James Version']);
+  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)', 'Reina-Valera 1909', 'King James Version']);
   const english = new Set(Object.values(en).flatMap(v => typeof v === 'string' ? [v] : Object.values(v as object) as string[]).filter(v => !sameInBoth.has(v)));
   const people = [
     { ...base, language: 'es', journey: 'psalm-nights' }, { ...base, language: 'es', door: 'mindset', journey: 'imagination-nights' },
