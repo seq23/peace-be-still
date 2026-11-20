@@ -211,6 +211,13 @@ describe('the ladder', () => {
     expect(r.body.kind).toBe('answer');
     expect(rung.calls[1].some(m => m.content.includes('outcome promise'))).toBe(true);
   });
+  it('two refused drafts, then a good third: she gets the answer, not the fallback (RT01 live)', async () => {
+    const promise = { text: 'God will heal you by Friday.', references: [] };
+    const rung = scripted('workers-ai', [promise, promise, good()]);
+    const r = await chat(deps({ rungList: [rung.rung] }), 'pray for my back');
+    expect(r.body.kind).toBe('answer');
+    expect(rung.calls.length).toBe(3);
+  });
   it('the judge can fail an answer the code floor passed', async () => {
     const rung = scripted('workers-ai', [good(), good()]);
     const r = await chat(deps({ rungList: [rung.rung], judge: async () => ({ verdict: 'fail', which: ['prophecy'], voice: 5 }) }), 'hello');

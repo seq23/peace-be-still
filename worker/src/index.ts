@@ -70,6 +70,7 @@ const OBJECTIONS: Record<string, string> = {
 };
 const objectionText = (p: string) => OBJECTIONS[p] ?? `Problem: ${p.replace(/^judge:/, '').replace(/_/g, ' ')}.`;
 
+const ANSWER_TRIES = 3;
 const int = (value: string, fallback: number) => { const n = Number.parseInt(value, 10); return Number.isSafeInteger(n) && n > 0 ? n : fallback; };
 const json = (body: unknown, status = 200) => Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
 const fail = (code: string, status: number) => { logCode(code); return json({ error: code }, status); };
@@ -267,7 +268,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const herWords = turns.filter(t => t.role === 'user').map(t => t.text).join('\n');
 
   let objection: string | null = null;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  // Three tries, then the fallback verse. Measured round 3: with two tries 4 of 45 answers fell back
+  // (grief, a teen's dating question, translation requests), each refused on a fixable point.
+  for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
     const messages = objection ? [...system, { role: 'system' as const, content: `Your last answer was not used. ${objection} Write a new answer.` }, ...history] : [...system, ...history];
     const out = await runLadder(env.DB, rungs, messages, answerSchema, 700, metrics, isAnswer);
     if ('empty' in out) {

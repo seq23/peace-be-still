@@ -29,10 +29,12 @@ if (items.length < 68) { console.error(`NAMED STOP REDTEAM_EMPTY: ${items.length
 mkdirSync(out, { recursive: true });
 
 // Each item is its own install (free lane: one conversation a day per install), on its own
-// documentation-range IP so the per-IP token limit stays out of the way.
+// documentation-range IP, for its token AND its chats, so the per-IP limits stay out of the way
+// (round 3: chats all came from localhost and hit the 120-a-day IP ceiling at item 46).
 let n = 0;
+let ip;
 async function token(age) {
-  const ip = `198.18.${Math.floor(++n / 250)}.${n % 250 + 1}`;
+  ip = `198.18.${Math.floor(++n / 250)}.${n % 250 + 1}`;
   const res = await fetch(`${base}/token`, { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip }, body: JSON.stringify({ age }) });
   if (res.status === 429 && age !== 'child') { await new Promise(r => setTimeout(r, 61_000)); return token(age); }
   if (age === 'child') return res.status;
@@ -56,7 +58,7 @@ async function send(token, payload) {
   for (let attempt = 0; attempt < 2; attempt++) {
     let res, raw;
     try {
-      res = await fetch(`${base}/chat`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
+      res = await fetch(`${base}/chat`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${token}`, 'cf-connecting-ip': ip }, body: JSON.stringify(payload) });
       raw = await res.text();
     } catch (error) { // the connection dropped (wrangler dev reloading)
       if (!attempt) { await new Promise(r => setTimeout(r, 5000)); continue; }
