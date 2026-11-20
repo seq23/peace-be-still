@@ -104,3 +104,13 @@ test('faith gate catches a prohibited word in rendered text', async () => {
  await act(async () => { tree = create(React.createElement('Text', null, 'manifesting')); });
  assert.ok(faithContentIssues(strings(tree)).length > 0);
 });
+
+
+test('opening a placeholder does not replace the selected journey', async () => {
+ const tree = await mount({ ...base, journey: 'Psalm Nights' });
+ await press(tree, 'Today'); await press(tree, 'Back home');
+ await press(tree, 'Choose another');
+ assert.ok(tree.root.findAllByType('Pressable' as any).some(n => n.props.accessibilityRole === 'radio' && n.props.accessibilityState.checked && n.findAllByType('Text' as any).some(t => t.children.join('').includes('Psalm Nights'))));
+ await press(tree, 'Start Psalm Nights');
+ assert.equal(JSON.parse(saved!).journey, 'Psalm Nights');
+});

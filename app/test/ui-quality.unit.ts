@@ -33,3 +33,11 @@ test('app copy and icon names avoid prohibited marks and automatic design tells'
   }
   assert.ok(examined > 0);
 });
+
+
+test('every English translation key has a Spanish translation', () => {
+  const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, string>;
+  const es = JSON.parse(readFileSync('src/i18n/es.json', 'utf8')) as Record<string, string>;
+  assert.ok(Object.keys(en).length > 0);
+  for (const key of Object.keys(en)) assert.ok(typeof es[key] === 'string' && es[key].trim(), `Missing Spanish translation: ${key}`);
+});
