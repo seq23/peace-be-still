@@ -8,23 +8,25 @@ audio/pronunciations.json are respelled so the engine says them right (QUALITY.m
 """
 from __future__ import annotations
 
+import gzip
 import json
 import re
 import unicodedata
-import zipfile
 from pathlib import Path
 
 AUDIO = Path(__file__).resolve().parent.parent
 
-# (code in the eBible vpl files, English name, Spanish name). The 66-book Protestant canon in order;
-# the KJV file also carries the Apocrypha (1ES, TOB, ...), which is never voiced.
+# The 66-book Protestant canon in order, shared with the app and the import script
+# (content/bible/books.json: eBible file code, USFM code, English and Spanish names).
+# The KJV file also carries the Apocrypha (1ES, TOB, ...), which is never voiced or imported.
 BOOKS = json.loads((AUDIO.parent / "content/bible/books.json").read_text("utf-8"))
-CODES = [b[0] for b in BOOKS]
-NAME = {b[0]: {"en": b[1], "es": b[2]} for b in BOOKS}
+CODES = [b["code"] for b in BOOKS]
+NAME = {b["code"]: {"en": b["en"], "es": b["es"]} for b in BOOKS}
 
-# Where the stored text lives (the brief folder; override with PBS_SCRIPTURE_DIR).
-TRANSLATION = {"en": ("kjv", "kjv/kjv_vpl.zip", "eng-kjv_vpl.txt"),
-               "es": ("rv1909", "rv1909/spaRV1909_vpl.zip", "spaRV1909_vpl.txt")}
+# The one stored text: the committed eBible verse-per-line files, also read by the app's import
+# (scripts/import-bibles.py) and the Worker. TRANSLATION[lang][0] names the audio files.
+SCRIPTURE = AUDIO.parent / "content/bible"
+TRANSLATION = {"en": ("kjv", "kjv_vpl.txt.gz"), "es": ("rv1909", "rv1909_vpl.txt.gz")}
 
 VPL = re.compile(r"^([1-4A-Z]{3}) (\d+):(\d+) (.*)$")
 
@@ -41,10 +43,9 @@ def parse_vpl(lines) -> dict:
     return out
 
 
-def load_bible(lang: str, scripture_dir: Path) -> dict:
-    _, rel, member = TRANSLATION[lang]
-    with zipfile.ZipFile(scripture_dir / rel) as z:
-        return parse_vpl(z.read(member).decode("utf-8").splitlines())
+def load_bible(lang: str, scripture_dir: Path = SCRIPTURE) -> dict:
+    with gzip.open(scripture_dir / TRANSLATION[lang][1], "rt", encoding="utf-8") as f:
+        return parse_vpl(f)
 
 
 def load_pronunciations(path: Path | None = None) -> dict:

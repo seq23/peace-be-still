@@ -75,5 +75,10 @@
   "Imagination Nights will be here.": "Imagination Nights will be here.",
   "Your saved items and settings.": "Your saved items and settings.",
   "With God's Word": "With God's Word",
-  "With mindset & imagination": "With mindset & imagination"
+  "With mindset & imagination": "With mindset & imagination",
+  "Start %{name}": "Start %{name}",
+  "%{count} of %{limit} messages left today": {
+    "one": "%{count} of %{limit} messages left today",
+    "other": "%{count} of %{limit} messages left today"
+  }
 }

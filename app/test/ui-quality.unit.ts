@@ -36,8 +36,14 @@ test('app copy and icon names avoid prohibited marks and automatic design tells'
 
 
 test('every English translation key has a Spanish translation', () => {
-  const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, string>;
-  const es = JSON.parse(readFileSync('src/i18n/es.json', 'utf8')) as Record<string, string>;
+  type Entry = string | Record<string, string>;
+  const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, Entry>;
+  const es = JSON.parse(readFileSync('src/i18n/es.json', 'utf8')) as Record<string, Entry>;
+  // A plural entry is { one, other }: both languages need both forms.
+  const forms = (entry: Entry | undefined) => typeof entry === 'string' ? [entry] : entry && typeof entry === 'object' ? [entry.one, entry.other] : [undefined];
   assert.ok(Object.keys(en).length > 0);
-  for (const key of Object.keys(en)) assert.ok(typeof es[key] === 'string' && es[key].trim(), `Missing Spanish translation: ${key}`);
+  for (const key of Object.keys(en)) {
+    assert.equal(typeof es[key], typeof en[key], `Spanish entry has a different shape: ${key}`);
+    for (const value of [...forms(en[key]), ...forms(es[key])]) assert.ok(typeof value === 'string' && value.trim(), `Missing translation: ${key}`);
+  }
 });

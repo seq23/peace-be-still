@@ -21,6 +21,8 @@
     "expo-localization": "~58.0.5",
     "expo-router": "~58.0.29",
     "expo-splash-screen": "~58.0.13",
+    "expo-sqlite": "~58.0.18",
+    "i18n-js": "^4.5.4",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-native": "0.88.1",

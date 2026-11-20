@@ -1,332 +1,68 @@
 [
-  [
-    "GEN",
-    "Genesis",
-    "Génesis"
-  ],
-  [
-    "EXO",
-    "Exodus",
-    "Éxodo"
-  ],
-  [
-    "LEV",
-    "Leviticus",
-    "Levítico"
-  ],
-  [
-    "NUM",
-    "Numbers",
-    "Números"
-  ],
-  [
-    "DEU",
-    "Deuteronomy",
-    "Deuteronomio"
-  ],
-  [
-    "JOS",
-    "Joshua",
-    "Josué"
-  ],
-  [
-    "JDG",
-    "Judges",
-    "Jueces"
-  ],
-  [
-    "RUT",
-    "Ruth",
-    "Rut"
-  ],
-  [
-    "1SA",
-    "First Samuel",
-    "Primera de Samuel"
-  ],
-  [
-    "2SA",
-    "Second Samuel",
-    "Segunda de Samuel"
-  ],
-  [
-    "1KI",
-    "First Kings",
-    "Primera de Reyes"
-  ],
-  [
-    "2KI",
-    "Second Kings",
-    "Segunda de Reyes"
-  ],
-  [
-    "1CH",
-    "First Chronicles",
-    "Primera de Crónicas"
-  ],
-  [
-    "2CH",
-    "Second Chronicles",
-    "Segunda de Crónicas"
-  ],
-  [
-    "EZR",
-    "Ezra",
-    "Esdras"
-  ],
-  [
-    "NEH",
-    "Nehemiah",
-    "Nehemías"
-  ],
-  [
-    "EST",
-    "Esther",
-    "Ester"
-  ],
-  [
-    "JOB",
-    "Job",
-    "Job"
-  ],
-  [
-    "PSA",
-    "Psalms",
-    "Salmos"
-  ],
-  [
-    "PRO",
-    "Proverbs",
-    "Proverbios"
-  ],
-  [
-    "ECC",
-    "Ecclesiastes",
-    "Eclesiastés"
-  ],
-  [
-    "SOL",
-    "Song of Solomon",
-    "Cantares"
-  ],
-  [
-    "ISA",
-    "Isaiah",
-    "Isaías"
-  ],
-  [
-    "JER",
-    "Jeremiah",
-    "Jeremías"
-  ],
-  [
-    "LAM",
-    "Lamentations",
-    "Lamentaciones"
-  ],
-  [
-    "EZE",
-    "Ezekiel",
-    "Ezequiel"
-  ],
-  [
-    "DAN",
-    "Daniel",
-    "Daniel"
-  ],
-  [
-    "HOS",
-    "Hosea",
-    "Oseas"
-  ],
-  [
-    "JOE",
-    "Joel",
-    "Joel"
-  ],
-  [
-    "AMO",
-    "Amos",
-    "Amós"
-  ],
-  [
-    "OBA",
-    "Obadiah",
-    "Abdías"
-  ],
-  [
-    "JON",
-    "Jonah",
-    "Jonás"
-  ],
-  [
-    "MIC",
-    "Micah",
-    "Miqueas"
-  ],
-  [
-    "NAH",
-    "Nahum",
-    "Nahúm"
-  ],
-  [
-    "HAB",
-    "Habakkuk",
-    "Habacuc"
-  ],
-  [
-    "ZEP",
-    "Zephaniah",
-    "Sofonías"
-  ],
-  [
-    "HAG",
-    "Haggai",
-    "Hageo"
-  ],
-  [
-    "ZEC",
-    "Zechariah",
-    "Zacarías"
-  ],
-  [
-    "MAL",
-    "Malachi",
-    "Malaquías"
-  ],
-  [
-    "MAT",
-    "Matthew",
-    "Mateo"
-  ],
-  [
-    "MAR",
-    "Mark",
-    "Marcos"
-  ],
-  [
-    "LUK",
-    "Luke",
-    "Lucas"
-  ],
-  [
-    "JOH",
-    "John",
-    "Juan"
-  ],
-  [
-    "ACT",
-    "Acts",
-    "Hechos"
-  ],
-  [
-    "ROM",
-    "Romans",
-    "Romanos"
-  ],
-  [
-    "1CO",
-    "First Corinthians",
-    "Primera de Corintios"
-  ],
-  [
-    "2CO",
-    "Second Corinthians",
-    "Segunda de Corintios"
-  ],
-  [
-    "GAL",
-    "Galatians",
-    "Gálatas"
-  ],
-  [
-    "EPH",
-    "Ephesians",
-    "Efesios"
-  ],
-  [
-    "PHI",
-    "Philippians",
-    "Filipenses"
-  ],
-  [
-    "COL",
-    "Colossians",
-    "Colosenses"
-  ],
-  [
-    "1TH",
-    "First Thessalonians",
-    "Primera de Tesalonicenses"
-  ],
-  [
-    "2TH",
-    "Second Thessalonians",
-    "Segunda de Tesalonicenses"
-  ],
-  [
-    "1TI",
-    "First Timothy",
-    "Primera de Timoteo"
-  ],
-  [
-    "2TI",
-    "Second Timothy",
-    "Segunda de Timoteo"
-  ],
-  [
-    "TIT",
-    "Titus",
-    "Tito"
-  ],
-  [
-    "PHM",
-    "Philemon",
-    "Filemón"
-  ],
-  [
-    "HEB",
-    "Hebrews",
-    "Hebreos"
-  ],
-  [
-    "JAM",
-    "James",
-    "Santiago"
-  ],
-  [
-    "1PE",
-    "First Peter",
-    "Primera de Pedro"
-  ],
-  [
-    "2PE",
-    "Second Peter",
-    "Segunda de Pedro"
-  ],
-  [
-    "1JO",
-    "First John",
-    "Primera de Juan"
-  ],
-  [
-    "2JO",
-    "Second John",
-    "Segunda de Juan"
-  ],
-  [
-    "3JO",
-    "Third John",
-    "Tercera de Juan"
-  ],
-  [
-    "JUD",
-    "Jude",
-    "Judas"
-  ],
-  [
-    "REV",
-    "Revelation",
-    "Apocalipsis"
-  ]
+  {"code": "GEN", "usfm": "GEN", "en": "Genesis", "es": "Génesis"},
+  {"code": "EXO", "usfm": "EXO", "en": "Exodus", "es": "Éxodo"},
+  {"code": "LEV", "usfm": "LEV", "en": "Leviticus", "es": "Levítico"},
+  {"code": "NUM", "usfm": "NUM", "en": "Numbers", "es": "Números"},
+  {"code": "DEU", "usfm": "DEU", "en": "Deuteronomy", "es": "Deuteronomio"},
+  {"code": "JOS", "usfm": "JOS", "en": "Joshua", "es": "Josué"},
+  {"code": "JDG", "usfm": "JDG", "en": "Judges", "es": "Jueces"},
+  {"code": "RUT", "usfm": "RUT", "en": "Ruth", "es": "Rut"},
+  {"code": "1SA", "usfm": "1SA", "en": "First Samuel", "es": "Primera de Samuel"},
+  {"code": "2SA", "usfm": "2SA", "en": "Second Samuel", "es": "Segunda de Samuel"},
+  {"code": "1KI", "usfm": "1KI", "en": "First Kings", "es": "Primera de Reyes"},
+  {"code": "2KI", "usfm": "2KI", "en": "Second Kings", "es": "Segunda de Reyes"},
+  {"code": "1CH", "usfm": "1CH", "en": "First Chronicles", "es": "Primera de Crónicas"},
+  {"code": "2CH", "usfm": "2CH", "en": "Second Chronicles", "es": "Segunda de Crónicas"},
+  {"code": "EZR", "usfm": "EZR", "en": "Ezra", "es": "Esdras"},
+  {"code": "NEH", "usfm": "NEH", "en": "Nehemiah", "es": "Nehemías"},
+  {"code": "EST", "usfm": "EST", "en": "Esther", "es": "Ester"},
+  {"code": "JOB", "usfm": "JOB", "en": "Job", "es": "Job"},
+  {"code": "PSA", "usfm": "PSA", "en": "Psalms", "es": "Salmos", "aliases": ["Psalm", "Salmo"]},
+  {"code": "PRO", "usfm": "PRO", "en": "Proverbs", "es": "Proverbios"},
+  {"code": "ECC", "usfm": "ECC", "en": "Ecclesiastes", "es": "Eclesiastés"},
+  {"code": "SOL", "usfm": "SNG", "en": "Song of Solomon", "es": "Cantares", "aliases": ["Song of Songs", "Cantar de los Cantares"]},
+  {"code": "ISA", "usfm": "ISA", "en": "Isaiah", "es": "Isaías"},
+  {"code": "JER", "usfm": "JER", "en": "Jeremiah", "es": "Jeremías"},
+  {"code": "LAM", "usfm": "LAM", "en": "Lamentations", "es": "Lamentaciones"},
+  {"code": "EZE", "usfm": "EZK", "en": "Ezekiel", "es": "Ezequiel"},
+  {"code": "DAN", "usfm": "DAN", "en": "Daniel", "es": "Daniel"},
+  {"code": "HOS", "usfm": "HOS", "en": "Hosea", "es": "Oseas"},
+  {"code": "JOE", "usfm": "JOL", "en": "Joel", "es": "Joel"},
+  {"code": "AMO", "usfm": "AMO", "en": "Amos", "es": "Amós"},
+  {"code": "OBA", "usfm": "OBA", "en": "Obadiah", "es": "Abdías"},
+  {"code": "JON", "usfm": "JON", "en": "Jonah", "es": "Jonás"},
+  {"code": "MIC", "usfm": "MIC", "en": "Micah", "es": "Miqueas"},
+  {"code": "NAH", "usfm": "NAM", "en": "Nahum", "es": "Nahúm"},
+  {"code": "HAB", "usfm": "HAB", "en": "Habakkuk", "es": "Habacuc"},
+  {"code": "ZEP", "usfm": "ZEP", "en": "Zephaniah", "es": "Sofonías"},
+  {"code": "HAG", "usfm": "HAG", "en": "Haggai", "es": "Hageo"},
+  {"code": "ZEC", "usfm": "ZEC", "en": "Zechariah", "es": "Zacarías"},
+  {"code": "MAL", "usfm": "MAL", "en": "Malachi", "es": "Malaquías"},
+  {"code": "MAT", "usfm": "MAT", "en": "Matthew", "es": "Mateo"},
+  {"code": "MAR", "usfm": "MRK", "en": "Mark", "es": "Marcos"},
+  {"code": "LUK", "usfm": "LUK", "en": "Luke", "es": "Lucas"},
+  {"code": "JOH", "usfm": "JHN", "en": "John", "es": "Juan"},
+  {"code": "ACT", "usfm": "ACT", "en": "Acts", "es": "Hechos"},
+  {"code": "ROM", "usfm": "ROM", "en": "Romans", "es": "Romanos"},
+  {"code": "1CO", "usfm": "1CO", "en": "First Corinthians", "es": "Primera de Corintios"},
+  {"code": "2CO", "usfm": "2CO", "en": "Second Corinthians", "es": "Segunda de Corintios"},
+  {"code": "GAL", "usfm": "GAL", "en": "Galatians", "es": "Gálatas"},
+  {"code": "EPH", "usfm": "EPH", "en": "Ephesians", "es": "Efesios"},
+  {"code": "PHI", "usfm": "PHP", "en": "Philippians", "es": "Filipenses"},
+  {"code": "COL", "usfm": "COL", "en": "Colossians", "es": "Colosenses"},
+  {"code": "1TH", "usfm": "1TH", "en": "First Thessalonians", "es": "Primera de Tesalonicenses"},
+  {"code": "2TH", "usfm": "2TH", "en": "Second Thessalonians", "es": "Segunda de Tesalonicenses"},
+  {"code": "1TI", "usfm": "1TI", "en": "First Timothy", "es": "Primera de Timoteo"},
+  {"code": "2TI", "usfm": "2TI", "en": "Second Timothy", "es": "Segunda de Timoteo"},
+  {"code": "TIT", "usfm": "TIT", "en": "Titus", "es": "Tito"},
+  {"code": "PHM", "usfm": "PHM", "en": "Philemon", "es": "Filemón"},
+  {"code": "HEB", "usfm": "HEB", "en": "Hebrews", "es": "Hebreos"},
+  {"code": "JAM", "usfm": "JAS", "en": "James", "es": "Santiago"},
+  {"code": "1PE", "usfm": "1PE", "en": "First Peter", "es": "Primera de Pedro"},
+  {"code": "2PE", "usfm": "2PE", "en": "Second Peter", "es": "Segunda de Pedro"},
+  {"code": "1JO", "usfm": "1JN", "en": "First John", "es": "Primera de Juan"},
+  {"code": "2JO", "usfm": "2JN", "en": "Second John", "es": "Segunda de Juan"},
+  {"code": "3JO", "usfm": "3JN", "en": "Third John", "es": "Tercera de Juan"},
+  {"code": "JUD", "usfm": "JUD", "en": "Jude", "es": "Judas"},
+  {"code": "REV", "usfm": "REV", "en": "Revelation", "es": "Apocalipsis", "aliases": ["Revelations"]}
 ]
