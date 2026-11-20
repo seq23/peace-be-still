@@ -50,12 +50,18 @@ const checks = {
   says_ai: r => /\bAI\b|\bIA\b/.test(r.text ?? ''),
   lang_es: r => !/\b(the|and|you|your|with|is)\b/i.test(r.text ?? ''),
 };
-// One chat call. A reply that is not JSON (wrangler dev reloading, a crash) is retried once after
+// One chat call. A dropped connection or a reply that is not JSON (wrangler dev reloading, a crash) is retried once after
 // 5 s and then recorded as a failed item, never a crash of the whole run.
 async function send(token, payload) {
   for (let attempt = 0; attempt < 2; attempt++) {
-    const res = await fetch(`${base}/chat`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
-    const raw = await res.text();
+    let res, raw;
+    try {
+      res = await fetch(`${base}/chat`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
+      raw = await res.text();
+    } catch (error) { // the connection dropped (wrangler dev reloading)
+      if (!attempt) { await new Promise(r => setTimeout(r, 5000)); continue; }
+      return { status: 0, kind: 'network_error', text: String(error).slice(0, 200) };
+    }
     try { return { status: res.status, ...JSON.parse(raw) }; } catch { if (!attempt) await new Promise(r => setTimeout(r, 5000)); else return { status: res.status, kind: `http_${res.status}`, text: raw.slice(0, 200) }; }
   }
 }
