@@ -1,0 +1,5 @@
+# Player integration
+
+This lane is independent of the app shell. Install compatible `expo-audio` and `expo-file-system` in the app, enable Expo Audio background playback in its app config, and pass those modules to `createNativeAdapters`. Keep one `createPlayer` instance alive across navigation. Feed `readManifest` the published JSONL and the HTTPS R2 public base URL; feed its tracks to `createPlayerScreen(React, ReactNative)`. Call `foreground()` when the app returns to the foreground and `dispose()` only when the player is destroyed. The shell supplies user access and must replace the local `canUse` stub with Phase 2A's gate.
+
+The timer uses a JavaScript timeout and checks elapsed time on foreground. iOS may suspend JavaScript in the background, so stopping at the selected time while suspended requires a native background timer or equivalent before this is complete. Native configuration and device playback remain to be integrated and verified when the app shell exists. Screen text currently needs the shared Phase 2A i18n loader.
