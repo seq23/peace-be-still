@@ -330,9 +330,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   let spare: { text: string; scripture: Scripture[]; shape: Shape } | null = null;
   // Three tries, then the fallback verse. Measured round 3: with two tries 4 of 45 answers fell back
   // (grief, a teen's dating question, translation requests), each refused on a fixable point.
+  // One number per answer drives its plan; a rewrite shifts the moves but keeps the closing word.
+  const seq = await planSeq(env.DB, lane);
   for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
-    // Each try gets its own plan, so a rewrite for variety is also written to new moves.
-    const plan = planFor(await planSeq(env.DB, lane), lane, req.door);
+    const plan = planFor(seq, lane, req.door, attempt);
     const steer: Message[] = [{ role: 'system', content: plan.text }];
     if (objection) steer.push({ role: 'system', content: `Your last answer was not used. ${objection} Write a new answer.` });
     const messages = [...system, ...steer, ...history];

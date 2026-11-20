@@ -129,7 +129,7 @@ export async function planSeq(db: D1Database, lane: Lane): Promise<number> {
 // that steps once per draft never tells two answers in the window to close the same way. P = a
 // one-sentence prayer for her, V = one sentence of her own words about one of the verses.
 const CLOSE_EN: Array<[kind: 'P' | 'V', word: string]> = ([
-  'P Lord', 'P Carry', 'V Whatever', 'P Father', 'P Keep', 'P Gracious', 'V Even', 'P Meet', 'P Jesus', 'P Guard', 'V Nothing',
+  'P Lord', 'P Carry', 'V Whatever', 'P Father', 'P Keep', 'P Gracious', 'V Even', 'P Meet', 'P Jesus', 'P Guard', 'V Since',
   'P Faithful', 'P Lead', 'P Steady', 'V Because', 'P God', 'P Quiet', 'P Surround', 'V Today', 'P Merciful', 'P Cover', 'P Strengthen',
   'V Wherever', 'P Holy', 'P Calm', 'P Settle', 'V Every', 'P Heavenly', 'P Draw', 'P Stay', 'V Before', 'P Shepherd', 'P Renew',
   'P Sustain', 'V Still', 'P Watch', 'P Comfort', 'P Grant', 'V Here', 'P Give', 'P Help', 'P Be', 'V This', 'P Walk', 'P Anchor', 'P Open', 'P Teach', 'P Hold', 'P Shelter',
@@ -147,7 +147,7 @@ const OPEN_EN = [
   'Open with one plain, true sentence about God that meets what she wrote.',
   'Open by answering her plainly in a short first sentence.',
   'Open with an honest, specific word about what is hard here, with no stock sympathy.',
-];
+].map(o => `${o} Its first word is not "The".`); // "The Bible does", "The weight of": round-6 probe
 const OPEN_ES = [
   'Empieza con algo concreto que ella te contó, con tus propias palabras (nunca repitiendo su pregunta).',
   'Empieza con una frase sencilla y verdadera sobre Dios que responda a lo que escribió.',
@@ -157,14 +157,14 @@ const OPEN_ES = [
 const MIDDLE_EN = [
   'In the middle, tell in a sentence or two how one person in the Bible met something like this.',
   'In the middle, give one concrete step she could take this week.',
-  'In the middle, say plainly what your verse meant to the people who first heard it.',
+  'In the middle, give the setting of one of your verses in a sentence: who said it, and when.',
   'In the middle, say one true thing about who God is that speaks to this.',
   'In the middle, stay with the details she gave, in plain words, without pictures or metaphors.',
 ];
 const MIDDLE_ES = [
   'En el medio, cuenta en una o dos frases cómo una persona de la Biblia vivió algo parecido.',
   'En el medio, da un paso concreto que pueda dar esta semana.',
-  'En el medio, di con sencillez qué significó tu versículo para quienes lo oyeron primero.',
+  'En el medio, da en una frase el contexto de uno de tus versículos: quién lo dijo y cuándo.',
   'En el medio, di algo verdadero sobre quién es Dios que hable a esto.',
   'En el medio, quédate con los detalles que ella dio, en palabras sencillas, sin imágenes ni metáforas.',
 ];
@@ -186,21 +186,28 @@ const REST_ES = [
   ['recibir', 'acompañamiento', 'cercano', 'conversar', 'sugiero'],
 ];
 
-/** The plan for one draft, from the lane's counter: how it opens, what the middle does, the words it leaves out, how it closes. */
-export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'faith'): Plan {
-  const pick = <T>(list: readonly T[]) => list[seq % list.length];
-  const rest = (groups: string[][]) => groups.filter((_, i) => i !== seq % groups.length).flat().join(', ');
+/**
+ * The plan for one answer, from the lane's counter: how it opens, what the middle does, the words it
+ * leaves out, how it closes. A rewrite of the same answer keeps its number (so rewrites never use up
+ * the closing words other answers need) and shifts the other moves by `attempt`. Its closing word
+ * stays: no other answer in the window was given it, so a repeated closing means it was not followed.
+ */
+export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'faith', attempt = 0): Plan {
+  const m = seq + attempt;
+  const pick = <T>(list: readonly T[]) => list[m % list.length];
+  const pickClose = <T>(list: readonly T[]) => list[seq % list.length];
+  const rest = (groups: string[][]) => groups.filter((_, i) => i !== m % groups.length).flat().join(', ');
   if (lane === 'es') {
-    const [kind, word] = pick(CLOSE_ES);
+    const [kind, word] = pickClose(CLOSE_ES);
     const close = kind === 'B'
       ? `Termina con una bendición breve para ella, en una sola frase que le hable de tú y cuya primera palabra sea "${word}".`
       : `Termina con una sola frase tuya, dicha a ella de tú, sobre lo que dice uno de tus versículos, con su referencia dentro o al final; su primera palabra es "${word}".`;
-    return { seq, text: `El plan de esta respuesta (síguelo; nunca lo menciones):\n- ${pick(OPEN_ES)}\n- ${door === 'mindset' ? MIDDLE_ES[[1, 4][seq % 2]] : pick(MIDDLE_ES)}\n- Esta vez no uses estas palabras: ${rest(REST_ES)}.\n- ${close} Nada después de esa frase.` };
+    return { seq, text: `El plan de esta respuesta (síguelo; nunca lo menciones):\n- ${pick(OPEN_ES)}\n- ${door === 'mindset' ? MIDDLE_ES[[1, 4][m % 2]] : pick(MIDDLE_ES)}\n- Esta vez no uses estas palabras: ${rest(REST_ES)}.\n- ${close} Nada después de esa frase.` };
   }
   if (lane === 'mindset' || door === 'mindset') {
-    return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${OPEN_EN[[0, 2, 3][seq % 3]]}\n- ${pick(MIDDLE_MINDSET)}\n- This time do not use these words: ${rest(REST_EN)}.\n- End on one calm sentence whose first word is "${pick(CLOSE_MINDSET)}". Nothing after that sentence.` };
+    return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${OPEN_EN[[0, 2, 3][m % 3]]}\n- ${pick(MIDDLE_MINDSET)}\n- This time do not use these words: ${rest(REST_EN)}.\n- End on one calm sentence whose first word is "${pickClose(CLOSE_MINDSET)}". Nothing after that sentence.` };
   }
-  const [kind, word] = pick(CLOSE_EN);
+  const [kind, word] = pickClose(CLOSE_EN);
   const close = kind === 'P'
     ? `End with a short prayer for her in ONE sentence whose first word is "${word}".`
     : `End with ONE sentence of your own about what one of your verses says, with its reference inside or at the end of the sentence, whose first word is "${word}".`;
