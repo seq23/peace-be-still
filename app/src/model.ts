@@ -1,7 +1,8 @@
+import banned from './quality/banned.json';
 export type Door = 'faith' | 'mindset';
 export type Age = 'child' | 'teen' | 'adult';
 export type Voice = 'plain' | 'church' | 'teen' | 'spanish';
-export type Settings = { door: Door | null; age: Age | null; voice: Voice; language: 'en' | 'es'; journey?: string };
+export type Settings = { door: Door | null; age: Age | null; voice: Voice; language: 'en' | 'es'; journey?: string; scripture?: boolean };
 export const initial: Settings = { door: null, age: null, voice: 'plain', language: 'en' };
 export function ageBand(year: number, now = new Date().getFullYear(), month?: number, currentMonth = new Date().getMonth() + 1): Age | null {
   if (!Number.isInteger(year) || year < 1900 || year > now || (month !== undefined && (!Number.isInteger(month) || month < 1 || month > 12))) return null;
@@ -27,7 +28,7 @@ export const mindsetJourneys = [['Imagination Nights', 'A quiet scene for sleep'
 // Applied to faith-facing content, including future stories and chat.
 export function faithContentIssues(text: string): string[] {
   const normalized = text.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const words = /\b(manifest(?:ar|ing|ation)?|universe|universo|vibration|vibracion|energy|energia|law of (?:attraction|assumption)|ley de atraccion|neville|abundance mindset|karma|chakra|aura|crystal|mantra|higher self|the source|align|attract|visualize|urban|speak life)\b|black[\W_]*bible[\W_]*stories/gu;
+  const words = new RegExp(`\\b(?:${banned.faith.join('|')})\\b`, 'gu');
   const issues = [...normalized.matchAll(words)].map(match => match[0]);
   if (/\p{Extended_Pictographic}|[\u2600-\u27bf]/u.test(text)) issues.push('emoji or decorative symbol');
   if (/sparkle|sparkles|sparkling|✨|✦|✧/iu.test(text)) issues.push('sparkle');

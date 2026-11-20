@@ -27,3 +27,12 @@ test('renders faith screens without prohibited content and mindset screens separ
 test('teen selection of the Spanish journey retains the teen voice', async () => {
  const tree = await mount({ ...base, age: 'teen', voice: 'teen' }); await press(tree, 'Mi Refugio'); assert.equal(JSON.parse(saved!).voice, 'teen'); assert.equal(JSON.parse(saved!).language, 'en');
 });
+
+test('mindset scripture preference persists and can be changed in settings', async () => {
+ const tree = await mount({ ...base, door: 'mindset' });
+ const toggle = tree.root.findByProps({ accessibilityRole: 'switch' });
+ await act(async () => toggle.props.onPress());
+ assert.equal(JSON.parse(saved!).scripture, true);
+ const restored = await mount(JSON.parse(saved!));
+ assert.equal(restored.root.findByProps({ accessibilityRole: 'switch' }).props.accessibilityState.checked, true);
+});
