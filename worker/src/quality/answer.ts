@@ -141,6 +141,8 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (ADDRESS.test(text)) problems.push('persona_roleplay');
   if (SAYS_AI.test(n) && !ASKED_AI.test(asked)) problems.push('unasked_ai');
   if (SPLIT_SAID.test(n) && !SPLIT_ASKED.test(asked)) problems.push('split_unasked');
+  // Two words run together ("theSong of Solomon", RT10 round 3): a lowercase word glued to a capital.
+  if (/\b[a-z]{2,}[A-Z][a-z]+/.test(text)) problems.push('glued_words');
   // Restating her question back to her is a machine tell (round 3: 11 of 30 answers opened that way).
   if (ECHO_OPENING.test(norm(text.split(/(?<=[.!?])\s/)[0] ?? ''))) problems.push('echo_opening');
   if (ctx.door === 'faith' && faithContentIssues(text).length) problems.push('mindset_word');

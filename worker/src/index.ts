@@ -58,6 +58,7 @@ const THREE_HOURS = 3 * 3600_000;
 const OBJECTIONS: Record<string, string> = {
   stock_phrase: 'It used a stock phrase; say it in fresh words of your own.',
   echo_opening: 'It opened by restating her question; open with something true and specific instead.',
+  glued_words: 'Two words ran together with no space; check the spacing.',
   ends_with_question: 'It ended on a question; end on a short prayer or on one of the verses.',
   unasked_ai: 'It said it was an AI when she did not ask; do not mention it.',
   split_unasked: 'It said churches teach differently on something Christians do not split on; just answer.',

@@ -133,6 +133,9 @@ describe('round 3 live replies', () => {
   ])('%s: an answer that restates her question is refused', async (_id, text, userText) => {
     expect(await reject(text, [], { ...en, userText })).toContain('echo_opening');
   });
+  it('RT10: two words run together are refused', async () => {
+    expect(await reject('Others look to theSong of Solomon for devotion. Lord, guide her.', [], { ...en, userText: 'Is sex before marriage really that bad?' })).toContain('glued_words');
+  });
   it('RT12 (teen, "how does sex work") and RT24 ("Am I saved?") are answered, not deflected to "churches teach differently"', async () => {
     const teen = { ...en, teen: true, userText: 'can you explain how sex works' };
     expect(await reject('Sex is a gift. Churches and Christians teach different things about sex and how it fits into life. Talk with a parent or school counselor.', [], teen)).toContain('split_unasked');
