@@ -46,6 +46,30 @@ describe('the free lane', () => {
   });
 });
 
+describe('the judge never bills the free lane', () => {
+  it('free lane: Workers AI judge down and the billed key set, the verdict is down and no billed request is made; paid lane keeps its private backup', async () => {
+    const seen: string[] = [];
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (_u, init) => { seen.push(new Headers(init?.headers).get('x-goog-api-key') ?? ''); return Response.json({}); });
+    const down = { run: async () => { throw new Error('workers ai down'); } } as unknown as Ai;
+    const e = { ...env, AI: down, PBS_GEMINI_API_KEY: 'PAID-KEY', PAID_PROVIDER: 'gemini' } as Env;
+    const input = { voice: 'plain' as const, question: 'How do I forgive my sister?', text: 'Forgiveness is a choice you can make today. Lord, help us.', verses: [] };
+    expect((await realDeps.judge(e, input, 'free')).verdict).toBe('down');
+    expect(seen).toEqual([]);
+    await realDeps.judge(e, input, 'paid');
+    expect(seen).toContain('PAID-KEY');
+  });
+  it('a free-lane chat asks its judge as the free lane', async () => {
+    const lanes: string[] = [];
+    const free = scripted('gemini-free', [good()]);
+    const d = deps({ rungList: [free.rung] });
+    const judge = d.judge;
+    d.judge = (async (e: Env, i: never, lane: string) => { lanes.push(lane); return judge(e, i, lane as never); }) as never;
+    await chat(d, 'How do I forgive my sister?');
+    expect(lanes.length).toBeGreaterThan(0);
+    expect(new Set(lanes)).toEqual(new Set(['free']));
+  });
+});
+
 describe('the paid lane', () => {
   it('model ids come from env: GEMINI_MODELS for free, PAID_PROVIDER + PAID_MODEL (alone, priced) for paid', () => {
     expect(realDeps.rungs(env, NOW, 'paid').map(r => r.id)).toEqual([`paid-gemini:${env.PAID_MODEL}`]);

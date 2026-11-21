@@ -40,7 +40,8 @@ export type { ChatRequest, ChatResponse };
 export type Deps = {
   now: () => number;
   risk: (env: Env, turns: Turn[]) => Promise<RiskVerdict>;
-  judge: (env: Env, input: JudgeInput) => Promise<JudgeVerdict>;
+  /** lane: the free lane's judge has no billed backup (brain rule: free chat never touches the billed key). */
+  judge: (env: Env, input: JudgeInput, lane: Lane) => Promise<JudgeVerdict>;
   /** The free lane by default (the order the privacy policy names); 'paid' is the billed, private model only. */
   rungs: (env: Env, now: number, lane?: Lane) => LadderRung[];
   paid: (env: Env, installId: string, now: number) => Promise<Paid>;
@@ -176,12 +177,13 @@ export const realDeps: Deps = {
       () => read('workers-ai-risk-confirm', env.WORKERS_AI_RISK_CONFIRM_MODEL, int(env.WORKERS_AI_RISK_CONFIRM_CALLS_DAILY, 100)),
     );
   },
-  judge(env, input) {
+  judge(env, input, lane) {
     const now = Date.now();
     const first: LadderRung = { id: 'workers-ai-judge', call: workersAi(env.AI, env.WORKERS_AI_JUDGE_MODEL, { temperature: 0 }), cap: int(env.WORKERS_AI_JUDGE_CALLS_DAILY, 300), day: utcDay(now) };
     // The judge thinks before it scores (gpt-oss): it gets the budget it was calibrated with (run 10: at 200
     // tokens its reasoning used everything and 76 of 76 reads came back empty, falling to the paid backup).
-    return check(env, now, first, judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
+    // Free chat never touches the billed key: its judge has no paid backup, and a down judge is `down`.
+    return check(env, now, first, judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free');
   },
   rungs(env, now, lane = 'free') {
     if (lane === 'paid') return [paidRung(env, now)];
@@ -348,9 +350,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     await flag(true);
     const card = crisisText(kind, v.lang, band, last, req.door, region);
     let checkIn = { text: checkInText[v.lang], ai: false };
-    if (layer !== 'floor' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
+    // The fixed words when the crisis model is the one that just failed (lane_down), or no model may read it (floor).
+    if (layer !== 'floor' && layer !== 'lane_down' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
       const messages: Message[] = [{ role: 'system', content: crisisPrompt(v.lang, v.teen, mind) }, ...turns.slice(-4).map(t => ({ role: t.role, content: t.text }))];
-      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis'), messages, crisisSchema, 600, metrics, d => crisisWords(d) !== null);
+      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis'), messages, crisisSchema, 600 + CRISIS_THINKING_HEADROOM, metrics, d => crisisWords(d) !== null);
       if ('data' in out) checkIn = { text: `${crisisWords(out.data)} ${checkInQuestion[v.lang]}`, ai: true };
       else { tally(metrics, 'crisis_model_down'); logCode('CHAT_CRISIS_MODEL_DOWN', { empty: out.empty }); }
     }
@@ -510,7 +513,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     ctx.waitUntil(saveShape(env.DB, me.installId, shape, now).catch(() => logCode('SHAPE_SAVE_FAILED')));
     if (paid.paid && lane !== 'crisis') ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
   });
-  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) });
+  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane);
   let objection: string | null = null;
   let variety0 = false;
   // A draft that passed every safety check but repeated a recent answer, or that the judge found
@@ -529,6 +532,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if ('empty' in out) {
       if (attempt === 0) {
         await refund(env.DB, day, me.installId, hash);
+        // A message on the crisis lane is never told chat is resting or busy: if the crisis model
+        // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
+        if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(confirmed && confirmed.level !== 'none' ? confirmed.kind : 'selfharm', 'lane_down'); }
         // Paid never falls back to a free model: if the private model is down, she is told so.
         if (lane === 'paid') { tally(metrics, 'paid_down'); logCode('CHAT_PAID_DOWN', { empty: out.empty }); return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }
         if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }

@@ -381,5 +381,9 @@
   "reminder.offer.title.morning": "Would a quiet nudge each morning help?",
   "reminder.offer.title.evening": "Would a quiet nudge each evening help?",
   "reminder.body.morning": "This morning's words are ready when you are.",
-  "reminder.body.evening": "A quiet moment is here when you want it."
+  "reminder.body.evening": "A quiet moment is here when you want it.",
+  "chat.help.us": "If you are in danger or thinking about hurting yourself, call or text 988 now.",
+  "chat.help.mx": "If you are in danger or thinking about hurting yourself, call Línea de la Vida at 800 911 2000, or 911.",
+  "chat.help.es": "If you are in danger or thinking about hurting yourself, call 024, or 112.",
+  "chat.help.other": "If you are in danger or thinking about hurting yourself, find a crisis line where you are at findahelpline.com."
 }

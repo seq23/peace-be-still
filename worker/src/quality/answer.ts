@@ -125,13 +125,13 @@ const REF_IN_TEXT = /((?:[123]\s+)?(?:\p{L}+\s+){0,3}\p{L}+\.?)\s+(\d{1,3})\s*:\
 const QUOTED = /"([^"]{3,}?)"|“([^”]{3,}?)”|«([^»]{3,}?)»|‘([^’]{3,}?)’|(?<![\p{L}])'([^']{3,}?)'(?![\p{L}])/gu;
 const ATTRIBUTED = /\b(?:says|said|saith|it is written|is written|declares|promises|dice|dijo|declara|promete|est[aá] escrito|escrito est[aá])\s*[:,]?\s+([^.!?\n"“«‘]{3,})/giu;
 
-function refsInText(text: string): Array<{ raw: string; book: string | null; chapter: number; verse: number; end?: number }> {
+function refsInText(text: string): Array<{ raw: string; book: string | null; name: string; chapter: number; verse: number; end?: number }> {
   const found = [];
   for (const m of text.matchAll(REF_IN_TEXT)) {
     const words = m[1].replace(/\.$/, '').split(/\s+/);
     let book: string | null = null;
     for (let i = 0; i < words.length && !book; i++) book = bookCode(words.slice(i).join(' '));
-    found.push({ raw: m[0], book, chapter: Number(m[2]), verse: Number(m[3]), ...(m[4] ? { end: Number(m[4]) } : {}) });
+    found.push({ raw: m[0], book, name: words.at(-1) ?? '', chapter: Number(m[2]), verse: Number(m[3]), ...(m[4] ? { end: Number(m[4]) } : {}) });
   }
   return found;
 }
@@ -165,7 +165,9 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
     // she is told plainly; an answer with too little left is written again instead.
     const madeUp: string[] = [];
     for (const r of refsInText(text)) {
-      if (!r.book) continue;
+      // A book that is not in the Bible, written like a reference ("Hezekiah 3:5", "1 Enoch 1:9",
+      // "Jasher 2:1"), is made up too. Only a capitalised name counts: "at 3:30" is a time.
+      if (!r.book) { if (/^\p{Lu}\p{Ll}+$/u.test(r.name) && !/^\s*(?:a\.?m\.?|p\.?m\.?|hrs?)\b/i.test(text.slice(text.indexOf(r.raw) + r.raw.length))) madeUp.push(r.raw); continue; }
       const s = await lookup(ctx.db, ctx.translation, { book: r.book, chapter: r.chapter, verse: r.verse, ...(r.end ? { endVerse: r.end } : {}) });
       if (!s) madeUp.push(r.raw);
       else if (unfit(s)) problems.push('verse_unfit'); // named in her answer: it has to be rewritten

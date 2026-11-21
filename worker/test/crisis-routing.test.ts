@@ -116,6 +116,29 @@ describe('the crisis lane answers', () => {
   });
 });
 
+describe('the crisis model gives nothing', () => {
+  it('an empty crisis-lane answer is the fixed check-in and her region\'s lines, never "resting" (review F2)', async () => {
+    for (const [region, line] of [['US', '988'], ['MX', '800 911 2000']] as const) {
+      const c = convo({ riskVerdict: { verdict: 'risk', kind: 'selfharm', level: 'low' } });
+      c.crisis.rung.call = (async () => { throw new Error('busy'); }) as never;
+      const r = await c.say('I feel so hopeless lately', { region });
+      expect(r.kind, region).toBe('crisis');
+      expect(r.text, region).toContain(line);
+      expect(r.text).not.toMatch(/resting|give it a minute/i);
+      expect(r.checkIn).toEqual({ text: expect.stringMatching(/Are you safe right now\?$/), ai: false });
+      expect(c.free.calls.length).toBe(0);
+    }
+  });
+  it('the crisis check-in words have room to think too (600 plus the same headroom as answers)', async () => {
+    const maxes: number[] = [];
+    const c = convo({ riskVerdict: { verdict: 'risk', kind: 'selfharm' } });
+    const inner = c.crisis.rung.call;
+    c.crisis.rung.call = (async (m: never, s: { properties: Record<string, unknown> }, max: number) => { if (!('references' in s.properties) && !('versions' in s.properties)) maxes.push(max); return inner(m, s as never, max); }) as never;
+    expect((await c.say('I feel so hopeless, nothing matters anymore')).kind).toBe('crisis');
+    expect(maxes).toEqual([600 + 1024]);
+  });
+});
+
 describe('the crisis lane decays', () => {
   it('back to the normal lane after 10 calm turns', async () => {
     const c = convo({ paidNow: true });

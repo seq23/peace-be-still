@@ -18,11 +18,24 @@ import type { ChatResponse, ChatTurn } from './contract';
 
 type Palette = ReturnType<typeof usePalette>;
 type T = (key: Key, values?: Record<string, string | number>) => string;
-type Entry = { role: 'user'; text: string } | { role: 'reply'; res: ChatResponse } | { role: 'note'; text: string };
+type Entry = { role: 'user'; text: string } | { role: 'reply'; res: ChatResponse } | { role: 'note'; text: string; region: string | null };
 /** Her one-time yes that free chat goes to a free AI service that may keep what she types (two lanes, 21 Nov 2026). */
 export const FREE_CONSENT_KEY = 'peace-be-still-free-chat-consent';
 
 /** Tappable lines for a crisis reply: 988 always; the hotline the reply names (Poison Control and 911 first for medical danger). */
+/**
+ * Help when chat cannot answer at all (offline, a server error, too fast): the message that failed
+ * may have been a crisis, so every error note carries the crisis line for her region and its links,
+ * as the crisis card would (the server picks the same lines by the same region; missing means US).
+ */
+export function regionHelp(region: string | null): { text: Key; links: Array<{ label: Key; url: string }> } {
+  const r = region ?? 'US';
+  if (r === 'US') return { text: 'chat.help.us', links: [{ label: 'chat.call.988', url: 'tel:988' }, { label: 'chat.text.988', url: 'sms:988' }] };
+  if (r === 'MX') return { text: 'chat.help.mx', links: [{ label: 'chat.call.mx', url: 'tel:8009112000' }, { label: 'chat.call.911', url: 'tel:911' }] };
+  if (r === 'ES') return { text: 'chat.help.es', links: [{ label: 'chat.call.024', url: 'tel:024' }, { label: 'chat.call.112', url: 'tel:112' }] };
+  return { text: 'chat.help.other', links: [{ label: 'chat.findHelpline', url: 'https://findahelpline.com' }] };
+}
+
 export function crisisLinks(res: ChatResponse): Array<{ label: Key; url: string }> {
   // The hotline the reply leads with comes first, as in the text.
   const links: Array<{ label: Key; url: string }> = [];
@@ -130,10 +143,10 @@ export default function ChatScreen() {
     setEntries(list => [...list, { role: 'user', text }]);
     setInput('');
     setSending(true);
+    // The phone's region picks the crisis lines (988 in the US, Línea de la Vida in Mexico, 024 in Spain).
+    let region: string | null = null;
+    try { region = getLocales()[0]?.regionCode ?? null; } catch { region = null; }
     try {
-      // The phone's region picks the crisis lines (988 in the US, Línea de la Vida in Mexico, 024 in Spain).
-      let region: string | null = null;
-      try { region = getLocales()[0]?.regionCode ?? null; } catch { region = null; }
       const res = await sendChat(settings, conversation, history, fetch, !paid && !!freeOk, region);
       // Her consent is gone on the server's side (another device, cleared storage): ask again.
       if (res.kind === 'consent') { setFreeOk(false); void AsyncStorage.removeItem(FREE_CONSENT_KEY).catch(() => undefined); return; }
@@ -143,7 +156,7 @@ export default function ChatScreen() {
     } catch (error) {
       const why = error instanceof ChatError ? error.message : '';
       if (why === 'network') setClosed(true); // no new install can start from this network today
-      setEntries(list => [...list, { role: 'note', text: t(why === 'slow' ? 'chat.error.slow' : why === 'network' ? 'chat.error.network' : 'chat.error.offline') }]);
+      setEntries(list => [...list, { role: 'note', text: t(why === 'slow' ? 'chat.error.slow' : why === 'network' ? 'chat.error.network' : 'chat.error.offline'), region }]);
     } finally { setSending(false); }
   }
 
@@ -159,7 +172,13 @@ export default function ChatScreen() {
     {entries.map((e, i) => e.role === 'user'
       ? <Text key={i} style={[s.me, { backgroundColor: c.accent, color: c.on }]}>{e.text}</Text>
       : e.role === 'note'
-        ? <Text key={i} accessibilityRole="alert" style={[s.note, { color: c.muted }]}>{e.text}</Text>
+        ? <View key={i} testID="chat-note">
+          <Text accessibilityRole="alert" style={[s.note, { color: c.muted }]}>{e.text}</Text>
+          <Text testID="note-help" style={[s.note, { color: c.ink }]}>{t(regionHelp(e.region).text)}</Text>
+          {regionHelp(e.region).links.map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
+            <Text style={[s.linkText, { color: c.accent }]}>{t(l.label)}</Text>
+          </Pressable>)}
+        </View>
         : <View key={i} testID={`reply-${e.res.kind}`} style={[s.bot, { backgroundColor: c.card, borderColor: c.line }]}>
           {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
           {e.res.reminder && <Text style={[s.body, { color: c.ink }]}>{t('chat.reminder')}</Text>}

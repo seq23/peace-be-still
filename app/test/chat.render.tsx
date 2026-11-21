@@ -24,14 +24,17 @@ const { PurchasesProvider } = require('../src/purchases/provider');
 const Chat = require('../app/(tabs)/chat').default;
 const { FREE_CONSENT_KEY } = require('../src/chat/ChatScreen');
 
-const replies: ChatResponse[] = [];
+const replies: Array<ChatResponse | 'offline' | 500> = [];
 const sent: any[] = [];
 const reports: any[] = [];
 (globalThis as any).fetch = async (url: string, init: any) => {
   if (url.endsWith('/token')) { store.set('peace-be-still-chat-token', JSON.stringify({ token: 'aaaaaaaaaaaa.bbbbbbbbbbbb', age: 'adult', installId: 'iid-1' })); return new Response(JSON.stringify({ token: 'aaaaaaaaaaaa.bbbbbbbbbbbb', installId: 'iid-1' })); }
   if (url.endsWith('/report')) { reports.push(JSON.parse(init.body)); return new Response(JSON.stringify({ reported: true })); }
   sent.push(JSON.parse(init.body));
-  return new Response(JSON.stringify(replies.shift()));
+  const next = replies.shift() as ChatResponse | 'offline' | 500;
+  if (next === 'offline') throw new TypeError('Network request failed');
+  if (next === 500) return new Response('{}', { status: 500 });
+  return new Response(JSON.stringify(next));
 };
 const texts = (tree: ReactTestRenderer) => tree.root.findAll(n => (n.type as unknown) === 'Text').map(n => n.children.filter(x => typeof x === 'string').join('')).join(' | ');
 const adult = { door: 'faith', age: 'adult', ageSetAt: 0, voice: 'church', language: 'en', journey: 'hush-harbor' } as const;
@@ -128,6 +131,28 @@ test('the crisis reply is not labelled AI and its numbers are tappable', async (
   (globalThis as any).__pbsOpened = [];
   for (const l of links) await act(async () => l.props.onPress());
   assert.deepEqual((globalThis as any).__pbsOpened, ['tel:18007997233', 'sms:88788?body=START', 'tel:988', 'sms:988']); // the hotline the reply leads with comes first
+});
+
+test('offline or a server error on a crisis message still shows the crisis line and its links, by region, EN and ES', async () => {
+  consented();
+  const opened = async (tree: ReactTestRenderer) => {
+    (globalThis as any).__pbsOpened = [];
+    for (const l of tree.root.findAllByType('Pressable' as any).filter(n => n.props.accessibilityRole === 'link')) await act(async () => l.props.onPress());
+    return (globalThis as any).__pbsOpened;
+  };
+  replies.push('offline');
+  let tree = await mount();
+  await say(tree, "I don't want to be alive anymore");
+  assert.match(texts(tree), /couldn't reach us[\s\S]*call or text 988 now/);
+  assert.deepEqual(await opened(tree), ['tel:988', 'sms:988']);
+  (globalThis as any).__pbsRegion = 'MX'; (globalThis as any).__pbsLocale = 'es';
+  try {
+    replies.push(500);
+    tree = await mount({ ...adult, voice: 'spanish', language: 'es' });
+    await say(tree, 'ya no quiero vivir', 'Enviar');
+    assert.match(texts(tree), /Línea de la Vida al 800 911 2000/);
+    assert.deepEqual(await opened(tree), ['tel:8009112000', 'tel:911']);
+  } finally { (globalThis as any).__pbsRegion = undefined; (globalThis as any).__pbsLocale = undefined; }
 });
 
 test('when the free models are out, the kind message shows and sending stops', async () => {

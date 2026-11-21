@@ -71,6 +71,18 @@ describe('verses come only from the store', () => {
     const es1 = await checkAnswer({ text: 'Dios no te ha dejado sola esta noche. Juan 22:5 dice que Él te llevará. Puedes traerle cada preocupación que tengas. Señor, abrázala esta noche.', references: [] }, es);
     expect(es1.ok && es1.text).toMatch(/\(Quité una cita que no está en la Biblia\.\)$/);
   });
+  it('a book that is not in the Bible (Hezekiah 3:5, 1 Enoch 1:9, Jasher 2:1) is made up too, EN and ES; a time like 3:30 is not', async () => {
+    for (const fake of ['Hezekiah 3:5', '1 Enoch 1:9', 'Jasher 2:1']) {
+      const r = await checkAnswer({ text: `God has not left you alone tonight. As ${fake} says, He will carry you home. You can bring Him every worry you have. Lord, hold us close tonight.`, references: [] }, en);
+      expect(r.ok, fake).toBe(true);
+      if (r.ok) { expect(r.text, fake).not.toContain(fake); expect(r.text).toMatch(/\(I left out a verse reference that is not in the Bible\.\)$/); }
+    }
+    const es1 = await checkAnswer({ text: 'Dios no te ha dejado sola esta noche. Ezequías 3:5 dice que Él te llevará. Puedes traerle cada preocupación que tengas. Señor, abrázala esta noche.', references: [] }, es);
+    expect(es1.ok && es1.text).not.toMatch(/Ezequías/);
+    expect(es1.ok && es1.text).toMatch(/\(Quité una cita que no está en la Biblia\.\)$/);
+    const time = await checkAnswer({ text: 'Your shift ends at 3:30 and you can rest then. God is near you through the whole day. Lord, give us rest.', references: [] }, en);
+    expect(time.ok && time.text).toMatch(/at 3:30/);
+  });
   it('an answer that is little more than a made-up reference is written again', async () => {
     expect(await reject('Psalm 151:2 is for you tonight.')).toContain('unknown_reference');
   });
