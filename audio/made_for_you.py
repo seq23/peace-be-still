@@ -46,6 +46,8 @@ TEMPLATE = {
 # A seeded Spanish Psalm session took 7m 38s through Kokoro, mastering and QA.
 # With the Worker's four-minute claim deadline, 20 minutes leaves over 50% headroom.
 BOX_MINUTES = 20
+# Leave time for a full claim, the measured render, and private upload before taking a lease.
+MIN_SESSION_SECONDS = 14 * 60
 HELD_CODES = {
     "MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA", "MADE_FOR_YOU_NO_FREE_MODEL",
     "MADE_FOR_YOU_PSALM_UNAVAILABLE", "MADE_FOR_YOU_ATTEMPTS_EXHAUSTED",
@@ -187,13 +189,15 @@ def process_one(call, render, put) -> bool:
         print(f"NOTE private session elapsed {time.monotonic() - started:.1f} s", flush=True)
 
 
-def drain_queue(call, render, put) -> int:
+def drain_queue(call, render, put, *, deadline: float = float("inf")) -> int:
     published = 0
     held = None
     consecutive_timeouts = 0
-    while True:
+    while deadline - time.monotonic() >= MIN_SESSION_SECONDS:
         try:
             if not process_one(call, render, put):
+                if not published and held is None:
+                    print("OUTPUT 0 private sessions (queue empty)")
                 break
         except fill.NamedStop as error:
             if error.code not in HELD_CODES:
@@ -207,12 +211,14 @@ def drain_queue(call, render, put) -> int:
         consecutive_timeouts = 0
         published += 1
         print(f"OUTPUT {published} private session(s) published", flush=True)
+    else:
+        print("OUTPUT private queue deferred until the next render window (insufficient time for another session)", flush=True)
     if held:
         raise held
     return published
 
 
-def work() -> int:
+def work(*, deadline: float = float("inf")) -> int:
     base, secret = os.getenv("PBS_MADE_FOR_YOU_API", ""), os.getenv("PBS_MADE_FOR_YOU_RUNNER_SECRET", "")
     bucket = os.getenv("PBS_MADE_FOR_YOU_PRIVATE_BUCKET", "")
     url = urlsplit(base)
@@ -221,8 +227,7 @@ def work() -> int:
     if not bucket or bucket == publish.BUCKET:
         raise fill.NamedStop("MADE_FOR_YOU_PRIVATE_BUCKET", "Configure a separate private R2 bucket.")
     publish.connect()
-    if not drain_queue(make_request(base, secret), render_session, lambda item, local: upload(item, local, bucket)):
-        print("OUTPUT 0 private sessions (queue empty)")
+    drain_queue(make_request(base, secret), render_session, lambda item, local: upload(item, local, bucket), deadline=deadline)
     return 0
 
 
@@ -232,7 +237,7 @@ def run_timebox(command: list[str], seconds: float) -> int:
     with TemporaryDirectory(prefix="pbs-made-for-you-") as temp:
         with subprocess.Popen(command, start_new_session=True, env={**os.environ, "TMPDIR": temp}) as child:
             try:
-                return child.wait(timeout=seconds)
+                return child.wait(timeout=max(0, started + seconds - time.monotonic()))
             except subprocess.TimeoutExpired:
                 try:
                     os.killpg(child.pid, signal.SIGKILL)
@@ -247,10 +252,11 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-minutes", type=int, default=BOX_MINUTES)
     parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--deadline", type=float, default=float("inf"), help=argparse.SUPPRESS)
     args = parser.parse_args()
     try:
         if args.worker:
-            return work()
+            return work(deadline=args.deadline)
         minutes = min(args.max_minutes, BOX_MINUTES, fill.window_minutes(dt.datetime.now(fill.CT)))
         if minutes <= 0:
             print("OUTPUT 0 private sessions (outside the render window)")
@@ -262,7 +268,9 @@ def main() -> int:
             except BlockingIOError:
                 print("OUTPUT 0 private sessions (library fill has the lock)")
                 return 0
-            return run_timebox([sys.executable, __file__, "--worker"], minutes * 60)
+            seconds = minutes * 60
+            deadline = time.monotonic() + seconds
+            return run_timebox([sys.executable, __file__, "--worker", "--deadline", str(deadline)], seconds)
     except fill.NamedStop as error:
         # Existing publisher exceptions may include storage details. Do not log customer data or URLs.
         print(f"NAMED STOP [{error.code}] in private session rendering", file=sys.stderr)

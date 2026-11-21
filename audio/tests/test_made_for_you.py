@@ -129,6 +129,14 @@ class MadeForYouTest(unittest.TestCase):
             sessions.run_timebox([sys.executable, "-c", "import time; time.sleep(30)"], 0.1)
         self.assertNotEqual(stopped.exception.exit_code, 0)
 
+    def test_drain_leaves_the_next_row_unclaimed_when_the_window_is_too_short(self):
+        job = self.job()
+        call = Mock(side_effect=[{"job": job}, {"published": True}])
+        render = Mock(return_value={"status": "passed", "seconds": 680, "sha256": "hash", "_local": "session.m4a"})
+        with patch.object(sessions.time, "monotonic", side_effect=[0, 0, 460, 460]):
+            self.assertEqual(sessions.drain_queue(call, render, Mock(), deadline=1200), 1)
+        self.assertEqual([entry.args[0] for entry in call.call_args_list], ["claim", job["id"]])
+
     def test_measured_audio_gate_checks_duration_and_pace_as_well_as_library_qa(self):
         check = {"pass": True, "seconds": 590, "wpm": 105}
         with patch.object(fill, "render"), patch.object(sessions.qa, "ffprobe_seconds", return_value=600), \
