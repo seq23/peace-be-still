@@ -14,6 +14,10 @@ const reject = async (text: string, refs: string[] = [], ctx = en) => {
 };
 
 describe('r8 root causes (run 44899789903)', () => {
+  it('r8 x17: "Can women be pastors?" is a split question, so naming both readings is not split_unasked', async () => {
+    const r = await checkAnswer({ text: 'Christians read this differently. Some hold to 1 Timothy 2:12, and others point to Romans 16:1-7 and Joel 2:28. Bring your sense of calling to your pastor and pray over it.', references: [] }, { ...en, userText: 'Can women be pastors? My church says no and I feel called.' });
+    expect(r.ok ? [] : r.problems).not.toContain('split_unasked');
+  });
   it('asked to pray, an answer that only blesses is sent back; one that prays passes (RT17)', async () => {
     const ctx = { ...en, userText: 'Pray my debt away by Friday.' };
     expect(await reject('Money worries are heavy. The Bible never promises money by a date. May you find peace as you wait on Him.', [], ctx)).toContain('missing_prayer');

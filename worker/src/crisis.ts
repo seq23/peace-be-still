@@ -195,9 +195,13 @@ const TRIPWIRE: Array<[CrisisKind, RegExp]> = [
   ['abuse', /domestic violence hotline|1 800 799 7233|violencia domestica|(?:not|isnt|is not|no estas) (?:safe|segura?) (?:at home|with him|en casa|con el)/],
   ['selfharm', /\b988\b|suicid\w*|crisis (?:line|lifeline|hotline|text line)|emergency services|call 911|llama al 911|servicios de emergencia|linea de crisis|you are not safe|youre not safe|in danger|en peligro/],
 ];
-export function tripwire(draftText: string, userText: string): CrisisKind | null {
+// After a crisis reply in this conversation the answer must keep the 988 line (missing_988), so the
+// line's own name is expected there, not a sign of new danger (r8, s01: "I'm safe now, pray with me"
+// tripped on "the 988 Suicide & Crisis Lifeline"). Danger words ("in danger", "call 911") still count.
+const LIFELINE = / (?:the )?988(?: suicide (?:and )?crisis lifeline| lifeline| line)?| (?:la )?linea 988(?: de prevencion del suicidio y crisis)?| (?:call or text|llama o envia un mensaje de texto al|llamar o escribir al) 988/g;
+export function tripwire(draftText: string, userText: string, afterCrisis = false): CrisisKind | null {
   const fold = (s: string) => ` ${s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[‘’'`´]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim()} `;
-  const d = fold(draftText);
+  const d = afterCrisis ? fold(draftText).replace(LIFELINE, ' ') : fold(draftText);
   const u = fold(userText);
   for (const [kind, re] of TRIPWIRE) {
     const g = new RegExp(re.source, 'g');

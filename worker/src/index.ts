@@ -26,7 +26,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, crisisText, MINDSET_FAITH_ASK, mindsetFaithAskText, fallbackMindsetText, fallbackText, fallbackTopic, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, crisisText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -57,6 +57,10 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const IDENTITY = /\b(?:(?:are you|are u|r u|ru|r you|you a|u a) (?:a |an |just a |just an )?(?:real|human|person|people|robot|bot|ai|a\.i\.|machine|computer|chatbot|pastor|preacher|minister|priest|god|jesus|the lord)|is this (?:a |an )?(?:bot|ai|robot|real person|human|computer)|(?:person|human|real|people) or (?:a |an )?(?:bot|robot|ai|machine|computer)|(?:bot|robot|ai|machine) or (?:a |an )?(?:real )?(?:person|human)|am i (?:talking|speaking|chatting) (?:to|with) (?:a |an )?(?:human|person|real person|bot|ai|robot|computer|pastor)|(?:eres|es esto) (?:un |una )?(?:persona|humano|humana|robot|bot|ia|inteligencia artificial|pastor|dios|jesus|real)|estoy hablando con (?:un |una )?(?:persona|humano|bot|robot|ia|pastor))\b/;
 const answerSchema = { type: 'object', properties: { text: { type: 'string' }, references: { type: 'array', items: { type: 'string' }, maxItems: 3 } }, required: ['text', 'references'], additionalProperties: false };
 const summarySchema = { type: 'object', properties: { summary: { type: 'string' } }, required: ['summary'], additionalProperties: false };
+const editSchema = { type: 'object', properties: { versions: { type: 'array', items: answerSchema, minItems: 2, maxItems: 3 } }, required: ['versions'], additionalProperties: false };
+const hasVersions = (d: unknown) => !!d && Array.isArray((d as { versions?: unknown }).versions) && (d as { versions: unknown[] }).versions.some(v => isAnswer(v));
+// A model that ignores the versions shape and sends one answer is still used.
+const isEdit = (d: unknown) => hasVersions(d) || isAnswer(d);
 const isAnswer = (d: unknown) => !!d && typeof (d as { text?: unknown }).text === 'string' && !!(d as { text: string }).text.trim() && Array.isArray((d as { references?: unknown }).references);
 const isSummary = (d: unknown) => !!d && typeof (d as { summary?: unknown }).summary === 'string';
 const RED_LINES = new Set(['first_person_divine', 'god_told_me', 'prophecy', 'salvation_claim', 'end_times_date', 'prosperity', 'money_ask', 'outcome_promise', 'stop_medicine', 'partisan', 'ethnicity_claim', 'secrecy', 'sexual_detail']);
@@ -310,6 +314,11 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
 
   // C08 floor: the honest answer, in code, whatever the model would say.
   if (IDENTITY.test(` ${last.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()} `)) return done({ kind: 'answer', ai: true, fixed: true, text: (mind ? identityMindsetText : identityText)[v.lang], scripture: [] });
+  if (!mind && ROLE_SWAP.test(` ${fold(last)} `)) {
+    const ref = parseReference(ROLE_VERSE);
+    const verse = ref ? await lookup(env.DB, v.translation, ref) : null;
+    return done({ kind: 'answer', ai: true, fixed: true, text: roleText[v.lang], scripture: verse ? [verse] : [] });
+  }
   if (mind && MINDSET_FAITH_ASK.test(` ${fold(last)} `)) return done({ kind: 'answer', ai: true, fixed: true, text: mindsetFaithAskText[v.lang], scripture: [] });
   // A named verse in another translation is structure, not meaning: give the stored verse in her
   // translation with one plain line (round 3: models fell back on RT26, RT34 and q02 every run).
@@ -352,9 +361,11 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Two human-written answers in this voice go in first, as an earlier exchange (one counter picks them).
   const examples = examplesFor(sampleSet(v.prompt, v.lang), v.lang, await nextSeq(env.DB, v.lang === 'es' ? 'es' : mind ? 'mindset' : 'en'));
   for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
-    const steer: Message[] = objection ? [{ role: 'system', content: variety0 ? `Your last answer needs an edit. ${objection}` : `Your last answer was not used. ${objection} Write a new answer.` }] : [];
+    const steer: Message[] = objection ? [{ role: 'system', content: variety0 ? `Your last answer needs an edit. ${objection}` : `Your last answer was not used. ${objection} Write three different new answers. Reply with JSON {"versions": [{"text": string, "references": [...]}, ...]}.` }] : [];
     const messages = [...system, ...examples, ...history.slice(0, -1), ...steer, ...history.slice(-1)];
-    const out = await runLadder(env.DB, rungs, messages, answerSchema, 700, metrics, isAnswer);
+    const out = objection
+      ? await runLadder(env.DB, rungs, messages, editSchema, 2000, metrics, isEdit)
+      : await runLadder(env.DB, rungs, messages, answerSchema, 700, metrics, isAnswer);
     if ('empty' in out) {
       if (attempt === 0) {
         await refund(env.DB, day, who.installId, hash);
@@ -364,27 +375,37 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       }
       break;
     }
-    // (c) The answer model as a third crisis detector: a draft that reaches for crisis lines is
-    // replaced by the fixed crisis reply, never shown.
-    const trip = tripwire((out.data as { text: string }).text, herWords);
-    if (trip) return crisisReply(trip, 'tripwire');
-    const checked = await checkAnswer(out.data, gate);
-    let problems = checked.ok ? [] : checked.problems;
+    // Every retry comes back as up to three versions in one call (r8: 9 of 61 shown answers repeated,
+    // because a single retry met another recent answer, or a repeat was found only on the last try);
+    // code keeps the first version that passes. Same call count, three chances.
+    const drafts = hasVersions(out.data) ? (out.data as { versions: unknown[] }).versions.filter(isAnswer) as Array<{ text: string; references: string[] }> : [out.data as { text: string; references: string[] }];
+    let problems: string[] = [];
     let variety = '';
-    if (checked.ok) {
-      const plainShape = shapeOf(checked.text);
-      const shape = await hashShape(plainShape, env.IP_HASH_SECRET!);
-      const scripture = withNamed(checked.scripture);
-      problems = repeats(shape, recent);
-      if (problems.length) { variety = varietyObjection(shape, plainShape.said, recent); spares.push({ text: checked.text, scripture, shape, judged: false }); }
-      else {
-        const j = await judge(checked.text, scripture);
-        if (j.verdict === 'fail') problems = j.which.map(w => `judge:${w}`);
-        if (j.verdict === 'down') tally(metrics, 'judge_down');
-        if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);
-        if (!problems.length) return show(checked.text, scripture, shape);
-        if (problems.length === 1 && problems[0] === 'judge:voice_low') spares.push({ text: checked.text, scripture, shape, judged: true });
+    for (const [k, draft] of drafts.entries()) {
+      // (c) The answer model as a third crisis detector: a draft that reaches for crisis lines is
+      // replaced by the fixed crisis reply, never shown.
+      const trip = tripwire(draft.text, herWords, gate.afterCrisis);
+      if (trip) return crisisReply(trip, 'tripwire');
+      const checked = await checkAnswer(draft, gate);
+      let found = checked.ok ? [] : checked.problems;
+      let edit = '';
+      if (checked.ok) {
+        const plainShape = shapeOf(checked.text);
+        const shape = await hashShape(plainShape, env.IP_HASH_SECRET!);
+        const scripture = withNamed(checked.scripture);
+        found = repeats(shape, recent);
+        if (found.length) { edit = varietyObjection(shape, plainShape.said, recent); spares.push({ text: checked.text, scripture, shape, judged: false }); }
+        else {
+          const j = await judge(checked.text, scripture);
+          if (j.verdict === 'fail') found = j.which.map(w => `judge:${w}`);
+          if (j.verdict === 'down') tally(metrics, 'judge_down');
+          if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);
+          if (!found.length) return show(checked.text, scripture, shape);
+          if (found.length === 1 && found[0] === 'judge:voice_low') spares.push({ text: checked.text, scripture, shape, judged: true });
+        }
       }
+      // The next try is steered by the version closest to done: one that only repeats is edited.
+      if (k === 0 || (edit && !variety)) { problems = found; variety = edit; }
     }
     if (problems.some(p => RED_LINES.has(p) || (p.startsWith('judge:') && p !== 'judge:voice_low'))) tally(metrics, 'red_line');
     for (const p of problems) tally(metrics, `gate:${p}`);

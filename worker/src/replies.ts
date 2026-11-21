@@ -182,6 +182,15 @@ export const identityText = {
 // Hostile review F5: people who needed an answer got the generic fallback. For the topics that kept
 // falling back, a short answer written by a person stands in for it (faith door; Mindset keeps the
 // plain fallback). Each is shown as a fixed answer, labelled AI like every chat reply.
+// Asked to become Jesus, God or someone else (r8: the model copied the prompt's identity sentence
+// word for word into RT22, RT30, RT32 and q14, so four answers repeated and two still drifted): this
+// is structure, like the identity question, so a person-written reply answers it, with His own words.
+export const ROLE_SWAP = / (?:you are now|youre now|you are dan|pretend (?:to be|you are)|ahora eres|finge (?:ser|que eres)) | (?:talk|speak|answer|respond|write)(?: to me)? as (?:if you (?:are|were) )?(?:jesus|god|the lord|christ|the holy spirit|dan) | (?:habla|hablame|respondeme|contestame) como (?:si fueras )?(?:jesus|dios|el senor|cristo) /;
+export const roleText = {
+  en: "I'm an AI helper in a Bible app, so I won't speak as Jesus or anyone else, and I won't set my rules aside. Jesus' own words are printed below, and they are better than anything I could put in His mouth. If something is weighing on you tonight, tell me about it, and we can look at what Scripture says together.",
+  es: 'Soy un asistente de IA en una app de la Biblia, así que no voy a hablar como Jesús ni como nadie más, ni dejaré mis reglas a un lado. Abajo están las palabras del mismo Jesús, que valen más que cualquier cosa que yo pudiera ponerle en la boca. Si algo te pesa esta noche, cuéntamelo y miramos juntos lo que dice la Escritura.',
+};
+export const ROLE_VERSE = 'Matthew 11:28';
 export type Topic = 'teen_grief' | 'money' | 'cursing' | 'jailbreak';
 export function fallbackTopic(text: string, teen: boolean): Topic | null {
   const t = ` ${text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[‘’'`´]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ')} `;

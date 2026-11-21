@@ -70,6 +70,23 @@ describe('variety across answers (round 4 finding 2)', () => {
 });
 
 describe('variety in the chat path', () => {
+  it('r8: the edit asks for versions in one call, and the first that repeats nothing is shown', async () => {
+    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold us close tonight.', ['Psalm 34:18']);
+    const again = good('Loss takes time to carry. Lord, hold us close tonight.', ['Psalm 34:18']);
+    const a = scripted('workers-ai', [first]);
+    const d = deps({ rungList: [a.rung] });
+    const token = await tokenFor(d);
+    const conversation = crypto.randomUUID();
+    await chat(d, 'My mama died last week.', { token, body: { conversation } });
+    const b = scripted('workers-ai', [again, { versions: [
+      good('Loss takes time to carry. Lord, hold us close tonight.', ['Psalm 34:18']),
+      good('Loss takes time to carry. May the Lord keep you near.', ['Psalm 34:18']),
+    ] }]);
+    const r = await chat(deps({ rungList: [b.rung] }), 'I still cry every day.', { token, body: { conversation } });
+    expect(r.body.kind).toBe('answer');
+    expect(r.body.text).toBe('Loss takes time to carry. May the Lord keep you near.');
+    expect(b.calls.length).toBe(2);
+  });
   it('her second answer that closes like her first is rewritten; a different one is shown', async () => {
     const first = good('Grief can sit heavy in the chest for a long while. Lord, hold us close tonight.', ['Psalm 34:18']);
     const again = good('Loss takes time to carry. Lord, hold us close tonight.', ['Psalm 34:18']);

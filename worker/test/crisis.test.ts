@@ -216,6 +216,18 @@ describe('the crisis reply does not stick (s01)', () => {
     expect(body.ai).toBe(true);
     expect(await readMemory(env.DB, installOf(token))).toBeNull();
   });
+  it('r8 s01: after a crisis turn, an answer that names the 988 Suicide & Crisis Lifeline is shown; new danger words still trip', async () => {
+    const draft = 'You reached out, and that took courage. Lord, keep us close tonight and thank You for the one who answered. The 988 Suicide & Crisis Lifeline is there any time: call or text 988.';
+    const rung = scripted('gemini-free', [{ text: draft, references: ['Psalm 4:8'] }]);
+    const d = deps({ rungList: [rung.rung] });
+    const r = await call(d, '/api/chat', { token: await tokenFor(d), body: { conversation: crypto.randomUUID(), door: 'faith', voice: 'plain', language: 'en', messages: [
+      { role: 'user', text: 'I want to kill myself' },
+      { role: 'user', text: "I called 988 and talked to someone. I'm safe now. Can you pray with me?" },
+    ] } });
+    expect(((await r.json()) as { kind: string }).kind).toBe('answer');
+    expect(tripwire(draft, 'I feel heavy')).toBe('selfharm');
+    expect(tripwire('If you are in danger right now, call 911.', "I'm safe now", true)).toBe('selfharm');
+  });
   it('a phrase split over her last two messages is still caught', () => {
     expect(floor([{ role: 'user', text: 'I just want to' }, { role: 'assistant', text: 'Go on.' }, { role: 'user', text: 'die' }]).sure).toBe('selfharm');
   });
