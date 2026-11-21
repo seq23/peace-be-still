@@ -63,6 +63,21 @@ test('the terms and privacy policy name every time free chat is offered to a pai
   }
 });
 
+test('the privacy policy names the paid model and every host the Worker may send paid chat to, and the backup', () => {
+  const vars = read('worker/wrangler.jsonc');
+  const v = (name: string) => vars.match(new RegExp(`"${name}": "([^"]*)"`))?.[1] ?? '';
+  const shown: Record<string, string> = { deepinfra: 'DeepInfra', together: 'Together', fireworks: 'Fireworks' };
+  const hosts = v('PAID_HOSTS').split(',').filter(Boolean);
+  assert.equal(v('PAID_PROVIDER'), 'openrouter-zdr');
+  assert.ok(hosts.length > 0);
+  for (const f of ['legal/privacy.md', 'legal/es/privacidad.md', 'site/public/privacy.html', 'site/public/es/privacidad.html']) {
+    const text = read(f);
+    for (const h of hosts) assert.ok(shown[h] && text.includes(shown[h]), `${f} does not name ${h}`);
+    assert.ok(text.includes('DeepSeek V4.1 Flash') && text.includes('OpenRouter'), `${f} does not name the paid model`);
+    assert.ok(/Google Gemini (?:on a paid plan|en un plan de pago)/.test(text), `${f} does not name the paid backup`);
+  }
+});
+
 test('NEGATIVE: no customer-facing words say "lane" (internal jargon); code names may', () => {
   const files = execSync('git ls-files app/src/i18n app/src/config/products.json store legal site/content site/public', { cwd: new URL('.', root) }).toString().split('\n')
     .filter(f => /\.(json|md|mjs|html|txt|xml)$/.test(f));

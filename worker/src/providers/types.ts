@@ -9,7 +9,8 @@ export class RungError extends Error {
 }
 /** One rung: messages in, parsed JSON out (structured output on every provider; prose is never parsed). */
 /** cached: input tokens served from the route's prompt cache (part of in). */
-export type Usage = { in: number; out: number; think: number; cached?: number };
+/** usd: what the route itself billed for the call (OpenRouter's usage.cost), when it says. */
+export type Usage = { in: number; out: number; think: number; cached?: number; usd?: number };
 export type Rung = (messages: Message[], schema: JsonSchema, maxTokens: number, onUsage?: (u: Usage) => void) => Promise<unknown>;
 export function parseJson(value: unknown): unknown {
   if (value && typeof value === 'object') return value;

@@ -32,8 +32,9 @@ export function openRouter(apiKey: string | undefined, models: string[]): Rung {
 
 /**
  * A PRIVATE paid route through OpenRouter (paid lane research, 21 Nov 2026): one model, served only
- * by the named US hosts, only with zero data retention and no data collection, never a fallback to
- * another host. Never DeepSeek's own API (its data is stored in China): the host list decides.
+ * by the named US hosts, in that order (the cheapest first; its prompt cache stays warm), only with
+ * zero data retention and no data collection; a host that is down hands over only to the next named
+ * host, never to anyone else. Never DeepSeek's own API (its data is stored in China): the list decides.
  */
 export function openRouterPrivate(apiKey: string | undefined, model: string, hosts: string[]): Rung {
   return async (messages, schema, maxTokens, onUsage) => {
@@ -43,13 +44,16 @@ export function openRouterPrivate(apiKey: string | undefined, model: string, hos
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
       body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature: 0.7,
-        provider: { zdr: true, data_collection: 'deny', only: hosts, allow_fallbacks: false },
+        provider: { zdr: true, data_collection: 'deny', only: hosts, order: hosts, allow_fallbacks: true },
+        usage: { include: true },
         // Thinking off (run 10b root cause: with effort low, DeepSeek V4.1 spent all 350 tokens reasoning and sent no content).
         reasoning: { enabled: false },
         response_format: { type: 'json_schema', json_schema: { name: 'reply', strict: true, schema } } }),
-    }, { retries: 1 }) as { choices?: Array<{ message?: { content?: unknown } }>; usage?: { prompt_tokens?: number; completion_tokens?: number; completion_tokens_details?: { reasoning_tokens?: number }; prompt_tokens_details?: { cached_tokens?: number } } };
+    }, { retries: 1 }) as { choices?: Array<{ finish_reason?: string; message?: { content?: unknown } }>; usage?: { cost?: number; prompt_tokens?: number; completion_tokens?: number; completion_tokens_details?: { reasoning_tokens?: number }; prompt_tokens_details?: { cached_tokens?: number } } };
     const u = data.usage;
-    if (u && onUsage) { const think = u.completion_tokens_details?.reasoning_tokens ?? 0; onUsage({ in: u.prompt_tokens ?? 0, out: Math.max(0, (u.completion_tokens ?? 0) - think), think, cached: u.prompt_tokens_details?.cached_tokens ?? 0 }); }
+    if (u && onUsage) { const think = u.completion_tokens_details?.reasoning_tokens ?? 0; onUsage({ in: u.prompt_tokens ?? 0, out: Math.max(0, (u.completion_tokens ?? 0) - think), think, cached: u.prompt_tokens_details?.cached_tokens ?? 0, ...(typeof u.cost === 'number' ? { usd: u.cost } : {}) }); }
+    // Run 12: 12 of 127 DeepSeek answers stopped at the cap mid-JSON and read as malformed; say so.
+    if (data.choices?.[0]?.finish_reason === 'length') throw new RungError('cut_off', 'OPENROUTER_MAX_TOKENS');
     return parseJson(data.choices?.[0]?.message?.content);
   };
 }

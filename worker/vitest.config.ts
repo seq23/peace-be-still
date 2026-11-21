@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
 const here = (p: string) => fileURLToPath(new URL(p, import.meta.url));
-const chapters: Array<[string, number]> = [['PSA', 46], ['PSA', 34], ['PSA', 23], ['PSA', 91], ['PSA', 4], ['PSA', 151], ['ISA', 41], ['PHI', 4], ['JOH', 3], ['JOH', 11], ['JOH', 14], ['JOH', 15],
+const chapters: Array<[string, number]> = [['PSA', 46], ['PSA', 130], ['PSA', 34], ['PSA', 23], ['PSA', 91], ['PSA', 4], ['PSA', 151], ['ISA', 41], ['PHI', 4], ['JOH', 3], ['JOH', 11], ['JOH', 14], ['JOH', 15],
   ['MAT', 11], ['MAT', 6], ['MAT', 24], ['ROM', 8], ['ROM', 6], ['ROM', 10], ['1PE', 5], ['2SA', 13], ['2CO', 12], ['HEB', 13], ['1TI', 4], ['PRO', 3], ['ECC', 3], ['EPH', 2], ['1JO', 1],
   ['1CO', 12], ['2CO', 9], ['PSA', 37], ['PSA', 13], ['PSA', 55], ['MAT', 9], ['MAT', 22], ['ROM', 1], ['PRO', 22], ['PSA', 101], ['1TH', 4],
   ['1CO', 6], ['1CO', 7], ['SOL', 2], ['SOL', 8], ['LAM', 3], ['MAT', 5], ['MAT', 21]];

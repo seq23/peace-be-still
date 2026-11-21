@@ -4,7 +4,7 @@
 // objection, then the fixed fallback reply. Nothing here keeps or logs the text.
 import { banned, bookCode, fold, parseReference, type Translation } from '../shared';
 import { faithContentIssues } from '../../../app/src/model';
-import { lookup, type Scripture } from '../scripture';
+import { chapterVerses, lookup, type Scripture } from '../scripture';
 import type { Reference } from '../shared';
 
 export type Draft = { text: string; references: string[] };
@@ -168,7 +168,21 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
       // A book that is not in the Bible, written like a reference ("Hezekiah 3:5", "1 Enoch 1:9",
       // "Jasher 2:1"), is made up too. Only a capitalised name counts: "at 3:30" is a time.
       if (!r.book) { if (/^\p{Lu}\p{Ll}+$/u.test(r.name) && !/^\s*(?:a\.?m\.?|p\.?m\.?|hrs?)\b/i.test(text.slice(text.indexOf(r.raw) + r.raw.length))) madeUp.push(r.raw); continue; }
-      const s = await lookup(ctx.db, ctx.translation, { book: r.book, chapter: r.chapter, verse: r.verse, ...(r.end ? { endVerse: r.end } : {}) });
+      let s = await lookup(ctx.db, ctx.translation, { book: r.book, chapter: r.chapter, verse: r.verse, ...(r.end ? { endVerse: r.end } : {}) });
+      // The verse number: a line from this chapter cited under the wrong verse ("watchmen wait for the
+      // morning (Psalm 130:1-2)", really 130:6, model compare 21 Nov 2026) gets the right number.
+      if (s) {
+        const sentence = text.split(/(?<=[.!?…])\s+/).find(x => x.includes(r.raw))?.replace(r.raw, ' ') ?? '';
+        const content = [...new Set(words(sentence).filter(w => w.length > 3).map(w => w.slice(0, 4)))];
+        const share = (verse: string) => { const v = ` ${fold(verse)}`; return content.filter(w => v.includes(` ${w}`)).length; };
+        if (content.length >= 4 && share(s.text) < 2) {
+          const best = (await chapterVerses(ctx.db, ctx.translation, r.book, r.chapter)).map(v => ({ verse: v.verse, n: share(v.text) })).sort((a, b) => b.n - a.n)[0];
+          if (best && best.n >= 3 && best.n / content.length >= 0.4 && (best.verse < r.verse || best.verse > (r.end ?? r.verse))) {
+            const fixed = await lookup(ctx.db, ctx.translation, { book: r.book, chapter: r.chapter, verse: best.verse });
+            if (fixed) { text = text.replace(r.raw, r.raw.replace(/\d+:\d+(?:\s*[-–]\s*\d+)?$/, `${r.chapter}:${best.verse}`)); s = fixed; notes.push('verse_number_fixed'); }
+          }
+        }
+      }
       if (!s) madeUp.push(r.raw);
       else if (unfit(s)) problems.push('verse_unfit'); // named in her answer: it has to be rewritten
       else add(s);
@@ -187,6 +201,7 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   const cited = scripture.map(s => ` ${fold(s.text)} `);
   const stored = (run: string) => { const w = words(run); return w.length < 6 || cited.some(c => c.includes(` ${w.join(' ')} `)); };
   // Half its content words are the words of a verse the app prints under it.
+  const unsourced: string[] = [];
   const faithful = (run: string) => {
     const content = words(run).filter(w => w.length > 3).map(w => w.slice(0, 4));
     return content.length > 0 && cited.some(c => content.filter(w => c.includes(` ${w}`)).length / content.length >= 0.5);
@@ -199,7 +214,7 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
     if (words(run).length < 6) continue;
     if (stored(run)) text = text.replace(m[0], ''); // the app shows the stored text below
     else if (faithful(run)) { text = text.replace(m[0], ''); notes.push('misquote_replaced'); }
-    else problems.push('non_store_scripture');
+    else unsourced.push(m[0]);
   }
   // "Jesus said that..." is a paraphrase in her own words, not a quotation.
   // Her own words handed back ("Song of Solomon says love is beautiful", x16) are not a quotation:
@@ -208,7 +223,15 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   // A faithful paraphrase of a verse the app prints right under it ("Psalm 34:18 says God is close to
   // the brokenhearted") is not a made-up quotation: half its content words are that verse's own.
   // Run 44856144997: 21 drafts were refused for exactly that shape.
-  for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1]) && !faithful(m[1]) && !hers.includes(` ${words(m[1]).slice(0, 3).join(' ')} `)) problems.push('non_store_scripture');
+  for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1]) && !faithful(m[1]) && !hers.includes(` ${words(m[1]).slice(0, 3).join(' ')} `)) unsourced.push(m[0]);
+  // Bible words that are not the printed text of a verse it cites (from memory, another translation, or
+  // made up) go out with their sentence, so she never reads them as Scripture (run 12: 16 drafts were
+  // rewritten for one such line). An answer with too little left is written again.
+  if (unsourced.length) {
+    const kept = text.split(/(?<=[.!?…]["”»']?)\s+/).filter(sentence => !unsourced.some(q => sentence.includes(q) || q.includes(sentence))).join(' ').trim();
+    if (words(kept).length < 25) problems.push('non_store_scripture');
+    else { text = kept; notes.push('unsourced_quote_dropped'); }
+  }
   text = text.replace(/\s+([,.;:!?])/g, '$1').replace(/\(\s*\)/g, '').replace(/\s{2,}/g, ' ').trim();
   text = tidyReferences(text);
   const archaic = words(text).filter(w => ARCHAIC.has(w)).length;

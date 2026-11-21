@@ -12,7 +12,7 @@ import './env';
 import { cleanup } from './cleanup';
 import { addUserSpend, appSpendMonth, blockFor, capAlert, openRouterHeadroom, safetyBudgetLeft, safetyMicro, spendStatus, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
 import { bump, logCode, reserve } from './counts';
-import { CRISIS_THINKING_HEADROOM, confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
+import { aboutScripture, CRISIS_THINKING_HEADROOM, confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
 import { paidStatus, recheckMemory, type Paid } from './entitlement';
 import { storyArt } from './storyart';
@@ -26,7 +26,7 @@ import { openRouter, openRouterPrivate } from './providers/openrouter';
 import type { Message } from './providers/types';
 import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
-import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
+import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, shortBusyText, checkInQuestion, checkInText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
@@ -79,6 +79,7 @@ const THREE_HOURS = 3 * 3600_000;
 // The regeneration is told in words what was wrong, never a line to copy.
 const OBJECTIONS: Record<string, string> = {
   stock_phrase: 'It used a stock phrase; say it in fresh words of your own.',
+  crisis_reach: 'They asked about the Bible and wrote nothing about danger to themselves: answer the question itself, with no crisis lines or hotlines.',
   non_store_scripture: 'It put Bible words in quotation marks or after "says" that are not the printed King James text. Do not retell any verse: name it by its reference and say in your own words what it means here.',
   missing_doctor: 'The question is about medicine: say plainly, in your own words, to talk with their doctor before changing anything.',
   missing_not_literal: 'Say plainly that Jesus is not speaking literally here and that God never wants anyone to hurt their body.',
@@ -151,6 +152,13 @@ const paidRung = (env: Env, now: number): LadderRung => {
   return { id: `paid-${provider}:${env.PAID_MODEL}`, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5), cached: usd(env.PAID_PRICE_CACHED_PER_M, usd(env.PAID_PRICE_IN_PER_M, 0.3) / 4) } };
 };
 
+/** The paid lane's private backup when PAID_PROVIDER is not Gemini: PAID_BACKUP_MODEL on the billed key. */
+const paidBackupRung = (env: Env, now: number): LadderRung => ({
+  id: `paid-gemini:${env.PAID_BACKUP_MODEL}`, cap: 1_000_000, day: utcDay(now),
+  call: gemini(env.PBS_GEMINI_API_KEY, env.PAID_BACKUP_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL }),
+  price: { in: usd(env.CRISIS_PRICE_IN_PER_M, 0.3), out: usd(env.CRISIS_PRICE_OUT_PER_M, 2.5), cached: usd(env.CRISIS_PRICE_IN_PER_M, 0.3) / 10 },
+});
+
 /** The stronger private model for a flagged conversation (CRISIS_MODEL, billed key only; never a free model). */
 const crisisRung = (env: Env, now: number): LadderRung => ({
   id: `crisis-gemini:${env.CRISIS_MODEL}`, cap: 1_000_000, day: utcDay(now),
@@ -162,11 +170,12 @@ const crisisRung = (env: Env, now: number): LadderRung => ({
 /** A paid install meets no device, IP or app-wide message count (it is only counted). */
 const PAID_UNCAPPED = 1_000_000;
 const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;
-async function check<T>(env: Env, now: number, first: LadderRung, messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true): Promise<T> {
+async function check<T>(env: Env, now: number, chain: LadderRung | LadderRung[], messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true): Promise<T> {
   const metrics: Metrics = new Map();
   // The backup reads the same words the risk read does, which may be about a crisis: only the
   // private (paid) model may see them, never a free one.
-  const rungs = backup && (env.PBS_GEMINI_API_KEY || (env.PAID_PROVIDER && env.PAID_PROVIDER !== 'gemini')) ? [first, paidRung(env, now)] : [first];
+  const first = Array.isArray(chain) ? chain[0] : chain;
+  const rungs = Array.isArray(chain) ? chain : backup && (env.PBS_GEMINI_API_KEY || ((env.PAID_PROVIDER as string) && (env.PAID_PROVIDER as string) !== 'gemini')) ? [first, paidRung(env, now)] : [first];
   const out = await runLadder(env.DB, rungs, messages, schema, maxTokens, metrics, d => ok(read(d)));
   // A private backup's cost counts toward the app's paid spend like any answer.
   for (const [metric, n] of metrics) await bump(env.DB, centralDay(now), metric === 'paid_spend_micro' ? metric : `${first.id}:${metric}`, n);
@@ -189,10 +198,18 @@ export const realDeps: Deps = {
     // The judge thinks before it scores (gpt-oss): it gets the budget it was calibrated with (run 10: at 200
     // tokens its reasoning used everything and 76 of 76 reads came back empty, falling to the paid backup).
     // Free chat never touches the billed key: its judge has no paid backup, and a down judge is `down`.
+    // Paid chat on DeepSeek (her ruling 21 Nov 2026: all-in cost <= $0.40 per 1,000): the private paid model
+    // judges first, its fixed judge prompt a cached prefix (about a quarter of gpt-oss's cost per read);
+    // Workers AI's gpt-oss is its backup. Free chat keeps Workers AI only, never the billed route.
+    if (lane !== 'free' && (env.PAID_PROVIDER as string) === 'openrouter-zdr') {
+      const paidJudge = { ...paidRung(env, now), id: `judge-${env.PAID_PROVIDER}:${env.PAID_MODEL}` };
+      return check(env, now, [paidJudge, first], judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
+    }
     return check(env, now, first, judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free');
   },
   rungs(env, now, lane = 'free') {
-    if (lane === 'paid') return [paidRung(env, now)];
+    // The private model, then (when it is not Gemini already) Gemini on the billed key: both private, both paid.
+    if (lane === 'paid') return (env.PAID_PROVIDER as string) !== 'gemini' && env.PAID_BACKUP_MODEL ? [paidRung(env, now), paidBackupRung(env, now)] : [paidRung(env, now)];
     if (lane === 'crisis') return [crisisRung(env, now)];
     const built: Record<string, LadderRung[]> = {
       'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL, { thinking: false }), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
@@ -543,7 +560,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The crisis model thinks (CRISIS_THINKING_LEVEL) and Gemini counts thinking inside the output cap:
   // at 350 it ran out mid-answer (run 10d: 21 of 48 crisis-lane answers malformed, 7 sent as busy).
   // Only the tokens used are billed, so the headroom costs nothing when unused.
-  const answerTokens = (short && lane === 'paid' ? Math.round(int(env.ANSWER_MAX_TOKENS, 350) / 2) : int(env.ANSWER_MAX_TOKENS, 350)) + (lane === 'crisis' ? CRISIS_THINKING_HEADROOM : 0);
+  // The paid lane's own cap (PAID_ANSWER_MAX_TOKENS): DeepSeek writes the same answer in more tokens than
+  // Gemini, and at 350 it stopped mid-answer on 12 of 127 (run 12). Only tokens used are billed.
+  const cap = lane === 'paid' ? int(env.PAID_ANSWER_MAX_TOKENS, int(env.ANSWER_MAX_TOKENS, 350)) : int(env.ANSWER_MAX_TOKENS, 350);
+  const answerTokens = (short && lane === 'paid' ? Math.round(cap / 2) : cap) + (lane === 'crisis' ? CRISIS_THINKING_HEADROOM : 0);
   if (short && lane === 'paid') system.push({ role: 'system', content: SHORT_ANSWER[v.lang] });
   const earlierTurns = turns.slice(0, -1).filter(t => t.role === 'user');
   const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: ask.door, userText: last, earlier: earlierTurns.map(t => t.text).join('\n'), afterCrisis: (sticky && state?.asked === 1) || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
@@ -559,7 +579,13 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const recent = await recentShapes(env.DB, me.installId);
   const show = (text: string, scripture: Scripture[], shape: Shape) => done({ kind: 'answer', ai: true, text, scripture }, () => {
     ctx.waitUntil(saveShape(env.DB, me.installId, shape, now).catch(() => logCode('SHAPE_SAVE_FAILED')));
-    if (paid.paid && lane === 'paid') ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
+    // Her memory note is rewritten every MEMORY_EVERY messages (not every one: it is a paid call), from
+    // the turns since the last rewrite, so nothing she said in between is skipped; and on her first.
+    const every = Math.max(1, int(env.MEMORY_EVERY, 3));
+    if (paid.paid && lane === 'paid' && (!memory || (row?.messages ?? 0) % every === 0)) {
+      const since = turns.slice(-(2 * every - 1)).filter(t => t.role === 'user').map(t => t.text).join('\n');
+      ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: since, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
+    } else if (paid.paid && lane === 'paid') tally(metrics, 'memory_skipped');
   });
   const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane);
   let objection: string | null = null;
@@ -626,18 +652,32 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       // (c) The answer model as a third crisis detector: a draft that reaches for crisis lines is
       // replaced by the fixed crisis reply, never shown.
       const trip = tripwire(draft.text, herWords, gate.afterCrisis);
-      if (trip) return crisisReply(trip, 'tripwire');
+      let reach = false;
+      if (trip) {
+        // The draft reached for crisis help: the safety model reads her words and names the kind (run 12:
+        // a husband's control and a coach's secret texts got the 988 card for "if you are in danger").
+        // A question about Scripture that it reads as calm (the rape of Tamar) is a rewrite, not a card;
+        // anything else stays a card, toward safety.
+        const c = await confirm();
+        if (c.level !== 'none') return crisisReply(c.kind, 'tripwire');
+        if (c.read === 'down' || !aboutScripture(last)) return crisisReply(trip, 'tripwire');
+        tally(metrics, 'tripwire_scripture_calm'); reach = true;
+      }
       const checked = await checkAnswer(draft, gate);
-      let found = checked.ok ? [] : checked.problems;
+      let found = checked.ok ? (reach ? ['crisis_reach'] : []) : checked.problems;
       let edit = '';
-      if (checked.ok) {
-        const plainShape = shapeOf(checked.text);
+      if (checked.ok && !reach) {
+        const plainShape = withoutTopic(shapeOf(checked.text), herWords);
         const shape = await hashShape(plainShape, env.IP_HASH_SECRET!);
         const scripture = withNamed(checked.scripture);
         found = repeats(shape, recent);
         if (found.length) { edit = varietyObjection(shape, plainShape.said, recent); spares.push({ text: checked.text, scripture, shape, judged: false }); }
         else {
-          const j = await judge(checked.text, scripture);
+          // The judge reads meaning where it earns its cost: Scripture, doctrine, a crisis. A Mindset answer
+          // (no Scripture by rule) outside a crisis is checked by code alone (her ruling 21 Nov 2026).
+          const needsJudge = scripture.length > 0 || ask.door !== 'mindset' || lane === 'crisis' || gate.afterCrisis;
+          const j = needsJudge ? await judge(checked.text, scripture) : ({ verdict: 'pass', voice: null } as JudgeVerdict);
+          if (!needsJudge) tally(metrics, 'judge_skipped');
           if (j.verdict === 'fail') found = j.which.map(w => `judge:${w}`);
           if (j.verdict === 'down') tally(metrics, 'judge_down');
           if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);

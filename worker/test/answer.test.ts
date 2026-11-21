@@ -100,6 +100,28 @@ describe('verses come only from the store', () => {
       expect(r.notes).toContain('misquote_replaced');
     }
   });
+  it('the verse number: a line of Psalm 130 cited under the wrong verse gets the right number (130:6, not 130:1-2); a right number is left alone', async () => {
+    const r = await checkAnswer({ text: 'Waiting on God is not wasted time. You can keep watching for the Lord more than the watchmen wait for the morning (Psalm 130:1-2). Lord, help us wait with hope tonight.', references: [] }, { ...en, userText: 'How do I know God hears my prayers when nothing changes?' });
+    expect(r.ok).toBe(true);
+    if (r.ok) {
+      expect(r.text).toContain('130:6');
+      expect(r.text).not.toContain('130:1');
+      expect(r.notes).toContain('verse_number_fixed');
+      expect(r.scripture.map(s => s.ref)).toContain('Psalm 130:6');
+    }
+    const right = await checkAnswer({ text: 'Waiting on God is not wasted time. You can keep watching for the Lord more than the watchmen wait for the morning (Psalm 130:6). Lord, help us wait with hope tonight.', references: [] }, { ...en, userText: 'How do I know God hears my prayers when nothing changes?' });
+    expect(right.ok && right.notes.includes('verse_number_fixed')).toBe(false);
+    if (right.ok) expect(right.text).toContain('130:6');
+  });
+  it('Bible words that are no cited verse go out with their sentence (she never reads them as Scripture); too little left is written again', async () => {
+    const long = 'Waiting on God is not wasted time, even when nothing seems to move. You can bring the same prayer again tomorrow, and it still counts. As the Bible puts it, "the Lord rewards every tear you cry in secret." God hears the person who keeps asking. Lord, help us keep asking with honest hearts.';
+    const r = await checkAnswer({ text: long, references: ['Psalm 34:18'] }, { ...en, userText: 'How do I know God hears my prayers when nothing changes?' });
+    expect(r.ok).toBe(true);
+    if (r.ok) { expect(r.text).not.toMatch(/rewards every tear/); expect(r.notes).toContain('unsourced_quote_dropped'); expect(r.text).toMatch(/keeps asking/); }
+    const short = await checkAnswer({ text: 'As the Bible puts it, "the Lord rewards every tear you cry in secret." Lord, help us.', references: ['Psalm 34:18'] }, en);
+    expect(short.ok).toBe(false);
+    if (!short.ok) expect(short.problems).toContain('non_store_scripture');
+  });
   it('a misquoted John 3:16 comes out word for word from the store', async () => {
     const r = await checkAnswer({ text: 'Remember this: "For God so loved the world that he gave his only Son, so that whoever believes in him will not perish but have eternal life" (John 3:16). Father, let us rest in that love.', references: ['John 3:16'] }, en);
     expect(r.ok).toBe(true);
