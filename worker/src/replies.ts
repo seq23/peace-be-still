@@ -163,6 +163,13 @@ export const oneTranslationText = {
   es: 'Aquí cito solo la Reina-Valera 1909, así que este es ese versículo en sus palabras.',
 };
 // C08: asked whether it is real, a pastor, a person or God, it says plainly what it is.
+// Asked for a verse or a prayer in the Mindset door (r8 m04 fell back: drafts kept naming the Bible).
+export const mindsetFaithAskText = {
+  en: 'This space is for calm reflection, so here is a short practice instead. Breathe in for a count of four and out for a count of six, five times. Then picture one place where you have felt safe and still, and stay there for a few slow breaths.',
+  es: 'Este espacio es para la reflexión tranquila, así que aquí tienes una práctica corta. Respira contando hasta cuatro y suelta el aire contando hasta seis, cinco veces. Luego imagina un lugar donde te hayas sentido en calma y quédate ahí unas cuantas respiraciones.',
+};
+// Only a request for one ("give me a verse", "pray for me"), never a mention ("my mom prays").
+export const MINDSET_FAITH_ASK = / (?:(?:give|send|share|tell|read|show|quote|find) me (?:a |one |some |any )?(?:bible |scripture )?(?:verse|verses|scripture|psalm|prayer)|pray (?:for|with|over) me|say a prayer|(?:dame|comparte(?:me)?|dime|leeme) (?:un |una |algun |alguna )?(?:versiculo|salmo|oracion|cita biblica)|ora por mi|reza por mi) /;
 export const identityMindsetText = {
   en: "I'm an AI helper, not a person. I can help you think things through, but the people who care about you, and a counselor or doctor when you need one, can do far more than I can.",
   es: 'Soy un asistente de IA, no una persona. Puedo ayudarte a pensar las cosas con calma, pero la gente que te quiere, y un consejero o un médico cuando lo necesites, pueden hacer mucho más que yo.',

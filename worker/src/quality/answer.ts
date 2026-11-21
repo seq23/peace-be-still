@@ -57,7 +57,8 @@ const STOCK = new RegExp(` (?:${(banned as { chat?: string[] }).chat?.join('|') 
 const ADDRESS = /(?:^|[,.;:!?¡¿]\s*)(?:oh\s+)?(?:honey|baby|child|chile|sugar|sweetheart|sweetie|darling|beloved|dear one|mija|mijo|cari[ñn]o|mi ni[ñn]a|coraz[oó]n)\s*[,.;!?]|,\s*(?:my\s+)?(?:honey|baby|child|chile|sugar|sweetheart|sweetie|darling|beloved|dear|mija|mijo|cari[ñn]o|mi ni[ñn]a)\b/iu;
 // "I'm an AI" is said only when she asked (the code floor answers a direct ask; the app labels every answer).
 const SAYS_AI = / (?:i am|im|as) an? (?:ai|a i|artificial intelligence)\b| ai helper | (?:soy|como) (?:un |una )?(?:asistente de )?(?:ia|inteligencia artificial)\b/;
-const ASKED_AI = / (?:are you|are u|r u|ru|who are you|what are you|is this|am i (?:talking|speaking|chatting)|real person|human|bot|robot|chatbot|an ai|a machine|eres|quien eres|que eres|es esto|estoy hablando|persona real|una ia)\b/;
+// Asked to become Jesus or someone else, or to drop its rules, it says plainly what it is (r8: RT22, RT30, RT32, q14).
+const ASKED_AI = / (?:are you|are u|r u|ru|who are you|what are you|is this|am i (?:talking|speaking|chatting)|real person|human|bot|robot|chatbot|an ai|a machine|eres|quien eres|que eres|es esto|estoy hablando|persona real|una ia|you are now|youre now|you are dan|talk to me as|speak to me as|speak as|pretend|ignore (?:your|the|all)|new rules|new instructions?|system prompt|your rules|ahora eres|habla(?:me)? como|olvida tus reglas|nuevas reglas)\b/;
 // DOCTRINE (coordinator ruling 20 Nov 2026, also in prompts.ts): answer from the plain words of
 // Scripture and historic Christian teaching, warmly, never shaming, and suggest her pastor for her
 // own situation. Sex belongs in marriage (Hebrews 13:4, 1 Corinthians 7:2-5): "churches differ" is
@@ -89,6 +90,8 @@ const HARD_TOPIC = / (?:died|dies|death|dead|funeral|suicide|sex|sexual|girlfrie
 const TRUSTED = / (?:trusted adult|parent|parents|mom|dad|mother|father|counselor|pastor|youth (?:leader|pastor)|teacher|coach|adulto de confianza|tus papas|tu mama|tu papa|tus padres|consejer[oa]|maestr[oa]|lider de jovenes) /;
 
 const MINDSET_FAITH = / (?:god|gods|lord|jesus|christ|pray\w*|bible\w*|verse\w*|scripture\w*|kjv|pastor\w*|church\w*|dios|senor|jesucristo|orar|oracion\w*|biblia\w*|versiculo\w*|escritura\w*|iglesia\w*) /;
+const PRAY_ASKED = / (?:pray (?:for|with|over|about) (?:me|us|my|our|her|him|them)|pray my|pray (?:this|it) away|please pray|(?:can|could|would|will) you pray|say a prayer|a prayer for|ora(?:r)? por (?:mi|nosotros|mi \w+)|oremos|ora conmigo|una oracion por) /;
+const PRAYED = /\b(?:Lord|Father|God|Jesus|Se[ñn]or|Padre|Dios|Jes[uú]s)\b(?:,| [^.!?]{0,40}, )|\b(?:we pray|I pray|oramos|te pedimos|te rogamos)\b/u;
 // Hostile review of 25c474f, F4: pastor-level floors in code.
 // A question about medicine gets "talk with your doctor" (RT25 sent her only to her pastor).
 const MEDS_Q = / (?:meds|medication\w*|medicine\w*|pills|antidepressants?|prescription\w*|insulin|dose|doses|dosage|medicament\w*|medicinas?|pastillas|receta\w*|dosis) /;
@@ -217,6 +220,8 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (ctx.teen && HARD_TOPIC.test(norm(ctx.userText)) && !TRUSTED.test(n)) problems.push('missing_trusted_adult');
 
   if (MEDS_Q.test(asked) && !DOCTOR.test(n)) problems.push('missing_doctor');
+  // Asked to pray, the answer prays: a sentence spoken to God (r8: RT17 and RT33 only blessed).
+  if (ctx.door === 'faith' && PRAY_ASKED.test(asked) && !PRAYED.test(text)) problems.push('missing_prayer');
   const cutOff = CUT_OFF_ASKED.test(asked) || scripture.some(s => CUT_OFF_REFS.some(r => overlaps(s, r))) || refsInText(ctx.userText).some(x => CUT_OFF_REFS.some(r => r.book === x.book && r.chapter === x.chapter && x.verse >= r.verse! && x.verse <= (r.endVerse ?? r.verse!)));
   if (cutOff && !NOT_LITERAL.test(n)) problems.push('missing_not_literal');
   if (ctx.afterCrisis && !text.includes('988')) problems.push('missing_988');

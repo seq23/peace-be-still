@@ -36,7 +36,17 @@ describe('variety across answers (round 4 finding 2)', () => {
   });
   it('the rewrite is told the words that came back, from the draft itself (x19 after q04)', () => {
     const later = shapeOf(x19);
-    expect(varietyObjection(later, later.said, [shapeOf(q04)])).toMatch(/reused wording from a recent answer \(.*"quiet hours"/);
+    expect(varietyObjection(later, later.said, [shapeOf(q04)])).toMatch(/the way recent answers to other people did \(.*"quiet hours"/);
+  });
+  it('r8: the rewrite is an edit of the draft: only the repeating sentences are marked, references kept in place', () => {
+    const recent = [shapeOf('Talk it over with your pastor so you can hear wise counsel. God is near.')];
+    const draft = shapeOf('Jesus wept with His friends (John 11:35). Talk this over with your pastor so you can hear wise counsel. Grief is not a lack of faith.');
+    const o = varietyObjection(draft, draft.said, recent);
+    expect(o).toContain('Jesus wept with His friends (John 11:35).');
+    expect(o).toContain('[REWRITE] Talk this over with your pastor so you can hear wise counsel.');
+    expect(o).not.toContain('[REWRITE] Jesus wept');
+    expect(o).not.toContain('[REWRITE] Grief');
+    expect(varietyObjection(shapeOf('A new thing entirely.'), shapeOf('A new thing entirely.').said, recent)).toBe('');
   });
   it('hashed shapes compare like plain ones and keep no words', async () => {
     const [a, b] = await Promise.all([hashShape(shapeOf(q04), 'k'.repeat(32)), hashShape(shapeOf(x19), 'k'.repeat(32))]);
@@ -75,7 +85,7 @@ describe('variety in the chat path', () => {
     expect(r.body.kind).toBe('answer');
     expect(r.body.text).toContain('May the Lord keep you near');
     expect(b.calls.length).toBe(2);
-    expect(b.calls[1].some(m => m.role === 'system' && /closed like a recent answer \("Lord, hold us\.\.\."\)/.test(m.content))).toBe(true);
+    expect(b.calls[1].some(m => m.role === 'system' && /the last sentence must begin another way than "Lord, hold us"/.test(m.content) && m.content.includes('[REWRITE] Lord, hold us close tonight.') && m.content.includes('\nLoss takes time to carry.'))).toBe(true);
   });
   it('variety never causes a fallback: when every try repeats, the last clean draft is shown', async () => {
     const same = good('Grief can sit heavy for a while. Lord, hold us close tonight.', ['Psalm 34:18']);

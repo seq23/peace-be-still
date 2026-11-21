@@ -26,7 +26,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, crisisText, fallbackMindsetText, fallbackText, fallbackTopic, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, crisisText, MINDSET_FAITH_ASK, mindsetFaithAskText, fallbackMindsetText, fallbackText, fallbackTopic, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -71,6 +71,7 @@ const OBJECTIONS: Record<string, string> = {
   assumes_gender: 'It called the person "she" or "her" without knowing; speak to them as "you", and pray with "we", "us" or "you".',
   trusted_adult_for_adult: 'It told a grown adult to find a "trusted adult"; say "someone you trust" instead.',
   broken_ending: 'It ended on a fragment or a bare name; end on one whole sentence of your own.',
+  missing_prayer: 'They asked for prayer: include a short prayer spoken to God, in your own words.',
   'judge:garbled': 'A sentence was broken or said something false about the Bible; write every sentence whole and true.',
   'judge:image_unfit': 'It used a picture that does not fit; leave pictures out unless the verse itself gives one.',
   'judge:assumes_gender': 'It called the person "she" or "her" without knowing; speak to them as "you".',
@@ -309,6 +310,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
 
   // C08 floor: the honest answer, in code, whatever the model would say.
   if (IDENTITY.test(` ${last.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()} `)) return done({ kind: 'answer', ai: true, fixed: true, text: (mind ? identityMindsetText : identityText)[v.lang], scripture: [] });
+  if (mind && MINDSET_FAITH_ASK.test(` ${fold(last)} `)) return done({ kind: 'answer', ai: true, fixed: true, text: mindsetFaithAskText[v.lang], scripture: [] });
   // A named verse in another translation is structure, not meaning: give the stored verse in her
   // translation with one plain line (round 3: models fell back on RT26, RT34 and q02 every run).
   if (!mind && OTHER_TRANSLATION.test(` ${fold(last)} `)) {
@@ -341,6 +343,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   };
   const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) });
   let objection: string | null = null;
+  let variety0 = false;
   // A draft that passed every safety check but repeated a recent answer, or that the judge found
   // only plain (voice_low and nothing else): shown if no later try does better. Variety and voice are
   // quality, not safety, and must never cost a real answer (round 5: 7 of 64 fell back that way).
@@ -349,7 +352,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Two human-written answers in this voice go in first, as an earlier exchange (one counter picks them).
   const examples = examplesFor(sampleSet(v.prompt, v.lang), v.lang, await nextSeq(env.DB, v.lang === 'es' ? 'es' : mind ? 'mindset' : 'en'));
   for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
-    const steer: Message[] = objection ? [{ role: 'system', content: `Your last answer was not used. ${objection} Write a new answer.` }] : [];
+    const steer: Message[] = objection ? [{ role: 'system', content: variety0 ? `Your last answer needs an edit. ${objection}` : `Your last answer was not used. ${objection} Write a new answer.` }] : [];
     const messages = [...system, ...examples, ...history.slice(0, -1), ...steer, ...history.slice(-1)];
     const out = await runLadder(env.DB, rungs, messages, answerSchema, 700, metrics, isAnswer);
     if ('empty' in out) {
@@ -387,6 +390,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     for (const p of problems) tally(metrics, `gate:${p}`);
     logCode('CHAT_GATE', { attempt, problems: problems.join(',') });
     objection = variety || problems.map(objectionText).join(' ');
+    variety0 = !!variety;
     if (attempt === 0) tally(metrics, 'regenerated');
   }
   // Newest first: it was written with the most guidance.

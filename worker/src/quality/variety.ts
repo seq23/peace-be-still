@@ -17,7 +17,8 @@ const fold = (text: string) => text.normalize('NFD').replace(/\p{M}/gu, '').toLo
 
 export type Shape = { opener: string; closer: string; pairs: string[] };
 /** The draft's own words for each part (never stored): what the rewrite is told to avoid. */
-export type Said = { opener: string; closer: string; pairs: string[] };
+/** The draft's own words, kept only in the request: its sentences, and which sentence each pair came from. */
+export type Said = { opener: string; closer: string; pairs: string[]; sentences: string[]; where: number[] };
 export const RECENT_MINE = 12;
 export const RECENT_ALL = 40;
 export const SHAPE_DAYS = 14;
@@ -33,25 +34,32 @@ const stem = (w: string) => w.slice(0, 4);
 const sentencesOf = (text: string) => text.replace(REF, ' REF ').split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
 const wordsOf = (s: string) => fold(s).split(' ').filter(Boolean);
 
+/** The sentences as written, references put back in order (the shape reads them as REF). */
+function withRefs(text: string, sentences: string[]): string[] {
+  const refs = text.match(REF) ?? [];
+  let k = 0;
+  return sentences.map(x => x.replace(/ ?REF ?/g, m => `${m.startsWith(' ') ? ' ' : ''}${refs[k++] ?? ''}${m.endsWith(' ') ? ' ' : ''}`).replace(/\s+/g, ' ').replace(/\( /g, '(').replace(/ \)/g, ')').trim());
+}
 export function shapeOf(text: string): Shape & { said: Said } {
   const sentences = sentencesOf(text);
   const head = (s: string | undefined) => (s ? wordsOf(s).slice(0, 3).map(stem).join(' ') : '');
   const said = (s: string | undefined) => (s ? s.replace(/\bREF\b/g, '(verse)').split(/\s+/).filter(Boolean).slice(0, 3).join(' ') : '');
   const pairs = new Map<string, string>();
-  for (const s of sentences) {
+  const where: number[] = [];
+  for (const [n, s] of sentences.entries()) {
     const content = wordsOf(s).filter(w => w !== 'ref' && w.length > 2 && !STOP.has(w));
     // Pairs one and two words apart: "every shadow stretch tall" and "every shadow look taller" share two.
     for (let i = 0; i < content.length; i++) for (const j of [i + 1, i + 2]) {
       if (j >= content.length || stem(content[i]) === stem(content[j])) continue;
       const key = `${stem(content[i])} ${stem(content[j])}`;
-      if (!pairs.has(key)) pairs.set(key, `${content[i]} ${content[j]}`);
+      if (!pairs.has(key)) { pairs.set(key, `${content[i]} ${content[j]}`); where.push(n); }
     }
   }
   // A last "sentence" that is only a reference is not a shape.
   const closing = sentences.length > 1 && head(sentences.at(-1)).split(' ').length >= 2;
   return {
     opener: head(sentences[0]), closer: closing ? head(sentences.at(-1)) : '', pairs: [...pairs.keys()],
-    said: { opener: said(sentences[0]), closer: closing ? said(sentences.at(-1)) : '', pairs: [...pairs.values()] },
+    said: { opener: said(sentences[0]), closer: closing ? said(sentences.at(-1)) : '', pairs: [...pairs.values()], sentences: withRefs(text, sentences), where },
   };
 }
 
@@ -68,21 +76,26 @@ export function repeats(draft: Shape, recent: Shape[]): string[] {
 }
 
 /**
- * The rewrite is told exactly what came back, in the draft's own words (the earlier answers are
- * only hashes): "It opened like a recent answer ("The quiet hours"); ... reused: quiet hours, hours shadow".
+ * The rewrite is an edit, not a fresh answer (r8, run 44899789903: 21 of 63 shown answers still
+ * repeated after two fresh tries, because each fresh draft met new recent answers). The model gets its
+ * own draft back with the sentences that repeat named; every other sentence has already been checked
+ * against the whole window, so keeping them can only lower the repeats.
  */
 export function varietyObjection(draft: Shape, said: Said, recent: Shape[]): string {
-  const parts: string[] = [];
-  if (draft.opener && recent.some(r => r.opener === draft.opener)) parts.push(`It opened like a recent answer ("${said.opener}..."); open another way, on what they said.`);
-  if (draft.closer && recent.some(r => r.closer === draft.closer)) parts.push(`It closed like a recent answer ("${said.closer}..."); close another way.`);
-  const shared = new Set<number>();
+  const redo = new Set<number>();
+  const words: string[] = [];
+  const last = said.sentences.length - 1;
+  if (draft.opener && recent.some(r => r.opener === draft.opener)) redo.add(0);
+  if (draft.closer && recent.some(r => r.closer === draft.closer)) redo.add(last);
   for (const r of recent) {
     const theirs = new Set(r.pairs);
     const hit = draft.pairs.map((p, i) => (theirs.has(p) ? i : -1)).filter(i => i >= 0);
-    if (hit.length >= 2) hit.forEach(i => shared.add(i));
+    if (hit.length >= 2) for (const i of hit) { redo.add(said.where[i]); words.push(said.pairs[i]); }
   }
-  if (shared.size) parts.push(`It reused wording from a recent answer (${[...shared].slice(0, 6).map(i => `"${said.pairs[i]}"`).join(', ')}); say those things in other words or leave them out; if they retell a verse, choose another verse or name it without retelling it.`);
-  return parts.join(' ');
+  if (!redo.size) return '';
+  const lines = said.sentences.map((x, n) => `${redo.has(n) ? '[REWRITE] ' : ''}${x}`).join('\n');
+  const openClose = [redo.has(0) && draft.opener && recent.some(r => r.opener === draft.opener) ? `the first sentence must begin another way than "${said.opener}"` : '', redo.has(last) && draft.closer && recent.some(r => r.closer === draft.closer) ? `the last sentence must begin another way than "${said.closer}"` : ''].filter(Boolean);
+  return `Its sentences marked [REWRITE] say things the way recent answers to other people did${words.length ? ` (${[...new Set(words)].slice(0, 8).map(w => `"${w}"`).join(', ')})` : ''}${openClose.length ? `, and ${openClose.join(' and ')}` : ''}. Keep every unmarked sentence word for word and rewrite only the marked ones in fresh, concrete words for this person (a different picture, or none), keeping the same verses:\n${lines}`;
 }
 
 const encoder = new TextEncoder();

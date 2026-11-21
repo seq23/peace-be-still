@@ -110,6 +110,17 @@ describe('accents are read, not folded, before judging (q08)', () => {
     const r = await chat(deps({ rungList: [throwing().rung], riskVerdict: { verdict: 'down' } }), 'mi hermano me lastimó', { body: { language: 'es', voice: 'spanish' } });
     expect(r.body.kind).toBe('crisis');
   });
+  it('q08 (r8): a question about what Scripture says on forgiving someone who hurt me is answered, even when the model reads self-harm', async () => {
+    const q08 = '¿Qué dice la Biblia sobre el perdón cuando alguien me lastimó mucho?';
+    expect(floor([{ role: 'user', text: q08 }]).ambiguous).toBe('abuse');
+    const r = await chat(deps({ rungList: [scripted('gemini-free', [good()]).rung], riskVerdict: { verdict: 'risk', kind: 'selfharm' } }), q08, { body: { language: 'es', voice: 'spanish' } });
+    expect(r.body.kind).not.toBe('crisis');
+    // An abuse read of the same words still fires, and so does a self-harm read without the question.
+    const abuse = await chat(deps({ rungList: [throwing().rung], riskVerdict: { verdict: 'risk', kind: 'abuse' } }), q08, { body: { language: 'es', voice: 'spanish' } });
+    expect(abuse.body.kind).toBe('crisis');
+    const plain = await chat(deps({ rungList: [throwing().rung], riskVerdict: { verdict: 'risk', kind: 'selfharm' } }), 'alguien me lastimó mucho', { body: { language: 'es', voice: 'spanish' } });
+    expect(plain.body.kind).toBe('crisis');
+  });
 });
 
 describe('the model risk read, on every message before any answer', () => {
