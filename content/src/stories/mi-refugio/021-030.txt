@@ -128,7 +128,7 @@ cast: shepherds|pastores|adult|group
 N: Hace mucho tiempo, el emperador de Roma ordenó que se contara a toda la gente de su imperio. Cada uno tenía que ir a registrarse a la ciudad de su familia.
 S: LUK 2:4-5
 C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] En un viaje largo, en un pueblo lleno, en una noche sin lugar.
-N: Fue un viaje largo para una mujer a punto de dar a luz. Y cuando llegaron a Bethlehem, el pueblo estaba lleno.
+N: Fue un viaje largo para una mujer a punto de dar a luz. Y cuando llegaron a Belén, el pueblo estaba lleno.
 S: LUK 2:6-7
 N: No había lugar para ellos. El Hijo de Dios nació donde dormían los animales, y su primera cama fue un pesebre, el cajón donde se les echaba de comer.
 N: Esa misma noche, en los campos cerca del pueblo, unos pastores cuidaban sus ovejas. Era un trabajo humilde, de noche, al frío. No eran gente importante. Nadie los habría invitado a una celebración en el palacio.

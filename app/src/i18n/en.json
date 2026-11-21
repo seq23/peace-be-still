@@ -254,5 +254,6 @@
   "story.past": "Every past story",
   "story.pastPaid": "Every past story comes with the paid lane ›",
   "story.today": "Today",
-  "story.none": "There are no past stories on this shelf yet."
+  "story.none": "There are no past stories on this shelf yet.",
+  "story.pastIntro": "Every story from the days before today, newest first."
 }

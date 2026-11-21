@@ -17,11 +17,29 @@ type State = {
 };
 const Context = createContext<State | null>(null);
 
+/**
+ * The CI web preview's paid switch, so reviewers and the store screenshots can see the paid screens.
+ * `?paid=1` turns it on (remembered in this browser as `pbs-preview-paid`), `?paid=0` turns it off. It is read
+ * only when the build is the web preview (EXPO_PUBLIC_PBS_PREVIEW=1 on web); a phone or store build never reads it.
+ */
+export const PREVIEW_PAID_KEY = 'pbs-preview-paid';
+function previewPaid(): boolean {
+  try {
+    const storage = (globalThis as { localStorage?: Storage }).localStorage;
+    const asked = new URLSearchParams((globalThis as { location?: Location }).location?.search ?? '').get('paid');
+    if (asked === '1') storage?.setItem(PREVIEW_PAID_KEY, '1');
+    if (asked === '0') storage?.removeItem(PREVIEW_PAID_KEY);
+    return storage?.getItem(PREVIEW_PAID_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
 export function PurchasesProvider({ children }: { children: React.ReactNode }) {
   const { settings: { age } } = useSettings();
   const preview = Platform.OS === 'web' && process.env.EXPO_PUBLIC_PBS_PREVIEW === '1' ? previewStore : null;
   const [store, setStore] = useState<PurchaseStore | null>(null);
-  const [paid, setPaid] = useState(false);
+  const [paid, setPaid] = useState(() => !!preview && previewPaid());
   const [status, setStatus] = useState<Status>('idle');
   const inFlight = useRef(false);
   const pending = useRef(false);

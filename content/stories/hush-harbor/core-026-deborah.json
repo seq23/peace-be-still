@@ -218,7 +218,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: \"Yes he will\"] Yes he will. [PAUSE 3s | screen: \"Won’t he do it?\"] Twenty years of iron chariots, and the LORD went out before them.",
+   "text": "When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: \"Yes he will\"] I said, won't he do it? [PAUSE 3s | screen: \"Yes he will\"] Twenty years of iron chariots, and the LORD went out before them.",
    "pauses": [
     {
      "seconds": 3,
@@ -226,7 +226,7 @@
     },
     {
      "seconds": 3,
-     "screen": "Won’t he do it?"
+     "screen": "Yes he will"
     }
    ]
   },
@@ -271,8 +271,8 @@
   "file": null,
   "qa": null
  },
- "words": 605,
- "est_seconds": 336,
+ "words": 608,
+ "est_seconds": 338,
  "qa": {
   "gate_version": "library-1",
   "checks": {

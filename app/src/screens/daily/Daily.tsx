@@ -34,6 +34,8 @@ export type DailyPage = keyof typeof pages;
 export const faithOnly: readonly DailyPage[] = ['story', 'stories', 'plans'];
 
 const isTopic = (id: string | undefined): id is TopicId => !!id && id in topicNames;
+/** The topics one door offers: God's Word tags the Morning Word lines; Mindset has its own. */
+export const topicsFor = (door: Settings['door']): TopicId[] => door === 'mindset' ? mindsetTopics : faithTopics.filter(isTopic);
 
 /** The shelf this person reads (telling by language and journey, filtered for her age band) and today's story on it. */
 export function useStories(now: Date) {
@@ -49,7 +51,9 @@ export function useDeclaration(now: Date) {
   const { settings } = useSettings();
   const canUse = useCanUse();
   const state = daily.useRecord();
-  const topic = canUse('declarationTopics') && isTopic(state.value.topic) ? state.value.topic : undefined;
+  const saved = state.value.topic;
+  // A topic counts only behind the door it was picked in: switching doors falls back to day by day.
+  const topic = canUse('declarationTopics') && isTopic(saved) && topicsFor(settings.door).includes(saved) ? saved : undefined;
   return declarationFor(settings, t.locale, now, topic);
 }
 
@@ -100,7 +104,7 @@ export function Daily({ page, back, read, upgrade, open, storyId, now = new Date
   // A past story opens only in the paid lane; the free lane always reads today's.
   const past = storyId && storyId !== stories.today?.id ? stories.list.find(item => item.id === storyId) : undefined;
   const story: Story | undefined = past && canUse('pastStories') ? past : stories.today;
-  const topicList = faith ? faithTopics.filter(isTopic) : mindsetTopics;
+  const topicList = topicsFor(settings.door);
   const topicLines = word.topic
     ? faith ? byTopic(t.locale, word.topic).map(item => ({ id: item.id, text: item.text, passage: item.ref }))
       : mindsetDeclarations.filter(item => item.topic === word.topic).map(item => ({ id: item.line, text: t(item.line), passage: undefined }))
@@ -145,6 +149,7 @@ export function Daily({ page, back, read, upgrade, open, storyId, now = new Date
       {canUse('pastStories') ? <TextLink onPress={() => open('stories')}>{t('story.past')}</TextLink>
         : <TextLink onPress={upgrade}>{t('story.pastPaid')}</TextLink>}
     </>}
+    {page === 'stories' && <Body>{t('story.pastIntro')}</Body>}
     {page === 'stories' && (canUse('pastStories') ? <>
       {stories.today && <Card onPress={() => open('story', stories.today!.id)} label={`${t('story.today')}, ${stories.today.title}`}>
         <Label>{t('story.today')}</Label>

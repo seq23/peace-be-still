@@ -2,7 +2,7 @@
 // expo-router recorder). Each test drives a screen the way a person would and checks what is shown, what is
 // saved and where the app goes next.
 import React from 'react';
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { displayRuns, formatReference, parseReference } from '../src/bible/core';
 import { mindsetDeclarations, mindsetTopics, plans } from '../src/screens/daily/content';
@@ -801,6 +801,7 @@ async function asPaid(render: () => Promise<ReactTestRenderer>) {
 async function closePaid(tree: ReactTestRenderer) {
   await act(async () => tree.unmount());
   (globalThis as any).__pbsPlatform = 'web';
+  storePaid = false;
   (globalThis as any).__pbsOpenURL = undefined;
 }
 
@@ -1002,4 +1003,78 @@ test('the web preview shows configured prices and renewal terms without opening 
     if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
     else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
   }
+});
+
+test('the web preview\'s paid switch opens the paid screens there, and only there', async () => {
+  const shelfNow = shelf('plain', 'adult');
+  const yesterday = pastStories(shelfNow, new Date())[0].story.title;
+  const kept = new Map<string, string>();
+  const fakeStorage = { getItem: (k: string) => kept.get(k) ?? null, setItem: (k: string, v: string) => void kept.set(k, v), removeItem: (k: string) => void kept.delete(k) };
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  (globalThis as any).localStorage = fakeStorage;
+  const person = { ...base, journey: 'psalm-nights' };
+  const archive = async () => strings(await mount('dailyPage', person, { page: 'stories' }));
+  try {
+    // The preview build, opened with ?paid=1: the archive opens, and the choice is remembered without the query.
+    process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+    (globalThis as any).location = { search: '?paid=1' };
+    assert.ok((await archive()).includes(yesterday), 'step 1');
+    (globalThis as any).location = { search: '' };
+    assert.ok((await archive()).includes(yesterday), 'step 2');
+    // A phone build ignores the flag even when it is set and the variable leaks in.
+    (globalThis as any).__pbsPlatform = 'ios';
+    assert.ok(!(await archive()).includes(yesterday), 'step 3');
+    (globalThis as any).__pbsPlatform = 'web';
+    // A web build that is not the preview ignores it too.
+    delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    assert.ok(!(await archive()).includes(yesterday), 'step 4');
+    // ?paid=0 turns it off again in the preview.
+    process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+    (globalThis as any).location = { search: '?paid=0' };
+    assert.ok(!(await archive()).includes(yesterday), 'step 5');
+    assert.equal(kept.size, 0);
+  } finally {
+    delete (globalThis as any).localStorage;
+    delete (globalThis as any).location;
+    (globalThis as any).__pbsPlatform = 'web';
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
+  }
+});
+
+test('only the web preview workflow turns the preview on; no store or phone build config can', () => {
+  const walk = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? (e.name === 'node_modules' ? [] : walk(`${dir}/${e.name}`)) : [`${dir}/${e.name}`]);
+  const configs = [...walk('../.github/workflows'), 'app.config.ts', 'package.json', ...['eas.json', 'app.json'].filter(f => existsSync(f))];
+  const setters = configs.filter(file => /EXPO_PUBLIC_PBS_PREVIEW/.test(readFileSync(file, 'utf8')));
+  assert.deepEqual(setters, ['../.github/workflows/mobile-preview.yml']);
+  const workflow = readFileSync('../.github/workflows/mobile-preview.yml', 'utf8');
+  assert.match(workflow, /expo export --platform web|preview:web/);
+  assert.doesNotMatch(workflow, /eas (build|submit)/);
+});
+
+test('a topic picked behind one door never leaks into the other: no stray "More on" heading, day by day instead', async () => {
+  const faith = { ...base, journey: 'psalm-nights' };
+  const mindset = { ...base, door: 'mindset', journey: 'imagination-nights' };
+  const heading = (topic: string) => en['declaration.inTopic'].replace('%{topic}', topic);
+  const pick = async (person: object, topic: string) => {
+    const tree = await asPaid(() => mount('dailyPage', person, { page: 'declaration' }));
+    try { await press(tree, topic); assert.ok(strings(tree).includes(heading(topic))); } finally { await closePaid(tree); }
+  };
+  const other = async (person: object, stray: string) => {
+    const tree = await asPaid(() => mount('dailyPage', person, { page: 'declaration' }));
+    try {
+      assert.ok(!strings(tree).includes(heading(stray)));
+      assert.ok(!strings(tree).includes(en['declaration.inTopic'].split('%{topic}')[0].trim() + ' '));
+      assert.deepEqual(checked(tree), [en['declaration.anyTopic']]);
+    } finally { await closePaid(tree); }
+  };
+  await pick(faith, en['declaration.topic.peace']);
+  await other(mindset, en['declaration.topic.peace']);
+  await pick(mindset, en['declaration.topic.calm']);
+  await other(faith, en['declaration.topic.calm']);
+  // Back behind its own door, the saved topic still holds.
+  const again = await asPaid(() => mount('dailyPage', mindset, { page: 'declaration' }));
+  try { assert.ok(strings(again).includes(heading(en['declaration.topic.calm']))); } finally { await closePaid(again); }
+  const reset = await asPaid(() => mount('dailyPage', mindset, { page: 'declaration' }));
+  try { await press(reset, en['declaration.anyTopic']); } finally { await closePaid(reset); }
 });

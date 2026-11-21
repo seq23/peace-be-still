@@ -177,7 +177,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: \"Yes he will\"] Yes he will. [PAUSE 3s | screen: \"Won’t he do it?\"] He did it for them on that dry ground.",
+   "text": "When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: \"Yes he will\"] I said, won't he do it? [PAUSE 3s | screen: \"Yes he will\"] He did it for them on that dry ground.",
    "pauses": [
     {
      "seconds": 3,
@@ -185,7 +185,7 @@
     },
     {
      "seconds": 3,
-     "screen": "Won’t he do it?"
+     "screen": "Yes he will"
     }
    ]
   },
@@ -230,8 +230,8 @@
   "file": null,
   "qa": null
  },
- "words": 588,
- "est_seconds": 327,
+ "words": 591,
+ "est_seconds": 328,
  "qa": {
   "gate_version": "library-1",
   "checks": {

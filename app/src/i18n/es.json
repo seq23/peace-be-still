@@ -210,7 +210,7 @@
   "mindset.calm.2": "Respiro más despacio que las noticias. El día puede esperar un minuto.",
   "mindset.calm.3": "Cuando mi mente se acelera, vuelvo a una cosa que puedo ver y tocar.",
   "mindset.calm.4": "Me regalo diez minutos de silencio antes de darle mi atención a nadie más.",
-  "mindset.confidence.1": "Entro al cuarto como la persona que decidí ser.",
+  "mindset.confidence.1": "Entro a cada lugar como la persona que decidí ser.",
   "mindset.confidence.2": "Hoy hablo una vez, con voz tranquila, de algo que me importa.",
   "mindset.confidence.3": "Me imagino que hoy sale bien, y me dejo sentirlo un momento.",
   "mindset.confidence.4": "Las dudas viejas pueden hablar. No tengo que contestarle a cada una.",
@@ -229,7 +229,7 @@
   "mindset.home.2": "Arreglo la mesa, el cuarto o la mañana como quiero que se sienta.",
   "mindset.home.3": "Dejo que la gente de mi casa vea que me alegra verlos.",
   "mindset.home.4": "Hoy puedo tener paciencia con los pequeños. Están aprendiendo, y yo también.",
-  "mindset.home.5": "Dejo descansar una pelea vieja. No hay que ganar en cada cuarto.",
+  "mindset.home.5": "Dejo descansar una pelea vieja. No toda discusión hay que ganarla.",
   "mindset.home.6": "Le doy las gracias a alguien en casa por algo que cree que no noté.",
   "mindset.begin.1": "Ayer no decide quién soy esta mañana.",
   "mindset.begin.2": "Empiezo desde el final que quiero y vivo una hora de hoy desde ahí.",
@@ -254,5 +254,6 @@
   "story.past": "Todas las historias anteriores",
   "story.pastPaid": "Todas las historias anteriores vienen con la suscripción ›",
   "story.today": "Hoy",
-  "story.none": "Todavía no hay historias anteriores en este estante."
+  "story.none": "Todavía no hay historias anteriores en este estante.",
+  "story.pastIntro": "Cada historia de los días anteriores, de la más reciente a la más antigua."
 }

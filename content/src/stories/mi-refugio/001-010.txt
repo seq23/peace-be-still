@@ -192,7 +192,7 @@ violence: none
 sexual: none
 cast: naomi|Noemi|elder|f; ruth|Ruth|adult|f
 N: Hubo un tiempo de hambre en Israel. Una familia de Belén se fue a vivir a Moab, una tierra extranjera, buscando comida. Eran Elimelech, su esposa Noemi y sus dos hijos.
-N: Allí murió Elimelec. Los hijos se casaron con mujeres moabitas, Orpha y Ruth. Y unos diez años después, murieron también los dos hijos. Noemi se quedó sola, lejos de su tierra, con sus dos nueras viudas.
+N: Allí murió Elimelech. Los hijos se casaron con mujeres moabitas, Orpha y Ruth. Y unos diez años después, murieron también los dos hijos. Noemi se quedó sola, lejos de su tierra, con sus dos nueras viudas.
 N: Cuando supo que en Israel ya había pan otra vez, decidió volver a casa. Sus nueras salieron con ella. Pero en el camino, Noemi se detuvo.
 S: RUT 1:8 @naomi
 C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Aun en el camino largo, con el corazón vacío.
