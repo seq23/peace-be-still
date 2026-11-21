@@ -42,7 +42,7 @@ N: Stand still. Not because there was nothing to do. Because this part was not t
 N: Night came down. The angel of God moved from the front of the camp to the back, and the pillar of cloud went with him. It stood right between Israel and Egypt. On Egypt's side it was cloud and darkness. On Israel's side it gave light all night long. Same cloud, Church. Darkness on one side, light on the other.
 S: EXO 14:21
 S: EXO 14:22
-C: When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: "Yes he will"] Yes he will. [PAUSE 3s | screen: "Won’t he do it?"] He did it for them on that dry ground.
+C: When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: "Yes he will"] I said, won't he do it? [PAUSE 3s | screen: "Yes he will"] He did it for them on that dry ground.
 N: Can you see them walking? Feet on dry ground where fish had been swimming that morning. Water standing up like walls on either side. Grandmothers holding children's hands. The old folks sang about this in the fields, "Go Down, Moses" and "Oh, Mary, Don't You Weep," and they sang it when there was no sea in sight and no way out that they could see.
 N: The Egyptians came in after them. Their chariot wheels came off, and they drove heavy. When the morning came, Moses stretched out his hand again, and the waters went back to their place. Israel stood safe on the far shore.
 S: EXO 14:31
@@ -66,7 +66,7 @@ S: DAN 6:19
 S: DAN 6:20 @king
 S: DAN 6:21 @daniel
 S: DAN 6:22 @daniel
-C: When I say our God is able, you say, yes he is. Our God is able. [PAUSE 3s | screen: "Yes he is"] Yes he is. [PAUSE 3s | screen: "Our God is able"] Daniel’s God was able in that den.
+C: When I say our God is able, you say, yes he is. Our God is able. [PAUSE 3s | screen: "Yes he is"] I said, our God is able. [PAUSE 3s | screen: "Yes he is"] Daniel’s God was able in that den.
 S: DAN 6:23
 N: The old spiritual asks it plain: didn't my Lord deliver Daniel? And the answer comes right back. He did. The story does not say the den was not real or that the lions were not hungry. It says God sent his angel and shut their mouths, and Daniel trusted his God. Somebody is praying with the windows open tonight. Keep on praying.
 
@@ -113,7 +113,7 @@ N: The giant looked at him and sneered. Just a youth, ruddy in the face. And he 
 S: 1SA 17:45 @david
 S: 1SA 17:47 @david
 S: 1SA 17:49
-C: When I say whose battle is it, you say, the LORD's. Whose battle is it? [PAUSE 3s | screen: "The LORD’s"] The LORD's. [PAUSE 3s | screen: "Whose battle is it?"] That is what David told the giant.
+C: When I say whose battle is it, you say, the LORD's. Whose battle is it? [PAUSE 3s | screen: "The LORD’s"] I said, whose battle is it? [PAUSE 3s | screen: "The LORD’s"] That is what David told the giant.
 N: One stone. And the giant fell on his face to the earth. David had no sword in his hand that day. He had a sling, a stone, and a God he had already met out on the hillside with the sheep.
 N: Our grandmothers used to say, the giants don't get smaller, baby, your God gets bigger in your eyes. The story does not promise every battle ends like this one. It shows us where David's courage came from: the LORD who had been with him before.
 
@@ -161,7 +161,7 @@ S: LUK 15:21 @younger-son
 S: LUK 15:22 @father
 S: LUK 15:23 @father
 S: LUK 15:24 @father
-C: When I say he was lost, you say, and is found. He was lost. [PAUSE 3s | screen: "And is found"] And is found. [PAUSE 3s | screen: "He was lost"] That is a father’s joy.
+C: When I say he was lost, you say, and is found. He was lost. [PAUSE 3s | screen: "And is found"] I said, he was lost. [PAUSE 3s | screen: "And is found"] That is a father’s joy.
 N: But there is another son in this story. The elder son was out in the field, and when he came near the house he heard music and dancing. When he found out why, he got angry and would not go in. So the father went out to him too.
 S: LUK 15:29 @elder-son
 S: LUK 15:31 @father
@@ -237,5 +237,5 @@ N: The disciples thought that was a strange question, with all those people push
 N: And she knew she had been found. She was afraid, and she was trembling. But she did not run.
 S: MAR 5:33
 S: MAR 5:34
-C: When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: "Hallelujah"] Hallelujah. [PAUSE 3s | screen: "Glory"] Twelve years, and one hand reaching in faith.
+C: When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: "Hallelujah"] I said, glory. [PAUSE 3s | screen: "Hallelujah"] Twelve years, and one hand reaching in faith.
 N: He could have let her slip away healed and nameless. But he called her daughter. He let her tell all the truth in front of everybody, while a worried father waited and a whole town watched. Then he sent her home in peace. That is the story, Church. Not only the healing. The being seen.

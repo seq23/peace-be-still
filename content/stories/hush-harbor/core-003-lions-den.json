@@ -202,7 +202,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say our God is able, you say, yes he is. Our God is able. [PAUSE 3s | screen: \"Yes he is\"] Yes he is. [PAUSE 3s | screen: \"Our God is able\"] Daniel’s God was able in that den.",
+   "text": "When I say our God is able, you say, yes he is. Our God is able. [PAUSE 3s | screen: \"Yes he is\"] I said, our God is able. [PAUSE 3s | screen: \"Yes he is\"] Daniel’s God was able in that den.",
    "pauses": [
     {
      "seconds": 3,
@@ -210,7 +210,7 @@
     },
     {
      "seconds": 3,
-     "screen": "Our God is able"
+     "screen": "Yes he is"
     }
    ]
   },
@@ -245,8 +245,8 @@
   "file": null,
   "qa": null
  },
- "words": 591,
- "est_seconds": 328,
+ "words": 594,
+ "est_seconds": 330,
  "qa": {
   "gate_version": "library-1",
   "checks": {

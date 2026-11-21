@@ -367,6 +367,7 @@ N: The same voice that spoke to the sea still calls to the frightened heart.
     ["call_response", (s) => { s.blocks[s.blocks.length - 1].text += " Can I get an amen?"; }],
     ["call_response", (s) => { s.blocks.pop(); }],
     ["call_response", (s) => { s.blocks[s.blocks.length - 2].pauses = []; }],
+    ["call_response", (s) => { const b = s.blocks.find((x) => x.type === "call_response"); b.pauses = [{ seconds: 3, screen: "Yes he will" }, { seconds: 3, screen: "Won’t he do it?" }]; }],
     ["call_response", (s) => { s.blocks.splice(0, 0, s.blocks[s.blocks.length - 2]); }],
     ["voice_segments", (s) => { s.blocks[2].segments = [{ v: 38, speaker: "disciples", text: s.blocks[2].verses[0].text }]; }],
     ["voice_segments", (s) => { s.blocks[2].segments[1].text += " extra"; }],

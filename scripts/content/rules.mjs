@@ -128,6 +128,14 @@ function scriptureBlock(b, lang) {
 }
 
 // ---------------------------------------------------------------- stories (S01-S15 code part)
+// Every line on screen is the listener's answer: the same response both times, except the one call churches
+// really turn around (COMMON.md: "God is good" / "All the time", both directions; Spanish the same).
+const TURNS = new Set(["all the time|god is good", "god is good|all the time", "all the time|god is faithful", "todo el tiempo|dios es bueno", "dios es bueno|todo el tiempo"]);
+const norm = (x) => String(x).toLowerCase().replace(/[’']/g, "'").replace(/[?.!¡¿]/g, "").trim();
+function callAnswersOnly(blk) {
+  const [a, b] = blk.pauses.map((p) => norm(p.screen));
+  return a === b || TURNS.has(`${a}|${b}`);
+}
 export function checkStory(s) {
   const lang = s.lang, tr = TRANSLATION[lang];
   const ret = s.blocks.filter((b) => b.type === "retelling" || b.type === "call_response");
@@ -206,6 +214,7 @@ export function checkStory(s) {
     c.call_response = cr.length !== 1 ? fail(`${cr.length} call-and-response blocks (exactly one)`)
       : calls ? fail("a call-out outside the call-and-response block")
       : blk.pauses.length < 2 || blk.pauses.some((p) => p.seconds < 3 || !p.screen) ? fail("call and response needs two 3 s pauses with screen text")
+      : !callAnswersOnly(blk) ? fail("the listener is asked to say the call back; only God is good / all the time turns around")
       : i === s.blocks.length - 1 ? fail("call and response is the last paragraph")
       : i < firstVerse ? fail("call and response comes before the first verse")
       : pass;
