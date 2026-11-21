@@ -2,42 +2,53 @@ import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import ts from 'typescript';
-import banned from '../src/quality/banned.json';
+import { uiCopyIssues, visibleStrings } from './support/ui-copy';
 
-// Scan literal UI copy and icon names, not the test fixtures or validation patterns.
-test('app copy and icon names avoid prohibited marks and automatic design tells', () => {
-  const walk = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? walk(join(dir, entry.name)) : /\.(tsx?|json)$/.test(entry.name) ? [join(dir, entry.name)] : []);
-  const files = [...walk('app'), ...walk('src')].filter(file => file !== 'src/quality/banned.json');
-  const prohibited = new RegExp(`\\b(?:${banned.ui.join('|')})\\b|black[\\W_]*bible[\\W_]*stories|\\p{Extended_Pictographic}|[—!]`, 'iu');
-  let examined = 0;
-  for (const file of files) {
-    if (file.endsWith('.json')) {
-      const visitValue = (value: unknown): void => {
-        if (typeof value === 'string') { examined++; if (value !== 'Choose your journey') assert.doesNotMatch(value, prohibited, `${file}: ${value}`); }
-        else if (value && typeof value === 'object') Object.values(value).forEach(visitValue);
-      };
-      visitValue(JSON.parse(readFileSync(file, 'utf8')));
-      continue;
-    }
-    const source = ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true, file.endsWith('tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
-    function visit(node: ts.Node) {
-      if (file === 'src/model.ts' && ts.isFunctionDeclaration(node)) return;
-      if (ts.isStringLiteral(node) || ts.isJsxText(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
-        examined++;
-        if (node.text !== 'Choose your journey') assert.doesNotMatch(node.text, prohibited, `${file}: ${node.text}`);
-      }
-      ts.forEachChild(node, visit);
-    }
-    visit(source);
-  }
-  assert.ok(examined > 0);
+const walk = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap(entry =>
+  entry.isDirectory() ? walk(join(dir, entry.name)) : [join(dir, entry.name)]);
+
+test('every string a person can see avoids AI filler, em dashes, "!", emoji and the trademark phrase', () => {
+  const screens = [...walk('app'), ...walk('src')].filter(file => file.endsWith('.tsx'));
+  const files = [...screens, 'src/i18n/en.json', 'src/i18n/es.json'];
+  const seen = files.flatMap(file => visibleStrings(file, readFileSync(file, 'utf8')));
+  assert.ok(seen.length > 150, `only ${seen.length} visible strings found`);
+  assert.deepEqual(files.flatMap(file => uiCopyIssues(file, readFileSync(file, 'utf8'))), []);
 });
 
+test('screens hold no literal copy: every visible word comes from the string files', () => {
+  const screens = [...walk('app'), ...walk('src')].filter(file => file.endsWith('.tsx'));
+  // Only the brand's chevrons and arrows may be written inline.
+  const literal = screens.flatMap(file => visibleStrings(file, readFileSync(file, 'utf8')).filter(text => /\p{L}/u.test(text)).map(text => `${file}: ${text}`));
+  assert.deepEqual(literal, []);
+});
 
-test('every English translation key has a Spanish translation', () => {
-  const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, string>;
-  const es = JSON.parse(readFileSync('src/i18n/es.json', 'utf8')) as Record<string, string>;
+test('the check reads copy, never code: a style value passes and the same word as visible text fails', () => {
+  assert.deepEqual(uiCopyIssues('fixture.tsx', `const s = { justifyContent: 'space-around' }; export const A = () => <View style={s} />;`), []);
+  assert.equal(uiCopyIssues('fixture.tsx', `export const A = () => <Text>Make space around you</Text>;`).length, 1);
+  assert.equal(uiCopyIssues('fixture.tsx', `export const A = () => <TextInput placeholder="Unlock more" />;`).length, 1);
+  assert.equal(uiCopyIssues('fixture.json', JSON.stringify({ 'x.y': 'Your journey awaits' })).length, 1);
+  // The locked title is fine on its own, with no exemption in the check.
+  assert.deepEqual(uiCopyIssues('fixture.json', JSON.stringify({ 'journeys.title': 'Choose your journey' })), []);
+});
+
+test('every English string has a Spanish one of the same shape', () => {
+  type Entry = string | Record<string, string>;
+  const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, Entry>;
+  const es = JSON.parse(readFileSync('src/i18n/es.json', 'utf8')) as Record<string, Entry>;
+  const forms = (entry: Entry | undefined) => typeof entry === 'string' ? [entry] : entry && typeof entry === 'object' ? [entry.one, entry.other] : [undefined];
   assert.ok(Object.keys(en).length > 0);
-  for (const key of Object.keys(en)) assert.ok(typeof es[key] === 'string' && es[key].trim(), `Missing Spanish translation: ${key}`);
+  assert.deepEqual(Object.keys(es).sort(), Object.keys(en).sort());
+  for (const key of Object.keys(en)) {
+    assert.equal(typeof es[key], typeof en[key], `Spanish entry has a different shape: ${key}`);
+    for (const value of [...forms(en[key]), ...forms(es[key])]) assert.ok(typeof value === 'string' && value.trim(), `Missing translation: ${key}`);
+  }
+});
+
+test('every string in the files is used by a screen or the model', () => {
+  const code = [...walk('app'), ...walk('src')].filter(file => /\.tsx?$/.test(file)).map(file => readFileSync(file, 'utf8')).join('\n');
+  const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, unknown>;
+  // A key is used when it is written out, or built from a known prefix (`door.${id}.title`).
+  const unused = Object.keys(en).filter(key => !code.includes(`'${key}'`) && !code.includes(`"${key}"`) &&
+    !/^(door\.(faith|mindset)\.(title|detail)|doorName\.|greeting\.|tabs\.|voice\.|language\.)/.test(key));
+  assert.deepEqual(unused, []);
 });

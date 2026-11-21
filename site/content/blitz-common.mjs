@@ -23,7 +23,7 @@ export const PICK_EN = (lead) => `<p><strong>${lead}</strong></p>
 export const PICK_ES = (lead) => `<p><strong>${lead}</strong></p>
 <ul>
 <li>Sin prueba y sin plan semanal: $7.99 al mes o $39.99 al año, con el precio en dólares antes de tocar.</li>
-<li>Una parte gratis que sigue gratis: la Biblia completa para leer y escuchar, la historia del día, un chat al día de hasta 10 mensajes, tu primera noche para dormir y luego una por semana, y una declaración diaria.</li>
+<li>Una parte gratis que sigue gratis: la Biblia completa para leer, la historia del día, un chat al día de hasta 10 mensajes, tu primera noche para dormir y luego una por semana, y una declaración diaria.</li>
 <li>Sin anuncios, nunca.</li>
 <li>Cada versículo se pega palabra por palabra de la Reina-Valera 1909 guardada. La IA nunca escribe un versículo.</li>
 <li>Se cancela en dos toques. Llega muy pronto al App Store y a Google Play.</li>

@@ -79,6 +79,7 @@ export function footerHtml(lang, updated = "18 Nov 2026") {
       <a href="/es/privacidad">Privacidad</a>
       <a href="/es/terminos">Términos</a>
       <a href="/es/aviso">Aviso</a>
+      <a href="/es/soporte">Ayuda</a>
       <a href="/" hreflang="en" lang="en">English</a>
     </nav>
   </div>
@@ -92,6 +93,7 @@ export function footerHtml(lang, updated = "18 Nov 2026") {
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="/disclaimer">Disclaimer</a>
+      <a href="/support">Support</a>
       <a href="/es/" hreflang="es" lang="es">Español</a>
     </nav>
   </div>

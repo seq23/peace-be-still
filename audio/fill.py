@@ -52,7 +52,6 @@ import text as T  # noqa: E402
 
 CT = ZoneInfo("America/Chicago")
 HOME = Path(os.environ.get("PBS_HOME", Path.home() / ".peace-be-still"))
-SCRIPTURE = Path(os.environ.get("PBS_SCRIPTURE_DIR", Path.home() / "Work/codex-briefs/peace-be-still"))
 KOKORO_PY = os.environ.get("PBS_KOKORO_PY", str(Path.home() / "Work/claude-work/tts/venv/bin/python"))
 SHELF = os.environ.get("PBS_SHELF", "gdrive:Mac-Shelf/peace-be-still/audio")
 MANIFEST = Path(os.environ.get("PBS_MANIFEST", AUDIO / "manifest.jsonl"))
@@ -88,9 +87,18 @@ def book_order() -> list[str]:
     return FIRST_BOOKS + [c for c in T.CODES if c not in FIRST_BOOKS]
 
 
+SESSION_KINDS = ("psalm-night", "imagination-night")   # the sleep sessions (the paid "session every night")
+
+
 def plan(bibles: dict, content: list | None = None) -> list[dict]:
-    """Every file the library needs, in recording order: English Psalms, then the listening-order
-    books, then the rest in canon order; then Spanish the same way. Pure."""
+    """Every file the library needs, in recording order: English Psalms, then the sleep sessions
+    (Psalm Nights in both languages, Imagination Nights: the paid core, coordinator 21 Nov 2026),
+    then the listening-order books, the rest in canon order, then Spanish the same way; other
+    content (stories) last. Pure."""
+    content = list(content or [])
+    # owner's order 21 Nov 2026: EN Psalm Nights, ES Psalm Nights, then Imagination Nights EN, then ES
+    sessions = sorted((i for i in content if i["kind"] in SESSION_KINDS),
+                      key=lambda i: (SESSION_KINDS.index(i["kind"]), i["lang"] != "en", i["file"]))
     items = []
     for lang in ("en", "es"):
         for code in book_order():
@@ -99,7 +107,8 @@ def plan(bibles: dict, content: list | None = None) -> list[dict]:
                     items.append(_scripture_item(bibles, lang, code, c, kind="psalms", priority=1))
                 else:
                     items.append(_scripture_item(bibles, lang, code, c, kind="bible", priority=2))
-    return items + list(content or [])
+    cut = next((n for n, i in enumerate(items) if not (i["lang"] == "en" and i["kind"] == "psalms")), len(items))
+    return items[:cut] + sessions + items[cut:] + [i for i in content if i["kind"] not in SESSION_KINDS]
 
 
 def _scripture_item(bibles, lang, book, chapter, *, kind, priority):
@@ -128,10 +137,15 @@ def content_items(root: Path) -> list[dict]:
             if not isinstance(o, dict):
                 continue
             status = str(o.get("status") or (o.get("qa") or {}).get("status") or "").lower()
+            lang = o.get("lang") if o.get("lang") in ("en", "es") else "en"
+            if status == "passed" and isinstance(o.get("segments"), list):
+                item = session_item(o, f, root, lang)
+                if item:
+                    out.append(item)
+                continue
             body = next((o[k] for k in ("script", "text", "retelling", "body") if isinstance(o.get(k), str)), "")
             if status != "passed" or not body.strip():
                 continue
-            lang = o.get("lang") if o.get("lang") in ("en", "es") else "en"
             kind = re.sub(r"[^a-z0-9-]+", "-", str(o.get("kind") or f.parent.name).lower()).strip("-") or "content"
             ident = re.sub(r"[^a-z0-9-]+", "-", str(o.get("id") or f.stem).lower()).strip("-")
             h = hashlib.sha256(body.encode()).hexdigest()[:8]
@@ -143,6 +157,59 @@ def content_items(root: Path) -> list[dict]:
     return out
 
 
+_PAUSE = re.compile(r"\[pause (\d+(?:\.\d+)?)\]")
+
+
+def _verse_label(ref: str, lang: str) -> str:
+    """'PSA 23:1-6' -> 'Psalm 23, verses 1 to 6.' (the reference is always said with the passage)."""
+    book, rest = ref.split(" ", 1)
+    chap, _, vv = rest.partition(":")
+    head = T.heading(book, int(chap), lang).rstrip(".")
+    if not vv:
+        return head + "."
+    a, _, b = vv.partition("-")
+    if lang == "es":
+        return f"{head}, versículos {a} al {b}." if b else f"{head}, versículo {a}."
+    return f"{head}, verses {a} to {b}." if b else f"{head}, verse {a}."
+
+
+def session_item(o: dict, f: Path, root: Path, lang: str) -> dict | None:
+    """A sleep session (content/psalm-nights, content/imagination-nights): `segments` of narrator text,
+    where `[pause N]` is N seconds of real quiet and a blank line is the script's paragraph quiet, and
+    passages whose verses are the stored KJV / RV1909 words (checked word for word by the content gate),
+    each said with its reference. Returns None when there is nothing to say."""
+    pace = o.get("pacing") or {}
+    para = float(pace.get("quiet_between_paragraphs_s", 2.0))
+    verse_gap = float(pace.get("quiet_between_verses_s", GAP["psalms"]))
+    pieces: list[list] = []          # [text, gap after]
+    for seg in o["segments"]:
+        if isinstance(seg.get("verses"), list) and seg.get("ref"):
+            pieces.append([_verse_label(seg["ref"], lang), HEADING_GAP])
+            pieces += [[str(v.get("text", "")).strip(), verse_gap] for v in seg["verses"]]
+            if pieces:
+                pieces[-1][1] = para
+        elif isinstance(seg.get("text"), str):
+            for block in re.split(r"\n\s*\n", seg["text"]):
+                parts = _PAUSE.split(block)
+                for n in range(0, len(parts), 2):
+                    t = parts[n].strip()
+                    pause = float(parts[n + 1]) if n + 1 < len(parts) else None
+                    if t:
+                        pieces.append([t, pause if pause is not None else para])
+                    elif pause is not None and pieces:
+                        pieces[-1][1] = max(pieces[-1][1], pause)
+    pieces = [p for p in pieces if p[0]]
+    if not pieces:
+        return None
+    kind = re.sub(r"[^a-z0-9-]+", "-", str(o.get("kind") or f.parent.name).lower()).strip("-")
+    ident = re.sub(r"[^a-z0-9-]+", "-", str(o.get("id") or f.stem).lower()).strip("-")
+    h = hashlib.sha256(json.dumps(pieces, ensure_ascii=False).encode()).hexdigest()[:8]
+    return {"file": f"{lang}/{kind}/{ident}-{h}.m4a", "kind": kind, "lang": lang,
+            "ref": f"{f.relative_to(root)}#{o.get('id') or f.stem}", "priority": 3, "level": "sleep",
+            "heading": o.get("title") if isinstance(o.get("title"), str) else "",
+            "verses": [p[0] for p in pieces], "gaps": [p[1] for p in pieces], "text": "script"}
+
+
 def script_of(item: dict) -> str:
     """What the transcript is scored against: the stored words, heading first."""
     return " ".join([item["heading"], *item["verses"]]).strip()
@@ -151,7 +218,8 @@ def script_of(item: dict) -> str:
 def segments_of(item: dict, pron: dict) -> list[dict]:
     gap = item.get("gap", GAP.get(item["kind"], 1.2))
     segs = [{"text": T.speech_text(item["heading"], item["lang"], pron), "gap": HEADING_GAP}] if item["heading"] else []
-    segs += [{"text": T.speech_text(v, item["lang"], pron), "gap": gap} for v in item["verses"]]
+    gaps = item.get("gaps") or [gap] * len(item["verses"])
+    segs += [{"text": T.speech_text(v, item["lang"], pron), "gap": g} for v, g in zip(item["verses"], gaps)]
     return [s for s in segs if s["text"]]
 
 
@@ -206,8 +274,14 @@ def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> l
     not yet in the manifest, each in plan order. Passed files and files out of tries are skipped. Pure."""
     last = latest(rows)
     mine = [i for i in items if not only or key(i).startswith(only)]
-    retry = [i for i in mine if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
-    return retry + [i for i in mine if key(i) not in last]
+    # The sleep sessions (the paid core, 21 Nov 2026) are never queued behind retries planned after them:
+    # retry-first applies within the part of the plan up to the last session, then within the rest.
+    cut = max((n + 1 for n, i in enumerate(mine) if i.get("kind") in SESSION_KINDS), default=0)
+
+    def part(xs):
+        retry = [i for i in xs if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
+        return retry + [i for i in xs if key(i) not in last]
+    return part(mine[:cut]) + part(mine[cut:])
 
 
 def given_up(items: list, rows: list[dict], key=_file) -> list[str]:
@@ -487,7 +561,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
             attempts += 1
             render(item, pron, wav, speed)
             mastered = master(wav, out, item["level"])
-            result = qa.check(out, script_of(item), item["lang"], item["level"])
+            result = qa.check(out, script_of(item), item["lang"], item["level"], quiet=sum(item.get("gaps") or []))
             if result["pass"] or not qa.speech_problems(result["problems"]):
                 break
     finally:
@@ -557,16 +631,14 @@ def git_commit(msg: str) -> str:
 
 # ------------------------------------------------------------------ the run window
 def window_minutes(now: dt.datetime) -> int:
-    """Minutes the Mac may still spend on audio in this batch (her pick "A", 20 Nov 2026): 0 in her
-    workday (Mon-Fri 08:00-17:00 CT, Codex builds the app then); otherwise the minutes until the next
-    weekday 08:00 CT, so a batch never runs into a workday. Weekends are open all day. Pure."""
+    """Minutes the Mac may still spend on audio in this batch (her call 20 Nov 2026: "every night at
+    5pm until its done"): every day 17:00-08:00 CT, weekends included; 0 between 08:00 and 17:00.
+    Otherwise the minutes until the next 08:00 CT, so a batch never runs into the day. Pure."""
     n = now.astimezone(CT)
-    if n.weekday() < 5 and 8 <= n.hour < 17:
+    if 8 <= n.hour < 17:
         return 0
     end = n.replace(hour=8, minute=0, second=0, microsecond=0)
     if n >= end:
-        end += dt.timedelta(days=1)
-    while end.weekday() >= 5:
         end += dt.timedelta(days=1)
     return int((end.timestamp() - n.timestamp()) // 60)
 
@@ -594,10 +666,10 @@ def main(argv=None) -> int:
         return 0
 
     now = dt.datetime.now(CT)
-    bibles = {lang: T.load_bible(lang, SCRIPTURE) for lang in ("en", "es")}
+    bibles = {lang: T.load_bible(lang) for lang in ("en", "es")}
     if len(bibles["en"]) != 66 or len(bibles["es"]) != 66:
         raise NamedStop("SCRIPTURE_MISSING", f"expected 66 books in each store, found KJV {len(bibles['en'])}, "
-                        f"RV1909 {len(bibles['es'])} (read from {SCRIPTURE})", 2)
+                        f"RV1909 {len(bibles['es'])} (read from {T.SCRIPTURE})", 2)
     pron = T.load_pronunciations()
     items = plan(bibles, content_items(REPO))
     rows = read_manifest()

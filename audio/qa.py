@@ -31,7 +31,7 @@ BARS = {
     "read": {"lufs": (-18.0, -16.0), "tp_max": -1.0},
 }
 ACCURACY = {"en": 0.95, "es": 0.90}
-WPM = (55.0, 150.0)          # words a minute over the whole file, quiet gaps included
+WPM = (55.0, 150.0)          # words a minute; a sleep session's scripted quiet (`quiet`) is left out
 TARGET = {"sleep": -22.0, "read": -17.0}
 
 
@@ -113,11 +113,12 @@ def speech_problems(problems: list[str]) -> list[str]:
 
 
 def judge(*, script: str, transcript: str, lang: str, level: str, seconds: float, lufs: float,
-          true_peak: float, clipped: int) -> dict:
+          true_peak: float, clipped: int, quiet: float = 0.0) -> dict:
     """Pure: the numbers in, pass/problems out. Kept apart from the measuring so it is tested."""
     words = len(T.score_words(script, lang))
     acc = accuracy(script, transcript, lang)
-    wpm = round(words / (seconds / 60.0), 1) if seconds > 0 else 0.0
+    spoken = seconds - quiet       # a session's long scripted pauses are not slow speech
+    wpm = round(words / (spoken / 60.0), 1) if spoken > 0 else 0.0
     bar = BARS[level]
     problems = []
     if acc < ACCURACY[lang]:
@@ -136,7 +137,7 @@ def judge(*, script: str, transcript: str, lang: str, level: str, seconds: float
             "lufs": lufs, "true_peak": true_peak, "clipped": clipped}
 
 
-def check(path: Path, script: str, lang: str, level: str) -> dict:
+def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0) -> dict:
     seconds = ffprobe_seconds(path)
     loud = loudness(path)
     clipped = clipped_samples(path)
@@ -146,7 +147,7 @@ def check(path: Path, script: str, lang: str, level: str) -> dict:
         asr = "small"
         transcript = transcribe(path, lang, asr)
     out = judge(script=script, transcript=transcript, lang=lang, level=level, seconds=seconds,
-                lufs=loud["lufs"], true_peak=loud["true_peak"], clipped=clipped)
+                lufs=loud["lufs"], true_peak=loud["true_peak"], clipped=clipped, quiet=quiet)
     out["asr"] = asr
     out["seconds"] = round(seconds, 2)
     out["transcript_tail"] = transcript[-120:]

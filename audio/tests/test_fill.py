@@ -67,6 +67,16 @@ class Plan(unittest.TestCase):
         rows[1]["tries"] = fill.MAX_TRIES
         self.assertNotIn(items[5]["file"], [i["file"] for i in fill.todo(items, rows)])
 
+    def test_a_failed_chapter_never_queues_ahead_of_new_sleep_sessions(self):
+        vpl = ["MAT 1:1 The book.", "MAT 2:1 Now when.", "PSA 1:1 Blessed.", "PSA 2:1 Why."]
+        b = {"en": T.parse_vpl(vpl), "es": T.parse_vpl(vpl)}
+        session = {"file": "en/psalm-night/a.m4a", "kind": "psalm-night", "lang": "en", "priority": 3}
+        items = fill.plan(b, [session])
+        rows = [{"file": "en/bible/kjv-mat-001.m4a", "status": "FAILED"}, {"file": "en/psalms/kjv-psa-002.m4a", "status": "FAILED"},
+                {"file": "en/psalms/kjv-psa-001.m4a", "status": "passed"}]
+        q = [i["file"] for i in fill.todo(items, rows)]
+        self.assertEqual(q[:4], ["en/psalms/kjv-psa-002.m4a", "en/psalm-night/a.m4a", "en/bible/kjv-mat-001.m4a", "en/bible/kjv-mat-002.m4a"])
+
     def test_third_failure_is_a_named_stop_in_the_census(self):
         items = fill.plan(bibles())
         with tempfile.TemporaryDirectory() as d:
@@ -109,8 +119,9 @@ class RunWindow(unittest.TestCase):
         self.assertEqual(fill.window_minutes(at(23, 16, 59)), 0)
         self.assertEqual(fill.window_minutes(at(23, 7, 30)), 30)        # Mon 07:30: at most 30 minutes
         self.assertEqual(fill.window_minutes(at(23, 17)), 15 * 60)      # Mon 17:00 -> Tue 08:00
-        self.assertEqual(fill.window_minutes(at(21, 12)), 44 * 60)      # Sat noon runs, until Mon 08:00
-        self.assertEqual(fill.window_minutes(at(20, 17)), 63 * 60)      # Fri 17:00 -> Mon 08:00
+        self.assertEqual(fill.window_minutes(at(21, 12)), 0)            # Sat noon: no run (nights only, every day)
+        self.assertEqual(fill.window_minutes(at(21, 17)), 15 * 60)      # Sat 17:00 -> Sun 08:00
+        self.assertEqual(fill.window_minutes(at(20, 17)), 15 * 60)      # Fri 17:00 -> Sat 08:00
 
 
 class Manifest(unittest.TestCase):
@@ -174,6 +185,9 @@ class Text(unittest.TestCase):
         self.assertEqual(T.score_words("thou hast shewed it for ever. Selah.", "en"),
                          T.score_words("Thou haste showed it forever. Sila.", "en"))
         self.assertNotEqual(T.score_words("thou hast shewed it", "en"), T.score_words("thou showed it", "en"))
+        self.assertEqual(T.score_words("he was honoured; that armour; go to day", "en"),
+                         T.score_words("He was honored, that armor, go today", "en"))
+        self.assertNotEqual(T.score_words("go to day", "en"), T.score_words("go", "en"))
 
     def test_real_respellings_load(self):
         p = T.load_pronunciations()
@@ -193,6 +207,57 @@ class Content(unittest.TestCase):
             self.assertEqual(items[0]["verses"], ["One.", "Two."])
             self.assertTrue(items[0]["file"].startswith("en/stories/ruth-1-"))
             self.assertEqual(items[0]["priority"], 3)
+
+
+class Sessions(unittest.TestCase):
+    """The real session scripts (content/psalm-nights, content/imagination-nights) become fill items:
+    before 21 Nov 2026 content_items read only a string body, so all 90 sessions were skipped."""
+    def test_every_passed_session_script_is_planned(self):
+        items = fill.content_items(fill.REPO)
+        kinds = {}
+        for i in items:
+            kinds[(i["kind"], i["lang"])] = kinds.get((i["kind"], i["lang"]), 0) + 1
+        for kind, folder in (("psalm-night", "psalm-nights"), ("imagination-night", "imagination-nights")):
+            for lang in ("en", "es"):
+                d = fill.REPO / "content" / folder / lang
+                want = sum(1 for f in d.glob("*.json") if json.loads(f.read_text("utf-8")).get("status") == "passed") if d.is_dir() else 0
+                self.assertEqual(kinds.get((kind, lang), 0), want, (kind, lang))
+        self.assertGreaterEqual(sum(kinds.values()), 60, "rule 0: the real scripts must yield sessions")
+
+    def test_pauses_are_real_quiet_and_scripture_is_the_stored_text_with_its_reference(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "content/psalm-nights/en").mkdir(parents=True)
+            (root / "content/psalm-nights/en/pn.json").write_text(json.dumps({
+                "id": "pn-x", "kind": "psalm-night", "lang": "en", "title": "Psalm 4", "status": "passed",
+                "pacing": {"quiet_between_verses_s": 1.5, "quiet_between_paragraphs_s": 4},
+                "segments": [{"text": "Hello. [pause 8]\n\nLie down."},
+                             {"ref": "PSA 4:8", "verses": [{"v": 8, "text": "I will both lay me down in peace, and sleep."}]}]}))
+            [item] = fill.content_items(root)
+        self.assertEqual(item["verses"], ["Hello.", "Lie down.", "Psalm 4, verse 8.", "I will both lay me down in peace, and sleep."])
+        self.assertEqual(item["gaps"], [8.0, 4.0, fill.HEADING_GAP, 4.0])
+        self.assertNotIn("[pause", fill.script_of(item))
+        segs = fill.segments_of(item, {})
+        self.assertEqual([s["gap"] for s in segs][1:], item["gaps"])
+        self.assertEqual(item["level"], "sleep")
+
+    def test_sessions_come_after_english_psalms_and_before_other_chapters(self):
+        vpl = ["MAT 1:1 The book.", "PSA 1:1 Blessed.", "PSA 2:1 Why."]
+        b = {"en": T.parse_vpl(vpl), "es": T.parse_vpl(vpl)}
+        mk = lambda kind, lang, n: {"file": f"{lang}/{kind}/{n}.m4a", "kind": kind, "lang": lang, "priority": 3}
+        content = [mk("imagination-night", "en", "a"), mk("story", "en", "s"), mk("psalm-night", "es", "b"), mk("psalm-night", "en", "c")]
+        order = [i["file"] for i in fill.plan(b, content)]
+        self.assertEqual(order[:5], ["en/psalms/kjv-psa-001.m4a", "en/psalms/kjv-psa-002.m4a",
+                                     "en/psalm-night/c.m4a", "es/psalm-night/b.m4a", "en/imagination-night/a.m4a"])
+        self.assertEqual(order[5], "en/bible/kjv-mat-001.m4a")
+        self.assertEqual(order[-1], "en/story/s.m4a")
+
+    def test_scripted_quiet_is_not_counted_as_slow_speech(self):
+        import qa
+        kw = dict(script="one two three", transcript="one two three", lang="en", level="sleep",
+                  lufs=-22.0, true_peak=-3.0, clipped=0)
+        self.assertTrue(any(p.startswith("length") for p in qa.judge(seconds=60.0, **kw)["problems"]))
+        self.assertFalse(any(p.startswith("length") for p in qa.judge(seconds=60.0, quiet=58.4, **kw)["problems"]))
 
 
 class TextProgress(unittest.TestCase):
