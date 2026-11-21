@@ -1,0 +1,50 @@
+diff --git a/worker/src/index.ts b/worker/src/index.ts
+index 0d2112c..15d6899 100644
+--- a/worker/src/index.ts
++++ b/worker/src/index.ts
+@@ -14,6 +14,7 @@ import { bump, logCode, reserve } from './counts';
+ import { confirmRisk, detectCrisis, floor, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type RiskVerdict, type Turn } from './crisis';
+ import { centralDay, pacificDay, utcDay } from './day';
+ import { paidStatus, recheckMemory, type Paid } from './entitlement';
++import { madeForYou } from './madeForYou.mount';
+ import { ipHash } from './iphash';
+ import { runLadder, tally, type LadderRung, type Metrics } from './ladder';
+ import { deleteMemory, markCrisis, readMemory, saveMemory } from './memory';
+@@ -424,9 +425,14 @@ async function report(request: Request, env: Env, deps: Deps): Promise<Response>
+   if (who === 'missing') return fail('CHAT_TOKEN_SECRET_MISSING', 503);
+   if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
+   if (!(await env.CHAT_BURST.limit({ key: who.installId })).success) return json({ error: 'SLOW_DOWN' }, 429);
+-  const body = parseReport(await request.json().catch(() => null));
+-  if (!body) return fail('BAD_REQUEST', 400);
++  const raw = await request.json().catch(() => null);
++  // "Report this session" (Made for you): the same token, burst and daily checks, then its own store.
++  const session = !!raw && typeof raw === 'object' && 'session' in raw;
++  const body = session ? null : parseReport(raw);
++  if (!session && !body) return fail('BAD_REQUEST', 400);
+   if (!(await reserve(env.DB, centralDay(now), 'reports', REPORTS_DAILY))) { logCode('REPORT_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
++  if (session) return madeForYou(env, deps, install, RENEW_GRACE_DAYS).report(who.installId, raw as { session?: unknown; reason?: unknown }, now);
++  if (!body) return fail('BAD_REQUEST', 400);
+   await saveReport(env.DB, body, now);
+   logCode('ANSWER_REPORTED', { reason: body.reason });
+   return json({ reported: true });
+@@ -445,6 +451,10 @@ export function createApp(deps: Deps = realDeps) {
+         if (pathname === '/api/token/renew' && request.method === 'POST') return await renew(request, env, deps);
+         if (pathname === '/api/chat' && request.method === 'POST') return await chat(request, env, ctx, deps);
+         if (pathname === '/api/report' && request.method === 'POST') return await report(request, env, deps);
++        if (pathname.startsWith('/api/made-for-you')) {
++          const answered = await madeForYou(env, deps, install, RENEW_GRACE_DAYS).fetch(request);
++          if (answered) return answered;
++        }
+         if (pathname === '/api/memory' && request.method === 'DELETE') {
+           // An expired token still deletes: her memory must go whenever she asks, not only within 30 days.
+           const who = await install(request, env, deps.now(), RENEW_GRACE_DAYS);
+@@ -463,6 +473,9 @@ export function createApp(deps: Deps = realDeps) {
+       const rechecked = await recheckMemory(env, now).catch(() => { logCode('MEMORY_RECHECK_FAILED'); return 0; });
+       const removed = await cleanup(env.DB, now);
+       logCode('CHAT_CLEANUP', { ...removed, rechecked });
++      // Made for you's retention promises (her note by day 7, audio 30 days after the plan, reports at 90 days).
++      const made = await madeForYou(env, deps, install, RENEW_GRACE_DAYS).scheduled().catch(() => { logCode('MADE_FOR_YOU_CLEANUP_FAILED'); return null; });
++      if (made) logCode('MADE_FOR_YOU_CLEANUP', made);
+     },
+   };
+ }

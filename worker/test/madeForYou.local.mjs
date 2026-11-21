@@ -208,7 +208,7 @@ def voice(item, work):
 def put(item, file):
     with urlopen(Request(base + '/_test-media/' + item['file'], data=file.read_bytes(), headers={'Authorization': 'Bearer ' + secret}, method='PUT')) as r:
         assert r.status == 204
-assert process_one(make_request(base + '/api', secret), voice, put)
+assert process_one(make_request(base + '/api', secret), voice, put, lambda item: None)
 `;
   await python('python3', ['-c', runner, url.origin, secret]);
   const ready = await row(job);
@@ -270,6 +270,54 @@ assert process_one(make_request(base + '/api', secret), voice, put)
   assert.equal(ninety.reports, 1);
   assert.equal((await db.prepare('SELECT count(*) AS n FROM made_for_you_report').first()).n, 0);
   assert.equal((await fetch(new URL(`/_test-media/${kept.results[0].audio_key}?ticket=local-only`, url))).status, 404);
+});
+
+test('a session deleted while it is being voiced leaves no audio behind, and the drain goes on to the next', async t => {
+  const { db, call, row, url } = await worker(t);
+  const gone = (await (await call(id.owner, { body: note })).json()).id;
+  const next = (await (await call(id.other, { body: note })).json()).id;
+  // The Mac's real drain: during the first render she deletes the session; its upload then gets a 409.
+  // drop() is the Mac's own delete; here it fails (does nothing), so the Worker's sweep must remove the file.
+  const runner = `
+import hashlib, json, sys
+from urllib.request import Request, urlopen
+sys.path.insert(0, 'audio')
+from made_for_you import make_request, drain_queue
+base, secret, owner, gone = sys.argv[1:]
+def voice(item, work):
+    if item['ref'] == gone:
+        with urlopen(Request(base + '/api/made-for-you?id=' + gone, method='DELETE', headers={'Authorization': 'Bearer ' + owner})) as r:
+            assert json.load(r)['deleted'] == 1
+    out = work / 'session.m4a'
+    out.write_bytes(b'stub-voice')
+    return dict(status='passed', seconds=680, sha256=hashlib.sha256(out.read_bytes()).hexdigest(), _local=str(out))
+def put(item, file):
+    with urlopen(Request(base + '/_test-media/' + item['file'], data=file.read_bytes(), headers={'Authorization': 'Bearer ' + secret}, method='PUT')) as r:
+        assert r.status == 204
+print(drain_queue(make_request(base + '/api', secret), voice, put, drop=lambda item: None))
+`;
+  const { stdout } = await python('python3', ['-c', runner, url.origin, secret, id.owner, gone]);
+  assert.match(stdout, /MADE_FOR_YOU_ENDED/);
+  assert.match(stdout.trim(), /\n1$/, 'the pass did not crash: the next session was published');
+  assert.equal((await row(next)).state, 'ready');
+  const ended = await row(gone);
+  assert.equal(ended.state, 'deleted');
+  assert.equal(ended.audio_path, `made-for-you/${id.owner}/${gone}.m4a`, 'the row kept the key of the upload in flight');
+  const media = () => fetch(new URL(`/_test-media/${ended.audio_path}?ticket=local-only`, url)).then(r => r.status);
+  assert.equal(await media(), 200, 'the orphan exists until the sweep');
+  const cleanup = now => fetch(new URL('/_test-cleanup', url), { headers: { 'x-test-now': String(now) } }).then(r => r.json());
+  await cleanup(Date.now());
+  assert.equal(await media(), 404, 'the hourly sweep deleted her audio');
+  assert.ok((await row(gone)).audio_path, 'while the lease runs, a late upload would still be caught');
+  await cleanup(Date.now() + 3 * HOUR());
+  assert.equal((await row(gone)).audio_path, null);
+  // The same for a session that expires (day 7) mid-render.
+  await db.prepare(`UPDATE made_for_you SET state = 'scripted', script = '{}', audio_path = NULL, lease = 'l', lease_until = ?, created_at = ? WHERE id = ?`)
+    .bind(Date.now() + HOUR(), Date.now() - 8 * 24 * HOUR(), gone).run();
+  await cleanup(Date.now());
+  const expired = await row(gone);
+  assert.equal(expired.state, 'expired');
+  assert.equal(expired.audio_path, `made-for-you/${id.owner}/${gone}.m4a`);
 });
 
 test('the runner status reports queue depth, held rows and late promises for its own failure line', async t => {

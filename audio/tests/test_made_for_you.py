@@ -4,6 +4,7 @@ import sys
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest.mock import Mock, patch
 from urllib.error import HTTPError
 
@@ -61,8 +62,7 @@ class MadeForYouTest(unittest.TestCase):
         with patch.dict(sessions.os.environ, {
             "PBS_MADE_FOR_YOU_API": "https://fixture.example/api",
             "PBS_MADE_FOR_YOU_RUNNER_SECRET": "fixture",
-            "PBS_MADE_FOR_YOU_PRIVATE_BUCKET": "fixture-private",
-        }), patch.object(sessions.publish, "connect"), patch.object(sessions, "make_request", return_value=call), \
+        }), patch.object(sessions, "connect_private", return_value="fixture-private"), patch.object(sessions, "make_request", return_value=call), \
                 patch.object(sessions, "render_session", side_effect=voice), patch.object(sessions, "upload", put):
             self.assertEqual(sessions.work(), 0)
         self.assertEqual(published, [first["id"], second_id])
@@ -93,7 +93,7 @@ class MadeForYouTest(unittest.TestCase):
         logs = io.StringIO()
         with patch.object(sessions, "urlopen", side_effect=replies) as request, redirect_stdout(logs):
             # A held request is a note the next pass retries, never a failed run.
-            self.assertEqual(sessions.drain_queue(call, render, put), 1)
+            self.assertEqual(sessions.drain_queue(call, render, put, drop=Mock()), 1)
             self.assertIn(f"NOTE [{code}]", logs.getvalue())
             self.assertIn("NOTE [MADE_FOR_YOU_QA]", logs.getvalue())
             self.assertEqual([entry.args[0].full_url.rsplit("/", 1)[-1] for entry in request.call_args_list],
@@ -106,7 +106,7 @@ class MadeForYouTest(unittest.TestCase):
         call = Mock(return_value={"job": self.job()})
         put = Mock()
         with self.assertRaisesRegex(fill.NamedStop, "MADE_FOR_YOU_QA"):
-            sessions.process_one(call, Mock(return_value={"status": "FAILED"}), put)
+            sessions.process_one(call, Mock(return_value={"status": "FAILED"}), put, Mock())
         put.assert_not_called()
         self.assertEqual(call.call_args_list[0].args, ("claim", {}))
         job = self.job()
@@ -120,7 +120,7 @@ class MadeForYouTest(unittest.TestCase):
         call = sessions.make_request("https://fixture.example/api", "fixture")
         put = Mock()
         with patch.object(sessions, "urlopen", side_effect=replies) as request, redirect_stdout(io.StringIO()):
-            self.assertEqual(sessions.drain_queue(call, render, put), 1)
+            self.assertEqual(sessions.drain_queue(call, render, put, drop=Mock()), 1)
             self.assertEqual(request.call_args_list[0].kwargs["timeout"], 300)
             self.assertTrue(request.call_args_list[2].args[0].full_url.endswith(job["id"]))
         put.assert_called_once()
@@ -144,12 +144,55 @@ class MadeForYouTest(unittest.TestCase):
             return {"queue": 1, "held": 0, "oldestHours": 2, "late": 0}
         with patch.dict(sessions.os.environ, {
             "PBS_MADE_FOR_YOU_API": "https://fixture.example/api", "PBS_MADE_FOR_YOU_RUNNER_SECRET": "fixture",
-            "PBS_MADE_FOR_YOU_PRIVATE_BUCKET": "fixture-private",
-        }), patch.object(sessions, "make_request", return_value=call), patch.object(sessions.publish, "connect") as connect, \
+        }), patch.object(sessions, "make_request", return_value=call), patch.object(sessions, "connect_private") as connect, \
                 redirect_stdout(io.StringIO()):
             self.assertEqual(sessions.work(render=False), 0)
         self.assertEqual(seen, ["status"])
         connect.assert_not_called()
+
+    def test_a_session_ended_mid_render_has_its_upload_removed_and_the_drain_goes_on(self):
+        other = "10000000-0000-4000-a000-000000000002"
+        ended, next_job = self.job(), {**self.job(), "id": other, "lease": other, "path": f"made-for-you/{other}/{other}.m4a"}
+        ended_id, next_id = ended["id"], next_job["id"]
+        jobs = [ended, next_job, None]
+        gone = HTTPError("https://fixture.example", 409, "Conflict", {}, io.BytesIO(b'{"error":"LEASE_EXPIRED"}'))
+        def call(target, body):
+            if target == "claim":
+                return {"job": jobs.pop(0)}
+            if target == ended_id:
+                raise gone
+            return {"published": True}
+        render = Mock(side_effect=lambda item, directory: {"status": "passed", "seconds": 680, "sha256": "h", "_local": directory / "s.m4a"})
+        put, drop = Mock(), Mock()
+        with redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(sessions.drain_queue(call, render, put, drop=drop), 1)
+        self.assertEqual(put.call_count, 2)
+        drop.assert_called_once()
+        self.assertEqual(drop.call_args.args[0]["ref"], ended_id, "only the ended session's upload is removed")
+        self.assertIn("MADE_FOR_YOU_ENDED", out.getvalue())
+        self.assertNotEqual(next_id, ended_id)
+
+    def test_private_uploads_use_their_own_token_never_the_library_key(self):
+        env = {"CF2_ACCOUNT_ID": "acct", "PBS_MFY_R2_ACCESS_KEY_ID": "id", "PBS_MFY_R2_SECRET_ACCESS_KEY": "s", "PBS_MFY_R2_BUCKET": "pbs-made-for-you",
+               "PBS_CF2_R2_ACCESS_KEY_ID": "library-id"}
+        with patch.dict(sessions.os.environ, env), patch.dict(sessions.publish.RCLONE_ENV, {}, clear=True):
+            self.assertEqual(sessions.connect_private(), "pbs-made-for-you")
+            self.assertEqual(sessions.publish.RCLONE_ENV["RCLONE_CONFIG_R2P_ACCESS_KEY_ID"], "id")
+        with patch.dict(sessions.os.environ, {**env, "PBS_MFY_R2_BUCKET": ""}), self.assertRaises(fill.NamedStop) as stop:
+            sessions.connect_private()
+        self.assertEqual(stop.exception.code, "MADE_FOR_YOU_STORAGE_CONFIG")
+        with patch.dict(sessions.os.environ, {**env, "PBS_MFY_R2_BUCKET": sessions.publish.BUCKET}), self.assertRaises(fill.NamedStop):
+            sessions.connect_private()
+
+    def test_upload_is_held_when_the_whole_account_is_at_the_free_cap(self):
+        with TemporaryDirectory() as directory:
+            local = Path(directory) / "s.m4a"
+            local.write_bytes(b"x" * 10)
+            with patch.object(sessions.publish, "account_bytes", return_value=sessions.publish.FREE_CAP_BYTES), \
+                    patch.object(sessions.publish, "rclone") as rclone, self.assertRaises(fill.NamedStop) as stop:
+                sessions.upload({"file": "made-for-you/a/b.m4a"}, local, "pbs-made-for-you")
+        self.assertEqual(stop.exception.code, "MADE_FOR_YOU_R2_FREE_CAP")
+        rclone.assert_not_called()
 
     def test_session_time_comes_from_the_config_the_worker_promises_with(self):
         self.assertEqual(sessions.MIN_SESSION_SECONDS, sessions.CONFIG["sessionMinutes"] * 60)
@@ -173,7 +216,7 @@ class MadeForYouTest(unittest.TestCase):
         render = Mock(side_effect=[RuntimeError("kokoro failed"),
                                    {"status": "passed", "seconds": 680, "sha256": "hash", "_local": "session.m4a"}])
         with redirect_stdout(io.StringIO()):
-            self.assertEqual(sessions.drain_queue(call, render, Mock()), 1)
+            self.assertEqual(sessions.drain_queue(call, render, Mock(), drop=Mock()), 1)
         self.assertEqual(seen, ["claim", f"{crashed['id']}/qa-failed", "claim", ready_id, "claim"])
 
     def test_timebox_kills_a_slow_render_and_raises_a_named_stop(self):
@@ -186,7 +229,7 @@ class MadeForYouTest(unittest.TestCase):
         call = Mock(side_effect=[{"job": job}, {"published": True}])
         render = Mock(return_value={"status": "passed", "seconds": 680, "sha256": "hash", "_local": "session.m4a"})
         with patch.object(sessions.time, "monotonic", side_effect=[0, 0, 460, 460]):
-            self.assertEqual(sessions.drain_queue(call, render, Mock(), deadline=1200), 1)
+            self.assertEqual(sessions.drain_queue(call, render, Mock(), drop=Mock(), deadline=1200), 1)
         self.assertEqual([entry.args[0] for entry in call.call_args_list], ["claim", job["id"]])
 
     def test_measured_audio_gate_checks_duration_and_pace_as_well_as_library_qa(self):

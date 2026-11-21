@@ -52,7 +52,7 @@ BOX_MINUTES = 60
 HELD_CODES = {
     "MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA", "MADE_FOR_YOU_NO_FREE_MODEL",
     "MADE_FOR_YOU_PSALM_UNAVAILABLE", "MADE_FOR_YOU_ATTEMPTS_EXHAUSTED",
-    "MADE_FOR_YOU_CLAIM_TIMEOUT", "LEASE_EXPIRED",
+    "MADE_FOR_YOU_CLAIM_TIMEOUT", "LEASE_EXPIRED", "MADE_FOR_YOU_ENDED",
 }
 PRIVATE_PATH = re.compile(r"made-for-you/[a-f0-9-]{36}/([a-f0-9-]{36})\.m4a")
 
@@ -138,16 +138,37 @@ def make_request(base: str, secret: str):
     return call
 
 
+def connect_private() -> str:
+    """An `r2p:` rclone remote from the private bucket's own token (PBS_MFY_R2_*, scoped to that bucket
+    only, never the public library's key), in rclone's environment, never argv. Returns the bucket."""
+    need = ("CF2_ACCOUNT_ID", "PBS_MFY_R2_ACCESS_KEY_ID", "PBS_MFY_R2_SECRET_ACCESS_KEY", "PBS_MFY_R2_BUCKET")
+    if not all(os.environ.get(k) for k in need):
+        raise fill.NamedStop("MADE_FOR_YOU_STORAGE_CONFIG", f"{' / '.join(need)} are not all set (Boss OS vault).")
+    bucket = os.environ["PBS_MFY_R2_BUCKET"]
+    if bucket == publish.BUCKET:
+        raise fill.NamedStop("MADE_FOR_YOU_PRIVATE_BUCKET", "Private sessions never go in the public library bucket.")
+    publish.RCLONE_ENV.update({
+        "RCLONE_CONFIG_R2P_TYPE": "s3", "RCLONE_CONFIG_R2P_PROVIDER": "Cloudflare",
+        "RCLONE_CONFIG_R2P_ACCESS_KEY_ID": os.environ["PBS_MFY_R2_ACCESS_KEY_ID"],
+        "RCLONE_CONFIG_R2P_SECRET_ACCESS_KEY": os.environ["PBS_MFY_R2_SECRET_ACCESS_KEY"],
+        "RCLONE_CONFIG_R2P_ENDPOINT": f"https://{os.environ['CF2_ACCOUNT_ID']}.r2.cloudflarestorage.com",
+        "RCLONE_CONFIG_R2P_NO_CHECK_BUCKET": "true"})
+    return bucket
+
+
+def drop(item: dict, bucket: str) -> None:
+    """Removes an upload the Worker refused (the session ended while it was being voiced)."""
+    result = publish.rclone("deletefile", f"r2p:{bucket}/{item['file']}", timeout=60)
+    if result.returncode:
+        # The Worker's hourly sweep deletes it from the key it set when the session ended.
+        print("NOTE an orphaned private upload is left for the Worker's hourly sweep", flush=True)
+
+
 def upload(item: dict, local: Path, bucket: str) -> None:
-    sizes = []
-    for name in (publish.BUCKET, bucket):
-        result = publish.rclone("size", "--json", f"r2:{name}", timeout=60)
-        if result.returncode:
-            raise fill.NamedStop("MADE_FOR_YOU_R2_UNREACHABLE", "Could not check R2 storage.")
-        sizes.append(json.loads(result.stdout)["bytes"])
-    if sum(sizes) + local.stat().st_size > publish.FREE_CAP_BYTES:
+    # The second account's free 10 GB covers every bucket on it: the account's whole use, read once.
+    if publish.account_bytes() + local.stat().st_size > publish.FREE_CAP_BYTES:
         raise fill.NamedStop("MADE_FOR_YOU_R2_FREE_CAP", "Private audio is held at the free storage cap.")
-    dest = f"r2:{bucket}/{item['file']}"
+    dest = f"r2p:{bucket}/{item['file']}"
     result = publish.rclone(
         "copyto", "--checksum", "--s3-upload-cutoff", "32M",
         "--header-upload", "Content-Type: audio/mp4", "--header-upload", "Cache-Control: private, no-store",
@@ -161,7 +182,7 @@ def upload(item: dict, local: Path, bucket: str) -> None:
         raise fill.NamedStop("MADE_FOR_YOU_R2_HASH", "Private audio could not be verified.")
 
 
-def process_one(call, render, put) -> bool:
+def process_one(call, render, put, drop) -> bool:
     started = time.monotonic()
     job = call("claim", {}).get("job")
     if job is None:
@@ -190,21 +211,29 @@ def process_one(call, render, put) -> bool:
             if row["status"] != "passed":
                 raise failed("MADE_FOR_YOU_QA")
             put(item, Path(row["_local"]))
-            if call(job["id"], {"lease": job["lease"], "seconds": row["seconds"], "sha256": row["sha256"]}).get("published") is not True:
+            try:
+                answer = call(job["id"], {"lease": job["lease"], "seconds": row["seconds"], "sha256": row["sha256"]})
+            except HTTPError as error:
+                if error.code != 409:
+                    raise
+                # She deleted it, or it expired, while it was being voiced: the audio must not stay.
+                drop(item)
+                raise fill.NamedStop("MADE_FOR_YOU_ENDED", "The session ended during its render; its upload was removed.") from None
+            if answer.get("published") is not True:
                 raise fill.NamedStop("MADE_FOR_YOU_PUBLISH", "The Worker did not confirm publication.")
         return True
     finally:
         print(f"NOTE private session elapsed {time.monotonic() - started:.1f} s", flush=True)
 
 
-def drain_queue(call, render, put, *, deadline: float = float("inf")) -> int:
+def drain_queue(call, render, put, *, drop, deadline: float = float("inf")) -> int:
     """Make sessions until the queue is empty or another would not fit. A held request is a NOTE: the
     Worker keeps it and the app shows her the retry; only a broken promise is a stop (report())."""
     published = 0
     consecutive_timeouts = 0
     while deadline - time.monotonic() >= MIN_SESSION_SECONDS:
         try:
-            if not process_one(call, render, put):
+            if not process_one(call, render, put, drop):
                 break
         except fill.NamedStop as error:
             if error.code not in HELD_CODES:
@@ -230,17 +259,15 @@ def report(call, published: int) -> None:
 
 def work(*, deadline: float = float("inf"), render: bool = True) -> int:
     base, secret = os.getenv("PBS_MADE_FOR_YOU_API", ""), os.getenv("PBS_MADE_FOR_YOU_RUNNER_SECRET", "")
-    bucket = os.getenv("PBS_MADE_FOR_YOU_PRIVATE_BUCKET", "")
     url = urlsplit(base)
     if url.scheme != "https" or not url.hostname or url.username or url.password or url.query or url.fragment or not secret:
         raise fill.NamedStop("MADE_FOR_YOU_CONFIG", "Configure the HTTPS API and the runner secret.")
-    if not bucket or bucket == publish.BUCKET:
-        raise fill.NamedStop("MADE_FOR_YOU_PRIVATE_BUCKET", "Configure a separate private R2 bucket.")
     call = make_request(base, secret)
     published = 0
     if render:
-        publish.connect()
-        published = drain_queue(call, render_session, lambda item, local: upload(item, local, bucket), deadline=deadline)
+        bucket = connect_private()
+        published = drain_queue(call, render_session, lambda item, local: upload(item, local, bucket),
+                                drop=lambda item: drop(item, bucket), deadline=deadline)
     report(call, published)
     return 0
 

@@ -28,7 +28,7 @@ class Selection(unittest.TestCase):
         available = publish.public_row(row("available.m4a"))
         missing = publish.public_row(row("missing.m4a"))
         with tempfile.TemporaryDirectory() as home, mock.patch.object(fill, "HOME", Path(home)), \
-                mock.patch.object(publish, "connect"), \
+                mock.patch.object(publish, "connect"), mock.patch.object(publish, "account_bytes", return_value=110.0), \
                 mock.patch.object(fill, "read_manifest", return_value=[row("available.m4a")]), \
                 mock.patch.object(publish, "r2_listing", return_value={
                     "available.m4a": {"Size": 10}, publish.SERVED: {"Size": 100}}), \
@@ -70,10 +70,49 @@ class FreeCap(unittest.TestCase):
         # kjv-psa-001.m4a: 83.84 s, 512,431 bytes on Drive (measured 20 Nov 2026)
         self.assertGreaterEqual(publish.estimate_bytes({"seconds": 83.84}), 512431)
 
+    def run_main(self, account, listing, **env):
+        calls = []
+        with tempfile.TemporaryDirectory() as home, mock.patch.object(publish.fill, "HOME", Path(home)), \
+                mock.patch.object(publish, "connect"), account, mock.patch.dict(publish.os.environ, env), \
+                mock.patch.object(publish.fill, "read_manifest", return_value=[row("a.m4a")]), \
+                mock.patch.object(publish, "r2_listing", return_value=listing), \
+                mock.patch.object(publish, "read_ledger", return_value={}), \
+                mock.patch.object(publish, "publish_one", side_effect=lambda r: calls.append(r)), \
+                mock.patch.object(publish, "write_ledger"), \
+                mock.patch.object(publish.fill, "morning_line", return_value="m"):
+            try:
+                rc = publish.main([])
+            except fill.NamedStop as stop:
+                rc = stop.code
+        return rc, calls
+
+    def test_other_buckets_on_the_account_count_against_the_free_10_gb(self):
+        # The private made-for-you bucket (or any other) holds 9.6 GB; this bucket holds almost nothing.
+        rc, calls = self.run_main(mock.patch.object(publish, "account_bytes", return_value=9.6e9), {"x.m4a": {"Size": 10}})
+        self.assertEqual((rc, calls), (9, []))
+        rc, calls = self.run_main(mock.patch.object(publish, "account_bytes", return_value=1e6), {"x.m4a": {"Size": 10}})
+        self.assertEqual(len(calls), 1, "under the cap the file goes up")
+
+    def test_an_unreadable_account_total_uploads_nothing(self):
+        rc, calls = self.run_main(mock.patch.object(publish, "connect"), {"x.m4a": {"Size": 10}}, PBS_CF2_ANALYTICS_TOKEN="")
+        self.assertEqual((rc, calls), ("R2_USAGE_UNREAD", []))
+
+    def test_account_total_is_each_buckets_latest_sample(self):
+        reply = {"data": {"viewer": {"accounts": [{"r2StorageAdaptiveGroups": [
+            {"max": {"payloadSize": 700, "metadataSize": 5}, "dimensions": {"bucketName": "pbs-made-for-you", "datetime": "2026-11-21T03:00:00Z"}},
+            {"max": {"payloadSize": 900, "metadataSize": 10}, "dimensions": {"bucketName": "peace-be-still-audio", "datetime": "2026-11-21T03:00:00Z"}},
+            {"max": {"payloadSize": 100, "metadataSize": 1}, "dimensions": {"bucketName": "pbs-made-for-you", "datetime": "2026-11-21T02:00:00Z"}},
+        ]}]}}}
+        with mock.patch.dict(publish.os.environ, {"PBS_CF2_ANALYTICS_TOKEN": "t", "CF2_ACCOUNT_ID": "a"}):
+            self.assertEqual(publish.account_bytes(post=lambda body: reply), 1615.0)
+            with self.assertRaises(fill.NamedStop) as stop:
+                publish.account_bytes(post=lambda body: {"errors": [{"message": "not authorized"}]})
+        self.assertEqual(stop.exception.code, "R2_USAGE_UNREAD")
+
     def test_over_the_cap_nothing_uploads_and_the_run_is_a_named_stop(self):
         calls = []
         with tempfile.TemporaryDirectory() as home, mock.patch.object(publish.fill, "HOME", Path(home)), \
-                mock.patch.object(publish, "connect"), \
+                mock.patch.object(publish, "connect"), mock.patch.object(publish, "account_bytes", return_value=0.0), \
                 mock.patch.object(publish.fill, "read_manifest", return_value=[row("a.m4a")]), \
                 mock.patch.object(publish, "r2_listing", return_value={"x.m4a": {"Size": 9.6e9}}), \
                 mock.patch.object(publish, "read_ledger", return_value={}), \

@@ -278,7 +278,8 @@ export type MadeForYouDependencies<CrisisKind = string> = {
   paid(installId: string, now: number): Promise<{ paid: boolean; paidUntil: number | null }>;
   // detectCrisis(turns, () => realDeps.risk(env, turns)) and the chat's crisisText.
   detectCrisis(turns: Turn[]): Promise<Crisis<CrisisKind>>;
-  crisisText(kind: CrisisKind, lang: Lang, age: Install['age'], text: string): string;
+  // The door matters: an Imagination (Mindset door) request never gets a faith reply.
+  crisisText(kind: CrisisKind, lang: Lang, age: Install['age'], text: string, door: 'faith' | 'mindset'): string;
   // runLadder(db, madeForYouRungs(realDeps.rungs(env, now), use, signal), messages, schema, maxTokens, metrics, valid).
   ladder(use: Use, messages: Message[], schema: Schema, maxTokens: number, valid: (value: unknown) => boolean, signal: AbortSignal): Promise<LadderResult>;
   // Phase 3's checkAnswer with the Worker's db, and its judgeSchema / judgeVerdict.
@@ -317,6 +318,10 @@ const shaPattern = /^[0-9a-f]{64}$/;
 const json = (body: object, status = 200) => Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
 const error = (status: number, code: string) => json({ error: code }, status);
 const audioPath = (row: Pick<Row, 'install_id' | 'id'>) => `made-for-you/${row.install_id}/${row.id}.m4a`;
+// The key a scripted row's audio will have, set when the row ends mid-render (SQL twin of audioPath).
+const IN_FLIGHT_KEY = "audio_path = CASE WHEN state = 'scripted' THEN 'made-for-you/' || install_id || '/' || id || '.m4a' ELSE audio_path END";
+// The row's audio key may be cleared only once no render can still upload to it (its lease is over).
+const UPLOAD_OVER = '(lease_until IS NULL OR lease_until <= ?)';
 // Ten paragraphs as an array, not one text field: measured 20 Nov 2026, free models asked for "1,000
 // words" in one field wrote 35 and 292; asked for ten 90-105 word paragraphs they wrote 973 (95-99 each).
 export const draftSchema: Schema = { type: 'object', properties: { paragraphs: { type: 'array', items: { type: 'string' }, minItems: 10, maxItems: 10 } },
@@ -514,15 +519,18 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     return published ? json({ published: true }) : error(409, 'LEASE_EXPIRED');
   }
 
-  /** Removes the audio and hides the session; a storage failure leaves audio_path for the cron to retry. */
+  /** Removes the audio and hides the session; a storage failure leaves audio_path for the cron to retry.
+   * A row still being voiced (scripted) gets its future key and keeps its lease end, so whatever the Mac
+   * uploads before the lease runs out is deleted too (sweep()); the Mac's publish then gets a 409. */
   async function remove(where: string, ...binds: (string | number)[]) {
-    const { results } = await db.prepare(`UPDATE made_for_you SET state = 'deleted', note = NULL, script = NULL, lease = NULL, lease_until = NULL
+    const { results } = await db.prepare(`UPDATE made_for_you SET state = 'deleted', note = NULL, script = NULL, lease = NULL,
+        ${IN_FLIGHT_KEY}, lease_until = CASE WHEN state = 'scripted' THEN lease_until END
       WHERE ${where} RETURNING id, audio_path`).bind(...binds).all<{ id: string; audio_path: string | null }>();
     for (const row of results) {
       if (!row.audio_path) continue;
       try {
         await deps.deleteAudio(row.audio_path);
-        await db.prepare('UPDATE made_for_you SET audio_path = NULL WHERE id = ?').bind(row.id).run();
+        await db.prepare(`UPDATE made_for_you SET audio_path = NULL WHERE id = ? AND ${UPLOAD_OVER}`).bind(row.id, deps.now()).run();
       } catch { /* the hourly cron retries rows still holding audio_path */ }
     }
     return results.length;
@@ -564,7 +572,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     const note = { kind: input.kind, lang: input.lang, text: input.text.trim(), teen: who.age === 'teen' };
     // The chat's own crisis floor and safety read, before anything is stored.
     const safety = await deps.detectCrisis([{ role: 'user', text: note.text }]);
-    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, note.lang, who.age, note.text) });
+    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, note.lang, who.age, note.text, note.kind === 'psalm' ? 'faith' : 'mindset') });
     if (safety.read === 'down') return error(503, 'SAFETY_UNAVAILABLE');
     const id = crypto.randomUUID();
     const day = deps.centralDay(now);
@@ -639,7 +647,8 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     async scheduled(recheckBatch = 20): Promise<Record<string, number>> {
       const now = deps.now();
       // 7 days at most for her note and the script, made or not.
-      const expired = await db.prepare(`UPDATE made_for_you SET state = 'expired', note = NULL, script = NULL, lease = NULL, lease_until = NULL
+      const expired = await db.prepare(`UPDATE made_for_you SET state = 'expired', note = NULL, script = NULL, lease = NULL,
+          ${IN_FLIGHT_KEY}, lease_until = CASE WHEN state = 'scripted' THEN lease_until END
         WHERE state IN ('queued','scripted') AND created_at <= ? RETURNING id`).bind(now - noteLifetime).all();
       // Audio 30 days after the paid plan ends, rechecked with RevenueCat first (a renewal moves the date).
       const lapsed = await db.prepare(`SELECT DISTINCT install_id FROM made_for_you WHERE state = 'ready' AND paid_until < ? LIMIT ?`)
@@ -652,11 +661,14 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
           await db.prepare('UPDATE made_for_you SET paid_until = ? WHERE install_id = ?').bind(status.paidUntil, install_id).run();
         } else planEnded += await remove("install_id = ? AND state = 'ready'", install_id);
       }
-      // Deletes that storage refused earlier.
-      const { results: leftovers } = await db.prepare("SELECT id, audio_path FROM made_for_you WHERE state = 'deleted' AND audio_path IS NOT NULL LIMIT 50")
+      // Deletes that storage refused earlier, and audio a render may have uploaded after the row ended.
+      const { results: leftovers } = await db.prepare("SELECT id, audio_path FROM made_for_you WHERE state IN ('deleted','expired') AND audio_path IS NOT NULL LIMIT 50")
         .all<{ id: string; audio_path: string }>();
       for (const row of leftovers) {
-        try { await deps.deleteAudio(row.audio_path); await db.prepare('UPDATE made_for_you SET audio_path = NULL WHERE id = ?').bind(row.id).run(); } catch { /* next hour */ }
+        try {
+          await deps.deleteAudio(row.audio_path);
+          await db.prepare(`UPDATE made_for_you SET audio_path = NULL WHERE id = ? AND ${UPLOAD_OVER}`).bind(row.id, now).run();
+        } catch { /* next hour */ }
       }
       // Reports (the copied audio and the reason) are kept 90 days.
       const { results: oldReports } = await db.prepare('SELECT rowid AS id, audio_key FROM made_for_you_report WHERE at < ? LIMIT 50')

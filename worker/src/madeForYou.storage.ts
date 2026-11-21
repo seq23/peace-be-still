@@ -3,8 +3,10 @@
 // with AWS Signature V4, using WebCrypto only and no dependency. Playback gets a presigned GET of at most
 // one hour; the Worker itself uses HEAD (the publish check), DELETE (her delete, a report, 30 days after
 // her plan) and a server-side copy (a report keeps the audio under reports/, with no install id).
-// Worker secrets (from the Boss OS vault): PBS_CF2_R2_ACCESS_KEY_ID, PBS_CF2_R2_SECRET_ACCESS_KEY;
-// vars: CF2_ACCOUNT_ID, PBS_MADE_FOR_YOU_PRIVATE_BUCKET. Any missing → named stop MADE_FOR_YOU_STORAGE_CONFIG.
+// Least privilege: its own R2 token, scoped to the private bucket pbs-made-for-you only (Object Read and
+// Write), never the public library's key. Worker secrets (from the Boss OS vault): PBS_MFY_R2_ACCESS_KEY_ID,
+// PBS_MFY_R2_SECRET_ACCESS_KEY, PBS_MFY_R2_BUCKET; var: CF2_ACCOUNT_ID. Any missing → named stop
+// MADE_FOR_YOU_STORAGE_CONFIG. The Mac uploads with the same token (audio/made_for_you.py).
 
 const encoder = new TextEncoder();
 const hex = (bytes: ArrayBuffer) => [...new Uint8Array(bytes)].map(b => b.toString(16).padStart(2, '0')).join('');

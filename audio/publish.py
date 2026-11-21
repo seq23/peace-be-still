@@ -13,12 +13,13 @@ Drive paths). A file whose ledger sha256 equals the manifest's is done, so every
 a run cut off by its time box resumes where it stopped. The app reads <audioBaseUrl>/manifest.jsonl
 to check which tracks from the bundled catalog it can stream.
 
-Where (her ruling 20 Nov 2026): her SECOND Cloudflare account, which holds only this bucket, so its own
-free 10 GB is the app's. Free tier only: the bucket's stored bytes (summed from the S3 listing; the key is
-scoped to this one bucket) plus this batch must stay under PBS_R2_FREE_CAP_GB (default 9.5 of the free
-10 GB), else NAMED STOP R2_FREE_STORAGE (nothing past the cap is uploaded). Class A operations are not
-read (the key cannot see analytics); a run costs about one listing plus one PUT per new file, far under
-the free 1,000,000 a month.
+Where (her ruling 20 Nov 2026): her SECOND Cloudflare account. Its free 10 GB is shared by every bucket
+on it (this library, the private made-for-you bucket, anything else), so the cap is read for the WHOLE
+account from Cloudflare's own R2 storage analytics (account_bytes(); token PBS_CF2_ANALYTICS_TOKEN,
+Account Analytics: Read). The account's stored bytes plus this batch must stay under PBS_R2_FREE_CAP_GB
+(default 9.5 of the free 10 GB), else NAMED STOP R2_FREE_STORAGE (nothing past the cap is uploaded). An
+unreadable total is NAMED STOP R2_USAGE_UNREAD: nothing is uploaded on a guess. Class A operations: a run
+costs about one listing plus one PUT per new file, far under the free 1,000,000 a month.
 
 Key: CF2_ACCOUNT_ID + PBS_CF2_R2_ACCESS_KEY_ID / PBS_CF2_R2_SECRET_ACCESS_KEY from the Boss OS vault
 (vault:run), passed to rclone in its environment, never argv.
@@ -33,6 +34,7 @@ import fcntl
 import json
 import os
 import subprocess
+import urllib.request
 import sys
 import tempfile
 import time
@@ -127,9 +129,36 @@ def connect() -> None:
         "RCLONE_CONFIG_R2_NO_CHECK_BUCKET": "true"})
 
 
-def stored_bytes(in_r2: dict[str, dict]) -> float:
-    """Bytes in the bucket (the second account's only bucket), from the listing already read."""
-    return float(sum(e.get("Size") or 0 for e in in_r2.values()))
+R2_USAGE_QUERY = """query ($account: String!, $since: Time!) { viewer { accounts(filter: {accountTag: $account}) {
+  r2StorageAdaptiveGroups(limit: 1000, filter: {datetime_geq: $since}, orderBy: [datetime_DESC]) {
+    max { payloadSize metadataSize } dimensions { bucketName datetime } } } } }"""
+
+
+def account_bytes(post=None, now: dt.datetime | None = None) -> float:
+    """Every bucket's stored bytes on the second account (its latest storage sample per bucket), from
+    Cloudflare's GraphQL analytics. Unreadable -> NAMED STOP R2_USAGE_UNREAD before anything is uploaded."""
+    token, account = os.environ.get("PBS_CF2_ANALYTICS_TOKEN"), os.environ.get("CF2_ACCOUNT_ID")
+    if not token or not account:
+        raise NamedStop("R2_USAGE_UNREAD", "PBS_CF2_ANALYTICS_TOKEN (Account Analytics: Read on the second account) "
+                        "is not set, so the account's whole R2 storage cannot be counted. Nothing was uploaded.")
+    since = ((now or dt.datetime.now(dt.timezone.utc)) - dt.timedelta(days=2)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    body = json.dumps({"query": R2_USAGE_QUERY, "variables": {"account": account, "since": since}}).encode()
+    def fetch(data: bytes) -> dict:
+        request = urllib.request.Request("https://api.cloudflare.com/client/v4/graphql", data=data, method="POST",
+                                         headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
+        with urllib.request.urlopen(request, timeout=60) as response:
+            return json.load(response)
+    try:
+        reply = (post or fetch)(body)
+        groups = reply["data"]["viewer"]["accounts"][0]["r2StorageAdaptiveGroups"]
+    except Exception:
+        raise NamedStop("R2_USAGE_UNREAD", "Cloudflare's R2 storage analytics did not answer. Nothing was uploaded.") from None
+    latest: dict[str, float] = {}
+    for group in groups:  # newest first: the first sample seen for a bucket is its current size
+        name = group["dimensions"]["bucketName"]
+        if name not in latest:
+            latest[name] = float(group["max"]["payloadSize"] or 0) + float(group["max"]["metadataSize"] or 0)
+    return sum(latest.values())
 
 
 def r2_listing() -> dict[str, dict]:
@@ -207,9 +236,10 @@ def main(argv=None) -> int:
     queue = todo(cands, ledger, in_r2)
     if a.limit:
         queue = queue[:a.limit]
-    stored = stored_bytes(in_r2)
+    # The analytics lag by up to an hour, so this bucket's own listing is the floor for its share.
+    stored = max(account_bytes(), float(sum(e.get("Size") or 0 for e in in_r2.values())))
     batch = fits(queue, stored)
-    room = f"bucket {stored / 1e9:.2f} of {FREE_CAP_BYTES / 1e9:.1f} GB cap (second account, free 10 GB)"
+    room = f"account {stored / 1e9:.2f} of {FREE_CAP_BYTES / 1e9:.1f} GB cap (second account, all buckets, free 10 GB)"
     if a.dry_run:
         print(f"{len(queue)} to publish, {len(batch)} fit under the free cap; {room}")
         return 0

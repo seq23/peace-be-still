@@ -48,3 +48,22 @@ jobs:
       - run: npm ci --prefix app --no-audit --no-fund
       - run: npm install --prefix worker --no-save --package-lock=false --no-audit --no-fund miniflare@5.20261118.0-beta
       - run: node --test worker/test/madeForYou.unit.mjs worker/test/madeForYou.local.mjs
+  # The launch wiring, proven against phase 3 itself: the lane's modules, migration 0006 and the one
+  # index.ts change (worker/integration/phase3-index.patch) put into the pinned phase 3, then phase 3's own
+  # typecheck and test suite. A patch that no longer applies or breaks chat fails here.
+  made-for-you-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: 48aaa835730481af8ffe4ff554064a6ae21d9b9d
+          path: .phase-3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .phase-3/worker/package-lock.json
+      - run: worker/integration/apply.sh .phase-3
+      - run: npm ci --no-audit --no-fund && npm run typecheck && npm test
+        working-directory: .phase-3/worker
