@@ -28,7 +28,7 @@ jobs:
       # Standalone lane tests use the shared chat code from the integration branch.
       - uses: actions/checkout@v4
         with:
-          ref: b23fa1db9862e65b403dd0f0f32848b295d8ef5b
+          ref: bd407cbe772b20bc49a88f24ecd347d4311d1a0e
           path: .phase-3
       - uses: actions/setup-node@v4
         with:
@@ -40,4 +40,4 @@ jobs:
           python-version: '3.12'
       - run: npm ci --prefix app --no-audit --no-fund
       - run: npm install --prefix worker --no-save --package-lock=false --no-audit --no-fund miniflare@5.20261118.0-beta
-      - run: node --test worker/test/madeForYou.local.mjs
+      - run: node --test worker/test/madeForYou.unit.mjs worker/test/madeForYou.local.mjs

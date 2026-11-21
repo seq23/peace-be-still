@@ -1,8 +1,10 @@
-// Set PBS_CHAT_SOURCE to the Phase 3 checkout, then run from the repository root: node --test worker/test/madeForYou.local.mjs
-// Uses CI's pinned Miniflare and the app's existing esbuild.
+// Run from the repository root with PBS_CHAT_SOURCE set to a phase 3 checkout (CI pins one):
+//   node --test worker/test/madeForYou.local.mjs
+// One local Worker (Miniflare, D1 with phase 3's migrations then 0006, R2) bound to phase 3's real
+// ladder, checkAnswer, judge and report code; the real Mac runner (audio/made_for_you.py) with a stub voice.
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import { test } from 'node:test';
@@ -12,205 +14,257 @@ import ts from '../../app/node_modules/typescript/lib/typescript.js';
 import * as miniflare from 'miniflare';
 
 const id = {
-  owner: '10000000-0000-4000-a000-000000000001',
-  other: '10000000-0000-4000-a000-000000000002',
-  free: '10000000-0000-4000-a000-000000000003',
-  limited: '10000000-0000-4000-a000-000000000004',
+  owner: '10000000-0000-4000-a000-000000000001', other: '10000000-0000-4000-a000-000000000002',
+  free: '10000000-0000-4000-a000-000000000003', limited: '10000000-0000-4000-a000-000000000004',
+  lapsed: '10000000-0000-4000-a000-000000000005',
 };
 const secret = 'local-runner';
-const day = 86_400_000;
-const at = Date.parse('2026-11-21T04:00:00Z');
-const schema = readFileSync('worker/migrations/0005_made_for_you.sql', 'utf8').replace(/\s+/g, ' ');
+const DAY = 86_400_000;
+const MIN = 60_000;
+// Tuesday 17 Nov 2026, 10:00 Central: tonight's night ends Wednesday 08:00 Central (14:00 UTC).
+const at = Date.parse('2026-11-17T16:00:00Z');
+const tonight = Date.parse('2026-11-18T14:00:00Z');
+const tomorrow = Date.parse('2026-11-19T14:00:00Z');
 const python = promisify(execFile);
 const chat = resolve(process.env.PBS_CHAT_SOURCE ?? '../.wt-peace-be-still-phase-3');
 const { config } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
-const rungs = ['workers-ai', ...config.vars.GEMINI_MODELS.split(',').map(model => `gemini-free:${model.trim()}`), 'openrouter-free'];
+const mfyConfig = JSON.parse(readFileSync('worker/src/madeForYou.config.json', 'utf8'));
 
-test('a seeded D1 row travels through the local Worker, Mac template and QA seam, private audio and paid playback', async t => {
+async function worker(t) {
   const bundle = await build({
-    entryPoints: ['worker/src/madeForYou.stub.ts'], bundle: true, format: 'esm', write: false,
-    alias: { 'phase-3': chat },
+    entryPoints: ['worker/src/madeForYou.stub.ts'], bundle: true, format: 'esm', write: false, alias: { 'phase-3': chat },
     plugins: [{
       name: 'chat-config',
-      setup(build) {
-        build.onResolve({ filter: /^phase-3-config$/ }, () => ({ path: 'chat-config', namespace: 'fixture' }));
-        build.onLoad({ filter: /.*/, namespace: 'fixture' }, () => ({ contents: JSON.stringify(config.vars), loader: 'json' }));
+      setup(b) {
+        b.onResolve({ filter: /^phase-3-config$/ }, () => ({ path: 'chat-config', namespace: 'fixture' }));
+        b.onLoad({ filter: /.*/, namespace: 'fixture' }, () => ({ contents: JSON.stringify(config.vars), loader: 'json' }));
       },
     }],
   });
-  const options = {
-    modules: true, script: bundle.outputFiles[0].text, compatibilityDate: '2026-11-20',
-    d1Databases: ['DB'], r2Buckets: ['AUDIO'],
-  };
-  const worker = new miniflare.Miniflare(miniflare.convertV4MiniflareOptions?.(options) ?? options);
-  t.after(() => worker.dispose());
-  const url = await worker.ready;
-  const db = await worker.getD1Database('DB');
-  const chatLimits = readFileSync(resolve(chat, 'worker/migrations/0001_chat_limits.sql'), 'utf8');
-  const counterTable = chatLimits.match(/^CREATE TABLE IF NOT EXISTS chat_counts .+;$/m);
-  assert.ok(counterTable, 'Phase 3 counter table is required for the shared ladder');
+  const options = { modules: true, script: bundle.outputFiles[0].text, compatibilityDate: '2026-11-20', d1Databases: ['DB'], r2Buckets: ['AUDIO'] };
+  const mf = new miniflare.Miniflare(miniflare.convertV4MiniflareOptions?.(options) ?? options);
+  t.after(() => mf.dispose());
+  const url = await mf.ready;
+  const db = await mf.getD1Database('DB');
   const migrations = [
-    counterTable[0],
-    schema,
-    readFileSync('worker/migrations/0006_made_for_you_retry.sql', 'utf8'),
-    readFileSync('worker/migrations/0007_made_for_you_attempts.sql', 'utf8'),
+    ...readdirSync(resolve(chat, 'worker/migrations')).sort().map(f => readFileSync(resolve(chat, 'worker/migrations', f), 'utf8')),
+    readFileSync('worker/migrations/0006_made_for_you.sql', 'utf8'),
   ];
+  // One statement per prepare(); a trigger's BEGIN..END body stays whole.
   for (const sql of migrations) {
-    for (const stmt of sql.replace(/^--.*$/gm, '').split(';').filter(x => x.trim())) await db.prepare(stmt).run();
+    let statement = '';
+    let inTrigger = false;
+    for (const line of sql.split('\n')) {
+      if (/^\s*--/.test(line) || !line.trim()) continue;
+      statement += line + '\n';
+      if (/\bBEGIN\s*$/.test(line)) inTrigger = true;
+      if (inTrigger ? /^\s*END;\s*$/.test(line) : /;\s*(--.*)?$/.test(line)) {
+        await db.prepare(statement).run();
+        statement = '';
+        inTrigger = false;
+      }
+    }
   }
-  await db.prepare('CREATE TABLE bible_verses (translation TEXT, verse INTEGER, text TEXT)').run();
-  const original = new DatabaseSync('app/src/bible/data/rv1909.db', { readOnly: true });
-  const verses = original.prepare("SELECT text FROM verses WHERE book = 'PSA' AND chapter = 23 ORDER BY verse").all();
-  original.close();
-  assert.equal(verses.length, 6);
-  await db.batch(verses.map(({ text }, i) => db.prepare('INSERT INTO bible_verses VALUES (?, ?, ?)').bind('RV1909', i + 1, text)));
-
-  const request = (token, { now = at, params = '?kind=psalm&lang=es', path = '', body, reject, blocked = [], short = [] } = {}) =>
-    fetch(new URL('/api/made-for-you' + path + params, url), {
-      method: body === undefined ? 'GET' : 'POST',
-      headers: {
-        authorization: `Bearer ${token}`, 'x-test-now': String(now),
-        'content-type': 'application/json', 'x-test-reject': reject ? 'yes' : 'no', 'x-test-models-down': blocked.join(','),
-        'x-test-models-short': short.join(','),
-      },
+  for (const [translation, file] of [['KJV', 'kjv'], ['RV1909', 'rv1909']]) {
+    const source = new DatabaseSync(`app/src/bible/data/${file}.db`, { readOnly: true });
+    const verses = source.prepare("SELECT verse, text FROM verses WHERE book = 'PSA' AND chapter = 23 ORDER BY verse").all();
+    source.close();
+    assert.equal(verses.length, 6);
+    await db.batch(verses.map(v => db.prepare("INSERT INTO bible_verses VALUES (?, 'PSA', 23, ?, ?)").bind(translation, v.verse, v.text)));
+  }
+  const call = (token, { now = at, params = '?kind=psalm&lang=es', path = '', body, method, headers = {} } = {}) =>
+    fetch(new URL(path.startsWith('/api') ? path : '/api/made-for-you' + path + (path ? '' : params), url), {
+      method: method ?? (body === undefined ? 'GET' : 'POST'),
+      headers: { authorization: `Bearer ${token}`, 'x-test-now': String(now), 'content-type': 'application/json', ...headers },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
-  const note = { kind: 'psalm', door: 'faith', lang: 'es', text: 'Días de lluvia' };
-  const count = async () => (await db.prepare('SELECT count(*) AS count FROM made_for_you').first()).count;
-  assert.equal((await request(id.free, { body: note })).status, 403);
-  assert.equal((await request(id.free)).status, 403);
-  assert.equal((await request('invalid', { body: note })).status, 401);
-  assert.equal((await request(id.limited, { body: note })).status, 429);
+  const claim = (now, headers) => call(secret, { now, path: '/runner/claim', body: {}, headers });
+  const row = rowId => db.prepare('SELECT * FROM made_for_you WHERE id = ?').bind(rowId).first();
+  return { url, db, call, claim, row, mf };
+}
+
+const note = { kind: 'psalm', door: 'faith', lang: 'es', text: 'Días de lluvia' };
+const scene = { kind: 'imagination', door: 'mindset', lang: 'en', text: 'Rain at the window' };
+
+test('requests are paid-only, crisis-checked first, one a day, and promised a real time from the night’s capacity', async t => {
+  const { db, call } = await worker(t);
+  const count = async () => (await db.prepare('SELECT count(*) AS n FROM made_for_you').first()).n;
+  assert.equal((await call(id.free, { body: note })).status, 403);
+  assert.equal((await call(id.free)).status, 403);
+  assert.equal((await call('invalid', { body: note })).status, 401);
+  assert.equal((await call(id.limited, { body: note })).status, 429);
   for (const text of ['fixture floor', 'fixture model']) {
-    assert.deepEqual(await (await request(id.owner, { body: { ...note, text } })).json(),
-      { status: 'crisis', text: 'Fixed safety reply' });
+    assert.deepEqual(await (await call(id.owner, { body: { ...note, text } })).json(), { status: 'crisis', text: 'Fixed safety reply' });
   }
-  assert.equal((await request(id.owner, { body: { ...note, text: 'fixture unavailable' } })).status, 503);
-  assert.equal((await request(id.owner, { body: { ...note, door: 'mindset' } })).status, 400);
-  assert.equal((await request(id.owner, { body: { ...note, text: 'a'.repeat(501) } })).status, 400);
-  assert.equal(await count(), 0);
+  assert.equal((await call(id.owner, { body: { ...note, text: 'fixture unavailable' } })).status, 503);
+  assert.equal((await call(id.owner, { body: { ...note, door: 'mindset' } })).status, 400);
+  assert.equal((await call(id.owner, { body: { ...note, text: 'a'.repeat(501) } })).status, 400);
+  assert.equal(await count(), 0, 'nothing is stored before the crisis and shape checks pass');
 
-  const now = Date.now();
-  const seed = await request(id.owner, { now, body: note });
-  assert.equal(seed.status, 202);
-  const { id: job, day: submittedDay } = await seed.json();
-  assert.deepEqual((await (await request(id.owner, { now })).json()).pending, { id: job, day: submittedDay, delayed: false, retrying: false });
-  assert.deepEqual((await (await request(id.other, { now })).json()), { pending: null, expired: false, ready: [] });
-  assert.deepEqual((await (await request(id.owner, { now, params: '?kind=imagination&lang=es' })).json()), { pending: null, expired: false, ready: [] });
-  const conflict = await request(id.owner, { now, body: { ...note, door: 'mindset', kind: 'imagination' } });
-  assert.equal(conflict.status, 429);
-  assert.deepEqual(await conflict.json(), { error: 'DAILY_LIMIT' });
-  assert.equal((await request(id.owner, { now, path: '/runner/claim', body: {} })).status, 401);
+  const before = await (await call(id.owner)).json();
+  assert.deepEqual(before, { pending: null, ended: null, requestedToday: false, next: tonight, ready: [] });
+  const sent = await call(id.owner, { body: note });
+  assert.equal(sent.status, 202);
+  const receipt = await sent.json();
+  assert.equal(receipt.dueAt, tonight);
+  const after = await (await call(id.owner)).json();
+  assert.deepEqual(after.pending, { id: receipt.id, day: receipt.day, dueAt: tonight, late: false, retrying: false });
+  assert.equal(after.requestedToday, true, 'the form hides once today’s request is used');
+  assert.equal((await call(id.owner, { body: scene })).status, 429);
+  assert.equal((await (await call(id.owner, { params: '?kind=imagination&lang=en' })).json()).requestedToday, true);
+  const race = await Promise.all([call(id.other, { body: note }), call(id.other, { body: note })]);
+  assert.deepEqual(race.map(r => r.status).sort(), [202, 429]);
 
-  const leaseWindow = 31 * 60_000;
-  const chatCounters = async () => {
-    const { results } = await db.prepare("SELECT * FROM chat_counts WHERE metric NOT LIKE 'calls:mfy:%' ORDER BY day, metric").all();
-    return results;
-  };
-  await db.prepare("INSERT INTO chat_counts (day, metric, n) VALUES (?, 'calls:workers-ai', 5)").bind('2026-11-20').run();
-  const beforeDraft = await chatCounters();
-  let claimTime = now - (rungs.length + 4) * leaseWindow;
-  for (const [index, rung] of rungs.entries()) {
-    const fallback = await request(secret, {
-      now: claimTime, path: '/runner/claim', body: {},
-      blocked: rungs.slice(1, index), short: index ? [rungs[0]] : [],
-    });
-    assert.equal(fallback.status, 200);
-    const { job: draft } = await fallback.json();
-    assert.equal(draft.id, job);
-    assert.ok(draft.reflection.endsWith(`Fixture rung: ${rung}`), `Expected ${rung} to supply the draft`);
-    claimTime += leaseWindow;
-  }
-  const dry = await request(secret, { now: claimTime, path: '/runner/claim', body: {}, blocked: rungs });
+  // Fill tonight: the next request is honestly promised for tomorrow night, then nothing is taken.
+  const seat = (n, due) => db.batch(Array.from({ length: n }, (_, i) => db.prepare(`INSERT INTO made_for_you
+    (id, install_id, day, kind, lang, teen, created_at, due_at, state, note) VALUES (?, ?, '2026-11-17', 'psalm', 'es', 0, ?, ?, 'queued', 'x')`)
+    .bind(crypto.randomUUID(), crypto.randomUUID(), at, due)));
+  await seat(mfyConfig.sessionsPerNight - 2, tonight);
+  const third = await call(crypto.randomUUID(), { body: note });
+  assert.equal((await third.json()).dueAt, tomorrow, 'tonight is full, so tomorrow night is promised');
+  await seat(mfyConfig.sessionsPerNight - 1, tomorrow);
+  const shelf = await (await call(crypto.randomUUID())).json();
+  assert.equal(shelf.next, null, 'the form knows before she writes that both nights are full');
+  const queued = await count();
+  const full = await call(crypto.randomUUID(), { body: note });
+  assert.equal(full.status, 409);
+  assert.deepEqual(await full.json(), { error: 'FULL' });
+  assert.equal(await count(), queued, 'a request that cannot be made is never stored');
+});
+
+test('the runner drafts on the shared ladder with its own budget, erases the note at once, and stops on the third failure', async t => {
+  const { db, call, claim, row } = await worker(t);
+  const chatCounters = async () => (await db.prepare("SELECT * FROM chat_counts WHERE metric NOT LIKE 'calls:mfy:%' ORDER BY day, metric").all()).results;
+  await db.prepare("INSERT INTO chat_counts (day, metric, n) VALUES ('2026-11-17', 'calls:workers-ai', 3)").run();
+  const before = await chatCounters();
+  assert.equal((await call(id.owner, { path: '/runner/claim', body: {} })).status, 401);
+
+  // Workers AI first: the first draft comes from it, and its one daily draft is then used.
+  const first = (await (await call(id.owner, { body: note })).json()).id;
+  const one = await (await claim(at)).json();
+  assert.equal(one.job.id, first);
+  assert.match(one.job.reflection, /Fixture workers-ai\.$/);
+  assert.equal(one.job.verses.length, 6);
+  const scripted = await row(first);
+  assert.equal(scripted.state, 'scripted');
+  assert.equal(scripted.note, null, 'her note is erased as soon as an approved script exists');
+  // Gemini has no share on the books (chat's caps use its whole floor), so the next draft is OpenRouter's.
+  const second = (await (await call(id.other, { body: note })).json()).id;
+  const two = await (await claim(at)).json();
+  assert.equal(two.job.id, second, 'a leased row is skipped');
+  assert.match(two.job.reflection, /Fixture openrouter-free\.$/);
+  assert.equal(await db.prepare("SELECT n FROM chat_counts WHERE metric LIKE 'calls:mfy:draft:gemini%' AND n > 0").first(), null);
+  assert.deepEqual(await chatCounters(), before, 'chat counters never move');
+
+  // A dry chain is a held retry she can see; her note stays for the retry.
+  const third = '20000000-0000-4000-a000-000000000001';
+  const sceneInstall = '10000000-0000-4000-a000-000000000009';
+  await db.prepare(`INSERT INTO made_for_you (id, install_id, day, kind, lang, teen, created_at, due_at, state, note)
+    VALUES (?, ?, '2026-11-17', 'imagination', 'en', 0, ?, ?, 'queued', 'Rain at the window')`).bind(third, sceneInstall, at, tonight).run();
+  const dry = await claim(at, { 'x-test-models-down': 'openrouter-free' });
   assert.equal(dry.status, 503);
   assert.deepEqual(await dry.json(), { error: 'MADE_FOR_YOU_NO_FREE_MODEL' });
-  assert.deepEqual((await (await request(id.owner, { now })).json()).pending,
-    { id: job, day: submittedDay, delayed: false, retrying: true });
-  assert.equal((await db.prepare('SELECT text FROM made_for_you WHERE id = ?').bind(job).first()).text, note.text);
-  const rejected = await request(secret, { now: claimTime + leaseWindow, path: '/runner/claim', body: {}, reject: true });
-  assert.equal(rejected.status, 503);
-  assert.deepEqual(await rejected.json(), { error: 'MADE_FOR_YOU_DRAFT' });
-  assert.deepEqual(await chatCounters(), beforeDraft);
-  assert.ok((await db.prepare("SELECT n FROM chat_counts WHERE metric = 'calls:mfy:workers-ai'").first()).n > 0);
-  const qaTime = claimTime + 2 * leaseWindow;
-  const accepted = await request(secret, { now: qaTime, path: '/runner/claim', body: {} });
-  const { job: failedAudio } = await accepted.json();
-  const qaRequest = () => request(secret, {
-    now: qaTime, path: `/runner/${job}/qa-failed`, body: { lease: failedAudio.lease },
-  });
-  assert.deepEqual(await (await qaRequest()).json(), { code: 'MADE_FOR_YOU_QA' });
-  assert.equal((await qaRequest()).status, 409, 'the same failure receipt must only count once');
+  let held = await row(third);
+  assert.equal(held.note, 'Rain at the window');
+  assert.equal(held.attempts, 0);
+  assert.equal((await (await call(sceneInstall, { params: '?kind=imagination&lang=en' })).json()).pending.retrying, true, 'she sees we will try again');
+  assert.equal((await claim(at + MIN, { 'x-test-judge': 'down' })).status, 503);
+  assert.equal((await row(third)).attempts, 0, 'a judge outage is a retry, not a failure');
+  // Three rejected drafts: stopped, and her note is gone in the same update.
+  for (let i = 0; i < 3; i++) {
+    const rejected = await claim(at + (2 + i) * MIN, { 'x-test-judge': 'fail' });
+    assert.deepEqual(await rejected.json(), { error: i === 2 ? 'MADE_FOR_YOU_ATTEMPTS_EXHAUSTED' : 'MADE_FOR_YOU_DRAFT' });
+  }
+  held = await row(third);
+  assert.equal(held.state, 'stopped');
+  assert.equal(held.note, null);
+  assert.equal(held.script, null);
+  assert.deepEqual(await chatCounters(), before);
+});
 
+test('the Mac publishes, she plays, reports (one report path) and deletes; the cron keeps every retention promise', async t => {
+  const { db, call, claim, row, url } = await worker(t);
+  const job = (await (await call(id.owner, { body: note })).json()).id;
   const runner = `
 import hashlib, json, sys
 from urllib.request import Request, urlopen
 sys.path.insert(0, 'audio')
 from made_for_you import make_request, process_one
-base, secret, source = sys.argv[1:]
+base, secret = sys.argv[1:]
 def voice(item, work):
-    verses = json.loads(source)
-    assert item['text'] == 'RV1909'
-    first = item['verses'].index(verses[0]['text'])
-    assert item['verses'][first:first + 6] == [v['text'] for v in verses]
+    assert item['text'] == 'RV1909' and len(item['verses']) > 6
     out = work / 'session.m4a'
     out.write_bytes(b'stub-voice')
     return dict(status='passed', seconds=680, sha256=hashlib.sha256(out.read_bytes()).hexdigest(), _local=str(out))
 def put(item, file):
-    with urlopen(Request(base + '/_test-media/' + item['file'], data=file.read_bytes(),
-                        headers={'Authorization': 'Bearer ' + secret}, method='PUT')) as response:
-        assert response.status == 204
+    with urlopen(Request(base + '/_test-media/' + item['file'], data=file.read_bytes(), headers={'Authorization': 'Bearer ' + secret}, method='PUT')) as r:
+        assert r.status == 204
 assert process_one(make_request(base + '/api', secret), voice, put)
 `;
-  await python('python3', ['-c', runner, url.origin, secret, JSON.stringify(verses)]);
-  const after = await db.prepare('SELECT text, lease, audio_path, retry_code FROM made_for_you WHERE id = ?').bind(job).first();
-  assert.equal(after.text, null);
-  assert.equal(after.lease, null);
-  assert.equal(after.retry_code, null);
-  assert.equal(after.audio_path, `made-for-you/${id.owner}/${job}.m4a`);
-  const shelf = await (await request(id.owner, { now })).json();
+  await python('python3', ['-c', runner, url.origin, secret]);
+  const ready = await row(job);
+  assert.equal(ready.state, 'ready');
+  assert.equal(ready.note, null);
+  assert.equal(ready.script, null);
+  const shelf = await (await call(id.owner, { now: Date.now() })).json();
+  assert.equal(shelf.ready[0].id, job);
   assert.equal(shelf.pending, null);
-  assert.equal(shelf.ready[0].path, after.audio_path);
-  assert.equal((await request(id.other, { now, params: '?kind=psalm&lang=es&play=' + job })).status, 404);
-  const playback = await (await request(id.owner, { now, params: '?kind=psalm&lang=es&play=' + job })).json();
-  assert.equal((await fetch(new URL('/_test-media/' + after.audio_path, url))).status, 403);
+  assert.equal((await call(id.other, { now: Date.now(), params: `?kind=psalm&lang=es&play=${job}` })).status, 404);
+  const playback = await (await call(id.owner, { now: Date.now(), params: `?kind=psalm&lang=es&play=${job}` })).json();
+  assert.equal((await fetch(new URL('/_test-media/' + ready.audio_path, url))).status, 403);
   assert.equal(await (await fetch(playback.url)).text(), 'stub-voice');
 
-  const race = await Promise.all([
-    request(id.other, { now, body: note }), request(id.other, { now, body: note }),
-  ]);
-  assert.deepEqual(race.map(response => response.status).sort(), [202, 429]);
-  const expired = await (await race.find(response => response.ok).json()).id;
-  for (let attempt = 0; attempt < 3; attempt++) {
-    const invalid = await request(secret, {
-      now: now + attempt * leaseWindow, path: '/runner/claim', body: {}, short: rungs,
-    });
-    assert.equal(invalid.status, 503);
-    assert.deepEqual(await invalid.json(), {
-      error: attempt === 2 ? 'MADE_FOR_YOU_ATTEMPTS_EXHAUSTED' : 'MADE_FOR_YOU_DRAFT',
-    });
-  }
-  assert.deepEqual(await (await request(secret, { now: now + 3 * leaseWindow, path: '/runner/claim', body: {} })).json(),
-    { job: null });
-  const stopped = await (await request(id.other, { now: now + 3 * leaseWindow })).json();
-  assert.equal(stopped.pending.stopped, true);
-  assert.equal(stopped.pending.retrying, false);
-  assert.deepEqual(await chatCounters(), beforeDraft);
-  const delayed = await (await request(id.other, { now: now + day })).json();
-  assert.equal(delayed.pending.id, expired);
-  assert.equal(delayed.pending.delayed, true);
-  assert.equal(delayed.expired, false);
-  const early = await fetch(new URL('/_test-cleanup', url), { headers: { 'x-test-now': String(now + 6 * day) } });
-  assert.equal(early.status, 204);
-  assert.equal((await db.prepare('SELECT text FROM made_for_you WHERE id = ?').bind(expired).first()).text, note.text);
-  const cleanup = await fetch(new URL('/_test-cleanup', url), { headers: { 'x-test-now': String(now + 7 * day) } });
-  assert.equal(cleanup.status, 204);
-  const erased = await db.prepare('SELECT text, lease, audio_path FROM made_for_you WHERE id = ?').bind(expired).first();
-  assert.deepEqual(erased, { text: null, lease: null, audio_path: null });
-  assert.deepEqual(await (await request(id.other, { now: now + 8 * day })).json(),
-    { pending: null, expired: true, ready: [] });
-  assert.equal((await request(id.other, { now: now + 8 * day, body: note })).status, 202);
-  const retry = await (await request(id.other, { now: now + 8 * day })).json();
-  assert.equal(retry.expired, false);
-  assert.equal(retry.pending.delayed, false);
-  assert.equal((await db.prepare('SELECT audio_path FROM made_for_you WHERE id = ?').bind(job).first()).audio_path, after.audio_path);
+  // Report: another install cannot; she can; a person gets the audio and the reason, never her install id.
+  const report = (token, body) => call(token, { now: Date.now(), path: '/api/report', body });
+  assert.equal((await report(id.other, { session: job, reason: 'unsafe' })).status, 404);
+  assert.equal((await report(id.owner, { session: job, reason: 'spam' })).status, 400);
+  assert.deepEqual(await (await report(id.owner, { session: job, reason: 'unsafe' })).json(), { reported: true });
+  const kept = await db.prepare('SELECT * FROM made_for_you_report').all();
+  assert.equal(kept.results.length, 1);
+  assert.deepEqual(Object.keys(kept.results[0]).sort(), ['at', 'audio_key', 'kind', 'lang', 'reason']);
+  assert.ok(!JSON.stringify(kept.results).includes(id.owner));
+  assert.equal(await (await fetch(new URL(`/_test-media/${kept.results[0].audio_key}?ticket=local-only`, url))).text(), 'stub-voice');
+  assert.equal((await fetch(new URL(`/_test-media/${ready.audio_path}?ticket=local-only`, url))).status, 404, 'her copy is gone');
+  assert.deepEqual((await (await call(id.owner, { now: Date.now() })).json()).ready, [], 'a reported session leaves her shelf');
+  // The chat's own answer reports still go through the same route.
+  assert.deepEqual(await (await report(id.owner, { answer: 'An answer', reason: 'wrong' })).json(), { reported: true });
+  assert.equal((await db.prepare('SELECT count(*) AS n FROM answer_report').first()).n, 1);
+
+  // Delete one session (allowed even after the plan ends).
+  const seedReady = async (sid, install, paidUntil = null) => {
+    const path = `made-for-you/${install}/${sid}.m4a`;
+    await fetch(new URL('/_test-media/' + path, url), { method: 'PUT', headers: { authorization: `Bearer ${secret}` }, body: 'audio' });
+    await db.prepare(`INSERT INTO made_for_you (id, install_id, day, kind, lang, teen, created_at, due_at, state, audio_path, seconds, sha256, published_at, paid_until)
+      VALUES (?, ?, ?, 'psalm', 'es', 0, ?, ?, 'ready', ?, 680, ?, ?, ?)`).bind(sid, install, sid.slice(0, 8), at, tonight, path, 'a'.repeat(64), at, paidUntil).run();
+    return path;
+  };
+  const gone = await seedReady('30000000-0000-4000-a000-000000000001', id.free);
+  assert.deepEqual(await (await call(id.free, { method: 'DELETE', params: '?id=30000000-0000-4000-a000-000000000001' })).json(), { deleted: 1 });
+  assert.equal((await fetch(new URL(`/_test-media/${gone}?ticket=local-only`, url))).status, 404);
+
+  // The cron: day 6 keeps her note, day 7 erases it and she is told; 30 days after the plan, audio goes; reports go at 90 days.
+  const waiting = (await (await call(id.other, { body: note })).json()).id;
+  const lapsedPath = await seedReady('30000000-0000-4000-a000-000000000002', id.lapsed, at - 40 * DAY);
+  const cleanup = now => fetch(new URL('/_test-cleanup', url), { headers: { 'x-test-now': String(now) } }).then(r => r.json());
+  await cleanup(at + 6 * DAY);
+  assert.equal((await row(waiting)).note, note.text);
+  assert.equal((await row('30000000-0000-4000-a000-000000000002')).state, 'deleted', 'the plan ended 40 days ago and RevenueCat agrees');
+  assert.equal((await fetch(new URL(`/_test-media/${lapsedPath}?ticket=local-only`, url))).status, 404);
+  const swept = await cleanup(at + 7 * DAY);
+  assert.equal(swept.expired, 1);
+  assert.equal((await row(waiting)).note, null);
+  assert.equal((await (await call(id.other, { now: at + 7 * DAY })).json()).ended, 'expired');
+  const ninety = await cleanup(Date.now() + 91 * DAY);
+  assert.equal(ninety.reports, 1);
+  assert.equal((await db.prepare('SELECT count(*) AS n FROM made_for_you_report').first()).n, 0);
+  assert.equal((await fetch(new URL(`/_test-media/${kept.results[0].audio_key}?ticket=local-only`, url))).status, 404);
 });
+
+test('the runner status reports queue depth, held rows and late promises for its own failure line', async t => {
+  const { call } = await worker(t);
+  await call(id.owner, { body: note });
+  const status = async now => (await call(secret, { now, path: '/runner/status', body: {} })).json();
+  assert.deepEqual(await status(at + HOUR()), { queue: 1, late: 0, held: 0, oldestHours: 1 });
+  assert.equal((await status(tonight + MIN)).late, 1, 'past 08:00 the promise is broken and the runner says so');
+});
+function HOUR() { return 3_600_000; }

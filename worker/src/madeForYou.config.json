@@ -1,0 +1,30 @@
+{
+  "_": "Made for you: one config read by the Worker (worker/src/madeForYou.ts) and the Mac runner (audio/made_for_you.py). allowanceBooks() in madeForYou.ts adds these caps to chat's own caps and worker/test/madeForYou.budget.mjs fails if any provider's free allowance is exceeded.",
+  "allowance": {
+    "_": "Free daily allowances, as phase 3 measured them (worker/wrangler.jsonc on codex/pbs-phase-3). Gemini's 200 per model is the floor phase 3 marks SUSPECTED until read in AI Studio; when a higher RPD is confirmed there, raise it here and give made-for-you a Gemini share.",
+    "workersAiNeurons": 10000,
+    "geminiRequestsPerModel": 200,
+    "openRouterRequests": 1000,
+    "openRouterRotationMargin": 50
+  },
+  "chatNeuronsPerCall": {
+    "_": "Measured by phase 3 on her account (llama-3.1-8b risk screen, llama-3.3-70b confirm, judge and answer).",
+    "risk": 2.7,
+    "riskConfirm": 19,
+    "judge": 24,
+    "answer": 109
+  },
+  "draftNeuronsWorstCase": 425,
+  "_draftNeurons": "llama-3.3-70b fp8-fast at Cloudflare's published rate: 2,000 output tokens x 0.2045 + ~600 input tokens x 0.0266 neurons.",
+  "judgeNeuronsWorstCase": 110,
+  "draftMaxTokens": 2000,
+  "judgeMaxTokens": 300,
+  "draft": { "workers-ai": 1, "gemini-free": 0, "openrouter-free": 25 },
+  "judge": { "workers-ai": 0, "gemini-free": 0, "openrouter-free": 25 },
+  "attemptsBooked": 2,
+  "_attemptsBooked": "Each session is booked at two drafts and two judgments, so one failed draft never takes another request's place.",
+  "sessionMinutes": 15,
+  "_sessionMinutes": "Measured 20 Nov 2026: one seeded session rendered, mastered and QA-checked in 7 min 38 s; the Worker's claim (draft and check) may take up to 4 min; 15 leaves room for nice 15 and the private upload.",
+  "sessionsPerNight": 12,
+  "_sessionsPerNight": "The smaller of the free budget (25 judge calls / 2 attempts = 12) and the Mac (a 15-hour weeknight window / 15 min = 60)."
+}

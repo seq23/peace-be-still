@@ -1,1 +1,0 @@
-ALTER TABLE made_for_you ADD COLUMN attempts INTEGER NOT NULL DEFAULT 0;
