@@ -136,6 +136,7 @@ function refsInText(text: string): Array<{ raw: string; book: string | null; cha
   return found;
 }
 
+const DROPPED_NOTE = { en: '(I left out a verse reference that is not in the Bible.)', es: '(Quité una cita que no está en la Biblia.)' } as const;
 const words = (text: string) => fold(text).split(' ').filter(Boolean);
 
 export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<GateResult> {
@@ -148,6 +149,7 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
 
   // C01: references resolve against the store or are dropped; numbers written in the text must exist.
   const scripture: Scripture[] = [];
+  let dropNote = false;
   const seen = new Set<string>();
   const add = (s: Scripture | null) => { if (s && !seen.has(`${s.book} ${s.chapter}:${s.verse}`) && scripture.length < 3) { seen.add(`${s.book} ${s.chapter}:${s.verse}`); scripture.push(s); } };
   const asked = norm(ctx.userText);
@@ -159,12 +161,20 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (ctx.door === 'faith') {
     // A verse whose words would promise healing or wealth to this question is dropped, not shown.
     for (const raw of rawRefs) { const ref = parseReference(raw); const s = ref ? await lookup(ctx.db, ctx.translation, ref) : null; if (s && unfit(s)) notes.push('verse_dropped'); else add(s); }
+    // A reference that is not in the Bible (John 22:5) goes, with the sentence that leans on it, and
+    // she is told plainly; an answer with too little left is written again instead.
+    const madeUp: string[] = [];
     for (const r of refsInText(text)) {
       if (!r.book) continue;
       const s = await lookup(ctx.db, ctx.translation, { book: r.book, chapter: r.chapter, verse: r.verse, ...(r.end ? { endVerse: r.end } : {}) });
-      if (!s) problems.push('unknown_reference');
+      if (!s) madeUp.push(r.raw);
       else if (unfit(s)) problems.push('verse_unfit'); // named in her answer: it has to be rewritten
       else add(s);
+    }
+    if (madeUp.length) {
+      const kept = text.split(/(?<=[.!?…])\s+/).filter(sentence => !madeUp.some(raw => sentence.includes(raw))).join(' ').trim();
+      if (words(kept).length < 8) problems.push('unknown_reference');
+      else { text = kept; dropNote = true; notes.push('reference_dropped'); }
     }
     if (rawRefs.length > 3) notes.push('over_3_refs');
   } else if (refsInText(text).some(r => r.book)) problems.push('scripture_in_mindset');
@@ -174,10 +184,20 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   // C01: any quoted or attributed run of 6+ words must be the stored text of a cited verse.
   const cited = scripture.map(s => ` ${fold(s.text)} `);
   const stored = (run: string) => { const w = words(run); return w.length < 6 || cited.some(c => c.includes(` ${w.join(' ')} `)); };
+  // Half its content words are the words of a verse the app prints under it.
+  const faithful = (run: string) => {
+    const content = words(run).filter(w => w.length > 3).map(w => w.slice(0, 4));
+    return content.length > 0 && cited.some(c => content.filter(w => c.includes(` ${w}`)).length / content.length >= 0.5);
+  };
+  // A misquote of a verse it cites (another translation, a word changed: "only Son" for "only begotten
+  // Son") is taken out of the text the same way, so she reads that verse only as the stored KJV or
+  // RV1909 printed below. A quotation that matches no cited verse is written again.
   for (const m of text.matchAll(QUOTED)) {
     const run = m.slice(1).find(Boolean) ?? '';
-    if (!stored(run)) problems.push('non_store_scripture');
-    else if (words(run).length >= 6) text = text.replace(m[0], ''); // the app shows the stored text below
+    if (words(run).length < 6) continue;
+    if (stored(run)) text = text.replace(m[0], ''); // the app shows the stored text below
+    else if (faithful(run)) { text = text.replace(m[0], ''); notes.push('misquote_replaced'); }
+    else problems.push('non_store_scripture');
   }
   // "Jesus said that..." is a paraphrase in her own words, not a quotation.
   // Her own words handed back ("Song of Solomon says love is beautiful", x16) are not a quotation:
@@ -186,10 +206,6 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   // A faithful paraphrase of a verse the app prints right under it ("Psalm 34:18 says God is close to
   // the brokenhearted") is not a made-up quotation: half its content words are that verse's own.
   // Run 44856144997: 21 drafts were refused for exactly that shape.
-  const faithful = (run: string) => {
-    const content = words(run).filter(w => w.length > 3).map(w => w.slice(0, 4));
-    return content.length > 0 && cited.some(c => content.filter(w => c.includes(` ${w}`)).length / content.length >= 0.5);
-  };
   for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1]) && !faithful(m[1]) && !hers.includes(` ${words(m[1]).slice(0, 3).join(' ')} `)) problems.push('non_store_scripture');
   text = text.replace(/\s+([,.;:!?])/g, '$1').replace(/\(\s*\)/g, '').replace(/\s{2,}/g, ' ').trim();
   text = tidyReferences(text);
@@ -245,6 +261,7 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (/[?？]["'”’)\]]*\s*$/.test(text)) problems.push('ends_with_question');
   if (!text) problems.push('empty');
 
+  if (dropNote) text = `${text} ${DROPPED_NOTE[ctx.lang]}`;
   return problems.length ? { ok: false, problems: [...new Set(problems)] } : { ok: true, text, scripture, notes };
 }
 

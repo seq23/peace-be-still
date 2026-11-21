@@ -59,7 +59,19 @@ describe('verses come only from the store', () => {
     const r = await checkAnswer({ text: 'You can rest here tonight.', references: ['Psalm 151:2', 'John 14:27', 'Hezekiah 3:16'] }, en);
     expect(r.ok && r.scripture.map(s => s.ref)).toEqual(['John 14:27']);
   });
-  it('a reference number written in the text must exist', async () => {
+  it('a made-up reference (John 22:5) is removed with its sentence and a plain note', async () => {
+    const r = await checkAnswer({ text: 'God has not left you alone tonight. John 22:5 says He will carry you home. You can bring Him every worry you have. Lord, hold us close tonight.', references: [] }, en);
+    expect(r.ok).toBe(true);
+    if (r.ok) {
+      expect(r.text).not.toMatch(/22:5|carry you home/);
+      expect(r.text).toMatch(/God has not left you alone tonight\./);
+      expect(r.text).toMatch(/\(I left out a verse reference that is not in the Bible\.\)$/);
+      expect(r.scripture).toEqual([]);
+    }
+    const es1 = await checkAnswer({ text: 'Dios no te ha dejado sola esta noche. Juan 22:5 dice que Él te llevará. Puedes traerle cada preocupación que tengas. Señor, abrázala esta noche.', references: [] }, es);
+    expect(es1.ok && es1.text).toMatch(/\(Quité una cita que no está en la Biblia\.\)$/);
+  });
+  it('an answer that is little more than a made-up reference is written again', async () => {
     expect(await reject('Psalm 151:2 is for you tonight.')).toContain('unknown_reference');
   });
   it('a quoted run equal to a cited verse is removed from the text (the app shows the stored verse)', async () => {
@@ -67,8 +79,36 @@ describe('verses come only from the store', () => {
     expect(r.ok).toBe(true);
     if (r.ok) expect(r.text).not.toMatch(/refuge/);
   });
-  it('another translation\'s wording is rejected (RT26: NIV Philippians 4:13)', async () => {
-    expect(await reject('"I can do all this through him who gives me strength."', ['Philippians 4:13'])).toContain('non_store_scripture');
+  it('another translation\'s wording never reaches her: the stored KJV is shown instead (RT26: NIV Philippians 4:13)', async () => {
+    const r = await checkAnswer({ text: 'Lean on this tonight: "I can do all this through him who gives me strength." Lord, carry us through today.', references: ['Philippians 4:13'] }, en);
+    expect(r.ok).toBe(true);
+    if (r.ok) {
+      expect(r.text).not.toMatch(/gives me strength/);
+      expect(r.scripture.map(s => s.text)).toEqual([expect.stringContaining('I can do all things through Christ which strengtheneth me.')]);
+      expect(r.notes).toContain('misquote_replaced');
+    }
+  });
+  it('a misquoted John 3:16 comes out word for word from the store', async () => {
+    const r = await checkAnswer({ text: 'Remember this: "For God so loved the world that he gave his only Son, so that whoever believes in him will not perish but have eternal life" (John 3:16). Father, let us rest in that love.', references: ['John 3:16'] }, en);
+    expect(r.ok).toBe(true);
+    if (r.ok) {
+      expect(r.text).not.toMatch(/only Son|eternal life/);
+      expect(r.scripture).toHaveLength(1);
+      expect(r.scripture[0].translation).toBe('KJV');
+      expect(r.scripture[0].text).toContain('For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.');
+    }
+  });
+  it('Spanish: a misquoted Juan 3:16 is shown as the RV1909 text', async () => {
+    const r = await checkAnswer({ text: 'Recuerda esto: "Porque Dios amó tanto al mundo que dio a su único Hijo, para que todo el que cree en él no se pierda sino que tenga vida eterna" (Juan 3:16). Señor, abrázala esta noche.', references: ['Juan 3:16'] }, es);
+    expect(r.ok).toBe(true);
+    if (r.ok) {
+      expect(r.text).not.toMatch(/amó tanto/);
+      expect(r.scripture[0].translation).toBe('RV1909');
+      expect(r.scripture[0].text).toContain('Porque de tal manera amó Dios al mundo');
+    }
+  });
+  it('a quotation that matches no cited verse is still written again (made-up promise on a real reference)', async () => {
+    expect(await reject('"Fear not my child for I will make thee rich and heal thy body today" (Isaiah 41:10). Lord, be near.', ['Isaiah 41:10'])).toContain('non_store_scripture');
   });
   it('unquoted KJV-sounding scripture without a source is rejected', async () => {
     expect(await reject('Fear thou not, for I am with thee and will uphold thee.')).toContain('scripture_like');
