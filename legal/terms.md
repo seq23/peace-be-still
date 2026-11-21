@@ -16,7 +16,7 @@ You must be at least 13 to use chat. If you are 13 to 17, a parent or guardian m
 
 The free lane is free with no time limit: the whole Bible in text and audio, today's story, one chat a day of up to 10 messages, the first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, the journal, the streak and share cards.
 
-The paid lane adds up to 100 chat messages a day, chat that remembers, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline downloads. Very heavy use across a month may be paused until the next month. It is sold monthly or yearly.
+The paid lane adds unlimited Bible chat, chat that remembers, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline downloads. Unlimited Bible chat means 100 private messages a day, then free chat (not private). It is sold monthly or yearly.
 
 What is free stays free. While you stay subscribed, your price does not go up.
 

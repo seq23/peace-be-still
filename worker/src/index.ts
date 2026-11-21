@@ -27,7 +27,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, checkInQuestion, checkInText, consentText, crisisText, fairUseText, heavyUseText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, checkInQuestion, checkInText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -156,6 +156,9 @@ const crisisRung = (env: Env, now: number): LadderRung => ({
 
 /** A small ladder for a check (risk read, judge): Workers AI first, then the last Gemini model. */
 const CRISIS_THINKING_HEADROOM = 1024;
+/** A paid install meets no device, IP or app-wide message count (it is only counted). */
+const PAID_UNCAPPED = 1_000_000;
+const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;
 async function check<T>(env: Env, now: number, first: LadderRung, messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true): Promise<T> {
   const metrics: Metrics = new Map();
   // The backup reads the same words the risk read does, which may be about a crisis: only the
@@ -225,7 +228,7 @@ function parseChat(body: unknown): ChatRequest | null {
     messages.push({ role: t.role, text: t.text });
   }
   if (messages[messages.length - 1].role !== 'user') return null;
-  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true, freeConsent: b.freeConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
+  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true, freeConsent: b.freeConsent === true, overflowConsent: b.overflowConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
 }
 
 /** Mi Refugio, the Spanish voice or a Spanish phone: Spanish and the Reina-Valera 1909. Teens keep the teen rules in their language. */
@@ -407,29 +410,35 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The lane. Paid is private (the billed model only). Free goes to free models that may keep what
   // is typed, so it needs her consent first. Crisis is the stronger private model, for anyone.
   if (lane === 'free' && req.freeConsent !== true) { tally(metrics, 'consent_needed'); return fixedReply('consent', consentText[v.lang]); }
+  // Paid (her ruling 21 Nov 2026): 100 private messages a day, then free chat for the rest of the day,
+  // only after she sees and accepts that it is not private (asked again each day). Her own monthly
+  // backstop (CHAT_USER_MONTHLY_USD_*) and the app's monthly cap lead to the same choice. A paid user
+  // never meets a pause: if the free lane has nothing, she is answered on the private model, briefly.
+  // A crisis conversation never leaves the private crisis model.
+  let overflow: 'daily' | 'monthly' | null = null;
   if (lane !== 'free') {
-    // The app's paid-route spend this calendar month (CT), then hers (controls.ts); past either, the
-    // fair-use pause, never the free lane. The owner hears at 80% and at the cap, once each. A
-    // crisis conversation always answers: a paid user keeps the crisis model, a free user the card.
     const appMicro = await appSpendMonth(env.DB, now);
-    if (appMicro >= capUsd * 1e6) {
-      tally(metrics, 'paid_cap'); await capAlert(env.DB, now, 100, appMicro, capUsd);
-      if (lane === 'crisis' && !paid.paid) return crisisReply('selfharm', 'cap');
-      if (lane !== 'crisis') return fixedReply('fair_use', fairUseText(v.lang, resetsOn(now)));
-    }
-    if (appMicro >= 0.8 * capUsd * 1e6) await capAlert(env.DB, now, 80, appMicro, capUsd);
-    if (lane === 'paid' && (await userSpend(env.DB, who.installId, now)) >= userCeilingUsd(env, paid.paidUntil, now) * 1e6) {
-      tally(metrics, 'user_ceiling'); logCode('CHAT_USER_CEILING');
-      return fixedReply('fair_use', heavyUseText(v.lang, resetsOn(now)));
+    const pastCap = appMicro >= capUsd * 1e6;
+    if (pastCap) { tally(metrics, 'paid_cap'); await capAlert(env.DB, now, 100, appMicro, capUsd); }
+    else if (appMicro >= 0.8 * capUsd * 1e6) await capAlert(env.DB, now, 80, appMicro, capUsd);
+    if (lane === 'crisis' && pastCap && !paid.paid) return crisisReply('selfharm', 'cap');
+    if (lane === 'paid') {
+      const today = await env.DB.prepare('SELECT messages FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId).first<{ messages: number }>();
+      if ((today?.messages ?? 0) >= PAID_CHAT_MESSAGES) overflow = 'daily';
+      else if (pastCap || (await userSpend(env.DB, who.installId, now)) >= userCeilingUsd(env, paid.paidUntil, now) * 1e6) { overflow = 'monthly'; if (!pastCap) { tally(metrics, 'user_ceiling'); logCode('CHAT_USER_CEILING'); } }
+      if (overflow && req.overflowConsent !== true) { tally(metrics, `overflow_ask:${overflow}`); return fixedReply('overflow_consent', overflowText(v.lang, overflow, resetsOn(now))); }
+      if (overflow) { tally(metrics, `overflow:${overflow}`); lane = 'free'; }
     }
     if (paid.paid) meter = { paidUntil: paid.paidUntil };
   }
-  const deviceLimit = paid.paid ? PAID_CHAT_MESSAGES : FREE_CHAT_MESSAGES;
+  // A paid install counts its messages but meets no device, IP or app-wide limit: those guard the free
+  // models' quotas, which the ladder's own caps already keep, and she is never walled.
+  const deviceLimit = paid.paid ? PAID_UNCAPPED : FREE_CHAT_MESSAGES;
   let hash: string;
   try { hash = await ipHash(env.IP_HASH_SECRET, day, request.headers.get('cf-connecting-ip') ?? '0.0.0.0'); } catch { return fail('IP_HASH_SECRET_MISSING', 503); }
   try {
     await env.DB.prepare('INSERT INTO chat_admission VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
-      .bind(day, who.installId, req.conversation, hash, paid.paid ? 1 : 0, deviceLimit, int(env.CHAT_IP_MESSAGES_DAILY, 120), int(env.CHAT_GLOBAL_MESSAGES_DAILY, 150), now).run();
+      .bind(day, who.installId, req.conversation, hash, paid.paid ? 1 : 0, deviceLimit, paid.paid ? PAID_UNCAPPED : int(env.CHAT_IP_MESSAGES_DAILY, 120), paid.paid ? PAID_UNCAPPED : int(env.CHAT_GLOBAL_MESSAGES_DAILY, 150), now).run();
   } catch (error) {
     const code = /CHAT_(?:GLOBAL|IP|DEVICE|CONVERSATION)_LIMIT/.exec(String(error))?.[0];
     if (!code) throw error;
@@ -439,14 +448,18 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   }
   const row = await env.DB.prepare('SELECT messages, first_msg_at, last_reminder_at FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId)
     .first<{ messages: number; first_msg_at: number; last_reminder_at: number | null }>();
-  const remaining = Math.max(0, deviceLimit - (row?.messages ?? 0));
+  // Paid: private messages left today (none counted on the free lane she chose after them).
+  const remaining = paid.paid ? (overflow ? null : Math.max(0, PAID_CHAT_MESSAGES - (row?.messages ?? 0))) : Math.max(0, deviceLimit - (row?.messages ?? 0));
+  const shownLimit = paid.paid ? (overflow ? null : PAID_CHAT_MESSAGES) : deviceLimit;
   // SB 243: a teen is reminded at least every 3 hours of chat that this is AI and to take a break.
   let reminder = false;
   if (v.teen && row && now - (row.last_reminder_at ?? row.first_msg_at) >= THREE_HOURS) {
     reminder = true;
     await env.DB.prepare('UPDATE chat_device_day SET last_reminder_at = ? WHERE day = ? AND device = ?').bind(now, day, who.installId).run();
   }
-  const emitNow = (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>) => reply({ ...body, remaining, reminder, limit: deviceLimit });
+  // short: the free lane had nothing for a paid user after 100, so the private model answered briefly.
+  let short = false;
+  const emitNow = (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>) => reply({ ...body, remaining, reminder, limit: shownLimit, ...(overflow && route.lane === 'free' && body.kind !== 'crisis' ? { notPrivate: true } : {}) });
   return answerOn(lane, false);
 
   // One answer on a lane. An answer model that tags its own risk low or high (its "risk" field, read
@@ -485,18 +498,21 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (verse) return done({ kind: 'answer', ai: true, fixed: true, text: oneTranslationText[v.lang], scripture: [verse] });
   }
 
-  const memory = paid.paid ? await readMemory(env.DB, me.installId) : null;
+  // Her memory note is private: never sent on the free lane she chose after 100.
+  const memory = paid.paid && lane !== 'free' ? await readMemory(env.DB, me.installId) : null;
   const system: Message[] = [{ role: 'system', content: v.prompt === 'mindset' ? [prompts.mindset, v.teen ? mindsetTeen : '', v.lang === 'es' ? spanishOnly : ''].filter(Boolean).join('\n') : prompts[v.prompt] }];
   // Fixed text first (the voice prompt, then the risk tag), so the route's prompt cache covers it; her memory note last.
   system.push({ role: 'system', content: RISK_TAG });
   if (memory) system.push({ role: 'system', content: memoryBlock(memory, v.lang) });
   // Only the last CHAT_HISTORY_TURNS turns travel to the model (a paid user's memory note carries the rest).
-  const history: Message[] = turns.slice(-int(env.CHAT_HISTORY_TURNS, 6)).map(t => ({ role: t.role, content: t.text }));
+  // On the free lane she chose after 100, only the new message travels: the earlier turns were private.
+  const history: Message[] = (lane === 'free' && overflow ? turns.slice(-1) : turns.slice(-int(env.CHAT_HISTORY_TURNS, 6))).map(t => ({ role: t.role, content: t.text }));
   const rungs = deps.rungs(env, now, lane);
   // The crisis model thinks (CRISIS_THINKING_LEVEL) and Gemini counts thinking inside the output cap:
   // at 350 it ran out mid-answer (run 10d: 21 of 48 crisis-lane answers malformed, 7 sent as busy).
   // Only the tokens used are billed, so the headroom costs nothing when unused.
-  const answerTokens = int(env.ANSWER_MAX_TOKENS, 350) + (lane === 'crisis' ? CRISIS_THINKING_HEADROOM : 0);
+  const answerTokens = (short && lane === 'paid' ? Math.round(int(env.ANSWER_MAX_TOKENS, 350) / 2) : int(env.ANSWER_MAX_TOKENS, 350)) + (lane === 'crisis' ? CRISIS_THINKING_HEADROOM : 0);
+  if (short && lane === 'paid') system.push({ role: 'system', content: SHORT_ANSWER[v.lang] });
   const earlierTurns = turns.slice(0, -1).filter(t => t.role === 'user');
   const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: ask.door, userText: last, earlier: earlierTurns.map(t => t.text).join('\n'), afterCrisis: (sticky && state?.asked === 1) || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
   // The newest message plus her earlier ones: an echo of what she wrote ("I called 988") is not a tripwire.
@@ -511,7 +527,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const recent = await recentShapes(env.DB, me.installId);
   const show = (text: string, scripture: Scripture[], shape: Shape) => done({ kind: 'answer', ai: true, text, scripture }, () => {
     ctx.waitUntil(saveShape(env.DB, me.installId, shape, now).catch(() => logCode('SHAPE_SAVE_FAILED')));
-    if (paid.paid && lane !== 'crisis') ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
+    if (paid.paid && lane === 'paid') ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
   });
   const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane);
   let objection: string | null = null;
@@ -535,11 +551,13 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         // A message on the crisis lane is never told chat is resting or busy: if the crisis model
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
         if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(confirmed && confirmed.level !== 'none' ? confirmed.kind : 'selfharm', 'lane_down'); }
+        // A paid user on free chat after 100 never meets "resting": the private model answers, briefly.
+        if (lane === 'free' && overflow) { tally(metrics, 'overflow_short'); short = true; return answerOn('paid', final); }
         // Paid never falls back to a free model: if the private model is down, she is told so.
-        if (lane === 'paid') { tally(metrics, 'paid_down'); logCode('CHAT_PAID_DOWN', { empty: out.empty }); return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }
-        if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }
+        if (lane === 'paid') { tally(metrics, 'paid_down'); logCode('CHAT_PAID_DOWN', { empty: out.empty }); return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit }); }
+        if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit }); }
         tally(metrics, 'busy'); logCode('CHAT_BUSY');
-        return reply({ kind: 'busy', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit });
+        return reply({ kind: 'busy', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });
       }
       break;
     }

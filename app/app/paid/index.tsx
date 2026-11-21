@@ -87,6 +87,9 @@ export default function PaidScreen() {
         <Body size={15}>{t('paid.intro')}</Body>
       </View>
       <View style={{ gap: 8 }}>
+        {/* The headline and, right under it, what "unlimited" means (both from PAID_CHAT_MESSAGES). */}
+        <Body size={16} muted={false}>{t(settings.door === 'mindset' ? 'paid.chatHeadlineMindset' : 'paid.chatHeadline')}</Body>
+        <Body size={14} muted={false}>{t('paid.fairUse', { count: PAID_CHAT_MESSAGES })}</Body>
         {benefits[settings.door === 'mindset' ? 'mindset' : 'faith'].map(key => <Body key={key} size={15} muted={false}>{t(key)}</Body>)}
       </View>
       {paid ? <Body muted={false}>{t('paid.active')}</Body> : null}
@@ -141,7 +144,6 @@ export default function PaidScreen() {
         <TextLink onPress={() => open(subscriptions)}>{t('paid.cancel')}</TextLink>
         <Body size={14} muted={false}>{t('paid.keepFree')}</Body>
         <Body size={14} muted={false}>{t('paid.keepPrice')}</Body>
-        <Body size={14}>{t('paid.fairUse', { count: PAID_CHAT_MESSAGES })}</Body>
       </Card>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 20 }}>
         <TextLink disabled={!store || busy} onPress={() => { void restore(); }}>{t('paid.restore')}</TextLink>

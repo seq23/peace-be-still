@@ -18,7 +18,7 @@ Usted debe tener al menos 13 años para usar el chat. Si tiene de 13 a 17 años,
 
 La parte gratis es gratis y sin límite de tiempo: toda la Biblia en texto y en audio, la historia de hoy, un chat al día de hasta 10 mensajes, la primera noche para dormir y después una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, el diario, la racha y las tarjetas para compartir.
 
-La parte de pago agrega hasta 100 mensajes de chat al día, un chat que recuerda, una sesión cada noche, sesiones hechas para usted, todas las historias anteriores, planes más largos, temas para las declaraciones y descargas para usar sin conexión. Un uso muy intenso durante un mes puede pausarse hasta el mes siguiente. Se vende por mes o por año.
+La parte de pago agrega chat bíblico ilimitado, un chat que recuerda, una sesión cada noche, sesiones hechas para usted, todas las historias anteriores, planes más largos, temas para las declaraciones y descargas para usar sin conexión. El chat bíblico ilimitado son 100 mensajes privados al día, y después chat gratis (no privado). Se vende por mes o por año.
 
 Lo que es gratis sigue siendo gratis. Mientras siga suscrito, su precio no sube.
 

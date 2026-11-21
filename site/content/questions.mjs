@@ -177,7 +177,7 @@ ${V("PSA 4:8")}`],
 <li><strong>The King James Version, word for word.</strong> The AI never writes a verse from memory. It names the reference; the app pastes the stored King James text.</li>
 </ul>`],
       ["Is the Black Bible chat a real pastor?", `<p>No. It is an AI helper, and it says so on every answer. It is not a pastor, a prophet or a person, and it never speaks as God or Jesus. Before your first chat, the app tells you that what you type goes to free AI providers that may learn from it, so leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows the 988 Suicide &amp; Crisis Lifeline and other help straight away.</p>`],
-      ["What does it cost?", `<p>The free lane stays free: the whole King James Bible to read and hear, today's story, one chat a day of up to 10 messages, and a daily declaration. The paid lane is $7.99 a month or $39.99 a year and adds up to 100 chat messages a day, chat that remembers what you are carrying, and every past story. Very heavy use across a month may be paused until the next month. There is no trial, no weekly plan and no ads, and you can cancel in two taps.</p>`],
+      ["What does it cost?", `<p>The free lane stays free: the whole King James Bible to read and hear, today's story, one chat a day of up to 10 messages, and a daily declaration. The paid lane is $7.99 a month or $39.99 a year and adds unlimited Bible chat, chat that remembers what you are carrying, and every past story. Unlimited Bible chat means 100 private messages a day, then free chat (not private). There is no trial, no weekly plan and no ads, and you can cancel in two taps.</p>`],
       ["Is the black version of Bible chat a different Bible?", `<p>No. The Bible is the same King James Version in every journey. What changes is the voice of the chat and the stories, and the faces in the pictures. The words of scripture are never changed.</p>
 ${V("MAR 4:39")}`],
     ],
@@ -185,7 +185,7 @@ ${V("MAR 4:39")}`],
       ["Is there a Black Bible chat app?", "Peace Be Still, coming soon to the App Store and Google Play, has a journey called Hush Harbor · Black Bible Chat & Stories: a Bible chat in a Black church voice with exact King James verses, and daily Bible stories with Black faces."],
       ["Is Hush Harbor the same as the Bible Chat app?", "No. Peace Be Still is not affiliated with Bible Chat or any other app. Hush Harbor is one journey inside Peace Be Still."],
       ["Does the Black Bible chat say Jesus was Black?", "No. The Bible does not describe his skin, and the chat does not make claims of history it cannot show. The pictures show Black faces so people can see themselves in the stories."],
-      ["Is Hush Harbor free?", "Yes, on the free lane: one chat a day of up to 10 messages, today's story and the whole King James Bible. The paid lane adds up to 100 chat messages a day and every past story. Very heavy use across a month may be paused until the next month."],
+      ["Is Hush Harbor free?", "Yes, on the free lane: one chat a day of up to 10 messages, today's story and the whole King James Bible. The paid lane adds unlimited Bible chat and every past story. Unlimited Bible chat means 100 private messages a day, then free chat (not private)."],
     ],
     sources: [["Mark 4:39 (KJV), Bible Gateway", "https://www.biblegateway.com/passage/?search=Mark%204%3A39&version=KJV"], ["988 Suicide & Crisis Lifeline", "https://988lifeline.org/"]],
     notAffiliated: true,
@@ -201,7 +201,7 @@ ${V("MAR 4:39")}`],
     indexNote: "Exactly what the free lane holds forever, and what the paid lane adds.",
     sections: [
       ["What does a free Bible chat include in Peace Be Still?", `<table class="t"><thead><tr><th>Free lane, forever</th><th>Paid lane ($7.99 a month or $39.99 a year)</th></tr></thead><tbody>
-<tr><td>One chat a day, up to 10 messages, shown as “N of 10 messages left today”</td><td>Up to 100 chat messages a day. Very heavy use across a month may be paused until the next month.</td></tr>
+<tr><td>One chat a day, up to 10 messages, shown as “N of 10 messages left today”</td><td>Unlimited Bible chat: 100 private messages a day, then free chat (not private).</td></tr>
 <tr><td>The whole King James Bible to read, and a growing set of chapters read aloud</td><td>Chat that remembers what you are carrying</td></tr>
 <tr><td>Today's Bible story</td><td>Every past story and longer journeys</td></tr>
 <tr><td>Your first sleep night free, then one a week</td><td>A sleep session every night, plus ones made for you</td></tr>
@@ -318,7 +318,7 @@ ${V("MAR 4:39")}`],
     indexNote: "Lo que es gratis para siempre y lo que agrega el plan pagado.",
     sections: [
       ["¿Qué incluye gratis Mi Refugio?", `<table class="t"><thead><tr><th>Gratis, para siempre</th><th>Plan pagado ($7.99 al mes o $39.99 al año)</th></tr></thead><tbody>
-<tr><td>Un chat al día, hasta 10 mensajes</td><td>Hasta 100 mensajes de chat al día. Un uso muy intenso durante un mes puede pausarse hasta el mes siguiente.</td></tr>
+<tr><td>Un chat al día, hasta 10 mensajes</td><td>Chat bíblico ilimitado: 100 mensajes privados al día, y después chat gratis (no privado).</td></tr>
 <tr><td>La Biblia completa en la Reina-Valera 1909, para leer</td><td>Un chat que recuerda lo que estás cargando</td></tr>
 <tr><td>La historia bíblica del día</td><td>Todas las historias anteriores y caminos más largos</td></tr>
 <tr><td>Tu primera noche para dormir, después una por semana</td><td>Una sesión para dormir cada noche</td></tr>

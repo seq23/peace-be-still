@@ -13,13 +13,16 @@ export type ChatRequest = {
   scripture?: boolean;
   /** She agreed, once, that free chat goes to a free AI service that may keep what she types. Free chat needs it. */
   freeConsent?: boolean;
+  /** A paid user accepted free chat (not private) for the rest of today, after her private messages. */
+  overflowConsent?: boolean;
   /** The phone's region (ISO alpha-2, from its settings): which crisis lines reach her. */
   region?: string;
 };
 export type ChatScripture = { ref: string; translation: 'KJV' | 'RV1909'; text: string; book: string; chapter: number; verse: number; endVerse?: number };
 // consent: free chat needs her one-time yes first. paused: chat is paused on this install (operator or
-// abuse throttle). fair_use: the paid lane's monthly (or today's app-wide) cost ceiling is reached.
-export type ChatKind = 'answer' | 'crisis' | 'fallback' | 'limit' | 'busy' | 'no_free_model' | 'consent' | 'paused' | 'fair_use';
+// abuse throttle). overflow_consent: a paid user's private messages for today (or this month) are used;
+// she may keep chatting on the free lane (not private) once she accepts, or wait. Nothing was sent.
+export type ChatKind = 'answer' | 'crisis' | 'fallback' | 'limit' | 'busy' | 'no_free_model' | 'consent' | 'paused' | 'overflow_consent';
 export type ChatResponse = {
   kind: ChatKind;
   /** True for every answer written (or stood in for) by the AI helper; false for fixed human-written replies. */
@@ -38,10 +41,12 @@ export type ChatResponse = {
   checkIn?: { text: string; ai: boolean };
   /** True when the text is a fixed line written in code (who it is; the one-translation note), not a model's words. */
   fixed?: boolean;
+  /** Answered on the free lane she chose after her private messages: shown as "Free chat (not private)". */
+  notPrivate?: boolean;
 };
 
 /** Null when chat is closed to her (under 13, or no door chosen yet). Only the last 12 turns travel. */
-export function buildChatRequest(settings: Settings, conversation: string, messages: ChatTurn[], freeConsent = false, region?: string | null): ChatRequest | null {
+export function buildChatRequest(settings: Settings, conversation: string, messages: ChatTurn[], freeConsent = false, region?: string | null, overflowConsent = false): ChatRequest | null {
   if (!settings.door || settings.age === 'child' || settings.age === null) return null;
   return {
     conversation,
@@ -52,6 +57,7 @@ export function buildChatRequest(settings: Settings, conversation: string, messa
     ...(settings.journey ? { journey: settings.journey } : {}),
     ...(settings.scripture ? { scripture: true } : {}),
     ...(freeConsent ? { freeConsent: true } : {}),
+    ...(overflowConsent ? { overflowConsent: true } : {}),
     ...(region && /^[A-Za-z]{2}$/.test(region) ? { region: region.toUpperCase() } : {}),
   };
 }

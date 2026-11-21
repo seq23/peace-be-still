@@ -1,3 +1,4 @@
+import { PAID_CHAT_MESSAGES } from './shared';
 // Fixed replies, written by people, never by a model. A crisis reply is not labelled AI:
 // a lifeline must not look machine-made. Read as the pastor pass before every change.
 import type { CrisisKind } from './crisis';
@@ -267,14 +268,9 @@ export const slowText = {
   es: 'Por favor, ve un poco más despacio. El chat volverá a responder en unos minutos.',
 };
 /** The fair-use pause: the date is when her meter (or today's app ceiling) resets, YYYY-MM-DD. */
-/** Her own monthly backstop (CHAT_USER_MONTHLY_USD_*): the same words the price screen and terms use, and when it opens. */
-export function heavyUseText(lang: 'en' | 'es', date: string): string {
+/** After her 100 private messages today (or past the monthly backstop): the choice, never a wall. */
+export function overflowText(lang: 'en' | 'es', why: 'daily' | 'monthly', date: string): string {
   const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
-  return lang === 'es'
-    ? `Un uso muy intenso durante un mes puede pausarse hasta el mes siguiente. Tu chat está en pausa hasta el ${shown}; tu Biblia está aquí cuando quieras.`
-    : `Very heavy use across a month may be paused until the next month. Your chat is paused until ${shown}; your Bible is here any time.`;
-}
-export function fairUseText(lang: 'en' | 'es', date: string): string {
-  const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
-  return lang === 'es' ? `Llegaste al límite de chat de este mes; se renueva el ${shown}.` : `You've reached this month's chat limit; it resets on ${shown}.`;
+  if (lang === 'es') return `${why === 'daily' ? `Usaste los ${PAID_CHAT_MESSAGES} mensajes privados de hoy.` : 'Usaste el chat privado de este mes.'} Puedes seguir conversando con nuestra IA gratuita. El chat gratis no es privado: el servicio gratuito puede guardar y usar lo que envíes. ${why === 'daily' ? 'El chat privado vuelve mañana.' : `El chat privado vuelve el ${shown}.`}`;
+  return `${why === 'daily' ? `You've used today's ${PAID_CHAT_MESSAGES} private messages.` : "You've used this month's private chat."} You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. ${why === 'daily' ? 'Private chat comes back tomorrow.' : `Private chat comes back on ${shown}.`}`;
 }

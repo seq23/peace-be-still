@@ -97,15 +97,47 @@ test('when the server asks for consent again, the consent screen comes back', as
   assert.equal(store.get(FREE_CONSENT_KEY), undefined);
 });
 
-test('a paused account and the fair-use pause stop sending; fair use offers the private chat', async () => {
-  for (const kind of ['paused', 'fair_use'] as const) {
-    consented();
-    replies.push({ kind, ai: false, text: kind === 'paused' ? 'Chat is paused on this account.' : "You've reached this month's chat limit; it resets on December 1.", scripture: [], remaining: null, limit: null, reminder: false });
-    const tree = await mount();
-    await say(tree, 'hello');
-    assert.equal(tree.root.findByType('TextInput' as any).props.editable, false);
-    assert.equal(/Make chat private/.test(texts(tree)), kind === 'fair_use');
-  }
+test('a paused account stops sending', async () => {
+  consented();
+  replies.push({ kind: 'paused', ai: false, text: 'Chat is paused on this account.', scripture: [], remaining: null, limit: null, reminder: false });
+  const tree = await mount();
+  await say(tree, 'hello');
+  assert.equal(tree.root.findByType('TextInput' as any).props.editable, false);
+});
+
+const overflowAsk = (): ChatResponse => ({ kind: 'overflow_consent', ai: false, text: "You've used today's 100 private messages. You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. Private chat comes back tomorrow.", scripture: [], remaining: null, limit: null, reminder: false });
+test('after her private messages: the choice appears, her typed message is kept and sent on free chat only after "Keep chatting", labelled not private', async () => {
+  store.clear(); storePaid = true; store.set('peace-be-still-chat-disclosure', 'yes');
+  replies.push(overflowAsk(), answer({ notPrivate: true, remaining: null, limit: null }));
+  const tree = await mount();
+  const before = sent.length;
+  await say(tree, 'Please pray with me about my mother tonight.');
+  assert.equal(sent.length, before + 1);
+  assert.equal(sent.at(-1).overflowConsent, undefined); // nothing goes to free chat before her yes
+  assert.match(texts(tree), /Free chat isn't private/);
+  assert.equal(tree.root.findAllByProps({ testID: 'answer-not-private' }).length, 0);
+  await act(async () => tree.root.findAllByProps({ testID: 'overflow-continue' })[0].props.onPress());
+  assert.equal(sent.length, before + 2);
+  assert.equal(sent.at(-1).overflowConsent, true);
+  assert.deepEqual(sent.at(-1).messages.map((m: { text: string }) => m.text), ['Please pray with me about my mother tonight.']); // the same message, never retyped
+  assert.equal(tree.root.findAllByType('TextInput' as any)[0].props.value, '');
+  assert.ok(tree.root.findAllByProps({ testID: 'answer-not-private' }).length > 0);
+  assert.match(texts(tree), /Free chat \(not private\)/);
+  assert.match(store.get('peace-be-still-chat-overflow-day') ?? '', /\d{4}/); // asked once today
+  storePaid = false;
+});
+test('"Wait until tomorrow" sends nothing, and chat stays open for anything urgent', async () => {
+  store.clear(); storePaid = true; store.set('peace-be-still-chat-disclosure', 'yes');
+  replies.push(overflowAsk());
+  const tree = await mount();
+  await say(tree, 'One more question about Psalm 23.');
+  const before = sent.length;
+  await act(async () => tree.root.findAllByProps({ testID: 'overflow-wait' })[0].props.onPress());
+  assert.equal(sent.length, before);
+  assert.equal(tree.root.findAllByProps({ testID: 'overflow-continue' }).length, 0);
+  assert.equal(tree.root.findByType('TextInput' as any).props.editable, true);
+  assert.equal(store.get('peace-be-still-chat-overflow-day'), undefined);
+  storePaid = false;
 });
 
 test('every AI answer carries the AI label, the stored verse and "N of 10 messages left today"', async () => {

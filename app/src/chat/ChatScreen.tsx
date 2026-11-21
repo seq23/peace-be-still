@@ -70,9 +70,13 @@ function ReportAnswer({ answer, c, t }: { answer: string; c: Palette; t: T }) {
   </View>;
 }
 
-// Replies that end today's chat on this screen: the day's limit, free chat resting, a paused account,
-// the fair-use pause. 'busy' (a model failed for a moment) keeps chat open.
-const CLOSES = new Set<ChatResponse['kind']>(['limit', 'no_free_model', 'paused', 'fair_use']);
+// Replies that end today's chat on this screen: the day's limit, free chat resting, a paused account.
+// 'busy' (a model failed for a moment) keeps chat open. A paid user meets none of these (the Worker
+// offers free chat after her private messages, or answers privately and briefly).
+const CLOSES = new Set<ChatResponse['kind']>(['limit', 'no_free_model', 'paused']);
+/** The day (on this phone) a paid user said yes to free chat (not private) after her private messages. */
+export const OVERFLOW_KEY = 'peace-be-still-chat-overflow-day';
+const today = () => new Date().toDateString();
 
 export default function ChatScreen() {
   const { settings } = useSettings();
@@ -89,13 +93,17 @@ export default function ChatScreen() {
   const [left, setLeft] = useState<{ remaining: number; limit: number } | null>(null);
   const [closed, setClosed] = useState(false);
   const [conversation, setConversation] = useState(() => randomUUID());
+  // overflowDay: the day she accepted free chat after her private messages (asked again each day).
+  // pending: what she sent when the Worker asked, kept so it goes on the lane she picks, never retyped.
+  const [overflowDay, setOverflowDay] = useState<string | null>(null);
+  const [pending, setPending] = useState<ChatTurn[] | null>(null);
   const spanish = settings.journey === 'mi-refugio' || settings.voice === 'spanish' || settings.language === 'es';
   // The Mindset door shows no faith words (hostile review F8): no KJV, verse or pastor.
   const mind = settings.door === 'mindset';
 
   useEffect(() => {
-    Promise.all([AsyncStorage.getItem(DISCLOSURE_KEY), AsyncStorage.getItem(FREE_CONSENT_KEY)])
-      .then(([d, f]) => { setAccepted(d === 'yes'); setFreeOk(f === 'yes'); })
+    Promise.all([AsyncStorage.getItem(DISCLOSURE_KEY), AsyncStorage.getItem(FREE_CONSENT_KEY), AsyncStorage.getItem(OVERFLOW_KEY)])
+      .then(([d, f, o]) => { setAccepted(d === 'yes'); setFreeOk(f === 'yes'); setOverflowDay(o); })
       .catch(() => { setAccepted(false); setFreeOk(false); });
   }, []);
   if (accepted === null || freeOk === null) return null;
@@ -142,12 +150,18 @@ export default function ChatScreen() {
     const history: ChatTurn[] = [...entries.flatMap((e): ChatTurn[] => e.role === 'user' ? [{ role: 'user', text: e.text }] : e.role === 'reply' && e.res.ai ? [{ role: 'assistant', text: e.res.text }] : e.role === 'reply' && e.res.checkIn ? [{ role: 'assistant', text: e.res.checkIn.text }] : []), { role: 'user', text }];
     setEntries(list => [...list, { role: 'user', text }]);
     setInput('');
+    await deliver(history, overflowDay === today());
+  }
+
+  /** Sends her turns; with overflow, on the free lane she accepted today. */
+  async function deliver(history: ChatTurn[], overflow: boolean) {
     setSending(true);
     // The phone's region picks the crisis lines (988 in the US, Línea de la Vida in Mexico, 024 in Spain).
     let region: string | null = null;
     try { region = getLocales()[0]?.regionCode ?? null; } catch { region = null; }
     try {
-      const res = await sendChat(settings, conversation, history, fetch, !paid && !!freeOk, region);
+      const res = await sendChat(settings, conversation, history, fetch, !paid && !!freeOk, region, overflow);
+      if (res.kind === 'overflow_consent') setPending(history);
       // Her consent is gone on the server's side (another device, cleared storage): ask again.
       if (res.kind === 'consent') { setFreeOk(false); void AsyncStorage.removeItem(FREE_CONSENT_KEY).catch(() => undefined); return; }
       setEntries(list => [...list, { role: 'reply', res }]);
@@ -160,11 +174,26 @@ export default function ChatScreen() {
     } finally { setSending(false); }
   }
 
+  // Her choice after her private messages: free chat (not private) for the rest of today, sending the
+  // message she already wrote; or wait, and nothing is sent.
+  const keepChatting = async () => {
+    const turns = pending;
+    setPending(null);
+    setOverflowDay(today());
+    void AsyncStorage.setItem(OVERFLOW_KEY, today()).catch(() => undefined);
+    if (turns) await deliver(turns, true);
+  };
+  // Waiting sends nothing and leaves chat open: a crisis message still reaches the private crisis model.
+  const waitForTomorrow = () => setPending(null);
+  const lastReply = [...entries].reverse().find((e): e is Extract<Entry, { role: 'reply' }> => e.role === 'reply');
+  const notPrivateNow = !!lastReply?.res.notPrivate;
+
   return <View>
     <View style={[s.head, { borderColor: c.line }]}>
       <View style={{ flex: 1 }}>
         <Text style={[s.headTitle, { color: c.ink }]}>{t('tabs.chat')}</Text>
         <Text style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : spanish ? 'chat.ai.rv' : 'chat.ai.kjv')}</Text>
+        {notPrivateNow && <Text testID="not-private" style={[s.ai, { color: c.accent }]}>{t('chat.free.notPrivate')}</Text>}
       </View>
       <Pressable accessibilityRole="button" onPress={() => { setConversation(randomUUID()); setEntries([]); }}><Text style={[s.small, { color: c.accent }]}>{t('chat.new')}</Text></Pressable>
     </View>
@@ -181,6 +210,7 @@ export default function ChatScreen() {
         </View>
         : <View key={i} testID={`reply-${e.res.kind}`} style={[s.bot, { backgroundColor: c.card, borderColor: c.line }]}>
           {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
+          {e.res.notPrivate && <Text testID="answer-not-private" style={[s.ai, { color: c.accent }]}>{t('chat.free.notPrivate')}</Text>}
           {e.res.reminder && <Text style={[s.body, { color: c.ink }]}>{t('chat.reminder')}</Text>}
           {e.res.checkIn && <>
             {e.res.checkIn.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
@@ -194,9 +224,17 @@ export default function ChatScreen() {
           {e.res.kind === 'crisis' && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
             <Text style={[s.linkText, { color: c.accent }]}>{t(l.label)}</Text>
           </Pressable>)}
-          {e.res.kind === 'fair_use' || (e.res.kind === 'no_free_model' && !paid) ? <Pressable accessibilityRole="button" onPress={() => router.push('/paid')} style={[s.link, { borderColor: c.accent }]}>
+          {e.res.kind === 'no_free_model' && !paid ? <Pressable accessibilityRole="button" onPress={() => router.push('/paid')} style={[s.link, { borderColor: c.accent }]}>
             <Text style={[s.linkText, { color: c.accent }]}>{t('chat.free.makePrivate')}</Text>
           </Pressable> : null}
+          {e.res.kind === 'overflow_consent' && pending && i === entries.length - 1 ? <>
+            <Pressable accessibilityRole="button" testID="overflow-continue" onPress={() => void keepChatting()} style={[s.button, { backgroundColor: c.accent }]}>
+              <Text style={[s.buttonText, { color: c.on }]}>{t('chat.overflow.continue')}</Text>
+            </Pressable>
+            <Pressable accessibilityRole="button" testID="overflow-wait" onPress={waitForTomorrow} style={[s.button, { borderWidth: 1.5, borderColor: c.accent }]}>
+              <Text style={[s.buttonText, { color: c.accent }]}>{t('chat.overflow.wait')}</Text>
+            </Pressable>
+          </> : null}
           {e.res.ai && <ReportAnswer answer={e.res.text} c={c} t={t} />}
         </View>)}
     {left && <Text style={[s.left, { color: c.muted }]}>{t('chat.left', { count: left.remaining, limit: left.limit })}</Text>}
