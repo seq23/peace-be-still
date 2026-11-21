@@ -15,6 +15,7 @@ import { bump, logCode, reserve } from './counts';
 import { CRISIS_THINKING_HEADROOM, confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
 import { paidStatus, recheckMemory, type Paid } from './entitlement';
+import { storyArt } from './storyart';
 import { appleDeviceCheck, countFirstMessage, decideFirst, endFirst, firstActive, firstRow, type DeviceBit } from './firstprivate';
 import { ipHash } from './iphash';
 import { runLadder, tally, type LadderRung, type Metrics } from './ladder';
@@ -764,6 +765,7 @@ export function createApp(deps: Deps = realDeps) {
         if (pathname === '/api/token/renew' && request.method === 'POST') return await renew(request, env, deps);
         if (pathname === '/api/chat' && request.method === 'POST') return await chat(request, env, ctx, deps);
         if (pathname === '/api/report' && request.method === 'POST') return await report(request, env, deps);
+        if (pathname.startsWith('/api/story-art/') && request.method === 'GET') return await storyArt(pathname, env.STORY_ART);
         if (pathname === '/api/chat/first' && request.method === 'POST') return await first(request, env, deps);
         if (pathname === '/api/admin/chat-block' && (request.method === 'POST' || request.method === 'DELETE')) return await adminBlock(request, env, deps);
         if (pathname === '/api/admin/spend' && request.method === 'GET') return await adminSpend(request, env, deps);

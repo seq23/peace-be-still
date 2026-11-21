@@ -23,6 +23,8 @@ printf %s "$APPLE_DEVICECHECK_KEY" | $W secret put APPLE_DEVICECHECK_KEY $CFG >/
 printf %s "$APPLE_DEVICECHECK_KEY_ID" | $W secret put APPLE_DEVICECHECK_KEY_ID $CFG >/dev/null
 printf %s "$APPLE_TEAM_ID_PBS" | $W secret put APPLE_TEAM_ID $CFG >/dev/null
 echo "OUTPUT devicecheck: 3 Worker secrets put from the vault"
+# Story artwork (worker/src/storyart.ts): the R2 bucket, made once.
+$W r2 bucket list $CFG 2>/dev/null | grep -q "pbs-story-art" || $W r2 bucket create pbs-story-art $CFG
 $W d1 migrations apply peace-be-still-chat --remote $CFG
 node scripts/worker-bible-load.mjs --remote
 $W deploy $CFG
