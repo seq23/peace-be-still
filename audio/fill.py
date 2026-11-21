@@ -52,7 +52,6 @@ import text as T  # noqa: E402
 
 CT = ZoneInfo("America/Chicago")
 HOME = Path(os.environ.get("PBS_HOME", Path.home() / ".peace-be-still"))
-SCRIPTURE = Path(os.environ.get("PBS_SCRIPTURE_DIR", Path.home() / "Work/codex-briefs/peace-be-still"))
 KOKORO_PY = os.environ.get("PBS_KOKORO_PY", str(Path.home() / "Work/claude-work/tts/venv/bin/python"))
 SHELF = os.environ.get("PBS_SHELF", "gdrive:Mac-Shelf/peace-be-still/audio")
 MANIFEST = Path(os.environ.get("PBS_MANIFEST", AUDIO / "manifest.jsonl"))
@@ -592,10 +591,10 @@ def main(argv=None) -> int:
         return 0
 
     now = dt.datetime.now(CT)
-    bibles = {lang: T.load_bible(lang, SCRIPTURE) for lang in ("en", "es")}
+    bibles = {lang: T.load_bible(lang) for lang in ("en", "es")}
     if len(bibles["en"]) != 66 or len(bibles["es"]) != 66:
         raise NamedStop("SCRIPTURE_MISSING", f"expected 66 books in each store, found KJV {len(bibles['en'])}, "
-                        f"RV1909 {len(bibles['es'])} (read from {SCRIPTURE})", 2)
+                        f"RV1909 {len(bibles['es'])} (read from {T.SCRIPTURE})", 2)
     pron = T.load_pronunciations()
     items = plan(bibles, content_items(REPO))
     rows = read_manifest()
