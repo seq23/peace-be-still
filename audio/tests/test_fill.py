@@ -67,6 +67,16 @@ class Plan(unittest.TestCase):
         rows[1]["tries"] = fill.MAX_TRIES
         self.assertNotIn(items[5]["file"], [i["file"] for i in fill.todo(items, rows)])
 
+    def test_a_failed_chapter_never_queues_ahead_of_new_sleep_sessions(self):
+        vpl = ["MAT 1:1 The book.", "MAT 2:1 Now when.", "PSA 1:1 Blessed.", "PSA 2:1 Why."]
+        b = {"en": T.parse_vpl(vpl), "es": T.parse_vpl(vpl)}
+        session = {"file": "en/psalm-night/a.m4a", "kind": "psalm-night", "lang": "en", "priority": 3}
+        items = fill.plan(b, [session])
+        rows = [{"file": "en/bible/kjv-mat-001.m4a", "status": "FAILED"}, {"file": "en/psalms/kjv-psa-002.m4a", "status": "FAILED"},
+                {"file": "en/psalms/kjv-psa-001.m4a", "status": "passed"}]
+        q = [i["file"] for i in fill.todo(items, rows)]
+        self.assertEqual(q[:4], ["en/psalms/kjv-psa-002.m4a", "en/psalm-night/a.m4a", "en/bible/kjv-mat-001.m4a", "en/bible/kjv-mat-002.m4a"])
+
     def test_third_failure_is_a_named_stop_in_the_census(self):
         items = fill.plan(bibles())
         with tempfile.TemporaryDirectory() as d:
