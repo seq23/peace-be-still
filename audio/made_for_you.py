@@ -43,15 +43,16 @@ TEMPLATE = {
         "Puedes dejar la escena aquí. Siente la cama debajo de ti y date tiempo para descansar.",
     ),
 }
-# A seeded Spanish Psalm session took 7m 38s through Kokoro, mastering and QA.
-# With the Worker's four-minute claim deadline, 20 minutes leaves over 50% headroom.
-BOX_MINUTES = 20
-# Leave time for a full claim, the measured render, and private upload before taking a lease.
-MIN_SESSION_SECONDS = 14 * 60
+# One config with the Worker (worker/src/madeForYou.config.json): the session time the nightly promise is
+# built on is the same number the drain uses to decide whether another session fits.
+CONFIG = json.loads((Path(__file__).resolve().parents[1] / "worker/src/madeForYou.config.json").read_text())
+MIN_SESSION_SECONDS = CONFIG["sessionMinutes"] * 60
+# A pass drains the whole queue; the box only stops a hung render. launchd starts a pass every 15 minutes.
+BOX_MINUTES = 60
 HELD_CODES = {
     "MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA", "MADE_FOR_YOU_NO_FREE_MODEL",
     "MADE_FOR_YOU_PSALM_UNAVAILABLE", "MADE_FOR_YOU_ATTEMPTS_EXHAUSTED",
-    "MADE_FOR_YOU_CLAIM_TIMEOUT",
+    "MADE_FOR_YOU_CLAIM_TIMEOUT", "LEASE_EXPIRED",
 }
 PRIVATE_PATH = re.compile(r"made-for-you/[a-f0-9-]{36}/([a-f0-9-]{36})\.m4a")
 
@@ -190,35 +191,37 @@ def process_one(call, render, put) -> bool:
 
 
 def drain_queue(call, render, put, *, deadline: float = float("inf")) -> int:
+    """Make sessions until the queue is empty or another would not fit. A held request is a NOTE: the
+    Worker keeps it and the app shows her the retry; only a broken promise is a stop (report())."""
     published = 0
-    held = None
     consecutive_timeouts = 0
     while deadline - time.monotonic() >= MIN_SESSION_SECONDS:
         try:
             if not process_one(call, render, put):
-                if not published and held is None:
-                    print("OUTPUT 0 private sessions (queue empty)")
                 break
         except fill.NamedStop as error:
             if error.code not in HELD_CODES:
                 raise
-            print(f"NAMED STOP [{error.code}] private request held", file=sys.stderr, flush=True)
-            held = error
+            print(f"NOTE [{error.code}] one private request held for a retry", flush=True)
             consecutive_timeouts = consecutive_timeouts + 1 if error.code == "MADE_FOR_YOU_CLAIM_TIMEOUT" else 0
             if consecutive_timeouts >= 2:
                 break
             continue
         consecutive_timeouts = 0
         published += 1
-        print(f"OUTPUT {published} private session(s) published", flush=True)
-    else:
-        print("OUTPUT private queue deferred until the next render window (insufficient time for another session)", flush=True)
-    if held:
-        raise held
     return published
 
 
-def work(*, deadline: float = float("inf")) -> int:
+def report(call, published: int) -> None:
+    """The pass's one OUTPUT line, then MADE_FOR_YOU_LATE when any request is past the time she was shown."""
+    status = call("status", {})
+    print(f"OUTPUT {published} published, queue {status['queue']}, held {status['held']}, "
+          f"oldest {status['oldestHours']:.1f} hours, late {status['late']}", flush=True)
+    if status["late"]:
+        raise fill.NamedStop("MADE_FOR_YOU_LATE", f"{status['late']} private session(s) past the promised time.")
+
+
+def work(*, deadline: float = float("inf"), render: bool = True) -> int:
     base, secret = os.getenv("PBS_MADE_FOR_YOU_API", ""), os.getenv("PBS_MADE_FOR_YOU_RUNNER_SECRET", "")
     bucket = os.getenv("PBS_MADE_FOR_YOU_PRIVATE_BUCKET", "")
     url = urlsplit(base)
@@ -226,8 +229,12 @@ def work(*, deadline: float = float("inf")) -> int:
         raise fill.NamedStop("MADE_FOR_YOU_CONFIG", "Configure the HTTPS API and the runner secret.")
     if not bucket or bucket == publish.BUCKET:
         raise fill.NamedStop("MADE_FOR_YOU_PRIVATE_BUCKET", "Configure a separate private R2 bucket.")
-    publish.connect()
-    drain_queue(make_request(base, secret), render_session, lambda item, local: upload(item, local, bucket), deadline=deadline)
+    call = make_request(base, secret)
+    published = 0
+    if render:
+        publish.connect()
+        published = drain_queue(call, render_session, lambda item, local: upload(item, local, bucket), deadline=deadline)
+    report(call, published)
     return 0
 
 
@@ -249,6 +256,7 @@ def run_timebox(command: list[str], seconds: float) -> int:
 
 
 def main() -> int:
+    """launchd entry (com.seq.pbs-made-for-you, its own job, log and exit code; audio/made_for_you.sh)."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-minutes", type=int, default=BOX_MINUTES)
     parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
@@ -258,21 +266,22 @@ def main() -> int:
         if args.worker:
             return work(deadline=args.deadline)
         minutes = min(args.max_minutes, BOX_MINUTES, fill.window_minutes(dt.datetime.now(fill.CT)))
-        if minutes <= 0:
-            print("OUTPUT 0 private sessions (outside the render window)")
-            return 0
+        if minutes * 60 < MIN_SESSION_SECONDS:
+            # Her workday (or the window's last minutes): nothing is rendered, but a late promise still shows.
+            return work(render=False)
         fill.HOME.mkdir(parents=True, exist_ok=True)
-        with (fill.HOME / "library-fill.lock").open("a") as lock:
+        # Its own lock: the library fill never makes a paid session wait, and two passes never overlap.
+        with (fill.HOME / "made-for-you.lock").open("a") as lock:
             try:
                 fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             except BlockingIOError:
-                print("OUTPUT 0 private sessions (library fill has the lock)")
+                print("NOTE a made-for-you pass is still running")
                 return 0
             seconds = minutes * 60
             deadline = time.monotonic() + seconds
             return run_timebox([sys.executable, __file__, "--worker", "--deadline", str(deadline)], seconds)
     except fill.NamedStop as error:
-        # Existing publisher exceptions may include storage details. Do not log customer data or URLs.
+        # Publisher exceptions may include storage details. Never log customer data or URLs.
         print(f"NAMED STOP [{error.code}] in private session rendering", file=sys.stderr)
         return error.exit_code
     except Exception:

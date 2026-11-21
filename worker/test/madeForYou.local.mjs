@@ -168,11 +168,12 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   assert.equal(held.note, 'Rain at the window');
   assert.equal(held.attempts, 0);
   assert.equal((await (await call(sceneInstall, { params: '?kind=imagination&lang=en' })).json()).pending.retrying, true, 'she sees we will try again');
-  assert.equal((await claim(at + MIN, { 'x-test-judge': 'down' })).status, 503);
+  assert.deepEqual(await (await claim(at + MIN)).json(), { job: null }, 'an outage backs the row off; the rest of the queue is not blocked');
+  assert.equal((await claim(at + 16 * MIN, { 'x-test-judge': 'down' })).status, 503);
   assert.equal((await row(third)).attempts, 0, 'a judge outage is a retry, not a failure');
   // Three rejected drafts: stopped, and her note is gone in the same update.
   for (let i = 0; i < 3; i++) {
-    const rejected = await claim(at + (2 + i) * MIN, { 'x-test-judge': 'fail' });
+    const rejected = await claim(at + (32 + i) * MIN, { 'x-test-judge': 'fail' });
     assert.deepEqual(await rejected.json(), { error: i === 2 ? 'MADE_FOR_YOU_ATTEMPTS_EXHAUSTED' : 'MADE_FOR_YOU_DRAFT' });
   }
   held = await row(third);

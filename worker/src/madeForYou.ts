@@ -244,6 +244,7 @@ const noteLifetime = 7 * DAY - HOUR; // the hourly cron never lets a note pass 7
 const leaseMs = 30 * MINUTE;
 const claimDeadlineMs = 240_000;
 const maxAttempts = 3;
+const retryAfterOutageMs = 15 * MINUTE;
 const REPORT_DAYS = 90;
 const PLAN_GRACE = 30 * DAY;
 const STOPPED = 'MADE_FOR_YOU_ATTEMPTS_EXHAUSTED';
@@ -337,9 +338,11 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
         state = CASE WHEN attempts + ? >= ? THEN 'stopped' ELSE state END,
         note = CASE WHEN attempts + ? >= ? THEN NULL ELSE note END,
         script = CASE WHEN attempts + ? >= ? THEN NULL ELSE script END,
-        lease = NULL, lease_until = NULL
+        lease = NULL, lease_until = ?
       WHERE id = ? AND lease = ? AND lease_until > ? AND state IN ('queued','scripted') RETURNING retry_code`)
-      .bind(add, add, maxAttempts, STOPPED, code, add, maxAttempts, add, maxAttempts, add, maxAttempts, id, lease, deps.now())
+      // An outage backs the row off so the rows behind it are made; a quality failure may retry at once.
+      .bind(add, add, maxAttempts, STOPPED, code, add, maxAttempts, add, maxAttempts, add, maxAttempts,
+        failure ? null : deps.now() + retryAfterOutageMs, id, lease, deps.now())
       .first<{ retry_code: string }>();
   }
 

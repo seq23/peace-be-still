@@ -2,7 +2,7 @@ import io
 import json
 import sys
 import unittest
-from contextlib import redirect_stderr
+from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from unittest.mock import Mock, patch
 from urllib.error import HTTPError
@@ -47,6 +47,8 @@ class MadeForYouTest(unittest.TestCase):
         put = Mock()
 
         def call(target, payload):
+            if target == "status":
+                return {"queue": 0, "held": 0, "oldestHours": 0, "late": 0}
             if target == "claim":
                 return {"job": next(jobs, None)}
             published.append(target)
@@ -89,11 +91,11 @@ class MadeForYouTest(unittest.TestCase):
             io.BytesIO(b'{"job":null}'),
         ]
         logs = io.StringIO()
-        with patch.object(sessions, "urlopen", side_effect=replies) as request, redirect_stderr(logs):
-            with self.assertRaises(fill.NamedStop) as stopped:
-                sessions.drain_queue(call, render, put)
-            self.assertEqual(stopped.exception.code, "MADE_FOR_YOU_QA")
-            self.assertIn(code, logs.getvalue())
+        with patch.object(sessions, "urlopen", side_effect=replies) as request, redirect_stdout(logs):
+            # A held request is a note the next pass retries, never a failed run.
+            self.assertEqual(sessions.drain_queue(call, render, put), 1)
+            self.assertIn(f"NOTE [{code}]", logs.getvalue())
+            self.assertIn("NOTE [MADE_FOR_YOU_QA]", logs.getvalue())
             self.assertEqual([entry.args[0].full_url.rsplit("/", 1)[-1] for entry in request.call_args_list],
                              ["claim", "claim", "qa-failed", "claim", ready_id, "claim"])
         self.assertEqual(render.call_count, 2)
@@ -117,12 +119,41 @@ class MadeForYouTest(unittest.TestCase):
         render = Mock(return_value={"status": "passed", "seconds": 680, "sha256": "hash", "_local": "session.m4a"})
         call = sessions.make_request("https://fixture.example/api", "fixture")
         put = Mock()
-        with patch.object(sessions, "urlopen", side_effect=replies) as request:
-            with self.assertRaisesRegex(fill.NamedStop, "MADE_FOR_YOU_CLAIM_TIMEOUT"):
-                sessions.drain_queue(call, render, put)
+        with patch.object(sessions, "urlopen", side_effect=replies) as request, redirect_stdout(io.StringIO()):
+            self.assertEqual(sessions.drain_queue(call, render, put), 1)
             self.assertEqual(request.call_args_list[0].kwargs["timeout"], 300)
             self.assertTrue(request.call_args_list[2].args[0].full_url.endswith(job["id"]))
         put.assert_called_once()
+
+    def test_each_pass_prints_one_output_line_and_a_broken_promise_is_a_named_stop(self):
+        status = {"queue": 3, "held": 1, "oldestHours": 5.25, "late": 0}
+        out = io.StringIO()
+        with redirect_stdout(out):
+            sessions.report(lambda target, body: status, 2)
+        self.assertEqual(out.getvalue().strip(), "OUTPUT 2 published, queue 3, held 1, oldest 5.2 hours, late 0")
+        status["late"] = 1
+        with redirect_stdout(io.StringIO()), self.assertRaises(fill.NamedStop) as stopped:
+            sessions.report(lambda target, body: status, 0)
+        self.assertEqual(stopped.exception.code, "MADE_FOR_YOU_LATE")
+        self.assertNotEqual(stopped.exception.exit_code, 0)
+
+    def test_outside_the_window_a_pass_renders_nothing_but_still_reports(self):
+        seen = []
+        def call(target, body):
+            seen.append(target)
+            return {"queue": 1, "held": 0, "oldestHours": 2, "late": 0}
+        with patch.dict(sessions.os.environ, {
+            "PBS_MADE_FOR_YOU_API": "https://fixture.example/api", "PBS_MADE_FOR_YOU_RUNNER_SECRET": "fixture",
+            "PBS_MADE_FOR_YOU_PRIVATE_BUCKET": "fixture-private",
+        }), patch.object(sessions, "make_request", return_value=call), patch.object(sessions.publish, "connect") as connect, \
+                redirect_stdout(io.StringIO()):
+            self.assertEqual(sessions.work(render=False), 0)
+        self.assertEqual(seen, ["status"])
+        connect.assert_not_called()
+
+    def test_session_time_comes_from_the_config_the_worker_promises_with(self):
+        self.assertEqual(sessions.MIN_SESSION_SECONDS, sessions.CONFIG["sessionMinutes"] * 60)
+        self.assertGreater(sessions.BOX_MINUTES * 60, sessions.MIN_SESSION_SECONDS)
 
     def test_timebox_kills_a_slow_render_and_raises_a_named_stop(self):
         with self.assertRaisesRegex(fill.NamedStop, "MADE_FOR_YOU_TIMEBOX") as stopped:

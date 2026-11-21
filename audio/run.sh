@@ -17,7 +17,6 @@ if (( $(left) <= 0 )); then
   exit 0
 fi
 "$PY" audio/fill.py --commit --max-minutes "$(cap 60)"; rc=$?
-mf_box=$(left); mf_script="$PWD/audio/made_for_you.py"; (( mf_box > 0 )) && { (cd "${BOSS_OS_REPO:-$HOME/GitHub/boss-os}" && npm run -s vault:run -- "$PY" "$mf_script" --max-minutes "$mf_box"); mf=$?; (( mf > rc )) && rc=$mf; }
 # Then the Hush Harbor stories (Gemini, key from the Boss OS vault). One queue: it takes the fill's
 # own lock, so the Mac never runs two renders at once; nice 15 comes from the launchd job. Its quota
 # stops are notes (exit 0).
