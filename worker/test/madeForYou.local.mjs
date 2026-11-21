@@ -141,11 +141,20 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   const before = await chatCounters();
   assert.equal((await call(id.owner, { path: '/runner/claim', body: {} })).status, 401);
 
-  // Workers AI first: the first draft comes from it, and its one daily draft is then used.
+  // Workers AI first: the first draft comes from it, and its one daily draft is then used. That draft
+  // leaned on an AI word and had a short paragraph: it went back once with exactly those faults.
   const first = (await (await call(id.owner, { body: note })).json()).id;
-  const one = await (await claim(at)).json();
+  const claimed = await claim(at, { 'x-test-draft': 'flawed' });
+  const revised = JSON.parse(decodeURIComponent(claimed.headers.get('x-test-revisions') ?? '[]'));
+  assert.equal(revised.length, 1, 'one revision, not a fresh draft');
+  assert.match(revised[0], /Paragraph 3 has \d+ words/);
+  assert.match(revised[0], /profound/);
+  assert.ok(!revised[0].includes('Días de lluvia'), 'her note is never quoted back as a fault');
+  const one = await claimed.json();
   assert.equal(one.job.id, first);
-  assert.match(one.job.reflection, /This draft came from workers-ai\.$/);
+  // Workers AI wrote the draft and spent its one daily draft; the revision came from the next rung.
+  assert.match(one.job.reflection, /This draft came from gemini-free:\S+\.$/);
+  assert.equal((await db.prepare("SELECT n FROM chat_counts WHERE metric = 'calls:mfy:draft:workers-ai'").first()).n, 1);
   assert.equal(one.job.verses.length, 6);
   const scripted = await row(first);
   assert.equal(scripted.state, 'scripted');

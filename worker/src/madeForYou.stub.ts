@@ -50,6 +50,7 @@ export default {
     const down = header('x-test-models-down');
     const short = header('x-test-models-short');
     const judgeMode = request.headers.get('x-test-judge') ?? 'pass';
+    const revisions: string[] = [];
     // The production client with no secrets: every storage call is the named stop MADE_FOR_YOU_STORAGE_CONFIG.
     const unconfigured = request.headers.get('x-test-storage') === 'unset' ? r2Private({}) : null;
     const service = createMadeForYou({
@@ -83,6 +84,12 @@ export default {
             const lang = messages[0].content.includes('Spanish') ? 'es' : 'en';
             const paragraphs = cleanDraft(lang, short.has(rung.id) || short.has(rung.id.split(':')[0]) ? 4 : 10).split('\n\n');
             paragraphs[paragraphs.length - 1] += ` This draft came from ${rung.id}.`;
+            // x-test-draft: flawed → the first draft leans on an AI word and is short; a revision request fixes it.
+            const revising = messages[messages.length - 1].content.startsWith('Revise');
+            if (request.headers.get('x-test-draft') === 'flawed' && !revising) {
+              paragraphs[2] = paragraphs[2].split(' ').slice(0, 40).join(' ') + ' A profound calm fills the room.';
+            }
+            if (revising) revisions.push(messages[messages.length - 1].content);
             return { paragraphs };
           },
         }));
@@ -129,6 +136,11 @@ export default {
       const object = await env.AUDIO.get(key);
       return object ? new Response(object.body) : new Response(null, { status: 404 });
     }
-    return await service.fetch(request) ?? new Response(null, { status: 404 });
+    const answered = await service.fetch(request) ?? new Response(null, { status: 404 });
+    if (!revisions.length) return answered;
+    // The revision requests the model received, for the test to read (fixture data only).
+    const headers = new Headers(answered.headers);
+    headers.set('x-test-revisions', encodeURIComponent(JSON.stringify(revisions)));
+    return new Response(answered.body, { status: answered.status, headers });
   },
 };

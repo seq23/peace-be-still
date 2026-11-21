@@ -20,9 +20,11 @@
   "judgeNeuronsWorstCase": 110,
   "draftMaxTokens": 2200,
   "judgeMaxTokens": 300,
+  "revisions": 2,
+  "_revisions": "A try is one draft plus up to two revisions that send it back with its exact faults (draftFaults). Soak of 21 Nov 2026: with fresh drafts only, 11 of 12 requests stopped on fixable floors.",
   "draft": {
     "workers-ai": 1,
-    "gemini-free": 30,
+    "gemini-free": 60,
     "openrouter-free": 20
   },
   "judge": {

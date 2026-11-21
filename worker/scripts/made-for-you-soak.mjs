@@ -10,7 +10,7 @@
 //   node worker/scripts/made-for-you-soak.mjs drain <state dir> <stop at, ms since epoch>
 //   node worker/scripts/made-for-you-soak.mjs summary <state dir>
 //   node worker/scripts/made-for-you-soak.mjs judge-reviewed <state dir>   (the real judge on the two sessions round 5 failed)
-// Env: PBS_CHAT_SOURCE = the integrated phase 3 checkout; SOAK_RENDER_SECONDS (default 360).
+// Env: PBS_CHAT_SOURCE = the integrated phase 3 checkout; SOAK_RENDER_SECONDS (default 360); SOAK_DUE_HOURS.
 import { appendFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
@@ -110,7 +110,8 @@ if (mode === 'seed') {
     for (const v of source.prepare('SELECT book, chapter, verse, text FROM verses').all()) insert.run(translation, v.book, v.chapter, v.verse, v.text);
     sqlite.exec('COMMIT');
   }
-  const now = Date.now(), due = m.nights(now).tonight.due;
+  // The promise the app would show (tonight's 08:00 CT), or SOAK_DUE_HOURS from now for a soak run in the day.
+  const now = Date.now(), due = process.env.SOAK_DUE_HOURS ? now + Number(process.env.SOAK_DUE_HOURS) * 3_600_000 : m.nights(now).tonight.due;
   const add = sqlite.prepare(`INSERT INTO made_for_you (id, install_id, day, kind, lang, teen, created_at, due_at, state, note, paid_until)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'queued', ?, ?)`);
   NOTES.forEach(([lang, kind, teen, note], i) =>
