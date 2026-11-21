@@ -104,6 +104,18 @@ describe('the check-in, once', () => {
   });
 });
 
+describe('the crisis lane answers', () => {
+  it('a crisis-lane answer has room to think before it writes (run 10d: 21 of 48 cut off at 350 tokens)', async () => {
+    const maxes: number[] = [];
+    const c = convo({ riskVerdict: { verdict: 'risk', kind: 'selfharm', level: 'low' } });
+    const inner = c.crisis.rung.call;
+    c.crisis.rung.call = (async (m: never, s: never, max: number) => { maxes.push(max); return inner(m, s, max); }) as never;
+    expect((await c.say('I feel so hopeless lately')).kind).toBe('answer');
+    expect(maxes.length).toBeGreaterThan(0);
+    expect(Math.min(...maxes)).toBeGreaterThanOrEqual(Number(env.ANSWER_MAX_TOKENS) + 1024);
+  });
+});
+
 describe('the crisis lane decays', () => {
   it('back to the normal lane after 10 calm turns', async () => {
     const c = convo({ paidNow: true });

@@ -154,6 +154,7 @@ const crisisRung = (env: Env, now: number): LadderRung => ({
 });
 
 /** A small ladder for a check (risk read, judge): Workers AI first, then the last Gemini model. */
+const CRISIS_THINKING_HEADROOM = 1024;
 async function check<T>(env: Env, now: number, first: LadderRung, messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true): Promise<T> {
   const metrics: Metrics = new Map();
   // The backup reads the same words the risk read does, which may be about a crisis: only the
@@ -489,7 +490,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Only the last CHAT_HISTORY_TURNS turns travel to the model (a paid user's memory note carries the rest).
   const history: Message[] = turns.slice(-int(env.CHAT_HISTORY_TURNS, 6)).map(t => ({ role: t.role, content: t.text }));
   const rungs = deps.rungs(env, now, lane);
-  const answerTokens = int(env.ANSWER_MAX_TOKENS, 350);
+  // The crisis model thinks (CRISIS_THINKING_LEVEL) and Gemini counts thinking inside the output cap:
+  // at 350 it ran out mid-answer (run 10d: 21 of 48 crisis-lane answers malformed, 7 sent as busy).
+  // Only the tokens used are billed, so the headroom costs nothing when unused.
+  const answerTokens = int(env.ANSWER_MAX_TOKENS, 350) + (lane === 'crisis' ? CRISIS_THINKING_HEADROOM : 0);
   const earlierTurns = turns.slice(0, -1).filter(t => t.role === 'user');
   const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: ask.door, userText: last, earlier: earlierTurns.map(t => t.text).join('\n'), afterCrisis: (sticky && state?.asked === 1) || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
   // The newest message plus her earlier ones: an echo of what she wrote ("I called 988") is not a tripwire.
