@@ -62,5 +62,5 @@ checks, shelved, status, voice).
   `R2_UNREACHABLE`, `R2_KEY_MISSING`; a Drive copy that is missing or not the manifest's file is HELD.
   Output `OUTPUT <n> files published to R2` and `r2: X of Y shelved files public`.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
-  reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing.
+  reel heard by a person, A04 heteronyms, A05 Psalm Nights session pacing. The app's player (reads the R2 manifest) is in `app/src/player/`.
 - Tests: `python3 -m unittest discover -s audio/tests` (needs numpy; `test_publish.py` covers the R2 step) and `python3 audio/check_manifest.py --self-test`.

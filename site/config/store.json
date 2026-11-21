@@ -1,5 +1,7 @@
 {
   "why": "One source of truth for the store buttons on every page (owner 18 Nov 2026: no waitlist; 'look for it in the Apple App Store and Google Play ... flip a switch'). null = 'coming soon' text for that store; a URL = that store's official badge linking to the listing. Set by hand the day a store approves: npm run store:set -- --ios <url> --play <url>, then land the PR as usual.",
   "app_store_url": null,
-  "play_url": null
+  "play_url": null,
+  "es_listing_spanish_legal": true,
+  "es_listing_spanish_legal_why": "OFF until the owner says yes: when true, the es-MX store listing links the Spanish legal pages (/es/privacidad, /es/terminos) instead of the English ones marked (en inglés). Flip with npm run store:set -- --es-legal on, then land the PR as usual."
 }
