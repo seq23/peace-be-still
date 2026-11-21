@@ -124,7 +124,7 @@ test('the two sessions the review transcribed fail the code floors; the voice sa
   assert.deepEqual(await why({ kind: 'psalm', lang: 'en', text: 'tired', verses: KJV23 }, withPara('en', 'Goodness and mercy shall follow you all the days of your life.')), ['floor:retells_verses']);
   // The samples the drafter hears keep every floor (each pasted into an otherwise clean script).
   for (const lang of ['en', 'es']) for (const kind of ['psalm', 'imagination']) for (const passage of mfy.VOICE_SAMPLES[lang][kind]) {
-    const p = cleanDraft(lang).split('\n\n'); const tail = p[0].split('. '); p[0] = passage; while (p[0].split(' ').length < 100) p[0] += ` ${tail.shift().replace(/\.?$/, '.')}`;
+    const p = cleanDraft(lang).split('\n\n'); const tail = p[0].split('. '); p[0] = passage; while (p[0].split(' ').length < 118) p[0] += ` ${tail.shift().replace(/\.?$/, '.')}`;
     assert.deepEqual(await why({ kind, lang, text: 'a long day', verses: kind === 'psalm' ? (lang === 'es' ? RV23 : KJV23) : undefined }, p.join('\n\n')), [], `${lang} ${kind}: ${passage.slice(0, 40)}`);
   }
 });
