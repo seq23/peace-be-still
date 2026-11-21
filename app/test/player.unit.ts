@@ -116,7 +116,7 @@ test('the real manifest yields one track for every passed row, with readable tit
       const script = JSON.parse(readFileSync(`${REPO}/${t.ref.split('#')[0]}`, 'utf8'));
       assert.equal(t.scriptureRef, script.main[0]);
     }
-    assert.deepEqual(Object.keys(t).sort(), fields.sort());
+    assert.deepEqual(Object.keys(t).sort(), fields.sort(), `${t.kind} ${t.ref}`);
   }
 });
 

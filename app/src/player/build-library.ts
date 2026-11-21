@@ -30,7 +30,9 @@ function scriptDisplay(row: ManifestRow) {
     if (typeof title !== 'string' || !title.trim()) return null;
     // A Psalm Night names its psalm in `main` ("PSA 23:1-6"); a story's key verse comes from its blocks.
     const psalm = Array.isArray(main) && typeof main[0] === 'string' ? main[0] : undefined;
-    return { titles: { [row.lang]: title.trim() }, scriptureRef: keyScripture(blocks) ?? psalm };
+    const scriptureRef = keyScripture(blocks) ?? psalm;
+    // A script with no Scripture (an Imagination Night) carries no scriptureRef key at all.
+    return { titles: { [row.lang]: title.trim() }, ...(scriptureRef ? { scriptureRef } : {}) };
   } catch { return null; }
 }
 

@@ -4,6 +4,8 @@ import type { Track } from '../../player/library';
 
 export function shelfOf(track: Track) {
   if (track.kind === 'psalms' || track.kind === 'bible') return track.kind;
+  // A whispered Psalm Night sits on the Psalms shelf; its psalm is its scriptureRef, not its ref (a script path).
+  if (track.kind === 'psalm-night') return 'psalms';
   if (track.kind === 'imagination-night' || track.ref.startsWith('content/imagination-nights/')) return 'imagination';
   if (track.kind === 'stories' && track.ref.startsWith('content/stories/hush-harbor/')) return 'hushHarbor';
   if (track.kind === 'stories' && track.ref.startsWith('content/stories/mi-refugio/')) return 'miRefugio';

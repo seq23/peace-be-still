@@ -600,13 +600,15 @@ test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor 
   const psalm = audioTracks.find(track => track.ref === 'PSA 23')!;
   const bible = audioTracks.find(track => track.kind === 'bible')!;
   const story = audioTracks.find(track => track.ref.startsWith('content/stories/hush-harbor/'))!;
-  assert.ok(psalm && bible && story);
+  const psalmNight = audioTracks.find(track => track.kind === 'psalm-night' && track.lang === 'en')!;
+  assert.ok(psalm && bible && story && psalmNight);
   const open = async (title: string, track: Track) => {
     await press(tree, title);
     assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: track.sha256 } }]);
   };
   const psalmShelf = host(tree, 'Pressable').find(node => textOf(node).startsWith(en['journey.psalmNights.name'] + ' '));
-  const count = audioTracks.filter(track => track.kind === 'psalms' && track.lang === 'en').length;
+  // Whispered Psalm Nights sessions sit on the Psalms shelf beside the read Psalms.
+  const count = audioTracks.filter(track => (track.kind === 'psalms' || track.kind === 'psalm-night') && track.lang === 'en').length;
   assert.ok(psalmShelf && textOf(psalmShelf).includes(i18n.t('listen.whisperedNights', { locale: 'en', count })));
   const cardRow = psalmShelf.findAll(node => (node.type as unknown) === 'View' && node.props.style?.flexDirection === 'row')[0];
   assert.ok(cardRow, 'The shelf details and chevron should share a horizontal row');
@@ -615,6 +617,7 @@ test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor 
   await press(tree, en['journey.psalmNights.name']);
   assert.equal(psalmShelf.props['aria-expanded'], true);
   await open(trackTitle(psalm, 'en'), psalm);
+  await open(trackTitle(psalmNight, 'en'), psalmNight);
   await press(tree, en['listen.bibleByBook']);
   await press(tree, trackTitle(bible, 'en').replace(/ \d+$/, ''));
   await open(trackTitle(bible, 'en'), bible);
@@ -688,7 +691,10 @@ test('Spanish and Mindset shelves show their own library and the current availab
     const locale = language === 'es' ? es : en;
     const mindset = await mount('nights', { ...base, language, door: 'mindset', journey: 'imagination-nights' });
     assert.ok(texts(mindset).includes(locale['journey.imaginationNights.name']));
-    assert.ok(texts(mindset).includes(locale['listen.emptyShelf']));
+    // The shelf follows the published library: a count once sessions in this language exist, else the empty line.
+    const count = audioTracks.filter(track => track.kind === 'imagination-night' && track.lang === language).length;
+    if (count) assert.ok(strings(mindset).includes(i18n.t('listen.nights', { locale: language, count })), language + ' mindset: ' + texts(mindset).join(' | '));
+    else assert.ok(texts(mindset).includes(locale['listen.emptyShelf']), language + ' mindset: ' + texts(mindset).join(' | '));
     assert.ok(!strings(mindset).includes(locale['listen.bibleByBook']));
   }
 });
