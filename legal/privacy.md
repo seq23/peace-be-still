@@ -8,7 +8,7 @@ The short version: there is no account, we never ask for your name, there are no
 
 ## What stays on your phone
 
-Your birth year, the door you chose, your settings, saved verses, highlights, journal entries, your streak and anything you record in your own voice stay on your phone. We never receive them. Deleting the app deletes them.
+Your birth year, the door you chose, your settings, saved verses, highlights, journal entries and your streak stay on your phone. We never receive them. Deleting the app deletes them.
 
 ## Chat
 

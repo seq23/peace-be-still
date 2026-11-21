@@ -10,7 +10,7 @@ En pocas palabras: no hay cuenta, nunca le pedimos su nombre, no hay anuncios y 
 
 ## Lo que se queda en su teléfono
 
-Su año de nacimiento, la puerta que eligió, su configuración, los versículos guardados, los resaltados, las entradas del diario, su racha y todo lo que grabe con su propia voz se quedan en su teléfono. Nunca los recibimos. Si borra la app, se borran.
+Su año de nacimiento, la puerta que eligió, su configuración, los versículos guardados, los resaltados, las entradas del diario y su racha se quedan en su teléfono. Nunca los recibimos. Si borra la app, se borran.
 
 ## El chat
 
