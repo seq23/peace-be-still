@@ -36,13 +36,14 @@ try:
 except fill.NamedStop as e:
     stopped = e.code
 publish.FREE_CAP_BYTES = cap
-over = publish.rclone('lsjson', '--stat', f'r2p:{bucket}/{sys.argv[1]}.over', timeout=60).returncode == 0
 m.upload({'file': sys.argv[1]}, local, bucket)
-print(json.dumps({'used': used, 'cap': cap, 'stopped': stopped, 'over_stored': over}))`, key, join(dir, 'smoke.m4a')], { encoding: 'utf8' });
+print(json.dumps({'used': used, 'cap': cap, 'stopped': stopped}))`, key, join(dir, 'smoke.m4a')], { encoding: 'utf8' });
 const seen = JSON.parse(mac.trim().split('\n').pop());
+// HEAD is the authority on whether the refused upload exists (rclone's --stat answers a missing key as a directory).
+seen.over_stored = await storage.hasAudio(`${key}.over`);
 console.log(`account R2 use ${(seen.used / 1e9).toFixed(2)} GB of the ${(seen.cap / 1e9).toFixed(1)} GB cap (every bucket on the second account)`);
 step('publish.py counts the whole account (a real, non-zero read)', seen.used > 0 && seen.used < seen.cap);
-step('an upload past the free cap is a named stop and stores nothing', seen.stopped === 'MADE_FOR_YOU_R2_FREE_CAP' && !seen.over_stored);
+step(`an upload past the free cap is a named stop and stores nothing (stop ${seen.stopped}, stored ${seen.over_stored})`, seen.stopped === 'MADE_FOR_YOU_R2_FREE_CAP' && !seen.over_stored);
 step('the Mac upload (r2p: remote, hash verified)', true);
 try {
   step('HEAD finds it', await storage.hasAudio(key));
