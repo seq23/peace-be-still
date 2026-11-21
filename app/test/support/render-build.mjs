@@ -1,20 +1,85 @@
+// Bundles test/screens.render.tsx with the real screens and runs it under node:test. Native modules are
+// replaced by HOST elements (a plain string type, as React Native's own primitives are), so each element
+// exists once in the tree. expo-router is replaced by a recorder: tests assert where a screen navigates
+// (push/replace/back/Redirect) and read the layouts' Stack/Tabs configuration as data.
 import { build } from 'esbuild';
 import { mkdtempSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
+
+const host = names => names.map(name => `exports[${JSON.stringify(name)}] = ${JSON.stringify(name)};`).join('\n');
+const MOCKS = {
+  'react-native': `${host(['ActivityIndicator', 'Image', 'Pressable', 'ScrollView', 'Switch', 'Text', 'TextInput', 'View'])}
+    exports.StyleSheet = { create: x => x };
+    exports.AppState = { addEventListener: () => ({ remove() {} }) };
+    exports.Linking = { openURL: async url => globalThis.__pbsOpenURL?.(url) };
+    exports.Platform = { get OS() { return globalThis.__pbsPlatform ?? 'web'; }, select: o => o.web ?? o.default };
+    exports.useColorScheme = () => globalThis.__pbsScheme || 'light';`,
+  'react-native-safe-area-context': `${host(['SafeAreaView'])}
+    exports.SafeAreaProvider = ({ children }) => children;
+    exports.useSafeAreaInsets = () => ({ top: 0, bottom: 0, left: 0, right: 0 });`,
+  'react-native-svg': `const React = require('react');
+    exports.__esModule = true;
+    exports.default = React.forwardRef(({ children, ...props }, ref) => {
+      React.useImperativeHandle(ref, () => ({ toDataURL: callback => globalThis.__pbsCapture(callback) }));
+      return React.createElement('Svg', props, children);
+    });
+    ${host(['Path', 'Rect', 'Circle'])}
+    exports.Text = 'SvgText';`,
+  'expo-asset': `const { readFileSync } = require('node:fs');
+    exports.Asset = { fromModule: name => ({
+      uri: 'data:application/octet-stream;base64,' + readFileSync('src/bible/data/' + name).toString('base64')
+    }) };`,
+  'expo-file-system': '',
+  'expo-sqlite': `const { DatabaseSync } = require('node:sqlite');
+    const { mkdtempSync, writeFileSync, rmSync } = require('node:fs');
+    const { join } = require('node:path');
+    const { tmpdir } = require('node:os');
+    exports.deserializeDatabaseAsync = async bytes => {
+      const dir = mkdtempSync(join(tmpdir(), 'pbs-bible-'));
+      const file = join(dir, 'bible.db');
+      writeFileSync(file, bytes);
+      const db = new DatabaseSync(file, { readOnly: true });
+      process.once('exit', () => { db.close(); rmSync(dir, { recursive: true, force: true }); });
+      return { getAllAsync: async (sql, params) => {
+        if (sql.includes('verses_fts')) throw new Error('Web SQLite lacks FTS5');
+        return db.prepare(sql).all(...params);
+      }, getFirstAsync: async sql => db.prepare(sql).get() };
+    };`,
+  'expo-router': `const React = require('react');
+    const r = () => globalThis.__pbsRouter;
+    exports.useRouter = () => r();
+    exports.useLocalSearchParams = () => globalThis.__pbsParams || {};
+    exports.useGlobalSearchParams = () => globalThis.__pbsParams || {};
+    exports.useSegments = () => globalThis.__pbsSegments || [];
+    exports.Redirect = props => React.createElement('Redirect', props);
+    const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
+    exports.Stack = layout('Stack'); exports.Tabs = layout('Tabs');`,
+  'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
+  'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`,
+  '@react-native-async-storage/async-storage': `module.exports = { __esModule: true, default: globalThis.__pbsStorage };`,
+  'expo-constants': `exports.__esModule = true; exports.default = { get expoConfig() { return globalThis.__pbsExpoConfig; } };`,
+  'expo-crypto': `let n = 0; exports.randomUUID = () => '00000000-0000-4000-8000-' + String(++n).padStart(12, '0');`,
+  'react-native-purchases': `exports.__esModule = true; exports.default = globalThis.__pbsPurchases;
+    exports.PURCHASES_ERROR_CODE = { PAYMENT_PENDING_ERROR: '20', PURCHASE_CANCELLED_ERROR: '1' };`,
+};
+
+// Every test/*.render.tsx is its own bundle and process, so each file sets its own globals.
 const dir = mkdtempSync(join(tmpdir(), 'pbs-render-'));
-const entries = readdirSync('test').filter(f => f.endsWith('.render.tsx'));
-await build({ entryPoints: entries.map(f => `test/${f}`), outdir: dir, outExtension: { '.js': '.cjs' }, bundle: true, platform: 'node', format: 'cjs', packages: 'external', external: ['react', 'react-test-renderer'], plugins: [{ name: 'native-mocks', setup(b) {
-  b.onResolve({ filter: /^(react-native|react-native-svg|expo-localization|expo-crypto|@expo-google-fonts\/.*|@react-native-async-storage\/async-storage)$/ }, args => ({ path: args.path, namespace: 'mock' }));
-  b.onLoad({ filter: /.*/, namespace: 'mock' }, args => {
-    if (args.path === 'react-native') return { contents: `const React = require('react'); const component = name => props => React.createElement(name, props, props.children); for (const name of ['ActivityIndicator','Pressable','SafeAreaView','ScrollView','Text','TextInput','View']) exports[name] = component(name); exports.StyleSheet = {create: x => x}; exports.useColorScheme = () => 'light'; exports.Linking = { openURL: async url => { (globalThis.__pbsOpened ??= []).push(url); } };`, loader: 'js' };
-    if (args.path === 'react-native-svg') return { contents: `const React = require('react'); const component = name => props => React.createElement(name, props, props.children); exports.__esModule = true; exports.default = component('Svg'); exports.Path = component('Path'); exports.Rect = component('Rect');`, loader: 'js' };
-    if (args.path.includes('async-storage')) return { contents: `module.exports = globalThis.__pbsStorage;`, loader: 'js' };
-    if (args.path === 'expo-crypto') return { contents: `exports.randomUUID = () => require('node:crypto').randomUUID();`, loader: 'js' };
-    if (args.path === 'expo-localization') return { contents: `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`, loader: 'js' };
-    return { contents: `exports.useFonts = () => [true];`, loader: 'js' };
-  });
-} }] });
-const result = spawnSync(process.execPath, ['--test', ...entries.map(f => join(dir, f.replace(/\.tsx$/, '.cjs')))], { stdio: 'inherit', env: { ...process.env, NODE_PATH: join(process.cwd(), 'node_modules') } });
+const files = readdirSync('test').filter(f => f.endsWith('.render.tsx'));
+for (const file of files) await build({
+  entryPoints: [join('test', file)], outfile: join(dir, file.replace(/\.tsx$/, '.cjs')), bundle: true, platform: 'node', format: 'cjs',
+  define: { __DEV__: 'false' }, packages: 'external', external: ['react', 'react-test-renderer', 'i18n-js'], jsx: 'automatic', logLevel: 'warning',
+  plugins: [{ name: 'native-mocks', setup(b) {
+    b.onResolve({ filter: /\.db$/ }, args => ({ path: args.path.split('/').at(-1), namespace: 'bible-asset' }));
+    b.onLoad({ filter: /.*/, namespace: 'bible-asset' }, args => ({ contents: `module.exports = ${JSON.stringify(args.path)}` }));
+    b.onResolve({ filter: /^(expo-asset|expo-file-system|expo-sqlite|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|expo-crypto|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
+    b.onLoad({ filter: /.*/, namespace: 'mock' }, args => ({
+      contents: MOCKS[args.path] ?? `module.exports = new Proxy({}, { get: (_, key) => key === '__esModule' ? false : String(key) });`,
+      loader: 'js',
+    }));
+  } }],
+});
+const result = spawnSync(process.execPath, ['--test', ...process.argv.slice(2), ...files.map(f => join(dir, f.replace(/\.tsx$/, '.cjs')))], { stdio: 'inherit', env: { ...process.env, NODE_PATH: join(process.cwd(), 'node_modules') } });
 process.exit(result.status ?? 1);

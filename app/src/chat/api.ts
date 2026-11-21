@@ -16,10 +16,20 @@ const saved = async () => JSON.parse((await AsyncStorage.getItem(TOKEN_KEY)) ?? 
 
 /** Her token. After 30 days it is RENEWED for the same install id (her RevenueCat id and her memory
  *  key), never replaced by a new id; a new id is made only for a first chat or a new age band. */
-async function token(age: Age, fetcher: typeof fetch, refresh = false): Promise<string> {
+const tokenRequests = new Map<Age, Promise<string>>();
+
+function token(age: Age, fetcher: typeof fetch, refresh = false): Promise<string> {
+  const pending = tokenRequests.get(age);
+  if (pending) return pending;
+  const request = fetchToken(age, fetcher, refresh).finally(() => tokenRequests.delete(age));
+  tokenRequests.set(age, request);
+  return request;
+}
+
+async function fetchToken(age: Age, fetcher: typeof fetch, refresh: boolean): Promise<string> {
   const old = await saved();
   if (old?.token && old.age === age) {
-    if (!refresh) return old.token;
+    if (!refresh && old.installId) return old.token;
     const res = await fetcher(`${CHAT_API}/token/renew`, { method: 'POST', headers: { authorization: `Bearer ${old.token}` } });
     if (res.ok) {
       const { token: value, installId } = (await res.json()) as { token: string; installId: string };
@@ -35,13 +45,13 @@ async function token(age: Age, fetcher: typeof fetch, refresh = false): Promise<
   }
   if (!res.ok) throw new ChatError(`token ${res.status}`);
   const { token: value, installId } = (await res.json()) as { token: string; installId: string };
-  // installId is the anonymous id RevenueCat should know her by (phase 5: Purchases.logIn(installId)).
   await AsyncStorage.setItem(TOKEN_KEY, JSON.stringify({ token: value, age, installId }));
   return value;
 }
 
-export async function sendChat(settings: Settings, conversation: string, messages: ChatTurn[], fetcher: typeof fetch = fetch): Promise<ChatResponse> {
-  const body = buildChatRequest(settings, conversation, messages);
+/** freeConsent: she said yes on the free-chat screen (free chat goes to a free AI service that may keep it). */
+export async function sendChat(settings: Settings, conversation: string, messages: ChatTurn[], fetcher: typeof fetch = fetch, freeConsent = false): Promise<ChatResponse> {
+  const body = buildChatRequest(settings, conversation, messages, freeConsent);
   if (!body || !settings.age) throw new ChatError('chat closed');
   for (const refresh of [false, true]) {
     const res = await fetcher(`${CHAT_API}/chat`, {
@@ -77,7 +87,11 @@ export async function deleteChatMemory(fetcher: typeof fetch = fetch): Promise<v
   if (body?.deleted !== true) throw new ChatError('memory not confirmed');
 }
 
-/** The anonymous install id from the server, once she has chatted; phase 5 logs RevenueCat in with it. */
-export async function installId(): Promise<string | null> {
-  return (JSON.parse((await AsyncStorage.getItem(TOKEN_KEY)) ?? 'null') as { installId?: string } | null)?.installId ?? null;
+/** Checkout and chat use the same server-issued identity, including when checkout comes first. */
+export async function installId(age?: Age): Promise<string | null> {
+  const existing = await saved();
+  if (!age || age === 'child') return existing?.installId ?? null;
+  if (existing?.age === age && existing.installId) return existing.installId;
+  await token(age, fetch);
+  return (await saved())?.installId ?? null;
 }

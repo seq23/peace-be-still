@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { DatabaseSync } from 'node:sqlite';
 import versions from '../src/bible/data/versions.json';
-import { BOOKS, bookCode, createBible, displayRuns, formatReference, parseReference, startsParagraph, type Translation, type Verse } from '../src/bible/core';
+import { BOOKS, bookCode, createBible, openCurrent, displayRuns, formatReference, parseReference, startsParagraph, type Translation, type Verse } from '../src/bible/core';
 
 // The committed eBible files are the one source; the app's SQLite files must hold them exactly.
 const sources: Record<Translation, string> = { KJV: 'kjv', RV1909: 'rv1909' };
@@ -74,15 +74,44 @@ test('search ignores accents and case and ranks the closest verses first', async
   await assert.doesNotReject(kjv.search('NEAR( OR NOT " ^', 3)); // typed text is never FTS5 syntax
 });
 
-test('without FTS5 (the web build) search finds the same verses by scanning', async () => {
+test('without FTS5 (the web build) search scans text folded once per translation', async () => {
   const { db } = open('RV1909');
+  const calls: string[] = [];
   const bible = createBible({ all: async <T>(sql: string, params: (string | number)[]) => {
+    calls.push(sql);
     if (sql.includes('verses_fts')) throw new Error('no such module: fts5');
     return db.prepare(sql).all(...params) as T[];
   } });
   const found = await bible.search('corazon', 10);
   assert.equal(found.length, 10);
   assert.ok(found.every(v => /corazón/i.test(v.text)));
+  const before = calls.length;
+  const started = performance.now();
+  const again = await bible.search('Senor Jehova', 5);
+  const ms = performance.now() - started;
+  assert.equal(calls.length, before, 'a second search reads nothing from SQLite');
+  assert.ok(again.length === 5 && again.every(v => /señor/i.test(v.text) && /jehová/i.test(v.text)));
+  console.log(`web fallback: second search ${ms.toFixed(1)} ms`);
+});
+
+test('a missing or older device copy is replaced before use; a current one is used as is', async () => {
+  const run = async (start: string | null) => {
+    const steps: string[] = [];
+    let onDisk = start;
+    const db = await openCurrent('2-new', {
+      exists: () => onDisk !== null,
+      install: async () => { steps.push('install'); onDisk = '2-new'; },
+      open: async () => { steps.push('open'); return { version: onDisk }; },
+      version: async db => db.version,
+      close: async () => { steps.push('close'); },
+    });
+    assert.equal(db.version, '2-new');
+    return steps;
+  };
+  assert.deepEqual(await run(null), ['install', 'open']);
+  assert.deepEqual(await run('1-old'), ['open', 'close', 'install', 'open']);
+  assert.deepEqual(await run('2-new'), ['open']);
+  await assert.rejects(openCurrent('2-new', { exists: () => true, install: async () => {}, open: async () => ({}), version: async () => '1-old', close: async () => {} }), /expected 2-new/);
 });
 
 test('every book is found by its English name, Spanish name and USFM code, and no name is shared', () => {

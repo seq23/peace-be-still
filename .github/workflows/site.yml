@@ -44,7 +44,7 @@ jobs:
       - name: Smoke test the live site
         run: |
           sleep 10
-          for u in https://peacebestillapp.com/ https://peacebestillapp.com/es/ https://peacebestillapp.com/privacy https://peacebestillapp.com/terms https://peacebestillapp.com/sitemap.xml https://peacebestillapp.com/questions/ https://peacebestillapp.com/about; do
+          for u in https://peacebestillapp.com/ https://peacebestillapp.com/es/ https://peacebestillapp.com/privacy https://peacebestillapp.com/terms https://peacebestillapp.com/disclaimer https://peacebestillapp.com/es/privacidad https://peacebestillapp.com/es/terminos https://peacebestillapp.com/es/aviso https://peacebestillapp.com/sitemap.xml https://peacebestillapp.com/questions/ https://peacebestillapp.com/about https://peacebestillapp.com/support https://peacebestillapp.com/es/soporte; do
             code=$(curl -s -o /dev/null -w '%{http_code}' "$u"); echo "$code $u"; [ "$code" = 200 ] || exit 1
           done
           loc=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' https://www.peacebestillapp.com/); echo "www: $loc"

@@ -9,7 +9,7 @@ import { call, chat, chatBody, conv, deps, freshIp, good, NOW, scripted, throwin
 
 describe('contract with phase 1', () => {
   it("a request built from the app's Settings gets an answer (door 'faith', not 'gods-word')", async () => {
-    const settings: Settings = { ...initial, door: 'faith', age: 'adult', voice: 'church', journey: 'Hush Harbor' };
+    const settings: Settings = { ...initial, door: 'faith', age: 'adult', voice: 'church', journey: 'hush-harbor' };
     const body = buildChatRequest(settings, conv(), [{ role: 'user', text: 'My mama died last week.' }], true);
     expect(body).not.toBeNull();
     const d = deps({ rungList: [scripted('workers-ai', [good()]).rung] });
@@ -83,7 +83,7 @@ describe('order of checks', () => {
 describe('Mi Refugio', () => {
   it('a Spanish teen in Mi Refugio gets the Spanish teen rules and RV1909 text from the store', async () => {
     const rung = scripted('workers-ai', [{ text: 'Duele mucho, y Dios está cerca. Habla con tu mamá o con un consejero de la escuela. Señor, acompáñanos en este dolor.', references: ['Salmos 34:18'] }]);
-    const settings: Settings = { ...initial, door: 'faith', age: 'teen', voice: 'teen', journey: 'Mi Refugio' };
+    const settings: Settings = { ...initial, door: 'faith', age: 'teen', voice: 'teen', journey: 'mi-refugio' };
     const d = deps({ rungList: [rung.rung] });
     const res = await call(d, '/api/chat', { body: buildChatRequest(settings, conv(), [{ role: 'user', text: 'mi abuela murió' }], true), token: await tokenFor(d, 'teen') });
     const json = (await res.json()) as { kind: string; scripture: Array<{ translation: string; text: string }> };

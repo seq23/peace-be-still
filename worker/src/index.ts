@@ -10,7 +10,7 @@
 // POST /api/token/renew re-signs the SAME install id (paid status and memory follow it).
 import './env';
 import { cleanup } from './cleanup';
-import { addUserSpend, appSpendToday, blockFor, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
+import { addUserSpend, appSpendMonth, blockFor, capAlert, spendStatus, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
 import { bump, logCode, reserve } from './counts';
 import { confirmRisk, detectCrisis, floor, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
@@ -148,7 +148,8 @@ async function check<T>(env: Env, now: number, first: LadderRung, messages: Retu
   // private (paid) model may see them, never a free one.
   const rungs = env.PBS_GEMINI_API_KEY || (env.PAID_PROVIDER && env.PAID_PROVIDER !== 'gemini') ? [first, paidRung(env, now)] : [first];
   const out = await runLadder(env.DB, rungs, messages, schema, maxTokens, metrics, d => ok(read(d)));
-  for (const [metric, n] of metrics) await bump(env.DB, centralDay(now), `${first.id}:${metric}`, n);
+  // A private backup's cost counts toward the app's paid spend like any answer.
+  for (const [metric, n] of metrics) await bump(env.DB, centralDay(now), metric === 'paid_spend_micro' ? metric : `${first.id}:${metric}`, n);
   return 'data' in out ? read(out.data) : down;
 }
 
@@ -211,7 +212,7 @@ function parseChat(body: unknown): ChatRequest | null {
 
 /** Mi Refugio, the Spanish voice or a Spanish phone: Spanish and the Reina-Valera 1909. Teens keep the teen rules in their language. */
 export function voiceFor(req: ChatRequest, install: Install): { lang: Lang; translation: Translation; prompt: PromptId; teen: boolean } {
-  const lang: Lang = req.journey === 'Mi Refugio' || req.voice === 'spanish' || req.language === 'es' ? 'es' : 'en';
+  const lang: Lang = req.journey === 'mi-refugio' || req.journey === 'Mi Refugio' || req.voice === 'spanish' || req.language === 'es' ? 'es' : 'en';
   const teen = install.age === 'teen';
   // The Mindset door keeps its own prompt for teens too (F8: no faith words); the teen rules are added to it.
   const prompt: PromptId = req.door === 'mindset' ? 'mindset' : teen ? (lang === 'es' ? 'teen-es' : 'teen') : lang === 'es' ? 'spanish' : req.voice === 'church' ? 'church' : 'plain';
@@ -329,13 +330,15 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const lane: Lane = paid.paid || crisisToday || turns.some(t => t.text === CRISIS_NOTE) ? 'paid' : 'free';
   if (lane === 'free' && req.freeConsent !== true) { tally(metrics, 'consent_needed'); return fixedReply('consent', consentText[v.lang]); }
   if (lane === 'paid') {
-    // The app's paid spend today, then hers this month (controls.ts); past either, the fair-use pause,
-    // never the free lane.
-    const appMicro = await appSpendToday(env.DB, day);
-    if (appMicro >= usd(env.CHAT_PAID_DAILY_USD, 50) * 1e6) {
-      tally(metrics, 'paid_ceiling'); logCode('CHAT_PAID_CEILING', { micro: appMicro });
-      return fixedReply('fair_use', fairUseText(v.lang, centralDay(now + 24 * 3600_000)));
+    // The app's paid-route spend this calendar month (CT), then hers (controls.ts); past either, the
+    // fair-use pause, never the free lane. The owner hears at 80% and at the cap, once each.
+    const capUsd = usd(env.PAID_AI_MONTHLY_CAP_USD, 100);
+    const appMicro = await appSpendMonth(env.DB, now);
+    if (appMicro >= capUsd * 1e6) {
+      tally(metrics, 'paid_cap'); await capAlert(env.DB, now, 100, appMicro, capUsd);
+      return fixedReply('fair_use', fairUseText(v.lang, resetsOn(now)));
     }
+    if (appMicro >= 0.8 * capUsd * 1e6) await capAlert(env.DB, now, 80, appMicro, capUsd);
     if (paid.paid && (await userSpend(env.DB, who.installId, now)) >= userCeilingUsd(env, paid.paidUntil, now) * 1e6) {
       tally(metrics, 'user_ceiling'); logCode('CHAT_USER_CEILING');
       return fixedReply('fair_use', fairUseText(v.lang, resetsOn(now)));
@@ -507,11 +510,20 @@ async function remember(env: Env, rungs: LadderRung[], a: { installId: string; d
  * pauses chat on it (no hours: until lifted), DELETE {installId} lifts it. Bearer CHAT_ADMIN_TOKEN;
  * without that secret the route is the named stop CHAT_ADMIN_TOKEN_MISSING.
  */
-async function adminBlock(request: Request, env: Env, deps: Deps): Promise<Response> {
+function adminAuth(request: Request, env: Env): Response | null {
   if (!env.CHAT_ADMIN_TOKEN) return fail('CHAT_ADMIN_TOKEN_MISSING', 503);
   const given = new TextEncoder().encode(request.headers.get('authorization') ?? '');
   const want = new TextEncoder().encode(`Bearer ${env.CHAT_ADMIN_TOKEN}`);
   if (given.byteLength !== want.byteLength || !crypto.subtle.timingSafeEqual(given, want)) return json({ error: 'UNAUTHORIZED' }, 401);
+  return null;
+}
+/** The paid-route spend this month against PAID_AI_MONTHLY_CAP_USD, and which alerts fired (80, 100). */
+async function adminSpend(request: Request, env: Env, deps: Deps): Promise<Response> {
+  return adminAuth(request, env) ?? json(await spendStatus(env.DB, deps.now(), usd(env.PAID_AI_MONTHLY_CAP_USD, 100)));
+}
+async function adminBlock(request: Request, env: Env, deps: Deps): Promise<Response> {
+  const denied = adminAuth(request, env);
+  if (denied) return denied;
   const b = (await request.json().catch(() => null)) as { installId?: unknown; reason?: unknown; hours?: unknown } | null;
   if (!b || typeof b.installId !== 'string' || !UUID.test(b.installId)) return fail('BAD_REQUEST', 400);
   const now = deps.now();
@@ -552,6 +564,7 @@ export function createApp(deps: Deps = realDeps) {
         if (pathname === '/api/chat' && request.method === 'POST') return await chat(request, env, ctx, deps);
         if (pathname === '/api/report' && request.method === 'POST') return await report(request, env, deps);
         if (pathname === '/api/admin/chat-block' && (request.method === 'POST' || request.method === 'DELETE')) return await adminBlock(request, env, deps);
+        if (pathname === '/api/admin/spend' && request.method === 'GET') return await adminSpend(request, env, deps);
         if (pathname === '/api/memory' && request.method === 'DELETE') {
           // An expired token still deletes: her memory must go whenever she asks, not only within 30 days.
           const who = await install(request, env, deps.now(), RENEW_GRACE_DAYS);

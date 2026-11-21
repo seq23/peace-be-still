@@ -16,12 +16,27 @@ export function moveBundledAssets(directory) {
   return changed;
 }
 
+// The four faces the app loads (app/_layout.tsx). Preloading them from index.html lets the phone fetch them
+// alongside the JS bundle instead of after it, so a slow phone draws the first screen sooner. Returns the count.
+export const FONTS = ['Figtree_400Regular', 'Figtree_600SemiBold', 'LibreCaslonText_400Regular', 'SplineSansMono_500Medium'];
+export function preloadFonts(directory) {
+  const found = [];
+  const walk = (dir) => { for (const name of readdirSync(dir)) { const path = join(dir, name); if (statSync(path).isDirectory()) walk(path); else if (/\.ttf$/.test(name) && FONTS.some(font => name.startsWith(font + '.'))) found.push(path.slice(resolve(directory).length).split('\\').join('/')); } };
+  walk(resolve(directory, 'assets'));
+  const index = resolve(directory, 'index.html');
+  const html = readFileSync(index, 'utf8');
+  const links = found.filter(href => !html.includes(`href="${href}"`)).map(href => `<link rel="preload" href="${href}" as="font" type="font/ttf" crossorigin>`).join('');
+  writeFileSync(index, html.replace('</head>', `${links}</head>`));
+  return found.length;
+}
+
 export function publish({ project, branch, directory = 'dist', env = process.env, run = spawnSync }) {
   const stop = () => { throw new Error('NAMED STOP [PREVIEW_HOST_FAILED]'); };
   if (!env.CLOUDFLARE_API_TOKEN || !env.CLOUDFLARE_ACCOUNT_ID || !branch || !existsSync(resolve(directory, 'index.html'))) stop();
   moveBundledAssets(directory);
+  if (preloadFonts(directory) < FONTS.length) stop();
   // The two cross-origin headers let SQLite (the Bible) run in the browser.
-  writeFileSync(resolve(directory, '_headers'), '/*\n  X-Robots-Tag: noindex, nofollow, noarchive\n  Cross-Origin-Embedder-Policy: credentialless\n  Cross-Origin-Opener-Policy: same-origin\n');
+  writeFileSync(resolve(directory, '_headers'), '/*\n  X-Robots-Tag: noindex, nofollow, noarchive\n  Cross-Origin-Embedder-Policy: require-corp\n  Cross-Origin-Opener-Policy: same-origin\n  Cross-Origin-Resource-Policy: same-origin\n');
   writeFileSync(resolve(directory, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
   const invoke = (args) => run('npx', ['--yes', 'wrangler@4.110.0', 'pages', ...args], { env: { ...env, NO_COLOR: '1' }, encoding: 'utf8', timeout: 120000 });
   const list = invoke(['project', 'list', '--json']);

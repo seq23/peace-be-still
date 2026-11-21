@@ -105,17 +105,45 @@ export function ftsQuery(query: string): string | null {
 
 const columns = 'v.book, v.chapter, v.verse, v.text';
 
+/** What opening a bundled translation needs: the copy on the device, and the bundled file. */
+export interface Installed<D> {
+  /** The device copy exists. */
+  exists(): boolean;
+  /** Copy the bundled file over the device copy. */
+  install(): Promise<void>;
+  open(): Promise<D>;
+  /** meta.version of an open copy, or null when it cannot be read. */
+  version(db: D): Promise<string | null>;
+  close(db: D): Promise<void>;
+}
+
+/** Open the device copy, replacing it first when it is missing or older than the bundled file. */
+export async function openCurrent<D>(wanted: string, file: Installed<D>): Promise<D> {
+  if (!file.exists()) await file.install();
+  const db = await file.open();
+  if ((await file.version(db)) === wanted) return db;
+  await file.close(db);
+  await file.install();
+  const fresh = await file.open();
+  const version = await file.version(fresh);
+  if (version !== wanted) throw new Error(`Bible file is version ${version}, expected ${wanted}`);
+  return fresh;
+}
+
 export function createBible(driver: Driver) {
   // The web build of SQLite has no FTS5 (the web preview only); there search scans the folded text.
+  // The rows are read and folded once per translation, so later searches only filter memory.
   let hasFts: Promise<boolean> | undefined;
   const fts = () => (hasFts ??= driver.all('SELECT rowid FROM verses_fts LIMIT 0', []).then(() => true, () => false));
+  let folded: Promise<{ verse: Verse; text: string }[]> | undefined;
+  const foldedRows = () => (folded ??= driver.all<Verse>(`SELECT ${columns} FROM verses v ORDER BY v.id`, [])
+    .then(rows => rows.map(verse => ({ verse, text: ` ${fold(verse.text)} ` }))));
   async function scan(query: string, limit: number): Promise<Verse[]> {
     const words = fold(query).split(' ').filter(Boolean);
-    const rows = await driver.all<Verse>(`SELECT ${columns} FROM verses v ORDER BY v.id`, []);
+    const needles = words.map((word, i) => (i === words.length - 1 ? ` ${word}` : ` ${word} `));
     const found: Verse[] = [];
-    for (const row of rows) {
-      const text = ` ${fold(row.text)} `;
-      if (words.every((word, i) => text.includes(i === words.length - 1 ? ` ${word}` : ` ${word} `))) found.push(row);
+    for (const row of await foldedRows()) {
+      if (needles.every(needle => row.text.includes(needle))) found.push(row.verse);
       if (found.length === limit) break;
     }
     return found;

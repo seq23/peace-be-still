@@ -4,6 +4,7 @@
 // structure here: counts, keyed hashes and money, never what she wrote.
 import { fold } from './shared';
 import { logCode } from './counts';
+import { centralDay } from './day';
 
 const HOUR = 3600_000;
 export const PAUSE_HOURS = 24;
@@ -58,11 +59,12 @@ export async function throttle(db: D1Database, secret: string, day: string, inst
 export function microCost(tokens: { in: number; out: number; think: number }, priceIn: number, priceOut: number): number {
   return Math.ceil(tokens.in * priceIn + (tokens.out + tokens.think) * priceOut);
 }
-export const monthOf = (now: number) => new Date(now).toISOString().slice(0, 7);
-/** The first day of next month (UTC), when a month's meter resets. */
+/** The month in Central time (YYYY-MM): both meters run on calendar months, CT. */
+export const monthOf = (now: number) => centralDay(now).slice(0, 7);
+/** The first day of next month (CT), when a month's meters reset. */
 export function resetsOn(now: number): string {
-  const d = new Date(now);
-  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1)).toISOString().slice(0, 10);
+  const [y, m] = monthOf(now).split('-').map(Number);
+  return m === 12 ? `${y + 1}-01-01` : `${y}-${String(m + 1).padStart(2, '0')}-01`;
 }
 export async function userSpend(db: D1Database, installId: string, now: number): Promise<number> {
   return (await db.prepare('SELECT micro FROM chat_paid_spend WHERE install_id = ? AND month = ?').bind(installId, monthOf(now)).first<{ micro: number }>())?.micro ?? 0;
@@ -72,9 +74,25 @@ export async function addUserSpend(db: D1Database, installId: string, micro: num
   await db.prepare('INSERT INTO chat_paid_spend VALUES (?, ?, ?, ?) ON CONFLICT(install_id, month) DO UPDATE SET micro = micro + excluded.micro, paid_until = excluded.paid_until')
     .bind(installId, monthOf(now), micro, paidUntil ?? now + 365 * 24 * HOUR).run();
 }
-/** The app's paid spend today, from the day's counters (metric paid_spend_micro). */
-export async function appSpendToday(db: D1Database, day: string): Promise<number> {
-  return (await db.prepare("SELECT n FROM chat_counts WHERE day = ? AND metric = 'paid_spend_micro'").bind(day).first<{ n: number }>())?.n ?? 0;
+/** The app's paid-route spend this month (CT), from the day counters (metric paid_spend_micro), crisis follow-ups included. */
+export async function appSpendMonth(db: D1Database, now: number): Promise<number> {
+  return (await db.prepare("SELECT COALESCE(SUM(n), 0) AS n FROM chat_counts WHERE metric = 'paid_spend_micro' AND day LIKE ?").bind(`${monthOf(now)}-%`).first<{ n: number }>())?.n ?? 0;
+}
+/**
+ * The owner's alerts on the monthly cap, each once a month: at 80% (CHAT_PAID_CAP_80) and at the cap
+ * (the named stop CHAT_PAID_MONTHLY_CAP). Recorded in chat_counts under the month (day = YYYY-MM) and
+ * shown by GET /api/admin/spend, so a reader of either sees it.
+ */
+export async function capAlert(db: D1Database, now: number, level: 80 | 100, micro: number, capUsd: number): Promise<boolean> {
+  const metric = `paid_cap_alert:${level}`;
+  const fresh = (await db.prepare('INSERT INTO chat_counts (day, metric, n) VALUES (?, ?, 1) ON CONFLICT(day, metric) DO NOTHING').bind(monthOf(now), metric).run()).meta.changes === 1;
+  if (fresh) logCode(level === 100 ? 'NAMED STOP CHAT_PAID_MONTHLY_CAP' : 'CHAT_PAID_CAP_80', { spentUsd: Math.round(micro / 1e4) / 100, capUsd, month: monthOf(now) });
+  return fresh;
+}
+export async function spendStatus(db: D1Database, now: number, capUsd: number) {
+  const micro = await appSpendMonth(db, now);
+  const alerts = (await db.prepare("SELECT metric FROM chat_counts WHERE day = ? AND metric LIKE 'paid_cap_alert:%'").bind(monthOf(now)).all<{ metric: string }>()).results.map(r => r.metric.split(':')[1]);
+  return { month: monthOf(now), spentUsd: micro / 1e6, capUsd, resetsOn: resetsOn(now), alerts };
 }
 /** A yearly (or lifetime) plan nets less per month than a monthly one, so its ceiling is lower. */
 export function userCeilingUsd(env: { CHAT_USER_MONTHLY_USD_YEARLY?: string; CHAT_USER_MONTHLY_USD_MONTHLY?: string }, paidUntil: number | null, now: number): number {

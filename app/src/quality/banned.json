@@ -21,10 +21,12 @@
     "higher self",
     "the source",
     "align",
-    "visuali[sz](?:e|es|ed|ing|ation)",
+    "attract",
+    "visualize",
     "urban",
     "speak life",
     "black[\\W_]*bible[\\W_]*stories",
+    "visuali[sz](?:e|es|ed|ing|ation)",
     "visualizar",
     "feel it real",
     "attract(?:ion|ing)?",
@@ -45,7 +47,10 @@
     "urban",
     "sparkles?",
     "space",
-    "journey"
+    "journey awaits",
+    "explore (?:the |our )?journeys",
+    "begin your journey",
+    "on your journey"
   ],
   "profanity": [
     "fuck\\w*",

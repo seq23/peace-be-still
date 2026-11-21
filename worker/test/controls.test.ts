@@ -94,15 +94,44 @@ describe('the paid lane', () => {
     expect(answerText(r)).toBe("You've reached this month's chat limit; it resets on December 1.");
     expect(paid.calls.length + free.calls.length).toBe(0);
   });
-  it('past the app-wide daily ceiling (CHAT_PAID_DAILY_USD, $50): the fair-use pause and the named stop CHAT_PAID_CEILING', async () => {
+  // PAID_AI_MONTHLY_CAP_USD ($100 a calendar month, CT), counted from every paid-route call this month.
+  const spend = async (micro: number) => {
+    await env.DB.prepare("DELETE FROM chat_counts WHERE metric = 'paid_spend_micro' OR metric LIKE 'paid_cap_alert:%'").run();
+    if (micro) await env.DB.prepare("INSERT INTO chat_counts VALUES ('2026-11-03', 'paid_spend_micro', ?)").bind(micro).run();
+  };
+  it('past the monthly cap: every paid chat gets the fair-use pause until the 1st, and the named stop fires once', async () => {
     const log = vi.spyOn(console, 'log');
-    await env.DB.prepare("INSERT INTO chat_counts VALUES (?, 'paid_spend_micro', ?) ON CONFLICT(day, metric) DO UPDATE SET n = excluded.n").bind(centralDay(NOW), 50_000_000).run();
+    await spend(100_000_000);
     const paid = scripted('gemini-paid', [good()]);
-    const r = await chat(deps({ paidNow: true, rungs: () => [paid.rung] }), 'How do I forgive my sister?');
-    await env.DB.prepare("DELETE FROM chat_counts WHERE metric = 'paid_spend_micro'").run();
+    const d = deps({ paidNow: true, rungs: () => [paid.rung] });
+    const r = await chat(d, 'How do I forgive my sister?');
+    await chat(d, 'How do I forgive my brother?');
     expect(r.body.kind).toBe('fair_use');
+    expect(answerText(r)).toBe("You've reached this month's chat limit; it resets on December 1.");
     expect(paid.calls.length).toBe(0);
-    expect(log.mock.calls.flat().join(' ')).toContain('CHAT_PAID_CEILING');
+    expect(log.mock.calls.flat().join(' ').match(/NAMED STOP CHAT_PAID_MONTHLY_CAP/g)?.length).toBe(1);
+    await spend(0);
+  });
+  it('at 80% of the cap the owner is alerted once, and chat still answers', async () => {
+    const log = vi.spyOn(console, 'log');
+    await spend(80_000_000);
+    const paid = scripted('gemini-paid', [good()]);
+    const d = deps({ paidNow: true, rungs: () => [paid.rung] });
+    expect((await chat(d, 'How do I forgive my sister?')).body.kind).toBe('answer');
+    await chat(d, 'How do I forgive my brother?');
+    expect(log.mock.calls.flat().join(' ').match(/CHAT_PAID_CAP_80/g)?.length).toBe(1);
+    const res = await call(d, '/api/admin/spend', { method: 'GET', token: undefined });
+    expect(res.status).toBe(401);
+    await spend(0);
+  });
+  it('past the cap, a crisis message still gets the crisis card and its hotline (fixed text, no model)', async () => {
+    await spend(150_000_000);
+    const paid = scripted('gemini-paid', [good()]);
+    const r = await chat(deps({ paidNow: true, rungs: () => [paid.rung] }), 'I want to kill myself');
+    expect(r.body.kind).toBe('crisis');
+    expect(answerText(r)).toContain('988');
+    expect(paid.calls.length).toBe(0);
+    await spend(0);
   });
   it('token savers: the answer call is capped at ANSWER_MAX_TOKENS and only the last CHAT_HISTORY_TURNS turns travel', async () => {
     const sent: Array<{ n: number; max: number }> = [];
