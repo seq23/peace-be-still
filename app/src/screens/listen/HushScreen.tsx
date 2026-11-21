@@ -1,8 +1,8 @@
 // The small-hours screen for "3 AM, back to sleep" (the rule is in hush.ts): night, one large calm button, one quiet
 // line, and a way back to the usual screen. Nothing else bright or busy.
-import { useRouter } from 'expo-router';
+import { useIsFocused, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { AppState, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { formatReference, parseReference } from '../../bible/core';
 import { clock, inSmallHours } from '../../clock';
@@ -10,12 +10,17 @@ import { trackTitle, type Track } from '../../player/library';
 import { useT } from '../../settings';
 import { fonts, night } from '../../theme/tokens';
 
-/** Whether it is the small hours now, checked again every minute so the button comes and goes on its own. */
+/**
+ * Whether it is the small hours now, read again whenever the tab comes into view or the app comes back to the
+ * front (waking the phone at 3 AM), so the button comes and goes without a timer running all night.
+ */
 export function useSmallHours(): boolean {
+  const focused = useIsFocused();
   const [small, setSmall] = useState(() => inSmallHours(clock.now()));
+  useEffect(() => { if (focused) setSmall(inSmallHours(clock.now())); }, [focused]);
   useEffect(() => {
-    const tick = setInterval(() => setSmall(inSmallHours(clock.now())), 60_000);
-    return () => clearInterval(tick);
+    const subscription = AppState.addEventListener('change', next => { if (next === 'active') setSmall(inSmallHours(clock.now())); });
+    return () => subscription.remove();
   }, []);
   return small;
 }

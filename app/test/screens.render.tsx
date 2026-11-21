@@ -1971,7 +1971,7 @@ test('3 AM: Nights and Today are one calm button on night; 10 PM and 6 AM never 
       await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
       try {
         // Only the button, its one line and the way back: no shelves, cards, week dots or bright surface.
-        assert.deepEqual(texts(tree), [en['hush.label'], en['hush.play'], i18n.t('hush.detail', { locale: 'en', minutes: 6, ref: 'Psalm 4:8' }), en['hush.showAll']], name);
+        assert.deepEqual(texts(tree), [en['hush.label'], en['hush.play'], i18n.t('hush.detail', { locale: 'en', minutes: 6, ref: formatReference(parseReference('PSA 4:8')!, 'en') }), en['hush.showAll']], name);
         assert.equal(screenBg(tree), '#0E1A22', name);
         assert.equal(host(tree, 'Pressable').length, 2, name);
         await press(tree, en['hush.play']);
@@ -2053,8 +2053,8 @@ test('For when you\'ve lost someone: free stored verses and gentle lines, a past
     try {
       const shown = texts(tree);
       for (const line of lines) assert.ok(shown.includes(line.declaration), line.declaration);
-      // Every verse is the stored KJV, by reference (Psalm 34:18 first).
-      assert.ok(texts(tree).some(text => text.includes(storedVerse('PSA', 34, 18))), strings(tree));
+      // Every verse is the stored KJV, read by reference (Ecclesiastes 3:4 has no supplied words in italics).
+      assert.ok(texts(tree).includes(storedVerse('ECC', 3, 4)), strings(tree));
       assert.ok(shown.includes(en['grief.help.people']) && shown.includes(en['grief.help.crisis']));
       assert.ok(!shown.includes(en['grief.nights']) && !strings(tree).includes(trackTitle(voiced, 'en')), 'a voiced but unpublished night is not shown');
       assert.deepEqual(faithContentIssues(strings(tree)), []);
