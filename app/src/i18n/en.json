@@ -312,5 +312,20 @@
   "daily.verseUnavailable": "This verse could not be loaded.",
   "error.crash.title": "Something went wrong.",
   "error.crash.body": "Tap Try again. If it keeps happening, close Peace Be Still and open it again. Your saved verses and journal are still on this phone.",
-  "error.crash.retry": "Try again ›"
+  "error.crash.retry": "Try again ›",
+  "reminder.title": "Peace Be Still",
+  "reminder.body": "A quiet moment is here when you want it.",
+  "reminder.offer.label": "A gentle reminder",
+  "reminder.offer.title": "Would a quiet nudge each evening help?",
+  "reminder.offer.body": "One reminder a day at most, at %{time}. You can change the time or turn it off in Settings.",
+  "reminder.offer.yes": "Turn on the reminder",
+  "reminder.offer.notNow": "Not now",
+  "reminder.settings.title": "Daily reminder",
+  "reminder.settings.on": "One a day at %{time}.",
+  "reminder.settings.off": "Off. Nothing is sent.",
+  "reminder.settings.time": "Time",
+  "reminder.settings.earlier": "Earlier",
+  "reminder.settings.later": "Later",
+  "reminder.settings.denied": "Notifications for Peace Be Still are off in your phone's Settings. If you want the reminder, turn them on there.",
+  "reminder.settings.openPhone": "Open phone Settings"
 }
