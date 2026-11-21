@@ -9,7 +9,7 @@ import { trackBelongsToDoor } from '../../src/screens/listen/catalog';
 
 export default function Listen() {
   const { settings } = useSettings();
-  const { track: id } = useLocalSearchParams<{ track: string }>();
+  const { track: id, play } = useLocalSearchParams<{ track: string; play?: string }>();
   const router = useRouter();
   const t = useT('journey');
   if (!onboarded(settings)) return <Redirect href={startRoute(settings)} />;
@@ -19,5 +19,5 @@ export default function Listen() {
     else router.replace('/nights');
   }
   if (!track) return <Screen><BackLink onPress={close}>{t('common.back')}</BackLink><Body>{t('listen.emptyShelf')}</Body></Screen>;
-  return <NowPlaying key={track.file} track={track} close={close} />;
+  return <NowPlaying key={track.file} track={track} close={close} autoplay={play === '1'} />;
 }

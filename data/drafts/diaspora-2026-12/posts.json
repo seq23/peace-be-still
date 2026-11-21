@@ -1,0 +1,1614 @@
+{
+  "_comment": "DRAFTS ONLY, not in any posting bank: nothing here is scheduled or posted. 4-week starter calendar for Korean American and African diaspora Christians (21 Nov 2026). Verse text comes from the stored KJV. Pictures: npm run ig:render -- --bank data/drafts/diaspora-2026-12/posts.json --out data/drafts/diaspora-2026-12/cards. See CALENDAR.md.",
+  "status": "draft-awaiting-owner-yes",
+  "posts": [
+    {
+      "id": "af01",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-07",
+      "day": "Mon",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Monday declaration",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Monday declaration",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Say it over your week."
+            },
+            {
+              "verse": "PSA 118:17",
+              "size": 58,
+              "em": "I shall not die, but live"
+            }
+          ]
+        }
+      ],
+      "caption": "Say it over your week.\n\n“I shall not die, but live, and declare the works of the LORD.”\nPsalm 118:17 (KJV)\n\nMonday morning. Before the emails, before the commute, before the group chat: one verse, said out loud.\n\n#prayerpoints #declarations #morningprayer #kjv",
+      "threads": "Say it over your week.\n\n“I shall not die, but live, and declare the works of the LORD.”\nPsalm 118:17 (KJV)\n\nMonday morning. Before the emails, before the commute, before the group chat: one verse, said out loud.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Monday declaration\n\n“I shall not die, but live, and declare the works of the LORD.”\nPsalm 118:17 (KJV)\n\nSay it over your week.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Monday declaration",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Say it over your week."
+              },
+              {
+                "verse": "PSA 118:17",
+                "size": 58,
+                "em": "I shall not die, but live"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko01",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-07",
+      "day": "Mon",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "오늘 아침 첫마디",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "오늘 아침 첫마디",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "kicker": "오늘 아침, 주님께 드릴 첫마디는 무엇인가요?"
+            },
+            {
+              "verse": "PSA 5:3",
+              "size": 58,
+              "em": "in the morning will I direct my prayer unto thee"
+            }
+          ]
+        }
+      ],
+      "caption": "오늘 아침, 주님께 드릴 첫마디는 무엇인가요?\n\n“My voice shalt thou hear in the morning, O LORD; in the morning will I direct my prayer unto thee, and will look up.”\n시편 5:3 (KJV)\n\n시편 5편 3절로 하루를 열어요. 영어 흠정역(KJV) 본문이에요. 가지고 계신 성경으로 같은 구절을 함께 펴 보세요.\n\nPeace Be Still 앱은 지금 영어로 되어 있어요. 한국어 새벽기도 여정은 2027년 1월을 목표로 준비 중이에요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "오늘 아침, 주님께 드릴 첫마디는 무엇인가요?\n\n“My voice shalt thou hear in the morning, O LORD; in the morning will I direct my prayer unto thee, and will look up.”\n시편 5:3 (KJV)\n\n시편 5편 3절로 하루를 열어요. 영어 흠정역(KJV) 본문이에요. 가지고 계신 성경으로 같은 구절을 함께 펴 보세요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "오늘 아침, 주님께 드릴 첫마디는 무엇인가요?\n시편 5:3 · 오늘 새벽 함께 기도해요\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "night",
+            "label": "오늘 아침 첫마디",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "kicker": "오늘 아침, 주님께 드릴 첫마디는 무엇인가요?"
+              },
+              {
+                "verse": "PSA 5:3",
+                "size": 58,
+                "em": "in the morning will I direct my prayer unto thee"
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af02",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-09",
+      "day": "Wed",
+      "slot_ct": "19:00",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Prayer points · family",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Prayer points · family",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Pray for your household by name tonight."
+            },
+            {
+              "verse": "JOS 24:15",
+              "size": 46,
+              "em": "as for me and my house, we will serve the LORD"
+            }
+          ]
+        }
+      ],
+      "caption": "Pray for your household by name tonight.\n\n“And if it seem evil unto you to serve the LORD, choose you this day whom ye will serve; whether the gods which your fathers served that were on the other side of the flood, or the gods of the Amorites, in whose land ye dwell: but as for me and my house, we will serve the LORD.”\nJoshua 24:15 (KJV)\n\nPrayer point for tonight: your household, here and back home, one name at a time. Who are you praying for? Drop a name (or an initial) below and we will pray with you.\n\n#prayerpoints #familyprayer #christianfamily #kjv",
+      "threads": "Pray for your household by name tonight.\n\n“And if it seem evil unto you to serve the LORD, choose you this day whom ye will serve; whether the gods which your fathers served that were on the other side of the flood, or the gods of the Amorites, in whose land ye dwell: but as for me and my house, we will serve the LORD.”\nJoshua 24:15 (KJV)\n\nPrayer point for tonight: your household, here and back home, one name at a time. Who are you praying for? Drop a name (or an initial) below and we will pray with you.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Prayer points · family\n\n“And if it seem evil unto you to serve the LORD, choose you this day whom ye will serve; whether the gods which your fathers served that were on the other side of the flood, or the gods of the Amorites, in whose land ye dwell: but as for me and my house, we will serve the LORD.”\nJoshua 24:15 (KJV)\n\nPray for your household by name tonight.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Prayer points · family",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Pray for your household by name tonight."
+              },
+              {
+                "verse": "JOS 24:15",
+                "size": 46,
+                "em": "as for me and my house, we will serve the LORD"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko02",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-09",
+      "day": "Wed",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "예수님의 새벽",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "예수님의 새벽",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "kicker": "예수님도 날이 밝기 전에 한적한 곳에서 기도하셨어요."
+            },
+            {
+              "verse": "MAR 1:35",
+              "size": 58,
+              "em": "rising up a great while before day"
+            }
+          ]
+        }
+      ],
+      "caption": "예수님도 날이 밝기 전에 한적한 곳에서 기도하셨어요.\n\n“And in the morning, rising up a great while before day, he went out, and departed into a solitary place, and there prayed.”\n마가복음 1:35 (KJV)\n\n교회에 갈 수 없는 아침이라면, 식탁이 오늘의 한적한 곳이 될 수 있어요.\n\nPeace Be Still 앱은 지금 영어로 되어 있어요. 한국어 새벽기도 여정은 2027년 1월을 목표로 준비 중이에요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "예수님도 날이 밝기 전에 한적한 곳에서 기도하셨어요.\n\n“And in the morning, rising up a great while before day, he went out, and departed into a solitary place, and there prayed.”\n마가복음 1:35 (KJV)\n\n교회에 갈 수 없는 아침이라면, 식탁이 오늘의 한적한 곳이 될 수 있어요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "예수님도 날이 밝기 전에 한적한 곳에서 기도하셨어요.\n마가복음 1:35 · 오늘 새벽 함께 기도해요\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "night",
+            "label": "예수님의 새벽",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "kicker": "예수님도 날이 밝기 전에 한적한 곳에서 기도하셨어요."
+              },
+              {
+                "verse": "MAR 1:35",
+                "size": 58,
+                "em": "rising up a great while before day"
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af03",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-11",
+      "day": "Fri",
+      "slot_ct": "21:00",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Friday vigil",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Friday vigil",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Midnight is for praise."
+            },
+            {
+              "verse": "ACT 16:25",
+              "size": 58,
+              "em": "at midnight Paul and Silas prayed, and sang praises"
+            }
+          ]
+        }
+      ],
+      "caption": "Midnight is for praise.\n\n“And at midnight Paul and Silas prayed, and sang praises unto God: and the prisoners heard them.”\nActs 16:25 (KJV)\n\nKeeping vigil tonight, at church, at home or on the prayer line? Paul and Silas prayed and sang at midnight, in a prison. Start tonight with praise before petition.\n\n#prayerpoints #nightvigil #midnightprayer #kjv",
+      "threads": "Midnight is for praise.\n\n“And at midnight Paul and Silas prayed, and sang praises unto God: and the prisoners heard them.”\nActs 16:25 (KJV)\n\nKeeping vigil tonight, at church, at home or on the prayer line? Paul and Silas prayed and sang at midnight, in a prison. Start tonight with praise before petition.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Friday vigil\n\n“And at midnight Paul and Silas prayed, and sang praises unto God: and the prisoners heard them.”\nActs 16:25 (KJV)\n\nMidnight is for praise.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Friday vigil",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Midnight is for praise."
+              },
+              {
+                "verse": "ACT 16:25",
+                "size": 58,
+                "em": "at midnight Paul and Silas prayed, and sang praises"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko03",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-11",
+      "day": "Fri",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "About",
+      "title": "집에서 드리는 새벽기도",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "집에서 드리는 새벽기도",
+          "wave": false,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "say": "교회에 못 가는 아침, 20분이면 충분해요.",
+              "size": 60
+            },
+            {
+              "list": [
+                "찬송 3분",
+                "말씀 5분",
+                "감사 2분",
+                "중보기도 5분",
+                "오늘을 맡기는 기도 5분"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "교회에 못 가는 아침, 20분이면 충분해요.\n\n찬송 3분, 말씀 5분, 감사 2분, 중보기도 5분, 오늘을 맡기는 기도 5분. 전날 밤에 읽을 곳을 정해 두면 아침이 훨씬 편해요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "교회에 못 가는 아침, 20분이면 충분해요.\n\n찬송 3분, 말씀 5분, 감사 2분, 중보기도 5분, 오늘을 맡기는 기도 5분. 전날 밤에 읽을 곳을 정해 두면 아침이 훨씬 편해요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "교회에 못 가는 아침, 20분이면 충분해요.\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "linen",
+            "label": "집에서 드리는 새벽기도",
+            "wave": false,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "say": "교회에 못 가는 아침, 20분이면 충분해요.",
+                "size": 60
+              },
+              {
+                "list": [
+                  "찬송 3분",
+                  "말씀 5분",
+                  "감사 2분",
+                  "중보기도 5분",
+                  "오늘을 맡기는 기도 5분"
+                ]
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af04",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-14",
+      "day": "Mon",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Monday declaration",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Monday declaration",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Stand on it this week."
+            },
+            {
+              "verse": "ISA 54:17",
+              "size": 46,
+              "em": "No weapon that is formed against thee shall prosper"
+            }
+          ]
+        }
+      ],
+      "caption": "Stand on it this week.\n\n“No weapon that is formed against thee shall prosper; and every tongue that shall rise against thee in judgment thou shalt condemn. This is the heritage of the servants of the LORD, and their righteousness is of me, saith the LORD.”\nIsaiah 54:17 (KJV)\n\nA verse many of us learned in Sunday school back home and still say before a hard week. Isaiah 54:17, King James.\n\n#prayerpoints #declarations #morningprayer #kjv",
+      "threads": "Stand on it this week.\n\n“No weapon that is formed against thee shall prosper; and every tongue that shall rise against thee in judgment thou shalt condemn. This is the heritage of the servants of the LORD, and their righteousness is of me, saith the LORD.”\nIsaiah 54:17 (KJV)\n\nA verse many of us learned in Sunday school back home and still say before a hard week. Isaiah 54:17, King James.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Monday declaration\n\n“No weapon that is formed against thee shall prosper; and every tongue that shall rise against thee in judgment thou shalt condemn. This is the heritage of the servants of the LORD, and their righteousness is of me, saith the LORD.”\nIsaiah 54:17 (KJV)\n\nStand on it this week.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Monday declaration",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Stand on it this week."
+              },
+              {
+                "verse": "ISA 54:17",
+                "size": 46,
+                "em": "No weapon that is formed against thee shall prosper"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko04",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-14",
+      "day": "Mon",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "기다림",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "기다림",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "kicker": "파수꾼이 아침을 기다리는 것보다 더."
+            },
+            {
+              "verse": "PSA 130:6",
+              "size": 58,
+              "em": "more than they that watch for the morning"
+            }
+          ]
+        }
+      ],
+      "caption": "파수꾼이 아침을 기다리는 것보다 더.\n\n“My soul waiteth for the Lord more than they that watch for the morning: I say, more than they that watch for the morning.”\n시편 130:6 (KJV)\n\n기다리는 기도 제목이 있으신가요? 오늘 아침 그 이름을 한 번 더 불러 드려요.\n\nPeace Be Still 앱은 지금 영어로 되어 있어요. 한국어 새벽기도 여정은 2027년 1월을 목표로 준비 중이에요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "파수꾼이 아침을 기다리는 것보다 더.\n\n“My soul waiteth for the Lord more than they that watch for the morning: I say, more than they that watch for the morning.”\n시편 130:6 (KJV)\n\n기다리는 기도 제목이 있으신가요? 오늘 아침 그 이름을 한 번 더 불러 드려요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "파수꾼이 아침을 기다리는 것보다 더.\n시편 130:6 · 오늘 새벽 함께 기도해요\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "night",
+            "label": "기다림",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "kicker": "파수꾼이 아침을 기다리는 것보다 더."
+              },
+              {
+                "verse": "PSA 130:6",
+                "size": 58,
+                "em": "more than they that watch for the morning"
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af05",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-16",
+      "day": "Wed",
+      "slot_ct": "19:00",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Prayer points · journey mercies",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Prayer points · journey mercies",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Travelling home for Christmas?"
+            },
+            {
+              "verse": "PSA 121:8",
+              "size": 58,
+              "em": "The LORD shall preserve thy going out and thy coming in"
+            }
+          ]
+        }
+      ],
+      "caption": "Travelling home for Christmas?\n\n“The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.”\nPsalm 121:8 (KJV)\n\nJourney mercies. If you fly to Lagos, Accra, Abuja or Kumasi this month, or drive to family across the state, this is the verse for the door: Psalm 121:8. Tag someone who is travelling.\n\n#prayerpoints #journeymercies #travelprayer #kjv",
+      "threads": "Travelling home for Christmas?\n\n“The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.”\nPsalm 121:8 (KJV)\n\nJourney mercies. If you fly to Lagos, Accra, Abuja or Kumasi this month, or drive to family across the state, this is the verse for the door: Psalm 121:8. Tag someone who is travelling.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Prayer points · journey mercies\n\n“The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.”\nPsalm 121:8 (KJV)\n\nTravelling home for Christmas?\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Prayer points · journey mercies",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Travelling home for Christmas?"
+              },
+              {
+                "verse": "PSA 121:8",
+                "size": 58,
+                "em": "The LORD shall preserve thy going out and thy coming in"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko05",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-16",
+      "day": "Wed",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "부르짖는 기도",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "부르짖는 기도",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "kicker": "새벽에 소리 내어 드리는 기도, 그 자리에서 많은 분이 붙잡는 말씀."
+            },
+            {
+              "verse": "JER 33:3",
+              "size": 58,
+              "em": "Call unto me, and I will answer thee"
+            }
+          ]
+        }
+      ],
+      "caption": "새벽에 소리 내어 드리는 기도, 그 자리에서 많은 분이 붙잡는 말씀.\n\n“Call unto me, and I will answer thee, and shew thee great and mighty things, which thou knowest not.”\n예레미야 33:3 (KJV)\n\n예레미야 33장 3절. 영어로 읽으면 이렇게 시작해요. “Call unto me.”\n\nPeace Be Still 앱은 지금 영어로 되어 있어요. 한국어 새벽기도 여정은 2027년 1월을 목표로 준비 중이에요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "새벽에 소리 내어 드리는 기도, 그 자리에서 많은 분이 붙잡는 말씀.\n\n“Call unto me, and I will answer thee, and shew thee great and mighty things, which thou knowest not.”\n예레미야 33:3 (KJV)\n\n예레미야 33장 3절. 영어로 읽으면 이렇게 시작해요. “Call unto me.”\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "새벽에 소리 내어 드리는 기도, 그 자리에서 많은 분이 붙잡는 말씀.\n예레미야 33:3 · 오늘 새벽 함께 기도해요\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "night",
+            "label": "부르짖는 기도",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "kicker": "새벽에 소리 내어 드리는 기도, 그 자리에서 많은 분이 붙잡는 말씀."
+              },
+              {
+                "verse": "JER 33:3",
+                "size": 58,
+                "em": "Call unto me, and I will answer thee"
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af06",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-18",
+      "day": "Fri",
+      "slot_ct": "21:00",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Friday vigil",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Friday vigil",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "He continued all night in prayer."
+            },
+            {
+              "verse": "LUK 6:12",
+              "size": 58,
+              "em": "continued all night in prayer to God"
+            }
+          ]
+        }
+      ],
+      "caption": "He continued all night in prayer.\n\n“And it came to pass in those days, that he went out into a mountain to pray, and continued all night in prayer to God.”\nLuke 6:12 (KJV)\n\nBefore Jesus chose the twelve, he prayed all night. Holding a vigil at home tonight? A simple order: worship, the Word, repentance at midnight, intercession, testimonies, thanksgiving. The full order is on peacebestillapp.com/prayer-points.\n\n#prayerpoints #nightvigil #prayer #kjv",
+      "threads": "He continued all night in prayer.\n\n“And it came to pass in those days, that he went out into a mountain to pray, and continued all night in prayer to God.”\nLuke 6:12 (KJV)\n\nBefore Jesus chose the twelve, he prayed all night. Holding a vigil at home tonight? A simple order: worship, the Word, repentance at midnight, intercession, testimonies, thanksgiving. The full order is on peacebestillapp.com/prayer-points.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Friday vigil\n\n“And it came to pass in those days, that he went out into a mountain to pray, and continued all night in prayer to God.”\nLuke 6:12 (KJV)\n\nHe continued all night in prayer.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Friday vigil",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "He continued all night in prayer."
+              },
+              {
+                "verse": "LUK 6:12",
+                "size": 58,
+                "em": "continued all night in prayer to God"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko06",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-18",
+      "day": "Fri",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "About",
+      "title": "자녀를 위한 새벽기도",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "자녀를 위한 새벽기도",
+          "wave": false,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "say": "아이 이름을 부르며, 하루에 두세 가지만.",
+              "size": 60
+            },
+            {
+              "list": [
+                "월 · 믿음, 말씀",
+                "화 · 학교, 친구",
+                "수 · 건강",
+                "목 · 정체성, 대화",
+                "금 · 진로",
+                "토 · 감사"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "아이 이름을 부르며, 하루에 두세 가지만.\n\n월요일은 믿음과 말씀, 화요일은 학교와 친구, 수요일은 건강, 목요일은 정체성과 부모와의 대화, 금요일은 진로, 토요일은 한 주의 감사. 기도 제목 10가지는 peacebestillapp.com/ko 에 정리해 두었어요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "아이 이름을 부르며, 하루에 두세 가지만.\n\n월요일은 믿음과 말씀, 화요일은 학교와 친구, 수요일은 건강, 목요일은 정체성과 부모와의 대화, 금요일은 진로, 토요일은 한 주의 감사. 기도 제목 10가지는 peacebestillapp.com/ko 에 정리해 두었어요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "아이 이름을 부르며, 하루에 두세 가지만.\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "linen",
+            "label": "자녀를 위한 새벽기도",
+            "wave": false,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "say": "아이 이름을 부르며, 하루에 두세 가지만.",
+                "size": 60
+              },
+              {
+                "list": [
+                  "월 · 믿음, 말씀",
+                  "화 · 학교, 친구",
+                  "수 · 건강",
+                  "목 · 정체성, 대화",
+                  "금 · 진로",
+                  "토 · 감사"
+                ]
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af07",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-21",
+      "day": "Mon",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Monday declaration",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Monday declaration",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "A goodly heritage."
+            },
+            {
+              "verse": "PSA 16:6",
+              "size": 58,
+              "em": "I have a goodly heritage"
+            }
+          ]
+        }
+      ],
+      "caption": "A goodly heritage.\n\n“The lines are fallen unto me in pleasant places; yea, I have a goodly heritage.”\nPsalm 16:6 (KJV)\n\nChristmas week. Whatever this year took, count what God kept. Psalm 16:6.\n\n#prayerpoints #declarations #thanksgiving #kjv",
+      "threads": "A goodly heritage.\n\n“The lines are fallen unto me in pleasant places; yea, I have a goodly heritage.”\nPsalm 16:6 (KJV)\n\nChristmas week. Whatever this year took, count what God kept. Psalm 16:6.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Monday declaration\n\n“The lines are fallen unto me in pleasant places; yea, I have a goodly heritage.”\nPsalm 16:6 (KJV)\n\nA goodly heritage.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Monday declaration",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "A goodly heritage."
+              },
+              {
+                "verse": "PSA 16:6",
+                "size": 58,
+                "em": "I have a goodly heritage"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko07",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-21",
+      "day": "Mon",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "아침에 듣게 하소서",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "아침에 듣게 하소서",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "kicker": "오늘 걸어갈 길을 아침에 여쭤봐요."
+            },
+            {
+              "verse": "PSA 143:8",
+              "size": 58,
+              "em": "Cause me to hear thy lovingkindness in the morning"
+            }
+          ]
+        }
+      ],
+      "caption": "오늘 걸어갈 길을 아침에 여쭤봐요.\n\n“Cause me to hear thy lovingkindness in the morning; for in thee do I trust: cause me to know the way wherein I should walk; for I lift up my soul unto thee.”\n시편 143:8 (KJV)\n\n이번 주는 성탄 주간이에요. 바쁜 한 주를 시작하기 전에 시편 143편 8절을 붙잡아 보세요.\n\nPeace Be Still 앱은 지금 영어로 되어 있어요. 한국어 새벽기도 여정은 2027년 1월을 목표로 준비 중이에요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "오늘 걸어갈 길을 아침에 여쭤봐요.\n\n“Cause me to hear thy lovingkindness in the morning; for in thee do I trust: cause me to know the way wherein I should walk; for I lift up my soul unto thee.”\n시편 143:8 (KJV)\n\n이번 주는 성탄 주간이에요. 바쁜 한 주를 시작하기 전에 시편 143편 8절을 붙잡아 보세요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "오늘 걸어갈 길을 아침에 여쭤봐요.\n시편 143:8 · 오늘 새벽 함께 기도해요\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "night",
+            "label": "아침에 듣게 하소서",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "kicker": "오늘 걸어갈 길을 아침에 여쭤봐요."
+              },
+              {
+                "verse": "PSA 143:8",
+                "size": 58,
+                "em": "Cause me to hear thy lovingkindness in the morning"
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af08",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-23",
+      "day": "Wed",
+      "slot_ct": "19:00",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Prayer points · on the road",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Prayer points · on the road",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "For everyone in the air this week."
+            },
+            {
+              "verse": "PSA 91:11",
+              "size": 58,
+              "em": "he shall give his angels charge over thee"
+            }
+          ]
+        }
+      ],
+      "caption": "For everyone in the air this week.\n\n“For he shall give his angels charge over thee, to keep thee in all thy ways.”\nPsalm 91:11 (KJV)\n\nPrayer point: the pilots, the drivers, the airport staff, and every family member on the move this Christmas. Psalm 91:11.\n\n#prayerpoints #journeymercies #travelprayer #kjv",
+      "threads": "For everyone in the air this week.\n\n“For he shall give his angels charge over thee, to keep thee in all thy ways.”\nPsalm 91:11 (KJV)\n\nPrayer point: the pilots, the drivers, the airport staff, and every family member on the move this Christmas. Psalm 91:11.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Prayer points · on the road\n\n“For he shall give his angels charge over thee, to keep thee in all thy ways.”\nPsalm 91:11 (KJV)\n\nFor everyone in the air this week.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Prayer points · on the road",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "For everyone in the air this week."
+              },
+              {
+                "verse": "PSA 91:11",
+                "size": 58,
+                "em": "he shall give his angels charge over thee"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko08",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-23",
+      "day": "Wed",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "자녀를 위한 말씀",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "자녀를 위한 말씀",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "kicker": "두 언어 사이에서 자라는 우리 아이들을 위해."
+            },
+            {
+              "verse": "ISA 54:13",
+              "size": 58,
+              "em": "great shall be the peace of thy children"
+            }
+          ]
+        }
+      ],
+      "caption": "두 언어 사이에서 자라는 우리 아이들을 위해.\n\n“And all thy children shall be taught of the LORD; and great shall be the peace of thy children.”\n이사야 54:13 (KJV)\n\n부모님은 한국어 성경으로, 아이는 영어 성경으로. 같은 구절을 나란히 읽고 한 문장씩 기도해 보세요.\n\nPeace Be Still 앱은 지금 영어로 되어 있어요. 한국어 새벽기도 여정은 2027년 1월을 목표로 준비 중이에요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "두 언어 사이에서 자라는 우리 아이들을 위해.\n\n“And all thy children shall be taught of the LORD; and great shall be the peace of thy children.”\n이사야 54:13 (KJV)\n\n부모님은 한국어 성경으로, 아이는 영어 성경으로. 같은 구절을 나란히 읽고 한 문장씩 기도해 보세요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "두 언어 사이에서 자라는 우리 아이들을 위해.\n이사야 54:13 · 오늘 새벽 함께 기도해요\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "night",
+            "label": "자녀를 위한 말씀",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "kicker": "두 언어 사이에서 자라는 우리 아이들을 위해."
+              },
+              {
+                "verse": "ISA 54:13",
+                "size": 58,
+                "em": "great shall be the peace of thy children"
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af09",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-25",
+      "day": "Fri",
+      "slot_ct": "21:00",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Christmas night",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Christmas night",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Watching thereunto with all perseverance."
+            },
+            {
+              "verse": "EPH 6:18",
+              "size": 46,
+              "em": "Praying always with all prayer and supplication"
+            }
+          ]
+        }
+      ],
+      "caption": "Watching thereunto with all perseverance.\n\n“Praying always with all prayer and supplication in the Spirit, and watching thereunto with all perseverance and supplication for all saints;”\nEphesians 6:18 (KJV)\n\nMerry Christmas. If your fellowship skips the vigil tonight, pray one round from home for the saints everywhere, as Ephesians 6:18 says.\n\n#prayerpoints #nightvigil #christmas #kjv",
+      "threads": "Watching thereunto with all perseverance.\n\n“Praying always with all prayer and supplication in the Spirit, and watching thereunto with all perseverance and supplication for all saints;”\nEphesians 6:18 (KJV)\n\nMerry Christmas. If your fellowship skips the vigil tonight, pray one round from home for the saints everywhere, as Ephesians 6:18 says.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Christmas night\n\n“Praying always with all prayer and supplication in the Spirit, and watching thereunto with all perseverance and supplication for all saints;”\nEphesians 6:18 (KJV)\n\nWatching thereunto with all perseverance.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Christmas night",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Watching thereunto with all perseverance."
+              },
+              {
+                "verse": "EPH 6:18",
+                "size": 46,
+                "em": "Praying always with all prayer and supplication"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko09",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-25",
+      "day": "Fri",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "About",
+      "title": "신년 특새를 앞두고",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "신년 특새를 앞두고",
+          "wave": false,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "say": "새해 첫 주, 많은 교회가 특별새벽기도회를 열어요.",
+              "size": 60
+            },
+            {
+              "list": [
+                "잠드는 시간 30분 당기기",
+                "기도 제목 한 장에 적기",
+                "주제 말씀 미리 읽기",
+                "못 가는 날은 집에서 같은 시간에"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "새해 첫 주, 많은 교회가 특별새벽기도회를 열어요.\n\n일주일 전부터 잠드는 시간을 30분씩 당기고, 올해의 기도 제목을 한 장에 적어 보세요. 갈 수 없는 날은 집에서 같은 시간에 함께해요. 메리 크리스마스.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "새해 첫 주, 많은 교회가 특별새벽기도회를 열어요.\n\n일주일 전부터 잠드는 시간을 30분씩 당기고, 올해의 기도 제목을 한 장에 적어 보세요. 갈 수 없는 날은 집에서 같은 시간에 함께해요. 메리 크리스마스.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "새해 첫 주, 많은 교회가 특별새벽기도회를 열어요.\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "linen",
+            "label": "신년 특새를 앞두고",
+            "wave": false,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "say": "새해 첫 주, 많은 교회가 특별새벽기도회를 열어요.",
+                "size": 60
+              },
+              {
+                "list": [
+                  "잠드는 시간 30분 당기기",
+                  "기도 제목 한 장에 적기",
+                  "주제 말씀 미리 읽기",
+                  "못 가는 날은 집에서 같은 시간에"
+                ]
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af10",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-28",
+      "day": "Mon",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Crossover week",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Crossover week",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Thou crownest the year."
+            },
+            {
+              "verse": "PSA 65:11",
+              "size": 58,
+              "em": "Thou crownest the year with thy goodness"
+            }
+          ]
+        }
+      ],
+      "caption": "Thou crownest the year.\n\n“Thou crownest the year with thy goodness; and thy paths drop fatness.”\nPsalm 65:11 (KJV)\n\nCrossover week. Start a list today: every month of this year, one thing God did. You will read it out on Thursday night.\n\n#prayerpoints #crossovernight #newyear #kjv",
+      "threads": "Thou crownest the year.\n\n“Thou crownest the year with thy goodness; and thy paths drop fatness.”\nPsalm 65:11 (KJV)\n\nCrossover week. Start a list today: every month of this year, one thing God did. You will read it out on Thursday night.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Crossover week\n\n“Thou crownest the year with thy goodness; and thy paths drop fatness.”\nPsalm 65:11 (KJV)\n\nThou crownest the year.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Crossover week",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Thou crownest the year."
+              },
+              {
+                "verse": "PSA 65:11",
+                "size": 58,
+                "em": "Thou crownest the year with thy goodness"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko10",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-28",
+      "day": "Mon",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "송구영신",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "송구영신",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "kicker": "올 한 해, 아침마다 새로웠던 은혜."
+            },
+            {
+              "verse": "LAM 3:23",
+              "size": 50,
+              "em": "They are new every morning"
+            }
+          ]
+        }
+      ],
+      "caption": "올 한 해, 아침마다 새로웠던 은혜.\n\n“They are new every morning: great is thy faithfulness.”\n예레미야애가 3:23 (KJV)\n\n송구영신예배를 준비하며 한 해를 돌아봐요. 감사한 일 세 가지를 댓글로 나눠 주세요.\n\nPeace Be Still 앱은 지금 영어로 되어 있어요. 한국어 새벽기도 여정은 2027년 1월을 목표로 준비 중이에요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "올 한 해, 아침마다 새로웠던 은혜.\n\n“They are new every morning: great is thy faithfulness.”\n예레미야애가 3:23 (KJV)\n\n송구영신예배를 준비하며 한 해를 돌아봐요. 감사한 일 세 가지를 댓글로 나눠 주세요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "올 한 해, 아침마다 새로웠던 은혜.\n예레미야애가 3:23 · 오늘 새벽 함께 기도해요\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "night",
+            "label": "송구영신",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "kicker": "올 한 해, 아침마다 새로웠던 은혜."
+              },
+              {
+                "verse": "LAM 3:23",
+                "size": 50,
+                "em": "They are new every morning"
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af11",
+      "community": "african",
+      "lang": "en",
+      "date": "2026-12-30",
+      "day": "Wed",
+      "slot_ct": "19:00",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Crossover prayer points",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Crossover prayer points",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Before midnight, at midnight, after midnight."
+            },
+            {
+              "verse": "PRO 3:6",
+              "size": 46,
+              "em": "In all thy ways acknowledge him"
+            }
+          ]
+        }
+      ],
+      "caption": "Before midnight, at midnight, after midnight.\n\n“In all thy ways acknowledge him, and he shall direct thy paths.”\nProverbs 3:6 (KJV)\n\nCrossover prayer points for tomorrow night: before midnight, thank God for the year and let go of what is past (Isaiah 43:18-19). At midnight, praise. After midnight, commit the new year to him (Proverbs 3:5-6). Full list on peacebestillapp.com/prayer-points.\n\n#prayerpoints #crossovernight #newyear #kjv",
+      "threads": "Before midnight, at midnight, after midnight.\n\n“In all thy ways acknowledge him, and he shall direct thy paths.”\nProverbs 3:6 (KJV)\n\nCrossover prayer points for tomorrow night: before midnight, thank God for the year and let go of what is past (Isaiah 43:18-19). At midnight, praise. After midnight, commit the new year to him (Proverbs 3:5-6). Full list on peacebestillapp.com/prayer-points.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Crossover prayer points\n\n“In all thy ways acknowledge him, and he shall direct thy paths.”\nProverbs 3:6 (KJV)\n\nBefore midnight, at midnight, after midnight.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Crossover prayer points",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Before midnight, at midnight, after midnight."
+              },
+              {
+                "verse": "PRO 3:6",
+                "size": 46,
+                "em": "In all thy ways acknowledge him"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko11",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2026-12-30",
+      "day": "Wed",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "새해 첫 새벽",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "새해 첫 새벽",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "kicker": "새해 첫 새벽, 하나님이 일찍 도우세요."
+            },
+            {
+              "verse": "PSA 46:5",
+              "size": 58,
+              "em": "God shall help her, and that right early"
+            }
+          ]
+        }
+      ],
+      "caption": "새해 첫 새벽, 하나님이 일찍 도우세요.\n\n“God is in the midst of her; she shall not be moved: God shall help her, and that right early.”\n시편 46:5 (KJV)\n\n신년 특새에 함께하시는 모든 분을 위해 기도해요.\n\nPeace Be Still 앱은 지금 영어로 되어 있어요. 한국어 새벽기도 여정은 2027년 1월을 목표로 준비 중이에요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "새해 첫 새벽, 하나님이 일찍 도우세요.\n\n“God is in the midst of her; she shall not be moved: God shall help her, and that right early.”\n시편 46:5 (KJV)\n\n신년 특새에 함께하시는 모든 분을 위해 기도해요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "새해 첫 새벽, 하나님이 일찍 도우세요.\n시편 46:5 · 오늘 새벽 함께 기도해요\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "night",
+            "label": "새해 첫 새벽",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "kicker": "새해 첫 새벽, 하나님이 일찍 도우세요."
+              },
+              {
+                "verse": "PSA 46:5",
+                "size": 58,
+                "em": "God shall help her, and that right early"
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    },
+    {
+      "id": "af12",
+      "community": "african",
+      "lang": "en",
+      "date": "2027-01-01",
+      "day": "Fri",
+      "slot_ct": "21:00",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "Verse",
+      "title": "Happy New Year",
+      "frames": [
+        {
+          "theme": "night",
+          "label": "Happy New Year",
+          "wave": true,
+          "foot": [
+            "peacebestillapp.com",
+            "/prayer-points"
+          ],
+          "blocks": [
+            {
+              "kicker": "Behold, I will do a new thing."
+            },
+            {
+              "verse": "ISA 43:19",
+              "size": 58,
+              "em": "Behold, I will do a new thing"
+            }
+          ]
+        }
+      ],
+      "caption": "Behold, I will do a new thing.\n\n“Behold, I will do a new thing; now it shall spring forth; shall ye not know it? I will even make a way in the wilderness, and rivers in the desert.”\nIsaiah 43:19 (KJV)\n\nHappy New Year. In January we are building a journey in the app for the way many African churches pray: prayer points that each stand on a verse, morning declarations and an order for the night vigil. It is still being built, so the date may move. We will post here first.\n\n#prayerpoints #crossovernight #newyear #kjv",
+      "threads": "Behold, I will do a new thing.\n\n“Behold, I will do a new thing; now it shall spring forth; shall ye not know it? I will even make a way in the wilderness, and rivers in the desert.”\nIsaiah 43:19 (KJV)\n\nHappy New Year. In January we are building a journey in the app for the way many African churches pray: prayer points that each stand on a verse, morning declarations and an order for the night vigil. It is still being built, so the date may move. We will post here first.\n\npeacebestillapp.com/prayer-points?utm_source=threads",
+      "share": [
+        {
+          "kind": "whatsapp",
+          "note": "WhatsApp: 1080×1920 Status picture + the forward text for family and fellowship groups",
+          "text": "Happy New Year\n\n“Behold, I will do a new thing; now it shall spring forth; shall ye not know it? I will even make a way in the wilderness, and rivers in the desert.”\nIsaiah 43:19 (KJV)\n\nBehold, I will do a new thing.\npeacebestillapp.com/prayer-points",
+          "frame": {
+            "theme": "night",
+            "label": "Happy New Year",
+            "wave": true,
+            "foot": [
+              "peacebestillapp.com",
+              "/prayer-points"
+            ],
+            "blocks": [
+              {
+                "kicker": "Behold, I will do a new thing."
+              },
+              {
+                "verse": "ISA 43:19",
+                "size": 58,
+                "em": "Behold, I will do a new thing"
+              }
+            ],
+            "h": 1920,
+            "css": "body{padding:220px 92px 200px}.wave{bottom:420px}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko12",
+      "community": "korean",
+      "lang": "ko",
+      "date": "2027-01-01",
+      "day": "Fri",
+      "slot_ct": "06:30",
+      "channels": [
+        "instagram",
+        "facebook",
+        "threads"
+      ],
+      "kind": "About",
+      "title": "1월 준비 중",
+      "frames": [
+        {
+          "theme": "linen",
+          "label": "1월 준비 중",
+          "wave": false,
+          "foot": [
+            "peacebestillapp.com/ko"
+          ],
+          "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}",
+          "blocks": [
+            {
+              "say": "한국어 새벽기도 여정, 2027년 1월을 목표로 준비하고 있어요.",
+              "size": 60
+            },
+            {
+              "list": [
+                "지금: 영어 KJV 성경, 아침 선포",
+                "준비 중: 한국어 새벽기도 여정",
+                "목표: 2027년 1월"
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "한국어 새벽기도 여정, 2027년 1월을 목표로 준비하고 있어요.\n\nPeace Be Still은 지금 영어와 스페인어로 되어 있어요. 한국어로 드리는 새벽기도 여정은 1월 공개를 목표로 만들고 있고, 날짜와 내용은 바뀔 수 있어요. 준비되면 이 계정과 peacebestillapp.com/ko 에 먼저 알려 드릴게요.\n\n#새벽기도 #말씀묵상 #한인교회 #KJV",
+      "threads": "한국어 새벽기도 여정, 2027년 1월을 목표로 준비하고 있어요.\n\nPeace Be Still은 지금 영어와 스페인어로 되어 있어요. 한국어로 드리는 새벽기도 여정은 1월 공개를 목표로 만들고 있고, 날짜와 내용은 바뀔 수 있어요. 준비되면 이 계정과 peacebestillapp.com/ko 에 먼저 알려 드릴게요.\n\npeacebestillapp.com/ko?utm_source=threads",
+      "share": [
+        {
+          "kind": "kakao",
+          "note": "KakaoTalk: 1080×1080 picture + the message text, for 단톡방 and 구역 chats",
+          "text": "한국어 새벽기도 여정, 2027년 1월을 목표로 준비하고 있어요.\npeacebestillapp.com/ko",
+          "frame": {
+            "theme": "linen",
+            "label": "1월 준비 중",
+            "wave": false,
+            "foot": [
+              "peacebestillapp.com/ko"
+            ],
+            "css": "body{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;word-break:keep-all}.title,.say,.kicker,.sub,.body,.list{font-family:'Libre Caslon Text','Apple SD Gothic Neo','Noto Sans KR',serif}.kicker,.sub,.body,.list{font-family:Figtree,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}.label{letter-spacing:.06em}body{padding:80px 80px 70px}",
+            "blocks": [
+              {
+                "say": "한국어 새벽기도 여정, 2027년 1월을 목표로 준비하고 있어요.",
+                "size": 60
+              },
+              {
+                "list": [
+                  "지금: 영어 KJV 성경, 아침 선포",
+                  "준비 중: 한국어 새벽기도 여정",
+                  "목표: 2027년 1월"
+                ]
+              }
+            ],
+            "h": 1080
+          }
+        }
+      ]
+    }
+  ]
+}

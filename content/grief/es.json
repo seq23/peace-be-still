@@ -1,0 +1,579 @@
+{
+ "kind": "grief",
+ "journey": "grief",
+ "door": "gods-word",
+ "lang": "es",
+ "ai_label": "label.ai_written_checked",
+ "items": [
+  {
+   "id": "gr-001",
+   "day": 1,
+   "speaker": "narrator",
+   "ref": "PSA 34:18",
+   "label": "Salmos 34:18",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 18,
+     "text": "Cercano está Jehová á los quebrantados de corazón; y salvará á los contritos de espíritu."
+    }
+   ],
+   "declaration": "Hoy tengo el corazón partido, y no se lo escondo a Dios. Él se acerca a los quebrantados, y yo lo dejo acercarse a mí.",
+   "words": 40,
+   "est_seconds": 19,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-002",
+   "day": 2,
+   "speaker": "narrator",
+   "ref": "JOH 11:35",
+   "label": "Juan 11:35",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Y lloró Jesús."
+    }
+   ],
+   "declaration": "Jesús lloró por su amigo Lázaro, aun sabiendo lo que iba a hacer. Llorar no es falta de fe. Yo puedo llorar, y Él me entiende.",
+   "words": 29,
+   "est_seconds": 14,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "note: 14 s outside 15-25 s",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-003",
+   "day": 3,
+   "speaker": "narrator",
+   "ref": "MAT 5:4",
+   "label": "Mateo 5:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Bienaventurados los que lloran: porque ellos recibirán consolación."
+    }
+   ],
+   "declaration": "Me doy permiso para estar de luto. No tengo que apurarme, ni darle explicaciones a nadie.",
+   "words": 24,
+   "est_seconds": 12,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "note: 12 s outside 15-25 s",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-004",
+   "day": 4,
+   "speaker": "narrator",
+   "ref": "PSA 56:8",
+   "label": "Salmos 56:8",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Mis huídas has tú contado: pon mis lágrimas en tu redoma: ¿no están ellas en tu libro?"
+    }
+   ],
+   "declaration": "Ninguna de mis lágrimas se pierde. Dios las ve todas, y conoce el nombre de la persona que extraño.",
+   "words": 36,
+   "est_seconds": 18,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-005",
+   "day": 5,
+   "speaker": "narrator",
+   "ref": "ECC 3:4",
+   "label": "Eclesiastés 3:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Tiempo de llorar, y tiempo de reir; tiempo de endechar, y tiempo de bailar;"
+    }
+   ],
+   "declaration": "Este es mi tiempo de llorar. Lo dejo ser lo que es, sin fingir y sin apurarme.",
+   "words": 31,
+   "est_seconds": 15,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-006",
+   "day": 6,
+   "speaker": "narrator",
+   "ref": "PSA 31:9",
+   "label": "Salmos 31:9",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Ten misericordia de mí, oh Jehová, que estoy en angustia: hanse consumido de pesar mis ojos, mi alma, y mis entrañas."
+    }
+   ],
+   "declaration": "Hay días en que el dolor me pesa en todo el cuerpo. A Dios le puedo decir cuánto pesa, tal cual.",
+   "words": 42,
+   "est_seconds": 20,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-007",
+   "day": 7,
+   "speaker": "narrator",
+   "ref": "PSA 23:4",
+   "label": "Salmos 23:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Aunque ande en valle de sombra de muerte, no temeré mal alguno; porque tú estarás conmigo: tu vara y tu cayado me infundirán aliento."
+    }
+   ],
+   "declaration": "Voy por un valle que yo no escogí. Pero no lo camino a solas.",
+   "words": 38,
+   "est_seconds": 19,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-008",
+   "day": 8,
+   "speaker": "narrator",
+   "ref": "ISA 43:2",
+   "label": "Isaías 43:2",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 2,
+     "text": "Cuando pasares por las aguas, yo seré contigo; y por los ríos, no te anegarán. Cuando pasares por el fuego, no te quemarás, ni la llama arderá en ti."
+    }
+   ],
+   "declaration": "Ahora mismo las aguas se sienten hondas. El Señor no me deja cruzarlas a solas.",
+   "words": 44,
+   "est_seconds": 21,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-009",
+   "day": 9,
+   "speaker": "narrator",
+   "ref": "2CO 1:3",
+   "label": "2 Corintios 1:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Bendito sea el Dios y Padre del Señor Jesucristo, el Padre de misericordias, y el Dios de toda consolación,"
+    }
+   ],
+   "declaration": "Necesito un consuelo que yo no me puedo dar. Ahora se lo pido al Dios de toda consolación, y dejo que me ayuden los que me quieren.",
+   "words": 46,
+   "est_seconds": 22,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-010",
+   "day": 10,
+   "speaker": "narrator",
+   "ref": "REV 21:4",
+   "label": "Apocalipsis 21:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Y limpiará Dios toda lágrima de los ojos de ellos; y la muerte no será más; y no habrá más llanto, ni clamor, ni dolor: porque las primeras cosas son pasadas."
+    }
+   ],
+   "declaration": "Un día Dios va a secar toda lágrima. Por ahora dejo que corran las mías, y sigo amando a quien perdí.",
+   "words": 52,
+   "est_seconds": 25,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "latin_american": "pass",
+     "no_english": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "note: not in the first person",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Cada línea es la respuesta en primera persona de quien escucha a un versículo de la RV1909 guardada, nunca Dios hablando; permiso para el duelo (Mat 5:4, Ecl 3:4, Juan 11:35) y no un llamado a ser fuerte; Apocalipsis 21:4 repite la esperanza de la Escritura, nunca una afirmación sobre dónde está quien murió; sin razones para una muerte, sin plazos, sin resultados prometidos."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Español de América Latina escrito directamente (no traducido): 'corazón partido', 'tal cual', 'a solas', 'apurarme'; 'la persona que extraño' y 'quien perdí' no suponen quién murió ni el género de quien habla."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  }
+ ]
+}

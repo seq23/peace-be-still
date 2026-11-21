@@ -1,0 +1,181 @@
+{
+ "id": "gn-02-psalm-23",
+ "kind": "psalm-night",
+ "journey": "grief",
+ "door": "gods-word",
+ "lang": "es",
+ "title": "Salmo 23: Por el valle",
+ "main": [
+  "PSA 23:1-6"
+ ],
+ "companions": [
+  "MAT 5:4",
+  "2CO 1:3"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "Esta es una noche para cuando has perdido a alguien. [pause 10]\n\nAcomódate como puedas. Puedes dejar el teléfono a tu lado. [pause 12]\n\nEsta noche leemos el Salmo veintitrés. Mucha gente lo escucha por primera vez en un funeral, y vuelve a él en las noches largas que vienen después. [pause 12]\n\nLo vamos a leer dos veces. Solo tienes que escuchar. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 23:1-6",
+   "label": "Salmos 23:1-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. JEHOVÁ es mi pastor; nada me faltará."
+    },
+    {
+     "v": 2,
+     "text": "En lugares de delicados pastos me hará yacer: junto á aguas de reposo me pastoreará."
+    },
+    {
+     "v": 3,
+     "text": "Confortará mi alma; guiaráme por sendas de justicia por amor de su nombre."
+    },
+    {
+     "v": 4,
+     "text": "Aunque ande en valle de sombra de muerte, no temeré mal alguno; porque tú estarás conmigo: tu vara y tu cayado me infundirán aliento."
+    },
+    {
+     "v": 5,
+     "text": "Aderezarás mesa delante de mí, en presencia de mis angustiadores: ungiste mi cabeza con aceite: mi copa está rebosando."
+    },
+    {
+     "v": 6,
+     "text": "Ciertamente el bien y la misericordia me seguirán todos los días de mi vida: y en la casa de Jehová moraré por largos días."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "El salmo no le da la vuelta al valle. Lo atraviesa, paso a paso. [pause 15]\n\nY en medio del valle cambian las palabras. David deja de hablar de Dios y empieza a hablarle a Él. Tú estarás conmigo. [pause 15]\n\nMuchas veces así ora el duelo. Sin frases largas. Solo esto: aquí estás. Quédate conmigo. [pause 15]\n\nEn este salmo hay una mesa, y una copa, y una casa a donde volver. No tienes que sentir nada de eso esta noche. Está ahí, en las palabras, esperándote. [pause 15]\n\nAhora, dos pasajes cortos. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 5:4",
+   "label": "Mateo 5:4",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Bienaventurados los que lloran: porque ellos recibirán consolación."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "2CO 1:3",
+   "label": "2 Corintios 1:3",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Bendito sea el Dios y Padre del Señor Jesucristo, el Padre de misericordias, y el Dios de toda consolación,"
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Bienaventurados los que lloran. Jesús lo dijo de gente que estaba justo donde tú estás. Llorar a alguien no es fracasar. [pause 15]\n\nY Pablo le da a Dios dos nombres que puedes guardar esta noche. Padre de misericordias. Dios de toda consolación. Consuelo también para esto. [pause 15]\n\nAhora el Salmo veintitrés otra vez. Que vaya despacio. Deja que cada línea llegue antes de la siguiente. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 23:1-6",
+   "label": "Salmos 23:1-6",
+   "translation": "RV1909",
+   "verses": [
+    {
+     "v": 1,
+     "text": "Salmo de David. JEHOVÁ es mi pastor; nada me faltará."
+    },
+    {
+     "v": 2,
+     "text": "En lugares de delicados pastos me hará yacer: junto á aguas de reposo me pastoreará."
+    },
+    {
+     "v": 3,
+     "text": "Confortará mi alma; guiaráme por sendas de justicia por amor de su nombre."
+    },
+    {
+     "v": 4,
+     "text": "Aunque ande en valle de sombra de muerte, no temeré mal alguno; porque tú estarás conmigo: tu vara y tu cayado me infundirán aliento."
+    },
+    {
+     "v": 5,
+     "text": "Aderezarás mesa delante de mí, en presencia de mis angustiadores: ungiste mi cabeza con aceite: mi copa está rebosando."
+    },
+    {
+     "v": 6,
+     "text": "Ciertamente el bien y la misericordia me seguirán todos los días de mi vida: y en la casa de Jehová moraré por largos días."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "Por esta noche, es suficiente. [pause 8]\n\nSuelta los hombros. Deja que la cama te sostenga. [pause 12]\n\nTal vez estás pensando en su cara, en su voz, o en la última vez que hablaron. Puedes guardar eso con cuidado. [pause 15]\n\nEl duelo también es una forma de amor. Está bien que duela. [pause 15]\n\nNo tienes que cargarlo a solas. Un pastor, un consejero de duelo, alguien de confianza que se siente contigo: son buenos regalos, y está bien pedirlos. [pause 15]\n\nEl Señor está contigo en el valle. Quédate aquí todo lo que quieras. [pause 30]\n\nBuenas noches. [pause 45]"
+  }
+ ],
+ "words": 532,
+ "rest_part": "duelo_rest2",
+ "pacing": {
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 636,
+ "target_seconds": 480,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "speakers": "pass",
+   "grief_words": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-21",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Noches de duelo y la noche de las 3 de la mañana (21 nov 2026): cada pasaje es la RV1909 guardada, pegada por código; las líneas escritas solo hacen ecos cortos. El lamento se permite (hasta cuándo) sin regaño; ninguna razón para una muerte, nada de 'un lugar mejor', ningún plazo para el duelo (el chequeo grief_words); Apocalipsis 21:4 como la esperanza al final de la historia, no como afirmación sobre quien murió. Cada noche de duelo sugiere hablar con un pastor o con un consejero de duelo; la noche de las 3 no promete sueño."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Escrito en español de América Latina, no traducido: tú, nada de vosotros; frases cortas y naturales ('nadie te está tomando el tiempo', 'lo único que te toca ahora: acostarte'); la persona que murió es 'esa persona' o 'su nombre', sin suponer quién era; sin formas que obliguen a un género para quien escucha. Duración solo con silencios: 10-11 min las de duelo, 6 min la de las 3."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

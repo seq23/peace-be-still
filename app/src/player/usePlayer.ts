@@ -42,10 +42,11 @@ export function usePlayer() {
   return { player, state, tracks, stop: baseUrl ? null : AUDIO_STOP } as const;
 }
 
-/** Pass true while the player screen is focused. Returns whether to draw the dark overlay, and touch(). */
-export function useDimmer(focused: boolean) {
+/** Pass true while the player screen is focused. Returns whether to draw the dark overlay, and touch().
+ * `afterMs` dims sooner (the 3 AM back-to-sleep night goes dark almost at once). */
+export function useDimmer(focused: boolean, afterMs?: number) {
   const { state } = usePlayer();
-  const [dimmer] = useState(() => createDimmer(expoBrightness));
+  const [dimmer] = useState(() => createDimmer(expoBrightness, afterMs ? { afterMs } : undefined));
   const dimmed = useSyncExternalStore(dimmer.subscribe, () => dimmer.dimmed);
   const [appActive, setAppActive] = useState(AppState.currentState === 'active');
   useEffect(() => {

@@ -3,16 +3,17 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { storeCtaHtml, storeConfig } from "../content/parts.mjs";
+import { storeCtaHtml, storeConfig, langOf } from "../content/parts.mjs";
 
 const IOS = "https://apps.apple.com/us/app/peace-be-still/id1234567890";
 const PLAY = "https://play.google.com/store/apps/details?id=com.example.pbs";
 
 test("null store URLs render coming-soon text, never a badge, a date or 'available now'", () => {
-  for (const lang of ["en", "es"]) {
+  const SOON = { en: [/Coming soon to the App Store · search “Peace Be Still”/, /Coming soon to Google Play · search “Peace Be Still”/], es: [/Muy pronto en el App Store/, /Muy pronto en Google Play/], ko: [/곧 App Store에 나와요/, /곧 Google Play에 나와요/] };
+  for (const lang of ["en", "es", "ko"]) {
     const h = storeCtaHtml(lang, { app_store_url: null, play_url: null });
-    assert.match(h, lang === "en" ? /Coming soon to the App Store · search “Peace Be Still”/ : /Muy pronto en el App Store/);
-    assert.match(h, lang === "en" ? /Coming soon to Google Play · search “Peace Be Still”/ : /Muy pronto en Google Play/);
+    assert.match(h, SOON[lang][0]);
+    assert.match(h, SOON[lang][1]);
     assert.doesNotMatch(h, /<img|apps\.apple\.com|play\.google\.com|available now|disponible ya|20\d\d/i);
   }
 });
@@ -27,6 +28,14 @@ test("each store flips on its own: a URL renders that store's badge linking to i
   assert.doesNotMatch(both, /Muy pronto/);
 });
 
+test("the Korean CTA says the app is in English and Spanish today (no Korean app is implied)", () => {
+  for (const store of [{ app_store_url: null, play_url: null }, { app_store_url: IOS, play_url: PLAY }]) {
+    assert.match(storeCtaHtml("ko", store), /영어와 스페인어로/);
+  }
+  assert.equal(langOf('<html lang="ko">'), "ko");
+  assert.equal(langOf('<html lang="fr">'), "en");
+});
+
 test("every built page carries the CTA only from the component, up to date with store.json", () => {
   const pub = new URL("../public/", import.meta.url).pathname;
   const pages = [];
@@ -35,7 +44,7 @@ test("every built page carries the CTA only from the component, up to date with 
   let withCta = 0;
   for (const p of pages) {
     const s = readFileSync(p, "utf8");
-    const lang = /<html lang="es"/.test(s) ? "es" : "en";
+    const lang = langOf(s);
     const blocks = s.match(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g) || [];
     for (const b of blocks) assert.equal(b, storeCtaHtml(lang, store), `${p}: stale or hand-edited CTA (run node site/scripts/apply-cta.mjs)`);
     const outside = s.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, "");

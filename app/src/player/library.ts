@@ -2,7 +2,10 @@ import { chapterTitles } from './books';
 
 export type Lang = 'en' | 'es';
 export type Titles = Partial<Record<Lang, string>>;
-type TrackDisplay = { titles: Titles; scriptureRef?: string };
+/** `journey` marks a night that is not a Psalm Night: the grief nights and the one "3 AM, back to sleep" night. */
+type TrackDisplay = { titles: Titles; scriptureRef?: string; journey?: NightJourney };
+export type NightJourney = 'grief' | 'back-to-sleep';
+export const NIGHT_JOURNEYS: readonly NightJourney[] = ['grief', 'back-to-sleep'];
 
 /** One line of audio/manifest.jsonl, as the Mac library fill writes it (only the fields the app reads). */
 export type ResponsePauses = readonly [number, number];

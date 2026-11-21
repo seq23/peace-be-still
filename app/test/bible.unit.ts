@@ -138,6 +138,11 @@ test('references parse in English, Spanish and USFM, and format back', () => {
   assert.equal(parseReference('John'), null);
   assert.equal(formatReference({ book: 'JOH', chapter: 3, verse: 16 }, 'es'), 'Juan 3:16');
   assert.equal(formatReference({ book: 'ROM', chapter: 8, verse: 28, endVerse: 30 }, 'en'), 'Romans 8:28-30');
+  // One psalm is singular in English; the Reina-Valera's own usage is "Salmos" (and the book list stays "Psalms").
+  assert.equal(formatReference({ book: 'PSA', chapter: 4, verse: 8 }, 'en'), 'Psalm 4:8');
+  assert.equal(formatReference({ book: 'PSA', chapter: 23 }, 'en'), 'Psalm 23');
+  assert.equal(formatReference({ book: 'PSA', chapter: 34, verse: 17, endVerse: 18 }, 'en'), 'Psalm 34:17-18');
+  assert.equal(formatReference({ book: 'PSA', chapter: 4, verse: 8 }, 'es'), 'Salmos 4:8');
 });
 
 test("the translators' supplied words show in italics without changing the stored text", async () => {

@@ -84,7 +84,9 @@
         "psalm 91 audio for sleep",
         "psalm 91 sleep meditation abide",
         "psalm 91 sleep rain",
-        "psalm 91 bedtime prayer"
+        "psalm 91 bedtime prayer",
+        "psalm 91 for sleep and protection",
+        "psalm 91 for sleeping 8 hours"
       ],
       "indexnow_at": "2026-11-19"
     },
@@ -191,7 +193,10 @@
         "b5 FAQ answer is 31 words (aim 40-60): \"Are there advertisements in the app?\"",
         "b5 FAQ answer is 36 words (aim 40-60): \"How do I get the app?\""
       ],
-      "indexnow_at": "2026-11-20"
+      "indexnow_at": "2026-11-20",
+      "extra_queries": [
+        "does the bible app cost money"
+      ]
     },
     {
       "slug": "daily-devotional-for-black-woman",
@@ -303,7 +308,132 @@
         "https://en.wikipedia.org/wiki/Reina-Valera"
       ],
       "linked_from": [],
-      "checks": {}
+      "checks": {},
+      "indexnow_at": "2026-11-21"
+    },
+    {
+      "slug": "what-is-the-bible-verse-for-sleep-prayer",
+      "query": "what is the bible verse for sleep prayer",
+      "lane": "striking",
+      "priority": "whispered bible for sleep",
+      "score": 30,
+      "scores": {
+        "striking": 30,
+        "can_be_one": 13.2
+      },
+      "reasons": [
+        "priority topic \"whispered bible for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ],
+      "signals": {
+        "words": 8,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 1 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "rel": "site/public/questions/what-is-the-bible-verse-for-sleep-prayer/index.html",
+      "route": "/questions/what-is-the-bible-verse-for-sleep-prayer/",
+      "url": "https://peacebestillapp.com/questions/what-is-the-bible-verse-for-sleep-prayer/",
+      "published_at": "2026-11-21",
+      "status": "live",
+      "hash": "30c19c7a33d3ba25c0e171652ca4532bda11589ca0918613bd27761d077c28e4",
+      "model": "free-route",
+      "facts": [
+        "https://www.copyright.gov/circs/circ01.pdf",
+        "https://en.wikipedia.org/wiki/Reina-Valera"
+      ],
+      "linked_from": [],
+      "checks": {},
+      "extra_queries": [
+        "what is the bible verse for prayer before sleeping"
+      ]
+    },
+    {
+      "slug": "psalm-23-sleep-meditation",
+      "query": "psalm 23 sleep meditation",
+      "lane": "striking",
+      "priority": "psalms for sleep",
+      "score": 25,
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "reasons": [
+        "priority topic \"psalms for sleep\" (find.priority_topics): built before other searches",
+        "autocomplete demand (google/bing)"
+      ],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "rel": "site/public/questions/psalm-23-sleep-meditation/index.html",
+      "route": "/questions/psalm-23-sleep-meditation/",
+      "url": "https://peacebestillapp.com/questions/psalm-23-sleep-meditation/",
+      "published_at": "2026-11-21",
+      "status": "live",
+      "hash": "577a17ddd4535a0a1363f71f80e24d9764b6e1c64de9363e5bc961ed07638c26",
+      "model": "free-route",
+      "facts": [
+        "https://www.bl.uk/collection-items/the-king-james-bible",
+        "https://www.biblegateway.com/versions/Reina-Valera-1909-RV1909/"
+      ],
+      "linked_from": [],
+      "checks": {},
+      "gate_notes": [
+        "b5 FAQ answer is 38 words (aim 40-60): \"Are the Bible stories suitable for my family?\""
+      ]
+    },
+    {
+      "slug": "daily-devotional-tips",
+      "query": "daily devotional tips",
+      "lane": "striking",
+      "score": 15,
+      "scores": {
+        "striking": 15,
+        "can_be_one": 0
+      },
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ],
+      "signals": {
+        "words": 3,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "rel": "site/public/questions/daily-devotional-tips/index.html",
+      "route": "/questions/daily-devotional-tips/",
+      "url": "https://peacebestillapp.com/questions/daily-devotional-tips/",
+      "published_at": "2026-11-21",
+      "status": "live",
+      "hash": "937cc79c26e4e3dbbd26caafe2e57380acce9360e6955f9cf31f0865bfd1fd6d",
+      "model": "free-route",
+      "facts": [
+        "https://www.bl.uk/collection-items/the-king-james-bible",
+        "https://en.wikipedia.org/wiki/Reina-Valera"
+      ],
+      "linked_from": [],
+      "checks": {},
+      "gate_notes": [
+        "b2 meta description is 117 chars (aim 120-160)"
+      ]
     }
   ],
   "dropped": [
@@ -537,6 +667,44 @@
       "reason": [
         "b5 FAQ answer is 29 words (aim 40-60): \"How can I help my toddler stop being afraid of the\"",
         "b5 FAQ answer is 27 words (aim 40-60): \"Where can I find whispered scripture recordings fo\""
+      ]
+    },
+    {
+      "query": "what is the bible verse about sleep",
+      "at": "2026-11-21",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 29 words (aim 40-60): \"Can I read the Bible in Spanish?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://www.loc.gov/exhibits/books-that-changed-the-world/king-james-bible.html (HTTP 404); https://www.gutenberg.org/about/ (HTTP 503)",
+        "invented: unsourced price \"The paid lane is seven dollars and ninety-nine cents a month or thirty-nine dollars and ninety-nine \" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      ]
+    },
+    {
+      "query": "how to use psalm 91",
+      "at": "2026-11-21",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 21 words (aim 40-60): \"How do I listen to Psalm 91 at night?\"",
+        "b5 FAQ answer is 16 words (aim 40-60): \"Can I read the chapter in Spanish?\"",
+        "b5 FAQ answer is 13 words (aim 40-60): \"Are there ads in the reading space?\"",
+        "b5 FAQ answer is 12 words (aim 40-60): \"Where can I download the app?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0); these failed the check, replace each with a page that exists: https://www.britannica.com/topic/King-James-Version (HTTP 403: this site refuses automated checks, so cite a different publisher); https://www.britannica.com/topic/Psalms-Old-Testament (HTTP 403: this site refuses automated checks, so cite a different publisher)"
+      ]
+    },
+    {
+      "query": "bedtime prayer for family",
+      "at": "2026-11-21",
+      "gate": 2,
+      "reason": [
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://www.loc.gov/exhibits/bibles/the-spanish-bible.html (HTTP 429)"
+      ]
+    },
+    {
+      "query": "bedtime prayers for little ones",
+      "at": "2026-11-21",
+      "gate": 2,
+      "reason": [
+        "off-audience: This search query does not fit the specific focus of the Peace Be Still app, which centres on adult scripture reading, w"
       ]
     }
   ],
@@ -969,6 +1137,56 @@
       "kind": "page",
       "matched_by": "high token overlap (0.80 >= 0.6)",
       "matched_text": "Is the Haven Bible app free?",
+      "stage": "search"
+    },
+    {
+      "query": "what is the bible verse for prayer before sleeping",
+      "at": "2026-11-21",
+      "url": "https://peacebestillapp.com/questions/what-is-the-bible-verse-for-sleep-prayer/",
+      "route": "/questions/what-is-the-bible-verse-for-sleep-prayer/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "matched_text": "what is the bible verse for sleep prayer",
+      "stage": "search"
+    },
+    {
+      "query": "bible verses for sleep",
+      "at": "2026-11-21",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "route": "/questions/bible-verses-for-sleep/",
+      "kind": "page",
+      "matched_by": "same 3 intent words plus modifiers",
+      "matched_text": "Bible verses for sleep: 10 to read before bed",
+      "stage": "search"
+    },
+    {
+      "query": "psalm 91 for sleep and protection",
+      "at": "2026-11-21",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "route": "/questions/psalm-91-prayer-for-sleep/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "psalm 91 prayer for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "psalm 91 for sleeping 8 hours",
+      "at": "2026-11-21",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "route": "/questions/psalm-91-prayer-for-sleep/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "psalm 91 prayer for sleep",
+      "stage": "search"
+    },
+    {
+      "query": "does the bible app cost money",
+      "at": "2026-11-21",
+      "url": "https://peacebestillapp.com/questions/does-the-holy-bible-app-cost-money/",
+      "route": "/questions/does-the-holy-bible-app-cost-money/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "matched_text": "does the holy bible app cost money",
       "stage": "search"
     }
   ]

@@ -1961,6 +1961,51 @@
   ],
   "strengthen": [
     {
+      "query": "does the bible app cost money",
+      "page": "/questions/does-the-holy-bible-app-cost-money/",
+      "url": "https://peacebestillapp.com/questions/does-the-holy-bible-app-cost-money/",
+      "score": 16,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-21"
+    },
+    {
+      "query": "psalm 91 for sleeping 8 hours",
+      "page": "/questions/psalm-91-prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-21"
+    },
+    {
+      "query": "psalm 91 for sleep and protection",
+      "page": "/questions/psalm-91-prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-21"
+    },
+    {
+      "query": "bible verses for sleep",
+      "page": "/questions/bible-verses-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "same 3 intent words plus modifiers",
+      "at": "2026-11-21"
+    },
+    {
+      "query": "what is the bible verse for prayer before sleeping",
+      "page": "/questions/what-is-the-bible-verse-for-sleep-prayer/",
+      "url": "https://peacebestillapp.com/questions/what-is-the-bible-verse-for-sleep-prayer/",
+      "score": 30,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-21"
+    },
+    {
       "query": "haven bible chat app free",
       "page": "/questions/is-the-haven-bible-app-free/",
       "url": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
