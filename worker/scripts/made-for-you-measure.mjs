@@ -26,7 +26,7 @@ const chat = resolve(process.env.PBS_CHAT_SOURCE ?? '../.wt-peace-be-still-phase
 const { config: wrangler } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
 const bundle = await build({
   stdin: {
-    contents: `export * from './worker/src/madeForYou.ts';
+    contents: `export * from './worker/src/madeForYou.ts'; export { banned } from 'phase-3/worker/src/shared';
       export { realDeps } from 'phase-3/worker/src/index';
       export { runLadder } from 'phase-3/worker/src/ladder';
       export { checkAnswer } from 'phase-3/worker/src/quality/answer';
@@ -76,7 +76,10 @@ const notes = [
   ['es', 'imagination', 'Me gustaría imaginar un jardín tranquilo después de un día largo.'],
 ];
 const cfg = m.allowanceBooks(wrangler.vars) && JSON.parse(readFileSync('worker/src/madeForYou.config.json', 'utf8'));
-const calls = () => Object.fromEntries(sqlite.prepare("SELECT metric, n FROM chat_counts WHERE metric LIKE 'calls:mfy:%'").all().map(r => [r.metric, r.n]));
+// Real calls are the ladder's own tallies (ok/429/malformed/fail/exhausted per rung). The counters are not:
+// a provider's "out for today" sets its counter to the cap without any call being made.
+const metrics = new Map();
+const calls = () => { const o = {}; for (const [k, n] of metrics) { const at = k.indexOf(':'); if (k.slice(0, at) !== 'capped') o[`calls:${k.slice(at + 1)}`] = (o[`calls:${k.slice(at + 1)}`] ?? 0) + n; } return o; };
 const sum = (o, use) => Object.entries(o).filter(([k]) => k.startsWith(`calls:mfy:${use}:`)).reduce((s, [, n]) => s + n, 0);
 const sessions = [];
 for (const [lang, kind, text] of notes) {
@@ -89,9 +92,9 @@ for (const [lang, kind, text] of notes) {
     const t0 = Date.now();
     const signal = AbortSignal.timeout(240_000);
     const ladder = (use, messages, schema, maxTokens, valid) =>
-      m.runLadder(db, m.madeForYouRungs(m.realDeps.rungs(env, Date.now()), use, signal), messages, schema, maxTokens, new Map(), valid);
+      m.runLadder(db, m.madeForYouRungs(m.realDeps.rungs(env, Date.now()), use, signal), messages, schema, maxTokens, metrics, valid);
     const shapes = [];
-    const drafted = await ladder('draft', m.draftMessages({ kind, lang, teen: 0 }, text), m.draftSchema,
+    const drafted = await ladder('draft', m.draftMessages({ kind, lang, teen: 0 }, text, m.banned), m.draftSchema,
       cfg.draftMaxTokens, value => {
         const ok = m.draftText(value) !== null;
         if (Array.isArray(value?.paragraphs)) shapes.push(value.paragraphs.map(p => String(p).split(/\s+/).filter(Boolean).length));

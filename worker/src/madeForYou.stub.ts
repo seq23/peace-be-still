@@ -12,6 +12,7 @@ import { runLadder } from 'phase-3/worker/src/ladder';
 import { reserve } from 'phase-3/worker/src/counts';
 import { RungError } from 'phase-3/worker/src/providers/types';
 import { checkAnswer } from 'phase-3/worker/src/quality/answer';
+import { banned } from 'phase-3/worker/src/shared';
 import { judgeSchema, judgeVerdict, JUDGE_CHECKS } from 'phase-3/worker/src/quality/judge';
 import { parseReport, saveReport, REPORTS_DAILY } from 'phase-3/worker/src/report';
 import chatConfig from 'phase-3-config';
@@ -90,6 +91,7 @@ export default {
       },
       checkProse: (draft, ctx) => checkAnswer(draft, { ...ctx, db: env.DB }),
       judgeShared: { schema: judgeSchema, verdict: judgeVerdict },
+      banned,
       psalm: async translation => {
         const { results } = await env.DB.prepare("SELECT text FROM bible_verses WHERE translation = ? AND book = 'PSA' AND chapter = 23 ORDER BY verse")
           .bind(translation).all<{ text: string }>();

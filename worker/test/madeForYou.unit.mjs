@@ -14,7 +14,7 @@ const chat = resolve(process.env.PBS_CHAT_SOURCE ?? '../.wt-peace-be-still-phase
 const { config } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
 const bundle = await build({
   stdin: {
-    contents: `export * from './worker/src/madeForYou.ts'; export * from './worker/src/madeForYou.storage.ts'; export { checkAnswer } from 'phase-3/worker/src/quality/answer';`,
+    contents: `export * from './worker/src/madeForYou.ts'; export * from './worker/src/madeForYou.storage.ts'; export { checkAnswer } from 'phase-3/worker/src/quality/answer'; export { banned } from 'phase-3/worker/src/shared';`,
     resolveDir: process.cwd(), loader: 'ts',
   },
   bundle: true, format: 'esm', platform: 'node', write: false, alias: { 'phase-3': chat },
@@ -83,6 +83,19 @@ test('a draft is ten clean paragraphs of the right length, joined as spoken pros
   assert.equal(mfy.draftText({ paragraphs: [...paragraphs.slice(0, 9), `${paragraphs[9]} ${paragraphs[9]}`] }), null, 'one paragraph over 110 words');
   assert.equal(mfy.draftText({ text: cleanDraft('en') }), null, 'the old one-field shape');
   assert.equal(mfy.draftText(null), null);
+});
+
+test('the drafter is told, in plain words, every word and phrase the content check rejects', () => {
+  const psalm = mfy.avoided('psalm', mfy.banned), scene = mfy.avoided('imagination', mfy.banned);
+  for (const [list, patterns] of [[psalm, [...mfy.banned.chat, ...mfy.banned.faith]], [scene, mfy.banned.chat]]) {
+    for (const pattern of patterns) {
+      assert.ok(list.some(word => new RegExp(`^(?:${pattern})$`).test(word)), `the prompt names a word the check's ${pattern} rejects`);
+    }
+  }
+  assert.ok(psalm.every(word => !/[\\()[\]?|*]/.test(word)), `no regex syntax reaches the model: ${psalm.join('; ')}`);
+  assert.ok(!scene.includes('energy'), 'Imagination may say energy: the faith list is the psalm door only');
+  const prompt = mfy.draftMessages({ kind: 'psalm', lang: 'en', teen: 0 }, 'a note', mfy.banned)[0].content;
+  assert.match(prompt, /visuali[sz]e;.*for nights like this|for nights like this.*visuali[sz]e;/);
 });
 
 test('the content check passes clean scripts in both doors and languages', async () => {
