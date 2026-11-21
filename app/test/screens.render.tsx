@@ -5,12 +5,14 @@ import React from 'react';
 import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { displayRuns, formatReference, parseReference } from '../src/bible/core';
-import { declaration } from '../src/screens/daily/content';
+import { mindsetDeclarations, mindsetTopics, plans } from '../src/screens/daily/content';
+import { byTopic, dailyDeclaration, pastStories, shelf, storyFor, tellingFor, topics } from '../src/content';
+import type { DailyPage } from '../src/screens/daily/Daily';
 import { test, beforeEach } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { create, act, type ReactTestRenderer, type ReactTestInstance } from 'react-test-renderer';
 import products from '../src/config/products.json';
-import { dayKey, faithContentIssues, RAISE_WAIT_MS, type Settings } from '../src/model';
+import { dayKey, faithContentIssues, RAISE_WAIT_MS, type JourneyId, type Settings } from '../src/model';
 
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
 const quiet = console.error;
@@ -465,7 +467,7 @@ async function faithWalk(language: 'en' | 'es', age: 'child' | 'teen' | 'adult')
     ['door', { ...person, door: null, age: null, journey: undefined }], ['age', { ...person, age: null }], ['journeys', person],
     ['today', person], ['bible', person],
     ...['books', 'search', 'saved'].map(page => ['biblePage', person, { page }] as [Name, object, Record<string, string>]),
-    ...['declaration', 'story', 'plans', 'journal'].map(page => ['dailyPage', person, { page }] as [Name, object, Record<string, string>]),
+    ...['declaration', 'story', 'stories', 'plans', 'journal'].map(page => ['dailyPage', person, { page }] as [Name, object, Record<string, string>]),
     ['nights', person], ['more', person], ['settings', person], ['notFound', person],
   ];
   if (age !== 'child') pages.push(['chat', person], ['paid', person]);
@@ -596,82 +598,80 @@ for (const locale of ['en', 'es'] as const) {
     assert.match(strings(search), locale === 'es' ? /corazón/i : /John 3:16/);
   });
 
-  test(`Daily ${locale}: production hides drafts, declaration makes an image, plans and journal save`, async () => {
+  const source = () => gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
+  /** The stored text of a reference (one verse or a run), as the reader shows it. */
+  const stored = (data: string, ref: string) => {
+    const r = parseReference(ref)!;
+    const lines: string[] = [];
+    for (let v = r.verse!; v <= (r.endVerse ?? r.verse!); v++) {
+      const prefix = `${r.book} ${r.chapter}:${v} `;
+      lines.push(displayRuns(data.split('\n').find(line => line.startsWith(prefix))!.slice(prefix.length).trim()).map(run => run.text).join(''));
+    }
+    return lines.join(' ').replace(/\s+/g, ' ').trim();
+  };
+  // The words exactly as drawn: every string inside the scripture text, in order, nothing added between runs.
+  const leaves = (node: ReactTestInstance | string): string => typeof node === 'string' ? node : node.children.map(leaves).join('');
+  const shown = (tree: ReactTestRenderer) => host(tree, 'Text').filter(node => node.props.testID === 'scripture-text').map(node => leaves(node).replace(/\s+/g, ' ').trim());
+  const renderDaily = (page: DailyPage, date: Date, value: object = person, storyId?: string) => mount('dailyPage', value, {}, () =>
+    <Daily page={page} now={date} storyId={storyId} back={() => {}} read={() => {}}
+      upgrade={() => calls.push(['push', '/paid'])} open={(next: DailyPage, id?: string) => calls.push(['open', [next, id]])} />);
+
+  test(`Daily ${locale}: today's story is a passed library story in every build, read from its own telling`, async () => {
     const now = new Date();
-    const dateOf = (day: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + day - now.getDay());
-    const data = gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
-    const draft = await mount('dailyPage', person, { page: 'story' });
-    assert.ok(strings(draft).includes(copy['daily.noStory']));
-    await press(draft, copy['daily.readBible']);
-    const [action, destination] = calls.at(-1)!;
-    const passage = destination as { pathname: string; params: { page: string; book: string; chapter: number } };
-    assert.equal(action, 'push');
-    assert.equal(passage.pathname, '/bible/[page]');
-    assert.equal(passage.params.page, 'chapter');
+    const data = source();
+    const shelfNow = shelf(tellingFor(locale, person.journey as JourneyId), 'adult');
+    assert.ok(shelfNow.length >= 60);
+    const story = storyFor(shelfNow, now)!;
+    assert.equal(story.lang, locale);
     const today = await mount('today', person);
-    assert.ok(!strings(today).includes(copy['daily.openStory']));
-    assert.ok(!strings(today).includes(copy['daily.draft']));
-    assert.ok(!strings(today).includes(copy['daily.listenStory']));
-    await press(today, copy['daily.readBible']);
-    assert.deepEqual(calls.at(-1), ['push', {
-      pathname: '/bible/[page]',
-      params: { page: 'chapter', book: passage.params.book, chapter: passage.params.chapter },
-    }]);
-    const extras = host(today, 'View').find(node => node.children.some(child =>
-      typeof child !== 'string' && textOf(child) === copy['daily.more'],
-    ) && textOf(node).includes(copy['daily.title.plans']) && textOf(node).includes(copy['daily.title.journal']));
-    assert.ok(extras);
-    const renderDaily = (page: 'story' | 'declaration', date: Date) => mount('dailyPage', person, {}, () =>
-      <Daily page={page} now={date} back={() => {}} read={() => {}} />);
+    assert.ok(strings(today).includes(story.title));
+    assert.ok(!/draft|borrador/i.test(strings(today)));
+    await press(today, copy['daily.openStory']);
+    assert.deepEqual(calls.at(-1), ['push', { pathname: '/today/[page]', params: { page: 'story' } }]);
+    // Seven days in a row: seven different stories, each one's scripture exactly the stored text, each labelled.
+    const seen = new Set<string>();
     for (let day = 0; day < 7; day++) {
-      const production = strings(await renderDaily('story', dateOf(day)));
-      assert.ok(production.includes(copy['daily.noStory']));
-      assert.ok(!production.includes(copy[`daily.draft.${day}`]));
-      assert.ok(!production.includes(copy[`daily.retelling.${day}`]));
+      const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + day);
+      const expected = storyFor(shelfNow, date)!;
+      seen.add(expected.id);
+      const page = await renderDaily('story', date);
+      const text = strings(page);
+      assert.ok(text.includes(expected.title) && text.includes(copy['story.ai']) && text.includes(copy['daily.retelling']), expected.id);
+      const scripture = expected.blocks.filter(block => block.type === 'scripture');
+      assert.deepEqual(shown(page), scripture.map(block => stored(data, block.ref)), expected.id);
+      assert.deepEqual(faithContentIssues(texts(page, false).join(' | ')), [], expected.id);
     }
-    try {
-      process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
-      const previewToday = await mount('today', person);
-      assert.ok(strings(previewToday).includes(copy['daily.draft']));
-      const listen = host(previewToday, 'Pressable').find(node => textOf(node) === copy['daily.listenStory']);
-      assert.equal(listen?.props.disabled, true);
-      assert.equal(listen.props['aria-disabled'], true);
-      assert.ok(strings(previewToday).includes(copy['daily.storyAudioUnavailable']));
-      await press(previewToday, copy['daily.openStory']);
-      assert.deepEqual(calls.at(-1), ['push', { pathname: '/today/[page]', params: { page: 'story' } }]);
-      const previewRoute = await mount('dailyPage', person, { page: 'story' });
-      assert.ok(strings(previewRoute).includes(copy[`daily.retelling.${now.getDay()}`]));
-      for (let day = 0; day < 7; day++) {
-        const preview = await renderDaily('story', dateOf(day));
-        assert.ok(strings(preview).includes(copy['daily.draft']));
-        assert.ok(strings(preview).includes(copy[`daily.draft.${day}`]));
-        assert.ok(strings(preview).includes(copy[`daily.retelling.${day}`]));
-        assert.ok(strings(preview).includes(copy['daily.storyAudioUnavailable']));
-        assert.deepEqual(faithContentIssues(strings(preview)), []);
-      }
-    } finally {
-      delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
-    }
-    for (let day = 0; day < 7; day++) {
-      const date = dateOf(day);
-      const row = declaration('faith', date);
-      const ref = parseReference(row.passage!)!;
-      const prefix = `${ref.book} ${ref.chapter}:${ref.verse} `;
-      const verse = data.split('\n').find(line => line.startsWith(prefix))!.slice(prefix.length).trim();
-      const expected = displayRuns(verse).map(run => run.text).join('');
+    assert.equal(seen.size, 7);
+    // The free lane reads today's story only: the archive and a past story's link lead to the paid lane.
+    const free = await renderDaily('story', now);
+    await press(free, copy['story.pastPaid']);
+    assert.deepEqual(calls.at(-1), ['push', '/paid']);
+    const archive = await renderDaily('stories', now);
+    assert.ok(!pastStories(shelfNow, now).some(({ story: item }) => strings(archive).includes(item.title)));
+    assert.ok(strings(archive).includes(copy['story.pastPaid']));
+    const yesterday = pastStories(shelfNow, now)[0].story;
+    const deepLink = await renderDaily('story', now, person, yesterday.id);
+    assert.ok(strings(deepLink).includes(story.title) && !strings(deepLink).includes(yesterday.title));
+  });
+
+  test(`Daily ${locale}: the free declaration is the day's line with its stored verse; topics and longer plans lead to the paid lane`, async () => {
+    const now = new Date();
+    const data = source();
+    for (let day = 0; day < 3; day++) {
+      const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + day);
+      const row = dailyDeclaration(locale, date);
       const screen = await renderDaily('declaration', date);
-      assert.ok(strings(screen).includes(copy[row.line]));
-      assert.ok(host(screen, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
-      if (day === now.getDay()) {
-        assert.ok(host(today, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
-      }
-      assert.ok(strings(screen).includes(formatReference(ref, locale)));
+      assert.ok(strings(screen).includes(row.text));
+      assert.deepEqual(shown(screen), [stored(data, row.ref)]);
+      assert.ok(strings(screen).includes(formatReference(parseReference(row.ref)!, locale)));
       assert.ok(strings(screen).includes(copy['daily.prayer']));
+      assert.equal(radios(screen).length, 0);
     }
-    const mindset = await mount('dailyPage', { ...person, door: 'mindset', journey: 'imagination-nights', language: locale }, { page: 'declaration' });
-    assert.ok(!host(mindset, 'Text').some(node => node.props.testID === 'scripture-text'));
-    assert.ok(!strings(mindset).includes(copy['daily.prayer']));
+    const today = await mount('today', person);
+    assert.ok(shown(today).includes(stored(data, dailyDeclaration(locale, now).ref)));
     const word = await mount('dailyPage', person, { page: 'declaration' });
+    await press(word, copy['declaration.topicsPaid']);
+    assert.deepEqual(calls.at(-1), ['push', '/paid']);
     if (!strings(word).includes(copy['daily.done'])) await press(word, copy['daily.said']);
     assert.ok(strings(word).includes(copy['daily.done']));
     await press(word, copy['share.title']);
@@ -683,13 +683,21 @@ for (const locale of ['en', 'es'] as const) {
     await press(word, copy['share.render']);
     assert.equal(host(word, 'Image')[0].props.source.uri, `data:image/png;base64,${png}`);
     assert.ok(strings(word).includes(copy['share.download']));
-    const plans = await mount('dailyPage', person, { page: 'plans' });
-    const planTitles = ['rest', 'courage', 'mercy'].map(id => copy[`daily.plan.${id}`]);
-    assert.deepEqual(host(plans, 'Pressable').filter(node => planTitles.some(title => textOf(node).includes(title))).length, 3);
-    await press(plans, copy[locale === 'es' ? 'daily.plan.courage' : 'daily.plan.rest']);
-    assert.equal(host(plans, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 7);
-    await press(plans, copy['daily.plan.complete']);
-    assert.ok(strings(plans).includes(copy['daily.done']));
+    const mindset = await mount('dailyPage', { ...person, door: 'mindset', journey: 'imagination-nights', language: locale }, { page: 'declaration' });
+    assert.equal(shown(mindset).length, 0);
+    assert.ok(!strings(mindset).includes(copy['daily.prayer']));
+    assert.ok(mindsetDeclarations.some(item => strings(mindset).includes(copy[item.line])));
+    const plansPage = await mount('dailyPage', person, { page: 'plans' });
+    const basic = plans.filter(plan => !plan.paid);
+    for (const plan of basic) assert.ok(strings(plansPage).includes(copy[plan.title]));
+    await press(plansPage, copy[locale === 'es' ? 'daily.plan.courage' : 'daily.plan.rest']);
+    assert.equal(host(plansPage, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 7);
+    await press(plansPage, copy['daily.plan.complete']);
+    assert.ok(strings(plansPage).includes(copy['daily.done']));
+    const longer = await mount('dailyPage', person, { page: 'plans' });
+    await press(longer, copy['plan.heavy.title']);
+    assert.deepEqual(calls.at(-1), ['push', '/paid']);
+    assert.ok(!strings(longer).includes(copy['daily.plan.day'].replace('%{day}', '30')));
     const journal = await mount('dailyPage', person, { page: 'journal' });
     const entry = `Test note ${locale}`;
     await type(journal, entry);
@@ -699,6 +707,63 @@ for (const locale of ['en', 'es'] as const) {
     assert.equal(host(reopened, 'TextInput')[0].props.value, entry);
     const completed = await mount('today', person);
     assert.ok(strings(completed).includes(copy['today.week'].one.replace('%{count}', '1')));
+  });
+
+  test(`Paid ${locale}: every past story, longer plans and declaration topics open once the store says paid`, async () => {
+    const now = new Date();
+    const data = source();
+    const shelfNow = shelf(tellingFor(locale, person.journey as JourneyId), 'adult');
+    const past = pastStories(shelfNow, now);
+    assert.equal(past.length, shelfNow.length - 1);
+    assert.equal(new Set([storyFor(shelfNow, now)!.id, ...past.map(item => item.story.id)]).size, shelfNow.length);
+    const archive = await asPaid(() => renderDaily('stories', now));
+    try {
+      for (const { story } of past) assert.ok(strings(archive).includes(story.title), story.id);
+      await press(archive, past[3].story.title);
+      assert.deepEqual(calls.at(-1), ['open', ['story', past[3].story.id]]);
+    } finally { await closePaid(archive); }
+    const old = await asPaid(() => renderDaily('story', now, person, past[3].story.id));
+    try {
+      assert.ok(strings(old).includes(past[3].story.title));
+      assert.deepEqual(shown(old), past[3].story.blocks.filter(block => block.type === 'scripture').map(block => stored(data, block.ref)));
+    } finally { await closePaid(old); }
+
+    const plansPage = await asPaid(() => mount('dailyPage', person, { page: 'plans' }));
+    try {
+      await press(plansPage, copy['plan.heavy.title']);
+      const heavy = plans.find(plan => plan.id === 'heavy-30')!;
+      assert.equal(host(plansPage, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, heavy.readings.length);
+      assert.ok(strings(plansPage).includes(formatReference(parseReference('Revelation 21:1-7')!, locale)));
+    } finally { await closePaid(plansPage); }
+
+    const word = await asPaid(() => mount('dailyPage', person, { page: 'declaration' }));
+    try {
+      assert.equal(radios(word).length, topics.length + 1);
+      await press(word, copy['declaration.topic.workMoney']);
+      assert.equal(JSON.parse(local.get('pbs-daily')!).topic, 'work-money');
+      const inTopic = byTopic(locale, 'work-money');
+      const chosen = dailyDeclaration(locale, now, 'work-money');
+      assert.ok(inTopic.some(item => item.id === chosen.id));
+      for (const item of inTopic) assert.ok(strings(word).includes(item.text), item.id);
+      assert.ok(shown(word).includes(stored(data, chosen.ref)));
+      await press(word, copy['declaration.anyTopic']);
+      assert.equal(JSON.parse(local.get('pbs-daily')!).topic, undefined);
+    } finally { await closePaid(word); }
+
+    const mindset = { ...person, door: 'mindset', journey: 'imagination-nights', language: locale };
+    const scene = await asPaid(() => mount('dailyPage', mindset, { page: 'declaration' }));
+    try {
+      assert.equal(radios(scene).length, mindsetTopics.length + 1);
+      await press(scene, copy['declaration.topic.work']);
+      for (const item of mindsetDeclarations.filter(row => row.topic === 'work')) assert.ok(strings(scene).includes(copy[item.line]));
+      assert.equal(shown(scene).length, 0);
+      await press(scene, copy['declaration.anyTopic']);
+    } finally { await closePaid(scene); }
+    // The Mindset door never reaches stories or reading plans, paid or not.
+    for (const page of ['story', 'stories', 'plans']) {
+      const tree = await asPaid(() => mount('dailyPage', mindset, { page }));
+      try { assert.deepEqual(host(tree, 'Redirect')[0]?.props.href, '/today'); } finally { await closePaid(tree); }
+    }
   });
 }
 
@@ -718,6 +783,19 @@ async function mountPaid(value: Settings = readyForPaid, setup?: () => void) {
   fakePurchaseCalls.length = 0;
   setup?.();
   return mount('paid', value);
+}
+
+/** Any screen, mounted with the store reporting an active paid entitlement (the same fake store as the price screen). */
+async function asPaid(render: () => Promise<ReactTestRenderer>) {
+  (globalThis as any).__pbsPlatform = 'ios';
+  (globalThis as any).__pbsExpoConfig = { extra: { revenueCatIosKey: 'render-test-key' } };
+  chatRecord = JSON.stringify({ age: 'adult', token: 'render-token', installId: 'render-install' });
+  storeUser = 'render-install';
+  storePaid = true;
+  listeners = new Set();
+  const tree = await render();
+  await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+  return tree;
 }
 
 async function closePaid(tree: ReactTestRenderer) {

@@ -25,7 +25,12 @@ const statusCopy = {
   nothingToRestore: 'paid.nothingToRestore',
   restoreFailed: 'paid.restoreFailed',
 } as const;
-const benefits = ['paid.chat', 'paid.nights', 'paid.stories', 'paid.topics'] as const;
+// Each line is a built feature (ship-ready app-review.md check 13). Stories and reading plans live behind
+// the God's Word door only, so the Mindset door is never sold them.
+const benefits = {
+  faith: ['paid.chat', 'paid.nights', 'paid.stories', 'paid.topics'],
+  mindset: ['paid.chat', 'paid.nights', 'paid.topics'],
+} as const;
 const subscriptions = 'https://apps.apple.com/account/subscriptions';
 
 export default function PaidScreen() {
@@ -82,7 +87,7 @@ export default function PaidScreen() {
         <Body size={15}>{t('paid.intro')}</Body>
       </View>
       <View style={{ gap: 8 }}>
-        {benefits.map(key => <Body key={key} size={15} muted={false}>{t(key)}</Body>)}
+        {benefits[settings.door === 'mindset' ? 'mindset' : 'faith'].map(key => <Body key={key} size={15} muted={false}>{t(key)}</Body>)}
       </View>
       {paid ? <Body muted={false}>{t('paid.active')}</Body> : null}
       {!paid && offers ? (
