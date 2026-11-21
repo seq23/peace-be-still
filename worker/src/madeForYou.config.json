@@ -1,0 +1,61 @@
+{
+  "_": "Made for you: one config read by the Worker (worker/src/madeForYou.ts) and the Mac runner (audio/made_for_you.py). allowanceBooks() in madeForYou.ts adds these caps to chat's own caps and worker/test/madeForYou.unit.mjs fails if any provider's free allowance is exceeded.",
+  "allowance": {
+    "_": "Free daily allowances. Gemini: 500 requests per model per day, CONFIRMED 20 Nov 2026 from the API's own quota error (GenerateRequestsPerDayPerProjectPerModel-FreeTier, quotaValue 500, gemini-3.5-flash-lite); chat books 200, made-for-you a share. The rest as phase 3 measured them (worker/wrangler.jsonc on codex/pbs-phase-3).",
+    "workersAiNeurons": 10000,
+    "geminiRequestsPerModel": 500,
+    "openRouterRequests": 1000,
+    "openRouterRotationMargin": 50,
+    "madeForYouRotationMargin": 10
+  },
+  "chatNeuronsPerCall": {
+    "_": "Measured by phase 3 on her account (llama-3.1-8b risk screen, llama-3.3-70b confirm, judge and answer).",
+    "risk": 2.7,
+    "riskConfirm": 19,
+    "judge": 24,
+    "answer": 109
+  },
+  "draftNeuronsWorstCase": 466,
+  "_draftNeurons": "llama-3.3-70b fp8-fast at Cloudflare's published rate: 2,200 output tokens x 0.2045 + ~600 input tokens x 0.0266 neurons.",
+  "judgeNeuronsWorstCase": 217,
+  "callTimeoutMs": 90000,
+  "_callTimeoutMs": "One HTTP try's limit for every made-for-you draft and judgment, free and paid (phase 3's providers take it as the rung's fifth argument; chat keeps CHAT_TIMEOUT_MS, 25 s). A background queue can wait: a 2,200-token draft from a slower host runs past 25 s (DeepSeek on OpenRouter took 12.3 s p50 for 350-token chat replies, 21 Nov 2026 model compare).",
+  "draftMaxTokens": 2200,
+  "judgeMaxTokens": 800,
+  "_judgeMaxTokens": "The judge answers 28 fields (16 chat checks, 11 session checks, voice). At 300 tokens Gemini's answers were cut off mid-object (NOT_JSON on every call, 21 Nov 2026 run 44893624600), so every judgment was DOWN. 800 leaves room; worst-case neurons: 800 x 0.2045 + ~2,000 input x 0.0266.",
+  "revisions": 2,
+  "rungOrder": ["gemini-free:gemini-3-flash-preview", "gemini-free:gemini-3.6-flash", "openrouter-free", "gemini-free:gemini-3.5-flash-lite", "gemini-free:gemini-3.1-flash-lite", "workers-ai"],
+  "_rungOrder": "Strongest free model first (coordinator's design, 21 Nov 2026: made-for-you volume is a few sessions a day, so quality, not price, picks rung 1). Measured in run 44940443859 (6 psalm notes): gemini-3-flash-preview answered 9 of 10 calls (one 503) and drafted 3 of the 5 made sessions; gemini-3.6-flash answered 7, then its free daily quota ran out (HTTP_429_DAILY after about 11 calls), so it is second; gemini-3.8-flash refused every call (HTTP_400, 17 of 17) and is left out; gemini-3.7-flash was busy (503) and gemini-3.1-pro-preview has no free quota (429) when probed. Flash-lite and Workers AI go last. The soak's draft pass rate per rung (MADE_FOR_YOU_DRAFT_CHECK) re-orders it.",
+  "escalate": {
+    "_": "The one place the drafting escalation is set (her ruling 21 Nov 2026): a free model drafts and revises freeRevisions times; the next revision, and any redraft of a note a free model has already failed, goes to the private paid rung alone (madeForYouRungs paidOnly), under the same PAID_AI_MONTHLY_CAP_USD. A free model never gets a third try on a note.",
+    "freeRevisions": 1
+  },
+  "_revisions": "A try is one draft plus up to two revisions that send it back with its exact faults (draftFaults). Soak of 21 Nov 2026: with fresh drafts only, 11 of 12 requests stopped on fixable floors.",
+  "draft": {
+    "workers-ai": 1,
+    "gemini-free": 30,
+    "openrouter-free": 20
+  },
+  "judge": {
+    "workers-ai": 0,
+    "gemini-free": 30,
+    "openrouter-free": 20
+  },
+  "paid": {
+    "_": "Her ruling, 21 Nov 2026: free models stay first; when they are busy, empty or rate-limited a session is drafted and judged by the private paid model, so it never fails or slips for that. Phase 3's paid route (openRouterPrivate: zdr, data_collection deny, these US hosts only, no fallbacks; never DeepSeek's own API) on its key (OPENROUTER_API_KEY). Every call's cost is tallied into chat's paid_spend_micro, under the same PAID_AI_MONTHLY_CAP_USD; at the cap the rung is left out. Price: the dearest of the three hosts (Fireworks US, 21 Nov 2026 OpenRouter endpoints list), so the meter never reads low. Caps: a day's worst case is 40 calls, about $0.25.",
+    "model": "deepseek/deepseek-v4.1-flash",
+    "hosts": ["deepinfra", "together", "fireworks"],
+    "price": { "in": 0.45, "out": 1.8 },
+    "draft": 30,
+    "judge": 10
+  },
+  "costPerSession": {
+    "_": "Calls per MADE session, every call counted (answered, refused or failed, as the share counters book them), from the soak's own call log. Imagination: run 44901386751, 28 draft and 6 judge calls for 4 made. Psalm: run 44940443859 (personal middle, 6 notes), 27 free draft and 13 free judge calls for 5 made (5.4 and 2.6 a session), its summary.json calls; it counts gemini-3.8-flash's 17 refused calls although that rung is now left out, so it reads high. Paid calls are on the paid meter, not this share.",
+    "imagination": { "draft": 7, "judge": 1.5 },
+    "psalm": { "draft": 5.4, "judge": 2.6 }
+  },
+  "sessionMinutes": 15,
+  "_sessionMinutes": "Measured 20 Nov 2026: real passing scripts voiced, mastered and QA-checked in 4.5 and 5.2 min on a GitHub runner (12.4 and 10.3 min of audio at 91 and 98 wpm), 7 min 38 s on the Mac; the Worker's claim took 8-48 s when a model answered (abort at 4 min). 15 leaves room for nice 15 and the private upload.",
+  "sessionsPerNight": 3,
+  "_sessionsPerNight": "Soak-proven 21 Nov 2026 (run 44901386751, compressed to 2.5 h at the owner's ask, after chat red team 44899789903; red team keys under the chat-wins share cap; real ladder; free quotas only): 4 of 12 made (EN 2, ES 2, all Imagination; 0 of 6 Psalm), all within 14 minutes, then every row held: the day's made-for-you Gemini draft share (30 + 30) was spent, OpenRouter answered 429 on all 20, Workers AI gave its 1. Chat's own rows stayed under half (Gemini 41 and 30 of 200, OpenRouter 20 of 900); 10 MFY_SHARE_USED holds. The free draft share, not the Mac, is the limit: ~15 drafts per made session. 4 less a 20% margin = 3."
+}

@@ -40,3 +40,23 @@ jobs:
         working-directory: app
       # Tests run in workerd with a local D1 (Miniflare); verses come from the app's real Bible files.
       - run: npm run typecheck && npm test
+  # Made for you: the lane's unit tests (the chat's real gate, ladder and providers, from this tree) and the
+  # local Worker tests (the lane mounted in this Worker on a local D1, with the Mac's Python runner).
+  made-for-you:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            worker/package-lock.json
+            app/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --prefix app --no-audit --no-fund
+      - run: npm ci --prefix worker --no-audit --no-fund && npm install --prefix worker --no-save --package-lock=false --no-audit --no-fund miniflare@5.20261118.0-beta
+      - run: node --test worker/test/madeForYou.unit.mjs worker/test/madeForYou.local.mjs

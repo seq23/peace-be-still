@@ -32,7 +32,7 @@ Si usted tiene un plan de pago, el chat puede recordar lo que le pesa. Esa memor
 
 ## Sesiones hechas para usted
 
-Si usted tiene un plan de pago y pide una sesión hecha para usted, la escena o la preocupación que escriba se envía a nuestro servicio. Proveedores gratuitos de IA escriben el guion de la sesión a partir de sus palabras, y pueden guardar lo que usted escribe y aprender de ello, igual que en el chat (el formulario se lo dice antes de enviar). Hacemos el audio en nuestra propia computadora con un motor de voz de código abierto. Sus palabras escritas se borran en cuanto se hace el audio, y a más tardar 7 días después de que las envíe. El audio terminado se guarda para que usted lo escuche hasta que lo borre, o hasta 30 días después de que termine su plan de pago.
+Si usted tiene un plan de pago y pide una sesión hecha para usted, la escena o la preocupación que escriba se envía a nuestro servicio. Proveedores gratuitos de IA escriben el guion de la sesión a partir de sus palabras, y pueden guardar lo que usted escribe y aprender de ello, igual que en el chat (el formulario se lo dice antes de enviar). Cuando los proveedores gratuitos están ocupados, o un borrador gratuito no pasa nuestros controles después de una revisión, lo escribe en su lugar un modelo privado de pago, a través de servidores que no guardan nada de lo que usted envía y nunca entrenan con ello. Hacemos el audio en nuestra propia computadora con un motor de voz de código abierto. Sus palabras escritas se borran en cuanto se hace el audio, y a más tardar 7 días después de que las envíe. El audio terminado se guarda para que usted lo escuche hasta que lo borre, o hasta 30 días después de que termine su plan de pago.
 
 ## Uso justo y registros de seguridad
 

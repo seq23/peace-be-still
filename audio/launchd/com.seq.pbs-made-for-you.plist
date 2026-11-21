@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Peace Be Still made-for-you: every 15 minutes. Its own job, log and exit code (the Boss OS schedule
+     row "pbs-made-for-you", metric "private sessions published", reads this log's OUTPUT line). Renders
+     only in the run window (audio/fill.py window_minutes); outside it, a pass only reports, so a late
+     promise is seen at once. Nice 15 and low-priority disk I/O, like the library fill. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.seq.pbs-made-for-you</string>
+  <key>ProgramArguments</key>
+  <array><string>/bin/zsh</string><string>__RUNNER__/audio/made_for_you.sh</string></array>
+  <key>StartInterval</key><integer>900</integer>
+  <key>RunAtLoad</key><true/>
+  <key>Nice</key><integer>15</integer>
+  <key>LowPriorityIO</key><true/>
+  <key>StandardOutPath</key><string>__HOME__/.peace-be-still/logs/made-for-you.log</string>
+  <key>StandardErrorPath</key><string>__HOME__/.peace-be-still/logs/made-for-you.log</string>
+</dict>
+</plist>

@@ -27,5 +27,7 @@ echo "OUTPUT devicecheck: 3 Worker secrets put from the vault"
 $W r2 bucket list $CFG 2>/dev/null | grep -q "pbs-story-art" || $W r2 bucket create pbs-story-art $CFG
 $W d1 migrations apply peace-be-still-chat --remote $CFG
 node scripts/worker-bible-load.mjs --remote
+# Made for you's Scripture index over the same Bible (idempotent, keyed to the Bible version; zero rows stops the deploy).
+node worker/scripts/made-for-you-bible-runs.mjs --remote
 $W deploy $CFG
 echo "OUTPUT worker: deployed peace-be-still-chat"

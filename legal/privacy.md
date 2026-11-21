@@ -30,7 +30,7 @@ If you have a paid plan, chat can remember what you are carrying. That memory is
 
 ## Sessions made for you
 
-If you have a paid plan and ask for a session made for you, the scene or worry you write is sent to our service. Free AI providers write the session script from your words, and they may keep what you write and learn from it, as with chat (the request form says so before you send). We make the audio on our own computer with an open-source voice engine. Your written words are deleted once the audio is made, and at most 7 days after you send them. The finished audio is kept for you to play until you delete it, or until 30 days after your paid plan ends.
+If you have a paid plan and ask for a session made for you, the scene or worry you write is sent to our service. Free AI providers write the session script from your words, and they may keep what you write and learn from it, as with chat (the request form says so before you send). When the free providers are busy, or what they write still misses our checks after one revision, a private paid model writes it instead, through hosts that keep nothing you send and never train on it. We make the audio on our own computer with an open-source voice engine. Your written words are deleted once the audio is made, and at most 7 days after you send them. The finished audio is kept for you to play until you delete it, or until 30 days after your paid plan ends.
 
 ## Fair use and safety records
 
