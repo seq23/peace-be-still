@@ -151,6 +151,14 @@ test('a story gets its own title; a story with no readable title is held', () =>
   assert.equal(skipped.length, 1);
 });
 
+test('a re-voiced script ships only its newest file, so a shelf never lists two versions', () => {
+  const night = { file: 'en/imagination-night/in-01-aaaa1111.m4a', kind: 'imagination-night', lang: 'en', ref: 'content/imagination-nights/en/in-01.json#in-01', seconds: 1029, sha256: 'd'.repeat(64), voice: 'v', status: 'passed' };
+  const longer = { ...night, file: 'en/imagination-night/in-01-bbbb2222.m4a', seconds: 1115, sha256: 'e'.repeat(64) };
+  const spanish = { ...night, lang: 'es', file: 'es/imagination-night/in-01-cccc3333.m4a', ref: 'content/imagination-nights/es/in-01.json#in-01' };
+  const { tracks } = readManifest([night, longer, spanish].map(r => JSON.stringify(r)).join('\n'), () => ({ titles: { en: 'Living in the End', es: 'Vivir desde el final' } }));
+  assert.deepEqual(tracks.map(t => t.file), [longer.file, spanish.file]);
+});
+
 test('the audio base URL must be https; anything else is the CONFIG_AUDIO_BASE_URL stop', () => {
   assert.equal(audioBaseUrl('https://audio.example.org/lib'), 'https://audio.example.org/lib/');
   for (const value of [undefined, null, '', 'http://audio.example.org', 'not a url']) assert.equal(audioBaseUrl(value), null);

@@ -72,7 +72,15 @@ export function readManifest(jsonl: string, displayOf: (row: ManifestRow) => Tra
     tracks.push(track);
   });
   if (!tracks.length) throw new LibraryEmptyError(skipped.length);
-  return { tracks, skipped };
+  return { tracks: latestPerScript(tracks), skipped };
+}
+
+/** A re-voiced script (edited text, a longer night) is a new file with a new row; only its newest passed row
+ * ships, so the shelf never lists two versions of one story or night. Rows are appended in voicing order. */
+function latestPerScript(tracks: Track[]): Track[] {
+  const key = (t: Track) => `${t.kind}|${t.lang}|${t.ref}`;
+  const last = new Map(tracks.map((t, i) => [key(t), i]));
+  return tracks.filter((t, i) => last.get(key(t)) === i);
 }
 
 export function hasCallAndResponse(track: Track): boolean {
