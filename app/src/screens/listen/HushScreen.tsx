@@ -6,7 +6,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { formatReference, parseReference } from '../../bible/core';
 import { clock, inSmallHours } from '../../clock';
-import type { Track } from '../../player/library';
+import { trackTitle, type Track } from '../../player/library';
 import { useT } from '../../settings';
 import { fonts, night } from '../../theme/tokens';
 
@@ -25,7 +25,7 @@ export function BackToSleep({ track, showAll }: { track: Track; showAll: () => v
   const router = useRouter();
   const minutes = Math.max(1, Math.round(track.seconds / 60));
   const ref = track.scriptureRef && parseReference(track.scriptureRef);
-  const detail = t('hush.detail', { minutes, ref: ref ? formatReference(ref, t.locale) : t('journey.psalmNights.name') });
+  const detail = t('hush.detail', { minutes, ref: ref ? formatReference(ref, t.locale) : trackTitle(track, t.locale) });
   return (
     <SafeAreaView edges={['top']} style={styles.screen}>
       <View style={styles.middle}>

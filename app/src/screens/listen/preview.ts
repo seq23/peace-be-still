@@ -12,7 +12,7 @@ const sample = (kind: 'psalm-night' | 'imagination-night', lang: 'en' | 'es', ti
   file: `${lang}/${kind}/preview-${journey ?? 'sample'}.m4a`, kind, lang, seconds: journey === 'back-to-sleep' ? 360 : 900, voice: 'preview',
   sha256: `preview-${journey ?? kind}-${lang}`,
   ref: `content/${kind === 'psalm-night' ? 'psalm-nights' : 'imagination-nights'}/${lang}/preview-${journey ?? 'sample'}.json#preview`,
-  titles: { [lang]: title }, ...(journey ? { journey } : {}),
+  titles: { [lang]: title }, ...(journey ? { journey } : {}), ...(journey === 'back-to-sleep' ? { scriptureRef: 'PSA 4:8' } : {}),
 } as Track);
 
 export const PREVIEW_SLEEP_SESSIONS: readonly Track[] = [
