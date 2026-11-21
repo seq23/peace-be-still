@@ -140,7 +140,7 @@ const usd = (value: string | undefined, fallback: number) => { const n = Number(
  */
 const paidRung = (env: Env, now: number): LadderRung => {
   const provider: string = env.PAID_PROVIDER || 'gemini';
-  const call = provider === 'workers-ai' ? workersAi(env.AI, env.PAID_MODEL)
+  const call = provider === 'workers-ai' ? workersAi(env.AI, env.PAID_MODEL, { thinking: false })
     : provider === 'openrouter-zdr' ? openRouterPrivate(env.OPENROUTER_API_KEY, env.PAID_MODEL, (env.PAID_HOSTS ?? '').split(',').map(h => h.trim()).filter(Boolean))
     : gemini(env.PBS_GEMINI_API_KEY, env.PAID_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL });
   return { id: `paid-${provider}:${env.PAID_MODEL}`, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5), cached: usd(env.PAID_PRICE_CACHED_PER_M, usd(env.PAID_PRICE_IN_PER_M, 0.3) / 4) } };
@@ -184,7 +184,7 @@ export const realDeps: Deps = {
     if (lane === 'paid') return [paidRung(env, now)];
     if (lane === 'crisis') return [crisisRung(env, now)];
     const built: Record<string, LadderRung[]> = {
-      'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
+      'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL, { thinking: false }), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
       'gemini-free': geminiModels(env).map(model => geminiRung(env, model, now)),
       'openrouter-free': [{ id: 'openrouter-free', call: openRouter(env.OPENROUTER_API_KEY, env.OPENROUTER_MODELS.split(',')), cap: int(env.OPENROUTER_CALLS_DAILY, 900), day: utcDay(now) }],
     };

@@ -11,3 +11,18 @@ describe('the Workers AI rung reads both answer shapes', () => {
     expect(await workersAi(ai({ choices: [{ message: { content: '{"pass":true}' } }] }), 'm')([], {}, 10)).toEqual({ pass: true });
   });
 });
+
+describe('thinking off for chat answers (run 10 root cause)', () => {
+  it('a chat answer call turns thinking off; DeepSeek also gets reasoning_effort none; a check call is left as is', async () => {
+    const { workersAi } = await import('../src/providers/workers-ai');
+    const sent: Array<Record<string, unknown>> = [];
+    const ai = { run: async (_m: string, input: Record<string, unknown>) => { sent.push(input); return { choices: [{ message: { content: '{"text":"x","references":[],"risk":"none"}' } }] }; } } as unknown as Ai;
+    await workersAi(ai, '@cf/zai-org/glm-4.7-flash', { thinking: false })([{ role: 'user', content: 'hi' }], {}, 350);
+    await workersAi(ai, '@cf/deepseek-ai/deepseek-v4.1-flash-1017', { thinking: false })([{ role: 'user', content: 'hi' }], {}, 350);
+    await workersAi(ai, '@cf/openai/gpt-oss-120b', { temperature: 0 })([{ role: 'user', content: 'hi' }], {}, 200);
+    expect(sent[0].chat_template_kwargs).toEqual({ enable_thinking: false });
+    expect(sent[0].reasoning_effort).toBeUndefined();
+    expect(sent[1].reasoning_effort).toBe('none');
+    expect(sent[2].chat_template_kwargs).toBeUndefined();
+  });
+});

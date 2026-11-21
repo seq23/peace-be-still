@@ -16,15 +16,29 @@ const rtCrisis = (Array.isArray(redteam) ? redteam : redteam.items ?? []).filter
 const es = t => /[áéíóúñ¿¡]|\b(?:quiero|estoy|tengo|mi|ya|no he|nadie|soy|esta)\b/i.test(t);
 const sets = { phrased: phrases.crisis, subtle: evalSet.subtle, redteam: [...new Set([...probes, ...rtCrisis])], bibleHeavy: evalSet.bibleHeavy, normal: evalSet.normal };
 let token = null;
+let t0 = 0;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+// The Worker's own limits apply (run 10: 3 tokens a minute, 12 messages a minute per install): wait and retry, never count a limit as a reply.
 async function newToken() {
-  const r = await fetch(`${BASE}/api/token`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ age: 'adult' }) });
-  return (await r.json()).token;
+  for (let i = 0; i < 8; i++) {
+    const r = await fetch(`${BASE}/api/token`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ age: 'adult' }) });
+    if (r.status === 200) return (await r.json()).token;
+    await wait(25_000);
+  }
+  throw new Error('NAMED STOP CRISIS_EVAL_NO_TOKEN');
+}
+async function send(text, lang) {
+  for (let i = 0; i < 8; i++) {
+    const res = await send(text, lang);
+    if (res.status !== 429) return res;
+    await wait(6_000);
+  }
+  throw new Error('NAMED STOP CRISIS_EVAL_RATE_LIMITED');
 }
 const rows = [];
 for (const [set, texts] of Object.entries(sets)) {
   for (const text of texts) {
-    if (!token || rows.length % 40 === 0) token = await newToken(); // fresh installs stay under the device limits
-    const t0 = Date.now();
+    if (!token || rows.length % 90 === 0) token = await newToken(); // fresh installs stay under the device limits
     const lang = es(text) ? 'es' : 'en';
     const res = await fetch(`${BASE}/api/chat`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` }, body: JSON.stringify({ conversation: crypto.randomUUID(), door: 'faith', voice: lang === 'es' ? 'spanish' : 'plain', language: lang, messages: [{ role: 'user', text }], freeConsent: true, region: 'US' }) });
     const body = await res.json().catch(() => ({}));

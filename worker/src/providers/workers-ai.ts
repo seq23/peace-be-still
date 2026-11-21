@@ -1,14 +1,18 @@
 import { backoff, parseJson, RungError, sleep, type Rung } from './types';
 // Workers AI on the account's free 10,000 neurons a day. "Daily free allocation" (error 4006) is
 // the only error that means out for today; capacity errors and blips are retried once.
-export function workersAi(ai: Ai, model: string, opts: { temperature?: number } = {}): Rung {
+// thinking: false turns a reasoning model's thinking off for chat answers (run 10: GLM 4.7 spent the whole
+// 350-token budget thinking and returned no content on 65 of 65 calls; DeepSeek V4.1 truncated 57 of 87).
+// chat_template_kwargs is accepted by every chat model tried (GLM, Qwen, Llama); DeepSeek takes reasoning_effort.
+const noThinking = (model: string) => ({ chat_template_kwargs: { enable_thinking: false }, ...(/deepseek/i.test(model) ? { reasoning_effort: 'none' } : {}) });
+export function workersAi(ai: Ai, model: string, opts: { temperature?: number; thinking?: boolean } = {}): Rung {
   return async (messages, schema, maxTokens, onUsage) => {
     let last: RungError = new RungError('failed', 'WORKERS_AI_ERROR');
     for (let attempt = 0; attempt < 2; attempt++) {
       if (attempt) await sleep(backoff.ms(attempt));
       let out: { response?: unknown; choices?: Array<{ message?: { content?: unknown } }>; usage?: { prompt_tokens?: number; completion_tokens?: number; prompt_tokens_details?: { cached_tokens?: number } } };
       try {
-        out = (await ai.run(model as keyof AiModels, { messages, response_format: { type: 'json_schema', json_schema: schema }, max_tokens: maxTokens, ...(opts.temperature === undefined ? {} : { temperature: opts.temperature }) } as never)) as typeof out;
+        out = (await ai.run(model as keyof AiModels, { messages, response_format: { type: 'json_schema', json_schema: schema }, max_tokens: maxTokens, ...(opts.temperature === undefined ? {} : { temperature: opts.temperature }), ...(opts.thinking === false ? noThinking(model) : {}) } as never)) as typeof out;
       } catch (error) {
         const s = String(error);
         if (/4006|daily free allocation|neurons/i.test(s)) throw new RungError('exhausted', 'WORKERS_AI_DAILY');
