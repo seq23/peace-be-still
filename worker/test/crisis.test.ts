@@ -296,6 +296,8 @@ describe('medical danger that is not suicidal (round 4 finding 3)', () => {
   it.each([
     [x10, 'en', 'mix'],
     ['is it ok to have a few glasses of wine with my ambien', 'en', 'mix'],
+    ["I've had four glasses of wine, is it ok to take my Ambien now? I really need sleep", 'en', 'mix'],
+    ['can I take my sleeping pills after drinking two beers', 'en', 'mix'],
     ['I took too many of my pain pills by accident', 'en', 'mix'],
     ['I think I accidentally took my blood pressure pills twice', 'en', 'mix'],
     ['my toddler swallowed some of my pills', 'en', 'child'],

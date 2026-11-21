@@ -75,6 +75,9 @@ const sure: Array<[CrisisKind, RegExp]> = [
     W`${sedative}(?: \w+){0,6} (?:with|and|plus|after|on top of|con|y|despues de)(?: \w+){0,3} ${alcohol}`,
     W`${alcohol}(?: \w+){0,6} (?:with|and|plus|then|after|con|y|despues de)(?: \w+){0,3} ${sedative}`,
     W`(?:mix|mixing|mezclar|mezclo)(?: \w+){0,4} ${sedative}`,
+    // "I've had four glasses of wine, is it ok to take my Ambien now?" (model compare 21 Nov 2026: one route gave the 988 card).
+    W`${alcohol}(?: \w+){0,8} (?:take|taking|took|have|pop|tomar|tomo|tomarme|me tomo)(?: \w+){0,2} ${sedative}`,
+    W`${sedative}(?: \w+){0,6} (?:after|while|since)(?: \w+){0,4} ${alcohol}`,
     W`(?:couple|few|handful|bunch|double|triple|extra|more|unas cuantas|varias|mas|doble)(?: extra| more| mas)?(?: of)?(?: my| the| mis| las| los)? ${sedative}`,
     W`double (?:up on|dose|my dose)`, W`more than (?:prescribed|the bottle says|the label says|i should|my doctor)`, W`(?:took|taken|tomé|tome) (?:too many|too much|demasiadas|demasiado)`,
     W`(?:accidentally|by accident|por accidente|sin querer) (?:took|take|taken|overdosed|me tome|tome)`,
@@ -233,7 +236,7 @@ export function saysNotSafe(lastAssistant: string | undefined, herReply: string)
 }
 
 /** The words of the answer model's risk tag and of the crisis instructions every answer prompt carries. */
-export const RISK_TAG = 'Also set "risk" for the person writing, judged on the last few turns: "high" if they may hurt or kill themselves, or someone is hurting, forcing or threatening them, or their body is in danger now; "low" for signs that are not clear (hopeless, worthless, cannot go on, not eating, afraid at home); "none" for anything else, including Bible questions about death, killing, suicide or violence in scripture. If they seem in danger, answer gently, never describe any method, never promise a secret, and encourage them to reach a real person they trust today.';
+export const RISK_TAG = 'Also set "risk" for the person writing, judged on the last few turns: "high" if they may hurt or kill themselves, or someone is hurting, forcing or threatening them, or their body is in danger now; "low" for signs that are not clear (hopeless, worthless, cannot go on, not eating, afraid at home); "none" for anything else, including Bible questions about death, killing, suicide or violence in scripture, and questions about what the Bible or a church teaches on suicide, abuse, divorce or depression when they say nothing about themselves or someone hurting them now. If they seem in danger, answer gently, never describe any method, never promise a secret, and encourage them to reach a real person they trust today.';
 // The distress pre-filter (EN/ES, folded): words that MIGHT mean danger. A hit never goes to a free
 // model; the safety model reads it first. A negation in front ("not hopeless", "no me siento sola")
 // or a question about Scripture does not count.
@@ -242,6 +245,8 @@ const NEGATED = / (?:not|no|never|isnt|im not|arent|nunca|ni) (?:\w+ )?$/;
 const ABOUT_SCRIPTURE = / (?:bible|scripture|verse|psalms?|proverbs|gospel|genesis|exodus|revelation|romans|jesus|christ|god|lord|cross|judas|saul|david|goliath|cain|abel|samson|moses|abraham|isaac|jacob|joseph|paul|peter|tamar|absalom|uzzah|elijah|jonah|job|pharaoh|herod|biblia|escritura|versiculo|salmos?|evangelio|cristo|dios|senor|cruz|goliat|cain|abel|elias|jonas) /;
 // A teen (13 to 17) with a partner who is an adult: Childhelp's case, read by the safety model first.
 const AGE_GAP = / (?:im|i am|tengo) 1[3-7]\b.*\b(?:boyfriend|girlfriend|novio|novia|he|she|el|ella) (?:is|tiene) (?:1[89]|[2-9]\d)\b/;
+/** A message about Scripture (Goliath, the cross, Tamar): Bible study unless the safety model reads danger. */
+export const aboutScripture = (text: string) => ABOUT_SCRIPTURE.test(` ${fold(text)} `);
 export function distress(turns: Turn[]): boolean {
   if (AGE_GAP.test(fold(turns.filter(t => t.role === 'user').at(-1)?.text ?? ''))) return true;
   const users = turns.filter(t => t.role === 'user').slice(-2).map(t => fold(t.text));

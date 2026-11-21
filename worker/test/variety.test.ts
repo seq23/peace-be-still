@@ -2,7 +2,7 @@ import { env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
 import { cleanup } from '../src/cleanup';
 import { deleteMemory } from '../src/memory';
-import { hashShape, recentShapes, repeats, saveShape, shapeOf, varietyObjection } from '../src/quality/variety';
+import { hashShape, recentShapes, repeats, saveShape, shapeOf, varietyObjection, withoutTopic } from '../src/quality/variety';
 import { SAMPLES } from '../src/voice/samples';
 import type { Message } from '../src/providers/types';
 import { call, chat, deps, good, NOW, scripted, tokenFor } from './helpers';
@@ -194,5 +194,17 @@ describe('voice samples, not a code plan', () => {
     const r = await chat(deps({ rungList: [scripted('workers-ai', [plainOne]).rung], judge: async () => ({ verdict: 'fail', which: ['voice_low'], voice: 3 }) }), 'My mama died last week.');
     expect(r.body.kind).toBe('answer');
     expect(r.body.text).toBe(plainOne.text);
+  });
+});
+
+describe('her own topic is not an image (run 12)', () => {
+  it('pairs whose words she wrote are not compared; a pair she did not write still is', () => {
+    const q = 'Is sex before marriage a sin if we are engaged?';
+    const a = withoutTopic(shapeOf('Scripture keeps sex for marriage, and that is a gift, not a cage. Talk with your pastor about the wait. Lord, give us clear eyes and a steady heart.'), q);
+    const b = withoutTopic(shapeOf('The Bible places sex inside marriage as something good. Ask your pastor to walk the wait with you. Lord, give us clear eyes and a steady heart.'), q);
+    expect(a.pairs.some(p => p === 'sex marr')).toBe(false);
+    expect(repeats(a, [b])).toContain('repeat_image'); // "clear eyes", "eyes heart": not her words
+    const c = withoutTopic(shapeOf('Waiting can feel long. God honors the two of you choosing it. Lord, help us wait well.'), q);
+    expect(repeats(c, [b])).not.toContain('repeat_image');
   });
 });

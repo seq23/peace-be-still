@@ -31,7 +31,8 @@ export async function runLadder(db: D1Database, rungs: LadderRung[], messages: M
         tally(metrics, `tok_in:${rung.id}`, u.in); tally(metrics, `tok_out:${rung.id}`, u.out); tally(metrics, `tok_think:${rung.id}`, u.think);
         if (u.cached) tally(metrics, `tok_cached:${rung.id}`, u.cached);
         if (rung.price) {
-          tally(metrics, 'paid_spend_micro', microCost(u, rung.price.in, rung.price.out, rung.price.cached));
+          // What the route billed when it says (OpenRouter), else the list prices: the ledger is the real spend.
+          tally(metrics, 'paid_spend_micro', typeof u.usd === 'number' ? Math.round(u.usd * 1e6) : microCost(u, rung.price.in, rung.price.out, rung.price.cached));
           // What the same call would have cost with no prompt cache: the saving is measured, not assumed.
           tally(metrics, 'paid_spend_nocache_micro', microCost(u, rung.price.in, rung.price.out));
         }

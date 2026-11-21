@@ -63,6 +63,18 @@ export function shapeOf(text: string): Shape & { said: Said } {
   };
 }
 
+/**
+ * Her own topic is not an image (run 12: "sex marriage" to a question about sex before marriage,
+ * "husband wife" to one about a husband, were 32 rewrites): a pair whose two words both stand in what
+ * she wrote is left out, before the draft is compared or stored. A pair she did not write still counts,
+ * so a required line said the same way every time is repetition too (F6).
+ */
+export function withoutTopic<T extends Shape & { said: Said }>(shape: T, herText: string): T {
+  const hers = new Set(wordsOf(herText).map(stem));
+  const keep = shape.pairs.map(p => !p.split(' ').every(w => hers.has(w)));
+  return { ...shape, pairs: shape.pairs.filter((_, i) => keep[i]), said: { ...shape.said, pairs: shape.said.pairs.filter((_, i) => keep[i]), where: shape.said.where.filter((_, i) => keep[i]) } };
+}
+
 /** Problems for a draft against earlier answers (plain or hashed shapes, compared like for like). */
 export function repeats(draft: Shape, recent: Shape[]): string[] {
   const problems = new Set<string>();

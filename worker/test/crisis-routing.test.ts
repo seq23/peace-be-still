@@ -9,7 +9,7 @@ import { CRISIS_THINKING_HEADROOM, distress, floor } from '../src/crisis';
 import { centralDay } from '../src/day';
 import { FREE_CHAT_MESSAGES } from '../src/shared';
 import { limitText } from '../src/replies';
-import { call, chatBody, deps, good, NOW, scripted, tokenFor } from './helpers';
+import { call, chat, chatBody, deps, good, NOW, scripted, tokenFor } from './helpers';
 
 afterEach(() => vi.restoreAllMocks());
 const HOUR = 3600_000;
@@ -222,6 +222,27 @@ describe('the crisis model\'s words (run 10 root cause)', () => {
     expect(crisisWords({ text: 'Call 988 now.' })).toBeNull();
     expect(crisisWords({ text: 'Put the pills away.' })).toBeNull();
     expect(crisisWords({ text: 'Can you talk to someone?' })).toBeNull();
+  });
+});
+
+describe('the answer-side tripwire asks the safety model for the kind (run 12)', () => {
+  const reach = 'If you are ever in danger at home, call 911 or the 988 line right away. God sees what is done to people in the dark. Lord, keep us safe and seen.';
+  it('a husband\'s control the safety model reads as abuse gets the abuse card, not the 988 one', async () => {
+    const r = await chat(deps({ riskVerdict: { verdict: 'risk', kind: 'abuse', level: 'high' }, rungList: [scripted('gemini-free', [good(reach, [])]).rung] }), "My husband takes my whole paycheck and won't let me see my sister. My pastor says I'm supposed to submit. Is that biblical?");
+    expect(r.body.kind).toBe('crisis');
+    expect(r.body.crisis).toBe('abuse');
+  });
+  it('a plain question about Scripture the safety model reads as calm is written again without crisis lines: no card', async () => {
+    const rung = scripted('gemini-free', [good(reach, []), good('Tamar was wronged, and the Bible tells it plainly as a crime against her, never her fault (2 Samuel 13:12-13). God sees the people others hurt. Lord, help us honor those who were wronged.', ['Psalm 9:9'])]);
+    const d = deps({ riskVerdict: { verdict: 'none' }, rungList: [rung.rung] });
+    const r = await chat(d, 'What does the Bible say about the rape of Tamar in 2 Samuel 13?');
+    expect(r.body.kind).toBe('answer');
+    expect(rung.calls.length).toBe(2);
+    expect(String(rung.calls[1].at(-1)?.content ?? '') + JSON.stringify(rung.calls[1])).toMatch(/no crisis lines/);
+  });
+  it('the same reach on a message that is not about Scripture stays a card, toward safety', async () => {
+    const r = await chat(deps({ riskVerdict: { verdict: 'none' }, rungList: [scripted('gemini-free', [good(reach, [])]).rung] }), 'Things at home have been really tense lately.');
+    expect(r.body.kind).toBe('crisis');
   });
 });
 

@@ -3,9 +3,12 @@ import { env } from 'cloudflare:test';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { call, chat, chatBody, deps, good, NOW, scripted, tokenFor } from './helpers';
 import { realDeps } from '../src/index';
+import { JUDGE_CHECKS } from '../src/quality/judge';
 import { openRouterPrivate } from '../src/providers/openrouter';
 import { PAUSE_AT, SLOW_AT, microCost, openRouterHeadroom, resetsOn, userCeilingUsd } from '../src/controls';
 import { freeRestingText, overflowText, shortBusyText } from '../src/replies';
+import { summaryPrompt } from '../src/prompts';
+import { saveMemory } from '../src/memory';
 import { PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY } from '../src/shared';
 import products from '../../app/src/config/products.json';
 import { centralDay } from '../src/day';
@@ -45,8 +48,27 @@ describe('the free lane', () => {
     for (const r of realDeps.rungs(both, NOW).filter(r => r.id.startsWith('gemini-free'))) await r.call([{ role: 'user', content: 'hi' }], {}, 10).catch(() => {});
     expect(seen.length).toBeGreaterThan(0);
     expect(seen.every(k => k === 'FREE-KEY')).toBe(true);
-    await realDeps.rungs(both, NOW, 'paid')[0].call([{ role: 'user', content: 'hi' }], {}, 10).catch(() => {});
+    // The paid lane's Gemini rung (the backup behind DeepSeek) carries the paid key.
+    const gem = realDeps.rungs(both, NOW, 'paid').find(r => r.id.startsWith('paid-gemini'))!;
+    await gem.call([{ role: 'user', content: 'hi' }], {}, 10).catch(() => {});
     expect(seen.at(-1)).toBe('PAID-KEY');
+  });
+});
+
+describe('the paid judge (her cost ruling 21 Nov 2026)', () => {
+  it('paid chat on DeepSeek is judged by the private paid model first (cached judge prompt), Workers AI gpt-oss as its backup; free chat never', async () => {
+    const urls: string[] = [];
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async u => { urls.push(String(u)); return Response.json({ choices: [{ message: { content: JSON.stringify({ ...Object.fromEntries(JUDGE_CHECKS.map(k => [k, false])), voice: 5 }) } }] }); });
+    const ai = { run: async () => { urls.push('workers-ai'); throw new Error('down'); } } as unknown as Ai;
+    const input = { voice: 'plain' as const, question: 'How do I forgive my sister?', text: 'Forgiveness is a choice you can make today. Lord, help us.', verses: [] };
+    expect((await realDeps.judge({ ...env, AI: ai, OPENROUTER_API_KEY: 'k' } as Env, input, 'paid')).verdict).toBe('pass');
+    expect(urls[0]).toMatch(/openrouter\.ai/);
+    expect(urls).not.toContain('workers-ai');
+    urls.length = 0;
+    await realDeps.judge({ ...env, AI: ai, OPENROUTER_API_KEY: 'k' } as Env, input, 'free');
+    expect(urls.length).toBeGreaterThan(0);
+    expect(urls.every(u => u === 'workers-ai')).toBe(true);
+    vi.restoreAllMocks();
   });
 });
 
@@ -55,7 +77,7 @@ describe('the judge never bills the free lane', () => {
     const seen: string[] = [];
     vi.spyOn(globalThis, 'fetch').mockImplementation(async (_u, init) => { seen.push(new Headers(init?.headers).get('x-goog-api-key') ?? ''); return Response.json({}); });
     const down = { run: async () => { throw new Error('workers ai down'); } } as unknown as Ai;
-    const e = { ...env, AI: down, PBS_GEMINI_API_KEY: 'PAID-KEY', PAID_PROVIDER: 'gemini' } as Env;
+    const e = { ...env, AI: down, PBS_GEMINI_API_KEY: 'PAID-KEY', PAID_PROVIDER: 'gemini', PAID_MODEL: 'gemini-3.5-flash-lite' } as unknown as Env;
     const input = { voice: 'plain' as const, question: 'How do I forgive my sister?', text: 'Forgiveness is a choice you can make today. Lord, help us.', verses: [] };
     expect((await realDeps.judge(e, input, 'free')).verdict).toBe('down');
     expect(seen).toEqual([]);
@@ -92,10 +114,39 @@ describe('the OpenRouter key\'s headroom (hourly cron)', () => {
 });
 
 describe('the paid lane', () => {
-  it('model ids come from env: GEMINI_MODELS for free, PAID_PROVIDER + PAID_MODEL (alone, priced) for paid', () => {
-    expect(realDeps.rungs(env, NOW, 'paid').map(r => r.id)).toEqual([`paid-gemini:${env.PAID_MODEL}`]);
-    expect(realDeps.rungs(env, NOW, 'paid')[0].price).toEqual({ in: 0.3, out: 2.5, cached: 0.03 });
+  it('model ids come from env: GEMINI_MODELS for free; PAID_PROVIDER + PAID_MODEL, then Gemini PAID_BACKUP_MODEL on the billed key, for paid (both priced, nothing free)', () => {
+    expect(realDeps.rungs(env, NOW, 'paid').map(r => r.id)).toEqual([`paid-${env.PAID_PROVIDER}:${env.PAID_MODEL}`, `paid-gemini:${env.PAID_BACKUP_MODEL}`]);
+    expect(env.PAID_PROVIDER).toBe('openrouter-zdr');
+    expect(realDeps.rungs(env, NOW, 'paid')[0].price).toEqual({ in: Number(env.PAID_PRICE_IN_PER_M), out: Number(env.PAID_PRICE_OUT_PER_M), cached: Number(env.PAID_PRICE_CACHED_PER_M) });
+    for (const r of realDeps.rungs(env, NOW, 'paid')) { expect(r.price).toBeDefined(); expect(r.id).not.toMatch(/free/); }
+    // Gemini alone when it is the paid provider.
+    expect(realDeps.rungs({ ...env, PAID_PROVIDER: 'gemini', PAID_MODEL: 'gemini-3.5-flash-lite' } as unknown as Env, NOW, 'paid').map(r => r.id)).toEqual(['paid-gemini:gemini-3.5-flash-lite']);
     expect(realDeps.rungs(env, NOW).filter(r => r.id.startsWith('gemini-free')).map(r => r.id)).toEqual(env.GEMINI_MODELS.split(',').map(m => `gemini-free:${m}`));
+  });
+  it('the paid lane gets its own answer cap (PAID_ANSWER_MAX_TOKENS), above the free lane\'s', async () => {
+    const maxes: number[] = [];
+    const paid = { ...scripted('gemini-paid', [good()]).rung };
+    const call = paid.call; paid.call = (m, s, max, u) => { maxes.push(max); return call(m, s, max, u); };
+    await chat(deps({ paidNow: true, rungs: (_e, _n, lane) => (lane === 'paid' ? [paid] : []) }), 'How do I forgive my sister?');
+    expect(maxes[0]).toBe(Number(env.PAID_ANSWER_MAX_TOKENS));
+    expect(Number(env.PAID_ANSWER_MAX_TOKENS)).toBeGreaterThan(Number(env.ANSWER_MAX_TOKENS));
+  });
+  it('her memory note is rewritten every MEMORY_EVERY paid messages from the turns since (and on her first), not on every message', async () => {
+    const paid = scripted('gemini-paid', [good()]);
+    const d = deps({ paidNow: true, rungs: (_e, _n, lane) => (lane === 'paid' ? [paid.rung] : []) });
+    const token = await tokenFor(d);
+    const notes = () => paid.calls.filter(m => m[0]?.content === summaryPrompt);
+    await chat(d, 'My mother is in the hospital and I am scared.', { token });
+    expect(notes()).toHaveLength(1); // no note yet: the first message writes one
+    await saveMemory(env.DB, { installId: iid(token), day: centralDay(NOW), summary: 'Her mother is in the hospital.', paidUntil: NOW + 86400_000, now: NOW });
+    const every = Number(env.MEMORY_EVERY);
+    expect(every).toBeGreaterThan(1);
+    const ask = (i: number) => `How do I pray for her tonight, part ${i}?`;
+    for (let i = 2; i < every; i++) await chat(d, ask(i), { token });
+    expect(notes()).toHaveLength(1); // messages 2 .. every-1 write no note
+    await chat(d, [ask(every - 1), 'You can pray simply and honestly tonight.', ask(every)], { token });
+    expect(notes()).toHaveLength(2); // message `every` does
+    expect(String(notes()[1][1].content)).toContain(ask(every - 1)); // with the turns since the last note
   });
   it('outage: the private model refuses (402/403 from the key) on every paid call: the free-chat choice, then free chat, or "busy" if free is out too; never blank or an error', async () => {
     for (const status of [402, 403]) {
@@ -192,7 +243,7 @@ describe('the paid lane', () => {
     expect(r.body.kind).toBe('answer');
     expect(r.body.notPrivate).toBeUndefined();
     expect(answerText(r)).not.toMatch(/resting|paused|limit/i);
-    expect(sent[0]).toBe(Math.round(Number(env.ANSWER_MAX_TOKENS) / 2));
+    expect(sent[0]).toBe(Math.round(Number(env.PAID_ANSWER_MAX_TOKENS) / 2));
     expect(JSON.stringify(paid.calls[0])).toContain('Keep this answer brief');
   });
   it('a crisis message after 101 stays on the private crisis model, with or without her yes', async () => {
@@ -315,12 +366,12 @@ describe('the paid lane', () => {
     expect(paid.calls.length).toBe(0);
     await spend(0);
   });
-  it('token savers: the answer call is capped at ANSWER_MAX_TOKENS and only the last CHAT_HISTORY_TURNS turns travel', async () => {
+  it('token savers: the paid answer call is capped at PAID_ANSWER_MAX_TOKENS and only the last CHAT_HISTORY_TURNS turns travel', async () => {
     const sent: Array<{ n: number; max: number }> = [];
     const rung: LadderRung = { id: 'gemini-paid:test', cap: 1000, day: '2026-11-20', call: async (m, _s, max) => { sent.push({ n: m.filter(x => x.role !== 'system').length, max }); return good(); } };
     const turns = Array.from({ length: 11 }, (_, i) => `turn number ${i} about my week`);
     await chat(deps({ paidNow: true, rungs: () => [rung] }), turns);
-    expect(sent[0].max).toBe(Number(env.ANSWER_MAX_TOKENS));
+    expect(sent[0].max).toBe(Number(env.PAID_ANSWER_MAX_TOKENS));
     expect(sent[0].n).toBe(Number(env.CHAT_HISTORY_TURNS));
   });
 });

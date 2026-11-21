@@ -34,6 +34,12 @@ export async function lookup(db: D1Database, translation: Translation, ref: Refe
   return { ref: shownRef(formatReference(shown, translation === 'RV1909' ? 'es' : 'en')), translation, text, book: ref.book, chapter: ref.chapter, verse: ref.verse, ...(last > ref.verse ? { endVerse: last } : {}) };
 }
 
+/** Every verse of one chapter (the verse-number check: a line quoted under the wrong verse of a chapter). */
+export async function chapterVerses(db: D1Database, translation: Translation, book: string, chapter: number): Promise<Array<{ verse: number; text: string }>> {
+  const { results } = await db.prepare('SELECT verse, text FROM bible_verses WHERE translation = ? AND book = ? AND chapter = ? ORDER BY verse').bind(translation, book, chapter).all<{ verse: number; text: string }>();
+  return results;
+}
+
 export async function resolve(db: D1Database, translation: Translation, raw: string): Promise<Scripture | null> {
   const ref = parseReference(raw);
   return ref ? lookup(db, translation, ref) : null;

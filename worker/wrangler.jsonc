@@ -73,16 +73,23 @@
     "GEMINI_MODELS": "gemini-3.5-flash-lite,gemini-3.1-flash-lite",
     "OPENROUTER_MODELS": "google/gemma-4-26b-a4b-it:free,nvidia/nemotron-3.5-super-vl:free,nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free",
     // Two lanes (21 Nov 2026). Free: GEMINI_MODELS on the free-tier key, then the free fallbacks.
-    // Paid: PAID_GEMINI_MODEL on the billed key only, never a free model. Prices are Google's list
-    // prices per million tokens (thinking billed as output) and drive the spend meters below.
-    "PAID_PROVIDER": "gemini",
-    "PAID_MODEL": "gemini-3.5-flash-lite",
-    "PAID_HOSTS": "",
+    // Paid (her ruling 21 Nov 2026): DeepSeek V4.1 Flash over OpenRouter, served only by the named US
+    // zero-retention hosts in this order (DeepInfra is the cheapest; Together, Fireworks if it is down),
+    // never a free model and never DeepSeek's own API; then Gemini (PAID_BACKUP_MODEL) on the billed
+    // key. The ledger records what OpenRouter billed for each call; these prices (the dearest named
+    // host, per million tokens, from OpenRouter's endpoint list 21 Nov 2026) are only its fallback.
+    "PAID_PROVIDER": "openrouter-zdr",
+    "PAID_MODEL": "deepseek/deepseek-v4.1-flash",
+    "PAID_HOSTS": "deepinfra,together,fireworks",
     "PAID_PRICE_IN_PER_M": "0.30",
-    "PAID_PRICE_OUT_PER_M": "2.50",
-    "PAID_PRICE_CACHED_PER_M": "0.03",
+    "PAID_PRICE_OUT_PER_M": "1.20",
+    "PAID_PRICE_CACHED_PER_M": "0.006",
+    "PAID_BACKUP_MODEL": "gemini-3.5-flash-lite",
+    // Her memory note is rewritten every this many paid messages (a paid call each time), from the turns since.
+    "MEMORY_EVERY": "3",
     "GEMINI_THINKING_LEVEL": "minimal",
     "ANSWER_MAX_TOKENS": "350",
+    "PAID_ANSWER_MAX_TOKENS": "600",
     "CHAT_HISTORY_TURNS": "6",
     "PAID_AI_MONTHLY_CAP_USD": "100",
     // The private first chat (her ruling 21 Nov 2026): at most this many new installs a day get it (about $0.60 a day).
