@@ -32,7 +32,7 @@ const REASONS: Array<[ReportReason, string]> = [['hurtful', 'Hurtful or unkind']
 /** The report action under one AI answer: tap, pick a reason, sent; a failure can be tried again. */
 function ReportAnswer({ answer, c, t }: { answer: string; c: Palette; t: (key: string) => string }) {
   const [state, setState] = useState<'idle' | 'choosing' | 'sending' | 'sent' | 'failed'>('idle');
-  if (state === 'sent') return <Text accessibilityRole="alert" style={[s.small, { color: c.muted }]}>{t('Thank you. A person will read this report.')}</Text>;
+  if (state === 'sent') return <Text accessibilityRole="alert" style={[s.small, { color: c.muted }]}>{t('Thank you. Your report was sent.')}</Text>;
   if (state === 'idle') return <Pressable accessibilityRole="button" testID="report-answer" onPress={() => setState('choosing')}><Text style={[s.small, { color: c.muted, textDecorationLine: 'underline' }]}>{t('Report this answer')}</Text></Pressable>;
   const send = async (reason: ReportReason) => {
     setState('sending');
@@ -43,6 +43,7 @@ function ReportAnswer({ answer, c, t }: { answer: string; c: Palette; t: (key: s
     {REASONS.map(([id, label]) => <Pressable key={id} accessibilityRole="button" testID={`report-${id}`} disabled={state === 'sending'} onPress={() => void send(id)} style={[s.reason, { borderColor: c.line }]}>
       <Text style={[s.small, { color: c.ink }]}>{t(label)}</Text>
     </Pressable>)}
+    <Pressable accessibilityRole="button" testID="report-cancel" disabled={state === 'sending'} onPress={() => setState('idle')}><Text style={[s.small, { color: c.muted, textDecorationLine: 'underline' }]}>{t('Cancel')}</Text></Pressable>
   </View>;
 }
 
@@ -56,6 +57,8 @@ export default function ChatScreen({ settings, c, locale }: { settings: Settings
   const [closed, setClosed] = useState(false);
   const [conversation, setConversation] = useState(() => randomUUID());
   const spanish = settings.journey === 'Mi Refugio' || settings.voice === 'spanish' || settings.language === 'es';
+  // The Mindset door shows no faith words (hostile review F8): no KJV, verse or pastor.
+  const mind = settings.door === 'mindset';
 
   useEffect(() => { AsyncStorage.getItem(DISCLOSURE_KEY).then(v => setAccepted(v === 'yes')).catch(() => setAccepted(false)); }, []);
   if (accepted === null) return null;
@@ -64,7 +67,7 @@ export default function ChatScreen({ settings, c, locale }: { settings: Settings
     return <View style={[s.card, { backgroundColor: c.card, borderColor: c.line }]}>
       <Text style={[s.label, { color: c.muted }]}>{t('BEFORE YOUR FIRST CHAT')}</Text>
       <Text style={[s.title, { color: c.ink }]}>{t('Chat answers are written by AI.')}</Text>
-      <Text style={[s.body, { color: c.ink }]}>{t('Every answer is marked AI. It is not a pastor, a counselor or a person.')}</Text>
+      <Text style={[s.body, { color: c.ink }]}>{t(mind ? 'Every answer is marked AI. It is not a counselor or a person.' : 'Every answer is marked AI. It is not a pastor, a counselor or a person.')}</Text>
       <Text style={[s.body, { color: c.ink }]}>{t('What you type goes to free AI providers, and they may learn from it. Please leave out names and anything that identifies you or someone else.')}</Text>
       <Text style={[s.body, { color: c.ink }]}>{t('If you are in danger or thinking about hurting yourself, call or text 988.')}</Text>
       <Pressable accessibilityRole="button" onPress={() => { setAccepted(true); void AsyncStorage.setItem(DISCLOSURE_KEY, 'yes').catch(() => undefined); }} style={[s.button, { backgroundColor: c.accent }]}>
@@ -97,17 +100,17 @@ export default function ChatScreen({ settings, c, locale }: { settings: Settings
     <View style={[s.head, { borderColor: c.line }]}>
       <View style={{ flex: 1 }}>
         <Text style={[s.headTitle, { color: c.ink }]}>{t(settings.journey ?? 'Chat')}</Text>
-        <Text style={[s.ai, { color: c.muted }]}>{t(spanish ? 'AI · verses from Reina-Valera 1909' : 'AI · verses from KJV')}</Text>
+        <Text style={[s.ai, { color: c.muted }]}>{t(mind ? 'AI · not a person' : spanish ? 'AI · verses from Reina-Valera 1909' : 'AI · verses from KJV')}</Text>
       </View>
-      <Pressable accessibilityRole="button" onPress={() => { setConversation(randomUUID()); setEntries([]); }}><Text style={{ color: c.accent }}>{t('+ New chat')}</Text></Pressable>
+      <Pressable accessibilityRole="button" onPress={() => { setConversation(randomUUID()); setEntries([]); }}><Text style={[s.small, { color: c.accent }]}>{t('+ New chat')}</Text></Pressable>
     </View>
-    {entries.length === 0 && <Text style={[s.body, { color: c.muted, marginTop: 16 }]}>{t('Say what is on your heart. You will get a short answer and a verse to hold on to.')}</Text>}
+    {entries.length === 0 && <Text style={[s.body, { color: c.muted, marginTop: 16 }]}>{t(mind ? 'Say what is on your mind. You will get a short, calm answer.' : 'Say what is on your heart. You will get a short answer and a verse to hold on to.')}</Text>}
     {entries.map((e, i) => e.role === 'user'
       ? <Text key={i} style={[s.me, { backgroundColor: c.accent, color: c.on }]}>{e.text}</Text>
       : e.role === 'note'
         ? <Text key={i} accessibilityRole="alert" style={[s.note, { color: c.muted }]}>{e.text}</Text>
         : <View key={i} testID={`reply-${e.res.kind}`} style={[s.bot, { backgroundColor: c.card, borderColor: c.line }]}>
-          {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t('AI · not a pastor or a person')}</Text>}
+          {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'AI · not a person' : 'AI · not a pastor or a person')}</Text>}
           {e.res.reminder && <Text style={[s.body, { color: c.ink }]}>{t("A reminder: you're talking with an AI, not a person. It's a good time to take a break.")}</Text>}
           <Text style={[s.body, { color: c.ink }]}>{e.res.text}</Text>
           {e.res.scripture.map(v => <View key={v.ref} style={s.verse}>
@@ -115,7 +118,7 @@ export default function ChatScreen({ settings, c, locale }: { settings: Settings
             <Text style={s.verseText}>{displayRuns(v.text).map((r, j) => <Text key={j} style={r.italic ? { fontStyle: 'italic' } : undefined}>{r.text}</Text>)}</Text>
           </View>)}
           {e.res.kind === 'crisis' && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
-            <Text style={{ color: c.accent, fontSize: 17 }}>{t(l.label)}</Text>
+            <Text style={[s.linkText, { color: c.accent }]}>{t(l.label)}</Text>
           </Pressable>)}
           {e.res.ai && <ReportAnswer answer={e.res.text} c={c} t={t} />}
         </View>)}
@@ -140,12 +143,13 @@ const s = StyleSheet.create({
   head: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingBottom: 12, borderBottomWidth: 1 },
   headTitle: { fontFamily: 'Figtree_600SemiBold', fontSize: 17 },
   ai: { fontFamily: 'SplineSansMono_500Medium', fontSize: 11, letterSpacing: 1.1, textTransform: 'uppercase' },
-  me: { alignSelf: 'flex-end', paddingVertical: 10, paddingHorizontal: 14, borderRadius: 18, borderBottomRightRadius: 4, maxWidth: '78%', fontSize: 16, marginTop: 12, overflow: 'hidden' },
+  me: { alignSelf: 'flex-end', paddingVertical: 10, paddingHorizontal: 14, borderRadius: 18, borderBottomRightRadius: 4, maxWidth: '78%', fontFamily: 'Figtree_400Regular', fontSize: 16, lineHeight: 22, marginTop: 12, overflow: 'hidden' },
   bot: { alignSelf: 'flex-start', borderWidth: 1, padding: 14, borderRadius: 18, borderBottomLeftRadius: 4, maxWidth: '92%', gap: 10, marginTop: 12 },
   verse: { backgroundColor: night.bg, borderRadius: 12, padding: 14, gap: 6 },
   ref: { fontFamily: 'SplineSansMono_500Medium', fontSize: 12, letterSpacing: 1.2, textTransform: 'uppercase', color: night.dawn },
   verseText: { fontFamily: 'LibreCaslonText_400Regular', fontSize: 16, lineHeight: 23, color: night.ink },
   link: { borderWidth: 1.5, borderRadius: 40, paddingVertical: 12, alignItems: 'center' },
+  linkText: { fontFamily: 'Figtree_600SemiBold', fontSize: 17 },
   note: { textAlign: 'center', fontSize: 14, marginTop: 12 },
   small: { fontFamily: 'Figtree_400Regular', fontSize: 14, lineHeight: 20 },
   reasons: { gap: 6 },

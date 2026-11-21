@@ -1,23 +1,17 @@
 // Variety across answers (hostile review round 4: "the quiet hours of the night make every shadow
 // stretch tall" in one answer and "the quiet hours have a way of making every shadow look taller"
-// in another; "<verse> reminds us" closed 14 of 56). One answer can be fine and still read as a
-// template to someone who chats every night.
-// PRODUCED, not policed (round 5 rebuild): round 5 detected repeats after the draft and asked the
-// model to rewrite, and 25 of 53 answers still repeated ("May you find..." closed 14), while the
-// rewrites ate the tries real problems needed (7 fallbacks). So code now plans each answer BEFORE
-// the model writes (planFor): the opening move, the middle move, the habit words to leave out and
-// the first word of the last sentence, all from rotations driven by one counter with no identifier
-// (planSeq). The closing words come from a list of more than RECENT_ALL distinct stems, so within the
-// window no two answers are told to close the same way. The plan is code's own vocabulary: nothing
-// she or the model wrote is read back to steer it.
-// The after-check stays as the backstop: each draft is compared with the last answers she was given
+// in another). One answer can be fine and still read as a template to someone who chats every night.
+// The model writes every answer whole (hostile review of 25c474f, F1/F2: code that chose the first
+// word of the prayer, injected a picture and cut sentences out produced "Teach God to guide her" and
+// "Mercy is a deep well" to the grieving). Variety comes from the prompt and from human-written voice
+// samples rotated in as examples (src/voice/samples.ts, nextSeq below), never from code splicing words.
+// This file is only the after-check: each draft is compared with the last answers she was given
 // (her install) and the last answers anyone was given:
 //  - the same opening shape (first three words, stemmed),
 //  - the same closing shape (first three words of the last sentence, a verse reference as REF),
 //  - the same image (two or more shared pairs of content words, stemmed).
-// A match is a rewrite on a NEW plan; if every try repeats, the last draft that passed everything
-// else is shown (index.ts), never the fallback. Nothing readable is kept: each opener, closer and
-// pair is stored only as a keyed hash (HMAC with IP_HASH_SECRET, 8 hex), never the words.
+// A match is a rewrite told what repeated, in the draft's own words. Nothing readable is kept: each
+// opener, closer and pair is stored only as a keyed hash (HMAC with IP_HASH_SECRET, 8 hex).
 // Self-contained (no app imports) so the red-team runner can load it under plain node.
 const fold = (text: string) => text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 
@@ -28,17 +22,12 @@ export const RECENT_MINE = 12;
 export const RECENT_ALL = 40;
 export const SHAPE_DAYS = 14;
 
-// Words that carry no image: function words (EN, ES), the faith words every answer needs, and the
-// words of the lines the rules REQUIRE (talk with a parent or school counselor; faith and treatment
-// go together; talk it through with your pastor; since the 20 Nov doctrine ruling, sex belongs in
-// marriage, and on a genuine split, faithful churches differ), which must be free to come back.
+// Words that carry no image: function words (EN, ES) and the names of God every answer may use.
+// No other exemption (F6): a required line said the same way every time is repetition too.
 const STOP = new Set(`a an the and or but so if of to in on at by for with from into onto over under about as than then that this these those there here it its is are was were be been being am do does did have has had will would can could should shall may might must not no nor never very just even also only still yet too more most much many any some all every each one own same such what when where who whom whose why how which while because though although until up down out off again once your you yours yourself i me my mine we us our ours he him his she her hers they them their theirs itself way ways thing things lot let lets get gets got make makes made making take takes like
 el la los las un una unos unas y o pero si de del a al en con por para sin sobre como que se su sus tu tus te ti mi mis me nos lo le les es son era fue ser estar esta estas este estos esa ese eso hay muy mas tambien ya aun cuando donde quien porque pues ni no hace hacer cada todo toda todos todas
-god gods lord jesus christ spirit holy pray prayer praying pastor church bible scripture verse verses amen dios senor jesucristo espiritu santo orar oracion iglesia biblia escritura versiculo
-sex sexual marriage married marry belongs husband wife wedding churches differ faithful
-talk talking through parent parents mom dad mother father school counselor trusted adult adults doctor doctors medicine medicines medication medications meds medical treatment therapy therapist together faith help listen
-sexo sexual matrimonio casados casarse casarnos esposo esposa pertenece iglesias difieren fieles
-hablar habla hablalo mama papa padres consejero escuela adulto adultos confianza medico medicina medicinas medicamento medicamentos tratamiento juntos fe ayuda`.split(/\s+/));
+god gods lord jesus christ dios senor jesucristo
+`.split(/\s+/));
 const REF = /(?:[123]\s+)?(?:\p{L}+\s+){0,2}\p{L}+\.?\s+\d{1,3}\s*:\s*\d{1,3}(?:\s*[-–]\s*\d{1,3})?/gu;
 const stem = (w: string) => w.slice(0, 4);
 const sentencesOf = (text: string) => text.replace(REF, ' REF ').split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
@@ -84,7 +73,7 @@ export function repeats(draft: Shape, recent: Shape[]): string[] {
  */
 export function varietyObjection(draft: Shape, said: Said, recent: Shape[]): string {
   const parts: string[] = [];
-  if (draft.opener && recent.some(r => r.opener === draft.opener)) parts.push(`It opened like a recent answer ("${said.opener}..."); open another way, on what she said.`);
+  if (draft.opener && recent.some(r => r.opener === draft.opener)) parts.push(`It opened like a recent answer ("${said.opener}..."); open another way, on what they said.`);
   if (draft.closer && recent.some(r => r.closer === draft.closer)) parts.push(`It closed like a recent answer ("${said.closer}..."); close another way.`);
   const shared = new Set<number>();
   for (const r of recent) {
@@ -118,135 +107,9 @@ export async function saveShape(db: D1Database, installId: string, hashed: Shape
   await db.batch([insert(installId), insert('all'), prune(installId, RECENT_MINE), prune('all', RECENT_ALL)]);
 }
 
-// ---- The plan (code chooses, before the model writes) ----
 export type Lane = 'en' | 'es' | 'mindset';
-export type Plan = { seq: number; text: string };
-
-/** The next number in one plain counter per lane (no identifier, never reset): drives every rotation. */
-export async function planSeq(db: D1Database, lane: Lane): Promise<number> {
+/** The next number in one plain counter per lane (no identifier, never reset): picks which voice samples go in. */
+export async function nextSeq(db: D1Database, lane: Lane): Promise<number> {
   const row = await db.prepare("INSERT INTO chat_counts (day, metric, n) VALUES ('seq', ?, 1) ON CONFLICT(day, metric) DO UPDATE SET n = n + 1 RETURNING n").bind(`plan:${lane}`).first<{ n: number }>();
   return row?.n ?? Math.floor(Math.random() * 1e6);
-}
-
-// The last sentence's first word. Each list has more distinct stems than RECENT_ALL, so a counter
-// that steps once per draft never tells two answers in the window to close the same way. P = a
-// one-sentence prayer for her, V = one sentence of her own words about one of the verses.
-const CLOSE_EN: Array<[kind: 'P' | 'V', word: string]> = ([
-  'P Lord', 'P Carry', 'V Whatever', 'P Father', 'P Keep', 'P Gracious', 'V Even', 'P Meet', 'P Jesus', 'P Guard', 'V Since',
-  'P Faithful', 'P Lead', 'P Steady', 'V Because', 'P God', 'P Quiet', 'P Surround', 'V Today', 'P Merciful', 'P Cover', 'P Strengthen',
-  'V Wherever', 'P Holy', 'P Calm', 'P Settle', 'V Every', 'P Heavenly', 'P Draw', 'P Stay', 'V Before', 'P Shepherd', 'P Renew',
-  'P Sustain', 'V Still', 'P Watch', 'P Comfort', 'P Grant', 'V Here', 'P Give', 'P Help', 'P Be', 'V This', 'P Walk', 'P Anchor', 'P Open', 'P Teach', 'P Hold', 'P Shelter',
-] as const).map(s => s.split(' ') as ['P' | 'V', string]);
-// Spanish speaks to her as tú to the very end (the voice rubric), so its closings are a blessing or
-// a sentence about a verse, said to her: B = a short blessing, V = a sentence about one of the verses.
-const CLOSE_ES: Array<[kind: 'B' | 'V', word: string]> = ([
-  'B Que', 'V Hoy', 'V Aunque', 'B Descansa', 'V Mañana', 'V Cada', 'B Confía', 'V Nada', 'B Lleva', 'V Mientras', 'V Aún',
-  'B Recuerda', 'B Pon', 'V Puedes', 'V Dios', 'B Sigue', 'V Ahora', 'V Todo', 'B Entrega', 'V Jesús', 'V Él', 'B Respira',
-  'V Esta', 'V Tu', 'B Camina', 'V Tienes', 'B Guarda', 'V Mira', 'B Vuelve', 'V Lee', 'B Busca', 'V Cuando', 'B Deja', 'V Junto', 'B Abre', 'V Aquí', 'V Siempre', 'V Nunca', 'B Toma', 'B Escucha', 'B Habla', 'B Ora', 'V Gracias',
-] as const).map(s => s.split(' ') as ['B' | 'V', string]);
-const CLOSE_MINDSET = ['Breathe', 'Notice', 'Tomorrow', 'Let', 'Whatever', 'Rest', 'Picture', 'Even', 'One', 'Before', 'Small', 'Today', 'Keep', 'Give', 'Hold', 'Stay', 'Come', 'Leave', 'Carry', 'Name', 'When', 'Here', 'Each', 'Nothing', 'Quiet', 'Settle', 'Allow', 'Tonight', 'Listen', 'Start', 'Begin', 'Trust', 'Look', 'Return', 'Close', 'Slow', 'Write', 'Set', 'Take', 'Ease', 'Know'];
-// The one picture an answer may use, chosen by code like the closing word: more distinct stems than
-// the window, so two answers in the window are never handed the same picture (run 44847465310:
-// images were the main repeat once openings and closings were planned). Plain, safe, everyday things;
-// nothing a person with a body or a home would act out (no table, cup, porch or kitchen), nothing
-// that reads as a money promise (no seed, harvest or sowing).
-const PICTURE_EN = ['a lamp', 'a well', 'bread', 'a harbor', 'a river', 'a bridge', 'a candle', 'a quilt', 'a compass', 'a map', 'a mountain', 'a valley',
-  'roots', 'a vine', 'a rock', 'a shield', 'a fortress', 'sunrise', 'rain', 'a boat', 'a net', 'sheep', 'a key', 'a door', 'a window', 'a letter', 'a thread',
-  'a blanket', 'a coat', 'shoes', 'a ladder', 'a wall', 'a gate', 'a fire', 'oil', 'salt', 'a spring of water', 'a field', 'a nest', 'wings', 'a lighthouse',
-  'a tent', 'a garden wall', 'a clay pot', 'an anchor chain', 'stars', 'a compass needle'].filter((p, i, a) => a.findIndex(q => q.split(' ').at(-1)!.slice(0, 4) === p.split(' ').at(-1)!.slice(0, 4)) === i);
-const PICTURE_ES = ['una lámpara', 'un pozo', 'el pan', 'un puerto', 'un río', 'un puente', 'una vela', 'una cobija', 'una brújula', 'un mapa', 'una montaña', 'un valle',
-  'las raíces', 'una vid', 'una roca', 'un escudo', 'una fortaleza', 'el amanecer', 'la lluvia', 'una barca', 'una red', 'las ovejas', 'una llave', 'un umbral',
-  'una ventana', 'una carta', 'un hilo', 'un abrigo', 'unos zapatos', 'una escalera', 'un muro', 'un portón', 'el fuego', 'el aceite', 'la sal', 'un manantial',
-  'un campo', 'un nido', 'unas alas', 'un faro', 'una tienda', 'una vasija de barro', 'las estrellas'];
-const pictureStems = (list: string[]) => list.map(p => stem(fold(p.split(' ').at(-1)!)));
-const OPEN_EN = [
-  'Open on one concrete thing she told you, in your own words (never by restating her question).',
-  'Open with one plain, true sentence about God that meets what she wrote.',
-  'Open by answering her plainly in a short first sentence.',
-  'Open with an honest, specific word about what is hard here, with no stock sympathy.',
-].map(o => `${o} Its first word is not "The", "God", "Scripture" or "Faith".`); // "The Bible does", "God remains the", "Scripture teaches that": probes
-const OPEN_ES = [
-  'Empieza con algo concreto que ella te contó, con tus propias palabras (nunca repitiendo su pregunta).',
-  'Empieza con una frase sencilla y verdadera sobre Dios que responda a lo que escribió.',
-  'Empieza respondiéndole directamente, en una primera frase corta.',
-  'Empieza con una palabra honesta y concreta sobre lo difícil de esto, sin frases hechas de consuelo.',
-];
-const MIDDLE_EN = [
-  'In the middle, tell in a sentence or two how one person in the Bible met something like this.',
-  'In the middle, give one concrete step she could take this week.',
-  'In the middle, give the setting of one of your verses in a sentence: who said it, and when.',
-  'In the middle, say one true thing about who God is that speaks to this.',
-  'In the middle, stay with the details she gave, in plain words.',
-];
-const MIDDLE_ES = [
-  'En el medio, cuenta en una o dos frases cómo una persona de la Biblia vivió algo parecido.',
-  'En el medio, da un paso concreto que pueda dar esta semana.',
-  'En el medio, da en una frase el contexto de uno de tus versículos: quién lo dijo y cuándo.',
-  'En el medio, di algo verdadero sobre quién es Dios que hable a esto.',
-  'En el medio, quédate con los detalles que ella dio, en palabras sencillas.',
-];
-const MIDDLE_MINDSET = [
-  'In the middle, give one small thing she can picture or do in the next few minutes.',
-  'In the middle, stay with the details she gave, in plain words, without metaphors.',
-  'In the middle, name one thing that is in her hands and one that is not.',
-];
-// The words the free models lean on in answer after answer (measured: the shared pairs of the
-// round-4 and round-5 red teams). Each plan leaves out two of the three groups, a different two each time.
-const REST_EN = [
-  ['honor', 'bring', 'find', 'walk', 'path', 'journey', 'season', 'navigate'],
-  ['peace', 'wisdom', 'strength', 'steady', 'guide', 'light', 'gentle', 'space'],
-  ['please', 'consider', 'respect', 'others', 'life', 'care', 'heavy', 'ground'],
-].map((g, i) => [...g, ...[['importance', 'important', 'understand', 'understanding'], ['helpful', 'helps', 'guidance', 'provide'], ['seek', 'seeks', 'knowing', 'remember']][i]]); // + the Workers AI model's (run 44847465310)
-const REST_ES = [
-  ['encontrar', 'camino', 'paso', 'guía'],
-  ['paz', 'fuerza', 'carga', 'descanso'],
-  ['recibir', 'acompañamiento', 'cercano', 'conversar', 'sugiero'],
-];
-
-/**
- * The plan for one answer, from the lane's counter: how it opens, what the middle does, the words it
- * leaves out, how it closes. A rewrite of the same answer keeps its number (so rewrites never use up
- * the closing words other answers need) and shifts the other moves by `attempt`. Its closing word
- * stays: no other answer in the window was given it, so a repeated closing means it was not followed.
- */
-export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'faith', attempt = 0): Plan {
-  const m = seq + attempt;
-  const pick = <T>(list: readonly T[]) => list[m % list.length];
-  const pickClose = <T>(list: readonly T[]) => list[seq % list.length];
-  const rest = (groups: string[][]) => groups.filter((_, i) => i !== m % groups.length).flat().join(', ');
-  if (lane === 'es') {
-    const [kind, word] = pickClose(CLOSE_ES);
-    const close = kind === 'B'
-      ? `Termina con una bendición breve para ella, en una sola frase que le hable de tú y cuya primera palabra sea "${word}".`
-      : `Termina con una sola frase completa, con tus propias palabras y dicha a ella de tú, sobre lo que uno de tus versículos significa para ella hoy, con su referencia entre paréntesis al final; no repitas ni cites sus palabras. Su primera palabra es "${word}".`;
-    return { seq, text: `El plan de esta respuesta (síguelo; nunca lo menciones):\n- ${pick(OPEN_ES)}\n- ${door === 'mindset' ? MIDDLE_ES[[1, 4][m % 2]] : pick(MIDDLE_ES)}\n- Esta vez no uses estas palabras: ${rest(REST_ES)}.\n- La única imagen que puedes usar, con tus palabras, es ${pickClose(PICTURE_ES)}; ninguna otra imagen ni metáfora.\n- Nunca escribas una referencia seguida de "dice" o "nos recuerda": di la idea con tus palabras y pon la referencia entre paréntesis después.\n- Si estas reglas piden sugerir a su pastor o a un adulto de confianza, hazlo antes de la última frase, nunca en la primera.\n- ${close} Nada después de esa frase.` };
-  }
-  if (lane === 'mindset' || door === 'mindset') {
-    return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${OPEN_EN[[0, 2, 3][m % 3]]}\n- ${pick(MIDDLE_MINDSET)}\n- This time do not use these words: ${rest(REST_EN)}.\n- End on one calm sentence whose first word is "${pickClose(CLOSE_MINDSET)}". Nothing after that sentence.` };
-  }
-  const [kind, word] = pickClose(CLOSE_EN);
-  const close = kind === 'P'
-    ? `End with a short prayer to God for her in ONE sentence whose first word is "${word}" and that calls on God by name (Lord, Father, God or Jesus), so it is plainly God being asked, never you doing it.`
-    : `End with ONE sentence, in your own words, on what one of your verses means for her today, with its reference in parentheses at the end; do not retell or quote its words. The sentence's first word is "${word}".`;
-  return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${pick(OPEN_EN)}\n- ${pick(MIDDLE_EN)}\n- This time do not use these words: ${rest(REST_EN)}.\n- The one picture you may use, in your own words, is ${pickClose(PICTURE_EN)}; use no other picture or metaphor.\n- Never write a reference followed by "says", "tells us" or "reminds us": say the point in your own words and put the reference in parentheses after it.\n- If these rules ask you to suggest her pastor or a trusted adult, do it before the last sentence, never as the first one.\n- ${close} Nothing after that sentence.` };
-}
-/** For the tests: every closing word list has more distinct closing stems than the window. */
-export const pictureStemsFor = (lane: 'en' | 'es') => pictureStems(lane === 'es' ? PICTURE_ES : PICTURE_EN);
-export const closeStems = (lane: Lane) => (lane === 'es' ? CLOSE_ES.map(c => c[1]) : lane === 'mindset' ? CLOSE_MINDSET : CLOSE_EN.map(c => c[1])).map(w => stem(fold(w)));
-
-/** Her answer's sentences, as written (the same split shapeOf uses). */
-export const sentencesIn = (text: string) => text.split(/(?<=[.!?])\s+/).map(x => x.trim()).filter(Boolean);
-/**
- * The texts left when one or two sentences (never the last: it is the planned closing, C13) are taken
- * out, fewest removals first, keeping at least two sentences. Used when a draft repeats a recent
- * answer: what repeats is a habitual SENTENCE ("mercy is a fundamental part of His character"), so
- * code removes it and re-checks the rest, instead of asking the model to write the whole answer again.
- */
-export function withoutSentences(text: string): string[] {
-  const s = sentencesIn(text);
-  const out: string[] = [];
-  const keep = (drop: number[]) => s.filter((_, i) => !drop.includes(i)).join(' ');
-  for (let i = 0; i < s.length - 1; i++) if (s.length - 1 >= 2) out.push(keep([i]));
-  for (let i = 0; i < s.length - 1; i++) for (let j = i + 1; j < s.length - 1; j++) if (s.length - 2 >= 2) out.push(keep([i, j]));
-  return out;
 }

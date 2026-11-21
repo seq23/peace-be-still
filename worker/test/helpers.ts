@@ -76,4 +76,4 @@ export async function chat(d: Deps, text: string | string[], opts: { age?: 'teen
   return { status: res.status, body: (await res.json()) as ChatResponse & { error?: string }, token };
 }
 
-export const good = (text = 'You are not alone tonight, and God stays close to a broken heart. Psalm 34:18 says so. Lord, sit close to her tonight.', references = ['Psalm 34:18']) => ({ text, references });
+export const good = (text = 'You are not alone tonight, and God stays close to a broken heart. Psalm 34:18 says so. Lord, sit close to us tonight.', references = ['Psalm 34:18']) => ({ text, references });

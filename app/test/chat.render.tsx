@@ -127,7 +127,9 @@ test('every AI answer can be reported: the answer and a reason are sent, never h
   await act(async () => tree.root.findAllByProps({ testID: 'report-wrong' })[0].props.onPress());
   assert.deepEqual(reports.at(-1), { answer: 'You are not carrying this by yourself.', reason: 'wrong' });
   assert.doesNotMatch(JSON.stringify(reports), /HER-WORDS/);
-  assert.match(texts(tree), /A person will read this report/);
+  // F10: nothing reads reports yet, so the copy only says it was sent.
+  assert.match(texts(tree), /Thank you\. Your report was sent\./);
+  assert.doesNotMatch(texts(tree), /person will read/i);
   await say(tree, 'I want to die');
   assert.equal(tree.root.findAllByProps({ testID: 'report-answer' }).filter(n => typeof n.type !== 'string').length, 0); // the crisis reply is not an AI answer
 });
@@ -140,4 +142,35 @@ test('the report action speaks Spanish in Mi Refugio', async () => {
   await act(async () => tree.root.findByType('TextInput' as any).props.onChangeText('tengo miedo'));
   await act(async () => tree.root.findByProps({ accessibilityLabel: 'Enviar' }).props.onPress());
   assert.match(texts(tree), /Reportar esta respuesta/);
+});
+
+test('the report picker can be cancelled without sending anything', async () => {
+  store.set('peace-be-still-chat-disclosure', 'yes');
+  replies.push(answer());
+  const tree = await mount();
+  await say(tree, 'rent is due');
+  const sent = reports.length;
+  await act(async () => tree.root.findAllByProps({ testID: 'report-answer' })[0].props.onPress());
+  await act(async () => tree.root.findAllByProps({ testID: 'report-cancel' })[0].props.onPress());
+  assert.equal(reports.length, sent);
+  assert.doesNotMatch(texts(tree), /What is wrong with it\?/);
+  assert.equal(tree.root.findAllByProps({ testID: 'report-answer' }).filter(n => typeof n.type !== 'string').length, 1);
+});
+
+test('the Mindset chat shows no faith words: no KJV, verse, pastor or God (hostile review F8)', async () => {
+  for (const [locale, language] of [['en', 'en'], ['es', 'es']] as const) {
+    store.delete('peace-be-still-chat-disclosure');
+    let tree!: ReactTestRenderer;
+    const settings = { door: 'mindset', age: 'adult', voice: 'plain', language, journey: 'Imagination Nights' };
+    await act(async () => { tree = create(<ChatScreen settings={settings as any} c={colors.light} locale={locale} />); });
+    assert.doesNotMatch(texts(tree), /KJV|King James|verse|versículo|pastor|\bGod\b|\bDios\b/i);
+    store.set('peace-be-still-chat-disclosure', 'yes');
+    replies.push(answer({ text: 'Breathe out slowly. Tomorrow can wait its turn.', scripture: [] }));
+    await act(async () => { tree = create(<ChatScreen settings={settings as any} c={colors.light} locale={locale} />); });
+    assert.doesNotMatch(texts(tree), /KJV|King James|verse|versículo|pastor|\bGod\b|\bDios\b/i);
+    await act(async () => tree.root.findByType('TextInput' as any).props.onChangeText('I cannot sleep'));
+    await act(async () => tree.root.findByProps({ accessibilityLabel: locale === 'es' ? 'Enviar' : 'Send' }).props.onPress());
+    assert.match(texts(tree), /Tomorrow can wait/);
+    assert.doesNotMatch(texts(tree), /KJV|King James|verse|versículo|pastor|\bGod\b|\bDios\b/i);
+  }
 });

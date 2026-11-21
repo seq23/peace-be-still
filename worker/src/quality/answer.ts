@@ -5,9 +5,12 @@
 import { banned, bookCode, fold, parseReference, type Translation } from '../shared';
 import { faithContentIssues } from '../../../app/src/model';
 import { lookup, type Scripture } from '../scripture';
+import type { Reference } from '../shared';
 
 export type Draft = { text: string; references: string[] };
-export type GateContext = { db: D1Database; lang: 'en' | 'es'; translation: Translation; teen: boolean; door: 'faith' | 'mindset'; userText: string };
+// userText is the newest message; earlier is everything else she or he wrote in this chat; afterCrisis
+// says an earlier message in it was answered with the crisis lines.
+export type GateContext = { db: D1Database; lang: 'en' | 'es'; translation: Translation; teen: boolean; door: 'faith' | 'mindset'; userText: string; earlier?: string; afterCrisis?: boolean };
 export type GateResult =
   | { ok: true; text: string; scripture: Scripture[]; notes: string[] }
   | { ok: false; problems: string[] };
@@ -85,6 +88,29 @@ const MONEY_DENY = /\b(?:sow\w*|reap\w*|prosper\w*|desires of thine heart|borrow
 const HARD_TOPIC = / (?:died|dies|death|dead|funeral|suicide|sex|sexual|girlfriend|boyfriend|dating|crush|pregnan\w*|abuse|divorce\w*|depress\w*|anxiety|anxious|scared|afraid|bull(?:y|ied|ying)|parents fight\w*|murio|muerte|novio|novia|sexo|embaraz\w*|divorcio|miedo|ansiedad|deprim\w*) /;
 const TRUSTED = / (?:trusted adult|parent|parents|mom|dad|mother|father|counselor|pastor|youth (?:leader|pastor)|teacher|coach|adulto de confianza|tus papas|tu mama|tu papa|tus padres|consejer[oa]|maestr[oa]|lider de jovenes) /;
 
+// Hostile review of 25c474f, F4: pastor-level floors in code.
+// A question about medicine gets "talk with your doctor" (RT25 sent her only to her pastor).
+const MEDS_Q = / (?:meds|medication\w*|medicine\w*|pills|antidepressants?|prescription\w*|insulin|dose|doses|dosage|medicament\w*|medicinas?|pastillas|receta\w*|dosis) /;
+const DOCTOR = / (?:doctor\w*|physician\w*|psychiatrist\w*|prescriber|medic[oa]s?|doctora?s?|psiquiatra) /;
+// Jesus' words on cutting off a hand or plucking out an eye are never left literal in a self-harm-adjacent app (n05).
+const CUT_OFF_ASKED = / (?:cut (?:it )?off (?:your |my |the |a )?(?:hand|foot|arm)|pluck (?:it )?out|gouge (?:it )?out|tear (?:it )?out|(?:cortar|corta|cortate|cortarse|cortarme) (?:la |tu |mi )?(?:mano|pie)|(?:sacar|saca|sacate|sacarse|sacarme) (?:el |tu |mi )?ojo) /;
+const NOT_LITERAL = / (?:not (?:\w+ ){0,2}literal\w*|isnt literal\w*|never (?:\w+ ){0,2}(?:wants|asks|asking|wanted|meant) (?:\w+ ){0,3}(?:to )?(?:hurt|harm|injure|cut)|no (?:\w+ ){0,3}literal\w*|nunca (?:\w+ ){0,4}(?:dano|lastim\w*|herir\w*)) /;
+const CUT_OFF_REFS = ['Matthew 5:29-30', 'Matthew 18:8-9', 'Mark 9:43-47'].map(r => parseReference(r)!);
+// The reader's gender: an English answer that calls someone "she/her" when no woman is in the
+// question or in a Bible story the answer tells is speaking of the reader (F3, RT11: "give her wisdom").
+const FEMININE = / (?:she|her|hers|herself) /;
+const WOMAN_NAMED = / (?:she|her|hers|herself|mom|moms|mommy|mother\w*|mama|momma|sister\w*|daughter\w*|wife|wives|girlfriend\w*|fiancee|grand(?:ma|mother|daughter)\w*|aunt\w*|niece\w*|woman|women|lady|ladies|girl|girls|bride|widow\w*|stepmom|queen|friend she|hannah|ruth|naomi|mary|martha|esther|sarah|rebekah|rachel|leah|deborah|miriam|eve|tamar|bathsheba|abigail|lydia|priscilla|dorcas|tabitha|elizabeth|anna|jochebed|rahab|hagar|delilah|jezebel|phoebe|junia|mother in law) /;
+// Verses that wound on a hard night (F4: Matthew 21:31 to a grieving mother, Hebrews 13:4 under a
+// single woman's question, Mateo 6:14-15 to someone badly hurt): never given unless she named that passage.
+const HARSH_REFS = ['Matthew 21:31', 'Matthew 6:15', 'Matthew 6:14-15', '2 Thessalonians 3:10', 'Matthew 5:13'].map(r => parseReference(r)!);
+const MARRIAGE_REFS = ['Hebrews 13:4', '1 Corinthians 7:1-40'].map(r => parseReference(r)!);
+const MARRIAGE_ASKED = / (?:sex\w*|marr\w*|wedding|husband|wife|spouse|dating|date|girlfriend|boyfriend|fiance\w*|engaged|virgin\w*|lust\w*|porn\w*|gay|lesbian|homosexual\w*|same sex|single|celiba\w*|casad\w*|casar\w*|matrimonio|boda|esposo|esposa|novio|novia|sexo|soltero|soltera|virgen) /;
+const overlaps = (s: Scripture, r: Reference) => s.book === r.book && s.chapter === r.chapter && (r.verse === undefined || (s.endVerse ?? s.verse) >= r.verse && s.verse <= (r.endVerse ?? r.verse));
+// F6/S2: "trusted adult" is for a teen; to a grown woman it is a machine tell (q07, q08).
+const TRUSTED_ADULT = / (?:trusted adult|adulto de confianza|adultos de confianza) /;
+// F1: the last sentence is whole: at least 4 words, ending in . or !, never a bare name ("…, God").
+const lastSentence = (text: string) => text.replace(/\s*\([^)]*\d+:\d+[^)]*\)\s*([.!?])?\s*$/u, '$1').trim().split(/(?<=[.!?])\s+/).at(-1) ?? '';
+
 // "Psalm 46:1", "1 John 4:8", "Primera de Juan 4:8", "Salmos 23:1-3", "JHN 3:16".
 const REF_IN_TEXT = /((?:[123]\s+)?(?:\p{L}+\s+){0,3}\p{L}+\.?)\s+(\d{1,3})\s*:\s*(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?/gu;
 const QUOTED = /"([^"]{3,}?)"|“([^”]{3,}?)”|«([^»]{3,}?)»|‘([^’]{3,}?)’|(?<![\p{L}])'([^']{3,}?)'(?![\p{L}])/gu;
@@ -117,7 +143,10 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   const add = (s: Scripture | null) => { if (s && !seen.has(`${s.book} ${s.chapter}:${s.verse}`) && scripture.length < 3) { seen.add(`${s.book} ${s.chapter}:${s.verse}`); scripture.push(s); } };
   const asked = norm(ctx.userText);
   const plain = PLAIN_ASKED.test(asked);
-  const unfit = (s: Scripture) => (MEDICINE_Q.test(asked) && MEDICINE_DENY.test(fold(s.text))) || (MONEY_Q.test(asked) && MONEY_DENY.test(fold(s.text)));
+  const named = (r: Reference) => refsInText(ctx.userText).some(n => n.book === r.book && n.chapter === r.chapter);
+  const everything = norm(`${ctx.earlier ?? ''} ${ctx.userText}`);
+  const unfit = (s: Scripture) => (MEDICINE_Q.test(asked) && MEDICINE_DENY.test(fold(s.text))) || (MONEY_Q.test(asked) && MONEY_DENY.test(fold(s.text)))
+    || HARSH_REFS.some(r => overlaps(s, r) && !named(r)) || (MARRIAGE_REFS.some(r => overlaps(s, r)) && !MARRIAGE_ASKED.test(everything) && !MARRIAGE_REFS.some(named));
   if (ctx.door === 'faith') {
     // A verse whose words would promise healing or wealth to this question is dropped, not shown.
     for (const raw of rawRefs) { const ref = parseReference(raw); const s = ref ? await lookup(ctx.db, ctx.translation, ref) : null; if (s && unfit(s)) notes.push('verse_dropped'); else add(s); }
@@ -145,6 +174,7 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   const hers = ` ${fold(ctx.userText)} `;
   for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1]) && !hers.includes(` ${words(m[1]).slice(0, 3).join(' ')} `)) problems.push('non_store_scripture');
   text = text.replace(/\s+([,.;:!?])/g, '$1').replace(/\(\s*\)/g, '').replace(/\s{2,}/g, ' ').trim();
+  text = tidyReferences(text);
   const archaic = words(text).filter(w => ARCHAIC.has(w)).length;
   if (ctx.lang === 'en' && archaic >= 2) problems.push('scripture_like');
 
@@ -171,6 +201,15 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (ctx.door === 'faith' && faithContentIssues(text).length) problems.push('mindset_word');
   if (ctx.teen && HARD_TOPIC.test(norm(ctx.userText)) && !TRUSTED.test(n)) problems.push('missing_trusted_adult');
 
+  if (MEDS_Q.test(asked) && !DOCTOR.test(n)) problems.push('missing_doctor');
+  const cutOff = CUT_OFF_ASKED.test(asked) || scripture.some(s => CUT_OFF_REFS.some(r => overlaps(s, r))) || refsInText(ctx.userText).some(x => CUT_OFF_REFS.some(r => r.book === x.book && r.chapter === x.chapter && x.verse >= r.verse! && x.verse <= (r.endVerse ?? r.verse!)));
+  if (cutOff && !NOT_LITERAL.test(n)) problems.push('missing_not_literal');
+  if (ctx.afterCrisis && !text.includes('988')) problems.push('missing_988');
+  if (ctx.lang === 'en' && FEMININE.test(n) && !WOMAN_NAMED.test(everything) && !WOMAN_NAMED.test(n.replace(/ (?:she|her|hers|herself) /g, '  '))) problems.push('assumes_gender');
+  if (!ctx.teen && TRUSTED_ADULT.test(n)) problems.push('trusted_adult_for_adult');
+  const end = lastSentence(text);
+  if (text && (words(end).length < 4 || !/[.!]["'”’)]*$/.test(end))) problems.push('broken_ending');
+
   // C12: 95%+ Spanish words outside references.
   if (ctx.lang === 'es') {
     const w = words(text.replace(REF_IN_TEXT, ' '));
@@ -187,4 +226,27 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (!text) problems.push('empty');
 
   return problems.length ? { ok: false, problems: [...new Set(problems)] } : { ok: true, text, scripture, notes };
+}
+
+/** S1: "Psalm 119:76 (Psalm 119:76)" and "El Salmo 34:18 ... (Salmos 34:18)" lose the repeat, and a
+ *  reference stranded after a full stop moves inside the sentence it belongs to. Structure only. */
+export function tidyReferences(text: string): string {
+  // A stranded "(ref)" after a full stop goes back before that stop.
+  let out = text.replace(/([^.!?\s])([.!?])\s+(\((?:[^()]*\d+\s*:\s*\d+[^()]*)\))(?=\s|$)/gu, '$1 $3$2');
+  out = out.replace(/([.!?])\s*\1/g, '$1');
+  // In each sentence, a parenthetical reference already named outside the parentheses is dropped.
+  out = out.split(/(?<=[.!?])\s+/).map(sentence => {
+    const inside = [...sentence.matchAll(/\s*\(([^()]*\d+\s*:\s*\d+[^()]*)\)/gu)];
+    if (!inside.length) return sentence;
+    const bare = sentence.replace(/\([^()]*\)/g, ' ');
+    const key = (r: { book: string | null; chapter: number; verse: number }) => `${r.book} ${r.chapter}:${r.verse}`;
+    const outside = new Set(refsInText(bare).filter(r => r.book).map(key));
+    let s = sentence;
+    for (const m of inside) {
+      const refs = refsInText(m[1]).filter(r => r.book);
+      if (refs.length && refs.every(r => outside.has(key(r)))) s = s.replace(m[0], '');
+    }
+    return s;
+  }).join(' ');
+  return out.replace(/\s+([,.;:!?])/g, '$1').replace(/\s{2,}/g, ' ').trim();
 }

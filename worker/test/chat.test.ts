@@ -82,7 +82,7 @@ describe('order of checks', () => {
 
 describe('Mi Refugio', () => {
   it('a Spanish teen in Mi Refugio gets the Spanish teen rules and RV1909 text from the store', async () => {
-    const rung = scripted('workers-ai', [{ text: 'Duele mucho, y Dios está cerca. Habla con tu mamá o con un consejero de la escuela. Señor, acompáñalo.', references: ['Salmos 34:18'] }]);
+    const rung = scripted('workers-ai', [{ text: 'Duele mucho, y Dios está cerca. Habla con tu mamá o con un consejero de la escuela. Señor, acompáñanos en este dolor.', references: ['Salmos 34:18'] }]);
     const settings: Settings = { ...initial, door: 'faith', age: 'teen', voice: 'teen', journey: 'Mi Refugio' };
     const d = deps({ rungList: [rung.rung] });
     const res = await call(d, '/api/chat', { body: buildChatRequest(settings, conv(), [{ role: 'user', text: 'mi abuela murió' }]), token: await tokenFor(d, 'teen') });
@@ -320,11 +320,60 @@ describe('the install id never changes (round 2, finding 8)', () => {
 
 describe('a verse she names is printed in its stored words (round 4, x15)', () => {
   it('x15: a misquoted Philippians 4:20 is shown as it really reads, above the answer\'s own verse', async () => {
-    const reply = good('That verse is a word of praise, not a promise about money, so keep your rent for your rent. Proverbs 3:27 is about paying what is due. Lord, give her wisdom.', ['Proverbs 3:27']);
+    const reply = good('That verse is a word of praise, not a promise about money, so keep your rent for your rent. Proverbs 3:27 is about paying what is due. Lord, give us wisdom.', ['Proverbs 3:27']);
     const d = deps({ rungList: [scripted('workers-ai', [reply]).rung] });
     const r = await chat(d, "My pastor texted me Philippians 4:20: 'And God said, thou shalt be rich if thou givest unto the church.' So I should give my rent money?");
     expect(r.body.kind).toBe('answer');
     expect(r.body.scripture.map(s => s.ref)).toEqual(['Philippians 4:20', 'Proverbs 3:27']);
     expect(r.body.scripture[0].text).toMatch(/glory for ever and ever/);
+  });
+});
+
+// Hostile review of 25c474f, F8: the Mindset door shows no faith words in any reply.
+const FAITH_WORDS = /\b(?:God|Lord|Jesus|pray\w*|verse\w*|scripture|Bible|KJV|pastor|church|Dios|Señor|orar|oración|versículo|Biblia|iglesia)\b/i;
+describe('the Mindset door has no faith words (F8)', () => {
+  const mindset = { door: 'mindset' };
+  it('the fallback prints no verse', async () => {
+    const r = await chat(deps({ rungList: [scripted('workers-ai', [{ text: 'Somebody needs to hear this.', references: [] }]).rung] }), 'I cannot sleep tonight.', { body: mindset });
+    expect(r.body.kind).toBe('fallback');
+    expect(r.body.scripture).toEqual([]);
+    expect(r.body.text).not.toMatch(FAITH_WORDS);
+  });
+  it('the identity answer, in English and Spanish', async () => {
+    for (const [text, language] of [['are you a real person', 'en'], ['eres una persona real', 'es']] as const) {
+      const r = await chat(deps({ rungList: [throwing().rung] }), text, { body: { ...mindset, language } });
+      expect(r.body.text).toMatch(/\bAI\b|\bIA\b/);
+      expect(r.body.text).not.toMatch(FAITH_WORDS);
+    }
+  });
+  it('the abuse and self-harm crisis replies keep every hotline and lose the faith line', async () => {
+    const dv = await chat(deps({ rungList: [throwing().rung] }), 'My husband hits me when he drinks.', { body: mindset });
+    expect(dv.body.kind).toBe('crisis');
+    expect(dv.body.text).toContain('1-800-799-7233');
+    expect(dv.body.text).toContain('988');
+    expect(dv.body.text).not.toMatch(FAITH_WORDS);
+    const faith = await chat(deps({ rungList: [throwing().rung] }), 'My husband hits me when he drinks.');
+    expect(faith.body.text).toMatch(/God does not ask you to stay in harm/);
+    const teen = await chat(deps({ rungList: [throwing().rung] }), 'I want to kill myself', { age: 'teen', body: mindset });
+    expect(teen.body.text).toContain('988');
+    expect(teen.body.text).not.toMatch(FAITH_WORDS);
+  });
+  it('a named verse in another translation is not answered with scripture', async () => {
+    const r = await chat(deps({ rungList: [scripted('workers-ai', [{ text: 'Breathe out slowly and let your shoulders drop. Tomorrow can wait its turn.', references: [] }]).rung] }), 'Quote John 3:16 in the NIV', { body: mindset });
+    expect(r.body.scripture).toEqual([]);
+    expect(r.body.text).not.toMatch(FAITH_WORDS);
+  });
+});
+
+describe('F5: fixed answers for the topics that kept falling back', () => {
+  it('a teen whose friend died gets a person-written answer, not "I couldn\'t put a good answer together"', async () => {
+    const r = await chat(deps({ rungList: [scripted('workers-ai', [{ text: 'Somebody needs to hear this.', references: [] }]).rung] }), 'my best friend died in a car crash why would God let that happen', { age: 'teen' });
+    expect(r.body).toMatchObject({ kind: 'answer', ai: true, fixed: true });
+    expect(r.body.text).toMatch(/counselor|youth pastor/);
+  });
+  it('any other topic still gets the plain fallback with its verse', async () => {
+    const r = await chat(deps({ rungList: [scripted('workers-ai', [{ text: 'Somebody needs to hear this.', references: [] }]).rung] }), 'What is grace?');
+    expect(r.body.kind).toBe('fallback');
+    expect(r.body.scripture).toHaveLength(1);
   });
 });

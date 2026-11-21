@@ -4,6 +4,9 @@ import type { CrisisKind } from './crisis';
 
 export type Lang = 'en' | 'es';
 type Band = 'teen' | 'adult';
+// The Mindset door has no faith words anywhere (hostile review F8): every reply that names God, a
+// verse, scripture or a pastor has a Mindset version, and every hotline stays.
+export type Door = 'faith' | 'mindset';
 
 const open = { en: "You matter, and you don't have to carry this alone.", es: 'Tú importas, y no tienes que cargar esto a solas.' };
 const lifeline = {
@@ -26,6 +29,14 @@ const childhelp = {
 const trusted = {
   en: 'Please also tell a trusted adult today, like a parent, a school counselor or a pastor.',
   es: 'Por favor, cuéntale hoy también a un adulto de confianza, como tu mamá o tu papá, un consejero de la escuela o un pastor.',
+};
+const trustedMindset = {
+  en: 'Please also tell a trusted adult today, like a parent or a school counselor.',
+  es: 'Por favor, cuéntale hoy también a un adulto de confianza, como tu mamá o tu papá o un consejero de la escuela.',
+};
+const dvMindset = {
+  en: 'Please reach out to the National Domestic Violence Hotline: call 1-800-799-7233 or text START to 88788, any time. What is happening to you is not your fault, and you deserve to be safe.',
+  es: 'Por favor, comunícate con la Línea Nacional contra la Violencia Doméstica: llama al 1-800-799-7233 o envía START al 88788, a cualquier hora. Lo que te está pasando no es tu culpa, y mereces estar a salvo.',
 };
 // In abuse, the trusted adult must not send her back to the person hurting her (a parent's
 // partner, a youth pastor): it names adults outside the home first.
@@ -95,13 +106,15 @@ const medical: Record<MedicalCase, Record<Lang, string[]>> = {
 /** The fixed crisis reply. Abuse leads with the hotline for what is happening (Childhelp for a
  *  child or teen, the Domestic Violence Hotline for an adult), then 988 and 911. Medical danger
  *  leads with what not to do, then Poison Control, 911, her doctor, then 988. */
-export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = ''): string {
-  if (kind === 'medical') return [...medical[medicalCase(herText)][lang], ...(band === 'teen' ? [trusted[lang]] : []), close[lang]].join(' ');
+export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '', door: Door = 'faith'): string {
+  const mind = door === 'mindset';
+  const trust = mind ? trustedMindset : trusted;
+  if (kind === 'medical') return [...medical[medicalCase(herText)][lang].map(line => mind ? line.replace(/ Faith and treatment go together\.| La fe y el tratamiento van juntos\./, '') : line), ...(band === 'teen' ? [trust[lang]] : []), close[lang]].join(' ');
   const child = kind === 'child_abuse' || (kind === 'abuse' && band === 'teen');
   const parts = kind === 'selfharm'
     ? [open[lang], lifeline[lang], danger[lang]]
-    : [open[lang], child ? childhelp[lang] : dv[lang], alsoLifeline[lang], danger[lang]];
-  if (band === 'teen') parts.push(kind === 'selfharm' ? trusted[lang] : trustedSafe[lang]);
+    : [open[lang], child ? childhelp[lang] : mind ? dvMindset[lang] : dv[lang], alsoLifeline[lang], danger[lang]];
+  if (band === 'teen') parts.push(kind === 'selfharm' ? trust[lang] : trustedSafe[lang]);
   parts.push(close[lang]);
   return parts.join(' ');
 }
@@ -109,6 +122,11 @@ export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '
 export const fallbackText = {
   en: "I couldn't put a good answer together just now. Hold on to this verse for a moment, then ask me again.",
   es: 'No pude armar una buena respuesta en este momento. Quédate con este versículo un momento y vuelve a preguntarme.',
+};
+// Mindset: no verse is printed under it.
+export const fallbackMindsetText = {
+  en: "I couldn't put a good answer together just now. Take one slow breath, then ask me again.",
+  es: 'No pude armar una buena respuesta en este momento. Respira despacio una vez y vuelve a preguntarme.',
 };
 // A rung failed for a moment (busy, a network blip) but today's allowances are not used up.
 export const busyText = {
@@ -120,9 +138,17 @@ export const noFreeModelText = {
   en: 'Chat is resting until tomorrow. Your Bible, today\'s story and the night sessions are all still here.',
   es: 'El chat descansa hasta mañana. Tu Biblia, la historia de hoy y las sesiones de la noche siguen aquí.',
 };
+export const noFreeModelMindsetText = {
+  en: 'Chat is resting until tomorrow. Your night sessions are all still here.',
+  es: 'El chat descansa hasta mañana. Tus sesiones de la noche siguen aquí.',
+};
 export const limitText = {
   en: "That's today's chat. It opens again tomorrow, and your Bible is here any time.",
   es: 'Ese fue el chat de hoy. Mañana se abre de nuevo, y tu Biblia está aquí cuando quieras.',
+};
+export const limitMindsetText = {
+  en: "That's today's chat. It opens again tomorrow.",
+  es: 'Ese fue el chat de hoy. Mañana se abre de nuevo.',
 };
 // Asked for a verse in another translation: the app quotes only the KJV / RV1909, so it gives that
 // verse in those words and says so once, plainly.
@@ -131,7 +157,42 @@ export const oneTranslationText = {
   es: 'Aquí cito solo la Reina-Valera 1909, así que este es ese versículo en sus palabras.',
 };
 // C08: asked whether it is real, a pastor, a person or God, it says plainly what it is.
+export const identityMindsetText = {
+  en: "I'm an AI helper, not a person. I can help you think things through, but the people who care about you, and a counselor or doctor when you need one, can do far more than I can.",
+  es: 'Soy un asistente de IA, no una persona. Puedo ayudarte a pensar las cosas con calma, pero la gente que te quiere, y un consejero o un médico cuando lo necesites, pueden hacer mucho más que yo.',
+};
 export const identityText = {
   en: "I'm an AI helper, not a pastor, not a person and not God. I can talk things through and point you to scripture, but for prayer and care, your pastor and the people who love you matter more than I can.",
   es: 'Soy un asistente de IA, no un pastor, no una persona y no Dios. Puedo conversar contigo y mostrarte pasajes de la Biblia, pero para la oración y el cuidado, tu pastor y la gente que te quiere valen mucho más que yo.',
+};
+
+// Hostile review F5: people who needed an answer got the generic fallback. For the topics that kept
+// falling back, a short answer written by a person stands in for it (faith door; Mindset keeps the
+// plain fallback). Each is shown as a fixed answer, labelled AI like every chat reply.
+export type Topic = 'teen_grief' | 'money' | 'cursing' | 'jailbreak';
+export function fallbackTopic(text: string, teen: boolean): Topic | null {
+  const t = ` ${text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[‘’'`´]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ')} `;
+  if (/ (?:ignore (?:all|your|the|previous|prior|these)|system prompt|you are now|you are dan|new rules|developer mode|pretend (?:to be|you are)|jailbreak|olvida (?:tus|las) reglas|ahora eres|nuevas reglas) /.test(t)) return 'jailbreak';
+  if (/ (?:curse|cuss|cussing|swear word|swear words|bad word|bad words|say a (?:bad|dirty) word|groseria\w*|maldicion\w*|palabrota\w*|mala palabra) /.test(t)) return 'cursing';
+  if (teen && / (?:died|dies|dead|death|passed away|killed|funeral|murio|fallecio|muerte|se mato) /.test(t)) return 'teen_grief';
+  if (/ (?:seed|sow|sowing|tithe\w*|offering|debt\w*|rent|bills?|broke|money|semilla|sembrar|diezmo\w*|ofrenda|deuda\w*|renta|dinero) /.test(t)) return 'money';
+  return null;
+}
+export const topicText: Record<Topic, Record<Lang, string>> = {
+  teen_grief: {
+    en: "I'm so sorry. Losing a friend like this is one of the hardest things there is, and it is okay to be angry, numb or full of questions. You can tell God exactly how you feel; the Psalms are full of people who did. Please talk with someone who can sit with you in this, like a parent, a school counselor or your youth pastor. Lord, stay close to this grief and to every heart that is broken by it.",
+    es: 'Lo siento mucho. Perder a un amigo así es de lo más difícil que hay, y está bien sentir enojo, vacío o muchas preguntas. Puedes decirle a Dios exactamente cómo te sientes; los Salmos están llenos de personas que lo hicieron. Por favor, habla con alguien que pueda acompañarte en esto, como tu mamá o tu papá, un consejero de la escuela o tu líder de jóvenes. Señor, quédate cerca de este dolor y de cada corazón que hoy está roto.',
+  },
+  money: {
+    en: "Money pressure is real, and God cares about the rent and the bills, not only about the big questions. Giving is never a way to buy a blessing; God is not paid to help you. Today, write down what is due and when, and call the people you owe to ask about a plan; many churches and local programs also help with rent and utilities. Lord, give wisdom for the next step and peace for the waiting.",
+    es: 'La presión del dinero es real, y a Dios le importan la renta y las cuentas, no solo las grandes preguntas. Dar nunca es una forma de comprar una bendición; a Dios no se le paga para que ayude. Hoy, anota lo que debes y para cuándo, y llama a quienes les debes para pedir un plan; muchas iglesias y programas locales también ayudan con la renta y los servicios. Señor, danos sabiduría para el siguiente paso y paz mientras esperamos.',
+  },
+  cursing: {
+    en: "I'll pass on the cursing, but I'm glad to keep talking. If something has you angry or worn out, you can say it plainly here, and you can say it to God too; He can handle honest words. Tell me what is going on.",
+    es: 'Las groserías las dejo pasar, pero con gusto seguimos hablando. Si algo te tiene enojado o cansado, puedes decirlo con claridad aquí, y también decírselo a Dios; Él puede con las palabras honestas. Cuéntame qué está pasando.',
+  },
+  jailbreak: {
+    en: "I'll stay what I am: an AI helper in a Bible app, not God, not Jesus and not a pastor, so I can't speak in their place or promise what they will do. I'm glad to talk about what you are carrying and what Scripture says about it. What is on your heart?",
+    es: 'Seguiré siendo lo que soy: un asistente de IA en una app de la Biblia, no Dios, no Jesús y no un pastor, así que no puedo hablar en su lugar ni prometer lo que harán. Con gusto hablamos de lo que estás cargando y de lo que dice la Escritura al respecto. ¿Qué hay en tu corazón?',
+  },
 };

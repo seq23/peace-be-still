@@ -113,6 +113,10 @@
   "Wrong about the Bible": "Equivocada sobre la Biblia",
   "Unsafe advice": "Consejo peligroso",
   "Something else": "Otra cosa",
-  "Thank you. A person will read this report.": "Gracias. Una persona leerá este reporte.",
+  "Thank you. Your report was sent.": "Gracias. Tu reporte fue enviado.",
+  "Cancel": "Cancelar",
+  "Every answer is marked AI. It is not a counselor or a person.": "Cada respuesta dice IA. No es un consejero ni una persona.",
+  "AI · not a person": "IA · no es una persona",
+  "Say what is on your mind. You will get a short, calm answer.": "Escribe lo que tienes en mente. Recibirás una respuesta corta y tranquila.",
   "The report didn't go through. Try again.": "El reporte no se envió. Inténtalo de nuevo."
 }

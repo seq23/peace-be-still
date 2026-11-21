@@ -7,7 +7,7 @@ import redteam from './fixtures/redteam.json';
 import injection from './fixtures/redteam-injection.json';
 import probes from './fixtures/redteam-probes.json';
 import { call, chat, chatBody, deps, scripted, throwing } from './helpers';
-import { oneTranslationText } from '../src/replies';
+import { fallbackTopic, oneTranslationText, topicText } from '../src/replies';
 
 type Item = { id: string; voice: string; age_band: 'child' | 'teen' | 'adult'; lang: 'en' | 'es'; door: string; prompt: string; expect: { path: string; assert: string[] } };
 const items = [...redteam, ...injection] as Item[];
@@ -106,9 +106,14 @@ for (const item of items.filter(i => i.expect.path === 'model')) {
           // An unknown reference never reaches her: dropped from scripture, or the answer is replaced.
           expect(r.body.scripture.every(s => !(s.book === 'PSA' && s.chapter === 151))).toBe(true);
         }
-        expect(r.body.kind, `${item.id} ${word}`).toBe('fallback');
         expect(r.body.text).not.toBe(reply.text);
-        expect(r.body.scripture[0]?.ref).toMatch(/^(Psalm|Salmos) 46:1$/);
+        // F5: the topics that kept falling back get a short answer written by a person instead.
+        const topic = item.door === 'mindset' ? null : fallbackTopic(item.prompt, item.age_band === 'teen');
+        if (topic) expect(r.body, `${item.id} ${word}`).toMatchObject({ kind: 'answer', ai: true, fixed: true, text: topicText[topic][item.lang] });
+        else {
+          expect(r.body.kind, `${item.id} ${word}`).toBe('fallback');
+          expect(r.body.scripture[0]?.ref).toMatch(/^(Psalm|Salmos) 46:1$/);
+        }
         expect(rung.calls.length).toBe(3); // two regenerations, each with the objection, then the fallback
         expect(JSON.stringify(rung.calls[1])).toMatch(/Your last answer was not used/);
         expect(JSON.stringify(rung.calls[2])).toMatch(/Your last answer was not used/);
@@ -117,8 +122,8 @@ for (const item of items.filter(i => i.expect.path === 'model')) {
     it('passes a good reply, labelled AI', async () => {
       if (item.expect.assert.includes('says_ai')) return;
       const reply = item.lang === 'es'
-        ? { text: 'No estás sola. Dios está cerca de los quebrantados de corazón; lee Salmos 34:18 esta noche y habla con tu pastor. Señor, abrázala.', references: ['Salmos 34:18'] }
-        : { text: 'You are not alone. God stays close to the brokenhearted; read Psalm 34:18 tonight, and talk with a parent, a counselor or your pastor. Lord, hold her close.', references: ['Psalm 34:18'] };
+        ? { text: 'No estás sin compañía. Dios está cerca de los quebrantados de corazón; lee Salmos 34:18 esta noche y habla con tu médico o con tu pastor. Señor, abrázanos hoy y siempre.', references: ['Salmos 34:18'] }
+        : { text: 'You are not alone. God stays close to the brokenhearted; read Psalm 34:18 tonight, and talk with a parent, a counselor, your doctor or your pastor. Lord, hold us close.', references: ['Psalm 34:18'] };
       const r = await chat(deps({ rungList: [scripted('workers-ai', [reply]).rung] }), item.prompt, { age: age(item), body: body(item) });
       expect(r.body.kind).toBe('answer');
       expect(r.body.ai).toBe(true);
@@ -144,8 +149,8 @@ describe('round-2 probes', () => {
   for (const p of (probes as Probe[]).filter(x => x.want === 'answer' || x.id === 'q08')) {
     it(`${p.id} (Bible study / hurt) reaches the model`, async () => {
       const rung = scripted('gemini-free', [p.lang === 'es'
-        ? { text: 'Dios ve lo que pasó. Perdonar toma tiempo. Señor, sana su corazón.', references: ['Salmos 34:18'] }
-        : { text: 'Scripture tells this hard story honestly, and God sees every person in it. Lord, give her understanding.', references: ['Psalm 34:18'] }]);
+        ? { text: 'Dios ve lo que pasó. Perdonar toma tiempo. Señor, sana nuestro corazón.', references: ['Salmos 34:18'] }
+        : { text: `Scripture tells this hard story honestly, and God sees every person in it.${p.id === 'n05' ? ' Jesus is not speaking literally here, and God never wants anyone to hurt their body.' : ''} Lord, give us understanding.`, references: ['Psalm 34:18'] }]);
       const r = await chat(deps({ rungList: [rung.rung] }), p.text!, { body: { voice: p.voice ?? 'plain', language: p.lang ?? 'en' } });
       expect(r.body.kind).toBe('answer');
       expect(rung.calls.length).toBe(1);

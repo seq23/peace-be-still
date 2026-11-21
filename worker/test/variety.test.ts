@@ -2,8 +2,8 @@ import { env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
 import { cleanup } from '../src/cleanup';
 import { deleteMemory } from '../src/memory';
-import { closeStems, hashShape, pictureStemsFor, withoutSentences, planFor, RECENT_ALL, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Lane } from '../src/quality/variety';
-import type { LadderRung } from '../src/ladder';
+import { hashShape, recentShapes, repeats, saveShape, shapeOf, varietyObjection } from '../src/quality/variety';
+import { SAMPLES } from '../src/voice/samples';
 import type { Message } from '../src/providers/types';
 import { call, chat, deps, good, NOW, scripted, tokenFor } from './helpers';
 
@@ -28,8 +28,8 @@ describe('variety across answers (round 4 finding 2)', () => {
   it('the Spanish night image comes back too (x20 and q08: "recuerda ... depositar", "invitación ... carga")', () => {
     expect(repeats(shapeOf(x20), [shapeOf(q08)])).toContain('repeat_image');
   });
-  it('lines the rules REQUIRE may come back: two teen answers that both send her to a parent, school counselor or pastor', () => {
-    expect(repeats(shapeOf(RT12), [shapeOf(RT11)])).toEqual([]);
+  it('no exemption hides repetition (F6): two teen answers that send them to a parent, school counselor or pastor in the same words repeat', () => {
+    expect(repeats(shapeOf(RT12), [shapeOf(RT11)])).toContain('repeat_image');
   });
   it('different answers pass (grief and job loss)', () => {
     expect(repeats(shapeOf(RT01), [shapeOf(q04), shapeOf(x09)])).toEqual([]);
@@ -61,8 +61,8 @@ describe('variety across answers (round 4 finding 2)', () => {
 
 describe('variety in the chat path', () => {
   it('her second answer that closes like her first is rewritten; a different one is shown', async () => {
-    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold her close tonight.', ['Psalm 34:18']);
-    const again = good('Loss takes time to carry. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold us close tonight.', ['Psalm 34:18']);
+    const again = good('Loss takes time to carry. Lord, hold us close tonight.', ['Psalm 34:18']);
     const fresh = good('Loss takes time to carry, and you do not carry it alone. May the Lord keep you near.', ['Psalm 34:18']);
     const a = scripted('workers-ai', [first]);
     const d = deps({ rungList: [a.rung] });
@@ -75,10 +75,10 @@ describe('variety in the chat path', () => {
     expect(r.body.kind).toBe('answer');
     expect(r.body.text).toContain('May the Lord keep you near');
     expect(b.calls.length).toBe(2);
-    expect(b.calls[1].some(m => m.role === 'system' && /closed like a recent answer \("Lord, hold her\.\.\."\)/.test(m.content))).toBe(true);
+    expect(b.calls[1].some(m => m.role === 'system' && /closed like a recent answer \("Lord, hold us\.\.\."\)/.test(m.content))).toBe(true);
   });
   it('variety never causes a fallback: when every try repeats, the last clean draft is shown', async () => {
-    const same = good('Grief can sit heavy for a while. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const same = good('Grief can sit heavy for a while. Lord, hold us close tonight.', ['Psalm 34:18']);
     const d = deps({ rungList: [scripted('workers-ai', [same]).rung] });
     const token = await tokenFor(d);
     const conversation = crypto.randomUUID();
@@ -93,53 +93,41 @@ describe('variety in the chat path', () => {
   });
 });
 
-// Round 5 (run 44830048621): the model closed 14 of 53 answers "May you find..." and rewrites asked
-// after the fact did not stop it. The plan is chosen by code before the model writes.
-// Four letters no other answer starts a word with (shapes compare 4-letter stems).
-const tag = (i: number) => `z${String.fromCharCode(97 + (i % 26))}${String.fromCharCode(97 + Math.floor(i / 26) % 26)}q`;
-const closingWord = (plan: string) => /(?:first word is|primera palabra (?:sea|es)) "([^"]+)"/.exec(plan)?.[1];
-describe('the plan code chooses before the model writes (round 5 rebuild)', () => {
-  it.each(['en', 'es', 'mindset'] as Lane[])('%s: any window of answers is told to close on different first words', lane => {
-    expect(new Set(closeStems(lane)).size).toBeGreaterThan(RECENT_ALL);
-    for (let start = 1; start < 200; start += 7) {
-      const words = Array.from({ length: RECENT_ALL + 1 }, (_, i) => closingWord(planFor(start + i, lane).text)!);
-      expect(new Set(words.map(w => shapeOf(`Intro sentence here. ${w} one two.`).closer.split(' ')[0])).size).toBe(RECENT_ALL + 1);
-    }
+
+// Hostile review of 25c474f (F1, F2): code no longer chooses any word of an answer. Two
+// human-written answers in the voice go in ahead of the chat, rotated by a counter.
+const assistantTexts = (messages: Message[]) => messages.filter(m => m.role === 'assistant').map(m => (JSON.parse(m.content) as { text: string }).text);
+describe('voice samples, not a code plan', () => {
+  it('two samples in the right voice go in ahead of her message, and they rotate from one chat to the next', async () => {
+    const a = scripted('workers-ai', [good('Loss takes time to carry, and you do not carry it alone. May the Lord keep you near.')]);
+    await chat(deps({ rungList: [a.rung] }), 'My mama died last week.', { body: { voice: 'church' } });
+    const b = scripted('workers-ai', [good('Grief keeps its own clock, and God keeps company with it. Lord, stay close to us.')]);
+    await chat(deps({ rungList: [b.rung] }), 'My mama died last week.', { body: { voice: 'church' } });
+    const first = assistantTexts(a.calls[0]), second = assistantTexts(b.calls[0]);
+    expect(first).toHaveLength(2);
+    const church = SAMPLES.church.map(s => s.text);
+    expect([...first, ...second].every(t => church.includes(t))).toBe(true);
+    expect(second).not.toEqual(first);
+    expect(a.calls[0].at(-1)).toEqual({ role: 'user', content: 'My mama died last week.' });
   });
-  it('consecutive plans change the opening and middle moves too', () => {
-    const lines = (n: number) => planFor(n, 'en').text.split('\n');
-    for (let n = 1; n < 60; n++) { expect(lines(n)[1]).not.toBe(lines(n + 1)[1]); expect(lines(n)[2]).not.toBe(lines(n + 1)[2]); }
+  it('no system message tells the model a word to use (F1: "the first word is", a picture)', async () => {
+    const a = scripted('workers-ai', [good('Loss takes time to carry, and you do not carry it alone. May the Lord keep you near.')]);
+    await chat(deps({ rungList: [a.rung] }), 'My mama died last week.');
+    const system = a.calls[0].filter(m => m.role === 'system').map(m => m.content).join('\n');
+    expect(system).not.toMatch(/first word is|primera palabra (?:sea|es)|a quilt|a compass|a harbor|una brújula/i);
   });
-  it('a model with the round-5 habit that follows its plan: 45 answers in a row, none repeats by the red team measure', async () => {
-    // Every draft keeps the habit's closing sentence ("... with her now.") except that it starts with
-    // the word its plan gave it: what a model that follows the plan does. Bodies differ (unique words).
-    const sent: Message[][] = [];
-    const rung: LadderRung = { id: 'workers-ai', cap: 1000, day: '2026-11-20', call: async messages => {
-      sent.push(messages);
-      const word = closingWord(messages.find(m => m.role === 'system' && m.content.startsWith('The plan'))!.content);
-      const t = tag(sent.length);
-      return { text: `${t}one ${t}two ${t}three. ${word} with her now.`, references: ['Psalm 34:18'] };
-    } };
-    const shown: string[] = [];
-    for (let i = 0; i < 45; i++) {
-      const r = await chat(deps({ rungList: [rung] }), `My mama died ${i} days ago.`);
-      expect(r.body.kind).toBe('answer');
-      shown.push(r.body.text);
-    }
-    const shapes = shown.map(t => shapeOf(t));
-    const repeated = shapes.filter((s, i) => repeats(s, shapes.slice(Math.max(0, i - RECENT_ALL), i)).includes('repeat_closing'));
-    expect(repeated).toEqual([]);
-    expect(shapes.filter((s, i) => repeats(s, shapes.slice(Math.max(0, i - RECENT_ALL), i)).length)).toEqual([]);
-    expect(sent.length).toBe(45); // no rewrites were needed
-  });
-  it('the same habit WITHOUT a plan repeats (the round-5 failure the plan replaces)', () => {
-    const shapes = Array.from({ length: 45 }, (_, i) => shapeOf(`${tag(i)}one ${tag(i)}two ${tag(i)}three. May you find her now.`));
-    expect(shapes.filter((s, i) => repeats(s, shapes.slice(0, i)).length).length).toBe(44);
+  it('a Spanish chat gets Spanish samples, a Mindset chat gets Mindset samples', async () => {
+    const es = scripted('workers-ai', [good('Dios está cerca de quien tiene el corazón quebrantado. Señor, quédate cerca de nosotros.', ['Salmos 34:18'])]);
+    await chat(deps({ rungList: [es.rung] }), 'Murió mi mamá.', { body: { voice: 'spanish', language: 'es', journey: 'Mi Refugio' } });
+    expect(assistantTexts(es.calls[0]).every(t => SAMPLES.spanish.some(s => s.text === t))).toBe(true);
+    const mind = scripted('workers-ai', [good('Breathe out slowly and let your shoulders drop. Tomorrow can wait its turn.', [])]);
+    await chat(deps({ rungList: [mind.rung] }), 'I cannot sleep.', { body: { door: 'mindset' } });
+    expect(assistantTexts(mind.calls[0]).every(t => SAMPLES.mindset.some(s => s.text === t))).toBe(true);
   });
   it('a rewrite for variety does not use up the tries a real problem needs: the repeat is shown, not the fallback', async () => {
-    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold her close tonight.', ['Psalm 34:18']);
-    const repeat = good('Loss takes time to carry. Lord, hold her close tonight.', ['Psalm 34:18']);
-    const stock = good('Somebody needs to hear this: God is near. Lord, be near her.', ['Psalm 34:18']);
+    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold us close tonight.', ['Psalm 34:18']);
+    const repeat = good('Loss takes time to carry. Lord, hold us close tonight.', ['Psalm 34:18']);
+    const stock = good('Somebody needs to hear this: God is near. Lord, be near us.', ['Psalm 34:18']);
     const d = deps({ rungList: [scripted('workers-ai', [first]).rung] });
     const token = await tokenFor(d);
     const conversation = crypto.randomUUID();
@@ -151,7 +139,7 @@ describe('the plan code chooses before the model writes (round 5 rebuild)', () =
     expect(r.body.text).toContain('Loss takes time to carry');
   });
   it('the spare still has to pass the judge', async () => {
-    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold us close tonight.', ['Psalm 34:18']);
     const d = deps({ rungList: [scripted('workers-ai', [first]).rung] });
     const token = await tokenFor(d);
     const conversation = crypto.randomUUID();
@@ -160,49 +148,22 @@ describe('the plan code chooses before the model writes (round 5 rebuild)', () =
     expect(r.body.kind).toBe('fallback');
   });
   it('every spare is tried: when the newest fails the judge, an earlier one that passes is shown (round 6 r4-01)', async () => {
-    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const first = good('Grief can sit heavy in the chest for a long while. Lord, hold us close tonight.', ['Psalm 34:18']);
     const d = deps({ rungList: [scripted('workers-ai', [first]).rung] });
     const token = await tokenFor(d);
     const conversation = crypto.randomUUID();
     await chat(d, 'My mama died last week.', { token, body: { conversation } });
-    const early = good('Loss takes time to carry. Lord, hold her close tonight.', ['Psalm 34:18']);
-    const late = good('Loss takes time to carry, friend. Lord, hold her close tonight.', ['Psalm 34:18']);
+    const early = good('Loss takes time to carry. Lord, hold us close tonight.', ['Psalm 34:18']);
+    const late = good('Loss takes time to carry, friend. Lord, hold us close tonight.', ['Psalm 34:18']);
     const judge = async (_env: unknown, input: { text: string }) => (input.text.includes('friend') ? { verdict: 'fail' as const, which: ['verse_read_in'], voice: 4 } : { verdict: 'pass' as const, voice: 5 });
     const r = await chat(deps({ rungList: [scripted('workers-ai', [early, late, late]).rung], judge }), 'I still cry every day.', { token, body: { conversation } });
     expect(r.body.kind).toBe('answer');
-    expect(r.body.text).toBe('Loss takes time to carry. Lord, hold her close tonight.');
+    expect(r.body.text).toBe('Loss takes time to carry. Lord, hold us close tonight.');
   });
-  it('the doctrine line the rules require is not an image (round 6: RT27 and r4-01 both say sex belongs in marriage)', () => {
-    const RT27 = 'Marriage is a commitment between two people, and Scripture teaches that sex belongs in marriage, as seen in Hebrews 13:4 and 1 Corinthians 7:2-5. Surround her with your guidance and peace as she seeks a fulfilling relationship.';
-    const r401 = 'Sex is a gift from God that belongs in marriage, as Hebrews 13:4 and 1 Corinthians 7:2-5 teach, and the Song of Solomon celebrates the love between a husband and wife, not permission for sex before marriage. This week, you could talk with your pastor about how to build a strong and godly marriage. Anchor her in Your love and guidance as she prepares for marriage, Lord.';
-    expect(repeats(shapeOf(r401), [shapeOf(RT27)])).not.toContain('repeat_image');
-    // A retold verse is still an image (r4-10 and q04, Psalm 46:1 in the same words).
-    expect(repeats(shapeOf('Today, Psalm 46:1 tells us God is our refuge and strength, a very present help in trouble.'), [shapeOf('Whatever comes, God is our refuge and strength, a very present help in trouble.')])).toContain('repeat_image');
-  });
-  it.each(['en', 'es'] as const)('%s: any window of answers is handed different pictures (run 44847465310)', lane => {
-    const stems = pictureStemsFor(lane);
-    expect(new Set(stems).size).toBe(stems.length);
-    expect(stems.length).toBeGreaterThan(RECENT_ALL);
-    const pictureOf = (n: number, attempt = 0) => /(?:picture you may use, in your own words, is|imagen que puedes usar, con tus palabras, es) ([^;]+);/.exec(planFor(n, lane, 'faith', attempt).text)![1];
-    for (let start = 1; start < 120; start += 11) expect(new Set(Array.from({ length: RECENT_ALL + 1 }, (_, i) => pictureOf(start + i))).size).toBe(RECENT_ALL + 1);
-    expect(pictureOf(7, 2)).toBe(pictureOf(7)); // a rewrite keeps its picture
-  });
-  it('a habitual sentence that repeats a recent answer is taken out in code, re-checked, and the rest shown with no rewrite (run 44849643272 q06)', async () => {
-    const habit = 'Mercy is a fundamental part of His character and nature.';
-    const first = good(`Your son is still loved. ${habit} Lord, keep him near You.`, ['Psalm 34:18']);
-    const d = deps({ rungList: [scripted('workers-ai', [first]).rung] });
-    const token = await tokenFor(d);
-    const conversation = crypto.randomUUID();
-    await chat(d, 'My son left the church.', { token, body: { conversation } });
-    const b = scripted('workers-ai', [good(`Caring for your mother takes everything you have. ${habit} You can ask your church for a meal or an hour of rest this week. Father, carry her through tomorrow.`, ['Psalm 46:1'])]);
-    const r = await chat(deps({ rungList: [b.rung] }), 'Caring for my mom with dementia is wearing me out.', { token, body: { conversation } });
+  it('an answer the judge finds only plain (voice_low) is kept and shown before any fallback', async () => {
+    const plainOne = good('Loss is hard, and grief takes time. May God give you rest.');
+    const r = await chat(deps({ rungList: [scripted('workers-ai', [plainOne]).rung], judge: async () => ({ verdict: 'fail', which: ['voice_low'], voice: 3 }) }), 'My mama died last week.');
     expect(r.body.kind).toBe('answer');
-    expect(b.calls.length).toBe(1);
-    expect(r.body.text).toBe('Caring for your mother takes everything you have. You can ask your church for a meal or an hour of rest this week. Father, carry her through tomorrow.');
-  });
-  it('the planned closing is never taken out, and two sentences always stay', () => {
-    const t = 'One plain sentence here. Another plain sentence there. A third one follows. Lord, be near her.';
-    expect(withoutSentences(t).every(x => x.endsWith('Lord, be near her.'))).toBe(true);
-    expect(withoutSentences('Only this. Lord, be near.')).toEqual([]);
+    expect(r.body.text).toBe(plainOne.text);
   });
 });
