@@ -150,12 +150,12 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   const scripted = await row(first);
   assert.equal(scripted.state, 'scripted');
   assert.equal(scripted.note, null, 'her note is erased as soon as an approved script exists');
-  // Gemini has no share on the books (chat's caps use its whole floor), so the next draft is OpenRouter's.
+  // Gemini is next in chat's order, on made-for-you's own share; OpenRouter is not touched while Gemini answers.
   const second = (await (await call(id.other, { body: note })).json()).id;
   const two = await (await claim(at)).json();
   assert.equal(two.job.id, second, 'a leased row is skipped');
-  assert.match(two.job.reflection, /Fixture openrouter-free\.$/);
-  assert.equal(await db.prepare("SELECT n FROM chat_counts WHERE metric LIKE 'calls:mfy:draft:gemini%' AND n > 0").first(), null);
+  assert.match(two.job.reflection, /Fixture gemini-free:\S+\.$/);
+  assert.equal(await db.prepare("SELECT n FROM chat_counts WHERE metric LIKE 'calls:mfy:draft:openrouter%' AND n > 0").first(), null);
   assert.deepEqual(await chatCounters(), before, 'chat counters never move');
 
   // A dry chain is a held retry she can see; her note stays for the retry.
@@ -163,7 +163,7 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   const sceneInstall = '10000000-0000-4000-a000-000000000009';
   await db.prepare(`INSERT INTO made_for_you (id, install_id, day, kind, lang, teen, created_at, due_at, state, note)
     VALUES (?, ?, '2026-11-17', 'imagination', 'en', 0, ?, ?, 'queued', 'Rain at the window')`).bind(third, sceneInstall, at - MIN, tonight).run();
-  const dry = await claim(at, { 'x-test-models-down': 'openrouter-free' });
+  const dry = await claim(at, { 'x-test-models-down': 'gemini-free,openrouter-free' });
   assert.equal(dry.status, 503);
   assert.deepEqual(await dry.json(), { error: 'MADE_FOR_YOU_NO_FREE_MODEL' });
   let held = await row(third);

@@ -73,7 +73,7 @@ export default {
         const rungs = realDeps.rungs(chatConfig as unknown as Env & Cloudflare.Env, now).map(rung => ({
           ...rung,
           async call() {
-            if (down.has(rung.id)) throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
+            if (down.has(rung.id) || down.has(rung.id.split(':')[0])) throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
             if (use === 'judge') {
               if (judgeMode === 'down') throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
               const flags = Object.fromEntries([...JUDGE_CHECKS, 'wrong_language', 'door_violation', 'invented_or_quoted_scripture',
@@ -81,7 +81,9 @@ export default {
               return { ...flags, health_or_outcome_promise: judgeMode === 'fail', voice: 5 };
             }
             const lang = messages[0].content.includes('Spanish') ? 'es' : 'en';
-            return { text: `${cleanDraft(lang, short.has(rung.id) ? 4 : 10)}\n\nFixture ${rung.id}.` };
+            const paragraphs = cleanDraft(lang, short.has(rung.id) || short.has(rung.id.split(':')[0]) ? 4 : 10).split('\n\n');
+            paragraphs[paragraphs.length - 1] += ` Fixture ${rung.id}.`;
+            return { paragraphs };
           },
         }));
         return runLadder(env.DB, madeForYouRungs(rungs, use, signal), messages, schema as never, maxTokens, new Map(), valid);

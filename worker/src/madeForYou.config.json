@@ -1,9 +1,9 @@
 {
   "_": "Made for you: one config read by the Worker (worker/src/madeForYou.ts) and the Mac runner (audio/made_for_you.py). allowanceBooks() in madeForYou.ts adds these caps to chat's own caps and worker/test/madeForYou.unit.mjs fails if any provider's free allowance is exceeded.",
   "allowance": {
-    "_": "Free daily allowances, as phase 3 measured them (worker/wrangler.jsonc on codex/pbs-phase-3). Gemini's 200 per model is the floor phase 3 marks SUSPECTED until read in AI Studio; when a higher RPD is confirmed there, raise it here and give made-for-you a Gemini share.",
+    "_": "Free daily allowances. Gemini: 500 requests per model per day, CONFIRMED 20 Nov 2026 from the API's own quota error (GenerateRequestsPerDayPerProjectPerModel-FreeTier, quotaValue 500, gemini-3.5-flash-lite); chat books 200, made-for-you a share. The rest as phase 3 measured them (worker/wrangler.jsonc on codex/pbs-phase-3).",
     "workersAiNeurons": 10000,
-    "geminiRequestsPerModel": 200,
+    "geminiRequestsPerModel": 500,
     "openRouterRequests": 1000,
     "openRouterRotationMargin": 50,
     "madeForYouRotationMargin": 10
@@ -15,13 +15,21 @@
     "judge": 24,
     "answer": 109
   },
-  "draftNeuronsWorstCase": 425,
-  "_draftNeurons": "llama-3.3-70b fp8-fast at Cloudflare's published rate: 2,000 output tokens x 0.2045 + ~600 input tokens x 0.0266 neurons.",
+  "draftNeuronsWorstCase": 466,
+  "_draftNeurons": "llama-3.3-70b fp8-fast at Cloudflare's published rate: 2,200 output tokens x 0.2045 + ~600 input tokens x 0.0266 neurons.",
   "judgeNeuronsWorstCase": 110,
-  "draftMaxTokens": 2000,
+  "draftMaxTokens": 2200,
   "judgeMaxTokens": 300,
-  "draft": { "workers-ai": 1, "gemini-free": 0, "openrouter-free": 20 },
-  "judge": { "workers-ai": 0, "gemini-free": 0, "openrouter-free": 20 },
+  "draft": {
+    "workers-ai": 1,
+    "gemini-free": 30,
+    "openrouter-free": 20
+  },
+  "judge": {
+    "workers-ai": 0,
+    "gemini-free": 30,
+    "openrouter-free": 20
+  },
   "attemptsBooked": 2,
   "_attemptsBooked": "Each session is booked at two drafts and two judgments, so one failed draft never takes another request's place.",
   "sessionMinutes": 15,

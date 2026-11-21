@@ -91,16 +91,16 @@ for (const [lang, kind, text] of notes) {
     const ladder = (use, messages, schema, maxTokens, valid) =>
       m.runLadder(db, m.madeForYouRungs(m.realDeps.rungs(env, Date.now()), use, signal), messages, schema, maxTokens, new Map(), valid);
     const shapes = [];
-    const drafted = await ladder('draft', m.draftMessages({ kind, lang, teen: 0 }, text), { type: 'object', properties: { text: { type: 'string' } }, required: ['text'], additionalProperties: false },
+    const drafted = await ladder('draft', m.draftMessages({ kind, lang, teen: 0 }, text), m.draftSchema,
       cfg.draftMaxTokens, value => {
-        const ok = typeof value?.text === 'string' && m.draftShape(value.text);
-        if (typeof value?.text === 'string') shapes.push(value.text.split(/\s+/).filter(Boolean).length);
+        const ok = m.draftText(value) !== null;
+        if (Array.isArray(value?.paragraphs)) shapes.push(value.paragraphs.map(p => String(p).split(/\s+/).filter(Boolean).length));
         return ok;
       }).catch(e => ({ empty: `error:${String(e).slice(0, 60)}` }));
     if ('empty' in drafted) { tries.push({ attempt, outcome: `no_draft:${drafted.empty}`, misshapenWords: shapes, ms: Date.now() - t0 }); continue; }
     const reasons = [];
     const judge = (i, script, s) => m.madeForYouJudge((msgs, schema, valid) => ladder('judge', msgs, schema, cfg.judgeMaxTokens, valid), { schema: m.judgeSchema, verdict: m.judgeVerdict }, i, script, r => reasons.push(r));
-    const reflection = drafted.data.text.trim();
+    const reflection = m.draftText(drafted.data);
     const verdict = await m.madeForYouApprove((d, ctx) => m.checkAnswer(d, { ...ctx, db }), judge, input, reflection, signal, r => reasons.push(r));
     tries.push({ attempt, rung: drafted.rung, words: reflection.split(/\s+/).length, misshapenWords: shapes, outcome: verdict, reasons, ms: Date.now() - t0 });
     if (verdict === 'pass') passed = reflection;

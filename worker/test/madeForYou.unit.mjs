@@ -40,7 +40,7 @@ test('made-for-you rungs keep the chat order and providers but never touch chat 
   const rungs = [{ id: 'workers-ai' }, { id: 'gemini-free:a' }, { id: 'openrouter-free' }].map(r => ({ ...r, cap: 999, day: 'd', call: async () => 1 }));
   const draft = mfy.madeForYouRungs(rungs, 'draft');
   assert.deepEqual(draft.map(r => r.id), ['mfy:draft:workers-ai', 'mfy:draft:gemini-free:a', 'mfy:draft:openrouter-free']);
-  assert.deepEqual(draft.map(r => r.cap), [1, 0, 20]);
+  assert.deepEqual(draft.map(r => r.cap), [1, 30, 20]);
   assert.deepEqual(mfy.madeForYouRungs(rungs, 'judge').map(r => r.id)[2], 'mfy:judge:openrouter-free');
 });
 
@@ -73,6 +73,17 @@ const withLine = (lang, line, at = 4) => cleanDraft(lang).split('\n\n').map((p, 
 const approve = (input, text, judge = passJudge) => mfy.madeForYouApprove(checkProse, judge, { teen: false, ...input }, text, signal);
 const psalmEs = { kind: 'psalm', lang: 'es', text: 'Días de lluvia' };
 const sceneEn = { kind: 'imagination', lang: 'en', text: 'Rain at the window' };
+
+test('a draft is ten clean paragraphs of the right length, joined as spoken prose', () => {
+  const paragraphs = cleanDraft('en').split('\n\n');
+  assert.equal(mfy.draftText({ paragraphs }), cleanDraft('en'));
+  assert.equal(mfy.draftText({ paragraphs: paragraphs.map(p => p.replace('. ', '.\n')) }), cleanDraft('en'), 'a stray line break inside a paragraph stays one paragraph');
+  assert.equal(mfy.draftText({ paragraphs: paragraphs.slice(0, 9) }), null, 'nine paragraphs');
+  assert.equal(mfy.draftText({ paragraphs: paragraphs.map(p => p.split(' ').slice(0, 30).join(' ')) }), null, 'the 300-word draft free models write when asked for one text field');
+  assert.equal(mfy.draftText({ paragraphs: [...paragraphs.slice(0, 9), `${paragraphs[9]} ${paragraphs[9]}`] }), null, 'one paragraph over 110 words');
+  assert.equal(mfy.draftText({ text: cleanDraft('en') }), null, 'the old one-field shape');
+  assert.equal(mfy.draftText(null), null);
+});
 
 test('the content check passes clean scripts in both doors and languages', async () => {
   assert.equal(await approve(psalmEs, cleanDraft('es')), 'pass');
