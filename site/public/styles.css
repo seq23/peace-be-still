@@ -178,6 +178,7 @@ section{padding-top:56px;padding-bottom:56px}
   .t tr{display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid var(--line)}
   .t td{border:0;padding:0}
   .t td:first-child{font-weight:700}
+  .t td[data-label]::before{content:attr(data-label);display:block;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)}
 }
 .byline{font-size:14px;color:var(--ink-muted);border-top:1px solid var(--line);padding-top:14px}
 .qlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
