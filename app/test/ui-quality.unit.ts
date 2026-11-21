@@ -47,3 +47,11 @@ test('every English translation key has a Spanish translation', () => {
     for (const value of [...forms(en[key]), ...forms(es[key])]) assert.ok(typeof value === 'string' && value.trim(), `Missing translation: ${key}`);
   }
 });
+
+// Apple rejects unfinished apps (PHASES.md, APPLE REJECTION CHECKS): every tab reaches a real screen.
+test('no "Coming soon" page or string ships, in English or Spanish', () => {
+  const walk = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? walk(join(dir, entry.name)) : /\.(tsx?|json)$/.test(entry.name) ? [join(dir, entry.name)] : []);
+  const files = [...walk('app'), ...walk('src')];
+  assert.ok(files.length > 10);
+  for (const file of files) assert.doesNotMatch(readFileSync(file, 'utf8'), /coming soon|pr[oó]ximamente/i, file);
+});

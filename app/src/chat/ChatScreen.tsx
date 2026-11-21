@@ -1,6 +1,7 @@
 // The Chat tab (mock-up screen 3). The disclosure comes before the first chat and is remembered
 // on the device; every AI answer carries the AI label; the crisis reply is not labelled AI and
 // its phone numbers are tappable; "N of 10 messages left today" comes from the Worker's count.
+// Every AI answer has "Report this answer" (Apple Guideline 1.2): the answer and a reason are sent.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { randomUUID } from 'expo-crypto';
 import React, { useEffect, useState } from 'react';
@@ -9,7 +10,7 @@ import { displayRuns } from '../bible/core';
 import { t as translate } from '../i18n';
 import type { Settings } from '../model';
 import { colors } from '../theme/tokens';
-import { ChatError, DISCLOSURE_KEY, sendChat } from './api';
+import { ChatError, DISCLOSURE_KEY, reportAnswer, sendChat, type ReportReason } from './api';
 import type { ChatResponse, ChatTurn } from './contract';
 
 type Palette = (typeof colors)['light'] | (typeof colors)['dark'];
@@ -24,6 +25,25 @@ export function crisisLinks(res: ChatResponse): Array<{ label: string; url: stri
   if (res.text.includes('1-800-799-7233')) links.push({ label: 'Call 1-800-799-7233', url: 'tel:18007997233' }, { label: 'Text START to 88788', url: 'sms:88788?body=START' });
   links.push({ label: 'Call 988', url: 'tel:988' }, { label: 'Text 988', url: 'sms:988' });
   return links;
+}
+
+const REASONS: Array<[ReportReason, string]> = [['hurtful', 'Hurtful or unkind'], ['wrong', 'Wrong about the Bible'], ['unsafe', 'Unsafe advice'], ['other', 'Something else']];
+
+/** The report action under one AI answer: tap, pick a reason, sent; a failure can be tried again. */
+function ReportAnswer({ answer, c, t }: { answer: string; c: Palette; t: (key: string) => string }) {
+  const [state, setState] = useState<'idle' | 'choosing' | 'sending' | 'sent' | 'failed'>('idle');
+  if (state === 'sent') return <Text accessibilityRole="alert" style={[s.small, { color: c.muted }]}>{t('Thank you. A person will read this report.')}</Text>;
+  if (state === 'idle') return <Pressable accessibilityRole="button" testID="report-answer" onPress={() => setState('choosing')}><Text style={[s.small, { color: c.muted, textDecorationLine: 'underline' }]}>{t('Report this answer')}</Text></Pressable>;
+  const send = async (reason: ReportReason) => {
+    setState('sending');
+    try { await reportAnswer(answer, reason); setState('sent'); } catch { setState('failed'); }
+  };
+  return <View style={s.reasons}>
+    <Text style={[s.small, { color: c.ink }]}>{t(state === 'failed' ? "The report didn't go through. Try again." : 'What is wrong with it?')}</Text>
+    {REASONS.map(([id, label]) => <Pressable key={id} accessibilityRole="button" testID={`report-${id}`} disabled={state === 'sending'} onPress={() => void send(id)} style={[s.reason, { borderColor: c.line }]}>
+      <Text style={[s.small, { color: c.ink }]}>{t(label)}</Text>
+    </Pressable>)}
+  </View>;
 }
 
 export default function ChatScreen({ settings, c, locale }: { settings: Settings; c: Palette; locale: 'en' | 'es' }) {
@@ -97,6 +117,7 @@ export default function ChatScreen({ settings, c, locale }: { settings: Settings
           {e.res.kind === 'crisis' && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
             <Text style={{ color: c.accent, fontSize: 17 }}>{t(l.label)}</Text>
           </Pressable>)}
+          {e.res.ai && <ReportAnswer answer={e.res.text} c={c} t={t} />}
         </View>)}
     {left && <Text style={[s.left, { color: c.muted }]}>{t('%{count} of %{limit} messages left today', { count: left.remaining, limit: left.limit })}</Text>}
     <View style={[s.input, { borderColor: c.line, backgroundColor: c.card }]}>
@@ -126,6 +147,9 @@ const s = StyleSheet.create({
   verseText: { fontFamily: 'LibreCaslonText_400Regular', fontSize: 16, lineHeight: 23, color: night.ink },
   link: { borderWidth: 1.5, borderRadius: 40, paddingVertical: 12, alignItems: 'center' },
   note: { textAlign: 'center', fontSize: 14, marginTop: 12 },
+  small: { fontFamily: 'Figtree_400Regular', fontSize: 14, lineHeight: 20 },
+  reasons: { gap: 6 },
+  reason: { borderWidth: 1, borderRadius: 20, paddingVertical: 8, paddingHorizontal: 14, alignSelf: 'flex-start', minHeight: 44, justifyContent: 'center' },
   left: { textAlign: 'center', fontSize: 14, marginTop: 16 },
   input: { flexDirection: 'row', alignItems: 'center', gap: 8, borderWidth: 1.5, borderRadius: 28, paddingVertical: 6, paddingLeft: 16, paddingRight: 6, marginTop: 16 },
   field: { flex: 1, fontFamily: 'Figtree_400Regular', fontSize: 16, minHeight: 40 },

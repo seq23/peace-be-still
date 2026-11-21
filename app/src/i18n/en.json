@@ -30,7 +30,6 @@
   "Your saved items": "Your saved items",
   "Settings": "Settings",
   "Your preferences": "Your preferences",
-  "Coming soon.": "Coming soon.",
   "Back home": "Back home",
   "PREFERENCES": "PREFERENCES",
   "Change your door": "Change your door",
@@ -107,5 +106,13 @@
   "Chat memory couldn't be deleted. Try again.": "Chat memory couldn't be deleted. Try again.",
   "Chat can't start on this network today. Try again on another connection.": "Chat can't start on this network today. Try again on another connection.",
   "Text 1-800-422-4453": "Text 1-800-422-4453",
-  "Text START to 88788": "Text START to 88788"
+  "Text START to 88788": "Text START to 88788",
+  "Report this answer": "Report this answer",
+  "What is wrong with it?": "What is wrong with it?",
+  "Hurtful or unkind": "Hurtful or unkind",
+  "Wrong about the Bible": "Wrong about the Bible",
+  "Unsafe advice": "Unsafe advice",
+  "Something else": "Something else",
+  "Thank you. A person will read this report.": "Thank you. A person will read this report.",
+  "The report didn't go through. Try again.": "The report didn't go through. Try again."
 }

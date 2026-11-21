@@ -4,10 +4,12 @@
 // - the entitlement cache and her install's answer shapes (keyed hashes, quality/variety.ts) carry
 //   the install id, so they go with the counters: within 48 hours;
 // - everyone's answer shapes (scope 'all', no identifier): deleted after 14 days;
+// - reported answers (the answer text and a reason, no identifier, src/report.ts): after 90 days;
 // - paid chat memory: deleted 30 days after the paid plan ends (paid_until, kept current by
 //   recheckMemory and every paid check in entitlement.ts).
 import { SHAPE_DAYS } from './quality/variety';
 import { centralDay } from './day';
+import { REPORT_DAYS } from './report';
 const HOUR = 3600_000;
 const DAY = 24 * HOUR;
 
@@ -21,7 +23,8 @@ export async function cleanup(db: D1Database, now: number): Promise<Record<strin
     db.prepare('DELETE FROM chat_memory WHERE paid_until < ?').bind(now - 30 * DAY),
     db.prepare("DELETE FROM answer_shape WHERE scope <> 'all' AND at < ?").bind(now - 47 * HOUR),
     db.prepare('DELETE FROM answer_shape WHERE at < ?').bind(now - SHAPE_DAYS * DAY),
+    db.prepare('DELETE FROM answer_report WHERE at < ?').bind(now - REPORT_DAYS * DAY),
   ]);
-  const [device, ip, token, entitlement, memory, installShapes, shapes] = results.map(r => r.meta.changes ?? 0);
-  return { device, ip, token, entitlement, memory, shapes: installShapes + shapes };
+  const [device, ip, token, entitlement, memory, installShapes, shapes, reports] = results.map(r => r.meta.changes ?? 0);
+  return { device, ip, token, entitlement, memory, shapes: installShapes + shapes, reports };
 }

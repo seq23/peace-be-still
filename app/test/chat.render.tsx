@@ -13,8 +13,10 @@ const { colors } = require('../src/theme/tokens');
 
 const replies: ChatResponse[] = [];
 const sent: any[] = [];
+const reports: any[] = [];
 (globalThis as any).fetch = async (url: string, init: any) => {
-  if (url.endsWith('/token')) return new Response(JSON.stringify({ token: 'aaaaaaaaaaaa.bbbbbbbbbbbb' }));
+  if (url.endsWith('/token')) { store.set('peace-be-still-chat-token', JSON.stringify({ token: 'aaaaaaaaaaaa.bbbbbbbbbbbb', age: 'adult' })); return new Response(JSON.stringify({ token: 'aaaaaaaaaaaa.bbbbbbbbbbbb' })); }
+  if (url.endsWith('/report')) { reports.push(JSON.parse(init.body)); return new Response(JSON.stringify({ reported: true })); }
   sent.push(JSON.parse(init.body));
   return new Response(JSON.stringify(replies.shift()));
 };
@@ -112,4 +114,30 @@ test('a child gets no Chat tab at all', async () => {
   let tree!: ReactTestRenderer;
   await act(async () => { tree = create(<Index />); });
   assert.equal(tree.root.findAllByProps({ accessibilityRole: 'tab' }).some(n => n.findAllByType('Text' as any).some(t => t.children.join('').includes('Chat'))), false);
+});
+
+test('every AI answer can be reported: the answer and a reason are sent, never her message (Apple 1.2)', async () => {
+  store.set('peace-be-still-chat-disclosure', 'yes');
+  replies.push(answer(), { kind: 'crisis', ai: false, text: 'Call or text 988.', scripture: [], remaining: null, limit: null, reminder: false, crisis: 'selfharm' });
+  const tree = await mount();
+  await say(tree, 'HER-WORDS rent is due');
+  assert.equal(tree.root.findAllByProps({ testID: 'report-answer' }).filter(n => typeof n.type !== 'string').length, 1);
+  await act(async () => tree.root.findAllByProps({ testID: 'report-answer' })[0].props.onPress());
+  assert.match(texts(tree), /What is wrong with it\?/);
+  await act(async () => tree.root.findAllByProps({ testID: 'report-wrong' })[0].props.onPress());
+  assert.deepEqual(reports.at(-1), { answer: 'You are not carrying this by yourself.', reason: 'wrong' });
+  assert.doesNotMatch(JSON.stringify(reports), /HER-WORDS/);
+  assert.match(texts(tree), /A person will read this report/);
+  await say(tree, 'I want to die');
+  assert.equal(tree.root.findAllByProps({ testID: 'report-answer' }).filter(n => typeof n.type !== 'string').length, 0); // the crisis reply is not an AI answer
+});
+
+test('the report action speaks Spanish in Mi Refugio', async () => {
+  store.set('peace-be-still-chat-disclosure', 'yes');
+  replies.push(answer({ text: 'No cargas esto sin compañía.' }));
+  let tree!: ReactTestRenderer;
+  await act(async () => { tree = create(<ChatScreen settings={{ ...adult, journey: 'Mi Refugio', language: 'es' }} c={colors.light} locale="es" />); });
+  await act(async () => tree.root.findByType('TextInput' as any).props.onChangeText('tengo miedo'));
+  await act(async () => tree.root.findByProps({ accessibilityLabel: 'Enviar' }).props.onPress());
+  assert.match(texts(tree), /Reportar esta respuesta/);
 });

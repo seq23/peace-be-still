@@ -1,4 +1,4 @@
-// Peace Be Still chat Worker: POST /api/token, POST /api/chat, DELETE /api/memory, hourly cleanup.
+// Peace Be Still chat Worker: POST /api/token, POST /api/chat, POST /api/report, DELETE /api/memory, hourly cleanup.
 // Order for a chat message: region -> signed token (age band inside) -> burst limit -> body ->
 // crisis (floor, then the model risk read on EVERY message; no read = no answer) -> paid status
 // (RevenueCat) -> daily admission (D1) -> free ladder -> crisis tripwire on the draft -> answer gate
@@ -25,6 +25,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, planFor, planSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, crisisText, fallbackText, identityText, limitText, noFreeModelText, oneTranslationText, type Lang } from './replies';
+import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
 import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, providers, type Translation } from './shared';
@@ -400,6 +401,21 @@ async function remember(env: Env, rungs: LadderRung[], a: { installId: string; d
   if (summary) await saveMemory(env.DB, { installId: a.installId, day: a.day, summary, paidUntil: a.paidUntil, now: a.now });
 }
 
+/** "Report this answer": the answer and a reason are kept (src/report.ts); her install id is only checked, never stored. */
+async function report(request: Request, env: Env, deps: Deps): Promise<Response> {
+  const now = deps.now();
+  const who = await install(request, env, now, RENEW_GRACE_DAYS);
+  if (who === 'missing') return fail('CHAT_TOKEN_SECRET_MISSING', 503);
+  if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
+  if (!(await env.CHAT_BURST.limit({ key: who.installId })).success) return json({ error: 'SLOW_DOWN' }, 429);
+  const body = parseReport(await request.json().catch(() => null));
+  if (!body) return fail('BAD_REQUEST', 400);
+  if (!(await reserve(env.DB, centralDay(now), 'reports', REPORTS_DAILY))) { logCode('REPORT_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+  await saveReport(env.DB, body, now);
+  logCode('ANSWER_REPORTED', { reason: body.reason });
+  return json({ reported: true });
+}
+
 export function createApp(deps: Deps = realDeps) {
   return {
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -412,6 +428,7 @@ export function createApp(deps: Deps = realDeps) {
         if (pathname === '/api/token' && request.method === 'POST') return await token(request, env, deps);
         if (pathname === '/api/token/renew' && request.method === 'POST') return await renew(request, env, deps);
         if (pathname === '/api/chat' && request.method === 'POST') return await chat(request, env, ctx, deps);
+        if (pathname === '/api/report' && request.method === 'POST') return await report(request, env, deps);
         if (pathname === '/api/memory' && request.method === 'DELETE') {
           // An expired token still deletes: her memory must go whenever she asks, not only within 30 days.
           const who = await install(request, env, deps.now(), RENEW_GRACE_DAYS);

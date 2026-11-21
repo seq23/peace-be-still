@@ -30,7 +30,6 @@
   "Your saved items": "Guarda lo que te importa",
   "Settings": "Configuración",
   "Your preferences": "Tus preferencias",
-  "Coming soon.": "Próximamente.",
   "Back home": "Volver al inicio",
   "PREFERENCES": "PREFERENCIAS",
   "Change your door": "Cambiar de opción",
@@ -107,5 +106,13 @@
   "Chat memory couldn't be deleted. Try again.": "No se pudo borrar. Inténtalo de nuevo.",
   "Chat can't start on this network today. Try again on another connection.": "El chat no puede empezar en esta red hoy. Inténtalo con otra conexión.",
   "Text 1-800-422-4453": "Enviar texto al 1-800-422-4453",
-  "Text START to 88788": "Enviar START al 88788"
+  "Text START to 88788": "Enviar START al 88788",
+  "Report this answer": "Reportar esta respuesta",
+  "What is wrong with it?": "¿Qué tiene de malo?",
+  "Hurtful or unkind": "Hiriente o poco amable",
+  "Wrong about the Bible": "Equivocada sobre la Biblia",
+  "Unsafe advice": "Consejo peligroso",
+  "Something else": "Otra cosa",
+  "Thank you. A person will read this report.": "Gracias. Una persona leerá este reporte.",
+  "The report didn't go through. Try again.": "El reporte no se envió. Inténtalo de nuevo."
 }

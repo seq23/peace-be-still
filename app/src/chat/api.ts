@@ -1,4 +1,4 @@
-// The app's side of chat: the install token, sending a message and deleting chat memory.
+// The app's side of chat: the install token, sending a message, reporting an answer and deleting chat memory.
 // The base URL is ONE config value. Under 13 nothing here is ever called (buildChatRequest is null,
 // and the Chat tab is hidden), so no install id is made for a child.
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -55,6 +55,15 @@ export async function sendChat(settings: Settings, conversation: string, message
     return (await res.json()) as ChatResponse;
   }
   throw new ChatError('unauthorized');
+}
+
+export type ReportReason = 'hurtful' | 'wrong' | 'unsafe' | 'other';
+/** "Report this answer": sends the answer she saw and the reason she picked, never her message. */
+export async function reportAnswer(answer: string, reason: ReportReason, fetcher: typeof fetch = fetch): Promise<void> {
+  const old = await saved();
+  if (!old?.token) throw new ChatError('no token'); // an answer on screen means she has one
+  const res = await fetcher(`${CHAT_API}/report`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${old.token}` }, body: JSON.stringify({ answer, reason }) });
+  if (res.status !== 200) throw new ChatError(`report ${res.status}`);
 }
 
 /** Resolves only when the server confirmed the delete (200), or when she never chatted (nothing stored).
