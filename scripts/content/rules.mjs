@@ -244,7 +244,8 @@ export function checkPsalmNight(p) {
   const t = commonText("psalm-night", lang, written, "gods-word");
   Object.assign(c, t);
   c.speakers = p.segments.every((x) => x.speaker === "narrator") ? pass : fail("a Psalm Night is narrator only");
-  c.length = band(p.est_seconds / 60, 13, 17, " min");
+  // 13 min is a floor, not a band edge (21 Nov 2026: nights estimated at 13.6 min voiced at 12).
+  c.length = p.est_seconds < 13 * 60 ? fail(`${(p.est_seconds / 60).toFixed(1)} min voiced is under the 13 min floor`) : band(p.est_seconds / 60, 13, 17, " min");
   c.ai_label = p.ai_label ? pass : fail("AI label key missing");
   return c;
 }

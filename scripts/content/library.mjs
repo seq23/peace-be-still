@@ -189,6 +189,34 @@ function shared(items) {
   return Object.fromEntries(items.filter((i) => i.id.startsWith("_")).map((i) => [i.id.slice(1), (i.fields.text || []).join("\n\n")]));
 }
 
+// A Psalm Night's voiced length, piece by piece as fill.session_item renders it (calibrated 21 Nov 2026 on the
+// 14 voiced nights: the quiet model matches exactly and Kokoro speaks 109-117 wpm; the fastest is used, so a
+// night the gate passes is not under its floor when voiced). Each passage is its spoken reference (1.2 s after),
+// then its verses with PSALM_VERSE_QUIET between them and the paragraph quiet after the last; a written line's
+// [pause N] is its quiet, a line without one gets the paragraph quiet; plus 0.6 s lead, 2 s tail, 1.2 s after the title.
+export const VOICED_WPM_PSALM = 117;
+// 21 Nov 2026: 1.5 s voiced the nights at 12 min against the 13-17 min target; a whispered psalm read twice,
+// verse by verse, has room to breathe.
+export const PSALM_VERSE_QUIET = 2.5;
+export function voicedPsalmSeconds(segments, lang) {
+  let spoken = 0, quiet = 3.8;
+  for (const s of segments) {
+    if (s.part === "passage") {
+      const { a, z } = parseRef(s.ref);
+      spoken += (lang === "es" ? 3 : 3) + (a === z ? 1 : 3);   // "Psalm 23, verses 1 to 6." / "Salmo 23, versículos 1 al 6."
+      quiet += 1.2 + PSALM_VERSE_QUIET * (s.verses.length - 1) + 4;
+      spoken += s.verses.reduce((x, v) => x + words(v.text).length, 0);
+    } else {
+      for (const line of s.text.split("\n\n")) {
+        spoken += words(line).length;
+        quiet += /\[pause \d+\]\s*$/.test(line) ? 0 : 4;
+      }
+      quiet += pauses(s.text);
+    }
+  }
+  return Math.round((spoken / VOICED_WPM_PSALM) * 60 + quiet);
+}
+
 function buildPsalmNight(it, lang, parts) {
   const main = one(it, "main", "").split(";").map((s) => s.trim()).filter(Boolean);
   const comp = one(it, "companions", "").split(";").map((s) => s.trim()).filter(Boolean);
@@ -200,14 +228,12 @@ function buildPsalmNight(it, lang, parts) {
   const pas = (r) => ({ part: "passage", speaker: "narrator", ...passage(r, lang) });
   const segments = [seg("welcome", para("welcome")), ...main.map(pas), seg("reflect", para("reflect1")), ...comp.map(pas), seg("reflect", para("reflect2")), ...main.map(pas), seg("rest", restText)];
   const all = segments.map((s) => (s.part === "passage" ? s.verses.map((v) => v.text).join(" ") : s.text)).join(" ");
-  const nverses = segments.filter((s) => s.part === "passage").reduce((a, s) => a + s.verses.length, 0);
-  const nparas = segments.filter((s) => s.part !== "passage").reduce((a, s) => a + s.text.split("\n\n").length, 0);
   const n = words(all).length;
   return {
     id: it.id, kind: "psalm-night", journey: JOURNEY["psalm-night"][lang], door: "gods-word", lang, title: it.title, main, companions: comp,
     ai_label: AI_LABEL["psalm-night"], segments, words: n, rest_part: parts[rest] ? rest : null,
-    pacing: { words_per_minute: 100, quiet_between_verses_s: 1.5, quiet_between_paragraphs_s: 4 },
-    est_seconds: Math.round((n / 100) * 60 + 1.5 * nverses + 4 * nparas + pauses(all)),
+    pacing: { words_per_minute: VOICED_WPM_PSALM, quiet_between_verses_s: PSALM_VERSE_QUIET, quiet_between_paragraphs_s: 4 },
+    est_seconds: voicedPsalmSeconds(segments, lang),
   };
 }
 
@@ -433,6 +459,11 @@ rest: c1
   if (!isFail(checkPsalmNight(pnight).no_promises)) throw new Error("SELFTEST sleep claim not caught");
   pnight.segments.reverse();
   if (!isFail(checkPsalmNight(pnight).plan)) throw new Error("SELFTEST psalm plan not caught");
+  // 21 Nov 2026: nights the old gate estimated at 13.6 min voiced at 12; 13 min is now a hard floor and the
+  // estimate is never longer than the voice: en pn-01 (739 words, 340 s of quiet) voiced at 723 s.
+  if (!isFail(checkPsalmNight({ ...pnight, est_seconds: 12.9 * 60 }).length)) throw new Error("SELFTEST a 12.9-minute psalm night was not held");
+  const pn01 = voicedPsalmSeconds([{ part: "reflect", text: `${"word ".repeat(739).trim()} [pause 336]` }], "en");
+  if (pn01 > 723.3 || pn01 < 700) throw new Error(`SELFTEST psalm night estimate ${pn01}s is not calibrated to en pn-01 voiced at 723 s`);
   // Imagination Night: no faith words, no Neville without the line
   const inn = parseItems(`=== _s
 text: Breathe. [pause 5]
