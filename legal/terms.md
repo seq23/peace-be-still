@@ -57,7 +57,7 @@ These terms are between you and us, not Apple. We, not Apple, are solely respons
 
 ## Changes
 
-We may update these terms. We post the new date here and show a notice in the app for material changes. Using the app after a change means you accept the updated terms. A change never takes back something free or raises the price while you stay subscribed.
+We may update these terms. We post the change on this page and update the date on it. Using the app after a change means you accept the updated terms. A change never takes back something free or raises the price while you stay subscribed.
 
 ## Governing law
 
