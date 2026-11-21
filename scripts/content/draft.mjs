@@ -70,14 +70,14 @@ ${vv}
 `;
 }
 
-async function gemini(prompt) {
+export async function gemini(prompt, temperature = 0.7) {
   const key = process.env.PBS_GEMINI_API_KEY; // the app's own free AI Studio project, never the shared key
   if (!key) throw new Error("NAMED STOP [KEY_MISSING] PBS_GEMINI_API_KEY not set; run through npm run -s vault:run -- in ~/GitHub/boss-os");
   for (const model of GEMINI_TEXT_MODELS) {
     for (let attempt = 0; attempt < 3; attempt++) {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: "POST", headers: { "x-goog-api-key": key, "content-type": "application/json" },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7 } }),
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature } }),
         signal: AbortSignal.timeout(300_000),
       }).catch((e) => ({ ok: false, status: 0, text: async () => String(e) }));
       if (r.ok) {

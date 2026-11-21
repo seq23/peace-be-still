@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You step outside. The day's heat has gone. The air is soft. [pause 22]\n\nFeel your feet on the ground. One, then the other. No hurry. [pause 24]\n\nNotice the sky. The last color in the west. The first star. [pause 24]\n\nHear the sounds around you. A dog somewhere. Leaves. Someone's music through an open window. [pause 24]\n\nBreathe in the evening air. Let it out slowly. [pause 24]\n\nPass a neighbor. You nod. They nod back. It is that kind of evening. [pause 28]\n\nNotice how your arms swing. How easy each step is. [pause 28]\n\nStop for a moment and look at something small. A flower by a fence. A puddle holding the sky. [pause 28]\n\nTurn toward home. The windows are lit. Yours is one of them. [pause 30]\n\nSay in your mind, I am at ease. [pause 30]\n\nStep inside, and let the walk carry you all the way to bed. [pause 30]"
+   "text": "You step outside. The day's heat has gone. The air is soft. [pause 28]\n\nFeel your feet on the ground. One, then the other. No hurry. [pause 30]\n\nNotice the sky. The last color in the west. The first star. [pause 30]\n\nHear the sounds around you. A dog somewhere. Leaves. Someone's music through an open window. [pause 30]\n\nBreathe in the evening air. Let it out slowly. [pause 30]\n\nPass a neighbor. You nod. They nod back. It is that kind of evening. [pause 34]\n\nNotice how your arms swing. How easy each step is. [pause 34]\n\nStop for a moment and look at something small. A flower by a fence. A puddle holding the sky. [pause 34]\n\nTurn toward home. The windows are lit. Yours is one of them. [pause 36]\n\nSay in your mind, I am at ease. [pause 36]\n\nStep inside, and let the walk carry you all the way to bed. [pause 36]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1170,
+ "est_seconds": 1115,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

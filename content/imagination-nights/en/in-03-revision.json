@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Go back to the start of that moment. Notice where you were. The room. The time of day. Who was there. [pause 14]\n\nLet it begin the way it began. But this time, before the hard part comes, take a breath in the scene. [pause 14]\n\nNow let it go differently. If you spoke sharply, hear yourself speaking gently. If you were ignored, see the other person turn and listen. [pause 17]\n\nHear the new words. Let them be ordinary words. Nothing dramatic. Just the way you wish it had gone. [pause 17]\n\nWatch the other person's face soften. Watch your own shoulders drop. [pause 17]\n\nLet the moment end well. Maybe a nod. A laugh. A thank you. [pause 17]\n\nNow play the new version once more, from the beginning. Let it feel familiar this time. [pause 20]\n\nAnd once more, slower. Let it become the version you remember. [pause 22]\n\nNotice how you feel toward the other person now. A little softer. A little more patient. [pause 20]\n\nNotice how you feel toward yourself. You were tired today. You did your best. In this version, you let yourself be kind to you as well. [pause 20]\n\nIf there is something to make right tomorrow, picture yourself doing it calmly. A short message. A kind word. Then let that go too. [pause 20]\n\nThe day is closing like a book. The last page you read was a good one. [pause 22]\n\nWhen it ends, let it fade. The day is finished, and the last version you saw was a kind one. [pause 22]"
+   "text": "Go back to the start of that moment. Notice where you were. The room. The time of day. Who was there. [pause 23]\n\nLet it begin the way it began. But this time, before the hard part comes, take a breath in the scene. [pause 23]\n\nNow let it go differently. If you spoke sharply, hear yourself speaking gently. If you were ignored, see the other person turn and listen. [pause 26]\n\nHear the new words. Let them be ordinary words. Nothing dramatic. Just the way you wish it had gone. [pause 26]\n\nWatch the other person's face soften. Watch your own shoulders drop. [pause 26]\n\nLet the moment end well. Maybe a nod. A laugh. A thank you. [pause 26]\n\nNow play the new version once more, from the beginning. Let it feel familiar this time. [pause 29]\n\nAnd once more, slower. Let it become the version you remember. [pause 31]\n\nNotice how you feel toward the other person now. A little softer. A little more patient. [pause 29]\n\nNotice how you feel toward yourself. You were tired today. You did your best. In this version, you let yourself be kind to you as well. [pause 29]\n\nIf there is something to make right tomorrow, picture yourself doing it calmly. A short message. A kind word. Then let that go too. [pause 29]\n\nThe day is closing like a book. The last page you read was a good one. [pause 31]\n\nWhen it ends, let it fade. The day is finished, and the last version you saw was a kind one. [pause 31]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1135,
+ "est_seconds": 1122,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

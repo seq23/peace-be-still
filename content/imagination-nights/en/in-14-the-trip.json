@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You wake up in a room that is not your own, and for a second you do not know where you are. Then you remember, and you smile. [pause 25]\n\nOpen the curtains. Notice what is outside. Water. Hills. Rooftops. [pause 25]\n\nStep outside. Feel the air on your face. It smells different here. Salt, or pine, or bread from a bakery. [pause 25]\n\nWalk slowly. You have nowhere to be. Your phone is in your pocket, quiet. [pause 25]\n\nFind a place to sit. A bench. A wall. A patch of sand. Watch people going about their morning. [pause 28]\n\nTaste something new. Let it surprise you. [pause 25]\n\nNotice that your shoulders are lower than they have been in months. [pause 28]\n\nLater, the light turns gold. You are tired in the good way, from walking and looking. [pause 28]\n\nBack in the room, you lie down, and through the window you hear the sounds of this place settling into night. [pause 30]\n\nSay in your mind, I came. I am here. [pause 30]\n\nLet those far-off sounds become the sounds around you now. [pause 30]"
+   "text": "You wake up in a room that is not your own, and for a second you do not know where you are. Then you remember, and you smile. [pause 30]\n\nOpen the curtains. Notice what is outside. Water. Hills. Rooftops. [pause 30]\n\nStep outside. Feel the air on your face. It smells different here. Salt, or pine, or bread from a bakery. [pause 30]\n\nWalk slowly. You have nowhere to be. Your phone is in your pocket, quiet. [pause 30]\n\nFind a place to sit. A bench. A wall. A patch of sand. Watch people going about their morning. [pause 33]\n\nTaste something new. Let it surprise you. [pause 30]\n\nNotice that your shoulders are lower than they have been in months. [pause 33]\n\nLater, the light turns gold. You are tired in the good way, from walking and looking. [pause 33]\n\nBack in the room, you lie down, and through the window you hear the sounds of this place settling into night. [pause 35]\n\nSay in your mind, I came. I am here. [pause 35]\n\nLet those far-off sounds become the sounds around you now. [pause 35]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1179,
+ "est_seconds": 1114,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

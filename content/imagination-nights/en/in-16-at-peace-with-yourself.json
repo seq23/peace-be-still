@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You are standing in front of a mirror, some months from now. [pause 25]\n\nLook at your own face. Notice that you do not look away. [pause 28]\n\nNotice your eyes. They look rested. [pause 28]\n\nHear yourself say, in your mind, good morning. And mean it. [pause 28]\n\nPicture yourself making a small mistake later that day. Spilling something. Forgetting a name. [pause 28]\n\nHear how you speak to yourself now. That is all right. Everybody does that. You laugh a little and move on. [pause 30]\n\nPicture someone giving you a compliment. Notice that you can say thank you without arguing. [pause 30]\n\nIn the evening, picture sitting quietly by yourself. It feels like good company. [pause 30]\n\nSay softly, I am enough as I am, and I am still growing. [pause 30]\n\nLet that kind voice stay with you, like a hand on your back, as you drift. [pause 30]"
+   "text": "You are standing in front of a mirror, some months from now. [pause 34]\n\nLook at your own face. Notice that you do not look away. [pause 37]\n\nNotice your eyes. They look rested. [pause 37]\n\nHear yourself say, in your mind, good morning. And mean it. [pause 37]\n\nPicture yourself making a small mistake later that day. Spilling something. Forgetting a name. [pause 37]\n\nHear how you speak to yourself now. That is all right. Everybody does that. You laugh a little and move on. [pause 39]\n\nPicture someone giving you a compliment. Notice that you can say thank you without arguing. [pause 39]\n\nIn the evening, picture sitting quietly by yourself. It feels like good company. [pause 39]\n\nSay softly, I am enough as I am, and I am still growing. [pause 39]\n\nLet that kind voice stay with you, like a hand on your back, as you drift. [pause 39]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1140,
+ "est_seconds": 1118,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

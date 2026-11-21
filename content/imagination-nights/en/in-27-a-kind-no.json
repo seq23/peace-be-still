@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Your phone rings, or someone comes to your door. You already know what they are about to ask. [pause 20]\n\nNotice the old feeling start to rise. The quick yes on the tip of your tongue. [pause 23]\n\nTake one breath first. Feel your feet on the floor. [pause 23]\n\nHear yourself say it. Thank you for thinking of me. I cannot do that this time. [pause 25]\n\nNotice that your voice is warm and steady. You do not explain for a long time. You do not apologize three times. [pause 27]\n\nLet them answer. Maybe they understand right away. Maybe they are surprised. Either way, you stay calm. [pause 27]\n\nSay goodbye kindly. Put the phone down, or close the door. [pause 27]\n\nNow notice the time you just kept. An evening. A rest. A little room to breathe. [pause 27]\n\nFeel how light your chest is. You told the truth, and you were kind. [pause 28]\n\nSay in your mind, my no is kind. My yes is true. [pause 28]\n\nLet that freed-up evening stretch out in front of you, and drift into it. [pause 30]"
+   "text": "Your phone rings, or someone comes to your door. You already know what they are about to ask. [pause 26]\n\nNotice the old feeling start to rise. The quick yes on the tip of your tongue. [pause 29]\n\nTake one breath first. Feel your feet on the floor. [pause 29]\n\nHear yourself say it. Thank you for thinking of me. I cannot do that this time. [pause 31]\n\nNotice that your voice is warm and steady. You do not explain for a long time. You do not apologize three times. [pause 33]\n\nLet them answer. Maybe they understand right away. Maybe they are surprised. Either way, you stay calm. [pause 33]\n\nSay goodbye kindly. Put the phone down, or close the door. [pause 33]\n\nNow notice the time you just kept. An evening. A rest. A little room to breathe. [pause 33]\n\nFeel how light your chest is. You told the truth, and you were kind. [pause 34]\n\nSay in your mind, my no is kind. My yes is true. [pause 34]\n\nLet that freed-up evening stretch out in front of you, and drift into it. [pause 36]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1175,
+ "est_seconds": 1119,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
    },
    "verdict": "pass"
   },

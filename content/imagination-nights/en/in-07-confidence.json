@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You are standing just outside the door. Notice your feet on the ground. Steady. [pause 14]\n\nTake one slow breath. Feel your back straighten a little, not stiff, just tall. [pause 14]\n\nNow walk in. Notice that nobody gasps or stares. People simply look up, and some of them smile. [pause 17]\n\nSomeone says your name like they are glad you came. You say hello back, easily. [pause 17]\n\nFind a seat, or a place to stand. Feel how relaxed your hands are. You are not holding on to anything. [pause 17]\n\nSomeone asks your opinion. You answer. Your voice sounds the way you want it to sound. Calm and clear. [pause 17]\n\nNotice the room listening, then the talk moving on. It went fine. Better than fine. [pause 20]\n\nAt the end, you walk out into the evening air, and you think, that was easy. I belonged there. [pause 20]\n\nSay it in your mind. I belong. [pause 22]\n\nNow picture the next time you go into that room, a week later. It is even easier. People expect you. [pause 20]\n\nNotice how you stand when you wait in line, how you answer the phone, how you say no when you need to. Steady, in small ways. [pause 20]\n\nYou catch your reflection in a window as you pass. You look like someone who is at home in their own life. [pause 20]\n\nLet that steady feeling rest in your body as you drift. [pause 27]"
+   "text": "You are standing just outside the door. Notice your feet on the ground. Steady. [pause 22]\n\nTake one slow breath. Feel your back straighten a little, not stiff, just tall. [pause 22]\n\nNow walk in. Notice that nobody gasps or stares. People simply look up, and some of them smile. [pause 25]\n\nSomeone says your name like they are glad you came. You say hello back, easily. [pause 25]\n\nFind a seat, or a place to stand. Feel how relaxed your hands are. You are not holding on to anything. [pause 25]\n\nSomeone asks your opinion. You answer. Your voice sounds the way you want it to sound. Calm and clear. [pause 25]\n\nNotice the room listening, then the talk moving on. It went fine. Better than fine. [pause 28]\n\nAt the end, you walk out into the evening air, and you think, that was easy. I belonged there. [pause 28]\n\nSay it in your mind. I belong. [pause 30]\n\nNow picture the next time you go into that room, a week later. It is even easier. People expect you. [pause 28]\n\nNotice how you stand when you wait in line, how you answer the phone, how you say no when you need to. Steady, in small ways. [pause 28]\n\nYou catch your reflection in a window as you pass. You look like someone who is at home in their own life. [pause 28]\n\nLet that steady feeling rest in your body as you drift. [pause 35]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1138,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

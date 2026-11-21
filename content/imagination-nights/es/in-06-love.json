@@ -1,0 +1,87 @@
+{
+ "id": "in-06-love",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "Alguien que se alegra de verte",
+ "theme": "el amor",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hola. Qué bueno que volviste a esta noche de imaginación. [pause 3]\n\nAcomódate en la cama. Súbete las cobijas hasta donde te gusten. [pause 8]\n\nRespira hondo una vez, y suelta el aire con un suspiro. [pause 8]\n\nAhora deja que la respiración encuentre su propio ritmo. No tienes que controlarla. Solo nótala. [pause 10]\n\nSiente cómo te pesan los pies. Las piernas. La espalda que se hunde en el colchón. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEl día ya terminó. Este rato de la noche es tuyo. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "El deseo de esta noche tiene que ver con el amor. Puede ser una pareja, una amistad que sana, una familia que se acerca, o simplemente sentir menos soledad. [pause 8]\n\nEsta práctica tiene que ver con tus propios sentimientos y tu propia imaginación. Nunca se trata de controlar a otra persona. Cada quien tiene sus propias decisiones. Lo que sí puedes practicar esta noche es cómo se siente recibir amor y darlo con libertad. [pause 10]\n\nPor eso no vamos a imaginar a una persona en particular cambiando de opinión. Vamos a imaginar la sensación de una noche tibia y segura con alguien que se alegra de que estés ahí. [pause 10]\n\nComo siempre, esto no es una promesa sobre el futuro. Es una manera de quedarte en calma sintiendo cariño en lugar de soledad. [pause 10]\n\nDeja que te llegue la sensación de ese tipo de amor. Todavía no necesita una cara. [pause 14]\n\nSi el amor te ha lastimado, ve con calma. Puedes imaginar un amor tranquilo, que te cuida y te da seguridad. Mereces ese tipo de amor, y puedes ensayar cómo se siente recibirlo sin miedo. Si estás en una relación que te da miedo, por favor busca ayuda durante el día. [pause 10]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Estás en una mesa, tarde en la noche. Ya se lavaron los trastes. Hay música bajita. [pause 23]\n\nFrente a ti hay alguien que se alegra de que estés ahí. Fíjate cómo lo sabes. Cómo te mira. Lo fácil que se siente el ambiente. [pause 27]\n\nTe cuenta algo de su día. Escuchas. Te escucha también. Nadie tiene prisa. [pause 27]\n\nSiente tus hombros. Nota que no estás tratando de impresionar a nadie. Eres tú, y aquí eso es bienvenido. [pause 27]\n\nAlguien se ríe. Tal vez eres tú. [pause 27]\n\nMás tarde, al despedirse, te dice algo sencillo. Me dio mucho gusto estar contigo. Y le crees. [pause 29]\n\nDeja que esa sensación se acomode en tu pecho. Tibia. Sin prisa. Segura. [pause 29]\n\nDi bajito en tu mente, me quieren, y sé querer bien. [pause 31]\n\nFíjate en los pequeños detalles. Una taza de té que te ponen al lado sin que la pidas. Un mensaje que dice, ¿ya llegaste? [pause 29]\n\nFíjate cómo devuelves el cariño. Con facilidad. Sin llevar la cuenta. [pause 29]\n\nImagina una mañana tranquila con esta persona, o con estas personas. Nadie con prisa. Café. Sol. Algo de todos los días, y bueno. [pause 29]\n\nDeja que la noche se quede contigo mientras te vas quedando en calma. [pause 37]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
+  }
+ ],
+ "words": 648,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 115,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1113,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass",
+   "verse_read": "pass",
+   "listener_gender": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Same safety shape as the English set, in our own words: each teaching says plainly it is imagination and feeling, not a promise, and that the daytime steps stay real; the love night never pictures another person changing their mind and points anyone in a frightening relationship to help; revision keeps owed apologies real; the work night pictures a bill paid on time, not riches. No faith words, no verse in any wording (scripture_woven false), no teacher named."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
