@@ -27,7 +27,7 @@ None. Tracking: No for every row below.
 | Location (precise and coarse) | Not collected. The hashed IP address is used for rate limits, not location. |
 | Contacts | Not collected. |
 | User Content: Emails or Text Messages, Photos or Videos, Gameplay Content, Customer Support | Not collected. |
-| User Content: Audio Data | Not collected. Recordings in your own voice stay on the phone. |
+| User Content: Audio Data | Not collected. |
 | Browsing History, Search History | Not collected. Bible searches run on the phone. |
 | Usage Data: Advertising Data, Other Usage Data | Not collected. |
 | Diagnostics (crash, performance, other) | Not collected. There is no crash or analytics SDK, and RevenueCat diagnostics are off. |

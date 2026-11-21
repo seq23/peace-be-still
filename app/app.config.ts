@@ -5,7 +5,8 @@ const config: ExpoConfig = {
     // One web bundle: the app is small, and lazy route chunks showed a blank screen while a slow phone fetched them.
     ['expo-router', { asyncRoutes: { web: false, default: 'development' } }], ['expo-audio', { enableBackgroundPlayback: true }], ['expo-splash-screen', { image: './assets/icon.png', resizeMode: 'contain', backgroundColor: '#0E1A22' }]],
   icon: './assets/icon.png',
-  ios: { bundleIdentifier: 'com.peacebestillapp.mobile' },
+  // Only HTTPS and Apple's own encryption: exempt, so no export-compliance question on each upload.
+  ios: { bundleIdentifier: 'com.peacebestillapp.mobile', infoPlist: { ITSAppUsesNonExemptEncryption: false } },
   android: { package: 'com.peacebestillapp.mobile' },
   web: { bundler: 'metro' },
   // The ONE audio host: R2 bucket peace-be-still-audio (key = manifest `file`, audio/publish.py). PBS_AUDIO_BASE_URL overrides.

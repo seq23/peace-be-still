@@ -129,5 +129,8 @@
   "paid.unconfirmed": "We couldn’t confirm paid access yet. Try restoring your purchases.",
   "paid.nothingToRestore": "Apple didn’t find an active subscription to restore.",
   "paid.restoreFailed": "We couldn’t check your purchases. Please try again.",
-  "paid.linkFailed": "The link couldn’t open. Please try again."
+  "paid.linkFailed": "The link couldn’t open. Please try again.",
+  "error.crash.title": "Something went wrong.",
+  "error.crash.body": "Tap Try again. If it keeps happening, close Peace Be Still and open it again. Your saved verses and journal are still on this phone.",
+  "error.crash.retry": "Try again ›"
 }

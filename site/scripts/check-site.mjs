@@ -6,7 +6,8 @@
 // (3) mindset-practice words only on pages marked <meta name="pbs:door" content="mindset">,
 //     and a faith page never links a mindset page (or the reverse);
 // (4) the /privacy promise: no forms or inputs at all (sign-ups closed 18 Nov 2026), no email
-//     addresses, no third-party scripts;
+//     addresses except the published contact info@peacebestillapp.com (the legal pages must name
+//     one), no third-party scripts; a negated "does not guarantee" (the disclaimer) is not a promise;
 // (5) store badges and store links only inside the one store CTA (<!-- cta:start -->…<!-- cta:end -->,
 //     from site/config/store.json), or as a sourced fact link <a class="src" rel="nofollow noopener">;
 //     never "available now" while store.json has no URL.
@@ -21,8 +22,8 @@ const banned = [
   [/speak\s+life/i, '"Speak Life" (live trademarks)'],
   [/(?<!rel=")\bmanifest(ing|ation|s|ed)?\b/i, "manifesting words"],
   [/law of attraction|neville|abraham[- ]hicks/i, "law-of-attraction / teacher names"],
-  [/\bcures?\b|insomnia|\bheals?\b|guarantee/i, "outcome or health promise"],
-  [/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i, "an email address"],
+  [/\bcures?\b|insomnia|\bheals?\b|(?<!\bnot )guarantee/i, "outcome or health promise"],
+  [/(?<![A-Z0-9._%+-])(?!info@peacebestillapp\.com\b)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i, "an email address"],
   [/<script(?![^>]*application\/ld\+json)[^>]*>/i, "a script other than JSON-LD"],
 
 ];
@@ -82,12 +83,15 @@ if (process.argv.includes("--self-test")) {
     ["d.html", '<p>Available now!</p><a href="https://apps.apple.com/us/app/x/id1">get</a>'],
     ["b.html", '<meta name="pbs:door" content="mindset"><p>law of assumption</p>'],
     ["c.html", "<p>the law of assumption</p><script src=\"https://t.example/x.js\"></script>"],
+    ["e.html", "<p>We guarantee sleep. Write to someone@peacebestillapp.com.</p>"],
   ]);
-  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD"];
+  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD", "e.html: outcome or health promise", "e.html: an email address"];
   const missing = want.filter((w) => !bad.some((f) => f.includes(w)));
   if (missing.length) { console.error(`check-site --self-test: did not catch: ${missing.join("; ")}`); process.exit(1); }
   if (bad.some((f) => f.startsWith("b.html"))) { console.error("check-site --self-test: flagged a clean mindset page"); process.exit(1); }
-  console.log("OUTPUT check-site --self-test: caught all 7 planted faults");
+  const clean = check([["f.html", "<p>Listening does not guarantee sleep. Write to info@peacebestillapp.com.</p>"]]);
+  if (clean.length) { console.error(`check-site --self-test: flagged the legal contact or a negated guarantee: ${clean.join("; ")}`); process.exit(1); }
+  console.log("OUTPUT check-site --self-test: caught all 9 planted faults");
   process.exit(0);
 }
 

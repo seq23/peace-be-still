@@ -17,7 +17,7 @@ const src = (k, name) => [`${name}: App Store listing (US), checked ${CHECKED}`,
 const a = (k, text = "App Store listing") => `<a class="src" rel="nofollow noopener" href="${L[k]}">${text}</a>`;
 const APPLE_CANCEL = ["Apple Support: Cancel a subscription from Apple", "https://support.apple.com/en-us/118428"];
 const PLAY_CANCEL = ["Google Play Help: Cancel, pause, or change a subscription", "https://support.google.com/googleplay/answer/7018481"];
-const PBS_ROW = `<tr><td>Peace Be Still (coming soon)</td><td>$7.99 a month or $39.99 a year</td><td>No trial</td><td>Free lane forever: whole KJV text and audio, today's story, 1 chat a day (10 messages), first sleep night then 1 a week, daily declaration</td><td>This site</td></tr>`;
+const PBS_ROW = `<tr><td>Peace Be Still (coming soon)</td><td>$7.99 a month or $39.99 a year</td><td>No trial</td><td>Free lane forever: whole KJV to read, a growing set of chapters read aloud, today's story, 1 chat a day (10 messages), first sleep night then 1 a week, daily declaration</td><td>This site</td></tr>`;
 const HEAD = `<table class="t"><thead><tr><th>App</th><th>Prices listed</th><th>Trial</th><th>What is free</th><th>Source</th></tr></thead><tbody>`;
 const CANCEL_STEPS = `<ol>
 <li>iPhone: Settings › your name › Subscriptions › the app › Cancel Subscription.</li>
@@ -86,7 +86,7 @@ ${PBS_ROW}
       ["The listing at a glance", `<table class="t"><thead><tr><th></th><th>Hallow</th><th>Peace Be Still (coming soon)</th></tr></thead><tbody>
 <tr><td>Tradition</td><td>Catholic; “meant as a resource for people of all faiths”</td><td>Christian, King James Version; Reina-Valera 1909 in Spanish</td></tr>
 <tr><td>Price</td><td>$9.99 a month or $69.99 a year</td><td>$7.99 a month or $39.99 a year</td></tr>
-<tr><td>Free</td><td>Daily prayers and the 9-day Intro Prayer Challenge</td><td>Whole KJV text and audio, today's story, 1 chat a day, first sleep night then 1 a week, daily declaration</td></tr>
+<tr><td>Free</td><td>Daily prayers and the 9-day Intro Prayer Challenge</td><td>Whole KJV to read, a growing set of chapters read aloud, today's story, 1 chat a day, first sleep night then 1 a week, daily declaration</td></tr>
 <tr><td>Rating shown</td><td>4.9 out of 5, 383,775 ratings</td><td>Not out yet</td></tr>
 <tr><td>Source</td><td>${a("hallow")}, ${CHECKED}</td><td>This site</td></tr>
 </tbody></table>`],
@@ -127,7 +127,7 @@ ${PBS_ROW}
     faq: [
       ["Can I use Hallow for free?", "Yes, in part. Its App Store description says the daily prayers, including the rosary, and the 9-day Intro Prayer Challenge are free. The full library needs a subscription."],
       ["Does Hallow have a free trial?", "Its App Store description does not mention one (checked 18 Nov 2026). The price screen inside the app is the place to check before you tap."],
-      ["What is free forever in Peace Be Still?", "The whole King James Bible to read and to hear, today's story, one chat a day of up to 10 messages, your first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, a journal and share cards."],
+      ["What is free forever in Peace Be Still?", "The whole King James Bible to read, a growing set of chapters read aloud, today's story, one chat a day of up to 10 messages, your first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, a journal and share cards."],
     ],
     sources: [src("hallow", "Hallow: Prayer & Meditation"), APPLE_CANCEL, PLAY_CANCEL],
     notAffiliated: "Hallow",
@@ -413,12 +413,12 @@ ${V("ACT 17:11")}`],
   {
     ...D, lang: "en", door: "neutral", group: "Bible apps", path: "/bible-app-for-women/",
     title: "Bible app for women: what to look for, and our pick · Peace Be Still",
-    description: "A Bible app made with women in mind: the women of scripture in its stories, a morning word and whispered psalms at night, the Bible read aloud free, no trial, no ads.",
+    description: "A Bible app made with women in mind: the women of scripture in its stories, a morning word and whispered psalms at night, the whole KJV free to read, with a growing set of chapters read aloud, no trial, no ads.",
     h1: "A Bible app for women: what to look for, and our pick",
     indexLabel: "Bible app for women",
     indexNote: "Stories of the women of scripture, morning and night, no trial.",
     definition: "A Bible app for women is a Bible app whose stories, devotionals and voice speak to women's lives: the women of scripture told in full, a morning word to start the day, and something quiet at night. Look for exact scripture, the Bible read aloud, no ads and no trial. Our pick is Peace Be Still, coming soon.",
-    quick: "Check four things: exact verses from a named translation, the Bible read aloud free, stories that include the women of scripture, and honest pricing with no trial. Peace Be Still has all four, plus Hush Harbor in a Black church voice and Mi Refugio in Spanish.",
+    quick: "Check four things: exact verses from a named translation, scripture read aloud free, stories that include the women of scripture, and honest pricing with no trial. Peace Be Still has all four, plus Hush Harbor in a Black church voice and Mi Refugio in Spanish.",
     bestFor: "women choosing a Bible app, and anyone buying one as a gift.",
     pick: PICK_EN("Our pick for a Bible app for women: Peace Be Still, for its morning-and-night rhythm and honest prices."),
     sections: [
@@ -445,7 +445,7 @@ ${V("EST 4:14")}`],
       ["Can you use a Bible chat app for free?", `<p>In Peace Be Still, yes: one chat a day of up to 10 messages, for good. The paid lane adds unlimited chat (fair use 100 a day) and a chat that remembers what you are carrying.</p>`],
     ],
     faq: [
-      ["What is the best Bible app for women?", "Our pick is Peace Be Still, coming soon: the women of scripture in its stories, a morning declaration and whispered psalms at night, the whole KJV read aloud free, no ads and no trial. We make it, so weigh that."],
+      ["What is the best Bible app for women?", "Our pick is Peace Be Still, coming soon: the women of scripture in its stories, a morning declaration and whispered psalms at night, the whole KJV free to read, with a growing set of chapters read aloud, no ads and no trial. We make it, so weigh that."],
       ["Is there a Bible app for Black women?", "Peace Be Still's Hush Harbor · Black Bible Chat & Stories has a chat in a Black church voice and Bible stories with Black faces, including Hagar and the Shunammite woman."],
       ["Is there a Bible app for women in Spanish?", "Yes. Mi Refugio · Biblia y Chat en Español is the Spanish journey in Peace Be Still, with the Reina-Valera 1909, at launch."],
     ],
