@@ -1,0 +1,47 @@
+# TEMPORARY (round-7 red team for PR #52, after the hostile review of 25c474f). Deleted with its branch after the run.
+# Production ladder and caps as committed; main-account run per the owner's relayed yes (21 Nov 5:35 AM, $2 today, ceiling 1,000,000 neurons as a runaway guard (owner: spend what is needed today, relayed)). Pushed to temp/pbs-redteam-r7 to run.
+name: redteam-r7
+on: { push: { branches: [temp/pbs-redteam-r7] } }
+jobs:
+  redteam:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - run: npm ci --no-audit --no-fund
+        working-directory: worker
+      - name: judge calibration on the live model (CF2)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.PBS_RT_CF_ANALYTICS }}
+          REDTEAM_ALLOW_MAIN: '1'
+          REDTEAM_NEURON_CEILING: '1000000'
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.PBS_RT_CF_ACCOUNT }}
+          REDTEAM_JUDGE_TOKEN: ${{ secrets.PBS_RT_CF_TOKEN }}
+          REDTEAM_JUDGE_ACCOUNT: ${{ secrets.PBS_RT_CF_ACCOUNT }}
+          CALIBRATION_OUT: calibration.json
+        run: node worker/scripts/judge-calibrate.mjs 2>&1 | tee calibration.log; echo "exit ${PIPESTATUS[0]}" >> calibration.log
+      - name: worker dev (Workers AI over REST on CF2) + red team
+        env:
+          RT_CF_TOKEN: ${{ secrets.PBS_RT_CF_TOKEN }}
+          RT_CF_ANALYTICS: ${{ secrets.PBS_RT_CF_ANALYTICS }}
+          REDTEAM_ALLOW_MAIN: '1'
+          REDTEAM_NEURON_CEILING: '1000000'
+          RT_CF_ACCOUNT: ${{ secrets.PBS_RT_CF_ACCOUNT }}
+          PBS_GEMINI_API_KEY: ${{ secrets.PBS_RT_GEMINI }}
+          OPENROUTER_API_KEY: ${{ secrets.PBS_RT_OPENROUTER }}
+          REDTEAM_ONLY: ${{ vars.REDTEAM_ONLY }}
+        run: |
+          DEV_AI_TOKEN="$RT_CF_TOKEN" DEV_AI_ACCOUNT="$RT_CF_ACCOUNT" bash scripts/worker-dev.sh > dev.log 2>&1 &
+          up=0; for i in $(seq 1 300); do curl -sk -o /dev/null https://localhost:8787/ && { up=1; break; }; sleep 2; done
+          if [ "$up" != 1 ]; then echo "NAMED STOP DEV_NOT_UP"; tail -60 dev.log; exit 1; fi
+          echo "dev up after $((i*2)) s"
+          CLOUDFLARE_API_TOKEN="$RT_CF_ANALYTICS" CLOUDFLARE_ACCOUNT_ID="$RT_CF_ACCOUNT" REDTEAM_JUDGE_TOKEN="$RT_CF_TOKEN" REDTEAM_JUDGE_ACCOUNT="$RT_CF_ACCOUNT" \
+            node --experimental-strip-types worker/scripts/redteam.mjs 2>&1 | tee run.log; echo "exit ${PIPESTATUS[0]}" >> run.log
+          CI=1 npx --prefix worker wrangler d1 execute peace-be-still-chat --local --config worker/wrangler.jsonc --json --command "SELECT metric, n FROM chat_counts WHERE day <> 'seq' ORDER BY metric" > counts.json </dev/null || true
+          grep -h CHAT_GATE dev.log | grep -o '"problems":"[^"]*"' | sort | uniq -c | sort -rn > gate.log || true
+          grep -q "^OUTPUT redteam" run.log && grep -q "^exit 0" run.log && grep -q "^exit 0" calibration.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: redteam-out, path: "redteam-out\nrun.log\ncalibration.log\ncalibration.json\ngate.log\ncounts.json\ndev.log" }
