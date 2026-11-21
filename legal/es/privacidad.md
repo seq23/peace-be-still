@@ -70,7 +70,7 @@ De 13 a 17 años, el chat usa la voz para adolescentes, y las compras de un plan
 
 ## Dónde se ofrece la app
 
-La app se ofrece en los Estados Unidos y en otros países, pero no en el Espacio Económico Europeo, el Reino Unido ni Suiza, porque uno de nuestros proveedores gratuitos de IA no permite que su nivel gratuito atienda a personas de esos lugares.
+La app se ofrece en los Estados Unidos y en otros países, pero no en el Espacio Económico Europeo, el Reino Unido ni Suiza, porque uno de nuestros proveedores gratuitos de IA no permite que su nivel gratuito atienda a personas de esos lugares. Tampoco se ofrece en China continental, donde el contenido religioso en internet requiere un permiso del gobierno.
 
 ## Cómo la protegemos
 

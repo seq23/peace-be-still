@@ -68,7 +68,7 @@ For ages 13 to 17, chat uses the teen voice, and paid upgrades go through Apple'
 
 ## Where the app is offered
 
-The app is offered in the United States and other countries, but not in the European Economic Area, the United Kingdom or Switzerland, because one of our free AI providers does not allow its free tier to serve people there.
+The app is offered in the United States and other countries, but not in the European Economic Area, the United Kingdom or Switzerland, because one of our free AI providers does not allow its free tier to serve people there. It is not offered in mainland China either, where religious content online needs a government permit.
 
 ## Keeping it safe
 

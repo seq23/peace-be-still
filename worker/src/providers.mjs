@@ -19,4 +19,6 @@ export const excludedTerritories = [
   'ISL', 'LIE', 'NOR',
   'GBR',
   'CHE',
+  // China mainland: religious content online needs a government permit, and AI-generated content has its own rules.
+  'CHN',
 ];
