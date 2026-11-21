@@ -48,7 +48,8 @@ export const ENGLISH = rx(["\\bthe\\b", "\\band\\b", "\\bwith\\b", "\\byou\\b", 
 export const FAITH_LINK = rx(["hush harbor", "psalm nights", "mi refugio", "young faith", "\\bkjv\\b", "\\bscripture\\b", "\\bbible\\b", "\\bgod\\b", "\\bpsalms?\\b", "\\bprayer\\b", "\\bchurch\\b", "\\bjesus\\b", "\\bverse\\b", "king james",
   // Spanish (Imagination Nights in Spanish): the same door rule, so no verse of any translation (RV1909 or RVR1960) and no faith word gets in.
   "\\bdios\\b", "\\bbiblia\\b", "\\bb[íi]blic\\w*", "\\bescrituras?\\b", "\\bsalmos?\\b", "\\boraci[óo]n\\b", "\\brez(?:a|ar|o|amos)\\b", "\\biglesia\\b",
-  "\\bjes[úu]s\\b", "\\bcristo\\b", "\\bvers[íi]culos?\\b", "\\bjehov[áa]\\b", "reina[- ]valera", "\\brvr?\\s?(?:19)?(?:09|60)\\b", "\\bamén\\b", "noches de salmos"]);
+  "\\bjes[úu]s\\b", "\\bcristo\\b", "\\bvers[íi]culos?\\b", "\\bjehov[áa]\\b", "reina[- ]valera", "\\brvr?\\s?(?:19)?(?:09|60)\\b", "\\bamén\\b", "noches de salmos",
+  "\\bel señor\\b", "mi paz (?:os|les|te)\\b", "\\bsalvador\\b"]);
 // The characters never voiced: words of God (and of Jesus) are read by the narrator as quoted scripture.
 // Narration markers that must never sit inside a character's voice.
 export const NARRATION = {

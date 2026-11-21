@@ -1,0 +1,34 @@
+{
+ "cases": {
+  "verses": [
+   "El Señor es mi pastor, nada me falta.",
+   "Vengan a mí todos ustedes que están cansados y agobiados, y yo les daré descanso.",
+   "Al acostarte, no tendrás temor alguno; te acostarás y dormirás tranquilo.",
+   "En paz me acuesto y me duermo, porque solo tú, Señor, me haces vivir confiado.",
+   "La paz les dejo; mi paz les doy. No se angustien ni se acobarden.",
+   "El amor es paciente, es bondadoso.",
+   "No te preocupes por el mañana, a cada día le basta su propio afán.",
+   "Todo lo que pidas, cree que ya lo recibiste, y lo tendrás.",
+   "Come to me, all you who are weary and burdened, and I will give you rest.",
+   "In peace I will lie down and sleep, for you alone make me dwell in safety.",
+   "Do not worry about tomorrow, for tomorrow will worry about itself.",
+   "Whatever you ask for in prayer, believe that you have received it, and it will be yours."
+  ],
+  "clean": [
+   "Siente cómo se afloja el pecho. Cómo se suelta el estómago.",
+   "Deja que el sueño llegue cuando llegue. No hay prisa.",
+   "Imagina una tarde, dentro de unas semanas. El deseo ya se cumplió.",
+   "Esto es imaginación y sentimiento, no una promesa.",
+   "Feel your feet getting heavy. Your legs. Your back sinking into the mattress.",
+   "Let the scene stay with you as you drift."
+  ]
+ },
+ "models": {
+  "gemini-4-hydrogen": {
+   "pass": true,
+   "date": "2026-11-21",
+   "missed": [],
+   "false_positives": []
+  }
+ }
+}
