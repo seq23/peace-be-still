@@ -288,6 +288,36 @@ GOOD = dict(script="The Lord is my shepherd I shall not want " * 9 + "he leadeth
             lufs=-22.0, true_peak=-3.0, clipped=0)
 
 
+class SpeechOnly(unittest.TestCase):
+    """21 Nov 2026: Whisper invented "suscríbete suscríbete" in a session's closing 60 s of silence; the
+    accuracy score must be taken on the speech, not on what the model dreams into the quiet."""
+    def test_long_silence_is_cut_before_asr_and_the_speech_is_kept(self):
+        import numpy as np
+        r = 16000
+        tone = (0.2 * np.sin(np.arange(r) * 2 * np.pi * 220 / r)).astype(np.float32)   # 1 s of "speech"
+        quiet = lambda s: np.zeros(int(r * s), dtype=np.float32)
+        audio = np.concatenate([quiet(3), tone, quiet(0.8), tone, quiet(20), tone, quiet(60)])
+        out = qa.speech_only(audio, r)
+        self.assertLess(len(out) / r, 5.5)                      # 3 s of speech, short gap kept, cuts at 0.4 s a side
+        self.assertGreater(len(out) / r, 3.6)
+        loud = np.count_nonzero(np.abs(out) > 0.05)
+        self.assertGreaterEqual(loud, np.count_nonzero(np.abs(audio) > 0.05) - 3 * 800)  # every second of speech survives
+        tail = len(out) - 1 - int(np.flatnonzero(np.abs(out) > 0.05)[-1])
+        self.assertLess(tail / r, 0.5)                          # the 60 s tail is gone: nothing left for ASR to fill
+
+    def test_transcribe_hears_only_the_speech(self):
+        import numpy as np
+        heard = []
+        class M:
+            def transcribe(self, audio, **k):
+                heard.append(len(audio))
+                return [], None
+        audio = np.concatenate([np.full(16000, 0.2, dtype=np.float32), np.zeros(16000 * 60, dtype=np.float32)])
+        with mock.patch.dict(qa._MODELS, {"base": M()}), mock.patch.object(qa, "decode", return_value=audio):
+            qa.transcribe(Path("x.m4a"), "es")
+        self.assertLess(heard[0], 16000 * 2)
+
+
 class Bars(unittest.TestCase):
     def test_good_track_passes(self):
         r = qa.judge(transcript=GOOD["script"], **GOOD)
