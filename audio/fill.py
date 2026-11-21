@@ -285,10 +285,10 @@ def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> l
     def part(xs):
         retry = [i for i in xs if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
         return retry + [i for i in xs if key(i) not in last]
-    # A re-voice of a published Psalm Night (its script changed, e.g. lengthened past the 13 min floor on
+    # A re-voice of a published session (its script changed, e.g. lengthened past its floor on
     # 21 Nov 2026) waits for the sessions never voiced yet: the old file stays served until the new one passes.
     voiced = {r.get("ref") for r in last.values() if r.get("status") == "passed"}
-    again = [i for i in mine[:cut] if i.get("kind") == "psalm-night" and i.get("ref") in voiced]
+    again = [i for i in mine[:cut] if i.get("kind") in SESSION_KINDS and i.get("ref") in voiced]
     first = [i for i in mine[:cut] if i not in again]
     return part(first) + part(again) + part(mine[cut:])
 

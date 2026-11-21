@@ -269,6 +269,16 @@ class Sessions(unittest.TestCase):
         rows.append({"file": "en/psalm-night/pn-01-new.m4a", "ref": "en/psalm-night/pn-01", "status": "FAILED"})
         self.assertEqual([i["file"] for i in fill.todo(items, rows)][2:4], ["en/psalm-night/pn-01-new.m4a", "en/bible/kjv-mat-001.m4a"])
 
+    def test_a_lengthened_published_imagination_night_queues_after_an_unvoiced_one(self):
+        """Review of #83: the 7 English Imagination Nights lengthened in #79 must not jump the 30 unvoiced Spanish ones."""
+        b = {"en": T.parse_vpl(["MAT 1:1 The book."]), "es": T.parse_vpl(["MAT 1:1 El libro."])}
+        mk = lambda lang, n: {"file": f"{lang}/imagination-night/{n}-new.m4a", "kind": "imagination-night", "lang": lang,
+                              "priority": 3, "ref": f"{lang}/imagination-night/{n}"}
+        items = fill.plan(b, [mk("en", "in-01"), mk("es", "in-01")])
+        rows = [{"file": "en/imagination-night/in-01-old.m4a", "ref": "en/imagination-night/in-01", "status": "passed", "seconds": 1029.0}]
+        q = [i["file"] for i in fill.todo(items, rows)]
+        self.assertEqual(q[:3], ["es/imagination-night/in-01-new.m4a", "en/imagination-night/in-01-new.m4a", "en/bible/kjv-mat-001.m4a"])
+
     def test_scripted_quiet_is_not_counted_as_slow_speech(self):
         import qa
         kw = dict(script="one two three", transcript="one two three", lang="en", level="sleep",
