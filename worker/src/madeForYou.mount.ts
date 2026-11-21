@@ -4,7 +4,9 @@
 // made-for-you-integration job applies it to the pinned phase 3 and runs phase 3's own typecheck and tests).
 // Relative imports are phase 3's modules: this file only compiles inside the integrated worker/src.
 import { detectCrisis } from './crisis';
+import { reserve } from './counts';
 import { runLadder } from './ladder';
+import { RungError } from './providers/types';
 import { checkAnswer } from './quality/answer';
 import { judgeSchema, judgeVerdict } from './quality/judge';
 import { crisisText } from './replies';
@@ -22,6 +24,12 @@ export type MadeForYouEnv = {
   PBS_MFY_R2_BUCKET?: string;
   PBS_MADE_FOR_YOU_RUNNER_SECRET?: string;
 };
+
+/** Chat keeps at least half of every rung: made-for-you books chat's own row too, under half its cap. */
+export const chatShare = (db: D1Database) => ({
+  book: (day: string, metric: string, cap: number) => reserve(db, day, metric, cap),
+  out: () => new RungError('exhausted', 'MFY_SHARE_USED'),
+});
 
 type InstallReader = (request: Request, env: Env, now: number, graceDays?: number) => Promise<Install | null | 'missing'>;
 const central = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -50,7 +58,7 @@ export function madeForYou(env: Env & MadeForYouEnv, deps: Deps, install: Instal
     },
     crisisText: (kind, lang, age, text, door) => crisisText(kind, lang, age, text, door),
     ladder: (use, messages, schema, maxTokens, valid, signal) =>
-      runLadder(env.DB, madeForYouRungs(deps.rungs(env, deps.now()), use, signal), messages, schema as never, maxTokens, new Map(), valid),
+      runLadder(env.DB, madeForYouRungs(deps.rungs(env, deps.now()), use, chatShare(env.DB), signal), messages, schema as never, maxTokens, new Map(), valid),
     checkProse: (draft, ctx) => checkAnswer(draft, { ...ctx, db: env.DB }),
     judgeShared: { schema: judgeSchema, verdict: judgeVerdict },
     banned,

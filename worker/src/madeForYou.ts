@@ -51,15 +51,26 @@ const REPORT_REASONS: readonly ReportReason[] = ['hurtful', 'wrong', 'unsafe', '
 type ChatRung = { id: string; cap: number; day: string; call: (messages: Message[], schema: Schema, maxTokens: number) => Promise<unknown> };
 const family = (id: string) => (id.startsWith('gemini-free') ? 'gemini-free' : id) as keyof typeof config.draft;
 
-/** Chat's rungs, same order and providers, with made-for-you counters (mfy:<use>:<rung>) and caps. */
-export function madeForYouRungs<T extends ChatRung>(rungs: T[], use: Use, signal?: AbortSignal): T[] {
+/** Chat wins (PHASES.md, 21 Nov 2026): every made-for-you call is also booked in chat's own `calls:<rung>`
+ * row, on that provider's day, and only while the row is under HALF of chat's cap, so chat keeps at least half
+ * of every rung. book is phase 3's counts.reserve; out() is the error the ladder reads as "out for today". */
+export type ChatShare = { book(day: string, metric: string, cap: number): Promise<boolean>; out(): Error };
+
+/** Chat's rungs, same order and providers, with made-for-you counters (mfy:<use>:<rung>), caps and chat's half. */
+export function madeForYouRungs<T extends ChatRung>(rungs: T[], use: Use, share: ChatShare, signal?: AbortSignal): T[] {
   return rungs.map(rung => ({
     ...rung,
     id: `mfy:${use}:${rung.id}`,
     cap: config[use][family(rung.id)] ?? 0,
-    call: (...args: Parameters<ChatRung['call']>) => { signal?.throwIfAborted(); return rung.call(...args); },
+    call: async (...args: Parameters<ChatRung['call']>) => {
+      signal?.throwIfAborted();
+      if (!(await share.book(rung.day, `calls:${rung.id}`, Math.floor(rung.cap / 2)))) throw share.out();
+      return rung.call(...args);
+    },
   }));
 }
+/** Every rung said "out" (made-for-you's share or chat's half is used for the provider's day): retried, never a call. */
+export const SHARE_USED = 'MFY_SHARE_USED';
 
 /** Per provider: what chat's caps (phase 3 wrangler vars) plus made-for-you's caps can spend in a day. */
 export function allowanceBooks(chat: Record<string, string>) {
@@ -302,7 +313,7 @@ export type MadeForYouDependencies<CrisisKind = string> = {
   detectCrisis(turns: Turn[]): Promise<Crisis<CrisisKind>>;
   // The door matters: an Imagination (Mindset door) request never gets a faith reply.
   crisisText(kind: CrisisKind, lang: Lang, age: Install['age'], text: string, door: 'faith' | 'mindset'): string;
-  // runLadder(db, madeForYouRungs(realDeps.rungs(env, now), use, signal), messages, schema, maxTokens, metrics, valid).
+  // runLadder(db, madeForYouRungs(realDeps.rungs(env, now), use, chatShare, signal), messages, schema, maxTokens, metrics, valid).
   ladder(use: Use, messages: Message[], schema: Schema, maxTokens: number, valid: (value: unknown) => boolean, signal: AbortSignal): Promise<LadderResult>;
   // Phase 3's checkAnswer with the Worker's db, and its judgeSchema / judgeVerdict.
   checkProse: CheckProse;
@@ -541,7 +552,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
           misshapen = true;
           return false;
         }, signal);
-        if ('empty' in drafted) return misshapen ? { code: DRAFT_FAILED, failure: true } : { code: NO_FREE_MODEL, failure: false };
+        if ('empty' in drafted) return misshapen ? { code: DRAFT_FAILED, failure: true } : { code: drafted.empty === 'out' ? SHARE_USED : NO_FREE_MODEL, failure: false };
         paragraphs = paragraphsOf(drafted.data)!;
         const faults = await draftFaults(deps.checkProse, input, paragraphs, signal);
         if (!faults.length) break;

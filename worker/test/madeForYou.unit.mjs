@@ -42,12 +42,16 @@ test('chat caps plus made-for-you caps fit inside every free allowance, and the 
   assert.ok(greedy.openRouter.chat + greedy.openRouter.madeForYou > greedy.openRouter.allowance);
 });
 
-test('made-for-you rungs keep the chat order and providers but never touch chat counters', () => {
+test('made-for-you rungs keep the chat order and providers, with their own counters, and book chat\'s row under half its cap', async () => {
   const rungs = [{ id: 'workers-ai' }, { id: 'gemini-free:a' }, { id: 'openrouter-free' }].map(r => ({ ...r, cap: 999, day: 'd', call: async () => 1 }));
-  const draft = mfy.madeForYouRungs(rungs, 'draft');
+  const books = [];
+  const share = { book: async (day, metric, cap) => { books.push([day, metric, cap]); return true; }, out: () => new Error('out') };
+  const draft = mfy.madeForYouRungs(rungs, 'draft', share);
   assert.deepEqual(draft.map(r => r.id), ['mfy:draft:workers-ai', 'mfy:draft:gemini-free:a', 'mfy:draft:openrouter-free']);
-  assert.deepEqual(draft.map(r => r.cap), [1, 60, 20]);
-  assert.deepEqual(mfy.madeForYouRungs(rungs, 'judge').map(r => r.id)[2], 'mfy:judge:openrouter-free');
+  assert.deepEqual(draft.map(r => r.cap), [1, 30, 20]);
+  assert.deepEqual(mfy.madeForYouRungs(rungs, 'judge', share).map(r => r.id)[2], 'mfy:judge:openrouter-free');
+  await draft[1].call([], {}, 10);
+  assert.deepEqual(books, [['d', 'calls:gemini-free:a', 499]], "each call is booked in chat's own row, under half chat's cap");
 });
 
 test('the promise is the 08:00 Central that ends the night with room, in weekday, weekend and DST cases', () => {

@@ -137,7 +137,19 @@ test('requests are paid-only, crisis-checked first, one a day, and promised a re
 test('the runner drafts on the shared ladder with its own budget, erases the note at once, and stops on the third failure', async t => {
   const { db, call, claim, row } = await worker(t);
   const chatCounters = async () => (await db.prepare("SELECT * FROM chat_counts WHERE metric NOT LIKE 'calls:mfy:%' ORDER BY day, metric").all()).results;
-  await db.prepare("INSERT INTO chat_counts (day, metric, n) VALUES ('2026-11-17', 'calls:workers-ai', 3)").run();
+  // Chat wins: chat's own row for a rung grows by exactly the made-for-you calls on it, and nothing else moves.
+  const sharedRight = async () => {
+    const rows = (await db.prepare("SELECT day, metric, n FROM chat_counts").all()).results;
+    const mfy = {};
+    for (const r of rows.filter(r => r.metric.startsWith('calls:mfy:'))) {
+      const rung = r.metric.replace(/^calls:mfy:(draft|judge):/, 'calls:');
+      mfy[`${r.day} ${rung}`] = (mfy[`${r.day} ${rung}`] ?? 0) + r.n;
+    }
+    const was = Object.fromEntries(before.map(r => [`${r.day} ${r.metric}`, r.n]));
+    const now = Object.fromEntries(rows.filter(r => !r.metric.startsWith('calls:mfy:')).map(r => [`${r.day} ${r.metric}`, r.n]));
+    for (const key of new Set([...Object.keys(was), ...Object.keys(now)])) assert.equal(now[key] ?? 0, (was[key] ?? 0) + (mfy[key] ?? 0), key);
+  };
+  await db.prepare("INSERT INTO chat_counts (day, metric, n) VALUES ('2026-11-17', 'calls:workers-ai', 1)").run();
   const before = await chatCounters();
   assert.equal((await call(id.owner, { path: '/runner/claim', body: {} })).status, 401);
 
@@ -165,7 +177,7 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   assert.equal(two.job.id, second, 'a leased row is skipped');
   assert.match(two.job.reflection, /This draft came from gemini-free:\S+\.$/);
   assert.equal(await db.prepare("SELECT n FROM chat_counts WHERE metric LIKE 'calls:mfy:draft:openrouter%' AND n > 0").first(), null);
-  assert.deepEqual(await chatCounters(), before, 'chat counters never move');
+  await sharedRight();
 
   // A dry chain is a held retry she can see; her note stays for the retry.
   const third = '20000000-0000-4000-a000-000000000001';
@@ -193,13 +205,38 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   assert.equal(held.state, 'stopped');
   assert.equal(held.note, null);
   assert.equal(held.script, null);
-  assert.deepEqual(await chatCounters(), before);
+  await sharedRight();
   // A request we failed does not use up her day.
   const sceneShelf = await (await call(sceneInstall, { now: at + 50 * MIN, params: '?kind=imagination&lang=en' })).json();
   assert.equal(sceneShelf.ended, 'stopped');
   assert.equal(sceneShelf.requestedToday, false);
   assert.equal((await call(sceneInstall, { now: at + 50 * MIN, body: scene })).status, 202);
   assert.equal((await call(sceneInstall, { now: at + 51 * MIN, body: scene })).status, 429, 'still one a day');
+});
+
+test('chat wins: made-for-you books a rung only up to half of chat\'s cap, is refused past it, and chat still gets the rung', async t => {
+  const { db, call, claim } = await worker(t);
+  const rung = 'gemini-free:gemini-3.5-flash-lite';
+  const { cap, day } = { cap: 200, day: new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Los_Angeles' }).format(at) };
+  const row = () => db.prepare('SELECT n FROM chat_counts WHERE day = ? AND metric = ?').bind(day, `calls:${rung}`).first().then(r => r?.n ?? 0);
+  // Chat has used 98 of its 200 Gemini calls today; chat has used half or more of every other rung.
+  await db.prepare('INSERT INTO chat_counts (day, metric, n) VALUES (?, ?, 98)').bind(day, `calls:${rung}`).run();
+  await db.prepare('INSERT INTO chat_counts (day, metric, n) VALUES (?, ?, 200)').bind(day, 'calls:gemini-free:gemini-3.1-flash-lite').run();
+  await db.prepare("INSERT INTO chat_counts (day, metric, n) VALUES (?, 'calls:workers-ai', 10), (?, 'calls:openrouter-free', 450)")
+    .bind(new Date(at).toISOString().slice(0, 10), new Date(at).toISOString().slice(0, 10)).run();
+  await call(id.owner, { body: note });
+  await call(id.other, { body: note });
+  const one = await claim(at);
+  assert.ok((await one.json()).job, 'a draft and a judgment fit under half: made-for-you gets them');
+  assert.equal(await row(), 100);
+  const two = await claim(at);
+  assert.equal(two.status, 503);
+  assert.deepEqual(await two.json(), { error: 'MFY_SHARE_USED' }, 'past half it is a named, retried stop, never a call');
+  assert.equal(await row(), 100, 'the refused call was not made');
+  // Chat's own ladder still books the rung (phase 3 counts.reserve with chat's full cap).
+  const chat = await db.prepare('INSERT INTO chat_counts (day, metric, n) VALUES (?, ?, 1) ON CONFLICT(day, metric) DO UPDATE SET n = n + 1 WHERE n < ? RETURNING n')
+    .bind(day, `calls:${rung}`, cap).first();
+  assert.equal(chat.n, 101);
 });
 
 test('the Mac publishes, she plays, reports (one report path) and deletes; the cron keeps every retention promise', async t => {

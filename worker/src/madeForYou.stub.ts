@@ -93,7 +93,8 @@ export default {
             return { paragraphs };
           },
         }));
-        return runLadder(env.DB, madeForYouRungs(rungs, use, signal), messages, schema as never, maxTokens, new Map(), valid);
+        const share = { book: (day: string, metric: string, cap: number) => reserve(env.DB, day, metric, cap), out: () => new RungError('exhausted', 'MFY_SHARE_USED') };
+        return runLadder(env.DB, madeForYouRungs(rungs, use, share, signal), messages, schema as never, maxTokens, new Map(), valid);
       },
       checkProse: (draft, ctx) => checkAnswer(draft, { ...ctx, db: env.DB }),
       judgeShared: { schema: judgeSchema, verdict: judgeVerdict },

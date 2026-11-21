@@ -24,7 +24,7 @@
   "_revisions": "A try is one draft plus up to two revisions that send it back with its exact faults (draftFaults). Soak of 21 Nov 2026: with fresh drafts only, 11 of 12 requests stopped on fixable floors.",
   "draft": {
     "workers-ai": 1,
-    "gemini-free": 60,
+    "gemini-free": 30,
     "openrouter-free": 20
   },
   "judge": {
@@ -33,9 +33,9 @@
     "openrouter-free": 20
   },
   "attemptsBooked": 2,
-  "_attemptsBooked": "Each session is booked at two drafts and two judgments, so one failed draft never takes another request's place. Measured 20 Nov 2026 on the real chain (worker/scripts/made-for-you-measure.mjs): the two sessions that passed took 1 and 2 tries.",
+  "_attemptsBooked": "Each session is booked at two tries, each a draft plus up to two revisions, and one judgment.",
   "sessionMinutes": 15,
   "_sessionMinutes": "Measured 20 Nov 2026: real passing scripts voiced, mastered and QA-checked in 4.5 and 5.2 min on a GitHub runner (12.4 and 10.3 min of audio at 91 and 98 wpm), 7 min 38 s on the Mac; the Worker's claim took 8-48 s when a model answered (abort at 4 min). 15 leaves room for nice 15 and the private upload.",
-  "sessionsPerNight": 10,
-  "_sessionsPerNight": "Measured 20 Nov 2026: the free budget allows 25 (50 judge calls / 2 tries) and the Mac 60, but in the measured hour OpenRouter's free models were rate-limited upstream and Gemini's 3.5 day was already spent by other traffic, so 10 is promised: a busy chain holds a row 15 minutes, it never fails it, and MADE_FOR_YOU_LATE fires if a promise slips."
+  "sessionsPerNight": 8,
+  "_sessionsPerNight": "NOT YET SOAK-PROVEN (21 Nov 2026). 8 is the free budget: 51 draft calls / (2 tries x 3 drafts each) = 8, judge 50 / 2 = 25, the Mac 60. Every call is also booked under HALF of chat's cap (chat wins, PHASES.md), so on a busy chat day fewer are made and the row holds as MFY_SHARE_USED. Soak 1 (20-21 Nov, before revisions): 1 of 12 made. A short run after revisions made 7 of 12 in 15 minutes. Re-set from worker/scripts/made-for-you-soak.mjs once its own keys exist."
 }

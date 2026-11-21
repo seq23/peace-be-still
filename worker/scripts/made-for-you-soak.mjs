@@ -4,8 +4,7 @@
 // phase 3's real rungs, ladder, checkAnswer and judge, the production caps, backoffs and leases, and the
 // Mac's pass shape (a pass every 15 minutes drains the queue; each made script holds the Mac for the
 // render time). Voice is stood in by that wait; the voice job voices the made scripts afterwards.
-// Workers AI runs ONLY on the second Cloudflare account (CF2_ACCOUNT_ID + CF2_WORKERS_AI_TOKEN), with
-// PBS_GEMINI_API_KEY and OPENROUTER_API_KEY. Codes only are logged: never a note or a script.
+// Keys: its own only (see the NAMED STOP below). Codes only are logged: never a note or a script.
 //   node worker/scripts/made-for-you-soak.mjs seed  <state dir>
 //   node worker/scripts/made-for-you-soak.mjs drain <state dir> <stop at, ms since epoch>
 //   node worker/scripts/made-for-you-soak.mjs summary <state dir>
@@ -70,15 +69,20 @@ if (mode === 'summary') {
   process.exit(made.length ? 0 : 1);
 }
 
-const account = process.env.CF2_ACCOUNT_ID, token = process.env.CF2_WORKERS_AI_TOKEN;
-if (['drain', 'judge-reviewed'].includes(mode) && (!account || !token || !process.env.OPENROUTER_API_KEY || !process.env.PBS_GEMINI_API_KEY)) {
-  console.error('NAMED STOP MADE_FOR_YOU_SOAK_KEYS: CF2_ACCOUNT_ID, CF2_WORKERS_AI_TOKEN, PBS_GEMINI_API_KEY, OPENROUTER_API_KEY');
+// Chat wins (PHASES.md, 21 Nov 2026): a soak never uses chat's keys (PBS_GEMINI_API_KEY, OPENROUTER_API_KEY or
+// the red team's PBS_RT_*): on 20-21 Nov the soak drained Gemini and 18 of 106 chat red-team items got "busy".
+// It runs only on keys of its own: a separate free Gemini project, a separate OpenRouter account, and a
+// Workers AI token on the second Cloudflare account that nothing else spends.
+const account = process.env.PBS_MFY_SOAK_CF_ACCOUNT_ID, token = process.env.PBS_MFY_SOAK_CF_TOKEN;
+const soakGemini = process.env.PBS_MFY_SOAK_GEMINI_API_KEY, soakOpenRouter = process.env.PBS_MFY_SOAK_OPENROUTER_API_KEY;
+if (['drain', 'judge-reviewed'].includes(mode) && (!account || !token || !soakGemini || !soakOpenRouter)) {
+  console.error('NAMED STOP MADE_FOR_YOU_SOAK_KEYS: PBS_MFY_SOAK_CF_ACCOUNT_ID, PBS_MFY_SOAK_CF_TOKEN, PBS_MFY_SOAK_GEMINI_API_KEY, PBS_MFY_SOAK_OPENROUTER_API_KEY (never chat\'s keys)');
   process.exit(3);
 }
 const { config: wrangler } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
 const bundle = await build({
   stdin: {
-    contents: `export { madeForYou } from './worker/src/madeForYou.mount.ts'; export { nights, madeForYouJudge, madeForYouRungs } from './worker/src/madeForYou.ts';
+    contents: `export { madeForYou, chatShare } from './worker/src/madeForYou.mount.ts'; export { nights, madeForYouJudge, madeForYouRungs } from './worker/src/madeForYou.ts';
       export { runLadder } from './worker/src/ladder.ts'; export { judgeSchema, judgeVerdict } from './worker/src/quality/judge.ts';
       export { realDeps } from './worker/src/index.ts';`,
     resolveDir: chat, loader: 'ts',
@@ -137,11 +141,11 @@ const AI = {
 if (mode === 'judge-reviewed') {
   // F6: the real free judge, on the made-for-you judge's own rungs, must flag both sessions the review transcribed.
   const reviewed = JSON.parse(readFileSync('worker/test/fixtures/reviewedSessions.json', 'utf8'));
-  const env0 = { ...wrangler.vars, PBS_GEMINI_API_KEY: process.env.PBS_GEMINI_API_KEY, OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY, AI, DB: db };
+  const env0 = { ...wrangler.vars, PBS_GEMINI_API_KEY: soakGemini, OPENROUTER_API_KEY: soakOpenRouter, AI, DB: db };
   let flagged = 0;
   for (const kind of ['psalm', 'imagination']) {
     const reasons = [];
-    const ladder = (messages, schema, valid) => m.runLadder(db, m.madeForYouRungs(m.realDeps.rungs(env0, Date.now()), 'judge'), messages, schema, 300, new Map(), valid);
+    const ladder = (messages, schema, valid) => m.runLadder(db, m.madeForYouRungs(m.realDeps.rungs(env0, Date.now()), 'judge', m.chatShare(db)), messages, schema, 300, new Map(), valid);
     const verdict = await m.madeForYouJudge(ladder, { schema: m.judgeSchema, verdict: m.judgeVerdict }, { kind, lang: 'en', teen: false, text: 'a long day' }, reviewed[kind], r => reasons.push(r));
     if (verdict === 'reject') flagged++;
     print(`${verdict === 'reject' ? 'FLAGGED' : verdict.toUpperCase()} reviewed ${kind}: ${reasons.join(' ') || '-'}`);
@@ -151,7 +155,7 @@ if (mode === 'judge-reviewed') {
   process.exit(flagged === 2 ? 0 : 1);
 }
 const secret = 'soak-runner';
-const env = { ...wrangler.vars, PBS_GEMINI_API_KEY: process.env.PBS_GEMINI_API_KEY, OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
+const env = { ...wrangler.vars, PBS_GEMINI_API_KEY: soakGemini, OPENROUTER_API_KEY: soakOpenRouter,
   AI, DB: db, PBS_MADE_FOR_YOU_RUNNER_SECRET: secret, CHAT_BURST: { limit: async () => ({ success: true }) } };
 let claiming = null;
 const deps = {
