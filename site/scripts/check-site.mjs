@@ -2,7 +2,9 @@
 // Safety check for the public website (risk brain: trademarks, claims, privacy promise, two doors).
 // Protects:
 // (1) never the registered phrase "Black Bible Stories" (USPTO 98839129) or "Speak Life";
-// (2) no outcome/health promises or manifesting words on any page;
+// (2) no outcome/health promises on any page; no teacher names (Neville, Abraham-Hicks) anywhere; manifesting
+//     and law-of-attraction words only on Mindset pages (the brand: never where the faith door sees), URLs
+//     aside (the sitemap and llms.txt list Mindset page addresses);
 // (3) mindset-practice words only on pages marked <meta name="pbs:door" content="mindset">,
 //     and a faith page never links a mindset page (or the reverse);
 // (4) the /privacy promise: no forms or inputs at all (sign-ups closed 18 Nov 2026), no email
@@ -20,14 +22,15 @@ const root = new URL("../public/", import.meta.url).pathname;
 const banned = [
   [/black\s+bible\s+stories/i, 'registered trademark "Black Bible Stories"'],
   [/speak\s+life/i, '"Speak Life" (live trademarks)'],
-  [/(?<!rel=")\bmanifest(ing|ation|s|ed)?\b/i, "manifesting words"],
-  [/law of attraction|neville|abraham[- ]hicks/i, "law-of-attraction / teacher names"],
+  [/neville|abraham[- ]hicks/i, "law-of-attraction teacher names"],
   [/\bcures?\b|insomnia|\bheals?\b|(?<!\bnot )guarantee/i, "outcome or health promise"],
   [/(?<![A-Z0-9._%+-])(?!info@peacebestillapp\.com\b)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i, "an email address"],
   [/<script(?![^>]*application\/ld\+json)[^>]*>/i, "a script other than JSON-LD"],
 
 ];
 const mindsetOnly = /law of assumption|living in the end|imagination nights/i;
+const manifesting = /\bmanifest(ing|ation|ations|s|ed)?\b|law of attraction/i;
+const withoutUrls = (t) => t.replace(/<link rel="manifest"[^>]*>/g, "").replace(/(?:href|src)="[^"]*"/g, "").replace(/https?:\/\/[^\s"<]+/g, "");
 
 export function check(files) {
   const findings = [];
@@ -50,6 +53,7 @@ export function check(files) {
     if (/<form\b/i.test(text)) findings.push(`${name}: a form (sign-ups are closed; the site collects nothing)`);
     if (/<input\b/i.test(text)) findings.push(`${name}: an input (the site collects nothing)`);
     const door = doorOf.get(name);
+    if (door !== "mindset" && manifesting.test(withoutUrls(text))) findings.push(`${name}: manifesting words on a ${door} page (${withoutUrls(text).match(manifesting)[0]})`);
     if (name.endsWith(".html") && door !== "mindset" && mindsetOnly.test(text)) {
       // Home pages describe both doors by name; only the practice words are kept to mindset pages.
       const hit = text.match(/law of assumption|living in the end/i);
@@ -81,17 +85,19 @@ if (process.argv.includes("--self-test")) {
   const bad = check([
     ["a.html", '<meta name="pbs:door" content="faith"><p>Black Bible Stories</p><a href="/b">x</a><form action="https://x.example">'],
     ["d.html", '<p>Available now!</p><a href="https://apps.apple.com/us/app/x/id1">get</a>'],
-    ["b.html", '<meta name="pbs:door" content="mindset"><p>law of assumption</p>'],
+    ["b.html", '<meta name="pbs:door" content="mindset"><p>law of assumption: how to manifest, and the law of attraction</p><link rel="manifest" href="/site.webmanifest">'],
+    ["g.html", '<meta name="pbs:door" content="faith"><p>Manifest your blessing.</p>'],
+    ["h.txt", "- [Gratitude](https://peacebestillapp.com/questions/how-to-manifest/)\n- the law of attraction"],
     ["c.html", "<p>the law of assumption</p><script src=\"https://t.example/x.js\"></script>"],
     ["e.html", "<p>We guarantee sleep. Write to someone@peacebestillapp.com.</p>"],
   ]);
-  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD", "e.html: outcome or health promise", "e.html: an email address"];
+  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD", "e.html: outcome or health promise", "e.html: an email address", "g.html: manifesting words on a faith page", "h.txt: manifesting words on a neutral page (law of attraction)"];
   const missing = want.filter((w) => !bad.some((f) => f.includes(w)));
   if (missing.length) { console.error(`check-site --self-test: did not catch: ${missing.join("; ")}`); process.exit(1); }
   if (bad.some((f) => f.startsWith("b.html"))) { console.error("check-site --self-test: flagged a clean mindset page"); process.exit(1); }
-  const clean = check([["f.html", "<p>Listening does not guarantee sleep. Write to info@peacebestillapp.com.</p>"]]);
+  const clean = check([["f.html", "<p>Listening does not guarantee sleep. Write to info@peacebestillapp.com.</p>"], ["i.xml", "<loc>https://peacebestillapp.com/questions/how-to-manifest/</loc>"], ["j.html", '<link rel="manifest" href="/site.webmanifest">']]);
   if (clean.length) { console.error(`check-site --self-test: flagged the legal contact or a negated guarantee: ${clean.join("; ")}`); process.exit(1); }
-  console.log("OUTPUT check-site --self-test: caught all 9 planted faults");
+  console.log("OUTPUT check-site --self-test: caught all 11 planted faults");
   process.exit(0);
 }
 

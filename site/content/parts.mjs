@@ -14,24 +14,39 @@ export function storeConfig() {
 // can never say more than the app (app/src/i18n; "never used to train AI", not "not kept": see
 // app/app/paid/index.tsx for the source on Google's paid-tier logging).
 const appStrings = (lang) => JSON.parse(readFileSync(new URL(`../../app/src/i18n/${lang}.json`, import.meta.url), "utf8"));
-export function privacyClaim(lang) {
+// The chat and price numbers every page says, read from the app's own settings (app/src/gates for the
+// daily message counts, app/src/config/products.json for the prices), so no page types a number.
+export function facts() {
+  const gates = readFileSync(new URL("../../app/src/gates/index.ts", import.meta.url), "utf8");
+  const num = (name) => Number(gates.match(new RegExp(`${name} = (\\d+);`))[1]);
+  const products = JSON.parse(readFileSync(new URL("../../app/src/config/products.json", import.meta.url), "utf8")).products;
+  return { free: num("FREE_CHAT_MESSAGES"), paid: num("PAID_CHAT_MESSAGES"), monthly: `$${products.monthly.usPrice}`, yearly: `$${products.yearly.usPrice}` };
+}
+// kind "bible": the God's Word claim ("unlimited Bible chat"); kind "any": the same claim with no faith
+// words (the app's Mindset headline), for Mindset pages and the two-door home pages.
+export function privacyClaim(lang, kind = "bible") {
   if (lang !== "en" && lang !== "es") return null; // no approved Korean wording yet
   const s = appStrings(lang);
-  const count = readFileSync(new URL("../../app/src/gates/index.ts", import.meta.url), "utf8").match(/PAID_CHAT_MESSAGES = (\d+);/)[1];
   // Her yes 21 Nov 2026: on the site the claim always says it is the paid plan's ("With a paid plan: ...").
-  const head = `${PLAN_PREFIX[lang]}: ${s["paid.chatHeadline"].replace(/^./, (ch) => ch.toLowerCase())}`;
-  return { head, promise: s["paid.noTraining"], small: s["paid.fairUse"].replace("%{count}", count) };
+  const headline = s[kind === "any" ? "paid.chatHeadlineMindset" : "paid.chatHeadline"];
+  const head = `${PLAN_PREFIX[lang]}: ${headline.replace(/^./, (ch) => ch.toLowerCase())}`;
+  return { head, promise: s["paid.noTraining"], small: s["paid.fairUse"].replace("%{count}", facts().paid) };
 }
 const PLAN_PREFIX = { en: "With a paid plan", es: "Con un plan de pago" };
-/** The claim as the page lead (home hero, the Bible chat pages). */
-export function claimHtml(lang) {
-  const c = privacyClaim(lang);
+/** Which claim a page carries: Mindset pages and the two-door home pages say it with no faith words. */
+const BOTH_DOORS = new Set(["index.html", "es/index.html"]);
+export function claimKind(page = "", door = "neutral") {
+  return door === "mindset" || BOTH_DOORS.has(String(page).replace(/^\/+/, "")) ? "any" : "bible";
+}
+/** The claim as the page lead (home hero, the Bible chat pages, the Mindset hub). */
+export function claimHtml(lang, kind = "bible") {
+  const c = privacyClaim(lang, kind);
   return c ? `<p class="claim">${claimBody(c)}</p>` : "";
 }
 const claimBody = (c) => `<b>${c.head}.</b> ${c.promise} <small>${c.small}</small>`;
 /** The same claim in the store CTA box, beside the buttons. */
-export function ctaClaimHtml(lang) {
-  const c = privacyClaim(lang);
+export function ctaClaimHtml(lang, kind = "bible") {
+  const c = privacyClaim(lang, kind);
   return c ? `\n    <p class="cta-privacy">${claimBody(c)}</p>` : "";
 }
 // Which page sent a buyer: the page's path as a campaign name on each store link (Apple App Analytics
@@ -85,22 +100,23 @@ export const langOf = (html) => {
   return LANGS.includes(l) ? l : "en";
 };
 /** The App Store link for a page (its path under site/public): the page's custom product page when
- *  store.json custom_pages lists it (an exact path first, then the longest folder prefix), otherwise the
- *  default product page. The ct= tag is added on top by tagged(). */
-export function appStoreHref(store, page = "") {
+ *  store.json custom_pages lists it (an exact path first, then the page's door, then the longest folder
+ *  prefix), otherwise the default product page. The ct= tag is added on top by tagged(). */
+export function appStoreHref(store, page = "", door = "neutral") {
   if (!store.app_store_url) return null;
   const path = String(page).replace(/^\/+/, "").replace(/(?:^|\/)index\.html$/, (m) => (m.startsWith("/") ? "/" : ""));
   const pages = store.custom_pages || [];
   const exact = pages.find((c) => [...(c.paths || []), ...(c.waiting_on_pr85 || [])].includes(path));
-  const prefix = exact ? null : pages.flatMap((c) => (c.prefixes || []).map((pre) => ({ pre, c }))).filter((x) => path.startsWith(x.pre)).sort((x, y) => y.pre.length - x.pre.length)[0]?.c;
-  const hit = exact || prefix;
+  const byDoor = exact ? null : pages.find((c) => (c.doors || []).includes(door));
+  const prefix = exact || byDoor ? null : pages.flatMap((c) => (c.prefixes || []).map((pre) => ({ pre, c }))).filter((x) => path.startsWith(x.pre)).sort((x, y) => y.pre.length - x.pre.length)[0]?.c;
+  const hit = exact || byDoor || prefix;
   return hit ? `${store.app_store_url}${store.app_store_url.includes("?") ? "&" : "?"}ppid=${hit.ppid}` : store.app_store_url;
 }
 
-export function storeCtaHtml(lang, store = storeConfig(), source = "", page = "") {
+export function storeCtaHtml(lang, store = storeConfig(), source = "", page = "", door = "neutral") {
   const t = CTA[LANGS.includes(lang) ? lang : "en"];
   const ios = store.app_store_url
-    ? `<a class="store-badge" href="${tagged(appStoreHref(store, page), store, "ios", source)}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
+    ? `<a class="store-badge" href="${tagged(appStoreHref(store, page, door), store, "ios", source)}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
     : `<span class="store-soon">${t.iosSoon}</span>`;
   const play = store.play_url
     ? `<a class="store-badge" href="${tagged(store.play_url, store, "play", source)}"><img src="/brand/stores/google-play-${lang === "es" ? "es" : "en"}.png" alt="${t.playAlt}" width="135" height="52"></a>`
@@ -109,7 +125,7 @@ export function storeCtaHtml(lang, store = storeConfig(), source = "", page = ""
   return `<!-- cta:start --><section class="wrap" id="get-the-app" aria-labelledby="cta-h">
   <div class="card cta-card">
     <h2 id="cta-h">${h}</h2>
-    <p>${t.p}</p>${ctaClaimHtml(lang)}
+    <p>${t.p}</p>${ctaClaimHtml(lang, claimKind(page, door))}
     <ul class="stores">
       <li>${ios}</li>
       <li>${play}</li>
@@ -156,7 +172,8 @@ export function updatedText(updated, lang) {
 }
 
 // updated: the page's own updated date (default: the static pages' 18 Nov 2026).
-// door "mindset": the two faith landing links are left out (the doors never link each other).
+// door "mindset": the two faith landing links are left out; door "faith": the Mindset hub link is left
+// out (the doors never link each other). Every other page links the Mindset hub.
 export function footerHtml(lang, updated = "18 Nov 2026", door = "neutral") {
   // Korean pages link the English legal pages, marked as English: no machine-translated legal text
   // (owner ruling 6 Nov 2026, the KeepMyProof precedent).
@@ -181,7 +198,8 @@ export function footerHtml(lang, updated = "18 Nov 2026", door = "neutral") {
     <span>Peace Be Still · una app de Spry Labs${upd}</span>
     <nav aria-label="Pie de página">
       <a href="/es/preguntas/">Preguntas</a>
-      <a href="/about">Acerca de</a>
+${door === "faith" ? "" : `      <a href="/es/mentalidad/">Mentalidad</a>
+`}      <a href="/about">Acerca de</a>
       <a href="/es/privacidad">Privacidad</a>
       <a href="/es/terminos">Términos</a>
       <a href="/es/aviso">Aviso</a>
@@ -196,7 +214,8 @@ ${door === "mindset" ? "" : `      <a href="/ko/" hreflang="ko" lang="ko">한국
     <span>Peace Be Still · a Spry Labs app${upd}</span>
     <nav aria-label="Footer">
       <a href="/questions/">Questions</a>
-      <a href="/about">About</a>
+${door === "faith" ? "" : `      <a href="/mindset/">Mindset</a>
+`}      <a href="/about">About</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="/disclaimer">Disclaimer</a>
