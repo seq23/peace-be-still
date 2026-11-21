@@ -23,6 +23,8 @@ umask 077
   echo "IP_HASH_SECRET=$(openssl rand -hex 32)"
   echo "PBS_GEMINI_API_KEY=$PBS_GEMINI_API_KEY"
   [ -n "${OPENROUTER_API_KEY:-}" ] && echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY"
+  # A red team the owner approved past the free answer rungs may raise the Workers AI answer cap for that run.
+  [ -n "${WORKERS_AI_ANSWER_CALLS_DAILY:-}" ] && echo "WORKERS_AI_ANSWER_CALLS_DAILY=$WORKERS_AI_ANSWER_CALLS_DAILY"
 } > worker/.dev.vars
 # CI=1 + no stdin: wrangler never waits on an "OK to proceed?" prompt.
 export CI=1

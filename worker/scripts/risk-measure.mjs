@@ -16,7 +16,8 @@ const account = process.env.CF2_ACCOUNT_ID ?? process.env.CLOUDFLARE_ACCOUNT_ID;
 const token = process.env.CF2_WORKERS_AI_TOKEN ?? process.env.CLOUDFLARE_API_TOKEN;
 if (!account || !token) { console.error('NAMED STOP WORKERS_AI_TOKEN_MISSING: set CF2_WORKERS_AI_TOKEN and CF2_ACCOUNT_ID'); process.exit(3); }
 // Under vault:run without the CF2 pair, CLOUDFLARE_API_TOKEN is the main account's: refuse it too.
-if (token === process.env.T2R_CLOUDFLARE_WORKERS_AI_TOKEN || (process.env.T2R_CLOUDFLARE_WORKERS_AI_TOKEN && !process.env.CF2_WORKERS_AI_TOKEN)) { console.error('NAMED STOP MAIN_ACCOUNT_REFUSED: risk-measure runs only on the second account (CF2_WORKERS_AI_TOKEN, CF2_ACCOUNT_ID)'); process.exit(3); }
+// REDTEAM_ALLOW_MAIN=1 is the owner's explicit yes for one run on the main account (set only in a temporary workflow).
+if (process.env.REDTEAM_ALLOW_MAIN !== '1' && (token === process.env.T2R_CLOUDFLARE_WORKERS_AI_TOKEN || (process.env.T2R_CLOUDFLARE_WORKERS_AI_TOKEN && !process.env.CF2_WORKERS_AI_TOKEN))) { console.error('NAMED STOP MAIN_ACCOUNT_REFUSED: risk-measure runs only on the second account (CF2_WORKERS_AI_TOKEN, CF2_ACCOUNT_ID)'); process.exit(3); }
 const wrangler = readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8');
 const model = /"WORKERS_AI_RISK_MODEL": "([^"]+)"/.exec(wrangler)[1];
 const confirmModel = /"WORKERS_AI_RISK_CONFIRM_MODEL": "([^"]+)"/.exec(wrangler)[1];
