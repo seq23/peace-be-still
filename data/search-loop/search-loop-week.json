@@ -2,13 +2,13 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W47",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-20T18:45:01.918Z",
+  "generated_at": "2026-11-21T17:44:51.103Z",
   "state": "slow",
-  "published": 7,
+  "published": 10,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
   "ai_visitors": 0,
-  "ai_bot_hits": 129,
+  "ai_bot_hits": 137,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
@@ -272,17 +272,48 @@
       "strengthen": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
       "matched_by": "high token overlap (0.80 >= 0.6)",
       "at": "2026-11-20"
+    },
+    {
+      "query": "what is the bible verse for prayer before sleeping",
+      "strengthen": "https://peacebestillapp.com/questions/what-is-the-bible-verse-for-sleep-prayer/",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-21"
+    },
+    {
+      "query": "bible verses for sleep",
+      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
+      "matched_by": "same 3 intent words plus modifiers",
+      "at": "2026-11-21"
+    },
+    {
+      "query": "psalm 91 for sleep and protection",
+      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-21"
+    },
+    {
+      "query": "psalm 91 for sleeping 8 hours",
+      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-21"
+    },
+    {
+      "query": "does the bible app cost money",
+      "strengthen": "https://peacebestillapp.com/questions/does-the-holy-bible-app-cost-money/",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-21"
     }
   ],
   "cap": {
     "max_live_pages": 10,
-    "live": 7,
-    "room": 3,
+    "live": 10,
+    "room": 0,
     "why": "held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data"
   },
   "notes": [
     "site config lowers the mode to slow",
-    "BUILD distinct gate: 7 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD distinct gate: 5 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD gate notes (not blocking): 2 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json",
     "CHECK runs weekly in mode=slow; last ran 2026-11-18"
   ],
   "lanes": {
@@ -297,7 +328,7 @@
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
     },
     "striking": {
-      "pages": 7,
+      "pages": 10,
       "measured": 0,
       "top3": 0,
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
@@ -311,5 +342,5 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44795679770"
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44931707267"
 }
