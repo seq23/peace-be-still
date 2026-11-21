@@ -43,6 +43,8 @@ TEMPLATE = {
         "Puedes dejar la escena aquí. Siente la cama debajo de ti y date tiempo para descansar.",
     ),
 }
+# A seeded Spanish Psalm session took 7m 38s through Kokoro, mastering and QA.
+# With the Worker's four-minute claim deadline, 20 minutes leaves over 50% headroom.
 BOX_MINUTES = 20
 HELD_CODES = {
     "MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA", "MADE_FOR_YOU_NO_FREE_MODEL",
