@@ -54,7 +54,8 @@ checks, shelved, status, voice).
   `file` (Drive SHA-256 = manifest, then R2 size + md5 = Drive; the Mac never holds the file).
   `manifest.jsonl` at the bucket root is what the app reads (public fields + story titles) and the ledger
   that makes runs idempotent and resumable; the app's bundled copy is the offline fallback. The same step is
-  the backfill. Stops: `R2_FREE_STORAGE` (bucket + this batch over 9.5 GB), `R2_HASH_MISMATCH`,
+  the backfill. Stops: `R2_FREE_STORAGE` (every bucket on the account, read from Cloudflare's R2 analytics with
+  `CF2_WORKERS_AI_TOKEN`, + this batch over 9.5 GB), `R2_USAGE_UNREAD` (that total unreadable: nothing uploads), `R2_HASH_MISMATCH`,
   `R2_UNREACHABLE`, `R2_KEY_MISSING`; a Drive copy that is missing or not the manifest's file is HELD.
   Output `OUTPUT <n> files published to R2` and `r2: X of Y shelved files public`.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
