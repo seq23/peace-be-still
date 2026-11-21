@@ -10,9 +10,9 @@ import { spawnSync } from 'node:child_process';
 
 const host = names => names.map(name => `exports[${JSON.stringify(name)}] = ${JSON.stringify(name)};`).join('\n');
 const MOCKS = {
-  'react-native': `${host(['ActivityIndicator', 'Image', 'Pressable', 'ScrollView', 'Switch', 'Text', 'TextInput', 'View'])}
+  'react-native': `${host(['ActivityIndicator', 'Image', 'Modal', 'Pressable', 'ScrollView', 'Switch', 'Text', 'TextInput', 'View'])}
     exports.StyleSheet = { create: x => x };
-    exports.AppState = { addEventListener: () => ({ remove() {} }) };
+    exports.AppState = { currentState: 'active', addEventListener: () => ({ remove() {} }) };
     exports.Linking = { openURL: async url => globalThis.__pbsOpenURL?.(url) };
     exports.Platform = { get OS() { return globalThis.__pbsPlatform ?? 'web'; }, select: o => o.web ?? o.default };
     exports.useColorScheme = () => globalThis.__pbsScheme || 'light';`,
@@ -51,6 +51,7 @@ const MOCKS = {
     const r = () => globalThis.__pbsRouter;
     exports.useRouter = () => r();
     exports.useLocalSearchParams = () => globalThis.__pbsParams || {};
+    exports.useIsFocused = () => true;
     exports.useGlobalSearchParams = () => globalThis.__pbsParams || {};
     exports.useSegments = () => globalThis.__pbsSegments || [];
     exports.Redirect = props => React.createElement('Redirect', props);
@@ -59,7 +60,21 @@ const MOCKS = {
   'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
   'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`,
   '@react-native-async-storage/async-storage': `module.exports = { __esModule: true, default: globalThis.__pbsStorage };`,
-  'expo-constants': `exports.__esModule = true; exports.default = { get expoConfig() { return globalThis.__pbsExpoConfig; } };`,
+  // The audio host from app.config.ts, plus whatever a test sets (the RevenueCat key).
+  'expo-constants': `exports.__esModule = true; exports.default = { get expoConfig() {
+    return { ...globalThis.__pbsExpoConfig, extra: { audioBaseUrl: require('./app.config').default.extra.audioBaseUrl, ...globalThis.__pbsExpoConfig?.extra } };
+  } };`,
+  'expo-audio': '',
+  'expo-brightness': '',
+  // Lane 4S: the player hook reads the test's fake player.
+  'player-hook': `const React = require('react');
+    exports.tracks = require('./src/player/library.json');
+    exports.useDimmer = () => ({ dimmed: false, touch() {} });
+    exports.usePlayer = () => {
+      const player = globalThis.__pbsPlayer;
+      const state = React.useSyncExternalStore(player.subscribe, player.getState);
+      return { player, state, stop: globalThis.__pbsAudioStop || null };
+    };`,
   'react-native-purchases': `exports.__esModule = true; exports.default = globalThis.__pbsPurchases;
     exports.PURCHASES_ERROR_CODE = { PAYMENT_PENDING_ERROR: '20', PURCHASE_CANCELLED_ERROR: '1' };`,
 };
@@ -69,12 +84,13 @@ await build({
   entryPoints: ['test/screens.render.tsx'], outfile: join(dir, 'screens.cjs'), bundle: true, platform: 'node', format: 'cjs',
   define: { __DEV__: 'false' }, packages: 'external', external: ['react', 'react-test-renderer', 'i18n-js'], jsx: 'automatic', logLevel: 'warning',
   plugins: [{ name: 'native-mocks', setup(b) {
+    b.onResolve({ filter: /\/player\/usePlayer$/ }, () => ({ path: 'player-hook', namespace: 'mock' }));
     b.onResolve({ filter: /\.db$/ }, args => ({ path: args.path.split('/').at(-1), namespace: 'bible-asset' }));
     b.onLoad({ filter: /.*/, namespace: 'bible-asset' }, args => ({ contents: `module.exports = ${JSON.stringify(args.path)}` }));
-    b.onResolve({ filter: /^(expo-asset|expo-file-system|expo-sqlite|expo-constants|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-font|expo-localization|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
+    b.onResolve({ filter: /^(expo-audio|expo-brightness|expo-asset|expo-file-system|expo-sqlite|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
     b.onLoad({ filter: /.*/, namespace: 'mock' }, args => ({
       contents: MOCKS[args.path] ?? `module.exports = new Proxy({}, { get: (_, key) => key === '__esModule' ? false : String(key) });`,
-      loader: 'js',
+      loader: 'js', resolveDir: process.cwd(),
     }));
   } }],
 });

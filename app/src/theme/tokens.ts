@@ -12,6 +12,8 @@ export type Palette = (typeof colors)['light' | 'dark'];
 
 export const fonts = {
   serif: 'LibreCaslonText_400Regular',
+  // Scripture's supplied words (the KJV's [brackets]); its own face, because a phone never slants a single-face font.
+  serifItalic: 'LibreCaslonText_400Regular_Italic',
   body: 'Figtree_400Regular',
   strong: 'Figtree_600SemiBold',
   mono: 'SplineSansMono_500Medium',

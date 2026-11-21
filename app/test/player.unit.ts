@@ -1,10 +1,10 @@
 import { strict as assert } from 'node:assert';
 import { readFileSync } from 'node:fs';
 import { beforeEach, afterEach, mock, test } from 'node:test';
-import { buildLibrary, MANIFEST } from '../src/player/build-library';
+import { buildLibrary, keyScripture, MANIFEST, REPO } from '../src/player/build-library';
 import { createDimmer } from '../src/player/dimmer';
 import { createDownloads, type DownloadFiles } from '../src/player/downloads';
-import { audioBaseUrl, readManifest, trackTitle, type Track } from '../src/player/library';
+import { audioBaseUrl, hasCallAndResponse, readManifest, trackTitle, type Track } from '../src/player/library';
 import { createPlayer, FADE_MS, LOAD_WAIT_MS, type AudioOutput, type AudioStatus, type Store } from '../src/player/player';
 
 const BASE = 'https://audio.test/';
@@ -33,8 +33,9 @@ function fakeAudio({ autoLoad = true } = {}) {
     for (const l of listeners) l({ playing: startedAt !== null, isLoaded: ready, didJustFinish });
   });
   const audio = {
-    uri: null as string | null, volume: 1, seeks: [] as number[], titles: [] as string[], disposed: false,
-    load(uri: string, title: string) {
+    uri: null as string | null, volume: 1, seeks: [] as number[], seekPermissions: [] as boolean[], titles: [] as string[], disposed: false,
+    load(uri: string, title: string, allowSeek: boolean) {
+      audio.seekPermissions.push(allowSeek);
       audio.uri = uri; audio.titles.push(title); base = 0; startedAt = null; ready = false;
       if (autoLoad) queueMicrotask(() => audio.loaded());
     },
@@ -99,8 +100,34 @@ test('the real manifest yields one track for every passed row, with readable tit
       assert.ok(title, `${t.file} has a title`);
       assert.doesNotMatch(title, /\/|\.json|\b[1-3]?[A-Z]{3}\b/, `${t.file} title "${title}" is readable`);
     }
-    assert.deepEqual(Object.keys(t).sort(), ['file', 'kind', 'lang', 'ref', 'seconds', 'sha256', 'titles', 'voice']);
+    const fields = ['file', 'kind', 'lang', 'ref', 'seconds', 'sha256', 'titles', 'voice'];
+    if (hasCallAndResponse(t)) {
+      fields.push('responsePauses', 'scriptureRef');
+      const story = JSON.parse(readFileSync(`${REPO}/${t.ref}`, 'utf8'));
+      // The key verse is the one the call and response answers: the last Scripture before it.
+      const call = story.blocks.findIndex((block: { type: string }) => block.type === 'call_response');
+      const before = story.blocks.slice(0, call).filter((block: { type: string }) => block.type === 'scripture');
+      assert.ok(call > 0 && before.length, `${t.ref} has Scripture before its call and response`);
+      assert.equal(t.scriptureRef, before.at(-1).ref);
+    }
+    if (t.kind === 'psalm-night') {
+      // A Psalm Night shows its psalm under the title: the script's own `main` reference.
+      fields.push('scriptureRef');
+      const script = JSON.parse(readFileSync(`${REPO}/${t.ref.split('#')[0]}`, 'utf8'));
+      assert.equal(t.scriptureRef, script.main[0]);
+    }
+    assert.deepEqual(Object.keys(t).sort(), fields.sort(), `${t.kind} ${t.ref}`);
   }
+});
+
+test('a story shows the verse its call and response answers, else its first Scripture, else none', () => {
+  const s = (ref: string) => ({ type: 'scripture', ref });
+  const call = { type: 'call_response' };
+  assert.equal(keyScripture([s('MAR 4:37'), { type: 'retelling' }, s('MAR 4:39'), call, s('MAR 4:40')]), 'MAR 4:39');
+  assert.equal(keyScripture([s('RUT 1:8'), s('RUT 1:16')]), 'RUT 1:8');
+  assert.equal(keyScripture([call, s('GEN 1:1')]), 'GEN 1:1');
+  assert.equal(keyScripture([{ type: 'retelling' }]), undefined);
+  assert.equal(keyScripture(undefined), undefined);
 });
 
 test('a bad passed row is held and the rest ship; failed rows never ship', () => {
@@ -119,7 +146,7 @@ test('a manifest with nothing playable stops with AUDIO_LIBRARY_EMPTY', () => {
 test('a story gets its own title; a story with no readable title is held', () => {
   const row = { file: 'stories/hush-harbor/en/x.m4a', kind: 'stories', lang: 'en', ref: 'content/stories/hush-harbor/x.json', seconds: 200, sha256: 'c'.repeat(64), voice: 'v', status: 'passed' };
   const jsonl = JSON.stringify(row) + '\n' + JSON.stringify({ ...row, file: 'stories/hush-harbor/en/y.m4a' });
-  const { tracks, skipped } = readManifest(jsonl, (r) => (r.file.endsWith('x.m4a') ? { en: 'Peace, Be Still' } : null));
+  const { tracks, skipped } = readManifest(jsonl, (r) => (r.file.endsWith('x.m4a') ? { titles: { en: 'Peace, Be Still' } } : null));
   assert.equal(trackTitle(tracks[0], 'es'), 'Peace, Be Still');
   assert.equal(skipped.length, 1);
 });
@@ -373,4 +400,33 @@ test('leaving the screen always restores brightness, and nothing dims when not p
   await dimmer.settled();
   assert.equal(dimmer.dimmed, false);
   assert.equal(brightness.level, 0.6);
+});
+
+test('all passed Hush Harbor audio carries both response pauses and they survive a cold resume', async () => {
+  const { tracks } = buildLibrary();
+  const stories = tracks.filter(hasCallAndResponse);
+  assert.ok(stories.length > 0);
+  for (const story of stories) assert.ok(story.responsePauses, story.file);
+  const story = stories[0];
+  const [first] = story.responsePauses!;
+  const { player, audio, store } = setup();
+  store.data.set(`pbs.player.position:${story.file}`, JSON.stringify({ positionSeconds: first + 2 }));
+  try {
+    await player.play(story, FREE);
+    assert.deepEqual(audio.seekPermissions, [false]);
+    assert.deepEqual(audio.seeks, [first]);
+    assert.equal(player.getState().response, 0);
+    await player.play(tracks.find(track => track.kind === 'psalms')!, FREE);
+    assert.deepEqual(audio.seekPermissions, [false, true]);
+    assert.equal(player.getState().response, null);
+  } finally { await player.dispose(); }
+});
+
+test('a passed Imagination Nights row uses the real session script title', () => {
+  const ref = 'content/imagination-nights/en/in-01-living-in-the-end.json';
+  const script = JSON.parse(readFileSync(`${REPO}/${ref}`, 'utf8'));
+  const row = { ...track(), file: 'imagination-nights/en/in-01.m4a', kind: script.kind, ref, status: 'passed' };
+  const { tracks, skipped } = buildLibrary(JSON.stringify(row));
+  assert.deepEqual(skipped, []);
+  assert.equal(trackTitle(tracks[0], 'en'), script.title);
 });

@@ -11,6 +11,8 @@ type State = {
   store: PurchaseStore | null;
   preview: typeof previewStore | null;
   paid: boolean;
+  /** False until the store has answered once (or there is no store to ask): screens that lock wait for it. */
+  known: boolean;
   status: Status;
   buy: (pkg: PurchasesPackage) => Promise<void>;
   restore: () => Promise<void>;
@@ -40,6 +42,7 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
   const preview = Platform.OS === 'web' && process.env.EXPO_PUBLIC_PBS_PREVIEW === '1' ? previewStore : null;
   const [store, setStore] = useState<PurchaseStore | null>(null);
   const [paid, setPaid] = useState(() => !!preview && previewPaid());
+  const [answered, setAnswered] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
   const inFlight = useRef(false);
   const pending = useRef(false);
@@ -49,11 +52,12 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
     let live = true;
     let cleanup = () => {};
     void connectStore().then(async sdk => {
-      if (!sdk || !live) return;
+      if (!sdk || !live) { if (live) setAnswered(true); return; }
       const update = (info: CustomerInfo) => {
         if (!live) return;
         const active = hasPaid(info);
         setPaid(active);
+        setAnswered(true);
         if (active) {
           pending.current = false;
           setStatus(current => current === 'pending' ? 'idle' : current);
@@ -62,7 +66,10 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
       const refresh = () => {
         if (!inFlight.current) void sdk.getCustomerInfo().then(info => {
           if (!inFlight.current) update(info);
-        }).catch(() => {});
+        }).catch(() => {
+          // No answer and nothing cached (a first launch offline): go on as the free lane rather than wait forever.
+          if (live) setAnswered(true);
+        });
       };
       const id = await installId();
       if (id && await sdk.getAppUserID() !== id) await sdk.logIn(id);
@@ -77,7 +84,7 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
       };
       setStore(sdk);
       refresh();
-    }).catch(() => { if (live) setStatus('failed'); });
+    }).catch(() => { if (live) { setStatus('failed'); setAnswered(true); } });
     return () => { live = false; cleanup(); };
   }, [age, preview]);
 
@@ -115,7 +122,7 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
   }
 
   const allowed = !!age && age !== 'child';
-  return <Context.Provider value={{ store: allowed ? store : null, preview: allowed ? preview : null, paid: allowed && paid, status, buy: transact, restore: transact }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ store: allowed ? store : null, preview: allowed ? preview : null, paid: allowed && paid, known: !allowed || !!preview || answered, status, buy: transact, restore: transact }}>{children}</Context.Provider>;
 }
 
 export function usePurchases() {
