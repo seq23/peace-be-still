@@ -28,7 +28,8 @@ export async function cleanup(db: D1Database, now: number): Promise<Record<strin
     db.prepare('DELETE FROM chat_block WHERE until IS NOT NULL AND until < ?').bind(now),
     db.prepare('DELETE FROM chat_crisis WHERE flagged_at < ?').bind(now - 2 * 86_400_000),
     db.prepare('DELETE FROM chat_paid_spend WHERE paid_until < ? OR month < ?').bind(now - 30 * DAY, new Date(now - 40 * DAY).toISOString().slice(0, 7)),
+    db.prepare('DELETE FROM chat_short_day WHERE day < ?').bind(ended),
   ]);
-  const [device, ip, token, entitlement, memory, installShapes, shapes, reports, abuse, blocks, crisis, spend] = results.map(r => r.meta.changes ?? 0);
-  return { device, ip, token, entitlement, memory, shapes: installShapes + shapes, reports, abuse, blocks, crisis, spend };
+  const [device, ip, token, entitlement, memory, installShapes, shapes, reports, abuse, blocks, crisis, spend, short] = results.map(r => r.meta.changes ?? 0);
+  return { device, ip, token, entitlement, memory, shapes: installShapes + shapes, reports, abuse, blocks, crisis, spend, short };
 }

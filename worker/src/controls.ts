@@ -91,6 +91,23 @@ export async function capAlert(db: D1Database, now: number, level: 80 | 100, mic
   if (fresh) logCode(level === 100 ? 'NAMED STOP CHAT_PAID_MONTHLY_CAP' : 'CHAT_PAID_CAP_80', { spentUsd: Math.round(micro / 1e4) / 100, capUsd, month: monthOf(now) });
   return fresh;
 }
+/**
+ * The OpenRouter key's own spend limit (the hourly cron): its credit can run out long before the app's
+ * monthly cap. Below $3 left, or below 10% of the key's limit, NAMED STOP OPENROUTER_KEY_LOW, once a day,
+ * through the same path as the cap alerts (a code in the log, its once-flag in chat_counts).
+ */
+export async function openRouterHeadroom(db: D1Database, now: number, apiKey: string | undefined, fetcher: typeof fetch = fetch): Promise<'ok' | 'low' | 'unread' | 'no_key'> {
+  if (!apiKey) return 'no_key';
+  const res = await fetcher('https://openrouter.ai/api/v1/key', { headers: { authorization: `Bearer ${apiKey}` }, signal: AbortSignal.timeout(10_000) }).catch(() => null);
+  if (!res?.ok) { logCode('OPENROUTER_KEY_UNREAD', { status: res?.status ?? 0 }); return 'unread'; }
+  const data = ((await res.json().catch(() => null)) as { data?: { limit?: number | null; limit_remaining?: number | null } } | null)?.data;
+  const limit = data?.limit, left = data?.limit_remaining;
+  if (typeof limit !== 'number' || typeof left !== 'number') return 'ok'; // no limit set on the key
+  if (left >= 3 && left >= 0.1 * limit) return 'ok';
+  const fresh = (await db.prepare('INSERT INTO chat_counts (day, metric, n) VALUES (?, ?, 1) ON CONFLICT(day, metric) DO NOTHING').bind(centralDay(now), 'openrouter_key_low').run()).meta.changes === 1;
+  if (fresh) logCode('NAMED STOP OPENROUTER_KEY_LOW', { leftUsd: Math.round(left * 100) / 100, limitUsd: limit });
+  return 'low';
+}
 /** The safety model's monthly spend (counted as billed, though the daily free neurons cover most):
  *  neurons x $0.011 per 1,000. Alerts at 80% (CHAT_SAFETY_CAP_80) and at the cap (NAMED STOP CHAT_SAFETY_MONTHLY_CAP). */
 export function safetyMicro(model: string): number {

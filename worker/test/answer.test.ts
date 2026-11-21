@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
-import { checkAnswer, type GateContext } from '../src/quality/answer';
+import { checkAnswer, DROPPED_NOTE, type GateContext } from '../src/quality/answer';
 import { banned } from '../src/shared';
 import { JUDGE_CHECKS, judgeMessages, judgeVerdict } from '../src/quality/judge';
 import { judgePrompt, prompts } from '../src/prompts';
@@ -65,21 +65,21 @@ describe('verses come only from the store', () => {
     if (r.ok) {
       expect(r.text).not.toMatch(/22:5|carry you home/);
       expect(r.text).toMatch(/God has not left you alone tonight\./);
-      expect(r.text).toMatch(/\(I left out a verse reference that is not in the Bible\.\)$/);
+      expect(r.text.endsWith(DROPPED_NOTE.en)).toBe(true);
       expect(r.scripture).toEqual([]);
     }
     const es1 = await checkAnswer({ text: 'Dios no te ha dejado sola esta noche. Juan 22:5 dice que Él te llevará. Puedes traerle cada preocupación que tengas. Señor, abrázala esta noche.', references: [] }, es);
-    expect(es1.ok && es1.text).toMatch(/\(Quité una cita que no está en la Biblia\.\)$/);
+    expect(es1.ok && es1.text.endsWith(DROPPED_NOTE.es)).toBe(true);
   });
   it('a book that is not in the Bible (Hezekiah 3:5, 1 Enoch 1:9, Jasher 2:1) is made up too, EN and ES; a time like 3:30 is not', async () => {
     for (const fake of ['Hezekiah 3:5', '1 Enoch 1:9', 'Jasher 2:1']) {
       const r = await checkAnswer({ text: `God has not left you alone tonight. As ${fake} says, He will carry you home. You can bring Him every worry you have. Lord, hold us close tonight.`, references: [] }, en);
       expect(r.ok, fake).toBe(true);
-      if (r.ok) { expect(r.text, fake).not.toContain(fake); expect(r.text).toMatch(/\(I left out a verse reference that is not in the Bible\.\)$/); }
+      if (r.ok) { expect(r.text, fake).not.toContain(fake); expect(r.text.endsWith(DROPPED_NOTE.en)).toBe(true); }
     }
     const es1 = await checkAnswer({ text: 'Dios no te ha dejado sola esta noche. Ezequías 3:5 dice que Él te llevará. Puedes traerle cada preocupación que tengas. Señor, abrázala esta noche.', references: [] }, es);
     expect(es1.ok && es1.text).not.toMatch(/Ezequías/);
-    expect(es1.ok && es1.text).toMatch(/\(Quité una cita que no está en la Biblia\.\)$/);
+    expect(es1.ok && es1.text.endsWith(DROPPED_NOTE.es)).toBe(true);
     const time = await checkAnswer({ text: 'Your shift ends at 3:30 and you can rest then. God is near you through the whole day. Lord, give us rest.', references: [] }, en);
     expect(time.ok && time.text).toMatch(/at 3:30/);
   });

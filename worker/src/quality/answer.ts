@@ -136,7 +136,7 @@ function refsInText(text: string): Array<{ raw: string; book: string | null; nam
   return found;
 }
 
-const DROPPED_NOTE = { en: '(I left out a verse reference that is not in the Bible.)', es: '(Quité una cita que no está en la Biblia.)' } as const;
+export const DROPPED_NOTE = { en: '(I left out a verse reference that is not in the Bible.)', es: '(Quité una cita que no está en la Biblia.)' } as const;
 const words = (text: string) => fold(text).split(' ').filter(Boolean);
 
 export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<GateResult> {

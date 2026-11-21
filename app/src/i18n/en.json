@@ -159,6 +159,7 @@
   "paid.keepPrice": "Your price never rises while you stay.",
   "paid.chatHeadline": "Unlimited Bible chat",
   "paid.chatHeadlineMindset": "Unlimited chat",
+  "paid.fairUseSmall": "Very heavy use across a month moves to free chat sooner.",
   "paid.fairUse": "%{count} private messages a day, then free chat (not private).",
   "paid.restore": "Restore Purchases",
   "paid.terms": "Terms",

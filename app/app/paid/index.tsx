@@ -90,6 +90,7 @@ export default function PaidScreen() {
         {/* The headline and, right under it, what "unlimited" means (both from PAID_CHAT_MESSAGES). */}
         <Body size={16} muted={false}>{t(settings.door === 'mindset' ? 'paid.chatHeadlineMindset' : 'paid.chatHeadline')}</Body>
         <Body size={14} muted={false}>{t('paid.fairUse', { count: PAID_CHAT_MESSAGES })}</Body>
+        <Body size={13}>{t('paid.fairUseSmall')}</Body>
         {benefits[settings.door === 'mindset' ? 'mindset' : 'faith'].map(key => <Body key={key} size={15} muted={false}>{t(key)}</Body>)}
       </View>
       {paid ? <Body muted={false}>{t('paid.active')}</Body> : null}

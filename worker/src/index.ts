@@ -10,7 +10,7 @@
 // POST /api/token/renew re-signs the SAME install id (paid status and memory follow it).
 import './env';
 import { cleanup } from './cleanup';
-import { addUserSpend, appSpendMonth, blockFor, capAlert, safetyBudgetLeft, safetyMicro, spendStatus, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
+import { addUserSpend, appSpendMonth, blockFor, capAlert, openRouterHeadroom, safetyBudgetLeft, safetyMicro, spendStatus, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
 import { bump, logCode, reserve } from './counts';
 import { confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
@@ -27,11 +27,11 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, checkInQuestion, checkInText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, shortBusyText, checkInQuestion, checkInText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
-import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, providers, type Translation } from './shared';
+import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY, providers, type Translation } from './shared';
 import { issueToken, RENEW_GRACE_DAYS, verifyToken, type Install } from './token';
 
 import type { ChatRequest, ChatResponse } from '../../app/src/chat/contract';
@@ -415,7 +415,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // backstop (CHAT_USER_MONTHLY_USD_*) and the app's monthly cap lead to the same choice. A paid user
   // never meets a pause: if the free lane has nothing, she is answered on the private model, briefly.
   // A crisis conversation never leaves the private crisis model.
-  let overflow: 'daily' | 'monthly' | null = null;
+  let overflow: 'daily' | 'monthly' | 'down' | null = null;
   if (lane !== 'free') {
     const appMicro = await appSpendMonth(env.DB, now);
     const pastCap = appMicro >= capUsd * 1e6;
@@ -459,6 +459,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   }
   // short: the free lane had nothing for a paid user after 100, so the private model answered briefly.
   let short = false;
+  const shortBusy = () => reply({ kind: 'busy', ai: false, text: shortBusyText[v.lang], scripture: [], remaining: null, reminder, limit: null });
   const emitNow = (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>) => reply({ ...body, remaining, reminder, limit: shownLimit, ...(overflow && route.lane === 'free' && body.kind !== 'crisis' ? { notPrivate: true } : {}) });
   return answerOn(lane, false);
 
@@ -552,9 +553,26 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
         if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(confirmed && confirmed.level !== 'none' ? confirmed.kind : 'selfharm', 'lane_down'); }
         // A paid user on free chat after 100 never meets "resting": the private model answers, briefly.
-        if (lane === 'free' && overflow) { tally(metrics, 'overflow_short'); short = true; return answerOn('paid', final); }
-        // Paid never falls back to a free model: if the private model is down, she is told so.
-        if (lane === 'paid') { tally(metrics, 'paid_down'); logCode('CHAT_PAID_DOWN', { empty: out.empty }); return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit }); }
+        // Those short answers are capped per person per day (her ruling: a money ceiling); then "busy".
+        if (lane === 'free' && overflow && overflow !== 'down') {
+          const used = (await env.DB.prepare('INSERT INTO chat_short_day (day, device, n) VALUES (?, ?, 1) ON CONFLICT(day, device) DO UPDATE SET n = n + 1 WHERE n < ? RETURNING n').bind(day, me.installId, PAID_SHORT_ANSWERS_DAILY).first<{ n: number }>())?.n;
+          if (used === undefined) { tally(metrics, 'overflow_short_cap'); return shortBusy(); }
+          tally(metrics, 'overflow_short'); short = true; return answerOn('paid', final);
+        }
+        // Free chat after the private model was down, and free has nothing either: busy, never "resting".
+        if (lane === 'free' && overflow === 'down') { tally(metrics, 'paid_down_free_out'); return shortBusy(); }
+        if (lane === 'paid') {
+          tally(metrics, 'paid_down'); logCode('CHAT_PAID_DOWN', { empty: out.empty });
+          // Short private answers when the private model is down too: busy.
+          if (short) return shortBusy();
+          // The private model is down (a refused key, an outage): the same choice as after 100, never an
+          // error or a blank. Her yes sends this same message on free chat; with no yes, nothing is sent.
+          if (paid.paid && !overflow) {
+            if (ask.overflowConsent !== true) return reply({ kind: 'overflow_consent', ai: false, text: overflowText(v.lang, 'down', resetsOn(now)), scripture: [], remaining: null, limit: null, reminder: false });
+            overflow = 'down'; return answerOn('free', final);
+          }
+          return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });
+        }
         if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit }); }
         tally(metrics, 'busy'); logCode('CHAT_BUSY');
         return reply({ kind: 'busy', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });
@@ -710,6 +728,7 @@ export function createApp(deps: Deps = realDeps) {
       const now = deps.now();
       const rechecked = await recheckMemory(env, now).catch(() => { logCode('MEMORY_RECHECK_FAILED'); return 0; });
       const removed = await cleanup(env.DB, now);
+      await openRouterHeadroom(env.DB, now, env.OPENROUTER_API_KEY).catch(() => logCode('OPENROUTER_KEY_UNREAD', { status: -1 }));
       logCode('CHAT_CLEANUP', { ...removed, rechecked });
     },
   };

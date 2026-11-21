@@ -7,9 +7,15 @@ import { PAID_CHAT_MESSAGES } from '../src/gates';
 // (PAID_CHAT_MESSAGES) and the monthly heavy-use pause (CHAT_USER_MONTHLY_USD_*), in EN and ES.
 const root = new URL('../../', import.meta.url);
 const read = (f: string) => readFileSync(new URL(f, root), 'utf8');
-// Her ruling 21 Nov 2026: "Unlimited Bible chat", and right with it what that means.
-const EN = (n: number) => `${n} private messages a day, then free chat (not private)`;
-const ES = (n: number) => `${n} mensajes privados al día, y después chat gratis (no privado)`;
+// The copy source is the app's own strings (app/src/i18n): the headline, what it means (with the
+// enforced PAID_CHAT_MESSAGES) and the small print. Every other place paid chat is described says the
+// same words, so nothing a person reads can drift from the setting.
+const strings = { en: JSON.parse(read('app/src/i18n/en.json')), es: JSON.parse(read('app/src/i18n/es.json')) };
+const claim = (lang: 'en' | 'es') => ({
+  head: String(strings[lang]['paid.chatHeadline']),
+  means: String(strings[lang]['paid.fairUse']).replace('%{count}', String(PAID_CHAT_MESSAGES)).replace(/\.$/, ''),
+  small: String(strings[lang]['paid.fairUseSmall']),
+});
 const described: Array<[string, 'en' | 'es']> = [ // the language each file is mainly in
   ['legal/terms.md', 'en'], ['legal/es/terminos.md', 'es'], ['store/listing-en.md', 'en'], ['store/listing-es.md', 'es'],
   ['site/content/questions.mjs', 'en'], ['site/content/blitz-black.mjs', 'en'], ['site/content/blitz-apps.mjs', 'en'],
@@ -17,30 +23,33 @@ const described: Array<[string, 'en' | 'es']> = [ // the language each file is m
   ['site/public/free-bible-chat/index.html', 'en'], ['site/public/es/chat-biblico-gratis/index.html', 'es'], ['site/public/black-bible-chat/index.html', 'en'], ['site/public/black-bible-app/index.html', 'en'], ['site/public/bible-app-for-women/index.html', 'en'],
 ];
 const privacy = ['legal/privacy.md', 'legal/es/privacidad.md', 'site/public/privacy.html', 'site/public/es/privacidad.html'];
+const everywhere = [...described.map(([f]) => f), ...privacy, 'app/src/i18n/en.json', 'app/src/i18n/es.json', 'worker/src/replies.ts'];
 
-test('every paid-chat number in the copy is the enforced private-message setting; no old fair-use or pause wording', () => {
+test('every paid-chat number in the copy is the enforced private-message setting', () => {
   for (const f of [...described.map(([f]) => f), ...privacy]) {
-    const text = read(f);
-    const numbers = [...text.matchAll(/(\d+) (?:private messages a day|mensajes privados al día)/g)].map(m => Number(m[1]));
+    const numbers = [...read(f).matchAll(/(\d+) (?:private messages|mensajes privados)/g)].map(m => Number(m[1]));
     assert.ok(numbers.length > 0, `${f} names no private-message number`);
     assert.deepEqual([...new Set(numbers)], [PAID_CHAT_MESSAGES], f);
-    assert.doesNotMatch(text, /fair use(?: of)?:? \d+|uso (?:justo|razonable)(?: de)?:? \d+|\d+ chat messages a day|\d+ mensajes de chat al día|very heavy use|uso muy intenso/i, f);
   }
 });
 
-test('where paid chat is described, "Unlimited Bible chat" comes with what it means, from the setting', () => {
+test('wherever the "unlimited" claim appears, what it means and the small print come right with it, in the app\'s own words', () => {
   for (const [f] of described) {
     const text = read(f);
-    const heads = [...text.matchAll(/[Uu]nlimited Bible chat|[Cc]hat bíblico ilimitado/g)];
-    assert.ok(heads.length > 0, `${f} has no headline`);
-    for (const m of heads) {
-      const es = /ilimitado/.test(m[0]);
-      assert.ok(text.slice(m.index!, m.index! + 500).includes(es ? ES(PAID_CHAT_MESSAGES) : EN(PAID_CHAT_MESSAGES)), `${f}: "${m[0]}" without its disclosure`);
+    let found = 0;
+    for (const lang of ['en', 'es'] as const) {
+      const c = claim(lang);
+      for (const m of text.matchAll(new RegExp(c.head.replace(/^./, ch => `[${ch.toUpperCase()}${ch.toLowerCase()}]`), 'g'))) {
+        found++;
+        const near = text.slice(m.index!, m.index! + 700);
+        assert.ok(near.includes(c.means) && near.includes(c.small), `${f}: "${m[0]}" without "${c.means}" and the small print`);
+      }
     }
+    assert.ok(found > 0, `${f} describes paid chat without the claim`);
   }
-  const en = JSON.parse(read('app/src/i18n/en.json')), es = JSON.parse(read('app/src/i18n/es.json'));
-  assert.equal(en['paid.chatHeadline'], 'Unlimited Bible chat');
-  assert.equal(es['paid.chatHeadline'], 'Chat bíblico ilimitado');
-  assert.equal(en['paid.fairUse'], `${EN(0).replace('0', '%{count}')}.`);
-  assert.equal(es['paid.fairUse'], `${ES(0).replace('0', '%{count}')}.`);
+});
+
+test('NEGATIVE: the old pause and never-free wording is gone everywhere (it contradicts the 100-then-free rule)', () => {
+  const old = /until the 1st|never switches you to a free provider|chat pauses until|se pausa hasta el día 1|nunca lo pasa a un proveedor gratuito|never falls back to a free provider:|nunca pasa a un proveedor gratuito:|fair use(?: of)?:? \d+|uso (?:justo|razonable)(?: de)?:? \d+|\d+ chat messages a day|\d+ mensajes de chat al día|very heavy use across a month may be paused|month's chat limit|límite de chat de este mes/i;
+  for (const f of everywhere) assert.doesNotMatch(read(f), old, f);
 });

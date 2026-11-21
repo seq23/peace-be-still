@@ -16,7 +16,7 @@ You must be at least 13 to use chat. If you are 13 to 17, a parent or guardian m
 
 The free lane is free with no time limit: the whole Bible in text and audio, today's story, one chat a day of up to 10 messages, the first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, the journal, the streak and share cards.
 
-The paid lane adds unlimited Bible chat, chat that remembers, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline downloads. Unlimited Bible chat means 100 private messages a day, then free chat (not private). It is sold monthly or yearly.
+The paid lane adds unlimited Bible chat, chat that remembers, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline downloads. Unlimited Bible chat means 100 private messages a day, then free chat (not private). Very heavy use across a month moves to free chat sooner. It is sold monthly or yearly.
 
 What is free stays free. While you stay subscribed, your price does not go up.
 
@@ -30,7 +30,7 @@ Chat answers are written by AI and marked AI. They can be wrong, incomplete or u
 
 ## Using the app well
 
-Use the app lawfully. Do not try to get around the daily limits, overload or attack our service, copy the app's stories, audio or sessions to offer them elsewhere, or use chat to harm anyone. We may limit or end access for anyone who does, and chat pauses itself for 24 hours after a flood of messages, repeated messages or attempts to break its rules. Fair use in the paid lane also has a monthly limit on AI use per account; past it, chat pauses until the 1st of the next month and never switches you to a free provider.
+Use the app lawfully. Do not try to get around the daily limits, overload or attack our service, copy the app's stories, audio or sessions to offer them elsewhere, or use chat to harm anyone. We may limit or end access for anyone who does, and chat pauses itself for 24 hours after a flood of messages, repeated messages or attempts to break its rules. Paid chat also has a monthly limit on private AI use per account. After your 100 private messages in a day, or past that monthly limit, you can choose to keep chatting on free chat, which is not private; it never switches without your yes. If free chat is unavailable, you get shorter private answers, up to 50 a day, and after those chat may be busy for a while.
 
 The King James Version and the Reina-Valera 1909 are in the public domain. The stories, audio, sessions, design and software are ours and are licensed to you for personal, non-commercial use in the app.
 

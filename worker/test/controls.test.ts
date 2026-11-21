@@ -3,7 +3,11 @@ import { env } from 'cloudflare:test';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { call, chat, chatBody, deps, good, NOW, scripted, tokenFor } from './helpers';
 import { realDeps } from '../src/index';
-import { PAUSE_AT, SLOW_AT, microCost, userCeilingUsd } from '../src/controls';
+import { openRouterPrivate } from '../src/providers/openrouter';
+import { PAUSE_AT, SLOW_AT, microCost, openRouterHeadroom, resetsOn, userCeilingUsd } from '../src/controls';
+import { overflowText, shortBusyText } from '../src/replies';
+import { PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY } from '../src/shared';
+import products from '../../app/src/config/products.json';
 import { centralDay } from '../src/day';
 import type { LadderRung } from '../src/ladder';
 
@@ -70,18 +74,59 @@ describe('the judge never bills the free lane', () => {
   });
 });
 
+describe('the OpenRouter key\'s headroom (hourly cron)', () => {
+  it('below $3 or 10% of the key\'s limit: NAMED STOP OPENROUTER_KEY_LOW once a day; enough left, or no limit, is quiet; an unreadable key is said', async () => {
+    const log = vi.spyOn(console, 'log');
+    const key = (body: unknown, status = 200) => (async () => new Response(JSON.stringify(body), { status })) as unknown as typeof fetch;
+    await env.DB.prepare("DELETE FROM chat_counts WHERE metric = 'openrouter_key_low'").run();
+    expect(await openRouterHeadroom(env.DB, NOW, 'k', key({ data: { limit: 10, limit_remaining: 9.74 } }))).toBe('ok');
+    expect(await openRouterHeadroom(env.DB, NOW, 'k', key({ data: { limit: null, limit_remaining: null } }))).toBe('ok');
+    expect(await openRouterHeadroom(env.DB, NOW, 'k', key({ data: { limit: 100, limit_remaining: 9 } }))).toBe('low'); // under 10%
+    expect(await openRouterHeadroom(env.DB, NOW, 'k', key({ data: { limit: 10, limit_remaining: 2.5 } }))).toBe('low'); // under $3
+    expect(log.mock.calls.flat().join(' ').match(/NAMED STOP OPENROUTER_KEY_LOW/g)?.length).toBe(1);
+    expect(await openRouterHeadroom(env.DB, NOW, 'k', key({}, 401))).toBe('unread');
+    expect(log.mock.calls.flat().join(' ')).toMatch(/OPENROUTER_KEY_UNREAD/);
+    expect(await openRouterHeadroom(env.DB, NOW, undefined)).toBe('no_key');
+    vi.restoreAllMocks();
+  });
+});
+
 describe('the paid lane', () => {
   it('model ids come from env: GEMINI_MODELS for free, PAID_PROVIDER + PAID_MODEL (alone, priced) for paid', () => {
     expect(realDeps.rungs(env, NOW, 'paid').map(r => r.id)).toEqual([`paid-gemini:${env.PAID_MODEL}`]);
     expect(realDeps.rungs(env, NOW, 'paid')[0].price).toEqual({ in: 0.3, out: 2.5, cached: 0.03 });
     expect(realDeps.rungs(env, NOW).filter(r => r.id.startsWith('gemini-free')).map(r => r.id)).toEqual(env.GEMINI_MODELS.split(',').map(m => `gemini-free:${m}`));
   });
-  it('down: she is told so, and no free model is ever called', async () => {
-    const free = scripted('gemini-free', [good()]);
-    const r = await chat(deps({ paidNow: true, rungs: (_e, _n, lane) => (lane === 'paid' ? [] : [free.rung]) }), 'How do I forgive my sister?');
-    expect(r.body.kind).toBe('busy');
-    expect(answerText(r)).toMatch(/Private chat is down/);
-    expect(free.calls.length).toBe(0);
+  it('outage: the private model refuses (402/403 from the key) on every paid call: the free-chat choice, then free chat, or "busy" if free is out too; never blank or an error', async () => {
+    for (const status of [402, 403]) {
+      vi.spyOn(globalThis, 'fetch').mockImplementation(async () => new Response(JSON.stringify({ error: { message: 'Insufficient credits' } }), { status }));
+      const refused: LadderRung = { id: 'paid-openrouter-zdr:test', cap: 1000, day: '2026-11-20', call: openRouterPrivate('or-key', 'deepseek/deepseek-v4.1-flash', ['deepinfra']) };
+      const free = scripted('gemini-free', [good()]);
+      const d = deps({ paidNow: true, rungs: (_e, _n, lane) => (lane === 'paid' ? [refused] : lane === 'crisis' ? [refused] : [free.rung]) });
+      const token = await tokenFor(d);
+      const ask = await chat(d, 'How do I forgive my sister?', { token });
+      expect(ask.body.kind, String(status)).toBe('overflow_consent');
+      expect(answerText(ask)).toBe(overflowText('en', 'down', resetsOn(NOW)));
+      expect(free.calls.length).toBe(0); // nothing goes to free chat before her yes
+      const r = await chat(d, 'How do I forgive my sister?', { token, body: { overflowConsent: true } });
+      expect(r.body.kind).toBe('answer');
+      expect(r.body.notPrivate).toBe(true);
+      expect(free.calls.length).toBeGreaterThan(0);
+      const both = deps({ paidNow: true, rungs: (_e, _n, lane) => (lane === 'free' || lane === undefined ? [] : [refused]) });
+      const t2 = await tokenFor(both);
+      const busy = await chat(both, 'How do I forgive my brother?', { token: t2, body: { overflowConsent: true } });
+      expect(busy.body.kind).toBe('busy');
+      expect(answerText(busy)).toBe(shortBusyText.en);
+      // Short private mode on a refused key: busy, not an error.
+      await hundred(t2);
+      expect((await chat(both, 'What does Psalm 23 mean?', { token: t2, body: { overflowConsent: true } })).body.kind).toBe('busy');
+      // The crisis lane on a refused key: the fixed check-in and the hotline.
+      const c = await chat(deps({ paidNow: true, riskVerdict: { verdict: 'risk', kind: 'selfharm', level: 'low' }, rungs: () => [refused] }), 'I feel so hopeless lately');
+      expect(c.body.kind).toBe('crisis');
+      expect(answerText(c)).toContain('988');
+      expect(c.body.checkIn?.ai).toBe(false);
+      vi.restoreAllMocks();
+    }
   });
   it('a message the crisis check flagged moves a free user to the private lane for the day; the crisis words reach no model', async () => {
     const free = scripted('gemini-free', [good()]);
@@ -116,7 +161,7 @@ describe('the paid lane', () => {
     const crisis = scripted('crisis-gemini', [{ ...good('You can rest a moment here, and God stays close. Lord, keep us tonight.', ['Psalm 4:8']), risk: 'none' }]);
     return { free, paid, crisis, rungs: (_e: Env, _n: number, lane?: string) => (lane === 'paid' ? [paid.rung] : lane === 'crisis' ? [crisis.rung] : [free.rung]) };
   };
-  const hundred = (token: string) => env.DB.prepare('INSERT INTO chat_device_day (day, device, conversation, messages) VALUES (?, ?, ?, 100)').bind(centralDay(NOW), iid(token), 'earlier').run();
+  const hundred = (token: string) => env.DB.prepare('INSERT INTO chat_device_day (day, device, conversation, messages) VALUES (?, ?, ?, ?) ON CONFLICT(day, device) DO UPDATE SET messages = excluded.messages').bind(centralDay(NOW), iid(token), 'earlier', PAID_CHAT_MESSAGES).run();
   it('message 101: the choice, and nothing reaches any model before her yes; after it, the free lane with only the new message', async () => {
     const l = lanes3();
     const d = deps({ paidNow: true, rungs: l.rungs });
@@ -124,7 +169,8 @@ describe('the paid lane', () => {
     await hundred(token);
     const ask = await chat(d, 'Please pray with me about my mother tonight.', { token });
     expect(ask.body.kind).toBe('overflow_consent');
-    expect(answerText(ask)).toBe("You've used today's 100 private messages. You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. Private chat comes back tomorrow.");
+    expect(answerText(ask)).toBe(overflowText('en', 'daily', resetsOn(NOW)));
+    expect(answerText(ask)).toContain(String(PAID_CHAT_MESSAGES));
     expect(l.free.calls.length + l.paid.calls.length).toBe(0);
     const r = await chat(d, ['Earlier, private: my sister Ana is sick.', 'I am so sorry she is sick. Lord, be near Ana.', 'Please pray with me about my mother tonight.'], { token, body: { overflowConsent: true } });
     expect(r.body.kind).toBe('answer');
@@ -162,9 +208,9 @@ describe('the paid lane', () => {
       expect(l.free.calls.length).toBe(0);
     }
   });
-  it('the monthly backstop (yearly $1.33 until Apple\'s Small Business Program, monthly $5) leads to the same choice, with the date private chat comes back', async () => {
-    expect(env.CHAT_USER_MONTHLY_USD_YEARLY).toBe('1.33');
-    for (const [paidUntil, micro] of [[NOW + 300 * 86400_000, 1_330_000], [NOW + 20 * 86400_000, 5_000_000]] as const) {
+  it('the monthly backstop (CHAT_USER_MONTHLY_USD_YEARLY / _MONTHLY) leads to the same choice, with the date private chat comes back', async () => {
+    for (const paidUntil of [NOW + 300 * 86400_000, NOW + 20 * 86400_000]) {
+      const micro = Math.round(userCeilingUsd(env, paidUntil, NOW) * 1e6);
       const l = lanes3();
       const d = deps({ paid: async () => ({ paid: true, paidUntil }), rungs: l.rungs });
       const token = await tokenFor(d);
@@ -175,7 +221,8 @@ describe('the paid lane', () => {
       const before = l.paid.calls.length;
       const r = await chat(d, 'How do I forgive my brother?', { token });
       expect(r.body.kind).toBe('overflow_consent');
-      expect(answerText(r)).toBe("You've used this month's private chat. You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. Private chat comes back on December 1.");
+      expect(answerText(r)).toBe(overflowText('en', 'monthly', resetsOn(NOW)));
+      expect(resetsOn(NOW)).toBe('2026-12-01');
       expect(l.paid.calls.length + l.free.calls.length).toBe(before);
       expect((await chat(d, 'I want to kill myself', { token })).body.kind).toBe('crisis');
     }
@@ -196,11 +243,38 @@ describe('the paid lane', () => {
     await env.DB.prepare("DELETE FROM chat_global_day").run();
     for (const s of shown) { expect(['answer'], JSON.stringify(s)).toContain(s.kind); expect(s.text).not.toMatch(wall); }
   });
+  it('short private answers are capped per person per day: answer 51 is "busy" with no model call; crisis still reaches the crisis model', async () => {
+    const paid = scripted('gemini-paid', [good(), good()]);
+    const crisis = scripted('crisis-gemini', [{ ...good('You can rest a moment here, and God stays close. Lord, keep us tonight.', ['Psalm 4:8']), risk: 'none' }]);
+    const d = deps({ paidNow: true, riskVerdict: { verdict: 'risk', kind: 'selfharm', level: 'low' }, rungs: (_e, _n, lane) => (lane === 'paid' ? [paid.rung] : lane === 'crisis' ? [crisis.rung] : []) });
+    const token = await tokenFor(d);
+    await hundred(token);
+    await env.DB.prepare('INSERT INTO chat_short_day (day, device, n) VALUES (?, ?, ?)').bind(centralDay(NOW), iid(token), PAID_SHORT_ANSWERS_DAILY - 1).run();
+    expect((await chat(d, 'How do I forgive my sister?', { token, body: { overflowConsent: true } })).body.kind).toBe('answer'); // short answer 50
+    const before = paid.calls.length;
+    const r = await chat(d, 'How do I forgive my brother?', { token, body: { overflowConsent: true } }); // 51
+    expect(r.body.kind).toBe('busy');
+    expect(answerText(r)).toBe(shortBusyText.en);
+    expect(paid.calls.length).toBe(before);
+    expect((await chat(d, 'I feel so hopeless lately', { token, body: { overflowConsent: true } })).body.kind).toBe('answer');
+    expect(crisis.calls.length).toBeGreaterThan(0);
+    expect((await chat(d, 'I want to kill myself', { token, body: { overflowConsent: true } })).body.kind).toBe('crisis');
+  });
+  it('each plan nets her at least $1 a month after Apple\'s share and the full AI backstop (read from the config)', () => {
+    const share = Number(env.APPLE_SHARE);
+    expect(share).toBeGreaterThan(0);
+    const perMonth = { monthly: Number(products.products.monthly.usPrice), yearly: Number(products.products.yearly.usPrice) / 12 };
+    const backstop = { monthly: userCeilingUsd(env, NOW + 20 * 86400_000, NOW), yearly: userCeilingUsd(env, NOW + 300 * 86400_000, NOW) };
+    for (const plan of ['monthly', 'yearly'] as const) {
+      expect(backstop[plan], plan).toBeGreaterThan(0);
+      expect(perMonth[plan] * (1 - share) - backstop[plan], plan).toBeGreaterThanOrEqual(1);
+    }
+  });
   it('a missing or broken ceiling is $0, never unmetered', () => {
     expect(userCeilingUsd({}, null, NOW)).toBe(0);
     expect(userCeilingUsd({ CHAT_USER_MONTHLY_USD_MONTHLY: 'five' }, NOW + 20 * 86400_000, NOW)).toBe(0);
-    expect(userCeilingUsd(env, NOW + 300 * 86400_000, NOW)).toBe(1.33);
-    expect(userCeilingUsd(env, NOW + 20 * 86400_000, NOW)).toBe(5);
+    expect(userCeilingUsd(env, NOW + 300 * 86400_000, NOW)).toBe(Number(env.CHAT_USER_MONTHLY_USD_YEARLY));
+    expect(userCeilingUsd(env, NOW + 20 * 86400_000, NOW)).toBe(Number(env.CHAT_USER_MONTHLY_USD_MONTHLY));
   });
   // PAID_AI_MONTHLY_CAP_USD ($100 a calendar month, CT), counted from every paid-route call this month.
   const spend = async (micro: number) => {
@@ -215,7 +289,7 @@ describe('the paid lane', () => {
     const r = await chat(d, 'How do I forgive my sister?');
     await chat(d, 'How do I forgive my brother?');
     expect(r.body.kind).toBe('overflow_consent');
-    expect(answerText(r)).toMatch(/^You've used this month's private chat\./);
+    expect(answerText(r)).toBe(overflowText('en', 'monthly', resetsOn(NOW)));
     expect(paid.calls.length).toBe(0);
     expect(log.mock.calls.flat().join(' ').match(/NAMED STOP CHAT_PAID_MONTHLY_CAP/g)?.length).toBe(1);
     await spend(0);

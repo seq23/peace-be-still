@@ -6,6 +6,8 @@ export const FREE_CHAT_MESSAGES = 10;
 /** Fair use for every paid subscriber, monthly and yearly (her ruling 21 Nov 2026). The one setting: the worker's
  * daily limit and every user-facing line (price screen, terms, privacy, store listing, site) say this number. */
 export const PAID_CHAT_MESSAGES = 100;
+/** When free chat has nothing after her private messages, the private model answers briefly, at most this many a day; then "busy". */
+export const PAID_SHORT_ANSWERS_DAILY = 50;
 
 export const FREE_FEATURES = [
   'bibleText', 'bibleAudio', 'todayStory', 'dailyDeclaration', 'basicPlans',

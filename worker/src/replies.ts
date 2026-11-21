@@ -159,6 +159,11 @@ export const fallbackMindsetText = {
   es: 'No pude armar una buena respuesta en este momento. Respira despacio una vez y vuelve a preguntarme.',
 };
 // A rung failed for a moment (busy, a network blip) but today's allowances are not used up.
+/** A paid user's short private answers are used up for today (PAID_SHORT_ANSWERS_DAILY). */
+export const shortBusyText = {
+  en: 'Chat is busy right now. Try again in a little while.',
+  es: 'El chat está ocupado en este momento. Vuelve a intentarlo en un rato.',
+};
 export const busyText = {
   en: 'Chat is busy for a moment. Give it a minute and send that again.',
   es: 'El chat está ocupado por un momento. Espera un minuto y vuelve a enviarlo.',
@@ -267,10 +272,9 @@ export const slowText = {
   en: 'Please slow down a little. Chat will answer again in a few minutes.',
   es: 'Por favor, ve un poco más despacio. El chat volverá a responder en unos minutos.',
 };
-/** The fair-use pause: the date is when her meter (or today's app ceiling) resets, YYYY-MM-DD. */
 /** After her 100 private messages today (or past the monthly backstop): the choice, never a wall. */
-export function overflowText(lang: 'en' | 'es', why: 'daily' | 'monthly', date: string): string {
+export function overflowText(lang: 'en' | 'es', why: 'daily' | 'monthly' | 'down', date: string): string {
   const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
-  if (lang === 'es') return `${why === 'daily' ? `Usaste los ${PAID_CHAT_MESSAGES} mensajes privados de hoy.` : 'Usaste el chat privado de este mes.'} Puedes seguir conversando con nuestra IA gratuita. El chat gratis no es privado: el servicio gratuito puede guardar y usar lo que envíes. ${why === 'daily' ? 'El chat privado vuelve mañana.' : `El chat privado vuelve el ${shown}.`}`;
-  return `${why === 'daily' ? `You've used today's ${PAID_CHAT_MESSAGES} private messages.` : "You've used this month's private chat."} You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. ${why === 'daily' ? 'Private chat comes back tomorrow.' : `Private chat comes back on ${shown}.`}`;
+  if (lang === 'es') return `${why === 'daily' ? `Usaste los ${PAID_CHAT_MESSAGES} mensajes privados de hoy.` : why === 'down' ? 'El chat privado no está disponible por un momento.' : 'Usaste el chat privado de este mes.'} Puedes seguir conversando con nuestra IA gratuita. El chat gratis no es privado: el servicio gratuito puede guardar y usar lo que envíes. ${why === 'daily' ? 'El chat privado vuelve mañana.' : why === 'down' ? 'El chat privado vuelve pronto.' : `El chat privado vuelve el ${shown}.`}`;
+  return `${why === 'daily' ? `You've used today's ${PAID_CHAT_MESSAGES} private messages.` : why === 'down' ? 'Private chat is down for a moment.' : "You've used this month's private chat."} You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. ${why === 'daily' ? 'Private chat comes back tomorrow.' : why === 'down' ? 'Private chat will be back soon.' : `Private chat comes back on ${shown}.`}`;
 }

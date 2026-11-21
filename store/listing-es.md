@@ -18,7 +18,7 @@ Elige tu camino: la Palabra de Dios, o mente e imaginación. Cada uno es su prop
 Description body:
 Gratis, y sigue gratis: toda la Biblia para leer, y capítulos en voz alta (por ahora en inglés), con capítulos nuevos cada semana. La historia de hoy. Un chat al día, de hasta 10 mensajes. Tu primera noche para dormir, y luego una por semana. Una palabra para cada mañana. Planes básicos de 7 días, versículos guardados, un diario, una racha que nunca regaña y tarjetas para compartir.
 
-La parte de pago suma chat bíblico ilimitado, un chat que recuerda lo que cargas, una sesión cada noche, sesiones hechas para ti, todas las historias anteriores, planes más largos, temas para las declaraciones y escuchar sin conexión. El chat bíblico ilimitado son 100 mensajes privados al día, y después chat gratis (no privado).
+La parte de pago suma chat bíblico ilimitado, un chat que recuerda lo que cargas, una sesión cada noche, sesiones hechas para ti, todas las historias anteriores, planes más largos, temas para las declaraciones y escuchar sin conexión. El chat bíblico ilimitado son 100 mensajes privados al día, y después chat gratis (no privado). Con un uso muy intenso durante el mes, pasas antes al chat gratuito.
 
 Las Escrituras se citan palabra por palabra de la Reina-Valera 1909, y de la King James en inglés.
 

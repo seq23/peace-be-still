@@ -16,7 +16,7 @@ Chat is optional, and it has two lanes. Before your first free chat, the app ask
 
 Free chat: each message travels through our service to an AI provider, which writes the answer. The providers, tried in this order, are Cloudflare Workers AI, Google Gemini (free tier) and free models reached through OpenRouter. These providers may retain and use what you type to improve their services, and people at those companies may read it. Please leave out names and anything that identifies you or someone else.
 
-Paid chat: each message goes through our service to a paid AI service under terms that do not let it use what you type to train or improve its AI (today Google Gemini on a paid plan; if we change it, it will be another paid service with the same promise, named here). Paid chat never falls back to a free provider: if the paid service is down, the app says so.
+Paid chat: each message goes through our service to a paid AI service under terms that do not let it use what you type to train or improve its AI (today Google Gemini on a paid plan; if we change it, it will be another paid service with the same promise, named here). Paid chat never falls back to a free provider unless you choose free chat after your private messages: if the paid service is down, the app says so.
 
 Each chat message is sent with your age group (teen or adult), the door you chose, the chat voice and the language, so the answer fits; none of these is linked to your name, because the app never asks for it. Your birth year itself never leaves your phone.
 

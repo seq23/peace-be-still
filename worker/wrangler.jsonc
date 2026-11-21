@@ -88,8 +88,13 @@
     "CRISIS_THINKING_LEVEL": "low",
     "CRISIS_PRICE_IN_PER_M": "0.30",
     "CRISIS_PRICE_OUT_PER_M": "2.50",
+    // Hidden monthly AI backstop per subscriber, so she nets at least $1 a month on each plan after
+    // Apple's share (APPLE_SHARE; app/src/config/products.json has the prices; controls.test.ts checks
+    // price x (1 - share) - backstop >= 1). At Apple's 30% today: yearly 1.33, monthly 4.59. Once she is
+    // in Apple's Small Business Program (15%), raise them to 1.83 and 5.79 and APPLE_SHARE to 0.15.
+    "APPLE_SHARE": "0.30",
     "CHAT_USER_MONTHLY_USD_YEARLY": "1.33",
-    "CHAT_USER_MONTHLY_USD_MONTHLY": "5",
+    "CHAT_USER_MONTHLY_USD_MONTHLY": "4.59",
     "REVENUECAT_ENTITLEMENT": "paid",
     "CHAT_TOKEN_KID": "k1"
   }

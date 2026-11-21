@@ -159,6 +159,7 @@
   "paid.keepPrice": "Tu precio no sube mientras sigas con tu suscripción.",
   "paid.chatHeadline": "Chat bíblico ilimitado",
   "paid.chatHeadlineMindset": "Chat ilimitado",
+  "paid.fairUseSmall": "Con un uso muy intenso durante el mes, pasas antes al chat gratuito.",
   "paid.fairUse": "%{count} mensajes privados al día, y después chat gratis (no privado).",
   "paid.restore": "Restaurar compras",
   "paid.terms": "Términos",
