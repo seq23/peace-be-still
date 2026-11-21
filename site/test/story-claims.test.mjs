@@ -7,10 +7,10 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const ROOT = new URL("../../", import.meta.url).pathname;
-const CLAIM = /black faces|drawn with (?:black )?faces|faces in the pictures|story pictures|illustrated (?:bible )?stor|rostros negros|caras negras|dibujad|rostros y nombres negros/i;
+const CLAIM = /black faces|drawn with (?:black )?faces|faces in the pictures|story pictures|illustrated (?:bible )?stor|rostros negros|imágenes de esta app|app's pictures|caras negras|dibujad|rostros y nombres negros/i;
 const files = (dir) => {
   const out = [];
-  (function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); if (statSync(p).isDirectory()) walk(p); else if (/\.(html|mjs|json|md|txt)$/.test(f)) out.push(p); } })(join(ROOT, dir));
+  (function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); if (statSync(p).isDirectory()) walk(p); else if (/\.(html|mjs|json|md|txt|ts)$/.test(f)) out.push(p); } })(join(ROOT, dir));
   return out;
 };
 
@@ -25,7 +25,7 @@ test("the phrase check catches the claim and lets plain story wording through", 
 });
 
 test("no public page, generator, draft or store file says the stories show faces or pictures", () => {
-  const scanned = [...files("site/public"), ...files("site/content"), ...files("data/search-loop"), ...files("data/drafts"), ...files("data/instagram"), ...files("store"), join(ROOT, "search-loop.config.json")].filter(existsSync);
+  const scanned = [...files("site/public"), ...files("site/content"), ...files("data/search-loop"), ...files("data/drafts"), ...files("data/instagram"), ...files("store"), join(ROOT, "search-loop.config.json"), ...files("worker/src").filter((p) => !/\.d\.ts$/.test(p))].filter(existsSync);
   assert.ok(scanned.length > 100, `only ${scanned.length} files scanned`);
   const hits = scanned.filter((p) => claimsIn(readFileSync(p, "utf8"))).map((p) => p.slice(ROOT.length));
   assert.deepEqual(hits, []);
