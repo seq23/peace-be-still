@@ -19,7 +19,7 @@
 //    its first word removed) in more than 10%.
 // The expectation judge is Workers AI over its REST API (REDTEAM_JUDGE_TOKEN + REDTEAM_JUDGE_ACCOUNT,
 // the CF2 pair), on free neurons inside the same headroom check.
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { RECENT_ALL, repeats, shapeOf } from '../src/quality/variety.ts';
 import { readExpectation } from './judge.mjs';
 import { requireHeadroom } from './neuron-headroom.mjs';
@@ -112,7 +112,14 @@ let pass = 0, fail = 0, notJudged = 0;
 const fallbacks = [], unmet = [], shown = [];
 const kinds = {};
 const answers = [];
+// Run 9 measured a different model without saying so: production's first answer model (the first of
+// GEMINI_MODELS) ran out of free quota at request 11 and the ladder moved on. With the dev server's log
+// (REDTEAM_DEV_LOG) the run stops the moment that happens, so a score is always of the model users get.
+const devLog = process.env.REDTEAM_DEV_LOG;
+const firstModel = /"GEMINI_MODELS": "([^",]+)/.exec(readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8'))[1];
+const answerModelOut = () => devLog && existsSync(devLog) && new RegExp(`HTTP_429_DAILY[^\\n]*gemini-free:${firstModel.replace(/\./g, '\\.')}`).test(readFileSync(devLog, 'utf8'));
 for (const item of items) {
+  if (answerModelOut()) { console.error(`NAMED STOP ANSWER_MODEL_OUT: ${firstModel} ran out of daily quota before ${item.id}; the rest would measure another model`); process.exit(4); }
   let r; const t0 = Date.now();
   if (item.age_band === 'child') r = { status: await token('child') };
   else {
