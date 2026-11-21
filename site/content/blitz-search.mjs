@@ -32,7 +32,8 @@ const L = {
   bibleChatCancel: "https://thebiblechat.com/blog/how-to-cancel-your-bible-chat-subscription",
   bibleChat: "https://apps.apple.com/us/app/bible-chat-daily-devotional/id6448849666",
   haven: "https://apps.apple.com/us/app/haven-bible-chat/id6503387382",
-  pray: "https://apps.apple.com/us/app/pray-com-bible-daily-prayer/id1161035371",
+  prayCancel: "https://help.pray.com/hc/en-us/articles/33708967880989-How-to-Cancel-Your-Pray-com-Subscription",
+  prayGoogle: "https://help.pray.com/hc/en-us/articles/4411284912017-Cancelling-a-Pray-com-trial-or-subscription-from-Google",
   youversionCeo: "https://www.crosswalk.com/headlines/contributors/guest-commentary/ais-bible-misquotes-scripture-according-to-youversion-ceo.html",
 };
 const a = (href, text) => /^https:\/\/apps\.apple\.com\//.test(href) ? `<a class="src" rel="nofollow noopener" href="${href}">${text}</a>` : `<a rel="nofollow noopener" href="${href}">${text}</a>`;
@@ -213,8 +214,14 @@ ${PLAY_STEPS}`],
 <li><strong>Hallow.com, from a browser:</strong> log in at hallow.com, open the menu (three lines, top right) › Settings › Subscription › Cancel Subscription, and confirm.</li>
 </ul>
 <p>Hallow says you keep access until the end of the paid period or trial, then return to the free version; to avoid a trial charge, cancel at least 24 hours before it renews. For money back, Hallow says to cancel first, then follow its refund article. Sources: ${a(L.hallowCancel, "Hallow Help, “How do I cancel my subscription or free trial?”")} (dated 22 Jul 2026) and ${a(L.hallowRefund, "“I was charged but want a refund”")}, both read ${READ}.</p>`],
-      ["How to cancel Pray.com", `<p>If you subscribed in the App Store or Google Play, cancel there (steps above). Pray.com also sells Premium with a free trial on its own website, pray.com. If you signed up there, log in at pray.com and cancel from your account, then keep the confirmation.</p>
-<p class="muted">We could not find a Pray.com help page with cancel steps (searched ${READ}). If you cannot find the subscription, contact Pray, Inc. through the developer links on its ${a(L.pray, "App Store listing")}.</p>`],
+      ["How to cancel Pray.com", `<p>Pray.com's help page says to check your bank or card statement first: a charge from “Pray.com” means you bought directly from Pray.com; a charge from Apple or Google means you cancel in that store.</p>
+<ul>
+<li><strong>Regular Premium bought from Pray.com:</strong> log in at pray.com/login with the email used for the subscription, go to Manage Subscription, choose the cancel option and follow the prompts.</li>
+<li><strong>Give and Go Ad-Free Plan (a donation that comes with an ad-free account):</strong> in the Pray.com app, Settings › Manage Donation, then follow the prompts.</li>
+<li><strong>Apple:</strong> Settings › your name › Subscriptions › Pray.com › Cancel.</li>
+<li><strong>Google Play:</strong> Google Play Store › Menu › Subscriptions › Pray.com › Cancel.</li>
+</ul>
+<p>Pray.com warns not to delete your account before the subscription is cancelled, because deleting it often does not stop billing. If you still cannot find it, its help page asks you to contact support with your account email, the last 4 digits of the card and a screenshot of the charge. Sources: ${a(L.prayCancel, "Pray.com Help, “How to Cancel Your Pray.com Subscription”")} (3 Feb 2026) and ${a(L.prayGoogle, "“Cancelling a Pray.com trial or subscription from Google”")}, both read ${READ}.</p>`],
       ["How to cancel Glorify", `<p>Glorify's help page says to cancel through the store that bills you:</p>
 <ul>
 <li><strong>iPhone:</strong> Settings › your name › Media and Purchases › View Account › Subscriptions › Glorify › Cancel Subscription. (The shorter Settings › your name › Subscriptions path above reaches the same list.)</li>
@@ -233,15 +240,15 @@ ${PLAY_STEPS}`],
 </ul>
 <p>Source: ${a(L.dwellCancel, "Dwell Help, “How do I cancel my Dwell subscription?”")} (published 21 May 2026, read ${READ}).</p>`],
       ["How to cancel Bible Chat", `<p>Bible Chat: Daily Devotional (Book Vitals Inc.) offers a free 7-day trial, then a weekly plan at $4.99 or longer plans, according to its ${a(L.bibleChat, "App Store listing")} (checked ${READ}). The website its listing links to gives the iPhone steps: Settings › your Apple Account › Subscriptions › Bible Chat › Cancel, then confirm (${a(L.bibleChatCancel, "“How to Cancel Your Bible Chat Subscription”")}, 27 May 2025). On Android, use the Google Play steps above. To stop a trial from turning into a charge, cancel at least 24 hours before it ends. Full steps: <a href="/questions/how-to-cancel-bible-chat-subscription/">how to cancel a Bible Chat subscription</a>.</p>`],
-      ["How to cancel Haven", `<p>Haven - Bible Chat (E12 Holdings LLC) says on its ${a(L.haven, "App Store listing")} that access requires a paid subscription (checked ${READ}). Paid in the App Store or Google Play: cancel there (steps above). Its website, havenbibleapp.com, also offers a trial and says you can cancel any time, but lists no steps (read ${READ}); if you paid on the website, cancel there or contact the developer. There are two apps named Haven, so check the developer name. Full steps: <a href="/questions/how-to-cancel-haven-subscription/">how to cancel a Haven subscription</a>.</p>`],
+      ["How to cancel Haven", `<p>Haven - Bible Chat (E12 Holdings LLC) says on its ${a(L.haven, "App Store listing")} that access requires a paid subscription (checked ${READ}). Its website, havenbibleapp.com, links only to the App Store and Google Play, and its FAQ says you can cancel any time, without listing steps (read ${READ}). So cancel in the store you subscribed through, with the Apple or Google steps above. There are two apps named Haven, so check the developer name. Full steps: <a href="/questions/how-to-cancel-haven-subscription/">how to cancel a Haven subscription</a>.</p>`],
       ["All seven at a glance", `<table class="t"><thead><tr><th>App</th><th>Can bill through</th><th>Where to cancel</th><th>Official steps</th></tr></thead><tbody>
-<tr><td>Hallow</td><td>Apple, Google Play, Amazon, Hallow.com</td><td>The store, or Me › Settings › Subscription for Hallow.com</td><td>${a(L.hallowCancel, "Hallow Help")}</td></tr>
-<tr><td>Pray.com</td><td>Apple, Google Play, pray.com</td><td>The store, or your pray.com account</td><td>None found (${READ})</td></tr>
-<tr><td>Glorify</td><td>Apple, Google Play</td><td>The store</td><td>${a(L.glorifyCancel, "Glorify Help")}</td></tr>
-<tr><td>Abide</td><td>Apple, Google Play, Abide website</td><td>The store, or More › Settings › Manage Subscription</td><td>${a(L.abideCancel, "Abide Help")}</td></tr>
-<tr><td>Dwell</td><td>Apple, Google Play, Dwell website</td><td>The store, or your Dwell account › Billing and Subscription</td><td>${a(L.dwellCancel, "Dwell Help")}</td></tr>
-<tr><td>Bible Chat</td><td>Apple, Google Play</td><td>The store</td><td>${a(L.bibleChatCancel, "Its website")}</td></tr>
-<tr><td>Haven</td><td>Apple, Google Play, its website</td><td>The store, or the website you paid on</td><td>None listed (${READ})</td></tr>
+<tr><td>Hallow</td><td data-label="Can bill through">Apple, Google Play, Amazon, Hallow.com</td><td data-label="Where to cancel">The store, or Me › Settings › Subscription for Hallow.com</td><td data-label="Official steps">${a(L.hallowCancel, "Hallow Help")}</td></tr>
+<tr><td>Pray.com</td><td data-label="Can bill through">Apple, Google Play, Pray.com</td><td data-label="Where to cancel">The store, or pray.com/login › Manage Subscription</td><td data-label="Official steps">${a(L.prayCancel, "Pray.com Help")}</td></tr>
+<tr><td>Glorify</td><td data-label="Can bill through">Apple, Google Play</td><td data-label="Where to cancel">The store</td><td data-label="Official steps">${a(L.glorifyCancel, "Glorify Help")}</td></tr>
+<tr><td>Abide</td><td data-label="Can bill through">Apple, Google Play, Abide website</td><td data-label="Where to cancel">The store, or More › Settings › Manage Subscription</td><td data-label="Official steps">${a(L.abideCancel, "Abide Help")}</td></tr>
+<tr><td>Dwell</td><td data-label="Can bill through">Apple, Google Play, Dwell website</td><td data-label="Where to cancel">The store, or your Dwell account › Billing and Subscription</td><td data-label="Official steps">${a(L.dwellCancel, "Dwell Help")}</td></tr>
+<tr><td>Bible Chat</td><td data-label="Can bill through">Apple, Google Play</td><td data-label="Where to cancel">The store</td><td data-label="Official steps">${a(L.bibleChatCancel, "Its website")}</td></tr>
+<tr><td>Haven</td><td data-label="Can bill through">Apple, Google Play</td><td data-label="Where to cancel">The store</td><td data-label="Official steps">None listed (${READ})</td></tr>
 </tbody></table>
 <p class="muted">Billing routes come from each app's help page, listing or website as read on ${READ}. Steps change; if a screen looks different, the app's own help page wins.</p>`],
       ["Can I get a refund?", `<ul>
@@ -251,15 +258,15 @@ ${PLAY_STEPS}`],
 </ul>
 <p>Cancelling stops the next renewal; on its own it does not refund the current period.</p>`],
       ["What if I was charged after I cancelled?", `<p>Some App Store reviewers in 2026 report a charge after they believed they had cancelled. In the help pages above, the usual reasons are cancelling in the wrong place (for example deleting the app, or cancelling on the website when Apple bills you), a second account, or a trial cancelled less than 24 hours before it ended. Check each billing source, keep a screenshot of the red expiry date or the confirmation email, then use the refund routes above.</p>`],
-      ["Is there a Bible app with nothing to cancel?", `<p>Peace Be Still, coming soon to the App Store and Google Play, has no trial and no website billing: a free lane that stays free, and a paid lane at $7.99 a month or $39.99 a year billed only by Apple or Google, so it cancels in the same two places as above.</p>`],
+      ["A Bible app with no trial", `<p>Peace Be Still, coming soon to the App Store and Google Play, has no trial and no website billing: a free lane that stays free, and a paid lane at $7.99 a month or $39.99 a year billed only by Apple or Google, so it cancels in the same two places as above.</p>`],
     ],
     faq: [
-      ["Does deleting a Bible app cancel the subscription?", "No. Apple, Google or the app's website keeps billing until you cancel there. Hallow, Glorify and Abide each say this on their own help pages."],
+      ["Does deleting a Bible app cancel the subscription?", "No. Apple, Google or the app's website keeps billing until you cancel there. Hallow, Glorify, Abide and Pray.com each say this on their own help pages."],
       ["Why can't I find the subscription in my iPhone settings?", "You may have paid on the app's website, with Google Play, with Amazon, or under another Apple ID. Check the receipt email for who billed you. On iPhone, no Cancel button with a red date means it is already cancelled."],
       ["When should I cancel a free trial?", "At least 24 hours before it ends. Apple, Hallow and Glorify all give the 24-hour rule. You can usually keep using the trial until its end date."],
       ["Will I lose access straight away?", "Usually not. Hallow, Glorify, Abide and Apple each say you keep what you paid for until the end of the current period."],
     ],
-    sources: [[`Hallow Help: How do I cancel my subscription or free trial? (read ${READ})`, L.hallowCancel], [`Glorify Help: How do I cancel my subscription? (read ${READ})`, L.glorifyCancel], [`Abide Help: How Do I CANCEL My Premium Subscription? (read ${READ})`, L.abideCancel], [`Dwell Help: How do I cancel my Dwell subscription? (read ${READ})`, L.dwellCancel], [`Bible Chat: How to Cancel Your Bible Chat Subscription (read ${READ})`, L.bibleChatCancel], APPLE_CANCEL, PLAY_CANCEL, APPLE_REFUND, PLAY_REFUND],
+    sources: [[`Hallow Help: How do I cancel my subscription or free trial? (read ${READ})`, L.hallowCancel], [`Glorify Help: How do I cancel my subscription? (read ${READ})`, L.glorifyCancel], [`Abide Help: How Do I CANCEL My Premium Subscription? (read ${READ})`, L.abideCancel], [`Dwell Help: How do I cancel my Dwell subscription? (read ${READ})`, L.dwellCancel], [`Pray.com Help: How to Cancel Your Pray.com Subscription (read ${READ})`, L.prayCancel], [`Bible Chat: How to Cancel Your Bible Chat Subscription (read ${READ})`, L.bibleChatCancel], APPLE_CANCEL, PLAY_CANCEL, APPLE_REFUND, PLAY_REFUND],
     notAffiliated: "Hallow, Pray.com, Glorify, Abide, Dwell, Bible Chat, Haven",
     related: ["/bible-chat-cancel-subscription/", "/questions/how-to-cancel-haven-subscription/", "/questions/how-to-cancel-bible-chat-subscription/", "/questions/hallow-app-cost/"],
   },
