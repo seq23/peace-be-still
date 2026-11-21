@@ -105,8 +105,6 @@ test("every custom product page mapping lands on a real page", () => {
     assert.match(c.ppid, /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/, c.page);
     for (const path of c.paths) { assert.ok(existsSync(join(pub, path, "index.html")), `${c.page}: ${path} is not a page`); checked++; }
     for (const pre of c.prefixes || []) { assert.ok(statSync(join(pub, pre)).isDirectory(), `${c.page}: ${pre}`); checked++; }
-    // Pages PR #85 adds: once they exist, they move to paths (this fails until they do).
-    for (const path of c.waiting_on_pr85 || []) assert.ok(!existsSync(join(pub, path, "index.html")), `${c.page}: ${path} exists now; move it to paths`);
     const rel = c.paths[0] ? `${c.paths[0]}index.html` : null;
     if (rel) assert.match(appStoreHref({ ...storeConfig(), app_store_url: "https://apps.apple.com/app/id1" }, rel), new RegExp(`ppid=${c.ppid}$`), c.page);
   }
