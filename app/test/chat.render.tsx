@@ -257,17 +257,30 @@ test('the crisis reply is not labelled AI and its numbers are tappable', async (
   assert.deepEqual((globalThis as any).__pbsOpened, ['tel:18007997233', 'sms:88788?body=START', 'tel:988', 'sms:988']); // the hotline the reply leads with comes first
 });
 
-test('offline or a server error on a crisis message still shows the crisis line and its links, by region, EN and ES', async () => {
+test('offline or a server error on a crisis message still shows the crisis line, as one quiet line of links, by region, EN and ES', async () => {
   consented();
   const opened = async (tree: ReactTestRenderer) => {
     (globalThis as any).__pbsOpened = [];
-    for (const l of tree.root.findAllByType('Pressable' as any).filter(n => n.props.accessibilityRole === 'link')) await act(async () => l.props.onPress());
+    for (const l of tree.root.findAll(n => n.props.accessibilityRole === 'link' && (n.type as unknown) === 'Text')) await act(async () => l.props.onPress());
     return (globalThis as any).__pbsOpened;
+  };
+  // The error path is calm: no Call/Text buttons (those belong to a real crisis reply), one muted line.
+  const calm = (tree: ReactTestRenderer) => {
+    assert.equal(tree.root.findAll(n => (n.type as unknown) === 'Pressable' && n.props.accessibilityRole === 'link').length, 0);
+    const help = tree.root.findAll(n => (n.type as unknown) === 'Text' && n.props.testID === 'note-help');
+    assert.equal(help.length, 1);
+    assert.notEqual(help[0].props.style.flat().find((x: any) => x?.color)?.color, undefined);
+    assert.equal(help[0].props.style.flat().some((x: any) => x?.textAlign === 'center'), false);
   };
   replies.push('offline');
   let tree = await mount();
   await say(tree, "I don't want to be alive anymore");
-  assert.match(texts(tree), /couldn't reach us[\s\S]*call or text 988 now/);
+  assert.match(texts(tree), /couldn't reach us/);
+  const flat = (n: any): string => n.children.map((x: any) => typeof x === 'string' ? x : flat(x)).join('');
+  const help = tree.root.findAll(n => (n.type as unknown) === 'Text' && n.props.testID === 'note-help');
+  assert.match(texts(tree), /couldn't reach us[\s\S]*If you're in danger/); // the error line, then the help line
+  assert.equal(flat(help[0]), "If you're in danger, call or text 988.");
+  calm(tree);
   assert.deepEqual(await opened(tree), ['tel:988', 'sms:988']);
   (globalThis as any).__pbsRegion = 'MX'; (globalThis as any).__pbsLocale = 'es';
   try {
@@ -275,8 +288,34 @@ test('offline or a server error on a crisis message still shows the crisis line 
     tree = await mount({ ...adult, voice: 'spanish', language: 'es' });
     await say(tree, 'ya no quiero vivir', 'Enviar');
     assert.match(texts(tree), /Línea de la Vida al 800 911 2000/);
+    calm(tree);
     assert.deepEqual(await opened(tree), ['tel:8009112000', 'tel:911']);
   } finally { (globalThis as any).__pbsRegion = undefined; (globalThis as any).__pbsLocale = undefined; }
+});
+
+test('every region\'s help line, EN and ES, has exactly one [link] per number it offers', () => {
+  const { regionHelp } = require('../src/chat/ChatScreen');
+  const es = require('../src/i18n/es.json') as Record<string, string>;
+  for (const region of ['US', 'MX', 'ES', 'FR', null]) {
+    const help = regionHelp(region);
+    for (const strings of [en, es]) assert.equal((strings[help.text].match(/\[[^\]]+\]/g) ?? []).length, help.links.length, `${region} ${help.text}`);
+  }
+});
+
+test('the composer shows focus on its pill border, never the browser outline on web', async () => {
+  consented();
+  (globalThis as any).__pbsPlatform = 'web';
+  try {
+    const tree = await mount();
+    const input = tree.root.findByType('TextInput' as any);
+    assert.equal(input.props.style.flat().some((x: any) => x?.outlineStyle === 'none'), true);
+    const border = () => tree.root.findAll(n => (n.type as unknown) === 'View' && n.props.testID === 'composer')[0].props.style.flat().reduce((a: any, x: any) => ({ ...a, ...x }), {}).borderColor;
+    const rest = border();
+    await act(async () => input.props.onFocus());
+    assert.notEqual(border(), rest);
+    await act(async () => input.props.onBlur());
+    assert.equal(border(), rest);
+  } finally { (globalThis as any).__pbsPlatform = 'ios'; }
 });
 
 test('when the free models are out, the kind message shows and sending stops', async () => {
