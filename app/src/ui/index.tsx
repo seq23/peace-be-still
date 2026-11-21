@@ -86,11 +86,11 @@ export function PillButton({ children, onPress }: { children: string; onPress: (
   );
 }
 
-export function TextLink({ children, onPress, style }: { children: string; onPress: () => void; style?: StyleProp<ViewStyle> }) {
+export function TextLink({ children, onPress, style, disabled = false }: { children: string; onPress: () => void; style?: StyleProp<ViewStyle>; disabled?: boolean }) {
   const c = usePalette();
   return (
-    <Pressable accessibilityRole="link" onPress={onPress} hitSlop={10} style={[{ minHeight: 44, justifyContent: 'center', alignSelf: 'flex-start' }, style]}>
-      <Text style={{ fontFamily: fonts.strong, fontSize: 15, color: c.accent }}>{children}</Text>
+    <Pressable accessibilityRole="link" disabled={disabled} accessibilityState={{ disabled }} aria-disabled={disabled || undefined} onPress={disabled ? undefined : onPress} hitSlop={10} style={[{ minHeight: 44, justifyContent: 'center', alignSelf: 'flex-start' }, style]}>
+      <Text style={{ fontFamily: fonts.strong, fontSize: 15, color: disabled ? c.muted : c.accent }}>{children}</Text>
     </Pressable>
   );
 }

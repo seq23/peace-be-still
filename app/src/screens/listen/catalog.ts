@@ -4,6 +4,7 @@ import type { Track } from '../../player/library';
 
 export function shelfOf(track: Track) {
   if (track.kind === 'psalms' || track.kind === 'bible') return track.kind;
+  if (track.kind === 'psalm-night') return 'psalms';
   if (track.kind === 'imagination-night' || track.ref.startsWith('content/imagination-nights/')) return 'imagination';
   if (track.kind === 'stories' && track.ref.startsWith('content/stories/hush-harbor/')) return 'hushHarbor';
   if (track.kind === 'stories' && track.ref.startsWith('content/stories/mi-refugio/')) return 'miRefugio';

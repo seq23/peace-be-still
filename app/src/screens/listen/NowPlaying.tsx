@@ -1,4 +1,4 @@
-import { useIsFocused } from 'expo-router';
+import { useIsFocused, useRouter } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,6 +14,7 @@ import { ScriptureText } from '../../ui/scripture';
 import { shelfOf } from './catalog';
 import { usePublishedAudio } from './availability';
 import { downloadAvailable, useOffline } from './offline';
+import { isSleepSession, nextFreeNight, sleepUsage, useSleepNights } from './nights';
 
 function clock(seconds: number) {
   return [Math.floor(seconds / 60), String(Math.floor(seconds % 60)).padStart(2, '0')].join(':');
@@ -24,6 +25,8 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const { settings } = useSettings();
   const user = useOffline(settings.age);
   const { player, state, stop } = usePlayer();
+  const router = useRouter();
+  const nights = useSleepNights();
   const [timerOpen, setTimerOpen] = useState(false);
   const [now, setNow] = useState(Date.now);
   useEffect(() => {
@@ -50,6 +53,12 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const canStream = !stop && published?.get(track.file) === track.sha256;
   const unavailable = !saved && !canStream;
   const shelf = shelfOf(track);
+  // Sleep sessions: the first night free, then one a week; paid, every night. The one gate decides.
+  const sleep = isSleepSession(track);
+  const nightAllowed = !sleep || (nights.ready && canUse('sleepSession', { ...user, ...sleepUsage(nights.log, new Date()) }));
+  const nightLocked = sleep && nights.ready && !nightAllowed && !current;
+  const nextNight = new Intl.DateTimeFormat(t.locale === 'es' ? 'es-MX' : 'en-US', { weekday: 'long', month: 'long', day: 'numeric' })
+    .format(nextFreeNight(nights.log, new Date()));
   const protectedPauses = hasCallAndResponse(track);
   const untimedResponses = protectedPauses && !track.responsePauses;
   const translation = track.lang === 'es' ? 'RV1909' : 'KJV';
@@ -75,7 +84,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const progress = Math.floor(position / track.seconds * 100);
 
   async function toggle() {
-    if (playRequest.current || (unavailable && !playing)) return;
+    if (playRequest.current || (unavailable && !playing) || (!current && !nightAllowed)) return;
     touch();
     playRequest.current = true;
     setPlayPending(true);
@@ -87,6 +96,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         player.resume();
         pausedHere.current = false;
       } else {
+        if (sleep) nights.record(new Date());
         await player.play(track, user);
       }
     } finally {
@@ -157,13 +167,20 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         {unavailable && <Text accessibilityRole="alert" style={styles.note}>{t('listen.audioNotReady')}</Text>}
         {!unavailable && current && state.error === 'play-failed' &&
           <Text accessibilityRole="alert" style={styles.note}>{t('listen.playFailed')}</Text>}
+        {nightLocked ? <View style={styles.locked}>
+          <Text accessibilityRole="text" style={styles.lockedLine}>{t('listen.nextFreeNight', { day: nextNight })}</Text>
+          <Text style={styles.note}>{t('listen.everyNight')}</Text>
+          {settings.age !== 'child' && <Pressable accessibilityRole="button" style={styles.pill} onPress={() => router.push('/paid')}>
+            <Text style={styles.pillText}>{t('listen.seePlans')}</Text>
+          </Pressable>}
+        </View> : <>
         <View style={styles.transport}>
           {!protectedPauses && <Pressable disabled={!current || unavailable || playPending || !!state.error}
             accessibilityRole="button" accessibilityLabel={t('listen.back15')} style={styles.skip}
             onPress={() => { void player.skip(-15).catch(() => undefined); }}>
             <Text style={styles.skipText}>−15</Text>
           </Pressable>}
-          <Pressable onPress={() => void toggle()} disabled={playPending || (unavailable && !playing)} accessibilityRole="button"
+          <Pressable onPress={() => void toggle()} disabled={playPending || (unavailable && !playing) || (sleep && !nights.ready)} accessibilityRole="button"
             accessibilityLabel={playing ? t('listen.pause') : current && !state.error && !unavailable ? t('listen.resume') : t('listen.play')}
             accessibilityState={{ busy: playPending, disabled: unavailable && !playing }} style={[styles.play, unavailable && !playing && styles.disabled]}>
             <Svg width={26} height={28} viewBox="0 0 26 28">
@@ -184,7 +201,8 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
             {state.fading ? t('listen.fading') : t('listen.timerSummary', { setting: minutes === null ? t('listen.timerOff') : t('listen.minutes', { minutes }) })}
           </Text>
         </Pressable>
-        {(shelf === 'psalms' || shelf === 'imagination') && <Text style={styles.allowance}>
+        </>}
+        {sleep && !user.paid && !nightLocked && <Text style={styles.allowance}>
           {t(shelf === 'psalms' ? 'listen.psalmAllowance' : 'listen.nightAllowance')}
         </Text>}
         {offlineAllowed ? (
@@ -250,6 +268,10 @@ const styles = StyleSheet.create({
   disabled: { opacity: 0.55 },
   allowance: { color: night.muted, fontFamily: fonts.body, fontSize: 14, lineHeight: 20, textAlign: 'center' },
   cue: { minHeight: 30 },
+  locked: { gap: 14, alignItems: 'center', paddingVertical: 8 },
+  lockedLine: { color: night.ink, fontFamily: fonts.serif, fontSize: 21, lineHeight: 28, textAlign: 'center' },
+  pill: { minHeight: 48, borderRadius: 24, paddingHorizontal: 24, justifyContent: 'center', backgroundColor: night.glow },
+  pillText: { color: night.bg, fontFamily: fonts.strong, fontSize: 16 },
   responses: { gap: 8, marginBottom: 16 },
   response: { color: night.ink, fontFamily: fonts.serif, fontSize: 21, lineHeight: 30, textAlign: 'center' },
   play: { width: 84, height: 84, borderRadius: 42, backgroundColor: night.glow, alignItems: 'center', justifyContent: 'center' },

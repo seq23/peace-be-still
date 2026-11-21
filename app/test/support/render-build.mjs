@@ -12,8 +12,9 @@ const host = names => names.map(name => `exports[${JSON.stringify(name)}] = ${JS
 const MOCKS = {
   'react-native': `${host(['ActivityIndicator', 'Modal', 'Pressable', 'ScrollView', 'Switch', 'Text', 'TextInput', 'View'])}
     exports.StyleSheet = { create: x => x };
-    exports.Platform = { get OS() { return globalThis.__pbsPlatform || 'web'; }, select: o => o.web ?? o.default };
     exports.AppState = { currentState: 'active', addEventListener: () => ({ remove() {} }) };
+    exports.Linking = { openURL: async url => globalThis.__pbsOpenURL?.(url) };
+    exports.Platform = { get OS() { return globalThis.__pbsPlatform ?? 'web'; }, select: o => o.web ?? o.default };
     exports.useColorScheme = () => globalThis.__pbsScheme || 'light';`,
   'react-native-safe-area-context': `${host(['SafeAreaView'])}
     exports.SafeAreaProvider = ({ children }) => children;
@@ -32,13 +33,14 @@ const MOCKS = {
   'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
   'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`,
   '@react-native-async-storage/async-storage': `module.exports = { __esModule: true, default: globalThis.__pbsStorage };`,
-  'react-native-purchases': `exports.__esModule = true; exports.default = {
-    configure() {}, isConfigured: async () => true,
-    getCustomerInfo: async () => ({ entitlements: { active: globalThis.__pbsPaid ? { paid: {} } : {} } }),
-    addCustomerInfoUpdateListener() {}, removeCustomerInfoUpdateListener() {},
-  };`,
+  // Paid status comes from lane 5S's PurchasesProvider, driven by the test's fake store.
+  'react-native-purchases': `exports.__esModule = true; exports.default = globalThis.__pbsPurchases;
+    exports.PURCHASES_ERROR_CODE = { PAYMENT_PENDING_ERROR: '20', PURCHASE_CANCELLED_ERROR: '1' };`,
+  // The audio host from app.config.ts, plus whatever a test sets (the RevenueCat key).
+  'expo-constants': `exports.__esModule = true; exports.default = { get expoConfig() {
+    return { ...globalThis.__pbsExpoConfig, extra: { audioBaseUrl: require('./app.config').default.extra.audioBaseUrl, ...globalThis.__pbsExpoConfig?.extra } };
+  } };`,
   'expo-audio': '',
-  'expo-constants': `exports.__esModule = true; exports.default = { expoConfig: { extra: { audioBaseUrl: require('./app.config').default.extra.audioBaseUrl } } };`,
   'bible-store': `const core = require('./src/bible/core');
     const { DatabaseSync } = require('node:sqlite');
     Object.assign(exports, core);
