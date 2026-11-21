@@ -1,4 +1,4 @@
-// Shared page parts: header, footer and the one action (the launch waitlist).
+// Shared page parts: header, footer and the one action (the store call to action; no waitlist).
 export const BASE = "https://peacebestillapp.com";
 
 import { readFileSync } from "node:fs";
@@ -29,9 +29,26 @@ const CTA = {
     iosAlt: "Descárgalo en el App Store",
     playAlt: "Disponible en Google Play",
   },
+  // Korean pages (21 Nov 2026): the app itself is in English and Spanish, so the Korean CTA says so
+  // where people decide to download.
+  ko: {
+    soonH: "App Store와 Google Play에서 Peace Be Still을 찾아 주세요",
+    liveH: "Peace Be Still 받기",
+    p: "무료로 내려받을 수 있고, 무료로 쓰는 부분은 계속 무료예요. 광고도, 자동 결제로 넘어가는 무료 체험도 없어요. 앱 화면은 지금 영어와 스페인어로 되어 있어요.",
+    iosSoon: "곧 App Store에 나와요",
+    playSoon: "곧 Google Play에 나와요",
+    iosAlt: "App Store에서 다운로드",
+    playAlt: "Google Play에서 받기",
+  },
+};
+// The page languages the site renders: English, Spanish and (landing + question pages only) Korean.
+export const LANGS = ["en", "es", "ko"];
+export const langOf = (html) => {
+  const l = (String(html).match(/<html lang="(\w+)"/) || [])[1];
+  return LANGS.includes(l) ? l : "en";
 };
 export function storeCtaHtml(lang, store = storeConfig()) {
-  const t = CTA[lang === "es" ? "es" : "en"];
+  const t = CTA[LANGS.includes(lang) ? lang : "en"];
   const ios = store.app_store_url
     ? `<a class="store-badge" href="${store.app_store_url}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
     : `<span class="store-soon">${t.iosSoon}</span>`;
@@ -52,6 +69,16 @@ export function storeCtaHtml(lang, store = storeConfig()) {
 }
 
 export function headerHtml(lang, altPath) {
+  if (lang === "ko") return `<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="wrap site-head">
+  <a class="brand" href="/ko/" aria-label="Peace Be Still, 한국어 첫 페이지">
+    <picture>
+      <source srcset="/brand/pbs-wordmark-dark.svg" media="(prefers-color-scheme: dark)">
+      <img src="/brand/pbs-wordmark-light.svg" alt="Peace Be Still" width="225" height="36">
+    </picture>
+  </a>
+  <a class="lang" href="${altPath || "/"}" hreflang="en" lang="en">English ›</a>
+</header>`;
   const es = lang === "es";
   const alt = altPath || (es ? "/" : "/es/");
   return `<a class="skip" href="#main">${es ? "Ir al contenido" : "Skip to the page"}</a>
@@ -66,7 +93,23 @@ export function headerHtml(lang, altPath) {
 </header>`;
 }
 
-export function footerHtml(lang, updated = "18 Nov 2026") {
+// door "mindset": the two faith landing links are left out (the doors never link each other).
+export function footerHtml(lang, updated = "18 Nov 2026", door = "neutral") {
+  // Korean pages link the English legal pages, marked as English: no machine-translated legal text
+  // (owner ruling 6 Nov 2026, the KeepMyProof precedent).
+  if (lang === "ko") return `<footer class="site-foot">
+  <div class="wrap">
+    <span>Peace Be Still · Spry Labs가 만든 앱 · 2026년 11월 21일 업데이트</span>
+    <nav aria-label="바닥글">
+      <a href="/ko/">새벽기도</a>
+      <a href="/about" hreflang="en">소개 (영문)</a>
+      <a href="/privacy" hreflang="en">개인정보 처리방침 (영문)</a>
+      <a href="/terms" hreflang="en">이용약관 (영문)</a>
+      <a href="/support" hreflang="en">도움말 (영문)</a>
+      <a href="/" hreflang="en" lang="en">English</a>
+    </nav>
+  </div>
+</footer>`;
   const es = lang === "es";
   const upd = es ? ` · Actualizado el ${updated.replace("Nov", "nov")}` : ` · Updated ${updated}`;
   return es
@@ -80,7 +123,8 @@ export function footerHtml(lang, updated = "18 Nov 2026") {
       <a href="/es/terminos">Términos</a>
       <a href="/es/aviso">Aviso</a>
       <a href="/es/soporte">Ayuda</a>
-      <a href="/" hreflang="en" lang="en">English</a>
+${door === "mindset" ? "" : `      <a href="/ko/" hreflang="ko" lang="ko">한국어</a>
+`}      <a href="/" hreflang="en" lang="en">English</a>
     </nav>
   </div>
 </footer>`
@@ -94,7 +138,9 @@ export function footerHtml(lang, updated = "18 Nov 2026") {
       <a href="/terms">Terms</a>
       <a href="/disclaimer">Disclaimer</a>
       <a href="/support">Support</a>
-      <a href="/es/" hreflang="es" lang="es">Español</a>
+${door === "mindset" ? "" : `      <a href="/prayer-points/">Prayer points &amp; vigils</a>
+      <a href="/ko/" hreflang="ko" lang="ko">한국어 · 새벽기도</a>
+`}      <a href="/es/" hreflang="es" lang="es">Español</a>
     </nav>
   </div>
 </footer>`;

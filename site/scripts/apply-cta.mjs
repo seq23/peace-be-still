@@ -5,7 +5,7 @@
 // finds no page with a CTA block.
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { storeCtaHtml } from "../content/parts.mjs";
+import { storeCtaHtml, langOf } from "../content/parts.mjs";
 
 const pub = new URL("../public/", import.meta.url).pathname;
 export function applyCta() {
@@ -17,8 +17,7 @@ export function applyCta() {
       if (!f.endsWith(".html")) continue;
       const s = readFileSync(p, "utf8");
       if (!s.includes("<!-- cta:start -->")) continue;
-      const lang = (s.match(/<html lang="(\w+)"/) || [])[1] === "es" ? "es" : "en";
-      const out = s.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, storeCtaHtml(lang));
+      const out = s.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, storeCtaHtml(langOf(s)));
       if (out !== s) writeFileSync(p, out);
       n++;
     }
