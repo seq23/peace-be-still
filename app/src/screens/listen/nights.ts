@@ -10,8 +10,12 @@ export const NIGHTS_KEY = 'peace-be-still-sleep-nights';
 const NIGHT_STARTS_HOUR = 6;
 const DAY_MS = 86_400_000;
 
-/** Sleep sessions are the whispered Psalm Nights and Imagination Nights; Bible chapters and stories stay free. */
-export function isSleepSession(track: Pick<Track, 'kind'>): boolean {
+/**
+ * Sleep sessions are the whispered Psalm Nights (the grief nights among them) and Imagination Nights; Bible chapters
+ * and stories stay free. The short "3 AM, back to sleep" night is free for everyone and never spends a night (21 Nov 2026).
+ */
+export function isSleepSession(track: Pick<Track, 'kind' | 'journey'>): boolean {
+  if (track.journey === 'back-to-sleep') return false;
   return track.kind === 'psalm-night' || track.kind === 'imagination-night';
 }
 

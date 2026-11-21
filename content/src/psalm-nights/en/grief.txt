@@ -1,0 +1,107 @@
+# Grief nights (journey: grief, "For when you've lost someone") and the one "3 AM, back to sleep" night (journey: back-to-sleep).
+# English, KJV. Written by Claude (no free-model draft), 21 Nov 2026. Present and warm: no reason given for a death, no
+# timeline for grief, no "better place" promise; each grief night points to a pastor or a grief counselor.
+
+=== _grief_rest1
+text: We will stop reading now. [pause 8]
+text: Let the room be quiet. Let your breathing find its own pace. [pause 12]
+text: There is nothing you need to fix tonight, and nothing you are supposed to feel. [pause 12]
+text: If the tears come, let them come. If they do not, that is all right too. [pause 15]
+text: The love you have for them is still here. It does not have to go anywhere. [pause 15]
+text: If the nights stay this heavy, talk with your pastor, or with a grief counselor. Nobody is meant to carry this alone. [pause 15]
+text: The Lord is near to the broken in heart. Stay here as long as you need. [pause 30]
+text: Good night. [pause 45]
+
+=== _grief_rest2
+text: That is enough for tonight. [pause 8]
+text: Let your shoulders drop. Let the bed hold you up. [pause 12]
+text: You may be thinking of their face, or their voice, or the last time you spoke. You can hold that gently. [pause 15]
+text: Grief is a kind of love. It is all right that it hurts. [pause 15]
+text: You do not have to carry it alone. A pastor, a grief counselor, a friend who will sit with you: these are good gifts, and it is good to ask for them. [pause 15]
+text: The Lord is with you in the valley. Stay here as long as you like. [pause 30]
+text: Good night. [pause 45]
+
+=== _grief_rest3
+text: We will stop here. [pause 8]
+text: Let the dark be soft around you. Let the pillow be cool. [pause 12]
+text: You can say their name in the quiet, if you want to. God knows it already. [pause 15]
+text: There is no right way to do this, and nobody is timing you. [pause 15]
+text: When you feel able, reach out to your pastor, or to a grief counselor. People who have walked this road can walk a little of it with you. [pause 15]
+text: Jesus wept with his friends. He is not far from you tonight. [pause 30]
+text: Rest now. [pause 45]
+
+=== _back_rest
+text: Now let it be quiet. [pause 12]
+text: Let your breathing slow down on its own. In, and out. [pause 15]
+text: Nothing is needed from you. He does not sleep, so you can let go. [pause 20]
+text: Rest. [pause 60]
+
+=== gn-01-psalm-13 | Psalm 13: How Long, O Lord
+journey: grief
+main: PSA 13:1-6
+companions: JOH 11:35; PSA 56:8
+welcome: This is a night for when you have lost someone. [pause 10]
+welcome: You do not have to do anything here. You can lie down, or stay just as you are, with the phone in the dark beside you. [pause 12]
+welcome: Tonight we read Psalm 13. It is short, and it is honest. David asks God the same question four times. How long. [pause 12]
+welcome: We will read it twice, slowly. [pause 12]
+reflect1: How long. That question is in the Bible. Someone prayed it out loud, and God let it be written down. [pause 14]
+reflect1: Grief can feel as if God has gone quiet. The psalm does not scold David for saying so. It lets him say it. [pause 14]
+reflect1: You can say it too. Out loud, or only in your heart. Your questions do not offend God. [pause 15]
+reflect1: Then, near the end, David says one small word. But. He trusts God's mercy while the question is still open. [pause 15]
+reflect1: Here are two short passages to sit beside it. [pause 12]
+reflect2: Jesus wept. He stood with Mary and Martha in their sorrow, and he cried too. [pause 15]
+reflect2: And the psalmist pictures God keeping every tear in a bottle. Not one is wasted. Not one is forgotten. [pause 15]
+reflect2: Whoever you are missing tonight, you can bring their name to God. You do not have to find the right words. [pause 15]
+reflect2: Now Psalm 13 once more. If a line is yours tonight, let it be yours. [pause 15]
+rest: grief_rest1
+
+=== gn-02-psalm-23 | Psalm 23: Through the Valley
+journey: grief
+main: PSA 23:1-6
+companions: MAT 5:4; 2CO 1:3
+welcome: This is a night for when you have lost someone. [pause 10]
+welcome: Get as comfortable as you can. You can let the phone rest beside you. [pause 12]
+welcome: Tonight is Psalm 23. Many people first hear it at a funeral, and come back to it on the long nights afterward. [pause 12]
+welcome: We will read it twice. You only need to listen. [pause 12]
+reflect1: The psalm does not go around the valley. It goes through it, one step at a time. [pause 15]
+reflect1: And in the middle of the valley, the words change. David stops talking about God and starts talking to him. Thou art with me. [pause 15]
+reflect1: That is often how grief prays. Not in long sentences. Just, you are here. Stay with me. [pause 15]
+reflect1: There is a table in this psalm, and a cup, and a house to come home to. You do not have to feel any of that tonight. It is there in the words, waiting for you. [pause 15]
+reflect1: Two more short passages now. [pause 12]
+reflect2: Blessed are they that mourn. Jesus said that about people standing exactly where you are. Mourning is not failing. [pause 15]
+reflect2: And Paul gives God two names you can hold tonight. Father of mercies. God of all comfort. Comfort for this, too. [pause 15]
+reflect2: Now Psalm 23 again. Let it go slowly. Let each line land before the next one comes. [pause 15]
+rest: grief_rest2
+
+=== gn-03-john-11 | John 11: Jesus Wept
+journey: grief
+main: JOH 11:32-36
+companions: ECC 3:4; REV 21:4
+welcome: This is a night for when you have lost someone. [pause 10]
+welcome: Lie down, or sit, however your body wants to rest. [pause 12]
+welcome: Tonight is not a psalm. It is a few verses from the Gospel of John, when Jesus came to Bethany after his friend Lazarus had died. [pause 12]
+welcome: We will read it twice. [pause 12]
+reflect1: Mary says what so many grieving people say. Lord, if you had been here. [pause 15]
+reflect1: Jesus does not correct her. He does not give her a lesson. He sees her crying, and he is troubled, and he asks to be taken to the place. [pause 15]
+reflect1: And then he weeps. The one who was about to call Lazarus out of the grave still stopped to cry with his friends. [pause 15]
+reflect1: The people watching said, look how he loved him. Your tears tonight say that too. [pause 15]
+reflect1: Two more short passages now. [pause 12]
+reflect2: There is a time to weep, the Preacher says, and a time to mourn. This may be that time for you, and that is not wrong. [pause 15]
+reflect2: And at the very end of the Bible, God wipes away every tear. That is the hope at the end of the story. You can hold it, even while you still cry tonight. [pause 15]
+reflect2: Now John's words once more. Listen for the moment Jesus weeps. [pause 15]
+rest: grief_rest3
+
+=== bs-01-psalm-4 | Back to Sleep: In Peace I Will Lie Down
+journey: back-to-sleep
+main: PSA 4:8
+companions: PSA 63:6; PSA 3:5
+welcome: You are awake in the night. That is all right. [pause 10]
+welcome: Leave the lights off. Let the phone lie face down beside you. [pause 12]
+welcome: Here is one short line from Psalm 4, read twice, very slowly. [pause 12]
+reflect1: Lay me down in peace. That is all there is to do right now. Lie down. [pause 15]
+reflect1: Nothing has to be solved at this hour. It will keep until morning. [pause 15]
+reflect1: Two more short lines for the night. [pause 12]
+reflect2: David remembered God on his bed, in the night watches. You can do the same, without any words. [pause 15]
+reflect2: And he lay down, and slept, and woke again. The Lord held him through the night. [pause 15]
+reflect2: Here is the line from Psalm 4 once more. [pause 15]
+rest: back_rest

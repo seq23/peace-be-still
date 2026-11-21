@@ -29,10 +29,12 @@ import text as T  # noqa: E402
 BARS = {
     "sleep": {"lufs": (-24.0, -20.0), "tp_max": -2.0},
     "read": {"lufs": (-18.0, -16.0), "tp_max": -1.0},
+    # The "3 AM, back to sleep" night: very quiet, for a half-awake listener in a dark room (21 Nov 2026).
+    "hush": {"lufs": (-29.0, -25.0), "tp_max": -4.0},
 }
 ACCURACY = {"en": 0.95, "es": 0.90}
 WPM = (55.0, 150.0)          # words a minute; a sleep session's scripted quiet (`quiet`) is left out
-TARGET = {"sleep": -22.0, "read": -17.0}
+TARGET = {"sleep": -22.0, "read": -17.0, "hush": -27.0}
 
 
 def ffprobe_seconds(path: Path) -> float:

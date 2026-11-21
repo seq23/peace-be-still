@@ -132,7 +132,13 @@ const screens = {
   settings: require('../app/settings').default,
   paid: require('../app/paid').default,
   notFound: require('../app/+not-found').default,
+  grief: require('../app/grief').default,
 };
+const { clock } = require('../src/clock') as typeof import('../src/clock');
+const { shelfOf } = require('../src/screens/listen/catalog') as typeof import('../src/screens/listen/catalog');
+const realNow = clock.now;
+/** The phone's clock at this hour today (the small hours are 12 AM to 4:59 AM). */
+const setHour = (hour: number) => { clock.now = () => { const d = realNow(); d.setHours(hour, 12, 0, 0); return d; }; };
 type Name = Exclude<keyof typeof screens, 'root'>;
 
 const base: Settings = { door: 'faith', age: 'adult', ageSetAt: 0, voice: 'plain', language: 'en' };
@@ -162,7 +168,7 @@ mock.method(globalThis, 'fetch', async (url: string) => {
   assert.equal(url, audioBase + 'manifest.jsonl');
   return new Response(publishedTracks.map(track => JSON.stringify({ ...track, status: 'passed' })).join('\n'));
 });
-beforeEach(() => { calls = []; history = false; (globalThis as any).__pbsParams = {}; (globalThis as any).__pbsSegments = []; (globalThis as any).__pbsScheme = 'light'; (globalThis as any).__pbsLocale = 'en'; readFails = false; });
+beforeEach(() => { setHour(14); calls = []; history = false; (globalThis as any).__pbsParams = {}; (globalThis as any).__pbsSegments = []; (globalThis as any).__pbsScheme = 'light'; (globalThis as any).__pbsLocale = 'en'; readFails = false; });
 
 async function mount(name: Name, value: object | null = base, params: Record<string, string> = {}, override?: React.ComponentType) {
   saved = value ? JSON.stringify(value) : null;
@@ -870,7 +876,7 @@ test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor 
   };
   const psalmShelf = host(tree, 'Pressable').find(node => textOf(node).startsWith(en['journey.psalmNights.name'] + ' '));
   // Whispered Psalm Nights sessions sit on the Psalms shelf beside the read Psalms.
-  const count = audioTracks.filter(track => (track.kind === 'psalms' || track.kind === 'psalm-night') && track.lang === 'en').length;
+  const count = audioTracks.filter(track => shelfOf(track) === 'psalms' && track.lang === 'en').length;
   assert.ok(psalmShelf && textOf(psalmShelf).includes(i18n.t('listen.whisperedNights', { locale: 'en', count })));
   const cardRow = psalmShelf.findAll(node => (node.type as unknown) === 'View' && node.props.style?.flexDirection === 'row')[0];
   assert.ok(cardRow, 'The shelf details and chevron should share a horizontal row');
@@ -1929,4 +1935,151 @@ test('the offer and the default follow the journey: Morning Word asks for a 7:00
   assert.ok(strings(refugio).includes(es['reminder.offer.title.evening']) && es['reminder.offer.title.evening'].includes('cada noche'));
   assert.ok(strings(refugio).includes(reminders.formatTime({ hour: 20, minute: 30 }, 'es')));
   await act(async () => refugio.unmount());
+});
+
+// "3 AM, back to sleep" and "For when you've lost someone" (her brief 21 Nov 2026), on the real screens with a fake clock.
+const hushTrack = (lang: 'en' | 'es' = 'en'): Track => ({
+  file: `${lang}/psalm-night/bs-01-psalm-4-0000000${lang === 'en' ? '1' : '2'}.m4a`, kind: 'psalm-night', lang, seconds: 372, voice: 'kokoro:af_nicole',
+  titles: { [lang]: lang === 'en' ? 'Back to Sleep: In Peace I Will Lie Down' : 'Para volver a dormir: En paz me acostaré' },
+  scriptureRef: 'PSA 4:8', journey: 'back-to-sleep', sha256: 'c'.repeat(63) + (lang === 'en' ? '1' : '2'),
+  ref: `content/psalm-nights/${lang}/bs-01-psalm-4.json#bs-01-psalm-4`,
+} as Track);
+const griefTrack = (): Track => ({
+  file: 'en/psalm-night/gn-01-psalm-13-00000001.m4a', kind: 'psalm-night', lang: 'en', seconds: 660, voice: 'kokoro:af_nicole',
+  titles: { en: 'Psalm 13: How Long, O Lord' }, scriptureRef: 'PSA 13:1-6', journey: 'grief', sha256: 'd'.repeat(64),
+  ref: 'content/psalm-nights/en/gn-01-psalm-13.json#gn-01-psalm-13',
+} as Track);
+const screenBg = (tree: ReactTestRenderer) => host(tree, 'SafeAreaView')[0]?.props.style?.backgroundColor;
+
+async function withTracks(extra: Track[], published: Track[], run: () => Promise<void>) {
+  const before = publishedTracks;
+  publishedTracks = [...audioTracks, ...published];
+  audioTracks.push(...extra);
+  try { await run(); } finally {
+    for (const track of extra) { const i = audioTracks.indexOf(track); if (i >= 0) audioTracks.splice(i, 1); }
+    publishedTracks = before;
+  }
+}
+
+test('3 AM: Nights and Today are one calm button on night; 10 PM and 6 AM never show it', async () => {
+  const person = { ...base, journey: 'psalm-nights' };
+  const back = hushTrack();
+  await withTracks([back], [back], async () => {
+    for (const name of ['nights', 'today'] as const) {
+      setHour(3);
+      let tree = await mount(name, person);
+      await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+      try {
+        // Only the button, its one line and the way back: no shelves, cards, week dots or bright surface.
+        assert.deepEqual(texts(tree), [en['hush.label'], en['hush.play'], i18n.t('hush.detail', { locale: 'en', minutes: 6, ref: 'Psalm 4:8' }), en['hush.showAll']], name);
+        assert.equal(screenBg(tree), '#0E1A22', name);
+        assert.equal(host(tree, 'Pressable').length, 2, name);
+        await press(tree, en['hush.play']);
+        assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: back.sha256, play: '1' } }]);
+        // "Show everything" gives the usual screen, still on night colours.
+        await press(tree, en['hush.showAll']);
+        assert.ok(!texts(tree).includes(en['hush.play']), name);
+        assert.equal(screenBg(tree), '#0E1A22', name);
+      } finally { await act(async () => tree.unmount()); }
+      for (const hour of [22, 23, 5, 6]) {
+        setHour(hour);
+        tree = await mount(name, person);
+        await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+        try {
+          assert.ok(!texts(tree).includes(en['hush.play']), `${name} at ${hour}:12`);
+          assert.equal(screenBg(tree), '#F4F0E6', `${name} at ${hour}:12 follows the light phone`);
+        } finally { await act(async () => tree.unmount()); }
+      }
+    }
+    // The Mindset door never sees it; a Spanish phone gets only a published Spanish night (none here).
+    setHour(3);
+    for (const other of [{ ...base, door: 'mindset', journey: 'imagination-nights' }, { ...base, journey: 'mi-refugio', voice: 'spanish' }]) {
+      const tree = await mount('nights', other);
+      await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+      try { assert.ok(!strings(tree).includes(en['hush.play']) && !strings(tree).includes(es['hush.play'])); } finally { await act(async () => tree.unmount()); }
+    }
+  });
+});
+
+test('3 AM: a voiced back-to-sleep night that is not published yet is never offered', async () => {
+  const back = hushTrack();
+  await withTracks([back], [], async () => {
+    setHour(3);
+    const tree = await mount('nights', { ...base, journey: 'psalm-nights' });
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+    try {
+      assert.ok(!texts(tree).includes(en['hush.play']));
+      assert.ok(!strings(tree).includes(trackTitle(back, 'en')), 'never listed on a shelf either');
+      assert.equal(screenBg(tree), '#0E1A22', 'the small hours are night even without the button');
+    } finally { await act(async () => tree.unmount()); }
+  });
+});
+
+test('the back-to-sleep night starts from the one button, free even when the week is used, with no timer and no night spent', async () => {
+  const back = hushTrack();
+  const used = JSON.stringify([daysAgo(10), daysAgo(3)]);
+  nightsRecord = used;
+  publishedTracks = [...audioTracks, back];
+  const player = testPlayer(back);
+  saved = JSON.stringify({ ...base, journey: 'psalm-nights' });
+  const Ready = () => useSettings().ready ? <PurchasesProvider><NowPlaying track={back} close={() => undefined} autoplay /></PurchasesProvider> : null;
+  let tree!: ReactTestRenderer;
+  await act(async () => { tree = create(<SettingsProvider><Ready /></SettingsProvider>); });
+  await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+  await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+  try {
+    assert.ok(button(tree, en['listen.pause']), strings(tree));
+    assert.equal(player.source(), audioBase + back.file);
+    assert.equal(nightsRecord, used, 'no free night spent');
+    assert.ok(!texts(tree).includes(en['listen.timer']) && !strings(tree).includes(en['listen.nextFreeNight'].split('%')[0]));
+    assert.ok(!texts(tree).includes(en['listen.psalmWeekly']) && !texts(tree).includes(en['listen.paidDownload']));
+    assert.ok(texts(tree).includes(en['hush.label']));
+    assert.deepEqual(faithContentIssues(strings(tree)), []);
+  } finally { await act(async () => tree.unmount()); await player.dispose(); }
+});
+
+test('For when you\'ve lost someone: free stored verses and gentle lines, a pastor or counselor, nights only once published', async () => {
+  const person = { ...base, journey: 'psalm-nights' };
+  const today = await mount('today', person);
+  try {
+    await press(today, en['grief.name']);
+    assert.deepEqual(calls.pop(), ['push', '/grief']);
+  } finally { await act(async () => today.unmount()); }
+  const lines = JSON.parse(readFileSync('../content/grief/en.json', 'utf8')).items as { ref: string; declaration: string }[];
+  const voiced = griefTrack();
+  await withTracks([voiced], [], async () => {
+    let tree = await mount('grief', person);
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 20)); });
+    try {
+      const shown = texts(tree);
+      for (const line of lines) assert.ok(shown.includes(line.declaration), line.declaration);
+      // Every verse is the stored KJV, by reference (Psalm 34:18 first).
+      assert.ok(texts(tree).some(text => text.includes(storedVerse('PSA', 34, 18))), strings(tree));
+      assert.ok(shown.includes(en['grief.help.people']) && shown.includes(en['grief.help.crisis']));
+      assert.ok(!shown.includes(en['grief.nights']) && !strings(tree).includes(trackTitle(voiced, 'en')), 'a voiced but unpublished night is not shown');
+      assert.deepEqual(faithContentIssues(strings(tree)), []);
+    } finally { await act(async () => tree.unmount()); }
+    publishedTracks = [...publishedTracks, voiced];
+    tree = await mount('grief', person);
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+    try {
+      await press(tree, trackTitle(voiced, 'en'));
+      assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: voiced.sha256 } }]);
+    } finally { await act(async () => tree.unmount()); }
+    // On Nights the published grief night has its own shelf, never the Psalm Nights one.
+    tree = await mount('nights', person);
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+    try {
+      await press(tree, en['grief.name']);
+      assert.ok(strings(tree).includes(trackTitle(voiced, 'en')));
+    } finally { await act(async () => tree.unmount()); }
+  });
+  // The Mindset door never reaches it; Spanish phones read the RV1909 lines.
+  assert.equal(host(await mount('grief', { ...base, door: 'mindset', journey: 'imagination-nights' }), 'Redirect')[0].props.href, '/today');
+  const spanish = await mount('grief', { ...base, journey: 'mi-refugio', voice: 'spanish' });
+  await act(async () => { await new Promise(resolve => setTimeout(resolve, 20)); });
+  try {
+    const es1 = JSON.parse(readFileSync('../content/grief/es.json', 'utf8')).items[0].declaration;
+    assert.ok(texts(spanish).includes(es['grief.name']) && texts(spanish).includes(es1));
+  } finally { await act(async () => spanish.unmount()); }
 });

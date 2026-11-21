@@ -5,12 +5,13 @@ import { audioBaseUrl } from '../../player/library';
 
 const base = audioBaseUrl(Constants.expoConfig?.extra?.audioBaseUrl);
 
-export function usePublishedAudio() {
+/** The published files (R2 manifest), read on focus. `enabled` false skips the request (Today outside the small hours). */
+export function usePublishedAudio(enabled = true) {
   const focused = useIsFocused();
   const [published, setPublished] = useState<ReadonlyMap<string, string> | null>(null);
 
   useEffect(() => {
-    if (!focused || !base) return;
+    if (!focused || !base || !enabled) return;
     let active = true;
     const request = new AbortController();
     const timeout = setTimeout(() => request.abort(), 8000);
@@ -41,7 +42,7 @@ export function usePublishedAudio() {
       clearTimeout(timeout);
       request.abort();
     };
-  }, [focused]);
+  }, [focused, enabled]);
 
   return published;
 }

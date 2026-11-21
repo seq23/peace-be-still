@@ -3,7 +3,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readManifest, type ManifestRow } from './library';
+import { NIGHT_JOURNEYS, readManifest, type ManifestRow, type NightJourney } from './library';
 
 export const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 export const MANIFEST = join(REPO, 'audio/manifest.jsonl');
@@ -26,13 +26,15 @@ function scriptDisplay(row: ManifestRow) {
   const path = resolve(REPO, row.ref.split('#')[0]);
   if (!SCRIPT_ROOTS.some(root => path.startsWith(root)) || !path.endsWith('.json') || !existsSync(path)) return null;
   try {
-    const { title, blocks, main } = JSON.parse(readFileSync(path, 'utf8'));
+    const { title, blocks, main, journey } = JSON.parse(readFileSync(path, 'utf8'));
     if (typeof title !== 'string' || !title.trim()) return null;
     // A Psalm Night names its psalm in `main` ("PSA 23:1-6"); a story's key verse comes from its blocks.
     const psalm = Array.isArray(main) && typeof main[0] === 'string' ? main[0] : undefined;
     const scriptureRef = keyScripture(blocks) ?? psalm;
     // A script with no Scripture (an Imagination Night) carries no scriptureRef key at all.
-    return { titles: { [row.lang]: title.trim() }, ...(scriptureRef ? { scriptureRef } : {}) };
+    // A grief night or the "3 AM, back to sleep" night carries its journey, so it sits on its own shelf, not Psalm Nights.
+    const own = NIGHT_JOURNEYS.includes(journey) ? { journey: journey as NightJourney } : {};
+    return { titles: { [row.lang]: title.trim() }, ...(scriptureRef ? { scriptureRef } : {}), ...own };
   } catch { return null; }
 }
 

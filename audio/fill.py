@@ -70,7 +70,8 @@ RETRY_SPEED = 0.82
 GAP = {"psalms": 1.5, "bible": 1.0, "content": 1.2}   # seconds of quiet after each verse / paragraph
 HEADING_GAP = 1.2
 # Loudness targets inside qa.BARS: sleep -24..-20 LUFS (TP <= -2), read-aloud -18..-16 (TP <= -1).
-LEVEL_TARGET = {"sleep": (-22.0, -2.0), "read": (-17.0, -1.0)}
+# "hush" (-27 LUFS, TP <= -4) is the very quiet "3 AM, back to sleep" night (a session's `level`, 21 Nov 2026).
+LEVEL_TARGET = {"sleep": (-22.0, -2.0), "read": (-17.0, -1.0), "hush": (-27.0, -4.0)}
 TRANSLATION_NAME = {"en": "KJV", "es": "RV1909"}
 
 
@@ -101,7 +102,7 @@ FRONT_KINDS = SESSION_KINDS + (STORY_KIND,)   # queued ahead of the chapters and
 TARGET_SECONDS = {"imagination-night": 18 * 60, "psalm-night": 13 * 60}   # the low end of each writing target
 # Her ruling 21 Nov 2026: a floor catches BROKEN output (cut off, skipped chunks), not the target: under 75% of
 # the target is held (one slower render, then FAILED); between the floor and the target ships with a SHORT note.
-MIN_SECONDS = {k: round(v * 0.75) for k, v in TARGET_SECONDS.items()}
+# A night's own `target_seconds` (session_item) replaces its kind's target.
 
 
 def plan(bibles: dict, content: list | None = None) -> list[dict]:
@@ -226,11 +227,15 @@ def session_item(o: dict, f: Path, root: Path, lang: str) -> dict | None:
     kind = re.sub(r"[^a-z0-9-]+", "-", str(o.get("kind") or f.parent.name).lower()).strip("-")
     ident = re.sub(r"[^a-z0-9-]+", "-", str(o.get("id") or f.stem).lower()).strip("-")
     h = hashlib.sha256(json.dumps(pieces, ensure_ascii=False).encode()).hexdigest()[:8]
+    # A night may carry its own writing target (the grief nights, the 5-8 min "3 AM, back to sleep") and level (hush).
+    own = o.get("target_seconds")
+    target = int(own) if isinstance(own, (int, float)) and own > 0 else TARGET_SECONDS.get(kind)
+    level = o.get("level") if o.get("level") in LEVEL_TARGET else "sleep"
     return {"file": f"{lang}/{kind}/{ident}-{h}.m4a", "kind": kind, "lang": lang,
-            "ref": f"{f.relative_to(root)}#{o.get('id') or f.stem}", "priority": 3, "level": "sleep",
+            "ref": f"{f.relative_to(root)}#{o.get('id') or f.stem}", "priority": 3, "level": level,
             "heading": o.get("title") if isinstance(o.get("title"), str) else "",
             "verses": [p[0] for p in pieces], "gaps": [p[1] for p in pieces], "text": "script",
-            **({"min_seconds": MIN_SECONDS[kind], "target_seconds": TARGET_SECONDS[kind]} if kind in MIN_SECONDS else {})}
+            **({"min_seconds": round(target * 0.75), "target_seconds": target} if target else {})}
 
 
 _CALL_PAUSE = re.compile(r"\[PAUSE (\d+(?:\.\d+)?)s[^\]]*\]")
@@ -432,7 +437,9 @@ def text_counts(root: Path) -> dict:
     for o in passed(base / "stories/hush-harbor"):
         c["fav" if str(o.get("id", "")).startswith("fav-") else "hh"] += 1
     c["es"] = sum(1 for _ in passed(base / "stories/mi-refugio"))
-    c["psalm"] = sum(1 for lang in ("en", "es") for _ in passed(base / "psalm-nights" / lang))
+    # The 60 Psalm Nights only: the grief nights and the "3 AM, back to sleep" night share the folder, not the target.
+    c["psalm"] = sum(1 for lang in ("en", "es") for o in passed(base / "psalm-nights" / lang)
+                     if o.get("journey") not in ("grief", "back-to-sleep"))
     c["imagination"] = sum(1 for _ in passed(base / "imagination-nights/en"))
     for lang in ("en", "es"):
         f = base / "morning-word" / f"{lang}.json"

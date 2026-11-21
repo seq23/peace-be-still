@@ -1,6 +1,6 @@
 // Today keeps the date, week dots and the three daily cards in the shell's order.
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { dayKey, journeyById } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
@@ -12,6 +12,12 @@ import { DeclarationVerse } from '../../src/screens/daily/DeclarationVerse';
 import { WeekStrip } from '../../src/ui/week';
 import type { Key } from '../../src/i18n';
 import { ReminderOffer } from '../../src/reminders';
+import { clock } from '../../src/clock';
+import { listenTracks, isPreviewSample } from '../../src/screens/listen/preview';
+import { usePublishedAudio } from '../../src/screens/listen/availability';
+import { BackToSleep, useSmallHours } from '../../src/screens/listen/HushScreen';
+import { backToSleepTrack } from '../../src/screens/listen/hush';
+import type { Track } from '../../src/player/library';
 
 export default function Today() {
   const { settings } = useSettings();
@@ -26,6 +32,12 @@ export default function Today() {
   const open = (page: DailyPage) => router.push({ pathname: '/today/[page]', params: { page } });
   const faith = settings.door !== 'mindset';
   const nights = faith ? journeyById('psalm-nights')! : journeyById('imagination-nights')!;
+  // In the small hours Today is only the one back-to-sleep button, once its audio is published (the manifest is read then only).
+  const smallHours = useSmallHours();
+  const published = usePublishedAudio(smallHours && faith);
+  const [showAll, setShowAll] = useState(false);
+  const playable = (track: Track) => isPreviewSample(track) || published?.get(track.file) === track.sha256;
+  const hush = smallHours ? backToSleepTrack(listenTracks(), t.locale, settings.door, clock.now(), playable) : null;
 
   const item = (label: Key, text: string, extra?: React.ReactNode, done = false) => (
     <Card>
@@ -39,6 +51,8 @@ export default function Today() {
       </View>
     </Card>
   );
+
+  if (hush && !showAll) return <BackToSleep track={hush} showAll={() => setShowAll(true)} />;
 
   return (
     <Screen edges={['top']}>
@@ -65,6 +79,7 @@ export default function Today() {
         <Label>{t('daily.more')}</Label>
         {canUse(pages.plans.feature) && <TextLink onPress={() => open('plans')}>{t('daily.title.plans')}</TextLink>}
         {canUse(pages.journal.feature) && <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>}
+        <TextLink onPress={() => router.push('/grief')}>{t('grief.name')}</TextLink>
       </Card>}
     </Screen>
   );

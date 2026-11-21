@@ -4,6 +4,9 @@ import type { Track } from '../../player/library';
 
 export function shelfOf(track: Track) {
   if (track.kind === 'psalms' || track.kind === 'bible') return track.kind;
+  // A grief night sits on "For when you've lost someone"; the "3 AM, back to sleep" night is only ever the one button.
+  if (track.kind === 'psalm-night' && track.journey === 'grief') return 'grief';
+  if (track.kind === 'psalm-night' && track.journey === 'back-to-sleep') return 'backToSleep';
   // A whispered Psalm Night sits on the Psalms shelf; its psalm is its scriptureRef, not its ref (a script path).
   if (track.kind === 'psalm-night') return 'psalms';
   if (track.kind === 'imagination-night' || track.ref.startsWith('content/imagination-nights/')) return 'imagination';

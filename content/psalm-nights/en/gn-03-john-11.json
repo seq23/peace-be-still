@@ -1,0 +1,171 @@
+{
+ "id": "gn-03-john-11",
+ "kind": "psalm-night",
+ "journey": "grief",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "John 11: Jesus Wept",
+ "main": [
+  "JOH 11:32-36"
+ ],
+ "companions": [
+  "ECC 3:4",
+  "REV 21:4"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "This is a night for when you have lost someone. [pause 10]\n\nLie down, or sit, however your body wants to rest. [pause 12]\n\nTonight is not a psalm. It is a few verses from the Gospel of John, when Jesus came to Bethany after his friend Lazarus had died. [pause 12]\n\nWe will read it twice. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "JOH 11:32-36",
+   "label": "John 11:32-36",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Then when Mary was come where Jesus was, and saw him, she fell down at his feet, saying unto him, Lord, if thou hadst been here, my brother had not died."
+    },
+    {
+     "v": 33,
+     "text": "When Jesus therefore saw her weeping, and the Jews also weeping which came with her, he groaned in the spirit, and was troubled,"
+    },
+    {
+     "v": 34,
+     "text": "And said, Where have ye laid him? They said unto him, Lord, come and see."
+    },
+    {
+     "v": 35,
+     "text": "Jesus wept."
+    },
+    {
+     "v": 36,
+     "text": "Then said the Jews, Behold how he loved him!"
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Mary says what so many grieving people say. Lord, if you had been here. [pause 15]\n\nJesus does not correct her. He does not give her a lesson. He sees her crying, and he is troubled, and he asks to be taken to the place. [pause 15]\n\nAnd then he weeps. The one who was about to call Lazarus out of the grave still stopped to cry with his friends. [pause 15]\n\nThe people watching said, look how he loved him. Your tears tonight say that too. [pause 15]\n\nTwo more short passages now. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "ECC 3:4",
+   "label": "Ecclesiastes 3:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "A time to weep, and a time to laugh; a time to mourn, and a time to dance;"
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "REV 21:4",
+   "label": "Revelation 21:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "There is a time to weep, the Preacher says, and a time to mourn. This may be that time for you, and that is not wrong. [pause 15]\n\nAnd at the very end of the Bible, God wipes away every tear. That is the hope at the end of the story. You can hold it, even while you still cry tonight. [pause 15]\n\nNow John's words once more. Listen for the moment Jesus weeps. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "JOH 11:32-36",
+   "label": "John 11:32-36",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 32,
+     "text": "Then when Mary was come where Jesus was, and saw him, she fell down at his feet, saying unto him, Lord, if thou hadst been here, my brother had not died."
+    },
+    {
+     "v": 33,
+     "text": "When Jesus therefore saw her weeping, and the Jews also weeping which came with her, he groaned in the spirit, and was troubled,"
+    },
+    {
+     "v": 34,
+     "text": "And said, Where have ye laid him? They said unto him, Lord, come and see."
+    },
+    {
+     "v": 35,
+     "text": "Jesus wept."
+    },
+    {
+     "v": 36,
+     "text": "Then said the Jews, Behold how he loved him!"
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "We will stop here. [pause 8]\n\nLet the dark be soft around you. Let the pillow be cool. [pause 12]\n\nYou can say their name in the quiet, if you want to. God knows it already. [pause 15]\n\nThere is no right way to do this, and nobody is timing you. [pause 15]\n\nWhen you feel able, reach out to your pastor, or to a grief counselor. People who have walked this road can walk a little of it with you. [pause 15]\n\nJesus wept with his friends. He is not far from you tonight. [pause 30]\n\nRest now. [pause 45]"
+  }
+ ],
+ "words": 507,
+ "rest_part": "grief_rest3",
+ "pacing": {
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 618,
+ "target_seconds": 480,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "grief_words": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-21",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Grief nights and the 3 AM night (21 Nov 2026): every passage is stored KJV pasted by code (Ps 13, Ps 23, John 11:32-36, Ps 4:8 and companions); written lines echo in short phrases only. Lament is allowed (How long) without rebuke; no reason given for a death, no 'better place', no timeline for grief (the grief_words check); Rev 21:4 told as the hope at the end of the story, not a claim about the person who died; Jesus's and God's words given indirectly outside scripture. Each grief night points to a pastor or a grief counselor; the 3 AM night makes no sleep promise."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a grieving or half-awake listener can follow at 3 AM; the person who died is 'them', never assumed to be a spouse, parent or child; no pity, no hurry ('nobody is timing you'); the 3 AM night is short and spare, the phone face down. Lengths by silence only: grief nights 10-11.5 min, the 3 AM night 6 min (estimated at 117 wpm)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
