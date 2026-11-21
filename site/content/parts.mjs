@@ -18,12 +18,21 @@ export function privacyClaim(lang) {
   if (lang !== "en" && lang !== "es") return null; // no approved Korean wording yet
   const s = appStrings(lang);
   const count = readFileSync(new URL("../../app/src/gates/index.ts", import.meta.url), "utf8").match(/PAID_CHAT_MESSAGES = (\d+);/)[1];
-  return { head: s["paid.chatHeadline"], promise: s["paid.noTraining"], small: s["paid.fairUse"].replace("%{count}", count) };
+  // Her yes 21 Nov 2026: on the site the claim always says it is the paid plan's ("With a paid plan: ...").
+  const head = `${PLAN_PREFIX[lang]}: ${s["paid.chatHeadline"].replace(/^./, (ch) => ch.toLowerCase())}`;
+  return { head, promise: s["paid.noTraining"], small: s["paid.fairUse"].replace("%{count}", count) };
 }
+const PLAN_PREFIX = { en: "With a paid plan", es: "Con un plan de pago" };
 /** The claim as the page lead (home hero, the Bible chat pages). */
 export function claimHtml(lang) {
   const c = privacyClaim(lang);
-  return c ? `<p class="claim"><b>${c.head}.</b> ${c.promise} <small>${c.small}</small></p>` : "";
+  return c ? `<p class="claim">${claimBody(c)}</p>` : "";
+}
+const claimBody = (c) => `<b>${c.head}.</b> ${c.promise} <small>${c.small}</small>`;
+/** The same claim in the store CTA box, beside the buttons. */
+export function ctaClaimHtml(lang) {
+  const c = privacyClaim(lang);
+  return c ? `\n    <p class="cta-privacy">${claimBody(c)}</p>` : "";
 }
 // Which page sent a buyer: the page's path as a campaign name on each store link (Apple App Analytics
 // reads ct, with pt = her provider token from App Store Connect once store.json has it; Google Play
@@ -87,7 +96,7 @@ export function storeCtaHtml(lang, store = storeConfig(), source = "") {
   return `<!-- cta:start --><section class="wrap" id="get-the-app" aria-labelledby="cta-h">
   <div class="card cta-card">
     <h2 id="cta-h">${h}</h2>
-    <p>${t.p}</p>${privacyClaim(lang) ? `\n    <p class="cta-privacy">${privacyClaim(lang).promise}</p>` : ""}
+    <p>${t.p}</p>${ctaClaimHtml(lang)}
     <ul class="stores">
       <li>${ios}</li>
       <li>${play}</li>

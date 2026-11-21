@@ -60,11 +60,13 @@ test("privacy leads (her ruling 21 Nov 2026): the home hero and the Bible chat p
     const s = readFileSync(join(pub, f), "utf8");
     const claim = claimHtml(lang);
     assert.ok(claim.includes("never used to train AI") || claim.includes("nunca se usan para entrenar IA"), lang);
+    // Her yes 21 Nov 2026: the lead says it is the paid plan's, on the page and in the CTA box.
+    assert.match(claim, lang === "es" ? /<b>Con un plan de pago: chat bíblico ilimitado y privado\.<\/b>/ : /<b>With a paid plan: unlimited Bible chat, kept private\.<\/b>/, f);
     const at = s.indexOf(claim);
     assert.ok(at > 0 && at - s.indexOf("</h1>") < 80, `${f}: the claim is not the lead under the heading`);
   }
   const store = storeConfig();
-  for (const lang of ["en", "es"]) assert.match(storeCtaHtml(lang, store), /class="cta-privacy"/);
+  for (const lang of ["en", "es"]) assert.match(storeCtaHtml(lang, store), lang === "es" ? /class="cta-privacy"><b>Con un plan de pago: / : /class="cta-privacy"><b>With a paid plan: /);
   assert.doesNotMatch(storeCtaHtml("ko", store), /cta-privacy/);
 });
 
