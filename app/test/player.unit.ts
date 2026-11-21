@@ -110,6 +110,12 @@ test('the real manifest yields one track for every passed row, with readable tit
       assert.ok(call > 0 && before.length, `${t.ref} has Scripture before its call and response`);
       assert.equal(t.scriptureRef, before.at(-1).ref);
     }
+    if (t.kind === 'psalm-night') {
+      // A Psalm Night shows its psalm under the title: the script's own `main` reference.
+      fields.push('scriptureRef');
+      const script = JSON.parse(readFileSync(`${REPO}/${t.ref.split('#')[0]}`, 'utf8'));
+      assert.equal(t.scriptureRef, script.main[0]);
+    }
     assert.deepEqual(Object.keys(t).sort(), fields.sort());
   }
 });

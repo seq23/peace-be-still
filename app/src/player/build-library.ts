@@ -26,9 +26,11 @@ function scriptDisplay(row: ManifestRow) {
   const path = resolve(REPO, row.ref.split('#')[0]);
   if (!SCRIPT_ROOTS.some(root => path.startsWith(root)) || !path.endsWith('.json') || !existsSync(path)) return null;
   try {
-    const { title, blocks } = JSON.parse(readFileSync(path, 'utf8'));
+    const { title, blocks, main } = JSON.parse(readFileSync(path, 'utf8'));
     if (typeof title !== 'string' || !title.trim()) return null;
-    return { titles: { [row.lang]: title.trim() }, scriptureRef: keyScripture(blocks) };
+    // A Psalm Night names its psalm in `main` ("PSA 23:1-6"); a story's key verse comes from its blocks.
+    const psalm = Array.isArray(main) && typeof main[0] === 'string' ? main[0] : undefined;
+    return { titles: { [row.lang]: title.trim() }, scriptureRef: keyScripture(blocks) ?? psalm };
   } catch { return null; }
 }
 
