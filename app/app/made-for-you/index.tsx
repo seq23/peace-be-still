@@ -4,6 +4,7 @@ import { onboarded, startRoute } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { isMadeForYouPreview, useMadeForYouPaid } from '../../src/madeForYou/paidStub';
 import { previewApi } from '../../src/madeForYou/preview';
+import { previewCrisisText } from '../../src/madeForYou/crisis';
 import { MadeForYouScreen } from '../../src/madeForYou/Screen';
 
 export default function MadeForYouRoute() {
@@ -21,6 +22,7 @@ export default function MadeForYouRoute() {
   const { age, door } = settings;
   const kind = door === 'faith' ? 'psalm' : 'imagination';
   return <MadeForYouScreen key={`${age}:${door}:${locale}:${paid}:${previewState ?? ''}`} paid={paid && previewState !== 'locked'} api={api}
+    crisis={previewState === 'crisis' ? previewCrisisText[locale] : undefined}
     context={{ age, door, kind, lang: locale }}
     close={() => router.canGoBack() ? router.back() : router.replace('/nights')}
     plans={() => router.push('/paid')}

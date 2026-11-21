@@ -16,7 +16,7 @@ export type Shelf = {
   /** What a request sent now would be promised; null when tonight and tomorrow night are full. */
   next: number | null;
 };
-export type Submission = ({ status: 'pending'; dueAt: number } & Receipt) | { status: 'crisis'; text: string } | { status: 'preview' };
+export type Submission = ({ status: 'pending'; dueAt: number } & Receipt) | { status: 'crisis'; kind: string; text: string } | { status: 'preview' };
 export type SessionContext = { age: Age; door: Door; lang: Language; kind: Kind };
 /** The chat's report reasons (one report path, POST /api/report). */
 export type ReportReason = 'hurtful' | 'wrong' | 'unsafe' | 'other';

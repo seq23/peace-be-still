@@ -930,6 +930,39 @@ test('paid sessions render every state, then play, report and delete in the shar
   }
 });
 
+test('a crisis note gets the chat’s fixed reply with one-tap 988 help, and nothing is queued', async () => {
+  const { MadeForYouScreen } = require('../src/madeForYou/Screen') as typeof import('../src/madeForYou/Screen');
+  const replies = {
+    en: 'Please reach out right now to the 988 Suicide & Crisis Lifeline. Call or text 988, any time, day or night. If you are in danger now, call 911.',
+    es: 'Por favor, comunícate ahora con la Línea 988 de Prevención del Suicidio y Crisis. Llama al 988 y oprime 2 para español. Si estás en peligro ahora, llama al 911.',
+  };
+  for (const lang of ['en', 'es'] as const) {
+    (globalThis as any).__pbsOpened = [];
+    const context = { age: 'adult', lang, door: 'faith', kind: 'psalm' } as const;
+    const api = {
+      async list() { return { ready: [], pending: null, ended: null, requestedToday: false, next: Date.now() + 3_600_000 }; },
+      async submit() { return { status: 'crisis' as const, kind: 'self_harm', text: replies[lang] }; },
+      async play(): Promise<{ url: string }> { throw new Error('unused'); },
+      async remove(): Promise<{ deleted: number }> { throw new Error('unused'); },
+      async report(): Promise<{ reported: true }> { throw new Error('unused'); },
+    };
+    let tree!: ReactTestRenderer;
+    await act(async () => { tree = create(<MadeForYouScreen paid context={context} close={() => {}} plans={() => {}} play={() => {}} api={api} />); });
+    await type(tree, lang === 'es' ? 'No quiero seguir' : 'I want it to end');
+    await press(tree, lang === 'es' ? /preparar mi sesión/i : /make my session/i);
+    assert.ok(texts(tree).includes(replies[lang]));
+    const links = host(tree, 'Pressable').filter(n => n.props.accessibilityRole === 'link').map(textOf).filter(label => /988|911/.test(label));
+    assert.deepEqual(links, lang === 'es'
+      ? ['Llamar al 911', 'Llamar al 988', 'Enviar un texto al 988']
+      : ['Call 911', 'Call 988', 'Text 988']);
+    await press(tree, lang === 'es' ? 'Llamar al 988' : 'Call 988');
+    await press(tree, lang === 'es' ? 'Enviar un texto al 988' : 'Text 988');
+    assert.deepEqual((globalThis as any).__pbsOpened, ['tel:988', 'sms:988']);
+    assert.equal(host(tree, 'TextInput').length, 0, 'the form gives way to the help');
+    await act(async () => tree.unmount());
+  }
+});
+
 test('Settings deletes every made-for-you session after asking', async t => {
   sessionToken = true;
   t.after(() => { sessionToken = false; });
@@ -977,6 +1010,8 @@ test('web preview renders every paid state, including stopped, full and used, an
   assert.match(seen.get('used')!, /Puedes pedir otra mañana/);
   assert.match(seen.get('full')!, /ya no hay lugar/);
   assert.match(seen.get('ready')!, /Puedes pedir otra mañana/);
+  assert.match(seen.get('ready')!, /12 min/, 'the preview shelf shows a real session length');
+  assert.match(seen.get('crisis')!, /Llamar al 988/);
   const form = await mount('madeForYou', person, { state: 'form' });
   await type(form, 'Quiero descansar');
   await press(form, /preparar mi sesión/i);

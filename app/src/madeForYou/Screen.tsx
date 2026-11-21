@@ -1,13 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Linking, Pressable, Text, TextInput, View } from 'react-native';
 import { t } from '../i18n';
 import { fonts } from '../theme/tokens';
 import { BackLink, Body, Card, Label, PillButton, Screen, TextLink, Title, usePalette } from '../ui';
 import { madeForYouApi, SessionError, type Ready, type SessionContext, type Shelf } from './api';
 import { playedSessionKey } from './played';
 import { madeForYouCopy, readyWhen } from './copy';
+import { crisisLinks } from './crisis';
 
 type Props = {
   paid: boolean;
@@ -16,9 +17,11 @@ type Props = {
   plans: () => void;
   play: (row: Ready) => void;
   api?: typeof madeForYouApi;
+  /** The crisis reply to show at once (the web preview's ?state=crisis). */
+  crisis?: string;
 };
 
-export function MadeForYouScreen({ paid, context, close, plans, play, api = madeForYouApi }: Props) {
+export function MadeForYouScreen({ paid, context, close, plans, play, api = madeForYouApi, crisis }: Props) {
   const copy = madeForYouCopy(context.lang);
   const back = t('common.back', { locale: context.lang });
   if (!paid) return <Screen>
@@ -27,10 +30,10 @@ export function MadeForYouScreen({ paid, context, close, plans, play, api = made
     <Body>{copy('locked')}</Body>
     <PillButton onPress={plans}>{copy('plans')}</PillButton>
   </Screen>;
-  return <Sessions context={context} close={close} play={play} api={api} />;
+  return <Sessions context={context} close={close} play={play} api={api} crisis={crisis} />;
 }
 
-function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close' | 'play'> & { api: typeof madeForYouApi }) {
+function Sessions({ context, close, play, api, crisis: shownCrisis }: Pick<Props, 'context' | 'close' | 'play' | 'crisis'> & { api: typeof madeForYouApi }) {
   const { age, door, kind, lang } = context;
   const copy = madeForYouCopy(lang);
   const palette = usePalette();
@@ -51,7 +54,7 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
   const [text, setText] = useState('');
   const [sending, setSending] = useState(false);
   const [notice, setNotice] = useState<'limit' | 'failed' | 'preview' | 'full' | null>(null);
-  const [crisis, setCrisis] = useState('');
+  const [crisis, setCrisis] = useState(shownCrisis ?? '');
   const submission = useRef(false);
   const requestVersion = useRef(0);
 
@@ -130,7 +133,14 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
     </>}
     {(loadFailed || pending) && <TextLink onPress={() => refresh(value => value + 1)}>{copy('refresh')}</TextLink>}
     {!shelf && !loadFailed && <Body>{copy('loading')}</Body>}
-    {crisis ? <Text accessibilityRole="alert" style={{ color: palette.ink, fontFamily: fonts.body }}>{crisis}</Text>
+    {crisis ? <View style={{ gap: 10 }}>
+      <Text accessibilityRole="alert" style={{ color: palette.ink, fontFamily: fonts.body, fontSize: 17, lineHeight: 25 }}>{crisis}</Text>
+      {/* The same one-tap help as chat: nobody in crisis at bedtime should have to copy a number. */}
+      {crisisLinks(crisis, lang).map(link => <Pressable key={link.url} accessibilityRole="link" onPress={() => void Linking.openURL(link.url)}
+        style={{ minHeight: 48, justifyContent: 'center', paddingHorizontal: 18, borderWidth: 1, borderColor: palette.accent, borderRadius: 24 }}>
+        <Text style={{ color: palette.ink, fontFamily: fonts.strong, fontSize: 16 }}>{link.label}</Text>
+      </Pressable>)}
+    </View>
       : shelf && !pending && !canAsk ? <Body>{copy(shelf.requestedToday ? 'usedToday' : 'full')}</Body>
       : canAsk && <React.Fragment>
         <Body>{copy('description')}</Body>

@@ -12,7 +12,8 @@ const clips = {
 const clipOf = ({ kind, lang }: Pick<SessionContext, 'kind' | 'lang'>) => `${kind === 'psalm' ? 'psalm' : 'scene'}-${lang}` as const;
 export const previewClipPath = (context: Pick<SessionContext, 'kind' | 'lang'>) => `/made-for-you-preview/${clipOf(context)}.mp3`;
 function sample(context: SessionContext): Ready {
-  return { id: 'preview-session', day: '2026-11-20', ...clips[clipOf(context)] };
+  // The shelf shows a real session's length (11 min 30 s); the player plays the short public excerpt.
+  return { id: 'preview-session', day: '2026-11-20', ...clips[clipOf(context)], seconds: 690 };
 }
 
 /** The next 08:00 Central after now, plus `nights` more (the promise the Worker would give). */
@@ -23,7 +24,7 @@ function morning(nights: number, now = Date.now()) {
   }
 }
 
-export const PREVIEW_STATES = ['form', 'pending', 'tomorrow', 'retrying', 'late', 'stopped', 'expired', 'ready', 'used', 'full', 'error', 'locked'] as const;
+export const PREVIEW_STATES = ['form', 'pending', 'tomorrow', 'retrying', 'late', 'stopped', 'expired', 'ready', 'used', 'full', 'crisis', 'error', 'locked'] as const;
 
 /** ?state=<one of PREVIEW_STATES> on the web preview: every screen state, with no paid API call. */
 export function previewApi(state: string | undefined): typeof madeForYouApi {

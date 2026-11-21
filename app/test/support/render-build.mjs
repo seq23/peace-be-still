@@ -14,6 +14,7 @@ const MOCKS = {
     exports.StyleSheet = { create: x => x };
     exports.Platform = { get OS() { return globalThis.__pbsPlatform || 'web'; }, select: o => o.web ?? o.default };
     exports.AppState = { currentState: 'active', addEventListener: () => ({ remove() {} }) };
+    exports.Linking = { openURL: async url => { (globalThis.__pbsOpened ||= []).push(url); } };
     exports.useColorScheme = () => globalThis.__pbsScheme || 'light';`,
   'react-native-safe-area-context': `${host(['SafeAreaView'])}
     exports.SafeAreaProvider = ({ children }) => children;

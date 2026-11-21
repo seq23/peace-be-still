@@ -97,9 +97,9 @@ const es: Record<keyof typeof en, string> = {
   deleteYes: 'Borrar',
   deleteNo: 'Conservarla',
   deleteFailed: 'No pudimos borrarla. Inténtalo de nuevo.',
-  settingsDelete: 'Borrar mis sesiones Para ti',
+  settingsDelete: 'Borrar mis sesiones de Para ti',
   settingsAsk: '¿Borrar todas las sesiones preparadas para ti? No se puede deshacer.',
-  settingsDone: 'Se borraron tus sesiones Para ti.',
+  settingsDone: 'Se borraron tus sesiones de Para ti.',
 };
 
 i18n.store({ en: { madeForYou: en }, es: { madeForYou: es } });
