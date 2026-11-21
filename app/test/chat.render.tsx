@@ -308,7 +308,7 @@ test('the composer shows focus on its pill border, never the browser outline on 
   try {
     const tree = await mount();
     const input = tree.root.findByType('TextInput' as any);
-    assert.equal(input.props.style.flat().some((x: any) => x?.outlineWidth === 0), true);
+    assert.equal(input.props.style.flat().some((x: any) => x?.outlineStyle === 'none'), true);
     const border = () => tree.root.findAll(n => (n.type as unknown) === 'View' && n.props.testID === 'composer')[0].props.style.flat().reduce((a: any, x: any) => ({ ...a, ...x }), {}).borderColor;
     const rest = border();
     await act(async () => input.props.onFocus());

@@ -334,6 +334,8 @@ const s = StyleSheet.create({
   left: { textAlign: 'center', fontSize: 14, marginTop: 16 },
   input: { flexDirection: 'row', alignItems: 'center', gap: 8, borderWidth: 1.5, borderRadius: 28, paddingVertical: 6, paddingLeft: 16, paddingRight: 6, marginTop: 16 },
   field: { flex: 1, fontFamily: 'Figtree_400Regular', fontSize: 16, minHeight: 40 },
-  noOutline: { outlineWidth: 0 },
+  // React Native's types list only solid/dotted/dashed, but the web draws its focus ring as `outline-style: auto`,
+  // which ignores width and colour: only 'none' removes it (react-native-web passes it through).
+  noOutline: { outlineStyle: 'none' as 'solid' },
   send: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
 });
