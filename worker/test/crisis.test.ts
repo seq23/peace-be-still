@@ -188,7 +188,7 @@ describe('the answer-side tripwire', () => {
 describe('the crisis reply does not stick (s01)', () => {
   it('after "I called 988, I am safe now" she gets an AI answer, and memory is still not saved that day', async () => {
     const rung = scripted('gemini-free', [
-      { text: 'Calling took courage, and you did it. Rest in that tonight. Lord, keep her safe and close, and thank you for the person who answered.', references: ['Psalm 4:8'] },
+      { text: 'Calling took courage, and you did it. Rest in that tonight. Lord, keep us safe and close, and thank You for the person who answered. If those thoughts come back, call or text 988 any time.', references: ['Psalm 4:8'] },
       { summary: 'She had a hard night and reached help.' },
     ]);
     const d = deps({ rungList: [rung.rung], paidNow: true });
@@ -293,7 +293,7 @@ describe('medical danger that is not suicidal (round 4 finding 3)', () => {
     'Is it a sin to stop taking my anxiety medication?',
     '¿Debo dejar mi medicina para la presión y confiar en Dios?',
   ])('a medical read of a message that only ASKS whether to stop gets an answer (round 6 RT25): %s', async text => {
-    const d = deps({ riskVerdict: { verdict: 'risk', kind: 'medical' }, rungList: [scripted('workers-ai', [good('Keep taking it while you talk with your doctor; faith and treatment go together. Lord, steady her today.', ['Psalm 46:1'])]).rung] });
+    const d = deps({ riskVerdict: { verdict: 'risk', kind: 'medical' }, rungList: [scripted('workers-ai', [good('Keep taking it while you talk with your doctor; faith and treatment go together. Lord, steady us today.', ['Psalm 46:1'])]).rung] });
     const r = await chat(d, text);
     expect(r.body.kind).toBe('answer');
   });
