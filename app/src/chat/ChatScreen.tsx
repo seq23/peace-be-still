@@ -7,7 +7,7 @@ import { randomUUID } from 'expo-crypto';
 import { getLocales } from 'expo-localization';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Linking, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Linking, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { displayRuns } from '../bible/core';
 import type { Key } from '../i18n';
 import { FREE_CHAT_MESSAGES } from '../gates';
@@ -27,8 +27,9 @@ export const FREE_CONSENT_KEY = 'peace-be-still-free-chat-consent';
 /** Tappable lines for a crisis reply: 988 always; the hotline the reply names (Poison Control and 911 first for medical danger). */
 /**
  * Help when chat cannot answer at all (offline, a server error, too fast): the message that failed
- * may have been a crisis, so every error note carries the crisis line for her region and its links,
- * as the crisis card would (the server picks the same lines by the same region; missing means US).
+ * may have been a crisis, so every error note carries the crisis line for her region (the server picks
+ * the same lines by the same region; missing means US). It is one quiet line, not the crisis card's
+ * buttons: each [bracketed] part of the text is a tappable link, in the order of `links`.
  */
 export function regionHelp(region: string | null): { text: Key; links: Array<{ label: Key; url: string }> } {
   const r = region ?? 'US';
@@ -36,6 +37,19 @@ export function regionHelp(region: string | null): { text: Key; links: Array<{ l
   if (r === 'MX') return { text: 'chat.help.mx', links: [{ label: 'chat.call.mx', url: 'tel:8009112000' }, { label: 'chat.call.911', url: 'tel:911' }] };
   if (r === 'ES') return { text: 'chat.help.es', links: [{ label: 'chat.call.024', url: 'tel:024' }, { label: 'chat.call.112', url: 'tel:112' }] };
   return { text: 'chat.help.other', links: [{ label: 'chat.findHelpline', url: 'https://findahelpline.com' }] };
+}
+
+/** The help line under an error note: muted, with its [bracketed] words as inline links. */
+function NoteHelp({ region, c, t }: { region: string | null; c: Palette; t: T }) {
+  const help = regionHelp(region);
+  const parts = t(help.text).split(/\[([^\]]+)\]/);
+  return <Text testID="note-help" style={[s.note, { color: c.muted }]}>
+    {parts.map((part, j) => {
+      if (j % 2 === 0) return part;
+      const link = help.links[(j - 1) / 2];
+      return <Text key={j} accessibilityRole="link" accessibilityLabel={t(link.label)} onPress={() => void Linking.openURL(link.url)} style={{ color: c.accent, textDecorationLine: 'underline' }}>{part}</Text>;
+    })}
+  </Text>;
 }
 
 export function crisisLinks(res: ChatResponse): Array<{ label: Key; url: string }> {
@@ -102,6 +116,7 @@ export default function ChatScreen() {
   const [freeOk, setFreeOk] = useState<boolean | null>(null);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [input, setInput] = useState('');
+  const [focused, setFocused] = useState(false);
   const [sending, setSending] = useState(false);
   const [left, setLeft] = useState<{ remaining: number; limit: number } | null>(null);
   const [closed, setClosed] = useState(false);
@@ -243,11 +258,8 @@ export default function ChatScreen() {
       ? <Text key={i} style={[s.me, { backgroundColor: c.accent, color: c.on }]}>{e.text}</Text>
       : e.role === 'note'
         ? <View key={i} testID="chat-note">
-          <Text accessibilityRole="alert" style={[s.note, { color: c.muted }]}>{e.text}</Text>
-          <Text testID="note-help" style={[s.note, { color: c.ink }]}>{t(regionHelp(e.region).text)}</Text>
-          {regionHelp(e.region).links.map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
-            <Text style={[s.linkText, { color: c.accent }]}>{t(l.label)}</Text>
-          </Pressable>)}
+          <Text accessibilityRole="alert" style={[s.note, { color: c.muted, marginTop: 12 }]}>{e.text}</Text>
+          <NoteHelp region={e.region} c={c} t={t} />
         </View>
         : <View key={i} testID={`reply-${e.res.kind}`} style={[s.bot, { backgroundColor: c.card, borderColor: c.line }]}>
           {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
@@ -287,8 +299,9 @@ export default function ChatScreen() {
           {e.res.ai && <ReportAnswer answer={e.res.text} c={c} t={t} />}
         </View>)}
     {left && <Text style={[s.left, { color: c.muted }]}>{t('chat.left', { count: left.remaining, limit: left.limit })}</Text>}
-    <View style={[s.input, { borderColor: c.line, backgroundColor: c.card }]}>
-      <TextInput accessibilityLabel={t('chat.input')} placeholder={t('chat.input')} placeholderTextColor={c.muted} value={input} onChangeText={setInput} editable={!closed} multiline maxLength={2000} style={[s.field, { color: c.ink }]} />
+    {/* Focus shows on the pill's border (the accent), never as the browser's rectangle inside it. */}
+    <View testID="composer" style={[s.input, { borderColor: focused ? c.accent : c.line, backgroundColor: c.card }]}>
+      <TextInput accessibilityLabel={t('chat.input')} placeholder={t('chat.input')} placeholderTextColor={c.muted} value={input} onChangeText={setInput} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} editable={!closed} multiline maxLength={2000} style={[s.field, { color: c.ink }, Platform.OS === 'web' && s.noOutline]} />
       <Pressable accessibilityRole="button" accessibilityLabel={t('chat.send')} disabled={sending || closed} onPress={() => void send()} style={[s.send, { backgroundColor: c.accent, opacity: sending || closed ? 0.5 : 1 }]}>
         <Text style={{ color: c.on, fontSize: 18 }}>↑</Text>
       </Pressable>
@@ -314,12 +327,13 @@ const s = StyleSheet.create({
   verseText: { fontFamily: 'LibreCaslonText_400Regular', fontSize: 16, lineHeight: 23, color: night.ink },
   link: { borderWidth: 1.5, borderRadius: 40, paddingVertical: 12, alignItems: 'center' },
   linkText: { fontFamily: 'Figtree_600SemiBold', fontSize: 17 },
-  note: { textAlign: 'center', fontSize: 14, marginTop: 12 },
+  note: { fontFamily: 'Figtree_400Regular', fontSize: 14, lineHeight: 20, marginTop: 4 },
   small: { fontFamily: 'Figtree_400Regular', fontSize: 14, lineHeight: 20 },
   reasons: { gap: 6 },
   reason: { borderWidth: 1, borderRadius: 20, paddingVertical: 8, paddingHorizontal: 14, alignSelf: 'flex-start', minHeight: 44, justifyContent: 'center' },
   left: { textAlign: 'center', fontSize: 14, marginTop: 16 },
   input: { flexDirection: 'row', alignItems: 'center', gap: 8, borderWidth: 1.5, borderRadius: 28, paddingVertical: 6, paddingLeft: 16, paddingRight: 6, marginTop: 16 },
   field: { flex: 1, fontFamily: 'Figtree_400Regular', fontSize: 16, minHeight: 40 },
+  noOutline: { outlineWidth: 0 },
   send: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
 });
