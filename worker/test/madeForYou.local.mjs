@@ -94,7 +94,7 @@ test('requests are paid-only, crisis-checked first, one a day, and promised a re
   assert.equal((await call('invalid', { body: note })).status, 401);
   assert.equal((await call(id.limited, { body: note })).status, 429);
   for (const text of ['fixture floor', 'fixture model']) {
-    assert.deepEqual(await (await call(id.owner, { body: { ...note, text } })).json(), { status: 'crisis', text: 'Fixed safety reply' });
+    assert.deepEqual(await (await call(id.owner, { body: { ...note, text } })).json(), { status: 'crisis', kind: text, text: 'Fixed safety reply' });
   }
   assert.equal((await call(id.owner, { body: { ...note, text: 'fixture unavailable' } })).status, 503);
   assert.equal((await call(id.owner, { body: { ...note, door: 'mindset' } })).status, 400);
@@ -130,6 +130,8 @@ test('requests are paid-only, crisis-checked first, one a day, and promised a re
   assert.equal(full.status, 409);
   assert.deepEqual(await full.json(), { error: 'FULL' });
   assert.equal(await count(), queued, 'a request that cannot be made is never stored');
+  const status = await (await call(secret, { path: '/runner/status', body: {} })).json();
+  assert.equal(status.refusedFull, 1, 'demand over capacity is counted, with no identifier');
 });
 
 test('the runner drafts on the shared ladder with its own budget, erases the note at once, and stops on the third failure', async t => {
@@ -160,7 +162,7 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   const third = '20000000-0000-4000-a000-000000000001';
   const sceneInstall = '10000000-0000-4000-a000-000000000009';
   await db.prepare(`INSERT INTO made_for_you (id, install_id, day, kind, lang, teen, created_at, due_at, state, note)
-    VALUES (?, ?, '2026-11-17', 'imagination', 'en', 0, ?, ?, 'queued', 'Rain at the window')`).bind(third, sceneInstall, at, tonight).run();
+    VALUES (?, ?, '2026-11-17', 'imagination', 'en', 0, ?, ?, 'queued', 'Rain at the window')`).bind(third, sceneInstall, at - MIN, tonight).run();
   const dry = await claim(at, { 'x-test-models-down': 'openrouter-free' });
   assert.equal(dry.status, 503);
   assert.deepEqual(await dry.json(), { error: 'MADE_FOR_YOU_NO_FREE_MODEL' });
@@ -181,6 +183,12 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   assert.equal(held.note, null);
   assert.equal(held.script, null);
   assert.deepEqual(await chatCounters(), before);
+  // A request we failed does not use up her day.
+  const sceneShelf = await (await call(sceneInstall, { now: at + 40 * MIN, params: '?kind=imagination&lang=en' })).json();
+  assert.equal(sceneShelf.ended, 'stopped');
+  assert.equal(sceneShelf.requestedToday, false);
+  assert.equal((await call(sceneInstall, { now: at + 40 * MIN, body: scene })).status, 202);
+  assert.equal((await call(sceneInstall, { now: at + 41 * MIN, body: scene })).status, 429, 'still one a day');
 });
 
 test('the Mac publishes, she plays, reports (one report path) and deletes; the cron keeps every retention promise', async t => {
@@ -214,6 +222,9 @@ assert process_one(make_request(base + '/api', secret), voice, put)
   const playback = await (await call(id.owner, { now: Date.now(), params: `?kind=psalm&lang=es&play=${job}` })).json();
   assert.equal((await fetch(new URL('/_test-media/' + ready.audio_path, url))).status, 403);
   assert.equal(await (await fetch(playback.url)).text(), 'stub-voice');
+  const unset = await call(id.owner, { now: Date.now(), params: `?kind=psalm&lang=es&play=${job}`, headers: { 'x-test-storage': 'unset' } });
+  assert.equal(unset.status, 503);
+  assert.deepEqual(await unset.json(), { error: 'MADE_FOR_YOU_STORAGE_CONFIG' });
 
   // Report: another install cannot; she can; a person gets the audio and the reason, never her install id.
   const report = (token, body) => call(token, { now: Date.now(), path: '/api/report', body });
@@ -265,7 +276,7 @@ test('the runner status reports queue depth, held rows and late promises for its
   const { call } = await worker(t);
   await call(id.owner, { body: note });
   const status = async now => (await call(secret, { now, path: '/runner/status', body: {} })).json();
-  assert.deepEqual(await status(at + HOUR()), { queue: 1, late: 0, held: 0, oldestHours: 1 });
+  assert.deepEqual(await status(at + HOUR()), { queue: 1, late: 0, held: 0, refusedFull: 0, oldestHours: 1 });
   assert.equal((await status(tonight + MIN)).late, 1, 'past 08:00 the promise is broken and the runner says so');
 });
 function HOUR() { return 3_600_000; }

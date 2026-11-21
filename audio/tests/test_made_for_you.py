@@ -130,7 +130,7 @@ class MadeForYouTest(unittest.TestCase):
         out = io.StringIO()
         with redirect_stdout(out):
             sessions.report(lambda target, body: status, 2)
-        self.assertEqual(out.getvalue().strip(), "OUTPUT 2 published, queue 3, held 1, oldest 5.2 hours, late 0")
+        self.assertEqual(out.getvalue().strip(), "OUTPUT 2 published, queue 3, held 1, oldest 5.2 hours, late 0, refused full 0")
         status["late"] = 1
         with redirect_stdout(io.StringIO()), self.assertRaises(fill.NamedStop) as stopped:
             sessions.report(lambda target, body: status, 0)
@@ -154,6 +154,27 @@ class MadeForYouTest(unittest.TestCase):
     def test_session_time_comes_from_the_config_the_worker_promises_with(self):
         self.assertEqual(sessions.MIN_SESSION_SECONDS, sessions.CONFIG["sessionMinutes"] * 60)
         self.assertGreater(sessions.BOX_MINUTES * 60, sessions.MIN_SESSION_SECONDS)
+
+    def test_a_voice_crash_is_a_counted_failure_and_the_drain_moves_on(self):
+        crashed, ready = self.job(), self.job()
+        ready_id = "10000000-0000-4000-a000-000000000002"
+        ready.update(id=ready_id, path=ready["path"].replace(crashed["id"] + ".m4a", ready_id + ".m4a"))
+        jobs = iter([crashed, ready, None])
+        seen = []
+
+        def call(target, body):
+            seen.append(target)
+            if target == "claim":
+                return {"job": next(jobs)}
+            if target.endswith("/qa-failed"):
+                return {"code": "MADE_FOR_YOU_QA"}
+            return {"published": True}
+
+        render = Mock(side_effect=[RuntimeError("kokoro failed"),
+                                   {"status": "passed", "seconds": 680, "sha256": "hash", "_local": "session.m4a"}])
+        with redirect_stdout(io.StringIO()):
+            self.assertEqual(sessions.drain_queue(call, render, Mock()), 1)
+        self.assertEqual(seen, ["claim", f"{crashed['id']}/qa-failed", "claim", ready_id, "claim"])
 
     def test_timebox_kills_a_slow_render_and_raises_a_named_stop(self):
         with self.assertRaisesRegex(fill.NamedStop, "MADE_FOR_YOU_TIMEBOX") as stopped:

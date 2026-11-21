@@ -179,7 +179,14 @@ def process_one(call, render, put) -> bool:
         except (KeyError, TypeError, ValueError):
             raise failed("MADE_FOR_YOU_DRAFT") from None
         with TemporaryDirectory(prefix="pbs-private-audio-") as directory:
-            row = render(item, Path(directory))
+            try:
+                row = render(item, Path(directory))
+            except fill.NamedStop:
+                raise
+            except Exception:
+                # A crash in the voice, ffmpeg or the QA check is a failed try (the third stops the request),
+                # never an aborted pass that leaves the same row first in line for 7 days.
+                raise failed("MADE_FOR_YOU_QA") from None
             if row["status"] != "passed":
                 raise failed("MADE_FOR_YOU_QA")
             put(item, Path(row["_local"]))
@@ -216,7 +223,7 @@ def report(call, published: int) -> None:
     """The pass's one OUTPUT line, then MADE_FOR_YOU_LATE when any request is past the time she was shown."""
     status = call("status", {})
     print(f"OUTPUT {published} published, queue {status['queue']}, held {status['held']}, "
-          f"oldest {status['oldestHours']:.1f} hours, late {status['late']}", flush=True)
+          f"oldest {status['oldestHours']:.1f} hours, late {status['late']}, refused full {status.get('refusedFull', 0)}", flush=True)
     if status["late"]:
         raise fill.NamedStop("MADE_FOR_YOU_LATE", f"{status['late']} private session(s) past the promised time.")
 

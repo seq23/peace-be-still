@@ -17,6 +17,7 @@ import { parseReport, saveReport, REPORTS_DAILY } from 'phase-3/worker/src/repor
 import chatConfig from 'phase-3-config';
 import { createMadeForYou, madeForYouRungs, type MadeForYouDependencies } from './madeForYou';
 import { cleanDraft } from '../test/fixtures/madeForYouDraft.mjs';
+import { r2Private } from './madeForYou.storage';
 
 type Env = {
   DB: MadeForYouDependencies['db'] & D1Database;
@@ -48,6 +49,8 @@ export default {
     const down = header('x-test-models-down');
     const short = header('x-test-models-short');
     const judgeMode = request.headers.get('x-test-judge') ?? 'pass';
+    // The production client with no secrets: every storage call is the named stop MADE_FOR_YOU_STORAGE_CONFIG.
+    const unconfigured = request.headers.get('x-test-storage') === 'unset' ? r2Private({}) : null;
     const service = createMadeForYou({
       db: env.DB,
       now: () => now,
@@ -91,7 +94,7 @@ export default {
         return results.map(row => row.text);
       },
       hasAudio: async key => !!await env.AUDIO.head(key),
-      playUrl: async key => `${url.origin}/_test-media/${key}?ticket=local-only`,
+      playUrl: async key => unconfigured ? unconfigured.playUrl(key) : `${url.origin}/_test-media/${key}?ticket=local-only`,
       deleteAudio: async key => { await env.AUDIO.delete(key); },
       copyAudio: async (from, to) => {
         const object = await env.AUDIO.get(from);

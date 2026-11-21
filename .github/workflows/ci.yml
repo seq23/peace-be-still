@@ -25,10 +25,11 @@ jobs:
       PBS_CHAT_SOURCE: .phase-3
     steps:
       - uses: actions/checkout@v4
-      # Standalone lane tests use the shared chat code from the integration branch.
+      # Standalone lane tests use phase 3's real chat code at the commit the integration merge takes
+      # (codex/pbs-phase-3 head 8a8dfce, 20 Nov 2026). Drop the pin once phase 3 is on main.
       - uses: actions/checkout@v4
         with:
-          ref: bd407cbe772b20bc49a88f24ecd347d4311d1a0e
+          ref: 8a8dfce8fcc1dd647c5dd4e1ce4299626e995e1a
           path: .phase-3
       - uses: actions/setup-node@v4
         with:

@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS made_for_you (
   id TEXT PRIMARY KEY,
   install_id TEXT NOT NULL,
-  day TEXT NOT NULL,                 -- Central day of the request: one a day
+  day TEXT NOT NULL,                 -- Central day of the request: one a day (made_for_you_one_a_day)
   kind TEXT NOT NULL CHECK (kind IN ('psalm', 'imagination')),
   lang TEXT NOT NULL CHECK (lang IN ('en', 'es')),
   teen INTEGER NOT NULL,
@@ -21,9 +21,10 @@ CREATE TABLE IF NOT EXISTS made_for_you (
   seconds REAL,
   sha256 TEXT,
   published_at INTEGER,
-  paid_until INTEGER,
-  UNIQUE (install_id, day)
+  paid_until INTEGER
 );
+-- One a day, but a request WE failed (stopped) does not use up her day.
+CREATE UNIQUE INDEX IF NOT EXISTS made_for_you_one_a_day ON made_for_you (install_id, day) WHERE state <> 'stopped';
 CREATE INDEX IF NOT EXISTS made_for_you_queue ON made_for_you (due_at, created_at) WHERE state IN ('queued', 'scripted');
 CREATE INDEX IF NOT EXISTS made_for_you_shelf ON made_for_you (install_id, kind, lang, created_at);
 

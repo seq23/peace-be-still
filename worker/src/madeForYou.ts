@@ -14,6 +14,7 @@
 // the nights' real capacity (sessionsPerNight, sessionMinutes). A request that fits neither tonight
 // nor tomorrow night is refused before anything is stored, and she keeps her request for the day.
 import config from './madeForYou.config.json';
+import { StorageConfigError } from './madeForYou.storage';
 
 type Lang = 'en' | 'es';
 type Kind = 'psalm' | 'imagination';
@@ -72,7 +73,8 @@ export function allowanceBooks(chat: Record<string, string>) {
     geminiPerModel: { chat: n('GEMINI_CALLS_DAILY'), madeForYou: config.draft['gemini-free'] + config.judge['gemini-free'], allowance: a.geminiRequestsPerModel },
     openRouter: {
       chat: n('OPENROUTER_CALLS_DAILY') + a.openRouterRotationMargin,
-      madeForYou: config.draft['openrouter-free'] + config.judge['openrouter-free'], allowance: a.openRouterRequests,
+      // Like chat, made-for-you books room for its own rotation tries (one counted call can retry on other free models).
+      madeForYou: config.draft['openrouter-free'] + config.judge['openrouter-free'] + a.madeForYouRotationMargin, allowance: a.openRouterRequests,
     },
     // The nightly promise may not book more sessions than the budget or the Mac can make.
     sessions: {
@@ -248,6 +250,8 @@ const retryAfterOutageMs = 15 * MINUTE;
 const REPORT_DAYS = 90;
 const PLAN_GRACE = 30 * DAY;
 const STOPPED = 'MADE_FOR_YOU_ATTEMPTS_EXHAUSTED';
+// A request we failed (stopped) does not use up her day; the partial unique index in 0006 matches.
+const COUNTS_TODAY = "state <> 'stopped'";
 const NO_FREE_MODEL = 'MADE_FOR_YOU_NO_FREE_MODEL';
 const DRAFT_FAILED = 'MADE_FOR_YOU_DRAFT';
 const isKind = (v: unknown): v is Kind => v === 'psalm' || v === 'imagination';
@@ -389,8 +393,9 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
       const stats = await db.prepare(`SELECT count(*) AS queue, min(created_at) AS oldest, sum(due_at < ?) AS late,
           sum(retry_code IS NOT NULL) AS held FROM made_for_you WHERE state IN ('queued','scripted')`)
         .bind(now).first<{ queue: number; oldest: number | null; late: number | null; held: number | null }>();
+      const full = await db.prepare("SELECT n FROM chat_counts WHERE day = ? AND metric = 'mfy:full'").bind(deps.centralDay(now)).first<{ n: number }>();
       return json({
-        queue: stats?.queue ?? 0, late: stats?.late ?? 0, held: stats?.held ?? 0,
+        queue: stats?.queue ?? 0, late: stats?.late ?? 0, held: stats?.held ?? 0, refusedFull: full?.n ?? 0,
         oldestHours: stats?.oldest == null ? 0 : Math.round((now - stats.oldest) / HOUR * 10) / 10,
       });
     }
@@ -461,7 +466,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
         .first<Pick<Row, 'id' | 'day' | 'state' | 'due_at' | 'retry_code'>>(),
       db.prepare(`SELECT id, day, seconds, sha256 FROM made_for_you WHERE install_id = ? AND kind = ? AND lang = ? AND state = 'ready'
         ORDER BY created_at DESC, id DESC LIMIT 30`).bind(installId, channel, language).all<{ id: string; day: string; seconds: number; sha256: string }>(),
-      db.prepare('SELECT 1 AS used FROM made_for_you WHERE install_id = ? AND day = ?').bind(installId, deps.centralDay(now)).first(),
+      db.prepare(`SELECT 1 AS used FROM made_for_you WHERE install_id = ? AND day = ? AND ${COUNTS_TODAY}`).bind(installId, deps.centralDay(now)).first(),
       nextDue(now),
     ]);
     const waiting = latest && (latest.state === 'queued' || latest.state === 'scripted');
@@ -481,7 +486,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     const note = { kind: input.kind, lang: input.lang, text: input.text.trim(), teen: who.age === 'teen' };
     // The chat's own crisis floor and safety read, before anything is stored.
     const safety = await deps.detectCrisis([{ role: 'user', text: note.text }]);
-    if (safety.fired) return json({ status: 'crisis', text: deps.crisisText(safety.kind, note.lang, who.age, note.text) });
+    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, note.lang, who.age, note.text) });
     if (safety.read === 'down') return error(503, 'SAFETY_UNAVAILABLE');
     const id = crypto.randomUUID();
     const day = deps.centralDay(now);
@@ -489,12 +494,15 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     // One statement: D1 runs it alone, so two requests can never take the same place.
     const queued = await db.prepare(`INSERT INTO made_for_you (id, install_id, day, kind, lang, teen, created_at, due_at, state, note, paid_until)
       SELECT ?, ?, ?, ?, ?, ?, ?, due, 'queued', ?, ? FROM (SELECT ${p.due} AS due FROM (${p.counts})) WHERE due IS NOT NULL
-      ON CONFLICT (install_id, day) DO NOTHING RETURNING due_at`)
+      ON CONFLICT (install_id, day) WHERE state <> 'stopped' DO NOTHING RETURNING due_at`)
       .bind(id, who.installId, day, note.kind, note.lang, note.teen ? 1 : 0, now, note.text, paidUntil, ...p.binds, ...p.countBinds)
       .first<{ due_at: number }>();
     if (queued) return json({ status: 'pending', id, day, dueAt: queued.due_at }, 202);
-    const used = await db.prepare('SELECT 1 FROM made_for_you WHERE install_id = ? AND day = ?').bind(who.installId, day).first();
-    return used ? error(429, 'DAILY_LIMIT') : error(409, 'FULL');
+    const used = await db.prepare(`SELECT 1 FROM made_for_you WHERE install_id = ? AND day = ? AND ${COUNTS_TODAY}`).bind(who.installId, day).first();
+    if (used) return error(429, 'DAILY_LIMIT');
+    // Demand over capacity is counted (no identifier) so the runner's OUTPUT line shows it.
+    await db.prepare("INSERT INTO chat_counts (day, metric, n) VALUES (?, 'mfy:full', 1) ON CONFLICT(day, metric) DO UPDATE SET n = n + 1").bind(day).run();
+    return error(409, 'FULL');
   }
 
   return {
@@ -522,8 +530,9 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
         if (req.method === 'GET') return await shelf(url, who.installId, now);
         if (req.method === 'POST') return await request(await body(req), who, now, paid.paidUntil);
         return error(405, 'METHOD');
-      } catch {
+      } catch (e) {
         // Request bodies and provider or storage exceptions may contain private input: codes only.
+        if (e instanceof StorageConfigError) return error(503, e.code);
         return error(503, 'MADE_FOR_YOU_UNAVAILABLE');
       }
     },

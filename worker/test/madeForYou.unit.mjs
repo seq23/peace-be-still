@@ -14,7 +14,7 @@ const chat = resolve(process.env.PBS_CHAT_SOURCE ?? '../.wt-peace-be-still-phase
 const { config } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
 const bundle = await build({
   stdin: {
-    contents: `export * from './worker/src/madeForYou.ts'; export { checkAnswer } from 'phase-3/worker/src/quality/answer';`,
+    contents: `export * from './worker/src/madeForYou.ts'; export * from './worker/src/madeForYou.storage.ts'; export { checkAnswer } from 'phase-3/worker/src/quality/answer';`,
     resolveDir: process.cwd(), loader: 'ts',
   },
   bundle: true, format: 'esm', platform: 'node', write: false, alias: { 'phase-3': chat },
@@ -40,7 +40,7 @@ test('made-for-you rungs keep the chat order and providers but never touch chat 
   const rungs = [{ id: 'workers-ai' }, { id: 'gemini-free:a' }, { id: 'openrouter-free' }].map(r => ({ ...r, cap: 999, day: 'd', call: async () => 1 }));
   const draft = mfy.madeForYouRungs(rungs, 'draft');
   assert.deepEqual(draft.map(r => r.id), ['mfy:draft:workers-ai', 'mfy:draft:gemini-free:a', 'mfy:draft:openrouter-free']);
-  assert.deepEqual(draft.map(r => r.cap), [1, 0, 25]);
+  assert.deepEqual(draft.map(r => r.cap), [1, 0, 20]);
   assert.deepEqual(mfy.madeForYouRungs(rungs, 'judge').map(r => r.id)[2], 'mfy:judge:openrouter-free');
 });
 
@@ -113,4 +113,40 @@ test('the judge reads the whole script once and fails on any session flag or a l
   assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, voice: 2 }), shared, sceneEn, 'x'), 'reject');
   assert.equal(await mfy.madeForYouJudge(ladder({ voice: 5 }), shared, sceneEn, 'x'), 'down');
   assert.equal(calls, 4);
+});
+
+// AWS Signature V4: the two published S3 examples (docs.aws.amazon.com, "Authenticating requests:
+// query parameters" and "Examples: GET Object"), and two R2 requests signed independently by botocore 1.x.
+const aws = { accessKeyId: 'AKIAIOSFODNN7EXAMPLE', secretAccessKey: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY', now: Date.parse('2013-05-24T00:00:00Z'), service: 's3' };
+
+test('SigV4 matches the AWS published examples and botocore for R2 requests', async () => {
+  const presign = await mfy.signV4({ ...aws, method: 'GET', url: 'https://examplebucket.s3.amazonaws.com/test.txt', region: 'us-east-1', expires: 86400 });
+  assert.equal(presign.url, 'https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20130524%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20130524T000000Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=aeeed9bbccd4d02ee5c0109b86d86835f995330da4c265957d157751f604d404');
+  const get = await mfy.signV4({ ...aws, method: 'GET', url: 'https://examplebucket.s3.amazonaws.com/test.txt', region: 'us-east-1', headers: { Range: 'bytes=0-9' } });
+  assert.equal(get.headers.authorization, 'AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130524/us-east-1/s3/aws4_request, SignedHeaders=host;range;x-amz-content-sha256;x-amz-date, Signature=f0e8bdb87c964420e857bd35b5d6ed310bd44f0170aba48dd91039c6036bdb41');
+  const r2 = 'https://acct123.r2.cloudflarestorage.com/pbs-private';
+  const play = await mfy.signV4({ ...aws, method: 'GET', url: `${r2}/made-for-you/10000000-0000-4000-a000-000000000001/20000000-0000-4000-a000-000000000002.m4a`, region: 'auto', expires: 3600 });
+  assert.match(play.url, /X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=62579f8ccdbb2875709c2ff73c363feacb58d8f1f5501217bf62b758c90f80d8$/);
+  const copy = await mfy.signV4({ ...aws, method: 'PUT', url: `${r2}/reports/30000000-0000-4000-a000-000000000003.m4a`, region: 'auto', headers: { 'x-amz-copy-source': '/pbs-private/made-for-you/a/b.m4a' } });
+  assert.match(copy.headers.authorization, /SignedHeaders=host;x-amz-content-sha256;x-amz-copy-source;x-amz-date, Signature=d6f48cfc0afd344349e8f98cd027ab04ec1723cb7345ac27152eee3d1abad68f$/);
+  // Negative proof: one changed byte of the secret changes the signature.
+  const wrong = await mfy.signV4({ ...aws, secretAccessKey: aws.secretAccessKey.replace('K7', 'K8'), method: 'GET', url: 'https://examplebucket.s3.amazonaws.com/test.txt', region: 'us-east-1', expires: 86400 });
+  assert.notEqual(wrong.url, presign.url);
+});
+
+test('the private bucket client: playback links last an hour at most, and missing secrets are a named stop', async () => {
+  const sent = [];
+  const fetcher = async (url, init) => { sent.push([init.method, new URL(url).pathname, init.headers['x-amz-copy-source'] ?? null]); return new Response(null, { status: init.method === 'HEAD' && url.includes('gone') ? 404 : 200 }); };
+  const bucket = mfy.r2Private({ accountId: 'acct123', accessKeyId: aws.accessKeyId, secretAccessKey: aws.secretAccessKey, bucket: 'pbs-private' }, () => aws.now, fetcher);
+  const url = new URL(await bucket.playUrl('made-for-you/a/b.m4a', 86400));
+  assert.equal(url.searchParams.get('X-Amz-Expires'), '3600');
+  assert.equal(url.host, 'acct123.r2.cloudflarestorage.com');
+  assert.equal(await bucket.hasAudio('made-for-you/a/b.m4a'), true);
+  assert.equal(await bucket.hasAudio('made-for-you/a/gone.m4a'), false);
+  await bucket.deleteAudio('made-for-you/a/b.m4a');
+  await bucket.copyAudio('made-for-you/a/b.m4a', 'reports/c.m4a');
+  assert.deepEqual(sent.slice(2), [['DELETE', '/pbs-private/made-for-you/a/b.m4a', null], ['PUT', '/pbs-private/reports/c.m4a', '/pbs-private/made-for-you/a/b.m4a']]);
+  const unset = mfy.r2Private({ accountId: 'acct123', bucket: 'pbs-private' }, () => aws.now, fetcher);
+  await assert.rejects(unset.playUrl('x'), e => e.code === 'MADE_FOR_YOU_STORAGE_CONFIG');
+  await assert.rejects(unset.hasAudio('x'), e => e.code === 'MADE_FOR_YOU_STORAGE_CONFIG');
 });
