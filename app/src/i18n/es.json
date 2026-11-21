@@ -139,5 +139,8 @@
   "listen.forward15": "Avanzar 15 segundos",
   "listen.timerSummary": "%{setting} · el sonido se desvanece",
   "listen.psalmAllowance": "Tu primera noche es gratis. Después, una Noche de Salmos por semana.",
-  "listen.nightAllowance": "Tu primera noche es gratis. Después, una Noche de Imaginación por semana."
+  "listen.nightAllowance": "Tu primera noche es gratis. Después, una Noche de Imaginación por semana.",
+  "error.crash.title": "Algo salió mal.",
+  "error.crash.body": "Toca Intentar de nuevo. Si vuelve a pasar, cierra Peace Be Still y ábrela otra vez. Tus versículos guardados y tu diario siguen en este teléfono.",
+  "error.crash.retry": "Intentar de nuevo ›"
 }

@@ -7,7 +7,8 @@ import { readManifest, type ManifestRow } from './library';
 
 export const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 export const MANIFEST = join(REPO, 'audio/manifest.jsonl');
-const SCRIPT_ROOTS = ['stories', 'imagination-nights'].map(folder => join(REPO, 'content', folder) + sep);
+// Every folder whose scripts are spoken: stories and the two sleep-session kinds (Psalm Nights, Imagination Nights).
+const SCRIPT_ROOTS = ['stories', 'psalm-nights', 'imagination-nights'].map(folder => join(REPO, 'content', folder) + sep);
 
 type Block = { type?: unknown; ref?: unknown };
 const isScripture = (block: Block | undefined) => block?.type === 'scripture' && typeof block.ref === 'string';
@@ -20,9 +21,9 @@ export function keyScripture(blocks: unknown): string | undefined {
   return blocks.find(isScripture)?.ref;
 }
 
-/** Content rows point to the source script that supplies its title and key Scripture reference. */
+/** Content rows point to the source script (the fill may add `#<id>`) that supplies its title and key Scripture reference. */
 function scriptDisplay(row: ManifestRow) {
-  const path = resolve(REPO, row.ref);
+  const path = resolve(REPO, row.ref.split('#')[0]);
   if (!SCRIPT_ROOTS.some(root => path.startsWith(root)) || !path.endsWith('.json') || !existsSync(path)) return null;
   try {
     const { title, blocks } = JSON.parse(readFileSync(path, 'utf8'));
