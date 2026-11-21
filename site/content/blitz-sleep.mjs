@@ -163,7 +163,7 @@ ${V("MAR 4:39")}`],
 <li>If you woke at 3 a.m.: Psalm 63:6.</li>
 </ul>`],
       ["Is it okay to fall asleep listening to the Bible?", `<p>Yes. Many people play a psalm or a short passage read softly and fall asleep before it ends. Use a sleep timer so it stops on its own, keep the screen dark, and make sure nothing new starts playing.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon to the App Store and Google Play, has the whole King James Bible to hear for free, and Psalm Nights: a psalm whispered on an always-dark screen with a sleep timer that fades out. First night free, then one a week on the free lane, or every night on the paid lane ($7.99 a month or $39.99 a year, no trial).</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon to the App Store and Google Play, has the whole King James Bible free to read, with a growing set of chapters read aloud, and Psalm Nights: a psalm whispered on an always-dark screen with a sleep timer that fades out. First night free, then one a week on the free lane, or every night on the paid lane ($7.99 a month or $39.99 a year, no trial).</p>`],
     ],
     faq: [
       ["What is the best Bible verse for sleep?", `Psalm 4:8 is the verse most people choose: ${Q("PSA 4:8")} Proverbs 3:24 is a close second because it says ${F("PRO 3:24", "thy sleep shall be sweet")}.`],

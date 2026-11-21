@@ -11,7 +11,7 @@ const GN = "Oraciones de la noche";
 const GM = "Oraciones de la mañana";
 const GS = "Salmos";
 const GV = "Versículos";
-const MI_REFUGIO = `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae la Reina-Valera 1909 completa, para leer y escuchar gratis, un chat bíblico en español y Salmos susurrados para dormir.</p>`;
+const MI_REFUGIO = `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae la Reina-Valera 1909 completa para leer gratis y un chat bíblico en español. Todavía no hay audio en español.</p>`;
 const NOTA_RV = `<p class="muted">Los versículos se citan tal como están en la Reina-Valera 1909, con su ortografía antigua (“á”, “fué”). Algunos salmos empiezan con su título y la primera palabra en mayúsculas, como en la edición impresa.</p>`;
 
 export const ES = [
@@ -48,7 +48,7 @@ export const ES = [
 <tr><td>Domingo</td><td>${q("PSA 107:1")} (Salmos 107:1)</td></tr>
 </tbody></table>`],
       ["¿Hay un devocional diario gratis en español?", `${MI_REFUGIO}
-<p>La parte gratis, que no se acaba, incluye la Biblia completa en texto y audio, la historia bíblica del día, un chat al día de hasta 10 mensajes y una declaración diaria con su versículo. No hay anuncios ni prueba gratuita.</p>`],
+<p>La parte gratis, que no se acaba, incluye la Biblia completa para leer, la historia bíblica del día, un chat al día de hasta 10 mensajes y una declaración diaria con su versículo. No hay anuncios ni prueba gratuita.</p>`],
     ],
     faq: [
       ["¿Cuánto tiempo debe durar un devocional?", "Entre cinco y quince minutos. Es mejor un devocional corto todos los días que uno largo una vez al mes."],

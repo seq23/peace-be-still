@@ -255,5 +255,8 @@
   "story.pastPaid": "Every past story comes with the paid lane ›",
   "story.today": "Today",
   "story.none": "There are no past stories on this shelf yet.",
-  "story.pastIntro": "Every story from the days before today, newest first."
+  "story.pastIntro": "Every story from the days before today, newest first.",
+  "error.crash.title": "Something went wrong.",
+  "error.crash.body": "Tap Try again. If it keeps happening, close Peace Be Still and open it again. Your saved verses and journal are still on this phone.",
+  "error.crash.retry": "Try again ›"
 }

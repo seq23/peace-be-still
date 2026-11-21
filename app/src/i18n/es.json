@@ -255,5 +255,8 @@
   "story.pastPaid": "Todas las historias anteriores vienen con la suscripción ›",
   "story.today": "Hoy",
   "story.none": "Todavía no hay historias anteriores en este estante.",
-  "story.pastIntro": "Cada historia de los días anteriores, de la más reciente a la más antigua."
+  "story.pastIntro": "Cada historia de los días anteriores, de la más reciente a la más antigua.",
+  "error.crash.title": "Algo salió mal.",
+  "error.crash.body": "Toca Intentar de nuevo. Si vuelve a pasar, cierra Peace Be Still y ábrela otra vez. Tus versículos guardados y tu diario siguen en este teléfono.",
+  "error.crash.retry": "Intentar de nuevo ›"
 }

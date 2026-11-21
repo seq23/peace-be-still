@@ -4,8 +4,11 @@ Voices the app's library on her Mac and shelves every file on Drive. Audio never
 folder holds the code and `manifest.jsonl` (one row per file: file, kind, lang, ref, seconds, sha256,
 checks, shelved, status, voice).
 
-- **Order**: (1) Psalms, KJV + RV1909, one file per psalm; (2) every other chapter of the 66 books,
-  English and Spanish book by book; (3) scripts in `content/` marked `"status": "passed"`.
+- **Order**: (1) English Psalms; (2) the sleep sessions, the paid core (coordinator 21 Nov 2026): EN Psalm Nights,
+  ES Psalm Nights, Imagination Nights EN then ES (`content/psalm-nights`, `content/imagination-nights`: `segments`,
+  where `[pause N]` is N s of real quiet, verses are the stored text said with their reference, and QA's words-a-minute
+  leaves the scripted quiet out); (3) every other chapter, English then Spanish, in listening order; (4) other
+  passed scripts in `content/` (stories).
 - **Per file**: `render_kokoro.py` (Kokoro, voices in `VOICES.md`, 1.5 s quiet between psalm verses,
   1.0 s between chapter verses) → `fill.master` (two-pass EBU R128 `loudnorm`, true-peak target 1 dB
   under the ceiling, then AAC-LC mono 48 kbps `.m4a`; the ENCODED file is measured and, if AAC pushed it
@@ -54,7 +57,8 @@ checks, shelved, status, voice).
   `file` (Drive SHA-256 = manifest, then R2 size + md5 = Drive; the Mac never holds the file).
   `manifest.jsonl` at the bucket root is what the app reads (public fields + story titles) and the ledger
   that makes runs idempotent and resumable; the app's bundled copy is the offline fallback. The same step is
-  the backfill. Stops: `R2_FREE_STORAGE` (bucket + this batch over 9.5 GB), `R2_HASH_MISMATCH`,
+  the backfill. Stops: `R2_FREE_STORAGE` (every bucket on the account, read from Cloudflare's R2 analytics with
+  `CF2_WORKERS_AI_TOKEN`, + this batch over 9.5 GB), `R2_USAGE_UNREAD` (that total unreadable: nothing uploads), `R2_HASH_MISMATCH`,
   `R2_UNREACHABLE`, `R2_KEY_MISSING`; a Drive copy that is missing or not the manifest's file is HELD.
   Output `OUTPUT <n> files published to R2` and `r2: X of Y shelved files public`.
 - **Not yet here** (Phase 4 proper): A02 verse-by-verse alignment, A03 full name inventory + name
