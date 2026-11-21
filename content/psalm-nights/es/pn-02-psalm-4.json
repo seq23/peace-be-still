@@ -18,7 +18,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 9]\n\nBaja las luces, o apágalas. Deja que tu cuerpo se hunda un poco en la cama. [pause 12]\n\nEl salmo de esta noche es el Salmo cuatro. Es un salmo para la noche. Empieza con un hombre que clama a Dios en medio de la angustia, y termina con ese mismo hombre acostándose a dormir. [pause 11]\n\nEse es todo el camino de esta noche. De las preocupaciones del día a la calma de la cama. Lo vamos a leer dos veces. [pause 14]"
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nBaja las luces, o apágalas. Deja que tu cuerpo se hunda un poco en la cama. [pause 15]\n\nEl salmo de esta noche es el Salmo cuatro. Es un salmo para la noche. Empieza con un hombre que clama a Dios en medio de la angustia, y termina con ese mismo hombre acostándose a dormir. [pause 15]\n\nEse es todo el camino de esta noche. De las preocupaciones del día a la calma de la cama. Lo vamos a leer dos veces. [pause 15]"
   },
   {
    "part": "passage",
@@ -64,7 +64,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "El salmo dice que, en tu cama, hables con tu corazón y te quedes quieto. [pause 12]\n\nEs un buen consejo para el final del día. No repasar todo otra vez. No volver a discutir con el día. Solo estar quieto, y dejar que Dios vea tu corazón como está. [pause 14]\n\nEn medio del salmo hay una línea sobre la alegría. Dios le dio más alegría en el corazón que la que sienten otros cuando su cosecha es grande. La cosecha de otros parecía más grande. Pero la alegría que Dios le dio era suficiente. [pause 14]\n\nAhora, unos versículos que hablan del sueño. [pause 10]"
+   "text": "El salmo dice que, en tu cama, hables con tu corazón y te quedes quieto. [pause 22]\n\nEs un buen consejo para el final del día. No repasar todo otra vez. No volver a discutir con el día. Solo estar quieto, y dejar que Dios vea tu corazón como está. [pause 24]\n\nEn medio del salmo hay una línea sobre la alegría. Dios le dio más alegría en el corazón que la que sienten otros cuando su cosecha es grande. La cosecha de otros parecía más grande. Pero la alegría que Dios le dio era suficiente. [pause 24]\n\nAhora, unos versículos que hablan del sueño. [pause 20]"
   },
   {
    "part": "passage",
@@ -108,7 +108,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Me acosté, dormí, desperté. Palabras sencillas. David las escribió cuando huía para salvar su vida, y aun así descansó. [pause 12]\n\nY el proverbio habla de un sueño suave. No es una promesa para cada noche, sino una imagen de lo que puede ser descansar en Dios. [pause 12]\n\nY el Salmo ciento veintisiete dice que de nada sirve madrugar y acostarse tarde comiendo pan de preocupación. Él da sueño a sus amados. Por hoy ya puedes dejar de trabajar. [pause 14]\n\nAquí está el Salmo cuatro otra vez, desde el principio. Escucha el último versículo. Que sean tus propias palabras esta noche. [pause 16]"
+   "text": "Me acosté, dormí, desperté. Palabras sencillas. David las escribió cuando huía para salvar su vida, y aun así descansó. [pause 22]\n\nY el proverbio habla de un sueño suave. No es una promesa para cada noche, sino una imagen de lo que puede ser descansar en Dios. [pause 22]\n\nY el Salmo ciento veintisiete dice que de nada sirve madrugar y acostarse tarde comiendo pan de preocupación. Él da sueño a sus amados. Por hoy ya puedes dejar de trabajar. [pause 24]\n\nAquí está el Salmo cuatro otra vez, desde el principio. Escucha el último versículo. Que sean tus propias palabras esta noche. [pause 26]"
   },
   {
    "part": "passage",
@@ -160,11 +160,11 @@
  "words": 712,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 814,
+ "est_seconds": 817,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -201,7 +201,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

@@ -4,7 +4,7 @@ import { beforeEach, afterEach, mock, test } from 'node:test';
 import { buildLibrary, keyScripture, MANIFEST, REPO } from '../src/player/build-library';
 import { createDimmer } from '../src/player/dimmer';
 import { createDownloads, type DownloadFiles } from '../src/player/downloads';
-import { audioBaseUrl, hasCallAndResponse, readManifest, trackTitle, type Track } from '../src/player/library';
+import { audioBaseUrl, hasCallAndResponse, onePerScript, readManifest, trackTitle, type Track } from '../src/player/library';
 import { createPlayer, FADE_MS, LOAD_WAIT_MS, type AudioOutput, type AudioStatus, type Store } from '../src/player/player';
 
 const BASE = 'https://audio.test/';
@@ -79,10 +79,10 @@ function fakeFiles(body: (url: string) => string | Error = () => 'a'.repeat(64))
   return { files, api };
 }
 
-function setup({ baseUrl = BASE as string | null, store = memoryStore(), files = fakeFiles(), autoLoad = true } = {}) {
+function setup({ baseUrl = BASE as string | null, store = memoryStore(), files = fakeFiles(), autoLoad = true, onFinish = undefined as ((t: Track) => void) | undefined } = {}) {
   const audio = fakeAudio({ autoLoad });
   const downloads = createDownloads(files.api);
-  const player = createPlayer({ audio, store, downloads, baseUrl, lang: 'en' });
+  const player = createPlayer({ audio, store, downloads, baseUrl, lang: 'en', onFinish });
   return { audio, store, files, downloads, player };
 }
 
@@ -149,6 +149,27 @@ test('a story gets its own title; a story with no readable title is held', () =>
   const { tracks, skipped } = readManifest(jsonl, (r) => (r.file.endsWith('x.m4a') ? { titles: { en: 'Peace, Be Still' } } : null));
   assert.equal(trackTitle(tracks[0], 'es'), 'Peace, Be Still');
   assert.equal(skipped.length, 1);
+});
+
+const night = { file: 'en/imagination-night/in-01-aaaa1111.m4a', kind: 'imagination-night', lang: 'en', ref: 'content/imagination-nights/en/in-01.json#in-01', seconds: 1029, sha256: 'd'.repeat(64), voice: 'v', status: 'passed' };
+const nightTitles = () => ({ titles: { en: 'Living in the End', es: 'Vivir desde el final' } });
+
+test('a re-voiced script: the newest playable file is shown, never one hidden by a newer file not yet in R2', () => {
+  const longer = { ...night, file: 'en/imagination-night/in-01-bbbb2222.m4a', seconds: 1115, sha256: 'e'.repeat(64) };
+  const spanish = { ...night, lang: 'es', file: 'es/imagination-night/in-01-cccc3333.m4a', ref: 'content/imagination-nights/es/in-01.json#in-01' };
+  const { tracks } = readManifest([night, longer, spanish].map(r => JSON.stringify(r)).join('\n'), nightTitles);
+  assert.deepEqual(tracks.map(t => t.file), [night.file, longer.file, spanish.file], 'the library keeps every passed file');
+  const live = (...files: string[]) => (t: { file: string }) => files.includes(t.file);
+  // Old published + new unpublished -> the old one; both published -> the new one; neither -> the newest (shown as not ready).
+  assert.deepEqual(onePerScript(tracks, live(night.file, spanish.file)).map(t => t.file), [night.file, spanish.file]);
+  assert.deepEqual(onePerScript(tracks, live(night.file, longer.file)).map(t => t.file), [longer.file, spanish.file]);
+  assert.deepEqual(onePerScript(tracks, live()).map(t => t.file), [longer.file, spanish.file]);
+});
+
+test('a re-voiced script whose new file failed keeps its old published file listed', () => {
+  const failed = { ...night, file: 'en/imagination-night/in-01-bbbb2222.m4a', sha256: 'e'.repeat(64), status: 'FAILED' };
+  const { tracks } = readManifest([night, failed].map(r => JSON.stringify(r)).join('\n'), nightTitles);
+  assert.deepEqual(onePerScript(tracks, t => t.file === night.file).map(t => t.file), [night.file]);
 });
 
 test('the audio base URL must be https; anything else is the CONFIG_AUDIO_BASE_URL stop', () => {
@@ -270,6 +291,19 @@ test('a spot in the last 10 seconds, or a finished track, starts again from the 
   second.audio.finish();
   await flush();
   assert.equal(store.data.size, 0);
+});
+
+test('a track played to its end is reported once (the daily reminder\'s first value); a pause is not', async () => {
+  const finished: string[] = [];
+  const { audio, player } = setup({ onFinish: t => finished.push(t.file) });
+  await player.play(track({ seconds: 100 }), FREE);
+  await player.pause();
+  await flush();
+  assert.deepEqual(finished, []);
+  await player.play(track({ seconds: 100 }), FREE);
+  audio.finish();
+  await flush();
+  assert.deepEqual(finished, [track().file]);
 });
 
 test('the saved spot is applied only after the track reports loaded', async () => {

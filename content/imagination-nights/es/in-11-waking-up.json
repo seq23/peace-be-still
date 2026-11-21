@@ -1,0 +1,87 @@
+{
+ "id": "in-11-waking-up",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "La mañana de después",
+ "theme": "la mañana después del deseo",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de imaginación. [pause 3]\n\nAcuéstate como te resulte más cómodo. Deja que la cama cargue todo tu peso. [pause 8]\n\nToma aire despacio por la nariz. Y suéltalo por la boca, un poquito más largo de lo que entró. [pause 8]\n\nOtra vez. Entra el aire. Y sale, lento y largo. [pause 10]\n\nAfloja la frente. La mandíbula. Los hombros. Las manos. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEsta noche no hay nada que hacer más que imaginar. Y imaginar es algo que ya sabes hacer. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Esta noche probamos algo un poco distinto. En lugar de imaginar la tarde después de tu deseo, imaginamos la mañana. [pause 6]\n\nLos primeros segundos al despertar son honestos. Antes de acordarnos del día, el cuerpo ya sabe cómo se siente. Hay mañanas en que despertamos con un nudo. Y hay otras en que despertamos con ligereza. [pause 8]\n\nEsta noche vas a imaginar que despiertas una mañana cualquiera después de que tu deseo se cumplió. No el día en que pasó. Una mañana sencilla, semanas después, cuando ya es parte de tu vida. [pause 8]\n\nFíjate cómo se siente tu cuerpo en ese primer momento. ¿Qué es lo primero que piensas? ¿De dónde entra la luz? ¿Qué se oye? [pause 8]\n\nComo siempre, esta es una práctica de imaginación y de sentimiento. No es una promesa de lo que va a pasar. Es una manera suave de irte a la cama con una imagen más ligera del día de mañana, y de dejar que el cuerpo ensaye lo que se siente la calma. [pause 8]\n\nTrae ahora tu deseo a la mente. Solo nómbralo una vez, en silencio. [pause 13]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Es temprano en la mañana. Te estás despertando. Todavía tienes los ojos cerrados. [pause 22]\n\nFíjate en los sonidos. Un pájaro afuera. Un carro a lo lejos. Los ruiditos de la casa. [pause 25]\n\nAntes de abrir los ojos, te acuerdas. Ah. Es cierto. Ya pasó. [pause 25]\n\nSiente cómo llega la sonrisa antes de que decidas sonreír. [pause 25]\n\nAbre los ojos en la escena. Fíjate en la luz del techo. El color de las paredes. [pause 25]\n\nEstírate. Siente qué fácil está tu cuerpo esta mañana. No hay ningún peso en el pecho. [pause 25]\n\nPon los pies en el piso. Siéntelo, fresco y firme. [pause 25]\n\nVe a la cocina y pon el café, o el agua para el té. Oye cómo empieza. [pause 28]\n\nMientras esperas, mira por la ventana. El día que viene es un día normal, y eso es lo mejor. Tu deseo ya es simplemente parte de lo normal. [pause 28]\n\nAlguien te escribe buenos días. Le contestas. La vida va caminando, y va caminando bien. [pause 28]\n\nSírvete la taza. Agárrala con las dos manos. Siente el calor. [pause 30]\n\nDi bajito en tu mente, así es mi vida ahora. Qué alegría. [pause 30]\n\nLuego deja que la mañana se desvanezca, y que la noche vuelva a rodearte, con esa mañana guardada adentro. [pause 35]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Ahora deja que la escena se quede contigo mientras te vas quedando en calma. [pause 10]\n\nNo tienes que agarrarla fuerte. Solo deja que esté ahí, tibia y callada, como una lámpara encendida en otro cuarto. [pause 15]\n\nSi la mente se te va, vuelve a un detalle pequeño. Un sonido. Una palabra. Lo que sienten tus manos. [pause 20]\n\nEsto es solo imaginación, y la imaginación tiene permiso de ser amable. [pause 20]\n\nTal vez notes que respiras más despacio que cuando empezamos. Deja que siga así. [pause 25]\n\nDeja que el cuerpo pese todavía un poco más. No hay ningún lugar adonde ir. [pause 25]\n\nSi el sueño todavía no llega, no pasa nada. Quédate en silencio con la escena, y deja que el silencio haga lo suyo. [pause 30]\n\nDescansa ahora. [pause 60]"
+  }
+ ],
+ "words": 672,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 115,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1121,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass",
+   "verse_read": "pass",
+   "listener_gender": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words, no faith words or scripture; each teaching names imagination, not a promise. Self-worth night gives 988 and says it answers in Spanish; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health promise and offers a wheelchair or porch version; family night never forces anyone to change; business night pictures enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

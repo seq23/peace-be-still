@@ -80,13 +80,51 @@ def whisper_model(size: str):
     return WhisperModel(size, device="cpu", compute_type="int8")
 
 
+SILENCE_DB = -50.0     # a 50 ms frame quieter than this is silence
+KEEP_SILENCE_S = 0.4   # quiet kept at each cut, so words are never clipped
+
+
+def speech_only(audio, rate: int = 16000, min_gap_s: float = 1.5):
+    """The audio with every silence longer than min_gap_s cut down to KEEP_SILENCE_S, leading and trailing
+    silence included. Whisper invents words in long silence (21 Nov 2026: "suscríbete suscríbete" in the
+    closing 60 s of a sleep session), and a sleep session is mostly silence; the scripted quiet is checked
+    by its own bars, so ASR hears only the speech. Pure (numpy in, numpy out)."""
+    import numpy as np
+    frame = int(rate * 0.05)
+    n = len(audio) // frame
+    if n == 0:
+        return audio
+    rms = np.sqrt(np.mean(np.square(audio[: n * frame].reshape(n, frame)), axis=1) + 1e-12)
+    loud = 20 * np.log10(rms) > SILENCE_DB
+    keep = np.zeros(n, dtype=bool)
+    pad = int(KEEP_SILENCE_S / 0.05)
+    run_start = None
+    for i in range(n + 1):
+        quiet = i < n and not loud[i]
+        if quiet and run_start is None:
+            run_start = i
+        elif not quiet and run_start is not None:
+            length = i - run_start
+            inner = run_start > 0 and i < n     # a gap between speech keeps a little quiet on each side
+            if length * 0.05 < min_gap_s and inner:
+                keep[run_start:i] = True
+            elif inner:
+                keep[run_start:run_start + pad] = True
+                keep[i - pad:i] = True
+            run_start = None
+        if i < n and loud[i]:
+            keep[i] = True
+    idx = np.repeat(keep, frame)
+    return audio[: n * frame][idx]
+
+
 def transcribe(path: Path, lang: str, model: str = "base") -> str:
     """faster-whisper, local. "base" first (QUALITY.md A01); a score under the bar is heard again
     by "small" before it counts, because base mishears the KJV's old words (Psalm 3, 18 Nov 2026:
     base 0.947 with "belongeth" -> "belongs", "Absalom" -> "upsalam"; small 0.98 on the same file)."""
     if model not in _MODELS:
         _MODELS[model] = whisper_model(model)
-    segs, _ = _MODELS[model].transcribe(decode(path, 16000), language=lang, beam_size=5,
+    segs, _ = _MODELS[model].transcribe(speech_only(decode(path, 16000)), language=lang, beam_size=5,
                                         condition_on_previous_text=False)
     return " ".join(s.text.strip() for s in segs)
 

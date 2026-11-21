@@ -1,0 +1,87 @@
+{
+ "id": "in-19-the-evening-walk",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "La caminata de la tarde",
+ "theme": "un cuerpo en calma",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de imaginación. [pause 3]\n\nAcuéstate como te resulte más cómodo. Deja que la cama cargue todo tu peso. [pause 8]\n\nToma aire despacio por la nariz. Y suéltalo por la boca, un poquito más largo de lo que entró. [pause 8]\n\nOtra vez. Entra el aire. Y sale, lento y largo. [pause 10]\n\nAfloja la frente. La mandíbula. Los hombros. Las manos. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEsta noche no hay nada que hacer más que imaginar. Y imaginar es algo que ya sabes hacer. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "La escena de esta noche es sencilla. Una caminata al final del día, con calma y a gusto en tu propio cuerpo. [pause 12]\n\nNo nos imaginamos un cambio en tu salud ni en tu cuerpo, y esta práctica no promete nada sobre ninguno de los dos. Eso le toca a tu médico y a tu cuidado de todos los días. Lo que imaginamos es cómo se siente pasar una tarde sin prisa, respirando con facilidad, fijándote en el mundo. [pause 14]\n\nCaminar despacio es una de las maneras más antiguas que tiene la gente de calmar la mente. Hasta imaginarlo puede hacer más lenta la respiración y aflojar los hombros. [pause 14]\n\nEscoge un lugar por donde te gustaría caminar. Una calle de tu colonia. Un parque. Un camino junto al agua. Puede ser real o inventado. [pause 14]\n\nSi caminar se te hace difícil, imagina una manera suave de moverte que le quede a tu cuerpo. Avanzar en tu silla por un camino parejo. Sentarte en el porche mientras la tarde se mueve a tu alrededor. Lo que importa es la calma, no los pasos. [pause 5]\n\nDeja que la sensación de una tarde tranquila sea todo el deseo de esta noche. [pause 20]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Sales de la casa. Ya se fue el calor del día. El aire está suave. [pause 26]\n\nSiente los pies en el suelo. Uno, luego el otro. Sin prisa. [pause 28]\n\nFíjate en el cielo. El último color hacia el poniente. La primera estrella. [pause 28]\n\nOye los sonidos alrededor. Un perro por ahí. Las hojas. La música de alguien que sale por una ventana abierta. [pause 28]\n\nRespira el aire de la tarde. Suéltalo despacio. [pause 28]\n\nPasas junto a un vecino. Le haces un saludo con la cabeza. Te lo devuelve. Es una tarde de esas. [pause 32]\n\nFíjate cómo se mueven tus brazos. Qué fácil es cada paso. [pause 32]\n\nDetente un momento a mirar algo pequeño. Una flor junto a una reja. Un charco que guarda el cielo. [pause 32]\n\nDa la vuelta hacia tu casa. Las ventanas están encendidas. Una de ellas es la tuya. [pause 34]\n\nDi en tu mente, estoy en calma. [pause 34]\n\nEntra, y deja que la caminata te lleve hasta la cama. [pause 34]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Ahora deja que la escena se quede contigo mientras te vas quedando en calma. [pause 10]\n\nNo tienes que agarrarla fuerte. Solo deja que esté ahí, tibia y callada, como una lámpara encendida en otro cuarto. [pause 15]\n\nSi la mente se te va, vuelve a un detalle pequeño. Un sonido. Una palabra. Lo que sienten tus manos. [pause 20]\n\nEsto es solo imaginación, y la imaginación tiene permiso de ser amable. [pause 20]\n\nTal vez notes que respiras más despacio que cuando empezamos. Deja que siga así. [pause 25]\n\nDeja que el cuerpo pese todavía un poco más. No hay ningún lugar adonde ir. [pause 25]\n\nSi el sueño todavía no llega, no pasa nada. Quédate en silencio con la escena, y deja que el silencio haga lo suyo. [pause 30]\n\nDescansa ahora. [pause 60]"
+  }
+ ],
+ "words": 642,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 115,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1119,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass",
+   "verse_read": "pass",
+   "listener_gender": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words, no faith words or scripture; each teaching names imagination, not a promise. Self-worth night gives 988 and says it answers in Spanish; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health promise and offers a wheelchair or porch version; family night never forces anyone to change; business night pictures enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -11,6 +11,7 @@ import { daily, pages, useDeclaration, useStories, type DailyPage } from '../../
 import { DeclarationVerse } from '../../src/screens/daily/DeclarationVerse';
 import { WeekStrip } from '../../src/ui/week';
 import type { Key } from '../../src/i18n';
+import { ReminderOffer } from '../../src/reminders';
 
 export default function Today() {
   const { settings } = useSettings();
@@ -42,6 +43,7 @@ export default function Today() {
   return (
     <Screen edges={['top']}>
       {canUse('streak') && <WeekStrip />}
+      <ReminderOffer />
       {canUse(pages.declaration.feature) && item('today.declaration.label', word.key ? t(word.key) : word.text!, <>
         {word.passage && <DeclarationVerse passage={word.passage} />}
         <TextLink onPress={() => open('declaration')}>{t('daily.openDeclaration')}</TextLink>

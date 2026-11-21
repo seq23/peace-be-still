@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is a weeknight. The dishes are done. You sit down at the table with the mail and a cup of something warm. [pause 22]\n\nNotice the pile. A few envelopes. Your phone with the bank app open. [pause 23]\n\nOpen the first bill. Read the amount. Feel your chest stay soft. You know it is covered. [pause 25]\n\nPay it. Watch the screen say paid. Set it aside. [pause 25]\n\nOpen the next one. The same steady feeling. Paid. Set aside. [pause 25]\n\nLook at the account when you are done. There is still some there. Not a fortune. Enough. [pause 27]\n\nMove a little into savings. Watch that number grow by a small step. [pause 27]\n\nLean back in your chair. Notice that your jaw is loose. Your hands are still. [pause 27]\n\nSay in your mind, I am steady. I have enough for tonight. [pause 28]\n\nStack the paid bills neatly, turn off the kitchen light, and walk to bed with nothing hanging over you. [pause 30]"
+   "text": "It is a weeknight. The dishes are done. You sit down at the table with the mail and a cup of something warm. [pause 33]\n\nNotice the pile. A few envelopes. Your phone with the bank app open. [pause 34]\n\nOpen the first bill. Read the amount. Feel your chest stay soft. You know it is covered. [pause 36]\n\nPay it. Watch the screen say paid. Set it aside. [pause 36]\n\nOpen the next one. The same steady feeling. Paid. Set aside. [pause 36]\n\nLook at the account when you are done. There is still some there. Not a fortune. Enough. [pause 38]\n\nMove a little into savings. Watch that number grow by a small step. [pause 38]\n\nLean back in your chair. Notice that your jaw is loose. Your hands are still. [pause 38]\n\nSay in your mind, I am steady. I have enough for tonight. [pause 39]\n\nStack the paid bills neatly, turn off the kitchen light, and walk to bed with nothing hanging over you. [pause 40]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1120,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
    },
    "verdict": "pass"
   },

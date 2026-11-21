@@ -62,7 +62,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Out of the depths. The psalm does not wait until things are better to pray. It prays from the bottom. [pause 25]\n\nIf thou shouldest mark iniquities, who shall stand? If God kept a record of every wrong, no one could stand. But there is forgiveness with him. [pause 25]\n\nThen the most beautiful line. Waiting for the Lord, more than the watchmen wait for morning. The night watchman on the city wall, tired, cold, looking east for the first gray light. [pause 25]\n\nThe psalm says it twice. More than the watchmen. Like someone who knows morning is coming, and is waiting for it. [pause 25]\n\nA companion passage from Lamentations. [pause 23]"
+   "text": "Out of the depths. The psalm does not wait until things are better to pray. It prays from the bottom. [pause 36]\n\nIf thou shouldest mark iniquities, who shall stand? If God kept a record of every wrong, no one could stand. But there is forgiveness with him. [pause 36]\n\nThen the most beautiful line. Waiting for the Lord, more than the watchmen wait for morning. The night watchman on the city wall, tired, cold, looking east for the first gray light. [pause 36]\n\nThe psalm says it twice. More than the watchmen. Like someone who knows morning is coming, and is waiting for it. [pause 36]\n\nA companion passage from Lamentations. [pause 34]"
   },
   {
    "part": "passage",
@@ -84,7 +84,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "The Lord is good to them that wait for him. It is good to hope, and to wait quietly. Quietly. You can wait quietly tonight. [pause 25]\n\nHere is Psalm 130 again. Be the watchman, waiting for the light. [pause 25]"
+   "text": "The Lord is good to them that wait for him. It is good to hope, and to wait quietly. Quietly. You can wait quietly tonight. [pause 36]\n\nHere is Psalm 130 again. Be the watchman, waiting for the light. [pause 36]"
   },
   {
    "part": "passage",
@@ -136,11 +136,11 @@
  "words": 528,
  "rest_part": "rest4",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 815,
+ "est_seconds": 813,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -175,7 +175,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

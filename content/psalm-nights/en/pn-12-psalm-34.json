@@ -70,7 +70,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Bless the Lord, at all times. At all times. Not only when the day went well. [pause 19]\n\nHe sought the Lord, and was heard. David is not giving a lecture here. He is telling what happened to him. I looked for God, and God answered. [pause 19]\n\nThe angel of the Lord encamps around those who fear him. Encamps. Like a tent pitched around you for the night. [pause 19]\n\nO taste and see. Faith is not only something you think. It is something you can taste, like bread, like water when you are thirsty. [pause 23]\n\nTwo more verses from later in the same psalm. [pause 17]"
+   "text": "Bless the Lord, at all times. At all times. Not only when the day went well. [pause 31]\n\nHe sought the Lord, and was heard. David is not giving a lecture here. He is telling what happened to him. I looked for God, and God answered. [pause 31]\n\nThe angel of the Lord encamps around those who fear him. Encamps. Like a tent pitched around you for the night. [pause 31]\n\nO taste and see. Faith is not only something you think. It is something you can taste, like bread, like water when you are thirsty. [pause 35]\n\nTwo more verses from later in the same psalm. [pause 29]"
   },
   {
    "part": "passage",
@@ -92,7 +92,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Near to the brokenhearted. If your heart is broken tonight, he is not far. He is nearer than you think. [pause 21]\n\nHere is the beginning of Psalm 34 again. Let it taste like something good. [pause 23]"
+   "text": "Near to the brokenhearted. If your heart is broken tonight, he is not far. He is nearer than you think. [pause 33]\n\nHere is the beginning of Psalm 34 again. Let it taste like something good. [pause 35]"
   },
   {
    "part": "passage",
@@ -152,11 +152,11 @@
  "words": 641,
  "rest_part": "rest5",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 813,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -191,7 +191,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

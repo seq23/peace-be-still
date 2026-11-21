@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello. This is Psalm Nights. [pause 9]\n\nLet the day go. Let the room be dim and soft. [pause 12]\n\nTonight we read Psalm 84. It is a song of longing for the house of God. Of pilgrims on the road, and of a small bird that found a home near the altar. [pause 11]\n\nWe will read it twice, slowly. [pause 14]"
+   "text": "Hello. This is Psalm Nights. [pause 14]\n\nLet the day go. Let the room be dim and soft. [pause 15]\n\nTonight we read Psalm 84. It is a song of longing for the house of God. Of pilgrims on the road, and of a small bird that found a home near the altar. [pause 15]\n\nWe will read it twice, slowly. [pause 15]"
   },
   {
    "part": "passage",
@@ -78,7 +78,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "How amiable are thy tabernacles. How lovely is the place where you are. The psalmist misses it the way you miss home. [pause 12]\n\nYea, the sparrow hath found an house. A tiny bird, building her nest in the courts of God. If there is room for a sparrow, there is room for you. [pause 14]\n\nThe pilgrims pass through the valley of Baca, a valley of weeping, and make it a well. They go from strength to strength. [pause 12]\n\nOne day in his courts, better than a thousand. One day near God is worth more than a thousand anywhere else. [pause 16]\n\nOne companion verse. [pause 10]"
+   "text": "How amiable are thy tabernacles. How lovely is the place where you are. The psalmist misses it the way you miss home. [pause 22]\n\nYea, the sparrow hath found an house. A tiny bird, building her nest in the courts of God. If there is room for a sparrow, there is room for you. [pause 24]\n\nThe pilgrims pass through the valley of Baca, a valley of weeping, and make it a well. They go from strength to strength. [pause 22]\n\nOne day in his courts, better than a thousand. One day near God is worth more than a thousand anywhere else. [pause 26]\n\nOne companion verse. [pause 20]"
   },
   {
    "part": "passage",
@@ -96,7 +96,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "One thing have I desired. The same longing, in another psalm. To dwell in the house of the Lord, and behold his beauty. [pause 14]\n\nHere is Psalm 84 again. Think of the sparrow and her nest. [pause 16]"
+   "text": "One thing have I desired. The same longing, in another psalm. To dwell in the house of the Lord, and behold his beauty. [pause 24]\n\nHere is Psalm 84 again. Think of the sparrow and her nest. [pause 26]"
   },
   {
    "part": "passage",
@@ -164,11 +164,11 @@
  "words": 770,
  "rest_part": "rest5",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 820,
+ "est_seconds": 812,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -203,7 +203,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

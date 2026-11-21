@@ -12,18 +12,19 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, rmSync
 import { join } from "node:path";
 import { CONTENT, verses, label, words, pauses, TRANSLATION, parseRef } from "./lib.mjs";
 import { GATE_VERSION, checkStory, checkPsalmNight, checkImaginationNight, checkDeclaration, isFail } from "./rules.mjs";
+import { loadCache, probedModels, verseReadCheck, genderReadCheck, PROBE_GENDERED, readNight, parseAnswer, writtenLines, textKey, PROBE_VERSES, PROBE_CLEAN, PROBE, CACHE } from "./verse-read.mjs";
 
 const SRC = join(CONTENT, "src");
 const KINDS = {
   // Stories come in three tellings (owner 18 Nov 2026): plain (everyone, English), hush-harbor (Black church voice, English), mi-refugio (Spanish).
   story: { dir: "stories", langs: ["plain", "hush-harbor", "mi-refugio"] },
   "psalm-night": { dir: "psalm-nights", langs: ["en", "es"] },
-  "imagination-night": { dir: "imagination-nights", langs: ["en"] },
+  "imagination-night": { dir: "imagination-nights", langs: ["en", "es"] },
   declaration: { dir: "morning-word", langs: ["en", "es"] },
 };
 const TELLING_LANG = { plain: "en", "hush-harbor": "en", "mi-refugio": "es" };
 const langOf = (kind, l) => (kind === "story" ? TELLING_LANG[l] : l);
-const JOURNEY = { story: { plain: "gods-word", "hush-harbor": "hush-harbor", "mi-refugio": "mi-refugio" }, "psalm-night": { en: "psalm-nights", es: "mi-refugio" }, "imagination-night": { en: "imagination-nights" }, declaration: { en: "morning-word", es: "mi-refugio" } };
+const JOURNEY = { story: { plain: "gods-word", "hush-harbor": "hush-harbor", "mi-refugio": "mi-refugio" }, "psalm-night": { en: "psalm-nights", es: "mi-refugio" }, "imagination-night": { en: "imagination-nights", es: "imagination-nights" }, declaration: { en: "morning-word", es: "mi-refugio" } };
 const AI_LABEL = { story: "label.ai_retold_checked", "psalm-night": "label.ai_voice_checked", "imagination-night": "label.ai_written_voice_checked", declaration: "label.ai_written_checked" };
 
 const read = (p) => (existsSync(p) ? readFileSync(p, "utf8") : "");
@@ -188,6 +189,34 @@ function shared(items) {
   return Object.fromEntries(items.filter((i) => i.id.startsWith("_")).map((i) => [i.id.slice(1), (i.fields.text || []).join("\n\n")]));
 }
 
+// A Psalm Night's voiced length, piece by piece as fill.session_item renders it (calibrated 21 Nov 2026 on the
+// 14 voiced nights: the quiet model matches exactly and Kokoro speaks 109-117 wpm; the fastest is used, so a
+// night the gate passes is not under its floor when voiced). Each passage is its spoken reference (1.2 s after),
+// then its verses with PSALM_VERSE_QUIET between them and the paragraph quiet after the last; a written line's
+// [pause N] is its quiet, a line without one gets the paragraph quiet; plus 0.6 s lead, 2 s tail, 1.2 s after the title.
+export const VOICED_WPM_PSALM = 117;
+// 21 Nov 2026: 1.5 s voiced the nights at 12 min against the 13-17 min target; a whispered psalm read twice,
+// verse by verse, has room to breathe.
+export const PSALM_VERSE_QUIET = 2.5;
+export function voicedPsalmSeconds(segments, lang) {
+  let spoken = 0, quiet = 3.8;
+  for (const s of segments) {
+    if (s.part === "passage") {
+      const { a, z } = parseRef(s.ref);
+      spoken += (lang === "es" ? 3 : 3) + (a === z ? 1 : 3);   // "Psalm 23, verses 1 to 6." / "Salmo 23, versículos 1 al 6."
+      quiet += 1.2 + PSALM_VERSE_QUIET * (s.verses.length - 1) + 4;
+      spoken += s.verses.reduce((x, v) => x + words(v.text).length, 0);
+    } else {
+      for (const line of s.text.split("\n\n")) {
+        spoken += words(line).length;
+        quiet += /\[pause \d+\]\s*$/.test(line) ? 0 : 4;
+      }
+      quiet += pauses(s.text);
+    }
+  }
+  return Math.round((spoken / VOICED_WPM_PSALM) * 60 + quiet);
+}
+
 function buildPsalmNight(it, lang, parts) {
   const main = one(it, "main", "").split(";").map((s) => s.trim()).filter(Boolean);
   const comp = one(it, "companions", "").split(";").map((s) => s.trim()).filter(Boolean);
@@ -199,15 +228,24 @@ function buildPsalmNight(it, lang, parts) {
   const pas = (r) => ({ part: "passage", speaker: "narrator", ...passage(r, lang) });
   const segments = [seg("welcome", para("welcome")), ...main.map(pas), seg("reflect", para("reflect1")), ...comp.map(pas), seg("reflect", para("reflect2")), ...main.map(pas), seg("rest", restText)];
   const all = segments.map((s) => (s.part === "passage" ? s.verses.map((v) => v.text).join(" ") : s.text)).join(" ");
-  const nverses = segments.filter((s) => s.part === "passage").reduce((a, s) => a + s.verses.length, 0);
-  const nparas = segments.filter((s) => s.part !== "passage").reduce((a, s) => a + s.text.split("\n\n").length, 0);
   const n = words(all).length;
   return {
     id: it.id, kind: "psalm-night", journey: JOURNEY["psalm-night"][lang], door: "gods-word", lang, title: it.title, main, companions: comp,
     ai_label: AI_LABEL["psalm-night"], segments, words: n, rest_part: parts[rest] ? rest : null,
-    pacing: { words_per_minute: 100, quiet_between_verses_s: 1.5, quiet_between_paragraphs_s: 4 },
-    est_seconds: Math.round((n / 100) * 60 + 1.5 * nverses + 4 * nparas + pauses(all)),
+    pacing: { words_per_minute: VOICED_WPM_PSALM, quiet_between_verses_s: PSALM_VERSE_QUIET, quiet_between_paragraphs_s: 4 },
+    est_seconds: voicedPsalmSeconds(segments, lang),
   };
+}
+
+// The voiced length, as the fill really renders it (calibrated 21 Nov 2026 on the 7 voiced English nights and the
+// Spanish sample: Kokoro speaks 110-115 wpm, not 100; a paragraph's [pause N] IS its quiet, the 2 s paragraph quiet
+// comes only where no pause is written; plus 0.6 s lead, 2 s tail and the 1.2 s after the title). The faster end
+// of the measured speed is used, so a night the gate passes is not under its floor when voiced.
+export const VOICED_WPM = 115;
+export function voicedSeconds(all, n) {
+  const paras = all.split("\n\n");
+  const bare = paras.filter((p) => !/\[pause \d+\]\s*$/.test(p)).length;
+  return Math.round((n / VOICED_WPM) * 60 + pauses(all) + 2 * bare + 3.8);
 }
 
 function buildImaginationNight(it, lang, parts) {
@@ -220,8 +258,8 @@ function buildImaginationNight(it, lang, parts) {
     id: it.id, kind: "imagination-night", journey: "imagination-nights", door: "mindset", lang, title: it.title, theme: one(it, "theme", ""),
     scripture_woven: false, ai_label: AI_LABEL["imagination-night"], segments, words: n,
     shared_parts: { settle: one(it, "settle", ""), close: one(it, "close", "") },
-    pacing: { words_per_minute: 100, pause_marker: "[pause N] = N seconds of quiet", quiet_between_paragraphs_s: 2 },
-    est_seconds: Math.round((n / 100) * 60 + pauses(all) + 2 * all.split("\n\n").length),
+    pacing: { words_per_minute: VOICED_WPM, pause_marker: "[pause N] = N seconds of quiet", quiet_between_paragraphs_s: 2 },
+    est_seconds: voicedSeconds(all, n),
   };
 }
 
@@ -240,6 +278,13 @@ function buildDeclarations(text, lang) {
 }
 
 // ------------------------------------------------------------------ build all
+const VERSE_READ = loadCache(), TRUSTED = probedModels();
+
+/** Every Imagination Night as built (both languages), for the verse read. */
+export function nights() {
+  return buildAll().out.map((o) => o.json).filter((j) => j.kind === "imagination-night");
+}
+
 export function buildAll() {
   const out = []; // {path, json}
   const summary = {};
@@ -269,6 +314,9 @@ export function buildAll() {
       for (const it of items) {
         const item = kind === "story" ? buildStory(it, lang) : kind === "psalm-night" ? buildPsalmNight(it, langOf(kind, lang), parts) : buildImaginationNight(it, lang, parts);
         const checks = kind === "story" ? checkStory(item) : kind === "psalm-night" ? checkPsalmNight(item) : checkImaginationNight(item);
+        // The Mindset door's meaning check: the recorded model read of this exact text (verse-read.mjs); none = held.
+        if (kind === "imagination-night") checks.verse_read = verseReadCheck(item, VERSE_READ, TRUSTED);
+        if (kind === "imagination-night" && item.lang === "es") checks.listener_gender = genderReadCheck(item, VERSE_READ, TRUSTED);
         add(kind, lang, item, checks, rv[it.id]);
         out.push({ path: join(CONTENT, dir, lang, `${it.id}.json`), json: item });
       }
@@ -331,7 +379,7 @@ function cmdCheck() {
 }
 
 // ------------------------------------------------------------------ self-test (negative proof)
-function selfTest() {
+async function selfTest() {
   const good = parseItems(`=== t-good | Peace, Be Still
 passage: MAR 4:35-41
 shelf: adult
@@ -411,6 +459,14 @@ rest: c1
   if (!isFail(checkPsalmNight(pnight).no_promises)) throw new Error("SELFTEST sleep claim not caught");
   pnight.segments.reverse();
   if (!isFail(checkPsalmNight(pnight).plan)) throw new Error("SELFTEST psalm plan not caught");
+  // Her ruling 21 Nov 2026: the length target guides the writing; a 12-min night ships with a note, only one under
+  // 75% of the target (a broken script) is held. The estimate is never longer than the voice: en pn-01 (739 words,
+  // 340 s of quiet) voiced at 723 s.
+  const pnLen = (min) => checkPsalmNight({ ...pnight, est_seconds: min * 60 }).length;
+  if (isFail(pnLen(12)) || pnLen(12) === "pass") throw new Error("SELFTEST a 12-minute psalm night is not shipped with a note");
+  if (!isFail(pnLen(6))) throw new Error("SELFTEST a 6-minute psalm night was not held");
+  const pn01 = voicedPsalmSeconds([{ part: "reflect", text: `${"word ".repeat(739).trim()} [pause 336]` }], "en");
+  if (pn01 > 723.3 || pn01 < 700) throw new Error(`SELFTEST psalm night estimate ${pn01}s is not calibrated to en pn-01 voiced at 723 s`);
   // Imagination Night: no faith words, no Neville without the line
   const inn = parseItems(`=== _s
 text: Breathe. [pause 5]
@@ -427,6 +483,72 @@ close: s
   if (!isFail(ic.neville) || !isFail(ic.no_faith_links)) throw new Error("SELFTEST Neville/faith link not caught");
   night.segments[2].text += " You will be rich by spring, guaranteed.";
   if (!isFail(checkImaginationNight(night).no_promises)) throw new Error("SELFTEST promise not caught");
+  // Imagination Night in Spanish (Mindset door): no verse in ANY wording. RVR1960 (copyrighted, never stored) is caught
+  // because it keeps the stored RV1909's words; a typed RV1909 verse, a reference and a faith word are caught too.
+  const ines = parseItems(`=== _s
+text: Respira. [pause 5]
+=== t-in-es | El porche
+settle: s
+teaching: Imagina el final que esperas, como si ya hubiera pasado.
+scene: Estás en un porche al caer la tarde.
+close: s
+`);
+  const mkEs = (patch) => { const n = buildImaginationNight(ines[1], "es", shared(ines)); patch(n); return checkImaginationNight(n); };
+  const okEs = mkEs(() => {});
+  if (Object.entries(okEs).some(([k, v]) => isFail(v) && k !== "length" && k !== "teaching_length")) throw new Error(`SELFTEST good Spanish imagination night fails ${JSON.stringify(okEs)}`);
+  const esCases = [
+    ["no_verse_wording", "Cuando te acuestes, no tendrás temor, sino que te acostarás, y tu sueño será grato."], // RVR1960 Prov 3:24, no faith word, no reference
+    ["no_verse_wording", "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar."], // RVR1960 Mat 11:28
+    ["no_typed_scripture", "Cuando te acostares, no tendrás temor; antes te acostarás, y tu sueño será suave."], // the stored RV1909 typed in
+    ["no_refs_in_text", "Como dice Proverbios 3:24, descansa."],
+    ["no_faith_links", "Dios te cuida esta noche."],
+    ["no_faith_links", "Lee este versículo de la Biblia."],
+    ["no_quoted_runs", "Repite: «la calma siempre llega a quien la espera con paciencia»."], // a made-up 'verse' in quotes
+    ["latin_american", "Vosotros sabéis descansar."],
+    ["no_english", "Rest now, and let the night come."],
+    ["no_promises", "Con esto vas a dormir toda la noche."],
+  ];
+  for (const [key, line] of esCases) if (!isFail(mkEs((n) => { n.segments[2].text += " " + line; })[key])) throw new Error(`SELFTEST Spanish ${key} not caught: ${line}`);
+  // The verse read (meaning, any translation): a found verse holds the night; no read (model out, text edited
+  // since, unparsable answer) holds it; a read by a model that has not passed the probe holds it; NONE passes.
+  {
+    const n = buildImaginationNight(ines[1], "es", shared(ines));
+    const key = textKey(writtenLines(n)), trusted = new Set(["m-ok"]);
+    const rec = (verdict, model = "m-ok") => new Map([[key, { id: n.id, lang: "es", verdict, model, gendered: "NONE" }]]);
+    if (verseReadCheck(n, rec("NONE"), trusted) !== "pass") throw new Error("SELFTEST clean verse read not passed");
+    const g = new Map([[key, { id: n.id, lang: "es", verdict: "NONE", model: "m-ok", gendered: "4:despierto" }]]);
+    if (!isFail(genderReadCheck(n, g, trusted)) || genderReadCheck(n, rec("NONE"), trusted) !== "pass") throw new Error("SELFTEST listener-gender read not judged");
+    for (const [why, c] of [["found", rec("3:PSA 23:1")], ["unread", new Map()], ["unprobed model", rec("NONE", "m-new")]]) {
+      const item = buildImaginationNight(ines[1], "es", shared(ines));
+      const checks = { ...checkImaginationNight(item), verse_read: verseReadCheck(item, c, trusted) };
+      for (const k of ["length", "teaching_length"]) checks[k] = "pass";
+      if (finalize(item, checks, { pastor: { verdict: "pass" }, cultural: { verdict: "pass" } }).status !== "held") throw new Error(`SELFTEST verse read ${why} not held`);
+    }
+    n.segments[2].text += " Y aquí otra frase.";
+    if (verseReadCheck(n, rec("NONE"), trusted) === "pass") throw new Error("SELFTEST a night edited after its read still passed");
+    if (parseAnswer("I think none", 4) !== null || parseAnswer('{"verses": [{"n": 9, "ref": "x"}], "gendered": []}', 4)?.verses.length !== 0
+      || parseAnswer('{"verses": [{"n": 2, "ref": "MAT 6:34"}], "gendered": []}', 4)?.verses[0]?.n !== 2 || parseAnswer('{"verses": []}', 4) !== null) throw new Error("SELFTEST verse read answer parsing");
+    const outage = await readNight(n, async () => { throw new Error("503"); });
+    const garbled = await readNight(n, async () => ({ model: "m-ok", text: "Sure! Here is my analysis" }));
+    if (outage !== null || garbled !== null) throw new Error("SELFTEST a model outage or garbled answer produced a verdict");
+    // The probe on record: exactly the review's 8 Spanish NVI/plain verses plus English verses and clean lines,
+    // and every verdict on record comes from a model that passed it.
+    const pr = JSON.parse(readFileSync(PROBE, "utf8"));
+    if (JSON.stringify(pr.cases) !== JSON.stringify({ verses: PROBE_VERSES, gendered: PROBE_GENDERED, clean: PROBE_CLEAN }) || PROBE_VERSES.length < 12) throw new Error("SELFTEST verse-read probe record is not the current probe");
+    for (const [m, r] of Object.entries(pr.models)) if (r.pass && (r.missed.length || r.false_positives.length)) throw new Error(`SELFTEST probe record for ${m} passes with misses`);
+    const ok = probedModels();
+    for (const [, r] of loadCache(CACHE)) if (!ok.has(r.model)) throw new Error(`SELFTEST verse read on record by unprobed model ${r.model}`);
+  }
+  // A script missing a segment, or far over length, fails the gate (held, so the fill never voices it).
+  if (!isFail(mkEs((n) => { n.segments.splice(1, 1); }).plan)) throw new Error("SELFTEST missing teaching not caught");
+  if (!isFail(mkEs((n) => { n.est_seconds = 40 * 60; }).length)) throw new Error("SELFTEST 40-minute night not caught");
+  if (isFail(mkEs((n) => { n.est_seconds = 17.6 * 60; }).length)) throw new Error("SELFTEST a 17.6-minute night (the first Spanish sample) was held: only a note");
+  if (!isFail(mkEs((n) => { n.est_seconds = 13 * 60; }).length)) throw new Error("SELFTEST a 13-minute night (under 75% of 18) was not held");
+  // The pace matches the voiced files: the Spanish sample (in-01 before lengthening: 793 words, 1055 s voiced).
+  if (Math.abs(voicedSeconds("x [pause 1000]", 793) - (793 / VOICED_WPM) * 60 - 1003.8) > 0.6) throw new Error("SELFTEST voiced length counts a written pause twice");
+  const heldEs = buildImaginationNight(ines[1], "es", shared(ines));
+  heldEs.segments[2].text += " Dios te cuida.";
+  if (finalize(heldEs, checkImaginationNight(heldEs), { pastor: { verdict: "pass" }, cultural: { verdict: "pass" } }).status !== "held") throw new Error("SELFTEST Spanish night with a faith word not held");
   // Declarations
   const [d] = buildDeclarations("1 | PSA 118:24 | This is the day. I will rejoice and be glad in it.", "en");
   if (isFail(checkDeclaration(d, "en").word_for_word)) throw new Error("SELFTEST good declaration fails");
@@ -448,11 +570,12 @@ close: s
   }
   if (finalize(buildStory(good, "plain"), {}, null, "nope").qa.first_reader.route !== "none") throw new Error("SELFTEST draft log keyed without telling");
   void parseRef; void readdirSync;
-  console.log(`OUTPUT library self-test: ${cases.length + 10} negative cases caught`);
+  console.log(`OUTPUT library self-test: ${cases.length + 30} negative cases caught`);
 }
 
-const cmd = process.argv[2];
-if (cmd === "build") cmdBuild();
+const cmd = import.meta.url === `file://${process.argv[1]}` ? process.argv[2] : "imported";
+if (cmd === "imported") { /* used as a module (verse-read.mjs) */ }
+else if (cmd === "build") cmdBuild();
 else if (cmd === "check") cmdCheck();
-else if (cmd === "--self-test") selfTest();
+else if (cmd === "--self-test") selfTest().catch((e) => { console.error(e.message); process.exit(1); });
 else { console.error("usage: library.mjs build|check|--self-test"); process.exit(2); }

@@ -7,8 +7,11 @@ checks, shelved, status, voice).
 - **Order**: (1) English Psalms; (2) the sleep sessions, the paid core (coordinator 21 Nov 2026): EN Psalm Nights,
   ES Psalm Nights, Imagination Nights EN then ES (`content/psalm-nights`, `content/imagination-nights`: `segments`,
   where `[pause N]` is N s of real quiet, verses are the stored text said with their reference, and QA's words-a-minute
-  leaves the scripted quiet out); (3) every other chapter, English then Spanish, in listening order; (4) other
-  passed scripts in `content/` (stories).
+  leaves the scripted quiet out); (3) the stories Kokoro voices (coordinator 21 Nov 2026): the 60 plain English
+  tellings (af_nicole) then the 60 Mi Refugio (the Spanish blend), each the title, the retelling and the stored verses
+  word for word in one narrator voice, the call and response's `[PAUSE 3s]` as real quiet (row `checks.pause_starts_s`,
+  as Hush Harbor rows carry it); a bounded batch (about 7 Mac-hours) queued ahead of the failed-chapter retries;
+  Hush Harbor stays on its own lanes; (4) every other chapter, English then Spanish, in listening order.
 - **Per file**: `render_kokoro.py` (Kokoro, voices in `VOICES.md`, 1.5 s quiet between psalm verses,
   1.0 s between chapter verses) → `fill.master` (two-pass EBU R128 `loudnorm`, true-peak target 1 dB
   under the ceiling, then AAC-LC mono 48 kbps `.m4a`; the ENCODED file is measured and, if AAC pushed it

@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello. This is Psalm Nights. [pause 11]\n\nFind a comfortable way to lie. Let your breathing slow. [pause 14]\n\nTonight we read most of Psalm 56. David wrote it when he was captured in a foreign city. He was afraid, and he said so. [pause 13]\n\nWe will read it twice. [pause 16]"
+   "text": "Hello. This is Psalm Nights. [pause 15]\n\nFind a comfortable way to lie. Let your breathing slow. [pause 15]\n\nTonight we read most of Psalm 56. David wrote it when he was captured in a foreign city. He was afraid, and he said so. [pause 15]\n\nWe will read it twice. [pause 16]"
   },
   {
    "part": "passage",
@@ -74,7 +74,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "When afraid, I will trust. Not if I am afraid. When. David does not pretend he is never scared. [pause 14]\n\nThen a tender picture. God counts our wanderings and puts our tears in his bottle. God keeps count of the nights you could not sleep. He keeps every tear. None of them are lost. [pause 16]\n\nTrust in God, and no fear of what people can do. [pause 14]\n\nAnd at the end, the light of the living. [pause 18]\n\nOne companion verse. [pause 12]"
+   "text": "When afraid, I will trust. Not if I am afraid. When. David does not pretend he is never scared. [pause 26]\n\nThen a tender picture. God counts our wanderings and puts our tears in his bottle. God keeps count of the nights you could not sleep. He keeps every tear. None of them are lost. [pause 28]\n\nTrust in God, and no fear of what people can do. [pause 26]\n\nAnd at the end, the light of the living. [pause 30]\n\nOne companion verse. [pause 24]"
   },
   {
    "part": "passage",
@@ -92,7 +92,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Fear not, God says through Isaiah. Do not be dismayed. Strength, help, and his right hand holding you up. [pause 16]\n\nHere is Psalm 56 again. If you are afraid tonight, say the first line with it. [pause 18]"
+   "text": "Fear not, God says through Isaiah. Do not be dismayed. Strength, help, and his right hand holding you up. [pause 28]\n\nHere is Psalm 56 again. If you are afraid tonight, say the first line with it. [pause 30]"
   },
   {
    "part": "passage",
@@ -156,8 +156,8 @@
  "words": 660,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
  "est_seconds": 814,
@@ -195,7 +195,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

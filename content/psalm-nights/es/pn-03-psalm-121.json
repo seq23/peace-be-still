@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola. Esta es una noche de Salmos. [pause 11]\n\nAcomódate. Deja que tu cabeza encuentre el lugar más suave de la almohada. [pause 14]\n\nEsta noche leemos el Salmo ciento veintiuno. Era un canto para los que iban de viaje. La gente lo cantaba en el largo camino de subida a Jerusalén, mirando los montes y preguntándose qué los esperaba allí. [pause 13]\n\nLo vamos a leer despacio, y luego otra vez. [pause 16]"
+   "text": "Hola. Esta es una noche de Salmos. [pause 15]\n\nAcomódate. Deja que tu cabeza encuentre el lugar más suave de la almohada. [pause 15]\n\nEsta noche leemos el Salmo ciento veintiuno. Era un canto para los que iban de viaje. La gente lo cantaba en el largo camino de subida a Jerusalén, mirando los montes y preguntándose qué los esperaba allí. [pause 15]\n\nLo vamos a leer despacio, y luego otra vez. [pause 16]"
   },
   {
    "part": "passage",
@@ -63,7 +63,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Alzo mis ojos a los montes. El viajero mira hacia arriba y hace la pregunta honesta. ¿De dónde me vendrá la ayuda? [pause 14]\n\nY la respuesta no son los montes. Es el que los hizo. [pause 14]\n\nEscucha la palabra que se repite. Guardar. El que te guarda. Jehová es tu guardador. Una y otra vez en ocho versículos cortos. El salmo lo repite como se le repite algo a un niño que le tiene miedo a la oscuridad. [pause 14]\n\nEl que te guarda no se duerme. Tú puedes cerrar los ojos. Él no cierra los suyos. [pause 18]\n\nAhora, unas palabras de Isaías para los que esta noche están cansados. [pause 12]"
+   "text": "Alzo mis ojos a los montes. El viajero mira hacia arriba y hace la pregunta honesta. ¿De dónde me vendrá la ayuda? [pause 23]\n\nY la respuesta no son los montes. Es el que los hizo. [pause 23]\n\nEscucha la palabra que se repite. Guardar. El que te guarda. Jehová es tu guardador. Una y otra vez en ocho versículos cortos. El salmo lo repite como se le repite algo a un niño que le tiene miedo a la oscuridad. [pause 23]\n\nEl que te guarda no se duerme. Tú puedes cerrar los ojos. Él no cierra los suyos. [pause 27]\n\nAhora, unas palabras de Isaías para los que esta noche están cansados. [pause 21]"
   },
   {
    "part": "passage",
@@ -106,7 +106,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Él da fuerzas al cansado. No al fuerte. Al cansado. Si esta noche estás agotado, esas palabras se escribieron pensando en ti. [pause 14]\n\nEsperar en el Señor no es tiempo perdido. Así es como los cansados recobran fuerzas. [pause 14]\n\nY otra palabra de Isaías. No temas, porque yo estoy contigo. Él te sostiene con su mano. Esta noche no tienes que sostenerte tú solo. [pause 16]\n\nAhora el Salmo ciento veintiuno otra vez. Deja que la palabra guardar se quede contigo mientras escuchas. [pause 18]"
+   "text": "Él da fuerzas al cansado. No al fuerte. Al cansado. Si esta noche estás agotado, esas palabras se escribieron pensando en ti. [pause 23]\n\nEsperar en el Señor no es tiempo perdido. Así es como los cansados recobran fuerzas. [pause 23]\n\nY otra palabra de Isaías. No temas, porque yo estoy contigo. Él te sostiene con su mano. Esta noche no tienes que sostenerte tú solo. [pause 25]\n\nAhora el Salmo ciento veintiuno otra vez. Deja que la palabra guardar se quede contigo mientras escuchas. [pause 27]"
   },
   {
    "part": "passage",
@@ -158,8 +158,8 @@
  "words": 636,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
  "est_seconds": 811,
@@ -199,7 +199,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

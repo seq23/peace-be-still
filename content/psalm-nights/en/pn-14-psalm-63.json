@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Welcome to Psalm Nights. [pause 10]\n\nFind a comfortable way to lie. Let the pillow hold your head. [pause 14]\n\nTonight's psalm is Psalm 63. David wrote it in the wilderness of Judah, in a dry land with no water. And in that dry place he wrote about lying awake at night, thinking of God. [pause 12]\n\nIf you are awake tonight, this one is for you. We will read it twice. [pause 16]"
+   "text": "Welcome to Psalm Nights. [pause 15]\n\nFind a comfortable way to lie. Let the pillow hold your head. [pause 15]\n\nTonight's psalm is Psalm 63. David wrote it in the wilderness of Judah, in a dry land with no water. And in that dry place he wrote about lying awake at night, thinking of God. [pause 15]\n\nIf you are awake tonight, this one is for you. We will read it twice. [pause 16]"
   },
   {
    "part": "passage",
@@ -63,7 +63,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "O God, thou art my God. The psalm does not start with a request. It starts with a name. My God. [pause 14]\n\nMy soul thirsteth for thee. In a dry land, where no water is. Some nights feel like that. Dry. Empty. Far from what you need. [pause 14]\n\nThen verse six. Remembering God upon his bed, thinking of him through the night watches. A night watch was a part of the night, the way a guard counted the hours. David spent his sleepless hours remembering God. [pause 16]\n\nAnd joy, under the shadow of his wings. [pause 18]\n\nTwo short companion verses about the night. [pause 12]"
+   "text": "O God, thou art my God. The psalm does not start with a request. It starts with a name. My God. [pause 24]\n\nMy soul thirsteth for thee. In a dry land, where no water is. Some nights feel like that. Dry. Empty. Far from what you need. [pause 24]\n\nThen verse six. Remembering God upon his bed, thinking of him through the night watches. A night watch was a part of the night, the way a guard counted the hours. David spent his sleepless hours remembering God. [pause 26]\n\nAnd joy, under the shadow of his wings. [pause 28]\n\nTwo short companion verses about the night. [pause 22]"
   },
   {
    "part": "passage",
@@ -94,7 +94,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "His song, in the night. A song in the night. [pause 14]\n\nMine eyes prevent the night watches. That means my eyes are open before the watchman calls, so I can think on your word. If you cannot sleep, you can still rest your mind on him. [pause 16]\n\nHere is Psalm 63 again. If your eyes are open, let the words be your night watch. [pause 18]"
+   "text": "His song, in the night. A song in the night. [pause 24]\n\nMine eyes prevent the night watches. That means my eyes are open before the watchman calls, so I can think on your word. If you cannot sleep, you can still rest your mind on him. [pause 26]\n\nHere is Psalm 63 again. If your eyes are open, let the words be your night watch. [pause 28]"
   },
   {
    "part": "passage",
@@ -146,11 +146,11 @@
  "words": 654,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 820,
+ "est_seconds": 815,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -185,7 +185,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

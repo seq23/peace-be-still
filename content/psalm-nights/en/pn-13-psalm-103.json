@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello. This is Psalm Nights. [pause 7]\n\nSettle in. Let your breath slow. [pause 10]\n\nTonight we read Psalm 103, the first fourteen verses. It is a psalm where a man talks to his own soul and reminds it of everything God has done. [pause 9]\n\nWe will read it slowly, and then once more. [pause 12]"
+   "text": "Hello. This is Psalm Nights. [pause 12]\n\nSettle in. Let your breath slow. [pause 15]\n\nTonight we read Psalm 103, the first fourteen verses. It is a psalm where a man talks to his own soul and reminds it of everything God has done. [pause 14]\n\nWe will read it slowly, and then once more. [pause 15]"
   },
   {
    "part": "passage",
@@ -86,7 +86,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Bless the Lord, O my soul. Sometimes we have to speak to our own soul. Remind it. Forget not all his benefits. [pause 10]\n\nThe psalm makes a list. He forgives. He heals. He redeems. He crowns with lovingkindness. These are not promises about tomorrow. They are a memory of who God has been. [pause 12]\n\nThen comes a picture of distance. East from west, that is how far he has carried our sins away. You cannot walk to where the east ends. [pause 10]\n\nAnd the last verse tonight is very gentle. He knoweth our frame. He remembers that we are dust. He knows how tired you are. He is not surprised. [pause 14]\n\nA companion passage from Lamentations. [pause 8]"
+   "text": "Bless the Lord, O my soul. Sometimes we have to speak to our own soul. Remind it. Forget not all his benefits. [pause 20]\n\nThe psalm makes a list. He forgives. He heals. He redeems. He crowns with lovingkindness. These are not promises about tomorrow. They are a memory of who God has been. [pause 22]\n\nThen comes a picture of distance. East from west, that is how far he has carried our sins away. You cannot walk to where the east ends. [pause 20]\n\nAnd the last verse tonight is very gentle. He knoweth our frame. He remembers that we are dust. He knows how tired you are. He is not surprised. [pause 24]\n\nA companion passage from Lamentations. [pause 18]"
   },
   {
    "part": "passage",
@@ -108,7 +108,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "His compassions fail not. They are new every morning. Whatever was used up today, there will be new mercy when you wake. [pause 12]\n\nHere is Psalm 103 again. Let your soul listen. [pause 14]"
+   "text": "His compassions fail not. They are new every morning. Whatever was used up today, there will be new mercy when you wake. [pause 22]\n\nHere is Psalm 103 again. Let your soul listen. [pause 24]"
   },
   {
    "part": "passage",
@@ -184,8 +184,8 @@
  "words": 720,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
  "est_seconds": 813,
@@ -223,7 +223,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

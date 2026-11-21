@@ -6,7 +6,7 @@ Reads a job on stdin:
    "speed": 0.85, "lead": 0.6, "tail": 2.0, "segments": [{"text": "...", "gap": 1.5}], "out": "/path.wav"}
 Each segment is voiced on its own, given a 25 ms fade at both ends (no clicks at the joins,
 QUALITY.md A08), and followed by `gap` seconds of silence (the quiet between verses).
-Prints one JSON line: {"seconds": ..., "segments": n}.
+Prints one JSON line: {"seconds": ..., "segments": n, "ends": [seconds where each segment's speech ends]}.
 """
 import json
 import os
@@ -38,6 +38,7 @@ def main():
     voice = voice_of(k, job["voice"])
     sr = 24000
     parts = [np.zeros(int(job.get("lead", 0.6) * sr), dtype=np.float32)]
+    ends = []
     for seg in job["segments"]:
         s, sr = k.create(seg["text"], voice=voice, speed=job.get("speed", 0.85), lang=job["lang"])
         s = np.asarray(s, dtype=np.float32)
@@ -46,11 +47,13 @@ def main():
             ramp = np.linspace(0.0, 1.0, n, dtype=np.float32)
             s[:n] *= ramp
             s[-n:] *= ramp[::-1]
-        parts += [s, np.zeros(int(seg.get("gap", 1.0) * sr), dtype=np.float32)]
+        parts.append(s)
+        ends.append(round(sum(len(x) for x in parts) / sr, 3))   # this segment's speech ends here; its quiet starts
+        parts.append(np.zeros(int(seg.get("gap", 1.0) * sr), dtype=np.float32))
     parts.append(np.zeros(int(job.get("tail", 2.0) * sr), dtype=np.float32))
     audio = np.concatenate(parts)
     sf.write(job["out"], audio, sr, subtype="PCM_16")
-    print(json.dumps({"seconds": round(len(audio) / sr, 2), "segments": len(job["segments"])}))
+    print(json.dumps({"seconds": round(len(audio) / sr, 2), "segments": len(job["segments"]), "ends": ends}))
 
 
 if __name__ == "__main__":

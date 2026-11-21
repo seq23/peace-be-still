@@ -50,7 +50,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "I waited patiently for the Lord. In the old Hebrew, I waited, waited. Waiting on top of waiting. [pause 19]\n\nUp from a horrible pit, up from the miry clay. Mud that pulls your feet down. Some seasons are like that. Every step is hard. [pause 19]\n\nAnd then a rock under the feet. And a new song in the mouth. [pause 19]\n\nMany are his wonderful works. More than can be counted. [pause 23]\n\nA companion passage from Isaiah. [pause 17]"
+   "text": "I waited patiently for the Lord. In the old Hebrew, I waited, waited. Waiting on top of waiting. [pause 33]\n\nUp from a horrible pit, up from the miry clay. Mud that pulls your feet down. Some seasons are like that. Every step is hard. [pause 33]\n\nAnd then a rock under the feet. And a new song in the mouth. [pause 33]\n\nMany are his wonderful works. More than can be counted. [pause 37]\n\nA companion passage from Isaiah. [pause 31]"
   },
   {
    "part": "passage",
@@ -72,7 +72,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Fear not. Called by name. Through the waters, God with you. Not around the waters. Through them, together. [pause 21]\n\nHere is Psalm 40 again. Think of solid rock under your feet. [pause 23]"
+   "text": "Fear not. Called by name. Through the waters, God with you. Not around the waters. Through them, together. [pause 35]\n\nHere is Psalm 40 again. Think of solid rock under your feet. [pause 37]"
   },
   {
    "part": "passage",
@@ -112,11 +112,11 @@
  "words": 594,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 812,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -151,7 +151,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

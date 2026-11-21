@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is early morning. You are unlocking the door of your place, or opening your laptop to your shop. [pause 20]\n\nTurn on the lights. Notice the first thing you see. Your name. Your colors. Your things in their places. [pause 23]\n\nFlip the sign to open, or press the button that says live. [pause 23]\n\nThe first person of the day arrives. They smile. They have been here before. [pause 23]\n\nHear them say, I told my sister about you. She is coming next week. [pause 23]\n\nFeel yourself doing the work you are good at. Your hands know what to do. [pause 26]\n\nMidday, there is a little rush. It is busy in the good way. [pause 26]\n\nAt closing, you count up the day. It was a good day. Not wild. Just good. Enough to feel steady. [pause 26]\n\nFlip the sign back to closed. Stand for a moment in the quiet room you built. [pause 28]\n\nSay in your mind, this is mine. I made this. [pause 28]\n\nLet the quiet of that room become the quiet of this one. [pause 30]"
+   "text": "It is early morning. You are unlocking the door of your place, or opening your laptop to your shop. [pause 26]\n\nTurn on the lights. Notice the first thing you see. Your name. Your colors. Your things in their places. [pause 29]\n\nFlip the sign to open, or press the button that says live. [pause 29]\n\nThe first person of the day arrives. They smile. They have been here before. [pause 29]\n\nHear them say, I told my sister about you. She is coming next week. [pause 29]\n\nFeel yourself doing the work you are good at. Your hands know what to do. [pause 32]\n\nMidday, there is a little rush. It is busy in the good way. [pause 32]\n\nAt closing, you count up the day. It was a good day. Not wild. Just good. Enough to feel steady. [pause 32]\n\nFlip the sign back to closed. Stand for a moment in the quiet room you built. [pause 34]\n\nSay in your mind, this is mine. I made this. [pause 34]\n\nLet the quiet of that room become the quiet of this one. [pause 36]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1172,
+ "est_seconds": 1115,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

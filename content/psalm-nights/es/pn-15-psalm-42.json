@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 3]\n\nQuédate quieto. Esta noche no tienes que sentirte de ninguna manera en particular. [pause 6]\n\nEsta noche leemos el Salmo cuarenta y dos. Es un salmo para las noches tristes. El que lo escribió está lejos de casa, triste, y lo dice con honestidad. Le habla a su propia alma y le pregunta por qué está tan abatida. [pause 5]\n\nLo vamos a leer dos veces. [pause 8]"
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 8]\n\nQuédate quieto. Esta noche no tienes que sentirte de ninguna manera en particular. [pause 11]\n\nEsta noche leemos el Salmo cuarenta y dos. Es un salmo para las noches tristes. El que lo escribió está lejos de casa, triste, y lo dice con honestidad. Le habla a su propia alma y le pregunta por qué está tan abatida. [pause 10]\n\nLo vamos a leer dos veces. [pause 13]"
   },
   {
    "part": "passage",
@@ -74,7 +74,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Como el ciervo que busca las corrientes de agua. Un ciervo cansado y con sed, buscando un arroyo. Así puede sentirse el anhelo de Dios. [pause 6]\n\nLágrimas de día y de noche, como pan. Aquí no se finge nada. En algunas temporadas, las lágrimas son de lo que uno vive. La Biblia les hace lugar. [pause 8]\n\nLuego la pregunta, dos veces. ¿Por qué te abates, alma mía? Y la respuesta, dos veces. Espera en Dios. No porque la tristeza se haya ido. Porque Dios sigue siendo Dios. [pause 8]\n\nEl versículo ocho es para esta noche. De noche, su canción conmigo. [pause 10]\n\nUn versículo para acompañarlo, del salmo siguiente. [pause 4]"
+   "text": "Como el ciervo que busca las corrientes de agua. Un ciervo cansado y con sed, buscando un arroyo. Así puede sentirse el anhelo de Dios. [pause 11]\n\nLágrimas de día y de noche, como pan. Aquí no se finge nada. En algunas temporadas, las lágrimas son de lo que uno vive. La Biblia les hace lugar. [pause 13]\n\nLuego la pregunta, dos veces. ¿Por qué te abates, alma mía? Y la respuesta, dos veces. Espera en Dios. No porque la tristeza se haya ido. Porque Dios sigue siendo Dios. [pause 13]\n\nEl versículo ocho es para esta noche. De noche, su canción conmigo. [pause 15]\n\nUn versículo para acompañarlo, del salmo siguiente. [pause 9]"
   },
   {
    "part": "passage",
@@ -92,7 +92,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "El Salmo cuarenta y tres termina con las mismas palabras. Como si el que lo escribió tuviera que decírselo a sí mismo una y otra vez. Espera en Dios. Todavía lo voy a alabar. [pause 8]\n\nSi esta noche estás triste, no tienes que sentirte mejor antes de descansar. Y si la tristeza se queda muchos días, cuéntaselo a alguien. Un pastor, un doctor, una amiga. Eso también es parte de esperar. [pause 8]\n\nAquí está el Salmo cuarenta y dos otra vez. [pause 10]"
+   "text": "El Salmo cuarenta y tres termina con las mismas palabras. Como si el que lo escribió tuviera que decírselo a sí mismo una y otra vez. Espera en Dios. Todavía lo voy a alabar. [pause 13]\n\nSi esta noche estás triste, no tienes que sentirte mejor antes de descansar. Y si la tristeza se queda muchos días, cuéntaselo a alguien. Un pastor, un doctor, una amiga. Eso también es parte de esperar. [pause 13]\n\nAquí está el Salmo cuarenta y dos otra vez. [pause 15]"
   },
   {
    "part": "passage",
@@ -156,11 +156,11 @@
  "words": 895,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 862,
+ "est_seconds": 811,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -197,7 +197,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

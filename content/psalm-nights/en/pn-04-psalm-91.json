@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Welcome to Psalm Nights. [pause 3]\n\nGet comfortable. There is nowhere else you need to be. [pause 5]\n\nTonight is Psalm 91. It is a psalm many people pray at night, and over their families. It is full of pictures of shelter. A secret place. A shadow. Wings. A shield. [pause 5]\n\nWe will read it twice, slowly. [pause 8]"
+   "text": "Welcome to Psalm Nights. [pause 8]\n\nGet comfortable. There is nowhere else you need to be. [pause 10]\n\nTonight is Psalm 91. It is a psalm many people pray at night, and over their families. It is full of pictures of shelter. A secret place. A shadow. Wings. A shield. [pause 10]\n\nWe will read it twice, slowly. [pause 13]"
   },
   {
    "part": "passage",
@@ -94,7 +94,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "He that dwelleth in the secret place. The psalm starts with where you live, not with what you fear. [pause 6]\n\nThe picture in verse four is a bird gathering her young under her wings. Feathers over them, warm and close, while the night goes on outside. [pause 6]\n\nThis psalm has been prayed in hospitals and in war, in storms and in long nights waiting for a phone call. It does not say that nothing hard will ever happen. It says, I will be with him in trouble. [pause 10]\n\nOne companion verse tonight. [pause 4]"
+   "text": "He that dwelleth in the secret place. The psalm starts with where you live, not with what you fear. [pause 13]\n\nThe picture in verse four is a bird gathering her young under her wings. Feathers over them, warm and close, while the night goes on outside. [pause 13]\n\nThis psalm has been prayed in hospitals and in war, in storms and in long nights waiting for a phone call. It does not say that nothing hard will ever happen. It says, I will be with him in trouble. [pause 17]\n\nOne companion verse tonight. [pause 11]"
   },
   {
    "part": "passage",
@@ -112,7 +112,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "In peace. Lying down. Sleeping. Dwelling in safety, because of the Lord alone. [pause 6]\n\nHere is Psalm 91 once more. You might picture those wings as you listen. [pause 10]"
+   "text": "In peace. Lying down. Sleeping. Dwelling in safety, because of the Lord alone. [pause 13]\n\nHere is Psalm 91 once more. You might picture those wings as you listen. [pause 17]"
   },
   {
    "part": "passage",
@@ -196,11 +196,11 @@
  "words": 862,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 844,
+ "est_seconds": 812,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -235,7 +235,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.5-13.7 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

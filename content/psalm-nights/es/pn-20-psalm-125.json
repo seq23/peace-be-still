@@ -51,7 +51,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Quien confía en el Señor es firme como el monte de Sión. Un monte no se mueve con el viento. [pause 25]\n\nComo Jerusalén tiene montes alrededor. La ciudad estaba en un círculo de cerros. Desde sus calles se veían montes por todos lados. [pause 25]\n\nAsí el Señor rodea a su pueblo. Por todos lados. Detrás de ti. Delante de ti. Alrededor de esta cama esta noche. [pause 25]\n\nDos pasajes para acompañarlo. [pause 23]"
+   "text": "Quien confía en el Señor es firme como el monte de Sión. Un monte no se mueve con el viento. [pause 36]\n\nComo Jerusalén tiene montes alrededor. La ciudad estaba en un círculo de cerros. Desde sus calles se veían montes por todos lados. [pause 36]\n\nAsí el Señor rodea a su pueblo. Por todos lados. Detrás de ti. Delante de ti. Alrededor de esta cama esta noche. [pause 36]\n\nDos pasajes para acompañarlo. [pause 34]"
   },
   {
    "part": "passage",
@@ -94,7 +94,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Del Salmo ciento veintiuno, el Señor es tu sombra a tu mano derecha. Y de Deuteronomio, un versículo en el que muchos se han apoyado. Los brazos eternos, debajo. [pause 25]\n\nDebajo. Mientras te acuestas, lo puedes imaginar. Unos brazos que te sostienen desde abajo. [pause 25]\n\nAquí está el Salmo ciento veinticinco otra vez. Piensa en los montes alrededor. [pause 25]"
+   "text": "Del Salmo ciento veintiuno, el Señor es tu sombra a tu mano derecha. Y de Deuteronomio, un versículo en el que muchos se han apoyado. Los brazos eternos, debajo. [pause 36]\n\nDebajo. Mientras te acuestas, lo puedes imaginar. Unos brazos que te sostienen desde abajo. [pause 36]\n\nAquí está el Salmo ciento veinticinco otra vez. Piensa en los montes alrededor. [pause 36]"
   },
   {
    "part": "passage",
@@ -134,8 +134,8 @@
  "words": 533,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
  "est_seconds": 813,
@@ -175,7 +175,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

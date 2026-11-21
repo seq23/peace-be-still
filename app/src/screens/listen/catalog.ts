@@ -9,6 +9,8 @@ export function shelfOf(track: Track) {
   if (track.kind === 'imagination-night' || track.ref.startsWith('content/imagination-nights/')) return 'imagination';
   if (track.kind === 'stories' && track.ref.startsWith('content/stories/hush-harbor/')) return 'hushHarbor';
   if (track.kind === 'stories' && track.ref.startsWith('content/stories/mi-refugio/')) return 'miRefugio';
+  // The plain English tellings (everyone), voiced by the library fill once published.
+  if (track.kind === 'stories' && track.ref.startsWith('content/stories/plain/')) return 'bibleStories';
   return null;
 }
 

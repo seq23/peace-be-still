@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello, and welcome. This is Psalm Nights. [pause 3]\n\nLet the day fall away. Let your jaw loosen. Let your hands rest open. [pause 6]\n\nTonight we read Psalm 46. It is a psalm for when the ground feels like it is moving. Mountains, waters, nations, all in an uproar. And in the middle of it, a quiet river. [pause 5]\n\nWe will read it twice. [pause 8]"
+   "text": "Hello, and welcome. This is Psalm Nights. [pause 8]\n\nLet the day fall away. Let your jaw loosen. Let your hands rest open. [pause 11]\n\nTonight we read Psalm 46. It is a psalm for when the ground feels like it is moving. Mountains, waters, nations, all in an uproar. And in the middle of it, a quiet river. [pause 10]\n\nWe will read it twice. [pause 13]"
   },
   {
    "part": "passage",
@@ -75,7 +75,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "A refuge, a strength, a help in trouble. And very present. Not far off. Not coming later. Here. [pause 6]\n\nThe psalm imagines the worst. The earth moving, the mountains falling into the sea. And then it says, therefore will not we fear. [pause 6]\n\nThen comes a river, whose streams make glad the city of God. Not a flood. A river. Steady and quiet, while everything else roars. [pause 6]\n\nAnd at the end, God speaks. Be still, and know. You do not have to fix the world tonight. You can be still. [pause 10]\n\nA companion verse from Isaiah. [pause 4]"
+   "text": "A refuge, a strength, a help in trouble. And very present. Not far off. Not coming later. Here. [pause 14]\n\nThe psalm imagines the worst. The earth moving, the mountains falling into the sea. And then it says, therefore will not we fear. [pause 14]\n\nThen comes a river, whose streams make glad the city of God. Not a flood. A river. Steady and quiet, while everything else roars. [pause 14]\n\nAnd at the end, God speaks. Be still, and know. You do not have to fix the world tonight. You can be still. [pause 18]\n\nA companion verse from Isaiah. [pause 12]"
   },
   {
    "part": "passage",
@@ -110,7 +110,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Perfect peace. Kept in it, by a mind that rests on him. That is not something you have to make happen. It is something you can be kept in. [pause 6]\n\nAnd Paul, writing from a prison cell, tells us to bring everything to God in prayer, with thanks, and the peace of God will keep our hearts. A peace that does not have to make sense. [pause 8]\n\nHere is Psalm 46 again. When you hear be still, let your body answer. [pause 10]"
+   "text": "Perfect peace. Kept in it, by a mind that rests on him. That is not something you have to make happen. It is something you can be kept in. [pause 14]\n\nAnd Paul, writing from a prison cell, tells us to bring everything to God in prayer, with thanks, and the peace of God will keep our hearts. A peace that does not have to make sense. [pause 16]\n\nHere is Psalm 46 again. When you hear be still, let your body answer. [pause 18]"
   },
   {
    "part": "passage",
@@ -174,11 +174,11 @@
  "words": 811,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 829,
+ "est_seconds": 813,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -213,7 +213,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.5-13.7 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

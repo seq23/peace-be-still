@@ -74,7 +74,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Bienaventurado aquel cuya maldad ha sido perdonada. El salmo empieza con alivio. Feliz el que tiene su pecado cubierto. [pause 18]\n\nLuego David recuerda lo que le costó callar. Mientras calló, sus huesos se envejecieron. De día y de noche el peso era grande. Algunas cosas que cargamos también cansan el cuerpo. [pause 20]\n\nY entonces lo dijo. Voy a confesar. Y el peso se levantó. [pause 18]\n\nTú eres mi refugio. No esconderse de Dios. Esconderse en Dios. [pause 22]\n\nUn versículo para acompañarlo. [pause 16]"
+   "text": "Bienaventurado aquel cuya maldad ha sido perdonada. El salmo empieza con alivio. Feliz el que tiene su pecado cubierto. [pause 29]\n\nLuego David recuerda lo que le costó callar. Mientras calló, sus huesos se envejecieron. De día y de noche el peso era grande. Algunas cosas que cargamos también cansan el cuerpo. [pause 31]\n\nY entonces lo dijo. Voy a confesar. Y el peso se levantó. [pause 29]\n\nTú eres mi refugio. No esconderse de Dios. Esconderse en Dios. [pause 33]\n\nUn versículo para acompañarlo. [pause 27]"
   },
   {
    "part": "passage",
@@ -92,7 +92,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Si confesamos, él es fiel y justo para perdonar. Si hay algo en tu corazón esta noche, se lo puedes decir. Él ya lo sabe, y no se va a ir. [pause 20]\n\nAquí está el Salmo treinta y dos otra vez. Escucha la palabra refugio. [pause 22]"
+   "text": "Si confesamos, él es fiel y justo para perdonar. Si hay algo en tu corazón esta noche, se lo puedes decir. Él ya lo sabe, y no se va a ir. [pause 31]\n\nAquí está el Salmo treinta y dos otra vez. Escucha la palabra refugio. [pause 33]"
   },
   {
    "part": "passage",
@@ -156,11 +156,11 @@
  "words": 660,
  "rest_part": "rest5",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 817,
+ "est_seconds": 811,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -197,7 +197,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

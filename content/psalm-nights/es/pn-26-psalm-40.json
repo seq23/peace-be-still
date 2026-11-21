@@ -50,7 +50,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Resignadamente esperé. En el hebreo antiguo dice esperando, esperé. Espera sobre espera. [pause 25]\n\nMe sacó del pozo, del lodo cenagoso. Un lodo que te jala los pies hacia abajo. Algunas temporadas son así. Cada paso cuesta. [pause 25]\n\nY luego, una roca bajo los pies. Y un cántico nuevo en la boca. [pause 25]\n\nMuchas son sus maravillas. Más de las que se pueden contar. [pause 25]\n\nUn pasaje de Isaías para acompañarlo. [pause 24]"
+   "text": "Resignadamente esperé. En el hebreo antiguo dice esperando, esperé. Espera sobre espera. [pause 37]\n\nMe sacó del pozo, del lodo cenagoso. Un lodo que te jala los pies hacia abajo. Algunas temporadas son así. Cada paso cuesta. [pause 37]\n\nY luego, una roca bajo los pies. Y un cántico nuevo en la boca. [pause 37]\n\nMuchas son sus maravillas. Más de las que se pueden contar. [pause 37]\n\nUn pasaje de Isaías para acompañarlo. [pause 36]"
   },
   {
    "part": "passage",
@@ -72,7 +72,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "No temas, dice Dios. Él te llamó por tu nombre. Cuando pases por las aguas, Dios contigo. No alrededor de las aguas. A través de ellas, juntos. [pause 25]\n\nAquí está el Salmo cuarenta otra vez. Piensa en roca firme bajo tus pies. [pause 25]"
+   "text": "No temas, dice Dios. Él te llamó por tu nombre. Cuando pases por las aguas, Dios contigo. No alrededor de las aguas. A través de ellas, juntos. [pause 37]\n\nAquí está el Salmo cuarenta otra vez. Piensa en roca firme bajo tus pies. [pause 37]"
   },
   {
    "part": "passage",
@@ -112,11 +112,11 @@
  "words": 534,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 814,
+ "est_seconds": 813,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -153,7 +153,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

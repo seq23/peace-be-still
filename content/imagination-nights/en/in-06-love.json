@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You are at a table, late in the evening. The dishes are done. There is music on, low. [pause 16]\n\nAcross from you is someone who is glad you are there. Notice how you know. The way they look at you. The ease in the room. [pause 20]\n\nThey tell you something about their day. You listen. They listen back. Nobody is in a hurry. [pause 20]\n\nFeel your own shoulders. Notice that you are not trying to impress anyone. You are just yourself, and that is welcome here. [pause 20]\n\nSomeone laughs. Maybe it is you. [pause 20]\n\nLater, walking out, they say something simple. I am really glad we did this. And you believe them. [pause 22]\n\nLet that feeling settle in your chest. Warm. Unhurried. Safe. [pause 22]\n\nSay softly in your mind, I am loved, and I love well. [pause 24]\n\nNotice the small kindnesses. A cup of tea set down beside you without asking. A message that says, home safe? [pause 22]\n\nNotice how you give love back. Easily. Without keeping score. [pause 22]\n\nPicture a quiet morning with this person, or these people. Nobody rushing. Coffee. Sunlight. Ordinary and good. [pause 22]\n\nLet the evening stay with you as you drift. [pause 30]"
+   "text": "You are at a table, late in the evening. The dishes are done. There is music on, low. [pause 24]\n\nAcross from you is someone who is glad you are there. Notice how you know. The way they look at you. The ease in the room. [pause 28]\n\nThey tell you something about their day. You listen. They listen back. Nobody is in a hurry. [pause 28]\n\nFeel your own shoulders. Notice that you are not trying to impress anyone. You are just yourself, and that is welcome here. [pause 28]\n\nSomeone laughs. Maybe it is you. [pause 28]\n\nLater, walking out, they say something simple. I am really glad we did this. And you believe them. [pause 30]\n\nLet that feeling settle in your chest. Warm. Unhurried. Safe. [pause 30]\n\nSay softly in your mind, I am loved, and I love well. [pause 32]\n\nNotice the small kindnesses. A cup of tea set down beside you without asking. A message that says, home safe? [pause 30]\n\nNotice how you give love back. Easily. Without keeping score. [pause 30]\n\nPicture a quiet morning with this person, or these people. Nobody rushing. Coffee. Sunlight. Ordinary and good. [pause 30]\n\nLet the evening stay with you as you drift. [pause 38]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1141,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

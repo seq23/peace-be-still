@@ -63,7 +63,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Crying out from the end of the earth. Wherever you are tonight, however far you feel, it is not too far to pray from. [pause 21]\n\nWhen my heart is overwhelmed. Some nights the heart is simply too full. Then the prayer is short. Lead me to the higher rock. [pause 21]\n\nA rock higher than you. Higher than your worry. Higher than your understanding. Somewhere to stand above the water. [pause 21]\n\nAnd the shelter of his wings again. A tent. A strong tower. [pause 25]\n\nTwo companion passages. [pause 19]"
+   "text": "Crying out from the end of the earth. Wherever you are tonight, however far you feel, it is not too far to pray from. [pause 32]\n\nWhen my heart is overwhelmed. Some nights the heart is simply too full. Then the prayer is short. Lead me to the higher rock. [pause 32]\n\nA rock higher than you. Higher than your worry. Higher than your understanding. Somewhere to stand above the water. [pause 32]\n\nAnd the shelter of his wings again. A tent. A strong tower. [pause 36]\n\nTwo companion passages. [pause 30]"
   },
   {
    "part": "passage",
@@ -94,7 +94,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Psalm 18 calls God a rock, a fortress, and a high tower. Isaiah pictures a hiding place from the wind, and the shade of a great rock when the land is tired and dry. [pause 23]\n\nHere is Psalm 61 again. Let your heart be led to the rock. [pause 25]"
+   "text": "Psalm 18 calls God a rock, a fortress, and a high tower. Isaiah pictures a hiding place from the wind, and the shade of a great rock when the land is tired and dry. [pause 34]\n\nHere is Psalm 61 again. Let your heart be led to the rock. [pause 36]"
   },
   {
    "part": "passage",
@@ -146,11 +146,11 @@
  "words": 590,
  "rest_part": "rest4",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 820,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -185,7 +185,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

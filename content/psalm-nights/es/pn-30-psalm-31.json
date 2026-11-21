@@ -52,7 +52,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "En ti, Señor, confío. El salmo empieza donde puede empezar cada noche. Confianza. [pause 25]\n\nSé mi roca fuerte, una casa fuerte. Una casa. Un lugar donde entrar y cerrar la puerta. [pause 25]\n\nLuego el versículo cinco. En tu mano encomiendo mi espíritu. Encomendar es entregar algo y dejarlo ahí. Como una niña que al final del día le da a su mamá el juguete con el que ya se cansó de jugar. [pause 25]\n\nAhora unos versículos para acompañarlo. [pause 25]"
+   "text": "En ti, Señor, confío. El salmo empieza donde puede empezar cada noche. Confianza. [pause 34]\n\nSé mi roca fuerte, una casa fuerte. Una casa. Un lugar donde entrar y cerrar la puerta. [pause 34]\n\nLuego el versículo cinco. En tu mano encomiendo mi espíritu. Encomendar es entregar algo y dejarlo ahí. Como una niña que al final del día le da a su mamá el juguete con el que ya se cansó de jugar. [pause 34]\n\nAhora unos versículos para acompañarlo. [pause 34]"
   },
   {
    "part": "passage",
@@ -100,7 +100,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "En tu mano están mis tiempos. Todos. Lo que pasó, esta noche, mañana. [pause 25]\n\nY Jesús, al final de su sufrimiento, oró este mismo salmo. Padre, en tus manos. Si él pudo orarlo entonces, tú lo puedes orar esta noche. [pause 25]\n\nY nuestro versículo de la noche, una última vez. Paz. Acostarse. Dormir. [pause 25]\n\nAquí está el Salmo treinta y uno otra vez. Cuando oigas el versículo cinco, entrégale tu espíritu por esta noche. [pause 25]"
+   "text": "En tu mano están mis tiempos. Todos. Lo que pasó, esta noche, mañana. [pause 34]\n\nY Jesús, al final de su sufrimiento, oró este mismo salmo. Padre, en tus manos. Si él pudo orarlo entonces, tú lo puedes orar esta noche. [pause 34]\n\nY nuestro versículo de la noche, una última vez. Paz. Acostarse. Dormir. [pause 34]\n\nAquí está el Salmo treinta y uno otra vez. Cuando oigas el versículo cinco, entrégale tu espíritu por esta noche. [pause 34]"
   },
   {
    "part": "passage",
@@ -140,11 +140,11 @@
  "words": 509,
  "rest_part": "rest6",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 810,
+ "est_seconds": 811,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -181,7 +181,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

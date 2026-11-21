@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello, and welcome to Psalm Nights. [pause 13]\n\nLet your body be still. Let your face soften. [pause 16]\n\nTonight we read the second half of Psalm 145. It is a psalm of praise, and it is full of the word all. All his works. All that fall. All that call upon him. [pause 15]\n\nWe will read it twice. [pause 18]"
+   "text": "Hello, and welcome to Psalm Nights. [pause 15]\n\nLet your body be still. Let your face soften. [pause 16]\n\nTonight we read the second half of Psalm 145. It is a psalm of praise, and it is full of the word all. All his works. All that fall. All that call upon him. [pause 15]\n\nWe will read it twice. [pause 18]"
   },
   {
    "part": "passage",
@@ -86,7 +86,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Gracious, and full of compassion. These words go back to the time of Moses, when God passed by and described himself. Slow to anger. Of great mercy. [pause 16]\n\nHe holds up all who fall. He raises all who are bowed down. If you fell today, if you are bent low tonight, this verse is about you. [pause 18]\n\nThe eyes of all wait upon thee. Like a family waiting for supper, every creature looks to him. [pause 16]\n\nNear to all who call on him. All. Nobody is too far. [pause 20]\n\nOne companion verse. [pause 14]"
+   "text": "Gracious, and full of compassion. These words go back to the time of Moses, when God passed by and described himself. Slow to anger. Of great mercy. [pause 27]\n\nHe holds up all who fall. He raises all who are bowed down. If you fell today, if you are bent low tonight, this verse is about you. [pause 29]\n\nThe eyes of all wait upon thee. Like a family waiting for supper, every creature looks to him. [pause 27]\n\nNear to all who call on him. All. Nobody is too far. [pause 31]\n\nOne companion verse. [pause 25]"
   },
   {
    "part": "passage",
@@ -104,7 +104,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "In peace. Lying down. Sleeping. Safe in him alone. [pause 16]\n\nHere is Psalm 145 again. Listen for the word all. [pause 20]"
+   "text": "In peace. Lying down. Sleeping. Safe in him alone. [pause 27]\n\nHere is Psalm 145 again. Listen for the word all. [pause 31]"
   },
   {
    "part": "passage",
@@ -180,11 +180,11 @@
  "words": 683,
  "rest_part": "rest5",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 815,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -219,7 +219,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

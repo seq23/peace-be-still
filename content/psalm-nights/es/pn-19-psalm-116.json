@@ -67,7 +67,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Amo al Señor, porque me oyó. La razón es sencilla. Me escuchó. [pause 24]\n\nInclinó a mí su oído. Imagina a alguien que se agacha para oírte cuando hablas bajito. Esa es la palabra. [pause 24]\n\nEl salmo recuerda los dolores, la angustia, el miedo. Y luego dice, clemente es el Señor. [pause 24]\n\nLuego el versículo siete. Vuelve, oh alma mía, a tu reposo. El salmista se habla a sí mismo, como quien llama a un niño para que vuelva a la cama. Vuelve a descansar. [pause 25]\n\nDos versículos para acompañarlo. [pause 22]"
+   "text": "Amo al Señor, porque me oyó. La razón es sencilla. Me escuchó. [pause 35]\n\nInclinó a mí su oído. Imagina a alguien que se agacha para oírte cuando hablas bajito. Esa es la palabra. [pause 35]\n\nEl salmo recuerda los dolores, la angustia, el miedo. Y luego dice, clemente es el Señor. [pause 35]\n\nLuego el versículo siete. Vuelve, oh alma mía, a tu reposo. El salmista se habla a sí mismo, como quien llama a un niño para que vuelva a la cama. Vuelve a descansar. [pause 36]\n\nDos versículos para acompañarlo. [pause 33]"
   },
   {
    "part": "passage",
@@ -98,7 +98,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Paz. Acostarse. Dormir. Y las palabras de Jesús, invitando a los cansados a venir y descansar. [pause 25]\n\nAquí está el Salmo ciento dieciséis otra vez. Cuando oigas el versículo siete, díselo a tu propia alma. [pause 25]"
+   "text": "Paz. Acostarse. Dormir. Y las palabras de Jesús, invitando a los cansados a venir y descansar. [pause 36]\n\nAquí está el Salmo ciento dieciséis otra vez. Cuando oigas el versículo siete, díselo a tu propia alma. [pause 36]"
   },
   {
    "part": "passage",
@@ -154,11 +154,11 @@
  "words": 526,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 812,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -195,7 +195,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

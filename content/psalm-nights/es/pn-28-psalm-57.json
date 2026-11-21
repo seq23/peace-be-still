@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nQue las cobijas te calienten. [pause 17]\n\nEl salmo de esta noche es el Salmo cincuenta y siete. El título dice que David lo escribió cuando se escondía de Saúl en una cueva. Una cueva oscura, un enemigo afuera. Y este es el canto que cantó ahí. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nQue las cobijas te calienten. [pause 17]\n\nEl salmo de esta noche es el Salmo cincuenta y siete. El título dice que David lo escribió cuando se escondía de Saúl en una cueva. Una cueva oscura, un enemigo afuera. Y este es el canto que cantó ahí. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
   },
   {
    "part": "passage",
@@ -74,7 +74,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Ten misericordia de mí, oh Dios. Dos veces, al principio. Luego, un refugio a la sombra de sus alas, hasta que pase el quebranto. Hasta que pase. Va a pasar. [pause 19]\n\nEn medio, David describe leones. Peligro por todos lados. Y luego levanta los ojos. Dios, que seas exaltado sobre los cielos. [pause 17]\n\nLuego una línea sobre el amanecer. Me despertaré de mañana. David en una cueva, decidiendo despertar a la mañana con un canto. [pause 21]\n\nUn versículo para acompañarlo, de la historia de Rut. [pause 15]"
+   "text": "Ten misericordia de mí, oh Dios. Dos veces, al principio. Luego, un refugio a la sombra de sus alas, hasta que pase el quebranto. Hasta que pase. Va a pasar. [pause 32]\n\nEn medio, David describe leones. Peligro por todos lados. Y luego levanta los ojos. Dios, que seas exaltado sobre los cielos. [pause 30]\n\nLuego una línea sobre el amanecer. Me despertaré de mañana. David en una cueva, decidiendo despertar a la mañana con un canto. [pause 34]\n\nUn versículo para acompañarlo, de la historia de Rut. [pause 28]"
   },
   {
    "part": "passage",
@@ -92,7 +92,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Booz se lo dijo a Rut, una viuda extranjera que había llegado sin nada. Viniste a cobijarte bajo sus alas. Las mismas alas de las que cantó David. [pause 19]\n\nAquí está el Salmo cincuenta y siete otra vez. Imagínate bajo esas alas, hasta que pase la noche. [pause 21]"
+   "text": "Booz se lo dijo a Rut, una viuda extranjera que había llegado sin nada. Viniste a cobijarte bajo sus alas. Las mismas alas de las que cantó David. [pause 32]\n\nAquí está el Salmo cincuenta y siete otra vez. Imagínate bajo esas alas, hasta que pase la noche. [pause 34]"
   },
   {
    "part": "passage",
@@ -156,11 +156,11 @@
  "words": 683,
  "rest_part": "rest4",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 820,
+ "est_seconds": 815,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -197,7 +197,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

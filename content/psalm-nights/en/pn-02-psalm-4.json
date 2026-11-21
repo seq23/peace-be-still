@@ -18,7 +18,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Welcome to Psalm Nights. [pause 5]\n\nTurn the lights down low, or off. Let your body sink a little into the bed. [pause 8]\n\nTonight's psalm is Psalm 4. It is an evening psalm. It begins with a man calling out to God in trouble, and it ends with him lying down to sleep. [pause 7]\n\nThat is the whole journey of tonight. From the worries of the day to the quiet of the bed. We will read it twice. [pause 10]"
+   "text": "Welcome to Psalm Nights. [pause 10]\n\nTurn the lights down low, or off. Let your body sink a little into the bed. [pause 13]\n\nTonight's psalm is Psalm 4. It is an evening psalm. It begins with a man calling out to God in trouble, and it ends with him lying down to sleep. [pause 12]\n\nThat is the whole journey of tonight. From the worries of the day to the quiet of the bed. We will read it twice. [pause 15]"
   },
   {
    "part": "passage",
@@ -64,7 +64,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Upon your bed, the psalm says, speak with your own heart, and be still. [pause 8]\n\nThat is good advice for the end of a day. Not to replay everything. Not to argue with the day again. Just to be still, and let God see your heart as it is. [pause 10]\n\nThere is a line in the middle about gladness. God put gladness in his heart, more than other people felt when their harvest came in. Other people's harvest looked bigger. But the gladness God gave was enough. [pause 10]\n\nTwo companion verses now, both about sleep. [pause 6]"
+   "text": "Upon your bed, the psalm says, speak with your own heart, and be still. [pause 17]\n\nThat is good advice for the end of a day. Not to replay everything. Not to argue with the day again. Just to be still, and let God see your heart as it is. [pause 19]\n\nThere is a line in the middle about gladness. God put gladness in his heart, more than other people felt when their harvest came in. Other people's harvest looked bigger. But the gladness God gave was enough. [pause 19]\n\nTwo companion verses now, both about sleep. [pause 15]"
   },
   {
    "part": "passage",
@@ -108,7 +108,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "I lay down, I slept, I woke. Simple words. Lying down, sleeping, waking. David wrote them when he was running for his life, and still he rested. [pause 8]\n\nAnd the proverb speaks of sleep that is sweet. Not a promise for every night, but a picture of what rest in God can feel like. [pause 8]\n\nAnd Psalm 127 says it is no use getting up early and staying up late, eating the bread of worry. He gives his beloved sleep. You can stop working for today. [pause 10]\n\nHere is Psalm 4 again, from the beginning. Listen for that last verse. Let it be your own words tonight. [pause 12]"
+   "text": "I lay down, I slept, I woke. Simple words. Lying down, sleeping, waking. David wrote them when he was running for his life, and still he rested. [pause 17]\n\nAnd the proverb speaks of sleep that is sweet. Not a promise for every night, but a picture of what rest in God can feel like. [pause 17]\n\nAnd Psalm 127 says it is no use getting up early and staying up late, eating the bread of worry. He gives his beloved sleep. You can stop working for today. [pause 19]\n\nHere is Psalm 4 again, from the beginning. Listen for that last verse. Let it be your own words tonight. [pause 21]"
   },
   {
    "part": "passage",
@@ -160,11 +160,11 @@
  "words": 766,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 817,
+ "est_seconds": 811,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -199,7 +199,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.5-13.7 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

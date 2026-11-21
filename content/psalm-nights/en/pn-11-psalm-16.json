@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello, and welcome to Psalm Nights. [pause 7]\n\nLet your body sink into the bed. Let your feet be warm. [pause 10]\n\nTonight's psalm is Psalm 16. It is a psalm of contentment. Of someone who looks at their life and says, the lines have fallen for me in pleasant places. [pause 9]\n\nWe will read it twice, slowly. [pause 12]"
+   "text": "Hello, and welcome to Psalm Nights. [pause 12]\n\nLet your body sink into the bed. Let your feet be warm. [pause 15]\n\nTonight's psalm is Psalm 16. It is a psalm of contentment. Of someone who looks at their life and says, the lines have fallen for me in pleasant places. [pause 14]\n\nWe will read it twice, slowly. [pause 15]"
   },
   {
    "part": "passage",
@@ -75,7 +75,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Preserve me, O God. The psalm begins with a short prayer. Keep me. [pause 10]\n\nIn the middle there is a line about the night. My reins instruct me, in the night seasons. The old word reins means the deep places inside. Even at night, God is teaching the heart. [pause 10]\n\nPleasant places, the psalm says. In those days the land was measured out with lines. The psalmist looks at his portion and is glad. Not because it is the biggest. Because the Lord is in it. [pause 12]\n\nAnd at the end, fulness of joy, in his presence. [pause 14]\n\nTwo companion passages. [pause 8]"
+   "text": "Preserve me, O God. The psalm begins with a short prayer. Keep me. [pause 18]\n\nIn the middle there is a line about the night. My reins instruct me, in the night seasons. The old word reins means the deep places inside. Even at night, God is teaching the heart. [pause 18]\n\nPleasant places, the psalm says. In those days the land was measured out with lines. The psalmist looks at his portion and is glad. Not because it is the biggest. Because the Lord is in it. [pause 20]\n\nAnd at the end, fulness of joy, in his presence. [pause 22]\n\nTwo companion passages. [pause 16]"
   },
   {
    "part": "passage",
@@ -110,7 +110,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "The first is the evening verse we often return to. Peace, lying down, sleep. [pause 10]\n\nThe second is from Psalm 73. My flesh and my heart may fail. God is the strength of my heart. When your body is tired and your heart is worn, he is still your portion. [pause 12]\n\nHere is Psalm 16 again. Listen for the pleasant places. [pause 14]"
+   "text": "The first is the evening verse we often return to. Peace, lying down, sleep. [pause 18]\n\nThe second is from Psalm 73. My flesh and my heart may fail. God is the strength of my heart. When your body is tired and your heart is worn, he is still your portion. [pause 20]\n\nHere is Psalm 16 again. Listen for the pleasant places. [pause 22]"
   },
   {
    "part": "passage",
@@ -174,11 +174,11 @@
  "words": 746,
  "rest_part": "rest4",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 819,
+ "est_seconds": 811,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -213,7 +213,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

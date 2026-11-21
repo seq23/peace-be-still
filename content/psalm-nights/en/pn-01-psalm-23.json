@@ -19,7 +19,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello, and welcome to Psalm Nights. [pause 8]\n\nFind a way to lie down that feels easy. Pull the covers up. Let your phone rest somewhere you will not have to reach for it. [pause 11]\n\nTonight we are reading the twenty-third Psalm, slowly, twice. It may be the most loved psalm there is. Many people learned it as children, and many have heard it at the bedside of someone they love. [pause 10]\n\nYou do not have to do anything but listen. [pause 13]"
+   "text": "Hello, and welcome to Psalm Nights. [pause 13]\n\nFind a way to lie down that feels easy. Pull the covers up. Let your phone rest somewhere you will not have to reach for it. [pause 15]\n\nTonight we are reading the twenty-third Psalm, slowly, twice. It may be the most loved psalm there is. Many people learned it as children, and many have heard it at the bedside of someone they love. [pause 15]\n\nYou do not have to do anything but listen. [pause 15]"
   },
   {
    "part": "passage",
@@ -57,7 +57,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "The psalm begins with one small word. My. [pause 10]\n\nNot a shepherd somewhere far away. My shepherd. David had been a shepherd boy. He knew what it was to count the sheep at night, to find water for them, to carry the one that was hurt. [pause 11]\n\nA shepherd does not ask the sheep to find the pasture on their own. He leads. He goes first. [pause 11]\n\nNotice that the psalm does not pretend there is no dark valley. It says yea, though I walk through it. The valley is real. But so is the one who walks it with you. [pause 15]\n\nHere are two more short passages to sit beside it. [pause 9]"
+   "text": "The psalm begins with one small word. My. [pause 19]\n\nNot a shepherd somewhere far away. My shepherd. David had been a shepherd boy. He knew what it was to count the sheep at night, to find water for them, to carry the one that was hurt. [pause 20]\n\nA shepherd does not ask the sheep to find the pasture on their own. He leads. He goes first. [pause 20]\n\nNotice that the psalm does not pretend there is no dark valley. It says yea, though I walk through it. The valley is real. But so is the one who walks it with you. [pause 24]\n\nHere are two more short passages to sit beside it. [pause 18]"
   },
   {
    "part": "passage",
@@ -114,7 +114,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Lie down in peace, and sleep. That is a line you can borrow tonight. [pause 11]\n\nAnd the good shepherd, Jesus said, gives his life for the sheep. He does not leave when the night comes. [pause 11]\n\nAnd Isaiah pictures the shepherd carrying the lambs close to his chest, leading gently those with young. Gently. That is how he leads you tonight. [pause 13]\n\nNow we will read the twenty-third Psalm once more. This time, you might let it be a little slower in your mind. Let each line land before the next one comes. [pause 15]"
+   "text": "Lie down in peace, and sleep. That is a line you can borrow tonight. [pause 20]\n\nAnd the good shepherd, Jesus said, gives his life for the sheep. He does not leave when the night comes. [pause 20]\n\nAnd Isaiah pictures the shepherd carrying the lambs close to his chest, leading gently those with young. Gently. That is how he leads you tonight. [pause 22]\n\nNow we will read the twenty-third Psalm once more. This time, you might let it be a little slower in your mind. Let each line land before the next one comes. [pause 24]"
   },
   {
    "part": "passage",
@@ -158,11 +158,11 @@
  "words": 696,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 816,
+ "est_seconds": 818,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -197,7 +197,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.5-13.7 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

@@ -943,6 +943,83 @@ test('the canonical catalog plays Psalm 1 and disables missing or outdated uploa
   }
 });
 
+test('plain Bible Stories show only once published: no shelf before, no greyed rows, a published one opens', async () => {
+  const person = { ...base, journey: 'gods-word' };
+  const script = (id: string) => JSON.parse(require('node:fs').readFileSync(`../content/stories/plain/${id}.json`, 'utf8'));
+  const voiced = script('core-001-peace-be-still'), unpublished = script('core-002-red-sea'), unvoiced = script('core-003-lions-den');
+  const plainTrack = (id: string, title: string, n: string): Track => ({
+    file: `en/stories/plain/${id}-0000000${n}.m4a`, kind: 'stories', lang: 'en', ref: `content/stories/plain/${id}.json`,
+    seconds: 300, sha256: n.repeat(64), voice: 'kokoro:af_nicole', titles: { en: title },
+  } as Track);
+  assert.ok(!audioTracks.some(track => track.ref.startsWith('content/stories/plain/')), 'the fixture assumes no plain story is voiced on main');
+  const published = plainTrack(voiced.id, voiced.title, 'd'), waiting = plainTrack(unpublished.id, unpublished.title, 'e');
+  // publishedTracks defaults to the library array itself: copy it, so a voiced-but-unpublished track stays unpublished.
+  const before = publishedTracks, live = [...publishedTracks];
+  publishedTracks = live;
+  audioTracks.push(waiting);
+  try {
+    // Voiced but not yet published (and nothing else): no shelf at all, no "not ready" row, no empty line.
+    let tree = await mount('nights', person);
+    try {
+      assert.ok(!texts(tree).includes(en['listen.bibleStories']));
+      assert.ok(!strings(tree).includes(unpublished.title) && !strings(tree).includes(unvoiced.title));
+    } finally { await act(async () => tree.unmount()); }
+    // One published: the shelf appears with that one story, which opens; the unpublished and unvoiced stay hidden.
+    audioTracks.push(published);
+    publishedTracks = [...live, published];
+    tree = await mount('nights', person);
+    try {
+      await press(tree, en['listen.bibleStories']);
+      assert.ok(strings(tree).includes(i18n.t('listen.stories', { locale: 'en', count: 1 })));
+      await press(tree, voiced.title);
+      assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: published.sha256 } }]);
+      assert.ok(!strings(tree).includes(unpublished.title) && !strings(tree).includes(unvoiced.title));
+      assert.deepEqual(faithContentIssues(strings(tree)), []);
+    } finally { await act(async () => tree.unmount()); }
+    // Spanish phones never get the English shelf.
+    const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
+    try { assert.ok(!strings(spanish).includes(en['listen.bibleStories'])); } finally { await act(async () => spanish.unmount()); }
+  } finally {
+    for (const track of [published, waiting]) { const i = audioTracks.indexOf(track); if (i >= 0) audioTracks.splice(i, 1); }
+    publishedTracks = before;
+  }
+});
+
+test('a re-voiced night: a newer file not yet published never hides the published one; a failed one leaves it listed', async () => {
+  const person = { ...base, door: 'mindset', journey: 'imagination-nights' };
+  const old = audioTracks.find(track => track.kind === 'imagination-night' && track.lang === 'en')!;
+  assert.ok(old && publishedTracks.includes(old), 'the fixture needs a published English Imagination Night on main');
+  const title = trackTitle(old, 'en');
+  const count = audioTracks.filter(track => track.kind === 'imagination-night' && track.lang === 'en').length;
+  const newer = { ...old, file: old.file.replace(/-[0-9a-f]{8}\.m4a$/, '-ffffffff.m4a'), sha256: 'f'.repeat(64), seconds: old.seconds + 90 } as Track;
+  const before = publishedTracks, live = [...publishedTracks];
+  publishedTracks = live;
+  try {
+    // Old published + new voiced but not in R2 yet: still one row for the night, and it opens the old file.
+    audioTracks.push(newer);
+    let tree = await mount('nights', person);
+    try {
+      assert.ok(strings(tree).includes(i18n.t('listen.nights', { locale: 'en', count })), texts(tree).join(' | '));
+      await press(tree, en['journey.imaginationNights.name']);
+      assert.equal(texts(tree).filter(s => s === title).length, 1);
+      assert.ok(!texts(tree).includes(en['listen.notReady']));
+      await press(tree, title);
+      assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: old.sha256 } }]);
+    } finally { await act(async () => tree.unmount()); }
+    // Old published + new failed (a FAILED row never enters the library): the old one is listed and opens.
+    audioTracks.splice(audioTracks.indexOf(newer), 1);
+    tree = await mount('nights', person);
+    try {
+      await press(tree, en['journey.imaginationNights.name']);
+      await press(tree, title);
+      assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: old.sha256 } }]);
+    } finally { await act(async () => tree.unmount()); }
+  } finally {
+    const n = audioTracks.indexOf(newer); if (n >= 0) audioTracks.splice(n, 1);
+    publishedTracks = before;
+  }
+});
+
 test('Spanish and Mindset shelves show their own library and the current availability', async () => {
   const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
   assert.ok(texts(spanish).includes(es['tabs.nights']));
@@ -1618,4 +1695,238 @@ test('a screen that throws shows the calm error screen in the app language, and 
     await act(async () => tree.unmount());
   }
   i18n.locale = 'en';
+});
+
+// The daily reminder: a fake phone with a real schedule (one entry per id) and a permission that answers once.
+const reminders = require('../src/reminders') as typeof import('../src/reminders');
+const { REMINDER_KEY } = require('../src/reminders/reminder') as typeof import('../src/reminders/reminder');
+function notificationPhone(permission: 'granted' | 'denied' | 'undetermined' = 'undetermined', answer: 'granted' | 'denied' = 'granted') {
+  const status = (s: string) => ({ granted: s === 'granted', canAskAgain: s === 'undetermined', status: s });
+  const phone = {
+    permission, asked: 0, booked: 0, schedule: new Map<string, { content: { body: string }; trigger: object }>(),
+    getPermissionsAsync: async () => status(phone.permission),
+    requestPermissionsAsync: async () => { phone.asked++; phone.permission = answer; return status(answer); },
+    cancelAllScheduledNotificationsAsync: async () => { phone.schedule.clear(); },
+    scheduleNotificationAsync: async ({ identifier, content, trigger }: { identifier: string; content: { body: string }; trigger: object }) => {
+      phone.booked++; phone.schedule.set(identifier, { content, trigger }); return identifier;
+    },
+  };
+  (globalThis as any).__pbsNotifications = phone;
+  return phone;
+}
+/** A fresh app open on the same phone: the saved reminder record stays, the in-memory copy and the once-per-open sync reset. */
+const reopen = () => reminders.resetReminderForTests();
+const settle = () => act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+const onPhone = () => { (globalThis as any).__pbsPlatform = 'ios'; };
+beforeEach(() => { reopen(); local.delete(REMINDER_KEY); notificationPhone(); });
+
+test('the reminder offer never shows on first launch; after a finished session it does, in the journey language; "Not now" waits a week', async () => {
+  onPhone();
+  const person = { ...base, journey: 'psalm-nights' };
+  const first = await mount('today', person);
+  await settle();
+  assert.ok(!strings(first).includes(en['reminder.offer.title.evening']), 'first launch: no offer');
+  await act(async () => first.unmount());
+  await reminders.markFirstValue();
+  const after = await mount('today', person);
+  await settle();
+  assert.ok(strings(after).includes(en['reminder.offer.title.evening']));
+  assert.ok(strings(after).includes('8:30 PM'), 'the offer names the evening time');
+  assert.equal((globalThis as any).__pbsNotifications.asked, 0, 'our own pre-ask comes before the phone\'s prompt');
+  await press(after, en['reminder.offer.notNow']);
+  assert.ok(!strings(after).includes(en['reminder.offer.title.evening']));
+  await act(async () => after.unmount());
+  reopen();
+  const tomorrow = await mount('today', person);
+  await settle();
+  assert.ok(!strings(tomorrow).includes(en['reminder.offer.title.evening']), '"Not now" holds across a reopen');
+  assert.ok(JSON.parse(local.get(REMINDER_KEY)!).notNowAt > 0);
+  await act(async () => tomorrow.unmount());
+  reopen();
+  local.set(REMINDER_KEY, JSON.stringify({ on: false, firstValueAt: 1 }));
+  const spanish = await mount('today', { ...base, journey: 'mi-refugio', voice: 'spanish' });
+  await settle();
+  assert.ok(strings(spanish).includes(es['reminder.offer.title.evening']), 'Mi Refugio asks in Spanish');
+  await act(async () => spanish.unmount());
+});
+
+test('"Turn on the reminder" asks the phone once and books exactly one daily reminder; reopening never stacks a second', async () => {
+  onPhone();
+  const phone = notificationPhone();
+  await reminders.markFirstValue();
+  const person = { ...base, journey: 'psalm-nights' };
+  const today = await mount('today', person);
+  await settle();
+  await press(today, en['reminder.offer.yes']);
+  await settle();
+  assert.equal(phone.asked, 1);
+  assert.deepEqual([...phone.schedule.values()].map(e => [e.trigger, e.content.body]), [[{ type: 'daily', hour: 20, minute: 30 }, en['reminder.body.evening']]]);
+  assert.ok(!strings(today).includes(en['reminder.offer.title.evening']), 'the offer is gone once it is on');
+  await act(async () => today.unmount());
+  for (let i = 0; i < 3; i++) {
+    reopen();
+    const again = await mount('today', person);
+    await settle();
+    await act(async () => again.unmount());
+  }
+  assert.equal(phone.schedule.size, 1);
+  assert.equal(phone.asked, 1, 'reopening never prompts');
+});
+
+test('Settings has one reminder switch and the time; off clears the schedule at once', async () => {
+  onPhone();
+  const phone = notificationPhone('granted');
+  const settings = await mount('settings', { ...base, journey: 'psalm-nights' });
+  await settle();
+  const toggle = () => host(settings, 'Pressable').find(n => n.props.role === 'switch' && n.props['aria-label'] === en['reminder.settings.title'])!;
+  assert.ok(toggle(), 'the switch is in Settings');
+  assert.equal(toggle().props['aria-checked'], false);
+  assert.ok(strings(settings).includes(en['reminder.settings.off']));
+  await act(async () => toggle().props.onPress());
+  await settle();
+  assert.equal(toggle().props['aria-checked'], true);
+  assert.ok(strings(settings).includes(i18n.t('reminder.settings.on', { locale: 'en', time: '8:30 PM' })));
+  // The phone's own time picker: turning the wheel books nothing; Done reschedules once.
+  const booked = phone.booked;
+  await press(settings, en['reminder.settings.change']);
+  const wheel = () => host(settings, 'DateTimePicker')[0];
+  assert.equal(wheel().props.mode, 'time');
+  for (const minute of [0, 10, 15]) await act(async () => wheel().props.onChange({ type: 'set' }, new Date(2026, 0, 1, 21, minute)));
+  assert.equal(phone.booked, booked, 'turning the wheel books nothing');
+  await press(settings, en['reminder.settings.done']);
+  await settle();
+  assert.equal(phone.booked, booked + 1, 'closing the picker reschedules once');
+  assert.ok(strings(settings).includes('9:15 PM'));
+  assert.deepEqual([...phone.schedule.values()].map(e => e.trigger), [{ type: 'daily', hour: 21, minute: 15 }]);
+  // Opened and cancelled: nothing changes.
+  await press(settings, en['reminder.settings.change']);
+  await act(async () => wheel().props.onChange({ type: 'set' }, new Date(2026, 0, 1, 6, 0)));
+  await press(settings, en['reminder.settings.cancel']);
+  await settle();
+  assert.equal(phone.booked, booked + 1);
+  assert.ok(strings(settings).includes('9:15 PM'));
+  await act(async () => toggle().props.onPress());
+  await settle();
+  assert.equal(phone.schedule.size, 0, 'off cancels every scheduled notification');
+  assert.ok(!strings(settings).includes(en['reminder.settings.change']), 'the time row goes with it');
+  await act(async () => settings.unmount());
+});
+
+test('a phone that says no: no crash, no second prompt, and Settings shows how to allow it there', async () => {
+  onPhone();
+  const phone = notificationPhone('undetermined', 'denied');
+  await reminders.markFirstValue();
+  const today = await mount('today', { ...base, journey: 'psalm-nights' });
+  await settle();
+  await press(today, en['reminder.offer.yes']);
+  await settle();
+  assert.equal(phone.asked, 1);
+  assert.equal(phone.schedule.size, 0);
+  assert.ok(!strings(today).includes(en['reminder.offer.title.evening']), 'no nagging after a no');
+  await act(async () => today.unmount());
+  const links: string[] = [];
+  (globalThis as any).__pbsOpenURL = (url: string) => links.push(url);
+  const settings = await mount('settings', { ...base, journey: 'psalm-nights' });
+  await settle();
+  assert.ok(strings(settings).includes(en['reminder.settings.denied']));
+  const toggle = host(settings, 'Pressable').find(n => n.props.role === 'switch' && n.props['aria-label'] === en['reminder.settings.title'])!;
+  await act(async () => toggle.props.onPress());
+  await settle();
+  assert.equal(phone.asked, 1, 'the switch re-reads the permission, it never prompts again');
+  assert.equal(toggle.props['aria-checked'], false);
+  await press(settings, en['reminder.settings.openPhone']);
+  assert.deepEqual(links, ['app-settings:']);
+  (globalThis as any).__pbsOpenURL = undefined;
+  await act(async () => settings.unmount());
+});
+
+test('saying the day\'s declaration is a finished session: Today then offers the reminder', async () => {
+  onPhone();
+  const person = { ...base, journey: 'psalm-nights' };
+  // A day no earlier test has marked, so the declaration is still unsaid.
+  const unsaid = new Date(2031, 0, 15, 9);
+  const page = await mount('dailyPage', person, {}, () =>
+    <Daily page="declaration" now={unsaid} back={() => {}} read={() => {}} upgrade={() => {}} open={() => {}} />);
+  await settle();
+  await press(page, en['daily.said']);
+  await settle();
+  await act(async () => page.unmount());
+  const today = await mount('today', person);
+  await settle();
+  assert.ok(strings(today).includes(en['reminder.offer.title.evening']));
+  await act(async () => today.unmount());
+});
+
+test('the plain website has no reminder: no switch, no offer', async () => {
+  await reminders.markFirstValue();
+  const settings = await mount('settings', { ...base, journey: 'psalm-nights' });
+  await settle();
+  assert.ok(strings(settings).includes(en['settings.language']), 'Settings itself is drawn');
+  assert.ok(!strings(settings).includes(en['reminder.settings.title']));
+  await act(async () => settings.unmount());
+});
+
+test('Android uses its own time dialog: OK reschedules once, Cancel changes nothing', async () => {
+  (globalThis as any).__pbsPlatform = 'android';
+  const phone = notificationPhone('granted');
+  local.set(REMINDER_KEY, JSON.stringify({ on: true, hour: 20, minute: 30 }));
+  const settings = await mount('settings', { ...base, journey: 'psalm-nights' });
+  await settle();
+  const booked = phone.booked;
+  await press(settings, en['reminder.settings.change']);
+  await act(async () => host(settings, 'DateTimePicker')[0].props.onChange({ type: 'dismissed' }, undefined));
+  assert.equal(host(settings, 'DateTimePicker').length, 0, 'the dialog closed');
+  assert.equal(phone.booked, booked);
+  await press(settings, en['reminder.settings.change']);
+  await act(async () => host(settings, 'DateTimePicker')[0].props.onChange({ type: 'set' }, new Date(2026, 0, 1, 6, 45)));
+  await settle();
+  assert.equal(phone.booked, booked + 1);
+  assert.deepEqual([...phone.schedule.values()].map(e => e.trigger), [{ type: 'daily', hour: 6, minute: 45 }]);
+  await act(async () => settings.unmount());
+});
+
+test('the web preview falls back to a time field: typing edits, leaving the field sets the time once', async () => {
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+  try {
+    const settings = await mount('settings', { ...base, journey: 'psalm-nights' });
+    await settle();
+    const toggle = host(settings, 'Pressable').find(n => n.props.role === 'switch' && n.props['aria-label'] === en['reminder.settings.title'])!;
+    await act(async () => toggle.props.onPress());
+    await settle();
+    const field = () => host(settings, 'input')[0];
+    assert.equal(field().props.type, 'time');
+    assert.equal(field().props.value, '20:30');
+    await act(async () => field().props.onChange({ target: { value: '07:05' } }));
+    assert.ok(strings(settings).includes('8:30 PM'), 'typing alone does not set it');
+    await act(async () => field().props.onBlur());
+    await settle();
+    assert.ok(strings(settings).includes('7:05 AM'));
+    assert.deepEqual([JSON.parse(local.get(REMINDER_KEY)!).hour, JSON.parse(local.get(REMINDER_KEY)!).minute], [7, 5]);
+    await act(async () => settings.unmount());
+  } finally {
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW; else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
+  }
+});
+
+test('the offer and the default follow the journey: Morning Word asks for a 7:00 AM morning reminder, Mi Refugio for an evening one, "cada noche"', async () => {
+  onPhone();
+  const phone = notificationPhone();
+  local.set(REMINDER_KEY, JSON.stringify({ on: false, firstValueAt: 1 }));
+  const morning = await mount('today', { ...base, journey: 'morning-word' });
+  await settle();
+  assert.ok(strings(morning).includes(en['reminder.offer.title.morning']));
+  assert.ok(strings(morning).includes(reminders.formatTime({ hour: 7, minute: 0 }, 'en')));
+  assert.ok(!strings(morning).includes(en['reminder.offer.title.evening']));
+  await press(morning, en['reminder.offer.yes']);
+  await settle();
+  assert.deepEqual([...phone.schedule.values()].map(e => [e.trigger, e.content.body]), [[{ type: 'daily', hour: 7, minute: 0 }, en['reminder.body.morning']]]);
+  await act(async () => morning.unmount());
+  reopen();
+  local.set(REMINDER_KEY, JSON.stringify({ on: false, firstValueAt: 1 }));
+  const refugio = await mount('today', { ...base, journey: 'mi-refugio', voice: 'spanish' });
+  await settle();
+  assert.ok(strings(refugio).includes(es['reminder.offer.title.evening']) && es['reminder.offer.title.evening'].includes('cada noche'));
+  assert.ok(strings(refugio).includes(reminders.formatTime({ hour: 20, minute: 30 }, 'es')));
+  await act(async () => refugio.unmount());
 });

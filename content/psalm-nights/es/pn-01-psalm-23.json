@@ -19,7 +19,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola. Te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nAcuéstate como te sientas más a gusto. Tápate bien. Deja el teléfono en un lugar donde no lo tengas que alcanzar. [pause 17]\n\nEsta noche vamos a leer el Salmo veintitrés, despacio, dos veces. Tal vez sea el salmo más querido de todos. Muchos lo aprendieron de niños, y muchos lo han oído junto a la cama de alguien que aman. [pause 16]\n\nNo tienes que hacer nada más que escuchar. [pause 19]"
+   "text": "Hola. Te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nAcuéstate como te sientas más a gusto. Tápate bien. Deja el teléfono en un lugar donde no lo tengas que alcanzar. [pause 17]\n\nEsta noche vamos a leer el Salmo veintitrés, despacio, dos veces. Tal vez sea el salmo más querido de todos. Muchos lo aprendieron de niños, y muchos lo han oído junto a la cama de alguien que aman. [pause 16]\n\nNo tienes que hacer nada más que escuchar. [pause 19]"
   },
   {
    "part": "passage",
@@ -57,7 +57,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "El salmo empieza con una palabra pequeña. Mi. [pause 16]\n\nNo un pastor lejano. Mi pastor. David había sido pastor de niño. Sabía lo que era contar las ovejas en la noche, buscarles agua, cargar a la que estaba herida. [pause 17]\n\nUn pastor no les pide a las ovejas que encuentren solas el pasto. Él las guía. Él va adelante. [pause 17]\n\nFíjate que el salmo no finge que no hay valle oscuro. Dice aunque ande en valle de sombra. El valle es real. Pero también es real el que camina contigo por él. [pause 21]\n\nAhora, unos versículos cortos para leer junto a él. [pause 15]"
+   "text": "El salmo empieza con una palabra pequeña. Mi. [pause 24]\n\nNo un pastor lejano. Mi pastor. David había sido pastor de niño. Sabía lo que era contar las ovejas en la noche, buscarles agua, cargar a la que estaba herida. [pause 25]\n\nUn pastor no les pide a las ovejas que encuentren solas el pasto. Él las guía. Él va adelante. [pause 25]\n\nFíjate que el salmo no finge que no hay valle oscuro. Dice aunque ande en valle de sombra. El valle es real. Pero también es real el que camina contigo por él. [pause 29]\n\nAhora, unos versículos cortos para leer junto a él. [pause 23]"
   },
   {
    "part": "passage",
@@ -114,7 +114,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "En paz me acostaré, y dormiré. Es una frase que puedes hacer tuya esta noche. [pause 17]\n\nY el buen pastor, dijo Jesús, da su vida por las ovejas. No se va cuando llega la noche. [pause 17]\n\nIsaías pinta al pastor cargando a los corderitos en su pecho, y guiando con cuidado a las que están criando. Con cuidado. Así te guía esta noche. [pause 19]\n\nAhora vamos a leer el Salmo veintitrés otra vez. Esta vez deja que cada línea llegue antes de que venga la siguiente. [pause 21]"
+   "text": "En paz me acostaré, y dormiré. Es una frase que puedes hacer tuya esta noche. [pause 25]\n\nY el buen pastor, dijo Jesús, da su vida por las ovejas. No se va cuando llega la noche. [pause 25]\n\nIsaías pinta al pastor cargando a los corderitos en su pecho, y guiando con cuidado a las que están criando. Con cuidado. Así te guía esta noche. [pause 27]\n\nAhora vamos a leer el Salmo veintitrés otra vez. Esta vez deja que cada línea llegue antes de que venga la siguiente. [pause 29]"
   },
   {
    "part": "passage",
@@ -158,11 +158,11 @@
  "words": 605,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 820,
+ "est_seconds": 811,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -199,7 +199,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

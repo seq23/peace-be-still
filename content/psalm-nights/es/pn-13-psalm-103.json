@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola. Esta es una noche de Salmos. [pause 11]\n\nAcomódate. Deja que tu respiración se haga lenta. [pause 14]\n\nEsta noche leemos el Salmo ciento tres, los primeros catorce versículos. Es un salmo donde un hombre le habla a su propia alma y le recuerda todo lo que Dios ha hecho. [pause 13]\n\nLo vamos a leer despacio, y luego otra vez. [pause 16]"
+   "text": "Hola. Esta es una noche de Salmos. [pause 15]\n\nAcomódate. Deja que tu respiración se haga lenta. [pause 15]\n\nEsta noche leemos el Salmo ciento tres, los primeros catorce versículos. Es un salmo donde un hombre le habla a su propia alma y le recuerda todo lo que Dios ha hecho. [pause 15]\n\nLo vamos a leer despacio, y luego otra vez. [pause 16]"
   },
   {
    "part": "passage",
@@ -86,7 +86,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Bendice, alma mía, al Señor. A veces tenemos que hablarle a nuestra propia alma. Recordarle. No olvides ninguno de sus beneficios. [pause 14]\n\nEl salmo hace una lista. Él perdona. Él sana. Él rescata. Él corona de misericordia. No son promesas sobre mañana. Son la memoria de quién ha sido Dios. [pause 16]\n\nLuego viene una imagen de distancia. Tan lejos como está el oriente del occidente, así de lejos echó nuestras rebeliones. Nadie puede caminar hasta donde se acaba el oriente. [pause 14]\n\nY el último versículo de esta noche es muy tierno. Él conoce de qué estamos hechos. Se acuerda de que somos polvo. Sabe lo cansado que estás. No le sorprende. [pause 18]\n\nUn pasaje de Lamentaciones para acompañarlo. [pause 12]"
+   "text": "Bendice, alma mía, al Señor. A veces tenemos que hablarle a nuestra propia alma. Recordarle. No olvides ninguno de sus beneficios. [pause 24]\n\nEl salmo hace una lista. Él perdona. Él sana. Él rescata. Él corona de misericordia. No son promesas sobre mañana. Son la memoria de quién ha sido Dios. [pause 26]\n\nLuego viene una imagen de distancia. Tan lejos como está el oriente del occidente, así de lejos echó nuestras rebeliones. Nadie puede caminar hasta donde se acaba el oriente. [pause 24]\n\nY el último versículo de esta noche es muy tierno. Él conoce de qué estamos hechos. Se acuerda de que somos polvo. Sabe lo cansado que estás. No le sorprende. [pause 28]\n\nUn pasaje de Lamentaciones para acompañarlo. [pause 22]"
   },
   {
    "part": "passage",
@@ -108,7 +108,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Sus misericordias no se acaban. Son nuevas cada mañana. Lo que se gastó hoy, mañana habrá misericordia nueva cuando despiertes. [pause 16]\n\nAquí está el Salmo ciento tres otra vez. Deja que tu alma escuche. [pause 18]"
+   "text": "Sus misericordias no se acaban. Son nuevas cada mañana. Lo que se gastó hoy, mañana habrá misericordia nueva cuando despiertes. [pause 26]\n\nAquí está el Salmo ciento tres otra vez. Deja que tu alma escuche. [pause 28]"
   },
   {
    "part": "passage",
@@ -184,11 +184,11 @@
  "words": 685,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 817,
+ "est_seconds": 813,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -225,7 +225,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

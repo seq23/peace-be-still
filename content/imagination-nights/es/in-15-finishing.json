@@ -1,0 +1,87 @@
+{
+ "id": "in-15-finishing",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "El día que terminaste",
+ "theme": "terminar algo difícil",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de imaginación. [pause 3]\n\nAcuéstate como te resulte más cómodo. Deja que la cama cargue todo tu peso. [pause 8]\n\nToma aire despacio por la nariz. Y suéltalo por la boca, un poquito más largo de lo que entró. [pause 8]\n\nOtra vez. Entra el aire. Y sale, lento y largo. [pause 10]\n\nAfloja la frente. La mandíbula. Los hombros. Las manos. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEsta noche no hay nada que hacer más que imaginar. Y imaginar es algo que ya sabes hacer. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Esta noche es para quien va camino a una meta. Un título. Un certificado. Un libro. Un proyecto largo. Terminar de pagar algo. Salir de una temporada difícil. [pause 11]\n\nCuando estamos a la mitad de algo largo, el final puede sentirse irreal. Solo vemos la próxima tarea, el próximo turno, el próximo pago. Esta noche damos un paso adelante, hasta el final. [pause 13]\n\nImagina el día en que ya está terminado. No el estrés de la última semana, sino el momento en que sabes que ya acabó. Tal vez tienes un papel en las manos. Tal vez nada más cierras la computadora. Tal vez alguien te abraza. [pause 13]\n\nDate permiso de sentir orgullo. A mucha gente no le enseñaron a sentirlo. Está bien practicarlo. [pause 13]\n\nSi antes empezaste y lo dejaste, eso no cuenta en tu contra. Mucha gente termina al segundo o al tercer intento. Esta noche puedes imaginar que esta vez es la vez que llegas al final. [pause 5]\n\nEsto es imaginación y sentimiento, no una promesa de ningún resultado. Sigue haciendo el trabajo durante el día. Esta noche, descansa con el final a la vista. [pause 18]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Es el día en que todo terminó. Fíjate dónde estás. Un salón. Una oficina. La mesa de tu propia cocina. [pause 26]\n\nSiente lo que tienes en las manos. Un diploma. La última página. El último recibo. [pause 29]\n\nNota la calma en el pecho, donde antes estaba la presión. [pause 29]\n\nAlguien cerca de ti dice, lo lograste. Oye las palabras. Deja que te lleguen. [pause 29]\n\nPiensa un momento en la noche más difícil de todo el camino. Esa en la que casi lo dejas. [pause 29]\n\nAhora mírate hoy, del otro lado. Date permiso de asombrarte un poco. [pause 32]\n\nImagina que llegas a casa esa tarde. Te quitas los zapatos. Mañana no hay nada pendiente. [pause 32]\n\nAlguien te llama para felicitarte. Óyete decir, gracias. De verdad siento mucho orgullo. [pause 32]\n\nAntes de acostarte, pones el diploma, o el último recibo, donde lo vas a ver. En el refrigerador. En un estante. [pause 34]\n\nDi bajito, lo terminé. [pause 34]\n\nDeja que esa frase sea la última en tu mente esta noche. [pause 36]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Ahora deja que la escena se quede contigo mientras te vas quedando en calma. [pause 10]\n\nNo tienes que agarrarla fuerte. Solo deja que esté ahí, tibia y callada, como una lámpara encendida en otro cuarto. [pause 15]\n\nSi la mente se te va, vuelve a un detalle pequeño. Un sonido. Una palabra. Lo que sienten tus manos. [pause 20]\n\nEsto es solo imaginación, y la imaginación tiene permiso de ser amable. [pause 20]\n\nTal vez notes que respiras más despacio que cuando empezamos. Deja que siga así. [pause 25]\n\nDeja que el cuerpo pese todavía un poco más. No hay ningún lugar adonde ir. [pause 25]\n\nSi el sueño todavía no llega, no pasa nada. Quédate en silencio con la escena, y deja que el silencio haga lo suyo. [pause 30]\n\nDescansa ahora. [pause 60]"
+  }
+ ],
+ "words": 636,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 115,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1116,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass",
+   "verse_read": "pass",
+   "listener_gender": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words, no faith words or scripture; each teaching names imagination, not a promise. Self-worth night gives 988 and says it answers in Spanish; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health promise and offers a wheelchair or porch version; family night never forces anyone to change; business night pictures enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

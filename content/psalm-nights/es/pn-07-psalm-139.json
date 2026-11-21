@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola. Esta es una noche de Salmos. [pause 4]\n\nPonte cómodo. Cierra los ojos si quieren cerrarse. [pause 6]\n\nEsta noche leemos parte del Salmo ciento treinta y nueve. Es un salmo sobre ser conocido. Conocido por completo. Y no ser dejado. [pause 6]\n\nEs una lectura larga, así que vamos a ir despacio. [pause 9]"
+   "text": "Hola. Esta es una noche de Salmos. [pause 9]\n\nPonte cómodo. Cierra los ojos si quieren cerrarse. [pause 11]\n\nEsta noche leemos parte del Salmo ciento treinta y nueve. Es un salmo sobre ser conocido. Conocido por completo. Y no ser dejado. [pause 11]\n\nEs una lectura larga, así que vamos a ir despacio. [pause 14]"
   },
   {
    "part": "passage",
@@ -102,7 +102,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Tú conoces mi sentarme y mi levantarme. Cuando te sientas al final del día, Dios lo sabe. Cuando te levantas en la mañana, él lo sabe. [pause 7]\n\nEl salmo va a todos los lugares adonde una persona podría ir. Los cielos. El sepulcro. El otro lado del mar. Y en todas partes, Dios ya está ahí. [pause 7]\n\nLuego dice algo para esta noche. Para Dios, las tinieblas y la luz son iguales. La oscuridad no te esconde de él. Te ve igual de claro en la noche. [pause 9]\n\nY al final, al despertar, todavía con él. [pause 11]"
+   "text": "Tú conoces mi sentarme y mi levantarme. Cuando te sientas al final del día, Dios lo sabe. Cuando te levantas en la mañana, él lo sabe. [pause 17]\n\nEl salmo va a todos los lugares adonde una persona podría ir. Los cielos. El sepulcro. El otro lado del mar. Y en todas partes, Dios ya está ahí. [pause 17]\n\nLuego dice algo para esta noche. Para Dios, las tinieblas y la luz son iguales. La oscuridad no te esconde de él. Te ve igual de claro en la noche. [pause 19]\n\nY al final, al despertar, todavía con él. [pause 21]"
   },
   {
    "part": "passage",
@@ -120,7 +120,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "En paz me acostaré, y dormiré. Un versículo corto para guardar. [pause 7]\n\nAhora el Salmo ciento treinta y nueve otra vez. Escucha la línea sobre las tinieblas. [pause 11]"
+   "text": "En paz me acostaré, y dormiré. Un versículo corto para guardar. [pause 17]\n\nAhora el Salmo ciento treinta y nueve otra vez. Escucha la línea sobre las tinieblas. [pause 21]"
   },
   {
    "part": "passage",
@@ -212,11 +212,11 @@
  "words": 813,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 815,
+ "est_seconds": 814,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -253,7 +253,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

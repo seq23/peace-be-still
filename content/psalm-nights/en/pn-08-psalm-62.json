@@ -18,7 +18,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Welcome to Psalm Nights. [pause 8]\n\nLet your body settle. There is nothing left to do today. [pause 11]\n\nTonight's psalm is Psalm 62. David wrote it when people were trying to pull him down. And yet the psalm is quiet. It is about waiting, and about a rock that does not move. [pause 10]\n\nWe will read it twice. [pause 13]"
+   "text": "Welcome to Psalm Nights. [pause 13]\n\nLet your body settle. There is nothing left to do today. [pause 15]\n\nTonight's psalm is Psalm 62. David wrote it when people were trying to pull him down. And yet the psalm is quiet. It is about waiting, and about a rock that does not move. [pause 15]\n\nWe will read it twice. [pause 15]"
   },
   {
    "part": "passage",
@@ -64,7 +64,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Truly my soul waiteth upon God. In older words, my soul is silent before God. Not anxious. Not rushing. Waiting. [pause 11]\n\nThree times the psalm calls God a rock. A rock is not quick. It does not change its mind. You can lean your whole weight on it and it stays. [pause 11]\n\nThen a line to say in your heart. Trust him at all times. Pour out your heart before him. [pause 11]\n\nYou can pour it out tonight. All of it. The worry, the hurt, the thing you did not say. He can hold it. [pause 15]\n\nA companion passage from Isaiah. [pause 9]"
+   "text": "Truly my soul waiteth upon God. In older words, my soul is silent before God. Not anxious. Not rushing. Waiting. [pause 20]\n\nThree times the psalm calls God a rock. A rock is not quick. It does not change its mind. You can lean your whole weight on it and it stays. [pause 20]\n\nThen a line to say in your heart. Trust him at all times. Pour out your heart before him. [pause 20]\n\nYou can pour it out tonight. All of it. The worry, the hurt, the thing you did not say. He can hold it. [pause 24]\n\nA companion passage from Isaiah. [pause 18]"
   },
   {
    "part": "passage",
@@ -112,7 +112,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Everlasting strength. A rock of ages. The same picture, in another book, centuries apart. [pause 11]\n\nPsalm 18 piles up the same pictures. Rock, fortress, deliverer, shield, high tower. And Jesus, in the gospel, says come to me, and I will give you rest. [pause 13]\n\nHere is Psalm 62 again. Let your soul wait as you listen. [pause 15]"
+   "text": "Everlasting strength. A rock of ages. The same picture, in another book, centuries apart. [pause 20]\n\nPsalm 18 piles up the same pictures. Rock, fortress, deliverer, shield, high tower. And Jesus, in the gospel, says come to me, and I will give you rest. [pause 22]\n\nHere is Psalm 62 again. Let your soul wait as you listen. [pause 24]"
   },
   {
    "part": "passage",
@@ -164,11 +164,11 @@
  "words": 696,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 813,
+ "est_seconds": 811,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -203,7 +203,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.5-13.7 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

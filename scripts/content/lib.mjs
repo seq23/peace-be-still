@@ -110,6 +110,49 @@ export function scriptureHits(text, tr) {
   return hits;
 }
 
+// A verse in ANOTHER wording (RVR1960, NIV, a half-remembered quote): those Bibles are not stored (RVR1960 is
+// copyrighted), but each is a revision of the stored text, so its sentences keep most of the stored verse's words
+// in order. A written clause of 9+ words that shares 2+ word triples with one stored verse and keeps 70%+ (and 7+) of
+// its own words in that verse's order reads as that verse (shorter clauses like "it is the day it is finished" are everyday speech). Used where no scripture may stand at all (the Mindset door).
+const tri = {};
+function trigramIndex(tr) {
+  if (tri[tr]) return tri[tr];
+  const idx = new Map(), list = [];
+  for (const [ref, t] of bible(tr)) {
+    const k = tokens(t), id = list.push({ ref, k }) - 1;
+    for (let i = 0; i + 3 <= k.length; i++) {
+      const g = k.slice(i, i + 3).join(" ");
+      const ids = idx.get(g) || idx.set(g, []).get(g);
+      if (ids[ids.length - 1] !== id) ids.push(id);
+    }
+  }
+  return (tri[tr] = { idx, list });
+}
+function lcs(a, b) {
+  let prev = new Array(b.length + 1).fill(0);
+  for (const x of a) {
+    const cur = [0];
+    for (let j = 0; j < b.length; j++) cur.push(x === b[j] ? prev[j] + 1 : Math.max(prev[j + 1], cur[j]));
+    prev = cur;
+  }
+  return prev[b.length];
+}
+export function verseLikeHits(text, tr) {
+  const { idx, list } = trigramIndex(tr), hits = [];
+  for (const clause of String(text).replace(/\[pause \d+\]/g, " ").split(/[.;:!?¡¿«»“”"\n]+/)) {
+    const k = tokens(clause);
+    if (k.length < 9) continue;
+    const shared = new Map();
+    for (let i = 0; i + 3 <= k.length; i++) for (const id of idx.get(k.slice(i, i + 3).join(" ")) || []) shared.set(id, (shared.get(id) || 0) + 1);
+    for (const [id, n] of shared) {
+      if (n < 2) continue;
+      const n2 = lcs(k, list[id].k);
+      if (n2 >= 7 && n2 / k.length >= 0.7) { hits.push(`${clause.trim().slice(0, 60)} (like ${list[id].ref})`); break; }
+    }
+  }
+  return hits;
+}
+
 // Syllables, for reading level (heuristics, good enough for a band check).
 export function sylEn(w) {
   w = w.toLowerCase().replace(/[^a-z]/g, "");

@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is late afternoon on a day off. You are at a table with people you love. [pause 19]\n\nNotice what is on the table. Plates passed hand to hand. Something you made. Something someone else brought. [pause 22]\n\nHear the noise. Two conversations at once. A child laughing somewhere. A chair scraping. [pause 22]\n\nSomeone tells an old story, and everyone groans because they have heard it before, and then they laugh anyway. [pause 22]\n\nNotice that nobody is tense. There is no old fight waiting under the surface. [pause 25]\n\nSomeone reaches over and squeezes your shoulder as they pass. [pause 22]\n\nLook around the table, one face at a time. Let yourself feel glad for each one. [pause 25]\n\nLater, people stand at the door saying goodbye for a long time, the way families do. [pause 25]\n\nWhen the house is quiet again, you sit for a moment with a full heart. That was a good day. [pause 27]\n\nSay in your mind, we are all right. We are together. [pause 27]\n\nLet the table and the voices fade, and keep the warmth. [pause 30]"
+   "text": "It is late afternoon on a day off. You are at a table with people you love. [pause 28]\n\nNotice what is on the table. Plates passed hand to hand. Something you made. Something someone else brought. [pause 31]\n\nHear the noise. Two conversations at once. A child laughing somewhere. A chair scraping. [pause 31]\n\nSomeone tells an old story, and everyone groans because they have heard it before, and then they laugh anyway. [pause 31]\n\nNotice that nobody is tense. There is no old fight waiting under the surface. [pause 34]\n\nSomeone reaches over and squeezes your shoulder as they pass. [pause 31]\n\nLook around the table, one face at a time. Let yourself feel glad for each one. [pause 34]\n\nLater, people stand at the door saying goodbye for a long time, the way families do. [pause 34]\n\nWhen the house is quiet again, you sit for a moment with a full heart. That was a good day. [pause 36]\n\nSay in your mind, we are all right. We are together. [pause 36]\n\nLet the table and the voices fade, and keep the warmth. [pause 39]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1134,
+ "est_seconds": 1113,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },
