@@ -1,9 +1,10 @@
-// The app's side of chat: the install token, sending a message and deleting chat memory.
+// The app's side of chat: the install token, sending a message, reporting an answer and deleting chat memory.
 // The base URL is ONE config value. Under 13 nothing here is ever called (buildChatRequest is null,
 // and the Chat tab is hidden), so no install id is made for a child.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Age, Settings } from '../model';
 import { buildChatRequest, type ChatResponse, type ChatTurn } from './contract';
+import { deviceCheckToken } from './devicecheck';
 
 export const CHAT_API = process.env.EXPO_PUBLIC_CHAT_API ?? 'https://peacebestillapp.com/api';
 const TOKEN_KEY = 'peace-be-still-chat-token';
@@ -49,8 +50,10 @@ async function fetchToken(age: Age, fetcher: typeof fetch, refresh: boolean): Pr
   return value;
 }
 
-export async function sendChat(settings: Settings, conversation: string, messages: ChatTurn[], fetcher: typeof fetch = fetch): Promise<ChatResponse> {
-  const body = buildChatRequest(settings, conversation, messages);
+/** freeConsent: she said yes on the free-chat screen (free chat goes to a free AI service that may keep it).
+ *  overflowConsent: a paid user said yes, today, to free chat (not private) after her private messages. */
+export async function sendChat(settings: Settings, conversation: string, messages: ChatTurn[], fetcher: typeof fetch = fetch, freeConsent = false, region: string | null = null, overflowConsent = false): Promise<ChatResponse> {
+  const body = buildChatRequest(settings, conversation, messages, freeConsent, region, overflowConsent);
   if (!body || !settings.age) throw new ChatError('chat closed');
   for (const refresh of [false, true]) {
     const res = await fetcher(`${CHAT_API}/chat`, {
@@ -64,6 +67,34 @@ export async function sendChat(settings: Settings, conversation: string, message
     return (await res.json()) as ChatResponse;
   }
   throw new ChatError('unauthorized');
+}
+
+/** Whether this conversation is the install's private first chat. The Worker decides (Apple DeviceCheck,
+ *  per-network and daily caps); any failure or slowness is "no": the normal free chat, with its consent. */
+export async function askFirstPrivate(settings: Settings, conversation: string, fetcher: typeof fetch = fetch, waitMs = 6000): Promise<boolean> {
+  if (settings.age !== 'adult' && settings.age !== 'teen') return false;
+  const age = settings.age;
+  const ask = (async () => {
+    const deviceCheck = await deviceCheckToken();
+    const res = await fetcher(`${CHAT_API}/chat/first`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${await token(age, fetcher)}` },
+      body: JSON.stringify({ conversation, ...(deviceCheck ? { deviceCheck } : {}) }),
+    });
+    return res.ok && ((await res.json()) as { private?: unknown }).private === true;
+  })();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const late = new Promise<boolean>(done => { timer = setTimeout(() => done(false), waitMs); });
+  try { return await Promise.race([ask.catch(() => false), late]); } finally { clearTimeout(timer); }
+}
+
+export type ReportReason = 'hurtful' | 'wrong' | 'unsafe' | 'other';
+/** "Report this answer": sends the answer she saw and the reason she picked, never her message. */
+export async function reportAnswer(answer: string, reason: ReportReason, fetcher: typeof fetch = fetch): Promise<void> {
+  const old = await saved();
+  if (!old?.token) throw new ChatError('no token'); // an answer on screen means she has one
+  const res = await fetcher(`${CHAT_API}/report`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${old.token}` }, body: JSON.stringify({ answer, reason }) });
+  if (res.status !== 200) throw new ChatError(`report ${res.status}`);
 }
 
 /** Resolves only when the server confirmed the delete (200), or when she never chatted (nothing stored).

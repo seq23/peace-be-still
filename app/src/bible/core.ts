@@ -69,8 +69,10 @@ export function parseReference(text: string): Reference | null {
   return reference;
 }
 
+/** A reference as a reader writes it. One psalm is "Psalm 4:8" in English (the book is Psalms); Spanish keeps
+ * "Salmos 4:8", as the Reina-Valera writes it. */
 export function formatReference(reference: Reference, language: Language): string {
-  const name = bookName(reference.book, language) ?? reference.book;
+  const name = reference.book === 'PSA' && language === 'en' ? 'Psalm' : bookName(reference.book, language) ?? reference.book;
   if (reference.verse === undefined) return `${name} ${reference.chapter}`;
   const end = reference.endVerse && reference.endVerse !== reference.verse ? `-${reference.endVerse}` : '';
   return `${name} ${reference.chapter}:${reference.verse}${end}`;

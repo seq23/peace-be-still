@@ -1,0 +1,108 @@
+# Noches de duelo (journey: grief, "Para cuando has perdido a alguien") y la noche "Para volver a dormir" (journey: back-to-sleep).
+# Español de América Latina, Reina-Valera 1909. Escrito por Claude en español (no es traducción del inglés), 21 Nov 2026.
+# Presente y tierno: sin razones para una muerte, sin plazos para el duelo, sin "un lugar mejor"; cada noche de duelo
+# sugiere hablar con un pastor o con un consejero de duelo.
+
+=== _duelo_rest1
+text: Aquí dejamos la lectura. [pause 8]
+text: Deja que el cuarto se quede en silencio. Deja que tu respiración encuentre su propio ritmo. [pause 12]
+text: Esta noche no tienes que arreglar nada, ni sentir nada en particular. [pause 12]
+text: Si vienen las lágrimas, déjalas venir. Y si no vienen, también está bien. [pause 15]
+text: El amor que sientes por esa persona sigue aquí. No tiene que irse a ningún lado. [pause 15]
+text: Si las noches siguen así de pesadas, habla con tu pastor, o con un consejero de duelo. Nadie tiene que cargar esto a solas. [pause 15]
+text: El Señor está cerca de los que tienen el corazón partido. Quédate aquí todo lo que necesites. [pause 30]
+text: Buenas noches. [pause 45]
+
+=== _duelo_rest2
+text: Por esta noche, es suficiente. [pause 8]
+text: Suelta los hombros. Deja que la cama te sostenga. [pause 12]
+text: Tal vez estás pensando en su cara, en su voz, o en la última vez que hablaron. Puedes guardar eso con cuidado. [pause 15]
+text: El duelo también es una forma de amor. Está bien que duela. [pause 15]
+text: No tienes que cargarlo a solas. Un pastor, un consejero de duelo, alguien de confianza que se siente contigo: son buenos regalos, y está bien pedirlos. [pause 15]
+text: El Señor está contigo en el valle. Quédate aquí todo lo que quieras. [pause 30]
+text: Buenas noches. [pause 45]
+
+=== _duelo_rest3
+text: Aquí nos detenemos. [pause 8]
+text: Deja que la oscuridad sea suave a tu alrededor. Que la almohada esté fresca. [pause 12]
+text: Si quieres, puedes decir su nombre en el silencio. Dios ya lo conoce. [pause 15]
+text: No hay una manera correcta de pasar por esto, y nadie te está tomando el tiempo. [pause 15]
+text: Cuando sientas que puedes, busca a tu pastor o a un consejero de duelo. Hay gente que ya caminó este camino y puede acompañarte un tramo. [pause 15]
+text: Jesús lloró con sus amigos. No está lejos de ti esta noche. [pause 30]
+text: Descansa. [pause 45]
+
+=== _volver_rest
+text: Ahora deja que todo quede en silencio. [pause 12]
+text: Deja que tu respiración vaya más lenta, sola. El aire entra, y sale. [pause 15]
+text: No se te pide nada. Él no duerme, así que tú puedes soltarlo todo. [pause 20]
+text: Descansa. [pause 60]
+
+=== gn-01-psalm-13 | Salmo 13: ¿Hasta cuándo, Señor?
+journey: grief
+main: PSA 13:1-6
+companions: JOH 11:35; PSA 56:8
+welcome: Esta es una noche para cuando has perdido a alguien. [pause 10]
+welcome: Aquí no tienes que hacer nada. Puedes acostarte, o quedarte así como estás, con el teléfono a oscuras a tu lado. [pause 12]
+welcome: Esta noche leemos el Salmo trece. Es corto, y es honesto. David le hace a Dios la misma pregunta cuatro veces. Hasta cuándo. [pause 12]
+welcome: Lo vamos a leer dos veces, despacio. [pause 12]
+reflect1: Hasta cuándo. Esa pregunta está en la Biblia. Alguien la oró en voz alta, y Dios dejó que quedara escrita. [pause 14]
+reflect1: El duelo a veces se siente como si Dios se hubiera quedado callado. El salmo no regaña a David por decirlo. Lo deja decirlo. [pause 14]
+reflect1: Tú también lo puedes decir. En voz alta, o solo en tu corazón. A Dios no le ofenden tus preguntas. [pause 15]
+reflect1: Y casi al final, David dice una palabra pequeña. Mas. Confía en la misericordia de Dios cuando la pregunta todavía no tiene respuesta. [pause 15]
+reflect1: Aquí hay dos pasajes cortos para acompañarlo. [pause 12]
+reflect2: Y lloró Jesús. Estuvo con María y con Marta en su dolor, y lloró con ellas. [pause 15]
+reflect2: Y el salmista se imagina a Dios guardando cada lágrima en su redoma. Ninguna se desperdicia. Ninguna se olvida. [pause 15]
+reflect2: Sea quien sea la persona que extrañas esta noche, puedes decirle su nombre a Dios. No tienes que encontrar las palabras correctas. [pause 15]
+reflect2: Ahora el Salmo trece otra vez. Si alguna línea te habla esta noche, hazla tuya. [pause 15]
+rest: duelo_rest1
+
+=== gn-02-psalm-23 | Salmo 23: Por el valle
+journey: grief
+main: PSA 23:1-6
+companions: MAT 5:4; 2CO 1:3
+welcome: Esta es una noche para cuando has perdido a alguien. [pause 10]
+welcome: Acomódate como puedas. Puedes dejar el teléfono a tu lado. [pause 12]
+welcome: Esta noche leemos el Salmo veintitrés. Mucha gente lo escucha por primera vez en un funeral, y vuelve a él en las noches largas que vienen después. [pause 12]
+welcome: Lo vamos a leer dos veces. Solo tienes que escuchar. [pause 12]
+reflect1: El salmo no le da la vuelta al valle. Lo atraviesa, paso a paso. [pause 15]
+reflect1: Y en medio del valle cambian las palabras. David deja de hablar de Dios y empieza a hablarle a Él. Tú estarás conmigo. [pause 15]
+reflect1: Muchas veces así ora el duelo. Sin frases largas. Solo esto: aquí estás. Quédate conmigo. [pause 15]
+reflect1: En este salmo hay una mesa, y una copa, y una casa a donde volver. No tienes que sentir nada de eso esta noche. Está ahí, en las palabras, esperándote. [pause 15]
+reflect1: Ahora, dos pasajes cortos. [pause 12]
+reflect2: Bienaventurados los que lloran. Jesús lo dijo de gente que estaba justo donde tú estás. Llorar a alguien no es fracasar. [pause 15]
+reflect2: Y Pablo le da a Dios dos nombres que puedes guardar esta noche. Padre de misericordias. Dios de toda consolación. Consuelo también para esto. [pause 15]
+reflect2: Ahora el Salmo veintitrés otra vez. Que vaya despacio. Deja que cada línea llegue antes de la siguiente. [pause 15]
+rest: duelo_rest2
+
+=== gn-03-john-11 | Juan 11: Y lloró Jesús
+journey: grief
+main: JOH 11:32-36
+companions: ECC 3:4; REV 21:4
+welcome: Esta es una noche para cuando has perdido a alguien. [pause 10]
+welcome: Recuéstate, o quédate como estés, como tu cuerpo quiera descansar. [pause 12]
+welcome: Esta noche no leemos un salmo. Son unos versículos del Evangelio de Juan, cuando Jesús llegó a Betania después de que murió su amigo Lázaro. [pause 12]
+welcome: Lo vamos a leer dos veces. [pause 12]
+reflect1: María dice lo que dice tanta gente en el duelo. Señor, si hubieras estado aquí. [pause 15]
+reflect1: Jesús no la corrige. No le da una lección. La ve llorando, se conmueve, y pide que lo lleven al lugar. [pause 15]
+reflect1: Y entonces llora. El que estaba a punto de llamar a Lázaro fuera del sepulcro se detuvo a llorar con sus amigos. [pause 15]
+reflect1: La gente que miraba dijo: miren cuánto lo amaba. Tus lágrimas de esta noche dicen lo mismo. [pause 15]
+reflect1: Ahora, dos pasajes cortos. [pause 12]
+reflect2: Hay tiempo de llorar, dice el Predicador, y tiempo de endechar. Endechar es llorar a alguien en voz alta. Tal vez este es ese tiempo para ti, y no está mal. [pause 15]
+reflect2: Y al final de la Biblia, Dios seca toda lágrima. Esa es la esperanza al final de la historia. La puedes guardar, aunque todavía llores esta noche. [pause 15]
+reflect2: Ahora las palabras de Juan otra vez. Escucha el momento en que Jesús llora. [pause 15]
+rest: duelo_rest3
+
+=== bs-01-psalm-4 | Para volver a dormir: En paz me acostaré
+journey: back-to-sleep
+main: PSA 4:8
+companions: PSA 63:6; PSA 3:5
+welcome: Te despertaste en medio de la noche. Está bien. [pause 10]
+welcome: Deja las luces apagadas. Pon el teléfono boca abajo a tu lado. [pause 12]
+welcome: Aquí hay una sola línea del Salmo cuatro, leída dos veces, muy despacio. [pause 12]
+reflect1: En paz me acostaré. Eso es lo único que te toca ahora: acostarte. [pause 15]
+reflect1: A esta hora no hay nada que resolver. Puede esperar a la mañana. [pause 15]
+reflect1: Dos líneas cortas más para la noche. [pause 12]
+reflect2: David se acordaba de Dios en su cama, en las horas de la noche. Tú puedes hacer lo mismo, sin palabras. [pause 15]
+reflect2: Y se acostó, y durmió, y despertó otra vez. El Señor lo sostuvo toda la noche. [pause 15]
+reflect2: Aquí está otra vez la línea del Salmo cuatro. [pause 15]
+rest: volver_rest

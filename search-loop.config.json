@@ -9,7 +9,7 @@
     "logo": "https://peacebestillapp.com/icon-512.png"
   },
   "audience": "Christians, many of them Black women and Spanish-speaking families, who read or listen to scripture at bedtime and in the morning: whispered Bible readings, Psalms for sleep, Bible chat and daily prayers or declarations; plus people looking for a Bible app with no trial and no surprise charges",
-  "voice": "warm, unhurried and plain, like a grandmother's front porch after dark; short sentences; scripture quoted word for word from the King James Version (English) or Reina-Valera 1909 (Spanish) with book, chapter and verse, never paraphrased; never promise sleep, healing or any outcome (say 'a nightly practice'); never 'manifest', law of attraction or mindset-practice words on these pages; never the phrase 'Black Bible Stories' (say 'Bible stories told in a Black church voice'; never say the stories have pictures); never 'Speak Life'; never speak as God or Jesus; coming soon to the App Store and Google Play; never a launch date; never 'available now' until site/config/store.json has that store's URL; no ads, no trial, $7.99 a month or $39.99 a year; never disparage another app",
+  "voice": "warm, unhurried and plain, like a grandmother's front porch after dark; short sentences; scripture quoted word for word from the King James Version (English) or Reina-Valera 1909 (Spanish) with book, chapter and verse, never paraphrased; never promise sleep, healing or any outcome (say 'a nightly practice'); never 'manifest', law of attraction or mindset-practice words on these pages; never the phrase 'Black Bible Stories' (say 'Bible stories told in a Black church voice'); never say the stories have pictures, illustrations or faces (they are text and audio); never 'Speak Life'; never speak as God or Jesus; coming soon to the App Store and Google Play; never a launch date; never 'available now' until site/config/store.json has that store's URL; no ads, no trial, $7.99 a month or $39.99 a year; never disparage another app",
   "topics": [
     "prayer for sleep",
     "bedtime bible stories",
@@ -38,7 +38,6 @@
     "black bible verses",
     "was bathsheba black in the bible",
     "who is black in the bible",
-    "bible stories told in a Black church voice",
     "bible app no subscription",
     "free bible chat app",
     "psalm 91 for sleep",
@@ -128,7 +127,7 @@
         "the whole King James Bible to read, and a growing set of chapters read aloud",
         "whispered Psalms for sleep with a sleep timer (Psalm Nights)",
         "Bible chat that is AI, labelled as AI, quoting KJV verses word for word",
-        "a daily Bible story; Bible stories told in a Black church voice in Hush Harbor",
+        "a daily Bible story; in Hush Harbor, Bible stories told in a Black church voice",
         "Mi Refugio: Biblia y chat en español con la Reina-Valera 1909",
         "a free lane forever; paid lane $7.99 a month or $39.99 a year; no trial; no ads"
       ],

@@ -32,6 +32,24 @@ export const PROMISE = rx([
   "dios (?:te )?(?:sanar[áa]|curar[áa])", "vas a (?:sanar|dormir|ser rico)", "\\bgarantiza\\w*", "\\binsomnio\\b", "\\bcurar\\w*",
   "te (?:dormir[áa]s|sanar[áa]s)", "tu dinero viene",
 ]);
+// Grief (the "For when you've lost someone" journey and its nights): no comfort that promises, hurries or explains
+// a loss. Not "they're in a better place" as our promise, no timeline for grief, no reason given for a death.
+export const GRIEF = rx([
+  "(?:in|to) a better place", "everything happens for a reason", "\\bfor a reason\\b", "time heals", "\\bmove on\\b", "get over (?:it|this|them|him|her)",
+  "god needed (?:another|an) angel", "another angel", "stages of grief", "you(?:'ll| will) feel better", "it gets easier", "at least (?:they|he|she|you)",
+  "\\bthey(?:'re| are) (?:not suffering|at peace|watching over you|looking down)", "\\bstay strong\\b", "\\bbe strong\\b",
+  "(?:in|within|after) (?:a|one|two|three|six|\\d+) (?:days?|weeks?|months?|years?)", "\\bby now\\b", "\\bbetter soon\\b",
+  "(?:en|a) un lugar mejor", "todo pasa por (?:algo|una raz[óo]n)", "el tiempo (?:lo )?cura", "\\bsuperarlo\\b", "\\bsup[ée]ralo\\b", "pasar la p[áa]gina",
+  "dios (?:necesitaba|quer[íi]a) (?:otro|un) [áa]ngel", "otro angelito", "etapas del duelo", "te sentir[áa]s mejor", "\\bal menos (?:ya|[ée]l|ella|t[úu])\\b",
+  "\\bya (?:no sufre|descansa|est[áa] en paz)\\b", "\\bs[ée] fuerte\\b", "\\bmantente fuerte\\b", "\\bpara este momento\\b",
+  "(?:en|dentro de|despu[ée]s de) (?:un|una|dos|tres|seis|\\d+) (?:d[íi]as?|semanas?|mes(?:es)?|a[ñn]os?)",
+]);
+// The night lengths by journey, in minutes (the writing target; a note inside 75%, a fail beyond: band()).
+// Psalm Nights 13-17 (21 Nov 2026); grief nights are shorter; "3 AM, back to sleep" is 5-8 minutes (her brief 21 Nov 2026).
+export const NIGHT_BANDS = { grief: [8, 12], "back-to-sleep": [5, 8] };
+export const nightBand = (journey) => NIGHT_BANDS[journey] || [13, 17];
+export const griefCheck = (written) => { const g = listHits(GRIEF, written); return g.length ? fail(`grief wording that hurries, explains or promises: ${g.join(", ")}`) : pass; };
+
 // S05: theology red lines outside stored scripture.
 export const REDLINE = rx([
   "god is telling you", "god told me to tell you", "curse of ham", "jesus was (?:black|white)", "\\byou are saved\\b", "\\byou(?:'re| are) (?:lost|going to hell|bound for hell)",
@@ -244,8 +262,9 @@ export function checkPsalmNight(p) {
   const t = commonText("psalm-night", lang, written, "gods-word");
   Object.assign(c, t);
   c.speakers = p.segments.every((x) => x.speaker === "narrator") ? pass : fail("a Psalm Night is narrator only");
+  if (NIGHT_BANDS[p.journey]) c.grief_words = griefCheck(written);
   // Her ruling 21 Nov 2026: the target guides the writing; only a night under 75% of it (a broken script) fails.
-  c.length = band(p.est_seconds / 60, 13, 17, " min");
+  c.length = band(p.est_seconds / 60, ...nightBand(p.journey), " min");
   c.ai_label = p.ai_label ? pass : fail("AI label key missing");
   return c;
 }
@@ -262,6 +281,11 @@ export function checkImaginationNight(n) {
   c.length = band(n.est_seconds / 60, 18, 22, " min");   // a note inside 75%, a fail under it (her ruling 21 Nov 2026)
   c.ai_label = n.ai_label ? pass : fail("AI label key missing");
   return c;
+}
+
+// ---------------------------------------------------------------- Grief journey: a verse and a short, gentle line
+export function checkGriefLine(d, lang) {
+  return { ...checkDeclaration(d, lang), grief_words: griefCheck([d.declaration]) };
 }
 
 // ---------------------------------------------------------------- Morning Word

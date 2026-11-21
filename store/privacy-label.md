@@ -10,11 +10,12 @@ None. Tracking: No for every row below.
 
 | Apple category | Data type | What it is | Purpose | Linked to user | Tracking |
 | --- | --- | --- | --- | --- | --- |
-| User Content | Other User Content | Chat messages (sent to the AI providers), the paid chat memory summary, words written for a made-for-you session | App Functionality | Yes (install id) | No |
+| User Content | Other User Content | Chat messages: free chat goes to free AI providers that may keep and use it (asked once, before the first free chat); paid chat, and any message the safety check flags, goes to a paid AI service that does not train on it. Also the paid chat memory summary and words written for a made-for-you session | App Functionality | Yes (install id) | No |
 | Identifiers | Device ID | The anonymous install id, created the first time someone chats | App Functionality | Yes | No |
 | Identifiers | User ID | RevenueCat's anonymous app user id | App Functionality | Yes | No |
 | Purchases | Purchase History | Subscription receipts read through Apple and RevenueCat | App Functionality | Yes | No |
 | Usage Data | Product Interaction | Messages sent per install per day, for the free and paid limits, and short answer-pattern hashes (8 characters, no words) so answers do not repeat (both deleted within 48 hours) | App Functionality | Yes | No |
+| Usage Data | Other Usage Data | Fair-use and safety records with no words: a chat pause and its reason code (deleted when it ends), a paid install's AI cost this month (deleted 30 days after the plan ends), and, for a conversation the safety check flagged, when and how many calm messages followed (deleted after two days) | App Functionality | Yes | No |
 | Sensitive Info | Sensitive Info | The door chosen and the chat voice travel with each chat message and can suggest religious belief or race | App Functionality | Yes | No |
 
 ## Data not collected

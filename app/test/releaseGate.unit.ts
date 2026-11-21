@@ -304,4 +304,5 @@ test('the App Store Connect dry run prints the plan from the shared constants an
   assert.equal(plan.introductoryOffer, 'none');
   assert.equal(plan.revenueCat.entitlement, 'paid');
   assert.ok(plan.availability.excludedTerritories.includes('GBR') && plan.availability.excludedTerritories.includes('CHE'));
+  assert.ok(plan.availability.excludedTerritories.includes('CHN'), 'China mainland is excluded (religious content permit, AIGC rules)');
 });

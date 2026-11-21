@@ -32,7 +32,7 @@ const links = (t, map) => [...t.matchAll(/\]\(([^)]+)\)/g)].map((m) => (map ? to
 // Wyoming, Family Sharing...). Each must appear in the Spanish clause, as written, or as its
 // standard Spanish name (Apple's own es-MX feature names, country and common nouns).
 const SPANISH = {
-  AI: /\bIA\b/, SDKs: /\bSDK\b/, "Apple-branded": /marca Apple/, Bible: /Biblia/, God: /Dios/, Settings: /Configuración/,
+  AI: /\bIA\b/, SDKs: /\bSDK\b/, "Apple-branded": /marca Apple/, Bible: /Biblia|bíblic[oa]/, God: /Dios/, Settings: /Configuración/,
   United: /Estados Unidos|Reino Unido/, States: /Estados/, Kingdom: /Reino/, European: /Europeo/, Economic: /Económico/,
   Area: /Espacio/, Switzerland: /Suiza/, State: /Estado/, November: /noviembre/, Spanish: /español/,
   Scripture: /Escrituras/, Government: /Gobierno/,
@@ -40,7 +40,7 @@ const SPANISH = {
 // A capitalised word counts as a name when it sits mid-sentence, or when the English texts never
 // use it in lower case (RevenueCat, Apple and Cloudflare often open a sentence). The few ordinary
 // words that open a sentence and never recur in lower case are listed here.
-const SENTENCE_OPENERS = new Set(["Everything", "Manage", "Nothing", "Using", "Questions", "Listening", "Effective"]);
+const SENTENCE_OPENERS = new Set(["Everything", "Manage", "Nothing", "Using", "Questions", "Listening", "Effective", "Very"]);
 const lowerWords = new Set(LEGAL.map((e) => readLegal(e.en.file)).join("\n").match(/\b\p{Ll}[\p{L}'-]*/gu));
 const names = (raw) => {
   const t = raw.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");

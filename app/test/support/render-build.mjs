@@ -3,7 +3,7 @@
 // exists once in the tree. expo-router is replaced by a recorder: tests assert where a screen navigates
 // (push/replace/back/Redirect) and read the layouts' Stack/Tabs configuration as data.
 import { build } from 'esbuild';
-import { mkdtempSync } from 'node:fs';
+import { mkdtempSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -29,24 +29,22 @@ const MOCKS = {
     exports.Text = 'SvgText';`,
   'expo-asset': `const { readFileSync } = require('node:fs');
     exports.Asset = { fromModule: name => ({
-      uri: 'data:application/octet-stream;base64,' + readFileSync('src/bible/data/' + name).toString('base64')
+      uri: 'data:application/octet-stream;base64,' + readFileSync(name.endsWith('.wasm') ? 'node_modules/sql.js/dist/' + name : 'src/bible/data/' + name).toString('base64')
     }) };`,
   'expo-file-system': '',
-  'expo-sqlite': `const { DatabaseSync } = require('node:sqlite');
-    const { mkdtempSync, writeFileSync, rmSync } = require('node:fs');
-    const { join } = require('node:path');
-    const { tmpdir } = require('node:os');
-    exports.deserializeDatabaseAsync = async bytes => {
-      const dir = mkdtempSync(join(tmpdir(), 'pbs-bible-'));
-      const file = join(dir, 'bible.db');
-      writeFileSync(file, bytes);
-      const db = new DatabaseSync(file, { readOnly: true });
-      process.once('exit', () => { db.close(); rmSync(dir, { recursive: true, force: true }); });
-      return { getAllAsync: async (sql, params) => {
-        if (sql.includes('verses_fts')) throw new Error('Web SQLite lacks FTS5');
-        return db.prepare(sql).all(...params);
-      }, getFirstAsync: async sql => db.prepare(sql).get() };
-    };`,
+  // The web Bible's real engine (src/bible/open.web.ts), with one switch: a test may make the next N reads fail,
+  // like a cold start whose first open or read fails.
+  'sql.js': `const real = require(require.resolve('sql.js/dist/sql-wasm.js', { paths: [process.cwd()] }));
+    module.exports = async options => {
+      const SQL = await real(options);
+      const prepare = SQL.Database.prototype.prepare;
+      SQL.Database.prototype.prepare = function (sql) {
+        if (globalThis.__pbsSqlFailures > 0) { globalThis.__pbsSqlFailures--; throw new Error('cold start'); }
+        return prepare.call(this, sql);
+      };
+      return SQL;
+    };
+    module.exports.default = module.exports;`,
   'expo-router': `const React = require('react');
     const r = () => globalThis.__pbsRouter;
     exports.useRouter = () => r();
@@ -57,8 +55,10 @@ const MOCKS = {
     exports.Redirect = props => React.createElement('Redirect', props);
     const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
     exports.Stack = layout('Stack'); exports.Tabs = layout('Tabs');`,
+  // Native modules by name: the test's fakes (globalThis.__pbsNative), none by default (as on web).
+  'expo-modules-core': `exports.requireOptionalNativeModule = name => globalThis.__pbsNative?.[name] ?? null;`,
   'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
-  'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`,
+  'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en', regionCode: globalThis.__pbsRegion ?? 'US' }];`,
   '@react-native-async-storage/async-storage': `module.exports = { __esModule: true, default: globalThis.__pbsStorage };`,
   // The audio host from app.config.ts, plus whatever a test sets (the RevenueCat key).
   'expo-constants': `exports.__esModule = true; exports.default = { get expoConfig() {
@@ -83,24 +83,27 @@ const MOCKS = {
       const state = React.useSyncExternalStore(player.subscribe, player.getState);
       return { player, state, stop: globalThis.__pbsAudioStop || null };
     };`,
+  'expo-crypto': `let n = 0; exports.randomUUID = () => '00000000-0000-4000-8000-' + String(++n).padStart(12, '0');`,
   'react-native-purchases': `exports.__esModule = true; exports.default = globalThis.__pbsPurchases;
     exports.PURCHASES_ERROR_CODE = { PAYMENT_PENDING_ERROR: '20', PURCHASE_CANCELLED_ERROR: '1' };`,
 };
 
+// Every test/*.render.tsx is its own bundle and process, so each file sets its own globals.
 const dir = mkdtempSync(join(tmpdir(), 'pbs-render-'));
-await build({
-  entryPoints: ['test/screens.render.tsx'], outfile: join(dir, 'screens.cjs'), bundle: true, platform: 'node', format: 'cjs',
-  define: { __DEV__: 'false' }, packages: 'external', external: ['react', 'react-test-renderer', 'i18n-js'], jsx: 'automatic', logLevel: 'warning',
+const files = readdirSync('test').filter(f => f.endsWith('.render.tsx'));
+for (const file of files) await build({
+  entryPoints: [join('test', file)], outfile: join(dir, file.replace(/\.tsx$/, '.cjs')), bundle: true, platform: 'node', format: 'cjs',
+  define: { __DEV__: 'false' }, resolveExtensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.jsx', '.js', '.json'], packages: 'external', external: ['react', 'react-test-renderer', 'i18n-js'], jsx: 'automatic', logLevel: 'warning',
   plugins: [{ name: 'native-mocks', setup(b) {
     b.onResolve({ filter: /\/player\/usePlayer$/ }, () => ({ path: 'player-hook', namespace: 'mock' }));
-    b.onResolve({ filter: /\.db$/ }, args => ({ path: args.path.split('/').at(-1), namespace: 'bible-asset' }));
+    b.onResolve({ filter: /\.(db|wasm)$/ }, args => ({ path: args.path.split('/').at(-1), namespace: 'bible-asset' }));
     b.onLoad({ filter: /.*/, namespace: 'bible-asset' }, args => ({ contents: `module.exports = ${JSON.stringify(args.path)}` }));
-    b.onResolve({ filter: /^(@react-native-community\/datetimepicker|expo-notifications|expo-audio|expo-brightness|expo-asset|expo-file-system|expo-sqlite|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
+    b.onResolve({ filter: /^(expo-modules-core|@react-native-community\/datetimepicker|expo-notifications|expo-audio|expo-brightness|expo-asset|expo-file-system|sql\.js|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|expo-crypto|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
     b.onLoad({ filter: /.*/, namespace: 'mock' }, args => ({
       contents: MOCKS[args.path] ?? `module.exports = new Proxy({}, { get: (_, key) => key === '__esModule' ? false : String(key) });`,
       loader: 'js', resolveDir: process.cwd(),
     }));
   } }],
 });
-const result = spawnSync(process.execPath, ['--test', ...process.argv.slice(2), join(dir, 'screens.cjs')], { stdio: 'inherit', env: { ...process.env, NODE_PATH: join(process.cwd(), 'node_modules') } });
+const result = spawnSync(process.execPath, ['--test', ...process.argv.slice(2), ...files.map(f => join(dir, f.replace(/\.tsx$/, '.cjs')))], { stdio: 'inherit', env: { ...process.env, NODE_PATH: join(process.cwd(), 'node_modules') } });
 process.exit(result.status ?? 1);

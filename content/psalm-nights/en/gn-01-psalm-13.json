@@ -1,0 +1,179 @@
+{
+ "id": "gn-01-psalm-13",
+ "kind": "psalm-night",
+ "journey": "grief",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 13: How Long, O Lord",
+ "main": [
+  "PSA 13:1-6"
+ ],
+ "companions": [
+  "JOH 11:35",
+  "PSA 56:8"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "This is a night for when you have lost someone. [pause 10]\n\nYou do not have to do anything here. You can lie down, or stay just as you are, with the phone in the dark beside you. [pause 12]\n\nTonight we read Psalm 13. It is short, and it is honest. David asks God the same question four times. How long. [pause 12]\n\nWe will read it twice, slowly. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 13:1-6",
+   "label": "Psalm 13:1-6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, A Psalm of David. How long wilt thou forget me, O LORD? for ever? how long wilt thou hide thy face from me?"
+    },
+    {
+     "v": 2,
+     "text": "How long shall I take counsel in my soul, having sorrow in my heart daily? how long shall mine enemy be exalted over me?"
+    },
+    {
+     "v": 3,
+     "text": "Consider and hear me, O LORD my God: lighten mine eyes, lest I sleep the sleep of death;"
+    },
+    {
+     "v": 4,
+     "text": "Lest mine enemy say, I have prevailed against him; and those that trouble me rejoice when I am moved."
+    },
+    {
+     "v": 5,
+     "text": "But I have trusted in thy mercy; my heart shall rejoice in thy salvation."
+    },
+    {
+     "v": 6,
+     "text": "I will sing unto the LORD, because he hath dealt bountifully with me."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "How long. That question is in the Bible. Someone prayed it out loud, and God let it be written down. [pause 14]\n\nGrief can feel as if God has gone quiet. The psalm does not scold David for saying so. It lets him say it. [pause 14]\n\nYou can say it too. Out loud, or only in your heart. Your questions do not offend God. [pause 15]\n\nThen, near the end, David says one small word. But. He trusts God's mercy while the question is still open. [pause 15]\n\nHere are two short passages to sit beside it. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "JOH 11:35",
+   "label": "John 11:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Jesus wept."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 56:8",
+   "label": "Psalm 56:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Thou tellest my wanderings: put thou my tears into thy bottle: are they not in thy book?"
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Jesus wept. He stood with Mary and Martha in their sorrow, and he cried too. [pause 15]\n\nAnd the psalmist pictures God keeping every tear in a bottle. Not one is wasted. Not one is forgotten. [pause 15]\n\nWhoever you are missing tonight, you can bring their name to God. You do not have to find the right words. [pause 15]\n\nNow Psalm 13 once more. If a line is yours tonight, let it be yours. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 13:1-6",
+   "label": "Psalm 13:1-6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "To the chief Musician, A Psalm of David. How long wilt thou forget me, O LORD? for ever? how long wilt thou hide thy face from me?"
+    },
+    {
+     "v": 2,
+     "text": "How long shall I take counsel in my soul, having sorrow in my heart daily? how long shall mine enemy be exalted over me?"
+    },
+    {
+     "v": 3,
+     "text": "Consider and hear me, O LORD my God: lighten mine eyes, lest I sleep the sleep of death;"
+    },
+    {
+     "v": 4,
+     "text": "Lest mine enemy say, I have prevailed against him; and those that trouble me rejoice when I am moved."
+    },
+    {
+     "v": 5,
+     "text": "But I have trusted in thy mercy; my heart shall rejoice in thy salvation."
+    },
+    {
+     "v": 6,
+     "text": "I will sing unto the LORD, because he hath dealt bountifully with me."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "We will stop reading now. [pause 8]\n\nLet the room be quiet. Let your breathing find its own pace. [pause 12]\n\nThere is nothing you need to fix tonight, and nothing you are supposed to feel. [pause 12]\n\nIf the tears come, let them come. If they do not, that is all right too. [pause 15]\n\nThe love you have for them is still here. It does not have to go anywhere. [pause 15]\n\nIf the nights stay this heavy, talk with your pastor, or with a grief counselor. Nobody is meant to carry this alone. [pause 15]\n\nThe Lord is near to the broken in heart. Stay here as long as you need. [pause 30]\n\nGood night. [pause 45]"
+  }
+ ],
+ "words": 577,
+ "rest_part": "grief_rest1",
+ "pacing": {
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 684,
+ "target_seconds": 480,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "grief_words": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-21",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Grief nights and the 3 AM night (21 Nov 2026): every passage is stored KJV pasted by code (Ps 13, Ps 23, John 11:32-36, Ps 4:8 and companions); written lines echo in short phrases only. Lament is allowed (How long) without rebuke; no reason given for a death, no 'better place', no timeline for grief (the grief_words check); Rev 21:4 told as the hope at the end of the story, not a claim about the person who died; Jesus's and God's words given indirectly outside scripture. Each grief night points to a pastor or a grief counselor; the 3 AM night makes no sleep promise."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a grieving or half-awake listener can follow at 3 AM; the person who died is 'them', never assumed to be a spouse, parent or child; no pity, no hurry ('nobody is timing you'); the 3 AM night is short and spare, the phone face down. Lengths by silence only: grief nights 10-11.5 min, the 3 AM night 6 min (estimated at 117 wpm)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

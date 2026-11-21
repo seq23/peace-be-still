@@ -2,9 +2,9 @@
 // may see, which story is today's, every past one, and the declarations behind each topic.
 import type { Age, JourneyId, Language } from '../model';
 import raw from './library.json';
-import type { Declaration, Library, Story, Telling } from './types';
+import type { Declaration, GriefLine, Library, Story, Telling } from './types';
 
-export type { Block, Declaration, Story, Telling } from './types';
+export type { Block, Declaration, GriefLine, Story, Telling } from './types';
 
 const library = raw as unknown as Library;
 export const topics = library.topics;
@@ -63,6 +63,11 @@ export function dailyDeclaration(language: Language, date: Date, topic?: Topic):
   const start = new Date(date.getFullYear(), 0, 1);
   const dayOfYear = Math.round((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(start.getFullYear(), 0, 1)) / 86_400_000) + 1;
   return all.find(item => item.day === dayOfYear) ?? at(all, dayOfYear - 1);
+}
+
+/** "For when you've lost someone": every line, in order. Free; the same for every age band. */
+export function griefLines(language: Language): readonly GriefLine[] {
+  return library.grief[language];
 }
 
 export function byTopic(language: Language, topic: Topic): Declaration[] {

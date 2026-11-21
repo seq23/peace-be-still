@@ -1,0 +1,179 @@
+{
+ "id": "gn-02-psalm-23",
+ "kind": "psalm-night",
+ "journey": "grief",
+ "door": "gods-word",
+ "lang": "en",
+ "title": "Psalm 23: Through the Valley",
+ "main": [
+  "PSA 23:1-6"
+ ],
+ "companions": [
+  "MAT 5:4",
+  "2CO 1:3"
+ ],
+ "ai_label": "label.ai_voice_checked",
+ "segments": [
+  {
+   "part": "welcome",
+   "speaker": "narrator",
+   "text": "This is a night for when you have lost someone. [pause 10]\n\nGet as comfortable as you can. You can let the phone rest beside you. [pause 12]\n\nTonight is Psalm 23. Many people first hear it at a funeral, and come back to it on the long nights afterward. [pause 12]\n\nWe will read it twice. You only need to listen. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 23:1-6",
+   "label": "Psalm 23:1-6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David. The LORD is my shepherd; I shall not want."
+    },
+    {
+     "v": 2,
+     "text": "He maketh me to lie down in green pastures: he leadeth me beside the still waters."
+    },
+    {
+     "v": 3,
+     "text": "He restoreth my soul: he leadeth me in the paths of righteousness for his name’s sake."
+    },
+    {
+     "v": 4,
+     "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me."
+    },
+    {
+     "v": 5,
+     "text": "Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over."
+    },
+    {
+     "v": 6,
+     "text": "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever."
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "The psalm does not go around the valley. It goes through it, one step at a time. [pause 15]\n\nAnd in the middle of the valley, the words change. David stops talking about God and starts talking to him. Thou art with me. [pause 15]\n\nThat is often how grief prays. Not in long sentences. Just, you are here. Stay with me. [pause 15]\n\nThere is a table in this psalm, and a cup, and a house to come home to. You do not have to feel any of that tonight. It is there in the words, waiting for you. [pause 15]\n\nTwo more short passages now. [pause 12]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "MAT 5:4",
+   "label": "Matthew 5:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Blessed are they that mourn: for they shall be comforted."
+    }
+   ]
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "2CO 1:3",
+   "label": "2 Corinthians 1:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Blessed be God, even the Father of our Lord Jesus Christ, the Father of mercies, and the God of all comfort;"
+    }
+   ]
+  },
+  {
+   "part": "reflect",
+   "speaker": "narrator",
+   "text": "Blessed are they that mourn. Jesus said that about people standing exactly where you are. Mourning is not failing. [pause 15]\n\nAnd Paul gives God two names you can hold tonight. Father of mercies. God of all comfort. Comfort for this, too. [pause 15]\n\nNow Psalm 23 again. Let it go slowly. Let each line land before the next one comes. [pause 15]"
+  },
+  {
+   "part": "passage",
+   "speaker": "narrator",
+   "ref": "PSA 23:1-6",
+   "label": "Psalm 23:1-6",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 1,
+     "text": "A Psalm of David. The LORD is my shepherd; I shall not want."
+    },
+    {
+     "v": 2,
+     "text": "He maketh me to lie down in green pastures: he leadeth me beside the still waters."
+    },
+    {
+     "v": 3,
+     "text": "He restoreth my soul: he leadeth me in the paths of righteousness for his name’s sake."
+    },
+    {
+     "v": 4,
+     "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me."
+    },
+    {
+     "v": 5,
+     "text": "Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over."
+    },
+    {
+     "v": 6,
+     "text": "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever."
+    }
+   ]
+  },
+  {
+   "part": "rest",
+   "speaker": "narrator",
+   "text": "That is enough for tonight. [pause 8]\n\nLet your shoulders drop. Let the bed hold you up. [pause 12]\n\nYou may be thinking of their face, or their voice, or the last time you spoke. You can hold that gently. [pause 15]\n\nGrief is a kind of love. It is all right that it hurts. [pause 15]\n\nYou do not have to carry it alone. A pastor, a grief counselor, a friend who will sit with you: these are good gifts, and it is good to ask for them. [pause 15]\n\nThe Lord is with you in the valley. Stay here as long as you like. [pause 30]\n\nGood night. [pause 45]"
+  }
+ ],
+ "words": 585,
+ "rest_part": "grief_rest2",
+ "pacing": {
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
+  "quiet_between_paragraphs_s": 4
+ },
+ "est_seconds": 663,
+ "target_seconds": 480,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "word_for_word": "pass",
+   "plan": "pass",
+   "never_words": "pass",
+   "mindset_words": "pass",
+   "theology_redlines": "pass",
+   "split_topics": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "speakers": "pass",
+   "grief_words": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-21",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Grief nights and the 3 AM night (21 Nov 2026): every passage is stored KJV pasted by code (Ps 13, Ps 23, John 11:32-36, Ps 4:8 and companions); written lines echo in short phrases only. Lament is allowed (How long) without rebuke; no reason given for a death, no 'better place', no timeline for grief (the grief_words check); Rev 21:4 told as the hope at the end of the story, not a claim about the person who died; Jesus's and God's words given indirectly outside scripture. Each grief night points to a pastor or a grief counselor; the 3 AM night makes no sleep promise."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Plain, unhurried English a grieving or half-awake listener can follow at 3 AM; the person who died is 'them', never assumed to be a spouse, parent or child; no pity, no hurry ('nobody is timing you'); the 3 AM night is short and spare, the phone face down. Lengths by silence only: grief nights 10-11.5 min, the 3 AM night 6 min (estimated at 117 wpm)."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

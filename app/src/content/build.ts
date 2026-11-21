@@ -5,7 +5,7 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { Block, Declaration, Library, Story, Telling } from './types';
+import type { Block, Declaration, GriefLine, Library, Story, Telling } from './types';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const CONTENT = resolve(HERE, '../../../content');
@@ -65,6 +65,12 @@ export function readDeclarations(lang: 'en' | 'es'): Declaration[] {
   });
 }
 
+/** The grief journey's lines (content/grief), passed by the content gate; the verse ships as its reference only. */
+export function readGrief(lang: 'en' | 'es'): GriefLine[] {
+  const raw = JSON.parse(readFileSync(join(CONTENT, 'grief', `${lang}.json`), 'utf8')) as Raw;
+  return (raw.items as Raw[]).filter(passed).map(item => ({ id: item.id, ref: item.ref, text: item.declaration }));
+}
+
 export function buildContent(): { library: Library; held: string[] } {
   const held: string[] = [];
   const stories = Object.fromEntries(TELLINGS.map(telling => {
@@ -73,18 +79,18 @@ export function buildContent(): { library: Library; held: string[] } {
     return [telling, read.stories];
   })) as Library['stories'];
   const topics = (JSON.parse(readFileSync(join(CONTENT, 'morning-word', 'topics.json'), 'utf8')) as { topics: string[] }).topics;
-  return { library: { stories, declarations: { en: readDeclarations('en'), es: readDeclarations('es') }, topics }, held };
+  return { library: { stories, declarations: { en: readDeclarations('en'), es: readDeclarations('es') }, topics, grief: { en: readGrief('en'), es: readGrief('es') } }, held };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const { library, held } = buildContent();
   const counts = TELLINGS.map(telling => `${library.stories[telling].length} ${telling}`);
   const empty = TELLINGS.filter(telling => !library.stories[telling].length);
-  if (empty.length || !library.declarations.en.length || !library.declarations.es.length) {
-    console.error(`CONTENT_LIBRARY_EMPTY: no passed ${empty.length ? `stories in ${empty.join(', ')}` : 'declarations'}`);
+  if (empty.length || !library.declarations.en.length || !library.declarations.es.length || !library.grief.en.length || !library.grief.es.length) {
+    console.error(`CONTENT_LIBRARY_EMPTY: no passed ${empty.length ? `stories in ${empty.join(', ')}` : !library.grief.en.length || !library.grief.es.length ? 'grief lines' : 'declarations'}`);
     process.exit(3);
   }
   writeFileSync(join(HERE, 'library.json'), JSON.stringify(library) + '\n');
   for (const id of held) console.log(`HELD ${id}: not passed by the content gate`);
-  console.log(`OUTPUT content library: stories ${counts.join(', ')}; declarations ${library.declarations.en.length} en, ${library.declarations.es.length} es; ${held.length} held`);
+  console.log(`OUTPUT content library: stories ${counts.join(', ')}; declarations ${library.declarations.en.length} en, ${library.declarations.es.length} es; grief lines ${library.grief.en.length} en, ${library.grief.es.length} es; ${held.length} held`);
 }

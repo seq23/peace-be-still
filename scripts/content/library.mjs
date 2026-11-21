@@ -11,7 +11,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { CONTENT, verses, label, words, pauses, TRANSLATION, parseRef } from "./lib.mjs";
-import { GATE_VERSION, checkStory, checkPsalmNight, checkImaginationNight, checkDeclaration, isFail } from "./rules.mjs";
+import { GATE_VERSION, checkStory, checkPsalmNight, checkImaginationNight, checkDeclaration, checkGriefLine, isFail, NIGHT_BANDS, nightBand } from "./rules.mjs";
 import { loadCache, probedModels, verseReadCheck, genderReadCheck, PROBE_GENDERED, readNight, parseAnswer, writtenLines, textKey, PROBE_VERSES, PROBE_CLEAN, PROBE, CACHE } from "./verse-read.mjs";
 
 const SRC = join(CONTENT, "src");
@@ -21,11 +21,15 @@ const KINDS = {
   "psalm-night": { dir: "psalm-nights", langs: ["en", "es"] },
   "imagination-night": { dir: "imagination-nights", langs: ["en", "es"] },
   declaration: { dir: "morning-word", langs: ["en", "es"] },
+  // "For when you've lost someone" (21 Nov 2026): a stored verse and a short, gentle line, free; its nights are Psalm Nights with `journey: grief`.
+  grief: { dir: "grief", langs: ["en", "es"] },
 };
 const TELLING_LANG = { plain: "en", "hush-harbor": "en", "mi-refugio": "es" };
 const langOf = (kind, l) => (kind === "story" ? TELLING_LANG[l] : l);
-const JOURNEY = { story: { plain: "gods-word", "hush-harbor": "hush-harbor", "mi-refugio": "mi-refugio" }, "psalm-night": { en: "psalm-nights", es: "mi-refugio" }, "imagination-night": { en: "imagination-nights", es: "imagination-nights" }, declaration: { en: "morning-word", es: "mi-refugio" } };
-const AI_LABEL = { story: "label.ai_retold_checked", "psalm-night": "label.ai_voice_checked", "imagination-night": "label.ai_written_voice_checked", declaration: "label.ai_written_checked" };
+const JOURNEY = { story: { plain: "gods-word", "hush-harbor": "hush-harbor", "mi-refugio": "mi-refugio" }, "psalm-night": { en: "psalm-nights", es: "mi-refugio" }, "imagination-night": { en: "imagination-nights", es: "imagination-nights" }, declaration: { en: "morning-word", es: "mi-refugio" }, grief: { en: "grief", es: "grief" } };
+// A night's own journey (a `journey:` source line) beyond its kind's default: the grief nights and the one "3 AM, back to sleep".
+const NIGHT_JOURNEYS = Object.keys(NIGHT_BANDS);
+const AI_LABEL = { story: "label.ai_retold_checked", "psalm-night": "label.ai_voice_checked", "imagination-night": "label.ai_written_voice_checked", declaration: "label.ai_written_checked", grief: "label.ai_written_checked" };
 
 const read = (p) => (existsSync(p) ? readFileSync(p, "utf8") : "");
 const srcFiles = (dir) => (existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith(".txt")).sort().map((f) => join(dir, f)) : []);
@@ -62,8 +66,8 @@ function loadReviews(kind, lang, ids) {
   const txt = read(join(SRC, "reviews", `${KINDS[kind].dir}-${lang}.tsv`));
   for (const line of txt.split("\n")) {
     if (!line.trim() || line.startsWith("#")) continue;
-    const [key, pv, pn, cv, cn, rw] = line.split("\t");
-    const r = { pastor: { verdict: pv, note: pn }, cultural: { verdict: cv, note: cn }, rewritten: rw || null };
+    const [key, pv, pn, cv, cn, rw, date] = line.split("\t");
+    const r = { pastor: { verdict: pv, note: pn }, cultural: { verdict: cv, note: cn }, rewritten: rw || null, date: date || null };
     for (const v of [pv, cv]) if (!["pass", "rewrite", "never-ship"].includes(v)) throw new Error(`REVIEW_BAD_VERDICT ${key} ${v}`);
     if (key.includes("..")) {
       const [a, z] = key.split("..");
@@ -86,7 +90,7 @@ const DRAFT_LOG = Object.fromEntries(read(join(SRC, "drafts", "log.tsv")).split(
 }));
 function finalize(item, checks, review, telling = item.telling || item.lang) {
   const failed = Object.entries(checks).filter(([, v]) => isFail(v));
-  const final = review ? { reviewer: "claude", date: REVIEW_DATE, pastor: review.pastor, cultural: review.cultural, verdict: review.pastor.verdict === "pass" && review.cultural.verdict === "pass" ? "pass" : [review.pastor.verdict, review.cultural.verdict].includes("never-ship") ? "never-ship" : "rewrite" } : null;
+  const final = review ? { reviewer: "claude", date: review.date || REVIEW_DATE, pastor: review.pastor, cultural: review.cultural, verdict: review.pastor.verdict === "pass" && review.cultural.verdict === "pass" ? "pass" : [review.pastor.verdict, review.cultural.verdict].includes("never-ship") ? "never-ship" : "rewrite" } : null;
   item.qa = {
     gate_version: GATE_VERSION,
     checks,
@@ -221,6 +225,8 @@ function buildPsalmNight(it, lang, parts) {
   const main = one(it, "main", "").split(";").map((s) => s.trim()).filter(Boolean);
   const comp = one(it, "companions", "").split(";").map((s) => s.trim()).filter(Boolean);
   const para = (k) => (it.fields[k] || []).join("\n\n");
+  const journey = one(it, "journey", JOURNEY["psalm-night"][lang]);
+  if (journey !== JOURNEY["psalm-night"][lang] && !NIGHT_JOURNEYS.includes(journey)) throw new Error(`SRC_JOURNEY ${it.id}: ${journey}`);
   const rest = one(it, "rest", "");
   const restText = parts[rest] ?? rest;
   if (!restText) throw new Error(`SRC_REST ${it.id}`);
@@ -230,10 +236,13 @@ function buildPsalmNight(it, lang, parts) {
   const all = segments.map((s) => (s.part === "passage" ? s.verses.map((v) => v.text).join(" ") : s.text)).join(" ");
   const n = words(all).length;
   return {
-    id: it.id, kind: "psalm-night", journey: JOURNEY["psalm-night"][lang], door: "gods-word", lang, title: it.title, main, companions: comp,
+    id: it.id, kind: "psalm-night", journey, door: "gods-word", lang, title: it.title, main, companions: comp,
     ai_label: AI_LABEL["psalm-night"], segments, words: n, rest_part: parts[rest] ? rest : null,
     pacing: { words_per_minute: VOICED_WPM_PSALM, quiet_between_verses_s: PSALM_VERSE_QUIET, quiet_between_paragraphs_s: 4 },
     est_seconds: voicedPsalmSeconds(segments, lang),
+    // The fill's floor follows the journey's own target; "3 AM, back to sleep" is mastered quieter than a Psalm Night.
+    ...(NIGHT_BANDS[journey] ? { target_seconds: nightBand(journey)[0] * 60 } : {}),
+    ...(journey === "back-to-sleep" ? { level: "hush" } : {}),
   };
 }
 
@@ -263,7 +272,7 @@ function buildImaginationNight(it, lang, parts) {
   };
 }
 
-function buildDeclarations(text, lang) {
+function buildDeclarations(text, lang, prefix = "mw") {
   const items = [];
   for (const raw of text.split("\n")) {
     const line = raw.trim();
@@ -272,7 +281,7 @@ function buildDeclarations(text, lang) {
     if (!decl) throw new Error(`SRC_DECLARATION ${line.slice(0, 60)}`);
     const p = passage(ref, lang);
     const n = words(p.verses.map((v) => v.text).join(" ") + " " + decl).length;
-    items.push({ id: `mw-${String(day).padStart(3, "0")}`, day: +day, speaker: "narrator", ...p, declaration: decl, words: n, est_seconds: Math.round((n / 130) * 60 + 1) });
+    items.push({ id: `${prefix}-${String(day).padStart(3, "0")}`, day: +day, speaker: "narrator", ...p, declaration: decl, words: n, est_seconds: Math.round((n / 130) * 60 + 1) });
   }
   return items;
 }
@@ -298,12 +307,12 @@ export function buildAll() {
   for (const [kind, { dir, langs }] of Object.entries(KINDS)) {
     for (const lang of langs) {
       const sdir = join(SRC, dir, lang);
-      if (kind === "declaration") {
+      if (kind === "declaration" || kind === "grief") {
         const txt = srcFiles(sdir).map(read).join("\n");
         if (!txt.trim()) continue;
-        const items = buildDeclarations(txt, lang);
+        const items = buildDeclarations(txt, lang, kind === "grief" ? "gr" : "mw");
         const rv = loadReviews(kind, lang, items.map((i) => i.id));
-        for (const d of items) add(kind, lang, d, checkDeclaration(d, lang), rv[d.id]);
+        for (const d of items) add(kind, lang, d, kind === "grief" ? checkGriefLine(d, lang) : checkDeclaration(d, lang), rv[d.id]);
         out.push({ path: join(CONTENT, dir, `${lang}.json`), json: { kind, journey: JOURNEY[kind][lang], door: "gods-word", lang, ai_label: AI_LABEL[kind], items } });
         continue;
       }
@@ -467,6 +476,45 @@ rest: c1
   if (!isFail(pnLen(6))) throw new Error("SELFTEST a 6-minute psalm night was not held");
   const pn01 = voicedPsalmSeconds([{ part: "reflect", text: `${"word ".repeat(739).trim()} [pause 336]` }], "en");
   if (pn01 > 723.3 || pn01 < 700) throw new Error(`SELFTEST psalm night estimate ${pn01}s is not calibrated to en pn-01 voiced at 723 s`);
+  // Grief and "3 AM, back to sleep" nights (21 Nov 2026): their own length bands, the grief wording check, a known journey only.
+  const gn = parseItems(`=== _r
+text: Rest now. [pause 30]
+=== t-gn | Psalm 13
+journey: grief
+main: PSA 13:1-6
+companions: JOH 11:35
+welcome: This is a night for when you have lost someone.
+reflect1: How long, David asks. You can ask it too.
+reflect2: Jesus wept with his friends.
+rest: r
+=== t-bs | Back to Sleep
+journey: back-to-sleep
+main: PSA 4:8
+welcome: You are awake in the night.
+reflect1: Lie down.
+reflect2: Rest.
+rest: r
+=== t-bad | Psalm 1
+journey: lost
+main: PSA 1:1
+welcome: x
+reflect1: x
+reflect2: x
+rest: r
+`);
+  const grief = buildPsalmNight(gn[1], "en", shared(gn)), back = buildPsalmNight(gn[2], "en", shared(gn));
+  if (grief.journey !== "grief" || grief.target_seconds !== 480 || grief.level || back.level !== "hush" || back.target_seconds !== 300 || "target_seconds" in pnight) throw new Error("SELFTEST night journey fields");
+  if (isFail(checkPsalmNight(grief).grief_words) || isFail(checkPsalmNight(back).plan)) throw new Error("SELFTEST good grief night fails");
+  for (const line of ["She is in a better place now.", "Everything happens for a reason.", "Time heals.", "In a few months you will feel better.", "After six months it gets easier.", "Be strong for them."]) {
+    const g = buildPsalmNight(gn[1], "en", shared(gn)); g.segments[2].text += " " + line;
+    if (!isFail(checkPsalmNight(g).grief_words)) throw new Error(`SELFTEST grief wording not caught: ${line}`);
+  }
+  for (const line of ["Ella está en un lugar mejor.", "Todo pasa por algo.", "El tiempo lo cura todo.", "En unos meses te sentirás mejor.", "Sé fuerte."]) {
+    if (!isFail(checkGriefLine({ ...buildDeclarations("1 | PSA 34:18 | Hoy me duele el corazón.", "es", "gr")[0], declaration: line }, "es").grief_words)) throw new Error(`SELFTEST Spanish grief wording not caught: ${line}`);
+  }
+  const bsLen = (min) => checkPsalmNight({ ...back, est_seconds: min * 60 }).length;
+  if (bsLen(6) !== "pass" || !isFail(bsLen(11)) || !isFail(bsLen(3))) throw new Error("SELFTEST the 3 AM night is not held to 5-8 minutes");
+  try { buildPsalmNight(gn[3], "en", shared(gn)); throw new Error("SELFTEST unknown journey built"); } catch (e) { if (!String(e.message).startsWith("SRC_JOURNEY")) throw e; }
   // Imagination Night: no faith words, no Neville without the line
   const inn = parseItems(`=== _s
 text: Breathe. [pause 5]
@@ -570,7 +618,7 @@ close: s
   }
   if (finalize(buildStory(good, "plain"), {}, null, "nope").qa.first_reader.route !== "none") throw new Error("SELFTEST draft log keyed without telling");
   void parseRef; void readdirSync;
-  console.log(`OUTPUT library self-test: ${cases.length + 30} negative cases caught`);
+  console.log(`OUTPUT library self-test: ${cases.length + 44} negative cases caught`);
 }
 
 const cmd = import.meta.url === `file://${process.argv[1]}` ? process.argv[2] : "imported";
