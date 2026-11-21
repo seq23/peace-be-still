@@ -76,7 +76,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const protectedPauses = hasCallAndResponse(track);
   const untimedResponses = protectedPauses && !track.responsePauses;
   const translation = track.lang === 'es' ? 'RV1909' : 'KJV';
-  const excerptRef = shelf === 'psalms' ? track.ref : track.scriptureRef;
+  const excerptRef = track.kind === 'psalms' ? track.ref : track.scriptureRef;
   const [excerpt, setExcerpt] = useState<{ track: Track; verse: Verse } | null>(null);
   const verse = excerpt?.track === track ? excerpt.verse : null;
   useEffect(() => {
@@ -157,7 +157,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         </View>
         {verse && <View style={styles.verse}>
           <ScriptureText text={verse.text} style={styles.verseText} testID="scripture-text" />
-          <Text style={styles.reference}>{shelf === 'psalms' ? `${trackTitle(track, t.locale)}:${verse.verse}` : formatReference(verse, t.locale)} · {translation}</Text>
+          <Text style={styles.reference}>{track.kind === 'psalms' ? `${trackTitle(track, t.locale)}:${verse.verse}` : formatReference(verse, t.locale)} · {translation}</Text>
         </View>}
         {untimedResponses && <View style={styles.responses}>
           <Text style={styles.note}>{t('listen.respondDuringPauses')}</Text>

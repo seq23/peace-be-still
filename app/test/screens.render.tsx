@@ -580,7 +580,8 @@ test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor 
     assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: track.sha256 } }]);
   };
   const psalmShelf = host(tree, 'Pressable').find(node => textOf(node).startsWith(en['journey.psalmNights.name'] + ' '));
-  const count = audioTracks.filter(track => track.kind === 'psalms' && track.lang === 'en').length;
+  // The shelf holds the whispered KJV Psalms and the Psalm Nights sleep sessions.
+  const count = audioTracks.filter(track => (track.kind === 'psalms' || track.kind === 'psalm-night') && track.lang === 'en').length;
   assert.ok(psalmShelf && textOf(psalmShelf).includes(i18n.t('listen.whisperedNights', { locale: 'en', count })));
   const cardRow = psalmShelf.findAll(node => (node.type as unknown) === 'View' && node.props.style?.flexDirection === 'row')[0];
   assert.ok(cardRow, 'The shelf details and chevron should share a horizontal row');
