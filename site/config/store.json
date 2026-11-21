@@ -5,5 +5,95 @@
   "es_listing_spanish_legal": true,
   "es_listing_spanish_legal_why": "ON since the owner's yes on 20 Nov 2026 (commit f26135d): the es-MX store listing links the Spanish legal pages (/es/privacidad, /es/terminos), and the release gate fails if store/listing-es.md disagrees. To go back to the English pages marked (en inglés): npm run store:set -- --es-legal off, then land the PR as usual.",
   "app_store_pt": null,
-  "app_store_pt_why": "Her App Store Connect provider token (App Analytics > Campaigns): with it, each page's ct= tag on the App Store link is credited to that page. null until she sets it; the ct tag is on the links either way."
+  "app_store_pt_why": "Her App Store Connect provider token (App Analytics > Campaigns): with it, each page's ct= tag on the App Store link is credited to that page. null until she sets it; the ct tag is on the links either way.",
+  "custom_pages_why": "Apple custom product pages (App Store Connect, 21 Nov 2026). paths: exact landing pages (a trailing slash means that folder's index.html) whose App Store link opens the page (?ppid=), next to the page's own ct= tag. prefixes: a whole folder (the Spanish site). waiting_on_pr85: pages PR #85 adds; the test fails once they exist so they move to paths. Unlisted pages link the default product page. Only used once app_store_url is set.",
+  "custom_pages": [
+    {
+      "page": "hush-harbor",
+      "ppid": "24801b20-7b5b-47ce-81b5-75f38079dc3f",
+      "paths": [
+        "black-bible-chat/",
+        "black-bible-app/",
+        "bible-app-for-women/",
+        "questions/african-american-bible/",
+        "questions/black-bible-verses/",
+        "questions/black-christian/",
+        "questions/black-history-in-the-bible/",
+        "questions/black-people-in-the-bible/",
+        "questions/hush-harbor/",
+        "questions/was-bathsheba-black-in-the-bible/",
+        "questions/was-jesus-black-in-the-bible/",
+        "questions/was-samson-black-in-the-bible/",
+        "questions/who-are-black-people-in-the-bible/",
+        "questions/who-is-black-in-the-bible/",
+        "questions/daily-devotional-for-black-woman/",
+        "questions/free-daily-devotional-for-black-women/",
+        "questions/bible-stories-for-adults/"
+      ]
+    },
+    {
+      "page": "psalm-nights",
+      "ppid": "4a6c0868-3270-4b00-9661-1fae58d06f0d",
+      "paths": [
+        "questions/psalms-for-sleep/",
+        "questions/bible-verses-for-sleep/",
+        "questions/bible-verses-for-sleep-and-anxiety/",
+        "questions/bible-verses-for-sleepless-nights/",
+        "questions/bible-verses-for-anxiety/",
+        "questions/prayer-for-sleep/",
+        "questions/psalm-23-sleep-meditation/",
+        "questions/psalm-91-prayer-for-sleep/",
+        "questions/bedtime-prayer/",
+        "questions/bedtime-prayer-for-adults/",
+        "questions/what-is-the-bible-verse-for-sleep-prayer/",
+        "questions/bedtime-bible-stories/"
+      ]
+    },
+    {
+      "page": "whispered-bible",
+      "ppid": "bbc9e16c-da97-47dc-98d5-758642c2897e",
+      "paths": [
+        "questions/bible-asmr/",
+        "questions/whispered-bible-for-sleep/"
+      ]
+    },
+    {
+      "page": "imagination-nights",
+      "ppid": "9c612e62-45f0-4dcc-965d-aabfc6b98dfa",
+      "paths": [
+        "questions/law-of-assumption-sleep-meditation/"
+      ]
+    },
+    {
+      "page": "grief",
+      "ppid": "0c89f8e1-c5b6-4355-937d-af27c07ea8e3",
+      "paths": [],
+      "waiting_on_pr85": [
+        "questions/bible-verses-for-grief/",
+        "es/preguntas/versiculos-para-el-duelo/"
+      ]
+    },
+    {
+      "page": "mi-refugio",
+      "ppid": "5024fe1b-bc53-44f3-b837-af95f26bc385",
+      "paths": [],
+      "prefixes": [
+        "es/"
+      ]
+    },
+    {
+      "page": "morning-word",
+      "ppid": "4887be8a-83b8-4b18-a3b6-3e93766d0240",
+      "paths": [
+        "questions/daily-bible-declarations/"
+      ]
+    },
+    {
+      "page": "young-faith",
+      "ppid": "210c4cf6-e468-401b-b5af-2b2f90f12903",
+      "paths": [
+        "bible-app-for-teens/"
+      ]
+    }
+  ]
 }

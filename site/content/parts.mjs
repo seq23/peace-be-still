@@ -84,10 +84,23 @@ export const langOf = (html) => {
   const l = (String(html).match(/<html lang="(\w+)"/) || [])[1];
   return LANGS.includes(l) ? l : "en";
 };
-export function storeCtaHtml(lang, store = storeConfig(), source = "") {
+/** The App Store link for a page (its path under site/public): the page's custom product page when
+ *  store.json custom_pages lists it (an exact path first, then the longest folder prefix), otherwise the
+ *  default product page. The ct= tag is added on top by tagged(). */
+export function appStoreHref(store, page = "") {
+  if (!store.app_store_url) return null;
+  const path = String(page).replace(/^\/+/, "").replace(/(?:^|\/)index\.html$/, (m) => (m.startsWith("/") ? "/" : ""));
+  const pages = store.custom_pages || [];
+  const exact = pages.find((c) => [...(c.paths || []), ...(c.waiting_on_pr85 || [])].includes(path));
+  const prefix = exact ? null : pages.flatMap((c) => (c.prefixes || []).map((pre) => ({ pre, c }))).filter((x) => path.startsWith(x.pre)).sort((x, y) => y.pre.length - x.pre.length)[0]?.c;
+  const hit = exact || prefix;
+  return hit ? `${store.app_store_url}${store.app_store_url.includes("?") ? "&" : "?"}ppid=${hit.ppid}` : store.app_store_url;
+}
+
+export function storeCtaHtml(lang, store = storeConfig(), source = "", page = "") {
   const t = CTA[LANGS.includes(lang) ? lang : "en"];
   const ios = store.app_store_url
-    ? `<a class="store-badge" href="${tagged(store.app_store_url, store, "ios", source)}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
+    ? `<a class="store-badge" href="${tagged(appStoreHref(store, page), store, "ios", source)}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
     : `<span class="store-soon">${t.iosSoon}</span>`;
   const play = store.play_url
     ? `<a class="store-badge" href="${tagged(store.play_url, store, "play", source)}"><img src="/brand/stores/google-play-${lang === "es" ? "es" : "en"}.png" alt="${t.playAlt}" width="135" height="52"></a>`

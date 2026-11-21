@@ -18,7 +18,7 @@ export function applyCta() {
       const s = readFileSync(p, "utf8");
       if (!s.includes("<!-- cta:start -->")) continue;
       // The privacy lead (home hero, the Bible chat pages) comes from the same strings as the app.
-      const out = s.replace(/<!-- claim:start -->[\s\S]*?<!-- claim:end -->/g, `<!-- claim:start -->${claimHtml(langOf(s))}<!-- claim:end -->`).replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, storeCtaHtml(langOf(s), storeConfig(), sourceOf(p.slice(pub.length))));
+      const out = s.replace(/<!-- claim:start -->[\s\S]*?<!-- claim:end -->/g, `<!-- claim:start -->${claimHtml(langOf(s))}<!-- claim:end -->`).replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, storeCtaHtml(langOf(s), storeConfig(), sourceOf(p.slice(pub.length)), p.slice(pub.length)));
       if (out !== s) writeFileSync(p, out);
       n++;
     }

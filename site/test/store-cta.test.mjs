@@ -1,9 +1,9 @@
 // The store call to action: one component, driven by site/config/store.json (owner 18 Nov 2026).
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { claimHtml, storeCtaHtml, storeConfig, langOf, sourceOf } from "../content/parts.mjs";
+import { appStoreHref, claimHtml, storeCtaHtml, storeConfig, langOf, sourceOf } from "../content/parts.mjs";
 
 const IOS = "https://apps.apple.com/us/app/peace-be-still/id1234567890";
 const PLAY = "https://play.google.com/store/apps/details?id=com.example.pbs";
@@ -46,7 +46,7 @@ test("every built page carries the CTA only from the component, up to date with 
     const s = readFileSync(p, "utf8");
     const lang = langOf(s);
     const blocks = s.match(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g) || [];
-    for (const b of blocks) assert.equal(b, storeCtaHtml(lang, store, sourceOf(p.slice(pub.length))), `${p}: stale or hand-edited CTA (run node site/scripts/apply-cta.mjs)`);
+    for (const b of blocks) assert.equal(b, storeCtaHtml(lang, store, sourceOf(p.slice(pub.length)), p.slice(pub.length)), `${p}: stale or hand-edited CTA (run node site/scripts/apply-cta.mjs)`);
     const outside = s.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, "");
     assert.doesNotMatch(outside, /store-badge|store-soon|\/brand\/stores\/|id="waitlist"|#waitlist|action="\/api\/waitlist"/, `${p}: a CTA or waitlist outside the component`);
     if (blocks.length) withCta++;
@@ -78,4 +78,37 @@ test("each page's store links name the page that sent the buyer", () => {
   assert.equal(sourceOf("index.html"), "home");
   assert.equal(sourceOf("es/index.html"), "es");
   assert.doesNotMatch(storeCtaHtml("en", store), /ct=|referrer=/); // a link with no page says nothing
+});
+
+test("a landing page's App Store link opens its custom product page and names the page, in one link", () => {
+  const store = { app_store_url: "https://apps.apple.com/us/app/peace-be-still/id1", play_url: null, app_store_pt: "123", custom_pages: [
+    { page: "grief", ppid: "g-1", paths: ["questions/bible-verses-for-grief/"] },
+    { page: "mi-refugio", ppid: "m-1", paths: [], prefixes: ["es/"] },
+    { page: "hush-harbor", ppid: "h-1", paths: ["questions/who-is-black-in-the-bible/"] },
+  ] };
+  const rel = "questions/bible-verses-for-grief/index.html";
+  assert.match(storeCtaHtml("en", store, sourceOf(rel), rel), /href="https:\/\/apps\.apple\.com\/us\/app\/peace-be-still\/id1\?ppid=g-1&pt=123&ct=questions-bible-verses-for-grief&mt=8"/);
+  // Exact paths only: a sibling page with the same start does not inherit the mapping.
+  assert.equal(appStoreHref(store, "questions/who-is-black-in-the-bible-really/index.html"), store.app_store_url);
+  assert.equal(appStoreHref(store, "questions/hallow-app-cost/index.html"), store.app_store_url);
+  // A folder prefix covers the Spanish site; an exact path beats it.
+  assert.equal(appStoreHref(store, "es/preguntas/salmos-para-dormir/index.html"), `${store.app_store_url}?ppid=m-1`);
+  assert.equal(appStoreHref({ ...store, app_store_url: null }, rel), null);
+});
+
+test("every custom product page mapping lands on a real page", () => {
+  const pub = new URL("../public/", import.meta.url).pathname;
+  const { custom_pages: pages } = storeConfig();
+  assert.equal(pages.length, 8);
+  let checked = 0;
+  for (const c of pages) {
+    assert.match(c.ppid, /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/, c.page);
+    for (const path of c.paths) { assert.ok(existsSync(join(pub, path, "index.html")), `${c.page}: ${path} is not a page`); checked++; }
+    for (const pre of c.prefixes || []) { assert.ok(statSync(join(pub, pre)).isDirectory(), `${c.page}: ${pre}`); checked++; }
+    // Pages PR #85 adds: once they exist, they move to paths (this fails until they do).
+    for (const path of c.waiting_on_pr85 || []) assert.ok(!existsSync(join(pub, path, "index.html")), `${c.page}: ${path} exists now; move it to paths`);
+    const rel = c.paths[0] ? `${c.paths[0]}index.html` : null;
+    if (rel) assert.match(appStoreHref({ ...storeConfig(), app_store_url: "https://apps.apple.com/app/id1" }, rel), new RegExp(`ppid=${c.ppid}$`), c.page);
+  }
+  assert.ok(checked >= 20, `only ${checked} mappings checked`);
 });
