@@ -275,8 +275,14 @@ def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> l
     not yet in the manifest, each in plan order. Passed files and files out of tries are skipped. Pure."""
     last = latest(rows)
     mine = [i for i in items if not only or key(i).startswith(only)]
-    retry = [i for i in mine if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
-    return retry + [i for i in mine if key(i) not in last]
+    # The sleep sessions (the paid core, 21 Nov 2026) are never queued behind retries planned after them:
+    # retry-first applies within the part of the plan up to the last session, then within the rest.
+    cut = max((n + 1 for n, i in enumerate(mine) if i.get("kind") in SESSION_KINDS), default=0)
+
+    def part(xs):
+        retry = [i for i in xs if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
+        return retry + [i for i in xs if key(i) not in last]
+    return part(mine[:cut]) + part(mine[cut:])
 
 
 def given_up(items: list, rows: list[dict], key=_file) -> list[str]:
