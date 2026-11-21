@@ -120,7 +120,7 @@ N: Shepherds were working people, Church. They slept outdoors with the sheep. Of
 S: LUK 2:9
 S: LUK 2:10
 S: LUK 2:11
-C: When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: "Hallelujah"] Hallelujah. [PAUSE 3s | screen: "Glory"] Good news came to working people on a working night.
+C: When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: "Hallelujah"] I said, glory. [PAUSE 3s | screen: "Hallelujah"] Good news came to working people on a working night.
 N: Good news of great joy, for all people. Not just the important or the powerful. All people, starting with shepherds out on a hillside in the dark.
 N: The angel told them how they would know him. They would find a newborn baby, wrapped up snug and lying in a manger.
 S: LUK 2:13
@@ -152,7 +152,7 @@ N: Barak gathered his ten thousand, and Deborah went up with him. When Sisera he
 S: JDG 4:14 @deborah until "So Barak went"
 N: Up. This is the day. Deborah did not hesitate. She saw what God was doing and told Barak to move. And Barak went down from Mount Tabor with ten thousand men behind him.
 S: JDG 4:15
-C: When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: "Yes he will"] Yes he will. [PAUSE 3s | screen: "Won’t he do it?"] Twenty years of iron chariots, and the LORD went out before them.
+C: When I say won't he do it, you say, yes he will. Won't he do it? [PAUSE 3s | screen: "Yes he will"] I said, won't he do it? [PAUSE 3s | screen: "Yes he will"] Twenty years of iron chariots, and the LORD went out before them.
 N: The LORD threw Sisera's great army into confusion. Those chariots that had scared Israel for twenty years were no help now. Sisera himself jumped down from his chariot and ran away on foot, and Barak's men chased the army down.
 N: When it was over, Deborah and Barak sang together. Their song is one of the oldest in the whole Bible.
 S: JDG 5:3 @deborah whole

@@ -223,7 +223,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say whose battle is it, you say, the LORD's. Whose battle is it? [PAUSE 3s | screen: \"The LORD’s\"] The LORD's. [PAUSE 3s | screen: \"Whose battle is it?\"] That is what David told the giant.",
+   "text": "When I say whose battle is it, you say, the LORD's. Whose battle is it? [PAUSE 3s | screen: \"The LORD’s\"] I said, whose battle is it? [PAUSE 3s | screen: \"The LORD’s\"] That is what David told the giant.",
    "pauses": [
     {
      "seconds": 3,
@@ -231,7 +231,7 @@
     },
     {
      "seconds": 3,
-     "screen": "Whose battle is it?"
+     "screen": "The LORD’s"
     }
    ]
   },
@@ -251,8 +251,8 @@
   "file": null,
   "qa": null
  },
- "words": 574,
- "est_seconds": 319,
+ "words": 578,
+ "est_seconds": 321,
  "qa": {
   "gate_version": "library-1",
   "checks": {

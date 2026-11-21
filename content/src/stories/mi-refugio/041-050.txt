@@ -270,7 +270,7 @@ shelf: adult
 violence: none
 sexual: none
 cast: magi|magos|adult|group; herod|Herodes|adult|m
-N: Después del nacimiento de Jesús, muy lejos de Bethlehem, en las tierras del oriente, unos hombres sabios que estudiaban las estrellas vieron algo nuevo en el cielo. Entendieron que había nacido un rey. Y emprendieron un largo viaje para conocerlo.
+N: Después del nacimiento de Jesús, muy lejos de Belén, en las tierras del oriente, unos hombres sabios que estudiaban las estrellas vieron algo nuevo en el cielo. Entendieron que había nacido un rey. Y emprendieron un largo viaje para conocerlo.
 S: MAT 2:1
 S: MAT 2:2 @magi after "Diciendo: "
 C: Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] Bueno con los que vinieron de lejos buscando a Jesús.
@@ -279,7 +279,7 @@ S: MAT 2:3
 N: Herodes se asustó. Él era el rey, y no quería que hubiera otro. Y con él se turbó toda Jerusalén.
 S: MAT 2:4-5
 S: MAT 2:6
-N: Los sacerdotes sabían la respuesta. Estaba escrita en sus Escrituras desde hacía siglos. Bethlehem. Pero ninguno de ellos fue a buscar al niño. Los que vinieron de lejos fueron los que se pusieron en camino.
+N: Los sacerdotes sabían la respuesta. Estaba escrita en sus Escrituras desde hacía siglos. Belén. Pero ninguno de ellos fue a buscar al niño. Los que vinieron de lejos fueron los que se pusieron en camino.
 S: MAT 2:7
 S: MAT 2:8 @herod after "dijo: "
 N: Herodes dijo que también quería adorarlo. Pero no era verdad. Tenía otros planes en el corazón.

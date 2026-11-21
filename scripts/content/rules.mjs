@@ -19,7 +19,7 @@ export const NEVER = rx([
 export const MINDSET = rx([
   "\\bthe universe\\b", "\\bvibration\\w*", "\\benerg(?:y|ies)\\b", "law of (?:attraction|assumption)", "\\bneville\\b",
   "abundance mindset", "\\bkarma\\b", "\\bchakras?\\b", "\\bauras?\\b", "\\bcrystals?\\b", "\\bmantras?\\b", "higher self",
-  "\\bthe source\\b", "\\balign\\w*", "\\battract\\w*", "\\bvisuali[sz]\\w*", "\\bmindset\\b",
+  "\\bthe source\\b", "\\balign\\w*", "\\battract\\w*", "\\bvisuali[sz]\\w*", "\\bmindset\\b", "\\bassumption\\b", "\\bsats\\b", "imagination nights",
   "\\bel universo\\b", "\\bvibraci\\w+", "\\benerg[íi]as?\\b", "ley de (?:la )?atracci[óo]n", "\\bcristales\\b",
 ]);
 // S08: eye dialect and slang pastiche (never in any voice).
@@ -45,7 +45,7 @@ export const SPLIT = rx(["baptis\\w*", "\\btongues\\b", "predestin\\w*", "\\brap
 export const SPAIN = rx(["\\bvosotr[oa]s\\b", "\\bos\\b", "\\bsois\\b", "\\bhab[ée]is\\b", "\\b(?!(?:dieci|veinti)séis\\b)\\p{L}{2,}(?:áis|éis)\\b", "\\bvale[,.!]", "\\bcog(?:er|e|es|ió|ido)\\b", "\\bordenador\\w*", "\\bm[óo]vil\\b", "\\bvuestr[oa]s?\\b"]);
 export const ENGLISH = rx(["\\bthe\\b", "\\band\\b", "\\bwith\\b", "\\byou\\b", "\\byour\\b", "\\bof\\b", "\\bthat\\b", "\\bnight\\b", "\\blord\\b"]);
 // Mindset door (Imagination Nights): no God's Word cross-links, no scripture, no Neville without the disclaimer.
-export const FAITH_LINK = rx(["hush harbor", "psalm nights", "mi refugio", "young faith", "\\bkjv\\b", "\\bscripture\\b", "\\bbible\\b"]);
+export const FAITH_LINK = rx(["hush harbor", "psalm nights", "mi refugio", "young faith", "\\bkjv\\b", "\\bscripture\\b", "\\bbible\\b", "\\bgod\\b", "\\bpsalms?\\b", "\\bprayer\\b", "\\bchurch\\b", "\\bjesus\\b", "\\bverse\\b", "king james"]);
 // The characters never voiced: words of God (and of Jesus) are read by the narrator as quoted scripture.
 // Narration markers that must never sit inside a character's voice.
 export const NARRATION = {
@@ -128,6 +128,14 @@ function scriptureBlock(b, lang) {
 }
 
 // ---------------------------------------------------------------- stories (S01-S15 code part)
+// Every line on screen is the listener's answer: the same response both times, except the one call churches
+// really turn around (COMMON.md: "God is good" / "All the time", both directions; Spanish the same).
+const TURNS = new Set(["all the time|god is good", "god is good|all the time", "all the time|god is faithful", "todo el tiempo|dios es bueno", "dios es bueno|todo el tiempo"]);
+const norm = (x) => String(x).toLowerCase().replace(/[’']/g, "'").replace(/[?.!¡¿]/g, "").trim();
+function callAnswersOnly(blk) {
+  const [a, b] = blk.pauses.map((p) => norm(p.screen));
+  return a === b || TURNS.has(`${a}|${b}`);
+}
 export function checkStory(s) {
   const lang = s.lang, tr = TRANSLATION[lang];
   const ret = s.blocks.filter((b) => b.type === "retelling" || b.type === "call_response");
@@ -206,6 +214,7 @@ export function checkStory(s) {
     c.call_response = cr.length !== 1 ? fail(`${cr.length} call-and-response blocks (exactly one)`)
       : calls ? fail("a call-out outside the call-and-response block")
       : blk.pauses.length < 2 || blk.pauses.some((p) => p.seconds < 3 || !p.screen) ? fail("call and response needs two 3 s pauses with screen text")
+      : !callAnswersOnly(blk) ? fail("the listener is asked to say the call back; only God is good / all the time turns around")
       : i === s.blocks.length - 1 ? fail("call and response is the last paragraph")
       : i < firstVerse ? fail("call and response comes before the first verse")
       : pass;

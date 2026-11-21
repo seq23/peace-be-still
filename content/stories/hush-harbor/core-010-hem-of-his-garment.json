@@ -278,7 +278,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: \"Hallelujah\"] Hallelujah. [PAUSE 3s | screen: \"Glory\"] Twelve years, and one hand reaching in faith.",
+   "text": "When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: \"Hallelujah\"] I said, glory. [PAUSE 3s | screen: \"Hallelujah\"] Twelve years, and one hand reaching in faith.",
    "pauses": [
     {
      "seconds": 3,
@@ -286,7 +286,7 @@
     },
     {
      "seconds": 3,
-     "screen": "Glory"
+     "screen": "Hallelujah"
     }
    ]
   },
@@ -301,8 +301,8 @@
   "file": null,
   "qa": null
  },
- "words": 489,
- "est_seconds": 273,
+ "words": 491,
+ "est_seconds": 274,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -321,7 +321,7 @@
    "speakers": "pass",
    "voice_segments": "pass",
    "S10_shelf": "pass",
-   "S11_length": "note: 489 words outside 500-900 words",
+   "S11_length": "note: 491 words outside 500-900 words",
    "S11_sentence_length": "pass",
    "S11_reading_level": "note: grade 2.9",
    "no_invented_memories": "pass",

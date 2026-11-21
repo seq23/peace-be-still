@@ -56,7 +56,7 @@ N: Job lived in the land of Uz. Seven sons and three daughters. Flocks and herds
 N: Then one day, it all came apart. One messenger after another came running. Raiders took the oxen and the donkeys. Fire fell and burned up the sheep. The camels were gone. And while one man was still talking, another came with the worst news a parent can hear. A great wind had hit the house where Job's children were gathered, and they had died.
 N: Job stood up and tore his robe. He shaved his head. He fell down on the ground. And Church, he worshipped.
 S: JOB 1:21 @job
-C: When I say blessed be, you say, the name of the LORD. Blessed be. [PAUSE 3s | screen: "The name of the LORD"] The name of the LORD. [PAUSE 3s | screen: "Blessed be"] Job said it on the worst day of his life.
+C: When I say blessed be, you say, the name of the LORD. Blessed be. [PAUSE 3s | screen: "The name of the LORD"] I said, blessed be. [PAUSE 3s | screen: "The name of the LORD"] Job said it on the worst day of his life.
 S: JOB 1:22
 N: Job was not pretending it did not hurt. He tore his robe. He sat in the dirt. But in the middle of the worst day of his life, he still turned his face toward God.
 N: Then Job's own body broke out in sores from the bottom of his feet to the top of his head. He sat down in the ashes. Three friends heard about it and came to comfort him. When they saw him, they hardly knew him. They cried out loud.
@@ -185,7 +185,7 @@ N: He told them to hurry home and bring their daddy and their families down to l
 N: Years later, after Jacob died, those brothers got scared again. They wondered if Joseph had only been kind because of their father. They sent word asking him to forgive them, and they came and fell down before him.
 S: GEN 50:19 @joseph
 S: GEN 50:20 @joseph
-C: When I say they meant it for evil, you say, God meant it for good. They meant it for evil. [PAUSE 3s | screen: "God meant it for good"] God meant it for good. [PAUSE 3s | screen: "They meant it for evil"] That is what Joseph told his brothers.
+C: When I say they meant it for evil, you say, God meant it for good. They meant it for evil. [PAUSE 3s | screen: "God meant it for good"] I said, they meant it for evil. [PAUSE 3s | screen: "God meant it for good"] That is what Joseph told his brothers.
 S: GEN 50:21 @joseph until "And he comforted"
 N: You meant evil, Joseph said, but God meant good. Church, his forgiveness did not deny the harm. It held the harm and the hope side by side, and it chose to take care of the ones who had hurt him. He comforted them, and he spoke kindly to them. Somebody needs to hear that tonight.
 

@@ -258,7 +258,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say he was lost, you say, and is found. He was lost. [PAUSE 3s | screen: \"And is found\"] And is found. [PAUSE 3s | screen: \"He was lost\"] That is a father’s joy.",
+   "text": "When I say he was lost, you say, and is found. He was lost. [PAUSE 3s | screen: \"And is found\"] I said, he was lost. [PAUSE 3s | screen: \"And is found\"] That is a father’s joy.",
    "pauses": [
     {
      "seconds": 3,
@@ -266,7 +266,7 @@
     },
     {
      "seconds": 3,
-     "screen": "He was lost"
+     "screen": "And is found"
     }
    ]
   },
@@ -356,8 +356,8 @@
   "file": null,
   "qa": null
  },
- "words": 609,
- "est_seconds": 338,
+ "words": 611,
+ "est_seconds": 339,
  "qa": {
   "gate_version": "library-1",
   "checks": {
