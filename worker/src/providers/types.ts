@@ -11,7 +11,9 @@ export class RungError extends Error {
 /** cached: input tokens served from the route's prompt cache (part of in). */
 /** usd: what the route itself billed for the call (OpenRouter's usage.cost), when it says. */
 export type Usage = { in: number; out: number; think: number; cached?: number; usd?: number };
-export type Rung = (messages: Message[], schema: JsonSchema, maxTokens: number, onUsage?: (u: Usage) => void) => Promise<unknown>;
+/** timeoutMs: one HTTP try's limit (default CHAT_TIMEOUT_MS). Made for you, a background queue, passes its own longer one. */
+export type Rung = (messages: Message[], schema: JsonSchema, maxTokens: number, onUsage?: (u: Usage) => void, timeoutMs?: number) => Promise<unknown>;
+export const CHAT_TIMEOUT_MS = 25_000;
 export function parseJson(value: unknown): unknown {
   if (value && typeof value === 'object') return value;
   if (typeof value !== 'string') throw new RungError('malformed', 'NO_CONTENT');
@@ -28,14 +30,14 @@ const TRANSIENT = new Set([500, 502, 503, 504]);
  * tried again after a short backoff (up to `retries` times). A 429 whose body says the DAILY quota
  * is used up is 'exhausted' at once (no retry): that is the only 429 that means "out for today".
  */
-export async function httpJson(url: string, init: RequestInit, opts: { retries?: number; daily?: RegExp } = {}): Promise<unknown> {
+export async function httpJson(url: string, init: RequestInit, opts: { retries?: number; daily?: RegExp; timeoutMs?: number } = {}): Promise<unknown> {
   const retries = opts.retries ?? 1;
   const daily = opts.daily ?? /PerDay|per day|per-day|daily/i;
   let last: RungError = new RungError('failed', 'NETWORK');
   for (let attempt = 0; attempt <= retries; attempt++) {
     if (attempt) await sleep(backoff.ms(attempt));
     let res: Response;
-    try { res = await fetch(url, { ...init, signal: AbortSignal.timeout(25_000) }); } catch { last = new RungError('failed', 'NETWORK'); continue; }
+    try { res = await fetch(url, { ...init, signal: AbortSignal.timeout(opts.timeoutMs ?? CHAT_TIMEOUT_MS) }); } catch { last = new RungError('failed', 'NETWORK'); continue; }
     if (res.ok) {
       try { return await res.json(); } catch { throw new RungError('malformed', 'NOT_JSON'); }
     }

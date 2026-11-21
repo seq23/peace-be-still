@@ -33,7 +33,16 @@ function clock(seconds: number) {
   return [Math.floor(seconds / 60), String(Math.floor(seconds % 60)).padStart(2, '0')].join(':');
 }
 
-export function NowPlaying({ track, close, autoplay = false }: { track: Track; close: () => void; autoplay?: boolean }) {
+/** The Worker signs private links for an hour (worker/src/madeForYou.storage.ts): re-sign before that. */
+export const PRIVATE_LINK_FRESH_MS = 50 * 60_000;
+
+export function NowPlaying({ track, close, privateStream, autoplay = false }: {
+  track: Track;
+  close: () => void;
+  autoplay?: boolean;
+  // A private session (made for you): its own signed URL, its own AI label (words AND voice are AI) and actions.
+  privateStream?: { label: string; aiLabel: string; footer?: React.ReactNode; url: (signal: AbortSignal) => Promise<string> };
+}) {
   const t = useT('journey');
   const { settings } = useSettings();
   const user = useOffline(settings.age);
@@ -53,23 +62,31 @@ export function NowPlaying({ track, close, autoplay = false }: { track: Track; c
   const [downloaded, setDownloaded] = useState(false);
   const [downloadFailed, setDownloadFailed] = useState(false);
   const playRequest = useRef(false);
+  const signing = useRef<AbortController | null>(null);
+  const [sourceFailed, setSourceFailed] = useState(false);
+  useEffect(() => () => signing.current?.abort(), []);
   const pausedHere = useRef(false);
+  // A private session's link is signed for an hour; a resume after 50 minutes paused signs a fresh one
+  // (the player starts from the saved position), so a long pause never ends in a 403.
+  const signedAt = useRef(0);
   const downloadRequest = useRef(false);
-  const current = state.track?.file === track.file;
+  const current = privateStream
+    ? state.track?.kind === track.kind && state.track.ref === track.ref && state.track.sha256 === track.sha256
+    : state.track?.file === track.file;
   const playing = current && state.playing;
   const response = current ? state.response : null;
   const focused = useIsFocused();
   // The 3 AM back-to-sleep night: it starts from the one button, dims at once, has no timer (it stops by itself).
   const hush = isBackToSleep(track);
   const { dimmed, touch } = useDimmer(focused && playing && response === null, hush ? HUSH_DIM_AFTER_MS : undefined);
-  const offlineAllowed = canUse('offline', user);
+  const offlineAllowed = !privateStream && canUse('offline', user);
   const saved = offlineAllowed && (downloaded || downloadAvailable(track, user));
-  const published = usePublishedAudio();
-  const canStream = !stop && !isPreviewSample(track) && published?.get(track.file) === track.sha256;
+  const published = usePublishedAudio(!privateStream);
+  const canStream = !!privateStream || (!stop && !isPreviewSample(track) && published?.get(track.file) === track.sha256);
   const unavailable = !saved && !canStream;
   const shelf = shelfOf(track);
   // Sleep sessions: the first night free, then one a week; paid, every night. The one gate decides.
-  const sleep = isSleepSession(track);
+  const sleep = !privateStream && isSleepSession(track);   // a paid private session is never night-locked
   // Nothing is locked or granted until both the night log and the store's answer are in, so a subscriber
   // never sees the free lane's lock while RevenueCat is still answering.
   const { known } = usePurchases();
@@ -95,11 +112,11 @@ export function NowPlaying({ track, close, autoplay = false }: { track: Track; c
     }).catch(() => undefined);
     return () => { active = false; };
   }, [excerptRef, track, translation]);
-  const label = shelf === 'psalms' ? t('journey.psalmNights.name')
+  const label = privateStream?.label ?? (shelf === 'psalms' ? t('journey.psalmNights.name')
     : shelf === 'imagination' ? t('journey.imaginationNights.name')
     : shelf === 'hushHarbor' ? [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')
     : shelf === 'miRefugio' ? [t('journey.miRefugio.name'), t('journey.miRefugio.subtitle')].join(' · ')
-    : shelf === 'grief' ? t('grief.name') : shelf === 'backToSleep' ? t('hush.label') : t('listen.bibleByBook');
+    : shelf === 'grief' ? t('grief.name') : shelf === 'backToSleep' ? t('hush.label') : t('listen.bibleByBook'));
   const minutes = state.sleepEndsAt === null ? null : Math.max(1, Math.ceil((state.sleepEndsAt - now) / 60_000));
   const position = current ? Math.min(track.seconds, state.position) : 0;
   const progress = Math.floor(position / track.seconds * 100);
@@ -109,13 +126,25 @@ export function NowPlaying({ track, close, autoplay = false }: { track: Track; c
     touch();
     playRequest.current = true;
     setPlayPending(true);
+    setSourceFailed(false);
     try {
       if (playing) {
         await player.pause();
         pausedHere.current = true;
-      } else if (current && pausedHere.current) {
+      } else if (current && pausedHere.current && !(privateStream && Date.now() - signedAt.current > PRIVATE_LINK_FRESH_MS)) {
         player.resume();
         pausedHere.current = false;
+      } else if (privateStream) {
+        pausedHere.current = false;
+        const controller = new AbortController();
+        signing.current = controller;
+        try {
+          const file = await privateStream.url(controller.signal);
+          signedAt.current = Date.now();
+          if (!controller.signal.aborted) await player.play({ ...track, file }, null);
+        } catch {
+          if (!controller.signal.aborted) setSourceFailed(true);
+        }
       } else {
         await player.play(track, user);
         // A night is spent only by the free lane, and only once the session really started.
@@ -123,6 +152,7 @@ export function NowPlaying({ track, close, autoplay = false }: { track: Track; c
         if (sleep && !user.paid && after.playing && !after.error && after.track?.file === track.file) nights.record(new Date());
       }
     } finally {
+      signing.current = null;
       playRequest.current = false;
       setPlayPending(false);
     }
@@ -168,7 +198,7 @@ export function NowPlaying({ track, close, autoplay = false }: { track: Track; c
         <View style={[styles.heading, !excerptRef && styles.headingAlone]}>
           <Text style={styles.tag}>{label}</Text>
           <Text accessibilityRole="header" style={styles.title}>{trackTitle(track, t.locale)}</Text>
-          <Text style={styles.note}>{t('listen.minutes', { minutes: Math.max(1, Math.round(track.seconds / 60)) })} · {t('listen.aiVoice')}</Text>
+          <Text style={styles.note}>{`${t('listen.minutes', { minutes: Math.max(1, Math.round(track.seconds / 60)) })} · ${privateStream?.aiLabel ?? t('listen.aiVoice')}`}</Text>
         </View>
         {verse && <View style={styles.verse}>
           <ScriptureText text={verse.text} style={styles.verseText} testID="scripture-text" />
@@ -196,7 +226,7 @@ export function NowPlaying({ track, close, autoplay = false }: { track: Track; c
           </View>
         </View>
         {unavailable && !nightLocked && <Text accessibilityRole="alert" style={styles.note}>{t('listen.audioNotReady')}</Text>}
-        {!unavailable && current && state.error === 'play-failed' &&
+        {!unavailable && (sourceFailed || (current && state.error === 'play-failed')) &&
           <Text accessibilityRole="alert" style={styles.note}>{t(saved ? 'listen.playFailed' : 'listen.playFailedNetwork')}</Text>}
         {nightLocked ? <View style={styles.locked}>
           <Text accessibilityRole="text" style={styles.lockedLine}>{t('listen.nextFreeNight', { day: nextNight })}</Text>
@@ -238,13 +268,14 @@ export function NowPlaying({ track, close, autoplay = false }: { track: Track; c
             ? t(shelf === 'psalms' ? 'listen.psalmWeekly' : 'listen.nightWeekly')
             : t(shelf === 'psalms' ? 'listen.psalmAllowance' : 'listen.nightAllowance')}
         </Text>}
-        {hush ? null : offlineAllowed ? (
+        {!privateStream && !hush && (offlineAllowed ? (
           <Pressable accessibilityRole="button" accessibilityState={{ busy: downloading }} style={[styles.control, styles.centered]}
             disabled={downloading || !canStream || saved} onPress={() => void download()}>
             <Text style={styles.link}>{saved ? t('listen.downloaded') : downloading ? t('listen.downloading') : t('listen.download')}</Text>
           </Pressable>
-        ) : !child && !nightLocked && <Text style={styles.note}>{t('listen.paidDownload')}</Text>}
+        ) : !child && !nightLocked && <Text style={styles.note}>{t('listen.paidDownload')}</Text>)}
         {downloadFailed && <Text accessibilityRole="alert" style={styles.note}>{t('listen.downloadFailed')}</Text>}
+        {privateStream?.footer}
       </ScrollView>
       {dimmed && response === null && <Pressable accessibilityRole="button" accessibilityLabel={t('listen.brighten')} onPress={touch} style={styles.dim} />}
       {timerOpen && <Modal visible transparent animationType="slide" onRequestClose={() => setTimerOpen(false)}>
