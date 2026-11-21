@@ -96,7 +96,7 @@ describe('variety in the chat path', () => {
 
 // Hostile review of 25c474f (F1, F2): code no longer chooses any word of an answer. Two
 // human-written answers in the voice go in ahead of the chat, rotated by a counter.
-const assistantTexts = (messages: Message[]) => messages.filter(m => m.role === 'assistant').map(m => (JSON.parse(m.content) as { text: string }).text);
+const assistantTexts = (messages: Message[]) => messages.filter(m => m.role === 'system').flatMap(m => [...m.content.matchAll(/^(?:The answer|La respuesta): (.*)$/gm)].map(x => (JSON.parse(x[1]) as { text: string }).text));
 describe('voice samples, not a code plan', () => {
   it('two samples in the right voice go in ahead of her message, and they rotate from one chat to the next', async () => {
     const a = scripted('workers-ai', [good('Loss takes time to carry, and you do not carry it alone. May the Lord keep you near.')]);
@@ -109,6 +109,8 @@ describe('voice samples, not a code plan', () => {
     expect([...first, ...second].every(t => church.includes(t))).toBe(true);
     expect(second).not.toEqual(first);
     expect(a.calls[0].at(-1)).toEqual({ role: 'user', content: 'My mama died last week.' });
+    // In one system message, never as chat turns the model could take for the conversation (run 44856144997 q14).
+    expect(a.calls[0].filter(m => m.role !== 'system')).toEqual([{ role: 'user', content: 'My mama died last week.' }]);
   });
   it('no system message tells the model a word to use (F1: "the first word is", a picture)', async () => {
     const a = scripted('workers-ai', [good('Loss takes time to carry, and you do not carry it alone. May the Lord keep you near.')]);

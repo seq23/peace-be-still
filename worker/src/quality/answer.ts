@@ -88,6 +88,7 @@ const MONEY_DENY = /\b(?:sow\w*|reap\w*|prosper\w*|desires of thine heart|borrow
 const HARD_TOPIC = / (?:died|dies|death|dead|funeral|suicide|sex|sexual|girlfriend|boyfriend|dating|crush|pregnan\w*|abuse|divorce\w*|depress\w*|anxiety|anxious|scared|afraid|bull(?:y|ied|ying)|parents fight\w*|murio|muerte|novio|novia|sexo|embaraz\w*|divorcio|miedo|ansiedad|deprim\w*) /;
 const TRUSTED = / (?:trusted adult|parent|parents|mom|dad|mother|father|counselor|pastor|youth (?:leader|pastor)|teacher|coach|adulto de confianza|tus papas|tu mama|tu papa|tus padres|consejer[oa]|maestr[oa]|lider de jovenes) /;
 
+const MINDSET_FAITH = / (?:god|gods|lord|jesus|christ|pray\w*|bible\w*|verse\w*|scripture\w*|kjv|pastor\w*|church\w*|dios|senor|jesucristo|orar|oracion\w*|biblia\w*|versiculo\w*|escritura\w*|iglesia\w*) /;
 // Hostile review of 25c474f, F4: pastor-level floors in code.
 // A question about medicine gets "talk with your doctor" (RT25 sent her only to her pastor).
 const MEDS_Q = / (?:meds|medication\w*|medicine\w*|pills|antidepressants?|prescription\w*|insulin|dose|doses|dosage|medicament\w*|medicinas?|pastillas|receta\w*|dosis) /;
@@ -109,7 +110,12 @@ const overlaps = (s: Scripture, r: Reference) => s.book === r.book && s.chapter 
 // F6/S2: "trusted adult" is for a teen; to a grown woman it is a machine tell (q07, q08).
 const TRUSTED_ADULT = / (?:trusted adult|adulto de confianza|adultos de confianza) /;
 // F1: the last sentence is whole: at least 4 words, ending in . or !, never a bare name ("…, God").
-const lastSentence = (text: string) => text.replace(/\s*\([^)]*\d+:\d+[^)]*\)\s*([.!?])?\s*$/u, '$1').trim().split(/(?<=[.!?])\s+/).at(-1) ?? '';
+// A closing "Amen." and a closing reference are not the sentence that has to be whole (run 44856144997:
+// 36 drafts were refused, most of them prayers ending "... Amen.").
+const lastSentence = (text: string) => {
+  const t = text.replace(/\s*\([^)]*\d+:\d+[^)]*\)\s*([.!?])?\s*$/u, '$1').replace(/\s+(?:(?:in (?:jesus|christ)['’]?s?(?: holy)? name,?\s*)?amen|(?:en el nombre de (?:jes[uú]s|cristo),?\s*)?am[eé]n)[.!]*["'”’)]*\s*$/iu, '').trim();
+  return t.split(/(?<=[.!?]["'”’)]*)\s+/).at(-1) ?? '';
+};
 
 // "Psalm 46:1", "1 John 4:8", "Primera de Juan 4:8", "Salmos 23:1-3", "JHN 3:16".
 const REF_IN_TEXT = /((?:[123]\s+)?(?:\p{L}+\s+){0,3}\p{L}+\.?)\s+(\d{1,3})\s*:\s*(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?/gu;
@@ -159,6 +165,8 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
     }
     if (rawRefs.length > 3) notes.push('over_3_refs');
   } else if (refsInText(text).some(r => r.book)) problems.push('scripture_in_mindset');
+  // F8: the Mindset door has no faith words at all (run 44856144997 m04: "I cannot share Bible verses").
+  if (ctx.door === 'mindset' && MINDSET_FAITH.test(norm(text))) problems.push('faith_word_in_mindset');
 
   // C01: any quoted or attributed run of 6+ words must be the stored text of a cited verse.
   const cited = scripture.map(s => ` ${fold(s.text)} `);
@@ -172,7 +180,14 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   // Her own words handed back ("Song of Solomon says love is beautiful", x16) are not a quotation:
   // a claim that starts with three words she wrote is hers, not a verse.
   const hers = ` ${fold(ctx.userText)} `;
-  for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1]) && !hers.includes(` ${words(m[1]).slice(0, 3).join(' ')} `)) problems.push('non_store_scripture');
+  // A faithful paraphrase of a verse the app prints right under it ("Psalm 34:18 says God is close to
+  // the brokenhearted") is not a made-up quotation: half its content words are that verse's own.
+  // Run 44856144997: 21 drafts were refused for exactly that shape.
+  const faithful = (run: string) => {
+    const content = words(run).filter(w => w.length > 3).map(w => w.slice(0, 4));
+    return content.length > 0 && cited.some(c => content.filter(w => c.includes(` ${w}`)).length / content.length >= 0.5);
+  };
+  for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1]) && !faithful(m[1]) && !hers.includes(` ${words(m[1]).slice(0, 3).join(' ')} `)) problems.push('non_store_scripture');
   text = text.replace(/\s+([,.;:!?])/g, '$1').replace(/\(\s*\)/g, '').replace(/\s{2,}/g, ' ').trim();
   text = tidyReferences(text);
   const archaic = words(text).filter(w => ARCHAIC.has(w)).length;
@@ -208,7 +223,7 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (ctx.lang === 'en' && FEMININE.test(n) && !WOMAN_NAMED.test(everything) && !WOMAN_NAMED.test(n.replace(/ (?:she|her|hers|herself) /g, '  '))) problems.push('assumes_gender');
   if (!ctx.teen && TRUSTED_ADULT.test(n)) problems.push('trusted_adult_for_adult');
   const end = lastSentence(text);
-  if (text && (words(end).length < 4 || !/[.!]["'”’)]*$/.test(end))) problems.push('broken_ending');
+  if (text && (words(end).length < 3 || !/[.!]["'”’)]*$/.test(end))) problems.push('broken_ending');
 
   // C12: 95%+ Spanish words outside references.
   if (ctx.lang === 'es') {

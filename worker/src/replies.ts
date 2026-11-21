@@ -22,6 +22,12 @@ const dv = {
   en: 'Please reach out to the National Domestic Violence Hotline: call 1-800-799-7233 or text START to 88788, any time. What is happening to you is not your fault, and God does not ask you to stay in harm.',
   es: 'Por favor, comunícate con la Línea Nacional contra la Violencia Doméstica: llama al 1-800-799-7233 o envía START al 88788, a cualquier hora. Lo que te está pasando no es tu culpa, y Dios no te pide que te quedes donde te hacen daño.',
 };
+// An adult dating a teen (run 44856144997 x12: the reply never said plainly it is wrong).
+const groomed = {
+  en: 'An adult who dates or touches someone your age is doing something wrong, even when it feels like love.',
+  es: 'Un adulto que tiene una relación de pareja con alguien de tu edad está haciendo algo malo, aunque se sienta como amor.',
+};
+const DATING = / (?:boyfriend|girlfriend|dating|date|in love|relationship|novio|novia|saliendo|enamorad\w*|relacion) /;
 const childhelp = {
   en: 'Please call or text the Childhelp hotline at 1-800-422-4453, any time. What is happening is not your fault.',
   es: 'Por favor, llama o envía un texto a la línea de Childhelp al 1-800-422-4453, a cualquier hora. Lo que está pasando no es tu culpa.',
@@ -113,7 +119,7 @@ export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '
   const child = kind === 'child_abuse' || (kind === 'abuse' && band === 'teen');
   const parts = kind === 'selfharm'
     ? [open[lang], lifeline[lang], danger[lang]]
-    : [open[lang], child ? childhelp[lang] : mind ? dvMindset[lang] : dv[lang], alsoLifeline[lang], danger[lang]];
+    : [open[lang], ...(child && band === 'teen' && DATING.test(` ${herText.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ')} `) ? [groomed[lang]] : []), child ? childhelp[lang] : mind ? dvMindset[lang] : dv[lang], alsoLifeline[lang], danger[lang]];
   if (band === 'teen') parts.push(kind === 'selfharm' ? trust[lang] : trustedSafe[lang]);
   parts.push(close[lang]);
   return parts.join(' ');
@@ -175,17 +181,19 @@ export function fallbackTopic(text: string, teen: boolean): Topic | null {
   if (/ (?:ignore (?:all|your|the|previous|prior|these)|system prompt|you are now|you are dan|new rules|developer mode|pretend (?:to be|you are)|jailbreak|olvida (?:tus|las) reglas|ahora eres|nuevas reglas) /.test(t)) return 'jailbreak';
   if (/ (?:curse|cuss|cussing|swear word|swear words|bad word|bad words|say a (?:bad|dirty) word|groseria\w*|maldicion\w*|palabrota\w*|mala palabra) /.test(t)) return 'cursing';
   if (teen && / (?:died|dies|dead|death|passed away|killed|funeral|murio|fallecio|muerte|se mato) /.test(t)) return 'teen_grief';
-  if (/ (?:seed|sow|sowing|tithe\w*|offering|debt\w*|rent|bills?|broke|money|semilla|sembrar|diezmo\w*|ofrenda|deuda\w*|renta|dinero) /.test(t)) return 'money';
+  // Only a seed, a tithe or a prayer to make a debt vanish (RT16, RT17): a lost job or a question about
+  // a psalm is answered by the model (run 44856144997: q03 and q04 got this text and failed).
+  if (/ (?:seed|sow|sowing|tithe\w*|offering|semilla|sembrar|diezmo\w*|ofrenda) /.test(t) || / (?:pray|praying|ora|orar|oren) (?:\w+ ){0,3}(?:debt|debts|bills?|deuda\w*|cuentas) (?:away|go|gone|disappear|desaparec\w*)/.test(t)) return 'money';
   return null;
 }
 export const topicText: Record<Topic, Record<Lang, string>> = {
   teen_grief: {
-    en: "I'm so sorry. Losing a friend like this is one of the hardest things there is, and it is okay to be angry, numb or full of questions. You can tell God exactly how you feel; the Psalms are full of people who did. Please talk with someone who can sit with you in this, like a parent, a school counselor or your youth pastor. Lord, stay close to this grief and to every heart that is broken by it.",
-    es: 'Lo siento mucho. Perder a un amigo así es de lo más difícil que hay, y está bien sentir enojo, vacío o muchas preguntas. Puedes decirle a Dios exactamente cómo te sientes; los Salmos están llenos de personas que lo hicieron. Por favor, habla con alguien que pueda acompañarte en esto, como tu mamá o tu papá, un consejero de la escuela o tu líder de jóvenes. Señor, quédate cerca de este dolor y de cada corazón que hoy está roto.',
+    en: "I'm so sorry. Losing a friend like this is one of the hardest things there is, and it is okay to be angry, numb or full of questions, even angry with God. You can tell Him exactly how you feel; the Psalms are full of people who did (Psalm 13 is one). Please talk with someone who can sit with you in this, like a parent, a school counselor or your youth pastor. Lord, stay close to this grief and to every heart that is broken by it.",
+    es: 'Lo siento mucho. Perder a un amigo así es de lo más difícil que hay, y está bien sentir enojo, vacío o muchas preguntas, incluso enojo con Dios. Puedes decirle exactamente cómo te sientes; los Salmos están llenos de personas que lo hicieron (el Salmo 13 es uno). Por favor, habla con alguien que pueda acompañarte en esto, como tu mamá o tu papá, un consejero de la escuela o tu líder de jóvenes. Señor, quédate cerca de este dolor y de cada corazón que hoy está roto.',
   },
   money: {
-    en: "Money pressure is real, and God cares about the rent and the bills, not only about the big questions. Giving is never a way to buy a blessing; God is not paid to help you. Today, write down what is due and when, and call the people you owe to ask about a plan; many churches and local programs also help with rent and utilities. Lord, give wisdom for the next step and peace for the waiting.",
-    es: 'La presión del dinero es real, y a Dios le importan la renta y las cuentas, no solo las grandes preguntas. Dar nunca es una forma de comprar una bendición; a Dios no se le paga para que ayude. Hoy, anota lo que debes y para cuándo, y llama a quienes les debes para pedir un plan; muchas iglesias y programas locales también ayudan con la renta y los servicios. Señor, danos sabiduría para el siguiente paso y paz mientras esperamos.',
+    en: "God cares about the bills and the deadline, not only about the big questions. Giving is never a way to buy a blessing, and no prayer works like a payment; God is not paid to help you. Today, write down what is due and when, and call the people you owe to ask about a plan; many churches and local programs also help with rent and utilities. Father, we bring You this debt and this week. Give wisdom for each call, courage to ask for help, and Your peace while we wait.",
+    es: 'A Dios le importan las cuentas y la fecha límite, no solo las grandes preguntas. Dar nunca es una forma de comprar una bendición, y ninguna oración funciona como un pago; a Dios no se le paga para que ayude. Hoy, anota lo que debes y para cuándo, y llama a quienes les debes para pedir un plan; muchas iglesias y programas locales también ayudan con la renta y los servicios. Padre, te traemos esta deuda y esta semana. Danos sabiduría para cada llamada, valor para pedir ayuda y tu paz mientras esperamos.',
   },
   cursing: {
     en: "I'll pass on the cursing, but I'm glad to keep talking. If something has you angry or worn out, you can say it plainly here, and you can say it to God too; He can handle honest words. Tell me what is going on.",
