@@ -7,12 +7,13 @@ import { readManifest, type ManifestRow, type Titles } from './library';
 
 export const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 export const MANIFEST = join(REPO, 'audio/manifest.jsonl');
-const STORIES = join(REPO, 'content/stories') + sep;
+// Every folder whose scripts are spoken: stories and the two sleep-session kinds (Psalm Nights, Imagination Nights).
+const SCRIPT_ROOTS = ['stories', 'psalm-nights', 'imagination-nights'].map(folder => join(REPO, 'content', folder) + sep);
 
-/** A story row's ref is its script's path in the repo; its title is the script's own title. */
+/** A content row's ref is its script's path in the repo (the fill may add `#<id>`); its title is the script's own title. */
 export function storyTitle(row: ManifestRow): Titles | null {
-  const path = resolve(REPO, row.ref);
-  if (!path.startsWith(STORIES) || !path.endsWith('.json') || !existsSync(path)) return null;
+  const path = resolve(REPO, row.ref.split('#')[0]);
+  if (!SCRIPT_ROOTS.some(root => path.startsWith(root)) || !path.endsWith('.json') || !existsSync(path)) return null;
   try {
     const title = JSON.parse(readFileSync(path, 'utf8')).title;
     return typeof title === 'string' && title.trim() ? { [row.lang]: title.trim() } : null;

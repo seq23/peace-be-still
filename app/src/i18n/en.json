@@ -168,5 +168,8 @@
   "daily.more": "More for today",
   "daily.storyAudioUnavailable": "Audio is unavailable for this draft.",
   "daily.prayer": "Lord, help me trust you in what today brings. Amen.",
-  "daily.verseUnavailable": "This verse could not be loaded."
+  "daily.verseUnavailable": "This verse could not be loaded.",
+  "error.crash.title": "Something went wrong.",
+  "error.crash.body": "Tap Try again. If it keeps happening, close Peace Be Still and open it again. Your saved verses and journal are still on this phone.",
+  "error.crash.retry": "Try again ›"
 }
