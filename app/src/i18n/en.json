@@ -180,5 +180,7 @@
   "paid.linkFailed": "The link couldn’t open. Please try again.",
   "listen.nextFreeNight": "Your next free night is %{day}.",
   "listen.everyNight": "With a subscription, there is a sleep session every night.",
-  "listen.seePlans": "See plans ›"
+  "listen.seePlans": "See plans ›",
+  "listen.psalmWeekly": "One free Psalm Night a week.",
+  "listen.nightWeekly": "One free Imagination Night a week."
 }

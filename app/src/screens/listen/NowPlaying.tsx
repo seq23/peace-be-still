@@ -14,7 +14,16 @@ import { ScriptureText } from '../../ui/scripture';
 import { shelfOf } from './catalog';
 import { usePublishedAudio } from './availability';
 import { downloadAvailable, useOffline } from './offline';
+import { isListenPreview, isPreviewSample } from './preview';
+import { usePurchases } from '../../purchases/provider';
 import { isSleepSession, nextFreeNight, sleepUsage, useSleepNights } from './nights';
+
+/** "Friday, November 28" / "viernes 28 de noviembre" (Spanish takes no comma after the weekday). */
+function freeNightLabel(date: Date, locale: string) {
+  if (locale !== 'es') return new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).format(date);
+  const part = (o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat('es-MX', o).format(date);
+  return `${part({ weekday: 'long' })} ${part({ day: 'numeric', month: 'long' })}`;
+}
 
 function clock(seconds: number) {
   return [Math.floor(seconds / 60), String(Math.floor(seconds % 60)).padStart(2, '0')].join(':');
@@ -26,7 +35,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const user = useOffline(settings.age);
   const { player, state, stop } = usePlayer();
   const router = useRouter();
-  const nights = useSleepNights();
+  const nights = useSleepNights(isListenPreview());
   const [timerOpen, setTimerOpen] = useState(false);
   const [now, setNow] = useState(Date.now);
   useEffect(() => {
@@ -50,15 +59,20 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const offlineAllowed = canUse('offline', user);
   const saved = offlineAllowed && (downloaded || downloadAvailable(track, user));
   const published = usePublishedAudio();
-  const canStream = !stop && published?.get(track.file) === track.sha256;
+  const canStream = !stop && !isPreviewSample(track) && published?.get(track.file) === track.sha256;
   const unavailable = !saved && !canStream;
   const shelf = shelfOf(track);
   // Sleep sessions: the first night free, then one a week; paid, every night. The one gate decides.
   const sleep = isSleepSession(track);
-  const nightAllowed = !sleep || (nights.ready && canUse('sleepSession', { ...user, ...sleepUsage(nights.log, new Date()) }));
-  const nightLocked = sleep && nights.ready && !nightAllowed && !current;
-  const nextNight = new Intl.DateTimeFormat(t.locale === 'es' ? 'es-MX' : 'en-US', { weekday: 'long', month: 'long', day: 'numeric' })
-    .format(nextFreeNight(nights.log, new Date()));
+  // Nothing is locked or granted until both the night log and the store's answer are in, so a subscriber
+  // never sees the free lane's lock while RevenueCat is still answering.
+  const { known } = usePurchases();
+  const nightsKnown = nights.ready && known;
+  const usage = sleepUsage(nights.log, new Date());
+  const nightAllowed = !sleep || (nightsKnown && canUse('sleepSession', { ...user, ...usage }));
+  const nightLocked = sleep && nightsKnown && !nightAllowed && !current;
+  const nextNight = freeNightLabel(nextFreeNight(nights.log, new Date()), t.locale);
+  const child = settings.age === 'child';
   const protectedPauses = hasCallAndResponse(track);
   const untimedResponses = protectedPauses && !track.responsePauses;
   const translation = track.lang === 'es' ? 'RV1909' : 'KJV';
@@ -96,8 +110,10 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         player.resume();
         pausedHere.current = false;
       } else {
-        if (sleep) nights.record(new Date());
         await player.play(track, user);
+        // A night is spent only by the free lane, and only once the session really started.
+        const after = player.getState();
+        if (sleep && !user.paid && after.playing && !after.error && after.track?.file === track.file) nights.record(new Date());
       }
     } finally {
       playRequest.current = false;
@@ -164,13 +180,13 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
             <Text style={styles.time}>{clock(track.seconds)}</Text>
           </View>
         </View>
-        {unavailable && <Text accessibilityRole="alert" style={styles.note}>{t('listen.audioNotReady')}</Text>}
+        {unavailable && !nightLocked && <Text accessibilityRole="alert" style={styles.note}>{t('listen.audioNotReady')}</Text>}
         {!unavailable && current && state.error === 'play-failed' &&
           <Text accessibilityRole="alert" style={styles.note}>{t('listen.playFailed')}</Text>}
         {nightLocked ? <View style={styles.locked}>
           <Text accessibilityRole="text" style={styles.lockedLine}>{t('listen.nextFreeNight', { day: nextNight })}</Text>
-          <Text style={styles.note}>{t('listen.everyNight')}</Text>
-          {settings.age !== 'child' && <Pressable accessibilityRole="button" style={styles.pill} onPress={() => router.push('/paid')}>
+          {!child && <Text style={styles.note}>{t('listen.everyNight')}</Text>}
+          {!child && <Pressable accessibilityRole="button" style={styles.pill} onPress={() => router.push('/paid')}>
             <Text style={styles.pillText}>{t('listen.seePlans')}</Text>
           </Pressable>}
         </View> : <>
@@ -180,7 +196,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
             onPress={() => { void player.skip(-15).catch(() => undefined); }}>
             <Text style={styles.skipText}>−15</Text>
           </Pressable>}
-          <Pressable onPress={() => void toggle()} disabled={playPending || (unavailable && !playing) || (sleep && !nights.ready)} accessibilityRole="button"
+          <Pressable onPress={() => void toggle()} disabled={playPending || (unavailable && !playing) || (sleep && !nightsKnown)} accessibilityRole="button"
             accessibilityLabel={playing ? t('listen.pause') : current && !state.error && !unavailable ? t('listen.resume') : t('listen.play')}
             accessibilityState={{ busy: playPending, disabled: unavailable && !playing }} style={[styles.play, unavailable && !playing && styles.disabled]}>
             <Svg width={26} height={28} viewBox="0 0 26 28">
@@ -202,8 +218,10 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
           </Text>
         </Pressable>
         </>}
-        {sleep && !user.paid && !nightLocked && <Text style={styles.allowance}>
-          {t(shelf === 'psalms' ? 'listen.psalmAllowance' : 'listen.nightAllowance')}
+        {sleep && nightsKnown && !user.paid && !nightLocked && <Text style={styles.allowance}>
+          {usage.firstSleepUsed
+            ? t(shelf === 'psalms' ? 'listen.psalmWeekly' : 'listen.nightWeekly')
+            : t(shelf === 'psalms' ? 'listen.psalmAllowance' : 'listen.nightAllowance')}
         </Text>}
         {offlineAllowed ? (
           <Pressable accessibilityRole="button" accessibilityState={{ busy: downloading }} style={[styles.control, styles.centered]}

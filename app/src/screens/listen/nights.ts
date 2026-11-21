@@ -62,14 +62,33 @@ export function parseLog(raw: string | null): NightLog {
   }
 }
 
+/**
+ * The web preview's night switch, like the preview paid flag (`?paid=1`): `?nights=used` stores a used week
+ * (the first night 10 nights ago, this week's 2 nights ago) and `?nights=new` clears the log. Preview only.
+ */
+export function previewNights(now: Date, preview: boolean): NightLog | 'clear' | null {
+  if (!preview) return null;
+  try {
+    const asked = new URLSearchParams((globalThis as { location?: Location }).location?.search ?? '').get('nights');
+    const ago = (n: number) => nightOf(new Date(now.getTime() - n * DAY_MS));
+    return asked === 'used' ? [ago(10), ago(2)] : asked === 'new' ? 'clear' : null;
+  } catch {
+    return null;
+  }
+}
+
 /** The log on this phone. `ready` is false until it is read, so nothing is locked or granted on a guess. */
-export function useSleepNights() {
+export function useSleepNights(preview = false) {
   const [log, setLog] = useState<NightLog | null>(null);
   useEffect(() => {
     let live = true;
-    AsyncStorage.getItem(NIGHTS_KEY).then(raw => { if (live) setLog(parseLog(raw)); }, () => { if (live) setLog([]); });
+    const asked = previewNights(new Date(), preview);
+    const read = asked === null ? AsyncStorage.getItem(NIGHTS_KEY).then(parseLog)
+      : asked === 'clear' ? AsyncStorage.removeItem(NIGHTS_KEY).then(() => [])
+      : AsyncStorage.setItem(NIGHTS_KEY, JSON.stringify(asked)).then(() => asked);
+    read.then(value => { if (live) setLog(value); }, () => { if (live) setLog([]); });
     return () => { live = false; };
-  }, []);
+  }, [preview]);
   const record = useCallback((now: Date) => {
     setLog(current => {
       const next = recordNight(current ?? [], now);

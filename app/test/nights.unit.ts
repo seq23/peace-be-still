@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { canUse } from '../src/gates';
-import { isSleepSession, nextFreeNight, nightOf, recordNight, sleepUsage, parseLog } from '../src/screens/listen/nights';
+import { isSleepSession, nextFreeNight, nightOf, previewNights, recordNight, sleepUsage, parseLog } from '../src/screens/listen/nights';
 
 const at = (d: number, h = 21) => new Date(2026, 10, d, h);
 const free = (log: string[], now: Date, paid = false) => canUse('sleepSession', { paid, age: 'adult', ...sleepUsage(log, now) });
@@ -35,4 +35,19 @@ test('only whispered sleep sessions count; a broken log is read as empty, never 
   assert.deepEqual(parseLog('{"door":"faith"}'), []);
   assert.deepEqual(parseLog('not json'), []);
   assert.deepEqual(parseLog('["2026-11-02", 4]'), ['2026-11-02']);
+});
+
+test('the web preview switch: ?nights=used is a used week, ?nights=new clears, nothing outside the preview', () => {
+  const g = globalThis as { location?: { search: string } };
+  const now = at(21);
+  try {
+    g.location = { search: '?nights=used' };
+    assert.equal(previewNights(now, false), null);
+    const used = previewNights(now, true) as string[];
+    assert.ok(!free(used, now), 'a used week is locked tonight');
+    g.location = { search: '?nights=new' };
+    assert.equal(previewNights(now, true), 'clear');
+    g.location = { search: '' };
+    assert.equal(previewNights(now, true), null);
+  } finally { delete g.location; }
 });

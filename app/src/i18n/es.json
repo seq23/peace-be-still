@@ -180,5 +180,7 @@
   "paid.linkFailed": "No se pudo abrir el enlace. Vuelve a intentarlo.",
   "listen.nextFreeNight": "Tu próxima noche gratis es el %{day}.",
   "listen.everyNight": "Con la suscripción, tienes una sesión para dormir cada noche.",
-  "listen.seePlans": "Ver planes ›"
+  "listen.seePlans": "Ver planes ›",
+  "listen.psalmWeekly": "Una Noche de Salmos gratis por semana.",
+  "listen.nightWeekly": "Una Noche de Imaginación gratis por semana."
 }
