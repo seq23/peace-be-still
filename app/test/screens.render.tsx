@@ -349,17 +349,25 @@ test('correcting down to a child drops a chat-led journey and sends her to pick 
   assert.deepEqual(calls, [['replace', '/journeys']]);
 });
 
-test('the picker shows Start for the first journey before any tap, and starting Hush Harbor sets the church voice', async () => {
+test('the picker lists Bible Chat & Stories first with nothing picked; Start waits for a tap, then names it and sets the plain voice', async () => {
   const tree = await mount('journeys');
-  const start = () => host(tree, 'Pressable').find(n => /^Start /.test(textOf(n)));
-  assert.equal(textOf(start()!), 'Start Hush Harbor  ›');
-  assert.deepEqual(checked(tree).map(s => s.split(' · ')[0]), ['Hush Harbor']);
+  const start = () => host(tree, 'Pressable').find(n => n.props.accessibilityRole === 'button' && /^(Start |Choose a journey)/.test(textOf(n)))!;
+  assert.deepEqual(radios(tree).map(n => textOf(n).split(' ')[0]), ['Bible', 'Hush', 'Mi', 'Psalm', 'Morning']);
+  assert.ok(textOf(radios(tree)[0]).startsWith(`${en['journey.bibleChat.name']} `));
+  assert.deepEqual(checked(tree), []);
+  assert.equal(textOf(start()), en['journeys.choose']);
+  assert.equal(start().props.disabled, true);
+  await act(async () => start().props.onPress?.());
+  assert.equal(store().journey, undefined, 'a disabled Start saves nothing');
   await press(tree, 'Mi Refugio');
   assert.deepEqual(checked(tree).map(s => s.split(' · ')[0]), ['Mi Refugio']);
-  await press(tree, 'Hush Harbor');
-  await press(tree, 'Start Hush Harbor');
-  assert.equal(store().journey, 'hush-harbor');
-  assert.equal(store().voice, 'church');
+  assert.equal(textOf(start()), 'Start Mi Refugio  ›');
+  await press(tree, en['journey.bibleChat.purpose']);
+  assert.equal(textOf(start()), 'Start Bible Chat & Stories  ›');
+  assert.equal(start().props.disabled, false);
+  await press(tree, 'Start Bible Chat & Stories');
+  assert.equal(store().journey, 'bible-chat');
+  assert.equal(store().voice, 'plain');
   // Start only saves; the onboarding layout's redirect (a replace) moves her to Today, so nothing is pushed
   // or dismissed that back could return to.
   assert.deepEqual(calls, []);
@@ -367,17 +375,32 @@ test('the picker shows Start for the first journey before any tap, and starting 
   assert.equal(host(await mount('onboarding', store()), 'Redirect')[0].props.href, '/today');
 });
 
-test('a teen\'s picker opens on Young Faith; a teen who picks Hush Harbor still gets the teen voice', async () => {
+test('starting Hush Harbor from the picker still sets the church voice; from Settings a saved journey shows as picked', async () => {
+  const saved = await mount('journeys', { ...base, journey: 'hush-harbor', voice: 'church' }, { door: 'faith', change: '1' });
+  assert.deepEqual(checked(saved).map(s => s.split(' · ')[0]), ['Hush Harbor']);
+  const tree = await mount('journeys');
+  await press(tree, 'Hush Harbor');
+  await press(tree, 'Start Hush Harbor');
+  assert.equal(store().journey, 'hush-harbor');
+  assert.equal(store().voice, 'church');
+});
+
+test('a teen\'s picker lists Young Faith first, nothing picked; a teen who picks Hush Harbor still gets the teen voice', async () => {
   const teen = await mount('journeys', { ...base, age: 'teen', voice: 'teen' });
-  assert.ok(host(teen, 'Pressable').some(n => textOf(n) === 'Start Young Faith  ›'));
+  assert.ok(textOf(radios(teen)[0]).startsWith('Young Faith'));
+  assert.deepEqual(checked(teen), []);
+  assert.ok(host(teen, 'Pressable').some(n => textOf(n) === en['journeys.choose'] && n.props.disabled === true));
   await press(teen, 'Hush Harbor');
   await press(teen, 'Start Hush Harbor');
   assert.equal(store().voice, 'teen');
 });
 
-test('a child sees no chat-led journey, and Start names the first one she can pick', async () => {
+test('a child sees no chat-led journey, and Start names the one she taps', async () => {
   const tree = await mount('journeys', { ...base, age: 'child' });
-  assert.doesNotMatch(strings(tree), /Hush Harbor|Mi Refugio|Young Faith|13 to 17/);
+  assert.doesNotMatch(strings(tree), /Bible Chat|Hush Harbor|Mi Refugio|Young Faith|13 to 17/);
+  assert.ok(textOf(radios(tree)[0]).startsWith('Psalm Nights'));
+  assert.deepEqual(checked(tree), []);
+  await press(tree, 'Psalm Nights');
   assert.ok(host(tree, 'Pressable').some(n => textOf(n) === 'Start Psalm Nights  ›'));
   const es = strings(await mount('journeys', { ...base, age: 'child', language: 'es' }));
   assert.doesNotMatch(es, /Young Faith|13 a 17/);
@@ -395,6 +418,8 @@ test('the Mindset picker asks the scripture question after its cards, with a swi
   assert.equal(toggles[0].props['aria-checked'], false);
   await act(async () => toggles[0].props.onPress());
   assert.equal(host(tree, 'Pressable').find(n => n.props.role === 'switch')!.props['aria-checked'], true);
+  assert.deepEqual(checked(tree), []);
+  await press(tree, 'Imagination Nights');
   await press(tree, 'Start Imagination Nights');
   assert.equal(store().scripture, true); assert.equal(store().journey, 'imagination-nights');
 });
@@ -406,6 +431,8 @@ test('changing the door from Settings keeps the old journey until a new one is s
   assert.deepEqual(calls, [['push', { pathname: '/journeys', params: { door: 'mindset', change: '1' } }]]);
   calls = [];
   const picker = await mount('journeys', { ...base, journey: 'psalm-nights' }, { door: 'mindset', change: '1' });
+  assert.deepEqual(checked(picker), [], 'her God\'s Word journey is not behind the Mindset door, so nothing is picked');
+  await press(picker, 'Imagination Nights');
   await press(picker, 'Start Imagination Nights');
   assert.equal(store().door, 'mindset'); assert.equal(store().journey, 'imagination-nights');
   assert.deepEqual(calls, [['dismissTo', '/today']]);

@@ -10,6 +10,7 @@ import { doorLine } from './index';
 type Stroke = { d: string; accent?: boolean; width?: number };
 
 const ART: Record<JourneyId, Stroke[]> = {
+  'bible-chat': [{ d: 'M5 9c5-2 10-2 14 1 4-3 9-3 14-1v14c-5-2-10-2-14 1-4-3-9-3-14-1z', accent: true, width: 2 }, { d: 'M19 10v14' }],
   'hush-harbor': [{ d: 'M4 22c4-8 10-12 15-12s11 4 15 12', accent: true, width: 2 }, { d: 'M4 26h30' }],
   'mi-refugio': [{ d: 'M10 24V11h4V7h4v4h2V7h4v4h4v13', accent: true, width: 2 }, { d: 'M4 26h30' }],
   'psalm-nights': [{ d: 'M3 12c5-6 9 6 16 0s11 6 16 0' }, { d: 'M3 22h32', accent: true, width: 2 }],

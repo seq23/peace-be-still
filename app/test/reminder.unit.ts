@@ -136,7 +136,7 @@ test('the default time and the words follow the journey: Morning Word in the mor
   const { journeys } = await import('../src/model');
   const want: Record<string, 'morning' | 'evening'> = {
     'morning-word': 'morning', 'morning-word-mindset': 'morning',
-    'psalm-nights': 'evening', 'imagination-nights': 'evening', 'hush-harbor': 'evening', 'mi-refugio': 'evening',
+    'bible-chat': 'evening', 'psalm-nights': 'evening', 'imagination-nights': 'evening', 'hush-harbor': 'evening', 'mi-refugio': 'evening',
     'young-faith': 'evening', 'living-in-the-end': 'evening',
   };
   assert.deepEqual(Object.fromEntries(journeys.map((j: { id: string }) => [j.id, reminderKind(j.id)])), want, 'every journey has its kind');

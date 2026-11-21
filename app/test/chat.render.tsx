@@ -245,6 +245,19 @@ test('every AI answer carries the AI label, the stored verse and "N of 10 messag
   assert.equal(sent.at(-1).messages.length, 3); // her two turns and the AI answer between them
 });
 
+test('the chat request carries the journey\'s voice: Bible Chat & Stories sends plain (even after Hush Harbor), Hush Harbor sends church', async () => {
+  const { chooseJourney } = require('../src/model') as typeof import('../src/model');
+  for (const [journey, voice] of [['bible-chat', 'plain'], ['hush-harbor', 'church']] as const) {
+    store.clear(); storePaid = false; consented();
+    replies.push(answer());
+    const tree = await mount(chooseJourney({ ...adult, voice: journey === 'bible-chat' ? 'church' : 'plain' }, journey));
+    await say(tree, 'I keep worrying about my mother.');
+    assert.equal(sent.at(-1).voice, voice, journey);
+    assert.equal(sent.at(-1).journey, journey);
+    assert.equal(sent.at(-1).language, 'en');
+  }
+});
+
 test('the crisis reply is not labelled AI and its numbers are tappable', async () => {
   consented();
   replies.push({ kind: 'crisis', ai: false, text: "You matter, and you don't have to carry this alone. Call or text 988. The National Domestic Violence Hotline: 1-800-799-7233.", scripture: [], remaining: null, limit: null, reminder: false, crisis: 'abuse' });

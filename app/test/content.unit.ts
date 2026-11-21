@@ -32,6 +32,8 @@ test('Spanish readers get the Spanish tellings; Hush Harbor its own; everyone el
   assert.equal(tellingFor('es', 'hush-harbor'), 'mi-refugio');
   assert.equal(tellingFor('en', 'hush-harbor'), 'hush-harbor');
   assert.equal(tellingFor('en', 'young-faith'), 'plain');
+  assert.equal(tellingFor('en', 'bible-chat'), 'plain');
+  assert.equal(tellingFor('es', 'bible-chat'), 'mi-refugio');
   assert.ok(shelf('mi-refugio', 'adult').every(story => story.lang === 'es'));
   assert.ok(shelf('hush-harbor', 'adult').some(story => story.blocks.some(block => block.type === 'call')));
   assert.ok(shelf('plain', 'adult').every(story => story.blocks.every(block => block.type !== 'call')));

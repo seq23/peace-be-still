@@ -79,11 +79,11 @@ export function SwitchRow({ title, detail, value, onChange }: { title: string; d
 }
 
 /** The one still-water pill per screen, verb first. */
-export function PillButton({ children, onPress }: { children: string; onPress: () => void }) {
+export function PillButton({ children, onPress, disabled = false }: { children: string; onPress: () => void; disabled?: boolean }) {
   const c = usePalette();
   return (
-    <Pressable accessibilityRole="button" onPress={onPress} style={({ pressed }) => [styles.pill, { backgroundColor: c.accent }, pressed && { opacity: 0.85 }]}>
-      <Text style={[styles.pillText, { color: c.on }]}>{`${children}  ›`}</Text>
+    <Pressable accessibilityRole="button" disabled={disabled} accessibilityState={{ disabled }} aria-disabled={disabled || undefined} onPress={disabled ? undefined : onPress} style={({ pressed }) => [styles.pill, { backgroundColor: c.accent }, disabled && { opacity: 0.45 }, pressed && !disabled && { opacity: 0.85 }]}>
+      <Text style={[styles.pillText, { color: c.on }]}>{disabled ? children : `${children}  ›`}</Text>
     </Pressable>
   );
 }
