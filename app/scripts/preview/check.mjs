@@ -55,6 +55,7 @@ export async function check(target) {
   }
   const shows = (page, text) => page.getByText(text, { exact: false }).first().waitFor({ timeout: 30000 }).then(() => true, () => false);
   const body = page => page.evaluate(() => document.body.innerText);
+  const fits = page => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
   try {
     // 1. Tab labels fit (light and dark, English and Mi Refugio's Spanish), and the week count is live.
     for (const [settings, labels, scheme, name] of [[adult, ['Today', 'Chat', 'Bible', 'Nights', 'More'], 'light', '01-today-faith'], [{ ...adult, journey: 'mi-refugio', voice: 'spanish' }, ['Hoy', 'Chat', 'Biblia', 'Noches', 'Más'], 'dark', '02-today-mirefugio-dark']]) {
@@ -143,7 +144,18 @@ export async function check(target) {
       await page.getByText("With God's Word", { exact: false }).first().click();
       await page.getByRole('textbox').fill('1990');
       await page.getByText('Continue', { exact: false }).first().click();
-      await page.getByText('Start Hush Harbor', { exact: false }).first().click();
+      // The picker: Bible Chat & Stories first, nothing picked, Start disabled until a tap, then named.
+      const start = page.getByRole('button', { name: 'Choose a journey to start' });
+      await start.waitFor({ timeout: 30000 });
+      expect((await start.getAttribute('aria-disabled')) === 'true', 'Start is not disabled before a journey is picked');
+      expect((await page.locator('[role=radio][aria-checked=true]').count()) === 0, 'a journey is preselected on a first run');
+      expect(/^Bible Chat & Stories/.test((await page.locator('[role=radio]').first().innerText()).trim()), 'Bible Chat & Stories is not the first journey');
+      expect(await fits(page), 'the journey picker is wider than 390 px');
+      await shot(page, '08b-picker-first-run');
+      await page.locator('[role=radio]').first().click();
+      expect((await page.locator('[role=radio][aria-checked=true]').count()) === 1, 'tapping Bible Chat & Stories did not pick it');
+      await shot(page, '08c-picker-bible-chat-picked');
+      await page.getByText('Start Bible Chat & Stories', { exact: false }).first().click();
       const today = await page.waitForURL(url => new URL(url).pathname === '/today', { timeout: 30000 }).then(() => true, () => false);
       expect(today, `Start on a first run went to ${new URL(page.url()).pathname}, not /today`);
       await page.goBack().catch(() => undefined);
@@ -151,6 +163,14 @@ export async function check(target) {
       expect(!/What do you need tonight\?/.test(await body(page)), `back from Today shows the front door (${new URL(page.url()).pathname})`);
       await shot(page, '09-back-from-today');
       await context.close();
+      // The first-run picker in dark mode.
+      const darkPicker = await open('/journeys', { ...adult, journey: undefined }, 'dark');
+      await darkPicker.page.getByRole('button', { name: 'Choose a journey to start' }).waitFor({ timeout: 30000 });
+      expect(await fits(darkPicker.page), 'the dark journey picker is wider than 390 px');
+      await shot(darkPicker.page, '08d-picker-first-run-dark');
+      await darkPicker.page.locator('[role=radio]').first().click();
+      await shot(darkPicker.page, '08e-picker-bible-chat-picked-dark');
+      await darkPicker.context.close();
       const evening = await open('/', null, 'dark', { timezoneId: 'Europe/London' });
       await evening.page.getByText("With God's Word", { exact: false }).first().waitFor({ timeout: 30000 });
       const h = await evening.page.evaluate(() => new Date().getHours());
@@ -161,11 +181,12 @@ export async function check(target) {
     // 6. Age bands: a teen opens on Young Faith; a child (Spanish) never sees it.
     {
       const teen = await open('/journeys', { ...adult, age: 'teen', voice: 'teen', journey: undefined });
-      expect(await shows(teen.page, 'Start Young Faith'), 'a teen\'s picker does not open on "Start Young Faith"');
+      expect(await shows(teen.page, 'Choose a journey to start'), 'a teen\'s picker preselects a journey');
+      expect(/^Young Faith/.test((await teen.page.locator('[role=radio]').first().innerText()).trim()), 'a teen\'s picker does not list Young Faith first');
       await shot(teen.page, '11-picker-teen');
       await teen.context.close();
       const child = await open('/journeys', { ...adult, age: 'child', language: 'es', journey: undefined });
-      await child.page.getByText('Comenzar', { exact: false }).first().waitFor({ timeout: 30000 });
+      await child.page.getByText('Elige un camino para comenzar', { exact: false }).first().waitFor({ timeout: 30000 });
       expect(!/Young Faith|13 a 17/.test(await body(child.page)), 'a child is offered Young Faith');
       await shot(child.page, '12-picker-child-es');
       await child.context.close();
@@ -206,7 +227,6 @@ export async function check(target) {
       const bg = [...document.querySelectorAll('div')].map(el => getComputedStyle(el).backgroundColor).find(c => c && c !== 'rgba(0, 0, 0, 0)');
       return bg === 'rgb(14, 26, 34)';
     });
-    const fits = page => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
     for (const tab of ['nights', 'today']) {
       const { page, context } = await open(`/${tab}?hour=3`, adult);
       expect(await shows(page, 'Go back to sleep'), `${tab} at 3 AM: no back-to-sleep button`);

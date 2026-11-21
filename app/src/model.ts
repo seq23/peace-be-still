@@ -8,7 +8,7 @@ export type Age = 'child' | 'teen' | 'adult';
 export type Voice = 'plain' | 'church' | 'teen' | 'spanish';
 export type Language = 'en' | 'es';
 export type JourneyId =
-  | 'hush-harbor' | 'mi-refugio' | 'psalm-nights' | 'morning-word' | 'young-faith'
+  | 'bible-chat' | 'hush-harbor' | 'mi-refugio' | 'psalm-nights' | 'morning-word' | 'young-faith'
   | 'imagination-nights' | 'morning-word-mindset' | 'living-in-the-end';
 
 export type Journey = {
@@ -28,6 +28,7 @@ export type Journey = {
 };
 
 export const journeys: readonly Journey[] = [
+  { id: 'bible-chat', door: 'faith', name: 'journey.bibleChat.name', purpose: 'journey.bibleChat.purpose', chat: true, voice: 'plain' },
   { id: 'hush-harbor', door: 'faith', name: 'journey.hushHarbor.name', subtitle: 'journey.hushHarbor.subtitle', purpose: 'journey.hushHarbor.purpose', chat: true, voice: 'church' },
   { id: 'mi-refugio', door: 'faith', name: 'journey.miRefugio.name', subtitle: 'journey.miRefugio.subtitle', purpose: 'journey.miRefugio.purpose', chat: true, voice: 'spanish', language: 'es' },
   { id: 'psalm-nights', door: 'faith', name: 'journey.psalmNights.name', subtitle: 'journey.psalmNights.subtitle', purpose: 'journey.psalmNights.purpose', chat: false },

@@ -10,7 +10,7 @@ const library = raw as unknown as Library;
 export const topics = library.topics;
 export type Topic = string;
 
-/** Spanish readers get Mi Refugio's Spanish tellings; Hush Harbor gets its church voice; everyone else the plain telling. */
+/** Spanish readers get Mi Refugio's Spanish tellings; Hush Harbor gets its church voice; everyone else (Bible Chat & Stories too) the plain telling. */
 export function tellingFor(language: Language, journey: JourneyId | undefined): Telling {
   if (language === 'es') return 'mi-refugio';
   return journey === 'hush-harbor' ? 'hush-harbor' : 'plain';

@@ -1,5 +1,6 @@
-// Screen 2: the journey picker for one door. The first allowed journey is preselected, so "Start …" is
-// always on screen in the bottom bar; Mindset asks the one scripture question after its cards.
+// Screen 2: the journey picker for one door. Nothing is preselected (her call 21 Nov 2026): Start stays disabled
+// until she taps one, then names it. From Settings her saved journey shows as picked. Mindset asks the one
+// scripture question after its cards.
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
@@ -19,7 +20,7 @@ export default function JourneysScreen() {
   const door: Door = param === 'faith' || param === 'mindset' ? param : settings.door ?? 'faith';
   const options = journeysFor(door, settings.age);
   const [tapped, setPicked] = useState<JourneyId>();
-  const picked = [tapped, settings.journey].find(id => options.some(j => j.id === id)) ?? options[0]?.id;
+  const picked = [tapped, settings.journey].find(id => options.some(j => j.id === id));
   const [scripture, setScripture] = useState(!!settings.scripture);
   const chosen = options.find(j => j.id === picked);
 
@@ -32,7 +33,7 @@ export default function JourneysScreen() {
   }
 
   return (
-    <Screen footer={chosen ? <PillButton onPress={start}>{t('journeys.start', { name: t(chosen.name) })}</PillButton> : undefined}>
+    <Screen footer={<PillButton onPress={start} disabled={!chosen}>{chosen ? t('journeys.start', { name: t(chosen.name) }) : t('journeys.choose')}</PillButton>}>
       <BackLink onPress={() => (router.canGoBack() ? router.back() : router.replace('/door'))}>{t('common.back')}</BackLink>
       <View style={{ gap: 6 }}>
         <Label>{t(`doorName.${door}`)}</Label>

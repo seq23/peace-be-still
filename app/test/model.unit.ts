@@ -31,7 +31,14 @@ test('a re-entry goes younger any time, older once after 7 days, and never up fr
   assert.ok(down.ok); assert.equal(down.settings.age, 'teen'); assert.equal(down.settings.voice, 'teen');
 });
 
-test('journeys are chosen by id; Hush Harbor sets the church voice, Mi Refugio Spanish, a teen always gets teen', () => {
+test('journeys are chosen by id; Bible Chat & Stories (first for every adult) sets the plain voice, Hush Harbor the church voice, Mi Refugio Spanish, a teen always gets teen', () => {
+  assert.equal(journeysFor('faith', 'adult')[0].id, 'bible-chat');
+  assert.deepEqual(journeysFor('faith', 'adult').map(j => j.id), ['bible-chat', 'hush-harbor', 'mi-refugio', 'psalm-nights', 'morning-word']);
+  assert.equal(chooseJourney({ ...adult, voice: 'church' }, 'bible-chat').voice, 'plain');
+  assert.equal(chooseJourney(adult, 'bible-chat').journey, 'bible-chat');
+  assert.equal(chooseJourney({ ...adult, age: 'teen', voice: 'teen' }, 'bible-chat').voice, 'teen');
+  const kid: Settings = { ...adult, age: 'child' };
+  assert.equal(chooseJourney(kid, 'bible-chat'), kid, 'chat-led, so never for under-13s');
   assert.equal(chooseJourney(adult, 'hush-harbor').voice, 'church');
   assert.equal(chooseJourney(adult, 'hush-harbor').journey, 'hush-harbor');
   assert.equal(chooseJourney(adult, 'mi-refugio').voice, 'spanish');
