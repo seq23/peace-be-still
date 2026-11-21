@@ -69,13 +69,14 @@ export function declarationFor(settings: Pick<Settings, 'door'>, locale: 'en' | 
   return { key: undefined, text: item.text, passage: item.ref, topic };
 }
 
-export function Daily({ page, back, read, upgrade, open, storyId, now = new Date() }: {
+export function Daily({ page, back, read, upgrade, open, id, now = new Date() }: {
   page: DailyPage;
   back: () => void;
   read: (book: string, chapter: number, verse?: number) => void;
   upgrade: () => void;
   open: (page: DailyPage, id?: string) => void;
-  storyId?: string;
+  /** A story id on the story page; a plan id on the plans page (a deep link opens that plan). */
+  id?: string;
   now?: Date;
 }) {
   const t = useT('journey');
@@ -90,7 +91,7 @@ export function Daily({ page, back, read, upgrade, open, storyId, now = new Date
   const line = word.key ? t(word.key) : word.text!;
   const [note, edit] = useState<string>();
   const [share, setShare] = useState(false);
-  const [selectedPlan, setPlan] = useState<string>();
+  const [selectedPlan, setPlan] = useState<string | undefined>(page === 'plans' ? id : undefined);
   const plan = plans.find(item => item.id === selectedPlan && (!item.paid || canUse('longPlans')));
   const update = (change: (value: typeof state.value) => typeof state.value) => void daily.update(change);
   const link = (passage: string, label?: string) => {
@@ -102,6 +103,7 @@ export function Daily({ page, back, read, upgrade, open, storyId, now = new Date
   if (page !== 'stories' && !canUse(pages[page].feature)) return null;
 
   // A past story opens only in the paid lane; the free lane always reads today's.
+  const storyId = page === 'story' ? id : undefined;
   const past = storyId && storyId !== stories.today?.id ? stories.list.find(item => item.id === storyId) : undefined;
   const story: Story | undefined = past && canUse('pastStories') ? past : stories.today;
   const topicList = topicsFor(settings.door);

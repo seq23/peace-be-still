@@ -613,7 +613,7 @@ for (const locale of ['en', 'es'] as const) {
   const leaves = (node: ReactTestInstance | string): string => typeof node === 'string' ? node : node.children.map(leaves).join('');
   const shown = (tree: ReactTestRenderer) => host(tree, 'Text').filter(node => node.props.testID === 'scripture-text').map(node => leaves(node).replace(/\s+/g, ' ').trim());
   const renderDaily = (page: DailyPage, date: Date, value: object = person, storyId?: string) => mount('dailyPage', value, {}, () =>
-    <Daily page={page} now={date} storyId={storyId} back={() => {}} read={() => {}}
+    <Daily page={page} now={date} id={storyId} back={() => {}} read={() => {}}
       upgrade={() => calls.push(['push', '/paid'])} open={(next: DailyPage, id?: string) => calls.push(['open', [next, id]])} />);
 
   test(`Daily ${locale}: today's story is a passed library story in every build, read from its own telling`, async () => {
@@ -736,6 +736,12 @@ for (const locale of ['en', 'es'] as const) {
       assert.ok(strings(plansPage).includes(formatReference(parseReference('Revelation 21:1-7')!, locale)));
     } finally { await closePaid(plansPage); }
 
+    const linked = await asPaid(() => mount('dailyPage', person, { page: 'plans', id: 'heavy-30' }));
+    try { assert.equal(host(linked, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 30); } finally { await closePaid(linked); }
+    const lockedLink = await mount('dailyPage', person, { page: 'plans', id: 'heavy-30' });
+    // Free, the same link shows the plan list with the paid note, never the plan's days.
+    assert.equal(host(lockedLink, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 0);
+    assert.ok(strings(lockedLink).includes(copy['plan.paidNote']));
     const word = await asPaid(() => mount('dailyPage', person, { page: 'declaration' }));
     try {
       assert.equal(radios(word).length, topics.length + 1);

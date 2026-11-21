@@ -13,7 +13,7 @@ export default function DailyPage() {
   if (!page || !Object.hasOwn(pages, page)) return <Redirect href="/today" />;
   const name = page as DailyPage;
   if (settings.door !== 'faith' && faithOnly.includes(name)) return <Redirect href="/today" />;
-  return <Daily key={`${name}:${id ?? ''}`} page={name} storyId={id || undefined}
+  return <Daily key={`${name}:${id ?? ''}`} page={name} id={id || undefined}
     back={() => router.canGoBack() ? router.back() : router.replace('/today')}
     read={(book, chapter, verse) => router.push({ pathname: '/bible/[page]', params: { page: 'chapter', book, chapter, verse } })}
     upgrade={() => router.push('/paid')}
