@@ -1192,6 +1192,7 @@ test('the used-night screen speaks Spanish in Mi Refugio and keeps the Mindset d
   try {
     assert.ok(texts(s.tree).some(text => text.startsWith('Your next free night')));
     assert.ok(!strings(s.tree).includes(en['listen.everyNight']), 'no subscription pitch to a child');
+    assert.ok(!strings(s.tree).includes(en['listen.paidDownload']), 'no download pitch to a child either');
     assert.ok(!strings(s.tree).includes(en['listen.seePlans']));
   } finally { await s.close(); }
 });
