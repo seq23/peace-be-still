@@ -26,11 +26,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # Standalone lane tests use phase 3's real chat code at the commit the integration merge takes
-      # (codex/pbs-phase-3 head 8a8dfce, 20 Nov 2026). Drop the pin once phase 3 is on main.
+      # (codex/pbs-phase-3 head 48aaa83, 20 Nov 2026). Drop the pin once phase 3 is on main.
       - uses: actions/checkout@v4
         with:
-          ref: 8a8dfce8fcc1dd647c5dd4e1ce4299626e995e1a
+          ref: 48aaa835730481af8ffe4ff554064a6ae21d9b9d
           path: .phase-3
+          fetch-depth: 0
+      # A stale pin fails here: the lane must be tested against phase 3's head, not an older commit.
+      - name: The phase 3 pin is phase 3's head
+        run: |
+          git -C .phase-3 fetch -q origin codex/pbs-phase-3 || { echo "phase 3 branch gone: it is on main, drop this pin"; exit 1; }
+          test "$(git -C .phase-3 rev-parse HEAD)" = "$(git -C .phase-3 rev-parse FETCH_HEAD)" || { echo "NAMED STOP MADE_FOR_YOU_PHASE3_PIN_STALE: re-pin to $(git -C .phase-3 rev-parse --short FETCH_HEAD)"; exit 1; }
       - uses: actions/setup-node@v4
         with:
           node-version: 24

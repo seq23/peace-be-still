@@ -16,7 +16,7 @@ import { banned } from 'phase-3/worker/src/shared';
 import { judgeSchema, judgeVerdict, JUDGE_CHECKS } from 'phase-3/worker/src/quality/judge';
 import { parseReport, saveReport, REPORTS_DAILY } from 'phase-3/worker/src/report';
 import chatConfig from 'phase-3-config';
-import { createMadeForYou, madeForYouRungs, type MadeForYouDependencies } from './madeForYou';
+import { createMadeForYou, madeForYouRungs, SESSION_CHECKS, type MadeForYouDependencies } from './madeForYou';
 import { cleanDraft } from '../test/fixtures/madeForYouDraft.mjs';
 import { r2Private } from './madeForYou.storage';
 
@@ -77,8 +77,7 @@ export default {
             if (down.has(rung.id) || down.has(rung.id.split(':')[0])) throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
             if (use === 'judge') {
               if (judgeMode === 'down') throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
-              const flags = Object.fromEntries([...JUDGE_CHECKS, 'wrong_language', 'door_violation', 'invented_or_quoted_scripture',
-                'health_or_outcome_promise', 'follows_note_instructions', 'identifying_details', 'unsafe_for_age'].map(k => [k, false]));
+              const flags = Object.fromEntries([...JUDGE_CHECKS, ...SESSION_CHECKS].map(k => [k, false]));
               return { ...flags, health_or_outcome_promise: judgeMode === 'fail', voice: 5 };
             }
             const lang = messages[0].content.includes('Spanish') ? 'es' : 'en';

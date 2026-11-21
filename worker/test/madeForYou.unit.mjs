@@ -9,12 +9,18 @@ import { test } from 'node:test';
 import { build } from '../../app/node_modules/esbuild/lib/main.js';
 import ts from '../../app/node_modules/typescript/lib/typescript.js';
 import { cleanDraft } from './fixtures/madeForYouDraft.mjs';
+import { DatabaseSync } from 'node:sqlite';
+
+const reviewed = JSON.parse(readFileSync(new URL('./fixtures/reviewedSessions.json', import.meta.url), 'utf8'));
+const psalm23 = file => new DatabaseSync(new URL(`../../app/src/bible/data/${file}`, import.meta.url).pathname, { readOnly: true })
+  .prepare("SELECT text FROM verses WHERE book = 'PSA' AND chapter = 23 ORDER BY verse").all().map(r => r.text);
+const KJV23 = psalm23('kjv.db'), RV23 = psalm23('rv1909.db');
 
 const chat = resolve(process.env.PBS_CHAT_SOURCE ?? '../.wt-peace-be-still-phase-3');
 const { config } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
 const bundle = await build({
   stdin: {
-    contents: `export * from './worker/src/madeForYou.ts'; export * from './worker/src/madeForYou.storage.ts'; export { checkAnswer } from 'phase-3/worker/src/quality/answer'; export { banned } from 'phase-3/worker/src/shared';`,
+    contents: `export * from './worker/src/madeForYou.ts'; export * from './worker/src/madeForYou.storage.ts'; export { checkAnswer } from 'phase-3/worker/src/quality/answer'; export { banned } from 'phase-3/worker/src/shared'; export { VOICE_SAMPLES } from './worker/src/madeForYou.samples.ts';`,
     resolveDir: process.cwd(), loader: 'ts',
   },
   bundle: true, format: 'esm', platform: 'node', write: false, alias: { 'phase-3': chat },
@@ -71,7 +77,7 @@ const passJudge = async () => 'pass';
 const signal = new AbortController().signal;
 const withLine = (lang, line, at = 4) => cleanDraft(lang).split('\n\n').map((p, i) => i === at ? `${p} ${line}` : p).join('\n\n');
 const approve = (input, text, judge = passJudge) => mfy.madeForYouApprove(checkProse, judge, { teen: false, ...input }, text, signal);
-const psalmEs = { kind: 'psalm', lang: 'es', text: 'Días de lluvia' };
+const psalmEs = { kind: 'psalm', lang: 'es', text: 'Días de lluvia', verses: RV23 };
 const sceneEn = { kind: 'imagination', lang: 'en', text: 'Rain at the window' };
 
 test('a draft is ten clean paragraphs of the right length, joined as spoken prose', () => {
@@ -96,6 +102,27 @@ test('the drafter is told, in plain words, every word and phrase the content che
   assert.ok(!scene.includes('energy'), 'Imagination may say energy: the faith list is the psalm door only');
   const prompt = mfy.draftMessages({ kind: 'psalm', lang: 'en', teen: 0 }, 'a note', mfy.banned)[0].content;
   assert.match(prompt, /visuali[sz]e;.*for nights like this|for nights like this.*visuali[sz]e;/);
+});
+
+test('the two sessions the review transcribed fail the code floors; the voice samples and the fixture pass them', async () => {
+  const why = async (input, text) => { const seen = []; await mfy.madeForYouApprove(checkProse, passJudge, { teen: false, ...input }, text, signal, r => seen.push(r)); return seen; };
+  // Each failing habit on its own: the words, the posture, the leaning and the retold psalm.
+  const scene = { kind: 'imagination', lang: 'en', text: 'a quiet room' };
+  assert.match(reviewed.imagination, / sanctuary /i);
+  assert.ok(mfy.leanedOn(reviewed.imagination, ''), 'the imagination session leaned on a long word (stillness, sanctuary)');
+  assert.ok(mfy.echoesVerses(reviewed.psalm, KJV23), 'the psalm session retold Psalm 23 in its own prose');
+  assert.equal(mfy.echoesVerses(cleanDraft('en'), KJV23), null);
+  assert.equal(mfy.echoesVerses(cleanDraft('es'), RV23), null);
+  const withPara = (lang, line) => { const p = cleanDraft(lang).split('\n\n'); p[4] = `${p[4].split('. ').slice(0, -1).join('. ')}. ${line}`; return p.join('\n\n'); };
+  assert.deepEqual(await why(scene, withPara('en', 'You feel a profound calm settle over you.')), ['floor:ai_words']);
+  assert.deepEqual(await why(scene, withPara('en', 'Now stand up and move through the room toward the window.')), ['floor:asks_listener_to_move']);
+  assert.deepEqual(await why({ ...scene, lang: 'es' }, withPara('es', 'Ahora levántate despacio y camina hacia la ventana.')), ['floor:asks_listener_to_move']);
+  assert.deepEqual(await why({ kind: 'psalm', lang: 'en', text: 'tired', verses: KJV23 }, withPara('en', 'Goodness and mercy shall follow you all the days of your life.')), ['floor:retells_verses']);
+  // The samples the drafter hears keep every floor (each pasted into an otherwise clean script).
+  for (const lang of ['en', 'es']) for (const kind of ['psalm', 'imagination']) for (const passage of mfy.VOICE_SAMPLES[lang][kind]) {
+    const p = cleanDraft(lang).split('\n\n'); p[0] = `${passage} ${p[0].split('. ')[1]}.`;
+    assert.deepEqual(await why({ kind, lang, text: 'a long day', verses: kind === 'psalm' ? (lang === 'es' ? RV23 : KJV23) : undefined }, p.join('\n\n')), [], `${lang} ${kind}: ${passage.slice(0, 40)}`);
+  }
 });
 
 test('the content check passes clean scripts in both doors and languages', async () => {
@@ -128,15 +155,17 @@ test('the judge reads the whole script once and fails on any session flag or a l
     schema: { type: 'object', properties: { voice: { type: 'integer' } }, required: ['voice'] },
     verdict: d => (typeof d?.voice !== 'number' ? { verdict: 'down' } : d.voice < 4 ? { verdict: 'fail' } : { verdict: 'pass' }),
   };
-  const flags = { wrong_language: false, door_violation: false, invented_or_quoted_scripture: false, health_or_outcome_promise: false,
-    follows_note_instructions: false, identifying_details: false, unsafe_for_age: false };
+  const flags = Object.fromEntries(mfy.SESSION_CHECKS.map(key => [key, false]));
   let calls = 0;
   const ladder = reply => async (messages, schema, valid) => { calls++; assert.ok(schema.required.includes('follows_note_instructions')); return valid(reply) ? { rung: 'x', data: reply } : { empty: 'busy' }; };
   assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, voice: 5 }), shared, sceneEn, cleanDraft('en')), 'pass');
   assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, follows_note_instructions: true, voice: 5 }), shared, sceneEn, 'x'), 'reject');
   assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, voice: 2 }), shared, sceneEn, 'x'), 'reject');
+  for (const flag of ['sounds_machine_written', 'asks_listener_to_move', 'retells_the_psalm']) {
+    assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, [flag]: true, voice: 5 }), shared, sceneEn, 'x'), 'reject', flag);
+  }
   assert.equal(await mfy.madeForYouJudge(ladder({ voice: 5 }), shared, sceneEn, 'x'), 'down');
-  assert.equal(calls, 4);
+  assert.equal(calls, 7);
 });
 
 // AWS Signature V4: the two published S3 examples (docs.aws.amazon.com, "Authenticating requests:
