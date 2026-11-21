@@ -25,11 +25,12 @@ umask 077
   echo "CHAT_TOKEN_SECRET=$(openssl rand -hex 32)"
   echo "IP_HASH_SECRET=$(openssl rand -hex 32)"
   [ -n "${PBS_FREE_GEMINI_API_KEY:-}" ] && echo "PBS_FREE_GEMINI_API_KEY=$PBS_FREE_GEMINI_API_KEY"
-  # The billed key only for a paid-lane run: a free-lane run never has it.
-  [ "${DEV_LANE:-}" = paid ] && [ -n "${PBS_GEMINI_API_KEY:-}" ] && echo "PBS_GEMINI_API_KEY=$PBS_GEMINI_API_KEY"
+  # The billed key: the paid lane and the crisis lane (any flagged message, free or paid). The free lane
+  # never reads it (worker/test/controls.test.ts proves the free lane cannot see this name).
+  [ -n "${PBS_GEMINI_API_KEY:-}" ] && echo "PBS_GEMINI_API_KEY=$PBS_GEMINI_API_KEY"
   [ -n "${DEV_LANE:-}" ] && echo "DEV_LANE=$DEV_LANE"
   # Research runs (21 Nov 2026): the paid lane's route and model, its list prices, and the judge.
-  for v in PAID_PROVIDER PAID_MODEL PAID_HOSTS PAID_PRICE_IN_PER_M PAID_PRICE_OUT_PER_M WORKERS_AI_JUDGE_MODEL; do
+  for v in PAID_PROVIDER PAID_MODEL PAID_HOSTS PAID_PRICE_IN_PER_M PAID_PRICE_OUT_PER_M PAID_PRICE_CACHED_PER_M CRISIS_MODEL WORKERS_AI_JUDGE_MODEL CHAT_GLOBAL_MESSAGES_DAILY CHAT_IP_MESSAGES_DAILY; do
     eval "x=\${DEV_$v:-}"; [ -z "$x" ] || echo "$v=$x"
   done
   [ -n "${OPENROUTER_API_KEY:-}" ] && echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY"
