@@ -11,11 +11,14 @@ const config: ExpoConfig = {
   ios: { bundleIdentifier: 'com.peacebestillapp.mobile', infoPlist: { ITSAppUsesNonExemptEncryption: false } },
   android: { package: 'com.peacebestillapp.mobile' },
   web: { bundler: 'metro' },
+  // EAS project @seq23/peace-be-still (eas init); the submit profile is in eas.json.
+  owner: 'seq23',
   // The ONE audio host: R2 bucket peace-be-still-audio (key = manifest `file`, audio/publish.py). PBS_AUDIO_BASE_URL overrides.
   extra: {
     revenueCatIosKey: process.env.REVENUECAT_PBS_TEST_STORE === '1'
       ? process.env.REVENUECAT_PBS_TEST_PUBLIC_KEY
       : process.env.REVENUECAT_PBS_IOS_PUBLIC_KEY,
-    audioBaseUrl: process.env.PBS_AUDIO_BASE_URL ?? 'https://pbs-audio.professionalresourcelibrary.com/' },
+    audioBaseUrl: process.env.PBS_AUDIO_BASE_URL ?? 'https://pbs-audio.professionalresourcelibrary.com/',
+    eas: { projectId: 'e23117dc-4272-4aaa-b88e-662733141a5c' } },
 };
 export default config;
