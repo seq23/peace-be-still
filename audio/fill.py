@@ -98,7 +98,10 @@ STORY_TELLINGS = ("plain", "mi-refugio")
 FRONT_KINDS = SESSION_KINDS + (STORY_KIND,)   # queued ahead of the chapters and of failed-chapter retries
 # The voiced floor per session kind (21 Nov 2026: nights the gate estimated at 20 min voiced at 17): a file under it
 # fails its checks and is rendered again slower, then held, never shelved short.
-MIN_SECONDS = {"imagination-night": 18 * 60, "psalm-night": 13 * 60}
+TARGET_SECONDS = {"imagination-night": 18 * 60, "psalm-night": 13 * 60}   # the low end of each writing target
+# Her ruling 21 Nov 2026: a floor catches BROKEN output (cut off, skipped chunks), not the target: under 75% of
+# the target is held (one slower render, then FAILED); between the floor and the target ships with a SHORT note.
+MIN_SECONDS = {k: round(v * 0.75) for k, v in TARGET_SECONDS.items()}
 
 
 def plan(bibles: dict, content: list | None = None) -> list[dict]:
@@ -227,7 +230,7 @@ def session_item(o: dict, f: Path, root: Path, lang: str) -> dict | None:
             "ref": f"{f.relative_to(root)}#{o.get('id') or f.stem}", "priority": 3, "level": "sleep",
             "heading": o.get("title") if isinstance(o.get("title"), str) else "",
             "verses": [p[0] for p in pieces], "gaps": [p[1] for p in pieces], "text": "script",
-            **({"min_seconds": MIN_SECONDS[kind]} if kind in MIN_SECONDS else {})}
+            **({"min_seconds": MIN_SECONDS[kind], "target_seconds": TARGET_SECONDS[kind]} if kind in MIN_SECONDS else {})}
 
 
 _CALL_PAUSE = re.compile(r"\[PAUSE (\d+(?:\.\d+)?)s[^\]]*\]")
@@ -669,6 +672,9 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
         wav.unlink(missing_ok=True)
     checks = {k: result[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks["problems"] = result["problems"]
+    if result["pass"] and item.get("target_seconds") and result["seconds"] < item["target_seconds"]:
+        checks["notes"] = [f"SHORT {result['seconds']:.0f}s voiced is under the {item['target_seconds']}s target"]
+        print(f"  SHORT {item['file']}: {result['seconds']:.0f}s against the {item['target_seconds']}s target (shipped)")
     checks["mastering"] = {k: mastered[k] for k in ("tries", "i", "tp")}
     if item.get("marks"):
         # Where the call-and-response quiet starts, as Hush Harbor rows carry it (the app shows the response then).

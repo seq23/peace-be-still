@@ -459,9 +459,12 @@ rest: c1
   if (!isFail(checkPsalmNight(pnight).no_promises)) throw new Error("SELFTEST sleep claim not caught");
   pnight.segments.reverse();
   if (!isFail(checkPsalmNight(pnight).plan)) throw new Error("SELFTEST psalm plan not caught");
-  // 21 Nov 2026: nights the old gate estimated at 13.6 min voiced at 12; 13 min is now a hard floor and the
-  // estimate is never longer than the voice: en pn-01 (739 words, 340 s of quiet) voiced at 723 s.
-  if (!isFail(checkPsalmNight({ ...pnight, est_seconds: 12.9 * 60 }).length)) throw new Error("SELFTEST a 12.9-minute psalm night was not held");
+  // Her ruling 21 Nov 2026: the length target guides the writing; a 12-min night ships with a note, only one under
+  // 75% of the target (a broken script) is held. The estimate is never longer than the voice: en pn-01 (739 words,
+  // 340 s of quiet) voiced at 723 s.
+  const pnLen = (min) => checkPsalmNight({ ...pnight, est_seconds: min * 60 }).length;
+  if (isFail(pnLen(12)) || pnLen(12) === "pass") throw new Error("SELFTEST a 12-minute psalm night is not shipped with a note");
+  if (!isFail(pnLen(6))) throw new Error("SELFTEST a 6-minute psalm night was not held");
   const pn01 = voicedPsalmSeconds([{ part: "reflect", text: `${"word ".repeat(739).trim()} [pause 336]` }], "en");
   if (pn01 > 723.3 || pn01 < 700) throw new Error(`SELFTEST psalm night estimate ${pn01}s is not calibrated to en pn-01 voiced at 723 s`);
   // Imagination Night: no faith words, no Neville without the line
@@ -539,7 +542,8 @@ close: s
   // A script missing a segment, or far over length, fails the gate (held, so the fill never voices it).
   if (!isFail(mkEs((n) => { n.segments.splice(1, 1); }).plan)) throw new Error("SELFTEST missing teaching not caught");
   if (!isFail(mkEs((n) => { n.est_seconds = 40 * 60; }).length)) throw new Error("SELFTEST 40-minute night not caught");
-  if (!isFail(mkEs((n) => { n.est_seconds = 17.6 * 60; }).length)) throw new Error("SELFTEST a 17.6-minute night (the first Spanish sample) was not held");
+  if (isFail(mkEs((n) => { n.est_seconds = 17.6 * 60; }).length)) throw new Error("SELFTEST a 17.6-minute night (the first Spanish sample) was held: only a note");
+  if (!isFail(mkEs((n) => { n.est_seconds = 13 * 60; }).length)) throw new Error("SELFTEST a 13-minute night (under 75% of 18) was not held");
   // The pace matches the voiced files: the Spanish sample (in-01 before lengthening: 793 words, 1055 s voiced).
   if (Math.abs(voicedSeconds("x [pause 1000]", 793) - (793 / VOICED_WPM) * 60 - 1003.8) > 0.6) throw new Error("SELFTEST voiced length counts a written pause twice");
   const heldEs = buildImaginationNight(ines[1], "es", shared(ines));
