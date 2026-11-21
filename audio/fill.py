@@ -557,16 +557,14 @@ def git_commit(msg: str) -> str:
 
 # ------------------------------------------------------------------ the run window
 def window_minutes(now: dt.datetime) -> int:
-    """Minutes the Mac may still spend on audio in this batch (her pick "A", 20 Nov 2026): 0 in her
-    workday (Mon-Fri 08:00-17:00 CT, Codex builds the app then); otherwise the minutes until the next
-    weekday 08:00 CT, so a batch never runs into a workday. Weekends are open all day. Pure."""
+    """Minutes the Mac may still spend on audio in this batch (her call 20 Nov 2026: "every night at
+    5pm until its done"): every day 17:00-08:00 CT, weekends included; 0 between 08:00 and 17:00.
+    Otherwise the minutes until the next 08:00 CT, so a batch never runs into the day. Pure."""
     n = now.astimezone(CT)
-    if n.weekday() < 5 and 8 <= n.hour < 17:
+    if 8 <= n.hour < 17:
         return 0
     end = n.replace(hour=8, minute=0, second=0, microsecond=0)
     if n >= end:
-        end += dt.timedelta(days=1)
-    while end.weekday() >= 5:
         end += dt.timedelta(days=1)
     return int((end.timestamp() - n.timestamp()) // 60)
 
