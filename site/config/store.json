@@ -3,5 +3,5 @@
   "app_store_url": null,
   "play_url": null,
   "es_listing_spanish_legal": true,
-  "es_listing_spanish_legal_why": "OFF until the owner says yes: when true, the es-MX store listing links the Spanish legal pages (/es/privacidad, /es/terminos) instead of the English ones marked (en inglés). Flip with npm run store:set -- --es-legal on, then land the PR as usual."
+  "es_listing_spanish_legal_why": "ON since the owner's yes on 20 Nov 2026 (commit f26135d): the es-MX store listing links the Spanish legal pages (/es/privacidad, /es/terminos), and the release gate fails if store/listing-es.md disagrees. To go back to the English pages marked (en inglés): npm run store:set -- --es-legal off, then land the PR as usual."
 }
