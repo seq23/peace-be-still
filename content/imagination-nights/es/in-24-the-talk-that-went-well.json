@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Vas caminando hacia el lugar donde van a hablar. Nota que tus pasos son parejos. [pause 20]\n\nRespira una vez, despacio, antes de empezar. Siente los pies en el piso. [pause 23]\n\nSiéntate o párate frente a esa persona. Mira su cara. Deja que sea una cara normal, no una que da miedo. [pause 23]\n\nÓyete empezar. Tu voz suena tranquila. Dices la primera frase, y sale tal como querías. [pause 25]\n\nSigue. Dices la parte difícil con sencillez, sin apurarte y sin pedir perdón por decirla. [pause 27]\n\nNota que te está escuchando. Nota que el cuarto sigue en pie. [pause 27]\n\nDeja que conteste, como sea que conteste. Siente que sigues firme. Dijiste lo que era verdad. [pause 27]\n\nCuando termina, sales al aire libre. Sientes los hombros ligeros. [pause 27]\n\nDi en tu mente, dije lo que tenía que decir. Puedo hacer cosas difíciles con amabilidad. [pause 28]\n\nDeja que el alivio de esa caminata se acomode en tu pecho mientras descansas. [pause 30]"
+   "text": "Vas caminando hacia el lugar donde van a hablar. Nota que tus pasos son parejos. [pause 29]\n\nRespira una vez, despacio, antes de empezar. Siente los pies en el piso. [pause 32]\n\nSiéntate o párate frente a esa persona. Mira su cara. Deja que sea una cara normal, no una que da miedo. [pause 32]\n\nÓyete empezar. Tu voz suena tranquila. Dices la primera frase, y sale tal como querías. [pause 34]\n\nSigue. Dices la parte difícil con sencillez, sin apurarte y sin pedir perdón por decirla. [pause 36]\n\nNota que te está escuchando. Nota que el cuarto sigue en pie. [pause 36]\n\nDeja que conteste, como sea que conteste. Siente que sigues firme. Dijiste lo que era verdad. [pause 36]\n\nCuando termina, sales al aire libre. Sientes los hombros ligeros. [pause 36]\n\nDi en tu mente, dije lo que tenía que decir. Puedo hacer cosas difíciles con amabilidad. [pause 37]\n\nDeja que el alivio de esa caminata se acomode en tu pecho mientras descansas. [pause 39]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1140,
+ "est_seconds": 1110,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

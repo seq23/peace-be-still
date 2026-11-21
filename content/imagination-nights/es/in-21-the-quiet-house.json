@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es el principio de la noche. Vas llegando a casa después de un día largo. [pause 20]\n\nMete la llave en la cerradura, o empuja la puerta. Entra. [pause 22]\n\nFíjate en lo primero que hueles. Algo limpio. Algo que se está cocinando. El olor de tu propia casa, nada más. [pause 23]\n\nDeja tu bolsa en su lugar. Quítate los zapatos. Siente el piso bajo tus pies. [pause 23]\n\nRecorre los cuartos despacio. Todo está donde va. Nada te está llamando. [pause 25]\n\nPrende una lámpara de luz suave. Fíjate cómo cae la luz en la pared. [pause 25]\n\nEn algún lugar de la casa hay un sonido pequeño. Un reloj. El refrigerador que zumba. Alguien que quieres moviéndose en otro cuarto, a gusto. [pause 25]\n\nSiéntate en tu lugar favorito. Deja que la silla o el sillón te sostenga. [pause 27]\n\nMira alrededor y nota qué silencio hay también dentro de ti. [pause 27]\n\nDi en tu mente, esta es una casa en paz. Aquí descanso. [pause 28]\n\nDeja que el silencio de esa casa se doble suavemente dentro del silencio de este cuarto. [pause 30]"
+   "text": "Es el principio de la noche. Vas llegando a casa después de un día largo. [pause 25]\n\nMete la llave en la cerradura, o empuja la puerta. Entra. [pause 27]\n\nFíjate en lo primero que hueles. Algo limpio. Algo que se está cocinando. El olor de tu propia casa, nada más. [pause 28]\n\nDeja tu bolsa en su lugar. Quítate los zapatos. Siente el piso bajo tus pies. [pause 28]\n\nRecorre los cuartos despacio. Todo está donde va. Nada te está llamando. [pause 30]\n\nPrende una lámpara de luz suave. Fíjate cómo cae la luz en la pared. [pause 30]\n\nEn algún lugar de la casa hay un sonido pequeño. Un reloj. El refrigerador que zumba. Alguien que quieres moviéndose en otro cuarto, a gusto. [pause 30]\n\nSiéntate en tu lugar favorito. Deja que la silla o el sillón te sostenga. [pause 32]\n\nMira alrededor y nota qué silencio hay también dentro de ti. [pause 32]\n\nDi en tu mente, esta es una casa en paz. Aquí descanso. [pause 33]\n\nDeja que el silencio de esa casa se doble suavemente dentro del silencio de este cuarto. [pause 35]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1189,
+ "est_seconds": 1119,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

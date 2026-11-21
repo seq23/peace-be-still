@@ -257,7 +257,8 @@ export function checkImaginationNight(n) {
   c.plan = order === "settle,teaching,scene,close" ? pass : fail(`segments ${order} are not settle, teaching, scene, close`);
   c.speakers = n.segments.every((x) => x.speaker === "narrator") ? pass : fail("narrator only");
   c.teaching_length = band(words(n.segments.find((x) => x.part === "teaching")?.text || "").length / 1.0, 150, 300, " words");
-  c.length = band(n.est_seconds / 60, 18, 22, " min");
+  // 18 min is a floor, not a band edge (21 Nov 2026: nights estimated at 100 wpm voiced at 17 min).
+  c.length = n.est_seconds < 18 * 60 ? fail(`${(n.est_seconds / 60).toFixed(1)} min voiced is under the 18 min floor`) : band(n.est_seconds / 60, 18, 22, " min");
   c.ai_label = n.ai_label ? pass : fail("AI label key missing");
   return c;
 }

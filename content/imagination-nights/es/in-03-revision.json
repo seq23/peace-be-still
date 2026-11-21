@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Vuelve al principio de ese momento. Fíjate dónde estabas. El lugar. La hora del día. Quién estaba ahí. [pause 14]\n\nDeja que empiece como empezó. Pero esta vez, antes de que llegue la parte difícil, respira dentro de la escena. [pause 14]\n\nAhora deja que vaya distinto. Si hablaste con dureza, óyete hablar con suavidad. Si no te hicieron caso, mira a la otra persona voltear y escucharte. [pause 17]\n\nOye las palabras nuevas. Que sean palabras normales. Nada dramático. Solo como te hubiera gustado que fuera. [pause 17]\n\nMira cómo se suaviza la cara de la otra persona. Mira cómo bajan tus propios hombros. [pause 17]\n\nDeja que el momento termine bien. Tal vez un gesto con la cabeza. Una risa. Un gracias. [pause 17]\n\nAhora repasa la versión nueva una vez más, desde el principio. Deja que esta vez se sienta conocida. [pause 20]\n\nY una vez más, más despacio. Deja que se vuelva la versión que recuerdas. [pause 22]\n\nNota lo que sientes ahora por la otra persona. Un poco más de ternura. Un poco más de paciencia. [pause 20]\n\nNota lo que sientes por ti. Hoy traías mucho cansancio. Hiciste lo mejor que pudiste. En esta versión, también te tratas con cariño. [pause 20]\n\nSi mañana hay algo que arreglar, imagínate haciéndolo con calma. Un mensaje corto. Una palabra amable. Y luego suéltalo también. [pause 20]\n\nEl día se está cerrando como un libro. La última página que leíste fue buena. [pause 22]\n\nCuando termine, deja que se desvanezca. El día ya acabó, y la última versión que viste fue una versión amable. [pause 22]"
+   "text": "Vuelve al principio de ese momento. Fíjate dónde estabas. El lugar. La hora del día. Quién estaba ahí. [pause 22]\n\nDeja que empiece como empezó. Pero esta vez, antes de que llegue la parte difícil, respira dentro de la escena. [pause 22]\n\nAhora deja que vaya distinto. Si hablaste con dureza, óyete hablar con suavidad. Si no te hicieron caso, mira a la otra persona voltear y escucharte. [pause 25]\n\nOye las palabras nuevas. Que sean palabras normales. Nada dramático. Solo como te hubiera gustado que fuera. [pause 25]\n\nMira cómo se suaviza la cara de la otra persona. Mira cómo bajan tus propios hombros. [pause 25]\n\nDeja que el momento termine bien. Tal vez un gesto con la cabeza. Una risa. Un gracias. [pause 25]\n\nAhora repasa la versión nueva una vez más, desde el principio. Deja que esta vez se sienta conocida. [pause 28]\n\nY una vez más, más despacio. Deja que se vuelva la versión que recuerdas. [pause 30]\n\nNota lo que sientes ahora por la otra persona. Un poco más de ternura. Un poco más de paciencia. [pause 28]\n\nNota lo que sientes por ti. Hoy traías mucho cansancio. Hiciste lo mejor que pudiste. En esta versión, también te tratas con cariño. [pause 28]\n\nSi mañana hay algo que arreglar, imagínate haciéndolo con calma. Un mensaje corto. Una palabra amable. Y luego suéltalo también. [pause 28]\n\nEl día se está cerrando como un libro. La última página que leíste fue buena. [pause 30]\n\nCuando termine, deja que se desvanezca. El día ya acabó, y la última versión que viste fue una versión amable. [pause 30]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1145,
+ "est_seconds": 1118,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

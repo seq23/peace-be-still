@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Despiertas sin alarma. Ya hay luz. Nadie te está llamando. [pause 20]\n\nQuédate sin moverte un rato. Fíjate en las cobijas. La almohada. El simple hecho de que no tienes que levantarte. [pause 23]\n\nCuando quieras, levántate despacio. Prepara el desayuno sin prisa. Saboréalo. [pause 23]\n\nSiéntate junto a una ventana con un libro, o con música, o con nada. [pause 25]\n\nDeja que pase una hora. Nota que no miraste el reloj. [pause 27]\n\nEn la tarde, toma una siesta con la ventana un poco abierta. Oye cómo van y vienen los ruidos de la calle. [pause 27]\n\nDespierta suave y sin prisa. Sal un minuto y siente el aire. [pause 27]\n\nEn la noche, come algo sencillo. Lava un plato. Deja lo demás para mañana. [pause 27]\n\nFíjate cómo se siente tu cuerpo al final de un día así. Suelto. Lleno. En silencio. [pause 28]\n\nDi en tu mente, tengo permiso de descansar. [pause 28]\n\nDeja que ese día tranquilo te lleve hasta esta noche tranquila. [pause 30]"
+   "text": "Despiertas sin alarma. Ya hay luz. Nadie te está llamando. [pause 26]\n\nQuédate sin moverte un rato. Fíjate en las cobijas. La almohada. El simple hecho de que no tienes que levantarte. [pause 29]\n\nCuando quieras, levántate despacio. Prepara el desayuno sin prisa. Saboréalo. [pause 29]\n\nSiéntate junto a una ventana con un libro, o con música, o con nada. [pause 31]\n\nDeja que pase una hora. Nota que no miraste el reloj. [pause 33]\n\nEn la tarde, toma una siesta con la ventana un poco abierta. Oye cómo van y vienen los ruidos de la calle. [pause 33]\n\nDespierta suave y sin prisa. Sal un minuto y siente el aire. [pause 33]\n\nEn la noche, come algo sencillo. Lava un plato. Deja lo demás para mañana. [pause 33]\n\nFíjate cómo se siente tu cuerpo al final de un día así. Suelto. Lleno. En silencio. [pause 34]\n\nDi en tu mente, tengo permiso de descansar. [pause 34]\n\nDeja que ese día tranquilo te lleve hasta esta noche tranquila. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1167,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

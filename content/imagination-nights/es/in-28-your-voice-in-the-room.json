@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Estás esperando tu turno. Fíjate en el salón. Las sillas. La luz. La gente que platica bajito. [pause 20]\n\nSiente el corazón que late un poco rápido. Déjalo. Es solo tu cuerpo preparándose. [pause 23]\n\nOye tu nombre. Levántate. Camina al frente, un paso tranquilo a la vez. [pause 23]\n\nMira las caras. Encuentra una amable, y deja que tus ojos descansen ahí. [pause 25]\n\nRespira, y empieza. Oye cómo tu voz llena el salón, clara y cálida. [pause 27]\n\nNota el momento en que el salón se queda en silencio, del silencio bueno. Te están escuchando. [pause 27]\n\nSigue. Date permiso de disfrutarlo. Esto es algo que haces bien. [pause 27]\n\nCuando terminas, hay una pausa cortita, y luego el sonido de la gente aplaudiendo. Alguien grita, qué bonito. [pause 27]\n\nRegresa a tu lugar. Siente la cara tibia y las manos firmes. [pause 28]\n\nDi en tu mente, mi voz tiene lugar en este salón. [pause 28]\n\nDeja que el sonido de ese salón se apague suavemente en el silencio de este cuarto. [pause 30]"
+   "text": "Estás esperando tu turno. Fíjate en el salón. Las sillas. La luz. La gente que platica bajito. [pause 27]\n\nSiente el corazón que late un poco rápido. Déjalo. Es solo tu cuerpo preparándose. [pause 30]\n\nOye tu nombre. Levántate. Camina al frente, un paso tranquilo a la vez. [pause 30]\n\nMira las caras. Encuentra una amable, y deja que tus ojos descansen ahí. [pause 32]\n\nRespira, y empieza. Oye cómo tu voz llena el salón, clara y cálida. [pause 34]\n\nNota el momento en que el salón se queda en silencio, del silencio bueno. Te están escuchando. [pause 34]\n\nSigue. Date permiso de disfrutarlo. Esto es algo que haces bien. [pause 34]\n\nCuando terminas, hay una pausa cortita, y luego el sonido de la gente aplaudiendo. Alguien grita, qué bonito. [pause 34]\n\nRegresa a tu lugar. Siente la cara tibia y las manos firmes. [pause 35]\n\nDi en tu mente, mi voz tiene lugar en este salón. [pause 35]\n\nDeja que el sonido de ese salón se apague suavemente en el silencio de este cuarto. [pause 37]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1164,
+ "est_seconds": 1120,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

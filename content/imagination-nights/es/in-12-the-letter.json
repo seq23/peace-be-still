@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Estás en un lugar donde sueles sentarte. Una silla de la cocina. La orilla de la cama. Tu carro, antes de entrar a la casa. [pause 22]\n\nLlega un mensaje. Ves de quién es. Sientes mariposas en el estómago. [pause 25]\n\nÁbrelo. Deja que tus ojos encuentren la primera línea. [pause 25]\n\nAhí está. La palabra que esperabas. Léela despacio. [pause 25]\n\nLéela otra vez, nada más para confirmar. Sigue diciendo lo mismo. [pause 25]\n\nSiente cómo se te sale todo el aire de una vez. Siente tu mano que va a la boca, o al corazón. [pause 28]\n\nTal vez te ríes. Tal vez se te llenan los ojos de lágrimas. Deja que venga lo que venga. [pause 28]\n\nAhora imagina a quién se lo cuentas primero. Óyete decirlo en voz alta por primera vez. Sí pasó. [pause 28]\n\nOye su respuesta. Oye la alegría en su voz. [pause 28]\n\nMás tarde esa noche, vuelves a leer el mensaje antes de acostarte. Ya se siente más tranquilo. Real. [pause 30]\n\nDeja el teléfono. Recuéstate. Deja que las palabras se queden en tu mente mientras te vas quedando en calma. [pause 30]"
+   "text": "Estás en un lugar donde sueles sentarte. Una silla de la cocina. La orilla de la cama. Tu carro, antes de entrar a la casa. [pause 27]\n\nLlega un mensaje. Ves de quién es. Sientes mariposas en el estómago. [pause 30]\n\nÁbrelo. Deja que tus ojos encuentren la primera línea. [pause 30]\n\nAhí está. La palabra que esperabas. Léela despacio. [pause 30]\n\nLéela otra vez, nada más para confirmar. Sigue diciendo lo mismo. [pause 30]\n\nSiente cómo se te sale todo el aire de una vez. Siente tu mano que va a la boca, o al corazón. [pause 33]\n\nTal vez te ríes. Tal vez se te llenan los ojos de lágrimas. Deja que venga lo que venga. [pause 33]\n\nAhora imagina a quién se lo cuentas primero. Óyete decirlo en voz alta por primera vez. Sí pasó. [pause 33]\n\nOye su respuesta. Oye la alegría en su voz. [pause 33]\n\nMás tarde esa noche, vuelves a leer el mensaje antes de acostarte. Ya se siente más tranquilo. Real. [pause 35]\n\nDeja el teléfono. Recuéstate. Deja que las palabras se queden en tu mente mientras te vas quedando en calma. [pause 35]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1184,
+ "est_seconds": 1117,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

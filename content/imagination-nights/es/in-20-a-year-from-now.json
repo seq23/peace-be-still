@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es dentro de un año, esta misma noche. Estás en la cama, más o menos como ahora. [pause 22]\n\nFíjate en el cuarto. ¿Es el mismo cuarto, o es otro? [pause 25]\n\nDeja que tu mente recorra el año. Empieza por la primavera. ¿Qué pasó? [pause 25]\n\nLuego el verano. Un día que recuerdas. Una comida. Un viaje. Una plática. [pause 25]\n\nLuego el otoño. Algo que terminaste. Algo que soltaste. [pause 25]\n\nLuego el invierno. Una noche tranquila, muy parecida a esta. [pause 28]\n\nAhora piensa en el deseo que cargaste este año. Imagínalo ya como parte de tu vida. Normal. Conocido. [pause 28]\n\nFíjate en lo que sientes por la persona que eras hace un año. Trátala con cariño. Estaba haciendo lo mejor que podía. [pause 28]\n\nDi en tu mente, fue un buen año. Qué bueno que no me rendí. [pause 30]\n\nDeja que todo el año descanse en tu pecho, como un respiro largo. [pause 30]\n\nY deja que esa noche de dentro de un año y esta noche se vuelvan una sola noche tranquila. [pause 30]"
+   "text": "Es dentro de un año, esta misma noche. Estás en la cama, más o menos como ahora. [pause 27]\n\nFíjate en el cuarto. ¿Es el mismo cuarto, o es otro? [pause 30]\n\nDeja que tu mente recorra el año. Empieza por la primavera. ¿Qué pasó? [pause 30]\n\nLuego el verano. Un día que recuerdas. Una comida. Un viaje. Una plática. [pause 30]\n\nLuego el otoño. Algo que terminaste. Algo que soltaste. [pause 30]\n\nLuego el invierno. Una noche tranquila, muy parecida a esta. [pause 33]\n\nAhora piensa en el deseo que cargaste este año. Imagínalo ya como parte de tu vida. Normal. Conocido. [pause 33]\n\nFíjate en lo que sientes por la persona que eras hace un año. Trátala con cariño. Estaba haciendo lo mejor que podía. [pause 33]\n\nDi en tu mente, fue un buen año. Qué bueno que no me rendí. [pause 35]\n\nDeja que todo el año descanse en tu pecho, como un respiro largo. [pause 35]\n\nY deja que esa noche de dentro de un año y esta noche se vuelvan una sola noche tranquila. [pause 35]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1177,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

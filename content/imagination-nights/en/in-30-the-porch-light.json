@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is a summer evening, many years from now. You are sitting on a porch in a comfortable chair. [pause 20]\n\nNotice the sounds. Crickets. A screen door somewhere. Children laughing down the street. [pause 23]\n\nSomeone you love comes out and sits beside you. Neither of you needs to talk. [pause 23]\n\nLook out at the yard. The trees are tall now. You remember when they were small. [pause 25]\n\nLet your mind drift over the years. A home you made. Work you were proud of. Friends who stayed. [pause 27]\n\nThink of the hard seasons too. Notice that you came through them. Notice who you became. [pause 27]\n\nThe porch light comes on. Moths gather around it. The sky goes from orange to deep blue. [pause 27]\n\nSomeone calls goodnight from the sidewalk, and you wave. [pause 27]\n\nFeel how full your heart is. Not because everything was perfect, but because it was yours. [pause 28]\n\nSay in your mind, I am grateful for my life. [pause 28]\n\nLeave the porch light on, and let the long evening slip quietly into this night. [pause 30]"
+   "text": "It is a summer evening, many years from now. You are sitting on a porch in a comfortable chair. [pause 27]\n\nNotice the sounds. Crickets. A screen door somewhere. Children laughing down the street. [pause 30]\n\nSomeone you love comes out and sits beside you. Neither of you needs to talk. [pause 30]\n\nLook out at the yard. The trees are tall now. You remember when they were small. [pause 32]\n\nLet your mind drift over the years. A home you made. Work you were proud of. Friends who stayed. [pause 34]\n\nThink of the hard seasons too. Notice that you came through them. Notice who you became. [pause 34]\n\nThe porch light comes on. Moths gather around it. The sky goes from orange to deep blue. [pause 34]\n\nSomeone calls goodnight from the sidewalk, and you wave. [pause 34]\n\nFeel how full your heart is. Not because everything was perfect, but because it was yours. [pause 35]\n\nSay in your mind, I am grateful for my life. [pause 35]\n\nLeave the porch light on, and let the long evening slip quietly into this night. [pause 37]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1160,
+ "est_seconds": 1116,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
    },
    "verdict": "pass"
   },

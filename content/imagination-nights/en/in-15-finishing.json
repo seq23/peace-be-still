@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is the day it is finished. Notice where you are. A hall. An office. Your own kitchen table. [pause 20]\n\nFeel what is in your hands. A diploma. The last page. The final receipt. [pause 23]\n\nNotice the quiet in your chest where the pressure used to be. [pause 23]\n\nSomeone near you says, you did it. Hear the words. Let them land. [pause 23]\n\nThink back for a moment to the hardest night of the whole thing. The one where you almost quit. [pause 23]\n\nNow look at yourself today, on the other side of it. Let yourself be a little amazed. [pause 26]\n\nPicture going home that evening. Taking off your shoes. Nothing due tomorrow. [pause 26]\n\nSomeone calls to congratulate you. You hear yourself say, thank you. I am really proud. [pause 26]\n\nBefore bed, you put the proof of it somewhere you will see it. On the fridge. On a shelf. [pause 28]\n\nSay quietly, I finished. [pause 28]\n\nLet that sentence be the last one in your mind tonight. [pause 30]"
+   "text": "It is the day it is finished. Notice where you are. A hall. An office. Your own kitchen table. [pause 27]\n\nFeel what is in your hands. A diploma. The last page. The final receipt. [pause 30]\n\nNotice the quiet in your chest where the pressure used to be. [pause 30]\n\nSomeone near you says, you did it. Hear the words. Let them land. [pause 30]\n\nThink back for a moment to the hardest night of the whole thing. The one where you almost quit. [pause 30]\n\nNow look at yourself today, on the other side of it. Let yourself be a little amazed. [pause 33]\n\nPicture going home that evening. Taking off your shoes. Nothing due tomorrow. [pause 33]\n\nSomeone calls to congratulate you. You hear yourself say, thank you. I am really proud. [pause 33]\n\nBefore bed, you put the proof of it somewhere you will see it. On the fridge. On a shelf. [pause 35]\n\nSay quietly, I finished. [pause 35]\n\nLet that sentence be the last one in your mind tonight. [pause 37]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1165,
+ "est_seconds": 1119,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

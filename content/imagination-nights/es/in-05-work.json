@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es una mañana entre semana, dentro de unas semanas. Lo que esperabas ya pasó. [pause 15]\n\nTe estás arreglando. Fíjate qué ropa llevas. Fíjate cómo te sientes con ella. [pause 15]\n\nLlegas, o te conectas, y alguien te saluda por tu nombre. Es algo de todos los días. Ya perteneces aquí. [pause 18]\n\nSiente cómo te sientas a trabajar. Es un reto, pero un reto bueno. Sabes qué sigue. [pause 18]\n\nAhora imagina la noche de ese día. Le estás contando a alguien de confianza cómo te fue. Se ríen de algo pequeño que pasó. [pause 18]\n\nOye cómo te dice, yo sabía que podías. Siente el calorcito en la cara. [pause 18]\n\nNota que la preocupación de antes no está. No estás revisando el correo a cada rato. Eso ya quedó atrás. [pause 21]\n\nDi en tu mente una frase tranquila, en pasado. Salió bien. Qué bueno que no me rendí. [pause 23]\n\nFíjate también en el dinero en esta imagen. No riquezas. Solo la calma de una cuenta que se paga a tiempo, sin un nudo en el estómago. [pause 21]\n\nFíjate en tus tardes. Llegas a casa con energía de sobra para la gente que quieres. [pause 21]\n\nAlguien te pregunta a qué te dedicas, y le cuentas, y te gusta decirlo. [pause 21]\n\nDeja que la imagen descanse ahí, como un buen día que recuerdas. [pause 28]"
+   "text": "Es una mañana entre semana, dentro de unas semanas. Lo que esperabas ya pasó. [pause 23]\n\nTe estás arreglando. Fíjate qué ropa llevas. Fíjate cómo te sientes con ella. [pause 23]\n\nLlegas, o te conectas, y alguien te saluda por tu nombre. Es algo de todos los días. Ya perteneces aquí. [pause 26]\n\nSiente cómo te sientas a trabajar. Es un reto, pero un reto bueno. Sabes qué sigue. [pause 26]\n\nAhora imagina la noche de ese día. Le estás contando a alguien de confianza cómo te fue. Se ríen de algo pequeño que pasó. [pause 26]\n\nOye cómo te dice, yo sabía que podías. Siente el calorcito en la cara. [pause 26]\n\nNota que la preocupación de antes no está. No estás revisando el correo a cada rato. Eso ya quedó atrás. [pause 29]\n\nDi en tu mente una frase tranquila, en pasado. Salió bien. Qué bueno que no me rendí. [pause 31]\n\nFíjate también en el dinero en esta imagen. No riquezas. Solo la calma de una cuenta que se paga a tiempo, sin un nudo en el estómago. [pause 29]\n\nFíjate en tus tardes. Llegas a casa con energía de sobra para la gente que quieres. [pause 29]\n\nAlguien te pregunta a qué te dedicas, y le cuentas, y te gusta decirlo. [pause 29]\n\nDeja que la imagen descanse ahí, como un buen día que recuerdas. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1152,
+ "est_seconds": 1117,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

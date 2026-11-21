@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You and your friend are standing together somewhere familiar. A kitchen. A doorway. A parking lot after an ordinary day. [pause 18]\n\nThey turn to you. They are smiling before they even say anything. [pause 18]\n\nHear them say it. Congratulations. I am so happy for you. [pause 21]\n\nFeel their hand on your arm. Or their arms around you. [pause 21]\n\nHear yourself say, thank you. I can hardly believe it, and yet it feels normal now. [pause 21]\n\nLet the scene play again from the start. Their smile. Their words. Your thank you. [pause 24]\n\nAnd again. Shorter now. Just the word. Congratulations. [pause 24]\n\nLet the word repeat in your mind, in the rhythm of your breath. [pause 26]\n\nNow picture a second friend. They heard the news from the first one. They call you, excited. [pause 24]\n\nHear them say it too. I heard. Congratulations. Tell me everything. [pause 24]\n\nFeel yourself telling the story, easily, as something that already happened. [pause 24]\n\nLet it get quieter and quieter, until it is only a feeling. [pause 30]"
+   "text": "You and your friend are standing together somewhere familiar. A kitchen. A doorway. A parking lot after an ordinary day. [pause 26]\n\nThey turn to you. They are smiling before they even say anything. [pause 26]\n\nHear them say it. Congratulations. I am so happy for you. [pause 29]\n\nFeel their hand on your arm. Or their arms around you. [pause 29]\n\nHear yourself say, thank you. I can hardly believe it, and yet it feels normal now. [pause 29]\n\nLet the scene play again from the start. Their smile. Their words. Your thank you. [pause 32]\n\nAnd again. Shorter now. Just the word. Congratulations. [pause 32]\n\nLet the word repeat in your mind, in the rhythm of your breath. [pause 34]\n\nNow picture a second friend. They heard the news from the first one. They call you, excited. [pause 32]\n\nHear them say it too. I heard. Congratulations. Tell me everything. [pause 32]\n\nFeel yourself telling the story, easily, as something that already happened. [pause 32]\n\nLet it get quieter and quieter, until it is only a feeling. [pause 38]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1137,
+ "est_seconds": 1111,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

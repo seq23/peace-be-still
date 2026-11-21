@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is early morning. You are just waking up. Your eyes are still closed. [pause 15]\n\nNotice the sounds. A bird outside. A car far away. The hum of the house. [pause 18]\n\nBefore you even open your eyes, you remember. Oh. That is right. It already happened. [pause 18]\n\nFeel the smile come before you decide to smile. [pause 18]\n\nOpen your eyes in the scene. Notice the light on the ceiling. The color of the walls. [pause 18]\n\nStretch. Feel how easy your body is this morning. No dread sitting on your chest. [pause 18]\n\nSwing your feet onto the floor. Feel it, cool and solid. [pause 18]\n\nWalk to the kitchen and start the coffee or the kettle. Hear it begin. [pause 21]\n\nWhile you wait, look out the window. The day ahead is ordinary, and that is the best part. Your wish is simply part of the ordinary now. [pause 21]\n\nSomeone texts good morning. You text back. Life is moving, and it is moving well. [pause 21]\n\nPour your cup. Hold it with both hands. Feel the warmth. [pause 23]\n\nSay quietly in your mind, this is my life now. I am glad. [pause 23]\n\nThen let the morning fade, and let the night come back around you, carrying that morning inside it. [pause 28]"
+   "text": "It is early morning. You are just waking up. Your eyes are still closed. [pause 23]\n\nNotice the sounds. A bird outside. A car far away. The hum of the house. [pause 26]\n\nBefore you even open your eyes, you remember. Oh. That is right. It already happened. [pause 26]\n\nFeel the smile come before you decide to smile. [pause 26]\n\nOpen your eyes in the scene. Notice the light on the ceiling. The color of the walls. [pause 26]\n\nStretch. Feel how easy your body is this morning. No dread sitting on your chest. [pause 26]\n\nSwing your feet onto the floor. Feel it, cool and solid. [pause 26]\n\nWalk to the kitchen and start the coffee or the kettle. Hear it begin. [pause 29]\n\nWhile you wait, look out the window. The day ahead is ordinary, and that is the best part. Your wish is simply part of the ordinary now. [pause 29]\n\nSomeone texts good morning. You text back. Life is moving, and it is moving well. [pause 29]\n\nPour your cup. Hold it with both hands. Feel the warmth. [pause 31]\n\nSay quietly in your mind, this is my life now. I am glad. [pause 31]\n\nThen let the morning fade, and let the night come back around you, carrying that morning inside it. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1146,
+ "est_seconds": 1121,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

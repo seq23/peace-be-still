@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Despiertas en un cuarto que no es el tuyo, y por un segundo no sabes dónde estás. Luego te acuerdas, y sonríes. [pause 25]\n\nAbre las cortinas. Fíjate qué hay afuera. Agua. Cerros. Techos de teja. [pause 25]\n\nSal. Siente el aire en la cara. Aquí huele distinto. A sal, o a pino, o a pan recién hecho de una panadería. [pause 25]\n\nCamina despacio. No tienes que llegar a ningún lado. El teléfono está en tu bolsillo, callado. [pause 25]\n\nBusca dónde sentarte. Una banca. Una barda. Un pedazo de arena. Mira a la gente que empieza su mañana. [pause 28]\n\nPrueba algo nuevo. Deja que te sorprenda. [pause 25]\n\nNota que tus hombros están más abajo de lo que han estado en meses. [pause 28]\n\nMás tarde, la luz se pone dorada. Sientes el cansancio bueno, el de caminar y mirar. [pause 28]\n\nDe vuelta en el cuarto, te acuestas, y por la ventana oyes los sonidos de este lugar que se acomoda para la noche. [pause 30]\n\nDi en tu mente, vine. Estoy aquí. [pause 30]\n\nDeja que esos sonidos lejanos se vuelvan los sonidos que te rodean ahora. [pause 30]"
+   "text": "Despiertas en un cuarto que no es el tuyo, y por un segundo no sabes dónde estás. Luego te acuerdas, y sonríes. [pause 29]\n\nAbre las cortinas. Fíjate qué hay afuera. Agua. Cerros. Techos de teja. [pause 29]\n\nSal. Siente el aire en la cara. Aquí huele distinto. A sal, o a pino, o a pan recién hecho de una panadería. [pause 29]\n\nCamina despacio. No tienes que llegar a ningún lado. El teléfono está en tu bolsillo, callado. [pause 29]\n\nBusca dónde sentarte. Una banca. Una barda. Un pedazo de arena. Mira a la gente que empieza su mañana. [pause 32]\n\nPrueba algo nuevo. Deja que te sorprenda. [pause 29]\n\nNota que tus hombros están más abajo de lo que han estado en meses. [pause 32]\n\nMás tarde, la luz se pone dorada. Sientes el cansancio bueno, el de caminar y mirar. [pause 32]\n\nDe vuelta en el cuarto, te acuestas, y por la ventana oyes los sonidos de este lugar que se acomoda para la noche. [pause 34]\n\nDi en tu mente, vine. Estoy aquí. [pause 34]\n\nDeja que esos sonidos lejanos se vuelvan los sonidos que te rodean ahora. [pause 34]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1194,
+ "est_seconds": 1116,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

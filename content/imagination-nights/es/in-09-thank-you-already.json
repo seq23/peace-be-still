@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Estás en un lugar cómodo, con una pluma y una tarjeta enfrente. [pause 16]\n\nLe escribes a alguien que fue parte de tu buena noticia. Una amistad. Una maestra. Un vecino. Alguien que creyó que podías. [pause 19]\n\nMira tu mano escribir las primeras palabras. Muchas gracias. [pause 19]\n\nSigue escribiendo. Cuéntale lo que pasó. Cuéntale cómo se siente ahora. [pause 19]\n\nNota con qué facilidad salen las palabras. No te estás esforzando por creerlo. Solo lo estás recordando. [pause 19]\n\nDobla la tarjeta. Imagina a esa persona abriéndola, y sonriendo. [pause 22]\n\nAhora deja que el gracias se vuelva hacia adentro. Dilo bajito en tu mente. Gracias. Gracias. Sí pasó. [pause 22]\n\nSiente ese calor que se extiende del pecho a las manos. [pause 24]\n\nImagina otro gracias. Esta vez dicho en voz alta. Estás al teléfono, diciéndole a alguien lo mucho que significó su ayuda. [pause 22]\n\nÓyete decir, no lo hubiera logrado sin ti. Oye cómo se ríe y te dice, lo lograste tú. [pause 22]\n\nAhora imagina un gracias pequeño y callado al final de un día cualquiera en tu vida nueva. Solo tú, mirando por la ventana, con alegría. [pause 22]\n\nDeja que la gratitud sea lo último que sientas antes del sueño. [pause 29]"
+   "text": "Estás en un lugar cómodo, con una pluma y una tarjeta enfrente. [pause 24]\n\nLe escribes a alguien que fue parte de tu buena noticia. Una amistad. Una maestra. Un vecino. Alguien que creyó que podías. [pause 27]\n\nMira tu mano escribir las primeras palabras. Muchas gracias. [pause 27]\n\nSigue escribiendo. Cuéntale lo que pasó. Cuéntale cómo se siente ahora. [pause 27]\n\nNota con qué facilidad salen las palabras. No te estás esforzando por creerlo. Solo lo estás recordando. [pause 27]\n\nDobla la tarjeta. Imagina a esa persona abriéndola, y sonriendo. [pause 30]\n\nAhora deja que el gracias se vuelva hacia adentro. Dilo bajito en tu mente. Gracias. Gracias. Sí pasó. [pause 30]\n\nSiente ese calor que se extiende del pecho a las manos. [pause 32]\n\nImagina otro gracias. Esta vez dicho en voz alta. Estás al teléfono, diciéndole a alguien lo mucho que significó su ayuda. [pause 30]\n\nÓyete decir, no lo hubiera logrado sin ti. Oye cómo se ríe y te dice, lo lograste tú. [pause 30]\n\nAhora imagina un gracias pequeño y callado al final de un día cualquiera en tu vida nueva. Solo tú, mirando por la ventana, con alegría. [pause 30]\n\nDeja que la gratitud sea lo último que sientas antes del sueño. [pause 37]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1152,
+ "est_seconds": 1120,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

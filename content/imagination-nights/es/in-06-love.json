@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Estás en una mesa, tarde en la noche. Ya se lavaron los trastes. Hay música bajita. [pause 16]\n\nFrente a ti hay alguien que se alegra de que estés ahí. Fíjate cómo lo sabes. Cómo te mira. Lo fácil que se siente el ambiente. [pause 20]\n\nTe cuenta algo de su día. Escuchas. Te escucha también. Nadie tiene prisa. [pause 20]\n\nSiente tus hombros. Nota que no estás tratando de impresionar a nadie. Eres tú, y aquí eso es bienvenido. [pause 20]\n\nAlguien se ríe. Tal vez eres tú. [pause 20]\n\nMás tarde, al despedirse, te dice algo sencillo. Me dio mucho gusto estar contigo. Y le crees. [pause 22]\n\nDeja que esa sensación se acomode en tu pecho. Tibia. Sin prisa. Segura. [pause 22]\n\nDi bajito en tu mente, me quieren, y sé querer bien. [pause 24]\n\nFíjate en los pequeños detalles. Una taza de té que te ponen al lado sin que la pidas. Un mensaje que dice, ¿ya llegaste? [pause 22]\n\nFíjate cómo devuelves el cariño. Con facilidad. Sin llevar la cuenta. [pause 22]\n\nImagina una mañana tranquila con esta persona, o con estas personas. Nadie con prisa. Café. Sol. Algo de todos los días, y bueno. [pause 22]\n\nDeja que la noche se quede contigo mientras te vas quedando en calma. [pause 30]"
+   "text": "Estás en una mesa, tarde en la noche. Ya se lavaron los trastes. Hay música bajita. [pause 23]\n\nFrente a ti hay alguien que se alegra de que estés ahí. Fíjate cómo lo sabes. Cómo te mira. Lo fácil que se siente el ambiente. [pause 27]\n\nTe cuenta algo de su día. Escuchas. Te escucha también. Nadie tiene prisa. [pause 27]\n\nSiente tus hombros. Nota que no estás tratando de impresionar a nadie. Eres tú, y aquí eso es bienvenido. [pause 27]\n\nAlguien se ríe. Tal vez eres tú. [pause 27]\n\nMás tarde, al despedirse, te dice algo sencillo. Me dio mucho gusto estar contigo. Y le crees. [pause 29]\n\nDeja que esa sensación se acomode en tu pecho. Tibia. Sin prisa. Segura. [pause 29]\n\nDi bajito en tu mente, me quieren, y sé querer bien. [pause 31]\n\nFíjate en los pequeños detalles. Una taza de té que te ponen al lado sin que la pidas. Un mensaje que dice, ¿ya llegaste? [pause 29]\n\nFíjate cómo devuelves el cariño. Con facilidad. Sin llevar la cuenta. [pause 29]\n\nImagina una mañana tranquila con esta persona, o con estas personas. Nadie con prisa. Café. Sol. Algo de todos los días, y bueno. [pause 29]\n\nDeja que la noche se quede contigo mientras te vas quedando en calma. [pause 37]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1155,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Vas llegando a tu puerta al final de un día largo. Fíjate qué hay bajo tus pies. Un escalón. Un caminito. Un pasillo. [pause 14]\n\nSiente la llave en la mano. Su peso. Los dientecitos del metal. Sabes cuál es sin tener que mirarla. [pause 17]\n\nGírala en la cerradura. Oye el clic. Empuja la puerta. [pause 14]\n\nEntra. Fíjate en lo primero que ves. Un tapete. Una planta. Una ventana con la tarde detrás. [pause 17]\n\nDeja tu bolsa donde siempre la dejas. Quítate los zapatos. Nadie te va a pedir que te vayas. [pause 17]\n\nVe a la cocina. Sírvete un vaso de agua y tómalo despacio, con la espalda apoyada en la barra. [pause 17]\n\nOye el silencio del lugar. Es tu silencio. [pause 20]\n\nAhora ve a la recámara. Abre las cobijas de tu propia cama. Siéntate un momento en la orilla y mira alrededor. [pause 20]\n\nDilo bajito en tu mente. Aquí vivo. Estoy en casa. [pause 22]\n\nAntes de acostarte, recorre los cuartos una vez más. Apaga una lámpara. Revisa la cerradura. Ahora suena igual todas las noches. [pause 20]\n\nFíjate en algo pequeño que tú escogiste. Un cuadro en la pared. Una cobija en la silla. Tus cosas, en tu lugar. [pause 20]\n\nOye los ruidos del barrio que se va calmando. Ya los conoces. Son los ruidos de tu casa. [pause 20]\n\nAcuéstate en esa cama, en ese cuarto, y deja que esta cama y aquella se vuelvan la misma. [pause 27]"
+   "text": "Vas llegando a tu puerta al final de un día largo. Fíjate qué hay bajo tus pies. Un escalón. Un caminito. Un pasillo. [pause 23]\n\nSiente la llave en la mano. Su peso. Los dientecitos del metal. Sabes cuál es sin tener que mirarla. [pause 26]\n\nGírala en la cerradura. Oye el clic. Empuja la puerta. [pause 23]\n\nEntra. Fíjate en lo primero que ves. Un tapete. Una planta. Una ventana con la tarde detrás. [pause 26]\n\nDeja tu bolsa donde siempre la dejas. Quítate los zapatos. Nadie te va a pedir que te vayas. [pause 26]\n\nVe a la cocina. Sírvete un vaso de agua y tómalo despacio, con la espalda apoyada en la barra. [pause 26]\n\nOye el silencio del lugar. Es tu silencio. [pause 29]\n\nAhora ve a la recámara. Abre las cobijas de tu propia cama. Siéntate un momento en la orilla y mira alrededor. [pause 29]\n\nDilo bajito en tu mente. Aquí vivo. Estoy en casa. [pause 31]\n\nAntes de acostarte, recorre los cuartos una vez más. Apaga una lámpara. Revisa la cerradura. Ahora suena igual todas las noches. [pause 29]\n\nFíjate en algo pequeño que tú escogiste. Un cuadro en la pared. Una cobija en la silla. Tus cosas, en tu lugar. [pause 29]\n\nOye los ruidos del barrio que se va calmando. Ya los conoces. Son los ruidos de tu casa. [pause 29]\n\nAcuéstate en esa cama, en ese cuarto, y deja que esta cama y aquella se vuelvan la misma. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1133,
+ "est_seconds": 1120,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

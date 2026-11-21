@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Suena tu teléfono, o alguien toca a tu puerta. Ya sabes lo que te van a pedir. [pause 20]\n\nNota cómo empieza a subir la sensación de siempre. El sí rápido en la punta de la lengua. [pause 23]\n\nPrimero respira una vez. Siente los pies en el piso. [pause 23]\n\nÓyete decirlo. Gracias por pensar en mí. Esta vez no puedo. [pause 25]\n\nNota que tu voz es cálida y firme. No te pones a dar explicaciones largas. No pides perdón tres veces. [pause 27]\n\nDeja que conteste. Tal vez entiende enseguida. Tal vez se sorprende. Sea como sea, tú sigues en calma. [pause 27]\n\nDespídete con amabilidad. Cuelga el teléfono, o cierra la puerta. [pause 27]\n\nAhora fíjate en el tiempo que acabas de cuidar. Una tarde. Un descanso. Un poco de espacio para respirar. [pause 27]\n\nSiente qué ligero está tu pecho. Dijiste la verdad, y lo hiciste con cariño. [pause 28]\n\nDi en tu mente, mi no es amable. Mi sí es de verdad. [pause 28]\n\nDeja que esa tarde libre se extienda frente a ti, y entra en ella poco a poco. [pause 30]"
+   "text": "Suena tu teléfono, o alguien toca a tu puerta. Ya sabes lo que te van a pedir. [pause 25]\n\nNota cómo empieza a subir la sensación de siempre. El sí rápido en la punta de la lengua. [pause 28]\n\nPrimero respira una vez. Siente los pies en el piso. [pause 28]\n\nÓyete decirlo. Gracias por pensar en mí. Esta vez no puedo. [pause 30]\n\nNota que tu voz es cálida y firme. No te pones a dar explicaciones largas. No pides perdón tres veces. [pause 32]\n\nDeja que conteste. Tal vez entiende enseguida. Tal vez se sorprende. Sea como sea, tú sigues en calma. [pause 32]\n\nDespídete con amabilidad. Cuelga el teléfono, o cierra la puerta. [pause 32]\n\nAhora fíjate en el tiempo que acabas de cuidar. Una tarde. Un descanso. Un poco de espacio para respirar. [pause 32]\n\nSiente qué ligero está tu pecho. Dijiste la verdad, y lo hiciste con cariño. [pause 33]\n\nDi en tu mente, mi no es amable. Mi sí es de verdad. [pause 33]\n\nDeja que esa tarde libre se extienda frente a ti, y entra en ella poco a poco. [pause 35]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1190,
+ "est_seconds": 1120,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

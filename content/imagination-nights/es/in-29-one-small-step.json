@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es mañana en la tarde. Tienes un ratito libre. [pause 20]\n\nImagina que te sientas a dar ese paso. Fíjate dónde estás. La mesa. La silla. La luz. [pause 23]\n\nSiente las ganas pequeñas de dejarlo para después. Y luego siente cómo empiezas de todos modos. [pause 23]\n\nMira tus manos hacer el trabajo. Es más fácil de lo que pensabas. [pause 25]\n\nFíjate en el momento en que ya está. El formulario enviado. La página escrita. La vuelta terminada. [pause 27]\n\nÉchate para atrás en la silla. Deja que llegue una sonrisa pequeña. [pause 27]\n\nImagina una marquita en el calendario, o una palomita en la lista. Un paso más. [pause 27]\n\nImagina los pasos que se van formando detrás de ti con las semanas. Cada uno pequeño. Juntos, un camino. [pause 27]\n\nMás tarde esa noche, te acuestas sabiendo que cumpliste tu palabra contigo. [pause 28]\n\nDi en tu mente, hoy hice mi parte. Con eso basta. [pause 28]\n\nDeja que ese orgullo callado sea lo último que sientas mientras te vas quedando en calma. [pause 30]"
+   "text": "Es mañana en la tarde. Tienes un ratito libre. [pause 26]\n\nImagina que te sientas a dar ese paso. Fíjate dónde estás. La mesa. La silla. La luz. [pause 29]\n\nSiente las ganas pequeñas de dejarlo para después. Y luego siente cómo empiezas de todos modos. [pause 29]\n\nMira tus manos hacer el trabajo. Es más fácil de lo que pensabas. [pause 31]\n\nFíjate en el momento en que ya está. El formulario enviado. La página escrita. La vuelta terminada. [pause 33]\n\nÉchate para atrás en la silla. Deja que llegue una sonrisa pequeña. [pause 33]\n\nImagina una marquita en el calendario, o una palomita en la lista. Un paso más. [pause 33]\n\nImagina los pasos que se van formando detrás de ti con las semanas. Cada uno pequeño. Juntos, un camino. [pause 33]\n\nMás tarde esa noche, te acuestas sabiendo que cumpliste tu palabra contigo. [pause 34]\n\nDi en tu mente, hoy hice mi parte. Con eso basta. [pause 34]\n\nDeja que ese orgullo callado sea lo último que sientas mientras te vas quedando en calma. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1172,
+ "est_seconds": 1116,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

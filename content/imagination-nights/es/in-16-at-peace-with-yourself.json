@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Estás frente a un espejo, dentro de unos meses. [pause 25]\n\nMira tu propia cara. Nota que no apartas la mirada. [pause 28]\n\nFíjate en tus ojos. Se ven descansados. [pause 28]\n\nÓyete decir, en tu mente, buenos días. Y decirlo en serio. [pause 28]\n\nImagina que más tarde, ese mismo día, cometes un error pequeño. Se te tira algo. Se te olvida un nombre. [pause 28]\n\nOye cómo te hablas ahora. No pasa nada. A todo el mundo le pasa. Te ríes un poco y sigues. [pause 30]\n\nImagina que alguien te hace un cumplido. Nota que puedes decir gracias sin discutirlo. [pause 30]\n\nEn la noche, imagina un rato a solas, en silencio. Se siente como buena compañía. [pause 30]\n\nDi bajito, así como soy, valgo, y sigo creciendo. [pause 30]\n\nDeja que esa voz amable se quede contigo, como una mano en la espalda, mientras te vas quedando en calma. [pause 30]"
+   "text": "Estás frente a un espejo, dentro de unos meses. [pause 33]\n\nMira tu propia cara. Nota que no apartas la mirada. [pause 36]\n\nFíjate en tus ojos. Se ven descansados. [pause 36]\n\nÓyete decir, en tu mente, buenos días. Y decirlo en serio. [pause 36]\n\nImagina que más tarde, ese mismo día, cometes un error pequeño. Se te tira algo. Se te olvida un nombre. [pause 36]\n\nOye cómo te hablas ahora. No pasa nada. A todo el mundo le pasa. Te ríes un poco y sigues. [pause 38]\n\nImagina que alguien te hace un cumplido. Nota que puedes decir gracias sin discutirlo. [pause 38]\n\nEn la noche, imagina un rato a solas, en silencio. Se siente como buena compañía. [pause 38]\n\nDi bajito, así como soy, valgo, y sigo creciendo. [pause 38]\n\nDeja que esa voz amable se quede contigo, como una mano en la espalda, mientras te vas quedando en calma. [pause 38]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1147,
+ "est_seconds": 1114,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

@@ -211,6 +211,17 @@ function buildPsalmNight(it, lang, parts) {
   };
 }
 
+// The voiced length, as the fill really renders it (calibrated 21 Nov 2026 on the 7 voiced English nights and the
+// Spanish sample: Kokoro speaks 110-115 wpm, not 100; a paragraph's [pause N] IS its quiet, the 2 s paragraph quiet
+// comes only where no pause is written; plus 0.6 s lead, 2 s tail and the 1.2 s after the title). The faster end
+// of the measured speed is used, so a night the gate passes is not under its floor when voiced.
+export const VOICED_WPM = 115;
+export function voicedSeconds(all, n) {
+  const paras = all.split("\n\n");
+  const bare = paras.filter((p) => !/\[pause \d+\]\s*$/.test(p)).length;
+  return Math.round((n / VOICED_WPM) * 60 + pauses(all) + 2 * bare + 3.8);
+}
+
 function buildImaginationNight(it, lang, parts) {
   const ref = (k) => { const v = one(it, k, ""); return parts[v] ?? v; };
   const seg = (part, text) => ({ part, speaker: "narrator", text });
@@ -221,8 +232,8 @@ function buildImaginationNight(it, lang, parts) {
     id: it.id, kind: "imagination-night", journey: "imagination-nights", door: "mindset", lang, title: it.title, theme: one(it, "theme", ""),
     scripture_woven: false, ai_label: AI_LABEL["imagination-night"], segments, words: n,
     shared_parts: { settle: one(it, "settle", ""), close: one(it, "close", "") },
-    pacing: { words_per_minute: 100, pause_marker: "[pause N] = N seconds of quiet", quiet_between_paragraphs_s: 2 },
-    est_seconds: Math.round((n / 100) * 60 + pauses(all) + 2 * all.split("\n\n").length),
+    pacing: { words_per_minute: VOICED_WPM, pause_marker: "[pause N] = N seconds of quiet", quiet_between_paragraphs_s: 2 },
+    est_seconds: voicedSeconds(all, n),
   };
 }
 
@@ -493,6 +504,9 @@ close: s
   // A script missing a segment, or far over length, fails the gate (held, so the fill never voices it).
   if (!isFail(mkEs((n) => { n.segments.splice(1, 1); }).plan)) throw new Error("SELFTEST missing teaching not caught");
   if (!isFail(mkEs((n) => { n.est_seconds = 40 * 60; }).length)) throw new Error("SELFTEST 40-minute night not caught");
+  if (!isFail(mkEs((n) => { n.est_seconds = 17.6 * 60; }).length)) throw new Error("SELFTEST a 17.6-minute night (the first Spanish sample) was not held");
+  // The pace matches the voiced files: the Spanish sample (in-01 before lengthening: 793 words, 1055 s voiced).
+  if (Math.abs(voicedSeconds("x [pause 1000]", 793) - (793 / VOICED_WPM) * 60 - 1003.8) > 0.6) throw new Error("SELFTEST voiced length counts a written pause twice");
   const heldEs = buildImaginationNight(ines[1], "es", shared(ines));
   heldEs.segments[2].text += " Dios te cuida.";
   if (finalize(heldEs, checkImaginationNight(heldEs), { pastor: { verdict: "pass" }, cultural: { verdict: "pass" } }).status !== "held") throw new Error("SELFTEST Spanish night with a faith word not held");

@@ -371,6 +371,27 @@ class Mastering(unittest.TestCase):
             self.assertFalse((Path(d) / "track.wav").exists())
         return row, renders, [c for c in calls if "aac_at" in c]
 
+    def test_a_night_voiced_under_18_minutes_is_rendered_slower_then_never_shelved(self):
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "content/imagination-nights/es").mkdir(parents=True)
+            (Path(d) / "content/imagination-nights/es/in-x.json").write_text(json.dumps({
+                "id": "in-x", "kind": "imagination-night", "lang": "es", "title": "Vivir desde el final", "status": "passed",
+                "segments": [{"part": "settle", "text": "Respira. [pause 8]"}, {"part": "scene", "text": "Imagina una tarde. [pause 20]"}]}))
+            [item] = fill.content_items(Path(d))
+        self.assertEqual(item["min_seconds"], 1080)
+        renders = []
+        res = lambda s: {"pass": True, "problems": [], "accuracy": 0.98, "wpm": 114, "words": 600, "lufs": -22.0,
+                         "true_peak": -3.0, "clipped": 0, "asr": "base", "seconds": s}
+        with tempfile.TemporaryDirectory() as d, \
+                mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
+                mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg([])), \
+                mock.patch.object(qa, "loudness", return_value={"lufs": -22.0, "true_peak": -3.0}), \
+                mock.patch.object(qa, "check", side_effect=[res(1055.0), res(1070.0)]):
+            row = fill.make_one(item, {}, Path(d))
+        self.assertEqual(renders, [fill.SPEED, fill.RETRY_SPEED])
+        self.assertEqual(row["status"], "FAILED")
+        self.assertTrue(any("under the 1080s floor" in p for p in row["checks"]["problems"]))
+
     def test_mastering_miss_is_mastered_again_never_rendered_again(self):
         ok = {"lufs": -17.0, "true_peak": -1.5}
         row, renders, encodes = self.make([[]], [{"lufs": -17.0, "true_peak": -0.2}, ok])

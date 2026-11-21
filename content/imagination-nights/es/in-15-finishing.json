@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es el día en que todo terminó. Fíjate dónde estás. Un salón. Una oficina. La mesa de tu propia cocina. [pause 20]\n\nSiente lo que tienes en las manos. Un diploma. La última página. El último recibo. [pause 23]\n\nNota la calma en el pecho, donde antes estaba la presión. [pause 23]\n\nAlguien cerca de ti dice, lo lograste. Oye las palabras. Deja que te lleguen. [pause 23]\n\nPiensa un momento en la noche más difícil de todo el camino. Esa en la que casi lo dejas. [pause 23]\n\nAhora mírate hoy, del otro lado. Date permiso de asombrarte un poco. [pause 26]\n\nImagina que llegas a casa esa tarde. Te quitas los zapatos. Mañana no hay nada pendiente. [pause 26]\n\nAlguien te llama para felicitarte. Óyete decir, gracias. De verdad siento mucho orgullo. [pause 26]\n\nAntes de acostarte, pones la prueba en un lugar donde la vas a ver. En el refrigerador. En un estante. [pause 28]\n\nDi bajito, lo terminé. [pause 28]\n\nDeja que esa frase sea la última en tu mente esta noche. [pause 30]"
+   "text": "Es el día en que todo terminó. Fíjate dónde estás. Un salón. Una oficina. La mesa de tu propia cocina. [pause 26]\n\nSiente lo que tienes en las manos. Un diploma. La última página. El último recibo. [pause 29]\n\nNota la calma en el pecho, donde antes estaba la presión. [pause 29]\n\nAlguien cerca de ti dice, lo lograste. Oye las palabras. Deja que te lleguen. [pause 29]\n\nPiensa un momento en la noche más difícil de todo el camino. Esa en la que casi lo dejas. [pause 29]\n\nAhora mírate hoy, del otro lado. Date permiso de asombrarte un poco. [pause 32]\n\nImagina que llegas a casa esa tarde. Te quitas los zapatos. Mañana no hay nada pendiente. [pause 32]\n\nAlguien te llama para felicitarte. Óyete decir, gracias. De verdad siento mucho orgullo. [pause 32]\n\nAntes de acostarte, pones la prueba en un lugar donde la vas a ver. En el refrigerador. En un estante. [pause 34]\n\nDi bajito, lo terminé. [pause 34]\n\nDeja que esa frase sea la última en tu mente esta noche. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1172,
+ "est_seconds": 1114,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

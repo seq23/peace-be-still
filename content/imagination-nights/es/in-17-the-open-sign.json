@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es temprano en la mañana. Estás abriendo la puerta de tu local, o abriendo la computadora para entrar a tu tienda. [pause 20]\n\nPrende las luces. Fíjate en lo primero que ves. Tu nombre. Tus colores. Tus cosas en su lugar. [pause 23]\n\nVoltea el letrero a abierto, o aprieta el botón que dice publicar. [pause 23]\n\nLlega la primera persona del día. Sonríe. Ya ha venido antes. [pause 23]\n\nÓyela decir, le hablé de ti a mi hermana. La próxima semana viene. [pause 23]\n\nSiente cómo haces el trabajo que sabes hacer bien. Tus manos saben qué hacer. [pause 26]\n\nA mediodía hay un poco de movimiento. Es un ajetreo del bueno. [pause 26]\n\nAl cerrar, haces las cuentas del día. Fue un buen día. Nada del otro mundo. Solo bueno. Lo suficiente para sentirte con estabilidad. [pause 26]\n\nVoltea el letrero a cerrado. Quédate un momento en el silencio del lugar que construiste. [pause 28]\n\nDi en tu mente, esto es mío. Yo lo hice. [pause 28]\n\nDeja que el silencio de ese lugar se vuelva el silencio de este cuarto. [pause 30]"
+   "text": "Es temprano en la mañana. Estás abriendo la puerta de tu local, o abriendo la computadora para entrar a tu tienda. [pause 25]\n\nPrende las luces. Fíjate en lo primero que ves. Tu nombre. Tus colores. Tus cosas en su lugar. [pause 28]\n\nVoltea el letrero a abierto, o aprieta el botón que dice publicar. [pause 28]\n\nLlega la primera persona del día. Sonríe. Ya ha venido antes. [pause 28]\n\nÓyela decir, le hablé de ti a mi hermana. La próxima semana viene. [pause 28]\n\nSiente cómo haces el trabajo que sabes hacer bien. Tus manos saben qué hacer. [pause 31]\n\nA mediodía hay un poco de movimiento. Es un ajetreo del bueno. [pause 31]\n\nAl cerrar, haces las cuentas del día. Fue un buen día. Nada del otro mundo. Solo bueno. Lo suficiente para sentirte con estabilidad. [pause 31]\n\nVoltea el letrero a cerrado. Quédate un momento en el silencio del lugar que construiste. [pause 33]\n\nDi en tu mente, esto es mío. Yo lo hice. [pause 33]\n\nDeja que el silencio de ese lugar se vuelva el silencio de este cuarto. [pause 35]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1189,
+ "est_seconds": 1118,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

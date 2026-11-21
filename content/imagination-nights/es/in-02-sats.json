@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Deja que el cuerpo pese más que hace un minuto. Los brazos. Las piernas. Los párpados. [pause 14]\n\nAhora trae tu escena pequeña. Mira dónde estás. Mira quién está contigo. [pause 14]\n\nDeja que pase una vez. El apretón de manos. El abrazo. La frase. Siéntelo en las manos, o en la cara. [pause 17]\n\nAhora deja que pase otra vez, igualito. No hace falta hacerlo más grande. [pause 17]\n\nY otra vez. Un poco más lento esta vez. [pause 17]\n\nSi se te pierde, no pasa nada. Empiézala otra vez desde el principio. [pause 17]\n\nSiente lo natural que es. Como si ya hubiera pasado muchas veces. Como si fuera un recuerdo. [pause 20]\n\nDeja que las palabras de la escena se hagan muy sencillas. Tal vez una sola palabra. Felicidades. Gracias. Bienvenido a casa. [pause 20]\n\nDi esa palabra en tu mente, bajito, al ritmo de tu respiración. [pause 22]\n\nNota qué poco esfuerzo cuesta. No estás construyendo nada. Solo estás recordando un momento. [pause 20]\n\nSi llega otro pensamiento, déjalo pasar, como alguien que cruza al fondo de un cuarto. Luego vuelve a tu escena. [pause 20]\n\nEl apretón de manos. El abrazo. Las palabras. Otra vez. [pause 22]\n\nDeja que la escena se haga más pequeña y más suave, hasta que quepa en una sola respiración. [pause 22]\n\nSigue repitiéndola mientras los pensamientos se hacen lentos. Deja que la escena y el sueño se mezclen. [pause 27]"
+   "text": "Deja que el cuerpo pese más que hace un minuto. Los brazos. Las piernas. Los párpados. [pause 21]\n\nAhora trae tu escena pequeña. Mira dónde estás. Mira quién está contigo. [pause 21]\n\nDeja que pase una vez. El apretón de manos. El abrazo. La frase. Siéntelo en las manos, o en la cara. [pause 24]\n\nAhora deja que pase otra vez, igualito. No hace falta hacerlo más grande. [pause 24]\n\nY otra vez. Un poco más lento esta vez. [pause 24]\n\nSi se te pierde, no pasa nada. Empiézala otra vez desde el principio. [pause 24]\n\nSiente lo natural que es. Como si ya hubiera pasado muchas veces. Como si fuera un recuerdo. [pause 27]\n\nDeja que las palabras de la escena se hagan muy sencillas. Tal vez una sola palabra. Felicidades. Gracias. Bienvenido a casa. [pause 27]\n\nDi esa palabra en tu mente, bajito, al ritmo de tu respiración. [pause 29]\n\nNota qué poco esfuerzo cuesta. No estás construyendo nada. Solo estás recordando un momento. [pause 27]\n\nSi llega otro pensamiento, déjalo pasar, como alguien que cruza al fondo de un cuarto. Luego vuelve a tu escena. [pause 27]\n\nEl apretón de manos. El abrazo. Las palabras. Otra vez. [pause 29]\n\nDeja que la escena se haga más pequeña y más suave, hasta que quepa en una sola respiración. [pause 29]\n\nSigue repitiéndola mientras los pensamientos se hacen lentos. Deja que la escena y el sueño se mezclen. [pause 34]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1153,
+ "est_seconds": 1120,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

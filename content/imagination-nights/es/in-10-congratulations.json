@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Tú y esa persona están juntos en un lugar conocido. Una cocina. La puerta de la casa. Un estacionamiento después de un día cualquiera. [pause 18]\n\nSe voltea hacia ti. Ya está sonriendo antes de decir nada. [pause 18]\n\nÓyela decirlo. Felicidades. Me da mucho gusto por ti. [pause 21]\n\nSiente su mano en tu brazo. O sus brazos alrededor de ti. [pause 21]\n\nÓyete decir, gracias. Todavía no me la creo, y a la vez ya se siente normal. [pause 21]\n\nDeja que la escena vuelva a empezar. Su sonrisa. Sus palabras. Tu gracias. [pause 24]\n\nY otra vez. Más corta ahora. Solo la palabra. Felicidades. [pause 24]\n\nDeja que la palabra se repita en tu mente, al ritmo de tu respiración. [pause 26]\n\nAhora imagina a otra persona querida. Se enteró por la primera. Te llama, emocionada. [pause 24]\n\nÓyela decirlo también. Ya me enteré. Felicidades. Cuéntamelo todo. [pause 24]\n\nSiente cómo cuentas la historia, con facilidad, como algo que ya pasó. [pause 24]\n\nDeja que todo se haga más y más callado, hasta que sea solo una sensación. [pause 30]"
+   "text": "Tú y esa persona están juntos en un lugar conocido. Una cocina. La puerta de la casa. Un estacionamiento después de un día cualquiera. [pause 26]\n\nSe voltea hacia ti. Ya está sonriendo antes de decir nada. [pause 26]\n\nÓyela decirlo. Felicidades. Me da mucho gusto por ti. [pause 29]\n\nSiente su mano en tu brazo. O sus brazos alrededor de ti. [pause 29]\n\nÓyete decir, gracias. Todavía no me la creo, y a la vez ya se siente normal. [pause 29]\n\nDeja que la escena vuelva a empezar. Su sonrisa. Sus palabras. Tu gracias. [pause 32]\n\nY otra vez. Más corta ahora. Solo la palabra. Felicidades. [pause 32]\n\nDeja que la palabra se repita en tu mente, al ritmo de tu respiración. [pause 34]\n\nAhora imagina a otra persona querida. Se enteró por la primera. Te llama, emocionada. [pause 32]\n\nÓyela decirlo también. Ya me enteré. Felicidades. Cuéntamelo todo. [pause 32]\n\nSiente cómo cuentas la historia, con facilidad, como algo que ya pasó. [pause 32]\n\nDeja que todo se haga más y más callado, hasta que sea solo una sensación. [pause 38]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1142,
+ "est_seconds": 1116,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

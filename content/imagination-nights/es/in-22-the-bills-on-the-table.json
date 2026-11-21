@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es una noche entre semana. Ya se lavaron los trastes. Te sientas a la mesa con el correo y una taza de algo calientito. [pause 22]\n\nFíjate en el montoncito. Unos cuantos sobres. Tu teléfono con la aplicación del banco abierta. [pause 23]\n\nAbre el primer recibo. Lee la cantidad. Siente que el pecho sigue suave. Sabes que está cubierto. [pause 25]\n\nPágalo. Mira la pantalla que dice pagado. Ponlo a un lado. [pause 25]\n\nAbre el siguiente. La misma sensación firme. Pagado. A un lado. [pause 25]\n\nMira la cuenta cuando terminas. Todavía queda algo. No una fortuna. Lo suficiente. [pause 27]\n\nPasa un poquito a tus ahorros. Mira cómo ese número sube un pasito. [pause 27]\n\nRecárgate en la silla. Nota que la mandíbula está floja. Las manos, quietas. [pause 27]\n\nDi en tu mente, tengo calma. Esta noche me alcanza. [pause 28]\n\nJunta los recibos pagados en una pila ordenada, apaga la luz de la cocina, y camina a la cama sin nada pendiente encima. [pause 30]"
+   "text": "Es una noche entre semana. Ya se lavaron los trastes. Te sientas a la mesa con el correo y una taza de algo calientito. [pause 32]\n\nFíjate en el montoncito. Unos cuantos sobres. Tu teléfono con la aplicación del banco abierta. [pause 33]\n\nAbre el primer recibo. Lee la cantidad. Siente que el pecho sigue suave. Sabes que está cubierto. [pause 35]\n\nPágalo. Mira la pantalla que dice pagado. Ponlo a un lado. [pause 35]\n\nAbre el siguiente. La misma sensación firme. Pagado. A un lado. [pause 35]\n\nMira la cuenta cuando terminas. Todavía queda algo. No una fortuna. Lo suficiente. [pause 37]\n\nPasa un poquito a tus ahorros. Mira cómo ese número sube un pasito. [pause 37]\n\nRecárgate en la silla. Nota que la mandíbula está floja. Las manos, quietas. [pause 37]\n\nDi en tu mente, tengo calma. Esta noche me alcanza. [pause 38]\n\nJunta los recibos pagados en una pila ordenada, apaga la luz de la cocina, y camina a la cama sin nada pendiente encima. [pause 40]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1130,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

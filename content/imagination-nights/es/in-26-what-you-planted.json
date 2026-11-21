@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es una mañana tibia. Sales al huerto con una taza en la mano. [pause 20]\n\nFíjate en lo verde. Hileras de hojas más altas de lo que recordabas. [pause 23]\n\nPonte de rodillas. Toca la tierra, fresca y suave. Huele la tierra mojada. [pause 23]\n\nBusca lo primero que ya está listo para cortar. Dale vueltas entre los dedos. Tú cultivaste esto. [pause 25]\n\nAcuérdate de los días en que solo había tierra, y regabas de todos modos. [pause 27]\n\nRecorre las hileras. Aquí está algo que casi diste por perdido. Al final sí salió. [pause 27]\n\nLlena una canasta despacio. Hay más de lo que necesitas. [pause 27]\n\nImagina que regalas un poco. A una vecina en la cerca. A alguien que pasa a saludar. [pause 27]\n\nSiéntate en el escalón con la canasta a tus pies. El sol te da en los brazos. [pause 28]\n\nDi en tu mente, sé esperar bien. Lo bueno se toma su tiempo. [pause 28]\n\nDeja que el huerto se quede en silencio a tu alrededor, y que la tarde baje sobre él. [pause 30]"
+   "text": "Es una mañana tibia. Sales al huerto con una taza en la mano. [pause 27]\n\nFíjate en lo verde. Hileras de hojas más altas de lo que recordabas. [pause 30]\n\nPonte de rodillas. Toca la tierra, fresca y suave. Huele la tierra mojada. [pause 30]\n\nBusca lo primero que ya está listo para cortar. Dale vueltas entre los dedos. Tú cultivaste esto. [pause 32]\n\nAcuérdate de los días en que solo había tierra, y regabas de todos modos. [pause 34]\n\nRecorre las hileras. Aquí está algo que casi diste por perdido. Al final sí salió. [pause 34]\n\nLlena una canasta despacio. Hay más de lo que necesitas. [pause 34]\n\nImagina que regalas un poco. A una vecina en la cerca. A alguien que pasa a saludar. [pause 34]\n\nSiéntate en el escalón con la canasta a tus pies. El sol te da en los brazos. [pause 35]\n\nDi en tu mente, sé esperar bien. Lo bueno se toma su tiempo. [pause 35]\n\nDeja que el huerto se quede en silencio a tu alrededor, y que la tarde baje sobre él. [pause 37]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1157,
+ "est_seconds": 1114,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

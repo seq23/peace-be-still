@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Sales de la casa. Ya se fue el calor del día. El aire está suave. [pause 22]\n\nSiente los pies en el suelo. Uno, luego el otro. Sin prisa. [pause 24]\n\nFíjate en el cielo. El último color hacia el poniente. La primera estrella. [pause 24]\n\nOye los sonidos alrededor. Un perro por ahí. Las hojas. La música de alguien que sale por una ventana abierta. [pause 24]\n\nRespira el aire de la tarde. Suéltalo despacio. [pause 24]\n\nPasas junto a un vecino. Le haces un saludo con la cabeza. Te lo devuelve. Es una tarde de esas. [pause 28]\n\nFíjate cómo se mueven tus brazos. Qué fácil es cada paso. [pause 28]\n\nDetente un momento a mirar algo pequeño. Una flor junto a una reja. Un charco que guarda el cielo. [pause 28]\n\nDa la vuelta hacia tu casa. Las ventanas están encendidas. Una de ellas es la tuya. [pause 30]\n\nDi en tu mente, estoy en calma. [pause 30]\n\nEntra, y deja que la caminata te lleve hasta la cama. [pause 30]"
+   "text": "Sales de la casa. Ya se fue el calor del día. El aire está suave. [pause 26]\n\nSiente los pies en el suelo. Uno, luego el otro. Sin prisa. [pause 28]\n\nFíjate en el cielo. El último color hacia el poniente. La primera estrella. [pause 28]\n\nOye los sonidos alrededor. Un perro por ahí. Las hojas. La música de alguien que sale por una ventana abierta. [pause 28]\n\nRespira el aire de la tarde. Suéltalo despacio. [pause 28]\n\nPasas junto a un vecino. Le haces un saludo con la cabeza. Te lo devuelve. Es una tarde de esas. [pause 32]\n\nFíjate cómo se mueven tus brazos. Qué fácil es cada paso. [pause 32]\n\nDetente un momento a mirar algo pequeño. Una flor junto a una reja. Un charco que guarda el cielo. [pause 32]\n\nDa la vuelta hacia tu casa. Las ventanas están encendidas. Una de ellas es la tuya. [pause 34]\n\nDi en tu mente, estoy en calma. [pause 34]\n\nEntra, y deja que la caminata te lleve hasta la cama. [pause 34]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1199,
+ "est_seconds": 1119,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Think of your wish for a moment. Just name it in your mind. [pause 17]\n\nNow imagine the second after it came true. Not the party. The quiet second after. [pause 20]\n\nFeel your chest loosen. Your stomach unclench. Your hands unfold. [pause 20]\n\nLet out a long breath. The breath of someone who can stop waiting. [pause 20]\n\nIn your mind, say very simply, it is done. [pause 25]\n\nNotice there is nothing to check, nothing to chase. You can just lie here. [pause 25]\n\nSay it again, softer. It is done. [pause 25]\n\nLet the words fade, and keep only the feeling. [pause 30]\n\nPicture yourself the next morning, waking up. The first thought is not worry. It is something simple. Oh, that is right. It is done. [pause 25]\n\nFeel yourself stretch, and get up slowly, with no knot in your stomach. [pause 25]\n\nLet that morning feeling come back here, into tonight. [pause 25]\n\nRest in it. [pause 30]"
+   "text": "Think of your wish for a moment. Just name it in your mind. [pause 26]\n\nNow imagine the second after it came true. Not the party. The quiet second after. [pause 29]\n\nFeel your chest loosen. Your stomach unclench. Your hands unfold. [pause 29]\n\nLet out a long breath. The breath of someone who can stop waiting. [pause 29]\n\nIn your mind, say very simply, it is done. [pause 34]\n\nNotice there is nothing to check, nothing to chase. You can just lie here. [pause 34]\n\nSay it again, softer. It is done. [pause 34]\n\nLet the words fade, and keep only the feeling. [pause 39]\n\nPicture yourself the next morning, waking up. The first thought is not worry. It is something simple. Oh, that is right. It is done. [pause 34]\n\nFeel yourself stretch, and get up slowly, with no knot in your stomach. [pause 34]\n\nLet that morning feeling come back here, into tonight. [pause 34]\n\nRest in it. [pause 39]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1133,
+ "est_seconds": 1121,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

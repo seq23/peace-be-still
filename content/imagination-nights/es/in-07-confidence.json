@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Estás justo afuera de la puerta. Siente los pies en el piso. Firmes. [pause 14]\n\nRespira una vez, despacio. Siente cómo se endereza un poco la espalda, sin ponerse rígida, solo derecha. [pause 14]\n\nAhora entra. Nota que nadie se sorprende ni se te queda viendo. La gente simplemente levanta la vista, y algunos sonríen. [pause 17]\n\nAlguien dice tu nombre como si le diera gusto que hayas venido. Saludas, con naturalidad. [pause 17]\n\nBusca dónde sentarte, o dónde quedarte de pie. Siente lo relajadas que están tus manos. No te estás agarrando de nada. [pause 17]\n\nAlguien te pide tu opinión. Contestas. Tu voz suena como tú quieres que suene. Tranquila y clara. [pause 17]\n\nNota cómo te escuchan, y luego la plática sigue. Salió bien. Mejor que bien. [pause 20]\n\nAl final, sales al aire de la tarde y piensas, fue fácil. Ese también es mi lugar. [pause 20]\n\nDilo en tu mente. Aquí tengo mi lugar. [pause 22]\n\nAhora imagina la próxima vez que entras a ese lugar, una semana después. Es todavía más fácil. Ya te esperan. [pause 20]\n\nFíjate cómo te paras cuando haces fila, cómo contestas el teléfono, cómo dices que no cuando hace falta. Con firmeza, en cosas pequeñas. [pause 20]\n\nAl pasar, ves tu reflejo en una ventana. Te ves como alguien que está a gusto en su propia vida. [pause 20]\n\nDeja que esa sensación firme descanse en tu cuerpo mientras te vas quedando en calma. [pause 27]"
+   "text": "Estás justo afuera de la puerta. Siente los pies en el piso. Firmes. [pause 21]\n\nRespira una vez, despacio. Siente cómo se endereza un poco la espalda, sin ponerse rígida, solo derecha. [pause 21]\n\nAhora entra. Nota que nadie se sorprende ni se te queda viendo. La gente simplemente levanta la vista, y algunos sonríen. [pause 24]\n\nAlguien dice tu nombre como si le diera gusto que hayas venido. Saludas, con naturalidad. [pause 24]\n\nBusca dónde sentarte, o dónde quedarte de pie. Siente lo relajadas que están tus manos. No te estás agarrando de nada. [pause 24]\n\nAlguien te pide tu opinión. Contestas. Tu voz suena como tú quieres que suene. Tranquila y clara. [pause 24]\n\nNota cómo te escuchan, y luego la plática sigue. Salió bien. Mejor que bien. [pause 27]\n\nAl final, sales al aire de la tarde y piensas, fue fácil. Ese también es mi lugar. [pause 27]\n\nDilo en tu mente. Aquí tengo mi lugar. [pause 29]\n\nAhora imagina la próxima vez que entras a ese lugar, una semana después. Es todavía más fácil. Ya te esperan. [pause 27]\n\nFíjate cómo te paras cuando haces fila, cómo contestas el teléfono, cómo dices que no cuando hace falta. Con firmeza, en cosas pequeñas. [pause 27]\n\nAl pasar, ves tu reflejo en una ventana. Te ves como alguien que está a gusto en su propia vida. [pause 27]\n\nDeja que esa sensación firme descanse en tu cuerpo mientras te vas quedando en calma. [pause 34]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1151,
+ "est_seconds": 1110,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es una tarde de verano, dentro de muchos años. Estás en un porche, en una silla cómoda. [pause 20]\n\nFíjate en los sonidos. Los grillos. Una puerta de tela metálica en algún lado. Niños que se ríen calle abajo. [pause 23]\n\nAlguien que quieres sale y se sienta a tu lado. Ninguno de los dos necesita hablar. [pause 23]\n\nMira el patio. Los árboles ya están altos. Te acuerdas de cuando eran chiquitos. [pause 25]\n\nDeja que tu mente recorra los años. Un hogar que formaste. Un trabajo que te dio orgullo. Amistades que se quedaron. [pause 27]\n\nPiensa también en las temporadas difíciles. Nota que saliste de ellas. Nota en quién te convertiste. [pause 27]\n\nSe prende la luz del porche. Las palomillas se juntan alrededor. El cielo pasa del anaranjado al azul profundo. [pause 27]\n\nAlguien te da las buenas noches desde la banqueta, y le dices adiós con la mano. [pause 27]\n\nSiente qué lleno está tu corazón. No porque todo haya sido perfecto, sino porque fue tuyo. [pause 28]\n\nDi en tu mente, le doy gracias a mi vida. [pause 28]\n\nDeja encendida la luz del porche, y deja que la tarde larga se deslice despacio en esta noche. [pause 30]"
+   "text": "Es una tarde de verano, dentro de muchos años. Estás en un porche, en una silla cómoda. [pause 26]\n\nFíjate en los sonidos. Los grillos. Una puerta de tela metálica en algún lado. Niños que se ríen calle abajo. [pause 29]\n\nAlguien que quieres sale y se sienta a tu lado. Ninguno de los dos necesita hablar. [pause 29]\n\nMira el patio. Los árboles ya están altos. Te acuerdas de cuando eran chiquitos. [pause 31]\n\nDeja que tu mente recorra los años. Un hogar que formaste. Un trabajo que te dio orgullo. Amistades que se quedaron. [pause 33]\n\nPiensa también en las temporadas difíciles. Nota que saliste de ellas. Nota en quién te convertiste. [pause 33]\n\nSe prende la luz del porche. Las palomillas se juntan alrededor. El cielo pasa del anaranjado al azul profundo. [pause 33]\n\nAlguien te da las buenas noches desde la banqueta, y le dices adiós con la mano. [pause 33]\n\nSiente qué lleno está tu corazón. No porque todo haya sido perfecto, sino porque fue tuyo. [pause 34]\n\nDi en tu mente, le doy gracias a mi vida. [pause 34]\n\nDeja encendida la luz del porche, y deja que la tarde larga se deslice despacio en esta noche. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1176,
+ "est_seconds": 1119,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

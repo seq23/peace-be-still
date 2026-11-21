@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es una tarde libre. Vibra tu teléfono. Alguien querido está afuera. [pause 20]\n\nAbres la puerta, y ya te está sonriendo. Oye cómo dice tu nombre, como solo lo dicen las amistades. [pause 23]\n\nCaminan juntos a un lugar que a los dos les gusta. Una cafetería. Una banca del parque. El escalón de la entrada. [pause 23]\n\nSe sientan. Uno empieza a contar algo, y el otro se ríe antes de que termine. [pause 25]\n\nNota que no tienes que cuidar tus palabras. Puedes tener cansancio. Puedes decir tonterías. Puedes hablar con el corazón. [pause 25]\n\nCuéntale algo que traes en el corazón. Mira cómo asiente. Te entiende. [pause 27]\n\nTambién te cuenta algo. Siente lo bonito que es que te tengan confianza. [pause 27]\n\nEl tiempo se pasa rápido. La luz cambia y ninguno de los dos se dio cuenta. [pause 27]\n\nAl final, te abraza y te dice, hay que repetirlo pronto. Y sabes que lo dice en serio. [pause 28]\n\nDi en tu mente, es fácil quererme. Tengo gente buena. [pause 28]\n\nDeja que el calor de esa tarde se quede contigo mientras el cuarto se oscurece. [pause 30]"
+   "text": "Es una tarde libre. Vibra tu teléfono. Alguien querido está afuera. [pause 25]\n\nAbres la puerta, y ya te está sonriendo. Oye cómo dice tu nombre, como solo lo dicen las amistades. [pause 28]\n\nCaminan juntos a un lugar que a los dos les gusta. Una cafetería. Una banca del parque. El escalón de la entrada. [pause 28]\n\nSe sientan. Uno empieza a contar algo, y el otro se ríe antes de que termine. [pause 30]\n\nNota que no tienes que cuidar tus palabras. Puedes tener cansancio. Puedes decir tonterías. Puedes hablar con el corazón. [pause 30]\n\nCuéntale algo que traes en el corazón. Mira cómo asiente. Te entiende. [pause 32]\n\nTambién te cuenta algo. Siente lo bonito que es que te tengan confianza. [pause 32]\n\nEl tiempo se pasa rápido. La luz cambia y ninguno de los dos se dio cuenta. [pause 32]\n\nAl final, te abraza y te dice, hay que repetirlo pronto. Y sabes que lo dice en serio. [pause 33]\n\nDi en tu mente, es fácil quererme. Tengo gente buena. [pause 33]\n\nDeja que el calor de esa tarde se quede contigo mientras el cuarto se oscurece. [pause 35]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1187,
+ "est_seconds": 1118,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

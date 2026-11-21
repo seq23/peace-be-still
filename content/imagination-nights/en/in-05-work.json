@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is a weekday morning, some weeks from now. The thing you hoped for has happened. [pause 15]\n\nYou are getting ready. Notice what you are wearing. Notice how you feel in it. [pause 15]\n\nYou walk in, or log on, and someone greets you by name. It is ordinary. You already belong here. [pause 18]\n\nFeel yourself sit down to the work. It is a little challenging, in a good way. You know what to do next. [pause 18]\n\nNow picture the evening of that day. You are telling someone you trust how it went. You are laughing about a small thing that happened. [pause 18]\n\nHear them say, I knew you could do it. Feel your face warm. [pause 18]\n\nNotice that the old worry is not here. You are not checking your email over and over. That part is behind you. [pause 21]\n\nSay a quiet sentence in your mind, in the past tense. It worked out. I am glad I kept going. [pause 23]\n\nNotice your money in this picture, too. Not riches. Just the calm of a bill that gets paid on time without a knot in your stomach. [pause 21]\n\nNotice your evenings. You come home with strength left for the people you love. [pause 21]\n\nSomeone asks what you do, and you tell them, and you feel good saying it. [pause 21]\n\nLet the picture rest there, like a good day remembered. [pause 28]"
+   "text": "It is a weekday morning, some weeks from now. The thing you hoped for has happened. [pause 23]\n\nYou are getting ready. Notice what you are wearing. Notice how you feel in it. [pause 23]\n\nYou walk in, or log on, and someone greets you by name. It is ordinary. You already belong here. [pause 26]\n\nFeel yourself sit down to the work. It is a little challenging, in a good way. You know what to do next. [pause 26]\n\nNow picture the evening of that day. You are telling someone you trust how it went. You are laughing about a small thing that happened. [pause 26]\n\nHear them say, I knew you could do it. Feel your face warm. [pause 26]\n\nNotice that the old worry is not here. You are not checking your email over and over. That part is behind you. [pause 29]\n\nSay a quiet sentence in your mind, in the past tense. It worked out. I am glad I kept going. [pause 31]\n\nNotice your money in this picture, too. Not riches. Just the calm of a bill that gets paid on time without a knot in your stomach. [pause 29]\n\nNotice your evenings. You come home with strength left for the people you love. [pause 29]\n\nSomeone asks what you do, and you tell them, and you feel good saying it. [pause 29]\n\nLet the picture rest there, like a good day remembered. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1144,
+ "est_seconds": 1110,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

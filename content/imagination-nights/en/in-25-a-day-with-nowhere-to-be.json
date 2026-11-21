@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You wake without an alarm. The light is already up. Nobody is calling your name. [pause 20]\n\nLie still for a while. Notice the covers. The pillow. The plain fact that you do not have to get up. [pause 23]\n\nWhen you are ready, get up slowly. Make breakfast the long way. Taste it. [pause 23]\n\nSit by a window with a book, or music, or nothing at all. [pause 25]\n\nLet an hour go by. Notice that you did not check the time. [pause 27]\n\nIn the afternoon, take a nap with the window cracked. Hear the street sounds come and go. [pause 27]\n\nWake up soft and unhurried. Step outside for a minute and feel the air. [pause 27]\n\nIn the evening, eat something simple. Wash one plate. Leave the rest for tomorrow. [pause 27]\n\nNotice how your body feels at the end of a day like this. Loose. Full. Quiet. [pause 28]\n\nSay in your mind, I am allowed to rest. [pause 28]\n\nLet that easy day carry you down into this easy night. [pause 30]"
+   "text": "You wake without an alarm. The light is already up. Nobody is calling your name. [pause 26]\n\nLie still for a while. Notice the covers. The pillow. The plain fact that you do not have to get up. [pause 29]\n\nWhen you are ready, get up slowly. Make breakfast the long way. Taste it. [pause 29]\n\nSit by a window with a book, or music, or nothing at all. [pause 31]\n\nLet an hour go by. Notice that you did not check the time. [pause 33]\n\nIn the afternoon, take a nap with the window cracked. Hear the street sounds come and go. [pause 33]\n\nWake up soft and unhurried. Step outside for a minute and feel the air. [pause 33]\n\nIn the evening, eat something simple. Wash one plate. Leave the rest for tomorrow. [pause 33]\n\nNotice how your body feels at the end of a day like this. Loose. Full. Quiet. [pause 34]\n\nSay in your mind, I am allowed to rest. [pause 34]\n\nLet that easy day carry you down into this easy night. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1165,
+ "est_seconds": 1110,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
    },
    "verdict": "pass"
   },

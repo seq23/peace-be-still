@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Vuelve a ese momento. Fíjate qué edad tenías. Fíjate en el lugar. [pause 23]\n\nDeja que el momento empiece como empezó. Luego, justo antes de que se complicara, ponle pausa. [pause 26]\n\nImagina que tú, como eres hoy, entras a la escena y te pones al lado de tu yo más joven. [pause 26]\n\nPonle una mano en el hombro. Dile, aquí estoy. Esta vez lo podemos hacer distinto. [pause 26]\n\nAhora deja que el momento siga de otra manera. Oye a tu yo más joven hablar con calma. O mira a la otra persona responder con amabilidad. O simplemente mírate salir de ahí con la cabeza en alto. [pause 29]\n\nDeja que termine con suavidad. [pause 26]\n\nMira a tu yo más joven. Dile, hiciste lo mejor que pudiste. Siento orgullo de ti. [pause 29]\n\nVuelve a pasar la versión nueva una vez más, desde el principio, para que se te haga conocida. [pause 29]\n\nLuego deja que la escena se desvanezca, como una foto que se queda al sol. [pause 30]\n\nDi bajito, eso ya terminó. Puedo descansar. [pause 30]\n\nSuelta el peso viejo, y deja que tu cuerpo se sienta ligero. [pause 30]"
+   "text": "Vuelve a ese momento. Fíjate qué edad tenías. Fíjate en el lugar. [pause 29]\n\nDeja que el momento empiece como empezó. Luego, justo antes de que se complicara, ponle pausa. [pause 32]\n\nImagina que tú, como eres hoy, entras a la escena y te pones al lado de tu yo más joven. [pause 32]\n\nPonle una mano en el hombro. Dile, aquí estoy. Esta vez lo podemos hacer distinto. [pause 32]\n\nAhora deja que el momento siga de otra manera. Oye a tu yo más joven hablar con calma. O mira a la otra persona responder con amabilidad. O simplemente mírate salir de ahí con la cabeza en alto. [pause 35]\n\nDeja que termine con suavidad. [pause 32]\n\nMira a tu yo más joven. Dile, hiciste lo mejor que pudiste. Siento orgullo de ti. [pause 35]\n\nVuelve a pasar la versión nueva una vez más, desde el principio, para que se te haga conocida. [pause 35]\n\nLuego deja que la escena se desvanezca, como una foto que se queda al sol. [pause 36]\n\nDi bajito, eso ya terminó. Puedo descansar. [pause 36]\n\nSuelta el peso viejo, y deja que tu cuerpo se sienta ligero. [pause 36]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1167,
+ "est_seconds": 1116,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

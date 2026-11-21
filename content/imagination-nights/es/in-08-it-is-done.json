@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Piensa en tu deseo un momento. Solo nómbralo en tu mente. [pause 17]\n\nAhora imagina el segundo después de que se cumplió. No la fiesta. El segundo callado de después. [pause 20]\n\nSiente cómo se afloja el pecho. Cómo se suelta el estómago. Cómo se abren las manos. [pause 20]\n\nSuelta el aire, largo. El aire de alguien que ya puede dejar de esperar. [pause 20]\n\nEn tu mente, di con sencillez, ya está hecho. [pause 25]\n\nNota que no hay nada que revisar, nada que perseguir. Puedes simplemente quedarte aquí, en tu cama. [pause 25]\n\nDilo otra vez, más bajito. Ya está hecho. [pause 25]\n\nDeja que las palabras se apaguen, y quédate solo con la sensación. [pause 30]\n\nImagínate a la mañana siguiente, al despertar. Lo primero que piensas no es una preocupación. Es algo sencillo. Ah, es cierto. Ya está hecho. [pause 25]\n\nSiente cómo te estiras, y te levantas despacio, sin ningún nudo en el estómago. [pause 25]\n\nDeja que esa sensación de la mañana regrese aquí, a esta noche. [pause 25]\n\nDescansa en ella. [pause 30]"
+   "text": "Piensa en tu deseo un momento. Solo nómbralo en tu mente. [pause 25]\n\nAhora imagina el segundo después de que se cumplió. No la fiesta. El segundo callado de después. [pause 28]\n\nSiente cómo se afloja el pecho. Cómo se suelta el estómago. Cómo se abren las manos. [pause 28]\n\nSuelta el aire, largo. El aire de alguien que ya puede dejar de esperar. [pause 28]\n\nEn tu mente, di con sencillez, ya está hecho. [pause 33]\n\nNota que no hay nada que revisar, nada que perseguir. Puedes simplemente quedarte aquí, en tu cama. [pause 33]\n\nDilo otra vez, más bajito. Ya está hecho. [pause 33]\n\nDeja que las palabras se apaguen, y quédate solo con la sensación. [pause 38]\n\nImagínate a la mañana siguiente, al despertar. Lo primero que piensas no es una preocupación. Es algo sencillo. Ah, es cierto. Ya está hecho. [pause 33]\n\nSiente cómo te estiras, y te levantas despacio, sin ningún nudo en el estómago. [pause 33]\n\nDeja que esa sensación de la mañana regrese aquí, a esta noche. [pause 33]\n\nDescansa en ella. [pause 38]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1147,
+ "est_seconds": 1121,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },

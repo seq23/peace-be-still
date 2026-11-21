@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You are walking up to your door at the end of a long day. Notice what is under your feet. A step. A path. A hallway. [pause 14]\n\nFeel the key in your hand. The weight of it. The little ridges on the metal. You know exactly which one it is without looking. [pause 17]\n\nTurn it in the lock. Hear the click. Push the door open. [pause 14]\n\nStep inside. Notice the first thing you see. A rug. A plant. A window with the evening behind it. [pause 17]\n\nSet your bag down where you always set it down. Kick off your shoes. Nobody is going to tell you to move. [pause 17]\n\nWalk to the kitchen. Run a glass of water and drink it slowly, leaning against the counter. [pause 17]\n\nHear the quiet of the place. It is your quiet. [pause 20]\n\nNow walk to the bedroom. Turn back the covers of your own bed. Sit on the edge for a moment and look around. [pause 20]\n\nSay it softly in your mind. I live here. I am home. [pause 22]\n\nBefore you lie down, walk through the rooms once more. Turn off a lamp. Check the lock. It clicks the same way every night now. [pause 20]\n\nNotice a small thing you chose. A picture on the wall. A blanket on the chair. Your things, in your place. [pause 20]\n\nHear the sounds of the neighborhood settling down. They are familiar now. They are the sounds of home. [pause 20]\n\nLie down in that bed, in that room, and let this bed and that one become the same bed. [pause 27]"
+   "text": "You are walking up to your door at the end of a long day. Notice what is under your feet. A step. A path. A hallway. [pause 22]\n\nFeel the key in your hand. The weight of it. The little ridges on the metal. You know exactly which one it is without looking. [pause 25]\n\nTurn it in the lock. Hear the click. Push the door open. [pause 22]\n\nStep inside. Notice the first thing you see. A rug. A plant. A window with the evening behind it. [pause 25]\n\nSet your bag down where you always set it down. Kick off your shoes. Nobody is going to tell you to move. [pause 25]\n\nWalk to the kitchen. Run a glass of water and drink it slowly, leaning against the counter. [pause 25]\n\nHear the quiet of the place. It is your quiet. [pause 28]\n\nNow walk to the bedroom. Turn back the covers of your own bed. Sit on the edge for a moment and look around. [pause 28]\n\nSay it softly in your mind. I live here. I am home. [pause 30]\n\nBefore you lie down, walk through the rooms once more. Turn off a lamp. Check the lock. It clicks the same way every night now. [pause 28]\n\nNotice a small thing you chose. A picture on the wall. A blanket on the chair. Your things, in your place. [pause 28]\n\nHear the sounds of the neighborhood settling down. They are familiar now. They are the sounds of home. [pause 28]\n\nLie down in that bed, in that room, and let this bed and that one become the same bed. [pause 35]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1141,
+ "est_seconds": 1114,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

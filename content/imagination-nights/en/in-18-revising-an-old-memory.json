@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Go back to that moment. Notice how old you were. Notice the place. [pause 23]\n\nLet the moment begin as it began. Then, just before it went wrong, pause it. [pause 26]\n\nPicture yourself today stepping into the scene, beside your younger self. [pause 26]\n\nPut a hand on their shoulder. Say, I am here. We can do this differently. [pause 26]\n\nNow let the moment play on in a new way. Hear your younger self speak up calmly. Or see the other person respond kindly. Or simply see yourself walk away with your head up. [pause 29]\n\nLet it end gently. [pause 26]\n\nLook at your younger self. Tell them, you did your best. I am proud of you. [pause 29]\n\nPlay the new version once more, from the start, so it becomes familiar. [pause 29]\n\nThen let the scene fade, like a photograph left in the sun. [pause 30]\n\nSay quietly, that is finished. I can rest. [pause 30]\n\nLet the old weight go, and let your body be light. [pause 30]"
+   "text": "Go back to that moment. Notice how old you were. Notice the place. [pause 31]\n\nLet the moment begin as it began. Then, just before it went wrong, pause it. [pause 34]\n\nPicture yourself today stepping into the scene, beside your younger self. [pause 34]\n\nPut a hand on their shoulder. Say, I am here. We can do this differently. [pause 34]\n\nNow let the moment play on in a new way. Hear your younger self speak up calmly. Or see the other person respond kindly. Or simply see yourself walk away with your head up. [pause 37]\n\nLet it end gently. [pause 34]\n\nLook at your younger self. Tell them, you did your best. I am proud of you. [pause 37]\n\nPlay the new version once more, from the start, so it becomes familiar. [pause 37]\n\nThen let the scene fade, like a photograph left in the sun. [pause 38]\n\nSay quietly, that is finished. I can rest. [pause 38]\n\nLet the old weight go, and let your body be light. [pause 38]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1142,
+ "est_seconds": 1117,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -76,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.9-19.1 min)."
+    "note": "Ordinary, dignified scenes (a family table, a bench on a trip, an open sign, a mirror) with no wealth or status fantasy; grandparents' hometown and family wounds named gently; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

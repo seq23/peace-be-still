@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es domingo por la tarde, un día libre. Estás en una mesa con gente que quieres. [pause 19]\n\nFíjate qué hay en la mesa. Platos que pasan de mano en mano. Algo que tú preparaste. Algo que trajo alguien más. [pause 22]\n\nOye el ruido. Dos pláticas a la vez. Un niño que se ríe por ahí. Una silla que se arrastra. [pause 22]\n\nAlguien cuenta una historia de hace años, y todos se quejan porque ya se la saben, y luego se ríen de todos modos. [pause 22]\n\nNota que nadie está tenso. No hay ningún pleito viejo esperando debajo de la mesa. [pause 25]\n\nAlguien pasa detrás de ti y te aprieta el hombro con cariño. [pause 22]\n\nMira alrededor de la mesa, una cara a la vez. Date permiso de alegrarte por cada una. [pause 25]\n\nMás tarde, la gente se queda en la puerta despidiéndose un buen rato, como pasa en las familias. [pause 25]\n\nCuando la casa vuelve a estar en silencio, te quedas un momento con el corazón lleno. Fue un buen día. [pause 27]\n\nDi en tu mente, estamos bien. Estamos juntos. [pause 27]\n\nDeja que la mesa y las voces se desvanezcan, y quédate con el calor. [pause 30]"
+   "text": "Es domingo por la tarde, un día libre. Estás en una mesa con gente que quieres. [pause 26]\n\nFíjate qué hay en la mesa. Platos que pasan de mano en mano. Algo que tú preparaste. Algo que trajo alguien más. [pause 29]\n\nOye el ruido. Dos pláticas a la vez. Un niño que se ríe por ahí. Una silla que se arrastra. [pause 29]\n\nAlguien cuenta una historia de hace años, y todos se quejan porque ya se la saben, y luego se ríen de todos modos. [pause 29]\n\nNota que nadie está tenso. No hay ningún pleito viejo esperando debajo de la mesa. [pause 32]\n\nAlguien pasa detrás de ti y te aprieta el hombro con cariño. [pause 29]\n\nMira alrededor de la mesa, una cara a la vez. Date permiso de alegrarte por cada una. [pause 32]\n\nMás tarde, la gente se queda en la puerta despidiéndose un buen rato, como pasa en las familias. [pause 32]\n\nCuando la casa vuelve a estar en silencio, te quedas un momento con el corazón lleno. Fue un buen día. [pause 34]\n\nDi en tu mente, estamos bien. Estamos juntos. [pause 34]\n\nDeja que la mesa y las voces se desvanezcan, y quédate con el calor. [pause 37]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1157,
+ "est_seconds": 1111,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 18.5-18.7 min voiced at the measured 115 wpm."
    },
    "verdict": "pass"
   },

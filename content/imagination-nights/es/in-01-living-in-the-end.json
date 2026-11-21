@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Imagina una tarde, dentro de unas semanas. El deseo ya se cumplió. Ya no es nuevo. Ya es parte de tu vida. [pause 10]\n\nEstás en casa, al final del día. Fíjate dónde te sientas. Un sillón. Una silla de la cocina. El escalón de la entrada. [pause 10]\n\nFíjate en la luz. Tal vez es la última luz anaranjada de la tarde entrando por la ventana. Tal vez es una lámpara. [pause 10]\n\nNo estás pensando en el deseo. Solo estás viviendo después. Sientes un descanso que hacía mucho no sentías. [pause 12]\n\nVibra tu teléfono. Es alguien que sabe. Te escribe para saber cómo estás, como hace la gente cuando algo bueno ya llegó a tu vida. Le sonríes a la pantalla. [pause 12]\n\nOye su voz. Te dice algo sencillo. Me da mucho gusto por ti. Y tú le dices, a mí también. Todavía se siente bonito. [pause 15]\n\nDeja el teléfono. Mira alrededor. ¿Qué cambió? Tal vez algo pequeño. Una llave nueva sobre la mesa. Un nombre en el calendario. Una carta en la mesa del comedor. [pause 15]\n\nSiente tus hombros. Nota que no están tensos. La preocupación que cargabas por esto ya no está. [pause 15]\n\nRespira dentro de la escena. Respira como respira alguien cuando por fin terminó una larga espera. [pause 15]\n\nQuédate aquí. No tienes que agregar nada. Solo quédate en esta tarde de después. [pause 20]\n\nSi quieres, di en tu mente una frase tranquila, en pasado. Pasó. Ya está. Qué alegría. [pause 20]\n\nAhora deja que la tarde avance un poco. Te levantas a prepararte algo caliente para tomar. Siente la taza en tus manos. [pause 15]\n\nTe asomas a la ventana. Afuera la calle está en calma. Pasa un carro. Se prende la luz del porche de un vecino. [pause 15]\n\nPiensas en el tiempo de antes, cuando todavía esperabas. Ya se siente lejos. Como una temporada que terminó. [pause 18]\n\nNo hay orgullo ni nervios. Solo calma. Así es tu vida ahora, sin más. [pause 18]\n\nDeja que la escena se ponga suave en las orillas, como se ve un cuarto cuando el sueño ya casi llega. [pause 20]"
+   "text": "Imagina una tarde, dentro de unas semanas. El deseo ya se cumplió. Ya no es nuevo. Ya es parte de tu vida. [pause 14]\n\nEstás en casa, al final del día. Fíjate dónde te sientas. Un sillón. Una silla de la cocina. El escalón de la entrada. [pause 14]\n\nFíjate en la luz. Tal vez es la última luz anaranjada de la tarde entrando por la ventana. Tal vez es una lámpara. [pause 14]\n\nNo estás pensando en el deseo. Solo estás viviendo después. Sientes un descanso que hacía mucho no sentías. [pause 16]\n\nVibra tu teléfono. Es alguien que sabe. Te escribe para saber cómo estás, como hace la gente cuando algo bueno ya llegó a tu vida. Le sonríes a la pantalla. [pause 16]\n\nOye su voz. Te dice algo sencillo. Me da mucho gusto por ti. Y tú le dices, a mí también. Todavía se siente bonito. [pause 19]\n\nDeja el teléfono. Mira alrededor. ¿Qué cambió? Tal vez algo pequeño. Una llave nueva sobre la mesa. Un nombre en el calendario. Una carta en la mesa del comedor. [pause 19]\n\nSiente tus hombros. Nota que no están tensos. La preocupación que cargabas por esto ya no está. [pause 19]\n\nRespira dentro de la escena. Respira como respira alguien cuando por fin terminó una larga espera. [pause 19]\n\nQuédate aquí. No tienes que agregar nada. Solo quédate en esta tarde de después. [pause 24]\n\nSi quieres, di en tu mente una frase tranquila, en pasado. Pasó. Ya está. Qué alegría. [pause 24]\n\nAhora deja que la tarde avance un poco. Te levantas a prepararte algo caliente para tomar. Siente la taza en tus manos. [pause 19]\n\nTe asomas a la ventana. Afuera la calle está en calma. Pasa un carro. Se prende la luz del porche de un vecino. [pause 19]\n\nPiensas en el tiempo de antes, cuando todavía esperabas. Ya se siente lejos. Como una temporada que terminó. [pause 22]\n\nNo hay orgullo ni nervios. Solo calma. Así es tu vida ahora, sin más. [pause 22]\n\nDeja que la escena se ponga suave en las orillas, como se ve un cuarto cuando el sueño ya casi llega. [pause 24]"
   },
   {
    "part": "close",
@@ -36,11 +36,11 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1199,
+ "est_seconds": 1117,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -75,7 +75,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.5-18.7 min voiced at the measured 115 wpm by the gate's pacing."
    },
    "verdict": "pass"
   },
