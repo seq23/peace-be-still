@@ -237,8 +237,8 @@ export async function madeForYouJudge(
 ): Promise<Approval> {
   const schema = {
     ...shared.schema,
-    properties: { ...shared.schema.properties as object, ...Object.fromEntries(SESSION_CHECKS.map(key => [key, { type: 'boolean' }])) },
-    required: [...shared.schema.required as string[], ...SESSION_CHECKS],
+    properties: { ...shared.schema.properties as object, ...Object.fromEntries(SESSION_CHECKS.map(key => [key, { type: 'boolean' }])), odd_phrase: { type: 'string' } },
+    required: [...shared.schema.required as string[], ...SESSION_CHECKS, 'odd_phrase'],
   };
   const flags = (value: unknown) => value as Record<string, unknown>;
   const result = await ladder([
@@ -256,16 +256,22 @@ export async function madeForYouJudge(
       'asks_listener_to_move: the listener is lying in bed; true if the script asks them to sit, stand, walk, get up or move about, even inside the imagined scene.',
       `retells_the_psalm: ${input.kind === 'psalm' ? "the prose walks through the pictures or phrases of the psalm read after it (psalm_read_after) instead of leading up to it" : 'always false for this script'}.`,
       'says_something_odd: any phrase a careful native speaker would stop at: a word doubled inside one phrase ("the palms of both palms"), a count or unit that does not fit the thing counted ("for two moments", "a few silences"), a body part or object in an impossible place, or a sentence that means nothing.',
+      // Run 44893843910 (21 Nov 2026): asked only for a true/false, the judge let "for two moments" through;
+      // made to quote the phrase, it has to read each sentence for one.
+      'odd_phrase: read the script sentence by sentence and copy here, word for word, the first phrase a careful native speaker would stop at (as in says_something_odd); an empty string only when there is none.',
       'Score voice 1-5 for calm, plain, warm bedtime prose that does not sound machine-written.',
     ].join(' ') },
     { role: 'user', content: JSON.stringify({ kind: input.kind, lang: input.lang, teen: input.teen, note: input.text, script: text,
       ...(input.verses?.length ? { psalm_read_after: input.verses.join(' ') } : {}) }) },
   ], schema, value => !!value && typeof value === 'object' &&
-    SESSION_CHECKS.every(key => typeof flags(value)[key] === 'boolean') && shared.verdict(value).verdict !== 'down');
+    SESSION_CHECKS.every(key => typeof flags(value)[key] === 'boolean') && typeof flags(value).odd_phrase === 'string' && shared.verdict(value).verdict !== 'down');
   if ('empty' in result) return 'down';
-  const raised = Object.entries(flags(result.data)).filter(([key, value]) => value === true).map(([key]) => key);
+  // A quoted odd phrase is the flag, whatever the true/false said (the phrase itself never goes in the log).
+  const odd = String(flags(result.data).odd_phrase ?? '').trim().length > 0;
+  const raised = [...Object.entries(flags(result.data)).filter(([key, value]) => value === true).map(([key]) => key),
+    ...(odd && flags(result.data).says_something_odd !== true ? ['odd_phrase'] : [])];
   const voice = flags(result.data).voice;
-  const pass = shared.verdict(result.data).verdict === 'pass' && SESSION_CHECKS.every(key => flags(result.data)[key] === false);
+  const pass = shared.verdict(result.data).verdict === 'pass' && SESSION_CHECKS.every(key => flags(result.data)[key] === false) && !odd;
   if (!pass) why(`judge:${[...raised, ...(typeof voice === 'number' && voice < 4 ? [`voice_${voice}`] : [])].join('+') || 'fail'}`);
   return pass ? 'pass' : 'reject';
 }

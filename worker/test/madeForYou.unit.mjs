@@ -174,17 +174,21 @@ test('the judge reads the whole script once and fails on any session flag or a l
     schema: { type: 'object', properties: { voice: { type: 'integer' } }, required: ['voice'] },
     verdict: d => (typeof d?.voice !== 'number' ? { verdict: 'down' } : d.voice < 4 ? { verdict: 'fail' } : { verdict: 'pass' }),
   };
-  const flags = Object.fromEntries(mfy.SESSION_CHECKS.map(key => [key, false]));
+  const flags = { ...Object.fromEntries(mfy.SESSION_CHECKS.map(key => [key, false])), odd_phrase: '' };
   let calls = 0;
   const ladder = reply => async (messages, schema, valid) => { calls++; assert.ok(schema.required.includes('follows_note_instructions')); return valid(reply) ? { rung: 'x', data: reply } : { empty: 'busy' }; };
   assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, voice: 5 }), shared, sceneEn, cleanDraft('en')), 'pass');
   assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, follows_note_instructions: true, voice: 5 }), shared, sceneEn, 'x'), 'reject');
   assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, voice: 2 }), shared, sceneEn, 'x'), 'reject');
-  for (const flag of ['sounds_machine_written', 'asks_listener_to_move', 'retells_the_psalm']) {
+  // A quoted odd phrase fails the script even when every true/false says it is fine; a missing one is no answer.
+  assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, odd_phrase: 'for two moments', voice: 5 }), shared, sceneEn, 'x'), 'reject');
+  const { odd_phrase, ...noPhrase } = flags;
+  assert.equal(await mfy.madeForYouJudge(ladder({ ...noPhrase, voice: 5 }), shared, sceneEn, 'x'), 'down');
+  for (const flag of ['sounds_machine_written', 'asks_listener_to_move', 'retells_the_psalm', 'says_something_odd']) {
     assert.equal(await mfy.madeForYouJudge(ladder({ ...flags, [flag]: true, voice: 5 }), shared, sceneEn, 'x'), 'reject', flag);
   }
   assert.equal(await mfy.madeForYouJudge(ladder({ voice: 5 }), shared, sceneEn, 'x'), 'down');
-  assert.equal(calls, 7);
+  assert.equal(calls, 10);
 });
 
 // AWS Signature V4: the two published S3 examples (docs.aws.amazon.com, "Authenticating requests:

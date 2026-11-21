@@ -79,7 +79,7 @@ export default {
             if (use === 'judge') {
               if (judgeMode === 'down') throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
               const flags = Object.fromEntries([...JUDGE_CHECKS, ...SESSION_CHECKS].map(k => [k, false]));
-              return { ...flags, health_or_outcome_promise: judgeMode === 'fail', voice: 5 };
+              return { ...flags, odd_phrase: '', health_or_outcome_promise: judgeMode === 'fail', voice: 5 };
             }
             const lang = messages[0].content.includes('Spanish') ? 'es' : 'en';
             const paragraphs = cleanDraft(lang, short.has(rung.id) || short.has(rung.id.split(':')[0]) ? 4 : 10).split('\n\n');
