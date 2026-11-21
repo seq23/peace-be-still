@@ -28,7 +28,11 @@ If you are in the paid lane, chat can remember what you are carrying. That memor
 
 ## Sessions made for you
 
-If you are in the paid lane and ask for a session made for you, the scene or worry you write is sent to our service. We place your words into a session script and make the audio on our own computer with an open-source voice engine; your words for these sessions are not sent to an AI company. Your written words are deleted once the audio is made, and at most 7 days after you send them. The finished audio is kept for you to play until you delete it, or until 30 days after your paid plan ends.
+If you are in the paid lane and ask for a session made for you, the scene or worry you write is sent to our service. Free AI providers write the session script from your words, and they may keep what you write and learn from it, as with chat (the request form says so before you send). We make the audio on our own computer with an open-source voice engine. Your written words are deleted once the audio is made, and at most 7 days after you send them. The finished audio is kept for you to play until you delete it, or until 30 days after your paid plan ends.
+
+## Reporting an answer
+
+If you report an answer or a session, we keep the answer you reported, the reason you chose and the time, for 90 days, so a person can review it. Your message and anything that identifies you are not kept with it.
 
 ## The anonymous install id and limits
 

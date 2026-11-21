@@ -30,7 +30,11 @@ Si usted está en la parte de pago, el chat puede recordar lo que le pesa. Esa m
 
 ## Sesiones hechas para usted
 
-Si usted está en la parte de pago y pide una sesión hecha para usted, la escena o la preocupación que escriba se envía a nuestro servicio. Ponemos sus palabras en el guion de una sesión y hacemos el audio en nuestra propia computadora con un motor de voz de código abierto; sus palabras para estas sesiones no se envían a ninguna empresa de IA. Sus palabras escritas se borran en cuanto se hace el audio, y a más tardar 7 días después de que las envíe. El audio terminado se guarda para que usted lo escuche hasta que lo borre, o hasta 30 días después de que termine su plan de pago.
+Si usted está en la parte de pago y pide una sesión hecha para usted, la escena o la preocupación que escriba se envía a nuestro servicio. Proveedores gratuitos de IA escriben el guion de la sesión a partir de sus palabras, y pueden guardar lo que usted escribe y aprender de ello, igual que en el chat (el formulario se lo dice antes de enviar). Hacemos el audio en nuestra propia computadora con un motor de voz de código abierto. Sus palabras escritas se borran en cuanto se hace el audio, y a más tardar 7 días después de que las envíe. El audio terminado se guarda para que usted lo escuche hasta que lo borre, o hasta 30 días después de que termine su plan de pago.
+
+## Reportar una respuesta
+
+Si usted reporta una respuesta o una sesión, guardamos esa respuesta, el motivo que eligió y la hora, durante 90 días, para que una persona la revise. Su mensaje y nada que lo identifique se guardan con ella.
 
 ## El identificador de instalación anónimo y los límites
 
