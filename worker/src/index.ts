@@ -155,7 +155,9 @@ const crisisRung = (env: Env, now: number): LadderRung => ({
 });
 
 /** A small ladder for a check (risk read, judge): Workers AI first, then the last Gemini model. */
-const CRISIS_THINKING_HEADROOM = 1024;
+// Run 10f: at 1,024 one crisis-lane answer still ran out mid-thought (thinking ~430 tokens on average, one
+// past 1,024) and a Bible question got the fixed card. Unused tokens are not billed.
+export const CRISIS_THINKING_HEADROOM = 2048;
 /** A paid install meets no device, IP or app-wide message count (it is only counted). */
 const PAID_UNCAPPED = 1_000_000;
 const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;

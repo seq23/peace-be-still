@@ -6,6 +6,7 @@ import { env } from 'cloudflare:test';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import phrases from './fixtures/crisis-phrases.json';
 import { distress, floor } from '../src/crisis';
+import { CRISIS_THINKING_HEADROOM } from '../src/index';
 import { call, chatBody, deps, good, NOW, scripted, tokenFor } from './helpers';
 
 afterEach(() => vi.restoreAllMocks());
@@ -112,7 +113,8 @@ describe('the crisis lane answers', () => {
     c.crisis.rung.call = (async (m: never, s: never, max: number) => { maxes.push(max); return inner(m, s, max); }) as never;
     expect((await c.say('I feel so hopeless lately')).kind).toBe('answer');
     expect(maxes.length).toBeGreaterThan(0);
-    expect(Math.min(...maxes)).toBeGreaterThanOrEqual(Number(env.ANSWER_MAX_TOKENS) + 1024);
+    expect(Math.min(...maxes)).toBeGreaterThanOrEqual(Number(env.ANSWER_MAX_TOKENS) + CRISIS_THINKING_HEADROOM);
+    expect(CRISIS_THINKING_HEADROOM).toBeGreaterThanOrEqual(2048);
   });
 });
 
@@ -135,7 +137,7 @@ describe('the crisis model gives nothing', () => {
     const inner = c.crisis.rung.call;
     c.crisis.rung.call = (async (m: never, s: { properties: Record<string, unknown> }, max: number) => { if (!('references' in s.properties) && !('versions' in s.properties)) maxes.push(max); return inner(m, s as never, max); }) as never;
     expect((await c.say('I feel so hopeless, nothing matters anymore')).kind).toBe('crisis');
-    expect(maxes).toEqual([600 + 1024]);
+    expect(maxes).toEqual([600 + CRISIS_THINKING_HEADROOM]);
   });
 });
 
