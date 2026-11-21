@@ -16,11 +16,11 @@ export function doorLine(door: Door | null | undefined): string {
   return door === 'mindset' ? night.glow : dawn;
 }
 
-export function Screen({ children, footer, edges = ['top', 'bottom'] }: { children: React.ReactNode; footer?: React.ReactNode; edges?: Edge[] }) {
+export function Screen({ children, footer, edges = ['top', 'bottom'], scrollRef }: { children: React.ReactNode; footer?: React.ReactNode; edges?: Edge[]; scrollRef?: React.Ref<React.ComponentRef<typeof ScrollView>> }) {
   const c = usePalette();
   return (
     <SafeAreaView edges={edges} style={{ flex: 1, backgroundColor: c.bg }}>
-      <ScrollView contentContainerStyle={styles.wrap} keyboardShouldPersistTaps="handled">{children}</ScrollView>
+      <ScrollView ref={scrollRef} contentContainerStyle={styles.wrap} keyboardShouldPersistTaps="handled">{children}</ScrollView>
       {footer ? <View style={[styles.footer, { borderColor: c.line, backgroundColor: c.bg }]}>{footer}</View> : null}
     </SafeAreaView>
   );
@@ -86,11 +86,11 @@ export function PillButton({ children, onPress }: { children: string; onPress: (
   );
 }
 
-export function TextLink({ children, onPress, style }: { children: string; onPress: () => void; style?: StyleProp<ViewStyle> }) {
+export function TextLink({ children, onPress, style, disabled = false }: { children: string; onPress: () => void; style?: StyleProp<ViewStyle>; disabled?: boolean }) {
   const c = usePalette();
   return (
-    <Pressable accessibilityRole="link" onPress={onPress} hitSlop={10} style={[{ minHeight: 44, justifyContent: 'center', alignSelf: 'flex-start' }, style]}>
-      <Text style={{ fontFamily: fonts.strong, fontSize: 15, color: c.accent }}>{children}</Text>
+    <Pressable accessibilityRole="link" disabled={disabled} accessibilityState={{ disabled }} aria-disabled={disabled || undefined} onPress={disabled ? undefined : onPress} hitSlop={10} style={[{ minHeight: 44, justifyContent: 'center', alignSelf: 'flex-start' }, style]}>
+      <Text style={{ fontFamily: fonts.strong, fontSize: 15, color: disabled ? c.muted : c.accent }}>{children}</Text>
     </Pressable>
   );
 }

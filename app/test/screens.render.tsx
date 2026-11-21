@@ -2,24 +2,84 @@
 // expo-router recorder). Each test drives a screen the way a person would and checks what is shown, what is
 // saved and where the app goes next.
 import React from 'react';
-import { test, beforeEach, mock } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
+import { gunzipSync } from 'node:zlib';
+import { displayRuns, formatReference, parseReference } from '../src/bible/core';
+import { declaration } from '../src/screens/daily/content';
+import { test, beforeEach, mock } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { create, act, type ReactTestRenderer, type ReactTestInstance } from 'react-test-renderer';
+import products from '../src/config/products.json';
 import { createDownloads } from '../src/player/downloads';
 import { trackTitle, type Track } from '../src/player/library';
 import { createPlayer } from '../src/player/player';
-import { faithContentIssues, RAISE_WAIT_MS, type Settings } from '../src/model';
+import { dayKey, faithContentIssues, RAISE_WAIT_MS, type Settings } from '../src/model';
 
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
 const quiet = console.error;
 console.error = (...args: unknown[]) => { if (!String(args[0]).includes('react-test-renderer is deprecated')) quiet(...args); };
 let saved: string | null = null;
 let readFails = false;
+let chatRecord: string | null = null;
+const fakePurchaseCalls: string[] = [];
+let listeners = new Set<(info: ReturnType<typeof customerInfo>) => void>();
+const customerInfo = (paid: boolean) => ({
+  entitlements: { active: paid ? { paid: { isActive: true } } : {} },
+});
+let storePaid = false;
+let storeUser = '$RCAnonymousID:test';
+let purchaseError: string | undefined;
+let restorePaid = false;
+let restoreWait: Promise<void> | undefined;
+let introPrice: object | null = null;
+const packageFor = (plan: 'yearly' | 'monthly') => ({
+  identifier: plan === 'yearly' ? '$rc_annual' : '$rc_monthly',
+  product: {
+    identifier: products.products[plan].id,
+    subscriptionPeriod: plan === 'yearly' ? 'P1Y' : 'P1M',
+    priceString: plan === 'yearly' ? '$38.49' : '$6.29',
+    pricePerMonthString: plan === 'yearly' ? '$3.21' : null,
+    introPrice,
+  },
+});
+(globalThis as any).__pbsPurchases = {
+  configure: ({ apiKey }: { apiKey: string }) => assert.equal(apiKey, 'render-test-key'),
+  getAppUserID: async () => storeUser,
+  logIn: async (id: string) => {
+    fakePurchaseCalls.push(id);
+    storeUser = id;
+    return { customerInfo: customerInfo(storePaid) };
+  },
+  getOfferings: async () => ({
+    current: { identifier: products.offering, availablePackages: [packageFor('monthly'), packageFor('yearly')] },
+  }),
+  getCustomerInfo: async () => customerInfo(storePaid),
+  addCustomerInfoUpdateListener: (fn: (info: ReturnType<typeof customerInfo>) => void) => listeners.add(fn),
+  removeCustomerInfoUpdateListener: (fn: (info: ReturnType<typeof customerInfo>) => void) => listeners.delete(fn),
+  purchasePackage: async (pkg: ReturnType<typeof packageFor>) => {
+    fakePurchaseCalls.push(pkg.product.identifier);
+    if (purchaseError) throw { code: purchaseError };
+    return { customerInfo: customerInfo(storePaid = true) };
+  },
+  restorePurchases: async () => {
+    fakePurchaseCalls.push('restore');
+    await restoreWait;
+    return customerInfo(storePaid = restorePaid);
+  },
+};
+const local = new Map<string, string>();
 (globalThis as any).__pbsStorage = {
-  getItem: async () => { if (readFails) throw new Error('unavailable'); return saved; },
-  setItem: async (_key: string, value: string) => { saved = value; },
+  getItem: async (key: string) => {
+    if (readFails) throw new Error('unavailable');
+    if (key === 'peace-be-still-chat-token') return chatRecord;
+    return key === 'peace-be-still-settings' ? saved : local.get(key) ?? null;
+  },
+  setItem: async (key: string, value: string) => {
+    if (key === 'peace-be-still-chat-token') chatRecord = value;
+    else if (key === 'peace-be-still-settings') saved = value;
+    else local.set(key, value);
+  },
 };
 type Call = [string, unknown?];
 let calls: Call[] = [];
@@ -38,7 +98,10 @@ let history = false;
 // Loaded after the globals above exist.
 const { NowPlaying } = require('../src/screens/listen/NowPlaying');
 const { tracks: audioTracks } = require('../src/player/usePlayer') as { tracks: Track[] };
+const { Daily } = require('../src/screens/daily/Daily');
 const { SettingsProvider, useSettings } = require('../src/settings');
+const { PurchasesProvider, useCanUse } = require('../src/purchases/provider') as typeof import('../src/purchases/provider');
+const { Text } = require('react-native');
 const { i18n } = require('../src/i18n');
 const en = require('../src/i18n/en.json');
 const es = require('../src/i18n/es.json');
@@ -53,10 +116,13 @@ const screens = {
   today: require('../app/(tabs)/today').default,
   chat: require('../app/(tabs)/chat').default,
   bible: require('../app/(tabs)/bible').default,
+  biblePage: require('../app/bible/[page]').default,
+  dailyPage: require('../app/today/[page]').default,
   nights: require('../app/(tabs)/nights').default,
   listen: require('../app/listen/[track]').default,
   more: require('../app/(tabs)/more').default,
   settings: require('../app/settings').default,
+  paid: require('../app/paid').default,
   notFound: require('../app/+not-found').default,
 };
 type Name = Exclude<keyof typeof screens, 'root'>;
@@ -64,29 +130,54 @@ type Name = Exclude<keyof typeof screens, 'root'>;
 const base: Settings = { door: 'faith', age: 'adult', ageSetAt: 0, voice: 'plain', language: 'en' };
 const store = () => JSON.parse(saved!) as Settings;
 
+/** A paid subscriber on a phone: lane 5S's provider reads the fake store as subscribed. */
+function asSubscriber(paid = true) {
+  (globalThis as any).__pbsPlatform = 'ios';
+  (globalThis as any).__pbsExpoConfig = { extra: { revenueCatIosKey: 'render-test-key' } };
+  chatRecord = JSON.stringify({ age: 'adult', token: 'render-token', installId: 'render-install' });
+  storePaid = paid;
+  storeUser = '$RCAnonymousID:test';
+}
+
 const audioBase = 'https://pbs-audio.professionalresourcelibrary.com/';
 let publishedTracks: Track[];
 beforeEach(() => {
-  Object.assign(globalThis, { __pbsPlatform: 'web', __pbsPaid: false, __pbsAudioStop: null });
+  Object.assign(globalThis, { __pbsPlatform: 'web', __pbsAudioStop: null, __pbsExpoConfig: undefined });
+  storePaid = false;
   publishedTracks = audioTracks;
 });
+const realFetch = globalThis.fetch;
 mock.method(globalThis, 'fetch', async (url: string) => {
+  // Lane 2S loads the Bible database from its bundled asset (a data: URL here); only the audio manifest is faked.
+  if (url.startsWith('data:')) return realFetch(url);
   assert.equal(url, audioBase + 'manifest.jsonl');
   return new Response(publishedTracks.map(track => JSON.stringify({ ...track, status: 'passed' })).join('\n'));
 });
 beforeEach(() => { calls = []; history = false; (globalThis as any).__pbsParams = {}; (globalThis as any).__pbsSegments = []; (globalThis as any).__pbsScheme = 'light'; (globalThis as any).__pbsLocale = 'en'; readFails = false; });
 
-async function mount(name: Name, value: object | null = base, params: Record<string, string> = {}) {
+async function mount(name: Name, value: object | null = base, params: Record<string, string> = {}, override?: React.ComponentType) {
   saved = value ? JSON.stringify(value) : null;
   (globalThis as any).__pbsParams = params;
-  const Screen = screens[name];
+  const Screen = override ?? screens[name];
   let tree!: ReactTestRenderer;
   // Like the root layout, a screen is drawn only once the saved settings are read.
-  const Ready = () => (useSettings().ready ? <Screen /> : null);
-  await act(async () => { tree = create(<SettingsProvider><Ready /></SettingsProvider>); });
+  const Gate = () => {
+    const canUse = useCanUse();
+    return <Text>{String(canUse('offline'))} {String(canUse('bibleText'))}</Text>;
+  };
+  const Ready = () => (useSettings().ready ? <PurchasesProvider>
+    <Screen />
+    {name === 'paid' && <Gate />}
+  </PurchasesProvider> : null);
+  await act(async () => {
+    tree = create(<SettingsProvider><Ready /></SettingsProvider>, {
+      createNodeMock: element => element.type === 'ScrollView' ? { scrollTo: (options: unknown) => calls.push(['scrollTo', options]) } : null,
+    });
+  });
   return tree;
 }
-const texts = (tree: ReactTestRenderer) => tree.root.findAll(n => (n.type as unknown) === 'Text').map(n => n.children.filter(x => typeof x === 'string').join('')).filter(Boolean);
+const scripture = (node: ReactTestInstance): boolean => node.props.testID === 'scripture-text' || (!!node.parent && scripture(node.parent));
+const texts = (tree: ReactTestRenderer, includeScripture = true) => tree.root.findAll(n => (n.type as unknown) === 'Text' && (includeScripture || !scripture(n))).map(n => n.children.filter(x => typeof x === 'string').join('')).filter(Boolean);
 const strings = (tree: ReactTestRenderer) => texts(tree).join(' | ');
 const host = (tree: ReactTestRenderer, type: string) => tree.root.findAll(n => (n.type as unknown) === type);
 const textOf = (node: ReactTestInstance) => node.findAll(n => (n.type as unknown) === 'Text').map(t => t.children.filter(x => typeof x === 'string').join('')).join(' ');
@@ -328,9 +419,9 @@ test('Today has the date, the week and the three items for the door, with no wel
   const shown = strings(faith);
   assert.match(shown, /1 day this week/);
   assert.equal(host(faith, 'View').filter(n => n.props.testID === 'day-opened').length, 1);
-  assert.match(shown, /Today's declaration.*Today's story.*Tonight: Psalm Nights/);
+  assert.match(shown, /Today's declaration.*Today's story.*Tonight: Psalm Nights/s);
   assert.doesNotMatch(shown, /WELCOME|Welcome|Good to have you/);
-  await press(faith, 'Open');
+  await press(faith, /^Open  ›$/);
   assert.deepEqual(calls, [['navigate', '/nights']]);
   const mindset = strings(await mount('today', { ...base, door: 'mindset', journey: 'imagination-nights' }));
   assert.match(mindset, /Your scene.*Tonight: Imagination Nights/);
@@ -406,12 +497,16 @@ async function faithWalk(language: 'en' | 'es', age: 'child' | 'teen' | 'adult')
   const person = { ...base, age, language, voice: age === 'teen' ? 'teen' : 'plain', journey: 'psalm-nights' };
   const pages: Array<[Name, object, Record<string, string>?]> = [
     ['door', { ...person, door: null, age: null, journey: undefined }], ['age', { ...person, age: null }], ['journeys', person],
-    ['today', person], ['bible', person], ['nights', person], ['more', person], ['settings', person], ['notFound', person],
+    ['today', person], ['bible', person],
+    ...['books', 'search', 'saved'].map(page => ['biblePage', person, { page }] as [Name, object, Record<string, string>]),
+    ...['declaration', 'story', 'plans', 'journal'].map(page => ['dailyPage', person, { page }] as [Name, object, Record<string, string>]),
+    ['nights', person], ['more', person], ['settings', person], ['notFound', person],
   ];
-  if (age !== 'child') pages.push(['chat', person]);
+  if (age !== 'child') pages.push(['chat', person], ['paid', person]);
   const out: Array<[string, string]> = [];
-  // The front door names both doors; everything on it except the Mindset door's own name is checked.
-  for (const [name, value, params] of pages) out.push([`${name} ${language} ${age}`, strings(await mount(name, value, params)).replace(/With mindset & imagination|Con mente e imaginación/g, '')]);
+  // The front door names both doors. Canonical verses are covered by the exact-source tests:
+  // the KJV uses “manifest” in John 3:21 and it must remain in the displayed verse.
+  for (const [name, value, params] of pages) out.push([`${name} ${language} ${age}`, texts(await mount(name, value, params), false).join(' | ').replace(/With mindset & imagination|Con mente e imaginación/g, '')]);
   return out;
 }
 
@@ -432,7 +527,7 @@ test('the God\'s Word gate fails a screen when a banned word reaches its data', 
 
 test('Spanish screens show no English: no rendered text is an English string that has a Spanish one', async () => {
   // Names that stay as they are in Spanish: the app, the journeys, the language picker's own names.
-  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)']);
+  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)', 'Reina-Valera 1909', 'King James Version']);
   const english = new Set(Object.values(en).flatMap(v => typeof v === 'string' ? [v] : Object.values(v as object) as string[]).filter(v => !sameInBoth.has(v)));
   const people = [
     { ...base, language: 'es', journey: 'psalm-nights' }, { ...base, language: 'es', door: 'mindset', journey: 'imagination-nights' },
@@ -440,7 +535,7 @@ test('Spanish screens show no English: no rendered text is an English string tha
   ];
   const leaks: string[] = [];
   for (const person of people) {
-    const pages: Name[] = person.language === 'es' ? ['door', 'age', 'journeys', 'today', 'chat', 'bible', 'nights', 'more', 'settings', 'notFound'] : ['today', 'chat', 'bible', 'nights', 'more'];
+    const pages: Name[] = person.language === 'es' ? ['door', 'age', 'journeys', 'today', 'chat', 'bible', 'nights', 'more', 'settings', 'paid', 'notFound'] : ['today', 'chat', 'bible', 'nights', 'more', 'paid'];
     for (const name of pages) {
       const tree = await mount(name, name === 'door' || name === 'age' ? { ...person, door: null, age: null, journey: undefined } : person);
       for (const text of texts(tree)) if (english.has(text) || english.has(text.replace(/\s+›$/, ''))) leaks.push(`${name} (${person.journey}): ${text}`);
@@ -685,8 +780,7 @@ test('a paid listener sees download in progress, failure and successful retry', 
   const track = audioTracks.find(track => track.kind === 'bible')!;
   let finish: ((hash: string) => void) | undefined;
   const player = testPlayer(track, audioBase, 0, () => new Promise(resolve => { finish = resolve; }));
-  (globalThis as any).__pbsPlatform = 'ios';
-  (globalThis as any).__pbsPaid = true;
+  asSubscriber();
   const tree = await mount('listen', { ...base, journey: 'psalm-nights' }, { track: track.sha256 });
   try {
     await press(tree, new RegExp('^' + en['listen.download'] + '$'));
@@ -743,7 +837,7 @@ test('Hush Harbor cues follow the real pause positions and the Spanish player re
   // The production catalog has no Spanish story audio yet. Use the real story's media
   // metadata at the component boundary to verify its Spanish controls and response copy.
   saved = JSON.stringify({ ...base, language: 'es', journey: 'mi-refugio' });
-  const Ready = () => useSettings().ready ? <NowPlaying track={track} close={() => undefined} /> : null;
+  const Ready = () => useSettings().ready ? <PurchasesProvider><NowPlaying track={track} close={() => undefined} /></PurchasesProvider> : null;
   let spanish!: ReactTestRenderer;
   await act(async () => { spanish = create(<SettingsProvider><Ready /></SettingsProvider>); });
   try {
@@ -760,6 +854,415 @@ test('Hush Harbor cues follow the real pause positions and the Spanish player re
   }
 });
 
+
+const readyForPaid = { ...base, journey: 'psalm-nights' } as const;
+
+async function mountPaid(value: Settings = readyForPaid, setup?: () => void) {
+  (globalThis as any).__pbsPlatform = 'ios';
+  (globalThis as any).__pbsExpoConfig = { extra: { revenueCatIosKey: 'render-test-key' } };
+  chatRecord = JSON.stringify({ age: value.age, token: 'render-token', installId: 'render-install' });
+  storePaid = false;
+  restorePaid = false;
+  restoreWait = undefined;
+  purchaseError = undefined;
+  introPrice = null;
+  listeners = new Set();
+  storeUser = '$RCAnonymousID:test';
+  fakePurchaseCalls.length = 0;
+  setup?.();
+  return mount('paid', value);
+}
+
+async function closePaid(tree: ReactTestRenderer) {
+  await act(async () => tree.unmount());
+  (globalThis as any).__pbsPlatform = 'web';
+  (globalThis as any).__pbsOpenURL = undefined;
+}
+
+const paidControls = (tree: ReactTestRenderer) => host(tree, 'Pressable').filter(n => n.props.accessibilityRole === 'button');
+const restoreControl = (tree: ReactTestRenderer) => host(tree, 'Pressable').find(n => /restore purchases/i.test(textOf(n)))!;
+const gate = (tree: ReactTestRenderer) => texts(tree).at(-1);
+
+test('Settings opens the paid lane and its close control takes the visitor back', async () => {
+  const settings = await mount('settings', readyForPaid);
+  await press(settings, /paid lane/i);
+  assert.deepEqual(calls, [['push', '/paid']]);
+  const tree = await mount('paid', readyForPaid);
+  assert.match(strings(tree), /App Store prices are unavailable/i);
+  assert.equal(paidControls(tree).length, 0);
+  assert.equal(restoreControl(tree).props.accessibilityRole, 'link');
+  assert.equal(restoreControl(tree).props.accessibilityState.disabled, true);
+  const links = host(tree, 'View').find(n => n.props.style?.columnGap === 20);
+  assert.equal(links?.props.style.alignItems, 'center');
+  assert.doesNotMatch(strings(tree), /no trial/i);
+  assert.equal(gate(tree), 'false true');
+  await press(tree, /close/i);
+  assert.deepEqual(calls.at(-1), ['replace', '/settings']);
+});
+
+test('the rendered paid lane discloses benefits, actual store prices, renewal terms, promises and working links in both languages', async () => {
+  for (const locale of ['en', 'es'] as const) {
+    const value: Settings = { ...readyForPaid, journey: locale === 'es' ? 'mi-refugio' : 'psalm-nights' };
+    const tree = await mountPaid(value);
+    try {
+      const es = locale === 'es';
+      assert.deepEqual(faithContentIssues(strings(tree)), []);
+      const choices = () => radios(tree);
+      assert.equal(choices().length, 2);
+      const group = host(tree, 'View').find(n => n.props.role === 'radiogroup');
+      assert.ok(group);
+      assert.equal(group.props.style.flexDirection, 'column');
+      assert.equal(host(tree, 'Text').find(n => n.props.accessibilityRole === 'header')?.props.style[0].fontSize, 30);
+      assert.match(textOf(choices()[0]), /\$38\.49/);
+      assert.match(textOf(choices()[1]), /\$6\.29/);
+      assert.match(choices()[0].props['aria-label'], es ? /Anual.*\$38\.49.*al año/ : /Yearly.*\$38\.49.*a year/);
+      assert.match(choices()[1].props['aria-label'], es ? /Mensual.*\$6\.29.*al mes/ : /Monthly.*\$6\.29.*a month/);
+      assert.equal(choices()[0].props['aria-checked'], true);
+      assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
+      for (const meaning of es
+        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /100 mensajes/, /24 horas/]
+        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, /100 messages/, /24 hours/]) {
+        assert.match(strings(tree), meaning);
+      }
+      await press(tree, /\$6\.29/);
+      assert.equal(choices()[1].props['aria-checked'], true);
+      assert.match(textOf(paidControls(tree)[0]), /\$6\.29/);
+      assert.match(strings(tree), es ? /cada mes por \$6\.29/ : /monthly at \$6\.29/);
+      const links: string[] = [];
+      (globalThis as any).__pbsOpenURL = (url: string) => links.push(url);
+      await press(tree, es ? /dos toques/ : /two taps/);
+      await press(tree, es ? /términos/i : /terms/i);
+      await press(tree, es ? /privacidad/i : /privacy/i);
+      assert.deepEqual(links, [
+        'https://apps.apple.com/account/subscriptions',
+        `https://peacebestillapp.com/${es ? 'es/terminos' : 'terms'}`,
+        `https://peacebestillapp.com/${es ? 'es/privacidad' : 'privacy'}`,
+      ]);
+      assert.ok(host(tree, 'Pressable').some(n => /restore|restaurar/i.test(textOf(n))));
+    } finally { await closePaid(tree); }
+  }
+});
+
+test('checkout uses the existing install identity and selected package and switches the actual feature gate', async () => {
+  const tree = await mountPaid();
+  try {
+    assert.equal(gate(tree), 'false true');
+    await press(tree, /\$6\.29/);
+    await press(tree, /Join /);
+    assert.deepEqual(fakePurchaseCalls, ['render-install', products.products.monthly.id]);
+    assert.equal(gate(tree), 'true true');
+    assert.match(strings(tree), /paid access is active/);
+    assert.equal(paidControls(tree).length, 0);
+  } finally { await closePaid(tree); }
+});
+
+test('restore checks the store and grants access only when paid is active', async () => {
+  const tree = await mountPaid();
+  try {
+    await press(tree, /restore purchases/i);
+    assert.equal(gate(tree), 'false true');
+    assert.match(strings(tree), /didn’t find.*active subscription/);
+    restorePaid = true;
+    let finish!: () => void;
+    restoreWait = new Promise(resolve => { finish = resolve; });
+    await press(tree, /restore purchases/i);
+    assert.equal(restoreControl(tree).props.accessibilityRole, 'link');
+    assert.equal(restoreControl(tree).props.accessibilityState.disabled, true);
+    assert.equal(restoreControl(tree).props.onPress, undefined);
+    await act(async () => finish());
+    assert.deepEqual(fakePurchaseCalls, ['render-install', 'restore', 'restore']);
+    assert.equal(gate(tree), 'true true');
+    assert.match(strings(tree), /paid access is active/);
+  } finally { await closePaid(tree); }
+});
+
+test('Ask to Buy leaves paid access locked until the RevenueCat listener reports approval', async () => {
+  const tree = await mountPaid({ ...readyForPaid, age: 'teen' }, () => { purchaseError = '20'; });
+  try {
+    await press(tree, /Join /);
+    assert.deepEqual(fakePurchaseCalls, ['render-install', products.products.yearly.id]);
+    assert.match(strings(tree), /waiting for a parent or guardian/);
+    assert.equal(gate(tree), 'false true');
+    assert.equal(paidControls(tree).length, 0);
+    await act(async () => listeners.forEach(fn => fn(customerInfo(true))));
+    assert.equal(gate(tree), 'true true');
+    assert.doesNotMatch(strings(tree), /waiting for a parent or guardian/);
+  } finally { await closePaid(tree); }
+});
+
+test('failure leaves the free lane in place and makes checkout available again', async () => {
+  const tree = await mountPaid({ ...readyForPaid, language: 'es' }, () => { purchaseError = '2'; });
+  try {
+    await press(tree, /Suscríbete/);
+    assert.match(strings(tree), /completar la compra/i);
+    assert.equal(gate(tree), 'false true');
+    purchaseError = undefined;
+    await press(tree, /Suscríbete/);
+    assert.equal(gate(tree), 'true true');
+  } finally { await closePaid(tree); }
+});
+
+test('a storefront with an introductory offer cannot present a no-trial checkout', async () => {
+  const tree = await mountPaid(readyForPaid, () => { introPrice = {}; });
+  try {
+    assert.match(strings(tree), /prices are unavailable/);
+    assert.equal(paidControls(tree).length, 0);
+    assert.equal(gate(tree), 'false true');
+    introPrice = null;
+    await press(tree, /try again/i);
+    assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
+  } finally { await closePaid(tree); }
+});
+
+test('a first purchase provisions and persists the shared install identity before reaching the store', async () => {
+  const fetch = globalThis.fetch;
+  const requests: string[] = [];
+  globalThis.fetch = async (url, options) => {
+    requests.push(String(url));
+    assert.deepEqual(JSON.parse(String(options?.body)), { age: 'adult' });
+    return Response.json({ token: 'new-token', installId: 'new-install' });
+  };
+  const tree = await mountPaid(readyForPaid, () => { chatRecord = null; });
+  try {
+    assert.deepEqual(requests, []);
+    await press(tree, /Join /);
+    assert.match(requests[0], /\/token$/);
+    assert.equal(requests.length, 1);
+    assert.deepEqual(JSON.parse(chatRecord!), { token: 'new-token', age: 'adult', installId: 'new-install' });
+    assert.deepEqual(fakePurchaseCalls, ['new-install', products.products.yearly.id]);
+    assert.equal(gate(tree), 'true true');
+  } finally {
+    globalThis.fetch = fetch;
+    await closePaid(tree);
+  }
+});
+
+test('the web preview shows configured prices and renewal terms without opening checkout or granting access', async () => {
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+  fakePurchaseCalls.length = 0;
+  try {
+    for (const language of ['en', 'es'] as const) {
+      const es = language === 'es';
+      const tree = await mount('paid', { ...readyForPaid, language });
+      const previewLabel = es ? /vista previa/i : /preview/i;
+      try {
+        const [yearly, monthly] = radios(tree);
+        assert.match(textOf(yearly), /\$39\.99/);
+        assert.match(textOf(yearly), /\$3\.33/);
+        assert.match(textOf(monthly), /\$7\.99/);
+        assert.match(textOf(paidControls(tree)[0]), previewLabel);
+        assert.match(textOf(paidControls(tree)[0]), /\$39\.99/);
+        const yearlyDisclosure = es
+          ? /sin período de prueba.*cada año por \$39\.99/i
+          : /no trial.*renews yearly at \$39\.99/i;
+        assert.ok(texts(tree).some(line => yearlyDisclosure.test(line)));
+        await press(tree, previewLabel);
+        assert.deepEqual(fakePurchaseCalls, []);
+        assert.equal(gate(tree), 'false true');
+        const restore = host(tree, 'Pressable').find(n => (es ? /restaurar compras/i : /restore purchases/i).test(textOf(n)));
+        assert.ok(restore);
+        assert.equal(restore.props.accessibilityRole, 'link');
+        assert.equal(restore.props['aria-disabled'], true);
+        assert.equal(restore.props.onPress, undefined);
+        await press(tree, /\$7\.99/);
+        assert.match(textOf(paidControls(tree)[0]), /\$7\.99/);
+        const monthlyDisclosure = es
+          ? /sin período de prueba.*cada mes por \$7\.99/i
+          : /no trial.*renews monthly at \$7\.99/i;
+        assert.ok(texts(tree).some(line => monthlyDisclosure.test(line)));
+      } finally { await closePaid(tree); }
+    }
+  } finally {
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
+  }
+});
+
+
+test('a Bible verse link scrolls the expanded verse into view once its row is laid out', async () => {
+  for (const journey of ['psalm-nights', 'mi-refugio'] as const) {
+    calls = [];
+    const tree = await mount('biblePage', { ...base, journey }, { page: 'chapter', book: 'PSA', chapter: '119', verse: '105' });
+    const verses = host(tree, 'Text').filter(node => node.props.testID === 'scripture-text');
+    const target = verses.find(node => node.props.accessibilityState.expanded);
+    assert.equal(target, verses[104]);
+    assert.ok(target);
+    const row = target.parent!;
+    const measured = verses.filter(node => node.parent?.props.onLayout);
+    assert.equal(measured.length, 1);
+    assert.equal(measured[0], target);
+    assert.deepEqual(calls, []);
+    const event = { nativeEvent: { layout: { x: 20, y: 6100, width: 350, height: 100 } } };
+    await act(async () => row.props.onLayout(event));
+    assert.deepEqual(calls, [['scrollTo', { y: 6088, animated: false }]]);
+    // A highlight or a font change can lay out the row again after the reader has moved on.
+    await act(async () => row.props.onLayout(event));
+    assert.equal(calls.length, 1);
+  }
+});
+
+for (const locale of ['en', 'es'] as const) {
+  const person = { ...base, journey: locale === 'es' ? 'mi-refugio' : 'psalm-nights' };
+  const copy = locale === 'es' ? es : en;
+  test(`Bible ${locale}: John 3:16 from the source, chapter picker, search and saved marks`, async () => {
+    const data = gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
+    const verse = data.match(/^JOH 3:16 (.*)$/m)![1].trim();
+    const shownVerse = displayRuns(verse).map(run => run.text).join('');
+    const chapter = await mount('bible', person);
+    const verseNode = host(chapter, 'Text').find(node => node.props.accessibilityRole === 'button' && textOf(node).replace(/\s+/g, ' ').includes(shownVerse));
+    assert.ok(verseNode, 'John 3:16 is present as stored and selectable');
+    assert.equal(host(chapter, 'Text').some(node => node.props.style?.fontStyle === 'italic'), locale === 'en');
+    await press(chapter, copy['reader.next']);
+    assert.deepEqual(calls.at(-1), ['push', { pathname: '/bible/[page]', params: { page: 'chapter', book: 'JOH', chapter: 4, verse: undefined } }]);
+    await press(chapter, copy['reader.previous']);
+    assert.equal((calls.at(-1)?.[1] as { params: { chapter: number } }).params.chapter, 2);
+    assert.equal(verseNode.props.accessibilityState.selected, false);
+    await act(async () => verseNode.props.onPress());
+    assert.equal(verseNode.props.accessibilityState.selected, true);
+    assert.equal(verseNode.props['aria-expanded'], true);
+    await act(async () => verseNode.props.onPress());
+    assert.deepEqual(verseNode.props.accessibilityState, { expanded: false, selected: false });
+    await act(async () => verseNode.props.onPress());
+    const linked = await mount('biblePage', person, { page: 'chapter', book: 'JHN', chapter: '3', verse: '16' });
+    assert.ok(host(linked, 'Text').some(node => node.props.accessibilityState?.selected && textOf(node).replace(/\s+/g, ' ').includes(shownVerse)));
+    await press(chapter, copy['reader.save']);
+    await press(chapter, copy['reader.highlight']);
+    assert.ok(local.get('pbs-bible-marks')?.includes('"highlight":true'));
+    await press(chapter, copy['share.title']);
+    assert.ok(host(chapter, 'SvgText').some(node => node.children.join('') === `${locale === 'es' ? 'Juan' : 'John'} 3:16 · ${locale === 'es' ? 'RV1909' : 'KJV'}`));
+    const savedPage = await mount('biblePage', person, { page: 'saved' });
+    assert.match(strings(savedPage), /3:16/);
+    await press(savedPage, copy['reader.unhighlight']);
+    await press(savedPage, copy['reader.unsave']);
+    assert.ok(strings(savedPage).includes(copy['reader.emptySaved']));
+    const books = await mount('biblePage', person, { page: 'books' });
+    await press(books, copy['reader.chooseBook']);
+    await press(books, locale === 'es' ? /^Salmos$/ : /^Psalms$/);
+    await press(books, /^150$/);
+    assert.equal((calls.at(-1)?.[1] as { params: { chapter: number } }).params.chapter, 150);
+    const endOfJohn = await mount('biblePage', person, { page: 'chapter', book: 'JOH', chapter: '21' });
+    await press(endOfJohn, copy['reader.next']);
+    const next = (calls.at(-1)?.[1] as { params: { book: string; chapter: number } }).params;
+    assert.equal(next.book, 'ACT');
+    assert.equal(next.chapter, 1);
+    const startOfActs = await mount('biblePage', person, { page: 'chapter', book: next.book, chapter: '1' });
+    await press(startOfActs, copy['reader.previous']);
+    const previous = (calls.at(-1)?.[1] as { params: { book: string; chapter: number } }).params;
+    assert.equal(previous.book, 'JOH');
+    assert.equal(previous.chapter, 21);
+    const search = await mount('biblePage', person, { page: 'search' });
+    const query = locale === 'es' ? 'corazon' : 'loved world begotten';
+    await type(search, query);
+    await press(search, copy['reader.search']);
+    assert.match(strings(search), locale === 'es' ? /corazón/i : /John 3:16/);
+  });
+
+  test(`Daily ${locale}: production hides drafts, declaration makes an image, plans and journal save`, async () => {
+    const now = new Date();
+    const dateOf = (day: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + day - now.getDay());
+    const data = gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
+    const draft = await mount('dailyPage', person, { page: 'story' });
+    assert.ok(strings(draft).includes(copy['daily.noStory']));
+    await press(draft, copy['daily.readBible']);
+    const [action, destination] = calls.at(-1)!;
+    const passage = destination as { pathname: string; params: { page: string; book: string; chapter: number } };
+    assert.equal(action, 'push');
+    assert.equal(passage.pathname, '/bible/[page]');
+    assert.equal(passage.params.page, 'chapter');
+    const today = await mount('today', person);
+    assert.ok(!strings(today).includes(copy['daily.openStory']));
+    assert.ok(!strings(today).includes(copy['daily.draft']));
+    assert.ok(!strings(today).includes(copy['daily.listenStory']));
+    await press(today, copy['daily.readBible']);
+    assert.deepEqual(calls.at(-1), ['push', {
+      pathname: '/bible/[page]',
+      params: { page: 'chapter', book: passage.params.book, chapter: passage.params.chapter },
+    }]);
+    const extras = host(today, 'View').find(node => node.children.some(child =>
+      typeof child !== 'string' && textOf(child) === copy['daily.more'],
+    ) && textOf(node).includes(copy['daily.title.plans']) && textOf(node).includes(copy['daily.title.journal']));
+    assert.ok(extras);
+    const renderDaily = (page: 'story' | 'declaration', date: Date) => mount('dailyPage', person, {}, () =>
+      <Daily page={page} now={date} back={() => {}} read={() => {}} />);
+    for (let day = 0; day < 7; day++) {
+      const production = strings(await renderDaily('story', dateOf(day)));
+      assert.ok(production.includes(copy['daily.noStory']));
+      assert.ok(!production.includes(copy[`daily.draft.${day}`]));
+      assert.ok(!production.includes(copy[`daily.retelling.${day}`]));
+    }
+    try {
+      process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+      const previewToday = await mount('today', person);
+      assert.ok(strings(previewToday).includes(copy['daily.draft']));
+      const listen = host(previewToday, 'Pressable').find(node => textOf(node) === copy['daily.listenStory']);
+      assert.equal(listen?.props.disabled, true);
+      assert.equal(listen.props['aria-disabled'], true);
+      assert.ok(strings(previewToday).includes(copy['daily.storyAudioUnavailable']));
+      await press(previewToday, copy['daily.openStory']);
+      assert.deepEqual(calls.at(-1), ['push', { pathname: '/today/[page]', params: { page: 'story' } }]);
+      const previewRoute = await mount('dailyPage', person, { page: 'story' });
+      assert.ok(strings(previewRoute).includes(copy[`daily.retelling.${now.getDay()}`]));
+      for (let day = 0; day < 7; day++) {
+        const preview = await renderDaily('story', dateOf(day));
+        assert.ok(strings(preview).includes(copy['daily.draft']));
+        assert.ok(strings(preview).includes(copy[`daily.draft.${day}`]));
+        assert.ok(strings(preview).includes(copy[`daily.retelling.${day}`]));
+        assert.ok(strings(preview).includes(copy['daily.storyAudioUnavailable']));
+        assert.deepEqual(faithContentIssues(strings(preview)), []);
+      }
+    } finally {
+      delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    }
+    for (let day = 0; day < 7; day++) {
+      const date = dateOf(day);
+      const row = declaration('faith', date);
+      const ref = parseReference(row.passage!)!;
+      const prefix = `${ref.book} ${ref.chapter}:${ref.verse} `;
+      const verse = data.split('\n').find(line => line.startsWith(prefix))!.slice(prefix.length).trim();
+      const expected = displayRuns(verse).map(run => run.text).join('');
+      const screen = await renderDaily('declaration', date);
+      assert.ok(strings(screen).includes(copy[row.line]));
+      assert.ok(host(screen, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
+      if (day === now.getDay()) {
+        assert.ok(host(today, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
+      }
+      assert.ok(strings(screen).includes(formatReference(ref, locale)));
+      assert.ok(strings(screen).includes(copy['daily.prayer']));
+    }
+    const mindset = await mount('dailyPage', { ...person, door: 'mindset', journey: 'imagination-nights', language: locale }, { page: 'declaration' });
+    assert.ok(!host(mindset, 'Text').some(node => node.props.testID === 'scripture-text'));
+    assert.ok(!strings(mindset).includes(copy['daily.prayer']));
+    const word = await mount('dailyPage', person, { page: 'declaration' });
+    if (!strings(word).includes(copy['daily.done'])) await press(word, copy['daily.said']);
+    assert.ok(strings(word).includes(copy['daily.done']));
+    await press(word, copy['share.title']);
+    assert.ok(host(word, 'SvgText').some(node => node.children.join('') === copy['share.brand']));
+    // A known PNG stands in for the platform rasterizer. The real component must request capture
+    // and render the resulting image, with its download action, before it can be shared.
+    const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jR1sAAAAASUVORK5CYII=';
+    (globalThis as any).__pbsCapture = (callback: (data: string) => void) => callback(png);
+    await press(word, copy['share.render']);
+    assert.equal(host(word, 'Image')[0].props.source.uri, `data:image/png;base64,${png}`);
+    assert.ok(strings(word).includes(copy['share.download']));
+    const plans = await mount('dailyPage', person, { page: 'plans' });
+    const planTitles = ['rest', 'courage', 'mercy'].map(id => copy[`daily.plan.${id}`]);
+    assert.deepEqual(host(plans, 'Pressable').filter(node => planTitles.some(title => textOf(node).includes(title))).length, 3);
+    await press(plans, copy[locale === 'es' ? 'daily.plan.courage' : 'daily.plan.rest']);
+    assert.equal(host(plans, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 7);
+    await press(plans, copy['daily.plan.complete']);
+    assert.ok(strings(plans).includes(copy['daily.done']));
+    const journal = await mount('dailyPage', person, { page: 'journal' });
+    const entry = `Test note ${locale}`;
+    await type(journal, entry);
+    await press(journal, copy['daily.saveNote']);
+    assert.equal(JSON.parse(local.get('pbs-daily')!).journal[dayKey(now)], entry);
+    const reopened = await mount('dailyPage', person, { page: 'journal' });
+    assert.equal(host(reopened, 'TextInput')[0].props.value, entry);
+    const completed = await mount('today', person);
+    assert.ok(strings(completed).includes(copy['today.week'].one.replace('%{count}', '1')));
+  });
+}
 test('a screen that throws shows the calm error screen in the app language, and Try again retries', async () => {
   const { ErrorBoundary } = screens.root as { ErrorBoundary: (props: { error: Error; retry: () => Promise<void> }) => React.ReactElement };
   assert.equal(typeof ErrorBoundary, 'function', 'app/_layout.tsx exports the route error boundary');

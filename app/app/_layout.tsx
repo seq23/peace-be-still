@@ -5,10 +5,10 @@ import { LibreCaslonText_400Regular, LibreCaslonText_400Regular_Italic } from '@
 import { SplineSansMono_500Medium } from '@expo-google-fonts/spline-sans-mono';
 import { useFonts } from 'expo-font';
 import { Stack, type ErrorBoundaryProps } from 'expo-router';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { configureRevenueCat } from '../src/billing/revenuecat';
+import { PurchasesProvider } from '../src/purchases/provider';
 import { SettingsProvider, useSettings, useT } from '../src/settings';
 import { Body, Screen, usePalette } from '../src/ui';
 import { ErrorScreen } from '../src/ui/ErrorScreen';
@@ -21,12 +21,11 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({ LibreCaslonText_400Regular, LibreCaslonText_400Regular_Italic, Figtree_400Regular, Figtree_600SemiBold, SplineSansMono_500Medium });
-  useEffect(() => { void configureRevenueCat().catch(error => console.warn('RevenueCat initialization failed', error)); }, []);
   return (
     <SafeAreaProvider>
       <SettingsProvider>
         {/* A font that fails or times out (a slow phone) falls back to the system face; it never holds the app on a spinner. */}
-        <Root fontsLoaded={fontsLoaded || !!fontError} />
+        <PurchasesProvider><Root fontsLoaded={fontsLoaded || !!fontError} /></PurchasesProvider>
       </SettingsProvider>
     </SafeAreaProvider>
   );

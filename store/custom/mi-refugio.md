@@ -3,8 +3,8 @@
 Door: God's Word
 Deep link: https://peacebestillapp.com/open/mi-refugio
 Keywords locale: es-MX (the en-US and es-MX versions of this page are both in Spanish)
-Keywords assigned: biblia,español,salmos,hablada,reina,valera,oración,devocional,cristiana,audio,versículos,jesús
-Promotional text: La Biblia Reina-Valera 1909 en texto y audio, gratis. Habla de lo que cargas con un chat en español y duerme con Salmos susurrados. Sin prueba, sin anuncios.
+Keywords assigned: biblia,español,salmos,gratis,reina,valera,oración,devocional,cristiana,chat,versículos,jesús
+Promotional text: La Biblia Reina-Valera 1909 completa, gratis para leer. Habla de lo que cargas con un chat en español y duerme con Salmos susurrados. Sin prueba, sin anuncios.
 Screenshot 1: Habla de lo que cargas, en español
 Screenshot 1 shows: Hush Harbor chat in Spanish (screen 3 layout)
 Screenshot 2: Salmos susurrados para dormir

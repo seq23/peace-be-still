@@ -6,7 +6,7 @@ Peace Be Still is made by Spry Labs, the trade name of Redwood Reserve Holdings 
 
 ## Not an emergency service
 
-If you are in immediate danger, call 911. In the United States, call or text 988 for the Suicide & Crisis Lifeline; for Spanish, call 988 and press 2. The National Domestic Violence Hotline is 1-800-799-7233, and Childhelp is 1-800-422-4453. When a chat message mentions self-harm or abuse, the app shows these numbers instead of an AI answer.
+If you are in immediate danger, call 911. In the United States, call or text 988 for the Suicide & Crisis Lifeline; for Spanish, call 988 and press 2. The National Domestic Violence Hotline is 1-800-799-7233, and Childhelp is 1-800-422-4453. When the app recognizes that a chat message is about self-harm or abuse, it shows these numbers instead of an AI answer.
 
 ## Chat is AI, not a person
 
