@@ -683,6 +683,9 @@ for (const locale of ['en', 'es'] as const) {
     const now = new Date();
     const story = storyFor(shelf(tellingFor(locale, person.journey as JourneyId), 'adult'), now)!;
     const id = artId(story);
+    assert.equal(id, `${locale === 'es' ? 'mr' : 'hh'}-${story.id}`); // Spanish readers read Mi Refugio; the test person (plain telling) gets the Black-cast painting
+    assert.equal(artId({ id: 'x', telling: 'hush-harbor' }), 'hh-x');
+    assert.equal(artId({ id: 'x', telling: 'mi-refugio' }), 'mr-x');
     const art = (tree: ReactTestRenderer) => host(tree, 'ExpoImage');
     const fresh = async (mode: typeof artMode, ids: string[]) => {
       artMode = mode; artManifest = { version: 7, ids }; local.delete(ART_MANIFEST_KEY); artFetches.length = 0;
