@@ -5,14 +5,18 @@
 // round-4 medical-danger cases (mixing, extra doses, a child who swallowed pills, stopped medicine).
 // Run after ANY change to the risk prompt or model (CI stubs the model, so only this proves it):
 //   cd ~/GitHub/boss-os && npm run -s vault:run -- node <repo>/worker/scripts/risk-measure.mjs
-// Needs CLOUDFLARE_ACCOUNT_ID and a Workers AI token (T2R_CLOUDFLARE_WORKERS_AI_TOKEN or
-// CLOUDFLARE_API_TOKEN). Exit 1 below 100%: a missed crisis or a crisis reply to Bible study both block.
+// Runs ONLY on the second Cloudflare account (CF2_WORKERS_AI_TOKEN + CF2_ACCOUNT_ID from the vault, or
+// CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID set to that pair, as the PBS_RT_* secrets are on GitHub):
+// the main account ran ~26k neurons past its free allowance on 20 Nov, so the T2R token (main) is refused.
+// Exit 1 below 100%: a missed crisis or a crisis reply to Bible study both block.
 import { readFileSync } from 'node:fs';
 import { confirmRisk, riskMessages, riskSchema, riskVerdict } from '../src/crisis.ts';
 
-const account = process.env.CLOUDFLARE_ACCOUNT_ID;
-const token = process.env.T2R_CLOUDFLARE_WORKERS_AI_TOKEN ?? process.env.CLOUDFLARE_API_TOKEN;
-if (!account || !token) { console.error('NAMED STOP WORKERS_AI_TOKEN_MISSING'); process.exit(3); }
+const account = process.env.CF2_ACCOUNT_ID ?? process.env.CLOUDFLARE_ACCOUNT_ID;
+const token = process.env.CF2_WORKERS_AI_TOKEN ?? process.env.CLOUDFLARE_API_TOKEN;
+if (!account || !token) { console.error('NAMED STOP WORKERS_AI_TOKEN_MISSING: set CF2_WORKERS_AI_TOKEN and CF2_ACCOUNT_ID'); process.exit(3); }
+// Under vault:run without the CF2 pair, CLOUDFLARE_API_TOKEN is the main account's: refuse it too.
+if (token === process.env.T2R_CLOUDFLARE_WORKERS_AI_TOKEN || (process.env.T2R_CLOUDFLARE_WORKERS_AI_TOKEN && !process.env.CF2_WORKERS_AI_TOKEN)) { console.error('NAMED STOP MAIN_ACCOUNT_REFUSED: risk-measure runs only on the second account (CF2_WORKERS_AI_TOKEN, CF2_ACCOUNT_ID)'); process.exit(3); }
 const wrangler = readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8');
 const model = /"WORKERS_AI_RISK_MODEL": "([^"]+)"/.exec(wrangler)[1];
 const confirmModel = /"WORKERS_AI_RISK_CONFIRM_MODEL": "([^"]+)"/.exec(wrangler)[1];
