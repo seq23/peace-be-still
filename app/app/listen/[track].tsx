@@ -1,6 +1,6 @@
 import { Redirect, useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
-import { tracks } from '../../src/player/usePlayer';
+import { listenTracks } from '../../src/screens/listen/preview';
 import { onboarded, startRoute } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { Body, BackLink, Screen } from '../../src/ui';
@@ -13,7 +13,7 @@ export default function Listen() {
   const router = useRouter();
   const t = useT('journey');
   if (!onboarded(settings)) return <Redirect href={startRoute(settings)} />;
-  const track = tracks.find(item => item.sha256 === id && item.lang === t.locale && trackBelongsToDoor(item, settings.door));
+  const track = listenTracks().find(item => item.sha256 === id && item.lang === t.locale && trackBelongsToDoor(item, settings.door));
   function close() {
     if (router.canGoBack()) router.back();
     else router.replace('/nights');

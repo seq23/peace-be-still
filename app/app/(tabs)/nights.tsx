@@ -2,7 +2,7 @@ import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useSettings, useT } from '../../src/settings';
-import { tracks } from '../../src/player/usePlayer';
+import { isPreviewSample, listenTracks } from '../../src/screens/listen/preview';
 import { trackTitle, type Track } from '../../src/player/library';
 import { byChapter, groupBible, shelfOf, trackBelongsToDoor } from '../../src/screens/listen/catalog';
 import { usePublishedAudio } from '../../src/screens/listen/availability';
@@ -15,14 +15,14 @@ export default function Nights() {
   const router = useRouter();
   const published = usePublishedAudio();
   const user = useOffline(settings.age);
-  const visible = tracks.filter(track => track.lang === t.locale && trackBelongsToDoor(track, settings.door));
+  const visible = listenTracks().filter(track => track.lang === t.locale && trackBelongsToDoor(track, settings.door));
   const psalms = visible.filter(track => shelfOf(track) === 'psalms').sort(byChapter);
   const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), t.locale);
   const stories = visible.filter(track => shelfOf(track) === (t.locale === 'es' ? 'miRefugio' : 'hushHarbor'));
   const imagination = visible.filter(track => shelfOf(track) === 'imagination');
 
   function row(track: Track) {
-    const playable = published?.get(track.file) === track.sha256 || downloadAvailable(track, user);
+    const playable = isPreviewSample(track) || published?.get(track.file) === track.sha256 || downloadAvailable(track, user);
     const open = playable ? () => router.push({ pathname: '/listen/[track]', params: { track: track.sha256 } }) : undefined;
     return (
       <Card key={track.file} onPress={open}>

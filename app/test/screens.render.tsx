@@ -22,12 +22,15 @@ console.error = (...args: unknown[]) => { if (!String(args[0]).includes('react-t
 let saved: string | null = null;
 let readFails = false;
 let chatRecord: string | null = null;
+let nightsRecord: string | null = null;
 const fakePurchaseCalls: string[] = [];
 let listeners = new Set<(info: ReturnType<typeof customerInfo>) => void>();
 const customerInfo = (paid: boolean) => ({
   entitlements: { active: paid ? { paid: { isActive: true } } : {} },
 });
 let storePaid = false;
+// Holds the store's first answer back, like RevenueCat on a slow cold start (lane 5N).
+let customerInfoWait: Promise<void> | undefined;
 let storeUser = '$RCAnonymousID:test';
 let purchaseError: string | undefined;
 let restorePaid = false;
@@ -54,7 +57,7 @@ const packageFor = (plan: 'yearly' | 'monthly') => ({
   getOfferings: async () => ({
     current: { identifier: products.offering, availablePackages: [packageFor('monthly'), packageFor('yearly')] },
   }),
-  getCustomerInfo: async () => customerInfo(storePaid),
+  getCustomerInfo: async () => { await customerInfoWait; return customerInfo(storePaid); },
   addCustomerInfoUpdateListener: (fn: (info: ReturnType<typeof customerInfo>) => void) => listeners.add(fn),
   removeCustomerInfoUpdateListener: (fn: (info: ReturnType<typeof customerInfo>) => void) => listeners.delete(fn),
   purchasePackage: async (pkg: ReturnType<typeof packageFor>) => {
@@ -73,10 +76,12 @@ const local = new Map<string, string>();
   getItem: async (key: string) => {
     if (readFails) throw new Error('unavailable');
     if (key === 'peace-be-still-chat-token') return chatRecord;
+    if (key === NIGHTS_KEY) return nightsRecord;
     return key === 'peace-be-still-settings' ? saved : local.get(key) ?? null;
   },
   setItem: async (key: string, value: string) => {
     if (key === 'peace-be-still-chat-token') chatRecord = value;
+    else if (key === NIGHTS_KEY) nightsRecord = value;
     else if (key === 'peace-be-still-settings') saved = value;
     else local.set(key, value);
   },
@@ -97,6 +102,7 @@ let history = false;
 
 // Loaded after the globals above exist.
 const { NowPlaying } = require('../src/screens/listen/NowPlaying');
+const { NIGHTS_KEY, nightOf } = require('../src/screens/listen/nights') as typeof import('../src/screens/listen/nights');
 const { tracks: audioTracks } = require('../src/player/usePlayer') as { tracks: Track[] };
 const { Daily } = require('../src/screens/daily/Daily');
 const { SettingsProvider, useSettings } = require('../src/settings');
@@ -143,6 +149,7 @@ const audioBase = 'https://pbs-audio.professionalresourcelibrary.com/';
 let publishedTracks: Track[];
 beforeEach(() => {
   Object.assign(globalThis, { __pbsPlatform: 'web', __pbsAudioStop: null, __pbsExpoConfig: undefined });
+  nightsRecord = null;
   storePaid = false;
   publishedTracks = audioTracks;
 });
@@ -553,14 +560,14 @@ test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does
 });
 
 function testPlayer(track: Track, baseUrl: string | null = audioBase, position = 0,
-  fetchHash: () => Promise<string> = async () => track.sha256) {
+  fetchHash: () => Promise<string> = async () => track.sha256, offline = false) {
   let at = 0;
   let source: string | undefined;
   let playing = false;
   let listener: ((status: { playing: boolean; isLoaded: boolean; didJustFinish: boolean }) => void) | undefined;
   const audio = {
     load: (uri: string) => { source = uri; at = 0; },
-    play() { playing = true; },
+    play() { if (offline) throw new Error('network'); playing = true; },
     pause() { playing = false; },
     isLoaded: true,
     get currentTime() { return at; },
@@ -754,7 +761,9 @@ test('Now Playing restores a saved position and renders pause, continue and the 
     assert.equal(player.position(), 12);
     assert.ok(texts(tree).includes(storedVerse('PSA', 23, 2)));
     assert.ok(strings(tree).includes('Psalm 23:2 · KJV'));
-    assert.ok(texts(tree).includes(en['listen.psalmAllowance']));
+    // A KJV Psalm chapter is free Bible audio (COMMON.md free lane): no night allowance, nothing counted.
+    assert.ok(!texts(tree).includes(en['listen.psalmAllowance']));
+    assert.equal(nightsRecord, null);
     assert.ok(texts(tree).includes('0:12'));
     assert.ok(texts(tree).includes(`${Math.floor(track.seconds / 60)}:${String(Math.floor(track.seconds % 60)).padStart(2, '0')}`));
     assert.ok(texts(tree).includes(i18n.t('listen.timerSummary', { locale: 'en', setting: en['listen.timerOff'] })));
@@ -1084,6 +1093,171 @@ test('the web preview shows configured prices and renewal terms without opening 
     else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
   }
 });
+
+// Lane 5N: the free lane's sleep nights. A whispered Psalm Night / Imagination Night is free the first night, then
+// one a week; paid plays every night. Bible chapters stay free whatever the count.
+const sleepTrack = (kind: 'psalm-night' | 'imagination-night', lang: 'en' | 'es'): Track => ({
+  file: `${lang}/${kind}/render-${kind}.m4a`, kind, lang, seconds: 900, voice: 'kokoro:af_nicole',
+  titles: { [lang]: kind === 'psalm-night' ? (lang === 'es' ? 'Salmo 23' : 'Psalm 23') : 'Living in the end' },
+  sha256: (kind === 'psalm-night' ? 'a' : 'b').repeat(63) + (lang === 'en' ? '1' : '2'),
+  ref: `content/${kind === 'psalm-night' ? 'psalm-nights' : 'imagination-nights'}/${lang}/render.json#render`,
+} as Track);
+
+async function nightPlayer(track: Track, value: Settings, baseUrl: string | null = audioBase, offline = false) {
+  publishedTracks = [...audioTracks, track];
+  const player = testPlayer(track, baseUrl, 0, undefined, offline);
+  saved = JSON.stringify(value);
+  const Ready = () => useSettings().ready ? <PurchasesProvider><NowPlaying track={track} close={() => undefined} /></PurchasesProvider> : null;
+  let tree!: ReactTestRenderer;
+  await act(async () => { tree = create(<SettingsProvider><Ready /></SettingsProvider>); });
+  await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+  return { tree, player, async close() { await act(async () => tree.unmount()); await player.dispose(); } };
+}
+const daysAgo = (n: number) => nightOf(new Date(Date.now() - n * 86_400_000));
+
+test('a free listener gets the first night, then one a week, and a used week shows the next free night and the paid lane', async () => {
+  const track = sleepTrack('psalm-night', 'en');
+  const person: Settings = { ...base, journey: 'psalm-nights' };
+  // First night ever: plays, and is counted once even when started again the same night.
+  let s = await nightPlayer(track, person);
+  try {
+    await press(s.tree, en['listen.play']);
+    assert.ok(button(s.tree, en['listen.pause']));
+    assert.deepEqual(JSON.parse(nightsRecord!), [nightOf(new Date())]);
+  } finally { await s.close(); }
+  // The weekly night after the first: still free.
+  nightsRecord = JSON.stringify([daysAgo(1)]);
+  s = await nightPlayer(track, person);
+  try {
+    await press(s.tree, en['listen.play']);
+    assert.deepEqual(JSON.parse(nightsRecord!), [daysAgo(1), nightOf(new Date())]);
+  } finally { await s.close(); }
+  // This week's night is used (3 nights ago): no play button, the date of the next free night, and the price screen.
+  nightsRecord = JSON.stringify([daysAgo(10), daysAgo(3)]);
+  s = await nightPlayer(track, person);
+  try {
+    assert.equal(button(s.tree, en['listen.play']), undefined);
+    const next = new Date(); next.setDate(next.getDate() + 4);
+    const day = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date(next.getFullYear(), next.getMonth(), next.getDate()));
+    assert.ok(texts(s.tree).includes(i18n.t('listen.nextFreeNight', { locale: 'en', day })), strings(s.tree));
+    assert.ok(!texts(s.tree).includes(en['listen.psalmAllowance']));
+    await press(s.tree, en['listen.seePlans']);
+    assert.deepEqual(calls.at(-1), ['push', '/paid']);
+    assert.deepEqual(faithContentIssues(strings(s.tree)), []);
+  } finally { await s.close(); }
+  // Seven nights on, the week is free again.
+  nightsRecord = JSON.stringify([daysAgo(10), daysAgo(7)]);
+  s = await nightPlayer(track, person);
+  try { assert.ok(button(s.tree, en['listen.play'])); } finally { await s.close(); }
+});
+
+test('a subscriber plays every night without spending free nights; after the plan ends tonight is still free; Bible chapters never count', async () => {
+  nightsRecord = JSON.stringify([daysAgo(10), daysAgo(1)]);
+  asSubscriber();
+  for (let night = 0; night < 5; night++) {
+    const s = await nightPlayer(sleepTrack('psalm-night', 'en'), { ...base, journey: 'psalm-nights' });
+    try {
+      await press(s.tree, en['listen.play']);
+      assert.ok(!texts(s.tree).includes(en['listen.psalmWeekly']));
+    } finally { await s.close(); }
+  }
+  assert.deepEqual(JSON.parse(nightsRecord!), [daysAgo(10), daysAgo(1)], 'paid nights are not taken from the free week');
+  // The plan lapses: the free week is exactly as it was, so the next free night is still hers.
+  nightsRecord = JSON.stringify([daysAgo(10), daysAgo(8)]);
+  storePaid = false;
+  let s = await nightPlayer(sleepTrack('psalm-night', 'en'), { ...base, journey: 'psalm-nights' });
+  try { assert.ok(button(s.tree, en['listen.play'])); } finally { await s.close(); (globalThis as any).__pbsPlatform = 'web'; }
+  nightsRecord = JSON.stringify([daysAgo(10), daysAgo(1)]);
+  const chapter = audioTracks.find(track => track.kind === 'bible' && track.lang === 'en')!;
+  s = await nightPlayer(chapter, { ...base, journey: 'psalm-nights' });
+  try {
+    await press(s.tree, en['listen.play']);
+    assert.deepEqual(JSON.parse(nightsRecord!), [daysAgo(10), daysAgo(1)], 'a Bible chapter is not a sleep night');
+    assert.ok(!strings(s.tree).includes(en['listen.seePlans']));
+  } finally { await s.close(); }
+});
+
+test('a subscriber never sees the free lane lock while the store is still answering', async () => {
+  nightsRecord = JSON.stringify([daysAgo(10), daysAgo(2)]);
+  asSubscriber();
+  let answer!: () => void;
+  customerInfoWait = new Promise(resolve => { answer = resolve; });
+  const s = await nightPlayer(sleepTrack('psalm-night', 'en'), { ...base, journey: 'psalm-nights' });
+  try {
+    assert.ok(!strings(s.tree).includes(en['listen.seePlans']), 'no lock before the store answers');
+    assert.ok(!texts(s.tree).some(text => text.startsWith('Your next free night')));
+    assert.equal(button(s.tree, en['listen.play'])?.props.disabled, true, 'play waits for the answer');
+    await act(async () => { answer(); await new Promise(resolve => setTimeout(resolve, 0)); });
+    assert.ok(!strings(s.tree).includes(en['listen.seePlans']));
+    await press(s.tree, en['listen.play']);
+  } finally { customerInfoWait = undefined; await s.close(); (globalThis as any).__pbsPlatform = 'web'; }
+});
+
+test('a session that fails to start does not spend the night', async () => {
+  nightsRecord = JSON.stringify([daysAgo(10)]);
+  const s = await nightPlayer(sleepTrack('psalm-night', 'en'), { ...base, journey: 'psalm-nights' }, null);
+  try {
+    await press(s.tree, en['listen.play']);
+    assert.deepEqual(JSON.parse(nightsRecord!), [daysAgo(10)]);
+    assert.ok(texts(s.tree).includes(en['listen.psalmWeekly']), 'after the first night the line says one a week');
+  } finally { await s.close(); }
+});
+
+test('the used-night screen speaks Spanish in Mi Refugio and keeps the Mindset door free of faith words; under 13 sees no pitch and no price link', async () => {
+  const used = () => { nightsRecord = JSON.stringify([daysAgo(20), daysAgo(2)]); };
+  used();
+  let s = await nightPlayer(sleepTrack('psalm-night', 'es'), { ...base, language: 'es', voice: 'spanish', journey: 'mi-refugio' });
+  try {
+    assert.ok(strings(s.tree).includes(es['listen.everyNight']));
+    assert.ok(texts(s.tree).some(text => /^Tu próxima noche gratis es el [a-záéíóú]+ \d{1,2} de [a-z]+\.$/.test(text)), strings(s.tree));
+    await press(s.tree, es['listen.seePlans']);
+  } finally { await s.close(); }
+  used();
+  s = await nightPlayer(sleepTrack('imagination-night', 'en'), { ...base, door: 'mindset', journey: 'imagination-nights' });
+  try {
+    assert.ok(strings(s.tree).includes(en['listen.everyNight']));
+    assert.doesNotMatch(strings(s.tree), /\b(bible|scripture|god|psalm|kjv|prayer|church|jesus|verse)\b/i);
+  } finally { await s.close(); }
+  used();
+  s = await nightPlayer(sleepTrack('psalm-night', 'en'), { ...base, age: 'child', journey: 'psalm-nights' });
+  try {
+    assert.ok(texts(s.tree).some(text => text.startsWith('Your next free night')));
+    assert.ok(!strings(s.tree).includes(en['listen.everyNight']), 'no subscription pitch to a child');
+    assert.ok(!strings(s.tree).includes(en['listen.paidDownload']), 'no download pitch to a child either');
+    assert.ok(!strings(s.tree).includes(en['listen.seePlans']));
+  } finally { await s.close(); }
+});
+
+test('a first launch offline: the store never answers, the free night still works, and a failed start says it needs a connection', async () => {
+  asSubscriber(false);
+  const failing = (globalThis as any).__pbsPurchases.getCustomerInfo;
+  (globalThis as any).__pbsPurchases.getCustomerInfo = async () => { throw new Error('offline'); };
+  try {
+    for (const [locale, value, track] of [
+      ['en', { ...base, journey: 'psalm-nights' }, sleepTrack('psalm-night', 'en')],
+      ['es', { ...base, language: 'es', voice: 'spanish', journey: 'mi-refugio' }, sleepTrack('psalm-night', 'es')],
+    ] as const) {
+      nightsRecord = null;
+      const strings_ = locale === 'es' ? es : en;
+      const s = await nightPlayer(track, value as Settings, audioBase, true);
+      try {
+        await press(s.tree, strings_['listen.play']);
+        assert.ok(texts(s.tree).includes(strings_['listen.playFailedNetwork']), strings(s.tree));
+        assert.equal(nightsRecord, null, 'a start that failed costs no night');
+      } finally { await s.close(); }
+    }
+  } finally { (globalThis as any).__pbsPurchases.getCustomerInfo = failing; (globalThis as any).__pbsPlatform = 'web'; }
+});
+
+test('the used-week screen has one subscription line and one button', async () => {
+  nightsRecord = JSON.stringify([daysAgo(10), daysAgo(2)]);
+  const s = await nightPlayer(sleepTrack('psalm-night', 'en'), { ...base, journey: 'psalm-nights' });
+  try {
+    assert.ok(strings(s.tree).includes(en['listen.everyNight']));
+    assert.ok(!strings(s.tree).includes(en['listen.paidDownload']));
+  } finally { await s.close(); }
+});
+
 
 
 test('a Bible verse link scrolls the expanded verse into view once its row is laid out', async () => {
