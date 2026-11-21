@@ -6,7 +6,7 @@ Vigente desde: 20 de noviembre de 2026
 
 Esta política cubre la app Peace Be Still y el sitio web peacebestillapp.com. Peace Be Still es una app de Spry Labs, el nombre comercial de Redwood Reserve Holdings LLC, una compañía de responsabilidad limitada de Wyoming. Escriba a info@peacebestillapp.com con cualquier pregunta o solicitud sobre privacidad.
 
-En pocas palabras: no hay cuenta, nunca le pedimos su nombre, no hay anuncios y no vendemos ni compartimos información personal. Lo que usted escribe en el chat va a proveedores gratuitos de IA, que pueden guardarlo y aprender de ello.
+En pocas palabras: no hay cuenta, nunca le pedimos su nombre, no hay anuncios y no vendemos ni compartimos información personal. El chat gratis va a proveedores gratuitos de IA, que pueden guardar lo que usted escribe y aprender de ello. El chat de pago es privado: va a un servicio de IA de pago que no lo usa para mejorar su IA.
 
 ## Lo que se queda en su teléfono
 
@@ -14,13 +14,15 @@ Su año de nacimiento, la puerta que eligió, su configuración, los versículos
 
 ## El chat
 
-El chat es opcional. Antes de su primer chat, la app le pide permiso y le dice adónde van sus palabras.
+El chat es opcional y tiene dos partes. Antes de su primer chat gratis, la app le pide permiso con palabras sencillas y le dice adónde van sus palabras; sin ese sí no hay chat gratis, y la app lo recuerda en su teléfono. También puede elegir hacer privado el chat.
 
-Cada mensaje del chat pasa por nuestro servicio hasta un proveedor de IA, que escribe la respuesta. Los proveedores, en el orden en que se prueban, son Cloudflare Workers AI, Google Gemini (en su nivel gratuito) y modelos gratuitos a los que se llega por medio de OpenRouter. Estos proveedores pueden guardar y usar lo que usted escribe para mejorar sus servicios, y personas de esas empresas pueden leerlo. Por favor, no incluya nombres ni nada que lo identifique a usted o a otra persona.
+Chat gratis: cada mensaje pasa por nuestro servicio hasta un proveedor de IA, que escribe la respuesta. Los proveedores, en el orden en que se prueban, son Cloudflare Workers AI, Google Gemini (en su nivel gratuito) y modelos gratuitos a los que se llega por medio de OpenRouter. Estos proveedores pueden guardar y usar lo que usted escribe para mejorar sus servicios, y personas de esas empresas pueden leerlo. Por favor, no incluya nombres ni nada que lo identifique a usted o a otra persona.
+
+Chat de pago: cada mensaje pasa por nuestro servicio hasta un servicio de IA de pago, con condiciones que no le permiten usar lo que usted escribe para entrenar o mejorar su IA (hoy, Google Gemini en un plan de pago; si lo cambiamos, será otro servicio de pago con la misma promesa, nombrado aquí). El chat de pago nunca pasa a un proveedor gratuito: si el servicio de pago no funciona, la app lo dice.
 
 Cada mensaje del chat se envía con su grupo de edad (adolescente o adulto), la puerta que eligió, la voz del chat y el idioma, para que la respuesta sea la adecuada; nada de esto está ligado a su nombre, porque la app nunca se lo pide. Su año de nacimiento nunca sale de su teléfono.
 
-Cada mensaje pasa primero por un control de seguridad basado en palabras, dentro de nuestro propio código. Cuando ese control reconoce que un mensaje trata de autolesiones o abuso, nuestro código responde con líneas de ayuda para crisis y el mensaje no se envía a ningún modelo de IA. Todos los demás mensajes los lee primero un modelo de seguridad en Cloudflare Workers AI, antes de que se escriba una respuesta.
+Cada mensaje pasa primero por un control de seguridad dentro de nuestro propio código. Cuando ese control reconoce que alguien dice que quiere hacerse daño, o que alguien le está haciendo daño, nuestro código responde con líneas de ayuda para crisis de la región configurada en su teléfono, y el mensaje no se envía a ningún modelo de IA. Un mensaje con señales menos claras de angustia nunca se envía a un proveedor gratuito: lo lee un modelo de seguridad en Cloudflare Workers AI, y se responde en la parte privada. La IA que escribe una respuesta también indica si un mensaje parece de riesgo, y entonces el mismo modelo de seguridad lo revisa antes de mostrar nada. Desde ese momento, esa conversación se responde en la parte privada hasta que lleve un rato en calma (24 horas como máximo), tanto en el chat gratis como en el de pago.
 
 No guardamos el texto del chat. Pasa por nuestro servicio hasta el proveedor y desaparece de nuestro servicio en cuanto llega la respuesta.
 
@@ -31,6 +33,10 @@ Si usted está en la parte de pago, el chat puede recordar lo que le pesa. Esa m
 ## Sesiones hechas para usted
 
 Si usted está en la parte de pago y pide una sesión hecha para usted, la escena o la preocupación que escriba se envía a nuestro servicio. Proveedores gratuitos de IA escriben el guion de la sesión a partir de sus palabras, y pueden guardar lo que usted escribe y aprender de ello, igual que en el chat (el formulario se lo dice antes de enviar). Hacemos el audio en nuestra propia computadora con un motor de voz de código abierto. Sus palabras escritas se borran en cuanto se hace el audio, y a más tardar 7 días después de que las envíe. El audio terminado se guarda para que usted lo escuche hasta que lo borre, o hasta 30 días después de que termine su plan de pago.
+
+## Uso justo y registros de seguridad
+
+Para que el chat sea seguro y sostenible, nuestro servicio guarda unos pocos registros sin ninguna palabra, bajo el identificador de instalación anónimo: si el chat está en pausa en una instalación (por decisión nuestra, o por 24 horas después de una avalancha de mensajes, mensajes repetidos o intentos de romper las reglas de la app, con el motivo como un código corto), que se borra cuando termina la pausa; el costo de IA del chat de una instalación de pago en el mes, que se borra 30 días después de que termine el plan de pago; y, para una conversación en la que el control de seguridad vio señales de peligro, cuándo pasó y cuántos mensajes en calma siguieron, que se borra a los dos días. Su permiso para el chat gratis se guarda en su teléfono.
 
 ## Reportar una respuesta
 

@@ -26,11 +26,11 @@ Apple shows the price and renewal terms before you buy and charges your Apple ac
 
 ## Chat and AI
 
-Chat answers are written by AI and marked AI. They can be wrong, incomplete or unhelpful. Scripture in an answer is inserted from the stored King James Version or Reina-Valera 1909; the rest of the answer is AI text, not the words of a pastor, counselor or any person. What you type goes to free AI providers, as the privacy policy explains, so leave out names and private details. Do not rely on the app for emergencies, medical, legal or financial decisions; see the disclaimer.
+Chat answers are written by AI and marked AI. They can be wrong, incomplete or unhelpful. Scripture in an answer is inserted from the stored King James Version or Reina-Valera 1909; the rest of the answer is AI text, not the words of a pastor, counselor or any person. In free chat, what you type goes to free AI providers that may keep it, as the privacy policy explains, so leave out names and private details. Paid chat goes to a paid AI service that does not use it to train its AI. A message that seems unsafe is answered with crisis lines and on the private lane, in either lane. Do not rely on the app for emergencies, medical, legal or financial decisions; see the disclaimer.
 
 ## Using the app well
 
-Use the app lawfully. Do not try to get around the daily limits, overload or attack our service, copy the app's stories, audio or sessions to offer them elsewhere, or use chat to harm anyone. We may limit or end access for anyone who does.
+Use the app lawfully. Do not try to get around the daily limits, overload or attack our service, copy the app's stories, audio or sessions to offer them elsewhere, or use chat to harm anyone. We may limit or end access for anyone who does, and chat pauses itself for 24 hours after a flood of messages, repeated messages or attempts to break its rules. Fair use in the paid lane also has a monthly limit on AI use per account; past it, chat pauses until the 1st of the next month and never switches you to a free provider.
 
 The King James Version and the Reina-Valera 1909 are in the public domain. The stories, audio, sessions, design and software are ours and are licensed to you for personal, non-commercial use in the app.
 

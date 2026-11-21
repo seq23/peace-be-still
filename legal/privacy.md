@@ -4,7 +4,7 @@ Effective: November 20, 2026
 
 This policy covers the Peace Be Still app and the website peacebestillapp.com. Peace Be Still is made by Spry Labs, the trade name of Redwood Reserve Holdings LLC, a Wyoming limited liability company. Write to info@peacebestillapp.com with any privacy question or request.
 
-The short version: there is no account, we never ask for your name, there are no ads, and we do not sell or share personal information. What you type into chat goes to free AI providers, which may keep it and learn from it.
+The short version: there is no account, we never ask for your name, there are no ads, and we do not sell or share personal information. Free chat goes to free AI providers, which may keep what you type and learn from it. Paid chat is private: it goes to a paid AI service that does not use it to improve its AI.
 
 ## What stays on your phone
 
@@ -12,13 +12,15 @@ Your birth year, the door you chose, your settings, saved verses, highlights, jo
 
 ## Chat
 
-Chat is optional. Before your first chat, the app asks for your permission and tells you where your words go.
+Chat is optional, and it has two lanes. Before your first free chat, the app asks for your permission in plain words and tells you where your words go; there is no free chat without that yes, and the app remembers it on your phone. You can choose to make chat private instead.
 
-Each chat message travels through our service to an AI provider, which writes the answer. The providers, tried in this order, are Cloudflare Workers AI, Google Gemini (free tier) and free models reached through OpenRouter. These providers may retain and use what you type to improve their services, and people at those companies may read it. Please leave out names and anything that identifies you or someone else.
+Free chat: each message travels through our service to an AI provider, which writes the answer. The providers, tried in this order, are Cloudflare Workers AI, Google Gemini (free tier) and free models reached through OpenRouter. These providers may retain and use what you type to improve their services, and people at those companies may read it. Please leave out names and anything that identifies you or someone else.
+
+Paid chat: each message goes through our service to a paid AI service under terms that do not let it use what you type to train or improve its AI (today Google Gemini on a paid plan; if we change it, it will be another paid service with the same promise, named here). Paid chat never falls back to a free provider: if the paid service is down, the app says so.
 
 Each chat message is sent with your age group (teen or adult), the door you chose, the chat voice and the language, so the answer fits; none of these is linked to your name, because the app never asks for it. Your birth year itself never leaves your phone.
 
-Every message first goes through a word-based safety check in our own code. When that check recognizes a message as being about self-harm or abuse, our code answers with crisis lines and the message is not sent to any AI model. Every other message is first read by a safety model on Cloudflare Workers AI before an answer is written.
+Every message first goes through a safety check in our own code. When that check recognizes a message as someone saying they mean to hurt themselves, or that someone is hurting them, our code answers with crisis lines for the region your phone is set to, and the message is not sent to any AI model. A message with less clear signs of distress is never sent to a free provider: a safety model on Cloudflare Workers AI reads it, and it is answered on the private lane. The AI that writes an answer also says whether a message seems unsafe, and then the same safety model checks it before anything is shown. From then on, that conversation is answered on the private lane until it has been calm for a while (at most 24 hours), for free and paid chat alike.
 
 We do not store chat text. It passes through our service to the provider and is gone from our service once the answer is returned.
 
@@ -29,6 +31,10 @@ If you are in the paid lane, chat can remember what you are carrying. That memor
 ## Sessions made for you
 
 If you are in the paid lane and ask for a session made for you, the scene or worry you write is sent to our service. Free AI providers write the session script from your words, and they may keep what you write and learn from it, as with chat (the request form says so before you send). We make the audio on our own computer with an open-source voice engine. Your written words are deleted once the audio is made, and at most 7 days after you send them. The finished audio is kept for you to play until you delete it, or until 30 days after your paid plan ends.
+
+## Fair use and safety records
+
+To keep chat safe and affordable, our service keeps a few records with no words in them, under the anonymous install id: whether chat is paused on an install (by us, or for 24 hours after a flood of messages, repeated messages or attempts to break the app's rules, with the reason as a short code), deleted when the pause ends; the AI cost of a paid install's chat this month, deleted 30 days after the paid plan ends; and, for a conversation where the safety check saw signs of danger, when that happened and how many calm messages followed, deleted after two days. Your consent to free chat is kept on your phone.
 
 ## Reporting an answer
 

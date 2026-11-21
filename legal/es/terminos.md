@@ -28,11 +28,11 @@ Apple le muestra el precio y las condiciones de renovación antes de que compre,
 
 ## El chat y la IA
 
-Las respuestas del chat las escribe una IA y van marcadas como IA. Pueden estar equivocadas, incompletas o no servir de ayuda. Las Escrituras que aparecen en una respuesta se insertan de la King James Version o de la Reina-Valera 1909 guardadas en la app; el resto de la respuesta es texto de IA, no las palabras de un pastor, de un consejero ni de ninguna persona. Lo que usted escribe va a proveedores gratuitos de IA, como explica la política de privacidad, así que no incluya nombres ni datos privados. No dependa de la app para emergencias ni para decisiones médicas, legales o financieras; vea el aviso importante.
+Las respuestas del chat las escribe una IA y van marcadas como IA. Pueden estar equivocadas, incompletas o no servir de ayuda. Las Escrituras que aparecen en una respuesta se insertan de la King James Version o de la Reina-Valera 1909 guardadas en la app; el resto de la respuesta es texto de IA, no las palabras de un pastor, de un consejero ni de ninguna persona. En el chat gratis, lo que usted escribe va a proveedores gratuitos de IA que pueden guardarlo, como explica la política de privacidad, así que no incluya nombres ni datos privados. El chat de pago va a un servicio de IA de pago que no lo usa para entrenar su IA. Un mensaje que parece de riesgo se responde con líneas de ayuda para crisis y en la parte privada, en cualquiera de las dos partes. No dependa de la app para emergencias ni para decisiones médicas, legales o financieras; vea el aviso importante.
 
 ## Cómo usar bien la app
 
-Use la app de forma legal. No intente saltarse los límites diarios, sobrecargar o atacar nuestro servicio, copiar las historias, el audio o las sesiones de la app para ofrecerlos en otro lugar, ni usar el chat para hacerle daño a nadie. Podemos limitar o terminar el acceso de quien lo haga.
+Use la app de forma legal. No intente saltarse los límites diarios, sobrecargar o atacar nuestro servicio, copiar las historias, el audio o las sesiones de la app para ofrecerlos en otro lugar, ni usar el chat para hacerle daño a nadie. Podemos limitar o terminar el acceso de quien lo haga, y el chat se pausa solo por 24 horas después de una avalancha de mensajes, mensajes repetidos o intentos de romper sus reglas. El uso justo en la parte de pago también tiene un límite mensual de uso de IA por cuenta; al pasarlo, el chat se pausa hasta el día 1 del mes siguiente y nunca lo pasa a un proveedor gratuito.
 
 La King James Version y la Reina-Valera 1909 son de dominio público. Las historias, el audio, las sesiones, el diseño y el software son nuestros, y le damos una licencia para usarlos de forma personal y no comercial dentro de la app.
 
