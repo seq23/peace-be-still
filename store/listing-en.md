@@ -2,8 +2,8 @@
 
 Name: Peace Be Still
 Subtitle: Whispered sleep & daily words
-Keywords: bible,black,women,stories,kids,psalms,asmr,kjv,declarations,teen,chat,prayer,manifest,assumption
-Unassigned keywords: bible,chat,prayer
+Keywords: bible,black,women,stories,kids,psalms,asmr,kjv,declarations,teen,chat,prayer,assumption,grief,verses
+Unassigned keywords: bible,chat,prayer,grief,verses
 Promotional text: A great calm, every night. Whispered sessions to fall asleep to, a word for the morning, and a free lane that stays free. No trial. No ads, ever.
 Category: Reference (primary), Health & Fitness (secondary)
 Age rating: 13+ (questionnaire answers in store/privacy-label.md)
