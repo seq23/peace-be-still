@@ -15,8 +15,8 @@ to check which tracks from the bundled catalog it can stream.
 
 Where (her ruling 20 Nov 2026): her SECOND Cloudflare account. Its free 10 GB is shared by every bucket
 on it (this library, the private made-for-you bucket, anything else), so the cap is read for the WHOLE
-account from Cloudflare's own R2 storage analytics (account_bytes(); token PBS_CF2_ANALYTICS_TOKEN,
-Account Analytics: Read). The account's stored bytes plus this batch must stay under PBS_R2_FREE_CAP_GB
+account from Cloudflare's own R2 storage analytics (account_bytes(); token CF2_WORKERS_AI_TOKEN, the
+second account's token that also reads its analytics). The account's stored bytes plus this batch must stay under PBS_R2_FREE_CAP_GB
 (default 9.5 of the free 10 GB), else NAMED STOP R2_FREE_STORAGE (nothing past the cap is uploaded). An
 unreadable total is NAMED STOP R2_USAGE_UNREAD: nothing is uploaded on a guess. Class A operations: a run
 costs about one listing plus one PUT per new file, far under the free 1,000,000 a month.
@@ -137,9 +137,9 @@ R2_USAGE_QUERY = """query ($account: String!, $since: Time!) { viewer { accounts
 def account_bytes(post=None, now: dt.datetime | None = None) -> float:
     """Every bucket's stored bytes on the second account (its latest storage sample per bucket), from
     Cloudflare's GraphQL analytics. Unreadable -> NAMED STOP R2_USAGE_UNREAD before anything is uploaded."""
-    token, account = os.environ.get("PBS_CF2_ANALYTICS_TOKEN"), os.environ.get("CF2_ACCOUNT_ID")
+    token, account = os.environ.get("CF2_WORKERS_AI_TOKEN"), os.environ.get("CF2_ACCOUNT_ID")
     if not token or not account:
-        raise NamedStop("R2_USAGE_UNREAD", "PBS_CF2_ANALYTICS_TOKEN (Account Analytics: Read on the second account) "
+        raise NamedStop("R2_USAGE_UNREAD", "CF2_WORKERS_AI_TOKEN with CF2_ACCOUNT_ID (the second account) "
                         "is not set, so the account's whole R2 storage cannot be counted. Nothing was uploaded.")
     since = ((now or dt.datetime.now(dt.timezone.utc)) - dt.timedelta(days=2)).strftime("%Y-%m-%dT%H:%M:%SZ")
     body = json.dumps({"query": R2_USAGE_QUERY, "variables": {"account": account, "since": since}}).encode()

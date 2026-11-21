@@ -21,6 +21,7 @@ class MadeForYouTest(unittest.TestCase):
             "path": f"made-for-you/{job_id}/{job_id}.m4a",
             "reflection": "A quiet room.\nThe rain at the window.",
             "verses": ["Stored text " + str(i) for i in range(6)] if kind == "psalm" else [],
+            **({"psalm": 23} if kind == "psalm" else {}),
         }
 
     def test_translation_and_verse_sequence_survive_the_fixed_template(self):
@@ -32,6 +33,16 @@ class MadeForYouTest(unittest.TestCase):
                 self.assertEqual(item["verses"][-7:-1], job["verses"])
                 self.assertGreaterEqual(item["gap"], 1.5)
                 self.assertIn("The rain at the window.", fill.script_of(item))
+        # Each comfort psalm is named and read whole; a count that does not match its psalm is refused.
+        for chapter, (count, en, es) in sessions.PSALMS.items():
+            for lang, name in (("en", en), ("es", es)):
+                job = {**self.job(lang), "psalm": chapter, "verses": [f"Verse {i}" for i in range(count)]}
+                item = sessions.session_item(job)
+                self.assertEqual(item["verses"][-count - 2], sessions.TEMPLATE[lang, "psalm"][1].format(name=name))
+                self.assertEqual(item["verses"][-count - 1:-1], job["verses"])
+        for wrong in ({"psalm": 4}, {"psalm": 150}, {"psalm": None}):
+            with self.assertRaises(ValueError):
+                sessions.session_item({**self.job(), **wrong})
         scene = self.job("es", "imagination")
         self.assertEqual(sessions.session_item(scene)["text"], "script")
         scene["verses"] = ["No verse goes here"]

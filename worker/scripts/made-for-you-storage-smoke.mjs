@@ -6,7 +6,7 @@
 // that must now say missing. Nothing else in the bucket is touched.
 //   node worker/scripts/made-for-you-storage-smoke.mjs
 // Env: CF2_ACCOUNT_ID, PBS_MFY_R2_ACCESS_KEY_ID, PBS_MFY_R2_SECRET_ACCESS_KEY, PBS_MFY_R2_BUCKET,
-// PBS_CF2_ANALYTICS_TOKEN; rclone and python3 on PATH.
+// CF2_WORKERS_AI_TOKEN (reads the account's R2 analytics); rclone and python3 on PATH.
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';

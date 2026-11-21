@@ -99,9 +99,9 @@ export default {
       checkProse: (draft, ctx) => checkAnswer(draft, { ...ctx, db: env.DB }),
       judgeShared: { schema: judgeSchema, verdict: judgeVerdict },
       banned,
-      psalm: async translation => {
-        const { results } = await env.DB.prepare("SELECT text FROM bible_verses WHERE translation = ? AND book = 'PSA' AND chapter = 23 ORDER BY verse")
-          .bind(translation).all<{ text: string }>();
+      psalm: async (translation, psalm) => {
+        const { results } = await env.DB.prepare("SELECT text FROM bible_verses WHERE translation = ? AND book = 'PSA' AND chapter = ? AND verse <= ? ORDER BY verse")
+          .bind(translation, psalm.chapter, psalm.verses).all<{ text: string }>();
         return results.map(row => row.text);
       },
       hasAudio: async key => !!await env.AUDIO.head(key),

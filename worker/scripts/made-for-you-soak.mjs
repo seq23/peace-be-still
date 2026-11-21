@@ -62,23 +62,33 @@ if (mode === 'summary') {
     hoursToLastMade: +hours.toFixed(2), sessionsPerHour: hours > 0 ? +(made.length / hours).toFixed(2) : null,
     // The promise: what this night proved it made by 08:00, less a 20% margin (the review's rule).
     sessionsPerNight: Math.floor(made.length * 0.8), calls, reasons, per,
+    // Chat wins, from the soak's own counters: what it booked in chat's calls:<rung> rows (each under half of
+    // chat's cap) and in its own mfy:<use>:<rung> rows, and how often a full share held a row (MFY_SHARE_USED).
+    booked: Object.fromEntries(sqlite.prepare("SELECT day || ' ' || metric AS k, n FROM chat_counts WHERE metric LIKE 'calls:%' ORDER BY k").all().map(r => [r.k, r.n])),
+    shareUsedHolds: events.filter(e => e.event === 'held' && e.code === 'MFY_SHARE_USED').length,
+    psalms: readdirSync(resolve(dir, 'jobs')).map(f => JSON.parse(readFileSync(resolve(dir, 'jobs', f), 'utf8'))).filter(j => j.psalm).map(j => `${j.lang} ${j.psalm}`),
   };
   writeFileSync(resolve(dir, 'summary.json'), JSON.stringify(summary, null, 1));
   for (const p of per) console.log(`${p.madeByPromise ? 'MADE' : 'NOT MADE'} ${p.lang} ${p.kind}${p.teen ? ' teen' : ''}: ${p.state}, ${p.failedTries} failed tries, held ${p.held.length}x, after ${p.madeAfterHours ?? '-'} h`);
-  console.log(`OUTPUT made-for-you-soak: ${made.length}/${rows.length} made by the promise (EN ${summary.en}, ES ${summary.es}), last at ${summary.hoursToLastMade} h, sessionsPerNight ${summary.sessionsPerNight}`);
+  console.log(`OUTPUT made-for-you-soak: ${made.length}/${rows.length} made by the promise (EN ${summary.en}, ES ${summary.es}), last at ${summary.hoursToLastMade} h, sessionsPerNight ${summary.sessionsPerNight}, share holds ${summary.shareUsedHolds}, psalms ${summary.psalms.join(', ') || '-'}`);
+  console.log(`booked ${JSON.stringify(summary.booked)}`);
   process.exit(made.length ? 0 : 1);
 }
 
-// Chat wins (PHASES.md, 21 Nov 2026): a soak never uses chat's keys (PBS_GEMINI_API_KEY, OPENROUTER_API_KEY or
-// the red team's PBS_RT_*): on 20-21 Nov the soak drained Gemini and 18 of 106 chat red-team items got "busy".
-// It runs only on keys of its own: a separate free Gemini project, a separate OpenRouter account, and a
-// Workers AI token on the second Cloudflare account that nothing else spends.
-const account = process.env.PBS_MFY_SOAK_CF_ACCOUNT_ID, token = process.env.PBS_MFY_SOAK_CF_TOKEN;
-const soakGemini = process.env.PBS_MFY_SOAK_GEMINI_API_KEY, soakOpenRouter = process.env.PBS_MFY_SOAK_OPENROUTER_API_KEY;
+// Keys (coordinator ruling, 21 Nov 2026, PHASES.md "CHAT WINS" amended): the red team's PBS_RT_* keys, never
+// production's PBS_GEMINI_API_KEY / OPENROUTER_API_KEY (the vault holds only those, so a local run cannot pick
+// them up by mistake). Every call is booked under half of chat's cap (madeForYouRungs) and stops at MFY_SHARE_USED;
+// the night soak starts only after the chat red team has finished (com.seq.pbs-mfy-soak-once).
+// SOAK_RUNGS (optional) keeps only rungs whose id starts with one of its comma-separated prefixes: a daytime check
+// runs on Workers AI and OpenRouter only, whose UTC days reset before the 18:10 CT red team, never on Gemini's.
+const account = process.env.PBS_RT_CF_ACCOUNT, token = process.env.PBS_RT_CF_TOKEN;
+const soakGemini = process.env.PBS_RT_GEMINI, soakOpenRouter = process.env.PBS_RT_OPENROUTER;
 if (['drain', 'judge-reviewed'].includes(mode) && (!account || !token || !soakGemini || !soakOpenRouter)) {
-  console.error('NAMED STOP MADE_FOR_YOU_SOAK_KEYS: PBS_MFY_SOAK_CF_ACCOUNT_ID, PBS_MFY_SOAK_CF_TOKEN, PBS_MFY_SOAK_GEMINI_API_KEY, PBS_MFY_SOAK_OPENROUTER_API_KEY (never chat\'s keys)');
+  console.error('NAMED STOP MADE_FOR_YOU_SOAK_KEYS: PBS_RT_CF_ACCOUNT, PBS_RT_CF_TOKEN, PBS_RT_GEMINI, PBS_RT_OPENROUTER (the red team\'s keys, never production\'s)');
   process.exit(3);
 }
+const allowed = (process.env.SOAK_RUNGS ?? '').split(',').map(x => x.trim()).filter(Boolean);
+const keep = rungs => allowed.length ? rungs.filter(r => allowed.some(prefix => r.id.startsWith(prefix))) : rungs;
 const { config: wrangler } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
 const bundle = await build({
   stdin: {
@@ -118,10 +128,14 @@ if (mode === 'seed') {
   const now = Date.now(), due = process.env.SOAK_DUE_HOURS ? now + Number(process.env.SOAK_DUE_HOURS) * 3_600_000 : m.nights(now).tonight.due;
   const add = sqlite.prepare(`INSERT INTO made_for_you (id, install_id, day, kind, lang, teen, created_at, due_at, state, note, paid_until)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'queued', ?, ?)`);
-  NOTES.forEach(([lang, kind, teen, note], i) =>
-    add.run(crypto.randomUUID(), crypto.randomUUID(), 'soak', kind, lang, teen, now + i, due, note, now + 30 * 86_400_000));
-  log({ event: 'seeded', notes: NOTES.length, due });
-  console.log(`OUTPUT made-for-you-soak: ${NOTES.length} notes queued, promised by ${new Date(due).toISOString()}`);
+  // One listener per language and kind, so her psalm nights turn through the comfort psalms (23, 4, 121).
+  // SOAK_NOTES (optional, e.g. "en-psalm") seeds only those notes.
+  const only = (process.env.SOAK_NOTES ?? '').split(',').filter(Boolean), installs = {};
+  NOTES.filter(([lang, kind]) => !only.length || only.includes(`${lang}-${kind}`)).forEach(([lang, kind, teen, note], i) =>
+    add.run(crypto.randomUUID(), installs[`${lang}-${kind}`] ??= crypto.randomUUID(), 'soak', kind, lang, teen, now + i, due, note, now + 30 * 86_400_000));
+  const seeded = sqlite.prepare('SELECT count(*) AS n FROM made_for_you').get().n;
+  log({ event: 'seeded', notes: seeded, due });
+  console.log(`OUTPUT made-for-you-soak: ${seeded} notes queued, promised by ${new Date(due).toISOString()}`);
   process.exit(0);
 }
 
@@ -142,17 +156,21 @@ if (mode === 'judge-reviewed') {
   // F6: the real free judge, on the made-for-you judge's own rungs, must flag both sessions the review transcribed.
   const reviewed = JSON.parse(readFileSync('worker/test/fixtures/reviewedSessions.json', 'utf8'));
   const env0 = { ...wrangler.vars, PBS_GEMINI_API_KEY: soakGemini, OPENROUTER_API_KEY: soakOpenRouter, AI, DB: db };
+  // The two sessions the round-5 review failed, and a made session the gate passed with two slips, one per copy.
+  const kjv23 = sqlite.prepare("SELECT text FROM bible_verses WHERE translation = 'KJV' AND book = 'PSA' AND chapter = 23 ORDER BY verse").all().map(r => r.text);
+  const cases = [['psalm', 'psalm'], ['imagination', 'imagination'], ['oddPalms', 'imagination'], ['oddMoments', 'imagination']];
   let flagged = 0;
-  for (const kind of ['psalm', 'imagination']) {
+  for (const [name, kind] of cases) {
     const reasons = [];
-    const ladder = (messages, schema, valid) => m.runLadder(db, m.madeForYouRungs(m.realDeps.rungs(env0, Date.now()), 'judge', m.chatShare(db)), messages, schema, 300, new Map(), valid);
-    const verdict = await m.madeForYouJudge(ladder, { schema: m.judgeSchema, verdict: m.judgeVerdict }, { kind, lang: 'en', teen: false, text: 'a long day' }, reviewed[kind], r => reasons.push(r));
+    const ladder = (messages, schema, valid) => m.runLadder(db, m.madeForYouRungs(keep(m.realDeps.rungs(env0, Date.now())), 'judge', m.chatShare(db)), messages, schema, 300, new Map(), valid);
+    const input = { kind, lang: 'en', teen: false, text: 'a long day', ...(kind === 'psalm' ? { verses: kjv23 } : {}) };
+    const verdict = await m.madeForYouJudge(ladder, { schema: m.judgeSchema, verdict: m.judgeVerdict }, input, reviewed[name], r => reasons.push(r));
     if (verdict === 'reject') flagged++;
-    print(`${verdict === 'reject' ? 'FLAGGED' : verdict.toUpperCase()} reviewed ${kind}: ${reasons.join(' ') || '-'}`);
-    log({ event: 'judge-reviewed', kind, verdict, reasons });
+    print(`${verdict === 'reject' ? 'FLAGGED' : verdict.toUpperCase()} ${name}: ${reasons.join(' ') || '-'}`);
+    log({ event: 'judge-reviewed', name, verdict, reasons });
   }
-  print(`OUTPUT made-for-you-judge-reviewed: ${flagged}/2 flagged by the real judge`);
-  process.exit(flagged === 2 ? 0 : 1);
+  print(`OUTPUT made-for-you-judge-reviewed: ${flagged}/${cases.length} flagged by the real judge`);
+  process.exit(flagged === cases.length ? 0 : 1);
 }
 const secret = 'soak-runner';
 const env = { ...wrangler.vars, PBS_GEMINI_API_KEY: soakGemini, OPENROUTER_API_KEY: soakOpenRouter,
@@ -161,7 +179,7 @@ let claiming = null;
 const deps = {
   ...m.realDeps,
   // Every provider call is recorded by rung and outcome (draft and judge told apart by their token room).
-  rungs: (e, now) => m.realDeps.rungs(e, now).map(rung => ({ ...rung, async call(messages, schema, maxTokens) {
+  rungs: (e, now) => keep(m.realDeps.rungs(e, now)).map(rung => ({ ...rung, async call(messages, schema, maxTokens) {
     const use = maxTokens > 1000 ? 'draft' : 'judge';
     try { const out = await rung.call(messages, schema, maxTokens); log({ event: 'call', id: claiming, use, rung: rung.id, outcome: 'ok' }); claiming && (calls[claiming] ??= []).push(`${use}:${rung.id}`); return out; }
     catch (error) { log({ event: 'call', id: claiming, use, rung: rung.id, outcome: String(error?.message ?? error).slice(0, 40) }); throw error; }

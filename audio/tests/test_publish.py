@@ -94,7 +94,7 @@ class FreeCap(unittest.TestCase):
         self.assertEqual(len(calls), 1, "under the cap the file goes up")
 
     def test_an_unreadable_account_total_uploads_nothing(self):
-        rc, calls = self.run_main(mock.patch.object(publish, "connect"), {"x.m4a": {"Size": 10}}, PBS_CF2_ANALYTICS_TOKEN="")
+        rc, calls = self.run_main(mock.patch.object(publish, "connect"), {"x.m4a": {"Size": 10}}, CF2_WORKERS_AI_TOKEN="")
         self.assertEqual((rc, calls), ("R2_USAGE_UNREAD", []))
 
     def test_account_total_is_each_buckets_latest_sample(self):
@@ -103,7 +103,7 @@ class FreeCap(unittest.TestCase):
             {"max": {"payloadSize": 900, "metadataSize": 10}, "dimensions": {"bucketName": "peace-be-still-audio", "datetime": "2026-11-21T03:00:00Z"}},
             {"max": {"payloadSize": 100, "metadataSize": 1}, "dimensions": {"bucketName": "pbs-made-for-you", "datetime": "2026-11-21T02:00:00Z"}},
         ]}]}}}
-        with mock.patch.dict(publish.os.environ, {"PBS_CF2_ANALYTICS_TOKEN": "t", "CF2_ACCOUNT_ID": "a"}):
+        with mock.patch.dict(publish.os.environ, {"CF2_WORKERS_AI_TOKEN": "t", "CF2_ACCOUNT_ID": "a"}):
             self.assertEqual(publish.account_bytes(post=lambda body: reply), 1615.0)
             with self.assertRaises(fill.NamedStop) as stop:
                 publish.account_bytes(post=lambda body: {"errors": [{"message": "not authorized"}]})

@@ -67,10 +67,11 @@ async function worker(t) {
   }
   for (const [translation, file] of [['KJV', 'kjv'], ['RV1909', 'rv1909']]) {
     const source = new DatabaseSync(`app/src/bible/data/${file}.db`, { readOnly: true });
-    const verses = source.prepare("SELECT verse, text FROM verses WHERE book = 'PSA' AND chapter = 23 ORDER BY verse").all();
+    // The comfort psalms a session can end in (PSALMS in madeForYou.ts), as the Worker's bible_verses holds them.
+    const verses = source.prepare("SELECT chapter, verse, text FROM verses WHERE book = 'PSA' AND chapter IN (4, 23, 91, 121, 131, 139) ORDER BY chapter, verse").all();
     source.close();
-    assert.equal(verses.length, 6);
-    await db.batch(verses.map(v => db.prepare("INSERT INTO bible_verses VALUES (?, 'PSA', 23, ?, ?)").bind(translation, v.verse, v.text)));
+    assert.equal(verses.filter(v => v.chapter === 23).length, 6);
+    await db.batch(verses.map(v => db.prepare("INSERT INTO bible_verses VALUES (?, 'PSA', ?, ?, ?)").bind(translation, v.chapter, v.verse, v.text)));
   }
   const call = (token, { now = at, params = '?kind=psalm&lang=es', path = '', body, method, headers = {} } = {}) =>
     fetch(new URL(path.startsWith('/api') ? path : '/api/made-for-you' + path + (path ? '' : params), url), {
@@ -167,6 +168,8 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   // Workers AI wrote the draft and spent its one daily draft; the revision came from the next rung.
   assert.match(one.job.reflection, /This draft came from gemini-free:\S+\.$/);
   assert.equal((await db.prepare("SELECT n FROM chat_counts WHERE metric = 'calls:mfy:draft:workers-ai'").first()).n, 1);
+  // Her first psalm session ends in Psalm 23, read whole from the store; her next ones go on through the comfort psalms.
+  assert.equal(one.job.psalm, 23);
   assert.equal(one.job.verses.length, 6);
   const scripted = await row(first);
   assert.equal(scripted.state, 'scripted');

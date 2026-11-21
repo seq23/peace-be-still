@@ -24,12 +24,12 @@ import qa
 TEMPLATE = {
     ("en", "psalm"): (
         "Take a moment to settle. There is room here for what you carried into the night.",
-        "Listen now to the words of Psalm twenty-three.",
+        "Listen now to the words of Psalm {name}.",
         "Let those words be enough for this moment. You can rest here awhile.",
     ),
     ("es", "psalm"): (
         "Tómate un momento para acomodarte. Aquí hay espacio para lo que traes esta noche.",
-        "Escucha ahora las palabras del Salmo veintitrés.",
+        "Escucha ahora las palabras del Salmo {name}.",
         "Deja que esas palabras basten por ahora. Puedes descansar aquí un rato.",
     ),
     ("en", "imagination"): (
@@ -42,6 +42,12 @@ TEMPLATE = {
         "",
         "Puedes dejar la escena aquí. Siente la cama debajo de ti y date tiempo para descansar.",
     ),
+}
+# The comfort psalms the Worker turns through (PSALMS in worker/src/madeForYou.ts): verses read, and the name spoken.
+PSALMS = {
+    23: (6, "twenty-three", "veintitrés"), 4: (8, "four", "cuatro"), 121: (8, "one hundred twenty-one", "ciento veintiuno"),
+    131: (3, "one hundred thirty-one", "ciento treinta y uno"), 91: (16, "ninety-one", "noventa y uno"),
+    139: (12, "one hundred thirty-nine", "ciento treinta y nueve"),
 }
 # One config with the Worker (worker/src/madeForYou.config.json): the session time the nightly promise is
 # built on is the same number the drain uses to decide whether another session fits.
@@ -67,8 +73,13 @@ def session_item(job: dict) -> dict:
         raise ValueError("Invalid queue path")
     if not isinstance(reflection, str) or not reflection.strip() or re.search(r"\bmanifest\w*\b", reflection, re.I):
         raise ValueError("Invalid reflection")
-    if not isinstance(verses, list) or len(verses) != (6 if bridge else 0):
+    psalm = PSALMS.get(job.get("psalm")) if bridge else None
+    if bridge and not psalm:
+        raise ValueError("Invalid psalm")
+    if not isinstance(verses, list) or len(verses) != (psalm[0] if psalm else 0):
         raise ValueError("Invalid verse sequence")
+    if psalm:
+        bridge = bridge.format(name=psalm[1 if job["lang"] == "en" else 2])
     if any(not isinstance(verse, str) or not verse.strip() for verse in verses):
         raise ValueError("Invalid stored verse")
     prose = [paragraph.strip() for paragraph in reflection.splitlines() if paragraph.strip()]

@@ -62,9 +62,9 @@ export function madeForYou(env: Env & MadeForYouEnv, deps: Deps, install: Instal
     checkProse: (draft, ctx) => checkAnswer(draft, { ...ctx, db: env.DB }),
     judgeShared: { schema: judgeSchema, verdict: judgeVerdict },
     banned,
-    async psalm(translation) {
-      const { results } = await env.DB.prepare("SELECT text FROM bible_verses WHERE translation = ? AND book = 'PSA' AND chapter = 23 ORDER BY verse")
-        .bind(translation).all<{ text: string }>();
+    async psalm(translation, psalm) {
+      const { results } = await env.DB.prepare("SELECT text FROM bible_verses WHERE translation = ? AND book = 'PSA' AND chapter = ? AND verse <= ? ORDER BY verse")
+        .bind(translation, psalm.chapter, psalm.verses).all<{ text: string }>();
       return results.map(row => row.text);
     },
     playUrl: storage.playUrl,
