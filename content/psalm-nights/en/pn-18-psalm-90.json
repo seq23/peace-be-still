@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Welcome to Psalm Nights. [pause 3]\n\nLet your body be heavy. Let your hands rest. [pause 6]\n\nTonight's psalm is Psalm 90. Its heading calls it a prayer of Moses. It is the oldest voice in the Psalms, and it speaks about time. Our short days, and God who is from everlasting to everlasting. [pause 5]\n\nWe will read it twice. [pause 8]"
+   "text": "Welcome to Psalm Nights. [pause 8]\n\nLet your body be heavy. Let your hands rest. [pause 11]\n\nTonight's psalm is Psalm 90. Its heading calls it a prayer of Moses. It is the oldest voice in the Psalms, and it speaks about time. Our short days, and God who is from everlasting to everlasting. [pause 10]\n\nWe will read it twice. [pause 13]"
   },
   {
    "part": "passage",
@@ -79,7 +79,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Our dwelling place, in every generation. Before your grandparents. Before their grandparents. God has been home to his people all along. [pause 6]\n\nA thousand years to God are like yesterday, like a watch in the night. A watch in the night. To God, all of history is like a few hours of the dark. [pause 8]\n\nThe psalm is honest about how short life is. Like grass in the morning, gone by evening. And so it asks for wisdom. Teach us to number our days. [pause 8]\n\nTwo more lines from the end of the psalm. [pause 4]"
+   "text": "Our dwelling place, in every generation. Before your grandparents. Before their grandparents. God has been home to his people all along. [pause 17]\n\nA thousand years to God are like yesterday, like a watch in the night. A watch in the night. To God, all of history is like a few hours of the dark. [pause 19]\n\nThe psalm is honest about how short life is. Like grass in the morning, gone by evening. And so it asks for wisdom. Teach us to number our days. [pause 19]\n\nTwo more lines from the end of the psalm. [pause 15]"
   },
   {
    "part": "passage",
@@ -110,7 +110,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Satisfy us early with thy mercy. A prayer for the morning. [pause 6]\n\nAnd establish the work of our hands. Whatever you did today, small or large, you can ask God to make it count. [pause 8]\n\nHere is Psalm 90 again. Let the long time of God hold your short night. [pause 10]"
+   "text": "Satisfy us early with thy mercy. A prayer for the morning. [pause 17]\n\nAnd establish the work of our hands. Whatever you did today, small or large, you can ask God to make it count. [pause 19]\n\nHere is Psalm 90 again. Let the long time of God hold your short night. [pause 21]"
   },
   {
    "part": "passage",
@@ -178,11 +178,11 @@
  "words": 809,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 814,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -217,7 +217,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

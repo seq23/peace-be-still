@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 13]\n\nBusca una manera cómoda de acostarte. Deja que la almohada sostenga tu cabeza. [pause 16]\n\nEl salmo de esta noche es el Salmo sesenta y tres. David lo escribió en el desierto de Judá, en tierra seca, sin agua. Y en ese lugar seco escribió sobre quedarse despierto de noche pensando en Dios. [pause 15]\n\nSi esta noche estás despierto, este salmo es para ti. Lo vamos a leer dos veces. [pause 18]"
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nBusca una manera cómoda de acostarte. Deja que la almohada sostenga tu cabeza. [pause 16]\n\nEl salmo de esta noche es el Salmo sesenta y tres. David lo escribió en el desierto de Judá, en tierra seca, sin agua. Y en ese lugar seco escribió sobre quedarse despierto de noche pensando en Dios. [pause 15]\n\nSi esta noche estás despierto, este salmo es para ti. Lo vamos a leer dos veces. [pause 18]"
   },
   {
    "part": "passage",
@@ -63,7 +63,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Dios, Dios mío eres tú. El salmo no empieza con una petición. Empieza con un nombre. Mi Dios. [pause 16]\n\nMi alma tiene sed de ti. En tierra seca, sin agua. Algunas noches se sienten así. Secas. Vacías. Lejos de lo que necesitas. [pause 16]\n\nLuego el versículo seis. Acordarse de Dios en la cama, pensar en él en las velas de la noche. Una vela era una parte de la noche, como los guardias contaban las horas. David pasaba sus horas sin sueño acordándose de Dios. [pause 18]\n\nY alegría, a la sombra de sus alas. [pause 20]\n\nDos versículos cortos sobre la noche. [pause 14]"
+   "text": "Dios, Dios mío eres tú. El salmo no empieza con una petición. Empieza con un nombre. Mi Dios. [pause 26]\n\nMi alma tiene sed de ti. En tierra seca, sin agua. Algunas noches se sienten así. Secas. Vacías. Lejos de lo que necesitas. [pause 26]\n\nLuego el versículo seis. Acordarse de Dios en la cama, pensar en él en las velas de la noche. Una vela era una parte de la noche, como los guardias contaban las horas. David pasaba sus horas sin sueño acordándose de Dios. [pause 28]\n\nY alegría, a la sombra de sus alas. [pause 30]\n\nDos versículos cortos sobre la noche. [pause 24]"
   },
   {
    "part": "passage",
@@ -94,7 +94,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "De noche, su canción conmigo. Una canción en la noche. [pause 16]\n\nMis ojos se adelantan a las velas de la noche, para meditar en su palabra. Si no puedes dormir, todavía puedes descansar tu mente en él. [pause 18]\n\nAquí está el Salmo sesenta y tres otra vez. Si tienes los ojos abiertos, que estas palabras sean tu vela de la noche. [pause 20]"
+   "text": "De noche, su canción conmigo. Una canción en la noche. [pause 26]\n\nMis ojos se adelantan a las velas de la noche, para meditar en su palabra. Si no puedes dormir, todavía puedes descansar tu mente en él. [pause 28]\n\nAquí está el Salmo sesenta y tres otra vez. Si tienes los ojos abiertos, que estas palabras sean tu vela de la noche. [pause 30]"
   },
   {
    "part": "passage",
@@ -146,11 +146,11 @@
  "words": 636,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 817,
+ "est_seconds": 810,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -187,7 +187,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

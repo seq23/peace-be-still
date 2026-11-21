@@ -63,7 +63,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Desde el cabo de la tierra clamaré. Dondequiera que estés esta noche, por lejos que te sientas, no es demasiado lejos para orar. [pause 23]\n\nCuando mi corazón desmaya. Algunas noches el corazón simplemente está demasiado lleno. Entonces la oración es corta. Llévame a la peña más alta. [pause 23]\n\nUna peña más alta que tú. Más alta que tu preocupación. Más alta que lo que entiendes. Un lugar para pararte encima del agua. [pause 23]\n\nY otra vez el refugio de sus alas. Una tienda. Una torre fuerte. [pause 25]\n\nDos pasajes para acompañarlo. [pause 21]"
+   "text": "Desde el cabo de la tierra clamaré. Dondequiera que estés esta noche, por lejos que te sientas, no es demasiado lejos para orar. [pause 34]\n\nCuando mi corazón desmaya. Algunas noches el corazón simplemente está demasiado lleno. Entonces la oración es corta. Llévame a la peña más alta. [pause 34]\n\nUna peña más alta que tú. Más alta que tu preocupación. Más alta que lo que entiendes. Un lugar para pararte encima del agua. [pause 34]\n\nY otra vez el refugio de sus alas. Una tienda. Una torre fuerte. [pause 36]\n\nDos pasajes para acompañarlo. [pause 32]"
   },
   {
    "part": "passage",
@@ -94,7 +94,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "El Salmo dieciocho llama a Dios roca, castillo y alto refugio. Isaías pinta un escondedero contra el viento, y la sombra de una gran peña en una tierra cansada. [pause 25]\n\nAquí está el Salmo sesenta y uno otra vez. Deja que tu corazón sea llevado a la peña. [pause 25]"
+   "text": "El Salmo dieciocho llama a Dios roca, castillo y alto refugio. Isaías pinta un escondedero contra el viento, y la sombra de una gran peña en una tierra cansada. [pause 36]\n\nAquí está el Salmo sesenta y uno otra vez. Deja que tu corazón sea llevado a la peña. [pause 36]"
   },
   {
    "part": "passage",
@@ -146,8 +146,8 @@
  "words": 552,
  "rest_part": "rest4",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
  "est_seconds": 815,
@@ -187,7 +187,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

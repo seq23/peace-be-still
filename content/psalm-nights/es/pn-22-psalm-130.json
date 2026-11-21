@@ -62,7 +62,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "De lo profundo. El salmo no espera a que las cosas mejoren para orar. Ora desde el fondo. [pause 25]\n\nSi Dios llevara la cuenta de cada pecado, nadie podría estar en pie. Pero en él hay perdón. [pause 25]\n\nLuego la línea más hermosa. Esperar al Señor más que los centinelas esperan la mañana. El guardia en la muralla de la ciudad, cansado, con frío, mirando hacia el oriente buscando la primera luz gris. [pause 25]\n\nEl salmo lo dice dos veces. Más que los centinelas. Como alguien que sabe que la mañana viene, y la está esperando. [pause 25]\n\nUn pasaje de Lamentaciones para acompañarlo. [pause 25]"
+   "text": "De lo profundo. El salmo no espera a que las cosas mejoren para orar. Ora desde el fondo. [pause 39]\n\nSi Dios llevara la cuenta de cada pecado, nadie podría estar en pie. Pero en él hay perdón. [pause 39]\n\nLuego la línea más hermosa. Esperar al Señor más que los centinelas esperan la mañana. El guardia en la muralla de la ciudad, cansado, con frío, mirando hacia el oriente buscando la primera luz gris. [pause 39]\n\nEl salmo lo dice dos veces. Más que los centinelas. Como alguien que sabe que la mañana viene, y la está esperando. [pause 39]\n\nUn pasaje de Lamentaciones para acompañarlo. [pause 39]"
   },
   {
    "part": "passage",
@@ -84,7 +84,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Bueno es el Señor con los que en él esperan. Es bueno esperar en silencio. En silencio. Esta noche puedes esperar en silencio. [pause 25]\n\nAquí está el Salmo ciento treinta otra vez. Sé el centinela que espera la luz. [pause 25]"
+   "text": "Bueno es el Señor con los que en él esperan. Es bueno esperar en silencio. En silencio. Esta noche puedes esperar en silencio. [pause 39]\n\nAquí está el Salmo ciento treinta otra vez. Sé el centinela que espera la luz. [pause 39]"
   },
   {
    "part": "passage",
@@ -136,11 +136,11 @@
  "words": 480,
  "rest_part": "rest4",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 792,
+ "est_seconds": 815,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -177,7 +177,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

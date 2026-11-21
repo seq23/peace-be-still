@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello, and welcome to Psalm Nights. [pause 7]\n\nLet your hands open. Let your forehead smooth out. [pause 10]\n\nTonight we read the first part of Psalm 37. It begins with a word we need some nights. Fret not. Do not get worked up. [pause 9]\n\nWe will read it twice. [pause 12]"
+   "text": "Hello, and welcome to Psalm Nights. [pause 12]\n\nLet your hands open. Let your forehead smooth out. [pause 15]\n\nTonight we read the first part of Psalm 37. It begins with a word we need some nights. Fret not. Do not get worked up. [pause 14]\n\nWe will read it twice. [pause 15]"
   },
   {
    "part": "passage",
@@ -74,7 +74,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Fret not thyself. Some nights we lie awake upset about what others have done. People who did wrong and seem to get away with it. The psalm says, do not let it eat at you. [pause 12]\n\nThen four small instructions. Trust in the Lord. Delight thyself in him. Commit thy way. Rest in the Lord. [pause 10]\n\nRest in the Lord, and wait for him. That is the whole night's work. Rest, and wait. [pause 10]\n\nAnd the meek shall inherit the earth. Jesus said it again, years later, on a mountain. [pause 14]\n\nA companion passage from Paul. [pause 8]"
+   "text": "Fret not thyself. Some nights we lie awake upset about what others have done. People who did wrong and seem to get away with it. The psalm says, do not let it eat at you. [pause 23]\n\nThen four small instructions. Trust in the Lord. Delight thyself in him. Commit thy way. Rest in the Lord. [pause 21]\n\nRest in the Lord, and wait for him. That is the whole night's work. Rest, and wait. [pause 21]\n\nAnd the meek shall inherit the earth. Jesus said it again, years later, on a mountain. [pause 25]\n\nA companion passage from Paul. [pause 19]"
   },
   {
    "part": "passage",
@@ -96,7 +96,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Be careful for nothing. In the old English, careful means full of care. Full of worry. Instead, prayer, with thanks. And a peace that keeps the heart. [pause 12]\n\nHere is Psalm 37 again. When you hear rest in the Lord, let your body rest too. [pause 14]"
+   "text": "Be careful for nothing. In the old English, careful means full of care. Full of worry. Instead, prayer, with thanks. And a peace that keeps the heart. [pause 23]\n\nHere is Psalm 37 again. When you hear rest in the Lord, let your body rest too. [pause 25]"
   },
   {
    "part": "passage",
@@ -160,11 +160,11 @@
  "words": 732,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 811,
+ "est_seconds": 812,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -199,7 +199,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

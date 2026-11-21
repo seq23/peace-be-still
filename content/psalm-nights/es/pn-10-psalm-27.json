@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 3]\n\nDeja que el cuarto quede en silencio a tu alrededor. Deja que tu respiración se haga lenta. [pause 5]\n\nEsta noche es el Salmo veintisiete. Empieza con luz y termina con espera. En medio hay miedo, hay anhelo, y hay un lugar tranquilo en la casa de Dios. [pause 5]\n\nEs un salmo largo. Vamos a tomarnos nuestro tiempo. [pause 8]"
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 8]\n\nDeja que el cuarto quede en silencio a tu alrededor. Deja que tu respiración se haga lenta. [pause 10]\n\nEsta noche es el Salmo veintisiete. Empieza con luz y termina con espera. En medio hay miedo, hay anhelo, y hay un lugar tranquilo en la casa de Dios. [pause 10]\n\nEs un salmo largo. Vamos a tomarnos nuestro tiempo. [pause 13]"
   },
   {
    "part": "passage",
@@ -86,7 +86,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "El Señor es mi luz. Puedes estar acostado en un cuarto oscuro y aun así tener luz. La luz no es solo lo que ven los ojos. [pause 6]\n\nEn medio del salmo, David dice la única cosa que quiere. Estar en la casa del Señor, y contemplar su hermosura. No una lista larga. Una sola cosa. [pause 6]\n\nY luego hay una línea que ha consolado a muchos que fueron dejados por las personas que amaban. Aunque padre y madre me dejen, el Señor me recogerá. [pause 8]\n\nEl salmo termina con esperar. Espera en el Señor. Esperar no es lo mismo que no pase nada. Es confianza sostenida en el tiempo. [pause 10]"
+   "text": "El Señor es mi luz. Puedes estar acostado en un cuarto oscuro y aun así tener luz. La luz no es solo lo que ven los ojos. [pause 17]\n\nEn medio del salmo, David dice la única cosa que quiere. Estar en la casa del Señor, y contemplar su hermosura. No una lista larga. Una sola cosa. [pause 17]\n\nY luego hay una línea que ha consolado a muchos que fueron dejados por las personas que amaban. Aunque padre y madre me dejen, el Señor me recogerá. [pause 19]\n\nEl salmo termina con esperar. Espera en el Señor. Esperar no es lo mismo que no pase nada. Es confianza sostenida en el tiempo. [pause 21]"
   },
   {
    "part": "passage",
@@ -104,7 +104,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "En paz. Acostarse. Dormir. Seguridad en él. [pause 6]\n\nAquí está el Salmo veintisiete otra vez. Que la primera línea sea la que recuerdes. [pause 10]"
+   "text": "En paz. Acostarse. Dormir. Seguridad en él. [pause 17]\n\nAquí está el Salmo veintisiete otra vez. Que la primera línea sea la que recuerdes. [pause 21]"
   },
   {
    "part": "passage",
@@ -180,11 +180,11 @@
  "words": 863,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 823,
+ "est_seconds": 815,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -221,7 +221,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

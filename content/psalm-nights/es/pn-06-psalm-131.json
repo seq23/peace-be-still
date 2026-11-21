@@ -19,7 +19,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nRecuéstate. Deja que la almohada reciba tu cabeza. Deja que tu respiración encuentre su propio ritmo. [pause 17]\n\nEl salmo de esta noche es uno de los más cortos de la Biblia. El Salmo ciento treinta y uno. Solo tres versículos. Es un salmo para las personas que piensan demasiado de noche. [pause 16]\n\nLo vamos a leer despacio, y luego otra vez. [pause 19]"
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nRecuéstate. Deja que la almohada reciba tu cabeza. Deja que tu respiración encuentre su propio ritmo. [pause 17]\n\nEl salmo de esta noche es uno de los más cortos de la Biblia. El Salmo ciento treinta y uno. Solo tres versículos. Es un salmo para las personas que piensan demasiado de noche. [pause 16]\n\nLo vamos a leer despacio, y luego otra vez. [pause 19]"
   },
   {
    "part": "passage",
@@ -45,7 +45,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "El salmista dice que no anda en cosas demasiado grandes ni demasiado altas para él. [pause 16]\n\nHay cosas que son muy grandes para resolverlas esta noche. El salmo te da permiso de dejarlas. No tienes que entenderlo todo antes de poder descansar. [pause 19]\n\nLuego viene la imagen de un niño destetado. No un bebé que llora porque tiene hambre, sino un pequeño que ya comió y está contento, recostado en su mamá. Quieto. Tranquilo. Ahí. [pause 19]\n\nAsí es un alma que descansa en Dios. No porque todas las preguntas tengan respuesta. Porque alguien te sostiene. [pause 21]\n\nAhora, unos versículos más. [pause 15]"
+   "text": "El salmista dice que no anda en cosas demasiado grandes ni demasiado altas para él. [pause 25]\n\nHay cosas que son muy grandes para resolverlas esta noche. El salmo te da permiso de dejarlas. No tienes que entenderlo todo antes de poder descansar. [pause 28]\n\nLuego viene la imagen de un niño destetado. No un bebé que llora porque tiene hambre, sino un pequeño que ya comió y está contento, recostado en su mamá. Quieto. Tranquilo. Ahí. [pause 28]\n\nAsí es un alma que descansa en Dios. No porque todas las preguntas tengan respuesta. Porque alguien te sostiene. [pause 30]\n\nAhora, unos versículos más. [pause 24]"
   },
   {
    "part": "passage",
@@ -114,7 +114,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Vengan a mí todos los que están cansados y cargados. Jesús se lo dijo a gente cansada. No les pidió que primero estuvieran menos cansados. [pause 17]\n\nEn descanso y en reposo, dice Isaías. En quietud y en confianza, la fortaleza. La calma no es debilidad. Puede ser fuerza. [pause 19]\n\nY dos más de los Salmos. Mi alma espera en silencio a Dios. Y, vuelve, oh alma mía, a tu reposo. Te lo puedes decir a ti mismo esta noche. Vuelve a tu reposo. [pause 21]\n\nAquí está el Salmo ciento treinta y uno otra vez. Tres versículos. Que sean lentos. [pause 23]"
+   "text": "Vengan a mí todos los que están cansados y cargados. Jesús se lo dijo a gente cansada. No les pidió que primero estuvieran menos cansados. [pause 26]\n\nEn descanso y en reposo, dice Isaías. En quietud y en confianza, la fortaleza. La calma no es debilidad. Puede ser fuerza. [pause 28]\n\nY dos más de los Salmos. Mi alma espera en silencio a Dios. Y, vuelve, oh alma mía, a tu reposo. Te lo puedes decir a ti mismo esta noche. Vuelve a tu reposo. [pause 30]\n\nAquí está el Salmo ciento treinta y uno otra vez. Tres versículos. Que sean lentos. [pause 32]"
   },
   {
    "part": "passage",
@@ -146,8 +146,8 @@
  "words": 584,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
  "est_seconds": 816,
@@ -187,7 +187,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

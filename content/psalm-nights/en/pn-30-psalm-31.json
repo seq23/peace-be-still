@@ -52,7 +52,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "In you, Lord, I trust. The psalm begins where every night can begin. Trust. [pause 24]\n\nA strong rock, a house of defence. A house. Somewhere to go in, and close the door. [pause 24]\n\nThen verse five. Into thine hand I commit my spirit. To commit is to hand something over and leave it there. Like a child handing a tired toy to her mother at the end of the day. [pause 25]\n\nSome companion verses now. [pause 22]"
+   "text": "In you, Lord, I trust. The psalm begins where every night can begin. Trust. [pause 33]\n\nA strong rock, a house of defence. A house. Somewhere to go in, and close the door. [pause 33]\n\nThen verse five. Into thine hand I commit my spirit. To commit is to hand something over and leave it there. Like a child handing a tired toy to her mother at the end of the day. [pause 34]\n\nSome companion verses now. [pause 31]"
   },
   {
    "part": "passage",
@@ -100,7 +100,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "My times are in thy hand. All of them. The past, this night, tomorrow. [pause 24]\n\nAnd Jesus, at the end of his suffering, prayed this same psalm. Father, into thy hands. If he could pray it then, you can pray it tonight. [pause 25]\n\nAnd our evening verse, one last time. Peace. Lying down. Sleep. [pause 24]\n\nHere is Psalm 31 again. When you hear verse five, hand him your spirit for the night. [pause 25]"
+   "text": "My times are in thy hand. All of them. The past, this night, tomorrow. [pause 33]\n\nAnd Jesus, at the end of his suffering, prayed this same psalm. Father, into thy hands. If he could pray it then, you can pray it tonight. [pause 34]\n\nAnd our evening verse, one last time. Peace. Lying down. Sleep. [pause 33]\n\nHere is Psalm 31 again. When you hear verse five, hand him your spirit for the night. [pause 34]"
   },
   {
    "part": "passage",
@@ -140,11 +140,11 @@
  "words": 543,
  "rest_part": "rest6",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 817,
+ "est_seconds": 814,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -179,7 +179,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

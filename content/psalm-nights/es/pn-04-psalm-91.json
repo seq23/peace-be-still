@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 10]\n\nPonte cómodo. No tienes que estar en ningún otro lugar. [pause 12]\n\nEsta noche leemos el Salmo noventa y uno. Muchas personas lo oran de noche, y lo oran por su familia. Está lleno de imágenes de refugio. Un lugar escondido. Una sombra. Unas alas. Un escudo. [pause 12]\n\nLo vamos a leer dos veces, despacio. [pause 15]"
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nPonte cómodo. No tienes que estar en ningún otro lugar. [pause 15]\n\nEsta noche leemos el Salmo noventa y uno. Muchas personas lo oran de noche, y lo oran por su familia. Está lleno de imágenes de refugio. Un lugar escondido. Una sombra. Unas alas. Un escudo. [pause 15]\n\nLo vamos a leer dos veces, despacio. [pause 15]"
   },
   {
    "part": "passage",
@@ -94,7 +94,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "El que habita al abrigo del Altísimo. El salmo empieza con el lugar donde vives, no con lo que temes. [pause 13]\n\nLa imagen del versículo cuatro es la de un ave que junta a sus pollitos debajo de sus alas. Las plumas encima de ellos, cálidas y cerca, mientras afuera sigue la noche. [pause 13]\n\nEste salmo se ha orado en hospitales y en guerras, en tormentas y en noches largas esperando una llamada. No dice que nunca va a pasar nada difícil. Dice que Dios estará con él en la angustia. [pause 17]\n\nUn versículo más para esta noche. [pause 11]"
+   "text": "El que habita al abrigo del Altísimo. El salmo empieza con el lugar donde vives, no con lo que temes. [pause 24]\n\nLa imagen del versículo cuatro es la de un ave que junta a sus pollitos debajo de sus alas. Las plumas encima de ellos, cálidas y cerca, mientras afuera sigue la noche. [pause 24]\n\nEste salmo se ha orado en hospitales y en guerras, en tormentas y en noches largas esperando una llamada. No dice que nunca va a pasar nada difícil. Dice que Dios estará con él en la angustia. [pause 28]\n\nUn versículo más para esta noche. [pause 22]"
   },
   {
    "part": "passage",
@@ -112,7 +112,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "En paz. Acostarse. Dormir. Vivir confiado, porque solo el Señor da esa seguridad. [pause 13]\n\nAquí está el Salmo noventa y uno otra vez. Puedes imaginar esas alas mientras escuchas. [pause 17]"
+   "text": "En paz. Acostarse. Dormir. Vivir confiado, porque solo el Señor da esa seguridad. [pause 24]\n\nAquí está el Salmo noventa y uno otra vez. Puedes imaginar esas alas mientras escuchas. [pause 28]"
   },
   {
    "part": "passage",
@@ -196,11 +196,11 @@
  "words": 728,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 814,
+ "est_seconds": 813,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -237,7 +237,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

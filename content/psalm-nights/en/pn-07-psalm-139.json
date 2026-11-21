@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello. This is Psalm Nights. [pause 3]\n\nMake yourself comfortable. Let your eyes close if they want to. [pause 5]\n\nTonight we read part of Psalm 139. It is a psalm about being known. Completely known. And not being left. [pause 5]\n\nIt is a long reading, so we will go slowly. [pause 8]"
+   "text": "Hello. This is Psalm Nights. [pause 8]\n\nMake yourself comfortable. Let your eyes close if they want to. [pause 10]\n\nTonight we read part of Psalm 139. It is a psalm about being known. Completely known. And not being left. [pause 10]\n\nIt is a long reading, so we will go slowly. [pause 13]"
   },
   {
    "part": "passage",
@@ -212,11 +212,11 @@
  "words": 930,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 895,
+ "est_seconds": 819,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -251,7 +251,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.5-13.7 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

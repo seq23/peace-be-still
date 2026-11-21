@@ -70,7 +70,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Bendecir al Señor en todo tiempo. En todo tiempo. No solo cuando el día salió bien. [pause 22]\n\nBusqué al Señor, y él me oyó. David no está dando una clase. Está contando lo que le pasó. Busqué a Dios, y Dios me respondió. [pause 22]\n\nEl ángel del Señor acampa alrededor de los que le temen. Acampa. Como una tienda levantada a tu alrededor para pasar la noche. [pause 22]\n\nPrueben y vean. La fe no es solo algo que se piensa. Es algo que se prueba, como el pan, como el agua cuando tienes sed. [pause 25]\n\nDos versículos más, del mismo salmo. [pause 20]"
+   "text": "Bendecir al Señor en todo tiempo. En todo tiempo. No solo cuando el día salió bien. [pause 33]\n\nBusqué al Señor, y él me oyó. David no está dando una clase. Está contando lo que le pasó. Busqué a Dios, y Dios me respondió. [pause 33]\n\nEl ángel del Señor acampa alrededor de los que le temen. Acampa. Como una tienda levantada a tu alrededor para pasar la noche. [pause 33]\n\nPrueben y vean. La fe no es solo algo que se piensa. Es algo que se prueba, como el pan, como el agua cuando tienes sed. [pause 36]\n\nDos versículos más, del mismo salmo. [pause 31]"
   },
   {
    "part": "passage",
@@ -92,7 +92,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Cercano está el Señor a los quebrantados de corazón. Si esta noche tienes el corazón roto, él no está lejos. Está más cerca de lo que piensas. [pause 24]\n\nAquí está el principio del Salmo treinta y cuatro otra vez. Que sepa a algo bueno. [pause 25]"
+   "text": "Cercano está el Señor a los quebrantados de corazón. Si esta noche tienes el corazón roto, él no está lejos. Está más cerca de lo que piensas. [pause 35]\n\nAquí está el principio del Salmo treinta y cuatro otra vez. Que sepa a algo bueno. [pause 36]"
   },
   {
    "part": "passage",
@@ -152,11 +152,11 @@
  "words": 588,
  "rest_part": "rest5",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 812,
+ "est_seconds": 813,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -193,7 +193,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

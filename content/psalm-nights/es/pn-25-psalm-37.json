@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nAbre las manos. Deja que tu frente se relaje. [pause 17]\n\nEsta noche leemos la primera parte del Salmo treinta y siete. Empieza con una palabra que algunas noches necesitamos. No te impacientes. No te alteres. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nAbre las manos. Deja que tu frente se relaje. [pause 17]\n\nEsta noche leemos la primera parte del Salmo treinta y siete. Empieza con una palabra que algunas noches necesitamos. No te impacientes. No te alteres. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
   },
   {
    "part": "passage",
@@ -74,7 +74,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "No te impacientes. Algunas noches nos quedamos despiertos molestos por lo que otros hicieron. Gente que hizo mal y parece que se salió con la suya. El salmo dice, no dejes que eso te consuma. [pause 19]\n\nLuego cuatro instrucciones pequeñas. Confía en el Señor. Deléitate en él. Encomienda tu camino. Calla delante de él. [pause 17]\n\nCalla delante del Señor, y espera en él. Ese es todo el trabajo de esta noche. Callar, y esperar. [pause 17]\n\nY los mansos heredarán la tierra. Jesús lo volvió a decir, años después, en un monte. [pause 21]\n\nUn pasaje de Pablo para acompañarlo. [pause 15]"
+   "text": "No te impacientes. Algunas noches nos quedamos despiertos molestos por lo que otros hicieron. Gente que hizo mal y parece que se salió con la suya. El salmo dice, no dejes que eso te consuma. [pause 30]\n\nLuego cuatro instrucciones pequeñas. Confía en el Señor. Deléitate en él. Encomienda tu camino. Calla delante de él. [pause 28]\n\nCalla delante del Señor, y espera en él. Ese es todo el trabajo de esta noche. Callar, y esperar. [pause 28]\n\nY los mansos heredarán la tierra. Jesús lo volvió a decir, años después, en un monte. [pause 32]\n\nUn pasaje de Pablo para acompañarlo. [pause 26]"
   },
   {
    "part": "passage",
@@ -96,7 +96,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Por nada estén afanosos. En lugar del afán, oración, con gratitud. Y una paz que guarda el corazón. [pause 19]\n\nAquí está el Salmo treinta y siete otra vez. Cuando oigas calla delante del Señor, deja que tu cuerpo también descanse. [pause 21]"
+   "text": "Por nada estén afanosos. En lugar del afán, oración, con gratitud. Y una paz que guarda el corazón. [pause 30]\n\nAquí está el Salmo treinta y siete otra vez. Cuando oigas calla delante del Señor, deja que tu cuerpo también descanse. [pause 32]"
   },
   {
    "part": "passage",
@@ -160,11 +160,11 @@
  "words": 643,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 816,
+ "est_seconds": 811,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -201,7 +201,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },
