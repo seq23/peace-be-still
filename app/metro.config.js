@@ -2,12 +2,19 @@ const path = require('path');
 const { getDefaultConfig } = require('expo/metro-config');
 
 const config = getDefaultConfig(__dirname);
-// The Bible ships as SQLite files (src/bible/data/*.db); the web build of SQLite is a .wasm file.
+// The Bible ships as SQLite files (src/bible/data/*.db); the web preview's SQLite engine (sql.js) is a .wasm file.
 config.resolver.assetExts.push('db', 'wasm');
+// sql.js (the web preview's in-memory Bible, src/bible/open.web.ts) names Node's fs, path and crypto in a branch
+// that only runs under Node; on the web they resolve to nothing.
+const resolve = config.resolver.resolveRequest;
+config.resolver.resolveRequest = (context, name, platform) => {
+  if (platform === 'web' && ['fs', 'path', 'crypto'].includes(name) && /[\\/]sql\.js[\\/]/.test(context.originModulePath)) return { type: 'empty' };
+  return (resolve ?? context.resolveRequest)(context, name, platform);
+};
 // The 66-book list is shared with the audio and import scripts (content/bible/books.json).
 config.watchFolders = [...(config.watchFolders ?? []), path.resolve(__dirname, '../content/bible')];
-// SQLite on the web needs SharedArrayBuffer, so the page must be cross-origin isolated. require-corp (not
-// credentialless, which iPhone Safari lacks) with every asset same-origin; the preview host sets the same.
+// The dev server serves the page cross-origin isolated, as the preview host does (require-corp, not credentialless,
+// which iPhone Safari lacks), so the local page behaves like the preview.
 const enhance = config.server.enhanceMiddleware;
 config.server.enhanceMiddleware = (middleware, server) => {
   const next = enhance ? enhance(middleware, server) : middleware;

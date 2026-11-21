@@ -231,6 +231,20 @@ export async function check(target) {
       await shot(page, '16-grief');
       await context.close();
     }
+    // 17. Two tabs (21 Nov 2026): with the app open in one tab and a verse loaded, a second tab of the same site
+    // loads its verses too. Each tab keeps its own copy of the Bible in memory; nothing is locked to one tab.
+    {
+      const first = await open('/grief', adult);
+      const verse = 'The LORD is nigh unto them that are of a broken heart';
+      expect(await shows(first.page, verse), 'two tabs: the first tab has no verse');
+      const second = await first.context.newPage();
+      await second.goto(base + '/grief', { waitUntil: 'commit', timeout: 60000 });
+      expect(await shows(second, verse), 'two tabs: the second tab shows no verse while the first is open');
+      expect(!/could not be loaded/.test(await body(second)), 'two tabs: the second tab says a verse could not be loaded');
+      expect(await shows(first.page, verse), 'two tabs: the first tab lost its verses');
+      await shot(second, '17-grief-second-tab');
+      await first.context.close();
+    }
   } finally {
     await browser.close();
     local?.server.close();
