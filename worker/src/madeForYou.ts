@@ -304,6 +304,7 @@ const leaseMs = 30 * MINUTE;
 const claimDeadlineMs = 240_000;
 const maxAttempts = 3;
 const retryAfterOutageMs = 15 * MINUTE;
+const retryAfterFailureMs = 5 * MINUTE; // a rejected draft tries again after the next row, not at once
 const REPORT_DAYS = 90;
 const PLAN_GRACE = 30 * DAY;
 const STOPPED = 'MADE_FOR_YOU_ATTEMPTS_EXHAUSTED';
@@ -426,9 +427,10 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
         script = CASE WHEN attempts + ? >= ? THEN NULL ELSE script END,
         lease = NULL, lease_until = ?
       WHERE id = ? AND lease = ? AND lease_until > ? AND state IN ('queued','scripted') RETURNING retry_code`)
-      // An outage backs the row off so the rows behind it are made; a quality failure may retry at once.
+      // Every held row steps back so the rows behind it are made, and no row's tries burst into a free
+      // provider's per-minute limit (round-5 measure: 3 tries a minute apart all met OpenRouter's 429s).
       .bind(add, add, maxAttempts, STOPPED, code, add, maxAttempts, add, maxAttempts, add, maxAttempts,
-        failure ? null : deps.now() + retryAfterOutageMs, id, lease, deps.now())
+        deps.now() + (failure ? retryAfterFailureMs : retryAfterOutageMs), id, lease, deps.now())
       .first<{ retry_code: string }>();
   }
 
@@ -446,14 +448,23 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
       let misshapen = false;
       const drafted = await deps.ladder('draft', draftMessages(row, note, deps.banned), draftSchema, config.draftMaxTokens, value => {
         const ok = draftText(value) !== null;
-        if (!ok) misshapen = true;
+        if (!ok) {
+          misshapen = true;
+          // Word counts only: how far off the shape a model's draft was.
+          const paragraphs = (value as { paragraphs?: unknown } | null)?.paragraphs;
+          const shape = Array.isArray(paragraphs) ? paragraphs.map(p => String(p).split(/\s+/).filter(Boolean).length).join(',') : typeof value;
+          console.log(JSON.stringify({ code: 'MADE_FOR_YOU_REJECT', reason: `shape:${shape}`, kind: row.kind, lang: row.lang }));
+        }
         return ok;
       }, signal);
       if ('empty' in drafted) return misshapen ? { code: DRAFT_FAILED, failure: true } : { code: NO_FREE_MODEL, failure: false };
       const reflection = draftText(drafted.data) as string;
       const judge: JudgeProse = (i, text, s) => madeForYouJudge(
-        (messages, schema, valid) => deps.ladder('judge', messages, schema, config.judgeMaxTokens, valid, s), deps.judgeShared, i, text);
-      const approval = await madeForYouApprove(deps.checkProse, judge, input, reflection, signal);
+        (messages, schema, valid) => deps.ladder('judge', messages, schema, config.judgeMaxTokens, valid, s), deps.judgeShared, i, text,
+        reason => console.log(JSON.stringify({ code: 'MADE_FOR_YOU_REJECT', reason, kind: row.kind, lang: row.lang })));
+      // Reject reasons are codes only (never her words or the script): the Worker log and the soak count them.
+      const approval = await madeForYouApprove(deps.checkProse, judge, input, reflection, signal,
+        reason => console.log(JSON.stringify({ code: 'MADE_FOR_YOU_REJECT', reason, kind: row.kind, lang: row.lang })));
       if (approval === 'down') return { code: NO_FREE_MODEL, failure: false };
       if (approval === 'reject') return { code: DRAFT_FAILED, failure: true };
       return { reflection, verses };

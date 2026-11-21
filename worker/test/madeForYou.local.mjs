@@ -173,10 +173,12 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   assert.deepEqual(await (await claim(at + MIN)).json(), { job: null }, 'an outage backs the row off; the rest of the queue is not blocked');
   assert.equal((await claim(at + 16 * MIN, { 'x-test-judge': 'down' })).status, 503);
   assert.equal((await row(third)).attempts, 0, 'a judge outage is a retry, not a failure');
-  // Three rejected drafts: stopped, and her note is gone in the same update.
+  // Three rejected drafts, each tried again only after a 5-minute step back (never a burst): stopped,
+  // and her note is gone in the same update.
   for (let i = 0; i < 3; i++) {
-    const rejected = await claim(at + (32 + i) * MIN, { 'x-test-judge': 'fail' });
+    const rejected = await claim(at + (32 + 6 * i) * MIN, { 'x-test-judge': 'fail' });
     assert.deepEqual(await rejected.json(), { error: i === 2 ? 'MADE_FOR_YOU_ATTEMPTS_EXHAUSTED' : 'MADE_FOR_YOU_DRAFT' });
+    if (i === 0) assert.notEqual((await (await claim(at + 33 * MIN, { 'x-test-judge': 'fail' })).json()).job?.id ?? null, third, 'a rejected draft does not retry at once');
   }
   held = await row(third);
   assert.equal(held.state, 'stopped');
@@ -184,11 +186,11 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   assert.equal(held.script, null);
   assert.deepEqual(await chatCounters(), before);
   // A request we failed does not use up her day.
-  const sceneShelf = await (await call(sceneInstall, { now: at + 40 * MIN, params: '?kind=imagination&lang=en' })).json();
+  const sceneShelf = await (await call(sceneInstall, { now: at + 50 * MIN, params: '?kind=imagination&lang=en' })).json();
   assert.equal(sceneShelf.ended, 'stopped');
   assert.equal(sceneShelf.requestedToday, false);
-  assert.equal((await call(sceneInstall, { now: at + 40 * MIN, body: scene })).status, 202);
-  assert.equal((await call(sceneInstall, { now: at + 41 * MIN, body: scene })).status, 429, 'still one a day');
+  assert.equal((await call(sceneInstall, { now: at + 50 * MIN, body: scene })).status, 202);
+  assert.equal((await call(sceneInstall, { now: at + 51 * MIN, body: scene })).status, 429, 'still one a day');
 });
 
 test('the Mac publishes, she plays, reports (one report path) and deletes; the cron keeps every retention promise', async t => {
