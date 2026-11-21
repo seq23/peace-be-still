@@ -48,7 +48,7 @@ export const ES = [
 <tr><td>Domingo</td><td>${q("PSA 107:1")} (Salmos 107:1)</td></tr>
 </tbody></table>`],
       ["¿Hay un devocional diario gratis en español?", `${MI_REFUGIO}
-<p>La parte gratis, que no se acaba, incluye la Biblia completa para leer, la historia bíblica del día, un chat al día de hasta 10 mensajes y una declaración diaria con su versículo. No hay anuncios ni prueba gratuita.</p>`],
+<p>La versión gratis, que no se acaba, incluye la Biblia completa para leer, la historia bíblica del día, un chat al día de hasta 10 mensajes y una declaración diaria con su versículo. No hay anuncios ni prueba gratuita.</p>`],
     ],
     faq: [
       ["¿Cuánto tiempo debe durar un devocional?", "Entre cinco y quince minutos. Es mejor un devocional corto todos los días que uno largo una vez al mes."],
@@ -161,7 +161,7 @@ ${v("PSA 4:8")}`],
 ${v("PSA 3:5")}`],
       ["¿Cuál es una oración corta para dormir?", `<p>“Señor, en tus manos dejo este día. Dame descanso. Amén.” Si quieres más, mira <a href="/es/preguntas/oracion-para-dormir/">oraciones para dormir</a>.</p>`],
       ["Mi Refugio en Peace Be Still", `${MI_REFUGIO}
-<p>De noche, los Salmos se leen en susurro con la pantalla siempre oscura y un temporizador que apaga la voz poco a poco. La primera noche es gratis y luego una por semana; la parte de pago ($7.99 al mes o $39.99 al año, sin prueba) abre una cada noche.</p>`],
+<p>De noche, los Salmos se leen en susurro con la pantalla siempre oscura y un temporizador que apaga la voz poco a poco. La primera noche es gratis y luego una por semana; un plan de pago ($7.99 al mes o $39.99 al año, sin prueba) abre una cada noche.</p>`],
     ],
     faq: [
       ["¿Qué se reza antes de dormir?", "Muchas personas rezan el Padre Nuestro o una oración propia: dar gracias por el día, pedir perdón y pedir descanso. Terminar con el Salmo 4:8 es una costumbre muy antigua."],
@@ -408,7 +408,7 @@ ${v("PSA 127:2")}`],
       ["¿Cuál es una oración corta para dormir?", `<p>Ora el Salmo 4:8 con tus palabras: “Señor, ya me acuesto. Confío en que tú me cuidas esta noche.” Mira más <a href="/es/preguntas/oracion-para-dormir/">oraciones para dormir</a>.</p>`],
       ["¿Hay una Biblia en español para dormir?", `<p>Sí. Muchas personas escuchan la Biblia en español leída despacio para dormir, sobre todo los Salmos y los Evangelios. La Reina-Valera 1909 es de dominio público en Estados Unidos, así que se puede leer, grabar y compartir libremente.</p>
 ${v("PSA 91:2")}`],
-      ["¿Qué hará Peace Be Still?", `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae todo en español: chat bíblico, historias y Salmos susurrados para dormir, con la Reina-Valera 1909 palabra por palabra. La pantalla siempre está oscura y un temporizador apaga la voz poco a poco. La primera noche es gratis y luego una por semana; la parte de pago cuesta $7.99 al mes o $39.99 al año, sin prueba.</p>`],
+      ["¿Qué hará Peace Be Still?", `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae todo en español: chat bíblico, historias y Salmos susurrados para dormir, con la Reina-Valera 1909 palabra por palabra. La pantalla siempre está oscura y un temporizador apaga la voz poco a poco. La primera noche es gratis y luego una por semana; un plan de pago cuesta $7.99 al mes o $39.99 al año, sin prueba.</p>`],
     ],
     faq: [
       ["¿Qué salmo leer para dormir tranquilo?", `El Salmo 4 es el salmo tradicional de la noche. Su último versículo dice: ${q("PSA 4:8")} Después del 4, los más leídos de noche son el Salmo 23 y el Salmo 91.`],

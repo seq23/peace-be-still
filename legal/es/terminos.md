@@ -14,21 +14,21 @@ Estos términos se suman al [Contrato de Licencia de Usuario Final Estándar de 
 
 Usted debe tener al menos 13 años para usar el chat. Si tiene de 13 a 17 años, uno de sus padres o un tutor debe aceptar estos términos junto con usted. Si Solicitar la compra (Ask to Buy) está activado en Compartir en familia (Family Sharing), uno de los padres aprueba cada compra antes de que se haga. Los menores de 13 años pueden usar la Biblia, el audio y las sesiones para dormir con el permiso de uno de sus padres; a ellos no se les ofrece el chat.
 
-## La parte gratis y la parte de pago
+## Gratis y de pago
 
-La parte gratis es gratis y sin límite de tiempo: toda la Biblia en texto y en audio, la historia de hoy, un chat al día de hasta 10 mensajes, la primera noche para dormir y después una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, el diario, la racha y las tarjetas para compartir.
+La versión gratis es gratis y sin límite de tiempo: toda la Biblia en texto y en audio, la historia de hoy, un chat al día de hasta 10 mensajes, la primera noche para dormir y después una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, el diario, la racha y las tarjetas para compartir.
 
-La parte de pago agrega chat bíblico ilimitado, un chat que recuerda, una sesión cada noche, sesiones hechas para usted, todas las historias anteriores, planes más largos, temas para las declaraciones y descargas para usar sin conexión. El chat bíblico ilimitado son 100 mensajes privados al día, y después chat gratis (no privado). Con un uso muy intenso durante el mes, pasas antes al chat gratuito. Se vende por mes o por año.
+Un plan de pago agrega chat bíblico ilimitado, un chat que recuerda, una sesión cada noche, sesiones hechas para usted, todas las historias anteriores, planes más largos, temas para las declaraciones y descargas para usar sin conexión. El chat bíblico ilimitado son 100 mensajes privados al día, y después chat gratis (no privado). Con un uso muy intenso durante el mes, pasas antes al chat gratuito. Se vende por mes o por año.
 
 Lo que es gratis sigue siendo gratis. Mientras siga suscrito, su precio no sube.
 
 ## Pagos, renovación y cancelación
 
-Apple le muestra el precio y las condiciones de renovación antes de que compre, y cobra a su cuenta de Apple. No hay período de prueba. Una suscripción se renueva automáticamente al final de cada mes o de cada año, a menos que la cancele al menos 24 horas antes de que se renueve. Adminístrela o cancélela cuando quiera en la [configuración de suscripciones de Apple](https://apps.apple.com/account/subscriptions); borrar la app no cancela una suscripción. Después de cancelar, la parte de pago sigue activa hasta el final del período que pagó. Puede restaurar sus compras en la app. Apple se encarga de los cobros y de los reembolsos según sus propios términos.
+Apple le muestra el precio y las condiciones de renovación antes de que compre, y cobra a su cuenta de Apple. No hay período de prueba. Una suscripción se renueva automáticamente al final de cada mes o de cada año, a menos que la cancele al menos 24 horas antes de que se renueve. Adminístrela o cancélela cuando quiera en la [configuración de suscripciones de Apple](https://apps.apple.com/account/subscriptions); borrar la app no cancela una suscripción. Después de cancelar, el plan de pago sigue activo hasta el final del período que pagó. Puede restaurar sus compras en la app. Apple se encarga de los cobros y de los reembolsos según sus propios términos.
 
 ## El chat y la IA
 
-Las respuestas del chat las escribe una IA y van marcadas como IA. Pueden estar equivocadas, incompletas o no servir de ayuda. Las Escrituras que aparecen en una respuesta se insertan de la King James Version o de la Reina-Valera 1909 guardadas en la app; el resto de la respuesta es texto de IA, no las palabras de un pastor, de un consejero ni de ninguna persona. En el chat gratis, lo que usted escribe va a proveedores gratuitos de IA que pueden guardarlo, como explica la política de privacidad, así que no incluya nombres ni datos privados. El chat de pago va a un servicio de IA de pago que no lo usa para entrenar su IA. Un mensaje que parece de riesgo se responde con líneas de ayuda para crisis y en la parte privada, en cualquiera de las dos partes. No dependa de la app para emergencias ni para decisiones médicas, legales o financieras; vea el aviso importante.
+Las respuestas del chat las escribe una IA y van marcadas como IA. Pueden estar equivocadas, incompletas o no servir de ayuda. Las Escrituras que aparecen en una respuesta se insertan de la King James Version o de la Reina-Valera 1909 guardadas en la app; el resto de la respuesta es texto de IA, no las palabras de un pastor, de un consejero ni de ninguna persona. En el chat gratis, lo que usted escribe va a proveedores gratuitos de IA que pueden guardarlo, como explica la política de privacidad, así que no incluya nombres ni datos privados. El chat de pago va a un servicio de IA de pago que no lo usa para entrenar su IA. Un mensaje que parece de riesgo se responde con líneas de ayuda para crisis y con la IA privada, gratis o de pago. No dependa de la app para emergencias ni para decisiones médicas, legales o financieras; vea el aviso importante.
 
 ## Cómo usar bien la app
 

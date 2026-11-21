@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
+import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { PAID_CHAT_MESSAGES } from '../src/gates';
 
@@ -59,4 +60,16 @@ test('the terms and privacy policy name every time free chat is offered to a pai
     ['legal/es/terminos.md', 'o mientras el servicio de pago no esté disponible'], ['legal/es/privacidad.md', 'o mientras el servicio de pago no esté disponible'], ['site/public/es/terminos.html', 'o mientras el servicio de pago no esté disponible'], ['site/public/es/privacidad.html', 'o mientras el servicio de pago no esté disponible']]) {
     assert.ok(read(f).includes(down), `${f} does not cover the outage path`);
   }
+});
+
+test('NEGATIVE: no customer-facing words say "lane" (internal jargon); code names may', () => {
+  const files = execSync('git ls-files app/src/i18n app/src/config/products.json store legal site/content site/public', { cwd: new URL('.', root) }).toString().split('\n')
+    .filter(f => /\.(json|md|mjs|html|txt|xml)$/.test(f));
+  assert.ok(files.length > 50, `only ${files.length} customer files found`);
+  const jargon = /\blanes?\b|\bparte (?:de pago|gratis|gratuita|privada)\b|\bdos partes\b/i;
+  // What a person reads: in a page, the text and attributes people see, not the class names.
+  const seen = (f: string) => (f.endsWith('.html') ? read(f).replace(/<(script|style)\b[\s\S]*?<\/\1>/g, ' ').replace(/\sclass="[^"]*"/g, ' ') : read(f));
+  for (const f of files) assert.doesNotMatch(seen(f), jargon, f);
+  const products = JSON.parse(read('app/src/config/products.json'));
+  assert.equal(products.subscriptionGroup['en-US'], 'Peace Be Still');
 });

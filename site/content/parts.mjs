@@ -14,7 +14,7 @@ const CTA = {
   en: {
     soonH: "Look for Peace Be Still in the App Store and Google Play",
     liveH: "Get Peace Be Still",
-    p: "Free to download, with a free lane that stays free. No ads, no trial.",
+    p: "Free to download, with a free version that stays free. No ads, no trial.",
     iosSoon: "Coming soon to the App Store · search “Peace Be Still”",
     playSoon: "Coming soon to Google Play · search “Peace Be Still”",
     iosAlt: "Download on the App Store",

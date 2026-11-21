@@ -1251,9 +1251,9 @@ const paidControls = (tree: ReactTestRenderer) => host(tree, 'Pressable').filter
 const restoreControl = (tree: ReactTestRenderer) => host(tree, 'Pressable').find(n => /restore purchases/i.test(textOf(n)))!;
 const gate = (tree: ReactTestRenderer) => texts(tree).at(-1);
 
-test('Settings opens the paid lane and its close control takes the visitor back', async () => {
+test('Settings opens the paid plan and its close control takes the visitor back', async () => {
   const settings = await mount('settings', readyForPaid);
-  await press(settings, /paid lane/i);
+  await press(settings, /paid plan/i);
   assert.deepEqual(calls, [['push', '/paid']]);
   const tree = await mount('paid', readyForPaid);
   assert.match(strings(tree), /App Store prices are unavailable/i);

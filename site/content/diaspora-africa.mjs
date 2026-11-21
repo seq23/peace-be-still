@@ -57,7 +57,7 @@ export const AFRICA = [
 <p>Whatever church you belong to, Pentecostal, Anglican, Methodist, Presbyterian, Baptist or independent, Peace Be Still keeps the text of Scripture at the centre and leaves the preaching to your pastor.</p>`],
       ["What Peace Be Still does today", `<p>The app is coming soon to the App Store. When it opens, this is what you will find:</p>
 ${TODAY_TABLE}
-<p>The free lane stays free. The paid lane is $7.99 a month or $39.99 a year. No ads, and no trial that turns into a charge.</p>`],
+<p>The free version stays free. A paid plan is $7.99 a month or $39.99 a year. No ads, and no trial that turns into a charge.</p>`],
       ["What is being built for January 2027", `<p>A journey for the way many African churches pray: prayer points that each stand on a verse, declarations for the morning, and an order for a night vigil you can keep at home or with your fellowship. It is still being built, so the details and the date may move.</p>
 <p>When it is ready, it will be on this page and on ${IG} first. We are not collecting emails for it.</p>
 ${V("HAB 2:3")}`],
@@ -71,7 +71,7 @@ ${V("PSA 118:17")}`],
       ["Which Bible does it use?", "The King James Version, read from a stored copy, with book, chapter and verse."],
       ["Is it for one church or denomination?", "No. It keeps to the text of Scripture so believers from Pentecostal, Anglican, Methodist, Presbyterian, Baptist and independent churches can all use it. For your own situation, it points you to your pastor."],
       ["Is the chat a pastor or a prophet?", "No. The Bible chat, arriving with the app's launch, is AI and will say so on every answer. It is not a pastor or a person; for your own situation, talk with your pastor."],
-      ["Is it free?", "Yes. The free lane stays free: the whole KJV to read and hear, today's story, one chat a day of up to 10 messages (chat arrives with the app's launch), your first sleep night and then one a week, and a daily declaration. The paid lane is $7.99 a month or $39.99 a year."],
+      ["Is it free?", "Yes. The free version stays free: the whole KJV to read and hear, today's story, one chat a day of up to 10 messages (chat arrives with the app's launch), your first sleep night and then one a week, and a daily declaration. A paid plan is $7.99 a month or $39.99 a year."],
     ],
     relatedTitle: "Prayer points and vigils",
     related: [...Object.values(AQ), "/questions/daily-bible-declarations/"],
