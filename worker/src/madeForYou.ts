@@ -112,12 +112,16 @@ export function draftShape(text: string): boolean {
 const proseSections = (text: string) => text.trim().split(/\n[ \t\r]*\n/).map(section => section.trim());
 
 /** The session script's gate: the chat's checkAnswer on every paragraph, the session floors, then the judge. */
-export async function madeForYouApprove(checkProse: CheckProse, judge: JudgeProse, input: Input, text: string, signal: AbortSignal): Promise<Approval> {
-  if (!draftShape(text)) return 'reject';
+export async function madeForYouApprove(checkProse: CheckProse, judge: JudgeProse, input: Input, text: string, signal: AbortSignal,
+  why: (reason: string) => void = () => {}): Promise<Approval> {
+  // why() receives codes only (never text): the measurement script counts reject reasons with it.
+  const reject = (reason: string) => { why(reason); return 'reject' as const; };
+  if (!draftShape(text)) return reject('shape');
   const n = norm(text);
-  if (PROMISE.test(n) || (input.kind === 'imagination' && FAITH.test(n))) return 'reject';
+  if (PROMISE.test(n)) return reject('floor:promise');
+  if (input.kind === 'imagination' && FAITH.test(n)) return reject('floor:faith_in_mindset');
   const words = n.trim().split(' ');
-  if (input.lang === 'en' && words.filter(w => ES_COMMON.has(w)).length / words.length > 0.05) return 'reject';
+  if (input.lang === 'en' && words.filter(w => ES_COMMON.has(w)).length / words.length > 0.05) return reject('floor:not_english');
   const context = {
     lang: input.lang, teen: input.teen, door: input.kind === 'psalm' ? 'faith' : 'mindset',
     translation: input.lang === 'es' ? 'RV1909' : 'KJV', userText: input.text,
@@ -126,10 +130,14 @@ export async function madeForYouApprove(checkProse: CheckProse, judge: JudgePros
     signal.throwIfAborted();
     const checked = await checkProse({ text: section, references: [] }, context);
     // Scripture is never in the prose: the stored verses are added by the template.
-    if (checked.ok ? checked.scripture.length > 0 : checked.problems.some(p => !CHAT_SHAPE.has(p))) return 'reject';
+    if (checked.ok && checked.scripture.length > 0) return reject('gate:scripture_in_prose');
+    const problems = checked.ok ? [] : checked.problems.filter(p => !CHAT_SHAPE.has(p));
+    if (problems.length) return reject(`gate:${problems.join('+')}`);
   }
   signal.throwIfAborted();
-  return judge(input, text, signal);
+  const verdict = await judge(input, text, signal);
+  if (verdict === 'reject') why('judge');
+  return verdict;
 }
 
 const SESSION_CHECKS = ['wrong_language', 'door_violation', 'invented_or_quoted_scripture', 'health_or_outcome_promise',
@@ -139,7 +147,7 @@ const SESSION_CHECKS = ['wrong_language', 'door_violation', 'invented_or_quoted_
 export async function madeForYouJudge(
   ladder: (messages: Message[], schema: Schema, valid: (value: unknown) => boolean) => Promise<LadderResult>,
   shared: { schema: Schema; verdict(data: unknown): { verdict: 'pass' | 'fail' | 'down' } },
-  input: Input, text: string,
+  input: Input, text: string, why: (reason: string) => void = () => {},
 ): Promise<Approval> {
   const schema = {
     ...shared.schema,
@@ -164,7 +172,11 @@ export async function madeForYouJudge(
   ], schema, value => !!value && typeof value === 'object' &&
     SESSION_CHECKS.every(key => typeof flags(value)[key] === 'boolean') && shared.verdict(value).verdict !== 'down');
   if ('empty' in result) return 'down';
-  return shared.verdict(result.data).verdict === 'pass' && SESSION_CHECKS.every(key => flags(result.data)[key] === false) ? 'pass' : 'reject';
+  const raised = Object.entries(flags(result.data)).filter(([key, value]) => value === true).map(([key]) => key);
+  const voice = flags(result.data).voice;
+  const pass = shared.verdict(result.data).verdict === 'pass' && SESSION_CHECKS.every(key => flags(result.data)[key] === false);
+  if (!pass) why(`judge:${[...raised, ...(typeof voice === 'number' && voice < 4 ? [`voice_${voice}`] : [])].join('+') || 'fail'}`);
+  return pass ? 'pass' : 'reject';
 }
 
 // ---------------------------------------------------------------- the nightly promise
@@ -293,7 +305,7 @@ async function runnerAllowed(request: Request, secret: string | undefined) {
     new Uint8Array(expected).reduce((diff, byte, i) => diff | (byte ^ new Uint8Array(supplied)[i]), 0) === 0;
 }
 
-function draftMessages(row: Row, note: string): Message[] {
+export function draftMessages(row: Pick<Row, 'kind' | 'lang' | 'teen'>, note: string): Message[] {
   return [
     { role: 'system', content: [
       `Write spoken bedtime prose in ${row.lang === 'es' ? 'plain Latin American Spanish' : 'plain English'}, 950 to 1,050 words, in ten paragraphs of at most 100 words each, separated by blank lines.`,
