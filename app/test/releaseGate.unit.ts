@@ -254,6 +254,27 @@ test('the privacy policy names every AI provider on the chat ladder', () => {
   assert.deepEqual(disclosureIssues(read('legal/privacy.md'), providers.map((p: { disclosedAs: string }) => p.disclosedAs)), []);
 });
 
+// A reminder or notification promise (EN or ES). Figurative use ("as a reminder of what God said") is not a promise.
+const REMINDER = /\b(?:reminders?\s+(?:a|each|every|per)\s+(?:day|morning)|daily\s+reminders?|gentle\s+reminders?|push\s+notifications?|notifications?\b|recordatorios?\s+(?:suaves?\s+)?(?:al|cada|por)\s+(?:día|mañana)|recordatorios?\s+diarios?|recordatorios?\s+suaves?|notificaci\p{L}*)/iu;
+function reminderPromises(files: { where: string; text: string }[], deps: string[]): string[] {
+  if (deps.includes('expo-notifications')) return [];
+  return files.filter(f => REMINDER.test(f.text)).map(f => `${f.where} promises a reminder, but the app sends no notifications`);
+}
+const walk = (dir: string, ext: RegExp): string[] => readdirSync(join(ROOT, dir), { withFileTypes: true })
+  .flatMap(e => e.isDirectory() ? walk(join(dir, e.name), ext) : ext.test(e.name) ? [join(dir, e.name)] : []);
+
+test('no store, site or legal text promises a reminder the app does not send', () => {
+  const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
+  // The rule itself: a promise fails without a notification library, figurative use passes, the library clears it.
+  assert.equal(reminderPromises([{ where: 'x', text: 'One gentle reminder a day at most.' }], []).length, 1);
+  assert.equal(reminderPromises([{ where: 'x', text: 'con un solo recordatorio suave al día' }], []).length, 1);
+  assert.equal(reminderPromises([{ where: 'x', text: 'A declaration speaks God\'s Word, as a reminder of what is true.' }], []).length, 0);
+  assert.equal(reminderPromises([{ where: 'x', text: 'One gentle reminder a day at most.' }], ['expo-notifications']).length, 0);
+  const files = [...walk('store', /\.md$/), ...walk('legal', /\.md$/), ...walk('site/content', /\.mjs$/)].map(where => ({ where, text: read(where) }));
+  assert.ok(files.length > 20, 'the scan reads the store, legal and site files');
+  assert.deepEqual(reminderPromises(files, deps), []);
+});
+
 test('the privacy label matches the dependencies: no crash, analytics or ad SDK', () => {
   assert.deepEqual(diagnosticsIssues(read('store/privacy-label.md'), Object.keys({ ...pkg.dependencies, ...pkg.devDependencies })), []);
 });
