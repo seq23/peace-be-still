@@ -83,7 +83,7 @@ export default {
             }
             const lang = messages[0].content.includes('Spanish') ? 'es' : 'en';
             const paragraphs = cleanDraft(lang, short.has(rung.id) || short.has(rung.id.split(':')[0]) ? 4 : 10).split('\n\n');
-            paragraphs[paragraphs.length - 1] += ` Fixture ${rung.id}.`;
+            paragraphs[paragraphs.length - 1] += ` This draft came from ${rung.id}.`;
             return { paragraphs };
           },
         }));

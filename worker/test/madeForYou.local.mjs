@@ -145,7 +145,7 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   const first = (await (await call(id.owner, { body: note })).json()).id;
   const one = await (await claim(at)).json();
   assert.equal(one.job.id, first);
-  assert.match(one.job.reflection, /Fixture workers-ai\.$/);
+  assert.match(one.job.reflection, /This draft came from workers-ai\.$/);
   assert.equal(one.job.verses.length, 6);
   const scripted = await row(first);
   assert.equal(scripted.state, 'scripted');
@@ -154,7 +154,7 @@ test('the runner drafts on the shared ladder with its own budget, erases the not
   const second = (await (await call(id.other, { body: note })).json()).id;
   const two = await (await claim(at)).json();
   assert.equal(two.job.id, second, 'a leased row is skipped');
-  assert.match(two.job.reflection, /Fixture gemini-free:\S+\.$/);
+  assert.match(two.job.reflection, /This draft came from gemini-free:\S+\.$/);
   assert.equal(await db.prepare("SELECT n FROM chat_counts WHERE metric LIKE 'calls:mfy:draft:openrouter%' AND n > 0").first(), null);
   assert.deepEqual(await chatCounters(), before, 'chat counters never move');
 
