@@ -10,6 +10,33 @@ import { readFileSync } from "node:fs";
 export function storeConfig() {
   return JSON.parse(readFileSync(new URL("../config/store.json", import.meta.url), "utf8"));
 }
+// Her ruling 21 Nov 2026: privacy leads. The approved claim, read from the app's own strings so the site
+// can never say more than the app (app/src/i18n; "never used to train AI", not "not kept": see
+// app/app/paid/index.tsx for the source on Google's paid-tier logging).
+const appStrings = (lang) => JSON.parse(readFileSync(new URL(`../../app/src/i18n/${lang}.json`, import.meta.url), "utf8"));
+export function privacyClaim(lang) {
+  if (lang !== "en" && lang !== "es") return null; // no approved Korean wording yet
+  const s = appStrings(lang);
+  return { head: s["paid.chatHeadline"], promise: s["paid.noTraining"] };
+}
+/** The claim as the page lead (home hero, the Bible chat pages). */
+export function claimHtml(lang) {
+  const c = privacyClaim(lang);
+  return c ? `<p class="claim"><b>${c.head}.</b> ${c.promise}</p>` : "";
+}
+// Which page sent a buyer: the page's path as a campaign name on each store link (Apple App Analytics
+// reads ct, with pt = her provider token from App Store Connect once store.json has it; Google Play
+// reads the referrer's utm fields).
+export function sourceOf(relPath) {
+  const p = String(relPath).replace(/^\/+/, "").replace(/(?:^|\/)index\.html$/, "").replace(/\.html$/, "").replace(/\/+$/, "");
+  return (p || "home").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+}
+const tagged = (url, store, kind, source) => {
+  if (!source) return url;
+  const sep = url.includes("?") ? "&" : "?";
+  if (kind === "ios") return `${url}${sep}${store.app_store_pt ? `pt=${encodeURIComponent(store.app_store_pt)}&` : ""}ct=${source}&mt=8`;
+  return `${url}${sep}referrer=${encodeURIComponent(`utm_source=peacebestillapp.com&utm_medium=site&utm_campaign=${source}`)}`;
+};
 const CTA = {
   en: {
     soonH: "Look for Peace Be Still in the App Store and Google Play",
@@ -47,19 +74,19 @@ export const langOf = (html) => {
   const l = (String(html).match(/<html lang="(\w+)"/) || [])[1];
   return LANGS.includes(l) ? l : "en";
 };
-export function storeCtaHtml(lang, store = storeConfig()) {
+export function storeCtaHtml(lang, store = storeConfig(), source = "") {
   const t = CTA[LANGS.includes(lang) ? lang : "en"];
   const ios = store.app_store_url
-    ? `<a class="store-badge" href="${store.app_store_url}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
+    ? `<a class="store-badge" href="${tagged(store.app_store_url, store, "ios", source)}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
     : `<span class="store-soon">${t.iosSoon}</span>`;
   const play = store.play_url
-    ? `<a class="store-badge" href="${store.play_url}"><img src="/brand/stores/google-play-${lang === "es" ? "es" : "en"}.png" alt="${t.playAlt}" width="135" height="52"></a>`
+    ? `<a class="store-badge" href="${tagged(store.play_url, store, "play", source)}"><img src="/brand/stores/google-play-${lang === "es" ? "es" : "en"}.png" alt="${t.playAlt}" width="135" height="52"></a>`
     : `<span class="store-soon">${t.playSoon}</span>`;
   const h = store.app_store_url || store.play_url ? t.liveH : t.soonH;
   return `<!-- cta:start --><section class="wrap" id="get-the-app" aria-labelledby="cta-h">
   <div class="card cta-card">
     <h2 id="cta-h">${h}</h2>
-    <p>${t.p}</p>
+    <p>${t.p}</p>${privacyClaim(lang) ? `\n    <p class="cta-privacy">${privacyClaim(lang).promise}</p>` : ""}
     <ul class="stores">
       <li>${ios}</li>
       <li>${play}</li>

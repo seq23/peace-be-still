@@ -3,7 +3,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { storeCtaHtml, storeConfig, langOf } from "../content/parts.mjs";
+import { claimHtml, storeCtaHtml, storeConfig, langOf, sourceOf } from "../content/parts.mjs";
 
 const IOS = "https://apps.apple.com/us/app/peace-be-still/id1234567890";
 const PLAY = "https://play.google.com/store/apps/details?id=com.example.pbs";
@@ -46,10 +46,34 @@ test("every built page carries the CTA only from the component, up to date with 
     const s = readFileSync(p, "utf8");
     const lang = langOf(s);
     const blocks = s.match(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g) || [];
-    for (const b of blocks) assert.equal(b, storeCtaHtml(lang, store), `${p}: stale or hand-edited CTA (run node site/scripts/apply-cta.mjs)`);
+    for (const b of blocks) assert.equal(b, storeCtaHtml(lang, store, sourceOf(p.slice(pub.length))), `${p}: stale or hand-edited CTA (run node site/scripts/apply-cta.mjs)`);
     const outside = s.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, "");
     assert.doesNotMatch(outside, /store-badge|store-soon|\/brand\/stores\/|id="waitlist"|#waitlist|action="\/api\/waitlist"/, `${p}: a CTA or waitlist outside the component`);
     if (blocks.length) withCta++;
   }
   assert.ok(pages.length > 0 && withCta >= 10, `only ${withCta} of ${pages.length} pages carry the store CTA`);
+});
+
+test("privacy leads (her ruling 21 Nov 2026): the home hero and the Bible chat pages open with the app's approved claim, and every EN/ES store CTA carries the training promise", () => {
+  const pub = new URL("../public/", import.meta.url).pathname;
+  for (const [f, lang] of [["index.html", "en"], ["es/index.html", "es"], ["free-bible-chat/index.html", "en"], ["es/chat-biblico-gratis/index.html", "es"]]) {
+    const s = readFileSync(join(pub, f), "utf8");
+    const claim = claimHtml(lang);
+    assert.ok(claim.includes("never used to train AI") || claim.includes("nunca se usan para entrenar IA"), lang);
+    const at = s.indexOf(claim);
+    assert.ok(at > 0 && at - s.indexOf("</h1>") < 80, `${f}: the claim is not the lead under the heading`);
+  }
+  const store = storeConfig();
+  for (const lang of ["en", "es"]) assert.match(storeCtaHtml(lang, store), /class="cta-privacy"/);
+  assert.doesNotMatch(storeCtaHtml("ko", store), /cta-privacy/);
+});
+
+test("each page's store links name the page that sent the buyer", () => {
+  const store = { app_store_url: "https://apps.apple.com/us/app/peace-be-still/id1", play_url: "https://play.google.com/store/apps/details?id=x", app_store_pt: "123" };
+  const h = storeCtaHtml("en", store, sourceOf("questions/hallow-app-cost/index.html"));
+  assert.match(h, /id1\?pt=123&ct=questions-hallow-app-cost&mt=8"/);
+  assert.match(h, /details\?id=x&referrer=utm_source%3Dpeacebestillapp\.com%26utm_medium%3Dsite%26utm_campaign%3Dquestions-hallow-app-cost"/);
+  assert.equal(sourceOf("index.html"), "home");
+  assert.equal(sourceOf("es/index.html"), "es");
+  assert.doesNotMatch(storeCtaHtml("en", store), /ct=|referrer=/); // a link with no page says nothing
 });
