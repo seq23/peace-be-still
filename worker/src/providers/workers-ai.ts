@@ -6,16 +6,17 @@ export function workersAi(ai: Ai, model: string, opts: { temperature?: number } 
     let last: RungError = new RungError('failed', 'WORKERS_AI_ERROR');
     for (let attempt = 0; attempt < 2; attempt++) {
       if (attempt) await sleep(backoff.ms(attempt));
-      let out: { response?: unknown };
+      let out: { response?: unknown; choices?: Array<{ message?: { content?: unknown } }> };
       try {
-        out = (await ai.run(model as keyof AiModels, { messages, response_format: { type: 'json_schema', json_schema: schema }, max_tokens: maxTokens, ...(opts.temperature === undefined ? {} : { temperature: opts.temperature }) } as never)) as { response?: unknown };
+        out = (await ai.run(model as keyof AiModels, { messages, response_format: { type: 'json_schema', json_schema: schema }, max_tokens: maxTokens, ...(opts.temperature === undefined ? {} : { temperature: opts.temperature }) } as never)) as typeof out;
       } catch (error) {
         const s = String(error);
         if (/4006|daily free allocation|neurons/i.test(s)) throw new RungError('exhausted', 'WORKERS_AI_DAILY');
         last = new RungError(/429|3040|capacity|rate/i.test(s) ? 'rate_limited' : 'failed', 'WORKERS_AI_ERROR');
         continue;
       }
-      return parseJson(out?.response);
+      // Newer chat models (gpt-oss, GLM, DeepSeek) answer in the chat-completions shape.
+      return parseJson(out?.response ?? out?.choices?.[0]?.message?.content);
     }
     throw last;
   };
