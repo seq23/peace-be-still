@@ -228,7 +228,7 @@ ${PLAY_STEPS}`],
 </ul>
 <p>Abide says uninstalling the app or deleting your account does not cancel, and you keep Premium until the end of the current billing period. Source: ${a(L.abideCancel, "Abide Help, “How Do I CANCEL My Premium Subscription?”")} (updated 6 Oct 2026, read ${READ}).</p>`],
       ["How to cancel Dwell", `<ul>
-<li><strong>Bought on the Dwell website:</strong> go to dwellapp.io/account/subscription, under “Billing and Subscription”, or in the app tap the gear icon (top left) › Subscription and follow the prompts. Dwell's team also offers to cancel a website subscription for you by email.</li>
+<li><strong>Bought on the Dwell website:</strong> open <a rel="nofollow noopener" href="https://dwellapp.io/account/subscription">your Dwell account page</a> and use the “Billing and Subscription” section, or in the app tap the gear icon (top left) › Subscription and follow the prompts. Dwell's team also offers to cancel a website subscription for you by email.</li>
 <li><strong>Bought in the App Store or Google Play:</strong> cancel with that store (steps above). Dwell says it cannot cancel store subscriptions for you.</li>
 </ul>
 <p>Source: ${a(L.dwellCancel, "Dwell Help, “How do I cancel my Dwell subscription?”")} (published 21 May 2026, read ${READ}).</p>`],
@@ -239,7 +239,7 @@ ${PLAY_STEPS}`],
 <tr><td>Pray.com</td><td>Apple, Google Play, pray.com</td><td>The store, or your pray.com account</td><td>None found (${READ})</td></tr>
 <tr><td>Glorify</td><td>Apple, Google Play</td><td>The store</td><td>${a(L.glorifyCancel, "Glorify Help")}</td></tr>
 <tr><td>Abide</td><td>Apple, Google Play, Abide website</td><td>The store, or More › Settings › Manage Subscription</td><td>${a(L.abideCancel, "Abide Help")}</td></tr>
-<tr><td>Dwell</td><td>Apple, Google Play, Dwell website</td><td>The store, or dwellapp.io account › Billing and Subscription</td><td>${a(L.dwellCancel, "Dwell Help")}</td></tr>
+<tr><td>Dwell</td><td>Apple, Google Play, Dwell website</td><td>The store, or your Dwell account › Billing and Subscription</td><td>${a(L.dwellCancel, "Dwell Help")}</td></tr>
 <tr><td>Bible Chat</td><td>Apple, Google Play</td><td>The store</td><td>${a(L.bibleChatCancel, "Its website")}</td></tr>
 <tr><td>Haven</td><td>Apple, Google Play, its website</td><td>The store, or the website you paid on</td><td>None listed (${READ})</td></tr>
 </tbody></table>
