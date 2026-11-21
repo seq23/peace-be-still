@@ -109,8 +109,9 @@ class RunWindow(unittest.TestCase):
         self.assertEqual(fill.window_minutes(at(23, 16, 59)), 0)
         self.assertEqual(fill.window_minutes(at(23, 7, 30)), 30)        # Mon 07:30: at most 30 minutes
         self.assertEqual(fill.window_minutes(at(23, 17)), 15 * 60)      # Mon 17:00 -> Tue 08:00
-        self.assertEqual(fill.window_minutes(at(21, 12)), 44 * 60)      # Sat noon runs, until Mon 08:00
-        self.assertEqual(fill.window_minutes(at(20, 17)), 63 * 60)      # Fri 17:00 -> Mon 08:00
+        self.assertEqual(fill.window_minutes(at(21, 12)), 0)            # Sat noon: no run (nights only, every day)
+        self.assertEqual(fill.window_minutes(at(21, 17)), 15 * 60)      # Sat 17:00 -> Sun 08:00
+        self.assertEqual(fill.window_minutes(at(20, 17)), 15 * 60)      # Fri 17:00 -> Sat 08:00
 
 
 class Manifest(unittest.TestCase):
