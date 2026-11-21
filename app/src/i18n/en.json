@@ -91,5 +91,8 @@
   "error.save": "Your choice could not be saved on this device. Please try again.",
   "error.read": "Your saved settings could not be read. Close and reopen the app to try again.",
   "notFound.title": "This page isn't here.",
-  "notFound.link": "Go to Today"
+  "notFound.link": "Go to Today",
+  "error.crash.title": "Something went wrong.",
+  "error.crash.body": "Tap Try again. If it keeps happening, close Peace Be Still and open it again. Your saved verses and journal are still on this phone.",
+  "error.crash.retry": "Try again ›"
 }

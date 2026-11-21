@@ -80,7 +80,7 @@ You can delete paid chat memory and made-for-you sessions in Settings at any tim
 
 ## Changes
 
-When this policy changes, we post the new date here and show a notice in the app for material changes.
+When this policy changes, we post the change on this page and update the date on it.
 
 ## Contact
 
