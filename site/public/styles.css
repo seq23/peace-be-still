@@ -112,11 +112,11 @@ section{padding-top:56px;padding-bottom:56px}
 .jr h3{font-size:18px}
 .jr .door-lab{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted)}
 
-/* lanes */
-.lanes{display:grid;gap:16px}
-@media (min-width:760px){.lanes{grid-template-columns:1fr 1fr}}
-.lane .price{font-family:var(--mono);font-size:22px}
-.lane.paid{border:2px solid var(--still-water)}
+/* price plans */
+.plans{display:grid;gap:16px}
+@media (min-width:760px){.plans{grid-template-columns:1fr 1fr}}
+.plan .price{font-family:var(--mono);font-size:22px}
+.plan.paid{border:2px solid var(--still-water)}
 .ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .ticks li{display:flex;gap:10px}
 .ticks li::before{content:"✓";color:var(--still-water);font-weight:700;flex:none}
@@ -213,3 +213,13 @@ q.v{font-family:var(--serif);font-style:italic}
 /* Prayer points: a numbered prayer, then the verse it stands on. */
 .qa ol.points{gap:16px}
 .qa ol.points>li>p{margin:0 0 6px}
+/* Home: two equal doors (21 Nov 2026). The God's Word card carries the dawn line; Mindset, still water. */
+@media (min-width:860px){.hero.solo{grid-template-columns:1fr}.hero.solo .hero-text{max-width:42em}}
+.door-card{border-top:4px solid var(--still-water)}
+.door-card:first-child{border-top-color:var(--dawn)}
+.door-card ul{flex:1}
+.door-go{margin-top:6px;min-height:44px;display:inline-flex;align-items:center}
+.door-section{margin-top:56px}
+.door-section .door-lab{display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted)}
+.door-section .door-lab img,.door-section .door-lab svg{width:28px;height:28px;flex:none}
+.sub-h{font-size:21px;margin:28px 0 12px}

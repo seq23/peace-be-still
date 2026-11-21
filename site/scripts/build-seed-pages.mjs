@@ -9,6 +9,7 @@ import { PAGES } from "../content/questions.mjs";
 import { storeCtaHtml, headerHtml, footerHtml, BASE } from "../content/parts.mjs";
 import { applyCta } from "./apply-cta.mjs";
 import { legalPages } from "../content/legal.mjs";
+import { homeHtml } from "../content/home.mjs";
 
 const pub = new URL("../public/", import.meta.url).pathname;
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
@@ -38,7 +39,8 @@ function render(p) {
   const index = t.index;
   const indexName = t.indexName;
   const og = p.og || t.og;
-  const crumbs = [["Peace Be Still", p.lang === "ko" ? "/" : home], ...(p.lang === "ko" && p.path === index ? [] : [[indexName, index]])];
+  // A door's hub (the Mindset page) crumbs straight to home; question pages go through the index.
+  const crumbs = [["Peace Be Still", p.lang === "ko" ? "/" : home], ...((p.lang === "ko" && p.path === index) || p.hub ? [] : [[indexName, index]])];
   const ld = {
     "@context": "https://schema.org",
     "@graph": [
@@ -182,8 +184,11 @@ if (PAGES.length === 0) { console.error("NAMED STOP [NO_SEED_PAGES] content/ques
 for (const p of PAGES) write(p.path, render(p));
 write("/questions/", renderIndex("en", PAGES.filter((p) => p.lang === "en")));
 write("/es/preguntas/", renderIndex("es", PAGES.filter((p) => p.lang === "es")));
+// The two home pages (two equal doors), from site/content/home.mjs.
+writeFileSync(join(pub, "index.html"), homeHtml("en"));
+writeFileSync(join(pub, "es/index.html"), homeHtml("es"));
 // Shared parts inside the hand-written pages, between markers.
-const STATIC = [["index.html", "en", "/"], ["es/index.html", "es", "/es/"], ["about.html", "en", "/about"], ["support.html", "en", "/support"], ["es/soporte.html", "es", "/es/soporte"], ["404.html", "en", "/404"]];
+const STATIC = [["about.html", "en", "/about"], ["support.html", "en", "/support"], ["es/soporte.html", "es", "/es/soporte"], ["404.html", "en", "/404"]];
 let filled = 0;
 for (const [f, lang, path] of STATIC) {
   const file = join(pub, f);

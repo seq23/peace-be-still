@@ -13,8 +13,8 @@ const read = (f: string) => readFileSync(new URL(f, root), 'utf8').replace(/\u20
 // small print (with the enforced PAID_CHAT_MESSAGES). Every other place paid chat is described says the
 // same words, so nothing a person reads can drift from the setting.
 const strings = { en: JSON.parse(read('app/src/i18n/en.json')), es: JSON.parse(read('app/src/i18n/es.json')) };
-const claim = (lang: 'en' | 'es') => ({
-  head: String(strings[lang]['paid.chatHeadline']),
+const claim = (lang: 'en' | 'es', head: 'paid.chatHeadline' | 'paid.chatHeadlineMindset' = 'paid.chatHeadline') => ({
+  head: String(strings[lang][head]),
   promise: String(strings[lang]['paid.noTraining']),
   small: String(strings[lang]['paid.fairUse']).replace('%{count}', String(PAID_CHAT_MESSAGES)),
 });
@@ -23,6 +23,7 @@ const described: Array<[string, 'en' | 'es']> = [ // the language each file is m
   ['site/content/questions.mjs', 'en'], ['site/content/blitz-black.mjs', 'en'], ['site/content/blitz-apps.mjs', 'en'],
   ['site/public/index.html', 'en'], ['site/public/es/index.html', 'es'], ['site/public/terms.html', 'en'], ['site/public/es/terminos.html', 'es'],
   ['site/public/free-bible-chat/index.html', 'en'], ['site/public/es/chat-biblico-gratis/index.html', 'es'], ['site/public/black-bible-chat/index.html', 'en'], ['site/public/black-bible-app/index.html', 'en'], ['site/public/bible-app-for-women/index.html', 'en'],
+  ['site/public/mindset/index.html', 'en'], ['site/public/es/mentalidad/index.html', 'es'],
 ];
 const privacy = ['legal/privacy.md', 'legal/es/privacidad.md', 'site/public/privacy.html', 'site/public/es/privacidad.html'];
 const everywhere = [...described.map(([f]) => f), ...privacy, 'app/src/i18n/en.json', 'app/src/i18n/es.json', 'worker/src/replies.ts'];
@@ -39,8 +40,10 @@ test('wherever the "unlimited" claim appears, what it means and the small print 
   for (const [f] of described) {
     const text = read(f);
     let found = 0;
-    for (const lang of ['en', 'es'] as const) {
-      const c = claim(lang);
+    // Either headline: "Unlimited Bible chat, kept private" (God's Word) or "Unlimited chat, kept private"
+    // (Mindset and the two-door home pages, 21 Nov 2026); each must carry the promise and the small print.
+    for (const lang of ['en', 'es'] as const) for (const key of ['paid.chatHeadline', 'paid.chatHeadlineMindset'] as const) {
+      const c = claim(lang, key);
       for (const m of text.matchAll(new RegExp(c.head.replace(/^./, ch => `[${ch.toUpperCase()}${ch.toLowerCase()}]`), 'g'))) {
         found++;
         const near = text.slice(m.index!, m.index! + 700);

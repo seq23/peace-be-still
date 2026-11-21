@@ -3,7 +3,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { appStoreHref, claimHtml, storeCtaHtml, storeConfig, langOf, sourceOf } from "../content/parts.mjs";
+import { appStoreHref, claimHtml, claimKind, storeCtaHtml, storeConfig, langOf, sourceOf } from "../content/parts.mjs";
+import { doorOf } from "../scripts/apply-cta.mjs";
 
 const IOS = "https://apps.apple.com/us/app/peace-be-still/id1234567890";
 const PLAY = "https://play.google.com/store/apps/details?id=com.example.pbs";
@@ -46,7 +47,7 @@ test("every built page carries the CTA only from the component, up to date with 
     const s = readFileSync(p, "utf8");
     const lang = langOf(s);
     const blocks = s.match(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g) || [];
-    for (const b of blocks) assert.equal(b, storeCtaHtml(lang, store, sourceOf(p.slice(pub.length)), p.slice(pub.length)), `${p}: stale or hand-edited CTA (run node site/scripts/apply-cta.mjs)`);
+    for (const b of blocks) assert.equal(b, storeCtaHtml(lang, store, sourceOf(p.slice(pub.length)), p.slice(pub.length), doorOf(s)), `${p}: stale or hand-edited CTA (run node site/scripts/apply-cta.mjs)`);
     const outside = s.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, "");
     assert.doesNotMatch(outside, /store-badge|store-soon|\/brand\/stores\/|id="waitlist"|#waitlist|action="\/api\/waitlist"/, `${p}: a CTA or waitlist outside the component`);
     if (blocks.length) withCta++;
@@ -56,17 +57,27 @@ test("every built page carries the CTA only from the component, up to date with 
 
 test("privacy leads (her ruling 21 Nov 2026): the home hero and the Bible chat pages open with the app's approved claim, and every EN/ES store CTA carries the training promise", () => {
   const pub = new URL("../public/", import.meta.url).pathname;
-  for (const [f, lang] of [["index.html", "en"], ["es/index.html", "es"], ["free-bible-chat/index.html", "en"], ["es/chat-biblico-gratis/index.html", "es"]]) {
+  // The two-door home pages carry the claim with no faith words (21 Nov 2026); the Bible chat pages keep "Bible chat".
+  for (const [f, lang, kind, want] of [
+    ["index.html", "en", "any", /<b>With a paid plan: unlimited chat, kept private\.<\/b>/],
+    ["es/index.html", "es", "any", /<b>Con un plan de pago: chat ilimitado y privado\.<\/b>/],
+    ["free-bible-chat/index.html", "en", "bible", /<b>With a paid plan: unlimited Bible chat, kept private\.<\/b>/],
+    ["es/chat-biblico-gratis/index.html", "es", "bible", /<b>Con un plan de pago: chat bíblico ilimitado y privado\.<\/b>/],
+  ]) {
     const s = readFileSync(join(pub, f), "utf8");
-    const claim = claimHtml(lang);
+    assert.equal(claimKind(f, doorOf(s)), kind, f);
+    const claim = claimHtml(lang, kind);
     assert.ok(claim.includes("never used to train AI") || claim.includes("nunca se usan para entrenar IA"), lang);
     // Her yes 21 Nov 2026: the lead says it is the paid plan's, on the page and in the CTA box.
-    assert.match(claim, lang === "es" ? /<b>Con un plan de pago: chat bíblico ilimitado y privado\.<\/b>/ : /<b>With a paid plan: unlimited Bible chat, kept private\.<\/b>/, f);
+    assert.match(claim, want, f);
     const at = s.indexOf(claim);
     assert.ok(at > 0 && at - s.indexOf("</h1>") < 80, `${f}: the claim is not the lead under the heading`);
   }
   const store = storeConfig();
-  for (const lang of ["en", "es"]) assert.match(storeCtaHtml(lang, store), lang === "es" ? /class="cta-privacy"><b>Con un plan de pago: / : /class="cta-privacy"><b>With a paid plan: /);
+  for (const lang of ["en", "es"]) for (const door of ["faith", "neutral", "mindset"]) assert.match(storeCtaHtml(lang, store, "", "", door), lang === "es" ? /class="cta-privacy"><b>Con un plan de pago: / : /class="cta-privacy"><b>With a paid plan: /);
+  // A Mindset page's CTA box never says "Bible".
+  assert.doesNotMatch(storeCtaHtml("en", store, "", "questions/daily-affirmations/index.html", "mindset"), /Bible/);
+  assert.doesNotMatch(storeCtaHtml("es", store, "", "es/mentalidad/index.html", "mindset"), /bíblico/);
   assert.doesNotMatch(storeCtaHtml("ko", store), /cta-privacy/);
 });
 
