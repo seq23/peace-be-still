@@ -21,7 +21,8 @@ jobs:
   # Every site PR gets a real preview: a copy of site/public (noindex) published by the repo's one Pages
   # publisher (scripts/lib/pages-publish.mjs, the same path as the phone app preview) to the project
   # peace-be-still-site-preview on branch pr-<n> (static files only; the Worker's redirects and headers
-  # are not in it), then the routes from the PR body's "Preview routes:" line (default / and /es/) captured at 390 px light and dark and 1280 px by
+  # are not in it), then the routes from the PR body's "Preview routes:" line (validated by
+  # site/scripts/preview-routes.mjs; default / and /es/) captured at 390 px light and dark and 1280 px by
   # scripts/review-capture (artifact review-site-pr-<n>). Korean fonts are installed so Hangul renders.
   preview:
     needs: check
@@ -37,8 +38,8 @@ jobs:
         env:
           BODY: ${{ github.event.pull_request.body }}
         run: |
-          r=$(printf '%s' "$BODY" | sed -n 's/^Preview routes: *//p' | head -1 | tr -d '\r ')
-          echo "routes=${r:-/,/es/}" >> "$GITHUB_OUTPUT"
+          routes=$(node site/scripts/preview-routes.mjs)
+          echo "routes=$routes" >> "$GITHUB_OUTPUT"
       - name: Publish the preview
         id: pub
         env:
@@ -52,11 +53,13 @@ jobs:
       - name: Capture at 390 px and 1280 px
         env:
           PW_DIR: ${{ runner.temp }}/pw
+          PREVIEW_URL: ${{ steps.pub.outputs.url }}
+          ROUTES: ${{ steps.routes.outputs.routes }}
         run: |
           sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
           npm i --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/pw" playwright@1.62.1 >/dev/null
           "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install chromium >/dev/null
-          node scripts/review-capture/capture.mjs "${{ steps.pub.outputs.url }}" "${{ steps.routes.outputs.routes }}" "$RUNNER_TEMP/review"
+          node scripts/review-capture/capture.mjs "$PREVIEW_URL" "$ROUTES" "$RUNNER_TEMP/review"
           cat "$RUNNER_TEMP/review/summary.md" >> "$GITHUB_STEP_SUMMARY" || true
       - uses: actions/upload-artifact@v4
         if: always()
