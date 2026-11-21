@@ -2,7 +2,7 @@ import { env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
 import { cleanup } from '../src/cleanup';
 import { deleteMemory } from '../src/memory';
-import { closeStems, hashShape, planFor, RECENT_ALL, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Lane } from '../src/quality/variety';
+import { closeStems, hashShape, pictureStemsFor, planFor, RECENT_ALL, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Lane } from '../src/quality/variety';
 import type { LadderRung } from '../src/ladder';
 import type { Message } from '../src/providers/types';
 import { call, chat, deps, good, NOW, scripted, tokenFor } from './helpers';
@@ -178,5 +178,13 @@ describe('the plan code chooses before the model writes (round 5 rebuild)', () =
     expect(repeats(shapeOf(r401), [shapeOf(RT27)])).not.toContain('repeat_image');
     // A retold verse is still an image (r4-10 and q04, Psalm 46:1 in the same words).
     expect(repeats(shapeOf('Today, Psalm 46:1 tells us God is our refuge and strength, a very present help in trouble.'), [shapeOf('Whatever comes, God is our refuge and strength, a very present help in trouble.')])).toContain('repeat_image');
+  });
+  it.each(['en', 'es'] as const)('%s: any window of answers is handed different pictures (run 44847465310)', lane => {
+    const stems = pictureStemsFor(lane);
+    expect(new Set(stems).size).toBe(stems.length);
+    expect(stems.length).toBeGreaterThan(RECENT_ALL);
+    const pictureOf = (n: number, attempt = 0) => /(?:picture you may use, in your own words, is|imagen que puedes usar, con tus palabras, es) ([^;]+);/.exec(planFor(n, lane, 'faith', attempt).text)![1];
+    for (let start = 1; start < 120; start += 11) expect(new Set(Array.from({ length: RECENT_ALL + 1 }, (_, i) => pictureOf(start + i))).size).toBe(RECENT_ALL + 1);
+    expect(pictureOf(7, 2)).toBe(pictureOf(7)); // a rewrite keeps its picture
   });
 });

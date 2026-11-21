@@ -145,6 +145,20 @@ const CLOSE_ES: Array<[kind: 'B' | 'V', word: string]> = ([
   'V Esta', 'V Tu', 'B Camina', 'V Tienes', 'B Guarda', 'V Mira', 'B Vuelve', 'V Lee', 'B Busca', 'V Cuando', 'B Deja', 'V Junto', 'B Abre', 'V Aquí', 'V Siempre', 'V Nunca', 'B Toma', 'B Escucha', 'B Habla', 'B Ora', 'V Gracias',
 ] as const).map(s => s.split(' ') as ['B' | 'V', string]);
 const CLOSE_MINDSET = ['Breathe', 'Notice', 'Tomorrow', 'Let', 'Whatever', 'Rest', 'Picture', 'Even', 'One', 'Before', 'Small', 'Today', 'Keep', 'Give', 'Hold', 'Stay', 'Come', 'Leave', 'Carry', 'Name', 'When', 'Here', 'Each', 'Nothing', 'Quiet', 'Settle', 'Allow', 'Tonight', 'Listen', 'Start', 'Begin', 'Trust', 'Look', 'Return', 'Close', 'Slow', 'Write', 'Set', 'Take', 'Ease', 'Know'];
+// The one picture an answer may use, chosen by code like the closing word: more distinct stems than
+// the window, so two answers in the window are never handed the same picture (run 44847465310:
+// images were the main repeat once openings and closings were planned). Plain, safe, everyday things;
+// nothing a person with a body or a home would act out (no table, cup, porch or kitchen), nothing
+// that reads as a money promise (no seed, harvest or sowing).
+const PICTURE_EN = ['a lamp', 'a well', 'bread', 'a harbor', 'a river', 'a bridge', 'a candle', 'a quilt', 'a compass', 'a map', 'a mountain', 'a valley',
+  'roots', 'a vine', 'a rock', 'a shield', 'a fortress', 'sunrise', 'rain', 'a boat', 'a net', 'sheep', 'a key', 'a door', 'a window', 'a letter', 'a thread',
+  'a blanket', 'a coat', 'shoes', 'a ladder', 'a wall', 'a gate', 'a fire', 'oil', 'salt', 'a spring of water', 'a field', 'a nest', 'wings', 'a lighthouse',
+  'a tent', 'a garden wall', 'a clay pot', 'an anchor chain', 'stars', 'a compass needle'].filter((p, i, a) => a.findIndex(q => q.split(' ').at(-1)!.slice(0, 4) === p.split(' ').at(-1)!.slice(0, 4)) === i);
+const PICTURE_ES = ['una lámpara', 'un pozo', 'el pan', 'un puerto', 'un río', 'un puente', 'una vela', 'una cobija', 'una brújula', 'un mapa', 'una montaña', 'un valle',
+  'las raíces', 'una vid', 'una roca', 'un escudo', 'una fortaleza', 'el amanecer', 'la lluvia', 'una barca', 'una red', 'las ovejas', 'una llave', 'un umbral',
+  'una ventana', 'una carta', 'un hilo', 'un abrigo', 'unos zapatos', 'una escalera', 'un muro', 'un portón', 'el fuego', 'el aceite', 'la sal', 'un manantial',
+  'un campo', 'un nido', 'unas alas', 'un faro', 'una tienda', 'una vasija de barro', 'las estrellas'];
+const pictureStems = (list: string[]) => list.map(p => stem(fold(p.split(' ').at(-1)!)));
 const OPEN_EN = [
   'Open on one concrete thing she told you, in your own words (never by restating her question).',
   'Open with one plain, true sentence about God that meets what she wrote.',
@@ -162,14 +176,14 @@ const MIDDLE_EN = [
   'In the middle, give one concrete step she could take this week.',
   'In the middle, give the setting of one of your verses in a sentence: who said it, and when.',
   'In the middle, say one true thing about who God is that speaks to this.',
-  'In the middle, stay with the details she gave, in plain words, without pictures or metaphors.',
+  'In the middle, stay with the details she gave, in plain words.',
 ];
 const MIDDLE_ES = [
   'En el medio, cuenta en una o dos frases cómo una persona de la Biblia vivió algo parecido.',
   'En el medio, da un paso concreto que pueda dar esta semana.',
   'En el medio, da en una frase el contexto de uno de tus versículos: quién lo dijo y cuándo.',
   'En el medio, di algo verdadero sobre quién es Dios que hable a esto.',
-  'En el medio, quédate con los detalles que ella dio, en palabras sencillas, sin imágenes ni metáforas.',
+  'En el medio, quédate con los detalles que ella dio, en palabras sencillas.',
 ];
 const MIDDLE_MINDSET = [
   'In the middle, give one small thing she can picture or do in the next few minutes.',
@@ -182,7 +196,7 @@ const REST_EN = [
   ['honor', 'bring', 'find', 'walk', 'path', 'journey', 'season', 'navigate'],
   ['peace', 'wisdom', 'strength', 'steady', 'guide', 'light', 'gentle', 'space'],
   ['please', 'consider', 'respect', 'others', 'life', 'care', 'heavy', 'ground'],
-];
+].map((g, i) => [...g, ...[['importance', 'important', 'understand', 'understanding'], ['helpful', 'helps', 'guidance', 'provide'], ['seek', 'seeks', 'knowing', 'remember']][i]]); // + the Workers AI model's (run 44847465310)
 const REST_ES = [
   ['encontrar', 'camino', 'paso', 'guía'],
   ['paz', 'fuerza', 'carga', 'descanso'],
@@ -204,8 +218,8 @@ export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'fa
     const [kind, word] = pickClose(CLOSE_ES);
     const close = kind === 'B'
       ? `Termina con una bendición breve para ella, en una sola frase que le hable de tú y cuya primera palabra sea "${word}".`
-      : `Termina con una sola frase completa, con tus propias palabras y dicha a ella de tú, sobre lo que uno de tus versículos significa para ella hoy, nombrándolo por su referencia; no repitas ni cites sus palabras y no escribas "dice" después de la referencia. Su primera palabra es "${word}".`;
-    return { seq, text: `El plan de esta respuesta (síguelo; nunca lo menciones):\n- ${pick(OPEN_ES)}\n- ${door === 'mindset' ? MIDDLE_ES[[1, 4][m % 2]] : pick(MIDDLE_ES)}\n- Esta vez no uses estas palabras: ${rest(REST_ES)}.\n- Si estas reglas piden sugerir a su pastor o a un adulto de confianza, hazlo antes de la última frase, nunca en la primera.\n- ${close} Nada después de esa frase.` };
+      : `Termina con una sola frase completa, con tus propias palabras y dicha a ella de tú, sobre lo que uno de tus versículos significa para ella hoy, con su referencia entre paréntesis al final; no repitas ni cites sus palabras. Su primera palabra es "${word}".`;
+    return { seq, text: `El plan de esta respuesta (síguelo; nunca lo menciones):\n- ${pick(OPEN_ES)}\n- ${door === 'mindset' ? MIDDLE_ES[[1, 4][m % 2]] : pick(MIDDLE_ES)}\n- Esta vez no uses estas palabras: ${rest(REST_ES)}.\n- La única imagen que puedes usar, con tus palabras, es ${pickClose(PICTURE_ES)}; ninguna otra imagen ni metáfora.\n- Nunca escribas una referencia seguida de "dice" o "nos recuerda": di la idea con tus palabras y pon la referencia entre paréntesis después.\n- Si estas reglas piden sugerir a su pastor o a un adulto de confianza, hazlo antes de la última frase, nunca en la primera.\n- ${close} Nada después de esa frase.` };
   }
   if (lane === 'mindset' || door === 'mindset') {
     return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${OPEN_EN[[0, 2, 3][m % 3]]}\n- ${pick(MIDDLE_MINDSET)}\n- This time do not use these words: ${rest(REST_EN)}.\n- End on one calm sentence whose first word is "${pickClose(CLOSE_MINDSET)}". Nothing after that sentence.` };
@@ -213,8 +227,9 @@ export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'fa
   const [kind, word] = pickClose(CLOSE_EN);
   const close = kind === 'P'
     ? `End with a short prayer for her in ONE sentence whose first word is "${word}".`
-    : `End with ONE sentence, in your own words, on what one of your verses means for her today, naming it by its reference; do not retell or quote its words and do not write "says" or "reminds" after it. The sentence's first word is "${word}".`;
-  return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${pick(OPEN_EN)}\n- ${pick(MIDDLE_EN)}\n- This time do not use these words: ${rest(REST_EN)}.\n- If these rules ask you to suggest her pastor or a trusted adult, do it before the last sentence, never as the first one.\n- ${close} Nothing after that sentence.` };
+    : `End with ONE sentence, in your own words, on what one of your verses means for her today, with its reference in parentheses at the end; do not retell or quote its words. The sentence's first word is "${word}".`;
+  return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${pick(OPEN_EN)}\n- ${pick(MIDDLE_EN)}\n- This time do not use these words: ${rest(REST_EN)}.\n- The one picture you may use, in your own words, is ${pickClose(PICTURE_EN)}; use no other picture or metaphor.\n- Never write a reference followed by "says", "tells us" or "reminds us": say the point in your own words and put the reference in parentheses after it.\n- If these rules ask you to suggest her pastor or a trusted adult, do it before the last sentence, never as the first one.\n- ${close} Nothing after that sentence.` };
 }
 /** For the tests: every closing word list has more distinct closing stems than the window. */
+export const pictureStemsFor = (lane: 'en' | 'es') => pictureStems(lane === 'es' ? PICTURE_ES : PICTURE_EN);
 export const closeStems = (lane: Lane) => (lane === 'es' ? CLOSE_ES.map(c => c[1]) : lane === 'mindset' ? CLOSE_MINDSET : CLOSE_EN.map(c => c[1])).map(w => stem(fold(w)));
