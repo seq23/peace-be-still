@@ -255,5 +255,9 @@
   "chat.free.private": "Paid chat is private.",
   "chat.free.continue": "Continue with free chat",
   "chat.free.makePrivate": "Make chat private",
-  "chat.paid.private": "Your chat is private: the paid AI service does not use what you type to improve its AI."
+  "chat.paid.private": "Your chat is private: the paid AI service does not use what you type to improve its AI.",
+  "chat.call.mx": "Call Línea de la Vida 800 911 2000",
+  "chat.call.024": "Call 024",
+  "chat.call.112": "Call 112",
+  "chat.findHelpline": "Find a crisis line where you are"
 }

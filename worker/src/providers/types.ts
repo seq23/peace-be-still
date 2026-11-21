@@ -7,7 +7,8 @@ export class RungError extends Error {
   constructor(readonly kind: RungErrorKind, code: string) { super(code); }
 }
 /** One rung: messages in, parsed JSON out (structured output on every provider; prose is never parsed). */
-export type Usage = { in: number; out: number; think: number };
+/** cached: input tokens served from the route's prompt cache (part of in). */
+export type Usage = { in: number; out: number; think: number; cached?: number };
 export type Rung = (messages: Message[], schema: JsonSchema, maxTokens: number, onUsage?: (u: Usage) => void) => Promise<unknown>;
 export function parseJson(value: unknown): unknown {
   if (value && typeof value === 'object') return value;

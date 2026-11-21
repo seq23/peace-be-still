@@ -4,6 +4,7 @@
 // Every AI answer has "Report this answer" (Apple Guideline 1.2): the answer and a reason are sent.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { randomUUID } from 'expo-crypto';
+import { getLocales } from 'expo-localization';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Linking, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
@@ -28,7 +29,11 @@ export function crisisLinks(res: ChatResponse): Array<{ label: Key; url: string 
   if (res.text.includes('1-800-222-1222')) links.push({ label: 'chat.call.poison', url: 'tel:18002221222' }, { label: 'chat.call.911', url: 'tel:911' });
   if (res.text.includes('1-800-422-4453')) links.push({ label: 'chat.call.childhelp', url: 'tel:18004224453' }, { label: 'chat.text.childhelp', url: 'sms:18004224453' });
   if (res.text.includes('1-800-799-7233')) links.push({ label: 'chat.call.dv', url: 'tel:18007997233' }, { label: 'chat.text.dv', url: 'sms:88788?body=START' });
-  links.push({ label: 'chat.call.988', url: 'tel:988' }, { label: 'chat.text.988', url: 'sms:988' });
+  // Outside the US the card names the lines where she is (by the phone's region).
+  if (res.text.includes('800 911 2000')) links.push({ label: 'chat.call.mx', url: 'tel:8009112000' }, { label: 'chat.call.911', url: 'tel:911' });
+  if (/\b024\b/.test(res.text)) links.push({ label: 'chat.call.024', url: 'tel:024' }, { label: 'chat.call.112', url: 'tel:112' });
+  if (res.text.includes('findahelpline.com')) links.push({ label: 'chat.findHelpline', url: 'https://findahelpline.com' });
+  if (res.text.includes('988')) links.push({ label: 'chat.call.988', url: 'tel:988' }, { label: 'chat.text.988', url: 'sms:988' });
   return links;
 }
 
@@ -121,12 +126,15 @@ export default function ChatScreen() {
   async function send() {
     const text = input.trim();
     if (!text || sending || closed) return;
-    const history: ChatTurn[] = [...entries.flatMap((e): ChatTurn[] => e.role === 'user' ? [{ role: 'user', text: e.text }] : e.role === 'reply' && e.res.ai ? [{ role: 'assistant', text: e.res.text }] : []), { role: 'user', text }];
+    const history: ChatTurn[] = [...entries.flatMap((e): ChatTurn[] => e.role === 'user' ? [{ role: 'user', text: e.text }] : e.role === 'reply' && e.res.ai ? [{ role: 'assistant', text: e.res.text }] : e.role === 'reply' && e.res.checkIn ? [{ role: 'assistant', text: e.res.checkIn.text }] : []), { role: 'user', text }];
     setEntries(list => [...list, { role: 'user', text }]);
     setInput('');
     setSending(true);
     try {
-      const res = await sendChat(settings, conversation, history, fetch, !paid && !!freeOk);
+      // The phone's region picks the crisis lines (988 in the US, Línea de la Vida in Mexico, 024 in Spain).
+      let region: string | null = null;
+      try { region = getLocales()[0]?.regionCode ?? null; } catch { region = null; }
+      const res = await sendChat(settings, conversation, history, fetch, !paid && !!freeOk, region);
       // Her consent is gone on the server's side (another device, cleared storage): ask again.
       if (res.kind === 'consent') { setFreeOk(false); void AsyncStorage.removeItem(FREE_CONSENT_KEY).catch(() => undefined); return; }
       setEntries(list => [...list, { role: 'reply', res }]);
@@ -155,6 +163,10 @@ export default function ChatScreen() {
         : <View key={i} testID={`reply-${e.res.kind}`} style={[s.bot, { backgroundColor: c.card, borderColor: c.line }]}>
           {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
           {e.res.reminder && <Text style={[s.body, { color: c.ink }]}>{t('chat.reminder')}</Text>}
+          {e.res.checkIn && <>
+            {e.res.checkIn.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
+            <Text testID="check-in" style={[s.body, { color: c.ink, fontFamily: 'Figtree_600SemiBold' }]}>{e.res.checkIn.text}</Text>
+          </>}
           <Text style={[s.body, { color: c.ink }]}>{e.res.text}</Text>
           {e.res.scripture.map(v => <View key={v.ref} style={s.verse}>
             <Text style={s.ref}>{`${v.ref} · ${v.translation === 'RV1909' ? 'RV1909' : 'KJV'}`}</Text>

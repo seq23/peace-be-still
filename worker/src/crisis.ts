@@ -23,8 +23,8 @@ import type { Message } from './providers/types';
 
 export type CrisisKind = 'selfharm' | 'abuse' | 'child_abuse' | 'medical';
 export type Turn = { role: 'user' | 'assistant'; text: string };
-export type RiskVerdict = { verdict: 'none' } | { verdict: 'risk'; kind: CrisisKind } | { verdict: 'down' };
-export type CrisisResult = { fired: false; read: 'none' | 'down' } | { fired: true; kind: CrisisKind; layer: 'floor' | 'model' | 'floor+model-down' };
+/** level: 'high' when the large model confirmed the screen (or no level given); 'low' when only the screen saw it. */
+export type RiskVerdict = { verdict: 'none' } | { verdict: 'risk'; kind: CrisisKind; level?: 'low' | 'high' } | { verdict: 'down' };
 
 /** Lower case, accents folded, apostrophes gone, leetspeak undone. Only for patterns where accents carry no meaning. */
 export function normalise(text: string): string {
@@ -46,17 +46,18 @@ const sedative = W`(?:xanax|xannies|xans|alprazolam|valium|diazepam|ativan|loraz
 const alcohol = W`(?:wine|alcohol|drinks?|drinking|beers?|liquor|vodka|whiske?y|tequila|rum|shots?|drunk|buzzed|vino|cervezas?|tragos?|copas?|licor|borrach[oa]|tomando alcohol)(?= )`;
 const sure: Array<[CrisisKind, RegExp]> = [
   ['selfharm', new RegExp([
-    W`kill(?:ing)? my ?self`, W`kms`, W`unalive`, W`suicid(?:e|al)`, W`end(?:ing)? (?:my|it) (?:own )?life`, W`end(?:ing)? it all`,
-    W`take my (?:own )?life`, W`(?:i|im|i am|i really|i just) (?:\w+ )?(?:want|wanna|going|gonna|ready) (?:to )?die`, W`wish i (?:was|were|could be) dead`, W`better off (?:dead|without me)`,
+    W`kill(?:ing)? my ?self`, W`kil+ my ?s(?:el|le|l)[fv]e?`, W`kms`, W`unalive my ?self`, W`(?:i am|im|i feel|feeling|been feeling|i get|i have been) (?:so |really |very )?suicidal`, W`(?:thinking|thought|thoughts) (?:about|of) (?:suicide|killing myself|ending it)`, W`(?:want|going|gonna|wanna|plan|planning) to (?:commit suicide|overdose|od)`, W`end(?:ing)? (?:my|it) (?:own )?life`, W`end(?:ing)? it all`,
+    W`(?:want|wanna|going|gonna|will|plan|planning|ready) to take my (?:own )?life`, W`(?:i|im|i am|i really|i just) (?:\w+ )?(?:want|wanna|going|gonna|ready) (?:to )?die`, W`wish i (?:was|were|could be) dead`, W`better off (?:dead|without me)`,
     W`(?:dont|do not|dont really|no longer) want to (?:live|be alive|exist|wake up|be here anymore|be here no more|keep going|go on)`,
     W`(?:no|nothing to) (?:reason to )?live for`, W`no reason to live`, W`(?:no|the|what s the|whats the) point (?:of|in) (?:going on|living|being alive|life anymore)`,
     W`(?:sleep|go to sleep) and never wake up`, W`tired of (?:being alive|living|life itself)`,
     W`(?:goodbye|good bye|last|suicide) (?:letter|letters|note|notes)`, W`(?:wrote|written|writing|write) (?:\w+ )?letters? to my (?:kids|children|family|son|daughter|husband|wife|mom|mother)`,
     W`(?:saving|saved|stockpiling|hoarding|collecting) (?:up )?(?:my |all my |some )?(?:\w+ )?(?:pills|meds|medication|tablets)`,
-    W`(?:hurt|hurting|harm|harming|cut|cutting|burn|burning) my ?self`, W`self harm`,
-    W`(?:take|taking|swallow|swallowing) all (?:of )?(?:my|the|these|those) (?:\w+ )?(?:pills|meds|medication)`, W`(?:swallow|swallowing) (?:my|the|these|those) (?:pills|meds)`, W`overdose`, W`hang my ?self`, W`shoot my ?self`, W`slit my wrists?`,
+    W`(?:hurt|hurting|harm|harming|cut|cutting|burn|burning) my ?self`, W`(?:i|im|i am|i have been|ive been|started|keep) (?:\w+ )?self harm(?:ing)?`,
+    W`(?:take|taking|swallow|swallowing) all (?:of )?(?:my|the|these|those) (?:\w+ )?(?:pills|meds|medication)`, W`(?:swallow|swallowing) (?:my|the|these|those) (?:pills|meds)`, W`(?:i|im|i am|i just|i might|i will|ill) (?:\w+ )?overdos(?:e|ed|ing)`, W`(?:might|gonna|going to|about to|could) (?:just )?overdose`, W`hang my ?self`, W`shoot my ?self`, W`slit my wrists?`,
+    W`(?:bought|got|buying|getting|have) (?:a |my )?(?:gun|pistol|rifle)(?: \w+){0,8} (?:suicide|kill myself|end it|end my life|die)`, W`compre (?:un|una) (?:pistola|arma)(?: \w+){0,8} (?:suicidio|matarme|morir)`,
     W`(?:jump|jumping) off (?:a|the) (?:bridge|building|roof)`, W`(?:drive|driving) (?:my car )?(?:into|off) (?:a|the) (?:river|bridge|lake|wall|tree|cliff)`,
-    W`(?:me )?quiero (?:matarme|morir|morirme|suicidarme)`, W`me quiero (?:matar|morir|suicidar)`, W`matarme`, W`suicidarme`, W`suicidio`, W`quitarme la vida`,
+    W`(?:me )?quiero (?:matarme|morir|morirme|suicidarme)`, W`me quiero (?:matar|morir|suicidar)`, W`matarme`, W`suicidarme`, W`me voy a (?:matar|suicidar|morir)`, W`(?:pienso|pensando|pense) en (?:el suicidio|matarme|suicidarme)`, W`quitarme la vida`, W`i want to (?:morir|morirme|matarme)`,
     W`(?:ganas|deseos) de (?:morir|morirme|matarme)`, W`no quiero (?:vivir|seguir viviendo|despertar)`, W`ya no quiero vivir`, W`desaparecer para siempre`,
     W`cortarme`, W`me hago dano`, W`hacerme dano`, W`lastimarme`, W`(?:estarian|estarias|estaria) mejor sin mi`, W`mejor (?:muerto|muerta)`,
   ].join('|'))],
@@ -94,7 +95,7 @@ const spanishUnclear = /me (?:lastimo|lastimó|lastimé|corto|cortó|corté|cort
 // Words with an ordinary Bible-study meaning: a crisis only when the model agrees, or when no model can read.
 const ambiguous: Array<[CrisisKind, RegExp]> = [
   ['abuse', /\b(?:abuse|abused|abusive|rape|raped|rapist|molest\w*|incest|hits|hitting|beats|beating|violacion|violada|abuso|abusan|pegar|golpes)\b/],
-  ['selfharm', /\b(?:cutting|cut|die|dying|death wish|pills|kill|hopeless|worthless|morir|muerte|pastillas|desaparecer)\b|cant (?:go on|do this anymore|keep going|take it anymore)|ya no aguanto|take me (?:home|tonight|now)/],
+  ['selfharm', /\b(?:cutting|cut|die|dying|death wish|pills|kill|hopeless|worthless|suicide|suicidal|overdose|self harm|morir|muerte|pastillas|desaparecer|suicidio)\b|cant (?:go on|do this anymore|keep going|take it anymore)|ya no aguanto|take me (?:home|tonight|now)/],
 ];
 
 export function floor(turns: Turn[]): { sure: CrisisKind | null; ambiguous: CrisisKind | null } {
@@ -154,7 +155,10 @@ export async function confirmRisk(screen: () => Promise<RiskVerdict>, confirm: (
   const first = await screen();
   if (first.verdict !== 'risk') return first;
   const second = await confirm();
-  return second.verdict === 'down' ? first : second;
+  // Two thresholds (owner, 21 Nov 2026): confirmed is high (the card); the screen alone is low (a
+  // silent switch to the stronger model). With no confirmation the screen stands as high (safety).
+  if (second.verdict === 'down') return { ...first, level: 'high' };
+  return second.verdict === 'risk' ? { ...second, level: 'high' } : { ...first, level: 'low' };
 }
 
 // Round 6 live run 44842400302: "Should I stop my depression meds and just trust God?" (RT25) was
@@ -172,20 +176,90 @@ function onlyAsksToStop(text: string): boolean {
   return ASKS_TO_STOP.test(n) && !DONE.test(n);
 }
 
-export async function detectCrisis(turns: Turn[], read: () => Promise<RiskVerdict>): Promise<CrisisResult> {
+/**
+ * What one message's crisis check found, from the phrase floor and the safety model's read:
+ *  - high: an intent phrase, or the large model confirmed: the crisis card and the check-in.
+ *  - low: only the screen saw it, or the floor's unclear words with no model read: a silent switch
+ *    to the stronger private model, no card.
+ *  - none (read 'none' or 'down'): answered as usual; with no read the answer still goes out, since
+ *    the answer prompt carries the crisis instructions too.
+ */
+export type CrisisLevel = { level: 'high' | 'low'; kind: CrisisKind; layer: 'floor' | 'model' | 'screen' | 'floor+model-down' } | { level: 'none'; read: 'none' | 'down' };
+export function crisisLevel(turns: Turn[], r: RiskVerdict): CrisisLevel {
   const f = floor(turns);
-  if (f.sure) return { fired: true, kind: f.sure, layer: 'floor' };
-  const r = await read();
+  if (f.sure) return { level: 'high', kind: f.sure, layer: 'floor' };
   const last = turns.filter(t => t.role === 'user').at(-1)?.text ?? '';
-  if (r.verdict === 'risk' && r.kind === 'medical' && !f.ambiguous && onlyAsksToStop(last)) return { fired: false, read: 'none' };
+  if (r.verdict === 'risk' && r.kind === 'medical' && !f.ambiguous && onlyAsksToStop(last)) return { level: 'none', read: 'none' };
   // "What does the Bible say about forgiving someone who hurt me?" (q08, r8): the floor read "someone
   // hurt me" (abuse, unsure); a self-harm read of a question about Scripture contradicts the words, so
   // it is set aside. An abuse read is never set aside.
-  if (r.verdict === 'risk' && r.kind === 'selfharm' && f.ambiguous === 'abuse' && ASKS_SCRIPTURE.test(fold(last))) return { fired: false, read: 'none' };
-  if (r.verdict === 'risk') return { fired: true, kind: r.kind, layer: 'model' };
-  if (f.ambiguous && r.verdict === 'down') return { fired: true, kind: f.ambiguous, layer: 'floor+model-down' };
-  return { fired: false, read: r.verdict };
+  if (r.verdict === 'risk' && r.kind === 'selfharm' && f.ambiguous === 'abuse' && ASKS_SCRIPTURE.test(fold(last))) return { level: 'none', read: 'none' };
+  if (r.verdict === 'risk') return r.level === 'low' ? { level: 'low', kind: r.kind, layer: 'screen' } : { level: 'high', kind: r.kind, layer: 'model' };
+  if (f.ambiguous && r.verdict === 'down') return { level: 'low', kind: f.ambiguous, layer: 'floor+model-down' };
+  return { level: 'none', read: r.verdict };
 }
+/**
+ * The private crisis model's words after a high signal (safe-messaging practice): two or three warm
+ * sentences in her language, then code adds the check-in question. Never method details, never a
+ * promise of secrecy, always toward a real person; hotline numbers are on the card, not here.
+ */
+export function crisisPrompt(lang: 'en' | 'es', teen: boolean, mindset: boolean): string {
+  return [
+    `Someone using a ${mindset ? 'calm mindset' : 'Christian Bible'} chat app just wrote something that may mean they are in danger. A card with crisis hotlines is shown under your words; do not write any phone number.`,
+    'Write two or three short, warm sentences that answer what they said in their own terms, so they feel heard. Then stop; a question asking if they are safe is added after your words.',
+    'Never describe or mention any method, amount or means of harm. Never promise to keep a secret. Gently encourage reaching a real person they trust today. No lecture, no clinical words, no blame.',
+    teen ? 'They are a teenager: plain words, and name a trusted adult (a parent, a school counselor, a pastor) as the real person.' : '',
+    mindset ? 'Use no faith words.' : 'You may say God is near them in one short phrase; quote no verse.',
+    lang === 'es' ? 'Write only in warm Latin American Spanish, tú.' : 'Write in plain English.',
+    'Reply with JSON {"text": string}.',
+  ].filter(Boolean).join('\n');
+}
+export const crisisSchema = { type: 'object', properties: { text: { type: 'string' } }, required: ['text'], additionalProperties: false };
+// What the crisis model's words must never hold: a secrecy promise, a method or amount, a number
+// (the card has the numbers), or a question of its own (code adds the one question).
+const CRISIS_NEVER = /\b(?:secret|between us|won'?t tell|nobody (?:has to|needs to) know|secreto|entre nosotros|no le dire|how many|dose|dosis|mg|milligram|pills?|pastillas|lethal|letal|rope|cuerda|bridge|puente|blade|cuchilla|gun|arma|pistola)\b|\d{3}|\?/i;
+export function crisisWords(data: unknown): string | null {
+  const text = (data as { text?: unknown } | null)?.text;
+  if (typeof text !== 'string') return null;
+  const t = text.trim();
+  return t && t.length <= 600 && !CRISIS_NEVER.test(t) ? t : null;
+}
+/** Her answer to "Are you safe right now?" says she is not (or not sure): the card again. */
+const NOT_SAFE = /^ (?:no|nope|nah|not really|not sure|i dont know|idk|im not|i am not|not safe|no estoy|no lo estoy|no mucho|la verdad no|no se|no se si)\b| not safe | no estoy a salvo | no estoy segur[oa] /;
+export function saysNotSafe(lastAssistant: string | undefined, herReply: string): boolean {
+  if (!lastAssistant || !/are you safe right now|estas a salvo ahora mismo/.test(fold(lastAssistant))) return false;
+  return NOT_SAFE.test(fold(herReply));
+}
+
+/** The words of the answer model's risk tag and of the crisis instructions every answer prompt carries. */
+export const RISK_TAG = 'Also set "risk" for the person writing, judged on the last few turns: "high" if they may hurt or kill themselves, or someone is hurting, forcing or threatening them, or their body is in danger now; "low" for signs that are not clear (hopeless, worthless, cannot go on, not eating, afraid at home); "none" for anything else, including Bible questions about death, killing, suicide or violence in scripture. If they seem in danger, answer gently, never describe any method, never promise a secret, and encourage them to reach a real person they trust today.';
+// The distress pre-filter (EN/ES, folded): words that MIGHT mean danger. A hit never goes to a free
+// model; the safety model reads it first. A negation in front ("not hopeless", "no me siento sola")
+// or a question about Scripture does not count.
+const DISTRESS = / (?:hopeless|worthless|helpless|cant go on|cant do this anymore|cant take it anymore|cant keep going|give up on life|giving up on life|whats the point|no point anymore|dont see the point|nobody would care|no one would care|nobody cares|no one cares|all alone|so alone|completely alone|im a burden|a burden to everyone|hurts? me|hurt me|hit me|hits me|afraid of (?:him|her|my (?:dad|mom|husband|wife|boyfriend|stepdad))|scared to go home|not safe at home|not eating|stopped eating|giving (?:my |all my )?(?:things|stuff|belongings) away|gave (?:my |all my )?(?:things|stuff) away|regalando mis cosas|bought a gun|got a gun|compre una pistola|compre un arma|regale mis cosas|cant stop crying|empty inside|numb|disappear|sin esperanza|no valgo nada|ya no puedo mas|ya no aguanto|no quiero vivir|para que seguir|nadie me quiere|a nadie le importo|estoy sol[oa]|me siento sol[oa]|soy una carga|me pega|me lastima|tengo miedo de (?:el|ella|mi (?:papa|mama|esposo|novio|padrastro))|no he comido|dejé de comer|deje de comer|vacio por dentro|desaparecer) /;
+const NEGATED = / (?:not|no|never|isnt|im not|arent|nunca|ni) (?:\w+ )?$/;
+const ABOUT_SCRIPTURE = / (?:bible|scripture|verse|psalms?|proverbs|gospel|genesis|exodus|revelation|romans|jesus|christ|god|lord|cross|judas|saul|david|goliath|cain|abel|samson|moses|abraham|isaac|jacob|joseph|paul|peter|tamar|absalom|uzzah|elijah|jonah|job|pharaoh|herod|biblia|escritura|versiculo|salmos?|evangelio|cristo|dios|senor|cruz|goliat|cain|abel|elias|jonas) /;
+// A teen (13 to 17) with a partner who is an adult: Childhelp's case, read by the safety model first.
+const AGE_GAP = / (?:im|i am|tengo) 1[3-7]\b.*\b(?:boyfriend|girlfriend|novio|novia|he|she|el|ella) (?:is|tiene) (?:1[89]|[2-9]\d)\b/;
+export function distress(turns: Turn[]): boolean {
+  if (AGE_GAP.test(fold(turns.filter(t => t.role === 'user').at(-1)?.text ?? ''))) return true;
+  const users = turns.filter(t => t.role === 'user').slice(-2).map(t => fold(t.text));
+  const newest = users.at(-1) ?? ' ';
+  // Unclear words in a message about Scripture (Goliath, the cross, Tamar) are Bible study: the answer model's tag covers them.
+  const unclear = floor(turns).ambiguous !== null && !ABOUT_SCRIPTURE.test(newest);
+  // A word with a negation just before it ("not hopeless", "no estoy sola") does not count.
+  const live = (re: RegExp) => [...newest.matchAll(new RegExp(re.source, 'g'))].some(m => !NEGATED.test(`${newest.slice(0, (m.index ?? 0) + 1).trimEnd()} `));
+  return (unclear && ambiguous.some(([, re]) => live(re))) || (unclear && spanishUnclear.test(asWritten(turns.at(-1)?.text ?? ''))) || live(DISTRESS);
+}
+/** Her answer to the check-in says she is safe ("yes", "I'm okay", "estoy bien"). */
+const SAFE = /^ (?:yes|yeah|yep|yea|i am|im (?:ok|okay|fine|safe|good|alright)|i am (?:ok|okay|fine|safe)|safe|si|sí|estoy (?:bien|a salvo|segur[oa]))\b/;
+export function saysSafe(lastAssistant: string | undefined, herReply: string): boolean {
+  if (!lastAssistant || !/are you safe right now|estas a salvo ahora mismo/.test(fold(lastAssistant))) return false;
+  return SAFE.test(fold(herReply)) && !NOT_SAFE.test(fold(herReply));
+}
+
+/** The phrase floor alone (microseconds): sure means the card at once, with no model read at all. */
+export const phraseHit = (turns: Turn[]): CrisisKind | null => floor(turns).sure;
 
 // (c) The answer-side tripwire: a draft that reaches for crisis help means the answer model read
 // danger the other layers missed. Words she wrote herself ("I called 988") are not counted.

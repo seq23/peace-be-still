@@ -8,7 +8,8 @@ import { centralDay } from '../src/day';
 import type { LadderRung } from '../src/ladder';
 
 const iid = (token: string) => JSON.parse(atob(token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'))).iid as string;
-const lanes = (free: LadderRung[], paid: LadderRung[]) => deps({ rungs: (_e, _n, lane) => (lane === 'paid' ? paid : free) });
+// The crisis lane is private too: in these tests it shares the paid list.
+const lanes = (free: LadderRung[], paid: LadderRung[]) => deps({ rungs: (_e, _n, lane) => (lane === 'paid' || lane === 'crisis' ? paid : free) });
 const answerText = (r: { body: { text: string } }) => r.body.text;
 afterEach(() => vi.restoreAllMocks());
 
@@ -48,7 +49,7 @@ describe('the free lane', () => {
 describe('the paid lane', () => {
   it('model ids come from env: GEMINI_MODELS for free, PAID_PROVIDER + PAID_MODEL (alone, priced) for paid', () => {
     expect(realDeps.rungs(env, NOW, 'paid').map(r => r.id)).toEqual([`paid-gemini:${env.PAID_MODEL}`]);
-    expect(realDeps.rungs(env, NOW, 'paid')[0].price).toEqual({ in: 0.3, out: 2.5 });
+    expect(realDeps.rungs(env, NOW, 'paid')[0].price).toEqual({ in: 0.3, out: 2.5, cached: 0.03 });
     expect(realDeps.rungs(env, NOW).filter(r => r.id.startsWith('gemini-free')).map(r => r.id)).toEqual(env.GEMINI_MODELS.split(',').map(m => `gemini-free:${m}`));
   });
   it('down: she is told so, and no free model is ever called', async () => {
@@ -178,5 +179,26 @@ describe('controls on one install', () => {
     expect(until - NOW).toBeGreaterThan(23 * 3600_000);
     // A crisis message from a paused install still gets the crisis card.
     expect((await chat(d, 'I want to kill myself', { token })).body.kind).toBe('crisis');
+  });
+});
+
+describe('cost per message', () => {
+  it('cached prompt tokens are billed at the cached price, and the no-cache cost is kept beside it', async () => {
+    const { microCost } = await import('../src/controls');
+    expect(microCost({ in: 4000, out: 300, think: 0, cached: 3000 }, 0.3, 2.5, 0.03)).toBe(Math.ceil(1000 * 0.3 + 3000 * 0.03 + 300 * 2.5));
+    expect(microCost({ in: 4000, out: 300, think: 0 }, 0.3, 2.5, 0.03)).toBe(Math.ceil(4000 * 0.3 + 300 * 2.5));
+  });
+  it('thinking is off for normal chat: a 2.5 model gets budget 0, a 3.x model its lowest level, and the fixed prompt leads the system text', async () => {
+    const { gemini } = await import('../src/providers/gemini');
+    const bodies: Array<Record<string, any>> = [];
+    vi.stubGlobal('fetch', async (_u: string, init: RequestInit) => { bodies.push(JSON.parse(String(init.body))); return new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: '{"text":"x","references":[],"risk":"none"}' }] } }], usageMetadata: { promptTokenCount: 10, candidatesTokenCount: 2, cachedContentTokenCount: 8 } })); });
+    const seen: unknown[] = [];
+    await gemini('k', 'gemini-2.5-flash-lite')([{ role: 'system', content: 'fixed' }, { role: 'user', content: 'hi' }], {}, 350, u => seen.push(u));
+    await gemini('k', 'gemini-3.5-flash-lite', { thinkingLevel: 'minimal' })([{ role: 'user', content: 'hi' }], {}, 350);
+    expect(bodies[0].generationConfig.thinkingConfig).toEqual({ thinkingBudget: 0 });
+    expect(bodies[1].generationConfig.thinkingConfig).toEqual({ thinkingLevel: 'minimal' });
+    expect(bodies[0].generationConfig.maxOutputTokens).toBe(350);
+    expect(seen[0]).toEqual({ in: 10, out: 2, think: 0, cached: 8 });
+    vi.unstubAllGlobals();
   });
 });

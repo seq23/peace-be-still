@@ -112,8 +112,21 @@ const medical: Record<MedicalCase, Record<Lang, string[]>> = {
 /** The fixed crisis reply. Abuse leads with the hotline for what is happening (Childhelp for a
  *  child or teen, the Domestic Violence Hotline for an adult), then 988 and 911. Medical danger
  *  leads with what not to do, then Poison Control, 911, her doctor, then 988. */
-export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '', door: Door = 'faith'): string {
+// Outside the US the US lines do not reach her (owner, 21 Nov 2026): Mexico's Línea de la Vida,
+// Spain's 024, else findahelpline.com, chosen by the device region (never by language alone).
+const regional: Record<'MX' | 'ES' | 'other', Record<Lang, string>> = {
+  MX: { en: 'Please call Línea de la Vida at 800 911 2000, free, any time. If you are in danger right now, call 911.', es: 'Por favor, llama a la Línea de la Vida al 800 911 2000, gratis, a cualquier hora. Si estás en peligro ahora mismo, llama al 911.' },
+  ES: { en: 'Please call 024, free, any time. If you are in danger right now, call 112.', es: 'Por favor, llama al 024, gratis, a cualquier hora. Si estás en peligro ahora mismo, llama al 112.' },
+  other: { en: 'Please reach a crisis line where you live: findahelpline.com lists free ones in your country. If you are in danger right now, call your local emergency number.', es: 'Por favor, busca una línea de crisis donde vives: findahelpline.com tiene líneas gratuitas en tu país. Si estás en peligro ahora mismo, llama al número de emergencias de tu país.' },
+};
+/** The device region (ISO alpha-2) to the card's lines: US (and US territories) keep the US lines. */
+export function regionOf(code: string | null | undefined): 'US' | 'MX' | 'ES' | 'other' {
+  const c = (code ?? '').toUpperCase();
+  return ['US', 'PR', 'GU', 'VI', 'AS', 'MP'].includes(c) ? 'US' : c === 'MX' ? 'MX' : c === 'ES' ? 'ES' : 'other';
+}
+export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '', door: Door = 'faith', region: 'US' | 'MX' | 'ES' | 'other' = 'US'): string {
   const mind = door === 'mindset';
+  if (region !== 'US') return [open[lang], regional[region][lang], ...(band === 'teen' ? [(door === 'mindset' ? trustedMindset : trusted)[lang]] : []), close[lang]].join(' ');
   const trust = mind ? trustedMindset : trusted;
   if (kind === 'medical') return [...medical[medicalCase(herText)][lang].map(line => mind ? line.replace(/ Faith and treatment go together\.| La fe y el tratamiento van juntos\./, '') : line), ...(band === 'teen' ? [trust[lang]] : []), close[lang]].join(' ');
   const child = kind === 'child_abuse' || (kind === 'abuse' && band === 'teen');
@@ -124,6 +137,14 @@ export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '
   parts.push(close[lang]);
   return parts.join(' ');
 }
+
+// The check-in that every crisis reply ends on (owner, 21 Nov 2026): warm, direct, never conditional.
+// The card and its hotlines are shown with it at once; the conversation is never stopped.
+export const checkInText = {
+  en: "It sounds like you're carrying something really heavy. Are you safe right now?",
+  es: 'Parece que estás cargando algo muy pesado. ¿Estás a salvo ahora mismo?',
+};
+export const checkInQuestion = { en: 'Are you safe right now?', es: '¿Estás a salvo ahora mismo?' };
 
 export const fallbackText = {
   en: "I couldn't put a good answer together just now. Hold on to this verse for a moment, then ask me again.",

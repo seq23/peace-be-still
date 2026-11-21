@@ -11,7 +11,7 @@ import { RungError, type JsonSchema, type Message, type Rung } from './providers
 import { microCost } from './controls';
 
 /** price: per-million-token dollars for a billed rung (the paid lane); its cost is tallied as paid_spend_micro. */
-export type LadderRung = { id: string; call: Rung; cap: number; day: string; price?: { in: number; out: number } };
+export type LadderRung = { id: string; call: Rung; cap: number; day: string; price?: { in: number; out: number; cached?: number } };
 export type Metrics = Map<string, number>;
 export const tally = (m: Metrics, key: string, by = 1) => m.set(key, (m.get(key) ?? 0) + by);
 export type LadderResult = { rung: string; data: unknown } | { empty: 'out' | 'busy' };
@@ -29,7 +29,12 @@ export async function runLadder(db: D1Database, rungs: LadderRung[], messages: M
     try {
       const data = await rung.call(messages, schema, maxTokens, u => {
         tally(metrics, `tok_in:${rung.id}`, u.in); tally(metrics, `tok_out:${rung.id}`, u.out); tally(metrics, `tok_think:${rung.id}`, u.think);
-        if (rung.price) tally(metrics, 'paid_spend_micro', microCost(u, rung.price.in, rung.price.out));
+        if (u.cached) tally(metrics, `tok_cached:${rung.id}`, u.cached);
+        if (rung.price) {
+          tally(metrics, 'paid_spend_micro', microCost(u, rung.price.in, rung.price.out, rung.price.cached));
+          // What the same call would have cost with no prompt cache: the saving is measured, not assumed.
+          tally(metrics, 'paid_spend_nocache_micro', microCost(u, rung.price.in, rung.price.out));
+        }
       });
       if (!valid(data)) throw new RungError('malformed', 'WRONG_SHAPE');
       tally(metrics, `ok:${rung.id}`);

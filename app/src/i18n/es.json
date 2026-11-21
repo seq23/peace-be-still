@@ -255,5 +255,9 @@
   "chat.free.private": "El chat de pago es privado.",
   "chat.free.continue": "Seguir con el chat gratis",
   "chat.free.makePrivate": "Hacer privado el chat",
-  "chat.paid.private": "Tu chat es privado: el servicio de IA de pago no usa lo que escribes para mejorar su IA."
+  "chat.paid.private": "Tu chat es privado: el servicio de IA de pago no usa lo que escribes para mejorar su IA.",
+  "chat.call.mx": "Llamar a la Línea de la Vida 800 911 2000",
+  "chat.call.024": "Llamar al 024",
+  "chat.call.112": "Llamar al 112",
+  "chat.findHelpline": "Buscar una línea de crisis donde estás"
 }

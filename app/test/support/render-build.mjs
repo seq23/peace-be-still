@@ -57,7 +57,7 @@ const MOCKS = {
     const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
     exports.Stack = layout('Stack'); exports.Tabs = layout('Tabs');`,
   'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
-  'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`,
+  'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en', regionCode: globalThis.__pbsRegion ?? 'US' }];`,
   '@react-native-async-storage/async-storage': `module.exports = { __esModule: true, default: globalThis.__pbsStorage };`,
   'expo-constants': `exports.__esModule = true; exports.default = { get expoConfig() { return globalThis.__pbsExpoConfig; } };`,
   'expo-crypto': `let n = 0; exports.randomUUID = () => '00000000-0000-4000-8000-' + String(++n).padStart(12, '0');`,

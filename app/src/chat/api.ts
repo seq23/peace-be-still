@@ -50,8 +50,8 @@ async function fetchToken(age: Age, fetcher: typeof fetch, refresh: boolean): Pr
 }
 
 /** freeConsent: she said yes on the free-chat screen (free chat goes to a free AI service that may keep it). */
-export async function sendChat(settings: Settings, conversation: string, messages: ChatTurn[], fetcher: typeof fetch = fetch, freeConsent = false): Promise<ChatResponse> {
-  const body = buildChatRequest(settings, conversation, messages, freeConsent);
+export async function sendChat(settings: Settings, conversation: string, messages: ChatTurn[], fetcher: typeof fetch = fetch, freeConsent = false, region: string | null = null): Promise<ChatResponse> {
+  const body = buildChatRequest(settings, conversation, messages, freeConsent, region);
   if (!body || !settings.age) throw new ChatError('chat closed');
   for (const refresh of [false, true]) {
     const res = await fetcher(`${CHAT_API}/chat`, {

@@ -46,9 +46,9 @@ export function openRouterPrivate(apiKey: string | undefined, model: string, hos
         provider: { zdr: true, data_collection: 'deny', only: hosts, allow_fallbacks: false },
         reasoning: { effort: 'low' },
         response_format: { type: 'json_schema', json_schema: { name: 'reply', strict: true, schema } } }),
-    }, { retries: 1 }) as { choices?: Array<{ message?: { content?: unknown } }>; usage?: { prompt_tokens?: number; completion_tokens?: number; completion_tokens_details?: { reasoning_tokens?: number } } };
+    }, { retries: 1 }) as { choices?: Array<{ message?: { content?: unknown } }>; usage?: { prompt_tokens?: number; completion_tokens?: number; completion_tokens_details?: { reasoning_tokens?: number }; prompt_tokens_details?: { cached_tokens?: number } } };
     const u = data.usage;
-    if (u && onUsage) { const think = u.completion_tokens_details?.reasoning_tokens ?? 0; onUsage({ in: u.prompt_tokens ?? 0, out: Math.max(0, (u.completion_tokens ?? 0) - think), think }); }
+    if (u && onUsage) { const think = u.completion_tokens_details?.reasoning_tokens ?? 0; onUsage({ in: u.prompt_tokens ?? 0, out: Math.max(0, (u.completion_tokens ?? 0) - think), think, cached: u.prompt_tokens_details?.cached_tokens ?? 0 }); }
     return parseJson(data.choices?.[0]?.message?.content);
   };
 }

@@ -56,8 +56,10 @@ export async function throttle(db: D1Database, secret: string, day: string, inst
 }
 
 /** Millionths of a dollar for one call at per-million-token prices (thinking is billed as output). */
-export function microCost(tokens: { in: number; out: number; think: number }, priceIn: number, priceOut: number): number {
-  return Math.ceil(tokens.in * priceIn + (tokens.out + tokens.think) * priceOut);
+/** Cost in millionths of a dollar. Cached input (a repeated prompt prefix the route caches) is billed at priceCached. */
+export function microCost(tokens: { in: number; out: number; think: number; cached?: number }, priceIn: number, priceOut: number, priceCached = priceIn): number {
+  const cached = Math.min(tokens.cached ?? 0, tokens.in);
+  return Math.ceil((tokens.in - cached) * priceIn + cached * priceCached + (tokens.out + tokens.think) * priceOut);
 }
 /** The month in Central time (YYYY-MM): both meters run on calendar months, CT. */
 export const monthOf = (now: number) => centralDay(now).slice(0, 7);
@@ -88,6 +90,22 @@ export async function capAlert(db: D1Database, now: number, level: 80 | 100, mic
   const fresh = (await db.prepare('INSERT INTO chat_counts (day, metric, n) VALUES (?, ?, 1) ON CONFLICT(day, metric) DO NOTHING').bind(monthOf(now), metric).run()).meta.changes === 1;
   if (fresh) logCode(level === 100 ? 'NAMED STOP CHAT_PAID_MONTHLY_CAP' : 'CHAT_PAID_CAP_80', { spentUsd: Math.round(micro / 1e4) / 100, capUsd, month: monthOf(now) });
   return fresh;
+}
+/** The safety model's monthly spend (counted as billed, though the daily free neurons cover most):
+ *  neurons x $0.011 per 1,000. Alerts at 80% (CHAT_SAFETY_CAP_80) and at the cap (NAMED STOP CHAT_SAFETY_MONTHLY_CAP). */
+export function safetyMicro(model: string): number {
+  const neurons = /70b/i.test(model) ? 20 : /guard|8b|3b|1b/i.test(model) ? 3 : 10;
+  return neurons * 11;
+}
+export async function safetyBudgetLeft(db: D1Database, now: number, capUsd: number): Promise<boolean> {
+  const micro = (await db.prepare("SELECT COALESCE(SUM(n), 0) AS n FROM chat_counts WHERE metric = 'safety_micro' AND day LIKE ?").bind(`${monthOf(now)}-%`).first<{ n: number }>())?.n ?? 0;
+  const alert = async (level: 80 | 100, code: string) => {
+    const fresh = (await db.prepare('INSERT INTO chat_counts (day, metric, n) VALUES (?, ?, 1) ON CONFLICT(day, metric) DO NOTHING').bind(monthOf(now), `safety_cap_alert:${level}`).run()).meta.changes === 1;
+    if (fresh) logCode(code, { spentUsd: Math.round(micro / 1e4) / 100, capUsd, month: monthOf(now) });
+  };
+  if (micro >= capUsd * 1e6) { await alert(100, 'NAMED STOP CHAT_SAFETY_MONTHLY_CAP'); return false; }
+  if (micro >= 0.8 * capUsd * 1e6) await alert(80, 'CHAT_SAFETY_CAP_80');
+  return true;
 }
 export async function spendStatus(db: D1Database, now: number, capUsd: number) {
   const micro = await appSpendMonth(db, now);

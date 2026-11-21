@@ -13,6 +13,8 @@ export type ChatRequest = {
   scripture?: boolean;
   /** She agreed, once, that free chat goes to a free AI service that may keep what she types. Free chat needs it. */
   freeConsent?: boolean;
+  /** The phone's region (ISO alpha-2, from its settings): which crisis lines reach her. */
+  region?: string;
 };
 export type ChatScripture = { ref: string; translation: 'KJV' | 'RV1909'; text: string; book: string; chapter: number; verse: number; endVerse?: number };
 // consent: free chat needs her one-time yes first. paused: chat is paused on this install (operator or
@@ -31,12 +33,15 @@ export type ChatResponse = {
   /** Teens: time for the "you're talking with an AI, take a break" reminder (California SB 243). */
   reminder: boolean;
   crisis?: 'selfharm' | 'abuse' | 'child_abuse' | 'medical';
+  /** Crisis replies: the words shown before the card, ending in "Are you safe right now?". ai is true when
+   *  the private crisis model wrote the first part; the card (text) and its hotlines are fixed, never AI. */
+  checkIn?: { text: string; ai: boolean };
   /** True when the text is a fixed line written in code (who it is; the one-translation note), not a model's words. */
   fixed?: boolean;
 };
 
 /** Null when chat is closed to her (under 13, or no door chosen yet). Only the last 12 turns travel. */
-export function buildChatRequest(settings: Settings, conversation: string, messages: ChatTurn[], freeConsent = false): ChatRequest | null {
+export function buildChatRequest(settings: Settings, conversation: string, messages: ChatTurn[], freeConsent = false, region?: string | null): ChatRequest | null {
   if (!settings.door || settings.age === 'child' || settings.age === null) return null;
   return {
     conversation,
@@ -47,5 +52,6 @@ export function buildChatRequest(settings: Settings, conversation: string, messa
     ...(settings.journey ? { journey: settings.journey } : {}),
     ...(settings.scripture ? { scripture: true } : {}),
     ...(freeConsent ? { freeConsent: true } : {}),
+    ...(region && /^[A-Za-z]{2}$/.test(region) ? { region: region.toUpperCase() } : {}),
   };
 }

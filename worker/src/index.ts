@@ -10,9 +10,9 @@
 // POST /api/token/renew re-signs the SAME install id (paid status and memory follow it).
 import './env';
 import { cleanup } from './cleanup';
-import { addUserSpend, appSpendMonth, blockFor, capAlert, spendStatus, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
+import { addUserSpend, appSpendMonth, blockFor, capAlert, safetyBudgetLeft, safetyMicro, spendStatus, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
 import { bump, logCode, reserve } from './counts';
-import { confirmRisk, detectCrisis, floor, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type RiskVerdict, type Turn } from './crisis';
+import { confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
 import { paidStatus, recheckMemory, type Paid } from './entitlement';
 import { ipHash } from './iphash';
@@ -27,7 +27,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, consentText, crisisText, fairUseText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, checkInQuestion, checkInText, consentText, crisisText, fairUseText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -57,9 +57,13 @@ export const blockedCountries = new Set(excludedTerritories.map(code => ALPHA2[c
 const VOICES = new Set<string>(['plain', 'church', 'teen', 'spanish'] satisfies ChatRequest['voice'][]);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const IDENTITY = /\b(?:(?:are you|are u|r u|ru|r you|you a|u a) (?:a |an |just a |just an )?(?:real|human|person|people|robot|bot|ai|a\.i\.|machine|computer|chatbot|pastor|preacher|minister|priest|god|jesus|the lord)|is this (?:a |an )?(?:bot|ai|robot|real person|human|computer)|(?:person|human|real|people) or (?:a |an )?(?:bot|robot|ai|machine|computer)|(?:bot|robot|ai|machine) or (?:a |an )?(?:real )?(?:person|human)|am i (?:talking|speaking|chatting) (?:to|with) (?:a |an )?(?:human|person|real person|bot|ai|robot|computer|pastor)|(?:eres|es esto) (?:un |una )?(?:persona|humano|humana|robot|bot|ia|inteligencia artificial|pastor|dios|jesus|real)|estoy hablando con (?:un |una )?(?:persona|humano|bot|robot|ia|pastor))\b/;
-const answerSchema = { type: 'object', properties: { text: { type: 'string' }, references: { type: 'array', items: { type: 'string' }, maxItems: 3 } }, required: ['text', 'references'], additionalProperties: false };
+// risk: the answer model's own read of the person's safety on the last turns (no extra call).
+const riskTag = { type: 'string', enum: ['none', 'low', 'high'] };
+const answerSchema = { type: 'object', properties: { text: { type: 'string' }, references: { type: 'array', items: { type: 'string' }, maxItems: 3 }, risk: riskTag }, required: ['text', 'references', 'risk'], additionalProperties: false };
+const DAY_MS = 86_400_000;
+const CALM_TURNS = 10;
 const summarySchema = { type: 'object', properties: { summary: { type: 'string' } }, required: ['summary'], additionalProperties: false };
-const editSchema = { type: 'object', properties: { versions: { type: 'array', items: answerSchema, minItems: 2, maxItems: 3 } }, required: ['versions'], additionalProperties: false };
+const editSchema = { type: 'object', properties: { versions: { type: 'array', items: answerSchema, minItems: 2, maxItems: 3 }, risk: riskTag }, required: ['versions', 'risk'], additionalProperties: false };
 const hasVersions = (d: unknown) => !!d && Array.isArray((d as { versions?: unknown }).versions) && (d as { versions: unknown[] }).versions.some(v => isAnswer(v));
 // A model that ignores the versions shape and sends one answer is still used.
 const isEdit = (d: unknown) => hasVersions(d) || isAnswer(d);
@@ -121,7 +125,8 @@ const int = (value: string, fallback: number) => { const n = Number.parseInt(val
 const json = (body: unknown, status = 200) => Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
 const fail = (code: string, status: number) => { logCode(code); return json({ error: code }, status); };
 
-export type Lane = 'free' | 'paid';
+/** free: free models; paid: the billed private model; crisis: the stronger private model a flagged conversation stays on. */
+export type Lane = 'free' | 'paid' | 'crisis';
 const geminiModels = (env: Env) => env.GEMINI_MODELS.split(',').map(s => s.trim()).filter(Boolean);
 // The free lane's Gemini is an UNBILLED project's key (PBS_FREE_GEMINI_API_KEY); the billed key
 // (PBS_GEMINI_API_KEY) is the paid lane's and is never used for free chat. A missing free key is the
@@ -138,15 +143,22 @@ const paidRung = (env: Env, now: number): LadderRung => {
   const call = provider === 'workers-ai' ? workersAi(env.AI, env.PAID_MODEL)
     : provider === 'openrouter-zdr' ? openRouterPrivate(env.OPENROUTER_API_KEY, env.PAID_MODEL, (env.PAID_HOSTS ?? '').split(',').map(h => h.trim()).filter(Boolean))
     : gemini(env.PBS_GEMINI_API_KEY, env.PAID_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL });
-  return { id: `paid-${provider}:${env.PAID_MODEL}`, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5) } };
+  return { id: `paid-${provider}:${env.PAID_MODEL}`, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5), cached: usd(env.PAID_PRICE_CACHED_PER_M, usd(env.PAID_PRICE_IN_PER_M, 0.3) / 4) } };
 };
 
+/** The stronger private model for a flagged conversation (CRISIS_MODEL, billed key only; never a free model). */
+const crisisRung = (env: Env, now: number): LadderRung => ({
+  id: `crisis-gemini:${env.CRISIS_MODEL}`, cap: 1_000_000, day: utcDay(now),
+  call: gemini(env.PBS_GEMINI_API_KEY, env.CRISIS_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.CRISIS_THINKING_LEVEL }),
+  price: { in: usd(env.CRISIS_PRICE_IN_PER_M, 0.3), out: usd(env.CRISIS_PRICE_OUT_PER_M, 2.5) },
+});
+
 /** A small ladder for a check (risk read, judge): Workers AI first, then the last Gemini model. */
-async function check<T>(env: Env, now: number, first: LadderRung, messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T): Promise<T> {
+async function check<T>(env: Env, now: number, first: LadderRung, messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true): Promise<T> {
   const metrics: Metrics = new Map();
   // The backup reads the same words the risk read does, which may be about a crisis: only the
   // private (paid) model may see them, never a free one.
-  const rungs = env.PBS_GEMINI_API_KEY || (env.PAID_PROVIDER && env.PAID_PROVIDER !== 'gemini') ? [first, paidRung(env, now)] : [first];
+  const rungs = backup && (env.PBS_GEMINI_API_KEY || (env.PAID_PROVIDER && env.PAID_PROVIDER !== 'gemini')) ? [first, paidRung(env, now)] : [first];
   const out = await runLadder(env.DB, rungs, messages, schema, maxTokens, metrics, d => ok(read(d)));
   // A private backup's cost counts toward the app's paid spend like any answer.
   for (const [metric, n] of metrics) await bump(env.DB, centralDay(now), metric === 'paid_spend_micro' ? metric : `${first.id}:${metric}`, n);
@@ -157,7 +169,7 @@ export const realDeps: Deps = {
   now: () => Date.now(),
   risk(env, turns) {
     const now = Date.now();
-    const read = (id: string, model: string, cap: number) => check(env, now, { id, call: workersAi(env.AI, model, { temperature: 0 }), cap, day: utcDay(now) }, riskMessages(turns), riskSchema, 60, riskVerdict, v => v.verdict !== 'down', { verdict: 'down' } as RiskVerdict);
+    const read = (id: string, model: string, cap: number) => check(env, now, { id, call: workersAi(env.AI, model, { temperature: 0 }), cap, day: utcDay(now) }, riskMessages(turns), riskSchema, 60, riskVerdict, v => v.verdict !== 'down', { verdict: 'down' } as RiskVerdict, false).then(v => { void bump(env.DB, centralDay(now), 'safety_micro', safetyMicro(model)); return v; });
     return confirmRisk(
       () => read('workers-ai-risk', env.WORKERS_AI_RISK_MODEL, int(env.WORKERS_AI_RISK_CALLS_DAILY, 400)),
       () => read('workers-ai-risk-confirm', env.WORKERS_AI_RISK_CONFIRM_MODEL, int(env.WORKERS_AI_RISK_CONFIRM_CALLS_DAILY, 100)),
@@ -170,6 +182,7 @@ export const realDeps: Deps = {
   },
   rungs(env, now, lane = 'free') {
     if (lane === 'paid') return [paidRung(env, now)];
+    if (lane === 'crisis') return [crisisRung(env, now)];
     const built: Record<string, LadderRung[]> = {
       'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
       'gemini-free': geminiModels(env).map(model => geminiRung(env, model, now)),
@@ -207,7 +220,7 @@ function parseChat(body: unknown): ChatRequest | null {
     messages.push({ role: t.role, text: t.text });
   }
   if (messages[messages.length - 1].role !== 'user') return null;
-  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true, freeConsent: b.freeConsent === true };
+  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true, freeConsent: b.freeConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
 }
 
 /** Mi Refugio, the Spanish voice or a Spanish phone: Spanish and the Reina-Valera 1909. Teens keep the teen rules in their language. */
@@ -288,6 +301,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const req = parseChat(raw);
   if (!req) return fail('BAD_REQUEST', 400);
   const v = voiceFor(req, who);
+  const me = who; const ask = req; // narrowed, for the answer function below
   // The Mindset door has no faith words in any reply (F8).
   const mind = req.door === 'mindset';
   const metrics: Metrics = new Map();
@@ -300,46 +314,99 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const turns = withoutCrisisWords(req.messages.slice(-12));
   const band = v.teen ? 'teen' : 'adult';
 
+  const last = turns[turns.length - 1].text;
+  const region = regionOf(req.region ?? (request as unknown as { cf?: { country?: string } }).cf?.country);
+  const paid = await deps.paid(env, who.installId, now);
+  // This conversation's crisis state (no words kept): the stronger model stays on while signals
+  // continue, then returns to normal after 10 calm turns or 24 hours, whichever is first.
+  const state = await env.DB.prepare('SELECT flagged_at, calm, asked FROM chat_crisis WHERE install_id = ? AND conversation = ?').bind(who.installId, req.conversation).first<{ flagged_at: number; calm: number; asked: number }>();
+  const sticky = !!state && now - state.flagged_at < DAY_MS && state.calm < CALM_TURNS;
+  const flag = (asked: boolean) => env.DB.prepare('INSERT INTO chat_crisis (install_id, conversation, flagged_at, calm, asked) VALUES (?, ?, ?, 0, ?) ON CONFLICT(install_id, conversation) DO UPDATE SET flagged_at = excluded.flagged_at, calm = 0, asked = max(asked, excluded.asked)')
+    .bind(who.installId, req.conversation, now, asked ? 1 : 0).run();
+  const calmTurn = () => env.DB.prepare('UPDATE chat_crisis SET calm = calm + 1 WHERE install_id = ? AND conversation = ?').bind(who.installId, req.conversation).run();
+  const capUsd = usd(env.PAID_AI_MONTHLY_CAP_USD, 100);
+
+  // A high signal (owner, 21 Nov 2026): the fixed crisis card and its hotlines (by the device
+  // region) at once, with words that end on "Are you safe right now?". Never stopped or locked; the
+  // switch to the stronger private model is silent and never waits on her answer.
+  //  - An intent phrase (the floor): fixed words, because the privacy policy promises such a message
+  //    reaches no AI model, now or later.
+  //  - Otherwise the private crisis model writes two or three warm sentences first. Crisis always
+  //    answers: past the monthly cap a paid user still gets the crisis model, a free user the fixed words.
   const crisisReply = async (kind: CrisisKind, layer: string) => {
     tally(metrics, 'crisis'); tally(metrics, `crisis:${layer}`);
     await markCrisis(env.DB, day, who.installId, req.conversation, now);
-    return reply({ kind: 'crisis', ai: false, text: crisisText(kind, v.lang, band, turns[turns.length - 1].text, req.door), scripture: [], remaining: null, limit: null, reminder: false, crisis: kind });
+    await flag(true);
+    const card = crisisText(kind, v.lang, band, last, req.door, region);
+    let checkIn = { text: checkInText[v.lang], ai: false };
+    if (layer !== 'floor' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
+      const messages: Message[] = [{ role: 'system', content: crisisPrompt(v.lang, v.teen, mind) }, ...turns.slice(-4).map(t => ({ role: t.role, content: t.text }))];
+      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis'), messages, crisisSchema, 200, metrics, d => crisisWords(d) !== null);
+      if ('data' in out) checkIn = { text: `${crisisWords(out.data)} ${checkInQuestion[v.lang]}`, ai: true };
+      else { tally(metrics, 'crisis_model_down'); logCode('CHAT_CRISIS_MODEL_DOWN', { empty: out.empty }); }
+    }
+    return reply({ kind: 'crisis', ai: false, text: card, checkIn, scripture: [], remaining: null, limit: null, reminder: false, crisis: kind });
   };
-  // Crisis: never reaches admission or a model that writes answers. The floor needs no model; every
-  // other message is read by a model for risk first, and with no read there is no answer.
-  const crisis = await detectCrisis(turns, () => deps.risk(env, turns));
-  if (crisis.fired) return crisisReply(crisis.kind, crisis.layer);
-  if (crisis.read === 'down') {
-    tally(metrics, 'risk_down'); tally(metrics, 'busy'); logCode('CHAT_RISK_READ_DOWN');
-    return reply({ kind: 'busy', ai: false, text: busyText[v.lang], scripture: [], remaining: null, limit: null, reminder: false });
+  // The separate safety model (Workers AI, private) runs only to confirm a signal: the distress
+  // pre-filter, or an answer model's own risk tag. Its own budget (SAFETY_MONTHLY_CAP_USD); past it,
+  // the phrases, the tags and the crisis model's instructions carry on.
+  let confirmed: CrisisLevel | null = null;
+  const confirm = async (): Promise<CrisisLevel> => {
+    if (confirmed) return confirmed;
+    if (!(await safetyBudgetLeft(env.DB, now, usd(env.SAFETY_MONTHLY_CAP_USD, 10)))) { tally(metrics, 'safety_over_budget'); return (confirmed = { level: 'none', read: 'down' }); }
+    tally(metrics, 'safety_check');
+    const r = await deps.risk(env, turns).catch((): RiskVerdict => ({ verdict: 'down' }));
+    confirmed = crisisLevel(turns, r);
+    // Her "yes, I'm safe" to the check-in is not a new high signal: she stays on the crisis model.
+    if (confirmed.level === 'high' && saysSafe(lastAssistant, last)) confirmed = { ...confirmed, level: 'low' };
+    return confirmed;
+  };
+
+  // 1. Intent phrases, on every message (code, microseconds).
+  const hit = phraseHit(turns);
+  if (hit) return crisisReply(hit, 'floor');
+  // 2. Her answer to the check-in says she is not safe, or not sure: the card again.
+  const lastAssistant = turns.slice(0, -1).filter(t => t.role === 'assistant').at(-1)?.text;
+  if (saysNotSafe(lastAssistant, last)) return crisisReply('selfharm', 'not_safe');
+  // 3. The distress pre-filter: such a message never reaches a free model; the safety model reads it
+  //    first. High is the card; anything else is answered by the crisis model, silently.
+  // A conversation already on the crisis model is read every message,
+  // so it stays on while signals continue and decays when they stop.
+  // A crisis turn in the history with no state here (another install, or state already cleaned) is
+  // treated as on: nothing near a crisis goes to a free model. Once state exists, it decays.
+  const inCrisis = sticky || (!state && turns.some(t => t.text === CRISIS_NOTE));
+  let lane: Lane = inCrisis ? 'crisis' : paid.paid ? 'paid' : 'free';
+  if (inCrisis || distress(turns)) {
+    tally(metrics, inCrisis ? 'crisis_followup' : 'prefilter');
+    const c = await confirm();
+    if (c.level === 'high') return crisisReply(c.kind, c.layer);
+    if (c.level === 'low') await flag(false);
+    lane = 'crisis';
   }
 
-  const paid = await deps.paid(env, who.installId, now);
   const fixedReply = (kind: ChatResponse['kind'], text: string) => reply({ kind, ai: false, text, scripture: [], remaining: null, limit: null, reminder: false });
   // Controls, after the crisis check so a crisis card is never withheld. The operator's kill switch
   // and the abuse throttle's 24-hour pause (controls.ts) come first.
   if (!env.IP_HASH_SECRET) return fail('IP_HASH_SECRET_MISSING', 503);
   if (await blockFor(env.DB, who.installId, now)) { tally(metrics, 'paused'); return fixedReply('paused', pausedText[v.lang]); }
-  const abuse = await throttle(env.DB, env.IP_HASH_SECRET, day, who.installId, turns[turns.length - 1].text, false, now);
+  const abuse = await throttle(env.DB, env.IP_HASH_SECRET, day, who.installId, last, false, now);
   if (abuse.verdict === 'paused') { tally(metrics, 'paused'); return fixedReply('paused', pausedText[v.lang]); }
   if (abuse.verdict === 'slow') { tally(metrics, `abuse_slow:${abuse.reason}`); return fixedReply('limit', slowText[v.lang]); }
   // The lane. Paid is private (the billed model only). Free goes to free models that may keep what
-  // is typed, so it needs her consent first. A device whose crisis check fired today is answered on
-  // the private lane for the rest of the day, paid or not: nothing near a crisis goes to a free model.
-  const crisisToday = (await env.DB.prepare('SELECT crisis FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId).first<{ crisis: number | null }>())?.crisis === 1;
-  const lane: Lane = paid.paid || crisisToday || turns.some(t => t.text === CRISIS_NOTE) ? 'paid' : 'free';
+  // is typed, so it needs her consent first. Crisis is the stronger private model, for anyone.
   if (lane === 'free' && req.freeConsent !== true) { tally(metrics, 'consent_needed'); return fixedReply('consent', consentText[v.lang]); }
-  if (lane === 'paid') {
+  if (lane !== 'free') {
     // The app's paid-route spend this calendar month (CT), then hers (controls.ts); past either, the
-    // fair-use pause, never the free lane. The owner hears at 80% and at the cap, once each.
-    const capUsd = usd(env.PAID_AI_MONTHLY_CAP_USD, 100);
+    // fair-use pause, never the free lane. The owner hears at 80% and at the cap, once each. A
+    // crisis conversation always answers: a paid user keeps the crisis model, a free user the card.
     const appMicro = await appSpendMonth(env.DB, now);
     if (appMicro >= capUsd * 1e6) {
       tally(metrics, 'paid_cap'); await capAlert(env.DB, now, 100, appMicro, capUsd);
-      return fixedReply('fair_use', fairUseText(v.lang, resetsOn(now)));
+      if (lane === 'crisis' && !paid.paid) return crisisReply('selfharm', 'cap');
+      if (lane !== 'crisis') return fixedReply('fair_use', fairUseText(v.lang, resetsOn(now)));
     }
     if (appMicro >= 0.8 * capUsd * 1e6) await capAlert(env.DB, now, 80, appMicro, capUsd);
-    if (paid.paid && (await userSpend(env.DB, who.installId, now)) >= userCeilingUsd(env, paid.paidUntil, now) * 1e6) {
+    if (lane === 'paid' && (await userSpend(env.DB, who.installId, now)) >= userCeilingUsd(env, paid.paidUntil, now) * 1e6) {
       tally(metrics, 'user_ceiling'); logCode('CHAT_USER_CEILING');
       return fixedReply('fair_use', fairUseText(v.lang, resetsOn(now)));
     }
@@ -367,8 +434,27 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     reminder = true;
     await env.DB.prepare('UPDATE chat_device_day SET last_reminder_at = ? WHERE day = ? AND device = ?').bind(now, day, who.installId).run();
   }
-  const last = turns[turns.length - 1].text;
-  const done = (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>) => reply({ ...body, remaining, reminder, limit: deviceLimit });
+  const emitNow = (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>) => reply({ ...body, remaining, reminder, limit: deviceLimit });
+  return answerOn(lane, false);
+
+  // One answer on a lane. An answer model that tags its own risk low or high (its "risk" field, read
+  // on the last turns) sends the message to the safety model before anything is shown: high is the
+  // card, low is answered again by the crisis model (once). A calm turn on the crisis lane counts
+  // toward its 10.
+  async function answerOn(lane: Lane, final: boolean): Promise<Response> {
+  let tag: 'none' | 'low' | 'high' = 'none';
+  const done = async (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>, effects?: () => void): Promise<Response> => {
+    if (tag !== 'none' && !final) {
+      tally(metrics, `risk_tag:${tag}`);
+      const c = await confirm();
+      // With no confirmation (down, or past the safety budget) the tag decides: toward safety.
+      const level = c.level === 'none' && c.read === 'down' ? tag : c.level;
+      if (level === 'high') return crisisReply(c.level === 'high' ? c.kind : 'selfharm', c.level === 'high' ? c.layer : 'tag');
+      if (level === 'low') { await flag(false); if (lane !== 'crisis') return answerOn('crisis', true); }
+    } else if (lane === 'crisis' && tag === 'none') await calmTurn();
+    effects?.();
+    return emitNow(body);
+  };
 
   // C08 floor: the honest answer, in code, whatever the model would say.
   if (IDENTITY.test(` ${last.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()} `)) return done({ kind: 'answer', ai: true, fixed: true, text: (mind ? identityMindsetText : identityText)[v.lang], scripture: [] });
@@ -386,30 +472,31 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (verse) return done({ kind: 'answer', ai: true, fixed: true, text: oneTranslationText[v.lang], scripture: [verse] });
   }
 
-  const memory = paid.paid ? await readMemory(env.DB, who.installId) : null;
+  const memory = paid.paid ? await readMemory(env.DB, me.installId) : null;
   const system: Message[] = [{ role: 'system', content: v.prompt === 'mindset' ? [prompts.mindset, v.teen ? mindsetTeen : '', v.lang === 'es' ? spanishOnly : ''].filter(Boolean).join('\n') : prompts[v.prompt] }];
+  // Fixed text first (the voice prompt, then the risk tag), so the route's prompt cache covers it; her memory note last.
+  system.push({ role: 'system', content: RISK_TAG });
   if (memory) system.push({ role: 'system', content: memoryBlock(memory, v.lang) });
   // Only the last CHAT_HISTORY_TURNS turns travel to the model (a paid user's memory note carries the rest).
   const history: Message[] = turns.slice(-int(env.CHAT_HISTORY_TURNS, 6)).map(t => ({ role: t.role, content: t.text }));
   const rungs = deps.rungs(env, now, lane);
   const answerTokens = int(env.ANSWER_MAX_TOKENS, 350);
   const earlierTurns = turns.slice(0, -1).filter(t => t.role === 'user');
-  const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: req.door, userText: last, earlier: earlierTurns.map(t => t.text).join('\n'), afterCrisis: crisisToday || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
+  const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: ask.door, userText: last, earlier: earlierTurns.map(t => t.text).join('\n'), afterCrisis: (sticky && state?.asked === 1) || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
   // The newest message plus her earlier ones: an echo of what she wrote ("I called 988") is not a tripwire.
   const herWords = turns.filter(t => t.role === 'user').map(t => t.text).join('\n');
 
   // A verse she named ("Philippians 4:20 says...") is printed in its stored words, so she can see
   // what it really says (round 4, x15).
-  const named = req.door === 'faith' ? namedReference(last) : null;
+  const named = ask.door === 'faith' ? namedReference(last) : null;
   const namedVerse = named ? await lookup(env.DB, v.translation, named) : null;
   const withNamed = (scripture: Scripture[]) => namedVerse && !scripture.some(s => s.ref === namedVerse.ref) ? [namedVerse, ...scripture].slice(0, 3) : scripture;
   // Her recent answers and everyone's (keyed hashes only): the variety backstop (quality/variety.ts).
-  const recent = await recentShapes(env.DB, who.installId);
-  const show = (text: string, scripture: Scripture[], shape: Shape) => {
-    ctx.waitUntil(saveShape(env.DB, who.installId, shape, now).catch(() => logCode('SHAPE_SAVE_FAILED')));
-    if (paid.paid) ctx.waitUntil(remember(env, rungs, { installId: who.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
-    return done({ kind: 'answer', ai: true, text, scripture });
-  };
+  const recent = await recentShapes(env.DB, me.installId);
+  const show = (text: string, scripture: Scripture[], shape: Shape) => done({ kind: 'answer', ai: true, text, scripture }, () => {
+    ctx.waitUntil(saveShape(env.DB, me.installId, shape, now).catch(() => logCode('SHAPE_SAVE_FAILED')));
+    if (paid.paid && lane !== 'crisis') ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: last, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
+  });
   const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) });
   let objection: string | null = null;
   let variety0 = false;
@@ -428,7 +515,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       : await runLadder(env.DB, rungs, messages, answerSchema, answerTokens, metrics, isAnswer);
     if ('empty' in out) {
       if (attempt === 0) {
-        await refund(env.DB, day, who.installId, hash);
+        await refund(env.DB, day, me.installId, hash);
         // Paid never falls back to a free model: if the private model is down, she is told so.
         if (lane === 'paid') { tally(metrics, 'paid_down'); logCode('CHAT_PAID_DOWN', { empty: out.empty }); return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }
         if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }
@@ -437,6 +524,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       }
       break;
     }
+    // Her risk as the answer model read it: the highest tag of the call (and of its versions).
+    const tags = [out.data, ...(hasVersions(out.data) ? (out.data as { versions: unknown[] }).versions : [])].map(d => (d as { risk?: unknown } | null)?.risk);
+    if (tags.includes('high')) tag = 'high'; else if (tags.includes('low') && tag === 'none') tag = 'low';
     // Every retry comes back as up to three versions in one call (r8: 9 of 61 shown answers repeated,
     // because a single retry met another recent answer, or a repeat was found only on the last try);
     // code keeps the first version that passes. Same call count, three chances.
@@ -492,6 +582,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   if (mind) return done({ kind: 'fallback', ai: true, text: fallbackMindsetText[v.lang], scripture: [] });
   const verse = await refugeVerse(env.DB, v.translation);
   return done({ kind: 'fallback', ai: true, text: fallbackText[v.lang], scripture: verse ? [verse] : [] });
+  }
 }
 async function remember(env: Env, rungs: LadderRung[], a: { installId: string; day: string; now: number; paidUntil: number | null; memory: string | null; user: string; answer: string }): Promise<void> {
   const metrics: Metrics = new Map();

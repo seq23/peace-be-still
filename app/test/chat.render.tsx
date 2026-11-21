@@ -233,3 +233,22 @@ test('the Mindset chat shows no faith words: no KJV, verse, pastor or God (hosti
     assert.doesNotMatch(texts(tree), /KJV|King James|verse|versículo|pastor|\bGod\b|\bDios\b/i);
   }
 });
+
+test('a crisis reply shows the check-in first and the card at once; the phone region travels; the check-in is in her history', async () => {
+  consented(); storePaid = false;
+  (globalThis as any).__pbsRegion = 'MX';
+  replies.push({ kind: 'crisis', ai: false, text: 'Tú importas. Por favor, llama a la Línea de la Vida al 800 911 2000, gratis, a cualquier hora. Si estás en peligro ahora mismo, llama al 911.', checkIn: { text: 'Parece que estás cargando algo muy pesado. ¿Estás a salvo ahora mismo?', ai: false }, scripture: [], remaining: null, limit: null, reminder: false, crisis: 'selfharm' });
+  const tree = await mount({ ...adult, journey: 'mi-refugio', voice: 'spanish', language: 'es' });
+  await say(tree, 'me quiero morir', 'Enviar');
+  assert.equal(sent.at(-1).region, 'MX');
+  const shown = texts(tree);
+  assert.ok(shown.indexOf('¿Estás a salvo ahora mismo?') < shown.indexOf('800 911 2000'));
+  (globalThis as any).__pbsOpened = [];
+  for (const l of tree.root.findAll(n => (n.type as unknown) === 'Pressable' && n.props.accessibilityRole === 'link')) await act(async () => l.props.onPress());
+  assert.deepEqual((globalThis as any).__pbsOpened, ['tel:8009112000', 'tel:911']);
+  replies.push(answer({ text: 'Gracias por decírmelo.' }));
+  await say(tree, 'no sé', 'Enviar');
+  assert.deepEqual(sent.at(-1).messages.map((m: any) => m.role), ['user', 'assistant', 'user']);
+  assert.match(sent.at(-1).messages[1].text, /a salvo/);
+  (globalThis as any).__pbsRegion = 'US';
+});
