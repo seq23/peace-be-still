@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Deja que el cuerpo pese más que hace un minuto. Los brazos. Las piernas. Los párpados. [pause 21]\n\nAhora trae tu escena pequeña. Mira dónde estás. Mira quién está contigo. [pause 21]\n\nDeja que pase una vez. El apretón de manos. El abrazo. La frase. Siéntelo en las manos, o en la cara. [pause 24]\n\nAhora deja que pase otra vez, igualito. No hace falta hacerlo más grande. [pause 24]\n\nY otra vez. Un poco más lento esta vez. [pause 24]\n\nSi se te pierde, no pasa nada. Empiézala otra vez desde el principio. [pause 24]\n\nSiente lo natural que es. Como si ya hubiera pasado muchas veces. Como si fuera un recuerdo. [pause 27]\n\nDeja que las palabras de la escena se hagan muy sencillas. Tal vez una sola palabra. Felicidades. Gracias. Bienvenido a casa. [pause 27]\n\nDi esa palabra en tu mente, bajito, al ritmo de tu respiración. [pause 29]\n\nNota qué poco esfuerzo cuesta. No estás construyendo nada. Solo estás recordando un momento. [pause 27]\n\nSi llega otro pensamiento, déjalo pasar, como alguien que cruza al fondo de un cuarto. Luego vuelve a tu escena. [pause 27]\n\nEl apretón de manos. El abrazo. Las palabras. Otra vez. [pause 29]\n\nDeja que la escena se haga más pequeña y más suave, hasta que quepa en una sola respiración. [pause 29]\n\nSigue repitiéndola mientras los pensamientos se hacen lentos. Deja que la escena y el sueño se mezclen. [pause 34]"
+   "text": "Deja que el cuerpo pese más que hace un minuto. Los brazos. Las piernas. Los párpados. [pause 21]\n\nAhora trae tu escena pequeña. Mira dónde estás. Mira quién está contigo. [pause 21]\n\nDeja que pase una vez. El apretón de manos. El abrazo. La frase. Siéntelo en las manos, o en la cara. [pause 24]\n\nAhora deja que pase otra vez, igualito. No hace falta hacerlo más grande. [pause 24]\n\nY otra vez. Un poco más lento esta vez. [pause 24]\n\nSi se te pierde, no pasa nada. Empiézala otra vez desde el principio. [pause 24]\n\nSiente lo natural que es. Como si ya hubiera pasado muchas veces. Como si fuera un recuerdo. [pause 27]\n\nDeja que las palabras de la escena se hagan muy sencillas. Tal vez una sola palabra. Felicidades. Gracias. Qué gusto tenerte en casa. [pause 27]\n\nDi esa palabra en tu mente, bajito, al ritmo de tu respiración. [pause 29]\n\nNota qué poco esfuerzo cuesta. No estás construyendo nada. Solo estás recordando un momento. [pause 27]\n\nSi llega otro pensamiento, déjalo pasar, como alguien que cruza al fondo de un cuarto. Luego vuelve a tu escena. [pause 27]\n\nEl apretón de manos. El abrazo. Las palabras. Otra vez. [pause 29]\n\nDeja que la escena se haga más pequeña y más suave, hasta que quepa en una sola respiración. [pause 29]\n\nSigue repitiéndola mientras los pensamientos se hacen lentos. Deja que la escena y el sueño se mezclen. [pause 34]"
   },
   {
    "part": "close",
@@ -30,7 +30,7 @@
    "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
   }
  ],
- "words": 650,
+ "words": 652,
  "shared_parts": {
   "settle": "settle2",
   "close": "close2"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1120,
+ "est_seconds": 1121,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

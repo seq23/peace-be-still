@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es una tarde libre. Vibra tu teléfono. Alguien querido está afuera. [pause 25]\n\nAbres la puerta, y ya te está sonriendo. Oye cómo dice tu nombre, como solo lo dicen las amistades. [pause 28]\n\nCaminan juntos a un lugar que a los dos les gusta. Una cafetería. Una banca del parque. El escalón de la entrada. [pause 28]\n\nSe sientan. Uno empieza a contar algo, y el otro se ríe antes de que termine. [pause 30]\n\nNota que no tienes que cuidar tus palabras. Puedes tener cansancio. Puedes decir tonterías. Puedes hablar con el corazón. [pause 30]\n\nCuéntale algo que traes en el corazón. Mira cómo asiente. Te entiende. [pause 32]\n\nTambién te cuenta algo. Siente lo bonito que es que te tengan confianza. [pause 32]\n\nEl tiempo se pasa rápido. La luz cambia y ninguno de los dos se dio cuenta. [pause 32]\n\nAl final, te abraza y te dice, hay que repetirlo pronto. Y sabes que lo dice en serio. [pause 33]\n\nDi en tu mente, es fácil quererme. Tengo gente buena. [pause 33]\n\nDeja que el calor de esa tarde se quede contigo mientras el cuarto se oscurece. [pause 35]"
+   "text": "Es una tarde libre. Vibra tu teléfono. Alguien querido está afuera. [pause 25]\n\nAbres la puerta, y ya te está sonriendo. Oye cómo dice tu nombre, como solo lo dicen las amistades. [pause 28]\n\nSe van caminando a un lugar que les encanta. Una cafetería. Una banca del parque. El escalón de la entrada. [pause 28]\n\nSe sientan. Empieza una historia, y la risa llega antes del final. [pause 30]\n\nNota que no tienes que cuidar tus palabras. Puedes tener cansancio. Puedes decir tonterías. Puedes hablar con el corazón. [pause 30]\n\nCuéntale algo que traes en el corazón. Mira cómo asiente. Te entiende. [pause 32]\n\nTambién te cuenta algo. Siente lo bonito que es que te tengan confianza. [pause 32]\n\nEl tiempo se pasa rápido. La luz cambia sin que nadie lo note. [pause 32]\n\nAl final, te abraza y te dice, hay que repetirlo pronto. Y sabes que lo dice en serio. [pause 33]\n\nDi en tu mente, es fácil quererme. Tengo gente buena. [pause 33]\n\nDeja que el calor de esa tarde se quede contigo mientras el cuarto se oscurece. [pause 35]"
   },
   {
    "part": "close",
@@ -30,7 +30,7 @@
    "text": "Ahora deja que la escena se quede contigo mientras te vas quedando en calma. [pause 10]\n\nNo tienes que agarrarla fuerte. Solo deja que esté ahí, tibia y callada, como una lámpara encendida en otro cuarto. [pause 15]\n\nSi la mente se te va, vuelve a un detalle pequeño. Un sonido. Una palabra. Lo que sienten tus manos. [pause 20]\n\nEsto es solo imaginación, y la imaginación tiene permiso de ser amable. [pause 20]\n\nTal vez notes que respiras más despacio que cuando empezamos. Deja que siga así. [pause 25]\n\nDeja que el cuerpo pese todavía un poco más. No hay ningún lugar adonde ir. [pause 25]\n\nSi el sueño todavía no llega, no pasa nada. Quédate en silencio con la escena, y deja que el silencio haga lo suyo. [pause 30]\n\nDescansa ahora. [pause 60]"
   }
  ],
- "words": 640,
+ "words": 631,
  "shared_parts": {
   "settle": "settle1",
   "close": "close1"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1118,
+ "est_seconds": 1113,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

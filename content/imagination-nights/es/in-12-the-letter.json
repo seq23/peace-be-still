@@ -17,12 +17,12 @@
   {
    "part": "teaching",
    "speaker": "narrator",
-   "text": "La escena de esta noche es abrir una buena noticia. Una carta, un correo, un mensaje. El momento en que lees las palabras que esperabas. [pause 13]\n\nMuchos hemos abierto noticias que nos desilusionaron. Recordamos esa sensación, y nos preparamos para que vuelva. Por eso esta noche ensayamos la otra. El respiro rápido. La segunda lectura, nada más para estar seguros. La risa que se escapa sola. [pause 15]\n\nEl truco es hacer el momento pequeño y concreto. No una historia completa. Solo tus manos, la pantalla o el papel, y unas cuantas palabras que casi puedes ver. [pause 15]\n\nTú escoges cuál es la noticia. Una aceptación. Una aprobación. Un sí. Guárdatelo si quieres. Nadie más necesita saber lo que imaginas. [pause 15]\n\nSi últimamente te han tocado muchas noticias difíciles, ve despacio. Puedes imaginar el sobre un buen rato antes de abrirlo. Deja primero que se calme tu respiración. En la imaginación no hay prisa. [pause 5]\n\nRecuerda que esta es una práctica de imaginación. No es una promesa de ningún resultado. Es una manera de dejar que tu cuerpo practique el alivio en lugar del miedo. [pause 20]"
+   "text": "La escena de esta noche es abrir una buena noticia. Una carta, un correo, un mensaje. El momento en que lees las palabras que esperabas. [pause 13]\n\nA mucha gente le ha tocado abrir noticias que la desilusionaron. Recordamos esa sensación, y nos preparamos para que vuelva. Por eso esta noche ensayamos la otra. El respiro rápido. La segunda lectura, nada más para no quedarnos con la duda. La risa que se escapa sola. [pause 15]\n\nEl truco es hacer el momento pequeño y concreto. No una historia completa. Solo tus manos, la pantalla o el papel, y unas cuantas palabras que casi puedes ver. [pause 15]\n\nTú escoges cuál es la noticia. Una aceptación. Una aprobación. Un sí. Guárdatelo si quieres. Nadie más necesita saber lo que imaginas. [pause 15]\n\nSi últimamente te han tocado muchas noticias difíciles, ve despacio. Puedes imaginar el sobre un buen rato antes de abrirlo. Deja primero que se calme tu respiración. En la imaginación no hay prisa. [pause 5]\n\nRecuerda que esta es una práctica de imaginación. No es una promesa de ningún resultado. Es una manera de dejar que tu cuerpo practique el alivio en lugar del miedo. [pause 20]"
   },
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Estás en un lugar donde sueles sentarte. Una silla de la cocina. La orilla de la cama. Tu carro, antes de entrar a la casa. [pause 27]\n\nLlega un mensaje. Ves de quién es. Sientes mariposas en el estómago. [pause 30]\n\nÁbrelo. Deja que tus ojos encuentren la primera línea. [pause 30]\n\nAhí está. La palabra que esperabas. Léela despacio. [pause 30]\n\nLéela otra vez, nada más para confirmar. Sigue diciendo lo mismo. [pause 30]\n\nSiente cómo se te sale todo el aire de una vez. Siente tu mano que va a la boca, o al corazón. [pause 33]\n\nTal vez te ríes. Tal vez se te llenan los ojos de lágrimas. Deja que venga lo que venga. [pause 33]\n\nAhora imagina a quién se lo cuentas primero. Óyete decirlo en voz alta por primera vez. Sí pasó. [pause 33]\n\nOye su respuesta. Oye la alegría en su voz. [pause 33]\n\nMás tarde esa noche, vuelves a leer el mensaje antes de acostarte. Ya se siente más tranquilo. Real. [pause 35]\n\nDeja el teléfono. Recuéstate. Deja que las palabras se queden en tu mente mientras te vas quedando en calma. [pause 35]"
+   "text": "Estás en un lugar donde sueles sentarte. Una silla de la cocina. La orilla de la cama. Tu carro, antes de entrar a la casa. [pause 27]\n\nLlega un mensaje. Ves de quién es. Sientes mariposas en el estómago. [pause 30]\n\nÁbrelo. Deja que tus ojos encuentren la primera línea. [pause 30]\n\nAhí está. La palabra que esperabas. Léela despacio. [pause 30]\n\nLéela otra vez, nada más para confirmar. Sigue diciendo lo mismo. [pause 30]\n\nSiente cómo se te sale todo el aire de una vez. Siente tu mano que va a la boca, o al corazón. [pause 33]\n\nTal vez te ríes. Tal vez se te llenan los ojos de lágrimas. Deja que venga lo que venga. [pause 33]\n\nAhora imagina a quién se lo cuentas primero. Óyete decirlo en voz alta por primera vez. Sí pasó. [pause 33]\n\nOye su respuesta. Oye la alegría en su voz. [pause 33]\n\nMás tarde esa noche, vuelves a leer el mensaje antes de acostarte. Ahora lo lees con más calma. Es real. [pause 35]\n\nDeja el teléfono. Recuéstate. Deja que las palabras se queden en tu mente mientras te vas quedando en calma. [pause 35]"
   },
   {
    "part": "close",
@@ -30,7 +30,7 @@
    "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
   }
  ],
- "words": 607,
+ "words": 616,
  "shared_parts": {
   "settle": "settle2",
   "close": "close2"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1117,
+ "est_seconds": 1122,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

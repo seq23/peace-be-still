@@ -17,7 +17,7 @@
   {
    "part": "teaching",
    "speaker": "narrator",
-   "text": "Esta noche es para quien tiene un don que se guarda para sí. Una voz para cantar. Un poema. Una receta. Una idea en el trabajo. Una historia que quieres contar. [pause 12]\n\nMucha gente se detiene por miedo a que la vean. Y si se ríen. Y si no es lo bastante bueno. Así que el don se queda en la cocina, o en el carro, o en un cuaderno en el cajón. [pause 14]\n\nEsta noche vas a imaginar que lo compartes con un salón lleno de gente, y que te da gusto haberlo hecho. Tú escoges el lugar. Una reunión familiar. Una junta de trabajo. Una noche de micrófono abierto. Un salón de clases. [pause 14]\n\nNo nos imaginamos fama ni aplausos del mundo entero. Solo el momento en que dejas de esconderte, y unas cuantas caras en el salón se inclinan para escuchar. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento, no una promesa de cómo va a responder la gente. Es una manera de dejar que tu cuerpo practique tener valor y calma al mismo tiempo. [pause 8]\n\nTrae ahora tu don a la mente. Sea lo que sea, cuenta. [pause 15]"
+   "text": "Esta noche es para quien tiene un don que se guarda para sí. Una voz para cantar. Un poema. Una receta. Una idea en el trabajo. Una historia que quieres contar. [pause 12]\n\nMucha gente se detiene por miedo a que la vean. ¿Y si se ríen? ¿Y si no es lo bastante bueno? Así que el don se queda en la cocina, o en el carro, o en un cuaderno en el cajón. [pause 14]\n\nEsta noche vas a imaginar que lo compartes con un salón lleno de gente, y que te da gusto haberlo hecho. Tú escoges el lugar. Una reunión familiar. Una junta de trabajo. Una noche de micrófono abierto. Un salón de clases. [pause 14]\n\nNo nos imaginamos fama ni aplausos del mundo entero. Solo el momento en que dejas de esconderte, y unas cuantas caras en el salón se inclinan para escuchar. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento, no una promesa de cómo va a responder la gente. Es una manera de dejar que tu cuerpo practique tener valor y calma al mismo tiempo. [pause 8]\n\nTrae ahora tu don a la mente. Sea lo que sea, cuenta. [pause 15]"
   },
   {
    "part": "scene",
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

@@ -17,7 +17,7 @@
   {
    "part": "teaching",
    "speaker": "narrator",
-   "text": "Esta noche imaginamos algo más pequeño que de costumbre. No el gran final. Un paso pequeño, dado hoy, y la sensación tan buena que deja. [pause 12]\n\nCuando un sueño es grande, es fácil sentir que nada de lo que hacemos hoy importa. Una página escrita. Un peso ahorrado. Una llamada hecha. Todo parece muy poco al lado de lo grande que es lo que esperamos. [pause 14]\n\nPero todo lo que se termina está hecho de días pequeños. Esta noche vas a imaginar el final de un día cualquiera, sabiendo que diste un paso, y sintiendo orgullo por eso. [pause 14]\n\nTú escoges el paso. Algo que de verdad podrías hacer mañana. Llenar un formulario. Darle la vuelta a la manzana. Mandar un correo. Leer un capítulo. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento, no una promesa de ningún resultado. Es una manera de dejar que tu cuerpo ensaye el orgullo callado de cumplirte una promesa a ti. [pause 8]\n\nNombra ahora tu paso pequeño. [pause 15]"
+   "text": "Esta noche imaginamos algo más pequeño que de costumbre. No el gran final. Un paso pequeño, dado hoy, y la sensación tan buena que deja. [pause 12]\n\nCuando un sueño es grande, es fácil sentir que nada de lo que hacemos hoy importa. Una página escrita. Un poquito ahorrado. Una llamada hecha. Todo parece muy poco al lado de lo grande que es lo que esperamos. [pause 14]\n\nPero todo lo que se termina está hecho de días pequeños. Esta noche vas a imaginar el final de un día cualquiera, sabiendo que diste un paso, y sintiendo orgullo por eso. [pause 14]\n\nTú escoges el paso. Algo que de verdad podrías hacer mañana. Llenar un formulario. Darle la vuelta a la manzana. Mandar un correo. Leer un capítulo. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento, no una promesa de ningún resultado. Es una manera de dejar que tu cuerpo ensaye el orgullo callado de cumplirte una promesa a ti. [pause 8]\n\nNombra ahora tu paso pequeño. [pause 15]"
   },
   {
    "part": "scene",
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

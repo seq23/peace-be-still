@@ -17,12 +17,12 @@
   {
    "part": "teaching",
    "speaker": "narrator",
-   "text": "El deseo de esta noche no es conseguir algo. Tiene que ver con lo que sientes por ti. [pause 16]\n\nMuchos nos hablamos en la noche de una forma en que nunca le hablaríamos a una amistad. Repasamos nuestros errores. Nos ponemos apodos feos. Nos preguntamos por qué somos así. [pause 18]\n\nEsta noche practicamos otra voz. Imaginamos una versión de ti, dentro de unos meses, que ya hizo las paces con quien eres. No perfecta. Solo amable contigo, firme y sin vergüenza. [pause 18]\n\nSi la voz en tu cabeza ha sido muy dura contigo por mucho tiempo, o si tienes pensamientos de hacerte daño, por favor habla con alguien durante el día. En Estados Unidos puedes llamar o mandar un mensaje al 988 a cualquier hora, y también te atienden en español. Mereces ayuda y mereces cariño. [pause 18]\n\nEsto es imaginación y sentimiento, no una promesa. Pero practicar una voz amable es una buena manera de cerrar el día. [pause 23]"
+   "text": "El deseo de esta noche no es conseguir algo. Tiene que ver con lo que sientes por ti. [pause 16]\n\nMucha gente se habla en la noche de una forma en que nunca le hablaría a una amistad. Repasa sus errores. Se pone apodos feos. Se pregunta por qué es así. [pause 18]\n\nEsta noche practicamos otra voz. Imaginamos una versión de ti, dentro de unos meses, que ya hizo las paces con quien eres. No perfecta. Solo amable contigo, firme y sin vergüenza. [pause 18]\n\nSi la voz en tu cabeza ha sido muy dura contigo por mucho tiempo, o si tienes pensamientos de hacerte daño, por favor habla con alguien durante el día. En Estados Unidos puedes llamar o mandar un mensaje al 988 a cualquier hora, y también te atienden en español. Mereces ayuda y mereces cariño. [pause 18]\n\nEsto es imaginación y sentimiento, no una promesa. Pero practicar una voz amable es una buena manera de cerrar el día. [pause 23]"
   },
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Estás frente a un espejo, dentro de unos meses. [pause 33]\n\nMira tu propia cara. Nota que no apartas la mirada. [pause 36]\n\nFíjate en tus ojos. Se ven descansados. [pause 36]\n\nÓyete decir, en tu mente, buenos días. Y decirlo en serio. [pause 36]\n\nImagina que más tarde, ese mismo día, cometes un error pequeño. Se te tira algo. Se te olvida un nombre. [pause 36]\n\nOye cómo te hablas ahora. No pasa nada. A todo el mundo le pasa. Te ríes un poco y sigues. [pause 38]\n\nImagina que alguien te hace un cumplido. Nota que puedes decir gracias sin discutirlo. [pause 38]\n\nEn la noche, imagina un rato a solas, en silencio. Se siente como buena compañía. [pause 38]\n\nDi bajito, así como soy, valgo, y sigo creciendo. [pause 38]\n\nDeja que esa voz amable se quede contigo, como una mano en la espalda, mientras te vas quedando en calma. [pause 38]"
+   "text": "Estás frente a un espejo, dentro de unos meses. [pause 33]\n\nMira tu propia cara. Nota que no apartas la mirada. [pause 36]\n\nFíjate en tus ojos. Se ven descansados. [pause 36]\n\nÓyete decir, en tu mente, buenos días. Y decirlo en serio. [pause 36]\n\nImagina que más tarde, ese mismo día, cometes un error pequeño. Se te cae algo. Se te olvida un nombre. [pause 36]\n\nOye cómo te hablas ahora. No pasa nada. A todo el mundo le pasa. Te ríes un poco y sigues. [pause 38]\n\nImagina que alguien te hace un cumplido. Nota que puedes decir gracias sin discutirlo. [pause 38]\n\nEn la noche, imagina un rato a solas, en silencio. Se siente como buena compañía. [pause 38]\n\nDi bajito, así como soy, valgo, y sigo creciendo. [pause 38]\n\nDeja que esa voz amable se quede contigo, como una mano en la espalda, mientras te vas quedando en calma. [pause 38]"
   },
   {
    "part": "close",
@@ -30,7 +30,7 @@
    "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
   }
  ],
- "words": 547,
+ "words": 548,
  "shared_parts": {
   "settle": "settle2",
   "close": "close2"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1114,
+ "est_seconds": 1115,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

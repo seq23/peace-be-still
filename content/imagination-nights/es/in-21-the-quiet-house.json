@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es el principio de la noche. Vas llegando a casa después de un día largo. [pause 25]\n\nMete la llave en la cerradura, o empuja la puerta. Entra. [pause 27]\n\nFíjate en lo primero que hueles. Algo limpio. Algo que se está cocinando. El olor de tu propia casa, nada más. [pause 28]\n\nDeja tu bolsa en su lugar. Quítate los zapatos. Siente el piso bajo tus pies. [pause 28]\n\nRecorre los cuartos despacio. Todo está donde va. Nada te está llamando. [pause 30]\n\nPrende una lámpara de luz suave. Fíjate cómo cae la luz en la pared. [pause 30]\n\nEn algún lugar de la casa hay un sonido pequeño. Un reloj. El refrigerador que zumba. Alguien que quieres moviéndose en otro cuarto, a gusto. [pause 30]\n\nSiéntate en tu lugar favorito. Deja que la silla o el sillón te sostenga. [pause 32]\n\nMira alrededor y nota qué silencio hay también dentro de ti. [pause 32]\n\nDi en tu mente, esta es una casa en paz. Aquí descanso. [pause 33]\n\nDeja que el silencio de esa casa se doble suavemente dentro del silencio de este cuarto. [pause 35]"
+   "text": "Es el principio de la noche. Vas llegando a casa después de un día largo. [pause 25]\n\nMete la llave en la cerradura, o empuja la puerta. Entra. [pause 27]\n\nFíjate en lo primero que hueles. Algo limpio. Algo que se está cocinando. El olor de tu propia casa, nada más. [pause 28]\n\nDeja tu bolsa en su lugar. Quítate los zapatos. Siente el piso bajo tus pies. [pause 28]\n\nRecorre los cuartos despacio. Todo está donde va. Nada te está llamando. [pause 30]\n\nPrende una lámpara de luz suave. Fíjate cómo cae la luz en la pared. [pause 30]\n\nEn algún lugar de la casa hay un sonido pequeño. Un reloj. El refrigerador que zumba. Alguien que quieres moviéndose en otro cuarto, a gusto. [pause 30]\n\nSiéntate en tu lugar favorito. Deja que la silla o el sillón te sostenga. [pause 32]\n\nMira alrededor y nota qué silencio hay también dentro de ti. [pause 32]\n\nDi en tu mente, esta es una casa en paz. Aquí descanso. [pause 33]\n\nDeja que el silencio de esa casa se junte despacio con el silencio de este cuarto. [pause 35]"
   },
   {
    "part": "close",
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

@@ -17,12 +17,12 @@
   {
    "part": "teaching",
    "speaker": "narrator",
-   "text": "Esta es la última noche de esta serie, así que cerramos con un porche, una tarde, y una mirada larga a una vida que te alegra estar viviendo. [pause 12]\n\nEn estas noches imaginaste muchos deseos. Un hogar, un trabajo que te gusta, gente buena contigo, un corazón tranquilo. Esta noche los juntamos en una sola tarde, dentro de muchos años, cuando te sientas en un porche a mirar hacia atrás. [pause 14]\n\nImagínate con más años. Sin preocuparte por envejecer, con los años ya bien acomodados. De esa edad en la que la gente te visita porque eres buena compañía. [pause 14]\n\nNo vas a llenar cada detalle. Deja que la tarde esté suave en las orillas. Lo que importa es la sensación de mirar tu vida y encontrarla buena. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento, no una promesa. La vida va a escribir sus propias líneas. Pero esta noche puedes descansar en la imagen de una vida bien vivida, y dejar que eso baste por ahora. [pause 8]\n\nImagina ahora el porche. Las tablas. El barandal. La luz junto a la puerta. [pause 15]"
+   "text": "Esta es la última noche de esta serie, así que cerramos con un porche, una tarde, y una mirada larga a una vida que te alegra estar viviendo. [pause 12]\n\nEn estas noches imaginaste muchos deseos. Un hogar, un trabajo que te gusta, gente buena contigo, un corazón tranquilo. Esta noche los juntamos en una sola tarde, dentro de muchos años, cuando te sientas en un porche a mirar hacia atrás. [pause 14]\n\nImagínate con más años. Sin preocuparte por envejecer, con los años ya bien acomodados. De esa edad en la que la gente te visita porque eres buena compañía. [pause 14]\n\nNo vas a llenar cada detalle. Deja que la tarde se quede un poco borrosa. Lo que importa es la sensación de mirar tu vida y encontrarla buena. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento, no una promesa. La vida va a escribir sus propias líneas. Pero esta noche puedes descansar en la imagen de una vida bien vivida, y dejar que eso baste por ahora. [pause 8]\n\nImagina ahora el porche. Las tablas. El barandal. La luz junto a la puerta. [pause 15]"
   },
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es una tarde de verano, dentro de muchos años. Estás en un porche, en una silla cómoda. [pause 26]\n\nFíjate en los sonidos. Los grillos. Una puerta de tela metálica en algún lado. Niños que se ríen calle abajo. [pause 29]\n\nAlguien que quieres sale y se sienta a tu lado. Ninguno de los dos necesita hablar. [pause 29]\n\nMira el patio. Los árboles ya están altos. Te acuerdas de cuando eran chiquitos. [pause 31]\n\nDeja que tu mente recorra los años. Un hogar que formaste. Un trabajo que te dio orgullo. Amistades que se quedaron. [pause 33]\n\nPiensa también en las temporadas difíciles. Nota que saliste de ellas. Nota en quién te convertiste. [pause 33]\n\nSe prende la luz del porche. Las palomillas se juntan alrededor. El cielo pasa del anaranjado al azul profundo. [pause 33]\n\nAlguien te da las buenas noches desde la banqueta, y le dices adiós con la mano. [pause 33]\n\nSiente qué lleno está tu corazón. No porque todo haya sido perfecto, sino porque fue tuyo. [pause 34]\n\nDi en tu mente, le doy gracias a mi vida. [pause 34]\n\nDeja encendida la luz del porche, y deja que la tarde larga se deslice despacio en esta noche. [pause 36]"
+   "text": "Es una tarde de verano, dentro de muchos años. Estás en un porche, en una silla cómoda. [pause 26]\n\nFíjate en los sonidos. Los grillos. Una puerta de mosquitero en algún lado. Niños que se ríen calle abajo. [pause 29]\n\nAlguien que quieres sale y se sienta a tu lado. No hace falta decir nada. [pause 29]\n\nMira el patio. Los árboles ya están altos. Te acuerdas de cuando eran chiquitos. [pause 31]\n\nDeja que tu mente recorra los años. Un hogar que formaste. Un trabajo que te dio orgullo. Amistades que se quedaron. [pause 33]\n\nPiensa también en las temporadas difíciles. Nota que saliste de ellas. Nota en quién te convertiste. [pause 33]\n\nSe prende la luz del porche. Las palomillas se juntan alrededor. El cielo pasa del anaranjado al azul profundo. [pause 33]\n\nAlguien te da las buenas noches desde la banqueta, y le dices adiós con la mano. [pause 33]\n\nSiente qué lleno está tu corazón. No porque todo haya sido perfecto, sino porque fue tuyo. [pause 34]\n\nDi en tu mente, le doy gracias a mi vida. [pause 34]\n\nDeja encendida la luz del porche, y deja que la tarde larga se deslice despacio en esta noche. [pause 36]"
   },
   {
    "part": "close",
@@ -30,7 +30,7 @@
    "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
   }
  ],
- "words": 618,
+ "words": 616,
  "shared_parts": {
   "settle": "settle2",
   "close": "close2"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1119,
+ "est_seconds": 1118,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

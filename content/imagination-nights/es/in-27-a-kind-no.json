@@ -17,7 +17,7 @@
   {
    "part": "teaching",
    "speaker": "narrator",
-   "text": "La escena de esta noche tiene que ver con una palabra pequeña que a mucha gente le cuesta decir. No. [pause 12]\n\nA muchas mujeres, sobre todo, les enseñaron a decir que sí. Sí al turno extra. Sí al favor. Sí a la persona que siempre pide y nunca ofrece. Con el tiempo, tantos síes pueden dejar mucho cansancio y un resentimiento callado. [pause 14]\n\nDecir que no no es falta de cariño. Es decir la verdad sobre lo que puedes dar. Un no con cariño protege el sí que quieres dar con todo el corazón. [pause 14]\n\nEsta noche vas a imaginar que le dices que no a algo, con suavidad y con claridad, y que después te sientes en paz. Sin culpa. Sin temblar. En paz. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento. No es una promesa de cómo va a reaccionar nadie. Si alguien en tu vida no acepta un no, y eso te da miedo, por favor habla con una persona preparada para ayudar. [pause 8]\n\nPiensa en una petición a la que te gustaría decir que no. Solo nómbrala para ti. [pause 15]"
+   "text": "La escena de esta noche tiene que ver con una palabra pequeña que a mucha gente le cuesta decir. No. [pause 12]\n\nA muchas mujeres, sobre todo, les enseñaron a decir que sí. Sí al turno extra. Sí al favor. Sí a la persona que siempre pide y nunca ofrece. Con el tiempo, tantos síes pueden dejar mucho cansancio y un resentimiento callado. [pause 14]\n\nNegarte no es falta de cariño. Es decir la verdad sobre lo que puedes dar. Un no con cariño protege el sí que quieres dar con todo el corazón. [pause 14]\n\nEsta noche vas a imaginar que le dices que no a algo, con suavidad y con claridad, y que después te sientes en paz. Sin culpa. Sin temblar. En paz. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento. No es una promesa de cómo va a reaccionar nadie. Si alguien en tu vida no acepta un no, y eso te da miedo, por favor habla con una persona preparada para ayudar. [pause 8]\n\nPiensa en una petición a la que te gustaría decir que no. Solo nómbrala para ti. [pause 15]"
   },
   {
    "part": "scene",
@@ -30,7 +30,7 @@
    "text": "Ahora deja que la escena se quede contigo mientras te vas quedando en calma. [pause 10]\n\nNo tienes que agarrarla fuerte. Solo deja que esté ahí, tibia y callada, como una lámpara encendida en otro cuarto. [pause 15]\n\nSi la mente se te va, vuelve a un detalle pequeño. Un sonido. Una palabra. Lo que sienten tus manos. [pause 20]\n\nEsto es solo imaginación, y la imaginación tiene permiso de ser amable. [pause 20]\n\nTal vez notes que respiras más despacio que cuando empezamos. Deja que siga así. [pause 25]\n\nDeja que el cuerpo pese todavía un poco más. No hay ningún lugar adonde ir. [pause 25]\n\nSi el sueño todavía no llega, no pasa nada. Quédate en silencio con la escena, y deja que el silencio haga lo suyo. [pause 30]\n\nDescansa ahora. [pause 60]"
   }
  ],
- "words": 641,
+ "words": 639,
  "shared_parts": {
   "settle": "settle1",
   "close": "close1"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1120,
+ "est_seconds": 1119,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

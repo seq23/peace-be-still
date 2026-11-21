@@ -4,13 +4,13 @@
 theme: la mañana después del deseo
 settle: settle1
 teaching: Esta noche probamos algo un poco distinto. En lugar de imaginar la tarde después de tu deseo, imaginamos la mañana. [pause 6]
-teaching: Los primeros segundos al despertar son honestos. Antes de acordarnos del día, el cuerpo ya sabe cómo se siente. Hay mañanas en que despertamos con un nudo. Y hay otras en que despertamos ligeros. [pause 8]
+teaching: Los primeros segundos al despertar son honestos. Antes de acordarnos del día, el cuerpo ya sabe cómo se siente. Hay mañanas en que despertamos con un nudo. Y hay otras en que despertamos con ligereza. [pause 8]
 teaching: Esta noche vas a imaginar que despiertas una mañana cualquiera después de que tu deseo se cumplió. No el día en que pasó. Una mañana sencilla, semanas después, cuando ya es parte de tu vida. [pause 8]
 teaching: Fíjate cómo se siente tu cuerpo en ese primer momento. ¿Qué es lo primero que piensas? ¿De dónde entra la luz? ¿Qué se oye? [pause 8]
 teaching: Como siempre, esta es una práctica de imaginación y de sentimiento. No es una promesa de lo que va a pasar. Es una manera suave de irte a la cama con una imagen más ligera del día de mañana, y de dejar que el cuerpo ensaye lo que se siente la calma. [pause 8]
 teaching: Trae ahora tu deseo a la mente. Solo nómbralo una vez, en silencio. [pause 13]
 scene: Es temprano en la mañana. Te estás despertando. Todavía tienes los ojos cerrados. [pause 22]
-scene: Fíjate en los sonidos. Un pájaro afuera. Un carro a lo lejos. El zumbido de la casa. [pause 25]
+scene: Fíjate en los sonidos. Un pájaro afuera. Un carro a lo lejos. Los ruiditos de la casa. [pause 25]
 scene: Antes de abrir los ojos, te acuerdas. Ah. Es cierto. Ya pasó. [pause 25]
 scene: Siente cómo llega la sonrisa antes de que decidas sonreír. [pause 25]
 scene: Abre los ojos en la escena. Fíjate en la luz del techo. El color de las paredes. [pause 25]
@@ -28,7 +28,7 @@ close: close1
 theme: la buena noticia que llega
 settle: settle2
 teaching: La escena de esta noche es abrir una buena noticia. Una carta, un correo, un mensaje. El momento en que lees las palabras que esperabas. [pause 13]
-teaching: Muchos hemos abierto noticias que nos desilusionaron. Recordamos esa sensación, y nos preparamos para que vuelva. Por eso esta noche ensayamos la otra. El respiro rápido. La segunda lectura, nada más para estar seguros. La risa que se escapa sola. [pause 15]
+teaching: A mucha gente le ha tocado abrir noticias que la desilusionaron. Recordamos esa sensación, y nos preparamos para que vuelva. Por eso esta noche ensayamos la otra. El respiro rápido. La segunda lectura, nada más para no quedarnos con la duda. La risa que se escapa sola. [pause 15]
 teaching: El truco es hacer el momento pequeño y concreto. No una historia completa. Solo tus manos, la pantalla o el papel, y unas cuantas palabras que casi puedes ver. [pause 15]
 teaching: Tú escoges cuál es la noticia. Una aceptación. Una aprobación. Un sí. Guárdatelo si quieres. Nadie más necesita saber lo que imaginas. [pause 15]
 teaching: Si últimamente te han tocado muchas noticias difíciles, ve despacio. Puedes imaginar el sobre un buen rato antes de abrirlo. Deja primero que se calme tu respiración. En la imaginación no hay prisa. [pause 5]
@@ -42,7 +42,7 @@ scene: Siente cómo se te sale todo el aire de una vez. Siente tu mano que va a 
 scene: Tal vez te ríes. Tal vez se te llenan los ojos de lágrimas. Deja que venga lo que venga. [pause 33]
 scene: Ahora imagina a quién se lo cuentas primero. Óyete decirlo en voz alta por primera vez. Sí pasó. [pause 33]
 scene: Oye su respuesta. Oye la alegría en su voz. [pause 33]
-scene: Más tarde esa noche, vuelves a leer el mensaje antes de acostarte. Ya se siente más tranquilo. Real. [pause 35]
+scene: Más tarde esa noche, vuelves a leer el mensaje antes de acostarte. Ahora lo lees con más calma. Es real. [pause 35]
 scene: Deja el teléfono. Recuéstate. Deja que las palabras se queden en tu mente mientras te vas quedando en calma. [pause 35]
 close: close2
 
@@ -63,7 +63,7 @@ scene: Alguien pasa detrás de ti y te aprieta el hombro con cariño. [pause 29]
 scene: Mira alrededor de la mesa, una cara a la vez. Date permiso de alegrarte por cada una. [pause 32]
 scene: Más tarde, la gente se queda en la puerta despidiéndose un buen rato, como pasa en las familias. [pause 32]
 scene: Cuando la casa vuelve a estar en silencio, te quedas un momento con el corazón lleno. Fue un buen día. [pause 34]
-scene: Di en tu mente, estamos bien. Estamos juntos. [pause 34]
+scene: Di en tu mente, estamos bien. Estamos en familia. [pause 34]
 scene: Deja que la mesa y las voces se desvanezcan, y quédate con el calor. [pause 37]
 close: close1
 
@@ -95,7 +95,7 @@ settle: settle1
 teaching: Esta noche es para quien va camino a una meta. Un título. Un certificado. Un libro. Un proyecto largo. Terminar de pagar algo. Salir de una temporada difícil. [pause 11]
 teaching: Cuando estamos a la mitad de algo largo, el final puede sentirse irreal. Solo vemos la próxima tarea, el próximo turno, el próximo pago. Esta noche damos un paso adelante, hasta el final. [pause 13]
 teaching: Imagina el día en que ya está terminado. No el estrés de la última semana, sino el momento en que sabes que ya acabó. Tal vez tienes un papel en las manos. Tal vez nada más cierras la computadora. Tal vez alguien te abraza. [pause 13]
-teaching: Date permiso de sentir orgullo. Muchos no tenemos costumbre de sentirlo. Está bien practicarlo. [pause 13]
+teaching: Date permiso de sentir orgullo. A mucha gente no le enseñaron a sentirlo. Está bien practicarlo. [pause 13]
 teaching: Si antes empezaste y lo dejaste, eso no cuenta en tu contra. Mucha gente termina al segundo o al tercer intento. Esta noche puedes imaginar que esta vez es la vez que llegas al final. [pause 5]
 teaching: Esto es imaginación y sentimiento, no una promesa de ningún resultado. Sigue haciendo el trabajo durante el día. Esta noche, descansa con el final a la vista. [pause 18]
 scene: Es el día en que todo terminó. Fíjate dónde estás. Un salón. Una oficina. La mesa de tu propia cocina. [pause 26]
@@ -106,7 +106,7 @@ scene: Piensa un momento en la noche más difícil de todo el camino. Esa en la 
 scene: Ahora mírate hoy, del otro lado. Date permiso de asombrarte un poco. [pause 32]
 scene: Imagina que llegas a casa esa tarde. Te quitas los zapatos. Mañana no hay nada pendiente. [pause 32]
 scene: Alguien te llama para felicitarte. Óyete decir, gracias. De verdad siento mucho orgullo. [pause 32]
-scene: Antes de acostarte, pones la prueba en un lugar donde la vas a ver. En el refrigerador. En un estante. [pause 34]
+scene: Antes de acostarte, pones el diploma, o el último recibo, donde lo vas a ver. En el refrigerador. En un estante. [pause 34]
 scene: Di bajito, lo terminé. [pause 34]
 scene: Deja que esa frase sea la última en tu mente esta noche. [pause 36]
 close: close1
@@ -115,7 +115,7 @@ close: close1
 theme: el valor propio
 settle: settle2
 teaching: El deseo de esta noche no es conseguir algo. Tiene que ver con lo que sientes por ti. [pause 16]
-teaching: Muchos nos hablamos en la noche de una forma en que nunca le hablaríamos a una amistad. Repasamos nuestros errores. Nos ponemos apodos feos. Nos preguntamos por qué somos así. [pause 18]
+teaching: Mucha gente se habla en la noche de una forma en que nunca le hablaría a una amistad. Repasa sus errores. Se pone apodos feos. Se pregunta por qué es así. [pause 18]
 teaching: Esta noche practicamos otra voz. Imaginamos una versión de ti, dentro de unos meses, que ya hizo las paces con quien eres. No perfecta. Solo amable contigo, firme y sin vergüenza. [pause 18]
 teaching: Si la voz en tu cabeza ha sido muy dura contigo por mucho tiempo, o si tienes pensamientos de hacerte daño, por favor habla con alguien durante el día. En Estados Unidos puedes llamar o mandar un mensaje al 988 a cualquier hora, y también te atienden en español. Mereces ayuda y mereces cariño. [pause 18]
 teaching: Esto es imaginación y sentimiento, no una promesa. Pero practicar una voz amable es una buena manera de cerrar el día. [pause 23]
@@ -123,7 +123,7 @@ scene: Estás frente a un espejo, dentro de unos meses. [pause 33]
 scene: Mira tu propia cara. Nota que no apartas la mirada. [pause 36]
 scene: Fíjate en tus ojos. Se ven descansados. [pause 36]
 scene: Óyete decir, en tu mente, buenos días. Y decirlo en serio. [pause 36]
-scene: Imagina que más tarde, ese mismo día, cometes un error pequeño. Se te tira algo. Se te olvida un nombre. [pause 36]
+scene: Imagina que más tarde, ese mismo día, cometes un error pequeño. Se te cae algo. Se te olvida un nombre. [pause 36]
 scene: Oye cómo te hablas ahora. No pasa nada. A todo el mundo le pasa. Te ríes un poco y sigues. [pause 38]
 scene: Imagina que alguien te hace un cumplido. Nota que puedes decir gracias sin discutirlo. [pause 38]
 scene: En la noche, imagina un rato a solas, en silencio. Se siente como buena compañía. [pause 38]
@@ -147,7 +147,7 @@ scene: Llega la primera persona del día. Sonríe. Ya ha venido antes. [pause 28
 scene: Óyela decir, le hablé de ti a mi hermana. La próxima semana viene. [pause 28]
 scene: Siente cómo haces el trabajo que sabes hacer bien. Tus manos saben qué hacer. [pause 31]
 scene: A mediodía hay un poco de movimiento. Es un ajetreo del bueno. [pause 31]
-scene: Al cerrar, haces las cuentas del día. Fue un buen día. Nada del otro mundo. Solo bueno. Lo suficiente para sentirte con estabilidad. [pause 31]
+scene: Al cerrar, haces las cuentas del día. Fue un buen día. Nada del otro mundo. Solo bueno. Lo suficiente para sentir que el negocio está firme. [pause 31]
 scene: Voltea el letrero a cerrado. Quédate un momento en el silencio del lugar que construiste. [pause 33]
 scene: Di en tu mente, esto es mío. Yo lo hice. [pause 33]
 scene: Deja que el silencio de ese lugar se vuelva el silencio de este cuarto. [pause 35]
@@ -198,7 +198,7 @@ close: close1
 === in-20-a-year-from-now | Dentro de un año
 theme: vivir desde el final, con la mirada larga
 settle: settle2
-teaching: Esta noche cerramos esta serie con una mirada más larga. Dentro de un año. [pause 13]
+teaching: Esta noche miramos más lejos. Dentro de un año. [pause 13]
 teaching: Imagínate dentro de un año, esta misma noche, en la cama, pensando en el año que pasó. Los deseos que cargaste este año tuvieron tiempo de crecer. Algunos ya son parte de tu vida de todos los días. [pause 15]
 teaching: En esta práctica miras hacia atrás, no hacia adelante. Recuerdas el año como si ya hubiera pasado. Te fijas en cómo cambiaste. Cómo saliste de las partes difíciles. Qué te sorprendió. [pause 15]
 teaching: Mirar hacia atrás desde el final es el corazón de vivir desde el final. Deja que tu mente descanse en la imagen terminada, en lugar del camino sin terminar. [pause 15]

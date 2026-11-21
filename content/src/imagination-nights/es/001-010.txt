@@ -65,8 +65,8 @@ scene: Imagina una tarde, dentro de unas semanas. El deseo ya se cumplió. Ya no
 scene: Estás en casa, al final del día. Fíjate dónde te sientas. Un sillón. Una silla de la cocina. El escalón de la entrada. [pause 14]
 scene: Fíjate en la luz. Tal vez es la última luz anaranjada de la tarde entrando por la ventana. Tal vez es una lámpara. [pause 14]
 scene: No estás pensando en el deseo. Solo estás viviendo después. Sientes un descanso que hacía mucho no sentías. [pause 16]
-scene: Vibra tu teléfono. Es alguien que sabe. Te escribe para saber cómo estás, como hace la gente cuando algo bueno ya llegó a tu vida. Le sonríes a la pantalla. [pause 16]
-scene: Oye su voz. Te dice algo sencillo. Me da mucho gusto por ti. Y tú le dices, a mí también. Todavía se siente bonito. [pause 19]
+scene: Vibra tu teléfono. Es alguien que ya sabe la noticia. Te llama para saber cómo estás, como hace la gente cuando algo bueno ya llegó a tu vida. Le sonríes a la pantalla. [pause 16]
+scene: Oye su voz. Te dice algo sencillo. Me da mucho gusto por ti. Y tú le dices, gracias, yo también estoy feliz. Todavía se siente bonito. [pause 19]
 scene: Deja el teléfono. Mira alrededor. ¿Qué cambió? Tal vez algo pequeño. Una llave nueva sobre la mesa. Un nombre en el calendario. Una carta en la mesa del comedor. [pause 19]
 scene: Siente tus hombros. Nota que no están tensos. La preocupación que cargabas por esto ya no está. [pause 19]
 scene: Respira dentro de la escena. Respira como respira alguien cuando por fin terminó una larga espera. [pause 19]
@@ -76,7 +76,7 @@ scene: Ahora deja que la tarde avance un poco. Te levantas a prepararte algo cal
 scene: Te asomas a la ventana. Afuera la calle está en calma. Pasa un carro. Se prende la luz del porche de un vecino. [pause 19]
 scene: Piensas en el tiempo de antes, cuando todavía esperabas. Ya se siente lejos. Como una temporada que terminó. [pause 22]
 scene: No hay orgullo ni nervios. Solo calma. Así es tu vida ahora, sin más. [pause 22]
-scene: Deja que la escena se ponga suave en las orillas, como se ve un cuarto cuando el sueño ya casi llega. [pause 24]
+scene: Deja que la escena se vaya desdibujando, como se ve un cuarto cuando el sueño ya casi llega. [pause 24]
 close: close1
 
 === in-02-sats | Al borde del sueño
@@ -95,7 +95,7 @@ scene: Ahora deja que pase otra vez, igualito. No hace falta hacerlo más grande
 scene: Y otra vez. Un poco más lento esta vez. [pause 24]
 scene: Si se te pierde, no pasa nada. Empiézala otra vez desde el principio. [pause 24]
 scene: Siente lo natural que es. Como si ya hubiera pasado muchas veces. Como si fuera un recuerdo. [pause 27]
-scene: Deja que las palabras de la escena se hagan muy sencillas. Tal vez una sola palabra. Felicidades. Gracias. Bienvenido a casa. [pause 27]
+scene: Deja que las palabras de la escena se hagan muy sencillas. Tal vez una sola palabra. Felicidades. Gracias. Qué gusto tenerte en casa. [pause 27]
 scene: Di esa palabra en tu mente, bajito, al ritmo de tu respiración. [pause 29]
 scene: Nota qué poco esfuerzo cuesta. No estás construyendo nada. Solo estás recordando un momento. [pause 27]
 scene: Si llega otro pensamiento, déjalo pasar, como alguien que cruza al fondo de un cuarto. Luego vuelve a tu escena. [pause 27]
@@ -108,7 +108,7 @@ close: close2
 theme: revisar el día
 settle: settle1
 teaching: La práctica de esta noche se llama revisión. Es para los días que no salieron como querías. [pause 5]
-teaching: Casi todos repasamos en la noche un mal momento. La discusión. El error en el trabajo. Lo que quisimos decir y no dijimos. Lo repetimos una y otra vez, y cada vez nos sentimos peor. [pause 7]
+teaching: A casi toda la gente le pasa: en la noche repasamos un mal momento. La discusión. El error en el trabajo. Lo que quisimos decir y no dijimos. Lo repetimos una y otra vez, y cada vez nos sentimos peor. [pause 7]
 teaching: La revisión le da la vuelta a esa costumbre. Vuelves a repasar el momento, pero esta vez lo cambias en tu imaginación. Dejas que salga como te hubiera gustado. Oyes las palabras más amables. Te ves con calma. [pause 7]
 teaching: Esto no borra lo que pasó, y no es hacerse de la vista gorda. Si le debes a alguien una disculpa o una llamada, eso sigue siendo tuyo para mañana. La revisión es una manera de no llevarte ese momento a la cama, y de practicar la persona que quieres ser la próxima vez. [pause 7]
 teaching: Piensa en un momento de hoy que te gustaría volver a contar. Mejor si es algo pequeño. [pause 12]
@@ -154,7 +154,7 @@ close: close2
 === in-05-work | La llamada que esperabas
 theme: el trabajo
 settle: settle1
-teaching: El deseo de esta noche tiene que ver con el trabajo. Un empleo, un ascenso, un proyecto aceptado, un negocio que por fin tiene clientes. Lo que sea que vienes esperando en tu vida de trabajo. [pause 6]
+teaching: El deseo de esta noche tiene que ver con el trabajo. Un empleo, un ascenso, un proyecto aceptado, un negocio que por fin tiene clientes. Eso que llevas tiempo esperando en tu trabajo. [pause 6]
 teaching: Cuando esperamos algo del trabajo, casi siempre nos imaginamos la entrevista, la espera, el correo que nunca llega. Esta noche nos adelantamos. Nos imaginamos un momento después de la buena noticia, cuando ya se siente normal. [pause 8]
 teaching: Una imagen útil es una que solo puede pasar si el deseo ya se cumplió. Alguien que te felicita. Tu primera mañana en el lugar nuevo. Contárselo a alguien en la cena. [pause 8]
 teaching: Esto no es una promesa de ningún resultado. Sigue haciendo el trabajo real durante el día: las solicitudes, las llamadas, la práctica. Esto es para la manera en que te vas a la cama. [pause 8]
@@ -163,7 +163,7 @@ teaching: Si el trabajo ha estado difícil por mucho tiempo, esto puede doler un
 scene: Es una mañana entre semana, dentro de unas semanas. Lo que esperabas ya pasó. [pause 23]
 scene: Te estás arreglando. Fíjate qué ropa llevas. Fíjate cómo te sientes con ella. [pause 23]
 scene: Llegas, o te conectas, y alguien te saluda por tu nombre. Es algo de todos los días. Ya perteneces aquí. [pause 26]
-scene: Siente cómo te sientas a trabajar. Es un reto, pero un reto bueno. Sabes qué sigue. [pause 26]
+scene: Fíjate cómo te pones a trabajar. Es un reto, pero un reto bueno. Sabes qué sigue. [pause 26]
 scene: Ahora imagina la noche de ese día. Le estás contando a alguien de confianza cómo te fue. Se ríen de algo pequeño que pasó. [pause 26]
 scene: Oye cómo te dice, yo sabía que podías. Siente el calorcito en la cara. [pause 26]
 scene: Nota que la preocupación de antes no está. No estás revisando el correo a cada rato. Eso ya quedó atrás. [pause 29]
@@ -177,12 +177,12 @@ close: close1
 === in-06-love | Alguien que se alegra de verte
 theme: el amor
 settle: settle2
-teaching: El deseo de esta noche tiene que ver con el amor. Puede ser una pareja, una amistad que sana, una familia que se acerca, o simplemente sentirte menos en soledad. [pause 8]
+teaching: El deseo de esta noche tiene que ver con el amor. Puede ser una pareja, una amistad que sana, una familia que se acerca, o simplemente sentir menos soledad. [pause 8]
 teaching: Esta práctica tiene que ver con tus propios sentimientos y tu propia imaginación. Nunca se trata de controlar a otra persona. Cada quien tiene sus propias decisiones. Lo que sí puedes practicar esta noche es cómo se siente recibir amor y darlo con libertad. [pause 10]
 teaching: Por eso no vamos a imaginar a una persona en particular cambiando de opinión. Vamos a imaginar la sensación de una noche tibia y segura con alguien que se alegra de que estés ahí. [pause 10]
 teaching: Como siempre, esto no es una promesa sobre el futuro. Es una manera de quedarte en calma sintiendo cariño en lugar de soledad. [pause 10]
 teaching: Deja que te llegue la sensación de ese tipo de amor. Todavía no necesita una cara. [pause 14]
-teaching: Si el amor te ha lastimado, ve con calma. Puedes imaginar un amor que es amable, paciente y seguro. Mereces ese tipo de amor, y puedes ensayar cómo se siente recibirlo sin miedo. Si estás en una relación que te da miedo, por favor busca ayuda durante el día. [pause 10]
+teaching: Si el amor te ha lastimado, ve con calma. Puedes imaginar un amor tranquilo, que te cuida y te da seguridad. Mereces ese tipo de amor, y puedes ensayar cómo se siente recibirlo sin miedo. Si estás en una relación que te da miedo, por favor busca ayuda durante el día. [pause 10]
 scene: Estás en una mesa, tarde en la noche. Ya se lavaron los trastes. Hay música bajita. [pause 23]
 scene: Frente a ti hay alguien que se alegra de que estés ahí. Fíjate cómo lo sabes. Cómo te mira. Lo fácil que se siente el ambiente. [pause 27]
 scene: Te cuenta algo de su día. Escuchas. Te escucha también. Nadie tiene prisa. [pause 27]
@@ -201,11 +201,11 @@ close: close2
 theme: la seguridad en ti
 settle: settle1
 teaching: Esta noche hablamos de la seguridad en ti. De entrar a un lugar y sentir que ahí tienes tu sitio. [pause 5]
-teaching: La seguridad es, en parte, un sentimiento que se practica. Si solo nos imaginamos con nervios, haciéndonos chiquitos o fuera de lugar, eso es lo que ensayamos. Esta noche ensayamos otra cosa. [pause 7]
-teaching: Escoge un lugar donde casi siempre te sientes con inseguridad. Una junta. Una reunión familiar. Una clase. Una fiesta. Vamos a entrar juntos, en tu imaginación, como la persona que te gustaría ser ahí. [pause 7]
+teaching: La seguridad es, en parte, un sentimiento que se practica. Si solo nos imaginamos con nervios, encogiéndonos, con la sensación de no encajar, eso es lo que ensayamos. Esta noche ensayamos otra cosa. [pause 7]
+teaching: Escoge un lugar donde casi siempre sientes inseguridad. Una junta. Una reunión familiar. Una clase. Una fiesta. Vamos a entrar ahí, en tu imaginación, como la persona que te gustaría ser ahí. [pause 7]
 teaching: No se trata de fingir que eres otra persona. Se trata de darte permiso de sentirte firme. [pause 7]
 teaching: Escoge tu lugar ahora. [pause 12]
-teaching: Tener seguridad no quiere decir no ponerse nervioso nunca. Hasta la gente más segura siente mariposas en el estómago. Quiere decir que puedes sentir las mariposas y aun así entrar, hablar, quedarte. Esta noche practicamos esa sensación, para que te sea un poco más conocida la próxima vez que la necesites. El cuerpo aprende de lo que ensaya, y esta noche puede ensayar la calma firme. [pause 7]
+teaching: Tener seguridad no quiere decir no sentir nervios nunca. Hasta la gente más segura siente mariposas en el estómago. Quiere decir que puedes sentir las mariposas y aun así entrar, hablar, quedarte. Esta noche practicamos esa sensación, para que te sea un poco más conocida la próxima vez que la necesites. El cuerpo aprende de lo que ensaya, y esta noche puede ensayar la calma firme. [pause 7]
 scene: Estás justo afuera de la puerta. Siente los pies en el piso. Firmes. [pause 21]
 scene: Respira una vez, despacio. Siente cómo se endereza un poco la espalda, sin ponerse rígida, solo derecha. [pause 21]
 scene: Ahora entra. Nota que nadie se sorprende ni se te queda viendo. La gente simplemente levanta la vista, y algunos sonríen. [pause 24]
@@ -225,8 +225,8 @@ close: close1
 theme: la calma después del deseo
 settle: settle2
 teaching: Esta noche la práctica es más callada. No hay una escena larga. Solo una sensación, sostenida un buen rato. [pause 8]
-teaching: Es la sensación que tienes cuando por fin termina algo que esperabas. Ya pasó el examen. Ya se firmaron los papeles. Ya llegó la llamada. Sueltas un aire que ni sabías que estabas guardando. [pause 10]
-teaching: Le decimos la sensación de ya está hecho. No es emoción. Es alivio. Descanso. El final de estar estirando la mano. [pause 10]
+teaching: Es la sensación que tienes cuando por fin termina algo que esperabas. Ya pasó el examen. Ya se firmaron los papeles. Ya llegó la llamada. Sueltas el aire que, sin darte cuenta, estabas aguantando. [pause 10]
+teaching: Le decimos la sensación de ya está hecho. No es emoción. Es alivio. Descanso. Ya no tienes que seguir persiguiéndolo. [pause 10]
 teaching: Puedes traer cualquier deseo a esta práctica. No tienes que imaginar ningún detalle. Solo la sensación de después. [pause 10]
 teaching: Y, como siempre, es una práctica para tu paz de esta noche, no una promesa sobre mañana. [pause 15]
 teaching: Hay quien lleva tanto tiempo esperando algo que ya se le olvidó lo que es parar. Esta noche puedes practicar parar. Solo por un ratito, puedes dejar descansar el deseo, como si ya tuviera respuesta, y dejar que todo tu cuerpo sienta lo que es el alivio. Luego puedes dejar que el sueño llegue con esa sensación, y no con la espera. [pause 10]
@@ -276,7 +276,7 @@ teaching: Esta escena funciona bien porque es corta, es cálida, y solo puede pa
 teaching: Puedes repetirla muchas veces mientras te da sueño. Es una práctica de imaginación, no una promesa. Pero es una cosa muy bonita para quedarse en calma. [pause 11]
 teaching: Escoge a esa persona, y escoge tu buena noticia. [pause 16]
 teaching: Ayuda escoger a alguien cuya voz conoces bien. Cómo se ríe. Las palabras que siempre usa. Mientras más conocida la voz, más natural se siente la escena. Si no te viene nadie a la mente, imagina a una vecina amable, a un compañero de trabajo, o a alguien con quien te gustaría tener amistad. [pause 11]
-scene: Tú y esa persona están juntos en un lugar conocido. Una cocina. La puerta de la casa. Un estacionamiento después de un día cualquiera. [pause 26]
+scene: Tú y esa persona comparten un lugar conocido. Una cocina. La puerta de la casa. Un estacionamiento después de un día cualquiera. [pause 26]
 scene: Se voltea hacia ti. Ya está sonriendo antes de decir nada. [pause 26]
 scene: Óyela decirlo. Felicidades. Me da mucho gusto por ti. [pause 29]
 scene: Siente su mano en tu brazo. O sus brazos alrededor de ti. [pause 29]

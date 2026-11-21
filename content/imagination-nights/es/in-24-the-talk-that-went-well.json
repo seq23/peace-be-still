@@ -17,12 +17,12 @@
   {
    "part": "teaching",
    "speaker": "narrator",
-   "text": "Esta noche es para una plática que has estado aplazando. Pedir un aumento. Decirle a alguien de tu familia cómo te sientes. Aclarar algo con una amistad. [pause 12]\n\nCuando le tenemos miedo a una plática, casi siempre la ensayamos saliendo mal. Repetimos la peor versión una y otra vez hasta que el estómago se nos hace nudo. Esta noche la ensayamos saliendo bien. [pause 14]\n\nLa otra persona sigue teniendo su propia manera de pensar, así que no nos imaginamos obligándola a estar de acuerdo. Te imaginamos a ti. Con calma. Con claridad. Con amabilidad. Diciendo lo que fuiste a decir, y saliendo con gusto de haberlo dicho. [pause 14]\n\nSi la persona con la que necesitas hablar te da miedo, o te ha lastimado, por favor no lo hagas a solas. Habla primero con alguien preparado para ayudar, y cuídate. La escena de esta noche es para pláticas difíciles de todos los días, no para pláticas peligrosas. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento. No es una promesa de cómo va a responder nadie. Es una manera de dejar que tu cuerpo practique la firmeza en un momento que casi siempre lo hace temblar. [pause 8]\n\nTrae ahora a la mente esa plática. Solo la persona y el lugar. [pause 15]"
+   "text": "Esta noche es para una plática que has estado aplazando. Pedir un aumento. Decirle a alguien de tu familia cómo te sientes. Aclarar algo con una amistad. [pause 12]\n\nCuando le tenemos miedo a una plática, casi siempre la ensayamos saliendo mal. Repetimos la peor versión una y otra vez hasta que el estómago se nos hace nudo. Esta noche la ensayamos saliendo bien. [pause 14]\n\nLa otra persona sigue teniendo su propia manera de pensar, así que no nos imaginamos obligándola a estar de acuerdo. Imaginamos solo tu parte. Con calma. Con claridad. Con amabilidad. Diciendo lo que fuiste a decir, y saliendo con gusto de haberlo dicho. [pause 14]\n\nSi la persona con la que necesitas hablar te da miedo, o te ha lastimado, por favor no lo hagas a solas. Habla primero con alguien preparado para ayudar, y cuídate. La escena de esta noche es para pláticas difíciles de todos los días, no para pláticas peligrosas. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento. No es una promesa de cómo va a responder nadie. Es una manera de dejar que tu cuerpo practique la firmeza en un momento que casi siempre lo hace temblar. [pause 8]\n\nTrae ahora a la mente esa plática. Solo la persona y el lugar. [pause 15]"
   },
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Vas caminando hacia el lugar donde van a hablar. Nota que tus pasos son parejos. [pause 29]\n\nRespira una vez, despacio, antes de empezar. Siente los pies en el piso. [pause 32]\n\nSiéntate o párate frente a esa persona. Mira su cara. Deja que sea una cara normal, no una que da miedo. [pause 32]\n\nÓyete empezar. Tu voz suena tranquila. Dices la primera frase, y sale tal como querías. [pause 34]\n\nSigue. Dices la parte difícil con sencillez, sin apurarte y sin pedir perdón por decirla. [pause 36]\n\nNota que te está escuchando. Nota que el cuarto sigue en pie. [pause 36]\n\nDeja que conteste, como sea que conteste. Siente que sigues firme. Dijiste lo que era verdad. [pause 36]\n\nCuando termina, sales al aire libre. Sientes los hombros ligeros. [pause 36]\n\nDi en tu mente, dije lo que tenía que decir. Puedo hacer cosas difíciles con amabilidad. [pause 37]\n\nDeja que el alivio de esa caminata se acomode en tu pecho mientras descansas. [pause 39]"
+   "text": "Vas caminando hacia el lugar donde van a hablar. Nota que tus pasos son parejos. [pause 29]\n\nRespira una vez, despacio, antes de empezar. Siente los pies en el piso. [pause 32]\n\nSiéntate o párate frente a esa persona. Mira su cara. Deja que sea una cara normal, no una que da miedo. [pause 32]\n\nÓyete empezar. Tu voz suena tranquila. Dices la primera frase, y sale tal como querías. [pause 34]\n\nSigue. Dices la parte difícil con sencillez, sin apurarte y sin pedir perdón por decirla. [pause 36]\n\nNota que te está escuchando. Nota que no pasa nada malo. [pause 36]\n\nDeja que conteste, como sea que conteste. Siente que sigues firme. Dijiste lo que era verdad. [pause 36]\n\nCuando termina, sales al aire libre. Sientes los hombros ligeros. [pause 36]\n\nDi en tu mente, dije lo que tenía que decir. Puedo hacer cosas difíciles con amabilidad. [pause 37]\n\nDeja que el alivio de esa caminata se acomode en tu pecho mientras descansas. [pause 39]"
   },
   {
    "part": "close",
@@ -30,7 +30,7 @@
    "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
   }
  ],
- "words": 608,
+ "words": 607,
  "shared_parts": {
   "settle": "settle2",
   "close": "close2"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1110,
+ "est_seconds": 1109,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

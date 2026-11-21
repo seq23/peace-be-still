@@ -17,7 +17,7 @@
   {
    "part": "teaching",
    "speaker": "narrator",
-   "text": "Esta noche hablamos de la seguridad en ti. De entrar a un lugar y sentir que ahí tienes tu sitio. [pause 5]\n\nLa seguridad es, en parte, un sentimiento que se practica. Si solo nos imaginamos con nervios, haciéndonos chiquitos o fuera de lugar, eso es lo que ensayamos. Esta noche ensayamos otra cosa. [pause 7]\n\nEscoge un lugar donde casi siempre te sientes con inseguridad. Una junta. Una reunión familiar. Una clase. Una fiesta. Vamos a entrar juntos, en tu imaginación, como la persona que te gustaría ser ahí. [pause 7]\n\nNo se trata de fingir que eres otra persona. Se trata de darte permiso de sentirte firme. [pause 7]\n\nEscoge tu lugar ahora. [pause 12]\n\nTener seguridad no quiere decir no ponerse nervioso nunca. Hasta la gente más segura siente mariposas en el estómago. Quiere decir que puedes sentir las mariposas y aun así entrar, hablar, quedarte. Esta noche practicamos esa sensación, para que te sea un poco más conocida la próxima vez que la necesites. El cuerpo aprende de lo que ensaya, y esta noche puede ensayar la calma firme. [pause 7]"
+   "text": "Esta noche hablamos de la seguridad en ti. De entrar a un lugar y sentir que ahí tienes tu sitio. [pause 5]\n\nLa seguridad es, en parte, un sentimiento que se practica. Si solo nos imaginamos con nervios, encogiéndonos, con la sensación de no encajar, eso es lo que ensayamos. Esta noche ensayamos otra cosa. [pause 7]\n\nEscoge un lugar donde casi siempre sientes inseguridad. Una junta. Una reunión familiar. Una clase. Una fiesta. Vamos a entrar ahí, en tu imaginación, como la persona que te gustaría ser ahí. [pause 7]\n\nNo se trata de fingir que eres otra persona. Se trata de darte permiso de sentirte firme. [pause 7]\n\nEscoge tu lugar ahora. [pause 12]\n\nTener seguridad no quiere decir no sentir nervios nunca. Hasta la gente más segura siente mariposas en el estómago. Quiere decir que puedes sentir las mariposas y aun así entrar, hablar, quedarte. Esta noche practicamos esa sensación, para que te sea un poco más conocida la próxima vez que la necesites. El cuerpo aprende de lo que ensaya, y esta noche puede ensayar la calma firme. [pause 7]"
   },
   {
    "part": "scene",
@@ -30,7 +30,7 @@
    "text": "Ahora deja que la escena se quede contigo mientras te vas quedando en calma. [pause 10]\n\nNo tienes que agarrarla fuerte. Solo deja que esté ahí, tibia y callada, como una lámpara encendida en otro cuarto. [pause 15]\n\nSi la mente se te va, vuelve a un detalle pequeño. Un sonido. Una palabra. Lo que sienten tus manos. [pause 20]\n\nEsto es solo imaginación, y la imaginación tiene permiso de ser amable. [pause 20]\n\nTal vez notes que respiras más despacio que cuando empezamos. Deja que siga así. [pause 25]\n\nDeja que el cuerpo pese todavía un poco más. No hay ningún lugar adonde ir. [pause 25]\n\nSi el sueño todavía no llega, no pasa nada. Quédate en silencio con la escena, y deja que el silencio haga lo suyo. [pause 30]\n\nDescansa ahora. [pause 60]"
   }
  ],
- "words": 690,
+ "words": 689,
  "shared_parts": {
   "settle": "settle1",
   "close": "close1"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1110,
+ "est_seconds": 1109,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

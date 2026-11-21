@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Tú y esa persona están juntos en un lugar conocido. Una cocina. La puerta de la casa. Un estacionamiento después de un día cualquiera. [pause 26]\n\nSe voltea hacia ti. Ya está sonriendo antes de decir nada. [pause 26]\n\nÓyela decirlo. Felicidades. Me da mucho gusto por ti. [pause 29]\n\nSiente su mano en tu brazo. O sus brazos alrededor de ti. [pause 29]\n\nÓyete decir, gracias. Todavía no me la creo, y a la vez ya se siente normal. [pause 29]\n\nDeja que la escena vuelva a empezar. Su sonrisa. Sus palabras. Tu gracias. [pause 32]\n\nY otra vez. Más corta ahora. Solo la palabra. Felicidades. [pause 32]\n\nDeja que la palabra se repita en tu mente, al ritmo de tu respiración. [pause 34]\n\nAhora imagina a otra persona querida. Se enteró por la primera. Te llama, emocionada. [pause 32]\n\nÓyela decirlo también. Ya me enteré. Felicidades. Cuéntamelo todo. [pause 32]\n\nSiente cómo cuentas la historia, con facilidad, como algo que ya pasó. [pause 32]\n\nDeja que todo se haga más y más callado, hasta que sea solo una sensación. [pause 38]"
+   "text": "Tú y esa persona comparten un lugar conocido. Una cocina. La puerta de la casa. Un estacionamiento después de un día cualquiera. [pause 26]\n\nSe voltea hacia ti. Ya está sonriendo antes de decir nada. [pause 26]\n\nÓyela decirlo. Felicidades. Me da mucho gusto por ti. [pause 29]\n\nSiente su mano en tu brazo. O sus brazos alrededor de ti. [pause 29]\n\nÓyete decir, gracias. Todavía no me la creo, y a la vez ya se siente normal. [pause 29]\n\nDeja que la escena vuelva a empezar. Su sonrisa. Sus palabras. Tu gracias. [pause 32]\n\nY otra vez. Más corta ahora. Solo la palabra. Felicidades. [pause 32]\n\nDeja que la palabra se repita en tu mente, al ritmo de tu respiración. [pause 34]\n\nAhora imagina a otra persona querida. Se enteró por la primera. Te llama, emocionada. [pause 32]\n\nÓyela decirlo también. Ya me enteré. Felicidades. Cuéntamelo todo. [pause 32]\n\nSiente cómo cuentas la historia, con facilidad, como algo que ya pasó. [pause 32]\n\nDeja que todo se haga más y más callado, hasta que sea solo una sensación. [pause 38]"
   },
   {
    "part": "close",
@@ -30,7 +30,7 @@
    "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
   }
  ],
- "words": 588,
+ "words": 586,
  "shared_parts": {
   "settle": "settle2",
   "close": "close2"
@@ -40,7 +40,7 @@
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1116,
+ "est_seconds": 1115,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

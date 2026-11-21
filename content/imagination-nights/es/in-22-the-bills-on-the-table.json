@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Es una noche entre semana. Ya se lavaron los trastes. Te sientas a la mesa con el correo y una taza de algo calientito. [pause 32]\n\nFíjate en el montoncito. Unos cuantos sobres. Tu teléfono con la aplicación del banco abierta. [pause 33]\n\nAbre el primer recibo. Lee la cantidad. Siente que el pecho sigue suave. Sabes que está cubierto. [pause 35]\n\nPágalo. Mira la pantalla que dice pagado. Ponlo a un lado. [pause 35]\n\nAbre el siguiente. La misma sensación firme. Pagado. A un lado. [pause 35]\n\nMira la cuenta cuando terminas. Todavía queda algo. No una fortuna. Lo suficiente. [pause 37]\n\nPasa un poquito a tus ahorros. Mira cómo ese número sube un pasito. [pause 37]\n\nRecárgate en la silla. Nota que la mandíbula está floja. Las manos, quietas. [pause 37]\n\nDi en tu mente, tengo calma. Esta noche me alcanza. [pause 38]\n\nJunta los recibos pagados en una pila ordenada, apaga la luz de la cocina, y camina a la cama sin nada pendiente encima. [pause 40]"
+   "text": "Es una noche entre semana. Ya se lavaron los trastes. Te sientas a la mesa con el correo y una taza de algo calientito. [pause 32]\n\nFíjate en el montoncito. Unos cuantos sobres. Tu teléfono con la aplicación del banco abierta. [pause 33]\n\nAbre el primer recibo. Lee la cantidad. Siente que el pecho sigue suave. Sabes que está cubierto. [pause 35]\n\nPágalo. Mira la pantalla que dice pagado. Ponlo a un lado. [pause 35]\n\nAbre el siguiente. La misma sensación firme. Pagado. A un lado. [pause 35]\n\nMira el saldo cuando terminas. Todavía queda algo. No una fortuna. Lo suficiente. [pause 37]\n\nPasa un poquito a tus ahorros. Mira cómo ese número sube un pasito. [pause 37]\n\nRecárgate en la silla. Nota que la mandíbula está floja. Las manos, quietas. [pause 37]\n\nDi en tu mente, tengo calma. Esta noche me alcanza. [pause 38]\n\nJunta los recibos pagados en una pila ordenada, apaga la luz de la cocina, y camina a la cama sin nada pendiente encima. [pause 40]"
   },
   {
    "part": "close",
@@ -60,7 +60,8 @@
    "teaching_length": "pass",
    "length": "pass",
    "ai_label": "pass",
-   "verse_read": "fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
+   "verse_read": "pass",
+   "listener_gender": "pass"
   },
   "first_reader": {
    "route": "none",
@@ -80,10 +81,7 @@
    "verdict": "pass"
   },
   "rewritten": null,
-  "person_read": false,
-  "held_because": [
-   "verse_read: fail: no verse read for this text yet (held until verse-read.mjs read runs; a model outage never passes)"
-  ]
+  "person_read": false
  },
- "status": "held"
+ "status": "passed"
 }

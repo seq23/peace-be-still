@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, rmSync
 import { join } from "node:path";
 import { CONTENT, verses, label, words, pauses, TRANSLATION, parseRef } from "./lib.mjs";
 import { GATE_VERSION, checkStory, checkPsalmNight, checkImaginationNight, checkDeclaration, isFail } from "./rules.mjs";
-import { loadCache, probedModels, verseReadCheck, readNight, parseAnswer, writtenLines, textKey, PROBE_VERSES, PROBE_CLEAN, PROBE, CACHE } from "./verse-read.mjs";
+import { loadCache, probedModels, verseReadCheck, genderReadCheck, PROBE_GENDERED, readNight, parseAnswer, writtenLines, textKey, PROBE_VERSES, PROBE_CLEAN, PROBE, CACHE } from "./verse-read.mjs";
 
 const SRC = join(CONTENT, "src");
 const KINDS = {
@@ -290,6 +290,7 @@ export function buildAll() {
         const checks = kind === "story" ? checkStory(item) : kind === "psalm-night" ? checkPsalmNight(item) : checkImaginationNight(item);
         // The Mindset door's meaning check: the recorded model read of this exact text (verse-read.mjs); none = held.
         if (kind === "imagination-night") checks.verse_read = verseReadCheck(item, VERSE_READ, TRUSTED);
+        if (kind === "imagination-night" && item.lang === "es") checks.listener_gender = genderReadCheck(item, VERSE_READ, TRUSTED);
         add(kind, lang, item, checks, rv[it.id]);
         out.push({ path: join(CONTENT, dir, lang, `${it.id}.json`), json: item });
       }
@@ -479,8 +480,10 @@ close: s
   {
     const n = buildImaginationNight(ines[1], "es", shared(ines));
     const key = textKey(writtenLines(n)), trusted = new Set(["m-ok"]);
-    const rec = (verdict, model = "m-ok") => new Map([[key, { id: n.id, lang: "es", verdict, model }]]);
+    const rec = (verdict, model = "m-ok") => new Map([[key, { id: n.id, lang: "es", verdict, model, gendered: "NONE" }]]);
     if (verseReadCheck(n, rec("NONE"), trusted) !== "pass") throw new Error("SELFTEST clean verse read not passed");
+    const g = new Map([[key, { id: n.id, lang: "es", verdict: "NONE", model: "m-ok", gendered: "4:despierto" }]]);
+    if (!isFail(genderReadCheck(n, g, trusted)) || genderReadCheck(n, rec("NONE"), trusted) !== "pass") throw new Error("SELFTEST listener-gender read not judged");
     for (const [why, c] of [["found", rec("3:PSA 23:1")], ["unread", new Map()], ["unprobed model", rec("NONE", "m-new")]]) {
       const item = buildImaginationNight(ines[1], "es", shared(ines));
       const checks = { ...checkImaginationNight(item), verse_read: verseReadCheck(item, c, trusted) };
@@ -489,14 +492,15 @@ close: s
     }
     n.segments[2].text += " Y aquí otra frase.";
     if (verseReadCheck(n, rec("NONE"), trusted) === "pass") throw new Error("SELFTEST a night edited after its read still passed");
-    if (parseAnswer("I think none", 4) !== null || parseAnswer('[{"n": 9, "ref": "x"}]', 4)?.length !== 0 || parseAnswer('[{"n": 2, "ref": "MAT 6:34"}]', 4)?.[0]?.n !== 2) throw new Error("SELFTEST verse read answer parsing");
+    if (parseAnswer("I think none", 4) !== null || parseAnswer('{"verses": [{"n": 9, "ref": "x"}], "gendered": []}', 4)?.verses.length !== 0
+      || parseAnswer('{"verses": [{"n": 2, "ref": "MAT 6:34"}], "gendered": []}', 4)?.verses[0]?.n !== 2 || parseAnswer('{"verses": []}', 4) !== null) throw new Error("SELFTEST verse read answer parsing");
     const outage = await readNight(n, async () => { throw new Error("503"); });
     const garbled = await readNight(n, async () => ({ model: "m-ok", text: "Sure! Here is my analysis" }));
     if (outage !== null || garbled !== null) throw new Error("SELFTEST a model outage or garbled answer produced a verdict");
     // The probe on record: exactly the review's 8 Spanish NVI/plain verses plus English verses and clean lines,
     // and every verdict on record comes from a model that passed it.
     const pr = JSON.parse(readFileSync(PROBE, "utf8"));
-    if (JSON.stringify(pr.cases) !== JSON.stringify({ verses: PROBE_VERSES, clean: PROBE_CLEAN }) || PROBE_VERSES.length < 12) throw new Error("SELFTEST verse-read probe record is not the current probe");
+    if (JSON.stringify(pr.cases) !== JSON.stringify({ verses: PROBE_VERSES, gendered: PROBE_GENDERED, clean: PROBE_CLEAN }) || PROBE_VERSES.length < 12) throw new Error("SELFTEST verse-read probe record is not the current probe");
     for (const [m, r] of Object.entries(pr.models)) if (r.pass && (r.missed.length || r.false_positives.length)) throw new Error(`SELFTEST probe record for ${m} passes with misses`);
     const ok = probedModels();
     for (const [, r] of loadCache(CACHE)) if (!ok.has(r.model)) throw new Error(`SELFTEST verse read on record by unprobed model ${r.model}`);
