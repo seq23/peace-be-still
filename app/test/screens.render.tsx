@@ -715,6 +715,8 @@ test('the web preview shows configured prices and renewal terms without opening 
     if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
     else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
   }
+});
+
 test('a screen that throws shows the calm error screen in the app language, and Try again retries', async () => {
   const { ErrorBoundary } = screens.root as { ErrorBoundary: (props: { error: Error; retry: () => Promise<void> }) => React.ReactElement };
   assert.equal(typeof ErrorBoundary, 'function', 'app/_layout.tsx exports the route error boundary');
