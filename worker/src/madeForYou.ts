@@ -150,7 +150,10 @@ const TELL = new RegExp(` (?:${AI_TELLS.join('|')}) `);
 // The same noun on both sides of a preposition ("the palms of both palms", "las manos en tus manos"): a slip no
 // person makes. Idioms and parallel lines (breath by breath, déjalo venir y déjalo ir) are not this shape.
 const DOUBLED = /\b(\p{L}{4,})\s+(?:of|in|on|with|against|into|de|en|con|sobre)(?:\s+(?:both|the|your|my|its|their|ambas|ambos|las|los|la|el|tus|sus|tu))?\s+\1\b/iu;
-export const doubledWord = (text: string): string | null => text.match(DOUBLED)?.[0] ?? null;
+// A moment counted out ("for two moments", "dos momentos"): the judge let it through even when made to quote
+// odd phrases (run 44893977711, 21 Nov 2026). "A few moments" and "a moment" are what people say.
+const COUNTED_MOMENT = /\b(?:two|three|four|five|six|seven|eight|nine|ten|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\s+(?:moments|instants|momentos|instantes)\b/iu;
+export const oddPhrase = (text: string): string | null => text.match(DOUBLED)?.[0] ?? text.match(COUNTED_MOMENT)?.[0] ?? null;
 const MOVE = / (?:stand up|get up|sit up|get out of bed|you (?:stand|rise|walk|step|stroll|wander|climb|sit up|get up)|walk (?:toward|over|across|into|through|to)|levantate|levantarte|ponte de pie|sientate|te levantas|te sientas|te pones de pie|sal de la cama|caminas|camina hacia|camina por) /;
 // A long word said three times is the model leaning on it. Short words, function words and the body's
 // own words (breathing, shoulders) recur in any bedtime script and are not counted.
@@ -207,7 +210,7 @@ export async function madeForYouApprove(checkProse: CheckProse, judge: JudgePros
   if (MOVE.test(n)) return reject('floor:asks_listener_to_move');
   if (leanedOn(text, input.text)) return reject('floor:leaned_on_word');
   if (input.verses?.length && echoesVerses(text, input.verses)) return reject('floor:retells_verses');
-  if (doubledWord(text)) return reject('floor:doubled_word');
+  if (oddPhrase(text)) return reject('floor:odd_phrase');
   const context = {
     lang: input.lang, teen: input.teen, door: input.kind === 'psalm' ? 'faith' : 'mindset',
     translation: input.lang === 'es' ? 'RV1909' : 'KJV', userText: input.text,
@@ -424,8 +427,8 @@ export async function draftFaults(checkProse: CheckProse, input: Input, paragrap
   const n = norm(text);
   const tells = [...new Set([...n.matchAll(new RegExp(` (${AI_TELLS.join('|')})(?= )`, 'g'))].map(m => m[1]))];
   if (tells.length) faults.push(`Replace these words with plain ones a person would say at a bedside: ${tells.join(', ')}.`);
-  const doubled = doubledWord(text);
-  if (doubled) faults.push(`"${doubled}" says the same word twice in one phrase; say it once.`);
+  const odd = oddPhrase(text);
+  if (odd) faults.push(`"${odd}" is a phrase no one says (a word twice in one phrase, or moments counted out); say it the plain way.`);
   const moved = n.match(MOVE)?.[0].trim();
   if (moved) faults.push(`"${moved}" asks the listener to move. They are lying in bed and stay there: let the scene come to them.`);
   for (const word of leanedOnAll(text, input.text)) faults.push(`"${word}" is used three or more times; keep it once and say the rest another way.`);
@@ -451,7 +454,7 @@ export async function draftFaults(checkProse: CheckProse, input: Input, paragrap
 /** A fault's kind, as a code for the log (the fault's words stay out of it). */
 const faultKind = (fault: string) => /^Paragraph \d+ has/.test(fault) ? 'length' : /^The whole/.test(fault) ? 'total'
   : /^Replace/.test(fault) ? 'ai_words' : /asks the listener/.test(fault) ? 'move' : /three or more/.test(fault) ? 'leaned'
-  : /psalm's own words/.test(fault) ? 'verses' : /same word twice/.test(fault) ? 'doubled' : /promises/.test(fault) ? 'promise' : /religious/.test(fault) ? 'faith'
+  : /psalm's own words/.test(fault) ? 'verses' : /phrase no one says/.test(fault) ? 'odd_phrase' : /promises/.test(fault) ? 'promise' : /religious/.test(fault) ? 'faith'
   : `gate_${fault.replace(/^Paragraph \d+ /, '').split(' ').slice(0, 3).join('_').replace(/\W/g, '')}`;
 
 /** The revision request: her draft back with its exact faults, the same ten-paragraph answer expected. */

@@ -131,12 +131,14 @@ test('the two sessions the review transcribed fail the code floors; the voice sa
   assert.deepEqual(await why(scene, withPara('en', 'Now stand up and move through the room toward the window.')), ['floor:asks_listener_to_move']);
   assert.deepEqual(await why({ ...scene, lang: 'es' }, withPara('es', 'Ahora levántate despacio y camina hacia la ventana.')), ['floor:asks_listener_to_move']);
   assert.deepEqual(await why({ kind: 'psalm', lang: 'en', text: 'tired', verses: KJV23 }, withPara('en', 'Goodness and mercy shall follow you all the days of your life.')), ['floor:retells_verses']);
-  // A word doubled in one phrase is a code floor; an odd count ("two moments") is the judge's (says_something_odd).
-  assert.equal(mfy.doubledWord(reviewed.oddPalms), 'palms of both palms');
-  assert.deepEqual(await why(scene, reviewed.oddPalms), ['floor:doubled_word']);
-  assert.equal(mfy.doubledWord(reviewed.oddMoments), null);
-  for (const idiom of ['breath by breath', 'little by little', 'poco a poco', 'despacio, despacio']) assert.equal(mfy.doubledWord(`Rest here ${idiom} tonight.`), null, idiom);
-  for (const lang of ['en', 'es']) assert.equal(mfy.doubledWord(cleanDraft(lang)), null);
+  // A word doubled in one phrase and a counted moment are code floors; other odd phrases are the judge's (odd_phrase).
+  assert.equal(mfy.oddPhrase(reviewed.oddPalms), 'palms of both palms');
+  assert.deepEqual(await why(scene, reviewed.oddPalms), ['floor:odd_phrase']);
+  assert.equal(mfy.oddPhrase(reviewed.oddMoments), 'two moments');
+  assert.deepEqual(await why(scene, reviewed.oddMoments), ['floor:odd_phrase']);
+  for (const plain of ['Stay here for a few moments.', 'In a moment the rain eases.', 'Unos momentos más.']) assert.equal(mfy.oddPhrase(plain), null, plain);
+  for (const idiom of ['breath by breath', 'little by little', 'poco a poco', 'despacio, despacio']) assert.equal(mfy.oddPhrase(`Rest here ${idiom} tonight.`), null, idiom);
+  for (const lang of ['en', 'es']) assert.equal(mfy.oddPhrase(cleanDraft(lang)), null);
   // The samples the drafter hears keep every floor (each pasted into an otherwise clean script).
   for (const lang of ['en', 'es']) for (const kind of ['psalm', 'imagination']) for (const passage of mfy.VOICE_SAMPLES[lang][kind]) {
     const p = cleanDraft(lang).split('\n\n'); const tail = p[0].split('. '); p[0] = passage; while (p[0].split(' ').length < 118) p[0] += ` ${tail.shift().replace(/\.?$/, '.')}`;
