@@ -4,7 +4,7 @@ import { realDeps } from 'phase-3/worker/src/index';
 import { runLadder } from 'phase-3/worker/src/ladder';
 import { RungError } from 'phase-3/worker/src/providers/types';
 import chatConfig from 'phase-3-config';
-import { createMadeForYou, type MadeForYouDependencies } from './madeForYou';
+import { createMadeForYou, madeForYouRungs, type MadeForYouDependencies } from './madeForYou';
 
 type Env = {
   DB: MadeForYouDependencies['db'];
@@ -46,15 +46,24 @@ export default {
         return { fired: false, read: text === 'fixture unavailable' ? 'down' : 'none' };
       },
       crisisText: () => 'Fixed safety reply',
-      draft: (messages, schema, valid) => {
+      draft: (messages, schema, valid, signal) => {
         const blocked = new Set(request.headers.get('x-test-models-down')?.split(','));
-        const rungs = realDeps.rungs(chatConfig, now).map(rung => ({
+        const short = new Set(request.headers.get('x-test-models-short')?.split(','));
+        const providers = realDeps.rungs(chatConfig, now).map(rung => ({
           ...rung,
           async call() {
-            if (blocked.has(rung.id)) throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
-            return { text: `Let the room be quiet for a moment. Fixture rung: ${rung.id}` };
+            const provider = rung.id;
+            if (blocked.has(provider)) throw new RungError('failed', 'FIXTURE_MODEL_DOWN');
+            const paragraph = 'Let the room be quiet for a moment. '.repeat(11).trim();
+            const prose = Array(short.has(provider) ? 4 : 10).fill(paragraph).join('\n\n');
+            return { text: `${prose} Fixture rung: ${provider}` };
           },
         }));
+        const rungs = madeForYouRungs(providers, {
+          MADE_FOR_YOU_WORKERS_AI_CALLS_DAILY: '20',
+          MADE_FOR_YOU_GEMINI_CALLS_DAILY: '20',
+          MADE_FOR_YOU_OPENROUTER_CALLS_DAILY: '20',
+        }, signal);
         return runLadder(env.DB, rungs, messages, schema, 2400, new Map(), valid);
       },
       approve: async () => request.headers.get('x-test-reject') !== 'yes',

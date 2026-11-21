@@ -10,9 +10,10 @@ import re
 import signal
 import subprocess
 import sys
+import time
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
@@ -41,6 +42,12 @@ TEMPLATE = {
         "",
         "Puedes dejar la escena aquí. Siente la cama debajo de ti y date tiempo para descansar.",
     ),
+}
+BOX_MINUTES = 20
+HELD_CODES = {
+    "MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA", "MADE_FOR_YOU_NO_FREE_MODEL",
+    "MADE_FOR_YOU_PSALM_UNAVAILABLE", "MADE_FOR_YOU_ATTEMPTS_EXHAUSTED",
+    "MADE_FOR_YOU_CLAIM_TIMEOUT",
 }
 PRIVATE_PATH = re.compile(r"made-for-you/[a-f0-9-]{36}/([a-f0-9-]{36})\.m4a")
 
@@ -88,7 +95,14 @@ def render_session(item: dict, work: Path) -> dict:
         ["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(wav), "-filter_complex", filters, str(shaped)],
         capture_output=True, check=True,
     )
-    fill.master(shaped, out, item["level"])
+    def encode(command, **options):
+        # The shared master accepts an ffmpeg runner. Use software AAC because AudioToolbox
+        # may be unavailable to the background process even on macOS.
+        if "aac_at" in command:
+            command = ["aac" if argument == "aac_at" else argument for argument in command]
+        return subprocess.run(command, **options)
+
+    fill.master(shaped, out, item["level"], run=encode)
     result = qa.check(out, fill.script_of(item), item["lang"], item["level"])
     if not result["pass"] or not 600 <= result["seconds"] <= 1200 or not 90 <= result["wpm"] <= 115:
         return {"status": "FAILED"}
@@ -103,16 +117,18 @@ def make_request(base: str, secret: str):
             headers={"Authorization": f"Bearer {secret}", "Content-Type": "application/json"},
         )
         try:
-            with urlopen(request, timeout=120) as response:
+            with urlopen(request, timeout=300 if target == "claim" else 120) as response:
                 return json.load(response)
         except HTTPError as error:
             with error:
                 if error.code == 503:
                     code = json.load(error).get("error")
-                    if code == "MADE_FOR_YOU_NO_FREE_MODEL":
-                        raise fill.NamedStop(code, "No free model could draft the session. It remains queued.") from None
-                    if code in {"PSALM_UNAVAILABLE", "NO_APPROVED_DRAFT"}:
-                        raise fill.NamedStop("MADE_FOR_YOU_DRAFT", "Session has no approved script.") from None
+                    if code in HELD_CODES:
+                        raise fill.NamedStop(code, "The queue held this request.") from None
+            raise
+        except (TimeoutError, URLError) as error:
+            if target == "claim" and (isinstance(error, TimeoutError) or isinstance(error.reason, TimeoutError)):
+                raise fill.NamedStop("MADE_FOR_YOU_CLAIM_TIMEOUT", "Claim response timed out.") from None
             raise
     return call
 
@@ -141,37 +157,52 @@ def upload(item: dict, local: Path, bucket: str) -> None:
 
 
 def process_one(call, render, put) -> bool:
+    started = time.monotonic()
     job = call("claim", {}).get("job")
     if job is None:
         return False
+
+    def failed(code):
+        result = call(f"{job['id']}/qa-failed", {"lease": job["lease"]})
+        if result.get("code") == "MADE_FOR_YOU_ATTEMPTS_EXHAUSTED":
+            code = result["code"]
+        return fill.NamedStop(code, "Session held by the draft or audio quality gate.")
+
     try:
-        item = session_item(job)
-    except (KeyError, TypeError, ValueError):
-        raise fill.NamedStop("MADE_FOR_YOU_DRAFT", "Session has no approved script.") from None
-    with TemporaryDirectory(prefix="pbs-private-audio-") as directory:
-        row = render(item, Path(directory))
-        if row["status"] != "passed":
-            raise fill.NamedStop("MADE_FOR_YOU_QA", "Session held by the audio quality gate.")
-        put(item, Path(row["_local"]))
-        if call(job["id"], {"lease": job["lease"], "seconds": row["seconds"], "sha256": row["sha256"]}).get("published") is not True:
-            raise fill.NamedStop("MADE_FOR_YOU_PUBLISH", "The Worker did not confirm publication.")
-    return True
+        try:
+            item = session_item(job)
+        except (KeyError, TypeError, ValueError):
+            raise failed("MADE_FOR_YOU_DRAFT") from None
+        with TemporaryDirectory(prefix="pbs-private-audio-") as directory:
+            row = render(item, Path(directory))
+            if row["status"] != "passed":
+                raise failed("MADE_FOR_YOU_QA")
+            put(item, Path(row["_local"]))
+            if call(job["id"], {"lease": job["lease"], "seconds": row["seconds"], "sha256": row["sha256"]}).get("published") is not True:
+                raise fill.NamedStop("MADE_FOR_YOU_PUBLISH", "The Worker did not confirm publication.")
+        return True
+    finally:
+        print(f"NOTE private session elapsed {time.monotonic() - started:.1f} s", flush=True)
 
 
 def drain_queue(call, render, put) -> int:
     published = 0
     held = None
+    consecutive_timeouts = 0
     while True:
         try:
             if not process_one(call, render, put):
                 break
         except fill.NamedStop as error:
-            if error.code not in {"MADE_FOR_YOU_DRAFT", "MADE_FOR_YOU_QA", "MADE_FOR_YOU_NO_FREE_MODEL"}:
+            if error.code not in HELD_CODES:
                 raise
-            # The held row keeps its lease, so the next claim advances to another request.
-            if held is None or error.code == "MADE_FOR_YOU_NO_FREE_MODEL":
-                held = error
+            print(f"NAMED STOP [{error.code}] private request held", file=sys.stderr, flush=True)
+            held = error
+            consecutive_timeouts = consecutive_timeouts + 1 if error.code == "MADE_FOR_YOU_CLAIM_TIMEOUT" else 0
+            if consecutive_timeouts >= 2:
+                break
             continue
+        consecutive_timeouts = 0
         published += 1
         print(f"OUTPUT {published} private session(s) published", flush=True)
     if held:
@@ -193,15 +224,32 @@ def work() -> int:
     return 0
 
 
+def run_timebox(command: list[str], seconds: float) -> int:
+    started = time.monotonic()
+    # The supervisor owns the temp directory so a killed renderer cannot strand private files.
+    with TemporaryDirectory(prefix="pbs-made-for-you-") as temp:
+        with subprocess.Popen(command, start_new_session=True, env={**os.environ, "TMPDIR": temp}) as child:
+            try:
+                return child.wait(timeout=seconds)
+            except subprocess.TimeoutExpired:
+                try:
+                    os.killpg(child.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                child.wait()
+                print(f"OUTPUT private render box stopped after {time.monotonic() - started:.1f} s", flush=True)
+                raise fill.NamedStop("MADE_FOR_YOU_TIMEBOX", "An unfinished request can be claimed after its lease.") from None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--max-minutes", type=int, default=15)
+    parser.add_argument("--max-minutes", type=int, default=BOX_MINUTES)
     parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     try:
         if args.worker:
             return work()
-        minutes = min(args.max_minutes, 15, fill.window_minutes(dt.datetime.now(fill.CT)))
+        minutes = min(args.max_minutes, BOX_MINUTES, fill.window_minutes(dt.datetime.now(fill.CT)))
         if minutes <= 0:
             print("OUTPUT 0 private sessions (outside the render window)")
             return 0
@@ -212,23 +260,7 @@ def main() -> int:
             except BlockingIOError:
                 print("OUTPUT 0 private sessions (library fill has the lock)")
                 return 0
-            # The deadline covers Kokoro and ffmpeg too. A killed job becomes available after its lease.
-            # Put temp files under a parent owned by the supervisor so they are removed on timeout.
-            with TemporaryDirectory(prefix="pbs-made-for-you-") as temp:
-                with subprocess.Popen(
-                    [sys.executable, __file__, "--worker"], start_new_session=True,
-                    env={**os.environ, "TMPDIR": temp},
-                ) as child:
-                    try:
-                        return child.wait(timeout=minutes * 60)
-                    except subprocess.TimeoutExpired:
-                        try:
-                            os.killpg(child.pid, signal.SIGKILL)
-                        except ProcessLookupError:
-                            pass
-                        child.wait()
-                        print("Render window ended; unfinished sessions can be claimed again.", flush=True)
-                        return 0
+            return run_timebox([sys.executable, __file__, "--worker"], minutes * 60)
     except fill.NamedStop as error:
         # Existing publisher exceptions may include storage details. Do not log customer data or URLs.
         print(f"NAMED STOP [{error.code}] in private session rendering", file=sys.stderr)

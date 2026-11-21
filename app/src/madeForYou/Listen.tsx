@@ -1,6 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import type { Age, Door } from '../model';
+import { usePlayer } from '../player/usePlayer';
+import { playedSessionKey } from './played';
 import { NowPlaying } from '../screens/listen/NowPlaying';
 import { useT } from '../settings';
 import { BackLink, Body, Screen } from '../ui';
@@ -32,6 +35,14 @@ export function MadeForYouListen({ id, age, door }: { id: string; age: Age; door
     });
     return () => controller.abort();
   }, [age, api, door, id, kind, locale, paid]);
+
+  const { state } = usePlayer();
+  const playing = state.playing && state.track?.kind === 'made-for-you' && state.track.ref === id;
+  useEffect(() => {
+    if (paid && !preview && playing) {
+      void AsyncStorage.setItem(playedSessionKey(id), '1').catch(() => undefined);
+    }
+  }, [id, paid, playing, preview]);
 
   function close() {
     if (router.canGoBack()) router.back();

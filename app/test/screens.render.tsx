@@ -18,13 +18,18 @@ console.error = (...args: unknown[]) => { if (!String(args[0]).includes('react-t
 let saved: string | null = null;
 let readFails = false;
 let sessionToken = false;
+const sessionHistory = new Map<string, string>();
 (globalThis as any).__pbsStorage = {
   getItem: async (key: string) => {
     if (readFails) throw new Error('unavailable');
     if (key === 'peace-be-still-chat-token' && sessionToken) return JSON.stringify({ age: 'adult', token: 'test-install' });
+    if (key.startsWith('pbs.made-for-you.played:')) return sessionHistory.get(key) ?? null;
     return saved;
   },
-  setItem: async (_key: string, value: string) => { saved = value; },
+  setItem: async (key: string, value: string) => {
+    if (key.startsWith('pbs.made-for-you.played:')) sessionHistory.set(key, value);
+    else saved = value;
+  },
 };
 type Call = [string, unknown?];
 let calls: Call[] = [];
@@ -781,7 +786,7 @@ test('paid sessions render requests, delay, expiry, shelf and shared playback in
   for (const lang of ['en', 'es'] as const) {
     const faith = lang === 'es';
     const context = { age: 'adult', lang, door: faith ? 'faith' : 'mindset', kind: faith ? 'psalm' : 'imagination' } as const;
-    const ready = { id: 'night-one', day: '2026-11-20', path: 'private/session.m4a', seconds: 650, sha256: 'a'.repeat(64) };
+    const ready = { id: `night-one-${lang}`, day: '2026-11-20', path: 'private/session.m4a', seconds: 650, sha256: 'a'.repeat(64) };
     const stream = 'https://private.example/session.m4a?signature=fixture';
     const player = testPlayer(audioTracks[0], null);
     type Api = NonNullable<React.ComponentProps<typeof MadeForYouScreen>['api']>;
@@ -829,11 +834,14 @@ test('paid sessions render requests, delay, expiry, shelf and shared playback in
     await press(tree, translated.retry);
     assert.equal(host(tree, 'TextInput')[0].props.maxLength, 500);
     assert.match(strings(tree), /IA|AI/);
+    assert.match(strings(tree), /12 minutos|12 minutes/);
+    if (faith) assert.match(strings(tree), /entrenar sus modelos/);
     const note = faith ? 'La lluvia' : 'Rain at the window';
     await type(tree, note);
     await press(tree, translated.request);
     assert.deepEqual(posted, [context, note]);
     assert.match(strings(tree), translated.pending);
+    assert.match(strings(tree), faith ? /mientras duermes.*por la mañana/s : /while you sleep.*by morning/s);
     assert.equal(host(tree, 'TextInput').length, 0);
     shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true, retrying: false }, expired: false };
     await press(tree, translated.retry);
@@ -851,6 +859,12 @@ test('paid sessions render requests, delay, expiry, shelf and shared playback in
     await press(tree, translated.request);
     shelf = { ready: [ready], pending: null, expired: false };
     await press(tree, translated.retry);
+    assert.match(strings(tree), faith ? /tus sesiones/i : /your sessions/i);
+    assert.match(strings(tree), faith ? /Salmos para dormir · 11 min/ : /Imagination Nights · 11 min/);
+    assert.match(strings(tree), faith ? /20 de noviembre/ : /November 20/);
+    assert.ok(texts(tree).includes('›'));
+    assert.ok(texts(tree).includes(faith ? 'Nueva' : 'New'));
+    const readyScreenProps = tree.root.findByType(MadeForYouScreen).props as React.ComponentProps<typeof MadeForYouScreen>;
     await press(tree, /20/);
     assert.equal(opened, ready.id);
     Object.assign(globalThis, { __pbsPlatform: 'ios', __pbsPaid: true });
@@ -861,6 +875,7 @@ test('paid sessions render requests, delay, expiry, shelf and shared playback in
     assert.ok(texts(listen).includes('10:50'));
     await press(listen, translated.play);
     assert.equal(player.source(), stream);
+    assert.equal(sessionHistory.get(`pbs.made-for-you.played:${ready.id}`), '1');
     assert.ok(player.getState().playing);
     await press(listen, '+15');
     assert.equal(player.position(), 15);
@@ -879,6 +894,14 @@ test('paid sessions render requests, delay, expiry, shelf and shared playback in
     if (faith) assert.deepEqual(faithContentIssues(section), []);
     else assert.doesNotMatch(section, /psalm|bible|scripture/i);
     await act(async () => { listen.unmount(); tree.unmount(); await player.dispose(); });
+    await act(async () => { tree = create(<MadeForYouScreen {...readyScreenProps} />); });
+    assert.ok(!texts(tree).includes(faith ? 'Nueva' : 'New'));
+    await act(async () => tree.unmount());
+    shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true, retrying: false, stopped: true }, expired: false };
+    await act(async () => { tree = create(<MadeForYouScreen {...readyScreenProps} />); });
+    assert.match(strings(tree), faith ? /otro día/ : /another day/);
+    assert.equal(host(tree, 'TextInput').length, 1);
+    await act(async () => tree.unmount());
     fetchMock.mock.restore();
   }
 });

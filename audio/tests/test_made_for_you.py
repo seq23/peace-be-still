@@ -2,6 +2,7 @@ import io
 import json
 import sys
 import unittest
+from contextlib import redirect_stderr
 from pathlib import Path
 from unittest.mock import Mock, patch
 from urllib.error import HTTPError
@@ -82,16 +83,19 @@ class MadeForYouTest(unittest.TestCase):
         replies = [
             busy,
             io.BytesIO(json.dumps({"job": blocked}).encode()),
+            io.BytesIO(b'{"code":"MADE_FOR_YOU_QA"}'),
             io.BytesIO(json.dumps({"job": ready}).encode()),
             io.BytesIO(b'{"published":true}'),
             io.BytesIO(b'{"job":null}'),
         ]
-        with patch.object(sessions, "urlopen", side_effect=replies) as request:
+        logs = io.StringIO()
+        with patch.object(sessions, "urlopen", side_effect=replies) as request, redirect_stderr(logs):
             with self.assertRaises(fill.NamedStop) as stopped:
                 sessions.drain_queue(call, render, put)
-            self.assertEqual(stopped.exception.code, code)
+            self.assertEqual(stopped.exception.code, "MADE_FOR_YOU_QA")
+            self.assertIn(code, logs.getvalue())
             self.assertEqual([entry.args[0].full_url.rsplit("/", 1)[-1] for entry in request.call_args_list],
-                             ["claim", "claim", "claim", ready_id, "claim"])
+                             ["claim", "claim", "qa-failed", "claim", ready_id, "claim"])
         self.assertEqual(render.call_count, 2)
         self.assertEqual(put.call_args.args[0]["ref"], ready_id)
         self.assertEqual(put.call_count, 1)
@@ -102,12 +106,33 @@ class MadeForYouTest(unittest.TestCase):
         with self.assertRaisesRegex(fill.NamedStop, "MADE_FOR_YOU_QA"):
             sessions.process_one(call, Mock(return_value={"status": "FAILED"}), put)
         put.assert_not_called()
-        call.assert_called_once_with("claim", {})
+        self.assertEqual(call.call_args_list[0].args, ("claim", {}))
+        job = self.job()
+        self.assertEqual(call.call_args_list[1].args, (f"{job['id']}/qa-failed", {"lease": job["lease"]}))
+
+    def test_timed_out_claim_does_not_skip_the_next_session(self):
+        job = self.job()
+        replies = [TimeoutError(), io.BytesIO(json.dumps({"job": job}).encode()),
+                   io.BytesIO(b'{"published":true}'), io.BytesIO(b'{"job":null}')]
+        render = Mock(return_value={"status": "passed", "seconds": 680, "sha256": "hash", "_local": "session.m4a"})
+        call = sessions.make_request("https://fixture.example/api", "fixture")
+        put = Mock()
+        with patch.object(sessions, "urlopen", side_effect=replies) as request:
+            with self.assertRaisesRegex(fill.NamedStop, "MADE_FOR_YOU_CLAIM_TIMEOUT"):
+                sessions.drain_queue(call, render, put)
+            self.assertEqual(request.call_args_list[0].kwargs["timeout"], 300)
+            self.assertTrue(request.call_args_list[2].args[0].full_url.endswith(job["id"]))
+        put.assert_called_once()
+
+    def test_timebox_kills_a_slow_render_and_raises_a_named_stop(self):
+        with self.assertRaisesRegex(fill.NamedStop, "MADE_FOR_YOU_TIMEBOX") as stopped:
+            sessions.run_timebox([sys.executable, "-c", "import time; time.sleep(30)"], 0.1)
+        self.assertNotEqual(stopped.exception.exit_code, 0)
 
     def test_measured_audio_gate_checks_duration_and_pace_as_well_as_library_qa(self):
         check = {"pass": True, "seconds": 590, "wpm": 105}
         with patch.object(fill, "render"), patch.object(sessions.qa, "ffprobe_seconds", return_value=600), \
-                patch.object(sessions.subprocess, "run"), patch.object(fill, "master"), \
+                patch.object(sessions.subprocess, "run") as ffmpeg, patch.object(fill, "master") as master, \
                 patch.object(sessions.qa, "check", return_value=check), patch.object(fill, "sha256", return_value="hash"):
             item = sessions.session_item(self.job())
             self.assertEqual(sessions.render_session(item, Path("/unused"))["status"], "FAILED")
@@ -117,6 +142,9 @@ class MadeForYouTest(unittest.TestCase):
             self.assertEqual(sessions.render_session(item, Path("/unused"))["status"], "FAILED")
             check["pass"] = True
             self.assertEqual(sessions.render_session(item, Path("/unused"))["status"], "passed")
+            encode = master.call_args.kwargs["run"]
+            encode(["ffmpeg", "-c:a", "aac_at"], check=True)
+            ffmpeg.assert_called_with(["ffmpeg", "-c:a", "aac"], check=True)
 
     def test_disallowed_prose_is_rejected_before_the_voice(self):
         job = self.job()

@@ -21,7 +21,7 @@ export function previewApi(state: string | undefined): typeof madeForYouApi {
       const row = sample(context);
       return {
         ready: state === 'ready' ? [row] : [],
-        pending: state === 'pending' || state === 'delayed' || state === 'retrying'
+        pending: state === 'pending' || state === 'delayed' || state === 'retrying' || state === 'stopped'
           ? { id: row.id, day: row.day, delayed: state === 'delayed', retrying: state === 'retrying' } : null,
         expired: state === 'expired',
       };

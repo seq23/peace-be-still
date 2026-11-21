@@ -1,10 +1,12 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, TextInput } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { t } from '../i18n';
 import { fonts } from '../theme/tokens';
 import { BackLink, Body, Card, Label, PillButton, Screen, TextLink, Title, usePalette } from '../ui';
 import { madeForYouApi, SessionError, type Ready, type SessionContext, type Shelf } from './api';
+import { playedSessionKey } from './played';
 import { madeForYouCopy } from './copy';
 
 type Props = {
@@ -34,6 +36,16 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
   const palette = usePalette();
   const focused = useIsFocused();
   const [shelf, setShelf] = useState<Shelf | null>(null);
+  const [unplayed, setUnplayed] = useState<string | null>(null);
+  const newest = shelf?.ready[0]?.id;
+  useEffect(() => {
+    if (!focused || !newest) return;
+    let active = true;
+    void AsyncStorage.getItem(playedSessionKey(newest)).then(played => {
+      if (active) setUnplayed(played ? null : newest);
+    }, () => { if (active) setUnplayed(null); });
+    return () => { active = false; };
+  }, [focused, newest]);
   const [loadFailed, setLoadFailed] = useState(false);
   const [revision, refresh] = useState(0);
   const [text, setText] = useState('');
@@ -82,22 +94,37 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
   }
 
   const journey = t(kind === 'psalm' ? 'journey.psalmNights.name' : 'journey.imaginationNights.name', { locale: lang });
-  const date = (day: string) => new Intl.DateTimeFormat(lang, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(day));
+  const date = new Intl.DateTimeFormat(lang, { dateStyle: 'long', timeZone: 'UTC' });
+  const minutes = new Intl.NumberFormat(lang, { style: 'unit', unit: 'minute', unitDisplay: 'short' });
+  const pending = shelf?.pending;
 
   return <Screen>
     <BackLink onPress={close}>{t('common.back', { locale: lang })}</BackLink>
     <Title>{copy('title')}</Title>
     <Label>{journey}</Label>
     {loadFailed && <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{copy('error')}</Text>}
-    {shelf?.pending && <Card><Body muted={false}>{copy(shelf.pending.retrying ? 'retrying' : shelf.pending.delayed ? 'delayed' : 'pending')}</Body></Card>}
+    {pending && <Card>
+      <Body muted={false}>{copy(pending.stopped ? 'stopped' : pending.retrying ? 'retrying' : pending.delayed ? 'delayed' : 'pending')}</Body>
+      {!pending.stopped && !pending.retrying && !pending.delayed && <Body size={14}>{copy('pendingDetail')}</Body>}
+    </Card>}
     {shelf?.expired && <Card><Body muted={false}>{copy('expired')}</Body></Card>}
-    {shelf?.ready.map(row => <Card key={row.id} onPress={() => play(row)}>
-      <Body muted={false}>{date(row.day)}</Body>
-    </Card>)}
-    {(loadFailed || shelf?.pending) && <TextLink onPress={() => refresh(value => value + 1)}>{copy('refresh')}</TextLink>}
+    {!!shelf?.ready.length && <>
+      <Label>{copy('shelf')}</Label>
+      {shelf.ready.map(row => <Card key={row.id} onPress={() => play(row)}
+        style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <View style={{ flex: 1 }}>
+          <Body muted={false}>{`${journey} · ${minutes.format(Math.max(1, Math.round(row.seconds / 60)))}`}</Body>
+          <Body size={14}>{date.format(new Date(row.day))}</Body>
+          {row.id === newest && row.id === unplayed && <Label>{copy('new')}</Label>}
+        </View>
+        <Text aria-hidden style={{ color: palette.accent, fontSize: 21 }}>›</Text>
+      </Card>)}
+    </>}
+    {(loadFailed || (pending && !pending.stopped)) && <TextLink onPress={() => refresh(value => value + 1)}>{copy('refresh')}</TextLink>}
     {!shelf && !loadFailed && <Body>{copy('loading')}</Body>}
     {crisis ? <Text accessibilityRole="alert" style={{ color: palette.ink, fontFamily: fonts.body }}>{crisis}</Text> :
-      shelf && !shelf.pending && <React.Fragment>
+      shelf && (!pending || pending.stopped) && <React.Fragment>
+        <Body>{copy('description')}</Body>
         <Body muted={false}>{copy('note')}</Body>
         <TextInput accessibilityLabel={copy('note')} multiline maxLength={500} editable={!sending}
           value={text} onChangeText={setText} style={{

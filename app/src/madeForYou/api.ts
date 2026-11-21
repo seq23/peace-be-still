@@ -3,7 +3,7 @@ import { madeForYouToken } from './paidStub';
 
 export type Kind = 'psalm' | 'imagination';
 type Receipt = { id: string; day: string };
-type Pending = Receipt & { delayed: boolean; retrying: boolean };
+type Pending = Receipt & { delayed: boolean; retrying: boolean; stopped?: true };
 export type Ready = Receipt & { path: string; seconds: number; sha256: string };
 export type Shelf = { ready: Ready[]; pending: Pending | null; expired: boolean };
 export type Submission = ({ status: 'pending' } & Receipt) | { status: 'crisis'; text: string } | { status: 'preview' };
