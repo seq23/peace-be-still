@@ -1626,12 +1626,12 @@ const { REMINDER_KEY } = require('../src/reminders/reminder') as typeof import('
 function notificationPhone(permission: 'granted' | 'denied' | 'undetermined' = 'undetermined', answer: 'granted' | 'denied' = 'granted') {
   const status = (s: string) => ({ granted: s === 'granted', canAskAgain: s === 'undetermined', status: s });
   const phone = {
-    permission, asked: 0, schedule: new Map<string, { content: { body: string }; trigger: object }>(),
+    permission, asked: 0, booked: 0, schedule: new Map<string, { content: { body: string }; trigger: object }>(),
     getPermissionsAsync: async () => status(phone.permission),
     requestPermissionsAsync: async () => { phone.asked++; phone.permission = answer; return status(answer); },
     cancelAllScheduledNotificationsAsync: async () => { phone.schedule.clear(); },
     scheduleNotificationAsync: async ({ identifier, content, trigger }: { identifier: string; content: { body: string }; trigger: object }) => {
-      phone.schedule.set(identifier, { content, trigger }); return identifier;
+      phone.booked++; phone.schedule.set(identifier, { content, trigger }); return identifier;
     },
   };
   (globalThis as any).__pbsNotifications = phone;
@@ -1709,14 +1709,29 @@ test('Settings has one reminder switch and the time; off clears the schedule at 
   await settle();
   assert.equal(toggle().props['aria-checked'], true);
   assert.ok(strings(settings).includes(i18n.t('reminder.settings.on', { locale: 'en', time: '8:30 PM' })));
-  await press(settings, en['reminder.settings.later']);
+  // The phone's own time picker: turning the wheel books nothing; Done reschedules once.
+  const booked = phone.booked;
+  await press(settings, en['reminder.settings.change']);
+  const wheel = () => host(settings, 'DateTimePicker')[0];
+  assert.equal(wheel().props.mode, 'time');
+  for (const minute of [0, 10, 15]) await act(async () => wheel().props.onChange({ type: 'set' }, new Date(2026, 0, 1, 21, minute)));
+  assert.equal(phone.booked, booked, 'turning the wheel books nothing');
+  await press(settings, en['reminder.settings.done']);
   await settle();
-  assert.ok(strings(settings).includes('9:00 PM'));
-  assert.deepEqual([...phone.schedule.values()].map(e => e.trigger), [{ type: 'daily', hour: 21, minute: 0 }]);
+  assert.equal(phone.booked, booked + 1, 'closing the picker reschedules once');
+  assert.ok(strings(settings).includes('9:15 PM'));
+  assert.deepEqual([...phone.schedule.values()].map(e => e.trigger), [{ type: 'daily', hour: 21, minute: 15 }]);
+  // Opened and cancelled: nothing changes.
+  await press(settings, en['reminder.settings.change']);
+  await act(async () => wheel().props.onChange({ type: 'set' }, new Date(2026, 0, 1, 6, 0)));
+  await press(settings, en['reminder.settings.cancel']);
+  await settle();
+  assert.equal(phone.booked, booked + 1);
+  assert.ok(strings(settings).includes('9:15 PM'));
   await act(async () => toggle().props.onPress());
   await settle();
   assert.equal(phone.schedule.size, 0, 'off cancels every scheduled notification');
-  assert.ok(!strings(settings).includes(en['reminder.settings.later']), 'the time row goes with it');
+  assert.ok(!strings(settings).includes(en['reminder.settings.change']), 'the time row goes with it');
   await act(async () => settings.unmount());
 });
 
@@ -1772,4 +1787,47 @@ test('the plain website has no reminder: no switch, no offer', async () => {
   assert.ok(strings(settings).includes(en['settings.language']), 'Settings itself is drawn');
   assert.ok(!strings(settings).includes(en['reminder.settings.title']));
   await act(async () => settings.unmount());
+});
+
+test('Android uses its own time dialog: OK reschedules once, Cancel changes nothing', async () => {
+  (globalThis as any).__pbsPlatform = 'android';
+  const phone = notificationPhone('granted');
+  local.set(REMINDER_KEY, JSON.stringify({ on: true, hour: 20, minute: 30 }));
+  const settings = await mount('settings', { ...base, journey: 'psalm-nights' });
+  await settle();
+  const booked = phone.booked;
+  await press(settings, en['reminder.settings.change']);
+  await act(async () => host(settings, 'DateTimePicker')[0].props.onChange({ type: 'dismissed' }, undefined));
+  assert.equal(host(settings, 'DateTimePicker').length, 0, 'the dialog closed');
+  assert.equal(phone.booked, booked);
+  await press(settings, en['reminder.settings.change']);
+  await act(async () => host(settings, 'DateTimePicker')[0].props.onChange({ type: 'set' }, new Date(2026, 0, 1, 6, 45)));
+  await settle();
+  assert.equal(phone.booked, booked + 1);
+  assert.deepEqual([...phone.schedule.values()].map(e => e.trigger), [{ type: 'daily', hour: 6, minute: 45 }]);
+  await act(async () => settings.unmount());
+});
+
+test('the web preview falls back to a time field: typing edits, leaving the field sets the time once', async () => {
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+  try {
+    const settings = await mount('settings', { ...base, journey: 'psalm-nights' });
+    await settle();
+    const toggle = host(settings, 'Pressable').find(n => n.props.role === 'switch' && n.props['aria-label'] === en['reminder.settings.title'])!;
+    await act(async () => toggle.props.onPress());
+    await settle();
+    const field = () => host(settings, 'input')[0];
+    assert.equal(field().props.type, 'time');
+    assert.equal(field().props.value, '20:30');
+    await act(async () => field().props.onChange({ target: { value: '07:05' } }));
+    assert.ok(strings(settings).includes('8:30 PM'), 'typing alone does not set it');
+    await act(async () => field().props.onBlur());
+    await settle();
+    assert.ok(strings(settings).includes('7:05 AM'));
+    assert.deepEqual([JSON.parse(local.get(REMINDER_KEY)!).hour, JSON.parse(local.get(REMINDER_KEY)!).minute], [7, 5]);
+    await act(async () => settings.unmount());
+  } finally {
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW; else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
+  }
 });

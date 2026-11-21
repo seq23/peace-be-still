@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import en from '../src/i18n/en.json';
 import es from '../src/i18n/es.json';
 import {
-  ASK_AGAIN_MS, DEFAULT_TIME, REMINDER_ID, initialReminder, markFirstValue, notNow, parseReminder, shiftTime, shouldOffer,
+  ASK_AGAIN_MS, DEFAULT_TIME, REMINDER_ID, initialReminder, markFirstValue, notNow, parseReminder, shouldOffer, withTime,
   sync, turnOff, turnOn, type NotificationsApi, type Permission,
 } from '../src/reminders/reminder';
 
@@ -36,7 +36,7 @@ test('never more than one reminder a day: reopening, a new time, a leftover from
   for (let i = 0; i < 10; i++) state = await sync(phone, parseReminder(JSON.parse(JSON.stringify(state))), content);
   assert.equal(phone.schedule.size, 1);
   // A new time replaces the old one; it never adds a second.
-  state = await sync(phone, shiftTime(state, 30), content);
+  state = await sync(phone, withTime(state, 21, 0), content);
   assert.deepEqual([...phone.schedule.values()].map(e => [e.hour, e.minute]), [[21, 0]]);
   // A reinstall can leave an entry the new copy did not book (another id); the next sync clears it.
   phone.schedule.set('left-over-from-an-older-install', { hour: 7, minute: 0, body: 'old' });
@@ -110,7 +110,8 @@ test('saved records are read safely and the default time is an evening one', () 
   assert.deepEqual(parseReminder(null), initialReminder);
   assert.deepEqual(parseReminder({ on: true, hour: 25, minute: 0 }), { on: true, ...DEFAULT_TIME });
   assert.ok(DEFAULT_TIME.hour >= 18 && DEFAULT_TIME.hour <= 21);
-  assert.deepEqual([shiftTime({ ...initialReminder, hour: 23, minute: 30 }, 30).hour, shiftTime({ ...initialReminder, hour: 0, minute: 0 }, -30).hour], [0, 23]);
+  assert.deepEqual(withTime(initialReminder, 7, 15), { ...initialReminder, hour: 7, minute: 15 });
+  assert.deepEqual(withTime(initialReminder, 24, 0), initialReminder, 'an impossible time from a picker changes nothing');
 });
 
 test('the reminder words are calm in both languages: no guilt, no streaks, no "you missed"', () => {

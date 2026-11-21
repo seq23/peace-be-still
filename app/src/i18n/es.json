@@ -324,8 +324,9 @@
   "reminder.settings.on": "Uno al día a las %{time}.",
   "reminder.settings.off": "Apagado. No se envía nada.",
   "reminder.settings.time": "Hora",
-  "reminder.settings.earlier": "Más temprano",
-  "reminder.settings.later": "Más tarde",
   "reminder.settings.denied": "Las notificaciones de Peace Be Still están apagadas en los Ajustes del teléfono. Si quieres el recordatorio, actívalas allí.",
-  "reminder.settings.openPhone": "Abrir Ajustes del teléfono"
+  "reminder.settings.openPhone": "Abrir Ajustes del teléfono",
+  "reminder.settings.change": "Cambiar",
+  "reminder.settings.done": "Listo",
+  "reminder.settings.cancel": "Cancelar"
 }

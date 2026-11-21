@@ -12,7 +12,6 @@ const DAY = 86_400_000;
 export const ASK_AGAIN_MS = 7 * DAY;
 /** The default time, early evening: before the night session, never at bedtime itself. */
 export const DEFAULT_TIME = { hour: 20, minute: 30 } as const;
-export const STEP_MINUTES = 30;
 
 export type Permission = 'granted' | 'denied' | 'undetermined';
 
@@ -69,11 +68,9 @@ export const markFirstValue = (state: ReminderState, now = Date.now()): Reminder
 
 export const notNow = (state: ReminderState, now = Date.now()): ReminderState => ({ ...state, notNowAt: now });
 
-/** Moves the time by whole steps, wrapping around midnight. */
-export function shiftTime(state: ReminderState, minutes: number): ReminderState {
-  const total = (((state.hour * 60 + state.minute + minutes) % 1440) + 1440) % 1440;
-  return { ...state, hour: Math.floor(total / 60), minute: total % 60 };
-}
+/** A time from the phone's picker; anything out of range is ignored. */
+export const withTime = (state: ReminderState, hour: number, minute: number): ReminderState =>
+  isTime(hour, minute) ? { ...state, hour, minute } : state;
 
 /**
  * Makes the phone's schedule match the state: clear everything, then book the one reminder if it is on and the

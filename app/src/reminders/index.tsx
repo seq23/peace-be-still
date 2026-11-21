@@ -6,9 +6,10 @@ import { Linking, Platform, Text, View } from 'react-native';
 import { useT } from '../settings';
 import { Body, Card, Label, PillButton, SwitchRow, TextLink, styles, usePalette } from '../ui';
 import { fonts } from '../theme/tokens';
+import { TimePicker, type Time } from './TimePicker';
 import {
-  REMINDER_KEY, STEP_MINUTES, initialReminder, markFirstValue as withFirstValue, notNow as withNotNow, parseReminder,
-  shiftTime, shouldOffer, sync, turnOff, turnOn, type NotificationsApi, type Permission, type ReminderContent, type ReminderState,
+  REMINDER_KEY, initialReminder, markFirstValue as withFirstValue, notNow as withNotNow, parseReminder,
+  shouldOffer, sync, withTime, turnOff, turnOn, type NotificationsApi, type Permission, type ReminderContent, type ReminderState,
 } from './reminder';
 
 const isPreview = () => Platform.OS === 'web' && process.env.EXPO_PUBLIC_PBS_PREVIEW === '1';
@@ -102,7 +103,8 @@ export function useReminder() {
     state, ready, available: !!api,
     turnOn: () => api && run(s => turnOn(api, s, content)),
     turnOff: () => api && run(s => turnOff(api, s, content)),
-    move: (minutes: number) => api && run(s => sync(api, shiftTime(s, minutes), content)),
+    /** One reschedule per closed picker; an unchanged time books nothing new. */
+    setTime: (time: Time | null) => api && time && run(s => (s.hour === time.hour && s.minute === time.minute ? s : sync(api, withTime(s, time.hour, time.minute), content))),
     notNow: () => run(s => withNotNow(s)),
   };
 }
@@ -143,14 +145,7 @@ export function ReminderSettings() {
       <SwitchRow title={t('reminder.settings.title')} detail={state.on ? t('reminder.settings.on', { time }) : t('reminder.settings.off')}
         value={state.on} onChange={on => void (on ? reminder.turnOn() : reminder.turnOff())} />
       {state.on && <Card>
-        <View style={styles.row}>
-          <View style={styles.grow}>
-            <Label>{t('reminder.settings.time')}</Label>
-            <Text style={{ fontFamily: fonts.mono, fontSize: 17, color: c.ink }}>{time}</Text>
-          </View>
-          <TextLink onPress={() => void reminder.move(-STEP_MINUTES)}>{t('reminder.settings.earlier')}</TextLink>
-          <TextLink onPress={() => void reminder.move(STEP_MINUTES)} style={{ marginLeft: 16 }}>{t('reminder.settings.later')}</TextLink>
-        </View>
+        <TimePicker value={state} label={t('reminder.settings.time')} shown={time} onClose={next => void reminder.setTime(next)} />
       </Card>}
       {!state.on && state.osDenied && <Card>
         <Body>{t('reminder.settings.denied')}</Body>

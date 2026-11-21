@@ -324,8 +324,9 @@
   "reminder.settings.on": "One a day at %{time}.",
   "reminder.settings.off": "Off. Nothing is sent.",
   "reminder.settings.time": "Time",
-  "reminder.settings.earlier": "Earlier",
-  "reminder.settings.later": "Later",
   "reminder.settings.denied": "Notifications for Peace Be Still are off in your phone's Settings. If you want the reminder, turn them on there.",
-  "reminder.settings.openPhone": "Open phone Settings"
+  "reminder.settings.openPhone": "Open phone Settings",
+  "reminder.settings.change": "Change",
+  "reminder.settings.done": "Done",
+  "reminder.settings.cancel": "Cancel"
 }

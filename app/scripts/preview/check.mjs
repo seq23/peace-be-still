@@ -117,9 +117,10 @@ export async function check(target) {
       await reminder.click();
       await page.getByText('One a day at 8:30 PM.', { exact: true }).waitFor({ timeout: 10000 }).catch(() => undefined);
       expect((await reminder.getAttribute('aria-checked')) === 'true' && await shows(page, 'One a day at 8:30 PM.'), 'turning the reminder on did not show "One a day at 8:30 PM."');
+      expect((await page.locator('input[type=time]').count()) === 1, 'the reminder time is not a time field on the web preview');
       await shot(page, '07-settings-reminder-on');
       await reminder.click();
-      expect((await reminder.getAttribute('aria-checked')) === 'false' && (await page.getByText('Later', { exact: true }).count()) === 0, 'turning the reminder off left it on or kept the time row');
+      expect((await reminder.getAttribute('aria-checked')) === 'false' && (await page.locator('input[type=time]').count()) === 0, 'turning the reminder off left it on or kept the time row');
       await context.close();
     }
     // 4. The onboarding guard.
