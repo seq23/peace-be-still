@@ -4,8 +4,11 @@ Voices the app's library on her Mac and shelves every file on Drive. Audio never
 folder holds the code and `manifest.jsonl` (one row per file: file, kind, lang, ref, seconds, sha256,
 checks, shelved, status, voice).
 
-- **Order**: (1) Psalms, KJV + RV1909, one file per psalm; (2) every other chapter of the 66 books,
-  English and Spanish book by book; (3) scripts in `content/` marked `"status": "passed"`.
+- **Order**: (1) English Psalms; (2) the sleep sessions, the paid core (coordinator 21 Nov 2026): EN Psalm Nights,
+  ES Psalm Nights, Imagination Nights EN then ES (`content/psalm-nights`, `content/imagination-nights`: `segments`,
+  where `[pause N]` is N s of real quiet, verses are the stored text said with their reference, and QA's words-a-minute
+  leaves the scripted quiet out); (3) every other chapter, English then Spanish, in listening order; (4) other
+  passed scripts in `content/` (stories).
 - **Per file**: `render_kokoro.py` (Kokoro, voices in `VOICES.md`, 1.5 s quiet between psalm verses,
   1.0 s between chapter verses) → `fill.master` (two-pass EBU R128 `loudnorm`, true-peak target 1 dB
   under the ceiling, then AAC-LC mono 48 kbps `.m4a`; the ENCODED file is measured and, if AAC pushed it
