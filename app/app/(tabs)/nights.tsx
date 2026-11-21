@@ -19,6 +19,8 @@ export default function Nights() {
   const psalms = visible.filter(track => shelfOf(track) === 'psalms').sort(byChapter);
   const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), t.locale);
   const stories = visible.filter(track => shelfOf(track) === (t.locale === 'es' ? 'miRefugio' : 'hushHarbor'));
+  // The plain tellings are English only; Spanish phones get Mi Refugio.
+  const plainStories = t.locale === 'en' ? visible.filter(track => shelfOf(track) === 'bibleStories') : [];
   const imagination = visible.filter(track => shelfOf(track) === 'imagination');
 
   function row(track: Track) {
@@ -46,6 +48,8 @@ export default function Nights() {
           <Shelf title={t('listen.bibleByBook')} detail={t('listen.books', { count: bible.length })}>{bible.map(book => (
             <Disclosure key={book.code} title={book.title} detail={t('listen.chapters', { count: book.chapters.length })}>{book.chapters.map(row)}</Disclosure>
           ))}</Shelf>
+          {t.locale === 'en' &&
+            <Shelf title={t('listen.bibleStories')} detail={t('listen.stories', { count: plainStories.length })}>{plainStories.map(row)}</Shelf>}
           <Shelf title={t.locale === 'es' ? t('journey.miRefugio.name') :
             [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')} detail={t('listen.stories', { count: stories.length })}>{stories.map(row)}</Shelf>
         </>}
