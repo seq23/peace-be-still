@@ -163,11 +163,18 @@ if (mode === 'judge-reviewed') {
   let flagged = 0;
   for (const [name, kind] of cases) {
     const reasons = [];
-    const ladder = (messages, schema, valid) => m.runLadder(db, m.madeForYouRungs(keep(m.realDeps.rungs(env0, Date.now())), 'judge', m.chatShare(db)), messages, schema, 300, new Map(), valid);
+    // Each rung's outcome is logged, so a DOWN says why (a quota, a bad answer, a timeout).
+    const rungs = keep(m.realDeps.rungs(env0, Date.now())).map(rung => ({ ...rung, async call(...a) {
+      try { const out = await rung.call(...a); log({ event: 'call', name, use: 'judge', rung: rung.id, outcome: 'ok' }); return out; }
+      catch (error) { const outcome = String(error?.code ?? error?.message ?? error).slice(0, 60); reasons.push(`${rung.id}:${outcome}`); log({ event: 'call', name, use: 'judge', rung: rung.id, outcome }); throw error; }
+    } }));
+    const answers = [];
+    const ladder = (messages, schema, valid) => m.runLadder(db, m.madeForYouRungs(rungs, 'judge', m.chatShare(db)), messages, schema, 300, new Map(),
+      value => { const ok = valid(value); if (!ok) answers.push(JSON.stringify(value).slice(0, 300)); return ok; });
     const input = { kind, lang: 'en', teen: false, text: 'a long day', ...(kind === 'psalm' ? { verses: kjv23 } : {}) };
     const verdict = await m.madeForYouJudge(ladder, { schema: m.judgeSchema, verdict: m.judgeVerdict }, input, reviewed[name], r => reasons.push(r));
     if (verdict === 'reject') flagged++;
-    print(`${verdict === 'reject' ? 'FLAGGED' : verdict.toUpperCase()} ${name}: ${reasons.join(' ') || '-'}`);
+    print(`${verdict === 'reject' ? 'FLAGGED' : verdict.toUpperCase()} ${name}: ${reasons.join(' ') || '-'}${answers.length ? ` (refused answers: ${answers.join(' | ')})` : ''}`);
     log({ event: 'judge-reviewed', name, verdict, reasons });
   }
   print(`OUTPUT made-for-you-judge-reviewed: ${flagged}/${cases.length} flagged by the real judge`);
