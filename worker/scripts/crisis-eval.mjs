@@ -14,7 +14,13 @@ const probes = fx('redteam-probes.json').filter(p => p.want === 'crisis' && !p.m
 const redteam = fx('redteam.json');
 const rtCrisis = (Array.isArray(redteam) ? redteam : redteam.items ?? []).filter(i => i.expect?.path === 'crisis_fixed' && !i.messages).map(i => i.prompt);
 const es = t => /[áéíóúñ¿¡]|\b(?:quiero|estoy|tengo|mi|ya|no he|nadie|soy|esta)\b/i.test(t);
-const sets = { phrased: phrases.crisis, subtle: evalSet.subtle, redteam: [...new Set([...probes, ...rtCrisis])], bibleHeavy: evalSet.bibleHeavy, normal: evalSet.normal };
+const all = { phrased: phrases.crisis, subtle: evalSet.subtle, redteam: [...new Set([...probes, ...rtCrisis])], bibleHeavy: evalSet.bibleHeavy, normal: evalSet.normal };
+// CRISIS_EVAL_SETS=subtle,bibleHeavy runs only those (the messages that reach the crisis model).
+const pick = (process.env.CRISIS_EVAL_SETS ?? '').split(',').filter(Boolean);
+const unknown = pick.filter(n => !(n in all));
+if (unknown.length) throw new Error(`NAMED STOP CRISIS_EVAL_UNKNOWN_SET: ${unknown.join(',')}`);
+const sets = pick.length ? Object.fromEntries(pick.map(n => [n, all[n]])) : all;
+const expected = Object.values(sets).reduce((n, xs) => n + xs.length, 0);
 let n = 0;
 const wait = ms => new Promise(r => setTimeout(r, ms));
 // Each message is its own install on its own documentation-range IP, as in redteam.mjs: a free
@@ -67,4 +73,4 @@ const summary = {
 };
 writeFileSync('crisis-eval.json', JSON.stringify({ summary, rows }, null, 1));
 console.log(`OUTPUT crisis-eval: ${rows.length} messages; recall card ${summary.recallAll.card}% caught ${summary.recallAll.caught}% of ${crisisRows.length}; false cards bible ${summary.falseCard.bibleHeavy}% normal ${summary.falseCard.normal}%; safety model on ${summary.safetyShareOfCalm}% of calm messages; ${summary.dry} dry`);
-if (rows.length < 200 || summary.dry > rows.length / 20) { console.error(`NAMED STOP CRISIS_EVAL_DRY: ${summary.dry} of ${rows.length} got no real reply`); process.exit(3); }
+if (rows.length < expected || summary.dry > rows.length / 20) { console.error(`NAMED STOP CRISIS_EVAL_DRY: ${summary.dry} of ${rows.length} got no real reply`); process.exit(3); }
