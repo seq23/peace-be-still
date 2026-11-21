@@ -306,3 +306,13 @@ test('the App Store Connect dry run prints the plan from the shared constants an
   assert.ok(plan.availability.excludedTerritories.includes('GBR') && plan.availability.excludedTerritories.includes('CHE'));
   assert.ok(plan.availability.excludedTerritories.includes('CHN'), 'China mainland is excluded (religious content permit, AIGC rules)');
 });
+
+// The iOS build image is pinned (review 21 Nov 2026): the simulator build was proven on Xcode 26.6
+// (GitHub run 44945173301) and failed on Xcode 16.4; EAS's `latest`/`sdk-58` is Xcode 27.1, which
+// needs the UIKit scene life cycle. Image names from docs.expo.dev/build-reference/infrastructure (read 21 Nov 2026).
+test('every EAS build profile pins the iOS image to the proven Xcode 26.6 image', () => {
+  const eas = JSON.parse(readFileSync(new URL('../eas.json', import.meta.url), 'utf8')) as { build: Record<string, { ios?: { image?: string } }> };
+  const profiles = Object.entries(eas.build);
+  assert.ok(profiles.length >= 3 && 'production' in eas.build, 'no build profiles read');
+  for (const [name, profile] of profiles) assert.equal(profile.ios?.image, 'macos-tahoe-26.5-xcode-26.6', `${name}: iOS image not pinned`);
+});
