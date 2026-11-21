@@ -81,6 +81,12 @@ export async function markFirstValue(now = Date.now()) {
 const subscribe = (listener: () => void) => { listeners.add(listener); return () => { listeners.delete(listener); }; };
 let synced = false;
 
+/** Each journey kind's own words, written out so every string is visibly used. */
+const WORDS = {
+  morning: { offer: 'reminder.offer.title.morning', body: 'reminder.body.morning' },
+  evening: { offer: 'reminder.offer.title.evening', body: 'reminder.body.evening' },
+} as const;
+
 export function useReminder() {
   // The reminder speaks the journey's language (Spanish inside Mi Refugio), like the screens it brings you back to.
   const t = useT('journey');
@@ -89,7 +95,7 @@ export function useReminder() {
   const api = reminderApi();
   // Morning Word gets a morning reminder; the other journeys an evening one, each in its own words.
   const kind = reminderKind(useSettings().settings.journey);
-  const content: ReminderContent = { title: t('reminder.title'), body: t(`reminder.body.${kind}`), kind };
+  const content: ReminderContent = { title: t('reminder.title'), body: t(WORDS[kind].body), kind };
   const time = timeOf(state, kind);
   useEffect(() => {
     let live = true;
@@ -129,7 +135,7 @@ export function ReminderOffer() {
     <Card>
       <View testID="reminder-offer" style={{ gap: 8 }}>
         <Label>{t('reminder.offer.label')}</Label>
-        <Text style={{ fontFamily: fonts.serif, fontSize: 19, lineHeight: 26, color: c.ink }}>{t(`reminder.offer.title.${reminder.kind}`)}</Text>
+        <Text style={{ fontFamily: fonts.serif, fontSize: 19, lineHeight: 26, color: c.ink }}>{t(WORDS[reminder.kind].offer)}</Text>
         <Body>{t('reminder.offer.body', { time: formatTime(reminder.time, t.locale) })}</Body>
         <PillButton onPress={() => void reminder.turnOn()}>{t('reminder.offer.yes')}</PillButton>
         <TextLink onPress={() => void reminder.notNow()}>{t('reminder.offer.notNow')}</TextLink>
