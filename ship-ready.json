@@ -1,0 +1,1 @@
+{ "kind": "site", "serve": "site/public", "allow": { "coming soon": "the app is not in the stores yet: site/config/store.json has no store URL, and check-site.mjs forbids \"available now\" until it does" } }

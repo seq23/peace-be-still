@@ -196,13 +196,13 @@ ${V("MAR 4:39")}`],
     description: "What a free Bible chat should include, and exactly what the free lane of Peace Be Still holds forever: one chat a day, the whole KJV, no ads, no trial.",
     h1: "Free Bible chat: what is really free, and for how long",
     definition: "A free Bible chat is an app where you can ask questions about faith and scripture without paying. Many apps call themselves free but lock the chat behind a trial that turns into a weekly or yearly charge. In Peace Be Still, coming soon, the free lane is free for good: one chat a day of up to 10 messages, with no trial, no ads and no card needed.",
-    quick: "Peace Be Still's free lane, forever: the whole King James Bible to read and to hear, today's Bible story, one chat a day of up to 10 messages, your first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, a journal and share cards. Nothing free is ever taken back.",
+    quick: "Peace Be Still's free lane, forever: the whole King James Bible to read, a growing set of chapters read aloud, today's Bible story, one chat a day of up to 10 messages, your first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, a journal and share cards. Nothing free is ever taken back.",
     bestFor: "anyone who wants a Bible chat app that is free without a trial, and wants to know exactly where free ends.",
     indexNote: "Exactly what the free lane holds forever, and what the paid lane adds.",
     sections: [
       ["What does a free Bible chat include in Peace Be Still?", `<table class="t"><thead><tr><th>Free lane, forever</th><th>Paid lane ($7.99 a month or $39.99 a year)</th></tr></thead><tbody>
 <tr><td>One chat a day, up to 10 messages, shown as “N of 10 messages left today”</td><td>Unlimited chat (fair use: 100 messages a day)</td></tr>
-<tr><td>The whole King James Bible, to read and to hear</td><td>Chat that remembers what you are carrying</td></tr>
+<tr><td>The whole King James Bible to read, and a growing set of chapters read aloud</td><td>Chat that remembers what you are carrying</td></tr>
 <tr><td>Today's Bible story</td><td>Every past story and longer journeys</td></tr>
 <tr><td>Your first sleep night free, then one a week</td><td>A sleep session every night, plus ones made for you</td></tr>
 <tr><td>A daily declaration, basic 7-day plans, saved verses, journal, streak and share cards</td><td>Declaration topics and offline downloads</td></tr>
@@ -313,13 +313,13 @@ ${V("MAR 4:39")}`],
     description: "Qué incluye gratis para siempre Peace Be Still: un chat al día, la Biblia completa en Reina-Valera 1909, sin anuncios y sin prueba gratuita.",
     h1: "Chat bíblico gratis: qué es gratis de verdad, y por cuánto tiempo",
     definition: "Un chat bíblico gratis es una app donde puedes hacer preguntas sobre la fe y la Biblia sin pagar. Muchas apps dicen ser gratis, pero cierran el chat detrás de una prueba que después cobra cada semana o cada año. En Peace Be Still, que llega muy pronto, el camino gratis es gratis para siempre: un chat al día de hasta 10 mensajes, sin prueba, sin anuncios y sin tarjeta.",
-    quick: "Gratis para siempre: la Biblia completa para leer y escuchar, la historia bíblica del día, un chat al día de hasta 10 mensajes, tu primera noche para dormir y después una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, diario y tarjetas para compartir. Lo gratis nunca se quita.",
+    quick: "Gratis para siempre: la Biblia completa para leer, la historia bíblica del día, un chat al día de hasta 10 mensajes, tu primera noche para dormir y después una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, diario y tarjetas para compartir. Lo gratis nunca se quita.",
     bestFor: "quien busca un chat bíblico en español que sea gratis sin prueba, y quiere saber dónde termina lo gratis.",
     indexNote: "Lo que es gratis para siempre y lo que agrega el plan pagado.",
     sections: [
       ["¿Qué incluye gratis Mi Refugio?", `<table class="t"><thead><tr><th>Gratis, para siempre</th><th>Plan pagado ($7.99 al mes o $39.99 al año)</th></tr></thead><tbody>
 <tr><td>Un chat al día, hasta 10 mensajes</td><td>Chat sin límite (uso justo: 100 mensajes al día)</td></tr>
-<tr><td>La Biblia completa, Reina-Valera 1909, para leer y escuchar</td><td>Un chat que recuerda lo que estás cargando</td></tr>
+<tr><td>La Biblia completa en la Reina-Valera 1909, para leer</td><td>Un chat que recuerda lo que estás cargando</td></tr>
 <tr><td>La historia bíblica del día</td><td>Todas las historias anteriores y caminos más largos</td></tr>
 <tr><td>Tu primera noche para dormir, después una por semana</td><td>Una sesión para dormir cada noche</td></tr>
 <tr><td>Una declaración diaria, planes de 7 días, versículos guardados, diario y tarjetas</td><td>Temas de declaraciones y descargas sin conexión</td></tr>

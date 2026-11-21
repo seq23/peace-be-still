@@ -10,16 +10,19 @@ Per file (a manifest row with status passed, a sha256 and a Drive `shelved` path
 The served manifest `manifest.jsonl` at the bucket root is the ledger: one public row per file that is
 in R2 (file, kind, lang, ref, seconds, sha256, voice, status, and a story's title; never checks or
 Drive paths). A file whose ledger sha256 equals the manifest's is done, so every run is idempotent and
-a run cut off by its time box resumes where it stopped. The app reads <audioBaseUrl>/manifest.jsonl,
-with the copy bundled in the release as the offline fallback, so new audio needs no app release.
+a run cut off by its time box resumes where it stopped. The app reads <audioBaseUrl>/manifest.jsonl
+to check which tracks from the bundled catalog it can stream.
 
-Free tier only (her rule): before uploading, the account's whole R2 storage (every bucket, from
-Cloudflare's analytics) plus this batch must stay under PBS_R2_FREE_CAP_GB (default 9.5 of the free
-10 GB) and the month's Class A operations under 900,000 of the free 1,000,000; otherwise
-NAMED STOP R2_FREE_STORAGE / R2_FREE_OPS (nothing past the cap is uploaded; a person frees space or decides).
+Where (her ruling 20 Nov 2026): her SECOND Cloudflare account. Its free 10 GB is shared by every bucket
+on it (this library, the private made-for-you bucket, anything else), so the cap is read for the WHOLE
+account from Cloudflare's own R2 storage analytics (account_bytes(); token CF2_WORKERS_AI_TOKEN, the
+second account's token that also reads its analytics). The account's stored bytes plus this batch must stay under PBS_R2_FREE_CAP_GB
+(default 9.5 of the free 10 GB), else NAMED STOP R2_FREE_STORAGE (nothing past the cap is uploaded). An
+unreadable total is NAMED STOP R2_USAGE_UNREAD: nothing is uploaded on a guess. Class A operations: a run
+costs about one listing plus one PUT per new file, far under the free 1,000,000 a month.
 
-Key: CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID from the Boss OS vault (vault:run); the R2 S3 key is
-derived from the token (id + SHA-256 of the value) and passed to rclone in its environment, never argv.
+Key: CF2_ACCOUNT_ID + PBS_CF2_R2_ACCESS_KEY_ID / PBS_CF2_R2_SECRET_ACCESS_KEY from the Boss OS vault
+(vault:run), passed to rclone in its environment, never argv.
 Output: `OUTPUT <n> files published to R2` and `r2: X of Y shelved files public`.
 By hand: cd ~/GitHub/boss-os && npm run -s vault:run -- <python> <repo>/audio/publish.py --limit 3 [--dry-run]
 """
@@ -28,14 +31,13 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import fcntl
-import hashlib
 import json
 import os
 import subprocess
+import urllib.request
 import sys
 import tempfile
 import time
-import urllib.request
 from pathlib import Path
 
 AUDIO = Path(__file__).resolve().parent
@@ -44,19 +46,14 @@ import fill  # noqa: E402
 from fill import NamedStop  # noqa: E402
 
 BUCKET = os.environ.get("PBS_R2_BUCKET", "peace-be-still-audio")
-PUBLIC_BASE = "https://audio.peacebestillapp.com/"
+PUBLIC_BASE = "https://pbs-audio.professionalresourcelibrary.com/"
 SERVED = "manifest.jsonl"
 FREE_CAP_BYTES = float(os.environ.get("PBS_R2_FREE_CAP_GB", "9.5")) * 1e9
-FREE_CLASS_A = 900_000
 PUBLIC_FIELDS = ("file", "kind", "lang", "ref", "seconds", "sha256", "voice", "status")
 AUDIO_HEADERS = ["--header-upload", "Content-Type: audio/mp4",
                  "--header-upload", "Cache-Control: public, max-age=86400"]
 SERVED_HEADERS = ["--header-upload", "Content-Type: application/x-ndjson; charset=utf-8",
                   "--header-upload", "Cache-Control: public, max-age=300"]
-CLASS_A = {"ListBuckets", "PutBucket", "ListObjects", "PutObject", "CopyObject", "CompleteMultipartUpload",
-           "CreateMultipartUpload", "ListMultipartUploads", "UploadPart", "UploadPartCopy", "ListParts",
-           "PutBucketEncryption", "PutBucketCors", "PutBucketLifecycleConfiguration",
-           "LifecycleStorageTierTransition"}
 RCLONE_ENV: dict = {}
 
 
@@ -118,52 +115,50 @@ def fits(batch: list[dict], account_bytes: float, cap: float = FREE_CAP_BYTES) -
 
 
 # ------------------------------------------------------------------ Cloudflare
-def _api(path: str, body: dict | None = None) -> dict:
-    req = urllib.request.Request("https://api.cloudflare.com/client/v4" + path,
-                                 data=json.dumps(body).encode() if body else None,
-                                 headers={"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"],
-                                          "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.load(resp)
-
-
 def connect() -> None:
-    """Fill RCLONE_ENV with an `r2:` remote. No key = NAMED STOP R2_KEY_MISSING."""
-    if not (os.environ.get("CLOUDFLARE_API_TOKEN") and os.environ.get("CLOUDFLARE_ACCOUNT_ID")):
-        raise NamedStop("R2_KEY_MISSING", "CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID are not set; run through "
+    """Fill RCLONE_ENV with an `r2:` remote on the second account. No key = NAMED STOP R2_KEY_MISSING."""
+    need = ("CF2_ACCOUNT_ID", "PBS_CF2_R2_ACCESS_KEY_ID", "PBS_CF2_R2_SECRET_ACCESS_KEY")
+    if not all(os.environ.get(k) for k in need):
+        raise NamedStop("R2_KEY_MISSING", f"{' / '.join(need)} are not all set; run through "
                         "`npm run -s vault:run --` in ~/GitHub/boss-os. Nothing was published.")
-    tok = os.environ["CLOUDFLARE_API_TOKEN"]
-    tid = _api("/user/tokens/verify")["result"]["id"]
     RCLONE_ENV.update({
         "RCLONE_CONFIG_R2_TYPE": "s3", "RCLONE_CONFIG_R2_PROVIDER": "Cloudflare",
-        "RCLONE_CONFIG_R2_ACCESS_KEY_ID": tid,
-        "RCLONE_CONFIG_R2_SECRET_ACCESS_KEY": hashlib.sha256(tok.encode()).hexdigest(),
-        "RCLONE_CONFIG_R2_ENDPOINT": f"https://{os.environ['CLOUDFLARE_ACCOUNT_ID']}.r2.cloudflarestorage.com",
+        "RCLONE_CONFIG_R2_ACCESS_KEY_ID": os.environ["PBS_CF2_R2_ACCESS_KEY_ID"],
+        "RCLONE_CONFIG_R2_SECRET_ACCESS_KEY": os.environ["PBS_CF2_R2_SECRET_ACCESS_KEY"],
+        "RCLONE_CONFIG_R2_ENDPOINT": f"https://{os.environ['CF2_ACCOUNT_ID']}.r2.cloudflarestorage.com",
         "RCLONE_CONFIG_R2_NO_CHECK_BUCKET": "true"})
 
 
-def account_usage(now: dt.datetime) -> tuple[float, int]:
-    """(bytes stored in every R2 bucket on the account now, Class A operations this month)."""
-    start = now.astimezone(dt.timezone.utc).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    v = {"a": os.environ["CLOUDFLARE_ACCOUNT_ID"], "s": start.isoformat().replace("+00:00", "Z"),
-         "e": now.astimezone(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
-         "d": (now - dt.timedelta(days=2)).astimezone(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")}
-    q = """query($a:String!,$s:Time!,$e:Time!,$d:Time!){viewer{accounts(filter:{accountTag:$a}){
-      st:r2StorageAdaptiveGroups(limit:10000,filter:{datetime_geq:$d,datetime_leq:$e},orderBy:[datetime_DESC]){
-        max{payloadSize metadataSize} dimensions{bucketName datetime}}
-      op:r2OperationsAdaptiveGroups(limit:10000,filter:{datetime_geq:$s,datetime_leq:$e}){
-        sum{requests} dimensions{actionType}}}}}"""
-    d = _api("/graphql", {"query": q, "variables": v})
-    if d.get("errors") or not d.get("data"):
-        raise NamedStop("R2_USAGE_UNREAD", f"Cloudflare analytics did not answer ({str(d.get('errors'))[:200]}); "
-                        "nothing is uploaded without knowing the free-tier room.")
-    acct = d["data"]["viewer"]["accounts"][0]
-    latest: dict[str, dict] = {}
-    for g in acct["st"]:
-        latest.setdefault(g["dimensions"]["bucketName"], g["max"])
-    stored = sum(m["payloadSize"] + m["metadataSize"] for m in latest.values())
-    ops = sum(g["sum"]["requests"] for g in acct["op"] if g["dimensions"]["actionType"] in CLASS_A)
-    return float(stored), int(ops)
+R2_USAGE_QUERY = """query ($account: String!, $since: Time!) { viewer { accounts(filter: {accountTag: $account}) {
+  r2StorageAdaptiveGroups(limit: 1000, filter: {datetime_geq: $since}, orderBy: [datetime_DESC]) {
+    max { payloadSize metadataSize } dimensions { bucketName datetime } } } } }"""
+
+
+def account_bytes(post=None, now: dt.datetime | None = None) -> float:
+    """Every bucket's stored bytes on the second account (its latest storage sample per bucket), from
+    Cloudflare's GraphQL analytics. Unreadable -> NAMED STOP R2_USAGE_UNREAD before anything is uploaded."""
+    token, account = os.environ.get("CF2_WORKERS_AI_TOKEN"), os.environ.get("CF2_ACCOUNT_ID")
+    if not token or not account:
+        raise NamedStop("R2_USAGE_UNREAD", "CF2_WORKERS_AI_TOKEN with CF2_ACCOUNT_ID (the second account) "
+                        "is not set, so the account's whole R2 storage cannot be counted. Nothing was uploaded.")
+    since = ((now or dt.datetime.now(dt.timezone.utc)) - dt.timedelta(days=2)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    body = json.dumps({"query": R2_USAGE_QUERY, "variables": {"account": account, "since": since}}).encode()
+    def fetch(data: bytes) -> dict:
+        request = urllib.request.Request("https://api.cloudflare.com/client/v4/graphql", data=data, method="POST",
+                                         headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
+        with urllib.request.urlopen(request, timeout=60) as response:
+            return json.load(response)
+    try:
+        reply = (post or fetch)(body)
+        groups = reply["data"]["viewer"]["accounts"][0]["r2StorageAdaptiveGroups"]
+    except Exception:
+        raise NamedStop("R2_USAGE_UNREAD", "Cloudflare's R2 storage analytics did not answer. Nothing was uploaded.") from None
+    latest: dict[str, float] = {}
+    for group in groups:  # newest first: the first sample seen for a bucket is its current size
+        name = group["dimensions"]["bucketName"]
+        if name not in latest:
+            latest[name] = float(group["max"]["payloadSize"] or 0) + float(group["max"]["metadataSize"] or 0)
+    return sum(latest.values())
 
 
 def r2_listing() -> dict[str, dict]:
@@ -236,23 +231,22 @@ def main(argv=None) -> int:
     connect()
     cands = candidates(fill.read_manifest())
     in_r2 = r2_listing()
-    ledger = {f: r for f, r in read_ledger().items() if f in in_r2}
+    previous_ledger = read_ledger()
+    ledger = {f: r for f, r in previous_ledger.items() if f in in_r2}
     queue = todo(cands, ledger, in_r2)
     if a.limit:
         queue = queue[:a.limit]
-    stored, ops = account_usage(now)
+    # The analytics lag by up to an hour, so this bucket's own listing is the floor for its share.
+    stored = max(account_bytes(), float(sum(e.get("Size") or 0 for e in in_r2.values())))
     batch = fits(queue, stored)
-    room = f"account R2 {stored / 1e9:.2f} of {FREE_CAP_BYTES / 1e9:.1f} GB cap, Class A {ops:,} this month"
+    room = f"account {stored / 1e9:.2f} of {FREE_CAP_BYTES / 1e9:.1f} GB cap (second account, all buckets, free 10 GB)"
     if a.dry_run:
         print(f"{len(queue)} to publish, {len(batch)} fit under the free cap; {room}")
         return 0
 
     stop: NamedStop | None = None
     held: list[str] = []
-    made, t0, dirty = 0, time.monotonic(), False
-    if ops > FREE_CLASS_A:
-        stop = NamedStop("R2_FREE_OPS", f"{room}: over {FREE_CLASS_A:,}; nothing uploaded until next month or her call")
-        batch = []
+    made, t0, dirty = 0, time.monotonic(), ledger != previous_ledger
     try:
         for row in batch:
             if a.max_minutes and (time.monotonic() - t0) / 60 >= a.max_minutes:
@@ -260,10 +254,10 @@ def main(argv=None) -> int:
             try:
                 publish_one(row)
             except NamedStop as e:
+                if e.exit_code == 0 or e.code == "R2_HASH_MISMATCH":
+                    dirty = ledger.pop(row["file"], None) is not None or dirty
                 if e.exit_code == 0:      # one bad shelf copy: hold that file, carry on
                     held.append(str(e))
-                    ledger.pop(row["file"], None)
-                    dirty = True
                     continue
                 raise
             ledger[row["file"]] = public_row(row)
@@ -278,8 +272,8 @@ def main(argv=None) -> int:
         if dirty or (cands and not in_r2.get(SERVED)):
             write_ledger(ledger)
     if not stop and len(batch) < len(queue) and len(batch) == made:
-        stop = NamedStop("R2_FREE_STORAGE", f"{room}; {len(queue) - len(batch)} files wait. The account's R2 is near "
-                         "the free 10 GB: free space in another bucket or decide to pay; nothing past the cap is uploaded.")
+        stop = NamedStop("R2_FREE_STORAGE", f"{room}; {len(queue) - len(batch)} files wait. The bucket is near "
+                         "the second account's free 10 GB: her call (more space or a third account); nothing past the cap is uploaded.")
     public = sum(1 for f in cands if f in ledger and ledger[f]["sha256"] == cands[f]["sha256"])
     for h in held:
         print(f"HELD {h}", file=sys.stderr)
