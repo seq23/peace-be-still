@@ -5,8 +5,7 @@
 import { env } from 'cloudflare:test';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import phrases from './fixtures/crisis-phrases.json';
-import { distress, floor } from '../src/crisis';
-import { CRISIS_THINKING_HEADROOM } from '../src/index';
+import { CRISIS_THINKING_HEADROOM, distress, floor } from '../src/crisis';
 import { call, chatBody, deps, good, NOW, scripted, tokenFor } from './helpers';
 
 afterEach(() => vi.restoreAllMocks());

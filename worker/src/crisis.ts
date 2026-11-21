@@ -284,3 +284,8 @@ export function tripwire(draftText: string, userText: string, afterCrisis = fals
   }
   return null;
 }
+
+/** Gemini counts thinking inside the output cap, so the crisis lane gets this much on top of its answer. */
+// Run 10f: at 1,024 one crisis-lane answer still ran out mid-thought (thinking ~430 tokens on average, one
+// past 1,024) and a Bible question got the fixed card. Unused tokens are not billed.
+export const CRISIS_THINKING_HEADROOM = 2048;

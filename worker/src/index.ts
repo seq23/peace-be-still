@@ -12,7 +12,7 @@ import './env';
 import { cleanup } from './cleanup';
 import { addUserSpend, appSpendMonth, blockFor, capAlert, openRouterHeadroom, safetyBudgetLeft, safetyMicro, spendStatus, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
 import { bump, logCode, reserve } from './counts';
-import { confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
+import { CRISIS_THINKING_HEADROOM, confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
 import { paidStatus, recheckMemory, type Paid } from './entitlement';
 import { ipHash } from './iphash';
@@ -155,9 +155,6 @@ const crisisRung = (env: Env, now: number): LadderRung => ({
 });
 
 /** A small ladder for a check (risk read, judge): Workers AI first, then the last Gemini model. */
-// Run 10f: at 1,024 one crisis-lane answer still ran out mid-thought (thinking ~430 tokens on average, one
-// past 1,024) and a Bible question got the fixed card. Unused tokens are not billed.
-export const CRISIS_THINKING_HEADROOM = 2048;
 /** A paid install meets no device, IP or app-wide message count (it is only counted). */
 const PAID_UNCAPPED = 1_000_000;
 const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;
