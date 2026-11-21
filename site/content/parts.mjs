@@ -93,13 +93,26 @@ export function headerHtml(lang, altPath) {
 </header>`;
 }
 
+// A page's "updated" date (ISO "2026-11-21", or the old "18 Nov 2026" text) as each language writes it.
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+export function updatedText(updated, lang) {
+  let y, m, d;
+  const iso = String(updated).match(/^(\d{4})-(\d\d)-(\d\d)$/);
+  if (iso) [y, m, d] = [+iso[1], +iso[2], +iso[3]];
+  else { const t = String(updated).match(/^(\d{1,2}) (\w{3}) (\d{4})$/); if (!t || !MONTHS.includes(t[2])) throw new Error(`NAMED STOP [BAD_UPDATED_DATE] ${updated}`); [y, m, d] = [+t[3], MONTHS.indexOf(t[2]) + 1, +t[1]]; }
+  if (lang === "ko") return `${y}년 ${m}월 ${d}일`;
+  const txt = `${d} ${MONTHS[m - 1]} ${y}`;
+  return lang === "es" ? txt.replace(/ (\w{3}) /, (x, mo) => ` ${mo.toLowerCase()} `) : txt;
+}
+
+// updated: the page's own updated date (default: the static pages' 18 Nov 2026).
 // door "mindset": the two faith landing links are left out (the doors never link each other).
 export function footerHtml(lang, updated = "18 Nov 2026", door = "neutral") {
   // Korean pages link the English legal pages, marked as English: no machine-translated legal text
   // (owner ruling 6 Nov 2026, the KeepMyProof precedent).
   if (lang === "ko") return `<footer class="site-foot">
   <div class="wrap">
-    <span>Peace Be Still · Spry Labs가 만든 앱 · 2026년 11월 21일 업데이트</span>
+    <span>Peace Be Still · Spry Labs가 만든 앱 · ${updatedText(updated, "ko")} 업데이트</span>
     <nav aria-label="바닥글">
       <a href="/ko/">새벽기도</a>
       <a href="/about" hreflang="en">소개 (영문)</a>
@@ -111,7 +124,7 @@ export function footerHtml(lang, updated = "18 Nov 2026", door = "neutral") {
   </div>
 </footer>`;
   const es = lang === "es";
-  const upd = es ? ` · Actualizado el ${updated.replace("Nov", "nov")}` : ` · Updated ${updated}`;
+  const upd = es ? ` · Actualizado el ${updatedText(updated, "es")}` : ` · Updated ${updatedText(updated, "en")}`;
   return es
     ? `<footer class="site-foot">
   <div class="wrap">

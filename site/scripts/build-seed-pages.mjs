@@ -108,7 +108,7 @@ ${sources}
 ${p.notAffiliated ? `  <p class="muted not-affiliated">${es ? `Peace Be Still no está afiliada con ${naNames} ni con ninguna app nombrada aquí.` : `Peace Be Still is not affiliated with ${naNames} or any app named here.`} ${es ? "Los nombres se usan solo para identificar las apps." : "Names are used only to identify the apps."}</p>\n` : ""}  <p class="byline">${t.by ? `${t.by} ` : ""}Peace Be Still · ${t.maker} · ${t.pub} ${p.publishedText} · ${t.upd} ${p.updatedText}</p>
 </main>
 ${storeCtaHtml(p.lang)}
-${footerHtml(p.lang, undefined, p.door)}
+${footerHtml(p.lang, p.updated, p.door)}
 </body>
 </html>
 `;
