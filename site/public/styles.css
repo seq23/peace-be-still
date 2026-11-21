@@ -198,3 +198,13 @@ q.v{font-family:var(--serif);font-style:italic}
 .disclosure{font-size:15px}
 .related ul{list-style:none;padding:0}
 .qgroup{font-size:21px;margin-top:18px}
+
+/* Korean pages (21 Nov 2026): keep words whole when lines wrap; Hangul falls back from the brand faces
+   (which have no Hangul) to the phone's Korean font; Latin letters keep the brand faces. */
+:lang(ko){word-break:keep-all;overflow-wrap:break-word;line-break:strict}
+:lang(ko) body,body:lang(ko){font-family:"Figtree","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif}
+:lang(ko) h1,:lang(ko) h2,:lang(ko) h3{font-family:"Libre Caslon Text","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",serif;letter-spacing:-.01em}
+.verse p:lang(en){word-break:normal}
+/* Prayer points: a numbered prayer, then the verse it stands on. */
+.qa ol.points{gap:16px}
+.qa ol.points>li>p{margin:0 0 6px}
