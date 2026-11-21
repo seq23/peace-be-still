@@ -63,7 +63,7 @@ ${TODAY_TABLE}
 ${V("HAB 2:3")}`],
       ["Every declaration stands on a verse", `<p>In Peace Be Still, a declaration is Scripture said back to God, with its chapter and verse beside it, so you always know what you are standing on. The Bible and the declarations come from a stored King James text, never typed from memory.</p>
 ${V("PSA 118:17")}`],
-      ["Hush Harbor, and an African journey of its own", `<p>Peace Be Still launches with Hush Harbor · Black Bible Chat &amp; Stories, which speaks in a Black American church voice and tells Bible stories with Black faces. Many African believers will enjoy it, and its stories include Africans the Bible names, such as the Ethiopian official in Acts 8 and Simon of Cyrene. But African churches and Black American churches each have their own ways of praying, so the African journey is being built as its own thing, not a copy of Hush Harbor.</p>
+      ["Hush Harbor, and an African journey of its own", `<p>Peace Be Still launches with Hush Harbor · Black Bible Chat &amp; Stories, which speaks in a Black American church voice and tells Bible stories told in a Black church voice. Many African believers will enjoy it, and its stories include Africans the Bible names, such as the Ethiopian official in Acts 8 and Simon of Cyrene. But African churches and Black American churches each have their own ways of praying, so the African journey is being built as its own thing, not a copy of Hush Harbor.</p>
 <p>See <a href="/questions/black-people-in-the-bible/">Black people in the Bible</a> for the named Africans in Scripture, each with the verse.</p>`],
     ],
     faq: [
