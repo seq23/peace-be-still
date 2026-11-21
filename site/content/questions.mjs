@@ -10,6 +10,8 @@ import { BLACK } from "./blitz-black.mjs";
 import { APPS } from "./blitz-apps.mjs";
 import { ES } from "./blitz-es.mjs";
 import { V } from "./scripture.mjs";
+import { KJV_SRC } from "./blitz-common.mjs";
+import { SEARCH, CHAT_VERSES } from "./blitz-search.mjs";
 
 export const PAGES = [
   {
@@ -121,7 +123,7 @@ ${V("PSA 4:8")}`],
     sources: [["Apple Support: Cancel a subscription from Apple", "https://support.apple.com/en-us/118428"], ["Google Play Help: Cancel, pause, or change a subscription", "https://support.google.com/googleplay/answer/7018481"], ["Apple: Request a refund", "https://reportaproblem.apple.com/"]],
   },
   {
-    ...D, lang: "en", door: "neutral", group: "Cancelling a subscription", path: "/questions/how-to-cancel-haven-subscription/",
+    ...D, updated: "2026-11-21", updatedText: "21 Nov 2026", lang: "en", door: "neutral", group: "Cancelling a subscription", path: "/questions/how-to-cancel-haven-subscription/",
     title: "How to cancel a Haven subscription · Peace Be Still",
     description: "Cancel a Haven subscription bought in the App Store or Google Play, with Apple's and Google's own steps, and what happens after you cancel.",
     h1: "How to cancel a Haven subscription on iPhone or Android",
@@ -146,7 +148,10 @@ ${V("PSA 4:8")}`],
 </ol>
 <p>Uninstalling the app does not cancel the subscription.</p>`],
       ["What happens after I cancel?", `<p>The subscription stops renewing. You can normally keep using the paid features until the end of the period you already paid for. Cancelling does not delete your account or refund the current period.</p>`],
+      ["What if I paid on Haven's website?", `<p>Haven's website, havenbibleapp.com (E12 Holdings), also offers a free trial and says you can cancel any time, but it lists no cancel steps (read 21 Nov 2026). A subscription bought on the website does not show in iPhone Settings or Google Play, so cancel it on that website or contact the developer, and keep the confirmation. Haven's App Store listing says “Access to Haven requires a paid subscription” (checked 21 Nov 2026).</p>`],
       ["Can I get a refund?", `<p>For App Store purchases, you can ask Apple at reportaproblem.apple.com; Apple decides. For Google Play purchases, Google Play's refund policy applies.</p>`],
+      ["What do App Store reviewers report? (Nov 2026)", `<p>Among Haven's 500 most recent US App Store reviews (16 May to 19 Nov 2026), 263 gave 4 or 5 stars and 189 gave 1 or 2. Most of the 189 mention price, the subscription or the trial; 16 mention cancelling, refunds or being charged.</p>
+<p class="muted">Method: Apple's public review feed, the 500 most recent US reviews, read 21 Nov 2026; a review counts toward a theme when its words mention it. These are reviewers' reports, not findings about the app.</p>`],
       ["Is there a Bible app with no trial?", `<p>Peace Be Still, coming soon to the App Store and Google Play, has no trial and no weekly plan: a free lane that stays free and a paid lane at $7.99 a month or $39.99 a year, with the price shown in dollars before you tap and cancel in two taps from the paid screen.</p>`],
     ],
     faq: [
@@ -154,7 +159,9 @@ ${V("PSA 4:8")}`],
       ["Does deleting Haven stop the charges?", "No. The App Store or Google Play bills the subscription, so it keeps renewing until you cancel it in iPhone Settings or in Google Play. Deleting the app only removes it from your phone."],
       ["When should I cancel a free trial?", "Apple advises cancelling at least 24 hours before a trial ends so it does not renew as a paid subscription. You can usually keep using the trial until its end date after cancelling."],
     ],
-    sources: [["Apple Support: Cancel a subscription from Apple", "https://support.apple.com/en-us/118428"], ["Google Play Help: Cancel, pause, or change a subscription", "https://support.google.com/googleplay/answer/7018481"], ["Apple: Request a refund", "https://reportaproblem.apple.com/"]],
+    sources: [["Apple Support: Cancel a subscription from Apple", "https://support.apple.com/en-us/118428"], ["Google Play Help: Cancel, pause, or change a subscription", "https://support.google.com/googleplay/answer/7018481"], ["Apple: Request a refund", "https://reportaproblem.apple.com/"], ["Haven - Bible Chat: App Store listing (US), checked 21 Nov 2026", "https://apps.apple.com/us/app/haven-bible-chat/id6503387382"]],
+    notAffiliated: "Haven",
+    related: ["/questions/how-to-cancel-bible-app-subscription/", "/questions/is-the-haven-bible-app-free/", "/bible-chat-cancel-subscription/", "/bible-chat-alternative/"],
   },
   // ---- Landing pages for "Bible chat" searches (owner ask 18 Nov 2026). Competitor facts only from
   // their own App Store listings, checked 18 Nov 2026; unknown = "not listed". Nominative use only.
@@ -191,44 +198,53 @@ ${V("MAR 4:39")}`],
     notAffiliated: true,
   },
   {
-    ...D, lang: "en", door: "neutral", group: "Bible apps", path: "/free-bible-chat/",
-    title: "Free Bible chat: what stays free in Peace Be Still · Peace Be Still",
-    description: "What a free Bible chat should include, and exactly what the free lane of Peace Be Still holds forever: one chat a day, the whole KJV, no ads, no trial.",
-    h1: "Free Bible chat: what is really free, and for how long",
-    definition: "A free Bible chat is an app where you can ask questions about faith and scripture without paying. Many apps call themselves free but lock the chat behind a trial that turns into a weekly or yearly charge. In Peace Be Still, coming soon, the free lane is free for good: one chat a day of up to 10 messages, with no trial, no ads and no card needed.",
-    quick: "Peace Be Still's free lane, forever: the whole King James Bible to read, a growing set of chapters read aloud, today's Bible story, one chat a day of up to 10 messages, your first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, a journal and share cards. Nothing free is ever taken back.",
-    bestFor: "anyone who wants a Bible chat app that is free without a trial, and wants to know exactly where free ends.",
-    indexNote: "Exactly what the free lane holds forever, and what the paid lane adds.",
+    // Retargeted 21 Nov 2026 at "bible chat" (3,600 a month, KD 27) and "bible chat app" (1,900), same URL.
+    // The verse claim stays soft (CHAT_VERSES) until the chat answer gate (PR #52) is on main.
+    ...D, updated: "2026-11-21", updatedText: "21 Nov 2026", lang: "en", door: "neutral", group: "Bible apps", path: "/free-bible-chat/",
+    title: "Bible chat: a free Bible chat app with no trial · Peace Be Still",
+    description: "Bible chat, free for good: say what is on your heart and get an answer pointed to scripture, with the verse and its reference. No trial, no ads, one chat a day free.",
+    h1: "Bible chat: talk it through, with verses you can check",
+    indexLabel: "Bible chat (free)",
+    indexNote: "What a Bible chat should and should not do, and what stays free.",
+    definition: "A Bible chat is an app where you type what is on your heart or a question about faith, and an AI answers by pointing you to scripture. A good one shows each verse with its book, chapter and verse so you can check it, says plainly that it is AI, never speaks as God or Jesus, and does not lock the chat behind a trial.",
+    quick: `Test any Bible chat with a verse you know by heart: if it gets the words wrong, do not trust it with the rest. ${CHAT_VERSES}. Its free lane, for good: one chat a day of up to 10 messages, the whole King James Bible and today's story, with no trial and no ads.`,
+    bestFor: "anyone choosing a Bible chat app, and anyone who wants one that is free without a trial and honest about being AI.",
     sections: [
-      ["What does a free Bible chat include in Peace Be Still?", `<table class="t"><thead><tr><th>Free lane, forever</th><th>Paid lane ($7.99 a month or $39.99 a year)</th></tr></thead><tbody>
+      ["What is a Bible chat?", `<p>It is a conversation with an AI about faith and scripture. You might ask what the Bible says about worry, how to pray for a friend, or what a hard passage means. The answer should be short, kind and rooted in named verses, and it should send you to your pastor for your own situation.</p>`],
+      ["How accurate are Bible chat apps?", `<p>It varies, which is why the verse matters. YouVersion's founder and CEO, Bobby Gruenewald, said AI models misquote Scripture “at least 15% of the time,” and “Some of them as much as 60% of the time” (reported by <a rel="nofollow noopener" href="https://www.crosswalk.com/headlines/contributors/guest-commentary/ais-bible-misquotes-scripture-according-to-youversion-ceo.html">Crosswalk</a>, 18 Mar 2026). Those are his figures, not a test we ran.</p>
+<p>So ask any Bible chat for a verse you know well, and compare it with your own Bible. The words should match a named translation, and the reference should be one that exists.</p>
+${V("PRO 30:5-6")}`],
+      ["What should a Bible chat never do?", `<ul>
+<li><strong>Make up a verse or a reference.</strong> If a chat cites a verse, you should be able to find it.</li>
+<li><strong>Speak as God or Jesus.</strong> “I am the Lord” from an app is not prayer. Peace Be Still's chat labels every answer as AI and never speaks as God or Jesus.</li>
+<li><strong>Dodge what Scripture plainly says.</strong> Where faithful churches genuinely differ, it should say so briefly; elsewhere it should answer from the plain words.</li>
+<li><strong>Promise money, healing or a result.</strong> It can pray with you and point you to scripture; it cannot promise outcomes.</li>
+<li><strong>Hide where your words go.</strong> Before your first free chat, Peace Be Still says it goes to a free AI service that may keep and use it, so leave out names.</li>
+</ul>`],
+      ["What does Bible chat include free in Peace Be Still?", `<table class="t"><thead><tr><th>Free lane, forever</th><th>Paid lane ($7.99 a month or $39.99 a year)</th></tr></thead><tbody>
 <tr><td>One chat a day, up to 10 messages, shown as “N of 10 messages left today”</td><td>Unlimited chat (fair use: 100 messages a day)</td></tr>
 <tr><td>The whole King James Bible to read, and a growing set of chapters read aloud</td><td>Chat that remembers what you are carrying</td></tr>
 <tr><td>Today's Bible story</td><td>Every past story and longer journeys</td></tr>
 <tr><td>Your first sleep night free, then one a week</td><td>A sleep session every night, plus ones made for you</td></tr>
 <tr><td>A daily declaration, basic 7-day plans, saved verses, journal, streak and share cards</td><td>Declaration topics and offline downloads</td></tr>
-</tbody></table>`],
-      ["Is there a free trial?", `<p>No. Peace Be Still has no trial at all, so nothing turns into a charge by surprise. The free lane is not a trial: it does not end. The paid lane starts only when you choose it, with the price in dollars shown before you tap.</p>`],
-      ["Are there ads in the free lane?", `<p>No. There are no ads in Peace Be Still, on the free lane or the paid lane, ever.</p>`],
-      ["What should a free Bible chat never do?", `<ul>
-<li>Make up a verse. In Peace Be Still the AI only names the reference; the app pastes the stored King James text.</li>
-<li>Pretend to be a pastor. Every answer is labelled as AI.</li>
-<li>Promise you money, healing or a result. A Bible chat can pray with you and point you to scripture; it cannot promise outcomes.</li>
-<li>Hide where your words go. Before your first chat, the app says what you type goes to free AI providers that may learn from it, and to leave out names.</li>
-</ul>`],
+</tbody></table>
+<p>There is no trial at all: the free lane does not end, and the paid lane starts only when you choose it, with the price in dollars shown before you tap. No ads on either lane.</p>`],
+      ["Is there a Bible chat in a Black church voice or in Spanish?", `<p>Yes, both at launch. <a href="/black-bible-chat/">Hush Harbor · Black Bible Chat &amp; Stories</a> answers in a Black church voice, and <a href="/es/chat-biblico-gratis/">Mi Refugio</a> is the whole chat in Spanish with the Reina-Valera 1909. The Bible text is the same; only the voice changes.</p>`],
       ["Is Peace Be Still out yet?", `<p>Not yet. It is coming soon to the App Store and Google Play: search “Peace Be Still”. There is no waitlist and no launch date to wait for.</p>`],
     ],
     faq: [
       ["Is there a Bible chat app that is free without a subscription?", "Yes. Peace Be Still, coming soon, has a free lane with one chat a day of up to 10 messages, the whole King James Bible and today's story, with no subscription, no trial and no ads."],
-      ["How many messages are free each day?", "One conversation a day of up to 10 messages. The app shows how many are left. The count starts again the next day."],
-      ["Will the free lane get smaller later?", "No. Nothing free is ever taken back. That promise is on the price screen."],
-      ["Is there a free Bible chat in Spanish?", "Yes. Mi Refugio, the Spanish journey, has the same free lane, with the Reina-Valera 1909."],
+      ["Is this the Bible Chat app?", "No. Bible Chat: Daily Devotional is a separate app by Book Vitals Inc. Peace Be Still is not affiliated with it. See how they compare on our Bible chat alternative page."],
+      ["Does the Bible chat pretend to be Jesus?", "No. Every answer is labelled as AI, and it never speaks as God or Jesus. It points you to scripture and suggests your pastor for your own situation."],
+      ["How many messages are free each day?", "One conversation a day of up to 10 messages. The app shows how many are left, and the count starts again the next day. Nothing free is ever taken back."],
     ],
-    sources: [],
+    sources: [["Crosswalk: AI's Bible misquotes, according to YouVersion's CEO (18 Mar 2026)", "https://www.crosswalk.com/headlines/contributors/guest-commentary/ais-bible-misquotes-scripture-according-to-youversion-ceo.html"], ["Christian Post: AI's Bible misquotes range from 15% to 60%, YouVersion CEO", "https://www.christianpost.com/news/ais-bible-misquotes-range-from-15-to-60-youversion-ceo.html"], KJV_SRC],
     notAffiliated: true,
+    related: ["/bible-chat-alternative/", "/black-bible-chat/", "/christian-ai/", "/kjv-bible-app/"],
     alt: "/es/chat-biblico-gratis/",
   },
   {
-    ...D, lang: "en", door: "neutral", group: "Bible apps compared", path: "/bible-chat-alternative/",
+    ...D, updated: "2026-11-21", updatedText: "21 Nov 2026", lang: "en", door: "neutral", group: "Bible apps compared", path: "/bible-chat-alternative/",
     title: "Bible chat alternative: what to compare before you pay · Peace Be Still",
     description: "What to check in any Bible chat app (price, trial, weekly plans, ads, renewal, verse accuracy) and a sourced comparison of four apps, checked 18 Nov 2026.",
     h1: "Looking for a Bible chat alternative? What to compare first",
@@ -247,11 +263,16 @@ ${V("MAR 4:39")}`],
       ["How do Bible chat apps compare?", `<p>Facts below come only from each app's own App Store page (United States) as it read on 18 Nov 2026. Prices change; check the listing before you pay. “Not listed” means the listing does not say.</p>
 <table class="t"><thead><tr><th>App</th><th>Prices listed</th><th>Free trial</th><th>Weekly plan</th><th>Source</th></tr></thead><tbody>
 <tr><td>Peace Be Still (coming soon)</td><td>$7.99 a month or $39.99 a year</td><td>No trial</td><td>No</td><td>This site, checked 18 Nov 2026</td></tr>
-<tr><td>Bible Chat: Daily Devotional (Book Vitals Inc.)</td><td>Weekly $2.99 to $6.99; monthly $4.99 and $12.99; yearly $39.99 and $59.99</td><td>The description says “Start with a FREE 7-day trial”</td><td>Yes, weekly plans are listed</td><td><a class="src" rel="nofollow noopener" href="https://apps.apple.com/us/app/bible-chat-daily-devotional/id6448849666">App Store listing</a>, checked 18 Nov 2026</td></tr>
-<tr><td>Haven - Bible Chat (E12 Holdings LLC)</td><td>“Unlimited” purchases from $4.99 to $19.99; billing periods not listed</td><td>Not listed</td><td>Not listed</td><td><a class="src" rel="nofollow noopener" href="https://apps.apple.com/us/app/haven-bible-chat/id6503387382">App Store listing</a>, checked 18 Nov 2026</td></tr>
+<tr><td>Bible Chat: Daily Devotional (Book Vitals Inc.)</td><td>Weekly $2.99 to $6.99; monthly $4.99 and $12.99; yearly $39.99 and $59.99</td><td>The description says “Start with a FREE 7-day trial” (re-checked 21 Nov 2026)</td><td>Yes: “our weekly plan at $4.99” (description, 21 Nov 2026)</td><td><a class="src" rel="nofollow noopener" href="https://apps.apple.com/us/app/bible-chat-daily-devotional/id6448849666">App Store listing</a>, checked 18 Nov 2026</td></tr>
+<tr><td>Haven - Bible Chat (E12 Holdings LLC)</td><td>“Unlimited” purchases from $4.99 to $19.99; billing periods not listed. The description says “Access to Haven requires a paid subscription” (21 Nov 2026)</td><td>Not on the listing; its website offers a free trial to eligible new users (havenbibleapp.com, read 21 Nov 2026)</td><td>Not listed</td><td><a class="src" rel="nofollow noopener" href="https://apps.apple.com/us/app/haven-bible-chat/id6503387382">App Store listing</a>, checked 18 Nov 2026</td></tr>
 <tr><td>Creed: Bible Chat &amp; Companion (Lemon Tree Labs, Inc.)</td><td>From $9.99 to $69.99, including “Annual - Discounted” at $34.99 and $44.99</td><td>Not listed</td><td>Not listed</td><td><a class="src" rel="nofollow noopener" href="https://apps.apple.com/us/app/creed-bible-chat-companion/id6747326744">App Store listing</a>, checked 18 Nov 2026</td></tr>
 </tbody></table>
 <p class="muted">Peace Be Still is not affiliated with Bible Chat, Haven, Creed or any app named here. Names are used only to identify the apps.</p>`],
+      ["What do App Store reviewers report? (Nov 2026)", `<ul>
+<li><strong>Bible Chat</strong> (500 most recent US reviews, 10 to 20 Nov 2026): 477 gave 4 or 5 stars and 19 gave 1 or 2. Most of the 19 mention price, the weekly plan or the trial.</li>
+<li><strong>Haven - Bible Chat</strong> (16 May to 19 Nov 2026): 263 gave 4 or 5 stars and 189 gave 1 or 2. Most of the 189 mention price, the subscription or the trial, and many say there is no free version.</li>
+</ul>
+<p class="muted">Method: Apple's public review feed, the 500 most recent US reviews of each app, read 21 Nov 2026; a review counts toward a theme when its words mention it. These are reviewers' reports, not findings about the apps.</p>`],
       ["What does Peace Be Still do differently?", `<ul>
 <li>No trial and no weekly plan: $7.99 a month or $39.99 a year, the price in dollars before you tap.</li>
 <li>A free lane that stays free: one chat a day of up to 10 messages, the whole King James Bible and today's story.</li>
@@ -259,7 +280,7 @@ ${V("MAR 4:39")}`],
 <li>Verses pasted from a stored King James Version (Reina-Valera 1909 in Spanish); the AI never writes a verse.</li>
 <li>Cancel in two taps, from a link on the paid screen.</li>
 </ul>`],
-      ["How do I switch without paying twice?", `<p>Cancel the old subscription first, in iPhone Settings › your name › Subscriptions, or in Google Play › Payments &amp; subscriptions. Deleting an app does not cancel it. See <a href="/bible-chat-cancel-subscription/">how to cancel a Bible chat subscription</a>.</p>`],
+      ["How do I switch without paying twice?", `<p>Cancel the old subscription first, in iPhone Settings › your name › Subscriptions, or in Google Play › Payments &amp; subscriptions. Deleting an app does not cancel it. See <a href="/bible-chat-cancel-subscription/">how to cancel a Bible chat subscription</a>, or <a href="/questions/how-to-cancel-bible-app-subscription/">step-by-step cancel instructions for seven apps</a>.</p>`],
     ],
     faq: [
       ["What is the best Bible chat alternative?", "The one that fits your budget and quotes scripture exactly. Compare the In-App Purchases list, look for a trial or weekly plan, and test a verse you know. Peace Be Still, coming soon, has no trial, no weekly plan, no ads and a free lane."],
@@ -268,9 +289,10 @@ ${V("MAR 4:39")}`],
     ],
     sources: [["Apple Support: Cancel a subscription from Apple", "https://support.apple.com/en-us/118428"], ["Google Play Help: Cancel, pause, or change a subscription", "https://support.google.com/googleplay/answer/7018481"]],
     notAffiliated: true,
+    related: ["/free-bible-chat/", "/questions/how-to-cancel-bible-app-subscription/", "/questions/haven-bible-chat/", "/christian-ai/"],
   },
   {
-    ...D, lang: "en", door: "neutral", group: "Cancelling a subscription", path: "/bible-chat-cancel-subscription/",
+    ...D, updated: "2026-11-21", updatedText: "21 Nov 2026", lang: "en", door: "neutral", group: "Cancelling a subscription", path: "/bible-chat-cancel-subscription/",
     title: "Bible chat cancel subscription: iPhone and Android steps · Peace Be Still",
     description: "Cancel any Bible chat app's subscription on iPhone or Android with Apple's and Google's own steps, and how to ask for a refund. Deleting the app does not cancel.",
     h1: "How to cancel a Bible chat subscription, and ask for a refund",
@@ -296,6 +318,7 @@ ${V("MAR 4:39")}`],
 </ol>`],
       ["Can I get a refund?", `<p>On iPhone, go to <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>, sign in, choose “Request a refund”, pick the reason and the purchase. Apple decides each request. On Android, Google Play's refund policy explains when you can ask Google for a refund and when you need to ask the app's developer. If you paid on the app's own website, ask the developer.</p>`],
       ["What if I am still in a free trial?", `<p>Cancel at least 24 hours before the trial ends, as Apple advises, so it does not turn into a paid plan. You can usually keep using it until the trial's end date.</p>`],
+      ["What if I was charged after I cancelled?", `<p>Some App Store reviewers in 2026 report a charge after they believed they had cancelled, across several Bible and prayer apps. The usual reasons are cancelling in the wrong place (deleting the app, or cancelling on a website when Apple bills you), a second Apple ID or Google account, or a trial cancelled under 24 hours before it ended. Check each place you could be billed, keep a screenshot of the red expiry date, then use the refund routes above. Each app's own steps, from its help page, are on <a href="/questions/how-to-cancel-bible-app-subscription/">how to cancel a Bible app subscription (7 apps)</a>.</p>`],
       ["Is there a Bible chat with nothing to cancel?", `<p>Peace Be Still has no trial and a free lane, so there is nothing to cancel to keep reading. The free lane holds the whole King James Bible, one chat a day of up to 10 messages and today's story. The paid lane is $7.99 a month or $39.99 a year, chosen on purpose, and cancels in two taps. It is coming soon to the App Store and Google Play. See <a href="/free-bible-chat/">what stays free</a>.</p>`],
     ],
     faq: [
@@ -306,6 +329,7 @@ ${V("MAR 4:39")}`],
     ],
     sources: [["Apple Support: Cancel a subscription from Apple", "https://support.apple.com/en-us/118428"], ["Apple: Report a problem, request a refund", "https://reportaproblem.apple.com/"], ["Google Play Help: Cancel, pause, or change a subscription", "https://support.google.com/googleplay/answer/7018481"], ["Google Play Help: Google Play refund policies", "https://support.google.com/googleplay/answer/2479637"]],
     notAffiliated: true,
+    related: ["/questions/how-to-cancel-bible-app-subscription/", "/questions/how-to-cancel-bible-chat-subscription/", "/questions/how-to-cancel-haven-subscription/", "/bible-chat-alternative/"],
   },
   {
     ...DES, lang: "es", door: "neutral", group: "Chat bíblico", path: "/es/chat-biblico-gratis/",
@@ -342,4 +366,5 @@ ${V("PSA 91:2", "es")}`],
   ...BLACK,
   ...APPS,
   ...ES,
+  ...SEARCH,
 ];

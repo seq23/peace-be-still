@@ -22,18 +22,26 @@ const HEAD = `<table class="t"><thead><tr><th>App</th><th>Prices listed</th><th>
 const CANCEL_STEPS = `<ol>
 <li>iPhone: Settings › your name › Subscriptions › the app › Cancel Subscription.</li>
 <li>Android: Google Play › profile icon › Payments &amp; subscriptions › Subscriptions › the app › Cancel subscription.</li>
-<li>Deleting the app does not cancel it. See <a href="/bible-chat-cancel-subscription/">the full steps and refunds</a>.</li>
+<li>Deleting the app does not cancel it. See <a href="/bible-chat-cancel-subscription/">the full steps and refunds</a>, or <a href="/questions/how-to-cancel-bible-app-subscription/">cancel steps for seven Bible and prayer apps</a>.</li>
 </ol>`;
+// 21 Nov 2026 refresh: what recent App Store reviewers report, with the method (gripe-leverage.md).
+// Reviewers' words are claims, never our findings; counts only with the window and the method.
+const D21 = { updated: "2026-11-21", updatedText: "21 Nov 2026" };
+const READ = "21 Nov 2026";
+const METHOD = "Method: Apple's public review feed, the 500 most recent US reviews, read 21 Nov 2026; a review counts toward a theme when its words mention it. These are reviewers' reports, not findings about the app.";
+const HALLOW_REVIEWS = ["What App Store reviewers report (Nov 2026)", `<p>Among Hallow's 500 most recent US App Store reviews (24 Mar to 18 Nov 2026), 370 gave 4 or 5 stars and 103 gave 1 or 2. About half of those 103 (51) mention cancelling, refunds or being charged, most often a charge after a trial, or after the reviewer believed they had cancelled. Some low ratings object to paying for prayer at all.</p>
+<p>Hallow's own help page says to cancel where you subscribed (Apple, Google Play, Amazon or Hallow.com) and shows how to check which in the app: <a href="/questions/how-to-cancel-bible-app-subscription/">the steps are here</a>.</p>
+<p class="muted">${METHOD}</p>`];
 
 export const APPS = [
   {
-    ...D, lang: "en", door: "neutral", group: G, path: "/questions/hallow-app-cost/",
+    ...D, ...D21, lang: "en", door: "neutral", group: G, path: "/questions/hallow-app-cost/",
     title: "Hallow app cost: monthly and yearly prices, checked · Peace Be Still",
     description: "How much Hallow costs on the US App Store: $9.99 a month or $69.99 a year per its listing, what is free, the yearly maths, and lower-cost options. Checked 18 Nov 2026.",
     h1: "How much does Hallow cost? The prices on its App Store listing",
     indexLabel: "Hallow app cost",
     indexNote: "$9.99 a month or $69.99 a year per the listing, and what is free.",
-    definition: "Hallow costs $9.99 a month or $69.99 a year in the United States, according to the subscription terms in its own App Store description (checked 18 Nov 2026). Its In-App Purchases list also shows a $10.99 monthly price. Hallow's daily prayers, including the rosary, and its 9-day Intro Prayer Challenge are free.",
+    definition: "Hallow costs $9.99 a month or $69.99 a year in the United States, according to the subscription terms in its own App Store description (checked 18 Nov 2026, and again 21 Nov 2026). Its In-App Purchases list also shows a $10.99 monthly price. Hallow's daily prayers, including the rosary, and its 9-day Intro Prayer Challenge are free.",
     quick: "Hallow: $9.99 a month or $69.99 a year (listing, US). Over a year, monthly billing comes to $119.88, so the yearly plan saves $49.89. For comparison, Peace Be Still (coming soon) is $7.99 a month or $39.99 a year, with no trial and a free lane that stays free.",
     bestFor: "people deciding whether to pay for Hallow, and anyone wanting a lower yearly price.",
     pick: PICK_EN("For a lower yearly price and a free lane that stays free, our pick is Peace Be Still: $39.99 a year against Hallow's listed $69.99."),
@@ -51,6 +59,7 @@ ${PBS_ROW}
       ["Is there a Bible app with no free trial?", `<p>Peace Be Still has no trial at all, so nothing turns into a charge by surprise. Its paid lane starts only when you choose it, with the price in dollars shown before you tap.</p>`],
       ["Which Bible apps are free with no ads?", `<p>Peace Be Still has no ads on either lane. Its free lane holds the whole King James Bible to read and hear, today's story, one chat a day of up to 10 messages, the first sleep night and then one a week, and a daily declaration. Nothing free is ever taken back.</p>`],
       ["How do I cancel a subscription on iPhone?", CANCEL_STEPS],
+      HALLOW_REVIEWS,
       ["Is it worth paying for a prayer app?", `<p>It is worth it if you use it most days and the free part does not cover what you need. Use the free part for two weeks first. Then ask: did I open it daily, and would I pay for a book or a class that did the same? Hallow is a Catholic app with thousands of guided sessions; if that fits your church, its free prayers are a good test.</p>`],
     ],
     faq: [
@@ -61,16 +70,16 @@ ${PBS_ROW}
     ],
     sources: [src("hallow", "Hallow: Prayer & Meditation"), APPLE_CANCEL],
     notAffiliated: "Hallow",
-    related: ["/questions/is-hallow-app-free/", "/questions/hallow-app-review/", "/questions/glorify-app-reviews/", "/bible-chat-alternative/"],
+    related: ["/questions/is-hallow-app-free/", "/questions/hallow-app-review/", "/questions/is-hallow-only-for-catholics/", "/questions/how-to-cancel-bible-app-subscription/"],
   },
   {
-    ...D, lang: "en", door: "neutral", group: G, path: "/questions/hallow-app-review/",
+    ...D, ...D21, lang: "en", door: "neutral", group: G, path: "/questions/hallow-app-review/",
     title: "Hallow app review: who it is for, from its own listing · Peace Be Still",
     description: "A fact-only look at Hallow: what its listing says it offers, who it suits (Catholic guided prayer), its price and rating as listed, and what to weigh before you pay.",
     h1: "Hallow app review: who it suits, and what to weigh before paying",
     indexLabel: "Hallow app review",
     indexNote: "What the listing offers, who it suits, and what to weigh.",
-    definition: "Hallow is a Catholic prayer and meditation app with audio-guided sessions: the rosary, Lectio Divina, the Examen, Night Prayer, chant and Bible stories read by guests. Its App Store listing shows 4.9 out of 5 from 383,775 ratings (checked 18 Nov 2026). It suits Catholics who want guided audio prayer and will use it often enough to pay $69.99 a year.",
+    definition: "Hallow is a Catholic prayer and meditation app with audio-guided sessions: the rosary, Lectio Divina, the Examen, Night Prayer, chant and Bible stories read by guests. Its App Store listing shows 4.9 out of 5 from 384,119 ratings (checked 21 Nov 2026). It suits Catholics who want guided audio prayer and will use it often enough to pay $69.99 a year.",
     quick: "If you are Catholic and want guided audio prayer with many voices, Hallow's own description shows that is its focus. If you want the King James Bible, whispered psalms for sleep or a Bible chat with no trial, look at Peace Be Still, coming soon, at $39.99 a year.",
     bestFor: "people reading reviews before paying for Hallow.",
     pick: PICK_EN("If you want the King James Bible, whispered psalms and a Bible chat for less, our pick is Peace Be Still."),
@@ -87,24 +96,26 @@ ${PBS_ROW}
 <tr><td>Tradition</td><td>Catholic; “meant as a resource for people of all faiths”</td><td>Christian, King James Version; Reina-Valera 1909 in Spanish</td></tr>
 <tr><td>Price</td><td>$9.99 a month or $69.99 a year</td><td>$7.99 a month or $39.99 a year</td></tr>
 <tr><td>Free</td><td>Daily prayers and the 9-day Intro Prayer Challenge</td><td>Whole KJV to read, a growing set of chapters read aloud, today's story, 1 chat a day, first sleep night then 1 a week, daily declaration</td></tr>
-<tr><td>Rating shown</td><td>4.9 out of 5, 383,775 ratings</td><td>Not out yet</td></tr>
+<tr><td>Rating shown</td><td>4.9 out of 5, 384,119 ratings (checked 21 Nov 2026)</td><td>Not out yet</td></tr>
 <tr><td>Source</td><td>${a("hallow")}, ${CHECKED}</td><td>This site</td></tr>
 </tbody></table>`],
+      HALLOW_REVIEWS,
+      ["Is Hallow only for Catholics?", `<p>Hallow's own help page answers “No”: it welcomes people from every faith background, while its content is Catholic and reviewed by Church leaders. See <a href="/questions/is-hallow-only-for-catholics/">is Hallow only for Catholics?</a></p>`],
       ["Is it worth paying for a prayer app?", `<p>Pay when the free part has become a habit and the paid part adds something you will use weekly. A review score tells you other people liked it; your own two weeks on the free part tell you whether you will.</p>`],
       ["Is there a Bible app with no free trial?", `<p>Peace Be Still has no trial and no weekly plan. The free lane is not a trial; it does not end.</p>`],
       ["How do I cancel an App Store subscription?", CANCEL_STEPS],
     ],
     faq: [
       ["Is Hallow a Catholic app?", "Yes. Its App Store description calls it a Catholic app whose content is based on the approved Catholic Bible and reviewed by Church leaders, while saying it is meant for people of all faiths."],
-      ["What is Hallow's rating?", "4.9 out of 5 from 383,775 ratings on the US App Store, checked 18 Nov 2026. Ratings change daily."],
+      ["What is Hallow's rating?", "4.9 out of 5 from 384,119 ratings on the US App Store, checked 21 Nov 2026. Ratings change daily."],
       ["Does Hallow have sleep content?", "Its listing names Night Prayer from the Liturgy of the Hours and Catholic Bible stories for sleep. Peace Be Still's Psalm Nights are whispered King James psalms with a sleep timer."],
     ],
     sources: [src("hallow", "Hallow: Prayer & Meditation"), APPLE_CANCEL],
     notAffiliated: "Hallow",
-    related: ["/questions/hallow-app-cost/", "/questions/is-hallow-app-free/", "/questions/glorify-app-reviews/", "/questions/whispered-bible-for-sleep/"],
+    related: ["/questions/hallow-app-cost/", "/questions/is-hallow-app-free/", "/questions/is-hallow-only-for-catholics/", "/questions/how-to-cancel-bible-app-subscription/"],
   },
   {
-    ...D, lang: "en", door: "neutral", group: G, path: "/questions/is-hallow-app-free/",
+    ...D, ...D21, lang: "en", door: "neutral", group: G, path: "/questions/is-hallow-app-free/",
     title: "Is Hallow free? What you get without paying · Peace Be Still",
     description: "Is Hallow free? Its listing says daily prayers (including the rosary) and the 9-day Intro Prayer Challenge are free; the rest needs a subscription. Checked 18 Nov 2026.",
     h1: "Is Hallow free? What you can use without paying",
@@ -115,12 +126,13 @@ ${PBS_ROW}
     bestFor: "people who want to pray with Hallow without a subscription, or want a bigger free lane.",
     pick: PICK_EN("If you want the most you can use free, for good, our pick is Peace Be Still."),
     sections: [
-      ["What is free in Hallow?", `<p>Hallow's own description: “Users can access our daily prayers (including the rosary) and the 9-day Intro Prayer Challenge for free. To access the full suite of Hallow, Hallow offers two auto-renewing subscription options: $9.99 per month, $69.99 per year.” Source: ${a("hallow")}, checked ${CHECKED}.</p>`],
+      ["What is free in Hallow?", `<p>Hallow's own description: “Users can access our daily prayers (including the rosary) and the 9-day Intro Prayer Challenge for free. To access the full suite of Hallow, Hallow offers two auto-renewing subscription options: $9.99 per month, $69.99 per year.” Source: ${a("hallow")}, checked ${CHECKED} and again ${READ}.</p>`],
       ["Free parts side by side", `${HEAD}
 <tr><td>Hallow (Hallow, Inc.)</td><td>$9.99 a month or $69.99 a year</td><td>Not stated in the description</td><td>Daily prayers (including the rosary), 9-day Intro Prayer Challenge</td><td>${a("hallow")}, ${CHECKED}</td></tr>
 ${PBS_ROW}
 </tbody></table>`],
       ["Which Bible apps are free with no ads?", `<p>Peace Be Still has no ads, on the free lane or the paid lane. Many Bible reading apps are free; check whether chat, audio or sleep content sits behind a paywall, and whether a “free trial” turns into a charge.</p>`],
+      HALLOW_REVIEWS,
       ["Is there a Bible app with no free trial?", `<p>Peace Be Still has no trial. You either use the free lane, which does not end, or choose the paid lane at $7.99 a month or $39.99 a year.</p>`],
       ["How do I cancel a subscription on iPhone?", CANCEL_STEPS],
     ],
@@ -131,7 +143,7 @@ ${PBS_ROW}
     ],
     sources: [src("hallow", "Hallow: Prayer & Meditation"), APPLE_CANCEL, PLAY_CANCEL],
     notAffiliated: "Hallow",
-    related: ["/questions/hallow-app-cost/", "/questions/hallow-app-review/", "/free-bible-chat/", "/questions/is-creed-bible-app-free/"],
+    related: ["/questions/hallow-app-cost/", "/questions/hallow-app-review/", "/questions/is-hallow-only-for-catholics/", "/questions/how-to-cancel-bible-app-subscription/"],
   },
   {
     ...D, lang: "en", door: "neutral", group: G, path: "/questions/is-creed-bible-app-free/",
@@ -230,13 +242,13 @@ ${V("PSA 119:105")}`],
     related: ["/questions/is-the-haven-bible-app-free/", "/questions/how-to-cancel-haven-subscription/", "/bible-chat-alternative/", "/black-bible-chat/"],
   },
   {
-    ...D, lang: "en", door: "neutral", group: G, path: "/questions/glorify-app-reviews/",
+    ...D, ...D21, lang: "en", door: "neutral", group: G, path: "/questions/glorify-app-reviews/",
     title: "Glorify app reviews: rating, prices and what it offers · Peace Be Still",
     description: "Glorify: Devotional & Prayer per its own App Store listing: its rating, the Glorify Plus prices ($6.99 to $9.99 monthly, $41.99 to $69.99 yearly), features, and what to weigh.",
     h1: "Glorify app reviews: what its listing shows, and what it costs",
     indexLabel: "Glorify app reviews",
     indexNote: "Rating, Glorify Plus prices and features, from its listing.",
-    definition: "Glorify: Devotional & Prayer (TUPOE LTD) shows 4.9 out of 5 from 101,371 ratings on the US App Store (checked 18 Nov 2026). Its listing describes daily devotionals, guided Christian meditation, sleep meditations, courses and several Bible translations including the KJV. Glorify Plus is listed at $6.99 to $9.99 monthly and $41.99 to $69.99 yearly.",
+    definition: "Glorify: Devotional & Prayer (TUPOE LTD) shows 4.9 out of 5 from 101,475 ratings on the US App Store (checked 21 Nov 2026). Its listing describes daily devotionals, guided Christian meditation, sleep meditations, courses and several Bible translations including the KJV. Glorify Plus is listed at $6.99 to $9.99 monthly and $41.99 to $69.99 yearly.",
     quick: "Glorify suits people who want a 10-minute daily routine (quote, passage, devotional, meditation), per its listing. Its lowest listed monthly price ($6.99) is below Peace Be Still's $7.99; its listed yearly prices ($41.99 and $69.99) are above Peace Be Still's $39.99.",
     bestFor: "people reading Glorify reviews before subscribing.",
     pick: PICK_EN("For the lowest yearly price here and a free lane that stays free, our pick is Peace Be Still."),
@@ -253,18 +265,21 @@ ${V("PSA 119:105")}`],
 <tr><td>Glorify: Devotional &amp; Prayer (TUPOE LTD)</td><td>Glorify Plus monthly $6.99 or $9.99; annual $41.99 or $69.99; “Pay it Forward” $4.99</td><td>Not stated in the description; the In-App Purchases list includes “Intro Offer” items</td><td>Not stated in the description</td><td>${a("glorify")}, ${CHECKED}</td></tr>
 ${PBS_ROW}
 </tbody></table>`],
+      ["What App Store reviewers report (Nov 2026)", `<p>Among Glorify's 500 most recent US App Store reviews (15 Nov 2025 to 18 Nov 2026), 440 gave 4 or 5 stars and 41 gave 1 or 2. The most common theme in those 41 is audio: reviewers say listening to the devotionals and passages used to be free and now needs Glorify Plus, and several who listen because of dyslexia or ADHD describe it as an access problem. Four mention the Glorify Ring advertisement shown in the app in July 2026.</p>
+<p>Glorify's help page says to cancel through the App Store or Google Play, and that deleting your Glorify account does not cancel: <a href="/questions/how-to-cancel-bible-app-subscription/">the steps are here</a>.</p>
+<p class="muted">${METHOD}</p>`],
       ["Is there a Bible app with no free trial?", `<p>Peace Be Still has no trial, no intro offer and no weekly plan. The price you see is the price, and it never rises while you stay.</p>`],
       ["Is it worth paying for a prayer app?", `<p>A high rating tells you many people liked it. Whether it is worth it for you depends on whether you open it most days. Try the free part first, then decide.</p>`],
       ["How do I cancel a subscription on iPhone?", CANCEL_STEPS],
     ],
     faq: [
-      ["What is Glorify's rating?", "4.9 out of 5 from 101,371 ratings on the US App Store, checked 18 Nov 2026. Ratings change daily."],
+      ["What is Glorify's rating?", "4.9 out of 5 from 101,475 ratings on the US App Store, checked 21 Nov 2026. Ratings change daily."],
       ["How much is Glorify Plus?", "Its In-App Purchases list shows monthly $6.99 and $9.99 and annual $41.99 and $69.99 on the US App Store (checked 18 Nov 2026)."],
       ["Does Glorify have the King James Bible?", "Its listing says it offers multiple Bible translations including the King James Version."],
     ],
     sources: [src("glorify", "Glorify: Devotional & Prayer"), APPLE_CANCEL],
     notAffiliated: "Glorify",
-    related: ["/questions/hallow-app-review/", "/questions/is-duomo-bible-app-free/", "/bible-app-for-women/", "/bible-chat-alternative/"],
+    related: ["/questions/hallow-app-review/", "/daily-bible-verse-app/", "/bible-app-for-women/", "/questions/how-to-cancel-bible-app-subscription/"],
   },
   {
     ...D, lang: "en", door: "neutral", group: G, path: "/questions/is-duomo-bible-app-free/",
