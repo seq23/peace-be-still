@@ -59,7 +59,7 @@ Estos términos son entre usted y nosotros, no con Apple. Nosotros, y no Apple, 
 
 ## Cambios
 
-Podemos actualizar estos términos. Publicaremos aquí la nueva fecha y mostraremos un aviso en la app si el cambio es importante. Si usa la app después de un cambio, acepta los términos actualizados. Un cambio nunca quita algo que es gratis ni sube el precio mientras usted siga suscrito.
+Podemos actualizar estos términos. Publicaremos el cambio en esta página y actualizaremos su fecha. Si usa la app después de un cambio, acepta los términos actualizados. Un cambio nunca quita algo que es gratis ni sube el precio mientras usted siga suscrito.
 
 ## Ley aplicable
 

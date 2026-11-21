@@ -82,7 +82,7 @@ Usted puede borrar la memoria del chat de pago y las sesiones hechas para usted 
 
 ## Cambios
 
-Cuando esta política cambie, publicaremos aquí la nueva fecha y mostraremos un aviso en la app si el cambio es importante.
+Cuando esta política cambie, publicaremos el cambio en esta página y actualizaremos su fecha.
 
 ## Contacto
 
