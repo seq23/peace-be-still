@@ -128,11 +128,12 @@ if (mode === 'seed') {
   const now = Date.now(), due = process.env.SOAK_DUE_HOURS ? now + Number(process.env.SOAK_DUE_HOURS) * 3_600_000 : m.nights(now).tonight.due;
   const add = sqlite.prepare(`INSERT INTO made_for_you (id, install_id, day, kind, lang, teen, created_at, due_at, state, note, paid_until)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'queued', ?, ?)`);
-  // One listener per language and kind, so her psalm nights turn through the comfort psalms (23, 4, 121).
+  // One listener per language and kind, on successive nights (one request a night), so her psalm sessions turn
+  // through the comfort psalms (23, 4, 121).
   // SOAK_NOTES (optional, e.g. "en-psalm") seeds only those notes.
   const only = (process.env.SOAK_NOTES ?? '').split(',').filter(Boolean), installs = {};
   NOTES.filter(([lang, kind]) => !only.length || only.includes(`${lang}-${kind}`)).forEach(([lang, kind, teen, note], i) =>
-    add.run(crypto.randomUUID(), installs[`${lang}-${kind}`] ??= crypto.randomUUID(), 'soak', kind, lang, teen, now + i, due, note, now + 30 * 86_400_000));
+    add.run(crypto.randomUUID(), installs[`${lang}-${kind}`] ??= crypto.randomUUID(), `soak-${i}`, kind, lang, teen, now + i, due, note, now + 30 * 86_400_000));
   const seeded = sqlite.prepare('SELECT count(*) AS n FROM made_for_you').get().n;
   log({ event: 'seeded', notes: seeded, due });
   console.log(`OUTPUT made-for-you-soak: ${seeded} notes queued, promised by ${new Date(due).toISOString()}`);
