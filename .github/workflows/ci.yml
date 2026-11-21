@@ -26,10 +26,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # Standalone lane tests use phase 3's real chat code at the commit the integration merge takes
-      # (codex/pbs-phase-3 head 48aaa83, 20 Nov 2026). Drop the pin once phase 3 is on main.
+      # (codex/pbs-phase-3 head 80f1688, 21 Nov 2026). Drop the pin once phase 3 is on main.
       - uses: actions/checkout@v4
         with:
-          ref: 48aaa835730481af8ffe4ff554064a6ae21d9b9d
+          ref: 80f1688821ed040a053f25251c1ca41802a2b9fa
           path: .phase-3
           fetch-depth: 0
       # A stale pin fails here: the lane must be tested against phase 3's head, not an older commit.
@@ -57,7 +57,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
-          ref: 48aaa835730481af8ffe4ff554064a6ae21d9b9d
+          ref: 80f1688821ed040a053f25251c1ca41802a2b9fa
           path: .phase-3
       - uses: actions/setup-node@v4
         with:
