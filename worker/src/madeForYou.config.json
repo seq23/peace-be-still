@@ -31,9 +31,9 @@
     "openrouter-free": 20
   },
   "attemptsBooked": 2,
-  "_attemptsBooked": "Each session is booked at two drafts and two judgments, so one failed draft never takes another request's place.",
+  "_attemptsBooked": "Each session is booked at two drafts and two judgments, so one failed draft never takes another request's place. Measured 20 Nov 2026 on the real chain (worker/scripts/made-for-you-measure.mjs): the two sessions that passed took 1 and 2 tries.",
   "sessionMinutes": 15,
-  "_sessionMinutes": "Measured 20 Nov 2026: one seeded session rendered, mastered and QA-checked in 7 min 38 s; the Worker's claim (draft and check) may take up to 4 min; 15 leaves room for nice 15 and the private upload.",
+  "_sessionMinutes": "Measured 20 Nov 2026: real passing scripts voiced, mastered and QA-checked in 4.5 and 5.2 min on a GitHub runner (12.4 and 10.3 min of audio at 91 and 98 wpm), 7 min 38 s on the Mac; the Worker's claim took 8-48 s when a model answered (abort at 4 min). 15 leaves room for nice 15 and the private upload.",
   "sessionsPerNight": 10,
-  "_sessionsPerNight": "The smaller of the free budget (20 judge calls / 2 attempts = 10) and the Mac (a 15-hour weeknight window / 15 min = 60)."
+  "_sessionsPerNight": "Measured 20 Nov 2026: the free budget allows 25 (50 judge calls / 2 tries) and the Mac 60, but in the measured hour OpenRouter's free models were rate-limited upstream and Gemini's 3.5 day was already spent by other traffic, so 10 is promised: a busy chain holds a row 15 minutes, it never fails it, and MADE_FOR_YOU_LATE fires if a promise slips."
 }
