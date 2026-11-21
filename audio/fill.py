@@ -339,14 +339,15 @@ def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> l
     not yet in the manifest, each in plan order. Passed files and files out of tries are skipped. Pure."""
     last = latest(rows)
     mine = [i for i in items if not only or key(i).startswith(only)]
-    # The sleep sessions (the paid core, 21 Nov 2026) and then the stories are never queued behind retries
-    # planned after them: retry-first applies within the part of the plan up to the last story, then within the rest.
-    cut = max((n + 1 for n, i in enumerate(mine) if i.get("kind") in FRONT_KINDS), default=0)
+    # Three parts, each retry-first inside itself: the sessions, then the stories, then the rest. A failed
+    # story is retried after the unvoiced sessions (review 21 Nov 2026), a failed chapter after the stories.
+    cut1 = max((n + 1 for n, i in enumerate(mine) if i.get("kind") in SESSION_KINDS), default=0)
+    cut2 = max([cut1] + [n + 1 for n, i in enumerate(mine) if i.get("kind") == STORY_KIND])
 
     def part(xs):
         retry = [i for i in xs if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
         return retry + [i for i in xs if key(i) not in last]
-    return part(mine[:cut]) + part(mine[cut:])
+    return part(mine[:cut1]) + part(mine[cut1:cut2]) + part(mine[cut2:])
 
 
 def given_up(items: list, rows: list[dict], key=_file) -> list[str]:

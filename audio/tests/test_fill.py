@@ -327,9 +327,9 @@ class Stories(unittest.TestCase):
         rows = [{"file": "en/bible/kjv-mat-001.m4a", "status": "FAILED"}, {"file": "en/psalms/kjv-psa-001.m4a", "status": "passed"},
                 {"file": "es/stories/mr.m4a", "status": "FAILED"}]
         q = [i["file"] for i in fill.todo(items, rows)]
-        # A failed story is retried within the front batch; the failed chapter waits for the stories, then
-        # comes before every new chapter (the English Bible is never starved: the stories are a bounded batch).
-        self.assertEqual(q, ["es/stories/mr.m4a", "en/psalm-night/pn.m4a", "es/imagination-night/in.m4a", "en/stories/plain.m4a",
+        # The unvoiced sessions first; a failed story is retried ahead of the new stories but after the sessions;
+        # the failed chapter waits for the stories, then comes before every new chapter (the stories are bounded).
+        self.assertEqual(q, ["en/psalm-night/pn.m4a", "es/imagination-night/in.m4a", "es/stories/mr.m4a", "en/stories/plain.m4a",
                              "en/bible/kjv-mat-001.m4a", "en/bible/kjv-mat-002.m4a", "es/psalms/rv1909-psa-001.m4a",
                              "es/bible/rv1909-mat-001.m4a", "es/bible/rv1909-mat-002.m4a"])
 
