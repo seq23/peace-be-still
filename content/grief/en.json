@@ -1,0 +1,559 @@
+{
+ "kind": "grief",
+ "journey": "grief",
+ "door": "gods-word",
+ "lang": "en",
+ "ai_label": "label.ai_written_checked",
+ "items": [
+  {
+   "id": "gr-001",
+   "day": 1,
+   "speaker": "narrator",
+   "ref": "PSA 34:18",
+   "label": "Psalm 34:18",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 18,
+     "text": "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit."
+    }
+   ],
+   "declaration": "My heart is broken tonight. I do not have to hide that from God. He comes near to the broken, so I let Him come near to me.",
+   "words": 49,
+   "est_seconds": 24,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-002",
+   "day": 2,
+   "speaker": "narrator",
+   "ref": "JOH 11:35",
+   "label": "John 11:35",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 35,
+     "text": "Jesus wept."
+    }
+   ],
+   "declaration": "Jesus wept for His friend Lazarus, even knowing what He was about to do. My tears are not a lack of faith. I can cry, and He understands.",
+   "words": 30,
+   "est_seconds": 15,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-003",
+   "day": 3,
+   "speaker": "narrator",
+   "ref": "MAT 5:4",
+   "label": "Matthew 5:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Blessed are they that mourn: for they shall be comforted."
+    }
+   ],
+   "declaration": "I am allowed to mourn. I do not have to rush it, and I do not have to explain it to anyone.",
+   "words": 32,
+   "est_seconds": 16,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-004",
+   "day": 4,
+   "speaker": "narrator",
+   "ref": "PSA 56:8",
+   "label": "Psalm 56:8",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 8,
+     "text": "Thou tellest my wanderings: put thou my tears into thy bottle: are they not in thy book?"
+    }
+   ],
+   "declaration": "Not one of my tears is lost. God sees every one, and He knows the name of the one I miss.",
+   "words": 38,
+   "est_seconds": 19,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-005",
+   "day": 5,
+   "speaker": "narrator",
+   "ref": "ECC 3:4",
+   "label": "Ecclesiastes 3:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "A time to weep, and a time to laugh; a time to mourn, and a time to dance;"
+    }
+   ],
+   "declaration": "This is a time to weep. I let it be what it is, without pretending and without hurrying myself.",
+   "words": 37,
+   "est_seconds": 18,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-006",
+   "day": 6,
+   "speaker": "narrator",
+   "ref": "PSA 31:9",
+   "label": "Psalm 31:9",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 9,
+     "text": "Have mercy upon me, O LORD, for I am in trouble: mine eye is consumed with grief, yea, my soul and my belly."
+    }
+   ],
+   "declaration": "Some days the grief is in my whole body. I can tell God exactly how heavy it is.",
+   "words": 41,
+   "est_seconds": 20,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-007",
+   "day": 7,
+   "speaker": "narrator",
+   "ref": "PSA 23:4",
+   "label": "Psalm 23:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me."
+    }
+   ],
+   "declaration": "I am walking through a valley I did not choose. I am not walking it alone.",
+   "words": 46,
+   "est_seconds": 22,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-008",
+   "day": 8,
+   "speaker": "narrator",
+   "ref": "ISA 43:2",
+   "label": "Isaiah 43:2",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 2,
+     "text": "When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee."
+    }
+   ],
+   "declaration": "The waters feel deep tonight. The Lord does not ask me to cross them by myself.",
+   "words": 54,
+   "est_seconds": 26,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "note: 26 s outside 15-25 s",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-009",
+   "day": 9,
+   "speaker": "narrator",
+   "ref": "2CO 1:3",
+   "label": "2 Corinthians 1:3",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 3,
+     "text": "Blessed be God, even the Father of our Lord Jesus Christ, the Father of mercies, and the God of all comfort;"
+    }
+   ],
+   "declaration": "I need a comfort I cannot give myself. I ask the God of all comfort for it tonight, and I let the people who love me help.",
+   "words": 48,
+   "est_seconds": 23,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "pass",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  },
+  {
+   "id": "gr-010",
+   "day": 10,
+   "speaker": "narrator",
+   "ref": "REV 21:4",
+   "label": "Revelation 21:4",
+   "translation": "KJV",
+   "verses": [
+    {
+     "v": 4,
+     "text": "And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away."
+    }
+   ],
+   "declaration": "One day God will wipe away every tear. Tonight I let mine fall, and I keep loving the one I lost.",
+   "words": 56,
+   "est_seconds": 27,
+   "qa": {
+    "gate_version": "library-1",
+    "checks": {
+     "never_words": "pass",
+     "mindset_words": "pass",
+     "theology_redlines": "pass",
+     "split_topics": "pass",
+     "no_promises": "pass",
+     "voice_dialect": "pass",
+     "no_quoted_runs": "pass",
+     "no_refs_in_text": "pass",
+     "no_typed_scripture": "pass",
+     "word_for_word": "pass",
+     "length": "note: 27 s outside 15-25 s",
+     "first_person": "pass",
+     "grief_words": "pass"
+    },
+    "first_reader": {
+     "route": "none",
+     "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+    },
+    "final": {
+     "reviewer": "claude",
+     "date": "2026-11-21",
+     "pastor": {
+      "verdict": "pass",
+      "note": "Each line is the listener's own first-person response to a stored KJV verse, never God speaking; permission to grieve (Mat 5:4, Ecc 3:4, John 11:35) rather than a call to be strong; Rev 21:4 restates Scripture's own hope, never a claim about where the person who died is; no reason given for a death, no timeline, no outcome promised."
+     },
+     "cultural": {
+      "verdict": "pass",
+      "note": "Short, warm, plain English for someone in a fresh or old loss; 'the one I miss' and 'the one I lost' never assume who died; no church jargon; nothing to do but say it."
+     },
+     "verdict": "pass"
+    },
+    "rewritten": null,
+    "person_read": false
+   },
+   "status": "passed"
+  }
+ ]
+}

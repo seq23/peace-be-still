@@ -5,9 +5,11 @@ import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
 import Svg, { Path, Rect } from 'react-native-svg';
 import { colors, dawn, fonts, MARK, night, type Palette } from '../theme/tokens';
 import type { Door } from '../model';
+import { clock, inSmallHours } from '../clock';
 
 export function usePalette(): Palette & { dark: boolean } {
-  const dark = useColorScheme() === 'dark';
+  // In the small hours the whole app is night, whatever the phone's setting: no bright screen at 3 AM.
+  const dark = useColorScheme() === 'dark' || inSmallHours(clock.now());
   return { ...(dark ? colors.dark : colors.light), dark };
 }
 

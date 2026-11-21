@@ -199,6 +199,38 @@ export async function check(target) {
       await shot(page, '14-slow-first-paint');
       await context.close();
     }
+    // 15. "3 AM, back to sleep" (21 Nov 2026): with ?hour=3 Nights and Today are one calm button on night, nothing
+    // wider than the phone; at ?hour=22 and ?hour=6 there is no button and the screen follows the light phone.
+    // "For when you've lost someone" fits the phone too. (Preview only: the sample night stands in for the audio.)
+    const darkBody = page => page.evaluate(() => {
+      const bg = [...document.querySelectorAll('div')].map(el => getComputedStyle(el).backgroundColor).find(c => c && c !== 'rgba(0, 0, 0, 0)');
+      return bg === 'rgb(14, 26, 34)';
+    });
+    const fits = page => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
+    for (const tab of ['nights', 'today']) {
+      const { page, context } = await open(`/${tab}?hour=3`, adult);
+      expect(await shows(page, 'Go back to sleep'), `${tab} at 3 AM: no back-to-sleep button`);
+      const text = await body(page);
+      expect(!/Psalm Nights|Today's declaration/.test(text), `${tab} at 3 AM shows more than the one button`);
+      expect(await darkBody(page), `${tab} at 3 AM is not on night`);
+      expect(await fits(page), `${tab} at 3 AM is wider than 390 px`);
+      await shot(page, `15-${tab}-3am`);
+      await context.close();
+      for (const hour of [22, 6]) {
+        const later = await open(`/${tab}?hour=${hour}`, adult);
+        await later.page.getByText(tab === 'nights' ? 'Psalm Nights' : 'Tonight', { exact: false }).first().waitFor({ timeout: 30000 }).catch(() => undefined);
+        expect(!/Go back to sleep/.test(await body(later.page)), `${tab} at ${hour}:00 shows the back-to-sleep button`);
+        await later.context.close();
+      }
+    }
+    {
+      const { page, context } = await open('/grief', adult);
+      expect(await shows(page, "For when you've lost someone"), 'the grief page did not open');
+      expect(await shows(page, 'The LORD is nigh unto them that are of a broken heart'), 'the grief page has no stored KJV verse');
+      expect(await fits(page), 'the grief page is wider than 390 px');
+      await shot(page, '16-grief');
+      await context.close();
+    }
   } finally {
     await browser.close();
     local?.server.close();

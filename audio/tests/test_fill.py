@@ -241,6 +241,32 @@ class Sessions(unittest.TestCase):
         self.assertEqual([s["gap"] for s in segs][1:], item["gaps"])
         self.assertEqual(item["level"], "sleep")
 
+    def test_a_night_with_its_own_target_and_level_keeps_them(self):
+        """The grief nights (8 min target) and the 5-8 min "3 AM, back to sleep" night (hush level) are floored at
+        75% of their OWN target, never the Psalm Night's 13 min; a night without one keeps its kind's."""
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "content/psalm-nights/en").mkdir(parents=True)
+            base = {"kind": "psalm-night", "lang": "en", "title": "Night", "status": "passed",
+                    "segments": [{"text": "You are awake. [pause 8]"}]}
+            for name, extra in (("a", {"target_seconds": 300, "level": "hush"}), ("b", {"target_seconds": 480}),
+                                ("c", {}), ("d", {"level": "loud"})):
+                (root / f"content/psalm-nights/en/{name}.json").write_text(json.dumps({**base, "id": name, **extra}))
+            items = {i["ref"].split("#")[1]: i for i in fill.content_items(root)}
+        self.assertEqual((items["a"]["target_seconds"], items["a"]["min_seconds"], items["a"]["level"]), (300, 225, "hush"))
+        self.assertEqual((items["b"]["target_seconds"], items["b"]["min_seconds"], items["b"]["level"]), (480, 360, "sleep"))
+        self.assertEqual((items["c"]["target_seconds"], items["c"]["min_seconds"]), (780, 585))
+        self.assertEqual(items["d"]["level"], "sleep")   # an unknown level never reaches the master
+        self.assertIn("hush", qa.BARS)
+        lo, hi = qa.BARS["hush"]["lufs"]
+        self.assertTrue(lo <= fill.LEVEL_TARGET["hush"][0] <= hi and hi < qa.BARS["sleep"]["lufs"][0])
+
+    def test_the_real_back_to_sleep_night_is_short_and_hushed(self):
+        items = [i for i in fill.content_items(fill.REPO) if "/bs-" in i["ref"]]
+        self.assertEqual(sorted(i["lang"] for i in items), ["en", "es"])
+        for i in items:
+            self.assertEqual((i["level"], i["target_seconds"]), ("hush", 300), i["ref"])
+
     def test_sessions_come_after_english_psalms_and_before_other_chapters(self):
         vpl = ["MAT 1:1 The book.", "PSA 1:1 Blessed.", "PSA 2:1 Why."]
         b = {"en": T.parse_vpl(vpl), "es": T.parse_vpl(vpl)}

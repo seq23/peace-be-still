@@ -17,6 +17,10 @@ import { downloadAvailable, useOffline } from './offline';
 import { isListenPreview, isPreviewSample } from './preview';
 import { usePurchases } from '../../purchases/provider';
 import { isSleepSession, nextFreeNight, sleepUsage, useSleepNights } from './nights';
+import { isBackToSleep } from './hush';
+
+/** The 3 AM back-to-sleep night goes dark 3 s after the last touch, not 15. */
+const HUSH_DIM_AFTER_MS = 3_000;
 
 /** "Friday, November 28" / "viernes 28 de noviembre" (Spanish takes no comma after the weekday). */
 function freeNightLabel(date: Date, locale: string) {
@@ -29,7 +33,7 @@ function clock(seconds: number) {
   return [Math.floor(seconds / 60), String(Math.floor(seconds % 60)).padStart(2, '0')].join(':');
 }
 
-export function NowPlaying({ track, close }: { track: Track; close: () => void }) {
+export function NowPlaying({ track, close, autoplay = false }: { track: Track; close: () => void; autoplay?: boolean }) {
   const t = useT('journey');
   const { settings } = useSettings();
   const user = useOffline(settings.age);
@@ -55,7 +59,9 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const playing = current && state.playing;
   const response = current ? state.response : null;
   const focused = useIsFocused();
-  const { dimmed, touch } = useDimmer(focused && playing && response === null);
+  // The 3 AM back-to-sleep night: it starts from the one button, dims at once, has no timer (it stops by itself).
+  const hush = isBackToSleep(track);
+  const { dimmed, touch } = useDimmer(focused && playing && response === null, hush ? HUSH_DIM_AFTER_MS : undefined);
   const offlineAllowed = canUse('offline', user);
   const saved = offlineAllowed && (downloaded || downloadAvailable(track, user));
   const published = usePublishedAudio();
@@ -92,7 +98,8 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
   const label = shelf === 'psalms' ? t('journey.psalmNights.name')
     : shelf === 'imagination' ? t('journey.imaginationNights.name')
     : shelf === 'hushHarbor' ? [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')
-    : shelf === 'miRefugio' ? [t('journey.miRefugio.name'), t('journey.miRefugio.subtitle')].join(' · ') : t('listen.bibleByBook');
+    : shelf === 'miRefugio' ? [t('journey.miRefugio.name'), t('journey.miRefugio.subtitle')].join(' · ')
+    : shelf === 'grief' ? t('grief.name') : shelf === 'backToSleep' ? t('hush.label') : t('listen.bibleByBook');
   const minutes = state.sleepEndsAt === null ? null : Math.max(1, Math.ceil((state.sleepEndsAt - now) / 60_000));
   const position = current ? Math.min(track.seconds, state.position) : 0;
   const progress = Math.floor(position / track.seconds * 100);
@@ -120,6 +127,14 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
       setPlayPending(false);
     }
   }
+
+  // The one button already asked to play: start once the audio is known to be there (never a locked night: it is free).
+  const autoplayed = useRef(false);
+  useEffect(() => {
+    if (!autoplay || !hush || autoplayed.current || unavailable || current) return;
+    autoplayed.current = true;
+    void toggle();
+  });
 
   async function download() {
     if (!offlineAllowed || !canStream || saved || downloadRequest.current) return;
@@ -211,19 +226,19 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
             <Text style={styles.skipText}>+15</Text>
           </Pressable>}
         </View>
-        <Pressable onPress={() => setTimerOpen(true)} accessibilityRole="button" style={styles.timer}>
+        {!hush && <Pressable onPress={() => setTimerOpen(true)} accessibilityRole="button" style={styles.timer}>
           <Text style={styles.main}>{t('listen.timer')}</Text>
           <Text accessibilityLiveRegion="polite" style={styles.timerValue}>
             {state.fading ? t('listen.fading') : t('listen.timerSummary', { setting: minutes === null ? t('listen.timerOff') : t('listen.minutes', { minutes }) })}
           </Text>
-        </Pressable>
+        </Pressable>}
         </>}
         {sleep && nightsKnown && !user.paid && !nightLocked && <Text style={styles.allowance}>
           {usage.firstSleepUsed
             ? t(shelf === 'psalms' ? 'listen.psalmWeekly' : 'listen.nightWeekly')
             : t(shelf === 'psalms' ? 'listen.psalmAllowance' : 'listen.nightAllowance')}
         </Text>}
-        {offlineAllowed ? (
+        {hush ? null : offlineAllowed ? (
           <Pressable accessibilityRole="button" accessibilityState={{ busy: downloading }} style={[styles.control, styles.centered]}
             disabled={downloading || !canStream || saved} onPress={() => void download()}>
             <Text style={styles.link}>{saved ? t('listen.downloaded') : downloading ? t('listen.downloading') : t('listen.download')}</Text>
