@@ -314,9 +314,7 @@
   "error.crash.body": "Tap Try again. If it keeps happening, close Peace Be Still and open it again. Your saved verses and journal are still on this phone.",
   "error.crash.retry": "Try again ›",
   "reminder.title": "Peace Be Still",
-  "reminder.body": "A quiet moment is here when you want it.",
   "reminder.offer.label": "A gentle reminder",
-  "reminder.offer.title": "Would a quiet nudge each evening help?",
   "reminder.offer.body": "One reminder a day at most, at %{time}. You can change the time or turn it off in Settings.",
   "reminder.offer.yes": "Turn on the reminder",
   "reminder.offer.notNow": "Not now",
@@ -328,5 +326,9 @@
   "reminder.settings.openPhone": "Open phone Settings",
   "reminder.settings.change": "Change",
   "reminder.settings.done": "Done",
-  "reminder.settings.cancel": "Cancel"
+  "reminder.settings.cancel": "Cancel",
+  "reminder.offer.title.morning": "Would a quiet nudge each morning help?",
+  "reminder.offer.title.evening": "Would a quiet nudge each evening help?",
+  "reminder.body.morning": "This morning's words are ready when you are.",
+  "reminder.body.evening": "A quiet moment is here when you want it."
 }

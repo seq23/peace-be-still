@@ -7,11 +7,11 @@ import { join } from 'node:path';
 import en from '../src/i18n/en.json';
 import es from '../src/i18n/es.json';
 import {
-  ASK_AGAIN_MS, DEFAULT_TIME, REMINDER_ID, initialReminder, markFirstValue, notNow, parseReminder, shouldOffer, withTime,
+  ASK_AGAIN_MS, DEFAULT_TIMES, REMINDER_ID, reminderKind, timeOf, initialReminder, markFirstValue, notNow, parseReminder, shouldOffer, withTime,
   sync, turnOff, turnOn, type NotificationsApi, type Permission,
 } from '../src/reminders/reminder';
 
-const content = { title: 'Peace Be Still', body: en['reminder.body'] };
+const content = { title: 'Peace Be Still', body: en['reminder.body.evening'], kind: 'evening' as const };
 const DAY = 86_400_000;
 
 function fakePhone(permission: Permission = 'undetermined', answer: Permission = 'granted') {
@@ -108,8 +108,7 @@ test('the pre-ask is never on first launch: only after a finished session, and "
 
 test('saved records are read safely and the default time is an evening one', () => {
   assert.deepEqual(parseReminder(null), initialReminder);
-  assert.deepEqual(parseReminder({ on: true, hour: 25, minute: 0 }), { on: true, ...DEFAULT_TIME });
-  assert.ok(DEFAULT_TIME.hour >= 18 && DEFAULT_TIME.hour <= 21);
+  assert.deepEqual(parseReminder({ on: true, hour: 25, minute: 0 }), { on: true }, 'an unreadable time falls back to the journey default');
   assert.deepEqual(withTime(initialReminder, 7, 15), { ...initialReminder, hour: 7, minute: 15 });
   assert.deepEqual(withTime(initialReminder, 24, 0), initialReminder, 'an impossible time from a picker changes nothing');
 });
@@ -131,4 +130,34 @@ test('local only: no code asks for a push token, so nothing leaves the phone and
   assert.ok(files.length > 20);
   for (const f of files) assert.doesNotMatch(readFileSync(f, 'utf8'), /get(?:Expo|Device)PushTokenAsync|addPushTokenListener/, f);
   assert.match(readFileSync('app.config.ts', 'utf8'), /'expo-notifications', \{ enableRemoteNotifications: false \}/);
+});
+
+test('the default time and the words follow the journey: Morning Word in the morning, every other journey in the evening (EN and ES)', async () => {
+  const { journeys } = await import('../src/model');
+  const want: Record<string, 'morning' | 'evening'> = {
+    'morning-word': 'morning', 'morning-word-mindset': 'morning',
+    'psalm-nights': 'evening', 'imagination-nights': 'evening', 'hush-harbor': 'evening', 'mi-refugio': 'evening',
+    'young-faith': 'evening', 'living-in-the-end': 'evening',
+  };
+  assert.deepEqual(Object.fromEntries(journeys.map((j: { id: string }) => [j.id, reminderKind(j.id)])), want, 'every journey has its kind');
+  assert.equal(reminderKind(undefined), 'evening');
+  assert.deepEqual(timeOf(initialReminder, 'morning'), { hour: 7, minute: 0 });
+  assert.deepEqual(timeOf(initialReminder, 'evening'), { hour: 20, minute: 30 });
+  assert.deepEqual(timeOf(withTime(initialReminder, 6, 15), 'evening'), { hour: 6, minute: 15 }, 'a picked time wins over the default');
+  assert.ok(DEFAULT_TIMES.morning.hour >= 6 && DEFAULT_TIMES.morning.hour <= 8 && DEFAULT_TIMES.evening.hour >= 19 && DEFAULT_TIMES.evening.hour <= 21);
+  // Morning words say morning; evening words say evening, and Spanish evening is "noche", never "tarde".
+  assert.match(en['reminder.offer.title.morning'], /\bmorning\b/); assert.match(en['reminder.body.morning'], /\bmorning\b/);
+  assert.match(en['reminder.offer.title.evening'], /\bevening\b/);
+  assert.match(es['reminder.offer.title.morning'], /\bmañana\b/); assert.match(es['reminder.body.morning'], /\bmañana\b/);
+  assert.match(es['reminder.offer.title.evening'], /\bcada noche\b/); assert.match(es['reminder.body.evening'], /\bnoche\b/);
+  for (const line of [es['reminder.offer.title.evening'], es['reminder.body.evening']]) assert.doesNotMatch(line, /\btarde\b/);
+  for (const line of [en['reminder.offer.title.morning'], en['reminder.body.morning'], es['reminder.offer.title.morning'], es['reminder.body.morning']]) assert.doesNotMatch(line, /evening|night|noche|tarde/i);
+  // The booking uses the journey's default until a time is picked.
+  const booked: number[][] = [];
+  const phone = { getPermission: async () => 'granted' as const, requestPermission: async () => 'granted' as const, cancelAll: async () => { booked.length = 0; },
+    scheduleDaily: async (_id: string, _c: unknown, hour: number, minute: number) => { booked.push([hour, minute]); } };
+  await sync(phone, { on: true }, { ...content, kind: 'morning' });
+  assert.deepEqual(booked, [[7, 0]]);
+  await sync(phone, { on: true }, content);
+  assert.deepEqual(booked, [[20, 30]]);
 });

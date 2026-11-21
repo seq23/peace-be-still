@@ -10,15 +10,23 @@ export const REMINDER_ID = 'pbs-daily-reminder';
 const DAY = 86_400_000;
 /** "Not now" on our own pre-ask: we don't offer again for at least this long. */
 export const ASK_AGAIN_MS = 7 * DAY;
-/** The default time, early evening: before the night session, never at bedtime itself. */
-export const DEFAULT_TIME = { hour: 20, minute: 30 } as const;
+/**
+ * The default time follows the journey: Morning Word is a morning practice (7:00 AM); every other journey leads to
+ * the night session, so its reminder is early evening (8:30 PM), before bedtime, never at it. A time the person
+ * picks replaces the default.
+ */
+export type ReminderKind = 'morning' | 'evening';
+export const DEFAULT_TIMES: Record<ReminderKind, { hour: number; minute: number }> = { morning: { hour: 7, minute: 0 }, evening: { hour: 20, minute: 30 } };
+export const reminderKind = (journey?: string | null): ReminderKind =>
+  journey === 'morning-word' || journey === 'morning-word-mindset' ? 'morning' : 'evening';
 
 export type Permission = 'granted' | 'denied' | 'undetermined';
 
 export type ReminderState = {
   on: boolean;
-  hour: number;
-  minute: number;
+  /** The time the person picked; unset means the journey's default. */
+  hour?: number;
+  minute?: number;
   /** The first finished session (a night played to the end, or the day's declaration said). Before it, no offer. */
   firstValueAt?: number;
   /** When "Not now" was tapped on our pre-ask. */
@@ -27,9 +35,14 @@ export type ReminderState = {
   osDenied?: boolean;
 };
 
-export const initialReminder: ReminderState = { on: false, ...DEFAULT_TIME };
+export const initialReminder: ReminderState = { on: false };
 
-export type ReminderContent = { title: string; body: string };
+/** The time the reminder rings: the person's pick, else the journey's default. */
+export const timeOf = (state: ReminderState, kind: ReminderKind) =>
+  state.hour !== undefined && state.minute !== undefined ? { hour: state.hour, minute: state.minute } : DEFAULT_TIMES[kind];
+
+/** What the reminder says, and which journey kind it belongs to (that sets the default time). */
+export type ReminderContent = { title: string; body: string; kind: ReminderKind };
 
 /** What the app needs from the phone's notification system (expo-notifications on a phone; a fake in tests). */
 export type NotificationsApi = {
@@ -46,7 +59,7 @@ const isTime = (hour: unknown, minute: unknown) =>
 /** Reads what was saved; anything unreadable falls back to off at the default time. */
 export function parseReminder(raw: unknown): ReminderState {
   const saved = (raw && typeof raw === 'object' ? raw : {}) as Partial<ReminderState>;
-  const time = isTime(saved.hour, saved.minute) ? { hour: saved.hour!, minute: saved.minute! } : { ...DEFAULT_TIME };
+  const time = isTime(saved.hour, saved.minute) ? { hour: saved.hour!, minute: saved.minute! } : {};
   const at = (value: unknown) => (typeof value === 'number' && Number.isFinite(value) ? value : undefined);
   return {
     on: saved.on === true,
@@ -83,7 +96,8 @@ export async function sync(api: NotificationsApi, state: ReminderState, content:
     if (!state.on) return state;
     const permission = await api.getPermission();
     if (permission !== 'granted') return { ...state, on: false, ...(permission === 'denied' && { osDenied: true }) };
-    await api.scheduleDaily(REMINDER_ID, content, state.hour, state.minute);
+    const { hour, minute } = timeOf(state, content.kind);
+    await api.scheduleDaily(REMINDER_ID, { title: content.title, body: content.body, kind: content.kind }, hour, minute);
     return { ...state, osDenied: undefined };
   } catch (error) {
     console.warn('Daily reminder could not be updated', error);

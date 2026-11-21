@@ -314,9 +314,7 @@
   "error.crash.body": "Toca Intentar de nuevo. Si vuelve a pasar, cierra Peace Be Still y ábrela otra vez. Tus versículos guardados y tu diario siguen en este teléfono.",
   "error.crash.retry": "Intentar de nuevo ›",
   "reminder.title": "Peace Be Still",
-  "reminder.body": "Un momento de calma te espera cuando quieras.",
   "reminder.offer.label": "Un recordatorio suave",
-  "reminder.offer.title": "¿Te ayudaría un aviso tranquilo cada tarde?",
   "reminder.offer.body": "Un solo recordatorio al día como máximo, a las %{time}. Puedes cambiar la hora o apagarlo en Ajustes.",
   "reminder.offer.yes": "Activar el recordatorio",
   "reminder.offer.notNow": "Ahora no",
@@ -328,5 +326,9 @@
   "reminder.settings.openPhone": "Abrir Ajustes del teléfono",
   "reminder.settings.change": "Cambiar",
   "reminder.settings.done": "Listo",
-  "reminder.settings.cancel": "Cancelar"
+  "reminder.settings.cancel": "Cancelar",
+  "reminder.offer.title.morning": "¿Te ayudaría un aviso tranquilo cada mañana?",
+  "reminder.offer.title.evening": "¿Te ayudaría un aviso tranquilo cada noche?",
+  "reminder.body.morning": "Las palabras de esta mañana te esperan cuando quieras.",
+  "reminder.body.evening": "Un momento de calma te espera esta noche, cuando quieras."
 }

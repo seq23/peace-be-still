@@ -3,12 +3,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
 import { Linking, Platform, Text, View } from 'react-native';
-import { useT } from '../settings';
+import { useSettings, useT } from '../settings';
 import { Body, Card, Label, PillButton, SwitchRow, TextLink, styles, usePalette } from '../ui';
 import { fonts } from '../theme/tokens';
 import { TimePicker, type Time } from './TimePicker';
 import {
-  REMINDER_KEY, initialReminder, markFirstValue as withFirstValue, notNow as withNotNow, parseReminder,
+  REMINDER_KEY, initialReminder, reminderKind, timeOf, markFirstValue as withFirstValue, notNow as withNotNow, parseReminder,
   shouldOffer, sync, withTime, turnOff, turnOn, type NotificationsApi, type Permission, type ReminderContent, type ReminderState,
 } from './reminder';
 
@@ -87,7 +87,10 @@ export function useReminder() {
   const state = useSyncExternalStore(subscribe, () => current, () => current);
   const [ready, setReady] = useState(false);
   const api = reminderApi();
-  const content: ReminderContent = { title: t('reminder.title'), body: t('reminder.body') };
+  // Morning Word gets a morning reminder; the other journeys an evening one, each in its own words.
+  const kind = reminderKind(useSettings().settings.journey);
+  const content: ReminderContent = { title: t('reminder.title'), body: t(`reminder.body.${kind}`), kind };
+  const time = timeOf(state, kind);
   useEffect(() => {
     let live = true;
     void load().then(async () => {
@@ -100,18 +103,21 @@ export function useReminder() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const run = useCallback(async (change: (s: ReminderState) => Promise<ReminderState> | ReminderState) => publish(await change(current)), []);
   return {
-    state, ready, available: !!api,
+    state, time, kind, ready, available: !!api,
     turnOn: () => api && run(s => turnOn(api, s, content)),
     turnOff: () => api && run(s => turnOff(api, s, content)),
     /** One reschedule per closed picker; an unchanged time books nothing new. */
-    setTime: (time: Time | null) => api && time && run(s => (s.hour === time.hour && s.minute === time.minute ? s : sync(api, withTime(s, time.hour, time.minute), content))),
+    setTime: (next: Time | null) => api && next && run(s => {
+      const now = timeOf(s, kind);
+      return now.hour === next.hour && now.minute === next.minute ? s : sync(api, withTime(s, next.hour, next.minute), content);
+    }),
     notNow: () => run(s => withNotNow(s)),
   };
 }
 
 /** The time as the phone shows it in the app's language (8:30 PM, 20:30). */
-export const formatTime = (state: ReminderState, locale: string) =>
-  new Intl.DateTimeFormat(locale === 'es' ? 'es-MX' : 'en-US', { hour: 'numeric', minute: '2-digit' }).format(new Date(2026, 0, 1, state.hour, state.minute));
+export const formatTime = (time: Time, locale: string) =>
+  new Intl.DateTimeFormat(locale === 'es' ? 'es-MX' : 'en-US', { hour: 'numeric', minute: '2-digit' }).format(new Date(2026, 0, 1, time.hour, time.minute));
 
 /** Our own calm pre-ask, shown after first value. "Turn on" leads to the phone's prompt; "Not now" waits 7 days. */
 export function ReminderOffer() {
@@ -123,8 +129,8 @@ export function ReminderOffer() {
     <Card>
       <View testID="reminder-offer" style={{ gap: 8 }}>
         <Label>{t('reminder.offer.label')}</Label>
-        <Text style={{ fontFamily: fonts.serif, fontSize: 19, lineHeight: 26, color: c.ink }}>{t('reminder.offer.title')}</Text>
-        <Body>{t('reminder.offer.body', { time: formatTime(reminder.state, t.locale) })}</Body>
+        <Text style={{ fontFamily: fonts.serif, fontSize: 19, lineHeight: 26, color: c.ink }}>{t(`reminder.offer.title.${reminder.kind}`)}</Text>
+        <Body>{t('reminder.offer.body', { time: formatTime(reminder.time, t.locale) })}</Body>
         <PillButton onPress={() => void reminder.turnOn()}>{t('reminder.offer.yes')}</PillButton>
         <TextLink onPress={() => void reminder.notNow()}>{t('reminder.offer.notNow')}</TextLink>
       </View>
@@ -139,13 +145,13 @@ export function ReminderSettings() {
   const reminder = useReminder();
   if (!reminder.available) return null;
   const { state } = reminder;
-  const time = formatTime(state, t.locale);
+  const time = formatTime(reminder.time, t.locale);
   return (
     <View style={{ gap: 10, marginTop: 10 }}>
       <SwitchRow title={t('reminder.settings.title')} detail={state.on ? t('reminder.settings.on', { time }) : t('reminder.settings.off')}
         value={state.on} onChange={on => void (on ? reminder.turnOn() : reminder.turnOff())} />
       {state.on && <Card>
-        <TimePicker value={state} label={t('reminder.settings.time')} shown={time} onClose={next => void reminder.setTime(next)} />
+        <TimePicker value={reminder.time} label={t('reminder.settings.time')} shown={time} onClose={next => void reminder.setTime(next)} />
       </Card>}
       {!state.on && state.osDenied && <Card>
         <Body>{t('reminder.settings.denied')}</Body>

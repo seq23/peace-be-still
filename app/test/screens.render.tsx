@@ -1648,28 +1648,28 @@ test('the reminder offer never shows on first launch; after a finished session i
   const person = { ...base, journey: 'psalm-nights' };
   const first = await mount('today', person);
   await settle();
-  assert.ok(!strings(first).includes(en['reminder.offer.title']), 'first launch: no offer');
+  assert.ok(!strings(first).includes(en['reminder.offer.title.evening']), 'first launch: no offer');
   await act(async () => first.unmount());
   await reminders.markFirstValue();
   const after = await mount('today', person);
   await settle();
-  assert.ok(strings(after).includes(en['reminder.offer.title']));
+  assert.ok(strings(after).includes(en['reminder.offer.title.evening']));
   assert.ok(strings(after).includes('8:30 PM'), 'the offer names the evening time');
   assert.equal((globalThis as any).__pbsNotifications.asked, 0, 'our own pre-ask comes before the phone\'s prompt');
   await press(after, en['reminder.offer.notNow']);
-  assert.ok(!strings(after).includes(en['reminder.offer.title']));
+  assert.ok(!strings(after).includes(en['reminder.offer.title.evening']));
   await act(async () => after.unmount());
   reopen();
   const tomorrow = await mount('today', person);
   await settle();
-  assert.ok(!strings(tomorrow).includes(en['reminder.offer.title']), '"Not now" holds across a reopen');
+  assert.ok(!strings(tomorrow).includes(en['reminder.offer.title.evening']), '"Not now" holds across a reopen');
   assert.ok(JSON.parse(local.get(REMINDER_KEY)!).notNowAt > 0);
   await act(async () => tomorrow.unmount());
   reopen();
-  local.set(REMINDER_KEY, JSON.stringify({ on: false, hour: 20, minute: 30, firstValueAt: 1 }));
+  local.set(REMINDER_KEY, JSON.stringify({ on: false, firstValueAt: 1 }));
   const spanish = await mount('today', { ...base, journey: 'mi-refugio', voice: 'spanish' });
   await settle();
-  assert.ok(strings(spanish).includes(es['reminder.offer.title']), 'Mi Refugio asks in Spanish');
+  assert.ok(strings(spanish).includes(es['reminder.offer.title.evening']), 'Mi Refugio asks in Spanish');
   await act(async () => spanish.unmount());
 });
 
@@ -1683,8 +1683,8 @@ test('"Turn on the reminder" asks the phone once and books exactly one daily rem
   await press(today, en['reminder.offer.yes']);
   await settle();
   assert.equal(phone.asked, 1);
-  assert.deepEqual([...phone.schedule.values()].map(e => [e.trigger, e.content.body]), [[{ type: 'daily', hour: 20, minute: 30 }, en['reminder.body']]]);
-  assert.ok(!strings(today).includes(en['reminder.offer.title']), 'the offer is gone once it is on');
+  assert.deepEqual([...phone.schedule.values()].map(e => [e.trigger, e.content.body]), [[{ type: 'daily', hour: 20, minute: 30 }, en['reminder.body.evening']]]);
+  assert.ok(!strings(today).includes(en['reminder.offer.title.evening']), 'the offer is gone once it is on');
   await act(async () => today.unmount());
   for (let i = 0; i < 3; i++) {
     reopen();
@@ -1745,7 +1745,7 @@ test('a phone that says no: no crash, no second prompt, and Settings shows how t
   await settle();
   assert.equal(phone.asked, 1);
   assert.equal(phone.schedule.size, 0);
-  assert.ok(!strings(today).includes(en['reminder.offer.title']), 'no nagging after a no');
+  assert.ok(!strings(today).includes(en['reminder.offer.title.evening']), 'no nagging after a no');
   await act(async () => today.unmount());
   const links: string[] = [];
   (globalThis as any).__pbsOpenURL = (url: string) => links.push(url);
@@ -1776,7 +1776,7 @@ test('saying the day\'s declaration is a finished session: Today then offers the
   await act(async () => page.unmount());
   const today = await mount('today', person);
   await settle();
-  assert.ok(strings(today).includes(en['reminder.offer.title']));
+  assert.ok(strings(today).includes(en['reminder.offer.title.evening']));
   await act(async () => today.unmount());
 });
 
@@ -1830,4 +1830,26 @@ test('the web preview falls back to a time field: typing edits, leaving the fiel
   } finally {
     if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW; else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
   }
+});
+
+test('the offer and the default follow the journey: Morning Word asks for a 7:00 AM morning reminder, Mi Refugio for an evening one, "cada noche"', async () => {
+  onPhone();
+  const phone = notificationPhone();
+  local.set(REMINDER_KEY, JSON.stringify({ on: false, firstValueAt: 1 }));
+  const morning = await mount('today', { ...base, journey: 'morning-word' });
+  await settle();
+  assert.ok(strings(morning).includes(en['reminder.offer.title.morning']));
+  assert.ok(strings(morning).includes(reminders.formatTime({ hour: 7, minute: 0 }, 'en')));
+  assert.ok(!strings(morning).includes(en['reminder.offer.title.evening']));
+  await press(morning, en['reminder.offer.yes']);
+  await settle();
+  assert.deepEqual([...phone.schedule.values()].map(e => [e.trigger, e.content.body]), [[{ type: 'daily', hour: 7, minute: 0 }, en['reminder.body.morning']]]);
+  await act(async () => morning.unmount());
+  reopen();
+  local.set(REMINDER_KEY, JSON.stringify({ on: false, firstValueAt: 1 }));
+  const refugio = await mount('today', { ...base, journey: 'mi-refugio', voice: 'spanish' });
+  await settle();
+  assert.ok(strings(refugio).includes(es['reminder.offer.title.evening']) && es['reminder.offer.title.evening'].includes('cada noche'));
+  assert.ok(strings(refugio).includes(reminders.formatTime({ hour: 20, minute: 30 }, 'es')));
+  await act(async () => refugio.unmount());
 });
