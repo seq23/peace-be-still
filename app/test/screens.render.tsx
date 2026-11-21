@@ -103,6 +103,7 @@ let history = false;
 };
 
 // Loaded after the globals above exist.
+const { PAID_CHAT_MESSAGES } = require('../src/gates') as typeof import('../src/gates');
 const { NowPlaying } = require('../src/screens/listen/NowPlaying');
 const { NIGHTS_KEY, nightOf } = require('../src/screens/listen/nights') as typeof import('../src/screens/listen/nights');
 const { tracks: audioTracks } = require('../src/player/usePlayer') as { tracks: Track[] };
@@ -426,7 +427,7 @@ test('opening the tabs records today once, keeping only this week', async () => 
 test('a typed link cannot open a hidden tab', async () => {
   assert.equal(host(await mount('chat', { ...base, age: 'child', journey: 'psalm-nights' }), 'Redirect')[0].props.href, '/today');
   assert.equal(host(await mount('bible', { ...base, door: 'mindset', journey: 'imagination-nights' }), 'Redirect')[0].props.href, '/today');
-  assert.match(strings(await mount('chat', { ...base, journey: 'psalm-nights' })), /One free conversation a day/);
+  assert.match(strings(await mount('chat', { ...base, journey: 'psalm-nights' })), /may keep and use what you type/);
 });
 
 test('Today has the date, the week and the three items for the door, with no welcome filler', async () => {
@@ -1250,9 +1251,9 @@ const paidControls = (tree: ReactTestRenderer) => host(tree, 'Pressable').filter
 const restoreControl = (tree: ReactTestRenderer) => host(tree, 'Pressable').find(n => /restore purchases/i.test(textOf(n)))!;
 const gate = (tree: ReactTestRenderer) => texts(tree).at(-1);
 
-test('Settings opens the paid lane and its close control takes the visitor back', async () => {
+test('Settings opens the paid plan and its close control takes the visitor back', async () => {
   const settings = await mount('settings', readyForPaid);
-  await press(settings, /paid lane/i);
+  await press(settings, /paid plan/i);
   assert.deepEqual(calls, [['push', '/paid']]);
   const tree = await mount('paid', readyForPaid);
   assert.match(strings(tree), /App Store prices are unavailable/i);
@@ -1287,8 +1288,8 @@ test('the rendered paid lane discloses benefits, actual store prices, renewal te
       assert.equal(choices()[0].props['aria-checked'], true);
       assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
       for (const meaning of es
-        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /100 mensajes/, /24 horas/]
-        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, /100 messages/, /24 hours/]) {
+        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /Chat bíblico ilimitado/, new RegExp(`Privado hasta ${PAID_CHAT_MESSAGES} mensajes al día. Después se puede elegir el chat gratis, que no es privado; siempre preguntamos antes\\.`), /24 horas/]
+        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, /Unlimited Bible chat/, new RegExp(`Private for up to ${PAID_CHAT_MESSAGES} messages a day. After that you can choose free chat, which isn't private; we always ask first\\.`), /24 hours/]) {
         assert.match(strings(tree), meaning);
       }
       await press(tree, /\$6\.29/);

@@ -11,3 +11,7 @@ node_modules/
 *.mp3
 *.opus
 __pycache__/
+
+# live red-team transcripts (npm run redteam)
+redteam-out/
+worker/.dev.vars

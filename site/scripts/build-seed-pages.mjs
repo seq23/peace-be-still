@@ -95,7 +95,7 @@ ${headerHtml(p.lang, p.lang === "ko" ? "/" : null)}
 <main id="main" class="wrap article">
   <nav class="crumbs" aria-label="${t.crumbs}">${crumbs.map(([n, h]) => `<a href="${h}">${n}</a>`).join(" › ")}</nav>
   <h1>${p.h1}</h1>
-  <p class="lead" id="what">${p.definition}</p>
+${p.claim ? "  <!-- claim:start --><!-- claim:end -->\n" : ""}  <p class="lead" id="what">${p.definition}</p>
   <section class="qa"><h2>${t.quick}</h2><p>${p.quick}</p><p class="muted">${t.best}: ${p.bestFor}</p></section>
 ${pick}${sections}
   <section class="qa" id="faq"><h2>${t.faq}</h2>

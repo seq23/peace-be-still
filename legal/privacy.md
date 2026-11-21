@@ -4,7 +4,7 @@ Effective: November 20, 2026
 
 This policy covers the Peace Be Still app and the website peacebestillapp.com. Peace Be Still is made by Spry Labs, the trade name of Redwood Reserve Holdings LLC, a Wyoming limited liability company. Write to info@peacebestillapp.com with any privacy question or request.
 
-The short version: there is no account, we never ask for your name, there are no ads, and we do not sell or share personal information. What you type into chat goes to free AI providers, which may keep it and learn from it.
+The short version: there is no account, we never ask for your name, there are no ads, and we do not sell or share personal information. Free chat goes to free AI providers, which may keep what you type and learn from it. Paid chat is private: it goes to a paid AI service that does not use it to improve its AI.
 
 ## What stays on your phone
 
@@ -12,23 +12,29 @@ Your birth year, the door you chose, your settings, saved verses, highlights, jo
 
 ## Chat
 
-Chat is optional. Before your first chat, the app asks for your permission and tells you where your words go.
+Chat is optional, and it comes free or paid. Before your first free chat, the app asks for your permission in plain words and tells you where your words go; there is no free chat without that yes, and the app remembers it on your phone. You can choose to make chat private instead.
 
-Each chat message travels through our service to an AI provider, which writes the answer. The providers, tried in this order, are Cloudflare Workers AI, Google Gemini (free tier) and free models reached through OpenRouter. These providers may retain and use what you type to improve their services, and people at those companies may read it. Please leave out names and anything that identifies you or someone else.
+Free chat: each message travels through our service to an AI provider, which writes the answer. The providers, tried in this order, are Cloudflare Workers AI, Google Gemini (free tier) and free models reached through OpenRouter. These providers may retain and use what you type to improve their services, and people at those companies may read it. Please leave out names and anything that identifies you or someone else.
+
+Paid chat: each message goes through our service to a paid AI service under terms that do not let it use what you type to train or improve its AI (today Google Gemini on a paid plan; if we change it, it will be another paid service with the same promise, named here). Paid chat never falls back to a free provider unless you choose free chat after your private messages, or while the paid service is down; the app always asks first.
 
 Each chat message is sent with your age group (teen or adult), the door you chose, the chat voice and the language, so the answer fits; none of these is linked to your name, because the app never asks for it. Your birth year itself never leaves your phone.
 
-Every message first goes through a word-based safety check in our own code. When that check recognizes a message as being about self-harm or abuse, our code answers with crisis lines and the message is not sent to any AI model. Every other message is first read by a safety model on Cloudflare Workers AI before an answer is written.
+Every message first goes through a safety check in our own code. When that check recognizes a message as someone saying they mean to hurt themselves, or that someone is hurting them, our code answers with crisis lines for the region your phone is set to, and the message is not sent to any AI model. A message with less clear signs of distress is never sent to a free provider: a safety model on Cloudflare Workers AI reads it, and it is answered by the private AI. The AI that writes an answer also says whether a message seems unsafe, and then the same safety model checks it before anything is shown. From then on, that conversation is answered by the private AI until it has been calm for a while (at most 24 hours), for free and paid chat alike.
 
 We do not store chat text. It passes through our service to the provider and is gone from our service once the answer is returned.
 
 ## Paid chat memory
 
-If you are in the paid lane, chat can remember what you are carrying. That memory is a short summary, at most 1,000 characters, stored on our service under an anonymous install id and sent with your messages so the answers remember. It is kept until you delete it in Settings, or until 30 days after your paid plan ends, whichever comes first. Words about self-harm or abuse are never saved to memory.
+If you have a paid plan, chat can remember what you are carrying. That memory is a short summary, at most 1,000 characters, stored on our service under an anonymous install id and sent with your messages so the answers remember. It is kept until you delete it in Settings, or until 30 days after your paid plan ends, whichever comes first. Words about self-harm or abuse are never saved to memory.
 
 ## Sessions made for you
 
-If you are in the paid lane and ask for a session made for you, the scene or worry you write is sent to our service. Free AI providers write the session script from your words, and they may keep what you write and learn from it, as with chat (the request form says so before you send). We make the audio on our own computer with an open-source voice engine. Your written words are deleted once the audio is made, and at most 7 days after you send them. The finished audio is kept for you to play until you delete it, or until 30 days after your paid plan ends.
+If you have a paid plan and ask for a session made for you, the scene or worry you write is sent to our service. Free AI providers write the session script from your words, and they may keep what you write and learn from it, as with chat (the request form says so before you send). We make the audio on our own computer with an open-source voice engine. Your written words are deleted once the audio is made, and at most 7 days after you send them. The finished audio is kept for you to play until you delete it, or until 30 days after your paid plan ends.
+
+## Fair use and safety records
+
+To keep chat safe and affordable, our service keeps a few records with no words in them, under the anonymous install id: whether chat is paused on an install (by us, or for 24 hours after a flood of messages, repeated messages or attempts to break the app's rules, with the reason as a short code), deleted when the pause ends; the AI cost of a paid install's chat this month, deleted 30 days after the paid plan ends; and, for a conversation where the safety check saw signs of danger, when that happened and how many calm messages followed, deleted after two days. Your consent to free chat is kept on your phone.
 
 ## Reporting an answer
 
@@ -36,7 +42,9 @@ If you report an answer or a session, we keep the answer you reported, the reaso
 
 ## The anonymous install id and limits
 
-To keep chat fair and free, our service creates a random install id the first time you chat. It is not tied to your name, email, phone number or Apple account. Our service uses the install id and a one-way hash of your IP address to count messages each day (1 conversation of up to 10 messages a day in the free lane, up to 100 messages a day in the paid lane) and to stop abuse. So that answers do not repeat, our service also keeps short records of recent answer patterns for each install id: keyed hashes of 8 characters, with no words in them. Those counters and records are deleted within 48 hours. We also keep a count of all chat messages per day, with no text and no identifier, to stay inside the free AI allowances.
+To keep chat fair and free, our service creates a random install id the first time you open chat. It is not tied to your name, email, phone number or Apple account. Our service uses the install id and a one-way hash of your IP address to count messages each day (1 conversation of up to 5 messages a day in the free version, 50 private messages a day in a paid plan, then free chat if you choose it) and to stop abuse. So that answers do not repeat, our service also keeps short records of recent answer patterns for each install id: keyed hashes of 8 characters, with no words in them. Those counters and records are deleted within 48 hours. We also keep a count of all chat messages per day, with no text and no identifier, to stay inside the free AI allowances.
+
+Your first chat on an iPhone is private: that one conversation (up to the free day's messages) goes to the same private paid service as a paid plan, never to a free AI service. To give it once per iPhone, the app asks Apple's DeviceCheck for a device token, and our service asks Apple to keep one yes-or-no mark for this iPhone ("already had its private first chat"). Apple keeps that mark for our app only; it tells us nothing about you, and it is not your Apple account. Our service also keeps, for each install id, whether its first chat was private and the day, with no words, for up to 120 days, to see whether the private first chat helps; the IP hash on that record is deleted after the day. Without DeviceCheck (the web, Android, or when Apple does not answer), the first chat is the normal free chat, with its own notice first.
 
 ## Audio and the Bible
 
@@ -44,7 +52,7 @@ The Bible text, the Bible audio and the sleep sessions are files. When your phon
 
 ## Purchases
 
-Apple handles every purchase. We never see your name, Apple ID or payment card. RevenueCat, which manages subscriptions for us, receives an anonymous app user id, your purchase receipts from Apple, and basic details such as the app version, iOS version and store country, so the app knows whether you are in the paid lane. RevenueCat's diagnostics and its collection of device identifiers are turned off in the app.
+Apple handles every purchase. We never see your name, Apple ID or payment card. RevenueCat, which manages subscriptions for us, receives an anonymous app user id, your purchase receipts from Apple, and basic details such as the app version, iOS version and store country, so the app knows whether you have a paid plan. RevenueCat's diagnostics and its collection of device identifiers are turned off in the app.
 
 ## What we never do
 
@@ -62,7 +70,7 @@ For ages 13 to 17, chat uses the teen voice, and paid upgrades go through Apple'
 
 ## Where the app is offered
 
-The app is offered in the United States and other countries, but not in the European Economic Area, the United Kingdom or Switzerland, because one of our free AI providers does not allow its free tier to serve people there.
+The app is offered in the United States and other countries, but not in the European Economic Area, the United Kingdom or Switzerland, because one of our free AI providers does not allow its free tier to serve people there. It is not offered in mainland China either, where religious content online needs a government permit.
 
 ## Keeping it safe
 

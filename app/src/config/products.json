@@ -1,19 +1,28 @@
 {
   "entitlement": "paid",
   "offering": "default",
-  "subscriptionGroup": { "en-US": "Peace Be Still paid lane", "es-MX": "Peace Be Still, parte de pago" },
+  "subscriptionGroup": {
+    "en-US": "Peace Be Still",
+    "es-MX": "Peace Be Still"
+  },
   "products": {
     "monthly": {
       "id": "com.peacebestillapp.mobile.paid.monthly",
       "duration": "ONE_MONTH",
       "usPrice": "7.99",
-      "displayName": { "en-US": "Paid lane · monthly", "es-MX": "Parte de pago · mensual" }
+      "displayName": {
+        "en-US": "Peace Be Still · Monthly",
+        "es-MX": "Peace Be Still · Mensual"
+      }
     },
     "yearly": {
       "id": "com.peacebestillapp.mobile.paid.yearly",
       "duration": "ONE_YEAR",
       "usPrice": "39.99",
-      "displayName": { "en-US": "Paid lane · yearly", "es-MX": "Parte de pago · anual" }
+      "displayName": {
+        "en-US": "Peace Be Still · Yearly",
+        "es-MX": "Peace Be Still · Anual"
+      }
     }
   }
 }

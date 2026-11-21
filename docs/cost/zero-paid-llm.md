@@ -1,6 +1,6 @@
 # Zero paid LLM — peace-be-still
 
-Owner policy: nothing paid. The website makes no model calls. Model use: the shared search-loop engine drafting question pages, and the content gate's verse read.
+Owner policy (updated 21 Nov 2026): the website and search-loop drafting are $0. The app's paid chat lane, and any chat message the safety check flags, use a billed private model capped at $100 a month app-wide (`docs/OPERATIONS.md`); free chat never uses the billed key. The website makes no model calls. Model use: the content gate's verse read, and the search-loop engine drafting question pages:
 
 | Call site | What it does | Models | Guard |
 |---|---|---|---|
