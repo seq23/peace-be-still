@@ -23,7 +23,7 @@ async function newToken() {
 const rows = [];
 for (const [set, texts] of Object.entries(sets)) {
   for (const text of texts) {
-    if (!token || rows.length % 8 === 0) token = await newToken(); // fresh installs stay under the device limits
+    if (!token || rows.length % 40 === 0) token = await newToken(); // fresh installs stay under the device limits
     const t0 = Date.now();
     const lang = es(text) ? 'es' : 'en';
     const res = await fetch(`${BASE}/api/chat`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` }, body: JSON.stringify({ conversation: crypto.randomUUID(), door: 'faith', voice: lang === 'es' ? 'spanish' : 'plain', language: lang, messages: [{ role: 'user', text }], freeConsent: true, region: 'US' }) });
