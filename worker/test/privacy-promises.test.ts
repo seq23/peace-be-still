@@ -4,7 +4,7 @@
 import { createExecutionContext, env, waitOnExecutionContext } from 'cloudflare:test';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import wranglerText from '../wrangler.jsonc?raw';
-import { PAID_CHAT_MESSAGES } from '../src/shared';
+import { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES } from '../src/shared';
 import { cleanup } from '../src/cleanup';
 import { centralDay } from '../src/day';
 import { paidStatus } from '../src/entitlement';
@@ -109,14 +109,14 @@ describe('The anonymous install id and limits', () => {
     expect(a.installId).not.toBe(b.installId);
     expect(await everyRow()).not.toMatch(/a@b\.co|5551234567/);
   });
-  it('free lane: 1 conversation of up to 10 messages a day; paid lane: PAID_CHAT_MESSAGES private messages a day, then free chat only after her yes', async () => {
+  it('free lane: 1 conversation of up to FREE_CHAT_MESSAGES messages a day; paid lane: PAID_CHAT_MESSAGES private messages a day, then free chat only after her yes', async () => {
     const free = deps({ rungList: [scripted('workers-ai', [good()]).rung] });
     const token = await tokenFor(free);
     const conversation = conv();
     const kinds: string[] = [];
-    for (let i = 0; i < 11; i++) kinds.push(((await (await call(free, '/api/chat', { token, body: { ...chatBody(`message ${i}`), conversation } })).json()) as { kind: string }).kind);
-    expect(kinds.slice(0, 10)).not.toContain('limit');
-    expect(kinds[10]).toBe('limit');
+    for (let i = 0; i <= FREE_CHAT_MESSAGES; i++) kinds.push(((await (await call(free, '/api/chat', { token, body: { ...chatBody(`message ${i}`), conversation } })).json()) as { kind: string }).kind);
+    expect(kinds.slice(0, FREE_CHAT_MESSAGES)).not.toContain('limit');
+    expect(kinds[FREE_CHAT_MESSAGES]).toBe('limit');
     const second = await tokenFor(free);
     await call(free, '/api/chat', { token: second, body: chatBody('first') });
     expect(((await (await call(free, '/api/chat', { token: second, body: chatBody('another conversation') })).json()) as { kind: string }).kind).toBe('limit');

@@ -23,6 +23,8 @@ const { SettingsProvider, useSettings } = require('../src/settings');
 const { PurchasesProvider } = require('../src/purchases/provider');
 const Chat = require('../app/(tabs)/chat').default;
 const { FREE_CONSENT_KEY } = require('../src/chat/ChatScreen');
+const { FREE_CHAT_MESSAGES } = require('../src/gates') as typeof import('../src/gates');
+const en = require('../src/i18n/en.json') as Record<string, string>;
 
 const replies: Array<ChatResponse | 'offline' | 500> = [];
 const sent: any[] = [];
@@ -103,6 +105,30 @@ test('a paused account stops sending', async () => {
   const tree = await mount();
   await say(tree, 'hello');
   assert.equal(tree.root.findByType('TextInput' as any).props.editable, false);
+});
+
+test('the free day\'s last message gets its full answer, then what a plan adds at the store\'s monthly price and when the free ones come back', async () => {
+  consented(); storePaid = false;
+  const products = require('../src/config/products.json');
+  const pkg = (plan: 'monthly' | 'yearly', id: string, period: string, price: string) => ({ identifier: id, product: { identifier: products.products[plan].id, subscriptionPeriod: period, priceString: price, introPrice: null } });
+  const real = (globalThis as any).__pbsPurchases.getOfferings;
+  (globalThis as any).__pbsPurchases.getOfferings = async () => ({ current: { identifier: products.offering, availablePackages: [pkg('monthly', '$rc_monthly', 'P1M', '$7.99'), pkg('yearly', '$rc_annual', 'P1Y', '$39.99')] } });
+  try {
+    replies.push(answer({ remaining: 0, limit: FREE_CHAT_MESSAGES }));
+    const tree = await mount();
+    await say(tree, 'the last free one');
+    assert.match(texts(tree), /You are not carrying this by yourself/); // the answer itself, whole
+    assert.match(texts(tree), new RegExp(en['chat.limit.upgrade'].replace('%{price}', '\\$7\\.99').replace('?', '\\?')));
+    assert.match(texts(tree), new RegExp(en['chat.limit.tomorrow'].replace('%{count}', String(FREE_CHAT_MESSAGES))));
+    pushed.length = 0;
+    await act(async () => tree.root.findAllByProps({ testID: 'limit-upgrade' })[0].props.onPress());
+    assert.deepEqual(pushed, ['/paid']);
+  } finally { (globalThis as any).__pbsPurchases.getOfferings = real; }
+  // A message with free ones left shows no prompt.
+  replies.push(answer({ remaining: 2, limit: FREE_CHAT_MESSAGES }));
+  const other = await mount();
+  await say(other, 'hello');
+  assert.equal(other.root.findAllByProps({ testID: 'limit-upgrade' }).length, 0);
 });
 
 const overflowAsk = (): ChatResponse => ({ kind: 'overflow_consent', ai: false, text: "You've used today's 100 private messages. You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. Private chat comes back tomorrow.", scripture: [], remaining: null, limit: null, reminder: false });

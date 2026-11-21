@@ -1,6 +1,6 @@
 // The Chat tab (mock-up screen 3). Free chat asks once for her yes to its data use (a free AI
 // service may keep what she types; paid chat is private) and paid chat shows the AI disclosure once; every AI answer carries the AI label; the crisis reply is not labelled AI and
-// its phone numbers are tappable; "N of 10 messages left today" comes from the Worker's count.
+// its phone numbers are tappable; "N of 5 messages left today" comes from the Worker's count.
 // Every AI answer has "Report this answer" (Apple Guideline 1.2): the answer and a reason are sent.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { randomUUID } from 'expo-crypto';
@@ -10,7 +10,9 @@ import React, { useEffect, useState } from 'react';
 import { Linking, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { displayRuns } from '../bible/core';
 import type { Key } from '../i18n';
+import { FREE_CHAT_MESSAGES } from '../gates';
 import { usePurchases } from '../purchases/provider';
+import { plansFrom } from '../purchases/revenuecat';
 import { useSettings, useT } from '../settings';
 import { usePalette } from '../ui';
 import { ChatError, DISCLOSURE_KEY, reportAnswer, sendChat, type ReportReason } from './api';
@@ -80,7 +82,16 @@ const today = () => new Date().toDateString();
 
 export default function ChatScreen() {
   const { settings } = useSettings();
-  const { paid } = usePurchases();
+  const { paid, store, preview } = usePurchases();
+  // The monthly price for the free day's last message, from the store product (never hard-coded).
+  const [monthly, setMonthly] = useState<string | null>(null);
+  useEffect(() => {
+    if (paid) return;
+    let live = true;
+    const plans = preview ? preview.getOfferings().then(v => plansFrom(v)) : store?.getOfferings().then(v => plansFrom(v));
+    void plans?.then(p => { if (live) setMonthly(p?.monthly.product.priceString ?? null); }, () => {});
+    return () => { live = false; };
+  }, [paid, store, preview]);
   const t = useT('journey') as T;
   const c = usePalette();
   const router = useRouter();
@@ -224,6 +235,14 @@ export default function ChatScreen() {
           {e.res.kind === 'crisis' && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
             <Text style={[s.linkText, { color: c.accent }]}>{t(l.label)}</Text>
           </Pressable>)}
+          {/* Her ruling 21 Nov 2026: the free day's last message (FREE_CHAT_MESSAGES) always gets its full
+              answer; under it, what a plan adds at the store's own monthly price, and when the free ones come back. */}
+          {!paid && i === entries.length - 1 && (e.res.kind === 'limit' || (e.res.kind === 'answer' && e.res.remaining === 0)) ? <View testID="limit-upgrade-card" style={{ gap: 6 }}>
+            <Pressable accessibilityRole="button" testID="limit-upgrade" onPress={() => router.push('/paid')} style={[s.link, { borderColor: c.accent }]}>
+              <Text style={[s.linkText, { color: c.accent }]}>{monthly ? t('chat.limit.upgrade', { price: monthly }) : t('chat.limit.upgradeNoPrice')}</Text>
+            </Pressable>
+            <Text style={[s.body, { color: c.muted }]}>{t('chat.limit.tomorrow', { count: FREE_CHAT_MESSAGES })}</Text>
+          </View> : null}
           {e.res.kind === 'no_free_model' && !paid ? <Pressable accessibilityRole="button" onPress={() => router.push('/paid')} style={[s.link, { borderColor: c.accent }]}>
             <Text style={[s.linkText, { color: c.accent }]}>{t('chat.free.makePrivate')}</Text>
           </Pressable> : null}

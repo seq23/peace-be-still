@@ -6,6 +6,8 @@ import { env } from 'cloudflare:test';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import phrases from './fixtures/crisis-phrases.json';
 import { CRISIS_THINKING_HEADROOM, distress, floor } from '../src/crisis';
+import { centralDay } from '../src/day';
+import { FREE_CHAT_MESSAGES } from '../src/shared';
 import { call, chatBody, deps, good, NOW, scripted, tokenFor } from './helpers';
 
 afterEach(() => vi.restoreAllMocks());
@@ -219,5 +221,26 @@ describe('the crisis model\'s words (run 10 root cause)', () => {
     expect(crisisWords({ text: 'Call 988 now.' })).toBeNull();
     expect(crisisWords({ text: 'Put the pills away.' })).toBeNull();
     expect(crisisWords({ text: 'Can you talk to someone?' })).toBeNull();
+  });
+});
+
+const iidOf = (token: string) => JSON.parse(atob(token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'))).iid as string;
+describe('a flagged conversation is never cut off by the free day (her ruling 21 Nov 2026)', () => {
+  it('past FREE_CHAT_MESSAGES, the flagged conversation still answers (on the crisis model); an unflagged one gets the limit', async () => {
+    const crisis = scripted('crisis-gemini', [{ ...good('You can rest a moment here, and God stays close. Lord, keep us tonight.', ['Psalm 4:8']), risk: 'none' }]);
+    const free = scripted('gemini-free', [good()]);
+    const d = deps({ rungs: (_e, _n, lane) => (lane === 'crisis' ? [crisis.rung] : [free.rung]) });
+    const token = await tokenFor(d);
+    const conversation = crypto.randomUUID();
+    const id = iidOf(token);
+    for (let i = 0; i < FREE_CHAT_MESSAGES; i++) await env.DB.prepare('INSERT INTO chat_admission VALUES (?, ?, ?, ?, 0, ?, 1000, 100000, ?)').bind(centralDay(NOW), id, conversation, 'h', FREE_CHAT_MESSAGES, NOW).run();
+    await env.DB.prepare('INSERT INTO chat_crisis (install_id, conversation, flagged_at, calm, asked) VALUES (?, ?, ?, 0, 1)').bind(id, conversation, NOW - 60_000).run();
+    const r = await call(d, '/api/chat', { token, body: { ...chatBody('I still feel so heavy tonight'), conversation } });
+    const body = (await r.json()) as { kind: string; remaining: number | null };
+    expect(body.kind).not.toBe('limit');
+    expect(crisis.calls.length).toBeGreaterThan(0);
+    await env.DB.prepare('DELETE FROM chat_crisis WHERE install_id = ?').bind(id).run();
+    const after = (await (await call(d, '/api/chat', { token, body: { ...chatBody('one more question'), conversation } })).json()) as { kind: string };
+    expect(after.kind).toBe('limit');
   });
 });

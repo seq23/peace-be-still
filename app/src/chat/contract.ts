@@ -29,7 +29,7 @@ export type ChatResponse = {
   ai: boolean;
   text: string;
   scripture: ChatScripture[];
-  /** Messages left today, for "N of 10 messages left today"; null when not counted (crisis). */
+  /** Messages left today, for "N of 5 messages left today"; null when not counted (crisis). */
   remaining: number | null;
   /** Today's allowance the count is out of (10 free, 100 paid); null when not counted. */
   limit: number | null;

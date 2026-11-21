@@ -166,7 +166,7 @@ ${V("PSA 4:8")}`],
     description: "A Black Bible chat that talks like the Black church and answers with exact King James verses. Hush Harbor is a journey in Peace Be Still, coming soon.",
     h1: "Black Bible chat: a Bible chat in a Black church voice",
     definition: "A Black Bible chat is a Bible chat app that talks the way the Black church talks: warm, plain, with the cadence of a Sunday sermon and the wisdom of the church mothers, and with verses quoted exactly. In Peace Be Still, that is the journey called Hush Harbor · Black Bible Chat &amp; Stories, coming soon to the App Store and Google Play.",
-    quick: "Hush Harbor is a chat in a Black church voice that answers with King James verses pasted word for word from a stored copy, plus a daily Bible story told in that voice, with Bible stories with Black faces in the pictures. The free version includes one chat a day of up to 10 messages and today's story.",
+    quick: "Hush Harbor is a chat in a Black church voice that answers with King James verses pasted word for word from a stored copy, plus a daily Bible story told in that voice, with Bible stories with Black faces in the pictures. The free version includes one chat a day of up to 5 messages and today's story.",
     bestFor: "people searching for a Black Bible chat, a Black version of Bible chat, or a Bible app that sounds like their church.",
     indexNote: "Hush Harbor: a Bible chat in a Black church voice, KJV word for word.",
     sections: [
@@ -179,7 +179,7 @@ ${V("PSA 4:8")}`],
 <li><strong>The King James Version, word for word.</strong> The AI never writes a verse from memory. It names the reference; the app pastes the stored King James text.</li>
 </ul>`],
       ["Is the Black Bible chat a real pastor?", `<p>No. It is an AI helper, and it says so on every answer. It is not a pastor, a prophet or a person, and it never speaks as God or Jesus. Before your first chat, the app tells you that what you type goes to free AI providers that may learn from it, so leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows the 988 Suicide &amp; Crisis Lifeline and other help straight away.</p>`],
-      ["What does it cost?", `<p>The free version stays free: the whole King James Bible to read and hear, today's story, one chat a day of up to 10 messages, and a daily declaration. A paid plan is $7.99 a month or $39.99 a year and adds unlimited Bible chat, chat that remembers what you are carrying, and every past story. Unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first. There is no trial, no weekly plan and no ads, and you can cancel in two taps.</p>`],
+      ["What does it cost?", `<p>The free version stays free: the whole King James Bible to read and hear, today's story, one chat a day of up to 5 messages, and a daily declaration. A paid plan is $7.99 a month or $39.99 a year and adds unlimited Bible chat, chat that remembers what you are carrying, and every past story. Unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first. There is no trial, no weekly plan and no ads, and you can cancel in two taps.</p>`],
       ["Is the black version of Bible chat a different Bible?", `<p>No. The Bible is the same King James Version in every journey. What changes is the voice of the chat and the stories, and the faces in the pictures. The words of scripture are never changed.</p>
 ${V("MAR 4:39")}`],
     ],
@@ -187,7 +187,7 @@ ${V("MAR 4:39")}`],
       ["Is there a Black Bible chat app?", "Peace Be Still, coming soon to the App Store and Google Play, has a journey called Hush Harbor · Black Bible Chat & Stories: a Bible chat in a Black church voice with exact King James verses, and daily Bible stories with Black faces."],
       ["Is Hush Harbor the same as the Bible Chat app?", "No. Peace Be Still is not affiliated with Bible Chat or any other app. Hush Harbor is one journey inside Peace Be Still."],
       ["Does the Black Bible chat say Jesus was Black?", "No. The Bible does not describe his skin, and the chat does not make claims of history it cannot show. The pictures show Black faces so people can see themselves in the stories."],
-      ["Is Hush Harbor free?", "Yes, in the free version: one chat a day of up to 10 messages, today's story and the whole King James Bible. A paid plan adds unlimited Bible chat and every past story. Unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first."],
+      ["Is Hush Harbor free?", "Yes, in the free version: one chat a day of up to 5 messages, today's story and the whole King James Bible. A paid plan adds unlimited Bible chat and every past story. Unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first."],
     ],
     sources: [["Mark 4:39 (KJV), Bible Gateway", "https://www.biblegateway.com/passage/?search=Mark%204%3A39&version=KJV"], ["988 Suicide & Crisis Lifeline", "https://988lifeline.org/"]],
     notAffiliated: true,
@@ -197,13 +197,13 @@ ${V("MAR 4:39")}`],
     title: "Free Bible chat: what stays free in Peace Be Still · Peace Be Still",
     description: "What a free Bible chat should include, and exactly what the free version of Peace Be Still holds forever: one chat a day, the whole KJV, no ads, no trial.",
     h1: "Free Bible chat: what is really free, and for how long",
-    definition: "A free Bible chat is an app where you can ask questions about faith and scripture without paying. Many apps call themselves free but lock the chat behind a trial that turns into a weekly or yearly charge. In Peace Be Still, coming soon, the free version is free for good: one chat a day of up to 10 messages, with no trial, no ads and no card needed.",
-    quick: "Peace Be Still's free version, forever: the whole King James Bible to read, a growing set of chapters read aloud, today's Bible story, one chat a day of up to 10 messages, your first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, a journal and share cards. Nothing free is ever taken back.",
+    definition: "A free Bible chat is an app where you can ask questions about faith and scripture without paying. Many apps call themselves free but lock the chat behind a trial that turns into a weekly or yearly charge. In Peace Be Still, coming soon, the free version is free for good: one chat a day of up to 5 messages, with no trial, no ads and no card needed.",
+    quick: "Peace Be Still's free version, forever: the whole King James Bible to read, a growing set of chapters read aloud, today's Bible story, one chat a day of up to 5 messages, your first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, a journal and share cards. Nothing free is ever taken back.",
     bestFor: "anyone who wants a Bible chat app that is free without a trial, and wants to know exactly where free ends.",
     indexNote: "Exactly what the free version holds forever, and what a paid plan adds.",
     sections: [
       ["What does a free Bible chat include in Peace Be Still?", `<table class="t"><thead><tr><th>Free version, forever</th><th>Paid plan ($7.99 a month or $39.99 a year)</th></tr></thead><tbody>
-<tr><td>One chat a day, up to 10 messages, shown as “N of 10 messages left today”</td><td>Unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first.</td></tr>
+<tr><td>One chat a day, up to 5 messages, shown as “N of 5 messages left today”</td><td>Unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first.</td></tr>
 <tr><td>The whole King James Bible to read, and a growing set of chapters read aloud</td><td>Chat that remembers what you are carrying</td></tr>
 <tr><td>Today's Bible story</td><td>Every past story and longer journeys</td></tr>
 <tr><td>Your first sleep night free, then one a week</td><td>A sleep session every night, plus ones made for you</td></tr>
@@ -220,8 +220,8 @@ ${V("MAR 4:39")}`],
       ["Is Peace Be Still out yet?", `<p>Not yet. It is coming soon to the App Store and Google Play: search “Peace Be Still”. There is no waitlist and no launch date to wait for.</p>`],
     ],
     faq: [
-      ["Is there a Bible chat app that is free without a subscription?", "Yes. Peace Be Still, coming soon, has a free version with one chat a day of up to 10 messages, the whole King James Bible and today's story, with no subscription, no trial and no ads."],
-      ["How many messages are free each day?", "One conversation a day of up to 10 messages. The app shows how many are left. The count starts again the next day."],
+      ["Is there a Bible chat app that is free without a subscription?", "Yes. Peace Be Still, coming soon, has a free version with one chat a day of up to 5 messages, the whole King James Bible and today's story, with no subscription, no trial and no ads."],
+      ["How many messages are free each day?", "One conversation a day of up to 5 messages. The app shows how many are left. The count starts again the next day."],
       ["Will the free version get smaller later?", "No. Nothing free is ever taken back. That promise is on the price screen."],
       ["Is there a free Bible chat in Spanish?", "Yes. Mi Refugio, the Spanish journey, has the same free version, with the Reina-Valera 1909."],
     ],
@@ -256,7 +256,7 @@ ${V("MAR 4:39")}`],
 <p class="muted">Peace Be Still is not affiliated with Bible Chat, Haven, Creed or any app named here. Names are used only to identify the apps.</p>`],
       ["What does Peace Be Still do differently?", `<ul>
 <li>No trial and no weekly plan: $7.99 a month or $39.99 a year, the price in dollars before you tap.</li>
-<li>A free version that stays free: one chat a day of up to 10 messages, the whole King James Bible and today's story.</li>
+<li>A free version that stays free: one chat a day of up to 5 messages, the whole King James Bible and today's story.</li>
 <li>No ads, ever.</li>
 <li>Verses pasted from a stored King James Version (Reina-Valera 1909 in Spanish); the AI never writes a verse.</li>
 <li>Cancel in two taps, from a link on the paid screen.</li>
@@ -298,7 +298,7 @@ ${V("MAR 4:39")}`],
 </ol>`],
       ["Can I get a refund?", `<p>On iPhone, go to <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>, sign in, choose “Request a refund”, pick the reason and the purchase. Apple decides each request. On Android, Google Play's refund policy explains when you can ask Google for a refund and when you need to ask the app's developer. If you paid on the app's own website, ask the developer.</p>`],
       ["What if I am still in a free trial?", `<p>Cancel at least 24 hours before the trial ends, as Apple advises, so it does not turn into a paid plan. You can usually keep using it until the trial's end date.</p>`],
-      ["Is there a Bible chat with nothing to cancel?", `<p>Peace Be Still has no trial and a free version, so there is nothing to cancel to keep reading. The free version holds the whole King James Bible, one chat a day of up to 10 messages and today's story. A paid plan is $7.99 a month or $39.99 a year, chosen on purpose, and cancels in two taps. It is coming soon to the App Store and Google Play. See <a href="/free-bible-chat/">what stays free</a>.</p>`],
+      ["Is there a Bible chat with nothing to cancel?", `<p>Peace Be Still has no trial and a free version, so there is nothing to cancel to keep reading. The free version holds the whole King James Bible, one chat a day of up to 5 messages and today's story. A paid plan is $7.99 a month or $39.99 a year, chosen on purpose, and cancels in two taps. It is coming soon to the App Store and Google Play. See <a href="/free-bible-chat/">what stays free</a>.</p>`],
     ],
     faq: [
       ["Does deleting a Bible chat app cancel the subscription?", "No. The App Store or Google Play bills it, so it keeps renewing until you cancel in iPhone Settings or Google Play."],
@@ -314,13 +314,13 @@ ${V("MAR 4:39")}`],
     title: "Chat bíblico gratis: lo que siempre es gratis en Peace Be Still · Peace Be Still",
     description: "Qué incluye gratis para siempre Peace Be Still: un chat al día, la Biblia completa en Reina-Valera 1909, sin anuncios y sin prueba gratuita.",
     h1: "Chat bíblico gratis: qué es gratis de verdad, y por cuánto tiempo",
-    definition: "Un chat bíblico gratis es una app donde puedes hacer preguntas sobre la fe y la Biblia sin pagar. Muchas apps dicen ser gratis, pero cierran el chat detrás de una prueba que después cobra cada semana o cada año. En Peace Be Still, que llega muy pronto, el camino gratis es gratis para siempre: un chat al día de hasta 10 mensajes, sin prueba, sin anuncios y sin tarjeta.",
-    quick: "Gratis para siempre: la Biblia completa para leer, la historia bíblica del día, un chat al día de hasta 10 mensajes, tu primera noche para dormir y después una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, diario y tarjetas para compartir. Lo gratis nunca se quita.",
+    definition: "Un chat bíblico gratis es una app donde puedes hacer preguntas sobre la fe y la Biblia sin pagar. Muchas apps dicen ser gratis, pero cierran el chat detrás de una prueba que después cobra cada semana o cada año. En Peace Be Still, que llega muy pronto, el camino gratis es gratis para siempre: un chat al día de hasta 5 mensajes, sin prueba, sin anuncios y sin tarjeta.",
+    quick: "Gratis para siempre: la Biblia completa para leer, la historia bíblica del día, un chat al día de hasta 5 mensajes, tu primera noche para dormir y después una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, diario y tarjetas para compartir. Lo gratis nunca se quita.",
     bestFor: "quien busca un chat bíblico en español que sea gratis sin prueba, y quiere saber dónde termina lo gratis.",
     indexNote: "Lo que es gratis para siempre y lo que agrega el plan pagado.",
     sections: [
       ["¿Qué incluye gratis Mi Refugio?", `<table class="t"><thead><tr><th>Gratis, para siempre</th><th>Plan pagado ($7.99 al mes o $39.99 al año)</th></tr></thead><tbody>
-<tr><td>Un chat al día, hasta 10 mensajes</td><td>Chat bíblico ilimitado y privado. Los chats privados nunca se usan para entrenar IA. Privado hasta 50 mensajes al día. Después se puede elegir el chat gratis, que no es privado; siempre preguntamos antes.</td></tr>
+<tr><td>Un chat al día, hasta 5 mensajes</td><td>Chat bíblico ilimitado y privado. Los chats privados nunca se usan para entrenar IA. Privado hasta 50 mensajes al día. Después se puede elegir el chat gratis, que no es privado; siempre preguntamos antes.</td></tr>
 <tr><td>La Biblia completa en la Reina-Valera 1909, para leer</td><td>Un chat que recuerda lo que estás cargando</td></tr>
 <tr><td>La historia bíblica del día</td><td>Todas las historias anteriores y caminos más largos</td></tr>
 <tr><td>Tu primera noche para dormir, después una por semana</td><td>Una sesión para dormir cada noche</td></tr>
@@ -332,8 +332,8 @@ ${V("MAR 4:39")}`],
 ${V("PSA 91:2", "es")}`],
     ],
     faq: [
-      ["¿Hay un chat bíblico gratis en español?", "Sí. Mi Refugio, el camino en español de Peace Be Still, que llega muy pronto, tiene un chat gratis al día de hasta 10 mensajes, con la Reina-Valera 1909, sin suscripción, sin prueba y sin anuncios."],
-      ["¿Cuántos mensajes son gratis cada día?", "Una conversación al día de hasta 10 mensajes. La app te muestra cuántos te quedan, y al día siguiente empieza de nuevo."],
+      ["¿Hay un chat bíblico gratis en español?", "Sí. Mi Refugio, el camino en español de Peace Be Still, que llega muy pronto, tiene un chat gratis al día de hasta 5 mensajes, con la Reina-Valera 1909, sin suscripción, sin prueba y sin anuncios."],
+      ["¿Cuántos mensajes son gratis cada día?", "Una conversación al día de hasta 5 mensajes. La app te muestra cuántos te quedan, y al día siguiente empieza de nuevo."],
       ["¿Lo gratis va a ser menos después?", "No. Lo gratis nunca se quita. Esa promesa está en la pantalla de precios."],
     ],
     sources: [["Reina-Valera 1909, eBible.org", "https://ebible.org/find/details.php?id=spaRV1909"]],

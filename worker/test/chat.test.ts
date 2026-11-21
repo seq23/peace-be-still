@@ -1,5 +1,5 @@
 import { env } from 'cloudflare:test';
-import { PAID_CHAT_MESSAGES } from '../src/shared';
+import { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES } from '../src/shared';
 import { describe, expect, it, vi } from 'vitest';
 import { buildChatRequest } from '../../app/src/chat/contract';
 import { initial, type Settings } from '../../app/src/model';
@@ -96,17 +96,17 @@ describe('Mi Refugio', () => {
 });
 
 describe('daily limits (D1 triggers)', () => {
-  it('free: one conversation of 10 messages, "remaining" counts down, then the kind limit reply', async () => {
+  it('free: one conversation of FREE_CHAT_MESSAGES messages, "remaining" counts down, then the kind limit reply', async () => {
     const d = deps({ rungList: [scripted('workers-ai', [good()]).rung] });
     const token = await tokenFor(d);
     const conversation = conv();
     const remaining = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < FREE_CHAT_MESSAGES; i++) {
       // Different words each time: the same message over and over is the abuse throttle's (controls.test.ts).
       const res = await call(d, '/api/chat', { body: { ...chatBody(`hello number ${i}`), conversation }, token });
       remaining.push(((await res.json()) as { remaining: number }).remaining);
     }
-    expect(remaining).toEqual([9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
+    expect(remaining).toEqual(Array.from({ length: FREE_CHAT_MESSAGES }, (_, i) => FREE_CHAT_MESSAGES - 1 - i));
     const over = (await (await call(d, '/api/chat', { body: { ...chatBody('hello once more'), conversation }, token })).json()) as { kind: string; remaining: number };
     expect(over.kind).toBe('limit');
     expect(over.remaining).toBe(0);
@@ -120,7 +120,7 @@ describe('daily limits (D1 triggers)', () => {
   it('paid status comes from the server (RevenueCat), not the request: paid:true in the body changes nothing', async () => {
     const d = deps({ rungList: [scripted('workers-ai', [good()]).rung] });
     const r = await chat(d, 'hello', { body: { paid: true } });
-    expect(r.body.remaining).toBe(9);
+    expect(r.body.remaining).toBe(FREE_CHAT_MESSAGES - 1);
     const paid = deps({ rungList: [scripted('workers-ai', [good()]).rung], paidNow: true });
     expect((await chat(paid, 'hello')).body.remaining).toBe(PAID_CHAT_MESSAGES - 1);
   });
@@ -154,9 +154,9 @@ describe('daily limits (D1 triggers)', () => {
     expect(centralDay(after)).toBe('2026-11-21');
     const t0 = await tokenFor(deps());
     const at = (now: number) => deps({ now: () => now, rungList: [scripted('workers-ai', [good()]).rung] });
-    expect((await chat(at(before), 'hello', { token: t0 })).body.remaining).toBe(9);
+    expect((await chat(at(before), 'hello', { token: t0 })).body.remaining).toBe(FREE_CHAT_MESSAGES - 1);
     expect((await chat(at(before), 'again', { token: t0 })).body.kind).toBe('limit'); // new conversation, same day
-    expect((await chat(at(after), 'next day', { token: t0 })).body.remaining).toBe(9);
+    expect((await chat(at(after), 'next day', { token: t0 })).body.remaining).toBe(FREE_CHAT_MESSAGES - 1);
   });
 });
 
@@ -203,9 +203,9 @@ describe('the ladder', () => {
     const body = (await r.json()) as { kind: string; text: string; remaining: number };
     expect(body.kind).toBe('busy');
     expect(body.text).not.toMatch(/resting until tomorrow/);
-    expect(body.remaining).toBe(10);
+    expect(body.remaining).toBe(FREE_CHAT_MESSAGES);
     const ok = deps({ rungList: [scripted('gemini-free', [good()]).rung] });
-    expect(((await (await call(ok, '/api/chat', { token, body: { ...chatBody('hello'), conversation } })).json()) as { remaining: number }).remaining).toBe(9);
+    expect(((await (await call(ok, '/api/chat', { token, body: { ...chatBody('hello'), conversation } })).json()) as { remaining: number }).remaining).toBe(FREE_CHAT_MESSAGES - 1);
   });
   it('a bad answer is regenerated once with the objection; a good second answer is used', async () => {
     const rung = scripted('workers-ai', [{ text: 'God will heal you by Friday.', references: [] }, good()]);

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { PAID_CHAT_MESSAGES } from '../src/gates';
+import { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES } from '../src/gates';
 
 // Every place paid chat is described to people says the fair-use number the worker enforces
 // (PAID_CHAT_MESSAGES) and the monthly heavy-use pause (CHAT_USER_MONTHLY_USD_*), in EN and ES.
@@ -73,4 +73,29 @@ test('NEGATIVE: no customer-facing words say "lane" (internal jargon); code name
   for (const f of files) assert.doesNotMatch(seen(f), jargon, f);
   const products = JSON.parse(read('app/src/config/products.json'));
   assert.equal(products.subscriptionGroup['en-US'], 'Peace Be Still');
+});
+
+test('every message count in customer copy is the setting: the free day is FREE_CHAT_MESSAGES, private ones PAID_CHAT_MESSAGES', () => {
+  const files = execSync('git ls-files app/src/i18n store legal site/content site/public', { cwd: new URL('.', root) }).toString().split('\n')
+    .filter(f => /\.(json|md|mjs|html|txt|xml)$/.test(f));
+  let free = 0;
+  for (const f of files) {
+    const text = read(f);
+    for (const m of text.matchAll(/(\d+) (?:free |more free )?(?:messages|mensajes)|메시지 (\d+)개/g)) {
+      const n = Number(m[1] ?? m[2]);
+      const before = text.slice(Math.max(0, m.index! - 40), m.index! + m[0].length + 12);
+      const paid = /private|privad|paid|pago|plan\b/i.test(before);
+      assert.equal(n, paid ? PAID_CHAT_MESSAGES : FREE_CHAT_MESSAGES, `${f}: "${before.replace(/\s+/g, ' ')}"`);
+      if (!paid) free++;
+    }
+  }
+  assert.ok(free > 30, `only ${free} free counts found: the scan read nothing`);
+  // The limit moment's own lines take the number and price at run time, never a typed one.
+  const en = JSON.parse(read('app/src/i18n/en.json')), es = JSON.parse(read('app/src/i18n/es.json'));
+  for (const t of [en, es]) {
+    assert.match(t['chat.limit.tomorrow'], /%\{count\}/);
+    assert.match(t['chat.limit.upgrade'], /%\{price\}/);
+    assert.doesNotMatch(t['chat.limit.upgrade'] + t['chat.limit.tomorrow'], /\d/);
+  }
+  assert.ok(en['chat.limit.upgrade'].includes(en['paid.chatHeadline']));
 });

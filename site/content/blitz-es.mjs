@@ -48,7 +48,7 @@ export const ES = [
 <tr><td>Domingo</td><td>${q("PSA 107:1")} (Salmos 107:1)</td></tr>
 </tbody></table>`],
       ["¿Hay un devocional diario gratis en español?", `${MI_REFUGIO}
-<p>La versión gratis, que no se acaba, incluye la Biblia completa para leer, la historia bíblica del día, un chat al día de hasta 10 mensajes y una declaración diaria con su versículo. No hay anuncios ni prueba gratuita.</p>`],
+<p>La versión gratis, que no se acaba, incluye la Biblia completa para leer, la historia bíblica del día, un chat al día de hasta 5 mensajes y una declaración diaria con su versículo. No hay anuncios ni prueba gratuita.</p>`],
     ],
     faq: [
       ["¿Cuánto tiempo debe durar un devocional?", "Entre cinco y quince minutos. Es mejor un devocional corto todos los días que uno largo una vez al mes."],
