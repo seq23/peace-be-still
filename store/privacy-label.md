@@ -14,7 +14,7 @@ None. Tracking: No for every row below.
 | Identifiers | Device ID | The anonymous install id, created the first time someone chats | App Functionality | Yes | No |
 | Identifiers | User ID | RevenueCat's anonymous app user id | App Functionality | Yes | No |
 | Purchases | Purchase History | Subscription receipts read through Apple and RevenueCat | App Functionality | Yes | No |
-| Usage Data | Product Interaction | Messages sent per install per day, for the free and paid limits (deleted within 48 hours) | App Functionality | Yes | No |
+| Usage Data | Product Interaction | Messages sent per install per day, for the free and paid limits, and short answer-pattern hashes (8 characters, no words) so answers do not repeat (both deleted within 48 hours) | App Functionality | Yes | No |
 | Sensitive Info | Sensitive Info | The door chosen and the chat voice travel with each chat message and can suggest religious belief or race | App Functionality | Yes | No |
 
 ## Data not collected
