@@ -29,3 +29,26 @@ export function openRouter(apiKey: string | undefined, models: string[]): Rung {
     throw last;
   };
 }
+
+/**
+ * A PRIVATE paid route through OpenRouter (paid lane research, 21 Nov 2026): one model, served only
+ * by the named US hosts, only with zero data retention and no data collection, never a fallback to
+ * another host. Never DeepSeek's own API (its data is stored in China): the host list decides.
+ */
+export function openRouterPrivate(apiKey: string | undefined, model: string, hosts: string[]): Rung {
+  return async (messages, schema, maxTokens, onUsage) => {
+    if (!apiKey) throw new RungError('missing_key', 'OPENROUTER_KEY_MISSING');
+    if (!hosts.length) throw new RungError('missing_key', 'OPENROUTER_PRIVATE_HOSTS_MISSING');
+    const data = await httpJson('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature: 0.7,
+        provider: { zdr: true, data_collection: 'deny', only: hosts, allow_fallbacks: false },
+        reasoning: { effort: 'low' },
+        response_format: { type: 'json_schema', json_schema: { name: 'reply', strict: true, schema } } }),
+    }, { retries: 1 }) as { choices?: Array<{ message?: { content?: unknown } }>; usage?: { prompt_tokens?: number; completion_tokens?: number; completion_tokens_details?: { reasoning_tokens?: number } } };
+    const u = data.usage;
+    if (u && onUsage) { const think = u.completion_tokens_details?.reasoning_tokens ?? 0; onUsage({ in: u.prompt_tokens ?? 0, out: Math.max(0, (u.completion_tokens ?? 0) - think), think }); }
+    return parseJson(data.choices?.[0]?.message?.content);
+  };
+}

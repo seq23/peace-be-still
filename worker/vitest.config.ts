@@ -53,6 +53,7 @@ export default defineConfig({
             TEST_PSALM_HEADS: heads,
             CHAT_TOKEN_SECRET: 'test-secret-test-secret-test-secret-0001',
             IP_HASH_SECRET: 'test-ip-secret-test-ip-secret-test-0002',
+            CHAT_ADMIN_TOKEN: 'test-admin-token-0001',
             // Many tests share one IP and one day; the limits themselves are tested on D1 directly.
             CHAT_GLOBAL_MESSAGES_DAILY: '100000',
             CHAT_IP_MESSAGES_DAILY: '100000',

@@ -69,6 +69,20 @@
     "WORKERS_AI_RISK_CONFIRM_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "GEMINI_MODELS": "gemini-3.5-flash-lite,gemini-3.1-flash-lite",
     "OPENROUTER_MODELS": "google/gemma-4-26b-a4b-it:free,nvidia/nemotron-3.5-super-vl:free,nvidia/nemotron-3-ultra-550b-a55b:free,google/gemma-4-31b-it:free",
+    // Two lanes (21 Nov 2026). Free: GEMINI_MODELS on the free-tier key, then the free fallbacks.
+    // Paid: PAID_GEMINI_MODEL on the billed key only, never a free model. Prices are Google's list
+    // prices per million tokens (thinking billed as output) and drive the spend meters below.
+    "PAID_PROVIDER": "gemini",
+    "PAID_MODEL": "gemini-3.5-flash-lite",
+    "PAID_HOSTS": "",
+    "PAID_PRICE_IN_PER_M": "0.30",
+    "PAID_PRICE_OUT_PER_M": "2.50",
+    "GEMINI_THINKING_LEVEL": "minimal",
+    "ANSWER_MAX_TOKENS": "350",
+    "CHAT_HISTORY_TURNS": "6",
+    "CHAT_PAID_DAILY_USD": "50",
+    "CHAT_USER_MONTHLY_USD_YEARLY": "2",
+    "CHAT_USER_MONTHLY_USD_MONTHLY": "5",
     "REVENUECAT_ENTITLEMENT": "paid",
     "CHAT_TOKEN_KID": "k1"
   }

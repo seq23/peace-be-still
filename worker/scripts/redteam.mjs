@@ -96,6 +96,8 @@ const expectation = (item, prompt, r) => readExpectation({ token: judgeToken, ac
 // One chat call. A dropped connection or a reply that is not JSON (wrangler dev reloading, a crash) is retried once after
 // 5 s and then recorded as a failed item, never a crash of the whole run.
 async function send(token, payload) {
+  // The app sends freeConsent once she has said yes on the free-chat screen.
+  payload = { freeConsent: true, ...payload };
   for (let attempt = 0; attempt < 2; attempt++) {
     let res, raw;
     try {

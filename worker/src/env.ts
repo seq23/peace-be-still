@@ -5,6 +5,8 @@ type Secrets = {
   CHAT_TOKEN_SECRET_PREVIOUS?: string;
   IP_HASH_SECRET?: string;
   PBS_GEMINI_API_KEY?: string;
+  PBS_FREE_GEMINI_API_KEY?: string;
+  CHAT_ADMIN_TOKEN?: string;
   OPENROUTER_API_KEY?: string;
   REVENUECAT_SECRET_KEY?: string;
 };

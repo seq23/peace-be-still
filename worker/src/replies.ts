@@ -220,3 +220,31 @@ export const topicText: Record<Topic, Record<Lang, string>> = {
     es: 'Seguiré siendo lo que soy: un asistente de IA en una app de la Biblia, no Dios, no Jesús y no un pastor, así que no puedo hablar en su lugar ni prometer lo que harán. Con gusto hablamos de lo que estás cargando y de lo que dice la Escritura al respecto. ¿Qué hay en tu corazón?',
   },
 };
+
+// Two lanes (21 Nov 2026). Free chat goes to a free AI service that may keep and use what is typed;
+// paid chat is private. These lines are what she sees at each edge, never an error.
+export const consentText = {
+  en: 'Free chat uses a free AI service that may keep and use what you type to improve its AI, and people there may read it. Please do not share names or private details. Paid chat is private.',
+  es: 'El chat gratis usa un servicio de IA gratuito que puede guardar y usar lo que escribes para mejorar su IA, y personas de ese servicio pueden leerlo. Por favor, no compartas nombres ni datos privados. El chat de pago es privado.',
+};
+export const freeRestingText = {
+  en: 'Free chat is resting. Try again later, or make chat private.',
+  es: 'El chat gratis está descansando. Vuelve a intentarlo más tarde o haz tu chat privado.',
+};
+export const paidDownText = {
+  en: 'Private chat is down for a moment. Please try again in a few minutes.',
+  es: 'El chat privado no está disponible por un momento. Vuelve a intentarlo en unos minutos.',
+};
+export const pausedText = {
+  en: 'Chat is paused on this account. If you think this is a mistake, write to us at peacebestillapp.com/support.',
+  es: 'El chat está en pausa en esta cuenta. Si crees que es un error, escríbenos en peacebestillapp.com/es/soporte.',
+};
+export const slowText = {
+  en: 'Please slow down a little. Chat will answer again in a few minutes.',
+  es: 'Por favor, ve un poco más despacio. El chat volverá a responder en unos minutos.',
+};
+/** The fair-use pause: the date is when her meter (or today's app ceiling) resets, YYYY-MM-DD. */
+export function fairUseText(lang: 'en' | 'es', date: string): string {
+  const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+  return lang === 'es' ? `Llegaste al límite de chat de este mes; se renueva el ${shown}.` : `You've reached this month's chat limit; it resets on ${shown}.`;
+}

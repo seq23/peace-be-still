@@ -8,10 +8,12 @@
 //  - 'busy': at least one rung only failed for a moment -> "give it a minute", chat stays open.
 import { reserve, logCode } from './counts';
 import { RungError, type JsonSchema, type Message, type Rung } from './providers/types';
+import { microCost } from './controls';
 
-export type LadderRung = { id: string; call: Rung; cap: number; day: string };
+/** price: per-million-token dollars for a billed rung (the paid lane); its cost is tallied as paid_spend_micro. */
+export type LadderRung = { id: string; call: Rung; cap: number; day: string; price?: { in: number; out: number } };
 export type Metrics = Map<string, number>;
-export const tally = (m: Metrics, key: string) => m.set(key, (m.get(key) ?? 0) + 1);
+export const tally = (m: Metrics, key: string, by = 1) => m.set(key, (m.get(key) ?? 0) + by);
 export type LadderResult = { rung: string; data: unknown } | { empty: 'out' | 'busy' };
 
 /** The provider said today's quota is used up: no more calls to it until its day turns. */
@@ -25,7 +27,10 @@ export async function runLadder(db: D1Database, rungs: LadderRung[], messages: M
   for (const rung of rungs) {
     if (!(await reserve(db, rung.day, `calls:${rung.id}`, rung.cap))) { tally(metrics, `capped:${rung.id}`); continue; }
     try {
-      const data = await rung.call(messages, schema, maxTokens);
+      const data = await rung.call(messages, schema, maxTokens, u => {
+        tally(metrics, `tok_in:${rung.id}`, u.in); tally(metrics, `tok_out:${rung.id}`, u.out); tally(metrics, `tok_think:${rung.id}`, u.think);
+        if (rung.price) tally(metrics, 'paid_spend_micro', microCost(u, rung.price.in, rung.price.out));
+      });
       if (!valid(data)) throw new RungError('malformed', 'WRONG_SHAPE');
       tally(metrics, `ok:${rung.id}`);
       return { rung: rung.id, data };

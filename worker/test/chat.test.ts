@@ -10,7 +10,7 @@ import { call, chat, chatBody, conv, deps, freshIp, good, NOW, scripted, throwin
 describe('contract with phase 1', () => {
   it("a request built from the app's Settings gets an answer (door 'faith', not 'gods-word')", async () => {
     const settings: Settings = { ...initial, door: 'faith', age: 'adult', voice: 'church', journey: 'Hush Harbor' };
-    const body = buildChatRequest(settings, conv(), [{ role: 'user', text: 'My mama died last week.' }]);
+    const body = buildChatRequest(settings, conv(), [{ role: 'user', text: 'My mama died last week.' }], true);
     expect(body).not.toBeNull();
     const d = deps({ rungList: [scripted('workers-ai', [good()]).rung] });
     const res = await call(d, '/api/chat', { body, token: await tokenFor(d) });
@@ -85,7 +85,7 @@ describe('Mi Refugio', () => {
     const rung = scripted('workers-ai', [{ text: 'Duele mucho, y Dios está cerca. Habla con tu mamá o con un consejero de la escuela. Señor, acompáñanos en este dolor.', references: ['Salmos 34:18'] }]);
     const settings: Settings = { ...initial, door: 'faith', age: 'teen', voice: 'teen', journey: 'Mi Refugio' };
     const d = deps({ rungList: [rung.rung] });
-    const res = await call(d, '/api/chat', { body: buildChatRequest(settings, conv(), [{ role: 'user', text: 'mi abuela murió' }]), token: await tokenFor(d, 'teen') });
+    const res = await call(d, '/api/chat', { body: buildChatRequest(settings, conv(), [{ role: 'user', text: 'mi abuela murió' }], true), token: await tokenFor(d, 'teen') });
     const json = (await res.json()) as { kind: string; scripture: Array<{ translation: string; text: string }> };
     expect(json.kind).toBe('answer');
     expect(rung.calls[0][0].content).toMatch(/adolescente de 13 a 17/);
@@ -101,11 +101,12 @@ describe('daily limits (D1 triggers)', () => {
     const conversation = conv();
     const remaining = [];
     for (let i = 0; i < 10; i++) {
-      const res = await call(d, '/api/chat', { body: { ...chatBody('hello'), conversation }, token });
+      // Different words each time: the same message over and over is the abuse throttle's (controls.test.ts).
+      const res = await call(d, '/api/chat', { body: { ...chatBody(`hello number ${i}`), conversation }, token });
       remaining.push(((await res.json()) as { remaining: number }).remaining);
     }
     expect(remaining).toEqual([9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
-    const over = (await (await call(d, '/api/chat', { body: { ...chatBody('hello'), conversation }, token })).json()) as { kind: string; remaining: number };
+    const over = (await (await call(d, '/api/chat', { body: { ...chatBody('hello once more'), conversation }, token })).json()) as { kind: string; remaining: number };
     expect(over.kind).toBe('limit');
     expect(over.remaining).toBe(0);
   });

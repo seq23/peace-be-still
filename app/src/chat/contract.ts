@@ -11,9 +11,13 @@ export type ChatRequest = {
   language: Settings['language'];
   journey?: string;
   scripture?: boolean;
+  /** She agreed, once, that free chat goes to a free AI service that may keep what she types. Free chat needs it. */
+  freeConsent?: boolean;
 };
 export type ChatScripture = { ref: string; translation: 'KJV' | 'RV1909'; text: string; book: string; chapter: number; verse: number; endVerse?: number };
-export type ChatKind = 'answer' | 'crisis' | 'fallback' | 'limit' | 'busy' | 'no_free_model';
+// consent: free chat needs her one-time yes first. paused: chat is paused on this install (operator or
+// abuse throttle). fair_use: the paid lane's monthly (or today's app-wide) cost ceiling is reached.
+export type ChatKind = 'answer' | 'crisis' | 'fallback' | 'limit' | 'busy' | 'no_free_model' | 'consent' | 'paused' | 'fair_use';
 export type ChatResponse = {
   kind: ChatKind;
   /** True for every answer written (or stood in for) by the AI helper; false for fixed human-written replies. */
@@ -32,7 +36,7 @@ export type ChatResponse = {
 };
 
 /** Null when chat is closed to her (under 13, or no door chosen yet). Only the last 12 turns travel. */
-export function buildChatRequest(settings: Settings, conversation: string, messages: ChatTurn[]): ChatRequest | null {
+export function buildChatRequest(settings: Settings, conversation: string, messages: ChatTurn[], freeConsent = false): ChatRequest | null {
   if (!settings.door || settings.age === 'child' || settings.age === null) return null;
   return {
     conversation,
@@ -42,5 +46,6 @@ export function buildChatRequest(settings: Settings, conversation: string, messa
     language: settings.language,
     ...(settings.journey ? { journey: settings.journey } : {}),
     ...(settings.scripture ? { scripture: true } : {}),
+    ...(freeConsent ? { freeConsent: true } : {}),
   };
 }

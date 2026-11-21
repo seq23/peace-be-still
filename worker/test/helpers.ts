@@ -67,7 +67,8 @@ export const conv = () => crypto.randomUUID();
 export function chatBody(text: string | string[], over: Record<string, unknown> = {}) {
   const texts = Array.isArray(text) ? text : [text];
   const messages = texts.map((t, i) => ({ role: i % 2 === 0 ? 'user' : 'assistant', text: t }));
-  return { conversation: conv(), messages, door: 'faith', voice: 'plain', language: 'en', ...over };
+  // The app sends freeConsent once she has said yes on the free-chat screen; tests start there.
+  return { conversation: conv(), messages, door: 'faith', voice: 'plain', language: 'en', freeConsent: true, ...over };
 }
 
 export async function chat(d: Deps, text: string | string[], opts: { age?: 'teen' | 'adult'; token?: string; body?: Record<string, unknown>; ip?: string } = {}) {

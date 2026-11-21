@@ -7,7 +7,8 @@ export class RungError extends Error {
   constructor(readonly kind: RungErrorKind, code: string) { super(code); }
 }
 /** One rung: messages in, parsed JSON out (structured output on every provider; prose is never parsed). */
-export type Rung = (messages: Message[], schema: JsonSchema, maxTokens: number) => Promise<unknown>;
+export type Usage = { in: number; out: number; think: number };
+export type Rung = (messages: Message[], schema: JsonSchema, maxTokens: number, onUsage?: (u: Usage) => void) => Promise<unknown>;
 export function parseJson(value: unknown): unknown {
   if (value && typeof value === 'object') return value;
   if (typeof value !== 'string') throw new RungError('malformed', 'NO_CONTENT');

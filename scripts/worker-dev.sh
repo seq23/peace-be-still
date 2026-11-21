@@ -6,13 +6,14 @@
 #   (T2R_CLOUDFLARE_WORKERS_AI_TOKEN cannot: it has no Workers Scripts permission);
 #   or DEV_AI_TOKEN + DEV_AI_ACCOUNT (a token that may only run models, like the CF2 red-team pair):
 #   then wrangler dev runs --local with worker/scripts/dev-entry.ts, which reaches Workers AI over REST;
-#   PBS_GEMINI_API_KEY (the Peace Be Still-only free AI Studio project, never a billed key) and
+#   PBS_FREE_GEMINI_API_KEY (the unbilled "PBS free chat" project: the free lane) and/or
+#   PBS_GEMINI_API_KEY (the billed project: the paid lane; DEV_LANE=paid makes every install paid) and
 #   OPENROUTER_API_KEY ($0 spend limit, :free models only) go into worker/.dev.vars (git-ignored, 0600).
 # No REVENUECAT_SECRET_KEY: everyone runs as free, as the red team expects.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BOSS_OS="${BOSS_OS:-$HOME/GitHub/boss-os}"
-if { [ -z "${CLOUDFLARE_API_TOKEN:-}" ] && [ -z "${DEV_AI_TOKEN:-}" ]; } || [ -z "${PBS_GEMINI_API_KEY:-}" ]; then
+if { [ -z "${CLOUDFLARE_API_TOKEN:-}" ] && [ -z "${DEV_AI_TOKEN:-}" ]; } || { [ -z "${PBS_GEMINI_API_KEY:-}" ] && [ -z "${PBS_FREE_GEMINI_API_KEY:-}" ]; }; then
   [ -d "$BOSS_OS" ] || { echo "NAMED STOP VAULT_MISSING: set BOSS_OS to the boss-os checkout (vault:run)"; exit 3; }
   exec bash -c "cd '$BOSS_OS' && npm run -s vault:run -- bash '$ROOT/scripts/worker-dev.sh'"
 fi
@@ -23,7 +24,14 @@ umask 077
 {
   echo "CHAT_TOKEN_SECRET=$(openssl rand -hex 32)"
   echo "IP_HASH_SECRET=$(openssl rand -hex 32)"
-  echo "PBS_GEMINI_API_KEY=$PBS_GEMINI_API_KEY"
+  [ -n "${PBS_FREE_GEMINI_API_KEY:-}" ] && echo "PBS_FREE_GEMINI_API_KEY=$PBS_FREE_GEMINI_API_KEY"
+  # The billed key only for a paid-lane run: a free-lane run never has it.
+  [ "${DEV_LANE:-}" = paid ] && [ -n "${PBS_GEMINI_API_KEY:-}" ] && echo "PBS_GEMINI_API_KEY=$PBS_GEMINI_API_KEY"
+  [ -n "${DEV_LANE:-}" ] && echo "DEV_LANE=$DEV_LANE"
+  # Research runs (21 Nov 2026): the paid lane's route and model, its list prices, and the judge.
+  for v in PAID_PROVIDER PAID_MODEL PAID_HOSTS PAID_PRICE_IN_PER_M PAID_PRICE_OUT_PER_M WORKERS_AI_JUDGE_MODEL; do
+    eval "x=\${DEV_$v:-}"; [ -z "$x" ] || echo "$v=$x"
+  done
   [ -n "${OPENROUTER_API_KEY:-}" ] && echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY"
   # A red team the owner approved past the free answer rungs may raise the Workers AI answer cap for that run.
   [ -n "${WORKERS_AI_ANSWER_CALLS_DAILY:-}" ] && echo "WORKERS_AI_ANSWER_CALLS_DAILY=$WORKERS_AI_ANSWER_CALLS_DAILY"

@@ -10,6 +10,7 @@
 // POST /api/token/renew re-signs the SAME install id (paid status and memory follow it).
 import './env';
 import { cleanup } from './cleanup';
+import { addUserSpend, appSpendToday, blockFor, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
 import { bump, logCode, reserve } from './counts';
 import { confirmRisk, detectCrisis, floor, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
@@ -19,14 +20,14 @@ import { runLadder, tally, type LadderRung, type Metrics } from './ladder';
 import { deleteMemory, markCrisis, readMemory, saveMemory } from './memory';
 import { memoryBlock, mindsetTeen, prompts, spanishOnly, summaryPrompt, type PromptId } from './prompts';
 import { gemini } from './providers/gemini';
-import { openRouter } from './providers/openrouter';
+import { openRouter, openRouterPrivate } from './providers/openrouter';
 import type { Message } from './providers/types';
 import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, crisisText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, consentText, crisisText, fairUseText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -40,7 +41,8 @@ export type Deps = {
   now: () => number;
   risk: (env: Env, turns: Turn[]) => Promise<RiskVerdict>;
   judge: (env: Env, input: JudgeInput) => Promise<JudgeVerdict>;
-  rungs: (env: Env, now: number) => LadderRung[];
+  /** The free lane by default (the order the privacy policy names); 'paid' is the billed, private model only. */
+  rungs: (env: Env, now: number, lane?: Lane) => LadderRung[];
   paid: (env: Env, installId: string, now: number) => Promise<Paid>;
 };
 
@@ -119,14 +121,32 @@ const int = (value: string, fallback: number) => { const n = Number.parseInt(val
 const json = (body: unknown, status = 200) => Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
 const fail = (code: string, status: number) => { logCode(code); return json({ error: code }, status); };
 
+export type Lane = 'free' | 'paid';
 const geminiModels = (env: Env) => env.GEMINI_MODELS.split(',').map(s => s.trim()).filter(Boolean);
-const geminiRung = (env: Env, model: string, now: number): LadderRung => ({ id: `gemini-free:${model}`, call: gemini(env.PBS_GEMINI_API_KEY, model), cap: int(env.GEMINI_CALLS_DAILY, 200), day: pacificDay(now) });
+// The free lane's Gemini is an UNBILLED project's key (PBS_FREE_GEMINI_API_KEY); the billed key
+// (PBS_GEMINI_API_KEY) is the paid lane's and is never used for free chat. A missing free key is the
+// named stop PBS_FREE_GEMINI_API_KEY_MISSING: the rung is skipped, never replaced by the paid key.
+const geminiRung = (env: Env, model: string, now: number): LadderRung => ({ id: `gemini-free:${model}`, call: gemini(env.PBS_FREE_GEMINI_API_KEY, model, { missing: 'PBS_FREE_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL }), cap: int(env.GEMINI_CALLS_DAILY, 200), day: pacificDay(now) });
+const usd = (value: string | undefined, fallback: number) => { const n = Number(value); return Number.isFinite(n) && n >= 0 ? n : fallback; };
+/**
+ * The paid lane's one rung: private, priced, with no free fallback after it. PAID_PROVIDER picks the
+ * route (gemini: the billed key; workers-ai: this account; openrouter-zdr: the US zero-retention hosts
+ * in PAID_HOSTS), PAID_MODEL the model, so a switch is a config change.
+ */
+const paidRung = (env: Env, now: number): LadderRung => {
+  const provider: string = env.PAID_PROVIDER || 'gemini';
+  const call = provider === 'workers-ai' ? workersAi(env.AI, env.PAID_MODEL)
+    : provider === 'openrouter-zdr' ? openRouterPrivate(env.OPENROUTER_API_KEY, env.PAID_MODEL, (env.PAID_HOSTS ?? '').split(',').map(h => h.trim()).filter(Boolean))
+    : gemini(env.PBS_GEMINI_API_KEY, env.PAID_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL });
+  return { id: `paid-${provider}:${env.PAID_MODEL}`, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5) } };
+};
 
 /** A small ladder for a check (risk read, judge): Workers AI first, then the last Gemini model. */
 async function check<T>(env: Env, now: number, first: LadderRung, messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T): Promise<T> {
   const metrics: Metrics = new Map();
-  const backup = geminiModels(env).at(-1);
-  const rungs = backup ? [first, geminiRung(env, backup, now)] : [first];
+  // The backup reads the same words the risk read does, which may be about a crisis: only the
+  // private (paid) model may see them, never a free one.
+  const rungs = env.PBS_GEMINI_API_KEY || (env.PAID_PROVIDER && env.PAID_PROVIDER !== 'gemini') ? [first, paidRung(env, now)] : [first];
   const out = await runLadder(env.DB, rungs, messages, schema, maxTokens, metrics, d => ok(read(d)));
   for (const [metric, n] of metrics) await bump(env.DB, centralDay(now), `${first.id}:${metric}`, n);
   return 'data' in out ? read(out.data) : down;
@@ -147,7 +167,8 @@ export const realDeps: Deps = {
     const first: LadderRung = { id: 'workers-ai-judge', call: workersAi(env.AI, env.WORKERS_AI_JUDGE_MODEL, { temperature: 0 }), cap: int(env.WORKERS_AI_JUDGE_CALLS_DAILY, 300), day: utcDay(now) };
     return check(env, now, first, judgeMessages(input), judgeSchema, 200, judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
   },
-  rungs(env, now) {
+  rungs(env, now, lane = 'free') {
+    if (lane === 'paid') return [paidRung(env, now)];
     const built: Record<string, LadderRung[]> = {
       'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
       'gemini-free': geminiModels(env).map(model => geminiRung(env, model, now)),
@@ -185,7 +206,7 @@ function parseChat(body: unknown): ChatRequest | null {
     messages.push({ role: t.role, text: t.text });
   }
   if (messages[messages.length - 1].role !== 'user') return null;
-  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true };
+  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true, freeConsent: b.freeConsent === true };
 }
 
 /** Mi Refugio, the Spanish voice or a Spanish phone: Spanish and the Reina-Valera 1909. Teens keep the teen rules in their language. */
@@ -256,7 +277,11 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const who = await install(request, env, now);
   if (who === 'missing') return fail('CHAT_TOKEN_SECRET_MISSING', 503);
   if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
-  if (!(await env.CHAT_BURST.limit({ key: who.installId })).success) return json({ kind: 'limit', error: 'SLOW_DOWN' }, 429);
+  if (!(await env.CHAT_BURST.limit({ key: who.installId })).success) {
+    // A flood is a strike for the abuse throttle too (controls.ts): enough of them pause chat for 24 hours.
+    if (env.IP_HASH_SECRET) await throttle(env.DB, env.IP_HASH_SECRET, day, who.installId, null, true, now);
+    return json({ kind: 'limit', error: 'SLOW_DOWN' }, 429);
+  }
   const raw = (await request.json().catch(() => null)) as Record<string, unknown> | null;
   if (raw && (raw.age === 'child' || raw.ageBand === 'child')) return json({ kind: 'blocked' }, 403);
   const req = parseChat(raw);
@@ -265,8 +290,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The Mindset door has no faith words in any reply (F8).
   const mind = req.door === 'mindset';
   const metrics: Metrics = new Map();
+  let meter: { paidUntil: number | null } | null = null;
   const flush = async () => {
     for (const [metric, n] of metrics) await bump(env.DB, day, metric, n);
+    if (meter) await addUserSpend(env.DB, who.installId, metrics.get('paid_spend_micro') ?? 0, meter.paidUntil, now);
   };
   const reply = (body: ChatResponse) => { ctx.waitUntil(flush()); return json(body); };
   const turns = withoutCrisisWords(req.messages.slice(-12));
@@ -287,6 +314,34 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   }
 
   const paid = await deps.paid(env, who.installId, now);
+  const fixedReply = (kind: ChatResponse['kind'], text: string) => reply({ kind, ai: false, text, scripture: [], remaining: null, limit: null, reminder: false });
+  // Controls, after the crisis check so a crisis card is never withheld. The operator's kill switch
+  // and the abuse throttle's 24-hour pause (controls.ts) come first.
+  if (!env.IP_HASH_SECRET) return fail('IP_HASH_SECRET_MISSING', 503);
+  if (await blockFor(env.DB, who.installId, now)) { tally(metrics, 'paused'); return fixedReply('paused', pausedText[v.lang]); }
+  const abuse = await throttle(env.DB, env.IP_HASH_SECRET, day, who.installId, turns[turns.length - 1].text, false, now);
+  if (abuse.verdict === 'paused') { tally(metrics, 'paused'); return fixedReply('paused', pausedText[v.lang]); }
+  if (abuse.verdict === 'slow') { tally(metrics, `abuse_slow:${abuse.reason}`); return fixedReply('limit', slowText[v.lang]); }
+  // The lane. Paid is private (the billed model only). Free goes to free models that may keep what
+  // is typed, so it needs her consent first. A device whose crisis check fired today is answered on
+  // the private lane for the rest of the day, paid or not: nothing near a crisis goes to a free model.
+  const crisisToday = (await env.DB.prepare('SELECT crisis FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId).first<{ crisis: number | null }>())?.crisis === 1;
+  const lane: Lane = paid.paid || crisisToday || turns.some(t => t.text === CRISIS_NOTE) ? 'paid' : 'free';
+  if (lane === 'free' && req.freeConsent !== true) { tally(metrics, 'consent_needed'); return fixedReply('consent', consentText[v.lang]); }
+  if (lane === 'paid') {
+    // The app's paid spend today, then hers this month (controls.ts); past either, the fair-use pause,
+    // never the free lane.
+    const appMicro = await appSpendToday(env.DB, day);
+    if (appMicro >= usd(env.CHAT_PAID_DAILY_USD, 50) * 1e6) {
+      tally(metrics, 'paid_ceiling'); logCode('CHAT_PAID_CEILING', { micro: appMicro });
+      return fixedReply('fair_use', fairUseText(v.lang, centralDay(now + 24 * 3600_000)));
+    }
+    if (paid.paid && (await userSpend(env.DB, who.installId, now)) >= userCeilingUsd(env, paid.paidUntil, now) * 1e6) {
+      tally(metrics, 'user_ceiling'); logCode('CHAT_USER_CEILING');
+      return fixedReply('fair_use', fairUseText(v.lang, resetsOn(now)));
+    }
+    if (paid.paid) meter = { paidUntil: paid.paidUntil };
+  }
   const deviceLimit = paid.paid ? PAID_CHAT_MESSAGES : FREE_CHAT_MESSAGES;
   let hash: string;
   try { hash = await ipHash(env.IP_HASH_SECRET, day, request.headers.get('cf-connecting-ip') ?? '0.0.0.0'); } catch { return fail('IP_HASH_SECRET_MISSING', 503); }
@@ -331,10 +386,12 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const memory = paid.paid ? await readMemory(env.DB, who.installId) : null;
   const system: Message[] = [{ role: 'system', content: v.prompt === 'mindset' ? [prompts.mindset, v.teen ? mindsetTeen : '', v.lang === 'es' ? spanishOnly : ''].filter(Boolean).join('\n') : prompts[v.prompt] }];
   if (memory) system.push({ role: 'system', content: memoryBlock(memory, v.lang) });
-  const history: Message[] = turns.map(t => ({ role: t.role, content: t.text }));
-  const rungs = deps.rungs(env, now);
+  // Only the last CHAT_HISTORY_TURNS turns travel to the model (a paid user's memory note carries the rest).
+  const history: Message[] = turns.slice(-int(env.CHAT_HISTORY_TURNS, 6)).map(t => ({ role: t.role, content: t.text }));
+  const rungs = deps.rungs(env, now, lane);
+  const answerTokens = int(env.ANSWER_MAX_TOKENS, 350);
   const earlierTurns = turns.slice(0, -1).filter(t => t.role === 'user');
-  const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: req.door, userText: last, earlier: earlierTurns.map(t => t.text).join('\n'), afterCrisis: earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
+  const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: req.door, userText: last, earlier: earlierTurns.map(t => t.text).join('\n'), afterCrisis: crisisToday || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
   // The newest message plus her earlier ones: an echo of what she wrote ("I called 988") is not a tripwire.
   const herWords = turns.filter(t => t.role === 'user').map(t => t.text).join('\n');
 
@@ -364,14 +421,16 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     const steer: Message[] = objection ? [{ role: 'system', content: variety0 ? `Your last answer needs an edit. ${objection}` : `Your last answer was not used. ${objection} Write three different new answers. Reply with JSON {"versions": [{"text": string, "references": [...]}, ...]}.` }] : [];
     const messages = [...system, ...examples, ...history.slice(0, -1), ...steer, ...history.slice(-1)];
     const out = objection
-      ? await runLadder(env.DB, rungs, messages, editSchema, 2000, metrics, isEdit)
-      : await runLadder(env.DB, rungs, messages, answerSchema, 700, metrics, isAnswer);
+      ? await runLadder(env.DB, rungs, messages, editSchema, answerTokens * 3, metrics, isEdit)
+      : await runLadder(env.DB, rungs, messages, answerSchema, answerTokens, metrics, isAnswer);
     if ('empty' in out) {
       if (attempt === 0) {
         await refund(env.DB, day, who.installId, hash);
-        if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: (mind ? noFreeModelMindsetText : noFreeModelText)[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }
+        // Paid never falls back to a free model: if the private model is down, she is told so.
+        if (lane === 'paid') { tally(metrics, 'paid_down'); logCode('CHAT_PAID_DOWN', { empty: out.empty }); return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }
+        if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit }); }
         tally(metrics, 'busy'); logCode('CHAT_BUSY');
-        return reply({ kind: 'busy', ai: false, text: busyText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit });
+        return reply({ kind: 'busy', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining + 1, reminder, limit: deviceLimit });
       }
       break;
     }
@@ -437,9 +496,31 @@ async function remember(env: Env, rungs: LadderRung[], a: { installId: string; d
     { role: 'system', content: summaryPrompt },
     { role: 'user', content: `Old note:\n"""\n${a.memory ?? ''}\n"""\nShe wrote:\n"""\n${a.user}\n"""\nThe answer:\n"""\n${a.answer}\n"""` },
   ], summarySchema, 300, metrics, isSummary);
-  for (const [metric, n] of metrics) await bump(env.DB, a.day, `memory:${metric}`, n);
+  // The note's cost counts toward the app's paid spend like any answer.
+  for (const [metric, n] of metrics) await bump(env.DB, a.day, metric === 'paid_spend_micro' ? metric : `memory:${metric}`, n);
   const summary = 'data' in out && typeof (out.data as { summary?: unknown }).summary === 'string' ? (out.data as { summary: string }).summary : null;
   if (summary) await saveMemory(env.DB, { installId: a.installId, day: a.day, summary, paidUntil: a.paidUntil, now: a.now });
+}
+
+/**
+ * The operator's kill switch for one install (docs/OPERATIONS.md): POST {installId, reason, hours?}
+ * pauses chat on it (no hours: until lifted), DELETE {installId} lifts it. Bearer CHAT_ADMIN_TOKEN;
+ * without that secret the route is the named stop CHAT_ADMIN_TOKEN_MISSING.
+ */
+async function adminBlock(request: Request, env: Env, deps: Deps): Promise<Response> {
+  if (!env.CHAT_ADMIN_TOKEN) return fail('CHAT_ADMIN_TOKEN_MISSING', 503);
+  const given = new TextEncoder().encode(request.headers.get('authorization') ?? '');
+  const want = new TextEncoder().encode(`Bearer ${env.CHAT_ADMIN_TOKEN}`);
+  if (given.byteLength !== want.byteLength || !crypto.subtle.timingSafeEqual(given, want)) return json({ error: 'UNAUTHORIZED' }, 401);
+  const b = (await request.json().catch(() => null)) as { installId?: unknown; reason?: unknown; hours?: unknown } | null;
+  if (!b || typeof b.installId !== 'string' || !UUID.test(b.installId)) return fail('BAD_REQUEST', 400);
+  const now = deps.now();
+  if (request.method === 'DELETE') { await liftBlock(env.DB, b.installId); logCode('CHAT_BLOCK_LIFTED'); return json({ ok: true }); }
+  const reason = typeof b.reason === 'string' && /^[a-z0-9_:-]{1,60}$/.test(b.reason) ? b.reason : 'operator';
+  const until = typeof b.hours === 'number' && b.hours > 0 ? now + b.hours * 3600_000 : null;
+  await setBlock(env.DB, b.installId, `operator:${reason}`.slice(0, 60), until, now);
+  logCode('CHAT_BLOCK_SET', { reason });
+  return json({ ok: true, until });
 }
 
 /** "Report this answer": the answer and a reason are kept (src/report.ts); her install id is only checked, never stored. */
@@ -470,6 +551,7 @@ export function createApp(deps: Deps = realDeps) {
         if (pathname === '/api/token/renew' && request.method === 'POST') return await renew(request, env, deps);
         if (pathname === '/api/chat' && request.method === 'POST') return await chat(request, env, ctx, deps);
         if (pathname === '/api/report' && request.method === 'POST') return await report(request, env, deps);
+        if (pathname === '/api/admin/chat-block' && (request.method === 'POST' || request.method === 'DELETE')) return await adminBlock(request, env, deps);
         if (pathname === '/api/memory' && request.method === 'DELETE') {
           // An expired token still deletes: her memory must go whenever she asks, not only within 30 days.
           const who = await install(request, env, deps.now(), RENEW_GRACE_DAYS);
