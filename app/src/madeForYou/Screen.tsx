@@ -140,6 +140,11 @@ function Sessions({ context, close, play, api, crisis: shownCrisis }: Pick<Props
         style={{ minHeight: 48, justifyContent: 'center', paddingHorizontal: 18, borderWidth: 1, borderColor: palette.accent, borderRadius: 24 }}>
         <Text style={{ color: palette.ink, fontFamily: fonts.strong, fontSize: 16 }}>{link.label}</Text>
       </Pressable>)}
+      {/* A way back for a reply that fired on the wrong words: nothing was kept, and she can write again. */}
+      <Body>{copy('crisisNothingSaved')}</Body>
+      <Pressable accessibilityRole="button" onPress={() => { setCrisis(''); setText(''); }} style={{ minHeight: 48, justifyContent: 'center' }}>
+        <Text style={{ color: palette.accent, fontFamily: fonts.strong, fontSize: 16 }}>{copy('writeAgain')}</Text>
+      </Pressable>
     </View>
       : shelf && !pending && !canAsk ? <Body>{copy(shelf.requestedToday ? 'usedToday' : 'full')}</Body>
       : canAsk && <React.Fragment>

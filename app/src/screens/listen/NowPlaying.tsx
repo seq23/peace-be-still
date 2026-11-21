@@ -17,6 +17,9 @@ function clock(seconds: number) {
   return [Math.floor(seconds / 60), String(Math.floor(seconds % 60)).padStart(2, '0')].join(':');
 }
 
+/** The Worker signs private links for an hour (worker/src/madeForYou.storage.ts): re-sign before that. */
+export const PRIVATE_LINK_FRESH_MS = 50 * 60_000;
+
 export function NowPlaying({ track, close, privateStream }: {
   track: Track;
   close: () => void;
@@ -44,6 +47,9 @@ export function NowPlaying({ track, close, privateStream }: {
   const [sourceFailed, setSourceFailed] = useState(false);
   useEffect(() => () => signing.current?.abort(), []);
   const pausedHere = useRef(false);
+  // A private session's link is signed for an hour; a resume after 50 minutes paused signs a fresh one
+  // (the player starts from the saved position), so a long pause never ends in a 403.
+  const signedAt = useRef(0);
   const downloadRequest = useRef(false);
   const current = privateStream
     ? state.track?.kind === track.kind && state.track.ref === track.ref && state.track.sha256 === track.sha256
@@ -92,14 +98,16 @@ export function NowPlaying({ track, close, privateStream }: {
       if (playing) {
         await player.pause();
         pausedHere.current = true;
-      } else if (current && pausedHere.current) {
+      } else if (current && pausedHere.current && !(privateStream && Date.now() - signedAt.current > PRIVATE_LINK_FRESH_MS)) {
         player.resume();
         pausedHere.current = false;
       } else if (privateStream) {
+        pausedHere.current = false;
         const controller = new AbortController();
         signing.current = controller;
         try {
           const file = await privateStream.url(controller.signal);
+          signedAt.current = Date.now();
           if (!controller.signal.aborted) await player.play({ ...track, file }, null);
         } catch {
           if (!controller.signal.aborted) setSourceFailed(true);

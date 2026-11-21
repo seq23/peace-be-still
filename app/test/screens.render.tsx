@@ -808,6 +808,7 @@ test('paid sessions render every state, then play, report and delete in the shar
     let fail = true;
     let posted: unknown;
     const sent: Array<[string, string, unknown]> = [];
+    let signs = 0;
     const fetchMock = mock.method(globalThis, 'fetch', async (input: string, init: RequestInit) => {
       const url = new URL(input);
       assert.equal(new Headers(init.headers).get('authorization'), 'Bearer test-install');
@@ -817,7 +818,7 @@ test('paid sessions render every state, then play, report and delete in the shar
       }
       assert.equal(url.pathname, '/api/made-for-you');
       assert.equal(url.searchParams.get('kind'), context.kind);
-      if (url.searchParams.has('play')) return Response.json({ url: stream });
+      if (url.searchParams.has('play')) { signs++; return Response.json({ url: stream }); }
       return Response.json(shelf);
     });
     const api: Api = {
@@ -910,6 +911,18 @@ test('paid sessions render every state, then play, report and delete in the shar
     assert.equal(sessionHistory.get(`pbs.made-for-you.played:${ready.id}`), '1');
     await press(listen, '+15');
     assert.equal(player.position(), 15);
+    // A short pause resumes the same link; after 50 minutes paused the link is signed again (it lasts an hour).
+    assert.equal(signs, 1);
+    const resume = (faith ? es : en)['listen.resume'];
+    await press(listen, w.pause);
+    await press(listen, resume);
+    assert.equal(signs, 1, 'a short pause resumes without a new link');
+    await press(listen, w.pause);
+    const realNow = Date.now;
+    Date.now = () => realNow() + 51 * 60_000;
+    try { await press(listen, resume); } finally { Date.now = realNow; }
+    assert.equal(signs, 2, 'a long pause gets a fresh link before playing');
+    assert.equal(player.source(), stream);
     await press(listen, copy.report);
     await press(listen, copy.reason);
     assert.deepEqual(sent.pop(), ['POST', '/api/report', { session: ready.id, reason: 'wrong' }]);
@@ -959,6 +972,12 @@ test('a crisis note gets the chat’s fixed reply with one-tap 988 help, and not
     await press(tree, lang === 'es' ? 'Enviar un texto al 988' : 'Text 988');
     assert.deepEqual((globalThis as any).__pbsOpened, ['tel:988', 'sms:988']);
     assert.equal(host(tree, 'TextInput').length, 0, 'the form gives way to the help');
+    // A way back when the words were not a crisis: nothing was kept, and the empty form returns.
+    assert.ok(texts(tree).includes(lang === 'es' ? 'No se guardó ni se envió nada de lo que escribiste.' : 'Nothing you wrote was saved or sent on.'));
+    await press(tree, lang === 'es' ? 'Escribir otra cosa' : 'Write something else');
+    assert.equal(host(tree, 'TextInput').length, 1);
+    assert.equal(host(tree, 'TextInput')[0].props.value, '', 'her words are not kept in the form either');
+    assert.ok(!texts(tree).includes(replies[lang]));
     await act(async () => tree.unmount());
   }
 });
