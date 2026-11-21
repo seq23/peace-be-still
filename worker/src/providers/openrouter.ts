@@ -44,7 +44,8 @@ export function openRouterPrivate(apiKey: string | undefined, model: string, hos
       headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
       body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature: 0.7,
         provider: { zdr: true, data_collection: 'deny', only: hosts, allow_fallbacks: false },
-        reasoning: { effort: 'low' },
+        // Thinking off (run 10b root cause: with effort low, DeepSeek V4.1 spent all 350 tokens reasoning and sent no content).
+        reasoning: { enabled: false },
         response_format: { type: 'json_schema', json_schema: { name: 'reply', strict: true, schema } } }),
     }, { retries: 1 }) as { choices?: Array<{ message?: { content?: unknown } }>; usage?: { prompt_tokens?: number; completion_tokens?: number; completion_tokens_details?: { reasoning_tokens?: number }; prompt_tokens_details?: { cached_tokens?: number } } };
     const u = data.usage;

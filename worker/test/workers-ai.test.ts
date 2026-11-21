@@ -26,3 +26,15 @@ describe('thinking off for chat answers (run 10 root cause)', () => {
     expect(sent[2].chat_template_kwargs).toBeUndefined();
   });
 });
+
+describe('the private OpenRouter route', () => {
+  it('asks for zero retention, no data collection, the named hosts only, and thinking off', async () => {
+    const { openRouterPrivate } = await import('../src/providers/openrouter');
+    let body: Record<string, any> = {};
+    const real = globalThis.fetch;
+    globalThis.fetch = (async (_u: string, init: RequestInit) => { body = JSON.parse(String(init.body)); return new Response(JSON.stringify({ choices: [{ message: { content: '{"text":"x","references":[],"risk":"none"}' } }] })); }) as typeof fetch;
+    try { await openRouterPrivate('k', 'deepseek/deepseek-v4.1-flash', ['deepinfra'])([{ role: 'user', content: 'hi' }], {}, 350); } finally { globalThis.fetch = real; }
+    expect(body.provider).toEqual({ zdr: true, data_collection: 'deny', only: ['deepinfra'], allow_fallbacks: false });
+    expect(body.reasoning).toEqual({ enabled: false });
+  });
+});
