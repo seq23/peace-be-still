@@ -9,6 +9,8 @@ import { SLEEP } from "./blitz-sleep.mjs";
 import { BLACK } from "./blitz-black.mjs";
 import { APPS } from "./blitz-apps.mjs";
 import { ES } from "./blitz-es.mjs";
+import { KO } from "./diaspora-ko.mjs";
+import { AFRICA } from "./diaspora-africa.mjs";
 import { V } from "./scripture.mjs";
 
 export const PAGES = [
@@ -342,4 +344,6 @@ ${V("PSA 91:2", "es")}`],
   ...BLACK,
   ...APPS,
   ...ES,
+  ...KO,
+  ...AFRICA,
 ];

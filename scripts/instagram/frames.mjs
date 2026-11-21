@@ -6,6 +6,7 @@
 // marks words the translators added).
 import crypto from 'node:crypto';
 import { BOOK, bible } from '../content/lib.mjs';
+import { BOOK_KO } from '../../site/content/scripture.mjs';
 
 export const SITE_DIR = 'social/ig';
 export const BASE_URL = 'https://peacebestillapp.com';
@@ -58,7 +59,9 @@ export function verse(ref, lang = 'en') {
   const text = bible(es ? 'RV1909' : 'KJV').get(ref);
   if (!text) throw new Error(`${ref} is not in the ${es ? 'RV1909' : 'KJV'} file`);
   const [code, cv] = ref.split(' ');
-  return { ref, text, cite: `${es ? BOOK[code].es : BOOK[code].en} ${cv}`, tr: es ? 'Reina-Valera 1909' : 'King James' };
+  // Korean cards (drafts, 21 Nov 2026) quote the KJV in English with the Korean book name.
+  const name = es ? BOOK[code].es : lang === 'ko' ? BOOK_KO[code] : BOOK[code].en;
+  return { ref, text, cite: `${name} ${cv}`, tr: es ? 'Reina-Valera 1909' : 'King James' };
 }
 
 /** "Coming soon" on the pictures becomes "Free on iPhone" once site/config/store.json has the App Store link. */

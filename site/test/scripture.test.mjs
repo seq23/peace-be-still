@@ -14,7 +14,7 @@ const inner = (html) => html.replace(/<[^>]+>/g, "").trim();
 export function checkPage(name, s) {
   const bad = [];
   let n = 0;
-  for (const m of s.matchAll(/<blockquote class="verse"([^>]*)><p>([\s\S]*?)<\/p>/g)) {
+  for (const m of s.matchAll(/<blockquote class="verse"([^>]*)><p\b[^>]*>([\s\S]*?)<\/p>/g)) {
     const ref = m[1].match(/data-ref="([^"]+)"/)?.[1], tr = m[1].match(/data-tr="([^"]+)"/)?.[1];
     if (!ref || !tr) { bad.push(`${name}: a verse block with no stored reference (typed verse?)`); continue; }
     n++;
@@ -36,6 +36,10 @@ test("a planted wrong or typed verse is caught", () => {
   assert.equal(wrong.bad.length, 2);
   const right = checkPage("r", '<q class="v" data-ref="PSA 4:8" data-tr="RV1909" data-part="1">En paz me acostaré</q>');
   assert.deepEqual(right.bad, []);
+  // Korean pages mark the English verse lang="en"; the attribute must not hide a changed verse.
+  const ko = checkPage("k", '<blockquote class="verse" data-ref="PSA 4:8" data-tr="KJV"><p lang="en">I will lay me down in peace.</p><cite>시편 4:8 · KJV</cite></blockquote>');
+  assert.equal(ko.n, 1);
+  assert.equal(ko.bad.length, 1);
 });
 
 test("every verse on every built page equals the stored KJV / RV1909 text", () => {
