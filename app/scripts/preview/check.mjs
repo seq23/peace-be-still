@@ -2,7 +2,7 @@
 // not on props. It catches what the render tests cannot see:
 // - every tab label fits its own box (the bar once clipped "Today" to "Todav");
 // - every radio announces its state (aria-checked), one checked per group;
-// - each scripture row is exactly one labelled switch, and tapping it flips aria-checked;
+// - each scripture row is exactly one labelled switch, and tapping it flips aria-checked (every switch is labelled, none doubled);
 // - the onboarding guard: a fresh /journeys goes to the door, an onboarded /door goes to Today, back from Today
 //   after a first run never shows the door;
 // - the other round-4 review findings, on the real page: week count, Mi Refugio Spanish, age bands, the age
@@ -91,11 +91,14 @@ export async function check(target) {
     for (const [path, name] of [['/settings', '05-settings-mindset-dark'], ['/journeys?door=mindset&change=1', '06-picker-mindset-dark']]) {
       const { page, context } = await open(path, mindset, 'dark');
       await page.getByText('Weave scripture in', { exact: true }).first().waitFor({ timeout: 30000 });
-      const switches = page.locator('[role=switch]');
+      // Settings also holds the daily reminder switch, so the scripture row is found by its own label.
+      const all = page.locator('[role=switch]');
+      const labels = await all.evaluateAll(nodes => nodes.map(n => n.getAttribute('aria-label')));
+      expect(labels.every(Boolean), `${path}: a switch has no label (${JSON.stringify(labels)})`);
+      expect(labels.length === new Set(labels).size, `${path}: one row drawn as two switches (${JSON.stringify(labels)})`);
+      const switches = page.locator('[role=switch][aria-label="Weave scripture in"]');
       const count = await switches.count();
       expect(count === 1, `${path}: ${count} switch elements for one scripture row (want 1)`);
-      const label = count ? await switches.first().getAttribute('aria-label') : null;
-      expect(!!label, `${path}: the switch has no label`);
       await shot(page, `${name}-off`);
       if (count) {
         const before = await switches.first().getAttribute('aria-checked');
@@ -103,6 +106,21 @@ export async function check(target) {
         expect((await switches.first().getAttribute('aria-checked')) === String(before !== 'true'), `${path}: tapping the switch did not flip aria-checked (was ${before})`);
       }
       await shot(page, `${name}-on`);
+      await context.close();
+    }
+    // 3b. The daily reminder in Settings: one labelled switch; on shows the time, off hides it.
+    {
+      const { page, context } = await open('/settings', adult);
+      const reminder = page.locator('[role=switch][aria-label="Daily reminder"]');
+      await reminder.waitFor({ timeout: 30000 });
+      expect((await reminder.getAttribute('aria-checked')) === 'false', 'the daily reminder starts off');
+      await reminder.click();
+      await page.getByText('One a day at 8:30 PM.', { exact: true }).waitFor({ timeout: 10000 }).catch(() => undefined);
+      expect((await reminder.getAttribute('aria-checked')) === 'true' && await shows(page, 'One a day at 8:30 PM.'), 'turning the reminder on did not show "One a day at 8:30 PM."');
+      expect((await page.locator('input[type=time]').count()) === 1, 'the reminder time is not a time field on the web preview');
+      await shot(page, '07-settings-reminder-on');
+      await reminder.click();
+      expect((await reminder.getAttribute('aria-checked')) === 'false' && (await page.locator('input[type=time]').count()) === 0, 'turning the reminder off left it on or kept the time row');
       await context.close();
     }
     // 4. The onboarding guard.

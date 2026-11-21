@@ -10,6 +10,7 @@ import { createDownloads } from './downloads';
 import { audioBaseUrl, type Lang, type Track } from './library';
 import library from './library.json';
 import { createPlayer, type Player } from './player';
+import { markFirstValue } from '../reminders';
 
 /** Bundled at install time from audio/manifest.jsonl by build-library.ts. */
 export const tracks = library as unknown as Track[];
@@ -26,6 +27,7 @@ function getPlayer(): Player {
   void prepareAudioSession().catch(() => undefined);
   const player = createPlayer({
     audio: expoAudioOutput(), store, downloads: createDownloads(expoDownloadFiles()), baseUrl, lang: phoneLang(),
+    onFinish: () => void markFirstValue(),
   });
   AppState.addEventListener('change', (next) => {
     if (next === 'active') player.foreground(); else if (next === 'background') void player.background();

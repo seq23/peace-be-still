@@ -6,6 +6,7 @@ import { onboarded, startRoute, voicesFor, type Language, type Voice } from '../
 import { useSettings, useT } from '../src/settings';
 import { BackLink, Body, Card, Chevron, Label, Screen, SwitchRow, Title, styles, usePalette } from '../src/ui';
 import { fonts } from '../src/theme/tokens';
+import { ReminderSettings } from '../src/reminders';
 
 export default function SettingsScreen() {
   const { settings, save } = useSettings();
@@ -49,6 +50,7 @@ export default function SettingsScreen() {
           {voices.map((voice: Voice) => radio(voice, t(`voice.${voice}`), settings.voice === voice, () => save({ ...settings, voice })))}
         </View>
       ) : null}
+      <ReminderSettings />
       <View role="radiogroup" style={{ gap: 10, marginTop: 10 }}>
         <Label>{t('settings.language')}</Label>
         {(['en', 'es'] as Language[]).map(language => radio(language, t(`language.${language}`), settings.language === language, () => save({ ...settings, language })))}
