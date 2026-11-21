@@ -165,7 +165,7 @@ for (const p of PAGES) write(p.path, render(p));
 write("/questions/", renderIndex("en", PAGES.filter((p) => p.lang === "en")));
 write("/es/preguntas/", renderIndex("es", PAGES.filter((p) => p.lang === "es")));
 // Shared parts inside the hand-written pages, between markers.
-const STATIC = [["index.html", "en", "/"], ["es/index.html", "es", "/es/"], ["about.html", "en", "/about"], ["privacy.html", "en", "/privacy"], ["terms.html", "en", "/terms"], ["es/privacidad.html", "es", "/es/privacidad"], ["es/terminos.html", "es", "/es/terminos"], ["404.html", "en", "/404"]];
+const STATIC = [["index.html", "en", "/"], ["es/index.html", "es", "/es/"], ["about.html", "en", "/about"], ["privacy.html", "en", "/privacy"], ["terms.html", "en", "/terms"], ["es/privacidad.html", "es", "/es/privacidad"], ["es/terminos.html", "es", "/es/terminos"], ["support.html", "en", "/support"], ["es/soporte.html", "es", "/es/soporte"], ["404.html", "en", "/404"]];
 let filled = 0;
 for (const [f, lang, path] of STATIC) {
   const file = join(pub, f);
