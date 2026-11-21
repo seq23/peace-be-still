@@ -30,8 +30,9 @@ export async function cleanup(db: D1Database, now: number): Promise<Record<strin
     db.prepare('DELETE FROM chat_crisis WHERE flagged_at < ?').bind(now - 2 * 86_400_000),
     db.prepare('DELETE FROM chat_paid_spend WHERE paid_until < ? OR month < ?').bind(now - 30 * DAY, new Date(now - 40 * DAY).toISOString().slice(0, 7)),
     db.prepare('DELETE FROM chat_short_day WHERE day < ?').bind(ended),
-    // The first private chat: the IP hash and conversation go after the day; the cohort row (install id, day, yes/no) after FIRST_PRIVATE_KEEP_DAYS.
-    db.prepare('UPDATE chat_first_private SET ip_hash = NULL, conversation = NULL WHERE day < ? AND (ip_hash IS NOT NULL OR conversation IS NOT NULL)').bind(ended),
+    // The first private chat: the IP hash goes after the day. The conversation id (random) stays for the row's life,
+    // so that conversation never carries its private turns to free chat on a later day (review 21 Nov 2026).
+    db.prepare('UPDATE chat_first_private SET ip_hash = NULL WHERE day < ? AND ip_hash IS NOT NULL').bind(ended),
     db.prepare('DELETE FROM chat_first_private WHERE decided_at < ?').bind(now - FIRST_PRIVATE_KEEP_DAYS * DAY),
   ]);
   const [device, ip, token, entitlement, memory, installShapes, shapes, reports, abuse, blocks, crisis, spend, short, firstCleared, firstDeleted] = results.map(r => r.meta.changes ?? 0);

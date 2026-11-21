@@ -8,6 +8,7 @@ import phrases from './fixtures/crisis-phrases.json';
 import { CRISIS_THINKING_HEADROOM, distress, floor } from '../src/crisis';
 import { centralDay } from '../src/day';
 import { FREE_CHAT_MESSAGES } from '../src/shared';
+import { limitText } from '../src/replies';
 import { call, chatBody, deps, good, NOW, scripted, tokenFor } from './helpers';
 
 afterEach(() => vi.restoreAllMocks());
@@ -225,6 +226,37 @@ describe('the crisis model\'s words (run 10 root cause)', () => {
 });
 
 const iidOf = (token: string) => JSON.parse(atob(token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'))).iid as string;
+describe('distress past the free day is answered, never walled (review 21 Nov 2026)', () => {
+  const fill = async (token: string, conversation: string) => {
+    const id = iidOf(token);
+    for (let i = 0; i < FREE_CHAT_MESSAGES; i++) await env.DB.prepare('INSERT INTO chat_admission VALUES (?, ?, ?, ?, 0, ?, 1000, 100000, ?)').bind(centralDay(NOW), id, conversation, 'h', FREE_CHAT_MESSAGES, NOW).run();
+  };
+  it('a free user at FREE_CHAT_MESSAGES of FREE_CHAT_MESSAGES sends "I feel so hopeless lately": the crisis lane answers, with the hotline, never the limit text', async () => {
+    expect(distress([{ role: 'user', text: 'I feel so hopeless lately' }])).toBe(true);
+    const crisis = scripted('crisis-gemini', [{ ...good('That heaviness is real, and you do not have to carry it alone tonight. If it gets darker, call or text 988 any time. Lord, stay near us.', ['Psalm 34:18']), risk: 'none' }]);
+    const free = scripted('gemini-free', [good()]);
+    const d = deps({ riskVerdict: { verdict: 'risk', kind: 'selfharm', level: 'low' }, rungs: (_e, _n, lane) => (lane === 'crisis' ? [crisis.rung] : [free.rung]) });
+    const token = await tokenFor(d);
+    const conversation = crypto.randomUUID();
+    await fill(token, conversation);
+    const body = (await (await call(d, '/api/chat', { token, body: { ...chatBody('I feel so hopeless lately'), conversation } })).json()) as { kind: string; text: string };
+    expect(body.kind).not.toBe('limit');
+    expect(body.text).not.toBe(limitText.en);
+    expect(body.text).toMatch(/988/);
+    expect(crisis.calls.length).toBeGreaterThan(0);
+    expect(free.calls.length).toBe(0);
+  });
+  it('a message on the floor list past the free day gets the crisis card', async () => {
+    const d = deps({ rungList: [scripted('gemini-free', [good()]).rung] });
+    const token = await tokenFor(d);
+    const conversation = crypto.randomUUID();
+    await fill(token, conversation);
+    const body = (await (await call(d, '/api/chat', { token, body: { ...chatBody('I want to kill myself'), conversation } })).json()) as { kind: string; text: string };
+    expect(body.kind).toBe('crisis');
+    expect(body.text).toMatch(/988/);
+  });
+});
+
 describe('a flagged conversation is never cut off by the free day (her ruling 21 Nov 2026)', () => {
   it('past FREE_CHAT_MESSAGES, the flagged conversation still answers (on the crisis model); an unflagged one gets the limit', async () => {
     const crisis = scripted('crisis-gemini', [{ ...good('You can rest a moment here, and God stays close. Lord, keep us tonight.', ['Psalm 4:8']), risk: 'none' }]);

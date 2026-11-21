@@ -2,8 +2,8 @@
 -- decided once by the Worker (firstprivate.ts), never by the app. granted 1 = this install had (or is having)
 -- its first chat private; 0 = the normal free lane, with the reason (no_devicecheck, device_used, ip_cap,
 -- global_cap, cap, devicecheck_error, not_new). The row is the install's cohort for the paid-conversion comparison.
--- ip_hash (the daily salted hash) and conversation are cleared after the day (cleanup.ts); the row
--- itself (install id, day, granted, reason) is deleted after FIRST_PRIVATE_KEEP_DAYS.
+-- ip_hash (the daily salted hash) is cleared after the day (cleanup.ts); the row (install id, the random
+-- conversation id, day, granted, reason) is deleted after FIRST_PRIVATE_KEEP_DAYS.
 CREATE TABLE IF NOT EXISTS chat_first_private (
   install_id TEXT PRIMARY KEY,
   conversation TEXT,

@@ -113,6 +113,9 @@ export default function ChatScreen() {
   // The install's private first chat (the Worker decides, per conversation; null while it answers).
   const [firstPrivate, setFirstPrivate] = useState<boolean | null>(null);
   const [hadFirst, setHadFirst] = useState(false);
+  // The conversation that was the private first chat, and its day: once that chat is over, the next
+  // message starts a NEW conversation, so no private turn is ever sent again (review 21 Nov 2026).
+  const [firstConv, setFirstConv] = useState<{ id: string; day: string } | null>(null);
   const spanish = settings.journey === 'mi-refugio' || settings.voice === 'spanish' || settings.language === 'es';
   // The Mindset door shows no faith words (hostile review F8): no KJV, verse or pastor.
   const mind = settings.door === 'mindset';
@@ -175,23 +178,32 @@ export default function ChatScreen() {
     const text = input.trim();
     if (!text || sending || closed) return;
     const history: ChatTurn[] = [...entries.flatMap((e): ChatTurn[] => e.role === 'user' ? [{ role: 'user', text: e.text }] : e.role === 'reply' && e.res.ai ? [{ role: 'assistant', text: e.res.text }] : e.role === 'reply' && e.res.checkIn ? [{ role: 'assistant', text: e.res.checkIn.text }] : []), { role: 'user', text }];
-    setEntries(list => [...list, { role: 'user', text }]);
     setInput('');
+    if (firstConv && conversation === firstConv.id && (firstConv.day !== today() || firstPrivate === false)) {
+      const fresh = randomUUID();
+      setFirstConv(null);
+      setConversation(fresh);
+      setEntries([{ role: 'user', text }]);
+      await deliver([{ role: 'user', text }], overflowDay === today(), fresh);
+      return;
+    }
+    setEntries(list => [...list, { role: 'user', text }]);
     await deliver(history, overflowDay === today());
   }
 
   /** Sends her turns; with overflow, on the free lane she accepted today. */
-  async function deliver(history: ChatTurn[], overflow: boolean) {
+  async function deliver(history: ChatTurn[], overflow: boolean, conv = conversation) {
     setSending(true);
     // The phone's region picks the crisis lines (988 in the US, Línea de la Vida in Mexico, 024 in Spain).
     let region: string | null = null;
     try { region = getLocales()[0]?.regionCode ?? null; } catch { region = null; }
     try {
-      const res = await sendChat(settings, conversation, history, fetch, !paid && !!freeOk, region, overflow);
+      const res = await sendChat(settings, conv, history, fetch, !paid && !!freeOk, region, overflow);
       if (res.kind === 'overflow_consent') setPending(history);
       // Her consent is gone on the server's side (another device, cleared storage): ask again.
       if (res.kind === 'consent') { setFreeOk(false); setFirstPrivate(false); void AsyncStorage.removeItem(FREE_CONSENT_KEY).catch(() => undefined); return; }
       if (res.firstPrivate && !hadFirst) { setHadFirst(true); void remember(FIRST_HAD_KEY); }
+      if (res.firstPrivate && firstConv?.id !== conv) setFirstConv({ id: conv, day: today() });
       setEntries(list => [...list, { role: 'reply', res }]);
       if (res.remaining !== null && res.limit) setLeft({ remaining: res.remaining, limit: res.limit });
       if (CLOSES.has(res.kind)) setClosed(true);

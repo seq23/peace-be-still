@@ -4,6 +4,7 @@ import { env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
 import { call, chatBody, deps, freshIp, good, NOW, scripted } from './helpers';
 import { centralDay } from '../src/day';
+import { cleanup } from '../src/cleanup';
 import { appleDeviceCheck, FIRST_PRIVATE_PER_IP } from '../src/firstprivate';
 import { RungError } from '../src/providers/types';
 import { FREE_CHAT_MESSAGES } from '../src/shared';
@@ -182,6 +183,27 @@ describe('the private first chat', () => {
     const r = await say(d, token, conversation, ['My private worry about money', 'An answer.', 'A new day'], { freeConsent: true });
     expect(r.kind).toBe('answer');
     expect(free.calls.flat().map(m => m.content).join('\n')).not.toMatch(/worry about money/);
+  });
+
+  it('PRIVACY (review probe): day 1 first chat mentions Marcus; after the hourly cleanup, day 2 continues that conversation on free chat and the free model sees no day-1 turn', async () => {
+    const paid = scripted('paid-test', [...answers]);
+    const free = scripted('gemini-free', [good()]);
+    let now = NOW;
+    const d = deps({ now: () => now, deviceCheck: apple().check, rungs: (_e, _n, lane) => (lane === 'free' ? [free.rung] : [paid.rung]) });
+    const token = await freshInstall(d);
+    const conversation = crypto.randomUUID();
+    expect(await probe(d, token, conversation, device('phone-marcus'))).toBe(true);
+    const day1 = ['My brother Marcus stopped talking to me', 'An answer.', 'Marcus said he cannot forgive me'];
+    expect((await say(d, token, conversation, day1.slice(0, 1))).firstPrivate).toBe(true);
+    expect((await say(d, token, conversation, day1)).firstPrivate).toBe(true);
+    now = NOW + 86_400_000 + 3_600_000;
+    await cleanup(env.DB, now);
+    await cleanup(env.DB, now + 3_600_000);
+    const day2 = [...day1, 'An answer.', 'Today I want to try again'];
+    const r = await say(d, token, conversation, day2, { freeConsent: true });
+    expect(r.kind).toBe('answer');
+    expect(free.calls.length).toBeGreaterThan(0);
+    expect(free.calls.flat().map(m => m.content).join('\n')).not.toMatch(/Marcus/);
   });
 
   it('MONEY: past the monthly cap no first chat starts, and one under way stops with the consent, never a silent switch; its spend is on the paid meter', async () => {

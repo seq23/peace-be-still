@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# The ONLY way the chat Worker is deployed (never a bare `wrangler deploy`). Claude runs it after land.
-# Order: config check -> secrets check -> D1 migrations -> Bible rows -> deploy.
+# The ONLY way the chat Worker is deployed (never a bare `wrangler deploy`). Claude runs it after land,
+# under the Boss OS vault: cd ~/GitHub/boss-os && npm run -s vault:run -- bash <repo>/scripts/worker-deploy.sh
+# Order: config check -> secrets check -> DeviceCheck key check and sync -> D1 migrations -> Bible rows -> deploy.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 W="npx --prefix worker wrangler"
@@ -15,6 +16,13 @@ done
 for name in PBS_GEMINI_API_KEY OPENROUTER_API_KEY REVENUECAT_SECRET_KEY; do
   echo "$secrets" | grep -q "\"$name\"" || echo "NOTE ${name}_MISSING: that rung or check is skipped and counted (cd ~/GitHub/boss-os && npm run -s vault:run -- sh -c 'printf %s \"\$$name\" | $W secret put $name $CFG')"
 done
+# The private first chat's Apple DeviceCheck key (worker/src/firstprivate.ts): checked with Apple first
+# (401 = NAMED STOP DEVICECHECK_KEY_REJECTED, nothing deployed), then put from the vault through a pipe.
+node scripts/devicecheck-probe.mjs
+printf %s "$APPLE_DEVICECHECK_KEY" | $W secret put APPLE_DEVICECHECK_KEY $CFG >/dev/null
+printf %s "$APPLE_DEVICECHECK_KEY_ID" | $W secret put APPLE_DEVICECHECK_KEY_ID $CFG >/dev/null
+printf %s "$APPLE_TEAM_ID_PBS" | $W secret put APPLE_TEAM_ID $CFG >/dev/null
+echo "OUTPUT devicecheck: 3 Worker secrets put from the vault"
 $W d1 migrations apply peace-be-still-chat --remote $CFG
 node scripts/worker-bible-load.mjs --remote
 $W deploy $CFG

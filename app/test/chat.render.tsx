@@ -167,6 +167,25 @@ test('the private first chat ends (the private route failed, or the cap): the fr
   } finally { firstAnswer = false; }
 });
 
+test('once the private first chat is over, the next message starts a new conversation carrying none of its turns', async () => {
+  store.clear(); storePaid = false; store.set('peace-be-still-chat-disclosure', 'yes');
+  firstAnswer = true;
+  try {
+    replies.push(answer({ firstPrivate: true }), { kind: 'consent', ai: false, text: 'Free chat needs your yes.', scripture: [], remaining: null, limit: null, reminder: false }, answer());
+    const tree = await mount();
+    await say(tree, 'My brother Marcus stopped talking to me');
+    const firstId = sent.at(-1).conversation;
+    await say(tree, 'Marcus again');
+    firstAnswer = false;
+    await act(async () => tree.root.findAllByProps({ testID: 'free-continue' })[0].props.onPress());
+    await say(tree, 'Today I want to try again');
+    const last = sent.at(-1);
+    assert.notEqual(last.conversation, firstId);
+    assert.deepEqual(last.messages.map((m: { text: string }) => m.text), ['Today I want to try again']);
+    assert.equal(last.freeConsent, true);
+  } finally { firstAnswer = false; }
+});
+
 test('no private first chat (web, Android, a reinstall, the Worker unreachable): the normal free-chat screen first', async () => {
   for (const answerIs of [false, 'down'] as const) {
     store.clear(); storePaid = false; store.set('peace-be-still-chat-disclosure', 'yes');

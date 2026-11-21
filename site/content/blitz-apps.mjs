@@ -446,7 +446,7 @@ ${V("EST 4:14")}`],
     ],
     faq: [
       ["What is the best Bible app for women?", "Our pick is Peace Be Still, coming soon: the women of scripture in its stories, a morning declaration and whispered psalms at night, the whole KJV free to read, with a growing set of chapters read aloud, no ads and no trial. We make it, so weigh that."],
-      ["Is there a Bible app for Black women?", "Peace Be Still's Hush Harbor · Black Bible Chat & Stories has a chat in a Black church voice and Bible stories with Black faces, including Hagar and the Shunammite woman."],
+      ["Is there a Bible app for Black women?", "Peace Be Still's Hush Harbor · Black Bible Chat & Stories has a chat in a Black church voice and daily Bible stories told in that voice, including Hagar and the Shunammite woman."],
       ["Is there a Bible app for women in Spanish?", "Yes. Mi Refugio · Biblia y Chat en Español is the Spanish journey in Peace Be Still, with the Reina-Valera 1909, at launch."],
     ],
     sources: [bg("Esther 4:14", "Esther 4:14 (KJV), Bible Gateway"), bg("1 Samuel 1:9-20", "1 Samuel 1:9-20 (KJV), Bible Gateway")],

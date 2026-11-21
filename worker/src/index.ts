@@ -455,8 +455,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // models' quotas, which the ladder's own caps already keep, and she is never walled.
   // A conversation the crisis check flagged is never cut off by the free day's count (her ruling 21 Nov
   // 2026): it is counted, but meets no device, conversation, IP or app-wide limit while it stays flagged.
-  const unwalled = paid.paid || inCrisis;
-  if (inCrisis && !paid.paid) tally(metrics, 'crisis_past_free_limit_open');
+  // A message on the crisis lane (an earlier flag, or this message's distress read) is never walled either.
+  const crisisOpen = inCrisis || lane === 'crisis';
+  const unwalled = paid.paid || crisisOpen;
+  if (crisisOpen && !paid.paid) tally(metrics, 'crisis_past_free_limit_open');
   const deviceLimit = unwalled ? PAID_UNCAPPED : FREE_CHAT_MESSAGES;
   let hash: string;
   try { hash = await ipHash(env.IP_HASH_SECRET, day, request.headers.get('cf-connecting-ip') ?? '0.0.0.0'); } catch { return fail('IP_HASH_SECRET_MISSING', 503); }
@@ -473,8 +475,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const row = await env.DB.prepare('SELECT messages, first_msg_at, last_reminder_at FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId)
     .first<{ messages: number; first_msg_at: number; last_reminder_at: number | null }>();
   // Paid: private messages left today (none counted on the free lane she chose after them).
-  const remaining = paid.paid ? (overflow ? null : Math.max(0, PAID_CHAT_MESSAGES - (row?.messages ?? 0))) : inCrisis ? null : Math.max(0, deviceLimit - (row?.messages ?? 0));
-  const shownLimit = paid.paid ? (overflow ? null : PAID_CHAT_MESSAGES) : inCrisis ? null : deviceLimit;
+  const remaining = paid.paid ? (overflow ? null : Math.max(0, PAID_CHAT_MESSAGES - (row?.messages ?? 0))) : crisisOpen ? null : Math.max(0, deviceLimit - (row?.messages ?? 0));
+  const shownLimit = paid.paid ? (overflow ? null : PAID_CHAT_MESSAGES) : crisisOpen ? null : deviceLimit;
   // SB 243: a teen is reminded at least every 3 hours of chat that this is AI and to take a break.
   let reminder = false;
   if (v.teen && row && now - (row.last_reminder_at ?? row.first_msg_at) >= THREE_HOURS) {
