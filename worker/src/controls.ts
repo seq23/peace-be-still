@@ -115,5 +115,8 @@ export async function spendStatus(db: D1Database, now: number, capUsd: number) {
 /** A yearly (or lifetime) plan nets less per month than a monthly one, so its ceiling is lower. */
 export function userCeilingUsd(env: { CHAT_USER_MONTHLY_USD_YEARLY?: string; CHAT_USER_MONTHLY_USD_MONTHLY?: string }, paidUntil: number | null, now: number): number {
   const yearly = paidUntil === null || paidUntil - now > 45 * 24 * HOUR;
-  return Number((yearly ? env.CHAT_USER_MONTHLY_USD_YEARLY : env.CHAT_USER_MONTHLY_USD_MONTHLY) ?? (yearly ? 2 : 5));
+  // The amounts live only in wrangler.jsonc (owner's ruling 21 Nov 2026: yearly $1, monthly $5).
+  // A missing or broken value pauses at $0, toward the cap, never unmetered.
+  const usd = Number(yearly ? env.CHAT_USER_MONTHLY_USD_YEARLY : env.CHAT_USER_MONTHLY_USD_MONTHLY);
+  return Number.isFinite(usd) && usd >= 0 ? usd : 0;
 }
