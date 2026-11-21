@@ -94,6 +94,9 @@ STORY_KIND = "stories"
 # Story tellings the Kokoro fill voices (coordinator 21 Nov 2026): Hush Harbor has its own Gemini and clone lanes.
 STORY_TELLINGS = ("plain", "mi-refugio")
 FRONT_KINDS = SESSION_KINDS + (STORY_KIND,)   # queued ahead of the chapters and of failed-chapter retries
+# The voiced floor per session kind (21 Nov 2026: nights the gate estimated at 20 min voiced at 17): a file under it
+# fails its checks and is rendered again slower, then held, never shelved short.
+MIN_SECONDS = {"imagination-night": 18 * 60}
 
 
 def plan(bibles: dict, content: list | None = None) -> list[dict]:
@@ -221,7 +224,8 @@ def session_item(o: dict, f: Path, root: Path, lang: str) -> dict | None:
     return {"file": f"{lang}/{kind}/{ident}-{h}.m4a", "kind": kind, "lang": lang,
             "ref": f"{f.relative_to(root)}#{o.get('id') or f.stem}", "priority": 3, "level": "sleep",
             "heading": o.get("title") if isinstance(o.get("title"), str) else "",
-            "verses": [p[0] for p in pieces], "gaps": [p[1] for p in pieces], "text": "script"}
+            "verses": [p[0] for p in pieces], "gaps": [p[1] for p in pieces], "text": "script",
+            **({"min_seconds": MIN_SECONDS[kind]} if kind in MIN_SECONDS else {})}
 
 
 _CALL_PAUSE = re.compile(r"\[PAUSE (\d+(?:\.\d+)?)s[^\]]*\]")
@@ -635,6 +639,9 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
             rendered = render(item, pron, wav, speed)
             mastered = master(wav, out, item["level"])
             result = qa.check(out, script_of(item), item["lang"], item["level"], quiet=sum(item.get("gaps") or []))
+            if item.get("min_seconds") and result["seconds"] < item["min_seconds"]:
+                result = {**result, "pass": False, "problems": [*result["problems"],
+                          f"length {result['seconds']:.0f}s voiced is under the {item['min_seconds']}s floor"]}
             if result["pass"] or not qa.speech_problems(result["problems"]):
                 break
     finally:

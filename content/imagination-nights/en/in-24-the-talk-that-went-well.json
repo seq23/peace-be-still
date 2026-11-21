@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You are walking toward the place where you will talk. Notice your steps are even. [pause 20]\n\nTake one slow breath before you begin. Feel your feet on the ground. [pause 23]\n\nSit or stand across from them. See their face. Let it be an ordinary face, not a frightening one. [pause 23]\n\nHear yourself begin. Your voice is calm. You say the first sentence, and it comes out just right. [pause 25]\n\nKeep going. You say the hard part plainly, without rushing and without apologizing for it. [pause 27]\n\nNotice them listening. Notice that the room is still standing. [pause 27]\n\nLet them answer, however they answer. Feel yourself stay steady. You said what was true. [pause 27]\n\nWhen it is over, you walk out into the air. Your shoulders are light. [pause 27]\n\nSay in your mind, I spoke up. I can do hard things kindly. [pause 28]\n\nLet the relief of that walk settle into your chest as you rest. [pause 30]"
+   "text": "You are walking toward the place where you will talk. Notice your steps are even. [pause 31]\n\nTake one slow breath before you begin. Feel your feet on the ground. [pause 34]\n\nSit or stand across from them. See their face. Let it be an ordinary face, not a frightening one. [pause 34]\n\nHear yourself begin. Your voice is calm. You say the first sentence, and it comes out just right. [pause 36]\n\nKeep going. You say the hard part plainly, without rushing and without apologizing for it. [pause 38]\n\nNotice them listening. Notice that the room is still standing. [pause 38]\n\nLet them answer, however they answer. Feel yourself stay steady. You said what was true. [pause 38]\n\nWhen it is over, you walk out into the air. Your shoulders are light. [pause 38]\n\nSay in your mind, I spoke up. I can do hard things kindly. [pause 39]\n\nLet the relief of that walk settle into your chest as you rest. [pause 40]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1122,
+ "est_seconds": 1113,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
    },
    "verdict": "pass"
   },

@@ -14,6 +14,7 @@ import { DeclarationVerse } from './DeclarationVerse';
 import { StoryText } from './StoryText';
 import { mindsetDeclarations, mindsetTopics, plans, topicNames, type TopicId } from './content';
 import { localRecord } from './local';
+import { markFirstValue } from '../../reminders';
 
 export const daily = localRecord('pbs-daily', {
   declarations: [] as string[],
@@ -123,7 +124,7 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
         <DeclarationVerse passage={word.passage} />
         <Body>{t('daily.prayer')}</Body>
       </>}
-      {state.value.declarations.includes(today) ? <Label>{t('daily.done')}</Label> : state.ready && <PillButton onPress={() => update(value => ({ ...value, declarations: [...new Set([...value.declarations, today])] }))}>{t('daily.said')}</PillButton>}
+      {state.value.declarations.includes(today) ? <Label>{t('daily.done')}</Label> : state.ready && <PillButton onPress={() => { update(value => ({ ...value, declarations: [...new Set([...value.declarations, today])] })); void markFirstValue(); }}>{t('daily.said')}</PillButton>}
       {canUse('shareCards') && !share && <TextLink onPress={() => setShare(true)}>{t('share.title')}</TextLink>}
     </Card>}
     {page === 'declaration' && share && <ShareCard text={line} credit={t('daily.title.declaration')} close={() => setShare(false)} />}

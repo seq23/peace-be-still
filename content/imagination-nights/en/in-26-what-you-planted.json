@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is a warm morning. You walk out to the garden with a cup in your hand. [pause 20]\n\nNotice the green. Rows of leaves taller than you remember. [pause 23]\n\nKneel down. Feel the soil, cool and soft. Smell the earth. [pause 23]\n\nFind the first thing ready to pick. Turn it in your fingers. You grew this. [pause 25]\n\nRemember the days it was only dirt, and you watered it anyway. [pause 27]\n\nWalk the rows. Here is something you almost gave up on. It came up after all. [pause 27]\n\nFill a basket slowly. There is more than you need. [pause 27]\n\nPicture giving some away. A neighbor at the fence. A friend who stops by. [pause 27]\n\nSit on the step with the basket at your feet. The sun is on your arms. [pause 28]\n\nSay in your mind, I can wait well. Good things take their time. [pause 28]\n\nLet the garden grow quiet around you, and let the evening come down over it. [pause 30]"
+   "text": "It is a warm morning. You walk out to the garden with a cup in your hand. [pause 28]\n\nNotice the green. Rows of leaves taller than you remember. [pause 31]\n\nKneel down. Feel the soil, cool and soft. Smell the earth. [pause 31]\n\nFind the first thing ready to pick. Turn it in your fingers. You grew this. [pause 33]\n\nRemember the days it was only dirt, and you watered it anyway. [pause 35]\n\nWalk the rows. Here is something you almost gave up on. It came up after all. [pause 35]\n\nFill a basket slowly. There is more than you need. [pause 35]\n\nPicture giving some away. A neighbor at the fence. A friend who stops by. [pause 35]\n\nSit on the step with the basket at your feet. The sun is on your arms. [pause 36]\n\nSay in your mind, I can wait well. Good things take their time. [pause 36]\n\nLet the garden grow quiet around you, and let the evening come down over it. [pause 38]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1142,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
    },
    "verdict": "pass"
   },

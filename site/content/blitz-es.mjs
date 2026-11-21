@@ -88,7 +88,7 @@ ${v("PSA 143:8")}`],
 <p>Jesús mismo oraba temprano: ${q("MAR 1:35")}</p>`],
       ["Lo que esta página no promete", `<p>Orar en la mañana no garantiza un buen día. Es poner el día delante de Dios, pase lo que pase. Si hoy viene algo difícil, la oración no cambia que venga; cambia con quién lo enfrentas.</p>`],
       ["Mi Refugio en Peace Be Still", `${MI_REFUGIO}
-<p>Cada mañana, Morning Word trae un versículo, una declaración para decir en voz alta y una oración corta, con un solo recordatorio suave al día como máximo.</p>`],
+<p>Cada mañana, Morning Word trae un versículo, una declaración para decir en voz alta y una oración corta, con un solo recordatorio suave al día como máximo, que puedes apagar.</p>`],
     ],
     faq: [
       ["¿Qué oración se dice al despertar?", "Una corta y sincera: dar gracias por el día, entregárselo a Dios y pedir guía. Muchas personas rezan también el Padre Nuestro (Mateo 6:9-13) al levantarse."],

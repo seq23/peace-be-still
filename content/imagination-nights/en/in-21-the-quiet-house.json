@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "It is early evening. You are coming home after a long day. [pause 20]\n\nPut your key in the lock, or push the door open. Step inside. [pause 22]\n\nNotice the first thing you smell. Something clean. Something cooking. The plain smell of your own home. [pause 23]\n\nSet your bag down in its place. Take off your shoes. Feel the floor under your feet. [pause 23]\n\nWalk through the rooms slowly. Everything is where it belongs. Nothing is calling for you. [pause 25]\n\nTurn on one soft lamp. Notice how the light falls on the wall. [pause 25]\n\nSomewhere in the house there is a small sound. A clock. The refrigerator humming. Someone you love moving in another room, at ease. [pause 25]\n\nSit down in your favorite spot. Let the chair or the couch hold you. [pause 27]\n\nLook around and notice how quiet it is inside you, too. [pause 27]\n\nSay in your mind, this is a peaceful home. I am at rest here. [pause 28]\n\nLet the quiet of that house fold into the quiet of this room. [pause 30]"
+   "text": "It is early evening. You are coming home after a long day. [pause 26]\n\nPut your key in the lock, or push the door open. Step inside. [pause 28]\n\nNotice the first thing you smell. Something clean. Something cooking. The plain smell of your own home. [pause 29]\n\nSet your bag down in its place. Take off your shoes. Feel the floor under your feet. [pause 29]\n\nWalk through the rooms slowly. Everything is where it belongs. Nothing is calling for you. [pause 31]\n\nTurn on one soft lamp. Notice how the light falls on the wall. [pause 31]\n\nSomewhere in the house there is a small sound. A clock. The refrigerator humming. Someone you love moving in another room, at ease. [pause 31]\n\nSit down in your favorite spot. Let the chair or the couch hold you. [pause 33]\n\nLook around and notice how quiet it is inside you, too. [pause 33]\n\nSay in your mind, this is a peaceful home. I am at rest here. [pause 34]\n\nLet the quiet of that house fold into the quiet of this room. [pause 36]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1174,
+ "est_seconds": 1116,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
    },
    "verdict": "pass"
   },

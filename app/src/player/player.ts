@@ -55,6 +55,8 @@ type Saved = { file: string; positionSeconds: number; savedAt: number };
 
 export function createPlayer(options: {
   audio: AudioOutput; store: Store; downloads: Downloads; baseUrl: string | null; lang: Lang;
+  /** A track played to its end (the daily reminder's first value). */
+  onFinish?: (track: Track) => void;
 }) {
   const { audio, store, downloads, baseUrl, lang } = options;
   let state: PlayerState = { track: null, playing: false, position: 0, sleepEndsAt: null, fading: false, response: null, error: null };
@@ -134,6 +136,7 @@ export function createPlayer(options: {
       loaded = null;
       void store.removeItem(positionKey(track)).catch(() => undefined);
       set({ track: null, playing: false, position: 0, response: null });
+      options.onFinish?.(track);
       return;
     }
     if (state.track !== loaded) return;

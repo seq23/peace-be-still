@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Picture an evening, some weeks from now. The wish has come true. It is not new anymore. It is just part of your life. [pause 10]\n\nYou are at home, at the end of the day. Notice where you are sitting. A couch. A kitchen chair. A porch step. [pause 10]\n\nNotice the light. Maybe it is the last orange light of evening through the window. Maybe it is a lamp. [pause 10]\n\nYou are not thinking about the wish. You are just living after it. You are relaxed in a way you have not been in a long time. [pause 12]\n\nYour phone buzzes. It is someone who knows. They are checking in, the way people do when something good has settled into your life. You smile at the screen. [pause 12]\n\nHear their voice. They say something simple. I am so glad for you. And you say, me too. It still feels good. [pause 15]\n\nPut the phone down. Look around the room. What is different now? Maybe something small. A new key on the counter. A name on a calendar. A letter on the table. [pause 15]\n\nFeel your shoulders. Notice that they are not tight. The worry you used to carry about this is not there. [pause 15]\n\nTake a breath in this scene. Breathe the way someone breathes when a long wait is over. [pause 15]\n\nStay here. You do not need to add anything. Just stay in the evening after. [pause 20]\n\nIf you want, say a quiet sentence in your mind, in the past tense. It happened. It is done. I am glad. [pause 20]\n\nNow let the evening move on a little. You get up and make something warm to drink. Notice the mug in your hands. [pause 15]\n\nYou stand at the window. Outside, the street is quiet. A car passes. Someone's porch light comes on. [pause 15]\n\nYou think about the time before, when you were still waiting. It feels far away now. Like a season that ended. [pause 18]\n\nYou are not proud or anxious. Just settled. This is simply your life now. [pause 18]\n\nLet the scene go a little soft around the edges, the way a room looks when you are almost asleep in it. [pause 20]"
+   "text": "Picture an evening, some weeks from now. The wish has come true. It is not new anymore. It is just part of your life. [pause 13]\n\nYou are at home, at the end of the day. Notice where you are sitting. A couch. A kitchen chair. A porch step. [pause 13]\n\nNotice the light. Maybe it is the last orange light of evening through the window. Maybe it is a lamp. [pause 13]\n\nYou are not thinking about the wish. You are just living after it. You are relaxed in a way you have not been in a long time. [pause 15]\n\nYour phone buzzes. It is someone who knows. They are checking in, the way people do when something good has settled into your life. You smile at the screen. [pause 15]\n\nHear their voice. They say something simple. I am so glad for you. And you say, me too. It still feels good. [pause 18]\n\nPut the phone down. Look around the room. What is different now? Maybe something small. A new key on the counter. A name on a calendar. A letter on the table. [pause 18]\n\nFeel your shoulders. Notice that they are not tight. The worry you used to carry about this is not there. [pause 18]\n\nTake a breath in this scene. Breathe the way someone breathes when a long wait is over. [pause 18]\n\nStay here. You do not need to add anything. Just stay in the evening after. [pause 23]\n\nIf you want, say a quiet sentence in your mind, in the past tense. It happened. It is done. I am glad. [pause 23]\n\nNow let the evening move on a little. You get up and make something warm to drink. Notice the mug in your hands. [pause 18]\n\nYou stand at the window. Outside, the street is quiet. A car passes. Someone's porch light comes on. [pause 18]\n\nYou think about the time before, when you were still waiting. It feels far away now. Like a season that ended. [pause 21]\n\nYou are not proud or anxious. Just settled. This is simply your life now. [pause 21]\n\nLet the scene go a little soft around the edges, the way a room looks when you are almost asleep in it. [pause 23]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close1"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1223,
+ "est_seconds": 1122,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },

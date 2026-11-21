@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "You are waiting for your turn. Notice the room. The chairs. The light. The people talking softly. [pause 20]\n\nFeel your heart beating a little fast. Let it. That is just your body getting ready. [pause 23]\n\nHear your name. Stand up. Walk to the front, one easy step at a time. [pause 23]\n\nLook out at the faces. Find one friendly one, and let your eyes rest there. [pause 25]\n\nTake a breath, and begin. Hear your voice fill the room, clear and warm. [pause 27]\n\nNotice the moment the room gets quiet in the good way. They are listening. [pause 27]\n\nKeep going. Let yourself enjoy it. This is a thing you are good at. [pause 27]\n\nWhen you finish, there is a little pause, and then the sound of people clapping. Someone calls out, that was beautiful. [pause 27]\n\nWalk back to your seat. Feel your face warm and your hands steady. [pause 28]\n\nSay in your mind, my voice belongs in the room. [pause 28]\n\nLet the sound of that room fade softly into the quiet of this one. [pause 30]"
+   "text": "You are waiting for your turn. Notice the room. The chairs. The light. The people talking softly. [pause 27]\n\nFeel your heart beating a little fast. Let it. That is just your body getting ready. [pause 30]\n\nHear your name. Stand up. Walk to the front, one easy step at a time. [pause 30]\n\nLook out at the faces. Find one friendly one, and let your eyes rest there. [pause 32]\n\nTake a breath, and begin. Hear your voice fill the room, clear and warm. [pause 34]\n\nNotice the moment the room gets quiet in the good way. They are listening. [pause 34]\n\nKeep going. Let yourself enjoy it. This is a thing you are good at. [pause 34]\n\nWhen you finish, there is a little pause, and then the sound of people clapping. Someone calls out, that was beautiful. [pause 34]\n\nWalk back to your seat. Feel your face warm and your hands steady. [pause 35]\n\nSay in your mind, my voice belongs in the room. [pause 35]\n\nLet the sound of that room fade softly into the quiet of this one. [pause 37]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1157,
+ "est_seconds": 1114,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.7-19.6 min). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
+    "note": "Plain warm English for a tired woman at 11 PM; ordinary, dignified scenes (the mail table, a diner booth, collards in the garden, a family reunion or open mic, an older woman on a porch at dusk) with no luxury or status fantasy; loneliness, overwork and saying yes too often named gently, not as faults; varied scenes and the shared settles and closes alternate; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm). Anti-AI read: no filler words, no exclamation marks, no em dashes, no repeated sentence frame across nights."
    },
    "verdict": "pass"
   },

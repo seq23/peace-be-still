@@ -79,10 +79,10 @@ function fakeFiles(body: (url: string) => string | Error = () => 'a'.repeat(64))
   return { files, api };
 }
 
-function setup({ baseUrl = BASE as string | null, store = memoryStore(), files = fakeFiles(), autoLoad = true } = {}) {
+function setup({ baseUrl = BASE as string | null, store = memoryStore(), files = fakeFiles(), autoLoad = true, onFinish = undefined as ((t: Track) => void) | undefined } = {}) {
   const audio = fakeAudio({ autoLoad });
   const downloads = createDownloads(files.api);
-  const player = createPlayer({ audio, store, downloads, baseUrl, lang: 'en' });
+  const player = createPlayer({ audio, store, downloads, baseUrl, lang: 'en', onFinish });
   return { audio, store, files, downloads, player };
 }
 
@@ -270,6 +270,19 @@ test('a spot in the last 10 seconds, or a finished track, starts again from the 
   second.audio.finish();
   await flush();
   assert.equal(store.data.size, 0);
+});
+
+test('a track played to its end is reported once (the daily reminder\'s first value); a pause is not', async () => {
+  const finished: string[] = [];
+  const { audio, player } = setup({ onFinish: t => finished.push(t.file) });
+  await player.play(track({ seconds: 100 }), FREE);
+  await player.pause();
+  await flush();
+  assert.deepEqual(finished, []);
+  await player.play(track({ seconds: 100 }), FREE);
+  audio.finish();
+  await flush();
+  assert.deepEqual(finished, [track().file]);
 });
 
 test('the saved spot is applied only after the track reports loaded', async () => {

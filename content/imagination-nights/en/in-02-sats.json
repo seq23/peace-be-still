@@ -22,7 +22,7 @@
   {
    "part": "scene",
    "speaker": "narrator",
-   "text": "Let your body be heavier than it was a minute ago. Your arms. Your legs. Your eyelids. [pause 14]\n\nNow bring in your small scene. See where you are standing. See who is with you. [pause 14]\n\nLet it happen once. The handshake. The hug. The sentence. Feel it in your hands, or on your face. [pause 17]\n\nNow let it happen again, the same way. No need to make it bigger. [pause 17]\n\nAnd again. Let it be a little slower this time. [pause 17]\n\nIf you lose it, that is all right. Just start it again from the beginning. [pause 17]\n\nFeel how natural it is. As if it has happened many times already. As if it is a memory. [pause 20]\n\nLet the words in the scene become very simple. Maybe just one word. Congratulations. Thank you. Welcome home. [pause 20]\n\nSay that word in your mind, softly, in the rhythm of your breathing. [pause 22]\n\nNotice how little effort this takes. You are not building anything. You are only remembering a moment. [pause 20]\n\nIf another thought comes in, let it walk past, like someone crossing the far end of a room. Then come back to your scene. [pause 20]\n\nThe handshake. The hug. The words. Again. [pause 22]\n\nLet the scene get smaller and softer, until it fits inside one breath. [pause 22]\n\nKeep looping it as your thoughts get slow. Let the scene and the sleepiness blur together. [pause 27]"
+   "text": "Let your body be heavier than it was a minute ago. Your arms. Your legs. Your eyelids. [pause 21]\n\nNow bring in your small scene. See where you are standing. See who is with you. [pause 21]\n\nLet it happen once. The handshake. The hug. The sentence. Feel it in your hands, or on your face. [pause 24]\n\nNow let it happen again, the same way. No need to make it bigger. [pause 24]\n\nAnd again. Let it be a little slower this time. [pause 24]\n\nIf you lose it, that is all right. Just start it again from the beginning. [pause 24]\n\nFeel how natural it is. As if it has happened many times already. As if it is a memory. [pause 27]\n\nLet the words in the scene become very simple. Maybe just one word. Congratulations. Thank you. Welcome home. [pause 27]\n\nSay that word in your mind, softly, in the rhythm of your breathing. [pause 29]\n\nNotice how little effort this takes. You are not building anything. You are only remembering a moment. [pause 27]\n\nIf another thought comes in, let it walk past, like someone crossing the far end of a room. Then come back to your scene. [pause 27]\n\nThe handshake. The hug. The words. Again. [pause 29]\n\nLet the scene get smaller and softer, until it fits inside one breath. [pause 29]\n\nKeep looping it as your thoughts get slow. Let the scene and the sleepiness blur together. [pause 34]"
   },
   {
    "part": "close",
@@ -36,17 +36,18 @@
   "close": "close2"
  },
  "pacing": {
-  "words_per_minute": 100,
+  "words_per_minute": 115,
   "pause_marker": "[pause N] = N seconds of quiet",
   "quiet_between_paragraphs_s": 2
  },
- "est_seconds": 1143,
+ "est_seconds": 1112,
  "qa": {
   "gate_version": "library-1",
   "checks": {
    "never_words": "pass",
    "no_faith_links": "pass",
    "neville": "pass",
+   "no_verse_wording": "pass",
    "no_promises": "pass",
    "voice_dialect": "pass",
    "no_quoted_runs": "pass",
@@ -56,7 +57,8 @@
    "speakers": "pass",
    "teaching_length": "pass",
    "length": "pass",
-   "ai_label": "pass"
+   "ai_label": "pass",
+   "verse_read": "pass"
   },
   "first_reader": {
    "route": "claude",
@@ -74,7 +76,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.9-20.4 min)."
+    "note": "Warm, plain English for a tired woman at 11 PM; ordinary scenes (porch light, mug, key in the lock, card and pen) with no luxury or wealth fantasy; moving house and long job searches named gently; two settles with a body scan and two closes so nights vary; pacing by silence (18.5-18.7 min voiced, at the measured 115 wpm)."
    },
    "verdict": "pass"
   },
