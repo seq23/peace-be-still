@@ -20,9 +20,8 @@
     {
       "binding": "DB",
       "database_name": "peace-be-still-chat",
-      // NAMED STOP D1_DATABASE_ID_MISSING: the deploy script refuses this placeholder.
-      // Claude runs `npx wrangler d1 create peace-be-still-chat` once and commits the id here.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      // Created 21 Nov 2026 (first production deploy). The deploy script still refuses an all-zero id.
+      "database_id": "472cc560-8ee6-43fd-89ca-21953d4400de",
       "migrations_dir": "migrations"
     }
   ],
