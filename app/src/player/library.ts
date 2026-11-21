@@ -72,15 +72,21 @@ export function readManifest(jsonl: string, displayOf: (row: ManifestRow) => Tra
     tracks.push(track);
   });
   if (!tracks.length) throw new LibraryEmptyError(skipped.length);
-  return { tracks: latestPerScript(tracks), skipped };
+  return { tracks, skipped };
 }
 
-/** A re-voiced script (edited text, a longer night) is a new file with a new row; only its newest passed row
- * ships, so the shelf never lists two versions of one story or night. Rows are appended in voicing order. */
-function latestPerScript(tracks: Track[]): Track[] {
+/** A re-voiced script (edited text, a longer night) is a new file with a new row, while its older passed file
+ * stays live. The library keeps every passed file; a screen shows ONE per script: the newest it can play now
+ * (published or downloaded), else the newest, so a newer file that is not in R2 yet never hides the old one
+ * that is. Rows are appended in voicing order, so a later track is a newer file. */
+export function onePerScript(tracks: readonly Track[], playable: (track: Track) => boolean): Track[] {
   const key = (t: Track) => `${t.kind}|${t.lang}|${t.ref}`;
-  const last = new Map(tracks.map((t, i) => [key(t), i]));
-  return tracks.filter((t, i) => last.get(key(t)) === i);
+  const pick = new Map<string, number>();
+  tracks.forEach((t, i) => {
+    const had = pick.get(key(t));
+    if (had === undefined || playable(t) || !playable(tracks[had])) pick.set(key(t), i);
+  });
+  return tracks.filter((t, i) => pick.get(key(t)) === i);
 }
 
 export function hasCallAndResponse(track: Track): boolean {

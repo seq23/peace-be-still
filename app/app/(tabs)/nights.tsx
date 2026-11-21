@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useSettings, useT } from '../../src/settings';
 import { isPreviewSample, listenTracks } from '../../src/screens/listen/preview';
-import { trackTitle, type Track } from '../../src/player/library';
+import { onePerScript, trackTitle, type Track } from '../../src/player/library';
 import { byChapter, groupBible, shelfOf, trackBelongsToDoor } from '../../src/screens/listen/catalog';
 import { usePublishedAudio } from '../../src/screens/listen/availability';
 import { downloadAvailable, useOffline } from '../../src/screens/listen/offline';
@@ -15,11 +15,12 @@ export default function Nights() {
   const router = useRouter();
   const published = usePublishedAudio();
   const user = useOffline(settings.age);
-  const visible = listenTracks().filter(track => track.lang === t.locale && trackBelongsToDoor(track, settings.door));
+  const playable = (track: Track) => isPreviewSample(track) || published?.get(track.file) === track.sha256 || downloadAvailable(track, user);
+  // One row per script: a re-voiced night or story shows its newest playable file, falling back to the older one.
+  const visible = onePerScript(listenTracks().filter(track => track.lang === t.locale && trackBelongsToDoor(track, settings.door)), playable);
   const psalms = visible.filter(track => shelfOf(track) === 'psalms').sort(byChapter);
   const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), t.locale);
   const stories = visible.filter(track => shelfOf(track) === (t.locale === 'es' ? 'miRefugio' : 'hushHarbor'));
-  const playable = (track: Track) => isPreviewSample(track) || published?.get(track.file) === track.sha256 || downloadAvailable(track, user);
   // The plain tellings are English only (Spanish phones get Mi Refugio), and listed only once their audio is
   // published: a voiced-but-unpublished story is not shown, and the shelf itself waits for its first story.
   const plainStories = t.locale === 'en' ? visible.filter(track => shelfOf(track) === 'bibleStories' && playable(track)) : [];

@@ -985,6 +985,41 @@ test('plain Bible Stories show only once published: no shelf before, no greyed r
   }
 });
 
+test('a re-voiced night: a newer file not yet published never hides the published one; a failed one leaves it listed', async () => {
+  const person = { ...base, door: 'mindset', journey: 'imagination-nights' };
+  const old = audioTracks.find(track => track.kind === 'imagination-night' && track.lang === 'en')!;
+  assert.ok(old && publishedTracks.includes(old), 'the fixture needs a published English Imagination Night on main');
+  const title = trackTitle(old, 'en');
+  const count = audioTracks.filter(track => track.kind === 'imagination-night' && track.lang === 'en').length;
+  const newer = { ...old, file: old.file.replace(/-[0-9a-f]{8}\.m4a$/, '-ffffffff.m4a'), sha256: 'f'.repeat(64), seconds: old.seconds + 90 } as Track;
+  const before = publishedTracks, live = [...publishedTracks];
+  publishedTracks = live;
+  try {
+    // Old published + new voiced but not in R2 yet: still one row for the night, and it opens the old file.
+    audioTracks.push(newer);
+    let tree = await mount('nights', person);
+    try {
+      assert.ok(strings(tree).includes(i18n.t('listen.nights', { locale: 'en', count })), texts(tree).join(' | '));
+      await press(tree, en['journey.imaginationNights.name']);
+      assert.equal(texts(tree).filter(s => s === title).length, 1);
+      assert.ok(!texts(tree).includes(en['listen.notReady']));
+      await press(tree, title);
+      assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: old.sha256 } }]);
+    } finally { await act(async () => tree.unmount()); }
+    // Old published + new failed (a FAILED row never enters the library): the old one is listed and opens.
+    audioTracks.splice(audioTracks.indexOf(newer), 1);
+    tree = await mount('nights', person);
+    try {
+      await press(tree, en['journey.imaginationNights.name']);
+      await press(tree, title);
+      assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: old.sha256 } }]);
+    } finally { await act(async () => tree.unmount()); }
+  } finally {
+    const n = audioTracks.indexOf(newer); if (n >= 0) audioTracks.splice(n, 1);
+    publishedTracks = before;
+  }
+});
+
 test('Spanish and Mindset shelves show their own library and the current availability', async () => {
   const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
   assert.ok(texts(spanish).includes(es['tabs.nights']));
