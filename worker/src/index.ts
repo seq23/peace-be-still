@@ -62,6 +62,7 @@ const THREE_HOURS = 3 * 3600_000;
 // The regeneration is told in words what was wrong, never a line to copy.
 const OBJECTIONS: Record<string, string> = {
   stock_phrase: 'It used a stock phrase; say it in fresh words of your own.',
+  non_store_scripture: 'It put Bible words in quotation marks or after "says" that are not the printed King James text. Do not retell any verse: name it by its reference and say in your own words what it means for her.',
   echo_opening: 'It opened by restating her question; open with something true and specific instead.',
   glued_words: 'Two words ran together with no space; check the spacing.',
   ends_with_question: 'It ended on a question; end on a short prayer or on one of the verses.',

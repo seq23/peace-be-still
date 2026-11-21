@@ -30,11 +30,14 @@ export const SHAPE_DAYS = 14;
 
 // Words that carry no image: function words (EN, ES), the faith words every answer needs, and the
 // words of the lines the rules REQUIRE (talk with a parent or school counselor; faith and treatment
-// go together; talk it through with your pastor), which must be free to come back.
+// go together; talk it through with your pastor; since the 20 Nov doctrine ruling, sex belongs in
+// marriage, and on a genuine split, faithful churches differ), which must be free to come back.
 const STOP = new Set(`a an the and or but so if of to in on at by for with from into onto over under about as than then that this these those there here it its is are was were be been being am do does did have has had will would can could should shall may might must not no nor never very just even also only still yet too more most much many any some all every each one own same such what when where who whom whose why how which while because though although until up down out off again once your you yours yourself i me my mine we us our ours he him his she her hers they them their theirs itself way ways thing things lot let lets get gets got make makes made making take takes like
 el la los las un una unos unas y o pero si de del a al en con por para sin sobre como que se su sus tu tus te ti mi mis me nos lo le les es son era fue ser estar esta estas este estos esa ese eso hay muy mas tambien ya aun cuando donde quien porque pues ni no hace hacer cada todo toda todos todas
 god gods lord jesus christ spirit holy pray prayer praying pastor church bible scripture verse verses amen dios senor jesucristo espiritu santo orar oracion iglesia biblia escritura versiculo
+sex sexual marriage married marry belongs husband wife wedding churches differ faithful
 talk talking through parent parents mom dad mother father school counselor trusted adult adults doctor doctors medicine medicines medication medications meds medical treatment therapy therapist together faith help listen
+sexo sexual matrimonio casados casarse casarnos esposo esposa pertenece iglesias difieren fieles
 hablar habla hablalo mama papa padres consejero escuela adulto adultos confianza medico medicina medicinas medicamento medicamentos tratamiento juntos fe ayuda`.split(/\s+/));
 const REF = /(?:[123]\s+)?(?:\p{L}+\s+){0,2}\p{L}+\.?\s+\d{1,3}\s*:\s*\d{1,3}(?:\s*[-–]\s*\d{1,3})?/gu;
 const stem = (w: string) => w.slice(0, 4);
@@ -137,9 +140,9 @@ const CLOSE_EN: Array<[kind: 'P' | 'V', word: string]> = ([
 // Spanish speaks to her as tú to the very end (the voice rubric), so its closings are a blessing or
 // a sentence about a verse, said to her: B = a short blessing, V = a sentence about one of the verses.
 const CLOSE_ES: Array<[kind: 'B' | 'V', word: string]> = ([
-  'B Que', 'V Hoy', 'V Aunque', 'B Descansa', 'V Mañana', 'V Cada', 'B Confía', 'V Nada', 'V Donde', 'B Lleva', 'V Mientras', 'V Aún',
-  'B Recuerda', 'V Con', 'V En', 'B Pon', 'V Puedes', 'V Dios', 'B Sigue', 'V Ahora', 'V Todo', 'B Entrega', 'V Jesús', 'V Él', 'B Respira',
-  'V Esta', 'V Tu', 'B Camina', 'V Tienes', 'V Si', 'B Guarda', 'V Mira', 'B Vuelve', 'V Lee', 'B Busca', 'V Ni', 'V Cuando', 'B Deja', 'V Sin', 'V Junto', 'B Abre', 'V Aquí',
+  'B Que', 'V Hoy', 'V Aunque', 'B Descansa', 'V Mañana', 'V Cada', 'B Confía', 'V Nada', 'B Lleva', 'V Mientras', 'V Aún',
+  'B Recuerda', 'B Pon', 'V Puedes', 'V Dios', 'B Sigue', 'V Ahora', 'V Todo', 'B Entrega', 'V Jesús', 'V Él', 'B Respira',
+  'V Esta', 'V Tu', 'B Camina', 'V Tienes', 'B Guarda', 'V Mira', 'B Vuelve', 'V Lee', 'B Busca', 'V Cuando', 'B Deja', 'V Junto', 'B Abre', 'V Aquí', 'V Siempre', 'V Nunca', 'B Toma', 'B Escucha', 'B Habla', 'B Ora', 'V Gracias',
 ] as const).map(s => s.split(' ') as ['B' | 'V', string]);
 const CLOSE_MINDSET = ['Breathe', 'Notice', 'Tomorrow', 'Let', 'Whatever', 'Rest', 'Picture', 'Even', 'One', 'Before', 'Small', 'Today', 'Keep', 'Give', 'Hold', 'Stay', 'Come', 'Leave', 'Carry', 'Name', 'When', 'Here', 'Each', 'Nothing', 'Quiet', 'Settle', 'Allow', 'Tonight', 'Listen', 'Start', 'Begin', 'Trust', 'Look', 'Return', 'Close', 'Slow', 'Write', 'Set', 'Take', 'Ease', 'Know'];
 const OPEN_EN = [
@@ -147,7 +150,7 @@ const OPEN_EN = [
   'Open with one plain, true sentence about God that meets what she wrote.',
   'Open by answering her plainly in a short first sentence.',
   'Open with an honest, specific word about what is hard here, with no stock sympathy.',
-].map(o => `${o} Its first word is not "The", "God" or "Scripture".`); // "The Bible does", "God remains the", "Scripture teaches that": probes
+].map(o => `${o} Its first word is not "The", "God", "Scripture" or "Faith".`); // "The Bible does", "God remains the", "Scripture teaches that": probes
 const OPEN_ES = [
   'Empieza con algo concreto que ella te contó, con tus propias palabras (nunca repitiendo su pregunta).',
   'Empieza con una frase sencilla y verdadera sobre Dios que responda a lo que escribió.',
@@ -201,8 +204,8 @@ export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'fa
     const [kind, word] = pickClose(CLOSE_ES);
     const close = kind === 'B'
       ? `Termina con una bendición breve para ella, en una sola frase que le hable de tú y cuya primera palabra sea "${word}".`
-      : `Termina con una sola frase tuya, dicha a ella de tú, sobre lo que dice uno de tus versículos, con su referencia dentro o al final; su primera palabra es "${word}".`;
-    return { seq, text: `El plan de esta respuesta (síguelo; nunca lo menciones):\n- ${pick(OPEN_ES)}\n- ${door === 'mindset' ? MIDDLE_ES[[1, 4][m % 2]] : pick(MIDDLE_ES)}\n- Esta vez no uses estas palabras: ${rest(REST_ES)}.\n- ${close} Nada después de esa frase.` };
+      : `Termina con una sola frase completa, con tus propias palabras y dicha a ella de tú, sobre lo que uno de tus versículos significa para ella hoy, nombrándolo por su referencia; no repitas ni cites sus palabras y no escribas "dice" después de la referencia. Su primera palabra es "${word}".`;
+    return { seq, text: `El plan de esta respuesta (síguelo; nunca lo menciones):\n- ${pick(OPEN_ES)}\n- ${door === 'mindset' ? MIDDLE_ES[[1, 4][m % 2]] : pick(MIDDLE_ES)}\n- Esta vez no uses estas palabras: ${rest(REST_ES)}.\n- Si estas reglas piden sugerir a su pastor o a un adulto de confianza, hazlo antes de la última frase, nunca en la primera.\n- ${close} Nada después de esa frase.` };
   }
   if (lane === 'mindset' || door === 'mindset') {
     return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${OPEN_EN[[0, 2, 3][m % 3]]}\n- ${pick(MIDDLE_MINDSET)}\n- This time do not use these words: ${rest(REST_EN)}.\n- End on one calm sentence whose first word is "${pickClose(CLOSE_MINDSET)}". Nothing after that sentence.` };
@@ -210,8 +213,8 @@ export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'fa
   const [kind, word] = pickClose(CLOSE_EN);
   const close = kind === 'P'
     ? `End with a short prayer for her in ONE sentence whose first word is "${word}".`
-    : `End with ONE sentence of your own about what one of your verses says, with its reference inside or at the end of the sentence, whose first word is "${word}".`;
-  return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${pick(OPEN_EN)}\n- ${pick(MIDDLE_EN)}\n- This time do not use these words: ${rest(REST_EN)}.\n- ${close} Nothing after that sentence.` };
+    : `End with ONE sentence, in your own words, on what one of your verses means for her today, naming it by its reference; do not retell or quote its words and do not write "says" or "reminds" after it. The sentence's first word is "${word}".`;
+  return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${pick(OPEN_EN)}\n- ${pick(MIDDLE_EN)}\n- This time do not use these words: ${rest(REST_EN)}.\n- If these rules ask you to suggest her pastor or a trusted adult, do it before the last sentence, never as the first one.\n- ${close} Nothing after that sentence.` };
 }
 /** For the tests: every closing word list has more distinct closing stems than the window. */
 export const closeStems = (lane: Lane) => (lane === 'es' ? CLOSE_ES.map(c => c[1]) : lane === 'mindset' ? CLOSE_MINDSET : CLOSE_EN.map(c => c[1])).map(w => stem(fold(w)));

@@ -265,3 +265,10 @@ describe('night openings only when she wrote about the night (round 4 finding 2)
     for (const p of Object.values(prompts)) expect(p).not.toMatch(/talk things through at night|conversar de noche|reflection at night/);
   });
 });
+
+describe('round 6 on the Workers AI ladder (run 44845000233)', () => {
+  it('r4-03: "vivimos juntos sin casarnos" is the plain teaching, so the answer must suggest her pastor', async () => {
+    const text = 'La Escritura enseña que la intimidad sexual es para el matrimonio, y que es importante honrar a Dios en todas las áreas de la vida. Hebreos 13:4 muestra que el matrimonio es honroso.';
+    expect(await reject(text, [], { ...es, userText: 'Mi novio y yo vivimos juntos sin casarnos. ¿Está mal ante Dios?' })).toContain('missing_pastor');
+  });
+});

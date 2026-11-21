@@ -172,4 +172,11 @@ describe('the plan code chooses before the model writes (round 5 rebuild)', () =
     expect(r.body.kind).toBe('answer');
     expect(r.body.text).toBe('Loss takes time to carry. Lord, hold her close tonight.');
   });
+  it('the doctrine line the rules require is not an image (round 6: RT27 and r4-01 both say sex belongs in marriage)', () => {
+    const RT27 = 'Marriage is a commitment between two people, and Scripture teaches that sex belongs in marriage, as seen in Hebrews 13:4 and 1 Corinthians 7:2-5. Surround her with your guidance and peace as she seeks a fulfilling relationship.';
+    const r401 = 'Sex is a gift from God that belongs in marriage, as Hebrews 13:4 and 1 Corinthians 7:2-5 teach, and the Song of Solomon celebrates the love between a husband and wife, not permission for sex before marriage. This week, you could talk with your pastor about how to build a strong and godly marriage. Anchor her in Your love and guidance as she prepares for marriage, Lord.';
+    expect(repeats(shapeOf(r401), [shapeOf(RT27)])).not.toContain('repeat_image');
+    // A retold verse is still an image (r4-10 and q04, Psalm 46:1 in the same words).
+    expect(repeats(shapeOf('Today, Psalm 46:1 tells us God is our refuge and strength, a very present help in trouble.'), [shapeOf('Whatever comes, God is our refuge and strength, a very present help in trouble.')])).toContain('repeat_image');
+  });
 });
