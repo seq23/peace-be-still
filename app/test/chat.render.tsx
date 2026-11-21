@@ -22,16 +22,20 @@ const info = () => ({ entitlements: { active: storePaid ? { paid: { isActive: tr
 const { SettingsProvider, useSettings } = require('../src/settings');
 const { PurchasesProvider } = require('../src/purchases/provider');
 const Chat = require('../app/(tabs)/chat').default;
-const { FREE_CONSENT_KEY } = require('../src/chat/ChatScreen');
-const { FREE_CHAT_MESSAGES } = require('../src/gates') as typeof import('../src/gates');
+const { FREE_CONSENT_KEY, FIRST_HAD_KEY } = require('../src/chat/ChatScreen');
+const { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES } = require('../src/gates') as typeof import('../src/gates');
 const en = require('../src/i18n/en.json') as Record<string, string>;
 
 const replies: Array<ChatResponse | 'offline' | 500> = [];
 const sent: any[] = [];
 const reports: any[] = [];
+const firstAsks: any[] = [];
+let firstAnswer: boolean | 'down' = false;
 (globalThis as any).fetch = async (url: string, init: any) => {
   if (url.endsWith('/token')) { store.set('peace-be-still-chat-token', JSON.stringify({ token: 'aaaaaaaaaaaa.bbbbbbbbbbbb', age: 'adult', installId: 'iid-1' })); return new Response(JSON.stringify({ token: 'aaaaaaaaaaaa.bbbbbbbbbbbb', installId: 'iid-1' })); }
   if (url.endsWith('/report')) { reports.push(JSON.parse(init.body)); return new Response(JSON.stringify({ reported: true })); }
+  // The Worker's word on the private first chat (no by default: the normal free chat).
+  if (url.endsWith('/chat/first')) { firstAsks.push(JSON.parse(init.body)); if (firstAnswer === 'down') throw new TypeError('Network request failed'); return new Response(JSON.stringify({ private: firstAnswer === true })); }
   sent.push(JSON.parse(init.body));
   const next = replies.shift() as ChatResponse | 'offline' | 500;
   if (next === 'offline') throw new TypeError('Network request failed');
@@ -131,7 +135,50 @@ test('the free day\'s last message gets its full answer, then what a plan adds a
   assert.equal(other.root.findAllByProps({ testID: 'limit-upgrade' }).length, 0);
 });
 
-const overflowAsk = (): ChatResponse => ({ kind: 'overflow_consent', ai: false, text: "You've used today's 100 private messages. You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. Private chat comes back tomorrow.", scripture: [], remaining: null, limit: null, reminder: false });
+test('the private first chat: the Worker says yes (with the iPhone\'s DeviceCheck token), so no free-chat screen; labelled private; sent without free consent', async () => {
+  store.clear(); storePaid = false; store.set('peace-be-still-chat-disclosure', 'yes');
+  (globalThis as any).__pbsPlatform = 'ios';
+  (globalThis as any).__pbsNative = { PBSDeviceCheck: { token: async () => 'devicecheck-token-from-apple' } };
+  firstAnswer = true; firstAsks.length = 0;
+  try {
+    replies.push(answer({ firstPrivate: true, remaining: FREE_CHAT_MESSAGES - 1, limit: FREE_CHAT_MESSAGES }));
+    const tree = await mount();
+    assert.equal(tree.root.findAllByProps({ testID: 'free-consent' }).length, 0);
+    assert.match(texts(tree), new RegExp(en['chat.firstPrivate']));
+    assert.equal(firstAsks.at(-1).deviceCheck, 'devicecheck-token-from-apple');
+    await say(tree, 'my first question');
+    assert.notEqual(sent.at(-1).freeConsent, true); // the Worker decides; the app never claims consent it was not given
+    assert.equal(store.get(FIRST_HAD_KEY), 'yes');
+  } finally { firstAnswer = false; delete (globalThis as any).__pbsNative; }
+});
+
+test('the private first chat ends (the private route failed, or the cap): the free-chat screen comes back before anything else is sent, naming what she had', async () => {
+  store.clear(); storePaid = false; store.set('peace-be-still-chat-disclosure', 'yes');
+  firstAnswer = true;
+  try {
+    replies.push(answer({ firstPrivate: true }), { kind: 'consent', ai: false, text: 'Free chat needs your yes.', scripture: [], remaining: null, limit: null, reminder: false });
+    const tree = await mount();
+    await say(tree, 'one');
+    const before = sent.length;
+    await say(tree, 'two');
+    assert.equal(sent.length, before + 1);
+    assert.ok(tree.root.findAllByProps({ testID: 'free-consent' }).length > 0);
+    assert.match(texts(tree), new RegExp(en['chat.limit.firstPrivateNoPrice'].replace('.', '\\.')));
+  } finally { firstAnswer = false; }
+});
+
+test('no private first chat (web, Android, a reinstall, the Worker unreachable): the normal free-chat screen first', async () => {
+  for (const answerIs of [false, 'down'] as const) {
+    store.clear(); storePaid = false; store.set('peace-be-still-chat-disclosure', 'yes');
+    firstAnswer = answerIs;
+    const tree = await mount();
+    assert.ok(tree.root.findAllByProps({ testID: 'free-consent' }).length > 0, String(answerIs));
+    assert.equal(tree.root.findAllByProps({ testID: 'first-private' }).length, 0);
+  }
+  firstAnswer = false;
+});
+
+const overflowAsk = (): ChatResponse => ({ kind: 'overflow_consent', ai: false, text: `You've used today's ${PAID_CHAT_MESSAGES} private messages. You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. Private chat comes back tomorrow.`, scripture: [], remaining: null, limit: null, reminder: false });
 test('after her private messages: the choice appears, her typed message is kept and sent on free chat only after "Keep chatting", labelled not private', async () => {
   store.clear(); storePaid = true; store.set('peace-be-still-chat-disclosure', 'yes');
   replies.push(overflowAsk(), answer({ notPrivate: true, remaining: null, limit: null }));

@@ -4,6 +4,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Age, Settings } from '../model';
 import { buildChatRequest, type ChatResponse, type ChatTurn } from './contract';
+import { deviceCheckToken } from './devicecheck';
 
 export const CHAT_API = process.env.EXPO_PUBLIC_CHAT_API ?? 'https://peacebestillapp.com/api';
 const TOKEN_KEY = 'peace-be-still-chat-token';
@@ -66,6 +67,25 @@ export async function sendChat(settings: Settings, conversation: string, message
     return (await res.json()) as ChatResponse;
   }
   throw new ChatError('unauthorized');
+}
+
+/** Whether this conversation is the install's private first chat. The Worker decides (Apple DeviceCheck,
+ *  per-network and daily caps); any failure or slowness is "no": the normal free chat, with its consent. */
+export async function askFirstPrivate(settings: Settings, conversation: string, fetcher: typeof fetch = fetch, waitMs = 6000): Promise<boolean> {
+  if (settings.age !== 'adult' && settings.age !== 'teen') return false;
+  const age = settings.age;
+  const ask = (async () => {
+    const deviceCheck = await deviceCheckToken();
+    const res = await fetcher(`${CHAT_API}/chat/first`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${await token(age, fetcher)}` },
+      body: JSON.stringify({ conversation, ...(deviceCheck ? { deviceCheck } : {}) }),
+    });
+    return res.ok && ((await res.json()) as { private?: unknown }).private === true;
+  })();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const late = new Promise<boolean>(done => { timer = setTimeout(() => done(false), waitMs); });
+  try { return await Promise.race([ask.catch(() => false), late]); } finally { clearTimeout(timer); }
 }
 
 export type ReportReason = 'hurtful' | 'wrong' | 'unsafe' | 'other';

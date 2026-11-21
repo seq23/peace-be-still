@@ -15,7 +15,7 @@ import { usePurchases } from '../purchases/provider';
 import { plansFrom } from '../purchases/revenuecat';
 import { useSettings, useT } from '../settings';
 import { usePalette } from '../ui';
-import { ChatError, DISCLOSURE_KEY, reportAnswer, sendChat, type ReportReason } from './api';
+import { askFirstPrivate, ChatError, DISCLOSURE_KEY, reportAnswer, sendChat, type ReportReason } from './api';
 import type { ChatResponse, ChatTurn } from './contract';
 
 type Palette = ReturnType<typeof usePalette>;
@@ -78,6 +78,8 @@ function ReportAnswer({ answer, c, t }: { answer: string; c: Palette; t: T }) {
 const CLOSES = new Set<ChatResponse['kind']>(['limit', 'no_free_model', 'paused']);
 /** The day (on this phone) a paid user said yes to free chat (not private) after her private messages. */
 export const OVERFLOW_KEY = 'peace-be-still-chat-overflow-day';
+/** She had her private first chat on this phone: the next free-chat screen names what she had. */
+export const FIRST_HAD_KEY = 'peace-be-still-first-private-had';
 const today = () => new Date().toDateString();
 
 export default function ChatScreen() {
@@ -108,32 +110,46 @@ export default function ChatScreen() {
   // pending: what she sent when the Worker asked, kept so it goes on the lane she picks, never retyped.
   const [overflowDay, setOverflowDay] = useState<string | null>(null);
   const [pending, setPending] = useState<ChatTurn[] | null>(null);
+  // The install's private first chat (the Worker decides, per conversation; null while it answers).
+  const [firstPrivate, setFirstPrivate] = useState<boolean | null>(null);
+  const [hadFirst, setHadFirst] = useState(false);
   const spanish = settings.journey === 'mi-refugio' || settings.voice === 'spanish' || settings.language === 'es';
   // The Mindset door shows no faith words (hostile review F8): no KJV, verse or pastor.
   const mind = settings.door === 'mindset';
 
   useEffect(() => {
-    Promise.all([AsyncStorage.getItem(DISCLOSURE_KEY), AsyncStorage.getItem(FREE_CONSENT_KEY), AsyncStorage.getItem(OVERFLOW_KEY)])
-      .then(([d, f, o]) => { setAccepted(d === 'yes'); setFreeOk(f === 'yes'); setOverflowDay(o); })
+    Promise.all([AsyncStorage.getItem(DISCLOSURE_KEY), AsyncStorage.getItem(FREE_CONSENT_KEY), AsyncStorage.getItem(OVERFLOW_KEY), AsyncStorage.getItem(FIRST_HAD_KEY)])
+      .then(([d, f, o, h]) => { setAccepted(d === 'yes'); setFreeOk(f === 'yes'); setOverflowDay(o); setHadFirst(h === 'yes'); })
       .catch(() => { setAccepted(false); setFreeOk(false); });
   }, []);
+  useEffect(() => {
+    if (paid) { setFirstPrivate(false); return; }
+    let live = true;
+    setFirstPrivate(null);
+    void askFirstPrivate(settings, conversation).then(p => { if (live) setFirstPrivate(p); });
+    return () => { live = false; };
+  }, [paid, conversation]);
   if (accepted === null || freeOk === null) return null;
+  // Waiting for the Worker's word before the free-chat screen: a private first chat never shows it.
+  if (!paid && !freeOk && firstPrivate === null) return null;
 
   const disclosure = <>
     <Text style={[s.title, { color: c.ink }]}>{t('chat.disclosure.title')}</Text>
     <Text style={[s.body, { color: c.ink }]}>{t(mind ? 'chat.disclosure.mindset' : 'chat.disclosure.faith')}</Text>
   </>;
   const remember = (key: string) => AsyncStorage.setItem(key, 'yes').catch(() => undefined);
+  // What she just had, at the store's monthly price.
+  const keepPrivate = monthly ? t('chat.limit.firstPrivate', { price: monthly }) : t('chat.limit.firstPrivateNoPrice');
 
   // Free chat: one screen, once, before the first free chat: what free chat does with her words, and
   // the private way. No free chat without it (the Worker refuses one too: kind 'consent').
-  if (!paid && !freeOk) {
+  if (!paid && !freeOk && !firstPrivate) {
     return <View testID="free-consent" style={[s.card, { backgroundColor: c.card, borderColor: c.line }]}>
       <Text style={[s.label, { color: c.muted }]}>{t('chat.free.label')}</Text>
       {disclosure}
       <Text style={[s.title, { color: c.ink }]}>{t('chat.free.title')}</Text>
       <Text style={[s.body, { color: c.ink }]}>{t('chat.free.body')}</Text>
-      <Text style={[s.body, { color: c.ink }]}>{t('chat.free.private')}</Text>
+      <Text testID={hadFirst ? 'free-had-private' : undefined} style={[s.body, { color: c.ink }]}>{hadFirst ? keepPrivate : t('chat.free.private')}</Text>
       <Text style={[s.body, { color: c.ink }]}>{t('chat.disclosure.danger')}</Text>
       <Pressable accessibilityRole="button" testID="free-continue" onPress={() => { setFreeOk(true); setAccepted(true); void remember(FREE_CONSENT_KEY); void remember(DISCLOSURE_KEY); }} style={[s.button, { backgroundColor: c.accent }]}>
         <Text style={[s.buttonText, { color: c.on }]}>{t('chat.free.continue')}</Text>
@@ -174,7 +190,8 @@ export default function ChatScreen() {
       const res = await sendChat(settings, conversation, history, fetch, !paid && !!freeOk, region, overflow);
       if (res.kind === 'overflow_consent') setPending(history);
       // Her consent is gone on the server's side (another device, cleared storage): ask again.
-      if (res.kind === 'consent') { setFreeOk(false); void AsyncStorage.removeItem(FREE_CONSENT_KEY).catch(() => undefined); return; }
+      if (res.kind === 'consent') { setFreeOk(false); setFirstPrivate(false); void AsyncStorage.removeItem(FREE_CONSENT_KEY).catch(() => undefined); return; }
+      if (res.firstPrivate && !hadFirst) { setHadFirst(true); void remember(FIRST_HAD_KEY); }
       setEntries(list => [...list, { role: 'reply', res }]);
       if (res.remaining !== null && res.limit) setLeft({ remaining: res.remaining, limit: res.limit });
       if (CLOSES.has(res.kind)) setClosed(true);
@@ -205,6 +222,7 @@ export default function ChatScreen() {
         <Text style={[s.headTitle, { color: c.ink }]}>{t('tabs.chat')}</Text>
         <Text style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : spanish ? 'chat.ai.rv' : 'chat.ai.kjv')}</Text>
         {notPrivateNow && <Text testID="not-private" style={[s.ai, { color: c.accent }]}>{t('chat.free.notPrivate')}</Text>}
+        {!paid && firstPrivate && <Text testID="first-private" style={[s.ai, { color: c.accent }]}>{t('chat.firstPrivate')}</Text>}
       </View>
       <Pressable accessibilityRole="button" onPress={() => { setConversation(randomUUID()); setEntries([]); }}><Text style={[s.small, { color: c.accent }]}>{t('chat.new')}</Text></Pressable>
     </View>
@@ -239,7 +257,7 @@ export default function ChatScreen() {
               answer; under it, what a plan adds at the store's own monthly price, and when the free ones come back. */}
           {!paid && i === entries.length - 1 && (e.res.kind === 'limit' || (e.res.kind === 'answer' && e.res.remaining === 0)) ? <View testID="limit-upgrade-card" style={{ gap: 6 }}>
             <Pressable accessibilityRole="button" testID="limit-upgrade" onPress={() => router.push('/paid')} style={[s.link, { borderColor: c.accent }]}>
-              <Text style={[s.linkText, { color: c.accent }]}>{monthly ? t('chat.limit.upgrade', { price: monthly }) : t('chat.limit.upgradeNoPrice')}</Text>
+              <Text style={[s.linkText, { color: c.accent }]}>{e.res.firstPrivate || firstPrivate ? keepPrivate : monthly ? t('chat.limit.upgrade', { price: monthly }) : t('chat.limit.upgradeNoPrice')}</Text>
             </Pressable>
             <Text style={[s.body, { color: c.muted }]}>{t('chat.limit.tomorrow', { count: FREE_CHAT_MESSAGES })}</Text>
           </View> : null}

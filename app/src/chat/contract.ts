@@ -43,6 +43,8 @@ export type ChatResponse = {
   fixed?: boolean;
   /** Answered on the free lane she chose after her private messages: shown as "Free chat (not private)". */
   notPrivate?: boolean;
+  /** This answer is the install's private first chat (the Worker decides; firstprivate.ts). */
+  firstPrivate?: boolean;
 };
 
 /** Null when chat is closed to her (under 13, or no door chosen yet). Only the last 12 turns travel. */

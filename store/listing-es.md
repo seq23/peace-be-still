@@ -24,6 +24,6 @@ Las Escrituras se citan palabra por palabra de la Reina-Valera 1909, y de la Kin
 
 Las respuestas del chat las escribe una IA y van marcadas como IA; lo que escribes va a proveedores gratuitos de IA que pueden aprender de ello.
 
-Sin prueba gratuita. Un plan de pago se renueva cada mes o cada año hasta que la canceles. Los precios y las condiciones de renovación aparecen antes de comprar. Cancela cuando quieras en Ajustes (o Configuración) del iPhone: toca tu nombre y luego Suscripciones.
+Sin prueba gratuita. Un plan de pago se renueva cada mes o cada año hasta que lo canceles. Los precios y las condiciones de renovación aparecen antes de comprar. Cancela cuando quieras en Ajustes (o Configuración) del iPhone: toca tu nombre y luego Suscripciones.
 
 Términos: https://peacebestillapp.com/es/terminos · Privacidad: https://peacebestillapp.com/es/privacidad

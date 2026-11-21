@@ -36,6 +36,8 @@ export function deps(over: Partial<Deps> & { rungList?: LadderRung[]; riskVerdic
     judge: over.judge ?? (async () => ({ verdict: 'pass', voice: 5 })),
     rungs: over.rungs ?? (() => over.rungList ?? []),
     paid: over.paid ?? (async () => ({ paid: over.paidNow ?? false, paidUntil: over.paidNow ? NOW + 30 * 86400_000 : null })),
+    // No DeviceCheck answer by default: every first chat is the normal free lane (fail closed).
+    deviceCheck: over.deviceCheck ?? (async () => 'error'),
   };
   return d;
 }

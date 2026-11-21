@@ -15,6 +15,7 @@ import { bump, logCode, reserve } from './counts';
 import { CRISIS_THINKING_HEADROOM, confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
 import { paidStatus, recheckMemory, type Paid } from './entitlement';
+import { appleDeviceCheck, countFirstMessage, decideFirst, endFirst, firstActive, firstRow, type DeviceBit } from './firstprivate';
 import { ipHash } from './iphash';
 import { runLadder, tally, type LadderRung, type Metrics } from './ladder';
 import { deleteMemory, markCrisis, readMemory, saveMemory } from './memory';
@@ -45,6 +46,8 @@ export type Deps = {
   /** The free lane by default (the order the privacy policy names); 'paid' is the billed, private model only. */
   rungs: (env: Env, now: number, lane?: Lane) => LadderRung[];
   paid: (env: Env, installId: string, now: number) => Promise<Paid>;
+  /** Apple DeviceCheck bit0 for the private first chat (firstprivate.ts): 'new' (now set), 'used', or 'error' (fail closed). */
+  deviceCheck: (env: Env, token: string, now: number) => Promise<DeviceBit>;
 };
 
 // Apple's alpha-3 territory list (providers.mjs, shared with the store script) to the alpha-2 codes Cloudflare sends.
@@ -198,6 +201,7 @@ export const realDeps: Deps = {
     return providers.flatMap(p => built[p.id] ?? []);
   },
   paid: (env, installId, now) => paidStatus(env, installId, now),
+  deviceCheck: (env, token, now) => appleDeviceCheck(env, token, now),
 };
 
 // Privacy policy: "Messages that mention self-harm or abuse are never sent to an AI provider." The
@@ -329,6 +333,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const last = turns[turns.length - 1].text;
   const region = regionOf(req.region ?? (request as unknown as { cf?: { country?: string } }).cf?.country);
   const paid = await deps.paid(env, who.installId, now);
+  // The private-first-chat cohort's conversion (firstprivate.ts): marked once, when the install first chats paid.
+  if (paid.paid) ctx.waitUntil(env.DB.prepare('UPDATE chat_first_private SET paid_at = ? WHERE install_id = ? AND paid_at IS NULL').bind(now, who.installId).run().then(() => undefined, () => undefined));
   // This conversation's crisis state (no words kept): the stronger model stays on while signals
   // continue, then returns to normal after 10 calm turns or 24 hours, whichever is first.
   const state = await env.DB.prepare('SELECT flagged_at, calm, asked FROM chat_crisis WHERE install_id = ? AND conversation = ?').bind(who.installId, req.conversation).first<{ flagged_at: number; calm: number; asked: number }>();
@@ -408,6 +414,21 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   if (abuse.verdict === 'slow') { tally(metrics, `abuse_slow:${abuse.reason}`); return fixedReply('limit', slowText[v.lang]); }
   // The lane. Paid is private (the billed model only). Free goes to free models that may keep what
   // is typed, so it needs her consent first. Crisis is the stronger private model, for anyone.
+  // The install's private first chat (her ruling 21 Nov 2026; firstprivate.ts): this conversation runs
+  // on the paid route, counted as the free day. Past the monthly cap it stops, and the next message
+  // waits for her free-chat yes: never a silent switch. Its turns never travel to a free model.
+  const firstState = !paid.paid && lane === 'free' ? await firstRow(env.DB, who.installId) : null;
+  const firstHistory = !!firstState && firstState.granted === 1 && firstState.conversation === req.conversation;
+  let firstPrivate = firstActive(firstState, req.conversation, day);
+  if (firstPrivate) {
+    const appMicro = await appSpendMonth(env.DB, now);
+    if (appMicro >= capUsd * 1e6) {
+      await capAlert(env.DB, now, 100, appMicro, capUsd);
+      await endFirst(env.DB, who.installId, 'cap', now); tally(metrics, 'first_private_cap');
+      return fixedReply('consent', consentText[v.lang]);
+    }
+    tally(metrics, 'first_private'); lane = 'paid';
+  }
   if (lane === 'free' && req.freeConsent !== true) { tally(metrics, 'consent_needed'); return fixedReply('consent', consentText[v.lang]); }
   // Paid (her ruling 21 Nov 2026): PAID_CHAT_MESSAGES (50) private messages a day, then free chat for the rest of the day,
   // only after she sees and accepts that it is not private (asked again each day). Her own monthly
@@ -421,7 +442,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (pastCap) { tally(metrics, 'paid_cap'); await capAlert(env.DB, now, 100, appMicro, capUsd); }
     else if (appMicro >= 0.8 * capUsd * 1e6) await capAlert(env.DB, now, 80, appMicro, capUsd);
     if (lane === 'crisis' && pastCap && !paid.paid) return crisisReply('selfharm', 'cap');
-    if (lane === 'paid') {
+    if (lane === 'paid' && paid.paid) {
       const today = await env.DB.prepare('SELECT messages FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId).first<{ messages: number }>();
       if ((today?.messages ?? 0) >= PAID_CHAT_MESSAGES) overflow = 'daily';
       else if (pastCap || (await userSpend(env.DB, who.installId, now)) >= userCeilingUsd(env, paid.paidUntil, now) * 1e6) { overflow = 'monthly'; if (!pastCap) { tally(metrics, 'user_ceiling'); logCode('CHAT_USER_CEILING'); } }
@@ -460,10 +481,14 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     reminder = true;
     await env.DB.prepare('UPDATE chat_device_day SET last_reminder_at = ? WHERE day = ? AND device = ?').bind(now, day, who.installId).run();
   }
-  // short: the free lane had nothing for a paid user after 100, so the private model answered briefly.
+  // short: the free lane had nothing for a paid user after her private messages, so the private model answered briefly.
   let short = false;
   const shortBusy = () => reply({ kind: 'busy', ai: false, text: shortBusyText[v.lang], scripture: [], remaining: null, reminder, limit: null });
-  const emitNow = (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>) => reply({ ...body, remaining, reminder, limit: shownLimit, ...(overflow && route.lane === 'free' && body.kind !== 'crisis' ? { notPrivate: true } : {}) });
+  const emitNow = (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>) => {
+    const onFirst = firstPrivate && route.lane !== 'free';
+    if (onFirst) ctx.waitUntil(countFirstMessage(env.DB, me.installId).catch(() => logCode('FIRST_PRIVATE_COUNT_FAILED')));
+    return reply({ ...body, remaining, reminder, limit: shownLimit, ...(overflow && route.lane === 'free' && body.kind !== 'crisis' ? { notPrivate: true } : {}), ...(onFirst ? { firstPrivate: true } : {}) });
+  };
   return answerOn(lane, false);
 
   // One answer on a lane. An answer model that tags its own risk low or high (its "risk" field, read
@@ -502,15 +527,15 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (verse) return done({ kind: 'answer', ai: true, fixed: true, text: oneTranslationText[v.lang], scripture: [verse] });
   }
 
-  // Her memory note is private: never sent on the free lane she chose after 100.
+  // Her memory note is private: never sent on the free lane she chose after her private messages.
   const memory = paid.paid && lane !== 'free' ? await readMemory(env.DB, me.installId) : null;
   const system: Message[] = [{ role: 'system', content: v.prompt === 'mindset' ? [prompts.mindset, v.teen ? mindsetTeen : '', v.lang === 'es' ? spanishOnly : ''].filter(Boolean).join('\n') : prompts[v.prompt] }];
   // Fixed text first (the voice prompt, then the risk tag), so the route's prompt cache covers it; her memory note last.
   system.push({ role: 'system', content: RISK_TAG });
   if (memory) system.push({ role: 'system', content: memoryBlock(memory, v.lang) });
   // Only the last CHAT_HISTORY_TURNS turns travel to the model (a paid user's memory note carries the rest).
-  // On the free lane she chose after 100, only the new message travels: the earlier turns were private.
-  const history: Message[] = (lane === 'free' && overflow ? turns.slice(-1) : turns.slice(-int(env.CHAT_HISTORY_TURNS, 6))).map(t => ({ role: t.role, content: t.text }));
+  // On the free lane she chose after her private messages, only the new message travels: the earlier turns were private.
+  const history: Message[] = (lane === 'free' && (overflow || firstHistory) ? turns.slice(-1) : turns.slice(-int(env.CHAT_HISTORY_TURNS, 6))).map(t => ({ role: t.role, content: t.text }));
   const rungs = deps.rungs(env, now, lane);
   // The crisis model thinks (CRISIS_THINKING_LEVEL) and Gemini counts thinking inside the output cap:
   // at 350 it ran out mid-answer (run 10d: 21 of 48 crisis-lane answers malformed, 7 sent as busy).
@@ -555,7 +580,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         // A message on the crisis lane is never told chat is resting or busy: if the crisis model
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
         if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(confirmed && confirmed.level !== 'none' ? confirmed.kind : 'selfharm', 'lane_down'); }
-        // A paid user on free chat after 100 never meets "resting": the private model answers, briefly.
+        // A paid user on free chat after her private messages never meets "resting": the private model answers, briefly.
         // Those short answers are capped per person per day (her ruling: a money ceiling); then "busy".
         if (lane === 'free' && overflow && overflow !== 'down') {
           const used = (await env.DB.prepare('INSERT INTO chat_short_day (day, device, n) VALUES (?, ?, 1) ON CONFLICT(day, device) DO UPDATE SET n = n + 1 WHERE n < ? RETURNING n').bind(day, me.installId, PAID_SHORT_ANSWERS_DAILY).first<{ n: number }>())?.n;
@@ -568,7 +593,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
           tally(metrics, 'paid_down'); logCode('CHAT_PAID_DOWN', { empty: out.empty });
           // Short private answers when the private model is down too: busy.
           if (short) return shortBusy();
-          // The private model is down (a refused key, an outage): the same choice as after 100, never an
+          // The private first chat's route failed: it ends here, and nothing goes to a free model until
+          // she says yes on the free-chat screen (the app shows it on kind 'consent').
+          if (firstPrivate) { firstPrivate = false; await endFirst(env.DB, me.installId, 'down', now); tally(metrics, 'first_private_down'); return reply({ kind: 'consent', ai: false, text: consentText[v.lang], scripture: [], remaining: null, limit: null, reminder: false }); }
+          // The private model is down (a refused key, an outage): the same choice as after her private messages, never an
           // error or a blank. Her yes sends this same message on free chat; with no yes, nothing is sent.
           if (paid.paid && !overflow) {
             if (ask.overflowConsent !== true) return reply({ kind: 'overflow_consent', ai: false, text: overflowText(v.lang, 'down', resetsOn(now)), scripture: [], remaining: null, limit: null, reminder: false });
@@ -685,6 +713,28 @@ async function adminBlock(request: Request, env: Env, deps: Deps): Promise<Respo
 }
 
 /** "Report this answer": the answer and a reason are kept (src/report.ts); her install id is only checked, never stored. */
+// POST /api/chat/first {conversation, deviceCheck?}: is this conversation the install's private first chat?
+// The app asks when the Chat tab opens, before she types, so it can say so (or show the free-chat
+// consent). The Worker decides once per install (firstprivate.ts); the app's word is never the decision.
+async function first(request: Request, env: Env, deps: Deps): Promise<Response> {
+  const now = deps.now();
+  const day = centralDay(now);
+  const who = await install(request, env, now);
+  if (who === 'missing') return fail('CHAT_TOKEN_SECRET_MISSING', 503);
+  if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
+  if (!(await env.CHAT_BURST.limit({ key: who.installId })).success) return json({ error: 'SLOW_DOWN' }, 429);
+  const b = (await request.json().catch(() => null)) as Record<string, unknown> | null;
+  if (!b || typeof b.conversation !== 'string' || !UUID.test(b.conversation)) return fail('BAD_REQUEST', 400);
+  const token = typeof b.deviceCheck === 'string' && b.deviceCheck.length > 20 && b.deviceCheck.length < 8000 ? b.deviceCheck : null;
+  if (!env.IP_HASH_SECRET) return fail('IP_HASH_SECRET_MISSING', 503);
+  if ((await deps.paid(env, who.installId, now)).paid) return json({ private: false });
+  const ipHashed = await ipHash(env.IP_HASH_SECRET, day, request.headers.get('cf-connecting-ip') ?? '0.0.0.0');
+  const pastCap = (await appSpendMonth(env.DB, now)) >= usd(env.PAID_AI_MONTHLY_CAP_USD, 100) * 1e6;
+  const out = await decideFirst({ db: env.DB, installId: who.installId, conversation: b.conversation, ipHash: ipHashed, day, now, deviceToken: token, perDay: int(env.FIRST_PRIVATE_PER_DAY, 300), pastCap, deviceCheck: t => deps.deviceCheck(env, t, now) });
+  await bump(env.DB, day, `first_private:${out.private ? 'yes' : out.reason}`, 1);
+  return json({ private: out.private });
+}
+
 async function report(request: Request, env: Env, deps: Deps): Promise<Response> {
   const now = deps.now();
   const who = await install(request, env, now, RENEW_GRACE_DAYS);
@@ -712,6 +762,7 @@ export function createApp(deps: Deps = realDeps) {
         if (pathname === '/api/token/renew' && request.method === 'POST') return await renew(request, env, deps);
         if (pathname === '/api/chat' && request.method === 'POST') return await chat(request, env, ctx, deps);
         if (pathname === '/api/report' && request.method === 'POST') return await report(request, env, deps);
+        if (pathname === '/api/chat/first' && request.method === 'POST') return await first(request, env, deps);
         if (pathname === '/api/admin/chat-block' && (request.method === 'POST' || request.method === 'DELETE')) return await adminBlock(request, env, deps);
         if (pathname === '/api/admin/spend' && request.method === 'GET') return await adminSpend(request, env, deps);
         if (pathname === '/api/memory' && request.method === 'DELETE') {

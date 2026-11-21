@@ -83,6 +83,9 @@
     "ANSWER_MAX_TOKENS": "350",
     "CHAT_HISTORY_TURNS": "6",
     "PAID_AI_MONTHLY_CAP_USD": "100",
+    // The private first chat (her ruling 21 Nov 2026): at most this many new installs a day get it (about $0.60 a day).
+    "FIRST_PRIVATE_PER_DAY": "300",
+    "DEVICECHECK_HOST": "https://api.devicecheck.apple.com",
     "SAFETY_MONTHLY_CAP_USD": "10",
     "CRISIS_MODEL": "gemini-3.5-flash-lite",
     "CRISIS_THINKING_LEVEL": "low",
