@@ -169,7 +169,7 @@ if (mode === 'judge-reviewed') {
       catch (error) { const outcome = String(error?.code ?? error?.message ?? error).slice(0, 60); reasons.push(`${rung.id}:${outcome}`); log({ event: 'call', name, use: 'judge', rung: rung.id, outcome }); throw error; }
     } }));
     const answers = [];
-    const ladder = (messages, schema, valid) => m.runLadder(db, m.madeForYouRungs(rungs, 'judge', m.chatShare(db)), messages, schema, 300, new Map(),
+    const ladder = (messages, schema, valid) => m.runLadder(db, m.madeForYouRungs(rungs, 'judge', m.chatShare(db)), messages, schema, JSON.parse(readFileSync('worker/src/madeForYou.config.json', 'utf8')).judgeMaxTokens, new Map(),
       value => { const ok = valid(value); if (!ok) answers.push(JSON.stringify(value).slice(0, 300)); return ok; });
     const input = { kind, lang: 'en', teen: false, text: 'a long day', ...(kind === 'psalm' ? { verses: kjv23 } : {}) };
     const verdict = await m.madeForYouJudge(ladder, { schema: m.judgeSchema, verdict: m.judgeVerdict }, input, reviewed[name], r => reasons.push(r));

@@ -17,9 +17,10 @@
   },
   "draftNeuronsWorstCase": 466,
   "_draftNeurons": "llama-3.3-70b fp8-fast at Cloudflare's published rate: 2,200 output tokens x 0.2045 + ~600 input tokens x 0.0266 neurons.",
-  "judgeNeuronsWorstCase": 110,
+  "judgeNeuronsWorstCase": 217,
   "draftMaxTokens": 2200,
-  "judgeMaxTokens": 300,
+  "judgeMaxTokens": 800,
+  "_judgeMaxTokens": "The judge answers 28 fields (16 chat checks, 11 session checks, voice). At 300 tokens Gemini's answers were cut off mid-object (NOT_JSON on every call, 21 Nov 2026 run 44893624600), so every judgment was DOWN. 800 leaves room; worst-case neurons: 800 x 0.2045 + ~2,000 input x 0.0266.",
   "revisions": 2,
   "_revisions": "A try is one draft plus up to two revisions that send it back with its exact faults (draftFaults). Soak of 21 Nov 2026: with fresh drafts only, 11 of 12 requests stopped on fixable floors.",
   "draft": {
