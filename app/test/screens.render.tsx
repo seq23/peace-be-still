@@ -2083,3 +2083,18 @@ test('For when you\'ve lost someone: free stored verses and gentle lines, a past
     assert.ok(texts(spanish).includes(es['grief.name']) && texts(spanish).includes(es1));
   } finally { await act(async () => spanish.unmount()); }
 });
+
+test('a cold start whose first Bible reads fail recovers by itself: every verse card loads, none says it could not', async () => {
+  (globalThis as any).__pbsSqlFailures = 3;
+  const tree = await mount('grief', { ...base, journey: 'psalm-nights' });
+  try {
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 2000)); });
+    assert.equal((globalThis as any).__pbsSqlFailures, 0, 'the failures were really hit');
+    assert.ok(!texts(tree).includes(en['daily.verseUnavailable']), strings(tree));
+    assert.ok(texts(tree).includes(storedVerse('ECC', 3, 4)), strings(tree));
+    assert.ok(texts(tree).includes('Psalm 34:18 · KJV'), 'one psalm is singular');
+  } finally {
+    (globalThis as any).__pbsSqlFailures = 0;
+    await act(async () => tree.unmount());
+  }
+});

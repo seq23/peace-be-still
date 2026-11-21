@@ -43,6 +43,8 @@ const MOCKS = {
       const db = new DatabaseSync(file, { readOnly: true });
       process.once('exit', () => { db.close(); rmSync(dir, { recursive: true, force: true }); });
       return { getAllAsync: async (sql, params) => {
+        // A test may make the next N reads fail, like a cold start whose first open or read fails.
+        if (globalThis.__pbsSqlFailures > 0) { globalThis.__pbsSqlFailures--; throw new Error('cold start'); }
         if (sql.includes('verses_fts')) throw new Error('Web SQLite lacks FTS5');
         return db.prepare(sql).all(...params);
       }, getFirstAsync: async sql => db.prepare(sql).get() };
