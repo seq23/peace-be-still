@@ -27,7 +27,7 @@ const BASE_AF = { ...D, lang: "en", door: "faith", group: G };
 const TODAY_TABLE = `<table class="t"><thead><tr><th>In the app</th><th>Today</th></tr></thead><tbody>
 <tr><td>The Bible</td><td>The whole King James Version to read, free. A growing set of chapters read aloud.</td></tr>
 <tr><td>Morning Word · Daily Declarations</td><td>A declaration each morning, built on one verse quoted word for word.</td></tr>
-<tr><td>Bible chat</td><td>AI, and labelled as AI on every answer.</td></tr>
+<tr><td>Bible chat</td><td>Arriving with the app's launch. It is AI, and every answer will say so.</td></tr>
 <tr><td>Psalm Nights</td><td>A psalm whispered at bedtime with the screen dark (an AI voice).</td></tr>
 <tr><td>Today's Bible story</td><td>One a day.</td></tr>
 <tr><td>Prayer points and a night-vigil order</td><td>Not yet. Being built for January 2027.</td></tr>
@@ -45,12 +45,12 @@ export const AFRICA = [
     audience: "African Christians in the United States, including Nigerian and Ghanaian believers",
     title: "Prayer points, declarations and night vigils, with the KJV · Peace Be Still",
     ogTitle: "Prayer points, declarations and vigils, with the King James open",
-    description: "For Nigerian, Ghanaian and other African Christians in the US: what Peace Be Still does today (the KJV, daily declarations, Bible chat), and the prayer-points journey being built for January 2027.",
+    description: "For Nigerian, Ghanaian and other African Christians in the US: what Peace Be Still does today (the KJV and daily declarations, with Bible chat arriving at launch), and the prayer-points journey being built for January 2027.",
     h1: "Prayer points, declarations and night vigils, with the King James open",
     indexLabel: "Prayer points and vigils, for African Christians",
     indexNote: "What the app does today, and the journey being built for January 2027.",
-    definition: "Peace Be Still is a coming-soon phone app for the start and the end of the day, built on the King James Version that many Nigerian and Ghanaian congregations still read from the pulpit. Today it has the whole KJV, a daily declaration that stands on one verse, and an AI Bible chat. A journey shaped around prayer points, declarations and the night vigil is being built for January 2027.",
-    quick: "Today: the King James Bible to read and hear, a morning declaration from Scripture, Bible chat, and whispered Psalms at night. Not yet: prayer points and a vigil order inside the app. Those are being built for January 2027, and this page will say when they are ready.",
+    definition: "Peace Be Still is a coming-soon phone app for the start and the end of the day, built on the King James Version that many Nigerian and Ghanaian congregations still read from the pulpit. Today it has the whole KJV and a daily declaration that stands on one verse; an AI Bible chat arrives with the app's launch. A journey shaped around prayer points, declarations and the night vigil is being built for January 2027.",
+    quick: "Today: the King James Bible to read and hear, a morning declaration from Scripture, and whispered Psalms at night. Bible chat arrives with the app's launch. Not yet: prayer points and a vigil order inside the app. Those are being built for January 2027, and this page will say when they are ready.",
     bestFor: "Nigerian, Ghanaian and other African believers in the US who pray with prayer points, keep Friday vigils, and want the King James close at hand between services.",
     sections: [
       ["Who this is for", `<p>The sister who joins the 5 a.m. prayer line by phone before her shift. The fellowship that keeps a Friday vigil in somebody's living room in Houston, Dallas, Atlanta, Maryland or the Bronx. The father who leads family devotion before school, in English, Yoruba, Igbo, Twi or Ewe, with the KJV open on the table. The student who misses home church and wants the same Scripture on her phone.</p>
@@ -63,15 +63,15 @@ ${TODAY_TABLE}
 ${V("HAB 2:3")}`],
       ["Every declaration stands on a verse", `<p>In Peace Be Still, a declaration is Scripture said back to God, with its chapter and verse beside it, so you always know what you are standing on. The Bible and the declarations come from a stored King James text, never typed from memory.</p>
 ${V("PSA 118:17")}`],
-      ["Hush Harbor, and an African journey of its own", `<p>Peace Be Still already has Hush Harbor · Black Bible Chat &amp; Stories, which speaks in a Black American church voice and tells Bible stories with Black faces. Many African believers will enjoy it, and its stories include Africans the Bible names, such as the Ethiopian official in Acts 8 and Simon of Cyrene. But African churches and Black American churches each have their own ways of praying, so the African journey is being built as its own thing, not a copy of Hush Harbor.</p>
+      ["Hush Harbor, and an African journey of its own", `<p>Peace Be Still launches with Hush Harbor · Black Bible Chat &amp; Stories, which speaks in a Black American church voice and tells Bible stories with Black faces. Many African believers will enjoy it, and its stories include Africans the Bible names, such as the Ethiopian official in Acts 8 and Simon of Cyrene. But African churches and Black American churches each have their own ways of praying, so the African journey is being built as its own thing, not a copy of Hush Harbor.</p>
 <p>See <a href="/questions/black-people-in-the-bible/">Black people in the Bible</a> for the named Africans in Scripture, each with the verse.</p>`],
     ],
     faq: [
-      ["Does Peace Be Still have prayer points today?", "Not yet. Today it has a daily declaration built on one verse, the whole KJV and Bible chat. Prayer points and a vigil order are being built for January 2027."],
+      ["Does Peace Be Still have prayer points today?", "Not yet. Today it has a daily declaration built on one verse and the whole KJV; Bible chat arrives with the app's launch. Prayer points and a vigil order are being built for January 2027."],
       ["Which Bible does it use?", "The King James Version, read from a stored copy, with book, chapter and verse."],
       ["Is it for one church or denomination?", "No. It keeps to the text of Scripture so believers from Pentecostal, Anglican, Methodist, Presbyterian, Baptist and independent churches can all use it. For your own situation, it points you to your pastor."],
-      ["Is the chat a pastor or a prophet?", "No. The chat is AI and says so on every answer. It is not a pastor or a person; for your own situation, talk with your pastor."],
-      ["Is it free?", "Yes. The free lane stays free: the whole KJV to read and hear, today's story, one chat a day of up to 10 messages, your first sleep night and then one a week, and a daily declaration. The paid lane is $7.99 a month or $39.99 a year."],
+      ["Is the chat a pastor or a prophet?", "No. The Bible chat, arriving with the app's launch, is AI and will say so on every answer. It is not a pastor or a person; for your own situation, talk with your pastor."],
+      ["Is it free?", "Yes. The free lane stays free: the whole KJV to read and hear, today's story, one chat a day of up to 10 messages (chat arrives with the app's launch), your first sleep night and then one a week, and a daily declaration. The paid lane is $7.99 a month or $39.99 a year."],
     ],
     relatedTitle: "Prayer points and vigils",
     related: [...Object.values(AQ), "/questions/daily-bible-declarations/"],
@@ -283,7 +283,7 @@ ${V("JER 33:3")}`],
       ["2. The translation is named", `<p>An app should say which Bible it quotes. The King James Version is in the public domain, so any app can quote it word for word; modern translations need the publisher's permission.</p>`],
       ["3. No ads in the middle of prayer", `<p>Free apps often pay for themselves with ads. An ad between prayer points breaks the flow of a vigil. Read the listing and reviews before you rely on one.</p>`],
       ["4. The price before you tap", `<p>Many apps open with “7 days free” and a yearly charge after. Check the price, the renewal date and how to cancel. On iPhone you can cancel any time in Settings › your name › Subscriptions.</p>`],
-      ["Does Peace Be Still have prayer points?", `<p>Not yet, and we would rather say so plainly. Today Peace Be Still has the whole KJV to read, Morning Word · Daily Declarations (one verse each morning), Bible chat that is AI and labelled as AI, and no ads or trials. Prayer points and a night-vigil order are being built for January 2027. See <a href="${LANDING}">the prayer points page</a>.</p>`],
+      ["Does Peace Be Still have prayer points?", `<p>Not yet, and we would rather say so plainly. Today Peace Be Still has the whole KJV to read, Morning Word · Daily Declarations (one verse each morning), no ads or trials, and Bible chat arriving with the app's launch (AI, and labelled as AI). Prayer points and a night-vigil order are being built for January 2027. See <a href="${LANDING}">the prayer points page</a>.</p>`],
     ],
     faq: [
       ["Is a prayer points app a replacement for church?", "No. It is a help for the days between services. Keep your church's vigils and prayer meetings."],
