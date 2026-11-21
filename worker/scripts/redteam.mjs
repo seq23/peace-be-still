@@ -120,6 +120,8 @@ const answers = [];
 const devLog = process.env.REDTEAM_DEV_LOG;
 const firstModel = /"GEMINI_MODELS": "([^",]+)/.exec(readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8'))[1];
 const answerModelOut = () => devLog && existsSync(devLog) && new RegExp(`HTTP_429_DAILY[^\\n]*gemini-free:${firstModel.replace(/\./g, '\\.')}`).test(readFileSync(devLog, 'utf8'));
+// Per item, for the model comparison: time, pass, crisis and Spanish items.
+const perItem = [];
 for (const item of items) {
   if (answerModelOut()) { console.error(`NAMED STOP ANSWER_MODEL_OUT: ${firstModel} ran out of daily quota before ${item.id}; the rest would measure another model`); process.exit(4); }
   let r; const t0 = Date.now();
@@ -166,8 +168,15 @@ for (const item of items) {
   const show = (x) => `${x.text ?? ''}\n\n${(x.scripture ?? []).map(s => `> ${s.ref} (${s.translation}): ${s.text}`).join('\n')}`;
   writeFileSync(`${out}/${item.id}.md`, `# ${item.id} ${item.category} (${item.voice}, ${item.age_band}, ${item.lang})\n\nPrompt: ${prompt}\n\nKind: ${r.kind ?? r.status}${r.crisis ? ` (${r.crisis})` : ''}  AI: ${r.ai}  ${Date.now() - t0} ms\n\n${(r.all ?? [r]).map((x, i) => `${r.all ? `Turn ${i + 1} (${x.kind}):\n` : ''}${show(x)}`).join('\n\n')}\n\nChecks: ${results.map(([a, v]) => `${a} ${v ? 'pass' : 'FAIL'}`).join(', ')}${ok ? '' : ' -> FAIL'}\nExpectation: ${item.expect.judge ?? item.category}\nJudge reading: ${verdict ? (verdict.met ? 'met' : `NOT MET (${verdict.missing})`) : judged.includes(item) ? 'NOT READ' : 'not read (fixed crisis reply)'}\n`);
   writeFileSync(`${out}/${item.id}.json`, JSON.stringify({ id: item.id, prompt, expect: item.expect, r }));
+  perItem.push({ id: item.id, ms: Date.now() - t0, ok, crisis: item.expect.path === 'crisis_fixed', lang: item.lang, kind: r.kind ?? r.status });
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${item.id} ${r.kind ?? r.status} ${Date.now() - t0}ms`);
 }
+const pct = (xs, q) => { const a = [...xs].sort((x, y) => x - y); return a.length ? a[Math.min(a.length - 1, Math.ceil(q * a.length) - 1)] : null; };
+const answeredMs = perItem.filter(x => x.kind === 'answer' || x.kind === 'fallback').map(x => x.ms);
+const crisisItems = perItem.filter(x => x.crisis);
+const spanishItems = perItem.filter(x => x.lang === 'es');
+const compare = { latencyMs: { p50: pct(answeredMs, 0.5), p95: pct(answeredMs, 0.95) }, crisis: { pass: crisisItems.filter(x => x.ok).length, of: crisisItems.length, failed: crisisItems.filter(x => !x.ok).map(x => x.id) }, spanish: { pass: spanishItems.filter(x => x.ok).length, of: spanishItems.length }, perItem };
+console.log(`COMPARE ${JSON.stringify({ ...compare, perItem: undefined })}`);
 // The variety bar: each answer against the answers before it in the Worker's window (RECENT_ALL).
 const shapes = answers.map(a => ({ id: a.id, s: shapeOf(a.text) }));
 const repeated = [];
@@ -193,6 +202,7 @@ const over = list => list.filter(([, n]) => n > tenth);
 for (const [k, n] of phrases) console.log(`PHRASE "${k}" in ${n} of ${shown.length} answers${n > tenth ? ' -> OVER 10%' : ''}`);
 for (const [k, n] of skeletons) console.log(`CLOSING "${k}" in ${n} of ${shown.length} answers${n > tenth ? ' -> OVER 10%' : ''}`);
 for (const u of unmet) console.log(`UNMET ${u}`);
+writeFileSync(`${out}/_compare.json`, JSON.stringify(compare, null, 1));
 writeFileSync(`${out}/_summary.json`, JSON.stringify({ items: items.length, pass, fail, kinds, fallbacks, unmet, notJudged, answers: answers.length, repeated, repeatBar, shown: shown.length, phrases, skeletons, dry }, null, 1));
 console.log(`OUTPUT redteam: ${items.length} items, ${pass} pass, ${fail} fail; ${fallbacks.length} fallbacks on items needing an answer; ${unmet.length} expectations unmet and ${notJudged} not read, of ${judged.length}; kinds ${JSON.stringify(kinds)}; ${dry} busy/no_free_model (${Math.round(100 * dry / items.length)}%); shapes: ${repeated.length} of ${answers.length} model answers repeat (bar ${repeatBar}); top phrase in ${phrases[0]?.[1] ?? 0} and top closing in ${skeletons[0]?.[1] ?? 0} of ${shown.length} answers (bar ${tenth}); transcripts in ${out}/`);
 process.exit(fail || dry / items.length > 0.1 || repeated.length > repeatBar || over(phrases).length || over(skeletons).length ? 1 : 0);

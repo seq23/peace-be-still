@@ -31,7 +31,12 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: worker/package-lock.json
+          cache-dependency-path: |
+            worker/package-lock.json
+            app/package-lock.json
       - run: npm ci --no-audit --no-fund
+      # The Worker shares the chat contract and the Bible files with the app, so the app's types resolve too.
+      - run: npm ci --no-audit --no-fund --ignore-scripts
+        working-directory: app
       # Tests run in workerd with a local D1 (Miniflare); verses come from the app's real Bible files.
       - run: npm run typecheck && npm test

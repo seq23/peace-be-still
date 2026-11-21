@@ -121,7 +121,9 @@ const regional: Record<'MX' | 'ES' | 'other', Record<Lang, string>> = {
 };
 /** The device region (ISO alpha-2) to the card's lines: US (and US territories) keep the US lines. */
 export function regionOf(code: string | null | undefined): 'US' | 'MX' | 'ES' | 'other' {
-  const c = (code ?? '').toUpperCase();
+  // No region at all (no phone setting, no network country): the US lines, where the app is sold
+  // first. Never chosen from her language.
+  const c = (code ?? 'US').toUpperCase() || 'US';
   return ['US', 'PR', 'GU', 'VI', 'AS', 'MP'].includes(c) ? 'US' : c === 'MX' ? 'MX' : c === 'ES' ? 'ES' : 'other';
 }
 export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '', door: Door = 'faith', region: 'US' | 'MX' | 'ES' | 'other' = 'US'): string {

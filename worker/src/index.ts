@@ -310,7 +310,12 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     for (const [metric, n] of metrics) await bump(env.DB, day, metric, n);
     if (meter) await addUserSpend(env.DB, who.installId, metrics.get('paid_spend_micro') ?? 0, meter.paidUntil, now);
   };
-  const reply = (body: ChatResponse) => { ctx.waitUntil(flush()); return json(body); };
+  // Which lane answered and whether the safety model ran: two words in headers, for measuring routing (no text).
+  const route = { lane: 'none', safety: false };
+  const reply = (body: ChatResponse) => {
+    ctx.waitUntil(flush());
+    return Response.json(body, { headers: { 'cache-control': 'no-store', 'x-chat-lane': route.lane, 'x-chat-safety': route.safety ? '1' : '0' } });
+  };
   const turns = withoutCrisisWords(req.messages.slice(-12));
   const band = v.teen ? 'teen' : 'adult';
 
@@ -334,6 +339,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   //  - Otherwise the private crisis model writes two or three warm sentences first. Crisis always
   //    answers: past the monthly cap a paid user still gets the crisis model, a free user the fixed words.
   const crisisReply = async (kind: CrisisKind, layer: string) => {
+    route.lane = 'crisis';
     tally(metrics, 'crisis'); tally(metrics, `crisis:${layer}`);
     await markCrisis(env.DB, day, who.installId, req.conversation, now);
     await flag(true);
@@ -354,7 +360,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const confirm = async (): Promise<CrisisLevel> => {
     if (confirmed) return confirmed;
     if (!(await safetyBudgetLeft(env.DB, now, usd(env.SAFETY_MONTHLY_CAP_USD, 10)))) { tally(metrics, 'safety_over_budget'); return (confirmed = { level: 'none', read: 'down' }); }
-    tally(metrics, 'safety_check');
+    tally(metrics, 'safety_check'); route.safety = true;
     const r = await deps.risk(env, turns).catch((): RiskVerdict => ({ verdict: 'down' }));
     confirmed = crisisLevel(turns, r);
     // Her "yes, I'm safe" to the check-in is not a new high signal: she stays on the crisis model.
@@ -442,6 +448,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // card, low is answered again by the crisis model (once). A calm turn on the crisis lane counts
   // toward its 10.
   async function answerOn(lane: Lane, final: boolean): Promise<Response> {
+  route.lane = lane;
   let tag: 'none' | 'low' | 'high' = 'none';
   const done = async (body: Omit<ChatResponse, 'remaining' | 'reminder' | 'limit'>, effects?: () => void): Promise<Response> => {
     if (tag !== 'none' && !final) {
