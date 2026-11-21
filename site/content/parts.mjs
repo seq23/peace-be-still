@@ -17,12 +17,13 @@ const appStrings = (lang) => JSON.parse(readFileSync(new URL(`../../app/src/i18n
 export function privacyClaim(lang) {
   if (lang !== "en" && lang !== "es") return null; // no approved Korean wording yet
   const s = appStrings(lang);
-  return { head: s["paid.chatHeadline"], promise: s["paid.noTraining"] };
+  const count = readFileSync(new URL("../../app/src/gates/index.ts", import.meta.url), "utf8").match(/PAID_CHAT_MESSAGES = (\d+);/)[1];
+  return { head: s["paid.chatHeadline"], promise: s["paid.noTraining"], small: s["paid.fairUse"].replace("%{count}", count) };
 }
 /** The claim as the page lead (home hero, the Bible chat pages). */
 export function claimHtml(lang) {
   const c = privacyClaim(lang);
-  return c ? `<p class="claim"><b>${c.head}.</b> ${c.promise}</p>` : "";
+  return c ? `<p class="claim"><b>${c.head}.</b> ${c.promise} <small>${c.small}</small></p>` : "";
 }
 // Which page sent a buyer: the page's path as a campaign name on each store link (Apple App Analytics
 // reads ct, with pt = her provider token from App Store Connect once store.json has it; Google Play

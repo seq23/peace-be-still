@@ -44,6 +44,7 @@ p{margin:0}
 .lead{font-size:19px;color:var(--ink);max-width:36em}
 .claim{font-size:17px;color:var(--ink);max-width:36em;margin:.25em 0 .75em;padding-left:12px;border-left:3px solid var(--still-water)}
 .claim b{font-weight:600}
+.claim small{display:block;font-size:14px;color:var(--ink-muted);margin-top:4px}
 .cta-privacy{font-size:15px;color:var(--ink-muted)}
 .muted{color:var(--ink-muted)}
 section{padding-top:56px;padding-bottom:56px}
