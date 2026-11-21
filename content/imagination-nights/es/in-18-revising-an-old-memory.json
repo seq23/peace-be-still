@@ -1,0 +1,85 @@
+{
+ "id": "in-18-revising-an-old-memory",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "Un recuerdo viejo, contado de nuevo",
+ "theme": "revisar el pasado",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hola. Qué bueno que volviste a esta noche de imaginación. [pause 3]\n\nAcomódate en la cama. Súbete las cobijas hasta donde te gusten. [pause 8]\n\nRespira hondo una vez, y suelta el aire con un suspiro. [pause 8]\n\nAhora deja que la respiración encuentre su propio ritmo. No tienes que controlarla. Solo nótala. [pause 10]\n\nSiente cómo te pesan los pies. Las piernas. La espalda que se hunde en el colchón. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEl día ya terminó. Este rato de la noche es tuyo. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Esta noche volvemos a usar la revisión, pero con un recuerdo más viejo. Un momento de tu pasado que todavía arde un poco cuando lo piensas. [pause 14]\n\nEscoge algo pequeño y leve. Una vez que pasaste vergüenza. Una vez que no dijiste lo que pensabas. Una despedida que salió mal. Por favor no escojas un recuerdo de cuando te lastimaron gravemente o abusaron de ti. Esos recuerdos merecen el cuidado de una persona preparada, no un ejercicio antes de dormir. Si aparece uno, hazlo a un lado con suavidad por ahora. [pause 16]\n\nEn la revisión, vuelves a pasar el momento viejo en tu imaginación, pero dejas que salga como te hubiera gustado. No te estás mintiendo sobre lo que pasó. Le estás dando a tu mente una imagen más amable para descansar, y estás practicando la persona que eres hoy. [pause 16]\n\nEsto es imaginación y sentimiento, no una promesa sobre nada fuera de ti. Es simplemente una manera de soltar un peso viejo antes del sueño. [pause 21]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Vuelve a ese momento. Fíjate qué edad tenías. Fíjate en el lugar. [pause 23]\n\nDeja que el momento empiece como empezó. Luego, justo antes de que se complicara, ponle pausa. [pause 26]\n\nImagina que tú, como eres hoy, entras a la escena y te pones al lado de tu yo más joven. [pause 26]\n\nPonle una mano en el hombro. Dile, aquí estoy. Esta vez lo podemos hacer distinto. [pause 26]\n\nAhora deja que el momento siga de otra manera. Oye a tu yo más joven hablar con calma. O mira a la otra persona responder con amabilidad. O simplemente mírate salir de ahí con la cabeza en alto. [pause 29]\n\nDeja que termine con suavidad. [pause 26]\n\nMira a tu yo más joven. Dile, hiciste lo mejor que pudiste. Siento orgullo de ti. [pause 29]\n\nVuelve a pasar la versión nueva una vez más, desde el principio, para que se te haga conocida. [pause 29]\n\nLuego deja que la escena se desvanezca, como una foto que se queda al sol. [pause 30]\n\nDi bajito, eso ya terminó. Puedo descansar. [pause 30]\n\nSuelta el peso viejo, y deja que tu cuerpo se sienta ligero. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
+  }
+ ],
+ "words": 595,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1167,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words, no faith words or scripture; each teaching names imagination, not a promise. Self-worth night gives 988 and says it answers in Spanish; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health promise and offers a wheelchair or porch version; family night never forces anyone to change; business night pictures enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

@@ -1,0 +1,85 @@
+{
+ "id": "in-25-a-day-with-nowhere-to-be",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "Un día sin pendientes",
+ "theme": "el descanso",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Te doy la bienvenida a esta noche de imaginación. [pause 3]\n\nAcuéstate como te resulte más cómodo. Deja que la cama cargue todo tu peso. [pause 8]\n\nToma aire despacio por la nariz. Y suéltalo por la boca, un poquito más largo de lo que entró. [pause 8]\n\nOtra vez. Entra el aire. Y sale, lento y largo. [pause 10]\n\nAfloja la frente. La mandíbula. Los hombros. Las manos. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEsta noche no hay nada que hacer más que imaginar. Y imaginar es algo que ya sabes hacer. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "El deseo de esta noche es sencillo, y para mucha gente se siente lejísimos. Un día entero sin ningún lugar adonde ir. [pause 12]\n\nHay quien no ha tenido un día libre de verdad en años. Hasta los días en que estamos en casa, estamos trabajando. La ropa, los mandados, cuidar a alguien, contestar mensajes. El descanso empieza a sentirse como algo que hay que ganarse. [pause 14]\n\nEsta noche imaginamos un día que no te pide nada. Sin alarma. Sin lista. Solo horas lentas, una tras otra, con tiempo para notarlas. [pause 14]\n\nNo tienes que averiguar cómo hacer que ese día pase en la vida real. Eso es para otro momento. Esta noche solo tienes que darte permiso de disfrutarlo en tu imaginación, sin culpa. [pause 14]\n\nComo siempre, esto es imaginación y sentimiento, no una promesa. Es una manera de recordarle a tu cuerpo que descansar está permitido, aunque el calendario todavía no esté de acuerdo. [pause 8]\n\nDate permiso ahora de imaginar que despiertas ese día. [pause 15]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Despiertas sin alarma. Ya hay luz. Nadie te está llamando. [pause 20]\n\nQuédate sin moverte un rato. Fíjate en las cobijas. La almohada. El simple hecho de que no tienes que levantarte. [pause 23]\n\nCuando quieras, levántate despacio. Prepara el desayuno sin prisa. Saboréalo. [pause 23]\n\nSiéntate junto a una ventana con un libro, o con música, o con nada. [pause 25]\n\nDeja que pase una hora. Nota que no miraste el reloj. [pause 27]\n\nEn la tarde, toma una siesta con la ventana un poco abierta. Oye cómo van y vienen los ruidos de la calle. [pause 27]\n\nDespierta suave y sin prisa. Sal un minuto y siente el aire. [pause 27]\n\nEn la noche, come algo sencillo. Lava un plato. Deja lo demás para mañana. [pause 27]\n\nFíjate cómo se siente tu cuerpo al final de un día así. Suelto. Lleno. En silencio. [pause 28]\n\nDi en tu mente, tengo permiso de descansar. [pause 28]\n\nDeja que ese día tranquilo te lleve hasta esta noche tranquila. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Ahora deja que la escena se quede contigo mientras te vas quedando en calma. [pause 10]\n\nNo tienes que agarrarla fuerte. Solo deja que esté ahí, tibia y callada, como una lámpara encendida en otro cuarto. [pause 15]\n\nSi la mente se te va, vuelve a un detalle pequeño. Un sonido. Una palabra. Lo que sienten tus manos. [pause 20]\n\nEsto es solo imaginación, y la imaginación tiene permiso de ser amable. [pause 20]\n\nTal vez notes que respiras más despacio que cuando empezamos. Deja que siga así. [pause 25]\n\nDeja que el cuerpo pese todavía un poco más. No hay ningún lugar adonde ir. [pause 25]\n\nSi el sueño todavía no llega, no pasa nada. Quédate en silencio con la escena, y deja que el silencio haga lo suyo. [pause 30]\n\nDescansa ahora. [pause 60]"
+  }
+ ],
+ "words": 604,
+ "shared_parts": {
+  "settle": "settle1",
+  "close": "close1"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1167,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words, no faith words or scripture; every teaching says imagination, not a promise, and keeps daytime work real. Quiet-house, hard-talk and kind-no nights point anyone afraid of someone to a trained person; friendship and hard-talk nights never picture making another person agree; money night pictures bills covered and a little saved, with advice from someone who knows; rest night makes no sleep claim; the porch night thanks one's life, not a deity."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Natural Spanish (los números cuadran, me alcanza, una palomita en la lista, darle la vuelta a la manzana, tomates o chiles en el huerto, una noche de micrófono abierto, palomillas en la luz del porche); the kind-no night speaks of women in the third person so the narrator claims no life of its own; no gendered listener adjectives; no em dashes or exclamation marks; 18.8-20.0 min."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

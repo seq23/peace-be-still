@@ -1,0 +1,85 @@
+{
+ "id": "in-02-sats",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "Al borde del sueño",
+ "theme": "el momento justo antes del sueño",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hola. Qué bueno que volviste a esta noche de imaginación. [pause 3]\n\nAcomódate en la cama. Súbete las cobijas hasta donde te gusten. [pause 8]\n\nRespira hondo una vez, y suelta el aire con un suspiro. [pause 8]\n\nAhora deja que la respiración encuentre su propio ritmo. No tienes que controlarla. Solo nótala. [pause 10]\n\nSiente cómo te pesan los pies. Las piernas. La espalda que se hunde en el colchón. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEl día ya terminó. Este rato de la noche es tuyo. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Esta noche hablamos de un momento muy especial. Esos minutos justo antes de dormirte, cuando el cuerpo pesa y los pensamientos empiezan a irse solos. [pause 5]\n\nHay quien lo llama simplemente el estado de somnolencia. Es cuando todavía te queda lucidez para escoger una imagen, pero el cuerpo ya está tan relajado que la imagen se siente real. Ahí las dudas y las discusiones hacen menos ruido. [pause 7]\n\nLa práctica es sencilla. Escoge una escena corta que pasaría después de que tu deseo se cumpla. Algo que dure unos segundos nada más. Un apretón de manos. Un abrazo. Una frase que alguien te dice. [pause 7]\n\nLuego, mientras te da sueño, repites esa escenita una y otra vez, con suavidad, como una canción que tarareas para ti. Sin esforzarte. La dejas dar vueltas hasta que el sueño te alcanza dentro de ella. [pause 7]\n\nNada de esto promete un resultado. Es una manera de cerrar el día con una imagen de esperanza en lugar de un montón de preocupaciones. [pause 7]\n\nEscoge ahora tu escena pequeña. Algo que dure más o menos lo que dura una respiración. [pause 12]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Deja que el cuerpo pese más que hace un minuto. Los brazos. Las piernas. Los párpados. [pause 14]\n\nAhora trae tu escena pequeña. Mira dónde estás. Mira quién está contigo. [pause 14]\n\nDeja que pase una vez. El apretón de manos. El abrazo. La frase. Siéntelo en las manos, o en la cara. [pause 17]\n\nAhora deja que pase otra vez, igualito. No hace falta hacerlo más grande. [pause 17]\n\nY otra vez. Un poco más lento esta vez. [pause 17]\n\nSi se te pierde, no pasa nada. Empiézala otra vez desde el principio. [pause 17]\n\nSiente lo natural que es. Como si ya hubiera pasado muchas veces. Como si fuera un recuerdo. [pause 20]\n\nDeja que las palabras de la escena se hagan muy sencillas. Tal vez una sola palabra. Felicidades. Gracias. Bienvenido a casa. [pause 20]\n\nDi esa palabra en tu mente, bajito, al ritmo de tu respiración. [pause 22]\n\nNota qué poco esfuerzo cuesta. No estás construyendo nada. Solo estás recordando un momento. [pause 20]\n\nSi llega otro pensamiento, déjalo pasar, como alguien que cruza al fondo de un cuarto. Luego vuelve a tu escena. [pause 20]\n\nEl apretón de manos. El abrazo. Las palabras. Otra vez. [pause 22]\n\nDeja que la escena se haga más pequeña y más suave, hasta que quepa en una sola respiración. [pause 22]\n\nSigue repitiéndola mientras los pensamientos se hacen lentos. Deja que la escena y el sueño se mezclen. [pause 27]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
+  }
+ ],
+ "words": 650,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1153,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Same safety shape as the English set, in our own words: each teaching says plainly it is imagination and feeling, not a promise, and that the daytime steps stay real; the love night never pictures another person changing their mind and points anyone in a frightening relationship to help; revision keeps owed apologies real; the work night pictures a bill paid on time, not riches. No faith words, no verse in any wording (scripture_woven false), no teacher named."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

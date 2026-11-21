@@ -18,12 +18,12 @@ const KINDS = {
   // Stories come in three tellings (owner 18 Nov 2026): plain (everyone, English), hush-harbor (Black church voice, English), mi-refugio (Spanish).
   story: { dir: "stories", langs: ["plain", "hush-harbor", "mi-refugio"] },
   "psalm-night": { dir: "psalm-nights", langs: ["en", "es"] },
-  "imagination-night": { dir: "imagination-nights", langs: ["en"] },
+  "imagination-night": { dir: "imagination-nights", langs: ["en", "es"] },
   declaration: { dir: "morning-word", langs: ["en", "es"] },
 };
 const TELLING_LANG = { plain: "en", "hush-harbor": "en", "mi-refugio": "es" };
 const langOf = (kind, l) => (kind === "story" ? TELLING_LANG[l] : l);
-const JOURNEY = { story: { plain: "gods-word", "hush-harbor": "hush-harbor", "mi-refugio": "mi-refugio" }, "psalm-night": { en: "psalm-nights", es: "mi-refugio" }, "imagination-night": { en: "imagination-nights" }, declaration: { en: "morning-word", es: "mi-refugio" } };
+const JOURNEY = { story: { plain: "gods-word", "hush-harbor": "hush-harbor", "mi-refugio": "mi-refugio" }, "psalm-night": { en: "psalm-nights", es: "mi-refugio" }, "imagination-night": { en: "imagination-nights", es: "imagination-nights" }, declaration: { en: "morning-word", es: "mi-refugio" } };
 const AI_LABEL = { story: "label.ai_retold_checked", "psalm-night": "label.ai_voice_checked", "imagination-night": "label.ai_written_voice_checked", declaration: "label.ai_written_checked" };
 
 const read = (p) => (existsSync(p) ? readFileSync(p, "utf8") : "");
@@ -427,6 +427,38 @@ close: s
   if (!isFail(ic.neville) || !isFail(ic.no_faith_links)) throw new Error("SELFTEST Neville/faith link not caught");
   night.segments[2].text += " You will be rich by spring, guaranteed.";
   if (!isFail(checkImaginationNight(night).no_promises)) throw new Error("SELFTEST promise not caught");
+  // Imagination Night in Spanish (Mindset door): no verse in ANY wording. RVR1960 (copyrighted, never stored) is caught
+  // because it keeps the stored RV1909's words; a typed RV1909 verse, a reference and a faith word are caught too.
+  const ines = parseItems(`=== _s
+text: Respira. [pause 5]
+=== t-in-es | El porche
+settle: s
+teaching: Imagina el final que esperas, como si ya hubiera pasado.
+scene: Estás en un porche al caer la tarde.
+close: s
+`);
+  const mkEs = (patch) => { const n = buildImaginationNight(ines[1], "es", shared(ines)); patch(n); return checkImaginationNight(n); };
+  const okEs = mkEs(() => {});
+  if (Object.entries(okEs).some(([k, v]) => isFail(v) && k !== "length" && k !== "teaching_length")) throw new Error(`SELFTEST good Spanish imagination night fails ${JSON.stringify(okEs)}`);
+  const esCases = [
+    ["no_verse_wording", "Cuando te acuestes, no tendrás temor, sino que te acostarás, y tu sueño será grato."], // RVR1960 Prov 3:24, no faith word, no reference
+    ["no_verse_wording", "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar."], // RVR1960 Mat 11:28
+    ["no_typed_scripture", "Cuando te acostares, no tendrás temor; antes te acostarás, y tu sueño será suave."], // the stored RV1909 typed in
+    ["no_refs_in_text", "Como dice Proverbios 3:24, descansa."],
+    ["no_faith_links", "Dios te cuida esta noche."],
+    ["no_faith_links", "Lee este versículo de la Biblia."],
+    ["no_quoted_runs", "Repite: «la calma siempre llega a quien la espera con paciencia»."], // a made-up 'verse' in quotes
+    ["latin_american", "Vosotros sabéis descansar."],
+    ["no_english", "Rest now, and let the night come."],
+    ["no_promises", "Con esto vas a dormir toda la noche."],
+  ];
+  for (const [key, line] of esCases) if (!isFail(mkEs((n) => { n.segments[2].text += " " + line; })[key])) throw new Error(`SELFTEST Spanish ${key} not caught: ${line}`);
+  // A script missing a segment, or far over length, fails the gate (held, so the fill never voices it).
+  if (!isFail(mkEs((n) => { n.segments.splice(1, 1); }).plan)) throw new Error("SELFTEST missing teaching not caught");
+  if (!isFail(mkEs((n) => { n.est_seconds = 40 * 60; }).length)) throw new Error("SELFTEST 40-minute night not caught");
+  const heldEs = buildImaginationNight(ines[1], "es", shared(ines));
+  heldEs.segments[2].text += " Dios te cuida.";
+  if (finalize(heldEs, checkImaginationNight(heldEs), { pastor: { verdict: "pass" }, cultural: { verdict: "pass" } }).status !== "held") throw new Error("SELFTEST Spanish night with a faith word not held");
   // Declarations
   const [d] = buildDeclarations("1 | PSA 118:24 | This is the day. I will rejoice and be glad in it.", "en");
   if (isFail(checkDeclaration(d, "en").word_for_word)) throw new Error("SELFTEST good declaration fails");
@@ -448,7 +480,7 @@ close: s
   }
   if (finalize(buildStory(good, "plain"), {}, null, "nope").qa.first_reader.route !== "none") throw new Error("SELFTEST draft log keyed without telling");
   void parseRef; void readdirSync;
-  console.log(`OUTPUT library self-test: ${cases.length + 10} negative cases caught`);
+  console.log(`OUTPUT library self-test: ${cases.length + 23} negative cases caught`);
 }
 
 const cmd = process.argv[2];

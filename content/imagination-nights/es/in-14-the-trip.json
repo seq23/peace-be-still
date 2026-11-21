@@ -1,0 +1,85 @@
+{
+ "id": "in-14-the-trip",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "El viaje que hiciste",
+ "theme": "viajar y descansar",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hola. Qué bueno que volviste a esta noche de imaginación. [pause 3]\n\nAcomódate en la cama. Súbete las cobijas hasta donde te gusten. [pause 8]\n\nRespira hondo una vez, y suelta el aire con un suspiro. [pause 8]\n\nAhora deja que la respiración encuentre su propio ritmo. No tienes que controlarla. Solo nótala. [pause 10]\n\nSiente cómo te pesan los pies. Las piernas. La espalda que se hunde en el colchón. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEl día ya terminó. Este rato de la noche es tuyo. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "La escena de esta noche es un viaje. Un lugar al que siempre has querido ir. Tal vez el mar. Tal vez una ciudad. Tal vez el pueblo donde nacieron tus abuelos. [pause 13]\n\nUn viaje es un buen deseo para practicar, porque los detalles se sienten con mucha facilidad. La arena. El viento. Una calle nueva. Una comida con otro sabor. [pause 15]\n\nEn lugar de imaginar los planes y las maletas, nos imaginamos ya ahí, en el tercer o cuarto día, cuando ya te acostumbraste y descansaste. [pause 15]\n\nNo tienes que saber cómo se haría el viaje. Eso es trabajo del día. Esta noche es solo para la sensación de haber llegado, con descanso y sin prisa. [pause 15]\n\nHaz que el lugar sea lo más real que puedas. Imagina el clima, cómo suena la gente al hablar, los zapatos que llevas puestos. Los detalles pequeños hacen que la escena se sienta como un recuerdo y no como un deseo. Y los recuerdos dan descanso. [pause 5]\n\nComo siempre, esto es imaginación, no una promesa. Aunque el viaje siga siendo un sueño por ahora, el descanso que sientes esta noche es real. [pause 20]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Despiertas en un cuarto que no es el tuyo, y por un segundo no sabes dónde estás. Luego te acuerdas, y sonríes. [pause 25]\n\nAbre las cortinas. Fíjate qué hay afuera. Agua. Cerros. Techos de teja. [pause 25]\n\nSal. Siente el aire en la cara. Aquí huele distinto. A sal, o a pino, o a pan recién hecho de una panadería. [pause 25]\n\nCamina despacio. No tienes que llegar a ningún lado. El teléfono está en tu bolsillo, callado. [pause 25]\n\nBusca dónde sentarte. Una banca. Una barda. Un pedazo de arena. Mira a la gente que empieza su mañana. [pause 28]\n\nPrueba algo nuevo. Deja que te sorprenda. [pause 25]\n\nNota que tus hombros están más abajo de lo que han estado en meses. [pause 28]\n\nMás tarde, la luz se pone dorada. Sientes el cansancio bueno, el de caminar y mirar. [pause 28]\n\nDe vuelta en el cuarto, te acuestas, y por la ventana oyes los sonidos de este lugar que se acomoda para la noche. [pause 30]\n\nDi en tu mente, vine. Estoy aquí. [pause 30]\n\nDeja que esos sonidos lejanos se vuelvan los sonidos que te rodean ahora. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
+  }
+ ],
+ "words": 615,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1194,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words, no faith words or scripture; each teaching names imagination, not a promise. Self-worth night gives 988 and says it answers in Spanish; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health promise and offers a wheelchair or porch version; family night never forces anyone to change; business night pictures enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

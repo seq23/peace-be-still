@@ -1,0 +1,85 @@
+{
+ "id": "in-10-congratulations",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "Un abrazo de felicidades",
+ "theme": "las felicidades de una amistad",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hola. Qué bueno que volviste a esta noche de imaginación. [pause 3]\n\nAcomódate en la cama. Súbete las cobijas hasta donde te gusten. [pause 8]\n\nRespira hondo una vez, y suelta el aire con un suspiro. [pause 8]\n\nAhora deja que la respiración encuentre su propio ritmo. No tienes que controlarla. Solo nótala. [pause 10]\n\nSiente cómo te pesan los pies. Las piernas. La espalda que se hunde en el colchón. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEl día ya terminó. Este rato de la noche es tuyo. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Esta noche usamos una de las escenas más sencillas que hay. Una amistad que te felicita. [pause 9]\n\nPiensa en alguien de confianza. Alguien que de verdad se alegraría por ti. En tu imaginación, esa persona está a punto de decirte lo feliz que está de que tu deseo se haya cumplido. [pause 11]\n\nEsta escena funciona bien porque es corta, es cálida, y solo puede pasar después de la buena noticia. Oyes su voz. Sientes su mano en tu hombro, o su abrazo. Nada más. [pause 11]\n\nPuedes repetirla muchas veces mientras te da sueño. Es una práctica de imaginación, no una promesa. Pero es una cosa muy bonita para quedarse en calma. [pause 11]\n\nEscoge a esa persona, y escoge tu buena noticia. [pause 16]\n\nAyuda escoger a alguien cuya voz conoces bien. Cómo se ríe. Las palabras que siempre usa. Mientras más conocida la voz, más natural se siente la escena. Si no te viene nadie a la mente, imagina a una vecina amable, a un compañero de trabajo, o a alguien con quien te gustaría tener amistad. [pause 11]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Tú y esa persona están juntos en un lugar conocido. Una cocina. La puerta de la casa. Un estacionamiento después de un día cualquiera. [pause 18]\n\nSe voltea hacia ti. Ya está sonriendo antes de decir nada. [pause 18]\n\nÓyela decirlo. Felicidades. Me da mucho gusto por ti. [pause 21]\n\nSiente su mano en tu brazo. O sus brazos alrededor de ti. [pause 21]\n\nÓyete decir, gracias. Todavía no me la creo, y a la vez ya se siente normal. [pause 21]\n\nDeja que la escena vuelva a empezar. Su sonrisa. Sus palabras. Tu gracias. [pause 24]\n\nY otra vez. Más corta ahora. Solo la palabra. Felicidades. [pause 24]\n\nDeja que la palabra se repita en tu mente, al ritmo de tu respiración. [pause 26]\n\nAhora imagina a otra persona querida. Se enteró por la primera. Te llama, emocionada. [pause 24]\n\nÓyela decirlo también. Ya me enteré. Felicidades. Cuéntamelo todo. [pause 24]\n\nSiente cómo cuentas la historia, con facilidad, como algo que ya pasó. [pause 24]\n\nDeja que todo se haga más y más callado, hasta que sea solo una sensación. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
+  }
+ ],
+ "words": 588,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1142,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Same safety shape as the English set, in our own words: each teaching says plainly it is imagination and feeling, not a promise, and that the daytime steps stay real; the love night never pictures another person changing their mind and points anyone in a frightening relationship to help; revision keeps owed apologies real; the work night pictures a bill paid on time, not riches. No faith words, no verse in any wording (scripture_woven false), no teacher named."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

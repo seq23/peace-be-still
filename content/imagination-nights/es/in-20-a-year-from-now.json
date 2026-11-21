@@ -1,0 +1,85 @@
+{
+ "id": "in-20-a-year-from-now",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "Dentro de un año",
+ "theme": "vivir desde el final, con la mirada larga",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hola. Qué bueno que volviste a esta noche de imaginación. [pause 3]\n\nAcomódate en la cama. Súbete las cobijas hasta donde te gusten. [pause 8]\n\nRespira hondo una vez, y suelta el aire con un suspiro. [pause 8]\n\nAhora deja que la respiración encuentre su propio ritmo. No tienes que controlarla. Solo nótala. [pause 10]\n\nSiente cómo te pesan los pies. Las piernas. La espalda que se hunde en el colchón. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEl día ya terminó. Este rato de la noche es tuyo. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "Esta noche cerramos esta serie con una mirada más larga. Dentro de un año. [pause 13]\n\nImagínate dentro de un año, esta misma noche, en la cama, pensando en el año que pasó. Los deseos que cargaste este año tuvieron tiempo de crecer. Algunos ya son parte de tu vida de todos los días. [pause 15]\n\nEn esta práctica miras hacia atrás, no hacia adelante. Recuerdas el año como si ya hubiera pasado. Te fijas en cómo cambiaste. Cómo saliste de las partes difíciles. Qué te sorprendió. [pause 15]\n\nMirar hacia atrás desde el final es el corazón de vivir desde el final. Deja que tu mente descanse en la imagen terminada, en lugar del camino sin terminar. [pause 15]\n\nNo tienes que llenar cada mes. Deja que tu mente brinque de un lado a otro, como hace la memoria. Un olor, una cara, un momento de risa. Lo que salga es suficiente. [pause 5]\n\nComo siempre, esto es imaginación y sentimiento, no una promesa. La vida real va a dar sus propias vueltas. Pero esta noche puedes descansar mirando atrás hacia un buen año. [pause 20]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Es dentro de un año, esta misma noche. Estás en la cama, más o menos como ahora. [pause 22]\n\nFíjate en el cuarto. ¿Es el mismo cuarto, o es otro? [pause 25]\n\nDeja que tu mente recorra el año. Empieza por la primavera. ¿Qué pasó? [pause 25]\n\nLuego el verano. Un día que recuerdas. Una comida. Un viaje. Una plática. [pause 25]\n\nLuego el otoño. Algo que terminaste. Algo que soltaste. [pause 25]\n\nLuego el invierno. Una noche tranquila, muy parecida a esta. [pause 28]\n\nAhora piensa en el deseo que cargaste este año. Imagínalo ya como parte de tu vida. Normal. Conocido. [pause 28]\n\nFíjate en lo que sientes por la persona que eras hace un año. Trátala con cariño. Estaba haciendo lo mejor que podía. [pause 28]\n\nDi en tu mente, fue un buen año. Qué bueno que no me rendí. [pause 30]\n\nDeja que todo el año descanse en tu pecho, como un respiro largo. [pause 30]\n\nY deja que esa noche de dentro de un año y esta noche se vuelvan una sola noche tranquila. [pause 30]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
+  }
+ ],
+ "words": 592,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1177,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Our own words, no faith words or scripture; each teaching names imagination, not a promise. Self-worth night gives 988 and says it answers in Spanish; old-memory revision tells listeners not to use abuse or trauma memories and to seek a trained person; evening walk makes no health promise and offers a wheelchair or porch version; family night never forces anyone to change; business night pictures enough, not riches, and says to get good advice."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Ordinary, dignified scenes rewritten for a Latin American listener (domingo por la tarde y la sobremesa, el pueblo de los abuelos, techos de teja, una banca o una barda, la colonia, la tiendita y el puesto de comida); warm and plain; no gendered listener adjectives; 19.1-20.0 min."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}

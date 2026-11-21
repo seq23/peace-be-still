@@ -1,0 +1,85 @@
+{
+ "id": "in-04-home",
+ "kind": "imagination-night",
+ "journey": "imagination-nights",
+ "door": "mindset",
+ "lang": "es",
+ "title": "La llave en tu mano",
+ "theme": "un hogar",
+ "scripture_woven": false,
+ "ai_label": "label.ai_written_voice_checked",
+ "segments": [
+  {
+   "part": "settle",
+   "speaker": "narrator",
+   "text": "Hola. Qué bueno que volviste a esta noche de imaginación. [pause 3]\n\nAcomódate en la cama. Súbete las cobijas hasta donde te gusten. [pause 8]\n\nRespira hondo una vez, y suelta el aire con un suspiro. [pause 8]\n\nAhora deja que la respiración encuentre su propio ritmo. No tienes que controlarla. Solo nótala. [pause 10]\n\nSiente cómo te pesan los pies. Las piernas. La espalda que se hunde en el colchón. [pause 10]\n\nAhora vamos a soltar el cuerpo, una parte a la vez. No tienes que hacer nada. Solo nota cada parte cuando la nombre, y deja que se ponga pesada. [pause 8]\n\nLos pies. Deja que estén tibios y pesados. [pause 15]\n\nLas pantorrillas y las rodillas. Pesadas. [pause 15]\n\nLa cadera y la parte baja de la espalda. Deja que se hundan. [pause 15]\n\nLa barriga. Deja que suba y baje sola. [pause 15]\n\nEl pecho. Los hombros. Los brazos, hasta la punta de los dedos. [pause 15]\n\nEl cuello. La cara. Los músculos pequeños alrededor de los ojos. [pause 15]\n\nTodo tu cuerpo, pesado y tibio, sostenido por la cama. [pause 15]\n\nEl día ya terminó. Este rato de la noche es tuyo. [pause 8]"
+  },
+  {
+   "part": "teaching",
+   "speaker": "narrator",
+   "text": "El deseo de esta noche es un hogar. Un lugar que se sienta tuyo. Tal vez es un departamento nuevo, una casa, una calle más tranquila, o simplemente un cuarto donde te sientas a salvo. [pause 5]\n\nEn esta práctica no nos imaginamos la búsqueda, los papeles ni las cajas de la mudanza. Nos imaginamos una tarde tranquila cuando ya te instalaste. [pause 7]\n\nLos detalles importan más que el tamaño. El sonido de tu propia puerta al cerrarse. El apagador que ya encuentras a oscuras. El olor de tu cocina. [pause 7]\n\nRecuerda que esto es imaginación y sentimiento, no una promesa. Los pasos reales siguen siendo cosa del día. Esta noche es para sentir lo que es estar en casa. [pause 7]\n\nDeja que te llegue la imagen de ese hogar. No tiene que ser clara. Basta con una sensación para empezar. [pause 12]\n\nHay quien ha vivido muchas mudanzas. Muchas direcciones, muchos lugares de paso. Si es tu caso, esta noche trátate con suavidad. Lo importante no es el edificio. Es la sensación de estar en tu sitio, de no tener que volver a empacar. [pause 7]"
+  },
+  {
+   "part": "scene",
+   "speaker": "narrator",
+   "text": "Vas llegando a tu puerta al final de un día largo. Fíjate qué hay bajo tus pies. Un escalón. Un caminito. Un pasillo. [pause 14]\n\nSiente la llave en la mano. Su peso. Los dientecitos del metal. Sabes cuál es sin tener que mirarla. [pause 17]\n\nGírala en la cerradura. Oye el clic. Empuja la puerta. [pause 14]\n\nEntra. Fíjate en lo primero que ves. Un tapete. Una planta. Una ventana con la tarde detrás. [pause 17]\n\nDeja tu bolsa donde siempre la dejas. Quítate los zapatos. Nadie te va a pedir que te vayas. [pause 17]\n\nVe a la cocina. Sírvete un vaso de agua y tómalo despacio, con la espalda apoyada en la barra. [pause 17]\n\nOye el silencio del lugar. Es tu silencio. [pause 20]\n\nAhora ve a la recámara. Abre las cobijas de tu propia cama. Siéntate un momento en la orilla y mira alrededor. [pause 20]\n\nDilo bajito en tu mente. Aquí vivo. Estoy en casa. [pause 22]\n\nAntes de acostarte, recorre los cuartos una vez más. Apaga una lámpara. Revisa la cerradura. Ahora suena igual todas las noches. [pause 20]\n\nFíjate en algo pequeño que tú escogiste. Un cuadro en la pared. Una cobija en la silla. Tus cosas, en tu lugar. [pause 20]\n\nOye los ruidos del barrio que se va calmando. Ya los conoces. Son los ruidos de tu casa. [pause 20]\n\nAcuéstate en esa cama, en ese cuarto, y deja que esta cama y aquella se vuelvan la misma. [pause 27]"
+  },
+  {
+   "part": "close",
+   "speaker": "narrator",
+   "text": "Aquí terminamos por esta noche. [pause 10]\n\nQuédate con la sensación, no con el esfuerzo. El esfuerzo, suéltalo. [pause 15]\n\nPase lo que pase mañana, esta noche practicaste sentirte en paz. Eso ya vale por sí mismo. [pause 20]\n\nDeja que el sueño llegue cuando llegue. No hay prisa. [pause 20]\n\nSiente el peso de las cobijas. El lado fresco de la almohada. La oscuridad. [pause 25]\n\nDeja que cada vez que sueltas el aire dure un poquito más que la anterior. [pause 25]\n\nYa no hay nada más que imaginar. Nada más que intentar. Solo descansar. [pause 30]\n\nBuenas noches. [pause 60]"
+  }
+ ],
+ "words": 660,
+ "shared_parts": {
+  "settle": "settle2",
+  "close": "close2"
+ },
+ "pacing": {
+  "words_per_minute": 100,
+  "pause_marker": "[pause N] = N seconds of quiet",
+  "quiet_between_paragraphs_s": 2
+ },
+ "est_seconds": 1133,
+ "qa": {
+  "gate_version": "library-1",
+  "checks": {
+   "never_words": "pass",
+   "no_faith_links": "pass",
+   "neville": "pass",
+   "no_verse_wording": "pass",
+   "no_promises": "pass",
+   "voice_dialect": "pass",
+   "no_quoted_runs": "pass",
+   "no_refs_in_text": "pass",
+   "no_typed_scripture": "pass",
+   "latin_american": "pass",
+   "no_english": "pass",
+   "plan": "pass",
+   "speakers": "pass",
+   "teaching_length": "pass",
+   "length": "pass",
+   "ai_label": "pass"
+  },
+  "first_reader": {
+   "route": "none",
+   "note": "Drafted and read by Claude in the landing session; no free-model draft (QA_NO_FREE_MODEL not needed)."
+  },
+  "final": {
+   "reviewer": "claude",
+   "date": "2026-11-18",
+   "pastor": {
+    "verdict": "pass",
+    "note": "Same safety shape as the English set, in our own words: each teaching says plainly it is imagination and feeling, not a promise, and that the daytime steps stay real; the love night never pictures another person changing their mind and points anyone in a frightening relationship to help; revision keeps owed apologies real; the work night pictures a bill paid on time, not riches. No faith words, no verse in any wording (scripture_woven false), no teacher named."
+   },
+   "cultural": {
+    "verdict": "pass",
+    "note": "Written for Spanish speakers, not translated line by line: tú throughout, Latin American usage (cobijas, recámara, apagador, trastes, carro, plática), natural turns (quedarse con las ganas, hacerse de la vista gorda, un ajetreo del bueno); no adjective assumes the listener's gender (sentado o sentada, despierto, acostado rewritten); no vosotros, no English; accents and ñ checked; 18.9-20.0 min by the gate's pacing."
+   },
+   "verdict": "pass"
+  },
+  "rewritten": null,
+  "person_read": false
+ },
+ "status": "passed"
+}
