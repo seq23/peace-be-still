@@ -5,7 +5,9 @@ Owner-approved 18 Nov 2026. Order (a partial library is still launchable), Engli
   2. Then, one file per chapter, the listening order in FIRST_BOOKS (Matthew, Mark, Luke, John,
      Proverbs, Genesis, ...), then the rest of the 66 books in canon order.
   The same order again in Spanish (RV1909). Files already in the manifest are never redone.
-  3. Content scripts marked passed in content/ (stories, Psalm Nights, Imagination Nights, declarations).
+  3. Content scripts marked passed in content/: the sleep sessions (Psalm Nights, Imagination Nights) right
+     after the English Psalms, then the stories Kokoro voices (plain English, Mi Refugio in Spanish; Hush
+     Harbor has its own lanes), then the chapters.
 Text is the stored text word for word (lib/text.py says the only spoken-form changes).
 
 Each file: render (Kokoro, render_kokoro.py) -> master (two-pass EBU R128 loudnorm, then AAC-LC mono
@@ -88,6 +90,10 @@ def book_order() -> list[str]:
 
 
 SESSION_KINDS = ("psalm-night", "imagination-night")   # the sleep sessions (the paid "session every night")
+STORY_KIND = "stories"
+# Story tellings the Kokoro fill voices (coordinator 21 Nov 2026): Hush Harbor has its own Gemini and clone lanes.
+STORY_TELLINGS = ("plain", "mi-refugio")
+FRONT_KINDS = SESSION_KINDS + (STORY_KIND,)   # queued ahead of the chapters and of failed-chapter retries
 # The voiced floor per session kind (21 Nov 2026: nights the gate estimated at 20 min voiced at 17): a file under it
 # fails its checks and is rendered again slower, then held, never shelved short.
 MIN_SECONDS = {"imagination-night": 18 * 60}
@@ -96,8 +102,9 @@ MIN_SECONDS = {"imagination-night": 18 * 60}
 def plan(bibles: dict, content: list | None = None) -> list[dict]:
     """Every file the library needs, in recording order: English Psalms, then the sleep sessions
     (Psalm Nights in both languages, Imagination Nights: the paid core, coordinator 21 Nov 2026),
-    then the listening-order books, the rest in canon order, then Spanish the same way; other
-    content (stories) last. Pure."""
+    then the stories (plain English, then Mi Refugio; 21 Nov 2026: queued after the sessions and before
+    the chapters and their retries, a bounded batch), then the listening-order books, the rest in canon
+    order, then Spanish the same way; any other content last. Pure."""
     content = list(content or [])
     # owner's order 21 Nov 2026: EN Psalm Nights, ES Psalm Nights, then Imagination Nights EN, then ES
     sessions = sorted((i for i in content if i["kind"] in SESSION_KINDS),
@@ -110,8 +117,10 @@ def plan(bibles: dict, content: list | None = None) -> list[dict]:
                     items.append(_scripture_item(bibles, lang, code, c, kind="psalms", priority=1))
                 else:
                     items.append(_scripture_item(bibles, lang, code, c, kind="bible", priority=2))
+    stories = sorted((i for i in content if i["kind"] == STORY_KIND),
+                     key=lambda i: (i["lang"] != "en", i["file"]))
     cut = next((n for n, i in enumerate(items) if not (i["lang"] == "en" and i["kind"] == "psalms")), len(items))
-    return items[:cut] + sessions + items[cut:] + [i for i in content if i["kind"] not in SESSION_KINDS]
+    return items[:cut] + sessions + stories + items[cut:] + [i for i in content if i["kind"] not in FRONT_KINDS]
 
 
 def _scripture_item(bibles, lang, book, chapter, *, kind, priority):
@@ -143,6 +152,11 @@ def content_items(root: Path) -> list[dict]:
             lang = o.get("lang") if o.get("lang") in ("en", "es") else "en"
             if status == "passed" and isinstance(o.get("segments"), list):
                 item = session_item(o, f, root, lang)
+                if item:
+                    out.append(item)
+                continue
+            if isinstance(o.get("blocks"), list):
+                item = story_item(o, f, root, lang) if status == "passed" and o.get("telling") in STORY_TELLINGS else None
                 if item:
                     out.append(item)
                 continue
@@ -214,17 +228,68 @@ def session_item(o: dict, f: Path, root: Path, lang: str) -> dict | None:
             **({"min_seconds": MIN_SECONDS[kind]} if kind in MIN_SECONDS else {})}
 
 
+_CALL_PAUSE = re.compile(r"\[PAUSE (\d+(?:\.\d+)?)s[^\]]*\]")
+VERSE_GAP = 0.6   # between the verses of one scripture block: the story keeps moving
+
+
+def story_item(o: dict, f: Path, root: Path, lang: str) -> dict | None:
+    """A story (content/stories/<telling>/*.json, `blocks`): the title, then each retelling paragraph,
+    each verse of a scripture block word for word (every speaker in the one narrator voice; the reference
+    is on screen, not read, as in Hush Harbor), and the call and response with its scripted quiet
+    (`[PAUSE 3s | screen: ...]`) as real silence. The pauses are marked so the row records where they
+    start (checks.pause_starts_s: the app shows the response on screen then). None when there is nothing to say."""
+    pieces: list[list] = []          # [text, gap after, call-and-response pause?]
+    gap = GAP["content"]
+    for b in o["blocks"]:
+        if b.get("type") == "scripture":
+            vs = [str(v.get("text", "")).strip() for v in b.get("verses") or []]
+            pieces += [[v, VERSE_GAP, False] for v in vs if v]
+            if pieces:
+                pieces[-1][1] = gap
+        elif b.get("type") == "call_response" and isinstance(b.get("text"), str):
+            parts = _CALL_PAUSE.split(b["text"])
+            for n in range(0, len(parts), 2):
+                t = re.sub(r"\s+", " ", parts[n]).strip()
+                pause = float(parts[n + 1]) if n + 1 < len(parts) else None
+                if t:
+                    pieces.append([t, pause if pause is not None else gap, pause is not None])
+                elif pause is not None and pieces:
+                    pieces[-1][1], pieces[-1][2] = max(pieces[-1][1], pause), True
+        elif isinstance(b.get("text"), str) and b["text"].strip():
+            pieces.append([re.sub(r"\s+", " ", b["text"]).strip(), gap, False])
+    if not pieces:
+        return None
+    telling = re.sub(r"[^a-z0-9-]+", "-", str(o.get("telling") or f.parent.name).lower()).strip("-")
+    ident = re.sub(r"[^a-z0-9-]+", "-", str(o.get("id") or f.stem).lower()).strip("-")
+    title = o.get("title") if isinstance(o.get("title"), str) else ""
+    h = hashlib.sha256(json.dumps([title, pieces], ensure_ascii=False).encode()).hexdigest()[:8]
+    return {"file": f"{lang}/{STORY_KIND}/{telling}/{ident}-{h}.m4a", "kind": STORY_KIND, "lang": lang,
+            "ref": str(f.relative_to(root)), "priority": 3, "level": "sleep", "heading": title,
+            "verses": [p[0] for p in pieces], "gaps": [p[1] for p in pieces],
+            "marks": [i for i, p in enumerate(pieces) if p[2]], "text": "script"}
+
+
 def script_of(item: dict) -> str:
     """What the transcript is scored against: the stored words, heading first."""
     return " ".join([item["heading"], *item["verses"]]).strip()
 
 
 def segments_of(item: dict, pron: dict) -> list[dict]:
+    """What Kokoro says, in order, each with the quiet after it; a call-and-response pause is `mark`ed."""
     gap = item.get("gap", GAP.get(item["kind"], 1.2))
     segs = [{"text": T.speech_text(item["heading"], item["lang"], pron), "gap": HEADING_GAP}] if item["heading"] else []
     gaps = item.get("gaps") or [gap] * len(item["verses"])
-    segs += [{"text": T.speech_text(v, item["lang"], pron), "gap": g} for v, g in zip(item["verses"], gaps)]
+    marks = set(item.get("marks") or [])
+    segs += [{"text": T.speech_text(v, item["lang"], pron), "gap": g, **({"mark": True} if n in marks else {})}
+             for n, (v, g) in enumerate(zip(item["verses"], gaps))]
     return [s for s in segs if s["text"]]
+
+
+def pause_starts(segs: list[dict], ends: list) -> list[float]:
+    """Seconds into the file where each marked pause starts (the renderer's per-segment speech ends). Pure."""
+    if len(ends or []) != len(segs):
+        return []
+    return [round(float(e), 3) for s, e in zip(segs, ends) if s.get("mark")]
 
 
 # ------------------------------------------------------------------ the manifest
@@ -278,14 +343,15 @@ def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> l
     not yet in the manifest, each in plan order. Passed files and files out of tries are skipped. Pure."""
     last = latest(rows)
     mine = [i for i in items if not only or key(i).startswith(only)]
-    # The sleep sessions (the paid core, 21 Nov 2026) are never queued behind retries planned after them:
-    # retry-first applies within the part of the plan up to the last session, then within the rest.
-    cut = max((n + 1 for n, i in enumerate(mine) if i.get("kind") in SESSION_KINDS), default=0)
+    # Three parts, each retry-first inside itself: the sessions, then the stories, then the rest. A failed
+    # story is retried after the unvoiced sessions (review 21 Nov 2026), a failed chapter after the stories.
+    cut1 = max((n + 1 for n, i in enumerate(mine) if i.get("kind") in SESSION_KINDS), default=0)
+    cut2 = max([cut1] + [n + 1 for n, i in enumerate(mine) if i.get("kind") == STORY_KIND])
 
     def part(xs):
         retry = [i for i in xs if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
         return retry + [i for i in xs if key(i) not in last]
-    return part(mine[:cut]) + part(mine[cut:])
+    return part(mine[:cut1]) + part(mine[cut1:cut2]) + part(mine[cut2:])
 
 
 def given_up(items: list, rows: list[dict], key=_file) -> list[str]:
@@ -430,14 +496,21 @@ def settle_active(active: Path, items: list[dict], rows: list[dict], now: dt.dat
 
 
 # ------------------------------------------------------------------ audio steps
-def render(item: dict, pron: dict, wav: Path, speed: float) -> None:
+def render(item: dict, pron: dict, wav: Path, speed: float) -> dict:
+    """Kokoro renders the item; returns the renderer's line ({"seconds", "segments", "ends"}) plus `segs`."""
     v = VOICE[item["lang"]]
+    segs = segments_of(item, pron)
     job = {"voice": v["spec"], "lang": v["lang"], "speed": speed, "lead": 0.6, "tail": 2.0,
-           "segments": segments_of(item, pron), "out": str(wav)}
+           "segments": segs, "out": str(wav)}
     r = subprocess.run([KOKORO_PY, str(AUDIO / "render_kokoro.py")], input=json.dumps(job),
                        capture_output=True, text=True, timeout=4 * 3600)
     if r.returncode != 0 or not wav.exists():
         raise RuntimeError(f"render failed: {r.stderr.strip()[-300:]}")
+    try:
+        out = json.loads(r.stdout.strip().splitlines()[-1])
+    except (json.JSONDecodeError, IndexError):
+        out = {}
+    return {**out, "segs": segs}
 
 
 # Mastering: ffmpeg's two-pass EBU R128 loudnorm (measure, then apply the measured values), then AAC.
@@ -563,7 +636,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     try:
         for speed in (SPEED, RETRY_SPEED):
             attempts += 1
-            render(item, pron, wav, speed)
+            rendered = render(item, pron, wav, speed)
             mastered = master(wav, out, item["level"])
             result = qa.check(out, script_of(item), item["lang"], item["level"], quiet=sum(item.get("gaps") or []))
             if item.get("min_seconds") and result["seconds"] < item["min_seconds"]:
@@ -576,6 +649,10 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     checks = {k: result[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks["problems"] = result["problems"]
     checks["mastering"] = {k: mastered[k] for k in ("tries", "i", "tp")}
+    if item.get("marks"):
+        # Where the call-and-response quiet starts, as Hush Harbor rows carry it (the app shows the response then).
+        checks["pause_starts_s"] = pause_starts(rendered.get("segs") or [], rendered.get("ends"))
+        checks["pauses_s"] = [s["gap"] for s in rendered.get("segs") or [] if s.get("mark")]
     row = {"file": item["file"], "kind": item["kind"], "lang": item["lang"], "ref": item["ref"],
            "text": item["text"], "voice": VOICE[item["lang"]]["id"], "seconds": result["seconds"],
            "checks": checks, "attempts": attempts, "work_s": round(time.monotonic() - t0, 1),

@@ -250,7 +250,7 @@ class Sessions(unittest.TestCase):
         self.assertEqual(order[:5], ["en/psalms/kjv-psa-001.m4a", "en/psalms/kjv-psa-002.m4a",
                                      "en/psalm-night/c.m4a", "es/psalm-night/b.m4a", "en/imagination-night/a.m4a"])
         self.assertEqual(order[5], "en/bible/kjv-mat-001.m4a")
-        self.assertEqual(order[-1], "en/story/s.m4a")
+        self.assertEqual(order[-1], "en/story/s.m4a")   # a kind the plan does not know stays last
 
     def test_scripted_quiet_is_not_counted_as_slow_speech(self):
         import qa
@@ -259,6 +259,79 @@ class Sessions(unittest.TestCase):
         self.assertTrue(any(p.startswith("length") for p in qa.judge(seconds=60.0, **kw)["problems"]))
         self.assertFalse(any(p.startswith("length") for p in qa.judge(seconds=60.0, quiet=58.4, **kw)["problems"]))
 
+
+class Stories(unittest.TestCase):
+    """21 Nov 2026: only Hush Harbor was voiced (its own lanes); the plain and Mi Refugio stories use `blocks`,
+    which content_items skipped, so 120 passed stories were never queued."""
+    def test_every_passed_plain_and_mi_refugio_story_is_planned_hush_harbor_never(self):
+        items = [i for i in fill.content_items(fill.REPO) if i["kind"] == "stories"]
+        for telling, lang in (("plain", "en"), ("mi-refugio", "es")):
+            d = fill.REPO / "content/stories" / telling
+            want = sum(1 for f in d.glob("*.json") if json.loads(f.read_text("utf-8")).get("status") == "passed")
+            mine = [i for i in items if i["ref"].startswith(f"content/stories/{telling}/")]
+            self.assertEqual(len(mine), want, telling)
+            self.assertGreaterEqual(len(mine), 60, f"rule 0: the real {telling} stories must yield files")
+            self.assertTrue(all(i["lang"] == lang and i["file"].startswith(f"{lang}/stories/{telling}/") for i in mine))
+        self.assertFalse([i for i in items if "hush-harbor" in i["ref"]], "Hush Harbor has its own lanes")
+        self.assertEqual(fill.VOICE["es"]["id"], "kokoro:blend af_nicole 0.7 + ef_dora 0.3")
+
+    def story(self, root, telling="mi-refugio", status="passed"):
+        d = root / "content/stories" / telling
+        d.mkdir(parents=True, exist_ok=True)
+        f = d / "core-001.json"
+        f.write_text(json.dumps({"id": "core-001", "kind": "story", "telling": telling, "lang": "es", "title": "Calla, enmudece",
+            "status": status, "blocks": [
+                {"type": "retelling", "speaker": "narrator", "text": "Jesús había pasado el día enseñando."},
+                {"type": "scripture", "speaker": "narrator", "ref": "MAR 4:35-36", "verses": [
+                    {"v": 35, "text": "Y les dijo aquel día cuando fué tarde: Pasemos de la otra parte."},
+                    {"v": 36, "text": "Y despachando la multitud, le tomaron como estaba, en el barco."}]},
+                {"type": "call_response", "speaker": "narrator", "text": 'Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno. [PAUSE 3s | screen: "Todo el tiempo"] Y todo el tiempo. [PAUSE 3s | screen: "Dios es bueno"] También en la tormenta.'},
+                {"type": "retelling", "speaker": "narrator", "text": "Y hubo grande bonanza."}]}, ensure_ascii=False))
+        return f
+
+    def test_story_words_are_the_stored_words_and_the_call_pauses_are_real_quiet(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            self.story(root)
+            [item] = fill.content_items(root)
+        self.assertEqual(item["verses"][:3], ["Jesús había pasado el día enseñando.",
+                                              "Y les dijo aquel día cuando fué tarde: Pasemos de la otra parte.",
+                                              "Y despachando la multitud, le tomaron como estaba, en el barco."])
+        self.assertEqual(item["gaps"][1:3], [fill.VERSE_GAP, fill.GAP["content"]])
+        self.assertEqual([item["gaps"][i] for i in item["marks"]], [3.0, 3.0])
+        self.assertEqual([item["verses"][i] for i in item["marks"]], ["Cuando yo diga Dios es bueno, ustedes dicen, todo el tiempo. Dios es bueno.", "Y todo el tiempo."])
+        self.assertNotIn("PAUSE", fill.script_of(item))
+        self.assertEqual((item["kind"], item["lang"], item["level"], item["ref"]), ("stories", "es", "sleep", "content/stories/mi-refugio/core-001.json"))
+        segs = fill.segments_of(item, {})
+        self.assertEqual(len([s for s in segs if s.get("mark")]), 2)
+        ends = [1.0 + n for n in range(len(segs))]
+        self.assertEqual(fill.pause_starts(segs, ends), [ends[n] for n, s in enumerate(segs) if s.get("mark")])
+        self.assertEqual(fill.pause_starts(segs, ends[:-1]), [], "a renderer line that does not match is never guessed")
+
+    def test_held_story_and_hush_harbor_story_are_never_queued(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            self.story(root, status="held")
+            self.story(root, telling="hush-harbor")
+            self.assertEqual(fill.content_items(root), [])
+
+    def test_stories_after_sessions_before_chapters_and_before_failed_chapter_retries(self):
+        vpl = ["MAT 1:1 The book.", "MAT 2:1 Now when.", "PSA 1:1 Blessed."]
+        b = {"en": T.parse_vpl(vpl), "es": T.parse_vpl(vpl)}
+        mk = lambda kind, lang, n: {"file": f"{lang}/{kind}/{n}.m4a", "kind": kind, "lang": lang, "priority": 3}
+        content = [mk("stories", "es", "mr"), mk("imagination-night", "es", "in"), mk("stories", "en", "plain"), mk("psalm-night", "en", "pn")]
+        items = fill.plan(b, content)
+        order = [i["file"] for i in items]
+        self.assertEqual(order[:6], ["en/psalms/kjv-psa-001.m4a", "en/psalm-night/pn.m4a", "es/imagination-night/in.m4a",
+                                     "en/stories/plain.m4a", "es/stories/mr.m4a", "en/bible/kjv-mat-001.m4a"])
+        rows = [{"file": "en/bible/kjv-mat-001.m4a", "status": "FAILED"}, {"file": "en/psalms/kjv-psa-001.m4a", "status": "passed"},
+                {"file": "es/stories/mr.m4a", "status": "FAILED"}]
+        q = [i["file"] for i in fill.todo(items, rows)]
+        # The unvoiced sessions first; a failed story is retried ahead of the new stories but after the sessions;
+        # the failed chapter waits for the stories, then comes before every new chapter (the stories are bounded).
+        self.assertEqual(q, ["en/psalm-night/pn.m4a", "es/imagination-night/in.m4a", "es/stories/mr.m4a", "en/stories/plain.m4a",
+                             "en/bible/kjv-mat-001.m4a", "en/bible/kjv-mat-002.m4a", "es/psalms/rv1909-psa-001.m4a",
+                             "es/bible/rv1909-mat-001.m4a", "es/bible/rv1909-mat-002.m4a"])
 
 class TextProgress(unittest.TestCase):
     def test_counts_from_files_and_behind_after_24h(self):
@@ -400,6 +473,28 @@ class Mastering(unittest.TestCase):
             row = fill.make_one(item, {}, Path(d))
             self.assertFalse((Path(d) / "track.wav").exists())
         return row, renders, [c for c in calls if "aac_at" in c]
+
+    def test_a_story_row_records_where_its_call_and_response_pauses_start(self):
+        with tempfile.TemporaryDirectory() as d:
+            Stories().story(Path(d))
+            [item] = fill.content_items(Path(d))
+        segs = fill.segments_of(item, {})
+        ends = [2.0 * (n + 1) for n in range(len(segs))]
+        def fake_render(it, pron, wav, speed):
+            Path(wav).write_bytes(b"w")
+            return {"seconds": 99.0, "ends": ends, "segs": fill.segments_of(it, pron)}
+        res = {"pass": True, "problems": [], "accuracy": 0.97, "wpm": 100, "words": 60, "lufs": -22.0,
+               "true_peak": -3.0, "clipped": 0, "asr": "base", "seconds": 99.0}
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(fill, "render", side_effect=fake_render), \
+                mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg([])), \
+                mock.patch.object(qa, "loudness", return_value={"lufs": -22.0, "true_peak": -3.0}), \
+                mock.patch.object(qa, "check", return_value=res) as chk:
+            row = fill.make_one(item, {}, Path(d))
+        marked = [n for n, sg in enumerate(segs) if sg.get("mark")]
+        self.assertEqual(row["checks"]["pause_starts_s"], [ends[n] for n in marked])
+        self.assertEqual(row["checks"]["pauses_s"], [3.0, 3.0])
+        self.assertEqual((row["kind"], row["lang"], row["voice"]), ("stories", "es", fill.VOICE["es"]["id"]))
+        self.assertGreaterEqual(chk.call_args.kwargs["quiet"], 6.0)
 
     def test_a_night_voiced_under_18_minutes_is_rendered_slower_then_never_shelved(self):
         with tempfile.TemporaryDirectory() as d:
