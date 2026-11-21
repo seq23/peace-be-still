@@ -10,7 +10,7 @@ import { spawnSync } from 'node:child_process';
 
 const host = names => names.map(name => `exports[${JSON.stringify(name)}] = ${JSON.stringify(name)};`).join('\n');
 const MOCKS = {
-  'react-native': `${host(['ActivityIndicator', 'Modal', 'Pressable', 'ScrollView', 'Switch', 'Text', 'TextInput', 'View'])}
+  'react-native': `${host(['ActivityIndicator', 'Image', 'Modal', 'Pressable', 'ScrollView', 'Switch', 'Text', 'TextInput', 'View'])}
     exports.StyleSheet = { create: x => x };
     exports.AppState = { currentState: 'active', addEventListener: () => ({ remove() {} }) };
     exports.Linking = { openURL: async url => globalThis.__pbsOpenURL?.(url) };
@@ -19,40 +19,54 @@ const MOCKS = {
   'react-native-safe-area-context': `${host(['SafeAreaView'])}
     exports.SafeAreaProvider = ({ children }) => children;
     exports.useSafeAreaInsets = () => ({ top: 0, bottom: 0, left: 0, right: 0 });`,
-  'react-native-svg': `exports.__esModule = true; exports.default = 'Svg'; ${host(['Path', 'Rect', 'Circle'])}`,
+  'react-native-svg': `const React = require('react');
+    exports.__esModule = true;
+    exports.default = React.forwardRef(({ children, ...props }, ref) => {
+      React.useImperativeHandle(ref, () => ({ toDataURL: callback => globalThis.__pbsCapture(callback) }));
+      return React.createElement('Svg', props, children);
+    });
+    ${host(['Path', 'Rect', 'Circle'])}
+    exports.Text = 'SvgText';`,
+  'expo-asset': `const { readFileSync } = require('node:fs');
+    exports.Asset = { fromModule: name => ({
+      uri: 'data:application/octet-stream;base64,' + readFileSync('src/bible/data/' + name).toString('base64')
+    }) };`,
+  'expo-file-system': '',
+  'expo-sqlite': `const { DatabaseSync } = require('node:sqlite');
+    const { mkdtempSync, writeFileSync, rmSync } = require('node:fs');
+    const { join } = require('node:path');
+    const { tmpdir } = require('node:os');
+    exports.deserializeDatabaseAsync = async bytes => {
+      const dir = mkdtempSync(join(tmpdir(), 'pbs-bible-'));
+      const file = join(dir, 'bible.db');
+      writeFileSync(file, bytes);
+      const db = new DatabaseSync(file, { readOnly: true });
+      process.once('exit', () => { db.close(); rmSync(dir, { recursive: true, force: true }); });
+      return { getAllAsync: async (sql, params) => {
+        if (sql.includes('verses_fts')) throw new Error('Web SQLite lacks FTS5');
+        return db.prepare(sql).all(...params);
+      }, getFirstAsync: async sql => db.prepare(sql).get() };
+    };`,
   'expo-router': `const React = require('react');
     const r = () => globalThis.__pbsRouter;
     exports.useRouter = () => r();
-    exports.useIsFocused = () => true;
-    exports.useSegments = () => globalThis.__pbsSegments || [];
-    exports.useGlobalSearchParams = () => globalThis.__pbsParams || {};
     exports.useLocalSearchParams = () => globalThis.__pbsParams || {};
+    exports.useIsFocused = () => true;
+    exports.useGlobalSearchParams = () => globalThis.__pbsParams || {};
+    exports.useSegments = () => globalThis.__pbsSegments || [];
     exports.Redirect = props => React.createElement('Redirect', props);
     const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
     exports.Stack = layout('Stack'); exports.Tabs = layout('Tabs');`,
   'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
   'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`,
   '@react-native-async-storage/async-storage': `module.exports = { __esModule: true, default: globalThis.__pbsStorage };`,
-  // Paid status comes from lane 5S's PurchasesProvider, driven by the test's fake store.
-  'react-native-purchases': `exports.__esModule = true; exports.default = globalThis.__pbsPurchases;
-    exports.PURCHASES_ERROR_CODE = { PAYMENT_PENDING_ERROR: '20', PURCHASE_CANCELLED_ERROR: '1' };`,
   // The audio host from app.config.ts, plus whatever a test sets (the RevenueCat key).
   'expo-constants': `exports.__esModule = true; exports.default = { get expoConfig() {
     return { ...globalThis.__pbsExpoConfig, extra: { audioBaseUrl: require('./app.config').default.extra.audioBaseUrl, ...globalThis.__pbsExpoConfig?.extra } };
   } };`,
   'expo-audio': '',
-  'bible-store': `const core = require('./src/bible/core');
-    const { DatabaseSync } = require('node:sqlite');
-    Object.assign(exports, core);
-    exports.bible = async translation => core.createBible({
-      async all(sql, params) {
-        const db = new DatabaseSync('src/bible/data/' + translation.toLowerCase() + '.db', { readOnly: true });
-        try { return db.prepare(sql).all(...params); }
-        finally { db.close(); }
-      },
-    });`,
   'expo-brightness': '',
-  'expo-file-system': '',
+  // Lane 4S: the player hook reads the test's fake player.
   'player-hook': `const React = require('react');
     exports.tracks = require('./src/player/library.json');
     exports.useDimmer = () => ({ dimmed: false, touch() {} });
@@ -61,16 +75,19 @@ const MOCKS = {
       const state = React.useSyncExternalStore(player.subscribe, player.getState);
       return { player, state, stop: globalThis.__pbsAudioStop || null };
     };`,
+  'react-native-purchases': `exports.__esModule = true; exports.default = globalThis.__pbsPurchases;
+    exports.PURCHASES_ERROR_CODE = { PAYMENT_PENDING_ERROR: '20', PURCHASE_CANCELLED_ERROR: '1' };`,
 };
 
 const dir = mkdtempSync(join(tmpdir(), 'pbs-render-'));
 await build({
   entryPoints: ['test/screens.render.tsx'], outfile: join(dir, 'screens.cjs'), bundle: true, platform: 'node', format: 'cjs',
-  packages: 'external', external: ['react', 'react-test-renderer', 'i18n-js'], jsx: 'automatic', logLevel: 'warning',
+  define: { __DEV__: 'false' }, packages: 'external', external: ['react', 'react-test-renderer', 'i18n-js'], jsx: 'automatic', logLevel: 'warning',
   plugins: [{ name: 'native-mocks', setup(b) {
-    b.onResolve({ filter: /^\.\.\/\.\.\/bible$/ }, () => ({ path: 'bible-store', namespace: 'mock' }));
     b.onResolve({ filter: /\/player\/usePlayer$/ }, () => ({ path: 'player-hook', namespace: 'mock' }));
-    b.onResolve({ filter: /^(expo-audio|expo-constants|expo-brightness|expo-file-system|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-font|expo-localization|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
+    b.onResolve({ filter: /\.db$/ }, args => ({ path: args.path.split('/').at(-1), namespace: 'bible-asset' }));
+    b.onLoad({ filter: /.*/, namespace: 'bible-asset' }, args => ({ contents: `module.exports = ${JSON.stringify(args.path)}` }));
+    b.onResolve({ filter: /^(expo-audio|expo-brightness|expo-asset|expo-file-system|expo-sqlite|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
     b.onLoad({ filter: /.*/, namespace: 'mock' }, args => ({
       contents: MOCKS[args.path] ?? `module.exports = new Proxy({}, { get: (_, key) => key === '__esModule' ? false : String(key) });`,
       loader: 'js', resolveDir: process.cwd(),

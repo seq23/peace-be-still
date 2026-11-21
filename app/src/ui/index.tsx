@@ -16,11 +16,11 @@ export function doorLine(door: Door | null | undefined): string {
   return door === 'mindset' ? night.glow : dawn;
 }
 
-export function Screen({ children, footer, edges = ['top', 'bottom'] }: { children: React.ReactNode; footer?: React.ReactNode; edges?: Edge[] }) {
+export function Screen({ children, footer, edges = ['top', 'bottom'], scrollRef }: { children: React.ReactNode; footer?: React.ReactNode; edges?: Edge[]; scrollRef?: React.Ref<React.ComponentRef<typeof ScrollView>> }) {
   const c = usePalette();
   return (
     <SafeAreaView edges={edges} style={{ flex: 1, backgroundColor: c.bg }}>
-      <ScrollView contentContainerStyle={styles.wrap} keyboardShouldPersistTaps="handled">{children}</ScrollView>
+      <ScrollView ref={scrollRef} contentContainerStyle={styles.wrap} keyboardShouldPersistTaps="handled">{children}</ScrollView>
       {footer ? <View style={[styles.footer, { borderColor: c.line, backgroundColor: c.bg }]}>{footer}</View> : null}
     </SafeAreaView>
   );

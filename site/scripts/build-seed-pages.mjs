@@ -8,6 +8,7 @@ import { dirname, join } from "node:path";
 import { PAGES } from "../content/questions.mjs";
 import { storeCtaHtml, headerHtml, footerHtml, BASE } from "../content/parts.mjs";
 import { applyCta } from "./apply-cta.mjs";
+import { legalPages } from "../content/legal.mjs";
 
 const pub = new URL("../public/", import.meta.url).pathname;
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
@@ -165,7 +166,7 @@ for (const p of PAGES) write(p.path, render(p));
 write("/questions/", renderIndex("en", PAGES.filter((p) => p.lang === "en")));
 write("/es/preguntas/", renderIndex("es", PAGES.filter((p) => p.lang === "es")));
 // Shared parts inside the hand-written pages, between markers.
-const STATIC = [["index.html", "en", "/"], ["es/index.html", "es", "/es/"], ["about.html", "en", "/about"], ["privacy.html", "en", "/privacy"], ["terms.html", "en", "/terms"], ["es/privacidad.html", "es", "/es/privacidad"], ["es/terminos.html", "es", "/es/terminos"], ["support.html", "en", "/support"], ["es/soporte.html", "es", "/es/soporte"], ["404.html", "en", "/404"]];
+const STATIC = [["index.html", "en", "/"], ["es/index.html", "es", "/es/"], ["about.html", "en", "/about"], ["support.html", "en", "/support"], ["es/soporte.html", "es", "/es/soporte"], ["404.html", "en", "/404"]];
 let filled = 0;
 for (const [f, lang, path] of STATIC) {
   const file = join(pub, f);
@@ -176,6 +177,9 @@ for (const [f, lang, path] of STATIC) {
   if (!s.includes("<!-- footer:start -->")) { console.error(`NAMED STOP [NO_FOOTER_MARKER] ${f}`); process.exit(1); }
   if (s !== before) { writeFileSync(file, s); filled++; }
 }
+// The legal pages, rendered from legal/*.md and legal/es/*.md (site/content/legal.mjs).
+const legal = legalPages();
+for (const [f, html] of legal) writeFileSync(join(pub, f), html);
 // llms.txt: the question and landing pages list, between markers, from PAGES.
 {
   const f = join(pub, "llms.txt");
@@ -186,4 +190,4 @@ for (const [f, lang, path] of STATIC) {
   writeFileSync(f, out);
 }
 const cta = applyCta();
-console.log(`OUTPUT build-seed-pages: ${PAGES.length} pages + 2 indexes; store CTA on ${cta} pages`);
+console.log(`OUTPUT build-seed-pages: ${PAGES.length} pages + 2 indexes + ${legal.length} legal pages; store CTA on ${cta} pages`);
