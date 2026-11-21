@@ -252,9 +252,9 @@ class Sessions(unittest.TestCase):
         self.assertEqual(order[5], "en/bible/kjv-mat-001.m4a")
         self.assertEqual(order[-1], "en/story/s.m4a")
 
-    def test_a_published_psalm_night_re_voiced_waits_for_the_new_sessions_and_comes_before_chapters(self):
-        """21 Nov 2026: the 14 published Psalm Nights voiced at 12 min were lengthened past the 13 min floor;
-        their new files queue after the sessions never voiced (the Spanish Imagination Nights), before the rest."""
+    def test_a_published_psalm_night_whose_words_changed_waits_for_the_new_sessions_and_comes_before_chapters(self):
+        """A published night re-voiced for a word change queues after the sessions never voiced, before the rest
+        (the old row records no words here, so its file is a word change)."""
         vpl = ["MAT 1:1 The book.", "PSA 1:1 Blessed."]
         b = {"en": T.parse_vpl(vpl), "es": T.parse_vpl(vpl)}
         mk = lambda kind, lang, n: {"file": f"{lang}/{kind}/{n}-new.m4a", "kind": kind, "lang": lang, "priority": 3, "ref": f"{lang}/{kind}/{n}"}
@@ -269,8 +269,8 @@ class Sessions(unittest.TestCase):
         rows.append({"file": "en/psalm-night/pn-01-new.m4a", "ref": "en/psalm-night/pn-01", "status": "FAILED"})
         self.assertEqual([i["file"] for i in fill.todo(items, rows)][2:4], ["en/psalm-night/pn-01-new.m4a", "en/bible/kjv-mat-001.m4a"])
 
-    def test_a_lengthened_published_imagination_night_queues_after_an_unvoiced_one(self):
-        """Review of #83: the 7 English Imagination Nights lengthened in #79 must not jump the 30 unvoiced Spanish ones."""
+    def test_a_re_voiced_published_imagination_night_queues_after_an_unvoiced_one(self):
+        """Review of #83: a published English Imagination Night voiced again must not jump the unvoiced Spanish ones."""
         b = {"en": T.parse_vpl(["MAT 1:1 The book."]), "es": T.parse_vpl(["MAT 1:1 El libro."])}
         mk = lambda lang, n: {"file": f"{lang}/imagination-night/{n}-new.m4a", "kind": "imagination-night", "lang": lang,
                               "priority": 3, "ref": f"{lang}/imagination-night/{n}"}
@@ -278,6 +278,36 @@ class Sessions(unittest.TestCase):
         rows = [{"file": "en/imagination-night/in-01-old.m4a", "ref": "en/imagination-night/in-01", "status": "passed", "seconds": 1029.0}]
         q = [i["file"] for i in fill.todo(items, rows)]
         self.assertEqual(q[:3], ["es/imagination-night/in-01-new.m4a", "en/imagination-night/in-01-new.m4a", "en/bible/kjv-mat-001.m4a"])
+
+    def test_only_added_quiet_is_never_re_voiced_and_a_word_change_is(self):
+        """Her call 21 Nov 2026: the published nights are not voiced again just to lengthen them."""
+        mk = lambda gaps, words=("Welcome.", "Lie down."): {"file": f"en/psalm-night/pn-01-{hash((gaps, words)) & 0xffff:x}.m4a",
+              "kind": "psalm-night", "lang": "en", "priority": 3, "ref": "c/pn-01.json#pn-01", "heading": "Psalm 23",
+              "verses": list(words), "gaps": list(gaps)}
+        old = mk((8.0, 4.0))
+        rows = [{"file": old["file"], "ref": old["ref"], "status": "passed", "words": fill.words_key(old)}]
+        quieter, reworded = mk((15.0, 9.0)), mk((15.0, 9.0), ("Welcome home.", "Lie down."))
+        self.assertNotEqual(quieter["file"], old["file"])
+        self.assertEqual(fill.todo([quieter], rows), [])
+        self.assertEqual(fill.todo([reworded], rows), [reworded])
+        # The rows voiced before rows recorded their words are matched by the recovered list.
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "voiced-words.json"
+            p.write_text(json.dumps({old["file"]: fill.words_key(old)}))
+            legacy = [{k: v for k, v in rows[0].items() if k != "words"}]
+            with mock.patch.object(fill, "VOICED_WORDS", p):
+                self.assertEqual(fill.todo([quieter], legacy), [])
+                self.assertEqual(fill.todo([reworded], legacy), [reworded])
+
+    def test_the_21_published_nights_are_not_queued_again_for_their_added_quiet(self):
+        rows = fill.read_manifest()
+        legacy = json.loads(fill.VOICED_WORDS.read_text("utf-8"))
+        published = [r for r in rows if r.get("kind") in fill.SESSION_KINDS and r.get("status") == "passed"]
+        self.assertGreaterEqual(len(published), 21, "rule 0: the published nights must be read")
+        self.assertFalse([r["file"] for r in published if not (r.get("words") or legacy.get(r["file"]))])
+        refs = {r["ref"] for r in published}
+        queued = [i["ref"] for i in fill.todo(fill.content_items(fill.REPO), rows) if i["ref"] in refs]
+        self.assertEqual(queued, [])
 
     def test_scripted_quiet_is_not_counted_as_slow_speech(self):
         import qa

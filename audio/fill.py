@@ -55,6 +55,8 @@ HOME = Path(os.environ.get("PBS_HOME", Path.home() / ".peace-be-still"))
 KOKORO_PY = os.environ.get("PBS_KOKORO_PY", str(Path.home() / "Work/claude-work/tts/venv/bin/python"))
 SHELF = os.environ.get("PBS_SHELF", "gdrive:Mac-Shelf/peace-be-still/audio")
 MANIFEST = Path(os.environ.get("PBS_MANIFEST", AUDIO / "manifest.jsonl"))
+# The words of the 21 sessions voiced before rows recorded them (recovered exactly from git, 21 Nov 2026).
+VOICED_WORDS = Path(os.environ.get("PBS_VOICED_WORDS", AUDIO / "voiced-words.json"))
 MAC_BUDGET_BYTES = 5 * 1024 ** 3
 
 # Voices locked 18 Nov 2026 (COMMON.md; VOICES.md). Speed 0.85 is Nicole "as shipped".
@@ -273,11 +275,25 @@ def _file(item: dict) -> str:
     return item["file"]
 
 
+def words_key(item: dict) -> str:
+    """What is said, without the quiet: a script change that only adds quiet keeps it, a word change does not."""
+    return hashlib.sha256(json.dumps([item.get("heading", ""), item.get("verses", [])], ensure_ascii=False).encode()).hexdigest()[:12]
+
+
+def _voiced_words() -> dict:
+    return json.loads(VOICED_WORDS.read_text("utf-8")) if VOICED_WORDS.exists() else {}
+
+
 def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> list:
     """What this run voices: FAILED files with tries left first (never a permanent hole), then files
     not yet in the manifest, each in plan order. Passed files and files out of tries are skipped. Pure."""
     last = latest(rows)
-    mine = [i for i in items if not only or key(i).startswith(only)]
+    # Her call 21 Nov 2026: published audio is never re-voiced only to add quiet (no length is promised to anyone);
+    # a script whose words match a passed file of the same script is done. A word change is voiced again.
+    legacy = _voiced_words()
+    said = {(r.get("ref"), r.get("words") or legacy.get(f)) for f, r in last.items() if r.get("status") == "passed"}
+    mine = [i for i in items if (not only or key(i).startswith(only)) and
+            (key(i) in last or (i.get("ref"), words_key(i)) not in said)]
     # The sleep sessions (the paid core, 21 Nov 2026) are never queued behind retries planned after them:
     # retry-first applies within the part of the plan up to the last session, then within the rest.
     cut = max((n + 1 for n, i in enumerate(mine) if i.get("kind") in SESSION_KINDS), default=0)
@@ -285,8 +301,8 @@ def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> l
     def part(xs):
         retry = [i for i in xs if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
         return retry + [i for i in xs if key(i) not in last]
-    # A re-voice of a published session (its script changed, e.g. lengthened past its floor on
-    # 21 Nov 2026) waits for the sessions never voiced yet: the old file stays served until the new one passes.
+    # A re-voice of a published session (its words changed) waits for the sessions never voiced yet: the old
+    # file stays served until the new one passes.
     voiced = {r.get("ref") for r in last.values() if r.get("status") == "passed"}
     again = [i for i in mine[:cut] if i.get("kind") in SESSION_KINDS and i.get("ref") in voiced]
     first = [i for i in mine[:cut] if i not in again]
@@ -582,7 +598,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     checks["problems"] = result["problems"]
     checks["mastering"] = {k: mastered[k] for k in ("tries", "i", "tp")}
     row = {"file": item["file"], "kind": item["kind"], "lang": item["lang"], "ref": item["ref"],
-           "text": item["text"], "voice": VOICE[item["lang"]]["id"], "seconds": result["seconds"],
+           "text": item["text"], "words": words_key(item), "voice": VOICE[item["lang"]]["id"], "seconds": result["seconds"],
            "checks": checks, "attempts": attempts, "work_s": round(time.monotonic() - t0, 1),
            "status": "passed" if result["pass"] else "FAILED",
            "at": dt.datetime.now(CT).isoformat(timespec="seconds")}
