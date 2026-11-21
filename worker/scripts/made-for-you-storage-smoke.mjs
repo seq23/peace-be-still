@@ -26,14 +26,32 @@ const step = (name, ok) => { console.log(`${ok ? 'PASS' : 'FAIL'} ${name}`); if 
 
 const dir = mkdtempSync(join(tmpdir(), 'mfy-smoke-'));
 writeFileSync(join(dir, 'smoke.m4a'), bytes);
-execFileSync('python3', ['-c', `import sys; sys.path.insert(0, 'audio'); from pathlib import Path; import made_for_you as m
-bucket = m.connect_private(); m.upload({'file': sys.argv[1]}, Path(sys.argv[2]), bucket)`, key, join(dir, 'smoke.m4a')], { stdio: 'inherit' });
-step('the Mac upload (whole-account cap read, r2p: remote, hash verified)', true);
+// The Mac side: the whole account's R2 use is read (publish.account_bytes), an upload that would pass the free
+// cap is a named stop with nothing stored, and a real upload is stored and hash-verified over the r2p: remote.
+const mac = execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, 'audio'); from pathlib import Path; import made_for_you as m, publish, fill
+bucket = m.connect_private(); used = publish.account_bytes(); local = Path(sys.argv[2])
+cap, publish.FREE_CAP_BYTES = publish.FREE_CAP_BYTES, int(used)
+try:
+    m.upload({'file': sys.argv[1] + '.over'}, local, bucket); stopped = None
+except fill.NamedStop as e:
+    stopped = e.code
+publish.FREE_CAP_BYTES = cap
+over = publish.rclone('lsjson', '--stat', f'r2p:{bucket}/{sys.argv[1]}.over', timeout=60).returncode == 0
+m.upload({'file': sys.argv[1]}, local, bucket)
+print(json.dumps({'used': used, 'cap': cap, 'stopped': stopped, 'over_stored': over}))`, key, join(dir, 'smoke.m4a')], { encoding: 'utf8' });
+const seen = JSON.parse(mac.trim().split('\n').pop());
+console.log(`account R2 use ${(seen.used / 1e9).toFixed(2)} GB of the ${(seen.cap / 1e9).toFixed(1)} GB cap (every bucket on the second account)`);
+step('publish.py counts the whole account (a real, non-zero read)', seen.used > 0 && seen.used < seen.cap);
+step('an upload past the free cap is a named stop and stores nothing', seen.stopped === 'MADE_FOR_YOU_R2_FREE_CAP' && !seen.over_stored);
+step('the Mac upload (r2p: remote, hash verified)', true);
 try {
   step('HEAD finds it', await storage.hasAudio(key));
   const res = await fetch(await storage.playUrl(key));
   step('presigned GET is 200 with the same bytes', res.status === 200 && (await res.text()) === bytes);
+  step('the playback link lasts at most 1 hour', Number(new URL(await storage.playUrl(key)).searchParams.get('X-Amz-Expires')) <= 3600);
   step('a 2-hour link is clamped to 1 hour', new URL(await storage.playUrl(key, 7200)).searchParams.get('X-Amz-Expires') === '3600');
+  const tampered = new URL(await storage.playUrl(key)); tampered.searchParams.set('X-Amz-Expires', '86400');
+  step('a link stretched past its hour is refused', (await fetch(tampered)).status === 403);
   await storage.copyAudio(key, copy);
   step('server-side copy under reports/', await storage.hasAudio(copy));
 } finally {
