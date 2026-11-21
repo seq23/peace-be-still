@@ -215,13 +215,14 @@ export function crisisPrompt(lang: 'en' | 'es', teen: boolean, mindset: boolean)
   ].filter(Boolean).join('\n');
 }
 export const crisisSchema = { type: 'object', properties: { text: { type: 'string' } }, required: ['text'], additionalProperties: false };
-// What the crisis model's words must never hold: a secrecy promise, a method or amount, a number
-// (the card has the numbers), or a question of its own (code adds the one question).
-const CRISIS_NEVER = /\b(?:secret|between us|won'?t tell|nobody (?:has to|needs to) know|secreto|entre nosotros|no le dire|how many|dose|dosis|mg|milligram|pills?|pastillas|lethal|letal|rope|cuerda|bridge|puente|blade|cuchilla|gun|arma|pistola)\b|\d{3}|\?/i;
+// What the crisis model's words must never hold: a secrecy promise, a method or amount, or a number
+// (the card has the numbers). A question of its own is dropped, since code adds the one question
+// (run 10: 9 of 12 crisis replies were refused for ending on a question of their own).
+const CRISIS_NEVER = /\b(?:secret|between us|won'?t tell|nobody (?:has to|needs to) know|secreto|entre nosotros|no le dire|how many|dose|dosis|mg|milligram|pills?|pastillas|lethal|letal|rope|cuerda|bridge|puente|blade|cuchilla|gun|arma|pistola)\b|\d{3}/i;
 export function crisisWords(data: unknown): string | null {
   const text = (data as { text?: unknown } | null)?.text;
   if (typeof text !== 'string') return null;
-  const t = text.trim();
+  const t = text.trim().split(/(?<=[.!?…])\s+/).filter(s => !/[?¿]/.test(s)).join(' ').trim();
   return t && t.length <= 600 && !CRISIS_NEVER.test(t) ? t : null;
 }
 /** Her answer to "Are you safe right now?" says she is not (or not sure): the card again. */

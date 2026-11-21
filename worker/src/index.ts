@@ -178,7 +178,9 @@ export const realDeps: Deps = {
   judge(env, input) {
     const now = Date.now();
     const first: LadderRung = { id: 'workers-ai-judge', call: workersAi(env.AI, env.WORKERS_AI_JUDGE_MODEL, { temperature: 0 }), cap: int(env.WORKERS_AI_JUDGE_CALLS_DAILY, 300), day: utcDay(now) };
-    return check(env, now, first, judgeMessages(input), judgeSchema, 200, judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
+    // The judge thinks before it scores (gpt-oss): it gets the budget it was calibrated with (run 10: at 200
+    // tokens its reasoning used everything and 76 of 76 reads came back empty, falling to the paid backup).
+    return check(env, now, first, judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
   },
   rungs(env, now, lane = 'free') {
     if (lane === 'paid') return [paidRung(env, now)];
@@ -347,7 +349,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     let checkIn = { text: checkInText[v.lang], ai: false };
     if (layer !== 'floor' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
       const messages: Message[] = [{ role: 'system', content: crisisPrompt(v.lang, v.teen, mind) }, ...turns.slice(-4).map(t => ({ role: t.role, content: t.text }))];
-      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis'), messages, crisisSchema, 200, metrics, d => crisisWords(d) !== null);
+      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis'), messages, crisisSchema, 600, metrics, d => crisisWords(d) !== null);
       if ('data' in out) checkIn = { text: `${crisisWords(out.data)} ${checkInQuestion[v.lang]}`, ai: true };
       else { tally(metrics, 'crisis_model_down'); logCode('CHAT_CRISIS_MODEL_DOWN', { empty: out.empty }); }
     }

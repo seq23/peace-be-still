@@ -175,3 +175,13 @@ describe('no crisis words in any log', () => {
     expect([...log.mock.calls, ...err.mock.calls].flat().join(' ')).not.toContain('ZEBRA-7731');
   });
 });
+
+describe('the crisis model\'s words (run 10 root cause)', () => {
+  it('a question of its own is dropped, never the whole reply; a number or a method still refuses it', async () => {
+    const { crisisWords } = await import('../src/crisis');
+    expect(crisisWords({ text: 'That sounds so heavy. Can you tell me more? You are not alone in this.' })).toBe('That sounds so heavy. You are not alone in this.');
+    expect(crisisWords({ text: 'Call 988 now.' })).toBeNull();
+    expect(crisisWords({ text: 'Put the pills away.' })).toBeNull();
+    expect(crisisWords({ text: 'Can you talk to someone?' })).toBeNull();
+  });
+});
