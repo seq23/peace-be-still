@@ -103,6 +103,7 @@ let history = false;
 };
 
 // Loaded after the globals above exist.
+const { PAID_CHAT_MESSAGES } = require('../src/gates') as typeof import('../src/gates');
 const { NowPlaying } = require('../src/screens/listen/NowPlaying');
 const { NIGHTS_KEY, nightOf } = require('../src/screens/listen/nights') as typeof import('../src/screens/listen/nights');
 const { tracks: audioTracks } = require('../src/player/usePlayer') as { tracks: Track[] };
@@ -1281,8 +1282,8 @@ test('the rendered paid lane discloses benefits, actual store prices, renewal te
       assert.equal(choices()[0].props['aria-checked'], true);
       assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
       for (const meaning of es
-        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /100 mensajes/, /24 horas/]
-        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, /100 messages/, /24 hours/]) {
+        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, new RegExp(`Hasta ${PAID_CHAT_MESSAGES} mensajes de chat al día\\. Un uso muy intenso durante un mes puede pausarse hasta el mes siguiente\\.`), /24 horas/]
+        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, new RegExp(`Up to ${PAID_CHAT_MESSAGES} chat messages a day\\. Very heavy use across a month may be paused until the next month\\.`), /24 hours/]) {
         assert.match(strings(tree), meaning);
       }
       await press(tree, /\$6\.29/);

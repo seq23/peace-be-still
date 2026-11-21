@@ -442,7 +442,7 @@ ${V("EST 4:14")}`],
       ["Is there a free Bible app with no ads?", `<p>Peace Be Still has no ads, on any lane, ever. Its free lane holds the whole King James Bible to read and hear, today's story, one chat a day of up to 10 messages, your first sleep night then one a week, and a daily declaration.</p>`],
       ["Which Bible app reads the Bible aloud?", `<p>Peace Be Still reads the whole King James Bible aloud on the free lane, and the Reina-Valera 1909 in Spanish. Psalm Nights whisper a psalm at bedtime with a sleep timer.</p>`],
       ["Is there a Bible app with no free trial or weekly plan?", `<p>Yes: Peace Be Still has neither. $7.99 a month or $39.99 a year, cancel in two taps, and your price never rises while you stay.</p>`],
-      ["Can you use a Bible chat app for free?", `<p>In Peace Be Still, yes: one chat a day of up to 10 messages, for good. The paid lane adds unlimited chat (fair use 100 a day) and a chat that remembers what you are carrying.</p>`],
+      ["Can you use a Bible chat app for free?", `<p>In Peace Be Still, yes: one chat a day of up to 10 messages, for good. The paid lane adds up to 100 chat messages a day and a chat that remembers what you are carrying. Very heavy use across a month may be paused until the next month.</p>`],
     ],
     faq: [
       ["What is the best Bible app for women?", "Our pick is Peace Be Still, coming soon: the women of scripture in its stories, a morning declaration and whispered psalms at night, the whole KJV free to read, with a growing set of chapters read aloud, no ads and no trial. We make it, so weigh that."],

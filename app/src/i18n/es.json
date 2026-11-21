@@ -157,7 +157,7 @@
   "paid.cancel": "Cancela en dos toques ›",
   "paid.keepFree": "Lo que es gratis sigue siendo gratis.",
   "paid.keepPrice": "Tu precio no sube mientras sigas con tu suscripción.",
-  "paid.fairUse": "El chat tiene un límite de %{count} mensajes al día.",
+  "paid.fairUse": "Hasta %{count} mensajes de chat al día. Un uso muy intenso durante un mes puede pausarse hasta el mes siguiente.",
   "paid.restore": "Restaurar compras",
   "paid.terms": "Términos",
   "paid.privacy": "Privacidad",

@@ -19,9 +19,10 @@ export function gemini(apiKey: string | undefined, model: string, opts: { missin
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-goog-api-key': apiKey },
       body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents, generationConfig: { responseMimeType: 'application/json', responseJsonSchema: schema, maxOutputTokens: maxTokens, temperature: 0.7, ...thinking(model, opts.thinkingLevel) } }),
-    }, { retries: 2, daily: /PerDay/ }) as { candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>; usageMetadata?: { promptTokenCount?: number; candidatesTokenCount?: number; thoughtsTokenCount?: number; cachedContentTokenCount?: number } };
+    }, { retries: 2, daily: /PerDay/ }) as { candidates?: Array<{ finishReason?: string; content?: { parts?: Array<{ text?: string }> } }>; usageMetadata?: { promptTokenCount?: number; candidatesTokenCount?: number; thoughtsTokenCount?: number; cachedContentTokenCount?: number } };
     const u = data.usageMetadata;
     if (u && onUsage) onUsage({ in: u.promptTokenCount ?? 0, out: u.candidatesTokenCount ?? 0, think: u.thoughtsTokenCount ?? 0, cached: u.cachedContentTokenCount ?? 0 });
+    if (data.candidates?.[0]?.finishReason === 'MAX_TOKENS') throw new RungError('cut_off', 'GEMINI_MAX_TOKENS');
     return parseJson(data.candidates?.[0]?.content?.parts?.map(p => p.text ?? '').join(''));
   };
 }

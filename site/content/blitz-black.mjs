@@ -392,14 +392,14 @@ ${V("EXO 3:7")}`],
 </ul>`],
       ["Which Bible app reads the Bible aloud?", `<p>Peace Be Still reads the whole King James Bible aloud on the free lane, and its Psalm Nights whisper a psalm at bedtime with a sleep timer. Many other Bible apps also have audio; check whether it costs extra.</p>`],
       ["Is there a free Bible app with no ads?", `<p>Peace Be Still has no ads on the free lane or the paid lane, ever. The free lane stays free: the whole King James Bible to read and hear, today's story, one chat a day of up to 10 messages, your first sleep night and then one a week, and a daily declaration.</p>`],
-      ["Is there a Bible app with no free trial or weekly plan?", `<p>Peace Be Still has neither. The paid lane is $7.99 a month or $39.99 a year, and adds unlimited chat (fair use 100 messages a day), chat that remembers what you are carrying, and every past story. You can cancel in two taps.</p>
+      ["Is there a Bible app with no free trial or weekly plan?", `<p>Peace Be Still has neither. The paid lane is $7.99 a month or $39.99 a year, and adds up to 100 chat messages a day, chat that remembers what you are carrying, and every past story. Very heavy use across a month may be paused until the next month. You can cancel in two taps.</p>
 ${V("MAR 4:39")}`],
     ],
     faq: [
       ["Is there a Bible app made for Black people?", "Peace Be Still, coming soon, has Hush Harbor · Black Bible Chat & Stories: a chat in a Black church voice that answers with exact King James verses, and daily Bible stories with Black faces. Everyone is welcome in every journey."],
       ["Which Bible translation does Hush Harbor use?", "The King James Version, quoted word for word from a stored copy with book, chapter and verse. The AI chooses which verses to show, but the words always come from the stored text."],
       ["Is the chat a real pastor?", "No. It is AI and says so on every answer. It never speaks as God or Jesus. If you mention self-harm or abuse, it shows the 988 Lifeline and other help instead of an AI reply."],
-      ["Is Hush Harbor free?", "Yes, on the free lane: one chat a day of up to 10 messages, today's story and the whole King James Bible. The paid lane adds unlimited chat and every past story."],
+      ["Is Hush Harbor free?", "Yes, on the free lane: one chat a day of up to 10 messages, today's story and the whole King James Bible. The paid lane adds up to 100 chat messages a day and every past story. Very heavy use across a month may be paused until the next month."],
     ],
     sources: [["988 Suicide & Crisis Lifeline", "https://988lifeline.org/"], bg("Mark 4:35-41", "Mark 4:35-41 (KJV), Bible Gateway")],
     related: ["/black-bible-chat/", "/questions/african-american-bible/", "/questions/black-christian/", "/questions/black-people-in-the-bible/", "/free-bible-chat/"],

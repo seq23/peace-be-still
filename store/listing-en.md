@@ -18,7 +18,7 @@ Choose your way in: God's Word, or mindset & imagination. Each one is its own sp
 Description body:
 Free, and it stays free: the whole Bible to read, and the Psalms and more chapters read aloud, with new ones added each week. Today's story. One chat a day, up to 10 messages. Your first sleep night, then one a week. A word for each morning. Basic 7-day plans, saved verses, a journal, a streak that never scolds, and cards to share.
 
-The paid lane adds unlimited chat (fair use of 100 messages a day), chat that remembers what you are carrying, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline listening.
+The paid lane adds up to 100 chat messages a day, chat that remembers what you are carrying, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline listening. Very heavy use across a month may be paused until the next month.
 
 Scripture is quoted word for word from the King James Version, and the Reina-Valera 1909 in Spanish.
 

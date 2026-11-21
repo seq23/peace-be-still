@@ -42,7 +42,7 @@ If you report an answer or a session, we keep the answer you reported, the reaso
 
 ## The anonymous install id and limits
 
-To keep chat fair and free, our service creates a random install id the first time you chat. It is not tied to your name, email, phone number or Apple account. Our service uses the install id and a one-way hash of your IP address to count messages each day (1 conversation of up to 10 messages a day in the free lane, up to 100 messages a day in the paid lane) and to stop abuse. So that answers do not repeat, our service also keeps short records of recent answer patterns for each install id: keyed hashes of 8 characters, with no words in them. Those counters and records are deleted within 48 hours. We also keep a count of all chat messages per day, with no text and no identifier, to stay inside the free AI allowances.
+To keep chat fair and free, our service creates a random install id the first time you chat. It is not tied to your name, email, phone number or Apple account. Our service uses the install id and a one-way hash of your IP address to count messages each day (1 conversation of up to 10 messages a day in the free lane, up to 100 chat messages a day in the paid lane) and to stop abuse. So that answers do not repeat, our service also keeps short records of recent answer patterns for each install id: keyed hashes of 8 characters, with no words in them. Those counters and records are deleted within 48 hours. We also keep a count of all chat messages per day, with no text and no identifier, to stay inside the free AI allowances.
 
 ## Audio and the Bible
 

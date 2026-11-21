@@ -2,7 +2,8 @@ export type Message = { role: 'system' | 'user' | 'assistant'; content: string }
 export type JsonSchema = Record<string, unknown>;
 /** Why a rung gave nothing. Only 'exhausted' (the provider said today's quota is used up) and
  *  'missing_key' mean the rung is out for the day; everything else is a passing failure. */
-export type RungErrorKind = 'missing_key' | 'exhausted' | 'rate_limited' | 'failed' | 'malformed';
+/** cut_off: the reply hit its token cap (thinking counts inside it on Gemini) and stopped mid-answer. */
+export type RungErrorKind = 'missing_key' | 'exhausted' | 'rate_limited' | 'failed' | 'malformed' | 'cut_off';
 export class RungError extends Error {
   constructor(readonly kind: RungErrorKind, code: string) { super(code); }
 }

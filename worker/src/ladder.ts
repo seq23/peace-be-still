@@ -41,7 +41,7 @@ export async function runLadder(db: D1Database, rungs: LadderRung[], messages: M
       return { rung: rung.id, data };
     } catch (error) {
       const kind = error instanceof RungError ? error.kind : 'failed';
-      const label = { rate_limited: '429', missing_key: 'missing', malformed: 'malformed', exhausted: 'exhausted', failed: 'fail' }[kind];
+      const label = { rate_limited: '429', missing_key: 'missing', malformed: 'malformed', cut_off: 'cutoff', exhausted: 'exhausted', failed: 'fail' }[kind];
       tally(metrics, `${label}:${rung.id}`);
       logCode(error instanceof RungError ? error.message : 'RUNG_ERROR', { rung: rung.id });
       if (kind === 'exhausted') await markOut(db, rung);

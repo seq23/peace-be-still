@@ -267,6 +267,13 @@ export const slowText = {
   es: 'Por favor, ve un poco más despacio. El chat volverá a responder en unos minutos.',
 };
 /** The fair-use pause: the date is when her meter (or today's app ceiling) resets, YYYY-MM-DD. */
+/** Her own monthly backstop (CHAT_USER_MONTHLY_USD_*): the same words the price screen and terms use, and when it opens. */
+export function heavyUseText(lang: 'en' | 'es', date: string): string {
+  const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+  return lang === 'es'
+    ? `Un uso muy intenso durante un mes puede pausarse hasta el mes siguiente. Tu chat está en pausa hasta el ${shown}; tu Biblia está aquí cuando quieras.`
+    : `Very heavy use across a month may be paused until the next month. Your chat is paused until ${shown}; your Bible is here any time.`;
+}
 export function fairUseText(lang: 'en' | 'es', date: string): string {
   const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
   return lang === 'es' ? `Llegaste al límite de chat de este mes; se renueva el ${shown}.` : `You've reached this month's chat limit; it resets on ${shown}.`;

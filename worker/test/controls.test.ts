@@ -116,36 +116,53 @@ describe('the paid lane', () => {
     await env.DB.prepare('INSERT INTO chat_paid_spend VALUES (?, ?, ?, ?)').bind(iid(token), '2026-11', 5_000_000, NOW + 30 * 86400_000).run();
     const r = await chat(d, 'How do I forgive my sister?', { token });
     expect(r.body.kind).toBe('fair_use');
-    expect(answerText(r)).toBe("You've reached this month's chat limit; it resets on December 1.");
+    expect(answerText(r)).toBe('Very heavy use across a month may be paused until the next month. Your chat is paused until December 1; your Bible is here any time.');
     expect(paid.calls.length + free.calls.length).toBe(0);
   });
-  it('a yearly subscriber pauses at $1 of chat in a calendar month (her ruling 21 Nov 2026): fair use, never the free lane; crisis still answers', async () => {
-    expect(env.CHAT_USER_MONTHLY_USD_YEARLY).toBe('1');
+  it('a yearly subscriber pauses at $1.33 of chat in a calendar month (her ruling 21 Nov 2026, until Apple\'s Small Business Program): the heavy-use pause with its reset date, never the free lane; crisis still answers', async () => {
+    expect(env.CHAT_USER_MONTHLY_USD_YEARLY).toBe('1.33');
     const free = scripted('gemini-free', [good(), good()]);
     const paid = scripted('gemini-paid', [good(), good()]);
-    const crisis = scripted('crisis-gemini', [{ ...good('You can rest a moment here, and God stays close. Lord, keep us tonight.', ['Psalm 4:8']), risk: 'none' }]);
     const yearly = async () => ({ paid: true, paidUntil: NOW + 300 * 86400_000 });
-    const d = deps({ paid: yearly, rungs: (_e, _n, lane) => (lane === 'paid' ? [paid.rung] : lane === 'crisis' ? [crisis.rung] : [free.rung]) });
+    const d = deps({ paid: yearly, rungs: (_e, _n, lane) => (lane === 'paid' ? [paid.rung] : [free.rung]) });
     const token = await tokenFor(d);
     const month = (micro: number) => env.DB.prepare('INSERT INTO chat_paid_spend VALUES (?, ?, ?, ?) ON CONFLICT DO UPDATE SET micro = excluded.micro').bind(iid(token), '2026-11', micro, NOW + 300 * 86400_000).run();
-    await month(999_999);
+    await month(1_329_999);
     expect((await chat(d, 'How do I forgive my sister?', { token })).body.kind).toBe('answer');
     await new Promise(res => setTimeout(res, 50)); // her memory note, written after the answer
-    await month(1_000_000);
+    await month(1_330_000);
     const before = paid.calls.length;
     const r = await chat(d, 'How do I forgive my brother?', { token });
     expect(r.body.kind).toBe('fair_use');
-    expect(answerText(r)).toBe("You've reached this month's chat limit; it resets on December 1.");
+    expect(answerText(r)).toBe('Very heavy use across a month may be paused until the next month. Your chat is paused until December 1; your Bible is here any time.');
     expect(paid.calls.length).toBe(before);
     expect(free.calls.length).toBe(0);
     const c = await chat(d, 'I want to kill myself', { token });
     expect(c.body.kind).toBe('crisis');
     expect(answerText(c)).toContain('988');
   });
+  it('fair use is 100 chat messages a day for every paid subscriber: message 101 pauses until tomorrow, never the free lane; crisis still answers', async () => {
+    const free = scripted('gemini-free', [good(), good()]);
+    const paid = scripted('gemini-paid', [good(), good(), good()]);
+    for (const paidUntil of [NOW + 20 * 86400_000, NOW + 300 * 86400_000]) {
+      const d = deps({ paid: async () => ({ paid: true, paidUntil }), rungs: (_e, _n, lane) => (lane === 'paid' ? [paid.rung] : [free.rung]) });
+      const token = await tokenFor(d);
+      await env.DB.prepare('INSERT INTO chat_device_day (day, device, conversation, messages) VALUES (?, ?, ?, 99)').bind(centralDay(NOW), iid(token), 'earlier').run();
+      expect((await chat(d, 'How do I forgive my sister?', { token })).body.kind).toBe('answer'); // message 100
+      await new Promise(res => setTimeout(res, 50));
+      const before = paid.calls.length;
+      const r = await chat(d, 'How do I forgive my brother?', { token }); // message 101
+      expect(r.body.kind).toBe('limit');
+      expect(answerText(r)).toMatch(/opens again tomorrow/);
+      expect(paid.calls.length).toBe(before);
+      expect(free.calls.length).toBe(0);
+      expect((await chat(d, 'I want to kill myself', { token })).body.kind).toBe('crisis');
+    }
+  });
   it('a missing or broken ceiling is $0, never unmetered', () => {
     expect(userCeilingUsd({}, null, NOW)).toBe(0);
     expect(userCeilingUsd({ CHAT_USER_MONTHLY_USD_MONTHLY: 'five' }, NOW + 20 * 86400_000, NOW)).toBe(0);
-    expect(userCeilingUsd(env, NOW + 300 * 86400_000, NOW)).toBe(1);
+    expect(userCeilingUsd(env, NOW + 300 * 86400_000, NOW)).toBe(1.33);
     expect(userCeilingUsd(env, NOW + 20 * 86400_000, NOW)).toBe(5);
   });
   // PAID_AI_MONTHLY_CAP_USD ($100 a calendar month, CT), counted from every paid-route call this month.

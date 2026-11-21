@@ -40,7 +40,7 @@ const SPANISH = {
 // A capitalised word counts as a name when it sits mid-sentence, or when the English texts never
 // use it in lower case (RevenueCat, Apple and Cloudflare often open a sentence). The few ordinary
 // words that open a sentence and never recur in lower case are listed here.
-const SENTENCE_OPENERS = new Set(["Everything", "Manage", "Nothing", "Using", "Questions", "Listening", "Effective"]);
+const SENTENCE_OPENERS = new Set(["Everything", "Manage", "Nothing", "Using", "Questions", "Listening", "Effective", "Very"]);
 const lowerWords = new Set(LEGAL.map((e) => readLegal(e.en.file)).join("\n").match(/\b\p{Ll}[\p{L}'-]*/gu));
 const names = (raw) => {
   const t = raw.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");

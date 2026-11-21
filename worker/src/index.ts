@@ -27,7 +27,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, checkInQuestion, checkInText, consentText, crisisText, fairUseText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, checkInQuestion, checkInText, consentText, crisisText, fairUseText, heavyUseText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -420,7 +420,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (appMicro >= 0.8 * capUsd * 1e6) await capAlert(env.DB, now, 80, appMicro, capUsd);
     if (lane === 'paid' && (await userSpend(env.DB, who.installId, now)) >= userCeilingUsd(env, paid.paidUntil, now) * 1e6) {
       tally(metrics, 'user_ceiling'); logCode('CHAT_USER_CEILING');
-      return fixedReply('fair_use', fairUseText(v.lang, resetsOn(now)));
+      return fixedReply('fair_use', heavyUseText(v.lang, resetsOn(now)));
     }
     if (paid.paid) meter = { paidUntil: paid.paidUntil };
   }

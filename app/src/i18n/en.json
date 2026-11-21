@@ -157,7 +157,7 @@
   "paid.cancel": "Cancel in two taps ›",
   "paid.keepFree": "Nothing free is ever taken back.",
   "paid.keepPrice": "Your price never rises while you stay.",
-  "paid.fairUse": "Chat has a fair-use limit of %{count} messages a day.",
+  "paid.fairUse": "Up to %{count} chat messages a day. Very heavy use across a month may be paused until the next month.",
   "paid.restore": "Restore Purchases",
   "paid.terms": "Terms",
   "paid.privacy": "Privacy",
