@@ -22,7 +22,7 @@ import { openRouter } from './providers/openrouter';
 import type { Message } from './providers/types';
 import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
-import { hashShape, planFor, planSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Shape } from './quality/variety';
+import { hashShape, planFor, planSeq, recentShapes, repeats, saveShape, shapeOf, varietyObjection, withoutSentences, type Shape } from './quality/variety';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, crisisText, fallbackText, identityText, limitText, noFreeModelText, oneTranslationText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
@@ -360,17 +360,29 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     let problems = checked.ok ? [] : checked.problems;
     let variety = '';
     if (checked.ok) {
-      const plainShape = shapeOf(checked.text);
-      const shape = await hashShape(plainShape, env.IP_HASH_SECRET!);
-      const scripture = withNamed(checked.scripture);
+      let text = checked.text;
+      let plainShape = shapeOf(text);
+      let shape = await hashShape(plainShape, env.IP_HASH_SECRET!);
+      let scripture = withNamed(checked.scripture);
       problems = repeats(shape, recent);
-      if (problems.length) { variety = varietyObjection(shape, plainShape.said, recent); spares.push({ text: checked.text, scripture, shape }); }
+      // A repeat is a habitual sentence: take it out in code and re-check what is left (every gate
+      // check and the repeat check again), before any rewrite (run 44849643272).
+      if (problems.length) for (const shorter of withoutSentences(text)) {
+        const trimmedShape = await hashShape(shapeOf(shorter), env.IP_HASH_SECRET!);
+        if (repeats(trimmedShape, recent).length) continue;
+        const again = await checkAnswer({ text: shorter, references: (out.data as { references?: unknown }).references }, gate);
+        if (!again.ok) continue;
+        text = again.text; plainShape = shapeOf(text); shape = trimmedShape; scripture = withNamed(again.scripture); problems = [];
+        tally(metrics, 'variety_trimmed');
+        break;
+      }
+      if (problems.length) { variety = varietyObjection(shape, plainShape.said, recent); spares.push({ text, scripture, shape }); }
       else {
-        const j = await judge(checked.text, scripture);
+        const j = await judge(text, scripture);
         if (j.verdict === 'fail') problems = j.which.map(w => `judge:${w}`);
         if (j.verdict === 'down') tally(metrics, 'judge_down');
         if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);
-        if (!problems.length) return show(checked.text, scripture, shape);
+        if (!problems.length) return show(text, scripture, shape);
       }
     }
     if (problems.some(p => RED_LINES.has(p) || p.startsWith('judge:'))) tally(metrics, 'red_line');

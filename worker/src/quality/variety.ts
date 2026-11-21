@@ -226,10 +226,27 @@ export function planFor(seq: number, lane: Lane, door: 'faith' | 'mindset' = 'fa
   }
   const [kind, word] = pickClose(CLOSE_EN);
   const close = kind === 'P'
-    ? `End with a short prayer for her in ONE sentence whose first word is "${word}".`
+    ? `End with a short prayer to God for her in ONE sentence whose first word is "${word}" and that calls on God by name (Lord, Father, God or Jesus), so it is plainly God being asked, never you doing it.`
     : `End with ONE sentence, in your own words, on what one of your verses means for her today, with its reference in parentheses at the end; do not retell or quote its words. The sentence's first word is "${word}".`;
   return { seq, text: `The plan for this answer (follow it; never mention it):\n- ${pick(OPEN_EN)}\n- ${pick(MIDDLE_EN)}\n- This time do not use these words: ${rest(REST_EN)}.\n- The one picture you may use, in your own words, is ${pickClose(PICTURE_EN)}; use no other picture or metaphor.\n- Never write a reference followed by "says", "tells us" or "reminds us": say the point in your own words and put the reference in parentheses after it.\n- If these rules ask you to suggest her pastor or a trusted adult, do it before the last sentence, never as the first one.\n- ${close} Nothing after that sentence.` };
 }
 /** For the tests: every closing word list has more distinct closing stems than the window. */
 export const pictureStemsFor = (lane: 'en' | 'es') => pictureStems(lane === 'es' ? PICTURE_ES : PICTURE_EN);
 export const closeStems = (lane: Lane) => (lane === 'es' ? CLOSE_ES.map(c => c[1]) : lane === 'mindset' ? CLOSE_MINDSET : CLOSE_EN.map(c => c[1])).map(w => stem(fold(w)));
+
+/** Her answer's sentences, as written (the same split shapeOf uses). */
+export const sentencesIn = (text: string) => text.split(/(?<=[.!?])\s+/).map(x => x.trim()).filter(Boolean);
+/**
+ * The texts left when one or two sentences (never the last: it is the planned closing, C13) are taken
+ * out, fewest removals first, keeping at least two sentences. Used when a draft repeats a recent
+ * answer: what repeats is a habitual SENTENCE ("mercy is a fundamental part of His character"), so
+ * code removes it and re-checks the rest, instead of asking the model to write the whole answer again.
+ */
+export function withoutSentences(text: string): string[] {
+  const s = sentencesIn(text);
+  const out: string[] = [];
+  const keep = (drop: number[]) => s.filter((_, i) => !drop.includes(i)).join(' ');
+  for (let i = 0; i < s.length - 1; i++) if (s.length - 1 >= 2) out.push(keep([i]));
+  for (let i = 0; i < s.length - 1; i++) for (let j = i + 1; j < s.length - 1; j++) if (s.length - 2 >= 2) out.push(keep([i, j]));
+  return out;
+}

@@ -2,7 +2,7 @@ import { env } from 'cloudflare:test';
 import { describe, expect, it } from 'vitest';
 import { cleanup } from '../src/cleanup';
 import { deleteMemory } from '../src/memory';
-import { closeStems, hashShape, pictureStemsFor, planFor, RECENT_ALL, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Lane } from '../src/quality/variety';
+import { closeStems, hashShape, pictureStemsFor, withoutSentences, planFor, RECENT_ALL, recentShapes, repeats, saveShape, shapeOf, varietyObjection, type Lane } from '../src/quality/variety';
 import type { LadderRung } from '../src/ladder';
 import type { Message } from '../src/providers/types';
 import { call, chat, deps, good, NOW, scripted, tokenFor } from './helpers';
@@ -186,5 +186,23 @@ describe('the plan code chooses before the model writes (round 5 rebuild)', () =
     const pictureOf = (n: number, attempt = 0) => /(?:picture you may use, in your own words, is|imagen que puedes usar, con tus palabras, es) ([^;]+);/.exec(planFor(n, lane, 'faith', attempt).text)![1];
     for (let start = 1; start < 120; start += 11) expect(new Set(Array.from({ length: RECENT_ALL + 1 }, (_, i) => pictureOf(start + i))).size).toBe(RECENT_ALL + 1);
     expect(pictureOf(7, 2)).toBe(pictureOf(7)); // a rewrite keeps its picture
+  });
+  it('a habitual sentence that repeats a recent answer is taken out in code, re-checked, and the rest shown with no rewrite (run 44849643272 q06)', async () => {
+    const habit = 'Mercy is a fundamental part of His character and nature.';
+    const first = good(`Your son is still loved. ${habit} Lord, keep him near You.`, ['Psalm 34:18']);
+    const d = deps({ rungList: [scripted('workers-ai', [first]).rung] });
+    const token = await tokenFor(d);
+    const conversation = crypto.randomUUID();
+    await chat(d, 'My son left the church.', { token, body: { conversation } });
+    const b = scripted('workers-ai', [good(`Caring for your mother takes everything you have. ${habit} You can ask your church for a meal or an hour of rest this week. Father, carry her through tomorrow.`, ['Psalm 46:1'])]);
+    const r = await chat(deps({ rungList: [b.rung] }), 'Caring for my mom with dementia is wearing me out.', { token, body: { conversation } });
+    expect(r.body.kind).toBe('answer');
+    expect(b.calls.length).toBe(1);
+    expect(r.body.text).toBe('Caring for your mother takes everything you have. You can ask your church for a meal or an hour of rest this week. Father, carry her through tomorrow.');
+  });
+  it('the planned closing is never taken out, and two sentences always stay', () => {
+    const t = 'One plain sentence here. Another plain sentence there. A third one follows. Lord, be near her.';
+    expect(withoutSentences(t).every(x => x.endsWith('Lord, be near her.'))).toBe(true);
+    expect(withoutSentences('Only this. Lord, be near.')).toEqual([]);
   });
 });
