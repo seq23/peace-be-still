@@ -111,7 +111,7 @@ const { NowPlaying } = require('../src/screens/listen/NowPlaying');
 const { NIGHTS_KEY, nightOf } = require('../src/screens/listen/nights') as typeof import('../src/screens/listen/nights');
 const { tracks: audioTracks } = require('../src/player/usePlayer') as { tracks: Track[] };
 const { Daily } = require('../src/screens/daily/Daily');
-const { ART_BASE, ART_MANIFEST_KEY } = require('../src/story/art') as typeof import('../src/story/art');
+const { ART_BASE, ART_MANIFEST_KEY, artId } = require('../src/story/art') as typeof import('../src/story/art');
 const { SettingsProvider, useSettings } = require('../src/settings');
 const { PurchasesProvider, useCanUse } = require('../src/purchases/provider') as typeof import('../src/purchases/provider');
 const { Text } = require('react-native');
@@ -679,9 +679,13 @@ for (const locale of ['en', 'es'] as const) {
     <Daily page={page} now={date} id={storyId} back={() => {}} read={() => {}}
       upgrade={() => calls.push(['push', '/paid'])} open={(next: DailyPage, id?: string) => calls.push(['open', [next, id]])} />);
 
-  test(`Daily ${locale}: story art shows only for an approved id (4:3, rounded, alt = title); a miss, a 404 or no network shows the story exactly as before`, async () => {
+  test(`Daily ${locale}: story art shows only for its own look's approved id (mr- for Mi Refugio, hh- otherwise; the bare id or the other look never shows) (4:3, rounded, alt = title); a miss, a 404 or no network shows the story exactly as before`, async () => {
     const now = new Date();
     const story = storyFor(shelf(tellingFor(locale, person.journey as JourneyId), 'adult'), now)!;
+    const id = artId(story);
+    assert.equal(id, `${locale === 'es' ? 'mr' : 'hh'}-${story.id}`); // Spanish readers read Mi Refugio; the test person (plain telling) gets the Black-cast painting
+    assert.equal(artId({ id: 'x', telling: 'hush-harbor' }), 'hh-x');
+    assert.equal(artId({ id: 'x', telling: 'mi-refugio' }), 'mr-x');
     const art = (tree: ReactTestRenderer) => host(tree, 'ExpoImage');
     const fresh = async (mode: typeof artMode, ids: string[]) => {
       artMode = mode; artManifest = { version: 7, ids }; local.delete(ART_MANIFEST_KEY); artFetches.length = 0;
@@ -690,10 +694,10 @@ for (const locale of ['en', 'es'] as const) {
       return page;
     };
     // Approved: the header image, from the Worker, versioned, cached on disk.
-    let page = await fresh('ok', [story.id, 'some-other-story']);
+    let page = await fresh('ok', [id, 'some-other-story']);
     assert.equal(art(page).length, 1);
     const img = art(page)[0].props;
-    assert.equal(img.source.uri, `${ART_BASE}/${story.id}.webp?v=7`);
+    assert.equal(img.source.uri, `${ART_BASE}/${id}.webp?v=7`);
     assert.equal(img.cachePolicy, 'disk');
     assert.equal(img.accessibilityLabel, story.title);
     assert.equal(img.style.aspectRatio, 4 / 3);
@@ -703,14 +707,14 @@ for (const locale of ['en', 'es'] as const) {
     assert.equal(art(page).length, 0);
     assert.ok(strings(page).includes(story.title));
     // Not in the manifest: no image element, so the image is never requested; the story still reads.
-    for (const [mode, ids] of [['ok', ['some-other-story']], ['404', [story.id]], ['down', [story.id]]] as const) {
+    for (const [mode, ids] of [['ok', ['some-other-story']], ['404', [id]], ['down', [id]], ['ok', [story.id, (id.startsWith('mr-') ? 'hh-' : 'mr-') + story.id]]] as const) {
       page = await fresh(mode, [...ids]);
       assert.equal(art(page).length, 0, mode);
       assert.ok(strings(page).includes(story.title), mode);
       assert.ok(artFetches.every(u => u.endsWith('/manifest.json')), mode);
     }
     // Offline after a good day: the kept manifest still shows the picture (expo-image serves it from disk).
-    artMode = 'ok'; artManifest = { version: 8, ids: [story.id] }; local.delete(ART_MANIFEST_KEY);
+    artMode = 'ok'; artManifest = { version: 8, ids: [id] }; local.delete(ART_MANIFEST_KEY);
     await renderDaily('story', now); await act(async () => { await new Promise(r => setTimeout(r, 0)); });
     artMode = 'down'; artFetches.length = 0;
     page = await renderDaily('story', now); await act(async () => { await new Promise(r => setTimeout(r, 0)); });

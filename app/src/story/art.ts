@@ -7,6 +7,10 @@ import { useEffect, useState } from 'react';
 import { CHAT_API } from '../chat/api';
 
 export const ART_BASE = `${CHAT_API}/story-art`;
+
+/** A story's art id: one painting per look, because Hush Harbor and Mi Refugio share story ids. Mi Refugio
+ *  gets its Latino-cast painting (`mr-`); Hush Harbor and the plain telling share the Black-cast one (`hh-`). */
+export const artId = (story: { id: string; telling: string }): string => `${story.telling === 'mi-refugio' ? 'mr' : 'hh'}-${story.id}`;
 export const ART_MANIFEST_KEY = 'peace-be-still-story-art-manifest';
 const DAY = 24 * 3600_000;
 type Manifest = { version: number; ids: string[] };
