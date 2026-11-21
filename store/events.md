@@ -16,12 +16,12 @@ Dates: 4 to 24 Jan 2027 (the new-year 21 days of prayer)
 Short description: 21 days of stories, chat and prayer
 Long description: Churches and friends go through 21 days of Hush Harbor together: a story, a word and a prayer each day.
 
-## Bible Stories with Black Faces
+## Black History Month Stories
 Door: God's Word
 Badge: Premiere
 Dates: 1 to 28 Feb 2027 (Black History Month)
-Short description: A new illustrated story every day in February
-Long description: Moses, Esther, Daniel and Ruth, drawn with Black faces and told with the King James text beside each one.
+Short description: A new Bible story every day in February
+Long description: Moses, Esther, Daniel and Ruth, told in a Black church voice with the KJV beside each.
 
 ## Lent Psalm Nights
 Door: God's Word
