@@ -14,6 +14,8 @@
   "workers_dev": false,
   "preview_urls": false,
   "routes": [{ "pattern": "peacebestillapp.com/api/*", "zone_name": "peacebestillapp.com" }],
+  // Story artwork (src/storyart.ts): approved images and their manifest; the deploy script creates the bucket.
+  "r2_buckets": [{ "binding": "STORY_ART", "bucket_name": "pbs-story-art" }],
   "d1_databases": [
     {
       "binding": "DB",

@@ -108,6 +108,7 @@ const { NowPlaying } = require('../src/screens/listen/NowPlaying');
 const { NIGHTS_KEY, nightOf } = require('../src/screens/listen/nights') as typeof import('../src/screens/listen/nights');
 const { tracks: audioTracks } = require('../src/player/usePlayer') as { tracks: Track[] };
 const { Daily } = require('../src/screens/daily/Daily');
+const { ART_BASE, ART_MANIFEST_KEY } = require('../src/story/art') as typeof import('../src/story/art');
 const { SettingsProvider, useSettings } = require('../src/settings');
 const { PurchasesProvider, useCanUse } = require('../src/purchases/provider') as typeof import('../src/purchases/provider');
 const { Text } = require('react-native');
@@ -163,9 +164,19 @@ beforeEach(() => {
   publishedTracks = audioTracks;
 });
 const realFetch = globalThis.fetch;
+const artFetches: string[] = [];
+let artMode: 'ok' | '404' | 'down' = 'ok';
+let artManifest: { version: number; ids: string[] } = { version: 0, ids: [] };
 mock.method(globalThis, 'fetch', async (url: string) => {
   // Lane 2S loads the Bible database from its bundled asset (a data: URL here); only the audio manifest is faked.
   if (url.startsWith('data:')) return realFetch(url);
+  // Story artwork's manifest (src/story/art.ts): what the Worker says is approved, or an outage.
+  if (url.endsWith('/story-art/manifest.json')) {
+    artFetches.push(url);
+    if (artMode === 'down') throw new TypeError('Network request failed');
+    if (artMode === '404') return new Response('Not found', { status: 404 });
+    return Response.json(artManifest);
+  }
   assert.equal(url, audioBase + 'manifest.jsonl');
   return new Response(publishedTracks.map(track => JSON.stringify({ ...track, status: 'passed' })).join('\n'));
 });
@@ -663,6 +674,46 @@ for (const locale of ['en', 'es'] as const) {
   const renderDaily = (page: DailyPage, date: Date, value: object = person, storyId?: string) => mount('dailyPage', value, {}, () =>
     <Daily page={page} now={date} id={storyId} back={() => {}} read={() => {}}
       upgrade={() => calls.push(['push', '/paid'])} open={(next: DailyPage, id?: string) => calls.push(['open', [next, id]])} />);
+
+  test(`Daily ${locale}: story art shows only for an approved id (4:3, rounded, alt = title); a miss, a 404 or no network shows the story exactly as before`, async () => {
+    const now = new Date();
+    const story = storyFor(shelf(tellingFor(locale, person.journey as JourneyId), 'adult'), now)!;
+    const art = (tree: ReactTestRenderer) => host(tree, 'ExpoImage');
+    const fresh = async (mode: typeof artMode, ids: string[]) => {
+      artMode = mode; artManifest = { version: 7, ids }; local.delete(ART_MANIFEST_KEY); artFetches.length = 0;
+      const page = await renderDaily('story', now);
+      await act(async () => { await new Promise(r => setTimeout(r, 0)); });
+      return page;
+    };
+    // Approved: the header image, from the Worker, versioned, cached on disk.
+    let page = await fresh('ok', [story.id, 'some-other-story']);
+    assert.equal(art(page).length, 1);
+    const img = art(page)[0].props;
+    assert.equal(img.source.uri, `${ART_BASE}/${story.id}.webp?v=7`);
+    assert.equal(img.cachePolicy, 'disk');
+    assert.equal(img.accessibilityLabel, story.title);
+    assert.equal(img.style.aspectRatio, 4 / 3);
+    assert.ok(img.style.borderRadius > 0);
+    // A listed image that fails to load (gone from R2, offline before it was kept): hidden, never an empty 4:3 box.
+    await act(async () => art(page)[0].props.onError({ error: 'HTTP 404' }));
+    assert.equal(art(page).length, 0);
+    assert.ok(strings(page).includes(story.title));
+    // Not in the manifest: no image element, so the image is never requested; the story still reads.
+    for (const [mode, ids] of [['ok', ['some-other-story']], ['404', [story.id]], ['down', [story.id]]] as const) {
+      page = await fresh(mode, [...ids]);
+      assert.equal(art(page).length, 0, mode);
+      assert.ok(strings(page).includes(story.title), mode);
+      assert.ok(artFetches.every(u => u.endsWith('/manifest.json')), mode);
+    }
+    // Offline after a good day: the kept manifest still shows the picture (expo-image serves it from disk).
+    artMode = 'ok'; artManifest = { version: 8, ids: [story.id] }; local.delete(ART_MANIFEST_KEY);
+    await renderDaily('story', now); await act(async () => { await new Promise(r => setTimeout(r, 0)); });
+    artMode = 'down'; artFetches.length = 0;
+    page = await renderDaily('story', now); await act(async () => { await new Promise(r => setTimeout(r, 0)); });
+    assert.equal(art(page).length, 1);
+    assert.equal(artFetches.length, 0); // asked at most once a day
+    artMode = 'ok'; artManifest = { version: 0, ids: [] }; local.delete(ART_MANIFEST_KEY);
+  });
 
   test(`Daily ${locale}: today's story is a passed library story in every build, read from its own telling`, async () => {
     const now = new Date();

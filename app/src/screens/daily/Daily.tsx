@@ -12,6 +12,7 @@ import { dayKey, type Settings } from '../../model';
 import type { Key } from '../../i18n';
 import { DeclarationVerse } from './DeclarationVerse';
 import { StoryText } from './StoryText';
+import { StoryArt } from '../../story/StoryArt';
 import { mindsetDeclarations, mindsetTopics, plans, topicNames, type TopicId } from './content';
 import { localRecord } from './local';
 import { markFirstValue } from '../../reminders';
@@ -149,6 +150,7 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
       </>}
     </View> : !paid && <TextLink onPress={upgrade}>{t('declaration.topicsPaid')}</TextLink>)}
     {page === 'story' && <>
+      {story && <StoryArt id={story.id} title={story.title} />}
       {story ? <StoryText story={story} /> : <Body>{t('story.none')}</Body>}
       {story && link(story.refs[0], t('daily.readBible'))}
       {canUse('pastStories') ? <TextLink onPress={() => open('stories')}>{t('story.past')}</TextLink>

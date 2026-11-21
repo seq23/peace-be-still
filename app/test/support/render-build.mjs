@@ -56,6 +56,8 @@ const MOCKS = {
     const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
     exports.Stack = layout('Stack'); exports.Tabs = layout('Tabs');`,
   // Native modules by name: the test's fakes (globalThis.__pbsNative), none by default (as on web).
+  // expo-image: a host element the tests can find by type, with the props it was given.
+  'expo-image': `exports.Image = 'ExpoImage';`,
   'expo-modules-core': `exports.requireOptionalNativeModule = name => globalThis.__pbsNative?.[name] ?? null;`,
   'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
   'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en', regionCode: globalThis.__pbsRegion ?? 'US' }];`,
@@ -98,7 +100,7 @@ for (const file of files) await build({
     b.onResolve({ filter: /\/player\/usePlayer$/ }, () => ({ path: 'player-hook', namespace: 'mock' }));
     b.onResolve({ filter: /\.(db|wasm)$/ }, args => ({ path: args.path.split('/').at(-1), namespace: 'bible-asset' }));
     b.onLoad({ filter: /.*/, namespace: 'bible-asset' }, args => ({ contents: `module.exports = ${JSON.stringify(args.path)}` }));
-    b.onResolve({ filter: /^(expo-modules-core|@react-native-community\/datetimepicker|expo-notifications|expo-audio|expo-brightness|expo-asset|expo-file-system|sql\.js|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|expo-crypto|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
+    b.onResolve({ filter: /^(expo-image|expo-modules-core|@react-native-community\/datetimepicker|expo-notifications|expo-audio|expo-brightness|expo-asset|expo-file-system|sql\.js|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|expo-crypto|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
     b.onLoad({ filter: /.*/, namespace: 'mock' }, args => ({
       contents: MOCKS[args.path] ?? `module.exports = new Proxy({}, { get: (_, key) => key === '__esModule' ? false : String(key) });`,
       loader: 'js', resolveDir: process.cwd(),
