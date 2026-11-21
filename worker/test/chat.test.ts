@@ -1,4 +1,5 @@
 import { env } from 'cloudflare:test';
+import { PAID_CHAT_MESSAGES } from '../src/shared';
 import { describe, expect, it, vi } from 'vitest';
 import { buildChatRequest } from '../../app/src/chat/contract';
 import { initial, type Settings } from '../../app/src/model';
@@ -121,7 +122,7 @@ describe('daily limits (D1 triggers)', () => {
     const r = await chat(d, 'hello', { body: { paid: true } });
     expect(r.body.remaining).toBe(9);
     const paid = deps({ rungList: [scripted('workers-ai', [good()]).rung], paidNow: true });
-    expect((await chat(paid, 'hello')).body.remaining).toBe(99);
+    expect((await chat(paid, 'hello')).body.remaining).toBe(PAID_CHAT_MESSAGES - 1);
   });
   it('paid: 100 messages a day, across conversations', async () => {
     const day = centralDay(NOW);

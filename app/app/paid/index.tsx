@@ -87,10 +87,14 @@ export default function PaidScreen() {
         <Body size={15}>{t('paid.intro')}</Body>
       </View>
       <View style={{ gap: 8 }}>
-        {/* The headline and, right under it, what "unlimited" means (both from PAID_CHAT_MESSAGES). */}
+        {/* The headline, the training promise right under it, and the small print (PAID_CHAT_MESSAGES). */}
         <Body size={16} muted={false}>{t(settings.door === 'mindset' ? 'paid.chatHeadlineMindset' : 'paid.chatHeadline')}</Body>
-        <Body size={14} muted={false}>{t('paid.fairUse', { count: PAID_CHAT_MESSAGES })}</Body>
-        <Body size={13}>{t('paid.fairUseSmall')}</Body>
+        {/* paid.noTraining says "never used to train AI", not "not kept": Google's Gemini API Additional Terms
+            (effective 23 Mar 2026, aistudio.google.com/docs/terms, read 21 Nov 2026) say that for Paid Services
+            "Google logs prompts and responses for a limited period of time" for abuse monitoring, and "doesn't use
+            your prompts ... or responses to improve our products". Gemini is the paid backup and the crisis model. */}
+        <Body size={14} muted={false}>{t('paid.noTraining')}</Body>
+        <Body size={13}>{t('paid.fairUse', { count: PAID_CHAT_MESSAGES })}</Body>
         {benefits[settings.door === 'mindset' ? 'mindset' : 'faith'].map(key => <Body key={key} size={15} muted={false}>{t(key)}</Body>)}
       </View>
       {paid ? <Body muted={false}>{t('paid.active')}</Body> : null}

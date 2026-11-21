@@ -4,6 +4,7 @@
 import { createExecutionContext, env, waitOnExecutionContext } from 'cloudflare:test';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import wranglerText from '../wrangler.jsonc?raw';
+import { PAID_CHAT_MESSAGES } from '../src/shared';
 import { cleanup } from '../src/cleanup';
 import { centralDay } from '../src/day';
 import { paidStatus } from '../src/entitlement';
@@ -108,7 +109,7 @@ describe('The anonymous install id and limits', () => {
     expect(a.installId).not.toBe(b.installId);
     expect(await everyRow()).not.toMatch(/a@b\.co|5551234567/);
   });
-  it('free lane: 1 conversation of up to 10 messages a day; paid lane: 100 private messages a day, then free chat only after her yes', async () => {
+  it('free lane: 1 conversation of up to 10 messages a day; paid lane: PAID_CHAT_MESSAGES private messages a day, then free chat only after her yes', async () => {
     const free = deps({ rungList: [scripted('workers-ai', [good()]).rung] });
     const token = await tokenFor(free);
     const conversation = conv();
@@ -119,14 +120,14 @@ describe('The anonymous install id and limits', () => {
     const second = await tokenFor(free);
     await call(free, '/api/chat', { token: second, body: chatBody('first') });
     expect(((await (await call(free, '/api/chat', { token: second, body: chatBody('another conversation') })).json()) as { kind: string }).kind).toBe('limit');
-    // Her ruling 21 Nov 2026 (replaces "up to 100 a day"): the 101st message reaches no model until she
+    // Her rulings 21 Nov 2026 (now 50 a day): the message after the last private one reaches no model until she
     // accepts free chat, which is not private.
     const freeRung = scripted('workers-ai', [good()]);
     const paidRung = scripted('gemini-paid', [good()]);
     const paid = deps({ rungs: (_e, _n, lane) => (lane === 'paid' ? [paidRung.rung] : [freeRung.rung]), paidNow: true });
     const p = await tokenFor(paid);
-    await env.DB.prepare('INSERT INTO chat_device_day (day, device, conversation, messages) VALUES (?, ?, ?, 99)').bind(centralDay(NOW), iid(p), conv()).run();
-    expect(((await (await call(paid, '/api/chat', { token: p, body: chatBody('the hundredth') })).json()) as { kind: string }).kind).toBe('answer');
+    await env.DB.prepare('INSERT INTO chat_device_day (day, device, conversation, messages) VALUES (?, ?, ?, ?)').bind(centralDay(NOW), iid(p), conv(), PAID_CHAT_MESSAGES - 1).run();
+    expect(((await (await call(paid, '/api/chat', { token: p, body: chatBody('the last private one') })).json()) as { kind: string }).kind).toBe('answer');
     const calls = paidRung.calls.length + freeRung.calls.length;
     expect(((await (await call(paid, '/api/chat', { token: p, body: chatBody('one more') })).json()) as { kind: string }).kind).toBe('overflow_consent');
     expect(paidRung.calls.length + freeRung.calls.length).toBe(calls);

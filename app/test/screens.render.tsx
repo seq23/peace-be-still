@@ -1288,8 +1288,8 @@ test('the rendered paid lane discloses benefits, actual store prices, renewal te
       assert.equal(choices()[0].props['aria-checked'], true);
       assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
       for (const meaning of es
-        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /Chat bíblico ilimitado/, new RegExp(`${PAID_CHAT_MESSAGES} mensajes privados al día, y después chat gratis \\(no privado\\)\\.`), /24 horas/]
-        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, /Unlimited Bible chat/, new RegExp(`${PAID_CHAT_MESSAGES} private messages a day, then free chat \\(not private\\)\\.`), /24 hours/]) {
+        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /Chat bíblico ilimitado/, new RegExp(`Privado hasta ${PAID_CHAT_MESSAGES} mensajes al día. Después se puede elegir el chat gratis, que no es privado; siempre preguntamos antes\\.`), /24 horas/]
+        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, /Unlimited Bible chat/, new RegExp(`Private for up to ${PAID_CHAT_MESSAGES} messages a day. After that you can choose free chat, which isn't private; we always ask first\\.`), /24 hours/]) {
         assert.match(strings(tree), meaning);
       }
       await press(tree, /\$6\.29/);

@@ -272,7 +272,7 @@ export const slowText = {
   en: 'Please slow down a little. Chat will answer again in a few minutes.',
   es: 'Por favor, ve un poco más despacio. El chat volverá a responder en unos minutos.',
 };
-/** After her 100 private messages today (or past the monthly backstop): the choice, never a wall. */
+/** After her PAID_CHAT_MESSAGES private messages today (or past the monthly backstop): the choice, never a wall. */
 export function overflowText(lang: 'en' | 'es', why: 'daily' | 'monthly' | 'down', date: string): string {
   const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
   if (lang === 'es') return `${why === 'daily' ? `Usaste los ${PAID_CHAT_MESSAGES} mensajes privados de hoy.` : why === 'down' ? 'El chat privado no está disponible por un momento.' : 'Usaste el chat privado de este mes.'} Puedes seguir conversando con nuestra IA gratuita. El chat gratis no es privado: el servicio gratuito puede guardar y usar lo que envíes. ${why === 'daily' ? 'El chat privado vuelve mañana.' : why === 'down' ? 'El chat privado vuelve pronto.' : `El chat privado vuelve el ${shown}.`}`;

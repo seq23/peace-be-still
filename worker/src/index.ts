@@ -409,7 +409,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The lane. Paid is private (the billed model only). Free goes to free models that may keep what
   // is typed, so it needs her consent first. Crisis is the stronger private model, for anyone.
   if (lane === 'free' && req.freeConsent !== true) { tally(metrics, 'consent_needed'); return fixedReply('consent', consentText[v.lang]); }
-  // Paid (her ruling 21 Nov 2026): 100 private messages a day, then free chat for the rest of the day,
+  // Paid (her ruling 21 Nov 2026): PAID_CHAT_MESSAGES (50) private messages a day, then free chat for the rest of the day,
   // only after she sees and accepts that it is not private (asked again each day). Her own monthly
   // backstop (CHAT_USER_MONTHLY_USD_*) and the app's monthly cap lead to the same choice. A paid user
   // never meets a pause: if the free lane has nothing, she is answered on the private model, briefly.
