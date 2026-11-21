@@ -6,6 +6,7 @@ import { onboarded, startRoute, voicesFor, type Language, type Voice } from '../
 import { useSettings, useT } from '../src/settings';
 import { BackLink, Body, Card, Chevron, Label, Screen, SwitchRow, Title, styles, usePalette } from '../src/ui';
 import { fonts } from '../src/theme/tokens';
+import { MadeForYouSettings } from '../src/madeForYou/Settings';
 
 export default function SettingsScreen() {
   const { settings, save } = useSettings();
@@ -52,6 +53,7 @@ export default function SettingsScreen() {
         <Label>{t('settings.language')}</Label>
         {(['en', 'es'] as Language[]).map(language => radio(language, t(`language.${language}`), settings.language === language, () => save({ ...settings, language })))}
       </View>
+      <MadeForYouSettings />
     </Screen>
   );
 }

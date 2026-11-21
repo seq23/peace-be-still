@@ -11,6 +11,7 @@ import { madeForYouApi, type Ready, type SessionContext } from './api';
 import { madeForYouCopy } from './copy';
 import { isMadeForYouPreview, useMadeForYouPaid } from './paidStub';
 import { previewApi } from './preview';
+import { SessionActions } from './SessionActions';
 
 const previewPlayerApi = previewApi('ready');
 
@@ -36,7 +37,7 @@ export function MadeForYouListen({ id, age, door }: { id: string; age: Age; door
     return () => controller.abort();
   }, [age, api, door, id, kind, locale, paid]);
 
-  const { state } = usePlayer();
+  const { state, player } = usePlayer();
   const playing = state.playing && state.track?.kind === 'made-for-you' && state.track.ref === id;
   useEffect(() => {
     if (paid && !preview && playing) {
@@ -55,11 +56,17 @@ export function MadeForYouListen({ id, age, door }: { id: string; age: Age; door
     <Body>{!paid ? copy('locked') : row === undefined ? copy('loading') : copy('error')}</Body>
   </Screen>;
 
+  const stopHere = async () => { if (playing) await player.pause(); };
   return <NowPlaying track={{
-    file: row.path, kind: 'made-for-you', ref: row.id, lang: locale, voice: 'AI',
+    file: `made-for-you/${row.id}`, kind: 'made-for-you', ref: row.id, lang: locale, voice: 'AI',
     titles: { [locale]: copy('title') }, seconds: row.seconds, sha256: row.sha256,
   }} close={close} privateStream={{
     label: t(kind === 'psalm' ? 'journey.psalmNights.name' : 'journey.imaginationNights.name'),
+    aiLabel: copy('aiLabel'),
+    footer: <SessionActions lang={locale} faith={kind === 'psalm'}
+      report={async reason => { await stopHere(); return api.report(context, row.id, reason); }}
+      remove={async () => { await stopHere(); return api.remove(context, row.id); }}
+      gone={close} />,
     async url(signal) {
       const { url } = await api.play(context, row.id, signal);
       const parsed = new URL(url);

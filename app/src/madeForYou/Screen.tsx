@@ -7,7 +7,7 @@ import { fonts } from '../theme/tokens';
 import { BackLink, Body, Card, Label, PillButton, Screen, TextLink, Title, usePalette } from '../ui';
 import { madeForYouApi, SessionError, type Ready, type SessionContext, type Shelf } from './api';
 import { playedSessionKey } from './played';
-import { madeForYouCopy } from './copy';
+import { madeForYouCopy, readyWhen } from './copy';
 
 type Props = {
   paid: boolean;
@@ -50,7 +50,7 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
   const [revision, refresh] = useState(0);
   const [text, setText] = useState('');
   const [sending, setSending] = useState(false);
-  const [notice, setNotice] = useState<'limit' | 'failed' | 'preview' | null>(null);
+  const [notice, setNotice] = useState<'limit' | 'failed' | 'preview' | 'full' | null>(null);
   const [crisis, setCrisis] = useState('');
   const submission = useRef(false);
   const requestVersion = useRef(0);
@@ -82,11 +82,16 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
       else if (response.status === 'preview') setNotice('preview');
       else {
         ++requestVersion.current;
-        setShelf(previous => ({ ready: previous?.ready ?? [], pending: { ...response, delayed: false, retrying: false }, expired: false }));
+        setShelf(previous => ({
+          ready: previous?.ready ?? [], ended: null, requestedToday: true, next: previous?.next ?? null,
+          pending: { id: response.id, day: response.day, dueAt: response.dueAt, late: false, retrying: false },
+        }));
         refresh(value => value + 1);
       }
     } catch (error) {
-      setNotice(error instanceof SessionError && error.code === 'DAILY_LIMIT' ? 'limit' : 'failed');
+      const code = error instanceof SessionError ? error.code : '';
+      setNotice(code === 'DAILY_LIMIT' ? 'limit' : code === 'FULL' ? 'full' : 'failed');
+      if (code === 'FULL' || code === 'DAILY_LIMIT') refresh(value => value + 1);
     } finally {
       submission.current = false;
       setSending(false);
@@ -97,17 +102,20 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
   const date = new Intl.DateTimeFormat(lang, { dateStyle: 'long', timeZone: 'UTC' });
   const minutes = new Intl.NumberFormat(lang, { style: 'unit', unit: 'minute', unitDisplay: 'short' });
   const pending = shelf?.pending;
+  const alert = (message: string) => <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{message}</Text>;
+  // The form shows only when a request can really be taken: none waiting, none today, and a night with room.
+  const canAsk = !!shelf && !pending && !shelf.requestedToday && shelf.next !== null;
 
   return <Screen>
     <BackLink onPress={close}>{t('common.back', { locale: lang })}</BackLink>
     <Title>{copy('title')}</Title>
     <Label>{journey}</Label>
-    {loadFailed && <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{copy('error')}</Text>}
+    {loadFailed && alert(copy('error'))}
     {pending && <Card>
-      <Body muted={false}>{copy(pending.stopped ? 'stopped' : pending.retrying ? 'retrying' : pending.delayed ? 'delayed' : 'pending')}</Body>
-      {!pending.stopped && !pending.retrying && !pending.delayed && <Body size={14}>{copy('pendingDetail')}</Body>}
+      <Body muted={false}>{pending.late ? copy('late') : copy('readyStatus', { when: readyWhen(pending.dueAt, lang) })}</Body>
+      {!pending.late && <Body size={14}>{copy(pending.retrying ? 'retrying' : 'pendingDetail')}</Body>}
     </Card>}
-    {shelf?.expired && <Card><Body muted={false}>{copy('expired')}</Body></Card>}
+    {!pending && shelf?.ended && <Card><Body muted={false}>{copy(shelf.ended)}</Body></Card>}
     {!!shelf?.ready.length && <>
       <Label>{copy('shelf')}</Label>
       {shelf.ready.map(row => <Card key={row.id} onPress={() => play(row)}
@@ -120,10 +128,11 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
         <Text aria-hidden style={{ color: palette.accent, fontSize: 21 }}>›</Text>
       </Card>)}
     </>}
-    {(loadFailed || (pending && !pending.stopped)) && <TextLink onPress={() => refresh(value => value + 1)}>{copy('refresh')}</TextLink>}
+    {(loadFailed || pending) && <TextLink onPress={() => refresh(value => value + 1)}>{copy('refresh')}</TextLink>}
     {!shelf && !loadFailed && <Body>{copy('loading')}</Body>}
-    {crisis ? <Text accessibilityRole="alert" style={{ color: palette.ink, fontFamily: fonts.body }}>{crisis}</Text> :
-      shelf && (!pending || pending.stopped) && <React.Fragment>
+    {crisis ? <Text accessibilityRole="alert" style={{ color: palette.ink, fontFamily: fonts.body }}>{crisis}</Text>
+      : shelf && !pending && !canAsk ? <Body>{copy(shelf.requestedToday ? 'usedToday' : 'full')}</Body>
+      : canAsk && <React.Fragment>
         <Body>{copy('description')}</Body>
         <Body muted={false}>{copy('note')}</Body>
         <TextInput accessibilityLabel={copy('note')} multiline maxLength={500} editable={!sending}
@@ -131,10 +140,10 @@ function Sessions({ context, close, play, api }: Pick<Props, 'context' | 'close'
             minHeight: 116, borderWidth: 1, borderColor: palette.line, borderRadius: 16, padding: 14,
             color: palette.ink, backgroundColor: palette.card, fontFamily: fonts.body, fontSize: 17, textAlignVertical: 'top',
           }} />
-        <Body size={14}>{copy('counter', text.length)}</Body>
+        <Body size={14}>{copy('counter', { count: text.length })}</Body>
         <Body size={14}>{copy('privacy')}</Body>
-        {notice === 'preview' ? <Body>{copy(notice)}</Body> : notice &&
-          <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{copy(notice)}</Text>}
+        <Body size={14}>{copy('formPromise', { when: readyWhen(shelf!.next!, lang) })}</Body>
+        {notice === 'preview' ? <Body>{copy(notice)}</Body> : notice && alert(copy(notice))}
         {sending ? <Body>{copy('sending')}</Body> : !!text.trim() && <PillButton onPress={() => void submit()}>{copy('submit')}</PillButton>}
       </React.Fragment>}
   </Screen>;

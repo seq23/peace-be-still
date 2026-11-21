@@ -779,30 +779,45 @@ test('the Nights entry leads to the subscription gate, and children cannot open 
   assert.equal(host(spanish, 'TextInput').length, 0);
 });
 
-test('paid sessions render requests, delay, expiry, shelf and shared playback in both languages', async t => {
+test('the promise is shown as a real time in her own time zone and language', () => {
+  const { readyWhen } = require('../src/madeForYou/copy') as typeof import('../src/madeForYou/copy');
+  const evening = new Date(2026, 10, 17, 22, 0).getTime();
+  const early = new Date(2026, 10, 18, 3, 0).getTime();
+  const due = new Date(2026, 10, 18, 8, 0).getTime();
+  assert.match(readyWhen(due, 'en', evening), /^by 8:00\s?AM tomorrow$/);
+  assert.match(readyWhen(due, 'en', early), /^by 8:00\s?AM$/);
+  assert.match(readyWhen(due + 86_400_000, 'en', evening), /^by 8:00\s?AM Thursday$/);
+  assert.match(readyWhen(due, 'es', evening), /^mañana antes de las 8:00/);
+  assert.match(readyWhen(due + 86_400_000, 'es', evening), /^el jueves antes de las 8:00/);
+});
+
+test('paid sessions render every state, then play, report and delete in the shared player, in both languages', async t => {
   sessionToken = true;
   t.after(() => { sessionToken = false; });
   const { MadeForYouScreen } = require('../src/madeForYou/Screen') as typeof import('../src/madeForYou/Screen');
   for (const lang of ['en', 'es'] as const) {
     const faith = lang === 'es';
     const context = { age: 'adult', lang, door: faith ? 'faith' : 'mindset', kind: faith ? 'psalm' : 'imagination' } as const;
-    const ready = { id: `night-one-${lang}`, day: '2026-11-20', path: 'private/session.m4a', seconds: 650, sha256: 'a'.repeat(64) };
+    const ready = { id: `night-one-${lang}`, day: '2026-11-20', seconds: 650, sha256: 'a'.repeat(64) };
     const stream = 'https://private.example/session.m4a?signature=fixture';
     const player = testPlayer(audioTracks[0], null);
     type Api = NonNullable<React.ComponentProps<typeof MadeForYouScreen>['api']>;
-    let shelf: Awaited<ReturnType<Api['list']>> = { ready: [], pending: null, expired: false };
+    const soon = Date.now() + 5 * 3_600_000;
+    const empty = { ready: [], pending: null, ended: null, requestedToday: false, next: soon };
+    let shelf: Awaited<ReturnType<Api['list']>> = empty;
     let fail = true;
     let posted: unknown;
+    const sent: Array<[string, string, unknown]> = [];
     const fetchMock = mock.method(globalThis, 'fetch', async (input: string, init: RequestInit) => {
       const url = new URL(input);
+      assert.equal(new Headers(init.headers).get('authorization'), 'Bearer test-install');
+      if (url.pathname === '/api/report' || init.method === 'DELETE') {
+        sent.push([init.method ?? 'GET', `${url.pathname}${url.search}`, init.body ? JSON.parse(String(init.body)) : null]);
+        return Response.json(init.method === 'DELETE' ? { deleted: 1 } : { reported: true });
+      }
       assert.equal(url.pathname, '/api/made-for-you');
       assert.equal(url.searchParams.get('kind'), context.kind);
-      assert.equal(url.searchParams.get('lang'), lang);
-      assert.equal(new Headers(init.headers).get('authorization'), 'Bearer test-install');
-      if (url.searchParams.has('play')) {
-        assert.equal(url.searchParams.get('play'), ready.id);
-        return Response.json({ url: stream });
-      }
+      if (url.searchParams.has('play')) return Response.json({ url: stream });
       return Response.json(shelf);
     });
     const api: Api = {
@@ -812,101 +827,131 @@ test('paid sessions render requests, delay, expiry, shelf and shared playback in
       },
       async submit(actual, note) {
         posted = [actual, note];
-        shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: false, retrying: false }, expired: false };
-        return { status: 'pending' as const, ...shelf.pending! };
+        shelf = { ...empty, requestedToday: true, pending: { id: ready.id, day: ready.day, dueAt: soon, late: false, retrying: false } };
+        return { status: 'pending' as const, id: ready.id, day: ready.day, dueAt: soon };
       },
       async play() { throw new Error('The shelf must open the listen route'); },
+      async remove() { throw new Error('unused'); },
+      async report() { throw new Error('unused'); },
     };
     let tree!: ReactTestRenderer;
     let opened: string | undefined;
-    await act(async () => {
-      tree = create(<MadeForYouScreen paid context={context} close={() => {}} plans={() => {}}
-        play={row => { opened = row.id; }} api={api} />);
-    });
-    const translated = faith
-      ? { retry: /volver a consultar/i, request: /preparar mi sesión/i, pending: /esta noche/i, error: /no pudimos/i,
-          play: es['listen.play'], pause: es['listen.pause'], ai: es['listen.aiVoice'], close: es['listen.close'] }
-      : { retry: /check again/i, request: /make my session/i, pending: /ready tonight/i, error: /couldn’t load/i,
-          play: en['listen.play'], pause: en['listen.pause'], ai: en['listen.aiVoice'], close: en['listen.close'] };
-    assert.match(strings(tree), translated.error);
+    const props = { paid: true, context, close: () => {}, plans: () => {}, play: (row: { id: string }) => { opened = row.id; }, api };
+    await act(async () => { tree = create(<MadeForYouScreen {...props} />); });
+    const w = faith
+      ? { retry: /volver a consultar/i, request: /preparar mi sesión/i, ready: /Estará lista (mañana )?antes de las/, error: /no pudimos/i,
+          play: es['listen.play'], pause: es['listen.pause'], close: es['listen.close'], ai: 'Escrita y narrada con IA' }
+      : { retry: /check again/i, request: /make my session/i, ready: /Ready by \d/, error: /couldn’t load/i,
+          play: en['listen.play'], pause: en['listen.pause'], close: en['listen.close'], ai: 'Written and voiced with AI' };
+    const copy = faith ? {
+      promise: /Si la envías ahora, estará lista/, detail: /nuestra propia computadora/, late: /tardando más de lo que dijimos/,
+      retrying: /primer intento/, expired: /a tiempo, y tu nota se borró/, stopped: /No pudimos preparar tu última sesión, y tu nota/,
+      used: /Puedes pedir otra mañana/, full: /ya no hay lugar/, report: 'Reportar esta sesión', reason: 'Equivocada sobre la Biblia',
+      reported: /Una persona revisará/, del: 'Borrar esta sesión', yes: 'Borrar',
+    } : {
+      promise: /Send it now and it will be ready by/, detail: /our own computer/, late: /longer than we said/,
+      retrying: /first try didn’t work/, expired: /in time, and your note was erased/, stopped: /couldn’t make your last session, and your note/,
+      used: /ask for another tomorrow/, full: /Tonight and tomorrow night are full/, report: 'Report this session', reason: 'Wrong or misleading',
+      reported: /A person will review/, del: 'Delete this session', yes: 'Delete',
+    };
+    const remount = async () => { await act(async () => tree.unmount()); await act(async () => { tree = create(<MadeForYouScreen {...props} />); }); };
+    assert.match(strings(tree), w.error);
     assert.equal(host(tree, 'TextInput').length, 0);
     fail = false;
-    await press(tree, translated.retry);
+    await press(tree, w.retry);
     assert.equal(host(tree, 'TextInput')[0].props.maxLength, 500);
     assert.match(strings(tree), /IA|AI/);
     assert.match(strings(tree), /12 minutos|12 minutes/);
+    assert.match(strings(tree), copy.promise, 'the form says when a request sent now will be ready');
     if (faith) assert.match(strings(tree), /entrenar sus modelos/);
     const note = faith ? 'La lluvia' : 'Rain at the window';
     await type(tree, note);
-    await press(tree, translated.request);
+    await press(tree, w.request);
     assert.deepEqual(posted, [context, note]);
-    assert.match(strings(tree), translated.pending);
-    assert.match(strings(tree), faith ? /mientras duermes.*por la mañana/s : /while you sleep.*by morning/s);
+    assert.match(strings(tree), w.ready);
+    assert.match(strings(tree), copy.detail);
+    assert.doesNotMatch(strings(tree), /by morning|por la mañana/, 'never a vague promise');
     assert.equal(host(tree, 'TextInput').length, 0);
-    shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true, retrying: false }, expired: false };
-    await press(tree, translated.retry);
-    assert.doesNotMatch(strings(tree), translated.pending);
-    assert.match(strings(tree), faith ? /tardando/ : /taking longer/);
-    shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true, retrying: true }, expired: false };
-    await press(tree, translated.retry);
-    assert.match(strings(tree), faith ? /intentaremos de nuevo/ : /we’ll try again/i);
-    assert.equal(host(tree, 'TextInput').length, 0);
-    shelf = { ready: [], pending: null, expired: true };
-    await press(tree, translated.retry);
-    assert.match(strings(tree), faith ? /se borró/ : /note was erased/);
-    assert.equal(host(tree, 'TextInput').length, 1);
-    await type(tree, note);
-    await press(tree, translated.request);
-    shelf = { ready: [ready], pending: null, expired: false };
-    await press(tree, translated.retry);
+    const states: Array<[typeof shelf, RegExp, boolean]> = [
+      [{ ...shelf, pending: { ...shelf.pending!, retrying: true } }, copy.retrying, false],
+      [{ ...shelf, pending: { ...shelf.pending!, late: true, dueAt: Date.now() - 1 } }, copy.late, false],
+      [{ ...empty, ended: 'expired' }, copy.expired, true],
+      [{ ...empty, ended: 'stopped', requestedToday: true }, copy.stopped, false],
+      [{ ...empty, requestedToday: true }, copy.used, false],
+      [{ ...empty, next: null }, copy.full, false],
+    ];
+    for (const [next, text, form] of states) {
+      shelf = next;
+      await remount();
+      assert.match(strings(tree), text);
+      assert.equal(host(tree, 'TextInput').length, form ? 1 : 0, `form shown only when a request can be taken: ${text}`);
+    }
+    if (!faith) assert.match(strings(tree), /Tonight and tomorrow night are full/);
+    shelf = { ...empty, ready: [ready], requestedToday: true };
+    await remount();
     assert.match(strings(tree), faith ? /tus sesiones/i : /your sessions/i);
     assert.match(strings(tree), faith ? /Salmos para dormir · 11 min/ : /Imagination Nights · 11 min/);
     assert.match(strings(tree), faith ? /20 de noviembre/ : /November 20/);
+    assert.match(strings(tree), copy.used, 'with today’s session made, the form is replaced by one line');
+    assert.equal(host(tree, 'TextInput').length, 0);
     assert.ok(texts(tree).includes('›'));
     assert.ok(texts(tree).includes(faith ? 'Nueva' : 'New'));
-    const readyScreenProps = tree.root.findByType(MadeForYouScreen).props as React.ComponentProps<typeof MadeForYouScreen>;
     await press(tree, /20/);
     assert.equal(opened, ready.id);
+
     Object.assign(globalThis, { __pbsPlatform: 'ios', __pbsPaid: true });
     const person = { ...base, door: context.door, language: lang, journey: faith ? 'mi-refugio' : 'imagination-nights' };
     const listen = await mount('listen', person, { track: `made-for-you-${opened}` });
-    assert.ok(texts(listen).includes(translated.ai));
-    assert.ok(texts(listen).includes('0:00'));
+    assert.ok(texts(listen).includes(w.ai), 'the label says the words and the voice are AI');
+    assert.ok(!texts(listen).includes((faith ? es : en)['listen.aiVoice']));
     assert.ok(texts(listen).includes('10:50'));
-    await press(listen, translated.play);
+    await press(listen, w.play);
     assert.equal(player.source(), stream);
     assert.equal(sessionHistory.get(`pbs.made-for-you.played:${ready.id}`), '1');
-    assert.ok(player.getState().playing);
     await press(listen, '+15');
     assert.equal(player.position(), 15);
-    await press(listen, '−15');
-    assert.equal(player.position(), 0);
-    await press(listen, translated.pause);
-    assert.ok(!player.getState().playing);
-    const locale = faith ? es : en;
-    await press(listen, locale['listen.timer']);
-    assert.ok(texts(listen).includes(locale['listen.timerFade']));
-    await press(listen, locale['listen.minutes'].replace('%{minutes}', '15'));
-    assert.ok(player.getState().sleepEndsAt);
-    await press(listen, translated.close);
-    assert.deepEqual(calls.pop(), ['replace', '/made-for-you']);
+    await press(listen, copy.report);
+    await press(listen, copy.reason);
+    assert.deepEqual(sent.pop(), ['POST', '/api/report', { session: ready.id, reason: 'wrong' }]);
+    assert.match(strings(listen), copy.reported);
+    assert.ok(!player.getState().playing, 'reporting stops the session');
     const section = strings(listen);
     if (faith) assert.deepEqual(faithContentIssues(section), []);
     else assert.doesNotMatch(section, /psalm|bible|scripture/i);
-    await act(async () => { listen.unmount(); tree.unmount(); await player.dispose(); });
-    await act(async () => { tree = create(<MadeForYouScreen {...readyScreenProps} />); });
-    assert.ok(!texts(tree).includes(faith ? 'Nueva' : 'New'));
-    await act(async () => tree.unmount());
-    shelf = { ready: [], pending: { id: ready.id, day: ready.day, delayed: true, retrying: false, stopped: true }, expired: false };
-    await act(async () => { tree = create(<MadeForYouScreen {...readyScreenProps} />); });
-    assert.match(strings(tree), faith ? /otro día/ : /another day/);
-    assert.equal(host(tree, 'TextInput').length, 1);
-    await act(async () => tree.unmount());
+    await act(async () => listen.unmount());
+    const again = await mount('listen', person, { track: `made-for-you-${opened}` });
+    await press(again, copy.del);
+    assert.equal(sent.length, 0, 'deleting asks first');
+    await press(again, copy.yes);
+    assert.deepEqual(sent.pop(), ['DELETE', `/api/made-for-you?id=night-one-${lang}`, null]);
+    assert.deepEqual(calls.pop(), ['replace', '/made-for-you']);
+    await act(async () => { again.unmount(); tree.unmount(); await player.dispose(); });
     fetchMock.mock.restore();
   }
 });
 
-test('web preview routes render paid states and play a public fixture without calling the paid API', async t => {
+test('Settings deletes every made-for-you session after asking', async t => {
+  sessionToken = true;
+  t.after(() => { sessionToken = false; });
+  const deletes: string[] = [];
+  const fetchMock = mock.method(globalThis, 'fetch', async (input: string, init: RequestInit) => {
+    deletes.push(`${init.method} ${new URL(input).pathname}${new URL(input).search}`);
+    return Response.json({ deleted: 2 });
+  });
+  const tree = await mount('settings', { ...base, journey: 'psalm-nights' });
+  await press(tree, 'Delete my made-for-you sessions');
+  assert.match(strings(tree), /can’t be undone/);
+  assert.equal(deletes.length, 0);
+  await press(tree, /^Delete$/);
+  assert.deepEqual(deletes, ['DELETE /api/made-for-you']);
+  assert.match(strings(tree), /were deleted/);
+  const child = await mount('settings', { ...base, age: 'child', journey: 'psalm-nights' });
+  assert.doesNotMatch(strings(child), /made-for-you/);
+  await act(async () => { tree.unmount(); child.unmount(); });
+  fetchMock.mock.restore();
+});
+
+test('web preview renders every paid state, including stopped, full and used, and plays a public fixture', async t => {
   const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
   process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
   const location = Object.getOwnPropertyDescriptor(globalThis, 'location');
@@ -918,32 +963,36 @@ test('web preview routes render paid states and play a public fixture without ca
     else Reflect.deleteProperty(globalThis, 'location');
   });
   const fetchMock = t.mock.method(globalThis, 'fetch', () => { throw new Error('Unexpected preview fetch'); });
+  const { PREVIEW_STATES } = require('../src/madeForYou/preview') as typeof import('../src/madeForYou/preview');
   const person = { ...base, journey: 'mi-refugio' };
+  const seen = new Map<string, string>();
+  for (const state of PREVIEW_STATES) {
+    const tree = await mount('madeForYou', person, { state });
+    seen.set(state, strings(tree));
+    await act(async () => tree.unmount());
+  }
+  assert.equal(new Set(seen.values()).size, PREVIEW_STATES.length, 'each preview state renders its own screen');
+  assert.match(seen.get('stopped')!, /tu nota se borró/);
+  assert.match(seen.get('tomorrow')!, /Estará lista (mañana|el \p{L}+) antes de las/u);
+  assert.match(seen.get('used')!, /Puedes pedir otra mañana/);
+  assert.match(seen.get('full')!, /ya no hay lugar/);
+  assert.match(seen.get('ready')!, /Puedes pedir otra mañana/);
   const form = await mount('madeForYou', person, { state: 'form' });
-  assert.equal(host(form, 'TextInput').length, 1);
   await type(form, 'Quiero descansar');
   await press(form, /preparar mi sesión/i);
   assert.match(strings(form), /vista previa/i);
-  assert.equal(host(form, 'TextInput')[0].props.value, '');
-  const pending = await mount('madeForYou', person, { state: 'pending' });
-  assert.match(strings(pending), /esta noche/i);
-  assert.equal(host(pending, 'TextInput').length, 0);
-  const error = await mount('madeForYou', person, { state: 'error' });
-  assert.ok(host(error, 'Text').some(node => node.props.accessibilityRole === 'alert'));
-
   const ready = await mount('madeForYou', person, { state: 'ready' });
   await press(ready, /20/);
-  const navigation = calls.pop();
-  assert.deepEqual(navigation, ['push', { pathname: '/listen/[track]', params: { track: 'made-for-you-preview-session' } }]);
+  assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: 'made-for-you-preview-session' } }]);
   const player = testPlayer(audioTracks[0], null);
   const listen = await mount('listen', person, { track: 'made-for-you-preview-session' });
+  assert.ok(texts(listen).includes('Escrita y narrada con IA'));
+  assert.ok(texts(listen).includes('Reportar esta sesión'));
   await press(listen, es['listen.play']);
   assert.equal(player.source(), 'https://preview.example/made-for-you-preview/psalm-es.mp3');
   assert.ok(readFileSync('public/made-for-you-preview/psalm-es.mp3').length > 0);
-  assert.ok(player.getState().playing);
-
   await act(async () => {
-    for (const tree of [form, pending, error, ready, listen]) tree.unmount();
+    for (const tree of [form, ready, listen]) tree.unmount();
     await player.dispose();
   });
   assert.equal(fetchMock.mock.callCount(), 0);

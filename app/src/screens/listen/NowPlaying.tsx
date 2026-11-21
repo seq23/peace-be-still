@@ -20,7 +20,8 @@ function clock(seconds: number) {
 export function NowPlaying({ track, close, privateStream }: {
   track: Track;
   close: () => void;
-  privateStream?: { label: string; url: (signal: AbortSignal) => Promise<string> };
+  // A private session (made for you): its own signed URL, its own AI label (words AND voice are AI) and actions.
+  privateStream?: { label: string; aiLabel: string; footer?: React.ReactNode; url: (signal: AbortSignal) => Promise<string> };
 }) {
   const t = useT('journey');
   const { settings } = useSettings();
@@ -143,7 +144,7 @@ export function NowPlaying({ track, close, privateStream }: {
         <View style={styles.heading}>
           <Text style={styles.tag}>{label}</Text>
           <Text accessibilityRole="header" style={styles.title}>{trackTitle(track, t.locale)}</Text>
-          <Text style={styles.secondary}>{t('listen.aiVoice')}</Text>
+          <Text style={styles.secondary}>{privateStream?.aiLabel ?? t('listen.aiVoice')}</Text>
         </View>
         {verse && <View style={styles.verse}>
           <Text style={styles.response}>
@@ -208,6 +209,7 @@ export function NowPlaying({ track, close, privateStream }: {
           </Pressable>
         ) : <Text style={styles.secondary}>{t('listen.paidDownload')}</Text>)}
         {downloadFailed && <Text accessibilityRole="alert" style={styles.secondary}>{t('listen.downloadFailed')}</Text>}
+        {privateStream?.footer}
       </ScrollView>
       {dimmed && response === null && <Pressable accessibilityRole="button" accessibilityLabel={t('listen.brighten')} onPress={touch} style={styles.dim} />}
       {timerOpen && <Modal visible transparent animationType="slide" onRequestClose={() => setTimerOpen(false)}>

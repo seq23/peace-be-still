@@ -1,4 +1,4 @@
-import { madeForYouApi, type Ready, type SessionContext } from './api';
+import { madeForYouApi, type Ready, type SessionContext, type Shelf } from './api';
 
 // Public excerpts of the approved stock Kokoro voices. The neutral scene stays
 // separate from the Psalm samples so Mindset never plays a faith excerpt.
@@ -9,28 +9,47 @@ const clips = {
   'scene-es': { seconds: 8.512000, sha256: '5c3639605d1728b429cf54d6d219d84394fa34ce2628bd1d982561789e800794' },
 } as const;
 
-function sample({ kind, lang }: SessionContext): Ready {
-  const clip = `${kind === 'psalm' ? 'psalm' : 'scene'}-${lang}` as const;
-  return { id: 'preview-session', day: '2026-11-20', path: `/made-for-you-preview/${clip}.mp3`, ...clips[clip] };
+const clipOf = ({ kind, lang }: Pick<SessionContext, 'kind' | 'lang'>) => `${kind === 'psalm' ? 'psalm' : 'scene'}-${lang}` as const;
+export const previewClipPath = (context: Pick<SessionContext, 'kind' | 'lang'>) => `/made-for-you-preview/${clipOf(context)}.mp3`;
+function sample(context: SessionContext): Ready {
+  return { id: 'preview-session', day: '2026-11-20', ...clips[clipOf(context)] };
 }
 
+/** The next 08:00 Central after now, plus `nights` more (the promise the Worker would give). */
+function morning(nights: number, now = Date.now()) {
+  for (let at = now + 3_600_000; ; at += 3_600_000) {
+    const hour = Number(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hourCycle: 'h23' }).format(at));
+    if (hour === 8) return Math.floor(at / 3_600_000) * 3_600_000 + nights * 86_400_000;
+  }
+}
+
+export const PREVIEW_STATES = ['form', 'pending', 'tomorrow', 'retrying', 'late', 'stopped', 'expired', 'ready', 'used', 'full', 'error', 'locked'] as const;
+
+/** ?state=<one of PREVIEW_STATES> on the web preview: every screen state, with no paid API call. */
 export function previewApi(state: string | undefined): typeof madeForYouApi {
   return {
     async list(context) {
       if (state === 'error') throw new Error('Preview error');
       const row = sample(context);
-      return {
+      const waiting = state === 'pending' || state === 'tomorrow' || state === 'retrying' || state === 'late';
+      const shelf: Shelf = {
         ready: state === 'ready' ? [row] : [],
-        pending: state === 'pending' || state === 'delayed' || state === 'retrying' || state === 'stopped'
-          ? { id: row.id, day: row.day, delayed: state === 'delayed', retrying: state === 'retrying' } : null,
-        expired: state === 'expired',
+        pending: waiting ? {
+          id: row.id, day: row.day, dueAt: state === 'late' ? Date.now() - 3_600_000 : morning(state === 'tomorrow' ? 1 : 0),
+          late: state === 'late', retrying: state === 'retrying',
+        } : null,
+        ended: state === 'stopped' || state === 'expired' ? state : null,
+        requestedToday: waiting || state === 'used' || state === 'ready',
+        next: state === 'full' ? null : morning(0),
       };
+      return shelf;
     },
     async submit() { return { status: 'preview' }; },
     async play(context, id) {
-      const row = sample(context);
-      if (state !== 'ready' || id !== row.id) throw new Error('Preview audio unavailable');
-      return { url: new URL(row.path, globalThis.location.origin).href };
+      if (state !== 'ready' || id !== sample(context).id) throw new Error('Preview audio unavailable');
+      return { url: new URL(previewClipPath(context), globalThis.location.origin).href };
     },
+    async remove() { return { deleted: 0 }; },
+    async report() { return { reported: true }; },
   };
 }
