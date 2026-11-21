@@ -2,19 +2,30 @@
 // expo-router recorder). Each test drives a screen the way a person would and checks what is shown, what is
 // saved and where the app goes next.
 import React from 'react';
+import { readFileSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
+import { displayRuns, formatReference, parseReference } from '../src/bible/core';
+import { declaration } from '../src/screens/daily/content';
 import { test, beforeEach } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { create, act, type ReactTestRenderer, type ReactTestInstance } from 'react-test-renderer';
-import { faithContentIssues, RAISE_WAIT_MS, type Settings } from '../src/model';
+import { dayKey, faithContentIssues, RAISE_WAIT_MS, type Settings } from '../src/model';
 
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
 const quiet = console.error;
 console.error = (...args: unknown[]) => { if (!String(args[0]).includes('react-test-renderer is deprecated')) quiet(...args); };
 let saved: string | null = null;
 let readFails = false;
+const local = new Map<string, string>();
 (globalThis as any).__pbsStorage = {
-  getItem: async () => { if (readFails) throw new Error('unavailable'); return saved; },
-  setItem: async (_key: string, value: string) => { saved = value; },
+  getItem: async (key: string) => {
+    if (readFails) throw new Error('unavailable');
+    return key === 'peace-be-still-settings' ? saved : local.get(key) ?? null;
+  },
+  setItem: async (key: string, value: string) => {
+    if (key === 'peace-be-still-settings') saved = value;
+    else local.set(key, value);
+  },
 };
 type Call = [string, unknown?];
 let calls: Call[] = [];
@@ -31,6 +42,7 @@ let history = false;
 };
 
 // Loaded after the globals above exist.
+const { Daily } = require('../src/screens/daily/Daily');
 const { SettingsProvider, useSettings } = require('../src/settings');
 const { i18n } = require('../src/i18n');
 const en = require('../src/i18n/en.json');
@@ -46,6 +58,8 @@ const screens = {
   today: require('../app/(tabs)/today').default,
   chat: require('../app/(tabs)/chat').default,
   bible: require('../app/(tabs)/bible').default,
+  biblePage: require('../app/bible/[page]').default,
+  dailyPage: require('../app/today/[page]').default,
   nights: require('../app/(tabs)/nights').default,
   more: require('../app/(tabs)/more').default,
   settings: require('../app/settings').default,
@@ -58,17 +72,22 @@ const store = () => JSON.parse(saved!) as Settings;
 
 beforeEach(() => { calls = []; history = false; (globalThis as any).__pbsParams = {}; (globalThis as any).__pbsSegments = []; (globalThis as any).__pbsScheme = 'light'; (globalThis as any).__pbsLocale = 'en'; readFails = false; });
 
-async function mount(name: Name, value: object | null = base, params: Record<string, string> = {}) {
+async function mount(name: Name, value: object | null = base, params: Record<string, string> = {}, override?: React.ComponentType) {
   saved = value ? JSON.stringify(value) : null;
   (globalThis as any).__pbsParams = params;
-  const Screen = screens[name];
+  const Screen = override ?? screens[name];
   let tree!: ReactTestRenderer;
   // Like the root layout, a screen is drawn only once the saved settings are read.
   const Ready = () => (useSettings().ready ? <Screen /> : null);
-  await act(async () => { tree = create(<SettingsProvider><Ready /></SettingsProvider>); });
+  await act(async () => {
+    tree = create(<SettingsProvider><Ready /></SettingsProvider>, {
+      createNodeMock: element => element.type === 'ScrollView' ? { scrollTo: (options: unknown) => calls.push(['scrollTo', options]) } : null,
+    });
+  });
   return tree;
 }
-const texts = (tree: ReactTestRenderer) => tree.root.findAll(n => (n.type as unknown) === 'Text').map(n => n.children.filter(x => typeof x === 'string').join('')).filter(Boolean);
+const scripture = (node: ReactTestInstance): boolean => node.props.testID === 'scripture-text' || (!!node.parent && scripture(node.parent));
+const texts = (tree: ReactTestRenderer, includeScripture = true) => tree.root.findAll(n => (n.type as unknown) === 'Text' && (includeScripture || !scripture(n))).map(n => n.children.filter(x => typeof x === 'string').join('')).filter(Boolean);
 const strings = (tree: ReactTestRenderer) => texts(tree).join(' | ');
 const host = (tree: ReactTestRenderer, type: string) => tree.root.findAll(n => (n.type as unknown) === type);
 const textOf = (node: ReactTestInstance) => node.findAll(n => (n.type as unknown) === 'Text').map(t => t.children.filter(x => typeof x === 'string').join('')).join(' ');
@@ -306,9 +325,9 @@ test('Today has the date, the week and the three items for the door, with no wel
   const shown = strings(faith);
   assert.match(shown, /1 day this week/);
   assert.equal(host(faith, 'View').filter(n => n.props.testID === 'day-opened').length, 1);
-  assert.match(shown, /Today's declaration.*Today's story.*Tonight: Psalm Nights/);
+  assert.match(shown, /Today's declaration.*Today's story.*Tonight: Psalm Nights/s);
   assert.doesNotMatch(shown, /WELCOME|Welcome|Good to have you/);
-  await press(faith, 'Open');
+  await press(faith, /^Open  ›$/);
   assert.deepEqual(calls, [['navigate', '/nights']]);
   const mindset = strings(await mount('today', { ...base, door: 'mindset', journey: 'imagination-nights' }));
   assert.match(mindset, /Your scene.*Tonight: Imagination Nights/);
@@ -384,12 +403,16 @@ async function faithWalk(language: 'en' | 'es', age: 'child' | 'teen' | 'adult')
   const person = { ...base, age, language, voice: age === 'teen' ? 'teen' : 'plain', journey: 'psalm-nights' };
   const pages: Array<[Name, object, Record<string, string>?]> = [
     ['door', { ...person, door: null, age: null, journey: undefined }], ['age', { ...person, age: null }], ['journeys', person],
-    ['today', person], ['bible', person], ['nights', person], ['more', person], ['settings', person], ['notFound', person],
+    ['today', person], ['bible', person],
+    ...['books', 'search', 'saved'].map(page => ['biblePage', person, { page }] as [Name, object, Record<string, string>]),
+    ...['declaration', 'story', 'plans', 'journal'].map(page => ['dailyPage', person, { page }] as [Name, object, Record<string, string>]),
+    ['nights', person], ['more', person], ['settings', person], ['notFound', person],
   ];
   if (age !== 'child') pages.push(['chat', person]);
   const out: Array<[string, string]> = [];
-  // The front door names both doors; everything on it except the Mindset door's own name is checked.
-  for (const [name, value, params] of pages) out.push([`${name} ${language} ${age}`, strings(await mount(name, value, params)).replace(/With mindset & imagination|Con mente e imaginación/g, '')]);
+  // The front door names both doors. Canonical verses are covered by the exact-source tests:
+  // the KJV uses “manifest” in John 3:21 and it must remain in the displayed verse.
+  for (const [name, value, params] of pages) out.push([`${name} ${language} ${age}`, texts(await mount(name, value, params), false).join(' | ').replace(/With mindset & imagination|Con mente e imaginación/g, '')]);
   return out;
 }
 
@@ -410,7 +433,7 @@ test('the God\'s Word gate fails a screen when a banned word reaches its data', 
 
 test('Spanish screens show no English: no rendered text is an English string that has a Spanish one', async () => {
   // Names that stay as they are in Spanish: the app, the journeys, the language picker's own names.
-  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)']);
+  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)', 'Reina-Valera 1909', 'King James Version']);
   const english = new Set(Object.values(en).flatMap(v => typeof v === 'string' ? [v] : Object.values(v as object) as string[]).filter(v => !sameInBoth.has(v)));
   const people = [
     { ...base, language: 'es', journey: 'psalm-nights' }, { ...base, language: 'es', door: 'mindset', journey: 'imagination-nights' },
@@ -434,3 +457,187 @@ test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does
   for (const name of ['journeys', 'today', 'nights', 'more', 'settings'] as const) assert.equal(dawnIn(await mount(name, mindset)), 0, name);
   assert.ok(dawnIn(await mount('journeys', { ...base, journey: 'psalm-nights' })) > 0);
 });
+
+test('a Bible verse link scrolls the expanded verse into view once its row is laid out', async () => {
+  for (const journey of ['psalm-nights', 'mi-refugio'] as const) {
+    calls = [];
+    const tree = await mount('biblePage', { ...base, journey }, { page: 'chapter', book: 'PSA', chapter: '119', verse: '105' });
+    const verses = host(tree, 'Text').filter(node => node.props.testID === 'scripture-text');
+    const target = verses.find(node => node.props.accessibilityState.expanded);
+    assert.equal(target, verses[104]);
+    assert.ok(target);
+    const row = target.parent!;
+    const measured = verses.filter(node => node.parent?.props.onLayout);
+    assert.equal(measured.length, 1);
+    assert.equal(measured[0], target);
+    assert.deepEqual(calls, []);
+    const event = { nativeEvent: { layout: { x: 20, y: 6100, width: 350, height: 100 } } };
+    await act(async () => row.props.onLayout(event));
+    assert.deepEqual(calls, [['scrollTo', { y: 6088, animated: false }]]);
+    // A highlight or a font change can lay out the row again after the reader has moved on.
+    await act(async () => row.props.onLayout(event));
+    assert.equal(calls.length, 1);
+  }
+});
+
+for (const locale of ['en', 'es'] as const) {
+  const person = { ...base, journey: locale === 'es' ? 'mi-refugio' : 'psalm-nights' };
+  const copy = locale === 'es' ? es : en;
+  test(`Bible ${locale}: John 3:16 from the source, chapter picker, search and saved marks`, async () => {
+    const data = gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
+    const verse = data.match(/^JOH 3:16 (.*)$/m)![1].trim();
+    const shownVerse = displayRuns(verse).map(run => run.text).join('');
+    const chapter = await mount('bible', person);
+    const verseNode = host(chapter, 'Text').find(node => node.props.accessibilityRole === 'button' && textOf(node).replace(/\s+/g, ' ').includes(shownVerse));
+    assert.ok(verseNode, 'John 3:16 is present as stored and selectable');
+    assert.equal(host(chapter, 'Text').some(node => node.props.style?.fontStyle === 'italic'), locale === 'en');
+    await press(chapter, copy['reader.next']);
+    assert.deepEqual(calls.at(-1), ['push', { pathname: '/bible/[page]', params: { page: 'chapter', book: 'JOH', chapter: 4, verse: undefined } }]);
+    await press(chapter, copy['reader.previous']);
+    assert.equal((calls.at(-1)?.[1] as { params: { chapter: number } }).params.chapter, 2);
+    assert.equal(verseNode.props.accessibilityState.selected, false);
+    await act(async () => verseNode.props.onPress());
+    assert.equal(verseNode.props.accessibilityState.selected, true);
+    assert.equal(verseNode.props['aria-expanded'], true);
+    await act(async () => verseNode.props.onPress());
+    assert.deepEqual(verseNode.props.accessibilityState, { expanded: false, selected: false });
+    await act(async () => verseNode.props.onPress());
+    const linked = await mount('biblePage', person, { page: 'chapter', book: 'JHN', chapter: '3', verse: '16' });
+    assert.ok(host(linked, 'Text').some(node => node.props.accessibilityState?.selected && textOf(node).replace(/\s+/g, ' ').includes(shownVerse)));
+    await press(chapter, copy['reader.save']);
+    await press(chapter, copy['reader.highlight']);
+    assert.ok(local.get('pbs-bible-marks')?.includes('"highlight":true'));
+    await press(chapter, copy['share.title']);
+    assert.ok(host(chapter, 'SvgText').some(node => node.children.join('') === `${locale === 'es' ? 'Juan' : 'John'} 3:16 · ${locale === 'es' ? 'RV1909' : 'KJV'}`));
+    const savedPage = await mount('biblePage', person, { page: 'saved' });
+    assert.match(strings(savedPage), /3:16/);
+    await press(savedPage, copy['reader.unhighlight']);
+    await press(savedPage, copy['reader.unsave']);
+    assert.ok(strings(savedPage).includes(copy['reader.emptySaved']));
+    const books = await mount('biblePage', person, { page: 'books' });
+    await press(books, copy['reader.chooseBook']);
+    await press(books, locale === 'es' ? /^Salmos$/ : /^Psalms$/);
+    await press(books, /^150$/);
+    assert.equal((calls.at(-1)?.[1] as { params: { chapter: number } }).params.chapter, 150);
+    const endOfJohn = await mount('biblePage', person, { page: 'chapter', book: 'JOH', chapter: '21' });
+    await press(endOfJohn, copy['reader.next']);
+    const next = (calls.at(-1)?.[1] as { params: { book: string; chapter: number } }).params;
+    assert.equal(next.book, 'ACT');
+    assert.equal(next.chapter, 1);
+    const startOfActs = await mount('biblePage', person, { page: 'chapter', book: next.book, chapter: '1' });
+    await press(startOfActs, copy['reader.previous']);
+    const previous = (calls.at(-1)?.[1] as { params: { book: string; chapter: number } }).params;
+    assert.equal(previous.book, 'JOH');
+    assert.equal(previous.chapter, 21);
+    const search = await mount('biblePage', person, { page: 'search' });
+    const query = locale === 'es' ? 'corazon' : 'loved world begotten';
+    await type(search, query);
+    await press(search, copy['reader.search']);
+    assert.match(strings(search), locale === 'es' ? /corazón/i : /John 3:16/);
+  });
+
+  test(`Daily ${locale}: production hides drafts, declaration makes an image, plans and journal save`, async () => {
+    const now = new Date();
+    const dateOf = (day: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + day - now.getDay());
+    const data = gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
+    const draft = await mount('dailyPage', person, { page: 'story' });
+    assert.ok(strings(draft).includes(copy['daily.noStory']));
+    await press(draft, copy['daily.readBible']);
+    const [action, destination] = calls.at(-1)!;
+    const passage = destination as { pathname: string; params: { page: string; book: string; chapter: number } };
+    assert.equal(action, 'push');
+    assert.equal(passage.pathname, '/bible/[page]');
+    assert.equal(passage.params.page, 'chapter');
+    const today = await mount('today', person);
+    assert.ok(!strings(today).includes(copy['daily.openStory']));
+    assert.ok(!strings(today).includes(copy['daily.draft']));
+    assert.ok(!strings(today).includes(copy['daily.listenStory']));
+    await press(today, copy['daily.readBible']);
+    assert.deepEqual(calls.at(-1), ['push', {
+      pathname: '/bible/[page]',
+      params: { page: 'chapter', book: passage.params.book, chapter: passage.params.chapter },
+    }]);
+    const extras = host(today, 'View').find(node => node.children.some(child =>
+      typeof child !== 'string' && textOf(child) === copy['daily.more'],
+    ) && textOf(node).includes(copy['daily.title.plans']) && textOf(node).includes(copy['daily.title.journal']));
+    assert.ok(extras);
+    const renderDaily = (page: 'story' | 'declaration', date: Date) => mount('dailyPage', person, {}, () =>
+      <Daily page={page} now={date} back={() => {}} read={() => {}} />);
+    for (let day = 0; day < 7; day++) {
+      const production = strings(await renderDaily('story', dateOf(day)));
+      assert.ok(production.includes(copy['daily.noStory']));
+      assert.ok(!production.includes(copy[`daily.draft.${day}`]));
+      assert.ok(!production.includes(copy[`daily.retelling.${day}`]));
+    }
+    try {
+      process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+      const previewToday = await mount('today', person);
+      assert.ok(strings(previewToday).includes(copy['daily.draft']));
+      const listen = host(previewToday, 'Pressable').find(node => textOf(node) === copy['daily.listenStory']);
+      assert.equal(listen?.props.disabled, true);
+      assert.equal(listen.props['aria-disabled'], true);
+      assert.ok(strings(previewToday).includes(copy['daily.storyAudioUnavailable']));
+      await press(previewToday, copy['daily.openStory']);
+      assert.deepEqual(calls.at(-1), ['push', { pathname: '/today/[page]', params: { page: 'story' } }]);
+      const previewRoute = await mount('dailyPage', person, { page: 'story' });
+      assert.ok(strings(previewRoute).includes(copy[`daily.retelling.${now.getDay()}`]));
+      for (let day = 0; day < 7; day++) {
+        const preview = await renderDaily('story', dateOf(day));
+        assert.ok(strings(preview).includes(copy['daily.draft']));
+        assert.ok(strings(preview).includes(copy[`daily.draft.${day}`]));
+        assert.ok(strings(preview).includes(copy[`daily.retelling.${day}`]));
+        assert.ok(strings(preview).includes(copy['daily.storyAudioUnavailable']));
+        assert.deepEqual(faithContentIssues(strings(preview)), []);
+      }
+    } finally {
+      delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    }
+    for (let day = 0; day < 7; day++) {
+      const date = dateOf(day);
+      const row = declaration('faith', date);
+      const ref = parseReference(row.passage!)!;
+      const prefix = `${ref.book} ${ref.chapter}:${ref.verse} `;
+      const verse = data.split('\n').find(line => line.startsWith(prefix))!.slice(prefix.length).trim();
+      const expected = displayRuns(verse).map(run => run.text).join('');
+      const screen = await renderDaily('declaration', date);
+      assert.ok(strings(screen).includes(copy[row.line]));
+      assert.ok(host(screen, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
+      if (day === now.getDay()) {
+        assert.ok(host(today, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
+      }
+      assert.ok(strings(screen).includes(formatReference(ref, locale)));
+      assert.ok(strings(screen).includes(copy['daily.prayer']));
+    }
+    const mindset = await mount('dailyPage', { ...person, door: 'mindset', journey: 'imagination-nights', language: locale }, { page: 'declaration' });
+    assert.ok(!host(mindset, 'Text').some(node => node.props.testID === 'scripture-text'));
+    assert.ok(!strings(mindset).includes(copy['daily.prayer']));
+    const word = await mount('dailyPage', person, { page: 'declaration' });
+    if (!strings(word).includes(copy['daily.done'])) await press(word, copy['daily.said']);
+    assert.ok(strings(word).includes(copy['daily.done']));
+    await press(word, copy['share.title']);
+    assert.ok(host(word, 'SvgText').some(node => node.children.join('') === copy['share.brand']));
+    // A known PNG stands in for the platform rasterizer. The real component must request capture
+    // and render the resulting image, with its download action, before it can be shared.
+    const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jR1sAAAAASUVORK5CYII=';
+    (globalThis as any).__pbsCapture = (callback: (data: string) => void) => callback(png);
+    await press(word, copy['share.render']);
+    assert.equal(host(word, 'Image')[0].props.source.uri, `data:image/png;base64,${png}`);
+    assert.ok(strings(word).includes(copy['share.download']));
+    const plans = await mount('dailyPage', person, { page: 'plans' });
+    const planTitles = ['rest', 'courage', 'mercy'].map(id => copy[`daily.plan.${id}`]);
+    assert.deepEqual(host(plans, 'Pressable').filter(node => planTitles.some(title => textOf(node).includes(title))).length, 3);
+    await press(plans, copy[locale === 'es' ? 'daily.plan.courage' : 'daily.plan.rest']);
+    assert.equal(host(plans, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 7);
+    await press(plans, copy['daily.plan.complete']);
+    assert.ok(strings(plans).includes(copy['daily.done']));
+    const journal = await mount('dailyPage', person, { page: 'journal' });
+    const entry = `Test note ${locale}`;
+    await type(journal, entry);
+    await press(journal, copy['daily.saveNote']);
+    assert.equal(JSON.parse(local.get('pbs-daily')!).journal[dayKey(now)], entry);
+    const reopened = await mount('dailyPage', person, { page: 'journal' });
+    assert.equal(host(reopened, 'TextInput')[0].props.value, entry);
+    const completed = await mount('today', person);
+    assert.ok(strings(completed).includes(copy['today.week'].one.replace('%{count}', '1')));
+  });
+}
