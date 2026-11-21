@@ -114,7 +114,7 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
 
   return <Screen>
     <TextLink onPress={back}>{t('common.back')}</TextLink>
-    <Title>{page === 'story' && story ? story.title : t(pages[page].title)}</Title>
+    <Title>{page === 'story' && story ? story.title : page === 'plans' && plan ? t(plan.title) : t(pages[page].title)}</Title>
     {state.failed && <Body>{t('reader.storageError')}</Body>}
     {state.failed && !state.ready && <TextLink onPress={() => void state.retry()}>{t('reader.retry')}</TextLink>}
     {page === 'declaration' && <Card>
@@ -132,7 +132,9 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
       <Body size={14}>{t('declaration.topicsHint')}</Body>
       <View role="radiogroup" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
         {[undefined, ...topicList].map(id => <Card key={id ?? 'any'} role="radio" selected={word.topic === id}
-          label={t(id ? topicNames[id] : 'declaration.anyTopic')} style={{ paddingVertical: 8, paddingHorizontal: 12 }}
+          label={t(id ? topicNames[id] : 'declaration.anyTopic')}
+          // The chosen chip's 2 px border takes its space from the padding, so the row never shifts.
+          style={word.topic === id ? { paddingVertical: 7, paddingHorizontal: 11 } : { paddingVertical: 8, paddingHorizontal: 12 }}
           onPress={() => update(value => ({ ...value, topic: id }))}>
           <Body size={14} muted={false}>{t(id ? topicNames[id] : 'declaration.anyTopic')}</Body>
         </Card>)}
@@ -187,8 +189,7 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
       )}
     </>}
     {page === 'plans' && (plan ? <>
-      <TextLink onPress={() => setPlan(undefined)}>{t('daily.title.plans')}</TextLink>
-      <Title>{t(plan.title)}</Title>
+      <TextLink onPress={() => setPlan(undefined)}>{`‹ ${t('daily.title.plans')}`}</TextLink>
       {plan.detail && <Body>{t(plan.detail)}</Body>}
       {plan.readings.map((reading, index) => {
         const complete = state.value.plans[plan.id]?.includes(index) ?? false;
