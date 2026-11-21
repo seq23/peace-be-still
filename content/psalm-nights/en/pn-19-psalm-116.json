@@ -67,7 +67,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Love for the Lord, because he heard. The reason is simple. He heard me. [pause 20]\n\nHe inclined his ear. Picture someone bending down close so they can hear you whisper. That is the word. [pause 20]\n\nThe psalm remembers the sorrows, the trouble, the fear. And then it says, gracious is the Lord. [pause 20]\n\nThen verse seven. Return unto thy rest, O my soul. The psalmist speaks to himself, like calling a child back to bed. Come back to rest. [pause 24]\n\nTwo companion verses. [pause 18]"
+   "text": "Love for the Lord, because he heard. The reason is simple. He heard me. [pause 31]\n\nHe inclined his ear. Picture someone bending down close so they can hear you whisper. That is the word. [pause 31]\n\nThe psalm remembers the sorrows, the trouble, the fear. And then it says, gracious is the Lord. [pause 31]\n\nThen verse seven. Return unto thy rest, O my soul. The psalmist speaks to himself, like calling a child back to bed. Come back to rest. [pause 35]\n\nTwo companion verses. [pause 29]"
   },
   {
    "part": "passage",
@@ -98,7 +98,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Peace. Lie down. Sleep. And the words of Jesus, inviting the weary to come and rest. [pause 22]\n\nHere is Psalm 116 again. When you hear verse seven, say it to your own soul. [pause 24]"
+   "text": "Peace. Lie down. Sleep. And the words of Jesus, inviting the weary to come and rest. [pause 33]\n\nHere is Psalm 116 again. When you hear verse seven, say it to your own soul. [pause 35]"
   },
   {
    "part": "passage",
@@ -154,11 +154,11 @@
  "words": 557,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 813,
+ "est_seconds": 810,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -193,7 +193,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

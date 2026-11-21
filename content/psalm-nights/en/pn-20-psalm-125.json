@@ -51,7 +51,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Those who trust the Lord are like mount Zion, which cannot be moved. A mountain does not move in the wind. [pause 20]\n\nAs the mountains are round about Jerusalem. The city sat in a ring of hills. When you stood in its streets, you could see the mountains on every side. [pause 20]\n\nSo the Lord surrounds his people. On every side. Behind you. Ahead of you. Around this bed tonight. [pause 24]\n\nTwo companion passages. [pause 18]"
+   "text": "Those who trust the Lord are like mount Zion, which cannot be moved. A mountain does not move in the wind. [pause 32]\n\nAs the mountains are round about Jerusalem. The city sat in a ring of hills. When you stood in its streets, you could see the mountains on every side. [pause 32]\n\nSo the Lord surrounds his people. On every side. Behind you. Ahead of you. Around this bed tonight. [pause 36]\n\nTwo companion passages. [pause 30]"
   },
   {
    "part": "passage",
@@ -94,7 +94,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "From Psalm 121, the Lord is your shade at your right hand. And from Deuteronomy, a verse many have leaned on. Underneath are the everlasting arms. [pause 22]\n\nUnderneath. As you lie down, you can picture that. Arms that hold you from below. [pause 22]\n\nHere is Psalm 125 again. Think of the mountains all around. [pause 24]"
+   "text": "From Psalm 121, the Lord is your shade at your right hand. And from Deuteronomy, a verse many have leaned on. Underneath are the everlasting arms. [pause 34]\n\nUnderneath. As you lie down, you can picture that. Arms that hold you from below. [pause 34]\n\nHere is Psalm 125 again. Think of the mountains all around. [pause 36]"
   },
   {
    "part": "passage",
@@ -134,11 +134,11 @@
  "words": 572,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 815,
+ "est_seconds": 814,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -173,7 +173,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.6-15.1 min)."
+    "note": "Plain English for a tired listener; grief and low nights named without pity; two new shared rests so closes vary; pacing by silence only (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

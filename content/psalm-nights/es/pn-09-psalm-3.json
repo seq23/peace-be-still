@@ -18,7 +18,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nBusca tu lugar. Que las cobijas se sientan pesadas y calientitas. [pause 17]\n\nEsta noche leemos el Salmo tres. El título dice que David lo escribió cuando huía de su propio hijo, Absalom. Su familia estaba rota, había perdido su ciudad, y dormía a la intemperie. [pause 16]\n\nY aun así, este salmo tiene algunas de las palabras más tranquilas sobre el sueño en toda la Biblia. Lo vamos a leer dos veces. [pause 19]"
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nBusca tu lugar. Que las cobijas se sientan pesadas y calientitas. [pause 17]\n\nEsta noche leemos el Salmo tres. El título dice que David lo escribió cuando huía de su propio hijo, Absalom. Su familia estaba rota, había perdido su ciudad, y dormía a la intemperie. [pause 16]\n\nY aun así, este salmo tiene algunas de las palabras más tranquilas sobre el sueño en toda la Biblia. Lo vamos a leer dos veces. [pause 19]"
   },
   {
    "part": "passage",
@@ -64,7 +64,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Señor, cuántos son mis problemas. El salmo empieza con honestidad. Hay muchos problemas. Muchas voces que dicen que Dios no lo va a ayudar. [pause 17]\n\nLuego David voltea. Pero tú, Señor, eres mi escudo. Un escudo alrededor. Y el que levanta mi cabeza. [pause 17]\n\nPiensa en alguien que con cariño te levanta la barbilla cuando estás muy cansado o muy triste para mirar hacia arriba. Esa es la imagen. [pause 17]\n\nLuego el versículo cinco. Se acostó, durmió, despertó, porque el Señor lo sostenía. En la peor semana de su vida, David durmió. [pause 21]\n\nUnos versículos para acompañarlo. [pause 15]"
+   "text": "Señor, cuántos son mis problemas. El salmo empieza con honestidad. Hay muchos problemas. Muchas voces que dicen que Dios no lo va a ayudar. [pause 26]\n\nLuego David voltea. Pero tú, Señor, eres mi escudo. Un escudo alrededor. Y el que levanta mi cabeza. [pause 26]\n\nPiensa en alguien que con cariño te levanta la barbilla cuando estás muy cansado o muy triste para mirar hacia arriba. Esa es la imagen. [pause 26]\n\nLuego el versículo cinco. Se acostó, durmió, despertó, porque el Señor lo sostenía. En la peor semana de su vida, David durmió. [pause 30]\n\nUnos versículos para acompañarlo. [pause 24]"
   },
   {
    "part": "passage",
@@ -112,7 +112,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "En paz, acostarse y dormir. El Salmo tres y el Salmo cuatro están juntos, como una oración de la mañana y una de la noche. [pause 17]\n\nY el Salmo ciento veintiuno dice que el que guarda a Israel no se adormece ni se duerme. El proverbio habla de acostarse sin temor. Alguien está velando. [pause 19]\n\nAquí está el Salmo tres otra vez. Cuando llegues al versículo cinco, que sea tuyo. [pause 21]"
+   "text": "En paz, acostarse y dormir. El Salmo tres y el Salmo cuatro están juntos, como una oración de la mañana y una de la noche. [pause 26]\n\nY el Salmo ciento veintiuno dice que el que guarda a Israel no se adormece ni se duerme. El proverbio habla de acostarse sin temor. Alguien está velando. [pause 28]\n\nAquí está el Salmo tres otra vez. Cuando llegues al versículo cinco, que sea tuyo. [pause 30]"
   },
   {
    "part": "passage",
@@ -164,11 +164,11 @@
  "words": 625,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 821,
+ "est_seconds": 814,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -205,7 +205,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

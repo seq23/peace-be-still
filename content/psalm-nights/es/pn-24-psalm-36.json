@@ -52,7 +52,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Su misericordia llega hasta los cielos. Mira hacia arriba en una noche clara y el cielo no se acaba. Hasta allá llega su misericordia. [pause 25]\n\nSus juicios son un abismo grande. Hay cosas de Dios cuyo fondo no podemos tocar. Y está bien. [pause 25]\n\nLas personas se refugian a la sombra de sus alas. Luego un río de delicias, y un manantial de vida. [pause 25]\n\nY en su luz, vemos la luz. [pause 25]\n\nUnos versículos para acompañarlo. [pause 25]"
+   "text": "Su misericordia llega hasta los cielos. Mira hacia arriba en una noche clara y el cielo no se acaba. Hasta allá llega su misericordia. [pause 36]\n\nSus juicios son un abismo grande. Hay cosas de Dios cuyo fondo no podemos tocar. Y está bien. [pause 36]\n\nLas personas se refugian a la sombra de sus alas. Luego un río de delicias, y un manantial de vida. [pause 36]\n\nY en su luz, vemos la luz. [pause 36]\n\nUnos versículos para acompañarlo. [pause 36]"
   },
   {
    "part": "passage",
@@ -96,7 +96,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Guárdame como a la niña de tus ojos. Escóndeme bajo tus alas. Una oración antigua para la noche. [pause 25]\n\nY Jesús dijo que él es la luz del mundo, y que quien lo sigue no camina en oscuridad. [pause 25]\n\nAquí está la lectura del Salmo treinta y seis otra vez. Piensa en el cielo encima del techo. [pause 25]"
+   "text": "Guárdame como a la niña de tus ojos. Escóndeme bajo tus alas. Una oración antigua para la noche. [pause 36]\n\nY Jesús dijo que él es la luz del mundo, y que quien lo sigue no camina en oscuridad. [pause 36]\n\nAquí está la lectura del Salmo treinta y seis otra vez. Piensa en el cielo encima del techo. [pause 36]"
   },
   {
    "part": "passage",
@@ -136,11 +136,11 @@
  "words": 483,
  "rest_part": "rest6",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 793,
+ "est_seconds": 810,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -177,7 +177,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

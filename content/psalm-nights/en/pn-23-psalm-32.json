@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello. This is Psalm Nights. [pause 10]\n\nLet your body settle. Let your breathing find its pace. [pause 13]\n\nTonight we read Psalm 32. It is a psalm about the weight of keeping something inside, and the relief of letting it out before God. [pause 12]\n\nWe will read it twice. [pause 15]"
+   "text": "Hello. This is Psalm Nights. [pause 15]\n\nLet your body settle. Let your breathing find its pace. [pause 15]\n\nTonight we read Psalm 32. It is a psalm about the weight of keeping something inside, and the relief of letting it out before God. [pause 15]\n\nWe will read it twice. [pause 15]"
   },
   {
    "part": "passage",
@@ -74,7 +74,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Blessed is he whose transgression is forgiven. The psalm begins with relief. Happy is the one whose sin is covered. [pause 13]\n\nThen David remembers what silence cost him. While he kept silent, his bones grew old. Day and night, the weight was heavy on him. Some things we carry make us tired in the body too. [pause 15]\n\nAnd then he said it. I will confess. And the weight was lifted. [pause 13]\n\nThou art my hiding place. Not hiding from God. Hiding in God. [pause 17]\n\nOne companion verse. [pause 11]"
+   "text": "Blessed is he whose transgression is forgiven. The psalm begins with relief. Happy is the one whose sin is covered. [pause 25]\n\nThen David remembers what silence cost him. While he kept silent, his bones grew old. Day and night, the weight was heavy on him. Some things we carry make us tired in the body too. [pause 27]\n\nAnd then he said it. I will confess. And the weight was lifted. [pause 25]\n\nThou art my hiding place. Not hiding from God. Hiding in God. [pause 29]\n\nOne companion verse. [pause 23]"
   },
   {
    "part": "passage",
@@ -92,7 +92,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "If we confess, he is faithful and just to forgive. If there is something on your heart tonight, you can tell him. He already knows, and he is not leaving. [pause 15]\n\nHere is Psalm 32 again. Listen for the hiding place. [pause 17]"
+   "text": "If we confess, he is faithful and just to forgive. If there is something on your heart tonight, you can tell him. He already knows, and he is not leaving. [pause 27]\n\nHere is Psalm 32 again. Listen for the hiding place. [pause 29]"
   },
   {
    "part": "passage",
@@ -156,11 +156,11 @@
  "words": 743,
  "rest_part": "rest5",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 811,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -195,7 +195,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

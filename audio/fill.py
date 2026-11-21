@@ -57,6 +57,8 @@ HOME = Path(os.environ.get("PBS_HOME", Path.home() / ".peace-be-still"))
 KOKORO_PY = os.environ.get("PBS_KOKORO_PY", str(Path.home() / "Work/claude-work/tts/venv/bin/python"))
 SHELF = os.environ.get("PBS_SHELF", "gdrive:Mac-Shelf/peace-be-still/audio")
 MANIFEST = Path(os.environ.get("PBS_MANIFEST", AUDIO / "manifest.jsonl"))
+# The words of the 21 sessions voiced before rows recorded them (recovered exactly from git, 21 Nov 2026).
+VOICED_WORDS = Path(os.environ.get("PBS_VOICED_WORDS", AUDIO / "voiced-words.json"))
 MAC_BUDGET_BYTES = 5 * 1024 ** 3
 
 # Voices locked 18 Nov 2026 (COMMON.md; VOICES.md). Speed 0.85 is Nicole "as shipped".
@@ -96,7 +98,10 @@ STORY_TELLINGS = ("plain", "mi-refugio")
 FRONT_KINDS = SESSION_KINDS + (STORY_KIND,)   # queued ahead of the chapters and of failed-chapter retries
 # The voiced floor per session kind (21 Nov 2026: nights the gate estimated at 20 min voiced at 17): a file under it
 # fails its checks and is rendered again slower, then held, never shelved short.
-MIN_SECONDS = {"imagination-night": 18 * 60}
+TARGET_SECONDS = {"imagination-night": 18 * 60, "psalm-night": 13 * 60}   # the low end of each writing target
+# Her ruling 21 Nov 2026: a floor catches BROKEN output (cut off, skipped chunks), not the target: under 75% of
+# the target is held (one slower render, then FAILED); between the floor and the target ships with a SHORT note.
+MIN_SECONDS = {k: round(v * 0.75) for k, v in TARGET_SECONDS.items()}
 
 
 def plan(bibles: dict, content: list | None = None) -> list[dict]:
@@ -225,7 +230,7 @@ def session_item(o: dict, f: Path, root: Path, lang: str) -> dict | None:
             "ref": f"{f.relative_to(root)}#{o.get('id') or f.stem}", "priority": 3, "level": "sleep",
             "heading": o.get("title") if isinstance(o.get("title"), str) else "",
             "verses": [p[0] for p in pieces], "gaps": [p[1] for p in pieces], "text": "script",
-            **({"min_seconds": MIN_SECONDS[kind]} if kind in MIN_SECONDS else {})}
+            **({"min_seconds": MIN_SECONDS[kind], "target_seconds": TARGET_SECONDS[kind]} if kind in MIN_SECONDS else {})}
 
 
 _CALL_PAUSE = re.compile(r"\[PAUSE (\d+(?:\.\d+)?)s[^\]]*\]")
@@ -338,20 +343,39 @@ def _file(item: dict) -> str:
     return item["file"]
 
 
+def words_key(item: dict) -> str:
+    """What is said, without the quiet: a script change that only adds quiet keeps it, a word change does not."""
+    return hashlib.sha256(json.dumps([item.get("heading", ""), item.get("verses", [])], ensure_ascii=False).encode()).hexdigest()[:12]
+
+
+def _voiced_words() -> dict:
+    return json.loads(VOICED_WORDS.read_text("utf-8")) if VOICED_WORDS.exists() else {}
+
+
 def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> list:
     """What this run voices: FAILED files with tries left first (never a permanent hole), then files
     not yet in the manifest, each in plan order. Passed files and files out of tries are skipped. Pure."""
     last = latest(rows)
-    mine = [i for i in items if not only or key(i).startswith(only)]
-    # Three parts, each retry-first inside itself: the sessions, then the stories, then the rest. A failed
-    # story is retried after the unvoiced sessions (review 21 Nov 2026), a failed chapter after the stories.
+    # Her call 21 Nov 2026: published audio is never re-voiced only to add quiet (no length is promised to anyone);
+    # a script whose words match a passed file of the same script is done. A word change is voiced again.
+    legacy = _voiced_words()
+    said = {(r.get("ref"), r.get("words") or legacy.get(f)) for f, r in last.items() if r.get("status") == "passed"}
+    mine = [i for i in items if (not only or key(i).startswith(only)) and
+            (key(i) in last or (i.get("ref"), words_key(i)) not in said)]
+    # Four parts, each retry-first inside itself: the sessions never voiced, the published sessions voiced again
+    # for a word change, then the stories, then the rest. A failed story is retried after the unvoiced sessions
+    # (review 21 Nov 2026), a failed chapter after the stories.
     cut1 = max((n + 1 for n, i in enumerate(mine) if i.get("kind") in SESSION_KINDS), default=0)
     cut2 = max([cut1] + [n + 1 for n, i in enumerate(mine) if i.get("kind") == STORY_KIND])
 
     def part(xs):
         retry = [i for i in xs if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
         return retry + [i for i in xs if key(i) not in last]
-    return part(mine[:cut1]) + part(mine[cut1:cut2]) + part(mine[cut2:])
+    # The old file of a re-voiced session stays served until the new one passes.
+    voiced = {r.get("ref") for r in last.values() if r.get("status") == "passed"}
+    again = [i for i in mine[:cut1] if i.get("kind") in SESSION_KINDS and i.get("ref") in voiced]
+    first = [i for i in mine[:cut1] if i not in again]
+    return part(first) + part(again) + part(mine[cut1:cut2]) + part(mine[cut2:])
 
 
 def given_up(items: list, rows: list[dict], key=_file) -> list[str]:
@@ -648,13 +672,16 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
         wav.unlink(missing_ok=True)
     checks = {k: result[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks["problems"] = result["problems"]
+    if result["pass"] and item.get("target_seconds") and result["seconds"] < item["target_seconds"]:
+        checks["notes"] = [f"SHORT {result['seconds']:.0f}s voiced is under the {item['target_seconds']}s target"]
+        print(f"  SHORT {item['file']}: {result['seconds']:.0f}s against the {item['target_seconds']}s target (shipped)")
     checks["mastering"] = {k: mastered[k] for k in ("tries", "i", "tp")}
     if item.get("marks"):
         # Where the call-and-response quiet starts, as Hush Harbor rows carry it (the app shows the response then).
         checks["pause_starts_s"] = pause_starts(rendered.get("segs") or [], rendered.get("ends"))
         checks["pauses_s"] = [s["gap"] for s in rendered.get("segs") or [] if s.get("mark")]
     row = {"file": item["file"], "kind": item["kind"], "lang": item["lang"], "ref": item["ref"],
-           "text": item["text"], "voice": VOICE[item["lang"]]["id"], "seconds": result["seconds"],
+           "text": item["text"], "words": words_key(item), "voice": VOICE[item["lang"]]["id"], "seconds": result["seconds"],
            "checks": checks, "attempts": attempts, "work_s": round(time.monotonic() - t0, 1),
            "status": "passed" if result["pass"] else "FAILED",
            "at": dt.datetime.now(CT).isoformat(timespec="seconds")}

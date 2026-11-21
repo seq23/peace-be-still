@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 8]\n\nDeja que tu cuerpo se ponga pesado. Que tus manos descansen. [pause 11]\n\nEl salmo de esta noche es el Salmo noventa. El título dice que es una oración de Moisés. Es la voz más antigua de los Salmos, y habla del tiempo. De nuestros días cortos, y de Dios, que es desde siempre y para siempre. [pause 10]\n\nLo vamos a leer dos veces. [pause 13]"
+   "text": "Te doy la bienvenida a esta noche de Salmos. [pause 13]\n\nDeja que tu cuerpo se ponga pesado. Que tus manos descansen. [pause 15]\n\nEl salmo de esta noche es el Salmo noventa. El título dice que es una oración de Moisés. Es la voz más antigua de los Salmos, y habla del tiempo. De nuestros días cortos, y de Dios, que es desde siempre y para siempre. [pause 15]\n\nLo vamos a leer dos veces. [pause 15]"
   },
   {
    "part": "passage",
@@ -79,7 +79,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Señor, tú nos has sido refugio de generación en generación. Antes de tus abuelos. Antes de los abuelos de ellos. Dios ha sido el hogar de su pueblo todo el tiempo. [pause 11]\n\nMil años para Dios son como el día de ayer, como una vela de la noche. Una vela de la noche. Para Dios, toda la historia es como unas pocas horas de la oscuridad. [pause 13]\n\nEl salmo es honesto sobre lo corta que es la vida. Como la hierba en la mañana, que en la tarde ya se secó. Y por eso pide sabiduría. Enséñanos a contar nuestros días. [pause 13]\n\nDos líneas más, del final del salmo. [pause 9]"
+   "text": "Señor, tú nos has sido refugio de generación en generación. Antes de tus abuelos. Antes de los abuelos de ellos. Dios ha sido el hogar de su pueblo todo el tiempo. [pause 20]\n\nMil años para Dios son como el día de ayer, como una vela de la noche. Una vela de la noche. Para Dios, toda la historia es como unas pocas horas de la oscuridad. [pause 22]\n\nEl salmo es honesto sobre lo corta que es la vida. Como la hierba en la mañana, que en la tarde ya se secó. Y por eso pide sabiduría. Enséñanos a contar nuestros días. [pause 22]\n\nDos líneas más, del final del salmo. [pause 18]"
   },
   {
    "part": "passage",
@@ -110,7 +110,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Sácianos de mañana con tu misericordia. Una oración para la mañana. [pause 11]\n\nY la obra de nuestras manos, confírmala. Lo que hayas hecho hoy, pequeño o grande, puedes pedirle a Dios que cuente. [pause 13]\n\nAquí está el Salmo noventa otra vez. Que el tiempo largo de Dios sostenga tu noche corta. [pause 15]"
+   "text": "Sácianos de mañana con tu misericordia. Una oración para la mañana. [pause 20]\n\nY la obra de nuestras manos, confírmala. Lo que hayas hecho hoy, pequeño o grande, puedes pedirle a Dios que cuente. [pause 22]\n\nAquí está el Salmo noventa otra vez. Que el tiempo largo de Dios sostenga tu noche corta. [pause 24]"
   },
   {
    "part": "passage",
@@ -178,11 +178,11 @@
  "words": 754,
  "rest_part": "rest1",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 817,
+ "est_seconds": 810,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -219,7 +219,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

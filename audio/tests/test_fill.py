@@ -252,6 +252,63 @@ class Sessions(unittest.TestCase):
         self.assertEqual(order[5], "en/bible/kjv-mat-001.m4a")
         self.assertEqual(order[-1], "en/story/s.m4a")   # a kind the plan does not know stays last
 
+    def test_a_published_psalm_night_whose_words_changed_waits_for_the_new_sessions_and_comes_before_chapters(self):
+        """A published night re-voiced for a word change queues after the sessions never voiced, before the rest
+        (the old row records no words here, so its file is a word change)."""
+        vpl = ["MAT 1:1 The book.", "PSA 1:1 Blessed."]
+        b = {"en": T.parse_vpl(vpl), "es": T.parse_vpl(vpl)}
+        mk = lambda kind, lang, n: {"file": f"{lang}/{kind}/{n}-new.m4a", "kind": kind, "lang": lang, "priority": 3, "ref": f"{lang}/{kind}/{n}"}
+        content = [mk("psalm-night", "en", "pn-01"), mk("psalm-night", "en", "pn-08"), mk("imagination-night", "es", "in-01")]
+        items = fill.plan(b, content)
+        rows = [{"file": "en/psalms/kjv-psa-001.m4a", "status": "passed"},
+                {"file": "en/psalm-night/pn-01-old.m4a", "ref": "en/psalm-night/pn-01", "status": "passed", "seconds": 723.3}]
+        q = [i["file"] for i in fill.todo(items, rows)]
+        self.assertEqual(q[:4], ["en/psalm-night/pn-08-new.m4a", "es/imagination-night/in-01-new.m4a",
+                                 "en/psalm-night/pn-01-new.m4a", "en/bible/kjv-mat-001.m4a"])
+        # A re-voice that failed is retried in the same place, still ahead of the chapters.
+        rows.append({"file": "en/psalm-night/pn-01-new.m4a", "ref": "en/psalm-night/pn-01", "status": "FAILED"})
+        self.assertEqual([i["file"] for i in fill.todo(items, rows)][2:4], ["en/psalm-night/pn-01-new.m4a", "en/bible/kjv-mat-001.m4a"])
+
+    def test_a_re_voiced_published_imagination_night_queues_after_an_unvoiced_one(self):
+        """Review of #83: a published English Imagination Night voiced again must not jump the unvoiced Spanish ones."""
+        b = {"en": T.parse_vpl(["MAT 1:1 The book."]), "es": T.parse_vpl(["MAT 1:1 El libro."])}
+        mk = lambda lang, n: {"file": f"{lang}/imagination-night/{n}-new.m4a", "kind": "imagination-night", "lang": lang,
+                              "priority": 3, "ref": f"{lang}/imagination-night/{n}"}
+        items = fill.plan(b, [mk("en", "in-01"), mk("es", "in-01")])
+        rows = [{"file": "en/imagination-night/in-01-old.m4a", "ref": "en/imagination-night/in-01", "status": "passed", "seconds": 1029.0}]
+        q = [i["file"] for i in fill.todo(items, rows)]
+        self.assertEqual(q[:3], ["es/imagination-night/in-01-new.m4a", "en/imagination-night/in-01-new.m4a", "en/bible/kjv-mat-001.m4a"])
+
+    def test_only_added_quiet_is_never_re_voiced_and_a_word_change_is(self):
+        """Her call 21 Nov 2026: the published nights are not voiced again just to lengthen them."""
+        mk = lambda gaps, words=("Welcome.", "Lie down."): {"file": f"en/psalm-night/pn-01-{hash((gaps, words)) & 0xffff:x}.m4a",
+              "kind": "psalm-night", "lang": "en", "priority": 3, "ref": "c/pn-01.json#pn-01", "heading": "Psalm 23",
+              "verses": list(words), "gaps": list(gaps)}
+        old = mk((8.0, 4.0))
+        rows = [{"file": old["file"], "ref": old["ref"], "status": "passed", "words": fill.words_key(old)}]
+        quieter, reworded = mk((15.0, 9.0)), mk((15.0, 9.0), ("Welcome home.", "Lie down."))
+        self.assertNotEqual(quieter["file"], old["file"])
+        self.assertEqual(fill.todo([quieter], rows), [])
+        self.assertEqual(fill.todo([reworded], rows), [reworded])
+        # The rows voiced before rows recorded their words are matched by the recovered list.
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "voiced-words.json"
+            p.write_text(json.dumps({old["file"]: fill.words_key(old)}))
+            legacy = [{k: v for k, v in rows[0].items() if k != "words"}]
+            with mock.patch.object(fill, "VOICED_WORDS", p):
+                self.assertEqual(fill.todo([quieter], legacy), [])
+                self.assertEqual(fill.todo([reworded], legacy), [reworded])
+
+    def test_the_21_published_nights_are_not_queued_again_for_their_added_quiet(self):
+        rows = fill.read_manifest()
+        legacy = json.loads(fill.VOICED_WORDS.read_text("utf-8"))
+        published = [r for r in rows if r.get("kind") in fill.SESSION_KINDS and r.get("status") == "passed"]
+        self.assertGreaterEqual(len(published), 21, "rule 0: the published nights must be read")
+        self.assertFalse([r["file"] for r in published if not (r.get("words") or legacy.get(r["file"]))])
+        refs = {r["ref"] for r in published}
+        queued = [i["ref"] for i in fill.todo(fill.content_items(fill.REPO), rows) if i["ref"] in refs]
+        self.assertEqual(queued, [])
+
     def test_scripted_quiet_is_not_counted_as_slow_speech(self):
         import qa
         kw = dict(script="one two three", transcript="one two three", lang="en", level="sleep",
@@ -474,6 +531,43 @@ class Mastering(unittest.TestCase):
             self.assertFalse((Path(d) / "track.wav").exists())
         return row, renders, [c for c in calls if "aac_at" in c]
 
+    def night(self, kind, lang, seconds):
+        """make_one on a fixture night whose voiced length is `seconds` (each render): (row, render speeds)."""
+        folder = {"psalm-night": "psalm-nights", "imagination-night": "imagination-nights"}[kind]
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "content" / folder / lang).mkdir(parents=True)
+            (Path(d) / "content" / folder / lang / "x.json").write_text(json.dumps({
+                "id": "x", "kind": kind, "lang": lang, "title": "Night", "status": "passed",
+                "segments": [{"part": "welcome", "text": "Welcome. [pause 8]"}, {"part": "rest", "text": "Rest now. [pause 20]"}]}))
+            [item] = fill.content_items(Path(d))
+        renders = []
+        res = {"pass": True, "problems": [], "accuracy": 0.98, "wpm": 114, "words": 700, "lufs": -22.0,
+               "true_peak": -3.0, "clipped": 0, "asr": "base", "seconds": seconds}
+        with tempfile.TemporaryDirectory() as d, \
+                mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
+                mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg([])), \
+                mock.patch.object(qa, "loudness", return_value={"lufs": -22.0, "true_peak": -3.0}), \
+                mock.patch.object(qa, "check", return_value=res):
+            return fill.make_one(item, {}, Path(d)), renders
+
+    def test_a_truncated_night_is_rendered_slower_once_then_held(self):
+        """Her ruling 21 Nov 2026: the floor (75% of the target's low end) catches broken output, e.g. a 6-min file."""
+        for kind, lang, floor in (("psalm-night", "en", 585), ("imagination-night", "es", 810)):
+            row, renders = self.night(kind, lang, 360.0)
+            self.assertEqual(renders, [fill.SPEED, fill.RETRY_SPEED], kind)
+            self.assertEqual(row["status"], "FAILED", kind)
+            self.assertTrue(any(f"under the {floor}s floor" in p for p in row["checks"]["problems"]), row["checks"])
+
+    def test_a_short_night_above_the_floor_ships_once_with_a_short_note(self):
+        """A 12-min Psalm Night and the 17.6-min Spanish sample are not broken: shipped, never re-rendered or held."""
+        for kind, lang, seconds, target in (("psalm-night", "en", 720.0, 780), ("imagination-night", "es", 1055.0, 1080)):
+            row, renders = self.night(kind, lang, seconds)
+            self.assertEqual((renders, row["status"]), ([fill.SPEED], "passed"), kind)
+            self.assertEqual(row["checks"]["problems"], [])
+            self.assertEqual(row["checks"]["notes"], [f"SHORT {seconds:.0f}s voiced is under the {target}s target"])
+        row, _ = self.night("psalm-night", "en", 800.0)
+        self.assertNotIn("notes", row["checks"])
+
     def test_a_story_row_records_where_its_call_and_response_pauses_start(self):
         with tempfile.TemporaryDirectory() as d:
             Stories().story(Path(d))
@@ -496,26 +590,6 @@ class Mastering(unittest.TestCase):
         self.assertEqual((row["kind"], row["lang"], row["voice"]), ("stories", "es", fill.VOICE["es"]["id"]))
         self.assertGreaterEqual(chk.call_args.kwargs["quiet"], 6.0)
 
-    def test_a_night_voiced_under_18_minutes_is_rendered_slower_then_never_shelved(self):
-        with tempfile.TemporaryDirectory() as d:
-            (Path(d) / "content/imagination-nights/es").mkdir(parents=True)
-            (Path(d) / "content/imagination-nights/es/in-x.json").write_text(json.dumps({
-                "id": "in-x", "kind": "imagination-night", "lang": "es", "title": "Vivir desde el final", "status": "passed",
-                "segments": [{"part": "settle", "text": "Respira. [pause 8]"}, {"part": "scene", "text": "Imagina una tarde. [pause 20]"}]}))
-            [item] = fill.content_items(Path(d))
-        self.assertEqual(item["min_seconds"], 1080)
-        renders = []
-        res = lambda s: {"pass": True, "problems": [], "accuracy": 0.98, "wpm": 114, "words": 600, "lufs": -22.0,
-                         "true_peak": -3.0, "clipped": 0, "asr": "base", "seconds": s}
-        with tempfile.TemporaryDirectory() as d, \
-                mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
-                mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg([])), \
-                mock.patch.object(qa, "loudness", return_value={"lufs": -22.0, "true_peak": -3.0}), \
-                mock.patch.object(qa, "check", side_effect=[res(1055.0), res(1070.0)]):
-            row = fill.make_one(item, {}, Path(d))
-        self.assertEqual(renders, [fill.SPEED, fill.RETRY_SPEED])
-        self.assertEqual(row["status"], "FAILED")
-        self.assertTrue(any("under the 1080s floor" in p for p in row["checks"]["problems"]))
 
     def test_mastering_miss_is_mastered_again_never_rendered_again(self):
         ok = {"lufs": -17.0, "true_peak": -1.5}

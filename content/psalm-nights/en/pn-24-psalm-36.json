@@ -52,7 +52,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "His mercy reaches to the heavens. Look up on a clear night and the sky goes on and on. His mercy reaches that far. [pause 25]\n\nHis judgments are a great deep. There are things about God we cannot reach the bottom of. That is all right. [pause 25]\n\nPeople find shelter under the shadow of his wings. Then a river of pleasures, and a fountain of life. [pause 25]\n\nAnd in his light, we see light. [pause 25]\n\nA few companion verses. [pause 25]"
+   "text": "His mercy reaches to the heavens. Look up on a clear night and the sky goes on and on. His mercy reaches that far. [pause 36]\n\nHis judgments are a great deep. There are things about God we cannot reach the bottom of. That is all right. [pause 36]\n\nPeople find shelter under the shadow of his wings. Then a river of pleasures, and a fountain of life. [pause 36]\n\nAnd in his light, we see light. [pause 36]\n\nA few companion verses. [pause 36]"
   },
   {
    "part": "passage",
@@ -96,7 +96,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "The apple of the eye. Hidden under his wings. An old prayer for the night. [pause 25]\n\nAnd Jesus called himself the light of the world, and said the one who follows him will not walk in darkness. [pause 25]\n\nHere is the reading from Psalm 36 again. Think of the sky above the roof. [pause 25]"
+   "text": "The apple of the eye. Hidden under his wings. An old prayer for the night. [pause 36]\n\nAnd Jesus called himself the light of the world, and said the one who follows him will not walk in darkness. [pause 36]\n\nHere is the reading from Psalm 36 again. Think of the sky above the roof. [pause 36]"
   },
   {
    "part": "passage",
@@ -136,11 +136,11 @@
  "words": 495,
  "rest_part": "rest6",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 801,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -175,7 +175,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

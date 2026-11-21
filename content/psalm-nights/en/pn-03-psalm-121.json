@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello. This is Psalm Nights. [pause 7]\n\nSettle in. Let your head find the softest part of the pillow. [pause 10]\n\nTonight we read Psalm 121. It was a song for travelers. People sang it on the long walk up to Jerusalem, looking at the hills ahead and wondering what was waiting in them. [pause 9]\n\nWe will read it slowly, and then once more. [pause 12]"
+   "text": "Hello. This is Psalm Nights. [pause 12]\n\nSettle in. Let your head find the softest part of the pillow. [pause 15]\n\nTonight we read Psalm 121. It was a song for travelers. People sang it on the long walk up to Jerusalem, looking at the hills ahead and wondering what was waiting in them. [pause 14]\n\nWe will read it slowly, and then once more. [pause 15]"
   },
   {
    "part": "passage",
@@ -63,7 +63,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Lifting my eyes to the hills. The traveler looks up and asks the honest question. Where does my help come from? [pause 10]\n\nAnd the answer is not the hills. It is the one who made them. [pause 10]\n\nListen to the word that keeps coming back. Keep. Keepeth. Preserve. Six times in eight short verses. The psalm says it over and over, the way you would say something to a child who is afraid of the dark. [pause 10]\n\nHe that keepeth thee will not slumber. You can close your eyes. He does not close his. [pause 14]\n\nHere is a companion passage from Isaiah, for the ones who are tired tonight. [pause 8]"
+   "text": "Lifting my eyes to the hills. The traveler looks up and asks the honest question. Where does my help come from? [pause 19]\n\nAnd the answer is not the hills. It is the one who made them. [pause 19]\n\nListen to the word that keeps coming back. Keep. Keepeth. Preserve. Six times in eight short verses. The psalm says it over and over, the way you would say something to a child who is afraid of the dark. [pause 19]\n\nHe that keepeth thee will not slumber. You can close your eyes. He does not close his. [pause 23]\n\nHere is a companion passage from Isaiah, for the ones who are tired tonight. [pause 17]"
   },
   {
    "part": "passage",
@@ -106,7 +106,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "He giveth power to the faint. Not to the strong. To the faint. If you are worn out tonight, that verse was written with you in mind. [pause 10]\n\nWaiting on the Lord is not wasted time. It is how the tired are renewed. [pause 10]\n\nOne more word from Isaiah. Fear not, for I am with thee. He holds you with his hand. You do not have to hold yourself up tonight. [pause 12]\n\nNow Psalm 121 again. Let the word keep sit with you as you listen. [pause 14]"
+   "text": "He giveth power to the faint. Not to the strong. To the faint. If you are worn out tonight, that verse was written with you in mind. [pause 19]\n\nWaiting on the Lord is not wasted time. It is how the tired are renewed. [pause 19]\n\nOne more word from Isaiah. Fear not, for I am with thee. He holds you with his hand. You do not have to hold yourself up tonight. [pause 21]\n\nNow Psalm 121 again. Let the word keep sit with you as you listen. [pause 23]"
   },
   {
    "part": "passage",
@@ -158,11 +158,11 @@
  "words": 699,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 816,
+ "est_seconds": 817,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -197,7 +197,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.5-13.7 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

@@ -244,6 +244,7 @@ export function checkPsalmNight(p) {
   const t = commonText("psalm-night", lang, written, "gods-word");
   Object.assign(c, t);
   c.speakers = p.segments.every((x) => x.speaker === "narrator") ? pass : fail("a Psalm Night is narrator only");
+  // Her ruling 21 Nov 2026: the target guides the writing; only a night under 75% of it (a broken script) fails.
   c.length = band(p.est_seconds / 60, 13, 17, " min");
   c.ai_label = p.ai_label ? pass : fail("AI label key missing");
   return c;
@@ -258,7 +259,7 @@ export function checkImaginationNight(n) {
   c.speakers = n.segments.every((x) => x.speaker === "narrator") ? pass : fail("narrator only");
   c.teaching_length = band(words(n.segments.find((x) => x.part === "teaching")?.text || "").length / 1.0, 150, 300, " words");
   // 18 min is a floor, not a band edge (21 Nov 2026: nights estimated at 100 wpm voiced at 17 min).
-  c.length = n.est_seconds < 18 * 60 ? fail(`${(n.est_seconds / 60).toFixed(1)} min voiced is under the 18 min floor`) : band(n.est_seconds / 60, 18, 22, " min");
+  c.length = band(n.est_seconds / 60, 18, 22, " min");   // a note inside 75%, a fail under it (her ruling 21 Nov 2026)
   c.ai_label = n.ai_label ? pass : fail("AI label key missing");
   return c;
 }

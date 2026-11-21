@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola, te doy la bienvenida. Esta es una noche de Salmos. [pause 6]\n\nDeja que el día se vaya. Afloja la quijada. Deja las manos abiertas. [pause 9]\n\nEsta noche leemos el Salmo cuarenta y seis. Es un salmo para cuando sientes que la tierra se mueve. Montes, aguas, naciones, todo alborotado. Y en medio de todo, un río tranquilo. [pause 8]\n\nLo vamos a leer dos veces. [pause 11]"
+   "text": "Hola, te doy la bienvenida. Esta es una noche de Salmos. [pause 11]\n\nDeja que el día se vaya. Afloja la quijada. Deja las manos abiertas. [pause 14]\n\nEsta noche leemos el Salmo cuarenta y seis. Es un salmo para cuando sientes que la tierra se mueve. Montes, aguas, naciones, todo alborotado. Y en medio de todo, un río tranquilo. [pause 13]\n\nLo vamos a leer dos veces. [pause 15]"
   },
   {
    "part": "passage",
@@ -75,7 +75,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Refugio, fortaleza, ayuda en la angustia. Y muy cercana. No lejos. No para después. Aquí. [pause 9]\n\nEl salmo se imagina lo peor. La tierra que tiembla, los montes que caen al mar. Y luego dice, por tanto, no temeremos. [pause 9]\n\nDespués viene un río, cuyas corrientes alegran la ciudad de Dios. No una inundación. Un río. Constante y callado, mientras todo lo demás ruge. [pause 9]\n\nY al final, Dios habla. Quédense quietos, y sepan que él es Dios. Esta noche no tienes que arreglar el mundo. Puedes estar quieto. [pause 13]\n\nUnas palabras de Isaías para acompañarlo. [pause 7]"
+   "text": "Refugio, fortaleza, ayuda en la angustia. Y muy cercana. No lejos. No para después. Aquí. [pause 18]\n\nEl salmo se imagina lo peor. La tierra que tiembla, los montes que caen al mar. Y luego dice, por tanto, no temeremos. [pause 18]\n\nDespués viene un río, cuyas corrientes alegran la ciudad de Dios. No una inundación. Un río. Constante y callado, mientras todo lo demás ruge. [pause 18]\n\nY al final, Dios habla. Quédense quietos, y sepan que él es Dios. Esta noche no tienes que arreglar el mundo. Puedes estar quieto. [pause 22]\n\nUnas palabras de Isaías para acompañarlo. [pause 16]"
   },
   {
    "part": "passage",
@@ -110,7 +110,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Paz completa. Guardado en ella, con una mente que descansa en él. No es algo que tengas que fabricar. Es algo en lo que te pueden guardar. [pause 9]\n\nY Pablo, escribiendo desde una cárcel, nos dice que llevemos todo a Dios en oración, con gratitud, y que la paz de Dios guardará nuestros corazones. Una paz que no tiene que tener sentido. [pause 11]\n\nAquí está el Salmo cuarenta y seis otra vez. Cuando oigas que Dios dice que estemos quietos, deja que tu cuerpo responda. [pause 13]"
+   "text": "Paz completa. Guardado en ella, con una mente que descansa en él. No es algo que tengas que fabricar. Es algo en lo que te pueden guardar. [pause 18]\n\nY Pablo, escribiendo desde una cárcel, nos dice que llevemos todo a Dios en oración, con gratitud, y que la paz de Dios guardará nuestros corazones. Una paz que no tiene que tener sentido. [pause 20]\n\nAquí está el Salmo cuarenta y seis otra vez. Cuando oigas que Dios dice que estemos quietos, deja que tu cuerpo responda. [pause 22]"
   },
   {
    "part": "passage",
@@ -174,11 +174,11 @@
  "words": 762,
  "rest_part": "rest2",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 817,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -215,7 +215,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.7 minutos."
+    "note": "Español natural de las Américas (tú, ustedes, 'cobijas', 'calientitas', 'te doy la bienvenida' sin género); nada de España; los descansos varían su redacción; el ritmo ajustado solo con silencio (pausas) a 13.5-13.6 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

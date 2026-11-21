@@ -41,7 +41,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Except the Lord build the house. We can work and plan and stay up late, and still the real building belongs to God. [pause 25]\n\nThen the line about bread. Eating the bread of sorrows. That is worry, chewed over and over, late into the night. [pause 25]\n\nAnd then, so gently. He giveth his beloved sleep. Beloved. That is what he calls you. [pause 25]\n\nSome companion verses now, from the words of Jesus and from Peter. [pause 23]"
+   "text": "Except the Lord build the house. We can work and plan and stay up late, and still the real building belongs to God. [pause 34]\n\nThen the line about bread. Eating the bread of sorrows. That is worry, chewed over and over, late into the night. [pause 34]\n\nAnd then, so gently. He giveth his beloved sleep. Beloved. That is what he calls you. [pause 34]\n\nSome companion verses now, from the words of Jesus and from Peter. [pause 32]"
   },
   {
    "part": "passage",
@@ -106,7 +106,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Jesus pointed to the birds of the air. They do not plant or store up food, and still they are fed. Which of you, he asked, can add one hour to your life by worrying? [pause 25]\n\nTomorrow can take care of itself. Today's trouble is enough for today. [pause 25]\n\nAnd Peter says, cast all your care on him, because he cares for you. All of it. Even the small worries. Even the ones you are embarrassed by. [pause 25]\n\nHere is Psalm 127 again. Two verses. Let the word beloved be the last one you hear. [pause 25]"
+   "text": "Jesus pointed to the birds of the air. They do not plant or store up food, and still they are fed. Which of you, he asked, can add one hour to your life by worrying? [pause 34]\n\nTomorrow can take care of itself. Today's trouble is enough for today. [pause 34]\n\nAnd Peter says, cast all your care on him, because he cares for you. All of it. Even the small worries. Even the ones you are embarrassed by. [pause 34]\n\nHere is Psalm 127 again. Two verses. Let the word beloved be the last one you hear. [pause 34]"
   },
   {
    "part": "passage",
@@ -134,11 +134,11 @@
  "words": 537,
  "rest_part": "rest6",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 815,
+ "est_seconds": 814,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -173,7 +173,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

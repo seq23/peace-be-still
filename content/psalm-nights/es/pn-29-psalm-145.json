@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 14]\n\nDeja tu cuerpo quieto. Deja que tu cara se suavice. [pause 17]\n\nEsta noche leemos la segunda mitad del Salmo ciento cuarenta y cinco. Es un salmo de alabanza, y está lleno de la palabra todos. Todas sus obras. Todos los que caen. Todos los que lo invocan. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nDeja tu cuerpo quieto. Deja que tu cara se suavice. [pause 17]\n\nEsta noche leemos la segunda mitad del Salmo ciento cuarenta y cinco. Es un salmo de alabanza, y está lleno de la palabra todos. Todas sus obras. Todos los que caen. Todos los que lo invocan. [pause 16]\n\nLo vamos a leer dos veces. [pause 19]"
   },
   {
    "part": "passage",
@@ -86,7 +86,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Clemente y misericordioso es el Señor. Estas palabras vienen del tiempo de Moisés, cuando Dios pasó delante de él y se describió a sí mismo. Lento para la ira. Grande en misericordia. [pause 17]\n\nÉl sostiene a todos los que caen. Levanta a todos los que están agobiados. Si hoy te caíste, si esta noche estás doblado por el peso, este versículo habla de ti. [pause 19]\n\nLos ojos de todos esperan en él. Como una familia esperando la cena, toda criatura mira hacia él. [pause 17]\n\nCerca está de todos los que lo invocan. Todos. Nadie está demasiado lejos. [pause 21]\n\nUn versículo para acompañarlo. [pause 15]"
+   "text": "Clemente y misericordioso es el Señor. Estas palabras vienen del tiempo de Moisés, cuando Dios pasó delante de él y se describió a sí mismo. Lento para la ira. Grande en misericordia. [pause 28]\n\nÉl sostiene a todos los que caen. Levanta a todos los que están agobiados. Si hoy te caíste, si esta noche estás doblado por el peso, este versículo habla de ti. [pause 30]\n\nLos ojos de todos esperan en él. Como una familia esperando la cena, toda criatura mira hacia él. [pause 28]\n\nCerca está de todos los que lo invocan. Todos. Nadie está demasiado lejos. [pause 32]\n\nUn versículo para acompañarlo. [pause 26]"
   },
   {
    "part": "passage",
@@ -104,7 +104,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "En paz. Acostarse. Dormir. Seguro solo en él. [pause 17]\n\nAquí está el Salmo ciento cuarenta y cinco otra vez. Escucha la palabra todos. [pause 21]"
+   "text": "En paz. Acostarse. Dormir. Seguro solo en él. [pause 28]\n\nAquí está el Salmo ciento cuarenta y cinco otra vez. Escucha la palabra todos. [pause 32]"
   },
   {
    "part": "passage",
@@ -180,11 +180,11 @@
  "words": 664,
  "rest_part": "rest5",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 815,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -221,7 +221,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

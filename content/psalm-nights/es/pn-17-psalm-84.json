@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola. Esta es una noche de Salmos. [pause 12]\n\nDeja ir el día. Que el cuarto esté oscuro y suave. [pause 15]\n\nEsta noche leemos el Salmo ochenta y cuatro. Es un canto de anhelo por la casa de Dios. De peregrinos en el camino, y de un pajarito que encontró casa cerca del altar. [pause 14]\n\nLo vamos a leer dos veces, despacio. [pause 17]"
+   "text": "Hola. Esta es una noche de Salmos. [pause 15]\n\nDeja ir el día. Que el cuarto esté oscuro y suave. [pause 15]\n\nEsta noche leemos el Salmo ochenta y cuatro. Es un canto de anhelo por la casa de Dios. De peregrinos en el camino, y de un pajarito que encontró casa cerca del altar. [pause 15]\n\nLo vamos a leer dos veces, despacio. [pause 17]"
   },
   {
    "part": "passage",
@@ -78,7 +78,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Cuán amables son tus moradas. Qué hermoso es el lugar donde tú estás. El salmista lo extraña como uno extraña su casa. [pause 15]\n\nAun el gorrión halla casa. Un pajarito haciendo su nido en los atrios de Dios. Si hay lugar para un gorrión, hay lugar para ti. [pause 17]\n\nLos peregrinos pasan por el valle de lágrimas y lo convierten en fuente. Van de poder en poder. [pause 15]\n\nMejor es un día en sus atrios que mil fuera. Un día cerca de Dios vale más que mil en cualquier otro lugar. [pause 19]\n\nUn versículo para acompañarlo. [pause 13]"
+   "text": "Cuán amables son tus moradas. Qué hermoso es el lugar donde tú estás. El salmista lo extraña como uno extraña su casa. [pause 26]\n\nAun el gorrión halla casa. Un pajarito haciendo su nido en los atrios de Dios. Si hay lugar para un gorrión, hay lugar para ti. [pause 28]\n\nLos peregrinos pasan por el valle de lágrimas y lo convierten en fuente. Van de poder en poder. [pause 26]\n\nMejor es un día en sus atrios que mil fuera. Un día cerca de Dios vale más que mil en cualquier otro lugar. [pause 30]\n\nUn versículo para acompañarlo. [pause 24]"
   },
   {
    "part": "passage",
@@ -96,7 +96,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Una cosa he pedido. El mismo anhelo, en otro salmo. Estar en la casa del Señor, y contemplar su hermosura. [pause 17]\n\nAquí está el Salmo ochenta y cuatro otra vez. Piensa en el gorrión y su nido. [pause 19]"
+   "text": "Una cosa he pedido. El mismo anhelo, en otro salmo. Estar en la casa del Señor, y contemplar su hermosura. [pause 28]\n\nAquí está el Salmo ochenta y cuatro otra vez. Piensa en el gorrión y su nido. [pause 30]"
   },
   {
    "part": "passage",
@@ -164,11 +164,11 @@
  "words": 709,
  "rest_part": "rest5",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 816,
+ "est_seconds": 812,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -205,7 +205,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

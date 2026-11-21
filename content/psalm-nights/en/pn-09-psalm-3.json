@@ -18,7 +18,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hello, and welcome to Psalm Nights. [pause 9]\n\nFind your place. Let the covers be heavy and warm. [pause 12]\n\nTonight we read Psalm 3. The heading says David wrote it when he fled from his own son, Absalom. His family was broken, his city was lost, and he was sleeping in the open. [pause 11]\n\nAnd still, this psalm has some of the most peaceful words about sleep in the whole Bible. We will read it twice. [pause 14]"
+   "text": "Hello, and welcome to Psalm Nights. [pause 14]\n\nFind your place. Let the covers be heavy and warm. [pause 15]\n\nTonight we read Psalm 3. The heading says David wrote it when he fled from his own son, Absalom. His family was broken, his city was lost, and he was sleeping in the open. [pause 15]\n\nAnd still, this psalm has some of the most peaceful words about sleep in the whole Bible. We will read it twice. [pause 15]"
   },
   {
    "part": "passage",
@@ -64,7 +64,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Lord, how many are my troubles. The psalm starts honest. There are many troubles. Many voices saying there is no help in God. [pause 12]\n\nThen David turns. But you, Lord, are my shield. A shield all around. And the lifter up of my head. [pause 12]\n\nThink of someone gently lifting your chin when you are too tired or too sad to look up. That is the picture. [pause 12]\n\nThen verse five. He lay down, he slept, he woke, because the Lord held him up. In the worst week of his life, David slept. [pause 16]\n\nA companion verse, from the very next psalm. [pause 10]"
+   "text": "Lord, how many are my troubles. The psalm starts honest. There are many troubles. Many voices saying there is no help in God. [pause 21]\n\nThen David turns. But you, Lord, are my shield. A shield all around. And the lifter up of my head. [pause 21]\n\nThink of someone gently lifting your chin when you are too tired or too sad to look up. That is the picture. [pause 21]\n\nThen verse five. He lay down, he slept, he woke, because the Lord held him up. In the worst week of his life, David slept. [pause 25]\n\nA companion verse, from the very next psalm. [pause 19]"
   },
   {
    "part": "passage",
@@ -112,7 +112,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "In peace, lying down and sleeping. Psalm 3 and Psalm 4 sit side by side, like a morning and an evening prayer. [pause 12]\n\nAnd Psalm 121 tells us the one who keeps Israel never slumbers or sleeps. The proverb speaks of lying down without fear. Someone is keeping watch. [pause 14]\n\nHere is Psalm 3 again. When you reach verse five, let it be yours. [pause 16]"
+   "text": "In peace, lying down and sleeping. Psalm 3 and Psalm 4 sit side by side, like a morning and an evening prayer. [pause 21]\n\nAnd Psalm 121 tells us the one who keeps Israel never slumbers or sleeps. The proverb speaks of lying down without fear. Someone is keeping watch. [pause 23]\n\nHere is Psalm 3 again. When you reach verse five, let it be yours. [pause 25]"
   },
   {
    "part": "passage",
@@ -164,11 +164,11 @@
  "words": 686,
  "rest_part": "rest3",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 817,
+ "est_seconds": 812,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -203,7 +203,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.6-15.3 minutes."
+    "note": "Plain, unhurried English a tired woman at 11 PM can follow; no filler, no church jargon unexplained; hospital and grief named gently; shared rests vary their wording so the close is not the same sentence every night; pacing tuned only by silence (pauses) to 13.5-13.7 min voiced at the measured 117 wpm."
    },
    "verdict": "pass"
   },

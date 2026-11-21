@@ -17,7 +17,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 10]\n\nDeja que tu cuerpo se hunda en la cama. Que tus pies estén calientitos. [pause 13]\n\nEl salmo de esta noche es el Salmo dieciséis. Es un salmo de contentamiento. De alguien que mira su vida y dice que le tocó una parte hermosa. [pause 12]\n\nLo vamos a leer dos veces, despacio. [pause 15]"
+   "text": "Hola, te doy la bienvenida a esta noche de Salmos. [pause 15]\n\nDeja que tu cuerpo se hunda en la cama. Que tus pies estén calientitos. [pause 15]\n\nEl salmo de esta noche es el Salmo dieciséis. Es un salmo de contentamiento. De alguien que mira su vida y dice que le tocó una parte hermosa. [pause 15]\n\nLo vamos a leer dos veces, despacio. [pause 15]"
   },
   {
    "part": "passage",
@@ -75,7 +75,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Guárdame, oh Dios. El salmo empieza con una oración corta. Cuídame. [pause 13]\n\nEn medio hay una línea sobre la noche. Aun de noche el corazón le enseña. Incluso de noche, Dios sigue enseñándole al corazón. [pause 13]\n\nLas cuerdas le cayeron en lugares deleitosos. En aquel tiempo la tierra se medía con cuerdas. El salmista mira la parte que le tocó y se alegra. No porque sea la más grande. Porque el Señor está en ella. [pause 15]\n\nY al final, hartura de alegría, en su presencia. [pause 17]\n\nDos pasajes para acompañarlo. [pause 11]"
+   "text": "Guárdame, oh Dios. El salmo empieza con una oración corta. Cuídame. [pause 22]\n\nEn medio hay una línea sobre la noche. Aun de noche el corazón le enseña. Incluso de noche, Dios sigue enseñándole al corazón. [pause 22]\n\nLas cuerdas le cayeron en lugares deleitosos. En aquel tiempo la tierra se medía con cuerdas. El salmista mira la parte que le tocó y se alegra. No porque sea la más grande. Porque el Señor está en ella. [pause 24]\n\nY al final, hartura de alegría, en su presencia. [pause 26]\n\nDos pasajes para acompañarlo. [pause 20]"
   },
   {
    "part": "passage",
@@ -110,7 +110,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "El primero es el versículo de la noche al que siempre volvemos. Paz, acostarse, dormir. [pause 13]\n\nEl segundo es del Salmo setenta y tres. Mi carne y mi corazón pueden desfallecer. Dios es la roca de mi corazón. Cuando tu cuerpo está cansado y tu corazón gastado, él sigue siendo tu porción. [pause 15]\n\nAquí está el Salmo dieciséis otra vez. Escucha los lugares deleitosos. [pause 17]"
+   "text": "El primero es el versículo de la noche al que siempre volvemos. Paz, acostarse, dormir. [pause 22]\n\nEl segundo es del Salmo setenta y tres. Mi carne y mi corazón pueden desfallecer. Dios es la roca de mi corazón. Cuando tu cuerpo está cansado y tu corazón gastado, él sigue siendo tu porción. [pause 24]\n\nAquí está el Salmo dieciséis otra vez. Escucha los lugares deleitosos. [pause 26]"
   },
   {
    "part": "passage",
@@ -174,11 +174,11 @@
  "words": 685,
  "rest_part": "rest4",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 819,
+ "est_seconds": 816,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -215,7 +215,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-14.4 min). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
+    "note": "Español natural de las Américas ('cobijas', 'calientitos', 'bajito'); títulos sin vosotros ('Prueben y vean'); dos descansos nuevos; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm). Fix: 'dieciséis' ya no se confunde con una forma de vosotros."
    },
    "verdict": "pass"
   },

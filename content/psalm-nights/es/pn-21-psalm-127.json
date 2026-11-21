@@ -41,7 +41,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Si el Señor no edifica la casa. Podemos trabajar, planear y quedarnos despiertos hasta tarde, y aun así la verdadera obra le pertenece a Dios. [pause 25]\n\nLuego la línea del pan. Comer pan de dolores. Eso es la preocupación, masticada una y otra vez, hasta muy tarde en la noche. [pause 25]\n\nY luego, con mucha ternura. A su amado dará sueño. Amado. Así te llama a ti. [pause 25]\n\nAhora unos versículos, de las palabras de Jesús y de Pedro. [pause 23]"
+   "text": "Si el Señor no edifica la casa. Podemos trabajar, planear y quedarnos despiertos hasta tarde, y aun así la verdadera obra le pertenece a Dios. [pause 34]\n\nLuego la línea del pan. Comer pan de dolores. Eso es la preocupación, masticada una y otra vez, hasta muy tarde en la noche. [pause 34]\n\nY luego, con mucha ternura. A su amado dará sueño. Amado. Así te llama a ti. [pause 34]\n\nAhora unos versículos, de las palabras de Jesús y de Pedro. [pause 32]"
   },
   {
    "part": "passage",
@@ -106,7 +106,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Jesús señaló a las aves del cielo. No siembran ni guardan comida, y aun así comen. ¿Quién de ustedes, preguntó, puede añadir una hora a su vida por preocuparse? [pause 25]\n\nEl día de mañana traerá su propio afán. Basta con el problema de hoy. [pause 25]\n\nY Pedro dice que echemos toda nuestra ansiedad sobre él, porque él cuida de nosotros. Toda. Aun las preocupaciones pequeñas. Aun las que nos dan vergüenza. [pause 25]\n\nAquí está el Salmo ciento veintisiete otra vez. Dos versículos. Que la palabra amado sea la última que oigas. [pause 25]"
+   "text": "Jesús señaló a las aves del cielo. No siembran ni guardan comida, y aun así comen. ¿Quién de ustedes, preguntó, puede añadir una hora a su vida por preocuparse? [pause 34]\n\nEl día de mañana traerá su propio afán. Basta con el problema de hoy. [pause 34]\n\nY Pedro dice que echemos toda nuestra ansiedad sobre él, porque él cuida de nosotros. Toda. Aun las preocupaciones pequeñas. Aun las que nos dan vergüenza. [pause 34]\n\nAquí está el Salmo ciento veintisiete otra vez. Dos versículos. Que la palabra amado sea la última que oigas. [pause 34]"
   },
   {
    "part": "passage",
@@ -134,11 +134,11 @@
  "words": 533,
  "rest_part": "rest6",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
- "est_seconds": 813,
+ "est_seconds": 812,
  "qa": {
   "gate_version": "library-1",
   "checks": {
@@ -175,7 +175,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.2-13.7 min)."
+    "note": "Español natural de las Américas ('cobijarte', 'te jala', 'masticada'); sin vosotros fuera de la RV1909; ritmo solo con silencio (13.5-13.6 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },

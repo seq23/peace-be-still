@@ -16,7 +16,7 @@
   {
    "part": "welcome",
    "speaker": "narrator",
-   "text": "Welcome to Psalm Nights. [pause 9]\n\nLet the covers be warm around you. [pause 12]\n\nTonight's psalm is Psalm 57. The heading says David wrote it when he hid from Saul in a cave. A dark cave, an enemy outside. And this is the song he sang there. [pause 11]\n\nWe will read it twice. [pause 14]"
+   "text": "Welcome to Psalm Nights. [pause 14]\n\nLet the covers be warm around you. [pause 15]\n\nTonight's psalm is Psalm 57. The heading says David wrote it when he hid from Saul in a cave. A dark cave, an enemy outside. And this is the song he sang there. [pause 15]\n\nWe will read it twice. [pause 15]"
   },
   {
    "part": "passage",
@@ -74,7 +74,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Be merciful unto me, O God. Twice, at the start. Then, a refuge in the shadow of his wings, until the trouble has passed over. Until they pass. They will pass. [pause 14]\n\nIn the middle, David describes lions. Danger all around. And then he lifts his eyes. God, be lifted high above the heavens. [pause 12]\n\nThen a line about the dawn. I myself will awake early. David in a cave, deciding to wake the morning with a song. [pause 16]\n\nA companion verse, from the story of Ruth. [pause 10]"
+   "text": "Be merciful unto me, O God. Twice, at the start. Then, a refuge in the shadow of his wings, until the trouble has passed over. Until they pass. They will pass. [pause 27]\n\nIn the middle, David describes lions. Danger all around. And then he lifts his eyes. God, be lifted high above the heavens. [pause 25]\n\nThen a line about the dawn. I myself will awake early. David in a cave, deciding to wake the morning with a song. [pause 29]\n\nA companion verse, from the story of Ruth. [pause 23]"
   },
   {
    "part": "passage",
@@ -92,7 +92,7 @@
   {
    "part": "reflect",
    "speaker": "narrator",
-   "text": "Boaz said it to Ruth, a foreign widow who had come with nothing. You have come to trust under his wings. The same wings David sang about. [pause 14]\n\nHere is Psalm 57 again. Picture yourself under those wings, until the night is overpast. [pause 16]"
+   "text": "Boaz said it to Ruth, a foreign widow who had come with nothing. You have come to trust under his wings. The same wings David sang about. [pause 27]\n\nHere is Psalm 57 again. Picture yourself under those wings, until the night is overpast. [pause 29]"
   },
   {
    "part": "passage",
@@ -156,8 +156,8 @@
  "words": 756,
  "rest_part": "rest4",
  "pacing": {
-  "words_per_minute": 100,
-  "quiet_between_verses_s": 1.5,
+  "words_per_minute": 117,
+  "quiet_between_verses_s": 2.5,
   "quiet_between_paragraphs_s": 4
  },
  "est_seconds": 814,
@@ -195,7 +195,7 @@
    },
    "cultural": {
     "verdict": "pass",
-    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.3-13.6 min)."
+    "note": "Plain English; work and worry, fear and shame named with kindness; Ruth named as a foreign widow with dignity; Psalm 31 'commit my spirit' explained with a child's picture, not morbid; pacing by silence (13.5-13.7 min voiced at the measured 117 wpm)."
    },
    "verdict": "pass"
   },
