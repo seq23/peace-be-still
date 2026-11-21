@@ -13,6 +13,7 @@ import pkg from '../package.json';
 import { NEVER, MINDSET, FAITH_LINK } from '../../scripts/content/rules.mjs';
 import { verses } from '../../scripts/content/lib.mjs';
 import { providers } from '../../worker/src/providers.mjs';
+import { esListingLegal } from '../../site/content/legal.mjs';
 
 const ROOT = join(process.cwd(), '..');
 const read = (path: string) => readFileSync(join(ROOT, path), 'utf8');
@@ -104,6 +105,8 @@ const pages: Page[] = pageFiles.map(file => {
     locale: (field(text, 'Keywords locale') ?? '').slice(0, 5),
   };
 });
+const storeConfig = JSON.parse(read('site/config/store.json'));
+const esLegal = esListingLegal(storeConfig.es_listing_spanish_legal);
 const listings = { 'en-US': read('store/listing-en.md'), 'es-MX': read('store/listing-es.md') };
 const events = read('store/events.md').split(/^## /m).slice(1).map(block => ({ name: block.split('\n')[0].trim(), block }));
 const legal = ['privacy', 'terms', 'disclaimer'].map(name => ({ name, text: read(`legal/${name}.md`) }));
@@ -207,11 +210,19 @@ test('listings have every App Store field, the subscription disclosures and the 
     assert.ok([...field(text, 'Promotional text')!].length <= 170, `${locale}: promotional text over 170`);
     const body = text.split('Description body:\n')[1] ?? '';
     assert.ok([...text.split('Description first 3 lines:\n')[1]].length <= 4000, `${locale}: description over 4000`);
-    assert.match(body, /https:\/\/peacebestillapp\.com\/terms/, `${locale}: Terms link`);
-    assert.match(body, /https:\/\/peacebestillapp\.com\/privacy/, `${locale}: Privacy link`);
+    const legalLinks = locale === 'es-MX' ? [esLegal['Privacy policy URL'], esLegal.body.split(' · ')[0].split(': ')[1]] : ['https://peacebestillapp.com/privacy', 'https://peacebestillapp.com/terms'];
+    for (const link of legalLinks) assert.ok(body.includes(link), `${locale}: legal link ${link}`);
     assert.match(body, /\b(?:AI|IA)\b[^\n]*\b(?:providers|proveedores)\b/, `${locale}: AI disclosure`);
     assert.doesNotMatch(body, /\$\s?\d/, `${locale}: prices are Apple's to show per storefront`);
   }
+});
+
+test('the es-MX listing links the legal pages its one switch names (site/config/store.json)', () => {
+  assert.equal(typeof storeConfig.es_listing_spanish_legal, 'boolean');
+  const text = listings['es-MX'];
+  for (const key of ['Privacy policy URL', 'Terms of use (EULA) URL'] as const) assert.equal(field(text, key.replace(/[()]/g, '\\$&')), esLegal[key], key);
+  assert.ok(text.split('\n').includes(esLegal.body), `es-MX: the legal line must read "${esLegal.body}"`);
+  assert.equal(/\(en inglés\)/.test(text), !storeConfig.es_listing_spanish_legal, 'es-MX: "(en inglés)" only while the switch is off');
 });
 
 test('keyword fields are valid and each keyword belongs to exactly one page', () => {

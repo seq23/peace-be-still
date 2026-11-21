@@ -11,7 +11,7 @@ const GN = "Oraciones de la noche";
 const GM = "Oraciones de la mañana";
 const GS = "Salmos";
 const GV = "Versículos";
-const MI_REFUGIO = `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae la Reina-Valera 1909 completa para leer gratis y un chat bíblico en español. Todavía no hay audio en español.</p>`;
+const MI_REFUGIO = `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae la Reina-Valera 1909 completa para leer gratis, un chat bíblico en español y Salmos susurrados para dormir.</p>`;
 const NOTA_RV = `<p class="muted">Los versículos se citan tal como están en la Reina-Valera 1909, con su ortografía antigua (“á”, “fué”). Algunos salmos empiezan con su título y la primera palabra en mayúsculas, como en la edición impresa.</p>`;
 
 export const ES = [
