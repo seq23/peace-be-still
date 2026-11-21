@@ -19,21 +19,23 @@ export default function Nights() {
   const psalms = visible.filter(track => shelfOf(track) === 'psalms').sort(byChapter);
   const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), t.locale);
   const stories = visible.filter(track => shelfOf(track) === (t.locale === 'es' ? 'miRefugio' : 'hushHarbor'));
-  // The plain tellings are English only; Spanish phones get Mi Refugio.
-  const plainStories = t.locale === 'en' ? visible.filter(track => shelfOf(track) === 'bibleStories') : [];
+  const playable = (track: Track) => isPreviewSample(track) || published?.get(track.file) === track.sha256 || downloadAvailable(track, user);
+  // The plain tellings are English only (Spanish phones get Mi Refugio), and listed only once their audio is
+  // published: a voiced-but-unpublished story is not shown, and the shelf itself waits for its first story.
+  const plainStories = t.locale === 'en' ? visible.filter(track => shelfOf(track) === 'bibleStories' && playable(track)) : [];
   const imagination = visible.filter(track => shelfOf(track) === 'imagination');
 
   function row(track: Track) {
-    const playable = isPreviewSample(track) || published?.get(track.file) === track.sha256 || downloadAvailable(track, user);
-    const open = playable ? () => router.push({ pathname: '/listen/[track]', params: { track: track.sha256 } }) : undefined;
+    const canPlay = playable(track);
+    const open = canPlay ? () => router.push({ pathname: '/listen/[track]', params: { track: track.sha256 } }) : undefined;
     return (
       <Card key={track.file} onPress={open}>
         <View style={styles.row}>
           <View style={styles.grow}>
             <Body muted={false}>{trackTitle(track, t.locale)}</Body>
-            {!playable && <Body size={14}>{t('listen.notReady')}</Body>}
+            {!canPlay && <Body size={14}>{t('listen.notReady')}</Body>}
           </View>
-          {playable && <Chevron />}
+          {canPlay && <Chevron />}
         </View>
       </Card>
     );
@@ -48,7 +50,7 @@ export default function Nights() {
           <Shelf title={t('listen.bibleByBook')} detail={t('listen.books', { count: bible.length })}>{bible.map(book => (
             <Disclosure key={book.code} title={book.title} detail={t('listen.chapters', { count: book.chapters.length })}>{book.chapters.map(row)}</Disclosure>
           ))}</Shelf>
-          {t.locale === 'en' &&
+          {plainStories.length > 0 &&
             <Shelf title={t('listen.bibleStories')} detail={t('listen.stories', { count: plainStories.length })}>{plainStories.map(row)}</Shelf>}
           <Shelf title={t.locale === 'es' ? t('journey.miRefugio.name') :
             [t('journey.hushHarbor.name'), t('journey.hushHarbor.subtitle')].join(' · ')} detail={t('listen.stories', { count: stories.length })}>{stories.map(row)}</Shelf>

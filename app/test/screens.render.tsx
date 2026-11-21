@@ -943,40 +943,46 @@ test('the canonical catalog plays Psalm 1 and disables missing or outdated uploa
   }
 });
 
-test('plain Bible Stories show only once voiced, and a published one opens', async () => {
+test('plain Bible Stories show only once published: no shelf before, no greyed rows, a published one opens', async () => {
   const person = { ...base, journey: 'gods-word' };
   const script = (id: string) => JSON.parse(require('node:fs').readFileSync(`../content/stories/plain/${id}.json`, 'utf8'));
-  const voiced = script('core-001-peace-be-still'), unvoiced = script('core-002-red-sea');
+  const voiced = script('core-001-peace-be-still'), unpublished = script('core-002-red-sea'), unvoiced = script('core-003-lions-den');
   const plainTrack = (id: string, title: string, n: string): Track => ({
     file: `en/stories/plain/${id}-0000000${n}.m4a`, kind: 'stories', lang: 'en', ref: `content/stories/plain/${id}.json`,
     seconds: 300, sha256: n.repeat(64), voice: 'kokoro:af_nicole', titles: { en: title },
   } as Track);
-  // Nothing voiced yet: the shelf says so and no plain story title is listed.
   assert.ok(!audioTracks.some(track => track.ref.startsWith('content/stories/plain/')), 'the fixture assumes no plain story is voiced on main');
-  let tree = await mount('nights', person);
+  const published = plainTrack(voiced.id, voiced.title, 'd'), waiting = plainTrack(unpublished.id, unpublished.title, 'e');
+  // publishedTracks defaults to the library array itself: copy it, so a voiced-but-unpublished track stays unpublished.
+  const before = publishedTracks, live = [...publishedTracks];
+  publishedTracks = live;
+  audioTracks.push(waiting);
   try {
-    assert.ok(texts(tree).includes(en['listen.bibleStories']));
-    assert.ok(!strings(tree).includes(voiced.title) && !strings(tree).includes(unvoiced.title));
-  } finally { await act(async () => tree.unmount()); }
-  // One story voiced and published: it is listed and opens; the unvoiced one (no audio row) never shows.
-  const track = plainTrack(voiced.id, voiced.title, 'd');
-  audioTracks.push(track);
-  publishedTracks = [...publishedTracks, track];
-  tree = await mount('nights', person);
-  try {
-    await press(tree, en['listen.bibleStories']);
-    assert.ok(strings(tree).includes(i18n.t('listen.stories', { locale: 'en', count: 1 })));
-    await press(tree, voiced.title);
-    assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: track.sha256 } }]);
-    assert.ok(!strings(tree).includes(unvoiced.title));
-    assert.deepEqual(faithContentIssues(strings(tree)), []);
+    // Voiced but not yet published (and nothing else): no shelf at all, no "not ready" row, no empty line.
+    let tree = await mount('nights', person);
+    try {
+      assert.ok(!texts(tree).includes(en['listen.bibleStories']));
+      assert.ok(!strings(tree).includes(unpublished.title) && !strings(tree).includes(unvoiced.title));
+    } finally { await act(async () => tree.unmount()); }
+    // One published: the shelf appears with that one story, which opens; the unpublished and unvoiced stay hidden.
+    audioTracks.push(published);
+    publishedTracks = [...live, published];
+    tree = await mount('nights', person);
+    try {
+      await press(tree, en['listen.bibleStories']);
+      assert.ok(strings(tree).includes(i18n.t('listen.stories', { locale: 'en', count: 1 })));
+      await press(tree, voiced.title);
+      assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: published.sha256 } }]);
+      assert.ok(!strings(tree).includes(unpublished.title) && !strings(tree).includes(unvoiced.title));
+      assert.deepEqual(faithContentIssues(strings(tree)), []);
+    } finally { await act(async () => tree.unmount()); }
+    // Spanish phones never get the English shelf.
+    const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
+    try { assert.ok(!strings(spanish).includes(en['listen.bibleStories'])); } finally { await act(async () => spanish.unmount()); }
   } finally {
-    await act(async () => tree.unmount());
-    audioTracks.splice(audioTracks.indexOf(track), 1);
+    for (const track of [published, waiting]) { const i = audioTracks.indexOf(track); if (i >= 0) audioTracks.splice(i, 1); }
+    publishedTracks = before;
   }
-  // Spanish phones never get the English shelf.
-  const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
-  try { assert.ok(!strings(spanish).includes(en['listen.bibleStories'])); } finally { await act(async () => spanish.unmount()); }
 });
 
 test('Spanish and Mindset shelves show their own library and the current availability', async () => {
