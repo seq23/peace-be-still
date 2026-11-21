@@ -1,0 +1,80 @@
+// Bundles test/screens.render.tsx with the real screens and runs it under node:test. Native modules are
+// replaced by HOST elements (a plain string type, as React Native's own primitives are), so each element
+// exists once in the tree. expo-router is replaced by a recorder: tests assert where a screen navigates
+// (push/replace/back/Redirect) and read the layouts' Stack/Tabs configuration as data.
+import { build } from 'esbuild';
+import { mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
+
+const host = names => names.map(name => `exports[${JSON.stringify(name)}] = ${JSON.stringify(name)};`).join('\n');
+const MOCKS = {
+  'react-native': `${host(['ActivityIndicator', 'Modal', 'Pressable', 'ScrollView', 'Switch', 'Text', 'TextInput', 'View'])}
+    exports.StyleSheet = { create: x => x };
+    exports.Platform = { get OS() { return globalThis.__pbsPlatform || 'web'; }, select: o => o.web ?? o.default };
+    exports.AppState = { currentState: 'active', addEventListener: () => ({ remove() {} }) };
+    exports.Linking = { openURL: async url => { (globalThis.__pbsOpened ||= []).push(url); } };
+    exports.useColorScheme = () => globalThis.__pbsScheme || 'light';`,
+  'react-native-safe-area-context': `${host(['SafeAreaView'])}
+    exports.SafeAreaProvider = ({ children }) => children;
+    exports.useSafeAreaInsets = () => ({ top: 0, bottom: 0, left: 0, right: 0 });`,
+  'react-native-svg': `exports.__esModule = true; exports.default = 'Svg'; ${host(['Path', 'Rect', 'Circle'])}`,
+  'expo-router': `const React = require('react');
+    const r = () => globalThis.__pbsRouter;
+    exports.useRouter = () => r();
+    exports.useIsFocused = () => true;
+    exports.useSegments = () => globalThis.__pbsSegments || [];
+    exports.useGlobalSearchParams = () => globalThis.__pbsParams || {};
+    exports.useLocalSearchParams = () => globalThis.__pbsParams || {};
+    exports.Redirect = props => React.createElement('Redirect', props);
+    const layout = name => { const C = props => React.createElement(name, props, props.children); C.Screen = props => React.createElement(name + '.Screen', props); C.Protected = props => React.createElement(name + '.Protected', props, props.children); return C; };
+    exports.Stack = layout('Stack'); exports.Tabs = layout('Tabs');`,
+  'expo-font': `exports.useFonts = () => globalThis.__pbsFonts || [true, null];`,
+  'expo-localization': `exports.getLocales = () => [{ languageCode: globalThis.__pbsLocale || 'en' }];`,
+  '@react-native-async-storage/async-storage': `module.exports = { __esModule: true, default: globalThis.__pbsStorage };`,
+  'react-native-purchases': `exports.__esModule = true; exports.default = {
+    configure() {}, isConfigured: async () => true,
+    getCustomerInfo: async () => ({ entitlements: { active: globalThis.__pbsPaid ? { paid: {} } : {} } }),
+    addCustomerInfoUpdateListener() {}, removeCustomerInfoUpdateListener() {},
+  };`,
+  'expo-audio': '',
+  'expo-constants': `exports.__esModule = true; exports.default = { expoConfig: { extra: { audioBaseUrl: require('./app.config').default.extra.audioBaseUrl } } };`,
+  'bible-store': `const core = require('./src/bible/core');
+    const { DatabaseSync } = require('node:sqlite');
+    Object.assign(exports, core);
+    exports.bible = async translation => core.createBible({
+      async all(sql, params) {
+        const db = new DatabaseSync('src/bible/data/' + translation.toLowerCase() + '.db', { readOnly: true });
+        try { return db.prepare(sql).all(...params); }
+        finally { db.close(); }
+      },
+    });`,
+  'expo-brightness': '',
+  'expo-file-system': '',
+  'player-hook': `const React = require('react');
+    exports.tracks = require('./src/player/library.json');
+    exports.useDimmer = () => ({ dimmed: false, touch() {} });
+    exports.usePlayer = () => {
+      const player = globalThis.__pbsPlayer;
+      const state = React.useSyncExternalStore(player.subscribe, player.getState);
+      return { player, state, stop: globalThis.__pbsAudioStop || null };
+    };`,
+};
+
+const dir = mkdtempSync(join(tmpdir(), 'pbs-render-'));
+await build({
+  entryPoints: ['test/screens.render.tsx'], outfile: join(dir, 'screens.cjs'), bundle: true, platform: 'node', format: 'cjs',
+  packages: 'external', external: ['react', 'react-test-renderer', 'i18n-js'], jsx: 'automatic', logLevel: 'warning',
+  plugins: [{ name: 'native-mocks', setup(b) {
+    b.onResolve({ filter: /^\.\.\/\.\.\/bible$/ }, () => ({ path: 'bible-store', namespace: 'mock' }));
+    b.onResolve({ filter: /\/player\/usePlayer$/ }, () => ({ path: 'player-hook', namespace: 'mock' }));
+    b.onResolve({ filter: /^(expo-audio|expo-constants|expo-brightness|expo-file-system|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-font|expo-localization|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
+    b.onLoad({ filter: /.*/, namespace: 'mock' }, args => ({
+      contents: MOCKS[args.path] ?? `module.exports = new Proxy({}, { get: (_, key) => key === '__esModule' ? false : String(key) });`,
+      loader: 'js', resolveDir: process.cwd(),
+    }));
+  } }],
+});
+const result = spawnSync(process.execPath, ['--test', ...process.argv.slice(2), join(dir, 'screens.cjs')], { stdio: 'inherit', env: { ...process.env, NODE_PATH: join(process.cwd(), 'node_modules') } });
+process.exit(result.status ?? 1);

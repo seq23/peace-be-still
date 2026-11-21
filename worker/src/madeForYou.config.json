@@ -1,0 +1,42 @@
+{
+  "_": "Made for you: one config read by the Worker (worker/src/madeForYou.ts) and the Mac runner (audio/made_for_you.py). allowanceBooks() in madeForYou.ts adds these caps to chat's own caps and worker/test/madeForYou.unit.mjs fails if any provider's free allowance is exceeded.",
+  "allowance": {
+    "_": "Free daily allowances. Gemini: 500 requests per model per day, CONFIRMED 20 Nov 2026 from the API's own quota error (GenerateRequestsPerDayPerProjectPerModel-FreeTier, quotaValue 500, gemini-3.5-flash-lite); chat books 200, made-for-you a share. The rest as phase 3 measured them (worker/wrangler.jsonc on codex/pbs-phase-3).",
+    "workersAiNeurons": 10000,
+    "geminiRequestsPerModel": 500,
+    "openRouterRequests": 1000,
+    "openRouterRotationMargin": 50,
+    "madeForYouRotationMargin": 10
+  },
+  "chatNeuronsPerCall": {
+    "_": "Measured by phase 3 on her account (llama-3.1-8b risk screen, llama-3.3-70b confirm, judge and answer).",
+    "risk": 2.7,
+    "riskConfirm": 19,
+    "judge": 24,
+    "answer": 109
+  },
+  "draftNeuronsWorstCase": 466,
+  "_draftNeurons": "llama-3.3-70b fp8-fast at Cloudflare's published rate: 2,200 output tokens x 0.2045 + ~600 input tokens x 0.0266 neurons.",
+  "judgeNeuronsWorstCase": 217,
+  "draftMaxTokens": 2200,
+  "judgeMaxTokens": 800,
+  "_judgeMaxTokens": "The judge answers 28 fields (16 chat checks, 11 session checks, voice). At 300 tokens Gemini's answers were cut off mid-object (NOT_JSON on every call, 21 Nov 2026 run 44893624600), so every judgment was DOWN. 800 leaves room; worst-case neurons: 800 x 0.2045 + ~2,000 input x 0.0266.",
+  "revisions": 2,
+  "_revisions": "A try is one draft plus up to two revisions that send it back with its exact faults (draftFaults). Soak of 21 Nov 2026: with fresh drafts only, 11 of 12 requests stopped on fixable floors.",
+  "draft": {
+    "workers-ai": 1,
+    "gemini-free": 30,
+    "openrouter-free": 20
+  },
+  "judge": {
+    "workers-ai": 0,
+    "gemini-free": 30,
+    "openrouter-free": 20
+  },
+  "attemptsBooked": 2,
+  "_attemptsBooked": "Each session is booked at two tries, each a draft plus up to two revisions, and one judgment.",
+  "sessionMinutes": 15,
+  "_sessionMinutes": "Measured 20 Nov 2026: real passing scripts voiced, mastered and QA-checked in 4.5 and 5.2 min on a GitHub runner (12.4 and 10.3 min of audio at 91 and 98 wpm), 7 min 38 s on the Mac; the Worker's claim took 8-48 s when a model answered (abort at 4 min). 15 leaves room for nice 15 and the private upload.",
+  "sessionsPerNight": 8,
+  "_sessionsPerNight": "NOT YET SOAK-PROVEN (21 Nov 2026). 8 is the free budget: 51 draft calls / (2 tries x 3 drafts each) = 8, judge 50 / 2 = 25, the Mac 60. Every call is also booked under HALF of chat's cap (chat wins, PHASES.md), so on a busy chat day fewer are made and the row holds as MFY_SHARE_USED. Soak 1 (20-21 Nov, before revisions): 1 of 12 made. A short run after revisions made 7 of 12 in 15 minutes. Tonight's soak (launchd com.seq.pbs-mfy-soak-once, 20:30 CT 21 Nov, after the chat red team, on its keys under the share cap) re-sets it."
+}

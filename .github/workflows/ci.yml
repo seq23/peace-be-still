@@ -1,0 +1,69 @@
+name: App checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions: { contents: read }
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck && npm test
+  made-for-you-worker:
+    runs-on: ubuntu-latest
+    env:
+      PBS_CHAT_SOURCE: .phase-3
+    steps:
+      - uses: actions/checkout@v4
+      # Standalone lane tests use phase 3's real chat code at the commit the integration merge takes
+      # (codex/pbs-phase-3 head 80f1688, 21 Nov 2026). Drop the pin once phase 3 is on main.
+      - uses: actions/checkout@v4
+        with:
+          ref: 80f1688821ed040a053f25251c1ca41802a2b9fa
+          path: .phase-3
+          fetch-depth: 0
+      # A stale pin fails here: the lane must be tested against phase 3's head, not an older commit.
+      - name: The phase 3 pin is phase 3's head
+        run: |
+          git -C .phase-3 fetch -q origin codex/pbs-phase-3 || { echo "phase 3 branch gone: it is on main, drop this pin"; exit 1; }
+          test "$(git -C .phase-3 rev-parse HEAD)" = "$(git -C .phase-3 rev-parse FETCH_HEAD)" || { echo "NAMED STOP MADE_FOR_YOU_PHASE3_PIN_STALE: re-pin to $(git -C .phase-3 rev-parse --short FETCH_HEAD)"; exit 1; }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --prefix app --no-audit --no-fund
+      - run: npm install --prefix worker --no-save --package-lock=false --no-audit --no-fund miniflare@5.20261118.0-beta
+      - run: node --test worker/test/madeForYou.unit.mjs worker/test/madeForYou.local.mjs
+  # The launch wiring, proven against phase 3 itself: the lane's modules, migration 0006 and the one
+  # index.ts change (worker/integration/phase3-index.patch) put into the pinned phase 3, then phase 3's own
+  # typecheck and test suite. A patch that no longer applies or breaks chat fails here.
+  made-for-you-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: 80f1688821ed040a053f25251c1ca41802a2b9fa
+          path: .phase-3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .phase-3/worker/package-lock.json
+      - run: worker/integration/apply.sh .phase-3
+      - run: npm ci --no-audit --no-fund && npm run typecheck && npm test
+        working-directory: .phase-3/worker
