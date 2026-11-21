@@ -182,7 +182,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
         </View>
         {unavailable && !nightLocked && <Text accessibilityRole="alert" style={styles.note}>{t('listen.audioNotReady')}</Text>}
         {!unavailable && current && state.error === 'play-failed' &&
-          <Text accessibilityRole="alert" style={styles.note}>{t('listen.playFailed')}</Text>}
+          <Text accessibilityRole="alert" style={styles.note}>{t(saved ? 'listen.playFailed' : 'listen.playFailedNetwork')}</Text>}
         {nightLocked ? <View style={styles.locked}>
           <Text accessibilityRole="text" style={styles.lockedLine}>{t('listen.nextFreeNight', { day: nextNight })}</Text>
           {!child && <Text style={styles.note}>{t('listen.everyNight')}</Text>}
@@ -228,7 +228,7 @@ export function NowPlaying({ track, close }: { track: Track; close: () => void }
             disabled={downloading || !canStream || saved} onPress={() => void download()}>
             <Text style={styles.link}>{saved ? t('listen.downloaded') : downloading ? t('listen.downloading') : t('listen.download')}</Text>
           </Pressable>
-        ) : !child && <Text style={styles.note}>{t('listen.paidDownload')}</Text>}
+        ) : !child && !nightLocked && <Text style={styles.note}>{t('listen.paidDownload')}</Text>}
         {downloadFailed && <Text accessibilityRole="alert" style={styles.note}>{t('listen.downloadFailed')}</Text>}
       </ScrollView>
       {dimmed && response === null && <Pressable accessibilityRole="button" accessibilityLabel={t('listen.brighten')} onPress={touch} style={styles.dim} />}

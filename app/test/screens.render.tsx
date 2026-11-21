@@ -527,14 +527,14 @@ test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does
 });
 
 function testPlayer(track: Track, baseUrl: string | null = audioBase, position = 0,
-  fetchHash: () => Promise<string> = async () => track.sha256) {
+  fetchHash: () => Promise<string> = async () => track.sha256, offline = false) {
   let at = 0;
   let source: string | undefined;
   let playing = false;
   let listener: ((status: { playing: boolean; isLoaded: boolean; didJustFinish: boolean }) => void) | undefined;
   const audio = {
     load: (uri: string) => { source = uri; at = 0; },
-    play() { playing = true; },
+    play() { if (offline) throw new Error('network'); playing = true; },
     pause() { playing = false; },
     isLoaded: true,
     get currentTime() { return at; },
@@ -1072,9 +1072,9 @@ const sleepTrack = (kind: 'psalm-night' | 'imagination-night', lang: 'en' | 'es'
   ref: `content/${kind === 'psalm-night' ? 'psalm-nights' : 'imagination-nights'}/${lang}/render.json#render`,
 } as Track);
 
-async function nightPlayer(track: Track, value: Settings, baseUrl: string | null = audioBase) {
+async function nightPlayer(track: Track, value: Settings, baseUrl: string | null = audioBase, offline = false) {
   publishedTracks = [...audioTracks, track];
-  const player = testPlayer(track, baseUrl);
+  const player = testPlayer(track, baseUrl, 0, undefined, offline);
   saved = JSON.stringify(value);
   const Ready = () => useSettings().ready ? <PurchasesProvider><NowPlaying track={track} close={() => undefined} /></PurchasesProvider> : null;
   let tree!: ReactTestRenderer;
@@ -1194,5 +1194,35 @@ test('the used-night screen speaks Spanish in Mi Refugio and keeps the Mindset d
     assert.ok(!strings(s.tree).includes(en['listen.everyNight']), 'no subscription pitch to a child');
     assert.ok(!strings(s.tree).includes(en['listen.paidDownload']), 'no download pitch to a child either');
     assert.ok(!strings(s.tree).includes(en['listen.seePlans']));
+  } finally { await s.close(); }
+});
+
+test('a first launch offline: the store never answers, the free night still works, and a failed start says it needs a connection', async () => {
+  asSubscriber(false);
+  const failing = (globalThis as any).__pbsPurchases.getCustomerInfo;
+  (globalThis as any).__pbsPurchases.getCustomerInfo = async () => { throw new Error('offline'); };
+  try {
+    for (const [locale, value, track] of [
+      ['en', { ...base, journey: 'psalm-nights' }, sleepTrack('psalm-night', 'en')],
+      ['es', { ...base, language: 'es', voice: 'spanish', journey: 'mi-refugio' }, sleepTrack('psalm-night', 'es')],
+    ] as const) {
+      nightsRecord = null;
+      const strings_ = locale === 'es' ? es : en;
+      const s = await nightPlayer(track, value as Settings, audioBase, true);
+      try {
+        await press(s.tree, strings_['listen.play']);
+        assert.ok(texts(s.tree).includes(strings_['listen.playFailedNetwork']), strings(s.tree));
+        assert.equal(nightsRecord, null, 'a start that failed costs no night');
+      } finally { await s.close(); }
+    }
+  } finally { (globalThis as any).__pbsPurchases.getCustomerInfo = failing; (globalThis as any).__pbsPlatform = 'web'; }
+});
+
+test('the used-week screen has one subscription line and one button', async () => {
+  nightsRecord = JSON.stringify([daysAgo(10), daysAgo(2)]);
+  const s = await nightPlayer(sleepTrack('psalm-night', 'en'), { ...base, journey: 'psalm-nights' });
+  try {
+    assert.ok(strings(s.tree).includes(en['listen.everyNight']));
+    assert.ok(!strings(s.tree).includes(en['listen.paidDownload']));
   } finally { await s.close(); }
 });

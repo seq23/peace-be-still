@@ -48,7 +48,10 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
       const refresh = () => {
         if (!inFlight.current) void sdk.getCustomerInfo().then(info => {
           if (!inFlight.current) update(info);
-        }).catch(() => {});
+        }).catch(() => {
+          // No answer and nothing cached (a first launch offline): go on as the free lane rather than wait forever.
+          if (live) setAnswered(true);
+        });
       };
       const id = await installId();
       if (id && await sdk.getAppUserID() !== id) await sdk.logIn(id);

@@ -182,5 +182,6 @@
   "listen.everyNight": "Con la suscripción, tienes una sesión para dormir cada noche.",
   "listen.seePlans": "Ver planes ›",
   "listen.psalmWeekly": "Una Noche de Salmos gratis por semana.",
-  "listen.nightWeekly": "Una Noche de Imaginación gratis por semana."
+  "listen.nightWeekly": "Una Noche de Imaginación gratis por semana.",
+  "listen.playFailedNetwork": "Para empezar se necesita conexión a internet. Revisa tu conexión e inténtalo de nuevo."
 }
