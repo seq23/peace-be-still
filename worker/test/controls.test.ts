@@ -5,7 +5,7 @@ import { call, chat, chatBody, deps, good, NOW, scripted, tokenFor } from './hel
 import { realDeps } from '../src/index';
 import { openRouterPrivate } from '../src/providers/openrouter';
 import { PAUSE_AT, SLOW_AT, microCost, openRouterHeadroom, resetsOn, userCeilingUsd } from '../src/controls';
-import { overflowText, shortBusyText } from '../src/replies';
+import { freeRestingText, overflowText, shortBusyText } from '../src/replies';
 import { PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY } from '../src/shared';
 import products from '../../app/src/config/products.json';
 import { centralDay } from '../src/day';
@@ -29,7 +29,7 @@ describe('the free lane', () => {
     const paid = scripted('gemini-paid', [good()]);
     const r = await chat(lanes([], [paid.rung]), 'How do I forgive my sister?');
     expect(r.body.kind).toBe('no_free_model');
-    expect(answerText(r)).toBe('Free chat is resting. Try again later, or make chat private.');
+    expect(answerText(r)).toBe(freeRestingText.en);
     expect(paid.calls.length).toBe(0);
   });
   it('never reads the paid key: with only PBS_GEMINI_API_KEY set, the free Gemini rung stops at PBS_FREE_GEMINI_API_KEY_MISSING without a request', async () => {

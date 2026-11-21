@@ -50,6 +50,13 @@ test('wherever the "unlimited" claim appears, what it means and the small print 
 });
 
 test('NEGATIVE: the old pause and never-free wording is gone everywhere (it contradicts the 100-then-free rule)', () => {
-  const old = /until the 1st|never switches you to a free provider|chat pauses until|se pausa hasta el día 1|nunca lo pasa a un proveedor gratuito|never falls back to a free provider:|nunca pasa a un proveedor gratuito:|fair use(?: of)?:? \d+|uso (?:justo|razonable)(?: de)?:? \d+|\d+ chat messages a day|\d+ mensajes de chat al día|very heavy use across a month may be paused|month's chat limit|límite de chat de este mes/i;
+  const old = /until the 1st|never switches you to a free provider|chat pauses until|se pausa hasta el día 1|nunca lo pasa a un proveedor gratuito|never falls back to a free provider:|nunca pasa a un proveedor gratuito:|fair use(?: of)?:? \d+|uso (?:justo|razonable)(?: de)?:? \d+|\d+ chat messages a day|\d+ mensajes de chat al día|very heavy use across a month may be paused|month's chat limit|límite de chat de este mes|if the paid service is down, the app says so|si el servicio de pago no funciona, la app lo dice/i;
   for (const f of everywhere) assert.doesNotMatch(read(f), old, f);
+});
+
+test('the terms and privacy policy name every time free chat is offered to a paid user, including while the paid service is down', () => {
+  for (const [f, down] of [['legal/terms.md', 'or while the paid service is down'], ['legal/privacy.md', 'or while the paid service is down'], ['site/public/terms.html', 'or while the paid service is down'], ['site/public/privacy.html', 'or while the paid service is down'],
+    ['legal/es/terminos.md', 'o mientras el servicio de pago no esté disponible'], ['legal/es/privacidad.md', 'o mientras el servicio de pago no esté disponible'], ['site/public/es/terminos.html', 'o mientras el servicio de pago no esté disponible'], ['site/public/es/privacidad.html', 'o mientras el servicio de pago no esté disponible']]) {
+    assert.ok(read(f).includes(down), `${f} does not cover the outage path`);
+  }
 });
