@@ -1227,3 +1227,22 @@ test('the used-week screen has one subscription line and one button', async () =
     assert.ok(!strings(s.tree).includes(en['listen.paidDownload']));
   } finally { await s.close(); }
 });
+
+test('a screen that throws shows the calm error screen in the app language, and Try again retries', async () => {
+  const { ErrorBoundary } = screens.root as { ErrorBoundary: (props: { error: Error; retry: () => Promise<void> }) => React.ReactElement };
+  assert.equal(typeof ErrorBoundary, 'function', 'app/_layout.tsx exports the route error boundary');
+  for (const locale of ['en', 'es'] as const) {
+    i18n.locale = locale;
+    const strings_ = locale === 'es' ? es : en;
+    let retried = 0;
+    let tree!: ReactTestRenderer;
+    await act(async () => { tree = create(<ErrorBoundary error={new Error('boom')} retry={async () => { retried++; }} />); });
+    assert.ok(texts(tree).includes(strings_['error.crash.title']));
+    assert.ok(texts(tree).includes(strings_['error.crash.body']));
+    assert.doesNotMatch(strings(tree), /boom|Error/, 'no internals shown');
+    await press(tree, strings_['error.crash.retry']);
+    assert.equal(retried, 1);
+    await act(async () => tree.unmount());
+  }
+  i18n.locale = 'en';
+});

@@ -16,7 +16,7 @@ You must be at least 13 to use chat. If you are 13 to 17, a parent or guardian m
 
 The free lane is free with no time limit: the whole Bible in text and audio, today's story, one chat a day of up to 10 messages, the first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, the journal, the streak and share cards.
 
-The paid lane adds unlimited chat (fair use of 100 messages a day), chat that remembers, a session every night, sessions made for you, every past story, longer plans, declaration topics, offline downloads and recording in your own voice. It is sold monthly or yearly.
+The paid lane adds unlimited chat (fair use of 100 messages a day), chat that remembers, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline downloads. It is sold monthly or yearly.
 
 What is free stays free. While you stay subscribed, your price does not go up.
 
@@ -57,7 +57,7 @@ These terms are between you and us, not Apple. We, not Apple, are solely respons
 
 ## Changes
 
-We may update these terms. We post the new date here and show a notice in the app for material changes. Using the app after a change means you accept the updated terms. A change never takes back something free or raises the price while you stay subscribed.
+We may update these terms. We post the change on this page and update the date on it. Using the app after a change means you accept the updated terms. A change never takes back something free or raises the price while you stay subscribed.
 
 ## Governing law
 

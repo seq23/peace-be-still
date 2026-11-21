@@ -11,7 +11,7 @@ export const FREE_FEATURES = [
 ] as const;
 export const PAID_FEATURES = [
   'chatMemory', 'personalSession', 'pastStories', 'longPlans', 'declarationTopics',
-  'offline', 'recordOwnVoice',
+  'offline',
 ] as const;
 export type Feature = (typeof FREE_FEATURES)[number] | (typeof PAID_FEATURES)[number] | 'chat' | 'sleepSession';
 

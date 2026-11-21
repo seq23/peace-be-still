@@ -183,5 +183,8 @@
   "listen.seePlans": "See plans ›",
   "listen.psalmWeekly": "One free Psalm Night a week.",
   "listen.nightWeekly": "One free Imagination Night a week.",
-  "listen.playFailedNetwork": "This needs an internet connection to start. Check your connection, then try again."
+  "listen.playFailedNetwork": "This needs an internet connection to start. Check your connection, then try again.",
+  "error.crash.title": "Something went wrong.",
+  "error.crash.body": "Tap Try again. If it keeps happening, close Peace Be Still and open it again. Your saved verses and journal are still on this phone.",
+  "error.crash.retry": "Try again ›"
 }

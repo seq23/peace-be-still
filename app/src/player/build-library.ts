@@ -7,6 +7,7 @@ import { readManifest, type ManifestRow } from './library';
 
 export const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 export const MANIFEST = join(REPO, 'audio/manifest.jsonl');
+// Every folder whose scripts are spoken: stories and the two sleep-session kinds (Psalm Nights, Imagination Nights).
 const SCRIPT_ROOTS = ['stories', 'psalm-nights', 'imagination-nights'].map(folder => join(REPO, 'content', folder) + sep);
 
 type Block = { type?: unknown; ref?: unknown };

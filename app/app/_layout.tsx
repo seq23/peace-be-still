@@ -4,14 +4,20 @@ import { Figtree_400Regular, Figtree_600SemiBold } from '@expo-google-fonts/figt
 import { LibreCaslonText_400Regular, LibreCaslonText_400Regular_Italic } from '@expo-google-fonts/libre-caslon-text';
 import { SplineSansMono_500Medium } from '@expo-google-fonts/spline-sans-mono';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, type ErrorBoundaryProps } from 'expo-router';
 import React from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { PurchasesProvider } from '../src/purchases/provider';
 import { SettingsProvider, useSettings, useT } from '../src/settings';
 import { Body, Screen, usePalette } from '../src/ui';
+import { ErrorScreen } from '../src/ui/ErrorScreen';
 import { fonts } from '../src/theme/tokens';
+
+/** Any screen that throws lands here (expo-router's route error boundary), never on a white screen. */
+export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
+  return <ErrorScreen retry={() => void retry()} />;
+}
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({ LibreCaslonText_400Regular, LibreCaslonText_400Regular_Italic, Figtree_400Regular, Figtree_600SemiBold, SplineSansMono_500Medium });
