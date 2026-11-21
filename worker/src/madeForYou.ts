@@ -364,7 +364,9 @@ export function paragraphsOf(value: unknown): string[] | null {
 
 const PROBLEM_WORDS: Record<string, string> = {
   stock_phrase: 'uses a stock phrase from the never-use list', mindset_word: 'uses a word from the never-use list',
-  profanity: 'uses a rude word', non_store_scripture: 'quotes or attributes words as scripture', broken_ending: 'ends on a broken sentence',
+  profanity: 'uses a rude word', broken_ending: 'ends on a broken sentence',
+  non_store_scripture: 'puts words in quotation marks or after "says", "said" or "it is written"; say it in your own words, with no quotation marks and none of those words',
+  scripture_like: 'uses old Bible words (thee, thou, thy, hath, words ending in -eth); say it in plain modern English',
   assumes_gender: 'assumes the listener is a woman', trusted_adult_for_adult: 'speaks to an adult as if a child',
 };
 /**
@@ -390,7 +392,7 @@ export async function draftFaults(checkProse: CheckProse, input: Input, paragrap
   if (moved) faults.push(`"${moved}" asks the listener to move. They are lying in bed and stay there: let the scene come to them.`);
   for (const word of leanedOnAll(text, input.text)) faults.push(`"${word}" is used three or more times; keep it once and say the rest another way.`);
   const echo = input.verses?.length ? echoesVerses(text, input.verses) : null;
-  if (echo) faults.push(`"${echo}" repeats the psalm's own words; the psalm is read after the prose, so lead up to it without retelling it.`);
+  if (echo) faults.push(`"${echo.replace(/·/g, '…')}" repeats the psalm's own words; the psalm is read after the prose, so take out every phrase and picture from it and talk about the listener's evening instead.`);
   if (PROMISE.test(n)) faults.push('A line promises an outcome (healing, sleep, money, love); take every promise out.');
   if (input.kind === 'imagination' && FAITH.test(n)) faults.push('A line has religious content; this session has none.');
   const context = { lang: input.lang, teen: input.teen, door: input.kind === 'psalm' ? 'faith' : 'mindset',
@@ -403,6 +405,12 @@ export async function draftFaults(checkProse: CheckProse, input: Input, paragrap
   }
   return faults;
 }
+
+/** A fault's kind, as a code for the log (the fault's words stay out of it). */
+const faultKind = (fault: string) => /^Paragraph \d+ has/.test(fault) ? 'length' : /^The whole/.test(fault) ? 'total'
+  : /^Replace/.test(fault) ? 'ai_words' : /asks the listener/.test(fault) ? 'move' : /three or more/.test(fault) ? 'leaned'
+  : /psalm's own words/.test(fault) ? 'verses' : /promises/.test(fault) ? 'promise' : /religious/.test(fault) ? 'faith'
+  : `gate_${fault.replace(/^Paragraph \d+ /, '').split(' ').slice(0, 3).join('_').replace(/\W/g, '')}`;
 
 /** The revision request: her draft back with its exact faults, the same ten-paragraph answer expected. */
 export function revisionMessages(first: Message[], paragraphs: string[], faults: string[]): Message[] {
@@ -454,7 +462,7 @@ export function draftMessages(row: Pick<Row, 'kind' | 'lang' | 'teen'>, note: st
     { role: 'system', content: [
       `Write spoken bedtime prose in ${row.lang === 'es' ? 'plain Latin American Spanish' : 'plain English'}.`,
       row.kind === 'psalm'
-        ? 'Write a quiet Christian reflection that leads up to a psalm read aloud after it. The psalm is read once, word for word, from the stored text: never quote, cite, retell, paraphrase or invent scripture, and never walk through its images (still waters, a valley, rod and staff, a table, a cup, oil, goodness and mercy). Talk about her day and about God being near, plainly.'
+        ? 'Write a quiet Christian reflection that leads up to a psalm read aloud after it. The psalm is read once, word for word, from the stored text: never quote, cite, retell, paraphrase or invent scripture, and never walk through its images (still waters, a valley, rod and staff, a table, a cup, oil, goodness and mercy). Talk about the listener's day and about God being near, plainly. No quotation marks, never "the psalm says" or "it is written", and no old Bible words (thee, thou, thy, hath, -eth).'
         : 'Write a quiet sensory scene in the present tense, with no religious content of any kind.',
       'The listener is lying in bed with the lights low and stays there: never ask them to sit up, stand, walk, get up or move about, not even inside the scene. Let the scene come to them through sound, light, weather and touch.',
       'Write the way a calm friend talks at a bedside: short plain sentences, concrete things in a real room or place, no ornate or abstract words, no lists of three, and no word leaned on again and again. These two passages from earlier sessions show the voice (do not reuse their words or images):',
@@ -537,7 +545,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
         paragraphs = paragraphsOf(drafted.data)!;
         const faults = await draftFaults(deps.checkProse, input, paragraphs, signal);
         if (!faults.length) break;
-        why(`revise:${round}:${faults.length}`);
+        why(`revise:${round}:${faults.map(faultKind).join('+')}`);
         if (round === config.revisions) return { code: DRAFT_FAILED, failure: true };
         messages = revisionMessages(first, paragraphs, faults);
       }
