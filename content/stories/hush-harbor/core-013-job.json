@@ -93,7 +93,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say blessed be, you say, the name of the LORD. Blessed be. [PAUSE 3s | screen: \"The name of the LORD\"] The name of the LORD. [PAUSE 3s | screen: \"Blessed be\"] Job said it on the worst day of his life.",
+   "text": "When I say blessed be, you say, the name of the LORD. Blessed be. [PAUSE 3s | screen: \"The name of the LORD\"] I said, blessed be. [PAUSE 3s | screen: \"The name of the LORD\"] Job said it on the worst day of his life.",
    "pauses": [
     {
      "seconds": 3,
@@ -101,7 +101,7 @@
     },
     {
      "seconds": 3,
-     "screen": "Blessed be"
+     "screen": "The name of the LORD"
     }
    ]
   },
@@ -201,8 +201,8 @@
   "file": null,
   "qa": null
  },
- "words": 557,
- "est_seconds": 310,
+ "words": 556,
+ "est_seconds": 309,
  "qa": {
   "gate_version": "library-1",
   "checks": {

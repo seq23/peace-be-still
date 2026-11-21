@@ -2,11 +2,13 @@
 // expo-router recorder). Each test drives a screen the way a person would and checks what is shown, what is
 // saved and where the app goes next.
 import React from 'react';
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import { gunzipSync } from 'node:zlib';
 import { displayRuns, formatReference, parseReference } from '../src/bible/core';
-import { declaration } from '../src/screens/daily/content';
+import { mindsetDeclarations, mindsetTopics, plans } from '../src/screens/daily/content';
+import { byTopic, dailyDeclaration, pastStories, shelf, storyFor, tellingFor, topics } from '../src/content';
+import type { DailyPage } from '../src/screens/daily/Daily';
 import { test, beforeEach, mock } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { create, act, type ReactTestRenderer, type ReactTestInstance } from 'react-test-renderer';
@@ -14,7 +16,7 @@ import products from '../src/config/products.json';
 import { createDownloads } from '../src/player/downloads';
 import { trackTitle, type Track } from '../src/player/library';
 import { createPlayer } from '../src/player/player';
-import { dayKey, faithContentIssues, RAISE_WAIT_MS, type Settings } from '../src/model';
+import { dayKey, faithContentIssues, RAISE_WAIT_MS, type JourneyId, type Settings } from '../src/model';
 
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
 const quiet = console.error;
@@ -506,7 +508,7 @@ async function faithWalk(language: 'en' | 'es', age: 'child' | 'teen' | 'adult')
     ['door', { ...person, door: null, age: null, journey: undefined }], ['age', { ...person, age: null }], ['journeys', person],
     ['today', person], ['bible', person],
     ...['books', 'search', 'saved'].map(page => ['biblePage', person, { page }] as [Name, object, Record<string, string>]),
-    ...['declaration', 'story', 'plans', 'journal'].map(page => ['dailyPage', person, { page }] as [Name, object, Record<string, string>]),
+    ...['declaration', 'story', 'stories', 'plans', 'journal'].map(page => ['dailyPage', person, { page }] as [Name, object, Record<string, string>]),
     ['nights', person], ['more', person], ['settings', person], ['notFound', person],
   ];
   if (age !== 'child') pages.push(['chat', person], ['paid', person]);
@@ -558,6 +560,259 @@ test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does
   for (const name of ['journeys', 'today', 'nights', 'more', 'settings'] as const) assert.equal(dawnIn(await mount(name, mindset)), 0, name);
   assert.ok(dawnIn(await mount('journeys', { ...base, journey: 'psalm-nights' })) > 0);
 });
+
+test('a Bible verse link scrolls the expanded verse into view once its row is laid out', async () => {
+  for (const journey of ['psalm-nights', 'mi-refugio'] as const) {
+    calls = [];
+    const tree = await mount('biblePage', { ...base, journey }, { page: 'chapter', book: 'PSA', chapter: '119', verse: '105' });
+    const verses = host(tree, 'Text').filter(node => node.props.testID === 'scripture-text');
+    const target = verses.find(node => node.props.accessibilityState.expanded);
+    assert.equal(target, verses[104]);
+    assert.ok(target);
+    const row = target.parent!;
+    const measured = verses.filter(node => node.parent?.props.onLayout);
+    assert.equal(measured.length, 1);
+    assert.equal(measured[0], target);
+    assert.deepEqual(calls, []);
+    const event = { nativeEvent: { layout: { x: 20, y: 6100, width: 350, height: 100 } } };
+    await act(async () => row.props.onLayout(event));
+    assert.deepEqual(calls, [['scrollTo', { y: 6088, animated: false }]]);
+    // A highlight or a font change can lay out the row again after the reader has moved on.
+    await act(async () => row.props.onLayout(event));
+    assert.equal(calls.length, 1);
+  }
+});
+
+for (const locale of ['en', 'es'] as const) {
+  const person = { ...base, journey: locale === 'es' ? 'mi-refugio' : 'psalm-nights' };
+  const copy = locale === 'es' ? es : en;
+  test(`Bible ${locale}: John 3:16 from the source, chapter picker, search and saved marks`, async () => {
+    const data = gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
+    const verse = data.match(/^JOH 3:16 (.*)$/m)![1].trim();
+    const shownVerse = displayRuns(verse).map(run => run.text).join('');
+    const chapter = await mount('bible', person);
+    const verseNode = host(chapter, 'Text').find(node => node.props.accessibilityRole === 'button' && textOf(node).replace(/\s+/g, ' ').includes(shownVerse));
+    assert.ok(verseNode, 'John 3:16 is present as stored and selectable');
+    assert.equal(host(chapter, 'Text').some(node => node.props.style?.fontStyle === 'italic'), locale === 'en');
+    await press(chapter, copy['reader.next']);
+    assert.deepEqual(calls.at(-1), ['push', { pathname: '/bible/[page]', params: { page: 'chapter', book: 'JOH', chapter: 4, verse: undefined } }]);
+    await press(chapter, copy['reader.previous']);
+    assert.equal((calls.at(-1)?.[1] as { params: { chapter: number } }).params.chapter, 2);
+    assert.equal(verseNode.props.accessibilityState.selected, false);
+    await act(async () => verseNode.props.onPress());
+    assert.equal(verseNode.props.accessibilityState.selected, true);
+    assert.equal(verseNode.props['aria-expanded'], true);
+    await act(async () => verseNode.props.onPress());
+    assert.deepEqual(verseNode.props.accessibilityState, { expanded: false, selected: false });
+    await act(async () => verseNode.props.onPress());
+    const linked = await mount('biblePage', person, { page: 'chapter', book: 'JHN', chapter: '3', verse: '16' });
+    assert.ok(host(linked, 'Text').some(node => node.props.accessibilityState?.selected && textOf(node).replace(/\s+/g, ' ').includes(shownVerse)));
+    await press(chapter, copy['reader.save']);
+    await press(chapter, copy['reader.highlight']);
+    assert.ok(local.get('pbs-bible-marks')?.includes('"highlight":true'));
+    await press(chapter, copy['share.title']);
+    assert.ok(host(chapter, 'SvgText').some(node => node.children.join('') === `${locale === 'es' ? 'Juan' : 'John'} 3:16 · ${locale === 'es' ? 'RV1909' : 'KJV'}`));
+    const savedPage = await mount('biblePage', person, { page: 'saved' });
+    assert.match(strings(savedPage), /3:16/);
+    await press(savedPage, copy['reader.unhighlight']);
+    await press(savedPage, copy['reader.unsave']);
+    assert.ok(strings(savedPage).includes(copy['reader.emptySaved']));
+    const books = await mount('biblePage', person, { page: 'books' });
+    await press(books, copy['reader.chooseBook']);
+    await press(books, locale === 'es' ? /^Salmos$/ : /^Psalms$/);
+    await press(books, /^150$/);
+    assert.equal((calls.at(-1)?.[1] as { params: { chapter: number } }).params.chapter, 150);
+    const endOfJohn = await mount('biblePage', person, { page: 'chapter', book: 'JOH', chapter: '21' });
+    await press(endOfJohn, copy['reader.next']);
+    const next = (calls.at(-1)?.[1] as { params: { book: string; chapter: number } }).params;
+    assert.equal(next.book, 'ACT');
+    assert.equal(next.chapter, 1);
+    const startOfActs = await mount('biblePage', person, { page: 'chapter', book: next.book, chapter: '1' });
+    await press(startOfActs, copy['reader.previous']);
+    const previous = (calls.at(-1)?.[1] as { params: { book: string; chapter: number } }).params;
+    assert.equal(previous.book, 'JOH');
+    assert.equal(previous.chapter, 21);
+    const search = await mount('biblePage', person, { page: 'search' });
+    const query = locale === 'es' ? 'corazon' : 'loved world begotten';
+    await type(search, query);
+    await press(search, copy['reader.search']);
+    assert.match(strings(search), locale === 'es' ? /corazón/i : /John 3:16/);
+  });
+
+  const source = () => gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
+  /** The stored text of a reference (one verse or a run), as the reader shows it. */
+  const stored = (data: string, ref: string) => {
+    const r = parseReference(ref)!;
+    const lines: string[] = [];
+    for (let v = r.verse!; v <= (r.endVerse ?? r.verse!); v++) {
+      const prefix = `${r.book} ${r.chapter}:${v} `;
+      lines.push(displayRuns(data.split('\n').find(line => line.startsWith(prefix))!.slice(prefix.length).trim()).map(run => run.text).join(''));
+    }
+    return lines.join(' ').replace(/\s+/g, ' ').trim();
+  };
+  // The words exactly as drawn: every string inside the scripture text, in order, nothing added between runs.
+  const leaves = (node: ReactTestInstance | string): string => typeof node === 'string' ? node : node.children.map(leaves).join('');
+  const shown = (tree: ReactTestRenderer) => host(tree, 'Text').filter(node => node.props.testID === 'scripture-text').map(node => leaves(node).replace(/\s+/g, ' ').trim());
+  const renderDaily = (page: DailyPage, date: Date, value: object = person, storyId?: string) => mount('dailyPage', value, {}, () =>
+    <Daily page={page} now={date} id={storyId} back={() => {}} read={() => {}}
+      upgrade={() => calls.push(['push', '/paid'])} open={(next: DailyPage, id?: string) => calls.push(['open', [next, id]])} />);
+
+  test(`Daily ${locale}: today's story is a passed library story in every build, read from its own telling`, async () => {
+    const now = new Date();
+    const data = source();
+    const shelfNow = shelf(tellingFor(locale, person.journey as JourneyId), 'adult');
+    assert.ok(shelfNow.length >= 60);
+    const story = storyFor(shelfNow, now)!;
+    assert.equal(story.lang, locale);
+    const today = await mount('today', person);
+    assert.ok(strings(today).includes(story.title));
+    assert.ok(!/draft|borrador/i.test(strings(today)));
+    await press(today, copy['daily.openStory']);
+    assert.deepEqual(calls.at(-1), ['push', { pathname: '/today/[page]', params: { page: 'story' } }]);
+    // Seven days in a row: seven different stories, each one's scripture exactly the stored text, each labelled.
+    const seen = new Set<string>();
+    for (let day = 0; day < 7; day++) {
+      const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + day);
+      const expected = storyFor(shelfNow, date)!;
+      seen.add(expected.id);
+      const page = await renderDaily('story', date);
+      const text = strings(page);
+      assert.ok(text.includes(expected.title) && text.includes(copy['story.ai']) && text.includes(copy['daily.retelling']), expected.id);
+      const scripture = expected.blocks.filter(block => block.type === 'scripture');
+      assert.deepEqual(shown(page), scripture.map(block => stored(data, block.ref)), expected.id);
+      assert.deepEqual(faithContentIssues(texts(page, false).join(' | ')), [], expected.id);
+    }
+    assert.equal(seen.size, 7);
+    // The free lane reads today's story only: the archive and a past story's link lead to the paid lane.
+    const free = await renderDaily('story', now);
+    await press(free, copy['story.pastPaid']);
+    assert.deepEqual(calls.at(-1), ['push', '/paid']);
+    const archive = await renderDaily('stories', now);
+    assert.ok(!pastStories(shelfNow, now).some(({ story: item }) => strings(archive).includes(item.title)));
+    assert.ok(strings(archive).includes(copy['story.pastPaid']));
+    const yesterday = pastStories(shelfNow, now)[0].story;
+    const deepLink = await renderDaily('story', now, person, yesterday.id);
+    assert.ok(strings(deepLink).includes(story.title) && !strings(deepLink).includes(yesterday.title));
+  });
+
+  test(`Daily ${locale}: the free declaration is the day's line with its stored verse; topics and longer plans lead to the paid lane`, async () => {
+    const now = new Date();
+    const data = source();
+    for (let day = 0; day < 3; day++) {
+      const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + day);
+      const row = dailyDeclaration(locale, date);
+      const screen = await renderDaily('declaration', date);
+      assert.ok(strings(screen).includes(row.text));
+      assert.deepEqual(shown(screen), [stored(data, row.ref)]);
+      assert.ok(strings(screen).includes(formatReference(parseReference(row.ref)!, locale)));
+      assert.ok(strings(screen).includes(copy['daily.prayer']));
+      assert.equal(radios(screen).length, 0);
+    }
+    const today = await mount('today', person);
+    assert.ok(shown(today).includes(stored(data, dailyDeclaration(locale, now).ref)));
+    const word = await mount('dailyPage', person, { page: 'declaration' });
+    await press(word, copy['declaration.topicsPaid']);
+    assert.deepEqual(calls.at(-1), ['push', '/paid']);
+    if (!strings(word).includes(copy['daily.done'])) await press(word, copy['daily.said']);
+    assert.ok(strings(word).includes(copy['daily.done']));
+    await press(word, copy['share.title']);
+    assert.ok(host(word, 'SvgText').some(node => node.children.join('') === copy['share.brand']));
+    // A known PNG stands in for the platform rasterizer. The real component must request capture
+    // and render the resulting image, with its download action, before it can be shared.
+    const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jR1sAAAAASUVORK5CYII=';
+    (globalThis as any).__pbsCapture = (callback: (data: string) => void) => callback(png);
+    await press(word, copy['share.render']);
+    assert.equal(host(word, 'Image')[0].props.source.uri, `data:image/png;base64,${png}`);
+    assert.ok(strings(word).includes(copy['share.download']));
+    const mindset = await mount('dailyPage', { ...person, door: 'mindset', journey: 'imagination-nights', language: locale }, { page: 'declaration' });
+    assert.equal(shown(mindset).length, 0);
+    assert.ok(!strings(mindset).includes(copy['daily.prayer']));
+    assert.ok(mindsetDeclarations.some(item => strings(mindset).includes(copy[item.line])));
+    const plansPage = await mount('dailyPage', person, { page: 'plans' });
+    const basic = plans.filter(plan => !plan.paid);
+    for (const plan of basic) assert.ok(strings(plansPage).includes(copy[plan.title]));
+    await press(plansPage, copy[locale === 'es' ? 'daily.plan.courage' : 'daily.plan.rest']);
+    assert.equal(host(plansPage, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 7);
+    await press(plansPage, copy['daily.plan.complete']);
+    assert.ok(strings(plansPage).includes(copy['daily.done']));
+    const longer = await mount('dailyPage', person, { page: 'plans' });
+    await press(longer, copy['plan.heavy.title']);
+    assert.deepEqual(calls.at(-1), ['push', '/paid']);
+    assert.ok(!strings(longer).includes(copy['daily.plan.day'].replace('%{day}', '30')));
+    const journal = await mount('dailyPage', person, { page: 'journal' });
+    const entry = `Test note ${locale}`;
+    await type(journal, entry);
+    await press(journal, copy['daily.saveNote']);
+    assert.equal(JSON.parse(local.get('pbs-daily')!).journal[dayKey(now)], entry);
+    const reopened = await mount('dailyPage', person, { page: 'journal' });
+    assert.equal(host(reopened, 'TextInput')[0].props.value, entry);
+    const completed = await mount('today', person);
+    assert.ok(strings(completed).includes(copy['today.week'].one.replace('%{count}', '1')));
+  });
+
+  test(`Paid ${locale}: every past story, longer plans and declaration topics open once the store says paid`, async () => {
+    const now = new Date();
+    const data = source();
+    const shelfNow = shelf(tellingFor(locale, person.journey as JourneyId), 'adult');
+    const past = pastStories(shelfNow, now);
+    assert.equal(past.length, shelfNow.length - 1);
+    assert.equal(new Set([storyFor(shelfNow, now)!.id, ...past.map(item => item.story.id)]).size, shelfNow.length);
+    const archive = await asPaid(() => renderDaily('stories', now));
+    try {
+      for (const { story } of past) assert.ok(strings(archive).includes(story.title), story.id);
+      await press(archive, past[3].story.title);
+      assert.deepEqual(calls.at(-1), ['open', ['story', past[3].story.id]]);
+    } finally { await closePaid(archive); }
+    const old = await asPaid(() => renderDaily('story', now, person, past[3].story.id));
+    try {
+      assert.ok(strings(old).includes(past[3].story.title));
+      assert.deepEqual(shown(old), past[3].story.blocks.filter(block => block.type === 'scripture').map(block => stored(data, block.ref)));
+    } finally { await closePaid(old); }
+
+    const plansPage = await asPaid(() => mount('dailyPage', person, { page: 'plans' }));
+    try {
+      await press(plansPage, copy['plan.heavy.title']);
+      const heavy = plans.find(plan => plan.id === 'heavy-30')!;
+      assert.equal(host(plansPage, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, heavy.readings.length);
+      assert.ok(strings(plansPage).includes(formatReference(parseReference('Revelation 21:1-7')!, locale)));
+    } finally { await closePaid(plansPage); }
+
+    const linked = await asPaid(() => mount('dailyPage', person, { page: 'plans', id: 'heavy-30' }));
+    try { assert.equal(host(linked, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 30); } finally { await closePaid(linked); }
+    const lockedLink = await mount('dailyPage', person, { page: 'plans', id: 'heavy-30' });
+    // Free, the same link shows the plan list with the paid note, never the plan's days.
+    assert.equal(host(lockedLink, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 0);
+    assert.ok(strings(lockedLink).includes(copy['plan.paidNote']));
+    const word = await asPaid(() => mount('dailyPage', person, { page: 'declaration' }));
+    try {
+      assert.equal(radios(word).length, topics.length + 1);
+      await press(word, copy['declaration.topic.workMoney']);
+      assert.equal(JSON.parse(local.get('pbs-daily')!).topic, 'work-money');
+      const inTopic = byTopic(locale, 'work-money');
+      const chosen = dailyDeclaration(locale, now, 'work-money');
+      assert.ok(inTopic.some(item => item.id === chosen.id));
+      for (const item of inTopic) assert.ok(strings(word).includes(item.text), item.id);
+      assert.ok(shown(word).includes(stored(data, chosen.ref)));
+      await press(word, copy['declaration.anyTopic']);
+      assert.equal(JSON.parse(local.get('pbs-daily')!).topic, undefined);
+    } finally { await closePaid(word); }
+
+    const mindset = { ...person, door: 'mindset', journey: 'imagination-nights', language: locale };
+    const scene = await asPaid(() => mount('dailyPage', mindset, { page: 'declaration' }));
+    try {
+      assert.equal(radios(scene).length, mindsetTopics.length + 1);
+      await press(scene, copy['declaration.topic.work']);
+      for (const item of mindsetDeclarations.filter(row => row.topic === 'work')) assert.ok(strings(scene).includes(copy[item.line]));
+      assert.equal(shown(scene).length, 0);
+      await press(scene, copy['declaration.anyTopic']);
+    } finally { await closePaid(scene); }
+    // The Mindset door never reaches stories or reading plans, paid or not.
+    for (const page of ['story', 'stories', 'plans']) {
+      const tree = await asPaid(() => mount('dailyPage', mindset, { page }));
+      try { assert.deepEqual(host(tree, 'Redirect')[0]?.props.href, '/today'); } finally { await closePaid(tree); }
+    }
+  });
+}
 
 function testPlayer(track: Track, baseUrl: string | null = audioBase, position = 0,
   fetchHash: () => Promise<string> = async () => track.sha256, offline = false) {
@@ -888,9 +1143,23 @@ async function mountPaid(value: Settings = readyForPaid, setup?: () => void) {
   return mount('paid', value);
 }
 
+/** Any screen, mounted with the store reporting an active paid entitlement (the same fake store as the price screen). */
+async function asPaid(render: () => Promise<ReactTestRenderer>) {
+  (globalThis as any).__pbsPlatform = 'ios';
+  (globalThis as any).__pbsExpoConfig = { extra: { revenueCatIosKey: 'render-test-key' } };
+  chatRecord = JSON.stringify({ age: 'adult', token: 'render-token', installId: 'render-install' });
+  storeUser = 'render-install';
+  storePaid = true;
+  listeners = new Set();
+  const tree = await render();
+  await act(async () => { await new Promise(resolve => setTimeout(resolve, 0)); });
+  return tree;
+}
+
 async function closePaid(tree: ReactTestRenderer) {
   await act(async () => tree.unmount());
   (globalThis as any).__pbsPlatform = 'web';
+  storePaid = false;
   (globalThis as any).__pbsOpenURL = undefined;
 }
 
@@ -1094,6 +1363,43 @@ test('the web preview shows configured prices and renewal terms without opening 
   }
 });
 
+test('the web preview\'s paid switch opens the paid screens there, and only there', async () => {
+  const shelfNow = shelf('plain', 'adult');
+  const yesterday = pastStories(shelfNow, new Date())[0].story.title;
+  const kept = new Map<string, string>();
+  const fakeStorage = { getItem: (k: string) => kept.get(k) ?? null, setItem: (k: string, v: string) => void kept.set(k, v), removeItem: (k: string) => void kept.delete(k) };
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  (globalThis as any).localStorage = fakeStorage;
+  const person = { ...base, journey: 'psalm-nights' };
+  const archive = async () => strings(await mount('dailyPage', person, { page: 'stories' }));
+  try {
+    // The preview build, opened with ?paid=1: the archive opens, and the choice is remembered without the query.
+    process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+    (globalThis as any).location = { search: '?paid=1' };
+    assert.ok((await archive()).includes(yesterday), 'step 1');
+    (globalThis as any).location = { search: '' };
+    assert.ok((await archive()).includes(yesterday), 'step 2');
+    // A phone build ignores the flag even when it is set and the variable leaks in.
+    (globalThis as any).__pbsPlatform = 'ios';
+    assert.ok(!(await archive()).includes(yesterday), 'step 3');
+    (globalThis as any).__pbsPlatform = 'web';
+    // A web build that is not the preview ignores it too.
+    delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    assert.ok(!(await archive()).includes(yesterday), 'step 4');
+    // ?paid=0 turns it off again in the preview.
+    process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+    (globalThis as any).location = { search: '?paid=0' };
+    assert.ok(!(await archive()).includes(yesterday), 'step 5');
+    assert.equal(kept.size, 0);
+  } finally {
+    delete (globalThis as any).localStorage;
+    delete (globalThis as any).location;
+    (globalThis as any).__pbsPlatform = 'web';
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
+  }
+});
+
 // Lane 5N: the free lane's sleep nights. A whispered Psalm Night / Imagination Night is free the first night, then
 // one a week; paid plays every night. Bible chapters stay free whatever the count.
 const sleepTrack = (kind: 'psalm-night' | 'imagination-night', lang: 'en' | 'es'): Track => ({
@@ -1258,191 +1564,43 @@ test('the used-week screen has one subscription line and one button', async () =
   } finally { await s.close(); }
 });
 
-
-
-test('a Bible verse link scrolls the expanded verse into view once its row is laid out', async () => {
-  for (const journey of ['psalm-nights', 'mi-refugio'] as const) {
-    calls = [];
-    const tree = await mount('biblePage', { ...base, journey }, { page: 'chapter', book: 'PSA', chapter: '119', verse: '105' });
-    const verses = host(tree, 'Text').filter(node => node.props.testID === 'scripture-text');
-    const target = verses.find(node => node.props.accessibilityState.expanded);
-    assert.equal(target, verses[104]);
-    assert.ok(target);
-    const row = target.parent!;
-    const measured = verses.filter(node => node.parent?.props.onLayout);
-    assert.equal(measured.length, 1);
-    assert.equal(measured[0], target);
-    assert.deepEqual(calls, []);
-    const event = { nativeEvent: { layout: { x: 20, y: 6100, width: 350, height: 100 } } };
-    await act(async () => row.props.onLayout(event));
-    assert.deepEqual(calls, [['scrollTo', { y: 6088, animated: false }]]);
-    // A highlight or a font change can lay out the row again after the reader has moved on.
-    await act(async () => row.props.onLayout(event));
-    assert.equal(calls.length, 1);
-  }
+test('only the web preview workflow turns the preview on; no store or phone build config can', () => {
+  const walk = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? (e.name === 'node_modules' ? [] : walk(`${dir}/${e.name}`)) : [`${dir}/${e.name}`]);
+  const configs = [...walk('../.github/workflows'), 'app.config.ts', 'package.json', ...['eas.json', 'app.json'].filter(f => existsSync(f))];
+  const setters = configs.filter(file => /EXPO_PUBLIC_PBS_PREVIEW/.test(readFileSync(file, 'utf8')));
+  assert.deepEqual(setters, ['../.github/workflows/mobile-preview.yml']);
+  const workflow = readFileSync('../.github/workflows/mobile-preview.yml', 'utf8');
+  assert.match(workflow, /expo export --platform web|preview:web/);
+  assert.doesNotMatch(workflow, /eas (build|submit)/);
 });
 
-for (const locale of ['en', 'es'] as const) {
-  const person = { ...base, journey: locale === 'es' ? 'mi-refugio' : 'psalm-nights' };
-  const copy = locale === 'es' ? es : en;
-  test(`Bible ${locale}: John 3:16 from the source, chapter picker, search and saved marks`, async () => {
-    const data = gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
-    const verse = data.match(/^JOH 3:16 (.*)$/m)![1].trim();
-    const shownVerse = displayRuns(verse).map(run => run.text).join('');
-    const chapter = await mount('bible', person);
-    const verseNode = host(chapter, 'Text').find(node => node.props.accessibilityRole === 'button' && textOf(node).replace(/\s+/g, ' ').includes(shownVerse));
-    assert.ok(verseNode, 'John 3:16 is present as stored and selectable');
-    assert.equal(host(chapter, 'Text').some(node => node.props.style?.fontStyle === 'italic'), locale === 'en');
-    await press(chapter, copy['reader.next']);
-    assert.deepEqual(calls.at(-1), ['push', { pathname: '/bible/[page]', params: { page: 'chapter', book: 'JOH', chapter: 4, verse: undefined } }]);
-    await press(chapter, copy['reader.previous']);
-    assert.equal((calls.at(-1)?.[1] as { params: { chapter: number } }).params.chapter, 2);
-    assert.equal(verseNode.props.accessibilityState.selected, false);
-    await act(async () => verseNode.props.onPress());
-    assert.equal(verseNode.props.accessibilityState.selected, true);
-    assert.equal(verseNode.props['aria-expanded'], true);
-    await act(async () => verseNode.props.onPress());
-    assert.deepEqual(verseNode.props.accessibilityState, { expanded: false, selected: false });
-    await act(async () => verseNode.props.onPress());
-    const linked = await mount('biblePage', person, { page: 'chapter', book: 'JHN', chapter: '3', verse: '16' });
-    assert.ok(host(linked, 'Text').some(node => node.props.accessibilityState?.selected && textOf(node).replace(/\s+/g, ' ').includes(shownVerse)));
-    await press(chapter, copy['reader.save']);
-    await press(chapter, copy['reader.highlight']);
-    assert.ok(local.get('pbs-bible-marks')?.includes('"highlight":true'));
-    await press(chapter, copy['share.title']);
-    assert.ok(host(chapter, 'SvgText').some(node => node.children.join('') === `${locale === 'es' ? 'Juan' : 'John'} 3:16 · ${locale === 'es' ? 'RV1909' : 'KJV'}`));
-    const savedPage = await mount('biblePage', person, { page: 'saved' });
-    assert.match(strings(savedPage), /3:16/);
-    await press(savedPage, copy['reader.unhighlight']);
-    await press(savedPage, copy['reader.unsave']);
-    assert.ok(strings(savedPage).includes(copy['reader.emptySaved']));
-    const books = await mount('biblePage', person, { page: 'books' });
-    await press(books, copy['reader.chooseBook']);
-    await press(books, locale === 'es' ? /^Salmos$/ : /^Psalms$/);
-    await press(books, /^150$/);
-    assert.equal((calls.at(-1)?.[1] as { params: { chapter: number } }).params.chapter, 150);
-    const endOfJohn = await mount('biblePage', person, { page: 'chapter', book: 'JOH', chapter: '21' });
-    await press(endOfJohn, copy['reader.next']);
-    const next = (calls.at(-1)?.[1] as { params: { book: string; chapter: number } }).params;
-    assert.equal(next.book, 'ACT');
-    assert.equal(next.chapter, 1);
-    const startOfActs = await mount('biblePage', person, { page: 'chapter', book: next.book, chapter: '1' });
-    await press(startOfActs, copy['reader.previous']);
-    const previous = (calls.at(-1)?.[1] as { params: { book: string; chapter: number } }).params;
-    assert.equal(previous.book, 'JOH');
-    assert.equal(previous.chapter, 21);
-    const search = await mount('biblePage', person, { page: 'search' });
-    const query = locale === 'es' ? 'corazon' : 'loved world begotten';
-    await type(search, query);
-    await press(search, copy['reader.search']);
-    assert.match(strings(search), locale === 'es' ? /corazón/i : /John 3:16/);
-  });
-
-  test(`Daily ${locale}: production hides drafts, declaration makes an image, plans and journal save`, async () => {
-    const now = new Date();
-    const dateOf = (day: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + day - now.getDay());
-    const data = gunzipSync(readFileSync(`../content/bible/${locale === 'es' ? 'rv1909' : 'kjv'}_vpl.txt.gz`)).toString();
-    const draft = await mount('dailyPage', person, { page: 'story' });
-    assert.ok(strings(draft).includes(copy['daily.noStory']));
-    await press(draft, copy['daily.readBible']);
-    const [action, destination] = calls.at(-1)!;
-    const passage = destination as { pathname: string; params: { page: string; book: string; chapter: number } };
-    assert.equal(action, 'push');
-    assert.equal(passage.pathname, '/bible/[page]');
-    assert.equal(passage.params.page, 'chapter');
-    const today = await mount('today', person);
-    assert.ok(!strings(today).includes(copy['daily.openStory']));
-    assert.ok(!strings(today).includes(copy['daily.draft']));
-    assert.ok(!strings(today).includes(copy['daily.listenStory']));
-    await press(today, copy['daily.readBible']);
-    assert.deepEqual(calls.at(-1), ['push', {
-      pathname: '/bible/[page]',
-      params: { page: 'chapter', book: passage.params.book, chapter: passage.params.chapter },
-    }]);
-    const extras = host(today, 'View').find(node => node.children.some(child =>
-      typeof child !== 'string' && textOf(child) === copy['daily.more'],
-    ) && textOf(node).includes(copy['daily.title.plans']) && textOf(node).includes(copy['daily.title.journal']));
-    assert.ok(extras);
-    const renderDaily = (page: 'story' | 'declaration', date: Date) => mount('dailyPage', person, {}, () =>
-      <Daily page={page} now={date} back={() => {}} read={() => {}} />);
-    for (let day = 0; day < 7; day++) {
-      const production = strings(await renderDaily('story', dateOf(day)));
-      assert.ok(production.includes(copy['daily.noStory']));
-      assert.ok(!production.includes(copy[`daily.draft.${day}`]));
-      assert.ok(!production.includes(copy[`daily.retelling.${day}`]));
-    }
+test('a topic picked behind one door never leaks into the other: no stray "More on" heading, day by day instead', async () => {
+  const faith = { ...base, journey: 'psalm-nights' };
+  const mindset = { ...base, door: 'mindset', journey: 'imagination-nights' };
+  const heading = (topic: string) => en['declaration.inTopic'].replace('%{topic}', topic);
+  const pick = async (person: object, topic: string) => {
+    const tree = await asPaid(() => mount('dailyPage', person, { page: 'declaration' }));
+    try { await press(tree, topic); assert.ok(strings(tree).includes(heading(topic))); } finally { await closePaid(tree); }
+  };
+  const other = async (person: object, stray: string) => {
+    const tree = await asPaid(() => mount('dailyPage', person, { page: 'declaration' }));
     try {
-      process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
-      const previewToday = await mount('today', person);
-      assert.ok(strings(previewToday).includes(copy['daily.draft']));
-      const listen = host(previewToday, 'Pressable').find(node => textOf(node) === copy['daily.listenStory']);
-      assert.equal(listen?.props.disabled, true);
-      assert.equal(listen.props['aria-disabled'], true);
-      assert.ok(strings(previewToday).includes(copy['daily.storyAudioUnavailable']));
-      await press(previewToday, copy['daily.openStory']);
-      assert.deepEqual(calls.at(-1), ['push', { pathname: '/today/[page]', params: { page: 'story' } }]);
-      const previewRoute = await mount('dailyPage', person, { page: 'story' });
-      assert.ok(strings(previewRoute).includes(copy[`daily.retelling.${now.getDay()}`]));
-      for (let day = 0; day < 7; day++) {
-        const preview = await renderDaily('story', dateOf(day));
-        assert.ok(strings(preview).includes(copy['daily.draft']));
-        assert.ok(strings(preview).includes(copy[`daily.draft.${day}`]));
-        assert.ok(strings(preview).includes(copy[`daily.retelling.${day}`]));
-        assert.ok(strings(preview).includes(copy['daily.storyAudioUnavailable']));
-        assert.deepEqual(faithContentIssues(strings(preview)), []);
-      }
-    } finally {
-      delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
-    }
-    for (let day = 0; day < 7; day++) {
-      const date = dateOf(day);
-      const row = declaration('faith', date);
-      const ref = parseReference(row.passage!)!;
-      const prefix = `${ref.book} ${ref.chapter}:${ref.verse} `;
-      const verse = data.split('\n').find(line => line.startsWith(prefix))!.slice(prefix.length).trim();
-      const expected = displayRuns(verse).map(run => run.text).join('');
-      const screen = await renderDaily('declaration', date);
-      assert.ok(strings(screen).includes(copy[row.line]));
-      assert.ok(host(screen, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
-      if (day === now.getDay()) {
-        assert.ok(host(today, 'Text').some(node => node.props.testID === 'scripture-text' && textOf(node).replace(/\s+/g, ' ').trim() === expected));
-      }
-      assert.ok(strings(screen).includes(formatReference(ref, locale)));
-      assert.ok(strings(screen).includes(copy['daily.prayer']));
-    }
-    const mindset = await mount('dailyPage', { ...person, door: 'mindset', journey: 'imagination-nights', language: locale }, { page: 'declaration' });
-    assert.ok(!host(mindset, 'Text').some(node => node.props.testID === 'scripture-text'));
-    assert.ok(!strings(mindset).includes(copy['daily.prayer']));
-    const word = await mount('dailyPage', person, { page: 'declaration' });
-    if (!strings(word).includes(copy['daily.done'])) await press(word, copy['daily.said']);
-    assert.ok(strings(word).includes(copy['daily.done']));
-    await press(word, copy['share.title']);
-    assert.ok(host(word, 'SvgText').some(node => node.children.join('') === copy['share.brand']));
-    // A known PNG stands in for the platform rasterizer. The real component must request capture
-    // and render the resulting image, with its download action, before it can be shared.
-    const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jR1sAAAAASUVORK5CYII=';
-    (globalThis as any).__pbsCapture = (callback: (data: string) => void) => callback(png);
-    await press(word, copy['share.render']);
-    assert.equal(host(word, 'Image')[0].props.source.uri, `data:image/png;base64,${png}`);
-    assert.ok(strings(word).includes(copy['share.download']));
-    const plans = await mount('dailyPage', person, { page: 'plans' });
-    const planTitles = ['rest', 'courage', 'mercy'].map(id => copy[`daily.plan.${id}`]);
-    assert.deepEqual(host(plans, 'Pressable').filter(node => planTitles.some(title => textOf(node).includes(title))).length, 3);
-    await press(plans, copy[locale === 'es' ? 'daily.plan.courage' : 'daily.plan.rest']);
-    assert.equal(host(plans, 'Pressable').filter(node => textOf(node) === copy['daily.plan.complete']).length, 7);
-    await press(plans, copy['daily.plan.complete']);
-    assert.ok(strings(plans).includes(copy['daily.done']));
-    const journal = await mount('dailyPage', person, { page: 'journal' });
-    const entry = `Test note ${locale}`;
-    await type(journal, entry);
-    await press(journal, copy['daily.saveNote']);
-    assert.equal(JSON.parse(local.get('pbs-daily')!).journal[dayKey(now)], entry);
-    const reopened = await mount('dailyPage', person, { page: 'journal' });
-    assert.equal(host(reopened, 'TextInput')[0].props.value, entry);
-    const completed = await mount('today', person);
-    assert.ok(strings(completed).includes(copy['today.week'].one.replace('%{count}', '1')));
-  });
-}
+      assert.ok(!strings(tree).includes(heading(stray)));
+      assert.ok(!strings(tree).includes(en['declaration.inTopic'].split('%{topic}')[0].trim() + ' '));
+      assert.deepEqual(checked(tree), [en['declaration.anyTopic']]);
+    } finally { await closePaid(tree); }
+  };
+  await pick(faith, en['declaration.topic.peace']);
+  await other(mindset, en['declaration.topic.peace']);
+  await pick(mindset, en['declaration.topic.calm']);
+  await other(faith, en['declaration.topic.calm']);
+  // Back behind its own door, the saved topic still holds.
+  const again = await asPaid(() => mount('dailyPage', mindset, { page: 'declaration' }));
+  try { assert.ok(strings(again).includes(heading(en['declaration.topic.calm']))); } finally { await closePaid(again); }
+  const reset = await asPaid(() => mount('dailyPage', mindset, { page: 'declaration' }));
+  try { await press(reset, en['declaration.anyTopic']); } finally { await closePaid(reset); }
+});
+
 test('a screen that throws shows the calm error screen in the app language, and Try again retries', async () => {
   const { ErrorBoundary } = screens.root as { ErrorBoundary: (props: { error: Error; retry: () => Promise<void> }) => React.ReactElement };
   assert.equal(typeof ErrorBoundary, 'function', 'app/_layout.tsx exports the route error boundary');

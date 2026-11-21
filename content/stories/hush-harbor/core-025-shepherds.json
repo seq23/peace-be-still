@@ -166,7 +166,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: \"Hallelujah\"] Hallelujah. [PAUSE 3s | screen: \"Glory\"] Good news came to working people on a working night.",
+   "text": "When I say glory, you say, hallelujah. Glory. [PAUSE 3s | screen: \"Hallelujah\"] I said, glory. [PAUSE 3s | screen: \"Hallelujah\"] Good news came to working people on a working night.",
    "pauses": [
     {
      "seconds": 3,
@@ -174,7 +174,7 @@
     },
     {
      "seconds": 3,
-     "screen": "Glory"
+     "screen": "Hallelujah"
     }
    ]
   },
@@ -304,8 +304,8 @@
   "file": null,
   "qa": null
  },
- "words": 556,
- "est_seconds": 309,
+ "words": 558,
+ "est_seconds": 310,
  "qa": {
   "gate_version": "library-1",
   "checks": {

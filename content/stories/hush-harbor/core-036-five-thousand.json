@@ -178,7 +178,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say God is able, you say, yes he is. Our God is able. [PAUSE 3s | screen: \"Yes he is\"] Yes he is. [PAUSE 3s | screen: \"Our God is able\"] Five loaves and two fish was all he needed.",
+   "text": "When I say God is able, you say, yes he is. Our God is able. [PAUSE 3s | screen: \"Yes he is\"] I said, our God is able. [PAUSE 3s | screen: \"Yes he is\"] Five loaves and two fish was all he needed.",
    "pauses": [
     {
      "seconds": 3,
@@ -186,7 +186,7 @@
     },
     {
      "seconds": 3,
-     "screen": "Our God is able"
+     "screen": "Yes he is"
     }
    ]
   },
@@ -316,8 +316,8 @@
   "file": null,
   "qa": null
  },
- "words": 512,
- "est_seconds": 285,
+ "words": 515,
+ "est_seconds": 287,
  "qa": {
   "gate_version": "library-1",
   "checks": {

@@ -4,7 +4,7 @@
   "private": true,
   "main": "expo-router/entry",
   "scripts": {
-    "library": "tsx src/player/build-library.ts",
+    "library": "tsx src/player/build-library.ts && tsx src/content/build.ts",
     "eas-build-post-install": "npm run -s library",
     "prestart": "npm run -s library",
     "start": "expo start",

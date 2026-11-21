@@ -232,7 +232,7 @@
   {
    "type": "call_response",
    "speaker": "narrator",
-   "text": "When I say they meant it for evil, you say, God meant it for good. They meant it for evil. [PAUSE 3s | screen: \"God meant it for good\"] God meant it for good. [PAUSE 3s | screen: \"They meant it for evil\"] That is what Joseph told his brothers.",
+   "text": "When I say they meant it for evil, you say, God meant it for good. They meant it for evil. [PAUSE 3s | screen: \"God meant it for good\"] I said, they meant it for evil. [PAUSE 3s | screen: \"God meant it for good\"] That is what Joseph told his brothers.",
    "pauses": [
     {
      "seconds": 3,
@@ -240,7 +240,7 @@
     },
     {
      "seconds": 3,
-     "screen": "They meant it for evil"
+     "screen": "God meant it for good"
     }
    ]
   },
@@ -280,8 +280,8 @@
   "file": null,
   "qa": null
  },
- "words": 594,
- "est_seconds": 330,
+ "words": 596,
+ "est_seconds": 331,
  "qa": {
   "gate_version": "library-1",
   "checks": {
