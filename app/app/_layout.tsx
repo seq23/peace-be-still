@@ -1,7 +1,7 @@
 // Root: fonts, the person's saved choices, and the stack. The tabs layout and Settings send anyone who has not
 // finished onboarding to the first unfinished step, so a deep link never skips the door or the birth year.
 import { Figtree_400Regular, Figtree_600SemiBold } from '@expo-google-fonts/figtree';
-import { LibreCaslonText_400Regular } from '@expo-google-fonts/libre-caslon-text';
+import { LibreCaslonText_400Regular, LibreCaslonText_400Regular_Italic } from '@expo-google-fonts/libre-caslon-text';
 import { SplineSansMono_500Medium } from '@expo-google-fonts/spline-sans-mono';
 import { useFonts } from 'expo-font';
 import { Stack, type ErrorBoundaryProps } from 'expo-router';
@@ -20,7 +20,7 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
 }
 
 export default function RootLayout() {
-  const [fontsLoaded, fontError] = useFonts({ LibreCaslonText_400Regular, Figtree_400Regular, Figtree_600SemiBold, SplineSansMono_500Medium });
+  const [fontsLoaded, fontError] = useFonts({ LibreCaslonText_400Regular, LibreCaslonText_400Regular_Italic, Figtree_400Regular, Figtree_600SemiBold, SplineSansMono_500Medium });
   return (
     <SafeAreaProvider>
       <SettingsProvider>

@@ -1,11 +1,11 @@
 import type { Downloads } from './downloads';
 import { canUse, FEATURES, type User } from './gate';
-import { trackTitle, trackUrl, type Lang, type Track } from './library';
+import { hasCallAndResponse, RESPONSE_PAUSE_SECONDS, trackTitle, trackUrl, type Lang, type Track } from './library';
 
 /** The playing side; adapters.ts backs it with one expo-audio player (background audio + lock screen). */
 export interface AudioOutput {
   /** Replace the source and show the title on the lock screen. */
-  load(uri: string, title: string): void;
+  load(uri: string, title: string, allowSeek: boolean): void;
   play(): void;
   pause(): void;
   /** Only honoured once the new source reports loaded (iOS drops a seek on an item that is not ready). */
@@ -14,7 +14,7 @@ export interface AudioOutput {
   readonly isLoaded: boolean;
   readonly currentTime: number;
   volume: number;
-  /** Native status: fires when playing or loaded changes, or the track ends, whoever caused it (lock screen, call, AirPods). */
+  /** Native status: fires when playing or loaded changes, the position changes, or the track ends. */
   onStatus(listener: (status: AudioStatus) => void): () => void;
   dispose(): void;
 }
@@ -32,9 +32,11 @@ export type PlayerError = 'audio-not-ready' | 'play-failed' | 'download-incomple
 export type PlayerState = {
   track: Track | null;
   playing: boolean;
+  position: number;
   /** Wall-clock ms when the sleep timer ends, or null. */
   sleepEndsAt: number | null;
   fading: boolean;
+  response: 0 | 1 | null;
   error: PlayerError | null;
 };
 
@@ -55,7 +57,7 @@ export function createPlayer(options: {
   audio: AudioOutput; store: Store; downloads: Downloads; baseUrl: string | null; lang: Lang;
 }) {
   const { audio, store, downloads, baseUrl, lang } = options;
-  let state: PlayerState = { track: null, playing: false, sleepEndsAt: null, fading: false, error: null };
+  let state: PlayerState = { track: null, playing: false, position: 0, sleepEndsAt: null, fading: false, response: null, error: null };
   let generation = 0;
   /** The track whose audio is in the output; only its position is ever saved. */
   let loaded: Track | null = null;
@@ -63,6 +65,13 @@ export function createPlayer(options: {
   let sleepTicker: ReturnType<typeof setInterval> | null = null;
   const listeners = new Set<(state: PlayerState) => void>();
   const set = (patch: Partial<PlayerState>) => { state = { ...state, ...patch }; for (const l of listeners) l(state); };
+
+  function responseAt(track: Track, position: number): PlayerState['response'] {
+    const pauses = track.responsePauses;
+    if (!pauses) return null;
+    const index = pauses.findIndex(start => position >= start && position < start + RESPONSE_PAUSE_SECONDS);
+    return index === 0 || index === 1 ? index : null;
+  }
 
   const savePosition = (track: Track | null = loaded): Promise<void> => {
     if (!track) return Promise.resolve();
@@ -74,7 +83,9 @@ export function createPlayer(options: {
       const raw = await store.getItem(positionKey(track));
       const saved = raw ? (JSON.parse(raw) as Saved) : null;
       const at = saved?.positionSeconds ?? 0;
-      return at > RESUME_MIN_S && at < track.seconds - RESUME_TAIL_S ? at : 0;
+      if (!(at > RESUME_MIN_S && at < track.seconds - RESUME_TAIL_S)) return 0;
+      const response = responseAt(track, at);
+      return response === null ? at : track.responsePauses?.[response] ?? at;
     } catch { return 0; }
   };
   const stopSaving = () => { if (saver !== null) clearInterval(saver); saver = null; };
@@ -122,12 +133,18 @@ export function createPlayer(options: {
       stopSaving();
       loaded = null;
       void store.removeItem(positionKey(track)).catch(() => undefined);
-      set({ playing: false });
+      set({ track: null, playing: false, position: 0, response: null });
       return;
     }
-    if (status.playing === state.playing) return;
-    if (status.playing) { startSaving(); set({ playing: true }); }
-    else { stopSaving(); void savePosition(); set({ playing: false }); }
+    if (state.track !== loaded) return;
+    const position = Math.floor(audio.currentTime);
+    const response = responseAt(loaded, audio.currentTime);
+    if (status.playing === state.playing) {
+      if (state.response !== response || state.position !== position) set({ position, response });
+      return;
+    }
+    if (status.playing) { startSaving(); set({ playing: true, position, response }); }
+    else { stopSaving(); void savePosition(); set({ playing: false, position, response }); }
   });
 
   return {
@@ -139,11 +156,11 @@ export function createPlayer(options: {
       if (state.playing) { stopSaving(); await savePosition(); set({ playing: false }); }
       const local = canUse(FEATURES.OFFLINE, user) ? downloads.find(track) : null;
       const uri = local ?? (baseUrl ? trackUrl(track, baseUrl) : null);
-      if (!uri) { audio.pause(); loaded = null; set({ track, playing: false, error: 'audio-not-ready' }); return; }
+      if (!uri) { audio.pause(); loaded = null; set({ track, playing: false, position: 0, response: null, error: 'audio-not-ready' }); return; }
       try {
         const at = await startAt(track);
         if (current !== generation) return;
-        audio.load(uri, trackTitle(track, lang));
+        audio.load(uri, trackTitle(track, lang), !hasCallAndResponse(track));
         loaded = track;
         if (!state.fading) audio.volume = 1;
         if (at > 0 && (await whenLoaded())) {
@@ -153,9 +170,9 @@ export function createPlayer(options: {
         if (current !== generation) return;
         audio.play();
         startSaving();
-        set({ track, playing: true, error: null });
+        set({ track, playing: true, position: Math.floor(audio.currentTime), response: responseAt(track, audio.currentTime), error: null });
       } catch {
-        if (current === generation) set({ track, playing: false, error: 'play-failed' });
+        if (current === generation) set({ track, playing: false, position: 0, response: null, error: 'play-failed' });
       }
     },
 
@@ -166,6 +183,18 @@ export function createPlayer(options: {
       audio.play();
       startSaving();
       set({ playing: true });
+    },
+
+    async skip(seconds: -15 | 15) {
+      const track = loaded;
+      if (!track || track !== state.track || !audio.isLoaded || hasCallAndResponse(track)) return;
+      const current = generation;
+      const target = Math.max(0, Math.min(track.seconds, audio.currentTime + seconds));
+      await audio.seekTo(target);
+      if (current === generation && loaded === track) {
+        set({ position: Math.floor(audio.currentTime) });
+        await savePosition(track);
+      }
     },
 
     async pause() {

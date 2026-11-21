@@ -42,14 +42,14 @@ export function Body({ children, muted = true, size = 16, style }: { children: R
   return <Text style={[{ fontFamily: fonts.body, fontSize: size, lineHeight: Math.round(size * 1.45), color: muted ? c.muted : c.ink }, style]}>{children}</Text>;
 }
 
-export function Card({ children, onPress, label, selected, role, style }: { children: React.ReactNode; onPress?: () => void; label?: string; selected?: boolean; role?: 'button' | 'radio' | 'link'; style?: StyleProp<ViewStyle> }) {
+export function Card({ children, onPress, label, selected, expanded, role, style }: { children: React.ReactNode; onPress?: () => void; label?: string; selected?: boolean; expanded?: boolean; role?: 'button' | 'radio' | 'link'; style?: StyleProp<ViewStyle> }) {
   const c = usePalette();
   const look = [styles.card, { backgroundColor: c.card, borderColor: selected ? c.accent : c.line, borderWidth: selected ? 2 : 1 }, style];
   if (!onPress) return <View style={look}>{children}</View>;
   return (
     // role + aria-checked are the props both React Native and react-native-web pass to the screen reader
     // (react-native-web drops accessibilityState, so a selected radio was never announced).
-    <Pressable role={role ?? 'button'} aria-label={label} aria-checked={role === 'radio' ? !!selected : undefined} onPress={onPress} style={({ pressed }) => [look, pressed && { opacity: 0.85 }]}>
+    <Pressable role={role ?? 'button'} aria-label={label} aria-checked={role === 'radio' ? !!selected : undefined} aria-expanded={expanded} onPress={onPress} style={({ pressed }) => [look, pressed && { opacity: 0.85 }]}>
       {children}
     </Pressable>
   );

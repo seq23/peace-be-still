@@ -3,13 +3,17 @@
 // saved and where the app goes next.
 import React from 'react';
 import { readFileSync } from 'node:fs';
+import { DatabaseSync } from 'node:sqlite';
 import { gunzipSync } from 'node:zlib';
 import { displayRuns, formatReference, parseReference } from '../src/bible/core';
 import { declaration } from '../src/screens/daily/content';
-import { test, beforeEach } from 'node:test';
+import { test, beforeEach, mock } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { create, act, type ReactTestRenderer, type ReactTestInstance } from 'react-test-renderer';
 import products from '../src/config/products.json';
+import { createDownloads } from '../src/player/downloads';
+import { trackTitle, type Track } from '../src/player/library';
+import { createPlayer } from '../src/player/player';
 import { dayKey, faithContentIssues, RAISE_WAIT_MS, type Settings } from '../src/model';
 
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
@@ -92,6 +96,8 @@ let history = false;
 };
 
 // Loaded after the globals above exist.
+const { NowPlaying } = require('../src/screens/listen/NowPlaying');
+const { tracks: audioTracks } = require('../src/player/usePlayer') as { tracks: Track[] };
 const { Daily } = require('../src/screens/daily/Daily');
 const { SettingsProvider, useSettings } = require('../src/settings');
 const { PurchasesProvider, useCanUse } = require('../src/purchases/provider') as typeof import('../src/purchases/provider');
@@ -113,6 +119,7 @@ const screens = {
   biblePage: require('../app/bible/[page]').default,
   dailyPage: require('../app/today/[page]').default,
   nights: require('../app/(tabs)/nights').default,
+  listen: require('../app/listen/[track]').default,
   more: require('../app/(tabs)/more').default,
   settings: require('../app/settings').default,
   paid: require('../app/paid').default,
@@ -123,6 +130,29 @@ type Name = Exclude<keyof typeof screens, 'root'>;
 const base: Settings = { door: 'faith', age: 'adult', ageSetAt: 0, voice: 'plain', language: 'en' };
 const store = () => JSON.parse(saved!) as Settings;
 
+/** A paid subscriber on a phone: lane 5S's provider reads the fake store as subscribed. */
+function asSubscriber(paid = true) {
+  (globalThis as any).__pbsPlatform = 'ios';
+  (globalThis as any).__pbsExpoConfig = { extra: { revenueCatIosKey: 'render-test-key' } };
+  chatRecord = JSON.stringify({ age: 'adult', token: 'render-token', installId: 'render-install' });
+  storePaid = paid;
+  storeUser = '$RCAnonymousID:test';
+}
+
+const audioBase = 'https://pbs-audio.professionalresourcelibrary.com/';
+let publishedTracks: Track[];
+beforeEach(() => {
+  Object.assign(globalThis, { __pbsPlatform: 'web', __pbsAudioStop: null, __pbsExpoConfig: undefined });
+  storePaid = false;
+  publishedTracks = audioTracks;
+});
+const realFetch = globalThis.fetch;
+mock.method(globalThis, 'fetch', async (url: string) => {
+  // Lane 2S loads the Bible database from its bundled asset (a data: URL here); only the audio manifest is faked.
+  if (url.startsWith('data:')) return realFetch(url);
+  assert.equal(url, audioBase + 'manifest.jsonl');
+  return new Response(publishedTracks.map(track => JSON.stringify({ ...track, status: 'passed' })).join('\n'));
+});
 beforeEach(() => { calls = []; history = false; (globalThis as any).__pbsParams = {}; (globalThis as any).__pbsSegments = []; (globalThis as any).__pbsScheme = 'light'; (globalThis as any).__pbsLocale = 'en'; readFails = false; });
 
 async function mount(name: Name, value: object | null = base, params: Record<string, string> = {}, override?: React.ComponentType) {
@@ -151,10 +181,14 @@ const texts = (tree: ReactTestRenderer, includeScripture = true) => tree.root.fi
 const strings = (tree: ReactTestRenderer) => texts(tree).join(' | ');
 const host = (tree: ReactTestRenderer, type: string) => tree.root.findAll(n => (n.type as unknown) === type);
 const textOf = (node: ReactTestInstance) => node.findAll(n => (n.type as unknown) === 'Text').map(t => t.children.filter(x => typeof x === 'string').join('')).join(' ');
+// An icon button (the player's play/pause) is found by its spoken label, like a screen reader finds it.
+const labelOf = (node: ReactTestInstance) => node.props.accessibilityLabel ?? textOf(node);
+const button = (tree: ReactTestRenderer, label: string) => host(tree, 'Pressable').find(n => labelOf(n) === label);
 async function press(tree: ReactTestRenderer, text: string | RegExp) {
   const match = (s: string) => typeof text === 'string' ? s.includes(text) : text.test(s);
-  const target = host(tree, 'Pressable').find(n => match(textOf(n)));
+  const target = host(tree, 'Pressable').find(n => match(textOf(n)) || (typeof n.props.accessibilityLabel === 'string' && match(n.props.accessibilityLabel)));
   assert.ok(target, `No button "${text}" in: ${strings(tree)}`);
+  assert.ok(!target.props.disabled, `Button "${text}" is disabled`);
   await act(async () => target.props.onPress());
 }
 async function type(tree: ReactTestRenderer, value: string) {
@@ -517,6 +551,315 @@ test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does
   for (const name of ['journeys', 'today', 'nights', 'more', 'settings'] as const) assert.equal(dawnIn(await mount(name, mindset)), 0, name);
   assert.ok(dawnIn(await mount('journeys', { ...base, journey: 'psalm-nights' })) > 0);
 });
+
+function testPlayer(track: Track, baseUrl: string | null = audioBase, position = 0,
+  fetchHash: () => Promise<string> = async () => track.sha256) {
+  let at = 0;
+  let source: string | undefined;
+  let playing = false;
+  let listener: ((status: { playing: boolean; isLoaded: boolean; didJustFinish: boolean }) => void) | undefined;
+  const audio = {
+    load: (uri: string) => { source = uri; at = 0; },
+    play() { playing = true; },
+    pause() { playing = false; },
+    isLoaded: true,
+    get currentTime() { return at; },
+    volume: 1,
+    async seekTo(seconds: number) { at = seconds; },
+    onStatus: (notify: typeof listener) => {
+      listener = notify;
+      return () => { listener = undefined; };
+    },
+    dispose() {},
+  };
+  const files = new Map<string, string>();
+  const downloads = createDownloads({
+    exists: name => files.has(name),
+    uri: name => 'file:///audio/' + name,
+    async download(_url, name) { files.set(name, await fetchHash()); },
+    async sha256(name) { return files.get(name)!; },
+    async move(from, to) { files.set(to, files.get(from)!); files.delete(from); },
+    remove: name => { files.delete(name); },
+  });
+  const store = {
+    getItem: async () => JSON.stringify({ positionSeconds: position }),
+    setItem: async () => undefined,
+    removeItem: async () => undefined,
+  };
+  const player = createPlayer({ audio, downloads, store, lang: 'en', baseUrl });
+  Object.assign(globalThis, { __pbsPlayer: player });
+  return {
+    ...player, position: () => at, source: () => source,
+    move(seconds: number) { at = seconds; listener?.({ playing, isLoaded: true, didJustFinish: false }); },
+  };
+}
+
+test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor stories', async () => {
+  const person = { ...base, journey: 'psalm-nights' };
+  const tree = await mount('nights', person);
+  const psalm = audioTracks.find(track => track.ref === 'PSA 23')!;
+  const bible = audioTracks.find(track => track.kind === 'bible')!;
+  const story = audioTracks.find(track => track.ref.startsWith('content/stories/hush-harbor/'))!;
+  const psalmNight = audioTracks.find(track => track.kind === 'psalm-night' && track.lang === 'en')!;
+  assert.ok(psalm && bible && story && psalmNight);
+  const open = async (title: string, track: Track) => {
+    await press(tree, title);
+    assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: track.sha256 } }]);
+  };
+  const psalmShelf = host(tree, 'Pressable').find(node => textOf(node).startsWith(en['journey.psalmNights.name'] + ' '));
+  // Whispered Psalm Nights sessions sit on the Psalms shelf beside the read Psalms.
+  const count = audioTracks.filter(track => (track.kind === 'psalms' || track.kind === 'psalm-night') && track.lang === 'en').length;
+  assert.ok(psalmShelf && textOf(psalmShelf).includes(i18n.t('listen.whisperedNights', { locale: 'en', count })));
+  const cardRow = psalmShelf.findAll(node => (node.type as unknown) === 'View' && node.props.style?.flexDirection === 'row')[0];
+  assert.ok(cardRow, 'The shelf details and chevron should share a horizontal row');
+  assert.ok(textOf(cardRow).endsWith(' ›'));
+  assert.equal(psalmShelf.props['aria-expanded'], false);
+  await press(tree, en['journey.psalmNights.name']);
+  assert.equal(psalmShelf.props['aria-expanded'], true);
+  await open(trackTitle(psalm, 'en'), psalm);
+  await open(trackTitle(psalmNight, 'en'), psalmNight);
+  await press(tree, en['listen.bibleByBook']);
+  await press(tree, trackTitle(bible, 'en').replace(/ \d+$/, ''));
+  await open(trackTitle(bible, 'en'), bible);
+  await press(tree, en['journey.hushHarbor.subtitle']);
+  await open(trackTitle(story, 'en'), story);
+  assert.deepEqual(faithContentIssues(strings(tree)), []);
+  assert.doesNotMatch(strings(tree), /\.m4a|\.json/);
+});
+
+test('the canonical catalog plays Psalm 1 and disables missing or outdated uploads', async () => {
+  const track = audioTracks.find(track => track.ref === 'PSA 4' && track.lang === 'en')!;
+  const outdated = audioTracks.find(track => track.ref === 'PSA 23' && track.lang === 'en')!;
+  const available = audioTracks.find(track => track.ref === 'PSA 1' && track.lang === 'en')!;
+  assert.ok(track && outdated && available);
+  publishedTracks = [available, { ...outdated, sha256: track.sha256 }];
+  const person = { ...base, journey: 'psalm-nights' };
+  const shelf = await mount('nights', person);
+  await press(shelf, en['journey.psalmNights.name']);
+  try {
+    await press(shelf, /^Psalm 1 ›$/);
+    assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: available.sha256 } }]);
+    const playable = testPlayer(available);
+    const screen = await mount('listen', person, { track: available.sha256 });
+    try {
+      await press(screen, en['listen.play']);
+      assert.ok(button(screen, en['listen.pause']));
+      assert.equal(playable.source(), audioBase + available.file);
+    } finally {
+      await act(async () => screen.unmount());
+      await playable.dispose();
+    }
+    for (const unavailable of [track, outdated]) {
+      const title = trackTitle(unavailable, 'en');
+      assert.ok(host(shelf, 'View').some(node => textOf(node) === `${title} ${en['listen.notReady']}`));
+      assert.ok(!host(shelf, 'Pressable').some(node => textOf(node).includes(title + ' ') || textOf(node) === title));
+      const player = testPlayer(unavailable);
+      const screen = await mount('listen', person, { track: unavailable.sha256 });
+      try {
+        assert.ok(texts(screen).includes(en['listen.audioNotReady']));
+        assert.equal(button(screen, en['listen.play'])?.props.disabled, true);
+        for (const label of [en['listen.back15'], en['listen.forward15']]) {
+          assert.equal(host(screen, 'Pressable').find(node => node.props.accessibilityLabel === label)?.props.disabled, true);
+        }
+        if (unavailable === track) {
+          const stored = storedVerse('PSA', 4, 1);
+          const supplied = stored.match(/\[([^\]]+)\]/)?.[1];
+          assert.ok(supplied, 'Psalm 4 contains translator-supplied words');
+          const italic = host(screen, 'Text').find(node => node.children.join('') === supplied);
+          assert.equal(italic?.props.style?.fontFamily, 'LibreCaslonText_400Regular_Italic');
+          assert.doesNotMatch(strings(screen), /[\[\]]/, 'no KJV bracket reaches the screen');
+          assert.equal(italic?.parent?.children.map(child => typeof child === 'string' ? child : child.children.join('')).join(''),
+            stored.replace(/^¶\s*/, '').replace(/[\[\]]/g, ''));
+        }
+      } finally {
+        await act(async () => screen.unmount());
+        await player.dispose();
+      }
+    }
+  } finally {
+    await act(async () => shelf.unmount());
+  }
+});
+
+test('Spanish and Mindset shelves show their own library and the current availability', async () => {
+  const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
+  assert.ok(texts(spanish).includes(es['tabs.nights']));
+  assert.ok(texts(spanish).includes(es['journey.miRefugio.name']));
+  assert.ok(texts(spanish).includes(es['listen.emptyShelf']));
+  assert.ok(!strings(spanish).includes(en['journey.hushHarbor.name']));
+  for (const language of ['en', 'es'] as const) {
+    const locale = language === 'es' ? es : en;
+    const mindset = await mount('nights', { ...base, language, door: 'mindset', journey: 'imagination-nights' });
+    assert.ok(texts(mindset).includes(locale['journey.imaginationNights.name']));
+    // The shelf follows the published library: a count once sessions in this language exist, else the empty line.
+    const count = audioTracks.filter(track => track.kind === 'imagination-night' && track.lang === language).length;
+    if (count) assert.ok(strings(mindset).includes(i18n.t('listen.nights', { locale: language, count })), language + ' mindset: ' + texts(mindset).join(' | '));
+    else assert.ok(texts(mindset).includes(locale['listen.emptyShelf']), language + ' mindset: ' + texts(mindset).join(' | '));
+    assert.ok(!strings(mindset).includes(locale['listen.bibleByBook']));
+  }
+});
+
+test('the player route guards onboarding, door and language even on direct links', async () => {
+  const psalm = audioTracks.find(track => track.kind === 'psalms')!;
+  const params = { track: psalm.sha256 };
+  assert.equal(host(await mount('listen', null, params), 'Redirect')[0].props.href, '/door');
+  for (const person of [
+    { ...base, journey: 'imagination-nights', door: 'mindset' },
+    { ...base, journey: 'mi-refugio', voice: 'spanish' },
+  ]) {
+    const tree = await mount('listen', person, params);
+    assert.ok(!texts(tree).includes(trackTitle(psalm, 'en')));
+    assert.equal(host(tree, 'Modal').length, 0);
+    assert.equal(host(tree, 'Pressable').length, 1);
+  }
+});
+
+test('Now Playing reports the named configuration stop, with AI disclosure and disabled playback', async () => {
+  const track = audioTracks.find(track => track.kind === 'psalms')!;
+  const player = testPlayer(track, null);
+  (globalThis as any).__pbsAudioStop = 'CONFIG_AUDIO_BASE_URL';
+  const tree = await mount('listen', { ...base, journey: 'psalm-nights' }, { track: track.sha256 });
+  assert.ok(strings(tree).includes(en['listen.aiVoice']));
+  assert.ok(texts(tree).includes(en['listen.audioNotReady']));
+  assert.equal(button(tree, en['listen.play'])?.props.disabled, true);
+  assert.ok(!strings(tree).includes('CONFIG_AUDIO_BASE_URL'));
+  assert.deepEqual(faithContentIssues(strings(tree)), []);
+  await act(async () => tree.unmount());
+  await player.dispose();
+});
+
+function storedVerse(book: string, chapter: number, verse: number) {
+  const db = new DatabaseSync('src/bible/data/kjv.db', { readOnly: true });
+  try {
+    const row = db.prepare('SELECT text FROM verses WHERE book = ? AND chapter = ? AND verse = ?').get(book, chapter, verse);
+    assert.equal(typeof row?.text, 'string');
+    return String(row?.text);
+  } finally {
+    db.close();
+  }
+}
+
+test('Now Playing restores a saved position and renders pause, continue and the timer sheet', async () => {
+  const track = audioTracks.find(track => track.ref === 'PSA 23')!;
+  const player = testPlayer(track, audioBase, 12);
+  const tree = await mount('listen', { ...base, journey: 'psalm-nights' }, { track: track.sha256 });
+  try {
+    assert.ok(texts(tree).includes(en['listen.paidDownload']));
+    assert.ok(!texts(tree).includes(en['listen.download']));
+    await press(tree, new RegExp('^' + en['listen.play'] + '$'));
+    assert.equal(player.position(), 12);
+    await press(tree, new RegExp('^' + en['listen.pause'] + '$'));
+    assert.ok(button(tree, en['listen.resume']));
+    await press(tree, en['listen.resume']);
+    assert.equal(player.position(), 12);
+    assert.ok(texts(tree).includes(storedVerse('PSA', 23, 2)));
+    assert.ok(strings(tree).includes('Psalm 23:2 · KJV'));
+    assert.ok(texts(tree).includes(en['listen.psalmAllowance']));
+    assert.ok(texts(tree).includes('0:12'));
+    assert.ok(texts(tree).includes(`${Math.floor(track.seconds / 60)}:${String(Math.floor(track.seconds % 60)).padStart(2, '0')}`));
+    assert.ok(texts(tree).includes(i18n.t('listen.timerSummary', { locale: 'en', setting: en['listen.timerOff'] })));
+    await press(tree, '+15');
+    assert.equal(player.position(), 27);
+    assert.ok(texts(tree).includes('0:27'));
+    assert.equal(host(tree, 'View').find(node => node.props.accessibilityRole === 'progressbar')?.props.accessibilityValue.now,
+      Math.floor(27 / track.seconds * 100));
+    await press(tree, '−15');
+    assert.equal(player.position(), 12);
+    await press(tree, en['listen.timer']);
+    assert.equal(host(tree, 'Modal').length, 1);
+    assert.ok(texts(tree).includes(en['listen.timerFade']));
+    assert.ok(texts(tree).includes('60 min'));
+    await press(tree, /^30 min$/);
+    assert.equal(host(tree, 'Modal').length, 0);
+    assert.ok(texts(tree).includes(i18n.t('listen.timerSummary', { locale: 'en', setting: '30 min' })));
+    assert.ok(player.getState().sleepEndsAt);
+    await press(tree, en['listen.timer']);
+    await press(tree, new RegExp('^' + en['listen.timerOff'] + '$'));
+    assert.equal(player.getState().sleepEndsAt, null);
+  } finally {
+    await act(async () => tree.unmount());
+    await player.dispose();
+  }
+});
+
+test('a paid listener sees download in progress, failure and successful retry', async () => {
+  const track = audioTracks.find(track => track.kind === 'bible')!;
+  let finish: ((hash: string) => void) | undefined;
+  const player = testPlayer(track, audioBase, 0, () => new Promise(resolve => { finish = resolve; }));
+  asSubscriber();
+  const tree = await mount('listen', { ...base, journey: 'psalm-nights' }, { track: track.sha256 });
+  try {
+    await press(tree, new RegExp('^' + en['listen.download'] + '$'));
+    assert.ok(texts(tree).includes(en['listen.downloading']));
+    await act(async () => finish?.('wrong hash'));
+    assert.ok(texts(tree).includes(en['listen.downloadFailed']));
+    await press(tree, new RegExp('^' + en['listen.download'] + '$'));
+    await act(async () => finish?.(track.sha256));
+    const saved = host(tree, 'Pressable').find(node => textOf(node) === en['listen.downloaded']);
+    assert.equal(saved?.props.disabled, true);
+    assert.ok(!texts(tree).includes(en['listen.downloadFailed']));
+  } finally {
+    await act(async () => tree.unmount());
+    await player.dispose();
+  }
+});
+
+test('Hush Harbor cues follow the real pause positions and the Spanish player renders its timer', async () => {
+  const track = audioTracks.find(track => track.ref === 'content/stories/hush-harbor/core-001-peace-be-still.json')!;
+  const player = testPlayer(track);
+  const english = await mount('listen', { ...base, journey: 'hush-harbor' }, { track: track.sha256 });
+  const story = JSON.parse(readFileSync('../' + track.ref, 'utf8'));
+  // The middle of the story player holds its key verse (the one the call and response answers), never a hole.
+  const keyVerse = story.blocks.find((block: { ref?: string }) => block.ref === 'MAR 4:39');
+  assert.equal(track.scriptureRef, 'MAR 4:39');
+  const scripture = english.root.find(node => node.props.testID === 'scripture-text' && (node.type as unknown) === 'Text');
+  assert.equal(textOf(scripture).replace(/ /g, ''), storedVerse('MAR', 4, 39).replace(/^¶\s*/, '').replace(/ /g, ''));
+  assert.ok(strings(english).includes(keyVerse.label + ' · KJV'));
+  const order = texts(english);
+  const title = order.indexOf(trackTitle(track, 'en'));
+  const reference = order.findIndex(text => text.includes(keyVerse.label));
+  assert.ok(title >= 0 && title < reference && reference < order.indexOf('0:00'), `title, verse, then progress: ${order.join(' | ')}`);
+  assert.ok(track.responsePauses, 'the real story carries both audio pause positions');
+  const [first, second] = track.responsePauses;
+  await press(english, en['listen.play']);
+  assert.ok(!texts(english).includes('+15') && !texts(english).includes('−15'));
+  await player.skip(15);
+  assert.equal(player.position(), 0);
+  const expectCue = async (position: number, cue: string | null) => {
+    await act(async () => player.move(position));
+    assert.deepEqual(
+      texts(english).filter(text => text === en['listen.responseFirst'] || text === en['listen.responseSecond']),
+      cue === null ? [] : [cue],
+    );
+  };
+  await expectCue(first - 0.25, null);
+  await expectCue(first, en['listen.responseFirst']);
+  await expectCue(first + 3, null);
+  await expectCue(second, en['listen.responseSecond']);
+  await expectCue(second + 3, null);
+  assert.deepEqual(faithContentIssues(strings(english)), []);
+  await act(async () => english.unmount());
+
+  // The production catalog has no Spanish story audio yet. Use the real story's media
+  // metadata at the component boundary to verify its Spanish controls and response copy.
+  saved = JSON.stringify({ ...base, language: 'es', journey: 'mi-refugio' });
+  const Ready = () => useSettings().ready ? <PurchasesProvider><NowPlaying track={track} close={() => undefined} /></PurchasesProvider> : null;
+  let spanish!: ReactTestRenderer;
+  await act(async () => { spanish = create(<SettingsProvider><Ready /></SettingsProvider>); });
+  try {
+    await act(async () => player.move(first));
+    assert.ok(texts(spanish).includes(es['listen.responseFirst']));
+    assert.ok(strings(spanish).includes(es['listen.aiVoice']));
+    await press(spanish, es['listen.timer']);
+    assert.equal(host(spanish, 'Modal').length, 1);
+    assert.ok(texts(spanish).includes(es['listen.timerFade']));
+    assert.deepEqual(faithContentIssues(strings(spanish)), []);
+  } finally {
+    await act(async () => spanish.unmount());
+    await player.dispose();
+  }
+});
+
 
 const readyForPaid = { ...base, journey: 'psalm-nights' } as const;
 
