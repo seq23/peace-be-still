@@ -21,6 +21,8 @@ _HOME = tempfile.TemporaryDirectory()
 def setUpModule():
     # No test ever writes to the real ~/.peace-be-still (held audio, locks).
     fill.HOME = Path(_HOME.name)
+    import memguard
+    memguard.MORNING_FLAG = Path(_HOME.name) / "no-morning-window"   # the real flag never steers a test
 
 VPL_EN = """GEN 1:1 In the beginning God created the heaven and the earth.
 GEN 2:1 Thus the heavens and the earth were finished.
@@ -171,6 +173,43 @@ class MemoryGuard(unittest.TestCase):
         with mock.patch.object(memguard.subprocess, "run", side_effect=OSError("no sysctl")):
             self.assertEqual(memguard.read(), {"level": 1, "swap_mb": 0.0})
             self.assertEqual(memguard.wait("clone", sleep=lambda s: self.fail("must not wait")), "go")
+
+    def test_the_morning_window_pauses_the_clone_lane_until_it_clears(self):
+        import memguard
+        with tempfile.TemporaryDirectory() as d:
+            flag = Path(d) / "morning-window.active"
+            logs, t = [], [0.0]
+            normal = lambda: {"level": 1, "swap_mb": 0.0}
+            # No flag file: no morning window, both lanes run.
+            self.assertEqual(memguard.wait("clone", reader=normal, log=logs.append, flag=flag, sleep=lambda s: self.fail("waited")), "go")
+            flag.write_text("on")
+            def sleep(s):
+                t[0] += s
+                if t[0] >= 180:
+                    flag.unlink()      # the morning jobs finish after 3 minutes
+            out = memguard.wait("clone", reader=normal, sleep=sleep, clock=lambda: t[0], log=logs.append, flag=flag)
+            self.assertEqual(out, "resumed")
+            self.assertTrue(logs[0].startswith("NOTE MEMGUARD_MORNING_PAUSE clone"))
+            self.assertTrue(logs[-1].startswith("NOTE MEMGUARD_MORNING_RESUME clone"))
+            # A morning window longer than the run's box: the lane stops for this run, the next looks again.
+            flag.write_text("on")
+            t[0] = 0.0
+            out = memguard.wait("clone", reader=normal, sleep=lambda s: t.__setitem__(0, t[0] + s), clock=lambda: t[0],
+                                log=logs.append, flag=flag, deadline=600)
+            self.assertEqual(out, "one-lane")
+
+    def test_a_morning_flag_left_behind_is_ignored(self):
+        import memguard, os
+        with tempfile.TemporaryDirectory() as d:
+            flag = Path(d) / "morning-window.active"
+            flag.write_text("on")
+            old = flag.stat().st_mtime - 4 * 3600
+            os.utime(flag, (old, old))
+            logs = []
+            out = memguard.wait("clone", reader=lambda: {"level": 1, "swap_mb": 0.0}, log=logs.append, flag=flag,
+                                sleep=lambda s: self.fail("waited on a stale flag"))
+            self.assertEqual(out, "go")
+            self.assertTrue(any("MEMGUARD_MORNING_STALE" in l for l in logs))
 
     def test_pressure_that_never_clears_drops_to_one_lane(self):
         out, logs = self.run_guard([{"level": 4, "swap_mb": 9000.0}], max_pause_s=300)
