@@ -16,7 +16,7 @@ import { V } from "./scripture.mjs";
 import { facts } from "./parts.mjs";
 
 const F = facts();
-const D = { published: "2026-11-22", updated: "2026-11-22", publishedText: "2026年11月22日", updatedText: "2026年11月22日" };
+const D = { published: "2026-11-21", updated: "2026-11-21", publishedText: "2026年11月21日", updatedText: "2026年11月21日" };
 const G = "睡前祷告";
 const IG = `<a href="https://www.instagram.com/peacebestillapp/">Instagram @peacebestillapp</a>`;
 const LANDING = "/zh/";
