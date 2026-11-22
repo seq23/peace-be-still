@@ -2,12 +2,15 @@
 // Reina-Valera 1909 in Spanish) through scripts/content/lib.mjs. Nobody types a verse into a page.
 // Every quote carries data-ref and data-tr, so site/test/scripture.test.mjs can compare each one with
 // the stored text. Refs use the file codes: "PSA 4:8", "MAT 11:28-30".
-import { verses, label } from "../../scripts/content/lib.mjs";
+import { verses, label, joinVerses } from "../../scripts/content/lib.mjs";
 
 // Korean pages ("ko") quote 개역한글판 (대한성서공회 번역, 1961), stored word for word in
 // content/bible/krv_vpl.txt.gz (scripts/content/import-krv.mjs; the Korean Bible Society lists its term as
 // expired on 31 Dec 2011). Citations read "시편 57:8 · 개역한글". 개역개정 and 새번역 are never used.
-const TR = { en: { code: "KJV", name: "KJV" }, es: { code: "RV1909", name: "RV 1909" }, ko: { code: "KRV", name: "개역한글" } };
+// Chinese pages ("zh-Hans") quote the 1919 和合本 (神 edition) in Simplified, converted by OpenCC from the
+// 1919 text and stored in content/bible/cuvs_vpl.txt.gz (scripts/content/import-cuv.mjs). Citations read
+// "诗篇 4:8 · 和合本". Never the 1988 新标点和合本 or the 和合本修订版 (both administered by the Hong Kong Bible Society).
+const TR = { en: { code: "KJV", name: "KJV" }, es: { code: "RV1909", name: "RV 1909" }, ko: { code: "KRV", name: "개역한글" }, "zh-Hans": { code: "CUVS", name: "和合本" } };
 const tr = (lang) => TR[TR[lang] ? lang : "en"];
 
 // Standard Korean Protestant book names, by file code (only the name, never verse text).
@@ -23,12 +26,27 @@ export const BOOK_KO = {
   "3JO": "요한삼서", JUD: "유다서", REV: "요한계시록",
 };
 
+// Standard Chinese Protestant (和合本) book names in Simplified, by file code.
+export const BOOK_ZH = {
+  GEN: "创世记", EXO: "出埃及记", LEV: "利未记", NUM: "民数记", DEU: "申命记", JOS: "约书亚记", JDG: "士师记", RUT: "路得记",
+  "1SA": "撒母耳记上", "2SA": "撒母耳记下", "1KI": "列王纪上", "2KI": "列王纪下", "1CH": "历代志上", "2CH": "历代志下",
+  EZR: "以斯拉记", NEH: "尼希米记", EST: "以斯帖记", JOB: "约伯记", PSA: "诗篇", PRO: "箴言", ECC: "传道书", SOL: "雅歌",
+  ISA: "以赛亚书", JER: "耶利米书", LAM: "耶利米哀歌", EZE: "以西结书", DAN: "但以理书", HOS: "何西阿书", JOE: "约珥书",
+  AMO: "阿摩司书", OBA: "俄巴底亚书", JON: "约拿书", MIC: "弥迦书", NAH: "那鸿书", HAB: "哈巴谷书", ZEP: "西番雅书",
+  HAG: "哈该书", ZEC: "撒迦利亚书", MAL: "玛拉基书", MAT: "马太福音", MAR: "马可福音", LUK: "路加福音", JOH: "约翰福音",
+  ACT: "使徒行传", ROM: "罗马书", "1CO": "哥林多前书", "2CO": "哥林多后书", GAL: "加拉太书", EPH: "以弗所书", PHI: "腓立比书",
+  COL: "歌罗西书", "1TH": "帖撒罗尼迦前书", "2TH": "帖撒罗尼迦后书", "1TI": "提摩太前书", "2TI": "提摩太后书", TIT: "提多书",
+  PHM: "腓利门书", HEB: "希伯来书", JAM: "雅各书", "1PE": "彼得前书", "2PE": "彼得后书", "1JO": "约翰一书", "2JO": "约翰二书",
+  "3JO": "约翰三书", JUD: "犹大书", REV: "启示录",
+};
+const NAMES = { ko: BOOK_KO, "zh-Hans": BOOK_ZH };
+
 // The stored text of a ref, verses joined by a space.
 export function text(ref, lang = "en") {
-  return verses(ref, tr(lang).code).map((x) => x.text).join(" ");
+  return joinVerses(verses(ref, tr(lang).code).map((x) => x.text), tr(lang).code);
 }
-// "Psalm 4:8" / "Salmos 4:8" / "시편 4:8"
-export const ref = (r, lang = "en") => (lang === "ko" ? label(r, "en").replace(/^.+? (?=\d+:)/, `${BOOK_KO[r.split(" ")[0]]} `) : label(r, lang === "es" ? "es" : "en"));
+// "Psalm 4:8" / "Salmos 4:8" / "시편 4:8" / "诗篇 4:8"
+export const ref = (r, lang = "en") => (NAMES[lang] ? label(r, "en").replace(/^.+? (?=\d+:)/, `${NAMES[lang][r.split(" ")[0]]} `) : label(r, lang === "es" ? "es" : "en"));
 // "Psalm 4:8 · KJV" / "Salmos 4:8 · RV 1909" / "시편 4:8 · KJV"
 export function cite(r, lang = "en") {
   return `${ref(r, lang)} · ${tr(lang).name}`;

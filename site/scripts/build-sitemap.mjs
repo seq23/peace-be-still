@@ -23,7 +23,7 @@ for (const p of pages) {
   const canon = html.match(/<link rel="canonical" href="([^"]+)"/);
   if (!canon || !canon[1].startsWith(BASE)) continue;
   const mod = html.match(/"dateModified":"(\d{4}-\d\d-\d\d)"/)?.[1] || html.match(/(\d{4}-\d\d-\d\d)/)?.[1];
-  const alts = [...html.matchAll(/<link rel="alternate" hreflang="(en|es|ko|x-default)" href="([^"]+)"/g)].map((m) => [m[1], m[2]]);
+  const alts = [...html.matchAll(/<link rel="alternate" hreflang="([A-Za-z-]+)" href="([^"]+)"/g)].map((m) => [m[1], m[2]]);
   urls.push({ loc: canon[1], mod, alts });
 }
 if (urls.length < 5) { console.error(`NAMED STOP [SITEMAP_TOO_SMALL] only ${urls.length} indexable pages found`); process.exit(1); }

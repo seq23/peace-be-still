@@ -1,7 +1,8 @@
 // Shared helpers for the launch library: the stored Bibles, references, word counts.
 // Scripture is never typed by a person or a model: every verse in content/ is read
 // from content/bible/*.txt.gz (eBible.org KJV and Reina-Valera 1909, both public domain; 개역한글판 1961,
-// from the Korean Bible Society's own reader; its Korean term is listed as expired; scripts/content/import-krv.mjs).
+// from the Korean Bible Society's own reader; its Korean term is listed as expired; scripts/content/import-krv.mjs;
+// the 1919 和合本 in Traditional (as printed) and Simplified (OpenCC), scripts/content/import-cuv.mjs).
 import { readFileSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
@@ -10,8 +11,11 @@ import { dirname, join } from "node:path";
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const CONTENT = join(ROOT, "content");
 
-const FILES = { KJV: "kjv_vpl.txt.gz", RV1909: "rv1909_vpl.txt.gz", KRV: "krv_vpl.txt.gz" };
-export const TRANSLATION = { en: "KJV", es: "RV1909", ko: "KRV" };
+const FILES = { KJV: "kjv_vpl.txt.gz", RV1909: "rv1909_vpl.txt.gz", KRV: "krv_vpl.txt.gz", CUV: "cuv_vpl.txt.gz", CUVS: "cuvs_vpl.txt.gz" };
+export const TRANSLATION = { en: "KJV", es: "RV1909", ko: "KRV", "zh-Hans": "CUVS" };
+// The Chinese stores are kept exactly as printed: display()'s whitespace rule would eat the full-width
+// space the 神 edition prints before 神 ("　神愛世人").
+const AS_STORED = new Set(["CUV", "CUVS"]);
 
 const BOOKS = [
   ["GEN", "Genesis", "Génesis"], ["EXO", "Exodus", "Éxodo"], ["LEV", "Leviticus", "Levítico"],
@@ -55,7 +59,7 @@ export function bible(tr) {
   const map = new Map();
   for (const line of txt.split("\n")) {
     const m = line.match(/^([1-4A-Z]{3}) (\d+):(\d+) (.*)$/);
-    if (m && m[4].trim()) map.set(`${m[1]} ${m[2]}:${m[3]}`, display(m[4]));
+    if (m && m[4].trim()) map.set(`${m[1]} ${m[2]}:${m[3]}`, AS_STORED.has(tr) ? m[4] : display(m[4]));
   }
   if (map.size < 30000) throw new Error(`BIBLE_INCOMPLETE ${tr} has ${map.size} verses`);
   return (cache[tr] = map);
@@ -70,10 +74,26 @@ export function parseRef(ref) {
   return { book: m[1], ch: +m[2], a, z };
 }
 
+// Verses a translation prints as one ("PSA 63:5-6" in the 1919 和合本) are stored once, under the first
+// number; the later numbers are listed in its *_source.json "joined" and are covered by that first verse.
+const SOURCE = { KRV: "krv_source.json", CUV: "cuv_source.json", CUVS: "cuv_source.json" };
+const joinedCache = {};
+function joinedTails(tr) {
+  if (joinedCache[tr]) return joinedCache[tr];
+  const tails = new Map();
+  if (SOURCE[tr]) for (const j of JSON.parse(readFileSync(join(CONTENT, "bible", SOURCE[tr]), "utf8")).joined || []) {
+    const m = j.match(/^([1-4A-Z]{3}) (\d+):(\d+)-(\d+)$/);
+    for (let v = +m[3] + 1; v <= +m[4]; v++) tails.set(`${m[1]} ${m[2]}:${v}`, +m[3]);
+  }
+  return (joinedCache[tr] = tails);
+}
+
 export function verses(ref, tr) {
   const { book, ch, a, z } = parseRef(ref), b = bible(tr), out = [];
   for (let v = a; v <= z; v++) {
     const t = b.get(`${book} ${ch}:${v}`);
+    // A joined verse's later number, inside a range that holds its first number: already quoted.
+    if (t === undefined && joinedTails(tr).get(`${book} ${ch}:${v}`) >= a) continue;
     if (t === undefined) throw new Error(`REF_NOT_IN_${tr} ${book} ${ch}:${v}`);
     out.push({ v, text: t });
   }
@@ -86,8 +106,10 @@ export function label(ref, lang) {
   return `${name} ${ch}:${a}${z !== a ? "-" + z : ""}`;
 }
 
+// Verses side by side: a space between them, none in Chinese (the text has no spaces between sentences).
+export const joinVerses = (texts, tr) => texts.join(AS_STORED.has(tr) ? "" : " ");
 export function passageText(refs, tr) {
-  return [].concat(refs).flatMap((r) => verses(r, tr).map((x) => x.text)).join(" ");
+  return joinVerses([].concat(refs).flatMap((r) => verses(r, tr).map((x) => x.text)), tr);
 }
 
 export const words = (t) => (String(t).replace(/\[pause \d+\]/g, " ").match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu) || []);

@@ -92,11 +92,22 @@ const CTA = {
     iosAlt: "App Store에서 다운로드",
     playAlt: "Google Play에서 받기",
   },
+  // Chinese pages (Simplified, 22 Nov 2026): the same honest line as the Korean CTA.
+  "zh-Hans": {
+    soonH: "请在 App Store 和 Google Play 搜索 Peace Be Still",
+    liveH: "下载 Peace Be Still",
+    p: "免费下载，免费的部分一直免费。没有广告，也没有到期自动扣费的免费试用。应用界面目前是英文和西班牙文。",
+    iosSoon: "即将上架 App Store",
+    playSoon: "即将上架 Google Play",
+    iosAlt: "在 App Store 下载",
+    playAlt: "在 Google Play 下载",
+  },
 };
-// The page languages the site renders: English, Spanish and (landing + question pages only) Korean.
-export const LANGS = ["en", "es", "ko"];
+// The page languages the site renders: English, Spanish and (landing + question pages only) Korean and
+// Simplified Chinese.
+export const LANGS = ["en", "es", "ko", "zh-Hans"];
 export const langOf = (html) => {
-  const l = (String(html).match(/<html lang="(\w+)"/) || [])[1];
+  const l = (String(html).match(/<html lang="([\w-]+)"/) || [])[1];
   return LANGS.includes(l) ? l : "en";
 };
 /** The App Store link for a page (its path under site/public): the page's custom product page when
@@ -134,10 +145,22 @@ export function storeCtaHtml(lang, store = storeConfig(), source = "", page = ""
 </section><!-- cta:end -->`;
 }
 
+// The landing-only languages (a landing page and its question pages, no app screens yet): the words of
+// their header and footer. Their footers link the English legal pages, marked as English: no
+// machine-translated legal text (owner ruling 6 Nov 2026, the KeepMyProof precedent).
+const LOCAL = {
+  ko: { home: "/ko/", skip: "본문으로 건너뛰기", brand: "Peace Be Still, 한국어 첫 페이지", foot: (d) => `Peace Be Still · Spry Labs가 만든 앱 · ${d} 업데이트`, nav: "바닥글", homeName: "새벽기도",
+    legal: [["/about", "소개 (영문)"], ["/privacy", "개인정보 처리방침 (영문)"], ["/terms", "이용약관 (영문)"], ["/support", "도움말 (영문)"]] },
+  "zh-Hans": { home: "/zh/", skip: "跳到正文", brand: "Peace Be Still 中文首页", foot: (d) => `Peace Be Still · Spry Labs 出品的应用 · ${d}更新`, nav: "页脚", homeName: "中文首页",
+    legal: [["/about", "关于我们（英文）"], ["/privacy", "隐私政策（英文）"], ["/terms", "使用条款（英文）"], ["/support", "帮助（英文）"]] },
+};
+export const isLocal = (lang) => Boolean(LOCAL[lang]);
+
 export function headerHtml(lang, altPath) {
-  if (lang === "ko") return `<a class="skip" href="#main">본문으로 건너뛰기</a>
+  const loc = LOCAL[lang];
+  if (loc) return `<a class="skip" href="#main">${loc.skip}</a>
 <header class="wrap site-head">
-  <a class="brand" href="/ko/" aria-label="Peace Be Still, 한국어 첫 페이지">
+  <a class="brand" href="${loc.home}" aria-label="${loc.brand}">
     <picture>
       <source srcset="/brand/pbs-wordmark-dark.svg" media="(prefers-color-scheme: dark)">
       <img src="/brand/pbs-wordmark-light.svg" alt="Peace Be Still" width="225" height="36">
@@ -167,6 +190,7 @@ export function updatedText(updated, lang) {
   if (iso) [y, m, d] = [+iso[1], +iso[2], +iso[3]];
   else { const t = String(updated).match(/^(\d{1,2}) (\w{3}) (\d{4})$/); if (!t || !MONTHS.includes(t[2])) throw new Error(`NAMED STOP [BAD_UPDATED_DATE] ${updated}`); [y, m, d] = [+t[3], MONTHS.indexOf(t[2]) + 1, +t[1]]; }
   if (lang === "ko") return `${y}년 ${m}월 ${d}일`;
+  if (lang === "zh-Hans") return `${y}年${m}月${d}日`;
   const txt = `${d} ${MONTHS[m - 1]} ${y}`;
   return lang === "es" ? txt.replace(/ (\w{3}) /, (x, mo) => ` ${mo.toLowerCase()} `) : txt;
 }
@@ -175,17 +199,13 @@ export function updatedText(updated, lang) {
 // door "mindset": the two faith landing links are left out; door "faith": the Mindset hub link is left
 // out (the doors never link each other). Every other page links the Mindset hub.
 export function footerHtml(lang, updated = "18 Nov 2026", door = "neutral") {
-  // Korean pages link the English legal pages, marked as English: no machine-translated legal text
-  // (owner ruling 6 Nov 2026, the KeepMyProof precedent).
-  if (lang === "ko") return `<footer class="site-foot">
+  const loc = LOCAL[lang];
+  if (loc) return `<footer class="site-foot">
   <div class="wrap">
-    <span>Peace Be Still · Spry Labs가 만든 앱 · ${updatedText(updated, "ko")} 업데이트</span>
-    <nav aria-label="바닥글">
-      <a href="/ko/">새벽기도</a>
-      <a href="/about" hreflang="en">소개 (영문)</a>
-      <a href="/privacy" hreflang="en">개인정보 처리방침 (영문)</a>
-      <a href="/terms" hreflang="en">이용약관 (영문)</a>
-      <a href="/support" hreflang="en">도움말 (영문)</a>
+    <span>${loc.foot(updatedText(updated, lang))}</span>
+    <nav aria-label="${loc.nav}">
+      <a href="${loc.home}">${loc.homeName}</a>
+${loc.legal.map(([h, n]) => `      <a href="${h}" hreflang="en">${n}</a>`).join("\n")}
       <a href="/" hreflang="en" lang="en">English</a>
     </nav>
   </div>
@@ -205,6 +225,7 @@ ${door === "faith" ? "" : `      <a href="/es/mentalidad/">Mentalidad</a>
       <a href="/es/aviso">Aviso</a>
       <a href="/es/soporte">Ayuda</a>
 ${door === "mindset" ? "" : `      <a href="/ko/" hreflang="ko" lang="ko">한국어</a>
+      <a href="/zh/" hreflang="zh-Hans" lang="zh-Hans">中文</a>
 `}      <a href="/" hreflang="en" lang="en">English</a>
     </nav>
   </div>
@@ -222,6 +243,7 @@ ${door === "faith" ? "" : `      <a href="/mindset/">Mindset</a>
       <a href="/support">Support</a>
 ${door === "mindset" ? "" : `      <a href="/prayer-points/">Prayer points &amp; vigils</a>
       <a href="/ko/" hreflang="ko" lang="ko">한국어 · 새벽기도</a>
+      <a href="/zh/" hreflang="zh-Hans" lang="zh-Hans">中文 · 睡前祷告</a>
 `}      <a href="/es/" hreflang="es" lang="es">Español</a>
     </nav>
   </div>
