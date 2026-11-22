@@ -12,6 +12,7 @@ AUDIO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(AUDIO))
 sys.path.insert(0, str(AUDIO / "lib"))
 import fill  # noqa: E402
+import hush_clone as C  # noqa: E402
 import qa  # noqa: E402
 import text as T  # noqa: E402
 
@@ -233,7 +234,7 @@ class Manifest(unittest.TestCase):
 
 
 class ActiveFlag(unittest.TestCase):
-    def test_written_while_incomplete_and_removed_when_done(self):
+    def test_written_while_incomplete_and_kept_marked_complete_when_done(self):
         items = fill.plan(bibles())
         with tempfile.TemporaryDirectory() as d:
             flag = Path(d) / "library-fill.active"
@@ -245,7 +246,72 @@ class ActiveFlag(unittest.TestCase):
             self.assertEqual(json.loads(flag.read_text())["started"], body["started"])  # start kept
             rows = [{"file": i["file"], "status": "passed"} for i in items]
             self.assertTrue(fill.settle_active(flag, items, rows, later))
-            self.assertFalse(flag.exists())
+            # Kept (YouTube restarts only after the owner approves the overhaul), marked with the date.
+            self.assertEqual(json.loads(flag.read_text())["complete"], later.date().isoformat())
+            self.assertFalse(fill.settle_active(flag, items, rows, later + dt.timedelta(days=1)))   # told once
+            self.assertTrue(flag.exists())
+
+
+class Lanes(unittest.TestCase):
+    def test_the_mac_and_the_cloud_never_take_the_same_file(self):
+        items = fill.plan(bibles(), fill.content_items(fill.REPO))
+        cfg = fill.lanes()
+        mac = {i["file"] for i in items if fill.lane_of(i, cfg) == "mac"}
+        cloud = {i["file"] for i in items if fill.lane_of(i, cfg) == "cloud"}
+        self.assertFalse(mac & cloud)
+        self.assertEqual(len(mac | cloud), len(items))
+        self.assertTrue(all(i["kind"] == "bible" for i in items if i["file"] in cloud))
+        stories = C.H.load_stories()
+        self.assertEqual({s["id"] for s in stories if C.lane_of(s, cfg) == "mac"}, set(cfg["mac_stories"]))
+
+    def test_shards_split_a_queue_with_no_overlap_and_no_gap(self):
+        q = list(range(101))
+        parts = [fill.shard(q, f"{i}/7") for i in range(7)]
+        self.assertEqual(sorted(x for p in parts for x in p), q)
+        self.assertEqual(fill.shard(q, None), q)
+        with self.assertRaises(ValueError):
+            fill.shard(q, "7/7")
+
+    def test_cloud_plan_sizes_the_matrix_and_says_when_it_is_done(self):
+        items = fill.plan(bibles(), fill.content_items(fill.REPO))
+        cfg = fill.lanes()
+        p = fill.cloud_plan(items, [], cfg, 12)
+        n = min(12, -(-p["left"] // fill.CLOUD_FILES_PER_JOB))
+        self.assertTrue(p["left"] > 0 and n >= 1)
+        self.assertEqual(p["bible"], [f"{k}/{n}" for k in range(n)])
+        self.assertEqual(len(fill.cloud_plan(items, [], cfg, 1)["bible"]), 1)   # capped at the jobs asked
+        done = [{"file": i["file"], "status": "passed"} for i in items]
+        self.assertEqual(fill.cloud_plan(items, done, cfg, 12), {"bible": [], "left": 0, "complete": True})
+
+
+class Gather(unittest.TestCase):
+    """Two writers of the manifest (the Mac, the cloud's gather job) never conflict and never lose a row."""
+    def test_unpushed_rows_are_laid_over_the_newest_main_and_pushed(self):
+        import subprocess as sp
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            git = lambda cwd, *a: sp.run(["git", "-C", str(cwd), *a], capture_output=True, text=True, check=True)
+            sp.run(["git", "init", "-q", "--bare", "-b", "main", str(d / "origin.git")], check=True)
+            sp.run(["git", "clone", "-q", str(d / "origin.git"), str(d / "a")], check=True, capture_output=True)
+            for c in ("a",):
+                git(d / c, "config", "user.email", "t@example.com"); git(d / c, "config", "user.name", "t")
+            (d / "a" / "audio").mkdir()
+            man = d / "a" / "audio" / "manifest.jsonl"
+            man.write_text(json.dumps({"file": "x", "status": "FAILED"}) + "\n")
+            git(d / "a", "checkout", "-q", "-b", "main"); git(d / "a", "add", "-A"); git(d / "a", "commit", "-qm", "seed"); git(d / "a", "push", "-q", "origin", "main")
+            sp.run(["git", "clone", "-q", str(d / "origin.git"), str(d / "b")], check=True, capture_output=True)
+            git(d / "b", "config", "user.email", "t@example.com"); git(d / "b", "config", "user.name", "t")
+            # The other writer pushes a row first.
+            (d / "b" / "audio" / "manifest.jsonl").write_text(json.dumps({"file": "x", "status": "FAILED"}) + "\n" + json.dumps({"file": "y", "status": "passed"}) + "\n")
+            git(d / "b", "commit", "-qam", "other"); git(d / "b", "push", "-q", "origin", "main")
+            with tempfile.TemporaryDirectory() as home, mock.patch.object(fill, "HOME", Path(home)), \
+                    mock.patch.object(fill, "REPO", d / "a"), mock.patch.object(fill, "MANIFEST", man):
+                fill.upsert_row({"file": "x", "status": "passed"}, man)
+                self.assertEqual(fill.git_commit("t"), "manifest pushed")
+                self.assertFalse(fill.unpushed_path().exists())
+            git(d / "b", "pull", "-q")
+            rows = {r["file"]: r["status"] for r in fill.read_manifest(d / "b" / "audio" / "manifest.jsonl")}
+            self.assertEqual(rows, {"x": "passed", "y": "passed"})   # both writers' rows, no conflict
 
     def test_expected_end_from_measured_speed(self):
         items = fill.plan(bibles())

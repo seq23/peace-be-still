@@ -1,0 +1,167 @@
+# The cloud fill lane (owner, 21 Nov 2026: "yea we can def move into github"). Voices the library on
+# GitHub's free runners (a public repo) with the SAME code as the Mac (audio/fill.py, audio/hush_clone.py:
+# one QA, the same margins, held audio), in the share audio/lanes.json gives the cloud.
+#   plan    sizes the matrix from what is left; when nothing is left it says FILL_COMPLETE, tells Open
+#           Loops, and switches this workflow off.
+#   bible   N Kokoro shards in parallel, each a different slice of the queue (--shard i/N), time-boxed.
+#   story   one Hush Harbor story per job on Chatterbox (CPU); its rendered sentences wait on Drive
+#           between jobs, so a story longer than one job carries on in the next.
+#   gather  lays every job's manifest rows over main's newest manifest and pushes once.
+# PRIVACY (the repo and its logs are public): reference clips come from Drive at run time; output goes
+# straight to the Drive shelf with the md5 check and is deleted from the runner; failed files are held on
+# Drive; no audio is ever a workflow artifact (only the rows files, the same rows the public manifest
+# holds). Times: cron is UTC; every 6 h at :15 = 00:15, 06:15, 12:15, 18:15 Central (CST).
+name: Fill (cloud)
+on:
+  schedule:
+    - cron: "15 0,6,12,18 * * *"
+  push: { branches: [fix/fill-cloud-lane] }   # TEMPORARY: the proof run before merge; removed before land
+  workflow_dispatch:
+    inputs:
+      bible_jobs: { description: "most Bible shards this launch", default: "12" }
+      story_jobs: { description: "most clone stories this launch", default: "6" }
+      only: { description: "proof run: only Bible files starting with this (e.g. en/bible/kjv-rut)", default: "" }
+      story: { description: "proof run: this one story id", default: "" }
+concurrency: { group: fill-cloud, cancel-in-progress: false }
+permissions: { contents: read }
+env:
+  PBS_LANE: cloud
+  PBS_HOME: /home/runner/pbs
+  PBS_NO_MORNING: "1"
+  PBS_WHISPER_DEVICE: cpu
+  PBS_HELD_REMOTE: gdrive:Mac-Shelf/peace-be-still/held-audio
+  PBS_WORK_REMOTE: gdrive:Mac-Shelf/peace-be-still/hh-work-cloud
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: { contents: read, actions: write }
+    outputs:
+      bible: ${{ steps.p.outputs.bible }}
+      stories: ${{ steps.p.outputs.stories }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - id: p
+        env:
+          ONLY: ${{ inputs.only || (github.event_name == 'push' && 'en/bible/kjv-rut') || '' }}
+          STORY: ${{ inputs.story || (github.event_name == 'push' && 'core-004-jonah') || '' }}
+          BJ: ${{ inputs.bible_jobs || '12' }}
+          SJ: ${{ inputs.story_jobs || '6' }}
+          BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pip install -q numpy scipy
+          plan=$(python audio/fill.py --cloud-plan "$BJ")
+          echo "$plan"
+          if [ -n "$ONLY" ] || [ -n "$STORY" ]; then
+            # A proof run: one shard over the files asked for, and/or the one story asked for.
+            bible=$([ -n "$ONLY" ] && echo '["0/1"]' || echo '[]')
+            stories=$([ -n "$STORY" ] && python -c 'import json,sys; print(json.dumps([sys.argv[1]]))' "$STORY" || echo '[]')
+          else
+            bible=$(python -c 'import json,sys; print(json.dumps(json.loads(sys.argv[1])["bible"]))' "$plan")
+            stories=$(python audio/hush_clone.py --cloud-plan "$SJ")
+          fi
+          echo "bible=$bible" >> "$GITHUB_OUTPUT"
+          echo "stories=$stories" >> "$GITHUB_OUTPUT"
+          if [ "$bible" = "[]" ] && [ "$stories" = "[]" ] && [ -z "$ONLY$STORY" ]; then
+            echo "NOTE FILL_COMPLETE the cloud's share of the library is voiced and on Drive; this workflow switches itself off"
+            if [ -n "$BOSS_OPEN_LOOPS_TOKEN" ]; then
+              curl -fsS -o /dev/null -X POST https://boss.sequoiataylor.com/api/boss/open-loops/intake \
+                -H "authorization: Bearer $BOSS_OPEN_LOOPS_TOKEN" -H "content-type: application/json" \
+                -d "{\"repo\":\"seq23/peace-be-still\",\"stop\":\"PBS_FILL_COMPLETE\",\"owner\":\"sequoia\",\"business\":\"spry\",\"next_date\":\"$(date -u +%F)\",\"title\":\"PBS fill complete: YouTube can restart after the overhaul is approved\",\"finish_line\":\"The YouTube channels overhaul is approved and the channels restart\",\"next_step\":\"Approve the YouTube channels overhaul; the pause stays until then\"}" \
+                || echo "note: Open Loops did not take the completion row"
+            fi
+            gh workflow disable fill-cloud.yml -R "$GITHUB_REPOSITORY" || echo "note: could not switch the workflow off"
+          fi
+
+  bible:
+    needs: plan
+    if: needs.plan.outputs.bible != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix: { shard: "${{ fromJSON(needs.plan.outputs.bible) }}" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/cache@v4
+        with: { path: "~/kokoro\n~/.cache/huggingface", key: kokoro-v1.0-whisper-1 }
+      - name: Runner setup (Kokoro)
+        env: { PBS_RCLONE_CONF: "${{ secrets.PBS_RCLONE_CONF }}" }
+        run: audio/cloud/setup.sh kokoro
+      - name: Voice this shard (time box 300 minutes)
+        env: { ONLY: "${{ inputs.only || (github.event_name == 'push' && 'en/bible/kjv-rut') || '' }}", SHARD: "${{ matrix.shard }}" }
+        run: |
+          set +e
+          python audio/fill.py --max-minutes 300 --shard "$SHARD" ${ONLY:+--only "$ONLY"}; rc=$?
+          set -e
+          mkdir -p rows && cp "$PBS_HOME/unpushed-rows.jsonl" "rows/rows.jsonl" 2>/dev/null || : > rows/rows.jsonl
+          echo "rows: $(wc -l < rows/rows.jsonl)"
+          exit $rc
+      - name: Clear the runner's work
+        if: always()
+        run: rm -rf "$PBS_HOME" ~/.config/rclone
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "rows-bible-${{ strategy.job-index }}", path: rows/rows.jsonl, retention-days: 3, if-no-files-found: ignore }
+
+  story:
+    needs: plan
+    if: needs.plan.outputs.stories != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: { story: "${{ fromJSON(needs.plan.outputs.stories) }}" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/cache@v4
+        with: { path: "~/.cache/huggingface\n~/.cache/torch", key: chatterbox-0.1.7-whisper-1 }
+      - name: Runner setup (Chatterbox)
+        env: { PBS_RCLONE_CONF: "${{ secrets.PBS_RCLONE_CONF }}" }
+        run: audio/cloud/setup.sh chatterbox
+      - name: Voice this story (time box 320 minutes; sentences saved to Drive)
+        env: { STORY: "${{ matrix.story }}" }
+        run: |
+          set +e
+          python audio/hush_clone.py --story "$STORY" --max-minutes 320; rc=$?
+          set -e
+          mkdir -p rows && cp "$PBS_HOME/unpushed-rows.jsonl" "rows/rows.jsonl" 2>/dev/null || : > rows/rows.jsonl
+          echo "rows: $(wc -l < rows/rows.jsonl)"
+          exit $rc
+      - name: Clear the runner's work
+        if: always()
+        run: rm -rf "$PBS_HOME" ~/.config/rclone
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "rows-story-${{ strategy.job-index }}", path: rows/rows.jsonl, retention-days: 3, if-no-files-found: ignore }
+
+  gather:
+    needs: [plan, bible, story]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: { contents: write }
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/download-artifact@v4
+        with: { pattern: "rows-*", path: rows }
+      - name: Lay the rows over main's manifest and push
+        run: |
+          pip install -q numpy scipy
+          git checkout -q -B main   # fill.git_commit lays the rows over origin/main and pushes only the manifest
+          git config user.name "pbs-cloud-fill"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          files=$(find rows -name rows.jsonl -size +0 2>/dev/null)
+          [ -z "$files" ] && { echo "OUTPUT 0 cloud rows gathered (no job wrote a row)"; exit 0; }
+          python audio/fill.py --push-rows $files

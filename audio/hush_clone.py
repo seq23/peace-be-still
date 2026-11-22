@@ -130,6 +130,34 @@ def lane_order(stories: list[dict], rows: list[dict] = ()) -> list[dict]:
     return retry + sorted((s for s in stories if H.row_file(s) not in last), key=lambda s: s["id"], reverse=True)
 
 
+# ------------------------------------------------------------------ lanes and the cloud's work folders
+# A cloud runner is wiped when its job ends, so a story's rendered sentences live on Drive between jobs
+# (PBS_WORK_REMOTE, private; never a workflow artifact): pulled before the story, pushed after, removed
+# once it is shelved.
+WORK_REMOTE = os.environ.get("PBS_WORK_REMOTE", "")
+
+
+def lane_of(story: dict, cfg: dict | None = None) -> str:
+    return "mac" if story["id"] in (cfg or fill.lanes())["mac_stories"] else "cloud"
+
+
+def pull_work(sid: str, work: Path) -> None:
+    if WORK_REMOTE:
+        work.mkdir(parents=True, exist_ok=True)
+        fill.rclone("copy", f"{WORK_REMOTE}/{sid}", str(work), timeout=1800)
+
+
+def push_work(sid: str, work: Path) -> None:
+    if WORK_REMOTE and work.exists():
+        if fill.rclone("copy", str(work), f"{WORK_REMOTE}/{sid}", timeout=1800).returncode != 0:
+            print(f"note: could not save {sid}'s rendered sentences to Drive; the next job renders them again", flush=True)
+
+
+def drop_work(sid: str) -> None:
+    if WORK_REMOTE:
+        fill.rclone("purge", f"{WORK_REMOTE}/{sid}", timeout=600)
+
+
 # ------------------------------------------------------------------ the Mac side
 def refs() -> dict:
     """Her picked clips as local wavs (the shelf method: pulled from Drive when missing)."""
@@ -377,10 +405,12 @@ def main(argv=None) -> int:
     ap.add_argument("--commit", action="store_true")
     ap.add_argument("--keep", help="also copy each shelved file here")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--story", help="this one story id (a cloud job: one story per job)")
+    ap.add_argument("--cloud-plan", type=int, metavar="JOBS", help="print at most JOBS cloud story ids as JSON")
     a = ap.parse_args(argv)
     # Its own lock (owner, 21 Nov 2026: the Bible and clone lanes run at the same time).
     lock = (fill.HOME / os.environ.get("PBS_HH_LOCK", "clone-lane.lock")).open("w")
-    if not a.dry_run:
+    if not a.dry_run and a.cloud_plan is None:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
@@ -390,7 +420,12 @@ def main(argv=None) -> int:
     rows = fill.read_manifest()
     # The clone lane is the one Hush Harbor lane (owner, 21 Nov 2026: "we cloned the voices for hush
     # harbor ... so are not subj to quota"): a story the retired Gemini lane had started is voiced here too.
-    queue = lane_order(H.todo(stories, rows, a.only), rows)
+    queue = [s for s in lane_order(H.todo(stories, rows, a.only), rows) if lane_of(s) == fill.LANE]
+    if a.story:
+        queue = [s for s in queue if s["id"] == a.story]
+    if a.cloud_plan is not None:
+        print(json.dumps([s["id"] for s in queue[:a.cloud_plan]] if fill.LANE == "cloud" else []))
+        return 0
     if not a.dry_run and (pruned := prune_work(stories, rows)):
         print(f"note: removed {pruned} work folders of stories already shelved", flush=True)
     if a.dry_run:
@@ -411,7 +446,11 @@ def main(argv=None) -> int:
             if memguard.wait("clone", deadline=deadline) == "one-lane":
                 break
             work = fill.HOME / "hh-work" / s["id"]
-            row = make_story(s, work, deadline)
+            pull_work(s["id"], work)
+            try:
+                row = make_story(s, work, deadline)
+            finally:
+                push_work(s["id"], work)
             if row is None:
                 print(f"note: the {a.max_minutes:g}-minute time box ended inside {s['id']}; its rendered sentences "
                       "are kept and the next run carries on", flush=True)
@@ -429,6 +468,7 @@ def main(argv=None) -> int:
             row = fill.upsert_row(row)
             if row["status"] == "passed":
                 shutil.rmtree(work, ignore_errors=True)   # a failed story keeps its good sentences for the retry
+                drop_work(s["id"])
             free_models()
             print(f"{row['status']:6} {row['file']}  {row['seconds']}s  acc {row['checks'].get('accuracy')}  "
                   f"sim {row['checks'].get('similarity')}  -> {row.get('shelved')}  {'; '.join(row['checks']['problems'])}", flush=True)
