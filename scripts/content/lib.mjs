@@ -1,6 +1,7 @@
 // Shared helpers for the launch library: the stored Bibles, references, word counts.
 // Scripture is never typed by a person or a model: every verse in content/ is read
-// from content/bible/*.txt.gz (eBible.org KJV and Reina-Valera 1909, both public domain).
+// from content/bible/*.txt.gz (eBible.org KJV and Reina-Valera 1909, both public domain; 개역한글판 1961,
+// from the Korean Bible Society's own reader; its Korean term is listed as expired; scripts/content/import-krv.mjs).
 import { readFileSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
@@ -9,8 +10,8 @@ import { dirname, join } from "node:path";
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const CONTENT = join(ROOT, "content");
 
-const FILES = { KJV: "kjv_vpl.txt.gz", RV1909: "rv1909_vpl.txt.gz" };
-export const TRANSLATION = { en: "KJV", es: "RV1909" };
+const FILES = { KJV: "kjv_vpl.txt.gz", RV1909: "rv1909_vpl.txt.gz", KRV: "krv_vpl.txt.gz" };
+export const TRANSLATION = { en: "KJV", es: "RV1909", ko: "KRV" };
 
 const BOOKS = [
   ["GEN", "Genesis", "Génesis"], ["EXO", "Exodus", "Éxodo"], ["LEV", "Leviticus", "Levítico"],

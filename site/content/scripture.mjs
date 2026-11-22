@@ -4,12 +4,11 @@
 // the stored text. Refs use the file codes: "PSA 4:8", "MAT 11:28-30".
 import { verses, label } from "../../scripts/content/lib.mjs";
 
-// Korean pages ("ko") quote the KJV in English: no Korean translation is stored, and the common
-// Korean Bibles (개역개정, 새번역) are under copyright. Only the book name is Korean ("시편 57:8 · KJV"),
-// and the quoted words carry lang="en".
-const TR = { en: { code: "KJV", name: "KJV" }, es: { code: "RV1909", name: "RV 1909" }, ko: { code: "KJV", name: "KJV" } };
+// Korean pages ("ko") quote 개역한글판 (대한성서공회 번역, 1961), stored word for word in
+// content/bible/krv_vpl.txt.gz (scripts/content/import-krv.mjs; the Korean Bible Society lists its term as
+// expired on 31 Dec 2011). Citations read "시편 57:8 · 개역한글". 개역개정 and 새번역 are never used.
+const TR = { en: { code: "KJV", name: "KJV" }, es: { code: "RV1909", name: "RV 1909" }, ko: { code: "KRV", name: "개역한글" } };
 const tr = (lang) => TR[TR[lang] ? lang : "en"];
-const enAttr = (lang) => (lang === "ko" ? ' lang="en"' : "");
 
 // Standard Korean Protestant book names, by file code (only the name, never verse text).
 export const BOOK_KO = {
@@ -36,11 +35,11 @@ export function cite(r, lang = "en") {
 }
 // A block quote with its reference.
 export function V(r, lang = "en") {
-  return `<blockquote class="verse" data-ref="${r}" data-tr="${tr(lang).code}"><p${enAttr(lang)}>${text(r, lang)}</p><cite>${cite(r, lang)}</cite></blockquote>`;
+  return `<blockquote class="verse" data-ref="${r}" data-tr="${tr(lang).code}"><p>${text(r, lang)}</p><cite>${cite(r, lang)}</cite></blockquote>`;
 }
 // An inline quote (the browser adds the quotation marks).
 export function Q(r, lang = "en") {
-  return `<q class="v" data-ref="${r}" data-tr="${tr(lang).code}"${enAttr(lang)}>${text(r, lang)}</q>`;
+  return `<q class="v" data-ref="${r}" data-tr="${tr(lang).code}">${text(r, lang)}</q>`;
 }
 // A whole passage, one numbered line per verse.
 export function P(r, lang = "en") {
@@ -53,5 +52,5 @@ export function P(r, lang = "en") {
 export function F(r, phrase, lang = "en") {
   const t = text(r, lang);
   if (!t.includes(phrase)) throw new Error(`NAMED STOP [PHRASE_NOT_IN_VERSE] "${phrase}" is not in ${r} (${tr(lang).code})`);
-  return `<q class="v" data-ref="${r}" data-tr="${tr(lang).code}" data-part="1"${enAttr(lang)}>${phrase}</q>`;
+  return `<q class="v" data-ref="${r}" data-tr="${tr(lang).code}" data-part="1">${phrase}</q>`;
 }
