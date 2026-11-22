@@ -4,11 +4,12 @@
 import { env } from 'cloudflare:test';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { centralDay } from '../src/day';
-import { REVIEW_TRIES_DAILY } from '../src/review';
+import { cleanup } from '../src/cleanup';
+import { REVIEW_TRIES_DAILY, REVIEW_TRIES_PER_INSTALL } from '../src/review';
 import { call, deps, NOW, tokenFor } from './helpers';
 
 const DAY = 86400_000;
-const CODE = '482913';
+const CODE = '4829137065';
 const open = { REVIEW_CODE: CODE, REVIEW_UNTIL: new Date(NOW + 7 * DAY).toISOString().slice(0, 10), REVENUECAT_SECRET_KEY: 'sk_test_review' };
 const iid = (token: string) => JSON.parse(atob(token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'))).iid as string;
 const e = env as unknown as Record<string, unknown>;
@@ -20,18 +21,20 @@ afterEach(async () => {
   set({ REVIEW_CODE: undefined, REVIEW_UNTIL: undefined, REVENUECAT_SECRET_KEY: undefined });
   vi.restoreAllMocks();
   await env.DB.prepare("DELETE FROM chat_counts WHERE metric = 'review_tries'").run();
+  await env.DB.prepare('DELETE FROM review_try_day').run();
 });
 
 describe('store review access', () => {
-  it('is off unless a 6-digit code and a future end date are both set: 404 to everyone, no network call', async () => {
+  it('is off unless a 10-digit code and a future end date are both set: 404 to everyone, no network call', async () => {
     const fetch = revenueCat();
     const token = await tokenFor(deps());
     for (const values of [
       {},
       { REVIEW_CODE: CODE, REVENUECAT_SECRET_KEY: 'sk_x' },
       { REVIEW_UNTIL: open.REVIEW_UNTIL, REVENUECAT_SECRET_KEY: 'sk_x' },
-      { ...open, REVIEW_CODE: '48291' },
-      { ...open, REVIEW_CODE: 'abcdef' },
+      { ...open, REVIEW_CODE: '482913' },
+      { ...open, REVIEW_CODE: '48291370651' },
+      { ...open, REVIEW_CODE: 'abcdefghij' },
       { ...open, REVIEW_UNTIL: new Date(NOW - DAY).toISOString().slice(0, 10) },
       { ...open, REVIEW_UNTIL: 'soon' },
       { ...open, REVENUECAT_SECRET_KEY: undefined },
@@ -66,7 +69,7 @@ describe('store review access', () => {
     set(open);
     const fetch = revenueCat();
     // A fresh install per code: the 5-a-minute burst limit is its own test below.
-    for (const code of ['482914', '48291', '4829133', 482913, null, ' 482913']) expect((await unlock(await tokenFor(deps()), code)).status, String(code)).toBe(403);
+    for (const code of ['4829137066', '482913', '48291370655', 4829137065, null, ' 4829137065']) expect((await unlock(await tokenFor(deps()), code)).status, String(code)).toBe(403);
     expect((await unlock(undefined, CODE)).status).toBe(401);
     expect(fetch).not.toHaveBeenCalled();
   });
@@ -83,19 +86,35 @@ describe('store review access', () => {
     expect((await unlock(token, CODE)).status).toBe(503);
   });
 
-  it(`guessing is capped: ${REVIEW_TRIES_DAILY} tries a day for everyone (even the right code waits), 5 a minute per install`, async () => {
+  it(`guessing is capped per install (${REVIEW_TRIES_PER_INSTALL} a day, 5 a minute), so one person cannot lock the reviewer out; ${REVIEW_TRIES_DAILY} a day for everyone is the backstop`, async () => {
     set(open);
     const fetch = revenueCat();
-    const token = await tokenFor(deps());
-    await env.DB.prepare("INSERT INTO chat_counts (day, metric, n) VALUES (?, 'review_tries', ?) ON CONFLICT(day, metric) DO UPDATE SET n = excluded.n")
-      .bind(centralDay(NOW), REVIEW_TRIES_DAILY).run();
-    expect((await unlock(token, CODE)).status).toBe(429);
-    expect(fetch).not.toHaveBeenCalled();
-    await env.DB.prepare("DELETE FROM chat_counts WHERE metric = 'review_tries'").run();
+    // One install spends its day: the 11th try is refused, even with the right code.
+    const guesser = await tokenFor(deps());
+    const day = centralDay(NOW);
+    await env.DB.prepare('INSERT INTO review_try_day (day, install_id, tries) VALUES (?, ?, ?)').bind(day, iid(guesser), REVIEW_TRIES_PER_INSTALL).run();
+    expect((await unlock(guesser, CODE)).status).toBe(429);
+    // The reviewer's own install is untouched by it.
+    const reviewer = await tokenFor(deps());
+    expect((await unlock(reviewer, CODE)).status).toBe(200);
+    expect(fetch).toHaveBeenCalledTimes(1);
+    // Burst: the 6th try in a minute from one install.
     const other = await tokenFor(deps());
     const statuses: number[] = [];
-    for (let i = 0; i < 6; i++) statuses.push((await unlock(other, '000000')).status);
-    expect(statuses.slice(0, 5)).toEqual([403, 403, 403, 403, 403]);
-    expect(statuses[5]).toBe(429);
+    for (let i = 0; i < 6; i++) statuses.push((await unlock(other, '0000000000')).status);
+    expect(statuses).toEqual([403, 403, 403, 403, 403, 429]);
+    // Backstop: the day's total for everyone.
+    await env.DB.prepare("INSERT INTO chat_counts (day, metric, n) VALUES (?, 'review_tries', ?) ON CONFLICT(day, metric) DO UPDATE SET n = excluded.n").bind(day, REVIEW_TRIES_DAILY).run();
+    expect((await unlock(await tokenFor(deps()), CODE)).status).toBe(429);
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('per-install try counts carry the install id, so they go with the day counters (within 48 hours)', async () => {
+    const day = centralDay(NOW - 2 * DAY);
+    await env.DB.prepare('INSERT INTO review_try_day (day, install_id, tries) VALUES (?, ?, 1)').bind(day, 'old-install').run();
+    await env.DB.prepare('INSERT INTO review_try_day (day, install_id, tries) VALUES (?, ?, 1)').bind(centralDay(NOW), 'today-install').run();
+    expect((await cleanup(env.DB, NOW)).reviewTries).toBe(1);
+    expect(await env.DB.prepare("SELECT 1 FROM review_try_day WHERE install_id = 'old-install'").first()).toBeNull();
+    expect(await env.DB.prepare("SELECT 1 FROM review_try_day WHERE install_id = 'today-install'").first()).not.toBeNull();
   });
 });

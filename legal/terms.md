@@ -6,11 +6,11 @@ Effective: November 21, 2026
 
 Peace Be Still is made by Spry Labs, the trade name of Redwood Reserve Holdings LLC, a Wyoming limited liability company ("we"). These terms are an agreement between you and us.
 
-These terms add to [Apple's Standard Licensed Application End User License Agreement](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/), which applies to your use of the app. If the two differ, Apple's agreement controls for anything it covers. On Android, [Google Play's Terms of Service](https://play.google.com/about/play-terms/) cover how you buy and pay through Google Play. Our [privacy policy](https://peacebestillapp.com/privacy) and [disclaimer](https://peacebestillapp.com/disclaimer) are part of these terms.
+If you get the app from Apple's App Store, these terms add to [Apple's Standard Licensed Application End User License Agreement](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/), which applies to your use of the app. If the two differ, Apple's agreement controls for anything it covers. On Android, [Google Play's Terms of Service](https://play.google.com/about/play-terms/) cover how you buy and pay through Google Play. Our [privacy policy](https://peacebestillapp.com/privacy) and [disclaimer](https://peacebestillapp.com/disclaimer) are part of these terms.
 
 ## Age
 
-You must be at least 13 to use chat. If you are 13 to 17, a parent or guardian must agree to these terms with you. If Ask to Buy is on in Family Sharing, a parent approves each purchase before it goes through. Children under 13 may use the Bible, audio and sleep sessions with a parent's permission; chat is not offered to them.
+You must be at least 13 to use chat. If you are 13 to 17, a parent or guardian must agree to these terms with you. If Ask to Buy is on in Family Sharing, or purchase approval is on in Google Family Link, a parent approves each purchase before it goes through. Children under 13 may use the Bible, audio and sleep sessions with a parent's permission; chat is not offered to them.
 
 ## Free and paid
 
@@ -32,7 +32,7 @@ Chat answers are written by AI and marked AI. They can be wrong, incomplete or u
 
 ## Using the app well
 
-Use the app lawfully. Do not try to get around the daily limits, overload or attack our service, copy the app's stories, audio or sessions to offer them elsewhere, or use chat to harm anyone. We may limit or end access for anyone who does, and chat pauses itself for 24 hours after a flood of messages, repeated messages or attempts to break its rules. Paid chat also has a monthly limit on private AI use per account. After your 50 private messages in a day, or past that monthly limit, or while the paid service is down, you can choose to keep chatting on free chat, which is not private; it never switches without your yes. If free chat is unavailable, you get shorter private answers, up to 50 a day, and after those chat may be busy for a while.
+Use the app lawfully. Do not try to get around the daily limits, overload or attack our service, copy the app's stories, audio or sessions to offer them elsewhere, or use chat to harm anyone. We may limit or end access for anyone who does, and chat pauses itself for 24 hours after a flood of messages, repeated messages or attempts to break its rules. Paid chat also has a monthly limit on private AI use per install. After your 50 private messages in a day, or past that monthly limit, or while the paid service is down, you can choose to keep chatting on free chat, which is not private; it never switches without your yes. If free chat is unavailable, you get shorter private answers, up to 50 a day, and after those chat may be busy for a while.
 
 The King James Version and the Reina-Valera 1909 are in the public domain. The stories, audio, sessions, design and software are ours and are licensed to you for personal, non-commercial use in the app.
 

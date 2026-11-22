@@ -5,7 +5,7 @@
 // Secrets (wrangler secret put, from the Boss OS vault; never in vars):
 //   CHAT_TOKEN_SECRET (32+ bytes), IP_HASH_SECRET (32+ bytes), PBS_GEMINI_API_KEY,
 //   OPENROUTER_API_KEY, REVENUECAT_SECRET_KEY. Optional during a rotation: CHAT_TOKEN_SECRET_PREVIOUS.
-//   Only while a store reviews the app: REVIEW_CODE (6 digits) and REVIEW_UNTIL (end date); see src/review.ts.
+//   Only while a store reviews the app: REVIEW_CODE (10 digits) and REVIEW_UNTIL (end date); see src/review.ts.
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "peace-be-still-chat",

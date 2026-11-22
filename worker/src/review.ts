@@ -1,27 +1,30 @@
 // Store review access. Peace Be Still has no accounts, so a store reviewer (Google Play, App Review) reaches the
-// paid lane with ONE 6-digit code, the same shape as A Player Mode's review sign-in (docs/33-BILLING-PHASE-D.md
+// paid lane with ONE 10-digit code, the same shape as A Player Mode's review sign-in (docs/33-BILLING-PHASE-D.md
 // there), never a free switch in the app.
-// - Off unless BOTH are set: REVIEW_CODE (secret, exactly 6 digits) and REVIEW_UNTIL (var, the date the review
-//   window closes, e.g. "2026-12-05"). Unset, malformed or past: every review route answers 404 and makes no
+// - Off unless BOTH Worker secrets are set: REVIEW_CODE (exactly 10 digits) and REVIEW_UNTIL (the date the
+//   review window closes, e.g. "2026-12-05"). Unset, malformed or past: every review route answers 404 and makes no
 //   network call. Unset both after approval and the path is gone.
 // - On: the app asks GET /api/review (200 means "show the code box"), then POST /api/review/unlock { code } with
 //   its install token. The right code asks RevenueCat to grant this install the paid entitlement for one week;
 //   from then on RevenueCat answers "paid" to the app and to this Worker like any subscriber. Nothing in the app
 //   or here decides paid on its own.
-// - Guessing: the code is compared in constant time; 5 tries a minute per install (REVIEW_BURST) and at most
-//   REVIEW_TRIES_DAILY tries a day for everyone together, taken atomically before the code is compared, after
-//   which the route answers 429 until tomorrow (Central): at most 30 guesses a day out of a million codes.
+// - Guessing: the code is compared in constant time; 5 tries a minute per install (REVIEW_BURST),
+//   REVIEW_TRIES_PER_INSTALL a day per install (review_try_day, so one person cannot use up the reviewer's tries)
+//   and REVIEW_TRIES_DAILY a day for everyone as a backstop, both taken atomically before the code is compared;
+//   past either the route answers 429 until tomorrow (Central). At most 1,000 guesses a day out of 10^10 codes.
 // - RevenueCat down or refusing: 503 "try again", never unlocked.
 import { logCode, reserve } from './counts';
 import { centralDay } from './day';
 
-export const REVIEW_TRIES_DAILY = 30;
+export const REVIEW_TRIES_PER_INSTALL = 10;
+export const REVIEW_TRIES_DAILY = 1000;
+const CODE = /^\d{10}$/;
 const WEEK = 7 * 86400_000;
 
-/** The window is open only with a 6-digit code and a future end date. */
+/** The window is open only with a 10-digit code and a future end date. */
 export function reviewOpen(env: Pick<Env, 'REVIEW_CODE' | 'REVIEW_UNTIL'>, now: number): boolean {
   const until = Date.parse(env.REVIEW_UNTIL ?? '');
-  return /^\d{6}$/.test(env.REVIEW_CODE ?? '') && Number.isFinite(until) && until > now;
+  return CODE.test(env.REVIEW_CODE ?? '') && Number.isFinite(until) && until > now;
 }
 
 async function same(a: string, b: string): Promise<boolean> {
@@ -41,9 +44,13 @@ export async function reviewUnlock(env: Env, installId: string, body: unknown, n
   if (!reviewOpen(env, now)) return closed();
   if (!env.REVENUECAT_SECRET_KEY) { logCode('REVIEW_REVENUECAT_KEY_MISSING'); return closed(); }
   if (!(await env.REVIEW_BURST.limit({ key: installId })).success) return json({ error: 'SLOW_DOWN' }, 429);
-  if (!(await reserve(env.DB, centralDay(now), 'review_tries', REVIEW_TRIES_DAILY))) { logCode('REVIEW_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+  const day = centralDay(now);
+  const mine = await env.DB.prepare('INSERT INTO review_try_day (day, install_id, tries) VALUES (?, ?, 1) ON CONFLICT(day, install_id) DO UPDATE SET tries = tries + 1 WHERE tries < ? RETURNING tries')
+    .bind(day, installId, REVIEW_TRIES_PER_INSTALL).first<{ tries: number }>();
+  if (!mine) { logCode('REVIEW_INSTALL_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+  if (!(await reserve(env.DB, day, 'review_tries', REVIEW_TRIES_DAILY))) { logCode('REVIEW_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
   const code = (body as { code?: unknown } | null)?.code;
-  if (typeof code !== 'string' || !/^\d{6}$/.test(code) || !(await same(code, env.REVIEW_CODE!))) {
+  if (typeof code !== 'string' || !CODE.test(code) || !(await same(code, env.REVIEW_CODE!))) {
     logCode('REVIEW_CODE_WRONG');
     return json({ error: 'WRONG_CODE' }, 403);
   }

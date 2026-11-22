@@ -11,7 +11,7 @@ Short description: Whispered sessions to fall asleep to, a word for morning, and
 Full description:
 A great calm, every night.
 
-Peace Be Still is one quiet place for the end of the day and the start of the next: whispered sessions to fall asleep to, a word for the morning, and someone to talk things through with. A calm bedtime routine, in English or Spanish.
+Peace Be Still is one quiet place for the end of the day and the start of the next: whispered sessions to fall asleep to, a word for the morning, and a calm chat to talk things through. A calm bedtime routine, in English or Spanish.
 
 Choose your way in: God's Word, or mindset & imagination. Each one is its own space, and you can switch any time in Settings.
 

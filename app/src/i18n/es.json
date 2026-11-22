@@ -197,7 +197,7 @@
   "paid.play.pending": "Google Play todavía está confirmando tu compra. Puedes seguir usando la versión gratuita mientras esperas.",
   "paid.play.nothingToRestore": "Google Play no encontró una suscripción activa para restaurar.",
   "review.title": "Código de revisión de la app",
-  "review.intro": "Para quienes revisan la app en la tienda: escribe el código de 6 dígitos de las notas de revisión.",
+  "review.intro": "Para quienes revisan la app en la tienda: escribe el código de 10 dígitos de las notas de revisión.",
   "review.use": "Usar este código",
   "review.wrong": "Ese código no funcionó.",
   "review.slow": "Demasiados intentos. Vuelve a intentarlo más tarde.",

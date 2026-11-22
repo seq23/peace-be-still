@@ -197,7 +197,7 @@
   "paid.play.pending": "Google Play is still confirming your purchase. You can keep using the free version while you wait.",
   "paid.play.nothingToRestore": "Google Play didn’t find an active subscription to restore.",
   "review.title": "App review code",
-  "review.intro": "For store reviewers: type the 6-digit code from the review notes.",
+  "review.intro": "For store reviewers: type the 10-digit code from the review notes.",
   "review.use": "Use this code",
   "review.wrong": "That code didn’t work.",
   "review.slow": "Too many tries. Please try again later.",

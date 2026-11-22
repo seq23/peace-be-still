@@ -171,13 +171,14 @@ export default function PaidScreen() {
         <TextLink onPress={() => open(site + (spanish ? '/es/privacidad' : '/privacy'))}>{t('paid.privacy')}</TextLink>
       </View>
       {linkFailed ? <Body size={14}>{t('paid.linkFailed')}</Body> : null}
-      {store && !paid ? <ReviewCode redeem={redeem} /> : null}
+      {/* Google Play's reviewer only: App Review buys in the sandbox, and Apple forbids an own unlock (3.1.1). */}
+      {Platform.OS === 'android' && store && !paid ? <ReviewCode redeem={redeem} /> : null}
       <Body size={13}>{t(shop.charge)}</Body>
     </Screen>
   );
 }
 
-/** Store reviewers only: shown while the server says a review window is open (GET /api/review answers 200), so a
+/** Google Play's reviewer only (Android): shown while the server says a review window is open (GET /api/review answers 200), so a
  *  person using the app never sees it. The code goes to the server; RevenueCat grants the plan (worker/src/review.ts). */
 function ReviewCode({ redeem }: { redeem: (code: string) => Promise<ReviewResult> }) {
   const t = useT('journey');
@@ -193,7 +194,7 @@ function ReviewCode({ redeem }: { redeem: (code: string) => Promise<ReviewResult
   }, []);
   if (!open) return null;
   const send = async () => {
-    if (busy || !/^\d{6}$/.test(code)) return;
+    if (busy || !/^\d{10}$/.test(code)) return;
     setBusy(true);
     setResult(null);
     const answer = await redeem(code);
@@ -205,10 +206,10 @@ function ReviewCode({ redeem }: { redeem: (code: string) => Promise<ReviewResult
     <Card style={{ gap: 8 }}>
       <Body size={15} muted={false}>{t('review.title')}</Body>
       <Body size={14}>{t('review.intro')}</Body>
-      <TextInput accessibilityLabel={t('review.title')} keyboardType="number-pad" inputMode="numeric" maxLength={6} value={code}
+      <TextInput accessibilityLabel={t('review.title')} keyboardType="number-pad" inputMode="numeric" maxLength={10} value={code}
         onChangeText={value => setCode(value.replace(/\D/g, ''))} onSubmitEditing={() => { void send(); }}
         style={{ fontFamily: fonts.mono, fontSize: 17, color: c.ink, backgroundColor: c.card, borderColor: problem ? c.wine : c.line, borderWidth: 1, borderRadius: 14, padding: 12, outlineColor: c.accent }} />
-      <TextLink disabled={busy || code.length !== 6} onPress={() => { void send(); }}>{t('review.use')}</TextLink>
+      <TextLink disabled={busy || code.length !== 10} onPress={() => { void send(); }}>{t('review.use')}</TextLink>
       {problem ? <Text accessibilityRole="alert" style={{ fontFamily: fonts.body, fontSize: 14, color: c.wine }}>{t(problem)}</Text> : null}
     </Card>
   );

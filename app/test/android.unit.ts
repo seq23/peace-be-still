@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import config, { androidStoreKeyStop } from '../app.config';
 import products from '../src/config/products.json';
-import { FORBIDDEN, manifestIssues } from '../scripts/android/check-aab.mjs';
+import { FORBIDDEN, keyIssues, manifestIssues } from '../scripts/android/check-aab.mjs';
 import { trackIssues } from '../scripts/android/play-track.mjs';
 
 const KEY = 'goog_AbCdEfGh12345678';
@@ -43,7 +43,18 @@ test('the workflow is manual only, one at a time, time-boxed, never uploads the 
   assert.match(yml, /^concurrency:\n  #[^\n]*\n  group: android-store-build\n  cancel-in-progress: false/m);
   assert.match(yml, /timeout-minutes: \d+/);
   assert.doesNotMatch(yml, /upload-artifact|actions\/cache/);
-  assert.match(yml, /if: always\(\)\n\s+run: rm -f play-sa\.json/);
+  assert.match(yml, /if: always\(\)\n\s+working-directory: \.\n\s+run: rm -f app\/play-sa\.json/);
+  // No secret at job level: each one only on the steps that need it.
+  const jobEnv = yml.split(/\n    steps:\n/)[0].split(/\n    env:\n/)[1] ?? '';
+  assert.doesNotMatch(jobEnv, /secrets\./);
+  const steps = yml.split(/\n      - /).slice(1);
+  const using = (secret: string) => steps.filter(st => st.includes(`secrets.${secret}`)).map(st => st.match(/name: (.+)/)?.[1] ?? st.split('\n')[0]);
+  assert.deepEqual(using('EXPO_TOKEN'), ['Secrets present', 'Build the App Bundle (eas build --local)', 'Upload to the internal track as a draft (eas submit)']);
+  assert.deepEqual(using('GOOGLE_PLAY_UPLOAD_SA_JSON'), ['Secrets present', 'Play key file']);
+  // The key file is written after the build and the bundle check, right before the upload.
+  const order = steps.map(st => st.match(/name: (.+)/)?.[1] ?? '');
+  assert.equal(order.indexOf('Play key file'), order.indexOf('Upload to the internal track as a draft (eas submit)') - 1);
+  assert.ok(order.indexOf('Play key file') > order.indexOf('Check the bundle (package, versionCode, signature, permissions)'));
   assert.match(yml, /--profile internal --local --non-interactive/);
   assert.match(yml, /play-track\.mjs play-sa\.json com\.peacebestillapp\.mobile/);
 });
@@ -62,6 +73,13 @@ test('the Android app blocks every permission it does not use, and the bundle ch
   assert.match(manifestIssues(good.replace('com.peacebestillapp.mobile', 'com.example')).issues[0], /^AAB_WRONG_PACKAGE/);
   assert.match(manifestIssues(good.replace(/<uses-permission android:name="com.android.vending.BILLING"\/>/, '')).issues[0], /^AAB_NO_BILLING/);
   assert.match(manifestIssues(good.replace(' android:versionCode="7"', '')).issues[0], /^AAB_NO_VERSION_CODE/);
+  // Signed by the EAS-held upload key only (the workflow's UPLOAD_SHA1).
+  const baseline = readFileSync(new URL('../../.github/workflows/android-store-build.yml', import.meta.url), 'utf8').match(/UPLOAD_SHA1: ([0-9A-F:]{59})/)?.[1];
+  assert.ok(baseline);
+  assert.deepEqual(keyIssues(baseline, baseline), []);
+  assert.match(keyIssues('00:' + baseline!.slice(3), baseline)[0], /^AAB_WRONG_UPLOAD_KEY/);
+  assert.match(keyIssues(undefined, baseline)[0], /^AAB_UNSIGNED/);
+  assert.match(keyIssues(baseline, undefined)[0], /^AAB_NO_KEY_BASELINE/);
 });
 
 test('the upload is proven only by a draft on the internal track, and fails red on anything else', () => {

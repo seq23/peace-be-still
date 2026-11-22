@@ -1,5 +1,5 @@
 // The hourly cron keeps the privacy policy's promises (test/privacy-promises.test.ts):
-// - counters (device, IP hash, token issue): deleted the first run after their Central day ends,
+// - counters (device, IP hash, token issue, store review tries): deleted the first run after their Central day ends,
 //   with an hour's grace for a reply still in flight, so at most ~26 hours old (policy: within 48);
 // - the entitlement cache and her install's answer shapes (keyed hashes, quality/variety.ts) carry
 //   the install id, so they go with the counters: within 48 hours;
@@ -30,11 +30,12 @@ export async function cleanup(db: D1Database, now: number): Promise<Record<strin
     db.prepare('DELETE FROM chat_crisis WHERE flagged_at < ?').bind(now - 2 * 86_400_000),
     db.prepare('DELETE FROM chat_paid_spend WHERE paid_until < ? OR month < ?').bind(now - 30 * DAY, new Date(now - 40 * DAY).toISOString().slice(0, 7)),
     db.prepare('DELETE FROM chat_short_day WHERE day < ?').bind(ended),
+    db.prepare('DELETE FROM review_try_day WHERE day < ?').bind(ended),
     // The first private chat: the IP hash goes after the day. The conversation id (random) stays for the row's life,
     // so that conversation never carries its private turns to free chat on a later day (review 21 Nov 2026).
     db.prepare('UPDATE chat_first_private SET ip_hash = NULL WHERE day < ? AND ip_hash IS NOT NULL').bind(ended),
     db.prepare('DELETE FROM chat_first_private WHERE decided_at < ?').bind(now - FIRST_PRIVATE_KEEP_DAYS * DAY),
   ]);
-  const [device, ip, token, entitlement, memory, installShapes, shapes, reports, abuse, blocks, crisis, spend, short, firstCleared, firstDeleted] = results.map(r => r.meta.changes ?? 0);
-  return { device, ip, token, entitlement, memory, shapes: installShapes + shapes, reports, abuse, blocks, crisis, spend, short, firstCleared, firstDeleted };
+  const [device, ip, token, entitlement, memory, installShapes, shapes, reports, abuse, blocks, crisis, spend, short, reviewTries, firstCleared, firstDeleted] = results.map(r => r.meta.changes ?? 0);
+  return { device, ip, token, entitlement, memory, shapes: installShapes + shapes, reports, abuse, blocks, crisis, spend, short, reviewTries, firstCleared, firstDeleted };
 }

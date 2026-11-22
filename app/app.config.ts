@@ -33,7 +33,7 @@ const config: ExpoConfig = {
   ios: { bundleIdentifier: 'com.peacebestillapp.mobile', infoPlist: { ITSAppUsesNonExemptEncryption: false } },
   android: {
     package: 'com.peacebestillapp.mobile',
-    // The dark tile: the mark (scripts/android/adaptive-icon.mjs) on the night colour, masked by the launcher.
+    // The dark tile: the approved mark (assets/brand/pbs-mark-dark.svg, rendered with resvg: docs/OPERATIONS.md) on the night colour.
     adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#0E1A22' },
     // Nothing in the app records, writes shared storage or draws over other apps. The Play Data safety answers
     // and the privacy policy rely on these staying out (the store build workflow checks the AAB's manifest).

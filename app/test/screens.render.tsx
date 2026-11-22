@@ -1829,6 +1829,13 @@ test('a store reviewer\'s code opens the paid plan only when the server and Reve
     await settle();
     assert.doesNotMatch(strings(tree), /App review code/);
     await closePaid(tree);
+    // An iPhone never shows it, even while a Play review window is open (App Store Guideline 3.1.1).
+    reviewWindow = true;
+    tree = await mountPaid();
+    await settle();
+    assert.doesNotMatch(strings(tree), /App review code/);
+    assert.equal(host(tree, 'TextInput').length, 0);
+    await closePaid(tree);
 
     reviewWindow = true;
     reviewCodes.length = 0;
@@ -1837,11 +1844,11 @@ test('a store reviewer\'s code opens the paid plan only when the server and Reve
       await settle();
       assert.match(strings(tree), /App review code/);
       const code = (value: string) => act(async () => host(tree, 'TextInput').find(n => n.props.accessibilityLabel === 'App review code')!.props.onChangeText(value));
-      await code('12a34');
-      assert.equal(host(tree, 'Pressable').find(n => /Use this code/.test(textOf(n)))!.props.disabled, true, 'only 6 digits can be sent');
+      await code('12a3456789');
+      assert.equal(host(tree, 'Pressable').find(n => /Use this code/.test(textOf(n)))!.props.disabled, true, 'only 10 digits can be sent');
       const attempt = async (answer: () => Response | Promise<Response>, expected: RegExp | null) => {
         reviewAnswer = answer;
-        await code('482913');
+        await code('4829137065');
         await press(tree, /Use this code/);
         if (expected) assert.match(strings(tree), expected);
       };
@@ -1855,7 +1862,7 @@ test('a store reviewer\'s code opens the paid plan only when the server and Reve
       await attempt(() => { storePaid = true; return Response.json({ unlocked: true }); }, /paid access is active/);
       assert.equal(gate(tree), 'true true');
       assert.doesNotMatch(strings(tree), /App review code/);
-      assert.deepEqual(reviewCodes, Array(6).fill('482913'));
+      assert.deepEqual(reviewCodes, Array(6).fill('4829137065'));
       assert.ok(fakePurchaseCalls.includes('render-install'), 'the store is logged in as the install that got the grant');
       assert.ok(fakePurchaseCalls.includes('invalidate'), 'RevenueCat is asked again, not its cache');
     } finally { await closePaid(tree); }
