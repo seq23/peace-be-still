@@ -65,8 +65,12 @@ jobs:
           fi
           echo "bible=$bible" >> "$GITHUB_OUTPUT"
           echo "stories=$stories" >> "$GITHUB_OUTPUT"
-          if [ "$bible" = "[]" ] && [ "$stories" = "[]" ] && [ -z "$ONLY$STORY" ]; then
-            echo "NOTE FILL_COMPLETE the cloud's share of the library is voiced and on Drive; this workflow switches itself off"
+          complete=$(python -c 'import json,sys; print(json.loads(sys.argv[1])["complete"])' "$plan")
+          if [ "$bible" = "[]" ] && [ "$stories" = "[]" ] && [ -z "$ONLY$STORY" ] && [ "$complete" != True ]; then
+            echo "NOTE CLOUD_SHARE_DONE the cloud's share is voiced; the Mac's share is still going, so the fill is not complete yet"
+          fi
+          if [ "$complete" = True ] && [ -z "$ONLY$STORY" ]; then
+            echo "NOTE FILL_COMPLETE the whole library (every lane) is voiced and on Drive; this workflow switches itself off"
             if [ -n "$BOSS_OPEN_LOOPS_TOKEN" ]; then
               curl -fsS -o /dev/null -X POST https://boss.sequoiataylor.com/api/boss/open-loops/intake \
                 -H "authorization: Bearer $BOSS_OPEN_LOOPS_TOKEN" -H "content-type: application/json" \

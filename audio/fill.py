@@ -578,11 +578,21 @@ def write_active(path: Path, now: dt.datetime, end: dt.datetime | None) -> None:
     tmp.replace(path)
 
 
-def settle_active(active: Path, items: list[dict], rows: list[dict], now: dt.datetime) -> bool:
-    """End of a run: priorities 1-2 all in the manifest -> the record is marked "complete": <date> and
-    KEPT (True when it was just marked): the YouTube channels restart only after the owner approves their
-    overhaul (Open Loops), and the How We Know gate reads a present file as paused. Otherwise refresh it."""
-    if census(items, rows)["complete"]:
+def whole_fill_done(items: list[dict], rows: list[dict], stories: list[dict] | None = None) -> bool:
+    """The WHOLE fill (owner: YouTube waits for all of it): every file of every priority and every Hush
+    Harbor story passed or out of tries, whichever lane voiced it."""
+    import hush_harbor as H
+    stories = H.load_stories() if stories is None else stories
+    return not todo(items, rows) and not H.todo(stories, rows)
+
+
+def settle_active(active: Path, items: list[dict], rows: list[dict], now: dt.datetime,
+                  stories: list[dict] | None = None) -> bool:
+    """End of a run. The fill NEVER removes this file (How We Know reads its removal as the only unpause
+    signal; owner: YouTube stays paused until the whole fill is done AND she approves the overhaul). When
+    the whole fill is done the record is marked "complete": <date> and kept (True when it was just
+    marked); the cloud plan job posts the Open Loops row. Otherwise it is refreshed."""
+    if whole_fill_done(items, rows, stories):
         try:
             body = json.loads(active.read_text())
         except Exception:
@@ -970,7 +980,7 @@ def cloud_plan(items: list[dict], rows: list[dict], cfg: dict, jobs: int) -> dic
     the census. "done" when nothing is left for the cloud. Pure."""
     q = [i for i in todo(items, rows) if lane_of(i, cfg) == "cloud"]
     n = min(jobs, -(-len(q) // CLOUD_FILES_PER_JOB)) if q else 0
-    return {"bible": [f"{k}/{n}" for k in range(n)], "left": len(q), "complete": census(items, rows)["complete"]}
+    return {"bible": [f"{k}/{n}" for k in range(n)], "left": len(q), "complete": whole_fill_done(items, rows)}
 
 
 def main(argv=None) -> int:

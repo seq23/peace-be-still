@@ -238,17 +238,27 @@ class ActiveFlag(unittest.TestCase):
         items = fill.plan(bibles())
         with tempfile.TemporaryDirectory() as d:
             flag = Path(d) / "library-fill.active"
-            self.assertFalse(fill.settle_active(flag, items, [], NOW))
+            self.assertFalse(fill.settle_active(flag, items, [], NOW, stories=[]))
             body = json.loads(flag.read_text())
             self.assertTrue(body["started"] and body["reason"])
             later = NOW + dt.timedelta(hours=3)
-            fill.settle_active(flag, items, [], later)
+            fill.settle_active(flag, items, [], later, stories=[])
             self.assertEqual(json.loads(flag.read_text())["started"], body["started"])  # start kept
             rows = [{"file": i["file"], "status": "passed"} for i in items]
-            self.assertTrue(fill.settle_active(flag, items, rows, later))
+            self.assertTrue(fill.settle_active(flag, items, rows, later, stories=[]))
             # Kept (YouTube restarts only after the owner approves the overhaul), marked with the date.
             self.assertEqual(json.loads(flag.read_text())["complete"], later.date().isoformat())
-            self.assertFalse(fill.settle_active(flag, items, rows, later + dt.timedelta(days=1)))   # told once
+            self.assertFalse(fill.settle_active(flag, items, rows, later + dt.timedelta(days=1), stories=[]))   # told once
+            self.assertTrue(flag.exists())
+
+    def test_a_story_left_keeps_the_fill_open_and_the_file_never_goes(self):
+        items = fill.plan(bibles())
+        rows = [{"file": i["file"], "status": "passed"} for i in items]
+        story = C.H.load_stories()[:1]
+        with tempfile.TemporaryDirectory() as d:
+            flag = Path(d) / "library-fill.active"
+            self.assertFalse(fill.settle_active(flag, items, rows, NOW, stories=story))
+            self.assertNotIn("complete", json.loads(flag.read_text()))
             self.assertTrue(flag.exists())
 
 
@@ -281,7 +291,8 @@ class Lanes(unittest.TestCase):
         self.assertEqual(p["bible"], [f"{k}/{n}" for k in range(n)])
         self.assertEqual(len(fill.cloud_plan(items, [], cfg, 1)["bible"]), 1)   # capped at the jobs asked
         done = [{"file": i["file"], "status": "passed"} for i in items]
-        self.assertEqual(fill.cloud_plan(items, done, cfg, 12), {"bible": [], "left": 0, "complete": True})
+        with mock.patch.object(fill, "whole_fill_done", return_value=True):
+            self.assertEqual(fill.cloud_plan(items, done, cfg, 12), {"bible": [], "left": 0, "complete": True})
 
 
 class Gather(unittest.TestCase):
