@@ -251,6 +251,13 @@ class ActiveFlag(unittest.TestCase):
             self.assertFalse(fill.settle_active(flag, items, rows, later + dt.timedelta(days=1), stories=[]))   # told once
             self.assertTrue(flag.exists())
 
+    def test_expected_end_from_measured_speed(self):
+        items = fill.plan(bibles())
+        rows = [{"file": items[0]["file"], "status": "passed", "work_s": 100, "checks": {"words": 100}}]
+        end = fill.expected_end(items, rows, NOW)
+        left = sum(len(T.score_words(fill.script_of(i), i["lang"])) for i in items[1:])
+        self.assertEqual(end, NOW + dt.timedelta(seconds=left))
+
     def test_a_story_left_keeps_the_fill_open_and_the_file_never_goes(self):
         items = fill.plan(bibles())
         rows = [{"file": i["file"], "status": "passed"} for i in items]
