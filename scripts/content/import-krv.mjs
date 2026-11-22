@@ -2,109 +2,91 @@
 // Imports 개역한글판 (the Korean Revised Version, 대한성서공회 번역, 1961) into the repo's verse-per-line
 // store, content/bible/krv_vpl.txt.gz, the same shape as the KJV and RV1909 files.
 //
-// Why this source: the Korean Bible Society's own copyright table lists 개역한글판 (1961) as expired on
+// Why this text: the Korean Bible Society's own copyright table lists 개역한글판 (1961) as expired on
 // 31 Dec 2011 (bskorea.or.kr subpage2_3_4_1, read 21 Nov 2026), and its one condition is integrity and
-// attribution: the text unaltered, credited as 개역한글판 (대한성서공회 번역, 1961). Korean Wikisource
-// publishes it book by book under that name (ko.wikisource.org/wiki/개역한글판). eBible's "kor" file is
-// NOT used: it is the same wording with changed punctuation ("여호와여, 아침에" for "여호와여 아침에",
-// "깰지어다 !"), so it is not word for word.
+// attribution: the text unaltered, credited as 개역한글판 (대한성서공회 번역, 1961).
+// Why this source: the Society's own online reader (version=HAN), so the words are the publisher's, in
+// the 1961 spelling ("볼찌어다", "세례"). Two other copies were rejected on 21 Nov 2026: eBible's "kor"
+// changes the punctuation, and Korean Wikisource's 개역한글판 is a modified edition ("침례" for "세례"
+// 83 times, modernised spelling, words changed in JER 33 and LAM 3, Psalm 72:20 merged).
+// Only verse text is kept: psalm titles, headings and footnotes (the reader's popup notes) are not.
 //
-// Each book is read at a pinned revision (content/bible/krv_source.json records title, revid and the
-// sha256 of the stored file), so a rerun is reproducible and a changed wiki page cannot slip in unseen.
-// Run: node scripts/content/import-krv.mjs            (fetch the latest revisions and rewrite both files)
-//      node scripts/content/import-krv.mjs --pinned   (re-fetch the recorded revisions; must reproduce the hash)
+// Run: node scripts/content/import-krv.mjs   (about 20 minutes: 1,189 chapters, one request at a time)
+// It writes the store and content/bible/krv_source.json (verse count, sha256, the fetch date).
 import { writeFileSync, readFileSync } from "node:fs";
-import { gzipSync } from "node:zlib";
+import { gzipSync, gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { CONTENT } from "./lib.mjs";
 
-const API = "https://ko.wikisource.org/w/api.php";
-const UA = "peace-be-still-scripture-import/1.0 (word-for-word Bible store)";
-export const KRV_BOOKS = [
-  ["GEN", "창세기"], ["EXO", "출애굽기"], ["LEV", "레위기"], ["NUM", "민수기"], ["DEU", "신명기"], ["JOS", "여호수아"],
-  ["JDG", "사사기"], ["RUT", "룻기"], ["1SA", "사무엘상"], ["2SA", "사무엘하"], ["1KI", "열왕기상"], ["2KI", "열왕기하"],
-  ["1CH", "역대상"], ["2CH", "역대하"], ["EZR", "에스라"], ["NEH", "느헤미야"], ["EST", "에스더"], ["JOB", "욥기"],
-  ["PSA", "시편"], ["PRO", "잠언"], ["ECC", "전도서"], ["SOL", "아가"], ["ISA", "이사야"], ["JER", "예레미야"],
-  ["LAM", "예레미야애가"], ["EZE", "에스겔"], ["DAN", "다니엘"], ["HOS", "호세아"], ["JOE", "요엘"], ["AMO", "아모스"],
-  ["OBA", "오바댜"], ["JON", "요나"], ["MIC", "미가"], ["NAH", "나훔"], ["HAB", "하박국"], ["ZEP", "스바냐"],
-  ["HAG", "학개"], ["ZEC", "스가랴"], ["MAL", "말라기"], ["MAT", "마태복음"], ["MAR", "마가복음"], ["LUK", "누가복음"],
-  ["JOH", "요한복음"], ["ACT", "사도행전"], ["ROM", "로마서"], ["1CO", "고린도전서"], ["2CO", "고린도후서"],
-  ["GAL", "갈라디아서"], ["EPH", "에베소서"], ["PHI", "빌립보서"], ["COL", "골로새서"], ["1TH", "데살로니가전서"],
-  ["2TH", "데살로니가후서"], ["1TI", "디모데전서"], ["2TI", "디모데후서"], ["TIT", "디도서"], ["PHM", "빌레몬서"],
-  ["HEB", "히브리서"], ["JAM", "야고보서"], ["1PE", "베드로전서"], ["2PE", "베드로후서"], ["1JO", "요한1서"],
-  ["2JO", "요한2서"], ["3JO", "요한3서"], ["JUD", "유다서"], ["REV", "요한계시록"],
-];
+const READER = "https://www.bskorea.or.kr/bible/korbibReadpage.php?version=HAN";
+const UA = "Mozilla/5.0 (peace-be-still scripture import; one request at a time)";
+// Repo book code → the reader's book code.
+export const KBS_BOOK = {
+  GEN: "gen", EXO: "exo", LEV: "lev", NUM: "num", DEU: "deu", JOS: "jos", JDG: "jdg", RUT: "rut", "1SA": "1sa",
+  "2SA": "2sa", "1KI": "1ki", "2KI": "2ki", "1CH": "1ch", "2CH": "2ch", EZR: "ezr", NEH: "neh", EST: "est", JOB: "job",
+  PSA: "psa", PRO: "pro", ECC: "ecc", SOL: "sng", ISA: "isa", JER: "jer", LAM: "lam", EZE: "ezk", DAN: "dan", HOS: "hos",
+  JOE: "jol", AMO: "amo", OBA: "oba", JON: "jnh", MIC: "mic", NAH: "nam", HAB: "hab", ZEP: "zep", HAG: "hag",
+  ZEC: "zec", MAL: "mal", MAT: "mat", MAR: "mrk", LUK: "luk", JOH: "jhn", ACT: "act", ROM: "rom", "1CO": "1co",
+  "2CO": "2co", GAL: "gal", EPH: "eph", PHI: "php", COL: "col", "1TH": "1th", "2TH": "2th", "1TI": "1ti", "2TI": "2ti",
+  TIT: "tit", PHM: "phm", HEB: "heb", JAM: "jas", "1PE": "1pe", "2PE": "2pe", "1JO": "1jn", "2JO": "2jn", "3JO": "3jn",
+  JUD: "jud", REV: "rev",
+};
 
-// Wikitext of one book → [[chapter, verse, text], ...]. Chapters are "== N장 ==" headings; verses are
-// {{절|C|}} (chapter C, verse 1), {{절|C|V}} or {{절||V}}. Only markup is removed; words are kept.
-export function parseBook(wikitext, code = "?") {
+const ENT = { "&nbsp;": " ", "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#39;": "'" };
+// One chapter page → [[verse, text], ...]. Each verse is <span><span class="number">N&nbsp;…</span>…</span>;
+// footnote markers (<a class=comment>…</a>) and their popups (<div class=D2>…</div>) are removed, then
+// every tag; the words are kept exactly. Pure.
+export function parseChapter(html, where = "?") {
+  const body = html.slice(html.indexOf('id="tdBible1"'));
+  if (body.length < 20) throw new Error(`NAMED STOP [KRV_PARSE] ${where}: no reader text`);
   const out = [];
-  let chapter = 0;
-  for (const raw of wikitext.split("\n")) {
-    const h = raw.match(/^==\s*(\d+)\s*장\s*==\s*$/);
-    if (h) { chapter = Number(h[1]); continue; }
-    const m = raw.match(/^\{\{절\|(\d*)\|(\d*)\}\}\s*(.*)$/);
-    if (!m) continue;
-    if (m[1]) chapter = Number(m[1]);
-    const verse = m[2] ? Number(m[2]) : 1;
-    if (!chapter) throw new Error(`NAMED STOP [KRV_PARSE] ${code}: a verse before any chapter`);
-    out.push([chapter, verse, clean(m[3])]);
+  const re = /<span class="number">(\d+)(?:&nbsp;)*\s*<\/span>([\s\S]*?)(?=<span(?: style="[^"]*")?><span class="number">|<\/div>\s*<\/div>|$)/g;
+  for (const m of body.matchAll(re)) {
+    const text = m[2]
+      .replace(/<a class=comment[\s\S]*?<\/a>/g, "")
+      .replace(/<div[^>]*class=D2[\s\S]*?<\/div>/g, "")
+      .replace(/<[^>]+>/g, "")
+      .replace(/&[a-z#0-9]+;/g, (e) => ENT[e] ?? e)
+      .replace(/\s+/g, " ")
+      .trim();
+    out.push([Number(m[1]), text]);
   }
+  if (!out.length) throw new Error(`NAMED STOP [KRV_PARSE] ${where}: no verses`);
   return out;
 }
-export function clean(s) {
-  return s
-    .replace(/<ref[^>]*\/>|<ref[^>]*>[\s\S]*?<\/ref>/g, "")
-    .replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1")
-    .replace(/'''?/g, "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
-async function fetchBook(title, revid) {
-  const q = revid
-    ? `action=query&prop=revisions&revids=${revid}&rvprop=ids|content&rvslots=main&format=json&formatversion=2`
-    : `action=query&prop=revisions&titles=${encodeURIComponent(title)}&rvprop=ids|content&rvslots=main&format=json&formatversion=2`;
-  let res;
-  // Wikisource asks bots to go slowly: one request at a time, and back off on 429.
+async function page(book, chap) {
   for (let attempt = 0; attempt < 6; attempt++) {
-    res = await fetch(`${API}?${q}`, { headers: { "user-agent": UA } });
-    if (res.status !== 429) break;
+    const res = await fetch(`${READER}&book=${book}&chap=${chap}`, { headers: { "user-agent": UA } });
+    if (res.ok) return res.text();
+    if (res.status !== 429 && res.status < 500) throw new Error(`NAMED STOP [KRV_FETCH] ${book} ${chap}: HTTP ${res.status}`);
     await new Promise((r) => setTimeout(r, 5000 * 2 ** attempt));
   }
-  if (!res.ok) throw new Error(`NAMED STOP [KRV_FETCH] ${title}: HTTP ${res.status}`);
-  const page = (await res.json()).query?.pages?.[0];
-  const rev = page?.revisions?.[0];
-  if (!rev?.slots?.main?.content) throw new Error(`NAMED STOP [KRV_FETCH] ${title}: no content`);
-  return { revid: rev.revid, text: rev.slots.main.content };
+  throw new Error(`NAMED STOP [KRV_FETCH] ${book} ${chap}: gave up after 6 tries`);
 }
 
 async function main() {
-  const pinnedPath = join(CONTENT, "bible", "krv_source.json");
-  const pinned = process.argv.includes("--pinned") ? JSON.parse(readFileSync(pinnedPath, "utf8")) : null;
+  // Chapter counts from the stored KJV (the same 66 books and, chapter for chapter, the same chapters).
+  const kjv = gunzipSync(readFileSync(join(CONTENT, "bible", "kjv_vpl.txt.gz"))).toString("utf8");
+  const chapters = {};
+  for (const m of kjv.matchAll(/^([1-4A-Z]{3}) (\d+):/gm)) chapters[m[1]] = Math.max(chapters[m[1]] || 0, +m[2]);
   const lines = [];
-  const books = [];
-  for (const [code, name] of KRV_BOOKS) {
-    const title = `개역한글판/${name}`;
-    const { revid, text } = await fetchBook(title, pinned?.books.find((b) => b.code === code)?.revid);
-    const verses = parseBook(text, code);
-    if (!verses.length) throw new Error(`NAMED STOP [KRV_EMPTY] ${title} has no verses`);
-    for (const [c, v, t] of verses) lines.push(`${code} ${c}:${v} ${t}`);
-    books.push({ code, title, revid, verses: verses.length });
-    await new Promise((r) => setTimeout(r, 1500));
+  for (const [code, book] of Object.entries(KBS_BOOK)) {
+    for (let c = 1; c <= chapters[code]; c++) {
+      for (const [v, t] of parseChapter(await page(book, c), `${code} ${c}`)) lines.push(`${code} ${c}:${v} ${t}`);
+      await new Promise((r) => setTimeout(r, 700));
+    }
   }
   if (lines.length < 31000) throw new Error(`NAMED STOP [KRV_SHORT] only ${lines.length} verses`);
   const body = lines.join("\n") + "\n";
   const sha256 = createHash("sha256").update(body).digest("hex");
-  if (pinned && pinned.sha256 !== sha256) throw new Error(`NAMED STOP [KRV_DRIFT] pinned revisions gave ${sha256}, recorded ${pinned.sha256}`);
   writeFileSync(join(CONTENT, "bible", "krv_vpl.txt.gz"), gzipSync(Buffer.from(body), { level: 9, mtime: 0 }));
-  writeFileSync(pinnedPath, JSON.stringify({
-    name: "개역한글판", credit: "개역한글판 (대한성서공회 번역, 1961)", source: "https://ko.wikisource.org/wiki/개역한글판",
+  writeFileSync(join(CONTENT, "bible", "krv_source.json"), JSON.stringify({
+    name: "개역한글판", credit: "개역한글판 (대한성서공회 번역, 1961)", source: `${READER}&book=<book>&chap=<chapter>`,
     status: "Korean Bible Society: copyright term expired 2011-12-31 (bskorea.or.kr/bbs/content.php?co_id=subpage2_3_4_1, read 2026-11-21)",
-    verses: lines.length, sha256, books,
+    fetched: new Date().toISOString().slice(0, 10), verses: lines.length, sha256,
   }, null, 1) + "\n");
-  console.log(`OUTPUT import-krv: ${lines.length} verses in ${books.length} books, sha256 ${sha256.slice(0, 12)}`);
+  console.log(`OUTPUT import-krv: ${lines.length} verses, sha256 ${sha256.slice(0, 12)}`);
 }
 if (import.meta.url === `file://${process.argv[1]}`) main().catch((e) => { console.error(e.message); process.exit(1); });

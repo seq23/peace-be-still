@@ -1,7 +1,7 @@
 // Shared helpers for the launch library: the stored Bibles, references, word counts.
 // Scripture is never typed by a person or a model: every verse in content/ is read
 // from content/bible/*.txt.gz (eBible.org KJV and Reina-Valera 1909, both public domain; 개역한글판 1961,
-// whose Korean term the Korean Bible Society lists as expired, imported by scripts/content/import-krv.mjs).
+// from the Korean Bible Society's own reader; its Korean term is listed as expired; scripts/content/import-krv.mjs).
 import { readFileSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
@@ -42,9 +42,7 @@ const cache = {};
 // The one display rule: KJV/RV [bracketed] words (added by the translators) are shown
 // without the brackets; the pilcrow is dropped; a chapter's all-capital opening word
 // (a drop-cap convention in the RV1909 file, e.g. "EN el principio") takes normal case.
-export function display(raw, tr = "KJV") {
-  // 개역한글 brackets mark a psalm's title ("[다윗의 시]"), printed with the verse: kept as printed.
-  if (tr === "KRV") return raw.replace(/\s+/g, " ").trim();
+export function display(raw) {
   let t = raw.replace(/¶\s*/g, "").replace(/[[\]]/g, "").replace(/\s+/g, " ").trim();
   t = t.replace(/^([¡¿]?)([A-ZÁÉÍÓÚÑ])([A-ZÁÉÍÓÚÑ]+)(?=[\s,.;:!?])/u, (m, p, a, b) =>
     (a + b === "LORD" || a + b === "GOD" ? m : p + a + b.toLowerCase()));
@@ -57,7 +55,7 @@ export function bible(tr) {
   const map = new Map();
   for (const line of txt.split("\n")) {
     const m = line.match(/^([1-4A-Z]{3}) (\d+):(\d+) (.*)$/);
-    if (m && m[4].trim()) map.set(`${m[1]} ${m[2]}:${m[3]}`, display(m[4], tr));
+    if (m && m[4].trim()) map.set(`${m[1]} ${m[2]}:${m[3]}`, display(m[4]));
   }
   if (map.size < 30000) throw new Error(`BIBLE_INCOMPLETE ${tr} has ${map.size} verses`);
   return (cache[tr] = map);
