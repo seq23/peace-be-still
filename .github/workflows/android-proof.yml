@@ -29,7 +29,7 @@ jobs:
           REVIEW_CODE: ${{ secrets.PBS_PLAY_REVIEW_CODE }}
         with:
           api-level: 34
-          target: google_apis_playstore
+          target: google_apis
           arch: x86_64
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
