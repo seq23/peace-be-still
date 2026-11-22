@@ -95,7 +95,6 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 10
       matrix: { shard: "${{ fromJSON(needs.plan.outputs.bible) }}" }
     steps:
       - uses: actions/checkout@v4
@@ -129,7 +128,6 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 14   # never above fill.CLOUD_JOBS' largest window
       matrix: { story: "${{ fromJSON(needs.plan.outputs.stories) }}" }
     steps:
       - uses: actions/checkout@v4

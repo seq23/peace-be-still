@@ -1008,7 +1008,11 @@ class CloudChain(unittest.TestCase):
         self.assertEqual(fill.cloud_batch(at(6), 12, 4, lots), ("night", 10, 4))
         self.assertEqual(fill.cloud_batch(at(7), 12, 4, lots), ("day", 6, 4))
         self.assertEqual(fill.cloud_batch(at(21), 12, 4, lots), ("day", 6, 4))
-        self.assertEqual(fill.cloud_batch(dt.datetime(2026, 11, 22, 4, 0, tzinfo=dt.timezone.utc), 12, 4, lots), ("night", 10, 4))  # 22:00 CT
+        utc = lambda h: dt.datetime(2026, 11, 22, h, 0, tzinfo=dt.timezone.utc)
+        # Instants where Central and UTC disagree, so reading the UTC hour fails: 03:00 UTC is 21:00 CT (day,
+        # though 03:00 is night), 12:00 UTC is 06:00 CT (night, though 12:00 is day).
+        self.assertEqual(fill.cloud_batch(utc(3), 12, 4, lots), ("day", 6, 4))
+        self.assertEqual(fill.cloud_batch(utc(12), 12, 4, lots), ("night", 10, 4))
         self.assertEqual(fill.cloud_batch(at(12), 12, 4, 41), ("day", 2, 8))       # a short queue gives stories the rest
         self.assertEqual(fill.cloud_batch(at(12), 12, 4, 0), ("day", 0, 10))
         self.assertEqual(fill.cloud_batch(at(23), 2, 4, lots), ("night", 2, 12))
