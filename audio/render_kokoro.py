@@ -32,9 +32,12 @@ def main():
     job = json.load(sys.stdin)
     t = Path(os.environ.get("PBS_KOKORO_DIR", Path.home() / "Work/claude-work/tts"))
     brew = Path(os.environ.get("PBS_ESPEAK_PREFIX", "/opt/homebrew/opt/espeak-ng"))
-    k = Kokoro(str(t / "kokoro-v1.0.onnx"), str(t / "voices-v1.0.bin"),
-               espeak_config=EspeakConfig(lib_path=str(brew / "lib/libespeak-ng.dylib"),
-                                          data_path=str(brew / "share/espeak-ng-data")))
+    if (brew / "lib/libespeak-ng.dylib").exists():   # the Mac: Homebrew's espeak-ng, as the voices were locked
+        cfg = EspeakConfig(lib_path=str(brew / "lib/libespeak-ng.dylib"), data_path=str(brew / "share/espeak-ng-data"))
+    else:   # a Linux runner (the cloud lane): the espeak-ng that kokoro-onnx ships (espeakng_loader)
+        import espeakng_loader
+        cfg = EspeakConfig(lib_path=espeakng_loader.get_library_path(), data_path=espeakng_loader.get_data_path())
+    k = Kokoro(str(t / "kokoro-v1.0.onnx"), str(t / "voices-v1.0.bin"), espeak_config=cfg)
     voice = voice_of(k, job["voice"])
     sr = 24000
     parts = [np.zeros(int(job.get("lead", 0.6) * sr), dtype=np.float32)]

@@ -12,6 +12,7 @@ AUDIO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(AUDIO))
 sys.path.insert(0, str(AUDIO / "lib"))
 import fill  # noqa: E402
+import hush_clone as C  # noqa: E402
 import qa  # noqa: E402
 import text as T  # noqa: E402
 
@@ -233,19 +234,22 @@ class Manifest(unittest.TestCase):
 
 
 class ActiveFlag(unittest.TestCase):
-    def test_written_while_incomplete_and_removed_when_done(self):
+    def test_written_while_incomplete_and_kept_marked_complete_when_done(self):
         items = fill.plan(bibles())
         with tempfile.TemporaryDirectory() as d:
             flag = Path(d) / "library-fill.active"
-            self.assertFalse(fill.settle_active(flag, items, [], NOW))
+            self.assertFalse(fill.settle_active(flag, items, [], NOW, stories=[]))
             body = json.loads(flag.read_text())
             self.assertTrue(body["started"] and body["reason"])
             later = NOW + dt.timedelta(hours=3)
-            fill.settle_active(flag, items, [], later)
+            fill.settle_active(flag, items, [], later, stories=[])
             self.assertEqual(json.loads(flag.read_text())["started"], body["started"])  # start kept
             rows = [{"file": i["file"], "status": "passed"} for i in items]
-            self.assertTrue(fill.settle_active(flag, items, rows, later))
-            self.assertFalse(flag.exists())
+            self.assertTrue(fill.settle_active(flag, items, rows, later, stories=[]))
+            # Kept (YouTube restarts only after the owner approves the overhaul), marked with the date.
+            self.assertEqual(json.loads(flag.read_text())["complete"], later.date().isoformat())
+            self.assertFalse(fill.settle_active(flag, items, rows, later + dt.timedelta(days=1), stories=[]))   # told once
+            self.assertTrue(flag.exists())
 
     def test_expected_end_from_measured_speed(self):
         items = fill.plan(bibles())
@@ -253,6 +257,152 @@ class ActiveFlag(unittest.TestCase):
         end = fill.expected_end(items, rows, NOW)
         left = sum(len(T.score_words(fill.script_of(i), i["lang"])) for i in items[1:])
         self.assertEqual(end, NOW + dt.timedelta(seconds=left))
+
+    def test_a_story_left_keeps_the_fill_open_and_the_file_never_goes(self):
+        items = fill.plan(bibles())
+        rows = [{"file": i["file"], "status": "passed"} for i in items]
+        story = C.H.load_stories()[:1]
+        with tempfile.TemporaryDirectory() as d:
+            flag = Path(d) / "library-fill.active"
+            self.assertFalse(fill.settle_active(flag, items, rows, NOW, stories=story))
+            self.assertNotIn("complete", json.loads(flag.read_text()))
+            self.assertTrue(flag.exists())
+
+
+class Lanes(unittest.TestCase):
+    def test_the_mac_and_the_cloud_never_take_the_same_file(self):
+        items = fill.plan(bibles(), fill.content_items(fill.REPO))
+        cfg = fill.lanes()
+        mac = {i["file"] for i in items if fill.lane_of(i, cfg) == "mac"}
+        cloud = {i["file"] for i in items if fill.lane_of(i, cfg) == "cloud"}
+        self.assertFalse(mac & cloud)
+        self.assertEqual(len(mac | cloud), len(items))
+        # A kind the Mac keeps is never the cloud's, whatever lanes.json lists.
+        alt = {"mac_kinds": ["psalms"], "mac_stories": ["core-011-noah"]}
+        self.assertTrue(all(fill.lane_of(i, alt) == ("mac" if i["kind"] == "psalms" else "cloud") for i in items))
+        self.assertEqual(C.lane_of({"id": "core-011-noah"}, alt), "mac")
+        stories = C.H.load_stories()
+        self.assertEqual({s["id"] for s in stories if C.lane_of(s, cfg) == "mac"}, set(cfg["mac_stories"]))
+
+    def test_shards_split_a_queue_with_no_overlap_and_no_gap(self):
+        q = list(range(101))
+        parts = [fill.shard(q, f"{i}/7") for i in range(7)]
+        self.assertEqual(sorted(x for p in parts for x in p), q)
+        self.assertEqual(fill.shard(q, None), q)
+        with self.assertRaises(ValueError):
+            fill.shard(q, "7/7")
+
+    def test_cloud_plan_sizes_the_matrix_and_says_when_it_is_done(self):
+        items = fill.plan(bibles(), fill.content_items(fill.REPO))
+        cfg = fill.lanes()
+        p = fill.cloud_plan(items, [], cfg, 12)
+        n = min(12, -(-p["left"] // fill.CLOUD_FILES_PER_JOB))
+        self.assertTrue(p["left"] > 0 and n >= 1)
+        self.assertEqual(p["bible"], [f"{k}/{n}" for k in range(n)])
+        self.assertEqual(len(fill.cloud_plan(items, [], cfg, 1)["bible"]), 1)   # capped at the jobs asked
+        done = [{"file": i["file"], "status": "passed"} for i in items]
+        with mock.patch.object(fill, "whole_fill_done", return_value=True):
+            self.assertEqual(fill.cloud_plan(items, done, cfg, 12), {"bible": [], "left": 0, "complete": True})
+
+
+class Gather(unittest.TestCase):
+    """Two writers of the manifest (the Mac, the cloud's gather job) never conflict and never lose a row."""
+    def repo(self, d: Path):
+        import subprocess as sp
+        self.git = lambda cwd, *a: sp.run(["git", "-C", str(cwd), *a], capture_output=True, text=True, check=True)
+        sp.run(["git", "init", "-q", "--bare", "-b", "main", str(d / "origin.git")], check=True)
+        for c in ("a", "b"):
+            sp.run(["git", "clone", "-q", str(d / "origin.git"), str(d / c)], check=True, capture_output=True)
+            self.git(d / c, "config", "user.email", "t@example.com"); self.git(d / c, "config", "user.name", "t")
+            self.git(d / c, "checkout", "-q", "-B", "main")
+        (d / "a" / "audio").mkdir()
+        (d / "a" / "audio" / "manifest.jsonl").write_text(json.dumps({"file": "x", "status": "FAILED", "at": "1"}) + "\n")
+        self.git(d / "a", "add", "-A"); self.git(d / "a", "commit", "-qm", "seed"); self.git(d / "a", "push", "-q", "origin", "main")
+        self.git(d / "b", "pull", "-q", "origin", "main")
+        return d / "a" / "audio" / "manifest.jsonl"
+
+    def other_writer_pushes(self, d: Path, row: dict):
+        man = d / "b" / "audio" / "manifest.jsonl"
+        self.git(d / "b", "pull", "-q", "origin", "main")
+        man.write_text(man.read_text() + json.dumps(row) + "\n")
+        self.git(d / "b", "commit", "-qam", "other"); self.git(d / "b", "push", "-q", "origin", "main")
+
+    def rows_on_main(self, d: Path) -> dict:
+        self.git(d / "b", "pull", "-q", "origin", "main")
+        return {r["file"]: r["status"] for r in fill.read_manifest(d / "b" / "audio" / "manifest.jsonl")}
+
+    def patched(self, d: Path, man: Path, home: str):
+        return [mock.patch.object(fill, "HOME", Path(home)), mock.patch.object(fill, "REPO", d / "a"),
+                mock.patch.object(fill, "MANIFEST", man)]
+
+    def run_with(self, patches, fn):
+        for p in patches:
+            p.start()
+        try:
+            return fn()
+        finally:
+            for p in patches:
+                p.stop()
+
+    def test_unpushed_rows_are_laid_over_the_newest_main_and_pushed(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            self.other_writer_pushes(d, {"file": "y", "status": "passed", "at": "2"})
+            def go():
+                fill.upsert_row({"file": "x", "status": "passed", "at": "3"}, man)
+                self.assertEqual(fill.git_commit("t"), "manifest pushed")
+                self.assertFalse(fill.unpushed_path().exists())
+            self.run_with(self.patched(d, man, home), go)
+            self.assertEqual(self.rows_on_main(d), {"x": "passed", "y": "passed"})
+
+    def test_a_rejected_push_is_retried_on_the_newer_main(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            real = fill.subprocess.run
+            raced = []
+            def run(cmd, *a, **k):
+                if cmd[:1] == ["git"] and "push" in cmd and not raced:   # the other writer lands first
+                    raced.append(1)
+                    self.other_writer_pushes(d, {"file": "z", "status": "passed", "at": "4"})
+                return real(cmd, *a, **k)
+            def go():
+                with mock.patch.object(fill.subprocess, "run", side_effect=run):
+                    fill.upsert_row({"file": "x", "status": "passed", "at": "3"}, man)
+                    self.assertEqual(fill.git_commit("t"), "manifest pushed")
+            self.run_with(self.patched(d, man, home), go)
+            self.assertEqual(self.rows_on_main(d), {"x": "passed", "z": "passed"})
+
+    def test_rows_in_an_old_unpushed_commit_are_kept(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            # A run from before unpushed-rows.jsonl existed: committed, push failed.
+            man.write_text(man.read_text() + json.dumps({"file": "old", "status": "passed", "at": "2"}) + "\n")
+            self.git(d / "a", "commit", "-qam", "old run")
+            self.other_writer_pushes(d, {"file": "y", "status": "passed", "at": "3"})
+            self.run_with(self.patched(d, man, home), lambda: self.assertEqual(fill.git_commit("t"), "manifest pushed"))
+            self.assertEqual(self.rows_on_main(d), {"x": "FAILED", "old": "passed", "y": "passed"})
+
+    def test_a_checkout_with_other_unpushed_commits_is_never_reset(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            (d / "a" / "notes.txt").write_text("work")
+            self.git(d / "a", "add", "-A"); self.git(d / "a", "commit", "-qm", "someone's work")
+            def go():
+                fill.upsert_row({"file": "x", "status": "passed", "at": "3"}, man)
+                self.assertIn("unpushed commits to notes.txt", fill.git_commit("t"))
+                self.assertTrue(fill.unpushed_path().exists())     # the row waits; nothing lost
+            self.run_with(self.patched(d, man, home), go)
+            self.assertTrue((d / "a" / "notes.txt").exists())
+            self.assertIn("someone's work", self.git(d / "a", "log", "-1", "--format=%s").stdout)
+
+    def test_the_gather_job_pushes_every_jobs_rows(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            r1, r2 = Path(home) / "r1.jsonl", Path(home) / "r2.jsonl"
+            r1.write_text(json.dumps({"file": "p", "status": "passed", "at": "5"}) + "\n")
+            r2.write_text(json.dumps({"file": "q", "status": "FAILED", "at": "5"}) + "\n")
+            self.run_with(self.patched(d, man, home), lambda: self.assertEqual(fill.main(["--push-rows", str(r1), str(r2)]), 0))
+            self.assertEqual(self.rows_on_main(d), {"x": "FAILED", "p": "passed", "q": "FAILED"})
 
 
 class Text(unittest.TestCase):
@@ -628,7 +778,7 @@ class Mastering(unittest.TestCase):
     def fake_ffmpeg(self, calls):
         def run(cmd, **k):
             calls.append(cmd)
-            if "aac_at" in cmd and Path(cmd[-1]).parent.is_dir():
+            if fill.aac_encoder() in cmd and Path(cmd[-1]).parent.is_dir():
                 Path(cmd[-1]).write_bytes(b"m4a")
             return mock.Mock(stderr=self.PASS1 if "null" in cmd else "", returncode=0)
         return run
@@ -637,7 +787,7 @@ class Mastering(unittest.TestCase):
         calls = []
         got = iter([{"lufs": -17.0, "true_peak": -0.4}, {"lufs": -18.2, "true_peak": -1.3}, {"lufs": -17.1, "true_peak": -1.6}])
         r = fill.master(Path("in.wav"), Path("out.m4a"), "read", run=self.fake_ffmpeg(calls), measure=lambda p: next(got))
-        encodes = [c for c in calls if "aac_at" in c]
+        encodes = [c for c in calls if fill.aac_encoder() in c]
         self.assertEqual((len(encodes), r["tries"]), (3, 3))
         self.assertTrue(all(c[c.index("-i") + 1] == "in.wav" for c in encodes))   # always from the kept WAV
         tps = [float(c[c.index("-af") + 1].split("TP=")[1].split(":")[0]) for c in encodes]
@@ -650,7 +800,7 @@ class Mastering(unittest.TestCase):
         calls = []
         fill.master(Path("in.wav"), Path("out.m4a"), "sleep", run=self.fake_ffmpeg(calls),
                     measure=lambda p: {"lufs": -22.0, "true_peak": -3.0})
-        self.assertEqual(len([c for c in calls if "aac_at" in c]), 1)
+        self.assertEqual(len([c for c in calls if fill.aac_encoder() in c]), 1)
 
     def make(self, checks, louds):
         item = fill.plan(bibles())[2]
@@ -666,7 +816,7 @@ class Mastering(unittest.TestCase):
             row = fill.make_one(item, {}, Path(d))
             self.assertFalse((Path(d) / "track.wav").exists())
             self.held = sorted(str(f.relative_to(home)) for f in Path(home).rglob("*") if f.is_file())
-        return row, renders, [c for c in calls if "aac_at" in c]
+        return row, renders, [c for c in calls if fill.aac_encoder() in c]
 
     def test_a_minus_18_1_lufs_file_is_normalised_and_passes(self):
         # 21 Nov 2026: -18.1 LUFS against -18..-16 was thrown away. Now it is mastered again from the same
@@ -826,3 +976,16 @@ class Mastering(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CloudChain(unittest.TestCase):
+    def test_a_batch_that_wrote_no_rows_never_starts_another(self):
+        # A batch where every job hit a named stop must not loop round the clock: the chain step runs only
+        # when the gather step counted at least one row, and that count starts at 0 before any push.
+        wf = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text()
+        gather = wf[wf.index("id: g"):]
+        self.assertLess(gather.index('echo "rows=0"'), gather.index("--push-rows"))
+        chain = wf[wf.index("Start the next batch"):]
+        cond = chain[chain.index("if:"):chain.index("\n", chain.index("if:"))]
+        self.assertIn("steps.g.outputs.rows != '0'", cond)
+        self.assertIn("steps.g.outputs.rows != ''", cond)

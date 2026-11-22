@@ -4,6 +4,8 @@
 # Order: config check -> secrets check -> DeviceCheck key check and sync -> D1 migrations -> Bible rows -> deploy.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# The prompts and crisis lists are encrypted in git: unlock first, or NAMED STOP and nothing deployed (never empty prompts).
+bash scripts/git-crypt-unlock.sh
 W="npx --prefix worker wrangler"
 CFG="--config worker/wrangler.jsonc"
 if grep -q '"database_id": "00000000-0000-0000-0000-000000000000"' worker/wrangler.jsonc; then

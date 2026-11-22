@@ -48,7 +48,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 AUDIO = Path(__file__).resolve().parent
-REPO = AUDIO.parent
+REPO = Path(os.environ.get("PBS_REPO", AUDIO.parent))   # the gather job: this commit's code, main's checkout
 sys.path.insert(0, str(AUDIO / "lib"))
 import memguard  # noqa: E402
 import text as T  # noqa: E402
@@ -57,9 +57,14 @@ CT = ZoneInfo("America/Chicago")
 HOME = Path(os.environ.get("PBS_HOME", Path.home() / ".peace-be-still"))
 KOKORO_PY = os.environ.get("PBS_KOKORO_PY", str(Path.home() / "Work/claude-work/tts/venv/bin/python"))
 SHELF = os.environ.get("PBS_SHELF", "gdrive:Mac-Shelf/peace-be-still/audio")
-MANIFEST = Path(os.environ.get("PBS_MANIFEST", AUDIO / "manifest.jsonl"))
+MANIFEST = Path(os.environ.get("PBS_MANIFEST", REPO / "audio" / "manifest.jsonl"))
 # The words of the 21 sessions voiced before rows recorded them (recovered exactly from git, 21 Nov 2026).
 VOICED_WORDS = Path(os.environ.get("PBS_VOICED_WORDS", AUDIO / "voiced-words.json"))
+# Who voices what (audio/lanes.json): the Mac's lanes take the kinds and stories listed there, the GitHub
+# Actions fill lane (fill-cloud.yml) takes everything else, so the two never voice the same file.
+LANE = os.environ.get("PBS_LANE", "mac")
+# Cloud only: failed files are held on Drive, not on a runner that is wiped when the job ends.
+HELD_REMOTE = os.environ.get("PBS_HELD_REMOTE", "")
 MAC_BUDGET_BYTES = 5 * 1024 ** 3
 
 # Voices locked 18 Nov 2026 (COMMON.md; VOICES.md). Speed 0.85 is Nicole "as shipped".
@@ -348,9 +353,61 @@ class manifest_lock:
 
 
 def upsert_row(row: dict, path: Path = MANIFEST) -> dict:
-    """One row per file: a retried file replaces its FAILED row, carrying the run count on."""
+    """One row per file: a retried file replaces its FAILED row, carrying the run count on. The row is
+    also kept in HOME/unpushed-rows.jsonl until a push carries it to main (git_commit), so a push that
+    loses a race never loses a row; the cloud lane hands that file to its gather job."""
     with manifest_lock():
-        return _upsert_row(row, path)
+        row = _upsert_row(row, path)
+        if path == MANIFEST:
+            with unpushed_path().open("a", encoding="utf-8") as f:
+                f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+        return row
+
+
+def unpushed_path() -> Path:
+    return HOME / "unpushed-rows.jsonl"
+
+
+def parse_rows(text: str) -> list[dict]:
+    return [json.loads(line) for line in text.splitlines() if line.strip() and line.lstrip().startswith("{")]
+
+
+def local_rows_ahead(local: list[dict], origin: list[dict]) -> list[dict]:
+    """Rows this checkout holds that main does not: a file main lacks, or a newer row (`at`) for one it
+    has. Rows a run wrote before unpushed-rows.jsonl existed (a commit whose push failed, a rebase left
+    half done) are kept this way. Pure."""
+    o = latest(origin)
+    return [r for r in latest(local).values()
+            if r["file"] not in o or (r != o[r["file"]] and str(r.get("at", "")) > str(o[r["file"]].get("at", "")))]
+
+
+def put_rows(new: list[dict], path: Path) -> None:
+    """Lay finished rows over the manifest as they are (one row per file; tries already counted)."""
+    rows = read_manifest(path)
+    files = {r["file"] for r in new}
+    rows = [r for r in rows if r["file"] not in files] + list(latest(new).values())
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text("".join(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n" for r in rows), "utf-8")
+    tmp.replace(path)
+
+
+def lanes() -> dict:
+    return json.loads((AUDIO / "lanes.json").read_text("utf-8"))
+
+
+def lane_of(item: dict, cfg: dict | None = None) -> str:
+    """"mac" for the kinds the Mac keeps, "cloud" for the rest. Pure given cfg."""
+    return "mac" if item["kind"] in (cfg or lanes())["mac_kinds"] else "cloud"
+
+
+def shard(seq: list, spec: str | None) -> list:
+    """"i/n": every n-th item from i, so n parallel jobs share one queue and never meet. Pure."""
+    if not spec:
+        return list(seq)
+    i, n = (int(x) for x in spec.split("/"))
+    if not 0 <= i < n:
+        raise ValueError(f"bad shard {spec}")
+    return [x for k, x in enumerate(seq) if k % n == i]
 
 
 def _upsert_row(row: dict, path: Path) -> dict:
@@ -534,14 +591,33 @@ def write_active(path: Path, now: dt.datetime, end: dt.datetime | None) -> None:
     tmp.replace(path)
 
 
-def settle_active(active: Path, items: list[dict], rows: list[dict], now: dt.datetime) -> bool:
-    """End of a run: priorities 1-2 all in the manifest -> remove the flag (True when it was just
-    removed); otherwise refresh it with the new expected end."""
-    if census(items, rows)["complete"]:
-        if active.exists():
-            active.unlink()
-            return True
-        return False
+def whole_fill_done(items: list[dict], rows: list[dict], stories: list[dict] | None = None) -> bool:
+    """The WHOLE fill (owner: YouTube waits for all of it): every file of every priority and every Hush
+    Harbor story passed or out of tries, whichever lane voiced it."""
+    import hush_harbor as H
+    stories = H.load_stories() if stories is None else stories
+    return not todo(items, rows) and not H.todo(stories, rows)
+
+
+def settle_active(active: Path, items: list[dict], rows: list[dict], now: dt.datetime,
+                  stories: list[dict] | None = None) -> bool:
+    """End of a run. The fill NEVER removes this file (How We Know reads its removal as the only unpause
+    signal; owner: YouTube stays paused until the whole fill is done AND she approves the overhaul). When
+    the whole fill is done the record is marked "complete": <date> and kept (True when it was just
+    marked); the cloud plan job posts the Open Loops row. Otherwise it is refreshed."""
+    if whole_fill_done(items, rows, stories):
+        try:
+            body = json.loads(active.read_text())
+        except Exception:
+            body = {}
+        if body.get("complete"):
+            return False
+        body.update({"complete": now.date().isoformat(), "updated": now.isoformat(timespec="seconds"),
+                     "reason": "Peace Be Still library fill is complete. This file stays until the owner approves "
+                               "the YouTube channels overhaul; How We Know / Whisper Almanac stay paused until then."})
+        active.parent.mkdir(parents=True, exist_ok=True)
+        active.write_text(json.dumps(body, indent=1))
+        return True
     write_active(active, now, expected_end(items, rows, now))
     return False
 
@@ -591,6 +667,12 @@ def loudnorm_filter(i: float, tp: float, measured: dict | None = None) -> str:
             f":offset={measured['target_offset']}:linear=true:print_format=summary")
 
 
+def aac_encoder() -> str:
+    """Apple's AAC (aac_at) on the Mac, as the library was locked; ffmpeg's own AAC on a Linux runner
+    (the cloud lane), which has no AudioToolbox. Either way the ENCODED file is what qa.check judges."""
+    return os.environ.get("PBS_AAC") or ("aac_at" if sys.platform == "darwin" else "aac")
+
+
 def master(wav: Path, out: Path, level: str, *, run=None, measure=None) -> dict:
     """WAV -> mastered AAC-LC mono 48 kbps .m4a inside the level's bars (qa.BARS), judged on the
     ENCODED file by qa.loudness. A miss is mastered again from the kept WAV: the true-peak target
@@ -606,7 +688,7 @@ def master(wav: Path, out: Path, level: str, *, run=None, measure=None) -> dict:
         p1 = run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(wav), "-af", loudnorm_filter(i, tp), "-f", "null", "-"],
                  capture_output=True, text=True, timeout=1800)
         run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af", loudnorm_filter(i, tp, loudnorm_measured(p1.stderr)),
-             "-ac", "1", "-ar", "24000", "-c:a", "aac_at", "-b:a", "48k", "-movflags", "+faststart", str(out)],
+             "-ac", "1", "-ar", "24000", "-c:a", aac_encoder(), "-b:a", "48k", "-movflags", "+faststart", str(out)],
             check=True, timeout=1800)
         got = measure(out)
         peak_ok, loud_ok = got["true_peak"] <= ceiling, lo <= got["lufs"] <= hi
@@ -699,7 +781,12 @@ def hold(path: Path, lane: str, rel: str, words: str, result: dict) -> Path | No
               "values": {k: result.get(k) for k in ("accuracy", "lufs", "true_peak", "clipped", "wpm", "seconds")},
               "margins": {"lu": qa.LU_MARGIN, "tp_db": qa.TP_MARGIN, "clipped_max": qa.CLIP_MAX,
                           "accuracy_margin": qa.ACC_MARGIN, "wpm_hard": qa.WPM_HARD}}
-    dest.with_name(dest.name + ".reason.json").write_text(json.dumps(reason, ensure_ascii=False, indent=1), "utf-8")
+    why = dest.with_name(dest.name + ".reason.json")
+    why.write_text(json.dumps(reason, ensure_ascii=False, indent=1), "utf-8")
+    if HELD_REMOTE:   # the cloud runner is wiped at the end of the job: the held copy lives on Drive
+        for f in (dest, why):
+            if rclone("copyto", str(f), f"{HELD_REMOTE}/{lane}/{f.relative_to(held_dir() / lane)}", timeout=900).returncode != 0:
+                print(f"note: could not hold {f.name} on Drive; it stays on this runner only", flush=True)
     return dest
 
 
@@ -707,6 +794,10 @@ def held_copy(lane: str, rel: str, words: str) -> Path | None:
     """The held file for rel, when its words still match what is to be said now."""
     dest = held_dir() / lane / rel
     why = dest.with_name(dest.name + ".reason.json")
+    if HELD_REMOTE and not why.exists():
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        if rclone("copyto", f"{HELD_REMOTE}/{lane}/{rel}.reason.json", str(why), timeout=120).returncode == 0:
+            rclone("copyto", f"{HELD_REMOTE}/{lane}/{rel}", str(dest), timeout=900)
     if not dest.exists() or not why.exists():
         return None
     try:
@@ -720,6 +811,9 @@ def release(lane: str, rel: str) -> None:
     dest = held_dir() / lane / rel
     dest.unlink(missing_ok=True)
     dest.with_name(dest.name + ".reason.json").unlink(missing_ok=True)
+    if HELD_REMOTE:
+        for f in (rel, rel + ".reason.json"):
+            rclone("deletefile", f"{HELD_REMOTE}/{lane}/{f}", timeout=120)
 
 
 def is_scripture_file(item: dict) -> bool:
@@ -842,15 +936,35 @@ def git_commit(msg: str) -> str:
 
 
 def _git_commit(msg: str) -> str:
+    """Every row this machine wrote and has not pushed (HOME/unpushed-rows.jsonl) is laid over main's
+    newest manifest and pushed, so two writers (the Mac, the cloud's gather job) never conflict: no
+    rebase of the manifest, ever. Runs only on main (the runner checkout, the gather job)."""
     def g(*a, timeout=120):
         return subprocess.run(["git", "-C", str(REPO), *a], capture_output=True, text=True, timeout=timeout)
-    g("add", str(MANIFEST.relative_to(REPO)))
-    if g("diff", "--cached", "--quiet").returncode != 0:
-        g("commit", "-q", "-m", msg)
-    for _ in range(3):
-        if g("pull", "--rebase", "-q").returncode == 0 and g("push", "-q").returncode == 0:
+    g("rebase", "--abort")   # a rebase an older version of this left half done
+    if g("rev-parse", "--abbrev-ref", "HEAD").stdout.strip() != "main":
+        return "manifest rows kept for the next push (this checkout is not on main)"
+    rel = str(MANIFEST.relative_to(REPO))
+    for _ in range(4):
+        if g("fetch", "-q", "origin", "main").returncode != 0:
+            continue
+        ahead = [f for f in g("diff", "--name-only", "origin/main...HEAD").stdout.split() if f != rel]
+        if ahead:   # never reset away anything but manifest rows
+            return f"manifest rows kept; this checkout has unpushed commits to {', '.join(ahead[:3])} (pushed by hand)"
+        origin = subprocess.run(["git", "-C", str(REPO), "show", f"origin/main:{rel}"], capture_output=True, text=True).stdout
+        mine = local_rows_ahead(read_manifest(MANIFEST), parse_rows(origin)) + read_manifest(unpushed_path())
+        if not mine:
+            return "no new manifest rows"
+        g("reset", "-q", "--mixed", "origin/main")
+        g("checkout", "origin/main", "--", rel)
+        put_rows(mine, MANIFEST)
+        g("add", rel)
+        if g("diff", "--cached", "--quiet").returncode != 0:
+            g("commit", "-q", "-m", msg)
+        if g("push", "-q", "origin", "HEAD:main").returncode == 0:
+            unpushed_path().unlink(missing_ok=True)
             return "manifest pushed"
-    return "manifest committed; push failed (the next run pushes it)"
+    return "manifest rows kept; push failed (the next run pushes them)"
 
 
 # ------------------------------------------------------------------ the run window
@@ -875,6 +989,17 @@ def window_minutes(now: dt.datetime) -> int:
 
 
 # ------------------------------------------------------------------ the run
+CLOUD_FILES_PER_JOB = 40   # measured 21 Nov 2026 (Ruth EN, one runner): 4 chapters tried in 31 min = 7.7 an hour x a 300-minute box
+
+
+def cloud_plan(items: list[dict], rows: list[dict], cfg: dict, jobs: int) -> dict:
+    """The cloud matrix for one launch: enough Bible shards for the cloud's queue (at most `jobs`), and
+    the census. "done" when nothing is left for the cloud. Pure."""
+    q = [i for i in todo(items, rows) if lane_of(i, cfg) == "cloud"]
+    n = min(jobs, -(-len(q) // CLOUD_FILES_PER_JOB)) if q else 0
+    return {"bible": [f"{k}/{n}" for k in range(n)], "left": len(q), "complete": whole_fill_done(items, rows)}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0, help="at most this many files this run")
@@ -883,7 +1008,19 @@ def main(argv=None) -> int:
     ap.add_argument("--commit", action="store_true", help="commit and push the manifest (the runner)")
     ap.add_argument("--dry-run", action="store_true", help="print the plan and the census; voice nothing")
     ap.add_argument("--window-minutes", action="store_true", help="print the run window's minutes left now (run.sh)")
+    ap.add_argument("--shard", help="i/n: this job's share of the lane's queue (the cloud matrix)")
+    ap.add_argument("--cloud-plan", type=int, metavar="JOBS", help="print the cloud matrix as JSON: at most JOBS Bible shards")
+    ap.add_argument("--push-rows", nargs="*", metavar="FILE", help="lay these rows files over main's manifest and push (the gather job)")
     a = ap.parse_args(argv)
+    if a.push_rows is not None:
+        HOME.mkdir(parents=True, exist_ok=True)
+        with unpushed_path().open("a", encoding="utf-8") as f:
+            for p in a.push_rows:
+                f.write(Path(p).read_text("utf-8"))
+        n = len(read_manifest(unpushed_path()))
+        note = git_commit(f"audio: cloud fill manifest ({n} rows)")
+        print(f"OUTPUT {n} cloud rows gathered; {note}")
+        return 0 if note in ("manifest pushed", "no new manifest rows") else 3
     if a.window_minutes:
         print(window_minutes(dt.datetime.now(CT)))
         return 0
@@ -904,7 +1041,11 @@ def main(argv=None) -> int:
     pron = T.load_pronunciations()
     items = plan(bibles, content_items(REPO))
     rows = read_manifest()
-    queue = todo(items, rows, a.only)
+    cfg = lanes()
+    queue = shard([i for i in todo(items, rows, a.only) if lane_of(i, cfg) == LANE], a.shard)
+    if a.cloud_plan is not None:
+        print(json.dumps(cloud_plan(items, rows, cfg, a.cloud_plan)))
+        return 0
     active = HOME / "library-fill.active"
     c0 = census(items, rows)
     if a.dry_run:
@@ -913,7 +1054,7 @@ def main(argv=None) -> int:
         print(census_line(c0) + "; " + text_line(now))
         return 0
 
-    if not c0["complete"]:
+    if not c0["complete"] and LANE == "mac":
         write_active(active, now, expected_end(items, rows, now))
     work = HOME / "work"
     shutil.rmtree(work, ignore_errors=True)
@@ -929,7 +1070,7 @@ def main(argv=None) -> int:
                 break
             if a.max_minutes and (time.monotonic() - t_start) / 60 >= a.max_minutes:
                 break
-            if not time_for(item, rows, dt.datetime.now(CT)):
+            if LANE == "mac" and not time_for(item, rows, dt.datetime.now(CT)):
                 print(f"note: {item['file']} needs about {expected_seconds(item['kind'], rows) / 60:.0f} minutes; "
                       "not started so the run checkpoints before 06:55", flush=True)
                 break
@@ -961,17 +1102,18 @@ def main(argv=None) -> int:
     c = census(items, rows)
     now = dt.datetime.now(CT)
     notes = []
-    if settle_active(active, items, rows, now):
+    if LANE == "mac" and settle_active(active, items, rows, now):
         notes.append(morning_line(f"Peace Be Still: the whole Bible is voiced and on Drive — {census_line(c)}. "
-                                  "How We Know and Whisper Almanac can run again.", "complete", now))
+                                  "YouTube restarts once you approve the channels overhaul.", "complete", now))
     if a.commit and (made or failed_now):
         notes.append(git_commit(f"audio: library fill manifest ({census_line(c)})"))
     line = census_line(c) + "; " + text_line(now)
-    if now.hour >= 5 and not stop:
+    if LANE == "mac" and now.hour >= 5 and not stop:
         notes.append(morning_line(f"Peace Be Still {line}.", "daily", now))
     if stop:
         print(str(stop), file=sys.stderr)
-        notes.append(morning_line(f"Peace Be Still library fill stopped: {stop}", f"stop:{stop.code}", now))
+        if LANE == "mac":
+            notes.append(morning_line(f"Peace Be Still library fill stopped: {stop}", f"stop:{stop.code}", now))
     print(f"OUTPUT {made} files shelved")
     print(line + (f" (this run: {made} shelved, {failed_now} failed)") + (f"; notes: {'; '.join(notes)}" if notes else ""))
     if stop:

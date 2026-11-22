@@ -1,0 +1,5 @@
+{
+ "_why": "Who voices what. Measured 21 Nov 2026: one GitHub runner tries 7.7 Bible chapters an hour (the Mac: 8.8), and the cloud runs 12 Kokoro shards and 4 clone stories round the clock against the Mac's two lanes for 9 hours a night: about 30 times the Mac. So the cloud takes everything and the Mac rests at night too (the coordinator's rule: 10 times the Mac -> the Mac lanes stop). To give the Mac a share again, list kinds or story ids here; the cloud then leaves them alone.",
+ "mac_kinds": [],
+ "mac_stories": []
+}

@@ -18,6 +18,7 @@ if { [ -z "${CLOUDFLARE_API_TOKEN:-}" ] && [ -z "${DEV_AI_TOKEN:-}" ]; } || { [ 
   exec bash -c "cd '$BOSS_OS' && npm run -s vault:run -- bash '$ROOT/scripts/worker-dev.sh'"
 fi
 cd "$ROOT"
+bash scripts/git-crypt-unlock.sh # the encrypted prompts, crisis lists and red-team sets (from the vault)
 W="npx --prefix worker wrangler"
 CFG="--config worker/wrangler.jsonc"
 umask 077
