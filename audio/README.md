@@ -9,9 +9,9 @@ checks, shelved, status, voice).
 
   | Lane | Where | When | Takes | Engine |
   |---|---|---|---|---|
-  | Bible matrix | GitHub Actions (`fill-cloud.yml`, job `bible`) | every 6 h at 00:15, 06:15, 12:15, 18:15 (cron UTC 06/12/18/00:15), up to 12 shards, each a 300-minute box (about 40 chapters) | every Bible chapter (`kind` bible, EN and ES) | Kokoro, CPU |
-  | Clone stories | GitHub Actions (job `story`) | the same launches, up to 4 stories, one per job, 260-minute box plus a 45-minute QA reserve; sentences saved to Drive after every batch | every Hush Harbor story but the Mac's | Chatterbox, CPU |
-  | Gather | GitHub Actions (job `gather`) | the end of each launch | lays every job's rows over main's manifest, one push | none |
+  | Bible matrix | GitHub Actions (`fill-cloud.yml`, job `bible`) | round the clock: the next batch starts as soon as one ends (cron every 20 minutes, one batch at a time), up to 12 shards, each a 300-minute box (about 40 chapters) | every Bible chapter (`kind` bible, EN and ES) | Kokoro, CPU |
+  | Clone stories | GitHub Actions (job `story`) | the same batches, up to 4 stories, one per job, 260-minute box plus a 45-minute QA reserve; sentences saved to Drive after every batch | every Hush Harbor story but the Mac's | Chatterbox, CPU |
+  | Gather | GitHub Actions (job `gather`) | the end of each batch | lays every job's rows over main's manifest, one push | none |
   | Mac Bible lane | her Mac (`run.sh`, launchd) | 22:00–06:45, 90-minute boxes | psalms, Psalm Nights, Imagination Nights, Kokoro stories | Kokoro |
   | Mac clone lane | her Mac, in parallel | the same window; waits while memory is tight or her morning jobs run | the two stories half rendered there | Chatterbox |
   | Publish | her Mac, after each run | the same window | Drive → R2 for the app | none |

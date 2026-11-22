@@ -10,11 +10,12 @@
 # PRIVACY (the repo and its logs are public): reference clips come from Drive at run time; output goes
 # straight to the Drive shelf with the md5 check and is deleted from the runner; failed files are held on
 # Drive; no audio is ever a workflow artifact (only the rows files, the same rows the public manifest
-# holds). Times: cron is UTC; every 6 h at :15 = 00:15, 06:15, 12:15, 18:15 Central (CST).
+# holds). Round the clock, no time window (GitHub's runners, not the Mac): a launch is tried every 20
+# minutes; the concurrency group holds it while a batch runs, so the next batch starts as soon as one ends.
 name: Fill (cloud)
 on:
   schedule:
-    - cron: "15 0,6,12,18 * * *"
+    - cron: "*/20 * * * *"   # round the clock (owner, 21 Nov 2026: "all day and night so its faster")
   workflow_dispatch:
     inputs:
       bible_jobs: { description: "most Bible shards this launch", default: "12" }
