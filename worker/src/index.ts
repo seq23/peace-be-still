@@ -342,14 +342,17 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (meter) await addUserSpend(env.DB, who.installId, metrics.get('paid_spend_micro') ?? 0, meter.paidUntil, now);
   };
   // Which lane answered and whether the safety model ran: two words in headers, for measuring routing (no text).
-  const route = { lane: 'none', safety: false };
+  // waitMs: how long a ready reply waited on the safety read (PBS_SAFETY_LATENCY's measure).
+  const route = { lane: 'none', safety: false, waitMs: 0 };
   // The safety model reads a flagged message ALONGSIDE the answer (PBS_SAFETY_LATENCY: it added 1.5 s at
   // p50 when it ran first). Nothing but the crisis card leaves before it has read: every reply passes
   // `cleared`, which waits for the read and turns a high one into the card, whatever was ready.
   let pendingSafety: Promise<CrisisLevel> | null = null;
   const cleared = async (make: () => Response | Promise<Response>): Promise<Response> => {
     if (pendingSafety) {
+      const t0 = Date.now();
       const c = await pendingSafety;
+      route.waitMs += Date.now() - t0;
       pendingSafety = null; // read once: the card itself, and any later reply, go straight out
       if (c.level === 'high') { tally(metrics, 'safety_after_answer_high'); return crisisReply(c.kind, c.layer); }
     }
@@ -357,7 +360,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   };
   const send = (body: ChatResponse) => {
     ctx.waitUntil(flush());
-    return Response.json(body, { headers: { 'cache-control': 'no-store', 'x-chat-lane': route.lane, 'x-chat-safety': route.safety ? '1' : '0' } });
+    return Response.json(body, { headers: { 'cache-control': 'no-store', 'x-chat-lane': route.lane, 'x-chat-safety': route.safety ? '1' : '0', 'x-chat-safety-wait': String(route.waitMs) } });
   };
   const reply = (body: ChatResponse): Promise<Response> => body.kind === 'crisis' ? Promise.resolve(send(body)) : cleared(() => send(body));
   const turns = withoutCrisisWords(req.messages.slice(-12));
