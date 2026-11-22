@@ -1182,9 +1182,6 @@ test('a re-voiced night: a newer file not yet published never hides the publishe
   }
 });
 
-test('Spanish and Mindset shelves show their own library and the current availability', async () => {
-});
-
 test('every Nights shelf, EN and ES, faith and mindset, holds exactly what the library has', async () => {
   await assertShelvesFollowLibrary(await mount('nights', { ...base, journey: 'psalm-nights' }), 'en', 'faith', 'en faith');
   const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
