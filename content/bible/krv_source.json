@@ -1,0 +1,406 @@
+{
+ "name": "개역한글판",
+ "credit": "개역한글판 (대한성서공회 번역, 1961)",
+ "source": "https://ko.wikisource.org/wiki/개역한글판",
+ "status": "Korean Bible Society: copyright term expired 2011-12-31 (bskorea.or.kr/bbs/content.php?co_id=subpage2_3_4_1, read 2026-11-21)",
+ "verses": 31102,
+ "sha256": "00fcde377e0e55066b1ae79285d311373d0b61f4741421be40fbb6b878dd05c2",
+ "books": [
+  {
+   "code": "GEN",
+   "title": "개역한글판/창세기",
+   "revid": 393283,
+   "verses": 1533
+  },
+  {
+   "code": "EXO",
+   "title": "개역한글판/출애굽기",
+   "revid": 393284,
+   "verses": 1213
+  },
+  {
+   "code": "LEV",
+   "title": "개역한글판/레위기",
+   "revid": 393285,
+   "verses": 859
+  },
+  {
+   "code": "NUM",
+   "title": "개역한글판/민수기",
+   "revid": 393286,
+   "verses": 1288
+  },
+  {
+   "code": "DEU",
+   "title": "개역한글판/신명기",
+   "revid": 393288,
+   "verses": 959
+  },
+  {
+   "code": "JOS",
+   "title": "개역한글판/여호수아",
+   "revid": 393296,
+   "verses": 658
+  },
+  {
+   "code": "JDG",
+   "title": "개역한글판/사사기",
+   "revid": 393323,
+   "verses": 618
+  },
+  {
+   "code": "RUT",
+   "title": "개역한글판/룻기",
+   "revid": 393331,
+   "verses": 85
+  },
+  {
+   "code": "1SA",
+   "title": "개역한글판/사무엘상",
+   "revid": 393342,
+   "verses": 810
+  },
+  {
+   "code": "2SA",
+   "title": "개역한글판/사무엘하",
+   "revid": 393350,
+   "verses": 695
+  },
+  {
+   "code": "1KI",
+   "title": "개역한글판/열왕기상",
+   "revid": 393355,
+   "verses": 816
+  },
+  {
+   "code": "2KI",
+   "title": "개역한글판/열왕기하",
+   "revid": 393358,
+   "verses": 719
+  },
+  {
+   "code": "1CH",
+   "title": "개역한글판/역대상",
+   "revid": 393794,
+   "verses": 942
+  },
+  {
+   "code": "2CH",
+   "title": "개역한글판/역대하",
+   "revid": 393797,
+   "verses": 822
+  },
+  {
+   "code": "EZR",
+   "title": "개역한글판/에스라",
+   "revid": 393802,
+   "verses": 280
+  },
+  {
+   "code": "NEH",
+   "title": "개역한글판/느헤미야",
+   "revid": 393806,
+   "verses": 406
+  },
+  {
+   "code": "EST",
+   "title": "개역한글판/에스더",
+   "revid": 393812,
+   "verses": 167
+  },
+  {
+   "code": "JOB",
+   "title": "개역한글판/욥기",
+   "revid": 393816,
+   "verses": 1070
+  },
+  {
+   "code": "PSA",
+   "title": "개역한글판/시편",
+   "revid": 393834,
+   "verses": 2460
+  },
+  {
+   "code": "PRO",
+   "title": "개역한글판/잠언",
+   "revid": 393839,
+   "verses": 915
+  },
+  {
+   "code": "ECC",
+   "title": "개역한글판/전도서",
+   "revid": 393844,
+   "verses": 222
+  },
+  {
+   "code": "SOL",
+   "title": "개역한글판/아가",
+   "revid": 393849,
+   "verses": 118
+  },
+  {
+   "code": "ISA",
+   "title": "개역한글판/이사야",
+   "revid": 393853,
+   "verses": 1292
+  },
+  {
+   "code": "JER",
+   "title": "개역한글판/예레미야",
+   "revid": 401888,
+   "verses": 1364
+  },
+  {
+   "code": "LAM",
+   "title": "개역한글판/예레미야애가",
+   "revid": 393899,
+   "verses": 154
+  },
+  {
+   "code": "EZE",
+   "title": "개역한글판/에스겔",
+   "revid": 393903,
+   "verses": 1273
+  },
+  {
+   "code": "DAN",
+   "title": "개역한글판/다니엘",
+   "revid": 393910,
+   "verses": 357
+  },
+  {
+   "code": "HOS",
+   "title": "개역한글판/호세아",
+   "revid": 393915,
+   "verses": 197
+  },
+  {
+   "code": "JOE",
+   "title": "개역한글판/요엘",
+   "revid": 393922,
+   "verses": 73
+  },
+  {
+   "code": "AMO",
+   "title": "개역한글판/아모스",
+   "revid": 393927,
+   "verses": 146
+  },
+  {
+   "code": "OBA",
+   "title": "개역한글판/오바댜",
+   "revid": 393932,
+   "verses": 21
+  },
+  {
+   "code": "JON",
+   "title": "개역한글판/요나",
+   "revid": 393937,
+   "verses": 48
+  },
+  {
+   "code": "MIC",
+   "title": "개역한글판/미가",
+   "revid": 393942,
+   "verses": 105
+  },
+  {
+   "code": "NAH",
+   "title": "개역한글판/나훔",
+   "revid": 393947,
+   "verses": 47
+  },
+  {
+   "code": "HAB",
+   "title": "개역한글판/하박국",
+   "revid": 393952,
+   "verses": 56
+  },
+  {
+   "code": "ZEP",
+   "title": "개역한글판/스바냐",
+   "revid": 393958,
+   "verses": 53
+  },
+  {
+   "code": "HAG",
+   "title": "개역한글판/학개",
+   "revid": 393963,
+   "verses": 38
+  },
+  {
+   "code": "ZEC",
+   "title": "개역한글판/스가랴",
+   "revid": 393968,
+   "verses": 211
+  },
+  {
+   "code": "MAL",
+   "title": "개역한글판/말라기",
+   "revid": 393973,
+   "verses": 55
+  },
+  {
+   "code": "MAT",
+   "title": "개역한글판/마태복음",
+   "revid": 401707,
+   "verses": 1071
+  },
+  {
+   "code": "MAR",
+   "title": "개역한글판/마가복음",
+   "revid": 393998,
+   "verses": 678
+  },
+  {
+   "code": "LUK",
+   "title": "개역한글판/누가복음",
+   "revid": 394007,
+   "verses": 1151
+  },
+  {
+   "code": "JOH",
+   "title": "개역한글판/요한복음",
+   "revid": 394018,
+   "verses": 879
+  },
+  {
+   "code": "ACT",
+   "title": "개역한글판/사도행전",
+   "revid": 394025,
+   "verses": 1007
+  },
+  {
+   "code": "ROM",
+   "title": "개역한글판/로마서",
+   "revid": 394032,
+   "verses": 433
+  },
+  {
+   "code": "1CO",
+   "title": "개역한글판/고린도전서",
+   "revid": 394040,
+   "verses": 437
+  },
+  {
+   "code": "2CO",
+   "title": "개역한글판/고린도후서",
+   "revid": 394047,
+   "verses": 256
+  },
+  {
+   "code": "GAL",
+   "title": "개역한글판/갈라디아서",
+   "revid": 394054,
+   "verses": 149
+  },
+  {
+   "code": "EPH",
+   "title": "개역한글판/에베소서",
+   "revid": 394062,
+   "verses": 155
+  },
+  {
+   "code": "PHI",
+   "title": "개역한글판/빌립보서",
+   "revid": 394073,
+   "verses": 104
+  },
+  {
+   "code": "COL",
+   "title": "개역한글판/골로새서",
+   "revid": 394080,
+   "verses": 95
+  },
+  {
+   "code": "1TH",
+   "title": "개역한글판/데살로니가전서",
+   "revid": 394087,
+   "verses": 89
+  },
+  {
+   "code": "2TH",
+   "title": "개역한글판/데살로니가후서",
+   "revid": 394094,
+   "verses": 47
+  },
+  {
+   "code": "1TI",
+   "title": "개역한글판/디모데전서",
+   "revid": 394101,
+   "verses": 113
+  },
+  {
+   "code": "2TI",
+   "title": "개역한글판/디모데후서",
+   "revid": 394110,
+   "verses": 83
+  },
+  {
+   "code": "TIT",
+   "title": "개역한글판/디도서",
+   "revid": 394117,
+   "verses": 46
+  },
+  {
+   "code": "PHM",
+   "title": "개역한글판/빌레몬서",
+   "revid": 394124,
+   "verses": 25
+  },
+  {
+   "code": "HEB",
+   "title": "개역한글판/히브리서",
+   "revid": 394131,
+   "verses": 303
+  },
+  {
+   "code": "JAM",
+   "title": "개역한글판/야고보서",
+   "revid": 394139,
+   "verses": 108
+  },
+  {
+   "code": "1PE",
+   "title": "개역한글판/베드로전서",
+   "revid": 394147,
+   "verses": 105
+  },
+  {
+   "code": "2PE",
+   "title": "개역한글판/베드로후서",
+   "revid": 394154,
+   "verses": 61
+  },
+  {
+   "code": "1JO",
+   "title": "개역한글판/요한1서",
+   "revid": 394161,
+   "verses": 105
+  },
+  {
+   "code": "2JO",
+   "title": "개역한글판/요한2서",
+   "revid": 394170,
+   "verses": 13
+  },
+  {
+   "code": "3JO",
+   "title": "개역한글판/요한3서",
+   "revid": 394179,
+   "verses": 15
+  },
+  {
+   "code": "JUD",
+   "title": "개역한글판/유다서",
+   "revid": 394186,
+   "verses": 25
+  },
+  {
+   "code": "REV",
+   "title": "개역한글판/요한계시록",
+   "revid": 470245,
+   "verses": 404
+  }
+ ]
+}
