@@ -36,6 +36,20 @@ ACCURACY = {"en": 0.95, "es": 0.90}
 WPM = (55.0, 150.0)          # words a minute; a sleep session's scripted quiet (`quiet`) is left out
 TARGET = {"sleep": -22.0, "read": -17.0, "hush": -27.0}
 
+# The owner's margin rule (~/.claude/CLAUDE.md, 21 Nov 2026): the bars above are TARGETS. A file only
+# FAILS about 25% outside them, which catches broken output (silent, truncated, wrong text, distorted);
+# a near-miss ships with a logged note. 21 Nov: a -18.1 LUFS chapter (0.1 LU under -18.0) was thrown away.
+LU_MARGIN = 2.5              # loudness: read -18..-16 is the target, -20.5..-13.5 the hard band
+TP_MARGIN = 1.0              # true peak: 1 dB over the ceiling (never above 0 dBTP)
+CLIP_MAX = 25                # a handful of clipped samples is inaudible; more is distortion
+ACC_MARGIN = 0.25            # word accuracy: 25% more misheard words than the target allows (0.95 -> 0.9375)
+WPM_HARD = (WPM[0] * 0.75, WPM[1] * 1.25)
+
+
+def hard_accuracy(target: float) -> float:
+    """The accuracy below which a render is broken: the target's error rate plus 25%. Pure."""
+    return round(1 - (1 - target) * (1 + ACC_MARGIN), 4)
+
 
 def ffprobe_seconds(path: Path) -> float:
     out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)],
@@ -153,31 +167,37 @@ def speech_problems(problems: list[str]) -> list[str]:
 
 
 def judge(*, script: str, transcript: str, lang: str, level: str, seconds: float, lufs: float,
-          true_peak: float, clipped: int, quiet: float = 0.0) -> dict:
+          true_peak: float, clipped: int, quiet: float = 0.0, strict_words: bool = False) -> dict:
     """Pure: the numbers in, pass/problems out. Kept apart from the measuring so it is tested."""
     words = len(T.score_words(script, lang))
     acc = accuracy(script, transcript, lang)
     spoken = seconds - quiet       # a session's long scripted pauses are not slow speech
     wpm = round(words / (spoken / 60.0), 1) if spoken > 0 else 0.0
     bar = BARS[level]
-    problems = []
+    problems, notes = [], []        # problems fail the file; notes ship it with a logged line
+
+    def judge_one(miss: str, broken: bool) -> None:
+        (problems if broken else notes).append(miss)
     if acc < ACCURACY[lang]:
-        problems.append(f"A01 word accuracy {acc} < {ACCURACY[lang]}")
+        # A file that IS scripture (a Bible chapter, a psalm) keeps the strict bar: a verse read wrong is
+        # always a fail. Other sessions get the margin.
+        judge_one(f"A01 word accuracy {acc} < {ACCURACY[lang]}", strict_words or acc < hard_accuracy(ACCURACY[lang]))
     if not ends_whole(script, transcript, lang):
-        problems.append("A07 the last words are not in the transcript")
-    if not (bar["lufs"][0] <= lufs <= bar["lufs"][1]):
-        problems.append(f"A06 loudness {lufs} LUFS outside {bar['lufs']}")
+        problems.append("A07 the last words are not in the transcript")     # truncated: always broken
+    lo, hi = bar["lufs"]
+    if not (lo <= lufs <= hi):
+        judge_one(f"A06 loudness {lufs} LUFS outside {bar['lufs']}", not (lo - LU_MARGIN <= lufs <= hi + LU_MARGIN))
     if true_peak > bar["tp_max"]:
-        problems.append(f"A06 true peak {true_peak} dBTP > {bar['tp_max']}")
+        judge_one(f"A06 true peak {true_peak} dBTP > {bar['tp_max']}", true_peak > min(bar["tp_max"] + TP_MARGIN, 0.0))
     if clipped:
-        problems.append(f"A06 {clipped} clipped samples")
+        judge_one(f"A06 {clipped} clipped samples", clipped > CLIP_MAX)
     if not (WPM[0] <= wpm <= WPM[1]):
-        problems.append(f"length {seconds}s for {words} words = {wpm} wpm, outside {WPM}")
-    return {"pass": not problems, "problems": problems, "accuracy": acc, "wpm": wpm, "words": words,
+        judge_one(f"length {seconds}s for {words} words = {wpm} wpm, outside {WPM}", not (WPM_HARD[0] <= wpm <= WPM_HARD[1]))
+    return {"pass": not problems, "problems": problems, "notes": notes, "accuracy": acc, "wpm": wpm, "words": words,
             "lufs": lufs, "true_peak": true_peak, "clipped": clipped}
 
 
-def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0) -> dict:
+def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0, strict_words: bool = False) -> dict:
     seconds = ffprobe_seconds(path)
     loud = loudness(path)
     clipped = clipped_samples(path)
@@ -187,7 +207,7 @@ def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0) ->
         asr = "small"
         transcript = transcribe(path, lang, asr)
     out = judge(script=script, transcript=transcript, lang=lang, level=level, seconds=seconds,
-                lufs=loud["lufs"], true_peak=loud["true_peak"], clipped=clipped, quiet=quiet)
+                lufs=loud["lufs"], true_peak=loud["true_peak"], clipped=clipped, quiet=quiet, strict_words=strict_words)
     out["asr"] = asr
     out["seconds"] = round(seconds, 2)
     out["transcript_tail"] = transcript[-120:]

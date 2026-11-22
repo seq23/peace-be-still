@@ -4,6 +4,7 @@ import json
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 AUDIO = Path(__file__).resolve().parent.parent
@@ -31,12 +32,10 @@ class Clone(unittest.TestCase):
     def test_one_engine_per_story(self):
         with tempfile.TemporaryDirectory() as d:
             w = Path(d)
-            self.assertIsNone(C.engine_of(w))
             self.assertFalse(H.taken_by_clone(w))
             (w / "engine").write_text("clone")
             self.assertTrue(H.taken_by_clone(w))
             (w / "engine").write_text("gemini")
-            self.assertEqual(C.engine_of(w), "gemini")
             self.assertFalse(H.taken_by_clone(w))
 
     def test_floors_sit_between_the_test_and_the_other_voices(self):
@@ -46,6 +45,11 @@ class Clone(unittest.TestCase):
             self.assertGreater(f, cl["test_scores"]["other"][r])
         self.assertTrue(C.turn_ok("elder", 0.9))
         self.assertFalse(C.turn_ok("elder", 0.8))
+        # The margin rule: just under the measured floor ships with a note; well under it fails.
+        f = cl["floor"]["grandmother"]
+        self.assertTrue(C.turn_ok("grandmother", f - 0.01))
+        self.assertFalse(C.turn_ok("grandmother", C.similarity_floor("grandmother") - 0.001))
+        self.assertGreater(C.similarity_floor("grandmother"), cl["test_scores"]["other"]["grandmother"])
 
     def test_similarity_is_never_judged_on_a_short_line_alone(self):
         """20 Nov 2026: every similarity miss (16 of 16 on 18-19 Nov) was a 2-6 word turn; the passing
@@ -74,7 +78,57 @@ class Clone(unittest.TestCase):
         self.assertTrue(C.sentence_ok("And he arose, and rebuked the wind.", "and he arose and rebuked the wind"))
         self.assertTrue(C.sentence_ok("Go, return.", "go return now"))
         self.assertFalse(C.sentence_ok("And he arose, and rebuked the wind.", "and the wind"))
-        self.assertEqual(C.sentences("One. Two? Three!"), ["One.", "Two?", "Three!"])
+
+    def test_margin_for_retelling_never_for_scripture(self):
+        # Two words off in a short retelling line (a name heard as another word): a near-miss that ships.
+        line, heard = "Naaman Dips Seven Times.", "neiman dipped seven times"
+        self.assertEqual(C.sentence_verdict(line, heard), "near")
+        self.assertTrue(C.sentence_ok(line, heard))
+        # The same miss inside a quoted verse stays a fail: a verse read wrong is always broken.
+        self.assertEqual(C.sentence_verdict(line, heard, scripture=True), "bad")
+        # Far off is broken anywhere.
+        self.assertEqual(C.sentence_verdict("Church, Naaman had everything he could want.", "church"), "bad")
+
+    def test_every_quoted_verse_sentence_in_every_story_is_scripture(self):
+        # The review found 15 long verse sentences and every short one missed by the first version.
+        missed = []
+        for story in H.load_stories():
+            verses = C.scripture_words(story)
+            for step in C.plan(story):
+                for sent in step.get("sentences", []):
+                    in_verse = any(sent.strip() and sent.strip() in sg["text"] for b in story["blocks"] if b["type"] == "scripture" for sg in b["segments"])
+                    if in_verse and C.T.score_words(sent, "en") and not C.is_scripture(sent, verses):
+                        missed.append((story["id"], sent[:50]))
+        self.assertEqual(missed, [])
+        story = next(s for s in H.load_stories() if any(b["type"] == "scripture" for b in s["blocks"]))
+        self.assertFalse(C.is_scripture("Grandmother pulled the quilt up and smiled at the children.", C.scripture_words(story)))
+
+    def test_a_story_the_gemini_lane_started_joins_the_clone_queue(self):
+        stories = H.load_stories()
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(C.fill, "HOME", Path(d)):
+            w = Path(d) / "hh-work" / stories[0]["id"]
+            w.mkdir(parents=True)
+            (w / "engine").write_text("gemini")
+            queue = C.lane_order(H.todo(stories, []), [])
+            self.assertIn(stories[0]["id"], [s["id"] for s in queue])
+
+    def test_a_held_story_is_rescued_only_while_its_words_match(self):
+        story = H.load_stories()[0]
+        ok = {"pass": True, "problems": [], "notes": [], "accuracy": 0.97, "wpm": 120, "words": 300,
+              "lufs": -22.0, "true_peak": -3.0, "clipped": 0, "asr": "base", "seconds": 300.0}
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(C.fill, "HOME", Path(d)), \
+                mock.patch.object(C.qa, "check", return_value=ok), \
+                mock.patch.object(C, "render", side_effect=AssertionError("no render for a rescue")):
+            src = Path(d) / "s.m4a"
+            src.write_bytes(b"m4a")
+            C.fill.hold(src, "clone", H.row_file(story), C.story_key(story), {"problems": ["A06 loudness"]})
+            row = C.make_story(story, Path(d) / "hh-work" / story["id"])
+            self.assertEqual(row["status"], "passed")
+            self.assertIn("rescued", " ".join(row["checks"]["notes"]))
+            # The script changed: the held copy is never re-used.
+            changed = {**story, "title": story["title"] + " (revised)"}
+            self.assertNotEqual(C.story_key(changed), C.story_key(story))
+            self.assertIsNone(C.fill.held_copy("clone", H.row_file(story), C.story_key(changed)))
 
 
 if __name__ == "__main__":

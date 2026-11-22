@@ -55,6 +55,7 @@ REPO = AUDIO.parent
 sys.path.insert(0, str(AUDIO))
 sys.path.insert(0, str(AUDIO / "lib"))
 import fill  # noqa: E402
+import qa  # noqa: E402
 import text as T  # noqa: E402
 
 VOICES = json.loads((AUDIO / "hush-harbor" / "voices.json").read_text("utf-8"))
@@ -68,7 +69,7 @@ LEAD, TAIL = 0.6, 2.0
 MAX_TRIES = 3        # renders per call before the story is a FAILED row
 PACE_S = float(os.environ.get("PBS_HH_PACE_S", "7"))
 DAILY_CAP = int(os.environ.get("PBS_HH_DAILY_CAP", "10"))   # per model; the free tier's own limit
-CALL_BAR = 0.95
+CALL_BAR = 0.95      # a target: qa.hard_accuracy(CALL_BAR) is the fail line (the margin rule)
 # The app's own AI Studio project (owner, 18 Nov 2026), free tier only; never the shared GEMINI_API_KEY.
 KEY_ENV = "PBS_GEMINI_API_KEY"
 PITCH_MIN_S = 1.5
@@ -264,8 +265,8 @@ def call_problems(turns: list[dict], transcript: str, spans: list, f0s: list) ->
     span (None when too short to read). Pure."""
     problems = []
     acc = call_accuracy(" ".join(t["text"] for t in turns), transcript)
-    if acc < CALL_BAR:
-        problems.append(f"word accuracy {acc} < {CALL_BAR}")
+    if acc < qa.hard_accuracy(CALL_BAR):
+        problems.append(f"word accuracy {acc} < {qa.hard_accuracy(CALL_BAR)}")
     for t, span, f0 in zip(turns, spans, f0s):
         if span is None:
             problems.append(f"{t['role']} turn not heard: \"{t['text'][:40]}\"")
@@ -666,6 +667,8 @@ def make_story(story: dict, work: Path) -> dict:
     wav.unlink()
     checks = {k: res[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks["problems"] = res["problems"]
+    if res.get("notes"):
+        checks["notes"] = res["notes"]
     checks["pauses_s"] = [p for p in parts if isinstance(p, float)]
     checks["tempo"] = factor
     row.update({"seconds": res["seconds"], "checks": checks, "work_s": round(time.monotonic() - t0, 1),

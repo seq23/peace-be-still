@@ -50,6 +50,7 @@ from zoneinfo import ZoneInfo
 AUDIO = Path(__file__).resolve().parent
 REPO = AUDIO.parent
 sys.path.insert(0, str(AUDIO / "lib"))
+import memguard  # noqa: E402
 import text as T  # noqa: E402
 
 CT = ZoneInfo("America/Chicago")
@@ -332,8 +333,27 @@ def tries(row: dict) -> int:
     return int(row.get("tries") or 1)
 
 
+class manifest_lock:
+    """Two lanes run at once (owner, 21 Nov 2026: "2 lanes is a must"), so every read-modify-write of
+    the manifest, and every commit of it, holds this one lock."""
+    def __enter__(self):
+        HOME.mkdir(parents=True, exist_ok=True)
+        self.f = (HOME / "manifest.lock").open("w")
+        fcntl.flock(self.f, fcntl.LOCK_EX)
+        return self
+
+    def __exit__(self, *exc):
+        fcntl.flock(self.f, fcntl.LOCK_UN)
+        self.f.close()
+
+
 def upsert_row(row: dict, path: Path = MANIFEST) -> dict:
     """One row per file: a retried file replaces its FAILED row, carrying the run count on."""
+    with manifest_lock():
+        return _upsert_row(row, path)
+
+
+def _upsert_row(row: dict, path: Path) -> dict:
     rows = read_manifest(path)
     prev = latest(rows).get(row["file"])
     row = {**row, "tries": tries(prev) + 1 if prev else 1}
@@ -656,6 +676,70 @@ def dir_bytes(p: Path) -> int:
     return sum(f.stat().st_size for f in p.rglob("*") if f.is_file()) if p.exists() else 0
 
 
+# ------------------------------------------------------------------ held audio (never thrown away)
+# Owner, 21 Nov 2026: "how are we going to not throw away good audio like the 63". A file that fails is
+# never deleted: it moves to ~/.peace-be-still/held-audio/<lane>/<file> with <file>.reason.json (the
+# problems, the values, the margins, the date, the words key). Before voicing a file again, the lane
+# re-checks the held copy under today's rules; if it passes it ships without a new render. The held copy
+# is removed once that file is shelved (passed, or re-voiced and passed), so the folder stays small.
+def held_dir() -> Path:
+    return HOME / "held-audio"
+
+
+def hold(path: Path, lane: str, rel: str, words: str, result: dict) -> Path | None:
+    """Move a failed file into held-audio with its reason. Returns the held path (None: nothing to hold)."""
+    import qa
+    if not path.exists():
+        return None
+    dest = held_dir() / lane / rel
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(path), dest)
+    reason = {"at": dt.datetime.now(CT).isoformat(timespec="seconds"), "words": words,
+              "problems": result.get("problems"), "notes": result.get("notes"),
+              "values": {k: result.get(k) for k in ("accuracy", "lufs", "true_peak", "clipped", "wpm", "seconds")},
+              "margins": {"lu": qa.LU_MARGIN, "tp_db": qa.TP_MARGIN, "clipped_max": qa.CLIP_MAX,
+                          "accuracy_margin": qa.ACC_MARGIN, "wpm_hard": qa.WPM_HARD}}
+    dest.with_name(dest.name + ".reason.json").write_text(json.dumps(reason, ensure_ascii=False, indent=1), "utf-8")
+    return dest
+
+
+def held_copy(lane: str, rel: str, words: str) -> Path | None:
+    """The held file for rel, when its words still match what is to be said now."""
+    dest = held_dir() / lane / rel
+    why = dest.with_name(dest.name + ".reason.json")
+    if not dest.exists() or not why.exists():
+        return None
+    try:
+        return dest if json.loads(why.read_text("utf-8")).get("words") == words else None
+    except json.JSONDecodeError:
+        return None
+
+
+def release(lane: str, rel: str) -> None:
+    """The file is shelved: its held copy and reason go (the owner's frequent clean-up)."""
+    dest = held_dir() / lane / rel
+    dest.unlink(missing_ok=True)
+    dest.with_name(dest.name + ".reason.json").unlink(missing_ok=True)
+
+
+def is_scripture_file(item: dict) -> bool:
+    """A Bible chapter or a psalm: every word is a verse, so word accuracy keeps the strict bar."""
+    return item["kind"] in ("bible", "psalms")
+
+
+def expected_seconds(kind: str, rows: list[dict]) -> float:
+    """How long a file of this kind takes to make on this Mac: the longest of the last 20 passed rows
+    (measured, not guessed); 900 s before any row exists. Pure."""
+    took = [r.get("work_s") or 0 for r in rows if r.get("kind") == kind and r.get("status") == "passed"][-20:]
+    return max(took) if took else 900.0
+
+
+def time_for(item: dict, rows: list[dict], now: dt.datetime) -> bool:
+    """True when the file can finish before 06:55 CT (window_minutes runs to 06:45; 10 more minutes of
+    grace for the file in hand). A run started at 06:44 never begins a 40-minute chapter. Pure."""
+    return expected_seconds(item["kind"], rows) / 60 <= window_minutes(now) + 10
+
+
 def make_one(item: dict, pron: dict, work: Path) -> dict:
     """Render, master and check one file. Mastering misses are mastered again from the kept WAV
     (master()); only a speech problem (qa.speech_problems: A01, A07, length) is rendered again, once,
@@ -664,12 +748,23 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     t0 = time.monotonic()
     wav, out = work / "track.wav", work / Path(item["file"]).name
     result, attempts = None, 0
+    rendered, mastered = {}, {"tries": 0, "i": None, "tp": None}
+    script = script_of(item)
+    # A held copy of this file is re-checked under today's rules first: if it passes, no new render.
+    # (Not for files with call-and-response marks: their pause timings come from the render itself.)
+    held = None if item.get("marks") else held_copy("fill", item["file"], words_key(item))
+    if held:
+        again = qa.check(held, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []), strict_words=is_scripture_file(item))
+        if again["pass"] and not (item.get("min_seconds") and again["seconds"] < item["min_seconds"]):
+            shutil.copy2(held, out)
+            result = {**again, "notes": [*(again.get("notes") or []), "rescued from held-audio by a re-check (no new render)"]}
+            print(f"  RESCUED {item['file']} from held-audio (no new render)", flush=True)
     try:
-        for speed in (SPEED, RETRY_SPEED):
+        for speed in (() if result else (SPEED, RETRY_SPEED)):
             attempts += 1
             rendered = render(item, pron, wav, speed)
             mastered = master(wav, out, item["level"])
-            result = qa.check(out, script_of(item), item["lang"], item["level"], quiet=sum(item.get("gaps") or []))
+            result = qa.check(out, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []), strict_words=is_scripture_file(item))
             if item.get("min_seconds") and result["seconds"] < item["min_seconds"]:
                 result = {**result, "pass": False, "problems": [*result["problems"],
                           f"length {result['seconds']:.0f}s voiced is under the {item['min_seconds']}s floor"]}
@@ -679,9 +774,13 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
         wav.unlink(missing_ok=True)
     checks = {k: result[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     checks["problems"] = result["problems"]
+    notes = list(result.get("notes") or [])
     if result["pass"] and item.get("target_seconds") and result["seconds"] < item["target_seconds"]:
-        checks["notes"] = [f"SHORT {result['seconds']:.0f}s voiced is under the {item['target_seconds']}s target"]
-        print(f"  SHORT {item['file']}: {result['seconds']:.0f}s against the {item['target_seconds']}s target (shipped)")
+        notes.append(f"SHORT {result['seconds']:.0f}s voiced is under the {item['target_seconds']}s target")
+    if notes:
+        checks["notes"] = notes
+        if result["pass"]:
+            print(f"  NOTE {item['file']} shipped inside the margin: {'; '.join(notes)}")
     checks["mastering"] = {k: mastered[k] for k in ("tries", "i", "tp")}
     if item.get("marks"):
         # Where the call-and-response quiet starts, as Hush Harbor rows carry it (the app shows the response then).
@@ -696,9 +795,11 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
         row["sha256"] = sha256(out)
         row["_local"] = str(out)
     else:
-        out.unlink(missing_ok=True)
+        held_at = hold(out, "fill", item["file"], row["words"], result)
         row["sha256"] = None
         row["shelved"] = None
+        if held_at:
+            row["held"] = str(held_at)
     return row
 
 
@@ -736,6 +837,11 @@ def morning_line(text: str, key: str, now: dt.datetime) -> str:
 def git_commit(msg: str) -> str:
     """Commit the manifest and push it (the runner checkout tracks main). A push that fails is a
     note: the commit stays local and the next run pushes it."""
+    with manifest_lock():
+        return _git_commit(msg)
+
+
+def _git_commit(msg: str) -> str:
     def g(*a, timeout=120):
         return subprocess.run(["git", "-C", str(REPO), *a], capture_output=True, text=True, timeout=timeout)
     g("add", str(MANIFEST.relative_to(REPO)))
@@ -748,14 +854,21 @@ def git_commit(msg: str) -> str:
 
 
 # ------------------------------------------------------------------ the run window
+# The Mac's day (her ruling, ~/.claude/CLAUDE.md "The Mac's day"): heavy work 22:00-07:00 CT only, and
+# the Mac is OFF 07:00-10:00. New work stops at 06:45 so the file in hand finishes and every lane has
+# checkpointed (manifest row written, clone sentences saved) before 06:55. launchd's own start time is
+# set elsewhere; this is the window every lane obeys.
+WINDOW_START, WINDOW_STOP = dt.time(22, 0), dt.time(6, 45)
+
+
 def window_minutes(now: dt.datetime) -> int:
-    """Minutes the Mac may still spend on audio in this batch (her call 20 Nov 2026: "every night at
-    5pm until its done"): every day 17:00-08:00 CT, weekends included; 0 between 08:00 and 17:00.
-    Otherwise the minutes until the next 08:00 CT, so a batch never runs into the day. Pure."""
+    """Minutes the Mac may still spend starting audio work in this batch: from 22:00 CT until 06:45 CT,
+    every day; 0 between 06:45 and 22:00. Pure."""
     n = now.astimezone(CT)
-    if 8 <= n.hour < 17:
+    t = n.time()
+    if WINDOW_STOP <= t < WINDOW_START:
         return 0
-    end = n.replace(hour=8, minute=0, second=0, microsecond=0)
+    end = n.replace(hour=WINDOW_STOP.hour, minute=WINDOW_STOP.minute, second=0, microsecond=0)
     if n >= end:
         end += dt.timedelta(days=1)
     return int((end.timestamp() - n.timestamp()) // 60)
@@ -816,6 +929,13 @@ def main(argv=None) -> int:
                 break
             if a.max_minutes and (time.monotonic() - t_start) / 60 >= a.max_minutes:
                 break
+            if not time_for(item, rows, dt.datetime.now(CT)):
+                print(f"note: {item['file']} needs about {expected_seconds(item['kind'], rows) / 60:.0f} minutes; "
+                      "not started so the run checkpoints before 06:55", flush=True)
+                break
+            mem = memguard.read()
+            if memguard.high(mem):      # the Bible lane carries on; the clone lane is the one that pauses
+                print(f"  NOTE MEMGUARD_HIGH bible: {memguard.line(mem)}; the clone lane pauses, this lane goes on", flush=True)
             if dir_bytes(work) > MAC_BUDGET_BYTES:
                 raise NamedStop("MAC_BUDGET", f"the work folder {work} holds over 5 GB; nothing more is voiced until it is cleared")
             row = make_one(item, pron, work)
@@ -823,6 +943,7 @@ def main(argv=None) -> int:
                 local = Path(row.pop("_local"))
                 row["shelved"] = shelve(local, item["file"])
                 local.unlink()
+                release("fill", item["file"])
                 made += 1
             else:
                 failed_now += 1

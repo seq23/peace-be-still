@@ -15,6 +15,13 @@ import fill  # noqa: E402
 import qa  # noqa: E402
 import text as T  # noqa: E402
 
+_HOME = tempfile.TemporaryDirectory()
+
+
+def setUpModule():
+    # No test ever writes to the real ~/.peace-be-still (held audio, locks).
+    fill.HOME = Path(_HOME.name)
+
 VPL_EN = """GEN 1:1 In the beginning God created the heaven and the earth.
 GEN 2:1 Thus the heavens and the earth were finished.
 PSA 1:1 Blessed [is] the man that walketh not in the counsel of the ungodly.
@@ -112,16 +119,63 @@ class Plan(unittest.TestCase):
 
 
 class RunWindow(unittest.TestCase):
-    def test_never_in_her_workday_and_a_batch_ends_by_eight(self):
+    def test_nights_only_and_new_work_stops_at_0645(self):
+        # The Mac's day (her ruling): heavy work 22:00-07:00 CT, Mac off 07:00-10:00; new work stops at
+        # 06:45 so every lane checkpoints before 06:55.
         at = lambda d, h, m=0: dt.datetime(2026, 11, d, h, m, tzinfo=fill.CT)   # 23 Nov 2026 is a Monday
         self.assertEqual(fill.window_minutes(at(23, 12)), 0)            # Mon noon: no run
+        self.assertEqual(fill.window_minutes(at(23, 6, 45)), 0)         # 06:45: stop starting work
         self.assertEqual(fill.window_minutes(at(23, 8)), 0)
-        self.assertEqual(fill.window_minutes(at(23, 16, 59)), 0)
-        self.assertEqual(fill.window_minutes(at(23, 7, 30)), 30)        # Mon 07:30: at most 30 minutes
-        self.assertEqual(fill.window_minutes(at(23, 17)), 15 * 60)      # Mon 17:00 -> Tue 08:00
-        self.assertEqual(fill.window_minutes(at(21, 12)), 0)            # Sat noon: no run (nights only, every day)
-        self.assertEqual(fill.window_minutes(at(21, 17)), 15 * 60)      # Sat 17:00 -> Sun 08:00
-        self.assertEqual(fill.window_minutes(at(20, 17)), 15 * 60)      # Fri 17:00 -> Sat 08:00
+        self.assertEqual(fill.window_minutes(at(23, 17)), 0)            # the old 17:00 start is gone
+        self.assertEqual(fill.window_minutes(at(23, 21, 59)), 0)
+        self.assertEqual(fill.window_minutes(at(23, 6, 30)), 15)        # 06:30: 15 minutes left
+        self.assertEqual(fill.window_minutes(at(23, 22)), 8 * 60 + 45)  # Mon 22:00 -> Tue 06:45
+        self.assertEqual(fill.window_minutes(at(21, 23)), 7 * 60 + 45)  # Sat 23:00 -> Sun 06:45
+        self.assertEqual(fill.window_minutes(at(22, 2)), 4 * 60 + 45)   # Sun 02:00 -> 06:45
+
+
+class MemoryGuard(unittest.TestCase):
+    """Two lanes at once on an 8 GB Mac: the clone lane pauses while memory is tight, then resumes."""
+    def run_guard(self, readings, **kw):
+        import memguard
+        seq, logs, t = list(readings), [], [0.0]
+        def reader():
+            return seq.pop(0) if len(seq) > 1 else seq[0]
+        def sleep(s):
+            t[0] += s
+        out = memguard.wait("clone", reader=reader, sleep=sleep, clock=lambda: t[0], log=logs.append, **kw)
+        return out, logs
+
+    def test_parse_swap(self):
+        import memguard
+        self.assertEqual(memguard.parse_swap_used_mb("vm.swapusage: total = 2048.00M  used = 1653.00M  free = 395.00M  (encrypted)"), 1653.0)
+        self.assertEqual(memguard.parse_swap_used_mb("total = 22.00G  used = 2.50G  free = 1.0G"), 2560.0)
+
+    def test_clear_memory_goes_straight_on(self):
+        out, logs = self.run_guard([{"level": 1, "swap_mb": 1653.0}])
+        self.assertEqual((out, logs), ("go", []))
+
+    def test_pause_at_the_threshold_then_resume(self):
+        import memguard
+        lim = memguard.SWAP_LIMIT_MB
+        self.assertEqual(self.run_guard([{"level": 1, "swap_mb": lim}])[0], "go")          # at the limit: fine
+        out, logs = self.run_guard([{"level": 1, "swap_mb": lim + 1}, {"level": 1, "swap_mb": lim + 1}, {"level": 1, "swap_mb": lim - 500}])
+        self.assertEqual(out, "resumed")
+        self.assertTrue(logs[0].startswith("NOTE MEMGUARD_PAUSE clone"))
+        self.assertTrue(logs[-1].startswith("NOTE MEMGUARD_RESUME clone"))
+        out, logs = self.run_guard([{"level": 2, "swap_mb": 0.0}, {"level": 1, "swap_mb": 0.0}])  # macOS warning level
+        self.assertEqual(out, "resumed")
+
+    def test_a_failing_sysctl_reads_as_normal_and_never_blocks(self):
+        import memguard
+        with mock.patch.object(memguard.subprocess, "run", side_effect=OSError("no sysctl")):
+            self.assertEqual(memguard.read(), {"level": 1, "swap_mb": 0.0})
+            self.assertEqual(memguard.wait("clone", sleep=lambda s: self.fail("must not wait")), "go")
+
+    def test_pressure_that_never_clears_drops_to_one_lane(self):
+        out, logs = self.run_guard([{"level": 4, "swap_mb": 9000.0}], max_pause_s=300)
+        self.assertEqual(out, "one-lane")
+        self.assertTrue(logs[-1].startswith("NOTE MEMGUARD_ONE_LANE clone"))
 
 
 class Manifest(unittest.TestCase):
@@ -479,19 +533,35 @@ class Bars(unittest.TestCase):
         r = qa.judge(transcript=GOOD["script"], **GOOD)
         self.assertTrue(r["pass"], r["problems"])
 
-    def test_each_fault_fails(self):
+    def test_each_broken_fault_fails(self):
         cases = {
             "A01": dict(transcript="The Lord is my " * 10),
             "A07": dict(transcript=GOOD["script"].rsplit(" ", 3)[0]),
-            "A06 loudness": dict(transcript=GOOD["script"], lufs=-16.0),
+            "A06 loudness": dict(transcript=GOOD["script"], lufs=-14.0),
             "true peak": dict(transcript=GOOD["script"], true_peak=-0.5),
-            "clipped": dict(transcript=GOOD["script"], clipped=3),
+            "clipped": dict(transcript=GOOD["script"], clipped=300),
             "length": dict(transcript=GOOD["script"], seconds=600.0),
         }
         for name, over in cases.items():
             r = qa.judge(**{**GOOD, **over})
             self.assertFalse(r["pass"], name)
             self.assertTrue(any(name.split()[0] in p for p in r["problems"]), (name, r["problems"]))
+
+    def test_near_misses_ship_with_a_note(self):
+        # 21 Nov 2026: a chapter at -18.1 LUFS against -18..-16 was thrown away. Inside the margin it ships.
+        read = {**GOOD, "level": "read", "lufs": -18.1, "true_peak": -1.5}
+        r = qa.judge(transcript=GOOD["script"], **{k: v for k, v in read.items() if k != "transcript"})
+        self.assertTrue(r["pass"], r["problems"])
+        self.assertTrue(any("A06 loudness" in n for n in r["notes"]))
+        self.assertFalse(qa.judge(transcript=GOOD["script"], **{**read, "lufs": -20.6})["pass"])   # 25% out: broken
+        near = {**GOOD, "true_peak": -1.6, "clipped": 3}
+        r = qa.judge(transcript=GOOD["script"], **near)
+        self.assertTrue(r["pass"], r["problems"])
+        self.assertEqual(len(r["notes"]), 2)
+
+    def test_accuracy_margin(self):
+        self.assertEqual(qa.hard_accuracy(0.95), 0.9375)
+        self.assertEqual(qa.hard_accuracy(0.90), 0.875)
 
     def test_spanish_bar_is_090(self):
         self.assertEqual(qa.ACCURACY["es"], 0.90)
@@ -548,14 +618,93 @@ class Mastering(unittest.TestCase):
         calls, renders = [], []
         res = lambda probs: {"pass": not probs, "problems": probs, "accuracy": 0.97, "wpm": 100, "words": 10,
                              "lufs": -17.0, "true_peak": -1.5, "clipped": 0, "asr": "base", "seconds": 60.0}
-        with tempfile.TemporaryDirectory() as d, \
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home, \
+                mock.patch.object(fill, "HOME", Path(home)), \
                 mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
                 mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg(calls)), \
                 mock.patch.object(qa, "loudness", side_effect=louds), \
                 mock.patch.object(qa, "check", side_effect=[res(p) for p in checks]):
             row = fill.make_one(item, {}, Path(d))
             self.assertFalse((Path(d) / "track.wav").exists())
+            self.held = sorted(str(f.relative_to(home)) for f in Path(home).rglob("*") if f.is_file())
         return row, renders, [c for c in calls if "aac_at" in c]
+
+    def test_a_minus_18_1_lufs_file_is_normalised_and_passes(self):
+        # 21 Nov 2026: -18.1 LUFS against -18..-16 was thrown away. Now it is mastered again from the same
+        # WAV toward -17 (two-pass loudnorm), and even a file left at -18.1 ships inside the margin.
+        calls = []
+        got = iter([{"lufs": -18.1, "true_peak": -1.5}, {"lufs": -17.0, "true_peak": -1.5}])
+        r = fill.master(Path("in.wav"), Path("out.m4a"), "read", run=self.fake_ffmpeg(calls), measure=lambda p: next(got))
+        self.assertEqual((r["tries"], r["lufs"]), (2, -17.0))
+        left = qa.judge(script=GOOD["script"], transcript=GOOD["script"], lang="en", level="read", seconds=60.0,
+                        lufs=-18.1, true_peak=-1.5, clipped=0)
+        self.assertTrue(left["pass"], left["problems"])
+
+    def test_a_wrong_verse_fails_and_is_held_not_deleted(self):
+        wrong = "A01 word accuracy 0.9 < 0.95"
+        row, renders, _ = self.make([[wrong], [wrong]], [{"lufs": -17.0, "true_peak": -1.5}] * 2)
+        self.assertEqual((row["status"], len(renders)), ("FAILED", 2))
+        self.assertTrue(row["held"].endswith(row["file"]))
+        self.assertIn(f"held-audio/fill/{row['file']}", self.held)
+        self.assertIn(f"held-audio/fill/{row['file']}.reason.json", self.held)
+
+    def test_scripture_files_keep_the_strict_word_bar(self):
+        near = dict(script=GOOD["script"], lang="en", level="read", seconds=60.0, lufs=-17.0, true_peak=-1.5, clipped=0)
+        heard = GOOD["script"].replace("shepherd", "shepard", 5)   # a few words wrong: accuracy just under 0.95
+        loose = qa.judge(transcript=heard, **near)
+        strict = qa.judge(transcript=heard, strict_words=True, **near)
+        self.assertLess(loose["accuracy"], 0.95)
+        self.assertGreaterEqual(loose["accuracy"], qa.hard_accuracy(0.95))
+        self.assertTrue(loose["pass"])          # a session line: ships with a note
+        self.assertFalse(strict["pass"])        # a Bible chapter: a verse read wrong fails
+        self.assertTrue(fill.is_scripture_file({"kind": "bible"}) and fill.is_scripture_file({"kind": "psalms"}))
+        self.assertFalse(fill.is_scripture_file({"kind": "psalm-night"}))
+
+    def test_no_file_starts_that_cannot_finish_before_0655(self):
+        rows = [{"kind": "bible", "status": "passed", "work_s": 2550.0}]
+        at = lambda h, m: dt.datetime(2026, 11, 23, h, m, tzinfo=fill.CT)
+        self.assertFalse(fill.time_for({"kind": "bible"}, rows, at(6, 44)))   # 1 + 10 minutes left, 42 needed
+        self.assertTrue(fill.time_for({"kind": "bible"}, rows, at(5, 0)))
+        self.assertEqual(fill.expected_seconds("psalms", rows), 900.0)          # nothing measured yet: 15 minutes
+
+    def test_a_held_copy_of_a_call_and_response_file_is_never_reused(self):
+        item = {**fill.plan(bibles())[2], "marks": [1]}
+        renders = []
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home, \
+                mock.patch.object(fill, "HOME", Path(home)), \
+                mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"), {})[2]), \
+                mock.patch.object(fill, "master", side_effect=lambda wav, out, level: (Path(out).write_bytes(b"m"), {"tries": 1, "i": -17.0, "tp": -2.0})[1]), \
+                mock.patch.object(fill, "pause_starts", return_value=[]), \
+                mock.patch.object(qa, "check", return_value={"pass": True, "problems": [], "notes": [], "accuracy": 0.97, "wpm": 100, "words": 10,
+                                                             "lufs": -17.0, "true_peak": -1.5, "clipped": 0, "asr": "base", "seconds": 60.0}):
+            src = Path(d) / "old.m4a"
+            src.write_bytes(b"m4a")
+            fill.hold(src, "fill", item["file"], fill.words_key(item), {"problems": []})
+            fill.make_one(item, {}, Path(d))
+            self.assertEqual(len(renders), 1)   # rendered again: its pause timings come from the render
+
+    def test_a_held_file_is_rescued_by_a_recheck_without_a_render(self):
+        item = fill.plan(bibles())[2]
+        ok = {"pass": True, "problems": [], "notes": [], "accuracy": 0.97, "wpm": 100, "words": 10,
+              "lufs": -18.1, "true_peak": -1.5, "clipped": 0, "asr": "base", "seconds": 60.0}
+        renders = []
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home, \
+                mock.patch.object(fill, "HOME", Path(home)), \
+                mock.patch.object(fill, "render", side_effect=lambda *a: renders.append(a)), \
+                mock.patch.object(qa, "check", return_value=ok):
+            src = Path(d) / "old.m4a"
+            src.write_bytes(b"m4a")
+            fill.hold(src, "fill", item["file"], fill.words_key(item), {"problems": ["A06 loudness -18.1 LUFS outside (-18.0, -16.0)"]})
+            row = fill.make_one(item, {}, Path(d))
+            self.assertEqual((row["status"], renders), ("passed", []))
+            self.assertIn("rescued", " ".join(row["checks"]["notes"]))
+            self.assertTrue(Path(row["_local"]).exists())
+            fill.release("fill", item["file"])
+            self.assertEqual([f for f in Path(home).rglob("*") if f.is_file()], [])
+            # A held copy of different words is never re-used.
+            src.write_bytes(b"m4a")
+            fill.hold(src, "fill", item["file"], "otherwords", {"problems": []})
+            self.assertIsNone(fill.held_copy("fill", item["file"], fill.words_key(item)))
 
     def night(self, kind, lang, seconds):
         """make_one on a fixture night whose voiced length is `seconds` (each render): (row, render speeds)."""
@@ -621,7 +770,7 @@ class Mastering(unittest.TestCase):
         ok = {"lufs": -17.0, "true_peak": -1.5}
         row, renders, encodes = self.make([[]], [{"lufs": -17.0, "true_peak": -0.2}, ok])
         self.assertEqual((len(renders), len(encodes), row["status"]), (1, 2, "passed"))
-        row, renders, _ = self.make([["A06 loudness -18.1 LUFS outside (-18.0, -16.0)"]], [ok])
+        row, renders, _ = self.make([["A06 loudness -22.0 LUFS outside (-18.0, -16.0)"]], [ok])
         self.assertEqual((len(renders), row["status"]), (1, "FAILED"))
 
     def test_speech_miss_is_rendered_again_slower(self):
