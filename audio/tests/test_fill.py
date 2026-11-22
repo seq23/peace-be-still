@@ -694,7 +694,7 @@ class Mastering(unittest.TestCase):
     def fake_ffmpeg(self, calls):
         def run(cmd, **k):
             calls.append(cmd)
-            if "aac_at" in cmd and Path(cmd[-1]).parent.is_dir():
+            if fill.aac_encoder() in cmd and Path(cmd[-1]).parent.is_dir():
                 Path(cmd[-1]).write_bytes(b"m4a")
             return mock.Mock(stderr=self.PASS1 if "null" in cmd else "", returncode=0)
         return run

@@ -644,6 +644,12 @@ def loudnorm_filter(i: float, tp: float, measured: dict | None = None) -> str:
             f":offset={measured['target_offset']}:linear=true:print_format=summary")
 
 
+def aac_encoder() -> str:
+    """Apple's AAC (aac_at) on the Mac, as the library was locked; ffmpeg's own AAC on a Linux runner
+    (the cloud lane), which has no AudioToolbox. Either way the ENCODED file is what qa.check judges."""
+    return os.environ.get("PBS_AAC") or ("aac_at" if sys.platform == "darwin" else "aac")
+
+
 def master(wav: Path, out: Path, level: str, *, run=None, measure=None) -> dict:
     """WAV -> mastered AAC-LC mono 48 kbps .m4a inside the level's bars (qa.BARS), judged on the
     ENCODED file by qa.loudness. A miss is mastered again from the kept WAV: the true-peak target
@@ -659,7 +665,7 @@ def master(wav: Path, out: Path, level: str, *, run=None, measure=None) -> dict:
         p1 = run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(wav), "-af", loudnorm_filter(i, tp), "-f", "null", "-"],
                  capture_output=True, text=True, timeout=1800)
         run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af", loudnorm_filter(i, tp, loudnorm_measured(p1.stderr)),
-             "-ac", "1", "-ar", "24000", "-c:a", "aac_at", "-b:a", "48k", "-movflags", "+faststart", str(out)],
+             "-ac", "1", "-ar", "24000", "-c:a", aac_encoder(), "-b:a", "48k", "-movflags", "+faststart", str(out)],
             check=True, timeout=1800)
         got = measure(out)
         peak_ok, loud_ok = got["true_peak"] <= ceiling, lo <= got["lufs"] <= hi
