@@ -67,8 +67,11 @@ tap(r"With God.s Word", wait=60)
 at = find(r'Birth year', 30)
 if not at: tap(r'Birth year')
 adb('shell', 'input', 'tap', str(at[0]), str(at[1])); adb('shell', 'input', 'text', '1985'); note('typed birth year 1985')
-adb('shell', 'input', 'keyevent', '111')
-tap(r'^Skip', wait=3, need=False); tap(r'^Continue')
+# The number pad covers the footer button (run 45081471618): submit with the pad's check key, as a person would.
+adb('shell', 'input', 'keyevent', '66'); time.sleep(2)
+if find(r'What year were you born', 2):
+    tap(r'^Skip', wait=2, need=False)
+    adb('shell', 'input', 'keyevent', '4'); time.sleep(1); tap(r'^Continue')
 tap(r'Hush Harbor', scroll=True); tap(r'^Start Hush Harbor', scroll=True)
 time.sleep(3); dismiss_system(); tap(r'^Not now', wait=4, need=False); dismiss_system()
 note('after onboarding: ' + words())
