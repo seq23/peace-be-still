@@ -409,6 +409,7 @@ def main(argv=None) -> int:
     ap.add_argument("--cloud-plan", type=int, metavar="JOBS", help="print at most JOBS cloud story ids as JSON")
     a = ap.parse_args(argv)
     # Its own lock (owner, 21 Nov 2026: the Bible and clone lanes run at the same time).
+    fill.HOME.mkdir(parents=True, exist_ok=True)   # a fresh runner has no home yet
     lock = (fill.HOME / os.environ.get("PBS_HH_LOCK", "clone-lane.lock")).open("w")
     if not a.dry_run and a.cloud_plan is None:
         try:
