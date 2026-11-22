@@ -43,6 +43,7 @@ import memguard  # noqa: E402
 import text as T  # noqa: E402
 
 CLONE = H.VOICES["clone"]
+BATCH = 20          # sentences per Chatterbox call: the memory guard is read between calls
 VOICE_ID = "chatterbox:hush-harbor-clone"
 CB_PY = os.environ.get("PBS_CHATTERBOX_PY", str(Path.home() / "GitHub/how-we-know/.venv-tts/bin/python"))
 REF_DIR = fill.HOME / "hh-reference" / "clone"
@@ -88,16 +89,26 @@ def sentence_ok(text: str, transcript: str, scripture: bool = False) -> bool:
     return sentence_verdict(text, transcript, scripture) != "bad"
 
 
-def scripture_words(story: dict) -> str:
-    """The story's quoted scripture as one normalised word string, to tell a verse sentence from a
-    retelling one (turns merge neighbouring blocks, so the block type is gone by then). Pure."""
-    segs = [sg["text"] for b in story["blocks"] if b["type"] == "scripture" for sg in b["segments"]]
-    return " " + " ".join(T.score_words(" ".join(segs), "en")) + " "
+def scripture_words(story: dict) -> dict:
+    """The story's quoted scripture, to tell a verse sentence from a retelling one (turns merge
+    neighbouring blocks, so the block type is gone by then): the verse words as one string, and every
+    run of three verse words. Pure."""
+    segs = [T.score_words(sg["text"], "en") for b in story["blocks"] if b["type"] == "scripture" for sg in b["segments"]]
+    words = " " + " | ".join(" ".join(w) for w in segs) + " "
+    grams = {tuple(w[i:i + 3]) for w in segs for i in range(len(w) - 2)}
+    return {"words": words, "grams": grams}
 
 
-def is_scripture(sentence: str, verses: str) -> bool:
+def is_scripture(sentence: str, verses: dict) -> bool:
+    """A sentence is scripture when all its words stand together in a quoted verse (a short line such as
+    "Stand still.") or it shares any three-word run with one (a verse that ends mid-sentence). Erring
+    toward scripture only makes the check stricter. Pure."""
     w = T.score_words(sentence, "en")
-    return len(w) >= 3 and f" {' '.join(w)} " in verses
+    if not w:
+        return False
+    if f" {' '.join(w)} " in verses["words"]:
+        return True
+    return any(tuple(w[i:i + 3]) in verses["grams"] for i in range(len(w) - 2))
 
 
 def similarity_floor(role: str) -> float:
@@ -237,8 +248,12 @@ def make_story(story: dict, work: Path, deadline: float | None = None) -> dict |
                 out = work / f"t{ti:03d}-s{si:03d}.wav"
                 items.append({"ref": str(ref[st["role"]]), "text": T.speech_text(s, "en", {}), "out": str(out),
                               "seed": 7 + seed.get(out.name, 0)})
-        if not render(items, deadline):
-            return None
+        # In batches of BATCH sentences, with the memory guard between (never mid-sentence: every
+        # sentence is saved as it is made, so a pause or a stop loses nothing).
+        todo = [i for i in items if not Path(i["out"]).exists()]
+        for b in range(0, len(todo), BATCH):
+            if memguard.wait("clone", deadline=deadline) == "one-lane" or not render(todo[b:b + BATCH], deadline):
+                return None
         bad = []
 
         def again(files):
@@ -412,7 +427,8 @@ def main(argv=None) -> int:
             else:
                 failed += 1
             row = fill.upsert_row(row)
-            shutil.rmtree(work, ignore_errors=True)
+            if row["status"] == "passed":
+                shutil.rmtree(work, ignore_errors=True)   # a failed story keeps its good sentences for the retry
             free_models()
             print(f"{row['status']:6} {row['file']}  {row['seconds']}s  acc {row['checks'].get('accuracy')}  "
                   f"sim {row['checks'].get('similarity')}  -> {row.get('shelved')}  {'; '.join(row['checks']['problems'])}", flush=True)

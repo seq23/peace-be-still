@@ -166,6 +166,12 @@ class MemoryGuard(unittest.TestCase):
         out, logs = self.run_guard([{"level": 2, "swap_mb": 0.0}, {"level": 1, "swap_mb": 0.0}])  # macOS warning level
         self.assertEqual(out, "resumed")
 
+    def test_a_failing_sysctl_reads_as_normal_and_never_blocks(self):
+        import memguard
+        with mock.patch.object(memguard.subprocess, "run", side_effect=OSError("no sysctl")):
+            self.assertEqual(memguard.read(), {"level": 1, "swap_mb": 0.0})
+            self.assertEqual(memguard.wait("clone", sleep=lambda s: self.fail("must not wait")), "go")
+
     def test_pressure_that_never_clears_drops_to_one_lane(self):
         out, logs = self.run_guard([{"level": 4, "swap_mb": 9000.0}], max_pause_s=300)
         self.assertEqual(out, "one-lane")
@@ -641,6 +647,41 @@ class Mastering(unittest.TestCase):
         self.assertTrue(row["held"].endswith(row["file"]))
         self.assertIn(f"held-audio/fill/{row['file']}", self.held)
         self.assertIn(f"held-audio/fill/{row['file']}.reason.json", self.held)
+
+    def test_scripture_files_keep_the_strict_word_bar(self):
+        near = dict(script=GOOD["script"], lang="en", level="read", seconds=60.0, lufs=-17.0, true_peak=-1.5, clipped=0)
+        heard = GOOD["script"].replace("shepherd", "shepard", 5)   # a few words wrong: accuracy just under 0.95
+        loose = qa.judge(transcript=heard, **near)
+        strict = qa.judge(transcript=heard, strict_words=True, **near)
+        self.assertLess(loose["accuracy"], 0.95)
+        self.assertGreaterEqual(loose["accuracy"], qa.hard_accuracy(0.95))
+        self.assertTrue(loose["pass"])          # a session line: ships with a note
+        self.assertFalse(strict["pass"])        # a Bible chapter: a verse read wrong fails
+        self.assertTrue(fill.is_scripture_file({"kind": "bible"}) and fill.is_scripture_file({"kind": "psalms"}))
+        self.assertFalse(fill.is_scripture_file({"kind": "psalm-night"}))
+
+    def test_no_file_starts_that_cannot_finish_before_0655(self):
+        rows = [{"kind": "bible", "status": "passed", "work_s": 2550.0}]
+        at = lambda h, m: dt.datetime(2026, 11, 23, h, m, tzinfo=fill.CT)
+        self.assertFalse(fill.time_for({"kind": "bible"}, rows, at(6, 44)))   # 1 + 10 minutes left, 42 needed
+        self.assertTrue(fill.time_for({"kind": "bible"}, rows, at(5, 0)))
+        self.assertEqual(fill.expected_seconds("psalms", rows), 900.0)          # nothing measured yet: 15 minutes
+
+    def test_a_held_copy_of_a_call_and_response_file_is_never_reused(self):
+        item = {**fill.plan(bibles())[2], "marks": [1]}
+        renders = []
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home, \
+                mock.patch.object(fill, "HOME", Path(home)), \
+                mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"), {})[2]), \
+                mock.patch.object(fill, "master", side_effect=lambda wav, out, level: (Path(out).write_bytes(b"m"), {"tries": 1, "i": -17.0, "tp": -2.0})[1]), \
+                mock.patch.object(fill, "pause_starts", return_value=[]), \
+                mock.patch.object(qa, "check", return_value={"pass": True, "problems": [], "notes": [], "accuracy": 0.97, "wpm": 100, "words": 10,
+                                                             "lufs": -17.0, "true_peak": -1.5, "clipped": 0, "asr": "base", "seconds": 60.0}):
+            src = Path(d) / "old.m4a"
+            src.write_bytes(b"m4a")
+            fill.hold(src, "fill", item["file"], fill.words_key(item), {"problems": []})
+            fill.make_one(item, {}, Path(d))
+            self.assertEqual(len(renders), 1)   # rendered again: its pause timings come from the render
 
     def test_a_held_file_is_rescued_by_a_recheck_without_a_render(self):
         item = fill.plan(bibles())[2]

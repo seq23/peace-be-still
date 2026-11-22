@@ -42,7 +42,7 @@ def read() -> dict:
                                    capture_output=True, text=True, timeout=10).stdout.strip() or 1)
         swap = parse_swap_used_mb(subprocess.run(["sysctl", "vm.swapusage"], capture_output=True,
                                                  text=True, timeout=10).stdout)
-    except (OSError, ValueError, subprocess.SubprocessError):
+    except Exception:   # no sysctl, a changed format, anything: read as normal, never block the lane
         return {"level": 1, "swap_mb": 0.0}
     return {"level": level, "swap_mb": swap}
 

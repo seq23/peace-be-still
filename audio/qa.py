@@ -167,7 +167,7 @@ def speech_problems(problems: list[str]) -> list[str]:
 
 
 def judge(*, script: str, transcript: str, lang: str, level: str, seconds: float, lufs: float,
-          true_peak: float, clipped: int, quiet: float = 0.0) -> dict:
+          true_peak: float, clipped: int, quiet: float = 0.0, strict_words: bool = False) -> dict:
     """Pure: the numbers in, pass/problems out. Kept apart from the measuring so it is tested."""
     words = len(T.score_words(script, lang))
     acc = accuracy(script, transcript, lang)
@@ -179,7 +179,9 @@ def judge(*, script: str, transcript: str, lang: str, level: str, seconds: float
     def judge_one(miss: str, broken: bool) -> None:
         (problems if broken else notes).append(miss)
     if acc < ACCURACY[lang]:
-        judge_one(f"A01 word accuracy {acc} < {ACCURACY[lang]}", acc < hard_accuracy(ACCURACY[lang]))
+        # A file that IS scripture (a Bible chapter, a psalm) keeps the strict bar: a verse read wrong is
+        # always a fail. Other sessions get the margin.
+        judge_one(f"A01 word accuracy {acc} < {ACCURACY[lang]}", strict_words or acc < hard_accuracy(ACCURACY[lang]))
     if not ends_whole(script, transcript, lang):
         problems.append("A07 the last words are not in the transcript")     # truncated: always broken
     lo, hi = bar["lufs"]
@@ -195,7 +197,7 @@ def judge(*, script: str, transcript: str, lang: str, level: str, seconds: float
             "lufs": lufs, "true_peak": true_peak, "clipped": clipped}
 
 
-def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0) -> dict:
+def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0, strict_words: bool = False) -> dict:
     seconds = ffprobe_seconds(path)
     loud = loudness(path)
     clipped = clipped_samples(path)
@@ -205,7 +207,7 @@ def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0) ->
         asr = "small"
         transcript = transcribe(path, lang, asr)
     out = judge(script=script, transcript=transcript, lang=lang, level=level, seconds=seconds,
-                lufs=loud["lufs"], true_peak=loud["true_peak"], clipped=clipped, quiet=quiet)
+                lufs=loud["lufs"], true_peak=loud["true_peak"], clipped=clipped, quiet=quiet, strict_words=strict_words)
     out["asr"] = asr
     out["seconds"] = round(seconds, 2)
     out["transcript_tail"] = transcript[-120:]

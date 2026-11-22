@@ -722,6 +722,24 @@ def release(lane: str, rel: str) -> None:
     dest.with_name(dest.name + ".reason.json").unlink(missing_ok=True)
 
 
+def is_scripture_file(item: dict) -> bool:
+    """A Bible chapter or a psalm: every word is a verse, so word accuracy keeps the strict bar."""
+    return item["kind"] in ("bible", "psalms")
+
+
+def expected_seconds(kind: str, rows: list[dict]) -> float:
+    """How long a file of this kind takes to make on this Mac: the longest of the last 20 passed rows
+    (measured, not guessed); 900 s before any row exists. Pure."""
+    took = [r.get("work_s") or 0 for r in rows if r.get("kind") == kind and r.get("status") == "passed"][-20:]
+    return max(took) if took else 900.0
+
+
+def time_for(item: dict, rows: list[dict], now: dt.datetime) -> bool:
+    """True when the file can finish before 06:55 CT (window_minutes runs to 06:45; 10 more minutes of
+    grace for the file in hand). A run started at 06:44 never begins a 40-minute chapter. Pure."""
+    return expected_seconds(item["kind"], rows) / 60 <= window_minutes(now) + 10
+
+
 def make_one(item: dict, pron: dict, work: Path) -> dict:
     """Render, master and check one file. Mastering misses are mastered again from the kept WAV
     (master()); only a speech problem (qa.speech_problems: A01, A07, length) is rendered again, once,
@@ -736,7 +754,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     # (Not for files with call-and-response marks: their pause timings come from the render itself.)
     held = None if item.get("marks") else held_copy("fill", item["file"], words_key(item))
     if held:
-        again = qa.check(held, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []))
+        again = qa.check(held, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []), strict_words=is_scripture_file(item))
         if again["pass"] and not (item.get("min_seconds") and again["seconds"] < item["min_seconds"]):
             shutil.copy2(held, out)
             result = {**again, "notes": [*(again.get("notes") or []), "rescued from held-audio by a re-check (no new render)"]}
@@ -746,7 +764,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
             attempts += 1
             rendered = render(item, pron, wav, speed)
             mastered = master(wav, out, item["level"])
-            result = qa.check(out, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []))
+            result = qa.check(out, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []), strict_words=is_scripture_file(item))
             if item.get("min_seconds") and result["seconds"] < item["min_seconds"]:
                 result = {**result, "pass": False, "problems": [*result["problems"],
                           f"length {result['seconds']:.0f}s voiced is under the {item['min_seconds']}s floor"]}
@@ -910,6 +928,10 @@ def main(argv=None) -> int:
             if a.limit and made + failed_now >= a.limit:
                 break
             if a.max_minutes and (time.monotonic() - t_start) / 60 >= a.max_minutes:
+                break
+            if not time_for(item, rows, dt.datetime.now(CT)):
+                print(f"note: {item['file']} needs about {expected_seconds(item['kind'], rows) / 60:.0f} minutes; "
+                      "not started so the run checkpoints before 06:55", flush=True)
                 break
             mem = memguard.read()
             if memguard.high(mem):      # the Bible lane carries on; the clone lane is the one that pauses
