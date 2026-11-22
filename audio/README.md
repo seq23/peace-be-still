@@ -23,19 +23,39 @@ checks, shelved, status, voice).
   new file; after 3 failed runs it is `NAMED STOP [FAILED_3_TRIES]` in the census line, naming the files.
 - **Spoken text**: stored text word for word; `[ ]`/`( )` marks dropped, ALL-CAPS said as words,
   names respelled from `pronunciations.json` (`engine`).
-- **Run window** (her pick, 20 Nov 2026): Mon–Fri 17:00–08:00 CT and all weekend. `run.sh` exits
-  with a `NOTE` line outside it and caps each step to the minutes left before the next weekday 08:00
-  (`fill.window_minutes`), so a batch never runs into her workday.
+- **The bars are targets, with a margin** (the owner's rule, 21 Nov 2026: "a reasonable margin of error
+  in all these things"): `qa.judge` fails a file only about 25% outside a bar (loudness 2.5 LU past the
+  band, true peak 1 dB over the ceiling and never above 0 dBTP, over 25 clipped samples, word accuracy
+  under `qa.hard_accuracy` (0.95 → 0.9375, 0.90 → 0.875), words a minute 25% outside 55–150). A
+  near-miss ships with a note in the row (`checks.notes`) and a `NOTE … shipped inside the margin` log
+  line. A07 (the last words missing) is always a fail. Why: a -18.1 LUFS chapter (0.1 LU under -18.0) was
+  thrown away on 21 Nov.
+- **Run window** (the Mac's day, her ruling): heavy work 22:00–07:00 CT only, the Mac off 07:00–10:00.
+  `fill.window_minutes` gives the minutes until 06:45, when new work stops so every lane checkpoints
+  before 06:55; `run.sh` exits with a `NOTE` line outside it and caps each step to the minutes left.
 - **Schedule**: launchd `com.seq.pbs-library-fill` (`launchd/install.sh`), every 15 minutes, Nice 15 +
-  low-priority I/O, from the runner clone `~/GitHub/.pbs-runner` via `run.sh`; each lane has its own
-  time box per run (Bible fill 60 minutes, Hush Harbor 12, clone lane 45) and the fill pushes the
-  manifest to main every 10 files.
+  low-priority I/O, from the runner clone `~/GitHub/.pbs-runner` via `run.sh`. **Two lanes at once**
+  (owner, 21 Nov 2026: "2 lanes is a must"): the Bible fill and the clone lane start together, each with
+  its own lock (`library-fill.lock`, `clone-lane.lock`) and a 90-minute box; manifest writes and commits
+  share `manifest.lock`. They are the night's only two heavy jobs. `run.sh` logs `MEM before` / `MEM
+  after` (pressure level, swap, free disk) every run.
+- **Memory guard** (`lib/memguard.py`; the Mac has 8 GB and went 22 GB into swap on 20 Nov): before each
+  story the clone lane (the heavier) reads macOS's pressure level and swap; at level 2+ or swap over
+  4,096 MB (baseline measured 21 Nov 20:15 CT: level 1, 1,653 MB, 53% free, plus 2.4 GB headroom;
+  `PBS_SWAP_LIMIT_MB` overrides) it logs `NOTE MEMGUARD_PAUSE`, waits, and logs `MEMGUARD_RESUME`; still
+  tight after 20 minutes, `MEMGUARD_ONE_LANE` and it stops for the run while the Bible lane carries on.
+  Never mid-story. Between stories it frees the speech and voice models; finished stories' work folders
+  are removed at the start of each run.
 - **Pause flag**: `~/.peace-be-still/library-fill.active` exists while priorities 1–2 are incomplete
   (How We Know / Whisper Almanac pause on it); the run that completes them removes it.
 - **Output**: `OUTPUT <n> files shelved` and `library fill: X of Y files, Z hours shelved, N failed`,
   once a day into the morning email's Notices. Stops: `DRIVE_UNREACHABLE`, `SHELF_HASH_MISMATCH`,
   `SHELF_NOT_VERIFIED`, `MAC_BUDGET` (5 GB), `SCRIPTURE_MISSING`, `NOTHING_SHELVED`.
-- **Hush Harbor stories** (`hush_harbor.py`, same launchd job, after the fill step in `run.sh`):
+- **Hush Harbor is voiced on the clone lane only** (owner, 21 Nov 2026: "we cloned the voices for hush
+  harbor -----thats what we did and those are cloned so are not subj to quota"). The Gemini lane below is
+  kept as code (its vetting and pitch checks are reused) but `run.sh` no longer runs it, so no story waits
+  on `QUOTA_OUT`; a story it had started is finished by the clone lane.
+- **Hush Harbor Gemini lane, retired from the night run** (`hush_harbor.py`):
   the four locked Gemini voices in `hush-harbor/voices.json` (key `PBS_GEMINI_API_KEY`, the app's own free-tier project) (grandmother Gacrux narrates and reads
   Jesus's and God's words; Charon elder men; Kore women; Umbriel other men and groups). Two
   multi-speaker calls per story, split at the call and response; the 3 s pauses are silence put in by
@@ -47,12 +67,12 @@ checks, shelved, status, voice).
   `hush harbor: X of Y stories voiced, N failed`. Mi Refugio stays on the Spanish Kokoro blend.
 - **Hush Harbor clone lane** (`hush_clone.py` + `render_chatterbox.py`, owner: "Use the clones"):
   Chatterbox (MIT) clones of her four picked clips (`gdrive:Mac-Shelf/peace-be-still/voices/hush-harbor/`),
-  one sentence at a time on the Mac's CPU. It works down from the highest story number while the
-  Gemini lane works up, and the first lane to start a story writes `engine` in its work folder, so a
-  story never mixes engines. Checks: each sentence's word accuracy, speaker similarity over the role's
-  floor (`voices.json` clone.floor) measured on at least 6 s of speech (a role's short turns pooled:
-  a d-vector on a 2 s line is noise), then the same file checks and shelf. `run.sh` gives it 45
-  minutes after each fill chunk, under the same lock; a story the box cuts off carries on next run.
+  one sentence at a time on the Mac's CPU, highest story number first. Checks: each sentence's word
+  accuracy (the margin rule: a retelling line up to two words off, or above the hard accuracy, ships with
+  a note; a sentence from a quoted Bible verse keeps the strict bar), speaker similarity over the role's
+  floor (`voices.json` clone.floor; under it by less than 25% of the way to 1.0 ships with a note)
+  measured on at least 6 s of speech (a role's short turns pooled: a d-vector on a 2 s line is noise),
+  then the same file checks and shelf. A story the box cuts off carries on next run.
 - **Served to the app (R2)** (`publish.py`, last step of `run.sh`, same window, keys from the vault): bucket
   `peace-be-still-audio` on her SECOND Cloudflare account (its own free 10 GB; her ruling 20 Nov 2026),
   public only at `https://pbs-audio.professionalresourcelibrary.com/<file>` (R2 custom domain: no listing,

@@ -31,12 +31,10 @@ class Clone(unittest.TestCase):
     def test_one_engine_per_story(self):
         with tempfile.TemporaryDirectory() as d:
             w = Path(d)
-            self.assertIsNone(C.engine_of(w))
             self.assertFalse(H.taken_by_clone(w))
             (w / "engine").write_text("clone")
             self.assertTrue(H.taken_by_clone(w))
             (w / "engine").write_text("gemini")
-            self.assertEqual(C.engine_of(w), "gemini")
             self.assertFalse(H.taken_by_clone(w))
 
     def test_floors_sit_between_the_test_and_the_other_voices(self):
@@ -46,6 +44,11 @@ class Clone(unittest.TestCase):
             self.assertGreater(f, cl["test_scores"]["other"][r])
         self.assertTrue(C.turn_ok("elder", 0.9))
         self.assertFalse(C.turn_ok("elder", 0.8))
+        # The margin rule: just under the measured floor ships with a note; well under it fails.
+        f = cl["floor"]["grandmother"]
+        self.assertTrue(C.turn_ok("grandmother", f - 0.01))
+        self.assertFalse(C.turn_ok("grandmother", C.similarity_floor("grandmother") - 0.001))
+        self.assertGreater(C.similarity_floor("grandmother"), cl["test_scores"]["other"]["grandmother"])
 
     def test_similarity_is_never_judged_on_a_short_line_alone(self):
         """20 Nov 2026: every similarity miss (16 of 16 on 18-19 Nov) was a 2-6 word turn; the passing
@@ -74,6 +77,23 @@ class Clone(unittest.TestCase):
         self.assertTrue(C.sentence_ok("And he arose, and rebuked the wind.", "and he arose and rebuked the wind"))
         self.assertTrue(C.sentence_ok("Go, return.", "go return now"))
         self.assertFalse(C.sentence_ok("And he arose, and rebuked the wind.", "and the wind"))
+
+    def test_margin_for_retelling_never_for_scripture(self):
+        # Two words off in a short retelling line (a name heard as another word): a near-miss that ships.
+        line, heard = "Naaman Dips Seven Times.", "neiman dipped seven times"
+        self.assertEqual(C.sentence_verdict(line, heard), "near")
+        self.assertTrue(C.sentence_ok(line, heard))
+        # The same miss inside a quoted verse stays a fail: a verse read wrong is always broken.
+        self.assertEqual(C.sentence_verdict(line, heard, scripture=True), "bad")
+        # Far off is broken anywhere.
+        self.assertEqual(C.sentence_verdict("Church, Naaman had everything he could want.", "church"), "bad")
+
+    def test_scripture_sentences_are_found_in_the_story(self):
+        story = next(s for s in H.load_stories() if any(b["type"] == "scripture" for b in s["blocks"]))
+        verses = C.scripture_words(story)
+        seg = next(sg["text"] for b in story["blocks"] if b["type"] == "scripture" for sg in b["segments"])
+        self.assertTrue(C.is_scripture(C.sentences(seg)[0], verses))
+        self.assertFalse(C.is_scripture("Grandmother pulled the quilt up and smiled at the children.", verses))
         self.assertEqual(C.sentences("One. Two? Three!"), ["One.", "Two?", "Three!"])
 
 
