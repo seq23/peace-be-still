@@ -703,7 +703,7 @@ class Mastering(unittest.TestCase):
         calls = []
         got = iter([{"lufs": -17.0, "true_peak": -0.4}, {"lufs": -18.2, "true_peak": -1.3}, {"lufs": -17.1, "true_peak": -1.6}])
         r = fill.master(Path("in.wav"), Path("out.m4a"), "read", run=self.fake_ffmpeg(calls), measure=lambda p: next(got))
-        encodes = [c for c in calls if "aac_at" in c]
+        encodes = [c for c in calls if fill.aac_encoder() in c]
         self.assertEqual((len(encodes), r["tries"]), (3, 3))
         self.assertTrue(all(c[c.index("-i") + 1] == "in.wav" for c in encodes))   # always from the kept WAV
         tps = [float(c[c.index("-af") + 1].split("TP=")[1].split(":")[0]) for c in encodes]
@@ -716,7 +716,7 @@ class Mastering(unittest.TestCase):
         calls = []
         fill.master(Path("in.wav"), Path("out.m4a"), "sleep", run=self.fake_ffmpeg(calls),
                     measure=lambda p: {"lufs": -22.0, "true_peak": -3.0})
-        self.assertEqual(len([c for c in calls if "aac_at" in c]), 1)
+        self.assertEqual(len([c for c in calls if fill.aac_encoder() in c]), 1)
 
     def make(self, checks, louds):
         item = fill.plan(bibles())[2]
@@ -732,7 +732,7 @@ class Mastering(unittest.TestCase):
             row = fill.make_one(item, {}, Path(d))
             self.assertFalse((Path(d) / "track.wav").exists())
             self.held = sorted(str(f.relative_to(home)) for f in Path(home).rglob("*") if f.is_file())
-        return row, renders, [c for c in calls if "aac_at" in c]
+        return row, renders, [c for c in calls if fill.aac_encoder() in c]
 
     def test_a_minus_18_1_lufs_file_is_normalised_and_passes(self):
         # 21 Nov 2026: -18.1 LUFS against -18..-16 was thrown away. Now it is mastered again from the same
