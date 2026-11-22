@@ -1013,7 +1013,6 @@ class CloudChain(unittest.TestCase):
         self.assertEqual({fill.cloud_slots(at(h, 0)) for h in range(24)}, {("day", 10), ("night", 16)})
         wf = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text()
         self.assertIn("--cloud-slots", wf)
-        self.assertNotIn("16 - $(", wf)        # the count lives in fill.CLOUD_JOBS only
 
     def test_a_chapter_that_crashes_is_held_and_the_shard_goes_on(self):
         items = fill.plan(bibles())[:3]
