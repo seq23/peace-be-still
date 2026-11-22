@@ -86,9 +86,10 @@ tap(r'Have a review code\?', scroll=True)
 shot('plain', 'review-box-open')
 tap(r'App review code')
 adb('shell', 'input', 'text', CODE); note('typed the review code')
-adb('shell', 'input', 'keyevent', '4'); time.sleep(1)  # BACK closes the pad (ESC does not), so the button is reachable
 shot('secret', 'review-code-typed')
-tap(r'^Use this code', scroll=True)
+# Submit with the pad's check key (onSubmitEditing), as a reviewer would; BACK would close the paywall (run 45083667833).
+adb('shell', 'input', 'keyevent', '66'); time.sleep(2)
+if not find(r'Your paid access is active', 8): tap(r'^Use this code', wait=3, need=False)
 ok = find(r'Your paid access is active', 40)
 note('after code: ' + words())
 shot('secret', 'after-code')
