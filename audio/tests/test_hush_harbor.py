@@ -161,6 +161,19 @@ class Audio(unittest.TestCase):
         lens = sorted(round(len(r) / H.RATE, 2) for r in runs)
         self.assertEqual(lens, sorted([H.LEAD, 3.0, H.GAP, H.TAIL]))
 
+    def test_the_row_knows_where_each_pause_starts(self):
+        # 22 Nov 2026: the clone lane's first passed story had no pause_starts_s, so the app could not
+        # show its response on screen. join() reports each pause's start in the joined audio.
+        import numpy as np
+        tone = np.full(H.RATE, 0.3, dtype=np.float32)
+        starts = []
+        x = H.join([tone, tone, 3.0, tone, 3.0, tone], pause_starts=starts)
+        quiet = np.flatnonzero(np.abs(x) < 1e-6)
+        runs = [r for r in np.split(quiet, np.flatnonzero(np.diff(quiet) != 1) + 1) if round(len(r) / H.RATE, 2) == 3.0]
+        self.assertEqual(starts, [round(r[0] / H.RATE, 3) for r in runs])
+        self.assertEqual(len(starts), 2)
+        self.assertEqual(H.join([tone, 3.0, tone]).tolist(), H.join([tone, 3.0, tone], pause_starts=[]).tolist())
+
     def test_tempo_slows_speech_never_pauses(self):
         import numpy as np
         sec = np.full(H.RATE * 60, 0.3, dtype=np.float32)                 # one minute of "speech"

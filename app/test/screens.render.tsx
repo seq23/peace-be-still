@@ -1063,10 +1063,12 @@ test('plain Bible Stories show only once published: no shelf before, no greyed r
     file: `en/stories/plain/${id}-0000000${n}.m4a`, kind: 'stories', lang: 'en', ref: `content/stories/plain/${id}.json`,
     seconds: 300, sha256: n.repeat(64), voice: 'kokoro:af_nicole', titles: { en: title },
   } as Track);
-  assert.ok(!audioTracks.some(track => track.ref.startsWith('content/stories/plain/')), 'the fixture assumes no plain story is voiced on main');
+  // Main's library now holds voiced plain stories (the cloud fill): set them aside, so the test starts from none.
+  const library = [...audioTracks], isPlain = (track: Track) => track.ref.startsWith('content/stories/plain/');
+  audioTracks.splice(0, audioTracks.length, ...library.filter(track => !isPlain(track)));
   const published = plainTrack(voiced.id, voiced.title, 'd'), waiting = plainTrack(unpublished.id, unpublished.title, 'e');
-  // publishedTracks defaults to the library array itself: copy it, so a voiced-but-unpublished track stays unpublished.
-  const before = publishedTracks, live = [...publishedTracks];
+  // A copy without the plain stories, so a voiced-but-unpublished track stays unpublished.
+  const before = publishedTracks, live = publishedTracks.filter(track => !isPlain(track));
   publishedTracks = live;
   audioTracks.push(waiting);
   try {
@@ -1092,7 +1094,7 @@ test('plain Bible Stories show only once published: no shelf before, no greyed r
     const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
     try { assert.ok(!strings(spanish).includes(en['listen.bibleStories'])); } finally { await act(async () => spanish.unmount()); }
   } finally {
-    for (const track of [published, waiting]) { const i = audioTracks.indexOf(track); if (i >= 0) audioTracks.splice(i, 1); }
+    audioTracks.splice(0, audioTracks.length, ...library);
     publishedTracks = before;
   }
 });
@@ -2459,12 +2461,15 @@ const griefTrack = (): Track => ({
 } as Track);
 const screenBg = (tree: ReactTestRenderer) => host(tree, 'SafeAreaView')[0]?.props.style?.backgroundColor;
 
+// The 3 AM and grief shelves hold only the fixture's tracks: main's own voiced journey nights (the cloud fill)
+// are set aside for the test and put back after, so "voiced but not published" means exactly the fixture.
 async function withTracks(extra: Track[], published: Track[], run: () => Promise<void>) {
-  const before = publishedTracks;
-  publishedTracks = [...audioTracks, ...published];
-  audioTracks.push(...extra);
+  const before = publishedTracks, library = [...audioTracks];
+  const others = library.filter(track => !track.journey);
+  audioTracks.splice(0, audioTracks.length, ...others, ...extra);
+  publishedTracks = [...others, ...published];
   try { await run(); } finally {
-    for (const track of extra) { const i = audioTracks.indexOf(track); if (i >= 0) audioTracks.splice(i, 1); }
+    audioTracks.splice(0, audioTracks.length, ...library);
     publishedTracks = before;
   }
 }

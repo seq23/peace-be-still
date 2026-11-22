@@ -4,7 +4,7 @@ import { beforeEach, afterEach, mock, test } from 'node:test';
 import { buildLibrary, keyScripture, MANIFEST, REPO } from '../src/player/build-library';
 import { createDimmer } from '../src/player/dimmer';
 import { createDownloads, type DownloadFiles } from '../src/player/downloads';
-import { audioBaseUrl, hasCallAndResponse, onePerScript, readManifest, trackTitle, type Track } from '../src/player/library';
+import { audioBaseUrl, hasCallAndResponse, NIGHT_JOURNEYS, onePerScript, readManifest, trackTitle, type Track } from '../src/player/library';
 import { createPlayer, FADE_MS, LOAD_WAIT_MS, type AudioOutput, type AudioStatus, type Store } from '../src/player/player';
 
 const BASE = 'https://audio.test/';
@@ -102,7 +102,7 @@ test('the real manifest yields one track for every passed row, with readable tit
     }
     const fields = ['file', 'kind', 'lang', 'ref', 'seconds', 'sha256', 'titles', 'voice'];
     if (hasCallAndResponse(t)) {
-      fields.push('responsePauses', 'scriptureRef');
+      fields.push('responsePauses');
       const story = JSON.parse(readFileSync(`${REPO}/${t.ref}`, 'utf8'));
       // The key verse is the one the call and response answers: the last Scripture before it.
       const call = story.blocks.findIndex((block: { type: string }) => block.type === 'call_response');
@@ -110,11 +110,21 @@ test('the real manifest yields one track for every passed row, with readable tit
       assert.ok(call > 0 && before.length, `${t.ref} has Scripture before its call and response`);
       assert.equal(t.scriptureRef, before.at(-1).ref);
     }
-    if (t.kind === 'psalm-night') {
-      // A Psalm Night shows its psalm under the title: the script's own `main` reference.
-      fields.push('scriptureRef');
+    if (/\.json(#|$)/.test(t.ref)) {
+      // Every script-made track (a story, a Psalm Night) shows its key Scripture under the title when it has one:
+      // a story's from its blocks, a Psalm Night's from its `main`; a script with no Scripture carries no key.
       const script = JSON.parse(readFileSync(`${REPO}/${t.ref.split('#')[0]}`, 'utf8'));
-      assert.equal(t.scriptureRef, script.main[0]);
+      const verse = (script.blocks ?? []).filter((block: { type: string }) => block.type === 'scripture')[0]?.ref ?? script.main?.[0];
+      if (verse) {
+        fields.push('scriptureRef');
+        assert.ok(t.scriptureRef, `${t.ref} shows its Scripture`);
+      }
+      if (t.kind === 'psalm-night') assert.equal(t.scriptureRef, script.main[0]);   // a Psalm Night names its psalm in `main`
+      // A grief or "back to sleep" night carries its journey (its own shelf); a plain Psalm Night carries none.
+      if (NIGHT_JOURNEYS.includes(script.journey)) {
+        fields.push('journey');
+        assert.equal(t.journey, script.journey);
+      }
     }
     assert.deepEqual(Object.keys(t).sort(), fields.sort(), `${t.kind} ${t.ref}`);
   }

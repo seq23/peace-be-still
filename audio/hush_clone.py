@@ -357,7 +357,8 @@ def make_story(story: dict, work: Path, deadline: float | None = None) -> dict |
     if factor < 1.0:
         parts = [p if isinstance(p, float) else H.slow(p, factor, work) for p in parts]
     wav, out = work / "story.wav", work / H.file_of(story)
-    H.write_wav(wav, H.join(parts))
+    starts: list[float] = []
+    H.write_wav(wav, H.join(parts, pause_starts=starts))
     fill.master(wav, out, "sleep")   # mastering misses are mastered again from this WAV (no re-render)
     if deadline is not None and time.time() > deadline:   # the box ended in the checks: every sentence is kept
         push_work(story["id"], work)
@@ -367,7 +368,7 @@ def make_story(story: dict, work: Path, deadline: float | None = None) -> dict |
     checks = {k: res[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
     if notes or res.get("notes"):
         print(f"  NOTE {H.row_file(story)}: {'; '.join([*notes, *(res.get('notes') or [])][:6])}", flush=True)
-    checks.update(problems=res["problems"], notes=[*notes, *(res.get("notes") or [])][:20], pauses_s=[p for p in parts if isinstance(p, float)], tempo=factor,
+    checks.update(problems=res["problems"], notes=[*notes, *(res.get("notes") or [])][:20], pauses_s=[p for p in parts if isinstance(p, float)], pause_starts_s=starts, tempo=factor,
                   similarity={r: min(vs) for r, vs in sims.items()}, similarity_unmeasured_s=unmeasured)
     row.update({"seconds": res["seconds"], "checks": checks, "work_s": round(time.monotonic() - t0, 1),
                 "status": "passed" if res["pass"] else "FAILED"})

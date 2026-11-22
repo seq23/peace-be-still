@@ -19,8 +19,8 @@ on:
     - cron: "40 * * * *"   # the safety net; each batch starts the next itself (gather), round the clock
   workflow_dispatch:
     inputs:
-      bible_jobs: { description: "most Bible shards this launch", default: "12" }
-      story_jobs: { description: "most clone stories this launch", default: "4" }
+      bible_jobs: { description: "most Bible shards this launch (the CT window caps it too)", default: "12" }
+      story_jobs: { description: "clone-story slots kept inside the window's job count", default: "4" }
       only: { description: "proof run: only Bible files starting with this (e.g. en/bible/kjv-rut)", default: "" }
       story: { description: "proof run: this one story id", default: "" }
 concurrency: { group: "fill-cloud-${{ github.ref }}", cancel-in-progress: false }   # one batch at a time on main
@@ -40,6 +40,7 @@ jobs:
     outputs:
       bible: ${{ steps.p.outputs.bible }}
       stories: ${{ steps.p.outputs.stories }}
+      jobs: ${{ steps.p.outputs.jobs }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -48,14 +49,19 @@ jobs:
         env:
           ONLY: ${{ inputs.only }}
           STORY: ${{ inputs.story }}
-          # 12 + 4 jobs: GitHub Free runs 20 jobs at once per account, across all her repos; 4 stay free for CI.
+          # The job count comes from the launch's Central start time (fill.py CLOUD_JOBS: 16 at night, 10 by
+          # day); GitHub Free runs 20 jobs at once across all her repos, so by day 10 stay free for CI.
           BJ: ${{ inputs.bible_jobs || '12' }}
           SJ: ${{ inputs.story_jobs || '4' }}
           BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}
           GH_TOKEN: ${{ github.token }}
         run: |
           pip install -q numpy scipy
-          plan=$(python audio/fill.py --cloud-plan "$BJ")
+          slots=$(python audio/fill.py --cloud-slots)
+          jobs=$(python -c 'import json,sys; print(json.loads(sys.argv[1])["jobs"])' "$slots")
+          window=$(python -c 'import json,sys; print(json.loads(sys.argv[1])["window"])' "$slots")
+          cap=$(( jobs - SJ < BJ ? jobs - SJ : BJ )); cap=$(( cap < 0 ? 0 : cap ))
+          plan=$(python audio/fill.py --cloud-plan "$cap")
           echo "$plan"
           if [ -n "$ONLY" ] || [ -n "$STORY" ]; then
             # A proof run: one shard over the files asked for, and/or the one story asked for.
@@ -63,12 +69,16 @@ jobs:
             stories=$([ -n "$STORY" ] && python -c 'import json,sys; print(json.dumps([sys.argv[1]]))' "$STORY" || echo '[]')
           else
             bible=$(python -c 'import json,sys; print(json.dumps(json.loads(sys.argv[1])["bible"]))' "$plan")
-            # Slots the Bible matrix leaves go to stories (16 jobs in all), so the long pole gets them.
-            free=$(( 16 - $(python -c 'import json,sys; print(len(json.loads(sys.argv[1])))' "$bible") ))
-            stories=$(python audio/hush_clone.py --cloud-plan "$(( free > SJ ? free : SJ ))")
+            # Slots the Bible matrix leaves go to stories (the window's job count in all), so the long pole gets them.
+            free=$(( jobs - $(python -c 'import json,sys; print(len(json.loads(sys.argv[1])))' "$bible") ))
+            stories=$(python audio/hush_clone.py --cloud-plan "$free")
           fi
+          nb=$(python -c 'import json,sys; print(len(json.loads(sys.argv[1])))' "$bible")
+          ns=$(python -c 'import json,sys; print(len(json.loads(sys.argv[1])))' "$stories")
           echo "bible=$bible" >> "$GITHUB_OUTPUT"
           echo "stories=$stories" >> "$GITHUB_OUTPUT"
+          echo "jobs=$(( nb + ns ))" >> "$GITHUB_OUTPUT"
+          echo "OUTPUT plan: $(( nb + ns )) of the $window window's $jobs jobs ($nb bible + $ns stories; $(TZ=America/Chicago date +%H:%M) CT start)"
           complete=$(python -c 'import json,sys; print(json.loads(sys.argv[1])["complete"])' "$plan")
           if [ "$bible" = "[]" ] && [ "$stories" = "[]" ] && [ -z "$ONLY$STORY" ] && [ "$complete" != True ]; then
             echo "NOTE CLOUD_SHARE_DONE the cloud's share is voiced; the Mac's share is still going, so the fill is not complete yet"

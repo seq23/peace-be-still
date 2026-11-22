@@ -326,14 +326,18 @@ def trim(x, rate: int = RATE, floor_db: float = -45.0):
     return x[max(0, loud[0] - 2) * w:min(k, loud[-1] + 3) * w]
 
 
-def join(parts: list, rate: int = RATE):
+def join(parts: list, rate: int = RATE, pause_starts: list | None = None):
     """parts: arrays (speech) or floats (silence seconds). GAP between speech pieces; a pause is
-    exactly its seconds (no gap added around it). Lead and tail quiet."""
+    exactly its seconds (no gap added around it). Lead and tail quiet. When `pause_starts` is a list,
+    the second each pause starts at in the joined audio is appended to it (the row's checks.pause_starts_s,
+    which the app needs to show the response on screen)."""
     import numpy as np
     z = lambda s: np.zeros(int(round(s * rate)), dtype=np.float32)  # noqa: E731
     out, prev_speech = [z(LEAD)], False
     for p in parts:
         if isinstance(p, float):
+            if pause_starts is not None:
+                pause_starts.append(round(sum(len(x) for x in out) / rate, 3))
             out.append(z(p))
             prev_speech = False
         else:

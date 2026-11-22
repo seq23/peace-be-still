@@ -802,6 +802,29 @@ class Mastering(unittest.TestCase):
                     measure=lambda p: {"lufs": -22.0, "true_peak": -3.0})
         self.assertEqual(len([c for c in calls if fill.aac_encoder() in c]), 1)
 
+    def test_a_peak_that_keeps_missing_never_asks_loudnorm_below_its_range(self):
+        # 22 Nov 2026: 7 of 12 cloud shards died on "Error applying option 'TP' to filter 'loudnorm':
+        # Numerical result out of range": each miss lowered TP by the whole overshoot + 0.5, past -9.
+        calls = []
+        r = fill.master(Path("in.wav"), Path("out.m4a"), "read", run=self.fake_ffmpeg(calls),
+                        measure=lambda p: {"lufs": -17.0, "true_peak": 8.0})
+        tps = [float(c[c.index("-af") + 1].split("TP=")[1].split(":")[0]) for c in calls]
+        self.assertTrue(all(-9.0 <= t <= 0.0 for t in tps), tps)   # ffmpeg -h filter=loudnorm: TP "from -9 to 0"
+        self.assertEqual(r["tp"], fill.TP_FLOOR)
+        encodes = [c for c in calls if fill.aac_encoder() in c]
+        self.assertEqual(len(encodes), 2)      # at the floor nothing lower can be asked: qa.check judges that encode
+        self.assertEqual(fill.tp_target(-14.2), -9.0)
+        self.assertEqual(fill.tp_target(0.4), 0.0)
+
+    @unittest.skipUnless(fill.shutil.which("ffmpeg"), "ffmpeg not installed")
+    def test_ffmpeg_accepts_the_floor_and_refuses_below_it(self):
+        def ask(tp):
+            return fill.subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-f", "lavfi", "-i", "sine=d=1",
+                                        "-af", fill.loudnorm_filter(-17.0, tp), "-f", "null", "-"],
+                                       capture_output=True, text=True, timeout=60)
+        self.assertIn("input_i", ask(fill.TP_FLOOR).stderr)
+        self.assertNotEqual(ask(fill.TP_FLOOR - 0.5).returncode, 0)   # the range is ffmpeg's, not ours
+
     def make(self, checks, louds):
         item = fill.plan(bibles())[2]
         calls, renders = [], []
@@ -979,6 +1002,50 @@ if __name__ == "__main__":
 
 
 class CloudChain(unittest.TestCase):
+    def test_the_launch_size_follows_the_central_clock(self):
+        at = lambda h, m: dt.datetime(2026, 11, 22, h, m, tzinfo=fill.CT)
+        self.assertEqual(fill.cloud_slots(at(21, 59)), ("day", 10))
+        self.assertEqual(fill.cloud_slots(at(22, 0)), ("night", 16))
+        self.assertEqual(fill.cloud_slots(at(3, 0)), ("night", 16))
+        self.assertEqual(fill.cloud_slots(at(6, 59)), ("night", 16))
+        self.assertEqual(fill.cloud_slots(at(7, 0)), ("day", 10))
+        self.assertEqual(fill.cloud_slots(dt.datetime(2026, 11, 22, 4, 0, tzinfo=dt.timezone.utc)), ("night", 16))  # 22:00 CT
+        self.assertEqual({fill.cloud_slots(at(h, 0)) for h in range(24)}, {("day", 10), ("night", 16)})
+        wf = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text()
+        self.assertIn("--cloud-slots", wf)
+
+    def test_a_chapter_that_crashes_is_held_and_the_shard_goes_on(self):
+        items = fill.plan(bibles())[:3]
+        tried = []
+        def make_one(item, pron, work):
+            tried.append(item["file"])
+            if len(tried) == 1:
+                raise RuntimeError("loudnorm pass 1 printed no measurement: Error applying option 'TP'")
+            raise fill.subprocess.CalledProcessError(1, ["ffmpeg"])
+        with tempfile.TemporaryDirectory() as home:
+            man = Path(home) / "manifest.jsonl"; man.write_text("")
+            read, upsert = fill.read_manifest, fill.upsert_row      # their path defaults are bound to the real manifest
+            with mock.patch.object(fill, "HOME", Path(home)), mock.patch.object(fill, "MANIFEST", man), \
+                    mock.patch.object(fill, "read_manifest", lambda path=man: read(path)), \
+                    mock.patch.object(fill, "upsert_row", lambda row, path=man: upsert(row, path)), \
+                    mock.patch.object(fill, "LANE", "cloud"), mock.patch.object(fill, "lane_of", lambda i, c=None: "cloud"), \
+                    mock.patch.object(fill, "plan", lambda *a: items), mock.patch.object(fill, "content_items", lambda r: []), \
+                    mock.patch.object(fill.T, "load_bible", lambda lang: [None] * 66), \
+                    mock.patch.object(fill.T, "load_pronunciations", lambda: {}), \
+                    mock.patch.object(fill, "drive_reachable", lambda *a: None), mock.patch.object(fill, "make_one", make_one), \
+                    mock.patch.dict(fill.os.environ, {"PBS_NO_MORNING": "1"}):
+                (Path(home) / "library-fill.active").write_text("{}")
+                rc = fill.main([])
+                rows = read(man)
+            self.assertEqual(tried, [i["file"] for i in items])           # the shard went on past each crash
+            self.assertEqual([r["status"] for r in rows], ["FAILED"] * 3)
+            self.assertTrue(all(r["checks"]["problems"][0].startswith("CRASH ") for r in rows))
+            self.assertTrue(all(r["tries"] == 1 for r in rows))              # a crash uses a try: never an endless loop
+            self.assertEqual(rc, 9)                                          # NOTHING_SHELVED, the existing stop
+            self.assertTrue((Path(home) / "library-fill.active").exists())   # the fill never removes the marker
+        import check_manifest
+        self.assertEqual(check_manifest.problems(rows, (AUDIO / "VOICES.md").read_text()), [])   # a valid FAILED row
+
     def test_a_batch_that_wrote_no_rows_never_starts_another(self):
         # A batch where every job hit a named stop must not loop round the clock: the chain step runs only
         # when the gather step counted at least one row, and that count starts at 0 before any push.
