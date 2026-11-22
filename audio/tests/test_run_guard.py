@@ -21,13 +21,19 @@ class RunGuard(unittest.TestCase):
             env = {k: v for k, v in os.environ.items() if k != "PBS_UNDER_MAC_WINDOW"}
             # HOME and the voice python are fakes: if the guard ever broke, nothing real could run
             env.update(HOME=td, PBS_WHISPER_PY="/usr/bin/false", MAC_WINDOW_BIN=str(fake))
-            r = subprocess.run(["/bin/zsh", str(RUN)], env=env,
+            # a COPY of run.sh in a throwaway repo with no remote: a broken guard can only pull a dead repo
+            repo = pathlib.Path(td) / "repo"
+            (repo / "audio").mkdir(parents=True)
+            shutil.copy(RUN, repo / "audio" / "run.sh")
+            subprocess.run(["git", "init", "-q", str(repo)], check=True)
+            run = repo / "audio" / "run.sh"
+            r = subprocess.run(["/bin/zsh", str(run)], env=env,
                                capture_output=True, text=True, timeout=30)
             self.assertEqual(r.returncode, 0, r.stderr)
             got = rec.read_text()
-            self.assertTrue(got.startswith(f"run HEAVY com.seq.pbs-library-fill --no-wait -- /bin/zsh {RUN}"), got)
+            # the guard got the whole run (exec: nothing of run.sh ran before it, no pull, no lanes)
+            self.assertTrue(got.startswith(f"run HEAVY com.seq.pbs-library-fill --no-wait -- /bin/zsh {run.resolve()}"), got)
             self.assertIn("SLOTS=2 INSIDE=1", got)
-            self.assertNotIn("git pull", r.stdout + r.stderr)
 
 
 INSTALL = pathlib.Path(__file__).resolve().parents[1] / "launchd" / "install.sh"
