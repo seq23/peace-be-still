@@ -647,6 +647,15 @@ def render(item: dict, pron: dict, wav: Path, speed: float) -> dict:
 LRA = 11.0          # speech: wide enough that loudnorm stays linear (no pumping) on a calm reading
 TP_MARGIN = 1.0
 MASTER_TRIES = 3
+# loudnorm's own TP range (ffmpeg -h filter=loudnorm: "from -9 to 0", the same on the Mac and the runner).
+# A lowered target outside it is refused by ffmpeg ("Error applying option 'TP'", 22 Nov 2026: 7 of 12
+# cloud shards died on it), so a re-master never asks for less than TP_FLOOR.
+TP_FLOOR, TP_TOP = -9.0, 0.0
+
+
+def tp_target(tp: float) -> float:
+    """A true-peak target loudnorm accepts. Pure."""
+    return round(min(TP_TOP, max(TP_FLOOR, tp)), 1)
 
 
 def loudnorm_measured(stderr: str) -> dict:
@@ -683,7 +692,7 @@ def master(wav: Path, out: Path, level: str, *, run=None, measure=None) -> dict:
     measure = measure or qa.loudness
     target, ceiling = LEVEL_TARGET[level]
     lo, hi = qa.BARS[level]["lufs"]
-    i, tp = target, round(ceiling - TP_MARGIN, 1)
+    i, tp = target, tp_target(ceiling - TP_MARGIN)
     for n in range(1, MASTER_TRIES + 1):
         p1 = run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(wav), "-af", loudnorm_filter(i, tp), "-f", "null", "-"],
                  capture_output=True, text=True, timeout=1800)
@@ -695,7 +704,9 @@ def master(wav: Path, out: Path, level: str, *, run=None, measure=None) -> dict:
         if peak_ok and loud_ok:
             break
         if not peak_ok:
-            tp = round(tp - (got["true_peak"] - ceiling) - 0.5, 1)
+            if tp <= TP_FLOOR:      # nothing lower to ask loudnorm for: qa.check judges this encode
+                break
+            tp = tp_target(tp - (got["true_peak"] - ceiling) - 0.5)
         if not loud_ok:
             i = round(i + (target - got["lufs"]), 1)
     return {**got, "tries": n, "i": i, "tp": tp}
@@ -897,6 +908,19 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     return row
 
 
+def crash_row(item: dict, e: BaseException) -> dict:
+    """The FAILED row for a file whose making raised (ffmpeg, a render, QA): it uses a try like any
+    failure, so a file that always crashes runs out of tries instead of killing every shard. Pure."""
+    why = f"CRASH {type(e).__name__}: {' '.join(str(e).split())[-240:]}"
+    print(f"  {why} ({item['file']})", flush=True)
+    checks = {k: None for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}
+    checks["problems"] = [why]
+    return {"file": item["file"], "kind": item["kind"], "lang": item["lang"], "ref": item["ref"],
+            "text": item["text"], "words": words_key(item), "voice": VOICE[item["lang"]]["id"], "seconds": 0.0,
+            "checks": checks, "attempts": 1, "work_s": 0.0, "status": "FAILED", "sha256": None, "shelved": None,
+            "at": dt.datetime.now(CT).isoformat(timespec="seconds")}
+
+
 # ------------------------------------------------------------------ the morning line + git
 def state_path() -> Path:
     return HOME / "state.json"
@@ -992,6 +1016,21 @@ def window_minutes(now: dt.datetime) -> int:
 CLOUD_FILES_PER_JOB = 40   # measured 21 Nov 2026 (Ruth EN, one runner): 4 chapters tried in 31 min = 7.7 an hour x a 300-minute box
 
 
+# How many cloud jobs one launch may take, by its start time in Central (owner, 22 Nov 2026): GitHub Free
+# runs 20 jobs at once across ALL her repos, so by day the fill leaves room for the other repos' CI.
+# Hours are [start, end) in CT; the one place these numbers live (the plan job reads --cloud-slots).
+CLOUD_JOBS = (("night", 22, 7, 16), ("day", 7, 22, 10))
+
+
+def cloud_slots(now: dt.datetime) -> tuple[str, int]:
+    """(window, jobs) for a launch starting at `now`: 16 from 22:00 to 06:59 CT, 10 from 07:00 to 21:59. Pure."""
+    h = now.astimezone(CT).hour
+    for name, start, end, jobs in CLOUD_JOBS:
+        if (start <= h < end) if start < end else (h >= start or h < end):
+            return name, jobs
+    raise AssertionError(f"CLOUD_JOBS leaves hour {h} uncovered")
+
+
 def cloud_plan(items: list[dict], rows: list[dict], cfg: dict, jobs: int) -> dict:
     """The cloud matrix for one launch: enough Bible shards for the cloud's queue (at most `jobs`), and
     the census. "done" when nothing is left for the cloud. Pure."""
@@ -1010,8 +1049,13 @@ def main(argv=None) -> int:
     ap.add_argument("--window-minutes", action="store_true", help="print the run window's minutes left now (run.sh)")
     ap.add_argument("--shard", help="i/n: this job's share of the lane's queue (the cloud matrix)")
     ap.add_argument("--cloud-plan", type=int, metavar="JOBS", help="print the cloud matrix as JSON: at most JOBS Bible shards")
+    ap.add_argument("--cloud-slots", action="store_true", help="print the cloud job count for a launch now (CT window) as JSON")
     ap.add_argument("--push-rows", nargs="*", metavar="FILE", help="lay these rows files over main's manifest and push (the gather job)")
     a = ap.parse_args(argv)
+    if a.cloud_slots:
+        window, jobs = cloud_slots(dt.datetime.now(CT))
+        print(json.dumps({"window": window, "jobs": jobs}))
+        return 0
     if a.push_rows is not None:
         HOME.mkdir(parents=True, exist_ok=True)
         with unpushed_path().open("a", encoding="utf-8") as f:
@@ -1079,7 +1123,13 @@ def main(argv=None) -> int:
                 print(f"  NOTE MEMGUARD_HIGH bible: {memguard.line(mem)}; the clone lane pauses, this lane goes on", flush=True)
             if dir_bytes(work) > MAC_BUDGET_BYTES:
                 raise NamedStop("MAC_BUDGET", f"the work folder {work} holds over 5 GB; nothing more is voiced until it is cleared")
-            row = make_one(item, pron, work)
+            try:
+                row = make_one(item, pron, work)
+            except NamedStop:
+                raise
+            except Exception as e:      # one chapter's crash holds that chapter (a FAILED row, a try used); the shard goes on
+                row = crash_row(item, e)
+                (work / Path(item["file"]).name).unlink(missing_ok=True)
             if row["status"] == "passed":
                 local = Path(row.pop("_local"))
                 row["shelved"] = shelve(local, item["file"])
