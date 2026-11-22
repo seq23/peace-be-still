@@ -46,8 +46,11 @@ export async function check(target) {
   const shots = process.env.SHOTS_DIR ? resolve(process.env.SHOTS_DIR) : null;
   if (shots) mkdirSync(shots, { recursive: true });
   const shot = async (page, name) => { if (shots) await page.screenshot({ path: join(shots, `${name}.png`), fullPage: true }).catch(() => undefined); };
-  async function open(path, settings, scheme = 'light', extra = {}) {
+  async function open(path, settings, scheme = 'light', extra = {}, at = null) {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, colorScheme: scheme, ...extra });
+    // A fixed clock where the check is about the daytime screen: from midnight to 5 AM Today is the one
+    // back-to-sleep button (its own render tests), so a run after midnight UTC failed on the week count.
+    if (at) await context.clock.setFixedTime(at);
     if (settings) await context.addInitScript(([key, value]) => { if (!localStorage.getItem(key)) localStorage.setItem(key, value); }, [KEY, JSON.stringify(settings)]);
     const page = await context.newPage();
     await page.goto(base + path, { waitUntil: 'commit', timeout: 60000 });
@@ -59,7 +62,8 @@ export async function check(target) {
   try {
     // 1. Tab labels fit (light and dark, English and Mi Refugio's Spanish), and the week count is live.
     for (const [settings, labels, scheme, name] of [[adult, ['Today', 'Chat', 'Bible', 'Nights', 'More'], 'light', '01-today-faith'], [{ ...adult, journey: 'mi-refugio', voice: 'spanish' }, ['Hoy', 'Chat', 'Biblia', 'Noches', 'Más'], 'dark', '02-today-mirefugio-dark']]) {
-      const { page, context } = await open('/today', settings, scheme);
+      const noon = new Date(); noon.setHours(12, 0, 0, 0);
+      const { page, context } = await open('/today', settings, scheme, {}, noon);
       await page.getByText(labels[3], { exact: true }).last().waitFor({ timeout: 30000 });
       const boxes = await page.evaluate(names => names.map(name => {
         const all = [...document.querySelectorAll('div, span')].filter(el => el.childElementCount === 0 && el.textContent === name);
