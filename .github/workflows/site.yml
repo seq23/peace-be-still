@@ -1,7 +1,7 @@
 name: Site
 on:
   pull_request:
-    paths: ["site/**", "scripts/lib/pages-publish.mjs", ".github/workflows/site.yml"]
+    paths: ["site/**", "scripts/lib/pages-publish.mjs", "scripts/review-capture/**", ".github/workflows/site.yml"]
   push:
     branches: [main]
     paths: ["site/**", ".github/workflows/site.yml"]

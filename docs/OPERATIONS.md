@@ -46,3 +46,14 @@ The Android launcher icon's foreground (`app/assets/adaptive-icon.png`) is the a
 - Free: `providers.mjs` order (Workers AI, Gemini free on `PBS_FREE_GEMINI_API_KEY`, OpenRouter free). Needs the person's consent (`freeConsent`).
 - Paid: `PAID_PROVIDER` + `PAID_MODEL` on the billed key `PBS_GEMINI_API_KEY` (or Workers AI, or OpenRouter with zero data retention). Never falls back to free.
 - Crisis: `CRISIS_MODEL` on the billed key, for any conversation the safety check flags; it decays after 10 calm turns or 24 hours.
+
+## The tap-through (every app PR)
+
+After the phone preview is published, `.github/workflows/mobile-preview.yml` calls boss-os
+`tap-through.yml`, driven by `tap-through.json` at the repo root: a robot taps through the preview like a
+person at 390 px, light and dark (the door, Today, every tab, the paid plan screen, preview paid access
+`?paid=1`, 3 AM `?hour=3`, a used week `?nights=used`, Settings), with a video per journey and a shot per
+step (artifact `tap-through-<run id>`). It fails by name on a dead button, a console error, an error
+screen, an unreachable step or a paid-plan line with no screen behind it (ship-ready app-review.md). A PR
+that adds a screen, button or plan line adds it to `tap-through.json`. It replaces the hand-started
+review-capture workflow; `scripts/review-capture` stays for the site's own capture (`site.yml`).
