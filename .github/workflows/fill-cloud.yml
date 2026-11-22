@@ -15,11 +15,10 @@ name: Fill (cloud)
 on:
   schedule:
     - cron: "15 0,6,12,18 * * *"
-  push: { branches: [fix/fill-cloud-lane] }   # TEMPORARY: the proof run before merge; removed before land
   workflow_dispatch:
     inputs:
-      bible_jobs: { description: "most Bible shards this launch", default: "12" }
-      story_jobs: { description: "most clone stories this launch", default: "6" }
+      bible_jobs: { description: "most Bible shards this launch", default: "10" }
+      story_jobs: { description: "most clone stories this launch", default: "4" }
       only: { description: "proof run: only Bible files starting with this (e.g. en/bible/kjv-rut)", default: "" }
       story: { description: "proof run: this one story id", default: "" }
 concurrency: { group: fill-cloud, cancel-in-progress: false }
@@ -45,10 +44,11 @@ jobs:
         with: { python-version: "3.12" }
       - id: p
         env:
-          ONLY: ${{ inputs.only || (github.event_name == 'push' && 'en/bible/kjv-rut') || '' }}
-          STORY: ${{ inputs.story || (github.event_name == 'push' && 'core-004-jonah') || '' }}
-          BJ: ${{ inputs.bible_jobs || '12' }}
-          SJ: ${{ inputs.story_jobs || '6' }}
+          ONLY: ${{ inputs.only }}
+          STORY: ${{ inputs.story }}
+          # 10 + 4 jobs: GitHub Free runs 20 jobs at once per account, across all her repos; 6 stay free for CI.
+          BJ: ${{ inputs.bible_jobs || '10' }}
+          SJ: ${{ inputs.story_jobs || '4' }}
           BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -88,7 +88,7 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 12
+      max-parallel: 10
       matrix: { shard: "${{ fromJSON(needs.plan.outputs.bible) }}" }
     steps:
       - uses: actions/checkout@v4
@@ -100,7 +100,7 @@ jobs:
         env: { PBS_RCLONE_CONF: "${{ secrets.PBS_RCLONE_CONF }}" }
         run: audio/cloud/setup.sh kokoro
       - name: Voice this shard (time box 300 minutes)
-        env: { ONLY: "${{ inputs.only || (github.event_name == 'push' && 'en/bible/kjv-rut') || '' }}", SHARD: "${{ matrix.shard }}" }
+        env: { ONLY: "${{ inputs.only }}", SHARD: "${{ matrix.shard }}" }
         run: |
           set +e
           python audio/fill.py --max-minutes 300 --shard "$SHARD" ${ONLY:+--only "$ONLY"}; rc=$?
@@ -122,7 +122,7 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 6
+      max-parallel: 4
       matrix: { story: "${{ fromJSON(needs.plan.outputs.stories) }}" }
     steps:
       - uses: actions/checkout@v4
