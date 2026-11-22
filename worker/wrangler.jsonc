@@ -1,6 +1,6 @@
 // The chat Worker. Separate from site/wrangler.jsonc (the site owns the custom domain);
-// this Worker only takes peacebestillapp.com/api/*. Workers on routes run before a
-// Custom Domain Worker, so /api/* reaches here and every other path stays the site's.
+// this Worker only takes its own /api paths (routes below). Workers on routes run before a
+// Custom Domain Worker, so those reach here and every other path stays the site's.
 // Deploy ONLY with `npm run worker:deploy` from the repo root (never a bare `wrangler deploy`).
 // Secrets (wrangler secret put, from the Boss OS vault; never in vars):
 //   CHAT_TOKEN_SECRET (32+ bytes), IP_HASH_SECRET (32+ bytes), PBS_GEMINI_API_KEY,
@@ -14,7 +14,18 @@
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": false,
   "preview_urls": false,
-  "routes": [{ "pattern": "peacebestillapp.com/api/*", "zone_name": "peacebestillapp.com" }],
+  // Only the chat Worker's own paths (never /api/*): the site Worker answers the rest of /api, such as the
+  // waitlist remove link and /api/social-visits (site/test/api-routes.test.mjs keeps the two lists apart).
+  "routes": [
+    { "pattern": "peacebestillapp.com/api/token*", "zone_name": "peacebestillapp.com" },
+    { "pattern": "peacebestillapp.com/api/chat*", "zone_name": "peacebestillapp.com" },
+    { "pattern": "peacebestillapp.com/api/report", "zone_name": "peacebestillapp.com" },
+    { "pattern": "peacebestillapp.com/api/memory", "zone_name": "peacebestillapp.com" },
+    { "pattern": "peacebestillapp.com/api/story-art/*", "zone_name": "peacebestillapp.com" },
+    { "pattern": "peacebestillapp.com/api/made-for-you*", "zone_name": "peacebestillapp.com" },
+    { "pattern": "peacebestillapp.com/api/admin/*", "zone_name": "peacebestillapp.com" },
+    { "pattern": "peacebestillapp.com/api/review*", "zone_name": "peacebestillapp.com" }
+  ],
   // Story artwork (src/storyart.ts): approved images and their manifest; the deploy script creates the bucket.
   "r2_buckets": [{ "binding": "STORY_ART", "bucket_name": "pbs-story-art" }],
   "d1_databases": [
