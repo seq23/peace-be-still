@@ -63,7 +63,9 @@ jobs:
             stories=$([ -n "$STORY" ] && python -c 'import json,sys; print(json.dumps([sys.argv[1]]))' "$STORY" || echo '[]')
           else
             bible=$(python -c 'import json,sys; print(json.dumps(json.loads(sys.argv[1])["bible"]))' "$plan")
-            stories=$(python audio/hush_clone.py --cloud-plan "$SJ")
+            # Slots the Bible matrix leaves go to stories (16 jobs in all), so the long pole gets them.
+            free=$(( 16 - $(python -c 'import json,sys; print(len(json.loads(sys.argv[1])))' "$bible") ))
+            stories=$(python audio/hush_clone.py --cloud-plan "$(( free > SJ ? free : SJ ))")
           fi
           echo "bible=$bible" >> "$GITHUB_OUTPUT"
           echo "stories=$stories" >> "$GITHUB_OUTPUT"
@@ -124,7 +126,7 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 16
       matrix: { story: "${{ fromJSON(needs.plan.outputs.stories) }}" }
     steps:
       - uses: actions/checkout@v4
