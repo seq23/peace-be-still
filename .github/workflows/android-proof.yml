@@ -10,15 +10,26 @@ permissions:
 jobs:
   proof:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
+      # The Play-delivered APK carries Play's automatic integrity protection (it refuses to open when not installed
+      # from Play, run 45077604758), so the proof builds the same code (PR head) as an APK signed by the EAS key.
+      - uses: actions/checkout@v4
+        with: { ref: pbs-play-billing, path: pr }
       - uses: actions/setup-node@v4
-        with: { node-version: 24 }
-      - name: Play-signed universal APK of the internal build
+        with: { node-version: 24, cache: npm, cache-dependency-path: pr/app/package-lock.json }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - name: APK of the PR head (eas build --local, preview profile)
+        working-directory: pr/app
         env:
-          PLAY_SA: ${{ secrets.GOOGLE_PLAY_UPLOAD_SA_JSON }}
-        run: node scripts/android-proof/apk.mjs "$(cat scripts/android-proof/VERSION_CODE)" app.apk
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          REVENUECAT_PBS_ANDROID_PUBLIC_KEY: ${{ secrets.REVENUECAT_PBS_ANDROID_PUBLIC_KEY }}
+        run: |
+          npm ci --no-audit --no-fund
+          npx --yes eas-cli@27.11.0 build --platform android --profile preview --local --non-interactive --output "$GITHUB_WORKSPACE/app.apk"
+          echo "OUTPUT apk $(stat -c %s "$GITHUB_WORKSPACE/app.apk") bytes from $(git rev-parse --short HEAD)"
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
