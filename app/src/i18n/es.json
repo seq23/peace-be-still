@@ -157,6 +157,7 @@
   "paid.renew.yearly": "Sin período de prueba. Apple cobra %{price} al confirmar la compra. Se renueva cada año por %{price} hasta que canceles.",
   "paid.renew.monthly": "Sin período de prueba. Apple cobra %{price} al confirmar la compra. Se renueva cada mes por %{price} hasta que canceles.",
   "paid.previewJoin": "Vista previa · %{action}",
+  "paid.previewJoinNote": "Esto es una vista previa: no se cobra nada y no se abre nada. En un teléfono, este botón abre la tienda para unirte.",
   "paid.cancel": "Cancela en dos toques ›",
   "paid.keepFree": "Lo que es gratis sigue siendo gratis.",
   "paid.keepPrice": "Tu precio no sube mientras sigas con tu suscripción.",

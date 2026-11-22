@@ -61,6 +61,8 @@ export default function PaidScreen() {
   const [requested, requestPlans] = useState(0);
   const [selected, select] = useState<Plan>('yearly');
   const [linkFailed, setLinkFailed] = useState(false);
+  // The preview's join opens nothing and grants nothing, so a tap says so (never a button that does nothing).
+  const [previewTapped, setPreviewTapped] = useState(false);
 
   useEffect(() => {
     if (paid) return;
@@ -143,7 +145,10 @@ export default function PaidScreen() {
         <PillButton onPress={() => { void buy(pkg); }}>{t(planCopy[selected].join, values)}</PillButton>
       ) : null}
       {preview && offers ? (
-        <PillButton onPress={() => {}}>{t('paid.previewJoin', { action: t(planCopy[selected].join, values) })}</PillButton>
+        <PillButton onPress={() => setPreviewTapped(true)}>{t('paid.previewJoin', { action: t(planCopy[selected].join, values) })}</PillButton>
+      ) : null}
+      {preview && offers && previewTapped ? (
+        <Body size={13} style={{ textAlign: 'center' }}>{t('paid.previewJoinNote')}</Body>
       ) : null}
       {offers && !paid ? (
         <Body size={13} style={{ textAlign: 'center' }}>{t(shop.renew[selected], values)}</Body>

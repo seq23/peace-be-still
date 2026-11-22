@@ -1931,9 +1931,12 @@ test('the web preview shows configured prices and renewal terms without opening 
           ? /sin período de prueba.*cada año por \$39\.99/i
           : /no trial.*renews yearly at \$39\.99/i;
         assert.ok(texts(tree).some(line => yearlyDisclosure.test(line)));
+        const note = es ? /no se cobra nada/i : /nothing is charged/i;
+        assert.ok(!texts(tree).some(line => note.test(line)), 'no note before the tap');
         await press(tree, previewLabel);
         assert.deepEqual(fakePurchaseCalls, []);
         assert.equal(gate(tree), 'false true');
+        assert.ok(texts(tree).some(line => note.test(line)), 'the preview join says what happened, never a dead tap');
         const restore = host(tree, 'Pressable').find(n => (es ? /restaurar compras/i : /restore purchases/i).test(textOf(n)));
         assert.ok(restore);
         assert.equal(restore.props.accessibilityRole, 'link');
