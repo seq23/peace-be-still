@@ -198,6 +198,19 @@ class MemoryGuard(unittest.TestCase):
                                 log=logs.append, flag=flag, deadline=600)
             self.assertEqual(out, "one-lane")
 
+    def test_a_morning_flag_left_behind_is_ignored(self):
+        import memguard, os
+        with tempfile.TemporaryDirectory() as d:
+            flag = Path(d) / "morning-window.active"
+            flag.write_text("on")
+            old = flag.stat().st_mtime - 4 * 3600
+            os.utime(flag, (old, old))
+            logs = []
+            out = memguard.wait("clone", reader=lambda: {"level": 1, "swap_mb": 0.0}, log=logs.append, flag=flag,
+                                sleep=lambda s: self.fail("waited on a stale flag"))
+            self.assertEqual(out, "go")
+            self.assertTrue(any("MEMGUARD_MORNING_STALE" in l for l in logs))
+
     def test_pressure_that_never_clears_drops_to_one_lane(self):
         out, logs = self.run_guard([{"level": 4, "swap_mb": 9000.0}], max_pause_s=300)
         self.assertEqual(out, "one-lane")

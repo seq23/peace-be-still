@@ -46,7 +46,7 @@ checks, shelved, status, voice).
   tight after 20 minutes, `MEMGUARD_ONE_LANE` and it stops for the run while the Bible lane carries on.
   Never mid-story. **Her morning jobs come first** (owner, 21 Nov 2026): while
   `~/.boss-os/morning-window.active` exists (`PBS_MORNING_FLAG` overrides), the clone lane waits
-  (`MEMGUARD_MORNING_PAUSE` / `_RESUME`) and only the Bible lane runs; no flag file means no morning window. Between stories it frees the speech and voice models; finished stories' work folders
+  (`MEMGUARD_MORNING_PAUSE` / `_RESUME`) and only the Bible lane runs; no flag file means no morning window; a flag older than 3 hours is ignored with `MEMGUARD_MORNING_STALE` (a crashed morning job left it). Boss OS creates and removes the flag (the Mac-schedule work). Between stories it frees the speech and voice models; finished stories' work folders
   are removed at the start of each run.
 - **Pause flag**: `~/.peace-be-still/library-fill.active` exists while priorities 1–2 are incomplete
   (How We Know / Whisper Almanac pause on it); the run that completes them removes it.

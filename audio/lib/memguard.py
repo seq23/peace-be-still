@@ -26,6 +26,7 @@ SWAP_LIMIT_MB = float(os.environ.get("PBS_SWAP_LIMIT_MB", "4096"))
 # Her morning email and briefs come first (owner, 21 Nov 2026): while Boss OS's morning jobs run, this
 # flag exists and the clone lane waits; only the Bible lane runs. No flag file: no morning window.
 MORNING_FLAG = Path(os.environ.get("PBS_MORNING_FLAG", str(Path.home() / ".boss-os" / "morning-window.active")))
+MORNING_STALE_S = 3 * 3600   # a flag older than this was left by a crashed morning job: ignored, with a note
 PRESSURE_HIGH = 2
 CHECK_EVERY_S = 60
 MAX_PAUSE_S = 20 * 60
@@ -59,6 +60,18 @@ def line(m: dict) -> str:
     return f"pressure level {m['level']}, swap used {m['swap_mb']:.0f} MB (limit {SWAP_LIMIT_MB:.0f})"
 
 
+def morning_on(flag: Path, clock=time.time, log=print) -> bool:
+    """The morning window is on while the flag exists and is younger than MORNING_STALE_S."""
+    try:
+        age = clock() - flag.stat().st_mtime
+    except OSError:
+        return False
+    if age > MORNING_STALE_S:
+        log(f"NOTE MEMGUARD_MORNING_STALE: {flag} is {int(age // 60)} minutes old; ignored (a morning job left it behind)")
+        return False
+    return True
+
+
 def wait(lane: str, *, deadline: float | None = None, reader=read, sleep=time.sleep, clock=time.time,
          log=print, max_pause_s: float = MAX_PAUSE_S, flag: Path | None = None) -> str:
     """Block while the morning window is on, then while pressure is high. Returns "go" (clear, never
@@ -66,10 +79,10 @@ def wait(lane: str, *, deadline: float | None = None, reader=read, sleep=time.sl
     Logs each pause and resume as a named note."""
     flag = flag or MORNING_FLAG
     resumed = False
-    if flag.exists():
+    if morning_on(flag, clock, log):
         start = clock()
         log(f"NOTE MEMGUARD_MORNING_PAUSE {lane}: {flag} exists (her morning jobs run); only the Bible lane goes on")
-        while flag.exists():
+        while morning_on(flag, clock, log):
             if deadline and clock() >= deadline:
                 log(f"NOTE MEMGUARD_ONE_LANE {lane}: the morning window outlasted this run's box; the next run looks again")
                 return "one-lane"
@@ -79,8 +92,6 @@ def wait(lane: str, *, deadline: float | None = None, reader=read, sleep=time.sl
     m = reader()
     if not high(m):
         return "resumed" if resumed else "go"
-    if not high(m):
-        return "go"
     start = clock()
     log(f"NOTE MEMGUARD_PAUSE {lane}: {line(m)}; waiting for memory to clear")
     while True:
