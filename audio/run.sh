@@ -10,14 +10,15 @@
 # ... so are not subj to quota"); the Gemini lane (audio/hush_harbor.py) is kept as code but not run.
 # Memory and disk are logged before and after every run; each lane clears its own work files.
 set -u
-# THE MAC'S DAY GUARD (seq-bin mac-window, 21 Nov 2026): the fill is HEAVY and takes BOTH heavy slots
-# (MAC_WINDOW_SLOTS=2), so no other heavy night job overlaps it; one that holds a slot (the 22:00-22:20
-# starts) makes this tick exit and the next 15-minute tick try again (--no-wait). mac-window also stops
-# the whole run at 06:55 if anything is still going (the window below stops new work at 06:45).
+# THE MAC'S DAY GUARD (seq-bin mac-window, 21 Nov 2026): a night job (22:00-06:55) holding ONE heavy slot.
+# The voicing moved to GitHub (#107: lanes.json gives the Mac no fill lanes), so on the Mac this is the
+# publish step (Drive -> R2) and the other heavy slot is free for the renders and sweeps. A tick that finds
+# both slots taken exits and the next 15-minute tick tries again (--no-wait); mac-window stops anything
+# still going at 06:55 (the window below stops new work at 06:45).
 MW="${MAC_WINDOW_BIN:-$HOME/bin/mac-window}"
 if [[ -z "${PBS_UNDER_MAC_WINDOW:-}" ]]; then
   if [[ -x "$MW" ]]; then
-    export PBS_UNDER_MAC_WINDOW=1 MAC_WINDOW_SLOTS=2
+    export PBS_UNDER_MAC_WINDOW=1 MAC_WINDOW_SLOTS=1
     exec "$MW" run HEAVY com.seq.pbs-library-fill --no-wait -- /bin/zsh "${0:A}" "$@"
   fi
   echo "NOTE [NO_MAC_WINDOW] $MW is missing (seq-bin): running on the fill's own 22:00-06:45 window only"

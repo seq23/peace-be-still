@@ -1,5 +1,5 @@
-"""run.sh runs the whole fill behind seq-bin's mac-window (the Mac's day, 21 Nov 2026): HEAVY, both heavy
-slots, no wait on an interval tick, before it pulls or voices anything."""
+"""run.sh runs the whole fill behind seq-bin's mac-window (the Mac's day, 21 Nov 2026): HEAVY, one heavy
+slot, no wait on an interval tick, before it pulls or voices anything."""
 import os
 import pathlib
 import subprocess
@@ -12,7 +12,7 @@ RUN = pathlib.Path(__file__).resolve().parents[1] / "run.sh"
 
 @unittest.skipUnless(shutil.which("zsh") and os.path.exists("/bin/zsh"), "run.sh is a Mac zsh script")
 class RunGuard(unittest.TestCase):
-    def test_fill_runs_behind_mac_window_with_both_slots(self):
+    def test_fill_runs_behind_mac_window_with_one_slot(self):
         with tempfile.TemporaryDirectory() as td:
             fake = pathlib.Path(td) / "mac-window"
             rec = pathlib.Path(td) / "rec"
@@ -33,7 +33,7 @@ class RunGuard(unittest.TestCase):
             got = rec.read_text()
             # the guard got the whole run (exec: nothing of run.sh ran before it, no pull, no lanes)
             self.assertTrue(got.startswith(f"run HEAVY com.seq.pbs-library-fill --no-wait -- /bin/zsh {run.resolve()}"), got)
-            self.assertIn("SLOTS=2 INSIDE=1", got)
+            self.assertIn("SLOTS=1 INSIDE=1", got)
 
 
 INSTALL = pathlib.Path(__file__).resolve().parents[1] / "launchd" / "install.sh"
