@@ -1,0 +1,90 @@
+name: Android store build
+# Manual only (a push never builds or uploads). Builds the Google Play App Bundle on a free GitHub runner with
+# `eas build --local` (no EAS cloud minutes; the upload keystore is held by EAS and fetched with EXPO_TOKEN),
+# checks the bundle, uploads it to the Play INTERNAL track as a DRAFT with `eas submit --path`, then proves it
+# landed there (scripts/android/play-track.mjs). Nothing goes to production, closed or open testing.
+# The bundle is never uploaded as an artifact (the repo is public); the Play key file is deleted in every case.
+# Repo secrets (from the Boss OS vault, set through a pipe): EXPO_TOKEN, GOOGLE_PLAY_UPLOAD_SA_JSON,
+# REVENUECAT_PBS_ANDROID_PUBLIC_KEY (RevenueCat's Play key, goog_...).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # One upload at a time: two runs would race for the same versionCode.
+  group: android-store-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    defaults:
+      run:
+        working-directory: app
+    # No secret at job level: each secret is given only to the step that needs it.
+    env:
+      EAS_CLI: eas-cli@27.11.0
+      BUNDLETOOL: '1.18.3'
+      BUNDLETOOL_SHA256: a099cfa1543f55593bc2ed16a70a7c67fe54b1747bb7301f37fdfd6d91028e29
+      # The EAS-held upload key, created 22 Nov 2026 (eas credentials:configure-build); a bundle signed by any other key fails.
+      UPLOAD_SHA1: 94:2D:B9:3B:B4:B7:17:E7:36:2F:D4:34:56:71:69:CF:7D:D2:65:4B
+    steps:
+      - name: Secrets present
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          REVENUECAT_PBS_ANDROID_PUBLIC_KEY: ${{ secrets.REVENUECAT_PBS_ANDROID_PUBLIC_KEY }}
+          PLAY_SA: ${{ secrets.GOOGLE_PLAY_UPLOAD_SA_JSON }}
+        run: |
+          [ -n "$EXPO_TOKEN" ] || { echo "NAMED STOP EXPO_TOKEN_MISSING"; exit 3; }
+          [ -n "$PLAY_SA" ] || { echo "NAMED STOP GOOGLE_PLAY_UPLOAD_SA_JSON_MISSING"; exit 3; }
+          [ -n "$REVENUECAT_PBS_ANDROID_PUBLIC_KEY" ] || { echo "NAMED STOP REVENUECAT_PBS_ANDROID_KEY_MISSING: add the Play app in RevenueCat, vault REVENUECAT_PBS_ANDROID_PUBLIC_KEY, then gh secret set"; exit 3; }
+        working-directory: .
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: npm ci --no-audit --no-fund
+      # The release gate in app.config.ts, run on its own first: a Play build without RevenueCat's Play key stops here.
+      - name: Release gate (RevenueCat Play key)
+        env:
+          EAS_BUILD_PLATFORM: android
+          EAS_BUILD_PROFILE: internal
+          REVENUECAT_PBS_ANDROID_PUBLIC_KEY: ${{ secrets.REVENUECAT_PBS_ANDROID_PUBLIC_KEY }}
+        run: |
+          npx expo config --type public > /dev/null
+          echo "OUTPUT gate: RevenueCat Play key present"
+      - name: Build the App Bundle (eas build --local)
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          REVENUECAT_PBS_ANDROID_PUBLIC_KEY: ${{ secrets.REVENUECAT_PBS_ANDROID_PUBLIC_KEY }}
+        run: npx --yes "$EAS_CLI" build --platform android --profile internal --local --non-interactive --output "$RUNNER_TEMP/peace-be-still.aab"
+      - name: Check the bundle (package, versionCode, signature, permissions)
+        id: aab
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/bundletool.jar" "https://github.com/google/bundletool/releases/download/$BUNDLETOOL/bundletool-all-$BUNDLETOOL.jar"
+          echo "$BUNDLETOOL_SHA256  $RUNNER_TEMP/bundletool.jar" | sha256sum -c -
+          node scripts/android/check-aab.mjs "$RUNNER_TEMP/peace-be-still.aab" "$RUNNER_TEMP/bundletool.jar"
+      # The Play key file exists only from here to the cleanup: never during npm ci, the build or its plugins.
+      - name: Play key file
+        env:
+          PLAY_SA: ${{ secrets.GOOGLE_PLAY_UPLOAD_SA_JSON }}
+        run: umask 077 && printf '%s' "$PLAY_SA" > play-sa.json
+      - name: Upload to the internal track as a draft (eas submit)
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: npx --yes "$EAS_CLI" submit --platform android --profile internal --path "$RUNNER_TEMP/peace-be-still.aab" --non-interactive --wait
+      - name: Prove it is a draft on the internal track only
+        run: node scripts/android/play-track.mjs play-sa.json com.peacebestillapp.mobile "${{ steps.aab.outputs.version_code }}"
+      - name: Delete the Play key file and the bundle
+        if: always()
+        working-directory: .
+        run: rm -f app/play-sa.json "$RUNNER_TEMP/peace-be-still.aab"

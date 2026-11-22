@@ -2,7 +2,7 @@
 
 > Esta es una traducción al español. Si esta versión y la [versión en inglés](https://peacebestillapp.com/privacy) no dicen lo mismo, prevalece la versión en inglés.
 
-Vigente desde: 20 de noviembre de 2026
+Vigente desde: 21 de noviembre de 2026
 
 Esta política cubre la app Peace Be Still y el sitio web peacebestillapp.com. Peace Be Still es una app de Spry Labs, el nombre comercial de Redwood Reserve Holdings LLC, una compañía de responsabilidad limitada de Wyoming. Escriba a info@peacebestillapp.com con cualquier pregunta o solicitud sobre privacidad.
 
@@ -40,11 +40,11 @@ Para que el chat sea seguro y sostenible, nuestro servicio guarda unos pocos reg
 
 ## Reportar una respuesta
 
-Si usted reporta una respuesta o una sesión, guardamos esa respuesta, el motivo que eligió y la hora, durante 90 días, para que una persona la revise. Su mensaje y nada que lo identifique se guardan con ella.
+Si usted reporta una respuesta o una sesión, guardamos esa respuesta, el motivo que eligió y la hora, durante 90 días, para que una persona la revise. No se guardan con ella ni su mensaje ni nada que lo identifique.
 
 ## El identificador de instalación anónimo y los límites
 
-Para que el chat siga siendo justo y gratis, nuestro servicio crea un identificador de instalación al azar la primera vez que usted abre el chat. No está ligado a su nombre, correo electrónico, número de teléfono ni cuenta de Apple. Nuestro servicio usa el identificador de instalación y un hash de un solo sentido de su dirección IP para contar los mensajes de cada día (1 conversación de hasta 5 mensajes al día en la versión gratis, 50 mensajes privados al día en un plan de pago, y después chat gratis si lo eliges) y para frenar el abuso. Para que las respuestas no se repitan, nuestro servicio también guarda registros cortos de los patrones de las respuestas recientes de cada identificador de instalación: hashes con clave de 8 caracteres, sin ninguna palabra. Esos contadores y registros se borran en un plazo de 48 horas. También guardamos un conteo de todos los mensajes del chat por día, sin texto y sin identificador, para mantenernos dentro de los límites gratuitos de IA.
+Para que el chat siga siendo justo y gratis, nuestro servicio crea un identificador de instalación al azar la primera vez que usted abre el chat. No está ligado a su nombre, correo electrónico, número de teléfono ni cuenta de Apple o de Google. Nuestro servicio usa el identificador de instalación y un hash de un solo sentido de su dirección IP para contar los mensajes de cada día (1 conversación de hasta 5 mensajes al día en la versión gratis, 50 mensajes privados al día en un plan de pago, y después chat gratis si lo elige) y para frenar el abuso. Para que las respuestas no se repitan, nuestro servicio también guarda registros cortos de los patrones de las respuestas recientes de cada identificador de instalación: hashes con clave de 8 caracteres, sin ninguna palabra. Esos contadores y registros se borran en un plazo de 48 horas. También guardamos un conteo de todos los mensajes del chat por día, sin texto y sin identificador, para mantenernos dentro de los límites gratuitos de IA.
 
 Su primer chat en un iPhone es privado: esa única conversación (hasta los mensajes del día gratis) va al mismo servicio privado de pago que un plan de pago, nunca a un servicio de IA gratis. Para darlo una sola vez por iPhone, la app le pide a DeviceCheck de Apple un token del dispositivo, y nuestro servicio le pide a Apple que guarde una marca de sí o no para ese iPhone ("ya tuvo su primer chat privado"). Apple guarda esa marca solo para nuestra app; no nos dice nada de usted y no es su cuenta de Apple. Nuestro servicio también guarda, por cada identificador de instalación, si su primer chat fue privado y el día, sin ninguna palabra, por hasta 120 días, para ver si el primer chat privado ayuda; el hash de IP de ese registro se borra al terminar el día. Sin DeviceCheck (la web, Android, o cuando Apple no responde), el primer chat es el chat gratis normal, con su propio aviso antes.
 
@@ -54,7 +54,7 @@ El texto de la Biblia, el audio de la Biblia y las sesiones para dormir son arch
 
 ## Compras
 
-Apple se encarga de cada compra. Nunca vemos su nombre, su Apple ID ni su tarjeta de pago. RevenueCat, que administra las suscripciones por nosotros, recibe un identificador anónimo de usuario de la app, sus recibos de compra de Apple y datos básicos como la versión de la app, la versión de iOS y el país de la tienda, para que la app sepa si usted está en un plan de pago. Los diagnósticos de RevenueCat y su recolección de identificadores del dispositivo están desactivados en la app.
+Apple se encarga de cada compra en un iPhone, y Google Play en Android. Nunca vemos su nombre, su Apple ID, su cuenta de Google ni su tarjeta de pago. RevenueCat, que administra las suscripciones por nosotros, recibe un identificador anónimo de usuario de la app, sus recibos de compra de Apple o de Google Play y datos básicos como la versión de la app, la versión de iOS o de Android y el país de la tienda, para que la app sepa si usted está en un plan de pago. Los diagnósticos de RevenueCat y su recolección de identificadores del dispositivo están desactivados en la app, y la app de Android no usa el identificador de publicidad.
 
 ## Lo que nunca hacemos
 
@@ -64,11 +64,11 @@ No hay anuncios, ni SDK de anuncios, ni SDK de analítica. La app no le sigue el
 
 Peace Be Still pide el año de nacimiento antes que cualquier otra cosa.
 
-Para menores de 13 años, la app no envía a nuestro servicio ningún chat, memoria, sesión hecha para ellos ni identificador de instalación, y el año de nacimiento se queda en el dispositivo. Los archivos de audio se descargan como cualquier archivo web: la dirección IP se usa solo para entregar el archivo. Las compras pasan por Apple, con uno de los padres por medio de Compartir en familia (Family Sharing).
+Para menores de 13 años, la app no envía a nuestro servicio ningún chat, memoria, sesión hecha para ellos ni identificador de instalación, y el año de nacimiento se queda en el dispositivo. Los archivos de audio se descargan como cualquier archivo web: la dirección IP se usa solo para entregar el archivo. El plan de pago no se ofrece a menores de 13 años.
 
 No recopilamos a sabiendas información personal de niños menores de 13 años. Si usted cree que un niño nos envió información, escriba a info@peacebestillapp.com y la borraremos.
 
-De 13 a 17 años, el chat usa la voz para adolescentes, y las compras de un plan de pago pasan por Solicitar la compra (Ask to Buy) de Apple cuando uno de los padres lo ha activado.
+De 13 a 17 años, el chat usa la voz para adolescentes, y las compras de un plan de pago pasan por Solicitar la compra (Ask to Buy) de Apple, o por la aprobación de compras de Google Play en Family Link, cuando uno de los padres lo ha activado.
 
 ## Dónde se ofrece la app
 
@@ -86,7 +86,7 @@ Hasta el 18 de noviembre de 2026, el sitio tenía un formulario para avisar cuan
 
 ## Sus opciones y sus derechos
 
-Usted puede borrar la memoria del chat de pago y las sesiones hechas para usted en Configuración cuando quiera. Apple administra las suscripciones en la Configuración de su iPhone. Para cualquier otra cosa, escriba a info@peacebestillapp.com: puede preguntar qué guardamos sobre su identificador de instalación y pedirnos que borremos esos datos, y le responderemos a mano en un plazo de 30 días. Le damos el mismo trato, haga o no una solicitud. Estos derechos aplican dondequiera que usted viva, incluidos California y otros estados con leyes de privacidad.
+Usted puede borrar la memoria del chat de pago y las sesiones hechas para usted en Configuración cuando quiera. Apple administra las suscripciones en la Configuración de su iPhone, y Google Play en la app Play Store, en Pagos y suscripciones. Para cualquier otra cosa, escriba a info@peacebestillapp.com: puede preguntar qué guardamos sobre su identificador de instalación y pedirnos que borremos esos datos, y le responderemos a mano en un plazo de 30 días. Le damos el mismo trato, haga o no una solicitud. Estos derechos aplican dondequiera que usted viva, incluidos California y otros estados con leyes de privacidad.
 
 ## Cambios
 

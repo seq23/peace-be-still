@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { AppState, Platform } from 'react-native';
 import type { CustomerInfo, PurchasesPackage } from 'react-native-purchases';
-import { installId } from '../chat/api';
+import { installId, redeemReviewCode, type ReviewResult } from '../chat/api';
 import { canUse, type Feature, type User } from '../gates';
 import { useSettings } from '../settings';
 import { connectStore, hasPaid, previewStore, type PurchaseStore } from './revenuecat';
@@ -16,6 +16,8 @@ type State = {
   status: Status;
   buy: (pkg: PurchasesPackage) => Promise<void>;
   restore: () => Promise<void>;
+  /** A store reviewer's code (worker/src/review.ts). Paid only once RevenueCat itself reports the grant. */
+  redeem: (code: string) => Promise<ReviewResult>;
 };
 const Context = createContext<State | null>(null);
 
@@ -121,8 +123,26 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  async function redeem(code: string): Promise<ReviewResult> {
+    if (!store || !age || age === 'child') return 'failed';
+    try {
+      // The grant goes to the install id, so the store must be logged in as it first (as at checkout).
+      const id = await installId(age);
+      if (!id) return 'failed';
+      if (await store.getAppUserID() !== id) await store.logIn(id);
+      const result = await redeemReviewCode(age, code);
+      if (result !== 'granted') return result;
+      await store.invalidateCustomerInfoCache();
+      const active = hasPaid(await store.getCustomerInfo());
+      setPaid(active);
+      return active ? 'granted' : 'failed';
+    } catch {
+      return 'failed';
+    }
+  }
+
   const allowed = !!age && age !== 'child';
-  return <Context.Provider value={{ store: allowed ? store : null, preview: allowed ? preview : null, paid: allowed && paid, known: !allowed || !!preview || answered, status, buy: transact, restore: transact }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ store: allowed ? store : null, preview: allowed ? preview : null, paid: allowed && paid, known: !allowed || !!preview || answered, status, buy: transact, restore: transact, redeem }}>{children}</Context.Provider>;
 }
 
 export function usePurchases() {

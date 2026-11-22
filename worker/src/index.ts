@@ -15,6 +15,7 @@ import { bump, logCode, reserve } from './counts';
 import { aboutScripture, CRISIS_THINKING_HEADROOM, confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
 import { paidStatus, recheckMemory, type Paid } from './entitlement';
+import { reviewOpen, reviewStatus, reviewUnlock } from './review';
 import { storyArt } from './storyart';
 import { appleDeviceCheck, countFirstMessage, decideFirst, endFirst, firstActive, firstRow, type DeviceBit } from './firstprivate';
 import { madeForYou } from './madeForYou.mount';
@@ -816,6 +817,15 @@ export function createApp(deps: Deps = realDeps) {
         if (pathname.startsWith('/api/made-for-you')) {
           const answered = await madeForYou(env, deps, install, RENEW_GRACE_DAYS).fetch(request);
           if (answered) return answered;
+        }
+        if (pathname === '/api/review' && request.method === 'GET') return await reviewStatus(env, deps.now());
+        if (pathname === '/api/review/unlock' && request.method === 'POST') {
+          const now = deps.now();
+          if (!reviewOpen(env, now)) return json({ error: 'NOT_FOUND' }, 404); // off: no token check, no network call
+          const who = await install(request, env, now);
+          if (who === 'missing') return fail('CHAT_TOKEN_SECRET_MISSING', 503);
+          if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
+          return await reviewUnlock(env, who.installId, await request.json().catch(() => null), now);
         }
         if (pathname === '/api/admin/chat-block' && (request.method === 'POST' || request.method === 'DELETE')) return await adminBlock(request, env, deps);
         if (pathname === '/api/admin/spend' && request.method === 'GET') return await adminSpend(request, env, deps);

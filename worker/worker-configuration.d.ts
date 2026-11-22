@@ -10,6 +10,7 @@ declare namespace Cloudflare {
 		DB: D1Database;
 		CHAT_BURST: RateLimit;
 		TOKEN_BURST: RateLimit;
+		REVIEW_BURST: RateLimit;
 		AI: Ai;
 		CHAT_GLOBAL_MESSAGES_DAILY: "220";
 		CHAT_IP_MESSAGES_DAILY: "120";

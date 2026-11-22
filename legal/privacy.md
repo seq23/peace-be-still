@@ -1,6 +1,6 @@
 # Privacy policy
 
-Effective: November 20, 2026
+Effective: November 21, 2026
 
 This policy covers the Peace Be Still app and the website peacebestillapp.com. Peace Be Still is made by Spry Labs, the trade name of Redwood Reserve Holdings LLC, a Wyoming limited liability company. Write to info@peacebestillapp.com with any privacy question or request.
 
@@ -42,7 +42,7 @@ If you report an answer or a session, we keep the answer you reported, the reaso
 
 ## The anonymous install id and limits
 
-To keep chat fair and free, our service creates a random install id the first time you open chat. It is not tied to your name, email, phone number or Apple account. Our service uses the install id and a one-way hash of your IP address to count messages each day (1 conversation of up to 5 messages a day in the free version, 50 private messages a day in a paid plan, then free chat if you choose it) and to stop abuse. So that answers do not repeat, our service also keeps short records of recent answer patterns for each install id: keyed hashes of 8 characters, with no words in them. Those counters and records are deleted within 48 hours. We also keep a count of all chat messages per day, with no text and no identifier, to stay inside the free AI allowances.
+To keep chat fair and free, our service creates a random install id the first time you open chat. It is not tied to your name, email, phone number, or Apple or Google account. Our service uses the install id and a one-way hash of your IP address to count messages each day (1 conversation of up to 5 messages a day in the free version, 50 private messages a day in a paid plan, then free chat if you choose it) and to stop abuse. So that answers do not repeat, our service also keeps short records of recent answer patterns for each install id: keyed hashes of 8 characters, with no words in them. Those counters and records are deleted within 48 hours. We also keep a count of all chat messages per day, with no text and no identifier, to stay inside the free AI allowances.
 
 Your first chat on an iPhone is private: that one conversation (up to the free day's messages) goes to the same private paid service as a paid plan, never to a free AI service. To give it once per iPhone, the app asks Apple's DeviceCheck for a device token, and our service asks Apple to keep one yes-or-no mark for this iPhone ("already had its private first chat"). Apple keeps that mark for our app only; it tells us nothing about you, and it is not your Apple account. Our service also keeps, for each install id, whether its first chat was private and the day, with no words, for up to 120 days, to see whether the private first chat helps; the IP hash on that record is deleted after the day. Without DeviceCheck (the web, Android, or when Apple does not answer), the first chat is the normal free chat, with its own notice first.
 
@@ -52,7 +52,7 @@ The Bible text, the Bible audio and the sleep sessions are files. When your phon
 
 ## Purchases
 
-Apple handles every purchase. We never see your name, Apple ID or payment card. RevenueCat, which manages subscriptions for us, receives an anonymous app user id, your purchase receipts from Apple, and basic details such as the app version, iOS version and store country, so the app knows whether you have a paid plan. RevenueCat's diagnostics and its collection of device identifiers are turned off in the app.
+Apple handles every purchase on an iPhone, and Google Play on Android. We never see your name, Apple ID, Google account or payment card. RevenueCat, which manages subscriptions for us, receives an anonymous app user id, your purchase receipts from Apple or Google Play, and basic details such as the app version, the iOS or Android version and store country, so the app knows whether you have a paid plan. RevenueCat's diagnostics and its collection of device identifiers are turned off in the app, and the Android app does not use the advertising ID.
 
 ## What we never do
 
@@ -62,11 +62,11 @@ No ads, no ad SDKs and no analytics SDKs. The app does not track you across othe
 
 Peace Be Still asks for a birth year before anything else.
 
-Under 13, the app sends no chat, memory, made-for-you session or install id to our service, and the birth year stays on the device. Audio files are fetched like any web file: the IP address is used only to deliver the file. Purchases go through Apple, with a parent through Family Sharing.
+Under 13, the app sends no chat, memory, made-for-you session or install id to our service, and the birth year stays on the device. Audio files are fetched like any web file: the IP address is used only to deliver the file. The paid plan is not offered under 13.
 
 We do not knowingly collect personal information from children under 13. If you believe a child sent us information, write to info@peacebestillapp.com and we will delete it.
 
-For ages 13 to 17, chat uses the teen voice, and paid upgrades go through Apple's Ask to Buy when a parent has turned it on.
+For ages 13 to 17, chat uses the teen voice, and paid upgrades go through Apple's Ask to Buy, or Google Play's purchase approval in Family Link, when a parent has turned it on.
 
 ## Where the app is offered
 
@@ -84,7 +84,7 @@ Until November 18, 2026 the site had a form to hear when the app launches. It is
 
 ## Your choices and rights
 
-You can delete paid chat memory and made-for-you sessions in Settings at any time. Apple manages subscriptions in your iPhone's Settings. For anything else, write to info@peacebestillapp.com: you can ask what we hold about your install id and ask us to delete it, and we will answer by hand within 30 days. We treat you the same whether or not you make a request. These rights apply wherever you live, including California and other states with privacy laws.
+You can delete paid chat memory and made-for-you sessions in Settings at any time. Apple manages subscriptions in your iPhone's Settings, and Google Play in the Play Store app under Payments and subscriptions. For anything else, write to info@peacebestillapp.com: you can ask what we hold about your install id and ask us to delete it, and we will answer by hand within 30 days. We treat you the same whether or not you make a request. These rights apply wherever you live, including California and other states with privacy laws.
 
 ## Changes
 

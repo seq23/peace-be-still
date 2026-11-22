@@ -45,7 +45,9 @@ export function check(files) {
   let live = false;
   try { const st = JSON.parse(readFileSync(new URL("../config/store.json", import.meta.url), "utf8")); live = Boolean(st.app_store_url || st.play_url); } catch {}
   for (const [name, text] of files) {
-    const outside = text.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, "").replace(/<a class="src" rel="nofollow noopener" href="https:\/\/apps\.apple\.com\/[^"]+">/g, "");
+    const outside = text.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, "").replace(/<a class="src" rel="nofollow noopener" href="https:\/\/apps\.apple\.com\/[^"]+">/g, "")
+      // The legal pages' cancel link to Google Play's own subscription settings is not a store listing.
+      .replace(/<a class="src" rel="nofollow noopener" href="https:\/\/play\.google\.com\/store\/account\/subscriptions">/g, "");
     const store = outside.match(/apps\.apple\.com|play\.google\.com\/store|download on the app store|get it on google play|\/brand\/stores\//i);
     if (store) findings.push(`${name}: a store link or badge outside the store CTA (${store[0]})`);
     if (!live && /available now|disponible ya/i.test(text)) findings.push(`${name}: "available now" while no store URL is set`);
@@ -90,14 +92,15 @@ if (process.argv.includes("--self-test")) {
     ["h.txt", "- [Gratitude](https://peacebestillapp.com/questions/how-to-manifest/)\n- the law of attraction"],
     ["c.html", "<p>the law of assumption</p><script src=\"https://t.example/x.js\"></script>"],
     ["e.html", "<p>We guarantee sleep. Write to someone@peacebestillapp.com.</p>"],
+    ["p.html", '<a class="src" rel="nofollow noopener" href="https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile">get</a>'],
   ]);
-  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD", "e.html: outcome or health promise", "e.html: an email address", "g.html: manifesting words on a faith page", "h.txt: manifesting words on a neutral page (law of attraction)"];
+  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD", "e.html: outcome or health promise", "e.html: an email address", "g.html: manifesting words on a faith page", "h.txt: manifesting words on a neutral page (law of attraction)", "p.html: a store link or badge outside the store CTA"];
   const missing = want.filter((w) => !bad.some((f) => f.includes(w)));
   if (missing.length) { console.error(`check-site --self-test: did not catch: ${missing.join("; ")}`); process.exit(1); }
   if (bad.some((f) => f.startsWith("b.html"))) { console.error("check-site --self-test: flagged a clean mindset page"); process.exit(1); }
-  const clean = check([["f.html", "<p>Listening does not guarantee sleep. Write to info@peacebestillapp.com.</p>"], ["i.xml", "<loc>https://peacebestillapp.com/questions/how-to-manifest/</loc>"], ["j.html", '<link rel="manifest" href="/site.webmanifest">']]);
+  const clean = check([["f.html", "<p>Listening does not guarantee sleep. Write to info@peacebestillapp.com.</p>"], ["i.xml", "<loc>https://peacebestillapp.com/questions/how-to-manifest/</loc>"], ["j.html", '<link rel="manifest" href="/site.webmanifest">'], ["k.html", '<a class="src" rel="nofollow noopener" href="https://play.google.com/store/account/subscriptions">cancel</a>']]);
   if (clean.length) { console.error(`check-site --self-test: flagged the legal contact or a negated guarantee: ${clean.join("; ")}`); process.exit(1); }
-  console.log("OUTPUT check-site --self-test: caught all 11 planted faults");
+  console.log(`OUTPUT check-site --self-test: caught all ${want.length} planted faults`);
   process.exit(0);
 }
 

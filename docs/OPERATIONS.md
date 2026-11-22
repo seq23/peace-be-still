@@ -6,6 +6,20 @@ What an operator can do and what the Worker reports. The code is in `worker/src`
 
 `POST /api/admin/chat-block` with `Authorization: Bearer $CHAT_ADMIN_TOKEN` and `{"installId": "...", "reason": "short-code", "hours": 72}` (leave out `hours` to pause until lifted). `DELETE` with `{"installId": "..."}` lifts it. That person sees "Chat is paused on this account" and the support link. With no `CHAT_ADMIN_TOKEN` the route answers `CHAT_ADMIN_TOKEN_MISSING` (503).
 
+## Store review access (no accounts, one code)
+
+Google Play's reviewer reaches the paid plan with a 10-digit code (Android only: App Review buys in the sandbox, and Apple forbids an own unlock, Guideline 3.1.1), never a free switch: `worker/src/review.ts`, tested in `worker/test/review.test.ts` and the paid-screen render tests.
+- **Turn on for a review:** put both Worker secrets (from the Boss OS vault, through a pipe): `REVIEW_CODE` (exactly 10 digits) and `REVIEW_UNTIL` (the date the window closes, e.g. `2026-12-05`). Then the Android price screen shows "App review code"; the right code makes the Worker ask RevenueCat (`REVENUECAT_SECRET_KEY`) to grant that install the `paid` entitlement for 7 days. Put the code and the steps (Settings > A paid plan > App review code) in Play Console > App content > App access.
+- **Off:** either secret missing, not 6 digits, or past `REVIEW_UNTIL` → `/api/review` and `/api/review/unlock` answer 404 and call no one, and the box is hidden. `wrangler secret delete REVIEW_CODE` after approval.
+- **Guessing:** 5 tries a minute per install (`REVIEW_BURST`), 10 a day per install (`review_try_day`, deleted with the day counters), so one person cannot use up the reviewer's tries; 1,000 a day for everyone as a backstop (`chat_counts.review_tries`); then 429 until tomorrow (Central). Log codes: `REVIEW_UNLOCKED`, `REVIEW_CODE_WRONG`, `REVIEW_INSTALL_DAILY_CAP`, `REVIEW_DAILY_CAP`, `REVIEW_UNLOCK_REVENUECAT_UNAVAILABLE` (503, the app says try again; never unlocked), `REVIEW_REVENUECAT_KEY_MISSING`.
+
+## Android build and Google Play internal upload
+
+`.github/workflows/android-store-build.yml`, manual only: `eas build --local` (profile `internal`, the upload keystore held by EAS) on a GitHub runner, `scripts/android/check-aab.mjs` (package, versionCode, signature, no blocked permission), `eas submit --path` to the internal track as a draft, then `scripts/android/play-track.mjs` proves it is a draft there and on no other track. The bundle must be signed by the EAS-held upload key (`UPLOAD_SHA1` in the workflow, SHA-1 `94:2D:B9:3B:B4:B7:17:E7:36:2F:D4:34:56:71:69:CF:7D:D2:65:4B`, created 22 Nov 2026 with `eas credentials:configure-build -p android -e internal`). Each secret is set only on the steps that use it, and the Play key file is written just before the upload. The bundle is never an artifact. Repo secrets: `EXPO_TOKEN`, `GOOGLE_PLAY_UPLOAD_SA_JSON`, `REVENUECAT_PBS_ANDROID_PUBLIC_KEY` (`goog_…`; `app.config.ts` refuses a Play build without it: `REVENUECAT_PBS_ANDROID_KEY_MISSING`). Play subscriptions use the App Store ids, each with one base plan (`playBasePlan` in `app/src/config/products.json`); listing text in `store/google-play/listing-en.md`.
+
+The Android launcher icon's foreground (`app/assets/adaptive-icon.png`) is the approved mark rendered with resvg, the tile dropped (the tile colour is `adaptiveIcon.backgroundColor`), from `app/`:
+`sed -E 's#<rect[^>]*></rect>##; s#viewBox="0 0 64 64"#viewBox="-4.056 -4.056 72.113 72.113" width="1024" height="1024"#' assets/brand/pbs-mark-dark.svg > /tmp/fg.svg && npx --yes @resvg/resvg-js-cli@2.6.2-beta.1 /tmp/fg.svg assets/adaptive-icon.png`
+
 ## Spend
 
 `GET /api/admin/spend` (same token): the paid-route spend this calendar month (Central), the cap (`PAID_AI_MONTHLY_CAP_USD`, $100) and which alerts fired.

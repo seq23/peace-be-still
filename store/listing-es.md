@@ -12,7 +12,7 @@ Terms of use (EULA) URL: https://peacebestillapp.com/terms
 
 Description first 3 lines:
 Una gran calma, cada noche.
-Peace Be Still es un lugar tranquilo para cerrar el día y empezar el siguiente: sesiones susurradas para dormir, una palabra para la mañana y alguien con quien hablar.
+Peace Be Still es un lugar tranquilo para cerrar el día y empezar el siguiente: sesiones susurradas para dormir, una palabra para la mañana y un chat tranquilo para hablar.
 Elige tu camino: la Palabra de Dios, o mente e imaginación. Cada uno es su propio espacio, y puedes cambiar cuando quieras en Ajustes.
 
 Description body:

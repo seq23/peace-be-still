@@ -9,6 +9,9 @@ type Secrets = {
   CHAT_ADMIN_TOKEN?: string;
   OPENROUTER_API_KEY?: string;
   REVENUECAT_SECRET_KEY?: string;
+  // Store review access (review.ts), both Worker secrets: REVIEW_CODE (10 digits) and REVIEW_UNTIL (a date, "2026-12-05"); either missing, the review routes answer 404.
+  REVIEW_CODE?: string;
+  REVIEW_UNTIL?: string;
   // Apple DeviceCheck (the private first chat, firstprivate.ts): the .p8 key, its id and the team id. Missing: DEVICECHECK_KEY_MISSING, and every first chat is the normal free lane.
   APPLE_DEVICECHECK_KEY?: string;
   APPLE_DEVICECHECK_KEY_ID?: string;
