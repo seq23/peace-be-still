@@ -14,6 +14,7 @@ import { NEVER, MINDSET, FAITH_LINK } from '../../scripts/content/rules.mjs';
 import { verses } from '../../scripts/content/lib.mjs';
 import { providers } from '../../worker/src/providers.mjs';
 import { esListingLegal } from '../../site/content/legal.mjs';
+import { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES } from '../src/gates';
 
 const ROOT = join(process.cwd(), '..');
 const read = (path: string) => readFileSync(join(ROOT, path), 'utf8');
@@ -108,6 +109,9 @@ const pages: Page[] = pageFiles.map(file => {
 const storeConfig = JSON.parse(read('site/config/store.json'));
 const esLegal = esListingLegal(storeConfig.es_listing_spanish_legal);
 const listings = { 'en-US': read('store/listing-en.md'), 'es-MX': read('store/listing-es.md') };
+// Google Play has one default listing (no custom pages), so its text is checked like the App Store's neutral lines.
+const play = read('store/google-play/listing-en.md');
+const playFields = { title: field(play, 'Title') ?? '', short: field(play, 'Short description') ?? '', full: play.split('Full description:\n')[1]?.trim() ?? '' };
 const events = read('store/events.md').split(/^## /m).slice(1).map(block => ({ name: block.split('\n')[0].trim(), block }));
 const legal = ['privacy', 'terms', 'disclaimer'].map(name => ({ name, text: read(`legal/${name}.md`) }));
 
@@ -133,6 +137,7 @@ function visibleItems(): Item[] {
       if (text) items.push({ where: `event ${e.name} ${key}`, text, kind: 'faith' });
     }
   }
+  items.push({ where: 'Play title', text: playFields.title, kind: 'neutral' }, { where: 'Play short description', text: playFields.short, kind: 'neutral' }, { where: 'Play full description', text: playFields.full, kind: 'neutral' });
   for (const l of legal) items.push({ where: `legal/${l.name}.md`, text: l.text, kind: 'legal' });
   items.push({ where: 'store/privacy-label.md', text: read('store/privacy-label.md'), kind: 'legal' });
   return items;
@@ -215,6 +220,20 @@ test('listings have every App Store field, the subscription disclosures and the 
     assert.match(body, /\b(?:AI|IA)\b[^\n]*\b(?:providers|proveedores)\b/, `${locale}: AI disclosure`);
     assert.doesNotMatch(body, /\$\s?\d/, `${locale}: prices are Apple's to show per storefront`);
   }
+});
+
+test('the Google Play listing fits Play\'s limits and promises nothing the Android build lacks', () => {
+  assert.equal(playFields.title, 'Peace Be Still');
+  assert.ok([...playFields.short].length > 20 && [...playFields.short].length <= 80, `short description ${[...playFields.short].length}/80`);
+  assert.ok([...playFields.full].length > 500 && [...playFields.full].length <= 4000, `full description ${[...playFields.full].length}/4000`);
+  // Android buys through Google Play and has no private first chat (that needs Apple's DeviceCheck).
+  const shown = Object.values(playFields).join('\n');
+  assert.doesNotMatch(shown, /\bApple\b|App Store|iPhone|first chat is private|tap your name/);
+  assert.match(playFields.full, /Google Play/);
+  assert.match(playFields.full, /https:\/\/peacebestillapp\.com\/privacy/);
+  // Same free and paid numbers the app enforces.
+  assert.match(playFields.full, new RegExp(`up to ${FREE_CHAT_MESSAGES} messages`));
+  assert.match(playFields.full, new RegExp(`up to ${PAID_CHAT_MESSAGES} messages a day`));
 });
 
 test('the es-MX listing links the legal pages its one switch names (site/config/store.json)', () => {

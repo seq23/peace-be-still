@@ -8,6 +8,7 @@
   "products": {
     "monthly": {
       "id": "com.peacebestillapp.mobile.paid.monthly",
+      "playBasePlan": "monthly",
       "duration": "ONE_MONTH",
       "usPrice": "7.99",
       "displayName": {
@@ -17,6 +18,7 @@
     },
     "yearly": {
       "id": "com.peacebestillapp.mobile.paid.yearly",
+      "playBasePlan": "yearly",
       "duration": "ONE_YEAR",
       "usPrice": "39.99",
       "displayName": {

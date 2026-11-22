@@ -41,7 +41,8 @@ let introPrice: object | null = null;
 const packageFor = (plan: 'yearly' | 'monthly') => ({
   identifier: plan === 'yearly' ? '$rc_annual' : '$rc_monthly',
   product: {
-    identifier: products.products[plan].id,
+    // RevenueCat names a Play subscription's base plan `<subscription id>:<base plan id>`.
+    identifier: (globalThis as any).__pbsPlatform === 'android' ? `${products.products[plan].id}:${products.products[plan].playBasePlan}` : products.products[plan].id,
     subscriptionPeriod: plan === 'yearly' ? 'P1Y' : 'P1M',
     priceString: plan === 'yearly' ? '$38.49' : '$6.29',
     pricePerMonthString: plan === 'yearly' ? '$3.21' : null,
@@ -67,6 +68,7 @@ const packageFor = (plan: 'yearly' | 'monthly') => ({
     if (purchaseError) throw { code: purchaseError };
     return { customerInfo: customerInfo(storePaid = true) };
   },
+  invalidateCustomerInfoCache: async () => { fakePurchaseCalls.push('invalidate'); },
   restorePurchases: async () => {
     fakePurchaseCalls.push('restore');
     await restoreWait;
@@ -171,7 +173,17 @@ const realFetch = globalThis.fetch;
 const artFetches: string[] = [];
 let artMode: 'ok' | '404' | 'down' = 'ok';
 let artManifest: { version: number; ids: string[] } = { version: 0, ids: [] };
-mock.method(globalThis, 'fetch', async (url: string) => {
+// Store review access (worker/src/review.ts): whether the window is open, and what the server says to a code.
+let reviewWindow = false;
+let reviewAnswer: () => Response | Promise<Response> = () => new Response('{}', { status: 404 });
+const reviewCodes: string[] = [];
+mock.method(globalThis, 'fetch', async (url: string, init?: RequestInit) => {
+  if (url.endsWith('/api/review')) return reviewWindow ? Response.json({ open: true }) : Response.json({ error: 'NOT_FOUND' }, { status: 404 });
+  if (url.endsWith('/api/review/unlock')) {
+    assert.equal(new Headers(init?.headers).get('authorization'), 'Bearer render-token');
+    reviewCodes.push(JSON.parse(String(init?.body)).code);
+    return reviewAnswer();
+  }
   // Lane 2S loads the Bible database from its bundled asset (a data: URL here); only the audio manifest is faked.
   if (url.startsWith('data:')) return realFetch(url);
   // Story artwork's manifest (src/story/art.ts): what the Worker says is approved, or an outage.
@@ -1762,10 +1774,107 @@ test('a storefront with an introductory offer cannot present a no-trial checkout
   } finally { await closePaid(tree); }
 });
 
+const onAndroid = (extra: Record<string, string> = { revenueCatAndroidKey: 'render-test-key' }) => () => {
+  (globalThis as any).__pbsPlatform = 'android';
+  (globalThis as any).__pbsExpoConfig = { extra };
+};
+const PLAY_SUBSCRIPTIONS = 'https://play.google.com/store/account/subscriptions?package=com.peacebestillapp.mobile';
+
+test('on Android the paid lane sells the Google Play plans with Google Play\'s own terms and cancel page, in both languages', async () => {
+  for (const language of ['en', 'es'] as const) {
+    const es = language === 'es';
+    const tree = await mountPaid({ ...readyForPaid, language, journey: es ? 'mi-refugio' : 'psalm-nights' }, onAndroid());
+    try {
+      assert.match(textOf(radios(tree)[0]), /\$38\.49/);
+      assert.match(textOf(radios(tree)[1]), /\$6\.29/);
+      assert.match(strings(tree), es ? /Google Play cobra \$38\.49.*cada año/ : /Google Play charges \$38\.49.*renews yearly/);
+      assert.match(strings(tree), es ? /cuenta de Google Play/ : /Google Play account/);
+      assert.doesNotMatch(strings(tree), /Apple|App Store/);
+      const links: string[] = [];
+      (globalThis as any).__pbsOpenURL = (url: string) => links.push(url);
+      await press(tree, es ? /dos toques/ : /two taps/);
+      assert.deepEqual(links, [PLAY_SUBSCRIPTIONS]);
+      await press(tree, /\$6\.29/);
+      await press(tree, es ? /Suscríbete/ : /Join /);
+      assert.deepEqual(fakePurchaseCalls, ['render-install', `${products.products.monthly.id}:${products.products.monthly.playBasePlan}`]);
+      assert.equal(gate(tree), 'true true');
+    } finally { await closePaid(tree); }
+  }
+});
+
+test('on Android only the Play key and Play base plans open checkout: the iPhone key or an Apple-shaped id is never offered', async () => {
+  const tree = await mountPaid(readyForPaid, onAndroid({ revenueCatIosKey: 'render-test-key' }));
+  try {
+    assert.match(strings(tree), /Google Play prices are unavailable/);
+    assert.equal(paidControls(tree).length, 0);
+    assert.equal(gate(tree), 'false true');
+  } finally { await closePaid(tree); }
+  const { plansFrom } = require('../src/purchases/revenuecat') as typeof import('../src/purchases/revenuecat');
+  const offering = (android: boolean) => {
+    (globalThis as any).__pbsPlatform = android ? 'android' : 'ios';
+    // The fake packages carry only the fields plansFrom reads.
+    const value = { current: { identifier: products.offering, availablePackages: [packageFor('monthly'), packageFor('yearly')] } } as unknown as Parameters<typeof plansFrom>[0];
+    (globalThis as any).__pbsPlatform = 'web';
+    return value;
+  };
+  assert.ok(plansFrom(offering(true), 'android'));
+  assert.equal(plansFrom(offering(false), 'android'), null, 'Apple ids on a Play storefront');
+  assert.equal(plansFrom(offering(true), 'ios'), null, 'Play ids on an Apple storefront');
+});
+
+test('a store reviewer\'s code opens the paid plan only when the server and RevenueCat both say so, and the box shows only during a review', async () => {
+  try {
+    reviewWindow = false;
+    let tree = await mountPaid(readyForPaid, onAndroid());
+    await settle();
+    assert.doesNotMatch(strings(tree), /App review code/);
+    await closePaid(tree);
+
+    reviewWindow = true;
+    reviewCodes.length = 0;
+    tree = await mountPaid(readyForPaid, onAndroid());
+    try {
+      await settle();
+      assert.match(strings(tree), /App review code/);
+      const code = (value: string) => act(async () => host(tree, 'TextInput').find(n => n.props.accessibilityLabel === 'App review code')!.props.onChangeText(value));
+      await code('12a34');
+      assert.equal(host(tree, 'Pressable').find(n => /Use this code/.test(textOf(n)))!.props.disabled, true, 'only 6 digits can be sent');
+      const attempt = async (answer: () => Response | Promise<Response>, expected: RegExp | null) => {
+        reviewAnswer = answer;
+        await code('482913');
+        await press(tree, /Use this code/);
+        if (expected) assert.match(strings(tree), expected);
+      };
+      await attempt(() => Response.json({ error: 'WRONG_CODE' }, { status: 403 }), /That code didn’t work/);
+      await attempt(() => Response.json({ error: 'SLOW_DOWN' }, { status: 429 }), /Too many tries/);
+      await attempt(() => Response.json({ error: 'TRY_AGAIN' }, { status: 503 }), /couldn’t open the paid plan/);
+      await attempt(() => { throw new TypeError('Network request failed'); }, /couldn’t open the paid plan/);
+      // The server said yes but RevenueCat does not report the plan: still locked.
+      await attempt(() => Response.json({ unlocked: true }), /couldn’t open the paid plan/);
+      assert.equal(gate(tree), 'false true');
+      await attempt(() => { storePaid = true; return Response.json({ unlocked: true }); }, /paid access is active/);
+      assert.equal(gate(tree), 'true true');
+      assert.doesNotMatch(strings(tree), /App review code/);
+      assert.deepEqual(reviewCodes, Array(6).fill('482913'));
+      assert.ok(fakePurchaseCalls.includes('render-install'), 'the store is logged in as the install that got the grant');
+      assert.ok(fakePurchaseCalls.includes('invalidate'), 'RevenueCat is asked again, not its cache');
+    } finally { await closePaid(tree); }
+  } finally {
+    reviewWindow = false;
+    reviewAnswer = () => new Response('{}', { status: 404 });
+  }
+});
+
 test('a first purchase provisions and persists the shared install identity before reaching the store', async () => {
   const fetch = globalThis.fetch;
   const requests: string[] = [];
   globalThis.fetch = async (url, options) => {
+    // The review-window question (store reviewers only) is anonymous: no token, no body, so it makes no identity.
+    if (String(url).endsWith('/api/review')) {
+      assert.equal(options?.body, undefined);
+      assert.equal(new Headers(options?.headers).get('authorization'), null);
+      return Response.json({ error: 'NOT_FOUND' }, { status: 404 });
+    }
     requests.push(String(url));
     assert.deepEqual(JSON.parse(String(options?.body)), { age: 'adult' });
     return Response.json({ token: 'new-token', installId: 'new-install' });
@@ -1773,6 +1882,7 @@ test('a first purchase provisions and persists the shared install identity befor
   const tree = await mountPaid(readyForPaid, () => { chatRecord = null; });
   try {
     assert.deepEqual(requests, []);
+    assert.equal(chatRecord, null, 'opening the price screen makes no install identity');
     await press(tree, /Join /);
     assert.match(requests[0], /\/token$/);
     assert.equal(requests.length, 1);

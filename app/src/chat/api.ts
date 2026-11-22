@@ -116,3 +116,34 @@ export async function installId(age?: Age): Promise<string | null> {
   await token(age, fetch);
   return (await saved())?.installId ?? null;
 }
+
+/** Store review access (worker/src/review.ts): true only while a store review window is open on the server. */
+export async function reviewOpen(fetcher: typeof fetch = fetch): Promise<boolean> {
+  try {
+    const res = await fetcher(`${CHAT_API}/review`);
+    return res.status === 200 && ((await res.json()) as { open?: unknown }).open === true;
+  } catch {
+    return false;
+  }
+}
+
+export type ReviewResult = 'granted' | 'wrong' | 'slow' | 'failed';
+/** Sends a store reviewer's code for this install. The server asks RevenueCat to grant the paid plan; this only
+ *  reports what the server said. Any failure, including no answer, is 'failed' (never paid). */
+export async function redeemReviewCode(age: Age, code: string, fetcher: typeof fetch = fetch): Promise<ReviewResult> {
+  try {
+    for (const refresh of [false, true]) {
+      const res = await fetcher(`${CHAT_API}/review/unlock`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', authorization: `Bearer ${await token(age, fetcher, refresh)}` },
+        body: JSON.stringify({ code }),
+      });
+      if (res.status === 401 && !refresh) continue;
+      if (res.status === 200) return 'granted';
+      if (res.status === 403) return 'wrong';
+      if (res.status === 429) return 'slow';
+      return 'failed';
+    }
+  } catch { /* offline or the server is down */ }
+  return 'failed';
+}

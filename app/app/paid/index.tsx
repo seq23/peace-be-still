@@ -1,44 +1,58 @@
 import { Redirect, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Linking, Text, View } from 'react-native';
+import { ActivityIndicator, Linking, Platform, Text, TextInput, View } from 'react-native';
 import type { PurchasesPackage } from 'react-native-purchases';
+import { reviewOpen, type ReviewResult } from '../../src/chat/api';
 import { PAID_CHAT_MESSAGES } from '../../src/gates';
 import { onboarded, startRoute } from '../../src/model';
 import { usePurchases } from '../../src/purchases/provider';
 import { plansFrom, type Plan } from '../../src/purchases/revenuecat';
+import type { Key } from '../../src/i18n';
 import { useSettings, useT } from '../../src/settings';
 import { fonts } from '../../src/theme/tokens';
 import { Body, Card, PillButton, Screen, TextLink, Title, styles, usePalette } from '../../src/ui';
 
 const planOrder = ['yearly', 'monthly'] as const;
 const planCopy = {
-  yearly: { name: 'paid.plan.yearly', period: 'paid.period.yearly', join: 'paid.join.yearly', renew: 'paid.renew.yearly' },
-  monthly: { name: 'paid.plan.monthly', period: 'paid.period.monthly', join: 'paid.join.monthly', renew: 'paid.renew.monthly' },
+  yearly: { name: 'paid.plan.yearly', period: 'paid.period.yearly', join: 'paid.join.yearly' },
+  monthly: { name: 'paid.plan.monthly', period: 'paid.period.monthly', join: 'paid.join.monthly' },
 } as const;
+// The store's own words and its subscription page: Apple on iPhone, Google Play on Android (the web preview reads as iPhone).
+const appleCopy = {
+  renew: { yearly: 'paid.renew.yearly', monthly: 'paid.renew.monthly' }, charge: 'paid.apple', loading: 'paid.loading',
+  unavailable: 'paid.unavailable', buying: 'paid.buying', restoring: 'paid.restoring', pending: 'paid.pending',
+  nothingToRestore: 'paid.nothingToRestore', subscriptions: 'https://apps.apple.com/account/subscriptions',
+} as const;
+const playCopy = {
+  renew: { yearly: 'paid.play.renew.yearly', monthly: 'paid.play.renew.monthly' }, charge: 'paid.play.charge', loading: 'paid.play.loading',
+  unavailable: 'paid.play.unavailable', buying: 'paid.play.buying', restoring: 'paid.play.restoring', pending: 'paid.play.pending',
+  nothingToRestore: 'paid.play.nothingToRestore',
+  subscriptions: 'https://play.google.com/store/account/subscriptions?package=com.peacebestillapp.mobile',
+} as const;
+type Shop = typeof appleCopy | typeof playCopy;
 const statusCopy = {
-  idle: null,
-  pending: 'paid.pending',
-  buying: 'paid.buying',
-  restoring: 'paid.restoring',
-  failed: 'paid.failed',
-  unconfirmed: 'paid.unconfirmed',
-  nothingToRestore: 'paid.nothingToRestore',
-  restoreFailed: 'paid.restoreFailed',
-} as const;
+  idle: () => null,
+  pending: (shop: Shop) => shop.pending,
+  buying: (shop: Shop) => shop.buying,
+  restoring: (shop: Shop) => shop.restoring,
+  failed: () => 'paid.failed' as const,
+  unconfirmed: () => 'paid.unconfirmed' as const,
+  nothingToRestore: (shop: Shop) => shop.nothingToRestore,
+  restoreFailed: () => 'paid.restoreFailed' as const,
+} satisfies Record<string, (shop: Shop) => Key | null>;
 // Each line is a built feature (ship-ready app-review.md check 13). Stories and reading plans live behind
 // the God's Word door only, so the Mindset door is never sold them.
 const benefits = {
   faith: ['paid.chat', 'paid.nights', 'paid.stories', 'paid.topics'],
   mindset: ['paid.chat', 'paid.nights', 'paid.topics'],
 } as const;
-const subscriptions = 'https://apps.apple.com/account/subscriptions';
 
 export default function PaidScreen() {
   const { settings } = useSettings();
   const t = useT('journey');
   const c = usePalette();
   const router = useRouter();
-  const { store, preview, paid, status, buy, restore } = usePurchases();
+  const { store, preview, paid, status, buy, restore, redeem } = usePurchases();
   const [plans, setPlans] = useState<{
     live: ReturnType<typeof plansFrom<PurchasesPackage>>;
     preview: ReturnType<typeof plansFrom>;
@@ -77,7 +91,8 @@ export default function PaidScreen() {
   };
   const site = 'https://peacebestillapp.com';
   const spanish = t.locale === 'es';
-  const message = status === 'pending' && settings.age === 'teen' ? 'paid.askToBuy' : statusCopy[status];
+  const shop = Platform.OS === 'android' ? playCopy : appleCopy;
+  const message = status === 'pending' && settings.age === 'teen' ? 'paid.askToBuy' : statusCopy[status](shop);
 
   return (
     <Screen>
@@ -131,12 +146,12 @@ export default function PaidScreen() {
         <PillButton onPress={() => {}}>{t('paid.previewJoin', { action: t(planCopy[selected].join, values) })}</PillButton>
       ) : null}
       {offers && !paid ? (
-        <Body size={13} style={{ textAlign: 'center' }}>{t(planCopy[selected].renew, values)}</Body>
+        <Body size={13} style={{ textAlign: 'center' }}>{t(shop.renew[selected], values)}</Body>
       ) : null}
-      {!paid && loading ? <ActivityIndicator accessibilityLabel={t('paid.loading')} color={c.accent} /> : null}
+      {!paid && loading ? <ActivityIndicator accessibilityLabel={t(shop.loading)} color={c.accent} /> : null}
       {!paid && !offers && !loading ? (
         <View>
-          <Body size={14}>{t('paid.unavailable')}</Body>
+          <Body size={14}>{t(shop.unavailable)}</Body>
           {store ? <TextLink onPress={() => requestPlans(n => n + 1)}>{t('paid.retry')}</TextLink> : null}
         </View>
       ) : null}
@@ -146,7 +161,7 @@ export default function PaidScreen() {
         </View>
       ) : null}
       <Card style={{ gap: 3 }}>
-        <TextLink onPress={() => open(subscriptions)}>{t('paid.cancel')}</TextLink>
+        <TextLink onPress={() => open(shop.subscriptions)}>{t('paid.cancel')}</TextLink>
         <Body size={14} muted={false}>{t('paid.keepFree')}</Body>
         <Body size={14} muted={false}>{t('paid.keepPrice')}</Body>
       </Card>
@@ -156,7 +171,45 @@ export default function PaidScreen() {
         <TextLink onPress={() => open(site + (spanish ? '/es/privacidad' : '/privacy'))}>{t('paid.privacy')}</TextLink>
       </View>
       {linkFailed ? <Body size={14}>{t('paid.linkFailed')}</Body> : null}
-      <Body size={13}>{t('paid.apple')}</Body>
+      {store && !paid ? <ReviewCode redeem={redeem} /> : null}
+      <Body size={13}>{t(shop.charge)}</Body>
     </Screen>
+  );
+}
+
+/** Store reviewers only: shown while the server says a review window is open (GET /api/review answers 200), so a
+ *  person using the app never sees it. The code goes to the server; RevenueCat grants the plan (worker/src/review.ts). */
+function ReviewCode({ redeem }: { redeem: (code: string) => Promise<ReviewResult> }) {
+  const t = useT('journey');
+  const c = usePalette();
+  const [open, setOpen] = useState(false);
+  const [code, setCode] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<ReviewResult | null>(null);
+  useEffect(() => {
+    let live = true;
+    void reviewOpen().then(value => { if (live) setOpen(value); });
+    return () => { live = false; };
+  }, []);
+  if (!open) return null;
+  const send = async () => {
+    if (busy || !/^\d{6}$/.test(code)) return;
+    setBusy(true);
+    setResult(null);
+    const answer = await redeem(code);
+    setBusy(false);
+    if (answer !== 'granted') setResult(answer);
+  };
+  const problem = result === 'wrong' ? 'review.wrong' : result === 'slow' ? 'review.slow' : result === 'failed' ? 'review.failed' : null;
+  return (
+    <Card style={{ gap: 8 }}>
+      <Body size={15} muted={false}>{t('review.title')}</Body>
+      <Body size={14}>{t('review.intro')}</Body>
+      <TextInput accessibilityLabel={t('review.title')} keyboardType="number-pad" inputMode="numeric" maxLength={6} value={code}
+        onChangeText={value => setCode(value.replace(/\D/g, ''))} onSubmitEditing={() => { void send(); }}
+        style={{ fontFamily: fonts.mono, fontSize: 17, color: c.ink, backgroundColor: c.card, borderColor: problem ? c.wine : c.line, borderWidth: 1, borderRadius: 14, padding: 12, outlineColor: c.accent }} />
+      <TextLink disabled={busy || code.length !== 6} onPress={() => { void send(); }}>{t('review.use')}</TextLink>
+      {problem ? <Text accessibilityRole="alert" style={{ fontFamily: fonts.body, fontSize: 14, color: c.wine }}>{t(problem)}</Text> : null}
+    </Card>
   );
 }

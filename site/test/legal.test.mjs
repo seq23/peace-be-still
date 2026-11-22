@@ -32,7 +32,7 @@ const links = (t, map) => [...t.matchAll(/\]\(([^)]+)\)/g)].map((m) => (map ? to
 // Wyoming, Family Sharing...). Each must appear in the Spanish clause, as written, or as its
 // standard Spanish name (Apple's own es-MX feature names, country and common nouns).
 const SPANISH = {
-  AI: /\bIA\b/, SDKs: /\bSDK\b/, "Apple-branded": /marca Apple/, Bible: /Biblia|bíblic[oa]/, God: /Dios/, Settings: /Configuración/,
+  AI: /\bIA\b/, SDKs: /\bSDK\b/, "Apple-branded": /marca Apple/, Bible: /Biblia|bíblic[oa]/, God: /Dios/, Settings: /Configuración/, Payments: /Pagos/, Terms: /Condiciones/, Service: /Servicio/,
   United: /Estados Unidos|Reino Unido/, States: /Estados/, Kingdom: /Reino/, European: /Europeo/, Economic: /Económico/,
   Area: /Espacio/, Switzerland: /Suiza/, State: /Estado/, November: /noviembre/, Spanish: /español/,
   Scripture: /Escrituras/, Government: /Gobierno/,

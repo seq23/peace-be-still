@@ -2,13 +2,13 @@
 
 > Esta es una traducción al español. Si esta versión y la [versión en inglés](https://peacebestillapp.com/terms) no dicen lo mismo, prevalece la versión en inglés.
 
-Vigente desde: 20 de noviembre de 2026
+Vigente desde: 21 de noviembre de 2026
 
 ## Con quién es este acuerdo
 
 Peace Be Still es una app de Spry Labs, el nombre comercial de Redwood Reserve Holdings LLC, una compañía de responsabilidad limitada de Wyoming ("nosotros"). Estos términos son un acuerdo entre usted y nosotros.
 
-Estos términos se suman al [Contrato de Licencia de Usuario Final Estándar de Apple para Aplicaciones con Licencia (Standard Licensed Application End User License Agreement)](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/), que se aplica a su uso de la app. Si los dos dicen cosas distintas, el contrato de Apple prevalece en todo lo que cubre. Nuestra [política de privacidad](https://peacebestillapp.com/es/privacidad) y nuestro [aviso importante](https://peacebestillapp.com/es/aviso) forman parte de estos términos.
+Estos términos se suman al [Contrato de Licencia de Usuario Final Estándar de Apple para Aplicaciones con Licencia (Standard Licensed Application End User License Agreement)](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/), que se aplica a su uso de la app. Si los dos dicen cosas distintas, el contrato de Apple prevalece en todo lo que cubre. En Android, las [Condiciones del Servicio de Google Play](https://play.google.com/about/play-terms/) rigen cómo compra y paga por medio de Google Play. Nuestra [política de privacidad](https://peacebestillapp.com/es/privacidad) y nuestro [aviso importante](https://peacebestillapp.com/es/aviso) forman parte de estos términos.
 
 ## Edad
 
@@ -24,7 +24,9 @@ Lo que es gratis sigue siendo gratis. Mientras siga suscrito, su precio no sube.
 
 ## Pagos, renovación y cancelación
 
-Apple le muestra el precio y las condiciones de renovación antes de que compre, y cobra a su cuenta de Apple. No hay período de prueba. Una suscripción se renueva automáticamente al final de cada mes o de cada año, a menos que la cancele al menos 24 horas antes de que se renueve. Adminístrela o cancélela cuando quiera en la [configuración de suscripciones de Apple](https://apps.apple.com/account/subscriptions); borrar la app no cancela una suscripción. Después de cancelar, el plan de pago sigue activo hasta el final del período que pagó. Puede restaurar sus compras en la app. Apple se encarga de los cobros y de los reembolsos según sus propios términos.
+En un iPhone, Apple le muestra el precio y las condiciones de renovación antes de que compre, y cobra a su cuenta de Apple. No hay período de prueba. Una suscripción se renueva automáticamente al final de cada mes o de cada año, a menos que la cancele al menos 24 horas antes de que se renueve. Adminístrela o cancélela cuando quiera en la [configuración de suscripciones de Apple](https://apps.apple.com/account/subscriptions); borrar la app no cancela una suscripción. Después de cancelar, el plan de pago sigue activo hasta el final del período que pagó. Puede restaurar sus compras en la app. Apple se encarga de los cobros y de los reembolsos según sus propios términos.
+
+En Android, Google Play le muestra el precio y las condiciones de renovación antes de que compre, y cobra a su cuenta de Google. No hay período de prueba. Una suscripción se renueva automáticamente al final de cada mes o de cada año, a menos que la cancele antes de que se renueve. Adminístrela o cancélela cuando quiera en la [configuración de suscripciones de Google Play](https://play.google.com/store/account/subscriptions); borrar la app no cancela una suscripción. Después de cancelar, el plan de pago sigue activo hasta el final del período que pagó. Puede restaurar sus compras en la app. Google Play se encarga de los cobros y de los reembolsos según sus propios términos.
 
 ## El chat y la IA
 
@@ -46,7 +48,7 @@ En la medida en que la ley lo permita, no somos responsables de pérdidas indire
 
 ## Apple
 
-Estos términos son entre usted y nosotros, no con Apple. Nosotros, y no Apple, somos los únicos responsables de la app y de su contenido.
+Esta sección se aplica cuando usted obtiene la app en el App Store de Apple. Estos términos son entre usted y nosotros, no con Apple. Nosotros, y no Apple, somos los únicos responsables de la app y de su contenido.
 
 - Su licencia es una licencia intransferible para usar la app en productos de la marca Apple que usted tenga o controle, como lo permiten las Reglas de Uso (Usage Rules) de los Términos y Condiciones de los Servicios Multimedia de Apple (Apple Media Services Terms and Conditions), incluido Compartir en familia (Family Sharing).
 - Nosotros somos los únicos responsables del mantenimiento y del soporte. Apple no tiene ninguna obligación de dar mantenimiento ni soporte para la app.

@@ -1,12 +1,12 @@
 # Terms of use
 
-Effective: November 20, 2026
+Effective: November 21, 2026
 
 ## Who these terms are with
 
 Peace Be Still is made by Spry Labs, the trade name of Redwood Reserve Holdings LLC, a Wyoming limited liability company ("we"). These terms are an agreement between you and us.
 
-These terms add to [Apple's Standard Licensed Application End User License Agreement](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/), which applies to your use of the app. If the two differ, Apple's agreement controls for anything it covers. Our [privacy policy](https://peacebestillapp.com/privacy) and [disclaimer](https://peacebestillapp.com/disclaimer) are part of these terms.
+These terms add to [Apple's Standard Licensed Application End User License Agreement](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/), which applies to your use of the app. If the two differ, Apple's agreement controls for anything it covers. On Android, [Google Play's Terms of Service](https://play.google.com/about/play-terms/) cover how you buy and pay through Google Play. Our [privacy policy](https://peacebestillapp.com/privacy) and [disclaimer](https://peacebestillapp.com/disclaimer) are part of these terms.
 
 ## Age
 
@@ -22,7 +22,9 @@ What is free stays free. While you stay subscribed, your price does not go up.
 
 ## Paying, renewing and canceling
 
-Apple shows the price and renewal terms before you buy and charges your Apple account. There is no trial. A subscription renews automatically at the end of each month or year unless you cancel at least 24 hours before it renews. Manage or cancel any time in [Apple's subscription settings](https://apps.apple.com/account/subscriptions); deleting the app does not cancel a subscription. After you cancel, the paid plan stays on until the end of the period you paid for. You can restore purchases in the app. Apple handles billing and refunds under its own terms.
+On an iPhone, Apple shows the price and renewal terms before you buy and charges your Apple account. There is no trial. A subscription renews automatically at the end of each month or year unless you cancel at least 24 hours before it renews. Manage or cancel any time in [Apple's subscription settings](https://apps.apple.com/account/subscriptions); deleting the app does not cancel a subscription. After you cancel, the paid plan stays on until the end of the period you paid for. You can restore purchases in the app. Apple handles billing and refunds under its own terms.
+
+On Android, Google Play shows the price and renewal terms before you buy and charges your Google account. There is no trial. A subscription renews automatically at the end of each month or year unless you cancel before it renews. Manage or cancel any time in [Google Play's subscription settings](https://play.google.com/store/account/subscriptions); deleting the app does not cancel a subscription. After you cancel, the paid plan stays on until the end of the period you paid for. You can restore purchases in the app. Google Play handles billing and refunds under its own terms.
 
 ## Chat and AI
 
@@ -44,7 +46,7 @@ To the extent the law allows, we are not liable for indirect, incidental, specia
 
 ## Apple
 
-These terms are between you and us, not Apple. We, not Apple, are solely responsible for the app and its content.
+This section applies when you get the app from Apple's App Store. These terms are between you and us, not Apple. We, not Apple, are solely responsible for the app and its content.
 
 - Your license is a non-transferable license to use the app on Apple-branded products that you own or control, as the Usage Rules in the Apple Media Services Terms and Conditions allow, including Family Sharing.
 - We are solely responsible for maintenance and support. Apple has no obligation to provide any maintenance or support for the app.

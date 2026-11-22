@@ -6,6 +6,17 @@ What an operator can do and what the Worker reports. The code is in `worker/src`
 
 `POST /api/admin/chat-block` with `Authorization: Bearer $CHAT_ADMIN_TOKEN` and `{"installId": "...", "reason": "short-code", "hours": 72}` (leave out `hours` to pause until lifted). `DELETE` with `{"installId": "..."}` lifts it. That person sees "Chat is paused on this account" and the support link. With no `CHAT_ADMIN_TOKEN` the route answers `CHAT_ADMIN_TOKEN_MISSING` (503).
 
+## Store review access (no accounts, one code)
+
+A store reviewer (Google Play, App Review) reaches the paid plan with a 6-digit code, never a free switch: `worker/src/review.ts`, tested in `worker/test/review.test.ts` and the paid-screen render tests.
+- **Turn on for a review:** put both Worker secrets (from the Boss OS vault, through a pipe): `REVIEW_CODE` (exactly 6 digits) and `REVIEW_UNTIL` (the date the window closes, e.g. `2026-12-05`). Then the price screen shows "App review code"; the right code makes the Worker ask RevenueCat (`REVENUECAT_SECRET_KEY`) to grant that install the `paid` entitlement for 7 days. Put the code and the steps (Settings > A paid plan > App review code) in Play Console > App content > App access.
+- **Off:** either secret missing, not 6 digits, or past `REVIEW_UNTIL` → `/api/review` and `/api/review/unlock` answer 404 and call no one, and the box is hidden. `wrangler secret delete REVIEW_CODE` after approval.
+- **Guessing:** 5 tries a minute per install (`REVIEW_BURST`), 30 a day for everyone (`chat_counts.review_tries`), then 429 until tomorrow (Central). Log codes: `REVIEW_UNLOCKED`, `REVIEW_CODE_WRONG`, `REVIEW_DAILY_CAP`, `REVIEW_UNLOCK_REVENUECAT_UNAVAILABLE` (503, the app says try again; never unlocked), `REVIEW_REVENUECAT_KEY_MISSING`.
+
+## Android build and Google Play internal upload
+
+`.github/workflows/android-store-build.yml`, manual only: `eas build --local` (profile `internal`, the upload keystore held by EAS) on a GitHub runner, `scripts/android/check-aab.mjs` (package, versionCode, signature, no blocked permission), `eas submit --path` to the internal track as a draft, then `scripts/android/play-track.mjs` proves it is a draft there and on no other track. The bundle is never an artifact. Repo secrets: `EXPO_TOKEN`, `GOOGLE_PLAY_UPLOAD_SA_JSON`, `REVENUECAT_PBS_ANDROID_PUBLIC_KEY` (`goog_…`; `app.config.ts` refuses a Play build without it: `REVENUECAT_PBS_ANDROID_KEY_MISSING`). Play subscriptions use the App Store ids, each with one base plan (`playBasePlan` in `app/src/config/products.json`); listing text in `store/google-play/listing-en.md`.
+
 ## Spend
 
 `GET /api/admin/spend` (same token): the paid-route spend this calendar month (Central), the cap (`PAID_AI_MONTHLY_CAP_USD`, $100) and which alerts fired.

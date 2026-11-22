@@ -5,6 +5,7 @@
 // Secrets (wrangler secret put, from the Boss OS vault; never in vars):
 //   CHAT_TOKEN_SECRET (32+ bytes), IP_HASH_SECRET (32+ bytes), PBS_GEMINI_API_KEY,
 //   OPENROUTER_API_KEY, REVENUECAT_SECRET_KEY. Optional during a rotation: CHAT_TOKEN_SECRET_PREVIOUS.
+//   Only while a store reviews the app: REVIEW_CODE (6 digits) and REVIEW_UNTIL (end date); see src/review.ts.
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "peace-be-still-chat",
@@ -29,7 +30,9 @@
   // Burst limits on top of the D1 daily counters (Workers Rate Limiting, per location, per key).
   "ratelimits": [
     { "name": "CHAT_BURST", "namespace_id": "3101", "simple": { "limit": 12, "period": 60 } },
-    { "name": "TOKEN_BURST", "namespace_id": "3102", "simple": { "limit": 3, "period": 60 } }
+    { "name": "TOKEN_BURST", "namespace_id": "3102", "simple": { "limit": 3, "period": 60 } },
+    // Store review code tries per install (src/review.ts); the daily cap for everyone is in D1.
+    { "name": "REVIEW_BURST", "namespace_id": "3103", "simple": { "limit": 5, "period": 60 } }
   ],
   // Every hour on the hour (UTC). Day boundaries are decided in code in America/Chicago.
   "triggers": { "crons": ["0 * * * *"] },
