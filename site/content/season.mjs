@@ -9,7 +9,7 @@
 // - only what the app does today: Psalm Nights, Hush Harbor stories and Morning Word exist; there is no
 //   Watch Night session and no fasting plan inside the app, and the pages say so;
 // - Watch Night history is sourced (National Archives, Smithsonian NMAAHC, Wikipedia's cited article).
-import { V, Q, F, bg, KJV_SRC, RV_SRC } from "./blitz-common.mjs";
+import { V, F, bg, KJV_SRC, RV_SRC, MI_REFUGIO_ES } from "./blitz-common.mjs";
 
 const D = { published: "2026-11-21", updated: "2026-11-21", publishedText: "21 Nov 2026", updatedText: "21 Nov 2026" };
 const DES = { published: "2026-11-21", updated: "2026-11-21", publishedText: "21 nov 2026", updatedText: "21 nov 2026" };
@@ -53,9 +53,9 @@ const PLAN = [
   ["Be still. Ten minutes of silence before you pray a word.", "Quédate quieto. Diez minutos de silencio antes de decir una palabra.", "PSA 46:10"],
   // Week 3: pray for others and go forward
   ["Pray like Esther, for your people. Name your family and your church.", "Ora como Ester, por tu pueblo. Nombra a tu familia y a tu iglesia.", "EST 4:16"],
-  ["Pray for the right way for your household and your children this year.", "Pide camino derecho para tu casa y tus hijos este año.", "EZR 8:21"],
-  ["Pray for leaders: your pastor, your city, your country.", "Ora por los que gobiernan: tu pastor, tu ciudad, tu país.", "1TI 2:1-2"],
-  ["Pray for a neighbourhood or city that needs to turn to God.", "Ora por un barrio o una ciudad que necesita volverse a Dios.", "JON 3:5"],
+  ["Pray for the right way for your household and your children this year.", "Pídele a Dios que enderece el camino de tu casa y de tus hijos este año.", "EZR 8:21"],
+  ["Pray for leaders: your pastor, your city, your country.", "Ora por tu pastor y por las autoridades de tu ciudad y de tu país.", "1TI 2:1-2"],
+  ["Pray for a neighborhood or city that needs to turn to God.", "Ora por un barrio o una ciudad que necesita volverse a Dios.", "JON 3:5"],
   ["Give God every worry, one by one, with thanks.", "Entrégale a Dios cada preocupación, una por una, con gratitud.", "PHI 4:6-7"],
   ["Leave last year behind. Press on to what is ahead.", "Deja atrás el año pasado. Sigue hacia lo que está delante.", "PHI 3:13-14"],
   ["Give thanks for the 21 days, and for the new thing God is doing.", "Da gracias por los 21 días y por lo nuevo que Dios hace.", "ISA 43:18-19"],
@@ -72,7 +72,8 @@ const week = (n, lang) => {
 
 const PSALM_NIGHTS_EN = `<p>Peace Be Still, coming soon to the App Store and Google Play, has <strong>Psalm Nights · Whispered Scripture for Sleep</strong>: a King James psalm whispered at bedtime (an AI voice), with the screen kept dark and a sleep timer. Psalm 4, Psalm 23, Psalm 91, Psalm 121 and Psalm 63 are among them. Your first night is free, then one a week; the paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`;
 const HUSH_HARBOR_EN = (stories) => `<p>Peace Be Still, coming soon to the App Store and Google Play, has <strong>Hush Harbor · Black Bible Chat &amp; Stories</strong>: Bible stories told in a Black church voice, word for word from the King James where it quotes Scripture. ${stories} Today's story is free every day.</p>`;
-const MI_REFUGIO = (extra) => `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae la Reina-Valera 1909 completa para leer gratis y Salmos susurrados para dormir (con una voz de IA), con la pantalla oscura y un temporizador. ${extra}</p>`;
+const MI_REFUGIO = (extra) => `${MI_REFUGIO_ES}
+<p>De noche, los Salmos se leen en susurro (con una voz de IA), con la pantalla oscura y un temporizador. ${extra}</p>`;
 
 const NOT_MEDICAL_EN = `<p class="muted">This page is about prayer. It is not medical advice. Before you give up food, talk with your doctor if you are pregnant or nursing, have diabetes or another health condition, take regular medicine, are under 18, or have ever struggled with eating. You can fast from something other than food instead.</p>`;
 const NOT_MEDICAL_ES = `<p class="muted">Esta página trata de la oración. No es consejo médico. Antes de dejar de comer, habla con tu médico si estás embarazada o amamantando, tienes diabetes u otra condición de salud, tomas medicina con regularidad, eres menor de 18 años o alguna vez has tenido problemas con la comida. También puedes ayunar de algo que no sea comida.</p>`;
@@ -134,7 +135,7 @@ ${V("ACT 16:25")}`],
     quick: "In 2026 Watch Night is Thursday 31 December. Most services start in the late evening with singing, testimony and the Word, and the church prays together as midnight comes. You can keep it at home with a psalm, thanks for the year, and prayer through midnight.",
     bestFor: "anyone going to Watch Night for the first time, families keeping it at home, and anyone who wants to know where it came from.",
     sections: [
-      ["Where did Watch Night come from?", `<p>Two streams meet in it. Methodists, following John Wesley, held watch nights from 1740: a late service of prayer, Scripture and covenant renewal at the turn of the year. Then on 31 December 1862, enslaved and free Black people gathered in churches and homes to watch for the Emancipation Proclamation, which Lincoln issued the next day. That night is remembered as Freedom's Eve, and Black churches have kept Watch Night ever since.</p>
+      ["Where did Watch Night come from?", `<p>Two streams meet in it. Methodists, following John Wesley, held watch nights from 1740: late services of prayer and Scripture, monthly at first and later on New Year's Eve, where Methodists also renewed their covenant with God. Then on 31 December 1862, enslaved and free Black people gathered in churches and homes to watch for the Emancipation Proclamation, which Lincoln issued the next day. That night is remembered as Freedom's Eve, and Black churches have kept Watch Night ever since.</p>
 <p>The Proclamation freed people in the states then in rebellion; freedom reached many only as Union troops advanced, and slavery ended in law with the Thirteenth Amendment in 1865. Watch Night remembers the waiting as much as the news.</p>`],
       ["What happens at a Watch Night service?", `<p>Every church does it its own way. Most include:</p>
 <ul>
@@ -167,8 +168,8 @@ ${V("ISA 43:18-19")}`],
     faq: [
       ["Why do Black churches have Watch Night?", "Black churches keep Watch Night in memory of Freedom's Eve, 31 December 1862, when enslaved and free Black people gathered to wait for the Emancipation Proclamation, issued on 1 January 1863. The service gives thanks for the year and prays the new one in."],
       ["What time does a Watch Night service start?", "Times vary by church. Many start between 9 and 11 p.m. and run past midnight, so the congregation is praying as the year turns. Check your church's announcement or website for this year's time."],
-      ["Is Watch Night the same as crossover night?", "They are close cousins. Watch Night is the name in Black American and Methodist churches; many African churches call the same midnight service of prayer crossover night."],
-      ["What do you wear to Watch Night?", "Whatever your church usually wears on Sunday. Some churches dress up for the new year; others are casual because the service runs late. Bring a Bible and a coat."],
+      ["Is Watch Night the same as crossover night?", "They are close cousins. Watch Night is the name in Black American and Methodist churches; many African churches call the same midnight service of prayer crossover night. Both thank God for the year that is ending and pray the new one in, and many families now keep both."],
+      ["What do you wear to Watch Night?", "Whatever your church usually wears on Sunday. Some churches dress up for the new year; others are casual because the service runs late. Bring a Bible and a coat, and something to write on if your church shares a word for the new year. Children are welcome in most churches."],
     ],
     sources: [ARCHIVES, NMAAHC, WIKI, KJV_SRC, bg("Psalm 90", "Psalm 90 (KJV), Bible Gateway")],
     related: ["/questions/crossover-night-prayer-points/", PATHS.fast, PATHS.night, "/black-bible-chat/"],
@@ -188,10 +189,10 @@ ${V("ISA 43:18-19")}`],
     sections: [
       ["Before you start", NOT_MEDICAL_EN],
       ["What kinds of fast are there?", `<table class="t"><thead><tr><th>Fast</th><th>What you give up</th><th>Where it comes from</th></tr></thead><tbody>
-<tr><td>The Daniel fast</td><td>Meat, sweets and rich food, and often wine; many eat vegetables, fruit, grains and water</td><td>Daniel 1:12 and 10:3</td></tr>
-<tr><td>A partial fast</td><td>Food until evening, or one meal a day</td><td>Judges 20:26 (${F("JDG 20:26", "fasted that day until even")})</td></tr>
-<tr><td>A full fast</td><td>All food, for a short time, with water</td><td>Esther 4:16; only with your doctor's okay</td></tr>
-<tr><td>A fast from something else</td><td>Social media, TV, games, shopping or sweets</td><td>A modern practice, kept in the same spirit</td></tr>
+<tr><td>The Daniel fast</td><td data-label="What you give up">Meat, sweets and rich food, and often wine; many eat vegetables, fruit, grains and water</td><td data-label="Where it comes from">Daniel 1:12 and 10:3</td></tr>
+<tr><td>A partial fast</td><td data-label="What you give up">Food until evening, or one meal a day</td><td data-label="Where it comes from">Judges 20:26 (${F("JDG 20:26", "fasted that day until even")})</td></tr>
+<tr><td>A full fast</td><td data-label="What you give up">All food, for a short time, with water</td><td data-label="Where it comes from">Esther 4:16; only with your doctor's okay</td></tr>
+<tr><td>A fast from something else</td><td data-label="What you give up">Social media, TV, games, shopping or sweets</td><td data-label="Where it comes from">A modern practice, kept in the same spirit</td></tr>
 </tbody></table>
 <p>Churches differ on the details of the Daniel fast; follow your church's guide if it has one.</p>
 ${V("DAN 1:12")}`],
@@ -207,14 +208,14 @@ ${V("PSA 30:5")}`],
 <ul>
 <li><strong>Morning Word · Daily Declarations:</strong> a declaration each morning that stands on one verse, quoted word for word.</li>
 <li><strong>Hush Harbor · Black Bible Chat &amp; Stories:</strong> stories of people who fasted, told in a Black church voice: Esther (“For Such a Time as This”), Daniel (“Didn't My Lord Deliver Daniel”) and Jonah, whose message moved Nineveh to fast (“Jonah Ran, and God Called Again”).</li>
-<li><strong>Psalm Nights:</strong> a whispered psalm at bedtime when the day was long.</li>
+<li><strong>Psalm Nights · Whispered Scripture for Sleep:</strong> a whispered psalm at bedtime when the day was long.</li>
 </ul>
 <p>Peace Be Still is coming soon to the App Store and Google Play. The whole King James Bible and today's story are free.</p>`],
     ],
     faq: [
       ["When does the January 2027 fast start?", "Most churches choose the first Sunday or Monday of the year. In 2027 that is Sunday 3 January or Monday 4 January, so a 21-day fast ends on Saturday 23 or Sunday 24 January. Follow your church's dates if it announces them."],
       ["What can you eat on a Daniel fast?", "Churches differ, but most follow Daniel 1:12 and 10:3: vegetables, fruit, whole grains, beans and water, with no meat, sweets or rich food. Many also leave out coffee and wine. Check your church's guide, and your doctor if you have a health condition."],
-      ["Is fasting commanded in the Bible?", "Jesus speaks of fasting as something his followers will do: “when ye fast” (Matthew 6:16), not “if”. The Bible gives no single rule for how long or what to give up, so churches and believers choose with prayer."],
+      ["Is fasting commanded in the Bible?", `Jesus speaks of fasting as something his followers will do: ${F("MAT 6:16", "when ye fast")} (Matthew 6:16), not “if”. The Bible gives no single rule for how long or what to give up, so churches and believers choose with prayer.`],
       ["What if I break my fast?", "Start again at the next meal or the next day. A fast is not a test you pass or fail; it is time given to God. Lamentations 3:22-23 says his mercies are new every morning, and that includes day 9 of a fast."],
     ],
     sources: [KJV_SRC, bg("Daniel 10", "Daniel 10 (KJV), Bible Gateway"), bg("Isaiah 58", "Isaiah 58 (KJV), Bible Gateway"), bg("Matthew 6:16-18", "Matthew 6:16-18 (KJV), Bible Gateway")],
@@ -230,10 +231,10 @@ ${V("PSA 30:5")}`],
     indexLabel: "Culto de fin de año",
     indexNote: "Qué se hace, cómo hacerlo en casa y una oración para la medianoche.",
     definition: "El culto de fin de año, o vigilia de Año Nuevo, es el servicio que muchas iglesias hacen la noche del 31 de diciembre para despedir el año dando gracias y recibir el nuevo orando a la medianoche. En las iglesias negras de Estados Unidos se llama Watch Night y recuerda la noche del 31 de diciembre de 1862.",
-    quick: "En 2026 el 31 de diciembre cae jueves. La mayoría de las iglesias empiezan en la noche con alabanza, testimonios y la Palabra, y oran juntas al llegar la medianoche. En casa basta un salmo, dar gracias por el año y orar hasta las doce.",
+    quick: "En 2026 el 31 de diciembre cae jueves. La mayoría de las iglesias empiezan en la noche con alabanza, testimonios y la Palabra, y oran juntas al llegar la medianoche. En casa basta un salmo, dar gracias por el año y orar hasta la medianoche.",
     bestFor: "quien va por primera vez a una vigilia de fin de año, y las familias que quieren hacerla en casa.",
     sections: [
-      ["¿De dónde viene la vigilia de fin de año?", `<p>Los metodistas, siguiendo a John Wesley, hacían vigilias de oración al final del año desde 1740. En Estados Unidos, la noche del 31 de diciembre de 1862, personas negras esclavizadas y libres se reunieron en iglesias y casas a esperar la Proclamación de Emancipación, que el presidente Lincoln firmó al día siguiente. Esa noche se recuerda como la Víspera de la Libertad, y las iglesias negras la guardan desde entonces con el nombre de Watch Night.</p>
+      ["¿De dónde viene la vigilia de fin de año?", `<p>Los metodistas, siguiendo a John Wesley, hacían vigilias de oración desde 1740, primero cada mes y más tarde la noche de fin de año. En Estados Unidos, la noche del 31 de diciembre de 1862, personas negras esclavizadas y libres se reunieron en iglesias y casas a esperar la Proclamación de Emancipación, que el presidente Lincoln firmó al día siguiente. Esa noche se recuerda como la Víspera de la Libertad, y las iglesias negras la guardan desde entonces con el nombre de Watch Night.</p>
 <p>Hoy muchas iglesias evangélicas hispanas tienen su propio culto de fin de año, con la misma idea: terminar el año delante de Dios.</p>`],
       ["¿Qué se hace en un culto de fin de año?", `<p>Cada iglesia lo hace a su manera. Casi siempre hay:</p>
 <ul>
@@ -247,12 +248,12 @@ ${V("PSA 90:12", es)}`],
       ["Una oración para la medianoche", `<p>“Señor, hemos esperado y tú nos has guardado. Gracias por cada mes de este año: por lo que nos diste y por lo que nos ayudaste a pasar. Dejamos atrás lo que ya pasó. Toma este año nuevo, nuestra casa, nuestra iglesia y nuestros hijos, y enséñanos a contar nuestros días. Amén.”</p>
 ${V("LAM 3:22-23", es)}`],
       ["¿Cómo hacer la vigilia de fin de año en casa?", `<ol>
-<li><strong>Empiecen a las 11 de la noche</strong> con un coro que todos sepan.</li>
-<li><strong>Lean el Salmo 90</strong> en voz alta, un versículo cada uno.</li>
-<li><strong>Den testimonio:</strong> cada uno dice algo que Dios hizo este año.</li>
-<li><strong>Despidan el año.</strong> Oren por lo que termina, por nombre.</li>
+<li><strong>Empieza a las 11 de la noche</strong> con un coro que todos en casa sepan.</li>
+<li><strong>Lee el Salmo 90</strong> en voz alta; que cada uno lea un versículo.</li>
+<li><strong>Abre el tiempo de testimonios:</strong> cada uno dice algo que Dios hizo este año.</li>
+<li><strong>Despide el año.</strong> Oren juntos por lo que termina, por nombre.</li>
 <li><strong>Oren hasta la medianoche</strong> y reciban el año con alabanza.</li>
-<li><strong>Consagren el año nuevo</strong> con la oración de abajo y coman juntos.</li>
+<li><strong>Consagra el año nuevo</strong> con la oración de abajo, y luego coman juntos.</li>
 </ol>`],
       ["Una oración para el Año Nuevo", `<p>“Padre, este año es tuyo antes de empezar. Ve delante de nosotros cada mes. Danos el pan de cada día, un corazón limpio y palabras sabias. Abre camino donde no lo vemos. Amén.”</p>
 ${V("PSA 65:11", es)}
@@ -277,16 +278,16 @@ ${V("ISA 43:18-19", es)}`],
     h1: "Ayuno de 21 días: oraciones y un plan día por día",
     indexLabel: "Ayuno de 21 días",
     indexNote: "Tipos de ayuno, una oración y un plan para cada día.",
-    definition: `Un ayuno de 21 días son tres semanas apartadas para orar, en las que dejas parte o toda la comida, u otra cosa como las redes sociales, y le das ese tiempo a Dios. Muchas iglesias lo empiezan la primera semana de enero. Sigue el ejemplo de Daniel, que ${F("DAN 10:2-3", "me contristé por espacio de tres semanas", es)} y ${F("DAN 10:2-3", "No comí pan delicado", es)}.`,
-    quick: "Elige tu ayuno, una fecha para empezar (muchas iglesias empiezan el domingo 3 o el lunes 4 de enero de 2027) y ora cada día con un motivo y un versículo del plan de abajo. En secreto, con amor, y el día 21 da gracias.",
+    definition: `Un ayuno de 21 días son tres semanas apartadas para orar, en las que dejas parte o toda la comida, u otra cosa como las redes sociales, y le das ese tiempo a Dios. Muchas iglesias lo empiezan la primera semana de enero. Sigue el ejemplo de Daniel, que escribió: ${F("DAN 10:2-3", "me contristé por espacio de tres semanas", es)}, y añadió: ${F("DAN 10:2-3", "No comí pan delicado", es)}.`,
+    quick: "Elige tu ayuno, una fecha para empezar (muchas iglesias empiezan el domingo 3 o el lunes 4 de enero de 2027) y ora cada día con un motivo y un versículo del plan de abajo. Hazlo en secreto y con amor, y el día 21 da gracias.",
     bestFor: "quien se une al ayuno de enero de su iglesia, o lo hace solo, y quiere un plan para orar cada día.",
     sections: [
       ["Antes de empezar", NOT_MEDICAL_ES],
       ["¿Qué tipos de ayuno hay?", `<table class="t"><thead><tr><th>Ayuno</th><th>Qué dejas</th><th>De dónde viene</th></tr></thead><tbody>
-<tr><td>El ayuno de Daniel</td><td>Carne, dulces y comida fina, y muchas veces el vino; se comen verduras, frutas, granos y agua</td><td>Daniel 1:12 y 10:3</td></tr>
-<tr><td>Ayuno parcial</td><td>La comida hasta la tarde, o una comida al día</td><td>Jueces 20:26 (${F("JDG 20:26", "ayunaron aquel día hasta la tarde", es)})</td></tr>
-<tr><td>Ayuno completo</td><td>Toda la comida, por poco tiempo, con agua</td><td>Ester 4:16; solo con el visto bueno de tu médico</td></tr>
-<tr><td>Ayuno de otra cosa</td><td>Redes sociales, televisión, juegos, compras o dulces</td><td>Una práctica de hoy, con el mismo espíritu</td></tr>
+<tr><td>El ayuno de Daniel</td><td data-label="Qué dejas">Carne, dulces y comida fina, y muchas veces el vino; se comen verduras, frutas, granos y agua</td><td data-label="De dónde viene">Daniel 1:12 y 10:3</td></tr>
+<tr><td>Ayuno parcial</td><td data-label="Qué dejas">La comida hasta la tarde, o una comida al día</td><td data-label="De dónde viene">Jueces 20:26 (${F("JDG 20:26", "ayunaron aquel día hasta la tarde", es)})</td></tr>
+<tr><td>Ayuno completo</td><td data-label="Qué dejas">Toda la comida, por poco tiempo, con agua</td><td data-label="De dónde viene">Ester 4:16; solo con el visto bueno de tu médico</td></tr>
+<tr><td>Ayuno de otra cosa</td><td data-label="Qué dejas">Redes sociales, televisión, juegos, compras o dulces</td><td data-label="De dónde viene">Una práctica de hoy, con el mismo espíritu</td></tr>
 </tbody></table>
 <p>Las iglesias no coinciden en todos los detalles del ayuno de Daniel; si tu iglesia tiene su guía, síguela.</p>
 ${V("DAN 1:12", es)}`],
@@ -298,12 +299,12 @@ ${V("MAT 6:17-18", es)}`],
       week(2, es),
       ["¿Cómo terminar un ayuno de 21 días?", `<p>Dando gracias. El día 21, escribe por qué oraste y lo que viste hacer a Dios, aunque sea pequeño. Muchas iglesias cierran con un culto de alabanza o la Santa Cena. Vuelve a tus comidas de siempre poco a poco, como te indique tu médico, y quédate con una costumbre del ayuno, como leer antes del desayuno.</p>
 ${V("PSA 30:5", es)}`],
-      ["El ayuno en Peace Be Still", MI_REFUGIO("La app no tiene un plan de ayuno por dentro; esta página es el plan. La Biblia completa y la historia del día son gratis.")],
+      ["El ayuno en Peace Be Still", MI_REFUGIO("Peace Be Still no tiene un plan de ayuno dentro de la app; esta página es el plan. La Biblia completa y la historia del día son gratis.")],
     ],
     faq: [
       ["¿Cuándo empieza el ayuno de enero de 2027?", "La mayoría de las iglesias escogen el primer domingo o lunes del año. En 2027 es el domingo 3 o el lunes 4 de enero, así que un ayuno de 21 días termina el sábado 23 o el domingo 24 de enero. Si tu iglesia anuncia fechas, síguelas."],
       ["¿Qué se come en el ayuno de Daniel?", "Las iglesias varían, pero casi todas siguen Daniel 1:12 y 10:3: verduras, frutas, granos, frijoles y agua, sin carne, dulces ni comida fina. Muchos también dejan el café. Revisa la guía de tu iglesia y consulta a tu médico si tienes una condición de salud."],
-      ["¿La Biblia manda ayunar?", "Jesús habla del ayuno como algo que sus discípulos harán: “cuando ayunáis” (Mateo 6:16), no “si ayunáis”. La Biblia no fija cuántos días ni qué dejar, así que cada iglesia y cada creyente lo decide en oración."],
+      ["¿La Biblia manda ayunar?", `Jesús habla del ayuno como algo que sus discípulos harán: ${F("MAT 6:16", "cuando ayunáis", es)} (Mateo 6:16), no “si ayunáis”. La Biblia no fija cuántos días ni qué dejar, así que cada iglesia y cada creyente lo decide en oración.`],
       ["¿Qué hago si rompo el ayuno?", "Vuelve a empezar en la próxima comida o al día siguiente. El ayuno no es un examen que se aprueba o se reprueba; es tiempo para Dios. Sus misericordias son nuevas cada mañana (Lamentaciones 3:22-23)."],
     ],
     sources: [RV_SRC, rv("Daniel 10", "Daniel 10 (RVES), Bible Gateway"), rv("Isaías 58", "Isaías 58 (RVES), Bible Gateway"), rv("Mateo 6:16-18", "Mateo 6:16-18 (RVES), Bible Gateway")],
