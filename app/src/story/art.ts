@@ -5,12 +5,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import { CHAT_API } from '../chat/api';
+import type { Telling } from '../content';
 
 export const ART_BASE = `${CHAT_API}/story-art`;
 
-/** A story's art id: one painting per look, because Hush Harbor and Mi Refugio share story ids. Mi Refugio
- *  gets its Latino-cast painting (`mr-`); Hush Harbor and the plain telling share the Black-cast one (`hh-`). */
-export const artId = (story: { id: string; telling: string }): string => `${story.telling === 'mi-refugio' ? 'mr' : 'hh'}-${story.id}`;
+/** A story's art ids, best first: one painting per look, because the tellings share story ids (her rulings
+ *  21 Nov 2026). Hush Harbor shows only the Black-cast painting (`hh-`) and Mi Refugio only the Hispanic-cast
+ *  one (`mr-`); the plain "Bible Chat & Stories" telling shows the Hispanic-cast painting, or the Black-cast one
+ *  when that story has no approved `mr-` painting. */
+const LOOKS: Record<Telling, readonly ('hh' | 'mr')[]> = { 'hush-harbor': ['hh'], 'mi-refugio': ['mr'], plain: ['mr', 'hh'] };
+export const artIds = (story: { id: string; telling: Telling }): string[] => LOOKS[story.telling].map(look => `${look}-${story.id}`);
 export const ART_MANIFEST_KEY = 'peace-be-still-story-art-manifest';
 const DAY = 24 * 3600_000;
 type Manifest = { version: number; ids: string[] };
@@ -36,15 +40,20 @@ export function storyArtManifest(fetcher: typeof fetch = fetch, now = Date.now()
   })().finally(() => { pending = null; }));
 }
 
-/** The image URL for this story, or null when it has no approved art (then nothing is ever requested). */
-export function useStoryArt(id: string | undefined): string | null {
+/** The image URL for this story: the first of its art ids that is approved, or null when none is (then
+ *  nothing is ever requested). */
+export function useStoryArt(ids: readonly string[]): string | null {
   const [uri, setUri] = useState<string | null>(null);
+  const key = ids.join(' ');
   useEffect(() => {
     let live = true;
     setUri(null);
-    if (!id) return;
-    void storyArtManifest().then(m => { if (live && m?.ids.includes(id)) setUri(`${ART_BASE}/${encodeURIComponent(id)}.webp?v=${m.version}`); }, () => undefined);
+    if (!key) return;
+    void storyArtManifest().then(m => {
+      const id = m && key.split(' ').find(x => m.ids.includes(x));
+      if (live && id) setUri(`${ART_BASE}/${encodeURIComponent(id)}.webp?v=${m.version}`);
+    }, () => undefined);
     return () => { live = false; };
-  }, [id]);
+  }, [key]);
   return uri;
 }
