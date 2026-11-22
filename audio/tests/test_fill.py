@@ -1,5 +1,6 @@
 """Behaviour of the library fill that runs without audio: plan order, resume, census, the active
 flag, the spoken text and the pass/fail bars. Run: python3 -m unittest discover -s audio/tests"""
+import re
 import datetime as dt
 import json
 import sys
@@ -1005,14 +1006,24 @@ class CloudChain(unittest.TestCase):
     def test_the_launch_size_follows_the_central_clock(self):
         at = lambda h, m: dt.datetime(2026, 11, 22, h, m, tzinfo=fill.CT)
         self.assertEqual(fill.cloud_slots(at(21, 59)), ("day", 10))
-        self.assertEqual(fill.cloud_slots(at(22, 0)), ("night", 16))
-        self.assertEqual(fill.cloud_slots(at(3, 0)), ("night", 16))
-        self.assertEqual(fill.cloud_slots(at(6, 59)), ("night", 16))
+        self.assertEqual(fill.cloud_slots(at(22, 0)), ("night", 14))
+        self.assertEqual(fill.cloud_slots(at(3, 0)), ("night", 14))
+        self.assertEqual(fill.cloud_slots(at(6, 59)), ("night", 14))
         self.assertEqual(fill.cloud_slots(at(7, 0)), ("day", 10))
-        self.assertEqual(fill.cloud_slots(dt.datetime(2026, 11, 22, 4, 0, tzinfo=dt.timezone.utc)), ("night", 16))  # 22:00 CT
-        self.assertEqual({fill.cloud_slots(at(h, 0)) for h in range(24)}, {("day", 10), ("night", 16)})
+        self.assertEqual(fill.cloud_slots(dt.datetime(2026, 11, 22, 4, 0, tzinfo=dt.timezone.utc)), ("night", 14))  # 22:00 CT
+        self.assertEqual({fill.cloud_slots(at(h, 0)) for h in range(24)}, {("day", 10), ("night", 14)})
         wf = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text()
         self.assertIn("--cloud-slots", wf)
+
+    def test_the_fill_never_takes_the_landing_runners(self):
+        # GitHub Free runs 20 jobs across all her repos; 4 stay free for merge gates, deploys and land.
+        biggest = max(j for *_, j in fill.CLOUD_JOBS)
+        self.assertLessEqual(biggest + fill.OTHER_HEAVY + fill.LANDING_RESERVE, fill.ACCOUNT_JOBS)
+        self.assertEqual(fill.LANDING_RESERVE, 4)
+        wf = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text()
+        caps = [int(n) for n in re.findall(r"max-parallel: *(\d+)", wf)]
+        self.assertTrue(caps, "fill-cloud.yml lost its max-parallel caps")
+        self.assertLessEqual(max(caps), biggest, "a matrix may run more jobs than the window allows")
 
     def test_a_chapter_that_crashes_is_held_and_the_shard_goes_on(self):
         items = fill.plan(bibles())[:3]

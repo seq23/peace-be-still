@@ -49,8 +49,8 @@ jobs:
         env:
           ONLY: ${{ inputs.only }}
           STORY: ${{ inputs.story }}
-          # The job count comes from the launch's Central start time (fill.py CLOUD_JOBS: 16 at night, 10 by
-          # day); GitHub Free runs 20 jobs at once across all her repos, so by day 10 stay free for CI.
+          # The job count comes from the launch's Central start time (fill.py CLOUD_JOBS: 14 at night, 10 by
+          # day); GitHub Free runs 20 jobs at once across all her repos, so 4 always stay free for landing.
           BJ: ${{ inputs.bible_jobs || '12' }}
           SJ: ${{ inputs.story_jobs || '4' }}
           BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}
@@ -136,7 +136,7 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 16
+      max-parallel: 14   # never above fill.CLOUD_JOBS' largest window
       matrix: { story: "${{ fromJSON(needs.plan.outputs.stories) }}" }
     steps:
       - uses: actions/checkout@v4

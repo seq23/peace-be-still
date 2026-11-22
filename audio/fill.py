@@ -1017,9 +1017,13 @@ CLOUD_FILES_PER_JOB = 40   # measured 21 Nov 2026 (Ruth EN, one runner): 4 chapt
 
 
 # How many cloud jobs one launch may take, by its start time in Central (owner, 22 Nov 2026): GitHub Free
-# runs 20 jobs at once across ALL her repos, so by day the fill leaves room for the other repos' CI.
+# runs 20 jobs at once across ALL her repos. 4 always stay free so a merge gate, deploy or land starts at
+# once, and 2 more for the other repos' heavy jobs (store builds, renders, nightly loops), so the fill
+# takes at most 14, even at night (landing-speed, 22 Nov 2026: at 16 a night PR waited for a runner).
 # Hours are [start, end) in CT; the one place these numbers live (the plan job reads --cloud-slots).
-CLOUD_JOBS = (("night", 22, 7, 16), ("day", 7, 22, 10))
+ACCOUNT_JOBS, LANDING_RESERVE, OTHER_HEAVY = 20, 4, 2
+CLOUD_JOBS = (("night", 22, 7, 14), ("day", 7, 22, 10))
+assert max(j for *_, j in CLOUD_JOBS) <= ACCOUNT_JOBS - LANDING_RESERVE - OTHER_HEAVY, "the fill would take the landing runners"
 
 
 def cloud_slots(now: dt.datetime) -> tuple[str, int]:
