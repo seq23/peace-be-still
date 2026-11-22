@@ -34,23 +34,25 @@ export const KBS_BOOK = {
 };
 
 const ENT = { "&nbsp;": " ", "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#39;": "'" };
-// One chapter page → [[verse, text], ...]. Each verse is <span><span class="number">N&nbsp;…</span>…</span>;
+// One chapter page → [[verse, text, last], ...]. Each verse is <span><span class="number">N&nbsp;…</span>…</span>;
+// where 개역한글 joins verses into one sentence the reader prints "12-13": stored once, under its first
+// verse (last = 13), as printed, never split by guesswork;
 // footnote markers (<a class=comment>…</a>) and their popups (<div class=D2>…</div>) are removed, then
 // every tag; the words are kept exactly. Pure.
 export function parseChapter(html, where = "?") {
   const body = html.slice(html.indexOf('id="tdBible1"'));
   if (body.length < 20) throw new Error(`NAMED STOP [KRV_PARSE] ${where}: no reader text`);
   const out = [];
-  const re = /<span class="number">(\d+)(?:&nbsp;)*\s*<\/span>([\s\S]*?)(?=<span(?: style="[^"]*")?><span class="number">|<\/div>\s*<\/div>|$)/g;
+  const re = /<span class="number">(\d+)(?:-(\d+))?(?:&nbsp;)*\s*<\/span>([\s\S]*?)(?=<span(?: style="[^"]*")?><span class="number">|<\/div>\s*<\/div>|$)/g;
   for (const m of body.matchAll(re)) {
-    const text = m[2]
+    const text = m[3]
       .replace(/<a class=comment[\s\S]*?<\/a>/g, "")
       .replace(/<div[^>]*class=D2[\s\S]*?<\/div>/g, "")
       .replace(/<[^>]+>/g, "")
       .replace(/&[a-z#0-9]+;/g, (e) => ENT[e] ?? e)
       .replace(/\s+/g, " ")
       .trim();
-    out.push([Number(m[1]), text]);
+    out.push([Number(m[1]), text, Number(m[2] || m[1])]);
   }
   if (!out.length) throw new Error(`NAMED STOP [KRV_PARSE] ${where}: no verses`);
   return out;
@@ -72,9 +74,13 @@ async function main() {
   const chapters = {};
   for (const m of kjv.matchAll(/^([1-4A-Z]{3}) (\d+):/gm)) chapters[m[1]] = Math.max(chapters[m[1]] || 0, +m[2]);
   const lines = [];
+  const joined = [];
   for (const [code, book] of Object.entries(KBS_BOOK)) {
     for (let c = 1; c <= chapters[code]; c++) {
-      for (const [v, t] of parseChapter(await page(book, c), `${code} ${c}`)) lines.push(`${code} ${c}:${v} ${t}`);
+      for (const [v, t, last] of parseChapter(await page(book, c), `${code} ${c}`)) {
+        lines.push(`${code} ${c}:${v} ${t}`);
+        if (last !== v) joined.push(`${code} ${c}:${v}-${last}`);
+      }
       await new Promise((r) => setTimeout(r, 700));
     }
   }
@@ -86,6 +92,8 @@ async function main() {
     name: "개역한글판", credit: "개역한글판 (대한성서공회 번역, 1961)", source: `${READER}&book=<book>&chap=<chapter>`,
     status: "Korean Bible Society: copyright term expired 2011-12-31 (bskorea.or.kr/bbs/content.php?co_id=subpage2_3_4_1, read 2026-11-21)",
     fetched: new Date().toISOString().slice(0, 10), verses: lines.length, sha256,
+    joined_note: "개역한글 prints these verse pairs as one verse; stored under the first number, as printed",
+    joined,
   }, null, 1) + "\n");
   console.log(`OUTPUT import-krv: ${lines.length} verses, sha256 ${sha256.slice(0, 12)}`);
 }

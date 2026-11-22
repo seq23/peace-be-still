@@ -52,6 +52,25 @@ export function koreanIssues(name, s) {
   return bad;
 }
 
+// Read from the Korean Bible Society's own reader (bskorea.or.kr, version=HAN) on 21 Nov 2026: the
+// verses the review found changed in the Wikisource copy. The store must be the publisher's words.
+const KBS_FIXTURE = {
+  "PSA 46:5": "하나님이 그 성중에 거하시매 성이 요동치 아니할 것이라 새벽에 하나님이 도우시리로다",
+  "PSA 130:6": "파숫군이 아침을 기다림보다 내 영혼이 주를 더 기다리나니 참으로 파숫군의 아침을 기다림보다 더하도다",
+  "MAR 1:4": "세례 요한이 이르러 광야에서 죄 사함을 받게 하는 회개의 세례를 전파하니",
+  "JER 33:1": "예레미야가 아직 시위대 뜰에 갇혔을 때에 여호와의 말씀이 그에게 다시 임하니라 가라사대",
+  "LAM 3:32": "저가 비록 근심케 하시나 그 풍부한 자비대로 긍휼히 여기실 것임이라",
+  "PSA 72:20": "이새의 아들 다윗의 기도가 필하다",
+  "PSA 46:10": "이르시기를 너희는 가만히 있어 내가 하나님 됨을 알찌어다 내가 열방과 세계 중에서 높임을 받으리라 하시도다",
+};
+
+test("the stored 개역한글 is the Korean Bible Society's text, word for word", () => {
+  for (const [ref, text] of Object.entries(KBS_FIXTURE)) assert.equal(verses(ref, "KRV")[0].text, text, ref);
+  // 개역한글 prints some verse pairs as one ("12-13"): stored once under the first number, never merged into the verse before.
+  assert.ok(verses("1CH 16:12", "KRV")[0].text.startsWith("그 종 이스라엘의 후손"));
+  assert.equal(verses("1CH 16:11", "KRV")[0].text, "여호와와 그 능력을 구할찌어다 그 얼굴을 항상 구할찌어다");
+});
+
 test("a Korean page quoting KJV, or without the credit line, is caught", () => {
   assert.equal(koreanIssues("k", '<q class="v" data-ref="PSA 4:8" data-tr="KJV">x</q> 개역한글판 (대한성서공회 번역, 1961)').length, 1);
   assert.equal(koreanIssues("k", '<q class="v" data-ref="PSA 4:8" data-tr="KRV">x</q>').length, 1);

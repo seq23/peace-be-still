@@ -23,7 +23,7 @@ const KQ = {
   journey: "/ko/questions/new-year-dawn-prayer-6-days/",
 };
 const ALL_Q = Object.values(KQ);
-const KRV_SRC = ["성경 본문: 개역한글판 (대한성서공회 번역, 1961)", "https://ko.wikisource.org/wiki/%EA%B0%9C%EC%97%AD%ED%95%9C%EA%B8%80%ED%8C%90"];
+const KRV_SRC = ["성경 본문: 개역한글판 (대한성서공회 번역, 1961), 대한성서공회 온라인 성경", "https://www.bskorea.or.kr/bible/korbibReadpage.php?version=HAN"];
 const KBS_SRC = ["대한성서공회: 성경 저작권 안내 (개역한글판 보호기간 2011년 12월 31일 만료)", "https://www.bskorea.or.kr/bbs/content.php?co_id=subpage2_3_4_1"];
 const KJV_SRC = ["King James Version, eBible.org", "https://ebible.org/find/details.php?id=eng-kjv"];
 const BASE_KO = { ...D, lang: "ko", door: "faith", group: G, sources: [KRV_SRC, KBS_SRC] };
