@@ -1014,6 +1014,14 @@ class CloudChain(unittest.TestCase):
         wf = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text()
         self.assertIn("--cloud-slots", wf)
 
+    def test_a_manifest_push_is_checked_by_ci(self):
+        # 22 Nov 2026: gather pushes rows with the job token, which starts no CI run, and 132 Spanish rows
+        # turned main red unseen. Gather dispatches CI on main after a push that wrote rows.
+        root = AUDIO.parent / ".github/workflows"
+        gather = (root / "fill-cloud.yml").read_text().split("\n  gather:", 1)[1]
+        self.assertRegex(gather, r"gh workflow run ci\.yml [^\n]*--ref main")
+        self.assertRegex((root / "ci.yml").read_text().split("jobs:", 1)[0], r"\n  workflow_dispatch:")
+
     def test_a_chapter_that_crashes_is_held_and_the_shard_goes_on(self):
         items = fill.plan(bibles())[:3]
         tried = []
