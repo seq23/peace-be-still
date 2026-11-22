@@ -1,10 +1,13 @@
 """Behaviour of the library fill that runs without audio: plan order, resume, census, the active
 flag, the spoken text and the pass/fail bars. Run: python3 -m unittest discover -s audio/tests"""
+import re
 import datetime as dt
 import json
 import sys
 import tempfile
 import unittest
+import contextlib
+import io
 from unittest import mock
 from pathlib import Path
 
@@ -292,17 +295,13 @@ class Lanes(unittest.TestCase):
         with self.assertRaises(ValueError):
             fill.shard(q, "7/7")
 
-    def test_cloud_plan_sizes_the_matrix_and_says_when_it_is_done(self):
-        items = fill.plan(bibles(), fill.content_items(fill.REPO))
-        cfg = fill.lanes()
-        p = fill.cloud_plan(items, [], cfg, 12)
-        n = min(12, -(-p["left"] // fill.CLOUD_FILES_PER_JOB))
-        self.assertTrue(p["left"] > 0 and n >= 1)
-        self.assertEqual(p["bible"], [f"{k}/{n}" for k in range(n)])
-        self.assertEqual(len(fill.cloud_plan(items, [], cfg, 1)["bible"]), 1)   # capped at the jobs asked
-        done = [{"file": i["file"], "status": "passed"} for i in items]
-        with mock.patch.object(fill, "whole_fill_done", return_value=True):
-            self.assertEqual(fill.cloud_plan(items, done, cfg, 12), {"bible": [], "left": 0, "complete": True})
+    def test_the_batch_says_when_the_cloud_is_done(self):
+        out = io.StringIO()
+        with mock.patch.object(fill, "whole_fill_done", return_value=True), mock.patch.object(fill, "todo", return_value=[]), \
+             contextlib.redirect_stdout(out):
+            self.assertEqual(fill.main(["--cloud-batch", "12", "4"]), 0)
+        p = json.loads(out.getvalue())
+        self.assertEqual((p["bible"], p["left"], p["complete"]), ([], 0, True))
 
 
 class Gather(unittest.TestCase):
@@ -1002,17 +1001,57 @@ if __name__ == "__main__":
 
 
 class CloudChain(unittest.TestCase):
-    def test_the_launch_size_follows_the_central_clock(self):
-        at = lambda h, m: dt.datetime(2026, 11, 22, h, m, tzinfo=fill.CT)
-        self.assertEqual(fill.cloud_slots(at(21, 59)), ("day", 10))
-        self.assertEqual(fill.cloud_slots(at(22, 0)), ("night", 16))
-        self.assertEqual(fill.cloud_slots(at(3, 0)), ("night", 16))
-        self.assertEqual(fill.cloud_slots(at(6, 59)), ("night", 16))
-        self.assertEqual(fill.cloud_slots(at(7, 0)), ("day", 10))
-        self.assertEqual(fill.cloud_slots(dt.datetime(2026, 11, 22, 4, 0, tzinfo=dt.timezone.utc)), ("night", 16))  # 22:00 CT
-        self.assertEqual({fill.cloud_slots(at(h, 0)) for h in range(24)}, {("day", 10), ("night", 16)})
-        wf = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text()
-        self.assertIn("--cloud-slots", wf)
+    def test_one_function_sizes_the_batch_by_the_central_clock(self):
+        at = lambda h: dt.datetime(2026, 11, 22, h, 0, tzinfo=fill.CT)
+        lots = 10_000   # more Bible files than any batch can take
+        self.assertEqual(fill.cloud_batch(at(22), 12, 4, lots), ("night", 10, 4))   # was 12 + 4 at 16 jobs
+        self.assertEqual(fill.cloud_batch(at(6), 12, 4, lots), ("night", 10, 4))
+        self.assertEqual(fill.cloud_batch(at(7), 12, 4, lots), ("day", 6, 4))
+        self.assertEqual(fill.cloud_batch(at(21), 12, 4, lots), ("day", 6, 4))
+        utc = lambda h: dt.datetime(2026, 11, 22, h, 0, tzinfo=dt.timezone.utc)
+        # Instants where Central and UTC disagree, so reading the UTC hour fails: 03:00 UTC is 21:00 CT (day,
+        # though 03:00 is night), 12:00 UTC is 06:00 CT (night, though 12:00 is day).
+        self.assertEqual(fill.cloud_batch(utc(3), 12, 4, lots), ("day", 6, 4))
+        self.assertEqual(fill.cloud_batch(utc(12), 12, 4, lots), ("night", 10, 4))
+        self.assertEqual(fill.cloud_batch(at(12), 12, 4, 41), ("day", 2, 8))       # a short queue gives stories the rest
+        self.assertEqual(fill.cloud_batch(at(12), 12, 4, 0), ("day", 0, 10))
+        self.assertEqual(fill.cloud_batch(at(23), 2, 4, lots), ("night", 2, 12))
+        # Every hour, every input: never more than the window, never fewer than KEEP_FREE runners left.
+        window_jobs = {name: j for name, _, _, j in fill.CLOUD_JOBS}
+        for h in range(24):
+            for bj in (0, 4, 12, 50):
+                for sj in (0, 4, 12, 50):
+                    for left in (0, 40, 400, lots):
+                        w, nb, ns = fill.cloud_batch(at(h), bj, sj, left)
+                        self.assertEqual(w, "night" if (h >= 22 or h < 7) else "day", (h, bj, sj, left))
+                        self.assertTrue(0 <= nb <= bj and ns >= 0, (h, bj, sj, left))
+                        self.assertLessEqual(nb + ns, window_jobs[w], (h, bj, sj, left))
+                        self.assertLessEqual(nb + ns, fill.ACCOUNT_JOBS - fill.KEEP_FREE, (h, bj, sj, left))
+
+    def test_ignoring_the_window_fails(self):
+        # Mutation: a batch that always takes the night size (or the largest) is caught by the day hours.
+        def mutant(now, bj, sj, left):
+            jobs = max(j for *_, j in fill.CLOUD_JOBS)
+            nb = max(0, min(bj, jobs - sj, -(-left // fill.CLOUD_FILES_PER_JOB)))
+            return "night", nb, jobs - nb
+        with mock.patch.object(fill, "cloud_batch", mutant):
+            with self.assertRaises(AssertionError):
+                self.test_one_function_sizes_the_batch_by_the_central_clock()
+
+    def test_the_plan_step_takes_its_batch_from_cloud_batch(self):
+        seen = []
+        def spy(now, bj, sj, left):
+            seen.append((bj, sj))
+            return "day", 3, 7
+        out = io.StringIO()
+        with mock.patch.object(fill, "cloud_batch", spy), contextlib.redirect_stdout(out):
+            self.assertEqual(fill.main(["--cloud-batch", "12", "4"]), 0)
+        p = json.loads(out.getvalue())
+        self.assertEqual((seen, p["bible"], p["story_slots"]), ([(12, 4)], ["0/3", "1/3", "2/3"], 7))
+        plan = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text().split("\n  plan:", 1)[1].split("\n  bible:", 1)[0]
+        self.assertIn('python audio/fill.py --cloud-batch "$BJ" "$SJ"', plan)
+        self.assertIn('["story_slots"]', plan)                 # the story planner is fed the function's slots
+        self.assertNotRegex(plan, r"\b(cap|free|jobs)=\$\(\(")  # no sizing arithmetic left in the shell
 
     def test_a_manifest_push_is_checked_by_ci(self):
         # 22 Nov 2026: gather pushes rows with the job token, which starts no CI run, and 132 Spanish rows
