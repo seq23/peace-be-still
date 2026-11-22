@@ -17,7 +17,7 @@ on:
     - cron: "15 0,6,12,18 * * *"
   workflow_dispatch:
     inputs:
-      bible_jobs: { description: "most Bible shards this launch", default: "10" }
+      bible_jobs: { description: "most Bible shards this launch", default: "12" }
       story_jobs: { description: "most clone stories this launch", default: "4" }
       only: { description: "proof run: only Bible files starting with this (e.g. en/bible/kjv-rut)", default: "" }
       story: { description: "proof run: this one story id", default: "" }
@@ -46,8 +46,8 @@ jobs:
         env:
           ONLY: ${{ inputs.only }}
           STORY: ${{ inputs.story }}
-          # 10 + 4 jobs: GitHub Free runs 20 jobs at once per account, across all her repos; 6 stay free for CI.
-          BJ: ${{ inputs.bible_jobs || '10' }}
+          # 12 + 4 jobs: GitHub Free runs 20 jobs at once per account, across all her repos; 4 stay free for CI.
+          BJ: ${{ inputs.bible_jobs || '12' }}
           SJ: ${{ inputs.story_jobs || '4' }}
           BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}
           GH_TOKEN: ${{ github.token }}
@@ -88,7 +88,7 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 10
+      max-parallel: 12
       matrix: { shard: "${{ fromJSON(needs.plan.outputs.bible) }}" }
     steps:
       - uses: actions/checkout@v4

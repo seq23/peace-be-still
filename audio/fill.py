@@ -989,7 +989,7 @@ def window_minutes(now: dt.datetime) -> int:
 
 
 # ------------------------------------------------------------------ the run
-CLOUD_FILES_PER_JOB = 60   # measured 21 Nov 2026: about 12.5 chapters per runner-hour (Ruth, ~4.7 min each) x a 300-minute box
+CLOUD_FILES_PER_JOB = 40   # measured 21 Nov 2026 (Ruth EN, one runner): 4 chapters tried in 31 min = 7.7 an hour x a 300-minute box
 
 
 def cloud_plan(items: list[dict], rows: list[dict], cfg: dict, jobs: int) -> dict:
