@@ -55,7 +55,9 @@ jobs:
         env:
           EAS_BUILD_PLATFORM: android
           EAS_BUILD_PROFILE: internal
-        run: npx expo config --type public > /dev/null && echo "OUTPUT gate: RevenueCat Play key present"
+        run: |
+          npx expo config --type public > /dev/null
+          echo "OUTPUT gate: RevenueCat Play key present"
       - name: Play key file
         env:
           PLAY_SA: ${{ secrets.GOOGLE_PLAY_UPLOAD_SA_JSON }}
