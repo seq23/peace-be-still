@@ -16,7 +16,7 @@ if [ ! -s "$KEY" ]; then
   [ -n "${PBS_GIT_CRYPT_KEY:-}" ] || { echo "NAMED STOP PBS_GIT_CRYPT_KEY_MISSING: the chat prompts, test sets and crisis lists stay encrypted; run under the vault: cd ~/GitHub/boss-os && npm run -s vault:run -- bash $PWD/scripts/git-crypt-unlock.sh (CI: the PBS_GIT_CRYPT_KEY repo secret)"; exit 3; }
   mkdir -p "$COMMON/git-crypt/keys"
   umask 077
-  node -e 'const b = Buffer.from(process.env.PBS_GIT_CRYPT_KEY.trim(), "base64"); if (!b.subarray(0, 12).equals(Buffer.from("\0GITCRYPTKEY"))) { console.log("NAMED STOP PBS_GIT_CRYPT_KEY_INVALID: the value is not a base64 git-crypt key"); process.exit(3); } process.stdout.write(b)' > "$KEY.tmp" || { rm -f "$KEY.tmp"; exit 3; }
+  node -e 'const b = Buffer.from(process.env.PBS_GIT_CRYPT_KEY.trim(), "base64"); if (!b.subarray(0, 12).equals(Buffer.from("\0GITCRYPTKEY"))) { console.log("NAMED STOP PBS_GIT_CRYPT_KEY_INVALID: the value is not a base64 git-crypt key"); process.exit(3); } require("fs").writeFileSync(process.argv[1], b, { mode: 0o600 })' "$KEY.tmp" || { rm -f "$KEY.tmp"; exit 3; }
   mv "$KEY.tmp" "$KEY"
 fi
 git config filter.git-crypt.smudge "\"git-crypt\" smudge --key-file \"$KEY\""
