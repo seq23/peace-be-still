@@ -1138,7 +1138,12 @@ test('Spanish and Mindset shelves show their own library and the current availab
   const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
   assert.ok(texts(spanish).includes(es['tabs.nights']));
   assert.ok(texts(spanish).includes(es['journey.miRefugio.name']));
-  assert.ok(texts(spanish).includes(es['listen.emptyShelf']));
+  // The Spanish shelves follow the library too (22 Nov 2026: the cloud fill shelved Spanish Bible chapters and this
+  // line, pinned to an empty shelf, turned main red): the empty line shows only while one of its shelves has nothing.
+  const esFaith = audioTracks.filter(track => track.lang === 'es' && track.kind !== 'imagination-night');
+  const anEmptyShelf = (['psalms', 'bible', 'miRefugio'] as const).some(shelf => !esFaith.some(track => shelfOf(track) === shelf));
+  assert.equal(texts(spanish).includes(es['listen.emptyShelf']), anEmptyShelf, 'spanish: ' + texts(spanish).join(' | '));
+  if (esFaith.some(track => shelfOf(track) === 'bible')) assert.ok(strings(spanish).includes(es['listen.bibleByBook']), 'spanish: ' + texts(spanish).join(' | '));
   assert.ok(!strings(spanish).includes(en['journey.hushHarbor.name']));
   for (const language of ['en', 'es'] as const) {
     const locale = language === 'es' ? es : en;
