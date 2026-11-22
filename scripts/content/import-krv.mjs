@@ -46,6 +46,7 @@ export function parseChapter(html, where = "?") {
   const re = /<span class="number">(\d+)(?:-(\d+))?(?:&nbsp;)*\s*<\/span>([\s\S]*?)(?=<span(?: style="[^"]*")?><span class="number">|<\/div>\s*<\/div>|$)/g;
   for (const m of body.matchAll(re)) {
     const text = m[3]
+      .replace(/<font[^>]*class="?smallTitle"?[^>]*>[\s\S]*?<\/font>/g, "")   // a section heading before the next verse
       .replace(/<a class=comment[\s\S]*?<\/a>/g, "")
       .replace(/<div[^>]*class=D2[\s\S]*?<\/div>/g, "")
       .replace(/<[^>]+>/g, "")

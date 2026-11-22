@@ -5,7 +5,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { verses } from "../../scripts/content/lib.mjs";
+import { verses, bible } from "../../scripts/content/lib.mjs";
+const bibleLines = (tr) => bible(tr).entries();
 
 const pub = new URL("../public/", import.meta.url).pathname;
 const stored = (ref, tr) => verses(ref, tr).map((x) => x.text).join(" ");
@@ -61,11 +62,16 @@ const KBS_FIXTURE = {
   "JER 33:1": "예레미야가 아직 시위대 뜰에 갇혔을 때에 여호와의 말씀이 그에게 다시 임하니라 가라사대",
   "LAM 3:32": "저가 비록 근심케 하시나 그 풍부한 자비대로 긍휼히 여기실 것임이라",
   "PSA 72:20": "이새의 아들 다윗의 기도가 필하다",
+  "MAT 18:20": "두 세 사람이 내 이름으로 모인 곳에는 나도 그들 중에 있느니라",
+  "GEN 11:9": "그러므로 그 이름을 바벨이라 하니 이는 여호와께서 거기서 온 땅의 언어를 혼잡케 하셨음이라 여호와께서 거기서 그들을 온 지면에 흩으셨더라",
   "PSA 46:10": "이르시기를 너희는 가만히 있어 내가 하나님 됨을 알찌어다 내가 열방과 세계 중에서 높임을 받으리라 하시도다",
 };
 
 test("the stored 개역한글 is the Korean Bible Society's text, word for word", () => {
   for (const [ref, text] of Object.entries(KBS_FIXTURE)) assert.equal(verses(ref, "KRV")[0].text, text, ref);
+  // The reader's section headings ("셈의 후예(대상 1:24-27)") are not verse text.
+  const withHeading = [...bibleLines("KRV")].filter(([, t]) => /\([가-힣]+ \d+:\d+(?:-\d+)?\)$/.test(t));
+  assert.deepEqual(withHeading.slice(0, 5), []);
   // 개역한글 prints some verse pairs as one ("12-13"): stored once under the first number, never merged into the verse before.
   assert.ok(verses("1CH 16:12", "KRV")[0].text.startsWith("그 종 이스라엘의 후손"));
   assert.equal(verses("1CH 16:11", "KRV")[0].text, "여호와와 그 능력을 구할찌어다 그 얼굴을 항상 구할찌어다");
