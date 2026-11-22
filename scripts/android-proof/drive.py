@@ -78,9 +78,17 @@ note('after onboarding: ' + words())
 # The paywall, as a reviewer reaches it (Settings > A paid plan), by deep link so a layout change never strands the run.
 adb('shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-d', 'peacebestill://paid', PKG)
 time.sleep(10)
-note('paywall: ' + words())
-shot('plain', 'paywall-390-light')
-adb('shell', 'cmd', 'uimode', 'night', 'yes'); time.sleep(4); shot('plain', 'paywall-390-dark'); note('dark: ' + words())
+# 320 and 390 dp, light and dark. A screen without the paywall title and its plan state is a blank or wrong capture: fail.
+def paywall_shot(name):
+    w = words()
+    if not (re.search(r'A paid plan', w) and re.search(r'prices are unavailable|/ (month|year)|Join ', w)):
+        shot('plain', 'stuck'); note(f'BLANK or not the paywall at {name}: {w}'); raise SystemExit(4)
+    shot('plain', name); note(f'{name}: {w}')
+for dp, px in ((320, 960), (390, 1170)):
+    adb('shell', 'wm', 'size', f'{px}x2532'); time.sleep(3)
+    for mode in ('no', 'yes'):
+        adb('shell', 'cmd', 'uimode', 'night', mode); time.sleep(4)
+        paywall_shot(f'paywall-{dp}-' + ('dark' if mode == 'yes' else 'light'))
 adb('shell', 'cmd', 'uimode', 'night', 'no'); time.sleep(4)
 tap(r'Have a review code\?', scroll=True)
 shot('plain', 'review-box-open')
