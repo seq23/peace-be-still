@@ -277,7 +277,10 @@ class Lanes(unittest.TestCase):
         cloud = {i["file"] for i in items if fill.lane_of(i, cfg) == "cloud"}
         self.assertFalse(mac & cloud)
         self.assertEqual(len(mac | cloud), len(items))
-        self.assertTrue(all(i["kind"] == "bible" for i in items if i["file"] in cloud))
+        # A kind the Mac keeps is never the cloud's, whatever lanes.json lists.
+        alt = {"mac_kinds": ["psalms"], "mac_stories": ["core-011-noah"]}
+        self.assertTrue(all(fill.lane_of(i, alt) == ("mac" if i["kind"] == "psalms" else "cloud") for i in items))
+        self.assertEqual(C.lane_of({"id": "core-011-noah"}, alt), "mac")
         stories = C.H.load_stories()
         self.assertEqual({s["id"] for s in stories if C.lane_of(s, cfg) == "mac"}, set(cfg["mac_stories"]))
 

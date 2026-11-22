@@ -12,8 +12,8 @@ checks, shelved, status, voice).
   | Bible matrix | GitHub Actions (`fill-cloud.yml`, job `bible`) | round the clock: each batch's gather job starts the next (an hourly cron restarts a broken chain; one batch at a time), up to 12 shards, each a 300-minute box (about 40 chapters) | every Bible chapter (`kind` bible, EN and ES) | Kokoro, CPU |
   | Clone stories | GitHub Actions (job `story`) | the same batches, up to 4 stories, one per job, 260-minute box plus a 45-minute QA reserve; sentences saved to Drive after every batch | every Hush Harbor story but the Mac's | Chatterbox, CPU |
   | Gather | GitHub Actions (job `gather`) | the end of each batch | lays every job's rows over main's manifest, one push | none |
-  | Mac Bible lane | her Mac (`run.sh`, launchd) | 22:00–06:45, 90-minute boxes | psalms, Psalm Nights, Imagination Nights, Kokoro stories | Kokoro |
-  | Mac clone lane | her Mac, in parallel | the same window; waits while memory is tight or her morning jobs run | the two stories half rendered there | Chatterbox |
+  | Mac Bible lane | her Mac (`run.sh`, launchd) | rests: `lanes.json` gives it nothing (measured 21 Nov 2026: the cloud is about 30 times the Mac); 22:00–06:45 in 90-minute boxes if it is given a share | whatever `mac_kinds` lists | Kokoro |
+  | Mac clone lane | her Mac, in parallel | rests the same way; when given a share, waits while memory is tight or her morning jobs run | whatever `mac_stories` lists | Chatterbox |
   | Publish | her Mac, after each run | the same window | Drive → R2 for the app | none |
 
   The cloud uses the same code and checks as the Mac (`PBS_LANE=cloud`); failed files are held on Drive
