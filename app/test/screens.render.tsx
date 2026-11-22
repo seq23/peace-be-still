@@ -1907,7 +1907,10 @@ test('a free listener gets the first night, then one a week, and a used week sho
   s = await nightPlayer(track, person);
   try {
     assert.equal(button(s.tree, en['listen.play']), undefined);
-    const next = new Date(); next.setDate(next.getDate() + 4);
+    // Counted from tonight's night, which starts at 6 AM: before 6 AM it is still last night (the CI clock is UTC,
+    // so between midnight and 6 AM the calendar date and the night differ).
+    const [y, m, d] = nightOf(new Date()).split('-').map(Number);
+    const next = new Date(y, m - 1, d + 4);
     const day = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date(next.getFullYear(), next.getMonth(), next.getDate()));
     assert.ok(texts(s.tree).includes(i18n.t('listen.nextFreeNight', { locale: 'en', day })), strings(s.tree));
     assert.ok(!texts(s.tree).includes(en['listen.psalmAllowance']));
