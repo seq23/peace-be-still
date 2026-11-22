@@ -1,9 +1,28 @@
 # Audio: the library fill (Phase 4 home)
 
-Voices the app's library on her Mac and shelves every file on Drive. Audio never goes in git; this
+Voices the app's library on GitHub's free runners and on her Mac, and shelves every file on Drive. Audio never goes in git; this
 folder holds the code and `manifest.jsonl` (one row per file: file, kind, lang, ref, seconds, sha256,
 checks, shelved, status, voice).
 
+- **Where and when** (owner, 21 Nov 2026: "yea we can def move into github"; `audio/lanes.json` says who
+  voices what, so no file is voiced twice; times Central):
+
+  | Lane | Where | When | Takes | Engine |
+  |---|---|---|---|---|
+  | Bible matrix | GitHub Actions (`fill-cloud.yml`, job `bible`) | round the clock: each batch's gather job starts the next (an hourly cron restarts a broken chain; one batch at a time), up to 12 shards, each a 300-minute box (about 40 chapters) | every Bible chapter (`kind` bible, EN and ES) | Kokoro, CPU |
+  | Clone stories | GitHub Actions (job `story`) | the same batches, up to 4 stories, one per job, 260-minute box plus a 45-minute QA reserve; sentences saved to Drive after every batch | every Hush Harbor story but the Mac's | Chatterbox, CPU |
+  | Gather | GitHub Actions (job `gather`) | the end of each batch | lays every job's rows over main's manifest, one push | none |
+  | Mac Bible lane | her Mac (`run.sh`, launchd) | rests: `lanes.json` gives it nothing (measured 21 Nov 2026: the cloud is about 30 times the Mac); 22:00–06:45 in 90-minute boxes if it is given a share | whatever `mac_kinds` lists | Kokoro |
+  | Mac clone lane | her Mac, in parallel | rests the same way; when given a share, waits while memory is tight or her morning jobs run | whatever `mac_stories` lists | Chatterbox |
+  | Publish | her Mac, after each run | the same window | Drive → R2 for the app | none |
+
+  The cloud uses the same code and checks as the Mac (`PBS_LANE=cloud`); failed files are held on Drive
+  (`PBS_HELD_REMOTE`); no audio is ever a workflow artifact (only rows files, which the public manifest
+  holds anyway); the Drive remote reaches the runner as the `PBS_RCLONE_CONF` secret (from the vault) and
+  is deleted with the work at the end of each job. When nothing is left the plan job logs
+  `NOTE FILL_COMPLETE`, posts the Open Loops row "PBS fill complete: YouTube can restart after the
+  overhaul is approved" and switches the workflow off; the Mac marks `library-fill.active` `"complete"`
+  and keeps it (YouTube restarts only after the owner approves the channels overhaul).
 - **Order**: (1) English Psalms; (2) the sleep sessions, the paid core (coordinator 21 Nov 2026): EN Psalm Nights,
   ES Psalm Nights, Imagination Nights EN then ES (`content/psalm-nights`, `content/imagination-nights`: `segments`,
   where `[pause N]` is N s of real quiet, verses are the stored text said with their reference, and QA's words-a-minute
