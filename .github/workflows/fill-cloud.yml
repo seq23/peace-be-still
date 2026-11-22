@@ -169,15 +169,19 @@ jobs:
       - uses: actions/download-artifact@v4
         with: { pattern: "rows-*", path: rows }
       - name: Lay the rows over main's manifest and push (this commit's code, main's checkout)
+        id: g
         env: { PBS_REPO: "${{ github.workspace }}/main" }
         run: |
+          echo "rows=0" >> "$GITHUB_OUTPUT"
           pip install -q numpy scipy
           git -C main config user.name "pbs-cloud-fill"; git -C main config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           files=$(find rows -name rows.jsonl -size +0 2>/dev/null)
           [ -z "$files" ] && { echo "OUTPUT 0 cloud rows gathered (no job wrote a row)"; exit 0; }
           python code/audio/fill.py --push-rows $files
+          echo "rows=$(cat $files | grep -c '^{')" >> "$GITHUB_OUTPUT"
       - name: Start the next batch (the chain; the plan job stops it when the fill is complete)
-        # Only after a batch that had work: with nothing left for the cloud, the hourly cron looks again.
-        if: always() && !inputs.only && !inputs.story && (needs.plan.outputs.bible != '[]' || needs.plan.outputs.stories != '[]')
+        # Only after a batch that wrote rows (a FAILED row counts: it uses a try, so the chain still ends).
+        # A batch where every job hit a named stop writes none, so it never loops: the hourly cron looks again.
+        if: always() && !inputs.only && !inputs.story && steps.g.outputs.rows != '' && steps.g.outputs.rows != '0'
         env: { GH_TOKEN: "${{ github.token }}" }
         run: gh workflow run fill-cloud.yml -R "$GITHUB_REPOSITORY" --ref main

@@ -976,3 +976,16 @@ class Mastering(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CloudChain(unittest.TestCase):
+    def test_a_batch_that_wrote_no_rows_never_starts_another(self):
+        # A batch where every job hit a named stop must not loop round the clock: the chain step runs only
+        # when the gather step counted at least one row, and that count starts at 0 before any push.
+        wf = (AUDIO.parent / ".github/workflows/fill-cloud.yml").read_text()
+        gather = wf[wf.index("id: g"):]
+        self.assertLess(gather.index('echo "rows=0"'), gather.index("--push-rows"))
+        chain = wf[wf.index("Start the next batch"):]
+        cond = chain[chain.index("if:"):chain.index("\n", chain.index("if:"))]
+        self.assertIn("steps.g.outputs.rows != '0'", cond)
+        self.assertIn("steps.g.outputs.rows != ''", cond)
