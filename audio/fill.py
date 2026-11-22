@@ -48,7 +48,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 AUDIO = Path(__file__).resolve().parent
-REPO = AUDIO.parent
+REPO = Path(os.environ.get("PBS_REPO", AUDIO.parent))   # the gather job: this commit's code, main's checkout
 sys.path.insert(0, str(AUDIO / "lib"))
 import memguard  # noqa: E402
 import text as T  # noqa: E402
@@ -57,7 +57,7 @@ CT = ZoneInfo("America/Chicago")
 HOME = Path(os.environ.get("PBS_HOME", Path.home() / ".peace-be-still"))
 KOKORO_PY = os.environ.get("PBS_KOKORO_PY", str(Path.home() / "Work/claude-work/tts/venv/bin/python"))
 SHELF = os.environ.get("PBS_SHELF", "gdrive:Mac-Shelf/peace-be-still/audio")
-MANIFEST = Path(os.environ.get("PBS_MANIFEST", AUDIO / "manifest.jsonl"))
+MANIFEST = Path(os.environ.get("PBS_MANIFEST", REPO / "audio" / "manifest.jsonl"))
 # The words of the 21 sessions voiced before rows recorded them (recovered exactly from git, 21 Nov 2026).
 VOICED_WORDS = Path(os.environ.get("PBS_VOICED_WORDS", AUDIO / "voiced-words.json"))
 # Who voices what (audio/lanes.json): the Mac's lanes take the kinds and stories listed there, the GitHub
@@ -366,6 +366,19 @@ def upsert_row(row: dict, path: Path = MANIFEST) -> dict:
 
 def unpushed_path() -> Path:
     return HOME / "unpushed-rows.jsonl"
+
+
+def parse_rows(text: str) -> list[dict]:
+    return [json.loads(line) for line in text.splitlines() if line.strip() and line.lstrip().startswith("{")]
+
+
+def local_rows_ahead(local: list[dict], origin: list[dict]) -> list[dict]:
+    """Rows this checkout holds that main does not: a file main lacks, or a newer row (`at`) for one it
+    has. Rows a run wrote before unpushed-rows.jsonl existed (a commit whose push failed, a rebase left
+    half done) are kept this way. Pure."""
+    o = latest(origin)
+    return [r for r in latest(local).values()
+            if r["file"] not in o or (r != o[r["file"]] and str(r.get("at", "")) > str(o[r["file"]].get("at", "")))]
 
 
 def put_rows(new: list[dict], path: Path) -> None:
@@ -928,16 +941,20 @@ def _git_commit(msg: str) -> str:
     rebase of the manifest, ever. Runs only on main (the runner checkout, the gather job)."""
     def g(*a, timeout=120):
         return subprocess.run(["git", "-C", str(REPO), *a], capture_output=True, text=True, timeout=timeout)
-    mine = read_manifest(unpushed_path())
-    if not mine:
-        return "no new manifest rows"
+    g("rebase", "--abort")   # a rebase an older version of this left half done
     if g("rev-parse", "--abbrev-ref", "HEAD").stdout.strip() != "main":
         return "manifest rows kept for the next push (this checkout is not on main)"
     rel = str(MANIFEST.relative_to(REPO))
     for _ in range(4):
-        g("rebase", "--abort")   # a rebase an older version of this left half done
         if g("fetch", "-q", "origin", "main").returncode != 0:
             continue
+        ahead = [f for f in g("diff", "--name-only", "origin/main...HEAD").stdout.split() if f != rel]
+        if ahead:   # never reset away anything but manifest rows
+            return f"manifest rows kept; this checkout has unpushed commits to {', '.join(ahead[:3])} (pushed by hand)"
+        origin = subprocess.run(["git", "-C", str(REPO), "show", f"origin/main:{rel}"], capture_output=True, text=True).stdout
+        mine = local_rows_ahead(read_manifest(MANIFEST), parse_rows(origin)) + read_manifest(unpushed_path())
+        if not mine:
+            return "no new manifest rows"
         g("reset", "-q", "--mixed", "origin/main")
         g("checkout", "origin/main", "--", rel)
         put_rows(mine, MANIFEST)

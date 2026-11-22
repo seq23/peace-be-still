@@ -297,39 +297,102 @@ class Lanes(unittest.TestCase):
 
 class Gather(unittest.TestCase):
     """Two writers of the manifest (the Mac, the cloud's gather job) never conflict and never lose a row."""
-    def test_unpushed_rows_are_laid_over_the_newest_main_and_pushed(self):
+    def repo(self, d: Path):
         import subprocess as sp
-        with tempfile.TemporaryDirectory() as d:
-            d = Path(d)
-            git = lambda cwd, *a: sp.run(["git", "-C", str(cwd), *a], capture_output=True, text=True, check=True)
-            sp.run(["git", "init", "-q", "--bare", "-b", "main", str(d / "origin.git")], check=True)
-            sp.run(["git", "clone", "-q", str(d / "origin.git"), str(d / "a")], check=True, capture_output=True)
-            for c in ("a",):
-                git(d / c, "config", "user.email", "t@example.com"); git(d / c, "config", "user.name", "t")
-            (d / "a" / "audio").mkdir()
-            man = d / "a" / "audio" / "manifest.jsonl"
-            man.write_text(json.dumps({"file": "x", "status": "FAILED"}) + "\n")
-            git(d / "a", "checkout", "-q", "-b", "main"); git(d / "a", "add", "-A"); git(d / "a", "commit", "-qm", "seed"); git(d / "a", "push", "-q", "origin", "main")
-            sp.run(["git", "clone", "-q", str(d / "origin.git"), str(d / "b")], check=True, capture_output=True)
-            git(d / "b", "config", "user.email", "t@example.com"); git(d / "b", "config", "user.name", "t")
-            # The other writer pushes a row first.
-            (d / "b" / "audio" / "manifest.jsonl").write_text(json.dumps({"file": "x", "status": "FAILED"}) + "\n" + json.dumps({"file": "y", "status": "passed"}) + "\n")
-            git(d / "b", "commit", "-qam", "other"); git(d / "b", "push", "-q", "origin", "main")
-            with tempfile.TemporaryDirectory() as home, mock.patch.object(fill, "HOME", Path(home)), \
-                    mock.patch.object(fill, "REPO", d / "a"), mock.patch.object(fill, "MANIFEST", man):
-                fill.upsert_row({"file": "x", "status": "passed"}, man)
+        self.git = lambda cwd, *a: sp.run(["git", "-C", str(cwd), *a], capture_output=True, text=True, check=True)
+        sp.run(["git", "init", "-q", "--bare", "-b", "main", str(d / "origin.git")], check=True)
+        for c in ("a", "b"):
+            sp.run(["git", "clone", "-q", str(d / "origin.git"), str(d / c)], check=True, capture_output=True)
+            self.git(d / c, "config", "user.email", "t@example.com"); self.git(d / c, "config", "user.name", "t")
+            self.git(d / c, "checkout", "-q", "-B", "main")
+        (d / "a" / "audio").mkdir()
+        (d / "a" / "audio" / "manifest.jsonl").write_text(json.dumps({"file": "x", "status": "FAILED", "at": "1"}) + "\n")
+        self.git(d / "a", "add", "-A"); self.git(d / "a", "commit", "-qm", "seed"); self.git(d / "a", "push", "-q", "origin", "main")
+        self.git(d / "b", "pull", "-q", "origin", "main")
+        return d / "a" / "audio" / "manifest.jsonl"
+
+    def other_writer_pushes(self, d: Path, row: dict):
+        man = d / "b" / "audio" / "manifest.jsonl"
+        self.git(d / "b", "pull", "-q", "origin", "main")
+        man.write_text(man.read_text() + json.dumps(row) + "\n")
+        self.git(d / "b", "commit", "-qam", "other"); self.git(d / "b", "push", "-q", "origin", "main")
+
+    def rows_on_main(self, d: Path) -> dict:
+        self.git(d / "b", "pull", "-q", "origin", "main")
+        return {r["file"]: r["status"] for r in fill.read_manifest(d / "b" / "audio" / "manifest.jsonl")}
+
+    def patched(self, d: Path, man: Path, home: str):
+        return [mock.patch.object(fill, "HOME", Path(home)), mock.patch.object(fill, "REPO", d / "a"),
+                mock.patch.object(fill, "MANIFEST", man)]
+
+    def run_with(self, patches, fn):
+        for p in patches:
+            p.start()
+        try:
+            return fn()
+        finally:
+            for p in patches:
+                p.stop()
+
+    def test_unpushed_rows_are_laid_over_the_newest_main_and_pushed(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            self.other_writer_pushes(d, {"file": "y", "status": "passed", "at": "2"})
+            def go():
+                fill.upsert_row({"file": "x", "status": "passed", "at": "3"}, man)
                 self.assertEqual(fill.git_commit("t"), "manifest pushed")
                 self.assertFalse(fill.unpushed_path().exists())
-            git(d / "b", "pull", "-q")
-            rows = {r["file"]: r["status"] for r in fill.read_manifest(d / "b" / "audio" / "manifest.jsonl")}
-            self.assertEqual(rows, {"x": "passed", "y": "passed"})   # both writers' rows, no conflict
+            self.run_with(self.patched(d, man, home), go)
+            self.assertEqual(self.rows_on_main(d), {"x": "passed", "y": "passed"})
 
-    def test_expected_end_from_measured_speed(self):
-        items = fill.plan(bibles())
-        rows = [{"file": items[0]["file"], "status": "passed", "work_s": 100, "checks": {"words": 100}}]
-        end = fill.expected_end(items, rows, NOW)
-        left = sum(len(T.score_words(fill.script_of(i), i["lang"])) for i in items[1:])
-        self.assertEqual(end, NOW + dt.timedelta(seconds=left))
+    def test_a_rejected_push_is_retried_on_the_newer_main(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            real = fill.subprocess.run
+            raced = []
+            def run(cmd, *a, **k):
+                if cmd[:1] == ["git"] and "push" in cmd and not raced:   # the other writer lands first
+                    raced.append(1)
+                    self.other_writer_pushes(d, {"file": "z", "status": "passed", "at": "4"})
+                return real(cmd, *a, **k)
+            def go():
+                with mock.patch.object(fill.subprocess, "run", side_effect=run):
+                    fill.upsert_row({"file": "x", "status": "passed", "at": "3"}, man)
+                    self.assertEqual(fill.git_commit("t"), "manifest pushed")
+            self.run_with(self.patched(d, man, home), go)
+            self.assertEqual(self.rows_on_main(d), {"x": "passed", "z": "passed"})
+
+    def test_rows_in_an_old_unpushed_commit_are_kept(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            # A run from before unpushed-rows.jsonl existed: committed, push failed.
+            man.write_text(man.read_text() + json.dumps({"file": "old", "status": "passed", "at": "2"}) + "\n")
+            self.git(d / "a", "commit", "-qam", "old run")
+            self.other_writer_pushes(d, {"file": "y", "status": "passed", "at": "3"})
+            self.run_with(self.patched(d, man, home), lambda: self.assertEqual(fill.git_commit("t"), "manifest pushed"))
+            self.assertEqual(self.rows_on_main(d), {"x": "FAILED", "old": "passed", "y": "passed"})
+
+    def test_a_checkout_with_other_unpushed_commits_is_never_reset(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            (d / "a" / "notes.txt").write_text("work")
+            self.git(d / "a", "add", "-A"); self.git(d / "a", "commit", "-qm", "someone's work")
+            def go():
+                fill.upsert_row({"file": "x", "status": "passed", "at": "3"}, man)
+                self.assertIn("unpushed commits to notes.txt", fill.git_commit("t"))
+                self.assertTrue(fill.unpushed_path().exists())     # the row waits; nothing lost
+            self.run_with(self.patched(d, man, home), go)
+            self.assertTrue((d / "a" / "notes.txt").exists())
+            self.assertIn("someone's work", self.git(d / "a", "log", "-1", "--format=%s").stdout)
+
+    def test_the_gather_job_pushes_every_jobs_rows(self):
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home:
+            d = Path(d); man = self.repo(d)
+            r1, r2 = Path(home) / "r1.jsonl", Path(home) / "r2.jsonl"
+            r1.write_text(json.dumps({"file": "p", "status": "passed", "at": "5"}) + "\n")
+            r2.write_text(json.dumps({"file": "q", "status": "FAILED", "at": "5"}) + "\n")
+            self.run_with(self.patched(d, man, home), lambda: self.assertEqual(fill.main(["--push-rows", str(r1), str(r2)]), 0))
+            self.assertEqual(self.rows_on_main(d), {"x": "FAILED", "p": "passed", "q": "FAILED"})
 
 
 class Text(unittest.TestCase):

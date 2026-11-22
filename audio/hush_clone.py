@@ -44,6 +44,10 @@ import text as T  # noqa: E402
 
 CLONE = H.VOICES["clone"]
 BATCH = 20          # sentences per Chatterbox call: the memory guard is read between calls
+# The cloud's hard job limit: rendering stops this long before the box so the story's checks (every
+# sentence heard, mastered, the whole file heard) still fit (fill-cloud.yml sets 45; the Mac has no
+# hard kill, so 0 there).
+QA_RESERVE_S = float(os.environ.get("PBS_QA_RESERVE_MIN", "0")) * 60
 VOICE_ID = "chatterbox:hush-harbor-clone"
 CB_PY = os.environ.get("PBS_CHATTERBOX_PY", str(Path.home() / "GitHub/how-we-know/.venv-tts/bin/python"))
 REF_DIR = fill.HOME / "hh-reference" / "clone"
@@ -279,8 +283,13 @@ def make_story(story: dict, work: Path, deadline: float | None = None) -> dict |
         # In batches of BATCH sentences, with the memory guard between (never mid-sentence: every
         # sentence is saved as it is made, so a pause or a stop loses nothing).
         todo = [i for i in items if not Path(i["out"]).exists()]
+        render_by = deadline - QA_RESERVE_S if deadline is not None else None   # the checks still fit in the box
         for b in range(0, len(todo), BATCH):
-            if memguard.wait("clone", deadline=deadline) == "one-lane" or not render(todo[b:b + BATCH], deadline):
+            if memguard.wait("clone", deadline=render_by) == "one-lane":
+                return None
+            done = render(todo[b:b + BATCH], render_by)
+            push_work(story["id"], work)   # a killed job loses at most one batch
+            if not done:
                 return None
         bad = []
 
@@ -350,6 +359,9 @@ def make_story(story: dict, work: Path, deadline: float | None = None) -> dict |
     wav, out = work / "story.wav", work / H.file_of(story)
     H.write_wav(wav, H.join(parts))
     fill.master(wav, out, "sleep")   # mastering misses are mastered again from this WAV (no re-render)
+    if deadline is not None and time.time() > deadline:   # the box ended in the checks: every sentence is kept
+        push_work(story["id"], work)
+        return None
     res = qa.check(out, H.spoken(story), "en", "sleep")
     wav.unlink()
     checks = {k: res[k] for k in ("accuracy", "wpm", "words", "lufs", "true_peak", "clipped", "asr")}

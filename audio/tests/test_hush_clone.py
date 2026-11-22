@@ -106,6 +106,24 @@ class Clone(unittest.TestCase):
         story = next(s for s in H.load_stories() if any(b["type"] == "scripture" for b in s["blocks"]))
         self.assertFalse(C.is_scripture("Grandmother pulled the quilt up and smiled at the children.", C.scripture_words(story)))
 
+    def test_a_cloud_story_resumes_from_drive_and_saves_after_every_batch(self):
+        story = H.load_stories()[0]
+        calls = []
+        def rclone(*a, **k):
+            calls.append(a)
+            if a[0] == "copy" and str(a[1]).startswith("remote:"):      # the sentences an earlier job made
+                Path(a[2], "t000-s000.wav").write_bytes(b"w")
+            return mock.Mock(returncode=0)
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(C, "WORK_REMOTE", "remote:hh"), \
+                mock.patch.object(C.fill, "rclone", side_effect=rclone):
+            work = Path(d) / story["id"]
+            C.pull_work(story["id"], work)
+            self.assertTrue((work / "t000-s000.wav").exists())
+            C.push_work(story["id"], work)
+            C.drop_work(story["id"])
+        self.assertEqual([c[0] for c in calls], ["copy", "copy", "purge"])
+        self.assertEqual(calls[1][2], f"remote:hh/{story['id']}")
+
     def test_a_story_the_gemini_lane_started_joins_the_clone_queue(self):
         stories = H.load_stories()
         with tempfile.TemporaryDirectory() as d, mock.patch.object(C.fill, "HOME", Path(d)):

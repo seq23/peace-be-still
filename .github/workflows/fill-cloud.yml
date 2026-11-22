@@ -4,8 +4,8 @@
 #   plan    sizes the matrix from what is left; when nothing is left it says FILL_COMPLETE, tells Open
 #           Loops, and switches this workflow off.
 #   bible   N Kokoro shards in parallel, each a different slice of the queue (--shard i/N), time-boxed.
-#   story   one Hush Harbor story per job on Chatterbox (CPU); its rendered sentences wait on Drive
-#           between jobs, so a story longer than one job carries on in the next.
+#   story   one Hush Harbor story per job on Chatterbox (CPU); its rendered sentences are saved to Drive
+#           after every batch of 20, so a story longer than one job (even a killed one) carries on in the next.
 #   gather  lays every job's manifest rows over main's newest manifest and pushes once.
 # PRIVACY (the repo and its logs are public): reference clips come from Drive at run time; output goes
 # straight to the Drive shelf with the md5 check and is deleted from the runner; failed files are held on
@@ -71,13 +71,14 @@ jobs:
           fi
           if [ "$complete" = True ] && [ -z "$ONLY$STORY" ]; then
             echo "NOTE FILL_COMPLETE the whole library (every lane) is voiced and on Drive; this workflow switches itself off"
-            if [ -n "$BOSS_OPEN_LOOPS_TOKEN" ]; then
-              curl -fsS -o /dev/null -X POST https://boss.sequoiataylor.com/api/boss/open-loops/intake \
-                -H "authorization: Bearer $BOSS_OPEN_LOOPS_TOKEN" -H "content-type: application/json" \
-                -d "{\"repo\":\"seq23/peace-be-still\",\"stop\":\"PBS_FILL_COMPLETE\",\"owner\":\"sequoia\",\"business\":\"spry\",\"next_date\":\"$(date -u +%F)\",\"title\":\"PBS fill complete: YouTube can restart after the overhaul is approved\",\"finish_line\":\"The YouTube channels overhaul is approved and the channels restart\",\"next_step\":\"Approve the YouTube channels overhaul; the pause stays until then\"}" \
-                || echo "note: Open Loops did not take the completion row"
-            fi
-            gh workflow disable fill-cloud.yml -R "$GITHUB_REPOSITORY" || echo "note: could not switch the workflow off"
+            # The row is posted first; the workflow switches off only once Open Loops has it (a failed
+            # post is a named stop, and the next launch posts again).
+            [ -n "$BOSS_OPEN_LOOPS_TOKEN" ] || { echo "NAMED STOP [OPEN_LOOPS_TOKEN_MISSING] the fill is complete but the completion row cannot be posted" >&2; exit 5; }
+            curl -fsS -o /dev/null -X POST https://boss.sequoiataylor.com/api/boss/open-loops/intake \
+              -H "authorization: Bearer $BOSS_OPEN_LOOPS_TOKEN" -H "content-type: application/json" \
+              -d "{\"repo\":\"seq23/peace-be-still\",\"stop\":\"PBS_FILL_COMPLETE\",\"owner\":\"sequoia\",\"business\":\"spry\",\"next_date\":\"$(date -u +%F)\",\"title\":\"PBS fill complete: YouTube can restart after the overhaul is approved\",\"finish_line\":\"The YouTube channels overhaul is approved and the channels restart\",\"next_step\":\"Approve the YouTube channels overhaul; the pause stays until then\"}" \
+              || { echo "NAMED STOP [OPEN_LOOPS_POST_FAILED] the fill is complete; the completion row did not post, so the workflow stays on and tries again next launch" >&2; exit 5; }
+            gh workflow disable fill-cloud.yml -R "$GITHUB_REPOSITORY"
           fi
 
   bible:
@@ -132,11 +133,11 @@ jobs:
       - name: Runner setup (Chatterbox)
         env: { PBS_RCLONE_CONF: "${{ secrets.PBS_RCLONE_CONF }}" }
         run: audio/cloud/setup.sh chatterbox
-      - name: Voice this story (time box 320 minutes; sentences saved to Drive)
-        env: { STORY: "${{ matrix.story }}" }
+      - name: Voice this story (time box 260 minutes incl. a 45-minute QA reserve; sentences saved to Drive after every batch)
+        env: { STORY: "${{ matrix.story }}", PBS_QA_RESERVE_MIN: "45" }
         run: |
           set +e
-          python audio/hush_clone.py --story "$STORY" --max-minutes 320; rc=$?
+          python audio/hush_clone.py --story "$STORY" --max-minutes 260; rc=$?
           set -e
           mkdir -p rows && cp "$PBS_HOME/unpushed-rows.jsonl" "rows/rows.jsonl" 2>/dev/null || : > rows/rows.jsonl
           echo "rows: $(wc -l < rows/rows.jsonl)"
@@ -156,16 +157,18 @@ jobs:
     permissions: { contents: write }
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
+        with: { ref: main, path: main }
+      - uses: actions/checkout@v4
+        with: { path: code }
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - uses: actions/download-artifact@v4
         with: { pattern: "rows-*", path: rows }
-      - name: Lay the rows over main's manifest and push
+      - name: Lay the rows over main's manifest and push (this commit's code, main's checkout)
+        env: { PBS_REPO: "${{ github.workspace }}/main" }
         run: |
           pip install -q numpy scipy
-          git checkout -q -B main   # fill.git_commit lays the rows over origin/main and pushes only the manifest
-          git config user.name "pbs-cloud-fill"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C main config user.name "pbs-cloud-fill"; git -C main config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           files=$(find rows -name rows.jsonl -size +0 2>/dev/null)
           [ -z "$files" ] && { echo "OUTPUT 0 cloud rows gathered (no job wrote a row)"; exit 0; }
-          python audio/fill.py --push-rows $files
+          python code/audio/fill.py --push-rows $files

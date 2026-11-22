@@ -8,7 +8,11 @@ set -euo pipefail
 engine="${1:?kokoro|chatterbox}"
 sudo apt-get -qq update >/dev/null
 sudo apt-get -qq install -y ffmpeg >/dev/null
-curl -fsSL https://rclone.org/install.sh | sudo bash >/dev/null 2>&1 || command -v rclone >/dev/null
+# rclone pinned by version and sha256 (the runner that gets the Drive token runs nothing unpinned).
+RCLONE=v1.75.2; RCLONE_SHA=349ac8fba6ff65d6247043f1750cdcb518ec5d500ef91463a10d37c0ccdf3702
+curl -fsSL -o /tmp/rclone.zip "https://downloads.rclone.org/$RCLONE/rclone-$RCLONE-linux-amd64.zip"
+echo "$RCLONE_SHA  /tmp/rclone.zip" | sha256sum -c --quiet
+unzip -q -o /tmp/rclone.zip -d /tmp && sudo install -m 0755 "/tmp/rclone-$RCLONE-linux-amd64/rclone" /usr/local/bin/rclone
 if [ -z "${PBS_RCLONE_CONF:-}" ]; then
   echo "NAMED STOP [RCLONE_CONF_MISSING] the PBS_RCLONE_CONF secret is not set; nothing was voiced" >&2
   exit 4
