@@ -5,10 +5,10 @@ import { Image } from 'expo-image';
 import React, { useEffect, useState } from 'react';
 import { useStoryArt } from './art';
 
-export function StoryArt({ id, title }: { id: string; title: string }) {
-  const uri = useStoryArt(id);
+export function StoryArt({ ids, title }: { ids: readonly string[]; title: string }) {
+  const uri = useStoryArt(ids);
   const [failed, setFailed] = useState<string | null>(null);
-  useEffect(() => setFailed(null), [id]);
+  useEffect(() => setFailed(null), [uri]);
   if (!uri || failed === uri) return null;
   return <Image testID="story-art" source={{ uri }} cachePolicy="disk" contentFit="cover" accessible accessibilityLabel={title} alt={title}
     onError={() => setFailed(uri)} style={{ width: '100%', aspectRatio: 4 / 3, borderRadius: 18 }} />;
