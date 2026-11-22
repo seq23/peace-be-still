@@ -50,6 +50,7 @@ const results = [];
 for (const model of models) {
   reads = 0;
   let agree = 0, leafletHigh = 0, down = 0;
+  const wantMissed = [];
   const rows = [];
   const verdicts = [];
   for (let i = 0; i < set.length; i += 5) verdicts.push(...await Promise.all(set.slice(i, i + 5).map(item => read(model, item))));
@@ -60,14 +61,17 @@ for (const model of models) {
     const right = item.label === 'good' ? v.verdict === 'pass' : v.verdict === 'fail' && (!item.want || (v.which ?? []).includes(item.want));
     const leafOk = item.label !== 'leaflet' || (v.voice !== null && v.voice !== undefined && v.voice <= 3);
     if (right) agree++;
+    else if (item.want) wantMissed.push(`${item.id}:${item.want}`);
     if (!leafOk) leafletHigh++;
     rows.push({ id: item.id, label: item.label, verdict: v.verdict, voice: v.voice ?? null, which: v.which ?? [] });
     console.log(`${right && leafOk ? 'ok  ' : 'MISS'} ${item.id} (${item.label}) ${v.verdict} voice ${v.voice ?? '-'} ${(v.which ?? []).join(',')}`);
   }
   const pct = Math.round(100 * agree / set.length);
-  results.push({ model, agree, pct, leafletHigh, down, rows });
-  console.log(`OUTPUT judge-calibrate: agreement ${agree}/${set.length} (${pct}%, floor ${FLOOR}%); leaflets scored above 3: ${leafletHigh} of ${set.filter(i => i.label === 'leaflet').length}; ${down} not read (${model})`);
+  results.push({ model, agree, pct, leafletHigh, down, wantMissed, rows });
+  console.log(`OUTPUT judge-calibrate: agreement ${agree}/${set.length} (${pct}%, floor ${FLOOR}%); leaflets scored above 3: ${leafletHigh} of ${set.filter(i => i.label === 'leaflet').length}; ${down} not read; moved checks missed ${wantMissed.length} of ${set.filter(i => i.want).length}${wantMissed.length ? ` (${wantMissed.join(' ')})` : ''} (${model})`);
 }
 writeFileSync(process.env.CALIBRATION_OUT ?? 'judge-calibration.json', JSON.stringify(results, null, 1));
 const mine = results.find(r => r.model === JUDGE_MODEL) ?? results[0];
-process.exit(mine.pct >= FLOOR && mine.leafletHigh === 0 && mine.down === 0 ? 0 : 1);
+// Each check moved out of answer.ts's keyword lists must fire on every one of its `want` items: an
+// overall floor alone would let a one-case check fail completely and still pass.
+process.exit(mine.pct >= FLOOR && mine.leafletHigh === 0 && mine.down === 0 && mine.wantMissed.length === 0 ? 0 : 1);

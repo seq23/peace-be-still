@@ -674,11 +674,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         found = repeats(shape, recent);
         if (found.length) { edit = varietyObjection(shape, plainShape.said, recent); spares.push({ text: checked.text, scripture, shape, judged: false }); }
         else {
-          // The judge reads meaning where it earns its cost: Scripture, doctrine, a crisis. A Mindset answer
-          // (no Scripture by rule) outside a crisis is checked by code alone (her ruling 21 Nov 2026).
-          const needsJudge = scripture.length > 0 || ask.door !== 'mindset' || lane === 'crisis' || gate.afterCrisis;
-          const j = needsJudge ? await judge(checked.text, scripture) : ({ verdict: 'pass', voice: null } as JudgeVerdict);
-          if (!needsJudge) tally(metrics, 'judge_skipped');
+          // Every answer is read by the judge, Mindset ones too: the voice checks it carries (echo_opening,
+          // night_opening, unasked_ai) were code on both doors until PBS_GATE_KEYWORD_LISTS, so the old
+          // Mindset skip ("checked by code alone", 21 Nov 2026) would now leave them unchecked.
+          const j = await judge(checked.text, scripture);
           if (j.verdict === 'fail') found = j.which.map(w => `judge:${w}`);
           if (j.verdict === 'down') tally(metrics, 'judge_down');
           if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);
