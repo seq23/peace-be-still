@@ -12,7 +12,8 @@ cd "$(git -C "$(dirname "$0")/.." rev-parse --show-toplevel)"
 command -v git-crypt >/dev/null || { echo "NAMED STOP GIT_CRYPT_NOT_INSTALLED: brew install git-crypt (CI: sudo apt-get install -y git-crypt)"; exit 3; }
 COMMON="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
 KEY="$COMMON/git-crypt/keys/default"
-if [ ! -s "$KEY" ]; then
+# The vault's key wins whenever it is given (a rotated key replaces the old one); without it, a key already here is used.
+if [ -n "${PBS_GIT_CRYPT_KEY:-}" ] || [ ! -s "$KEY" ]; then
   [ -n "${PBS_GIT_CRYPT_KEY:-}" ] || { echo "NAMED STOP PBS_GIT_CRYPT_KEY_MISSING: the chat prompts, test sets and crisis lists stay encrypted; run under the vault: cd ~/GitHub/boss-os && npm run -s vault:run -- bash $PWD/scripts/git-crypt-unlock.sh (CI: the PBS_GIT_CRYPT_KEY repo secret)"; exit 3; }
   mkdir -p "$COMMON/git-crypt/keys"
   umask 077
