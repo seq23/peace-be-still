@@ -1,15 +1,15 @@
 // Every verse on the website equals the stored Bible (content/bible: KJV in English, Reina-Valera 1909
-// in Spanish, 개역한글 1961 in Korean), word for word. Quotes are marked by site/content/scripture.mjs with data-ref/data-tr;
+// in Spanish, 개역한글 1961 in Korean, the 1919 和合本 in Chinese), word for word. Quotes are marked by site/content/scripture.mjs with data-ref/data-tr;
 // a verse block without a reference is a typed verse and fails.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { verses, bible } from "../../scripts/content/lib.mjs";
+import { verses, bible, joinVerses } from "../../scripts/content/lib.mjs";
 const bibleLines = (tr) => bible(tr).entries();
 
 const pub = new URL("../public/", import.meta.url).pathname;
-const stored = (ref, tr) => verses(ref, tr).map((x) => x.text).join(" ");
+const stored = (ref, tr) => joinVerses(verses(ref, tr).map((x) => x.text), tr);
 const inner = (html) => html.replace(/<[^>]+>/g, "").trim();
 
 export function checkPage(name, s) {
@@ -98,4 +98,106 @@ test("every verse on every built page equals the stored KJV / RV1909 / 개역한
   for (const f of files) { const r = checkPage(f.slice(pub.length), readFileSync(f, "utf8")); total += r.n; bad.push(...r.bad); }
   assert.deepEqual(bad, []);
   assert.ok(total >= 300, `only ${total} verses checked; the pages should carry far more`);
+});
+
+// Chinese pages (owner's plan, 21 Nov 2026): verses are the 1919 和合本 in Simplified (CUVS) only, except an
+// English KJV verse inside a lang="en" block; every Chinese page carries the 和合本 credit line; and the page
+// is in one script: no Traditional-only character outside a lang="en" block.
+const SCRIPT = JSON.parse(readFileSync(new URL("../../content/bible/zh_script.json", import.meta.url), "utf8"));
+const TRAD_ONLY = new Set(SCRIPT.tradOnly);
+const CREDIT = "和合本（1919年版，公有领域）";
+export function chineseIssues(name, s) {
+  const bad = [];
+  const outsideEn = s.replace(/<div lang="en">[\s\S]*?<\/div>/g, "");
+  for (const m of outsideEn.matchAll(/data-tr="([^"]+)"/g)) if (m[1] !== "CUVS") bad.push(`${name}: a ${m[1]} verse outside a lang="en" block`);
+  if (!s.includes(CREDIT)) bad.push(`${name}: no 和合本 credit line`);
+  const trad = [...new Set([...outsideEn].filter((ch) => TRAD_ONLY.has(ch)))];
+  if (trad.length) bad.push(`${name}: Traditional-only characters on a Simplified page: ${trad.join("")}`);
+  return bad;
+}
+
+// The second, independent 1919 copy: FHL 官話和合本 (bible.fhl.net/json/qb.php?version=cumv&gb=0), read
+// 22 Nov 2026, as served. It is the 上帝 edition with its own headings, its own marks for added words
+// "( …)" and its own spelling of a few characters, so both sides are compared on their words alone:
+// tags and headings out, 上帝 and "　神" both as 神, 呌 as 叫, punctuation and spaces out.
+const FHL_FIXTURE = {
+  "PSA 4:8": "我必安然躺下睡覺、因爲獨有你耶和華使我安然居住。",
+  "PSA 127:2": "你們清晨早起、夜晚安歇、喫勞碌得來的飯、本是枉然．惟有耶和華所親愛的、必呌他安然睡覺。",
+  "PRO 3:24": "你躺下、必不懼怕．你躺臥、睡得香甜。",
+  "MAT 11:28": "凡勞苦擔重擔的人、可以到我這裏來、我就使你們得安息。",
+  "PHI 4:7": "上帝所賜出人意外的平安、必在基督耶穌裏、保守你們的心懷意念。",
+  "ISA 26:3": "堅心倚賴( 你的)、你必保守他十分平安、因爲他倚靠你。",
+  "JOH 14:27": "我留下平安給你們、我將我的平安賜給你們．我所賜的、不像世人所賜的．你們心裏不要憂愁、也不要膽怯。",
+  "1PE 5:7": "<h2> 須將憂慮卸給上帝\n</h2> 你們要將一切的憂慮卸給上帝、因爲他顧念你們。",
+  "MAR 4:39": "耶穌醒了．斥責風、向海說、住了罷、靜了罷．風就止住、大大的平靜了。",
+  "LAM 3:23": "每早晨這都是新的．你的誠實、極其廣大。",
+  "PSA 23:1": "<b><u>大衞</u>的詩。</b><br/><h2>耶和華爲牧者</h2> 耶和華是我的牧者我必不至缺乏。",
+  // FHL also prints GEN 24:29-30 as one verse under 29 (its verse 30 is an empty marker).
+  "GEN 24:29": "<u>利百加</u>有一個哥哥、名呌<u>拉班</u>、看見金環、又看見金鐲在他妹子的手上、並聽見他妹子<u>利百加</u>的話、說、那人對我如此如此說、<u>拉班</u>就跑出來往井旁去、到那人跟前、見他仍站在駱駝旁邊的井旁那裏．",
+};
+const wordsOnly = (t) => t.replace(/<h2>[\s\S]*?<\/h2>/g, "").replace(/<[^>]+>/g, "").replace(/上帝/g, "神").replace(/呌/g, "叫")
+  .replace(/[\s　、．。，；：「」『』？！()（）]/g, "");
+
+test("the stored 和合本 has the 1919 words, checked against a second, independent 1919 copy", () => {
+  assert.ok(Object.keys(FHL_FIXTURE).length >= 9);
+  for (const [ref, text] of Object.entries(FHL_FIXTURE)) assert.equal(wordsOnly(verses(ref, "CUV")[0].text), wordsOnly(text), ref);
+  // And the comparison itself is not blind: one changed character fails it.
+  assert.notEqual(wordsOnly("我必安然躺下睡覺"), wordsOnly("我必安然躺下睡着"));
+  // The 1919 punctuation (、．) and the full-width space of the 神 edition are kept, not modernised.
+  assert.equal(verses("JOH 3:16", "CUV")[0].text, "　神愛世人、甚至將他的獨生子賜給他們、叫一切信他的、不至滅亡、反得永生。");
+  // Verses printed as one are stored once, under the first number, never merged into the verse before.
+  assert.throws(() => verses("GEN 24:30", "CUV"), /REF_NOT_IN_CUV/);
+  assert.equal(verses("GEN 24:28", "CUV")[0].text, "女子跑回去、照着這些話告訴他母親和他家裏的人。");
+  // A verse the 1919 text prints as a margin note keeps its own number; the next verse is not moved up.
+  assert.equal(verses("EXO 16:36", "CUV")[0].text, "俄梅珥乃伊法十分之一。");
+  assert.equal(verses("MAT 18:11", "CUV")[0].text, "人子來爲要拯救失喪的人");
+  assert.ok(verses("MAT 23:15", "CUV")[0].text.includes("走徧洋海陸地"));
+  assert.ok(verses("MAR 15:29", "CUV")[0].text.startsWith("從那裏經過的人辱罵他"));
+});
+
+// No Traditional page is built yet, so the reverse check (no Simplified-only character on a Traditional
+// page) has nothing to read; the Traditional store is the 1919 source as printed, variant glyphs included.
+test("the Simplified store is all Simplified, verse for verse with the Traditional", () => {
+  assert.ok(TRAD_ONLY.size > 2000, "the script table is empty");
+  const t = bible("CUV"), s = bible("CUVS");
+  assert.deepEqual([...t.keys()], [...s.keys()]);
+  const tradInS = [...new Set([...[...s.values()].join("")].filter((ch) => TRAD_ONLY.has(ch)))];
+  assert.deepEqual(tradInS, [], "Traditional-only characters in the Simplified store");
+  assert.equal(verses("PSA 4:8", "CUVS")[0].text, "我必安然躺下睡觉、因为独有你耶和华使我安然居住。");
+  assert.ok(!readdirSync(pub).includes("zh-hant"), "a Traditional section exists: add the reverse script check");
+});
+
+test("a Chinese page quoting KJV outside an English block, without the credit, or in Traditional is caught", () => {
+  const ok = `<q data-tr="CUVS">我必安然躺下睡觉</q><div lang="en"><q data-tr="KJV">x</q></div> ${CREDIT}`;
+  assert.deepEqual(chineseIssues("z", ok), []);
+  assert.equal(chineseIssues("z", `<q data-tr="KJV">x</q> ${CREDIT}`).length, 1);
+  assert.equal(chineseIssues("z", `<q data-tr="CUVS">x</q>`).length, 1);
+  assert.equal(chineseIssues("z", `<p>睡前禱告</p> ${CREDIT}`).length, 1);
+});
+
+test("every built Chinese page quotes the 1919 和合本 in Simplified and credits it", () => {
+  const files = [];
+  (function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); if (statSync(p).isDirectory()) walk(p); else if (f.endsWith(".html")) files.push(p); } })(join(pub, "zh"));
+  assert.ok(files.length >= 7, `only ${files.length} Chinese pages`);
+  assert.deepEqual(files.flatMap((f) => chineseIssues(f.slice(pub.length), readFileSync(f, "utf8"))), []);
+  const verseCount = files.reduce((n, f) => n + checkPage(f, readFileSync(f, "utf8")).n, 0);
+  assert.ok(verseCount >= 30, `only ${verseCount} verses on the Chinese pages`);
+});
+
+test("the 和合本 importer keeps the printed words and nothing else", async () => {
+  const { parseBook, bookLines } = await import("../../scripts/content/import-cuv.mjs");
+  const wt = `==第一章==
+{{verse|1|1}}{{-|大衞的詩。}}耶和華是我的{{udots|牧者}}{{*|或作{{!|𤘘|牛口}}}}．
+{{verse|1|2}}
+{{verse|1|3}}從耶西的本{{*|原文作{{!|𣎴|木下}}}}必發、[[#1a|〡]]　神同在。
+:{{Anchor|1a}}<sup>〡</sup>[[../詩篇#2:4|詩二　〤]]
+{{gototop}}`;
+  const { lines, joined } = bookLines("PSA", parseBook(wt, "t"));
+  assert.deepEqual(lines, ["PSA 1:1 大衞的詩。耶和華是我的牧者．", "PSA 1:2 從耶西的本必發、　神同在。"]);
+  assert.deepEqual(joined, ["PSA 1:2-3"]);
+  // A note-only verse keeps the note's words; a verse with no words at all is a stop, never stored.
+  assert.deepEqual(bookLines("EXO", parseBook("{{verse|16|36}}{{*|俄梅珥乃伊法十分之一}}。", "t")).lines, ["EXO 16:36 俄梅珥乃伊法十分之一。"]);
+  assert.throws(() => bookLines("EXO", parseBook("{{verse|1|1}}。", "t")), /CUV_NO_WORDS/);
+  // Leftover markup is a stop, never stored.
+  assert.throws(() => bookLines("PSA", parseBook("{{verse|1|1}}文字{{unknown|x}}", "t")), /CUV_TEMPLATE/);
 });

@@ -173,6 +173,7 @@ export function homeHtml(lang) {
 <link rel="alternate" hreflang="en" href="${BASE}/">
 <link rel="alternate" hreflang="es" href="${BASE}/es/">
 <link rel="alternate" hreflang="ko" href="${BASE}/ko/">
+<link rel="alternate" hreflang="zh-Hans" href="${BASE}/zh/">
 <link rel="alternate" hreflang="x-default" href="${BASE}/">
 <meta name="theme-color" content="#F4F0E6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E1A22" media="(prefers-color-scheme: dark)">

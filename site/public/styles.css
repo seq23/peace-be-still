@@ -209,6 +209,10 @@ q.v{font-family:var(--serif);font-style:italic}
 :lang(ko){word-break:keep-all;overflow-wrap:break-word;line-break:strict}
 :lang(ko) body,body:lang(ko){font-family:"Figtree","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif}
 :lang(ko) h1,:lang(ko) h2,:lang(ko) h3{font-family:"Libre Caslon Text","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",serif;letter-spacing:-.01em}
+:lang(zh){line-break:strict;overflow-wrap:break-word}
+:lang(zh) body,body:lang(zh){font-family:"Figtree","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.75}
+:lang(zh) h1,:lang(zh) h2,:lang(zh) h3{font-family:"Libre Caslon Text","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",serif;letter-spacing:.01em}
+.verse p:lang(zh){font-style:normal;line-height:1.9}
 .verse p:lang(en){word-break:normal}
 /* Prayer points: a numbered prayer, then the verse it stands on. */
 .qa ol.points{gap:16px}

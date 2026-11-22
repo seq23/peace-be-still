@@ -6,7 +6,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PAGES } from "../content/questions.mjs";
-import { storeCtaHtml, headerHtml, footerHtml, BASE } from "../content/parts.mjs";
+import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE } from "../content/parts.mjs";
 import { applyCta } from "./apply-cta.mjs";
 import { legalPages } from "../content/legal.mjs";
 import { homeHtml } from "../content/home.mjs";
@@ -16,12 +16,13 @@ const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const text = (html) => html.replace(/<q\b[^>]*>/g, "“").replace(/<\/q>/g, "”").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
-// Words the page frame uses, per page language. Korean pages crumb to the Korean landing (/ko/),
-// which lists every Korean page; there is no Korean question index.
+// Words the page frame uses, per page language. Korean and Chinese pages crumb to their landing (/ko/,
+// /zh/), which lists every page in that language; there is no Korean or Chinese question index.
 const L = {
   en: { home: "/", index: "/questions/", indexName: "Questions", crumbs: "Breadcrumb", quick: "Quick answer", best: "What this page is best for", pick: "Our pick", faq: "Frequently asked questions", more: "Keep reading", sources: "Sources", by: "By", maker: "a Spry Labs app", pub: "Published", upd: "Updated", og: "og.png" },
   es: { home: "/es/", index: "/es/preguntas/", indexName: "Preguntas", crumbs: "Ruta", quick: "Respuesta rápida", best: "Para quién es esta página", pick: "Nuestra recomendación", faq: "Preguntas frecuentes", more: "Sigue leyendo", sources: "Fuentes", by: "Por", maker: "una app de Spry Labs", pub: "Publicado", upd: "Actualizado", og: "og-es.png" },
   ko: { home: "/ko/", index: "/ko/", indexName: "새벽기도", crumbs: "현재 위치", quick: "한눈에 보기", best: "이런 분께 맞는 글이에요", pick: "추천", faq: "자주 묻는 질문", more: "함께 읽기", sources: "출처", by: "", maker: "Spry Labs가 만든 앱", pub: "처음 올린 날", upd: "수정한 날", og: "og-ko.png" },
+  "zh-Hans": { home: "/zh/", index: "/zh/", indexName: "中文首页", crumbs: "当前位置", quick: "简要回答", best: "适合谁读", pick: "推荐", faq: "常见问题", more: "继续阅读", sources: "出处", by: "", maker: "Spry Labs 出品的应用", pub: "发布于", upd: "更新于", og: "og-zh.png", colon: "：" },
 };
 
 // hreflang: p.alt (the Spanish/English twin) or p.alts ([[lang, path], ...], self included), plus x-default.
@@ -40,7 +41,7 @@ function render(p) {
   const indexName = t.indexName;
   const og = p.og || t.og;
   // A door's hub (the Mindset page) crumbs straight to home; question pages go through the index.
-  const crumbs = [["Peace Be Still", p.lang === "ko" ? "/" : home], ...((p.lang === "ko" && p.path === index) || p.hub ? [] : [[indexName, index]])];
+  const crumbs = [["Peace Be Still", isLocal(p.lang) ? "/" : home], ...((isLocal(p.lang) && p.path === index) || p.hub ? [] : [[indexName, index]])];
   const ld = {
     "@context": "https://schema.org",
     "@graph": [
@@ -88,17 +89,17 @@ function render(p) {
 <meta property="og:image" content="${BASE}/${og}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">${p.ogAlt ? `\n<meta property="og:image:alt" content="${esc(p.ogAlt)}">` : ""}
-<meta property="og:locale" content="${{ en: "en_US", es: "es_US", ko: "ko_KR" }[p.lang]}">
+<meta property="og:locale" content="${{ en: "en_US", es: "es_US", ko: "ko_KR", "zh-Hans": "zh_CN" }[p.lang]}">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
 <body>
-${headerHtml(p.lang, p.lang === "ko" ? "/" : null)}
+${headerHtml(p.lang, isLocal(p.lang) ? "/" : null)}
 <main id="main" class="wrap article">
   <nav class="crumbs" aria-label="${t.crumbs}">${crumbs.map(([n, h]) => `<a href="${h}">${n}</a>`).join(" › ")}</nav>
   <h1>${p.h1}</h1>
 ${p.claim ? "  <!-- claim:start --><!-- claim:end -->\n" : ""}  <p class="lead" id="what">${p.definition}</p>
-  <section class="qa"><h2>${t.quick}</h2><p>${p.quick}</p><p class="muted">${t.best}: ${p.bestFor}</p></section>
+  <section class="qa"><h2>${t.quick}</h2><p>${p.quick}</p><p class="muted">${t.best}${t.colon || ": "}${p.bestFor}</p></section>
 ${pick}${sections}
   <section class="qa" id="faq"><h2>${t.faq}</h2>
     <div class="faq">

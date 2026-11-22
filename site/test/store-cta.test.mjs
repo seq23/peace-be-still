@@ -10,8 +10,8 @@ const IOS = "https://apps.apple.com/us/app/peace-be-still/id1234567890";
 const PLAY = "https://play.google.com/store/apps/details?id=com.example.pbs";
 
 test("null store URLs render coming-soon text, never a badge, a date or 'available now'", () => {
-  const SOON = { en: [/Coming soon to the App Store · search “Peace Be Still”/, /Coming soon to Google Play · search “Peace Be Still”/], es: [/Muy pronto en el App Store/, /Muy pronto en Google Play/], ko: [/곧 App Store에 나와요/, /곧 Google Play에 나와요/] };
-  for (const lang of ["en", "es", "ko"]) {
+  const SOON = { en: [/Coming soon to the App Store · search “Peace Be Still”/, /Coming soon to Google Play · search “Peace Be Still”/], es: [/Muy pronto en el App Store/, /Muy pronto en Google Play/], ko: [/곧 App Store에 나와요/, /곧 Google Play에 나와요/], "zh-Hans": [/即将上架 App Store/, /即将上架 Google Play/] };
+  for (const lang of ["en", "es", "ko", "zh-Hans"]) {
     const h = storeCtaHtml(lang, { app_store_url: null, play_url: null });
     assert.match(h, SOON[lang][0]);
     assert.match(h, SOON[lang][1]);
@@ -29,11 +29,13 @@ test("each store flips on its own: a URL renders that store's badge linking to i
   assert.doesNotMatch(both, /Muy pronto/);
 });
 
-test("the Korean CTA says the app is in English and Spanish today (no Korean app is implied)", () => {
+test("the Korean and Chinese CTAs say the app is in English and Spanish today (no Korean or Chinese app is implied)", () => {
   for (const store of [{ app_store_url: null, play_url: null }, { app_store_url: IOS, play_url: PLAY }]) {
     assert.match(storeCtaHtml("ko", store), /영어와 스페인어로/);
+    assert.match(storeCtaHtml("zh-Hans", store), /应用界面目前是英文和西班牙文/);
   }
   assert.equal(langOf('<html lang="ko">'), "ko");
+  assert.equal(langOf('<html lang="zh-Hans">'), "zh-Hans");
   assert.equal(langOf('<html lang="fr">'), "en");
 });
 

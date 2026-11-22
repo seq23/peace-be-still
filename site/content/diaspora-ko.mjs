@@ -102,7 +102,7 @@ ${ABOUT_KRV}`],
 export const KO = [
   {
     ...BASE_KO, path: LANDING,
-    alts: [["ko", LANDING], ["en", "/"], ["es", "/es/"]], xDefault: "/",
+    alts: [["ko", LANDING], ["en", "/"], ["es", "/es/"], ["zh-Hans", "/zh/"]], xDefault: "/",
     og: "og-ko.png", ogAlt: "Peace Be Still 로고와 함께 ‘새벽 5시의 기도, 미국에서도’라는 문구",
     audience: "Korean American Christians",
     title: "새벽기도와 말씀으로 여는 하루 · Peace Be Still 한국어 안내",

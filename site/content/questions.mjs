@@ -10,6 +10,7 @@ import { BLACK } from "./blitz-black.mjs";
 import { APPS } from "./blitz-apps.mjs";
 import { ES } from "./blitz-es.mjs";
 import { KO } from "./diaspora-ko.mjs";
+import { ZH } from "./diaspora-zh.mjs";
 import { AFRICA } from "./diaspora-africa.mjs";
 import { V } from "./scripture.mjs";
 import { KJV_SRC } from "./blitz-common.mjs";
@@ -371,6 +372,7 @@ ${V("PSA 91:2", "es")}`],
   ...APPS,
   ...ES,
   ...KO,
+  ...ZH,
   ...AFRICA,
   ...SEARCH,
   ...MINDSET,
