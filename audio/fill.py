@@ -1016,31 +1016,31 @@ def window_minutes(now: dt.datetime) -> int:
 CLOUD_FILES_PER_JOB = 40   # measured 21 Nov 2026 (Ruth EN, one runner): 4 chapters tried in 31 min = 7.7 an hour x a 300-minute box
 
 
-# How many cloud jobs one launch may take, by its start time in Central (owner, 22 Nov 2026): GitHub Free
-# runs 20 jobs at once across ALL her repos. 4 always stay free so a merge gate, deploy or land starts at
-# once, and 2 more for the other repos' heavy jobs (store builds, renders, nightly loops), so the fill
-# takes at most 14, even at night (landing-speed, 22 Nov 2026: at 16 a night PR waited for a runner).
-# Hours are [start, end) in CT; the one place these numbers live (the plan job reads --cloud-slots).
-ACCOUNT_JOBS, LANDING_RESERVE, OTHER_HEAVY = 20, 4, 2
+# How many cloud jobs one launch may take, by its start time in Central (owner, 22 Nov 2026). GitHub Free
+# runs 20 jobs at once across ALL her repos, and the fill's jobs hold a runner for up to 300 minutes, so a
+# batch leaves KEEP_FREE runners for everything else. Measured 22 Nov 2026: a boss-os PR gate is 8 jobs
+# (run 45036905012), boss-os e2e 6 (run 45032858695), this repo's gate 4. At night 6 stay free: e2e or
+# this gate starts at once, a boss-os gate starts 6 jobs at once and its last 2 within minutes as its
+# own short jobs end; by day 10 stay free, so any one gate starts at once. A render in another repo
+# takes from the same 6, and then a gate starts within minutes, not at once.
+# Hours are [start, end) in CT. cloud_batch is the one place a batch is sized (the plan job calls it).
+ACCOUNT_JOBS, KEEP_FREE = 20, 6
 CLOUD_JOBS = (("night", 22, 7, 14), ("day", 7, 22, 10))
-assert max(j for *_, j in CLOUD_JOBS) <= ACCOUNT_JOBS - LANDING_RESERVE - OTHER_HEAVY, "the fill would take the landing runners"
 
 
-def cloud_slots(now: dt.datetime) -> tuple[str, int]:
-    """(window, jobs) for a launch starting at `now`: 16 from 22:00 to 06:59 CT, 10 from 07:00 to 21:59. Pure."""
+def cloud_batch(now: dt.datetime, bible_jobs: int, story_jobs: int, bible_left: int) -> tuple[str, int, int]:
+    """(window, Bible shards, story slots) for a launch starting at `now`. The window's jobs (14 from 22:00
+    to 06:59 CT, 10 from 07:00 to 21:59) are shared: Bible gets at most `bible_jobs` and never the
+    `story_jobs` kept for stories, and no more shards than `bible_left` files need; stories get the rest.
+    At night: 10 Bible + 4 stories; by day 6 + 4. Pure."""
     h = now.astimezone(CT).hour
-    for name, start, end, jobs in CLOUD_JOBS:
-        if (start <= h < end) if start < end else (h >= start or h < end):
-            return name, jobs
-    raise AssertionError(f"CLOUD_JOBS leaves hour {h} uncovered")
-
-
-def cloud_plan(items: list[dict], rows: list[dict], cfg: dict, jobs: int) -> dict:
-    """The cloud matrix for one launch: enough Bible shards for the cloud's queue (at most `jobs`), and
-    the census. "done" when nothing is left for the cloud. Pure."""
-    q = [i for i in todo(items, rows) if lane_of(i, cfg) == "cloud"]
-    n = min(jobs, -(-len(q) // CLOUD_FILES_PER_JOB)) if q else 0
-    return {"bible": [f"{k}/{n}" for k in range(n)], "left": len(q), "complete": whole_fill_done(items, rows)}
+    window, jobs = next(((name, j) for name, start, end, j in CLOUD_JOBS
+                         if ((start <= h < end) if start < end else (h >= start or h < end))), (None, 0))
+    n_bible = max(0, min(bible_jobs, jobs - story_jobs, -(-bible_left // CLOUD_FILES_PER_JOB)))
+    n_story = jobs - n_bible
+    if window is None or n_bible + n_story > ACCOUNT_JOBS - KEEP_FREE:
+        raise AssertionError(f"a {h}:00 CT batch of {n_bible + n_story} would leave fewer than {KEEP_FREE} of {ACCOUNT_JOBS} runners free")
+    return window, n_bible, n_story
 
 
 def main(argv=None) -> int:
@@ -1052,14 +1052,10 @@ def main(argv=None) -> int:
     ap.add_argument("--dry-run", action="store_true", help="print the plan and the census; voice nothing")
     ap.add_argument("--window-minutes", action="store_true", help="print the run window's minutes left now (run.sh)")
     ap.add_argument("--shard", help="i/n: this job's share of the lane's queue (the cloud matrix)")
-    ap.add_argument("--cloud-plan", type=int, metavar="JOBS", help="print the cloud matrix as JSON: at most JOBS Bible shards")
-    ap.add_argument("--cloud-slots", action="store_true", help="print the cloud job count for a launch now (CT window) as JSON")
+    ap.add_argument("--cloud-batch", nargs=2, type=int, metavar=("BIBLE_JOBS", "STORY_JOBS"),
+                    help="print this launch's batch as JSON (cloud_batch: window, Bible shards, story slots, census)")
     ap.add_argument("--push-rows", nargs="*", metavar="FILE", help="lay these rows files over main's manifest and push (the gather job)")
     a = ap.parse_args(argv)
-    if a.cloud_slots:
-        window, jobs = cloud_slots(dt.datetime.now(CT))
-        print(json.dumps({"window": window, "jobs": jobs}))
-        return 0
     if a.push_rows is not None:
         HOME.mkdir(parents=True, exist_ok=True)
         with unpushed_path().open("a", encoding="utf-8") as f:
@@ -1091,8 +1087,11 @@ def main(argv=None) -> int:
     rows = read_manifest()
     cfg = lanes()
     queue = shard([i for i in todo(items, rows, a.only) if lane_of(i, cfg) == LANE], a.shard)
-    if a.cloud_plan is not None:
-        print(json.dumps(cloud_plan(items, rows, cfg, a.cloud_plan)))
+    if a.cloud_batch is not None:
+        left = sum(1 for i in todo(items, rows) if lane_of(i, cfg) == "cloud")
+        window, n, stories = cloud_batch(dt.datetime.now(CT), *a.cloud_batch, left)
+        print(json.dumps({"window": window, "bible": [f"{k}/{n}" for k in range(n)], "story_slots": stories,
+                          "left": left, "complete": whole_fill_done(items, rows)}))
         return 0
     active = HOME / "library-fill.active"
     c0 = census(items, rows)
