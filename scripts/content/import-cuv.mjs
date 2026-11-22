@@ -21,6 +21,7 @@
 //
 // Run: npm i --no-save opencc-js@1.4.2 && node scripts/content/import-cuv.mjs [--pinned]
 //   --pinned re-reads the revisions in cuv_source.json and stops with CUV_DRIFT if the Traditional text differs.
+//   --reparse re-reads the same revisions after a change to this parser, and rewrites the stores.
 import { writeFileSync, readFileSync, existsSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
@@ -68,21 +69,31 @@ export function parseBook(wt, where = "?") {
 // One verse's wikitext → its printed words. Pure. Anything template-shaped left over is a stop, never a guess.
 export function clean(t, where = "?") {
   // Innermost templates first, until none changes (a note can hold a {{!|…}} character).
-  let x = t, prev;
-  do {
-    prev = x;
-    x = x
-      .replace(/\{\{!\|([^|{}]*)\|[^{}]*\}\}/g, "$1")
-      .replace(/\{\{(?:udots|-|\+)\|([^{}]*)\}\}/g, "$1")
-      .replace(/\{\{\*\|[^{}]*\}\}/g, "")
-      .replace(/\{\{[Aa]nchor\|[^{}]*\}\}/g, "")
-      .replace(/\[\[#[^\]]*\]\]/g, "");          // a link to a note ("[[#1a|〡]]", the note's number)
-  } while (x !== prev);
-  x = x
-    .replace(/<[^>]+>/g, "")
-    .replace(/[ \t\r\n]+/g, "")      // ASCII whitespace only: the full-width space before 神 is the text's own
-    .replace(/^　+$/, "");
+  const strip = (dropNotes) => {
+    let x = t, prev;
+    do {
+      prev = x;
+      x = x
+        .replace(/\{\{!\|([^|{}]*)\|[^{}]*\}\}/g, "$1")
+        .replace(/\{\{(?:udots|-|\+)\|([^{}]*)\}\}/g, "$1")
+        .replace(/\{\{\*\|([^{}]*)\}\}/g, dropNotes ? "" : "$1")
+        .replace(/\{\{[Aa]nchor\|[^{}]*\}\}/g, "")
+        .replace(/\[\[#[^\]]*\]\]/g, "");          // a link to a note ("[[#1a|〡]]", the note's number)
+    } while (x !== prev);
+    return x
+      .replace(/<[^>]+>/g, "")
+      .replace(/[ \t\r\n]+/g, "")      // ASCII whitespace only: the full-width space before 神 is the text's own
+      .replace(/^　+$/, "");
+  };
+  // {{*|…}} is a reader's note ("或作…"), except where it is the verse itself: Wikisource sets that way
+  // EXO 16:36 and the eleven verses the 1919 text prints in the margin, unpunctuated (MAT 18:11, 23:14,
+  // MAR 7:16, 15:28, LUK 17:36, 23:17, JOH 5:4, ACT 8:37, 15:34, 24:7, 28:29). A verse with no words once its
+  // notes are gone keeps the note's words, so the next verse is never stored under its number; an empty
+  // marker (a joined verse) stays empty.
+  let x = strip(true);
+  if (!/\p{L}/u.test(x) && /\{\{\*\|/.test(t)) x = strip(false);
   if (/[{}[\]|=<>]/.test(x)) throw new Error(`NAMED STOP [CUV_TEMPLATE] ${where}: unparsed markup in "${x.slice(0, 40)}"`);
+  if (x && !/\p{L}/u.test(x)) throw new Error(`NAMED STOP [CUV_NO_WORDS] ${where}: "${x}" has no words`);
   return x;
 }
 // A book's verses → stored lines; an empty marker's words come from the next marker that has words. Pure.
@@ -145,7 +156,7 @@ async function main() {
     ST = (await import("opencc-js/dict/STCharacters")).default;
   } catch { throw new Error(`NAMED STOP [OPENCC_MISSING] run: npm i --no-save ${OPENCC}`); }
   const t2s = OpenCC.Converter({ from: "t", to: "cn" });
-  const pinned = process.argv.includes("--pinned");
+  const reparse = process.argv.includes("--reparse"), pinned = reparse || process.argv.includes("--pinned");
   const srcFile = join(CONTENT, "bible", "cuv_source.json");
   const old = pinned && existsSync(srcFile) ? JSON.parse(readFileSync(srcFile, "utf8")) : null;
   if (pinned && !old) throw new Error("NAMED STOP [CUV_NOT_PINNED] no cuv_source.json to re-read");
@@ -164,7 +175,7 @@ async function main() {
   const simp = lines.map((l) => { const [code, cv] = l.split(" ", 2); return `${code} ${cv} ${t2s(l.slice(code.length + cv.length + 2)).replace(variant, (ch) => VARIANTS[ch])}`; }).join("\n") + "\n";
   const sha = (s) => createHash("sha256").update(s).digest("hex");
   // The source words must not move; the Simplified store is re-derived from them (a VARIANTS change is deliberate).
-  if (old && sha(trad) !== old.sha256) throw new Error("NAMED STOP [CUV_DRIFT] the pinned revisions no longer give the stored Traditional text");
+  if (old && !reparse && sha(trad) !== old.sha256) throw new Error("NAMED STOP [CUV_DRIFT] the pinned revisions no longer give the stored Traditional text");
   const script = scriptChars(TS, ST);
   const leftover = [...new Set([...simp].filter((ch) => script.tradOnly.includes(ch) || VARIANTS[ch]))];
   if (leftover.length) throw new Error(`NAMED STOP [CUV_SIMPLIFIED_LEFTOVER] Traditional characters left in the Simplified store: ${leftover.join("")}`);

@@ -148,6 +148,11 @@ test("the stored 和合本 has the 1919 words, checked against a second, indepen
   // Verses printed as one are stored once, under the first number, never merged into the verse before.
   assert.throws(() => verses("GEN 24:30", "CUV"), /REF_NOT_IN_CUV/);
   assert.equal(verses("GEN 24:28", "CUV")[0].text, "女子跑回去、照着這些話告訴他母親和他家裏的人。");
+  // A verse the 1919 text prints as a margin note keeps its own number; the next verse is not moved up.
+  assert.equal(verses("EXO 16:36", "CUV")[0].text, "俄梅珥乃伊法十分之一。");
+  assert.equal(verses("MAT 18:11", "CUV")[0].text, "人子來爲要拯救失喪的人");
+  assert.ok(verses("MAT 23:15", "CUV")[0].text.includes("走徧洋海陸地"));
+  assert.ok(verses("MAR 15:29", "CUV")[0].text.startsWith("從那裏經過的人辱罵他"));
 });
 
 // No Traditional page is built yet, so the reverse check (no Simplified-only character on a Traditional
@@ -190,6 +195,9 @@ test("the 和合本 importer keeps the printed words and nothing else", async ()
   const { lines, joined } = bookLines("PSA", parseBook(wt, "t"));
   assert.deepEqual(lines, ["PSA 1:1 大衞的詩。耶和華是我的牧者．", "PSA 1:2 從耶西的本必發、　神同在。"]);
   assert.deepEqual(joined, ["PSA 1:2-3"]);
+  // A note-only verse keeps the note's words; a verse with no words at all is a stop, never stored.
+  assert.deepEqual(bookLines("EXO", parseBook("{{verse|16|36}}{{*|俄梅珥乃伊法十分之一}}。", "t")).lines, ["EXO 16:36 俄梅珥乃伊法十分之一。"]);
+  assert.throws(() => bookLines("EXO", parseBook("{{verse|1|1}}。", "t")), /CUV_NO_WORDS/);
   // Leftover markup is a stop, never stored.
   assert.throws(() => bookLines("PSA", parseBook("{{verse|1|1}}文字{{unknown|x}}", "t")), /CUV_TEMPLATE/);
 });
