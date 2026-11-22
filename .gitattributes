@@ -1,1 +1,10 @@
 audio/manifest.jsonl merge=union
+# Encrypted with git-crypt (key: PBS_GIT_CRYPT_KEY in the Boss OS vault; unlock: scripts/git-crypt-unlock.sh).
+# The chat prompts, the crisis lists and the test question sets (fixtures), plus the tests that quote them.
+# scripts/check-encrypted.mjs fails on a plain-text copy. Never add a .gitattributes or a path here without its files being re-added encrypted.
+worker/src/prompts.ts filter=git-crypt diff=git-crypt
+worker/src/crisis.ts filter=git-crypt diff=git-crypt
+worker/src/voice/samples.ts filter=git-crypt diff=git-crypt
+worker/test/fixtures/*.json filter=git-crypt diff=git-crypt
+worker/test/*.test.ts filter=git-crypt diff=git-crypt
+app/test/chat.render.tsx filter=git-crypt diff=git-crypt
