@@ -361,7 +361,8 @@
       "checks": {},
       "extra_queries": [
         "what is the bible verse for prayer before sleeping"
-      ]
+      ],
+      "indexnow_at": "2026-11-22"
     },
     {
       "slug": "psalm-23-sleep-meditation",
@@ -398,7 +399,8 @@
       "checks": {},
       "gate_notes": [
         "b5 FAQ answer is 38 words (aim 40-60): \"Are the Bible stories suitable for my family?\""
-      ]
+      ],
+      "indexnow_at": "2026-11-22"
     },
     {
       "slug": "daily-devotional-tips",
@@ -433,7 +435,8 @@
       "checks": {},
       "gate_notes": [
         "b2 meta description is 117 chars (aim 120-160)"
-      ]
+      ],
+      "indexnow_at": "2026-11-22"
     }
   ],
   "dropped": [

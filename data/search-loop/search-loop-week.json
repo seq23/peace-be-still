@@ -2,13 +2,13 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W47",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-21T17:44:51.103Z",
+  "generated_at": "2026-11-22T18:02:47.877Z",
   "state": "slow",
   "published": 10,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
   "ai_visitors": 0,
-  "ai_bot_hits": 137,
+  "ai_bot_hits": 266,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
@@ -312,8 +312,7 @@
   },
   "notes": [
     "site config lowers the mode to slow",
-    "BUILD distinct gate: 5 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
-    "BUILD gate notes (not blocking): 2 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json",
+    "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data); 0 more page(s) today would have gone over it, those searches stay queued",
     "CHECK runs weekly in mode=slow; last ran 2026-11-18"
   ],
   "lanes": {
@@ -342,5 +341,5 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/44931707267"
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45052481054"
 }

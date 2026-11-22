@@ -61,6 +61,23 @@
           "DuckAssistBot": 3
         }
       }
+    },
+    "2026-11-22": {
+      "ai_visitors": {
+        "total": 0,
+        "by_engine": {},
+        "by_path": {},
+        "source": "web-analytics"
+      },
+      "ai_bot_hits": {
+        "total": 129,
+        "by_bot": {
+          "PerplexityBot": 4,
+          "GPTBot (OpenAI training)": 123,
+          "OAI-SearchBot (ChatGPT search)": 1,
+          "DuckAssistBot": 1
+        }
+      }
     }
   }
 }
