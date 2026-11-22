@@ -20,8 +20,12 @@ import os
 import re
 import subprocess
 import time
+from pathlib import Path
 
 SWAP_LIMIT_MB = float(os.environ.get("PBS_SWAP_LIMIT_MB", "4096"))
+# Her morning email and briefs come first (owner, 21 Nov 2026): while Boss OS's morning jobs run, this
+# flag exists and the clone lane waits; only the Bible lane runs. No flag file: no morning window.
+MORNING_FLAG = Path(os.environ.get("PBS_MORNING_FLAG", str(Path.home() / ".boss-os" / "morning-window.active")))
 PRESSURE_HIGH = 2
 CHECK_EVERY_S = 60
 MAX_PAUSE_S = 20 * 60
@@ -56,11 +60,25 @@ def line(m: dict) -> str:
 
 
 def wait(lane: str, *, deadline: float | None = None, reader=read, sleep=time.sleep, clock=time.time,
-         log=print, max_pause_s: float = MAX_PAUSE_S) -> str:
-    """Block while pressure is high. Returns "go" (clear, never paused or resumed), "resumed", or
-    "one-lane" (gave up: paused past max_pause_s or past the deadline). Logs each pause and resume as a
-    named note, and the peak seen."""
+         log=print, max_pause_s: float = MAX_PAUSE_S, flag: Path | None = None) -> str:
+    """Block while the morning window is on, then while pressure is high. Returns "go" (clear, never
+    paused or resumed), "resumed", or "one-lane" (gave up: paused past max_pause_s, or past the deadline).
+    Logs each pause and resume as a named note."""
+    flag = flag or MORNING_FLAG
+    resumed = False
+    if flag.exists():
+        start = clock()
+        log(f"NOTE MEMGUARD_MORNING_PAUSE {lane}: {flag} exists (her morning jobs run); only the Bible lane goes on")
+        while flag.exists():
+            if deadline and clock() >= deadline:
+                log(f"NOTE MEMGUARD_ONE_LANE {lane}: the morning window outlasted this run's box; the next run looks again")
+                return "one-lane"
+            sleep(CHECK_EVERY_S)
+        log(f"NOTE MEMGUARD_MORNING_RESUME {lane}: the morning window ended after {int(clock() - start)}s")
+        resumed = True
     m = reader()
+    if not high(m):
+        return "resumed" if resumed else "go"
     if not high(m):
         return "go"
     start = clock()

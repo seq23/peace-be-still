@@ -44,7 +44,9 @@ checks, shelved, status, voice).
   4,096 MB (baseline measured 21 Nov 20:15 CT: level 1, 1,653 MB, 53% free, plus 2.4 GB headroom;
   `PBS_SWAP_LIMIT_MB` overrides) it logs `NOTE MEMGUARD_PAUSE`, waits, and logs `MEMGUARD_RESUME`; still
   tight after 20 minutes, `MEMGUARD_ONE_LANE` and it stops for the run while the Bible lane carries on.
-  Never mid-story. Between stories it frees the speech and voice models; finished stories' work folders
+  Never mid-story. **Her morning jobs come first** (owner, 21 Nov 2026): while
+  `~/.boss-os/morning-window.active` exists (`PBS_MORNING_FLAG` overrides), the clone lane waits
+  (`MEMGUARD_MORNING_PAUSE` / `_RESUME`) and only the Bible lane runs; no flag file means no morning window. Between stories it frees the speech and voice models; finished stories' work folders
   are removed at the start of each run.
 - **Pause flag**: `~/.peace-be-still/library-fill.active` exists while priorities 1–2 are incomplete
   (How We Know / Whisper Almanac pause on it); the run that completes them removes it.

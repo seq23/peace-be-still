@@ -12,6 +12,9 @@ sys.path.insert(0, str(AUDIO))
 sys.path.insert(0, str(AUDIO / "lib"))
 import hush_clone as C  # noqa: E402
 import hush_harbor as H  # noqa: E402
+import memguard  # noqa: E402
+
+memguard.MORNING_FLAG = Path(tempfile.gettempdir()) / "pbs-test-no-morning-window"   # the real flag never steers a test
 
 
 class Clone(unittest.TestCase):
