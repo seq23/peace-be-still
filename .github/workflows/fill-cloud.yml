@@ -23,7 +23,7 @@ on:
       story_jobs: { description: "most clone stories this launch", default: "4" }
       only: { description: "proof run: only Bible files starting with this (e.g. en/bible/kjv-rut)", default: "" }
       story: { description: "proof run: this one story id", default: "" }
-concurrency: { group: fill-cloud, cancel-in-progress: false }
+concurrency: { group: "fill-cloud-${{ github.ref }}", cancel-in-progress: false }   # one batch at a time on main
 permissions: { contents: read }
 env:
   PBS_LANE: cloud
