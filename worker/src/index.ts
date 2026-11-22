@@ -30,7 +30,7 @@ import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
-import { chatJudgeSchema, chatJudgeVerdict, judgeMessages, type JudgeInput, type JudgeVerdict } from './quality/judge';
+import { chatJudgeListSchema, chatJudgeSchema, chatJudgeVerdict, judgeMessages, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, shortBusyText, checkInQuestion, checkInText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
@@ -204,7 +204,7 @@ export const realDeps: Deps = {
     // Workers AI's gpt-oss is its backup. Free chat keeps Workers AI only, never the billed route.
     if (lane !== 'free' && (env.PAID_PROVIDER as string) === 'openrouter-zdr') {
       const paidJudge = { ...paidRung(env, now), id: `judge-${env.PAID_PROVIDER}:${env.PAID_MODEL}` };
-      return check(env, now, [paidJudge, first], judgeMessages(input), chatJudgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
+      return check(env, now, [paidJudge, first], judgeMessages(input, true), chatJudgeListSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
     }
     return check(env, now, first, judgeMessages(input), chatJudgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free');
   },
@@ -601,7 +601,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
     const steer: Message[] = objection ? [{ role: 'system', content: variety0 ? `Your last answer needs an edit. ${objection}` : `Your last answer was not used. ${objection} Write three different new answers. Reply with JSON {"versions": [{"text": string, "references": [...]}, ...]}.` }] : [];
     const messages = [...system, ...examples, ...history.slice(0, -1), ...steer, ...history.slice(-1)];
-    const out = objection
+    // A variety edit is one answer (PBS_CHAT_COST_040: versions of an edit copied every kept sentence
+    // three times, the largest share of paid output); a rewrite after a failed check still asks for
+    // up to three versions, since a fresh answer can fail the same check again.
+    const out = objection && !variety0
       ? await runLadder(env.DB, rungs, messages, editSchema, answerTokens * 3, metrics, isEdit)
       : await runLadder(env.DB, rungs, messages, answerSchema, answerTokens, metrics, isAnswer);
     if ('empty' in out) {

@@ -15,16 +15,21 @@ export const CHAT_CHECKS = ['churches_differ', 'missing_pastor', 'missing_prayer
 const schemaFor = (keys: readonly string[]) => ({ type: 'object', properties: { ...Object.fromEntries(keys.map(k => [k, { type: 'boolean' }])), voice: { type: 'integer', minimum: 1, maximum: 5 } }, required: [...keys, 'voice'], additionalProperties: false });
 export const judgeSchema = schemaFor(JUDGE_CHECKS);
 export const chatJudgeSchema = schemaFor([...JUDGE_CHECKS, ...CHAT_CHECKS]);
+// The paid chat judge names only what failed (Open Loops PBS_CHAT_COST_040): one boolean per check was
+// ~200 output tokens a read, about a fifth of paid spend; an empty list is a few. Same checks, same prompt.
+const CHAT_KEYS: readonly string[] = [...JUDGE_CHECKS, ...CHAT_CHECKS];
+export const chatJudgeListSchema = { type: 'object', properties: { fails: { type: 'array', items: { type: 'string', enum: CHAT_KEYS } }, voice: { type: 'integer', minimum: 1, maximum: 5 } }, required: ['fails', 'voice'], additionalProperties: false };
+const LIST_REPLY = '\nReply as {"fails": [...], "voice": n}: "fails" names each check above that is true, by its name, and is [] when every check is false.';
 export const VOICE_PASS = 4; // QUALITY C09-C12: 4/5 or better
 
 const q = (s: string) => s.slice(0, 2000).replace(/"""/g, '"');
 
-export function judgeMessages(input: JudgeInput): Message[] {
+export function judgeMessages(input: JudgeInput, list = false): Message[] {
   const verses = input.verses.length ? input.verses.map(v => `${v.ref}: ${q(v.text)}`).join('\n') : '(none)';
   // Earlier words are context only (a woman she named, the topic): the newest 600 characters.
   const earlier = input.earlier?.trim() ? `Earlier in this chat they wrote:\n"""\n${q(input.earlier.slice(-600))}\n"""\n` : '';
   return [
-    { role: 'system', content: judgePrompt.replace('{RUBRIC}', voiceRubric[input.voice]) },
+    { role: 'system', content: judgePrompt.replace('{RUBRIC}', voiceRubric[input.voice]) + (list ? LIST_REPLY : '') },
     { role: 'user', content: `${earlier}The question:\n"""\n${q(input.question)}\n"""\nThe answer:\n"""\n${q(input.text)}\n"""\nVerses printed under it:\n"""\n${verses}\n"""` },
   ];
 }
@@ -40,4 +45,10 @@ export function judgeVerdict(data: unknown, keys: readonly string[] = JUDGE_CHEC
   return which.length ? { verdict: 'fail', which, voice } : { verdict: 'pass', voice };
 }
 /** The chat judge's reading: every shared check and every CHAT_CHECKS key must be answered. */
-export const chatJudgeVerdict = (data: unknown): JudgeVerdict => judgeVerdict(data, [...JUDGE_CHECKS, ...CHAT_CHECKS]);
+export function chatJudgeVerdict(data: unknown): JudgeVerdict {
+  const d = data as { fails?: unknown } | null;
+  if (!d || typeof d !== 'object' || !Array.isArray(d.fails)) return judgeVerdict(data, CHAT_KEYS);
+  // The list form: a name that is not a check means the reply was not read as asked, so it is down.
+  if (!d.fails.every(k => typeof k === 'string' && CHAT_KEYS.includes(k))) return { verdict: 'down' };
+  return judgeVerdict({ ...Object.fromEntries(CHAT_KEYS.map(k => [k, (d.fails as string[]).includes(k)])), voice: (data as { voice?: unknown }).voice }, CHAT_KEYS);
+}
