@@ -1,6 +1,6 @@
 // Páginas en español (blitz-top50.json, grupo "Spanish"). Escritas en español de EE. UU., no traducidas.
 // Toda cita bíblica sale de la Reina-Valera 1909 guardada (scripture.mjs), nunca de la RVR1960.
-import { DES, V, Q, P, F, bg, RV_SRC } from "./blitz-common.mjs";
+import { DES, V, Q, P, F, bg, RV_SRC, MI_REFUGIO_ES } from "./blitz-common.mjs";
 
 const es = "es";
 const v = (r) => V(r, es);
@@ -11,7 +11,7 @@ const GN = "Oraciones de la noche";
 const GM = "Oraciones de la mañana";
 const GS = "Salmos";
 const GV = "Versículos";
-const MI_REFUGIO = `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae la Reina-Valera 1909 completa para leer gratis, un chat bíblico en español y Salmos susurrados para dormir.</p>`;
+const MI_REFUGIO = MI_REFUGIO_ES;
 const NOTA_RV = `<p class="muted">Los versículos se citan tal como están en la Reina-Valera 1909, con su ortografía antigua (“á”, “fué”). Algunos salmos empiezan con su título y la primera palabra en mayúsculas, como en la edición impresa.</p>`;
 
 export const ES = [
@@ -135,7 +135,7 @@ ${v("PSA 30:5")}`],
     related: ["/es/preguntas/oracion-de-la-manana/", "/es/preguntas/devocional-diario/", "/es/preguntas/versiculos-de-agradecimiento/", "/es/preguntas/oracion-de-la-noche/"],
   },
   {
-    ...DES, lang: es, door: "faith", group: GN, path: "/es/preguntas/oracion-de-la-noche/",
+    ...DES, updated: "2026-11-21", updatedText: "21 nov 2026", lang: es, door: "faith", group: GN, path: "/es/preguntas/oracion-de-la-noche/", alt: "/questions/night-prayer/",
     title: "Oración de la noche: para cerrar el día con Dios · Peace Be Still",
     description: "Una oración de la noche para cerrar el día: dar gracias, pedir perdón y entregar lo que quedó pendiente, con los salmos de la noche de la Reina-Valera 1909.",
     h1: "Oración de la noche: cómo cerrar el día con Dios",
@@ -160,6 +160,12 @@ ${v("PSA 4:8")}`],
       ["¿Qué dice la Biblia sobre dormir en paz?", `<p>Que el sueño es un regalo de Dios y que se puede dormir aun en tiempos difíciles. David lo escribió huyendo de su propio hijo:</p>
 ${v("PSA 3:5")}`],
       ["¿Cuál es una oración corta para dormir?", `<p>“Señor, en tus manos dejo este día. Dame descanso. Amén.” Si quieres más, mira <a href="/es/preguntas/oracion-para-dormir/">oraciones para dormir</a>.</p>`],
+      ["¿Qué orar si me despierto a las 3 de la mañana?", `<p>Algo corto, para que la oración no se vuelva una lista de preocupaciones: “Señor, tú estás despierto cuando yo despierto. Te entrego lo que me despertó. Cuídame hasta la mañana. Amén.”</p>
+${v("PSA 63:6")}
+<p>Luego vuelve a acostarte. Si algo concreto te despertó, escríbelo en un papel junto a la cama y déjalo ahí hasta la mañana. Si te despiertas de noche con frecuencia, coméntalo con tu médico.</p>`],
+      ["¿Se ora a medianoche en la Biblia?", `<p>Sí. En la cárcel de Filipos, Pablo y Silas oraban y cantaban a medianoche:</p>
+${v("ACT 16:25")}
+<p>El 31 de diciembre muchas iglesias pasan la noche orando: mira el <a href="/es/preguntas/culto-de-fin-de-ano/">culto de fin de año</a> y el <a href="/es/preguntas/ayuno-de-21-dias/">ayuno de 21 días</a> de enero.</p>`],
       ["Mi Refugio en Peace Be Still", `${MI_REFUGIO}
 <p>De noche, los Salmos se leen en susurro con la pantalla siempre oscura y un temporizador que apaga la voz poco a poco. La primera noche es gratis y luego una por semana; un plan de pago ($7.99 al mes o $39.99 al año, sin prueba) abre una cada noche.</p>`],
     ],

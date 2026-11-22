@@ -15,6 +15,7 @@ import { V } from "./scripture.mjs";
 import { KJV_SRC } from "./blitz-common.mjs";
 import { SEARCH, CHAT_VERSES } from "./blitz-search.mjs";
 import { MINDSET } from "./mindset.mjs";
+import { SEASON } from "./season.mjs";
 
 export const PAGES = [
   {
@@ -373,4 +374,5 @@ ${V("PSA 91:2", "es")}`],
   ...AFRICA,
   ...SEARCH,
   ...MINDSET,
+  ...SEASON,
 ];

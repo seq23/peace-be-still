@@ -5,6 +5,8 @@ export { V, Q, P, F, ref, text } from "./scripture.mjs";
 export const D = { published: "2026-11-18", updated: "2026-11-18", publishedText: "18 Nov 2026", updatedText: "18 Nov 2026" };
 export const DES = { published: "2026-11-18", updated: "2026-11-18", publishedText: "18 nov 2026", updatedText: "18 nov 2026" };
 export const CHECKED = "18 Nov 2026";
+// The Mi Refugio paragraph every Spanish page uses (one copy, so the pages cannot drift).
+export const MI_REFUGIO_ES = `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae la Reina-Valera 1909 completa para leer gratis, un chat bíblico en español y Salmos susurrados para dormir.</p>`;
 
 export const bg = (q, label, version = "KJV") => [label, `https://www.biblegateway.com/passage/?search=${encodeURIComponent(q)}&version=${version}`];
 export const RV_SRC = ["Reina-Valera 1909, eBible.org", "https://ebible.org/find/details.php?id=spaRV1909"];
