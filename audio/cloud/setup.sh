@@ -21,6 +21,15 @@ mkdir -p ~/.config/rclone
 ( umask 077; printf '%s\n' "$PBS_RCLONE_CONF" > ~/.config/rclone/rclone.conf )
 rclone lsjson --max-depth 1 gdrive:Mac-Shelf/peace-be-still >/dev/null 2>&1 || {
   echo "NAMED STOP [DRIVE_UNREACHABLE] the runner could not list the Drive shelf; nothing was voiced" >&2; exit 4; }
+# The fill reads audio/, content/ and scripts/content/, none of them git-crypt encrypted today (.gitattributes:
+# the chat prompts, crisis lists, worker tests). If one ever is, this runner would read ciphertext: stop by name.
+python - <<'PY'
+import pathlib, sys
+locked = [str(p) for d in ("audio", "content", "scripts/content") for p in pathlib.Path(d).rglob("*")
+          if p.is_file() and p.open("rb").read(10) == b"\x00GITCRYPT\x00"]
+if locked:
+    sys.exit(f"NAMED STOP [ENCRYPTED_INPUT] the fill reads git-crypt files this runner cannot unlock: {', '.join(locked[:5])}")
+PY
 python -m pip install -q --upgrade pip
 case "$engine" in
   kokoro)
