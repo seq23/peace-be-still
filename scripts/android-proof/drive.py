@@ -86,7 +86,7 @@ tap(r'Have a review code\?', scroll=True)
 shot('plain', 'review-box-open')
 tap(r'App review code')
 adb('shell', 'input', 'text', CODE); note('typed the review code')
-adb('shell', 'input', 'keyevent', '111')
+adb('shell', 'input', 'keyevent', '4'); time.sleep(1)  # BACK closes the pad (ESC does not), so the button is reachable
 shot('secret', 'review-code-typed')
 tap(r'^Use this code', scroll=True)
 ok = find(r'Your paid access is active', 40)
