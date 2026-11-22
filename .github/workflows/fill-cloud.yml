@@ -10,12 +10,13 @@
 # PRIVACY (the repo and its logs are public): reference clips come from Drive at run time; output goes
 # straight to the Drive shelf with the md5 check and is deleted from the runner; failed files are held on
 # Drive; no audio is ever a workflow artifact (only the rows files, the same rows the public manifest
-# holds). Round the clock, no time window (GitHub's runners, not the Mac): a launch is tried every 20
-# minutes; the concurrency group holds it while a batch runs, so the next batch starts as soon as one ends.
+# holds). Round the clock, no time window (owner, 21 Nov 2026: "all day and night so its faster"; GitHub's
+# runners, not the Mac): the gather job starts the next batch the moment one ends; an hourly cron restarts
+# the chain if a batch ever ends without starting the next; the concurrency group keeps it to one batch.
 name: Fill (cloud)
 on:
   schedule:
-    - cron: "*/20 * * * *"   # round the clock (owner, 21 Nov 2026: "all day and night so its faster")
+    - cron: "40 * * * *"   # the safety net; each batch starts the next itself (gather), round the clock
   workflow_dispatch:
     inputs:
       bible_jobs: { description: "most Bible shards this launch", default: "12" }
@@ -155,7 +156,7 @@ jobs:
     if: always() && needs.plan.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permissions: { contents: write }
+    permissions: { contents: write, actions: write }
     steps:
       - uses: actions/checkout@v4
         with: { ref: main, path: main }
@@ -173,3 +174,8 @@ jobs:
           files=$(find rows -name rows.jsonl -size +0 2>/dev/null)
           [ -z "$files" ] && { echo "OUTPUT 0 cloud rows gathered (no job wrote a row)"; exit 0; }
           python code/audio/fill.py --push-rows $files
+      - name: Start the next batch (the chain; the plan job stops it when the fill is complete)
+        # Only after a batch that had work: with nothing left for the cloud, the hourly cron looks again.
+        if: always() && !inputs.only && !inputs.story && (needs.plan.outputs.bible != '[]' || needs.plan.outputs.stories != '[]')
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh workflow run fill-cloud.yml -R "$GITHUB_REPOSITORY" --ref main

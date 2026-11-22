@@ -9,7 +9,7 @@ checks, shelved, status, voice).
 
   | Lane | Where | When | Takes | Engine |
   |---|---|---|---|---|
-  | Bible matrix | GitHub Actions (`fill-cloud.yml`, job `bible`) | round the clock: the next batch starts as soon as one ends (cron every 20 minutes, one batch at a time), up to 12 shards, each a 300-minute box (about 40 chapters) | every Bible chapter (`kind` bible, EN and ES) | Kokoro, CPU |
+  | Bible matrix | GitHub Actions (`fill-cloud.yml`, job `bible`) | round the clock: each batch's gather job starts the next (an hourly cron restarts a broken chain; one batch at a time), up to 12 shards, each a 300-minute box (about 40 chapters) | every Bible chapter (`kind` bible, EN and ES) | Kokoro, CPU |
   | Clone stories | GitHub Actions (job `story`) | the same batches, up to 4 stories, one per job, 260-minute box plus a 45-minute QA reserve; sentences saved to Drive after every batch | every Hush Harbor story but the Mac's | Chatterbox, CPU |
   | Gather | GitHub Actions (job `gather`) | the end of each batch | lays every job's rows over main's manifest, one push | none |
   | Mac Bible lane | her Mac (`run.sh`, launchd) | 22:00–06:45, 90-minute boxes | psalms, Psalm Nights, Imagination Nights, Kokoro stories | Kokoro |
