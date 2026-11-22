@@ -14,7 +14,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
-import { requireHeadroom } from './neuron-headroom.mjs';
+import { NEURONS_PER_ITEM, requireHeadroom } from './neuron-headroom.mjs';
 import { ask, JUDGE_MODEL } from './judge.mjs';
 
 const token = process.env.REDTEAM_JUDGE_TOKEN ?? process.env.CF2_WORKERS_AI_TOKEN;
@@ -22,7 +22,13 @@ const account = process.env.REDTEAM_JUDGE_ACCOUNT ?? process.env.CF2_ACCOUNT_ID;
 if (!token || !account) { console.error('NAMED STOP JUDGE_KEYS_MISSING: set REDTEAM_JUDGE_TOKEN and REDTEAM_JUDGE_ACCOUNT (the CF2 pair)'); process.exit(3); }
 const set = JSON.parse(readFileSync(new URL('../test/fixtures/judge-calibration.json', import.meta.url)));
 if (set.length < 30 || set.filter(i => i.label === 'leaflet').length < 4) { console.error(`NAMED STOP CALIBRATION_SET_EMPTY: ${set.length} items`); process.exit(3); }
-await requireHeadroom(set.length * (process.env.JUDGE_CANDIDATES ?? 'x').split(',').length * 4);
+// One read is one gpt-oss call of ~2.2k tokens in and ~250 out: ~85 neurons. A down read is tried
+// once more only while the run is inside its read budget (the set plus 25%), so the worst case is
+// bounded and a 59-item set fits a day (the old flat x4 needed 9,440 neurons, over the 9,000 ceiling).
+const READ_NEURONS = 85;
+const readBudget = Math.ceil(set.length * 1.25);
+const candidates = (process.env.JUDGE_CANDIDATES ?? 'x').split(',').length;
+await requireHeadroom(Math.ceil(candidates * readBudget * READ_NEURONS / NEURONS_PER_ITEM));
 // The Worker's own judge code, bundled so plain node can load it (it imports without file extensions).
 const file = join(tmpdir(), `judge-${process.pid}.mjs`);
 await build({ entryPoints: [new URL('../src/quality/judge.ts', import.meta.url).pathname], bundle: true, format: 'esm', platform: 'neutral', outfile: file, logLevel: 'error' });
@@ -31,8 +37,10 @@ const { judgeMessages, chatJudgeVerdict: judgeVerdict } = await import(pathToFil
 // is about the model wrangler.jsonc names (or JUDGE_MODEL), which is what the app and red team use.
 const models = (process.env.JUDGE_CANDIDATES ?? JUDGE_MODEL).split(',').map(m => m.trim()).filter(Boolean);
 const FLOOR = 90;
+let reads = 0;
 async function read(model, item) {
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < 2 && (attempt === 0 || reads < readBudget); attempt++) {
+    reads++;
     const v = judgeVerdict(await ask({ token, account }, model, judgeMessages({ voice: item.voice, question: item.question, earlier: item.earlier, text: item.text, verses: item.verses })));
     if (v.verdict !== 'down') return v;
   }
@@ -40,6 +48,7 @@ async function read(model, item) {
 }
 const results = [];
 for (const model of models) {
+  reads = 0;
   let agree = 0, leafletHigh = 0, down = 0;
   const rows = [];
   const verdicts = [];
