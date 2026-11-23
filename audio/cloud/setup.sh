@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Sets up a GitHub runner for the cloud fill lane (.github/workflows/fill-cloud.yml): ffmpeg, rclone with
 # the Drive remote from the PBS_RCLONE_CONF secret (written 0600, never printed), and one engine:
-#   setup.sh kokoro      Kokoro (the Bible lane), faster-whisper for the checks
+#   setup.sh kokoro      Kokoro (the Bible lane), faster-whisper (the judge, qa.JUDGE_MODEL) for the checks
 #   setup.sh chatterbox  Chatterbox (the clone lane), Resemblyzer and faster-whisper for the checks
 # The repo and its logs are public: no audio, clip or token is ever printed or uploaded from here.
 set -euo pipefail
@@ -52,4 +52,13 @@ bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d  $d/voices-v1.0
     ;;
   *) echo "unknown engine $engine" >&2; exit 2 ;;
 esac
+# The judge (qa.JUDGE_MODEL), fetched and loaded once here, so a download that fails stops the job by name
+# before anything is voiced; the fill itself treats a judge that will not load as JUDGE_UNAVAILABLE, never a verdict.
+( cd audio && python - <<'PY' ) || { echo "NAMED STOP [JUDGE_MODEL_UNAVAILABLE] the judge model did not download or load; nothing was voiced, the next batch retries" >&2; exit 4; }
+import sys
+sys.path[:0] = [".", "lib"]
+import qa
+qa.judge_model()
+print(f"judge {qa.JUDGE_MODEL} loaded")
+PY
 echo "OUTPUT runner ready for $engine ($(nproc) CPUs, $(free -g | awk '/Mem/{print $2}') GB)"

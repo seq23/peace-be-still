@@ -2,6 +2,7 @@
 what, the pauses as real silence, resume, the quota stops and the unit checks.
 Run: python3 -m unittest discover -s audio/tests"""
 import json
+import tempfile
 import sys
 import unittest
 from pathlib import Path
@@ -10,6 +11,7 @@ AUDIO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(AUDIO))
 sys.path.insert(0, str(AUDIO / "lib"))
 import hush_harbor as H  # noqa: E402
+import fill  # noqa: E402
 
 CAST = [{"id": "disciples", "age": "adult", "gender": "group"}, {"id": "naomi", "age": "elder", "gender": "f"},
         {"id": "eli", "age": "elder", "gender": "m"}, {"id": "david", "age": "teen", "gender": "m"}]
@@ -118,16 +120,22 @@ class Units(unittest.TestCase):
         a = story([{"type": "retelling", "speaker": "narrator", "text": "One."}])
         rows = [{"file": f"stories/hush-harbor/en/{H.file_of(a)}", "status": "passed"}]
         self.assertEqual(H.todo([a], rows), [])
-        self.assertEqual(H.census([a], rows), {"total": 1, "passed": 1, "failed": 0, "given_up": []})
+        self.assertEqual(H.census([a], rows), {"total": 1, "passed": 1, "failed": 0, "held": []})
 
     def test_failed_story_is_tried_again_first_until_out_of_tries(self):
         a = story([{"type": "retelling", "speaker": "narrator", "text": "One."}])
         b = story([{"type": "retelling", "speaker": "narrator", "text": "Two."}])
-        rows = [{"file": H.row_file(b), "status": "FAILED", "tries": 1}]
-        self.assertEqual(H.todo([a, b], rows), [b, a])
-        rows[0]["tries"] = 3
-        self.assertEqual(H.todo([a, b], rows), [a])
-        self.assertIn("NAMED STOP [FAILED_3_TRIES]", H.census_line(H.census([a, b], rows)))
+        with tempfile.TemporaryDirectory() as d:
+            m = Path(d) / "m.jsonl"
+            for n in range(1, fill.MAX_TRIES + 1):
+                row = fill.upsert_row({"file": H.row_file(b), "status": "FAILED", "checks": {"problems": ["A01 x"]}}, m)
+                rows = fill.read_manifest(m)
+                if n < fill.MAX_TRIES:
+                    self.assertEqual((row["status"], H.todo([a, b], rows)), ("FAILED", [b, a]))   # tried again first
+        self.assertEqual((row["status"], H.todo([a, b], rows)), ("held", [a]))     # out of tries: held, not retried
+        line = H.census_line(H.census([a, b], rows))
+        self.assertIn(f"note: 1 held after every route failed", line)
+        self.assertNotIn("NAMED STOP", line)
 
 
 class Checks(unittest.TestCase):
