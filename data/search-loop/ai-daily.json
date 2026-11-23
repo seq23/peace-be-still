@@ -78,6 +78,15 @@
           "DuckAssistBot": 1
         }
       }
+    },
+    "2026-11-23": {
+      "ai_visitors_not_read": "this zone's plan has no referrer field, and the Cloudflare Web Analytics beacon is not on the site (not in the home page, no page loads in 7 days): turn on Web Analytics for peacebestillapp.com",
+      "ai_bot_hits": {
+        "total": 160,
+        "by_bot": {
+          "Meta-ExternalAgent": 160
+        }
+      }
     }
   }
 }

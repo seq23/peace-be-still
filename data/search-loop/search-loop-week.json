@@ -1,19 +1,19 @@
 {
   "schema": "search-loop-week-v1",
-  "week": "2026-W47",
+  "week": "2026-W48",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-22T18:02:47.877Z",
+  "generated_at": "2026-11-23T18:58:35.980Z",
   "state": "slow",
   "published": 10,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
   "ai_visitors": 0,
-  "ai_bot_hits": 266,
+  "ai_bot_hits": 426,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 0,
+  "held_by_cap": 3,
   "redirected": [
     {
       "query": "psalms for sleep with rain",
@@ -308,11 +308,14 @@
     "max_live_pages": 10,
     "live": 10,
     "room": 0,
-    "why": "held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data"
+    "why": "held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data"
   },
   "notes": [
     "site config lowers the mode to slow",
-    "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data); 0 more page(s) today would have gone over it, those searches stay queued",
+    "not read: AI answer misses (Boss OS did not read AI answers in 2026-W47 (status not_read)); could not tell this run",
+    "FIND api.bing.com: not read: unavailable after 3 failures (last http 204)",
+    "NAMED NOTE [CAP_HELD_NO_DATA] cap held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data",
+    "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data); 3 more page(s) today would have gone over it, those searches stay queued",
     "CHECK runs weekly in mode=slow; last ran 2026-11-18"
   ],
   "lanes": {
@@ -341,5 +344,15 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45052481054"
+  "ai_misses": {
+    "read": "not read: Boss OS did not read AI answers in 2026-W47 (status not_read)",
+    "week": "2026-W47",
+    "misses": 0,
+    "strengthened": [],
+    "new_candidates": [],
+    "skipped": [],
+    "rejected": [],
+    "could_not_tell": 1
+  },
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45243961870"
 }
