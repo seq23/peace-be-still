@@ -179,7 +179,7 @@ const offGoogle = (rungs: LadderRung[]) => rungs.filter(r => !r.google);
 /** A paid install meets no device, IP or app-wide message count (it is only counted). */
 const PAID_UNCAPPED = 1_000_000;
 /** A teen's model answers a day off the paid lane (her ruling 23 Nov 2026: "it should just be 1 free answer a day then for each"). */
-export const TEEN_AI_ANSWERS_DAILY = 1;
+const TEEN_AI_ANSWERS_DAILY = 1;
 const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;
 async function check<T>(env: Env, now: number, chain: LadderRung | LadderRung[], messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true, teen = false): Promise<T> {
   const metrics: Metrics = new Map();
