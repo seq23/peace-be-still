@@ -160,6 +160,16 @@ export const teenStillHereText = {
   en: "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above are free any time, and a real person there will listen. An adult you trust can sit with you today, too.",
   es: 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba son gratuitas a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.',
 };
+// A teen past her one model answer today (her ruling 23 Nov 2026, "yes, 1 each"). Chat stays open, so a
+// message about her safety still gets the card and its lines.
+export const teenDailyText = {
+  en: "That was today's chat answer. Chat answers again tomorrow, and your Bible, today's story and the night sessions are here any time. If you're not safe, tell me here and you'll see free lines you can reach right away.",
+  es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y tu Biblia, la historia de hoy y las sesiones de la noche están aquí cuando quieras. Si no estás a salvo, dímelo aquí y verás líneas gratuitas a las que puedes llamar enseguida.',
+};
+export const teenDailyMindsetText = {
+  en: "That was today's chat answer. Chat answers again tomorrow, and the night sessions are here any time. If you're not safe, tell me here and you'll see free lines you can reach right away.",
+  es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y las sesiones de la noche están aquí cuando quieras. Si no estás a salvo, dímelo aquí y verás líneas gratuitas a las que puedes llamar enseguida.',
+};
 export const checkInQuestion = { en: 'Are you safe right now?', es: '¿Estás a salvo ahora mismo?' };
 
 export const fallbackText = {

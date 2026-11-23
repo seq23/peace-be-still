@@ -20,7 +20,7 @@ import { storyArt } from './storyart';
 import { appleDeviceCheck, countFirstMessage, decideFirst, endFirst, firstActive, firstRow, type DeviceBit } from './firstprivate';
 import { madeForYou } from './madeForYou.mount';
 import { ipHash } from './iphash';
-import { runLadder, tally, type LadderRung, type Metrics } from './ladder';
+import { runLadder, tally, type LadderResult, type LadderRung, type Metrics } from './ladder';
 import { deleteMemory, markCrisis, readMemory, saveMemory } from './memory';
 import { memoryBlock, mindsetTeen, prompts, spanishOnly, summaryPrompt, type PromptId } from './prompts';
 import { gemini } from './providers/gemini';
@@ -31,7 +31,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, shortBusyText, checkInQuestion, checkInText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyMindsetText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -178,6 +178,8 @@ const offGoogle = (rungs: LadderRung[]) => rungs.filter(r => !r.google);
 
 /** A paid install meets no device, IP or app-wide message count (it is only counted). */
 const PAID_UNCAPPED = 1_000_000;
+/** A teen's model answers a day off the paid lane (her ruling 23 Nov 2026: "it should just be 1 free answer a day then for each"). */
+export const TEEN_AI_ANSWERS_DAILY = 1;
 const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;
 async function check<T>(env: Env, now: number, chain: LadderRung | LadderRung[], messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true, teen = false): Promise<T> {
   const metrics: Metrics = new Map();
@@ -387,6 +389,13 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const flag = (asked: boolean) => env.DB.prepare('INSERT INTO chat_crisis (install_id, conversation, flagged_at, calm, asked) VALUES (?, ?, ?, 0, ?) ON CONFLICT(install_id, conversation) DO UPDATE SET flagged_at = excluded.flagged_at, calm = 0, asked = max(asked, excluded.asked)')
     .bind(who.installId, req.conversation, now, asked ? 1 : 0).run();
   const calmTurn = () => env.DB.prepare('UPDATE chat_crisis SET calm = calm + 1 WHERE install_id = ? AND conversation = ?').bind(who.installId, req.conversation).run();
+  const teenKey = `teen:${who.installId}`;
+  const claimTeenAnswer = async (): Promise<'claimed' | 'used' | 'unread'> => {
+    try {
+      return (await env.DB.prepare('INSERT INTO chat_short_day (day, device, n) VALUES (?, ?, 1) ON CONFLICT(day, device) DO UPDATE SET n = n + 1 WHERE n < ? RETURNING n').bind(day, teenKey, TEEN_AI_ANSWERS_DAILY).first()) !== null ? 'claimed' : 'used';
+    } catch { logCode('TEEN_ANSWER_CAP_UNREAD'); return 'unread'; }
+  };
+  const releaseTeenAnswer = () => env.DB.prepare('UPDATE chat_short_day SET n = n - 1 WHERE day = ? AND device = ? AND n > 0').bind(day, teenKey).run().then(() => undefined, () => logCode('TEEN_ANSWER_RELEASE_FAILED'));
   const capUsd = usd(env.PAID_AI_MONTHLY_CAP_USD, 100);
 
   // A high signal (owner, 21 Nov 2026): the fixed crisis card and its hotlines (by the device
@@ -628,15 +637,23 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Three tries, then a fixed reply. Measured round 3: with two tries 4 of 45 answers fell back.
   // Two human-written answers in this voice go in first, as an earlier exchange (one counter picks them).
   const examples = examplesFor(sampleSet(v.prompt, v.lang), v.lang, await nextSeq(env.DB, v.lang === 'es' ? 'es' : mind ? 'mindset' : 'en'));
+  // A teen's model answers off the paid lane (Workers AI; her ruling 23 Nov 2026, "yes, 1 each"): one a day per
+  // install, the identity the device limit uses, claimed before any answer call so the shared pool is never
+  // drained by one person. Kept in the per-device day counter (chat_short_day) under a "teen:" key, cleaned with
+  // the day. A store that cannot be read is no answer (busy, or the crisis words), never unlimited. Given back if no model answered.
+  const teenSlot = teenOnly && lane !== 'paid' ? await claimTeenAnswer() : null;
+  if (teenSlot === 'used' || teenSlot === 'unread') tally(metrics, `teen_answer_${teenSlot}`);
   for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
     const steer: Message[] = objection ? [{ role: 'system', content: variety0 ? `Your last answer needs an edit. ${objection}` : `Your last answer was not used. ${objection} Write three different new answers. Reply with JSON {"versions": [{"text": string, "references": [...]}, ...]}.` }] : [];
     const messages = [...system, ...examples, ...history.slice(0, -1), ...steer, ...history.slice(-1)];
-    const out = objection
+    const out: LadderResult = teenSlot === 'used' ? { empty: 'out' } : teenSlot === 'unread' ? { empty: 'busy' }
+      : objection
       ? await runLadder(env.DB, rungs, messages, editSchema, answerTokens * 3, metrics, isEdit)
       : await runLadder(env.DB, rungs, messages, answerSchema, answerTokens, metrics, isAnswer);
     if ('empty' in out) {
       if (attempt === 0) {
         await refund(env.DB, day, me.installId, hash);
+        if (teenSlot === 'claimed') await releaseTeenAnswer();
         // A message on the crisis lane is never told chat is resting or busy: if the crisis model
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
         // A teen whose card already showed in this conversation (Workers AI has a small shared daily
@@ -675,6 +692,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
           }
           return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });
         }
+        // A teen past her one answer today: fixed words, and chat stays open (a closed chat could not take a crisis message).
+        if (teenSlot === 'used') return reply({ kind: 'busy', ai: false, fixed: true, text: (mind ? teenDailyMindsetText : teenDailyText)[v.lang], scripture: [], remaining: null, limit: null, reminder });
         if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit }); }
         tally(metrics, 'busy'); logCode('CHAT_BUSY');
         return reply({ kind: 'busy', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });
