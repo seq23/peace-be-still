@@ -110,8 +110,10 @@ const storeConfig = JSON.parse(read('site/config/store.json'));
 const esLegal = esListingLegal(storeConfig.es_listing_spanish_legal);
 const listings = { 'en-US': read('store/listing-en.md'), 'es-MX': read('store/listing-es.md') };
 // Google Play has one default listing (no custom pages), so its text is checked like the App Store's neutral lines.
-const play = read('store/google-play/listing-en.md');
-const playFields = { title: field(play, 'Title') ?? '', short: field(play, 'Short description') ?? '', full: play.split('Full description:\n')[1]?.trim() ?? '' };
+// Play shows the same listing in English (default) and Spanish (es-US translation); both are checked.
+const playFieldsOf = (text: string) => ({ title: field(text, 'Title') ?? '', short: field(text, 'Short description') ?? '', full: text.split('Full description:\n')[1]?.trim() ?? '' });
+const playListings = { 'en-US': playFieldsOf(read('store/google-play/listing-en.md')), 'es-US': playFieldsOf(read('store/google-play/listing-es.md')) };
+const playFields = playListings['en-US'];
 const events = read('store/events.md').split(/^## /m).slice(1).map(block => ({ name: block.split('\n')[0].trim(), block }));
 const legal = ['privacy', 'terms', 'disclaimer'].map(name => ({ name, text: read(`legal/${name}.md`) }));
 
@@ -137,7 +139,7 @@ function visibleItems(): Item[] {
       if (text) items.push({ where: `event ${e.name} ${key}`, text, kind: 'faith' });
     }
   }
-  items.push({ where: 'Play title', text: playFields.title, kind: 'neutral' }, { where: 'Play short description', text: playFields.short, kind: 'neutral' }, { where: 'Play full description', text: playFields.full, kind: 'neutral' });
+  for (const [locale, f] of Object.entries(playListings)) items.push({ where: `Play ${locale} title`, text: f.title, kind: 'neutral' }, { where: `Play ${locale} short description`, text: f.short, kind: 'neutral' }, { where: `Play ${locale} full description`, text: f.full, kind: 'neutral' });
   for (const l of legal) items.push({ where: `legal/${l.name}.md`, text: l.text, kind: 'legal' });
   items.push({ where: 'store/privacy-label.md', text: read('store/privacy-label.md'), kind: 'legal' });
   return items;
@@ -222,18 +224,21 @@ test('listings have every App Store field, the subscription disclosures and the 
   }
 });
 
-test('the Google Play listing fits Play\'s limits and promises nothing the Android build lacks', () => {
-  assert.equal(playFields.title, 'Peace Be Still');
-  assert.ok([...playFields.short].length > 20 && [...playFields.short].length <= 80, `short description ${[...playFields.short].length}/80`);
-  assert.ok([...playFields.full].length > 500 && [...playFields.full].length <= 4000, `full description ${[...playFields.full].length}/4000`);
-  // Android buys through Google Play and has no private first chat (that needs Apple's DeviceCheck).
-  const shown = Object.values(playFields).join('\n');
-  assert.doesNotMatch(shown, /\bApple\b|App Store|iPhone|first chat is private|tap your name/);
-  assert.match(playFields.full, /Google Play/);
-  assert.match(playFields.full, /https:\/\/peacebestillapp\.com\/privacy/);
-  // Same free and paid numbers the app enforces.
-  assert.match(playFields.full, new RegExp(`up to ${FREE_CHAT_MESSAGES} messages`));
-  assert.match(playFields.full, new RegExp(`up to ${PAID_CHAT_MESSAGES} messages a day`));
+test('each Google Play listing fits Play\'s limits and promises nothing the Android build lacks', () => {
+  for (const [locale, f] of Object.entries(playListings)) {
+    const es = locale.startsWith('es');
+    assert.equal(f.title, 'Peace Be Still', locale);
+    assert.ok([...f.short].length > 20 && [...f.short].length <= 80, `${locale}: short description ${[...f.short].length}/80`);
+    assert.ok([...f.full].length > 500 && [...f.full].length <= 4000, `${locale}: full description ${[...f.full].length}/4000`);
+    // Android buys through Google Play and has no private first chat (that needs Apple's DeviceCheck).
+    assert.doesNotMatch(Object.values(f).join('\n'), /\bApple\b|App Store|iPhone|first chat is private|primer chat es privado|tap your name|toca tu nombre/, locale);
+    assert.match(f.full, /Google Play/, locale);
+    assert.match(f.full, es ? /https:\/\/peacebestillapp\.com\/es\/privacidad/ : /https:\/\/peacebestillapp\.com\/privacy/, locale);
+    assert.doesNotMatch(f.full, /\$\s?\d/, `${locale}: prices are Google Play's to show per country`);
+    // Same free and paid numbers the app enforces.
+    assert.match(f.full, new RegExp(es ? `de hasta ${FREE_CHAT_MESSAGES} mensajes` : `up to ${FREE_CHAT_MESSAGES} messages`), locale);
+    assert.match(f.full, new RegExp(es ? `hasta ${PAID_CHAT_MESSAGES} mensajes al día` : `up to ${PAID_CHAT_MESSAGES} messages a day`), locale);
+  }
 });
 
 test('the es-MX listing links the legal pages its one switch names (site/config/store.json)', () => {
