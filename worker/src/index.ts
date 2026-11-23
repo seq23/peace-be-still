@@ -31,7 +31,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, shortBusyText, checkInQuestion, checkInText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, shortBusyText, checkInQuestion, checkInText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -408,7 +408,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     // The fixed words when the crisis model is the one that just failed (lane_down), or no model may read it (floor).
     if (!teenOnly && layer !== 'floor' && layer !== 'lane_down' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
       const messages: Message[] = [{ role: 'system', content: crisisPrompt(v.lang, mind) }, ...turns.slice(-4).map(t => ({ role: t.role, content: t.text }))];
-      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis'), messages, crisisSchema, 600 + CRISIS_THINKING_HEADROOM, metrics, d => crisisWords(d) !== null);
+      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis', teenOnly), messages, crisisSchema, 600 + CRISIS_THINKING_HEADROOM, metrics, d => crisisWords(d) !== null);
       if ('data' in out) checkIn = { text: `${crisisWords(out.data)} ${checkInQuestion[v.lang]}`, ai: true };
       else { tally(metrics, 'crisis_model_down'); logCode('CHAT_CRISIS_MODEL_DOWN', { empty: out.empty }); }
     }
@@ -442,6 +442,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // A crisis turn in the history with no state here (another install, or state already cleaned) is
   // treated as on: nothing near a crisis goes to a free model. Once state exists, it decays.
   const inCrisis = sticky || (!state && turns.some(t => t.text === CRISIS_NOTE));
+  // The card and its question already showed in this conversation (the same test as the answer gate's afterCrisis).
+  const cardShown = (sticky && state?.asked === 1) || turns.slice(0, -1).some(t => t.text === CRISIS_NOTE);
   let lane: Lane = inCrisis ? 'crisis' : paid.paid ? 'paid' : 'free';
   if (inCrisis || distress(turns)) {
     tally(metrics, inCrisis ? 'crisis_followup' : 'prefilter');
@@ -637,6 +639,17 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         await refund(env.DB, day, me.installId, hash);
         // A message on the crisis lane is never told chat is resting or busy: if the crisis model
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
+        // A teen whose card already showed in this conversation (Workers AI has a small shared daily
+        // quota, so this is common): fixed words written by people that point back to the card, never
+        // the card and "Are you safe right now?" again. The question is asked once per conversation;
+        // a new high signal or a not-safe answer still gets the card (both are read before this). Her
+        // "yes, I'm safe", or a message the safety model read as calm, counts toward the conversation's calm turns.
+        if (lane === 'crisis' && teenOnly && cardShown) {
+          tally(metrics, 'crisis_lane_down_teen_followup'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty, teen: true });
+          const safe = saysSafe(lastAssistant, last);
+          if (safe || (confirmed?.level === 'none' && confirmed.read !== 'down')) await calmTurn();
+          return reply({ kind: 'busy', ai: false, fixed: true, text: (safe ? teenStillHereSafeText : teenStillHereText)[v.lang], scripture: [], remaining: null, limit: null, reminder });
+        }
         if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(confirmed && confirmed.level !== 'none' ? confirmed.kind : 'selfharm', 'lane_down'); }
         // A paid user on free chat after her private messages never meets "resting": the private model answers, briefly.
         // Those short answers are capped per person per day (her ruling: a money ceiling); then "busy".

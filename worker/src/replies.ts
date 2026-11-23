@@ -129,7 +129,9 @@ export function regionOf(code: string | null | undefined): 'US' | 'MX' | 'ES' | 
 }
 export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '', door: Door = 'faith', region: 'US' | 'MX' | 'ES' | 'other' = 'US'): string {
   const mind = door === 'mindset';
-  if (region !== 'US') return [open[lang], regional[region][lang], ...(band === 'teen' ? [(door === 'mindset' ? trustedMindset : trusted)[lang]] : []), close[lang]].join(' ');
+  // Abuse: the trusted adult is never "like a parent" (the parent may be the one hurting her), in every region.
+  const abuse = kind === 'abuse' || kind === 'child_abuse';
+  if (region !== 'US') return [open[lang], regional[region][lang], ...(band === 'teen' ? [(abuse ? trustedSafe : door === 'mindset' ? trustedMindset : trusted)[lang]] : []), close[lang]].join(' ');
   const trust = mind ? trustedMindset : trusted;
   if (kind === 'medical') return [...medical[medicalCase(herText)][lang].map(line => mind ? line.replace(/ Faith and treatment go together\.| La fe y el tratamiento van juntos\./, '') : line), ...(band === 'teen' ? [trust[lang]] : []), close[lang]].join(' ');
   const child = kind === 'child_abuse' || (kind === 'abuse' && band === 'teen');
@@ -146,6 +148,17 @@ export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '
 export const checkInText = {
   en: "It sounds like you're carrying something really heavy. Are you safe right now?",
   es: 'Parece que estás cargando algo muy pesado. ¿Estás a salvo ahora mismo?',
+};
+// A teen's conversation after the card, when Workers AI (her only chat route) has no answer (her ruling
+// 23 Nov 2026: no extra capacity for teens): written by people, no faith words, never the card or the
+// question again. The first when her last words told the check-in she is safe.
+export const teenStillHereSafeText = {
+  en: "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and the lines on the card above are free any time if things feel heavy again.",
+  es: 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y las líneas de la tarjeta de arriba son gratuitas a cualquier hora si todo vuelve a sentirse pesado.',
+};
+export const teenStillHereText = {
+  en: "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above are free any time, and a real person there will listen. An adult you trust can sit with you today, too.",
+  es: 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba son gratuitas a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.',
 };
 export const checkInQuestion = { en: 'Are you safe right now?', es: '¿Estás a salvo ahora mismo?' };
 
