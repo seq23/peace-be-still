@@ -38,6 +38,7 @@ import datetime as dt
 import fcntl
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
@@ -640,40 +641,26 @@ def render(item: dict, pron: dict, wav: Path, speed: float) -> dict:
     return {**out, "segs": segs}
 
 
-# Mastering: ffmpeg's two-pass EBU R128 loudnorm (measure, then apply the measured values), then AAC.
-# The AAC encoder adds inter-sample overs a filter before it cannot see (19 Nov 2026: 53 of 63 failures
-# were A06 true peak), so the true-peak target starts TP_MARGIN under the ceiling and the ENCODED file
-# is what is judged; a miss is mastered again from the same WAV (never a new render).
-LRA = 11.0          # speech: wide enough that loudnorm stays linear (no pumping) on a calm reading
-TP_MARGIN = 1.0
+# Mastering (rebuilt 23 Nov 2026): the WAV's loudness is measured (ebur128), ONE linear gain takes it to the
+# level's target, and a true-peak limiter (ffmpeg alimiter run at LIMIT_OVERSAMPLE x the rate, so the peaks
+# between samples are seen) holds the peaks under the ceiling; then AAC. The gain alone sets the loudness, so
+# limiting harder never moves it. Why not two-pass loudnorm (19-22 Nov): when the gain a quiet render needs
+# would lift its peaks over loudnorm's TP, loudnorm leaves linear mode for its dynamic one, and each lowered
+# TP pulled the loudness down with it (Luke 8: -21.1 LUFS after three masters, its target -17). And ffmpeg's
+# own AAC (the cloud runner) fills quiet bands with noise (perceptual noise substitution), which put peaks
+# 3-5 dB over a limited signal (Matthew 2: +3.9 dBTP); PNS is off for that encoder. The ENCODED file is
+# what is judged; a peak that still misses is limited again lower, from the same WAV (never a new render).
+LIMIT_OVERSAMPLE = 4
+LIMIT_MARGIN = 1.5       # the first limiter ceiling sits this far under the level's ceiling (the encoder's overshoot)
+LIMIT_DEPTH = 6.0        # never limit more than this under the ceiling: deeper flattens the voice; qa.check judges it
 MASTER_TRIES = 3
-# loudnorm's own TP range (ffmpeg -h filter=loudnorm: "from -9 to 0", the same on the Mac and the runner).
-# A lowered target outside it is refused by ffmpeg ("Error applying option 'TP'", 22 Nov 2026: 7 of 12
-# cloud shards died on it), so a re-master never asks for less than TP_FLOOR.
-TP_FLOOR, TP_TOP = -9.0, 0.0
+RATE_OUT = 24000
 
 
-def tp_target(tp: float) -> float:
-    """A true-peak target loudnorm accepts. Pure."""
-    return round(min(TP_TOP, max(TP_FLOOR, tp)), 1)
-
-
-def loudnorm_measured(stderr: str) -> dict:
-    """The JSON block loudnorm prints in pass 1 (print_format=json). Pure."""
-    m = re.search(r"\{[^{}]*\"input_i\"[^{}]*\}", stderr)
-    if not m:
-        raise RuntimeError(f"loudnorm pass 1 printed no measurement: {stderr.strip()[-200:]}")
-    return json.loads(m.group(0))
-
-
-def loudnorm_filter(i: float, tp: float, measured: dict | None = None) -> str:
-    """loudnorm for pass 1 (no measurement: print it) or pass 2 (apply it, linear). Pure."""
-    f = f"loudnorm=I={i}:TP={tp}:LRA={LRA}"
-    if measured is None:
-        return f + ":print_format=json"
-    return (f + f":measured_I={measured['input_i']}:measured_TP={measured['input_tp']}"
-            f":measured_LRA={measured['input_lra']}:measured_thresh={measured['input_thresh']}"
-            f":offset={measured['target_offset']}:linear=true:print_format=summary")
+def master_filter(gain_db: float, limit_db: float) -> str:
+    """Gain, then the oversampled true-peak limiter (no auto level: the gain is the loudness). Pure."""
+    return (f"volume={gain_db:.2f}dB,aresample={RATE_OUT * LIMIT_OVERSAMPLE},"
+            f"alimiter=limit={10 ** (limit_db / 20):.4f}:attack=1:release=50:level=false,aresample={RATE_OUT}")
 
 
 def aac_encoder() -> str:
@@ -682,34 +669,41 @@ def aac_encoder() -> str:
     return os.environ.get("PBS_AAC") or ("aac_at" if sys.platform == "darwin" else "aac")
 
 
-def master(wav: Path, out: Path, level: str, *, run=None, measure=None) -> dict:
-    """WAV -> mastered AAC-LC mono 48 kbps .m4a inside the level's bars (qa.BARS), judged on the
-    ENCODED file by qa.loudness. A miss is mastered again from the kept WAV: the true-peak target
-    lowered by the overshoot (+0.5 dB), the loudness target moved by the error; at most MASTER_TRIES.
-    Returns the last measurement and the targets used; the caller's qa.check is the final judge."""
+def aac_args(encoder: str) -> list[str]:
+    """AAC-LC mono 48 kbps; ffmpeg's own encoder without noise substitution (see the note above). Pure."""
+    return ["-c:a", encoder, "-b:a", "48k", *(["-aac_pns", "0"] if encoder == "aac" else [])]
+
+
+def master(wav: Path, out: Path, level: str, *, run=None, measure=None, encoder: str | None = None) -> dict:
+    """WAV -> mastered AAC-LC mono 48 kbps .m4a inside the level's bars (qa.BARS), judged on the ENCODED
+    file by qa.loudness. A peak over the ceiling is limited again lower by the overshoot (+0.3 dB, at most
+    LIMIT_DEPTH under the ceiling); a loudness miss moves the gain by the error; at most MASTER_TRIES, all
+    from the same WAV. Returns the last measurement, the gain and the limit; qa.check is the final judge."""
     import qa
     run = run or subprocess.run
     measure = measure or qa.loudness
+    encoder = encoder or aac_encoder()
     target, ceiling = LEVEL_TARGET[level]
     lo, hi = qa.BARS[level]["lufs"]
-    i, tp = target, tp_target(ceiling - TP_MARGIN)
+    src = measure(wav)
+    if not math.isfinite(src["lufs"]):
+        raise RuntimeError(f"the render is silent ({src['lufs']} LUFS): nothing to master")
+    gain, limit = round(target - src["lufs"], 2), ceiling - LIMIT_MARGIN
     for n in range(1, MASTER_TRIES + 1):
-        p1 = run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(wav), "-af", loudnorm_filter(i, tp), "-f", "null", "-"],
-                 capture_output=True, text=True, timeout=1800)
-        run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af", loudnorm_filter(i, tp, loudnorm_measured(p1.stderr)),
-             "-ac", "1", "-ar", "24000", "-c:a", aac_encoder(), "-b:a", "48k", "-movflags", "+faststart", str(out)],
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af", master_filter(gain, limit),
+             "-ac", "1", "-ar", str(RATE_OUT), *aac_args(encoder), "-movflags", "+faststart", str(out)],
             check=True, timeout=1800)
         got = measure(out)
         peak_ok, loud_ok = got["true_peak"] <= ceiling, lo <= got["lufs"] <= hi
         if peak_ok and loud_ok:
             break
         if not peak_ok:
-            if tp <= TP_FLOOR:      # nothing lower to ask loudnorm for: qa.check judges this encode
+            if limit <= ceiling - LIMIT_DEPTH:
                 break
-            tp = tp_target(tp - (got["true_peak"] - ceiling) - 0.5)
+            limit = round(max(ceiling - LIMIT_DEPTH, limit - (got["true_peak"] - ceiling) - 0.3), 1)
         if not loud_ok:
-            i = round(i + (target - got["lufs"]), 1)
-    return {**got, "tries": n, "i": i, "tp": tp}
+            gain = round(gain + (target - got["lufs"]), 2)
+    return {**got, "tries": n, "gain": gain, "limit": limit}
 
 
 def sha256(path: Path) -> str:
@@ -853,7 +847,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     t0 = time.monotonic()
     wav, out = work / "track.wav", work / Path(item["file"]).name
     result, attempts = None, 0
-    rendered, mastered = {}, {"tries": 0, "i": None, "tp": None}
+    rendered, mastered = {}, {"tries": 0, "gain": None, "limit": None}
     script = script_of(item)
     # A held copy of this file is re-checked under today's rules first: if it passes, no new render.
     # (Not for files with call-and-response marks: their pause timings come from the render itself.)
@@ -886,7 +880,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
         checks["notes"] = notes
         if result["pass"]:
             print(f"  NOTE {item['file']} shipped inside the margin: {'; '.join(notes)}")
-    checks["mastering"] = {k: mastered[k] for k in ("tries", "i", "tp")}
+    checks["mastering"] = {k: mastered[k] for k in ("tries", "gain", "limit")}
     if item.get("marks"):
         # Where the call-and-response quiet starts, as Hush Harbor rows carry it (the app shows the response then).
         checks["pause_starts_s"] = pause_starts(rendered.get("segs") or [], rendered.get("ends"))

@@ -220,8 +220,9 @@ def request_of(turns: list[dict]) -> dict:
 
 # ------------------------------------------------------------------ pure: checking a call
 def call_accuracy(text: str, transcript: str) -> float:
-    ref, hyp = T.score_words(text, "en"), T.score_words(transcript, "en")
-    return round(SequenceMatcher(None, ref, hyp, autojunk=False).ratio(), 4) if ref else 0.0
+    """The fill's word accuracy (qa.accuracy: the one judge's scoring). Pure."""
+    import qa
+    return qa.accuracy(text, transcript, "en")
 
 
 def align(turns: list[dict], words: list[tuple[str, float, float]]) -> list[tuple[float, float] | None]:
@@ -554,13 +555,12 @@ def write_wav(p: Path, x) -> None:
         w.writeframes(pcm)
 
 
-def heard_words(path: Path, model_size: str) -> tuple[str, list[tuple[str, float, float]]]:
-    """faster-whisper transcript and (score word, start, end) for every word."""
+def heard_words(path: Path, hint: str = "") -> tuple[str, list[tuple[str, float, float]]]:
+    """The fill's one judge (qa.judge_model): transcript and (score word, start, end) for every word."""
     import qa
-    if model_size not in qa._MODELS:
-        qa._MODELS[model_size] = qa.whisper_model(model_size)
-    segs, _ = qa._MODELS[model_size].transcribe(qa.decode(path, 16000), language="en", beam_size=5,
-                                                condition_on_previous_text=False, word_timestamps=True)
+    segs, _ = qa.judge_model().transcribe(qa.decode(path, 16000), language="en", beam_size=5,
+                                          condition_on_previous_text=False, word_timestamps=True,
+                                          hotwords=hint or None)
     text, words = [], []
     for s in segs:
         text.append(s.text.strip())
@@ -572,23 +572,21 @@ def heard_words(path: Path, model_size: str) -> tuple[str, list[tuple[str, float
 
 def check_call(call: dict, path: Path) -> tuple[list[str], list | None]:
     """Problems with a rendered call, and (for call B) the cut point in samples."""
+    import qa
     x = read_wav(path)
-    for size in ("base", "small"):
-        transcript, words = heard_words(path, size)
-        spans = align(call["turns"], words)
-        f0s = [median_f0(x[int(s * RATE):int(e * RATE)]) if sp and (e - s) >= PITCH_MIN_S else None
-               for sp in spans for s, e in [sp or (0, 0)]]
-        problems = call_problems(call["turns"], transcript, spans, f0s)
-        cut = None
-        if not problems and call.get("cut_after") is not None:
-            win = cut_window(call["turns"], words, call["cut_after"])
-            if win is None:
-                problems = ["no clean cut after the response line"]
-            else:
-                cut = quietest(x, *win)
-        if not problems:
-            return [], cut
-    return problems, None
+    transcript, words = heard_words(path, qa.hint(" ".join(t["text"] for t in call["turns"]), "en"))
+    spans = align(call["turns"], words)
+    f0s = [median_f0(x[int(s * RATE):int(e * RATE)]) if sp and (e - s) >= PITCH_MIN_S else None
+           for sp in spans for s, e in [sp or (0, 0)]]
+    problems = call_problems(call["turns"], transcript, spans, f0s)
+    cut = None
+    if not problems and call.get("cut_after") is not None:
+        win = cut_window(call["turns"], words, call["cut_after"])
+        if win is None:
+            problems = ["no clean cut after the response line"]
+        else:
+            cut = quietest(x, *win)
+    return (problems, None) if problems else ([], cut)
 
 
 def render_call(call: dict, path: Path, prefer: str | None = None) -> tuple[list[str], dict]:

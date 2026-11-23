@@ -308,10 +308,7 @@ def make_story(story: dict, work: Path, deadline: float | None = None) -> dict |
                 if ok.exists():
                     continue
                 holy = is_scripture(s, verses)
-                verdict = sentence_verdict(s, qa.transcribe(f, "en", "base"), holy)
-                if verdict != "ok":
-                    second = sentence_verdict(s, qa.transcribe(f, "en", "small"), holy)
-                    verdict = "ok" if "ok" in (verdict, second) else "near" if "near" in (verdict, second) else "bad"
+                verdict = sentence_verdict(s, qa.transcribe(f, "en", qa.hint(s, "en")), holy)
                 if verdict == "bad":
                     bad.append(f"t{ti}: \"{s[:40]}\" misheard{' (scripture)' if holy else ''}")
                     again([f])
