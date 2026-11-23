@@ -102,3 +102,6 @@ jobs:
           [ "$wl" = 405 ] || exit 1
           sv=$(curl -s https://peacebestillapp.com/api/social-visits); echo "social visits: $sv"
           echo "$sv" | grep -q '"sources":{"threads":' || { echo "NAMED STOP: SOCIAL_VISITS_UNREADABLE - /api/social-visits does not answer counts"; exit 1; }
+          echo "$sv" | grep -q '"store":{"total":[0-9]' || { echo "NAMED STOP: STORE_TAPS_UNREADABLE - /api/social-visits does not answer store-page visits (migration 0003 or the Worker)"; exit 1; }
+          go=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' https://peacebestillapp.com/go/app-store); echo "store tap: $go"
+          case "$go" in "302 https://peacebestillapp.com/#get-the-app"|"302 https://apps.apple.com/"*) ;; *) echo "NAMED STOP: STORE_TAPS_UNREADABLE - /go/app-store does not redirect to the store box or the listing"; exit 1;; esac

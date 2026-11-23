@@ -129,7 +129,7 @@ await check('recycles the oldest 60+ day evergreen post after the bank', () => {
 function fakeBuffer({ visits = null, channels, scheduled = [], refuseReel = false, refuseAll = false, mediaStatus = 200, errors = [] }) {
   const made = [];
   const fetchImpl = async (url, init) => {
-    if (String(url).includes('/api/social-visits')) return visits ?? { status: 200, json: async () => ({ days: 28, total: 7, counting_since: '2026-11-19', sources: { threads: 4, instagram: 2, facebook: 1 } }) };
+    if (String(url).includes('/api/social-visits')) return visits ?? { status: 200, json: async () => ({ days: 28, total: 7, counting_since: '2026-11-19', sources: { threads: 4, instagram: 2, facebook: 1 }, store: { total: 3, counting_since: '2026-11-23', sources: { threads: 2, instagram: 1, facebook: 0, direct: 5 } } }) };
     if (init?.method === 'HEAD') return { status: mediaStatus, headers: { get: () => (url.includes('.mp4') ? 'video/mp4' : 'image/png') } };
     const { query, variables } = JSON.parse(init.body);
     let data;
@@ -173,6 +173,14 @@ await check('not connected: green notes, the OUTPUT line, metrics written, never
   const md = JSON.parse(fs.readFileSync(down.metricsFile, 'utf8'));
   assert.equal(md.social_visits_28d, 'not read', 'a failed count read must not write a number'); assert.match(md.social_visits_28d_why, /503/);
   assert.equal(md.channels.threads.visits_28d, 'not read'); assert.ok(md.channels.threads.visits_28d_why);
+  // Store-page visits (social_store_visits_28d): the site's store-badge tap count, never a constant.
+  assert.equal(m.social_store_visits_28d, 3, 'store-page visit count not written'); assert.equal(m.social_store_visits_counting_since, '2026-11-23');
+  assert.equal(m.social_store_visits_28d_why, undefined, 'a read number carries no why');
+  assert.equal(md.social_store_visits_28d, 'not read', 'a failed read must not write a store number'); assert.match(md.social_store_visits_28d_why, /503/);
+  const old = await run({ fetchImpl: fakeBuffer({ channels: [apIg, th], visits: { status: 200, json: async () => ({ days: 28, total: 7, counting_since: '2026-11-19', sources: { threads: 4, instagram: 2, facebook: 1 } }) } }).fetchImpl });
+  const mo = JSON.parse(fs.readFileSync(old.metricsFile, 'utf8'));
+  assert.equal(mo.social_visits_28d, 7);
+  assert.equal(mo.social_store_visits_28d, 'not read', 'no store block must not write a number'); assert.match(mo.social_store_visits_28d_why, /store block/);
 });
 await check('named stops', async () => {
   assert.equal((await run({ env: {} })).e?.code, `SECRET_MISSING_${TOKEN_ENV}`);

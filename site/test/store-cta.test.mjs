@@ -5,6 +5,14 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { appStoreHref, claimHtml, claimKind, storeCtaHtml, storeConfig, langOf, sourceOf } from "../content/parts.mjs";
 import { doorOf } from "../scripts/apply-cta.mjs";
+import { goTarget } from "../src/app.js";
+
+// A badge links to our own /go/<store>; the Worker turns that link back into the listing URL.
+const listing = (html, kind, store) => {
+  const m = html.match(new RegExp(`<a class="store-badge" href="(/go/${kind === "ios" ? "app-store" : "google-play"}[^"]*)"`));
+  assert.ok(m, `no ${kind} badge`);
+  return goTarget(new URL(`https://peacebestillapp.com${m[1].replace(/&amp;/g, "&")}`), store).location;
+};
 
 const IOS = "https://apps.apple.com/us/app/peace-be-still/id1234567890";
 const PLAY = "https://play.google.com/store/apps/details?id=com.example.pbs";
@@ -21,11 +29,13 @@ test("null store URLs render coming-soon text, never a badge, a date or 'availab
 
 test("each store flips on its own: a URL renders that store's badge linking to it", () => {
   const ios = storeCtaHtml("en", { app_store_url: IOS, play_url: null });
-  assert.ok(ios.includes(`<a class="store-badge" href="${IOS}"><img src="/brand/stores/app-store-en.svg"`));
+  assert.ok(ios.includes(`<a class="store-badge" href="/go/app-store"><img src="/brand/stores/app-store-en.svg"`));
+  assert.equal(listing(ios, "ios", { app_store_url: IOS, play_url: null }), IOS);
   assert.match(ios, /Coming soon to Google Play/);
   assert.doesNotMatch(ios, /Coming soon to the App Store/);
   const both = storeCtaHtml("es", { app_store_url: IOS, play_url: PLAY });
-  assert.ok(both.includes(`href="${PLAY}"><img src="/brand/stores/google-play-es.png"`));
+  assert.ok(both.includes(`href="/go/google-play"><img src="/brand/stores/google-play-es.png"`));
+  assert.equal(listing(both, "play", { app_store_url: IOS, play_url: PLAY }), PLAY);
   assert.doesNotMatch(both, /Muy pronto/);
 });
 
@@ -86,8 +96,8 @@ test("privacy leads (her ruling 21 Nov 2026): the home hero and the Bible chat p
 test("each page's store links name the page that sent the buyer", () => {
   const store = { app_store_url: "https://apps.apple.com/us/app/peace-be-still/id1", play_url: "https://play.google.com/store/apps/details?id=x", app_store_pt: "123" };
   const h = storeCtaHtml("en", store, sourceOf("questions/hallow-app-cost/index.html"));
-  assert.match(h, /id1\?pt=123&ct=questions-hallow-app-cost&mt=8"/);
-  assert.match(h, /details\?id=x&referrer=utm_source%3Dpeacebestillapp\.com%26utm_medium%3Dsite%26utm_campaign%3Dquestions-hallow-app-cost"/);
+  assert.equal(listing(h, "ios", store), "https://apps.apple.com/us/app/peace-be-still/id1?pt=123&ct=questions-hallow-app-cost&mt=8");
+  assert.equal(listing(h, "play", store), "https://play.google.com/store/apps/details?id=x&referrer=utm_source%3Dpeacebestillapp.com%26utm_medium%3Dsite%26utm_campaign%3Dquestions-hallow-app-cost");
   assert.equal(sourceOf("index.html"), "home");
   assert.equal(sourceOf("es/index.html"), "es");
   assert.doesNotMatch(storeCtaHtml("en", store), /ct=|referrer=/); // a link with no page says nothing
@@ -100,13 +110,29 @@ test("a landing page's App Store link opens its custom product page and names th
     { page: "hush-harbor", ppid: "h-1", paths: ["questions/who-is-black-in-the-bible/"] },
   ] };
   const rel = "questions/bible-verses-for-grief/index.html";
-  assert.match(storeCtaHtml("en", store, sourceOf(rel), rel), /href="https:\/\/apps\.apple\.com\/us\/app\/peace-be-still\/id1\?ppid=g-1&pt=123&ct=questions-bible-verses-for-grief&mt=8"/);
+  assert.equal(listing(storeCtaHtml("en", store, sourceOf(rel), rel), "ios", store), "https://apps.apple.com/us/app/peace-be-still/id1?ppid=g-1&pt=123&ct=questions-bible-verses-for-grief&mt=8");
   // Exact paths only: a sibling page with the same start does not inherit the mapping.
   assert.equal(appStoreHref(store, "questions/who-is-black-in-the-bible-really/index.html"), store.app_store_url);
   assert.equal(appStoreHref(store, "questions/hallow-app-cost/index.html"), store.app_store_url);
   // A folder prefix covers the Spanish site; an exact path beats it.
   assert.equal(appStoreHref(store, "es/preguntas/salmos-para-dormir/index.html"), `${store.app_store_url}?ppid=m-1`);
   assert.equal(appStoreHref({ ...store, app_store_url: null }, rel), null);
+});
+
+test("every built page's badges, once a store is set, open that page's tagged listing through /go/", () => {
+  const pub = new URL("../public/", import.meta.url).pathname;
+  const store = { ...storeConfig(), app_store_url: "https://apps.apple.com/us/app/peace-be-still/id1", play_url: "https://play.google.com/store/apps/details?id=x", app_store_pt: "123" };
+  let n = 0;
+  (function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); if (statSync(p).isDirectory()) walk(p); else if (f.endsWith(".html")) {
+    const s = readFileSync(p, "utf8"); if (!s.includes("<!-- cta:start -->")) continue;
+    const rel = p.slice(pub.length), src = sourceOf(rel), door = doorOf(s);
+    const h = storeCtaHtml(langOf(s), store, src, rel, door);
+    const ppid = appStoreHref(store, rel, door).match(/ppid=([^&]+)/)?.[1];
+    assert.equal(listing(h, "ios", store), `${store.app_store_url}${ppid ? `?ppid=${ppid}&` : "?"}pt=123&ct=${src}&mt=8`, rel);
+    assert.match(listing(h, "play", store), new RegExp(`utm_campaign%3D${src}$`), rel);
+    n++;
+  } } })(pub);
+  assert.ok(n >= 10, `only ${n} pages checked`);
 });
 
 test("every custom product page mapping lands on a real page", () => {

@@ -11,7 +11,8 @@
 //     addresses except the published contact info@peacebestillapp.com (the legal pages must name
 //     one), no third-party scripts; a negated "does not guarantee" (the disclaimer) is not a promise;
 // (5) store badges and store links only inside the one store CTA (<!-- cta:start -->…<!-- cta:end -->,
-//     from site/config/store.json), or as a sourced fact link <a class="src" rel="nofollow noopener">;
+//     from site/config/store.json; its badges link our own /go/app-store and /go/google-play, which count
+//     the tap and redirect to the listing), or as a sourced fact link <a class="src" rel="nofollow noopener">;
 //     never "available now" while store.json has no URL.
 // Exits 1 on any finding, and 1 if it read zero pages (rule 0). --self-test proves it can fail.
 import { readdirSync, readFileSync, statSync } from "node:fs";
@@ -48,7 +49,7 @@ export function check(files) {
     const outside = text.replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, "").replace(/<a class="src" rel="nofollow noopener" href="https:\/\/apps\.apple\.com\/[^"]+">/g, "")
       // The legal pages' cancel link to Google Play's own subscription settings is not a store listing.
       .replace(/<a class="src" rel="nofollow noopener" href="https:\/\/play\.google\.com\/store\/account\/subscriptions">/g, "");
-    const store = outside.match(/apps\.apple\.com|play\.google\.com\/store|download on the app store|get it on google play|\/brand\/stores\//i);
+    const store = outside.match(/apps\.apple\.com|play\.google\.com\/store|download on the app store|get it on google play|\/brand\/stores\/|\/go\/(?:app-store|google-play)\b/i);
     if (store) findings.push(`${name}: a store link or badge outside the store CTA (${store[0]})`);
     if (!live && /available now|disponible ya/i.test(text)) findings.push(`${name}: "available now" while no store URL is set`);
     for (const [re, why] of banned) if (re.test(text)) findings.push(`${name}: ${why} (${text.match(re)[0]})`);
@@ -93,8 +94,9 @@ if (process.argv.includes("--self-test")) {
     ["c.html", "<p>the law of assumption</p><script src=\"https://t.example/x.js\"></script>"],
     ["e.html", "<p>We guarantee sleep. Write to someone@peacebestillapp.com.</p>"],
     ["p.html", '<a class="src" rel="nofollow noopener" href="https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile">get</a>'],
+    ["q.html", '<p>Get the app: <a href="/go/app-store?ct=home">App Store</a></p><!-- cta:start --><a class="store-badge" href="/go/google-play">x</a><!-- cta:end -->'],
   ]);
-  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD", "e.html: outcome or health promise", "e.html: an email address", "g.html: manifesting words on a faith page", "h.txt: manifesting words on a neutral page (law of attraction)", "p.html: a store link or badge outside the store CTA"];
+  const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD", "e.html: outcome or health promise", "e.html: an email address", "g.html: manifesting words on a faith page", "h.txt: manifesting words on a neutral page (law of attraction)", "p.html: a store link or badge outside the store CTA", "q.html: a store link or badge outside the store CTA (/go/app-store)"];
   const missing = want.filter((w) => !bad.some((f) => f.includes(w)));
   if (missing.length) { console.error(`check-site --self-test: did not catch: ${missing.join("; ")}`); process.exit(1); }
   if (bad.some((f) => f.startsWith("b.html"))) { console.error("check-site --self-test: flagged a clean mindset page"); process.exit(1); }
