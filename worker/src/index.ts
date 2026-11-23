@@ -35,7 +35,7 @@ import { busyText, shortBusyText, checkInQuestion, checkInText, consentText, cri
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
-import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY, providers, type Translation } from './shared';
+import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY, providers, teenProviders, type Translation } from './shared';
 import { issueToken, RENEW_GRACE_DAYS, verifyToken, type Install } from './token';
 
 import type { ChatRequest, ChatResponse } from '../../app/src/chat/contract';
@@ -46,8 +46,9 @@ export type Deps = {
   risk: (env: Env, turns: Turn[]) => Promise<RiskVerdict>;
   /** lane: the free lane's judge has no billed backup (brain rule: free chat never touches the billed key). */
   judge: (env: Env, input: JudgeInput, lane: Lane) => Promise<JudgeVerdict>;
-  /** The free lane by default (the order the privacy policy names); 'paid' is the billed, private model only. */
-  rungs: (env: Env, now: number, lane?: Lane) => LadderRung[];
+  /** The free lane by default (the order the privacy policy names); 'paid' is the billed, private model only.
+   *  teen: the free lane keeps only the rungs that never train (providers.mjs teenProviders); paid and crisis are private already. */
+  rungs: (env: Env, now: number, lane?: Lane, teen?: boolean) => LadderRung[];
   paid: (env: Env, installId: string, now: number) => Promise<Paid>;
   /** Apple DeviceCheck bit0 for the private first chat (firstprivate.ts): 'new' (now set), 'used', or 'error' (fail closed). */
   deviceCheck: (env: Env, token: string, now: number) => Promise<DeviceBit>;
@@ -209,7 +210,7 @@ export const realDeps: Deps = {
     }
     return check(env, now, first, judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free');
   },
-  rungs(env, now, lane = 'free') {
+  rungs(env, now, lane = 'free', teen = false) {
     // The private model, then (when it is not Gemini already) Gemini on the billed key: both private, both paid.
     if (lane === 'paid') return (env.PAID_PROVIDER as string) !== 'gemini' && env.PAID_BACKUP_MODEL ? [paidRung(env, now), paidBackupRung(env, now)] : [paidRung(env, now)];
     if (lane === 'crisis') return [crisisRung(env, now)];
@@ -218,7 +219,7 @@ export const realDeps: Deps = {
       'gemini-free': geminiModels(env).map(model => geminiRung(env, model, now)),
       'openrouter-free': [{ id: 'openrouter-free', call: openRouter(env.OPENROUTER_API_KEY, env.OPENROUTER_MODELS.split(',')), cap: int(env.OPENROUTER_CALLS_DAILY, 900), day: utcDay(now) }],
     };
-    return providers.flatMap(p => built[p.id] ?? []);
+    return (teen ? teenProviders : providers).flatMap(p => built[p.id] ?? []);
   },
   paid: (env, installId, now) => paidStatus(env, installId, now),
   deviceCheck: (env, token, now) => appleDeviceCheck(env, token, now),
@@ -254,10 +255,17 @@ function parseChat(body: unknown): ChatRequest | null {
   return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true, freeConsent: b.freeConsent === true, overflowConsent: b.overflowConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
 }
 
+/** Who is a teen for routing and rules: the age band inside the SIGNED token, never a request field.
+ *  Anything not known to be adult is a teen (unknown age = teen). A request may only make routing
+ *  stricter (a teen voice or a teen age field on an adult token), never looser. */
+export const teenInstall = (install: Pick<Install, 'age'>) => install.age !== 'adult';
+export const teenRoute = (install: Pick<Install, 'age'>, raw: Record<string, unknown> | null, req: Pick<ChatRequest, 'voice'>) =>
+  teenInstall(install) || req.voice === 'teen' || raw?.age === 'teen' || raw?.ageBand === 'teen';
+
 /** Mi Refugio, the Spanish voice or a Spanish phone: Spanish and the Reina-Valera 1909. Teens keep the teen rules in their language. */
 export function voiceFor(req: ChatRequest, install: Install): { lang: Lang; translation: Translation; prompt: PromptId; teen: boolean } {
   const lang: Lang = req.journey === 'mi-refugio' || req.journey === 'Mi Refugio' || req.voice === 'spanish' || req.language === 'es' ? 'es' : 'en';
-  const teen = install.age === 'teen';
+  const teen = teenInstall(install);
   // The Mindset door keeps its own prompt for teens too (F8: no faith words); the teen rules are added to it.
   const prompt: PromptId = req.door === 'mindset' ? 'mindset' : teen ? (lang === 'es' ? 'teen-es' : 'teen') : lang === 'es' ? 'spanish' : req.voice === 'church' ? 'church' : 'plain';
   return { lang, translation: lang === 'es' ? 'RV1909' : 'KJV', prompt, teen };
@@ -332,6 +340,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const req = parseChat(raw);
   if (!req) return fail('BAD_REQUEST', 400);
   const v = voiceFor(req, who);
+  // Teens' words only ever reach rungs that never train (13-17 and unknown age; teenRoute above).
+  const teenOnly = teenRoute(who, raw, req);
   const me = who; const ask = req; // narrowed, for the answer function below
   // The Mindset door has no faith words in any reply (F8).
   const mind = req.door === 'mindset';
@@ -558,7 +568,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Only the last CHAT_HISTORY_TURNS turns travel to the model (a paid user's memory note carries the rest).
   // On the free lane she chose after her private messages, only the new message travels: the earlier turns were private.
   const history: Message[] = (lane === 'free' && (overflow || firstHistory) ? turns.slice(-1) : turns.slice(-int(env.CHAT_HISTORY_TURNS, 6))).map(t => ({ role: t.role, content: t.text }));
-  const rungs = deps.rungs(env, now, lane);
+  const rungs = deps.rungs(env, now, lane, teenOnly);
   // The crisis model thinks (CRISIS_THINKING_LEVEL) and Gemini counts thinking inside the output cap:
   // at 350 it ran out mid-answer (run 10d: 21 of 48 crisis-lane answers malformed, 7 sent as busy).
   // Only the tokens used are billed, so the headroom costs nothing when unused.

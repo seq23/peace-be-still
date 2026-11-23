@@ -2,11 +2,11 @@
 
 > Esta es una traducción al español. Si esta versión y la [versión en inglés](https://peacebestillapp.com/privacy) no dicen lo mismo, prevalece la versión en inglés.
 
-Vigente desde: 22 de noviembre de 2026
+Vigente desde: 23 de noviembre de 2026
 
 Esta política cubre la app Peace Be Still y el sitio web peacebestillapp.com. Peace Be Still es una app de Spry Labs, el nombre comercial de Redwood Reserve Holdings LLC, una compañía de responsabilidad limitada de Wyoming. Escriba a info@peacebestillapp.com con cualquier pregunta o solicitud sobre privacidad.
 
-En pocas palabras: no hay cuenta, nunca le pedimos su nombre, no hay anuncios y no vendemos ni compartimos información personal. El chat gratis va a proveedores gratuitos de IA, que pueden guardar lo que usted escribe y aprender de ello. El chat de pago es privado: va a un servicio de IA de pago que no lo usa para mejorar su IA.
+En pocas palabras: no hay cuenta, nunca le pedimos su nombre, no hay anuncios y no vendemos ni compartimos información personal. El chat gratis va a proveedores gratuitos de IA, que pueden guardar lo que usted escribe y aprender de ello. De 13 a 17 años, el chat gratis va solo a Cloudflare Workers AI, que no entrena con él. El chat de pago es privado: va a un servicio de IA de pago que no lo usa para mejorar su IA.
 
 ## Lo que se queda en su teléfono
 
@@ -16,7 +16,7 @@ Su año de nacimiento, la puerta que eligió, su configuración, los versículos
 
 El chat es opcional, gratis o de pago. Antes de su primer chat gratis, la app le pide permiso con palabras sencillas y le dice adónde van sus palabras; sin ese sí no hay chat gratis, y la app lo recuerda en su teléfono. También puede elegir hacer privado el chat.
 
-Chat gratis: cada mensaje pasa por nuestro servicio hasta un proveedor de IA, que escribe la respuesta. Los proveedores, en el orden en que se prueban, son Cloudflare Workers AI, Google Gemini (en su nivel gratuito) y modelos gratuitos a los que se llega por medio de OpenRouter. Estos proveedores pueden guardar y usar lo que usted escribe para mejorar sus servicios, y personas de esas empresas pueden leerlo. Por favor, no incluya nombres ni nada que lo identifique a usted o a otra persona.
+Chat gratis: cada mensaje pasa por nuestro servicio hasta un proveedor de IA, que escribe la respuesta. Los proveedores, en el orden en que se prueban, son Cloudflare Workers AI, Google Gemini (en su nivel gratuito) y modelos gratuitos a los que se llega por medio de OpenRouter. Estos proveedores pueden guardar y usar lo que usted escribe para mejorar sus servicios, y personas de esas empresas pueden leerlo. Por favor, no incluya nombres ni nada que lo identifique a usted o a otra persona. De 13 a 17 años, el chat gratis va solo a Cloudflare Workers AI, que no usa lo que usted escribe para entrenar modelos de IA; cuando está ocupado, el chat dice que está descansando y no prueba ningún otro proveedor.
 
 Chat de pago: cada mensaje pasa por nuestro servicio hasta un servicio de IA de pago, con condiciones que no le permiten usar lo que usted escribe para entrenar o mejorar su IA (hoy, DeepSeek V4.1 Flash por medio de OpenRouter, atendido solo por DeepInfra, Together o Fireworks en Estados Unidos sin retención de datos, nunca por DeepSeek mismo; si no están disponibles, Google Gemini en un plan de pago. Si los cambiamos, será otro servicio de pago con la misma promesa, nombrado aquí). El chat de pago nunca pasa a un proveedor gratuito, salvo que usted elija el chat gratis después de sus mensajes privados, o mientras el servicio de pago no esté disponible; la app siempre pregunta primero.
 
@@ -32,7 +32,7 @@ Si usted tiene un plan de pago, el chat puede recordar lo que le pesa. Esa memor
 
 ## Sesiones hechas para usted
 
-Si usted tiene un plan de pago y pide una sesión hecha para usted, la escena o la preocupación que escriba se envía a nuestro servicio. Proveedores gratuitos de IA escriben el guion de la sesión a partir de sus palabras, y pueden guardar lo que usted escribe y aprender de ello, igual que en el chat (el formulario se lo dice antes de enviar). Cuando los proveedores gratuitos están ocupados, o un borrador gratuito no pasa nuestros controles después de una revisión, lo escribe en su lugar un modelo privado de pago, a través de servidores que no guardan nada de lo que usted envía y nunca entrenan con ello. Hacemos el audio en nuestra propia computadora con un motor de voz de código abierto. Sus palabras escritas se borran en cuanto se hace el audio, y a más tardar 7 días después de que las envíe. El audio terminado se guarda para que usted lo escuche hasta que lo borre, o hasta 30 días después de que termine su plan de pago.
+Si usted tiene un plan de pago y pide una sesión hecha para usted, la escena o la preocupación que escriba se envía a nuestro servicio. Proveedores gratuitos de IA escriben el guion de la sesión a partir de sus palabras, y pueden guardar lo que usted escribe y aprender de ello, igual que en el chat (el formulario se lo dice antes de enviar). De 13 a 17 años no se usa ningún proveedor gratuito que pueda aprender de ello: lo escriben y lo revisan Cloudflare Workers AI o el modelo privado de pago. Cuando los proveedores gratuitos están ocupados, o un borrador gratuito no pasa nuestros controles después de una revisión, lo escribe en su lugar un modelo privado de pago, a través de servidores que no guardan nada de lo que usted envía y nunca entrenan con ello. Hacemos el audio en nuestra propia computadora con un motor de voz de código abierto. Sus palabras escritas se borran en cuanto se hace el audio, y a más tardar 7 días después de que las envíe. El audio terminado se guarda para que usted lo escuche hasta que lo borre, o hasta 30 días después de que termine su plan de pago.
 
 ## Uso justo y registros de seguridad
 
@@ -68,7 +68,7 @@ Para menores de 13 años, la app no envía a nuestro servicio ningún chat, memo
 
 No recopilamos a sabiendas información personal de niños menores de 13 años. Si usted cree que un niño nos envió información, escriba a info@peacebestillapp.com y la borraremos.
 
-De 13 a 17 años, el chat usa la voz para adolescentes, y las compras de un plan de pago pasan por Solicitar la compra (Ask to Buy) de Apple, o por la aprobación de compras de Google Play en Family Link, cuando uno de los padres lo ha activado.
+De 13 a 17 años, el chat usa la voz para adolescentes, el chat y las sesiones hechas para usted van solo a servicios de IA que no entrenan con lo que se escribe (Cloudflare Workers AI, o los servicios de pago nombrados arriba), y las compras de un plan de pago pasan por Solicitar la compra (Ask to Buy) de Apple, o por la aprobación de compras de Google Play en Family Link, cuando uno de los padres lo ha activado.
 
 ## Dónde se ofrece la app
 

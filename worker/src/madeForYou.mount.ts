@@ -13,7 +13,7 @@ import { crisisText } from './replies';
 import { banned } from './shared';
 import type { Install } from './token';
 import type { Deps } from './index';
-import { createMadeForYou, madeForYouEnv, madeForYouRungs, verbatimScripture, type PaidCall } from './madeForYou';
+import { createMadeForYou, madeForYouEnv, madeForYouRungs, verbatimScripture, type MadeForYouDependencies, type PaidCall } from './madeForYou';
 import config from './madeForYou.config.json';
 import { r2Private } from './madeForYou.storage';
 
@@ -53,6 +53,22 @@ export async function bookPaidSpend(db: D1Database, now: number, metrics: Map<st
 
 const central = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit' });
 
+/** Made for you's one ladder: chat's rungs (a teen's note only on rungs that never train), then the private paid rung. */
+export function madeForYouLadder(env: Env, deps: Deps): MadeForYouDependencies['ladder'] {
+  return async (use, messages, schema, maxTokens, valid, signal, paidOnly, teen) => {
+    const now = deps.now();
+    const metrics = new Map<string, number>();
+    const rungs = madeForYouRungs(deps.rungs(madeForYouEnv(env), now, 'free', teen), use, chatShare(env.DB), signal, await paidCall(env, now), paidOnly);
+    try {
+      const result = await runLadder(env.DB, rungs, messages, schema as never, maxTokens, metrics, valid);
+      // Which rung answered (a code, never the text): the soak's live log and the paid fallback's own count.
+      if ('rung' in result) logCode('MADE_FOR_YOU_RUNG', { use, rung: result.rung });
+      return result;
+    }
+    finally { const capUsd = Number(env.PAID_AI_MONTHLY_CAP_USD); await bookPaidSpend(env.DB, now, metrics, Number.isFinite(capUsd) && capUsd >= 0 ? capUsd : 100); }
+  };
+}
+
 export function madeForYou(env: Env & MadeForYouEnv, deps: Deps, install: InstallReader, graceDays: number) {
   const storage = r2Private({
     accountId: env.CF2_ACCOUNT_ID, accessKeyId: env.PBS_MFY_R2_ACCESS_KEY_ID,
@@ -85,18 +101,7 @@ export function madeForYou(env: Env & MadeForYouEnv, deps: Deps, install: Instal
       return level.level === 'none' ? { fired: false, read: level.read } : { fired: true, kind: level.kind };
     },
     crisisText: (kind, lang, age, text, door) => crisisText(kind, lang, age, text, door),
-    async ladder(use, messages, schema, maxTokens, valid, signal, paidOnly) {
-      const now = deps.now();
-      const metrics = new Map<string, number>();
-      const rungs = madeForYouRungs(deps.rungs(madeForYouEnv(env), now), use, chatShare(env.DB), signal, await paidCall(env, now), paidOnly);
-      try {
-        const result = await runLadder(env.DB, rungs, messages, schema as never, maxTokens, metrics, valid);
-        // Which rung answered (a code, never the text): the soak's live log and the paid fallback's own count.
-        if ('rung' in result) logCode('MADE_FOR_YOU_RUNG', { use, rung: result.rung });
-        return result;
-      }
-      finally { const capUsd = Number(env.PAID_AI_MONTHLY_CAP_USD); await bookPaidSpend(env.DB, now, metrics, Number.isFinite(capUsd) && capUsd >= 0 ? capUsd : 100); }
-    },
+    ladder: madeForYouLadder(env, deps),
     checkProse: (draft, ctx) => checkAnswer(draft, { ...ctx, db: env.DB }),
     verbatim: (translation, text) => verbatimScripture(env.DB, translation, text),
     judgeShared: { schema: judgeSchema, verdict: judgeVerdict },

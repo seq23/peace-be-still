@@ -46,6 +46,6 @@ The Android launcher icon's foreground (`app/assets/adaptive-icon.png`) is the a
 
 ## Lanes and models (env, `worker/wrangler.jsonc`)
 
-- Free: `providers.mjs` order (Workers AI, Gemini free on `PBS_FREE_GEMINI_API_KEY`, OpenRouter free). Needs the person's consent (`freeConsent`).
+- Free: `providers.mjs` order (Workers AI, Gemini free on `PBS_FREE_GEMINI_API_KEY`, OpenRouter free). Needs the person's consent (`freeConsent`). Teens (13-17, and any token not signed adult) get only the rungs with `trains: false` (`teenProviders`: Workers AI); when it is out or down they get the resting reply, never a training rung (`worker/test/teen-routing.test.ts`).
 - Paid: `PAID_PROVIDER` + `PAID_MODEL` on the billed key `PBS_GEMINI_API_KEY` (or Workers AI, or OpenRouter with zero data retention). Never falls back to free.
 - Crisis: `CRISIS_MODEL` on the billed key, for any conversation the safety check flags; it decays after 10 calm turns or 24 hours.

@@ -227,7 +227,7 @@ const deps = {
   ...m.realDeps,
   // Every provider call is recorded by rung and outcome (draft and judge told apart by their token room).
   // The per-call timeout and usage meter are passed through (made for you's 90 s, config.callTimeoutMs).
-  rungs: (e, now) => keep(m.realDeps.rungs(e, now)).map(rung => ({ ...rung, async call(messages, schema, maxTokens, ...rest) {
+  rungs: (e, now, lane, teen) => keep(m.realDeps.rungs(e, now, lane, teen)).map(rung => ({ ...rung, async call(messages, schema, maxTokens, ...rest) {
     const use = maxTokens > 1000 ? 'draft' : 'judge';
     try { const out = await rung.call(messages, schema, maxTokens, ...rest); log({ event: 'call', id: claiming, use, rung: rung.id, outcome: 'ok' });
  claiming && (calls[claiming] ??= []).push(`${use}:${rung.id}`);
