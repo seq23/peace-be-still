@@ -501,6 +501,9 @@ def main(argv=None) -> int:
 if __name__ == "__main__":
     try:
         sys.exit(main())
+    except qa.JudgeUnavailable as e:   # the judge missing is never a verdict: nothing was written, the next run retries
+        print(str(fill.NamedStop("JUDGE_UNAVAILABLE", str(e))), file=sys.stderr)
+        sys.exit(9)
     except fill.NamedStop as e:
         print(str(e), file=sys.stderr)
         sys.exit(e.exit_code)

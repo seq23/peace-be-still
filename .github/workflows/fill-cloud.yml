@@ -101,7 +101,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - uses: actions/cache@v4
-        with: { path: "~/kokoro\n~/.cache/huggingface", key: kokoro-v1.0-whisper-1 }
+        with: { path: "~/kokoro\n~/.cache/huggingface", key: kokoro-v1.0-whisper-large-v3-turbo }
       - name: Runner setup (Kokoro)
         env: { PBS_RCLONE_CONF: "${{ secrets.PBS_RCLONE_CONF }}" }
         run: audio/cloud/setup.sh kokoro
@@ -134,7 +134,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - uses: actions/cache@v4
-        with: { path: "~/.cache/huggingface\n~/.cache/torch", key: chatterbox-0.1.7-whisper-1 }
+        with: { path: "~/.cache/huggingface\n~/.cache/torch", key: chatterbox-0.1.7-whisper-large-v3-turbo }
       - name: Runner setup (Chatterbox)
         env: { PBS_RCLONE_CONF: "${{ secrets.PBS_RCLONE_CONF }}" }
         run: audio/cloud/setup.sh chatterbox

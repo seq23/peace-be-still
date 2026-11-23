@@ -116,7 +116,9 @@ def number_words(n: int, lang: str) -> str:
 def score_words(text: str, lang: str) -> list[str]:
     """Lower-case words without accents or punctuation; digits as words. Used on the script AND
     the transcript, so both are read the same way (RV1909's old "á" and today's "a" match)."""
-    s = unicodedata.normalize("NFD", text.lower())
+    # The KJV's ligatures are two letters ("Cæsar", "Judæa"): NFD keeps æ as one letter that the
+    # filter below drops, which split "Cæsar" into "c sar" and failed Acts 26 on its last word (A07).
+    s = unicodedata.normalize("NFD", text.lower().replace("æ", "ae").replace("œ", "oe"))
     s = "".join(ch for ch in s if unicodedata.category(ch) != "Mn")
     s = re.sub(r"(\d),(\d)", r"\1\2", s)
     s = re.sub(r"\d+", lambda m: " " + number_words(int(m.group()), lang) + " ", s)

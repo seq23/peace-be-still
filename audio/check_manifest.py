@@ -1,5 +1,5 @@
 """Gate on audio/manifest.jsonl (CI): every row has its fields, a passed row has a sha256, a Drive
-path and checks that pass the bars, a FAILED row names its problems, no file appears twice, and
+path and checks that pass the bars, a FAILED or held row names its problems, no file appears twice, and
 every voice id is listed in VOICES.md (QUALITY.md A09). Audio files themselves are never in git.
 Exit 1 with problems by name; --self-test proves each broken shape is caught."""
 import json
@@ -29,11 +29,11 @@ def problems(rows, voices_md):
                 out.append(f"{where}: passed but not shelved on Drive")
             if (r.get("checks") or {}).get("problems"):
                 out.append(f"{where}: passed with problems listed")
-        elif r.get("status") == "FAILED":
+        elif r.get("status") in ("FAILED", "held"):   # held: every route failed (fill.ROUTES); never in the app
             if not (r.get("checks") or {}).get("problems"):
-                out.append(f"{where}: FAILED without naming why")
+                out.append(f"{where}: {r['status']} without naming why")
         else:
-            out.append(f"{where}: status {r.get('status')!r} is neither passed nor FAILED")
+            out.append(f"{where}: status {r.get('status')!r} is not passed, FAILED or held")
     return out
 
 
@@ -50,6 +50,7 @@ def main():
                   ("no hash", [{**good, "sha256": None}]),
                   ("not shelved", [{**good, "shelved": None}]),
                   ("failed silently", [{**good, "status": "FAILED"}]),
+                  ("held silently", [{**good, "status": "held"}]),
                   ("unknown status", [{**good, "status": "skipped"}])]
         assert not problems([good], voices), problems([good], voices)
         assert not problems([{**good, "voice": "gemini:hush-harbor"}], voices)

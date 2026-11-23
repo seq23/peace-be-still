@@ -17,7 +17,7 @@ is rendered as two calls instead (3 in all).
 
 Checks: each call's word accuracy vs its text (old spellings forgiven, as in the fill), and each
 turn's pitch (median F0 over its time span) inside its voice's band; a call that misses is rendered
-again (MAX_TRIES). The joined file: fill.master (-22 LUFS, two-pass loudnorm, AAC m4a) then qa.check, the
+again (MAX_TRIES). The joined file: fill.master (-22 LUFS, gain + true-peak limiter, AAC m4a) then qa.check, the
 library fill's own checks. Then gdrive:Mac-Shelf/peace-be-still/stories/hush-harbor/en/ + md5
 check, the Mac copy deleted, a manifest row (audio/manifest.jsonl, with the model(s) used).
 
@@ -691,12 +691,12 @@ def census(stories: list[dict], rows: list[dict]) -> dict:
     last = fill.latest(rows)
     mine = [last[row_file(s)] for s in stories if row_file(s) in last]
     return {"total": len(stories), "passed": sum(r.get("status") == "passed" for r in mine),
-            "failed": sum(r.get("status") == "FAILED" for r in mine), "given_up": fill.given_up(stories, rows, row_file)}
+            "failed": sum(r.get("status") == "FAILED" for r in mine), "held": fill.held_files(stories, rows, row_file)}
 
 
 def census_line(c: dict) -> str:
     line = f"hush harbor: {c['passed']} of {c['total']} stories voiced, {c['failed']} failed"
-    return line + (f"; {fill.given_up_line(c['given_up'])}" if c.get("given_up") else "")
+    return line + (f"; {fill.held_line(c['held'])}" if c.get("held") else "")
 
 
 def taken_by_clone(work: Path) -> bool:
@@ -912,6 +912,9 @@ def main(argv=None) -> int:
 if __name__ == "__main__":
     try:
         sys.exit(main())
+    except qa.JudgeUnavailable as e:   # the judge missing is never a verdict: nothing was written, the next run retries
+        print(str(fill.NamedStop("JUDGE_UNAVAILABLE", str(e))), file=sys.stderr)
+        sys.exit(9)
     except fill.NamedStop as e:
         print(str(e), file=sys.stderr)
         sys.exit(e.exit_code)
