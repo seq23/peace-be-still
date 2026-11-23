@@ -1,9 +1,9 @@
 {
   "_comment": "Written by scripts/instagram/ig_loop.mjs every run; read by the Boss OS scorecard row pbs-social. \"not read\" always comes with a _why.",
-  "updatedAt": "2026-11-21T20:40:58.137Z",
+  "updatedAt": "2026-11-22T20:52:12.684Z",
   "first_post_at": "2026-11-18",
-  "social_visits_28d": 0,
-  "social_visits_counting_since": null,
+  "social_visits_28d": 1,
+  "social_visits_counting_since": "2026-11-22",
   "social_store_visits_28d": "not read",
   "social_store_visits_28d_why": "the App Store link is not set yet (site/config/store.json), so there are no store-page visits to count",
   "channels": {
@@ -13,7 +13,7 @@
       "followers_why": "Buffer's API has no follower count; read by hand in the app",
       "posts_sent": 1,
       "views_28d": 0,
-      "visits_28d": 0
+      "visits_28d": 1
     },
     "facebook": {
       "name": "facebook Peace Be Still",
@@ -28,8 +28,8 @@
       "name": "threads peacebestillapp",
       "followers": "not read",
       "followers_why": "Buffer's API has no follower count; read by hand in the app",
-      "posts_sent": 3,
-      "views_28d": 0,
+      "posts_sent": 4,
+      "views_28d": 12,
       "visits_28d": 0
     }
   }

@@ -15,6 +15,7 @@ import { create, act, type ReactTestRenderer, type ReactTestInstance } from 'rea
 import products from '../src/config/products.json';
 import { createDownloads } from '../src/player/downloads';
 import { trackTitle, type Track } from '../src/player/library';
+import { chapterTitles } from '../src/player/books';
 import { createPlayer } from '../src/player/player';
 import { dayKey, faithContentIssues, RAISE_WAIT_MS, type JourneyId, type Settings } from '../src/model';
 
@@ -968,6 +969,53 @@ function testPlayer(track: Track, baseUrl: string | null = audioBase, position =
   };
 }
 
+/** Every Nights shelf, for one language and door, holds exactly what the library has for it: each shelf's count
+ * line, each Bible book's chapter count, and every row once. Worked out from `audioTracks` here, never from the
+ * screen's own lists, so a fill push can never leave a test pinned to an old library. A rebuild, not a third patch:
+ * #64 (21 Nov 2026) re-pinned the Mindset half and #117 the Spanish half; this one helper replaces both. Never the
+ * shelf title: it renders when the shelf is empty too. */
+async function assertShelvesFollowLibrary(tree: ReactTestRenderer, locale: 'en' | 'es', door: 'faith' | 'mindset', where: string) {
+  const loc = locale === 'es' ? es : en;
+  const say = () => `${where}: ${strings(tree).slice(0, 800)}`;
+  const count = (key: string, n: number) => i18n.t(key, { locale, count: n });
+  const scripts = new Map<string, Track>();
+  for (const track of audioTracks) if (track.lang === locale) scripts.set(`${track.kind}|${track.ref}`, track);
+  const on = (shelf: string) => [...scripts.values()].filter(track => shelfOf(track) === shelf);
+  const books = new Map<string, Track[]>();
+  for (const track of door === 'faith' ? on('bible') : []) { const code = track.ref.split(' ')[0]; books.set(code, [...(books.get(code) ?? []), track]); }
+  // [title, count line, rows, shown even when empty]
+  const shelves: [string, string, Track[], boolean][] = door === 'mindset'
+    ? [[loc['journey.imaginationNights.name'], count('listen.nights', on('imagination').length), on('imagination'), true]]
+    : [
+      [loc['journey.psalmNights.name'], count('listen.whisperedNights', on('psalms').length), on('psalms'), true],
+      [loc['grief.name'], count('listen.nights', on('grief').length), on('grief'), false],
+      [loc['listen.bibleByBook'], count('listen.books', books.size), [...books.values()].flat(), true],
+      [loc['listen.bibleStories'], count('listen.stories', on('bibleStories').length), locale === 'en' ? on('bibleStories') : [], false],
+      locale === 'es'
+        ? [loc['journey.miRefugio.name'], count('listen.stories', on('miRefugio').length), on('miRefugio'), true]
+        : [loc['journey.hushHarbor.subtitle'], count('listen.stories', on('hushHarbor').length), on('hushHarbor'), true],
+    ];
+  const tally = (wanted: string[]) => {
+    const n = new Map<string, number>();
+    for (const text of wanted) n.set(text, (n.get(text) ?? 0) + 1);
+    return n;
+  };
+  const empty = shelves.filter(([, , rows, always]) => always && !rows.length).length;
+  assert.equal(texts(tree).filter(text => text === loc['listen.emptyShelf']).length, empty, `${empty} empty shelves — ${say()}`);
+  for (const [title, line, rows] of shelves) {
+    if (!rows.length) continue;
+    await press(tree, `${title} ${line}`);
+  }
+  for (const [code, chapters] of books) {
+    const title = chapterTitles(code + ' 1')![locale].slice(0, -2);
+    await press(tree, `${title} ${count('listen.chapters', chapters.length)}`);
+  }
+  // Every row the library has, once: a row shown twice, or another language's rows, changes this tally.
+  const want = tally(shelves.flatMap(([, , rows]) => rows).map(track => trackTitle(track, locale)));
+  const got = tally(texts(tree).filter(text => want.has(text)));
+  assert.deepEqual(got, want, say());
+}
+
 test('the Nights tab opens real manifest Psalms, Bible chapters and Hush Harbor stories', async () => {
   const person = { ...base, journey: 'psalm-nights' };
   const tree = await mount('nights', person);
@@ -1134,21 +1182,15 @@ test('a re-voiced night: a newer file not yet published never hides the publishe
   }
 });
 
-test('Spanish and Mindset shelves show their own library and the current availability', async () => {
+test('every Nights shelf, EN and ES, faith and mindset, holds exactly what the library has', async () => {
+  await assertShelvesFollowLibrary(await mount('nights', { ...base, journey: 'psalm-nights' }), 'en', 'faith', 'en faith');
   const spanish = await mount('nights', { ...base, journey: 'mi-refugio', voice: 'spanish' });
-  assert.ok(texts(spanish).includes(es['tabs.nights']));
-  assert.ok(texts(spanish).includes(es['journey.miRefugio.name']));
-  assert.ok(texts(spanish).includes(es['listen.emptyShelf']));
   assert.ok(!strings(spanish).includes(en['journey.hushHarbor.name']));
+  await assertShelvesFollowLibrary(spanish, 'es', 'faith', 'es faith');
   for (const language of ['en', 'es'] as const) {
-    const locale = language === 'es' ? es : en;
     const mindset = await mount('nights', { ...base, language, door: 'mindset', journey: 'imagination-nights' });
-    assert.ok(texts(mindset).includes(locale['journey.imaginationNights.name']));
-    // The shelf follows the published library: a count once sessions in this language exist, else the empty line.
-    const count = audioTracks.filter(track => track.kind === 'imagination-night' && track.lang === language).length;
-    if (count) assert.ok(strings(mindset).includes(i18n.t('listen.nights', { locale: language, count })), language + ' mindset: ' + texts(mindset).join(' | '));
-    else assert.ok(texts(mindset).includes(locale['listen.emptyShelf']), language + ' mindset: ' + texts(mindset).join(' | '));
-    assert.ok(!strings(mindset).includes(locale['listen.bibleByBook']));
+    assert.ok(!strings(mindset).includes((language === 'es' ? es : en)['listen.bibleByBook']));
+    await assertShelvesFollowLibrary(mindset, language, 'mindset', language + ' mindset');
   }
 });
 
