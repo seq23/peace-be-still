@@ -16,11 +16,13 @@ Chat is optional, and it comes free or paid. Before your first free chat, the ap
 
 Free chat: each message travels through our service to an AI provider, which writes the answer. The providers, tried in this order, are Cloudflare Workers AI, Google Gemini (free tier) and free models reached through OpenRouter. These providers may retain and use what you type to improve their services, and people at those companies may read it. Please leave out names and anything that identifies you or someone else. For ages 13 to 17, free chat goes only to Cloudflare Workers AI, which does not use what you type to train AI models; when it is busy, chat says it is resting and tries no other provider.
 
-Paid chat: each message goes through our service to a paid AI service under terms that do not let it use what you type to train or improve its AI (today DeepSeek V4.1 Flash through OpenRouter, served only by DeepInfra, Together or Fireworks in the United States with zero data retention, never by DeepSeek itself; if those are unavailable, Google Gemini on a paid plan. If we change them, it will be another paid service with the same promise, named here). Paid chat never falls back to a free provider unless you choose free chat after your private messages, or while the paid service is down; the app always asks first.
+Paid chat: each message goes through our service to a paid AI service under terms that do not let it use what you type to train or improve its AI (today DeepSeek V4.1 Flash through OpenRouter, served only by DeepInfra, Together or Fireworks in the United States with zero data retention, never by DeepSeek itself; if those are unavailable, Google Gemini on a paid plan. If we change them, it will be another paid service with the same promise, named here). Paid chat never falls back to a free provider unless you choose free chat after your private messages, or while the paid service is down; the app always asks first. For ages 13 to 17, paid chat never uses Google Gemini: when the paid service is unavailable, chat says it is resting, and free chat on Cloudflare Workers AI is offered instead.
 
 Each chat message is sent with your age group (teen or adult), the door you chose, the chat voice and the language, so the answer fits; none of these is linked to your name, because the app never asks for it. Your birth year itself never leaves your phone.
 
 Every message first goes through a safety check in our own code. When that check recognizes a message as someone saying they mean to hurt themselves, or that someone is hurting them, our code answers with crisis lines for the region your phone is set to, and the message is not sent to any AI model. A message with less clear signs of distress is never sent to a free provider: a safety model on Cloudflare Workers AI reads it, and it is answered by the private AI. The AI that writes an answer also says whether a message seems unsafe, and then the same safety model checks it before anything is shown. From then on, that conversation is answered by the private AI until it has been calm for a while (at most 24 hours), for free and paid chat alike.
+
+For ages 13 to 17, no Google Gemini model reads any message. When the safety check or the safety model sees clear signs of danger, the app shows crisis lines for your region and asks "Are you safe right now?" at once, in words written by people, not by AI, and no AI model writes anything in reply. A message with less clear signs, and the rest of that conversation, is answered by Cloudflare Workers AI, which does not use what you type to train AI models.
 
 We do not store chat text. It passes through our service to the provider and is gone from our service once the answer is returned.
 
@@ -66,7 +68,7 @@ Under 13, the app sends no chat, memory, made-for-you session or install id to o
 
 We do not knowingly collect personal information from children under 13. If you believe a child sent us information, write to info@peacebestillapp.com and we will delete it.
 
-For ages 13 to 17, chat uses the teen voice, chat and sessions made for you go only to AI services that do not train on what is typed (Cloudflare Workers AI, or the paid services named above), and paid upgrades go through Apple's Ask to Buy, or Google Play's purchase approval in Family Link, when a parent has turned it on.
+For ages 13 to 17, chat uses the teen voice, chat and sessions made for you go only to AI services that do not train on what is typed (Cloudflare Workers AI, or the paid service through OpenRouter named above; never Google Gemini), and paid upgrades go through Apple's Ask to Buy, or Google Play's purchase approval in Family Link, when a parent has turned it on.
 
 ## Where the app is offered
 

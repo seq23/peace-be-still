@@ -45,9 +45,9 @@ export type Deps = {
   now: () => number;
   risk: (env: Env, turns: Turn[]) => Promise<RiskVerdict>;
   /** lane: the free lane's judge has no billed backup (brain rule: free chat never touches the billed key). */
-  judge: (env: Env, input: JudgeInput, lane: Lane) => Promise<JudgeVerdict>;
+  judge: (env: Env, input: JudgeInput, lane: Lane, teen?: boolean) => Promise<JudgeVerdict>;
   /** The free lane by default (the order the privacy policy names); 'paid' is the billed, private model only.
-   *  teen: the free lane keeps only the rungs that never train (providers.mjs teenProviders); paid and crisis are private already. */
+   *  teen: no Gemini route on any lane (offGoogle); free and crisis keep only the rungs that never train (providers.mjs teenProviders). */
   rungs: (env: Env, now: number, lane?: Lane, teen?: boolean) => LadderRung[];
   paid: (env: Env, installId: string, now: number) => Promise<Paid>;
   /** Apple DeviceCheck bit0 for the private first chat (firstprivate.ts): 'new' (now set), 'used', or 'error' (fail closed). */
@@ -140,7 +140,7 @@ const geminiModels = (env: Env) => env.GEMINI_MODELS.split(',').map(s => s.trim(
 // The free lane's Gemini is an UNBILLED project's key (PBS_FREE_GEMINI_API_KEY); the billed key
 // (PBS_GEMINI_API_KEY) is the paid lane's and is never used for free chat. A missing free key is the
 // named stop PBS_FREE_GEMINI_API_KEY_MISSING: the rung is skipped, never replaced by the paid key.
-const geminiRung = (env: Env, model: string, now: number): LadderRung => ({ id: `gemini-free:${model}`, call: gemini(env.PBS_FREE_GEMINI_API_KEY, model, { missing: 'PBS_FREE_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL }), cap: int(env.GEMINI_CALLS_DAILY, 200), day: pacificDay(now) });
+const geminiRung = (env: Env, model: string, now: number): LadderRung => ({ id: `gemini-free:${model}`, google: true, call: gemini(env.PBS_FREE_GEMINI_API_KEY, model, { missing: 'PBS_FREE_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL }), cap: int(env.GEMINI_CALLS_DAILY, 200), day: pacificDay(now) });
 const usd = (value: string | undefined, fallback: number) => { const n = Number(value); return Number.isFinite(n) && n >= 0 ? n : fallback; };
 /**
  * The paid lane's one rung: private, priced, with no free fallback after it. PAID_PROVIDER picks the
@@ -152,33 +152,41 @@ const paidRung = (env: Env, now: number): LadderRung => {
   const call = provider === 'workers-ai' ? workersAi(env.AI, env.PAID_MODEL, { thinking: false })
     : provider === 'openrouter-zdr' ? openRouterPrivate(env.OPENROUTER_API_KEY, env.PAID_MODEL, (env.PAID_HOSTS ?? '').split(',').map(h => h.trim()).filter(Boolean))
     : gemini(env.PBS_GEMINI_API_KEY, env.PAID_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL });
-  return { id: `paid-${provider}:${env.PAID_MODEL}`, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5), cached: usd(env.PAID_PRICE_CACHED_PER_M, usd(env.PAID_PRICE_IN_PER_M, 0.3) / 4) } };
+  // A Gemini model is a Google route on any provider (OpenRouter names Google's models google/...).
+  const google = (provider !== 'workers-ai' && provider !== 'openrouter-zdr') || /^google\//i.test(env.PAID_MODEL ?? '');
+  return { id: `paid-${provider}:${env.PAID_MODEL}`, google, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5), cached: usd(env.PAID_PRICE_CACHED_PER_M, usd(env.PAID_PRICE_IN_PER_M, 0.3) / 4) } };
 };
 
 /** The paid lane's private backup when PAID_PROVIDER is not Gemini: PAID_BACKUP_MODEL on the billed key. */
 const paidBackupRung = (env: Env, now: number): LadderRung => ({
-  id: `paid-gemini:${env.PAID_BACKUP_MODEL}`, cap: 1_000_000, day: utcDay(now),
+  id: `paid-gemini:${env.PAID_BACKUP_MODEL}`, google: true, cap: 1_000_000, day: utcDay(now),
   call: gemini(env.PBS_GEMINI_API_KEY, env.PAID_BACKUP_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL }),
   price: { in: usd(env.CRISIS_PRICE_IN_PER_M, 0.3), out: usd(env.CRISIS_PRICE_OUT_PER_M, 2.5), cached: usd(env.CRISIS_PRICE_IN_PER_M, 0.3) / 10 },
 });
 
 /** The stronger private model for a flagged conversation (CRISIS_MODEL, billed key only; never a free model). */
 const crisisRung = (env: Env, now: number): LadderRung => ({
-  id: `crisis-gemini:${env.CRISIS_MODEL}`, cap: 1_000_000, day: utcDay(now),
+  id: `crisis-gemini:${env.CRISIS_MODEL}`, google: true, cap: 1_000_000, day: utcDay(now),
   call: gemini(env.PBS_GEMINI_API_KEY, env.CRISIS_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.CRISIS_THINKING_LEVEL }),
   price: { in: usd(env.CRISIS_PRICE_IN_PER_M, 0.3), out: usd(env.CRISIS_PRICE_OUT_PER_M, 2.5) },
 });
 
-/** A small ladder for a check (risk read, judge): Workers AI first, then the last Gemini model. */
+/** Teens (13-17 and unknown age; her ruling 23 Nov 2026): Google's terms (Cloud Service Specific Terms 20(d), the
+ *  Gemini API terms) bar every Gemini route, Vertex AI included, from a service likely used by under-18s. A teen's
+ *  words never reach a rung marked google: this is the one filter every teen ladder passes through. */
+const offGoogle = (rungs: LadderRung[]) => rungs.filter(r => !r.google);
+
 /** A paid install meets no device, IP or app-wide message count (it is only counted). */
 const PAID_UNCAPPED = 1_000_000;
 const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;
-async function check<T>(env: Env, now: number, chain: LadderRung | LadderRung[], messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true): Promise<T> {
+async function check<T>(env: Env, now: number, chain: LadderRung | LadderRung[], messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true, teen = false): Promise<T> {
   const metrics: Metrics = new Map();
   // The backup reads the same words the risk read does, which may be about a crisis: only the
   // private (paid) model may see them, never a free one.
   const first = Array.isArray(chain) ? chain[0] : chain;
-  const rungs = Array.isArray(chain) ? chain : backup && (env.PBS_GEMINI_API_KEY || ((env.PAID_PROVIDER as string) && (env.PAID_PROVIDER as string) !== 'gemini')) ? [first, paidRung(env, now)] : [first];
+  const all = Array.isArray(chain) ? chain : backup && (env.PBS_GEMINI_API_KEY || ((env.PAID_PROVIDER as string) && (env.PAID_PROVIDER as string) !== 'gemini')) ? [first, paidRung(env, now)] : [first];
+  // A teen's words (her question and the draft answer) never reach a Gemini backup: with none left, the read is `down`.
+  const rungs = teen ? offGoogle(all) : all;
   const out = await runLadder(env.DB, rungs, messages, schema, maxTokens, metrics, d => ok(read(d)));
   // A private backup's cost counts toward the app's paid spend like any answer.
   for (const [metric, n] of metrics) await bump(env.DB, centralDay(now), metric === 'paid_spend_micro' ? metric : `${first.id}:${metric}`, n);
@@ -195,7 +203,7 @@ export const realDeps: Deps = {
       () => read('workers-ai-risk-confirm', env.WORKERS_AI_RISK_CONFIRM_MODEL, int(env.WORKERS_AI_RISK_CONFIRM_CALLS_DAILY, 100)),
     );
   },
-  judge(env, input, lane) {
+  judge(env, input, lane, teen = false) {
     const now = Date.now();
     const first: LadderRung = { id: 'workers-ai-judge', call: workersAi(env.AI, env.WORKERS_AI_JUDGE_MODEL, { temperature: 0 }), cap: int(env.WORKERS_AI_JUDGE_CALLS_DAILY, 300), day: utcDay(now) };
     // The judge thinks before it scores (gpt-oss): it gets the budget it was calibrated with (run 10: at 200
@@ -206,24 +214,31 @@ export const realDeps: Deps = {
     // Workers AI's gpt-oss is its backup. Free chat keeps Workers AI only, never the billed route.
     if (lane !== 'free' && (env.PAID_PROVIDER as string) === 'openrouter-zdr') {
       const paidJudge = { ...paidRung(env, now), id: `judge-${env.PAID_PROVIDER}:${env.PAID_MODEL}` };
-      return check(env, now, [paidJudge, first], judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
+      return check(env, now, [paidJudge, first], judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, true, teen);
     }
-    return check(env, now, first, judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free');
+    return check(env, now, first, judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free', teen);
   },
   rungs(env, now, lane = 'free', teen = false) {
+    // A teen (her ruling 23 Nov 2026): paid is the private route alone, never its Gemini backup; free and the
+    // crisis lane are the rungs that never train (Workers AI). When those give nothing, the teen is told chat is
+    // resting, and on the crisis lane gets the card and her region's lines (chat's lane_down).
+    if (teen) return offGoogle(lane === 'paid' ? [paidRung(env, now)] : teenProviders.flatMap(p => freeRungs(env, now)[p.id] ?? []));
     // The private model, then (when it is not Gemini already) Gemini on the billed key: both private, both paid.
     if (lane === 'paid') return (env.PAID_PROVIDER as string) !== 'gemini' && env.PAID_BACKUP_MODEL ? [paidRung(env, now), paidBackupRung(env, now)] : [paidRung(env, now)];
     if (lane === 'crisis') return [crisisRung(env, now)];
-    const built: Record<string, LadderRung[]> = {
-      'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL, { thinking: false }), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
-      'gemini-free': geminiModels(env).map(model => geminiRung(env, model, now)),
-      'openrouter-free': [{ id: 'openrouter-free', call: openRouter(env.OPENROUTER_API_KEY, env.OPENROUTER_MODELS.split(',')), cap: int(env.OPENROUTER_CALLS_DAILY, 900), day: utcDay(now) }],
-    };
-    return (teen ? teenProviders : providers).flatMap(p => built[p.id] ?? []);
+    return providers.flatMap(p => freeRungs(env, now)[p.id] ?? []);
   },
   paid: (env, installId, now) => paidStatus(env, installId, now),
   deviceCheck: (env, token, now) => appleDeviceCheck(env, token, now),
 };
+/** The free rungs by provider id (providers.mjs names the order). */
+function freeRungs(env: Env, now: number): Record<string, LadderRung[]> {
+  return {
+    'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL, { thinking: false }), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
+    'gemini-free': geminiModels(env).map(model => geminiRung(env, model, now)),
+    'openrouter-free': [{ id: 'openrouter-free', call: openRouter(env.OPENROUTER_API_KEY, env.OPENROUTER_MODELS.split(',')), cap: int(env.OPENROUTER_CALLS_DAILY, 900), day: utcDay(now) }],
+  };
+}
 
 // Privacy policy: "Messages that mention self-harm or abuse are never sent to an AI provider." The
 // newest message is checked by the floor before any model; an EARLIER message the floor is sure
@@ -379,6 +394,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // switch to the stronger private model is silent and never waits on her answer.
   //  - An intent phrase (the floor): fixed words, because the privacy policy promises such a message
   //    reaches no AI model, now or later.
+  //  - A teen (13-17 or unknown age; her ruling 23 Nov 2026, "Card + hotline only"): fixed words, written
+  //    by people, with no model call of any kind (Google's terms bar the crisis model for under-18s).
   //  - Otherwise the private crisis model writes two or three warm sentences first. Crisis always
   //    answers: past the monthly cap a paid user still gets the crisis model, a free user the fixed words.
   const crisisReply = async (kind: CrisisKind, layer: string) => {
@@ -389,8 +406,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     const card = crisisText(kind, v.lang, band, last, req.door, region);
     let checkIn = { text: checkInText[v.lang], ai: false };
     // The fixed words when the crisis model is the one that just failed (lane_down), or no model may read it (floor).
-    if (layer !== 'floor' && layer !== 'lane_down' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
-      const messages: Message[] = [{ role: 'system', content: crisisPrompt(v.lang, v.teen, mind) }, ...turns.slice(-4).map(t => ({ role: t.role, content: t.text }))];
+    if (!teenOnly && layer !== 'floor' && layer !== 'lane_down' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
+      const messages: Message[] = [{ role: 'system', content: crisisPrompt(v.lang, mind) }, ...turns.slice(-4).map(t => ({ role: t.role, content: t.text }))];
       const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis'), messages, crisisSchema, 600 + CRISIS_THINKING_HEADROOM, metrics, d => crisisWords(d) !== null);
       if ('data' in out) checkIn = { text: `${crisisWords(out.data)} ${checkInQuestion[v.lang]}`, ai: true };
       else { tally(metrics, 'crisis_model_down'); logCode('CHAT_CRISIS_MODEL_DOWN', { empty: out.empty }); }
@@ -599,7 +616,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: since, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
     } else if (paid.paid && lane === 'paid') tally(metrics, 'memory_skipped');
   });
-  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane);
+  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane, teenOnly);
   let objection: string | null = null;
   let variety0 = false;
   // A draft that passed every safety check but repeated a recent answer, or that the judge found

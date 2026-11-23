@@ -9,7 +9,7 @@ import { runLadder } from './ladder';
 import { RungError } from './providers/types';
 import { checkAnswer } from './quality/answer';
 import { judgeSchema, judgeVerdict } from './quality/judge';
-import { crisisText } from './replies';
+import { crisisText, regionOf } from './replies';
 import { banned } from './shared';
 import type { Install } from './token';
 import type { Deps } from './index';
@@ -100,7 +100,7 @@ export function madeForYou(env: Env & MadeForYouEnv, deps: Deps, install: Instal
       const level = crisisLevel(turns, read);
       return level.level === 'none' ? { fired: false, read: level.read } : { fired: true, kind: level.kind };
     },
-    crisisText: (kind, lang, age, text, door) => crisisText(kind, lang, age, text, door),
+    crisisText: (kind, lang, age, text, door, country) => crisisText(kind, lang, age, text, door, regionOf(country)),
     ladder: madeForYouLadder(env, deps),
     checkProse: (draft, ctx) => checkAnswer(draft, { ...ctx, db: env.DB }),
     verbatim: (translation, text) => verbatimScripture(env.DB, translation, text),

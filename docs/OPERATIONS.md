@@ -41,11 +41,12 @@ The Android launcher icon's foreground (`app/assets/adaptive-icon.png`) is the a
 | `CHAT_USER_CEILING` | One paid account passed its hidden monthly AI backstop (`CHAT_USER_MONTHLY_USD_YEARLY` $1.33, raise to $1.83 once enrolled in Apple's Small Business Program; `CHAT_USER_MONTHLY_USD_MONTHLY` $4.59; both in worker/wrangler.jsonc, no app update) | Same as after her 75 private messages a day (`PAID_CHAT_MESSAGES`, app/src/gates/index.ts): she is asked once a day whether to keep chatting on free chat (not private); her message is kept and sent on the lane she picks. If the free lane has nothing, the private model answers briefly (`overflow_short`). A paid user never sees a pause; crisis stays on the private crisis model |
 | `CHAT_ABUSE_SLOW` / `CHAT_ABUSE_PAUSE` | Floods, repeated messages or jailbreak spam | Slowed, then paused 24 hours |
 | `CHAT_PAID_DOWN` | The paid model gave nothing | "Paid chat is down for a moment"; never a free model |
-| `CHAT_CRISIS_MODEL_DOWN` | The crisis model gave nothing on a high signal | The card and the fixed check-in still show |
+| `CHAT_CRISIS_MODEL_DOWN` | The crisis model gave nothing on an adult's high signal | The card and the fixed check-in still show (a teen never calls the crisis model, so never logs this) |
 | `CHAT_NO_FREE_MODEL` | Every free allowance is used up today | "Free chat is resting" |
 
 ## Lanes and models (env, `worker/wrangler.jsonc`)
 
 - Free: `providers.mjs` order (Workers AI, Gemini free on `PBS_FREE_GEMINI_API_KEY`, OpenRouter free). Needs the person's consent (`freeConsent`). Teens (13-17, and any token not signed adult) get only the rungs with `trains: false` (`teenProviders`: Workers AI); when it is out or down they get the resting reply, never a training rung (`worker/test/teen-routing.test.ts`).
 - Paid: `PAID_PROVIDER` + `PAID_MODEL` on the billed key `PBS_GEMINI_API_KEY` (or Workers AI, or OpenRouter with zero data retention). Never falls back to free.
-- Crisis: `CRISIS_MODEL` on the billed key, for any conversation the safety check flags; it decays after 10 calm turns or 24 hours.
+- Crisis: `CRISIS_MODEL` on the billed key, for any adult conversation the safety check flags; it decays after 10 calm turns or 24 hours.
+- Teens and Gemini (her ruling 23 Nov 2026, "Card + hotline only"; Google's terms bar every Gemini route, Vertex included, for services likely used by under-18s): a teen's words never reach a rung marked `google` (`offGoogle` in `worker/src/index.ts`, every Gemini rung and any `google/` model through OpenRouter). Paid is `PAID_PROVIDER` alone, no `PAID_BACKUP_MODEL`; the crisis lane is Workers AI (`teenProviders`); the answer judge has no Google backup. A teen's high signal gets the card, the region's lines and the fixed "Are you safe right now?" words with no model call. Guarded by `worker/test/teen-routing.test.ts`.

@@ -475,8 +475,9 @@ export type MadeForYouDependencies<CrisisKind = string> = {
   paid(installId: string, now: number): Promise<{ paid: boolean; paidUntil: number | null }>;
   // detectCrisis(turns, () => realDeps.risk(env, turns)) and the chat's crisisText.
   detectCrisis(turns: Turn[]): Promise<Crisis<CrisisKind>>;
-  // The door matters: an Imagination (Mindset door) request never gets a faith reply.
-  crisisText(kind: CrisisKind, lang: Lang, age: Install['age'], text: string, door: 'faith' | 'mindset'): string;
+  // The door matters: an Imagination (Mindset door) request never gets a faith reply. country: the network's
+  // country (request.cf), so a teen in Mexico or Spain gets her own lines, never the US ones.
+  crisisText(kind: CrisisKind, lang: Lang, age: Install['age'], text: string, door: 'faith' | 'mindset', country: string | undefined): string;
   // runLadder(db, madeForYouRungs(realDeps.rungs(env, now), use, chatShare, signal), messages, schema, maxTokens, metrics, valid).
   /** paidOnly asks the private paid rung alone (config.escalate); with the paid rung at its cap it answers empty.
    *  teen keeps a teen's words off every free rung that may train (rungs(env, now, 'free', true)): Workers AI and the private paid rung only. */
@@ -962,14 +963,14 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     });
   }
 
-  async function request(input: Record<string, unknown> | null, who: Install, now: number, paidUntil: number | null): Promise<Response> {
+  async function request(input: Record<string, unknown> | null, who: Install, now: number, paidUntil: number | null, country: string | undefined): Promise<Response> {
     if (!input || !isKind(input.kind) || !isLang(input.lang) || typeof input.text !== 'string' ||
         input.text.length > 500 || !input.text.trim() ||
         (input.kind === 'psalm' ? input.door !== 'faith' : input.door !== 'mindset')) return error(400, 'BAD_REQUEST');
     const note = { kind: input.kind, lang: input.lang, text: input.text.trim(), teen: who.age !== 'adult' };
     // The chat's own crisis floor and safety read, before anything is stored.
     const safety = await deps.detectCrisis([{ role: 'user', text: note.text }]);
-    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, note.lang, who.age, note.text, note.kind === 'psalm' ? 'faith' : 'mindset') });
+    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, note.lang, who.age, note.text, note.kind === 'psalm' ? 'faith' : 'mindset', country) });
     if (safety.read === 'down') return error(503, 'SAFETY_UNAVAILABLE');
     const id = crypto.randomUUID();
     const day = deps.centralDay(now);
@@ -1011,7 +1012,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
         // The cron deletes her audio 30 days after the plan ends; every paid visit keeps that date current.
         await db.prepare('UPDATE made_for_you SET paid_until = ? WHERE install_id = ? AND paid_until IS NOT ?').bind(paid.paidUntil, who.installId, paid.paidUntil).run();
         if (req.method === 'GET') return await shelf(url, who.installId, now);
-        if (req.method === 'POST') return await request(await body(req), who, now, paid.paidUntil);
+        if (req.method === 'POST') return await request(await body(req), who, now, paid.paidUntil, (req as unknown as { cf?: { country?: string } }).cf?.country);
         return error(405, 'METHOD');
       } catch (e) {
         // Request bodies and provider or storage exceptions may contain private input: codes only.
