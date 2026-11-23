@@ -45,6 +45,9 @@ p{margin:0}
 .claim{font-size:17px;color:var(--ink);max-width:36em;margin:.25em 0 .75em;padding-left:12px;border-left:3px solid var(--still-water)}
 .claim b{font-weight:600}
 .claim small{display:block;font-size:14px;color:var(--ink-muted);margin-top:4px}
+/* The home hero: the privacy line reads as a quiet line under the heading, not a boxed note. */
+.hero.solo .claim{border-left:0;padding-left:0;margin:0;color:var(--ink-muted)}
+.hero.solo .claim b{color:var(--ink)}
 .cta-privacy{font-size:15px;color:var(--ink-muted)}
 .muted{color:var(--ink-muted)}
 section{padding-top:56px;padding-bottom:56px}
@@ -53,11 +56,7 @@ section{padding-top:56px;padding-bottom:56px}
 /* hero */
 .hero{display:grid;gap:40px;align-items:center;padding-top:24px;padding-bottom:56px}
 .hero-text{display:flex;flex-direction:column;gap:20px}
-.soon{display:flex;gap:14px;align-items:center;border:1.5px solid var(--line);background:var(--surface-raised);border-radius:18px;padding:14px 16px;max-width:30em}
 .hero-go{align-self:flex-start;text-decoration:none}
-.soon img{width:44px;height:44px;flex:none}
-.soon b{display:block;font-size:17px}
-.soon span{font-size:15px;color:var(--ink-muted)}
 @media (min-width:860px){.hero{grid-template-columns:1.1fr .9fr}}
 
 /* phone pictures (rebuilt from the approved mock-ups) */
@@ -86,7 +85,8 @@ section{padding-top:56px;padding-bottom:56px}
 .transport{display:flex;align-items:center;justify-content:center;gap:26px}
 .transport .sk{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--night-line);display:grid;place-items:center;font-family:var(--mono);font-size:12px}
 .transport .pl{width:64px;height:64px;border-radius:50%;background:var(--night-glow);display:grid;place-items:center}
-.timer{display:flex;justify-content:space-between;border:1px solid var(--night-line);border-radius:14px;padding:10px 12px;background:var(--night-raised);font-size:13px}
+.timer{display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:space-between;align-items:baseline;border:1px solid var(--night-line);border-radius:14px;padding:10px 12px;background:var(--night-raised);font-size:13px}
+.timer span,.timer em{white-space:nowrap}
 .timer em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--night-glow)}
 @media (max-width:700px){.phones .phone + .phone{display:none}}
 
@@ -133,6 +133,7 @@ section{padding-top:56px;padding-bottom:56px}
 /* closing + footer */
 .closing{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
 .closing img{width:64px;height:64px}
+.closing-line{font-family:var(--serif);font-size:22px}
 .site-foot{border-top:1px solid var(--line);padding:28px 0 40px;font-size:15px;color:var(--ink-muted)}
 .site-foot .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between}
 .site-foot nav{display:flex;flex-wrap:wrap;gap:4px 20px}
@@ -189,8 +190,9 @@ section{padding-top:56px;padding-bottom:56px}
 
 /* store call to action (site/content/parts.mjs storeCtaHtml) */
 .cta-card{max-width:40em;margin:0 auto;gap:12px}
-.stores{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.store-soon{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border:1.5px solid var(--line);border-radius:12px;font-weight:600}
+.cta-card .stores{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+/* Not yet in a store: plain text, never shaped like a button that goes nowhere. */
+.store-soon{display:block;font-size:16px;font-weight:600;color:var(--ink-muted)}
 .store-badge img{display:block;height:48px;width:auto}
 .not-affiliated{margin-top:12px;font-size:15px}
 

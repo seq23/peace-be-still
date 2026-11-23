@@ -71,7 +71,7 @@ const CTA = {
   es: {
     soonH: "Busca Peace Be Still en el App Store y Google Play",
     liveH: "Descarga Peace Be Still",
-    p: "Gratis para descargar, con un camino gratis que siempre es gratis. Sin anuncios, sin prueba.",
+    p: "Se descarga gratis y la versión gratuita nunca se acaba. Sin anuncios, sin prueba.",
     iosSoon: "Muy pronto en el App Store · busca “Peace Be Still”",
     playSoon: "Muy pronto en Google Play · busca “Peace Be Still”",
     iosAlt: "Descárgalo en el App Store",

@@ -149,3 +149,19 @@ test("every custom product page mapping lands on a real page", () => {
   }
   assert.ok(checked >= 20, `only ${checked} mappings checked`);
 });
+
+test("a store that is not live yet reads as plain text, not a button that goes nowhere, and the home page says coming soon once at the end (ship review 23 Nov 2026)", () => {
+  const css = readFileSync(new URL("../public/styles.css", import.meta.url), "utf8");
+  const rule = (sel) => (css.match(new RegExp(`(?:^|\\n)${sel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\{([^}]*)\\}`)) || [])[1];
+  const soon = rule(".store-soon");
+  assert.ok(soon, "no .store-soon rule");
+  assert.doesNotMatch(soon, /border|min-height|padding/, "the not-live store line is styled like a button");
+  // .card ul (0,1,1) out-ranks a bare .stores (0,1,0) and pushed the list off-centre in the card.
+  assert.match(rule(".cta-card .stores") || "", /padding:0/);
+  const pub = new URL("../public/", import.meta.url).pathname;
+  for (const f of ["index.html", "es/index.html"]) {
+    const s = readFileSync(join(pub, f), "utf8");
+    const after = s.slice(s.indexOf("<!-- cta:end -->"));
+    assert.doesNotMatch(after.slice(0, after.indexOf("</main>")), /<h2/, `${f}: a second "coming soon" heading after the store card`);
+  }
+});

@@ -4,7 +4,7 @@
 // and below it. Every count and price comes from facts() (the app's settings); the privacy lead and the
 // store CTA are filled by apply-cta.mjs between their markers. site/test/mindset.test.mjs checks the doors.
 import { readFileSync } from "node:fs";
-import { BASE, facts, footerHtml, headerHtml, privacyClaim } from "./parts.mjs";
+import { BASE, facts, footerHtml, headerHtml } from "./parts.mjs";
 import { Q, cite } from "./scripture.mjs";
 
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
@@ -28,14 +28,12 @@ const jr = (art, lab, h, p, hLang) => `      <div class="jr"><span class="art">$
         <span class="txt"><span class="door-lab">${lab}</span><h3${hLang ? ` lang="${hLang}"` : ""}>${h}</h3><p class="muted">${p}</p></span></div>`;
 
 function words(lang) {
-  const c = privacyClaim(lang, "any");
   if (lang === "es") return {
     title: "Peace Be Still: noches tranquilas, palabras para el día y chat privado",
     description: "Peace Be Still, muy pronto: una app con dos puertas. Palabra de Dios (la Biblia Reina-Valera 1909, Salmos susurrados, chat bíblico) y Mentalidad (declaraciones e Imagination Nights).",
     ogTitle: "Peace Be Still: una gran calma, cada noche", locale: "es_US", og: "og-es.png", skipFaith: "#palabra-de-dios",
-    name: "Peace Be Still · muy pronto", h1: "Una gran calma, cada noche.",
+    name: "Peace Be Still · una app para noches tranquilas · muy pronto", h1: "Una gran calma, cada noche.",
     lead: "Noches tranquilas y palabras para el día, a tu manera. Peace Be Still es una app para el final del día que hace una sola pregunta, “¿Qué necesitas esta noche?”, y abre una de dos puertas. Empezar es gratis, sin anuncios y sin prueba.",
-    soonB: "Muy pronto en el App Store y Google Play", soonS: "Todavía no hay fecha. Cuando la app esté disponible, esta página llevará directo a ella.",
     heroGo: "Elige tu puerta", doorsH: "Dos puertas. Elige la tuya.", doorsP: "Cada puerta va por su lado, y puedes cambiar tu elección luego en Ajustes.",
     faith: { h: "Con la Palabra de Dios", p: "Escrituras, oración e historias bíblicas para leer y escuchar. Cada versículo es de la Reina-Valera 1909, palabra por palabra.", li: ["La Biblia completa para leer", "Un chat bíblico que responde con versículos reales", "Salmos susurrados para dormir y una historia bíblica cada día"], go: "Ver la Palabra de Dios ›", href: "#palabra-de-dios" },
     mind: { h: "Con mente e imaginación", p: "Palabras tranquilas en la mañana e imaginación en la noche, sin contenido religioso.", li: ["Morning Word: una frase para decir en voz alta, de mañana y de noche", "Imagination Nights: sesiones susurradas para dormir dentro de una escena", "Un chat de Mentalidad tranquilo"], go: "Ver Mentalidad ›", href: "/es/mentalidad/" },
@@ -43,31 +41,31 @@ function words(lang) {
     gwJourneys: [
       jr(ART.refugio, "Palabra de Dios · en español", "Mi Refugio · Biblia y Chat en Español", "Todo el camino en español: chat, historias y Salmos susurrados, con la Reina-Valera 1909."),
       jr(ART.harbor, "Palabra de Dios · en inglés", "Hush Harbor · Black Bible Chat &amp; Stories", "Habla las cosas como lo harías con tu familia, con una voz de iglesia negra, y lee cada día una historia bíblica contada con esa voz.", "en"),
-      jr(ART.waves("#E0A33E"), "Palabra de Dios", "Psalm Nights · Whispered Scripture for Sleep", "Salmos leídos en susurro a la hora de dormir, con un temporizador que baja la voz poco a poco. La primera noche es gratis, luego una por semana.", "en"),
-      jr(ART.bars("#E0A33E"), "Palabra de Dios", "Morning Word · Daily Declarations", "Para las mañanas: un versículo, una frase para decir en voz alta, una oración corta.", "en"),
+      jr(ART.waves("#E0A33E"), "Palabra de Dios", "Psalm Nights · Salmos susurrados para dormir", "Salmos leídos en susurro a la hora de dormir, con un temporizador que baja la voz poco a poco. La primera noche es gratis, luego una por semana."),
+      jr(ART.bars("#E0A33E"), "Palabra de Dios", "Morning Word · Declaraciones diarias", "Para las mañanas: un versículo, una frase para decir en voz alta, una oración corta."),
       jr(ART.peak, "Palabra de Dios · en inglés", "Young Faith · Bible for Teens", "Para jóvenes de 13 a 17 años. Palabras sencillas, preguntas reales.", "en"),
     ],
     sleepH: "¿Qué son los Salmos para dormir de la app?", sleepP: "Es un Salmo leído en susurro a la hora de dormir. La pantalla siempre está oscura, se atenúa a los diez segundos y un temporizador apaga la voz poco a poco. No sigue nada después y no se ofrece nada.",
-    phoneFaith: { lab: "MI REFUGIO · SALMOS", t: "Salmo 23, susurrado", sub: "45 min · suena con el teléfono bloqueado", ref: "PSA 23:2", timer: "⏲ Temporizador", timerE: "30 min · se apaga suave" },
+    phoneFaith: { lab: "MI REFUGIO · SALMOS", t: "Salmo 23, susurrado", sub: "45 min · suena con el teléfono bloqueado", ref: "PSA 23:2", timer: "⏲ Temporizador", timerE: "30 min · se apaga" },
     gwLinksH: "¿Buscas un chat bíblico gratis?", gwLinks: [["/es/chat-biblico-gratis/", "Chat bíblico gratis: lo que siempre es gratis"]],
     md: { id: "mentalidad", h: "Mentalidad", p: "Para quien quiere palabras tranquilas y un poco de imaginación, sin contenido religioso." },
     mdJourneys: [
-      jr(ART.bars("#86CBC1"), "Mentalidad", "Morning Word · Daily Declarations", `Una frase para decir en voz alta, de mañana y de noche, como “${I18N("es", "mindset.calm.1")}”`, "en"),
+      jr(ART.bars("#86CBC1"), "Mentalidad", "Morning Word · Declaraciones diarias", `Una frase para decir en voz alta, de mañana y de noche, como “${I18N("es", "mindset.calm.1")}”`),
       jr(ART.waves("#86CBC1"), "Mentalidad", "Imagination Nights", "Sesiones nocturnas susurradas: soltar el cuerpo, una escena leída en voz baja, y luego silencio.", "en"),
       jr(ART.talk, "Mentalidad", "Chat de Mentalidad", `Una respuesta corta y tranquila, marcada como IA. Con un plan de pago es privado hasta ${F.paid} mensajes al día.`),
     ],
-    phoneMind: { lab: "IMAGINATION NIGHTS", t: "La mañana de después", sub: "una escena, susurrada", line: "Abres los ojos antes de la alarma. La luz entra por la izquierda.", timer: "⏲ Temporizador", timerE: "30 min · se apaga suave" },
+    phoneMind: { lab: "IMAGINATION NIGHTS", t: "La mañana de después", sub: "una escena, susurrada", line: "Abres los ojos antes de la alarma. La luz entra por la izquierda.", timer: "⏲ Temporizador", timerE: "30 min · se apaga" },
     mdLinksH: "Preguntas de Mentalidad", mdLinks: [["/es/preguntas/afirmaciones-positivas/", "Afirmaciones positivas que no suenan falsas"], ["/es/preguntas/meditacion-guiada-para-dormir/", "Meditación guiada para dormir"], ["/es/preguntas/diario-de-gratitud/", "Diario de gratitud: cómo empezar"], ["/es/mentalidad/", "Todo sobre Mentalidad ›"]],
-    priceH: "¿Peace Be Still es gratis?", priceP: "Sí. Hay una versión gratis que sigue gratis, y un plan de pago que eliges a propósito. Nunca hay anuncios.",
+    priceH: "¿Peace Be Still es gratis?", priceP: "Sí. La versión gratuita es para siempre, y el plan de pago lo eliges tú, a propósito. Nunca hay anuncios.",
     freeLab: "Gratis · para siempre", paidLab: "De pago", price: `${F.monthly} al mes o ${F.yearly} al año`,
     free: [`Un chat al día, hasta ${F.free} mensajes`, "Tu primera noche de sueño, luego una por semana", "Una declaración diaria", "Un diario que se queda en tu teléfono, y tarjetas para compartir", "En la Palabra de Dios: la Biblia completa para leer y la historia bíblica de hoy"],
-    paid: [`Chat privado que recuerda lo que compartes. ${c.promise} ${c.small}`, "Una sesión de sueño cada noche, y otras hechas para ti", "Todas las historias pasadas y los caminos más largos", "Temas de declaraciones y descargas sin conexión"],
+    paid: [`Chat privado que recuerda lo que compartes, hasta ${F.paid} mensajes al día`, "Una sesión de sueño cada noche, y otras hechas para ti", "Todas las historias pasadas y los caminos más largos", "Temas de declaraciones y descargas sin conexión"],
     promises: [["Sin prueba", "Nada se convierte en un cobro por sorpresa."], ["Cancela en dos toques", "Desde un enlace en la misma pantalla de pago."], ["Lo gratis no se quita", "La versión gratis nunca se achica."]],
     priceNote: "Precios en dólares de EE. UU., visibles en la app antes de tocar. Tu precio nunca sube mientras sigas.",
     faqH: "Preguntas frecuentes",
     faq: [
       ["¿Qué es Peace Be Still?", "Peace Be Still es una app para el final del día. Empieza con una pregunta, “¿Qué necesitas esta noche?”, y dos puertas: la Palabra de Dios, con la Biblia, Salmos susurrados para dormir, chat bíblico e historias; y Mentalidad, con declaraciones diarias, Imagination Nights y un chat tranquilo. Llega muy pronto."],
-      ["¿Peace Be Still es gratis?", `Sí. La versión gratis sigue gratis: un chat al día de hasta ${F.free} mensajes, tu primera noche de sueño y luego una por semana, una declaración diaria y un diario; en la Palabra de Dios, además, la Biblia completa y la historia de hoy. Un plan de pago cuesta ${F.monthly} al mes o ${F.yearly} al año.`],
+      ["¿Peace Be Still es gratis?", `Sí. La versión gratuita es para siempre: un chat al día de hasta ${F.free} mensajes, tu primera noche de sueño y luego una por semana, una declaración diaria y un diario; en la Palabra de Dios, además, la Biblia completa y la historia de hoy. Un plan de pago cuesta ${F.monthly} al mes o ${F.yearly} al año.`],
       ["¿El chat es privado?", `Con un plan de pago, sí: privado hasta ${F.paid} mensajes al día y nunca se usa para entrenar IA. El chat gratis usa un servicio de IA gratis que puede guardar lo que escribes, y la app siempre pregunta antes.`],
       ["¿Cuándo sale Peace Be Still?", "Peace Be Still llega muy pronto al App Store y a Google Play. Todavía no hay fecha. Cuando la app esté disponible, esta página llevará directo a ella."],
       ["¿Qué Biblia usa la puerta de la Palabra de Dios?", "En español, la Reina-Valera 1909, citada palabra por palabra de una copia guardada, con libro, capítulo y versículo. En inglés, la King James Version. La IA nunca escribe un versículo de memoria."],
@@ -75,7 +73,7 @@ function words(lang) {
       ["¿Hay una prueba?", "No. No hay prueba que se convierta en un cobro. La versión gratis es gratis para siempre. La de pago empieza solo cuando tú la eliges, con el precio en dólares a la vista antes de tocar, y se cancela en dos toques."],
       ["¿El chat es una persona?", "No. El chat es IA y cada respuesta lo dice. No es un pastor, un consejero ni una persona."],
     ],
-    closingLab: "Muy pronto", closingH: "Muy pronto en el App Store y Google Play", closingP: "Una gran calma, cada noche.",
+    closingLab: "Muy pronto", closingP: "Una gran calma, cada noche.",
     byline: `Por Peace Be Still · una app de Spry Labs · Publicado el 18 nov 2026 · Actualizado el 21 nov 2026`,
     skip: "Ir al contenido",
   };
@@ -83,9 +81,8 @@ function words(lang) {
     title: "Peace Be Still: Whispered Sleep, Daily Words and Private Chat, Coming Soon",
     description: "Peace Be Still is a coming-soon phone app with two doors: God's Word (the King James Bible, whispered Psalms, Bible chat) and Mindset (daily declarations, Imagination Nights, a calm chat).",
     ogTitle: "Peace Be Still: a great calm, every night", locale: "en_US", og: "og.png",
-    name: "Peace Be Still · coming soon", h1: "A great calm, every night.",
+    name: "Peace Be Still · an app for calm nights · coming soon", h1: "A great calm, every night.",
     lead: "Calm nights and daily words, in the way that fits you. Peace Be Still is a phone app for the end of the day: it asks one question, “What do you need tonight?”, and opens one of two doors. It is free to start, with no ads and no trial.",
-    soonB: "Coming soon to the App Store and Google Play", soonS: "No date yet. When the app is live, this page will link straight to it.",
     heroGo: "Pick your door", doorsH: "Two doors. Pick yours.", doorsP: "Each door keeps to itself, and you can change your pick later in Settings.",
     faith: { h: "With God's Word", p: "Scripture, prayer and Bible stories, read and spoken. Every verse is the King James Version, word for word.", li: ["The whole King James Bible to read, and chapters read aloud", "A Bible chat that answers with real verses", "Whispered Psalms at bedtime, and a Bible story each day"], go: "See God's Word ›", href: "#gods-word" },
     mind: { h: "With mindset &amp; imagination", p: "Calm words in the morning and imagination at night, with no religious content.", li: ["Morning Word: one line to say out loud, morning and night", "Imagination Nights: whispered sleep sessions inside a scene", "A calm Mindset chat"], go: "See Mindset ›", href: "/mindset/" },
@@ -111,7 +108,7 @@ function words(lang) {
     priceH: "Is Peace Be Still free?", priceP: "Yes. There is a free version that stays free, and a paid plan you choose on purpose. No ads, ever.",
     freeLab: "Free version · forever", paidLab: "Paid plan", price: `${F.monthly} a month or ${F.yearly} a year`,
     free: [`One chat a day, up to ${F.free} messages`, "Your first sleep night, then one a week", "A daily declaration", "A journal that stays on your phone, and share cards", "In God's Word: the whole King James Bible to read, chapters read aloud, and today's Bible story"],
-    paid: [`Private chat that remembers what you share. ${c.promise} ${c.small}`, "A sleep session every night, plus ones made for you", "Every past story and the longer journeys", "Declaration topics and offline downloads"],
+    paid: [`Private chat that remembers what you share, up to ${F.paid} messages a day`, "A sleep session every night, plus ones made for you", "Every past story and the longer journeys", "Declaration topics and offline downloads"],
     promises: [["No trial", "Nothing turns into a charge by surprise."], ["Cancel in two taps", "From a link right on the paid screen."], ["Nothing free is taken back", "The free version never shrinks."]],
     priceNote: "Prices are in US dollars and are shown in the app before you tap. Your price never rises while you stay.",
     faqH: "Frequently asked questions",
@@ -125,7 +122,7 @@ function words(lang) {
       ["Is there a trial?", "No. There is no trial that turns into a charge. The free version is free for good. A paid plan starts only when you choose it, with the price in dollars shown before you tap, and you can cancel in two taps."],
       ["Is the chat a real person?", "No. The chat is AI, and every answer is labelled as AI. It is not a pastor, a counselor or a person."],
     ],
-    closingLab: "Coming soon", closingH: "Coming soon to the App Store and Google Play", closingP: "A great calm, every night.",
+    closingLab: "Coming soon", closingP: "A great calm, every night.",
     byline: "By Peace Be Still · a Spry Labs app · Published 18 Nov 2026 · Updated 21 Nov 2026",
     skip: "Skip to the page",
   };
@@ -206,10 +203,6 @@ ${headerHtml(lang, null)}
       <!-- claim:start --><!-- claim:end -->
       <p class="lead" id="what">${t.lead}</p>
       <a class="btn hero-go" href="#doors">${t.heroGo}</a>
-      <div class="soon" role="note">
-        <img src="/brand/pbs-mark-dark.svg" alt="" width="44" height="44">
-        <p><b>${t.soonB}</b><span>${t.soonS}</span></p>
-      </div>
     </div>
   </div>
   <section class="wrap" id="doors" aria-labelledby="doors-h">
@@ -223,11 +216,11 @@ ${headerHtml(lang, null)}
     </div>
   </section>
   <section id="${t.gw.id}" aria-labelledby="${t.gw.id}-h">
-    <div class="wrap section-head door-section">
+    <div class="wrap"><div class="section-head door-section">
       <span class="door-lab">${FAITH_TILE(28)}${t.faith.h}</span>
       <h2 id="${t.gw.id}-h">${t.gw.h}</h2>
       <p class="lead">${t.gw.p}</p>
-    </div>
+    </div></div>
     <div class="band">
       <figure class="wrap">
         <blockquote><p>${Q(t.gw.verseRef, lang)}</p></blockquote>
@@ -328,8 +321,7 @@ ${t.faq.map(([q, a]) => `      <div><h3>${q}</h3><p>${a}</p></div>`).join("\n")}
 <!-- cta:start --><!-- cta:end -->
   <section class="wrap closing" aria-label="${t.closingLab}">
     <img src="/brand/pbs-mark-dark.svg" alt="" width="64" height="64">
-    <h2>${t.closingH}</h2>
-    <p class="muted">${t.closingP}</p>
+    <p class="closing-line">${t.closingP}</p>
     <p class="byline">${t.byline}</p>
   </section>
 </main>
