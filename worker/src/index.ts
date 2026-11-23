@@ -450,7 +450,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     tally(metrics, 'first_private'); lane = 'paid';
   }
   if (lane === 'free' && req.freeConsent !== true) { tally(metrics, 'consent_needed'); return fixedReply('consent', consentText[v.lang]); }
-  // Paid (her ruling 21 Nov 2026): PAID_CHAT_MESSAGES (50) private messages a day, then free chat for the rest of the day,
+  // Paid (her ruling 21 Nov 2026): PAID_CHAT_MESSAGES (75) private messages a day, then free chat for the rest of the day,
   // only after she sees and accepts that it is not private (asked again each day). Her own monthly
   // backstop (CHAT_USER_MONTHLY_USD_*) and the app's monthly cap lead to the same choice. A paid user
   // never meets a pause: if the free lane has nothing, she is answered on the private model, briefly.
