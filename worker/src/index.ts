@@ -825,7 +825,7 @@ export function createApp(deps: Deps = realDeps) {
           const who = await install(request, env, now);
           if (who === 'missing') return fail('CHAT_TOKEN_SECRET_MISSING', 503);
           if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
-          return await reviewUnlock(env, who.installId, await request.json().catch(() => null), now);
+          return await reviewUnlock(env, who.installId, await request.text(), { now, ip: request.headers.get('cf-connecting-ip') ?? '0.0.0.0', waitUntil: p => ctx.waitUntil(p) });
         }
         if (pathname === '/api/admin/chat-block' && (request.method === 'POST' || request.method === 'DELETE')) return await adminBlock(request, env, deps);
         if (pathname === '/api/admin/spend' && request.method === 'GET') return await adminSpend(request, env, deps);

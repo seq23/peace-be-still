@@ -127,7 +127,7 @@ export async function reviewOpen(fetcher: typeof fetch = fetch): Promise<boolean
   }
 }
 
-export type ReviewResult = 'granted' | 'wrong' | 'slow' | 'failed';
+export type ReviewResult = 'granted' | 'wrong' | 'usedUp' | 'slow' | 'failed';
 /** Sends a store reviewer's code for this install. The server asks RevenueCat to grant the paid plan; this only
  *  reports what the server said. Any failure, including no answer, is 'failed' (never paid). */
 export async function redeemReviewCode(age: Age, code: string, fetcher: typeof fetch = fetch): Promise<ReviewResult> {
@@ -140,7 +140,7 @@ export async function redeemReviewCode(age: Age, code: string, fetcher: typeof f
       });
       if (res.status === 401 && !refresh) continue;
       if (res.status === 200) return 'granted';
-      if (res.status === 403) return 'wrong';
+      if (res.status === 403) return ((await res.json().catch(() => null)) as { error?: string } | null)?.error === 'USED_UP' ? 'usedUp' : 'wrong';
       if (res.status === 429) return 'slow';
       return 'failed';
     }

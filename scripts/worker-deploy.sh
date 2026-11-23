@@ -25,6 +25,13 @@ printf %s "$APPLE_DEVICECHECK_KEY" | $W secret put APPLE_DEVICECHECK_KEY $CFG >/
 printf %s "$APPLE_DEVICECHECK_KEY_ID" | $W secret put APPLE_DEVICECHECK_KEY_ID $CFG >/dev/null
 printf %s "$APPLE_TEAM_ID_PBS" | $W secret put APPLE_TEAM_ID $CFG >/dev/null
 echo "OUTPUT devicecheck: 3 Worker secrets put from the vault"
+# Store review access (worker/src/review.ts): the code is the vault's PBS_PLAY_REVIEW_CODE (10 digits), so the
+# Play Console App access note and the Worker never differ; the used-up alert files Open Loops with BOSS_OPEN_LOOPS_TOKEN.
+if printf %s "${PBS_PLAY_REVIEW_CODE:-}" | grep -Eqx '[0-9]{10}'; then
+  printf %s "$PBS_PLAY_REVIEW_CODE" | $W secret put REVIEW_CODE $CFG >/dev/null && echo "OUTPUT review: REVIEW_CODE put from the vault"
+else echo "NOTE PBS_PLAY_REVIEW_CODE_MISSING: review code not refreshed (the Worker keeps its own; no window opens without one)"; fi
+if [ -n "${BOSS_OPEN_LOOPS_TOKEN:-}" ]; then printf %s "$BOSS_OPEN_LOOPS_TOKEN" | $W secret put BOSS_OPEN_LOOPS_TOKEN $CFG >/dev/null
+else echo "NOTE BOSS_OPEN_LOOPS_TOKEN_MISSING: a used-up review code is logged (REVIEW_DEVICE_CAP) but files no Open Loops row"; fi
 # Story artwork (worker/src/storyart.ts): the R2 bucket, made once.
 $W r2 bucket list $CFG 2>/dev/null | grep -q "pbs-story-art" || $W r2 bucket create pbs-story-art $CFG
 $W d1 migrations apply peace-be-still-chat --remote $CFG

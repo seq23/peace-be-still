@@ -9,9 +9,13 @@ type Secrets = {
   CHAT_ADMIN_TOKEN?: string;
   OPENROUTER_API_KEY?: string;
   REVENUECAT_SECRET_KEY?: string;
-  // Store review access (review.ts), both Worker secrets: REVIEW_CODE (10 digits) and REVIEW_UNTIL (a date, "2026-12-05"); either missing, the review routes answer 404.
+  // Store review access (review.ts), Worker secrets: REVIEW_CODE (10 digits, vault PBS_PLAY_REVIEW_CODE) and REVIEW_UNTIL (a date, "2026-12-05"); either missing, the review routes answer 404.
   REVIEW_CODE?: string;
   REVIEW_UNTIL?: string;
+  // Optional override of the device cap per code version (default 10, at most 50).
+  REVIEW_MAX_DEVICES?: string;
+  // Files the Open Loops row when the review code is used up (review.ts); missing: OPEN_LOOPS_TOKEN_MISSING in the log.
+  BOSS_OPEN_LOOPS_TOKEN?: string;
   // Apple DeviceCheck (the private first chat, firstprivate.ts): the .p8 key, its id and the team id. Missing: DEVICECHECK_KEY_MISSING, and every first chat is the normal free lane.
   APPLE_DEVICECHECK_KEY?: string;
   APPLE_DEVICECHECK_KEY_ID?: string;
