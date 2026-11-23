@@ -2,7 +2,7 @@
 
 > Esta es una traducción al español. Si esta versión y la [versión en inglés](https://peacebestillapp.com/terms) no dicen lo mismo, prevalece la versión en inglés.
 
-Vigente desde: 21 de noviembre de 2026
+Vigente desde: 22 de noviembre de 2026
 
 ## Con quién es este acuerdo
 
@@ -18,7 +18,7 @@ Usted debe tener al menos 13 años para usar el chat. Si tiene de 13 a 17 años,
 
 La versión gratis es gratis y sin límite de tiempo: toda la Biblia en texto y en audio, la historia de hoy, un chat al día de hasta 5 mensajes (en un iPhone, su primer chat es privado), la primera noche para dormir y después una por semana, una declaración diaria, planes básicos de 7 días, versículos guardados, el diario, la racha y las tarjetas para compartir.
 
-Un plan de pago agrega chat bíblico ilimitado, un chat que recuerda, una sesión cada noche, sesiones hechas para usted, todas las historias anteriores, planes más largos, temas para las declaraciones y descargas para usar sin conexión. Con un plan de pago: chat bíblico ilimitado y privado. Los chats privados nunca se usan para entrenar IA. Privado hasta 50 mensajes al día. Después se puede elegir el chat gratis, que no es privado; siempre preguntamos antes. Se vende por mes o por año.
+Un plan de pago agrega chat bíblico ilimitado, un chat que recuerda, una sesión cada noche, sesiones hechas para usted, todas las historias anteriores, planes más largos, temas para las declaraciones y descargas para usar sin conexión. Con un plan de pago: chat bíblico ilimitado y privado. Los chats privados nunca se usan para entrenar IA. Privado hasta 75 mensajes al día. Después se puede elegir el chat gratis, que no es privado; siempre preguntamos antes. Se vende por mes o por año.
 
 Lo que es gratis sigue siendo gratis. Mientras siga suscrito, su precio no sube.
 
@@ -34,7 +34,7 @@ Las respuestas del chat las escribe una IA y van marcadas como IA. Pueden estar 
 
 ## Cómo usar bien la app
 
-Use la app de forma legal. No intente saltarse los límites diarios, sobrecargar o atacar nuestro servicio, copiar las historias, el audio o las sesiones de la app para ofrecerlos en otro lugar, ni usar el chat para hacerle daño a nadie. Podemos limitar o terminar el acceso de quien lo haga, y el chat se pausa solo por 24 horas después de una avalancha de mensajes, mensajes repetidos o intentos de romper sus reglas. El chat de pago también tiene un límite mensual de uso de IA privada por instalación. Después de sus 50 mensajes privados en un día, o al pasar ese límite mensual, o mientras el servicio de pago no esté disponible, puede elegir seguir en el chat gratis, que no es privado; nunca cambia sin su sí. Si el chat gratis no está disponible, recibe respuestas privadas más cortas, hasta 50 al día, y después de esas el chat puede estar ocupado un rato.
+Use la app de forma legal. No intente saltarse los límites diarios, sobrecargar o atacar nuestro servicio, copiar las historias, el audio o las sesiones de la app para ofrecerlos en otro lugar, ni usar el chat para hacerle daño a nadie. Podemos limitar o terminar el acceso de quien lo haga, y el chat se pausa solo por 24 horas después de una avalancha de mensajes, mensajes repetidos o intentos de romper sus reglas. El chat de pago también tiene un límite mensual de uso de IA privada por instalación. Después de sus 75 mensajes privados en un día, o al pasar ese límite mensual, o mientras el servicio de pago no esté disponible, puede elegir seguir en el chat gratis, que no es privado; nunca cambia sin su sí. Si el chat gratis no está disponible, recibe respuestas privadas más cortas, hasta 50 al día, y después de esas el chat puede estar ocupado un rato.
 
 La King James Version y la Reina-Valera 1909 son de dominio público. Las historias, el audio, las sesiones, el diseño y el software son nuestros, y le damos una licencia para usarlos de forma personal y no comercial dentro de la app.
 
