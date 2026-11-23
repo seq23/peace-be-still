@@ -31,7 +31,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyMindsetText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -533,8 +533,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const row = await env.DB.prepare('SELECT messages, first_msg_at, last_reminder_at FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId)
     .first<{ messages: number; first_msg_at: number; last_reminder_at: number | null }>();
   // Paid: private messages left today (none counted on the free lane she chose after them).
-  const remaining = paid.paid ? (overflow ? null : Math.max(0, PAID_CHAT_MESSAGES - (row?.messages ?? 0))) : crisisOpen ? null : Math.max(0, deviceLimit - (row?.messages ?? 0));
-  const shownLimit = paid.paid ? (overflow ? null : PAID_CHAT_MESSAGES) : crisisOpen ? null : deviceLimit;
+  // A free teen sees no message count: her model answer is one a day (TEEN_AI_ANSWERS_DAILY), so "4 of 5 left" would mislead.
+  const remaining = paid.paid ? (overflow ? null : Math.max(0, PAID_CHAT_MESSAGES - (row?.messages ?? 0))) : crisisOpen || teenOnly ? null : Math.max(0, deviceLimit - (row?.messages ?? 0));
+  const shownLimit = paid.paid ? (overflow ? null : PAID_CHAT_MESSAGES) : crisisOpen || teenOnly ? null : deviceLimit;
   // SB 243: a teen is reminded at least every 3 hours of chat that this is AI and to take a break.
   let reminder = false;
   if (v.teen && row && now - (row.last_reminder_at ?? row.first_msg_at) >= THREE_HOURS) {
@@ -693,7 +694,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
           return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });
         }
         // A teen past her one answer today: fixed words, and chat stays open (a closed chat could not take a crisis message).
-        if (teenSlot === 'used') return reply({ kind: 'busy', ai: false, fixed: true, text: (mind ? teenDailyMindsetText : teenDailyText)[v.lang], scripture: [], remaining: null, limit: null, reminder });
+        if (teenSlot === 'used') return reply({ kind: 'busy', ai: false, fixed: true, helpLines: true, text: teenDailyText(v.lang, region, mind ? 'mindset' : 'faith'), scripture: [], remaining: null, limit: null, reminder });
         if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit }); }
         tally(metrics, 'busy'); logCode('CHAT_BUSY');
         return reply({ kind: 'busy', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });

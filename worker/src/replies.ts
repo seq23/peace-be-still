@@ -160,16 +160,21 @@ export const teenStillHereText = {
   en: "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above are free any time, and a real person there will listen. An adult you trust can sit with you today, too.",
   es: 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba son gratuitas a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.',
 };
-// A teen past her one model answer today (her ruling 23 Nov 2026, "yes, 1 each"). Chat stays open, so a
-// message about her safety still gets the card and its lines.
-export const teenDailyText = {
-  en: "That was today's chat answer. Chat answers again tomorrow, and your Bible, today's story and the night sessions are here any time. If you're not safe, tell me here and you'll see free lines you can reach right away.",
-  es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y tu Biblia, la historia de hoy y las sesiones de la noche están aquí cuando quieras. Si no estás a salvo, dímelo aquí y verás líneas gratuitas a las que puedes llamar enseguida.',
+// A teen past her one model answer today (her ruling 23 Nov 2026, "yes, 1 each"). No model reads her next
+// messages, so this reply never asks her to say she is unsafe: it carries the free crisis lines for her
+// region itself, every time (the card's own lines; the app shows them as call and text buttons).
+const teenDailyOpen = {
+  faith: { en: "That was today's chat answer. Chat answers again tomorrow, and your Bible, today's story and the night sessions are here any time.", es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y tu Biblia, la historia de hoy y las sesiones de la noche están aquí cuando quieras.' },
+  mindset: { en: "That was today's chat answer. Chat answers again tomorrow, and the night sessions are here any time.", es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y las sesiones de la noche están aquí cuando quieras.' },
 };
-export const teenDailyMindsetText = {
-  en: "That was today's chat answer. Chat answers again tomorrow, and the night sessions are here any time. If you're not safe, tell me here and you'll see free lines you can reach right away.",
-  es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y las sesiones de la noche están aquí cuando quieras. Si no estás a salvo, dímelo aquí y verás líneas gratuitas a las que puedes llamar enseguida.',
+const teenDailyHelp = { en: 'If things feel heavy or you are not safe, free help is there any time.', es: 'Si todo se siente pesado o no estás a salvo, hay ayuda gratuita a cualquier hora.' };
+const teenDailyUs = {
+  en: 'Call or text 988, the Suicide & Crisis Lifeline, day or night. If you are in danger this minute, call 911.',
+  es: 'Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, la Línea de Prevención del Suicidio y Crisis, de día o de noche. Si estás en peligro en este momento, llama al 911.',
 };
+export function teenDailyText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other', door: Door = 'faith'): string {
+  return [teenDailyOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], teenDailyHelp[lang], (region === 'US' ? teenDailyUs : regional[region])[lang]].join(' ');
+}
 export const checkInQuestion = { en: 'Are you safe right now?', es: '¿Estás a salvo ahora mismo?' };
 
 export const fallbackText = {
