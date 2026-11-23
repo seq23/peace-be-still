@@ -274,7 +274,7 @@ export default function ChatScreen() {
             <Text style={s.ref}>{`${v.ref} · ${v.translation === 'RV1909' ? 'RV1909' : 'KJV'}`}</Text>
             <Text style={s.verseText}>{displayRuns(v.text).map((r, j) => <Text key={j} style={r.italic ? { fontStyle: 'italic' } : undefined}>{r.text}</Text>)}</Text>
           </View>)}
-          {e.res.kind === 'crisis' && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
+          {(e.res.kind === 'crisis' || e.res.helpLines) && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
             <Text style={[s.linkText, { color: c.accent }]}>{t(l.label)}</Text>
           </Pressable>)}
           {/* Her ruling 21 Nov 2026: the free day's last message (FREE_CHAT_MESSAGES) always gets its full

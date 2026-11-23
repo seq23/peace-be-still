@@ -39,6 +39,9 @@ export type ChatResponse = {
   /** Crisis replies: the words shown before the card, ending in "Are you safe right now?". ai is true when
    *  the private crisis model wrote the first part; the card (text) and its hotlines are fixed, never AI. */
   checkIn?: { text: string; ai: boolean };
+  /** A fixed reply that names free crisis lines in its text (a teen past her one answer today): shown with the
+   *  same call and text buttons as the crisis card. */
+  helpLines?: boolean;
   /** True when the text is a fixed line written in code (who it is; the one-translation note), not a model's words. */
   fixed?: boolean;
   /** Answered on the free lane she chose after her private messages: shown as "Free chat (not private)". */

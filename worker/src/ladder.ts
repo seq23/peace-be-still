@@ -10,8 +10,10 @@ import { reserve, logCode } from './counts';
 import { RungError, type JsonSchema, type Message, type Rung } from './providers/types';
 import { microCost } from './controls';
 
-/** price: per-million-token dollars for a billed rung (the paid lane); its cost is tallied as paid_spend_micro. */
-export type LadderRung = { id: string; call: Rung; cap: number; day: string; price?: { in: number; out: number; cached?: number } };
+/** price: per-million-token dollars for a billed rung (the paid lane); its cost is tallied as paid_spend_micro.
+ *  google: the rung reaches a Gemini model (Google's API, or a google/ model through OpenRouter). Google's terms bar
+ *  every Gemini route from a service likely used by under-18s, so a teen's words never reach such a rung (index.ts offGoogle). */
+export type LadderRung = { id: string; call: Rung; cap: number; day: string; price?: { in: number; out: number; cached?: number }; google?: boolean };
 export type Metrics = Map<string, number>;
 export const tally = (m: Metrics, key: string, by = 1) => m.set(key, (m.get(key) ?? 0) + by);
 export type LadderResult = { rung: string; data: unknown } | { empty: 'out' | 'busy' };

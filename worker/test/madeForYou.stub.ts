@@ -64,7 +64,8 @@ export default {
       allowedRegion: () => true,
       install: async req => {
         const installId = req.headers.get('authorization')?.replace(/^Bearer /, '');
-        return isInstall(installId) ? { installId, age: 'adult' } : null;
+        // x-test-age: teen → a teen install (13-17), whose notes never reach a free rung that may train.
+        return isInstall(installId) ? { installId, age: req.headers.get('x-test-age') === 'teen' ? 'teen' : 'adult' } : null;
       },
       limit: async id => id !== example.limited,
       paid: async id => id === example.free ? { paid: false, paidUntil: null }
@@ -75,7 +76,7 @@ export default {
       },
       crisisText: () => 'Fixed safety reply',
       // The chat's real ladder over the chat's real rung list, with made-for-you counters and caps.
-      ladder: async (use, messages, schema, maxTokens, valid, signal, paidOnly) => {
+      ladder: async (use, messages, schema, maxTokens, valid, signal, paidOnly, teen) => {
         const fixture = (rung: { id: string }) => async () => {
             if (down.has(rung.id) || down.has(rung.id.split(':')[0])) throw new RungError(rateLimited.has(rung.id.split(':')[0]) ? 'rate_limited' : 'failed', 'FIXTURE_MODEL_DOWN');
             if (use === 'judge') {
@@ -97,7 +98,7 @@ export default {
             if (revising) revisions.push(messages[messages.length - 1].content);
             return { paragraphs };
         };
-        const rungs = realDeps.rungs(madeForYouEnv(chatConfig as unknown as Env & Cloudflare.Env), now).map(rung => ({ ...rung, call: fixture(rung) }));
+        const rungs = realDeps.rungs(madeForYouEnv(chatConfig as unknown as Env & Cloudflare.Env), now, 'free', teen).map(rung => ({ ...rung, call: fixture(rung) }));
         const share = { book: (day: string, metric: string, cap: number) => reserve(env.DB, day, metric, cap), out: () => new RungError('exhausted', 'MFY_SHARE_USED') };
         // The private paid rung (her ruling 21 Nov 2026): last, answered by the same fixture, priced; its spend is booked
         // into chat's paid_spend_micro as madeForYou.mount.ts does. x-test-paid: off leaves it out (the monthly cap).
