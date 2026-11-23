@@ -113,7 +113,6 @@ const listings = { 'en-US': read('store/listing-en.md'), 'es-MX': read('store/li
 // Play shows the same listing in English (default) and Spanish (es-US translation); both are checked.
 const playFieldsOf = (text: string) => ({ title: field(text, 'Title') ?? '', short: field(text, 'Short description') ?? '', full: text.split('Full description:\n')[1]?.trim() ?? '' });
 const playListings = { 'en-US': playFieldsOf(read('store/google-play/listing-en.md')), 'es-US': playFieldsOf(read('store/google-play/listing-es.md')) };
-const playFields = playListings['en-US'];
 const events = read('store/events.md').split(/^## /m).slice(1).map(block => ({ name: block.split('\n')[0].trim(), block }));
 const legal = ['privacy', 'terms', 'disclaimer'].map(name => ({ name, text: read(`legal/${name}.md`) }));
 
@@ -235,9 +234,16 @@ test('each Google Play listing fits Play\'s limits and promises nothing the Andr
     assert.match(f.full, /Google Play/, locale);
     assert.match(f.full, es ? /https:\/\/peacebestillapp\.com\/es\/privacidad/ : /https:\/\/peacebestillapp\.com\/privacy/, locale);
     assert.doesNotMatch(f.full, /\$\s?\d/, `${locale}: prices are Google Play's to show per country`);
-    // Same free and paid numbers the app enforces.
-    assert.match(f.full, new RegExp(es ? `de hasta ${FREE_CHAT_MESSAGES} mensajes` : `up to ${FREE_CHAT_MESSAGES} messages`), locale);
-    assert.match(f.full, new RegExp(es ? `hasta ${PAID_CHAT_MESSAGES} mensajes al día` : `up to ${PAID_CHAT_MESSAGES} messages a day`), locale);
+  }
+});
+
+test('all four listings (App Store en-US/es-MX, Google Play en-US/es-US) state the free and paid counts the app enforces', () => {
+  const four: [string, string][] = [['apple en-US', listings['en-US']], ['apple es-MX', listings['es-MX']], ['play en-US', playListings['en-US'].full], ['play es-US', playListings['es-US'].full]];
+  for (const [where, text] of four) {
+    const es = where.endsWith('es-MX') || where.endsWith('es-US');
+    assert.ok(text.length > 500, `${where}: listing text read`);
+    assert.match(text, new RegExp(es ? `de hasta ${FREE_CHAT_MESSAGES} mensajes\\b` : `up to ${FREE_CHAT_MESSAGES} messages\\b`), where);
+    assert.match(text, new RegExp(es ? `hasta ${PAID_CHAT_MESSAGES} mensajes al día` : `up to ${PAID_CHAT_MESSAGES} messages a day`), where);
   }
 });
 

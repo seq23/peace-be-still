@@ -95,7 +95,8 @@ test('NEGATIVE: no customer-facing words say "lane" (internal jargon); code name
 
 test('every message count in customer copy is the setting: the free day is FREE_CHAT_MESSAGES, private ones PAID_CHAT_MESSAGES', () => {
   // Store text (App Store and Play, every language and caption), legal, the site, the app's strings and the
-  // social post banks and their caption code: a number written as a word counts too ("ten messages").
+  // social post banks and their caption code: a number written as a word counts too ("ten messages"), and so do
+  // "N chat messages", "N free chat messages", "N mensajes de chat" and "N chats" (review of #119).
   const files = execSync('git ls-files app/src/i18n store legal site/content site/public data/threads data/instagram scripts/threads scripts/instagram', { cwd: new URL('.', root) }).toString().split('\n')
     .filter(f => /\.(json|md|mjs|html|txt|xml)$/.test(f));
   assert.ok(files.some(f => f.startsWith('store/google-play/')) && files.some(f => f.startsWith('data/threads/')), 'the Play listings and the social banks are scanned');
@@ -104,7 +105,7 @@ test('every message count in customer copy is the setting: the free day is FREE_
     .forEach((w, i) => { spelled[w] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 30, 50][i]; });
   ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once', 'doce', 'quince', 'veinte', 'treinta', 'cincuenta']
     .forEach((w, i) => { spelled[w] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 30, 50][i]; });
-  const count = new RegExp(`\\b(\\d+|${Object.keys(spelled).join('|')}) (?:free |more free |private )?(?:messages|mensajes)|메시지 (\\d+)개`, 'gi');
+  const count = new RegExp(`\\b(\\d+|${Object.keys(spelled).join('|')}) (?:free |more free |private )?(?:bible chat |chat )?(?:messages|mensajes|chats)(?: de chat)?|메시지 (\\d+)개`, 'gi');
   let free = 0;
   for (const f of files) {
     const text = read(f);
