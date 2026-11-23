@@ -167,13 +167,18 @@ const teenDailyOpen = {
   faith: { en: "That was today's chat answer. Chat answers again tomorrow, and your Bible, today's story and the night sessions are here any time.", es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y tu Biblia, la historia de hoy y las sesiones de la noche están aquí cuando quieras.' },
   mindset: { en: "That was today's chat answer. Chat answers again tomorrow, and the night sessions are here any time.", es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y las sesiones de la noche están aquí cuando quieras.' },
 };
-const teenDailyHelp = { en: 'If things feel heavy or you are not safe, free help is there any time.', es: 'Si todo se siente pesado o no estás a salvo, hay ayuda gratuita a cualquier hora.' };
-const teenDailyUs = {
+const helpOpen = { en: 'If things feel heavy or you are not safe, free help is there any time.', es: 'Si todo se siente pesado o no estás a salvo, hay ayuda gratuita a cualquier hora.' };
+const helpUs = {
   en: 'Call or text 988, the Suicide & Crisis Lifeline, day or night. If you are in danger this minute, call 911.',
   es: 'Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, la Línea de Prevención del Suicidio y Crisis, de día o de noche. Si estás en peligro en este momento, llama al 911.',
 };
+/** Her region's free crisis lines, in the one form every reply outside the card uses (the teen daily limit and
+ *  the free day's wall). The app shows each number as call and text buttons when the reply says helpLines. */
+export function helpLinesText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other'): string {
+  return [helpOpen[lang], (region === 'US' ? helpUs : regional[region])[lang]].join(' ');
+}
 export function teenDailyText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other', door: Door = 'faith'): string {
-  return [teenDailyOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], teenDailyHelp[lang], (region === 'US' ? teenDailyUs : regional[region])[lang]].join(' ');
+  return [teenDailyOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], helpLinesText(lang, region)].join(' ');
 }
 export const checkInQuestion = { en: 'Are you safe right now?', es: '¿Estás a salvo ahora mismo?' };
 
@@ -205,14 +210,16 @@ export const noFreeModelMindsetText = {
   en: 'Chat is resting until tomorrow. Your night sessions are all still here.',
   es: 'El chat descansa hasta mañana. Tus sesiones de la noche siguen aquí.',
 };
-export const limitText = {
-  en: "That's today's chat. It opens again tomorrow, and your Bible is here any time.",
-  es: 'Ese fue el chat de hoy. Mañana se abre de nuevo, y tu Biblia está aquí cuando quieras.',
+// The free day's wall (its messages used, a second conversation the same day, or the network's share). No
+// model reads her words there, so the reply never depends on what she wrote: it always ends on her region's
+// free crisis lines (a second conversation that opens with "I'm not safe" meets them, never a closed door alone).
+const limitOpen = {
+  faith: { en: "That's today's chat. It opens again tomorrow, and your Bible is here any time.", es: 'Ese fue el chat de hoy. Mañana se abre de nuevo, y tu Biblia está aquí cuando quieras.' },
+  mindset: { en: "That's today's chat. It opens again tomorrow.", es: 'Ese fue el chat de hoy. Mañana se abre de nuevo.' },
 };
-export const limitMindsetText = {
-  en: "That's today's chat. It opens again tomorrow.",
-  es: 'Ese fue el chat de hoy. Mañana se abre de nuevo.',
-};
+export function limitText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other', door: Door = 'faith'): string {
+  return [limitOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], helpLinesText(lang, region)].join(' ');
+}
 // Asked for a verse in another translation: the app quotes only the KJV / RV1909, so it gives that
 // verse in those words and says so once, plainly.
 export const oneTranslationText = {

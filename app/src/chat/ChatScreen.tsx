@@ -325,8 +325,9 @@ const s = StyleSheet.create({
   verse: { backgroundColor: night.bg, borderRadius: 12, padding: 14, gap: 6 },
   ref: { fontFamily: 'SplineSansMono_500Medium', fontSize: 12, letterSpacing: 1.2, textTransform: 'uppercase', color: night.dawn },
   verseText: { fontFamily: 'LibreCaslonText_400Regular', fontSize: 16, lineHeight: 23, color: night.ink },
-  link: { borderWidth: 1.5, borderRadius: 40, paddingVertical: 12, alignItems: 'center' },
-  linkText: { fontFamily: 'Figtree_600SemiBold', fontSize: 17 },
+  // Wrapped labels ("Llamar a la Línea de la Vida 800 911 2000" at 390 px) stay centred inside the pill's curve.
+  link: { borderWidth: 1.5, borderRadius: 40, paddingVertical: 12, paddingHorizontal: 24, alignItems: 'center' },
+  linkText: { fontFamily: 'Figtree_600SemiBold', fontSize: 17, textAlign: 'center' },
   note: { fontFamily: 'Figtree_400Regular', fontSize: 14, lineHeight: 20, marginTop: 4 },
   small: { fontFamily: 'Figtree_400Regular', fontSize: 14, lineHeight: 20 },
   reasons: { gap: 6 },

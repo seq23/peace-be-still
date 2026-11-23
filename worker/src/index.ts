@@ -31,7 +31,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
@@ -528,7 +528,18 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (!code) throw error;
     tally(metrics, code.toLowerCase());
     if (code === 'CHAT_GLOBAL_LIMIT') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL', { reason: 'global_ceiling' }); return reply({ kind: 'no_free_model', ai: false, text: (mind ? noFreeModelMindsetText : noFreeModelText)[v.lang], scripture: [], remaining: null, limit: null, reminder: false }); }
-    return reply({ kind: 'limit', ai: false, text: (mind ? limitMindsetText : limitText)[v.lang], scripture: [], remaining: 0, limit: deviceLimit, reminder: false });
+    // The free day's wall (her messages, a second conversation the same day, or the network's share): the
+    // count stays enforced here at the server, whatever the request claims; only the words differ. Every wall
+    // reply names her region's free crisis lines (no model reads her words here, so nothing depends on what she
+    // wrote). A teen (no paid teen is walled) keeps chat open and sees no counter: her daily-limit reply once her
+    // one answer came today; before it (Workers AI was out or busy when she asked) the limit words, which claim no answer.
+    const door = mind ? 'mindset' : 'faith';
+    if (teenOnly) {
+      let answered = false; // unread: the limit words, which make no claim either way (both carry the lines)
+      try { answered = ((await env.DB.prepare('SELECT n FROM chat_short_day WHERE day = ? AND device = ?').bind(day, teenKey).first<{ n: number }>())?.n ?? 0) > 0; } catch { logCode('TEEN_ANSWER_CAP_UNREAD'); }
+      return reply({ kind: 'busy', ai: false, fixed: true, helpLines: true, text: (answered ? teenDailyText : limitText)(v.lang, region, door), scripture: [], remaining: null, limit: null, reminder: false });
+    }
+    return reply({ kind: 'limit', ai: false, helpLines: true, text: limitText(v.lang, region, door), scripture: [], remaining: 0, limit: deviceLimit, reminder: false });
   }
   const row = await env.DB.prepare('SELECT messages, first_msg_at, last_reminder_at FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId)
     .first<{ messages: number; first_msg_at: number; last_reminder_at: number | null }>();
