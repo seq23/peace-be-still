@@ -54,6 +54,7 @@ section{padding-top:56px;padding-bottom:56px}
 .hero{display:grid;gap:40px;align-items:center;padding-top:24px;padding-bottom:56px}
 .hero-text{display:flex;flex-direction:column;gap:20px}
 .soon{display:flex;gap:14px;align-items:center;border:1.5px solid var(--line);background:var(--surface-raised);border-radius:18px;padding:14px 16px;max-width:30em}
+.hero-go{align-self:flex-start;text-decoration:none}
 .soon img{width:44px;height:44px;flex:none}
 .soon b{display:block;font-size:17px}
 .soon span{font-size:15px;color:var(--ink-muted)}

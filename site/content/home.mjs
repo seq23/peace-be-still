@@ -36,7 +36,7 @@ function words(lang) {
     name: "Peace Be Still · muy pronto", h1: "Una gran calma, cada noche.",
     lead: "Noches tranquilas y palabras para el día, a tu manera. Peace Be Still es una app para el final del día que hace una sola pregunta, “¿Qué necesitas esta noche?”, y abre una de dos puertas. Empezar es gratis, sin anuncios y sin prueba.",
     soonB: "Muy pronto en el App Store y Google Play", soonS: "Todavía no hay fecha. Cuando la app esté disponible, esta página llevará directo a ella.",
-    doorsH: "Dos puertas. Elige la tuya.", doorsP: "Cada puerta va por su lado, y puedes cambiar tu elección luego en Ajustes.",
+    heroGo: "Elige tu puerta", doorsH: "Dos puertas. Elige la tuya.", doorsP: "Cada puerta va por su lado, y puedes cambiar tu elección luego en Ajustes.",
     faith: { h: "Con la Palabra de Dios", p: "Escrituras, oración e historias bíblicas para leer y escuchar. Cada versículo es de la Reina-Valera 1909, palabra por palabra.", li: ["La Biblia completa para leer", "Un chat bíblico que responde con versículos reales", "Salmos susurrados para dormir y una historia bíblica cada día"], go: "Ver la Palabra de Dios ›", href: "#palabra-de-dios" },
     mind: { h: "Con mente e imaginación", p: "Palabras tranquilas en la mañana e imaginación en la noche, sin contenido religioso.", li: ["Morning Word: una frase para decir en voz alta, de mañana y de noche", "Imagination Nights: sesiones susurradas para dormir dentro de una escena", "Un chat de Mentalidad tranquilo"], go: "Ver Mentalidad ›", href: "/es/mentalidad/" },
     gw: { id: "palabra-de-dios", h: "La Palabra de Dios", p: "Para quien quiere la Biblia al final del día: leerla, escucharla en susurro y conversar con ella.", verseRef: "MAR 4:39" },
@@ -86,7 +86,7 @@ function words(lang) {
     name: "Peace Be Still · coming soon", h1: "A great calm, every night.",
     lead: "Calm nights and daily words, in the way that fits you. Peace Be Still is a phone app for the end of the day: it asks one question, “What do you need tonight?”, and opens one of two doors. It is free to start, with no ads and no trial.",
     soonB: "Coming soon to the App Store and Google Play", soonS: "No date yet. When the app is live, this page will link straight to it.",
-    doorsH: "Two doors. Pick yours.", doorsP: "Each door keeps to itself, and you can change your pick later in Settings.",
+    heroGo: "Pick your door", doorsH: "Two doors. Pick yours.", doorsP: "Each door keeps to itself, and you can change your pick later in Settings.",
     faith: { h: "With God's Word", p: "Scripture, prayer and Bible stories, read and spoken. Every verse is the King James Version, word for word.", li: ["The whole King James Bible to read, and chapters read aloud", "A Bible chat that answers with real verses", "Whispered Psalms at bedtime, and a Bible story each day"], go: "See God's Word ›", href: "#gods-word" },
     mind: { h: "With mindset &amp; imagination", p: "Calm words in the morning and imagination at night, with no religious content.", li: ["Morning Word: one line to say out loud, morning and night", "Imagination Nights: whispered sleep sessions inside a scene", "A calm Mindset chat"], go: "See Mindset ›", href: "/mindset/" },
     gw: { id: "gods-word", h: "God's Word", p: "For people who want scripture at the end of the day: to read it, hear it whispered and talk it through.", verseRef: "MAR 4:39" },
@@ -205,13 +205,14 @@ ${headerHtml(lang, null)}
       <h1><span class="name">${t.name}</span>${t.h1}</h1>
       <!-- claim:start --><!-- claim:end -->
       <p class="lead" id="what">${t.lead}</p>
+      <a class="btn hero-go" href="#doors">${t.heroGo}</a>
       <div class="soon" role="note">
         <img src="/brand/pbs-mark-dark.svg" alt="" width="44" height="44">
         <p><b>${t.soonB}</b><span>${t.soonS}</span></p>
       </div>
     </div>
   </div>
-  <section class="wrap" aria-labelledby="doors-h">
+  <section class="wrap" id="doors" aria-labelledby="doors-h">
     <div class="section-head">
       <h2 id="doors-h">${t.doorsH}</h2>
       <p class="lead">${t.doorsP}</p>
