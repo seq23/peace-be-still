@@ -87,6 +87,7 @@ function ReportAnswer({ answer, c, t }: { answer: string; c: Palette; t: T }) {
 }
 
 // Replies that end today's chat on this screen: the day's limit, free chat resting, a paused account.
+// A message that shows the crisis lines never carries the upgrade offer (her ruling 23 Nov 2026).
 // 'busy' (a model failed for a moment) keeps chat open. A paid user meets none of these (the Worker
 // offers free chat after her private messages, or answers privately and briefly).
 const CLOSES = new Set<ChatResponse['kind']>(['limit', 'no_free_model', 'paused']);
@@ -279,7 +280,7 @@ export default function ChatScreen() {
           </Pressable>)}
           {/* Her ruling 21 Nov 2026: the free day's last message (FREE_CHAT_MESSAGES) always gets its full
               answer; under it, what a plan adds at the store's own monthly price, and when the free ones come back. */}
-          {!paid && i === entries.length - 1 && (e.res.kind === 'limit' || (e.res.kind === 'answer' && e.res.remaining === 0)) ? <View testID="limit-upgrade-card" style={{ gap: 6 }}>
+          {!paid && i === entries.length - 1 && !e.res.helpLines && (e.res.kind === 'limit' || (e.res.kind === 'answer' && e.res.remaining === 0)) ? <View testID="limit-upgrade-card" style={{ gap: 6 }}>
             <Pressable accessibilityRole="button" testID="limit-upgrade" onPress={() => router.push('/paid')} style={[s.link, { borderColor: c.accent }]}>
               <Text style={[s.linkText, { color: c.accent }]}>{e.res.firstPrivate || firstPrivate ? keepPrivate : monthly ? t('chat.limit.upgrade', { price: monthly }) : t('chat.limit.upgradeNoPrice')}</Text>
             </Pressable>
