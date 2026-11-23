@@ -10,14 +10,16 @@ Owner-approved 18 Nov 2026. Order (a partial library is still launchable), Engli
      Harbor has its own lanes), then the chapters.
 Text is the stored text word for word (lib/text.py says the only spoken-form changes).
 
-Each file: render (Kokoro, render_kokoro.py) -> master (two-pass EBU R128 loudnorm, then AAC-LC mono
-48 kbps .m4a, plays on iOS and Android; the ENCODED file is measured and re-mastered from the kept WAV
-when AAC pushed it outside the bars) -> check (qa.py) -> rclone copy to Drive + md5 check -> delete
+Each file: render (Kokoro, render_kokoro.py) -> master (a measured gain, then a 4x-oversampled true-peak
+limiter, then ffmpeg's AAC-LC, PNS off, mono 48 kbps .m4a, plays on iOS and Android; the ENCODED file is
+measured and re-mastered from the kept WAV when AAC pushed it outside the bars) -> check (qa.py: Whisper
+large-v3-turbo, accuracy and ends-whole by alignment) -> rclone copy to Drive + md5 check -> delete
 from the Mac -> manifest row (audio/manifest.jsonl, one row per file). A file whose only problems are
 mastering (A06) is never re-rendered; a speech problem (A01, A07, length) is re-rendered once (a touch
-slower). A FAILED row is tried again on later runs, before any new file, until it has failed
-MAX_TRIES runs; then it is a NAMED STOP [FAILED_3_TRIES] in the census line (and so in her morning
-Notices) naming the files. Drive unreachable = NAMED STOP, exit 9. The Mac holds at most ~5 GB of work.
+slower). A FAILED row is tried again on later runs, before any new file, by the next route (whole
+verses, then sentences); when every route has failed, or it crashed MAX_TRIES runs, it is "held" with its
+reason: never listed by the app, a note in the census line, tried again when its words or the judge change.
+A judge that will not load is NAMED STOP [JUDGE_UNAVAILABLE], never a verdict. Drive unreachable = NAMED STOP, exit 9. The Mac holds at most ~5 GB of work.
 
 While priorities 1-2 are incomplete, ~/.peace-be-still/library-fill.active exists
 ({started, expected_end, reason}); How We Know / Whisper Almanac pause while it does. It is removed
