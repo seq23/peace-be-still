@@ -1,5 +1,54 @@
 {
  "schema": "pbs-gsc-query-history-v1",
- "queries": {},
- "updated_at": "2026-11-21T17:47:12.189Z"
+ "queries": {
+  "bible stories in order for adults": {
+   "first_seen": "2026-11-19",
+   "best_position": 56,
+   "pages": [
+    "https://peacebestillapp.com/questions/bible-stories-for-adults/"
+   ],
+   "last_seen": "2026-11-19"
+  },
+  "como cancelar bible chat": {
+   "first_seen": "2026-11-19",
+   "best_position": 7,
+   "pages": [
+    "https://peacebestillapp.com/questions/how-to-cancel-bible-chat-subscription/"
+   ],
+   "last_seen": "2026-11-19"
+  },
+  "do you have to pay for creed bible app": {
+   "first_seen": "2026-11-19",
+   "best_position": 10.5,
+   "pages": [
+    "https://peacebestillapp.com/questions/is-creed-bible-app-free/"
+   ],
+   "last_seen": "2026-11-19"
+  },
+  "haven chat app": {
+   "first_seen": "2026-11-19",
+   "best_position": 10,
+   "pages": [
+    "https://peacebestillapp.com/questions/haven-bible-chat/"
+   ],
+   "last_seen": "2026-11-19"
+  },
+  "how much is creed app": {
+   "first_seen": "2026-11-19",
+   "best_position": 16,
+   "pages": [
+    "https://peacebestillapp.com/questions/is-creed-bible-app-free/"
+   ],
+   "last_seen": "2026-11-19"
+  },
+  "is the haven bible app free": {
+   "first_seen": "2026-11-19",
+   "best_position": 10,
+   "pages": [
+    "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/"
+   ],
+   "last_seen": "2026-11-19"
+  }
+ },
+ "updated_at": "2026-11-22T18:05:48.330Z"
 }

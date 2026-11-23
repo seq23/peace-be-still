@@ -40,7 +40,6 @@ jobs:
     outputs:
       bible: ${{ steps.p.outputs.bible }}
       stories: ${{ steps.p.outputs.stories }}
-      jobs: ${{ steps.p.outputs.jobs }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -49,36 +48,30 @@ jobs:
         env:
           ONLY: ${{ inputs.only }}
           STORY: ${{ inputs.story }}
-          # The job count comes from the launch's Central start time (fill.py CLOUD_JOBS: 16 at night, 10 by
-          # day); GitHub Free runs 20 jobs at once across all her repos, so by day 10 stay free for CI.
+          # fill.py cloud_batch sizes the whole batch from the launch's Central start time (14 jobs at night:
+          # 10 Bible + 4 stories; 10 by day: 6 + 4), so 6 of GitHub Free's 20 runners always stay free.
           BJ: ${{ inputs.bible_jobs || '12' }}
           SJ: ${{ inputs.story_jobs || '4' }}
           BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}
           GH_TOKEN: ${{ github.token }}
         run: |
           pip install -q numpy scipy
-          slots=$(python audio/fill.py --cloud-slots)
-          jobs=$(python -c 'import json,sys; print(json.loads(sys.argv[1])["jobs"])' "$slots")
-          window=$(python -c 'import json,sys; print(json.loads(sys.argv[1])["window"])' "$slots")
-          cap=$(( jobs - SJ < BJ ? jobs - SJ : BJ )); cap=$(( cap < 0 ? 0 : cap ))
-          plan=$(python audio/fill.py --cloud-plan "$cap")
+          plan=$(python audio/fill.py --cloud-batch "$BJ" "$SJ")
           echo "$plan"
+          window=$(python -c 'import json,sys; print(json.loads(sys.argv[1])["window"])' "$plan")
           if [ -n "$ONLY" ] || [ -n "$STORY" ]; then
             # A proof run: one shard over the files asked for, and/or the one story asked for.
             bible=$([ -n "$ONLY" ] && echo '["0/1"]' || echo '[]')
             stories=$([ -n "$STORY" ] && python -c 'import json,sys; print(json.dumps([sys.argv[1]]))' "$STORY" || echo '[]')
           else
             bible=$(python -c 'import json,sys; print(json.dumps(json.loads(sys.argv[1])["bible"]))' "$plan")
-            # Slots the Bible matrix leaves go to stories (the window's job count in all), so the long pole gets them.
-            free=$(( jobs - $(python -c 'import json,sys; print(len(json.loads(sys.argv[1])))' "$bible") ))
-            stories=$(python audio/hush_clone.py --cloud-plan "$free")
+            stories=$(python audio/hush_clone.py --cloud-plan "$(python -c 'import json,sys; print(json.loads(sys.argv[1])["story_slots"])' "$plan")")
           fi
           nb=$(python -c 'import json,sys; print(len(json.loads(sys.argv[1])))' "$bible")
           ns=$(python -c 'import json,sys; print(len(json.loads(sys.argv[1])))' "$stories")
           echo "bible=$bible" >> "$GITHUB_OUTPUT"
           echo "stories=$stories" >> "$GITHUB_OUTPUT"
-          echo "jobs=$(( nb + ns ))" >> "$GITHUB_OUTPUT"
-          echo "OUTPUT plan: $(( nb + ns )) of the $window window's $jobs jobs ($nb bible + $ns stories; $(TZ=America/Chicago date +%H:%M) CT start)"
+          echo "OUTPUT plan: $nb bible + $ns stories for the $window window ($(TZ=America/Chicago date +%H:%M) CT start)"
           complete=$(python -c 'import json,sys; print(json.loads(sys.argv[1])["complete"])' "$plan")
           if [ "$bible" = "[]" ] && [ "$stories" = "[]" ] && [ -z "$ONLY$STORY" ] && [ "$complete" != True ]; then
             echo "NOTE CLOUD_SHARE_DONE the cloud's share is voiced; the Mac's share is still going, so the fill is not complete yet"
@@ -102,7 +95,6 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 12
       matrix: { shard: "${{ fromJSON(needs.plan.outputs.bible) }}" }
     steps:
       - uses: actions/checkout@v4
@@ -136,7 +128,6 @@ jobs:
     timeout-minutes: 345
     strategy:
       fail-fast: false
-      max-parallel: 16
       matrix: { story: "${{ fromJSON(needs.plan.outputs.stories) }}" }
     steps:
       - uses: actions/checkout@v4
