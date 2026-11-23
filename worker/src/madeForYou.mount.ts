@@ -53,12 +53,13 @@ export async function bookPaidSpend(db: D1Database, now: number, metrics: Map<st
 
 const central = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit' });
 
-/** Made for you's one ladder: chat's rungs (a teen's note only on rungs that never train), then the private paid rung. */
+/** Made for you's one ladder: chat's rungs (a teen's note only on rungs that never train), then the private paid rung
+ *  (never for a teen when it is a google/ model: no teen's words reach any Gemini route, her ruling 23 Nov 2026). */
 export function madeForYouLadder(env: Env, deps: Deps): MadeForYouDependencies['ladder'] {
   return async (use, messages, schema, maxTokens, valid, signal, paidOnly, teen) => {
     const now = deps.now();
     const metrics = new Map<string, number>();
-    const rungs = madeForYouRungs(deps.rungs(madeForYouEnv(env), now, 'free', teen), use, chatShare(env.DB), signal, await paidCall(env, now), paidOnly);
+    const rungs = madeForYouRungs(deps.rungs(madeForYouEnv(env), now, 'free', teen), use, chatShare(env.DB), signal, teen && /^google\//i.test(config.paid.model) ? null : await paidCall(env, now), paidOnly);
     try {
       const result = await runLadder(env.DB, rungs, messages, schema as never, maxTokens, metrics, valid);
       // Which rung answered (a code, never the text): the soak's live log and the paid fallback's own count.
