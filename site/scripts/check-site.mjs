@@ -41,7 +41,7 @@ const manifesting = /\bmanifest(ing|ation|ations|s|ed)?\b|law of attraction/i;
 const STORE_NAMES = { ios: "App Store", play: "Google Play" };
 const notYetFor = (n) => new RegExp(`coming soon to (?:the )?${n}|${n}: coming soon|muy pronto (?:a|al|en)(?: el)? ${n}|${n}: muy pronto|곧 ${n}|${n}에 나오기 전|即将上架 ${n}|还没有在 ${n}`, "i");
 const nowOnFor = (n) => new RegExp(`now on (?:the )?${n}|ya está en (?:el )?${n}|지금 (?:iPhone용 |Android용 )?${n}에(?:서)? (?:있어요|받으)|已在 (?:iPhone 的 |Android 的 )?${n}|\\bon the ${n} for`, "i");
-const NOT_OUT = /(?<!(?:App Store|Google Play): )\bcoming[- ]soon\b(?! to (?:the App Store|Google Play))|(?<!(?:App Store|Google Play): )muy pronto(?! (?:a|al|en)(?: el)? (?:App Store|Google Play))|not yet in any app store|no launch date|when the app is live|once the app is available|cuando la app esté disponible|todavía no está en ninguna tienda|앱 출시와 함께|앱이 나오면|앱이 올라가면|上架后|上架时|上架以后|working (?:hard )?to bring this/i;
+const NOT_OUT = /(?<!(?:App Store|Google Play): )\bcoming[- ]soon\b(?! to (?:the App Store|Google Play))|(?<!(?:App Store|Google Play): )muy pronto(?! (?:a|al|en)(?: el)? (?:App Store|Google Play))|not yet in any app store|\bnot out yet\b|no launch date|when the app is live|once the app is available|cuando la app esté disponible|todavía no está en ninguna tienda|앱 출시와 함께|앱이 나오면|앱이 올라가면|上架后|上架时|上架以后|working (?:hard )?to bring this/i;
 export function launchFindings(name, text, store) {
   const out = [];
   const live = { ios: Boolean(store.app_store_url), play: Boolean(store.play_url) };
@@ -143,8 +143,9 @@ if (isMain && process.argv.includes("--self-test")) {
     ["l6.html", "<p>There is no launch date yet.</p>"],
     ["l7.html", "<p>Now on Google Play for Android.</p>"],
     ["l8.html", '<script type="application/ld+json">{"downloadUrl":"https://apps.apple.com/us/app/other/id9"}</script>'],
+    ["l9.html", "<table><tr><td>Rating shown</td><td>Not out yet</td></tr></table>"],
   ], IOS);
-  const iosWant = ["l1.html: says App Store is not out yet", "l2.html: says the app is not out yet", "l3.html: says App Store is not out yet", "l4.html: says App Store is not out yet", "l5.html: says the app is not out yet", "l6.html: says the app is not out yet", "l7.html: says the app is on Google Play", "l8.html: a store link or badge outside the store CTA"];
+  const iosWant = ["l1.html: says App Store is not out yet", "l2.html: says the app is not out yet", "l3.html: says App Store is not out yet", "l4.html: says App Store is not out yet", "l5.html: says the app is not out yet", "l6.html: says the app is not out yet", "l7.html: says the app is on Google Play", "l8.html: a store link or badge outside the store CTA", "l9.html: says the app is not out yet"];
   const playBad = check([["m1.html", "<p>Muy pronto en Google Play.</p>"], ["m2.html", "<p>已在 App Store 上架</p>"]], PLAY);
   const playWant = ["m1.html: says Google Play is not out yet", "m2.html: says the app is on App Store"];
   const missingStates = [...iosWant.filter((w) => !iosBad.some((f) => f.includes(w))), ...playWant.filter((w) => !playBad.some((f) => f.includes(w)))];

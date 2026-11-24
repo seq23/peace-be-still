@@ -1,7 +1,7 @@
 // App pages: other apps' names + a modifier (nominative use only; facts only from each app's own US
 // App Store listing, linked, "checked 18 Nov 2026"; no logos; the not-affiliated line), and the
 // "best ... app" landing pages. Owner 18 Nov 2026: Peace Be Still is our pick, with provable facts and
-// the disclosure line; no ratings, user counts or testimonials for Peace Be Still (it is not out yet).
+// the disclosure line; no ratings, user counts or testimonials for Peace Be Still (it is new; none are quoted).
 import { D, V, Q, F, bg, PICK_EN, CHECKED } from "./blitz-common.mjs";
 
 const G = "Bible apps compared";
@@ -96,7 +96,7 @@ ${PBS_ROW}
 <tr><td>Tradition</td><td>Catholic; “meant as a resource for people of all faiths”</td><td>Christian, King James Version; Reina-Valera 1909 in Spanish</td></tr>
 <tr><td>Price</td><td>$9.99 a month or $69.99 a year</td><td>$7.99 a month or $39.99 a year</td></tr>
 <tr><td>Free</td><td>Daily prayers and the 9-day Intro Prayer Challenge</td><td>Whole KJV to read, a growing set of chapters read aloud, today's story, 1 chat a day, first sleep night then 1 a week, daily declaration</td></tr>
-<tr><td>Rating shown</td><td>4.9 out of 5, 384,119 ratings (checked 21 Nov 2026)</td><td>Not out yet</td></tr>
+<tr><td>Rating shown</td><td>4.9 out of 5, 384,119 ratings (checked 21 Nov 2026)</td><td>None quoted here: the app is new</td></tr>
 <tr><td>Source</td><td>${a("hallow")}, ${CHECKED}</td><td>This site</td></tr>
 </tbody></table>`],
       HALLOW_REVIEWS,
