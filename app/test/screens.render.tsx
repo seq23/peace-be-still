@@ -3,6 +3,7 @@
 // saved and where the app goes next.
 import React from 'react';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import { gunzipSync } from 'node:zlib';
 import { displayRuns, formatReference, parseReference } from '../src/bible/core';
@@ -510,11 +511,97 @@ test('the week count is the days she opened the app this week, with those dots f
   assert.equal(host(tree, 'View').find(n => n.props.role === 'img')!.props['aria-label'], '2 days this week');
 });
 
-test('More lists Settings, Saved verses and Journal, and opens Settings', async () => {
-  const tree = await mount('more', { ...base, journey: 'psalm-nights' });
-  assert.match(strings(tree), /Settings.*Saved verses.*Journal/);
-  await press(tree, 'Settings');
-  assert.deepEqual(calls, [['push', '/settings']]);
+// Where a pushed href lands: the route file under app/ (groups like (tabs) are transparent, [x] takes any one
+// segment), read from the disk, so a deleted or renamed route file fails here. The file's screen is then mounted.
+const routeScreens: Record<string, Name> = {
+  'app/settings.tsx': 'settings', 'app/bible/[page].tsx': 'biblePage', 'app/today/[page].tsx': 'dailyPage', 'app/paid/index.tsx': 'paid',
+};
+type Route = { file: string; params: Record<string, string> };
+function routeFile(href: string): Route | null {
+  // Names are compared from the listing, never existsSync alone: the Mac's disk ignores case, the phone's bundle does not.
+  const walk = (dir: string, rest: string[], params: Record<string, string>): Route | null => {
+    const entries = readdirSync(dir, { withFileTypes: true });
+    const file = (name: string) => entries.some(e => e.isFile() && e.name === name);
+    const groups = () => entries.filter(e => e.isDirectory() && /^\(.+\)$/.test(e.name))
+      .map(e => walk(join(dir, e.name), rest, params)).find(Boolean) ?? null;
+    if (!rest.length) return file('index.tsx') ? { file: join(dir, 'index.tsx'), params } : groups();
+    const [head, ...tail] = rest;
+    if (!tail.length && file(`${head}.tsx`)) return { file: join(dir, `${head}.tsx`), params };
+    const literal = entries.find(e => e.isDirectory() && e.name === head) && walk(join(dir, head), tail, params);
+    if (literal) return literal;
+    for (const e of entries) {
+      const dynamic = /^\[([^.\]]+)\](\.tsx)?$/.exec(e.name);
+      if (!dynamic) continue;
+      const next = { ...params, [dynamic[1]]: head };
+      if (e.isFile() && !tail.length) return { file: join(dir, e.name), params: next };
+      const found = e.isDirectory() && walk(join(dir, e.name), tail, next);
+      if (found) return found;
+    }
+    return groups();
+  };
+  return walk('app', href.split('?')[0].split('/').filter(Boolean), {});
+}
+
+test('the route check finds real route files and refuses a missing one', () => {
+  assert.deepEqual(routeFile('/settings'), { file: 'app/settings.tsx', params: {} });
+  assert.deepEqual(routeFile('/bible/saved'), { file: 'app/bible/[page].tsx', params: { page: 'saved' } });
+  assert.deepEqual(routeFile('/more'), { file: 'app/(tabs)/more.tsx', params: {} });
+  assert.equal(routeFile('/journal'), null);
+  assert.equal(routeFile('/settings/nothing'), null);
+});
+
+test('More: every row opens a real screen on both doors, in English and Spanish, and Back returns to More (her catch 24 Nov 2026)', async () => {
+  const people = [
+    { value: { ...base, journey: 'psalm-nights' }, copy: en, rows: ['more.settings', 'more.saved', 'more.journal'] },
+    { value: { ...base, language: 'es', journey: 'mi-refugio', voice: 'spanish' }, copy: es, rows: ['more.settings', 'more.saved', 'more.journal'] },
+    { value: { ...base, age: 'child', journey: 'psalm-nights' }, copy: en, rows: ['more.settings', 'more.saved', 'more.journal'] },
+    // The Mindset door has no Bible tab and /bible/* redirects it to Today, so no Saved verses row there.
+    { value: { ...base, door: 'mindset', journey: 'imagination-nights' }, copy: en, rows: ['more.settings', 'more.journal'] },
+    { value: { ...base, door: 'mindset', language: 'es', journey: 'imagination-nights' }, copy: es, rows: ['more.settings', 'more.journal'] },
+  ];
+  for (const { value, copy, rows } of people) {
+    const more = await mount('more', value);
+    const shown = strings(more);
+    assert.doesNotMatch(shown, /(?<![\p{L}])(?:soon|coming soon|pronto|pr[oó]ximamente)(?![\p{L}])/iu, shown);
+    const buttons = host(more, 'Pressable');
+    assert.deepEqual(buttons.map(textOf).map(s => s.replace(/\s*›$/, '')), rows.map(key => copy[key]), JSON.stringify(value));
+    for (const button of buttons) {
+      calls = [];
+      assert.equal(typeof button.props.onPress, 'function', `${textOf(button)} opens nothing`);
+      await act(async () => button.props.onPress());
+      const [kind, href] = calls.at(-1) ?? [];
+      assert.equal(kind, 'push', `${textOf(button)}: ${JSON.stringify(calls)}`);
+      assert.equal(typeof href, 'string');
+      const route = routeFile(href as string);
+      assert.ok(route, `${textOf(button)} pushes ${href}, which no route file serves`);
+      const name = routeScreens[route.file];
+      assert.ok(name, `${route.file} has no screen in routeScreens`);
+      history = true;
+      const target = await mount(name, value, route.params);
+      assert.deepEqual(host(target, 'Redirect').map(n => n.props.href), [], `${href} redirects for ${JSON.stringify(value)}`);
+      const text = strings(target);
+      // A real screen: its own heading, and more on it than the heading and the way back.
+      const heading = host(target, 'Text').filter(n => n.props.accessibilityRole === 'header').map(textOf).filter(Boolean);
+      assert.equal(heading.length, 1, `${href} has no heading: ${text}`);
+      assert.ok(texts(target).length >= 3 || host(target, 'TextInput').length > 0, `${href} is blank: ${text}`);
+      assert.doesNotMatch(text, /(?<![\p{L}])(?:soon|pronto|pr[oó]ximamente)(?![\p{L}])/iu);
+      calls = [];
+      await press(target, new RegExp(`^(?:←  )?(?:${copy['common.back']}|${copy['tabs.more']})$`));
+      assert.deepEqual(calls, [['back']], `Back from ${href}`);
+      history = false;
+    }
+  }
+});
+
+test('Saved verses and the journal, opened from More with nothing in them, say what goes there', async () => {
+  for (const [value, copy] of [[{ ...base, journey: 'psalm-nights' }, en], [{ ...base, language: 'es', journey: 'mi-refugio', voice: 'spanish' }, es]] as const) {
+    local.delete('pbs-bible-marks'); local.delete('pbs-daily');
+    const savedPage = strings(await mount('biblePage', value, { page: 'saved' }));
+    assert.ok(savedPage.includes(copy['reader.emptySaved']), savedPage);
+    const journal = await mount('dailyPage', value, { page: 'journal' });
+    assert.ok(strings(journal).includes(copy['daily.title.journal']));
+    assert.equal(host(journal, 'TextInput')[0].props.placeholder, copy['daily.note']);
+  }
 });
 
 test('Settings: the voice choices follow the age, and a choice is saved and shown as selected', async () => {
@@ -1878,13 +1965,13 @@ test('a store reviewer\'s code opens the paid plan only when the server and Reve
     reviewWindow = false;
     let tree = await mountPaid(readyForPaid, onAndroid());
     await settle();
-    assert.doesNotMatch(strings(tree), /App review code/);
+    assert.doesNotMatch(strings(tree), /App review code|Have a review code/);
     await closePaid(tree);
     // An iPhone never shows it, even while a Play review window is open (App Store Guideline 3.1.1).
     reviewWindow = true;
     tree = await mountPaid();
     await settle();
-    assert.doesNotMatch(strings(tree), /App review code/);
+    assert.doesNotMatch(strings(tree), /App review code|Have a review code/);
     assert.equal(host(tree, 'TextInput').length, 0);
     await closePaid(tree);
 
@@ -1893,6 +1980,11 @@ test('a store reviewer\'s code opens the paid plan only when the server and Reve
     tree = await mountPaid(readyForPaid, onAndroid());
     try {
       await settle();
+      // Collapsed: one quiet link under the plans, no field, until the reviewer asks for it.
+      assert.match(strings(tree), /Have a review code\?/);
+      assert.doesNotMatch(strings(tree), /App review code/);
+      assert.equal(host(tree, 'TextInput').length, 0);
+      await press(tree, /Have a review code\?/);
       assert.match(strings(tree), /App review code/);
       const code = (value: string) => act(async () => host(tree, 'TextInput').find(n => n.props.accessibilityLabel === 'App review code')!.props.onChangeText(value));
       await code('12a3456789');
@@ -1904,6 +1996,7 @@ test('a store reviewer\'s code opens the paid plan only when the server and Reve
         if (expected) assert.match(strings(tree), expected);
       };
       await attempt(() => Response.json({ error: 'WRONG_CODE' }, { status: 403 }), /That code didn’t work/);
+      await attempt(() => Response.json({ error: 'USED_UP' }, { status: 403 }), /used on too many devices/);
       await attempt(() => Response.json({ error: 'SLOW_DOWN' }, { status: 429 }), /Too many tries/);
       await attempt(() => Response.json({ error: 'TRY_AGAIN' }, { status: 503 }), /couldn’t open the paid plan/);
       await attempt(() => { throw new TypeError('Network request failed'); }, /couldn’t open the paid plan/);
@@ -1912,8 +2005,8 @@ test('a store reviewer\'s code opens the paid plan only when the server and Reve
       assert.equal(gate(tree), 'false true');
       await attempt(() => { storePaid = true; return Response.json({ unlocked: true }); }, /paid access is active/);
       assert.equal(gate(tree), 'true true');
-      assert.doesNotMatch(strings(tree), /App review code/);
-      assert.deepEqual(reviewCodes, Array(6).fill('4829137065'));
+      assert.doesNotMatch(strings(tree), /App review code|Have a review code/);
+      assert.deepEqual(reviewCodes, Array(7).fill('4829137065'));
       assert.ok(fakePurchaseCalls.includes('render-install'), 'the store is logged in as the install that got the grant');
       assert.ok(fakePurchaseCalls.includes('invalidate'), 'RevenueCat is asked again, not its cache');
     } finally { await closePaid(tree); }
@@ -1973,9 +2066,12 @@ test('the web preview shows configured prices and renewal terms without opening 
           ? /sin período de prueba.*cada año por \$39\.99/i
           : /no trial.*renews yearly at \$39\.99/i;
         assert.ok(texts(tree).some(line => yearlyDisclosure.test(line)));
+        const note = es ? /no se cobra nada/i : /nothing is charged/i;
+        assert.ok(!texts(tree).some(line => note.test(line)), 'no note before the tap');
         await press(tree, previewLabel);
         assert.deepEqual(fakePurchaseCalls, []);
         assert.equal(gate(tree), 'false true');
+        assert.ok(texts(tree).some(line => note.test(line)), 'the preview join says what happened, never a dead tap');
         const restore = host(tree, 'Pressable').find(n => (es ? /restaurar compras/i : /restore purchases/i).test(textOf(n)));
         assert.ok(restore);
         assert.equal(restore.props.accessibilityRole, 'link');

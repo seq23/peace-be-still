@@ -38,7 +38,7 @@ ${V("JER 13:23")}`],
 ${V("GEN 10:6")}
 <p>Whether to call Cush “the first Black person” depends on reading a family list as a race list, which the text does not do. It does show Africa in the human story from the start.</p>`],
       ["What does this mean for Black believers?", `<p>That Africa is not a footnote in the Bible. An African official is one of the first people baptised after Pentecost. An African man carried the cross. A Cushite saved a prophet's life and God sent him a promise by name (Jeremiah 39:15-18). These are stories the Black church has preached for generations.</p>`],
-      ["Hush Harbor stories in Peace Be Still", `<p>Peace Be Still, coming soon, has Hush Harbor · Black Bible Chat &amp; Stories. Its Black favorites include Hagar and the God who sees, the Ethiopian on the desert road, Ebed-melech and the prophet in the pit, Simon of Cyrene, and Moses and the Ethiopian woman, each told in the Hush Harbor voice with the King James text beside it.</p>`],
+      ["Hush Harbor stories in Peace Be Still", `<p>Peace Be Still, {{stores.short}}, has Hush Harbor · Black Bible Chat &amp; Stories. Its Black favorites include Hagar and the God who sees, the Ethiopian on the desert road, Ebed-melech and the prophet in the pit, Simon of Cyrene, and Moses and the Ethiopian woman, each told in the Hush Harbor voice with the King James text beside it.</p>`],
     ],
     faq: [
       ["Is Cush Africa in the Bible?", "Yes. Cush is the region south of Egypt along the Nile, in what is now Sudan, home of the ancient kingdom of Kush. The King James Version usually translates it as “Ethiopia”, which is not the same as the modern country of Ethiopia."],
@@ -79,7 +79,7 @@ ${V("GEN 9:25")}`],
 <li>Some rely on what a name sounds like in English.</li>
 <li>Some miss that the KJV's “Ethiopia” is usually Cush, the land of the Kushite kingdom.</li>
 </ul>`],
-      ["Is there a Bible app for Black Christians?", `<p>Peace Be Still, coming soon to the App Store and Google Play, has Hush Harbor · Black Bible Chat &amp; Stories: a chat in a Black church voice that answers with King James verses pasted word for word, and a Bible story every day told in that voice. See <a href="/black-bible-app/">the Black Bible app page</a>.</p>`],
+      ["Is there a Bible app for Black Christians?", `<p>Peace Be Still, {{stores.tag}}, has Hush Harbor · Black Bible Chat &amp; Stories: a chat in a Black church voice that answers with King James verses pasted word for word, and a Bible story every day told in that voice. See <a href="/black-bible-app/">the Black Bible app page</a>.</p>`],
     ],
     faq: [
       ["What does Niger mean in Acts 13:1?", "Niger is a Latin word meaning black or dark. Simeon “that was called Niger” was a teacher in the church at Antioch. Many readers take the nickname to describe his skin; the verse itself does not explain it."],
@@ -141,7 +141,7 @@ ${V("PSA 68:31")}`],
       ["How did the Bible shape Black history in America?", `<p>Enslaved Christians heard the Exodus as their story: a God who sees the suffering of slaves and says ${F("EXO 5:1", "Let my people go")}. That is why the spirituals sing of Moses, Pharaoh and the Jordan. Many enslaved believers worshipped in secret in the woods, in what were called hush harbors.</p>
 ${V("EXO 3:7")}`],
       ["Who was the first Black person in the Bible?", `<p>The first African name in the Bible's family lists is Cush, son of Ham (Genesis 10:6). The first African person whose story is told at length is Hagar the Egyptian (Genesis 16).</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon, has Hush Harbor · Black Bible Chat &amp; Stories, named for the hidden places of worship. Its 20 Black favorites, told in the Hush Harbor voice with the King James text beside each, include Let my people go, Paul and Silas singing at midnight, and the valley of dry bones.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.short}}, has Hush Harbor · Black Bible Chat &amp; Stories, named for the hidden places of worship. Its 20 Black favorites, told in the Hush Harbor voice with the King James text beside each, include Let my people go, Paul and Silas singing at midnight, and the valley of dry bones.</p>`],
     ],
     faq: [
       ["Is Cush Africa in the Bible?", "Yes. Cush is the land south of Egypt along the Nile, now mostly in Sudan, home of the kingdom of Kush. The King James Version usually translates it “Ethiopia”."],
@@ -173,7 +173,7 @@ ${V("ISA 61:1")}
 <p>Jesus read this passage aloud in the synagogue at Nazareth and said it was fulfilled that day (Luke 4:16-21).</p>`],
       ["Verses about one human family", `${V("ACT 17:26")}
 ${V("GAL 3:28")}`],
-      ["Is there a Bible app for Black Christians?", `<p>Peace Be Still, coming soon, has Hush Harbor · Black Bible Chat &amp; Stories: tell the chat what is on your heart and it answers in a Black church voice with King James verses like these, pasted word for word. It is AI, labelled as AI, and never speaks as God.</p>`],
+      ["Is there a Bible app for Black Christians?", `<p>Peace Be Still, {{stores.short}}, has Hush Harbor · Black Bible Chat &amp; Stories: tell the chat what is on your heart and it answers in a Black church voice with King James verses like these, pasted word for word. It is AI, labelled as AI, and never speaks as God.</p>`],
     ],
     faq: [
       ["Where does the Bible say “I am black, but comely”?", `Song of Solomon 1:5 (${F("SOL 1:5", "I am black, but comely")}). The speaker is a young woman darkened by the sun from working in the vineyards (1:6). Some newer translations say “dark and lovely”.`],
@@ -208,7 +208,7 @@ ${V("GAL 3:28")}`],
 <li><strong>Check the print size</strong> if it is a gift for an older reader.</li>
 <li><strong>Look at the art.</strong> Many families choose these editions for pictures that look like them.</li>
 </ol>`],
-      ["Is there a Bible app for Black Christians?", `<p>Peace Be Still, coming soon, has Hush Harbor · Black Bible Chat &amp; Stories inside a full King James Bible. The chat answers in a Black church voice; every verse is pasted from the stored KJV, never written by the AI. Its stories are told in that same voice, with the King James text beside them. See <a href="/black-bible-app/">the Black Bible app</a>.</p>`],
+      ["Is there a Bible app for Black Christians?", `<p>Peace Be Still, {{stores.short}}, has Hush Harbor · Black Bible Chat &amp; Stories inside a full King James Bible. The chat answers in a Black church voice; every verse is pasted from the stored KJV, never written by the AI. Its stories are told in that same voice, with the King James text beside them. See <a href="/black-bible-app/">the Black Bible app</a>.</p>`],
     ],
     faq: [
       ["Is there an African American Bible?", "Yes, as editions rather than a new translation. The African American Jubilee Edition (1999) and the Original African Heritage Study Bible both use the King James Version with added notes, essays and art."],
@@ -243,7 +243,7 @@ ${V("GAL 3:28")}`],
 </ul>`],
       ["Where do Black Christians find devotionals made for them?", `<p>Start with your own church's reading plan. Beyond that, look for three things in any book or app: scripture quoted exactly from a named translation, a voice that does not feel borrowed, and honesty about history. Avoid anything that promises money or healing for a donation.</p>
 ${V("MIC 6:8")}`],
-      ["Is there a Bible app for Black Christians?", `<p>Peace Be Still, coming soon to the App Store and Google Play, has Hush Harbor · Black Bible Chat &amp; Stories: a Bible chat in a Black church voice, a daily Bible story told in that voice, and one “say it with me” call-and-response moment in each story. Every verse comes from the stored King James text.</p>`],
+      ["Is there a Bible app for Black Christians?", `<p>Peace Be Still, {{stores.tag}}, has Hush Harbor · Black Bible Chat &amp; Stories: a Bible chat in a Black church voice, a daily Bible story told in that voice, and one “say it with me” call-and-response moment in each story. Every verse comes from the stored King James text.</p>`],
     ],
     faq: [
       ["What percentage of Black Americans are Christian?", "Pew Research's 2021 report found 66% are Protestant, 6% Catholic and 3% belong to other Christian faiths: about three in four in all."],
@@ -300,7 +300,7 @@ ${V("JDG 16:19")}
 <p>“Locks” in 1611 English means lengths or tresses of hair. Many Black readers picture these as locs, since uncut hair grown for years and worn in seven sections looks a lot like them. That is a reasonable picture, but the verse does not describe the texture.</p>`],
       ["Were the Israelites Black?", `<p>The Bible does not use colour to describe Israel. The Israelites lived between Africa and Asia, came out of centuries in Egypt, and included people from other nations (Exodus 12:38 speaks of ${F("EXO 12:38", "a mixed multitude")}). Most historians picture ancient Israelites as brown-skinned people of the Near East.</p>`],
       ["Why does the question matter?", `<p>Because for generations, Bible pictures showed every hero as European. Asking “was Samson Black?” is often really asking “can I see myself in this story?”. The answer to that is yes, and the Bible gives no reason to say otherwise.</p>`],
-      ["Samson in Peace Be Still", `<p>Samson's last prayer (Judges 16:4-30) is in Peace Be Still's story library. In Hush Harbor · Black Bible Chat &amp; Stories, stories are told in a Black church voice with the King James text beside them. The app is coming soon to the App Store and Google Play.</p>`],
+      ["Samson in Peace Be Still", `<p>Samson's last prayer (Judges 16:4-30) is in Peace Be Still's story library. In Hush Harbor · Black Bible Chat &amp; Stories, stories are told in a Black church voice with the King James text beside them. The app is {{stores.tag}}.</p>`],
     ],
     faq: [
       ["What tribe was Samson from?", `The tribe of Dan. His father Manoah was ${F("JDG 13:2", "of the family of the Danites")} from Zorah (Judges 13:2).`],
@@ -329,7 +329,7 @@ ${V("2SA 23:34")}
       ["Where does the idea that Bathsheba was Black come from?", `<p>Some readers link her to the Song of Solomon, where a woman says she is black and comely; the Song is about Solomon's beloved, not his mother. Others note that 1 Chronicles 3:5 calls her ${F("1CH 3:5", "Bath-shua")} and connect the name to other women. None of these makes the text say she was Black.</p>`],
       ["Why is she in Jesus's family line?", `<p>Matthew names four women before Mary: Tamar, Rahab, Ruth, and ${F("MAT 1:6", "her that had been the wife of Urias")}. Each has a hard story. Matthew includes them on purpose; grace runs through the family line.</p>
 ${V("MAT 1:6")}`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon, has Hush Harbor · Black Bible Chat &amp; Stories, where you can ask questions like this one and get an answer that keeps to the King James text. The chat is AI and labelled as AI; it says plainly when the Bible is silent.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.short}}, has Hush Harbor · Black Bible Chat &amp; Stories, where you can ask questions like this one and get an answer that keeps to the King James text. The chat is AI and labelled as AI; it says plainly when the Bible is silent.</p>`],
     ],
     faq: [
       ["Was Bathsheba a Hittite?", "Her husband Uriah was a Hittite. Bathsheba herself is called the daughter of Eliam, and her family appears to be Israelite (2 Samuel 23:34)."],
@@ -360,7 +360,7 @@ ${V("MAT 1:6")}`],
 ${V("EXO 3:7")}`],
       ["What were hush harbor services like?", `<p>The people who were there described them. Lucretia Alexander, quoted by Raboteau, remembered: “They used to sing their songs in a whisper and pray in a whisper.” Wash Wilson said: “Sometimes us sing and pray all night.” In Louisiana, one man would bend over a vessel of water and speak into it to drown the sound.</p>`],
       ["How did hush harbors shape the Black church?", `<p>The National Humanities Center describes these meetings as places where enslaved people freely mixed African rhythms, singing and beliefs with evangelical Christianity. Their songs became the spirituals; their preachers became the first pastors of Black congregations after emancipation; their faith in a God who frees slaves became the backbone of Black preaching.</p>`],
-      ["What is the Hush Harbor journey in Peace Be Still?", `<p>Peace Be Still, a phone app coming soon to the App Store and Google Play, has a journey called Hush Harbor · Black Bible Chat &amp; Stories. The name honours this history. Inside it you can talk through what is on your heart with a Bible chat in a Black church voice, which answers with King James verses pasted word for word, and read a daily Bible story told in that voice. The chat is AI, labelled as AI, and stays humble about the history it is named for.</p>`],
+      ["What is the Hush Harbor journey in Peace Be Still?", `<p>Peace Be Still, a phone app {{stores.tag}}, has a journey called Hush Harbor · Black Bible Chat &amp; Stories. The name honours this history. Inside it you can talk through what is on your heart with a Bible chat in a Black church voice, which answers with King James verses pasted word for word, and read a daily Bible story told in that voice. The chat is AI, labelled as AI, and stays humble about the history it is named for.</p>`],
     ],
     faq: [
       ["What is a hush harbor?", "A secret meeting place, usually in woods or thickets, where enslaved African Americans gathered to worship away from their enslavers. The meetings were kept quiet, with whispered songs and prayers."],
@@ -377,12 +377,12 @@ ${V("EXO 3:7")}`],
     h1: "A Black Bible app with a Black church voice",
     indexLabel: "Black Bible app",
     indexNote: "Hush Harbor: a Black church voice, daily stories, KJV.",
-    definition: "A Black Bible app is a Bible app made with Black believers in mind: the same scripture, with a voice that sounds like the Black church and Bible stories told in that voice. Peace Be Still, coming soon, has one inside it: Hush Harbor · Black Bible Chat &amp; Stories, on top of the whole King James Bible, free to read and hear.",
+    definition: "A Black Bible app is a Bible app made with Black believers in mind: the same scripture, with a voice that sounds like the Black church and Bible stories told in that voice. Peace Be Still, {{stores.short}}, has one inside it: Hush Harbor · Black Bible Chat &amp; Stories, on top of the whole King James Bible, free to read and hear.",
     quick: "Look for three things: verses quoted word for word from a named translation, a voice and art that feel like home, and honest prices with no surprise charges. Hush Harbor has all three, and its free version includes one chat a day and today's story.",
     bestFor: "Black Christians, and the people who love them, looking for a Bible app that sounds like their church.",
     pick: PICK_EN("Our pick for a Black Bible app: Peace Be Still, for Hush Harbor's Black church voice and its honest prices."),
     sections: [
-      ["Is there a Black Bible app?", `<p>Yes. Hush Harbor · Black Bible Chat &amp; Stories is a journey inside Peace Be Still, a phone app coming soon to the App Store and Google Play. It has a Bible chat in a Black church voice, a daily Bible story told in that voice, and one “say it with me” moment in every story: “God is good.” “All the time.”</p>`],
+      ["Is there a Black Bible app?", `<p>Yes. Hush Harbor · Black Bible Chat &amp; Stories is a journey inside Peace Be Still, a phone app {{stores.tag}}. It has a Bible chat in a Black church voice, a daily Bible story told in that voice, and one “say it with me” moment in every story: “God is good.” “All the time.”</p>`],
       ["What should a Bible app for Black Christians have?", `<ul>
 <li><strong>Exact scripture.</strong> Every verse from a named translation, with book, chapter and verse. An AI should never write a verse from memory.</li>
 <li><strong>A voice that feels like home.</strong> Warm, plain church-family language, never put-on slang or a caricature.</li>
@@ -396,7 +396,7 @@ ${V("EXO 3:7")}`],
 ${V("MAR 4:39")}`],
     ],
     faq: [
-      ["Is there a Bible app made for Black people?", "Peace Be Still, coming soon, has Hush Harbor · Black Bible Chat & Stories: a chat in a Black church voice that answers with exact King James verses, and daily Bible stories told in that voice. Everyone is welcome in every journey."],
+      ["Is there a Bible app made for Black people?", "Peace Be Still, {{stores.short}}, has Hush Harbor · Black Bible Chat & Stories: a chat in a Black church voice that answers with exact King James verses, and daily Bible stories told in that voice. Everyone is welcome in every journey."],
       ["Which Bible translation does Hush Harbor use?", "The King James Version, quoted word for word from a stored copy with book, chapter and verse. The AI chooses which verses to show, but the words always come from the stored text."],
       ["Is the chat a real pastor?", "No. It is AI and says so on every answer. It never speaks as God or Jesus. If you mention self-harm or abuse, it shows the 988 Lifeline and other help instead of an AI reply."],
       ["Is Hush Harbor free?", "Yes, in the free version: one chat a day of up to 5 messages, today's story and the whole King James Bible. A paid plan adds unlimited Bible chat and every past story. With a paid plan: unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first."],

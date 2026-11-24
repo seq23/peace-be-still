@@ -57,6 +57,8 @@ section{padding-top:56px;padding-bottom:56px}
 .soon img{width:44px;height:44px;flex:none}
 .soon b{display:block;font-size:17px}
 .soon span{font-size:15px;color:var(--ink-muted)}
+.soon.live{flex-wrap:wrap}
+.soon.live .stores{flex-basis:100%;margin:2px 0 0}
 @media (min-width:860px){.hero{grid-template-columns:1.1fr .9fr}}
 
 /* phone pictures (rebuilt from the approved mock-ups) */

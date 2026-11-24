@@ -89,7 +89,7 @@ ${V("ROM 8:38-39")}`],
 <li><strong>Talk to your pastor.</strong> A church grief group or your pastor can walk with you in ways a page cannot.</li>
 </ol>`],
       ["If grief feels like too much", `<p>Grief can be heavy enough that you think about not going on. If that is you, please reach out now: in the United States, call or text <strong>988</strong> (the 988 Suicide &amp; Crisis Lifeline, 24 hours, free). Outside the US, <a href="https://findahelpline.com/">findahelpline.com</a> lists a free line near you. Reaching out is not a failure of faith.</p>`],
-      ["Where can I listen to scripture at night?", `<p>Peace Be Still, an app coming soon to the App Store and Google Play, reads King James psalms in a whisper on a dark screen with a sleep timer, including Psalm 23, Psalm 34 and Psalm 42. The first sleep night is free, then one a week on the free version; the whole King James Bible is free to read. It does not replace a pastor, a counsellor or a doctor.</p>`],
+      ["Where can I listen to scripture at night?", `<p>Peace Be Still, an app {{stores.tag}}, reads King James psalms in a whisper on a dark screen with a sleep timer, including Psalm 23, Psalm 34 and Psalm 42. The first sleep night is free, then one a week on the free version; the whole King James Bible is free to read. It does not replace a pastor, a counsellor or a doctor.</p>`],
     ],
     faq: [
       ["What is the best Bible verse for grief?", `Psalm 34:18 is the verse most people turn to first: the ${F("PSA 34:18", "LORD is nigh unto them that are of a broken heart")}. Matthew 5:4, John 11:35 and Revelation 21:4 come next. The best one is the one you can carry today.`],
@@ -129,7 +129,7 @@ ${V("LAM 3:22-23", "es")}`],
       ["Una oración breve para el duelo", `<p>Señor, tú estás cerca de los quebrantados de corazón, y mi corazón está quebrantado. Esta noche no tengo palabras, así que te traigo mis lágrimas. Gracias por la vida de la persona que extraño. Sostén lo que yo no puedo sostener y quédate cerca en las horas más difíciles. En el nombre de Jesús, amén.</p>
 <p class="muted">Una oración escrita para esta página, no un versículo de la Biblia.</p>`],
       ["Si el dolor es demasiado", `<p>El duelo puede pesar tanto que pienses en no seguir. Si es tu caso, busca ayuda ahora: en Estados Unidos llama al <strong>988</strong> y oprime 2 para español (988 Suicide &amp; Crisis Lifeline, las 24 horas, gratis). Fuera de Estados Unidos, <a href="https://findahelpline.com/">findahelpline.com</a> muestra una línea gratuita cerca de ti. Pedir ayuda no es falta de fe.</p>`],
-      ["¿Dónde puedo escuchar la Biblia de noche?", `<p>Peace Be Still, una app que llega muy pronto al App Store y a Google Play, tiene Mi Refugio en español, con la Reina-Valera 1909 para leer completa y gratis, y salmos para dormir. No reemplaza a un pastor, a un consejero ni a un médico.</p>`],
+      ["¿Dónde puedo escuchar la Biblia de noche?", `<p>Peace Be Still, una app {{stores.tag}}, tiene Mi Refugio en español, con la Reina-Valera 1909 para leer completa y gratis, y salmos para dormir. No reemplaza a un pastor, a un consejero ni a un médico.</p>`],
     ],
     faq: [
       ["¿Cuál es el mejor versículo para el duelo?", `Salmos 34:18 es el que más se busca primero: ${F("PSA 34:18", "Cercano está Jehová á los quebrantados de corazón", "es")}. Le siguen Mateo 5:4, Juan 11:35 y Apocalipsis 21:4. El mejor es el que puedas llevar contigo hoy.`],
@@ -148,7 +148,7 @@ ${V("LAM 3:22-23", "es")}`],
     indexLabel: "KJV Bible app",
     indexNote: "What to check in a King James app, and what Peace Be Still holds free.",
     definition: "A KJV Bible app is a phone app that holds the King James Version, the English translation first printed in 1611. Because the KJV is in the public domain in the United States, any app can carry the whole text free. What differs between apps is what sits around it: audio, ads, trials, and what is locked behind a subscription.",
-    quick: "Check five things: the whole KJV is free to read, every verse shows its book, chapter and verse, there is audio, there are no ads, and nothing starts as a trial that turns into a charge. Peace Be Still, coming soon, has the whole KJV free to read, the Psalms and more chapters read aloud, no ads and no trial.",
+    quick: "Check five things: the whole KJV is free to read, every verse shows its book, chapter and verse, there is audio, there are no ads, and nothing starts as a trial that turns into a charge. Peace Be Still, {{stores.short}}, has the whole KJV free to read, the Psalms and more chapters read aloud, no ads and no trial.",
     bestFor: "people who read the King James Version and want an app for it, or who were asked to pay for a Bible they expected to be free.",
     sections: [
       ["Is the King James Bible free to use in an app?", `<p>Yes, in the United States. The King James Version is in the public domain there, so an app can include all 66 books at no cost to you or to the app maker. In the United Kingdom it is printed under a Crown patent, which is why some UK editions carry a licence line.</p>
@@ -172,10 +172,10 @@ ${V("ISA 40:8")}`],
 <tr><td>One Bible chat a day, up to 5 messages</td><td>Every past story</td></tr>
 </tbody></table>
 <p>There are no ads, free or paid, and no trial. ${CHAT_VERSES}. In Spanish, the app uses the Reina-Valera 1909.</p>`],
-      ["Is Peace Be Still out yet?", `<p>Not yet. It is coming soon to the App Store and Google Play: search “Peace Be Still”. Until then, every verse on this site is the King James text, checked against a stored copy.</p>`],
+      ["Is Peace Be Still out yet?", `<p>{{stores.out}} Every verse on this site is the King James text, checked against a stored copy.</p>`],
     ],
     faq: [
-      ["Is there a free KJV Bible app with no ads?", "Yes. Several apps carry the whole King James Version free. Peace Be Still, coming soon, has the whole KJV free to read with no ads and no trial, and the Psalms and more chapters read aloud free."],
+      ["Is there a free KJV Bible app with no ads?", "Yes. Several apps carry the whole King James Version free. Peace Be Still, {{stores.short}}, has the whole KJV free to read with no ads and no trial, and the Psalms and more chapters read aloud free."],
       ["Is there a KJV Bible app with audio?", "Many have audio. In Peace Be Still the Psalms and a growing set of chapters are read aloud on the free version, and King James psalms are whispered for sleep at night."],
       ["Do I have to pay for the King James Bible?", "No. The KJV is in the public domain in the United States, so the text itself is free. Some apps charge for extras such as audio, plans or chat."],
       ["Is there a KJV Bible app in Spanish?", "The King James Version is English. The Spanish Bible of the same era that is also in the public domain is the Reina-Valera 1909, which Peace Be Still uses in its Spanish journey, Mi Refugio."],
@@ -258,7 +258,7 @@ ${PLAY_STEPS}`],
 </ul>
 <p>Cancelling stops the next renewal; on its own it does not refund the current period.</p>`],
       ["What if I was charged after I cancelled?", `<p>Some App Store reviewers in 2026 report a charge after they believed they had cancelled. In the help pages above, the usual reasons are cancelling in the wrong place (for example deleting the app, or cancelling on the website when Apple bills you), a second account, or a trial cancelled less than 24 hours before it ended. Check each billing source, keep a screenshot of the red expiry date or the confirmation email, then use the refund routes above.</p>`],
-      ["A Bible app with no trial", `<p>Peace Be Still, coming soon to the App Store and Google Play, has no trial and no website billing: a free version that stays free, and a paid plan at $7.99 a month or $39.99 a year billed only by Apple or Google, so it cancels in the same two places as above.</p>`],
+      ["A Bible app with no trial", `<p>Peace Be Still, {{stores.tag}}, has no trial and no website billing: a free version that stays free, and a paid plan at $7.99 a month or $39.99 a year billed only by Apple or Google, so it cancels in the same two places as above.</p>`],
     ],
     faq: [
       ["Does deleting a Bible app cancel the subscription?", "No. Apple, Google or the app's website keeps billing until you cancel there. Hallow, Glorify, Abide and Pray.com each say this on their own help pages."],
@@ -301,7 +301,7 @@ ${PLAY_STEPS}`],
 <tr><td>A Protestant who wants only a Protestant Bible and teaching</td><td>Much of the library will not fit; the Scripture readings may</td></tr>
 </tbody></table>`],
       ["What does Hallow cost?", `<p>$9.99 a month or $69.99 a year in the United States, per the subscription terms in its ${a(L.hallow, "App Store description")} (checked ${READ}). Its daily prayers, including the rosary, and a 9-day intro challenge are free. See <a href="/questions/hallow-app-cost/">Hallow app cost</a> and <a href="/questions/is-hallow-app-free/">is Hallow free?</a></p>`],
-      ["Is there a Bible app that is not tied to one church?", `<p>Peace Be Still, coming soon, is a King James Bible app that is not tied to one denomination: the whole KJV free to read, whispered psalms for sleep, and a Bible chat that answers from the plain words of Scripture and suggests your own pastor for your own situation. It is a different kind of app from Hallow, without a Catholic library.</p>`],
+      ["Is there a Bible app that is not tied to one church?", `<p>Peace Be Still, {{stores.short}}, is a King James Bible app that is not tied to one denomination: the whole KJV free to read, whispered psalms for sleep, and a Bible chat that answers from the plain words of Scripture and suggests your own pastor for your own situation. It is a different kind of app from Hallow, without a Catholic library.</p>`],
     ],
     faq: [
       ["Can a Protestant use Hallow?", "Yes. Hallow says it welcomes people from every faith background. Expect Catholic devotions such as the rosary and the Liturgy of the Hours beside Scripture readings and Christian meditation."],
@@ -322,7 +322,7 @@ ${PLAY_STEPS}`],
     indexLabel: "Daily Bible verse app",
     indexNote: "What to look for, and Morning Word in Peace Be Still.",
     definition: "A daily Bible verse app gives you one verse of scripture each day, usually in the morning, with its book, chapter and verse. The good ones get out of the way: the verse comes first, there are no pop-ups or ads in front of it, you can share it, and the reminder is one gentle nudge you chose, not a stream of notifications.",
-    quick: `Look for a verse from a named translation with its reference, no ads, no pop-up before the verse, one-tap sharing of just that verse, and an optional reminder you can turn off. In Peace Be Still, coming soon, Morning Word gives a King James verse and a short declaration each morning, free.`,
+    quick: `Look for a verse from a named translation with its reference, no ads, no pop-up before the verse, one-tap sharing of just that verse, and an optional reminder you can turn off. In Peace Be Still, {{stores.short}}, Morning Word gives a King James verse and a short declaration each morning, free.`,
     bestFor: "people who want a verse to start the day, without ads, upsells or notification guilt.",
     sections: [
       ["What should a daily Bible verse app do?", `<ol>
@@ -348,7 +348,7 @@ ${V("JOS 1:9")}`],
 <p>No ads free or paid, and no trial. A home-screen verse widget is not in the first version.</p>`],
     ],
     faq: [
-      ["Is there a free daily Bible verse app with no ads?", "Yes. Peace Be Still, coming soon, has a free Morning Word verse and declaration every day with no ads and no trial. Many other Bible apps also offer a free verse of the day."],
+      ["Is there a free daily Bible verse app with no ads?", "Yes. Peace Be Still, {{stores.short}}, has a free Morning Word verse and declaration every day with no ads and no trial. Many other Bible apps also offer a free verse of the day."],
       ["Which translation does the daily verse use?", "In Peace Be Still, the King James Version in English and the Reina-Valera 1909 in Spanish, each with its book, chapter and verse."],
       ["Will the app send me lots of notifications?", "Peace Be Still sends at most one gentle reminder a day, only if you say yes, and you can turn it off in Settings. A missed day is never scolded."],
     ],
@@ -386,7 +386,7 @@ ${V("ISA 46:4")}`],
 <li><strong>Listen at night.</strong> A psalm read aloud once the house is asleep can be the prayer when you have no words.</li>
 </ul>`],
       ["When caregiving is too heavy", `<p>Caregivers carry a lot, often alone. If you are running on empty, tell your doctor, and ask about respite care through your local agency on ageing or the care team. If you ever feel you cannot go on, in the US call or text <strong>988</strong>, any hour; outside the US, <a href="https://findahelpline.com/">findahelpline.com</a> lists a free line near you.</p>`],
-      ["Where can I hear scripture when the house is quiet?", `<p>Peace Be Still, coming soon to the App Store and Google Play, reads King James psalms in a whisper on a dark screen with a sleep timer; the first night is free, then one a week on the free version. It also has one Bible chat a day, free, for saying what is on your heart. It does not replace your doctor, a counsellor or your pastor.</p>`],
+      ["Where can I hear scripture when the house is quiet?", `<p>Peace Be Still, {{stores.tag}}, reads King James psalms in a whisper on a dark screen with a sleep timer; the first night is free, then one a week on the free version. It also has one Bible chat a day, free, for saying what is on your heart. It does not replace your doctor, a counsellor or your pastor.</p>`],
     ],
     faq: [
       ["What is a good prayer for a caregiver?", "Keep it short and honest: “Lord, give me strength for this hour, gentleness for this person, and rest when the house is quiet.” Short prayers fit a caregiver's day and can be prayed many times."],
@@ -432,7 +432,7 @@ ${V("MAR 1:1")}`],
 ${V("PSA 119:105")}`],
       ["What if I don't understand what I read?", `<p>That is normal, even for long-time readers. Mark the verse and keep reading; the next chapter often explains it. Ask your pastor or a small group, and read with someone if you can. The Bible itself pictures people searching it together and checking what they heard:</p>
 ${V("ACT 17:11")}`],
-      ["How does Peace Be Still help you start?", `<p>Peace Be Still, coming soon to the App Store and Google Play, has the whole King James Bible free to read, the Psalms and more chapters read aloud, and free 7-day plans (a week of rest, of courage, of mercy). Longer plans, such as Mark and John a chapter a day for 37 days, are on a paid plan at $7.99 a month or $39.99 a year, with no trial and no ads.</p>`],
+      ["How does Peace Be Still help you start?", `<p>Peace Be Still, {{stores.tag}}, has the whole King James Bible free to read, the Psalms and more chapters read aloud, and free 7-day plans (a week of rest, of courage, of mercy). Longer plans, such as Mark and John a chapter a day for 37 days, are on a paid plan at $7.99 a month or $39.99 a year, with no trial and no ads.</p>`],
     ],
     faq: [
       ["What book of the Bible should I read first?", "Mark or John. Mark is short and fast; John explains who Jesus is. Starting at Genesis is fine too, but many people stall in Leviticus, so a Gospel first is the easier way in."],

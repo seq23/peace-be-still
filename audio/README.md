@@ -32,14 +32,15 @@ checks, shelved, status, voice).
   as Hush Harbor rows carry it); a bounded batch (about 7 Mac-hours) queued ahead of the failed-chapter retries;
   Hush Harbor stays on its own lanes; (4) every other chapter, English then Spanish, in listening order.
 - **Per file**: `render_kokoro.py` (Kokoro, voices in `VOICES.md`, 1.5 s quiet between psalm verses,
-  1.0 s between chapter verses) → `fill.master` (two-pass EBU R128 `loudnorm`, true-peak target 1 dB
-  under the ceiling, then AAC-LC mono 48 kbps `.m4a`; the ENCODED file is measured and, if AAC pushed it
+  1.0 s between chapter verses) → `fill.master` (a measured gain, then a 4×-oversampled true-peak limiter
+  1 dB under the ceiling, then ffmpeg's AAC-LC, PNS off, mono 48 kbps `.m4a`; the ENCODED file is measured and, if AAC pushed it
   outside the bars, mastered again from the kept WAV, at most 3 times) → `qa.py` (word accuracy with
-  faster-whisper, loudness/true peak/0 clipped, last words present, words a minute) → `rclone copyto`
+  faster-whisper large-v3-turbo by alignment, loudness/true peak/0 clipped, last words present, words a minute) → `rclone copyto`
   `gdrive:Mac-Shelf/peace-be-still/audio/<lang>/<kind>/` + md5 check → deleted from the Mac → manifest row
   (one row per file). Only a speech problem (A01, A07, length) is re-rendered (once, speed 0.82); a
   mastering problem (A06) never costs a render. A `FAILED` row is tried again on later runs before any
-  new file; after 3 failed runs it is `NAMED STOP [FAILED_3_TRIES]` in the census line, naming the files.
+  new file, by the next route (whole verses, then sentences); when every route has failed it is `held` with
+  its reason (the app never lists it; a note in the census line), and tried again when its words or the judge change.
 - **Spoken text**: stored text word for word; `[ ]`/`( )` marks dropped, ALL-CAPS said as words,
   names respelled from `pronunciations.json` (`engine`).
 - **The bars are targets, with a margin** (the owner's rule, 21 Nov 2026: "a reasonable margin of error

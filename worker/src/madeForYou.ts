@@ -475,11 +475,13 @@ export type MadeForYouDependencies<CrisisKind = string> = {
   paid(installId: string, now: number): Promise<{ paid: boolean; paidUntil: number | null }>;
   // detectCrisis(turns, () => realDeps.risk(env, turns)) and the chat's crisisText.
   detectCrisis(turns: Turn[]): Promise<Crisis<CrisisKind>>;
-  // The door matters: an Imagination (Mindset door) request never gets a faith reply.
-  crisisText(kind: CrisisKind, lang: Lang, age: Install['age'], text: string, door: 'faith' | 'mindset'): string;
+  // The door matters: an Imagination (Mindset door) request never gets a faith reply. country: the network's
+  // country (request.cf), so a teen in Mexico or Spain gets her own lines, never the US ones.
+  crisisText(kind: CrisisKind, lang: Lang, age: Install['age'], text: string, door: 'faith' | 'mindset', country: string | undefined): string;
   // runLadder(db, madeForYouRungs(realDeps.rungs(env, now), use, chatShare, signal), messages, schema, maxTokens, metrics, valid).
-  /** paidOnly asks the private paid rung alone (config.escalate); with the paid rung at its cap it answers empty. */
-  ladder(use: Use, messages: Message[], schema: Schema, maxTokens: number, valid: (value: unknown) => boolean, signal: AbortSignal, paidOnly?: boolean): Promise<LadderResult>;
+  /** paidOnly asks the private paid rung alone (config.escalate); with the paid rung at its cap it answers empty.
+   *  teen keeps a teen's words off every free rung that may train (rungs(env, now, 'free', true)): Workers AI and the private paid rung only. */
+  ladder(use: Use, messages: Message[], schema: Schema, maxTokens: number, valid: (value: unknown) => boolean, signal: AbortSignal, paidOnly: boolean, teen: boolean): Promise<LadderResult>;
   // Phase 3's checkAnswer with the Worker's db, and its judgeSchema / judgeVerdict.
   checkProse: CheckProse;
   // verbatimScripture over the Worker's bible_runs index (the whole KJV and RV1909).
@@ -798,7 +800,8 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
       if (psalm && (verses.length !== psalm.verses || verses.some(verse => !verse.trim()))) {
         return { code: 'MADE_FOR_YOU_PSALM_UNAVAILABLE', failure: false };
       }
-      const input: Input = { kind: row.kind, lang: row.lang, teen: !!row.teen, text: note, verses };
+      // Anything but an explicit adult row (0) is a teen: unknown age = teen.
+      const input: Input = { kind: row.kind, lang: row.lang, teen: row.teen !== 0, text: note, verses };
       // Reject reasons are codes only (never her words or the script): the Worker log and the soak count them.
       const why = (reason: string) => console.log(JSON.stringify({ code: 'MADE_FOR_YOU_REJECT', reason, kind: row.kind, lang: row.lang }));
       // One try: a draft, then up to two revisions that send it back with its exact faults.
@@ -814,7 +817,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
           if (paragraphsOf(value)) return true;
           misshapen = true;
           return false;
-        }, signal, paidOnly);
+        }, signal, paidOnly, input.teen);
         if ('empty' in drafted) {
           // The paid rung alone, at its cap or refusing: the row waits (bounded by the morning-after expiry).
           if (!misshapen && paidOnly) return { code: PAID_UNAVAILABLE, failure: false };
@@ -837,7 +840,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
       }
       const middle = paragraphs.join('\n\n');
       const judge: JudgeProse = (i, text, s) => madeForYouJudge(
-        (judgeMessages, schema, valid) => deps.ladder('judge', judgeMessages, schema, config.judgeMaxTokens, valid, s), deps.judgeShared, i, text, why);
+        (judgeMessages, schema, valid) => deps.ladder('judge', judgeMessages, schema, config.judgeMaxTokens, valid, s, false, i.teen), deps.judgeShared, i, text, why);
       // The checks and the judge read the middle only: the fixed blocks were checked once (madeForYou.unit.mjs).
       const approval = await madeForYouApprove(deps.checkProse, deps.verbatim, judge, input, middle, signal, why);
       if (approval === 'down') return { code: NO_FREE_MODEL, failure: false };
@@ -960,14 +963,14 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     });
   }
 
-  async function request(input: Record<string, unknown> | null, who: Install, now: number, paidUntil: number | null): Promise<Response> {
+  async function request(input: Record<string, unknown> | null, who: Install, now: number, paidUntil: number | null, country: string | undefined): Promise<Response> {
     if (!input || !isKind(input.kind) || !isLang(input.lang) || typeof input.text !== 'string' ||
         input.text.length > 500 || !input.text.trim() ||
         (input.kind === 'psalm' ? input.door !== 'faith' : input.door !== 'mindset')) return error(400, 'BAD_REQUEST');
-    const note = { kind: input.kind, lang: input.lang, text: input.text.trim(), teen: who.age === 'teen' };
+    const note = { kind: input.kind, lang: input.lang, text: input.text.trim(), teen: who.age !== 'adult' };
     // The chat's own crisis floor and safety read, before anything is stored.
     const safety = await deps.detectCrisis([{ role: 'user', text: note.text }]);
-    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, note.lang, who.age, note.text, note.kind === 'psalm' ? 'faith' : 'mindset') });
+    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, note.lang, who.age, note.text, note.kind === 'psalm' ? 'faith' : 'mindset', country) });
     if (safety.read === 'down') return error(503, 'SAFETY_UNAVAILABLE');
     const id = crypto.randomUUID();
     const day = deps.centralDay(now);
@@ -1009,7 +1012,7 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
         // The cron deletes her audio 30 days after the plan ends; every paid visit keeps that date current.
         await db.prepare('UPDATE made_for_you SET paid_until = ? WHERE install_id = ? AND paid_until IS NOT ?').bind(paid.paidUntil, who.installId, paid.paidUntil).run();
         if (req.method === 'GET') return await shelf(url, who.installId, now);
-        if (req.method === 'POST') return await request(await body(req), who, now, paid.paidUntil);
+        if (req.method === 'POST') return await request(await body(req), who, now, paid.paidUntil, (req as unknown as { cf?: { country?: string } }).cf?.country);
         return error(405, 'METHOD');
       } catch (e) {
         // Request bodies and provider or storage exceptions may contain private input: codes only.

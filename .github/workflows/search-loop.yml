@@ -42,6 +42,7 @@ jobs:
       # trademark, claims or two-door rules before it is committed. Pure node, no install.
       post_build_command: node site/scripts/apply-cta.mjs && node site/scripts/build-sitemap.mjs && node site/scripts/check-site.mjs
     secrets:
+      BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}  # named stops -> Boss OS Open Loops (search-loop v1.7.0); AI misses read (v1.14.0)
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
       GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}

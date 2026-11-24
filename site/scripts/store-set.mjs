@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // The switch: npm run store:set -- --ios <App Store URL> --play <Google Play URL> (either one alone,
-// "none" puts that store back to "coming soon"). Writes site/config/store.json and re-renders the
-// store call to action on every page; deploy follows the normal PR + land path.
+// "none" puts that store back to "coming soon"). Writes site/config/store.json and rebuilds every page,
+// the share pictures and the Instagram frames from it; deploy follows the normal PR + land path.
 // Also: --es-legal on|off (owner's yes only) switches the es-MX store listing between the Spanish
 // legal pages and the English ones marked "(en inglés)", and rewrites store/listing-es.md to match.
 import { readFileSync, writeFileSync } from "node:fs";
@@ -32,5 +32,8 @@ if (esLegal !== undefined) {
   writeFileSync(listing, text);
 }
 writeFileSync(file, JSON.stringify(store, null, 2) + "\n");
-const out = execFileSync(process.execPath, [new URL("./apply-cta.mjs", import.meta.url).pathname], { encoding: "utf8" }).trim();
-console.log(`OUTPUT store:set: App Store ${store.app_store_url ? "live" : "coming soon"}, Google Play ${store.play_url ? "live" : "coming soon"}; es listing legal links ${store.es_listing_spanish_legal ? "Spanish" : "English"}; ${out.replace(/^OUTPUT /, "")}`);
+// Every word and picture that says whether the app is out reads store.json: rebuild the pages (CTA,
+// home hero, titles, FAQ, JSON-LD, llms.txt), the share pictures and the Instagram frames.
+const run = (script) => execFileSync(process.execPath, [new URL(script, import.meta.url).pathname], { encoding: "utf8" }).trim().split("\n").pop();
+const outs = ["./build-seed-pages.mjs", "./build-sitemap.mjs", "./og-render.mjs", "../../scripts/instagram/render.mjs"].map(run);
+console.log(`OUTPUT store:set: App Store ${store.app_store_url ? "live" : "coming soon"}, Google Play ${store.play_url ? "live" : "coming soon"}; es listing legal links ${store.es_listing_spanish_legal ? "Spanish" : "English"}; ${outs.map((o) => o.replace(/^OUTPUT /, "")).join("; ")}`);

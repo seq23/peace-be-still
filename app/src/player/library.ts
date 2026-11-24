@@ -78,6 +78,46 @@ export function readManifest(jsonl: string, displayOf: (row: ManifestRow) => Tra
   return { tracks, skipped };
 }
 
+/** The kinds the live R2 manifest may add after the build: the scripture library, whose titles come from the
+ * book list. A story or a night needs its script (title, key verse, pause timings, journey), which only the
+ * build reads, so those still arrive with a new build. */
+const LIVE_KINDS = new Set(['bible', 'psalms']);
+
+/** Scripture tracks from the served R2 manifest (publish.py's ledger): the chapters voiced and published after
+ * this build. Anything unreadable gives none, never an error: the bundled library is the fallback. Pure. */
+export function liveScripture(jsonl: string): Track[] {
+  try {
+    return readManifest(jsonl, () => null).tracks.filter(track => LIVE_KINDS.has(track.kind));
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * The bundled library plus the chapters published after this build. `set` takes the last good read of the R2
+ * manifest (liveScripture) and returns the tracks it added, by file, a bundled row always winning. An empty read
+ * (R2 down, a bad body) changes nothing: the list is never smaller than the bundled library.
+ */
+export function createLiveLibrary(bundled: readonly Track[]) {
+  let all: readonly Track[] = bundled;
+  return {
+    tracks: () => all,
+    set(live: readonly Track[]): readonly Track[] {
+      if (!live.length) return [];
+      const have = new Set(bundled.map(track => track.file));
+      const added = live.filter(track => !have.has(track.file) && !!have.add(track.file));
+      all = added.length ? [...bundled, ...added] : bundled;
+      return added;
+    },
+  };
+}
+
+/** Tracks back as manifest rows, so a saved copy is read by the same checks as the network one (liveScripture). */
+export function asManifestRows(tracks: readonly Track[]): string {
+  return tracks.map(({ file, kind, lang, ref, seconds, sha256, voice }) =>
+    JSON.stringify({ file, kind, lang, ref, seconds, sha256, voice, status: 'passed' })).join('\n');
+}
+
 /** A re-voiced script (edited text, a longer night) is a new file with a new row, while its older passed file
  * stays live. The library keeps every passed file; a screen shows ONE per script: the newest it can play now
  * (published or downloaded), else the newest, so a newer file that is not in R2 yet never hides the old one

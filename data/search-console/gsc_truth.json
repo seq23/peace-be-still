@@ -3,18 +3,42 @@
  "site": "https://peacebestillapp.com",
  "property": "sc-domain:peacebestillapp.com",
  "window": {
-  "start": "2026-10-23",
-  "end": "2026-11-19"
+  "start": "2026-10-24",
+  "end": "2026-11-20"
  },
- "generated_at": "2026-11-22T18:05:48.330Z",
+ "generated_at": "2026-11-23T22:15:17.627Z",
  "totals": {
-  "rows": 6,
+  "rows": 31,
   "clicks": 0,
-  "impressions": 7,
-  "queries": 6,
-  "pages": 5
+  "impressions": 48,
+  "queries": 28,
+  "pages": 14
  },
  "rows": [
+  {
+   "query": "bible ai free",
+   "page": "https://peacebestillapp.com/ai-bible/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 57
+  },
+  {
+   "query": "bible declarations",
+   "page": "https://peacebestillapp.com/questions/daily-bible-declarations/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 55
+  },
+  {
+   "query": "bible stories for young adults",
+   "page": "https://peacebestillapp.com/questions/bible-stories-for-adults/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 31
+  },
   {
    "query": "bible stories in order for adults",
    "page": "https://peacebestillapp.com/questions/bible-stories-for-adults/",
@@ -24,12 +48,36 @@
    "position": 56
   },
   {
-   "query": "como cancelar bible chat",
-   "page": "https://peacebestillapp.com/questions/how-to-cancel-bible-chat-subscription/",
+   "query": "black christian",
+   "page": "https://peacebestillapp.com/questions/black-christian/",
    "clicks": 0,
    "impressions": 1,
    "ctr": 0,
-   "position": 7
+   "position": 18
+  },
+  {
+   "query": "como cancelar bible chat",
+   "page": "https://peacebestillapp.com/bible-chat-cancel-subscription/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "query": "como cancelar bible chat",
+   "page": "https://peacebestillapp.com/questions/how-to-cancel-bible-chat-subscription/",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 6.2
+  },
+  {
+   "query": "creed bible app cost",
+   "page": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
   },
   {
    "query": "do you have to pay for creed bible app",
@@ -38,6 +86,62 @@
    "impressions": 2,
    "ctr": 0,
    "position": 10.5
+  },
+  {
+   "query": "does the haven app cost money",
+   "page": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "query": "hallow app plans",
+   "page": "https://peacebestillapp.com/questions/hallow-app-cost/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 58
+  },
+  {
+   "query": "hallow cost",
+   "page": "https://peacebestillapp.com/questions/hallow-app-cost/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 48
+  },
+  {
+   "query": "hallow cost",
+   "page": "https://peacebestillapp.com/questions/is-hallow-app-free/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 38
+  },
+  {
+   "query": "hallow free version",
+   "page": "https://peacebestillapp.com/questions/is-hallow-app-free/",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 10.6
+  },
+  {
+   "query": "hallow friends and family plan",
+   "page": "https://peacebestillapp.com/questions/hallow-app-cost/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 69
+  },
+  {
+   "query": "hallow subscription",
+   "page": "https://peacebestillapp.com/questions/hallow-app-cost/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 37.5
   },
   {
    "query": "haven chat app",
@@ -56,12 +160,108 @@
    "position": 16
   },
   {
-   "query": "is the haven bible app free",
+   "query": "how much is hallow app",
+   "page": "https://peacebestillapp.com/questions/hallow-app-cost/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "query": "how much is hallow app per month",
+   "page": "https://peacebestillapp.com/questions/hallow-app-cost/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 28
+  },
+  {
+   "query": "how much is the creed bible app",
+   "page": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "query": "how to cancel bible chat subscription",
+   "page": "https://peacebestillapp.com/bible-chat-cancel-subscription/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "query": "how to cancel bible chat subscription",
+   "page": "https://peacebestillapp.com/questions/how-to-cancel-bible-chat-subscription/",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 6
+  },
+  {
+   "query": "is haven bible app free",
    "page": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
    "clicks": 0,
    "impressions": 1,
    "ctr": 0,
    "position": 10
+  },
+  {
+   "query": "is the haven app free",
+   "page": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "query": "is the haven bible app free",
+   "page": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 9.7
+  },
+  {
+   "query": "is the hello app free",
+   "page": "https://peacebestillapp.com/questions/is-hallow-app-free/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "query": "prayer for sleep",
+   "page": "https://peacebestillapp.com/questions/prayer-for-sleep/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "salmo 4.8",
+   "page": "https://peacebestillapp.com/es/preguntas/salmo-4-8/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 23
+  },
+  {
+   "query": "salmos 4:8",
+   "page": "https://peacebestillapp.com/es/preguntas/salmo-4-8/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 38
+  },
+  {
+   "query": "versiculos de agradecimento",
+   "page": "https://peacebestillapp.com/es/preguntas/versiculos-de-agradecimiento/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 48
   }
  ]
 }

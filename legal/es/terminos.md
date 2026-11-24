@@ -2,7 +2,7 @@
 
 > Esta es una traducción al español. Si esta versión y la [versión en inglés](https://peacebestillapp.com/terms) no dicen lo mismo, prevalece la versión en inglés.
 
-Vigente desde: 21 de noviembre de 2026
+Vigente desde: 22 de noviembre de 2026
 
 ## Con quién es este acuerdo
 

@@ -2,96 +2,96 @@
   "_comment": "Written by scripts/instagram/render.mjs: the hash of each picture's HTML when its PNG was rendered. scripts/instagram/validate.mjs fails when a post changed without a re-render.",
   "frames": {
     "p1-1": {
-      "hash": "809018d1ccb8f4d0",
-      "store_live": false
+      "hash": "907340105270f5bf",
+      "store_live": true
     },
     "p1-2": {
       "hash": "c75d3179653e49e2",
       "store_live": false
     },
     "p1-3": {
-      "hash": "8c1deef72337b0b6",
-      "store_live": false
+      "hash": "132632a32f0597d7",
+      "store_live": true
     },
     "p3-1": {
       "hash": "b60ec707e87e3360",
       "store_live": false
     },
     "p3-2": {
-      "hash": "7a57ae59cb659d0c",
-      "store_live": false
+      "hash": "0fbaff8c852b444e",
+      "store_live": true
     },
     "p2-1": {
-      "hash": "621b7fb44eba403d",
-      "store_live": false
+      "hash": "820c574baa097ec2",
+      "store_live": true
     },
     "p5-1": {
-      "hash": "294c9196b95b8df5",
-      "store_live": false
+      "hash": "418cc8a63da35b22",
+      "store_live": true
     },
     "p5-2": {
-      "hash": "39b6c61570511204",
-      "store_live": false
+      "hash": "2032ad390ccb8448",
+      "store_live": true
     },
     "p5-3": {
-      "hash": "7d3ccf6df442ec84",
-      "store_live": false
+      "hash": "f9264c5ef4f59456",
+      "store_live": true
     },
     "p6-1": {
-      "hash": "8943a8465ada30c1",
-      "store_live": false
+      "hash": "faa38e9c510258f8",
+      "store_live": true
     },
     "p4-1": {
-      "hash": "ab0abb2c48ed73b3",
-      "store_live": false
+      "hash": "564b792f494e76e4",
+      "store_live": true
     },
     "p4-reel": {
-      "hash": "bda88de11c43caad",
-      "store_live": false
+      "hash": "3510af7308f21dd7",
+      "store_live": true
     },
     "p7-1": {
-      "hash": "4d788d38479da0a4",
-      "store_live": false
+      "hash": "a7d2c35fe68d873d",
+      "store_live": true
     },
     "p8-1": {
       "hash": "d2ffdb4a914ba027",
       "store_live": false
     },
     "p9-1": {
-      "hash": "91178441192be847",
-      "store_live": false
+      "hash": "a7afa71cb8306188",
+      "store_live": true
     },
     "p9-2": {
-      "hash": "af2c8ab2830a0143",
-      "store_live": false
+      "hash": "99d4b82a725a2df1",
+      "store_live": true
     },
     "p10-1": {
-      "hash": "7f19b4e7e318ae7f",
-      "store_live": false
+      "hash": "bf1fdd2f85324d72",
+      "store_live": true
     },
     "p11-1": {
       "hash": "f7673b4e3870e45c",
       "store_live": false
     },
     "p11-2": {
-      "hash": "f545ca72f798d41e",
-      "store_live": false
+      "hash": "a0e0f66cd18d382d",
+      "store_live": true
     },
     "p12-1": {
-      "hash": "cef6ced39b7b50e2",
-      "store_live": false
+      "hash": "07c93f646e1a65dd",
+      "store_live": true
     },
     "p13-1": {
-      "hash": "6fdc468345d06b9b",
-      "store_live": false
+      "hash": "65e70df55f59ed22",
+      "store_live": true
     },
     "p14-1": {
-      "hash": "a6ec1319de711fa9",
-      "store_live": false
+      "hash": "40fb64603d9b1c02",
+      "store_live": true
     },
     "p15-1": {
-      "hash": "52c45da8d712c4db",
-      "store_live": false
+      "hash": "6ffa531a6742eeeb",
+      "store_live": true
     },
     "p16-1": {
       "hash": "203c3cd82fdfb7fe",
@@ -102,100 +102,100 @@
       "store_live": false
     },
     "p17-2": {
-      "hash": "1a3c8db160be3769",
-      "store_live": false
+      "hash": "cbe8022c79100496",
+      "store_live": true
     },
     "p18-1": {
-      "hash": "eca35f6498a81d3c",
-      "store_live": false
+      "hash": "0fd70c4dc1d060d0",
+      "store_live": true
     },
     "p18-2": {
-      "hash": "2dcf398bd035f652",
-      "store_live": false
+      "hash": "e7621a4dc4bc1856",
+      "store_live": true
     },
     "p18-3": {
-      "hash": "f44775cb995d1cc5",
-      "store_live": false
+      "hash": "4a143f425d904d3b",
+      "store_live": true
     },
     "p19-1": {
-      "hash": "9ed9b830461bbaf1",
-      "store_live": false
+      "hash": "89f3d48de8329ce7",
+      "store_live": true
     },
     "p19-2": {
-      "hash": "8b3ab597932d53ea",
-      "store_live": false
+      "hash": "bf758324b84be92a",
+      "store_live": true
     },
     "p20-1": {
-      "hash": "dcd6b4a4e44ab689",
-      "store_live": false
+      "hash": "63bac4603cc6552e",
+      "store_live": true
     },
     "p21-1": {
       "hash": "402d0f960d0ffeec",
       "store_live": false
     },
     "p21-2": {
-      "hash": "8aa8e051773d79ee",
-      "store_live": false
+      "hash": "78bef6cf5743c48b",
+      "store_live": true
     },
     "p22-1": {
-      "hash": "592b9031b9f4a473",
-      "store_live": false
+      "hash": "0231b0ab636b1163",
+      "store_live": true
     },
     "p23-1": {
-      "hash": "e76c333112fcd033",
-      "store_live": false
+      "hash": "e344ff827651a55d",
+      "store_live": true
     },
     "p23-2": {
-      "hash": "b04778a307a78ff0",
-      "store_live": false
+      "hash": "e1313e73c60cd520",
+      "store_live": true
     },
     "p23-3": {
-      "hash": "6f56893478da562c",
-      "store_live": false
+      "hash": "746aa560c0bc7e1e",
+      "store_live": true
     },
     "p24-1": {
-      "hash": "1d2b6055cb4629fc",
-      "store_live": false
+      "hash": "e8dd1a6196830b00",
+      "store_live": true
     },
     "p25-1": {
       "hash": "f0aa6e74d5ee8543",
       "store_live": false
     },
     "p25-2": {
-      "hash": "af7db2c6456d274d",
-      "store_live": false
+      "hash": "a944c0c7b8d94926",
+      "store_live": true
     },
     "p26-1": {
-      "hash": "bbb5be42e8853ac7",
-      "store_live": false
+      "hash": "82036e4072830b68",
+      "store_live": true
     },
     "p27-1": {
       "hash": "38d1eaf2c93a99ab",
       "store_live": false
     },
     "p28-1": {
-      "hash": "b6d511fa9130f2c2",
-      "store_live": false
+      "hash": "5da8061412cd2f50",
+      "store_live": true
     },
     "p28-2": {
-      "hash": "319c009d55c76cbe",
-      "store_live": false
+      "hash": "a03aa4d975aafb7f",
+      "store_live": true
     },
     "p29-1": {
-      "hash": "924aace333be0e5c",
-      "store_live": false
+      "hash": "06e5806d140b9f71",
+      "store_live": true
     },
     "p30-1": {
-      "hash": "eda4703133d3f473",
-      "store_live": false
+      "hash": "f1b59fa7c0aaa98f",
+      "store_live": true
     },
     "p30-2": {
-      "hash": "a26ccc90b4bb49a6",
-      "store_live": false
+      "hash": "adda8769ff394ece",
+      "store_live": true
     },
     "p30-3": {
-      "hash": "6f3cd9fdc78709fb",
-      "store_live": false
+      "hash": "98e18f7faf9e1e2f",
+      "store_live": true
     }
   }
 }

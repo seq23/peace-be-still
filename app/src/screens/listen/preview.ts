@@ -3,7 +3,7 @@
 // preview (EXPO_PUBLIC_PBS_PREVIEW=1 on web), the same switch as the preview paid flag; a phone or store build
 // never lists them. They carry no audio: opened unlocked, they say the audio is not ready, which is true.
 import { Platform } from 'react-native';
-import type { NightJourney, Track } from '../../player/library';
+import { createLiveLibrary, type NightJourney, type Track } from '../../player/library';
 import { tracks as library } from '../../player/usePlayer';
 
 export const isListenPreview = () => Platform.OS === 'web' && process.env.EXPO_PUBLIC_PBS_PREVIEW === '1';
@@ -26,9 +26,16 @@ export const PREVIEW_SLEEP_SESSIONS: readonly Track[] = [
   sample('psalm-night', 'es', 'Para volver a dormir (vista previa)', 'back-to-sleep'),
 ];
 
-/** Every track the Nights tab and the player may show: the bundled library, plus the samples on the web preview. */
+// The bundled library plus the chapters published after this build: from the last good read of the R2 manifest
+// (availability.ts), or before that the copy saved from the last one. A failed read changes nothing: the bundled
+// library always shows.
+const live = createLiveLibrary(library);
+export const setLiveTracks = live.set;
+
+/** Every track the Nights tab and the player may show: the bundled library, the chapters published since
+ * (the live R2 manifest), plus the samples on the web preview. */
 export function listenTracks(): readonly Track[] {
-  return isListenPreview() ? [...library, ...PREVIEW_SLEEP_SESSIONS] : library;
+  return isListenPreview() ? [...live.tracks(), ...PREVIEW_SLEEP_SESSIONS] : live.tracks();
 }
 
 export const isPreviewSample = (track: Track) => track.sha256.startsWith('preview-');

@@ -129,7 +129,9 @@ export function regionOf(code: string | null | undefined): 'US' | 'MX' | 'ES' | 
 }
 export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '', door: Door = 'faith', region: 'US' | 'MX' | 'ES' | 'other' = 'US'): string {
   const mind = door === 'mindset';
-  if (region !== 'US') return [open[lang], regional[region][lang], ...(band === 'teen' ? [(door === 'mindset' ? trustedMindset : trusted)[lang]] : []), close[lang]].join(' ');
+  // Abuse: the trusted adult is never "like a parent" (the parent may be the one hurting her), in every region.
+  const abuse = kind === 'abuse' || kind === 'child_abuse';
+  if (region !== 'US') return [open[lang], regional[region][lang], ...(band === 'teen' ? [(abuse ? trustedSafe : door === 'mindset' ? trustedMindset : trusted)[lang]] : []), close[lang]].join(' ');
   const trust = mind ? trustedMindset : trusted;
   if (kind === 'medical') return [...medical[medicalCase(herText)][lang].map(line => mind ? line.replace(/ Faith and treatment go together\.| La fe y el tratamiento van juntos\./, '') : line), ...(band === 'teen' ? [trust[lang]] : []), close[lang]].join(' ');
   const child = kind === 'child_abuse' || (kind === 'abuse' && band === 'teen');
@@ -147,6 +149,37 @@ export const checkInText = {
   en: "It sounds like you're carrying something really heavy. Are you safe right now?",
   es: 'Parece que estás cargando algo muy pesado. ¿Estás a salvo ahora mismo?',
 };
+// A teen's conversation after the card, when Workers AI (her only chat route) has no answer (her ruling
+// 23 Nov 2026: no extra capacity for teens): written by people, no faith words, never the card or the
+// question again. The first when her last words told the check-in she is safe.
+export const teenStillHereSafeText = {
+  en: "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and the lines on the card above are free any time if things feel heavy again.",
+  es: 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y las líneas de la tarjeta de arriba son gratuitas a cualquier hora si todo vuelve a sentirse pesado.',
+};
+export const teenStillHereText = {
+  en: "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above are free any time, and a real person there will listen. An adult you trust can sit with you today, too.",
+  es: 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba son gratuitas a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.',
+};
+// A teen past her one model answer today (her ruling 23 Nov 2026, "yes, 1 each"). No model reads her next
+// messages, so this reply never asks her to say she is unsafe: it carries the free crisis lines for her
+// region itself, every time (the card's own lines; the app shows them as call and text buttons).
+const teenDailyOpen = {
+  faith: { en: "That was today's chat answer. Chat answers again tomorrow, and your Bible, today's story and the night sessions are here any time.", es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y tu Biblia, la historia de hoy y las sesiones de la noche están aquí cuando quieras.' },
+  mindset: { en: "That was today's chat answer. Chat answers again tomorrow, and the night sessions are here any time.", es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y las sesiones de la noche están aquí cuando quieras.' },
+};
+const helpOpen = { en: 'If things feel heavy or you are not safe, free help is there any time.', es: 'Si todo se siente pesado o no estás a salvo, hay ayuda gratuita a cualquier hora.' };
+const helpUs = {
+  en: 'Call or text 988, the Suicide & Crisis Lifeline, day or night. If you are in danger this minute, call 911.',
+  es: 'Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, la Línea de Prevención del Suicidio y Crisis, de día o de noche. Si estás en peligro en este momento, llama al 911.',
+};
+/** Her region's free crisis lines, in the one form every reply outside the card uses (the teen daily limit and
+ *  the free day's wall). The app shows each number as call and text buttons when the reply says helpLines. */
+export function helpLinesText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other'): string {
+  return [helpOpen[lang], (region === 'US' ? helpUs : regional[region])[lang]].join(' ');
+}
+export function teenDailyText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other', door: Door = 'faith'): string {
+  return [teenDailyOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], helpLinesText(lang, region)].join(' ');
+}
 export const checkInQuestion = { en: 'Are you safe right now?', es: '¿Estás a salvo ahora mismo?' };
 
 export const fallbackText = {
@@ -177,14 +210,16 @@ export const noFreeModelMindsetText = {
   en: 'Chat is resting until tomorrow. Your night sessions are all still here.',
   es: 'El chat descansa hasta mañana. Tus sesiones de la noche siguen aquí.',
 };
-export const limitText = {
-  en: "That's today's chat. It opens again tomorrow, and your Bible is here any time.",
-  es: 'Ese fue el chat de hoy. Mañana se abre de nuevo, y tu Biblia está aquí cuando quieras.',
+// The free day's wall (its messages used, a second conversation the same day, or the network's share). No
+// model reads her words there, so the reply never depends on what she wrote: it always ends on her region's
+// free crisis lines (a second conversation that opens with "I'm not safe" meets them, never a closed door alone).
+const limitOpen = {
+  faith: { en: "That's today's chat. It opens again tomorrow, and your Bible is here any time.", es: 'Ese fue el chat de hoy. Mañana se abre de nuevo, y tu Biblia está aquí cuando quieras.' },
+  mindset: { en: "That's today's chat. It opens again tomorrow.", es: 'Ese fue el chat de hoy. Mañana se abre de nuevo.' },
 };
-export const limitMindsetText = {
-  en: "That's today's chat. It opens again tomorrow.",
-  es: 'Ese fue el chat de hoy. Mañana se abre de nuevo.',
-};
+export function limitText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other', door: Door = 'faith'): string {
+  return [limitOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], helpLinesText(lang, region)].join(' ');
+}
 // Asked for a verse in another translation: the app quotes only the KJV / RV1909, so it gives that
 // verse in those words and says so once, plainly.
 export const oneTranslationText = {

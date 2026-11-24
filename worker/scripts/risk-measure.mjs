@@ -10,7 +10,7 @@
 // the main account ran ~26k neurons past its free allowance on 20 Nov, so the T2R token (main) is refused.
 // Exit 1 below 100%: a missed crisis or a crisis reply to Bible study both block.
 import { readFileSync } from 'node:fs';
-import { confirmRisk, detectCrisis, riskMessages, riskSchema, riskVerdict } from '../src/crisis.ts';
+import { confirmRisk, crisisLevel, riskMessages, riskSchema, riskVerdict } from '../src/crisis.ts';
 
 const account = process.env.CF2_ACCOUNT_ID ?? process.env.CLOUDFLARE_ACCOUNT_ID;
 const token = process.env.CF2_WORKERS_AI_TOKEN ?? process.env.CLOUDFLARE_API_TOKEN;
@@ -27,19 +27,21 @@ let ok = 0;
 async function read(m, turns) {
   const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/ai/run/${m}`, {
     method: 'POST', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' }, signal: AbortSignal.timeout(30_000),
-    body: JSON.stringify({ messages: riskMessages(turns), response_format: { type: 'json_schema', json_schema: riskSchema }, max_tokens: 60, temperature: 0 }),
+    body: JSON.stringify({ messages: riskMessages(turns), response_format: { type: 'json_schema', json_schema: riskSchema }, max_tokens: 80, temperature: 0 }),
   });
   const j = await res.json();
   let data = j.result?.response; if (typeof data === 'string') try { data = JSON.parse(data); } catch {}
   return riskVerdict(data);
 }
-// Exactly as the Worker runs it (detectCrisis): the floor, then the small model screens and the large
-// one confirms its positives, then the asking-to-stop rule; what is measured is what ships.
+// Exactly as the Worker reads it (crisisLevel): the floor, then the small model screens and the large
+// one confirms its positives, then the asking-to-stop and Scripture rules; what is measured is what ships.
+// A 'none' case must come back 'none', or low from a general teaching read (no card; the crisis model
+// answers: PBS_FALSE_CARDS); a risk case must come back high or low.
 for (const c of cases) {
-  const r = await detectCrisis(c.turns, () => confirmRisk(() => read(model, c.turns), () => read(confirmModel, c.turns)));
-  const got = r.fired ? r.kind : r.read;
+  const r = crisisLevel(c.turns, await confirmRisk(() => read(model, c.turns), () => read(confirmModel, c.turns)));
+  const got = r.level === 'none' ? r.read : `${r.kind}:${r.level}${r.layer === 'general' ? ':general' : ''}`;
   // Medical danger must get the medical reply (Poison Control), not only 988 (round 4, x10).
-  const pass = c.want === 'none' ? got === 'none' : c.want === 'medical' ? got === 'medical' : got !== 'none' && got !== 'down';
+  const pass = c.want === 'none' ? got === 'none' || (r.level === 'low' && r.layer === 'general') : c.want === 'medical' ? got.startsWith('medical:') : r.level !== 'none';
   if (pass) ok++;
   console.log(`${pass ? 'ok  ' : 'MISS'} ${c.id} want ${c.want} got ${got}`);
 }

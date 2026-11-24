@@ -49,13 +49,13 @@ export const AFRICA = [
     h1: "Prayer points, declarations and night vigils, with the King James open",
     indexLabel: "Prayer points and vigils, for African Christians",
     indexNote: "What the app does today, and the journey being built for January 2027.",
-    definition: "Peace Be Still is a coming-soon phone app for the start and the end of the day, built on the King James Version that many Nigerian and Ghanaian congregations still read from the pulpit. Today it has the whole KJV and a daily declaration that stands on one verse; an AI Bible chat arrives with the app's launch. A journey shaped around prayer points, declarations and the night vigil is being built for January 2027.",
-    quick: "Today: the King James Bible to read and hear, a morning declaration from Scripture, and whispered Psalms at night. Bible chat arrives with the app's launch. Not yet: prayer points and a vigil order inside the app. Those are being built for January 2027, and this page will say when they are ready.",
+    definition: "Peace Be Still is a phone app for the start and the end of the day, built on the King James Version that many Nigerian and Ghanaian congregations still read from the pulpit. Today it has the whole KJV, a daily declaration that stands on one verse and an AI Bible chat. A journey shaped around prayer points, declarations and the night vigil is being built for January 2027.",
+    quick: "Today: the King James Bible to read and hear, a morning declaration from Scripture, whispered Psalms at night, and Bible chat. Not yet: prayer points and a vigil order inside the app. Those are being built for January 2027, and this page will say when they are ready.",
     bestFor: "Nigerian, Ghanaian and other African believers in the US who pray with prayer points, keep Friday vigils, and want the King James close at hand between services.",
     sections: [
       ["Who this is for", `<p>The sister who joins the 5 a.m. prayer line by phone before her shift. The fellowship that keeps a Friday vigil in somebody's living room in Houston, Dallas, Atlanta, Maryland or the Bronx. The father who leads family devotion before school, in English, Yoruba, Igbo, Twi or Ewe, with the KJV open on the table. The student who misses home church and wants the same Scripture on her phone.</p>
 <p>Whatever church you belong to, Pentecostal, Anglican, Methodist, Presbyterian, Baptist or independent, Peace Be Still keeps the text of Scripture at the centre and leaves the preaching to your pastor.</p>`],
-      ["What Peace Be Still does today", `<p>The app is coming soon to the App Store. When it opens, this is what you will find:</p>
+      ["What Peace Be Still does today", `<p>{{stores.line}} This is what you will find in it:</p>
 ${TODAY_TABLE}
 <p>The free version stays free. A paid plan is $7.99 a month or $39.99 a year. No ads, and no trial that turns into a charge.</p>`],
       ["What is being built for January 2027", `<p>A journey for the way many African churches pray: prayer points that each stand on a verse, declarations for the morning, and an order for a night vigil you can keep at home or with your fellowship. It is still being built, so the details and the date may move.</p>
@@ -63,15 +63,15 @@ ${TODAY_TABLE}
 ${V("HAB 2:3")}`],
       ["Every declaration stands on a verse", `<p>In Peace Be Still, a declaration is Scripture said back to God, with its chapter and verse beside it, so you always know what you are standing on. The Bible and the declarations come from a stored King James text, never typed from memory.</p>
 ${V("PSA 118:17")}`],
-      ["Hush Harbor, and an African journey of its own", `<p>Peace Be Still launches with Hush Harbor · Black Bible Chat &amp; Stories, which speaks in a Black American church voice and tells a Bible story every day in that voice. Many African believers will enjoy it, and its stories include Africans the Bible names, such as the Ethiopian official in Acts 8 and Simon of Cyrene. But African churches and Black American churches each have their own ways of praying, so the African journey is being built as its own thing, not a copy of Hush Harbor.</p>
+      ["Hush Harbor, and an African journey of its own", `<p>Peace Be Still has Hush Harbor · Black Bible Chat &amp; Stories, which speaks in a Black American church voice and tells a Bible story every day in that voice. Many African believers will enjoy it, and its stories include Africans the Bible names, such as the Ethiopian official in Acts 8 and Simon of Cyrene. But African churches and Black American churches each have their own ways of praying, so the African journey is being built as its own thing, not a copy of Hush Harbor.</p>
 <p>See <a href="/questions/black-people-in-the-bible/">Black people in the Bible</a> for the named Africans in Scripture, each with the verse.</p>`],
     ],
     faq: [
-      ["Does Peace Be Still have prayer points today?", "Not yet. Today it has a daily declaration built on one verse and the whole KJV; Bible chat arrives with the app's launch. Prayer points and a vigil order are being built for January 2027."],
+      ["Does Peace Be Still have prayer points today?", "Not yet. Today it has a daily declaration built on one verse, the whole KJV and Bible chat. Prayer points and a vigil order are being built for January 2027."],
       ["Which Bible does it use?", "The King James Version, read from a stored copy, with book, chapter and verse."],
       ["Is it for one church or denomination?", "No. It keeps to the text of Scripture so believers from Pentecostal, Anglican, Methodist, Presbyterian, Baptist and independent churches can all use it. For your own situation, it points you to your pastor."],
       ["Is the chat a pastor or a prophet?", "No. The Bible chat, arriving with the app's launch, is AI and will say so on every answer. It is not a pastor or a person; for your own situation, talk with your pastor."],
-      ["Is it free?", "Yes. The free version stays free: the whole KJV to read and hear, today's story, one chat a day of up to 5 messages (chat arrives with the app's launch), your first sleep night and then one a week, and a daily declaration. A paid plan is $7.99 a month or $39.99 a year."],
+      ["Is it free?", "Yes. The free version stays free: the whole KJV to read and hear, today's story, one chat a day of up to 5 messages, your first sleep night and then one a week, and a daily declaration. A paid plan is $7.99 a month or $39.99 a year."],
     ],
     relatedTitle: "Prayer points and vigils",
     related: [...Object.values(AQ), "/questions/daily-bible-declarations/"],

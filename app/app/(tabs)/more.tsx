@@ -1,29 +1,23 @@
+// More: every row opens a real screen (her catch 24 Nov 2026: the live app showed two rows that opened nothing).
+// Saved verses live in the Bible, so the row shows only where the Bible tab does (tabsFor: none on the Mindset
+// door, where /bible/* redirects to Today). The journal is on both doors (today/[page] has it outside faithOnly).
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Text, View } from 'react-native';
-import { useT } from '../../src/settings';
-import { Card, Chevron, Screen, Tag, Title, styles, usePalette } from '../../src/ui';
-import { fonts } from '../../src/theme/tokens';
-import type { Key } from '../../src/i18n';
+import { View } from 'react-native';
+import { tabsFor } from '../../src/model';
+import { useSettings, useT } from '../../src/settings';
+import { LinkRow, Screen, Title } from '../../src/ui';
 
 export default function More() {
   const t = useT('journey');
-  const c = usePalette();
+  const { settings } = useSettings();
   const router = useRouter();
-  const row = (key: Key, onPress?: () => void) => (
-    <Card key={key} onPress={onPress} label={t(key)} style={{ paddingVertical: 14 }}>
-      <View style={styles.row}>
-        <Text style={{ flex: 1, fontFamily: fonts.body, fontSize: 17, color: c.ink }}>{t(key)}</Text>
-        {onPress ? <Chevron /> : <Tag>{t('common.soon')}</Tag>}
-      </View>
-    </Card>
-  );
   return (
     <Screen edges={['top']}>
       <View style={{ marginTop: 24, marginBottom: 6 }}><Title>{t('tabs.more')}</Title></View>
-      {row('more.settings', () => router.push('/settings'))}
-      {row('more.saved')}
-      {row('more.journal')}
+      <LinkRow label={t('more.settings')} onPress={() => router.push('/settings')} />
+      {tabsFor(settings).includes('bible') && <LinkRow label={t('more.saved')} onPress={() => router.push('/bible/saved')} />}
+      <LinkRow label={t('more.journal')} onPress={() => router.push('/today/journal')} />
     </Screen>
   );
 }

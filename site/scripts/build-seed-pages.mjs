@@ -6,13 +6,14 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PAGES } from "../content/questions.mjs";
-import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE } from "../content/parts.mjs";
+import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE, fillStores, orgSameAs, storeConfig, storeWords } from "../content/parts.mjs";
 import { applyCta } from "./apply-cta.mjs";
 import { legalPages } from "../content/legal.mjs";
 import { homeHtml } from "../content/home.mjs";
 
 const pub = new URL("../public/", import.meta.url).pathname;
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
+const SAME_AS = orgSameAs();
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const text = (html) => html.replace(/<q\b[^>]*>/g, "“").replace(/<\/q>/g, "”").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
@@ -47,8 +48,8 @@ function render(p) {
     "@graph": [
       { "@type": "Article", "@id": `${url}#article`, headline: p.h1, description: p.description, inLanguage: p.lang, url,
         datePublished: p.published, dateModified: p.updated, image: `${BASE}/${og}`,
-        author: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
-        publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: { "@type": "ImageObject", url: `${BASE}/icon-512.png` }, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
+        author: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: SAME_AS, parentOrganization: ENTITY.parentOrganization },
+        publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: { "@type": "ImageObject", url: `${BASE}/icon-512.png` }, sameAs: SAME_AS, parentOrganization: ENTITY.parentOrganization },
         isPartOf: { "@id": `${BASE}/#site` },
         ...(p.audience ? { audience: { "@type": "Audience", audienceType: p.audience } } : {}),
         speakable: { "@type": "SpeakableSpecification", cssSelector: ["#what", "#faq"] } },
@@ -121,7 +122,7 @@ function renderIndex(lang, list) {
   const es = lang === "es";
   const path = es ? "/es/preguntas/" : "/questions/";
   const title = es ? "Preguntas sobre la Biblia y el sueño · Peace Be Still" : "Bible, sleep and app questions · Peace Be Still";
-  const desc = es ? "Respuestas claras sobre Salmos para dormir, la Biblia en español para dormir y la app Peace Be Still, que llega muy pronto al App Store y Google Play." : "Plain answers about whispered scripture, Psalms for sleep, Bible apps and cancelling subscriptions, from Peace Be Still, a coming-soon app.";
+  const desc = es ? "Respuestas claras sobre Salmos para dormir, la Biblia en español para dormir y la app Peace Be Still, {{stores.tag}}." : "Plain answers about whispered scripture, Psalms for sleep, Bible apps and cancelling subscriptions, from Peace Be Still, a phone app {{stores.tag}}.";
   const groups = [...new Set(list.map((p) => p.group || (es ? "Más preguntas" : "More questions")))];
   const li = (p) => `    <li><span class="door-lab">${p.door === "faith" ? (es ? "Palabra de Dios" : "God's Word") : p.door === "mindset" ? (es ? "Mentalidad" : "Mindset") : (es ? "Para todos" : "For everyone")}</span><a href="${p.path}">${p.indexLabel || p.h1}</a><span class="muted">${p.indexNote || p.description}</span></li>`;
   const items = groups.map((g) => `  <h2 class="qgroup">${g}</h2>\n  <ul class="qlist">\n${list.filter((p) => (p.group || (es ? "Más preguntas" : "More questions")) === g).map(li).join("\n")}\n  </ul>`).join("\n");
@@ -148,7 +149,7 @@ function renderIndex(lang, list) {
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, dateModified: UPDATED, isPartOf: { "@id": `${BASE}/#site` }, publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
+<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, dateModified: UPDATED, isPartOf: { "@id": `${BASE}/#site` }, publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: SAME_AS, parentOrganization: ENTITY.parentOrganization }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
 </head>
 <body>
 ${headerHtml(lang, null)}
@@ -182,9 +183,10 @@ for (const p of PAGES) for (const r of p.related || []) {
   if (t.door !== "neutral" && p.door !== "neutral" && t.door !== p.door) { console.error(`NAMED STOP [DOOR_LINK] ${p.path} (${p.door}) links ${r} (${t.door})`); process.exit(1); }
 }
 if (PAGES.length === 0) { console.error("NAMED STOP [NO_SEED_PAGES] content/questions.mjs holds no pages"); process.exit(1); }
-for (const p of PAGES) write(p.path, render(p));
-write("/questions/", renderIndex("en", PAGES.filter((p) => p.lang === "en")));
-write("/es/preguntas/", renderIndex("es", PAGES.filter((p) => p.lang === "es")));
+// Every {{stores.*}} token (the launch state, from store.json) is filled here, per page language.
+for (const p of PAGES) write(p.path, fillStores(render(p), p.lang));
+write("/questions/", fillStores(renderIndex("en", PAGES.filter((p) => p.lang === "en")), "en"));
+write("/es/preguntas/", fillStores(renderIndex("es", PAGES.filter((p) => p.lang === "es")), "es"));
 // The two home pages (two equal doors), from site/content/home.mjs.
 writeFileSync(join(pub, "index.html"), homeHtml("en"));
 writeFileSync(join(pub, "es/index.html"), homeHtml("es"));
@@ -203,13 +205,18 @@ for (const [f, lang, path] of STATIC) {
 // The legal pages, rendered from legal/*.md and legal/es/*.md (site/content/legal.mjs).
 const legal = legalPages();
 for (const [f, html] of legal) writeFileSync(join(pub, f), html);
-// llms.txt: the question and landing pages list, between markers, from PAGES.
+// llms.txt: the store line (launch state and listing links, from store.json) and the question and
+// landing pages list (from PAGES), each between markers.
 {
   const f = join(pub, "llms.txt");
   const s = readFileSync(f, "utf8");
   const list = PAGES.map((p) => `- [${p.indexLabel || p.h1}](${BASE}${p.path})`).join("\n");
-  const out = s.replace(/<!-- pages:start -->[\s\S]*?<!-- pages:end -->/, `<!-- pages:start -->\n${list}\n<!-- pages:end -->`);
+  const st = storeConfig();
+  const links = [st.app_store_url && `App Store: ${st.app_store_url}`, st.play_url && `Google Play: ${st.play_url}`].filter(Boolean).map((x) => ` ${x}.`).join("");
+  const out = s.replace(/<!-- pages:start -->[\s\S]*?<!-- pages:end -->/, `<!-- pages:start -->\n${list}\n<!-- pages:end -->`)
+    .replace(/<!-- stores:start -->[\s\S]*?<!-- stores:end -->/, `<!-- stores:start -->${storeWords("en", st).line}${links} No waitlist.<!-- stores:end -->`);
   if (!out.includes("<!-- pages:start -->")) { console.error("NAMED STOP [NO_LLMS_MARKER] llms.txt has no pages markers"); process.exit(1); }
+  if (!out.includes("<!-- stores:start -->")) { console.error("NAMED STOP [NO_LLMS_MARKER] llms.txt has no stores markers"); process.exit(1); }
   writeFileSync(f, out);
 }
 const cta = applyCta();

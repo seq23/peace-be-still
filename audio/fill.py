@@ -10,14 +10,16 @@ Owner-approved 18 Nov 2026. Order (a partial library is still launchable), Engli
      Harbor has its own lanes), then the chapters.
 Text is the stored text word for word (lib/text.py says the only spoken-form changes).
 
-Each file: render (Kokoro, render_kokoro.py) -> master (two-pass EBU R128 loudnorm, then AAC-LC mono
-48 kbps .m4a, plays on iOS and Android; the ENCODED file is measured and re-mastered from the kept WAV
-when AAC pushed it outside the bars) -> check (qa.py) -> rclone copy to Drive + md5 check -> delete
+Each file: render (Kokoro, render_kokoro.py) -> master (a measured gain, then a 4x-oversampled true-peak
+limiter, then ffmpeg's AAC-LC, PNS off, mono 48 kbps .m4a, plays on iOS and Android; the ENCODED file is
+measured and re-mastered from the kept WAV when AAC pushed it outside the bars) -> check (qa.py: Whisper
+large-v3-turbo, accuracy and ends-whole by alignment) -> rclone copy to Drive + md5 check -> delete
 from the Mac -> manifest row (audio/manifest.jsonl, one row per file). A file whose only problems are
 mastering (A06) is never re-rendered; a speech problem (A01, A07, length) is re-rendered once (a touch
-slower). A FAILED row is tried again on later runs, before any new file, until it has failed
-MAX_TRIES runs; then it is a NAMED STOP [FAILED_3_TRIES] in the census line (and so in her morning
-Notices) naming the files. Drive unreachable = NAMED STOP, exit 9. The Mac holds at most ~5 GB of work.
+slower). A FAILED row is tried again on later runs, before any new file, by the next route (whole
+verses, then sentences); when every route has failed, or it crashed MAX_TRIES runs, it is "held" with its
+reason: never listed by the app, a note in the census line, tried again when its words or the judge change.
+A judge that will not load is NAMED STOP [JUDGE_UNAVAILABLE], never a verdict. Drive unreachable = NAMED STOP, exit 9. The Mac holds at most ~5 GB of work.
 
 While priorities 1-2 are incomplete, ~/.peace-be-still/library-fill.active exists
 ({started, expected_end, reason}); How We Know / Whisper Almanac pause while it does. It is removed
@@ -38,6 +40,7 @@ import datetime as dt
 import fcntl
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
@@ -290,15 +293,32 @@ def script_of(item: dict) -> str:
     return " ".join([item["heading"], *item["verses"]]).strip()
 
 
-def segments_of(item: dict, pron: dict) -> list[dict]:
-    """What Kokoro says, in order, each with the quiet after it; a call-and-response pause is `mark`ed."""
+SENTENCE_GAP = 0.3   # the second route: the quiet between the sentences of one verse
+_SENTENCE_END = re.compile(r"(?<=[.;:?!])\s+")
+
+
+def segments_of(item: dict, pron: dict, sentences: bool = False) -> list[dict]:
+    """What Kokoro says, in order, each with the quiet after it; a call-and-response pause is `mark`ed.
+    sentences=True (the "sentences" route) voices each sentence or clause of a verse on its own, with
+    SENTENCE_GAP between them and the verse's own quiet after its last one: the same words, a different
+    input to Kokoro (which is deterministic, so the same input can only give the same miss)."""
     gap = item.get("gap", GAP.get(item["kind"], 1.2))
     segs = [{"text": T.speech_text(item["heading"], item["lang"], pron), "gap": HEADING_GAP}] if item["heading"] else []
     gaps = item.get("gaps") or [gap] * len(item["verses"])
     marks = set(item.get("marks") or [])
-    segs += [{"text": T.speech_text(v, item["lang"], pron), "gap": g, **({"mark": True} if n in marks else {})}
-             for n, (v, g) in enumerate(zip(item["verses"], gaps))]
+    for n, (v, g) in enumerate(zip(item["verses"], gaps)):
+        said = T.speech_text(v, item["lang"], pron)
+        parts = [x for x in _SENTENCE_END.split(said) if x.strip()] if sentences else [said]
+        for k, part in enumerate(parts):
+            last = k == len(parts) - 1
+            segs.append({"text": part, "gap": g if last else SENTENCE_GAP, **({"mark": True} if last and n in marks else {})})
     return [s for s in segs if s["text"]]
+
+
+def said_key(item: dict, pron: dict) -> str:
+    """What Kokoro is asked to say (the spoken form, lib/text.py), so a held copy voiced before a
+    spoken-form fix (e.g. the pilcrow read aloud as "paragraph") is never rescued. Pure."""
+    return hashlib.sha256(json.dumps([s["text"] for s in segments_of(item, pron)], ensure_ascii=False).encode()).hexdigest()[:12]
 
 
 def pause_starts(segs: list[dict], ends: list) -> list[float]:
@@ -325,7 +345,18 @@ def read_manifest(path: Path = MANIFEST) -> list[dict]:
     return rows
 
 
-MAX_TRIES = 3   # runs that may fail one file before it is a named stop for a person
+# The route ladder (23 Nov 2026; replaces "FAILED_3_TRIES ... wait for a person"). A failed file is tried
+# again first on later runs, each time by the next route; Kokoro is deterministic, so the same route twice
+# can only give the same miss. A file that fails every route (or crashes MAX_TRIES runs) is HELD: its copy
+# and reason stay in held-audio, the row's status is "held", the app never lists it, the census names it
+# as a note, and it is tried again by itself when its words or the judge change. Nothing waits for a person.
+ROUTES = ("verses", "sentences")   # verses: each verse whole, at SPEED then RETRY_SPEED; sentences: each clause alone
+MAX_TRIES = 3                      # runs (crashes included) before a file is held
+
+
+def judge_now() -> str:
+    import qa
+    return qa.JUDGE_MODEL
 
 
 def latest(rows: list[dict]) -> dict:
@@ -334,8 +365,28 @@ def latest(rows: list[dict]) -> dict:
 
 
 def tries(row: dict) -> int:
-    """Runs that have voiced this file (rows from before 20 Nov 2026 carry no count: one run)."""
+    """Runs that have voiced this file under TODAY's judge. A row judged by an older judge (no `judge`,
+    or another model) counts 0: its misses may have been the judge's, so the file gets every route again."""
+    if row.get("judge") != judge_now():
+        return 0
     return int(row.get("tries") or 1)
+
+
+def failed_routes(row: dict | None) -> list[str]:
+    return list((row or {}).get("failed_routes") or []) if row and tries(row) else []
+
+
+def next_route(row: dict | None) -> str:
+    """The route this file takes on its next run: the first one it has not failed under today's judge. Pure."""
+    done = failed_routes(row)
+    return next((r for r in ROUTES if r not in done), ROUTES[-1])
+
+
+def is_held(row: dict | None, item: dict | None = None) -> bool:
+    """A held file stays held while its words and the judge are what failed. Pure."""
+    if not row or row.get("status") != "held" or row.get("judge") != judge_now():
+        return False
+    return item is None or "verses" not in item or not row.get("words") or row["words"] == words_key(item)
 
 
 class manifest_lock:
@@ -413,7 +464,13 @@ def shard(seq: list, spec: str | None) -> list:
 def _upsert_row(row: dict, path: Path) -> dict:
     rows = read_manifest(path)
     prev = latest(rows).get(row["file"])
-    row = {**row, "tries": tries(prev) + 1 if prev else 1}
+    n = tries(prev) + 1 if prev else 1
+    routes = failed_routes(prev)
+    if row["status"] == "FAILED" and row.get("route") and not str((row["checks"].get("problems") or [""])[0]).startswith("CRASH"):
+        routes = [*dict.fromkeys([*routes, row["route"]])]
+    row = {**row, "tries": n, "failed_routes": routes, "judge": row.get("judge") or judge_now()}
+    if row["status"] == "FAILED" and (set(ROUTES) <= set(routes) or n >= MAX_TRIES):
+        row["status"] = "held"   # every route failed (or it crashed MAX_TRIES runs): held with its reason, never "wait for a person"
     rows = [r for r in rows if r["file"] != row["file"]] + [row]
     tmp = path.with_suffix(".tmp")
     tmp.write_text("".join(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n" for r in rows), "utf-8")
@@ -451,7 +508,8 @@ def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> l
     cut2 = max([cut1] + [n + 1 for n, i in enumerate(mine) if i.get("kind") == STORY_KIND])
 
     def part(xs):
-        retry = [i for i in xs if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) < MAX_TRIES]
+        # Retried first: FAILED files, and held files whose words or judge changed (is_held is False then).
+        retry = [i for i in xs if last.get(key(i), {}).get("status") in ("FAILED", "held") and not is_held(last[key(i)], i)]
         return retry + [i for i in xs if key(i) not in last]
     # The old file of a re-voiced session stays served until the new one passes.
     voiced = {r.get("ref") for r in last.values() if r.get("status") == "passed"}
@@ -460,35 +518,38 @@ def todo(items: list, rows: list[dict], only: str | None = None, key=_file) -> l
     return part(first) + part(again) + part(mine[cut1:cut2]) + part(mine[cut2:])
 
 
-def given_up(items: list, rows: list[dict], key=_file) -> list[str]:
-    """Files that failed MAX_TRIES runs: they wait for a person. Pure."""
+def held_files(items: list, rows: list[dict], key=_file) -> list[str]:
+    """Files held after every route failed (not listed in the app; a note in the census). Pure."""
     last = latest(rows)
-    return [key(i) for i in items if last.get(key(i), {}).get("status") == "FAILED" and tries(last[key(i)]) >= MAX_TRIES]
+    return [key(i) for i in items if is_held(last.get(key(i)), i)]
 
 
-def given_up_line(files: list[str]) -> str:
-    return (f"NAMED STOP [FAILED_3_TRIES] {len(files)} file(s) failed {MAX_TRIES} runs and wait for a person: "
-            + ", ".join(files)) if files else ""
+def held_line(files: list[str]) -> str:
+    """The census note for held files: how many, and the first few (the reasons are in held-audio). Pure."""
+    if not files:
+        return ""
+    more = f" and {len(files) - 5} more" if len(files) > 5 else ""
+    return f"note: {len(files)} held after every route failed (not in the app; reasons in held-audio): {', '.join(files[:5])}{more}"
 
 
 def census(items: list[dict], rows: list[dict]) -> dict:
     """The run's numbers, over priorities 1-2 (the scripture library). Complete = every file passed
-    or out of tries (those are named in the line). Pure."""
+    or held (held files are a note in the line). Pure."""
     core = [i for i in items if i["priority"] <= 2]
     last = latest(rows)
     mine = [last[i["file"]] for i in core if i["file"] in last]
     passed = [r for r in mine if r.get("status") == "passed"]
-    failed = [r for r in mine if r.get("status") == "FAILED"]
-    stuck = given_up(core, rows)
+    held = held_files(core, rows)
+    failed = [r for r in mine if r.get("status") in ("FAILED", "held") and r["file"] not in held]
     return {"total": len(core), "done": len(mine), "passed": len(passed), "failed": len(failed),
-            "hours": round(sum(r.get("seconds", 0) for r in passed) / 3600, 1), "given_up": stuck,
-            "complete": len(passed) + len(stuck) == len(core) and len(core) > 0}
+            "hours": round(sum(r.get("seconds", 0) for r in passed) / 3600, 1), "held": held,
+            "complete": len(passed) + len(held) == len(core) and len(core) > 0}
 
 
 def census_line(c: dict) -> str:
     line = (f"library fill: {c['passed']} of {c['total']} files, {c['hours']} hours shelved, "
-            f"{c['failed']} failed")
-    return line + (f"; {given_up_line(c['given_up'])}" if c.get("given_up") else "")
+            f"{c['failed']} failed (tried again first)")
+    return line + (f"; {held_line(c['held'])}" if c.get("held") else "")
 
 
 # ------------------------------------------------------------------ text progress (the library text)
@@ -623,10 +684,10 @@ def settle_active(active: Path, items: list[dict], rows: list[dict], now: dt.dat
 
 
 # ------------------------------------------------------------------ audio steps
-def render(item: dict, pron: dict, wav: Path, speed: float) -> dict:
+def render(item: dict, pron: dict, wav: Path, speed: float, sentences: bool = False) -> dict:
     """Kokoro renders the item; returns the renderer's line ({"seconds", "segments", "ends"}) plus `segs`."""
     v = VOICE[item["lang"]]
-    segs = segments_of(item, pron)
+    segs = segments_of(item, pron, sentences)
     job = {"voice": v["spec"], "lang": v["lang"], "speed": speed, "lead": 0.6, "tail": 2.0,
            "segments": segs, "out": str(wav)}
     r = subprocess.run([KOKORO_PY, str(AUDIO / "render_kokoro.py")], input=json.dumps(job),
@@ -640,76 +701,67 @@ def render(item: dict, pron: dict, wav: Path, speed: float) -> dict:
     return {**out, "segs": segs}
 
 
-# Mastering: ffmpeg's two-pass EBU R128 loudnorm (measure, then apply the measured values), then AAC.
-# The AAC encoder adds inter-sample overs a filter before it cannot see (19 Nov 2026: 53 of 63 failures
-# were A06 true peak), so the true-peak target starts TP_MARGIN under the ceiling and the ENCODED file
-# is what is judged; a miss is mastered again from the same WAV (never a new render).
-LRA = 11.0          # speech: wide enough that loudnorm stays linear (no pumping) on a calm reading
-TP_MARGIN = 1.0
+# Mastering (rebuilt 23 Nov 2026): the WAV's loudness is measured (ebur128), ONE linear gain takes it to the
+# level's target, and a true-peak limiter (ffmpeg alimiter run at LIMIT_OVERSAMPLE x the rate, so the peaks
+# between samples are seen) holds the peaks under the ceiling; then AAC. The gain alone sets the loudness, so
+# limiting harder never moves it. Why not two-pass loudnorm (19-22 Nov): when the gain a quiet render needs
+# would lift its peaks over loudnorm's TP, loudnorm leaves linear mode for its dynamic one, and each lowered
+# TP pulled the loudness down with it (Luke 8: -21.1 LUFS after three masters, its target -17). And ffmpeg's
+# own AAC (the cloud runner) fills quiet bands with noise (perceptual noise substitution), which put peaks
+# 3-5 dB over a limited signal (Matthew 2: +3.9 dBTP); PNS is off. Apple's AAC (aac_at, the Mac's old
+# encoder) is gone: on Matthew 2 it still ended at +0.3 dBTP after three masters where ffmpeg's AAC without
+# PNS passed first time (-17.1 LUFS, -1.1 dBTP), and one encoder on both lanes means one tested path. The
+# ENCODED file is what is judged; a peak that still misses is limited again lower, from the same WAV.
+LIMIT_OVERSAMPLE = 4
+LIMIT_MARGIN = 1.5       # the first limiter ceiling sits this far under the level's ceiling (the encoder's overshoot)
+LIMIT_DEPTH = 6.0        # never limit more than this under the ceiling: deeper flattens the voice; qa.check judges it
 MASTER_TRIES = 3
-# loudnorm's own TP range (ffmpeg -h filter=loudnorm: "from -9 to 0", the same on the Mac and the runner).
-# A lowered target outside it is refused by ffmpeg ("Error applying option 'TP'", 22 Nov 2026: 7 of 12
-# cloud shards died on it), so a re-master never asks for less than TP_FLOOR.
-TP_FLOOR, TP_TOP = -9.0, 0.0
+RATE_OUT = 24000
 
 
-def tp_target(tp: float) -> float:
-    """A true-peak target loudnorm accepts. Pure."""
-    return round(min(TP_TOP, max(TP_FLOOR, tp)), 1)
+def master_filter(gain_db: float, limit_db: float) -> str:
+    """Gain, then the oversampled true-peak limiter (no auto level: the gain is the loudness). Pure."""
+    return (f"volume={gain_db:.2f}dB,aresample={RATE_OUT * LIMIT_OVERSAMPLE},"
+            f"alimiter=limit={10 ** (limit_db / 20):.4f}:attack=1:release=50:level=false,aresample={RATE_OUT}")
 
 
-def loudnorm_measured(stderr: str) -> dict:
-    """The JSON block loudnorm prints in pass 1 (print_format=json). Pure."""
-    m = re.search(r"\{[^{}]*\"input_i\"[^{}]*\}", stderr)
-    if not m:
-        raise RuntimeError(f"loudnorm pass 1 printed no measurement: {stderr.strip()[-200:]}")
-    return json.loads(m.group(0))
+AAC = "aac"   # ffmpeg's own AAC-LC, the same on the Mac and the cloud runner (see the note above)
 
 
-def loudnorm_filter(i: float, tp: float, measured: dict | None = None) -> str:
-    """loudnorm for pass 1 (no measurement: print it) or pass 2 (apply it, linear). Pure."""
-    f = f"loudnorm=I={i}:TP={tp}:LRA={LRA}"
-    if measured is None:
-        return f + ":print_format=json"
-    return (f + f":measured_I={measured['input_i']}:measured_TP={measured['input_tp']}"
-            f":measured_LRA={measured['input_lra']}:measured_thresh={measured['input_thresh']}"
-            f":offset={measured['target_offset']}:linear=true:print_format=summary")
-
-
-def aac_encoder() -> str:
-    """Apple's AAC (aac_at) on the Mac, as the library was locked; ffmpeg's own AAC on a Linux runner
-    (the cloud lane), which has no AudioToolbox. Either way the ENCODED file is what qa.check judges."""
-    return os.environ.get("PBS_AAC") or ("aac_at" if sys.platform == "darwin" else "aac")
+def aac_args() -> list[str]:
+    """AAC-LC mono 48 kbps without noise substitution (see the note above). Pure."""
+    return ["-c:a", AAC, "-b:a", "48k", "-aac_pns", "0"]
 
 
 def master(wav: Path, out: Path, level: str, *, run=None, measure=None) -> dict:
-    """WAV -> mastered AAC-LC mono 48 kbps .m4a inside the level's bars (qa.BARS), judged on the
-    ENCODED file by qa.loudness. A miss is mastered again from the kept WAV: the true-peak target
-    lowered by the overshoot (+0.5 dB), the loudness target moved by the error; at most MASTER_TRIES.
-    Returns the last measurement and the targets used; the caller's qa.check is the final judge."""
+    """WAV -> mastered AAC-LC mono 48 kbps .m4a inside the level's bars (qa.BARS), judged on the ENCODED
+    file by qa.loudness. A peak over the ceiling is limited again lower by the overshoot (+0.3 dB, at most
+    LIMIT_DEPTH under the ceiling); a loudness miss moves the gain by the error; at most MASTER_TRIES, all
+    from the same WAV. Returns the last measurement, the gain and the limit; qa.check is the final judge."""
     import qa
     run = run or subprocess.run
     measure = measure or qa.loudness
     target, ceiling = LEVEL_TARGET[level]
     lo, hi = qa.BARS[level]["lufs"]
-    i, tp = target, tp_target(ceiling - TP_MARGIN)
+    src = measure(wav)
+    if not math.isfinite(src["lufs"]):
+        raise RuntimeError(f"the render is silent ({src['lufs']} LUFS): nothing to master")
+    gain, limit = round(target - src["lufs"], 2), ceiling - LIMIT_MARGIN
     for n in range(1, MASTER_TRIES + 1):
-        p1 = run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(wav), "-af", loudnorm_filter(i, tp), "-f", "null", "-"],
-                 capture_output=True, text=True, timeout=1800)
-        run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af", loudnorm_filter(i, tp, loudnorm_measured(p1.stderr)),
-             "-ac", "1", "-ar", "24000", "-c:a", aac_encoder(), "-b:a", "48k", "-movflags", "+faststart", str(out)],
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-af", master_filter(gain, limit),
+             "-ac", "1", "-ar", str(RATE_OUT), *aac_args(), "-movflags", "+faststart", str(out)],
             check=True, timeout=1800)
         got = measure(out)
         peak_ok, loud_ok = got["true_peak"] <= ceiling, lo <= got["lufs"] <= hi
         if peak_ok and loud_ok:
             break
         if not peak_ok:
-            if tp <= TP_FLOOR:      # nothing lower to ask loudnorm for: qa.check judges this encode
+            if limit <= ceiling - LIMIT_DEPTH:
                 break
-            tp = tp_target(tp - (got["true_peak"] - ceiling) - 0.5)
+            limit = round(max(ceiling - LIMIT_DEPTH, limit - (got["true_peak"] - ceiling) - 0.3), 1)
         if not loud_ok:
-            i = round(i + (target - got["lufs"]), 1)
-    return {**got, "tries": n, "i": i, "tp": tp}
+            gain = round(gain + (target - got["lufs"]), 2)
+    return {**got, "tries": n, "gain": gain, "limit": limit}
 
 
 def sha256(path: Path) -> str:
@@ -779,7 +831,7 @@ def held_dir() -> Path:
     return HOME / "held-audio"
 
 
-def hold(path: Path, lane: str, rel: str, words: str, result: dict) -> Path | None:
+def hold(path: Path, lane: str, rel: str, words: str, result: dict, said: str | None = None) -> Path | None:
     """Move a failed file into held-audio with its reason. Returns the held path (None: nothing to hold)."""
     import qa
     if not path.exists():
@@ -787,7 +839,7 @@ def hold(path: Path, lane: str, rel: str, words: str, result: dict) -> Path | No
     dest = held_dir() / lane / rel
     dest.parent.mkdir(parents=True, exist_ok=True)
     shutil.move(str(path), dest)
-    reason = {"at": dt.datetime.now(CT).isoformat(timespec="seconds"), "words": words,
+    reason = {"at": dt.datetime.now(CT).isoformat(timespec="seconds"), "words": words, "said": said,
               "problems": result.get("problems"), "notes": result.get("notes"),
               "values": {k: result.get(k) for k in ("accuracy", "lufs", "true_peak", "clipped", "wpm", "seconds")},
               "margins": {"lu": qa.LU_MARGIN, "tp_db": qa.TP_MARGIN, "clipped_max": qa.CLIP_MAX,
@@ -801,8 +853,10 @@ def hold(path: Path, lane: str, rel: str, words: str, result: dict) -> Path | No
     return dest
 
 
-def held_copy(lane: str, rel: str, words: str) -> Path | None:
-    """The held file for rel, when its words still match what is to be said now."""
+def held_copy(lane: str, rel: str, words: str, said: str | None = None, legacy_ok: bool = True) -> Path | None:
+    """The held file for rel, when its words AND its spoken form still match what is to be said now. A
+    reason written before the spoken form was recorded (no "said") counts only when legacy_ok (the
+    caller's word that no spoken-form fix since then touches this file)."""
     dest = held_dir() / lane / rel
     why = dest.with_name(dest.name + ".reason.json")
     if HELD_REMOTE and not why.exists():
@@ -812,9 +866,14 @@ def held_copy(lane: str, rel: str, words: str) -> Path | None:
     if not dest.exists() or not why.exists():
         return None
     try:
-        return dest if json.loads(why.read_text("utf-8")).get("words") == words else None
+        reason = json.loads(why.read_text("utf-8"))
     except json.JSONDecodeError:
         return None
+    if reason.get("words") != words:
+        return None
+    if said is not None and (reason.get("said") != said if reason.get("said") else not legacy_ok):
+        return None
+    return dest
 
 
 def release(lane: str, rel: str) -> None:
@@ -845,19 +904,28 @@ def time_for(item: dict, rows: list[dict], now: dt.datetime) -> bool:
     return expected_seconds(item["kind"], rows) / 60 <= window_minutes(now) + 10
 
 
-def make_one(item: dict, pron: dict, work: Path) -> dict:
-    """Render, master and check one file. Mastering misses are mastered again from the kept WAV
-    (master()); only a speech problem (qa.speech_problems: A01, A07, length) is rendered again, once,
-    a touch slower. Returns the row (without shelving): passed with the local path, or FAILED."""
+def pilcrow_free(item: dict) -> bool:
+    """No paragraph mark in its words: a held copy made before 23 Nov 2026 (when Kokoro still read the
+    pilcrow aloud as "paragraph") says the same as a new render would. Pure."""
+    return not any("\u00b6" in t for t in [item.get("heading") or "", *item["verses"]])
+
+
+def make_one(item: dict, pron: dict, work: Path, route: str = ROUTES[0]) -> dict:
+    """Render, master and check one file by `route` (ROUTES). Mastering misses are mastered again from
+    the kept WAV (master()); a speech problem (qa.speech_problems: A01, A07, length) is rendered again,
+    once, a touch slower. Returns the row (without shelving): passed with the local path, or FAILED.
+    The judge missing (qa.JudgeUnavailable) is raised to the caller, never a verdict."""
     import qa
     t0 = time.monotonic()
+    said = said_key(item, pron)
     wav, out = work / "track.wav", work / Path(item["file"]).name
     result, attempts = None, 0
-    rendered, mastered = {}, {"tries": 0, "i": None, "tp": None}
+    rendered, mastered = {}, {"tries": 0, "gain": None, "limit": None}
     script = script_of(item)
     # A held copy of this file is re-checked under today's rules first: if it passes, no new render.
     # (Not for files with call-and-response marks: their pause timings come from the render itself.)
-    held = None if item.get("marks") else held_copy("fill", item["file"], words_key(item))
+    held = None if item.get("marks") or route != ROUTES[0] else held_copy(
+        "fill", item["file"], words_key(item), said, legacy_ok=pilcrow_free(item))
     if held:
         again = qa.check(held, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []), strict_words=is_scripture_file(item))
         if again["pass"] and not (item.get("min_seconds") and again["seconds"] < item["min_seconds"]):
@@ -867,7 +935,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     try:
         for speed in (() if result else (SPEED, RETRY_SPEED)):
             attempts += 1
-            rendered = render(item, pron, wav, speed)
+            rendered = render(item, pron, wav, speed, sentences=route == "sentences")
             mastered = master(wav, out, item["level"])
             result = qa.check(out, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []), strict_words=is_scripture_file(item))
             if item.get("min_seconds") and result["seconds"] < item["min_seconds"]:
@@ -886,7 +954,7 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
         checks["notes"] = notes
         if result["pass"]:
             print(f"  NOTE {item['file']} shipped inside the margin: {'; '.join(notes)}")
-    checks["mastering"] = {k: mastered[k] for k in ("tries", "i", "tp")}
+    checks["mastering"] = {k: mastered[k] for k in ("tries", "gain", "limit")}
     if item.get("marks"):
         # Where the call-and-response quiet starts, as Hush Harbor rows carry it (the app shows the response then).
         checks["pause_starts_s"] = pause_starts(rendered.get("segs") or [], rendered.get("ends"))
@@ -894,13 +962,13 @@ def make_one(item: dict, pron: dict, work: Path) -> dict:
     row = {"file": item["file"], "kind": item["kind"], "lang": item["lang"], "ref": item["ref"],
            "text": item["text"], "words": words_key(item), "voice": VOICE[item["lang"]]["id"], "seconds": result["seconds"],
            "checks": checks, "attempts": attempts, "work_s": round(time.monotonic() - t0, 1),
-           "status": "passed" if result["pass"] else "FAILED",
+           "status": "passed" if result["pass"] else "FAILED", "route": route, "said": said,
            "at": dt.datetime.now(CT).isoformat(timespec="seconds")}
     if result["pass"]:
         row["sha256"] = sha256(out)
         row["_local"] = str(out)
     else:
-        held_at = hold(out, "fill", item["file"], row["words"], result)
+        held_at = hold(out, "fill", item["file"], row["words"], result, said)
         row["sha256"] = None
         row["shelved"] = None
         if held_at:
@@ -1085,6 +1153,7 @@ def main(argv=None) -> int:
     pron = T.load_pronunciations()
     items = plan(bibles, content_items(REPO))
     rows = read_manifest()
+    import qa
     cfg = lanes()
     queue = shard([i for i in todo(items, rows, a.only) if lane_of(i, cfg) == LANE], a.shard)
     if a.cloud_batch is not None:
@@ -1126,10 +1195,13 @@ def main(argv=None) -> int:
                 print(f"  NOTE MEMGUARD_HIGH bible: {memguard.line(mem)}; the clone lane pauses, this lane goes on", flush=True)
             if dir_bytes(work) > MAC_BUDGET_BYTES:
                 raise NamedStop("MAC_BUDGET", f"the work folder {work} holds over 5 GB; nothing more is voiced until it is cleared")
+            route = next_route(latest(rows).get(item["file"]))
             try:
-                row = make_one(item, pron, work)
+                row = make_one(item, pron, work, route)
             except NamedStop:
                 raise
+            except qa.JudgeUnavailable as e:   # never a try used, never a verdict: the next run retries
+                raise NamedStop("JUDGE_UNAVAILABLE", f"{e}; {item['file']} is untouched and the next run retries it")
             except Exception as e:      # one chapter's crash holds that chapter (a FAILED row, a try used); the shard goes on
                 row = crash_row(item, e)
                 (work / Path(item["file"]).name).unlink(missing_ok=True)
@@ -1142,7 +1214,8 @@ def main(argv=None) -> int:
             else:
                 failed_now += 1
             row = upsert_row(row)
-            print(f"{row['status']:6} {item['file']}  try {row['tries']}  {row['seconds']}s  acc {row['checks']['accuracy']}  "
+            rows = [r for r in rows if r["file"] != row["file"]] + [row]
+            print(f"{row['status']:6} {item['file']}  {route} try {row['tries']}  {row['seconds']}s  acc {row['checks']['accuracy']}  "
                   f"{row['checks']['lufs']} LUFS  work {row['work_s']}s  {'; '.join(row['checks']['problems'])}", flush=True)
             if a.commit and (made + failed_now) % 10 == 0:
                 git_commit(f"audio: library fill manifest ({made + failed_now} more files)")

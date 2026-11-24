@@ -9,7 +9,7 @@
     "logo": "https://peacebestillapp.com/icon-512.png"
   },
   "audience": "Christians, many of them Black women and Spanish-speaking families, who read or listen to scripture at bedtime and in the morning: whispered Bible readings, Psalms for sleep, Bible chat and daily prayers or declarations; plus people looking for a Bible app with no trial and no surprise charges",
-  "voice": "warm, unhurried and plain, like a grandmother's front porch after dark; short sentences; scripture quoted word for word from the King James Version (English) or Reina-Valera 1909 (Spanish) with book, chapter and verse, never paraphrased; never promise sleep, healing or any outcome (say 'a nightly practice'); never 'manifest', law of attraction or mindset-practice words on these pages; never the phrase 'Black Bible Stories' (say 'Bible stories told in a Black church voice'); never say the stories have pictures, illustrations or faces (they are text and audio); never 'Speak Life'; never speak as God or Jesus; coming soon to the App Store and Google Play; never a launch date; never 'available now' until site/config/store.json has that store's URL; no ads, no trial, $7.99 a month or $39.99 a year; never disparage another app",
+  "voice": "warm, unhurried and plain, like a grandmother's front porch after dark; short sentences; scripture quoted word for word from the King James Version (English) or Reina-Valera 1909 (Spanish) with book, chapter and verse, never paraphrased; never promise sleep, healing or any outcome (say 'a nightly practice'); never 'manifest', law of attraction or mindset-practice words on these pages; never the phrase 'Black Bible Stories' (say 'Bible stories told in a Black church voice'); never say the stories have pictures, illustrations or faces (they are text and audio); never 'Speak Life'; never speak as God or Jesus; never say whether, when or where the app can be downloaded (the store box on every page says that, from site/config/store.json); never a launch date; no ads, no trial, $7.99 a month or $39.99 a year; never disparage another app",
   "topics": [
     "prayer for sleep",
     "bedtime bible stories",
@@ -96,7 +96,7 @@
     ]
   },
   "action": {
-    "label": "Look for Peace Be Still in the App Store and Google Play",
+    "label": "Where to get Peace Be Still",
     "url": "https://peacebestillapp.com/#get-the-app"
   },
   "allowed_link_targets": [

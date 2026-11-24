@@ -24,12 +24,16 @@ import os from 'node:os';
 import path from 'node:path';
 import { ORG_SPLIT, TOKEN_ENV } from '../threads/buffer.mjs';
 import { SPLIT, quotedVerses, slotUtc } from '../threads/threads_loop.mjs';
-import { frameHtml, postFrames } from './frames.mjs';
-import { FB_LINK, HH_AI, HH_FULL, fbText, igProblems, igStoreText, italicProblem, main, planRun, slotsAhead } from './ig_loop.mjs';
+import { frameHash, frameHtml, postFrames } from './frames.mjs';
+import { FB_LINK, HH_AI, HH_FULL, fbText, igProblems, igStoreText, italicProblem, main, planRun, postInput, slotsAhead } from './ig_loop.mjs';
 
 const bank = JSON.parse(fs.readFileSync('data/instagram/posts.json', 'utf8'));
 const lock = JSON.parse(fs.readFileSync('data/instagram/frames.lock.json', 'utf8'));
 const LIVE = { app_store_url: 'https://apps.apple.com/app/id0000000000' };
+// The committed pictures are drawn for the state store.json names today; the rules are proven in BOTH
+// states with fixtures (the coming-soon runs use a lock drawn for coming soon), never the live config alone.
+const STORE_NOW = JSON.parse(fs.readFileSync('site/config/store.json', 'utf8'));
+const soonLock = { frames: Object.fromEntries(bank.posts.flatMap((p) => postFrames(p).map(({ file, frame }) => [file, { hash: frameHash(frame, p.lang, false) }]))) };
 const SENSITIVE = /\b(?:died|dies|death|dead|funeral|grie(?:f|ving)|passed away|cancer|hospital|diagnos\w*|chemo|sick|illness|abus\w*|police|cops?|arrest\w*|missing child|kidnap\w*|overdose|suicid\w*|murder\w*|shot|muri[óo]|polic[íi]a|c[áa]ncer)\b/i;
 const fails = [];
 const check = async (name, fn) => { try { await fn(); } catch (e) { fails.push(`${name}: ${e.message.split('\n')[0]}`); } };
@@ -51,8 +55,9 @@ await check('bank shape', () => {
 });
 for (const p of bank.posts) await check(p.id, () => {
   assert.ok(['Chat', 'Story', 'Verse', 'About'].includes(p.kind), p.kind);
-  assert.deepEqual(igProblems(p, {}, lock), [], 'queue-time check (coming soon)');
+  assert.deepEqual(igProblems(p, {}, soonLock), [], 'queue-time check (coming soon)');
   assert.deepEqual(igProblems(p, LIVE), [], 'queue-time check (store live)');
+  assert.deepEqual(igProblems(p, STORE_NOW, lock), [], 'the committed pictures match store.json (run npm run ig:render)');
   if (p.kind === 'Chat' || p.kind === 'Story' || p.kind === 'Verse') assert.ok(quotedVerses(p.caption).length >= 1, 'no verse in the caption');
   if (!p.approved) {
     const words = `${p.caption}\n${JSON.stringify(p.frames)}`;
@@ -104,22 +109,29 @@ await check('slots are Sun / Tue / Thu 20:00 Central', () => {
   assert.equal(slotsAhead(Date.parse('2026-11-20T01:50:00Z'), bank)[0].date, '2026-11-22', 'a slot under 15 minutes away is skipped');
 });
 
+await check('a picture\'s alt text says what the picture says, in each store state', () => {
+  const p = bank.posts.find((x) => x.id === 'p2');
+  const alt = (live) => postInput({ post: p, channel: 'instagram', channelId: 'ig', dueAt: 'x', text: 'x', lock, live }).assets.map((a) => a.image.metadata.altText).join(' ');
+  assert.match(alt(false), /Coming soon to iPhone/);
+  assert.doesNotMatch(alt(true), /coming soon/i, 'the alt text still says coming soon once the store link is set');
+  assert.match(alt(true), /Free on iPhone/);
+});
 // 5. plan
 const NOW = Date.parse('2026-11-18T14:00:00Z');
 await check('the plan respects its room and keeps one post per slot on both channels', () => {
-  const r = planRun({ bank, ledger: { posts: {} }, pending: [], now: NOW, room: 3, channels: ['instagram', 'facebook'], store: {}, lock });
+  const r = planRun({ bank, ledger: { posts: {} }, pending: [], now: NOW, room: 3, channels: ['instagram', 'facebook'], store: {}, lock: soonLock });
   assert.equal(r.jobs.length, 3);
   assert.deepEqual(r.jobs.map((j) => `${j.channel} ${j.post.id} ${j.slot.date}`), ['instagram p1 2026-11-19', 'facebook p1 2026-11-19', 'instagram p3 2026-11-22']);
   assert.ok(r.notes.some((n) => n.startsWith('IG_ORG_LIMIT 3 post(s)')), JSON.stringify(r.notes));
   const ledger = { posts: { p1: { runs: [{ channel: 'instagram', due_at: '2026-11-20T02:00:00.000Z' }] } } };
-  const r2 = planRun({ bank, ledger, pending: [{ channelKey: 'instagram', dueAt: '2026-11-20T02:00:00.000Z' }], now: NOW, room: 6, channels: ['instagram', 'facebook'], store: {}, lock });
+  const r2 = planRun({ bank, ledger, pending: [{ channelKey: 'instagram', dueAt: '2026-11-20T02:00:00.000Z' }], now: NOW, room: 6, channels: ['instagram', 'facebook'], store: {}, lock: soonLock });
   assert.equal(r2.jobs[0].post.id, 'p1', 'facebook gets the same post instagram already has that evening');
   assert.equal(r2.jobs[0].channel, 'facebook');
 });
 await check('recycles the oldest 60+ day evergreen post after the bank', () => {
   const day = (n) => new Date(NOW - n * 86_400_000).toISOString();
   const ledger = { posts: Object.fromEntries(bank.posts.map((p, i) => [p.id, { runs: [{ due_at: day(i < 2 ? 100 - i : 30) }] }])) };
-  const r = planRun({ bank, ledger, pending: [], now: NOW, room: 6, channels: ['instagram'], store: {}, lock });
+  const r = planRun({ bank, ledger, pending: [], now: NOW, room: 6, channels: ['instagram'], store: {}, lock: soonLock });
   assert.deepEqual(r.jobs.map((j) => j.post.id).slice(0, 2), ['p1', 'p3']);
   assert.ok(r.jobs.every((j) => j.recycled));
   assert.ok(r.notes.some((n) => n.startsWith('IG_RECYCLE_UNDER_60')), 'third slot has no 60+ day post');
@@ -149,10 +161,11 @@ function fakeBuffer({ visits = null, channels, scheduled = [], refuseReel = fals
 }
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pbs-ig-'));
 const storeNull = path.join(tmp, 'store.json'); fs.writeFileSync(storeNull, JSON.stringify({ app_store_url: null }));
+const soonLockFile = path.join(tmp, 'frames.lock.json'); fs.writeFileSync(soonLockFile, JSON.stringify(soonLock));
 const run = async (opts) => {
   const lines = []; const k = Math.random();
   const files = { ledgerFile: path.join(tmp, `l${k}.json`), metricsFile: path.join(tmp, `m${k}.json`), threadsLedgerFile: path.join(tmp, 'none.json') };
-  try { const r = await main({ now: NOW, env: { [TOKEN_ENV]: 't' }, log: (l) => lines.push(l), storeFile: storeNull, ...files, ...opts }); return { r, lines, ...files }; } catch (e) { return { e, lines, ...files }; }
+  try { const r = await main({ now: NOW, env: { [TOKEN_ENV]: 't' }, log: (l) => lines.push(l), storeFile: storeNull, lockFile: soonLockFile, ...files, ...opts }); return { r, lines, ...files }; } catch (e) { return { e, lines, ...files }; }
 };
 const ig = { id: 'ig', service: 'instagram', name: 'peacebestillapp', isQueuePaused: false };
 const fb = { id: 'fb', service: 'facebook', name: 'Peace Be Still', isQueuePaused: false };
