@@ -510,9 +510,13 @@ test('the week count is the days she opened the app this week, with those dots f
   assert.equal(host(tree, 'View').find(n => n.props.role === 'img')!.props['aria-label'], '2 days this week');
 });
 
-test('More lists Settings, Saved verses and Journal, and opens Settings', async () => {
+test('More shows only rows that open something: Settings, never a "Soon" row (her catch 24 Nov 2026, live app)', async () => {
+  for (const lang of ['en', 'es'] as const) {
+    const s = strings(await mount('more', { ...base, language: lang, journey: 'psalm-nights' }));
+    assert.match(s, lang === 'en' ? /Settings/ : /Ajustes/);
+    assert.doesNotMatch(s, /\bSoon\b|\bPronto\b|Saved verses|Journal|Versículos guardados|Diario/);
+  }
   const tree = await mount('more', { ...base, journey: 'psalm-nights' });
-  assert.match(strings(tree), /Settings.*Saved verses.*Journal/);
   await press(tree, 'Settings');
   assert.deepEqual(calls, [['push', '/settings']]);
 });
