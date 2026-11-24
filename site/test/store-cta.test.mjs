@@ -137,6 +137,27 @@ const STATES = {
   both: { app_store_url: IOS, play_url: PLAY },
 };
 
+// Written apart from check-site's rule 6, so switching that rule off cannot also pass this test.
+const APP_STORE_SOON = /coming soon[^.<\n]{0,30}App Store|muy pronto[^.<\n]{0,30}App Store|App Store\s*[:—-]\s*(?:coming soon|muy pronto)|곧 App Store|아직 App Store|即将[^。<\n]{0,10}App Store|还没有在 App Store/i;
+
+test("with the App Store live, no rendered or built page pairs 'coming soon' with the App Store", async () => {
+  const { PAGES } = await import("../content/questions.mjs");
+  for (const state of ["ios", "both"]) {
+    const store = STATES[state];
+    for (const p of PAGES) assert.doesNotMatch(fillStores(JSON.stringify(p), p.lang, store), APP_STORE_SOON, `${state} ${p.path}`);
+    for (const lang of ["en", "es"]) assert.doesNotMatch(homeHtml(lang, store) + storeHeroHtml(lang, store, "home", "index.html"), APP_STORE_SOON, `${state} ${lang} home`);
+    for (const lang of ["en", "es", "ko", "zh-Hans"]) assert.doesNotMatch(storeCtaHtml(lang, store) + storeHeroHtml(lang, store, "home", "index.html"), APP_STORE_SOON, `${state} ${lang} CTA`);
+  }
+  // The pattern itself bites: the pre-launch words match it.
+  for (const lang of ["en", "es", "ko", "zh-Hans"]) assert.match(fillStores("{{stores.line}} {{stores.out}}", lang, STATES.soon), APP_STORE_SOON, `${lang}: the soon words`);
+  if (!storeConfig().app_store_url) return;
+  const pub = new URL("../public/", import.meta.url).pathname;
+  const walk = (d) => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
+  const built = walk(pub).filter((f) => /\.(html|txt|json)$/.test(f));
+  assert.ok(built.length > 100, `only ${built.length} built files`);
+  for (const f of built) assert.doesNotMatch(readFileSync(f, "utf8"), APP_STORE_SOON, f.slice(pub.length));
+});
+
 test("every page's launch words are true in every store state (no App Store 'coming soon' once it is live)", async () => {
   const { PAGES } = await import("../content/questions.mjs");
   assert.ok(PAGES.length >= 100, `only ${PAGES.length} pages`);
