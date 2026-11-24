@@ -58,3 +58,14 @@ jobs:
           git commit -m "chore(instagram): queued posts ledger and social metrics"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
           echo "NAMED STOP: IG_LEDGER_PUSH_FAILED - the queued posts ledger could not be pushed to main"; exit 1
+      # H5 (Boss OS, 24 Nov 2026): every post Buffer accepted (its id is in data/instagram/posted.json) becomes a row in
+      # Boss OS's results ledger, so Monday's growth lines can see it; a post with no row turns Monday red.
+      # A replay is counted as already there. Fails by name: LEDGER_TOKEN_MISSING, POSTED_UNREAD,
+      # NO_POSTS_TO_LEDGER, LEDGER_WRITE_FAILED. Prints `OUTPUT: n rows sent (w new, d already there)`.
+      - name: Send what Buffer accepted to the Boss OS ledger
+        if: always()
+        uses: seq23/boss-os/.github/actions/ledger-rows@main
+        with:
+          business: peace-be-still
+          file: data/instagram/posted.json
+          token: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}
