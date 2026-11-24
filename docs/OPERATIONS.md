@@ -65,7 +65,7 @@ opened with `?paid=1` and checked by words the free screen does not show: the pr
 (`/chat`), an unlocked night in a used week, Made for you, a past story opened from the list
 (`/today/stories`), day 30 of a 30-day plan (`/today/plans?id=psalms-30`), declaration topics
 (`/today/declaration`) and the Download button on a night. Made for you is open to everyone on the web
-preview (`src/madeForYou/paidStub.ts`), so its check types a test note (never sent) and sees "Make my session", which proves the form works, not that it is paid-only; chat
+preview (`src/madeForYou/paidStub.ts`), so its check types a test note (never sent) and sees its "Make my session" button, which proves the form works, not that it is paid-only; chat
 memory lives in the Worker (`worker/test/memory.test.ts`), and the run never sends a chat. It fails by name
 on a dead button, a console error, an error screen, an unreachable step or a paid-plan line with no screen
 behind it (ship-ready app-review.md). A PR that adds a screen, button or plan line adds it to

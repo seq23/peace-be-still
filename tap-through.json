@@ -110,7 +110,7 @@
       "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
       "steps": [
         { "fill": "What’s on your mind tonight?", "value": "TEST tap-through note, never sent" },
-        { "see": "Make my session", "id": "form" }
+        { "see": "/^Make my session/", "id": "form" }
       ]
     },
     {
