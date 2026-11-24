@@ -13,6 +13,8 @@ export const RESPONSE_PAUSE_SECONDS = 3;
 
 export type ManifestRow = {
   file: string; kind: string; lang: string; ref: string; seconds: number; sha256: string; voice: string; status: string; checks?: { pause_starts_s?: unknown };
+  /** Served rows only (publish.py): a story's or night's display, read from its script at publish time. */
+  title?: unknown; scripture_ref?: unknown; journey?: unknown; pause_starts_s?: unknown;
 };
 
 /** What ships in the app: passed rows only, no Drive paths, no checks, a readable title. The R2 key is `file`. */
@@ -64,7 +66,7 @@ export function readManifest(jsonl: string, displayOf: (row: ManifestRow) => Tra
     if (!display || !Object.values(display.titles).some(Boolean)) { skipped.push({ line, reason: 'no readable title' }); return; }
     const { file, kind, ref, seconds, sha256, voice } = full;
     const track: Track = { file, kind, lang: full.lang as Lang, ref, seconds, sha256, voice, ...display };
-    const starts = full.checks?.pause_starts_s;
+    const starts = full.checks?.pause_starts_s ?? full.pause_starts_s;
     if (hasCallAndResponse(track) && Array.isArray(starts) && starts.length === 2) {
       const [first, second] = starts;
       if (typeof first === 'number' && typeof second === 'number' &&
@@ -78,24 +80,35 @@ export function readManifest(jsonl: string, displayOf: (row: ManifestRow) => Tra
   return { tracks, skipped };
 }
 
-/** The kinds the live R2 manifest may add after the build: the scripture library, whose titles come from the
- * book list. A story or a night needs its script (title, key verse, pause timings, journey), which only the
- * build reads, so those still arrive with a new build. */
-const LIVE_KINDS = new Set(['bible', 'psalms']);
+/** The kinds the live R2 manifest may add after the build. Scripture is titled from the book list; a story or a
+ * night from the display publish.py serves beside it (its script's title, key verse, journey and pauses). */
+const SCRIPTURE_KINDS = new Set(['bible', 'psalms']);
+const SCRIPT_KINDS = new Set(['stories', 'psalm-night', 'imagination-night']);
+const isScript = (kind: string, ref: string) => SCRIPT_KINDS.has(kind) && ref.startsWith('content/');
 
-/** Scripture tracks from the served R2 manifest (publish.py's ledger): the chapters voiced and published after
- * this build. Anything unreadable gives none, never an error: the bundled library is the fallback. Pure. */
-export function liveScripture(jsonl: string): Track[] {
+/** A served story's or night's display; null for anything else, so it is held (readManifest's "no readable title"). */
+function servedDisplay(row: ManifestRow): TrackDisplay | null {
+  if (!isScript(row.kind, row.ref) || typeof row.title !== 'string' || !row.title.trim() || row.title.length > 200) return null;
+  const ref = typeof row.scripture_ref === 'string' && row.scripture_ref.trim() ? { scriptureRef: row.scripture_ref.trim() } : {};
+  const journey = NIGHT_JOURNEYS.includes(row.journey as NightJourney) ? { journey: row.journey as NightJourney } : {};
+  return { titles: { [row.lang]: row.title.trim() }, ...ref, ...journey };
+}
+
+/** Every track in the served R2 manifest (publish.py's ledger): chapters, stories and nights voiced and published
+ * after this build. A row of one kind dressed as another (a story with a chapter ref) is held. Anything unreadable
+ * gives none, never an error: the bundled library is the fallback. Pure. */
+export function liveLibrary(jsonl: string): Track[] {
   try {
-    return readManifest(jsonl, () => null).tracks.filter(track => LIVE_KINDS.has(track.kind));
+    return readManifest(jsonl, servedDisplay).tracks
+      .filter(track => SCRIPTURE_KINDS.has(track.kind) ? !!chapterTitles(track.ref) : isScript(track.kind, track.ref));
   } catch {
     return [];
   }
 }
 
 /**
- * The bundled library plus the chapters published after this build. `set` takes the last good read of the R2
- * manifest (liveScripture) and returns the tracks it added, by file, a bundled row always winning. An empty read
+ * The bundled library plus every track published after this build. `set` takes the last good read of the R2
+ * manifest (liveLibrary) and returns the tracks it added, by file, a bundled row always winning. An empty read
  * (R2 down, a bad body) changes nothing: the list is never smaller than the bundled library.
  */
 export function createLiveLibrary(bundled: readonly Track[]) {
@@ -112,10 +125,16 @@ export function createLiveLibrary(bundled: readonly Track[]) {
   };
 }
 
-/** Tracks back as manifest rows, so a saved copy is read by the same checks as the network one (liveScripture). */
+/** Tracks back as served rows, so a saved copy is read by the same checks as the network one (liveLibrary). */
 export function asManifestRows(tracks: readonly Track[]): string {
-  return tracks.map(({ file, kind, lang, ref, seconds, sha256, voice }) =>
-    JSON.stringify({ file, kind, lang, ref, seconds, sha256, voice, status: 'passed' })).join('\n');
+  return tracks.map(({ file, kind, lang, ref, seconds, sha256, voice, titles, scriptureRef, journey, responsePauses }) =>
+    JSON.stringify({
+      file, kind, lang, ref, seconds, sha256, voice, status: 'passed',
+      ...(isScript(kind, ref) ? { title: titles[lang] ?? Object.values(titles).find(Boolean) } : {}),
+      ...(scriptureRef && isScript(kind, ref) ? { scripture_ref: scriptureRef } : {}),
+      ...(journey ? { journey } : {}),
+      ...(responsePauses ? { pause_starts_s: [...responsePauses] } : {}),
+    })).join('\n');
 }
 
 /** A re-voiced script (edited text, a longer night) is a new file with a new row, while its older passed file
