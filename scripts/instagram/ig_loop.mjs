@@ -280,7 +280,7 @@ export async function readSocialVisits(fetchImpl) {
     const body = await res.json();
     const sources = body?.sources ?? {};
     if (![THREADS_CHANNEL, ...CHANNELS].every((c) => Number.isFinite(sources[c.key])) || !Number.isFinite(body.total)) return { why: '/api/social-visits answered without a count per channel' };
-    // Store-page visits: taps on the site's store badges (/go/app-store, /go/google-play; D1 table store_taps).
+    // Store-page visits: taps on the site's store badges (/api/go/app-store, /api/go/google-play; D1 table store_taps).
     const store = Number.isFinite(body.store?.total)
       ? { total: body.store.total, counting_since: body.store.counting_since ?? null }
       : { why: body.store?.why ? `/api/social-visits: ${body.store.why}` : '/api/social-visits answered without a store block (store-page visits)' };

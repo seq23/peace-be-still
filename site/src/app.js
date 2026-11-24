@@ -8,13 +8,13 @@
 // 4) social visit counts (scorecard row pbs-social): a page view tagged utm_source=threads|instagram|facebook
 //    (or ?src=, or arriving from those sites) adds 1 to a per-day, per-source count in D1 table social_visits.
 //    Counts only: no cookie, no IP, no user agent is stored. GET /api/social-visits?days=28 reads the totals.
-// 5) store-page visits (the same row, social_store_visits_28d): every store badge links to /go/app-store or
-//    /go/google-play, which adds 1 to D1 table store_taps (day, source, store) and 302s to the listing built
+// 5) store-page visits (the same row, social_store_visits_28d): every store badge links to /api/go/app-store or
+//    /api/go/google-play, which adds 1 to D1 table store_taps (day, source, store) and 302s to the listing built
 //    by site/content/store-links.mjs from site/config/store.json only (Apple pt/ct/mt=8 and Play referrer= kept).
 //    The source is the page the person tapped on: its own ?utm_source=/?src= tag (the same-origin Referer
 //    carries it), else a Threads/Instagram/Facebook Referer, else "direct". A ct or ppid that is not ours
-//    is dropped, so the target never carries anything else from the request. While a store has no URL, /go/
-//    answers 302 to /#get-the-app and counts nothing. /go/ is never a page view (4). A failed count never
+//    is dropped, so the target never carries anything else from the request. While a store has no URL, /api/go/
+//    answers 302 to /#get-the-app and counts nothing. /api/go/ is never a page view (4). A failed count never
 //    stops the 302. GET /api/social-visits answers the 28-day taps in its "store" block.
 import STORE from "../config/store.json" with { type: "json" };
 import CAMPAIGNS from "../config/campaigns.json" with { type: "json" };
@@ -123,7 +123,7 @@ const NOT_A_PERSON = /bot|crawl|spider|slurp|preview|facebookexternalhit|faceboo
 export function visitSource(request) {
   if (request.method !== "GET") return null;
   const url = new URL(request.url);
-  if (url.hostname !== APEX || url.pathname.startsWith("/api/") || url.pathname.startsWith("/go/")) return null;
+  if (url.hostname !== APEX || url.pathname.startsWith("/api/")) return null; // /api/go/ taps included
   if (/\.[a-z0-9]+$/i.test(url.pathname) && !url.pathname.endsWith(".html")) return null; // pictures, css, fonts
   const dest = request.headers.get("Sec-Fetch-Dest");
   if (dest && dest !== "document") return null;
@@ -155,10 +155,10 @@ export async function countVisit(request, env) {
 }
 
 // ---- store-page visits (taps on a store badge) ---------------------------------------------
-const GO_PATHS = { "/go/app-store": "ios", "/go/google-play": "play" };
+const GO_PATHS = { "/api/go/app-store": "ios", "/api/go/google-play": "play" };
 export const TAP_SOURCES = [...SOCIAL, "direct"];
 
-/** Where /go/<store> sends a person (store.json is bundled; tests pass their own), or null for any other path. */
+/** Where /api/go/<store> sends a person (store.json is bundled; tests pass their own), or null for any other path. */
 export function goTarget(url, store = STORE, campaigns = CAMPAIGNS) {
   const kind = GO_PATHS[url.pathname.replace(/\/+$/, "")];
   if (!kind) return null;

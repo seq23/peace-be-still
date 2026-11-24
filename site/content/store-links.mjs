@@ -1,10 +1,10 @@
 // The store links, in one place, with no file reads: imported by the page builder (parts.mjs) and by the
 // Worker (src/app.js), so the tagged listing URL has ONE definition, built only from site/config/store.json.
-// A page's badge links to our own /go/app-store or /go/google-play (goHref); the Worker counts the tap
+// A page's badge links to our own /api/go/app-store or /api/go/google-play (goHref); the Worker counts the tap
 // (scorecard row pbs-social, social_store_visits_28d) and redirects to the real listing (storeTarget),
 // with Apple's pt/ct/mt=8 and Google Play's referrer= tags exactly as the badge used to carry them.
 
-export const GO = { ios: "/go/app-store", play: "/go/google-play" };
+export const GO = { ios: "/api/go/app-store", play: "/api/go/google-play" };
 
 /** The listing URL with the page's campaign tags (Apple App Analytics reads pt + ct; Play reads the referrer's utm fields). */
 export function tagged(url, store, kind, source) {
@@ -33,13 +33,13 @@ export function appStoreHref(store, page = "", door = "neutral") {
   return withPpid(store.app_store_url, customPage(store, page, door)?.ppid);
 }
 
-/** The exact listing a page's badge leads to (what /go/ redirects that badge to). */
+/** The exact listing a page's badge leads to (what /api/go/ redirects that badge to). */
 export function listingHref(kind, store, source = "", page = "", door = "neutral") {
   const base = kind === "ios" ? appStoreHref(store, page, door) : store.play_url;
   return base ? tagged(base, store, kind, source) : null;
 }
 
-/** The same-origin href a page's badge carries: /go/<store> with the page's campaign and, for the App
+/** The same-origin href a page's badge carries: /api/go/<store> with the page's campaign and, for the App
  *  Store, its custom product page (HTML-escaped, ready for an attribute). */
 export function goHref(kind, store, source = "", page = "", door = "neutral") {
   const q = new URLSearchParams();
@@ -50,7 +50,7 @@ export function goHref(kind, store, source = "", page = "", door = "neutral") {
   return `${GO[kind]}${s ? `?${s.replace(/&/g, "&amp;")}` : ""}`;
 }
 
-/** Where /go/<store> sends a person: the store listing built only from store.json, with the campaign
+/** Where /api/go/<store> sends a person: the store listing built only from store.json, with the campaign
  *  and custom product page kept only when they are ours (a ct that is not one of our pages' campaign
  *  names in site/config/campaigns.json, or a ppid not in store.json, is dropped: nothing typed into the
  *  request ever reaches the redirect target). null while that store has no URL. */

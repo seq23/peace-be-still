@@ -1,5 +1,5 @@
 // Store-page visits (scorecard row pbs-social, social_store_visits_28d): a tap on a store badge goes
-// through /go/app-store or /go/google-play, adds 1 to D1 table store_taps (day, source, store) and gets a
+// through /api/go/app-store or /api/go/google-play, adds 1 to D1 table store_taps (day, source, store) and gets a
 // 302 to the listing built from store.json. Run against a real SQLite database with every migration in
 // site/migrations applied, so the SQL the Worker runs in production is the SQL tested here.
 import test from "node:test";
@@ -72,16 +72,16 @@ test("a tap on a live badge adds 1 under the page's channel and gets a 302 to th
   const env = mkEnv();
   // The person came from Threads to the grief page (its URL carries the tag), then tapped its badge.
   const grief = "https://peacebestillapp.com/questions/bible-verses-for-grief/?utm_source=threads";
-  const go = "/go/app-store?ct=questions-bible-verses-for-grief&ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3";
+  const go = "/api/go/app-store?ct=questions-bible-verses-for-grief&ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3";
   const res = await hit(env, tap(go, { Referer: grief }));
   assert.equal(res.status, 302);
   assert.equal(res.headers.get("Location"), `${IOS}?ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3&ct=questions-bible-verses-for-grief&mt=8`);
   assert.equal(res.headers.get("Cache-Control"), "no-store");
   assert.equal(res.headers.get("Set-Cookie"), null);
-  await hit(env, tap("/go/app-store?ct=home", { Referer: "https://peacebestillapp.com/?src=ig" }));
-  await hit(env, tap("/go/app-store?ct=home", { Referer: "https://l.facebook.com/" }));
-  await hit(env, tap("/go/app-store?ct=home", { Referer: "https://peacebestillapp.com/questions/" }));
-  await hit(env, tap("/go/app-store?ct=home"));
+  await hit(env, tap("/api/go/app-store?ct=home", { Referer: "https://peacebestillapp.com/?src=ig" }));
+  await hit(env, tap("/api/go/app-store?ct=home", { Referer: "https://l.facebook.com/" }));
+  await hit(env, tap("/api/go/app-store?ct=home", { Referer: "https://peacebestillapp.com/questions/" }));
+  await hit(env, tap("/api/go/app-store?ct=home"));
   assert.deepEqual(rows(env), [
     { day: today(), source: "direct", store: "ios", n: 2 },
     { day: today(), source: "facebook", store: "ios", n: 1 },
@@ -95,28 +95,28 @@ test("a tap on a live badge adds 1 under the page's channel and gets a 302 to th
     assert.ok(["threads", "instagram", "facebook", "direct"].includes(args[1]));
     assert.doesNotMatch(JSON.stringify(args), /203\.0\.113|Mozilla|grief|ppid|http/);
   }
-  // A /go/ tap is never also a page view.
-  assert.equal(visitSource(tap("/go/app-store?ct=home", { Referer: grief })), null);
+  // A /api/go/ tap is never also a page view.
+  assert.equal(visitSource(tap("/api/go/app-store?ct=home", { Referer: grief })), null);
   assert.equal(env.DB.db.prepare("SELECT COUNT(*) AS n FROM social_visits").get().n, 0);
 });
 
 test("previews, scripts, prefetches, other methods and a store with no URL count nothing", async () => {
   for (const [r, why] of [
-    [tap("/go/app-store", { "User-Agent": "facebookexternalhit/1.1" }), "link preview"],
-    [tap("/go/app-store", { "User-Agent": "curl/8.7.1" }), "script"],
-    [tap("/go/app-store", { "Sec-Fetch-Dest": "image" }), "not a page load"],
-    [tap("/go/app-store", { "Sec-Purpose": "prefetch;prerender" }), "speculative prefetch"],
-    [tap("/go/app-store", { Purpose: "prefetch" }), "old prefetch header"],
-    [tap("/go/app-store", {}, "POST"), "POST"],
-    [tap("/go/google-play"), "Google Play has no URL"],
-    [new Request("https://www.peacebestillapp.com/go/app-store", { headers: { "User-Agent": PHONE } }), "www (it is 301'd first)"],
+    [tap("/api/go/app-store", { "User-Agent": "facebookexternalhit/1.1" }), "link preview"],
+    [tap("/api/go/app-store", { "User-Agent": "curl/8.7.1" }), "script"],
+    [tap("/api/go/app-store", { "Sec-Fetch-Dest": "image" }), "not a page load"],
+    [tap("/api/go/app-store", { "Sec-Purpose": "prefetch;prerender" }), "speculative prefetch"],
+    [tap("/api/go/app-store", { Purpose: "prefetch" }), "old prefetch header"],
+    [tap("/api/go/app-store", {}, "POST"), "POST"],
+    [tap("/api/go/google-play"), "Google Play has no URL"],
+    [new Request("https://www.peacebestillapp.com/api/go/app-store", { headers: { "User-Agent": PHONE } }), "www (it is 301'd first)"],
   ]) assert.equal(tapSource(r, LIVE), null, why);
-  assert.deepEqual(tapSource(tap("/go/app-store"), LIVE), { source: "direct", store: "ios" });
-  // No store URL at all: /go/ sends a person to the store box and counts nothing.
-  assert.equal(goTarget(new URL("https://peacebestillapp.com/go/app-store?ct=home"), { ...LIVE, app_store_url: null }).location, "https://peacebestillapp.com/#get-the-app");
-  assert.equal(tapSource(tap("/go/app-store"), { ...LIVE, app_store_url: null }), null);
+  assert.deepEqual(tapSource(tap("/api/go/app-store"), LIVE), { source: "direct", store: "ios" });
+  // No store URL at all: /api/go/ sends a person to the store box and counts nothing.
+  assert.equal(goTarget(new URL("https://peacebestillapp.com/api/go/app-store?ct=home"), { ...LIVE, app_store_url: null }).location, "https://peacebestillapp.com/#get-the-app");
+  assert.equal(tapSource(tap("/api/go/app-store"), { ...LIVE, app_store_url: null }), null);
   const env = mkEnv();
-  const res = await hit(env, tap("/go/google-play?ct=home"));
+  const res = await hit(env, tap("/api/go/google-play?ct=home"));
   assert.equal(res.status, 302);
   assert.equal(res.headers.get("Location"), STORE.play_url ? res.headers.get("Location") : "https://peacebestillapp.com/#get-the-app");
   if (!STORE.play_url) assert.deepEqual(rows(env), []);
@@ -124,18 +124,18 @@ test("previews, scripts, prefetches, other methods and a store with no URL count
 
 test("a forged Referer or query can only pick which channel is counted, never where the 302 goes", async () => {
   const env = mkEnv();
-  const res = await hit(env, tap("/go/app-store?ct=x%26next%3Dhttps%3A%2F%2Fevil.example&ppid=evil&next=https://evil.example", { Referer: "https://evil.example/?utm_source=threads" }));
+  const res = await hit(env, tap("/api/go/app-store?ct=x%26next%3Dhttps%3A%2F%2Fevil.example&ppid=evil&next=https://evil.example", { Referer: "https://evil.example/?utm_source=threads" }));
   assert.equal(res.status, 302);
   assert.equal(res.headers.get("Location"), IOS);
   assert.doesNotMatch(res.headers.get("Location"), /evil/);
   assert.deepEqual(rows(env).map((r) => r.source), ["direct"], "another site's own tag is not ours to read");
-  const odd = await hit(env, tap("/go/app-store", { Referer: "not a url" }));
+  const odd = await hit(env, tap("/api/go/app-store", { Referer: "not a url" }));
   assert.equal(odd.status, 302);
 });
 
 test("over the per-visitor limit nothing is counted, and the person still gets the listing", async () => {
   const env = mkEnv({ VISIT_RL: { limit: async ({ key }) => { assert.equal(key, "203.0.113.9"); return { success: false }; } } });
-  const res = await hit(env, tap("/go/app-store?ct=home"));
+  const res = await hit(env, tap("/api/go/app-store?ct=home"));
   assert.equal(res.status, 302);
   assert.equal(res.headers.get("Location"), `${IOS}?ct=home&mt=8`);
   assert.deepEqual(rows(env), []);
@@ -143,7 +143,7 @@ test("over the per-visitor limit nothing is counted, and the person still gets t
 
 test("a D1 write failure never loses the tap's 302 (missing table, or D1 down)", async () => {
   for (const DB of [d1(), { prepare: () => { throw new Error("D1 down"); } }]) {
-    const res = await quiet(() => hit(mkEnv({ DB }), tap("/go/app-store?ct=home")));
+    const res = await quiet(() => hit(mkEnv({ DB }), tap("/api/go/app-store?ct=home")));
     assert.equal(res.status, 302);
     assert.equal(res.headers.get("Location"), `${IOS}?ct=home&mt=8`);
   }

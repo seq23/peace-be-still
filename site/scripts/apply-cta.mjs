@@ -4,7 +4,7 @@
 // <!-- hero-cta:start -->…<!-- hero-cta:end --> note, storeHeroHtml). Run after store.json changes
 // (store-watch.yml and `npm run store:set` do) and after every page build. Rule 0: exits 1 when it
 // finds no page with a CTA block. It also writes site/config/campaigns.json, every page's campaign name
-// (sourceOf): the only ct values the Worker's /go/ redirect passes on to a store listing.
+// (sourceOf): the only ct values the Worker's /api/go/ redirect passes on to a store listing.
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { claimHtml, claimKind, storeCtaHtml, storeHeroHtml, langOf, sourceOf, storeConfig } from "../content/parts.mjs";

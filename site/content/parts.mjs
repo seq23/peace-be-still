@@ -7,7 +7,7 @@ import { appStoreHref, goHref } from "./store-links.mjs";
 // THE store call to action (owner 18 Nov 2026: no waitlist). Every page renders it through this one
 // function, between <!-- cta:start --> and <!-- cta:end -->. Per store, from site/config/store.json:
 // null -> "coming soon" text (never a date, never "available now"); a URL -> that store's official
-// badge (Apple and Google marketing artwork, unaltered) linking to our own /go/app-store or /go/google-play,
+// badge (Apple and Google marketing artwork, unaltered) linking to our own /api/go/app-store or /api/go/google-play,
 // which counts the tap (scorecard row pbs-social) and redirects to the tagged listing (src/app.js).
 export function storeConfig() {
   return JSON.parse(readFileSync(new URL("../config/store.json", import.meta.url), "utf8"));
@@ -169,7 +169,7 @@ export const langOf = (html) => {
   const l = (String(html).match(/<html lang="([\w-]+)"/) || [])[1];
   return LANGS.includes(l) ? l : "en";
 };
-// The store links themselves (listing URL, tags, custom product pages, the /go/ redirect) live in
+// The store links themselves (listing URL, tags, custom product pages, the /api/go/ redirect) live in
 // store-links.mjs, shared with the Worker. appStoreHref is re-exported for the existing callers.
 export { appStoreHref };
 

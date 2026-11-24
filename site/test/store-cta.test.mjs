@@ -10,8 +10,8 @@ import { doorOf } from "../scripts/apply-cta.mjs";
 import { goTarget } from "../src/app.js";
 import { listingHref } from "../content/store-links.mjs";
 
-// A badge's href is our own /go/ link; this follows it through the Worker's redirect (the same code that
-// answers /go/ in production) to the listing a person lands on.
+// A badge's href is our own /api/go/ link; this follows it through the Worker's redirect (the same code that
+// answers /api/go/ in production) to the listing a person lands on.
 const hrefs = (html) => [...html.matchAll(/class="store-badge" href="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, "&"));
 const follow = (href, store) => goTarget(new URL(href, "https://peacebestillapp.com"), store).location;
 
@@ -30,15 +30,15 @@ test("null store URLs render coming-soon text, never a badge, a date or 'availab
 
 test("each store flips on its own: a URL renders that store's badge linking to it", () => {
   const ios = storeCtaHtml("en", { app_store_url: IOS, play_url: null });
-  assert.ok(ios.includes(`<a class="store-badge" href="/go/app-store"><img src="/brand/stores/app-store-en.svg"`));
-  assert.equal(follow("/go/app-store", { app_store_url: IOS, play_url: null }), IOS);
+  assert.ok(ios.includes(`<a class="store-badge" href="/api/go/app-store"><img src="/brand/stores/app-store-en.svg"`));
+  assert.equal(follow("/api/go/app-store", { app_store_url: IOS, play_url: null }), IOS);
   assert.match(ios, /Google Play: coming soon/);
   assert.doesNotMatch(ios, /App Store: coming soon/);
   const both = storeCtaHtml("es", { app_store_url: IOS, play_url: PLAY });
-  assert.ok(both.includes(`href="/go/google-play"><img src="/brand/stores/google-play-es.png"`));
-  assert.equal(follow("/go/google-play", { app_store_url: IOS, play_url: PLAY }), PLAY);
-  // A store with no URL: its /go/ link sends a person to the store box, never to a listing.
-  assert.equal(follow("/go/google-play", { app_store_url: IOS, play_url: null }), "https://peacebestillapp.com/#get-the-app");
+  assert.ok(both.includes(`href="/api/go/google-play"><img src="/brand/stores/google-play-es.png"`));
+  assert.equal(follow("/api/go/google-play", { app_store_url: IOS, play_url: PLAY }), PLAY);
+  // A store with no URL: its /api/go/ link sends a person to the store box, never to a listing.
+  assert.equal(follow("/api/go/google-play", { app_store_url: IOS, play_url: null }), "https://peacebestillapp.com/#get-the-app");
   assert.doesNotMatch(both, /muy pronto/i);
 });
 
@@ -101,8 +101,8 @@ test("each page's store links name the page that sent the buyer", () => {
   const store = { app_store_url: "https://apps.apple.com/us/app/peace-be-still/id1", play_url: "https://play.google.com/store/apps/details?id=x", app_store_pt: "123" };
   const h = storeCtaHtml("en", store, sourceOf("questions/hallow-app-cost/index.html"));
   const [ios, play] = hrefs(h);
-  assert.equal(ios, "/go/app-store?ct=questions-hallow-app-cost");
-  assert.equal(play, "/go/google-play?ct=questions-hallow-app-cost");
+  assert.equal(ios, "/api/go/app-store?ct=questions-hallow-app-cost");
+  assert.equal(play, "/api/go/google-play?ct=questions-hallow-app-cost");
   assert.equal(follow(ios, store), "https://apps.apple.com/us/app/peace-be-still/id1?pt=123&ct=questions-hallow-app-cost&mt=8");
   assert.equal(follow(play, store), "https://play.google.com/store/apps/details?id=x&referrer=utm_source%3Dpeacebestillapp.com%26utm_medium%3Dsite%26utm_campaign%3Dquestions-hallow-app-cost");
   assert.equal(sourceOf("index.html"), "home");
@@ -119,7 +119,7 @@ test("a landing page's App Store link opens its custom product page and names th
   ] };
   const rel = "questions/bible-verses-for-grief/index.html";
   const [href] = hrefs(storeCtaHtml("en", store, sourceOf(rel), rel));
-  assert.equal(href, "/go/app-store?ct=questions-bible-verses-for-grief&ppid=g-1");
+  assert.equal(href, "/api/go/app-store?ct=questions-bible-verses-for-grief&ppid=g-1");
   assert.equal(follow(href, store), "https://apps.apple.com/us/app/peace-be-still/id1?ppid=g-1&pt=123&ct=questions-bible-verses-for-grief&mt=8");
   // Exact paths only: a sibling page with the same start does not inherit the mapping.
   assert.equal(appStoreHref(store, "questions/who-is-black-in-the-bible-really/index.html"), store.app_store_url);
@@ -202,8 +202,8 @@ test("with the App Store live, the home hero shows its badge, the title and FAQ 
   assert.match(en, /Is Peace Be Still out yet\?[\s\S]{0,200}Yes/);
   for (const [lang, badge] of [["en", "app-store-en"], ["es", "app-store-es"], ["ko", "app-store-ko"], ["zh-Hans", "app-store-zh-hans"]]) {
     const hero = storeHeroHtml(lang, store, "home", "index.html");
-    assert.ok(hero.includes(`href="/go/app-store?ct=home"><img src="/brand/stores/${badge}.svg"`), `${lang}: hero badge`);
-    assert.equal(follow("/go/app-store?ct=home", store), `${IOS}?ct=home&mt=8`, `${lang}: hero badge target`);
+    assert.ok(hero.includes(`href="/api/go/app-store?ct=home"><img src="/brand/stores/${badge}.svg"`), `${lang}: hero badge`);
+    assert.equal(follow("/api/go/app-store?ct=home", store), `${IOS}?ct=home&mt=8`, `${lang}: hero badge target`);
     assert.doesNotMatch(hero, /play\.google\.com/);
     assert.match(storeCtaHtml(lang, store), new RegExp(`/brand/stores/${badge}\\.svg`));
   }
@@ -219,7 +219,7 @@ test("a launch word a language lacks is a named stop, never a blank", () => {
   for (const lang of ["en", "es", "ko", "zh-Hans"]) for (const store of Object.values(STATES)) assert.ok(storeWords(lang, store).out, `${lang}: no out line`);
 });
 
-test("every live badge on every built page goes through /go/ to that page's exact tagged listing (EN, ES, KO, ZH)", () => {
+test("every live badge on every built page goes through /api/go/ to that page's exact tagged listing (EN, ES, KO, ZH)", () => {
   const pub = new URL("../public/", import.meta.url).pathname;
   const store = storeConfig();
   const walk = (d) => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
@@ -228,11 +228,11 @@ test("every live badge on every built page goes through /go/ to that page's exac
   for (const f of walk(pub).filter((x) => x.endsWith(".html"))) {
     const s = readFileSync(f, "utf8"), rel = f.slice(pub.length);
     for (const href of hrefs(s)) {
-      const kind = href.startsWith("/go/app-store") ? "ios" : href.startsWith("/go/google-play") ? "play" : null;
-      assert.ok(kind, `${rel}: a badge that skips /go/ (${href})`);
+      const kind = href.startsWith("/api/go/app-store") ? "ios" : href.startsWith("/api/go/google-play") ? "play" : null;
+      assert.ok(kind, `${rel}: a badge that skips /api/go/ (${href})`);
       const want = listingHref(kind, store, sourceOf(rel), rel, doorOf(s));
       assert.ok(want, `${rel}: a ${kind} badge while store.json has no ${kind} URL`);
-      assert.equal(follow(href, store), want, `${rel}: /go/ does not land on the page's own listing`);
+      assert.equal(follow(href, store), want, `${rel}: /api/go/ does not land on the page's own listing`);
       if (want.includes("ppid=")) custom++;
       langs.add(langOf(s));
       badges++;
@@ -245,23 +245,24 @@ test("every live badge on every built page goes through /go/ to that page's exac
   }
 });
 
-test("/go/ never carries anything from the request but our own campaign and custom page ids", () => {
+test("/api/go/ never carries anything from the request but our own campaign and custom page ids", () => {
   const store = { app_store_url: IOS, play_url: PLAY, custom_pages: [{ page: "grief", ppid: "0c89f8e1-c5b6-4355-937d-af27c07ea8e3", paths: [] }] };
   for (const [href, want] of [
-    ["/go/app-store?ct=home&ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3", `${IOS}?ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3&ct=home&mt=8`],
-    ["/go/app-store?ppid=00000000-0000-0000-0000-000000000000&ct=home", `${IOS}?ct=home&mt=8`], // a ppid that is not ours
-    ["/go/app-store?ct=home%26url%3Dhttps%3A%2F%2Fevil.example", IOS], // a forged ct
-    ["/go/app-store?ct=" + "a".repeat(121), IOS], // too long
-    ["/go/app-store?ct=not-one-of-our-pages", IOS], // well-formed, but no page of ours has that campaign
-    ["/go/google-play?ct=spam-campaign", PLAY],
-    ["/go/app-store?ct=%3Cscript%3E&next=https://evil.example&url=//evil.example", IOS],
-    ["/go/google-play?ct=home&ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3", `${PLAY}&referrer=utm_source%3Dpeacebestillapp.com%26utm_medium%3Dsite%26utm_campaign%3Dhome`], // ppid is App Store only
-    ["/go/app-store/", IOS],
+    ["/api/go/app-store?ct=home&ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3", `${IOS}?ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3&ct=home&mt=8`],
+    ["/api/go/app-store?ppid=00000000-0000-0000-0000-000000000000&ct=home", `${IOS}?ct=home&mt=8`], // a ppid that is not ours
+    ["/api/go/app-store?ct=home%26url%3Dhttps%3A%2F%2Fevil.example", IOS], // a forged ct
+    ["/api/go/app-store?ct=" + "a".repeat(121), IOS], // too long
+    ["/api/go/app-store?ct=not-one-of-our-pages", IOS], // well-formed, but no page of ours has that campaign
+    ["/api/go/google-play?ct=spam-campaign", PLAY],
+    ["/api/go/app-store?ct=%3Cscript%3E&next=https://evil.example&url=//evil.example", IOS],
+    ["/api/go/google-play?ct=home&ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3", `${PLAY}&referrer=utm_source%3Dpeacebestillapp.com%26utm_medium%3Dsite%26utm_campaign%3Dhome`], // ppid is App Store only
+    ["/api/go/app-store/", IOS],
   ]) {
     const to = follow(href, store);
     assert.equal(to, want, href);
     assert.doesNotMatch(to, /evil|script|00000000/, href);
   }
-  assert.equal(goTarget(new URL("https://peacebestillapp.com/go/https://evil.example"), store), null, "any other /go/ path is not a redirect");
-  assert.equal(goTarget(new URL("https://peacebestillapp.com/go/"), store), null);
+  assert.equal(goTarget(new URL("https://peacebestillapp.com/api/go/https://evil.example"), store), null, "any other /api/go/ path is not a redirect");
+  assert.equal(goTarget(new URL("https://peacebestillapp.com/api/go/"), store), null);
+  assert.equal(goTarget(new URL("https://peacebestillapp.com/go/app-store"), store), null, "only /api/go/ redirects");
 });
