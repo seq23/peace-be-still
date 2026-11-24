@@ -369,11 +369,27 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (meter) await addUserSpend(env.DB, who.installId, metrics.get('paid_spend_micro') ?? 0, meter.paidUntil, now);
   };
   // Which lane answered and whether the safety model ran: two words in headers, for measuring routing (no text).
-  const route = { lane: 'none', safety: false };
-  const reply = (body: ChatResponse) => {
-    ctx.waitUntil(flush());
-    return Response.json(body, { headers: { 'cache-control': 'no-store', 'x-chat-lane': route.lane, 'x-chat-safety': route.safety ? '1' : '0' } });
+  // waitMs: how long a ready reply waited on the safety read (PBS_SAFETY_LATENCY's measure).
+  const route = { lane: 'none', safety: false, waitMs: 0 };
+  // The safety model reads a flagged message ALONGSIDE the answer (PBS_SAFETY_LATENCY: it added 1.5 s at
+  // p50 when it ran first). Nothing but the crisis card leaves before it has read: every reply passes
+  // `cleared`, which waits for the read and turns a high one into the card, whatever was ready.
+  let pendingSafety: Promise<CrisisLevel> | null = null;
+  const cleared = async (make: () => Response | Promise<Response>): Promise<Response> => {
+    if (pendingSafety) {
+      const t0 = Date.now();
+      const c = await pendingSafety;
+      route.waitMs += Date.now() - t0;
+      pendingSafety = null; // read once: the card itself, and any later reply, go straight out
+      if (c.level === 'high') { tally(metrics, 'safety_after_answer_high'); return crisisReply(c.kind, c.layer); }
+    }
+    return make();
   };
+  const send = (body: ChatResponse) => {
+    ctx.waitUntil(flush());
+    return Response.json(body, { headers: { 'cache-control': 'no-store', 'x-chat-lane': route.lane, 'x-chat-safety': route.safety ? '1' : '0', 'x-chat-safety-wait': String(route.waitMs) } });
+  };
+  const reply = (body: ChatResponse): Promise<Response> => body.kind === 'crisis' ? Promise.resolve(send(body)) : cleared(() => send(body));
   const turns = withoutCrisisWords(req.messages.slice(-12));
   const band = v.teen ? 'teen' : 'adult';
 
@@ -426,17 +442,18 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The separate safety model (Workers AI, private) runs only to confirm a signal: the distress
   // pre-filter, or an answer model's own risk tag. Its own budget (SAFETY_MONTHLY_CAP_USD); past it,
   // the phrases, the tags and the crisis model's instructions carry on.
+  // One read per message, shared by every caller (the pre-filter, a risk tag, the tripwire).
   let confirmed: CrisisLevel | null = null;
-  const confirm = async (): Promise<CrisisLevel> => {
-    if (confirmed) return confirmed;
+  let reading: Promise<CrisisLevel> | null = null;
+  const confirm = (): Promise<CrisisLevel> => reading ??= (async () => {
     if (!(await safetyBudgetLeft(env.DB, now, usd(env.SAFETY_MONTHLY_CAP_USD, 10)))) { tally(metrics, 'safety_over_budget'); return (confirmed = { level: 'none', read: 'down' }); }
     tally(metrics, 'safety_check'); route.safety = true;
     const r = await deps.risk(env, turns).catch((): RiskVerdict => ({ verdict: 'down' }));
-    confirmed = crisisLevel(turns, r);
+    let c = crisisLevel(turns, r);
     // Her "yes, I'm safe" to the check-in is not a new high signal: she stays on the crisis model.
-    if (confirmed.level === 'high' && saysSafe(lastAssistant, last)) confirmed = { ...confirmed, level: 'low' };
-    return confirmed;
-  };
+    if (c.level === 'high' && saysSafe(lastAssistant, last)) c = { ...c, level: 'low' };
+    return (confirmed = c);
+  })();
 
   // 1. Intent phrases, on every message (code, microseconds).
   const hit = phraseHit(turns);
@@ -454,18 +471,24 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The card and its question already showed in this conversation (the same test as the answer gate's afterCrisis).
   const cardShown = (sticky && state?.asked === 1) || turns.slice(0, -1).some(t => t.text === CRISIS_NOTE);
   let lane: Lane = inCrisis ? 'crisis' : paid.paid ? 'paid' : 'free';
+  // Whatever the read says short of high, this message is answered on the crisis lane, so that answer
+  // starts now; a high read turns it into the card before anything is shown (`cleared`).
   if (inCrisis || distress(turns)) {
     tally(metrics, inCrisis ? 'crisis_followup' : 'prefilter');
-    const c = await confirm();
-    if (c.level === 'high') return crisisReply(c.kind, c.layer);
-    if (c.level === 'low') await flag(false);
+    // A teen's message waits for the read first (her ruling 23 Nov 2026, "Card + hotline only"): no model is
+    // sent a teen's message that may be a crisis, not even an answer that the card would then replace.
+    if (teenOnly) {
+      const c = await confirm();
+      if (c.level === 'high') return crisisReply(c.kind, c.layer);
+      if (c.level === 'low') await flag(false);
+    } else pendingSafety = confirm().then(async c => { if (c.level === 'low') await flag(false); return c; });
     lane = 'crisis';
   }
 
   const fixedReply = (kind: ChatResponse['kind'], text: string) => reply({ kind, ai: false, text, scripture: [], remaining: null, limit: null, reminder: false });
   // Controls, after the crisis check so a crisis card is never withheld. The operator's kill switch
   // and the abuse throttle's 24-hour pause (controls.ts) come first.
-  if (!env.IP_HASH_SECRET) return fail('IP_HASH_SECRET_MISSING', 503);
+  if (!env.IP_HASH_SECRET) return cleared(() => fail('IP_HASH_SECRET_MISSING', 503));
   if (await blockFor(env.DB, who.installId, now)) { tally(metrics, 'paused'); return fixedReply('paused', pausedText[v.lang]); }
   const abuse = await throttle(env.DB, env.IP_HASH_SECRET, day, who.installId, last, false, now);
   if (abuse.verdict === 'paused') { tally(metrics, 'paused'); return fixedReply('paused', pausedText[v.lang]); }
@@ -519,7 +542,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   if (crisisOpen && !paid.paid) tally(metrics, 'crisis_past_free_limit_open');
   const deviceLimit = unwalled ? PAID_UNCAPPED : FREE_CHAT_MESSAGES;
   let hash: string;
-  try { hash = await ipHash(env.IP_HASH_SECRET, day, request.headers.get('cf-connecting-ip') ?? '0.0.0.0'); } catch { return fail('IP_HASH_SECRET_MISSING', 503); }
+  try { hash = await ipHash(env.IP_HASH_SECRET, day, request.headers.get('cf-connecting-ip') ?? '0.0.0.0'); } catch { return cleared(() => fail('IP_HASH_SECRET_MISSING', 503)); }
   try {
     await env.DB.prepare('INSERT INTO chat_admission VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
       .bind(day, who.installId, req.conversation, hash, unwalled ? 1 : 0, deviceLimit, unwalled ? PAID_UNCAPPED : int(env.CHAT_IP_MESSAGES_DAILY, 120), unwalled ? PAID_UNCAPPED : int(env.CHAT_GLOBAL_MESSAGES_DAILY, 150), now).run();
@@ -668,6 +691,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         if (teenSlot === 'claimed') await releaseTeenAnswer();
         // A message on the crisis lane is never told chat is resting or busy: if the crisis model
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
+        // The safety read runs beside the answer (PBS_SAFETY_LATENCY): settle it first, so a high read is the card here too.
+        const c = lane === 'crisis' ? (reading ? await reading : confirmed) : confirmed;
+        if (lane === 'crisis' && c?.level === 'high') return crisisReply(c.kind, c.layer);
         // A teen whose card already showed in this conversation (Workers AI has a small shared daily
         // quota, so this is common): fixed words written by people that point back to the card, never
         // the card and "Are you safe right now?" again. The question is asked once per conversation;
@@ -676,10 +702,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         if (lane === 'crisis' && teenOnly && cardShown) {
           tally(metrics, 'crisis_lane_down_teen_followup'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty, teen: true });
           const safe = saysSafe(lastAssistant, last);
-          if (safe || (confirmed?.level === 'none' && confirmed.read !== 'down')) await calmTurn();
+          if (safe || (c?.level === 'none' && c.read !== 'down')) await calmTurn();
           return reply({ kind: 'busy', ai: false, fixed: true, text: (safe ? teenStillHereSafeText : teenStillHereText)[v.lang], scripture: [], remaining: null, limit: null, reminder });
         }
-        if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(confirmed && confirmed.level !== 'none' ? confirmed.kind : 'selfharm', 'lane_down'); }
+        if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(c && c.level !== 'none' ? c.kind : 'selfharm', 'lane_down'); }
         // A paid user on free chat after her private messages never meets "resting": the private model answers, briefly.
         // Those short answers are capped per person per day (her ruling: a money ceiling); then "busy".
         if (lane === 'free' && overflow && overflow !== 'down') {
