@@ -251,8 +251,8 @@ export const identityText = {
 // is structure, like the identity question, so a person-written reply answers it, with His own words.
 export const ROLE_SWAP = / (?:you are now|youre now|you are dan|pretend (?:to be|you are)|ahora eres|finge (?:ser|que eres)) | (?:talk|speak|answer|respond|write)(?: to me)? as (?:if you (?:are|were) )?(?:jesus|god|the lord|christ|the holy spirit|dan) | (?:habla|hablame|respondeme|contestame) como (?:si fueras )?(?:jesus|dios|el senor|cristo) /;
 export const roleText = {
-  en: "I'm an AI helper in a Bible app, so I won't speak as Jesus or anyone else, and I won't set my rules aside. Jesus' own words are printed below, and they are better than anything I could put in His mouth. If something is weighing on you tonight, tell me about it, and we can look at what Scripture says together.",
-  es: 'Soy un asistente de IA en una app de la Biblia, así que no voy a hablar como Jesús ni como nadie más, ni dejaré mis reglas a un lado. Abajo están las palabras del mismo Jesús, que valen más que cualquier cosa que yo pudiera ponerle en la boca. Si algo te pesa esta noche, cuéntamelo y miramos juntos lo que dice la Escritura.',
+  en: "I'm an AI helper in a Bible app, so I won't speak as Jesus. Jesus' own words are printed below, and they are better than anything I could put in His mouth. If something is weighing on you tonight, tell me about it, and we can look at what Scripture says together.",
+  es: 'Soy un asistente de IA en una app de la Biblia, así que no voy a hablar como Jesús. Abajo están las palabras del mismo Jesús, que valen más que cualquier cosa que yo pudiera ponerle en la boca. Si algo te pesa esta noche, cuéntamelo y miramos juntos lo que dice la Escritura.',
 };
 export const ROLE_VERSE = 'Matthew 11:28';
 export type Topic = 'teen_grief' | 'money' | 'cursing' | 'jailbreak';
