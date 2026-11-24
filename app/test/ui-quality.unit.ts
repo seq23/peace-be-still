@@ -31,6 +31,16 @@ test('the check reads copy, never code: a style value passes and the same word a
   assert.deepEqual(uiCopyIssues('fixture.json', JSON.stringify({ 'journeys.title': 'Choose your journey' })), []);
 });
 
+test('a "Soon" tag is refused anywhere a person can see it, in English and Spanish, as a whole word in any case (her catch 24 Nov 2026)', () => {
+  for (const word of ['Soon', 'SOON', 'Coming soon', 'Pronto', 'Muy pronto', 'Próximamente', 'proximamente']) {
+    assert.equal(uiCopyIssues('src/i18n/es.json', JSON.stringify({ 'more.saved': word })).length, 1, word);
+    assert.equal(uiCopyIssues('app/(tabs)/more.tsx', `export const A = () => <Text>${word}</Text>;`).length, 1, word);
+    assert.equal(uiCopyIssues('app/(tabs)/more.tsx', `export const A = () => <TextInput placeholder="${word}" />;`).length, 1, word);
+  }
+  // Whole words only: a longer word that starts the same is not the tag.
+  assert.deepEqual(uiCopyIssues('fixture.json', JSON.stringify({ a: 'Soonest', b: 'Prontuario' })), []);
+});
+
 test('every English string has a Spanish one of the same shape', () => {
   type Entry = string | Record<string, string>;
   const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, Entry>;

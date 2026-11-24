@@ -101,14 +101,24 @@ export function BackLink({ children, onPress }: { children: string; onPress: () 
   return <TextLink onPress={onPress} style={{ marginBottom: 8 }}>{`←  ${children}`}</TextLink>;
 }
 
-export function Tag({ children }: { children: string }) {
-  const c = usePalette();
-  return <Text style={[styles.tag, { color: c.muted, borderColor: c.line }]}>{children}</Text>;
-}
-
 export function Chevron() {
   const c = usePalette();
   return <Text importantForAccessibility="no" style={{ fontFamily: fonts.strong, fontSize: 22, color: c.accent }}>›</Text>;
+}
+
+/** One row that opens another screen (More and Settings): its name, an optional current value, and a chevron.
+ * `onPress` is required, so a row that opens nothing cannot be drawn. */
+export function LinkRow({ label, value, onPress }: { label: string; value?: string | null; onPress: () => void }) {
+  const c = usePalette();
+  return (
+    <Card onPress={onPress} label={label} style={{ paddingVertical: 14 }}>
+      <View style={styles.row}>
+        <Text style={{ flex: 1, fontFamily: fonts.body, fontSize: 17, color: c.ink }}>{label}</Text>
+        {value ? <Body size={15}>{value}</Body> : null}
+        <Chevron />
+      </View>
+    </Card>
+  );
 }
 
 // The mark (paths in tokens.ts, equal to assets/brand/pbs-mark-*.svg). The light tile has a night wave and a
@@ -145,7 +155,6 @@ export const styles = StyleSheet.create({
   card: { borderRadius: 18, padding: 16, gap: 8 },
   pill: { minHeight: 52, borderRadius: 999, paddingHorizontal: 22, alignItems: 'center', justifyContent: 'center' },
   pillText: { fontFamily: fonts.strong, fontSize: 16 },
-  tag: { fontFamily: fonts.mono, fontSize: 11, letterSpacing: 1.1, textTransform: 'uppercase', borderWidth: 1, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3, alignSelf: 'flex-start', overflow: 'hidden' },
   logo: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 44 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   grow: { flex: 1, minWidth: 0, gap: 3 },

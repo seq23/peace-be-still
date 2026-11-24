@@ -50,7 +50,11 @@
     "journey awaits",
     "explore (?:the |our )?journeys",
     "begin your journey",
-    "on your journey"
+    "on your journey",
+    "coming soon",
+    "soon",
+    "pronto",
+    "pr[oó]ximamente"
   ],
   "profanity": [
     "fuck\\w*",

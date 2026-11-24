@@ -3,6 +3,7 @@
 // saved and where the app goes next.
 import React from 'react';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import { gunzipSync } from 'node:zlib';
 import { displayRuns, formatReference, parseReference } from '../src/bible/core';
@@ -510,15 +511,97 @@ test('the week count is the days she opened the app this week, with those dots f
   assert.equal(host(tree, 'View').find(n => n.props.role === 'img')!.props['aria-label'], '2 days this week');
 });
 
-test('More shows only rows that open something: Settings, never a "Soon" row (her catch 24 Nov 2026, live app)', async () => {
-  for (const lang of ['en', 'es'] as const) {
-    const s = strings(await mount('more', { ...base, language: lang, journey: 'psalm-nights' }));
-    assert.match(s, lang === 'en' ? /Settings/ : /Ajustes/);
-    assert.doesNotMatch(s, /\bSoon\b|\bPronto\b|Saved verses|Journal|Versículos guardados|Diario/);
+// Where a pushed href lands: the route file under app/ (groups like (tabs) are transparent, [x] takes any one
+// segment), read from the disk, so a deleted or renamed route file fails here. The file's screen is then mounted.
+const routeScreens: Record<string, Name> = {
+  'app/settings.tsx': 'settings', 'app/bible/[page].tsx': 'biblePage', 'app/today/[page].tsx': 'dailyPage', 'app/paid/index.tsx': 'paid',
+};
+type Route = { file: string; params: Record<string, string> };
+function routeFile(href: string): Route | null {
+  // Names are compared from the listing, never existsSync alone: the Mac's disk ignores case, the phone's bundle does not.
+  const walk = (dir: string, rest: string[], params: Record<string, string>): Route | null => {
+    const entries = readdirSync(dir, { withFileTypes: true });
+    const file = (name: string) => entries.some(e => e.isFile() && e.name === name);
+    const groups = () => entries.filter(e => e.isDirectory() && /^\(.+\)$/.test(e.name))
+      .map(e => walk(join(dir, e.name), rest, params)).find(Boolean) ?? null;
+    if (!rest.length) return file('index.tsx') ? { file: join(dir, 'index.tsx'), params } : groups();
+    const [head, ...tail] = rest;
+    if (!tail.length && file(`${head}.tsx`)) return { file: join(dir, `${head}.tsx`), params };
+    const literal = entries.find(e => e.isDirectory() && e.name === head) && walk(join(dir, head), tail, params);
+    if (literal) return literal;
+    for (const e of entries) {
+      const dynamic = /^\[([^.\]]+)\](\.tsx)?$/.exec(e.name);
+      if (!dynamic) continue;
+      const next = { ...params, [dynamic[1]]: head };
+      if (e.isFile() && !tail.length) return { file: join(dir, e.name), params: next };
+      const found = e.isDirectory() && walk(join(dir, e.name), tail, next);
+      if (found) return found;
+    }
+    return groups();
+  };
+  return walk('app', href.split('?')[0].split('/').filter(Boolean), {});
+}
+
+test('the route check finds real route files and refuses a missing one', () => {
+  assert.deepEqual(routeFile('/settings'), { file: 'app/settings.tsx', params: {} });
+  assert.deepEqual(routeFile('/bible/saved'), { file: 'app/bible/[page].tsx', params: { page: 'saved' } });
+  assert.deepEqual(routeFile('/more'), { file: 'app/(tabs)/more.tsx', params: {} });
+  assert.equal(routeFile('/journal'), null);
+  assert.equal(routeFile('/settings/nothing'), null);
+});
+
+test('More: every row opens a real screen on both doors, in English and Spanish, and Back returns to More (her catch 24 Nov 2026)', async () => {
+  const people = [
+    { value: { ...base, journey: 'psalm-nights' }, copy: en, rows: ['more.settings', 'more.saved', 'more.journal'] },
+    { value: { ...base, language: 'es', journey: 'mi-refugio', voice: 'spanish' }, copy: es, rows: ['more.settings', 'more.saved', 'more.journal'] },
+    { value: { ...base, age: 'child', journey: 'psalm-nights' }, copy: en, rows: ['more.settings', 'more.saved', 'more.journal'] },
+    // The Mindset door has no Bible tab and /bible/* redirects it to Today, so no Saved verses row there.
+    { value: { ...base, door: 'mindset', journey: 'imagination-nights' }, copy: en, rows: ['more.settings', 'more.journal'] },
+    { value: { ...base, door: 'mindset', language: 'es', journey: 'imagination-nights' }, copy: es, rows: ['more.settings', 'more.journal'] },
+  ];
+  for (const { value, copy, rows } of people) {
+    const more = await mount('more', value);
+    const shown = strings(more);
+    assert.doesNotMatch(shown, /(?<![\p{L}])(?:soon|coming soon|pronto|pr[oó]ximamente)(?![\p{L}])/iu, shown);
+    const buttons = host(more, 'Pressable');
+    assert.deepEqual(buttons.map(textOf).map(s => s.replace(/\s*›$/, '')), rows.map(key => copy[key]), JSON.stringify(value));
+    for (const button of buttons) {
+      calls = [];
+      assert.equal(typeof button.props.onPress, 'function', `${textOf(button)} opens nothing`);
+      await act(async () => button.props.onPress());
+      const [kind, href] = calls.at(-1) ?? [];
+      assert.equal(kind, 'push', `${textOf(button)}: ${JSON.stringify(calls)}`);
+      assert.equal(typeof href, 'string');
+      const route = routeFile(href as string);
+      assert.ok(route, `${textOf(button)} pushes ${href}, which no route file serves`);
+      const name = routeScreens[route.file];
+      assert.ok(name, `${route.file} has no screen in routeScreens`);
+      history = true;
+      const target = await mount(name, value, route.params);
+      assert.deepEqual(host(target, 'Redirect').map(n => n.props.href), [], `${href} redirects for ${JSON.stringify(value)}`);
+      const text = strings(target);
+      // A real screen: its own heading, and more on it than the heading and the way back.
+      const heading = host(target, 'Text').filter(n => n.props.accessibilityRole === 'header').map(textOf).filter(Boolean);
+      assert.equal(heading.length, 1, `${href} has no heading: ${text}`);
+      assert.ok(texts(target).length >= 3 || host(target, 'TextInput').length > 0, `${href} is blank: ${text}`);
+      assert.doesNotMatch(text, /(?<![\p{L}])(?:soon|pronto|pr[oó]ximamente)(?![\p{L}])/iu);
+      calls = [];
+      await press(target, new RegExp(`^(?:←  )?(?:${copy['common.back']}|${copy['tabs.more']})$`));
+      assert.deepEqual(calls, [['back']], `Back from ${href}`);
+      history = false;
+    }
   }
-  const tree = await mount('more', { ...base, journey: 'psalm-nights' });
-  await press(tree, 'Settings');
-  assert.deepEqual(calls, [['push', '/settings']]);
+});
+
+test('Saved verses and the journal, opened from More with nothing in them, say what goes there', async () => {
+  for (const [value, copy] of [[{ ...base, journey: 'psalm-nights' }, en], [{ ...base, language: 'es', journey: 'mi-refugio', voice: 'spanish' }, es]] as const) {
+    local.delete('pbs-bible-marks'); local.delete('pbs-daily');
+    const savedPage = strings(await mount('biblePage', value, { page: 'saved' }));
+    assert.ok(savedPage.includes(copy['reader.emptySaved']), savedPage);
+    const journal = await mount('dailyPage', value, { page: 'journal' });
+    assert.ok(strings(journal).includes(copy['daily.title.journal']));
+    assert.equal(host(journal, 'TextInput')[0].props.placeholder, copy['daily.note']);
+  }
 });
 
 test('Settings: the voice choices follow the age, and a choice is saved and shown as selected', async () => {
