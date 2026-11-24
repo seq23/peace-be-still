@@ -70,8 +70,8 @@ const week = (n, lang) => {
   return [WEEKS[lang][n], `<ol class="points" start="${n * 7 + 1}">\n${rows}\n</ol>`];
 };
 
-const PSALM_NIGHTS_EN = `<p>Peace Be Still, coming soon to the App Store and Google Play, has <strong>Psalm Nights · Whispered Scripture for Sleep</strong>: a King James psalm whispered at bedtime (an AI voice), with the screen kept dark and a sleep timer. Psalm 4, Psalm 23, Psalm 91, Psalm 121 and Psalm 63 are among them. Your first night is free, then one a week; the paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`;
-const HUSH_HARBOR_EN = (stories) => `<p>Peace Be Still, coming soon to the App Store and Google Play, has <strong>Hush Harbor · Black Bible Chat &amp; Stories</strong>: Bible stories told in a Black church voice, word for word from the King James where it quotes Scripture. ${stories} Today's story is free every day.</p>`;
+const PSALM_NIGHTS_EN = `<p>Peace Be Still, {{stores.tag}}, has <strong>Psalm Nights · Whispered Scripture for Sleep</strong>: a King James psalm whispered at bedtime (an AI voice), with the screen kept dark and a sleep timer. Psalm 4, Psalm 23, Psalm 91, Psalm 121 and Psalm 63 are among them. Your first night is free, then one a week; the paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`;
+const HUSH_HARBOR_EN = (stories) => `<p>Peace Be Still, {{stores.tag}}, has <strong>Hush Harbor · Black Bible Chat &amp; Stories</strong>: Bible stories told in a Black church voice, word for word from the King James where it quotes Scripture. ${stories} Today's story is free every day.</p>`;
 const MI_REFUGIO = (extra) => `${MI_REFUGIO_ES}
 <p>De noche, los Salmos se leen en susurro (con una voz de IA), con la pantalla oscura y un temporizador. ${extra}</p>`;
 
@@ -210,7 +210,7 @@ ${V("PSA 30:5")}`],
 <li><strong>Hush Harbor · Black Bible Chat &amp; Stories:</strong> stories of people who fasted, told in a Black church voice: Esther (“For Such a Time as This”), Daniel (“Didn't My Lord Deliver Daniel”) and Jonah, whose message moved Nineveh to fast (“Jonah Ran, and God Called Again”).</li>
 <li><strong>Psalm Nights · Whispered Scripture for Sleep:</strong> a whispered psalm at bedtime when the day was long.</li>
 </ul>
-<p>Peace Be Still is coming soon to the App Store and Google Play. The whole King James Bible and today's story are free.</p>`],
+<p>Peace Be Still is {{stores.tag}}. The whole King James Bible and today's story are free.</p>`],
     ],
     faq: [
       ["When does the January 2027 fast start?", "Most churches choose the first Sunday or Monday of the year. In 2027 that is Sunday 3 January or Monday 4 January, so a 21-day fast ends on Saturday 23 or Sunday 24 January. Follow your church's dates if it announces them."],

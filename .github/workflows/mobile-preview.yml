@@ -75,7 +75,7 @@ jobs:
   # behind it. Free (public repo); every write is blocked, nothing real is touched.
   tap-through:
     needs: preview
-    uses: seq23/boss-os/.github/workflows/tap-through.yml@feat/tap-through
+    uses: seq23/boss-os/.github/workflows/tap-through.yml@main
     with:
       target: ${{ needs.preview.outputs.url }}
       runner_ref: feat/tap-through  # until seq23/boss-os#509 lands; then this line and the @ref go to main

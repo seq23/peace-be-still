@@ -78,6 +78,20 @@
           "DuckAssistBot": 1
         }
       }
+    },
+    "2026-11-23": {
+      "ai_visitors": {
+        "total": 0,
+        "by_engine": {},
+        "by_path": {},
+        "source": "web-analytics"
+      },
+      "ai_bot_hits": {
+        "total": 160,
+        "by_bot": {
+          "Meta-ExternalAgent": 160
+        }
+      }
     }
   }
 }

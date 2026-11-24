@@ -1,6 +1,6 @@
 # Peace Be Still
 
-*A great calm, every night.* A Spry Labs phone app with two doors, God's Word and Mindset. Coming soon to the App Store and Google Play.
+*A great calm, every night.* A Spry Labs phone app with two doors, God's Word and Mindset. Which stores have it is one switch, `site/config/store.json` (see Launch state below).
 
 This repo holds:
 
@@ -21,7 +21,8 @@ This repo holds:
 - **Secrets:** `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are GitHub repo secrets. Nothing secret lives in this repo.
 - **Previews:** every site PR is published to the Pages project `peace-be-still-site-preview` (branch `pr-<n>`) and captured at 390 px light/dark and 1280 px; list routes in the PR body as `Preview routes: /ko/,/prayer-points/`.
 - **Social drafts:** `data/drafts/<batch>/` holds post drafts awaiting her yes (no loop reads them); render their pictures with `npm run ig:render -- --bank <posts.json> --out <dir>`.
-- **Images:** `site/assets-src/` holds the HTML used to render `og.png`, `og-es.png`, `og-ko.png`, `og-zh.png`, `og-prayer-points.png` and the PNG icons with headless Chrome.
+- **Images:** `site/assets-src/` holds the HTML used to render `og.png`, `og-es.png`, `og-ko.png`, `og-zh.png`, `og-prayer-points.png` (`npm run og:render`, which fills each picture's store line from store.json and writes `site/assets-src/og.lock.json`) and the PNG icons with headless Chrome.
+- **Launch state (23 Nov 2026):** `site/config/store.json` is the ONE switch for whether the app is out. `npm run store:set -- --ios <url> --play <url>` writes it and rebuilds the pages, the share pictures and the Instagram frames; commit and land. Every "coming soon / now on" line is a `{{stores.<form>}}` token filled from `STORE_WORDS` in `site/content/parts.mjs` (a missing word is `NAMED STOP [NO_STORE_WORDS]`); never type a launch line by hand. `check-site` rule 6 fails a page whose launch words disagree with store.json, and `site/test/store-cta.test.mjs` renders every page in all four store states.
 - **Fonts:** Libre Caslon Text, Figtree and Spline Sans Mono, self-hosted from Google Fonts under the SIL Open Font License 1.1.
 
 ## Validators
@@ -29,7 +30,7 @@ This repo holds:
 | Check | Protects | Runs |
 |---|---|---|
 | `scripts/check-encrypted.mjs` (+ `scripts/test/encrypted.test.mjs`) | The chat prompts, crisis lists and test question sets are committed only as git-crypt ciphertext; no plain-text copy of their text in any other tracked file (findings name files, never the text); a locked tree is a named stop, never a pass | every PR and push to main (`ci.yml` `encrypted`) |
-| `site/scripts/check-site.mjs` (+ `--self-test`) | No "Black Bible Stories" (registered mark) or "Speak Life"; no outcome/health promises; manifesting and mindset-practice words only on Mindset pages and no links between the two doors; the only form is the waitlist, no email addresses or third-party scripts (the `/privacy` promise); no store badges or links before launch | every PR, before every deploy, and after every search-loop build |
+| `site/scripts/check-site.mjs` (+ `--self-test`) | No "Black Bible Stories" (registered mark) or "Speak Life"; no outcome/health promises; manifesting and mindset-practice words only on Mindset pages and no links between the two doors; the only form is the waitlist, no email addresses or third-party scripts (the `/privacy` promise); store badges and links only in the store blocks filled from store.json; launch words true for store.json (rule 6: no App Store "coming soon" once it is live, no "now on" a store that is not), self-tested in all store states | every PR, before every deploy, and after every search-loop build |
 | `site/test/mindset.test.mjs` | The Mindset door: at least 24 English and 8 Spanish Mindset question pages; no faith word on any Mindset page; no manifesting word on a faith page or the home page's God's Word card; the two home door cards have the same shape; every "unlimited … private" line carries "With a paid plan:"; counts and prices only from the app's settings; no outcome, health, trial, urgency or filler wording; each page answers before it names the app; competitor facts sourced and dated; Mindset pages open the Imagination Nights custom product page | every PR and before every deploy |
 | `site/test/scripture.test.mjs` | Every verse on every page equals the stored KJV / Reina-Valera 1909 / 개역한글 / 1919 和合本 text (`content/bible/`); a verse block with no stored reference fails. The stored 개역한글 and 和合本 match fixtures read from a second source; Chinese pages are all Simplified (no Traditional-only character, from OpenCC's tables) and carry the 和合本 credit line. Pages quote scripture only through `site/content/scripture.mjs` | every PR and before every deploy |
 | `scripts/threads/validate.mjs` | Threads posts: every verse word for word (KJV / RV1909) at queue time, faith only (no Mindset, Imagination Nights, manifesting, law of assumption), "coming soon" until `site/config/store.json` has the App Store link, only ever the @peacebestillapp channel, the loop's named stops | every PR touching the Threads files, and inside every daily run |

@@ -77,8 +77,20 @@ class Plan(unittest.TestCase):
         q = [i["file"] for i in fill.todo(items, rows)]
         self.assertEqual(q[:2], [items[5]["file"], items[1]["file"]])
         self.assertEqual(len(q), len(items) - 1)
-        rows[1]["tries"] = fill.MAX_TRIES
-        self.assertNotIn(items[5]["file"], [i["file"] for i in fill.todo(items, rows)])
+        rows[1] = {**rows[1], "status": "held", "judge": fill.judge_now(), "words": fill.words_key(items[5])}
+        self.assertNotIn(items[5]["file"], [i["file"] for i in fill.todo(items, rows)])   # held: not retried every run
+        for again in ({"judge": "small"}, {"words": "changed"}):   # a new judge or new words: tried again first
+            self.assertEqual(fill.todo(items, [rows[0], {**rows[1], **again}])[0]["file"], items[5]["file"], again)
+
+    def test_a_row_from_the_old_judge_gets_every_route_again(self):
+        """23 Nov 2026: 205 files failed under the old judge (base/small); its misses were often its own."""
+        old = {"file": "f", "status": "FAILED", "tries": 3, "failed_routes": list(fill.ROUTES), "checks": {"asr": "small"}}
+        self.assertEqual((fill.tries(old), fill.next_route(old)), (0, fill.ROUTES[0]))
+        with tempfile.TemporaryDirectory() as d:
+            m = Path(d) / "m.jsonl"
+            fill.put_rows([old], m)
+            row = fill.upsert_row({"file": "f", "status": "FAILED", "route": "verses", "checks": {"problems": ["A01 x"]}}, m)
+            self.assertEqual((row["tries"], row["status"], row["judge"]), (1, "FAILED", fill.judge_now()))
 
     def test_a_failed_chapter_never_queues_ahead_of_new_sleep_sessions(self):
         vpl = ["MAT 1:1 The book.", "MAT 2:1 Now when.", "PSA 1:1 Blessed.", "PSA 2:1 Why."]
@@ -90,25 +102,42 @@ class Plan(unittest.TestCase):
         q = [i["file"] for i in fill.todo(items, rows)]
         self.assertEqual(q[:4], ["en/psalms/kjv-psa-002.m4a", "en/psalm-night/a.m4a", "en/bible/kjv-mat-001.m4a", "en/bible/kjv-mat-002.m4a"])
 
-    def test_third_failure_is_a_named_stop_in_the_census(self):
+    def test_a_file_that_fails_every_route_is_held_with_a_note_never_a_stop(self):
+        """23 Nov 2026 (her words: nothing waits on the owner): FAILED_3_TRIES "wait for a person" is gone.
+        Each run takes the next route; after the last, the file is held: not in the app, a note in the census."""
         items = fill.plan(bibles())
         with tempfile.TemporaryDirectory() as d:
             m = Path(d) / "m.jsonl"
             for i in items[:-1]:
                 fill.upsert_row({"file": i["file"], "status": "passed", "seconds": 360}, m)
-            for n in range(1, fill.MAX_TRIES + 1):
-                row = fill.upsert_row({"file": items[-1]["file"], "status": "FAILED"}, m)
+            last = items[-1]
+            for n, route in enumerate(fill.ROUTES, 1):
+                rows = fill.read_manifest(m)
+                self.assertEqual(fill.next_route(fill.latest(rows).get(last["file"])), route)
+                self.assertEqual(fill.todo(items, rows)[0]["file"], last["file"])     # tried again first
+                row = fill.upsert_row({"file": last["file"], "status": "FAILED", "route": route, "words": fill.words_key(last),
+                                       "checks": {"problems": ["A01 word accuracy 0.9 < 0.95"]}}, m)
                 self.assertEqual(row["tries"], n)
                 rows = fill.read_manifest(m)
                 self.assertEqual(len(rows), len(items))            # one row per file, never a duplicate
                 c = fill.census(items, rows)
-                self.assertEqual((c["passed"], c["failed"]), (7, 1))
-                self.assertEqual(c["complete"], n == fill.MAX_TRIES)
-                self.assertEqual("NAMED STOP [FAILED_3_TRIES]" in fill.census_line(c), n == fill.MAX_TRIES)
-            self.assertIn(items[-1]["file"], fill.census_line(c))
+                self.assertEqual(row["status"], "held" if n == len(fill.ROUTES) else "FAILED")
+                self.assertEqual(c["complete"], n == len(fill.ROUTES))
+            line = fill.census_line(c)
+            self.assertIn(f"note: 1 held after every route failed", line)
+            self.assertIn(last["file"], line)
+            self.assertNotIn("NAMED STOP", line)
+            self.assertNotIn("wait for a person", line)
             self.assertEqual(fill.todo(items, rows), [])
-            fill.upsert_row({"file": items[0]["file"], "status": "passed", "seconds": 360}, m)
-            self.assertEqual(len(fill.read_manifest(m)), len(items))
+            self.assertEqual(c["passed"], 7)
+
+    def test_a_file_that_keeps_crashing_is_held_after_max_tries(self):
+        with tempfile.TemporaryDirectory() as d:
+            m = Path(d) / "m.jsonl"
+            crash = {"file": "f", "status": "FAILED", "checks": {"problems": ["CRASH RuntimeError: render failed"]}}
+            got = [fill.upsert_row(crash, m) for _ in range(fill.MAX_TRIES)]
+            self.assertEqual([r["status"] for r in got], ["FAILED"] * (fill.MAX_TRIES - 1) + ["held"])
+            self.assertEqual(got[0]["failed_routes"], [])     # a crash is not a route failed: the route is taken again
 
     def test_census_counts_and_completion(self):
         items = fill.plan(bibles())
@@ -118,7 +147,7 @@ class Plan(unittest.TestCase):
         rows.append({"file": items[-1]["file"], "status": "FAILED"})
         c = fill.census(items, rows)
         self.assertFalse(c["complete"])  # a FAILED file with tries left is still to do
-        self.assertEqual(fill.census_line(c), "library fill: 7 of 8 files, 0.7 hours shelved, 1 failed")
+        self.assertEqual(fill.census_line(c), "library fill: 7 of 8 files, 0.7 hours shelved, 1 failed (tried again first)")
 
     def test_empty_plan_is_never_complete(self):
         self.assertFalse(fill.census([], [])["complete"])
@@ -711,7 +740,7 @@ class SpeechOnly(unittest.TestCase):
                 heard.append(len(audio))
                 return [], None
         audio = np.concatenate([np.full(16000, 0.2, dtype=np.float32), np.zeros(16000 * 60, dtype=np.float32)])
-        with mock.patch.dict(qa._MODELS, {"base": M()}), mock.patch.object(qa, "decode", return_value=audio):
+        with mock.patch.dict(qa._MODELS, {qa.JUDGE_MODEL: M()}), mock.patch.object(qa, "decode", return_value=audio):
             qa.transcribe(Path("x.m4a"), "es")
         self.assertLess(heard[0], 16000 * 2)
 
@@ -757,72 +786,86 @@ class Bars(unittest.TestCase):
 
 
 class Mastering(unittest.TestCase):
-    """20 Nov 2026: a hand-built gain -> limiter chain plus a re-encode loop left chapters at -18.1 LUFS
-    and failures rose 54 -> 71. Mastering is two-pass loudnorm judged on the ENCODED file, re-mastered
-    from the kept WAV; only a speech problem costs a new render."""
-    PASS1 = """[Parsed_loudnorm_0 @ 0x1] \n{\n\t"input_i" : "-21.43",\n\t"input_tp" : "-3.10",\n\t"input_lra" : "6.20",
-\t"input_thresh" : "-31.80",\n\t"output_i" : "-17.02",\n\t"output_tp" : "-2.01",\n\t"output_lra" : "5.90",
-\t"output_thresh" : "-27.40",\n\t"normalization_type" : "dynamic",\n\t"target_offset" : "0.02"\n}\n"""
+    """23 Nov 2026: 2-pass loudnorm fell back to its dynamic mode on speech and native AAC's noise
+    substitution added peaks after the limit, so re-mastering from the kept WAV kept failing A06 (42 files).
+    Mastering is now a measured gain plus an oversampled true-peak limiter, judged on the ENCODED file and
+    re-mastered from the kept WAV; only a speech problem costs a new render."""
+    WAV = {"lufs": -21.0, "true_peak": -4.0}      # what master() measures on the WAV first
 
-    def test_pass_two_applies_the_pass_one_measurement(self):
-        m = fill.loudnorm_measured("size=N/A time=00:05:00\n" + self.PASS1)
-        f = fill.loudnorm_filter(-17.0, -2.0, m)
-        for part in ("loudnorm=I=-17.0", "TP=-2.0", f"LRA={fill.LRA}", "measured_I=-21.43", "measured_TP=-3.10",
-                     "measured_LRA=6.20", "measured_thresh=-31.80", "offset=0.02", "linear=true"):
-            self.assertIn(part, f)
-        self.assertIn("print_format=json", fill.loudnorm_filter(-17.0, -2.0))
-        with self.assertRaises(RuntimeError):
-            fill.loudnorm_measured("no json here")
+    @staticmethod
+    def chain(cmd):
+        f = cmd[cmd.index("-af") + 1]
+        gain = float(re.search(r"volume=(-?[\d.]+)dB", f).group(1))
+        limit = 20 * __import__("math").log10(float(re.search(r"alimiter=limit=([\d.]+)", f).group(1)))
+        return gain, round(limit, 1)
+
+    def test_the_chain_is_a_gain_then_an_oversampled_limiter_never_loudnorm(self):
+        f = fill.master_filter(3.5, -2.5)
+        self.assertNotIn("loudnorm", f)
+        self.assertTrue(f.startswith("volume=3.50dB,aresample=96000,alimiter=limit=0.7499"), f)
+        self.assertIn("level=false", f)                # no auto level: the measured gain is the loudness
+        self.assertTrue(f.endswith("aresample=24000"))
+        self.assertEqual(fill.aac_args(), ["-c:a", "aac", "-b:a", "48k", "-aac_pns", "0"])
 
     def fake_ffmpeg(self, calls):
         def run(cmd, **k):
             calls.append(cmd)
-            if fill.aac_encoder() in cmd and Path(cmd[-1]).parent.is_dir():
+            if fill.AAC in cmd and Path(cmd[-1]).is_absolute():   # a bare "out.m4a" is never written into the repo
                 Path(cmd[-1]).write_bytes(b"m4a")
-            return mock.Mock(stderr=self.PASS1 if "null" in cmd else "", returncode=0)
+            return mock.Mock(stderr="", returncode=0)
         return run
 
     def test_encoded_file_out_of_bars_is_mastered_again_lower(self):
         calls = []
-        got = iter([{"lufs": -17.0, "true_peak": -0.4}, {"lufs": -18.2, "true_peak": -1.3}, {"lufs": -17.1, "true_peak": -1.6}])
+        got = iter([self.WAV, {"lufs": -17.0, "true_peak": -0.4}, {"lufs": -18.2, "true_peak": -1.3}, {"lufs": -17.1, "true_peak": -1.6}])
         r = fill.master(Path("in.wav"), Path("out.m4a"), "read", run=self.fake_ffmpeg(calls), measure=lambda p: next(got))
-        encodes = [c for c in calls if fill.aac_encoder() in c]
+        encodes = [c for c in calls if fill.AAC in c]
         self.assertEqual((len(encodes), r["tries"]), (3, 3))
         self.assertTrue(all(c[c.index("-i") + 1] == "in.wav" for c in encodes))   # always from the kept WAV
-        tps = [float(c[c.index("-af") + 1].split("TP=")[1].split(":")[0]) for c in encodes]
-        self.assertTrue(tps[0] > tps[1], tps)
-        self.assertEqual(tps[0], -2.0)
-        i3 = float(encodes[2][encodes[2].index("-af") + 1].split("I=")[1].split(":")[0])
-        self.assertGreater(i3, -17.0)   # the low loudness was corrected upward
+        (g1, l1), (g2, l2), (g3, l3) = map(self.chain, encodes)
+        self.assertEqual((g1, l1), (4.0, -2.5))        # -17 target - -21 measured; ceiling -1 - LIMIT_MARGIN
+        self.assertEqual(l2, -3.4)                      # lowered by the 0.6 dB overshoot + 0.3
+        self.assertEqual(g2, g1)
+        self.assertEqual(g3, 5.2)                       # the low loudness (-18.2) was corrected upward by 1.2
+        self.assertEqual((r["gain"], r["limit"], r["lufs"]), (5.2, -3.4, -17.1))
 
     def test_one_master_when_the_encoded_file_is_inside(self):
         calls = []
         fill.master(Path("in.wav"), Path("out.m4a"), "sleep", run=self.fake_ffmpeg(calls),
                     measure=lambda p: {"lufs": -22.0, "true_peak": -3.0})
-        self.assertEqual(len([c for c in calls if fill.aac_encoder() in c]), 1)
+        self.assertEqual(len([c for c in calls if fill.AAC in c]), 1)
 
-    def test_a_peak_that_keeps_missing_never_asks_loudnorm_below_its_range(self):
-        # 22 Nov 2026: 7 of 12 cloud shards died on "Error applying option 'TP' to filter 'loudnorm':
-        # Numerical result out of range": each miss lowered TP by the whole overshoot + 0.5, past -9.
+    def test_a_peak_that_keeps_missing_stops_at_the_limit_depth(self):
         calls = []
         r = fill.master(Path("in.wav"), Path("out.m4a"), "read", run=self.fake_ffmpeg(calls),
                         measure=lambda p: {"lufs": -17.0, "true_peak": 8.0})
-        tps = [float(c[c.index("-af") + 1].split("TP=")[1].split(":")[0]) for c in calls]
-        self.assertTrue(all(-9.0 <= t <= 0.0 for t in tps), tps)   # ffmpeg -h filter=loudnorm: TP "from -9 to 0"
-        self.assertEqual(r["tp"], fill.TP_FLOOR)
-        encodes = [c for c in calls if fill.aac_encoder() in c]
-        self.assertEqual(len(encodes), 2)      # at the floor nothing lower can be asked: qa.check judges that encode
-        self.assertEqual(fill.tp_target(-14.2), -9.0)
-        self.assertEqual(fill.tp_target(0.4), 0.0)
+        limits = [self.chain(c)[1] for c in calls]
+        self.assertTrue(all(-1.0 - fill.LIMIT_DEPTH <= x <= -1.0 for x in limits), limits)
+        self.assertEqual(r["limit"], -1.0 - fill.LIMIT_DEPTH)
+        self.assertEqual(len(calls), 2)       # at the depth nothing lower is asked: qa.check judges that encode
+
+    def test_a_silent_render_is_never_mastered(self):
+        with self.assertRaises(RuntimeError):
+            fill.master(Path("in.wav"), Path("out.m4a"), "read", run=self.fake_ffmpeg([]),
+                        measure=lambda p: {"lufs": float("-inf"), "true_peak": float("-inf")})
 
     @unittest.skipUnless(fill.shutil.which("ffmpeg"), "ffmpeg not installed")
-    def test_ffmpeg_accepts_the_floor_and_refuses_below_it(self):
-        def ask(tp):
-            return fill.subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-f", "lavfi", "-i", "sine=d=1",
-                                        "-af", fill.loudnorm_filter(-17.0, tp), "-f", "null", "-"],
-                                       capture_output=True, text=True, timeout=60)
-        self.assertIn("input_i", ask(fill.TP_FLOOR).stderr)
-        self.assertNotEqual(ask(fill.TP_FLOOR - 0.5).returncode, 0)   # the range is ffmpeg's, not ours
+    def test_real_ffmpeg_a_click_on_quiet_speech_lands_inside_every_bar(self):
+        """The real chain, the real encoder the cloud uses (ffmpeg aac), the real meter: a -26 LUFS tone
+        with full-scale clicks (the shape that failed A06: quiet read, one hard consonant) ends inside the
+        read bars on the encoded file. Undo the oversampling or the limiter and the peak goes over
+        (measured 23 Nov 2026: -0.8 and +14.4 dBTP). The PNS switch is proven on real speech, not here."""
+        with tempfile.TemporaryDirectory() as d:
+            wav, out = Path(d) / "in.wav", Path(d) / "out.m4a"
+            fill.subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i",
+                                 "aevalsrc=0.06*sin(2*PI*220*t)*(0.6+0.4*sin(2*PI*3*t))"
+                                 "+0.03*random(0)+if(lt(mod(t\\,2.3)\\,0.0015)\\,0.99\\,0):s=24000:d=40",
+                                 "-ac", "1", str(wav)], check=True, timeout=120)
+            r = fill.master(wav, out, "read")
+            got = qa.loudness(out)
+        lo, hi = qa.BARS["read"]["lufs"]
+        self.assertLessEqual(got["true_peak"], qa.BARS["read"]["tp_max"], (got, r))
+        self.assertTrue(lo <= got["lufs"] <= hi, (got, r))
 
     def make(self, checks, louds):
         item = fill.plan(bibles())[2]
@@ -831,20 +874,20 @@ class Mastering(unittest.TestCase):
                              "lufs": -17.0, "true_peak": -1.5, "clipped": 0, "asr": "base", "seconds": 60.0}
         with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home, \
                 mock.patch.object(fill, "HOME", Path(home)), \
-                mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
+                mock.patch.object(fill, "render", side_effect=lambda *a, **k: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
                 mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg(calls)), \
-                mock.patch.object(qa, "loudness", side_effect=louds), \
+                mock.patch.object(qa, "loudness", side_effect=[x for l in louds for x in (self.WAV, *l)]), \
                 mock.patch.object(qa, "check", side_effect=[res(p) for p in checks]):
             row = fill.make_one(item, {}, Path(d))
             self.assertFalse((Path(d) / "track.wav").exists())
             self.held = sorted(str(f.relative_to(home)) for f in Path(home).rglob("*") if f.is_file())
-        return row, renders, [c for c in calls if fill.aac_encoder() in c]
+        return row, renders, [c for c in calls if fill.AAC in c]
 
     def test_a_minus_18_1_lufs_file_is_normalised_and_passes(self):
         # 21 Nov 2026: -18.1 LUFS against -18..-16 was thrown away. Now it is mastered again from the same
-        # WAV toward -17 (two-pass loudnorm), and even a file left at -18.1 ships inside the margin.
+        # WAV toward -17, and even a file left at -18.1 ships inside the margin.
         calls = []
-        got = iter([{"lufs": -18.1, "true_peak": -1.5}, {"lufs": -17.0, "true_peak": -1.5}])
+        got = iter([self.WAV, {"lufs": -18.1, "true_peak": -1.5}, {"lufs": -17.0, "true_peak": -1.5}])
         r = fill.master(Path("in.wav"), Path("out.m4a"), "read", run=self.fake_ffmpeg(calls), measure=lambda p: next(got))
         self.assertEqual((r["tries"], r["lufs"]), (2, -17.0))
         left = qa.judge(script=GOOD["script"], transcript=GOOD["script"], lang="en", level="read", seconds=60.0,
@@ -853,7 +896,7 @@ class Mastering(unittest.TestCase):
 
     def test_a_wrong_verse_fails_and_is_held_not_deleted(self):
         wrong = "A01 word accuracy 0.9 < 0.95"
-        row, renders, _ = self.make([[wrong], [wrong]], [{"lufs": -17.0, "true_peak": -1.5}] * 2)
+        row, renders, _ = self.make([[wrong], [wrong]], [[{"lufs": -17.0, "true_peak": -1.5}]] * 2)
         self.assertEqual((row["status"], len(renders)), ("FAILED", 2))
         self.assertTrue(row["held"].endswith(row["file"]))
         self.assertIn(f"held-audio/fill/{row['file']}", self.held)
@@ -883,8 +926,8 @@ class Mastering(unittest.TestCase):
         renders = []
         with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home, \
                 mock.patch.object(fill, "HOME", Path(home)), \
-                mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"), {})[2]), \
-                mock.patch.object(fill, "master", side_effect=lambda wav, out, level: (Path(out).write_bytes(b"m"), {"tries": 1, "i": -17.0, "tp": -2.0})[1]), \
+                mock.patch.object(fill, "render", side_effect=lambda *a, **k: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"), {})[2]), \
+                mock.patch.object(fill, "master", side_effect=lambda wav, out, level: (Path(out).write_bytes(b"m"), {"tries": 1, "gain": 0.0, "limit": -2.5})[1]), \
                 mock.patch.object(fill, "pause_starts", return_value=[]), \
                 mock.patch.object(qa, "check", return_value={"pass": True, "problems": [], "notes": [], "accuracy": 0.97, "wpm": 100, "words": 10,
                                                              "lufs": -17.0, "true_peak": -1.5, "clipped": 0, "asr": "base", "seconds": 60.0}):
@@ -930,7 +973,7 @@ class Mastering(unittest.TestCase):
         res = {"pass": True, "problems": [], "accuracy": 0.98, "wpm": 114, "words": 700, "lufs": -22.0,
                "true_peak": -3.0, "clipped": 0, "asr": "base", "seconds": seconds}
         with tempfile.TemporaryDirectory() as d, \
-                mock.patch.object(fill, "render", side_effect=lambda *a: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
+                mock.patch.object(fill, "render", side_effect=lambda *a, **k: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
                 mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg([])), \
                 mock.patch.object(qa, "loudness", return_value={"lufs": -22.0, "true_peak": -3.0}), \
                 mock.patch.object(qa, "check", return_value=res):
@@ -960,7 +1003,7 @@ class Mastering(unittest.TestCase):
             [item] = fill.content_items(Path(d))
         segs = fill.segments_of(item, {})
         ends = [2.0 * (n + 1) for n in range(len(segs))]
-        def fake_render(it, pron, wav, speed):
+        def fake_render(it, pron, wav, speed, sentences=False):
             Path(wav).write_bytes(b"w")
             return {"seconds": 99.0, "ends": ends, "segs": fill.segments_of(it, pron)}
         res = {"pass": True, "problems": [], "accuracy": 0.97, "wpm": 100, "words": 60, "lufs": -22.0,
@@ -979,14 +1022,14 @@ class Mastering(unittest.TestCase):
 
     def test_mastering_miss_is_mastered_again_never_rendered_again(self):
         ok = {"lufs": -17.0, "true_peak": -1.5}
-        row, renders, encodes = self.make([[]], [{"lufs": -17.0, "true_peak": -0.2}, ok])
+        row, renders, encodes = self.make([[]], [[{"lufs": -17.0, "true_peak": -0.2}, ok]])
         self.assertEqual((len(renders), len(encodes), row["status"]), (1, 2, "passed"))
-        row, renders, _ = self.make([["A06 loudness -22.0 LUFS outside (-18.0, -16.0)"]], [ok])
+        row, renders, _ = self.make([["A06 loudness -22.0 LUFS outside (-18.0, -16.0)"]], [[ok]])
         self.assertEqual((len(renders), row["status"]), (1, "FAILED"))
 
     def test_speech_miss_is_rendered_again_slower(self):
         ok = {"lufs": -17.0, "true_peak": -1.5}
-        row, renders, _ = self.make([["A01 word accuracy 0.9 < 0.95"], []], [ok, ok])
+        row, renders, _ = self.make([["A01 word accuracy 0.9 < 0.95"], []], [[ok], [ok]])
         self.assertEqual(renders, [fill.SPEED, fill.RETRY_SPEED])
         self.assertEqual((row["status"], row["attempts"]), ("passed", 2))
 
@@ -1064,7 +1107,7 @@ class CloudChain(unittest.TestCase):
     def test_a_chapter_that_crashes_is_held_and_the_shard_goes_on(self):
         items = fill.plan(bibles())[:3]
         tried = []
-        def make_one(item, pron, work):
+        def make_one(item, pron, work, route=None):
             tried.append(item["file"])
             if len(tried) == 1:
                 raise RuntimeError("loudnorm pass 1 printed no measurement: Error applying option 'TP'")
@@ -1092,6 +1135,39 @@ class CloudChain(unittest.TestCase):
             self.assertTrue((Path(home) / "library-fill.active").exists())   # the fill never removes the marker
         import check_manifest
         self.assertEqual(check_manifest.problems(rows, (AUDIO / "VOICES.md").read_text()), [])   # a valid FAILED row
+
+    def test_the_judge_missing_is_a_named_stop_never_a_verdict_or_a_try(self):
+        """Outage: the judge model fails to download or load (disk, network, memory). The run stops by
+        name, exit 9; no row is written (no try used, nothing passed, failed or held); the next run retries.
+        The real make_one and qa.check run: only the model load, ffmpeg and the voice are faked."""
+        import numpy as np
+        items = fill.plan(bibles())[:2]
+        def whisper_model(size):
+            raise OSError("We couldn't connect to 'https://huggingface.co' to load the files")
+        with tempfile.TemporaryDirectory() as home, contextlib.ExitStack() as st:
+            man = Path(home) / "manifest.jsonl"; man.write_text("")
+            read, upsert = fill.read_manifest, fill.upsert_row
+            P = lambda *a, **k: st.enter_context(mock.patch.object(*a, **k))
+            P(fill, "HOME", Path(home)); P(fill, "MANIFEST", man)
+            P(fill, "read_manifest", lambda path=man: read(path)); P(fill, "upsert_row", lambda row, path=man: upsert(row, path))
+            P(fill, "LANE", "cloud"); P(fill, "lane_of", lambda i, c=None: "cloud")
+            P(fill, "plan", lambda *a: items); P(fill, "content_items", lambda r: [])
+            P(fill.T, "load_bible", lambda lang: [None] * 66); P(fill.T, "load_pronunciations", lambda: {})
+            P(fill, "drive_reachable", lambda *a: None)
+            P(fill, "render", side_effect=lambda *a, **k: (Path(a[2]).write_bytes(b"w"), {})[1])
+            P(fill, "master", side_effect=lambda wav, out, level: (Path(out).write_bytes(b"m"), {"tries": 1, "gain": 0, "limit": -3})[1])
+            P(qa, "loudness", return_value={"lufs": -17.0, "true_peak": -2.0}); P(qa, "clipped_samples", return_value=0)
+            P(qa, "ffprobe_seconds", return_value=60.0); P(qa, "decode", return_value=np.zeros(16000, dtype="float32"))
+            P(qa, "whisper_model", whisper_model)
+            st.enter_context(mock.patch.dict(qa._MODELS, {}, clear=True))
+            st.enter_context(mock.patch.dict(fill.os.environ, {"PBS_NO_MORNING": "1"}))
+            err = st.enter_context(mock.patch("sys.stderr", new_callable=io.StringIO))
+            out = st.enter_context(mock.patch("sys.stdout", new_callable=io.StringIO))
+            rc = fill.main([])
+            rows = read(man)
+        self.assertEqual(rc, 9)
+        self.assertIn("NAMED STOP [JUDGE_UNAVAILABLE]", err.getvalue() + out.getvalue())
+        self.assertEqual(rows, [])
 
     def test_a_batch_that_wrote_no_rows_never_starts_another(self):
         # A batch where every job hit a named stop must not loop round the clock: the chain step runs only

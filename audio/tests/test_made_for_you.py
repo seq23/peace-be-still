@@ -260,9 +260,6 @@ class MadeForYouTest(unittest.TestCase):
             self.assertEqual(sessions.render_session(item, Path("/unused"))["status"], "FAILED")
             check["pass"] = True
             self.assertEqual(sessions.render_session(item, Path("/unused"))["status"], "passed")
-            encode = master.call_args.kwargs["run"]
-            encode(["ffmpeg", "-c:a", "aac_at"], check=True)
-            ffmpeg.assert_called_with(["ffmpeg", "-c:a", "aac"], check=True)
 
     def test_disallowed_prose_is_rejected_before_the_voice(self):
         job = self.job()

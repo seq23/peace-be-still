@@ -1,7 +1,7 @@
 // App pages: other apps' names + a modifier (nominative use only; facts only from each app's own US
 // App Store listing, linked, "checked 18 Nov 2026"; no logos; the not-affiliated line), and the
 // "best ... app" landing pages. Owner 18 Nov 2026: Peace Be Still is our pick, with provable facts and
-// the disclosure line; no ratings, user counts or testimonials for Peace Be Still (it is not out yet).
+// the disclosure line; no ratings, user counts or testimonials for Peace Be Still (it is new; none are quoted).
 import { D, V, Q, F, bg, PICK_EN, CHECKED } from "./blitz-common.mjs";
 
 const G = "Bible apps compared";
@@ -17,7 +17,7 @@ const src = (k, name) => [`${name}: App Store listing (US), checked ${CHECKED}`,
 const a = (k, text = "App Store listing") => `<a class="src" rel="nofollow noopener" href="${L[k]}">${text}</a>`;
 const APPLE_CANCEL = ["Apple Support: Cancel a subscription from Apple", "https://support.apple.com/en-us/118428"];
 const PLAY_CANCEL = ["Google Play Help: Cancel, pause, or change a subscription", "https://support.google.com/googleplay/answer/7018481"];
-const PBS_ROW = `<tr><td>Peace Be Still (coming soon)</td><td>$7.99 a month or $39.99 a year</td><td>No trial</td><td>Free version forever: whole KJV to read, a growing set of chapters read aloud, today's story, 1 chat a day (5 messages), first sleep night then 1 a week, daily declaration</td><td>This site</td></tr>`;
+const PBS_ROW = `<tr><td>Peace Be Still</td><td>$7.99 a month or $39.99 a year</td><td>No trial</td><td>Free version forever: whole KJV to read, a growing set of chapters read aloud, today's story, 1 chat a day (5 messages), first sleep night then 1 a week, daily declaration</td><td>This site</td></tr>`;
 const HEAD = `<table class="t"><thead><tr><th>App</th><th>Prices listed</th><th>Trial</th><th>What is free</th><th>Source</th></tr></thead><tbody>`;
 const CANCEL_STEPS = `<ol>
 <li>iPhone: Settings › your name › Subscriptions › the app › Cancel Subscription.</li>
@@ -42,7 +42,7 @@ export const APPS = [
     indexLabel: "Hallow app cost",
     indexNote: "$9.99 a month or $69.99 a year per the listing, and what is free.",
     definition: "Hallow costs $9.99 a month or $69.99 a year in the United States, according to the subscription terms in its own App Store description (checked 18 Nov 2026, and again 21 Nov 2026). Its In-App Purchases list also shows a $10.99 monthly price. Hallow's daily prayers, including the rosary, and its 9-day Intro Prayer Challenge are free.",
-    quick: "Hallow: $9.99 a month or $69.99 a year (listing, US). Over a year, monthly billing comes to $119.88, so the yearly plan saves $49.89. For comparison, Peace Be Still (coming soon) is $7.99 a month or $39.99 a year, with no trial and a free version that stays free.",
+    quick: "Hallow: $9.99 a month or $69.99 a year (listing, US). Over a year, monthly billing comes to $119.88, so the yearly plan saves $49.89. For comparison, Peace Be Still ({{stores.short}}) is $7.99 a month or $39.99 a year, with no trial and a free version that stays free.",
     bestFor: "people deciding whether to pay for Hallow, and anyone wanting a lower yearly price.",
     pick: PICK_EN("For a lower yearly price and a free version that stays free, our pick is Peace Be Still: $39.99 a year against Hallow's listed $69.99."),
     sections: [
@@ -65,7 +65,7 @@ ${PBS_ROW}
     faq: [
       ["How much is Hallow per month?", "Hallow's App Store description lists $9.99 a month in the United States (checked 18 Nov 2026). Its In-App Purchases list also shows a $10.99 monthly option."],
       ["How much is Hallow per year?", "$69.99 a year, per the subscription terms in its App Store description (US, checked 18 Nov 2026)."],
-      ["Is there a cheaper alternative to Hallow?", "Peace Be Still, coming soon, is $7.99 a month or $39.99 a year with a free version that stays free. It is a different kind of app: King James Bible, whispered psalms and a Bible chat, not a Catholic guided-prayer library."],
+      ["Is there a cheaper alternative to Hallow?", "Peace Be Still, {{stores.short}}, is $7.99 a month or $39.99 a year with a free version that stays free. It is a different kind of app: King James Bible, whispered psalms and a Bible chat, not a Catholic guided-prayer library."],
       ["Is Peace Be Still part of Hallow?", "No. Peace Be Still is not affiliated with Hallow or any app named here."],
     ],
     sources: [src("hallow", "Hallow: Prayer & Meditation"), APPLE_CANCEL],
@@ -80,7 +80,7 @@ ${PBS_ROW}
     indexLabel: "Hallow app review",
     indexNote: "What the listing offers, who it suits, and what to weigh.",
     definition: "Hallow is a Catholic prayer and meditation app with audio-guided sessions: the rosary, Lectio Divina, the Examen, Night Prayer, chant and Bible stories read by guests. Its App Store listing shows 4.9 out of 5 from 384,119 ratings (checked 21 Nov 2026). It suits Catholics who want guided audio prayer and will use it often enough to pay $69.99 a year.",
-    quick: "If you are Catholic and want guided audio prayer with many voices, Hallow's own description shows that is its focus. If you want the King James Bible, whispered psalms for sleep or a Bible chat with no trial, look at Peace Be Still, coming soon, at $39.99 a year.",
+    quick: "If you are Catholic and want guided audio prayer with many voices, Hallow's own description shows that is its focus. If you want the King James Bible, whispered psalms for sleep or a Bible chat with no trial, look at Peace Be Still, {{stores.short}}, at $39.99 a year.",
     bestFor: "people reading reviews before paying for Hallow.",
     pick: PICK_EN("If you want the King James Bible, whispered psalms and a Bible chat for less, our pick is Peace Be Still."),
     sections: [
@@ -92,11 +92,11 @@ ${PBS_ROW}
 <li>Seasonal challenges such as Pray40 for Lent and Pray25 for Advent.</li>
 </ul>
 <p class="muted">All from Hallow's ${a("hallow")}, checked ${CHECKED}.</p>`],
-      ["The listing at a glance", `<table class="t"><thead><tr><th></th><th>Hallow</th><th>Peace Be Still (coming soon)</th></tr></thead><tbody>
+      ["The listing at a glance", `<table class="t"><thead><tr><th></th><th>Hallow</th><th>Peace Be Still</th></tr></thead><tbody>
 <tr><td>Tradition</td><td>Catholic; “meant as a resource for people of all faiths”</td><td>Christian, King James Version; Reina-Valera 1909 in Spanish</td></tr>
 <tr><td>Price</td><td>$9.99 a month or $69.99 a year</td><td>$7.99 a month or $39.99 a year</td></tr>
 <tr><td>Free</td><td>Daily prayers and the 9-day Intro Prayer Challenge</td><td>Whole KJV to read, a growing set of chapters read aloud, today's story, 1 chat a day, first sleep night then 1 a week, daily declaration</td></tr>
-<tr><td>Rating shown</td><td>4.9 out of 5, 384,119 ratings (checked 21 Nov 2026)</td><td>Not out yet</td></tr>
+<tr><td>Rating shown</td><td>4.9 out of 5, 384,119 ratings (checked 21 Nov 2026)</td><td>None quoted here: the app is new</td></tr>
 <tr><td>Source</td><td>${a("hallow")}, ${CHECKED}</td><td>This site</td></tr>
 </tbody></table>`],
       HALLOW_REVIEWS,
@@ -122,7 +122,7 @@ ${PBS_ROW}
     indexLabel: "Is Hallow free?",
     indexNote: "Daily prayers and the 9-day challenge are free; the rest is paid.",
     definition: "Hallow is free to download, and part of it is free to use. Its App Store description says users can access the daily prayers, including the rosary, and the 9-day Intro Prayer Challenge for free. The full app needs a subscription of $9.99 a month or $69.99 a year in the United States (checked 18 Nov 2026).",
-    quick: "Free in Hallow, per its listing: daily prayers (including the rosary) and the 9-day Intro Prayer Challenge. Paid: the full library. Free in Peace Be Still, coming soon: the whole King James Bible to read and hear, today's story, one chat a day, and more, for good.",
+    quick: "Free in Hallow, per its listing: daily prayers (including the rosary) and the 9-day Intro Prayer Challenge. Paid: the full library. Free in Peace Be Still, {{stores.short}}: the whole King James Bible to read and hear, today's story, one chat a day, and more, for good.",
     bestFor: "people who want to pray with Hallow without a subscription, or want a bigger free version.",
     pick: PICK_EN("If you want the most you can use free, for good, our pick is Peace Be Still."),
     sections: [
@@ -153,7 +153,7 @@ ${PBS_ROW}
     indexLabel: "Is the Creed Bible app free?",
     indexNote: "Limited free chat; subscriptions from $9.99 to $69.99 listed.",
     definition: "Creed: Bible Chat & Companion is free to download with limited use. Its App Store description says free users get limited access to AI chat and voice features and need a subscription for unlimited access. Its In-App Purchases list prices from $9.99 to $69.99, including “Annual - Discounted” at $34.99 and $44.99 (US, checked 18 Nov 2026).",
-    quick: "Creed: limited free chat, then a subscription (listed from $9.99 to $69.99). Peace Be Still, coming soon: one chat a day of up to 5 messages free for good, with every verse pasted from a stored King James Bible.",
+    quick: "Creed: limited free chat, then a subscription (listed from $9.99 to $69.99). Peace Be Still, {{stores.short}}: one chat a day of up to 5 messages free for good, with every verse pasted from a stored King James Bible.",
     bestFor: "people trying Creed who want to know where free ends.",
     pick: PICK_EN("For a Bible chat whose free part is spelled out and stays free, our pick is Peace Be Still."),
     sections: [
@@ -184,7 +184,7 @@ ${V("PHI 4:13")}`],
     indexLabel: "Is the Haven Bible app free?",
     indexNote: "Its listing says a paid subscription is required.",
     definition: "No, not beyond the download. The App Store description for Haven - Bible Chat (E12 Holdings LLC) ends with “Access to Haven requires a paid subscription”. Its In-App Purchases list “Unlimited” options from $4.99 to $19.99 without naming the billing periods (US, checked 18 Nov 2026).",
-    quick: "Haven - Bible Chat: free to download, paid to use, per its listing. If you want a Bible chat you can use without paying, Peace Be Still (coming soon) gives one chat a day of up to 5 messages free, for good.",
+    quick: "Haven - Bible Chat: free to download, paid to use, per its listing. If you want a Bible chat you can use without paying, Peace Be Still ({{stores.short}}) gives one chat a day of up to 5 messages free, for good.",
     bestFor: "people who downloaded Haven and want to know what it costs, or want a free option.",
     pick: PICK_EN("For a Bible chat you can use free every day, our pick is Peace Be Still."),
     sections: [
@@ -213,13 +213,13 @@ ${PBS_ROW}
     h1: "Haven Bible Chat: what it is, and what else to consider",
     indexLabel: "Haven Bible Chat and alternatives",
     indexNote: "What the listing says, the cost, cancelling, and alternatives.",
-    definition: "Haven - Bible Chat is an iPhone app by E12 Holdings LLC with daily verses, devotionals, prayers, a streak and a chat you can “ask Haven anything”. Its listing says access requires a paid subscription, shows a 12+ age rating and English only (checked 18 Nov 2026). Alternatives include Bible chat apps with a free version, such as Peace Be Still, coming soon.",
+    definition: "Haven - Bible Chat is an iPhone app by E12 Holdings LLC with daily verses, devotionals, prayers, a streak and a chat you can “ask Haven anything”. Its listing says access requires a paid subscription, shows a 12+ age rating and English only (checked 18 Nov 2026). Alternatives include Bible chat apps with a free version, such as Peace Be Still, {{stores.short}}.",
     quick: "Haven: daily verses, devotionals and a chat, paid subscription required, English only, per its listing. Peace Be Still: a Bible chat with verses pasted from a stored King James Bible, one free chat a day for good, Spanish at launch, no trial, no ads.",
     bestFor: "people comparing Haven with other Bible chat apps.",
     pick: PICK_EN("Our pick for a Bible chat alternative: Peace Be Still, for its free version and word-for-word verses."),
     sections: [
       ["What is Haven Bible Chat?", `<p>Its listing describes hand-picked daily verses, devotionals and prayers, verse citations, a daily streak, and a chat: “ask Haven anything”. Subtitle on the listing: “Bible Widget, Verse, Pet, Grow”. Source: ${a("haven")}, checked ${CHECKED}.</p>`],
-      ["Haven and Peace Be Still, fact by fact", `<table class="t"><thead><tr><th></th><th>Haven - Bible Chat</th><th>Peace Be Still (coming soon)</th></tr></thead><tbody>
+      ["Haven and Peace Be Still, fact by fact", `<table class="t"><thead><tr><th></th><th>Haven - Bible Chat</th><th>Peace Be Still</th></tr></thead><tbody>
 <tr><td>Price</td><td>“Unlimited” options $4.99 to $19.99; access requires a paid subscription</td><td>$7.99 a month or $39.99 a year; free version forever</td></tr>
 <tr><td>Languages</td><td>English</td><td>English and Spanish (Mi Refugio, Reina-Valera 1909)</td></tr>
 <tr><td>Age rating</td><td>12+</td><td>13+; under 13 no chat</td></tr>
@@ -289,7 +289,7 @@ ${PBS_ROW}
     indexLabel: "Is the Duomo Bible app free?",
     indexNote: "A paid-access app with a free trial, per its listing.",
     definition: "No. Duomo's App Store description says “Duomo is a paid-access app. All features are available through in-app subscription. A free trial is offered.” Its In-App Purchases list weekly ($9.99), monthly ($19.99), 3-month ($39.99) and yearly ($69.99 and $89.99) plans on the US App Store (checked 18 Nov 2026).",
-    quick: "Duomo: paid access after a free trial; plans from $9.99 a week. Peace Be Still, coming soon: no trial, no weekly plan, and a free version that stays free, or $7.99 a month or $39.99 a year.",
+    quick: "Duomo: paid access after a free trial; plans from $9.99 a week. Peace Be Still, {{stores.short}}: no trial, no weekly plan, and a free version that stays free, or $7.99 a month or $39.99 a year.",
     bestFor: "people who saw Duomo and want to know the cost before the trial ends.",
     pick: PICK_EN("For no trial and no weekly plan, our pick is Peace Be Still."),
     sections: [
@@ -322,7 +322,7 @@ ${V("ISA 55:1")}`],
     h1: "AI Bible: an AI that answers with real verses, not made-up ones",
     indexLabel: "AI Bible",
     indexNote: "How to spot an AI that invents verses, and one that cannot.",
-    definition: "An AI Bible is an app where you ask questions about faith or scripture and an AI answers. The risk is that a language model can invent a verse that sounds right. The safe design lets the AI choose only references, then pastes the verse from a stored Bible. Peace Be Still, coming soon, works that way with the King James Version.",
+    definition: "An AI Bible is an app where you ask questions about faith or scripture and an AI answers. The risk is that a language model can invent a verse that sounds right. The safe design lets the AI choose only references, then pastes the verse from a stored Bible. Peace Be Still, {{stores.short}}, works that way with the King James Version.",
     quick: "Test any AI Bible: ask for a verse you know by heart and check it word for word, ask where a phrase is found, and see whether it says it is AI. In Peace Be Still the AI names the reference; the app pastes the stored KJV text.",
     bestFor: "people curious about AI Bible apps who want to know which ones they can trust with scripture.",
     pick: PICK_EN("Our pick for an AI Bible that cannot misquote scripture: Peace Be Still."),
@@ -340,7 +340,7 @@ ${V("ISA 55:1")}`],
       ["Where do my words go?", `<p>Before your first chat, Peace Be Still tells you that what you type goes to free AI providers that may learn from it, and to leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows 988 and other help straight away.</p>`],
     ],
     faq: [
-      ["Is there an AI that answers Bible questions?", "Yes, several apps do. Peace Be Still, coming soon, answers with King James verses pasted from a stored copy, labels every answer as AI, and never speaks as God."],
+      ["Is there an AI that answers Bible questions?", "Yes, several apps do. Peace Be Still, {{stores.short}}, answers with King James verses pasted from a stored copy, labels every answer as AI, and never speaks as God."],
       ["Does the Bible app use AI?", "Some Bible apps add AI chat and many do not. Check the app's own description: it should say whether answers are written by AI."],
       ["Is AI Bible chat accurate?", "Only as accurate as its design. If the AI writes verses itself, it can get them wrong. If the app pastes verses from a stored Bible, the scripture is exact, though the AI's own words still deserve a careful read."],
     ],
@@ -374,7 +374,7 @@ ${V("ISA 55:1")}`],
 <li>Keep the verse if it still fits.</li>
 </ol>`],
       ["Where do Black people come from in the Bible?", `<p>A common search people type alongside verse finders. Genesis 10:6 lists Cush, Mizraim (Egypt) and Phut among the sons of Ham, African lands. See <a href="/questions/who-are-black-people-in-the-bible/">who are Black people in the Bible</a> for what the text does and does not say.</p>`],
-      ["How Peace Be Still does it", `<p>In Peace Be Still, coming soon, you tell the chat what is going on, and it answers with a verse card: the reference, and the King James text pasted from the stored copy. Free version: one chat a day of up to 5 messages. Every answer is labelled as AI.</p>`],
+      ["How Peace Be Still does it", `<p>In Peace Be Still, {{stores.short}}, you tell the chat what is going on, and it answers with a verse card: the reference, and the King James text pasted from the stored copy. Free version: one chat a day of up to 5 messages. Every answer is labelled as AI.</p>`],
     ],
     faq: [
       ["Can AI give me a Bible verse for my situation?", "Yes. Describe the situation and ask for one verse with its reference. Then read the verse in its chapter; the AI chooses, but you decide whether it fits."],
@@ -392,7 +392,7 @@ ${V("ISA 55:1")}`],
     indexLabel: "Christian AI",
     indexNote: "A six-point checklist for any Christian AI app.",
     definition: "A Christian AI is an AI chat built to talk about faith, prayer and scripture from a Christian point of view. One you can trust quotes scripture exactly from a named translation, says it is AI, never speaks as God or Jesus, sends crisis messages to real help, tells you where your words go, and promises no outcomes.",
-    quick: "Check six things: exact verses, an AI label on every answer, no speaking as God, crisis words routed to 988, a plain note about where your words go, and no promises of money or healing. Peace Be Still, coming soon, was built around all six.",
+    quick: "Check six things: exact verses, an AI label on every answer, no speaking as God, crisis words routed to 988, a plain note about where your words go, and no promises of money or healing. Peace Be Still, {{stores.short}}, was built around all six.",
     bestFor: "Christians weighing an AI chat app, and pastors asked about them.",
     pick: PICK_EN("Our pick for a Christian AI that stays with scripture: Peace Be Still."),
     sections: [
@@ -432,7 +432,7 @@ ${V("ACT 17:11")}`],
     h1: "A Bible app for women: what to look for, and our pick",
     indexLabel: "Bible app for women",
     indexNote: "Stories of the women of scripture, morning and night, no trial.",
-    definition: "A Bible app for women is a Bible app whose stories, devotionals and voice speak to women's lives: the women of scripture told in full, a morning word to start the day, and something quiet at night. Look for exact scripture, the Bible read aloud, no ads and no trial. Our pick is Peace Be Still, coming soon.",
+    definition: "A Bible app for women is a Bible app whose stories, devotionals and voice speak to women's lives: the women of scripture told in full, a morning word to start the day, and something quiet at night. Look for exact scripture, the Bible read aloud, no ads and no trial. Our pick is Peace Be Still, {{stores.short}}.",
     quick: "Check four things: exact verses from a named translation, scripture read aloud free, stories that include the women of scripture, and honest pricing with no trial. Peace Be Still has all four, plus Hush Harbor in a Black church voice and Mi Refugio in Spanish.",
     bestFor: "women choosing a Bible app, and anyone buying one as a gift.",
     pick: PICK_EN("Our pick for a Bible app for women: Peace Be Still, for its morning-and-night rhythm and honest prices."),
@@ -457,10 +457,10 @@ ${V("EST 4:14")}`],
       ["Is there a free Bible app with no ads?", `<p>Peace Be Still has no ads, free or paid, ever. Its free version holds the whole King James Bible to read and hear, today's story, one chat a day of up to 5 messages, your first sleep night then one a week, and a daily declaration.</p>`],
       ["Which Bible app reads the Bible aloud?", `<p>Peace Be Still reads the whole King James Bible aloud in the free version, and the Reina-Valera 1909 in Spanish. Psalm Nights whisper a psalm at bedtime with a sleep timer.</p>`],
       ["Is there a Bible app with no free trial or weekly plan?", `<p>Yes: Peace Be Still has neither. $7.99 a month or $39.99 a year, cancel in two taps, and your price never rises while you stay.</p>`],
-      ["Can you use a Bible chat app for free?", `<p>In Peace Be Still, yes: one chat a day of up to 5 messages, for good. A paid plan adds unlimited Bible chat and a chat that remembers what you are carrying. With a paid plan: unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first.</p>`],
+      ["Can you use a Bible chat app for free?", `<p>In Peace Be Still, yes: one chat a day of up to 5 messages, for good. A paid plan adds unlimited Bible chat and a chat that remembers what you are carrying. With a paid plan: unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 75 messages a day. After that you can choose free chat, which isn't private; we always ask first.</p>`],
     ],
     faq: [
-      ["What is the best Bible app for women?", "Our pick is Peace Be Still, coming soon: the women of scripture in its stories, a morning declaration and whispered psalms at night, the whole KJV free to read, with a growing set of chapters read aloud, no ads and no trial. We make it, so weigh that."],
+      ["What is the best Bible app for women?", "Our pick is Peace Be Still, {{stores.short}}: the women of scripture in its stories, a morning declaration and whispered psalms at night, the whole KJV free to read, with a growing set of chapters read aloud, no ads and no trial. We make it, so weigh that."],
       ["Is there a Bible app for Black women?", "Peace Be Still's Hush Harbor · Black Bible Chat & Stories has a chat in a Black church voice and Bible stories told in a Black church voice, including Hagar and the Shunammite woman."],
       ["Is there a Bible app for women in Spanish?", "Yes. Mi Refugio · Biblia y Chat en Español is the Spanish journey in Peace Be Still, with the Reina-Valera 1909, at launch."],
     ],
@@ -474,7 +474,7 @@ ${V("EST 4:14")}`],
     h1: "A Bible app for teens: what parents should check first",
     indexLabel: "Bible app for teens",
     indexNote: "A parent's checklist, and Young Faith for ages 13 to 17.",
-    definition: "A good Bible app for a teenager gives plain answers to real questions, quotes scripture exactly, keeps stories short, has no ads, and keeps parents in charge of purchases. Peace Be Still, coming soon, has Young Faith · Bible for Teens for ages 13 to 17, with upgrades through Apple's Ask to Buy and no chat at all under 13.",
+    definition: "A good Bible app for a teenager gives plain answers to real questions, quotes scripture exactly, keeps stories short, has no ads, and keeps parents in charge of purchases. Peace Be Still, {{stores.short}}, has Young Faith · Bible for Teens for ages 13 to 17, with upgrades through Apple's Ask to Buy and no chat at all under 13.",
     quick: "Check: an age gate (no AI chat under 13), exact verses, no ads, purchases that need your approval, and a clear note about where typed words go. Young Faith has a 3-minute story, a declaration and plain answers, every verse from the King James Bible.",
     bestFor: "parents and youth pastors choosing a Bible app for 13 to 17 year olds.",
     pick: PICK_EN("Our pick for a teen Bible app: Peace Be Still's Young Faith, for ages 13 to 17."),

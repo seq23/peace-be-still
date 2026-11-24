@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Puts THE store call to action (site/content/parts.mjs storeCtaHtml, read from site/config/store.json)
-// on every page: replaces each <!-- cta:start -->…<!-- cta:end --> block. Run after store.json changes
+// on every page: replaces each <!-- cta:start -->…<!-- cta:end --> block (and the home hero's
+// <!-- hero-cta:start -->…<!-- hero-cta:end --> note, storeHeroHtml). Run after store.json changes
 // (store-watch.yml and `npm run store:set` do) and after every page build. Rule 0: exits 1 when it
 // finds no page with a CTA block.
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { claimHtml, claimKind, storeCtaHtml, langOf, sourceOf, storeConfig } from "../content/parts.mjs";
+import { claimHtml, claimKind, storeCtaHtml, storeHeroHtml, langOf, sourceOf, storeConfig } from "../content/parts.mjs";
 
 export const doorOf = (html) => String(html).match(/<meta name="pbs:door" content="(\w+)"/)?.[1] || "neutral";
 
@@ -22,7 +23,8 @@ export function applyCta() {
       // The privacy lead (home hero, the Bible chat pages, the Mindset hub) comes from the same strings as
       // the app; Mindset pages and the two-door home pages carry it with no faith words.
       const rel = p.slice(pub.length), door = doorOf(s);
-      const out = s.replace(/<!-- claim:start -->[\s\S]*?<!-- claim:end -->/g, `<!-- claim:start -->${claimHtml(langOf(s), claimKind(rel, door))}<!-- claim:end -->`).replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, storeCtaHtml(langOf(s), storeConfig(), sourceOf(rel), rel, door));
+      const out = s.replace(/<!-- claim:start -->[\s\S]*?<!-- claim:end -->/g, `<!-- claim:start -->${claimHtml(langOf(s), claimKind(rel, door))}<!-- claim:end -->`).replace(/<!-- cta:start -->[\s\S]*?<!-- cta:end -->/g, storeCtaHtml(langOf(s), storeConfig(), sourceOf(rel), rel, door))
+        .replace(/<!-- hero-cta:start -->[\s\S]*?<!-- hero-cta:end -->/g, storeHeroHtml(langOf(s), storeConfig(), sourceOf(rel), rel, door));
       if (out !== s) writeFileSync(p, out);
       n++;
     }

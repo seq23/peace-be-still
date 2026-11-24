@@ -4,7 +4,7 @@
 // and below it. Every count and price comes from facts() (the app's settings); the privacy lead and the
 // store CTA are filled by apply-cta.mjs between their markers. site/test/mindset.test.mjs checks the doors.
 import { readFileSync } from "node:fs";
-import { BASE, facts, footerHtml, headerHtml, privacyClaim } from "./parts.mjs";
+import { BASE, facts, fillStores, footerHtml, headerHtml, orgSameAs, privacyClaim, storeConfig } from "./parts.mjs";
 import { Q, cite } from "./scripture.mjs";
 
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
@@ -31,11 +31,10 @@ function words(lang) {
   const c = privacyClaim(lang, "any");
   if (lang === "es") return {
     title: "Peace Be Still: noches tranquilas, palabras para el día y chat privado",
-    description: "Peace Be Still, muy pronto: una app con dos puertas. Palabra de Dios (la Biblia Reina-Valera 1909, Salmos susurrados, chat bíblico) y Mentalidad (declaraciones e Imagination Nights).",
+    description: "Peace Be Still es una app con dos puertas: Palabra de Dios (la Biblia Reina-Valera 1909, Salmos susurrados, chat bíblico) y Mentalidad (declaraciones e Imagination Nights). {{stores.line}}",
     ogTitle: "Peace Be Still: una gran calma, cada noche", locale: "es_US", og: "og-es.png", skipFaith: "#palabra-de-dios",
-    name: "Peace Be Still · muy pronto", h1: "Una gran calma, cada noche.",
+    name: "Peace Be Still · {{stores.eyebrow}}", h1: "Una gran calma, cada noche.",
     lead: "Noches tranquilas y palabras para el día, a tu manera. Peace Be Still es una app para el final del día que hace una sola pregunta, “¿Qué necesitas esta noche?”, y abre una de dos puertas. Empezar es gratis, sin anuncios y sin prueba.",
-    soonB: "Muy pronto en el App Store y Google Play", soonS: "Todavía no hay fecha. Cuando la app esté disponible, esta página llevará directo a ella.",
     doorsH: "Dos puertas. Elige la tuya.", doorsP: "Cada puerta va por su lado, y puedes cambiar tu elección luego en Ajustes.",
     faith: { h: "Con la Palabra de Dios", p: "Escrituras, oración e historias bíblicas para leer y escuchar. Cada versículo es de la Reina-Valera 1909, palabra por palabra.", li: ["La Biblia completa para leer", "Un chat bíblico que responde con versículos reales", "Salmos susurrados para dormir y una historia bíblica cada día"], go: "Ver la Palabra de Dios ›", href: "#palabra-de-dios" },
     mind: { h: "Con mente e imaginación", p: "Palabras tranquilas en la mañana e imaginación en la noche, sin contenido religioso.", li: ["Morning Word: una frase para decir en voz alta, de mañana y de noche", "Imagination Nights: sesiones susurradas para dormir dentro de una escena", "Un chat de Mentalidad tranquilo"], go: "Ver Mentalidad ›", href: "/es/mentalidad/" },
@@ -66,26 +65,25 @@ function words(lang) {
     priceNote: "Precios en dólares de EE. UU., visibles en la app antes de tocar. Tu precio nunca sube mientras sigas.",
     faqH: "Preguntas frecuentes",
     faq: [
-      ["¿Qué es Peace Be Still?", "Peace Be Still es una app para el final del día. Empieza con una pregunta, “¿Qué necesitas esta noche?”, y dos puertas: la Palabra de Dios, con la Biblia, Salmos susurrados para dormir, chat bíblico e historias; y Mentalidad, con declaraciones diarias, Imagination Nights y un chat tranquilo. Llega muy pronto."],
+      ["¿Qué es Peace Be Still?", "Peace Be Still es una app para el final del día. Empieza con una pregunta, “¿Qué necesitas esta noche?”, y dos puertas: la Palabra de Dios, con la Biblia, Salmos susurrados para dormir, chat bíblico e historias; y Mentalidad, con declaraciones diarias, Imagination Nights y un chat tranquilo. {{stores.line}}"],
       ["¿Peace Be Still es gratis?", `Sí. La versión gratis sigue gratis: un chat al día de hasta ${F.free} mensajes, tu primera noche de sueño y luego una por semana, una declaración diaria y un diario; en la Palabra de Dios, además, la Biblia completa y la historia de hoy. Un plan de pago cuesta ${F.monthly} al mes o ${F.yearly} al año.`],
       ["¿El chat es privado?", `Con un plan de pago, sí: privado hasta ${F.paid} mensajes al día y nunca se usa para entrenar IA. El chat gratis usa un servicio de IA gratis que puede guardar lo que escribes, y la app siempre pregunta antes.`],
-      ["¿Cuándo sale Peace Be Still?", "Peace Be Still llega muy pronto al App Store y a Google Play. Todavía no hay fecha. Cuando la app esté disponible, esta página llevará directo a ella."],
+      ["¿Ya salió Peace Be Still?", "{{stores.out}}"],
       ["¿Qué Biblia usa la puerta de la Palabra de Dios?", "En español, la Reina-Valera 1909, citada palabra por palabra de una copia guardada, con libro, capítulo y versículo. En inglés, la King James Version. La IA nunca escribe un versículo de memoria."],
       ["¿La puerta de Mentalidad es religiosa?", "No. Mentalidad no tiene contenido religioso: declaraciones diarias, imaginación en la noche y un chat tranquilo. Cada puerta va por su lado."],
       ["¿Hay una prueba?", "No. No hay prueba que se convierta en un cobro. La versión gratis es gratis para siempre. La de pago empieza solo cuando tú la eliges, con el precio en dólares a la vista antes de tocar, y se cancela en dos toques."],
       ["¿El chat es una persona?", "No. El chat es IA y cada respuesta lo dice. No es un pastor, un consejero ni una persona."],
     ],
-    closingLab: "Muy pronto", closingH: "Muy pronto en el App Store y Google Play", closingP: "Una gran calma, cada noche.",
+    closingLab: "{{stores.heroB}}", closingH: "{{stores.heroB}}", closingP: "Una gran calma, cada noche.",
     byline: `Por Peace Be Still · una app de Spry Labs · Publicado el 18 nov 2026 · Actualizado el 21 nov 2026`,
     skip: "Ir al contenido",
   };
   return {
-    title: "Peace Be Still: Whispered Sleep, Daily Words and Private Chat, Coming Soon",
-    description: "Peace Be Still is a coming-soon phone app with two doors: God's Word (the King James Bible, whispered Psalms, Bible chat) and Mindset (daily declarations, Imagination Nights, a calm chat).",
+    title: "Peace Be Still: Whispered Sleep, Daily Words and Private Chat{{stores.title}}",
+    description: "Peace Be Still is a phone app with two doors: God's Word (the King James Bible, whispered Psalms, Bible chat) and Mindset (daily declarations, Imagination Nights, a calm chat). {{stores.line}}",
     ogTitle: "Peace Be Still: a great calm, every night", locale: "en_US", og: "og.png",
-    name: "Peace Be Still · coming soon", h1: "A great calm, every night.",
+    name: "Peace Be Still · {{stores.eyebrow}}", h1: "A great calm, every night.",
     lead: "Calm nights and daily words, in the way that fits you. Peace Be Still is a phone app for the end of the day: it asks one question, “What do you need tonight?”, and opens one of two doors. It is free to start, with no ads and no trial.",
-    soonB: "Coming soon to the App Store and Google Play", soonS: "No date yet. When the app is live, this page will link straight to it.",
     doorsH: "Two doors. Pick yours.", doorsP: "Each door keeps to itself, and you can change your pick later in Settings.",
     faith: { h: "With God's Word", p: "Scripture, prayer and Bible stories, read and spoken. Every verse is the King James Version, word for word.", li: ["The whole King James Bible to read, and chapters read aloud", "A Bible chat that answers with real verses", "Whispered Psalms at bedtime, and a Bible story each day"], go: "See God's Word ›", href: "#gods-word" },
     mind: { h: "With mindset &amp; imagination", p: "Calm words in the morning and imagination at night, with no religious content.", li: ["Morning Word: one line to say out loud, morning and night", "Imagination Nights: whispered sleep sessions inside a scene", "A calm Mindset chat"], go: "See Mindset ›", href: "/mindset/" },
@@ -116,16 +114,16 @@ function words(lang) {
     priceNote: "Prices are in US dollars and are shown in the app before you tap. Your price never rises while you stay.",
     faqH: "Frequently asked questions",
     faq: [
-      ["What is Peace Be Still?", "Peace Be Still is a phone app for the end of the day. It opens with one question, “What do you need tonight?”, and two doors: God's Word, with the King James Bible, whispered Psalms for sleep, Bible chat and Bible stories; and Mindset, with daily declarations, Imagination Nights and a calm chat. It is coming soon."],
+      ["What is Peace Be Still?", "Peace Be Still is a phone app for the end of the day. It opens with one question, “What do you need tonight?”, and two doors: God's Word, with the King James Bible, whispered Psalms for sleep, Bible chat and Bible stories; and Mindset, with daily declarations, Imagination Nights and a calm chat. It is {{stores.short}}."],
       ["Is Peace Be Still free?", `Yes. The free version stays free: one chat a day of up to ${F.free} messages, your first sleep night and then one a week, a daily declaration and a journal; in God's Word, also the whole King James Bible and today's story. A paid plan is ${F.monthly} a month or ${F.yearly} a year.`],
       ["Is the chat private?", `With a paid plan, yes: private for up to ${F.paid} messages a day and never used to train AI. Free chat uses a free AI service that may keep what you type, and the app always asks first.`],
-      ["When does Peace Be Still launch?", "Peace Be Still is coming soon to the App Store and Google Play. There is no launch date yet. When the app is live, this page will link straight to it."],
+      ["Is Peace Be Still out yet?", "{{stores.out}}"],
       ["Which Bible does the God's Word door use?", "The King James Version, quoted word for word from a stored copy, with book, chapter and verse. The AI never writes a verse from memory. The Spanish journey, Mi Refugio, uses the Reina-Valera 1909."],
       ["Is the Mindset door religious?", "No. Mindset has no religious content: daily declarations, imagination at night and a calm chat. Each door keeps to itself."],
       ["Is there a trial?", "No. There is no trial that turns into a charge. The free version is free for good. A paid plan starts only when you choose it, with the price in dollars shown before you tap, and you can cancel in two taps."],
       ["Is the chat a real person?", "No. The chat is AI, and every answer is labelled as AI. It is not a pastor, a counselor or a person."],
     ],
-    closingLab: "Coming soon", closingH: "Coming soon to the App Store and Google Play", closingP: "A great calm, every night.",
+    closingLab: "{{stores.heroB}}", closingH: "{{stores.heroB}}", closingP: "A great calm, every night.",
     byline: "By Peace Be Still · a Spry Labs app · Published 18 Nov 2026 · Updated 21 Nov 2026",
     skip: "Skip to the page",
   };
@@ -145,23 +143,26 @@ ${d.li.map((x) => `          <li>${x}</li>`).join("\n")}
         <a class="door-go" href="${d.href}">${d.go}</a>
       </div><!-- /door:${id} -->`;
 
-export function homeHtml(lang) {
+export function homeHtml(lang, store = storeConfig()) {
   const t = words(lang);
+  // Each live store's listing (store.json, the one source): schema.org downloadUrl/installUrl.
+  const listings = [store.app_store_url, store.play_url].filter(Boolean);
   const es = lang === "es";
   const path = es ? "/es/" : "/";
   const url = `${BASE}${path}`;
   const ld = { "@context": "https://schema.org", "@graph": [
-    { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
+    { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: orgSameAs(store), parentOrganization: ENTITY.parentOrganization },
     { "@type": "WebSite", "@id": `${BASE}/#site`, name: "Peace Be Still", url: `${BASE}/`, inLanguage: ["en", "es"], publisher: { "@id": `${BASE}/#org` } },
     { "@type": "WebPage", "@id": `${url}#page`, url, name: t.title, inLanguage: lang, isPartOf: { "@id": `${BASE}/#site` }, about: { "@id": `${BASE}/#app` }, datePublished: PUBLISHED, dateModified: UPDATED, speakable: { "@type": "SpeakableSpecification", cssSelector: ["#what", "#faq"] } },
     { "@type": "MobileApplication", "@id": `${BASE}/#app`, name: "Peace Be Still", operatingSystem: "iOS, Android", applicationCategory: "LifestyleApplication", inLanguage: ["en", "es"],
-      description: "A phone app with two doors: God's Word (the King James Bible to read and hear, whispered Psalms for sleep, Bible chat, daily declarations) and Mindset (daily declarations, Imagination Nights and a calm chat). Coming soon; not yet in any app store.",
+      description: "A phone app with two doors: God's Word (the King James Bible to read and hear, whispered Psalms for sleep, Bible chat, daily declarations) and Mindset (daily declarations, Imagination Nights and a calm chat). {{stores.ld}}",
       publisher: { "@id": `${BASE}/#org` },
+      ...(listings.length ? { downloadUrl: listings.length === 1 ? listings[0] : listings, installUrl: listings[0] } : {}),
       offers: [{ "@type": "Offer", name: "Free version", price: "0", priceCurrency: "USD" }, { "@type": "Offer", name: "Paid plan, monthly", price: F.monthly.slice(1), priceCurrency: "USD" }, { "@type": "Offer", name: "Paid plan, yearly", price: F.yearly.slice(1), priceCurrency: "USD" }] },
     { "@type": "FAQPage", "@id": `${url}#faqpage`, mainEntity: t.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: plain(a) } })) },
   ] };
   const pf = t.phoneFaith, pm = t.phoneMind;
-  return `<!doctype html>
+  return fillStores(`<!doctype html>
 <html lang="${lang}">
 <head>
 <meta name="pbs:door" content="neutral">
@@ -205,10 +206,7 @@ ${headerHtml(lang, null)}
       <h1><span class="name">${t.name}</span>${t.h1}</h1>
       <!-- claim:start --><!-- claim:end -->
       <p class="lead" id="what">${t.lead}</p>
-      <div class="soon" role="note">
-        <img src="/brand/pbs-mark-dark.svg" alt="" width="44" height="44">
-        <p><b>${t.soonB}</b><span>${t.soonS}</span></p>
-      </div>
+      <!-- hero-cta:start --><!-- hero-cta:end -->
     </div>
   </div>
   <section class="wrap" aria-labelledby="doors-h">
@@ -335,5 +333,5 @@ ${t.faq.map(([q, a]) => `      <div><h3>${q}</h3><p>${a}</p></div>`).join("\n")}
 <!-- footer:start -->${footerHtml(lang, UPDATED)}<!-- footer:end -->
 </body>
 </html>
-`;
+`, lang, store);
 }
