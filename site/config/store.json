@@ -1,6 +1,6 @@
 {
   "why": "One source of truth for the store buttons on every page (owner 18 Nov 2026: no waitlist; 'look for it in the Apple App Store and Google Play ... flip a switch'). null = 'coming soon' text for that store; a URL = that store's official badge linking to the listing. Set by hand the day a store approves: npm run store:set -- --ios <url> --play <url>, then land the PR as usual.",
-  "app_store_url": null,
+  "app_store_url": "https://apps.apple.com/us/app/peace-be-still/id6837331126",
   "play_url": null,
   "es_listing_spanish_legal": true,
   "es_listing_spanish_legal_why": "ON since the owner's yes on 20 Nov 2026 (commit f26135d): the es-MX store listing links the Spanish legal pages (/es/privacidad, /es/terminos), and the release gate fails if store/listing-es.md disagrees. To go back to the English pages marked (en inglés): npm run store:set -- --es-legal off, then land the PR as usual.",
