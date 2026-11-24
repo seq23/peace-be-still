@@ -4,7 +4,7 @@
 // and below it. Every count and price comes from facts() (the app's settings); the privacy lead and the
 // store CTA are filled by apply-cta.mjs between their markers. site/test/mindset.test.mjs checks the doors.
 import { readFileSync } from "node:fs";
-import { BASE, facts, fillStores, footerHtml, headerHtml, privacyClaim, storeConfig } from "./parts.mjs";
+import { BASE, facts, fillStores, footerHtml, headerHtml, orgSameAs, privacyClaim, storeConfig } from "./parts.mjs";
 import { Q, cite } from "./scripture.mjs";
 
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
@@ -151,7 +151,7 @@ export function homeHtml(lang, store = storeConfig()) {
   const path = es ? "/es/" : "/";
   const url = `${BASE}${path}`;
   const ld = { "@context": "https://schema.org", "@graph": [
-    { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
+    { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: orgSameAs(store), parentOrganization: ENTITY.parentOrganization },
     { "@type": "WebSite", "@id": `${BASE}/#site`, name: "Peace Be Still", url: `${BASE}/`, inLanguage: ["en", "es"], publisher: { "@id": `${BASE}/#org` } },
     { "@type": "WebPage", "@id": `${url}#page`, url, name: t.title, inLanguage: lang, isPartOf: { "@id": `${BASE}/#site` }, about: { "@id": `${BASE}/#app` }, datePublished: PUBLISHED, dateModified: UPDATED, speakable: { "@type": "SpeakableSpecification", cssSelector: ["#what", "#faq"] } },
     { "@type": "MobileApplication", "@id": `${BASE}/#app`, name: "Peace Be Still", operatingSystem: "iOS, Android", applicationCategory: "LifestyleApplication", inLanguage: ["en", "es"],

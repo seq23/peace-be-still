@@ -10,6 +10,13 @@ import { readFileSync } from "node:fs";
 export function storeConfig() {
   return JSON.parse(readFileSync(new URL("../config/store.json", import.meta.url), "utf8"));
 }
+/** The Organization's sameAs: entity.json's profiles plus each live store listing from store.json
+ *  (the one place the listing URLs are written), so a store going live joins sameAs with no second copy.
+ *  Read by every page's JSON-LD and by scripts/entity-watch.mjs. */
+export function orgSameAs(store = storeConfig()) {
+  const entity = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
+  return [...new Set([...(entity.sameAs || []), store.app_store_url, store.play_url].filter(Boolean))];
+}
 // THE launch state in words. Every sentence on the site that says where the app can be had is a
 // {{stores.<form>}} token, filled at build time by fillStores() from store.json, so `npm run store:set`
 // (which rebuilds every page) is the only switch: no copy hunt when a store goes live. Forms:
@@ -32,16 +39,16 @@ const STORE_WORDS = {
     both: { tag: "que ya está en el App Store y en Google Play", short: "que ya está en el App Store y en Google Play", line: "Ya está en el App Store y en Google Play.", out: "Sí. Ya está en el App Store y en Google Play: toca un botón de tienda en esta página o busca “Peace Be Still”. No hay lista de espera.", heroB: "Ya está en el App Store y en Google Play", heroS: "Para iPhone y Android.", ld: "En el App Store y en Google Play.", eyebrow: "en el App Store y Google Play" },
   },
   ko: {
-    soon: { line: "곧 App Store에 나와요", out: "곧 나와요. 앱이 올라가면 이 페이지 아래 버튼이 바로 App Store로 연결돼요.", intro: "아직 App Store에 나오기 전이에요. 앱이 나오면 바로 아래 기능을 쓰실 수 있어요." },
+    soon: { line: "곧 App Store에 나와요", out: "아직이에요. 곧 나와요. 앱이 올라가면 이 페이지 아래 버튼이 바로 App Store로 연결돼요.", intro: "아직 App Store에 나오기 전이에요. 앱이 나오면 바로 아래 기능을 쓰실 수 있어요." },
     ios: { line: "지금 App Store에 있어요", out: "네. 지금 iPhone용 App Store에 있어요. 이 페이지 아래 App Store 버튼을 누르시거나 App Store에서 “Peace Be Still”을 검색해 주세요. Google Play에는 곧 나와요.", intro: "지금 iPhone용 App Store에서 받으실 수 있어요. 앱에는 아래 기능이 있어요." },
-    play: { line: "지금 Google Play에 있어요", out: "아직 App Store에는 없어요. 지금은 Android용 Google Play에 있고, App Store에는 곧 나와요.", intro: "지금 Android용 Google Play에서 받으실 수 있어요. 앱에는 아래 기능이 있어요." },
+    play: { line: "지금 Google Play에 있어요", out: "아직이에요. 지금은 Android용 Google Play에 있고, App Store에는 곧 나와요.", intro: "지금 Android용 Google Play에서 받으실 수 있어요. 앱에는 아래 기능이 있어요." },
     both: { line: "App Store와 Google Play에 있어요", out: "네. App Store와 Google Play에 있어요. 이 페이지 아래 버튼을 누르시거나 “Peace Be Still”을 검색해 주세요.", intro: "App Store와 Google Play에서 받으실 수 있어요. 앱에는 아래 기능이 있어요." },
   },
   "zh-Hans": {
-    soon: { line: "即将上架 App Store" },
-    ios: { line: "已在 App Store 上架" },
-    play: { line: "已在 Google Play 上架" },
-    both: { line: "已在 App Store 和 Google Play 上架" },
+    soon: { line: "即将上架 App Store", out: "还不能。快了。上架以后，页面下方的按钮会直接链接到 App Store。", intro: "应用还没有在 App Store 上架。上架以后，可以用的是下面这些：" },
+    ios: { line: "已在 App Store 上架", out: "可以。应用已在 iPhone 的 App Store 上架：点页面下方的 App Store 按钮，或在 App Store 搜索“Peace Be Still”。Google Play 版即将推出。", intro: "应用已在 iPhone 的 App Store 上架，可以用的是下面这些：" },
+    play: { line: "已在 Google Play 上架", out: "还不能。现在可以在 Android 的 Google Play 下载，App Store 版即将推出。", intro: "应用已在 Android 的 Google Play 上架，可以用的是下面这些：" },
+    both: { line: "已在 App Store 和 Google Play 上架", out: "可以。应用已在 App Store 和 Google Play 上架：点页面下方的按钮，或搜索“Peace Be Still”。", intro: "应用已在 App Store 和 Google Play 上架，可以用的是下面这些：" },
   },
 };
 /** The launch-state words for one language and store state (see STORE_WORDS). */
@@ -114,8 +121,8 @@ const CTA = {
     soonH: "Look for Peace Be Still in the App Store and Google Play",
     liveH: "Get Peace Be Still",
     p: "Free to download, with a free version that stays free. No ads, no trial.",
-    iosSoon: "Coming soon to the App Store · search “Peace Be Still”",
-    playSoon: "Coming soon to Google Play · search “Peace Be Still”",
+    iosSoon: "App Store: coming soon",
+    playSoon: "Google Play: coming soon",
     iosAlt: "Download on the App Store",
     playAlt: "Get it on Google Play",
   },
@@ -123,8 +130,8 @@ const CTA = {
     soonH: "Busca Peace Be Still en el App Store y Google Play",
     liveH: "Descarga Peace Be Still",
     p: "Gratis para descargar, con un camino gratis que siempre es gratis. Sin anuncios, sin prueba.",
-    iosSoon: "Muy pronto en el App Store · busca “Peace Be Still”",
-    playSoon: "Muy pronto en Google Play · busca “Peace Be Still”",
+    iosSoon: "App Store: muy pronto",
+    playSoon: "Google Play: muy pronto",
     iosAlt: "Descárgalo en el App Store",
     playAlt: "Disponible en Google Play",
   },

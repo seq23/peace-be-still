@@ -6,13 +6,14 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PAGES } from "../content/questions.mjs";
-import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE, fillStores, storeConfig, storeWords } from "../content/parts.mjs";
+import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE, fillStores, orgSameAs, storeConfig, storeWords } from "../content/parts.mjs";
 import { applyCta } from "./apply-cta.mjs";
 import { legalPages } from "../content/legal.mjs";
 import { homeHtml } from "../content/home.mjs";
 
 const pub = new URL("../public/", import.meta.url).pathname;
 const ENTITY = JSON.parse(readFileSync(new URL("../../entity.json", import.meta.url), "utf8"));
+const SAME_AS = orgSameAs();
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const text = (html) => html.replace(/<q\b[^>]*>/g, "“").replace(/<\/q>/g, "”").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
@@ -47,8 +48,8 @@ function render(p) {
     "@graph": [
       { "@type": "Article", "@id": `${url}#article`, headline: p.h1, description: p.description, inLanguage: p.lang, url,
         datePublished: p.published, dateModified: p.updated, image: `${BASE}/${og}`,
-        author: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
-        publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: { "@type": "ImageObject", url: `${BASE}/icon-512.png` }, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization },
+        author: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: SAME_AS, parentOrganization: ENTITY.parentOrganization },
+        publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: { "@type": "ImageObject", url: `${BASE}/icon-512.png` }, sameAs: SAME_AS, parentOrganization: ENTITY.parentOrganization },
         isPartOf: { "@id": `${BASE}/#site` },
         ...(p.audience ? { audience: { "@type": "Audience", audienceType: p.audience } } : {}),
         speakable: { "@type": "SpeakableSpecification", cssSelector: ["#what", "#faq"] } },
@@ -148,7 +149,7 @@ function renderIndex(lang, list) {
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, dateModified: UPDATED, isPartOf: { "@id": `${BASE}/#site` }, publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: ENTITY.sameAs, parentOrganization: ENTITY.parentOrganization }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
+<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", url: `${BASE}${path}`, name: title, inLanguage: lang, dateModified: UPDATED, isPartOf: { "@id": `${BASE}/#site` }, publisher: { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: SAME_AS, parentOrganization: ENTITY.parentOrganization }, breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: es ? "Preguntas" : "Questions", item: `${BASE}${path}` }] } })}</script>
 </head>
 <body>
 ${headerHtml(lang, null)}
