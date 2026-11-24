@@ -74,3 +74,12 @@ behind it (ship-ready app-review.md). A PR that adds a screen, button or plan li
 for the site's own capture (`site.yml`).
 A screen opened directly (a changed file with no journey of its own) opens as an onboarded adult (`route_storage`),
 so a changed `/paid` is tapped like a member would reach it, not bounced to the door.
+
+## Over-the-air fixes (EAS Update, free tier)
+- From app 1.0.1 on, a store build carries `expo-updates` on channel `production` (eas.json). A phone checks at launch and runs a new JS bundle on its next launch. 1.0.0 has no updater.
+- An update reaches only builds of the same app version (`runtimeVersion: { policy: 'appVersion' }`). Any native change (new package, plugin, permission, icon, splash) is a new store version, never an update.
+- Send one only from landed main: `cd ~/GitHub/boss-os && npm run -s vault:run -- bash ~/GitHub/peace-be-still/scripts/ota-update.sh "what this fixes"`. The script stops on a dirty tree, a HEAD that is not origin/main, a missing message or EXPO_TOKEN; `otaKeyStop` in app/app.config.ts stops a bundle without both RevenueCat store keys (it would leave live users unable to buy or restore).
+- Undo: from app/, `npx eas-cli@27.11.0 update:rollback` (or `update:republish --group <previous group>`).
+
+## Live library
+- The app lists every Bible chapter, psalm, story and night that audio/publish.py has served on R2 (`manifest.jsonl`), not only what was bundled at build time. Stories and nights are listed live only with their title (and key verse, journey and call-and-response pauses) served on the row; a row without a title waits for the next build. Failed or held recordings are never in the served manifest.

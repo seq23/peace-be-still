@@ -174,6 +174,60 @@ class Served(unittest.TestCase):
         text = publish.served_text({"b": {"file": "b"}, "a": {"file": "a"}})
         self.assertEqual([json.loads(x)["file"] for x in text.splitlines()], ["a", "b"])
 
+    def test_every_story_and_night_is_served_with_what_the_app_lists_it_by(self):
+        # The app lists a story or night published after its build from these fields alone (library.ts liveLibrary).
+        for kind in ("stories", "psalm-night", "imagination-night"):
+            r = next(x for x in REAL if x["kind"] == kind and x["status"] == "passed")
+            out = publish.public_row(r)
+            doc = json.loads((fill.REPO / r["ref"].split("#")[0]).read_text())
+            self.assertEqual(out["title"], doc["title"].strip(), kind)
+            self.assertNotIn("checks", out)
+        night = next(x for x in REAL if x["kind"] == "psalm-night" and x["status"] == "passed")
+        self.assertEqual(publish.public_row(night)["scripture_ref"], json.loads((fill.REPO / night["ref"].split("#")[0]).read_text())["main"][0])
+
+    def test_a_story_key_verse_is_the_one_its_call_and_response_answers(self):
+        blocks = [{"type": "scripture", "ref": "PSA 1:1"}, {"type": "text"}, {"type": "scripture", "ref": "JHN 3:16"},
+                  {"type": "call_response"}, {"type": "scripture", "ref": "ROM 8:28"}]
+        self.assertEqual(publish.key_scripture(blocks), "JHN 3:16")
+        self.assertEqual(publish.key_scripture([{"type": "text"}, {"type": "scripture", "ref": "PSA 23:1"}]), "PSA 23:1")
+        self.assertIsNone(publish.key_scripture("not a list"))
+
+    def test_call_and_response_pauses_are_served_and_bad_ones_are_not(self):
+        story = next(x for x in REAL if x["kind"] == "stories" and x["status"] == "passed")
+        good = {**story, "checks": {"pause_starts_s": [12.5, 40.0]}}
+        self.assertEqual(publish.public_row(good)["pause_starts_s"], [12.5, 40.0])
+        for bad in ([12.5], ["a", "b"], None):
+            self.assertNotIn("pause_starts_s", publish.public_row({**story, "checks": {"pause_starts_s": bad}}))
+
+    def test_a_scripture_row_or_a_path_outside_the_scripts_gets_no_display(self):
+        self.assertEqual(publish.script_display(row("en/psalms/kjv-psa-001.m4a")), {})
+        self.assertEqual(publish.script_display(row("x.m4a", kind="stories", ref="audio/manifest.jsonl")), {})
+        self.assertEqual(publish.script_display(row("x.m4a", kind="stories", ref="content/stories/../../package.json")), {})
+
+    def test_a_row_served_before_today_gets_its_display_on_the_next_run(self):
+        story = next(x for x in REAL if x["kind"] == "stories" and x["status"] == "passed")
+        story = {**story, "shelved": "gdrive:shelf/x"}
+        old = {k: story[k] for k in publish.PUBLIC_FIELDS}
+        with tempfile.TemporaryDirectory() as home, mock.patch.object(fill, "HOME", Path(home)), \
+                mock.patch.object(publish, "connect"), mock.patch.object(publish, "account_bytes", return_value=1.0), \
+                mock.patch.object(fill, "read_manifest", return_value=[story]), \
+                mock.patch.object(publish, "r2_listing", return_value={story["file"]: {"Size": 1}, publish.SERVED: {"Size": 1}}), \
+                mock.patch.object(publish, "read_ledger", return_value={story["file"]: old}), \
+                mock.patch.object(publish, "publish_one") as upload, mock.patch.object(publish, "write_ledger") as write:
+            self.assertEqual(publish.main([]), 0)
+        upload.assert_not_called()
+        written = write.call_args[0][0][story["file"]]
+        self.assertEqual(written["title"], publish.public_row(story)["title"])
+
+
+    def test_only_a_script_under_the_spoken_folders_is_read_even_with_a_title(self):
+        with tempfile.TemporaryDirectory() as repo, mock.patch.object(fill, "REPO", Path(repo)):
+            for rel in ("content/stories/a.json", "content/private/b.json", "c.json"):
+                (Path(repo) / rel).parent.mkdir(parents=True, exist_ok=True)
+                (Path(repo) / rel).write_text(json.dumps({"title": "T"}))
+            self.assertEqual(publish.script_display(row("a.m4a", kind="stories", ref="content/stories/a.json")), {"title": "T"})
+            for ref in ("content/private/b.json", "c.json", "content/stories/../private/b.json"):
+                self.assertEqual(publish.script_display(row("x.m4a", kind="stories", ref=ref)), {}, ref)
 
 if __name__ == "__main__":
     unittest.main()

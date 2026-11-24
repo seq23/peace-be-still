@@ -8,10 +8,10 @@ Per file (a manifest row with status passed, a sha256 and a Drive `shelved` path
   -> `rclone copyto <shelved> r2:<bucket>/<file>` (Drive streams straight into R2: the Mac never holds
   the file) -> R2's size and md5 must equal Drive's (else the object is deleted: NAMED STOP R2_HASH_MISMATCH).
 The served manifest `manifest.jsonl` at the bucket root is the ledger: one public row per file that is
-in R2 (file, kind, lang, ref, seconds, sha256, voice, status, and a story's title; never checks or
-Drive paths). A file whose ledger sha256 equals the manifest's is done, so every run is idempotent and
+in R2 (file, kind, lang, ref, seconds, sha256, voice, status, and a story's or night's title, key verse,
+journey and pause timings; never checks or Drive paths). A file whose ledger sha256 equals the manifest's is done, so every run is idempotent and
 a run cut off by its time box resumes where it stopped. The app reads <audioBaseUrl>/manifest.jsonl
-to check which tracks from the bundled catalog it can stream.
+to check which tracks it can stream and to list every track published after its build.
 
 Where (her ruling 20 Nov 2026): her SECOND Cloudflare account. Its free 10 GB is shared by every bucket
 on it (this library, the private made-for-you bucket, anything else), so the cap is read for the WHOLE
@@ -75,22 +75,55 @@ def todo(cands: dict[str, dict], ledger: dict[str, dict], in_r2: dict[str, dict]
             if not (f in ledger and ledger[f].get("sha256") == r["sha256"] and f in in_r2)]
 
 
-def story_title(row: dict) -> str | None:
-    p = (fill.REPO / row["ref"]).resolve()
-    if row.get("kind") != "stories" or not str(p).startswith(str(fill.REPO / "content")) or not p.is_file():
+# The spoken scripts whose title, key verse, journey and pause timings the app shows (app/src/player/build-library.ts
+# reads the same files at build time; this serves them so a story or night published after a build still lists).
+SCRIPT_ROOTS = ("stories", "psalm-nights", "imagination-nights")
+NIGHT_JOURNEYS = ("grief", "back-to-sleep")
+
+
+def key_scripture(blocks) -> str | None:
+    """A story's key verse: the Scripture its call and response answers (the last one before it), else its first."""
+    if not isinstance(blocks, list):
         return None
+    is_ref = lambda b: isinstance(b, dict) and b.get("type") == "scripture" and isinstance(b.get("ref"), str)
+    call = next((i for i, b in enumerate(blocks) if isinstance(b, dict) and b.get("type") == "call_response"), -1)
+    for b in reversed(blocks[:max(call, 0)]):
+        if is_ref(b):
+            return b["ref"]
+    return next((b["ref"] for b in blocks if is_ref(b)), None)
+
+
+def script_display(row: dict) -> dict:
+    """The served display fields of a story or night (title, scripture_ref, journey, pause_starts_s); {} for
+    scripture rows or an unreadable script, which the app then lists by its bundled copy only."""
+    repo = fill.REPO.resolve()
+    p = (repo / str(row.get("ref", "")).split("#")[0]).resolve()
+    if not any(str(p).startswith(str(repo / "content" / root) + "/") for root in SCRIPT_ROOTS) \
+            or p.suffix != ".json" or not p.is_file():
+        return {}
     try:
-        t = json.loads(p.read_text("utf-8")).get("title")
+        doc = json.loads(p.read_text("utf-8"))
     except Exception:
-        return None
-    return t.strip() if isinstance(t, str) and t.strip() else None
+        return {}
+    title = doc.get("title")
+    if not isinstance(title, str) or not title.strip():
+        return {}
+    out: dict = {"title": title.strip()}
+    main = doc.get("main")
+    ref = key_scripture(doc.get("blocks")) or (main[0] if isinstance(main, list) and main and isinstance(main[0], str) else None)
+    if ref:
+        out["scripture_ref"] = ref
+    if doc.get("journey") in NIGHT_JOURNEYS:
+        out["journey"] = doc["journey"]
+    starts = (row.get("checks") or {}).get("pause_starts_s")
+    if isinstance(starts, list) and len(starts) == 2 and all(isinstance(x, (int, float)) for x in starts):
+        out["pause_starts_s"] = starts
+    return out
 
 
 def public_row(row: dict) -> dict:
     out = {k: row[k] for k in PUBLIC_FIELDS if k in row}
-    title = story_title(row)
-    if title:
-        out["title"] = title
+    out.update(script_display(row))
     return out
 
 
@@ -233,6 +266,11 @@ def main(argv=None) -> int:
     in_r2 = r2_listing()
     previous_ledger = read_ledger()
     ledger = {f: r for f, r in previous_ledger.items() if f in in_r2}
+    # A served row whose file is unchanged takes the script's current display (title, key verse, journey,
+    # pauses), so the rows published before the app read them live carry them too.
+    for f, r in cands.items():
+        if f in ledger and ledger[f].get("sha256") == r["sha256"] and ledger[f] != public_row(r):
+            ledger[f] = public_row(r)
     queue = todo(cands, ledger, in_r2)
     if a.limit:
         queue = queue[:a.limit]
