@@ -1,6 +1,6 @@
 // Paid chat memory: a short summary of what she is carrying, at most 1,000 characters, under
 // the anonymous install id. Never saved on a day the crisis layer fired for this device, and
-// never when the summary itself trips the crisis floor. Deleted from Settings or by the cron
+// never when the summary itself trips the crisis floor. Shown and deleted in Settings ("What the chat remembers") or by the cron
 // 30 days after paid_until (privacy policy, "Paid chat memory").
 import { floor } from './crisis';
 
