@@ -31,11 +31,14 @@ export async function cleanup(db: D1Database, now: number): Promise<Record<strin
     db.prepare('DELETE FROM chat_paid_spend WHERE paid_until < ? OR month < ?').bind(now - 30 * DAY, new Date(now - 40 * DAY).toISOString().slice(0, 7)),
     db.prepare('DELETE FROM chat_short_day WHERE day < ?').bind(ended),
     db.prepare('DELETE FROM review_try_day WHERE day < ?').bind(ended),
+    db.prepare('DELETE FROM review_ip_day WHERE day < ?').bind(ended),
+    // A store reviewer's grant row (a keyed hash of the install id): 7 days after the grant ends.
+    db.prepare('DELETE FROM review_grant WHERE expires_at < ?').bind(now - 7 * DAY),
     // The first private chat: the IP hash goes after the day. The conversation id (random) stays for the row's life,
     // so that conversation never carries its private turns to free chat on a later day (review 21 Nov 2026).
     db.prepare('UPDATE chat_first_private SET ip_hash = NULL WHERE day < ? AND ip_hash IS NOT NULL').bind(ended),
     db.prepare('DELETE FROM chat_first_private WHERE decided_at < ?').bind(now - FIRST_PRIVATE_KEEP_DAYS * DAY),
   ]);
-  const [device, ip, token, entitlement, memory, installShapes, shapes, reports, abuse, blocks, crisis, spend, short, reviewTries, firstCleared, firstDeleted] = results.map(r => r.meta.changes ?? 0);
-  return { device, ip, token, entitlement, memory, shapes: installShapes + shapes, reports, abuse, blocks, crisis, spend, short, reviewTries, firstCleared, firstDeleted };
+  const [device, ip, token, entitlement, memory, installShapes, shapes, reports, abuse, blocks, crisis, spend, short, reviewTries, reviewIp, reviewGrants, firstCleared, firstDeleted] = results.map(r => r.meta.changes ?? 0);
+  return { device, ip, token, entitlement, memory, shapes: installShapes + shapes, reports, abuse, blocks, crisis, spend, short, reviewTries: reviewTries + reviewIp, reviewGrants, firstCleared, firstDeleted };
 }

@@ -116,14 +116,7 @@ def render_session(item: dict, work: Path) -> dict:
         ["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(wav), "-filter_complex", filters, str(shaped)],
         capture_output=True, check=True,
     )
-    def encode(command, **options):
-        # The shared master accepts an ffmpeg runner. Use software AAC because AudioToolbox
-        # may be unavailable to the background process even on macOS.
-        if "aac_at" in command:
-            command = ["aac" if argument == "aac_at" else argument for argument in command]
-        return subprocess.run(command, **options)
-
-    fill.master(shaped, out, item["level"], run=encode)
+    fill.master(shaped, out, item["level"])   # ffmpeg's own AAC: no AudioToolbox needed in the background
     result = qa.check(out, fill.script_of(item), item["lang"], item["level"])
     if not result["pass"] or not 600 <= result["seconds"] <= 1200 or not 90 <= result["wpm"] <= 115:
         return {"status": "FAILED"}

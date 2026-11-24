@@ -1,6 +1,6 @@
 # Terms of use
 
-Effective: November 21, 2026
+Effective: November 22, 2026
 
 ## Who these terms are with
 

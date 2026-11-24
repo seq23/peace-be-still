@@ -1,9 +1,9 @@
 """The checks every library track passes before it is shelved (QUALITY.md, audio rows).
 
-Runs in the faster-whisper venv (PBS_WHISPER_PY, default
-~/Work/codex-briefs/peace-be-still/voice-samples/.venv/bin/python), on the Mac, never CI.
+Runs in the faster-whisper venv (PBS_WHISPER_PY on the Mac; the cloud runner's own python), never CI.
 
-  A01 words match the script   faster-whisper base, word accuracy against the stored text
+  A01 words match the script   ONE judge: faster-whisper large-v3-turbo (int8), told the chapter's names,
+                               word accuracy against the stored text (see `accuracy`)
   A06 loudness, peaks, clipping ffmpeg ebur128 (integrated, true peak) + 0 clipped samples
   A07 not cut short            the script's last words are in the last part of the transcript
   length sane                  spoken words per minute (gaps included) inside a range
@@ -83,6 +83,29 @@ def clipped_samples(path: Path) -> int:
 
 _MODELS: dict = {}
 
+# The one judge (23 Nov 2026). base -> small misheard the KJV's names and old words, so chapters read right
+# failed the strict scripture bar: Psalm 83 small 0.929 (asaph, hagarenes, gebal, sisera, zalmunna ...),
+# large-v3-turbo told the psalm's names 0.973; Psalm 121 small cut "for evermore" (A07), turbo 0.992.
+# Measured on the Mac CPU: about 45 s for a 3-minute chapter, 1.9 GB peak.
+JUDGE_MODEL = "large-v3-turbo"
+NAME_LIKE = 0.8        # a name of THIS script heard within one letter or so (tiras/tiraz, azor/azur) is the name
+HINT_NAMES = 60        # names told to the judge (faster-whisper hotwords: a prompt, so it is kept short)
+
+
+class JudgeUnavailable(RuntimeError):
+    """The judge model could not be loaded (download, disk, memory). The caller stops by name and the
+    next run retries: a file is never passed, failed or held because the judge was missing."""
+
+
+def judge_model():
+    """The judge, loaded once per process. Any failure to load is JudgeUnavailable, never a verdict."""
+    if JUDGE_MODEL not in _MODELS:
+        try:
+            _MODELS[JUDGE_MODEL] = whisper_model(JUDGE_MODEL)
+        except Exception as e:
+            raise JudgeUnavailable(f"faster-whisper {JUDGE_MODEL} did not load: {' '.join(str(e).split())[-200:]}") from e
+    return _MODELS[JUDGE_MODEL]
+
 
 def whisper_model(size: str):
     """faster-whisper on the Mac's graphics chip (MPS) when it loads, else the CPU (her call 19 Nov 2026:
@@ -134,30 +157,57 @@ def speech_only(audio, rate: int = 16000, min_gap_s: float = 1.5):
     return audio[: n * frame][idx]
 
 
-def transcribe(path: Path, lang: str, model: str = "base") -> str:
-    """faster-whisper, local. "base" first (QUALITY.md A01); a score under the bar is heard again
-    by "small" before it counts, because base mishears the KJV's old words (Psalm 3, 18 Nov 2026:
-    base 0.947 with "belongeth" -> "belongs", "Absalom" -> "upsalam"; small 0.98 on the same file)."""
-    if model not in _MODELS:
-        _MODELS[model] = whisper_model(model)
-    segs, _ = _MODELS[model].transcribe(speech_only(decode(path, 16000)), language=lang, beam_size=5,
-                                        condition_on_previous_text=False)
+def hint(script: str, lang: str) -> str:
+    """The script's names, told to the judge so it can spell them (hotwords). Pure."""
+    return " ".join(list(T.names(script, lang).values())[:HINT_NAMES])
+
+
+def transcribe(path: Path, lang: str, hint_words: str = "") -> str:
+    """The judge hears the speech only (speech_only), told the script's names."""
+    segs, _ = judge_model().transcribe(speech_only(decode(path, 16000)), language=lang, beam_size=5,
+                                       condition_on_previous_text=False, hotwords=hint_words or None)
     return " ".join(s.text.strip() for s in segs)
 
 
-def accuracy(script: str, transcript: str, lang: str) -> float:
+def aligned(script: str, transcript: str, lang: str) -> tuple[list[str], list[str], list[int | None], int]:
+    """(script words, heard words, heard[k], heard words used): heard[k] is the heard index of script word
+    k, or None when it was not heard. Three things count as heard, and only these: the same word; words
+    whose letters are the same with the spaces moved ("beth lehem" / "bethlehem", "for evermore" /
+    "forevermore", "washpot" / "wash pot"); and a name of THIS script heard one-for-one within NAME_LIKE
+    ("tiras" / "tiraz"). A dropped verse, an added word or a swapped word is never heard. Pure."""
     ref, hyp = T.score_words(script, lang), T.score_words(transcript, lang)
+    names = set(T.names(script, lang))
+    heard: list[int | None] = [None] * len(ref)
+    used = 0
+    for op, a, b, c, d in SequenceMatcher(None, ref, hyp, autojunk=False).get_opcodes():
+        if op == "equal":
+            heard[a:b] = range(c, d)
+            used += d - c
+        elif op == "replace" and "".join(ref[a:b]) == "".join(hyp[c:d]):
+            heard[a:b] = [d - 1] * (b - a)
+            used += d - c
+        elif op == "replace" and b - a == d - c:
+            for k in range(b - a):
+                if ref[a + k] in names and SequenceMatcher(None, ref[a + k], hyp[c + k]).ratio() >= NAME_LIKE:
+                    heard[a + k] = c + k
+                    used += 1
+    return ref, hyp, heard, used
+
+
+def accuracy(script: str, transcript: str, lang: str) -> float:
+    """(script words heard + heard words used) / (script words + heard words): SequenceMatcher.ratio's
+    2M / (a + b), counting `aligned`'s three kinds of match. Pure."""
+    ref, hyp, heard, used = aligned(script, transcript, lang)
     if not ref:
         return 0.0
-    return round(SequenceMatcher(None, ref, hyp, autojunk=False).ratio(), 4)
+    return round((sum(h is not None for h in heard) + used) / (len(ref) + len(hyp)), 4)
 
 
 def ends_whole(script: str, transcript: str, lang: str) -> bool:
-    """A07: at least two of the script's last three words are among the transcript's last fifteen."""
-    ref, hyp = T.score_words(script, lang), T.score_words(transcript, lang)
-    tail = set(hyp[-15:])
-    last = ref[-3:]
-    return bool(last) and sum(w in tail for w in last) >= min(2, len(last))
+    """A07: at least two of the script's last three words were heard, inside the transcript's last fifteen."""
+    _, hyp, heard, _ = aligned(script, transcript, lang)
+    last = heard[-3:]
+    return bool(last) and sum(h is not None and h >= len(hyp) - 15 for h in last) >= min(2, len(last))
 
 
 def speech_problems(problems: list[str]) -> list[str]:
@@ -201,14 +251,10 @@ def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0, st
     seconds = ffprobe_seconds(path)
     loud = loudness(path)
     clipped = clipped_samples(path)
-    asr = "base"
-    transcript = transcribe(path, lang, asr)
-    if accuracy(script, transcript, lang) < ACCURACY[lang] or not ends_whole(script, transcript, lang):
-        asr = "small"
-        transcript = transcribe(path, lang, asr)
+    transcript = transcribe(path, lang, hint(script, lang))
     out = judge(script=script, transcript=transcript, lang=lang, level=level, seconds=seconds,
                 lufs=loud["lufs"], true_peak=loud["true_peak"], clipped=clipped, quiet=quiet, strict_words=strict_words)
-    out["asr"] = asr
+    out["asr"] = JUDGE_MODEL
     out["seconds"] = round(seconds, 2)
     out["transcript_tail"] = transcript[-120:]
     return out

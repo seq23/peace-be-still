@@ -101,7 +101,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - uses: actions/cache@v4
-        with: { path: "~/kokoro\n~/.cache/huggingface", key: kokoro-v1.0-whisper-1 }
+        with: { path: "~/kokoro\n~/.cache/huggingface", key: kokoro-v1.0-whisper-large-v3-turbo }
       - name: Runner setup (Kokoro)
         env: { PBS_RCLONE_CONF: "${{ secrets.PBS_RCLONE_CONF }}" }
         run: audio/cloud/setup.sh kokoro
@@ -134,7 +134,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - uses: actions/cache@v4
-        with: { path: "~/.cache/huggingface\n~/.cache/torch", key: chatterbox-0.1.7-whisper-1 }
+        with: { path: "~/.cache/huggingface\n~/.cache/torch", key: chatterbox-0.1.7-whisper-large-v3-turbo }
       - name: Runner setup (Chatterbox)
         env: { PBS_RCLONE_CONF: "${{ secrets.PBS_RCLONE_CONF }}" }
         run: audio/cloud/setup.sh chatterbox
@@ -176,7 +176,9 @@ jobs:
           echo "rows=0" >> "$GITHUB_OUTPUT"
           pip install -q numpy scipy
           git -C main config user.name "pbs-cloud-fill"; git -C main config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          files=$(find rows -name rows.jsonl -size +0 2>/dev/null)
+          # No rows folder at all when no job ran (the fill is complete): find fails, and under bash -e that
+          # failed assignment killed the step red with no message (24 Nov 2026).
+          files=$(find rows -name rows.jsonl -size +0 2>/dev/null || true)
           [ -z "$files" ] && { echo "OUTPUT 0 cloud rows gathered (no job wrote a row)"; exit 0; }
           python code/audio/fill.py --push-rows $files
           echo "rows=$(cat $files | grep -c '^{')" >> "$GITHUB_OUTPUT"

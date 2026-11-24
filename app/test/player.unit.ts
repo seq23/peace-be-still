@@ -4,7 +4,7 @@ import { beforeEach, afterEach, mock, test } from 'node:test';
 import { buildLibrary, keyScripture, MANIFEST, REPO } from '../src/player/build-library';
 import { createDimmer } from '../src/player/dimmer';
 import { createDownloads, type DownloadFiles } from '../src/player/downloads';
-import { audioBaseUrl, hasCallAndResponse, NIGHT_JOURNEYS, onePerScript, readManifest, trackTitle, type Track } from '../src/player/library';
+import { asManifestRows, audioBaseUrl, createLiveLibrary, hasCallAndResponse, liveScripture, NIGHT_JOURNEYS, onePerScript, readManifest, trackTitle, type Track } from '../src/player/library';
 import { createPlayer, FADE_MS, LOAD_WAIT_MS, type AudioOutput, type AudioStatus, type Store } from '../src/player/player';
 
 const BASE = 'https://audio.test/';
@@ -180,6 +180,71 @@ test('a re-voiced script whose new file failed keeps its old published file list
   const failed = { ...night, file: 'en/imagination-night/in-01-bbbb2222.m4a', sha256: 'e'.repeat(64), status: 'FAILED' };
   const { tracks } = readManifest([night, failed].map(r => JSON.stringify(r)).join('\n'), nightTitles);
   assert.deepEqual(onePerScript(tracks, t => t.file === night.file).map(t => t.file), [night.file]);
+});
+
+// ── the live R2 manifest: chapters published after the build are listed ──────────
+
+/** The served R2 ledger as publish.py writes it: public fields only, sorted keys, a story's title. */
+function served(rows: readonly object[]) {
+  return rows.map((row) => JSON.stringify(row)).join('\n') + '\n';
+}
+const ledgerRow = (t: Track) => ({ file: t.file, kind: t.kind, lang: t.lang, ref: t.ref, seconds: t.seconds, sha256: t.sha256, status: 'passed', voice: t.voice });
+
+test('a chapter published after the build is listed from the live manifest, titled from the book list', () => {
+  const { tracks } = buildLibrary();
+  const chapter = tracks.find((t) => t.kind === 'bible' && t.lang === 'en')!;
+  const psalm = tracks.find((t) => t.kind === 'psalms' && t.lang === 'es')!;
+  const bundled = tracks.filter((t) => t !== chapter && t !== psalm);   // the build that shipped before they passed
+  const library = createLiveLibrary(bundled);
+  assert.equal(library.tracks(), bundled);
+  const added = library.set(liveScripture(served(tracks.map(ledgerRow))));
+  assert.deepEqual(added.map((t) => t.file).sort(), [chapter.file, psalm.file].sort());
+  assert.equal(library.tracks().length, bundled.length + 2);
+  const listed = library.tracks().find((t) => t.file === chapter.file)!;
+  assert.deepEqual(listed.titles, chapter.titles);
+  assert.equal(listed.sha256, chapter.sha256);   // availability's gate (published sha === track sha) passes
+});
+
+test('a bundled row always wins, and a story or night in the live manifest waits for a build', () => {
+  const { tracks } = buildLibrary();
+  const story = tracks.find((t) => t.kind === 'stories')!;
+  const night = tracks.find((t) => t.kind === 'psalm-night')!;
+  const bundled = tracks.filter((t) => t !== story && t !== night);
+  const library = createLiveLibrary(bundled);
+  const chapter = bundled.find((t) => t.kind === 'bible')!;
+  const added = library.set(liveScripture(served([...tracks.map(ledgerRow), { ...ledgerRow(chapter), sha256: 'b'.repeat(64) }])));
+  assert.deepEqual(added, []);   // needs its script's title, key verse and pauses, which only the build reads
+  assert.equal(library.tracks(), bundled);
+  assert.equal(library.tracks().find((t) => t.file === chapter.file)!.sha256, chapter.sha256);
+});
+
+test('R2 down, an error page, junk or no passed rows: the bundled library stays, never an empty list', () => {
+  const bundled = buildLibrary().tracks;
+  const library = createLiveLibrary(bundled);
+  for (const body of ['', '<html>502 Bad Gateway</html>', '{"file":', served([{ ...ledgerRow(bundled[0]), status: 'FAILED' }])]) {
+    assert.deepEqual(liveScripture(body), [], JSON.stringify(body.slice(0, 20)));
+    assert.deepEqual(library.set(liveScripture(body)), []);
+    assert.equal(library.tracks(), bundled);
+  }
+  // A later bad read never takes away chapters a good read added.
+  const late = { ...ledgerRow(bundled.find((t) => t.kind === 'bible')!), file: 'en/bible/kjv-zzz-001.m4a', ref: 'GEN 51' };
+  assert.equal(library.set(liveScripture(served([late]))).length, 1);
+  library.set(liveScripture('<html>502</html>'));
+  assert.equal(library.tracks().length, bundled.length + 1);
+});
+
+test('a live row with an unsafe path, a bad hash, no title or a script kind is never listed', () => {
+  const base = ledgerRow(buildLibrary().tracks.find((t) => t.kind === 'bible')!);
+  const bad = [{ ...base, file: '../../etc/x.m4a' }, { ...base, file: 'https://evil.test/a.m4a' }, { ...base, sha256: 'x' },
+    { ...base, ref: 'not a chapter' }, { ...base, lang: 'fr' }, { ...base, seconds: 0 },
+    { ...base, kind: 'psalm-night', file: 'en/psalm-night/x.m4a' }, { ...base, kind: 'stories', file: 'en/stories/x.m4a' }];   // a script kind with a chapter ref
+  assert.deepEqual(liveScripture(served(bad)), []);
+});
+
+test('the saved copy of the live chapters reads back through the same checks, to the same tracks', () => {
+  const live = liveScripture(served(buildLibrary().tracks.filter((t) => t.kind === 'bible').slice(0, 3).map(ledgerRow)));
+  assert.equal(live.length, 3);
+  assert.deepEqual(liveScripture(asManifestRows(live)), live);
 });
 
 test('the audio base URL must be https; anything else is the CONFIG_AUDIO_BASE_URL stop', () => {

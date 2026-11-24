@@ -6,4 +6,4 @@ export { parseReference, formatReference, fold, bookCode, type Reference, type T
 export { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY } from '../../app/src/gates/index';
 export type { Door, Voice } from '../../app/src/model';
 export { default as banned } from '../../app/src/quality/banned.json';
-export { providers, excludedTerritories } from './providers.mjs';
+export { providers, teenProviders, excludedTerritories } from './providers.mjs';

@@ -269,6 +269,49 @@ export async function check(target) {
       await shot(second, '17-grief-second-tab');
       await first.context.close();
     }
+    // 18. More (her catch 24 Nov 2026: the App Store app showed rows tagged "Soon" that opened nothing). On both
+    // doors, English and Spanish, 320 and 390 px, light and dark: exactly the rows that open a real screen, none
+    // says Soon / Pronto, nothing wider than the phone; each row opens its screen (its heading, its URL) and the
+    // way back returns to More.
+    {
+      const SOON = /(?<![\p{L}])(?:soon|pronto|pr[oó]ximamente)(?![\p{L}])/iu;
+      const doors = [
+        ['faith-en', adult, [['Settings', '/settings', 'Settings', '←  More'], ['Saved verses', '/bible/saved', 'Saved and highlighted', '←  Back'], ['Journal', '/today/journal', 'Journal', 'Back']]],
+        ['faith-es', { ...adult, journey: 'mi-refugio', voice: 'spanish' }, [['Ajustes', '/settings', 'Settings', '←  Más'], ['Versículos guardados', '/bible/saved', 'Guardados y resaltados', '←  Volver'], ['Diario', '/today/journal', 'Diario', 'Volver']]],
+        ['mindset-en', mindset, [['Settings', '/settings', 'Settings', '←  More'], ['Journal', '/today/journal', 'Journal', 'Back']]],
+        ['mindset-es', { ...mindset, language: 'es' }, [['Ajustes', '/settings', 'Ajustes', '←  Más'], ['Diario', '/today/journal', 'Diario', 'Volver']]],
+      ];
+      for (const [name, settings, rows] of doors) {
+        for (const [width, scheme] of [[320, 'light'], [390, 'dark'], [320, 'dark'], [390, 'light']]) {
+          const { page, context } = await open('/more', settings, scheme, { viewport: { width, height: 844 } });
+          const ready = await page.getByRole('button', { name: rows[0][0], exact: true }).first().waitFor({ timeout: 30000 }).then(() => true, () => false);
+          expect(ready, `More (${name}, ${width} px ${scheme}) has no "${rows[0][0]}" row: ${(await body(page)).slice(0, 200)}`);
+          const shown = (await page.locator('[role=button]').allInnerTexts()).map(t => t.replace(/\s*›\s*$/, '').trim()).filter(Boolean);
+          expect(JSON.stringify(shown) === JSON.stringify(rows.map(r => r[0])), `More (${name}, ${width} px ${scheme}) rows are ${JSON.stringify(shown)}, want ${JSON.stringify(rows.map(r => r[0]))}`);
+          expect(!SOON.test(await body(page)), `More (${name}, ${width} px ${scheme}) says Soon or Pronto`);
+          expect(await fits(page), `More (${name}) is wider than ${width} px`);
+          await shot(page, `18-more-${name}-${width}-${scheme}`);
+          await context.close();
+        }
+        // Each row opens its own screen and Back comes home, at 390 px light.
+        for (const [label, path, heading, back] of rows) {
+          const { page, context } = await open('/more', settings);
+          const row = page.getByRole('button', { name: label, exact: true }).first();
+          if (!await row.waitFor({ timeout: 30000 }).then(() => true, () => false)) { expect(false, `More (${name}): no "${label}" row to tap`); await context.close(); continue; }
+          await row.click();
+          const arrived = await page.waitForURL(url => new URL(url).pathname === path, { timeout: 30000 }).then(() => true, () => false);
+          expect(arrived, `More (${name}): "${label}" went to ${new URL(page.url()).pathname}, want ${path}`);
+          const titled = await page.getByRole('heading', { name: heading, exact: true }).first().waitFor({ timeout: 30000 }).then(() => true, () => false);
+          expect(titled, `More (${name}): "${label}" opened no "${heading}" heading: ${(await body(page)).slice(0, 200)}`);
+          expect(!SOON.test(await body(page)), `${path} (${name}) says Soon or Pronto`);
+          await shot(page, `18-more-${name}-open-${path.replaceAll('/', '-').slice(1)}`);
+          await page.getByText(back, { exact: true }).first().click().catch(() => undefined);
+          const home = await page.waitForURL(url => new URL(url).pathname === '/more', { timeout: 30000 }).then(() => true, () => false);
+          expect(home, `More (${name}): Back from ${path} went to ${new URL(page.url()).pathname}, not /more`);
+          await context.close();
+        }
+      }
+    }
   } finally {
     await browser.close();
     local?.server.close();

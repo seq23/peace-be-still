@@ -48,8 +48,8 @@ const FEAT = {
   },
 };
 const PRICE = {
-  en: `<p>Peace Be Still is coming soon to the App Store and Google Play. It is free to download, with a free version that stays free. A plan is ${F.monthly} a month or ${F.yearly} a year: no trial, no ads, and you cancel in two taps.</p>`,
-  es: `<p>Peace Be Still llega muy pronto al App Store y a Google Play. Es gratis para descargar, con una versión gratis que sigue gratis. Un plan cuesta ${F.monthly} al mes o ${F.yearly} al año: sin prueba, sin anuncios, y se cancela en dos toques.</p>`,
+  en: `<p>Peace Be Still is {{stores.tag}}. It is free to download, with a free version that stays free. A plan is ${F.monthly} a month or ${F.yearly} a year: no trial, no ads, and you cancel in two taps.</p>`,
+  es: `<p>{{stores.line}} Es gratis para descargar, con una versión gratis que sigue gratis. Un plan cuesta ${F.monthly} al mes o ${F.yearly} al año: sin prueba, sin anuncios, y se cancela en dos toques.</p>`,
 };
 // The last section: a heading, one line on how it fits this question, the features that matter here.
 const app = (heading, lead, keys, lang = "en") => [heading, `<p>${lead}</p>\n<ul>\n${keys.map((k) => FEAT[lang][k]).join("\n")}\n</ul>\n${PRICE[lang]}`];
@@ -873,7 +873,7 @@ ${CRISIS}`],
 </ul>
 <p>Calm says that after you cancel, the subscription does not renew and you keep Premium access until the end of the current billing period.</p>`],
       ["How to check it worked", `<p>On iPhone, a cancelled subscription shows an expiry date instead of a Cancel button. On Google Play, it shows as cancelled in Subscriptions. Keep the confirmation email if you get one.</p>`],
-      app("Where Peace Be Still fits", "Peace Be Still is a coming-soon app with no trial and a free version that stays free; its Mindset door has daily lines and whispered nights.", ["nights", "words"]),
+      app("Where Peace Be Still fits", "Peace Be Still is an app {{stores.short}} with no trial and a free version that stays free; its Mindset door has daily lines and whispered nights.", ["nights", "words"]),
     ],
     faq: [
       ["Does deleting Calm cancel my subscription?", "No. Cancel where you paid: Calm.com, Apple or Google Play."],
@@ -900,7 +900,7 @@ ${CRISIS}`],
 </ul>`],
       ["Refunds", `<p>Headspace's page says website subscriptions are non-refundable, though it will review special circumstances if you contact support, and that Apple and Google Play purchases are subject to those stores' own refund policies. For an Apple refund, use Apple's “Report a Problem” page; for Google Play, use Google's refund request.</p>`],
       ["Family plans", `<p>Headspace's help centre says only the Family Plan's primary account holder can cancel it.</p>`],
-      app("Where Peace Be Still fits", "Peace Be Still is a coming-soon app with no trial and a free version that stays free; its Mindset door has daily lines and whispered nights.", ["nights", "words"]),
+      app("Where Peace Be Still fits", "Peace Be Still is an app {{stores.short}} with no trial and a free version that stays free; its Mindset door has daily lines and whispered nights.", ["nights", "words"]),
     ],
     faq: [
       ["Can I cancel Headspace in the app?", "For a website subscription, Headspace says to use a browser, not the app. For Apple or Google Play, cancel in that store."],

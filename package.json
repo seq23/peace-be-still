@@ -12,6 +12,7 @@
     "worker:bible-load": "node scripts/worker-bible-load.mjs",
     "redteam": "node worker/scripts/redteam.mjs",
     "worker:dev": "bash scripts/worker-dev.sh",
-    "risk:measure": "node worker/scripts/risk-measure.mjs"
+    "risk:measure": "node worker/scripts/risk-measure.mjs",
+    "og:render": "node site/scripts/og-render.mjs"
   }
 }

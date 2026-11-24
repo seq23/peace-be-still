@@ -14,8 +14,13 @@ export function ipPrefix(ip: string): string {
 }
 
 export async function ipHash(secret: string | undefined, day: string, ip: string): Promise<string> {
+  return keyedHash(secret, `${day}|${ipPrefix(ip)}`);
+}
+
+/** HMAC-SHA256(IP_HASH_SECRET, text), first 16 bytes as hex: one-way, and useless without the secret. */
+export async function keyedHash(secret: string | undefined, text: string): Promise<string> {
   if (!secret || encoder.encode(secret).length < 32) throw new Error('IP_HASH_SECRET_MISSING');
   const key = await crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-  const mac = new Uint8Array(await crypto.subtle.sign('HMAC', key, encoder.encode(`${day}|${ipPrefix(ip)}`)));
+  const mac = new Uint8Array(await crypto.subtle.sign('HMAC', key, encoder.encode(text)));
   return [...mac.slice(0, 16)].map(b => b.toString(16).padStart(2, '0')).join('');
 }
