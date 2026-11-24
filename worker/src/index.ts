@@ -641,6 +641,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, earlier: earlierTurns.map(t => t.text).join('\n'), text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane, teenOnly);
   let objection: string | null = null;
   let variety0 = false;
+  let edited = false;
   // A draft that passed every safety check but repeated a recent answer, or that the judge found
   // only plain (voice_low and nothing else): shown if no later try does better. Variety and voice are
   // quality, not safety, and must never cost a real answer (round 5: 7 of 64 fell back that way).
@@ -766,7 +767,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     for (const p of problems) tally(metrics, `gate:${p}`);
     logCode('CHAT_GATE', { attempt, problems: problems.join(',') });
     objection = variety || problems.map(objectionText).join(' ');
-    variety0 = !!variety;
+    // One cheap edit per answer: an edit that still repeats gets three fresh versions next time
+    // (red team 24 Nov 2026: with every variety retry a single edit, 9 of 58 shown answers repeated; bar 2).
+    variety0 = !!variety && !edited;
+    if (variety0) edited = true;
     if (attempt === 0) tally(metrics, 'regenerated');
   }
   // Newest first: it was written with the most guidance.
