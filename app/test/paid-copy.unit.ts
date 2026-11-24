@@ -167,3 +167,29 @@ test('paid private chat is 50 messages a day and free is 5 (her rulings, 21 Nov 
   assert.equal(PAID_CHAT_MESSAGES, 50);
   assert.equal(FREE_CHAT_MESSAGES, 5);
 });
+
+// Every selling line on /paid (the faith door the tap-through walks) is mapped in tap-through.json to a screen the
+// robot reaches, or to a native_only entry that says why the preview cannot show it; nothing on the price screen
+// is left unmapped, and the small print's number there is the enforced setting.
+test('every selling line on the paywall is mapped to a tap-through step, and its count is PAID_CHAT_MESSAGES', () => {
+  const flow = JSON.parse(read('tap-through.json'));
+  const source = read('app/app/paid/index.tsx');
+  const block = source.slice(source.indexOf('<View style={{ gap: 8 }}>'), source.indexOf("t('paid.madeForYouNote')") + 30);
+  const faith = /faith: \[([^\]]+)\]/.exec(source)![1];
+  const keys = [...new Set([...block.matchAll(/'(paid\.[A-Za-z.]+)'/g), ...faith.matchAll(/'(paid\.[A-Za-z.]+)'/g)].map(m => m[1]))]
+    .filter(k => k !== 'paid.chatHeadlineMindset');
+  assert.ok(keys.length >= 8, `only ${keys.length} selling lines read from the paywall`);
+  const mapped = (flow.promises as Array<{ text: string; on: string; built?: string; native_only?: string }>).filter(p => p.on === 'paywall:plans');
+  const steps = new Set((flow.journeys as Array<{ name: string; steps: Array<{ id?: string }> }>).flatMap(j => j.steps.filter(s => s.id).map(s => `${j.name}:${s.id}`)));
+  for (const key of keys) {
+    const line = String(strings.en[key]).replace('%{count}', String(PAID_CHAT_MESSAGES)).replace(/’/g, "'");
+    let left = line;
+    for (const p of mapped.filter(p => line.includes(p.text))) left = left.split(p.text).join('');
+    assert.match(left, /^[\s.;,]*$/, `${key} ("${line}") is not fully mapped in tap-through.json; unmapped: "${left.trim()}"`);
+  }
+  for (const p of mapped) {
+    assert.ok(p.native_only ? flow.native_only.some((n: { feature: string }) => n.feature === p.native_only) : steps.has(p.built!), `"${p.text}" maps to ${p.built ?? p.native_only}, which is not in the flow`);
+    for (const [, n] of p.text.matchAll(/(\d+) messages/g)) assert.equal(Number(n), PAID_CHAT_MESSAGES, `tap-through.json promises ${n}, not PAID_CHAT_MESSAGES`);
+  }
+  assert.ok(mapped.some(p => /\d+ messages/.test(p.text)), 'no tap-through promise names the private-message count');
+});
