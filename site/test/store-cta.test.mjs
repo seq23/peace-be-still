@@ -3,7 +3,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { appStoreHref, claimHtml, claimKind, fillStores, storeCtaHtml, storeConfig, storeHeroHtml, storeWords, langOf, sourceOf } from "../content/parts.mjs";
+import { appStoreHref, claimHtml, claimKind, facts, fillStores, storeCtaHtml, storeConfig, storeHeroHtml, storeWords, langOf, sourceOf } from "../content/parts.mjs";
 import { homeHtml } from "../content/home.mjs";
 import { check, launchFindings } from "../scripts/check-site.mjs";
 import { doorOf } from "../scripts/apply-cta.mjs";
@@ -64,10 +64,10 @@ test("privacy leads (her ruling 21 Nov 2026): the home hero and the Bible chat p
   const pub = new URL("../public/", import.meta.url).pathname;
   // The two-door home pages carry the claim with no faith words (21 Nov 2026); the Bible chat pages keep "Bible chat".
   for (const [f, lang, kind, want] of [
-    ["index.html", "en", "any", /<b>With a paid plan: unlimited chat, kept private\.<\/b>/],
-    ["es/index.html", "es", "any", /<b>Con un plan de pago: chat ilimitado y privado\.<\/b>/],
-    ["free-bible-chat/index.html", "en", "bible", /<b>With a paid plan: unlimited Bible chat, kept private\.<\/b>/],
-    ["es/chat-biblico-gratis/index.html", "es", "bible", /<b>Con un plan de pago: chat bíblico ilimitado y privado\.<\/b>/],
+    ["index.html", "en", "any", new RegExp(String.raw`<b>With a paid plan: unlimited chat\.<\/b> <small>Private for your first ${facts().paid} messages each day`)],
+    ["es/index.html", "es", "any", new RegExp(String.raw`<b>Con un plan de pago: chat ilimitado\.<\/b> <small>Privado en los primeros ${facts().paid} mensajes de cada día`)],
+    ["free-bible-chat/index.html", "en", "bible", new RegExp(String.raw`<b>With a paid plan: unlimited Bible chat\.<\/b> <small>Private for your first ${facts().paid} messages each day`)],
+    ["es/chat-biblico-gratis/index.html", "es", "bible", new RegExp(String.raw`<b>Con un plan de pago: chat bíblico ilimitado\.<\/b> <small>Privado en los primeros ${facts().paid} mensajes de cada día`)],
   ]) {
     const s = readFileSync(join(pub, f), "utf8");
     assert.equal(claimKind(f, doorOf(s)), kind, f);

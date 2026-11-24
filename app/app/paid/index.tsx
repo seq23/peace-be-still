@@ -104,15 +104,18 @@ export default function PaidScreen() {
         <Body size={15}>{t('paid.intro')}</Body>
       </View>
       <View style={{ gap: 8 }}>
-        {/* The headline, the training promise right under it, and the small print (PAID_CHAT_MESSAGES). */}
+        {/* Her ruling 24 Nov 2026: "Unlimited" is the headline, like the competitors; the private limit is the small
+            print right under it (smaller, muted, from PAID_CHAT_MESSAGES), then the training promise. */}
         <Body size={16} muted={false}>{t(settings.door === 'mindset' ? 'paid.chatHeadlineMindset' : 'paid.chatHeadline')}</Body>
+        <Body size={13}>{t('paid.fairUse', { count: PAID_CHAT_MESSAGES })}</Body>
         {/* paid.noTraining says "never used to train AI", not "not kept": Google's Gemini API Additional Terms
             (effective 23 Mar 2026, aistudio.google.com/docs/terms, read 21 Nov 2026) say that for Paid Services
             "Google logs prompts and responses for a limited period of time" for abuse monitoring, and "doesn't use
             your prompts ... or responses to improve our products". Gemini is the paid backup and the crisis model. */}
         <Body size={14} muted={false}>{t('paid.noTraining')}</Body>
-        <Body size={13}>{t('paid.fairUse', { count: PAID_CHAT_MESSAGES })}</Body>
         {benefits[settings.door === 'mindset' ? 'mindset' : 'faith'].map(key => <Body key={key} size={15} muted={false}>{t(key)}</Body>)}
+        {/* "Private" is the chat's promise, not Made for you's: its notes go to free models first (her ruling 21 Nov 2026). */}
+        <Body size={13}>{t('paid.madeForYouNote')}</Body>
       </View>
       {paid ? <Body muted={false}>{t('paid.active')}</Body> : null}
       {!paid && offers ? (

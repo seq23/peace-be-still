@@ -97,7 +97,12 @@ export function claimHtml(lang, kind = "bible") {
   const c = privacyClaim(lang, kind);
   return c ? `<p class="claim">${claimBody(c)}</p>` : "";
 }
-const claimBody = (c) => `<b>${c.head}.</b> ${c.promise} <small>${c.small}</small>`;
+/** The claim as plain words, for answers and tables written in content files (never typed out by hand). */
+export function claimText(lang, kind = "bible") {
+  const c = privacyClaim(lang, kind);
+  return `${c.head}. ${c.small} ${c.promise}`;
+}
+const claimBody = (c) => `<b>${c.head}.</b> <small>${c.small}</small> ${c.promise}`;
 /** The same claim in the store CTA box, beside the buttons. */
 export function ctaClaimHtml(lang, kind = "bible") {
   const c = privacyClaim(lang, kind);

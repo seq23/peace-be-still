@@ -82,14 +82,14 @@ test("no faith page, and not the home page's God's Word card, carries manifestin
   }
 });
 
-test("every 'unlimited ... private' line on Mindset pages and the home pages says it is the paid plan's", () => {
+test("every 'unlimited chat' line on Mindset pages and the home pages says it is the paid plan's (her ruling 24 Nov 2026: the headline is 'Unlimited chat')", () => {
   const check = [...mindsetBuilt, "index.html", "es/index.html"];
   let n = 0;
   for (const rel of check) {
     const t = words(read(rel));
-    for (const m of t.matchAll(/unlimited[^.]{0,40}private|ilimitad[oa][^.]{0,40}privad[oa]/gi)) {
+    for (const m of t.matchAll(/unlimited (?:Bible )?chat|chat (?:bíblico )?ilimitado|unlimited[^.]{0,40}private|ilimitad[oa][^.]{0,40}privad[oa]/gi)) {
       n++;
-      assert.match(t.slice(Math.max(0, m.index - 36), m.index), /(With a paid plan|Con un plan de pago): (chat (bíblico )?)?$/i, `${rel}: "${m[0]}" without the paid-plan qualifier`);
+      assert.match(t.slice(Math.max(0, m.index - 36), m.index), /(With a paid plan|Con un plan de pago): $/i, `${rel}: "${m[0]}" without the paid-plan qualifier`);
     }
   }
   assert.ok(n >= check.length, `only ${n} claims read on ${check.length} pages`);
@@ -136,7 +136,7 @@ test("the Mindset hub leads with the paid-plan privacy claim and opens the Imagi
     const s = read(rel);
     assert.equal(doorOf(s), "mindset", rel);
     const claim = claimHtml(lang, "any");
-    assert.match(claim, lang === "es" ? /<b>Con un plan de pago: chat ilimitado y privado\.<\/b>/ : /<b>With a paid plan: unlimited chat, kept private\.<\/b>/);
+    assert.match(claim, lang === "es" ? new RegExp(String.raw`<b>Con un plan de pago: chat ilimitado\.<\/b> <small>Privado en los primeros ${facts().paid} mensajes`) : new RegExp(String.raw`<b>With a paid plan: unlimited chat\.<\/b> <small>Private for your first ${facts().paid} messages`));
     const at = s.indexOf(claim);
     assert.ok(at > 0 && at - s.indexOf("</h1>") < 80, `${rel}: the claim is not the lead under the heading`);
     for (const name of ["Morning Word", "Imagination Nights"]) assert.ok(words(s).includes(name), `${rel}: ${name}`);

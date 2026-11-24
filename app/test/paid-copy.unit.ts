@@ -20,7 +20,8 @@ const claim = (lang: 'en' | 'es', head: 'paid.chatHeadline' | 'paid.chatHeadline
 });
 const described: Array<[string, 'en' | 'es']> = [ // the language each file is mainly in
   ['legal/terms.md', 'en'], ['legal/es/terminos.md', 'es'], ['store/listing-en.md', 'en'], ['store/listing-es.md', 'es'],
-  ['site/content/questions.mjs', 'en'], ['site/content/blitz-black.mjs', 'en'], ['site/content/blitz-apps.mjs', 'en'],
+  // The site's content files (questions.mjs, blitz-*.mjs) write the claim as claimText() from these same strings;
+  // their built pages are read here and in site/test/paid-lead.test.mjs (every page that sells unlimited chat).
   ['site/public/index.html', 'en'], ['site/public/es/index.html', 'es'], ['site/public/terms.html', 'en'], ['site/public/es/terminos.html', 'es'],
   ['site/public/free-bible-chat/index.html', 'en'], ['site/public/es/chat-biblico-gratis/index.html', 'es'], ['site/public/black-bible-chat/index.html', 'en'], ['site/public/black-bible-app/index.html', 'en'], ['site/public/bible-app-for-women/index.html', 'en'],
   ['site/public/mindset/index.html', 'en'], ['site/public/es/mentalidad/index.html', 'es'],
@@ -30,9 +31,17 @@ const everywhere = [...described.map(([f]) => f), ...privacy, 'app/src/i18n/en.j
 
 test('every paid-chat number in the copy is the enforced private-message setting', () => {
   for (const f of [...described.map(([f]) => f), ...privacy]) {
-    const numbers = [...read(f).matchAll(/(\d+) (?:private messages|mensajes privados)|(?:[Pp]rivate for up to|[Pp]rivado hasta) (\d+) (?:messages|mensajes)/g)].map(m => Number(m[1] ?? m[2]));
+    const numbers = [...read(f).matchAll(/(\d+) (?:private messages|mensajes privados)|(?:[Pp]rivate for (?:your|the) first|[Pp]rivado en (?:tus|los) primeros) (\d+) (?:messages|mensajes)/g)].map(m => Number(m[1] ?? m[2]));
     assert.ok(numbers.length > 0, `${f} names no private-message number`);
     assert.deepEqual([...new Set(numbers)], [PAID_CHAT_MESSAGES], f);
+  }
+});
+
+test('the site\'s content files never type the paid-chat claim by hand: they call claimText(), built from the app\'s strings', () => {
+  for (const f of ['site/content/questions.mjs', 'site/content/blitz-black.mjs', 'site/content/blitz-apps.mjs', 'site/content/blitz-search.mjs']) {
+    const text = read(f);
+    assert.ok(text.includes('${claimText("en")}'), `${f} does not use claimText`);
+    for (const lang of ['en', 'es'] as const) assert.ok(!text.includes(claim(lang).small), `${f} types the small print by hand`);
   }
 });
 
@@ -40,8 +49,9 @@ test('wherever the "unlimited" claim appears, what it means and the small print 
   for (const [f] of described) {
     const text = read(f);
     let found = 0;
-    // Either headline: "Unlimited Bible chat, kept private" (God's Word) or "Unlimited chat, kept private"
-    // (Mindset and the two-door home pages, 21 Nov 2026); each must carry the promise and the small print.
+    // Either headline: "Unlimited Bible chat" (God's Word) or "Unlimited chat" (Mindset and the two-door home
+    // pages, 21 Nov 2026); each must carry the small print and the promise (her ruling 24 Nov 2026: "unlimited is
+    // what we are selling", the private limit is the small print).
     for (const lang of ['en', 'es'] as const) for (const key of ['paid.chatHeadline', 'paid.chatHeadlineMindset'] as const) {
       const c = claim(lang, key);
       for (const m of text.matchAll(new RegExp(c.head.replace(/^./, ch => `[${ch.toUpperCase()}${ch.toLowerCase()}]`), 'g'))) {
@@ -54,8 +64,8 @@ test('wherever the "unlimited" claim appears, what it means and the small print 
   }
 });
 
-test('NEGATIVE: the old pause, never-free, 100-a-day and heavy-use wording is gone everywhere, and no "not kept" claim (Google logs paid prompts for abuse monitoring)', () => {
-  const old = /until the 1st|never switches you to a free provider|chat pauses until|se pausa hasta el día 1|nunca lo pasa a un proveedor gratuito|never falls back to a free provider:|nunca pasa a un proveedor gratuito:|fair use(?: of)?:? \d+|uso (?:justo|razonable)(?: de)?:? \d+|\d+ chat messages a day|\d+ mensajes de chat al día|very heavy use across a month may be paused|month's chat limit|límite de chat de este mes|if the paid service is down, the app says so|si el servicio de pago no funciona, la app lo dice|100 private|100 mensajes privados|very heavy use across a month|uso muy intenso durante el mes|not kept by the AI companies|no lo guardan las empresas de IA/i;
+test('NEGATIVE: the old pause, never-free, 100-a-day, heavy-use and "kept private" headline wording is gone everywhere, and no "not kept" claim (Google logs paid prompts for abuse monitoring)', () => {
+  const old = /until the 1st|never switches you to a free provider|chat pauses until|se pausa hasta el día 1|nunca lo pasa a un proveedor gratuito|never falls back to a free provider:|nunca pasa a un proveedor gratuito:|fair use(?: of)?:? \d+|uso (?:justo|razonable)(?: de)?:? \d+|\d+ chat messages a day|\d+ mensajes de chat al día|very heavy use across a month may be paused|month's chat limit|límite de chat de este mes|if the paid service is down, the app says so|si el servicio de pago no funciona, la app lo dice|100 private|100 mensajes privados|very heavy use across a month|uso muy intenso durante el mes|not kept by the AI companies|no lo guardan las empresas de IA|kept private|ilimitado y privado|private for up to \d+|privado hasta \d+/i;
   for (const f of everywhere) assert.doesNotMatch(read(f), old, f);
 });
 
