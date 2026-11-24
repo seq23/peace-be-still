@@ -1,4 +1,4 @@
-// What the player screen (a later phase) uses: usePlayer() for audio, useDimmer() while the screen is in front.
+// What the player screen (app/listen/[track].tsx → NowPlaying) uses: usePlayer() for audio, useDimmer() while the screen is in front.
 // The player is one per app, so audio keeps going while she moves between screens or locks the phone.
 import Constants from 'expo-constants';
 import { getLocales } from 'expo-localization';

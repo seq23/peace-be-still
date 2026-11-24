@@ -4,7 +4,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { onboarded, startRoute, voicesFor, type Language, type Voice } from '../src/model';
 import { useSettings, useT } from '../src/settings';
-import { BackLink, Body, Card, Chevron, Label, Screen, SwitchRow, Title, styles, usePalette } from '../src/ui';
+import { BackLink, Card, Label, LinkRow, Screen, SwitchRow, Title, usePalette } from '../src/ui';
 import { fonts } from '../src/theme/tokens';
 import { MadeForYouSettings } from '../src/madeForYou/Settings';
 import { ReminderSettings } from '../src/reminders';
@@ -24,23 +24,14 @@ export default function SettingsScreen() {
       <Text style={{ fontFamily: selected ? fonts.strong : fonts.body, fontSize: 17, color: c.ink }}>{text}</Text>
     </Card>
   );
-  const link = (text: string, value: string | null, onPress: () => void) => (
-    <Card onPress={onPress} label={text} style={{ paddingVertical: 14 }}>
-      <View style={styles.row}>
-        <Text style={{ flex: 1, fontFamily: fonts.body, fontSize: 17, color: c.ink }}>{text}</Text>
-        {value ? <Body size={15}>{value}</Body> : null}
-        <Chevron />
-      </View>
-    </Card>
-  );
 
   return (
     <Screen>
       <BackLink onPress={() => (router.canGoBack() ? router.back() : router.replace('/more'))}>{tabs('tabs.more')}</BackLink>
       <Title>{t('settings.title')}</Title>
-      {settings.age !== 'child' && link(t('paid.title'), null, () => router.push('/paid'))}
-      {link(t('settings.door'), settings.door ? t(`doorName.${settings.door}`) : null, () => router.push({ pathname: '/door', params: { change: '1' } }))}
-      {link(t('settings.birthYear'), null, () => router.push({ pathname: '/age', params: { correct: '1' } }))}
+      {settings.age !== 'child' && <LinkRow label={t('paid.title')} onPress={() => router.push('/paid')} />}
+      <LinkRow label={t('settings.door')} value={settings.door ? t(`doorName.${settings.door}`) : null} onPress={() => router.push({ pathname: '/door', params: { change: '1' } })} />
+      <LinkRow label={t('settings.birthYear')} onPress={() => router.push({ pathname: '/age', params: { correct: '1' } })} />
       {settings.door === 'mindset' ? (
         <SwitchRow title={t('journeys.scripture.title')} detail={t('journeys.scripture.detail')} value={!!settings.scripture}
           onChange={on => save({ ...settings, scripture: on || undefined })} />
