@@ -17,6 +17,8 @@ jobs:
   preview:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+    outputs:
+      url: ${{ steps.hosted.outputs.url }}
     defaults:
       run:
         working-directory: app
@@ -67,3 +69,12 @@ jobs:
           name: preview-shots-390x844
           path: ${{ runner.temp }}/shots
           if-no-files-found: warn
+  # THE TAP-THROUGH (ship-ready app-review.md, required for any PR that changes a screen): a robot taps
+  # through this preview like a person, at 390 px light and dark, from tap-through.json. Red on a dead
+  # button, a console error, an error screen, an unreachable step or a paid promise with no screen
+  # behind it. Free (public repo); every write is blocked, nothing real is touched.
+  tap-through:
+    needs: preview
+    uses: seq23/boss-os/.github/workflows/tap-through.yml@main
+    with:
+      target: ${{ needs.preview.outputs.url }}

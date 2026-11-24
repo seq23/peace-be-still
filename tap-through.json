@@ -1,0 +1,175 @@
+{
+  "app": "Peace Be Still",
+  "brand": "every-tongue",
+  "about": "The app's own robot walk for every PR that changes a screen (boss-os scripts/ops/tap-through.mjs, ship-ready app-review.md). Preview switches only: ?paid=1 (preview paid access, no purchase), ?nights=used (a used week), ?hour=3 (3 AM). Each paid line on /paid is mapped to the screen behind it, opened directly with ?paid=1 and checked by text a free screen does not show. Onboarded journeys seed the settings onboarding writes (an adult on the God's Word door, Hush Harbor). No account exists; every request that is not a read is blocked.",
+  "route_storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+  "journeys": [
+    {
+      "name": "first-open",
+      "start": "/",
+      "steps": [
+        { "see": "What do you need tonight?", "id": "door" },
+        { "sweep": true },
+        { "tap": "With God's Word", "id": "after-door" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "today",
+      "start": "/",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "wait": 1500, "id": "today" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "tabs",
+      "start": "/",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "tap": { "role": "tab", "name": "/Chat/" }, "id": "chat" },
+        { "tap": { "role": "tab", "name": "/Bible/" }, "id": "bible" },
+        { "sweep": true },
+        { "tap": { "role": "tab", "name": "/Nights/" }, "id": "nights" },
+        { "sweep": true },
+        { "tap": { "role": "tab", "name": "/More/" }, "id": "more" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "paywall",
+      "start": "/paid",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "see": "A paid plan", "id": "plans" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "paid-member",
+      "start": "/?paid=1",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "wait": 1500, "id": "paid-today" },
+        { "sweep": true },
+        { "tap": { "role": "tab", "name": "/Chat/" }, "id": "paid-chat" },
+        { "tap": { "role": "tab", "name": "/Bible/" }, "id": "paid-bible" },
+        { "tap": { "role": "tab", "name": "/Nights/" }, "id": "paid-nights" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "three-am-today",
+      "start": "/today?hour=3",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "see": "/^Go back to sleep/", "id": "three-am" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "three-am-nights",
+      "start": "/nights?hour=3",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "see": "/^Go back to sleep/", "id": "three-am" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "nights-used",
+      "start": "/listen/preview-psalm-night-en?nights=used",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "wait": 1500 },
+        { "see": "/^Your next free night is /", "id": "locked" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "paid-chat",
+      "start": "/chat?paid=1",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "see": "Your chat is private: the paid AI service does not use what you type to improve its AI.", "id": "private" }
+      ]
+    },
+    {
+      "name": "paid-night",
+      "start": "/listen/preview-psalm-night-en?paid=1&nights=used",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "wait": 1500 },
+        { "see": "This audio is not ready yet. Please try again later.", "id": "open" }
+      ]
+    },
+    {
+      "name": "made-for-you",
+      "start": "/made-for-you?paid=1",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "fill": "What’s on your mind tonight?", "value": "TEST tap-through note, never sent" },
+        { "see": "/^Make my session/", "id": "form" }
+      ]
+    },
+    {
+      "name": "paid-stories",
+      "start": "/today/stories?paid=1",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "tap": { "role": "button", "name": "/^[A-Z][a-z]{2} \\d{1,2}, \\d{4}, /" }, "then": "Read in Bible ›", "id": "past-story" }
+      ]
+    },
+    {
+      "name": "paid-plan",
+      "start": "/today/plans?paid=1&id=psalms-30",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "see": "Day 30", "id": "day-30" }
+      ]
+    },
+    {
+      "name": "paid-topics",
+      "start": "/today/declaration?paid=1",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "see": "Pick a topic and your daily declaration comes from it.", "id": "topics" }
+      ]
+    },
+    {
+      "name": "paid-download",
+      "start": "/listen/preview-psalm-night-en?paid=1",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "see": { "role": "button", "name": "Download" }, "id": "download" }
+      ]
+    },
+    {
+      "name": "settings",
+      "start": "/settings",
+      "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+      "steps": [
+        { "see": "Settings", "id": "settings" },
+        { "sweep": true }
+      ]
+    }
+  ],
+  "promises": [
+    { "text": "Unlimited Bible chat, kept private", "on": "paywall:plans", "built": "paid-chat:private" },
+    { "text": "Your private chats are never used to train AI.", "on": "paywall:plans", "built": "paid-chat:private" },
+    { "text": "The chat remembers what you share.", "on": "paywall:plans", "native_only": "chat memory between conversations" },
+    { "text": "A sleep session every night, plus ones made for you.", "on": "paywall:plans", "built": "paid-night:open" },
+    { "text": "A sleep session every night, plus ones made for you.", "on": "paywall:plans", "built": "made-for-you:form" },
+    { "text": "Every past story, and reading plans of 30 days and more.", "on": "paywall:plans", "built": "paid-stories:past-story" },
+    { "text": "Every past story, and reading plans of 30 days and more.", "on": "paywall:plans", "built": "paid-plan:day-30" },
+    { "text": "Declaration topics and offline downloads.", "on": "paywall:plans", "built": "paid-topics:topics" },
+    { "text": "Declaration topics and offline downloads.", "on": "paywall:plans", "built": "paid-download:download" }
+  ],
+  "native_only": [
+    { "feature": "in-app purchase and Restore Purchases", "why": "the web preview has no store: Restore is disabled and Join is preview-only", "simulator": "a StoreKit sandbox purchase on the simulator build (GitHub macOS runner, free: public repo)" },
+    { "feature": "the daily reminder notification", "why": "local notifications only exist on a phone", "simulator": "the simulator build" },
+    { "feature": "offline downloads and background audio", "why": "file storage and lock-screen audio only exist on a phone", "simulator": "the simulator build" },
+    { "feature": "chat memory between conversations", "why": "no screen shows it: the Worker writes and reads it only after real paid chats, and the preview run never sends a chat (guarded by worker/test/memory.test.ts)" }
+  ]
+}

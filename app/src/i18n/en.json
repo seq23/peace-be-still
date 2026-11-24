@@ -154,6 +154,7 @@
   "paid.renew.yearly": "No trial. Apple charges %{price} when your purchase is confirmed. It renews yearly at %{price} unless you cancel.",
   "paid.renew.monthly": "No trial. Apple charges %{price} when your purchase is confirmed. It renews monthly at %{price} unless you cancel.",
   "paid.previewJoin": "Preview · %{action}",
+  "paid.previewJoinNote": "This is a preview, so nothing is charged and nothing opens. On a phone, this button opens the store to join.",
   "paid.cancel": "Cancel in two taps ›",
   "paid.keepFree": "Nothing free is ever taken back.",
   "paid.keepPrice": "Your price never rises while you stay.",

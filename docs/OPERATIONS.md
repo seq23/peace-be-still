@@ -50,3 +50,27 @@ The Android launcher icon's foreground (`app/assets/adaptive-icon.png`) is the a
 - Paid: `PAID_PROVIDER` + `PAID_MODEL` on the billed key `PBS_GEMINI_API_KEY` (or Workers AI, or OpenRouter with zero data retention). Never falls back to free.
 - Crisis: `CRISIS_MODEL` on the billed key, for any adult conversation the safety check flags; it decays after 10 calm turns or 24 hours.
 - Teens and Gemini (her ruling 23 Nov 2026, "Card + hotline only"; Google's terms bar every Gemini route, Vertex included, for services likely used by under-18s): a teen's words never reach a rung marked `google` (`offGoogle` in `worker/src/index.ts`, every Gemini rung and any `google/` model through OpenRouter). Paid is `PAID_PROVIDER` alone, no `PAID_BACKUP_MODEL`; the crisis lane is Workers AI (`teenProviders`); the answer judge has no Google backup. A teen's high signal gets the card, the region's lines and the fixed "Are you safe right now?" words with no model call. Workers AI's answer calls are a small shared daily cap (`WORKERS_AI_ANSWER_CALLS_DAILY`, spent by adults first), so a teen's crisis lane is often out: after the card has shown in that conversation she gets fixed follow-up words (`teenStillHereText`, metric `crisis_lane_down_teen_followup`), never the card and question again unless a new high signal or a not-safe answer comes; her "yes, I'm safe" counts as a calm turn. Each teen gets one model answer a day off the paid lane (`TEEN_AI_ANSWERS_DAILY`, her ruling 23 Nov 2026 "yes, 1 each"), claimed per install in `chat_short_day` under a `teen:` key (cleaned with the day) before the ladder, given back when no model answered; past it the free lane says `teenDailyText(lang, region, door)`, which always names the region's free crisis lines (`helpLines: true`, shown as the card's call/text buttons; no model reads her words then, so it never asks her to say she is unsafe; metric `teen_answer_used`); a free teen sees no message counter and the crisis lane the follow-up words above; the free day's wall (a second conversation the same day, or the device or IP count; `CHAT_*_LIMIT` from the admission trigger, whatever the request claims) answers a teen `busy` with no counter and chat open: `teenDailyText` once her answer came today, else `limitText`, which claims no answer (an unreadable `teen:` row logs `TEEN_ANSWER_CAP_UNREAD` and takes `limitText`); an adult gets `kind: limit` (chat closes, counter unchanged) with `limitText(lang, region, door)`, the old words plus the same `helpLinesText` lines (`helpLines: true`), never a model call; an unreadable counter is busy (`teen_answer_unread`, log `TEEN_ANSWER_CAP_UNREAD`), never unlimited. Guarded by `worker/test/teen-routing.test.ts`.
+
+## The tap-through (every app PR)
+
+After the phone preview is published, `.github/workflows/mobile-preview.yml` calls boss-os
+`tap-through.yml` (the runner on boss-os main), driven by `tap-through.json` at the repo root: a robot
+taps through the preview like a person at 390 px, light and dark, with a video per journey and a shot per
+step (artifact `tap-through-<run id>`). Journeys: the door, Today, every tab, the paid plan screen
+(`/paid`), the tabs with preview paid access (`?paid=1`), Settings, and the hidden states opened by their
+own route: 3 AM on Today and Nights (`/today?hour=3`, `/nights?hour=3`, each must show "Go back to sleep")
+and a used week on a sleep session (`/listen/preview-psalm-night-en?nights=used`, must show "Your next free
+night is ..."; the Nights list itself shows no lock). Every line on `/paid` but one is mapped to the screen behind it,
+opened with `?paid=1` and checked by words the free screen does not show: the private chat note
+(`/chat`), an unlocked night in a used week, Made for you, a past story opened from the list
+(`/today/stories`), day 30 of a 30-day plan (`/today/plans?id=psalms-30`), declaration topics
+(`/today/declaration`) and the Download button on a night. Made for you is open to everyone on the web
+preview (`app/src/madeForYou/paidStub.ts`), so its check types a test note (never sent) and sees its "Make my session" button, which proves the form works, not that it is paid-only.
+The one line with no screen is "The chat remembers what you share.": chat memory lives in the Worker
+(`worker/test/memory.test.ts`) and the run never sends a chat, so it is listed under `native_only` as not run on the preview. It fails by name
+on a dead button, a console error, an error screen, an unreachable step or a paid-plan line with no screen
+behind it (ship-ready app-review.md). A PR that adds a screen, button or plan line adds it to
+`tap-through.json`. It replaces the hand-started review-capture workflow; `scripts/review-capture` stays
+for the site's own capture (`site.yml`).
+A screen opened directly (a changed file with no journey of its own) opens as an onboarded adult (`route_storage`),
+so a changed `/paid` is tapped like a member would reach it, not bounced to the door.
