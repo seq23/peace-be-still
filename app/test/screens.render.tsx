@@ -140,6 +140,7 @@ const screens = {
   listen: require('../app/listen/[track]').default,
   more: require('../app/(tabs)/more').default,
   settings: require('../app/settings').default,
+  chatMemory: require('../app/chat-memory').default,
   paid: require('../app/paid').default,
   notFound: require('../app/+not-found').default,
   grief: require('../app/grief').default,
@@ -1690,20 +1691,37 @@ test('Settings deletes every made-for-you session after asking', async t => {
   fetchMock.mock.restore();
 });
 
-test('web preview renders every paid state, including stopped, full and used, and plays a public fixture', async t => {
+test('web preview: Made for you is locked until the preview\'s ?paid=1, then renders every paid state, including stopped, full and used, and plays a public fixture', async t => {
   const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
   process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
   const location = Object.getOwnPropertyDescriptor(globalThis, 'location');
-  Object.defineProperty(globalThis, 'location', { configurable: true, value: { origin: 'https://preview.example' } });
+  // The preview's own paid switch (purchases/provider.tsx): ?paid=1, remembered in this browser.
+  const page = { origin: 'https://preview.example', search: '' };
+  const browser = new Map<string, string>();
+  Object.defineProperty(globalThis, 'location', { configurable: true, value: page });
+  Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: { getItem: (k: string) => browser.get(k) ?? null, setItem: (k: string, v: string) => void browser.set(k, v), removeItem: (k: string) => void browser.delete(k) } });
   t.after(() => {
     if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
     else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
     if (location) Object.defineProperty(globalThis, 'location', location);
     else Reflect.deleteProperty(globalThis, 'location');
+    Reflect.deleteProperty(globalThis, 'localStorage');
   });
   const fetchMock = t.mock.method(globalThis, 'fetch', () => { throw new Error('Unexpected preview fetch'); });
   const { PREVIEW_STATES } = require('../src/madeForYou/preview') as typeof import('../src/madeForYou/preview');
   const person = { ...base, journey: 'mi-refugio' };
+  // A free visitor to the preview gets the locked screen, like a free phone: the preview is not paid by itself.
+  for (const state of [undefined, 'ready', 'form']) {
+    const free = await mount('madeForYou', person, state ? { state } : {});
+    assert.match(strings(free), /Incluida con una suscripción/, `preview ${state ?? 'plain'} is locked without ?paid=1`);
+    assert.doesNotMatch(strings(free), /Puedes pedir otra mañana|preparar mi sesión/i);
+    await act(async () => free.unmount());
+  }
+  const player = testPlayer(audioTracks[0], null);
+  const lockedListen = await mount('listen', person, { track: 'made-for-you-preview-session' });
+  assert.match(strings(lockedListen), /Incluida con una suscripción/);
+  await act(async () => lockedListen.unmount());
+  page.search = '?paid=1';
   const seen = new Map<string, string>();
   for (const state of PREVIEW_STATES) {
     const tree = await mount('madeForYou', person, { state });
@@ -1725,7 +1743,6 @@ test('web preview renders every paid state, including stopped, full and used, an
   const ready = await mount('madeForYou', person, { state: 'ready' });
   await press(ready, /20/);
   assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: 'made-for-you-preview-session' } }]);
-  const player = testPlayer(audioTracks[0], null);
   const listen = await mount('listen', person, { track: 'made-for-you-preview-session' });
   assert.ok(texts(listen).some(line => line.endsWith(' · Escrita y narrada con IA')));
   assert.ok(texts(listen).includes('Reportar esta sesión'));
@@ -1818,8 +1835,8 @@ test('the rendered paid lane discloses benefits, actual store prices, renewal te
       assert.equal(choices()[0].props['aria-checked'], true);
       assert.match(textOf(paidControls(tree)[0]), /\$38\.49/);
       for (const meaning of es
-        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /Chat bíblico ilimitado/, new RegExp(`Privado hasta ${PAID_CHAT_MESSAGES} mensajes al día. Después se puede elegir el chat gratis, que no es privado; siempre preguntamos antes\\.`), /24 horas/]
-        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, /Unlimited Bible chat/, new RegExp(`Private for up to ${PAID_CHAT_MESSAGES} messages a day. After that you can choose free chat, which isn't private; we always ask first\\.`), /24 hours/]) {
+        ? [/memoria/, /cada noche/, /historias anteriores/, /sin conexión/, /sin período de prueba/i, /gratis sigue siendo gratis/, /precio no sube/, /Chat bíblico ilimitado/, new RegExp(`Chat bíblico ilimitado \\| Privado en los primeros ${PAID_CHAT_MESSAGES} mensajes de cada día; después, el chat sigue, pero ya no es privado\\. \\| Los chats privados nunca`), /servicios de IA gratis, que pueden usarlo para entrenar/, /24 horas/]
+        : [/remembers/, /every night/, /past story/, /offline/, /no trial/i, /free is ever taken back/, /price never rises/, /Unlimited Bible chat/, new RegExp(`Unlimited Bible chat \\| Private for your first ${PAID_CHAT_MESSAGES} messages each day; after that, chat keeps going, just not private\\. \\| Your private chats are never`), /free AI services first, and they may use it for training/, /24 hours/]) {
         assert.match(strings(tree), meaning);
       }
       await press(tree, /\$6\.29/);
@@ -2746,6 +2763,146 @@ test('a cold start whose first Bible reads fail recovers by itself: every verse 
     assert.ok(texts(tree).includes('Psalm 34:18 · KJV'), 'one psalm is singular');
   } finally {
     (globalThis as any).__pbsSqlFailures = 0;
+    await act(async () => tree.unmount());
+  }
+});
+
+// "What the chat remembers": a fake server for /api/memory and /api/token/renew; every request is kept.
+function memoryServer(answer: (method: string, path: string, auth: string | null) => Response | Promise<Response>) {
+  const seen: { method: string; path: string; search: string; auth: string | null; body: unknown }[] = [];
+  const fetchMock = mock.method(globalThis, 'fetch', async (input: string, init: RequestInit = {}) => {
+    const url = new URL(input);
+    const auth = new Headers(init.headers).get('authorization');
+    seen.push({ method: init.method ?? 'GET', path: url.pathname, search: url.search, auth, body: init.body });
+    return answer(init.method ?? 'GET', url.pathname, auth);
+  });
+  return { seen, restore: () => fetchMock.mock.restore() };
+}
+const memoryOpts = { ...base, journey: 'psalm-nights' } as const;
+
+test('Settings links "What the chat remembers" (13 and over only), and the screen shows her own note, read with her token alone', async t => {
+  asSubscriber();
+  const server = memoryServer(() => Response.json({ summary: 'Carrying a lot at work; Psalm 46 helps.' }));
+  t.after(() => server.restore());
+  const settings = await mount('settings', memoryOpts);
+  await press(settings, 'What the chat remembers');
+  assert.deepEqual(calls.at(-1), ['push', '/chat-memory']);
+  const child = await mount('settings', { ...memoryOpts, age: 'child' });
+  assert.doesNotMatch(strings(child), /What the chat remembers/);
+  assert.equal(host(await mount('chatMemory', { ...memoryOpts, age: 'child' }), 'Redirect')[0]?.props.href, '/settings');
+
+  const tree = await mount('chatMemory', memoryOpts);
+  assert.match(strings(tree), /Carrying a lot at work; Psalm 46 helps\./);
+  assert.match(strings(tree), new RegExp(en['memory.intro.paid'].slice(0, 40)));
+  // ABUSE: the app never names an install; the server reads the id from the signed token only.
+  const reads = server.seen.filter(r => r.path === '/api/memory');
+  assert.deepEqual(reads.map(r => [r.method, r.search, r.auth, r.body]), [['GET', '', 'Bearer render-token', undefined]]);
+  await act(async () => { settings.unmount(); child.unmount(); tree.unmount(); });
+});
+
+test('DATA LOSS: deleting what the chat remembers asks first, "Keep it" sends nothing, and only a confirmed delete says deleted', async t => {
+  asSubscriber();
+  let deleteAnswer = () => Response.json({ error: 'CHAT_INTERNAL' }, { status: 500 });
+  const server = memoryServer(method => method === 'DELETE' ? deleteAnswer() : Response.json({ summary: 'She is grieving her mother.' }));
+  t.after(() => server.restore());
+  const deletes = () => server.seen.filter(r => r.method === 'DELETE');
+  const tree = await mount('chatMemory', memoryOpts);
+  await press(tree, 'Delete what the chat remembers');
+  assert.match(strings(tree), /can't be undone/);
+  assert.equal(deletes().length, 0, 'nothing is deleted before she confirms');
+  await press(tree, 'Keep it');
+  assert.equal(deletes().length, 0);
+  assert.match(strings(tree), /grieving her mother/);
+  // A failed delete says so and keeps the note on screen; it never claims "Deleted".
+  await press(tree, 'Delete what the chat remembers');
+  await press(tree, /^Delete$/);
+  assert.equal(deletes().length, 1);
+  assert.match(strings(tree), /couldn't confirm it was deleted/);
+  assert.doesNotMatch(strings(tree), /Deleted\. /);
+  assert.match(strings(tree), /grieving her mother/);
+  // A 200 without {deleted:true} is not a delete either.
+  deleteAnswer = () => Response.json({});
+  await press(tree, /^Delete$/);
+  assert.match(strings(tree), /couldn't confirm it was deleted/);
+  deleteAnswer = () => Response.json({ deleted: true });
+  await press(tree, /^Delete$/);
+  assert.deepEqual(deletes().map(r => [r.auth, r.search, r.body]).at(-1), ['Bearer render-token', '', undefined]);
+  assert.match(strings(tree), /Deleted\. The chat no longer remembers it\./);
+  assert.doesNotMatch(strings(tree), /grieving her mother/);
+  await act(async () => tree.unmount());
+});
+
+test('OUTAGE: a failed read says it couldn\'t load, never "nothing remembered"; only a clear empty answer says nothing is remembered', async t => {
+  asSubscriber();
+  let answer: () => Response | Promise<Response> = () => { throw new TypeError('Network request failed'); };
+  const server = memoryServer(() => answer());
+  t.after(() => server.restore());
+  for (const [i, broken] of [
+    () => { throw new TypeError('Network request failed'); },
+    () => Response.json({ error: 'CHAT_INTERNAL' }, { status: 500 }),
+    () => Response.json({ error: 'CHAT_TOKEN_SECRET_MISSING' }, { status: 503 }),
+    () => new Response('<html>gateway</html>', { status: 200 }),
+    () => Response.json({ summary: 42 }),
+    () => Response.json({}),
+  ].entries()) {
+    answer = broken;
+    const tree = await mount('chatMemory', memoryOpts);
+    assert.match(strings(tree), /couldn't load what the chat remembers/, String(broken));
+    assert.doesNotMatch(strings(tree), /Nothing is remembered/, String(broken));
+    // She can still ask for it to be deleted.
+    assert.match(strings(tree), /Delete what the chat remembers/);
+    if (i === 0) {
+      answer = () => Response.json({ summary: null });
+      await press(tree, 'Try again');
+      assert.match(strings(tree), /Nothing is remembered right now\./);
+      assert.doesNotMatch(strings(tree), /couldn't load|Delete what the chat remembers/);
+    }
+    await act(async () => tree.unmount());
+  }
+});
+
+test('an old token is renewed for the SAME install before the read; a refused renewal is "couldn\'t load", never a new empty identity', async t => {
+  asSubscriber();
+  let renew = () => Response.json({ token: 'renewed-token', installId: 'render-install' });
+  const server = memoryServer((method, path, auth) => {
+    if (path === '/api/token/renew') return renew();
+    if (path === '/api/token') return Response.json({ token: 'brand-new', installId: 'someone-new' });
+    return auth === 'Bearer renewed-token' ? Response.json({ summary: 'kept note' }) : Response.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+  });
+  t.after(() => server.restore());
+  const tree = await mount('chatMemory', memoryOpts);
+  assert.match(strings(tree), /kept note/);
+  assert.deepEqual(JSON.parse(chatRecord!), { token: 'renewed-token', age: 'adult', installId: 'render-install' });
+  await act(async () => tree.unmount());
+  asSubscriber();
+  renew = () => Response.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+  const refused = await mount('chatMemory', memoryOpts);
+  assert.match(strings(refused), /couldn't load/);
+  assert.equal(server.seen.filter(r => r.path === '/api/token').length, 0, 'never a new install id');
+  await act(async () => refused.unmount());
+});
+
+test('free, never chatted: nothing is stored, so nothing is asked of the server and the free line is shown', async t => {
+  chatRecord = null;
+  const server = memoryServer(() => { throw new Error('no request expected'); });
+  t.after(() => server.restore());
+  const tree = await mount('chatMemory', memoryOpts);
+  assert.match(strings(tree), /Only a paid plan keeps a note like this\./);
+  assert.match(strings(tree), /Nothing is remembered right now\./);
+  assert.deepEqual(server.seen.filter(r => r.path.startsWith('/api/memory')), []);
+  await act(async () => tree.unmount());
+});
+
+test('"What the chat remembers" in Spanish, light and dark', async t => {
+  asSubscriber();
+  const server = memoryServer(() => Response.json({ summary: 'Nota guardada.' }));
+  t.after(() => server.restore());
+  for (const scheme of ['light', 'dark']) {
+    (globalThis as any).__pbsScheme = scheme;
+    const tree = await mount('chatMemory', { ...memoryOpts, language: 'es' });
+    assert.match(strings(tree), /Lo que recuerda el chat/);
+    assert.match(strings(tree), /Borrar lo que recuerda el chat/);
+    assert.doesNotMatch(strings(tree), /What the chat|Delete what/);
     await act(async () => tree.unmount());
   }
 });

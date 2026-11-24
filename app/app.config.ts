@@ -15,11 +15,24 @@ export function androidStoreKeyStop(env: Record<string, string | undefined>): st
   }
   return null;
 }
-const stop = androidStoreKeyStop(process.env);
+/** An over-the-air update (PBS_OTA_UPDATE=1, set only by scripts/ota-update.sh) replaces the JS bundle on every
+ *  phone of that version, purchase keys included: a bundle without BOTH store keys would leave live users unable to
+ *  buy or restore. Returns the named stop, or null. */
+export function otaKeyStop(env: Record<string, string | undefined>): string | null {
+  if (env.PBS_OTA_UPDATE !== '1') return null;
+  if (env.REVENUECAT_PBS_TEST_STORE === '1') return 'REVENUECAT_TEST_STORE_IN_OTA: unset REVENUECAT_PBS_TEST_STORE for an update';
+  if (!/^appl_[A-Za-z0-9]{8,}$/.test(env.REVENUECAT_PBS_IOS_PUBLIC_KEY ?? '')) return 'REVENUECAT_PBS_IOS_KEY_MISSING_FOR_OTA: run through the vault (REVENUECAT_PBS_IOS_PUBLIC_KEY, appl_…)';
+  if (!/^goog_[A-Za-z0-9]{8,}$/.test(env.REVENUECAT_PBS_ANDROID_PUBLIC_KEY ?? '')) return 'REVENUECAT_PBS_ANDROID_KEY_MISSING_FOR_OTA: run through the vault (REVENUECAT_PBS_ANDROID_PUBLIC_KEY, goog_…)';
+  return null;
+}
+
+const stop = androidStoreKeyStop(process.env) ?? otaKeyStop(process.env);
 if (stop) throw new Error(stop);
 
+const PROJECT_ID = 'e23117dc-4272-4aaa-b88e-662733141a5c';
+
 const config: ExpoConfig = {
-  name: 'Peace Be Still', slug: 'peace-be-still', scheme: 'peacebestill', version: '1.0.0',
+  name: 'Peace Be Still', slug: 'peace-be-still', scheme: 'peacebestill', version: '1.0.1',
   orientation: 'portrait', userInterfaceStyle: 'automatic', plugins: [
     // One web bundle: the app is small, and lazy route chunks showed a blank screen while a slow phone fetched them.
     ['expo-router', { asyncRoutes: { web: false, default: 'development' } }],
@@ -27,7 +40,14 @@ const config: ExpoConfig = {
     ['expo-audio', { enableBackgroundPlayback: true, recordAudioAndroid: false }],
     ['expo-splash-screen', { image: './assets/icon.png', resizeMode: 'contain', backgroundColor: '#0E1A22' }],
     // Local notifications only (the one daily reminder): no push entitlement, no server, no token.
-    ['expo-notifications', { enableRemoteNotifications: false }]],
+    ['expo-notifications', { enableRemoteNotifications: false }],
+    'expo-updates'],
+  // Over-the-air fixes (EAS Update, free tier): a phone checks at launch and uses a new JS bundle on the next
+  // launch. An update only reaches builds of the SAME app version (runtimeVersion = appVersion), so a native change
+  // ships as a new store version, never over the air. Publish only with scripts/ota-update.sh (it refuses a bundle
+  // without both purchase keys). Builds from 1.0.1 on; 1.0.0 has no updater.
+  runtimeVersion: { policy: 'appVersion' },
+  updates: { url: `https://u.expo.dev/${PROJECT_ID}`, checkAutomatically: 'ON_LOAD', fallbackToCacheTimeout: 0 },
   icon: './assets/icon.png',
   // Only HTTPS and Apple's own encryption: exempt, so no export-compliance question on each upload.
   ios: { bundleIdentifier: 'com.peacebestillapp.mobile', infoPlist: { ITSAppUsesNonExemptEncryption: false } },
@@ -53,6 +73,6 @@ const config: ExpoConfig = {
     revenueCatIosKey: iosKey,
     revenueCatAndroidKey: androidKey,
     audioBaseUrl: process.env.PBS_AUDIO_BASE_URL ?? 'https://pbs-audio.professionalresourcelibrary.com/',
-    eas: { projectId: 'e23117dc-4272-4aaa-b88e-662733141a5c' } },
+    eas: { projectId: PROJECT_ID } },
 };
 export default config;

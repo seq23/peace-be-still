@@ -243,7 +243,7 @@ test('all four listings (App Store en-US/es-MX, Google Play en-US/es-US) state t
     const es = where.endsWith('es-MX') || where.endsWith('es-US');
     assert.ok(text.length > 500, `${where}: listing text read`);
     assert.match(text, new RegExp(es ? `de hasta ${FREE_CHAT_MESSAGES} mensajes\\b` : `up to ${FREE_CHAT_MESSAGES} messages\\b`), where);
-    assert.match(text, new RegExp(es ? `hasta ${PAID_CHAT_MESSAGES} mensajes al día` : `up to ${PAID_CHAT_MESSAGES} messages a day`), where);
+    assert.match(text, new RegExp(es ? `Privado en los primeros ${PAID_CHAT_MESSAGES} mensajes de cada día` : `Private for your first ${PAID_CHAT_MESSAGES} messages each day`), where);
   }
 });
 

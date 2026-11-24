@@ -3,6 +3,7 @@
 // "best ... app" landing pages. Owner 18 Nov 2026: Peace Be Still is our pick, with provable facts and
 // the disclosure line; no ratings, user counts or testimonials for Peace Be Still (it is new; none are quoted).
 import { D, V, Q, F, bg, PICK_EN, CHECKED } from "./blitz-common.mjs";
+import { claimText } from "./parts.mjs";
 
 const G = "Bible apps compared";
 const L = {
@@ -457,7 +458,7 @@ ${V("EST 4:14")}`],
       ["Is there a free Bible app with no ads?", `<p>Peace Be Still has no ads, free or paid, ever. Its free version holds the whole King James Bible to read and hear, today's story, one chat a day of up to 5 messages, your first sleep night then one a week, and a daily declaration.</p>`],
       ["Which Bible app reads the Bible aloud?", `<p>Peace Be Still reads the whole King James Bible aloud in the free version, and the Reina-Valera 1909 in Spanish. Psalm Nights whisper a psalm at bedtime with a sleep timer.</p>`],
       ["Is there a Bible app with no free trial or weekly plan?", `<p>Yes: Peace Be Still has neither. $7.99 a month or $39.99 a year, cancel in two taps, and your price never rises while you stay.</p>`],
-      ["Can you use a Bible chat app for free?", `<p>In Peace Be Still, yes: one chat a day of up to 5 messages, for good. A paid plan adds unlimited Bible chat and a chat that remembers what you are carrying. With a paid plan: unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first.</p>`],
+      ["Can you use a Bible chat app for free?", `<p>In Peace Be Still, yes: one chat a day of up to 5 messages, for good. A paid plan adds unlimited Bible chat and a chat that remembers what you are carrying. ${claimText("en")}</p>`],
     ],
     faq: [
       ["What is the best Bible app for women?", "Our pick is Peace Be Still, {{stores.short}}: the women of scripture in its stories, a morning declaration and whispered psalms at night, the whole KJV free to read, with a growing set of chapters read aloud, no ads and no trial. We make it, so weigh that."],

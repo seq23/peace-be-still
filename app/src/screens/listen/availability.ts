@@ -2,18 +2,18 @@ import Constants from 'expo-constants';
 import { useIsFocused } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { asManifestRows, audioBaseUrl, liveScripture } from '../../player/library';
+import { asManifestRows, audioBaseUrl, liveLibrary } from '../../player/library';
 import { setLiveTracks } from './preview';
 
 const base = audioBaseUrl(Constants.expoConfig?.extra?.audioBaseUrl);
 
-// The chapters published after this build, saved from the last good read so a downloaded one still lists offline.
+// The tracks published after this build (chapters, stories, nights), saved from the last good read so a downloaded one still lists offline.
 // Read through the same checks as the network copy; a network read that already landed wins.
 const LIVE_KEY = 'pbs.liveScripture.v1';
 let readLive = false;
-AsyncStorage.getItem(LIVE_KEY).then(text => { if (text && !readLive) setLiveTracks(liveScripture(text)); }).catch(() => {});
+AsyncStorage.getItem(LIVE_KEY).then(text => { if (text && !readLive) setLiveTracks(liveLibrary(text)); }).catch(() => {});
 
-/** The published files (R2 manifest), read on focus; its scripture rows also add the chapters published after this build. `enabled` false skips the request (Today outside the small hours). */
+/** The published files (R2 manifest), read on focus; its rows also add every track published after this build. `enabled` false skips the request (Today outside the small hours). */
 export function usePublishedAudio(enabled = true) {
   const focused = useIsFocused();
   const [published, setPublished] = useState<ReadonlyMap<string, string> | null>(null);
@@ -38,7 +38,7 @@ export function usePublishedAudio(enabled = true) {
           }
         }
         if (!request.signal.aborted) {
-          const live = liveScripture(text);   // before setPublished: its re-render lists the new chapters
+          const live = liveLibrary(text);   // before setPublished: its re-render lists the new tracks
           if (live.length) {
             readLive = true;
             AsyncStorage.setItem(LIVE_KEY, asManifestRows(setLiveTracks(live))).catch(() => {});

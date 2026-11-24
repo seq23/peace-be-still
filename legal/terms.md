@@ -16,7 +16,7 @@ You must be at least 13 to use chat. If you are 13 to 17, a parent or guardian m
 
 The free version is free with no time limit: the whole Bible in text and audio, today's story, one chat a day of up to 5 messages (on an iPhone, your very first chat is private), the first sleep night and then one a week, a daily declaration, basic 7-day plans, saved verses, the journal, the streak and share cards.
 
-A paid plan adds unlimited Bible chat, chat that remembers, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline downloads. With a paid plan: unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first. It is sold monthly or yearly.
+A paid plan adds unlimited Bible chat, chat that remembers, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline downloads. With a paid plan: unlimited Bible chat. Private for your first 50 messages each day; after that, chat keeps going, just not private. Your private chats are never used to train AI. It is sold monthly or yearly.
 
 What is free stays free. While you stay subscribed, your price does not go up.
 

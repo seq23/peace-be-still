@@ -53,7 +53,7 @@ function words(lang) {
     mdJourneys: [
       jr(ART.bars("#86CBC1"), "Mentalidad", "Morning Word · Daily Declarations", `Una frase para decir en voz alta, de mañana y de noche, como “${I18N("es", "mindset.calm.1")}”`, "en"),
       jr(ART.waves("#86CBC1"), "Mentalidad", "Imagination Nights", "Sesiones nocturnas susurradas: soltar el cuerpo, una escena leída en voz baja, y luego silencio.", "en"),
-      jr(ART.talk, "Mentalidad", "Chat de Mentalidad", `Una respuesta corta y tranquila, marcada como IA. Con un plan de pago es privado hasta ${F.paid} mensajes al día.`),
+      jr(ART.talk, "Mentalidad", "Chat de Mentalidad", `Una respuesta corta y tranquila, marcada como IA. Con un plan de pago, los primeros ${F.paid} mensajes de cada día son privados.`),
     ],
     phoneMind: { lab: "IMAGINATION NIGHTS", t: "La mañana de después", sub: "una escena, susurrada", line: "Abres los ojos antes de la alarma. La luz entra por la izquierda.", timer: "⏲ Temporizador", timerE: "30 min · se apaga suave" },
     mdLinksH: "Preguntas de Mentalidad", mdLinks: [["/es/preguntas/afirmaciones-positivas/", "Afirmaciones positivas que no suenan falsas"], ["/es/preguntas/meditacion-guiada-para-dormir/", "Meditación guiada para dormir"], ["/es/preguntas/diario-de-gratitud/", "Diario de gratitud: cómo empezar"], ["/es/mentalidad/", "Todo sobre Mentalidad ›"]],
@@ -67,7 +67,7 @@ function words(lang) {
     faq: [
       ["¿Qué es Peace Be Still?", "Peace Be Still es una app para el final del día. Empieza con una pregunta, “¿Qué necesitas esta noche?”, y dos puertas: la Palabra de Dios, con la Biblia, Salmos susurrados para dormir, chat bíblico e historias; y Mentalidad, con declaraciones diarias, Imagination Nights y un chat tranquilo. {{stores.line}}"],
       ["¿Peace Be Still es gratis?", `Sí. La versión gratis sigue gratis: un chat al día de hasta ${F.free} mensajes, tu primera noche de sueño y luego una por semana, una declaración diaria y un diario; en la Palabra de Dios, además, la Biblia completa y la historia de hoy. Un plan de pago cuesta ${F.monthly} al mes o ${F.yearly} al año.`],
-      ["¿El chat es privado?", `Con un plan de pago, sí: privado hasta ${F.paid} mensajes al día y nunca se usa para entrenar IA. El chat gratis usa un servicio de IA gratis que puede guardar lo que escribes, y la app siempre pregunta antes.`],
+      ["¿El chat es privado?", `Con un plan de pago, sí: privado en los primeros ${F.paid} mensajes de cada día y nunca se usa para entrenar IA; después, el chat sigue, pero ya no es privado. El chat gratis usa un servicio de IA gratis que puede guardar lo que escribes, y la app siempre pregunta antes.`],
       ["¿Ya salió Peace Be Still?", "{{stores.out}}"],
       ["¿Qué Biblia usa la puerta de la Palabra de Dios?", "En español, la Reina-Valera 1909, citada palabra por palabra de una copia guardada, con libro, capítulo y versículo. En inglés, la King James Version. La IA nunca escribe un versículo de memoria."],
       ["¿La puerta de Mentalidad es religiosa?", "No. Mentalidad no tiene contenido religioso: declaraciones diarias, imaginación en la noche y un chat tranquilo. Cada puerta va por su lado."],
@@ -102,7 +102,7 @@ function words(lang) {
     mdJourneys: [
       jr(ART.bars("#86CBC1"), "Mindset", "Morning Word · Daily Declarations", `One line to say out loud, morning and night, such as “${I18N("en", "mindset.calm.1")}”`),
       jr(ART.waves("#86CBC1"), "Mindset", "Imagination Nights", "Whispered night sessions: a slow body settle, one scene read softly, then quiet until sleep comes."),
-      jr(ART.talk, "Mindset", "Mindset chat", `A short, calm answer, marked AI every time. With a paid plan it is private for up to ${F.paid} messages a day.`),
+      jr(ART.talk, "Mindset", "Mindset chat", `A short, calm answer, marked AI every time. With a paid plan, the first ${F.paid} messages each day are private.`),
     ],
     phoneMind: { lab: "IMAGINATION NIGHTS", t: "Waking Up Inside It", sub: "one scene, whispered", line: "You open your eyes before the alarm. The light comes in from the left.", timer: "⏲ Sleep timer", timerE: "30 min · fades out" },
     mdLinksH: "Mindset questions", mdLinks: [["/questions/daily-affirmations/", "Daily affirmations: one line a day, said out loud"], ["/questions/guided-visualization-for-sleep/", "Guided visualization for sleep"], ["/questions/is-my-ai-chat-private/", "Is my AI chat private, or used for training?"], ["/mindset/", "Everything in Mindset ›"]],
@@ -116,7 +116,7 @@ function words(lang) {
     faq: [
       ["What is Peace Be Still?", "Peace Be Still is a phone app for the end of the day. It opens with one question, “What do you need tonight?”, and two doors: God's Word, with the King James Bible, whispered Psalms for sleep, Bible chat and Bible stories; and Mindset, with daily declarations, Imagination Nights and a calm chat. It is {{stores.short}}."],
       ["Is Peace Be Still free?", `Yes. The free version stays free: one chat a day of up to ${F.free} messages, your first sleep night and then one a week, a daily declaration and a journal; in God's Word, also the whole King James Bible and today's story. A paid plan is ${F.monthly} a month or ${F.yearly} a year.`],
-      ["Is the chat private?", `With a paid plan, yes: private for up to ${F.paid} messages a day and never used to train AI. Free chat uses a free AI service that may keep what you type, and the app always asks first.`],
+      ["Is the chat private?", `With a paid plan, yes: private for the first ${F.paid} messages each day and never used to train AI; after that, chat keeps going, just not private. Free chat uses a free AI service that may keep what you type, and the app always asks first.`],
       ["Is Peace Be Still out yet?", "{{stores.out}}"],
       ["Which Bible does the God's Word door use?", "The King James Version, quoted word for word from a stored copy, with book, chapter and verse. The AI never writes a verse from memory. The Spanish journey, Mi Refugio, uses the Reina-Valera 1909."],
       ["Is the Mindset door religious?", "No. Mindset has no religious content: daily declarations, imagination at night and a calm chat. Each door keeps to itself."],

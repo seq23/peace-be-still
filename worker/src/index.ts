@@ -1,4 +1,4 @@
-// Peace Be Still chat Worker: POST /api/token, POST /api/chat, POST /api/report, DELETE /api/memory, hourly cleanup.
+// Peace Be Still chat Worker: POST /api/token, POST /api/chat, POST /api/report, GET and DELETE /api/memory, hourly cleanup.
 // Order for a chat message: region -> signed token (age band inside) -> burst limit -> body ->
 // crisis (floor, then the model risk read on EVERY message; no read = no answer) -> paid status
 // (RevenueCat) -> daily admission (D1) -> free ladder -> crisis tripwire on the draft -> answer gate
@@ -926,6 +926,14 @@ export function createApp(deps: Deps = realDeps) {
         }
         if (pathname === '/api/admin/chat-block' && (request.method === 'POST' || request.method === 'DELETE')) return await adminBlock(request, env, deps);
         if (pathname === '/api/admin/spend' && request.method === 'GET') return await adminSpend(request, env, deps);
+        if (pathname === '/api/memory' && request.method === 'GET') {
+          // "What the chat remembers" (Settings): her own note only. The install id comes from her signed token,
+          // never from the request; a live token only (the app renews an old one first), so an old copy reads nothing.
+          const who = await install(request, env, deps.now());
+          if (who === 'missing') return fail('CHAT_TOKEN_SECRET_MISSING', 503);
+          if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
+          return json({ summary: await readMemory(env.DB, who.installId) });
+        }
         if (pathname === '/api/memory' && request.method === 'DELETE') {
           // An expired token still deletes: her memory must go whenever she asks, not only within 30 days.
           const who = await install(request, env, deps.now(), RENEW_GRACE_DAYS);

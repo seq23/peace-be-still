@@ -18,7 +18,7 @@ Choose your way in: God's Word, or mindset & imagination. Each one is its own sp
 Description body:
 Free, and it stays free: the whole Bible to read, and the Psalms and more chapters read aloud, with new ones added each week. Today's story. One chat a day, up to 5 messages. Your first sleep night, then one a week. A word for each morning. Basic 7-day plans, saved verses, a journal, a streak that never scolds, and cards to share.
 
-A paid plan adds unlimited Bible chat, chat that remembers what you are carrying, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline listening. Unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first.
+A paid plan adds unlimited Bible chat, chat that remembers what you are carrying, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline listening. Unlimited Bible chat. Private for your first 50 messages each day; after that, chat keeps going, just not private. Your private chats are never used to train AI.
 
 Scripture is quoted word for word from the King James Version, and the Reina-Valera 1909 in Spanish.
 
