@@ -141,7 +141,7 @@ await check('recycles the oldest 60+ day evergreen post after the bank', () => {
 function fakeBuffer({ visits = null, channels, scheduled = [], refuseReel = false, refuseAll = false, mediaStatus = 200, errors = [] }) {
   const made = [];
   const fetchImpl = async (url, init) => {
-    if (String(url).includes('/api/social-visits')) return visits ?? { status: 200, json: async () => ({ days: 28, total: 7, counting_since: '2026-11-19', sources: { threads: 4, instagram: 2, facebook: 1 } }) };
+    if (String(url).includes('/api/social-visits')) return visits ?? { status: 200, json: async () => ({ days: 28, total: 7, counting_since: '2026-11-19', sources: { threads: 4, instagram: 2, facebook: 1 }, store: { total: 3, counting_since: '2026-11-24', sources: { threads: 2, instagram: 1, facebook: 0, direct: 5 } } }) };
     if (init?.method === 'HEAD') return { status: mediaStatus, headers: { get: () => (url.includes('.mp4') ? 'video/mp4' : 'image/png') } };
     const { query, variables } = JSON.parse(init.body);
     let data;
@@ -186,6 +186,19 @@ await check('not connected: green notes, the OUTPUT line, metrics written, never
   const md = JSON.parse(fs.readFileSync(down.metricsFile, 'utf8'));
   assert.equal(md.social_visits_28d, 'not read', 'a failed count read must not write a number'); assert.match(md.social_visits_28d_why, /503/);
   assert.equal(md.channels.threads.visits_28d, 'not read'); assert.ok(md.channels.threads.visits_28d_why);
+  // Store-page visits (social_store_visits_28d): the site's store-badge tap count, never a constant.
+  assert.equal(m.social_store_visits_28d, 3, 'store-page visit count not written'); assert.equal(m.social_store_visits_counting_since, '2026-11-24');
+  assert.equal(m.social_store_visits_28d_why, undefined, 'a read number carries no why');
+  assert.equal(md.social_store_visits_28d, 'not read', 'a failed read must not write a store number'); assert.match(md.social_store_visits_28d_why, /503/);
+  const page = { days: 28, total: 7, counting_since: '2026-11-19', sources: { threads: 4, instagram: 2, facebook: 1 } };
+  // The site answered, but without a store block (an older Worker): 'not read', never 0.
+  const old = JSON.parse(fs.readFileSync((await run({ fetchImpl: fakeBuffer({ channels: [apIg, th], visits: { status: 200, json: async () => page } }).fetchImpl })).metricsFile, 'utf8'));
+  assert.equal(old.social_visits_28d, 7);
+  assert.equal(old.social_store_visits_28d, 'not read', 'no store block must not write a number'); assert.match(old.social_store_visits_28d_why, /store block/);
+  // The site's store_taps read failed: 'not read' with the site's own reason, never 0.
+  const failed = JSON.parse(fs.readFileSync((await run({ fetchImpl: fakeBuffer({ channels: [apIg, th], visits: { status: 200, json: async () => ({ ...page, store: { total: null, why: 'store_taps could not be read: D1_ERROR no such table: store_taps' } }) } }).fetchImpl })).metricsFile, 'utf8'));
+  assert.equal(failed.social_visits_28d, 7);
+  assert.equal(failed.social_store_visits_28d, 'not read', 'a failed store read must not write a number'); assert.match(failed.social_store_visits_28d_why, /no such table: store_taps/);
 });
 await check('named stops', async () => {
   assert.equal((await run({ env: {} })).e?.code, `SECRET_MISSING_${TOKEN_ENV}`);

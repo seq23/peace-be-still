@@ -2,7 +2,7 @@
 
 > Esta es una traducción al español. Si esta versión y la [versión en inglés](https://peacebestillapp.com/privacy) no dicen lo mismo, prevalece la versión en inglés.
 
-Vigente desde: 23 de noviembre de 2026
+Vigente desde: 24 de noviembre de 2026
 
 Esta política cubre la app Peace Be Still y el sitio web peacebestillapp.com. Peace Be Still es una app de Spry Labs, el nombre comercial de Redwood Reserve Holdings LLC, una compañía de responsabilidad limitada de Wyoming. Escriba a info@peacebestillapp.com con cualquier pregunta o solicitud sobre privacidad.
 
@@ -82,7 +82,7 @@ Todo lo que viaja entre la app y nuestro servicio va por HTTPS. El identificador
 
 ## El sitio web
 
-El sitio web peacebestillapp.com no usa cookies y no tiene cuentas, anuncios ni scripts de rastreo. Usa Cloudflare Web Analytics, un contador de visitas que cuida la privacidad y no usa cookies; nos dice las páginas vistas, la página desde la que usted llegó, y su país y tipo de dispositivo, solo como cifras totales. Cloudflare, nuestro proveedor de hosting, procesa datos básicos de cada visita, como su dirección IP y el tipo de navegador, para entregar la página y proteger el sitio.
+El sitio web peacebestillapp.com no usa cookies y no tiene cuentas, anuncios ni scripts de rastreo. Usa Cloudflare Web Analytics, un contador de visitas que cuida la privacidad y no usa cookies; nos dice las páginas vistas, la página desde la que usted llegó, y su país y tipo de dispositivo, solo como cifras totales. Nuestro propio servidor también lleva dos cuentas, solo como totales por día: las visitas que llegan desde nuestras publicaciones en Threads, Instagram y Facebook, y los toques en los botones del App Store y Google Play, por tienda y según de dónde llegó la visita (Threads, Instagram, Facebook o directa). Estas cuentas no guardan cookies, direcciones IP ni datos del navegador. Cloudflare, nuestro proveedor de hosting, procesa datos básicos de cada visita, como su dirección IP y el tipo de navegador, para entregar la página y proteger el sitio.
 
 Hasta el 18 de noviembre de 2026, el sitio tenía un formulario para avisar cuando salga la app. Ya está cerrado. De las personas que se anotaron antes de esa fecha, guardamos el correo electrónico, el idioma de la página, la puerta elegida si la hubo, la página, la fecha y la hora, y la frase que aceptaron, solo para enviar un único correo de lanzamiento. Borramos toda la lista después de enviar ese correo. Para salir de la lista antes, use el enlace "Quitar mi correo" (en inglés, "Remove my email") que vio al anotarse, o el enlace del correo de lanzamiento.
 

@@ -102,3 +102,8 @@ jobs:
           [ "$wl" = 405 ] || exit 1
           sv=$(curl -s https://peacebestillapp.com/api/social-visits); echo "social visits: $sv"
           echo "$sv" | grep -q '"sources":{"threads":' || { echo "NAMED STOP: SOCIAL_VISITS_UNREADABLE - /api/social-visits does not answer counts"; exit 1; }
+          echo "$sv" | grep -q '"store":{"total":[0-9]' || { echo "NAMED STOP: STORE_TAPS_UNREADABLE - /api/social-visits has no store-tap number (scorecard pbs-social, social_store_visits_28d)"; exit 1; }
+          # A store badge's /go/ link: a 302 to the listing in store.json (curl is a script, so this tap is not counted).
+          ios=$(node -p "require('./site/config/store.json').app_store_url || 'https://peacebestillapp.com/#get-the-app'")
+          go=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' 'https://peacebestillapp.com/go/app-store?ct=home'); echo "go: $go"
+          case "$go" in "302 $ios"*) ;; *) echo "NAMED STOP: GO_REDIRECT_WRONG - /go/app-store does not send a person to $ios"; exit 1;; esac
