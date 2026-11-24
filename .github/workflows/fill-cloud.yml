@@ -176,7 +176,9 @@ jobs:
           echo "rows=0" >> "$GITHUB_OUTPUT"
           pip install -q numpy scipy
           git -C main config user.name "pbs-cloud-fill"; git -C main config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          files=$(find rows -name rows.jsonl -size +0 2>/dev/null)
+          # No rows folder at all when no job ran (the fill is complete): find fails, and under bash -e that
+          # failed assignment killed the step red with no message (24 Nov 2026).
+          files=$(find rows -name rows.jsonl -size +0 2>/dev/null || true)
           [ -z "$files" ] && { echo "OUTPUT 0 cloud rows gathered (no job wrote a row)"; exit 0; }
           python code/audio/fill.py --push-rows $files
           echo "rows=$(cat $files | grep -c '^{')" >> "$GITHUB_OUTPUT"
