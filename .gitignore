@@ -18,5 +18,6 @@ worker/.dev.vars
 
 # Android store builds: the Play upload key file (written by android-store-build.yml, deleted after) and the bundles
 play-sa.json
+asc-key.p8
 *.aab
 *.apk

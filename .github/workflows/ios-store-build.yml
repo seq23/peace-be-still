@@ -1,0 +1,117 @@
+name: iOS store build
+# Manual only (a push never builds or uploads). Builds the App Store .ipa on a free GitHub macOS runner with
+# `eas build --local` (no EAS cloud minutes; the App Store certificate and profile are held by EAS and fetched with
+# EXPO_TOKEN), checks it, and uploads it to App Store Connect (TestFlight) with `eas submit --path`. It never creates
+# a store version or sends anything to App Review: that is a separate, owner-approved step.
+# The .ipa is never uploaded as an artifact (the repo is public); the App Store Connect key file is deleted in every case.
+# Repo secrets (from the Boss OS vault, set through a pipe): EXPO_TOKEN, REVENUECAT_PBS_IOS_PUBLIC_KEY (appl_...),
+# ASC_API_KEY_P8, ASC_API_KEY_ID, ASC_API_ISSUER_ID.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # One upload at a time: two runs would race for the same build number.
+  group: ios-store-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: app
+    # No secret at job level: each secret is given only to the step that needs it.
+    env:
+      EAS_CLI: eas-cli@27.11.0
+    steps:
+      - name: Secrets present
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          RC_IOS: ${{ secrets.REVENUECAT_PBS_IOS_PUBLIC_KEY }}
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_ISSUER: ${{ secrets.ASC_API_ISSUER_ID }}
+        run: |
+          [ -n "$EXPO_TOKEN" ] || { echo "NAMED STOP EXPO_TOKEN_MISSING"; exit 3; }
+          [[ "$RC_IOS" =~ ^appl_[A-Za-z0-9]{8,}$ ]] || { echo "NAMED STOP REVENUECAT_PBS_IOS_KEY_MISSING: vault REVENUECAT_PBS_IOS_PUBLIC_KEY (appl_...), then gh secret set"; exit 3; }
+          [ -n "$ASC_P8" ] && [ -n "$ASC_KEY_ID" ] && [ -n "$ASC_ISSUER" ] || { echo "NAMED STOP ASC_API_KEY_MISSING"; exit 3; }
+        working-directory: .
+      - uses: actions/checkout@v4
+      - name: Select newest Xcode
+        run: |
+          XC=$(ls -d /Applications/Xcode_*.app | grep -v -i beta | sort -V | tail -1)
+          sudo xcode-select -s "$XC/Contents/Developer"
+          xcodebuild -version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - name: Ensure fastlane and CocoaPods
+        run: |
+          command -v fastlane || brew install fastlane
+          command -v pod || brew install cocoapods
+      # The release gate, run on its own first: an App Store build without RevenueCat's App Store key, or on the test
+      # store, stops here (the price screen could not buy, or would talk to the wrong store).
+      - name: Release gate (RevenueCat App Store key, updater channel)
+        env:
+          EAS_BUILD_PLATFORM: ios
+          EAS_BUILD_PROFILE: production
+          REVENUECAT_PBS_IOS_PUBLIC_KEY: ${{ secrets.REVENUECAT_PBS_IOS_PUBLIC_KEY }}
+        run: |
+          npx expo config --type public --json > "$RUNNER_TEMP/config.json"
+          node -e '
+            const c = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
+            const eas = JSON.parse(require("fs").readFileSync("eas.json", "utf8"));
+            const bad = [];
+            if (!/^appl_[A-Za-z0-9]{8,}$/.test(c.extra?.revenueCatIosKey ?? "")) bad.push("REVENUECAT_PBS_IOS_KEY_MISSING");
+            if (c.ios?.bundleIdentifier !== "com.peacebestillapp.mobile") bad.push("BUNDLE_ID_WRONG");
+            if (eas.build.production.channel && !c.updates?.url) bad.push("UPDATER_MISSING");
+            if (bad.length) { console.log("NAMED STOP " + bad.join(" ")); process.exit(3); }
+            console.log("OUTPUT gate: App Store key present; version " + c.version);
+          ' "$RUNNER_TEMP/config.json"
+      - name: Build the .ipa (eas build --local)
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          REVENUECAT_PBS_IOS_PUBLIC_KEY: ${{ secrets.REVENUECAT_PBS_IOS_PUBLIC_KEY }}
+        run: npx --yes "$EAS_CLI" build --platform ios --profile production --local --non-interactive --output "$RUNNER_TEMP/peace-be-still.ipa"
+      - name: Check the .ipa (bundle id, version, signed for the App Store)
+        run: |
+          rm -rf "$RUNNER_TEMP/ipa" && mkdir "$RUNNER_TEMP/ipa" && unzip -q "$RUNNER_TEMP/peace-be-still.ipa" -d "$RUNNER_TEMP/ipa"
+          P=$(ls -d "$RUNNER_TEMP"/ipa/Payload/*.app | head -1)
+          ID=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$P/Info.plist")
+          V=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$P/Info.plist")
+          B=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$P/Info.plist")
+          WANT=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).version' "$RUNNER_TEMP/config.json")
+          [ "$ID" = "com.peacebestillapp.mobile" ] || { echo "NAMED STOP IPA_BUNDLE_ID $ID"; exit 3; }
+          [ "$V" = "$WANT" ] || { echo "NAMED STOP IPA_VERSION $V != $WANT"; exit 3; }
+          security cms -D -i "$P/embedded.mobileprovision" > "$RUNNER_TEMP/profile.plist"
+          [ "$(/usr/libexec/PlistBuddy -c 'Print :ProvisionsAllDevices' "$RUNNER_TEMP/profile.plist" 2>/dev/null)" != "true" ] || { echo "NAMED STOP IPA_ENTERPRISE_PROFILE"; exit 3; }
+          ! /usr/libexec/PlistBuddy -c 'Print :ProvisionedDevices' "$RUNNER_TEMP/profile.plist" >/dev/null 2>&1 || { echo "NAMED STOP IPA_AD_HOC_PROFILE"; exit 3; }
+          echo "OUTPUT ipa: $ID $V ($B), App Store profile"
+      # The App Store Connect key exists only from here to the cleanup: never during npm ci, the build or its plugins.
+      # eas submit refuses this key from environment variables when non-interactive, so it goes into eas.json for this run.
+      - name: App Store Connect key file
+        env:
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_ISSUER: ${{ secrets.ASC_API_ISSUER_ID }}
+        run: |
+          umask 077 && printf '%s' "$ASC_P8" > asc-key.p8
+          node -e '
+            const fs = require("fs"); const j = JSON.parse(fs.readFileSync("eas.json", "utf8"));
+            Object.assign(j.submit.production.ios, { ascApiKeyPath: "./asc-key.p8", ascApiKeyId: process.env.ASC_KEY_ID, ascApiKeyIssuerId: process.env.ASC_ISSUER });
+            fs.writeFileSync("eas.json", JSON.stringify(j, null, 2));'
+      - name: Upload to App Store Connect (eas submit; TestFlight only, no review)
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: npx --yes "$EAS_CLI" submit --platform ios --profile production --path "$RUNNER_TEMP/peace-be-still.ipa" --non-interactive --wait
+      - name: Delete the key file and the .ipa
+        if: always()
+        working-directory: .
+        run: rm -rf app/asc-key.p8 "$RUNNER_TEMP/peace-be-still.ipa" "$RUNNER_TEMP/ipa"
