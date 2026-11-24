@@ -10,6 +10,53 @@ import { readFileSync } from "node:fs";
 export function storeConfig() {
   return JSON.parse(readFileSync(new URL("../config/store.json", import.meta.url), "utf8"));
 }
+// THE launch state in words. Every sentence on the site that says where the app can be had is a
+// {{stores.<form>}} token, filled at build time by fillStores() from store.json, so `npm run store:set`
+// (which rebuilds every page) is the only switch: no copy hunt when a store goes live. Forms:
+// tag (after "Peace Be Still, …," or "a phone app …"), short (the brief version), line (a sentence),
+// out (the answer to "Is Peace Be Still out yet?"), heroB/heroS (the home hero note), ld (JSON-LD),
+// title (the English home <title> ending), eyebrow (the home hero's small name line).
+// No form ever names a date (repo rule: no launch date). Plain text only: tokens also land in JSON-LD.
+export const storeState = (store = storeConfig()) => (store.app_store_url && store.play_url ? "both" : store.app_store_url ? "ios" : store.play_url ? "play" : "soon");
+const STORE_WORDS = {
+  en: {
+    soon: { tag: "coming soon to the App Store and Google Play", short: "coming soon", line: "Coming soon to the App Store and Google Play.", out: "Not yet. It is coming soon to the App Store and Google Play. There is no waitlist and no launch date to wait for.", heroB: "Coming soon to the App Store and Google Play", heroS: "No date yet. When the app is live, this page will link straight to it.", ld: "Coming soon; not yet in any app store.", title: ", Coming Soon", eyebrow: "coming soon" },
+    ios: { tag: "now on the App Store and coming soon to Google Play", short: "now on the App Store", line: "Now on the App Store for iPhone. Coming soon to Google Play.", out: "Yes. It is on the App Store for iPhone: tap the App Store button on this page, or search “Peace Be Still” in the App Store. It is coming soon to Google Play. There is no waitlist.", heroB: "Now on the App Store for iPhone", heroS: "Coming soon to Google Play.", ld: "On the App Store for iPhone; coming soon to Google Play.", title: " for iPhone", eyebrow: "on the App Store" },
+    play: { tag: "now on Google Play and coming soon to the App Store", short: "now on Google Play", line: "Now on Google Play for Android. Coming soon to the App Store.", out: "Yes. It is on Google Play for Android: tap the Google Play button on this page, or search “Peace Be Still” in Google Play. It is coming soon to the App Store. There is no waitlist.", heroB: "Now on Google Play for Android", heroS: "Coming soon to the App Store.", ld: "On Google Play for Android; coming soon to the App Store.", title: " for Android", eyebrow: "on Google Play" },
+    both: { tag: "on the App Store and Google Play", short: "on the App Store and Google Play", line: "On the App Store and Google Play.", out: "Yes. It is on the App Store and Google Play: tap a store button on this page, or search “Peace Be Still”. There is no waitlist.", heroB: "On the App Store and Google Play", heroS: "For iPhone and Android.", ld: "On the App Store and Google Play.", title: " for iPhone and Android", eyebrow: "on the App Store and Google Play" },
+  },
+  es: {
+    soon: { tag: "que llega muy pronto al App Store y a Google Play", short: "que llega muy pronto", line: "Llega muy pronto al App Store y a Google Play.", out: "Todavía no. Peace Be Still llega muy pronto al App Store y a Google Play. Todavía no hay fecha. Cuando la app esté disponible, esta página llevará directo a ella.", heroB: "Muy pronto en el App Store y Google Play", heroS: "Todavía no hay fecha. Cuando la app esté disponible, esta página llevará directo a ella.", ld: "Muy pronto; todavía no está en ninguna tienda de apps.", eyebrow: "muy pronto" },
+    ios: { tag: "que ya está en el App Store y llega muy pronto a Google Play", short: "que ya está en el App Store", line: "Ya está en el App Store para iPhone. Llega muy pronto a Google Play.", out: "Sí. Ya está en el App Store para iPhone: toca el botón del App Store en esta página o busca “Peace Be Still” en el App Store. Llega muy pronto a Google Play. No hay lista de espera.", heroB: "Ya está en el App Store para iPhone", heroS: "Llega muy pronto a Google Play.", ld: "En el App Store para iPhone; muy pronto en Google Play.", eyebrow: "en el App Store" },
+    play: { tag: "que ya está en Google Play y llega muy pronto al App Store", short: "que ya está en Google Play", line: "Ya está en Google Play para Android. Llega muy pronto al App Store.", out: "Sí. Ya está en Google Play para Android: toca el botón de Google Play en esta página o busca “Peace Be Still” en Google Play. Llega muy pronto al App Store. No hay lista de espera.", heroB: "Ya está en Google Play para Android", heroS: "Llega muy pronto al App Store.", ld: "En Google Play para Android; muy pronto en el App Store.", eyebrow: "en Google Play" },
+    both: { tag: "que ya está en el App Store y en Google Play", short: "que ya está en el App Store y en Google Play", line: "Ya está en el App Store y en Google Play.", out: "Sí. Ya está en el App Store y en Google Play: toca un botón de tienda en esta página o busca “Peace Be Still”. No hay lista de espera.", heroB: "Ya está en el App Store y en Google Play", heroS: "Para iPhone y Android.", ld: "En el App Store y en Google Play.", eyebrow: "en el App Store y Google Play" },
+  },
+  ko: {
+    soon: { line: "곧 App Store에 나와요", out: "곧 나와요. 앱이 올라가면 이 페이지 아래 버튼이 바로 App Store로 연결돼요.", intro: "아직 App Store에 나오기 전이에요. 앱이 나오면 바로 아래 기능을 쓰실 수 있어요." },
+    ios: { line: "지금 App Store에 있어요", out: "네. 지금 iPhone용 App Store에 있어요. 이 페이지 아래 App Store 버튼을 누르시거나 App Store에서 “Peace Be Still”을 검색해 주세요. Google Play에는 곧 나와요.", intro: "지금 iPhone용 App Store에서 받으실 수 있어요. 앱에는 아래 기능이 있어요." },
+    play: { line: "지금 Google Play에 있어요", out: "아직 App Store에는 없어요. 지금은 Android용 Google Play에 있고, App Store에는 곧 나와요.", intro: "지금 Android용 Google Play에서 받으실 수 있어요. 앱에는 아래 기능이 있어요." },
+    both: { line: "App Store와 Google Play에 있어요", out: "네. App Store와 Google Play에 있어요. 이 페이지 아래 버튼을 누르시거나 “Peace Be Still”을 검색해 주세요.", intro: "App Store와 Google Play에서 받으실 수 있어요. 앱에는 아래 기능이 있어요." },
+  },
+  "zh-Hans": {
+    soon: { line: "即将上架 App Store" },
+    ios: { line: "已在 App Store 上架" },
+    play: { line: "已在 Google Play 上架" },
+    both: { line: "已在 App Store 和 Google Play 上架" },
+  },
+};
+/** The launch-state words for one language and store state (see STORE_WORDS). */
+export function storeWords(lang, store = storeConfig()) {
+  return STORE_WORDS[STORE_WORDS[lang] ? lang : "en"][storeState(store)];
+}
+/** Fills every {{stores.<form>}} token in a built page or file. A token with no words for that language
+ *  is a named stop, never left on a page. */
+export function fillStores(text, lang, store = storeConfig()) {
+  const w = storeWords(lang, store);
+  return String(text).replace(/\{\{stores\.(\w+)\}\}/g, (m, form) => {
+    if (typeof w[form] !== "string") throw new Error(`NAMED STOP [NO_STORE_WORDS] ${m} has no ${lang} words`);
+    return w[form];
+  });
+}
 // Her ruling 21 Nov 2026: privacy leads. The approved claim, read from the app's own strings so the site
 // can never say more than the app (app/src/i18n; "never used to train AI", not "not kept": see
 // app/app/paid/index.tsx for the source on Google's paid-tier logging).
@@ -106,6 +153,10 @@ const CTA = {
 // The page languages the site renders: English, Spanish and (landing + question pages only) Korean and
 // Simplified Chinese.
 export const LANGS = ["en", "es", "ko", "zh-Hans"];
+// Apple's official "Download on the App Store" badge in the page's language (Apple Marketing Tools,
+// unaltered black badges: US-UK English, es-MX, zh-Hans (zh-cn) and ko-KR).
+// [file, width at 40 px tall] (each badge's own viewBox; the localized artwork is not all the same width).
+const APP_STORE_BADGE = { en: ["/brand/stores/app-store-en.svg", 120], es: ["/brand/stores/app-store-es.svg", 120], ko: ["/brand/stores/app-store-ko.svg", 130], "zh-Hans": ["/brand/stores/app-store-zh-hans.svg", 109] };
 export const langOf = (html) => {
   const l = (String(html).match(/<html lang="([\w-]+)"/) || [])[1];
   return LANGS.includes(l) ? l : "en";
@@ -124,25 +175,42 @@ export function appStoreHref(store, page = "", door = "neutral") {
   return hit ? `${store.app_store_url}${store.app_store_url.includes("?") ? "&" : "?"}ppid=${hit.ppid}` : store.app_store_url;
 }
 
-export function storeCtaHtml(lang, store = storeConfig(), source = "", page = "", door = "neutral") {
-  const t = CTA[LANGS.includes(lang) ? lang : "en"];
+// The badges (or "coming soon" lines), one per store, shared by the CTA box and the home hero.
+// liveOnly (the home hero): only the stores that are live; the hero note already names the other.
+function storeListHtml(t, lang, store, source, page, door, liveOnly = false) {
+  const [badge, bw] = APP_STORE_BADGE[lang] || APP_STORE_BADGE.en;
   const ios = store.app_store_url
-    ? `<a class="store-badge" href="${tagged(appStoreHref(store, page, door), store, "ios", source)}"><img src="/brand/stores/app-store-en.svg" alt="${t.iosAlt}" width="120" height="40"></a>`
-    : `<span class="store-soon">${t.iosSoon}</span>`;
+    ? `<a class="store-badge" href="${tagged(appStoreHref(store, page, door), store, "ios", source)}"><img src="${badge}" alt="${t.iosAlt}" width="${bw}" height="40"></a>`
+    : liveOnly ? "" : `<span class="store-soon">${t.iosSoon}</span>`;
   const play = store.play_url
     ? `<a class="store-badge" href="${tagged(store.play_url, store, "play", source)}"><img src="/brand/stores/google-play-${lang === "es" ? "es" : "en"}.png" alt="${t.playAlt}" width="135" height="52"></a>`
-    : `<span class="store-soon">${t.playSoon}</span>`;
+    : liveOnly ? "" : `<span class="store-soon">${t.playSoon}</span>`;
+  return `<ul class="stores">
+${[ios, play].filter(Boolean).map((x) => `      <li>${x}</li>`).join("\n")}
+    </ul>`;
+}
+export function storeCtaHtml(lang, store = storeConfig(), source = "", page = "", door = "neutral") {
+  const t = CTA[LANGS.includes(lang) ? lang : "en"];
   const h = store.app_store_url || store.play_url ? t.liveH : t.soonH;
   return `<!-- cta:start --><section class="wrap" id="get-the-app" aria-labelledby="cta-h">
   <div class="card cta-card">
     <h2 id="cta-h">${h}</h2>
     <p>${t.p}</p>${ctaClaimHtml(lang, claimKind(page, door))}
-    <ul class="stores">
-      <li>${ios}</li>
-      <li>${play}</li>
-    </ul>
+    ${storeListHtml(t, lang, store, source, page, door)}
   </div>
 </section><!-- cta:end -->`;
+}
+/** The home hero note (between <!-- hero-cta:start --> and <!-- hero-cta:end -->): before launch, the
+ *  "coming soon" note; once a store is live, the same note with that store's badge, so the download sits
+ *  above the fold. */
+export function storeHeroHtml(lang, store = storeConfig(), source = "", page = "", door = "neutral") {
+  const t = CTA[LANGS.includes(lang) ? lang : "en"], w = storeWords(lang, store);
+  const live = Boolean(store.app_store_url || store.play_url);
+  return `<!-- hero-cta:start --><div class="soon${live ? " live" : ""}" role="note">
+        <img src="/brand/pbs-mark-dark.svg" alt="" width="44" height="44">
+        <p><b>${w.heroB}</b><span>${w.heroS}</span></p>${live ? `
+        ${storeListHtml(t, lang, store, source, page, door, true)}` : ""}
+      </div><!-- hero-cta:end -->`;
 }
 
 // The landing-only languages (a landing page and its question pages, no app screens yet): the words of
