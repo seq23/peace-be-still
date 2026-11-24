@@ -1691,20 +1691,37 @@ test('Settings deletes every made-for-you session after asking', async t => {
   fetchMock.mock.restore();
 });
 
-test('web preview renders every paid state, including stopped, full and used, and plays a public fixture', async t => {
+test('web preview: Made for you is locked until the preview\'s ?paid=1, then renders every paid state, including stopped, full and used, and plays a public fixture', async t => {
   const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
   process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
   const location = Object.getOwnPropertyDescriptor(globalThis, 'location');
-  Object.defineProperty(globalThis, 'location', { configurable: true, value: { origin: 'https://preview.example' } });
+  // The preview's own paid switch (purchases/provider.tsx): ?paid=1, remembered in this browser.
+  const page = { origin: 'https://preview.example', search: '' };
+  const browser = new Map<string, string>();
+  Object.defineProperty(globalThis, 'location', { configurable: true, value: page });
+  Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: { getItem: (k: string) => browser.get(k) ?? null, setItem: (k: string, v: string) => void browser.set(k, v), removeItem: (k: string) => void browser.delete(k) } });
   t.after(() => {
     if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
     else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
     if (location) Object.defineProperty(globalThis, 'location', location);
     else Reflect.deleteProperty(globalThis, 'location');
+    Reflect.deleteProperty(globalThis, 'localStorage');
   });
   const fetchMock = t.mock.method(globalThis, 'fetch', () => { throw new Error('Unexpected preview fetch'); });
   const { PREVIEW_STATES } = require('../src/madeForYou/preview') as typeof import('../src/madeForYou/preview');
   const person = { ...base, journey: 'mi-refugio' };
+  // A free visitor to the preview gets the locked screen, like a free phone: the preview is not paid by itself.
+  for (const state of [undefined, 'ready', 'form']) {
+    const free = await mount('madeForYou', person, state ? { state } : {});
+    assert.match(strings(free), /Incluida con una suscripción/, `preview ${state ?? 'plain'} is locked without ?paid=1`);
+    assert.doesNotMatch(strings(free), /Puedes pedir otra mañana|preparar mi sesión/i);
+    await act(async () => free.unmount());
+  }
+  const player = testPlayer(audioTracks[0], null);
+  const lockedListen = await mount('listen', person, { track: 'made-for-you-preview-session' });
+  assert.match(strings(lockedListen), /Incluida con una suscripción/);
+  await act(async () => lockedListen.unmount());
+  page.search = '?paid=1';
   const seen = new Map<string, string>();
   for (const state of PREVIEW_STATES) {
     const tree = await mount('madeForYou', person, { state });
@@ -1726,7 +1743,6 @@ test('web preview renders every paid state, including stopped, full and used, an
   const ready = await mount('madeForYou', person, { state: 'ready' });
   await press(ready, /20/);
   assert.deepEqual(calls.pop(), ['push', { pathname: '/listen/[track]', params: { track: 'made-for-you-preview-session' } }]);
-  const player = testPlayer(audioTracks[0], null);
   const listen = await mount('listen', person, { track: 'made-for-you-preview-session' });
   assert.ok(texts(listen).some(line => line.endsWith(' · Escrita y narrada con IA')));
   assert.ok(texts(listen).includes('Reportar esta sesión'));

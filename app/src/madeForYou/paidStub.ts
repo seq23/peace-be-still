@@ -1,5 +1,6 @@
-// Integration: replace this hook with usePurchases().paid and bind request auth to
-// phase 3's install-token helper (including renewal). The paywall route comes from 5S.
+// Made for you is a paid feature: open only to a paid plan (the store, or the web preview's own ?paid=1 switch in
+// purchases/provider.tsx), 13 and over. The web preview is NOT paid by itself: it uses fake sessions
+// (previewApi), but who gets in follows the same paid flag as every other paid screen.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import type { Age } from '../model';
@@ -9,7 +10,7 @@ export const isMadeForYouPreview = () => Platform.OS === 'web' && process.env.EX
 
 export function useMadeForYouPaid(age: Age | null) {
   const { paid } = useOffline(age);
-  return !!age && age !== 'child' && (isMadeForYouPreview() || !!paid);
+  return !!age && age !== 'child' && !!paid;
 }
 
 export async function madeForYouToken(age: Age): Promise<string> {
