@@ -60,13 +60,14 @@ step (artifact `tap-through-<run id>`). Journeys: the door, Today, every tab, th
 (`/paid`), the tabs with preview paid access (`?paid=1`), Settings, and the hidden states opened by their
 own route: 3 AM on Today and Nights (`/today?hour=3`, `/nights?hour=3`, each must show "Go back to sleep")
 and a used week on a sleep session (`/listen/preview-psalm-night-en?nights=used`, must show "Your next free
-night is ..."; the Nights list itself shows no lock). Every line on `/paid` is mapped to the screen behind it,
+night is ..."; the Nights list itself shows no lock). Every line on `/paid` but one is mapped to the screen behind it,
 opened with `?paid=1` and checked by words the free screen does not show: the private chat note
 (`/chat`), an unlocked night in a used week, Made for you, a past story opened from the list
 (`/today/stories`), day 30 of a 30-day plan (`/today/plans?id=psalms-30`), declaration topics
 (`/today/declaration`) and the Download button on a night. Made for you is open to everyone on the web
-preview (`src/madeForYou/paidStub.ts`), so its check types a test note (never sent) and sees its "Make my session" button, which proves the form works, not that it is paid-only; chat
-memory lives in the Worker (`worker/test/memory.test.ts`), and the run never sends a chat. It fails by name
+preview (`app/src/madeForYou/paidStub.ts`), so its check types a test note (never sent) and sees its "Make my session" button, which proves the form works, not that it is paid-only.
+The one line with no screen is "The chat remembers what you share.": chat memory lives in the Worker
+(`worker/test/memory.test.ts`) and the run never sends a chat, so it is listed under `native_only` as not run on the preview. It fails by name
 on a dead button, a console error, an error screen, an unreachable step or a paid-plan line with no screen
 behind it (ship-ready app-review.md). A PR that adds a screen, button or plan line adds it to
 `tap-through.json`. It replaces the hand-started review-capture workflow; `scripts/review-capture` stays

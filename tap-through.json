@@ -158,7 +158,7 @@
   "promises": [
     { "text": "Unlimited Bible chat, kept private", "on": "paywall:plans", "built": "paid-chat:private" },
     { "text": "Your private chats are never used to train AI.", "on": "paywall:plans", "built": "paid-chat:private" },
-    { "text": "The chat remembers what you share.", "on": "paywall:plans", "built": "paid-chat:private" },
+    { "text": "The chat remembers what you share.", "on": "paywall:plans", "native_only": "chat memory between conversations" },
     { "text": "A sleep session every night, plus ones made for you.", "on": "paywall:plans", "built": "paid-night:open" },
     { "text": "A sleep session every night, plus ones made for you.", "on": "paywall:plans", "built": "made-for-you:form" },
     { "text": "Every past story, and reading plans of 30 days and more.", "on": "paywall:plans", "built": "paid-stories:past-story" },
@@ -169,6 +169,7 @@
   "native_only": [
     { "feature": "in-app purchase and Restore Purchases", "why": "the web preview has no store: Restore is disabled and Join is preview-only", "simulator": "a StoreKit sandbox purchase on the simulator build (GitHub macOS runner, free: public repo)" },
     { "feature": "the daily reminder notification", "why": "local notifications only exist on a phone", "simulator": "the simulator build" },
-    { "feature": "offline downloads and background audio", "why": "file storage and lock-screen audio only exist on a phone", "simulator": "the simulator build" }
+    { "feature": "offline downloads and background audio", "why": "file storage and lock-screen audio only exist on a phone", "simulator": "the simulator build" },
+    { "feature": "chat memory between conversations", "why": "no screen shows it: the Worker writes and reads it only after real paid chats, and the preview run never sends a chat (guarded by worker/test/memory.test.ts)" }
   ]
 }
