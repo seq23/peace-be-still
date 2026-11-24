@@ -54,12 +54,22 @@ The Android launcher icon's foreground (`app/assets/adaptive-icon.png`) is the a
 ## The tap-through (every app PR)
 
 After the phone preview is published, `.github/workflows/mobile-preview.yml` calls boss-os
-`tap-through.yml`, driven by `tap-through.json` at the repo root: a robot taps through the preview like a
-person at 390 px, light and dark (the door, Today, every tab, the paid plan screen, preview paid access
-`?paid=1`, 3 AM `?hour=3`, a used week `?nights=used`, Settings), with a video per journey and a shot per
-step (artifact `tap-through-<run id>`). It fails by name on a dead button, a console error, an error
-screen, an unreachable step or a paid-plan line with no screen behind it (ship-ready app-review.md). A PR
-that adds a screen, button or plan line adds it to `tap-through.json`. It replaces the hand-started
-review-capture workflow; `scripts/review-capture` stays for the site's own capture (`site.yml`).
+`tap-through.yml` (the runner on boss-os main), driven by `tap-through.json` at the repo root: a robot
+taps through the preview like a person at 390 px, light and dark, with a video per journey and a shot per
+step (artifact `tap-through-<run id>`). Journeys: the door, Today, every tab, the paid plan screen
+(`/paid`), the tabs with preview paid access (`?paid=1`), Settings, and the hidden states opened by their
+own route: 3 AM on Today and Nights (`/today?hour=3`, `/nights?hour=3`, each must show "Go back to sleep")
+and a used week on a sleep session (`/listen/preview-psalm-night-en?nights=used`, must show "Your next free
+night is ..."; the Nights list itself shows no lock). Every line on `/paid` is mapped to the screen behind it,
+opened with `?paid=1` and checked by words the free screen does not show: the private chat note
+(`/chat`), an unlocked night in a used week, Made for you, a past story opened from the list
+(`/today/stories`), day 30 of a 30-day plan (`/today/plans?id=psalms-30`), declaration topics
+(`/today/declaration`) and the Download button on a night. Made for you is open to everyone on the web
+preview (`src/madeForYou/paidStub.ts`), so its check proves the screen opens, not that it is paid-only; chat
+memory lives in the Worker (`worker/test/memory.test.ts`), and the run never sends a chat. It fails by name
+on a dead button, a console error, an error screen, an unreachable step or a paid-plan line with no screen
+behind it (ship-ready app-review.md). A PR that adds a screen, button or plan line adds it to
+`tap-through.json`. It replaces the hand-started review-capture workflow; `scripts/review-capture` stays
+for the site's own capture (`site.yml`).
 A screen opened directly (a changed file with no journey of its own) opens as an onboarded adult (`route_storage`),
 so a changed `/paid` is tapped like a member would reach it, not bounced to the door.
