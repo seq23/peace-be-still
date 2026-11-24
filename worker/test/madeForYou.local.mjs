@@ -481,6 +481,28 @@ test('with the paid rung at its cap, a note the free models failed twice is held
   assert.ok((await row(b)).note, 'the note is kept while it waits');
 });
 
+// Teens' words never reach a route that may train (security audit 23 Nov 2026, finding 8): a teen's note is drafted
+// and judged by Workers AI or the private paid rung only, even with every free model up and answering.
+test('a teen note is drafted and judged off every free rung that may train; an adult note still starts on them', async t => {
+  const { db, call, claim, row } = await worker(t);
+  const training = async () => (await db.prepare("SELECT COALESCE(SUM(n), 0) AS n FROM chat_counts WHERE metric LIKE '%gemini-free%' OR metric LIKE '%openrouter-free%'").first()).n;
+  const teen = (await (await call(id.owner, { body: note, headers: { 'x-test-age': 'teen' } })).json()).id;
+  assert.equal((await row(teen)).teen, 1);
+  const claimed = await claim(at, { 'x-test-paid': 'on' });
+  assert.equal(claimed.status, 200);
+  const job = (await claimed.json()).job;
+  assert.equal(job.id, teen);
+  assert.match(job.reflection, /This draft came from (workers-ai|paid)\./);
+  assert.doesNotMatch(job.reflection, /gemini-free|openrouter-free/);
+  assert.equal(await training(), 0, 'no free rung that may train was booked or asked');
+  // Control: an adult note on the same Worker drafts on the strongest free model (the count above can move).
+  const adult = (await (await call(id.other, { body: note })).json()).id;
+  const two = await (await claim(at, { 'x-test-paid': 'on' })).json();
+  assert.equal(two.job.id, adult);
+  assert.match(two.job.reflection, new RegExp(`This draft came from ${strongest}\\.`));
+  assert.ok(await training() > 0);
+});
+
 // Her ruling, 21 Nov 2026: free models first; when they are busy, empty or rate-limited, the private paid model drafts
 // and judges, so a session never fails or slips for that. Its spend goes into chat's one paid meter.
 test('free rungs busy (429), down or out of share: the private paid rung drafts and judges, the session completes, and its spend is on the paid meter', async t => {

@@ -20,7 +20,7 @@ import { storyArt } from './storyart';
 import { appleDeviceCheck, countFirstMessage, decideFirst, endFirst, firstActive, firstRow, type DeviceBit } from './firstprivate';
 import { madeForYou } from './madeForYou.mount';
 import { ipHash } from './iphash';
-import { runLadder, tally, type LadderRung, type Metrics } from './ladder';
+import { runLadder, tally, type LadderResult, type LadderRung, type Metrics } from './ladder';
 import { deleteMemory, markCrisis, readMemory, saveMemory } from './memory';
 import { memoryBlock, mindsetTeen, prompts, spanishOnly, summaryPrompt, type PromptId } from './prompts';
 import { gemini } from './providers/gemini';
@@ -31,11 +31,11 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { chatJudgeListSchema, chatJudgeSchema, chatJudgeVerdict, judgeMessages, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, shortBusyText, checkInQuestion, checkInText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitMindsetText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
-import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY, providers, type Translation } from './shared';
+import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY, providers, teenProviders, type Translation } from './shared';
 import { issueToken, RENEW_GRACE_DAYS, verifyToken, type Install } from './token';
 
 import type { ChatRequest, ChatResponse } from '../../app/src/chat/contract';
@@ -45,9 +45,10 @@ export type Deps = {
   now: () => number;
   risk: (env: Env, turns: Turn[]) => Promise<RiskVerdict>;
   /** lane: the free lane's judge has no billed backup (brain rule: free chat never touches the billed key). */
-  judge: (env: Env, input: JudgeInput, lane: Lane) => Promise<JudgeVerdict>;
-  /** The free lane by default (the order the privacy policy names); 'paid' is the billed, private model only. */
-  rungs: (env: Env, now: number, lane?: Lane) => LadderRung[];
+  judge: (env: Env, input: JudgeInput, lane: Lane, teen?: boolean) => Promise<JudgeVerdict>;
+  /** The free lane by default (the order the privacy policy names); 'paid' is the billed, private model only.
+   *  teen: no Gemini route on any lane (offGoogle); free and crisis keep only the rungs that never train (providers.mjs teenProviders). */
+  rungs: (env: Env, now: number, lane?: Lane, teen?: boolean) => LadderRung[];
   paid: (env: Env, installId: string, now: number) => Promise<Paid>;
   /** Apple DeviceCheck bit0 for the private first chat (firstprivate.ts): 'new' (now set), 'used', or 'error' (fail closed). */
   deviceCheck: (env: Env, token: string, now: number) => Promise<DeviceBit>;
@@ -138,7 +139,7 @@ const geminiModels = (env: Env) => env.GEMINI_MODELS.split(',').map(s => s.trim(
 // The free lane's Gemini is an UNBILLED project's key (PBS_FREE_GEMINI_API_KEY); the billed key
 // (PBS_GEMINI_API_KEY) is the paid lane's and is never used for free chat. A missing free key is the
 // named stop PBS_FREE_GEMINI_API_KEY_MISSING: the rung is skipped, never replaced by the paid key.
-const geminiRung = (env: Env, model: string, now: number): LadderRung => ({ id: `gemini-free:${model}`, call: gemini(env.PBS_FREE_GEMINI_API_KEY, model, { missing: 'PBS_FREE_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL }), cap: int(env.GEMINI_CALLS_DAILY, 200), day: pacificDay(now) });
+const geminiRung = (env: Env, model: string, now: number): LadderRung => ({ id: `gemini-free:${model}`, google: true, call: gemini(env.PBS_FREE_GEMINI_API_KEY, model, { missing: 'PBS_FREE_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL }), cap: int(env.GEMINI_CALLS_DAILY, 200), day: pacificDay(now) });
 const usd = (value: string | undefined, fallback: number) => { const n = Number(value); return Number.isFinite(n) && n >= 0 ? n : fallback; };
 /**
  * The paid lane's one rung: private, priced, with no free fallback after it. PAID_PROVIDER picks the
@@ -150,33 +151,43 @@ const paidRung = (env: Env, now: number): LadderRung => {
   const call = provider === 'workers-ai' ? workersAi(env.AI, env.PAID_MODEL, { thinking: false })
     : provider === 'openrouter-zdr' ? openRouterPrivate(env.OPENROUTER_API_KEY, env.PAID_MODEL, (env.PAID_HOSTS ?? '').split(',').map(h => h.trim()).filter(Boolean))
     : gemini(env.PBS_GEMINI_API_KEY, env.PAID_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL });
-  return { id: `paid-${provider}:${env.PAID_MODEL}`, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5), cached: usd(env.PAID_PRICE_CACHED_PER_M, usd(env.PAID_PRICE_IN_PER_M, 0.3) / 4) } };
+  // A Gemini model is a Google route on any provider (OpenRouter names Google's models google/...).
+  const google = (provider !== 'workers-ai' && provider !== 'openrouter-zdr') || /^google\//i.test(env.PAID_MODEL ?? '');
+  return { id: `paid-${provider}:${env.PAID_MODEL}`, google, call, cap: 1_000_000, day: utcDay(now), price: { in: usd(env.PAID_PRICE_IN_PER_M, 0.3), out: usd(env.PAID_PRICE_OUT_PER_M, 2.5), cached: usd(env.PAID_PRICE_CACHED_PER_M, usd(env.PAID_PRICE_IN_PER_M, 0.3) / 4) } };
 };
 
 /** The paid lane's private backup when PAID_PROVIDER is not Gemini: PAID_BACKUP_MODEL on the billed key. */
 const paidBackupRung = (env: Env, now: number): LadderRung => ({
-  id: `paid-gemini:${env.PAID_BACKUP_MODEL}`, cap: 1_000_000, day: utcDay(now),
+  id: `paid-gemini:${env.PAID_BACKUP_MODEL}`, google: true, cap: 1_000_000, day: utcDay(now),
   call: gemini(env.PBS_GEMINI_API_KEY, env.PAID_BACKUP_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.GEMINI_THINKING_LEVEL }),
   price: { in: usd(env.CRISIS_PRICE_IN_PER_M, 0.3), out: usd(env.CRISIS_PRICE_OUT_PER_M, 2.5), cached: usd(env.CRISIS_PRICE_IN_PER_M, 0.3) / 10 },
 });
 
 /** The stronger private model for a flagged conversation (CRISIS_MODEL, billed key only; never a free model). */
 const crisisRung = (env: Env, now: number): LadderRung => ({
-  id: `crisis-gemini:${env.CRISIS_MODEL}`, cap: 1_000_000, day: utcDay(now),
+  id: `crisis-gemini:${env.CRISIS_MODEL}`, google: true, cap: 1_000_000, day: utcDay(now),
   call: gemini(env.PBS_GEMINI_API_KEY, env.CRISIS_MODEL, { missing: 'PBS_GEMINI_API_KEY_MISSING', thinkingLevel: env.CRISIS_THINKING_LEVEL }),
   price: { in: usd(env.CRISIS_PRICE_IN_PER_M, 0.3), out: usd(env.CRISIS_PRICE_OUT_PER_M, 2.5) },
 });
 
-/** A small ladder for a check (risk read, judge): Workers AI first, then the last Gemini model. */
+/** Teens (13-17 and unknown age; her ruling 23 Nov 2026): Google's terms (Cloud Service Specific Terms 20(d), the
+ *  Gemini API terms) bar every Gemini route, Vertex AI included, from a service likely used by under-18s. A teen's
+ *  words never reach a rung marked google: this is the one filter every teen ladder passes through. */
+const offGoogle = (rungs: LadderRung[]) => rungs.filter(r => !r.google);
+
 /** A paid install meets no device, IP or app-wide message count (it is only counted). */
 const PAID_UNCAPPED = 1_000_000;
+/** A teen's model answers a day off the paid lane (her ruling 23 Nov 2026: "it should just be 1 free answer a day then for each"). */
+const TEEN_AI_ANSWERS_DAILY = 1;
 const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;
-async function check<T>(env: Env, now: number, chain: LadderRung | LadderRung[], messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true): Promise<T> {
+async function check<T>(env: Env, now: number, chain: LadderRung | LadderRung[], messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true, teen = false): Promise<T> {
   const metrics: Metrics = new Map();
   // The backup reads the same words the risk read does, which may be about a crisis: only the
   // private (paid) model may see them, never a free one.
   const first = Array.isArray(chain) ? chain[0] : chain;
-  const rungs = Array.isArray(chain) ? chain : backup && (env.PBS_GEMINI_API_KEY || ((env.PAID_PROVIDER as string) && (env.PAID_PROVIDER as string) !== 'gemini')) ? [first, paidRung(env, now)] : [first];
+  const all = Array.isArray(chain) ? chain : backup && (env.PBS_GEMINI_API_KEY || ((env.PAID_PROVIDER as string) && (env.PAID_PROVIDER as string) !== 'gemini')) ? [first, paidRung(env, now)] : [first];
+  // A teen's words (her question and the draft answer) never reach a Gemini backup: with none left, the read is `down`.
+  const rungs = teen ? offGoogle(all) : all;
   const out = await runLadder(env.DB, rungs, messages, schema, maxTokens, metrics, d => ok(read(d)));
   // A private backup's cost counts toward the app's paid spend like any answer.
   for (const [metric, n] of metrics) await bump(env.DB, centralDay(now), metric === 'paid_spend_micro' ? metric : `${first.id}:${metric}`, n);
@@ -193,7 +204,7 @@ export const realDeps: Deps = {
       () => read('workers-ai-risk-confirm', env.WORKERS_AI_RISK_CONFIRM_MODEL, int(env.WORKERS_AI_RISK_CONFIRM_CALLS_DAILY, 100)),
     );
   },
-  judge(env, input, lane) {
+  judge(env, input, lane, teen = false) {
     const now = Date.now();
     const first: LadderRung = { id: 'workers-ai-judge', call: workersAi(env.AI, env.WORKERS_AI_JUDGE_MODEL, { temperature: 0 }), cap: int(env.WORKERS_AI_JUDGE_CALLS_DAILY, 300), day: utcDay(now) };
     // The judge thinks before it scores (gpt-oss): it gets the budget it was calibrated with (run 10: at 200
@@ -204,24 +215,31 @@ export const realDeps: Deps = {
     // Workers AI's gpt-oss is its backup. Free chat keeps Workers AI only, never the billed route.
     if (lane !== 'free' && (env.PAID_PROVIDER as string) === 'openrouter-zdr') {
       const paidJudge = { ...paidRung(env, now), id: `judge-${env.PAID_PROVIDER}:${env.PAID_MODEL}` };
-      return check(env, now, [paidJudge, first], judgeMessages(input, true), chatJudgeListSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict);
+      return check(env, now, [paidJudge, first], judgeMessages(input, true), chatJudgeListSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, true, teen);
     }
-    return check(env, now, first, judgeMessages(input), chatJudgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free');
+    return check(env, now, first, judgeMessages(input), chatJudgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free', teen);
   },
-  rungs(env, now, lane = 'free') {
+  rungs(env, now, lane = 'free', teen = false) {
+    // A teen (her ruling 23 Nov 2026): paid is the private route alone, never its Gemini backup; free and the
+    // crisis lane are the rungs that never train (Workers AI). When those give nothing, the teen is told chat is
+    // resting, and on the crisis lane gets the card and her region's lines (chat's lane_down).
+    if (teen) return offGoogle(lane === 'paid' ? [paidRung(env, now)] : teenProviders.flatMap(p => freeRungs(env, now)[p.id] ?? []));
     // The private model, then (when it is not Gemini already) Gemini on the billed key: both private, both paid.
     if (lane === 'paid') return (env.PAID_PROVIDER as string) !== 'gemini' && env.PAID_BACKUP_MODEL ? [paidRung(env, now), paidBackupRung(env, now)] : [paidRung(env, now)];
     if (lane === 'crisis') return [crisisRung(env, now)];
-    const built: Record<string, LadderRung[]> = {
-      'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL, { thinking: false }), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
-      'gemini-free': geminiModels(env).map(model => geminiRung(env, model, now)),
-      'openrouter-free': [{ id: 'openrouter-free', call: openRouter(env.OPENROUTER_API_KEY, env.OPENROUTER_MODELS.split(',')), cap: int(env.OPENROUTER_CALLS_DAILY, 900), day: utcDay(now) }],
-    };
-    return providers.flatMap(p => built[p.id] ?? []);
+    return providers.flatMap(p => freeRungs(env, now)[p.id] ?? []);
   },
   paid: (env, installId, now) => paidStatus(env, installId, now),
   deviceCheck: (env, token, now) => appleDeviceCheck(env, token, now),
 };
+/** The free rungs by provider id (providers.mjs names the order). */
+function freeRungs(env: Env, now: number): Record<string, LadderRung[]> {
+  return {
+    'workers-ai': [{ id: 'workers-ai', call: workersAi(env.AI, env.WORKERS_AI_ANSWER_MODEL, { thinking: false }), cap: int(env.WORKERS_AI_ANSWER_CALLS_DAILY, 10), day: utcDay(now) }],
+    'gemini-free': geminiModels(env).map(model => geminiRung(env, model, now)),
+    'openrouter-free': [{ id: 'openrouter-free', call: openRouter(env.OPENROUTER_API_KEY, env.OPENROUTER_MODELS.split(',')), cap: int(env.OPENROUTER_CALLS_DAILY, 900), day: utcDay(now) }],
+  };
+}
 
 // Privacy policy: "Messages that mention self-harm or abuse are never sent to an AI provider." The
 // newest message is checked by the floor before any model; an EARLIER message the floor is sure
@@ -253,10 +271,17 @@ function parseChat(body: unknown): ChatRequest | null {
   return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true, freeConsent: b.freeConsent === true, overflowConsent: b.overflowConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
 }
 
+/** Who is a teen for routing and rules: the age band inside the SIGNED token, never a request field.
+ *  Anything not known to be adult is a teen (unknown age = teen). A request may only make routing
+ *  stricter (a teen voice or a teen age field on an adult token), never looser. */
+export const teenInstall = (install: Pick<Install, 'age'>) => install.age !== 'adult';
+export const teenRoute = (install: Pick<Install, 'age'>, raw: Record<string, unknown> | null, req: Pick<ChatRequest, 'voice'>) =>
+  teenInstall(install) || req.voice === 'teen' || raw?.age === 'teen' || raw?.ageBand === 'teen';
+
 /** Mi Refugio, the Spanish voice or a Spanish phone: Spanish and the Reina-Valera 1909. Teens keep the teen rules in their language. */
 export function voiceFor(req: ChatRequest, install: Install): { lang: Lang; translation: Translation; prompt: PromptId; teen: boolean } {
   const lang: Lang = req.journey === 'mi-refugio' || req.journey === 'Mi Refugio' || req.voice === 'spanish' || req.language === 'es' ? 'es' : 'en';
-  const teen = install.age === 'teen';
+  const teen = teenInstall(install);
   // The Mindset door keeps its own prompt for teens too (F8: no faith words); the teen rules are added to it.
   const prompt: PromptId = req.door === 'mindset' ? 'mindset' : teen ? (lang === 'es' ? 'teen-es' : 'teen') : lang === 'es' ? 'spanish' : req.voice === 'church' ? 'church' : 'plain';
   return { lang, translation: lang === 'es' ? 'RV1909' : 'KJV', prompt, teen };
@@ -331,6 +356,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const req = parseChat(raw);
   if (!req) return fail('BAD_REQUEST', 400);
   const v = voiceFor(req, who);
+  // Teens' words only ever reach rungs that never train (13-17 and unknown age; teenRoute above).
+  const teenOnly = teenRoute(who, raw, req);
   const me = who; const ask = req; // narrowed, for the answer function below
   // The Mindset door has no faith words in any reply (F8).
   const mind = req.door === 'mindset';
@@ -361,6 +388,13 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const flag = (asked: boolean) => env.DB.prepare('INSERT INTO chat_crisis (install_id, conversation, flagged_at, calm, asked) VALUES (?, ?, ?, 0, ?) ON CONFLICT(install_id, conversation) DO UPDATE SET flagged_at = excluded.flagged_at, calm = 0, asked = max(asked, excluded.asked)')
     .bind(who.installId, req.conversation, now, asked ? 1 : 0).run();
   const calmTurn = () => env.DB.prepare('UPDATE chat_crisis SET calm = calm + 1 WHERE install_id = ? AND conversation = ?').bind(who.installId, req.conversation).run();
+  const teenKey = `teen:${who.installId}`;
+  const claimTeenAnswer = async (): Promise<'claimed' | 'used' | 'unread'> => {
+    try {
+      return (await env.DB.prepare('INSERT INTO chat_short_day (day, device, n) VALUES (?, ?, 1) ON CONFLICT(day, device) DO UPDATE SET n = n + 1 WHERE n < ? RETURNING n').bind(day, teenKey, TEEN_AI_ANSWERS_DAILY).first()) !== null ? 'claimed' : 'used';
+    } catch { logCode('TEEN_ANSWER_CAP_UNREAD'); return 'unread'; }
+  };
+  const releaseTeenAnswer = () => env.DB.prepare('UPDATE chat_short_day SET n = n - 1 WHERE day = ? AND device = ? AND n > 0').bind(day, teenKey).run().then(() => undefined, () => logCode('TEEN_ANSWER_RELEASE_FAILED'));
   const capUsd = usd(env.PAID_AI_MONTHLY_CAP_USD, 100);
 
   // A high signal (owner, 21 Nov 2026): the fixed crisis card and its hotlines (by the device
@@ -368,6 +402,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // switch to the stronger private model is silent and never waits on her answer.
   //  - An intent phrase (the floor): fixed words, because the privacy policy promises such a message
   //    reaches no AI model, now or later.
+  //  - A teen (13-17 or unknown age; her ruling 23 Nov 2026, "Card + hotline only"): fixed words, written
+  //    by people, with no model call of any kind (Google's terms bar the crisis model for under-18s).
   //  - Otherwise the private crisis model writes two or three warm sentences first. Crisis always
   //    answers: past the monthly cap a paid user still gets the crisis model, a free user the fixed words.
   const crisisReply = async (kind: CrisisKind, layer: string) => {
@@ -378,9 +414,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     const card = crisisText(kind, v.lang, band, last, req.door, region);
     let checkIn = { text: checkInText[v.lang], ai: false };
     // The fixed words when the crisis model is the one that just failed (lane_down), or no model may read it (floor).
-    if (layer !== 'floor' && layer !== 'lane_down' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
-      const messages: Message[] = [{ role: 'system', content: crisisPrompt(v.lang, v.teen, mind) }, ...turns.slice(-4).map(t => ({ role: t.role, content: t.text }))];
-      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis'), messages, crisisSchema, 600 + CRISIS_THINKING_HEADROOM, metrics, d => crisisWords(d) !== null);
+    if (!teenOnly && layer !== 'floor' && layer !== 'lane_down' && (paid.paid || (await appSpendMonth(env.DB, now)) < capUsd * 1e6)) {
+      const messages: Message[] = [{ role: 'system', content: crisisPrompt(v.lang, mind) }, ...turns.slice(-4).map(t => ({ role: t.role, content: t.text }))];
+      const out = await runLadder(env.DB, deps.rungs(env, now, 'crisis', teenOnly), messages, crisisSchema, 600 + CRISIS_THINKING_HEADROOM, metrics, d => crisisWords(d) !== null);
       if ('data' in out) checkIn = { text: `${crisisWords(out.data)} ${checkInQuestion[v.lang]}`, ai: true };
       else { tally(metrics, 'crisis_model_down'); logCode('CHAT_CRISIS_MODEL_DOWN', { empty: out.empty }); }
     }
@@ -414,6 +450,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // A crisis turn in the history with no state here (another install, or state already cleaned) is
   // treated as on: nothing near a crisis goes to a free model. Once state exists, it decays.
   const inCrisis = sticky || (!state && turns.some(t => t.text === CRISIS_NOTE));
+  // The card and its question already showed in this conversation (the same test as the answer gate's afterCrisis).
+  const cardShown = (sticky && state?.asked === 1) || turns.slice(0, -1).some(t => t.text === CRISIS_NOTE);
   let lane: Lane = inCrisis ? 'crisis' : paid.paid ? 'paid' : 'free';
   if (inCrisis || distress(turns)) {
     tally(metrics, inCrisis ? 'crisis_followup' : 'prefilter');
@@ -489,13 +527,25 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (!code) throw error;
     tally(metrics, code.toLowerCase());
     if (code === 'CHAT_GLOBAL_LIMIT') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL', { reason: 'global_ceiling' }); return reply({ kind: 'no_free_model', ai: false, text: (mind ? noFreeModelMindsetText : noFreeModelText)[v.lang], scripture: [], remaining: null, limit: null, reminder: false }); }
-    return reply({ kind: 'limit', ai: false, text: (mind ? limitMindsetText : limitText)[v.lang], scripture: [], remaining: 0, limit: deviceLimit, reminder: false });
+    // The free day's wall (her messages, a second conversation the same day, or the network's share): the
+    // count stays enforced here at the server, whatever the request claims; only the words differ. Every wall
+    // reply names her region's free crisis lines (no model reads her words here, so nothing depends on what she
+    // wrote). A teen (no paid teen is walled) keeps chat open and sees no counter: her daily-limit reply once her
+    // one answer came today; before it (Workers AI was out or busy when she asked) the limit words, which claim no answer.
+    const door = mind ? 'mindset' : 'faith';
+    if (teenOnly) {
+      let answered = false; // unread: the limit words, which make no claim either way (both carry the lines)
+      try { answered = ((await env.DB.prepare('SELECT n FROM chat_short_day WHERE day = ? AND device = ?').bind(day, teenKey).first<{ n: number }>())?.n ?? 0) > 0; } catch { logCode('TEEN_ANSWER_CAP_UNREAD'); }
+      return reply({ kind: 'busy', ai: false, fixed: true, helpLines: true, text: (answered ? teenDailyText : limitText)(v.lang, region, door), scripture: [], remaining: null, limit: null, reminder: false });
+    }
+    return reply({ kind: 'limit', ai: false, helpLines: true, text: limitText(v.lang, region, door), scripture: [], remaining: 0, limit: deviceLimit, reminder: false });
   }
   const row = await env.DB.prepare('SELECT messages, first_msg_at, last_reminder_at FROM chat_device_day WHERE day = ? AND device = ?').bind(day, who.installId)
     .first<{ messages: number; first_msg_at: number; last_reminder_at: number | null }>();
   // Paid: private messages left today (none counted on the free lane she chose after them).
-  const remaining = paid.paid ? (overflow ? null : Math.max(0, PAID_CHAT_MESSAGES - (row?.messages ?? 0))) : crisisOpen ? null : Math.max(0, deviceLimit - (row?.messages ?? 0));
-  const shownLimit = paid.paid ? (overflow ? null : PAID_CHAT_MESSAGES) : crisisOpen ? null : deviceLimit;
+  // A free teen sees no message count: her model answer is one a day (TEEN_AI_ANSWERS_DAILY), so "4 of 5 left" would mislead.
+  const remaining = paid.paid ? (overflow ? null : Math.max(0, PAID_CHAT_MESSAGES - (row?.messages ?? 0))) : crisisOpen || teenOnly ? null : Math.max(0, deviceLimit - (row?.messages ?? 0));
+  const shownLimit = paid.paid ? (overflow ? null : PAID_CHAT_MESSAGES) : crisisOpen || teenOnly ? null : deviceLimit;
   // SB 243: a teen is reminded at least every 3 hours of chat that this is AI and to take a break.
   let reminder = false;
   if (v.teen && row && now - (row.last_reminder_at ?? row.first_msg_at) >= THREE_HOURS) {
@@ -557,7 +607,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Only the last CHAT_HISTORY_TURNS turns travel to the model (a paid user's memory note carries the rest).
   // On the free lane she chose after her private messages, only the new message travels: the earlier turns were private.
   const history: Message[] = (lane === 'free' && (overflow || firstHistory) ? turns.slice(-1) : turns.slice(-int(env.CHAT_HISTORY_TURNS, 6))).map(t => ({ role: t.role, content: t.text }));
-  const rungs = deps.rungs(env, now, lane);
+  const rungs = deps.rungs(env, now, lane, teenOnly);
   // The crisis model thinks (CRISIS_THINKING_LEVEL) and Gemini counts thinking inside the output cap:
   // at 350 it ran out mid-answer (run 10d: 21 of 48 crisis-lane answers malformed, 7 sent as busy).
   // Only the tokens used are billed, so the headroom costs nothing when unused.
@@ -588,7 +638,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: since, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
     } else if (paid.paid && lane === 'paid') tally(metrics, 'memory_skipped');
   });
-  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, earlier: earlierTurns.map(t => t.text).join('\n'), text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane);
+  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, earlier: earlierTurns.map(t => t.text).join('\n'), text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane, teenOnly);
   let objection: string | null = null;
   let variety0 = false;
   // A draft that passed every safety check but repeated a recent answer, or that the judge found
@@ -598,20 +648,39 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Three tries, then a fixed reply. Measured round 3: with two tries 4 of 45 answers fell back.
   // Two human-written answers in this voice go in first, as an earlier exchange (one counter picks them).
   const examples = examplesFor(sampleSet(v.prompt, v.lang), v.lang, await nextSeq(env.DB, v.lang === 'es' ? 'es' : mind ? 'mindset' : 'en'));
+  // A teen's model answers off the paid lane (Workers AI; her ruling 23 Nov 2026, "yes, 1 each"): one a day per
+  // install, the identity the device limit uses, claimed before any answer call so the shared pool is never
+  // drained by one person. Kept in the per-device day counter (chat_short_day) under a "teen:" key, cleaned with
+  // the day. A store that cannot be read is no answer (busy, or the crisis words), never unlimited. Given back if no model answered.
+  const teenSlot = teenOnly && lane !== 'paid' ? await claimTeenAnswer() : null;
+  if (teenSlot === 'used' || teenSlot === 'unread') tally(metrics, `teen_answer_${teenSlot}`);
   for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
     const steer: Message[] = objection ? [{ role: 'system', content: variety0 ? `Your last answer needs an edit. ${objection}` : `Your last answer was not used. ${objection} Write three different new answers. Reply with JSON {"versions": [{"text": string, "references": [...]}, ...]}.` }] : [];
     const messages = [...system, ...examples, ...history.slice(0, -1), ...steer, ...history.slice(-1)];
     // A variety edit is one answer (PBS_CHAT_COST_040: versions of an edit copied every kept sentence
     // three times, the largest share of paid output); a rewrite after a failed check still asks for
     // up to three versions, since a fresh answer can fail the same check again.
-    const out = objection && !variety0
+    const out: LadderResult = teenSlot === 'used' ? { empty: 'out' } : teenSlot === 'unread' ? { empty: 'busy' }
+      : objection && !variety0
       ? await runLadder(env.DB, rungs, messages, editSchema, answerTokens * 3, metrics, isEdit)
       : await runLadder(env.DB, rungs, messages, answerSchema, answerTokens, metrics, isAnswer);
     if ('empty' in out) {
       if (attempt === 0) {
         await refund(env.DB, day, me.installId, hash);
+        if (teenSlot === 'claimed') await releaseTeenAnswer();
         // A message on the crisis lane is never told chat is resting or busy: if the crisis model
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
+        // A teen whose card already showed in this conversation (Workers AI has a small shared daily
+        // quota, so this is common): fixed words written by people that point back to the card, never
+        // the card and "Are you safe right now?" again. The question is asked once per conversation;
+        // a new high signal or a not-safe answer still gets the card (both are read before this). Her
+        // "yes, I'm safe", or a message the safety model read as calm, counts toward the conversation's calm turns.
+        if (lane === 'crisis' && teenOnly && cardShown) {
+          tally(metrics, 'crisis_lane_down_teen_followup'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty, teen: true });
+          const safe = saysSafe(lastAssistant, last);
+          if (safe || (confirmed?.level === 'none' && confirmed.read !== 'down')) await calmTurn();
+          return reply({ kind: 'busy', ai: false, fixed: true, text: (safe ? teenStillHereSafeText : teenStillHereText)[v.lang], scripture: [], remaining: null, limit: null, reminder });
+        }
         if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(confirmed && confirmed.level !== 'none' ? confirmed.kind : 'selfharm', 'lane_down'); }
         // A paid user on free chat after her private messages never meets "resting": the private model answers, briefly.
         // Those short answers are capped per person per day (her ruling: a money ceiling); then "busy".
@@ -637,6 +706,8 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
           }
           return reply({ kind: 'busy', ai: false, text: paidDownText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });
         }
+        // A teen past her one answer today: fixed words, and chat stays open (a closed chat could not take a crisis message).
+        if (teenSlot === 'used') return reply({ kind: 'busy', ai: false, fixed: true, helpLines: true, text: teenDailyText(v.lang, region, mind ? 'mindset' : 'faith'), scripture: [], remaining: null, limit: null, reminder });
         if (out.empty === 'out') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL'); return reply({ kind: 'no_free_model', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit }); }
         tally(metrics, 'busy'); logCode('CHAT_BUSY');
         return reply({ kind: 'busy', ai: false, text: freeRestingText[v.lang], scripture: [], remaining: remaining === null ? null : remaining + 1, reminder, limit: shownLimit });
@@ -826,7 +897,7 @@ export function createApp(deps: Deps = realDeps) {
           const who = await install(request, env, now);
           if (who === 'missing') return fail('CHAT_TOKEN_SECRET_MISSING', 503);
           if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
-          return await reviewUnlock(env, who.installId, await request.json().catch(() => null), now);
+          return await reviewUnlock(env, who.installId, await request.text(), { now, ip: request.headers.get('cf-connecting-ip') ?? '0.0.0.0', waitUntil: p => ctx.waitUntil(p) });
         }
         if (pathname === '/api/admin/chat-block' && (request.method === 'POST' || request.method === 'DELETE')) return await adminBlock(request, env, deps);
         if (pathname === '/api/admin/spend' && request.method === 'GET') return await adminSpend(request, env, deps);

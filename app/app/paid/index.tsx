@@ -61,6 +61,8 @@ export default function PaidScreen() {
   const [requested, requestPlans] = useState(0);
   const [selected, select] = useState<Plan>('yearly');
   const [linkFailed, setLinkFailed] = useState(false);
+  // The preview's join opens nothing and grants nothing, so a tap says so (never a button that does nothing).
+  const [previewTapped, setPreviewTapped] = useState(false);
 
   useEffect(() => {
     if (paid) return;
@@ -143,7 +145,10 @@ export default function PaidScreen() {
         <PillButton onPress={() => { void buy(pkg); }}>{t(planCopy[selected].join, values)}</PillButton>
       ) : null}
       {preview && offers ? (
-        <PillButton onPress={() => {}}>{t('paid.previewJoin', { action: t(planCopy[selected].join, values) })}</PillButton>
+        <PillButton onPress={() => setPreviewTapped(true)}>{t('paid.previewJoin', { action: t(planCopy[selected].join, values) })}</PillButton>
+      ) : null}
+      {preview && offers && previewTapped ? (
+        <Body size={13} style={{ textAlign: 'center' }}>{t('paid.previewJoinNote')}</Body>
       ) : null}
       {offers && !paid ? (
         <Body size={13} style={{ textAlign: 'center' }}>{t(shop.renew[selected], values)}</Body>
@@ -178,12 +183,14 @@ export default function PaidScreen() {
   );
 }
 
-/** Google Play's reviewer only (Android): shown while the server says a review window is open (GET /api/review answers 200), so a
- *  person using the app never sees it. The code goes to the server; RevenueCat grants the plan (worker/src/review.ts). */
+/** Google Play's reviewer only (Android): while the server says a review window is open (GET /api/review answers 200), one
+ *  collapsed "Have a review code?" link under the plans; outside a window, nothing. The code goes to the server and RevenueCat
+ *  grants the plan (worker/src/review.ts); this screen never unlocks anything itself. */
 function ReviewCode({ redeem }: { redeem: (code: string) => Promise<ReviewResult> }) {
   const t = useT('journey');
   const c = usePalette();
   const [open, setOpen] = useState(false);
+  const [shown, setShown] = useState(false);
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<ReviewResult | null>(null);
@@ -193,6 +200,7 @@ function ReviewCode({ redeem }: { redeem: (code: string) => Promise<ReviewResult
     return () => { live = false; };
   }, []);
   if (!open) return null;
+  if (!shown) return <TextLink onPress={() => setShown(true)}>{t('review.link')}</TextLink>;
   const send = async () => {
     if (busy || !/^\d{10}$/.test(code)) return;
     setBusy(true);
@@ -201,7 +209,7 @@ function ReviewCode({ redeem }: { redeem: (code: string) => Promise<ReviewResult
     setBusy(false);
     if (answer !== 'granted') setResult(answer);
   };
-  const problem = result === 'wrong' ? 'review.wrong' : result === 'slow' ? 'review.slow' : result === 'failed' ? 'review.failed' : null;
+  const problem = result === 'wrong' ? 'review.wrong' : result === 'usedUp' ? 'review.usedUp' : result === 'slow' ? 'review.slow' : result === 'failed' ? 'review.failed' : null;
   return (
     <Card style={{ gap: 8 }}>
       <Body size={15} muted={false}>{t('review.title')}</Body>

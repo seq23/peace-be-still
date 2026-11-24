@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES } from '../src/gates';
+import { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY } from '../src/gates';
 
 // Every place paid chat is described to people says the fair-use number the worker enforces
 // (PAID_CHAT_MESSAGES) and the monthly heavy-use pause (CHAT_USER_MONTHLY_USD_*), in EN and ES.
@@ -94,13 +94,31 @@ test('NEGATIVE: no customer-facing words say "lane" (internal jargon); code name
 });
 
 test('every message count in customer copy is the setting: the free day is FREE_CHAT_MESSAGES, private ones PAID_CHAT_MESSAGES', () => {
-  const files = execSync('git ls-files app/src/i18n store legal site/content site/public', { cwd: new URL('.', root) }).toString().split('\n')
+  // Store text (App Store and Play, every language and caption), legal, the site, the app's strings and the
+  // social post banks and their caption code: a number written as a word counts too ("ten messages"), and so do
+  // up to three words between the number and "messages"/"mensajes"/"chats": "N chat messages", "N free daily messages",
+  // "N private daily chat messages", "N mensajes diarios gratis" (reviews of #119 and #120).
+  const files = execSync('git ls-files app/src/i18n store legal site/content site/public data/threads data/instagram scripts/threads scripts/instagram', { cwd: new URL('.', root) }).toString().split('\n')
     .filter(f => /\.(json|md|mjs|html|txt|xml)$/.test(f));
+  assert.ok(files.some(f => f.startsWith('store/google-play/')) && files.some(f => f.startsWith('data/threads/')), 'the Play listings and the social banks are scanned');
+  const spelled: Record<string, number> = {};
+  ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'fifteen', 'twenty', 'thirty', 'fifty']
+    .forEach((w, i) => { spelled[w] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 30, 50][i]; });
+  ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once', 'doce', 'quince', 'veinte', 'treinta', 'cincuenta']
+    .forEach((w, i) => { spelled[w] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 30, 50][i]; });
+  const count = new RegExp(`\\b(\\d+|${Object.keys(spelled).join('|')}) (?:[\\p{L}'-]+ ){0,3}?(?:messages|mensajes|chats)\\b|메시지 (\\d+)개`, 'giu');
+  // The pattern itself reads the phrasings reviews caught slipping past it.
+  for (const [probe, n] of [['10 free daily messages', 10], ['ten private daily chat messages', 10], ['10 mensajes diarios gratis', 10], ['diez nuevos mensajes de chat', 10], ['75 private messages', 75]] as const) {
+    const m = [...probe.matchAll(count)][0];
+    assert.ok(m, `the count scan misses "${probe}"`);
+    assert.equal(/^\d+$/.test(m[1]) ? Number(m[1]) : spelled[m[1].toLowerCase()], n, probe);
+  }
   let free = 0;
   for (const f of files) {
     const text = read(f);
-    for (const m of text.matchAll(/(\d+) (?:free |more free )?(?:messages|mensajes)|메시지 (\d+)개/g)) {
-      const n = Number(m[1] ?? m[2]);
+    for (const m of text.matchAll(count)) {
+      const word = (m[1] ?? '').toLowerCase();
+      const n = m[2] ? Number(m[2]) : /^\d+$/.test(word) ? Number(word) : spelled[word];
       const before = text.slice(Math.max(0, m.index! - 40), m.index! + m[0].length + 12);
       const paid = /private|privad|paid|pago|plan\b/i.test(before);
       assert.equal(n, paid ? PAID_CHAT_MESSAGES : FREE_CHAT_MESSAGES, `${f}: "${before.replace(/\s+/g, ' ')}"`);
@@ -116,4 +134,26 @@ test('every message count in customer copy is the setting: the free day is FREE_
     assert.doesNotMatch(t['chat.limit.upgrade'] + t['chat.limit.tomorrow'], /\d/);
   }
   assert.ok(en['chat.limit.upgrade'].includes(en['paid.chatHeadline']));
+});
+
+test('the short private answers a paid user gets when free chat is down are the setting (PAID_SHORT_ANSWERS_DAILY), in EN and ES', () => {
+  // The worker caps them with PAID_SHORT_ANSWERS_DAILY (worker/src/index.ts); the terms promise the same number.
+  const short = /shorter private answers, up to (\d+) a day|respuestas privadas más cortas, hasta (\d+) al día/g;
+  for (const f of ['legal/terms.md', 'legal/es/terminos.md', 'site/public/terms.html', 'site/public/es/terminos.html']) {
+    const numbers = [...read(f).matchAll(short)].map(m => Number(m[1] ?? m[2]));
+    assert.ok(numbers.length > 0, `${f} names no short-answer number`);
+    assert.deepEqual([...new Set(numbers)], [PAID_SHORT_ANSWERS_DAILY], f);
+  }
+  // Nowhere else in customer copy names a different short-answer number.
+  const files = execSync('git ls-files app/src/i18n store legal site/content site/public', { cwd: new URL('.', root) }).toString().split('\n')
+    .filter(f => /\.(json|md|mjs|html|txt|xml)$/.test(f));
+  const loose = /(?:short(?:er)? (?:private )?answers|respuestas (?:privadas )?(?:más )?cortas)[^.]{0,30}?(\d+)/gi;
+  for (const f of files) for (const m of read(f).matchAll(loose)) assert.equal(Number(m[1]), PAID_SHORT_ANSWERS_DAILY, `${f}: "${m[0]}"`);
+});
+
+// Her final ruling, 21 Nov 2026 19:29 CT: "ok keep 50" (after weighing 75, then 25 or 30). #119 set 75 from a
+// brain line that missed this answer; the live 1.0.0 app says 50. Changing the number is her call, never a build's.
+test('paid private chat is 50 messages a day and free is 5 (her rulings, 21 Nov 2026)', () => {
+  assert.equal(PAID_CHAT_MESSAGES, 50);
+  assert.equal(FREE_CHAT_MESSAGES, 5);
 });

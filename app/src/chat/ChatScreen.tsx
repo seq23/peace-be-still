@@ -87,6 +87,7 @@ function ReportAnswer({ answer, c, t }: { answer: string; c: Palette; t: T }) {
 }
 
 // Replies that end today's chat on this screen: the day's limit, free chat resting, a paused account.
+// A message that shows the crisis lines never carries the upgrade offer (her ruling 23 Nov 2026).
 // 'busy' (a model failed for a moment) keeps chat open. A paid user meets none of these (the Worker
 // offers free chat after her private messages, or answers privately and briefly).
 const CLOSES = new Set<ChatResponse['kind']>(['limit', 'no_free_model', 'paused']);
@@ -274,12 +275,12 @@ export default function ChatScreen() {
             <Text style={s.ref}>{`${v.ref} · ${v.translation === 'RV1909' ? 'RV1909' : 'KJV'}`}</Text>
             <Text style={s.verseText}>{displayRuns(v.text).map((r, j) => <Text key={j} style={r.italic ? { fontStyle: 'italic' } : undefined}>{r.text}</Text>)}</Text>
           </View>)}
-          {e.res.kind === 'crisis' && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
+          {(e.res.kind === 'crisis' || e.res.helpLines) && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
             <Text style={[s.linkText, { color: c.accent }]}>{t(l.label)}</Text>
           </Pressable>)}
           {/* Her ruling 21 Nov 2026: the free day's last message (FREE_CHAT_MESSAGES) always gets its full
               answer; under it, what a plan adds at the store's own monthly price, and when the free ones come back. */}
-          {!paid && i === entries.length - 1 && (e.res.kind === 'limit' || (e.res.kind === 'answer' && e.res.remaining === 0)) ? <View testID="limit-upgrade-card" style={{ gap: 6 }}>
+          {!paid && i === entries.length - 1 && !e.res.helpLines && (e.res.kind === 'limit' || (e.res.kind === 'answer' && e.res.remaining === 0)) ? <View testID="limit-upgrade-card" style={{ gap: 6 }}>
             <Pressable accessibilityRole="button" testID="limit-upgrade" onPress={() => router.push('/paid')} style={[s.link, { borderColor: c.accent }]}>
               <Text style={[s.linkText, { color: c.accent }]}>{e.res.firstPrivate || firstPrivate ? keepPrivate : monthly ? t('chat.limit.upgrade', { price: monthly }) : t('chat.limit.upgradeNoPrice')}</Text>
             </Pressable>
@@ -325,8 +326,9 @@ const s = StyleSheet.create({
   verse: { backgroundColor: night.bg, borderRadius: 12, padding: 14, gap: 6 },
   ref: { fontFamily: 'SplineSansMono_500Medium', fontSize: 12, letterSpacing: 1.2, textTransform: 'uppercase', color: night.dawn },
   verseText: { fontFamily: 'LibreCaslonText_400Regular', fontSize: 16, lineHeight: 23, color: night.ink },
-  link: { borderWidth: 1.5, borderRadius: 40, paddingVertical: 12, alignItems: 'center' },
-  linkText: { fontFamily: 'Figtree_600SemiBold', fontSize: 17 },
+  // Wrapped labels ("Llamar a la Línea de la Vida 800 911 2000" at 390 px) stay centred inside the pill's curve.
+  link: { borderWidth: 1.5, borderRadius: 40, paddingVertical: 12, paddingHorizontal: 24, alignItems: 'center' },
+  linkText: { fontFamily: 'Figtree_600SemiBold', fontSize: 17, textAlign: 'center' },
   note: { fontFamily: 'Figtree_400Regular', fontSize: 14, lineHeight: 20, marginTop: 4 },
   small: { fontFamily: 'Figtree_400Regular', fontSize: 14, lineHeight: 20 },
   reasons: { gap: 6 },

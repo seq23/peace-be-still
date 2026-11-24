@@ -308,10 +308,7 @@ def make_story(story: dict, work: Path, deadline: float | None = None) -> dict |
                 if ok.exists():
                     continue
                 holy = is_scripture(s, verses)
-                verdict = sentence_verdict(s, qa.transcribe(f, "en", "base"), holy)
-                if verdict != "ok":
-                    second = sentence_verdict(s, qa.transcribe(f, "en", "small"), holy)
-                    verdict = "ok" if "ok" in (verdict, second) else "near" if "near" in (verdict, second) else "bad"
+                verdict = sentence_verdict(s, qa.transcribe(f, "en", qa.hint(s, "en")), holy)
                 if verdict == "bad":
                     bad.append(f"t{ti}: \"{s[:40]}\" misheard{' (scripture)' if holy else ''}")
                     again([f])
@@ -504,6 +501,9 @@ def main(argv=None) -> int:
 if __name__ == "__main__":
     try:
         sys.exit(main())
+    except qa.JudgeUnavailable as e:   # the judge missing is never a verdict: nothing was written, the next run retries
+        print(str(fill.NamedStop("JUDGE_UNAVAILABLE", str(e))), file=sys.stderr)
+        sys.exit(9)
     except fill.NamedStop as e:
         print(str(e), file=sys.stderr)
         sys.exit(e.exit_code)

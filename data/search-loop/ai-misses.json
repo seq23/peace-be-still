@@ -1,0 +1,18 @@
+{
+  "schema": "search-loop-ai-misses-v1",
+  "weeks": {},
+  "reads": [
+    {
+      "at": "2026-11-23T18:58:35.980Z",
+      "status": "could_not_tell",
+      "week": "2026-W47",
+      "reason": "Boss OS did not read AI answers in 2026-W47 (status not_read)"
+    },
+    {
+      "at": "2026-11-23T22:11:51.798Z",
+      "status": "could_not_tell",
+      "week": "2026-W47",
+      "reason": "Boss OS did not read AI answers in 2026-W47 (status not_read)"
+    }
+  ]
+}

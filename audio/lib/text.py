@@ -58,7 +58,9 @@ _CAPS = re.compile(r"\b([A-ZÁÉÍÓÚÑ]{2,})\b")
 
 def speech_text(text: str, lang: str, pron: dict) -> str:
     """The words Kokoro is given for one stored verse (see the module note)."""
-    s = text.replace("[", "").replace("]", "").replace("(", "").replace(")", "")
+    # The KJV's paragraph mark is a mark on the page, never a word: the engine said "paragraph" aloud
+    # (23 Nov 2026: Genesis 1 as published says "...the first day, paragraph, and God said").
+    s = text.replace("¶", " ").replace("[", "").replace("]", "").replace("(", "").replace(")", "")
     s = s.replace("’", "'").replace("‘", "'")
     s = _CAPS.sub(lambda m: m.group(1).capitalize(), s)
     if lang == "es":
@@ -114,7 +116,9 @@ def number_words(n: int, lang: str) -> str:
 def score_words(text: str, lang: str) -> list[str]:
     """Lower-case words without accents or punctuation; digits as words. Used on the script AND
     the transcript, so both are read the same way (RV1909's old "á" and today's "a" match)."""
-    s = unicodedata.normalize("NFD", text.lower())
+    # The KJV's ligatures are two letters ("Cæsar", "Judæa"): NFD keeps æ as one letter that the
+    # filter below drops, which split "Cæsar" into "c sar" and failed Acts 26 on its last word (A07).
+    s = unicodedata.normalize("NFD", text.lower().replace("æ", "ae").replace("œ", "oe"))
     s = "".join(ch for ch in s if unicodedata.category(ch) != "Mn")
     s = re.sub(r"(\d),(\d)", r"\1\2", s)
     s = re.sub(r"\d+", lambda m: " " + number_words(int(m.group()), lang) + " ", s)
@@ -123,6 +127,26 @@ def score_words(text: str, lang: str) -> list[str]:
     s = re.sub(r"\bto (day|morrow)\b", r"to\1", s)   # KJV "to day" / "to morrow" are heard as one word
     s = re.sub(r"\bcheek bone\b", "cheekbone", s)
     return [SAME_WORD.get(w, w) for w in s.split()]
+
+
+_WORD = re.compile(r"[^\W\d_]+")
+
+
+def names(text: str, lang: str) -> dict:
+    """{score word: the word as written} for the script's names, in order: words written with a capital
+    inside a sentence (never the first word after . ? ! or the start) that the script never writes in
+    lower case, three letters or more. The judge is told them, and may hear them a letter off. Pure."""
+    caps, low = {}, set()
+    for m in _WORD.finditer(text):
+        w = m.group()
+        before = text[:m.start()].rstrip()
+        starts = not before or before[-1] in ".?!¶" or before.endswith(("[", "(")) and before[:-1].rstrip()[-1:] in ".?!"
+        if w.islower():
+            low.update(score_words(w, lang))
+        elif w[0].isupper() and not w.isupper() and not starts and len(w) >= 3:
+            key = "".join(score_words(w, lang))
+            caps.setdefault(key, w)
+    return {k: v for k, v in caps.items() if k not in low}
 
 
 # Old spellings a transcript writes the modern way, and "Selah" however it is heard. Applied to

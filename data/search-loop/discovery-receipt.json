@@ -1,11 +1,17 @@
 {
   "schema": "search-loop-discovery-v1",
   "site": "peacebestillapp.com",
-  "week": "2026-W47",
-  "generated_at": "2026-11-18T17:00:37.633Z",
+  "week": "2026-W48",
+  "generated_at": "2026-11-23T18:58:35.980Z",
   "paid_calls": 0,
   "cost_usd": 0,
   "hosts": {
+    "searchconsole.googleapis.com": {
+      "calls": 1,
+      "ok": 1,
+      "failed": 0,
+      "cost_usd": 0
+    },
     "ssl.bing.com": {
       "calls": 1,
       "ok": 0,
@@ -32,24 +38,24 @@
     }
   },
   "sources": {
-    "search_console": "not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
+    "search_console": "ok: 31 rows",
     "bing_webmaster": "ok: 0 rows",
-    "easy_wins": "not read: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/",
+    "easy_wins": "ok: 0 easy win(s) in Search Console",
     "suggestqueries.google.com": "ok",
     "api.bing.com": "not read: unavailable after 3 failures (last http 204)",
-    "relevance_screen": "ok: kept 81 of 130 (free model)",
+    "relevance_screen": "ok: kept 80 of 150 (free model)",
     "top10": "ok: 15 top-10 read(s) via brave"
   },
   "seeds": {
-    "planned": 126,
+    "planned": 460,
     "asked": 77,
-    "topics": 18,
-    "topics_asked": 18,
-    "priority_topics": 4,
-    "priority_targets": 41
+    "topics": 60,
+    "topics_asked": 60,
+    "priority_topics": 8,
+    "priority_targets": 57
   },
   "notes": [
-    "autocomplete stopped at its budget of 80 calls (77 of 126 planned questions asked)"
+    "autocomplete stopped at its budget of 80 calls (77 of 460 planned questions asked)"
   ],
   "competition": "ok: 15 top-10 read(s) via brave",
   "lanes": {
@@ -58,7 +64,7 @@
       "striking": 1
     },
     "can_be_one": 4,
-    "striking": 77,
+    "striking": 76,
     "weights": {
       "neighbour": 35,
       "unanswered": 30,
@@ -67,9 +73,9 @@
     }
   },
   "counts": {
-    "candidates": 132,
-    "targets": 81,
-    "strengthen_candidates": 2,
+    "candidates": 546,
+    "targets": 80,
+    "strengthen_candidates": 46,
     "dropped_shared_audience": 0
   }
 }

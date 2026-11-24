@@ -1,4 +1,4 @@
-# Player (engine only; the player screen is a later phase)
+# Player (the engine; the screen is app/listen/[track].tsx, drawn by src/screens/listen/NowPlaying.tsx)
 
 - `library.ts` + `build-library.ts`: `npm run library` (run before start, typecheck, the web export and EAS builds; never on install) turns `audio/manifest.jsonl`
   into `library.json` (git-ignored, bundled): passed rows only, a readable title per track, no checks or Drive paths.
