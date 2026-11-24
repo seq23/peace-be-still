@@ -150,3 +150,10 @@ test('the short private answers a paid user gets when free chat is down are the 
   const loose = /(?:short(?:er)? (?:private )?answers|respuestas (?:privadas )?(?:más )?cortas)[^.]{0,30}?(\d+)/gi;
   for (const f of files) for (const m of read(f).matchAll(loose)) assert.equal(Number(m[1]), PAID_SHORT_ANSWERS_DAILY, `${f}: "${m[0]}"`);
 });
+
+// Her final ruling, 21 Nov 2026 19:29 CT: "ok keep 50" (after weighing 75, then 25 or 30). #119 set 75 from a
+// brain line that missed this answer; the live 1.0.0 app says 50. Changing the number is her call, never a build's.
+test('paid private chat is 50 messages a day and free is 5 (her rulings, 21 Nov 2026)', () => {
+  assert.equal(PAID_CHAT_MESSAGES, 50);
+  assert.equal(FREE_CHAT_MESSAGES, 5);
+});
