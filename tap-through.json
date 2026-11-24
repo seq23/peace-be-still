@@ -150,9 +150,7 @@
       "start": "/settings?paid=1",
       "storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
       "steps": [
-        { "tap": "What the chat remembers", "then": "With a paid plan, the chat keeps one short note of what you've shared, so it can pick up where you left off. This is that note.", "id": "memory" },
-        { "see": "Nothing is remembered right now.", "id": "none" },
-        { "sweep": true }
+        { "tap": "What the chat remembers", "then": "With a paid plan, the chat keeps one short note of what you've shared, so it can pick up where you left off. This is that note.", "id": "memory" }
       ]
     },
     {
