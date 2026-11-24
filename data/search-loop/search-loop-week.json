@@ -2,18 +2,18 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W48",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-23T22:11:51.798Z",
+  "generated_at": "2026-11-24T20:49:54.100Z",
   "state": "slow",
   "published": 10,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
   "ai_visitors": 0,
-  "ai_bot_hits": 426,
+  "ai_bot_hits": 438,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 6,
+  "held_by_cap": 9,
   "redirected": [
     {
       "query": "psalms for sleep with rain",
@@ -312,9 +312,8 @@
   },
   "notes": [
     "site config lowers the mode to slow",
-    "not read: AI answer misses (Boss OS did not read AI answers in 2026-W47 (status not_read)); could not tell this run",
-    "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data); 3 more page(s) today would have gone over it, those searches stay queued",
-    "CHECK runs weekly in mode=slow; last ran 2026-11-18"
+    "not read: AI answer misses (Boss OS did not read AI answers in 2026-W48 (status not_read)); could not tell this run",
+    "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data); 3 more page(s) today would have gone over it, those searches stay queued"
   ],
   "lanes": {
     "ratio": {
@@ -343,14 +342,14 @@
     "competition": "ok: 15 top-10 read(s) via brave"
   },
   "ai_misses": {
-    "read": "not read: Boss OS did not read AI answers in 2026-W47 (status not_read)",
-    "week": "2026-W47",
+    "read": "not read: Boss OS did not read AI answers in 2026-W48 (status not_read)",
+    "week": "2026-W48",
     "misses": 0,
     "strengthened": [],
     "new_candidates": [],
     "skipped": [],
     "rejected": [],
-    "could_not_tell": 2
+    "could_not_tell": 3
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45277280124"
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45484815247"
 }
