@@ -8,6 +8,7 @@
 //   is on main; then CHAT_VERSES becomes "quotes Scripture word for word".
 // - Grief and caregiver pages promise no outcome and carry 988 and findahelpline.com.
 import { V, Q, F, bg, KJV_SRC, RV_SRC } from "./blitz-common.mjs";
+import { claimText } from "./parts.mjs";
 
 const D21 = { published: "2026-11-21", updated: "2026-11-21", publishedText: "21 Nov 2026", updatedText: "21 Nov 2026" };
 const DES21 = { published: "2026-11-21", updated: "2026-11-21", publishedText: "21 nov 2026", updatedText: "21 nov 2026" };
@@ -168,7 +169,7 @@ ${V("ISA 40:8")}`],
 <tr><td>The whole King James Bible to read</td><td>Offline listening</td></tr>
 <tr><td>The Psalms and more chapters read aloud, with new ones added each week</td><td>A whispered sleep session every night</td></tr>
 <tr><td>A morning verse and declaration, basic 7-day reading plans, saved verses, a journal and share cards</td><td>Longer plans, such as Mark and John a chapter a day</td></tr>
-<tr><td>Your first whispered sleep night, then one a week</td><td>With a paid plan: unlimited Bible chat, kept private. Your private chats are never used to train AI. Private for up to 50 messages a day. After that you can choose free chat, which isn't private; we always ask first.</td></tr>
+<tr><td>Your first whispered sleep night, then one a week</td><td>${claimText("en")}</td></tr>
 <tr><td>One Bible chat a day, up to 5 messages</td><td>Every past story</td></tr>
 </tbody></table>
 <p>There are no ads, free or paid, and no trial. ${CHAT_VERSES}. In Spanish, the app uses the Reina-Valera 1909.</p>`],

@@ -37,13 +37,13 @@ const FEAT = {
   en: {
     words: `<li><strong>Morning Word · Daily Declarations:</strong> one line to say out loud, morning and night, such as ${say("mindset.begin.1")} Free every day; a plan adds topics (${TOPICS("en")}).</li>`,
     nights: `<li><strong>Imagination Nights:</strong> ${NIGHTS} whispered night sessions. Each is a short teaching, a scene read softly, then quiet, on a dark screen with a sleep timer that fades out. Your first night is free, then one a week; a plan opens one every night.</li>`,
-    chat: `<li><strong>Mindset chat:</strong> say what is on your mind and get a short, calm answer, marked AI every time; it is not a counselor or a person. Free chat (one a day, up to ${F.free} messages) uses a free AI service that may keep what you type, so the app asks before your first one. With a paid plan, chat is private for up to ${F.paid} messages a day and never used to train AI.</li>`,
+    chat: `<li><strong>Mindset chat:</strong> say what is on your mind and get a short, calm answer, marked AI every time; it is not a counselor or a person. Free chat (one a day, up to ${F.free} messages) uses a free AI service that may keep what you type, so the app asks before your first one. With a paid plan, the first ${F.paid} messages each day are private and never used to train AI.</li>`,
     journal: `<li><strong>A journal that stays on your phone:</strong> Peace Be Still never receives your entries (<a href="/privacy">privacy policy</a>).</li>`,
   },
   es: {
     words: `<li><strong>Morning Word · Daily Declarations:</strong> una frase para decir en voz alta, de mañana y de noche, como ${say("mindset.begin.1", "es")} Gratis cada día; un plan suma temas (${TOPICS("es")}).</li>`,
     nights: `<li><strong>Imagination Nights:</strong> ${NIGHTS} sesiones nocturnas susurradas. Cada una trae una enseñanza corta, una escena leída en voz baja y luego silencio, con la pantalla oscura y un temporizador que baja el volumen. La primera noche es gratis, luego una por semana; un plan abre una cada noche.</li>`,
-    chat: `<li><strong>Chat de Mentalidad:</strong> escribe lo que tienes en mente y recibe una respuesta corta y tranquila, marcada como IA; no es un consejero ni una persona. El chat gratis (uno al día, hasta ${F.free} mensajes) usa un servicio de IA gratis que puede guardar lo que escribes, por eso la app pregunta antes del primero. Con un plan de pago, el chat es privado hasta ${F.paid} mensajes al día y nunca se usa para entrenar IA.</li>`,
+    chat: `<li><strong>Chat de Mentalidad:</strong> escribe lo que tienes en mente y recibe una respuesta corta y tranquila, marcada como IA; no es un consejero ni una persona. El chat gratis (uno al día, hasta ${F.free} mensajes) usa un servicio de IA gratis que puede guardar lo que escribes, por eso la app pregunta antes del primero. Con un plan de pago, los primeros ${F.paid} mensajes de cada día son privados y nunca se usan para entrenar IA.</li>`,
     journal: `<li><strong>Un diario que se queda en tu teléfono:</strong> Peace Be Still nunca recibe lo que escribes (<a href="/es/privacidad">privacidad</a>).</li>`,
   },
 };
@@ -1248,7 +1248,7 @@ const HUB_EN = {
     ["The Mindset chat", `<p>Say what is on your mind and get a short, calm answer. Every answer is marked AI; it is not a counselor or a person. If you mention self-harm or abuse, it shows the 988 Lifeline and other help straight away.</p>
 <ul>
 <li><strong>Free chat</strong> is one chat a day, up to ${F.free} messages. It uses a free AI service that may keep what you type, so the app asks before your first free chat.</li>
-<li><strong>With a paid plan</strong>, chat is private for up to ${F.paid} messages a day and never used to train AI. After that you can choose free chat, which isn't private; we always ask first.</li>
+<li><strong>With a paid plan</strong>, the first ${F.paid} messages each day are private and never used to train AI, and after that chat keeps going, just not private.</li>
 </ul>`],
     ["What is free, and what a plan adds", `<ul>
 <li><strong>Free, for good:</strong> the daily declaration, your first Imagination Night then one a week, one chat a day, and a journal that stays on your phone. No ads.</li>
@@ -1257,7 +1257,7 @@ const HUB_EN = {
   ],
   faq: [
     ["Is the Mindset door religious?", "No. The Mindset door has no religious content. It is daily declarations, imagination at night and a calm chat."],
-    ["Is the Mindset chat private?", `With a paid plan, yes: private for up to ${F.paid} messages a day and never used to train AI. Free chat uses a free AI service that may keep what you type, and the app asks before your first one.`],
+    ["Is the Mindset chat private?", `With a paid plan, yes: private for the first ${F.paid} messages each day and never used to train AI; after that, chat keeps going, just not private. Free chat uses a free AI service that may keep what you type, and the app asks before your first one.`],
     ["Is the chat a therapist?", "No. It is AI, it says so on every answer, and it is not a counselor or a person. If you mention self-harm, it shows the 988 Lifeline straight away."],
     ["Can teenagers use it?", "Chat is for ages 13 and up. Under 13, the app sends no chat to our service."],
   ],
@@ -1279,7 +1279,7 @@ const HUB_ES = {
     ["El chat de Mentalidad", `<p>Escribe lo que tienes en mente y recibe una respuesta corta y tranquila. Cada respuesta está marcada como IA; no es un consejero ni una persona. Si mencionas hacerte daño o abuso, muestra la línea 988 y otras ayudas de inmediato.</p>
 <ul>
 <li><strong>El chat gratis</strong> es un chat al día, hasta ${F.free} mensajes. Usa un servicio de IA gratis que puede guardar lo que escribes, por eso la app pregunta antes del primero.</li>
-<li><strong>Con un plan de pago</strong>, el chat es privado hasta ${F.paid} mensajes al día y nunca se usa para entrenar IA. Después se puede elegir el chat gratis, que no es privado; siempre preguntamos antes.</li>
+<li><strong>Con un plan de pago</strong>, los primeros ${F.paid} mensajes de cada día son privados y nunca se usan para entrenar IA, y después el chat sigue, pero ya no es privado.</li>
 </ul>`],
     ["Qué es gratis y qué suma un plan", `<ul>
 <li><strong>Gratis, para siempre:</strong> la declaración diaria, tu primera Imagination Night y luego una por semana, un chat al día y un diario que se queda en tu teléfono. Sin anuncios.</li>
@@ -1288,7 +1288,7 @@ const HUB_ES = {
   ],
   faq: [
     ["¿La puerta de Mentalidad es religiosa?", "No. No tiene contenido religioso: son declaraciones diarias, imaginación en la noche y un chat tranquilo."],
-    ["¿El chat de Mentalidad es privado?", `Con un plan de pago, sí: privado hasta ${F.paid} mensajes al día y nunca se usa para entrenar IA. El chat gratis usa un servicio de IA gratis que puede guardar lo que escribes, y la app pregunta antes del primero.`],
+    ["¿El chat de Mentalidad es privado?", `Con un plan de pago, sí: privado en los primeros ${F.paid} mensajes de cada día y nunca se usa para entrenar IA; después, el chat sigue, pero ya no es privado. El chat gratis usa un servicio de IA gratis que puede guardar lo que escribes, y la app pregunta antes del primero.`],
     ["¿El chat es un terapeuta?", "No. Es IA, lo dice en cada respuesta, y no es un consejero ni una persona."],
     ["¿Pueden usarlo adolescentes?", "El chat es para mayores de 13 años."],
   ],

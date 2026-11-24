@@ -99,6 +99,28 @@ export async function reportAnswer(answer: string, reason: ReportReason, fetcher
 
 /** Resolves only when the server confirmed the delete (200), or when she never chatted (nothing stored).
  *  The server accepts an expired token here, so a 401 is a real failure and is shown as one. */
+/** Settings, "What the chat remembers": her own note, read with her signed token (the server never takes an id
+ *  from the request). No token means she never chatted, so nothing is stored. An old token is renewed for the
+ *  SAME install id, never swapped for a new one (a new id would read someone new's empty note and show "nothing").
+ *  Anything but a clear answer throws, so the screen says it couldn't load, never "nothing remembered". */
+export async function readChatMemory(fetcher: typeof fetch = fetch): Promise<{ summary: string | null }> {
+  const old = await saved();
+  if (!old?.token) return { summary: null };
+  const read = (value: string) => fetcher(`${CHAT_API}/memory`, { headers: { authorization: `Bearer ${value}` } });
+  let res = await read(old.token);
+  if (res.status === 401) {
+    const renew = await fetcher(`${CHAT_API}/token/renew`, { method: 'POST', headers: { authorization: `Bearer ${old.token}` } });
+    if (!renew.ok) throw new ChatError(`renew ${renew.status}`);
+    const { token: value, installId } = (await renew.json()) as { token: string; installId: string };
+    await AsyncStorage.setItem(TOKEN_KEY, JSON.stringify({ token: value, age: old.age, installId }));
+    res = await read(value);
+  }
+  if (res.status !== 200) throw new ChatError(`memory ${res.status}`);
+  const body = (await res.json().catch(() => null)) as { summary?: unknown } | null;
+  if (!body || !('summary' in body) || (body.summary !== null && typeof body.summary !== 'string')) throw new ChatError('memory unreadable');
+  return { summary: body.summary || null };
+}
+
 export async function deleteChatMemory(fetcher: typeof fetch = fetch): Promise<void> {
   const old = await saved();
   if (!old?.token) return; // never chatted: nothing is stored

@@ -30,6 +30,7 @@ export default function SettingsScreen() {
       <BackLink onPress={() => (router.canGoBack() ? router.back() : router.replace('/more'))}>{tabs('tabs.more')}</BackLink>
       <Title>{t('settings.title')}</Title>
       {settings.age !== 'child' && <LinkRow label={t('paid.title')} onPress={() => router.push('/paid')} />}
+      {settings.age !== 'child' && <LinkRow label={t('memory.title')} onPress={() => router.push('/chat-memory')} />}
       <LinkRow label={t('settings.door')} value={settings.door ? t(`doorName.${settings.door}`) : null} onPress={() => router.push({ pathname: '/door', params: { change: '1' } })} />
       <LinkRow label={t('settings.birthYear')} onPress={() => router.push({ pathname: '/age', params: { correct: '1' } })} />
       {settings.door === 'mindset' ? (
