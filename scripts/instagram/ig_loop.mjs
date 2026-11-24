@@ -213,7 +213,7 @@ export function pickChannel(channels, { service, name }) {
 const imageUrl = (file, lock) => `${BASE_URL}/${SITE_DIR}/${file}.png?v=${(lock.frames?.[file]?.hash ?? '0').slice(0, 8)}`;
 
 /** The createPost input for one channel: the picture(s), or the Reel. */
-export function postInput({ post, channel, channelId, dueAt, text, lock, reel = false }) {
+export function postInput({ post, channel, channelId, dueAt, text, lock, live = false, reel = false }) {
   const base = { channelId, text: channel === 'facebook' ? fbText(text) : text, mode: 'customScheduled', dueAt, schedulingType: 'automatic', needsApproval: false, source: 'pbs-picture-loop' };
   if (reel) {
     const video = { url: `${BASE_URL}/${SITE_DIR}/${post.reel.video}`, thumbnailUrl: imageUrl(`${post.id}-reel`, lock) };
@@ -222,7 +222,7 @@ export function postInput({ post, channel, channelId, dueAt, text, lock, reel = 
   }
   // A carousel is an Instagram 'post' with several images (Buffer refuses type 'carousel', 19 Nov 2026).
   const frames = postFrames({ ...post, reel: undefined });
-  const assets = frames.map(({ file, frame }) => ({ image: { url: imageUrl(file, lock), metadata: { altText: frameText(frame, post.lang).slice(0, 500) } } }));
+  const assets = frames.map(({ file, frame }) => ({ image: { url: imageUrl(file, lock), metadata: { altText: frameText(frame, post.lang, live).slice(0, 500) } } }));
   const metadata = channel === 'instagram' ? { instagram: { type: 'post', shouldShareToFeed: true } } : { facebook: { type: 'post' } };
   return { ...base, assets, metadata };
 }
@@ -374,14 +374,14 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
     let format = postFrames({ ...post, reel: undefined }).length > 1 ? 'carousel' : 'single';
     if (post.reel) {
       try {
-        made = await createPost(call, postInput({ post, channel, channelId: chans[channel].id, dueAt: slot.dueAt, text: igStoreText(post.reel.caption, store), lock, reel: true }));
+        made = await createPost(call, postInput({ post, channel, channelId: chans[channel].id, dueAt: slot.dueAt, text: igStoreText(post.reel.caption, store), lock, live: storeLive(store), reel: true }));
         format = 'reel';
       } catch (e) {
         if (e.code !== 'BUFFER_POST_REFUSED') throw e;
         notes.push(`IG_REEL_FELL_BACK ${post.id} on ${channel}: Buffer refused the Reel (${e.message.slice(0, 160)}); the picture went instead`);
       }
     }
-    made ??= await createPost(call, postInput({ post, channel, channelId: chans[channel].id, dueAt: slot.dueAt, text, lock }));
+    made ??= await createPost(call, postInput({ post, channel, channelId: chans[channel].id, dueAt: slot.dueAt, text, lock, live: storeLive(store) }));
     ledger.posts[post.id] = { runs: [...runsOf(ledger, post.id), { channel, buffer_id: made.id, due_at: made.dueAt ?? slot.dueAt, queued_at: new Date(now).toISOString(), recycled: re, format }] };
     writeLedger(ledger);
     count[channel] += 1;

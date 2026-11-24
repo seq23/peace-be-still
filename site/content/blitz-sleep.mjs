@@ -34,7 +34,7 @@ ${V("PSA 127:2")}`],
 <li>If a task comes to mind, write it on paper by the bed and go back to the line.</li>
 <li>If you would rather listen than speak, play a psalm read softly with a sleep timer.</li>
 </ul>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still is a phone app coming soon to the App Store and Google Play. Its Psalm Nights read a King James psalm in a whisper on a dark screen that dims after ten seconds, with a sleep timer that fades out. Your first night is free, then one a week in the free version; a paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still is a phone app {{stores.tag}}. Its Psalm Nights read a King James psalm in a whisper on a dark screen that dims after ten seconds, with a sleep timer that fades out. Your first night is free, then one a week in the free version; a paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`],
     ],
     faq: [
       ["What is the best prayer for sleep?", `The one you will actually pray. Short is better: thank God for one thing, hand over one worry, ask for rest. Many people end with Psalm 4:8: ${Q("PSA 4:8")}`],
@@ -78,7 +78,7 @@ ${V("PSA 121:7-8")}`],
 </ul>
 ${V("NUM 6:24-26")}`],
       ["Is it okay to fall asleep listening to the Bible?", `<p>Yes. Plenty of families play a short passage or a psalm after prayer and let it run while children drift off. Use a sleep timer so the audio stops on its own, and turn off autoplay so a new video does not start.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon to the App Store and Google Play, has a daily Bible story to read or hear and Psalm Nights, a whispered King James psalm with a sleep timer. Chat is not offered under 13. The free version includes today's story and the whole King James Bible to read and hear.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has a daily Bible story to read or hear and Psalm Nights, a whispered King James psalm with a sleep timer. Chat is not offered under 13. The free version includes today's story and the whole King James Bible to read and hear.</p>`],
     ],
     faq: [
       ["What is a good bedtime prayer for kids?", "A short one they can say alone: “Thank you, God, for today. Please keep me safe tonight. Bless my family. Amen.” Let them add one thing they are thankful for and the names of people they love."],
@@ -120,7 +120,7 @@ ${V("PSA 94:19")}`],
 <li>If it is night, see <a href="/questions/bible-verses-for-sleep-and-anxiety/">verses for sleep and anxiety</a>.</li>
 </ol>`],
       ["When to get more help", `<p>Scripture and prayer are a comfort, not a replacement for care. If anxiety is stopping you from working, eating or sleeping for weeks, talk to a doctor or counselor. If you are thinking about harming yourself, call or text 988 (the Suicide &amp; Crisis Lifeline in the US) now.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon, has a Bible chat where you can say what is on your heart and get King James verses back, pasted word for word from a stored copy. It is AI and says so on every answer. If you mention self-harm, it shows 988 and other help straight away instead of an AI reply.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.short}}, has a Bible chat where you can say what is on your heart and get King James verses back, pasted word for word from a stored copy. It is AI and says so on every answer. If you mention self-harm, it shows 988 and other help straight away instead of an AI reply.</p>`],
     ],
     faq: [
       ["Is anxiety a sin in the Bible?", `The Bible does not call feeling anxious a sin. It invites anxious people to bring their worry to God: ${Q("1PE 5:7")} (1 Peter 5:7). Feeling afraid and praying about it is what the Psalms are full of.`],
@@ -163,7 +163,7 @@ ${V("MAR 4:39")}`],
 <li>If you woke at 3 a.m.: Psalm 63:6.</li>
 </ul>`],
       ["Is it okay to fall asleep listening to the Bible?", `<p>Yes. Many people play a psalm or a short passage read softly and fall asleep before it ends. Use a sleep timer so it stops on its own, keep the screen dark, and make sure nothing new starts playing.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon to the App Store and Google Play, has the whole King James Bible free to read, with a growing set of chapters read aloud, and Psalm Nights: a psalm whispered on an always-dark screen with a sleep timer that fades out. First night free, then one a week in the free version, or every night on a paid plan ($7.99 a month or $39.99 a year, no trial).</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has the whole King James Bible free to read, with a growing set of chapters read aloud, and Psalm Nights: a psalm whispered on an always-dark screen with a sleep timer that fades out. First night free, then one a week in the free version, or every night on a paid plan ($7.99 a month or $39.99 a year, no trial).</p>`],
     ],
     faq: [
       ["What is the best Bible verse for sleep?", `Psalm 4:8 is the verse most people choose: ${Q("PSA 4:8")} Proverbs 3:24 is a close second because it says ${F("PRO 3:24", "thy sleep shall be sweet")}.`],
@@ -203,7 +203,7 @@ ${V("PSA 42:8")}`],
 </ul>`],
       ["How do I pray when I am anxious at bedtime?", `<p>Short and honest. “Lord, I am worried about the rent (the test, my son, the doctor's call). I cannot fix it tonight. I give it to you until morning.” Then stop. The aim is not to solve it in prayer; it is to put it down for the night.</p>`],
       ["When to get more help", `<p>This is a faith practice, not medical care. If worry or poor sleep goes on for weeks, see a doctor. If you are thinking about harming yourself, call or text 988 now.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon, has Psalm Nights (a whispered King James psalm on a dark screen with a sleep timer) and a Bible chat for saying what is on your heart, which answers with verses pasted from a stored King James Bible. The chat is AI and is labelled as AI.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.short}}, has Psalm Nights (a whispered King James psalm on a dark screen with a sleep timer) and a Bible chat for saying what is on your heart, which answers with verses pasted from a stored King James Bible. The chat is AI and is labelled as AI.</p>`],
     ],
     faq: [
       ["What verse should I read when I can't sleep because of worry?", `Start with 1 Peter 5:7 to hand the worry over, then lie down with Psalm 4:8: ${Q("PSA 4:8")}`],
@@ -239,7 +239,7 @@ ${P("PSA 4:1-8")}`],
       ["What does the Bible say about sleep?", `<p>That it is a gift, not a reward for finishing everything. Psalm 127:2 says worrying late does not add anything, ${F("PSA 127:2", "for so he giveth his beloved sleep")}. Psalm 121 says the one who keeps you ${F("PSA 121:4", "shall neither slumber nor sleep")}, so you can.</p>`],
       ["Is it okay to fall asleep listening to the Bible?", `<p>Yes. Psalm 91 sleep readings on YouTube have gathered millions of views, and many people fall asleep before the reading ends. Set a sleep timer so the audio fades out, and turn off autoplay so nothing new starts.</p>`],
       ["What is a short prayer to say before bed?", `<p>Pray Psalm 4:8 back to God in your own words: “Lord, I am lying down now. I am trusting you to keep me safe tonight.” For more, see <a href="/questions/prayer-for-sleep/">prayers for sleep</a>.</p>`],
-      ["How Peace Be Still does it", `<p>Peace Be Still is a phone app coming soon to the App Store and Google Play. Its Psalm Nights journey reads a King James psalm in a whisper on an always-dark screen, with a sleep timer that fades out and nothing playing afterwards. The first night is free, then one a week; a paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`],
+      ["How Peace Be Still does it", `<p>Peace Be Still is a phone app {{stores.tag}}. Its Psalm Nights journey reads a King James psalm in a whisper on an always-dark screen, with a sleep timer that fades out and nothing playing afterwards. The first night is free, then one a week; a paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`],
     ],
     faq: [
       ["What psalm do you read before bed?", `Psalm 4 is the traditional bedtime psalm. Its last verse reads: ${Q("PSA 4:8")} Psalm 23 and Psalm 91 are the next most read at night.`],
@@ -279,7 +279,7 @@ ${P("PSA 4:1-8")}`],
 ${V("1KI 19:5")}`],
       ["Are there Bible stories for adults to listen to?", `<p>Yes. The simplest way is to listen to the passage itself read aloud: any of the stories above takes five to ten minutes. Many free audio Bibles read the King James Version, which is in the public domain in the United States.</p>`],
       ["What is the best Bible story to fall asleep to?", `<p>Pick a quiet one, not a battle. Jesus calming the storm (Mark 4:35-41) is short and ends in ${F("MAR 4:39", "a great calm")}. Ruth and Naomi and the road to Emmaus are gentle too. Leave Jericho and Goliath for the morning.</p>`],
-      ["Is there a free audio Bible story app?", `<p>Peace Be Still, coming soon to the App Store and Google Play, gives a daily Bible story to read or hear in the free version, along with the whole King James Bible to read and hear. Its launch library holds 60 stories, including most of the ones above, each told with the King James text beside it. A paid plan ($7.99 a month or $39.99 a year, no trial) adds every past story.</p>`],
+      ["Is there a free audio Bible story app?", `<p>Peace Be Still, {{stores.tag}}, gives a daily Bible story to read or hear in the free version, along with the whole King James Bible to read and hear. Its launch library holds 60 stories, including most of the ones above, each told with the King James text beside it. A paid plan ($7.99 a month or $39.99 a year, no trial) adds every past story.</p>`],
     ],
     faq: [
       ["What Bible stories are good for adults?", "Stories with grown-up struggles: Job's grief, Hannah's longing, Elijah's exhaustion (1 Kings 19), the prodigal son and his older brother (Luke 15), Ruth and Naomi after loss, and Joseph forgiving his brothers."],
@@ -324,7 +324,7 @@ ${V("MAR 4:39")}`],
 </ol>
 ${V("1SA 3:10")}`],
       ["Are there Bible stories for adults to listen to?", `<p>Yes, and many adults use them for sleep. See <a href="/questions/bible-stories-for-adults/">Bible stories for adults</a> for twelve that read differently as a grown-up.</p>`],
-      ["Is there a free audio Bible story app?", `<p>Peace Be Still, coming soon to the App Store and Google Play, has a daily Bible story to read or hear on its free version. Its story library includes every story in the table above. Chat is not offered under 13; the stories and the King James Bible are open to everyone.</p>`],
+      ["Is there a free audio Bible story app?", `<p>Peace Be Still, {{stores.tag}}, has a daily Bible story to read or hear on its free version. Its story library includes every story in the table above. Chat is not offered under 13; the stories and the King James Bible are open to everyone.</p>`],
     ],
     faq: [
       ["What Bible stories are good for bedtime?", "Calm ones that end in rest: Jesus calms the storm (Mark 4), the lost sheep (Luke 15), Samuel hearing God at night (1 Samuel 3), the shepherds (Luke 2) and Moses in the basket (Exodus 2)."],
@@ -363,7 +363,7 @@ ${V("JOH 14:1")}`],
 <li>Keep the volume low enough that you have to stay still to hear it.</li>
 </ol>`],
       ["Is it okay to fall asleep listening to the Bible?", `<p>Yes. Scripture does not need you awake to be true, and many believers end the day this way. It is a nightly practice, not a promise of sleep.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, coming soon to the App Store and Google Play, has Psalm Nights: real whispered readings of King James psalms, on a screen that goes dark after ten seconds, with a sleep timer that fades out. No ads, ever, and nothing plays after. Your first night is free, then one a week in the free version.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has Psalm Nights: real whispered readings of King James psalms, on a screen that goes dark after ten seconds, with a sleep timer that fades out. No ads, ever, and nothing plays after. Your first night is free, then one a week in the free version.</p>`],
     ],
     faq: [
       ["What is Bible ASMR?", "Scripture read in a whisper or very soft voice, close to the microphone, with gentle pauses. People listen to it at bedtime to wind down. A good reading keeps the words exact and names the book, chapter and verse."],
@@ -402,7 +402,7 @@ ${V("PSA 118:17")}`],
 <tr><td>Sunday</td><td>I will give thanks, for the Lord is good.</td><td>${Q("PSA 107:1")}</td></tr>
 </tbody></table>`],
       ["What should I declare over my day?", `<p>Things scripture actually says: that God is with you, that his mercy is new, that you can be still, that you will give thanks. Be wary of declarations that promise a result the verse never promised. A declaration is agreement with God's Word, not a way to make God do something.</p>`],
-      ["Morning Word in Peace Be Still", `<p>Peace Be Still, coming soon to the App Store and Google Play, has Morning Word · Daily Declarations: one King James verse, one declaration to say out loud, and a short prayer, with one gentle reminder a day at most that you can turn off. A daily declaration is in the free version every day; a paid plan adds declaration topics.</p>`],
+      ["Morning Word in Peace Be Still", `<p>Peace Be Still, {{stores.tag}}, has Morning Word · Daily Declarations: one King James verse, one declaration to say out loud, and a short prayer, with one gentle reminder a day at most that you can turn off. A daily declaration is in the free version every day; a paid plan adds declaration topics.</p>`],
     ],
     faq: [
       ["Are declarations biblical?", `Saying God's Word out loud is all through scripture: the Psalms declare his works, and Romans 10:10 says ${F("ROM 10:10", "with the mouth confession is made")}. A declaration is biblical when it stays with what the verse says.`],

@@ -414,7 +414,7 @@ ${v("PSA 127:2")}`],
       ["¿Cuál es una oración corta para dormir?", `<p>Ora el Salmo 4:8 con tus palabras: “Señor, ya me acuesto. Confío en que tú me cuidas esta noche.” Mira más <a href="/es/preguntas/oracion-para-dormir/">oraciones para dormir</a>.</p>`],
       ["¿Hay una Biblia en español para dormir?", `<p>Sí. Muchas personas escuchan la Biblia en español leída despacio para dormir, sobre todo los Salmos y los Evangelios. La Reina-Valera 1909 es de dominio público en Estados Unidos, así que se puede leer, grabar y compartir libremente.</p>
 ${v("PSA 91:2")}`],
-      ["¿Qué hará Peace Be Still?", `<p>Peace Be Still es una app que llega muy pronto al App Store y a Google Play. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae todo en español: chat bíblico, historias y Salmos susurrados para dormir, con la Reina-Valera 1909 palabra por palabra. La pantalla siempre está oscura y un temporizador apaga la voz poco a poco. La primera noche es gratis y luego una por semana; un plan de pago cuesta $7.99 al mes o $39.99 al año, sin prueba.</p>`],
+      ["¿Qué hará Peace Be Still?", `<p>Peace Be Still es una app {{stores.tag}}. Su camino <strong>Mi Refugio · Biblia y Chat en Español</strong> trae todo en español: chat bíblico, historias y Salmos susurrados para dormir, con la Reina-Valera 1909 palabra por palabra. La pantalla siempre está oscura y un temporizador apaga la voz poco a poco. La primera noche es gratis y luego una por semana; un plan de pago cuesta $7.99 al mes o $39.99 al año, sin prueba.</p>`],
     ],
     faq: [
       ["¿Qué salmo leer para dormir tranquilo?", `El Salmo 4 es el salmo tradicional de la noche. Su último versículo dice: ${q("PSA 4:8")} Después del 4, los más leídos de noche son el Salmo 23 y el Salmo 91.`],
@@ -541,7 +541,7 @@ ${v("JAM 1:5")}`],
 ${v("JOS 1:9")}`],
       ["¿Qué versículo leer cuando estoy triste?", `${v("PSA 34:18")}
 <p>Si la tristeza no se va o piensas en hacerte daño, habla con un adulto de confianza y llama o escribe al 988 (oprime 2 para español).</p>`],
-      ["Young Faith en Peace Be Still", `<p>Peace Be Still, que llega muy pronto, tiene Young Faith · Bible for Teens para jóvenes de 13 a 17 años: una historia bíblica de 3 minutos, una declaración y respuestas claras a preguntas reales. Las compras pasan por “Solicitar la compra” (Ask to Buy) de Apple. Para menores de 13 no hay chat.</p>`],
+      ["Young Faith en Peace Be Still", `<p>Peace Be Still, {{stores.short}}, tiene Young Faith · Bible for Teens para jóvenes de 13 a 17 años: una historia bíblica de 3 minutos, una declaración y respuestas claras a preguntas reales. Las compras pasan por “Solicitar la compra” (Ask to Buy) de Apple. Para menores de 13 no hay chat.</p>`],
     ],
     faq: [
       ["¿Qué versículo es bueno para un joven?", "1 Timoteo 4:12, que anima a ser ejemplo en palabra, conducta, amor, espíritu, fe y pureza, sin importar la edad."],

@@ -1,1 +1,1 @@
-{ "kind": "site", "serve": "site/public", "allow": { "coming soon": "the app is not in the stores yet: site/config/store.json has no store URL, and check-site.mjs forbids \"available now\" until it does" } }
+{"kind":"site","serve":"site/public","allow":{"coming soon":"Google Play is not live yet (site/config/store.json play_url is null). check-site rule 6 fails a coming-soon line for any store whose URL is set, and forbids \"available now\" while no store is live"}}
