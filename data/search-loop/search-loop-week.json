@@ -2,187 +2,19 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W48",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-24T20:49:54.100Z",
+  "generated_at": "2026-11-25T20:06:00.244Z",
   "state": "slow",
-  "published": 10,
+  "published": 7,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
   "ai_visitors": 0,
-  "ai_bot_hits": 438,
+  "ai_bot_hits": 396,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 9,
+  "held_by_cap": 12,
   "redirected": [
-    {
-      "query": "psalms for sleep with rain",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalms for sleep and protection",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalms for sleep and anxiety",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalms for sleep and peace",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "same wording",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalms for sleep audio",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalms for sleep with music",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalms for sleep and comfort",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalms to help me sleep",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleep kjv",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleep and peace",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "same wording",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleep and rest",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleep and anxiety",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep-and-anxiety/",
-      "matched_by": "same wording",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleep protection",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleep and comfort",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleeping at night",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalm 91 for sleep",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalm 91 meditation for sleep",
-      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalm 91 audio for sleep",
-      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalm 91 sleep meditation abide",
-      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalm 91 sleep rain",
-      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalm 23 for sleep",
-      "strengthen": "https://peacebestillapp.com/questions/psalms-for-sleep/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses to help me sleep",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses to relax and sleep",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "calming bible verses for sleep",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleep when stressed",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible verses for sleep paralysis",
-      "strengthen": "https://peacebestillapp.com/questions/bible-verses-for-sleep/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "psalm 91 bedtime prayer",
-      "strengthen": "https://peacebestillapp.com/questions/psalm-91-prayer-for-sleep/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-18"
-    },
-    {
-      "query": "bible asmr sleep",
-      "strengthen": "https://peacebestillapp.com/questions/bible-asmr/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-18"
-    },
     {
       "query": "is the bible app free",
       "strengthen": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
@@ -312,8 +144,9 @@
   },
   "notes": [
     "site config lowers the mode to slow",
-    "not read: AI answer misses (Boss OS did not read AI answers in 2026-W48 (status not_read)); could not tell this run",
-    "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data); 3 more page(s) today would have gone over it, those searches stay queued"
+    "not read: AI answer misses (no BOSS_OPEN_LOOPS_TOKEN in this run (pass it in the caller's secrets: block)); could not tell this run",
+    "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data); 3 more page(s) today would have gone over it, those searches stay queued",
+    "CHECK runs weekly in mode=slow; last ran 2026-11-24"
   ],
   "lanes": {
     "ratio": {
@@ -342,14 +175,14 @@
     "competition": "ok: 15 top-10 read(s) via brave"
   },
   "ai_misses": {
-    "read": "not read: Boss OS did not read AI answers in 2026-W48 (status not_read)",
-    "week": "2026-W48",
+    "read": "not read: no BOSS_OPEN_LOOPS_TOKEN in this run (pass it in the caller's secrets: block)",
+    "week": null,
     "misses": 0,
     "strengthened": [],
     "new_candidates": [],
     "skipped": [],
     "rejected": [],
-    "could_not_tell": 3
+    "could_not_tell": 4
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45484815247"
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45691610814"
 }
