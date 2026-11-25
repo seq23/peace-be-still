@@ -1,0 +1,48 @@
+name: Drama render TEST
+on:
+  pull_request:
+    paths:
+      - .github/workflows/drama-render-test.yml
+      - scripts/instagram/**
+      - data/instagram/fixtures/drama-preview.json
+      - site/public/fonts/**
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Render the six-frame drama fixture
+        run: npm run ig:render -- --bank data/instagram/fixtures/drama-preview.json --out "$RUNNER_TEMP/drama"
+      - name: Verify the rendered carousel files
+        env:
+          DRAMA_OUTPUT: ${{ runner.temp }}/drama
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import { readdirSync, readFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const dir = process.env.DRAMA_OUTPUT;
+          const expected = Array.from({ length: 6 }, (_, i) => `fixture-drama-${i + 1}.png`);
+          assert.deepEqual(readdirSync(dir).sort(), expected);
+          for (const name of expected) {
+            const png = readFileSync(join(dir, name));
+            assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', name);
+            assert.equal(png.readUInt32BE(16), 1080, name);
+            assert.equal(png.readUInt32BE(20), 1350, name);
+            assert.ok(png.length > 10_000, name);
+          }
+          console.log('OUTPUT 6 carousel PNGs at 1080×1350');
+          JS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pbs-drama-test-carousel
+          path: ${{ runner.temp }}/drama/*.png
+          if-no-files-found: error

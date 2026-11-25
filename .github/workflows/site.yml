@@ -37,6 +37,7 @@ jobs:
           echo "routes=$routes" >> "$GITHUB_OUTPUT"
       - name: Capture at 390 px and 1280 px
         env:
+          REVIEW_CAPTURE_LOCAL: "1"
           PW_DIR: ${{ runner.temp }}/pw
           ROUTES: ${{ steps.routes.outputs.routes }}
         run: |
@@ -44,7 +45,8 @@ jobs:
           npm i --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/pw" playwright@1.62.1 >/dev/null
           "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install chromium >/dev/null
           python3 -m http.server --bind 127.0.0.1 --directory site/public 4173 > "$RUNNER_TEMP/site-server.log" 2>&1 &
-          trap 'kill "$!"' EXIT
+          server=$!
+          trap 'kill "$server"' EXIT
           curl --retry 5 --retry-connrefused -fsS http://127.0.0.1:4173/ >/dev/null
           node scripts/review-capture/capture.mjs http://127.0.0.1:4173 "$ROUTES" "$RUNNER_TEMP/review"
           cat "$RUNNER_TEMP/review/summary.md" >> "$GITHUB_STEP_SUMMARY" || true

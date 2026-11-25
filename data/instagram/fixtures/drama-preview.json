@@ -1,0 +1,45 @@
+{
+  "posts": [
+    {
+      "id": "fixture-drama",
+      "kind": "Chat",
+      "lang": "en",
+      "frames": [
+        {
+          "label": "Dramatized story",
+          "theme": "night",
+          "chat": true,
+          "blocks": [{ "who": "Me", "right": true }, { "me": "Are you awake?" }]
+        },
+        {
+          "label": "Dramatized story",
+          "theme": "night",
+          "chat": true,
+          "blocks": [{ "who": "Friend" }, { "hh": ["I am now. What happened?"] }]
+        },
+        {
+          "label": "Dramatized story",
+          "theme": "night",
+          "chat": true,
+          "blocks": [{ "who": "Me", "right": true }, { "me": "I told everybody I was okay. I don't think I am." }]
+        },
+        {
+          "label": "Dramatized story",
+          "theme": "night",
+          "chat": true,
+          "blocks": [{ "who": "Friend" }, { "hh": ["I'm glad you told me. Can I stay on the phone with you?"] }]
+        },
+        {
+          "label": "Dramatized story",
+          "theme": "linen",
+          "blocks": [{ "verse": "PSA 4:8", "size": 55 }]
+        },
+        {
+          "label": "Dramatized story",
+          "theme": "linen",
+          "blocks": [{ "body": "Some things you can't tell anyone. Tell it to God, privately. Peace Be Still: unlimited Bible chat, kept private." }]
+        }
+      ]
+    }
+  ]
+}
