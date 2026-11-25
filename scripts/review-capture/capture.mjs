@@ -149,7 +149,11 @@ export async function capture({ url, routes, out, storage }) {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const [url, routeList, out, storageJson] = process.argv.slice(2);
-  if (!url || !/^https:\/\//.test(url)) { console.error('REVIEW_CAPTURE_EMPTY: preview_url must be an https URL'); process.exit(1); }
+  const local = process.env.REVIEW_CAPTURE_LOCAL === '1' && /^http:\/\/127\.0\.0\.1:[0-9]+$/.test(url ?? '');
+  if (!local && !/^https:\/\//.test(url ?? '')) {
+    console.error('REVIEW_CAPTURE_EMPTY: preview_url must be HTTPS or the CI loopback server');
+    process.exit(1);
+  }
   const result = await capture({ url, routes: parseRoutes(routeList ?? '/'), out: resolve(out ?? 'review-capture'), storage: parseStorage(storageJson) });
   console.log(`OUTPUT review-capture: ${result.shots} of ${result.total} shots, ${result.blank} blank, ${result.consoleErrors} console/page errors`);
   if (result.shots === 0) { console.error('REVIEW_CAPTURE_EMPTY: no screenshot was made (preview unreachable or every page failed)'); process.exit(1); }

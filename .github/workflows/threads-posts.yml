@@ -35,7 +35,8 @@ jobs:
         with: { node-version: 22 }
       - run: node scripts/threads/validate.mjs
   post:
-    if: github.event_name != 'pull_request'
+    environment: reviewed-main
+    if: github.ref == 'refs/heads/main' && (github.event_name != 'pull_request')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -58,3 +59,11 @@ jobs:
           git commit -m "chore(threads): queued posts ledger"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
           echo "NAMED STOP: THREADS_LEDGER_PUSH_FAILED - the queued posts ledger could not be pushed to main"; exit 1
+      - name: Send confirmed receipts to the growth ledger
+        if: ${{ always() && !cancelled() }}
+        uses: seq23/boss-os/.github/actions/ledger-rows@ef7270e2e758acb8dd166db4143e93c3563e228a
+        with:
+          business: peace-be-still
+          file: data/threads/posted.json
+          channel: threads
+          token: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}

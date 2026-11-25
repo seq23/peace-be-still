@@ -6,7 +6,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PAGES } from "../content/questions.mjs";
-import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE, fillStores, orgSameAs, storeConfig, storeWords } from "../content/parts.mjs";
+import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE, fillStores, orgSameAs, storeConfig, storeWords, INDEX_WORDS, STORE_STATES, snippetFindings } from "../content/parts.mjs";
 import { applyCta } from "./apply-cta.mjs";
 import { legalPages } from "../content/legal.mjs";
 import { homeHtml } from "../content/home.mjs";
@@ -17,13 +17,15 @@ const SAME_AS = orgSameAs();
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const text = (html) => html.replace(/<q\b[^>]*>/g, "“").replace(/<\/q>/g, "”").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
-// Words the page frame uses, per page language. Korean and Chinese pages crumb to their landing (/ko/,
+// Words the page frame uses, per page language. `faq` heads the FAQ block on every page, so it is
+// phrased as the question a reader is asking (Search Readiness b3: at least one H2 is a question;
+// 24 Nov 2026, 32 pages had none). Korean and Chinese pages crumb to their landing (/ko/,
 // /zh/), which lists every page in that language; there is no Korean or Chinese question index.
 const L = {
-  en: { home: "/", index: "/questions/", indexName: "Questions", crumbs: "Breadcrumb", quick: "Quick answer", best: "What this page is best for", pick: "Our pick", faq: "Frequently asked questions", more: "Keep reading", sources: "Sources", by: "By", maker: "a Spry Labs app", pub: "Published", upd: "Updated", og: "og.png" },
-  es: { home: "/es/", index: "/es/preguntas/", indexName: "Preguntas", crumbs: "Ruta", quick: "Respuesta rápida", best: "Para quién es esta página", pick: "Nuestra recomendación", faq: "Preguntas frecuentes", more: "Sigue leyendo", sources: "Fuentes", by: "Por", maker: "una app de Spry Labs", pub: "Publicado", upd: "Actualizado", og: "og-es.png" },
-  ko: { home: "/ko/", index: "/ko/", indexName: "새벽기도", crumbs: "현재 위치", quick: "한눈에 보기", best: "이런 분께 맞는 글이에요", pick: "추천", faq: "자주 묻는 질문", more: "함께 읽기", sources: "출처", by: "", maker: "Spry Labs가 만든 앱", pub: "처음 올린 날", upd: "수정한 날", og: "og-ko.png" },
-  "zh-Hans": { home: "/zh/", index: "/zh/", indexName: "中文首页", crumbs: "当前位置", quick: "简要回答", best: "适合谁读", pick: "推荐", faq: "常见问题", more: "继续阅读", sources: "出处", by: "", maker: "Spry Labs 出品的应用", pub: "发布于", upd: "更新于", og: "og-zh.png", colon: "：" },
+  en: { home: "/", index: "/questions/", indexName: "Questions", crumbs: "Breadcrumb", quick: "Quick answer", best: "What this page is best for", pick: "Our pick", faq: "What else do people ask?", more: "Keep reading", sources: "Sources", by: "By", maker: "a Spry Labs app", pub: "Published", upd: "Updated", og: "og.png" },
+  es: { home: "/es/", index: "/es/preguntas/", indexName: "Preguntas", crumbs: "Ruta", quick: "Respuesta rápida", best: "Para quién es esta página", pick: "Nuestra recomendación", faq: "¿Qué más se pregunta?", more: "Sigue leyendo", sources: "Fuentes", by: "Por", maker: "una app de Spry Labs", pub: "Publicado", upd: "Actualizado", og: "og-es.png" },
+  ko: { home: "/ko/", index: "/ko/", indexName: "새벽기도", crumbs: "현재 위치", quick: "한눈에 보기", best: "이런 분께 맞는 글이에요", pick: "추천", faq: "더 궁금한 점이 있으신가요?", more: "함께 읽기", sources: "출처", by: "", maker: "Spry Labs가 만든 앱", pub: "처음 올린 날", upd: "수정한 날", og: "og-ko.png" },
+  "zh-Hans": { home: "/zh/", index: "/zh/", indexName: "中文首页", crumbs: "当前位置", quick: "简要回答", best: "适合谁读", pick: "推荐", faq: "大家还常问什么？", more: "继续阅读", sources: "出处", by: "", maker: "Spry Labs 出品的应用", pub: "发布于", upd: "更新于", og: "og-zh.png", colon: "：" },
 };
 
 // hreflang: p.alt (the Spanish/English twin) or p.alts ([[lang, path], ...], self included), plus x-default.
@@ -121,8 +123,7 @@ ${footerHtml(p.lang, p.updated, p.door)}
 function renderIndex(lang, list) {
   const es = lang === "es";
   const path = es ? "/es/preguntas/" : "/questions/";
-  const title = es ? "Preguntas sobre la Biblia y el sueño · Peace Be Still" : "Bible, sleep and app questions · Peace Be Still";
-  const desc = es ? "Respuestas claras sobre Salmos para dormir, la Biblia en español para dormir y la app Peace Be Still, {{stores.tag}}." : "Plain answers about whispered scripture, Psalms for sleep, Bible apps and cancelling subscriptions, from Peace Be Still, a phone app {{stores.tag}}.";
+  const { title, description: desc } = INDEX_WORDS[es ? "es" : "en"];
   const groups = [...new Set(list.map((p) => p.group || (es ? "Más preguntas" : "More questions")))];
   const li = (p) => `    <li><span class="door-lab">${p.door === "faith" ? (es ? "Palabra de Dios" : "God's Word") : p.door === "mindset" ? (es ? "Mentalidad" : "Mindset") : (es ? "Para todos" : "For everyone")}</span><a href="${p.path}">${p.indexLabel || p.h1}</a><span class="muted">${p.indexNote || p.description}</span></li>`;
   const items = groups.map((g) => `  <h2 class="qgroup">${g}</h2>\n  <ul class="qlist">\n${list.filter((p) => (p.group || (es ? "Más preguntas" : "More questions")) === g).map(li).join("\n")}\n  </ul>`).join("\n");
@@ -183,6 +184,16 @@ for (const p of PAGES) for (const r of p.related || []) {
   if (t.door !== "neutral" && p.door !== "neutral" && t.door !== p.door) { console.error(`NAMED STOP [DOOR_LINK] ${p.path} (${p.door}) links ${r} (${t.door})`); process.exit(1); }
 }
 if (PAGES.length === 0) { console.error("NAMED STOP [NO_SEED_PAGES] content/questions.mjs holds no pages"); process.exit(1); }
+// The search snippet (b1/b2): every page's title and description fit, in every store state, before
+// anything is written. site/test/snippet.test.mjs holds the built pages (home, legal, engine) to the same.
+{
+  const bad = [];
+  for (const [state, store] of Object.entries(STORE_STATES)) {
+    for (const p of PAGES) bad.push(...snippetFindings(`${p.path} [${state}]`, fillStores(p.title, p.lang, store), fillStores(p.description, p.lang, store)));
+    for (const [lang, w] of Object.entries(INDEX_WORDS)) bad.push(...snippetFindings(`${lang} index [${state}]`, fillStores(w.title, lang, store), fillStores(w.description, lang, store)));
+  }
+  if (bad.length) { console.error(`NAMED STOP [SNIPPET_LENGTH]\n${[...new Set(bad.map((b) => b.replace(/ \[\w+\]:/, ":")))].join("\n")}`); process.exit(1); }
+}
 // Every {{stores.*}} token (the launch state, from store.json) is filled here, per page language.
 for (const p of PAGES) write(p.path, fillStores(render(p), p.lang));
 write("/questions/", fillStores(renderIndex("en", PAGES.filter((p) => p.lang === "en")), "en"));

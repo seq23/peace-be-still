@@ -34,22 +34,10 @@ concurrency:
 
 jobs:
   search-loop:
-    uses: seq23/search-loop/.github/workflows/search-loop.yml@v1
+    uses: seq23/search-loop/.github/workflows/search-loop.yml@56a1b11eb0262dd00dd4c379db7ff45dfebde4b6
     with:
       engine_ref: v1
       stage: ${{ github.event_name == 'pull_request' && 'validate' || inputs.stage || 'auto' }}
       # New pages join site/public/sitemap.xml; the safety check refuses a page that breaks the
       # trademark, claims or two-door rules before it is committed. Pure node, no install.
       post_build_command: node site/scripts/apply-cta.mjs && node site/scripts/build-sitemap.mjs && node site/scripts/check-site.mjs
-    secrets:
-      BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}  # named stops -> Boss OS Open Loops (search-loop v1.7.0); AI misses read (v1.14.0)
-      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-      GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
-      GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
-      BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
-      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
-      CLOUDFLARE_API_TOKEN: ${{ secrets.SEARCH_LOOP_CF_USAGE_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.SEARCH_LOOP_CF_ACCOUNT_ID }}
-      CLOUDFLARE_WORKERS_AI_TOKEN: ${{ secrets.SEARCH_LOOP_CF_WORKERS_AI_TOKEN }}
-      GEMINI_API_KEY: ${{ secrets.SEARCH_LOOP_GEMINI_API_KEY }}
-      BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
