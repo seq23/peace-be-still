@@ -82,7 +82,7 @@ export const SEASON = [
   // ---- Night prayer, English (60,500 a month, KD 12). Twin: /es/preguntas/oracion-de-la-noche/
   {
     ...D, lang: "en", door: "faith", group: GN, path: PATHS.night, alt: PATHS.noche,
-    title: "Night prayer: a prayer to end the day, with the Psalms · Peace Be Still",
+    title: "Night prayer to end the day, with Psalms · Peace Be Still",
     description: "A night prayer you can pray tonight, how to pray at night in five steps, what to pray if you wake at 3 a.m., and the King James psalms for the night.",
     h1: "Night prayer: how to end the day with God",
     indexLabel: "Night prayer",
@@ -126,8 +126,8 @@ ${V("ACT 16:25")}`],
   {
     ...D, lang: "en", door: "faith", group: G, path: PATHS.watch, alt: PATHS.finDeAno,
     audience: "Black churches and families in the United States keeping Watch Night",
-    title: "Watch Night service: its history, what happens, and a prayer · Peace Be Still",
-    description: "What a Watch Night service is, why Black churches keep it on 31 December (Freedom's Eve, 1862), what happens at one, how to keep it at home, and a prayer for midnight.",
+    title: "Watch Night service: history and a prayer · Peace Be Still",
+    description: "What a Watch Night service is, why Black churches keep it on 31 December (Freedom's Eve, 1862), what happens, how to keep it at home, and a midnight prayer.",
     h1: "The Watch Night service: history, order and a prayer for midnight",
     indexLabel: "Watch Night service",
     indexNote: "Freedom's Eve, what happens, and how to keep it at home.",
@@ -178,8 +178,8 @@ ${V("ISA 43:18-19")}`],
   // ---- 21-day fast, English (21 day fast 2,400 at KD 6; fasting prayer 8,100 at KD 10). Twin: ayuno.
   {
     ...D, lang: "en", door: "faith", group: G, path: PATHS.fast, alt: PATHS.ayuno,
-    title: "21-day fast: a day-by-day prayer plan for January (KJV) · Peace Be Still",
-    description: "A 21-day fast for January 2027: the kinds of fast (including the Daniel fast), a fasting prayer, and a day-by-day plan with one prayer focus and one King James verse a day.",
+    title: "21-day fast: a day-by-day prayer plan (KJV) · Peace Be Still",
+    description: "A 21-day fast for January 2027: the kinds of fast (including the Daniel fast), a fasting prayer, and a daily plan with one prayer focus and one KJV verse.",
     h1: "The 21-day fast: prayers and a day-by-day plan",
     indexLabel: "21-day fast",
     indexNote: "Kinds of fast, a fasting prayer, and a plan for every day.",
@@ -225,8 +225,8 @@ ${V("PSA 30:5")}`],
   // ---- Culto de fin de año (vigilia de Año Nuevo). Gemela de Watch Night.
   {
     ...DES, lang: es, door: "faith", group: GES, path: PATHS.finDeAno, alt: PATHS.watch,
-    title: "Culto de fin de año: vigilia y oración para el Año Nuevo · Peace Be Still",
-    description: "Cómo vivir el culto o la vigilia de fin de año el 31 de diciembre: qué se hace, cómo hacerlo en casa, una oración para la medianoche y versículos de la Reina-Valera 1909.",
+    title: "Culto de fin de año: vigilia y oración · Peace Be Still",
+    description: "Cómo vivir el culto o la vigilia de fin de año el 31 de diciembre: qué se hace, cómo hacerlo en casa, una oración y versículos de la Reina-Valera 1909.",
     h1: "Culto de fin de año: cómo recibir el Año Nuevo orando",
     indexLabel: "Culto de fin de año",
     indexNote: "Qué se hace, cómo hacerlo en casa y una oración para la medianoche.",
@@ -273,8 +273,8 @@ ${V("ISA 43:18-19", es)}`],
   // ---- Ayuno de 21 días. Gemela de /questions/21-day-fast/.
   {
     ...DES, lang: es, door: "faith", group: GES, path: PATHS.ayuno, alt: PATHS.fast,
-    title: "Ayuno de 21 días: plan de oración día por día (RV 1909) · Peace Be Still",
-    description: "Un ayuno de 21 días para enero de 2027: tipos de ayuno (también el ayuno de Daniel), una oración para ayunar y un plan con un motivo de oración y un versículo cada día.",
+    title: "Ayuno de 21 días: plan de oración (RV 1909) · Peace Be Still",
+    description: "Un ayuno de 21 días para enero de 2027: tipos de ayuno (también el de Daniel), una oración para ayunar y un plan con un versículo cada día.",
     h1: "Ayuno de 21 días: oraciones y un plan día por día",
     indexLabel: "Ayuno de 21 días",
     indexNote: "Tipos de ayuno, una oración y un plan para cada día.",

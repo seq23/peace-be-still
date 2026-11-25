@@ -64,6 +64,25 @@ export function fillStores(text, lang, store = storeConfig()) {
     return w[form];
   });
 }
+// The search snippet (Search Readiness b1/b2): a <title> of 30 to 65 characters and one meta description
+// of 120 to 160, counted in characters (code points), in every store state, since the home and index lines
+// carry a {{stores.*}} token whose words change length when a store goes live. The four states, for tests
+// and the build to fill a page's words with; the URLs only need to be present.
+export const SNIPPET = { title: [30, 65], description: [120, 160] };
+export const STORE_STATES = { soon: { app_store_url: null, play_url: null }, ios: { app_store_url: "https://apps.apple.com/x", play_url: null }, play: { app_store_url: null, play_url: "https://play.google.com/x" }, both: { app_store_url: "https://apps.apple.com/x", play_url: "https://play.google.com/x" } };
+export function snippetFindings(name, title, description) {
+  const out = [];
+  for (const [k, s] of [["title", title], ["description", description]]) {
+    const n = [...String(s ?? "")].length, [lo, hi] = SNIPPET[k];
+    if (n < lo || n > hi) out.push(`${name}: ${k} is ${n} characters (${lo}-${hi}): ${s}`);
+  }
+  return out;
+}
+// The two question indexes' snippet words (built by site/scripts/build-seed-pages.mjs).
+export const INDEX_WORDS = {
+  en: { title: "Bible, sleep and app questions · Peace Be Still", description: "Plain answers on whispered scripture, Psalms for sleep and Bible apps, from Peace Be Still, a phone app {{stores.tag}}." },
+  es: { title: "Preguntas sobre la Biblia y el sueño · Peace Be Still", description: "Respuestas sobre Salmos para dormir, la Biblia en español para dormir y la app Peace Be Still, {{stores.tag}}." },
+};
 // Her ruling 21 Nov 2026: privacy leads. The approved claim, read from the app's own strings so the site
 // can never say more than the app (app/src/i18n; "never used to train AI", not "not kept": see
 // app/app/paid/index.tsx for the source on Google's paid-tier logging).
@@ -219,7 +238,7 @@ export function storeHeroHtml(lang, store = storeConfig(), source = "", page = "
   const t = CTA[LANGS.includes(lang) ? lang : "en"], w = storeWords(lang, store);
   const live = Boolean(store.app_store_url || store.play_url);
   return `<!-- hero-cta:start --><div class="soon${live ? " live" : ""}" role="note">
-        <img src="/brand/pbs-mark-dark.svg" alt="" width="44" height="44">
+        <img src="/brand/pbs-mark-dark.svg" alt="" aria-hidden="true" width="44" height="44">
         <p><b>${w.heroB}</b><span>${w.heroS}</span></p>${live ? `
         ${storeListHtml(t, lang, store, source, page, door, true)}` : ""}
       </div><!-- hero-cta:end -->`;

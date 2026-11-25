@@ -14,7 +14,9 @@ const UPDATED = "2026-11-21";
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const plain = (html) => html.replace(/<q\b[^>]*>/g, "“").replace(/<\/q>/g, "”").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
 
-const FAITH_TILE = (size) => `<img src="/brand/pbs-mark-dark.svg" alt="" width="${size}" height="${size}">`;
+// The brand mark sits beside the words "Peace Be Still" wherever it appears: decorative, so it is hidden
+// from screen readers the same way MIND_TILE is (alt="" plus aria-hidden), never given duplicate alt words.
+const FAITH_TILE = (size) => `<img src="/brand/pbs-mark-dark.svg" alt="" aria-hidden="true" width="${size}" height="${size}">`;
 const MIND_TILE = (size) => `<svg viewBox="0 0 64 64" width="${size}" height="${size}" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#0E1A22"/><path d="M14 27 q6 -8 12 0 t12 0 t12 0" fill="none" stroke="#F4F0E6" stroke-opacity="0.62" stroke-width="4.5" stroke-linecap="round"/><path d="M14 41 H50" fill="none" stroke="#86CBC1" stroke-width="4.5" stroke-linecap="round"/></svg>`;
 const ART = {
   harbor: `<svg width="38" height="30" viewBox="0 0 38 30" fill="none" aria-hidden="true"><path d="M4 22c4-8 10-12 15-12s11 4 15 12" stroke="#E0A33E" stroke-width="2" stroke-linecap="round"/><circle cx="19" cy="9" r="3" fill="#F4F0E6"/><path d="M4 26h30" stroke="#F4F0E6" stroke-width="1.6" stroke-linecap="round"/></svg>`,
@@ -30,8 +32,8 @@ const jr = (art, lab, h, p, hLang) => `      <div class="jr"><span class="art">$
 function words(lang) {
   const c = privacyClaim(lang, "any");
   if (lang === "es") return {
-    title: "Peace Be Still: noches tranquilas, palabras para el día y chat privado",
-    description: "Peace Be Still es una app con dos puertas: Palabra de Dios (la Biblia Reina-Valera 1909, Salmos susurrados, chat bíblico) y Mentalidad (declaraciones e Imagination Nights). {{stores.line}}",
+    title: "Peace Be Still: noches tranquilas, palabra diaria y chat",
+    description: "Dos puertas: Palabra de Dios (Reina-Valera 1909, Salmos) y Mentalidad (Imagination Nights). {{stores.line}}",
     ogTitle: "Peace Be Still: una gran calma, cada noche", locale: "es_US", og: "og-es.png", skipFaith: "#palabra-de-dios",
     name: "Peace Be Still · {{stores.eyebrow}}", h1: "Una gran calma, cada noche.",
     lead: "Noches tranquilas y palabras para el día, a tu manera. Peace Be Still es una app para el final del día que hace una sola pregunta, “¿Qué necesitas esta noche?”, y abre una de dos puertas. Empezar es gratis, sin anuncios y sin prueba.",
@@ -79,8 +81,8 @@ function words(lang) {
     skip: "Ir al contenido",
   };
   return {
-    title: "Peace Be Still: Whispered Sleep, Daily Words and Private Chat{{stores.title}}",
-    description: "Peace Be Still is a phone app with two doors: God's Word (the King James Bible, whispered Psalms, Bible chat) and Mindset (daily declarations, Imagination Nights, a calm chat). {{stores.line}}",
+    title: "Peace Be Still: Bible, Sleep and Calm Chat{{stores.title}}",
+    description: "Two doors: God's Word (the KJV, whispered Psalms, Bible chat) and Mindset (Imagination Nights). {{stores.line}}",
     ogTitle: "Peace Be Still: a great calm, every night", locale: "en_US", og: "og.png",
     name: "Peace Be Still · {{stores.eyebrow}}", h1: "A great calm, every night.",
     lead: "Calm nights and daily words, in the way that fits you. Peace Be Still is a phone app for the end of the day: it asks one question, “What do you need tonight?”, and opens one of two doors. It is free to start, with no ads and no trial.",
@@ -324,7 +326,7 @@ ${t.faq.map(([q, a]) => `      <div><h3>${q}</h3><p>${a}</p></div>`).join("\n")}
   </section>
 <!-- cta:start --><!-- cta:end -->
   <section class="wrap closing" aria-label="${t.closingLab}">
-    <img src="/brand/pbs-mark-dark.svg" alt="" width="64" height="64">
+    <img src="/brand/pbs-mark-dark.svg" alt="" aria-hidden="true" width="64" height="64">
     <h2>${t.closingH}</h2>
     <p class="muted">${t.closingP}</p>
     <p class="byline">${t.byline}</p>

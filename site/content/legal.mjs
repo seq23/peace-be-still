@@ -76,9 +76,9 @@ export function renderLegal(entry, lang) {
   const iso = isoDate(doc.effective);
   const updated = `${Number(iso.slice(8))} ${SHORT[iso.slice(5, 7)]} ${iso.slice(0, 4)}`;
   const desc = es
-    ? `${doc.title} de Peace Be Still, la app de Spry Labs. ${doc.effective}.`
-    : `The Peace Be Still ${doc.title.toLowerCase()}, for the app and peacebestillapp.com. ${doc.effective}.`;
-  const title = `${doc.title} · Peace Be Still`;
+    ? `${doc.title} de Peace Be Still, la app de Spry Labs. ${doc.effective}. También en inglés, que es la versión que rige.`
+    : `The Peace Be Still ${doc.title.toLowerCase()}, for the app and peacebestillapp.com. ${doc.effective}. Also in Spanish; the English text controls.`;
+  const title = es ? `${doc.title} de la app y el sitio · Peace Be Still` : `${doc.title} for the app and website · Peace Be Still`;
   const ld = { "@context": "https://schema.org", "@type": "WebPage", url, name: title, inLanguage: lang, isPartOf: { "@id": `${BASE}/#site` }, datePublished: iso, dateModified: iso,
     breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Peace Be Still", item: `${BASE}${es ? "/es/" : "/"}` }, { "@type": "ListItem", position: 2, name: doc.title, item: url }] } };
   const blocks = (list) => {
