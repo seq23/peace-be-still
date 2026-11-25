@@ -34,6 +34,8 @@ env:
   PBS_WORK_REMOTE: gdrive:Mac-Shelf/peace-be-still/hh-work-cloud
 jobs:
   plan:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions: { contents: read, actions: write }
@@ -89,8 +91,9 @@ jobs:
           fi
 
   bible:
+    environment: reviewed-main
     needs: plan
-    if: needs.plan.outputs.bible != '[]'
+    if: github.ref == 'refs/heads/main' && (needs.plan.outputs.bible != '[]')
     runs-on: ubuntu-latest
     timeout-minutes: 345
     strategy:
@@ -122,8 +125,9 @@ jobs:
         with: { name: "rows-bible-${{ strategy.job-index }}", path: rows/rows.jsonl, retention-days: 3, if-no-files-found: ignore }
 
   story:
+    environment: reviewed-main
     needs: plan
-    if: needs.plan.outputs.stories != '[]'
+    if: github.ref == 'refs/heads/main' && (needs.plan.outputs.stories != '[]')
     runs-on: ubuntu-latest
     timeout-minutes: 345
     strategy:

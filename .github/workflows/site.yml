@@ -18,15 +18,10 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: node site/scripts/check-site.mjs && node site/scripts/check-site.mjs --self-test && node --test site/test/*.test.mjs
-  # Every site PR gets a real preview: a copy of site/public (noindex) published by the repo's one Pages
-  # publisher (scripts/lib/pages-publish.mjs, the same path as the phone app preview) to the project
-  # peace-be-still-site-preview on branch pr-<n> (static files only; the Worker's redirects and headers
-  # are not in it), then the routes from the PR body's "Preview routes:" line (validated by
-  # site/scripts/preview-routes.mjs; default / and /es/) captured at 390 px light and dark and 1280 px by
-  # scripts/review-capture (artifact review-site-pr-<n>). Korean fonts are installed so Hangul renders.
+  # Capture the same public files at phone and desktop widths on a local HTTP server.
   preview:
     needs: check
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 16
     steps:
@@ -40,26 +35,18 @@ jobs:
         run: |
           routes=$(node site/scripts/preview-routes.mjs)
           echo "routes=$routes" >> "$GITHUB_OUTPUT"
-      - name: Publish the preview
-        id: pub
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          PREVIEW_BRANCH: pr-${{ github.event.pull_request.number }}
-        run: |
-          cp -R site/public "$RUNNER_TEMP/site-preview"
-          url=$(node scripts/lib/pages-publish.mjs peace-be-still-site-preview "$RUNNER_TEMP/site-preview" --noindex --wait)
-          echo "Preview: $url" >> "$GITHUB_STEP_SUMMARY"
       - name: Capture at 390 px and 1280 px
         env:
           PW_DIR: ${{ runner.temp }}/pw
-          PREVIEW_URL: ${{ steps.pub.outputs.url }}
           ROUTES: ${{ steps.routes.outputs.routes }}
         run: |
           sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
           npm i --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/pw" playwright@1.62.1 >/dev/null
           "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install chromium >/dev/null
-          node scripts/review-capture/capture.mjs "$PREVIEW_URL" "$ROUTES" "$RUNNER_TEMP/review"
+          python3 -m http.server --bind 127.0.0.1 --directory site/public 4173 > "$RUNNER_TEMP/site-server.log" 2>&1 &
+          trap 'kill "$!"' EXIT
+          curl --retry 5 --retry-connrefused -fsS http://127.0.0.1:4173/ >/dev/null
+          node scripts/review-capture/capture.mjs http://127.0.0.1:4173 "$ROUTES" "$RUNNER_TEMP/review"
           cat "$RUNNER_TEMP/review/summary.md" >> "$GITHUB_STEP_SUMMARY" || true
       - uses: actions/upload-artifact@v4
         if: always()
@@ -68,6 +55,7 @@ jobs:
           path: ${{ runner.temp }}/review
           if-no-files-found: warn
   deploy:
+    environment: reviewed-main
     needs: check
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest

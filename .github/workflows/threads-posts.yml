@@ -35,7 +35,8 @@ jobs:
         with: { node-version: 22 }
       - run: node scripts/threads/validate.mjs
   post:
-    if: github.event_name != 'pull_request'
+    environment: reviewed-main
+    if: github.ref == 'refs/heads/main' && (github.event_name != 'pull_request')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

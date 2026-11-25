@@ -8,8 +8,21 @@ on:
   workflow_dispatch:
 permissions: { contents: read }
 jobs:
+  encrypted-fixtures:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq git-crypt >/dev/null
+      - run: node --test scripts/test/encrypted.test.mjs
   # The chat prompts, test question sets and crisis lists are committed only encrypted (scripts/check-encrypted.mjs).
   encrypted:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -24,6 +37,8 @@ jobs:
         with: { key: "${{ secrets.PBS_GIT_CRYPT_KEY }}" }
       - run: node scripts/check-encrypted.mjs
   app:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -40,6 +55,8 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm run typecheck && npm test
   worker:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:
@@ -65,6 +82,8 @@ jobs:
   # Made for you: the lane's unit tests (the chat's real gate, ladder and providers, from this tree) and the
   # local Worker tests (the lane mounted in this Worker on a local D1, with the Mac's Python runner).
   made-for-you:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
