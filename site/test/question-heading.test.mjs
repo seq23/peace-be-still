@@ -12,7 +12,8 @@ const root = new URL("../public/", import.meta.url).pathname;
 const walk = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : p.endsWith(".html") ? [p] : []; });
 // The sampler's own test (boss-os src/shared/boss/searchReadiness/page-quality-sample.mjs, QUESTION).
 const QUESTION = /[?？]\s*$|^(what|how|why|when|where|who|which|is|are|can|does|do|should|will|was|were)\b/i;
-const strip = (s) => s.replace(/<[^>]+>/g, "").replace(/&[a-z#0-9]+;/gi, " ").replace(/\s+/g, " ").trim();
+// Heading text only, for reading (never to sanitise): tags and entities split out, spaces collapsed.
+const strip = (s) => s.split(/<[^>]*>/).join("").split(/&[a-z#0-9]+;/i).join(" ").split(/\s+/).join(" ").trim();
 
 test("every page with an FAQ block has a question H2", () => {
   const bad = walk(root).flatMap((f) => {
