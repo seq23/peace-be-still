@@ -8,9 +8,8 @@ import { chapterVerses, lookup, type Scripture } from '../scripture';
 import type { Reference } from '../shared';
 
 export type Draft = { text: string; references: string[] };
-// userText is the newest message; earlier is everything else she or he wrote in this chat; afterCrisis
-// says an earlier message in it was answered with the crisis lines.
-export type GateContext = { db: D1Database; lang: 'en' | 'es'; translation: Translation; teen: boolean; door: 'faith' | 'mindset'; userText: string; earlier?: string; afterCrisis?: boolean };
+// userText is the newest message; afterCrisis says an earlier message in this chat was answered with the crisis lines.
+export type GateContext = { db: D1Database; lang: 'en' | 'es'; translation: Translation; teen: boolean; door: 'faith' | 'mindset'; userText: string; afterCrisis?: boolean };
 export type GateResult =
   | { ok: true; text: string; scripture: Scripture[]; notes: string[] }
   | { ok: false; problems: string[] };
@@ -55,43 +54,20 @@ const PROFANITY = new RegExp(` (?:${banned.profanity.join('|')}) `);
 const STOCK = new RegExp(` (?:${(banned as { chat?: string[] }).chat?.join('|') ?? '(?!)'})`);
 // Pet names used as address ("..., honey." / "Child, ..."), on the raw text: punctuation matters.
 const ADDRESS = /(?:^|[,.;:!?¡¿]\s*)(?:oh\s+)?(?:honey|baby|child|chile|sugar|sweetheart|sweetie|darling|beloved|dear one|mija|mijo|cari[ñn]o|mi ni[ñn]a|coraz[oó]n)\s*[,.;!?]|,\s*(?:my\s+)?(?:honey|baby|child|chile|sugar|sweetheart|sweetie|darling|beloved|dear|mija|mijo|cari[ñn]o|mi ni[ñn]a)\b/iu;
-// "I'm an AI" is said only when she asked (the code floor answers a direct ask; the app labels every answer).
-const SAYS_AI = / (?:i am|im|as) an? (?:ai|a i|artificial intelligence)\b| ai helper | (?:soy|como) (?:un |una )?(?:asistente de )?(?:ia|inteligencia artificial)\b/;
-// Asked to become Jesus or someone else, or to drop its rules, it says plainly what it is (r8: RT22, RT30, RT32, q14).
-const ASKED_AI = / (?:are you|are u|r u|ru|who are you|what are you|is this|am i (?:talking|speaking|chatting)|real person|human|bot|robot|chatbot|an ai|a machine|eres|quien eres|que eres|es esto|estoy hablando|persona real|una ia|you are now|youre now|you are dan|talk to me as|speak to me as|speak as|pretend|ignore (?:your|the|all)|new rules|new instructions?|system prompt|your rules|ahora eres|habla(?:me)? como|olvida tus reglas|nuevas reglas)\b/;
-// DOCTRINE (coordinator ruling 20 Nov 2026, also in prompts.ts): answer from the plain words of
-// Scripture and historic Christian teaching, warmly, never shaming, and suggest her pastor for her
-// own situation. Sex belongs in marriage (Hebrews 13:4, 1 Corinthians 7:2-5): "churches differ" is
-// never a dodge on what Scripture plainly says (round 3 RT10 said "others emphasize mutual love and
-// commitment"; round 4 x16 fell back three times on the same question). A verse read as saying what
-// it does not (the Song of Solomon as permission) is meaning, so the judge reads it (verse_read_in). Only where faithful churches genuinely differ (how to baptize, the end times,
-// women preaching, tongues today, whether to drink at all, remarriage) is "churches differ" honest.
-// "Churches teach differently" belongs only to those questions (C14).
-const SPLIT_SAID = / (?:churches|christians|denominations|believers|communities|traditions|leaders|people of faith)(?: \w+){0,4} (?:teach|see|view|read|understand|hold|have|find|arrive|look|weigh)\w*(?: \w+){0,5} (?:differen\w*|diverse|various|a range of|not all|the same thing)| (?:christians|believers) (?:disagree|differ)| (?:do|does) not all (?:teach|agree|see)| (?:iglesias|cristianos|creyentes|tradiciones)(?: \w+){0,4} (?:ensenan|ven|entienden|leen|interpretan)\w*(?: \w+){0,4} (?:distint\w*|diferente\w*|de manera diferente)| los cristianos no (?:estan de acuerdo|coinciden)/;
-// C14's split questions only: sexuality, divorce, women preaching, alcohol, tongues, the fate of
-// people of other faiths, and voting (C10: no side, so "Christians vote differently" is the honest line). "Am I saved?" or "how does sex work" is answered, not deflected.
-const SPLIT_ASKED = / (?:baptiz\w*|baptism\w*|baptis\w*|bautiz\w*|bautismo|sprinkl\w*|immersion|inmersion|rapture|millenni\w*|tribulation|end times|last days|antichrist|arrebatamiento|fin de los tiempos|milenio|tribulacion|communion|lords supper|santa cena|sabbath|predestin\w*|calvinis\w*|once saved|divorc\w*|remarr\w*|wom[ae]n(?: \w+){0,3} (?:preach\w*|pastors?|ministers?|in ministry|lead\w*|ordain\w*|elders?|bishops?|pulpit)|female pastors?|pastora|alcohol|drink\w*|wine|beer|vino|cerveza|tongues|lenguas|muslim\w*|jewish|jews|hindu\w*|buddhis\w*|atheis\w*|other religions?|other faiths?|musulman\w*|judio\w*|otras religiones|mujeres(?: \w+){0,3} (?:predic\w*|pastoras?|ministras?|ordenad\w*)|sexo antes del matrimonio|vivir juntos|homosexual\w*|vote|voting|votar|vot[oae]|elections?|elecciones|politic\w*|politica|candidates?|candidatos?|party|parties|partidos?) /;
-// What Scripture plainly says about sex and marriage (the ruling above): asked, the answer says it
-// kindly, never "churches differ", and points her to her pastor.
-const PLAIN_ASKED = / (?:sex before marriage|premarital|before (?:we re married|were married|we are married|we get married|marriage|the wedding)|sleep(?:ing)? together|slept together|(?:have|having|had) sex|hook ?up\w*|fornicat\w*|living together|live together|we live together|lives with (?:my|her|his) (?:boyfriend|girlfriend)|live with my (?:boyfriend|girlfriend|fiance|fiancee)|move in together|moving in together|cohabit\w*|shack\w* up|gay|gays|lesbian|homosexual\w*|same sex|sexo antes del matrimonio|relaciones (?:sexuales )?antes de (?:casarnos|casarme|casarse|la boda|el matrimonio)|dormir juntos|vivir juntos|vivimos juntos|viviendo juntos|vivo con mi (?:novio|novia|pareja)|sin casarnos|sin estar casados|union libre|fornicacion) /;
-const PASTOR = / (?:pastor|pastora|pastors|pastores|minister|ministro) /;
-// The night setting is hers to bring up: a prompt that said "at night" made "the quiet hours of the
-// night" open answers to questions about rent and fear (round 4, q04, RT22, x14, x20).
-// "Tonight" / "esta noche" is only when she is reading; the night as a scene is the habit.
-const NIGHT_OPEN = / (?:the night|the nights|at night|nighttime|midnight|quiet hours|small hours|dark hours|darkness|the dark|late hours?|(?:la|las|de|por la|en la) noches?|madrugada|oscuridad) /;
-const NIGHT_ASKED = / (?:night|nights|tonight|nighttime|midnight|sleep\w*|asleep|bed|bedtime|awake|insomnia|late|dark|\d+ ?am|noche|noches|dormir|duermo|dormida?o?|sueno|madrugada|desvel\w*|insomnio|cama) /;
-const ECHO_OPENING = /^ (?:you are|youre|you re|it sounds like you(?: are)?|so you are|estas|me preguntas|tu pregunta|preguntas) (?:\w+ )?(?:asking|wondering|hoping|looking|seeking|questioning|curious|preguntando|buscando|pensando)\b|^ (?:your question|the question of|when you ask|when you are asking|you want to (?:know|hear))\b/;
-// C07 verse floor: verses whose printed words would promise what the answer must not.
-const MEDICINE_Q = / (?:meds|medication\w*|medicine\w*|pills|antidepressants?|prescription\w*|therapy|therapist|doctor\w*|diagnos\w*|cancer|chemo\w*|tumou?r|sick|sickness|illness|disease|surgery|insulin|medicament\w*|medicinas?|pastillas|terapia|medic[oa]s?|enferm\w*|cirugia) /;
-const MEDICINE_DENY = /\b(?:heal\w*|physician|cure\w*|sana\w*|sanidad|curar\w*|medico)\b/;
-const MONEY_Q = / (?:money|seed|sow|sowing|tithe\w*|offering\w*|give|giving|debt\w*|rent|bills?|broke|job|income|house|rich|wealth\w*|prosper\w*|bless me|dinero|semilla|sembrar|diezmo\w*|ofrenda\w*|deuda\w*|renta|trabajo|casa|rico|riqueza|prosper\w*) /;
-const MONEY_DENY = /\b(?:sow\w*|reap\w*|prosper\w*|desires of thine heart|borrower|lender|siembra\w*|sembr\w*|sieg\w*|cosech\w*|deseos de tu corazon|prestador|prestamista)\b/;
+// MEANING IS THE JUDGE'S (Open Loops PBS_GATE_KEYWORD_LISTS, 22 Nov 2026). Keyword lists that guessed
+// what HER QUESTION was about (medicine, money, marriage, the night, a split doctrine, a prayer ask, a
+// woman named, an AI ask) and which verses were unfit for it now live in the judge prompt
+// (prompts.ts judgePrompt, quality/judge.ts CHAT_CHECKS): verse_implies_promise, verse_harsh_for_moment,
+// verse_off_topic, churches_differ, missing_pastor, night_opening, echo_opening, missing_prayer,
+// unasked_ai, assumes_gender. The live calibration set (test/fixtures/judge-calibration.json) holds
+// the real answers those lists were written for. What stays below is structure (references, quotes,
+// shape, language, length) and the hard safety stops (the red lines, medicine, a teen's trusted adult,
+// "cut off your hand", the 988 line after a crisis, persona and pet names, privacy).
+// A teen on a hard topic is pointed to a trusted adult (C11, child safety).
 const HARD_TOPIC = / (?:died|dies|death|dead|funeral|suicide|sex|sexual|girlfriend|boyfriend|dating|crush|pregnan\w*|abuse|divorce\w*|depress\w*|anxiety|anxious|scared|afraid|bull(?:y|ied|ying)|parents fight\w*|murio|muerte|novio|novia|sexo|embaraz\w*|divorcio|miedo|ansiedad|deprim\w*) /;
 const TRUSTED = / (?:trusted adult|parent|parents|mom|dad|mother|father|counselor|pastor|youth (?:leader|pastor)|teacher|coach|adulto de confianza|tus papas|tu mama|tu papa|tus padres|consejer[oa]|maestr[oa]|lider de jovenes) /;
 
 const MINDSET_FAITH = / (?:god|gods|lord|jesus|christ|pray\w*|bible\w*|verse\w*|scripture\w*|kjv|pastor\w*|church\w*|dios|senor|jesucristo|orar|oracion\w*|biblia\w*|versiculo\w*|escritura\w*|iglesia\w*) /;
-const PRAY_ASKED = / (?:pray (?:for|with|over|about) (?:me|us|my|our|her|him|them)|pray my|pray (?:this|it) away|please pray|(?:can|could|would|will) you pray|say a prayer|a prayer for|ora(?:r)? por (?:mi|nosotros|mi \w+)|oremos|ora conmigo|una oracion por) /;
-const PRAYED = /\b(?:Lord|Father|God|Jesus|Se[ñn]or|Padre|Dios|Jes[uú]s)\b(?:,| [^.!?]{0,40}, )|\b(?:we pray|I pray|oramos|te pedimos|te rogamos)\b/u;
 // Hostile review of 25c474f, F4: pastor-level floors in code.
 // A question about medicine gets "talk with your doctor" (RT25 sent her only to her pastor).
 const MEDS_Q = / (?:meds|medication\w*|medicine\w*|pills|antidepressants?|prescription\w*|insulin|dose|doses|dosage|medicament\w*|medicinas?|pastillas|receta\w*|dosis) /;
@@ -100,15 +76,6 @@ const DOCTOR = / (?:doctor\w*|physician\w*|psychiatrist\w*|prescriber|medic[oa]s
 const CUT_OFF_ASKED = / (?:cut (?:it )?off (?:your |my |the |a )?(?:hand|foot|arm)|pluck (?:it )?out|gouge (?:it )?out|tear (?:it )?out|(?:cortar|corta|cortate|cortarse|cortarme) (?:la |tu |mi )?(?:mano|pie)|(?:sacar|saca|sacate|sacarse|sacarme) (?:el |tu |mi )?ojo) /;
 const NOT_LITERAL = / (?:not (?:\w+ ){0,2}literal\w*|isnt literal\w*|never (?:\w+ ){0,2}(?:wants|asks|asking|wanted|meant) (?:\w+ ){0,3}(?:to )?(?:hurt|harm|injure|cut)|no (?:\w+ ){0,3}literal\w*|nunca (?:\w+ ){0,4}(?:dano|lastim\w*|herir\w*)) /;
 const CUT_OFF_REFS = ['Matthew 5:29-30', 'Matthew 18:8-9', 'Mark 9:43-47'].map(r => parseReference(r)!);
-// The reader's gender: an English answer that calls someone "she/her" when no woman is in the
-// question or in a Bible story the answer tells is speaking of the reader (F3, RT11: "give her wisdom").
-const FEMININE = / (?:she|her|hers|herself) /;
-const WOMAN_NAMED = / (?:she|her|hers|herself|mom|moms|mommy|mother\w*|mama|momma|sister\w*|daughter\w*|wife|wives|girlfriend\w*|fiancee|grand(?:ma|mother|daughter)\w*|aunt\w*|niece\w*|woman|women|lady|ladies|girl|girls|bride|widow\w*|stepmom|queen|friend she|hannah|ruth|naomi|mary|martha|esther|sarah|rebekah|rachel|leah|deborah|miriam|eve|tamar|bathsheba|abigail|lydia|priscilla|dorcas|tabitha|elizabeth|anna|jochebed|rahab|hagar|delilah|jezebel|phoebe|junia|mother in law) /;
-// Verses that wound on a hard night (F4: Matthew 21:31 to a grieving mother, Hebrews 13:4 under a
-// single woman's question, Mateo 6:14-15 to someone badly hurt): never given unless she named that passage.
-const HARSH_REFS = ['Matthew 21:31', 'Matthew 6:15', 'Matthew 6:14-15', '2 Thessalonians 3:10', 'Matthew 5:13'].map(r => parseReference(r)!);
-const MARRIAGE_REFS = ['Hebrews 13:4', '1 Corinthians 7:1-40'].map(r => parseReference(r)!);
-const MARRIAGE_ASKED = / (?:sex\w*|marr\w*|wedding|husband|wife|spouse|dating|date|girlfriend|boyfriend|fiance\w*|engaged|virgin\w*|lust\w*|porn\w*|gay|lesbian|homosexual\w*|same sex|single|celiba\w*|casad\w*|casar\w*|matrimonio|boda|esposo|esposa|novio|novia|sexo|soltero|soltera|virgen) /;
 const overlaps = (s: Scripture, r: Reference) => s.book === r.book && s.chapter === r.chapter && (r.verse === undefined || (s.endVerse ?? s.verse) >= r.verse && s.verse <= (r.endVerse ?? r.verse));
 // F6/S2: "trusted adult" is for a teen; to a grown woman it is a machine tell (q07, q08).
 const TRUSTED_ADULT = / (?:trusted adult|adulto de confianza|adultos de confianza) /;
@@ -153,14 +120,10 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   const seen = new Set<string>();
   const add = (s: Scripture | null) => { if (s && !seen.has(`${s.book} ${s.chapter}:${s.verse}`) && scripture.length < 3) { seen.add(`${s.book} ${s.chapter}:${s.verse}`); scripture.push(s); } };
   const asked = norm(ctx.userText);
-  const plain = PLAIN_ASKED.test(asked);
-  const named = (r: Reference) => refsInText(ctx.userText).some(n => n.book === r.book && n.chapter === r.chapter);
-  const everything = norm(`${ctx.earlier ?? ''} ${ctx.userText}`);
-  const unfit = (s: Scripture) => (MEDICINE_Q.test(asked) && MEDICINE_DENY.test(fold(s.text))) || (MONEY_Q.test(asked) && MONEY_DENY.test(fold(s.text)))
-    || HARSH_REFS.some(r => overlaps(s, r) && !named(r)) || (MARRIAGE_REFS.some(r => overlaps(s, r)) && !MARRIAGE_ASKED.test(everything) && !MARRIAGE_REFS.some(named));
   if (ctx.door === 'faith') {
-    // A verse whose words would promise healing or wealth to this question is dropped, not shown.
-    for (const raw of rawRefs) { const ref = parseReference(raw); const s = ref ? await lookup(ctx.db, ctx.translation, ref) : null; if (s && unfit(s)) notes.push('verse_dropped'); else add(s); }
+    // Whether a verse FITS her question (a healing promise under a medicine question, a harsh verse to
+    // someone grieving) is meaning: the judge reads the stored text of every verse printed here.
+    for (const raw of rawRefs) { const ref = parseReference(raw); add(ref ? await lookup(ctx.db, ctx.translation, ref) : null); }
     // A reference that is not in the Bible (John 22:5) goes, with the sentence that leans on it, and
     // she is told plainly; an answer with too little left is written again instead.
     const madeUp: string[] = [];
@@ -184,7 +147,6 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
         }
       }
       if (!s) madeUp.push(r.raw);
-      else if (unfit(s)) problems.push('verse_unfit'); // named in her answer: it has to be rewritten
       else add(s);
     }
     if (madeUp.length) {
@@ -248,25 +210,15 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (PROFANITY.test(n)) problems.push('profanity');
   if (STOCK.test(n)) problems.push('stock_phrase');
   if (ADDRESS.test(text)) problems.push('persona_roleplay');
-  if (SAYS_AI.test(n) && !ASKED_AI.test(asked)) problems.push('unasked_ai');
-  if (SPLIT_SAID.test(n) && plain) problems.push('split_dodge');
-  else if (SPLIT_SAID.test(n) && !SPLIT_ASKED.test(asked)) problems.push('split_unasked');
-  if (plain && !PASTOR.test(n)) problems.push('missing_pastor');
-  if (NIGHT_OPEN.test(norm(text.split(/(?<=[.!?])\s/)[0] ?? '')) && !NIGHT_ASKED.test(asked)) problems.push('night_opening');
   // Two words run together ("theSong of Solomon", RT10 round 3): a lowercase word glued to a capital.
   if (/\b[a-z]{2,}[A-Z][a-z]+/.test(text)) problems.push('glued_words');
-  // Restating her question back to her is a machine tell (round 3: 11 of 30 answers opened that way).
-  if (ECHO_OPENING.test(norm(text.split(/(?<=[.!?])\s/)[0] ?? ''))) problems.push('echo_opening');
   if (ctx.door === 'faith' && faithContentIssues(text).length) problems.push('mindset_word');
   if (ctx.teen && HARD_TOPIC.test(norm(ctx.userText)) && !TRUSTED.test(n)) problems.push('missing_trusted_adult');
 
   if (MEDS_Q.test(asked) && !DOCTOR.test(n)) problems.push('missing_doctor');
-  // Asked to pray, the answer prays: a sentence spoken to God (r8: RT17 and RT33 only blessed).
-  if (ctx.door === 'faith' && PRAY_ASKED.test(asked) && !PRAYED.test(text)) problems.push('missing_prayer');
   const cutOff = CUT_OFF_ASKED.test(asked) || scripture.some(s => CUT_OFF_REFS.some(r => overlaps(s, r))) || refsInText(ctx.userText).some(x => CUT_OFF_REFS.some(r => r.book === x.book && r.chapter === x.chapter && x.verse >= r.verse! && x.verse <= (r.endVerse ?? r.verse!)));
   if (cutOff && !NOT_LITERAL.test(n)) problems.push('missing_not_literal');
   if (ctx.afterCrisis && !text.includes('988')) problems.push('missing_988');
-  if (ctx.lang === 'en' && FEMININE.test(n) && !WOMAN_NAMED.test(everything) && !WOMAN_NAMED.test(n.replace(/ (?:she|her|hers|herself) /g, '  '))) problems.push('assumes_gender');
   if (!ctx.teen && TRUSTED_ADULT.test(n)) problems.push('trusted_adult_for_adult');
   const end = lastSentence(text);
   if (text && (words(end).length < 3 || !/[.!]["'”’)]*$/.test(end))) problems.push('broken_ending');

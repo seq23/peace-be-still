@@ -30,7 +30,7 @@ import { workersAi } from './providers/workers-ai';
 import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
-import { judgeMessages, judgeSchema, judgeVerdict, type JudgeInput, type JudgeVerdict } from './quality/judge';
+import { chatJudgeListSchema, chatJudgeSchema, chatJudgeVerdict, judgeMessages, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
 import { parseReport, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
@@ -77,7 +77,9 @@ const hasVersions = (d: unknown) => !!d && Array.isArray((d as { versions?: unkn
 const isEdit = (d: unknown) => hasVersions(d) || isAnswer(d);
 const isAnswer = (d: unknown) => !!d && typeof (d as { text?: unknown }).text === 'string' && !!(d as { text: string }).text.trim() && Array.isArray((d as { references?: unknown }).references);
 const isSummary = (d: unknown) => !!d && typeof (d as { summary?: unknown }).summary === 'string';
-const RED_LINES = new Set(['first_person_divine', 'god_told_me', 'prophecy', 'salvation_claim', 'end_times_date', 'prosperity', 'money_ask', 'outcome_promise', 'stop_medicine', 'partisan', 'ethnicity_claim', 'secrecy', 'sexual_detail']);
+// The red lines, from the code floor and from the judge (a judge's voice or shape objection is not one).
+const RED_LINES = new Set(['first_person_divine', 'god_told_me', 'prophecy', 'salvation_claim', 'end_times_date', 'prosperity', 'money_ask', 'outcome_promise', 'stop_medicine', 'partisan', 'ethnicity_claim', 'secrecy', 'sexual_detail',
+  ...['speaks_as_god', 'prophecy', 'salvation_claim', 'outcome_promise', 'stop_medicine', 'prosperity', 'partisan', 'condemns', 'verse_read_in'].map(k => `judge:${k}`)]);
 const THREE_HOURS = 3 * 3600_000;
 // The regeneration is told in words what was wrong, never a line to copy.
 const OBJECTIONS: Record<string, string> = {
@@ -87,27 +89,24 @@ const OBJECTIONS: Record<string, string> = {
   missing_doctor: 'The question is about medicine: say plainly, in your own words, to talk with their doctor before changing anything.',
   missing_not_literal: 'Say plainly that Jesus is not speaking literally here and that God never wants anyone to hurt their body.',
   missing_988: 'An earlier message in this chat was about their safety: include the line that they can call or text 988 any time.',
-  assumes_gender: 'It called the person "she" or "her" without knowing; speak to them as "you", and pray with "we", "us" or "you".',
   trusted_adult_for_adult: 'It told a grown adult to find a "trusted adult"; say "someone you trust" instead.',
   broken_ending: 'It ended on a fragment or a bare name; end on one whole sentence of your own.',
-  missing_prayer: 'They asked for prayer: include a short prayer spoken to God, in your own words.',
+  'judge:missing_prayer': 'They asked for prayer: include a short prayer spoken to God, in your own words.',
   'judge:garbled': 'A sentence was broken or said something false about the Bible; write every sentence whole and true.',
   'judge:image_unfit': 'It used a picture that does not fit; leave pictures out unless the verse itself gives one.',
-  'judge:assumes_gender': 'It called the person "she" or "her" without knowing; speak to them as "you".',
-  echo_opening: 'It opened by restating her question; open with something true and specific instead.',
+  'judge:assumes_gender': 'It called the person "she" or "her" without knowing; speak to them as "you", and pray with "we", "us" or "you".',
+  'judge:echo_opening': 'It opened by restating her question; open with something true and specific instead.',
   glued_words: 'Two words ran together with no space; check the spacing.',
   ends_with_question: 'It ended on a question; end on a whole sentence of your own.',
-  unasked_ai: 'It said it was an AI when they did not ask; do not mention it.',
-  split_unasked: 'It said churches teach differently on something Christians do not split on; just answer.',
-  split_dodge: 'It said churches differ where Scripture speaks plainly. Say kindly and without shame what Scripture and historic Christian teaching say, and suggest they talk it over with their pastor.',
-  missing_pastor: 'Suggest, in a sentence of your own, that they talk this through with their pastor.',
-  night_opening: 'It opened on the night or the dark, which they did not mention; open on what they actually said.',
+  'judge:unasked_ai': 'It said it was an AI when they did not ask; do not mention it.',
+  'judge:churches_differ': 'It said churches differ where they do not, or where Scripture speaks plainly. Say kindly and without shame what Scripture and historic Christian teaching say, and suggest they talk it over with their pastor when it is about their own life.',
+  'judge:missing_pastor': 'Suggest, in a sentence of your own, that they talk this through with their pastor.',
+  'judge:night_opening': 'It opened on the night or the dark, which they did not mention; open on what they actually said.',
   repeat_opening: 'It opened the same way as a recent answer; open differently, on what they said.',
   repeat_closing: 'It closed the same way as a recent answer; close differently.',
   repeat_image: 'It reused wording from a recent answer; say it in other words.',
   'judge:verse_read_in': 'It used a verse to approve what the verse does not say, or called a plain teaching a matter churches differ on; say what Scripture plainly says, kindly.',
   persona_roleplay: 'It acted as a person with a body or a home, or used a pet name; do neither.',
-  verse_unfit: 'It named a verse whose words would promise healing or wealth for this question; choose a different verse.',
   'judge:verse_implies_promise': 'A verse it chose reads as a promise of the outcome they asked about; choose verses about God\'s nearness instead.',
   'judge:verse_harsh_for_moment': 'A verse it chose is harsh for someone hurting; choose a gentler one.',
   'judge:verse_off_topic': 'A verse it chose does not fit the question; choose one that does.',
@@ -216,9 +215,9 @@ export const realDeps: Deps = {
     // Workers AI's gpt-oss is its backup. Free chat keeps Workers AI only, never the billed route.
     if (lane !== 'free' && (env.PAID_PROVIDER as string) === 'openrouter-zdr') {
       const paidJudge = { ...paidRung(env, now), id: `judge-${env.PAID_PROVIDER}:${env.PAID_MODEL}` };
-      return check(env, now, [paidJudge, first], judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, true, teen);
+      return check(env, now, [paidJudge, first], judgeMessages(input, true), chatJudgeListSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, true, teen);
     }
-    return check(env, now, first, judgeMessages(input), judgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), judgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free', teen);
+    return check(env, now, first, judgeMessages(input), chatJudgeSchema, int(env.JUDGE_MAX_TOKENS, 1500), chatJudgeVerdict, v => v.verdict !== 'down', { verdict: 'down' } as JudgeVerdict, lane !== 'free', teen);
   },
   rungs(env, now, lane = 'free', teen = false) {
     // A teen (her ruling 23 Nov 2026): paid is the private route alone, never its Gemini backup; free and the
@@ -369,11 +368,27 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (meter) await addUserSpend(env.DB, who.installId, metrics.get('paid_spend_micro') ?? 0, meter.paidUntil, now);
   };
   // Which lane answered and whether the safety model ran: two words in headers, for measuring routing (no text).
-  const route = { lane: 'none', safety: false };
-  const reply = (body: ChatResponse) => {
-    ctx.waitUntil(flush());
-    return Response.json(body, { headers: { 'cache-control': 'no-store', 'x-chat-lane': route.lane, 'x-chat-safety': route.safety ? '1' : '0' } });
+  // waitMs: how long a ready reply waited on the safety read (PBS_SAFETY_LATENCY's measure).
+  const route = { lane: 'none', safety: false, waitMs: 0 };
+  // The safety model reads a flagged message ALONGSIDE the answer (PBS_SAFETY_LATENCY: it added 1.5 s at
+  // p50 when it ran first). Nothing but the crisis card leaves before it has read: every reply passes
+  // `cleared`, which waits for the read and turns a high one into the card, whatever was ready.
+  let pendingSafety: Promise<CrisisLevel> | null = null;
+  const cleared = async (make: () => Response | Promise<Response>): Promise<Response> => {
+    if (pendingSafety) {
+      const t0 = Date.now();
+      const c = await pendingSafety;
+      route.waitMs += Date.now() - t0;
+      pendingSafety = null; // read once: the card itself, and any later reply, go straight out
+      if (c.level === 'high') { tally(metrics, 'safety_after_answer_high'); return crisisReply(c.kind, c.layer); }
+    }
+    return make();
   };
+  const send = (body: ChatResponse) => {
+    ctx.waitUntil(flush());
+    return Response.json(body, { headers: { 'cache-control': 'no-store', 'x-chat-lane': route.lane, 'x-chat-safety': route.safety ? '1' : '0', 'x-chat-safety-wait': String(route.waitMs) } });
+  };
+  const reply = (body: ChatResponse): Promise<Response> => body.kind === 'crisis' ? Promise.resolve(send(body)) : cleared(() => send(body));
   const turns = withoutCrisisWords(req.messages.slice(-12));
   const band = v.teen ? 'teen' : 'adult';
 
@@ -426,17 +441,18 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The separate safety model (Workers AI, private) runs only to confirm a signal: the distress
   // pre-filter, or an answer model's own risk tag. Its own budget (SAFETY_MONTHLY_CAP_USD); past it,
   // the phrases, the tags and the crisis model's instructions carry on.
+  // One read per message, shared by every caller (the pre-filter, a risk tag, the tripwire).
   let confirmed: CrisisLevel | null = null;
-  const confirm = async (): Promise<CrisisLevel> => {
-    if (confirmed) return confirmed;
+  let reading: Promise<CrisisLevel> | null = null;
+  const confirm = (): Promise<CrisisLevel> => reading ??= (async () => {
     if (!(await safetyBudgetLeft(env.DB, now, usd(env.SAFETY_MONTHLY_CAP_USD, 10)))) { tally(metrics, 'safety_over_budget'); return (confirmed = { level: 'none', read: 'down' }); }
     tally(metrics, 'safety_check'); route.safety = true;
     const r = await deps.risk(env, turns).catch((): RiskVerdict => ({ verdict: 'down' }));
-    confirmed = crisisLevel(turns, r);
+    let c = crisisLevel(turns, r);
     // Her "yes, I'm safe" to the check-in is not a new high signal: she stays on the crisis model.
-    if (confirmed.level === 'high' && saysSafe(lastAssistant, last)) confirmed = { ...confirmed, level: 'low' };
-    return confirmed;
-  };
+    if (c.level === 'high' && saysSafe(lastAssistant, last)) c = { ...c, level: 'low' };
+    return (confirmed = c);
+  })();
 
   // 1. Intent phrases, on every message (code, microseconds).
   const hit = phraseHit(turns);
@@ -454,18 +470,24 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // The card and its question already showed in this conversation (the same test as the answer gate's afterCrisis).
   const cardShown = (sticky && state?.asked === 1) || turns.slice(0, -1).some(t => t.text === CRISIS_NOTE);
   let lane: Lane = inCrisis ? 'crisis' : paid.paid ? 'paid' : 'free';
+  // Whatever the read says short of high, this message is answered on the crisis lane, so that answer
+  // starts now; a high read turns it into the card before anything is shown (`cleared`).
   if (inCrisis || distress(turns)) {
     tally(metrics, inCrisis ? 'crisis_followup' : 'prefilter');
-    const c = await confirm();
-    if (c.level === 'high') return crisisReply(c.kind, c.layer);
-    if (c.level === 'low') await flag(false);
+    // A teen's message waits for the read first (her ruling 23 Nov 2026, "Card + hotline only"): no model is
+    // sent a teen's message that may be a crisis, not even an answer that the card would then replace.
+    if (teenOnly) {
+      const c = await confirm();
+      if (c.level === 'high') return crisisReply(c.kind, c.layer);
+      if (c.level === 'low') await flag(false);
+    } else pendingSafety = confirm().then(async c => { if (c.level === 'low') await flag(false); return c; });
     lane = 'crisis';
   }
 
   const fixedReply = (kind: ChatResponse['kind'], text: string) => reply({ kind, ai: false, text, scripture: [], remaining: null, limit: null, reminder: false });
   // Controls, after the crisis check so a crisis card is never withheld. The operator's kill switch
   // and the abuse throttle's 24-hour pause (controls.ts) come first.
-  if (!env.IP_HASH_SECRET) return fail('IP_HASH_SECRET_MISSING', 503);
+  if (!env.IP_HASH_SECRET) return cleared(() => fail('IP_HASH_SECRET_MISSING', 503));
   if (await blockFor(env.DB, who.installId, now)) { tally(metrics, 'paused'); return fixedReply('paused', pausedText[v.lang]); }
   const abuse = await throttle(env.DB, env.IP_HASH_SECRET, day, who.installId, last, false, now);
   if (abuse.verdict === 'paused') { tally(metrics, 'paused'); return fixedReply('paused', pausedText[v.lang]); }
@@ -519,7 +541,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   if (crisisOpen && !paid.paid) tally(metrics, 'crisis_past_free_limit_open');
   const deviceLimit = unwalled ? PAID_UNCAPPED : FREE_CHAT_MESSAGES;
   let hash: string;
-  try { hash = await ipHash(env.IP_HASH_SECRET, day, request.headers.get('cf-connecting-ip') ?? '0.0.0.0'); } catch { return fail('IP_HASH_SECRET_MISSING', 503); }
+  try { hash = await ipHash(env.IP_HASH_SECRET, day, request.headers.get('cf-connecting-ip') ?? '0.0.0.0'); } catch { return cleared(() => fail('IP_HASH_SECRET_MISSING', 503)); }
   try {
     await env.DB.prepare('INSERT INTO chat_admission VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
       .bind(day, who.installId, req.conversation, hash, unwalled ? 1 : 0, deviceLimit, unwalled ? PAID_UNCAPPED : int(env.CHAT_IP_MESSAGES_DAILY, 120), unwalled ? PAID_UNCAPPED : int(env.CHAT_GLOBAL_MESSAGES_DAILY, 150), now).run();
@@ -618,7 +640,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const answerTokens = (short && lane === 'paid' ? Math.round(cap / 2) : cap) + (lane === 'crisis' ? CRISIS_THINKING_HEADROOM : 0);
   if (short && lane === 'paid') system.push({ role: 'system', content: SHORT_ANSWER[v.lang] });
   const earlierTurns = turns.slice(0, -1).filter(t => t.role === 'user');
-  const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: ask.door, userText: last, earlier: earlierTurns.map(t => t.text).join('\n'), afterCrisis: (sticky && state?.asked === 1) || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
+  const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: ask.door, userText: last, afterCrisis: (sticky && state?.asked === 1) || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
   // The newest message plus her earlier ones: an echo of what she wrote ("I called 988") is not a tripwire.
   const herWords = turns.filter(t => t.role === 'user').map(t => t.text).join('\n');
 
@@ -639,9 +661,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       ctx.waitUntil(remember(env, rungs, { installId: me.installId, day, now, paidUntil: paid.paidUntil, memory, user: since, answer: text }).catch(() => logCode('MEMORY_UPDATE_FAILED')));
     } else if (paid.paid && lane === 'paid') tally(metrics, 'memory_skipped');
   });
-  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane, teenOnly);
+  const judge = (text: string, scripture: Scripture[]) => deps.judge(env, { voice: v.prompt, question: last, earlier: earlierTurns.map(t => t.text).join('\n'), text, verses: scripture.map(s => ({ ref: s.ref, text: s.text })) }, lane, teenOnly);
   let objection: string | null = null;
   let variety0 = false;
+  let edited = false;
   // A draft that passed every safety check but repeated a recent answer, or that the judge found
   // only plain (voice_low and nothing else): shown if no later try does better. Variety and voice are
   // quality, not safety, and must never cost a real answer (round 5: 7 of 64 fell back that way).
@@ -658,8 +681,11 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   for (let attempt = 0; attempt < ANSWER_TRIES; attempt++) {
     const steer: Message[] = objection ? [{ role: 'system', content: variety0 ? `Your last answer needs an edit. ${objection}` : `Your last answer was not used. ${objection} Write three different new answers. Reply with JSON {"versions": [{"text": string, "references": [...]}, ...]}.` }] : [];
     const messages = [...system, ...examples, ...history.slice(0, -1), ...steer, ...history.slice(-1)];
+    // A variety edit is one answer (PBS_CHAT_COST_040: versions of an edit copied every kept sentence
+    // three times, the largest share of paid output); a rewrite after a failed check still asks for
+    // up to three versions, since a fresh answer can fail the same check again.
     const out: LadderResult = teenSlot === 'used' ? { empty: 'out' } : teenSlot === 'unread' ? { empty: 'busy' }
-      : objection
+      : objection && !variety0
       ? await runLadder(env.DB, rungs, messages, editSchema, answerTokens * 3, metrics, isEdit)
       : await runLadder(env.DB, rungs, messages, answerSchema, answerTokens, metrics, isAnswer);
     if ('empty' in out) {
@@ -668,6 +694,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         if (teenSlot === 'claimed') await releaseTeenAnswer();
         // A message on the crisis lane is never told chat is resting or busy: if the crisis model
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
+        // The safety read runs beside the answer (PBS_SAFETY_LATENCY): settle it first, so a high read is the card here too.
+        const c = lane === 'crisis' ? (reading ? await reading : confirmed) : confirmed;
+        if (lane === 'crisis' && c?.level === 'high') return crisisReply(c.kind, c.layer);
         // A teen whose card already showed in this conversation (Workers AI has a small shared daily
         // quota, so this is common): fixed words written by people that point back to the card, never
         // the card and "Are you safe right now?" again. The question is asked once per conversation;
@@ -676,10 +705,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         if (lane === 'crisis' && teenOnly && cardShown) {
           tally(metrics, 'crisis_lane_down_teen_followup'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty, teen: true });
           const safe = saysSafe(lastAssistant, last);
-          if (safe || (confirmed?.level === 'none' && confirmed.read !== 'down')) await calmTurn();
+          if (safe || (c?.level === 'none' && c.read !== 'down')) await calmTurn();
           return reply({ kind: 'busy', ai: false, fixed: true, text: (safe ? teenStillHereSafeText : teenStillHereText)[v.lang], scripture: [], remaining: null, limit: null, reminder });
         }
-        if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(confirmed && confirmed.level !== 'none' ? confirmed.kind : 'selfharm', 'lane_down'); }
+        if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(c && c.level !== 'none' ? c.kind : 'selfharm', 'lane_down'); }
         // A paid user on free chat after her private messages never meets "resting": the private model answers, briefly.
         // Those short answers are capped per person per day (her ruling: a money ceiling); then "busy".
         if (lane === 'free' && overflow && overflow !== 'down') {
@@ -746,11 +775,10 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
         found = repeats(shape, recent);
         if (found.length) { edit = varietyObjection(shape, plainShape.said, recent); spares.push({ text: checked.text, scripture, shape, judged: false }); }
         else {
-          // The judge reads meaning where it earns its cost: Scripture, doctrine, a crisis. A Mindset answer
-          // (no Scripture by rule) outside a crisis is checked by code alone (her ruling 21 Nov 2026).
-          const needsJudge = scripture.length > 0 || ask.door !== 'mindset' || lane === 'crisis' || gate.afterCrisis;
-          const j = needsJudge ? await judge(checked.text, scripture) : ({ verdict: 'pass', voice: null } as JudgeVerdict);
-          if (!needsJudge) tally(metrics, 'judge_skipped');
+          // Every answer is read by the judge, Mindset ones too: the voice checks it carries (echo_opening,
+          // night_opening, unasked_ai) were code on both doors until PBS_GATE_KEYWORD_LISTS, so the old
+          // Mindset skip ("checked by code alone", 21 Nov 2026) would now leave them unchecked.
+          const j = await judge(checked.text, scripture);
           if (j.verdict === 'fail') found = j.which.map(w => `judge:${w}`);
           if (j.verdict === 'down') tally(metrics, 'judge_down');
           if (j.verdict !== 'down' && j.voice !== null) tally(metrics, `voice:${j.voice}`);
@@ -761,11 +789,14 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       // The next try is steered by the version closest to done: one that only repeats is edited.
       if (k === 0 || (edit && !variety)) { problems = found; variety = edit; }
     }
-    if (problems.some(p => RED_LINES.has(p) || (p.startsWith('judge:') && p !== 'judge:voice_low'))) tally(metrics, 'red_line');
+    if (problems.some(p => RED_LINES.has(p))) tally(metrics, 'red_line');
     for (const p of problems) tally(metrics, `gate:${p}`);
     logCode('CHAT_GATE', { attempt, problems: problems.join(',') });
     objection = variety || problems.map(objectionText).join(' ');
-    variety0 = !!variety;
+    // One cheap edit per answer: an edit that still repeats gets three fresh versions next time
+    // (red team 24 Nov 2026: with every variety retry a single edit, 9 of 58 shown answers repeated; bar 2).
+    variety0 = !!variety && !edited;
+    if (variety0) edited = true;
     if (attempt === 0) tally(metrics, 'regenerated');
   }
   // Newest first: it was written with the most guidance.

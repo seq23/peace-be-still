@@ -162,7 +162,7 @@ export type JudgeProse = (input: Input, text: string, signal: AbortSignal) => Pr
 
 // Problems that describe a chat reply's shape, not a spoken session (a bedtime session talks about the
 // night; a paragraph may end on a question it answers in the next).
-const CHAT_SHAPE = new Set(['night_opening', 'ends_with_question', 'missing_pastor', 'missing_trusted_adult', 'over_length']);
+const CHAT_SHAPE = new Set(['ends_with_question', 'missing_trusted_adult', 'over_length']);
 const norm = (text: string) => ` ${text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[‘’'`´]/g, '').replace(/[^\p{L}\p{N}$]+/gu, ' ').trim()} `;
 const MANIFEST = /\bmanifest\p{L}*/iu;
 // The Mindset door never carries faith words (CLAUDE.md: the doors never link each other).
