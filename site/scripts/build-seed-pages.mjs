@@ -17,13 +17,15 @@ const SAME_AS = orgSameAs();
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const text = (html) => html.replace(/<q\b[^>]*>/g, "“").replace(/<\/q>/g, "”").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
-// Words the page frame uses, per page language. Korean and Chinese pages crumb to their landing (/ko/,
+// Words the page frame uses, per page language. `faq` heads the FAQ block on every page, so it is
+// phrased as the question a reader is asking (Search Readiness b3: at least one H2 is a question;
+// 24 Nov 2026, 32 pages had none). Korean and Chinese pages crumb to their landing (/ko/,
 // /zh/), which lists every page in that language; there is no Korean or Chinese question index.
 const L = {
-  en: { home: "/", index: "/questions/", indexName: "Questions", crumbs: "Breadcrumb", quick: "Quick answer", best: "What this page is best for", pick: "Our pick", faq: "Frequently asked questions", more: "Keep reading", sources: "Sources", by: "By", maker: "a Spry Labs app", pub: "Published", upd: "Updated", og: "og.png" },
-  es: { home: "/es/", index: "/es/preguntas/", indexName: "Preguntas", crumbs: "Ruta", quick: "Respuesta rápida", best: "Para quién es esta página", pick: "Nuestra recomendación", faq: "Preguntas frecuentes", more: "Sigue leyendo", sources: "Fuentes", by: "Por", maker: "una app de Spry Labs", pub: "Publicado", upd: "Actualizado", og: "og-es.png" },
-  ko: { home: "/ko/", index: "/ko/", indexName: "새벽기도", crumbs: "현재 위치", quick: "한눈에 보기", best: "이런 분께 맞는 글이에요", pick: "추천", faq: "자주 묻는 질문", more: "함께 읽기", sources: "출처", by: "", maker: "Spry Labs가 만든 앱", pub: "처음 올린 날", upd: "수정한 날", og: "og-ko.png" },
-  "zh-Hans": { home: "/zh/", index: "/zh/", indexName: "中文首页", crumbs: "当前位置", quick: "简要回答", best: "适合谁读", pick: "推荐", faq: "常见问题", more: "继续阅读", sources: "出处", by: "", maker: "Spry Labs 出品的应用", pub: "发布于", upd: "更新于", og: "og-zh.png", colon: "：" },
+  en: { home: "/", index: "/questions/", indexName: "Questions", crumbs: "Breadcrumb", quick: "Quick answer", best: "What this page is best for", pick: "Our pick", faq: "What else do people ask?", more: "Keep reading", sources: "Sources", by: "By", maker: "a Spry Labs app", pub: "Published", upd: "Updated", og: "og.png" },
+  es: { home: "/es/", index: "/es/preguntas/", indexName: "Preguntas", crumbs: "Ruta", quick: "Respuesta rápida", best: "Para quién es esta página", pick: "Nuestra recomendación", faq: "¿Qué más se pregunta?", more: "Sigue leyendo", sources: "Fuentes", by: "Por", maker: "una app de Spry Labs", pub: "Publicado", upd: "Actualizado", og: "og-es.png" },
+  ko: { home: "/ko/", index: "/ko/", indexName: "새벽기도", crumbs: "현재 위치", quick: "한눈에 보기", best: "이런 분께 맞는 글이에요", pick: "추천", faq: "더 궁금한 점이 있으신가요?", more: "함께 읽기", sources: "출처", by: "", maker: "Spry Labs가 만든 앱", pub: "처음 올린 날", upd: "수정한 날", og: "og-ko.png" },
+  "zh-Hans": { home: "/zh/", index: "/zh/", indexName: "中文首页", crumbs: "当前位置", quick: "简要回答", best: "适合谁读", pick: "推荐", faq: "大家还常问什么？", more: "继续阅读", sources: "出处", by: "", maker: "Spry Labs 出品的应用", pub: "发布于", upd: "更新于", og: "og-zh.png", colon: "：" },
 };
 
 // hreflang: p.alt (the Spanish/English twin) or p.alts ([[lang, path], ...], self included), plus x-default.
