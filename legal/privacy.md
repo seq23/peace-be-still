@@ -1,6 +1,6 @@
 # Privacy policy
 
-Effective: November 23, 2026
+Effective: November 24, 2026
 
 This policy covers the Peace Be Still app and the website peacebestillapp.com. Peace Be Still is made by Spry Labs, the trade name of Redwood Reserve Holdings LLC, a Wyoming limited liability company. Write to info@peacebestillapp.com with any privacy question or request.
 
@@ -80,7 +80,7 @@ Everything between the app and our service travels over HTTPS. The install id is
 
 ## The website
 
-The website peacebestillapp.com sets no cookies and has no accounts, ads or tracking scripts. It uses Cloudflare Web Analytics, a privacy-first visit counter with no cookies, which tells us page views, the page you came from, and your country and device type, in totals. Cloudflare, our host, processes basic details of each visit, such as your IP address and browser type, to deliver the page and protect the site.
+The website peacebestillapp.com sets no cookies and has no accounts, ads or tracking scripts. It uses Cloudflare Web Analytics, a privacy-first visit counter with no cookies, which tells us page views, the page you came from, and your country and device type, in totals. Our own server also keeps two counts, as daily totals only: visits that arrive from our Threads, Instagram and Facebook posts, and taps on the App Store and Google Play buttons, by store and by where the visit came from (Threads, Instagram, Facebook or direct). These counts store no cookie, IP address or browser details. Cloudflare, our host, processes basic details of each visit, such as your IP address and browser type, to deliver the page and protect the site.
 
 Until November 18, 2026 the site had a form to hear when the app launches. It is closed. For people who signed up before then, we keep the email address, page language, door chosen if any, the page, the date and time, and the sentence agreed to, only to send one launch email. We delete the whole list after that email is sent. To be removed sooner, use the "Remove my email" link you saw after signing up, or the link in the launch email.
 

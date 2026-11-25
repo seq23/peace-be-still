@@ -280,7 +280,11 @@ export async function readSocialVisits(fetchImpl) {
     const body = await res.json();
     const sources = body?.sources ?? {};
     if (![THREADS_CHANNEL, ...CHANNELS].every((c) => Number.isFinite(sources[c.key])) || !Number.isFinite(body.total)) return { why: '/api/social-visits answered without a count per channel' };
-    return { total: body.total, sources, counting_since: body.counting_since ?? null };
+    // Store-page visits: taps on the site's store badges (/api/go/app-store, /api/go/google-play; D1 table store_taps).
+    const store = Number.isFinite(body.store?.total)
+      ? { total: body.store.total, counting_since: body.store.counting_since ?? null }
+      : { why: body.store?.why ? `/api/social-visits: ${body.store.why}` : '/api/social-visits answered without a store block (store-page visits)' };
+    return { total: body.total, sources, counting_since: body.counting_since ?? null, store };
   } catch (e) { return { why: `/api/social-visits unreachable: ${e.message}` }; }
 }
 
@@ -293,8 +297,9 @@ export function writeMetrics(file, m, now) {
     ...(Number.isFinite(m.visits?.total)
       ? { social_visits_28d: m.visits.total, social_visits_counting_since: m.visits.counting_since }
       : { social_visits_28d: 'not read', social_visits_28d_why: m.visits?.why ?? 'social visits were not read this run' }),
-    social_store_visits_28d: 'not read',
-    social_store_visits_28d_why: 'the App Store link is not set yet (site/config/store.json), so there are no store-page visits to count',
+    ...(Number.isFinite(m.visits?.store?.total)
+      ? { social_store_visits_28d: m.visits.store.total, social_store_visits_counting_since: m.visits.store.counting_since }
+      : { social_store_visits_28d: 'not read', social_store_visits_28d_why: m.visits?.store?.why ?? m.visits?.why ?? 'store-page visits were not read this run' }),
     channels: m.channels ?? prev.channels ?? {},
   };
   for (const [key, row] of Object.entries(doc.channels)) {

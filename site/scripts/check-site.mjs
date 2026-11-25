@@ -13,7 +13,9 @@
 // (5) store badges and store links only inside the store blocks filled from site/config/store.json (the CTA
 //     <!-- cta:start -->…<!-- cta:end -->, the home hero, llms.txt's store line) or, for exactly store.json's
 //     listings, the JSON-LD; or as a sourced fact link <a class="src" rel="nofollow noopener">;
-//     never "available now" while store.json has no URL.
+//     every store badge links our own /api/go/app-store or /api/go/google-play (which counts the tap and redirects
+//     to the listing; scorecard row pbs-social), never the listing itself, and /api/go/ links sit only in
+//     the store blocks; never "available now" while store.json has no URL.
 // (6) the launch state is true per store (site/config/store.json, passed in so --self-test can hold both
 //     states with fixtures): a live store is never "coming soon"/"muy pronto"/"곧"/"即将上架", and once any
 //     store is live no page says the app is not out yet; a store with no URL is never "now on" it.
@@ -81,8 +83,9 @@ export function check(files, storeState = storeConfig()) {
       .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, (ld) => listings.reduce((t, u) => t.split(JSON.stringify(u).slice(1, -1)).join(""), ld)).replace(/<a class="src" rel="nofollow noopener" href="https:\/\/apps\.apple\.com\/[^"]+">/g, "")
       // The legal pages' cancel link to Google Play's own subscription settings is not a store listing.
       .replace(/<a class="src" rel="nofollow noopener" href="https:\/\/play\.google\.com\/store\/account\/subscriptions">/g, "");
-    const store = outside.match(/apps\.apple\.com|play\.google\.com\/store|download on the app store|get it on google play|\/brand\/stores\//i);
+    const store = outside.match(/apps\.apple\.com|play\.google\.com\/store|download on the app store|get it on google play|\/brand\/stores\/|\/api\/go\/(?:app-store|google-play)\b/i);
     if (store) findings.push(`${name}: a store link or badge outside the store CTA (${store[0]})`);
+    for (const b of text.matchAll(/class="store-badge" href="([^"]*)"/g)) if (!/^\/api\/go\/(?:app-store|google-play)(?:\?|$)/.test(b[1])) findings.push(`${name}: a store badge that skips the /api/go/ tap count (${b[1]})`);
     findings.push(...launchFindings(name, withoutUrls(text), storeState));
     for (const [re, why] of banned) if (re.test(text)) findings.push(`${name}: ${why} (${text.match(re)[0]})`);
     if (/<form\b/i.test(text)) findings.push(`${name}: a form (sign-ups are closed; the site collects nothing)`);
@@ -144,8 +147,10 @@ if (isMain && process.argv.includes("--self-test")) {
     ["l7.html", "<p>Now on Google Play for Android.</p>"],
     ["l8.html", '<script type="application/ld+json">{"downloadUrl":"https://apps.apple.com/us/app/other/id9"}</script>'],
     ["l9.html", "<table><tr><td>Rating shown</td><td>Not out yet</td></tr></table>"],
+    ["l10.html", '<p>Get it: <a href="/api/go/app-store?ct=home">App Store</a></p>'],
+    ["l11.html", '<!-- cta:start --><a class="store-badge" href="https://apps.apple.com/us/app/x/id1?ct=home&mt=8"><img src="/brand/stores/app-store-en.svg"></a><!-- cta:end -->'],
   ], IOS);
-  const iosWant = ["l1.html: says App Store is not out yet", "l2.html: says the app is not out yet", "l3.html: says App Store is not out yet", "l4.html: says App Store is not out yet", "l5.html: says the app is not out yet", "l6.html: says the app is not out yet", "l7.html: says the app is on Google Play", "l8.html: a store link or badge outside the store CTA", "l9.html: says the app is not out yet"];
+  const iosWant = ["l1.html: says App Store is not out yet", "l2.html: says the app is not out yet", "l3.html: says App Store is not out yet", "l4.html: says App Store is not out yet", "l5.html: says the app is not out yet", "l6.html: says the app is not out yet", "l7.html: says the app is on Google Play", "l8.html: a store link or badge outside the store CTA", "l9.html: says the app is not out yet", "l10.html: a store link or badge outside the store CTA (/api/go/app-store)", "l11.html: a store badge that skips the /api/go/ tap count"];
   const playBad = check([["m1.html", "<p>Muy pronto en Google Play.</p>"], ["m2.html", "<p>已在 App Store 上架</p>"]], PLAY);
   const playWant = ["m1.html: says Google Play is not out yet", "m2.html: says the app is on App Store"];
   const missingStates = [...iosWant.filter((w) => !iosBad.some((f) => f.includes(w))), ...playWant.filter((w) => !playBad.some((f) => f.includes(w)))];
@@ -154,7 +159,7 @@ if (isMain && process.argv.includes("--self-test")) {
   // Play's own "coming soon" line, the CTA's "Google Play: coming soon" and the listing in JSON-LD.
   const statesClean = [
     ...check([["s1.html", "<p>Coming soon to the App Store and Google Play. No launch date.</p><span>App Store: coming soon</span>"]], SOON),
-    ...check([["s2.html", '<p>Now on the App Store for iPhone. Coming soon to Google Play.</p><span class="store-soon">Google Play: coming soon</span><p>Ya está en el App Store para iPhone. Llega muy pronto a Google Play.</p><p>지금 App Store에 있어요. Google Play에는 곧 나와요.</p><script type="application/ld+json">{"downloadUrl":"https://apps.apple.com/us/app/x/id1"}</script>']], IOS),
+    ...check([["s2.html", '<p>Now on the App Store for iPhone. Coming soon to Google Play.</p><span class="store-soon">Google Play: coming soon</span><p>Ya está en el App Store para iPhone. Llega muy pronto a Google Play.</p><p>지금 App Store에 있어요. Google Play에는 곧 나와요.</p><script type="application/ld+json">{"downloadUrl":"https://apps.apple.com/us/app/x/id1"}</script><!-- cta:start --><a class="store-badge" href="/api/go/app-store?ct=home&amp;ppid=p-1"><img src="/brand/stores/app-store-en.svg"></a><!-- cta:end -->']], IOS),
   ];
   if (statesClean.length) { console.error(`check-site --self-test: flagged a true launch line: ${statesClean.join("; ")}`); process.exit(1); }
   const want = ["registered trademark", "a faith page links a mindset page", "a form (sign-ups are closed", "a store link or badge outside the store CTA", "available now", "mindset-practice words on a neutral page", "a script other than JSON-LD", "e.html: outcome or health promise", "e.html: an email address", "g.html: manifesting words on a faith page", "h.txt: manifesting words on a neutral page (law of attraction)", "p.html: a store link or badge outside the store CTA", "q.html: says the app is on App Store"];

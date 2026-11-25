@@ -2,11 +2,13 @@
 export const BASE = "https://peacebestillapp.com";
 
 import { readFileSync } from "node:fs";
+import { appStoreHref, goHref } from "./store-links.mjs";
 
 // THE store call to action (owner 18 Nov 2026: no waitlist). Every page renders it through this one
 // function, between <!-- cta:start --> and <!-- cta:end -->. Per store, from site/config/store.json:
 // null -> "coming soon" text (never a date, never "available now"); a URL -> that store's official
-// badge (Apple and Google marketing artwork, unaltered) linking to the listing.
+// badge (Apple and Google marketing artwork, unaltered) linking to our own /api/go/app-store or /api/go/google-play,
+// which counts the tap (scorecard row pbs-social) and redirects to the tagged listing (src/app.js).
 export function storeConfig() {
   return JSON.parse(readFileSync(new URL("../config/store.json", import.meta.url), "utf8"));
 }
@@ -134,12 +136,6 @@ export function sourceOf(relPath) {
   const p = String(relPath).replace(/^\/+/, "").replace(/(?:^|\/)index\.html$/, "").replace(/\.html$/, "").replace(/\/+$/, "");
   return (p || "home").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
 }
-const tagged = (url, store, kind, source) => {
-  if (!source) return url;
-  const sep = url.includes("?") ? "&" : "?";
-  if (kind === "ios") return `${url}${sep}${store.app_store_pt ? `pt=${encodeURIComponent(store.app_store_pt)}&` : ""}ct=${source}&mt=8`;
-  return `${url}${sep}referrer=${encodeURIComponent(`utm_source=peacebestillapp.com&utm_medium=site&utm_campaign=${source}`)}`;
-};
 const CTA = {
   en: {
     soonH: "Look for Peace Be Still in the App Store and Google Play",
@@ -192,29 +188,19 @@ export const langOf = (html) => {
   const l = (String(html).match(/<html lang="([\w-]+)"/) || [])[1];
   return LANGS.includes(l) ? l : "en";
 };
-/** The App Store link for a page (its path under site/public): the page's custom product page when
- *  store.json custom_pages lists it (an exact path first, then the page's door, then the longest folder
- *  prefix), otherwise the default product page. The ct= tag is added on top by tagged(). */
-export function appStoreHref(store, page = "", door = "neutral") {
-  if (!store.app_store_url) return null;
-  const path = String(page).replace(/^\/+/, "").replace(/(?:^|\/)index\.html$/, (m) => (m.startsWith("/") ? "/" : ""));
-  const pages = store.custom_pages || [];
-  const exact = pages.find((c) => [...(c.paths || []), ...(c.waiting_on_pr85 || [])].includes(path));
-  const byDoor = exact ? null : pages.find((c) => (c.doors || []).includes(door));
-  const prefix = exact || byDoor ? null : pages.flatMap((c) => (c.prefixes || []).map((pre) => ({ pre, c }))).filter((x) => path.startsWith(x.pre)).sort((x, y) => y.pre.length - x.pre.length)[0]?.c;
-  const hit = exact || byDoor || prefix;
-  return hit ? `${store.app_store_url}${store.app_store_url.includes("?") ? "&" : "?"}ppid=${hit.ppid}` : store.app_store_url;
-}
+// The store links themselves (listing URL, tags, custom product pages, the /api/go/ redirect) live in
+// store-links.mjs, shared with the Worker. appStoreHref is re-exported for the existing callers.
+export { appStoreHref };
 
 // The badges (or "coming soon" lines), one per store, shared by the CTA box and the home hero.
 // liveOnly (the home hero): only the stores that are live; the hero note already names the other.
 function storeListHtml(t, lang, store, source, page, door, liveOnly = false) {
   const [badge, bw] = APP_STORE_BADGE[lang] || APP_STORE_BADGE.en;
   const ios = store.app_store_url
-    ? `<a class="store-badge" href="${tagged(appStoreHref(store, page, door), store, "ios", source)}"><img src="${badge}" alt="${t.iosAlt}" width="${bw}" height="40"></a>`
+    ? `<a class="store-badge" href="${goHref("ios", store, source, page, door)}"><img src="${badge}" alt="${t.iosAlt}" width="${bw}" height="40"></a>`
     : liveOnly ? "" : `<span class="store-soon">${t.iosSoon}</span>`;
   const play = store.play_url
-    ? `<a class="store-badge" href="${tagged(store.play_url, store, "play", source)}"><img src="/brand/stores/google-play-${lang === "es" ? "es" : "en"}.png" alt="${t.playAlt}" width="135" height="52"></a>`
+    ? `<a class="store-badge" href="${goHref("play", store, source, page, door)}"><img src="/brand/stores/google-play-${lang === "es" ? "es" : "en"}.png" alt="${t.playAlt}" width="135" height="52"></a>`
     : liveOnly ? "" : `<span class="store-soon">${t.playSoon}</span>`;
   return `<ul class="stores">
 ${[ios, play].filter(Boolean).map((x) => `      <li>${x}</li>`).join("\n")}

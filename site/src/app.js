@@ -8,6 +8,18 @@
 // 4) social visit counts (scorecard row pbs-social): a page view tagged utm_source=threads|instagram|facebook
 //    (or ?src=, or arriving from those sites) adds 1 to a per-day, per-source count in D1 table social_visits.
 //    Counts only: no cookie, no IP, no user agent is stored. GET /api/social-visits?days=28 reads the totals.
+// 5) store-page visits (the same row, social_store_visits_28d): every store badge links to /api/go/app-store or
+//    /api/go/google-play, which adds 1 to D1 table store_taps (day, source, store) and 302s to the listing built
+//    by site/content/store-links.mjs from site/config/store.json only (Apple pt/ct/mt=8 and Play referrer= kept).
+//    The source is the page the person tapped on: its own ?utm_source=/?src= tag (the same-origin Referer
+//    carries it), else a Threads/Instagram/Facebook Referer, else "direct". A ct or ppid that is not ours
+//    is dropped, so the target never carries anything else from the request. While a store has no URL, /api/go/
+//    answers 302 to /#get-the-app and counts nothing. /api/go/ is never a page view (4). A failed count never
+//    stops the 302. GET /api/social-visits answers the 28-day taps in its "store" block.
+import STORE from "../config/store.json" with { type: "json" };
+import CAMPAIGNS from "../config/campaigns.json" with { type: "json" };
+import { storeTarget } from "../content/store-links.mjs";
+
 export const APEX = "peacebestillapp.com";
 const MAX_BODY = 2048;
 // 18 Nov 2026: the Black Bible app question page became the /black-bible-app/ landing page.
@@ -111,15 +123,21 @@ const NOT_A_PERSON = /bot|crawl|spider|slurp|preview|facebookexternalhit|faceboo
 export function visitSource(request) {
   if (request.method !== "GET") return null;
   const url = new URL(request.url);
-  if (url.hostname !== APEX || url.pathname.startsWith("/api/")) return null;
+  if (url.hostname !== APEX || url.pathname.startsWith("/api/")) return null; // /api/go/ taps included
   if (/\.[a-z0-9]+$/i.test(url.pathname) && !url.pathname.endsWith(".html")) return null; // pictures, css, fonts
   const dest = request.headers.get("Sec-Fetch-Dest");
   if (dest && dest !== "document") return null;
   if (NOT_A_PERSON.test(request.headers.get("User-Agent") || "")) return null;
+  return socialOf(url, request.headers.get("Referer"));
+}
+
+/** Threads, Instagram or Facebook from a page URL's own tag (?utm_source= or ?src=), else from the
+ *  referring site; null when neither says so. */
+function socialOf(url, referer) {
   const tag = (url.searchParams.get("utm_source") || url.searchParams.get("src") || "").toLowerCase();
   if (tag) return ALIAS[tag] ?? null;
   let host = "";
-  try { host = new URL(request.headers.get("Referer") || "").hostname; } catch { return null; }
+  try { host = new URL(referer || "").hostname; } catch { return null; }
   for (const [re, src] of REF) if (re.test(host)) return src;
   return null;
 }
@@ -136,6 +154,62 @@ export async function countVisit(request, env) {
   return true;
 }
 
+// ---- store-page visits (taps on a store badge) ---------------------------------------------
+const GO_PATHS = { "/api/go/app-store": "ios", "/api/go/google-play": "play" };
+export const TAP_SOURCES = [...SOCIAL, "direct"];
+
+/** Where /api/go/<store> sends a person (store.json is bundled; tests pass their own), or null for any other path. */
+export function goTarget(url, store = STORE, campaigns = CAMPAIGNS) {
+  const kind = GO_PATHS[url.pathname.replace(/\/+$/, "")];
+  if (!kind) return null;
+  const target = storeTarget(kind, store, { ct: url.searchParams.get("ct") || "", ppid: url.searchParams.get("ppid") || "" }, campaigns);
+  return { kind, target, location: target ?? `https://${APEX}/#get-the-app` };
+}
+
+/** The source of a store-badge tap, or null when it is not a person tapping a live store badge. */
+export function tapSource(request, store = STORE) {
+  if (request.method !== "GET") return null;
+  const url = new URL(request.url);
+  if (url.hostname !== APEX) return null;
+  const go = goTarget(url, store);
+  if (!go?.target) return null; // that store has no URL yet: not a store visit
+  if (NOT_A_PERSON.test(request.headers.get("User-Agent") || "")) return null;
+  const dest = request.headers.get("Sec-Fetch-Dest");
+  if (dest && dest !== "document") return null;
+  if (/prefetch|prerender/i.test(`${request.headers.get("Sec-Purpose") || ""} ${request.headers.get("Purpose") || ""}`)) return null;
+  let from = null;
+  try { from = new URL(request.headers.get("Referer") || ""); } catch {}
+  // Our own page: its query names the channel the person arrived from. Another site: its host.
+  const src = from && from.hostname === APEX ? socialOf(from, null) : socialOf(new URL(`https://${APEX}/`), from?.href ?? "");
+  return { source: src ?? "direct", store: go.kind };
+}
+
+export async function countTap(request, env, store = STORE) {
+  const tap = tapSource(request, store);
+  if (!tap || !env.DB) return false;
+  if (env.VISIT_RL) {
+    const { success } = await env.VISIT_RL.limit({ key: request.headers.get("CF-Connecting-IP") || "unknown" });
+    if (!success) return false;
+  }
+  const day = new Date().toISOString().slice(0, 10);
+  await env.DB.prepare("INSERT INTO store_taps (day, source, store, n) VALUES (?, ?, ?, 1) ON CONFLICT(day, source, store) DO UPDATE SET n = n + 1").bind(day, tap.source, tap.store).run();
+  return true;
+}
+
+/** The 28-day store taps. Threads + Instagram + Facebook make the total (as social_visits does); direct
+ *  taps are shown, never added. A failed read answers total null with the reason, never 0. */
+async function readTaps(env, since) {
+  try {
+    const { results = [] } = await env.DB.prepare("SELECT source, SUM(n) AS n FROM store_taps WHERE day >= ? GROUP BY source").bind(since).all();
+    const started = await env.DB.prepare("SELECT substr(applied_at, 1, 10) AS day FROM schema_version WHERE version = 3").first();
+    const sources = Object.fromEntries(TAP_SOURCES.map((s) => [s, 0]));
+    for (const r of results) if (r.source in sources) sources[r.source] = Number(r.n) || 0;
+    return { total: SOCIAL.reduce((a, s) => a + sources[s], 0), sources, counting_since: started?.day ?? null };
+  } catch (e) {
+    return { total: null, why: `store_taps could not be read: ${String(e?.message || e).slice(0, 200)}` };
+  }
+}
+
 export async function readVisits(url, env) {
   const days = Math.min(90, Math.max(1, Number.parseInt(url.searchParams.get("days") || "28", 10) || 28));
   const since = new Date(Date.now() - (days - 1) * 86_400_000).toISOString().slice(0, 10);
@@ -144,7 +218,8 @@ export async function readVisits(url, env) {
   const sources = Object.fromEntries(SOCIAL.map((s) => [s, 0]));
   for (const r of results) if (SOCIAL.includes(r.source)) sources[r.source] = Number(r.n) || 0;
   const total = SOCIAL.reduce((a, s) => a + sources[s], 0);
-  return new Response(JSON.stringify({ days, since, counting_since: first?.day ?? null, sources, total }), {
+  const store = await readTaps(env, since);
+  return new Response(JSON.stringify({ days, since, counting_since: first?.day ?? null, sources, total, store }), {
     headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, max-age=300" },
   });
 }
@@ -167,6 +242,8 @@ async function route(request, env) {
     if (request.method !== "GET") return new Response("Method not allowed", { status: 405, headers: { Allow: "GET" } });
     return readVisits(url, env);
   }
+  const go = goTarget(url);
+  if (go) return new Response(null, { status: 302, headers: { Location: go.location, "Cache-Control": "no-store" } });
   if (p === "/waitlist/remove" || p === "/es/waitlist/remove") return removeForm(p.startsWith("/es/") ? "es" : "en", url.searchParams.get("t"));
   return env.ASSETS.fetch(request);
 }
@@ -176,6 +253,9 @@ export default {
     // Counting never slows or breaks a page: it runs after the response, and a failure is only logged.
     const counting = countVisit(request, env).catch((e) => console.error(`social visit not counted: ${e.message}`));
     if (ctx?.waitUntil) ctx.waitUntil(counting);
+    // The same for a store-badge tap: the 302 to the listing never waits on, or fails with, the count.
+    const tapping = countTap(request, env).catch((e) => console.error(`store tap not counted: ${e.message}`));
+    if (ctx?.waitUntil) ctx.waitUntil(tapping);
     const res = await route(request, env);
     if (res.status === 301 || res.status === 302) return res;
     const out = new Response(res.body, res);
