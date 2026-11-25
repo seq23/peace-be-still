@@ -6,7 +6,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PAGES } from "../content/questions.mjs";
-import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE, fillStores, orgSameAs, storeConfig, storeWords } from "../content/parts.mjs";
+import { storeCtaHtml, headerHtml, footerHtml, isLocal, BASE, fillStores, orgSameAs, storeConfig, storeWords, INDEX_WORDS, STORE_STATES, snippetFindings } from "../content/parts.mjs";
 import { applyCta } from "./apply-cta.mjs";
 import { legalPages } from "../content/legal.mjs";
 import { homeHtml } from "../content/home.mjs";
@@ -121,8 +121,7 @@ ${footerHtml(p.lang, p.updated, p.door)}
 function renderIndex(lang, list) {
   const es = lang === "es";
   const path = es ? "/es/preguntas/" : "/questions/";
-  const title = es ? "Preguntas sobre la Biblia y el sueño · Peace Be Still" : "Bible, sleep and app questions · Peace Be Still";
-  const desc = es ? "Respuestas claras sobre Salmos para dormir, la Biblia en español para dormir y la app Peace Be Still, {{stores.tag}}." : "Plain answers about whispered scripture, Psalms for sleep, Bible apps and cancelling subscriptions, from Peace Be Still, a phone app {{stores.tag}}.";
+  const { title, description: desc } = INDEX_WORDS[es ? "es" : "en"];
   const groups = [...new Set(list.map((p) => p.group || (es ? "Más preguntas" : "More questions")))];
   const li = (p) => `    <li><span class="door-lab">${p.door === "faith" ? (es ? "Palabra de Dios" : "God's Word") : p.door === "mindset" ? (es ? "Mentalidad" : "Mindset") : (es ? "Para todos" : "For everyone")}</span><a href="${p.path}">${p.indexLabel || p.h1}</a><span class="muted">${p.indexNote || p.description}</span></li>`;
   const items = groups.map((g) => `  <h2 class="qgroup">${g}</h2>\n  <ul class="qlist">\n${list.filter((p) => (p.group || (es ? "Más preguntas" : "More questions")) === g).map(li).join("\n")}\n  </ul>`).join("\n");
@@ -183,6 +182,16 @@ for (const p of PAGES) for (const r of p.related || []) {
   if (t.door !== "neutral" && p.door !== "neutral" && t.door !== p.door) { console.error(`NAMED STOP [DOOR_LINK] ${p.path} (${p.door}) links ${r} (${t.door})`); process.exit(1); }
 }
 if (PAGES.length === 0) { console.error("NAMED STOP [NO_SEED_PAGES] content/questions.mjs holds no pages"); process.exit(1); }
+// The search snippet (b1/b2): every page's title and description fit, in every store state, before
+// anything is written. site/test/snippet.test.mjs holds the built pages (home, legal, engine) to the same.
+{
+  const bad = [];
+  for (const [state, store] of Object.entries(STORE_STATES)) {
+    for (const p of PAGES) bad.push(...snippetFindings(`${p.path} [${state}]`, fillStores(p.title, p.lang, store), fillStores(p.description, p.lang, store)));
+    for (const [lang, w] of Object.entries(INDEX_WORDS)) bad.push(...snippetFindings(`${lang} index [${state}]`, fillStores(w.title, lang, store), fillStores(w.description, lang, store)));
+  }
+  if (bad.length) { console.error(`NAMED STOP [SNIPPET_LENGTH]\n${[...new Set(bad.map((b) => b.replace(/ \[\w+\]:/, ":")))].join("\n")}`); process.exit(1); }
+}
 // Every {{stores.*}} token (the launch state, from store.json) is filled here, per page language.
 for (const p of PAGES) write(p.path, fillStores(render(p), p.lang));
 write("/questions/", fillStores(renderIndex("en", PAGES.filter((p) => p.lang === "en")), "en"));
