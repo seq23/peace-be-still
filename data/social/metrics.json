@@ -1,6 +1,6 @@
 {
   "_comment": "Written by scripts/instagram/ig_loop.mjs every run; read by the Boss OS scorecard row pbs-social. \"not read\" always comes with a _why.",
-  "updatedAt": "2026-11-25T23:20:37.111Z",
+  "updatedAt": "2026-11-26T23:20:09.552Z",
   "first_post_at": "2026-11-18",
   "social_visits_28d": 3,
   "social_visits_counting_since": "2026-11-22",
@@ -12,7 +12,7 @@
       "followers": "not read",
       "followers_why": "Buffer's API has no follower count; read by hand in the app",
       "posts_sent": 3,
-      "views_28d": 0,
+      "views_28d": 2,
       "visits_28d": 3
     },
     "facebook": {
@@ -28,7 +28,7 @@
       "name": "threads peacebestillapp",
       "followers": "not read",
       "followers_why": "Buffer's API has no follower count; read by hand in the app",
-      "posts_sent": 7,
+      "posts_sent": 8,
       "views_28d": 30,
       "visits_28d": 0
     }
