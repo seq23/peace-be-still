@@ -2,67 +2,19 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W48",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-25T20:06:00.244Z",
+  "generated_at": "2026-11-26T19:46:51.278Z",
   "state": "slow",
-  "published": 7,
+  "published": 4,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
   "ai_visitors": 0,
-  "ai_bot_hits": 396,
+  "ai_bot_hits": 315,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 12,
+  "held_by_cap": 15,
   "redirected": [
-    {
-      "query": "is the bible app free",
-      "strengthen": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-19"
-    },
-    {
-      "query": "is the holy bible app free",
-      "strengthen": "https://peacebestillapp.com/site/public/questions/is-creed-bible-app-free/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-19"
-    },
-    {
-      "query": "is there a free bible chat app",
-      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-19"
-    },
-    {
-      "query": "what are some free bible chat apps",
-      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-19"
-    },
-    {
-      "query": "is bible chat app free to use",
-      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-19"
-    },
-    {
-      "query": "bible app for black women",
-      "strengthen": "https://peacebestillapp.com/bible-app-for-women/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-19"
-    },
-    {
-      "query": "bible study app for black women",
-      "strengthen": "https://peacebestillapp.com/bible-app-for-women/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-19"
-    },
-    {
-      "query": "african american bible app",
-      "strengthen": "https://peacebestillapp.com/site/public/questions/african-american-bible/",
-      "matched_by": "high token overlap (0.80 >= 0.6)",
-      "at": "2026-11-19"
-    },
     {
       "query": "daily devotional books for black women",
       "strengthen": "https://peacebestillapp.com/questions/free-daily-devotional-for-black-women/",
@@ -182,7 +134,7 @@
     "new_candidates": [],
     "skipped": [],
     "rejected": [],
-    "could_not_tell": 4
+    "could_not_tell": 5
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45691610814"
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45886148485"
 }
