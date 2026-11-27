@@ -1,6 +1,7 @@
 // Reads the built Android App Bundle before it is uploaded: package name, versionCode, permissions and the
 // upload certificate. Fails on the wrong package, a key other than the EAS-held upload key, a missing versionCode, or a permission the app must not ask for
-// (the Play Data safety answers and the privacy policy rely on these staying out; app.config.ts blocks them).
+// (the Play Data safety answers and the privacy policy rely on these staying out; app.config.ts blocks them), or
+// backup rules that no longer keep Write your own night's folder out of Google backup.
 // Writes version_code and sha1 to $GITHUB_OUTPUT when it is set.
 // Usage: node scripts/android/check-aab.mjs <app.aab> <bundletool.jar>
 import { appendFileSync } from 'node:fs';
@@ -20,6 +21,9 @@ export function manifestIssues(xml) {
   if (!versionCode) issues.push('AAB_NO_VERSION_CODE');
   for (const p of permissions.filter(p => FORBIDDEN.includes(p))) issues.push(`AAB_FORBIDDEN_PERMISSION: ${p}`);
   if (!permissions.includes('com.android.vending.BILLING')) issues.push('AAB_NO_BILLING: Google Play Billing is missing, the paid plan could not be bought');
+  // Write your own night's folder must stay out of Google backup (plugins/own-night-backup.js; the privacy policy says never uploaded).
+  for (const [attr, name] of [['fullBackupContent', 'pbs_backup_rules'], ['dataExtractionRules', 'pbs_data_extraction_rules']])
+    if (!new RegExp(`android:${attr}="@xml/${name}"`).test(xml)) issues.push(`AAB_BACKUP_RULES_MISSING: android:${attr} is not @xml/${name}, so own nights could reach Google backup`);
   return { pkg, versionCode, permissions, issues };
 }
 

@@ -48,7 +48,9 @@ const config: ExpoConfig = {
     ['expo-splash-screen', { image: './assets/icon.png', resizeMode: 'contain', backgroundColor: '#0E1A22' }],
     // Local notifications only (the one daily reminder): no push entitlement, no server, no token.
     ['expo-notifications', { enableRemoteNotifications: false }],
-    'expo-updates'],
+    'expo-updates',
+    // Write your own night's folder stays out of Google backup and device transfer (the iPhone marks it at run time).
+    './plugins/own-night-backup'],
   // Over-the-air fixes (EAS Update, free tier): a phone checks at launch and uses a new JS bundle on the next
   // launch. An update only reaches builds of the SAME app version (runtimeVersion = appVersion), so a native change
   // ships as a new store version, never over the air. Publish only with scripts/ota-update.sh (it refuses a bundle

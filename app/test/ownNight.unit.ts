@@ -189,3 +189,54 @@ test('every number has one home: the lengths, the saved-night limit and the mess
   assert.deepEqual([...OWN_NIGHT_MINUTES], [20, 45, 90]);
   assert.equal(SAVED_NIGHTS_MAX, 20);
 });
+
+// "Never uploaded" (privacy policy, the microphone question, the editor): the own-nights folder is kept out of
+// iCloud and device backups before anything is written into it, and nothing is written when it cannot be.
+test('own nights are kept out of backups before anything is written, and nothing is written when they cannot be', async () => {
+  const { createShelf, NIGHTS_FILE } = await import('../src/ownNight/shelf');
+  const log: string[] = [];
+  const disk = new Map<string, string>();
+  const files = (marks: boolean) => ({
+    ensureFolder: () => { log.push('folder'); },
+    excludeFolder: () => { log.push(`exclude:${marks}`); return marks; },
+    read: (name: string) => disk.get(name) ?? null,
+    write: (name: string, text: string) => { log.push(`write:${name}`); disk.set(name, text); },
+  });
+  const ok = createShelf(files(true));
+  const shelf = createSavedNights(ok.storage, async () => undefined);
+  assert.equal((await shelf.save(night(1))).ok, true);
+  assert.deepEqual(log.slice(0, 2), ['folder', 'exclude:true'], 'the folder is marked before the first write');
+  assert.ok(log.indexOf('exclude:true') < log.indexOf(`write:${NIGHTS_FILE}`));
+  assert.equal(parseNights(disk.get(NIGHTS_FILE) ?? null).length, 1, 'the night is in the folder file, not elsewhere');
+  // The mark cannot be set or read back: no write, the save says it failed, and a recording is not moved in.
+  log.length = 0; disk.clear();
+  const refused = createShelf(files(false));
+  assert.deepEqual(await createSavedNights(refused.storage, async () => undefined).save(night(2)), { ok: false, reason: 'failed' });
+  assert.ok(!log.some(l => l.startsWith('write:')), `wrote while not out of backups: ${log.join(', ')}`);
+  assert.throws(() => refused.ready(), /BACKUP_EXCLUDE_FAILED/);
+  await assert.rejects(ok.storage.setItem('peace-be-still-settings', '{}'), /NOT_A_NIGHTS_KEY/);
+});
+
+test('the phone build keeps own nights in the excluded folder, and Android leaves that folder out of backup', async () => {
+  const adapters = readFileSync(new URL('../src/ownNight/adapters.ts', import.meta.url), 'utf8');
+  // Saved nights on a phone go through the shelf; the browser store is for the web preview only.
+  assert.match(adapters, /const nightStorage = \(\) => \(Platform\.OS === 'web' \? AsyncStorage : shelf\.storage\);/);
+  assert.match(adapters, /export function keepRecording[\s\S]{0,80}shelf\.ready\(\);/, 'a recording is moved in only after the folder is marked');
+  // An iPhone binary without the backup mark never shows the feature (an over-the-air update could reach one).
+  assert.match(adapters, /Platform\.OS !== 'ios' \|\| !!backupExclude\(\)/);
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const plugin = require('../plugins/own-night-backup.js');
+  for (const xml of Object.values(plugin.FILES) as string[]) assert.match(xml, /<exclude domain="file" path="own-nights\/" \/>/);
+  assert.match(plugin.FILES['pbs_data_extraction_rules.xml'], /<cloud-backup>[\s\S]*own-nights[\s\S]*<\/cloud-backup>\s*<device-transfer>[\s\S]*own-nights[\s\S]*<\/device-transfer>/);
+  assert.ok(!(Object.values(plugin.FILES) as string[]).some(x => /<include/.test(x)), 'an include rule would drop the rest of the app from backup');
+  const manifest = { manifest: { application: [{ $: { 'android:allowBackup': 'true' } }] } };
+  plugin.setBackupRules(manifest);
+  assert.equal(manifest.manifest.application[0].$['android:fullBackupContent'], '@xml/pbs_backup_rules');
+  assert.equal(manifest.manifest.application[0].$['android:dataExtractionRules'], '@xml/pbs_data_extraction_rules');
+  assert.throws(() => plugin.setBackupRules({ manifest: { application: [{ $: { 'android:fullBackupContent': '@xml/other' } }] } }), /OWN_NIGHT_BACKUP_RULES_TAKEN/);
+  const root = (await import('node:fs')).mkdtempSync(join((await import('node:os')).tmpdir(), 'pbs-android-'));
+  plugin.writeRuleFiles(root);
+  for (const [file, xml] of Object.entries(plugin.FILES)) assert.equal(readFileSync(join(root, 'app/src/main/res/xml', file), 'utf8'), xml);
+  const config = readFileSync(new URL('../app.config.ts', import.meta.url), 'utf8');
+  assert.match(config, /'\.\/plugins\/own-night-backup'/);
+});
