@@ -1,2 +1,0 @@
-# Marked TEST recordings for the web preview only (never in a store build: app/public is web-only).
-!*.mp3

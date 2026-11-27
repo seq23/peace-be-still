@@ -9,7 +9,7 @@ import { PAID_CHAT_MESSAGES } from '../gates';
 import { useT } from '../settings';
 import { fonts } from '../theme/tokens';
 import { BackLink, Body, Card, Label, PillButton, Screen, TextLink, Title, styles, usePalette } from '../ui';
-import type { SceneResult } from './api';
+import { REPORT_REASONS, type MomentReport, type SceneResult } from './api';
 import { canRecord, previewRecording } from './adapters';
 import { OWN_NIGHT_MINUTES, SAVED_NIGHTS_MAX, SCENE_MAX, WHO_MAX, WISH_MAX, type OwnNightMinutes } from './limits';
 import { Recorder } from './Recorder';
@@ -21,6 +21,8 @@ type Props = {
   lang: 'en' | 'es';
   saved: SavedNights;
   write: Write;
+  /** Sends a reason-only report of an AI-written moment; resolves whether the server took it. */
+  report: (reason: MomentReport) => Promise<boolean>;
   close: () => void;
   plans: () => void;
   play: (id: string) => void;
@@ -44,7 +46,7 @@ export function OwnNightScreen(props: Props) {
   return <Nights {...props} />;
 }
 
-function Nights({ lang, saved, write, close, play, startEditing }: Props) {
+function Nights({ lang, saved, write, report, close, play, startEditing }: Props) {
   const t = useT('journey');
   const c = usePalette();
   const [nights, setNights] = useState<SavedNight[] | null>(null);
@@ -59,7 +61,7 @@ function Nights({ lang, saved, write, close, play, startEditing }: Props) {
     if (result.ok) { setNights(result.nights); setConfirming(null); } else setDeleteFailed(true);
   }
 
-  if (draft) return <Editor draft={draft} write={write} saved={saved} count={nights?.length ?? 0}
+  if (draft) return <Editor draft={draft} write={write} report={report} saved={saved} count={nights?.length ?? 0}
     done={list => { if (list) setNights(list); setDraft(null); }} />;
 
   const full = (nights?.length ?? 0) >= SAVED_NIGHTS_MAX;
@@ -107,7 +109,7 @@ function Choices<T extends string | number>({ label, options, value, onChange }:
   </View>;
 }
 
-function Editor({ draft: start, write, saved, count, done }: { draft: Draft; write: Write; saved: SavedNights; count: number; done: (list?: SavedNight[]) => void }) {
+function Editor({ draft: start, write, report, saved, count, done }: { draft: Draft; write: Write; report: Props['report']; saved: SavedNights; count: number; done: (list?: SavedNight[]) => void }) {
   const t = useT('journey');
   const c = usePalette();
   const [d, setD] = useState<Draft>(start);
@@ -193,6 +195,7 @@ function Editor({ draft: start, write, saved, count, done }: { draft: Draft; wri
         onChangeText={scene => set({ scene })} style={[input, { minHeight: 236, fontFamily: fonts.serif, fontSize: 19, lineHeight: 27 }]} />
       <Body size={14}>{t('ownNight.sceneHint')}</Body>
       {remaining !== null && <Body size={13}>{t('ownNight.remaining', { count: remaining })}</Body>}
+      {d.ai && <ReportMoment report={report} />}
     </>}
     <Choices<OwnNightMinutes> label={t('ownNight.length')} value={d.minutes} onChange={minutes => set({ minutes })}
       options={OWN_NIGHT_MINUTES.map(m => ({ value: m, text: t('listen.minutes', { minutes: m }) }))} />
@@ -211,4 +214,23 @@ function Editor({ draft: start, write, saved, count, done }: { draft: Draft; wri
           {!sending && <TextLink onPress={() => { setNotice(null); setStep('scene'); }}>{t('ownNight.myself')}</TextLink>}</>
       : <PillButton disabled={!d.scene.trim()} onPress={() => void save()}>{t('ownNight.save')}</PillButton>}
   </Screen>;
+}
+
+const REPORT_KEYS = { hurtful: 'ownNight.report.hurtful', wrong: 'ownNight.report.wrong', unsafe: 'ownNight.report.unsafe', other: 'ownNight.report.other' } as const;
+/** App Review 1.2: an AI-written moment can be reported. Only the reason is sent. */
+function ReportMoment({ report }: { report: Props['report'] }) {
+  const t = useT('journey');
+  const c = usePalette();
+  const [open, setOpen] = useState(false);
+  const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
+  if (state === 'sent') return <Body size={14}>{t('ownNight.report.sent')}</Body>;
+  if (!open) return <TextLink onPress={() => setOpen(true)}>{t('ownNight.report')}</TextLink>;
+  return <View style={{ gap: 2 }}>
+    <Body muted={false} size={15}>{t('ownNight.report.why')}</Body>
+    {REPORT_REASONS.map(reason => <TextLink key={reason} disabled={state === 'sending'} onPress={() => {
+      setState('sending');
+      void report(reason).then(ok => setState(ok ? 'sent' : 'failed'));
+    }}>{t(REPORT_KEYS[reason])}</TextLink>)}
+    {state === 'failed' && <Text accessibilityRole="alert" style={{ color: c.wine, fontFamily: fonts.body }}>{t('ownNight.report.failed')}</Text>}
+  </View>;
 }

@@ -34,7 +34,7 @@ import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutT
 import { examplesFor, sampleSet } from './voice/samples';
 import { chatJudgeListSchema, chatJudgeSchema, chatJudgeVerdict, judgeMessages, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
-import { parseReport, REPORTS_DAILY, saveReport } from './report';
+import { parseReport, REPORT_REASONS, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
 import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY, providers, teenProviders, type Translation } from './shared';
@@ -882,6 +882,16 @@ async function report(request: Request, env: Env, deps: Deps): Promise<Response>
   if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
   if (!(await env.CHAT_BURST.limit({ key: who.installId })).success) return json({ error: 'SLOW_DOWN' }, 429);
   const raw = await request.json().catch(() => null);
+  // "Report this moment" (Write your own night): the reason only, as a count. The moment was written from her
+  // private wish, so no word of it is kept (ownNight.ts keeps nothing she wrote).
+  if (raw && typeof raw === 'object' && 'ownNight' in raw) {
+    const reason = (raw as { reason?: unknown }).reason;
+    if (typeof reason !== 'string' || !(REPORT_REASONS as readonly string[]).includes(reason)) return fail('BAD_REQUEST', 400);
+    if (!(await reserve(env.DB, centralDay(now), 'reports', REPORTS_DAILY))) { logCode('REPORT_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+    await bump(env.DB, centralDay(now), `own_night_report:${reason}`, 1);
+    logCode('OWN_NIGHT_REPORTED', { reason });
+    return json({ reported: true });
+  }
   // "Report this session" (Made for you): the same token, burst and daily checks, then its own store.
   const session = !!raw && typeof raw === 'object' && 'session' in raw;
   const body = session ? null : parseReport(raw);

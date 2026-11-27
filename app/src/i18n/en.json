@@ -508,5 +508,13 @@
   "ownNight.myVoiceLabel": "Your voice",
   "paid.ownNight": "Write your own night: your moment, read softly as you fall asleep.",
   "ownNight.seePlans": "See plans",
-  "ownNight.aiLabel": "Written with AI"
+  "ownNight.aiLabel": "Written with AI",
+  "ownNight.report": "Report this moment",
+  "ownNight.report.why": "What is wrong with it?",
+  "ownNight.report.hurtful": "Hurtful or unkind",
+  "ownNight.report.wrong": "Not what I wrote",
+  "ownNight.report.unsafe": "Unsafe or harmful",
+  "ownNight.report.other": "Something else",
+  "ownNight.report.sent": "Thank you. Your report was sent. No words from your moment were sent with it.",
+  "ownNight.report.failed": "The report didn't go through. Try again."
 }

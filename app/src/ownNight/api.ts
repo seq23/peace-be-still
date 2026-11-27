@@ -53,3 +53,11 @@ export function previewWrite(state: string | undefined) {
     return { kind: 'scene', scene: PREVIEW_SCENES[input.lang], remaining: 49 };
   };
 }
+
+/** "Report this moment" (App Review 1.2): the reason only. No word of the moment or the wish leaves the phone. */
+export const REPORT_REASONS = ['hurtful', 'wrong', 'unsafe', 'other'] as const;
+export type MomentReport = (typeof REPORT_REASONS)[number];
+export async function reportMoment(age: Age | null, reason: MomentReport, fetcher: typeof fetch = fetch): Promise<boolean> {
+  if (age !== 'adult') return false;
+  try { return (await authorizedPost(age, '/report', { ownNight: true, reason }, fetcher)).status === 200; } catch { return false; }
+}

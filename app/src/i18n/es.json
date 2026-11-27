@@ -508,5 +508,13 @@
   "ownNight.myVoiceLabel": "Tu voz",
   "paid.ownNight": "Escribe tu propia noche: tu momento, leído con suavidad mientras te duermes.",
   "ownNight.seePlans": "Ver planes",
-  "ownNight.aiLabel": "Escrito con IA"
+  "ownNight.aiLabel": "Escrito con IA",
+  "ownNight.report": "Reportar este momento",
+  "ownNight.report.why": "¿Qué tiene de malo?",
+  "ownNight.report.hurtful": "Hiriente o poco amable",
+  "ownNight.report.wrong": "No es lo que escribí",
+  "ownNight.report.unsafe": "Peligroso o dañino",
+  "ownNight.report.other": "Otra cosa",
+  "ownNight.report.sent": "Gracias. Tu reporte se envió. No se envió ninguna palabra de tu momento.",
+  "ownNight.report.failed": "El reporte no se envió. Inténtalo de nuevo."
 }

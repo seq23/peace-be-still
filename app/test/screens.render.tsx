@@ -184,8 +184,13 @@ let reviewAnswer: () => Response | Promise<Response> = () => new Response('{}', 
 const reviewCodes: string[] = [];
 // Write your own night (POST /api/own-night/scene): every request is recorded; the test sets the answer.
 const sceneRequests: Array<{ auth: string | null; body: Record<string, unknown> }> = [];
+const reportRequests: Array<Record<string, unknown>> = [];
 let sceneAnswer: () => Response | Promise<Response> = () => Response.json({ error: 'NOT_SET' }, { status: 500 });
 mock.method(globalThis, 'fetch', async (url: string, init?: RequestInit) => {
+  if (url.endsWith('/api/report') && String(init?.body).includes('"ownNight"')) {
+    reportRequests.push(JSON.parse(String(init?.body)));
+    return Response.json({ reported: true });
+  }
   if (url.endsWith('/api/own-night/scene')) {
     sceneRequests.push({ auth: new Headers(init?.headers).get('authorization'), body: JSON.parse(String(init?.body)) });
     return sceneAnswer();
@@ -3006,17 +3011,22 @@ test('Write your own night, paid: write -> change a word -> save; the wish goes 
   assert.match(strings(tree), /No nights saved yet\./);
   await press(tree, 'Write a new night');
   assert.match(strings(tree), /sent once to our private AI service/);
-  await typeInto(tree, 'What do you hope for?', 'TEST to own a small house with a yellow kitchen');
+  await typeInto(tree, 'What do you hope for?', 'TEST a cabin by the lake with a blue door');
   await typeInto(tree, 'Who is with you? (optional)', 'my sister');
   await press(tree, '90 min');
   await press(tree, 'Write my moment');
   assert.equal(sceneRequests.length, 1);
   assert.equal(sceneRequests[0].auth, 'Bearer render-token');
-  assert.deepEqual(sceneRequests[0].body, { wish: 'TEST to own a small house with a yellow kitchen', who: 'my sister', lang: 'en', region: 'US' });
+  assert.deepEqual(sceneRequests[0].body, { wish: 'TEST a cabin by the lake with a blue door', who: 'my sister', lang: 'en', region: 'US' });
   const scene = inputs(tree).find(n => n.props.accessibilityLabel === 'Your moment')!;
   assert.equal(scene.props.value, sceneText);
   assert.match(strings(tree), /Written with AI\. Every word is yours to change\./);
   assert.match(strings(tree), /49 private messages left today\./);
+  // App Review 1.2: the AI-written moment can be reported; only the reason leaves the phone.
+  await press(tree, 'Report this moment');
+  await press(tree, 'Hurtful or unkind');
+  assert.deepEqual(reportRequests.pop(), { ownNight: true, reason: 'hurtful' });
+  assert.match(strings(tree), /No words from your moment were sent with it\./);
   await typeInto(tree, 'Your moment', sceneText.replace('slow Sunday', 'bright Saturday'));
   await press(tree, 'Save this night');
   const kept = ownNightsSaved();
@@ -3050,7 +3060,7 @@ test('Write your own night: offline, busy, a refusal of who she is, and today\'s
     sceneAnswer = answer;
     const tree = await asPaid(() => mount('ownNight', mindsetAdult));
     await press(tree, 'Write a new night');
-    await typeInto(tree, 'What do you hope for?', 'TEST a calm new job');
+    await typeInto(tree, 'What do you hope for?', 'TEST a steady job I like');
     await press(tree, 'Write my moment');
     assert.match(strings(tree), line, name);
     const scene = inputs(tree).find(n => n.props.accessibilityLabel === 'Your moment');
