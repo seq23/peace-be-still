@@ -31,13 +31,20 @@ if (stop) throw new Error(stop);
 
 const PROJECT_ID = 'e23117dc-4272-4aaa-b88e-662733141a5c';
 
+/** The iPhone's microphone question, in English and Spanish (./locales/es.json carries the Spanish one). */
+export const MICROPHONE = {
+  en: 'Peace Be Still uses the microphone only when you record your moment for Write your own night. The recording stays on this phone and is never uploaded.',
+  es: 'Peace Be Still usa el micrófono solo cuando grabas tu momento para Escribe tu propia noche. La grabación se queda en este teléfono y nunca se sube.',
+} as const;
+
 const config: ExpoConfig = {
   name: 'Peace Be Still', slug: 'peace-be-still', scheme: 'peacebestill', version: '1.0.1',
   orientation: 'portrait', userInterfaceStyle: 'automatic', plugins: [
     // One web bundle: the app is small, and lazy route chunks showed a blank screen while a slow phone fetched them.
     ['expo-router', { asyncRoutes: { web: false, default: 'development' } }],
-    // Playback only: no microphone on Android (voice recording is not in v1).
-    ['expo-audio', { enableBackgroundPlayback: true, recordAudioAndroid: false }],
+    // Write your own night records her moment on iPhone only (kept on the phone, never uploaded); Android stays
+    // playback only (RECORD_AUDIO blocked below), so the Play Data safety answers do not change.
+    ['expo-audio', { enableBackgroundPlayback: true, recordAudioAndroid: false, microphonePermission: MICROPHONE.en }],
     ['expo-splash-screen', { image: './assets/icon.png', resizeMode: 'contain', backgroundColor: '#0E1A22' }],
     // Local notifications only (the one daily reminder): no push entitlement, no server, no token.
     ['expo-notifications', { enableRemoteNotifications: false }],
@@ -50,7 +57,9 @@ const config: ExpoConfig = {
   updates: { url: `https://u.expo.dev/${PROJECT_ID}`, checkAutomatically: 'ON_LOAD', fallbackToCacheTimeout: 0 },
   icon: './assets/icon.png',
   // Only HTTPS and Apple's own encryption: exempt, so no export-compliance question on each upload.
-  ios: { bundleIdentifier: 'com.peacebestillapp.mobile', infoPlist: { ITSAppUsesNonExemptEncryption: false } },
+  ios: { bundleIdentifier: 'com.peacebestillapp.mobile', infoPlist: { ITSAppUsesNonExemptEncryption: false, CFBundleAllowMixedLocalizations: true } },
+  // The Spanish Info.plist strings (the microphone question), so a Spanish iPhone asks in Spanish.
+  locales: { es: './locales/es.json' },
   android: {
     package: 'com.peacebestillapp.mobile',
     // The dark tile: the approved mark (assets/brand/pbs-mark-dark.svg, rendered with resvg: docs/OPERATIONS.md) on the night colour.

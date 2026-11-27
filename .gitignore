@@ -23,3 +23,5 @@ play-sa.json
 asc-key.p8
 *.aab
 *.apk
+# Write your own night live eval transcripts (worker/scripts/own-night-eval.mjs)
+own-night-eval-out/

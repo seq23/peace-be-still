@@ -15,7 +15,7 @@ export const FREE_FEATURES = [
 ] as const;
 export const PAID_FEATURES = [
   'chatMemory', 'personalSession', 'pastStories', 'longPlans', 'declarationTopics',
-  'offline',
+  'offline', 'ownNight',
 ] as const;
 export type Feature = (typeof FREE_FEATURES)[number] | (typeof PAID_FEATURES)[number] | 'chat' | 'sleepSession';
 
@@ -56,6 +56,9 @@ export function canUse(feature: Feature, user: User): boolean {
     }
     case 'chatMemory':
       return user.paid && mayChat(user);
+    // Write your own night (her ruling 24 Nov 2026): paid, and 18 and over only; a teen never gets it, paid or not.
+    case 'ownNight':
+      return user.paid && user.age === 'adult';
     case 'sleepSession': {
       if (user.paid || !user.firstSleepUsed) return true;
       return count(user.sleepSessionsThisWeek ?? 0) === 0;

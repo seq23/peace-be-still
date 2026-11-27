@@ -69,6 +69,22 @@ export async function sendChat(settings: Settings, conversation: string, message
   throw new ChatError('unauthorized');
 }
 
+/** A signed POST to another Worker route with her install token (Write your own night), renewed once on a 401
+ *  for the same install id. Throws on a network failure; the caller reads the status. */
+export async function authorizedPost(age: Age, path: string, body: unknown, fetcher: typeof fetch = fetch): Promise<Response> {
+  if (age === 'child') throw new ChatError('closed');
+  for (const refresh of [false, true]) {
+    const res = await fetcher(`${CHAT_API}${path}`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${await token(age, fetcher, refresh)}` },
+      body: JSON.stringify(body),
+    });
+    if (res.status === 401 && !refresh) continue;
+    return res;
+  }
+  throw new ChatError('unauthorized');
+}
+
 /** Whether this conversation is the install's private first chat. The Worker decides (Apple DeviceCheck,
  *  per-network and daily caps); any failure or slowness is "no": the normal free chat, with its consent. */
 export async function askFirstPrivate(settings: Settings, conversation: string, fetcher: typeof fetch = fetch, waitMs = 6000): Promise<boolean> {

@@ -23,6 +23,7 @@
     { "pattern": "peacebestillapp.com/api/memory", "zone_name": "peacebestillapp.com" },
     { "pattern": "peacebestillapp.com/api/story-art/*", "zone_name": "peacebestillapp.com" },
     { "pattern": "peacebestillapp.com/api/made-for-you*", "zone_name": "peacebestillapp.com" },
+    { "pattern": "peacebestillapp.com/api/own-night/*", "zone_name": "peacebestillapp.com" },
     { "pattern": "peacebestillapp.com/api/admin/*", "zone_name": "peacebestillapp.com" },
     { "pattern": "peacebestillapp.com/api/review*", "zone_name": "peacebestillapp.com" }
   ],

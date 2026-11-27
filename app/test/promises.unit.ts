@@ -1,6 +1,7 @@
-// ship-ready app-review.md check 13: nothing shipped may sell a feature v1 does not have. "Record in your own
-// voice" was cut from v1 on 21 Nov 2026 (it ships in v1.1), so no app string, store text, legal page or site page
-// may promise it, in English or Spanish.
+// ship-ready app-review.md check 13: nothing shipped may sell a feature the app does not have. "Record in your own
+// voice" was cut from v1 on 21 Nov 2026 and is built by Write your own night (27 Nov 2026) on iPhone only: Android
+// keeps RECORD_AUDIO blocked, so nothing Google Play or the website shows may promise it, the App Store text and the
+// legal pages may, and the promise is only allowed while the recorder really exists.
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
@@ -33,10 +34,27 @@ test('the check catches the old promise in both languages and passes ordinary us
   assert.ok(!promisesVoiceRecording('Talk it through in a Black church voice'));
 });
 
-test('no shipped string promises recording in your own voice, and no gate row exists for it', () => {
-  const files = shipped();
+test('recording in your own voice is promised only where it is built: never on Google Play or the website', () => {
+  // The website's own legal pages are the privacy policy (built from legal/*.md, which may describe it); every other page sells.
+  const legalPages = new Set(['../site/public/privacy.html', '../site/public/es/privacidad.html']);
+  const files = [...walk('../store/google-play'), ...walk('../site/content'), ...walk('../site/public')].filter(file => /\.(json|md|mjs|html|txt)$/.test(file) && !legalPages.has(file) && !file.endsWith('site/content/legal.mjs'));
   assert.ok(files.length > 20, `only ${files.length} files read`);
   const hits = files.flatMap(file => readFileSync(file, 'utf8').split('\n').filter(promisesVoiceRecording).map(line => `${file}: ${line.trim().slice(0, 120)}`));
   assert.deepEqual(hits, []);
-  assert.ok(!(PAID_FEATURES as readonly string[]).some(feature => /voice|record/i.test(feature)));
+  assert.ok(!(PAID_FEATURES as readonly string[]).some(feature => /voice|record/i.test(feature)), 'recording is part of ownNight, not a gate row of its own');
+});
+
+test('where recording is promised (App Store text, legal pages, app strings), the recorder is built: iPhone only, the microphone question in English and Spanish, Android still blocked', () => {
+  const promised = [...walk('../store').filter(f => !f.includes('google-play')), ...walk('../legal'), 'src/i18n/en.json', 'src/i18n/es.json']
+    .filter(file => /\.(json|md)$/.test(file) && readFileSync(file, 'utf8').split('\n').some(promisesVoiceRecording));
+  // The privacy policy describes recordings in both languages (27 Nov 2026), so the promise exists and is checked.
+  assert.ok(promised.includes('../legal/privacy.md') && promised.includes('../legal/es/privacidad.md'), `promised in: ${promised.join(', ')}`);
+  const config = readFileSync('app.config.ts', 'utf8');
+  assert.match(config, /microphonePermission: MICROPHONE\.en/);
+  assert.match(config, /locales: \{ es: '\.\/locales\/es\.json' \}/);
+  assert.match(JSON.parse(readFileSync('locales/es.json', 'utf8')).ios.NSMicrophoneUsageDescription, /micrófono.*nunca se sube/);
+  assert.match(config, /'android\.permission\.RECORD_AUDIO'/);
+  assert.match(config, /recordAudioAndroid: false/);
+  assert.match(readFileSync('src/ownNight/adapters.ts', 'utf8'), /export const canRecord = \(\) => Platform\.OS === 'ios';/);
+  assert.match(readFileSync('src/ownNight/Recorder.tsx', 'utf8'), /useAudioRecorder\(RecordingPresets\.HIGH_QUALITY\)/);
 });
