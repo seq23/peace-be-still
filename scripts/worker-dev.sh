@@ -2,10 +2,11 @@
 # Local chat Worker on the REAL free ladder, for `npm run redteam` (never in CI).
 #   npm run worker:dev          (then, in another terminal: npm run redteam)
 # Keys come from the Boss OS vault and are never printed:
-#   CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID open wrangler dev's remote Workers AI session
-#   (T2R_CLOUDFLARE_WORKERS_AI_TOKEN cannot: it has no Workers Scripts permission);
-#   or DEV_AI_TOKEN + DEV_AI_ACCOUNT (a token that may only run models, like the CF2 red-team pair):
-#   then wrangler dev runs --local with worker/scripts/dev-entry.ts, which reaches Workers AI over REST;
+#   CF2_ACCOUNT_ID + CF2_WORKERS_AI_TOKEN: Workers AI on the free second account ONLY (her answer 27 Nov 2026,
+#   "Remove it, never bill"). worker/scripts/free-ai.mjs refuses the main account (Workers Paid: it bills past
+#   10,000 neurons a day) before anything starts; wrangler dev runs --local with worker/scripts/dev-entry.ts,
+#   which reaches Workers AI over REST on that account. The main account's keys are unset before wrangler runs,
+#   so no remote AI binding can open on it;
 #   PBS_FREE_GEMINI_API_KEY (the unbilled "PBS free chat" project: the free lane) and/or
 #   PBS_GEMINI_API_KEY (the billed project: the paid lane; DEV_LANE=paid makes every install paid) and
 #   OPENROUTER_API_KEY ($0 spend limit, :free models only) go into worker/.dev.vars (git-ignored, 0600).
@@ -13,11 +14,13 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BOSS_OS="${BOSS_OS:-$HOME/GitHub/boss-os}"
-if { [ -z "${CLOUDFLARE_API_TOKEN:-}" ] && [ -z "${DEV_AI_TOKEN:-}" ]; } || { [ -z "${PBS_GEMINI_API_KEY:-}" ] && [ -z "${PBS_FREE_GEMINI_API_KEY:-}" ]; }; then
+if { [ -z "${CF2_ACCOUNT_ID:-}" ] || [ -z "${CF2_WORKERS_AI_TOKEN:-}" ]; } || { [ -z "${PBS_GEMINI_API_KEY:-}" ] && [ -z "${PBS_FREE_GEMINI_API_KEY:-}" ]; }; then
+  [ -z "${PBS_WORKER_DEV_VAULTED:-}" ] || { echo "NAMED STOP WORKERS_AI_KEYS_MISSING: the vault has no CF2_ACCOUNT_ID / CF2_WORKERS_AI_TOKEN or Gemini key"; exit 3; }
   [ -d "$BOSS_OS" ] || { echo "NAMED STOP VAULT_MISSING: set BOSS_OS to the boss-os checkout (vault:run)"; exit 3; }
-  exec bash -c "cd '$BOSS_OS' && npm run -s vault:run -- bash '$ROOT/scripts/worker-dev.sh'"
+  exec bash -c "cd '$BOSS_OS' && PBS_WORKER_DEV_VAULTED=1 npm run -s vault:run -- bash '$ROOT/scripts/worker-dev.sh'"
 fi
 cd "$ROOT"
+node worker/scripts/free-ai.mjs check # exits 3 (NAMED STOP MAIN_ACCOUNT_REFUSED / CF_ACCOUNT_NOT_FREE) before anything runs
 bash scripts/git-crypt-unlock.sh # the encrypted prompts, crisis lists and red-team sets (from the vault)
 W="npx --prefix worker wrangler"
 CFG="--config worker/wrangler.jsonc"
@@ -35,10 +38,11 @@ umask 077
     eval "x=\${DEV_$v:-}"; [ -z "$x" ] || echo "$v=$x"
   done
   [ -n "${OPENROUTER_API_KEY:-}" ] && echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY"
-  # A red team the owner approved past the free answer rungs may raise the Workers AI answer cap for that run.
-  [ -n "${WORKERS_AI_ANSWER_CALLS_DAILY:-}" ] && echo "WORKERS_AI_ANSWER_CALLS_DAILY=$WORKERS_AI_ANSWER_CALLS_DAILY"
-  if [ -n "${DEV_AI_TOKEN:-}" ]; then echo "DEV_AI_TOKEN=$DEV_AI_TOKEN"; echo "DEV_AI_ACCOUNT=${DEV_AI_ACCOUNT:?DEV_AI_ACCOUNT is needed with DEV_AI_TOKEN}"; fi
+  echo "DEV_AI_TOKEN=$CF2_WORKERS_AI_TOKEN"
+  echo "DEV_AI_ACCOUNT=$CF2_ACCOUNT_ID"
 } > worker/.dev.vars
+# The main account's keys never reach wrangler (no remote session, no remote AI binding on it).
+unset CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID T2R_CLOUDFLARE_WORKERS_AI_TOKEN
 # CI=1 + no stdin: wrangler never waits on an "OK to proceed?" prompt.
 export CI=1
 $W d1 migrations apply peace-be-still-chat --local $CFG </dev/null | tail -1
@@ -49,7 +53,4 @@ n=$(count)
 echo "worker:dev: D1 ready ($n verses); starting wrangler dev on https://localhost:8787 at nice 15"
 unset CI # wrangler dev itself stays interactive-safe without it
 # HTTPS: the Worker refuses plain HTTP (privacy policy), so the red team talks to it over TLS.
-if [ -n "${DEV_AI_TOKEN:-}" ]; then
-  exec nice -n 15 $W dev worker/scripts/dev-entry.ts $CFG --local --port 8787 --local-protocol https </dev/null
-fi
-exec nice -n 15 $W dev $CFG --port 8787 --local-protocol https </dev/null
+exec nice -n 15 $W dev worker/scripts/dev-entry.ts $CFG --local --port 8787 --local-protocol https </dev/null

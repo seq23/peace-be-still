@@ -3,6 +3,7 @@
 // OpenAI-compatible endpoint, which every Workers AI chat model answers in the same shape.
 import { readFileSync } from 'node:fs';
 import { voiceRubric } from '../src/prompts.ts';
+import { freeAiCall } from './free-ai.mjs';
 
 export const JUDGE_MODEL = process.env.JUDGE_MODEL ?? /"WORKERS_AI_JUDGE_MODEL": "([^"]+)"/.exec(readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8'))[1];
 const Q = '"'.repeat(3);
@@ -23,13 +24,11 @@ export function firstJson(text) {
 }
 
 /** One chat call; null when the model could not be read after two tries. */
-export async function ask({ token, account }, model, messages, maxTokens = 1500) {
+// `keys` come from freeAiKeys (worker/scripts/free-ai.mjs): the free second account only.
+export async function ask(keys, model, messages, maxTokens = 1500) {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/ai/v1/chat/completions`, {
-        method: 'POST', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' }, signal: AbortSignal.timeout(90_000),
-        body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature: 0 }),
-      });
+      const res = await freeAiCall(keys, 'v1/chat/completions', { model, messages, max_tokens: maxTokens, temperature: 0 });
       if (res.status === 429 || res.status >= 500) { await new Promise(r => setTimeout(r, 4000 * (attempt + 1))); continue; }
       const j = await res.json();
       const out = firstJson(j?.choices?.[0]?.message?.content);

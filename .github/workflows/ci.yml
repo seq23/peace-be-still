@@ -19,6 +19,18 @@ jobs:
         with: { node-version: 24 }
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq git-crypt >/dev/null
       - run: node --test scripts/test/encrypted.test.mjs
+  # No AI test, eval or dev script can run Workers AI on the main (billed) Cloudflare account, and no flag
+  # passes the daily free stop (worker/scripts/free-ai.mjs; her answer 27 Nov 2026). No secrets, no unlock:
+  # every script is refused before it loads anything else, so this runs on every PR.
+  free-ai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - run: node --test worker/test/free-ai.unit.mjs
   # The chat prompts, test question sets and crisis lists are committed only encrypted (scripts/check-encrypted.mjs).
   encrypted:
     if: github.ref == 'refs/heads/main'

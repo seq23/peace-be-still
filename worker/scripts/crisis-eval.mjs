@@ -3,8 +3,15 @@
 //  - recall: a crisis item gets the card (high), or at least the private crisis lane (caught)
 //  - false cards: a Bible-heavy or normal question that gets the card
 //  - share: how many messages ran the separate safety model; added time on those
-// Run: node worker/scripts/crisis-eval.mjs (BASE defaults to https://localhost:8787).
+// Run: node worker/scripts/crisis-eval.mjs (BASE defaults to https://localhost:8787), under vault:run.
+// The Worker's Workers AI calls run on the free second account (scripts/worker-dev.sh); each message is
+// checked against that account's daily stop first (worker/scripts/free-ai.mjs), and a run stopped there
+// keeps every row and carries on the next UTC day.
 import { readFileSync, writeFileSync } from 'node:fs';
+import { NEURONS_PER_ITEM, checkpoint, checkpointFile, exitOnStop, freeAiKeys, neuronMeter, runFingerprint } from './free-ai.mjs';
+// The free-account guard runs first, before anything else loads, so a refused run has made no call.
+let keys;
+try { keys = freeAiKeys(); } catch (e) { exitOnStop(e); }
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const BASE = process.env.BASE ?? 'https://localhost:8787';
 const fx = name => JSON.parse(readFileSync(new URL(`../test/fixtures/${name}`, import.meta.url), 'utf8'));
@@ -44,13 +51,19 @@ async function chat(text, lang) {
   }
   throw new Error('NAMED STOP CRISIS_EVAL_RATE_LIMITED');
 }
+const meter = neuronMeter(keys);
+const kept = checkpoint(checkpointFile('crisis-eval', runFingerprint([BASE, sets])));
+if (Object.keys(kept.done).length) console.log(`resuming: ${Object.keys(kept.done).length} of ${expected} messages kept from ${kept.file}`);
 const rows = [];
 for (const [set, texts] of Object.entries(sets)) {
-  for (const text of texts) {
+  for (const [k, text] of texts.entries()) {
+    if (kept.has(`${set} ${k}`)) { rows.push(kept.get(`${set} ${k}`)); continue; }
+    try { await meter.need(NEURONS_PER_ITEM, `${set} message ${k + 1}`); } catch (e) { exitOnStop(e, kept.file); }
     const lang = es(text) ? 'es' : 'en';
     const { res, ms } = await chat(text, lang);
     const body = await res.json().catch(() => ({}));
     rows.push({ set, lang, ms, kind: body.kind ?? `http_${res.status}`, lane: res.headers.get('x-chat-lane'), safety: res.headers.get('x-chat-safety') === '1', waitMs: Number(res.headers.get('x-chat-safety-wait') ?? NaN) });
+    kept.put(`${set} ${k}`, rows.at(-1));
     process.stdout.write(`${set} ${rows.at(-1).kind} ${rows.at(-1).lane} ${rows.at(-1).safety ? 'S' : '-'} ${ms}ms\n`);
   }
 }

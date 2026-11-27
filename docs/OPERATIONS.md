@@ -28,6 +28,8 @@ The Android launcher icon's foreground (`app/assets/adaptive-icon.png`) is the a
 
 `GET /api/admin/spend` (same token): the paid-route spend this calendar month (Central), the cap (`PAID_AI_MONTHLY_CAP_USD`, $100) and which alerts fired.
 
+AI tests never bill (her answer 27 Nov 2026, "Remove it, never bill"). Every test, eval and dev tool that reaches Workers AI (`risk-measure`, `judge-calibrate`, `rejudge`, `redteam`, `crisis-eval`, the Made for you soak, `npm run worker:dev`) runs only on the free second Cloudflare account, `CF2_ACCOUNT_ID` + `CF2_WORKERS_AI_TOKEN` from the Boss OS vault (a workflow must pass the same two names; the repo has no such secret today). `worker/scripts/free-ai.mjs` refuses the main account (Workers Paid, billed past 10,000 neurons a day) and any other account before the first call (`MAIN_ACCOUNT_REFUSED`, `CF_ACCOUNT_NOT_FREE`). Before each batch it reads the free account's whole day total and stops at 9,000 neurons (`NEURON_CEILING`), or stops when the total cannot be read (`NEURON_READ_FAILED`, "couldn't check"). A stopped run keeps its results in `.free-ai-runs/` (the soak keeps them in its state dir) and carries on from there when run again after 00:00 UTC. No override exists: no flag, input or variable raises the stop or allows the main account. `worker/test/free-ai.unit.mjs` runs on every PR.
+
 ## Named stops and alerts (log codes, no chat text)
 
 | Code | Means | What happens |
