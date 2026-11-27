@@ -62,13 +62,22 @@ test('where recording is promised (App Store text, legal pages, app strings), th
 // The journey picker shows a journey's purpose line to every age band it is offered to, teens
 // included, and on phones where a paid feature is hidden. So a line seen by more than adults never
 // sells a paid feature (#151 review, 27 Nov 2026: "With a paid plan, fall asleep to it" reached teens).
-test('journey purpose lines shown beyond adults never promise a paid feature', async () => {
+// The picker row shows the name and the subtitle ("Hush Harbor · Black Bible Chat & Stories") beside the purpose, so all three are read.
+test('journey names, subtitles and purpose lines shown beyond adults never promise a paid feature, in every app language', async () => {
   const { journeys } = await import('../src/model');
   const sells = /paid|premium|subscri|plan de pago|de pago|suscrip/i;
-  for (const lang of ['en', 'es'] as const) {
-    const strings = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
+  const langs = readdirSync(new URL('../src/i18n/', import.meta.url)).filter(f => /^[a-zA-Z-]+\.json$/.test(f));
+  assert.ok(langs.includes('en.json') && langs.includes('es.json'), `languages read: ${langs.join(', ')}`);
+  let read = 0;
+  for (const file of langs) {
+    const strings = JSON.parse(readFileSync(new URL(`../src/i18n/${file}`, import.meta.url), 'utf8'));
     for (const j of journeys.filter(x => !x.ages || x.ages.some(a => a !== 'adult'))) {
-      assert.doesNotMatch(String(strings[j.purpose] ?? ''), sells, `${lang} ${j.id}: ${strings[j.purpose]}`);
+      for (const key of [j.name, j.subtitle, j.purpose].filter(Boolean).map(String)) {
+        assert.ok(typeof strings[key] === 'string', `${file} has no ${key}`);
+        read++;
+        assert.doesNotMatch(strings[key], sells, `${file} ${j.id} ${key}: ${strings[key]}`);
+      }
     }
   }
+  assert.ok(read >= langs.length * 15, `only ${read} lines read`);
 });

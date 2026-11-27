@@ -31,7 +31,21 @@ const MOCKS = {
     exports.Asset = { fromModule: name => ({
       uri: 'data:application/octet-stream;base64,' + readFileSync(name.endsWith('.wasm') ? 'node_modules/sql.js/dist/' + name : 'src/bible/data/' + name).toString('base64')
     }) };`,
-  'expo-file-system': '',
+  // A phone's file system in memory (globalThis.__pbsFiles, reset per test): Write your own night's folder.
+  'expo-file-system': `const files = () => (globalThis.__pbsFiles ??= new Map());
+    const dirs = () => (globalThis.__pbsDirs ??= new Set());
+    const at = (a, b) => (b === undefined ? (typeof a === 'string' ? a : a.uri) : (typeof a === 'string' ? a : a.uri) + '/' + b);
+    class Directory { constructor(a, b) { this.uri = at(a, b); } get exists() { return dirs().has(this.uri); } create() { dirs().add(this.uri); } }
+    class File {
+      constructor(a, b) { this.uri = at(a, b); }
+      get exists() { return files().has(this.uri); }
+      textSync() { if (!files().has(this.uri)) throw new Error('no file'); return files().get(this.uri); }
+      writeSync(text) { files().set(this.uri, String(text)); }
+      delete() { files().delete(this.uri); }
+      move(target) { files().set(target.uri, files().get(this.uri) ?? ''); files().delete(this.uri); this.uri = target.uri; }
+    }
+    exports.Paths = { document: { uri: 'file:///doc' }, cache: { uri: 'file:///cache' } };
+    exports.Directory = Directory; exports.File = File;`,
   // The web Bible's real engine (src/bible/open.web.ts), with one switch: a test may make the next N reads fail,
   // like a cold start whose first open or read fails.
   'sql.js': `const real = require(require.resolve('sql.js/dist/sql-wasm.js', { paths: [process.cwd()] }));

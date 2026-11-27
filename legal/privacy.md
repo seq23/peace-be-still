@@ -1,6 +1,6 @@
 # Privacy policy
 
-Effective: November 24, 2026
+Effective: November 27, 2026
 
 This policy covers the Peace Be Still app and the website peacebestillapp.com. Peace Be Still is made by Spry Labs, the trade name of Redwood Reserve Holdings LLC, a Wyoming limited liability company. Write to info@peacebestillapp.com with any privacy question or request.
 
@@ -36,7 +36,7 @@ If you have a paid plan and ask for a session made for you, the scene or worry y
 
 ## Write your own night
 
-With a paid plan, adults (18 and over) can write what they hope for and get back one short moment to fall asleep to. What you write (the hope, and who is with you if you add that) is sent once, over HTTPS, to our service and on to the same private paid AI service as paid chat, which writes the moment and checks it; that service does not use it to train AI. Words that say you mean to hurt yourself, or that someone is hurting you, are answered with crisis lines and are not sent to any AI model; a hope with less clear signs is read first by the safety model on Cloudflare Workers AI. Our service does not store what you write or the moment it sends back, and writes none of their words to its logs. Each moment written counts as one of the day's private chat messages. The moment, the nights you save (up to 20) and any recording you make in your own voice stay on your phone: they are never uploaded, and they are not part of chat memory. Deleting a night deletes its words and its recording from your phone. Recording works on iPhone, and the app asks for the microphone only the first time you choose to record; otherwise the moment is read aloud by your phone's own text-to-speech voice. Ages 13 to 17 are never offered it, and our service refuses it for them.
+With a paid plan, adults (18 and over) can write what they hope for and get back one short moment to fall asleep to. What you write (the hope, and who is with you if you add that) is sent once, over HTTPS, to our service and on to the same private paid AI service as paid chat, which writes the moment and checks it; that service does not use it to train AI. Words that say you mean to hurt yourself, or that someone is hurting you, are answered with crisis lines and are not sent to any AI model. Every other hope is read first by the safety model on Cloudflare Workers AI, which does not train on it, and no moment is written when that read cannot happen. The app asks you once, before your first hope is sent, naming these services. Our service does not store what you write or the moment it sends back, and writes none of their words to its logs. Each moment written counts as one of the day's private chat messages. The moment, the nights you save (up to 20) and any recording you make in your own voice stay on your phone: they are never uploaded, they are left out of your phone's iCloud or Google backup, and they are not part of chat memory. Deleting a night deletes its words and its recording from your phone. Recording works on iPhone, and the app asks for the microphone only the first time you choose to record; otherwise the moment is read aloud by your phone's own text-to-speech voice. Ages 13 to 17 are never offered it, and our service refuses it for them.
 
 ## Fair use and safety records
 

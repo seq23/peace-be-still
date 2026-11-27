@@ -16,6 +16,10 @@ import { Recorder } from './Recorder';
 import type { NightVoice, SavedNight, SavedNights } from './saved';
 
 type Write = (input: { wish: string; who?: string; lang: 'en' | 'es'; region?: string }) => Promise<SceneResult>;
+/** Her one-time yes (Apple 5.1.2(i)) to the services that read her wish, asked before the first one is sent. */
+export type OwnNightConsent = { given: () => Promise<boolean>; give: () => Promise<void> };
+/** The privacy policy in her language (legal/privacy.md, legal/es/privacidad.md). */
+const POLICY = { en: 'https://peacebestillapp.com/privacy', es: 'https://peacebestillapp.com/es/privacidad' } as const;
 type Props = {
   paid: boolean;
   lang: 'en' | 'es';
@@ -23,6 +27,7 @@ type Props = {
   write: Write;
   /** Sends a reason-only report of an AI-written moment; resolves whether the server took it. */
   report: (reason: MomentReport) => Promise<boolean>;
+  consent: OwnNightConsent;
   close: () => void;
   plans: () => void;
   play: (id: string) => void;
@@ -46,7 +51,7 @@ export function OwnNightScreen(props: Props) {
   return <Nights {...props} />;
 }
 
-function Nights({ lang, saved, write, report, close, play, startEditing }: Props) {
+function Nights({ lang, saved, write, report, consent, close, play, startEditing }: Props) {
   const t = useT('journey');
   const c = usePalette();
   const [nights, setNights] = useState<SavedNight[] | null>(null);
@@ -61,7 +66,7 @@ function Nights({ lang, saved, write, report, close, play, startEditing }: Props
     if (result.ok) { setNights(result.nights); setConfirming(null); } else setDeleteFailed(true);
   }
 
-  if (draft) return <Editor draft={draft} write={write} report={report} saved={saved} count={nights?.length ?? 0}
+  if (draft) return <Editor draft={draft} write={write} report={report} consent={consent} saved={saved} count={nights?.length ?? 0}
     done={list => { if (list) setNights(list); setDraft(null); }} />;
 
   const full = (nights?.length ?? 0) >= SAVED_NIGHTS_MAX;
@@ -109,7 +114,7 @@ function Choices<T extends string | number>({ label, options, value, onChange }:
   </View>;
 }
 
-function Editor({ draft: start, write, report, saved, count, done }: { draft: Draft; write: Write; report: Props['report']; saved: SavedNights; count: number; done: (list?: SavedNight[]) => void }) {
+function Editor({ draft: start, write, report, consent, saved, count, done }: { draft: Draft; write: Write; report: Props['report']; consent: OwnNightConsent; saved: SavedNights; count: number; done: (list?: SavedNight[]) => void }) {
   const t = useT('journey');
   const c = usePalette();
   const [d, setD] = useState<Draft>(start);
@@ -120,6 +125,10 @@ function Editor({ draft: start, write, report, saved, count, done }: { draft: Dr
   const [refused, setRefused] = useState('');
   const [remaining, setRemaining] = useState<number | null>(null);
   const busy = useRef(false);
+  // Nothing is sent before her yes to the services that read it; an unreadable answer counts as not yet.
+  const agreed = useRef(false);
+  const [asking, setAsking] = useState(false);
+  useEffect(() => { let live = true; void consent.given().then(yes => { if (live && yes) agreed.current = true; }, () => undefined); return () => { live = false; }; }, [consent]);
   // A recording made here and not saved is deleted when she leaves (only the saved night's own file is kept).
   const unsaved = useRef<string | null>(null);
   const set = (patch: Partial<Draft>) => setD(current => ({ ...current, ...patch }));
@@ -128,6 +137,7 @@ function Editor({ draft: start, write, report, saved, count, done }: { draft: Dr
 
   async function ask() {
     if (busy.current || !d.wish.trim()) return;
+    if (!agreed.current) { setAsking(true); return; }
     busy.current = true; setSending(true); setNotice(null); setRefused(''); setCrisis('');
     let region: string | undefined;
     try { region = getLocales()[0]?.regionCode ?? undefined; } catch { region = undefined; }
@@ -209,7 +219,15 @@ function Editor({ draft: start, write, report, saved, count, done }: { draft: Dr
     {step === 'ask' && <Body size={14}>{t('ownNight.privacy')}</Body>}
     {refused ? alert(refused) : null}
     {notice && !['busy', 'offline', 'limit'].includes(notice) && alert(noticeText)}
-    {step === 'ask'
+    {step === 'ask' && asking
+      ? <Card style={{ gap: 10 }}>
+          <Label>{t('ownNight.consent.title')}</Label>
+          <Body muted={false} size={15}>{t('ownNight.consent.body')}</Body>
+          <TextLink onPress={() => void Linking.openURL(POLICY[d.lang])}>{t('ownNight.consent.policy')}</TextLink>
+          <PillButton onPress={() => { agreed.current = true; setAsking(false); void consent.give().catch(() => undefined); void ask(); }}>{t('ownNight.consent.agree')}</PillButton>
+          <TextLink onPress={() => { setAsking(false); setNotice(null); setStep('scene'); }}>{t('ownNight.consent.no')}</TextLink>
+        </Card>
+      : step === 'ask'
       ? <>{sending ? <Body>{t('ownNight.writing')}</Body> : <PillButton disabled={!d.wish.trim()} onPress={() => void ask()}>{t('ownNight.write')}</PillButton>}
           {!sending && <TextLink onPress={() => { setNotice(null); setStep('scene'); }}>{t('ownNight.myself')}</TextLink>}</>
       : <PillButton disabled={!d.scene.trim()} onPress={() => void save()}>{t('ownNight.save')}</PillButton>}
