@@ -192,7 +192,7 @@ function Editor({ draft: start, write, report, saved, count, done }: { draft: Dr
       {notice && ['busy', 'offline', 'limit'].includes(notice) && alert(noticeText)}
       {d.ai && <Body size={14}>{t('ownNight.writtenWithAi')}</Body>}
       <TextInput accessibilityLabel={t('ownNight.scene')} multiline maxLength={SCENE_MAX} value={d.scene}
-        onChangeText={scene => set({ scene })} style={[input, { minHeight: 236, fontFamily: fonts.serif, fontSize: 19, lineHeight: 27 }]} />
+        onChangeText={scene => set({ scene })} style={[input, { minHeight: 300, fontFamily: fonts.serif, fontSize: 19, lineHeight: 27 }]} />
       <Body size={14}>{t('ownNight.sceneHint')}</Body>
       {remaining !== null && <Body size={13}>{t('ownNight.remaining', { count: remaining })}</Body>}
       {d.ai && <ReportMoment report={report} />}
