@@ -16,7 +16,7 @@ Peace Be Still is one quiet place for the end of the day and the start of the ne
 Choose your way in: God's Word, or mindset & imagination. Each one is its own space, and you can switch any time in Settings.
 
 Description body:
-Free, and it stays free: the whole Bible to read, and the Psalms and more chapters read aloud, with new ones added each week. Today's story. One chat a day, up to 5 messages. Your first sleep night, then one a week. A word for each morning. Basic 7-day plans, saved verses, a journal, a streak that never scolds, and cards to share.
+Free, and it stays free: the whole Bible to read, and nearly every chapter read aloud. Today's story. One chat a day, up to 5 messages. Your first sleep night, then one a week. A word for each morning. Basic 7-day plans, saved verses, a journal, a streak that never scolds, and cards to share.
 
 A paid plan adds unlimited Bible chat, chat that remembers what you are carrying, a session every night, sessions made for you, every past story, longer plans, declaration topics and offline listening. Unlimited Bible chat. Private for your first 50 messages each day; after that, chat keeps going, just not private. Your private chats are never used to train AI.
 

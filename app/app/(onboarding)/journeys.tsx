@@ -1,13 +1,12 @@
 // Screen 2: the journey picker for one door. Nothing is preselected (her call 21 Nov 2026): Start stays disabled
-// until she taps one, then names it. From Settings her saved journey shows as picked. Mindset asks the one
-// scripture question after its cards.
+// until she taps one, then names it. From Settings her saved journey shows as picked.
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { chooseJourney, journeysFor, type Door, type JourneyId } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { JourneyArt } from '../../src/ui/art';
-import { BackLink, Body, Card, Label, PillButton, Screen, SwitchRow, Title, styles, usePalette } from '../../src/ui';
+import { BackLink, Body, Card, Label, PillButton, Screen, Title, styles, usePalette } from '../../src/ui';
 
 export default function JourneysScreen() {
   const { settings, save } = useSettings();
@@ -21,14 +20,13 @@ export default function JourneysScreen() {
   const options = journeysFor(door, settings.age);
   const [tapped, setPicked] = useState<JourneyId>();
   const picked = [tapped, settings.journey].find(id => options.some(j => j.id === id));
-  const [scripture, setScripture] = useState(!!settings.scripture);
   const chosen = options.find(j => j.id === picked);
 
   // Start only saves. On a first run the onboarding layout then moves her to Today (a replace, so back never
   // shows the door); from Settings she goes back to the tabs she came from.
   function start() {
     if (!chosen) return;
-    save({ ...chooseJourney(settings, chosen.id), ...(door === 'mindset' ? { scripture: scripture || undefined } : {}) });
+    save(chooseJourney(settings, chosen.id));
     if (changing) router.dismissTo('/today');
   }
 
@@ -53,9 +51,6 @@ export default function JourneysScreen() {
           </Card>
         ))}
       </View>
-      {door === 'mindset' ? (
-        <SwitchRow title={t('journeys.scripture.title')} detail={t('journeys.scripture.detail')} value={scripture} onChange={setScripture} />
-      ) : null}
     </Screen>
   );
 }

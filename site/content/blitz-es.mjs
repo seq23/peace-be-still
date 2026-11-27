@@ -124,7 +124,7 @@ ${v("PSA 143:8")}`],
       ["¿Qué salmo se lee en la mañana?", `<p>El Salmo 5 (${f("PSA 5:3", "de mañana oirás mi voz")}) y el Salmo 30:5 son clásicos de la mañana:</p>
 ${v("PSA 30:5")}`],
       ["Mi Refugio en Peace Be Still", `${MI_REFUGIO}
-<p>Su Morning Word te da cada día un versículo nuevo, una declaración para decir en voz alta y una oración corta, gratis.</p>`],
+<p>Su Morning Word te da cada día un versículo nuevo (a veces dos), una declaración para decir en voz alta y una oración corta, gratis.</p>`],
     ],
     faq: [
       ["¿Cuál es la oración de la mañana de hoy?", "“Señor, este es el día que tú hiciste. Me alegro en él aunque no sé lo que trae. Camina conmigo. Amén.” Está basada en el Salmo 118:24. Cada día de la semana tiene la suya en la tabla de arriba."],

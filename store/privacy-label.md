@@ -51,5 +51,5 @@ None. Tracking: No for every row below.
 | Dating and Relationships | No |
 | Shared Location | No |
 | Parental controls | No. Purchases by teens go through Apple's Ask to Buy. |
-| Age assurance | Yes: a birth-year step before anything else. Under 13 has no chat. |
+| Age assurance | Yes: a birth-year step right after the door choice, before any reading, story or chat. Under 13 has no chat. |
 | Override to higher age rating | 13+ |

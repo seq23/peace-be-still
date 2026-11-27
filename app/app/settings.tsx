@@ -4,7 +4,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { onboarded, startRoute, voicesFor, type Language, type Voice } from '../src/model';
 import { useSettings, useT } from '../src/settings';
-import { BackLink, Card, Label, LinkRow, Screen, SwitchRow, Title, usePalette } from '../src/ui';
+import { BackLink, Card, Label, LinkRow, Screen, Title, usePalette } from '../src/ui';
 import { fonts } from '../src/theme/tokens';
 import { MadeForYouSettings } from '../src/madeForYou/Settings';
 import { ReminderSettings } from '../src/reminders';
@@ -33,10 +33,6 @@ export default function SettingsScreen() {
       {settings.age !== 'child' && <LinkRow label={t('memory.title')} onPress={() => router.push('/chat-memory')} />}
       <LinkRow label={t('settings.door')} value={settings.door ? t(`doorName.${settings.door}`) : null} onPress={() => router.push({ pathname: '/door', params: { change: '1' } })} />
       <LinkRow label={t('settings.birthYear')} onPress={() => router.push({ pathname: '/age', params: { correct: '1' } })} />
-      {settings.door === 'mindset' ? (
-        <SwitchRow title={t('journeys.scripture.title')} detail={t('journeys.scripture.detail')} value={!!settings.scripture}
-          onChange={on => save({ ...settings, scripture: on || undefined })} />
-      ) : null}
       {voices.length ? (
         <View role="radiogroup" style={{ gap: 10, marginTop: 10 }}>
           <Label>{t('settings.voice')}</Label>

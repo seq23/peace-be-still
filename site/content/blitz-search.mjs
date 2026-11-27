@@ -167,7 +167,7 @@ ${V("PSA 119:105")}
 ${V("ISA 40:8")}`],
       ["What does Peace Be Still include with the KJV?", `<table class="t"><thead><tr><th>Free version, for good</th><th>Paid plan ($7.99 a month or $39.99 a year)</th></tr></thead><tbody>
 <tr><td>The whole King James Bible to read</td><td>Offline listening</td></tr>
-<tr><td>The Psalms and more chapters read aloud, with new ones added each week</td><td>A whispered sleep session every night</td></tr>
+<tr><td>Nearly every chapter read aloud, the Psalms included</td><td>A whispered sleep session every night</td></tr>
 <tr><td>A morning verse and declaration, basic 7-day reading plans, saved verses, a journal and share cards</td><td>Longer plans, such as Mark and John a chapter a day</td></tr>
 <tr><td>Your first whispered sleep night, then one a week</td><td>${claimText("en")}</td></tr>
 <tr><td>One Bible chat a day, up to 5 messages</td><td>Every past story</td></tr>
@@ -177,7 +177,7 @@ ${V("ISA 40:8")}`],
     ],
     faq: [
       ["Is there a free KJV Bible app with no ads?", "Yes. Several apps carry the whole King James Version free. Peace Be Still, {{stores.short}}, has the whole KJV free to read with no ads and no trial, and the Psalms and more chapters read aloud free."],
-      ["Is there a KJV Bible app with audio?", "Many have audio. In Peace Be Still the Psalms and a growing set of chapters are read aloud on the free version, and King James psalms are whispered for sleep at night."],
+      ["Is there a KJV Bible app with audio?", "Many have audio. In Peace Be Still nearly every chapter, the Psalms included, is read aloud on the free version, and King James psalms are whispered for sleep at night."],
       ["Do I have to pay for the King James Bible?", "No. The KJV is in the public domain in the United States, so the text itself is free. Some apps charge for extras such as audio, plans or chat."],
       ["Is there a KJV Bible app in Spanish?", "The King James Version is English. The Spanish Bible of the same era that is also in the public domain is the Reina-Valera 1909, which Peace Be Still uses in its Spanish journey, Mi Refugio."],
     ],

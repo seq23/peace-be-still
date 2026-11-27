@@ -10,7 +10,6 @@ export type ChatRequest = {
   voice: Settings['voice'];
   language: Settings['language'];
   journey?: string;
-  scripture?: boolean;
   /** She agreed, once, that free chat goes to a free AI service that may keep what she types. Free chat needs it. */
   freeConsent?: boolean;
   /** A paid user accepted free chat (not private) for the rest of today, after her private messages. */
@@ -60,7 +59,6 @@ export function buildChatRequest(settings: Settings, conversation: string, messa
     voice: settings.age === 'teen' ? 'teen' : settings.voice,
     language: settings.language,
     ...(settings.journey ? { journey: settings.journey } : {}),
-    ...(settings.scripture ? { scripture: true } : {}),
     ...(freeConsent ? { freeConsent: true } : {}),
     ...(overflowConsent ? { overflowConsent: true } : {}),
     ...(region && /^[A-Za-z]{2}$/.test(region) ? { region: region.toUpperCase() } : {}),

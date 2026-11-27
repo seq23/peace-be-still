@@ -48,7 +48,7 @@ ${V("PSA 4:8")}`],
 <li>Keep the same passage for a few nights. Familiar words are easier to rest in.</li>
 </ol>`],
       ["Which translation is best for a whispered reading?", `<p>Many listeners choose the King James Version for bedtime because its rhythm is slow and familiar, and it is in the public domain in the United States, so it can be read and shared freely. Whatever translation you choose, the reading should be word for word, with the book, chapter and verse said or shown.</p>`],
-      ["How does Peace Be Still do it?", `<p>Peace Be Still is a phone app {{stores.tag}}. Its Psalm Nights journey is whispered scripture for sleep: a King James psalm read in a whisper on an always-dark screen that dims after ten seconds, with a sleep timer that fades out. Your first night is free, then one a week in the free version; a paid plan ($7.99 a month or $39.99 a year, no trial) opens a session every night.</p>`],
+      ["How does Peace Be Still do it?", `<p>Peace Be Still is a phone app {{stores.tag}}. Its Psalm Nights journey is whispered scripture for sleep: a King James psalm read in a whisper on an always-dark screen that dims after fifteen seconds, with a sleep timer that fades out. Your first night is free, then one a week in the free version; a paid plan ($7.99 a month or $39.99 a year, no trial) opens a session every night.</p>`],
     ],
     faq: [
       ["Is listening to the Bible at night good for sleep?", "Many people find it calming to end the day with scripture, and a quiet voice with a sleep timer avoids the bright screens and autoplay that keep people up. It is a nightly practice, not a treatment; if sleep problems last, talk to a doctor."],
@@ -82,7 +82,7 @@ ${V("PSA 4:8")}`],
       ["What does “living in the end” mean?", `<p>It means picturing the moment after the thing you hope for has already happened, and staying with the feeling of that moment, instead of picturing the effort to get there. In a sleep meditation the “end” is one small scene you return to every night.</p>`],
       ["Why do people do it at bedtime?", `<p>The last minutes before sleep are quiet and drowsy, so a short scene is easy to hold and replay. Many people also like that the practice ends the day on something hopeful rather than on the news or a scrolling feed. It is a nightly habit; there is no promise of any outcome.</p>`],
       ["Can I add declarations to it?", `<p>Yes. Many people say one short declaration out loud before lying down, and another in the morning, written in the same present tense as their scene. Keep it to one line you can remember.</p>`],
-      ["How will Peace Be Still do it?", `<p>Peace Be Still is a phone app {{stores.tag}}. In its Mindset door, <strong>Imagination Nights</strong> are whispered night sessions built from a scene you write, on an always-dark screen with a sleep timer, and <strong>Morning Word</strong> gives you a short declaration to say out loud. The free version includes your first night and then one a week; a paid plan ($7.99 a month or $39.99 a year, no trial) opens a session every night.</p>`],
+      ["How will Peace Be Still do it?", `<p>Peace Be Still is a phone app {{stores.tag}}. In its Mindset door, <strong>Imagination Nights</strong> are whispered night sessions inside a scene (with a paid plan, one made from a scene you write), on an always-dark screen with a sleep timer, and <strong>Morning Word</strong> gives you a short declaration to say out loud. The free version includes your first night and then one a week; a paid plan ($7.99 a month or $39.99 a year, no trial) opens a session every night.</p>`],
     ],
     faq: [
       ["What is the law of assumption?", "The law of assumption is the idea that assuming a wish is already fulfilled, and living from that feeling, shapes your experience. People practise it with imagination, short scenes and declarations, often at bedtime. It is a personal practice and belief, not a proven method, and this page makes no promise of results."],
@@ -119,7 +119,7 @@ ${V("PSA 4:8")}`],
 <p>Google notes that when you uninstall the app, your subscription won't cancel.</p>`],
       ["Does deleting the app cancel the subscription?", `<p>No. The subscription is billed by Apple or Google, not by the app on your phone, so it keeps renewing until you cancel it in Settings (iPhone) or Google Play (Android).</p>`],
       ["What if I am on a free trial?", `<p>Cancel at least 24 hours before the trial ends, as Apple advises, so it does not turn into a paid plan. You can usually keep using the trial until its end date after cancelling.</p>`],
-      ["Is there a Bible app with no trial?", `<p>Peace Be Still, {{stores.tag}}, has no trial and no weekly plan: a free version that stays free (the whole King James Bible to read and hear, one chat a day, a daily story) and a paid plan at $7.99 a month or $39.99 a year, with the price shown in dollars before you tap and a cancel link on the paid screen.</p>`],
+      ["Is there a Bible app with no trial?", `<p>Peace Be Still, {{stores.tag}}, has no trial and no weekly plan: a free version that stays free (the whole King James Bible to read, and nearly every chapter read aloud, one chat a day, a daily story) and a paid plan at $7.99 a month or $39.99 a year, with the price shown before you tap and a cancel link on the paid screen.</p>`],
     ],
     faq: [
       ["Why can't I find Bible Chat in my subscriptions?", "Check that you are signed in with the same Apple ID or Google account you used to subscribe. If you subscribed on the app's website instead of in the store, you need to cancel it there. A missing Cancel button on iPhone means it is already cancelled."],
@@ -158,7 +158,7 @@ ${V("PSA 4:8")}`],
       ["Can I get a refund?", `<p>For App Store purchases, you can ask Apple at reportaproblem.apple.com; Apple decides. For Google Play purchases, Google Play's refund policy applies.</p>`],
       ["What do App Store reviewers report? (Nov 2026)", `<p>Among Haven's 500 most recent US App Store reviews (16 May to 19 Nov 2026), 263 gave 4 or 5 stars and 189 gave 1 or 2. Most of the 189 mention price, the subscription or the trial; 16 mention cancelling, refunds or being charged.</p>
 <p class="muted">Method: Apple's public review feed, the 500 most recent US reviews, read 21 Nov 2026; a review counts toward a theme when its words mention it. These are reviewers' reports, not findings about the app.</p>`],
-      ["Is there a Bible app with no trial?", `<p>Peace Be Still, {{stores.tag}}, has no trial and no weekly plan: a free version that stays free and a paid plan at $7.99 a month or $39.99 a year, with the price shown in dollars before you tap and cancel in two taps from the paid screen.</p>`],
+      ["Is there a Bible app with no trial?", `<p>Peace Be Still, {{stores.tag}}, has no trial and no weekly plan: a free version that stays free and a paid plan at $7.99 a month or $39.99 a year, with the price shown before you tap and a cancel link on the paid screen.</p>`],
     ],
     faq: [
       ["Why don't I see Haven under Subscriptions?", "Make sure you are signed in with the Apple ID or Google account you used to subscribe. If you paid on a website rather than in the store, cancel it on that website. On iPhone, no Cancel button means it is already cancelled."],
@@ -189,9 +189,9 @@ ${V("PSA 4:8")}`],
 <li><strong>Call and response.</strong> Each story has one “say it with me” moment, like “God is good” and “all the time”, with a pause for you to answer.</li>
 <li><strong>The King James Version, word for word.</strong> The AI never writes a verse from memory. It names the reference; the app pastes the stored King James text.</li>
 </ul>`],
-      ["Is the Black Bible chat a real pastor?", `<p>No. It is an AI helper, and it says so on every answer. It is not a pastor, a prophet or a person, and it never speaks as God or Jesus. Before your first chat, the app tells you that what you type goes to free AI providers that may learn from it, so leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows the 988 Suicide &amp; Crisis Lifeline and other help straight away.</p>`],
-      ["What does it cost?", `<p>The free version stays free: the whole King James Bible to read and hear, today's story, one chat a day of up to 5 messages, and a daily declaration. The paid plan is $7.99 a month or $39.99 a year and adds unlimited chat, chat that remembers what you are carrying, and every past story. ${claimText("en")} There is no trial, no weekly plan and no ads, and you can cancel in two taps.</p>`],
-      ["Is the black version of Bible chat a different Bible?", `<p>No. The Bible is the same King James Version in every journey. What changes is the voice of the chat and of the stories. The words of scripture are never changed.</p>
+      ["Is the Black Bible chat a real pastor?", `<p>No. It is an AI helper, and it says so on every answer. It is not a pastor, a prophet or a person, and it never speaks as God or Jesus. Before your first free chat, the app tells you that what you type goes to free AI providers that may learn from it, so leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows the 988 Suicide &amp; Crisis Lifeline and other help straight away.</p>`],
+      ["What does it cost?", `<p>The free version stays free: the whole King James Bible to read, and nearly every chapter read aloud, today's story, one chat a day of up to 5 messages, and a daily declaration. The paid plan is $7.99 a month or $39.99 a year and adds unlimited chat, chat that remembers what you are carrying, and every past story. ${claimText("en")} There is no trial, no weekly plan and no ads, and you can cancel any time from the paid screen.</p>`],
+      ["Is the black version of Bible chat a different Bible?", `<p>No. The Bible is the same in every journey: the King James Version in English, and the Reina-Valera 1909 in Spanish. What changes is the voice of the chat and of the stories. The words of scripture are never changed.</p>
 ${V("MAR 4:39")}`],
     ],
     faq: [
@@ -229,12 +229,12 @@ ${V("PRO 30:5-6")}`],
 </ul>`],
       ["What does Bible chat include free in Peace Be Still?", `<table class="t"><thead><tr><th>Free version, forever</th><th>Paid plan ($7.99 a month or $39.99 a year)</th></tr></thead><tbody>
 <tr><td>One chat a day, up to 5 messages, shown as “N of 5 messages left today”</td><td>${claimText("en")}</td></tr>
-<tr><td>The whole King James Bible to read, and a growing set of chapters read aloud</td><td>Chat that remembers what you are carrying</td></tr>
-<tr><td>Today's Bible story</td><td>Every past story and longer journeys</td></tr>
+<tr><td>The whole King James Bible to read, and nearly every chapter read aloud</td><td>Chat that remembers what you are carrying</td></tr>
+<tr><td>Today's Bible story</td><td>Every past story and longer reading plans</td></tr>
 <tr><td>Your first sleep night free, then one a week</td><td>A sleep session every night, plus ones made for you</td></tr>
 <tr><td>A daily declaration, basic 7-day plans, saved verses, journal, streak and share cards</td><td>Declaration topics and offline downloads</td></tr>
 </tbody></table>
-<p>There is no trial at all: the free version does not end, and a paid plan starts only when you choose it, with the price in dollars shown before you tap. No ads, free or paid.</p>`],
+<p>There is no trial at all: the free version does not end, and a paid plan starts only when you choose it, with the price shown before you tap. No ads, free or paid.</p>`],
       ["Is there a Bible chat in a Black church voice or in Spanish?", `<p>Yes, both at launch. <a href="/black-bible-chat/">Hush Harbor · Black Bible Chat &amp; Stories</a> answers in a Black church voice, and <a href="/es/chat-biblico-gratis/">Mi Refugio</a> is the whole chat in Spanish with the Reina-Valera 1909. The Bible text is the same; only the voice changes.</p>`],
       ["Is Peace Be Still out yet?", `<p>{{stores.out}}</p>`],
     ],
@@ -280,11 +280,11 @@ ${V("PRO 30:5-6")}`],
 </ul>
 <p class="muted">Method: Apple's public review feed, the 500 most recent US reviews of each app, read 21 Nov 2026; a review counts toward a theme when its words mention it. These are reviewers' reports, not findings about the apps.</p>`],
       ["What does Peace Be Still do differently?", `<ul>
-<li>No trial and no weekly plan: $7.99 a month or $39.99 a year, the price in dollars before you tap.</li>
+<li>No trial and no weekly plan: $7.99 a month or $39.99 a year in the US, the price shown before you tap.</li>
 <li>A free version that stays free: one chat a day of up to 5 messages, the whole King James Bible and today's story.</li>
 <li>No ads, ever.</li>
 <li>Verses pasted from a stored King James Version (Reina-Valera 1909 in Spanish); the AI never writes a verse.</li>
-<li>Cancel in two taps, from a link on the paid screen.</li>
+<li>Cancel any time, from a link on the paid screen.</li>
 </ul>`],
       ["How do I switch without paying twice?", `<p>Cancel the old subscription first, in iPhone Settings › your name › Subscriptions, or in Google Play › Payments &amp; subscriptions. Deleting an app does not cancel it. See <a href="/bible-chat-cancel-subscription/">how to cancel a Bible chat subscription</a>, or <a href="/questions/how-to-cancel-bible-app-subscription/">step-by-step cancel instructions for seven apps</a>.</p>`],
     ],
@@ -325,7 +325,7 @@ ${V("PRO 30:5-6")}`],
       ["Can I get a refund?", `<p>On iPhone, go to <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>, sign in, choose “Request a refund”, pick the reason and the purchase. Apple decides each request. On Android, Google Play's refund policy explains when you can ask Google for a refund and when you need to ask the app's developer. If you paid on the app's own website, ask the developer.</p>`],
       ["What if I am still in a free trial?", `<p>Cancel at least 24 hours before the trial ends, as Apple advises, so it does not turn into a paid plan. You can usually keep using it until the trial's end date.</p>`],
       ["What if I was charged after I cancelled?", `<p>Some App Store reviewers in 2026 report a charge after they believed they had cancelled, across several Bible and prayer apps. The usual reasons are cancelling in the wrong place (deleting the app, or cancelling on a website when Apple bills you), a second Apple ID or Google account, or a trial cancelled under 24 hours before it ended. Check each place you could be billed, keep a screenshot of the red expiry date, then use the refund routes above. Each app's own steps, from its help page, are on <a href="/questions/how-to-cancel-bible-app-subscription/">how to cancel a Bible app subscription (7 apps)</a>.</p>`],
-      ["Is there a Bible chat with no trial?", `<p>Peace Be Still has no trial and a free version, so there is nothing to cancel to keep reading. The free version holds the whole King James Bible, one chat a day of up to 5 messages and today's story. The paid plan is $7.99 a month or $39.99 a year, chosen on purpose, and cancels in two taps. It is {{stores.tag}}. See <a href="/free-bible-chat/">what stays free</a>.</p>`],
+      ["Is there a Bible chat with no trial?", `<p>Peace Be Still has no trial and a free version, so there is nothing to cancel to keep reading. The free version holds the whole King James Bible, one chat a day of up to 5 messages and today's story. The paid plan is $7.99 a month or $39.99 a year, chosen on purpose, and you can cancel any time from the paid screen. It is {{stores.tag}}. See <a href="/free-bible-chat/">what stays free</a>.</p>`],
     ],
     faq: [
       ["Does deleting a Bible chat app cancel the subscription?", "No. The App Store or Google Play bills it, so it keeps renewing until you cancel in iPhone Settings or Google Play."],
@@ -354,7 +354,7 @@ ${V("PRO 30:5-6")}`],
 <tr><td>Tu primera noche para dormir, después una por semana</td><td>Una sesión para dormir cada noche</td></tr>
 <tr><td>Una declaración diaria, planes de 7 días, versículos guardados, diario y tarjetas</td><td>Temas de declaraciones y descargas sin conexión</td></tr>
 </tbody></table>`],
-      ["¿Hay prueba gratuita?", `<p>No. Peace Be Still no tiene prueba, así que nada se convierte en un cobro por sorpresa. Lo gratis no es una prueba: no se acaba. El plan pagado empieza solo cuando tú lo eliges, con el precio en dólares a la vista antes de tocar.</p>`],
+      ["¿Hay prueba gratuita?", `<p>No. Peace Be Still no tiene prueba, así que nada se convierte en un cobro por sorpresa. Lo gratis no es una prueba: no se acaba. El plan pagado empieza solo cuando tú lo eliges, con el precio a la vista antes de tocar.</p>`],
       ["¿Hay anuncios?", `<p>No. Peace Be Still no tiene anuncios, ni en lo gratis ni en lo pagado, nunca.</p>`],
       ["¿Qué Biblia usa?", `<p>Mi Refugio usa la Reina-Valera 1909, palabra por palabra, con libro, capítulo y versículo. La inteligencia artificial nunca escribe un versículo de memoria: solo nombra la cita, y la app pega el texto guardado.</p>
 ${V("PSA 91:2", "es")}`],

@@ -2,7 +2,7 @@
 // not on props. It catches what the render tests cannot see:
 // - every tab label fits its own box (the bar once clipped "Today" to "Todav");
 // - every radio announces its state (aria-checked), one checked per group;
-// - each scripture row is exactly one labelled switch, and tapping it flips aria-checked (every switch is labelled, none doubled);
+// - Mindset Settings and picker show no "Weave scripture in" switch (removed 27 Nov 2026: it changed nothing), and every switch there is labelled once;
 // - the onboarding guard: a fresh /journeys goes to the door, an onboarded /door goes to Today, back from Today
 //   after a first run never shows the door;
 // - the other round-4 review findings, on the real page: week count, Mi Refugio Spanish, age bands, the age
@@ -92,25 +92,16 @@ export async function check(target) {
       await shot(refugio.page, '04-settings-mirefugio');
       await refugio.context.close();
     }
-    // 3. One labelled switch per scripture row, and it flips.
-    for (const [path, name] of [['/settings', '05-settings-mindset-dark'], ['/journeys?door=mindset&change=1', '06-picker-mindset-dark']]) {
+    // 3. Mindset Settings and picker: no "Weave scripture in" switch (it changed nothing and was removed,
+    // promise audit 27 Nov 2026), and every switch left there is labelled once.
+    for (const [path, name, ready] of [['/settings', '05-settings-mindset-dark', 'Daily reminder'], ['/journeys?door=mindset&change=1', '06-picker-mindset-dark', 'Imagination Nights']]) {
       const { page, context } = await open(path, mindset, 'dark');
-      await page.getByText('Weave scripture in', { exact: true }).first().waitFor({ timeout: 30000 });
-      // Settings also holds the daily reminder switch, so the scripture row is found by its own label.
-      const all = page.locator('[role=switch]');
-      const labels = await all.evaluateAll(nodes => nodes.map(n => n.getAttribute('aria-label')));
+      await page.getByText(ready).first().waitFor({ timeout: 30000 });
+      expect(!(await page.getByText('Weave scripture in').count()), `${path}: the removed "Weave scripture in" switch is back`);
+      const labels = await page.locator('[role=switch]').evaluateAll(nodes => nodes.map(n => n.getAttribute('aria-label')));
       expect(labels.every(Boolean), `${path}: a switch has no label (${JSON.stringify(labels)})`);
       expect(labels.length === new Set(labels).size, `${path}: one row drawn as two switches (${JSON.stringify(labels)})`);
-      const switches = page.locator('[role=switch][aria-label="Weave scripture in"]');
-      const count = await switches.count();
-      expect(count === 1, `${path}: ${count} switch elements for one scripture row (want 1)`);
-      await shot(page, `${name}-off`);
-      if (count) {
-        const before = await switches.first().getAttribute('aria-checked');
-        await switches.first().click();
-        expect((await switches.first().getAttribute('aria-checked')) === String(before !== 'true'), `${path}: tapping the switch did not flip aria-checked (was ${before})`);
-      }
-      await shot(page, `${name}-on`);
+      await shot(page, name);
       await context.close();
     }
     // 3b. The daily reminder in Settings: one labelled switch; on shows the time, off hides it.

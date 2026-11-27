@@ -73,7 +73,7 @@ test('saved records from the first previews (journeys by English name) migrate t
   assert.equal(migrateSettings({ door: 'faith', age: 'adult', journey: 'Morning Word' }).journey, 'morning-word');
   assert.equal(migrateSettings({ door: 'faith', age: 'child', journey: 'Mi Refugio' }).journey, undefined);
   assert.equal(migrateSettings({ door: 'faith', age: 'adult', journey: 'imagination-nights' }).journey, undefined);
-  assert.deepEqual(migrateSettings(null), { ...initial, ageSetAt: undefined, ageRaised: undefined, journey: undefined, scripture: undefined, opened: undefined });
+  assert.deepEqual(migrateSettings(null), { ...initial, ageSetAt: undefined, ageRaised: undefined, journey: undefined, opened: undefined });
 });
 
 test('Mi Refugio screens are Spanish whatever the app language', () => {

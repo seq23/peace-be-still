@@ -65,7 +65,6 @@ export type Settings = {
   voice: Voice;
   language: Language;
   journey?: JourneyId;
-  scripture?: boolean;
   /** The days (local YYYY-MM-DD) the app was opened this week; Today counts and fills these. */
   opened?: string[];
 };
@@ -92,7 +91,6 @@ export function migrateSettings(raw: unknown, now = Date.now()): Settings {
     voice: saved.voice === 'church' || saved.voice === 'teen' || saved.voice === 'spanish' ? saved.voice : 'plain',
     language: saved.language === 'es' ? 'es' : 'en',
     journey: journey && journey.door === door && allowedFor(journey, age) ? journey.id : undefined,
-    scripture: saved.scripture === true || undefined,
     opened: Array.isArray(saved.opened) ? saved.opened.filter(day => typeof day === 'string' && DAY.test(day)) : undefined,
   };
 }

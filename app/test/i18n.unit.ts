@@ -23,5 +23,5 @@ test('values and plurals: the week count and the Start button', () => {
   assert.equal(t('today.week', { count: 4, locale: 'es' }), '4 días esta semana');
   // The whole sentence is one key, so Spanish never mixes languages ("Comenzar with one" was a prefix hack).
   assert.equal(t('journeys.start', { name: 'Mi Refugio', locale: 'es' }), 'Comenzar Mi Refugio');
-  assert.equal(t('journeys.intro', { locale: 'es' }), 'Empieza con uno. Puedes añadir los demás cuando quieras.');
+  assert.equal(t('journeys.intro', { locale: 'es' }), 'Empieza con uno. Puedes cambiarlo cuando quieras en Ajustes.');
 });

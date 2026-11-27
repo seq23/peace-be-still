@@ -42,5 +42,5 @@ Long description: From Palm Sunday to Easter morning: the psalms of Holy Week, w
 Door: God's Word
 Badge: Challenge
 Dates: June 2027 (with youth pastors)
-Short description: A 3-minute story a day with your group
-Long description: Youth groups read the same 3-minute story each day and share one card with the group.
+Short description: A short story a day with your group
+Long description: Youth groups read the same short story each day and share one card with the group.

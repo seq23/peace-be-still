@@ -421,22 +421,22 @@ test('a child sees no chat-led journey, and Start names the one she taps', async
   assert.doesNotMatch(es, /Young Faith|13 a 17/);
 });
 
-test('the Mindset picker asks the scripture question after its cards, with a switch, and keeps the answer', async () => {
+test('the Mindset picker offers no scripture switch (it changed nothing), and saves only the journey', async () => {
+  // Promise audit 27 Nov 2026: "Weave scripture in" was saved and sent, and no code ever read it.
   const tree = await mount('journeys', { ...base, door: 'mindset' });
-  const order = texts(tree);
-  assert.ok(order.indexOf('Weave scripture in') > order.findIndex(s => s.startsWith('Morning Word')));
-  // The whole row is the one switch: role, state and label on it, and no second switch control inside.
-  assert.equal(host(tree, 'Switch').length, 0);
-  const toggles = host(tree, 'Pressable').filter(n => n.props.role === 'switch');
-  assert.equal(toggles.length, 1);
-  assert.equal(toggles[0].props['aria-label'], 'Weave scripture in');
-  assert.equal(toggles[0].props['aria-checked'], false);
-  await act(async () => toggles[0].props.onPress());
-  assert.equal(host(tree, 'Pressable').find(n => n.props.role === 'switch')!.props['aria-checked'], true);
-  assert.deepEqual(checked(tree), []);
+  assert.ok(texts(tree).some(s => s.startsWith('Imagination Nights')), 'the Mindset picker did not render its cards');
+  assert.doesNotMatch(strings(tree), /scripture|KJV/i);
+  assert.equal(host(tree, 'Pressable').filter(n => n.props.role === 'switch').length, 0);
   await press(tree, 'Imagination Nights');
   await press(tree, 'Start Imagination Nights');
-  assert.equal(store().scripture, true); assert.equal(store().journey, 'imagination-nights');
+  assert.equal(store().journey, 'imagination-nights');
+  assert.ok(!('scripture' in store()), 'the picker still saves a scripture setting');
+});
+
+test('Mindset Settings has no scripture switch', async () => {
+  const tree = await mount('settings', { ...base, door: 'mindset', journey: 'imagination-nights' });
+  assert.match(strings(tree), /Your door/, 'Settings did not render');
+  assert.doesNotMatch(strings(tree), /Weave scripture|KJV verses/);
 });
 
 test('changing the door from Settings keeps the old journey until a new one is started', async () => {

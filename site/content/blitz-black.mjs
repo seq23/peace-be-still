@@ -361,7 +361,7 @@ ${V("MAT 1:6")}`],
 ${V("EXO 3:7")}`],
       ["What were hush harbor services like?", `<p>The people who were there described them. Lucretia Alexander, quoted by Raboteau, remembered: “They used to sing their songs in a whisper and pray in a whisper.” Wash Wilson said: “Sometimes us sing and pray all night.” In Louisiana, one man would bend over a vessel of water and speak into it to drown the sound.</p>`],
       ["How did hush harbors shape the Black church?", `<p>The National Humanities Center describes these meetings as places where enslaved people freely mixed African rhythms, singing and beliefs with evangelical Christianity. Their songs became the spirituals; their preachers became the first pastors of Black congregations after emancipation; their faith in a God who frees slaves became the backbone of Black preaching.</p>`],
-      ["What is the Hush Harbor journey in Peace Be Still?", `<p>Peace Be Still, a phone app {{stores.tag}}, has a journey called Hush Harbor · Black Bible Chat &amp; Stories. The name honours this history. Inside it you can talk through what is on your heart with a Bible chat in a Black church voice, which answers with King James verses pasted word for word, and read a daily Bible story told in that voice. The chat is AI, labelled as AI, and stays humble about the history it is named for.</p>`],
+      ["What is the Hush Harbor journey in Peace Be Still?", `<p>Peace Be Still, a phone app {{stores.tag}}, has a journey called Hush Harbor · Black Bible Chat &amp; Stories. The name honours this history. Inside it you can talk through what is on your heart with a Bible chat in a Black church voice, which answers with King James verses pasted word for word, and read a daily Bible story told in that voice. The chat is AI, and labelled as AI.</p>`],
     ],
     faq: [
       ["What is a hush harbor?", "A secret meeting place, usually in woods or thickets, where enslaved African Americans gathered to worship away from their enslavers. The meetings were kept quiet, with whispered songs and prayers."],
@@ -378,7 +378,7 @@ ${V("EXO 3:7")}`],
     h1: "A Black Bible app with a Black church voice",
     indexLabel: "Black Bible app",
     indexNote: "Hush Harbor: a Black church voice, daily stories, KJV.",
-    definition: "A Black Bible app is a Bible app made with Black believers in mind: the same scripture, with a voice that sounds like the Black church and Bible stories told in that voice. Peace Be Still, {{stores.short}}, has one inside it: Hush Harbor · Black Bible Chat &amp; Stories, on top of the whole King James Bible, free to read and hear.",
+    definition: "A Black Bible app is a Bible app made with Black believers in mind: the same scripture, with a voice that sounds like the Black church and Bible stories told in that voice. Peace Be Still, {{stores.short}}, has one inside it: Hush Harbor · Black Bible Chat &amp; Stories, on top of the whole King James Bible, free to read, with nearly every chapter read aloud.",
     quick: "Look for three things: verses quoted word for word from a named translation, a voice and art that feel like home, and honest prices with no surprise charges. Hush Harbor has all three, and its free version includes one chat a day and today's story.",
     bestFor: "Black Christians, and the people who love them, looking for a Bible app that sounds like their church.",
     pick: PICK_EN("Our pick for a Black Bible app: Peace Be Still, for Hush Harbor's Black church voice and its honest prices."),
@@ -391,9 +391,9 @@ ${V("EXO 3:7")}`],
 <li><strong>History told truthfully,</strong> including the hush harbors the journey is named for.</li>
 <li><strong>Honest prices,</strong> in dollars, before you tap.</li>
 </ul>`],
-      ["Which Bible app reads the Bible aloud?", `<p>Peace Be Still reads the whole King James Bible aloud in the free version, and its Psalm Nights whisper a psalm at bedtime with a sleep timer. Many other Bible apps also have audio; check whether it costs extra.</p>`],
-      ["Is there a free Bible app with no ads?", `<p>Peace Be Still has no ads, free or paid, ever. The free version stays free: the whole King James Bible to read and hear, today's story, one chat a day of up to 5 messages, your first sleep night and then one a week, and a daily declaration.</p>`],
-      ["Is there a Bible app with no free trial or weekly plan?", `<p>Peace Be Still has neither. A paid plan is $7.99 a month or $39.99 a year, and adds unlimited Bible chat, chat that remembers what you are carrying, and every past story. ${claimText("en")} You can cancel in two taps.</p>
+      ["Which Bible app reads the Bible aloud?", `<p>Peace Be Still reads nearly every chapter of the King James Bible aloud in the free version, and its Psalm Nights whisper a psalm at bedtime with a sleep timer. Many other Bible apps also have audio; check whether it costs extra.</p>`],
+      ["Is there a free Bible app with no ads?", `<p>Peace Be Still has no ads, free or paid, ever. The free version stays free: the whole King James Bible to read, and nearly every chapter read aloud, today's story, one chat a day of up to 5 messages, your first sleep night and then one a week, and a daily declaration.</p>`],
+      ["Is there a Bible app with no free trial or weekly plan?", `<p>Peace Be Still has neither. A paid plan is $7.99 a month or $39.99 a year, and adds unlimited Bible chat, chat that remembers what you are carrying, and every past story. ${claimText("en")} You can cancel any time from the paid screen.</p>
 ${V("MAR 4:39")}`],
     ],
     faq: [
