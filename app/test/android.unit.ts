@@ -66,13 +66,16 @@ test('the Android app blocks every permission it does not use, and the bundle ch
   const audio = config.plugins?.find(p => Array.isArray(p) && p[0] === 'expo-audio') as [string, { recordAudioAndroid?: boolean }];
   assert.equal(audio[1].recordAudioAndroid, false);
   assert.equal(config.android?.package, 'com.peacebestillapp.mobile');
-  const good = '<manifest package="com.peacebestillapp.mobile" android:versionCode="7"><uses-permission android:name="android.permission.INTERNET"/><uses-permission android:name="com.android.vending.BILLING"/></manifest>';
+  const good = '<manifest package="com.peacebestillapp.mobile" android:versionCode="7"><uses-permission android:name="android.permission.INTERNET"/><uses-permission android:name="com.android.vending.BILLING"/><application android:fullBackupContent="@xml/pbs_backup_rules" android:dataExtractionRules="@xml/pbs_data_extraction_rules"/></manifest>';
   assert.deepEqual(manifestIssues(good).issues, []);
   assert.equal(manifestIssues(good).versionCode, '7');
   assert.deepEqual(manifestIssues(good.replace('INTERNET', 'RECORD_AUDIO')).issues, ['AAB_FORBIDDEN_PERMISSION: android.permission.RECORD_AUDIO']);
   assert.match(manifestIssues(good.replace('com.peacebestillapp.mobile', 'com.example')).issues[0], /^AAB_WRONG_PACKAGE/);
   assert.match(manifestIssues(good.replace(/<uses-permission android:name="com.android.vending.BILLING"\/>/, '')).issues[0], /^AAB_NO_BILLING/);
   assert.match(manifestIssues(good.replace(' android:versionCode="7"', '')).issues[0], /^AAB_NO_VERSION_CODE/);
+  // Own nights stay out of Google backup: a bundle without both rule files is refused.
+  assert.match(manifestIssues(good.replace(' android:fullBackupContent="@xml/pbs_backup_rules"', '')).issues[0], /^AAB_BACKUP_RULES_MISSING: android:fullBackupContent/);
+  assert.match(manifestIssues(good.replace('@xml/pbs_data_extraction_rules', '@xml/other')).issues[0], /^AAB_BACKUP_RULES_MISSING: android:dataExtractionRules/);
   // Signed by the EAS-held upload key only (the workflow's UPLOAD_SHA1).
   const baseline = readFileSync(new URL('../../.github/workflows/android-store-build.yml', import.meta.url), 'utf8').match(/UPLOAD_SHA1: ([0-9A-F:]{59})/)?.[1];
   assert.ok(baseline);

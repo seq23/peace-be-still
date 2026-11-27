@@ -189,3 +189,82 @@ test('every number has one home: the lengths, the saved-night limit and the mess
   assert.deepEqual([...OWN_NIGHT_MINUTES], [20, 45, 90]);
   assert.equal(SAVED_NIGHTS_MAX, 20);
 });
+
+// "Never uploaded" (privacy policy, the microphone question, the editor): the own-nights folder is kept out of
+// iCloud and device backups before anything is written into it, and nothing is written when it cannot be.
+test('own nights are kept out of backups before anything is written, and nothing is written when they cannot be', async () => {
+  const { createShelf, NIGHTS_FILE } = await import('../src/ownNight/shelf');
+  const log: string[] = [];
+  const disk = new Map<string, string>();
+  const files = (marks: boolean) => ({
+    ensureFolder: () => { log.push('folder'); },
+    excludeFolder: () => { log.push(`exclude:${marks}`); return marks; },
+    read: (name: string) => disk.get(name) ?? null,
+    write: (name: string, text: string) => { log.push(`write:${name}`); disk.set(name, text); },
+  });
+  const ok = createShelf(files(true));
+  const shelf = createSavedNights(ok.storage, async () => undefined);
+  assert.equal((await shelf.save(night(1))).ok, true);
+  assert.deepEqual(log.slice(0, 2), ['folder', 'exclude:true'], 'the folder is marked before the first write');
+  assert.ok(log.indexOf('exclude:true') < log.indexOf(`write:${NIGHTS_FILE}`));
+  assert.equal(parseNights(disk.get(NIGHTS_FILE) ?? null).length, 1, 'the night is in the folder file, not elsewhere');
+  // The mark cannot be set or read back: no write, the save says it failed, and a recording is not moved in.
+  log.length = 0; disk.clear();
+  const refused = createShelf(files(false));
+  assert.deepEqual(await createSavedNights(refused.storage, async () => undefined).save(night(2)), { ok: false, reason: 'failed' });
+  assert.ok(!log.some(l => l.startsWith('write:')), `wrote while not out of backups: ${log.join(', ')}`);
+  assert.throws(() => refused.ready(), /BACKUP_EXCLUDE_FAILED/);
+  await assert.rejects(ok.storage.setItem('peace-be-still-settings', '{}'), /NOT_A_NIGHTS_KEY/);
+});
+
+test('the phone build keeps own nights in the excluded folder, and Android leaves that folder out of backup', async () => {
+  const adapters = readFileSync(new URL('../src/ownNight/adapters.ts', import.meta.url), 'utf8');
+  // Saved nights on a phone go through the shelf; the browser store is for the web preview only.
+  assert.match(adapters, /const nightStorage = \(\) => \(Platform\.OS === 'web' \? AsyncStorage : shelf\.storage\);/);
+  assert.match(adapters, /export function keepRecording[\s\S]{0,80}shelf\.ready\(\);/, 'a recording is moved in only after the folder is marked');
+  // An iPhone binary without the backup mark never shows the feature (an over-the-air update could reach one).
+  assert.match(adapters, /Platform\.OS !== 'ios' \|\| !!backupExclude\(\)/);
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const plugin = require('../plugins/own-night-backup.js');
+  for (const xml of Object.values(plugin.FILES) as string[]) assert.match(xml, /<exclude domain="file" path="own-nights\/" \/>/);
+  assert.match(plugin.FILES['pbs_data_extraction_rules.xml'], /<cloud-backup>[\s\S]*own-nights[\s\S]*<\/cloud-backup>\s*<device-transfer>[\s\S]*own-nights[\s\S]*<\/device-transfer>/);
+  assert.ok(!(Object.values(plugin.FILES) as string[]).some(x => /<include/.test(x)), 'an include rule would drop the rest of the app from backup');
+  const manifest: { manifest: { application: Array<{ $: Record<string, string> }> } } = { manifest: { application: [{ $: { 'android:allowBackup': 'true' } }] } };
+  plugin.setBackupRules(manifest);
+  assert.equal(manifest.manifest.application[0].$['android:fullBackupContent'], '@xml/pbs_backup_rules');
+  assert.equal(manifest.manifest.application[0].$['android:dataExtractionRules'], '@xml/pbs_data_extraction_rules');
+  assert.throws(() => plugin.setBackupRules({ manifest: { application: [{ $: { 'android:fullBackupContent': '@xml/other' } }] } }), /OWN_NIGHT_BACKUP_RULES_TAKEN/);
+  const root = (await import('node:fs')).mkdtempSync(join((await import('node:os')).tmpdir(), 'pbs-android-'));
+  plugin.writeRuleFiles(root);
+  for (const [file, xml] of Object.entries(plugin.FILES)) assert.equal(readFileSync(join(root, 'app/src/main/res/xml', file), 'utf8'), xml);
+  const config = readFileSync(new URL('../app.config.ts', import.meta.url), 'utf8');
+  assert.match(config, /'\.\/plugins\/own-night-backup'/);
+});
+
+// The consent (Apple 5.1.2(i)) and the privacy line name exactly the services the Worker sends a wish to: the
+// safety model, the paid route and its backup (worker/wrangler.jsonc, worker/src/ownNight.ts). A changed model or
+// route with old words fails here.
+test('the own-night consent names every service the Worker sends a wish to, from its live config', async () => {
+  const wrangler = readFileSync(new URL('../../worker/wrangler.jsonc', import.meta.url), 'utf8');
+  const v = (name: string) => wrangler.match(new RegExp(`"${name}": "([^"]+)"`))?.[1];
+  const worker = readFileSync(new URL('../../worker/src/ownNight.ts', import.meta.url), 'utf8');
+  assert.match(worker, /deps\.risk\(env, turns\)/, 'every wish past the phrase floor goes to the safety model');
+  assert.match(worker, /deps\.rungs\(env, now, 'paid', false\)/, 'the moment is written on the paid lane');
+  // What the config names, in the words a person reads.
+  const NAMES: Record<string, Record<string, string>> = {
+    WORKERS_AI_RISK_MODEL: { '@cf/': 'Cloudflare Workers AI' },
+    PAID_PROVIDER: { 'openrouter-zdr': 'OpenRouter' },
+    PAID_MODEL: { 'deepseek/deepseek-v4.1-flash': 'DeepSeek V4.1 Flash' },
+    PAID_BACKUP_MODEL: { 'gemini-': 'Google Gemini' },
+  };
+  const { strings } = await import('../src/i18n');
+  const es = { 'Cloudflare Workers AI': 'Cloudflare Workers AI', OpenRouter: 'OpenRouter', 'DeepSeek V4.1 Flash': 'DeepSeek V4.1 Flash', 'Google Gemini': 'Google Gemini' } as Record<string, string>;
+  for (const [key, map] of Object.entries(NAMES)) {
+    const value = v(key);
+    assert.ok(value, `${key} is not in wrangler.jsonc`);
+    const hit = Object.entries(map).find(([prefix]) => value!.startsWith(prefix));
+    assert.ok(hit, `${key} is ${value}: name it in ownNight.consent.body (EN and ES) and add it here`);
+    for (const lang of ['en', 'es'] as const) assert.ok(String(strings[lang]['ownNight.consent.body']).includes(lang === 'en' ? hit![1] : es[hit![1]]), `${lang} consent does not name ${hit![1]} (${key})`);
+  }
+  for (const lang of ['en', 'es'] as const) assert.ok(String(strings[lang]['ownNight.privacy']).includes('Cloudflare Workers AI'), `${lang} privacy line hides the safety model`);
+});

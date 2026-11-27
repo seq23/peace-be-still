@@ -26,7 +26,7 @@ type InstallReader = (request: Request, env: Env, now: number, graceDays?: numbe
 const PAID_UNCAPPED = 1_000_000;
 const SAFETY = new Set(['harm', 'control', 'sexual', 'minor', 'crisis']);
 const REASONS = ['ok', 'harm', 'control', 'sexual', 'minor', 'crisis', 'other'] as const;
-const PROBLEMS = ['harm', 'control', 'sexual', 'minor', 'crisis', 'promise', 'divine', 'not_present', 'language', 'gender', 'off'] as const;
+const PROBLEMS = ['harm', 'control', 'sexual', 'minor', 'crisis', 'promise', 'divine', 'not_present', 'language', 'gender', 'flat', 'off'] as const;
 export const sceneSchema = {
   type: 'object',
   properties: { write: { type: 'boolean' }, reason: { type: 'string', enum: REASONS }, scene: { type: 'string' }, risk: { type: 'string', enum: ['none', 'low', 'high'] } },
@@ -167,7 +167,7 @@ export async function ownNightScene(request: Request, env: Env, ctx: ExecutionCo
     if (!w.write || w.reason !== 'ok') return outcome({ kind: 'refused', text: refusedText[req.lang] }, false);
     const scene = w.scene.trim();
     const shape = sceneShapeIssues(scene);
-    if (shape.length) { objection = `${shapeObjection(scene, shape)} Write three short sentences, each ending with a period, no more than ${SCENE_MAX} characters in all, and none of the words the rules forbid.`; continue; }
+    if (shape.length) { objection = `${shapeObjection(scene, shape)} Write two to four sentences of different lengths, no more than ${SCENE_MAX} characters in all, and none of the words the rules forbid.`; continue; }
     const checked = await runLadder(env.DB, rungs, [
       { role: 'system', content: sceneCheckPrompt },
       { role: 'user', content: `Language: ${req.lang === 'es' ? 'Spanish' : 'English'}\n${hope(req.wish, req.who)}\n<moment>${scene}</moment>` },

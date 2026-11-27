@@ -54,7 +54,7 @@ async function run(keys, item) {
     const issues = shape(w.scene);
     if (issues.length) {
       const count = String(w.scene ?? '').trim().split(/(?<=[.!?…])\s+/u).filter(s => /\p{L}/u.test(s)).length;
-      objection = `${[issues.includes('sentences') ? `It had ${count} sentence${count === 1 ? '' : 's'}.` : '', issues.includes('too_long') ? 'It was too long.' : '', issues.includes('banned_word') ? 'It used a word the rules forbid.' : '', issues.includes('empty') ? 'It was empty.' : ''].filter(Boolean).join(' ')} Write three short sentences, each ending with a period, no more than 500 characters in all, and none of the words the rules forbid.`;
+      objection = `${[issues.includes('sentences') ? `It had ${count} sentence${count === 1 ? '' : 's'}.` : '', issues.includes('too_long') ? 'It was too long.' : '', issues.includes('banned_word') ? 'It used a word the rules forbid.' : '', issues.includes('empty') ? 'It was empty.' : ''].filter(Boolean).join(' ')} Write two to four sentences of different lengths, no more than 500 characters in all, and none of the words the rules forbid.`;
       trail.push({ shape: issues }); continue;
     }
     const c = await ask(keys, JUDGE_MODEL, [{ role: 'system', content: sceneCheckPrompt }, { role: 'user', content: `Language: ${item.lang === 'es' ? 'Spanish' : 'English'}\n${hope(item)}\n<moment>${w.scene}</moment>` }], 1500);
