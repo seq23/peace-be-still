@@ -345,6 +345,9 @@ test('a session deleted while it is being voiced leaves no audio behind, and the
   const { db, call, row, url } = await worker(t);
   const gone = (await (await call(id.owner, { body: note })).json()).id;
   const next = (await (await call(id.other, { body: note })).json()).id;
+  // The drain and the sweeps below run on the wall clock, so the rows are dated on it too (made at the
+  // fixed test day, they fell to the 8-day purge of ended rows from 25 Nov 2026 and turned main red).
+  await db.prepare('UPDATE made_for_you SET created_at = ? WHERE id IN (?, ?)').bind(Date.now(), gone, next).run();
   // The Mac's real drain: during the first render she deletes the session; its upload then gets a 409.
   // drop() is the Mac's own delete; here it fails (does nothing), so the Worker's sweep must remove the file.
   const runner = `
