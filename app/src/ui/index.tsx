@@ -82,7 +82,8 @@ export function SwitchRow({ title, detail, value, onChange }: { title: string; d
 export function PillButton({ children, onPress, disabled = false }: { children: string; onPress: () => void; disabled?: boolean }) {
   const c = usePalette();
   return (
-    <Pressable accessibilityRole="button" disabled={disabled} accessibilityState={{ disabled }} aria-disabled={disabled || undefined} onPress={disabled ? undefined : onPress} style={({ pressed }) => [styles.pill, { backgroundColor: c.accent }, disabled && { opacity: 0.45 }, pressed && !disabled && { opacity: 0.85 }]}>
+    // Its name is the words alone: the › is drawn, never read ("Write my moment", not "Write my moment, right angle quote").
+    <Pressable accessibilityRole="button" accessibilityLabel={children} disabled={disabled} accessibilityState={{ disabled }} aria-disabled={disabled || undefined} onPress={disabled ? undefined : onPress} style={({ pressed }) => [styles.pill, { backgroundColor: c.accent }, disabled && { opacity: 0.45 }, pressed && !disabled && { opacity: 0.85 }]}>
       <Text style={[styles.pillText, { color: c.on }]}>{disabled ? children : `${children}  ›`}</Text>
     </Pressable>
   );

@@ -2952,6 +2952,28 @@ test('Write your own night: a phone on an older binary (no phone-voice module, n
   await act(async () => updated.unmount());
 });
 
+// The tap-through (and VoiceOver) finds a button by its accessible name. A pill's › is drawn, never part of the name:
+// main went red on 27 Nov 2026 when "Write my moment" and "See plans" could not be found as "Write my moment  ›".
+test('a pill button is named by its words alone, on the own-night list, editor and locked screen', async () => {
+  const pillsOf = (tree: ReactTestRenderer) => host(tree, 'Pressable').filter(n => /›$/.test(textOf(n)));
+  const checked: string[] = [];
+  const check = (tree: ReactTestRenderer, where: string) => {
+    const pills = pillsOf(tree);
+    assert.ok(pills.length >= 1, `${where}: no pill found in ${strings(tree)}`);
+    for (const p of pills) { assert.equal(p.props.accessibilityLabel, textOf(p).replace(/\s*›$/, ''), where); checked.push(p.props.accessibilityLabel); }
+  };
+  const locked = await mount('ownNight', mindsetAdult);
+  check(locked, 'locked');
+  await act(async () => locked.unmount());
+  const editor = await asPaid(() => mount('ownNight', mindsetAdult));
+  check(editor, 'saved nights');
+  await press(editor, 'Write a new night');
+  await typeInto(editor, 'What do you hope for?', 'TEST a quiet morning');
+  check(editor, 'editor');
+  await act(async () => editor.unmount());
+  assert.ok(checked.includes('Write my moment') && checked.includes('See plans'), `named: ${checked.join(', ')}`);
+});
+
 test('Write your own night: a free adult sees the entry marked for a paid plan, the explanation and the existing price screen', async () => {
   local.delete(OWN_NIGHTS);
   for (const name of ['nights', 'today'] as const) {
