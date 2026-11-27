@@ -6,6 +6,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 
+const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const MAX_STEPS = 40; // boss-os scripts/ops/tap-through.mjs MAX_STEPS
 const root = new URL('../../', import.meta.url);
 const files = readdirSync(root).filter(f => /^tap-through(?:-[a-z0-9-]+)?\.json$/.test(f)).sort();
@@ -32,7 +33,7 @@ for (const file of files) {
     }
   });
   test(`${file} is run by the preview workflow with its own label`, () => {
-    assert.match(workflow, new RegExp(`\\n {6}flow_file: ${file.replace(/[.]/g, '\\.')}\\n {6}label: \\$\\{\\{ github\\.run_id \\}\\}-[a-z-]+\\n`), `${file} has no tap-through call in mobile-preview.yml`);
+    assert.match(workflow, new RegExp(`\\n {6}flow_file: ${escape(file)}\\n {6}label: \\$\\{\\{ github\\.run_id \\}\\}-[a-z-]+\\n`), `${file} has no tap-through call in mobile-preview.yml`);
   });
 }
 
