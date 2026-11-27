@@ -108,7 +108,7 @@
   ],
   "mode": "slow",
   "cap": {
-    "max_live_pages": 10,
+    "max_live_pages": 15,
     "min_pages": 10,
     "grow_share": 0.1,
     "max_per_day": 3
