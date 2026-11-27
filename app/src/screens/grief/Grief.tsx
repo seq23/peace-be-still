@@ -11,6 +11,7 @@ import { onePerScript, trackTitle, type Track } from '../../player/library';
 import { useSettings, useT } from '../../settings';
 import { fonts } from '../../theme/tokens';
 import { BackLink, Body, Card, Chevron, Label, Screen, Title, styles, usePalette } from '../../ui';
+import { HelpLine, phoneRegion } from '../../chat/HelpLine';
 import { useStoredVerses, VerseText } from '../daily/DeclarationVerse';
 import { usePublishedAudio } from '../listen/availability';
 import { shelfOf, trackBelongsToDoor } from '../listen/catalog';
@@ -19,6 +20,7 @@ import { isPreviewSample, listenTracks } from '../listen/preview';
 
 export function Grief({ back, listen }: { back: () => void; listen: (track: Track) => void }) {
   const t = useT('journey');
+  const c = usePalette();
   const { settings } = useSettings();
   const published = usePublishedAudio();
   const user = useOffline(settings.age);
@@ -46,7 +48,7 @@ export function Grief({ back, listen }: { back: () => void; listen: (track: Trac
       <Card style={{ gap: 8 }}>
         <Label>{t('grief.help.label')}</Label>
         <Body muted={false}>{t('grief.help.people')}</Body>
-        <Body size={14}>{t('grief.help.crisis')}</Body>
+        <HelpLine region={phoneRegion()} t={t} style={{ color: c.muted, fontFamily: fonts.body, fontSize: 14, lineHeight: 20 }} link={c.accent} />
       </Card>
     </Screen>
   );

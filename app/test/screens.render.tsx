@@ -122,6 +122,7 @@ const { Text } = require('react-native');
 const { i18n } = require('../src/i18n');
 const en = require('../src/i18n/en.json');
 const es = require('../src/i18n/es.json');
+const ko = require('../src/i18n/ko.json');
 const screens = {
   root: require('../app/_layout'),
   onboarding: require('../app/(onboarding)/_layout').default,
@@ -700,7 +701,9 @@ test('the God\'s Word gate fails a screen when a banned word reaches its data', 
 
 test('Spanish screens show no English: no rendered text is an English string that has a Spanish one', async () => {
   // Names that stay as they are in Spanish: the app, the journeys, the language picker's own names.
-  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)', 'Reina-Valera 1909', 'King James Version']);
+  const sameInBoth = new Set(['Peace Be Still', 'Hush Harbor', 'Mi Refugio', 'Biblia y Chat en Español', 'Morning Word', 'Young Faith', 'Imagination Nights', 'Chat', 'English', 'Español', 'Español (Mi Refugio)', 'Reina-Valera 1909', 'King James Version',
+    // Each language picker name is written in its own script on every screen (한국어, 简体中文, 繁體中文).
+    ...Object.entries(en).filter(([key]) => key.startsWith('language.')).map(([, name]) => String(name))]);
   const english = new Set(Object.values(en).flatMap(v => typeof v === 'string' ? [v] : Object.values(v as object) as string[]).filter(v => !sameInBoth.has(v)));
   const people = [
     { ...base, language: 'es', journey: 'psalm-nights' }, { ...base, language: 'es', door: 'mindset', journey: 'imagination-nights' },
@@ -1668,10 +1671,10 @@ test('a crisis note gets the chat’s fixed reply with one-tap 988 help, and not
     assert.ok(texts(tree).includes(replies[lang]));
     const links = host(tree, 'Pressable').filter(n => n.props.accessibilityRole === 'link').map(textOf).filter(label => /988|911/.test(label));
     assert.deepEqual(links, lang === 'es'
-      ? ['Llamar al 911', 'Llamar al 988', 'Enviar un texto al 988']
+      ? [es['chat.call.911'], es['chat.call.988'], es['chat.text.988']]
       : ['Call 911', 'Call 988', 'Text 988']);
     await press(tree, lang === 'es' ? 'Llamar al 988' : 'Call 988');
-    await press(tree, lang === 'es' ? 'Enviar un texto al 988' : 'Text 988');
+    await press(tree, lang === 'es' ? es['chat.text.988'] : 'Text 988');
     assert.deepEqual(opened, ['tel:988', 'sms:988']);
     assert.equal(host(tree, 'TextInput').length, 0, 'the form gives way to the help');
     // A way back when the words were not a crisis: nothing was kept, and the empty form returns.
@@ -1703,6 +1706,46 @@ test('Settings deletes every made-for-you session after asking', async t => {
   assert.doesNotMatch(strings(child), /made-for-you/);
   await act(async () => { tree.unmount(); child.unmount(); });
   fetchMock.mock.restore();
+});
+
+// Made for you on a Korean or Chinese phone: every state in the phone's own language with no raw key (the copy was
+// en/es only, so these phones showed "[missing ...]"), and it says plainly the session itself is in English.
+test('web preview: Made for you in Korean and Chinese shows every state in that language, says the session is in English, and never a missing key', async t => {
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+  const location = Object.getOwnPropertyDescriptor(globalThis, 'location');
+  const page = { origin: 'https://preview.example', search: '' };
+  const browser = new Map<string, string>();
+  Object.defineProperty(globalThis, 'location', { configurable: true, value: page });
+  Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: { getItem: (k: string) => browser.get(k) ?? null, setItem: (k: string, v: string) => void browser.set(k, v), removeItem: (k: string) => void browser.delete(k) } });
+  t.after(() => {
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
+    if (location) Object.defineProperty(globalThis, 'location', location);
+    else Reflect.deleteProperty(globalThis, 'location');
+    Reflect.deleteProperty(globalThis, 'localStorage');
+  });
+  t.mock.method(globalThis, 'fetch', () => { throw new Error('Unexpected preview fetch'); });
+  const { PREVIEW_STATES } = require('../src/madeForYou/preview') as typeof import('../src/madeForYou/preview');
+  const english = { ko: /영어로/, 'zh-Hans': /以英语朗读/, 'zh-Hant': /以英語朗讀/ } as const;
+  const script = { ko: /\p{Script=Hangul}/u, 'zh-Hans': /\p{Script=Han}/u, 'zh-Hant': /\p{Script=Han}/u } as const;
+  for (const language of ['ko', 'zh-Hans', 'zh-Hant'] as const) {
+    const person = { ...base, journey: 'psalm-nights', language };
+    page.search = '';
+    browser.clear();
+    const locked = await mount('madeForYou', person);
+    assert.match(strings(locked), english[language], `${language}: the locked screen does not say the session is in English`);
+    assert.doesNotMatch(strings(locked), /missing|madeForYou\./, `${language}: a raw key on the locked screen`);
+    await act(async () => locked.unmount());
+    page.search = '?paid=1';
+    for (const state of PREVIEW_STATES) {
+      const tree = await mount('madeForYou', person, { state });
+      const shown = strings(tree);
+      assert.doesNotMatch(shown, /missing|madeForYou\./, `${language} ${state}: ${shown.slice(0, 200)}`);
+      assert.match(shown, script[language], `${language} ${state}: not in ${language}`);
+      await act(async () => tree.unmount());
+    }
+  }
 });
 
 test('web preview: Made for you is locked until the preview\'s ?paid=1, then renders every paid state, including stopped, full and used, and plays a public fixture', async t => {
@@ -2737,7 +2780,20 @@ test('For when you\'ve lost someone: free stored verses and gentle lines, a past
       for (const line of lines) assert.ok(shown.includes(line.declaration), line.declaration);
       // Every verse is the stored KJV, read by reference (Ecclesiastes 3:4 has no supplied words in italics).
       assert.ok(texts(tree).includes(storedVerse('ECC', 3, 4)), strings(tree));
-      assert.ok(shown.includes(en['grief.help.people']) && shown.includes(en['grief.help.crisis']));
+      // The crisis line is the phone region's (the render phone is en-US: 988), as one line with its links.
+      const links = () => host(tree, 'Text').filter(n => n.props.accessibilityRole === 'link').map(n => n.props.accessibilityLabel);
+      assert.ok(shown.includes(en['grief.help.people']));
+      assert.deepEqual(links(), [en['chat.call.988'], en['chat.text.988']], 'an en-US phone gets 988');
+      await act(async () => tree.unmount());
+      // The phone's region picks the line, never its language: Mexico gets Línea de la Vida; a Korean phone in the US 988.
+      (globalThis as any).__pbsRegion = 'MX';
+      tree = await mount('grief', person);
+      assert.deepEqual(links(), [en['chat.call.mx'], en['chat.call.911']], 'a phone in Mexico');
+      await act(async () => tree.unmount());
+      (globalThis as any).__pbsRegion = 'US';
+      tree = await mount('grief', { ...person, language: 'ko' });
+      assert.deepEqual(links(), [ko['chat.call.988'], ko['chat.text.988']], 'a Korean phone in the US');
+      delete (globalThis as any).__pbsRegion;
       assert.ok(!shown.includes(en['grief.nights']) && !strings(tree).includes(trackTitle(voiced, 'en')), 'a voiced but unpublished night is not shown');
       assert.deepEqual(faithContentIssues(strings(tree)), []);
     } finally { await act(async () => tree.unmount()); }

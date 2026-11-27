@@ -64,6 +64,6 @@ test('every string in the files is used by a screen or the model', () => {
   const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, unknown>;
   // A key is used when it is written out, or built from a known prefix (`door.${id}.title`).
   const unused = Object.keys(en).filter(key => !code.includes(`'${key}'`) && !code.includes(`"${key}"`) &&
-    !/^(door\.(faith|mindset)\.(title|detail)|doorName\.|greeting\.|tabs\.|voice\.|language\.)/.test(key));
+    !/^(door\.(faith|mindset)\.(title|detail)|doorName\.|greeting\.|tabs\.|voice\.|language\.|madeForYou\.)/.test(key)); // madeForYou.* is built in madeForYou/copy.ts
   assert.deepEqual(unused, []);
 });

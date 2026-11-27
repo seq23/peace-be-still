@@ -22,7 +22,7 @@ export default function MadeForYouRoute() {
   if (settings.age === 'child') return <Redirect href="/nights" />;
   const { age, door } = settings;
   const kind = door === 'faith' ? 'psalm' : 'imagination';
-  return <MadeForYouScreen key={`${age}:${door}:${locale}:${paid}:${previewState ?? ''}`} paid={paid && previewState !== 'locked'} api={api}
+  return <MadeForYouScreen key={`${age}:${door}:${locale}:${paid}:${previewState ?? ''}`} paid={paid && previewState !== 'locked'} api={api} ui={locale}
     crisis={previewState === 'crisis' ? previewCrisisText[contentLanguage(locale)] : undefined}
     context={{ age, door, kind, lang: contentLanguage(locale) }}
     close={() => router.canGoBack() ? router.back() : router.replace('/nights')}

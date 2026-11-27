@@ -4,7 +4,6 @@
 // Every AI answer has "Report this answer" (Apple Guideline 1.2): the answer and a reason are sent.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { randomUUID } from 'expo-crypto';
-import { getLocales } from 'expo-localization';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Linking, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
@@ -25,20 +24,12 @@ type Entry = { role: 'user'; text: string } | { role: 'reply'; res: ChatResponse
 export const FREE_CONSENT_KEY = 'peace-be-still-free-chat-consent';
 
 /** Tappable lines for a crisis reply: 988 always; the hotline the reply names (Poison Control and 911 first for medical danger). */
-import { regionHelp as regionHelpOf } from './regionHelp';
+import { HelpLine, phoneRegion } from './HelpLine';
 export { regionHelp } from './regionHelp';
 
 /** The help line under an error note: muted, with its [bracketed] words as inline links. */
 function NoteHelp({ region, c, t }: { region: string | null; c: Palette; t: T }) {
-  const help = regionHelpOf(region);
-  const parts = t(help.text).split(/\[([^\]]+)\]/);
-  return <Text testID="note-help" style={[s.note, { color: c.muted }]}>
-    {parts.map((part, j) => {
-      if (j % 2 === 0) return part;
-      const link = help.links[(j - 1) / 2];
-      return <Text key={j} accessibilityRole="link" accessibilityLabel={t(link.label)} onPress={() => void Linking.openURL(link.url)} style={{ color: c.accent, textDecorationLine: 'underline' }}>{part}</Text>;
-    })}
-  </Text>;
+  return <HelpLine testID="note-help" region={region} t={t} style={[s.note, { color: c.muted }]} link={c.accent} />;
 }
 
 export function crisisLinks(res: ChatResponse): Array<{ label: Key; url: string }> {
@@ -158,7 +149,7 @@ export default function ChatScreen() {
       <Text style={[s.title, { color: c.ink }]}>{t('chat.free.title')}</Text>
       <Text style={[s.body, { color: c.ink }]}>{t('chat.free.body')}</Text>
       <Text testID={hadFirst ? 'free-had-private' : undefined} style={[s.body, { color: c.ink }]}>{hadFirst ? keepPrivate : t('chat.free.private')}</Text>
-      <Text style={[s.body, { color: c.ink }]}>{t('chat.disclosure.danger')}</Text>
+      <HelpLine region={phoneRegion()} t={t} style={[s.body, { color: c.ink }]} link={c.accent} />
       <Pressable accessibilityRole="button" testID="free-continue" onPress={() => { setFreeOk(true); setAccepted(true); void remember(FREE_CONSENT_KEY); void remember(DISCLOSURE_KEY); }} style={[s.button, { backgroundColor: c.accent }]}>
         <Text style={[s.buttonText, { color: c.on }]}>{t('chat.free.continue')}</Text>
       </Pressable>
@@ -172,7 +163,7 @@ export default function ChatScreen() {
       <Text style={[s.label, { color: c.muted }]}>{t('chat.disclosure.label')}</Text>
       {disclosure}
       <Text style={[s.body, { color: c.ink }]}>{t('chat.paid.private')}</Text>
-      <Text style={[s.body, { color: c.ink }]}>{t('chat.disclosure.danger')}</Text>
+      <HelpLine region={phoneRegion()} t={t} style={[s.body, { color: c.ink }]} link={c.accent} />
       <Pressable accessibilityRole="button" onPress={() => { setAccepted(true); void remember(DISCLOSURE_KEY); }} style={[s.button, { backgroundColor: c.accent }]}>
         <Text style={[s.buttonText, { color: c.on }]}>{t('chat.disclosure.ok')}</Text>
       </Pressable>
@@ -200,8 +191,7 @@ export default function ChatScreen() {
   async function deliver(history: ChatTurn[], overflow: boolean, conv = conversation) {
     setSending(true);
     // The phone's region picks the crisis lines (988 in the US, Línea de la Vida in Mexico, 024 in Spain).
-    let region: string | null = null;
-    try { region = getLocales()[0]?.regionCode ?? null; } catch { region = null; }
+    const region = phoneRegion();
     try {
       const res = await sendChat(settings, conv, history, fetch, !paid && !!freeOk, region, overflow);
       if (res.kind === 'overflow_consent') setPending(history);

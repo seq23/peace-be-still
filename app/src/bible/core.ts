@@ -16,7 +16,7 @@ export function translationFor(language: string): Translation {
 }
 
 /** The short name shown after every reference and on every share card ("시편 23:1 · 개역한글"). */
-export const TRANSLATION_NAME: Record<Translation, string> = { KJV: 'KJV', RV1909: 'RV 1909', KRV: '개역한글', CUVS: '和合本', CUVT: '和合本' };
+export const TRANSLATION_NAME: Record<Translation, string> = { KJV: 'KJV', RV1909: 'RV1909', KRV: '개역한글', CUVS: '和合本', CUVT: '和合本' };
 
 /** The credit line under Korean and Chinese verses, from content/bible/{krv,cuv}_source.json. */
 export const TRANSLATION_CREDIT: Partial<Record<Translation, string>> = {
