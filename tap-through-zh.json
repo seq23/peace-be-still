@@ -1,0 +1,176 @@
+{
+  "app": "Peace Be Still",
+  "brand": "every-tongue",
+  "about": "The Simplified Chinese screens (zh-Hans), on a phone set to zh-CN: both doors, the price screen, a paid chat's privacy line and the grief card's crisis line (the phone region's, never the language's). Same preview switches as tap-through.json.",
+  "locale": "zh-CN",
+  "route_storage": {
+    "peace-be-still-settings": {
+      "door": "faith",
+      "age": "adult",
+      "ageSetAt": 0,
+      "voice": "church",
+      "language": "zh-Hans",
+      "journey": "psalm-nights"
+    }
+  },
+  "journeys": [
+    {
+      "name": "first-open-zh-Hans",
+      "start": "/",
+      "steps": [
+        {
+          "see": "今晚你需要什么？",
+          "id": "door"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "借着神的话语",
+          "id": "after-door"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "faith-today-zh-Hans",
+      "start": "/",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hans",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "today"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "mindset-today-zh-Hans",
+      "start": "/",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "mindset",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "plain",
+          "language": "zh-Hans",
+          "journey": "imagination-nights"
+        }
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "today"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "paywall-zh-Hans",
+      "start": "/paid",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hans",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "see": "付费方案",
+          "id": "plans"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "paid-chat-zh-Hans",
+      "start": "/chat?paid=1",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hans",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "see": "你的聊天是私密的：付费 AI 服务不会用你输入的内容来改进它的 AI。",
+          "id": "private"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "grief-zh-Hans",
+      "start": "/grief",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hans",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "see": "找个人说说",
+          "id": "help"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "made-for-you-zh-Hans",
+      "start": "/made-for-you?paid=1&state=ready",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hans",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "mfy"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    }
+  ]
+}
