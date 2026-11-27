@@ -272,6 +272,39 @@
         "Bible chat",
         "Bible stories"
       ]
+    },
+    {
+      "query": "sleep app that reads king james bible in soft calm voice",
+      "wants": [
+        "kjv",
+        "soft voice",
+        "sleep timer"
+      ]
+    },
+    {
+      "query": "bedtime bible stories for adults to fall asleep",
+      "wants": [
+        "adults",
+        "audio",
+        "sleep stories"
+      ]
+    },
+    {
+      "query": "short prayers and bible verses for anxiety at 3am",
+      "wants": [
+        "short prayers",
+        "anxiety",
+        "audio",
+        "sleep timer"
+      ]
+    },
+    {
+      "query": "free christian sleep and prayer app no free trial",
+      "wants": [
+        "free",
+        "no trial",
+        "pricing"
+      ]
     }
   ],
   "product": {
