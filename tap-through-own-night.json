@@ -1,0 +1,101 @@
+{
+  "app": "Peace Be Still",
+  "brand": "every-tongue",
+  "about": "Write your own night and the Mindset door price screen, split from tap-through.json on 27 Nov 2026 because one flow holds at most 40 steps (boss-os MAX_STEPS). Preview switches only: ?paid=1 (preview paid access, no purchase), /own-night?state=scene|busy|limit|refused|crisis (Write your own night's server replies, fixed TEST words, no network). Journeys seed the settings onboarding writes (an adult, or a teen, on the Mindset door). No account exists; every request that is not a read is blocked.",
+  "route_storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+  "journeys": [
+    {
+      "name": "paywall-mindset",
+      "start": "/paid",
+      "storage": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } },
+      "steps": [
+        { "see": "A paid plan", "id": "plans" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "own-night-locked",
+      "start": "/nights?paid=0",
+      "storage": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } },
+      "steps": [
+        { "see": "Write your own night", "id": "entry" },
+        { "tap": "/^Write your own night/", "id": "tapped" },
+        { "see": "/^With a paid plan, you write what you hope for/", "id": "locked" },
+        { "tap": "See plans", "then": "A paid plan", "id": "plans" }
+      ]
+    },
+    {
+      "name": "own-night-write",
+      "start": "/own-night?paid=1&state=scene",
+      "storage": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } },
+      "steps": [
+        { "fill": "What do you hope for?", "value": "TEST tap-through wish: a small house with a yellow kitchen" },
+        { "tap": "Write my moment", "then": "Written with AI. Every word is yours to change.", "id": "scene" },
+        { "sweep": true },
+        { "tap": "My voice" },
+        { "tap": "Use the TEST recording (preview)", "then": "Your recording is ready.", "id": "recorded" },
+        { "tap": "Save this night", "then": "1 of 20 saved on this phone", "id": "saved" },
+        { "tap": "/^TEST moment/", "then": "Start the night", "id": "player" },
+        { "tap": "Start the night", "then": "/then the sound fades out/", "id": "playing" },
+        { "tap": "Stop the night", "then": "Start the night", "id": "stopped" }
+      ]
+    },
+    {
+      "name": "own-night-write-es",
+      "start": "/own-night?paid=1&state=scene",
+      "storage": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "es", "journey": "living-in-the-end" } },
+      "steps": [
+        { "fill": "¿Qué esperas?", "value": "PRUEBA del recorrido: una casa pequeña" },
+        { "tap": "Escribir mi momento", "then": "Escrito con IA. Puedes cambiar cada palabra.", "id": "scene" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "own-night-outage",
+      "start": "/own-night?paid=1&state=busy",
+      "storage": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } },
+      "steps": [
+        { "fill": "What do you hope for?", "value": "TEST tap-through wish" },
+        { "tap": "Write my moment", "then": "I couldn't write it right now. You can write it yourself below.", "id": "busy" }
+      ]
+    },
+    {
+      "name": "own-night-crisis",
+      "start": "/own-night?paid=1&state=crisis",
+      "storage": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } },
+      "steps": [
+        { "fill": "What do you hope for?", "value": "TEST tap-through crisis path" },
+        { "tap": "Write my moment", "then": "Nothing you wrote was kept.", "id": "crisis" },
+        { "see": { "role": "link", "name": "Call 988" }, "id": "call" }
+      ]
+    },
+    {
+      "name": "own-night-delete",
+      "start": "/own-night?paid=1",
+      "storage": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" }, "peace-be-still-own-nights": [{ "id": "tap-1", "scene": "TEST moment. I am home and the lamp is warm. It is done.", "wish": "TEST tap-through wish", "who": "", "lang": "en", "minutes": 20, "voice": "phone", "ai": true, "savedAt": 1 }] },
+      "steps": [
+        { "see": "1 of 20 saved on this phone", "id": "list" },
+        { "tap": "Delete", "then": "Delete this night and its recording from this phone?", "id": "confirm" },
+        { "tap": "Delete it", "then": "No nights saved yet.", "id": "deleted" }
+      ]
+    },
+    {
+      "name": "own-night-teen",
+      "start": "/nights?paid=1",
+      "storage": { "peace-be-still-settings": { "door": "mindset", "age": "teen", "ageSetAt": 0, "voice": "teen", "language": "en", "journey": "living-in-the-end" } },
+      "steps": [
+        { "see": "Imagination Nights", "id": "teen-nights" },
+        { "sweep": true },
+        { "goto": "/own-night?paid=1", "id": "teen-link" },
+        { "see": "Imagination Nights", "id": "teen-redirected" }
+      ]
+    }
+  ],
+  "promises": [
+    { "text": "Write your own night: your moment, read softly as you fall asleep.", "on": "paywall-mindset:plans", "built": "own-night-write:playing" }
+  ],
+  "native_only": [
+    { "feature": "recording her moment in her own voice", "why": "the web preview has no microphone; it offers the marked TEST recording instead, and a phone build never has that file", "simulator": "an iPhone build on a real phone (reviewer device step, ## Not built)" },
+    { "feature": "the phone voice and the night playing on with the screen locked", "why": "speech and lock-screen audio only exist on a phone", "simulator": "an iPhone build on a real phone (reviewer device step, ## Not built)" }
+  ]
+}

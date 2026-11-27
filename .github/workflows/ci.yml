@@ -31,6 +31,17 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 24 }
       - run: node --test worker/test/free-ai.unit.mjs
+  # Each tap-through flow file fits the runner (at most 40 steps) and is called by the preview workflow, so a
+  # PR that grows a flow fails here, not first on main (27 Nov 2026: 70 steps, main red on FLOW_INVALID).
+  tap-through-flows:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - run: node --test scripts/test/tap-through-flows.test.mjs
   # The chat prompts, test question sets and crisis lists are committed only encrypted (scripts/check-encrypted.mjs).
   encrypted:
     if: github.ref == 'refs/heads/main'

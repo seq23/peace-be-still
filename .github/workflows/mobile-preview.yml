@@ -75,8 +75,20 @@ jobs:
   # through this preview like a person, at 390 px light and dark, from tap-through.json. Red on a dead
   # button, a console error, an error screen, an unreachable step or a paid promise with no screen
   # behind it. Free (public repo); every write is blocked, nothing real is touched.
+  # One flow file holds at most 40 steps (boss-os MAX_STEPS, one review's worth), so the journeys are split
+  # across tap-through*.json, one call each, each with its own label (artifact tap-through-<label>).
+  # scripts/test/tap-through-flows.test.mjs fails a PR whose flow file is over 40 steps or has no call here.
   tap-through:
     needs: preview
     uses: seq23/boss-os/.github/workflows/tap-through.yml@main
     with:
       target: ${{ needs.preview.outputs.url }}
+      flow_file: tap-through.json
+      label: ${{ github.run_id }}-core
+  tap-through-own-night:
+    needs: preview
+    uses: seq23/boss-os/.github/workflows/tap-through.yml@main
+    with:
+      target: ${{ needs.preview.outputs.url }}
+      flow_file: tap-through-own-night.json
+      label: ${{ github.run_id }}-own-night
