@@ -326,7 +326,7 @@ test('the soak reads the free Gemini key under its current name and stops by nam
   const dir = mkdtempSync(resolve(tmpdir(), 'mfy-soak-'));
   const run = env => { try { execFileSync(process.execPath, ['worker/scripts/made-for-you-soak.mjs', 'drain', dir], { env: { PATH: process.env.PATH, ...env }, stdio: 'pipe' }); return { code: 0, out: '' }; } catch (e) { return { code: e.status, out: String(e.stderr) }; } };
   // The old name alone is not enough: a named stop that names the current one.
-  const old = run({ PBS_RT_CF_ACCOUNT: 'a', PBS_RT_CF_TOKEN: 't', PBS_RT_GEMINI: 'old', PBS_RT_OPENROUTER_PAID: 'o' });
+  const old = run({ CF2_ACCOUNT_ID: 'a', CF2_WORKERS_AI_TOKEN: 't', PBS_RT_GEMINI: 'old', PBS_RT_OPENROUTER_PAID: 'o' });
   assert.equal(old.code, 3);
   assert.match(old.out, /NAMED STOP MADE_FOR_YOU_SOAK_KEYS: PBS_RT_GEMINI_FREE missing/);
   // Phase 3's free rung reads PBS_FREE_GEMINI_API_KEY; the soak hands the key to exactly that name, never the paid one.

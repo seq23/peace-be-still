@@ -1,7 +1,6 @@
-// Local red-team entry only (scripts/worker-dev.sh with DEV_AI_TOKEN set; never deployed): the same
-// Worker, with Workers AI reached over its REST API on a token that may only run models (the CF2
-// pair). wrangler dev's remote AI binding needs a token with Workers Scripts permission, which the
-// free second account's red-team token does not have, so `wrangler dev --local` runs this instead.
+// Local red-team entry only (scripts/worker-dev.sh; never deployed): the same Worker, with Workers AI
+// reached over its REST API on the free second account only (DEV_AI_TOKEN / DEV_AI_ACCOUNT, written by
+// worker-dev.sh from the CF2 pair after worker/scripts/free-ai.mjs refused the main account).
 import { createApp, realDeps } from '../src/index';
 
 type DevEnv = Env & { DEV_AI_TOKEN: string; DEV_AI_ACCOUNT: string; DEV_LANE?: string };

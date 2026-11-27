@@ -13,8 +13,7 @@ import { appendFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } f
 import { resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import { soakStop } from './made-for-you-soak-stop.mjs';
-import { build } from '../../app/node_modules/esbuild/lib/main.js';
-import ts from '../../app/node_modules/typescript/lib/typescript.js';
+import { exitOnStop, freeAiCall, freeAiKeys, neuronMeter } from './free-ai.mjs';
 
 const [mode, dir, until] = process.argv.slice(2);
 if (!['seed', 'drain', 'summary', 'judge-reviewed'].includes(mode) || !dir) { console.error('usage: seed|drain|summary <state dir> [stop at]'); process.exit(2); }
@@ -95,24 +94,31 @@ if (mode === 'summary') {
   process.exit(made.length ? 0 : 1);
 }
 
-// Keys (coordinator ruling, 21 Nov 2026, PHASES.md "CHAT WINS" amended): the red team's PBS_RT_* keys, never
+// Workers AI: the free second account only (worker/scripts/free-ai.mjs: CF2_ACCOUNT_ID + CF2_WORKERS_AI_TOKEN; the
+// main account is refused before any call), and every call is checked against that account's daily stop first. At the
+// stop the drain exits by name; the night's state is in <state dir>/soak.db, so the same drain carries on the next day.
+// Other keys (coordinator ruling, 21 Nov 2026, PHASES.md "CHAT WINS" amended): the red team's PBS_RT_* keys, never
 // production's PBS_GEMINI_API_KEY / OPENROUTER_API_KEY (the vault holds only those, so a local run cannot pick
 // them up by mistake). Every call is booked under half of chat's cap (madeForYouRungs) and stops at MFY_SHARE_USED;
 // the night soak starts only after the chat red team has finished (com.seq.pbs-mfy-soak-once).
 // SOAK_RUNGS (optional) keeps only rungs whose id starts with one of its comma-separated prefixes: a daytime check
 // runs on Workers AI and OpenRouter only, whose UTC days reset before the 18:10 CT red team, never on Gemini's.
-const account = process.env.PBS_RT_CF_ACCOUNT, token = process.env.PBS_RT_CF_TOKEN;
 // The free Gemini key is PBS_RT_GEMINI_FREE (the red team's twin of production's PBS_FREE_GEMINI_API_KEY, the name
 // phase 3's free rung reads). The soak read the old PBS_RT_GEMINI into PBS_GEMINI_API_KEY, which the free rung no longer
 // reads, so every Gemini rung threw PBS_FREE_GEMINI_API_KEY_MISSING and the soak ran without Gemini (review of #69).
 // OpenRouter: one key for the free rung (max_price 0) and the private paid rung (zdr, US hosts), as in production
 // (OPENROUTER_API_KEY); the red team's paid-enabled twin is PBS_RT_OPENROUTER_PAID.
-export const SOAK_KEYS = ['PBS_RT_CF_ACCOUNT', 'PBS_RT_CF_TOKEN', 'PBS_RT_GEMINI_FREE', 'PBS_RT_OPENROUTER_PAID'];
+export const SOAK_KEYS = ['PBS_RT_GEMINI_FREE', 'PBS_RT_OPENROUTER_PAID'];
 const soakGemini = process.env.PBS_RT_GEMINI_FREE, soakOpenRouter = process.env.PBS_RT_OPENROUTER_PAID;
 if (['drain', 'judge-reviewed'].includes(mode) && SOAK_KEYS.some(key => !process.env[key])) {
   console.error(`NAMED STOP MADE_FOR_YOU_SOAK_KEYS: ${SOAK_KEYS.filter(key => !process.env[key]).join(', ')} missing (the red team's keys, never production's)`);
   process.exit(3);
 }
+let keys = null;
+if (['drain', 'judge-reviewed'].includes(mode)) try { keys = freeAiKeys(); } catch (e) { exitOnStop(e); }
+const meter = keys && neuronMeter(keys, { log: () => {} });
+const { build } = await import('../../app/node_modules/esbuild/lib/main.js');
+const { default: ts } = await import('../../app/node_modules/typescript/lib/typescript.js');
 const allowed = (process.env.SOAK_RUNGS ?? '').split(',').map(x => x.trim()).filter(Boolean);
 const keep = rungs => allowed.length ? rungs.filter(r => allowed.some(prefix => r.id.startsWith(prefix))) : rungs;
 const { config: wrangler } = ts.parseConfigFileTextToJson('wrangler.jsonc', readFileSync(resolve(chat, 'worker/wrangler.jsonc'), 'utf8'));
@@ -181,12 +187,13 @@ if (mode === 'seed') {
 
 // drain: the production claim loop until the stop time or the promise, whichever is first.
 const print = console.log;
+// One call's worst case: llama-3.3-70b's list rates (26,668 neurons per million tokens in, 204,805 out; the dearest
+// model the rungs use), with ~3,000 tokens in and the call's whole token room out.
+const callNeurons = inputs => Math.ceil(3_000 * 0.026668 + (inputs?.max_tokens ?? 2_000) * 0.204805);
 const AI = {
   async run(model, inputs) {
-    const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/ai/run/${model}`, {
-      method: 'POST', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
-      body: JSON.stringify(inputs), signal: AbortSignal.timeout(120_000),
-    });
+    try { await meter.need(callNeurons(inputs), `a ${model} call`); } catch (e) { log({ event: 'stop', code: e.code }); exitOnStop(e, resolve(dir, 'soak.db')); }
+    const res = await freeAiCall(keys, `run/${model}`, inputs, { timeoutMs: 120_000 });
     const j = await res.json();
     if (!j.success) throw new Error(`${res.status} ${JSON.stringify(j.errors ?? []).slice(0, 200)}`);
     return j.result;
