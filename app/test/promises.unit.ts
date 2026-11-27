@@ -58,3 +58,17 @@ test('where recording is promised (App Store text, legal pages, app strings), th
   assert.match(readFileSync('src/ownNight/adapters.ts', 'utf8'), /export const canRecord = \(\) => Platform\.OS === 'ios';/);
   assert.match(readFileSync('src/ownNight/Recorder.tsx', 'utf8'), /useAudioRecorder\(RecordingPresets\.HIGH_QUALITY\)/);
 });
+
+// The journey picker shows a journey's purpose line to every age band it is offered to, teens
+// included, and on phones where a paid feature is hidden. So a line seen by more than adults never
+// sells a paid feature (#151 review, 27 Nov 2026: "With a paid plan, fall asleep to it" reached teens).
+test('journey purpose lines shown beyond adults never promise a paid feature', async () => {
+  const { journeys } = await import('../src/model');
+  const sells = /paid|premium|subscri|plan de pago|de pago|suscrip/i;
+  for (const lang of ['en', 'es'] as const) {
+    const strings = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
+    for (const j of journeys.filter(x => !x.ages || x.ages.some(a => a !== 'adult'))) {
+      assert.doesNotMatch(String(strings[j.purpose] ?? ''), sells, `${lang} ${j.id}: ${strings[j.purpose]}`);
+    }
+  }
+});
