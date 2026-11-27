@@ -229,7 +229,7 @@ test('the phone build keeps own nights in the excluded folder, and Android leave
   for (const xml of Object.values(plugin.FILES) as string[]) assert.match(xml, /<exclude domain="file" path="own-nights\/" \/>/);
   assert.match(plugin.FILES['pbs_data_extraction_rules.xml'], /<cloud-backup>[\s\S]*own-nights[\s\S]*<\/cloud-backup>\s*<device-transfer>[\s\S]*own-nights[\s\S]*<\/device-transfer>/);
   assert.ok(!(Object.values(plugin.FILES) as string[]).some(x => /<include/.test(x)), 'an include rule would drop the rest of the app from backup');
-  const manifest = { manifest: { application: [{ $: { 'android:allowBackup': 'true' } }] } };
+  const manifest: { manifest: { application: Array<{ $: Record<string, string> }> } } = { manifest: { application: [{ $: { 'android:allowBackup': 'true' } }] } };
   plugin.setBackupRules(manifest);
   assert.equal(manifest.manifest.application[0].$['android:fullBackupContent'], '@xml/pbs_backup_rules');
   assert.equal(manifest.manifest.application[0].$['android:dataExtractionRules'], '@xml/pbs_data_extraction_rules');
@@ -239,4 +239,32 @@ test('the phone build keeps own nights in the excluded folder, and Android leave
   for (const [file, xml] of Object.entries(plugin.FILES)) assert.equal(readFileSync(join(root, 'app/src/main/res/xml', file), 'utf8'), xml);
   const config = readFileSync(new URL('../app.config.ts', import.meta.url), 'utf8');
   assert.match(config, /'\.\/plugins\/own-night-backup'/);
+});
+
+// The consent (Apple 5.1.2(i)) and the privacy line name exactly the services the Worker sends a wish to: the
+// safety model, the paid route and its backup (worker/wrangler.jsonc, worker/src/ownNight.ts). A changed model or
+// route with old words fails here.
+test('the own-night consent names every service the Worker sends a wish to, from its live config', async () => {
+  const wrangler = readFileSync(new URL('../../worker/wrangler.jsonc', import.meta.url), 'utf8');
+  const v = (name: string) => wrangler.match(new RegExp(`"${name}": "([^"]+)"`))?.[1];
+  const worker = readFileSync(new URL('../../worker/src/ownNight.ts', import.meta.url), 'utf8');
+  assert.match(worker, /deps\.risk\(env, turns\)/, 'every wish past the phrase floor goes to the safety model');
+  assert.match(worker, /deps\.rungs\(env, now, 'paid', false\)/, 'the moment is written on the paid lane');
+  // What the config names, in the words a person reads.
+  const NAMES: Record<string, Record<string, string>> = {
+    WORKERS_AI_RISK_MODEL: { '@cf/': 'Cloudflare Workers AI' },
+    PAID_PROVIDER: { 'openrouter-zdr': 'OpenRouter' },
+    PAID_MODEL: { 'deepseek/deepseek-v4.1-flash': 'DeepSeek V4.1 Flash' },
+    PAID_BACKUP_MODEL: { 'gemini-': 'Google Gemini' },
+  };
+  const { strings } = await import('../src/i18n');
+  const es = { 'Cloudflare Workers AI': 'Cloudflare Workers AI', OpenRouter: 'OpenRouter', 'DeepSeek V4.1 Flash': 'DeepSeek V4.1 Flash', 'Google Gemini': 'Google Gemini' } as Record<string, string>;
+  for (const [key, map] of Object.entries(NAMES)) {
+    const value = v(key);
+    assert.ok(value, `${key} is not in wrangler.jsonc`);
+    const hit = Object.entries(map).find(([prefix]) => value!.startsWith(prefix));
+    assert.ok(hit, `${key} is ${value}: name it in ownNight.consent.body (EN and ES) and add it here`);
+    for (const lang of ['en', 'es'] as const) assert.ok(String(strings[lang]['ownNight.consent.body']).includes(lang === 'en' ? hit![1] : es[hit![1]]), `${lang} consent does not name ${hit![1]} (${key})`);
+  }
+  for (const lang of ['en', 'es'] as const) assert.ok(String(strings[lang]['ownNight.privacy']).includes('Cloudflare Workers AI'), `${lang} privacy line hides the safety model`);
 });

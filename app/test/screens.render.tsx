@@ -2942,7 +2942,9 @@ let backupMarks = true;
 // A phone binary built with Write your own night has the ExpoSpeech native module (the phone voice) and, on iPhone,
 // the backup mark for its folder (modules/backup-exclude).
 const nativeOwnNight = () => ({ ExpoSpeech: {}, PBSBackupExclude: { exclude: (uri: string) => { excludedFromBackup.push(uri); return backupMarks; } } });
-beforeEach(() => { (globalThis as any).__pbsNative = nativeOwnNight(); (globalThis as any).__pbsFiles = new Map(); (globalThis as any).__pbsDirs = new Set(); excludedFromBackup = []; backupMarks = true; });
+const OWN_NIGHT_CONSENT = 'peace-be-still-own-night-consent';
+// Every own-night test but the consent one starts after her one-time yes to the services that read a wish.
+beforeEach(() => { (globalThis as any).__pbsNative = nativeOwnNight(); (globalThis as any).__pbsFiles = new Map(); (globalThis as any).__pbsDirs = new Set(); excludedFromBackup = []; backupMarks = true; local.set(OWN_NIGHT_CONSENT, 'yes'); });
 
 test('Write your own night: a phone on an older binary (no phone-voice module, no microphone question) never shows it, even when updated over the air', async () => {
   (globalThis as any).__pbsNative = {};
@@ -3043,14 +3045,25 @@ test('Write your own night, paid: write -> change a word -> save; the wish goes 
   clearNights();
   sceneRequests.length = 0;
   sceneAnswer = () => Response.json({ kind: 'scene', scene: sceneText, remaining: 49 });
+  local.delete(OWN_NIGHT_CONSENT);
   const tree = await asPaid(() => mount('ownNight', mindsetAdult));
   assert.match(strings(tree), /No nights saved yet\./);
   await press(tree, 'Write a new night');
-  assert.match(strings(tree), /sent once to our private AI service/);
+  assert.match(strings(tree), /read first by a safety model on Cloudflare Workers AI, then sent once to our private AI service/);
   await typeInto(tree, 'What do you hope for?', 'TEST a cabin by the lake with a blue door');
   await typeInto(tree, 'Who is with you? (optional)', 'my sister');
   await press(tree, '90 min');
+  // Apple 5.1.2(i): the first wish waits for her yes, naming every service that reads it; nothing is sent before.
   await press(tree, 'Write my moment');
+  assert.equal(sceneRequests.length, 0, 'sent before her yes');
+  for (const name of ['Cloudflare Workers AI', 'DeepSeek V4.1 Flash', 'OpenRouter', 'DeepInfra, Together or Fireworks', 'Google Gemini'])
+    assert.ok(strings(tree).includes(name), `the consent does not name ${name}`);
+  const opened: string[] = [];
+  (globalThis as any).__pbsOpenURL = (url: string) => opened.push(url);
+  await press(tree, 'Privacy policy');
+  assert.deepEqual(opened, ['https://peacebestillapp.com/privacy']);
+  await press(tree, 'Agree and write my moment');
+  assert.equal(local.get(OWN_NIGHT_CONSENT), 'yes');
   assert.equal(sceneRequests.length, 1);
   assert.equal(sceneRequests[0].auth, 'Bearer render-token');
   assert.deepEqual(sceneRequests[0].body, { wish: 'TEST a cabin by the lake with a blue door', who: 'my sister', lang: 'en', region: 'US' });
@@ -3083,6 +3096,21 @@ test('Write your own night, paid: write -> change a word -> save; the wish goes 
   await press(tree, 'Delete it');
   assert.deepEqual(ownNightsSaved(), []);
   assert.match(strings(tree), /No nights saved yet\./);
+  await act(async () => tree.unmount());
+});
+
+test('Write your own night: "Not now" sends nothing and opens the editor to write it herself; no yes is kept', async () => {
+  clearNights();
+  local.delete(OWN_NIGHT_CONSENT);
+  sceneRequests.length = 0;
+  const tree = await asPaid(() => mount('ownNight', mindsetAdult));
+  await press(tree, 'Write a new night');
+  await typeInto(tree, 'What do you hope for?', 'TEST a quiet morning');
+  await press(tree, 'Write my moment');
+  await press(tree, "Not now, I'll write it myself");
+  assert.equal(sceneRequests.length, 0);
+  assert.ok(!local.has(OWN_NIGHT_CONSENT));
+  assert.ok(inputs(tree).some(n => n.props.accessibilityLabel === 'Your moment'), 'the editor is open');
   await act(async () => tree.unmount());
 });
 
