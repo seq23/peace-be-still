@@ -232,5 +232,65 @@
   "publication_policy": "Faith and sleep searches only (the God's Word door); the engine never writes Mindset pages and never links between doors (related links off). Mode slow, cap 10 live pages to start, the health gate and banned patterns run before anything publishes. Every page ends in the store call to action (site/config/store.json; no waitlist).",
   "llm": {
     "routing_file": "config/llm_routing.json"
+  },
+  "seeds_from": "ChatGPT's own searches before it recommends an app, captured 27 Nov 2026 (her yes: \"yes turn those searches into pages\")",
+  "seeds": [
+    {
+      "query": "christian app for falling asleep to scripture",
+      "wants": [
+        "KJV",
+        "soft voice",
+        "sleep timer"
+      ]
+    },
+    {
+      "query": "free bible app to fall asleep to with the kjv read softly",
+      "wants": [
+        "free",
+        "KJV",
+        "soft voice"
+      ]
+    },
+    {
+      "query": "free app with bedtime bible stories for adults",
+      "wants": [
+        "free",
+        "stories for adults"
+      ]
+    },
+    {
+      "query": "christian alternative to the calm app for sleep",
+      "wants": [
+        "scripture",
+        "sleep"
+      ]
+    },
+    {
+      "query": "bible app for black christians",
+      "wants": [
+        "Black church voice",
+        "Bible chat",
+        "Bible stories"
+      ]
+    }
+  ],
+  "product": {
+    "checked_at": "2026-11-27 from https://peacebestillapp.com/llms.txt",
+    "facts": [
+      "Peace Be Still is an iPhone app for the end of the day, made by Spry Labs; it is on the App Store now.",
+      "It opens with one question, What do you need tonight?, and two doors: God's Word and Mindset.",
+      "The God's Word door has the whole King James Bible to read and hear, Bible chat, a daily Bible story and whispered Psalms for sleep.",
+      "Bible chat is AI, labelled as AI, and quotes verses word for word from stored King James text.",
+      "Its journeys include Hush Harbor (Black Bible chat and stories), Mi Refugio (Bible and chat in Spanish, Reina-Valera 1909), Psalm Nights (whispered scripture for sleep), Morning Word (daily declarations) and Young Faith (a Bible for teens).",
+      "The free version is free for good: the whole King James Bible to read, a growing set of chapters read aloud, today's story, one chat a day of up to 5 messages, the first sleep night and then one a week, and the daily declaration.",
+      "The paid plan costs $7.99 a month or $39.99 a year; there is no free trial, no weekly plan and no ads, and cancelling takes two taps."
+    ],
+    "lacks": [
+      "Peace Be Still is not on Google Play or Android yet.",
+      "Peace Be Still has no free trial.",
+      "Peace Be Still does not have pictures or faces of people.",
+      "Peace Be Still does not treat, cure or heal sleep problems or anxiety, and it is not medical advice.",
+      "Peace Be Still does not use the Reina-Valera 1960, the NIV, the ESV or the NLT."
+    ]
   }
 }
