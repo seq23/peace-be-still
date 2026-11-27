@@ -172,7 +172,9 @@ test('paid private chat is 50 messages a day and free is 5 (her rulings, 21 Nov 
 // robot reaches, or to a native_only entry that says why the preview cannot show it; nothing on the price screen
 // is left unmapped, and the small print's number there is the enforced setting.
 test('every selling line on the paywall is mapped to a tap-through step, and its count is PAID_CHAT_MESSAGES', () => {
-  const flow = JSON.parse(read('tap-through.json'));
+  // The flow is split across files (one holds at most 40 steps); the Mindset price screen is in tap-through-own-night.json.
+  const flows = ['tap-through.json', 'tap-through-own-night.json'].map(f => JSON.parse(read(f)));
+  const flow = { journeys: flows.flatMap(f => f.journeys), promises: flows.flatMap(f => f.promises), native_only: flows.flatMap(f => f.native_only ?? []) };
   const source = read('app/app/paid/index.tsx');
   const block = source.slice(source.indexOf('<View style={{ gap: 8 }}>'), source.indexOf("t('paid.madeForYouNote')") + 30);
   const faith = /faith: \[([^\]]+)\]/.exec(source)![1];
@@ -186,7 +188,7 @@ test('every selling line on the paywall is mapped to a tap-through step, and its
     const line = String(strings.en[key]).replace('%{count}', String(PAID_CHAT_MESSAGES)).replace(/’/g, "'");
     let left = line;
     for (const p of mapped.filter(p => line.includes(p.text))) left = left.split(p.text).join('');
-    assert.match(left, /^[\s.;,]*$/, `${key} ("${line}") is not fully mapped in tap-through.json; unmapped: "${left.trim()}"`);
+    assert.match(left, /^[\s.;,]*$/, `${key} ("${line}") is not fully mapped in the tap-through flows; unmapped: "${left.trim()}"`);
   }
   for (const p of mapped) {
     assert.ok(p.native_only ? flow.native_only.some((n: { feature: string }) => n.feature === p.native_only) : steps.has(p.built!), `"${p.text}" maps to ${p.built ?? p.native_only}, which is not in the flow`);

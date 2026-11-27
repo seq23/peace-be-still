@@ -57,7 +57,9 @@ AI tests never bill (her answer 27 Nov 2026, "Remove it, never bill"). Every tes
 ## The tap-through (every app PR)
 
 After the phone preview is published, `.github/workflows/mobile-preview.yml` calls boss-os
-`tap-through.yml` (the runner on boss-os main), driven by `tap-through.json` at the repo root: a robot
+`tap-through.yml` (the runner on boss-os main) once per flow file at the repo root (`tap-through.json`, and
+`tap-through-own-night.json` for Write your own night and the Mindset price screen; one file holds at most 40 steps, and
+`scripts/test/tap-through-flows.test.mjs` fails a PR whose file is over that or has no call): a robot
 taps through the preview like a person at 390 px, light and dark, with a video per journey and a shot per
 step (artifact `tap-through-<run id>`). Journeys: the door, Today, every tab, the paid plan screen
 (`/paid`), the tabs with preview paid access (`?paid=1`), Settings, and the hidden states opened by their
