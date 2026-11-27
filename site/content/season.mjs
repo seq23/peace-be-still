@@ -206,7 +206,7 @@ ${V("MAT 6:17-18")}`],
 ${V("PSA 30:5")}`],
       ["The fast in Peace Be Still", `<p>The app has no fasting plan inside it; this page is the plan. What it does have helps each day of it:</p>
 <ul>
-<li><strong>Morning Word · Daily Declarations:</strong> a declaration each morning that stands on one verse, quoted word for word.</li>
+<li><strong>Morning Word · Daily Declarations:</strong> a declaration each morning that stands on a verse or two, quoted word for word.</li>
 <li><strong>Hush Harbor · Black Bible Chat &amp; Stories:</strong> stories of people who fasted, told in a Black church voice: Esther (“For Such a Time as This”), Daniel (“Didn't My Lord Deliver Daniel”) and Jonah, whose message moved Nineveh to fast (“Jonah Ran, and God Called Again”).</li>
 <li><strong>Psalm Nights · Whispered Scripture for Sleep:</strong> a whispered psalm at bedtime when the day was long.</li>
 </ul>

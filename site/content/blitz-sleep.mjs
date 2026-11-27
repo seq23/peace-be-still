@@ -402,7 +402,7 @@ ${V("PSA 118:17")}`],
 <tr><td>Sunday</td><td>I will give thanks, for the Lord is good.</td><td>${Q("PSA 107:1")}</td></tr>
 </tbody></table>`],
       ["What should I declare over my day?", `<p>Things scripture actually says: that God is with you, that his mercy is new, that you can be still, that you will give thanks. Be wary of declarations that promise a result the verse never promised. A declaration is agreement with God's Word, not a way to make God do something.</p>`],
-      ["Morning Word in Peace Be Still", `<p>Peace Be Still, {{stores.tag}}, has Morning Word · Daily Declarations: one King James verse, one declaration to say out loud, and a short prayer, with one gentle reminder a day at most that you can turn off. A daily declaration is in the free version every day; a paid plan adds declaration topics.</p>`],
+      ["Morning Word in Peace Be Still", `<p>Peace Be Still, {{stores.tag}}, has Morning Word · Daily Declarations: a King James verse (sometimes two), one declaration to say out loud, and a short prayer, with one gentle reminder a day at most that you can turn off. A daily declaration is in the free version every day; a paid plan adds declaration topics.</p>`],
     ],
     faq: [
       ["Are declarations biblical?", `Saying God's Word out loud is all through scripture: the Psalms declare his works, and Romans 10:10 says ${F("ROM 10:10", "with the mouth confession is made")}. A declaration is biblical when it stays with what the verse says.`],

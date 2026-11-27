@@ -82,7 +82,7 @@ ${V("PSA 4:8")}`],
       ["What does “living in the end” mean?", `<p>It means picturing the moment after the thing you hope for has already happened, and staying with the feeling of that moment, instead of picturing the effort to get there. In a sleep meditation the “end” is one small scene you return to every night.</p>`],
       ["Why do people do it at bedtime?", `<p>The last minutes before sleep are quiet and drowsy, so a short scene is easy to hold and replay. Many people also like that the practice ends the day on something hopeful rather than on the news or a scrolling feed. It is a nightly habit; there is no promise of any outcome.</p>`],
       ["Can I add declarations to it?", `<p>Yes. Many people say one short declaration out loud before lying down, and another in the morning, written in the same present tense as their scene. Keep it to one line you can remember.</p>`],
-      ["How will Peace Be Still do it?", `<p>Peace Be Still is a phone app {{stores.tag}}. In its Mindset door, <strong>Imagination Nights</strong> are whispered night sessions built from a scene you write, on an always-dark screen with a sleep timer, and <strong>Morning Word</strong> gives you a short declaration to say out loud. The free version includes your first night and then one a week; a paid plan ($7.99 a month or $39.99 a year, no trial) opens a session every night.</p>`],
+      ["How will Peace Be Still do it?", `<p>Peace Be Still is a phone app {{stores.tag}}. In its Mindset door, <strong>Imagination Nights</strong> are whispered night sessions inside a scene (with a paid plan, one made from a scene you write), on an always-dark screen with a sleep timer, and <strong>Morning Word</strong> gives you a short declaration to say out loud. The free version includes your first night and then one a week; a paid plan ($7.99 a month or $39.99 a year, no trial) opens a session every night.</p>`],
     ],
     faq: [
       ["What is the law of assumption?", "The law of assumption is the idea that assuming a wish is already fulfilled, and living from that feeling, shapes your experience. People practise it with imagination, short scenes and declarations, often at bedtime. It is a personal practice and belief, not a proven method, and this page makes no promise of results."],
@@ -230,7 +230,7 @@ ${V("PRO 30:5-6")}`],
       ["What does Bible chat include free in Peace Be Still?", `<table class="t"><thead><tr><th>Free version, forever</th><th>Paid plan ($7.99 a month or $39.99 a year)</th></tr></thead><tbody>
 <tr><td>One chat a day, up to 5 messages, shown as “N of 5 messages left today”</td><td>${claimText("en")}</td></tr>
 <tr><td>The whole King James Bible to read, and nearly every chapter read aloud</td><td>Chat that remembers what you are carrying</td></tr>
-<tr><td>Today's Bible story</td><td>Every past story and longer journeys</td></tr>
+<tr><td>Today's Bible story</td><td>Every past story and longer reading plans</td></tr>
 <tr><td>Your first sleep night free, then one a week</td><td>A sleep session every night, plus ones made for you</td></tr>
 <tr><td>A daily declaration, basic 7-day plans, saved verses, journal, streak and share cards</td><td>Declaration topics and offline downloads</td></tr>
 </tbody></table>

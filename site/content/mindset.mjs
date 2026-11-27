@@ -519,7 +519,7 @@ ${CRISIS}`],
 <li><strong>Huge, vague scenes</strong> are hard to picture; one ordinary day is easier.</li>
 <li><strong>Rewriting it daily</strong> can turn it into worry. One script, read nightly, is enough.</li>
 </ul>`],
-      app("Scripts in Peace Be Still", "In Peace Be Still's Mindset door, your script becomes your scene: write it once (“Write it as if it is true now”), and Imagination Nights whisper a session around it.", ["nights", "journal"]),
+      app("Scripts in Peace Be Still", "In Peace Be Still's Mindset door, your script becomes your scene: write it once (“Write it as if it is true now”) and keep it in your journal; with a paid plan, a session made for you can be whispered around what you write.", ["nights", "journal"]),
     ],
     faq: [
       ["Should scripting be past or present tense?", "Either works. Past tense (a diary of a day that happened) feels natural to many people; present tense feels more immediate."],
