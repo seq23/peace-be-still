@@ -156,7 +156,7 @@ export function homeHtml(lang, store = storeConfig()) {
     { "@type": "Organization", "@id": `${BASE}/#org`, name: "Peace Be Still", url: `${BASE}/`, logo: `${BASE}/icon-512.png`, sameAs: orgSameAs(store), parentOrganization: ENTITY.parentOrganization },
     { "@type": "WebSite", "@id": `${BASE}/#site`, name: "Peace Be Still", url: `${BASE}/`, inLanguage: ["en", "es"], publisher: { "@id": `${BASE}/#org` } },
     { "@type": "WebPage", "@id": `${url}#page`, url, name: t.title, inLanguage: lang, isPartOf: { "@id": `${BASE}/#site` }, about: { "@id": `${BASE}/#app` }, datePublished: PUBLISHED, dateModified: UPDATED, speakable: { "@type": "SpeakableSpecification", cssSelector: ["#what", "#faq"] } },
-    { "@type": "MobileApplication", "@id": `${BASE}/#app`, name: "Peace Be Still", operatingSystem: "iOS, Android", applicationCategory: "LifestyleApplication", inLanguage: ["en", "es"],
+    { "@type": "MobileApplication", "@id": `${BASE}/#app`, name: "Peace Be Still", operatingSystem: [store.app_store_url && "iOS", store.play_url && "Android"].filter(Boolean).join(", ") || "iOS, Android", applicationCategory: "LifestyleApplication", inLanguage: ["en", "es"],
       description: "A phone app with two doors: God's Word (the King James Bible to read and hear, whispered Psalms for sleep, Bible chat, daily declarations) and Mindset (daily declarations, Imagination Nights and a calm chat). {{stores.ld}}",
       publisher: { "@id": `${BASE}/#org` },
       ...(listings.length ? { downloadUrl: listings.length === 1 ? listings[0] : listings, installUrl: listings[0] } : {}),

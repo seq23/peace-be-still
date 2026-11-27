@@ -266,3 +266,11 @@ test("/api/go/ never carries anything from the request but our own campaign and 
   assert.equal(goTarget(new URL("https://peacebestillapp.com/api/go/"), store), null);
   assert.equal(goTarget(new URL("https://peacebestillapp.com/go/app-store"), store), null, "only /api/go/ redirects");
 });
+
+test("the home page's structured data names only the stores that are live (promise audit 27 Nov 2026)", async () => {
+  const { homeHtml } = await import("../content/home.mjs");
+  const os = (store) => JSON.stringify(homeHtml("en", { ...storeConfig(), ...store })).match(/operatingSystem\\":\\"([^\\"]*)/)[1];
+  assert.equal(os({ app_store_url: "https://apps.apple.com/us/app/x/id1", play_url: null }), "iOS");
+  assert.equal(os({ app_store_url: null, play_url: "https://play.google.com/store/apps/details?id=x" }), "Android");
+  assert.equal(os({ app_store_url: "https://apps.apple.com/us/app/x/id1", play_url: "https://play.google.com/store/apps/details?id=x" }), "iOS, Android");
+});
