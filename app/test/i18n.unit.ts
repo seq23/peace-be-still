@@ -79,6 +79,9 @@ test('the crisis card buttons follow the reply text, in its order, from the same
   assert.deepEqual(urls('Please reach out right now to the 988 Suicide & Crisis Lifeline. If you are in danger this minute, call 911.'), ['tel:988', 'sms:988']);
   assert.deepEqual(urls("Please don't take any extra. call Poison Control now at 1-800-222-1222. call 911 now. call or text 988."), ['tel:18002221222', 'tel:911', 'tel:988', 'sms:988']);
   assert.deepEqual(urls('Please reach a crisis line where you live: findahelpline.com lists free ones.'), ['https://findahelpline.com']);
+  assert.deepEqual(urls('지금 있는 곳의 위기 상담 전화에 연락해 주세요. findahelpline.com에서 찾을 수 있어요.'), ['https://findahelpline.com']);
+  assert.deepEqual(urls('请联系你所在地的危机热线：findahelpline.com 列出了免费热线。'), ['https://findahelpline.com']);
+  assert.deepEqual(urls('see notfindahelpline.com.evil.example'), []);
   // A KR reply never offers a US button, and a phone number that merely contains a line's digits is not that line.
   assert.ok(!urls('지금 바로 109에 전화해 주세요. 지금 위험하다면 119에 전화하세요.').some(u => u.includes('988') || u.includes('911')));
   assert.deepEqual(urls('Please call 1-800-799-7233. If you ever think about ending your life, call or text 988. If you are in danger this minute, call 911.'), ['tel:18007997233', 'sms:88788?body=START', 'tel:988', 'sms:988']);

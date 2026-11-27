@@ -81,7 +81,8 @@ export function crisisLinks(text: string, lang: Language): HelpLink[] {
     const name = row.name?.[lang];
     links.push(name ? { label: 'chat.call.named', values: { name, line: row.line }, url: `tel:${row.tel}` } : { label: 'chat.call.line', values: { line: row.line }, url: `tel:${row.tel}` }, { label: 'chat.call.line', values: { line: row.emergency }, url: `tel:${row.emergency}` });
   }
-  if (text.includes('findahelpline.com')) links.push({ label: 'chat.findHelpline', url: FIND_HELPLINE });
+  // The reply names the site in its words (it is fixed text, never a URL to follow): the button opens FIND_HELPLINE itself.
+  if (/(?<![\w.-])findahelpline\.com(?![\w/-])/.test(text)) links.push({ label: 'chat.findHelpline', url: FIND_HELPLINE });
   if (/(?<![\d-])988(?![\d-])/.test(text)) links.push({ label: 'chat.call.988', url: 'tel:988' }, { label: 'chat.text.988', url: 'sms:988' });
   return links;
 }
