@@ -25,7 +25,7 @@ const AQ = {
 const BASE_AF = { ...D, lang: "en", door: "faith", group: G };
 
 const TODAY_TABLE = `<table class="t"><thead><tr><th>In the app</th><th>Today</th></tr></thead><tbody>
-<tr><td>The Bible</td><td>The whole King James Version to read, free. A growing set of chapters read aloud.</td></tr>
+<tr><td>The Bible</td><td>The whole King James Version to read, free. Nearly every chapter read aloud.</td></tr>
 <tr><td>Morning Word · Daily Declarations</td><td>A declaration each morning, built on one verse quoted word for word.</td></tr>
 <tr><td>Bible chat</td><td>Arriving with the app's launch. It is AI, and every answer will say so.</td></tr>
 <tr><td>Psalm Nights</td><td>A psalm whispered at bedtime with the screen dark (an AI voice).</td></tr>
@@ -71,7 +71,7 @@ ${V("PSA 118:17")}`],
       ["Which Bible does it use?", "The King James Version, read from a stored copy, with book, chapter and verse."],
       ["Is it for one church or denomination?", "No. It keeps to the text of Scripture so believers from Pentecostal, Anglican, Methodist, Presbyterian, Baptist and independent churches can all use it. For your own situation, it points you to your pastor."],
       ["Is the chat a pastor or a prophet?", "No. The Bible chat, arriving with the app's launch, is AI and will say so on every answer. It is not a pastor or a person; for your own situation, talk with your pastor."],
-      ["Is it free?", "Yes. The free version stays free: the whole KJV to read and hear, today's story, one chat a day of up to 5 messages, your first sleep night and then one a week, and a daily declaration. A paid plan is $7.99 a month or $39.99 a year."],
+      ["Is it free?", "Yes. The free version stays free: the whole KJV to read, and nearly every chapter read aloud, today's story, one chat a day of up to 5 messages, your first sleep night and then one a week, and a daily declaration. A paid plan is $7.99 a month or $39.99 a year."],
     ],
     relatedTitle: "Prayer points and vigils",
     related: [...Object.values(AQ), "/questions/daily-bible-declarations/"],
@@ -275,7 +275,7 @@ ${V("DEU 28:6")}`],
     indexLabel: "Is there a prayer points app?",
     indexNote: "Four things to check, and an honest note on Peace Be Still.",
     definition: "A prayer points app gives you short, specific prayers to work through, ideally each tied to a Bible verse. When choosing one, check four things: that every point shows its chapter and verse, that the Bible translation is named, that no ads interrupt prayer, and that no free trial quietly turns into a yearly charge.",
-    quick: "Look for chapter and verse on every point, a named translation, no ads, and the price in dollars before you tap. Peace Be Still does not have prayer points yet; they are being built for January 2027.",
+    quick: "Look for chapter and verse on every point, a named translation, no ads, and the price shown before you tap. Peace Be Still does not have prayer points yet; they are being built for January 2027.",
     bestFor: "people who pray with prayer points and want them on their phone without ads or surprise charges.",
     sections: [
       ["1. Every point stands on a verse", `<p>A prayer point is strongest when you can see what it stands on. Check that the app shows the chapter and verse for every point, and that the verse is quoted, not paraphrased.</p>

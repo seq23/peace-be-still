@@ -35,21 +35,21 @@ const CRISIS_ES = `<p class="muted">Las afirmaciones no son atención médica. S
 // ---- The app, said once, at the end of each page.
 const FEAT = {
   en: {
-    words: `<li><strong>Morning Word · Daily Declarations:</strong> one line to say out loud, morning and night, such as ${say("mindset.begin.1")} Free every day; a plan adds topics (${TOPICS("en")}).</li>`,
+    words: `<li><strong>Morning Word · Daily Declarations:</strong> one line to say out loud each morning, such as ${say("mindset.begin.1")} Free every day; a plan adds topics (${TOPICS("en")}).</li>`,
     nights: `<li><strong>Imagination Nights:</strong> ${NIGHTS} whispered night sessions. Each is a short teaching, a scene read softly, then quiet, on a dark screen with a sleep timer that fades out. Your first night is free, then one a week; a plan opens one every night.</li>`,
     chat: `<li><strong>Mindset chat:</strong> say what is on your mind and get a short, calm answer, marked AI every time; it is not a counselor or a person. Free chat (one a day, up to ${F.free} messages) uses a free AI service that may keep what you type, so the app asks before your first one. With a paid plan, the first ${F.paid} messages each day are private and never used to train AI.</li>`,
     journal: `<li><strong>A journal that stays on your phone:</strong> Peace Be Still never receives your entries (<a href="/privacy">privacy policy</a>).</li>`,
   },
   es: {
-    words: `<li><strong>Morning Word · Daily Declarations:</strong> una frase para decir en voz alta, de mañana y de noche, como ${say("mindset.begin.1", "es")} Gratis cada día; un plan suma temas (${TOPICS("es")}).</li>`,
+    words: `<li><strong>Morning Word · Daily Declarations:</strong> una frase para decir en voz alta cada mañana, como ${say("mindset.begin.1", "es")} Gratis cada día; un plan suma temas (${TOPICS("es")}).</li>`,
     nights: `<li><strong>Imagination Nights:</strong> ${NIGHTS} sesiones nocturnas susurradas. Cada una trae una enseñanza corta, una escena leída en voz baja y luego silencio, con la pantalla oscura y un temporizador que baja el volumen. La primera noche es gratis, luego una por semana; un plan abre una cada noche.</li>`,
     chat: `<li><strong>Chat de Mentalidad:</strong> escribe lo que tienes en mente y recibe una respuesta corta y tranquila, marcada como IA; no es un consejero ni una persona. El chat gratis (uno al día, hasta ${F.free} mensajes) usa un servicio de IA gratis que puede guardar lo que escribes, por eso la app pregunta antes del primero. Con un plan de pago, los primeros ${F.paid} mensajes de cada día son privados y nunca se usan para entrenar IA.</li>`,
     journal: `<li><strong>Un diario que se queda en tu teléfono:</strong> Peace Be Still nunca recibe lo que escribes (<a href="/es/privacidad">privacidad</a>).</li>`,
   },
 };
 const PRICE = {
-  en: `<p>Peace Be Still is {{stores.tag}}. It is free to download, with a free version that stays free. A plan is ${F.monthly} a month or ${F.yearly} a year: no trial, no ads, and you cancel in two taps.</p>`,
-  es: `<p>{{stores.line}} Es gratis para descargar, con una versión gratis que sigue gratis. Un plan cuesta ${F.monthly} al mes o ${F.yearly} al año: sin prueba, sin anuncios, y se cancela en dos toques.</p>`,
+  en: `<p>Peace Be Still is {{stores.tag}}. It is free to download, with a free version that stays free. A plan is ${F.monthly} a month or ${F.yearly} a year: no trial, no ads, and you can cancel any time from the paid screen.</p>`,
+  es: `<p>{{stores.line}} Es gratis para descargar, con una versión gratis que sigue gratis. Un plan cuesta ${F.monthly} al mes o ${F.yearly} al año: sin prueba, sin anuncios, y se cancela cuando quieras desde la pantalla de pago.</p>`,
 };
 // The last section: a heading, one line on how it fits this question, the features that matter here.
 const app = (heading, lead, keys, lang = "en") => [heading, `<p>${lead}</p>\n<ul>\n${keys.map((k) => FEAT[lang][k]).join("\n")}\n</ul>\n${PRICE[lang]}`];
@@ -929,7 +929,7 @@ ${CRISIS}`],
 <li>If there is no Cancel button, or an expiry date shows in red, it is already cancelled.</li>
 </ol>`],
       ["Cancel on Android", `<p>Google's steps (Google Play Help): open the Play Store, tap your profile icon › Payments &amp; subscriptions › Subscriptions, choose the subscription and tap Cancel subscription, then follow the instructions. If you do not see it, check you are signed in to the Google account you paid with.</p>`],
-      app("If you'd like a calmer daily line", "Peace Be Still's Mindset door gives you one line a day, morning and night, with no trial and a free version that stays free.", ["words", "nights"]),
+      app("If you'd like a calmer daily line", "Peace Be Still's Mindset door gives you one line to say out loud each morning, with no trial and a free version that stays free.", ["words", "nights"]),
     ],
     faq: [
       ["Does deleting the I am app cancel my subscription?", "No. Cancel it in your Apple or Google Play subscriptions."],
@@ -1240,7 +1240,7 @@ const HUB_EN = {
   h1: "Mindset: daily words, calm nights, and a chat that is yours",
   indexLabel: "Mindset: what is inside the second door", indexNote: "Morning Word, Imagination Nights and the Mindset chat.",
   definition: "Mindset is one of the two doors in Peace Be Still, for calm words in the morning and imagination at night, with no religious content. It has three parts: Morning Word · Daily Declarations, Imagination Nights, and a Mindset chat.",
-  quick: `Morning Word gives you one line to say out loud, morning and night. Imagination Nights are ${NIGHTS} whispered sleep sessions built around a scene. The chat talks things through calmly; with a paid plan it is private.`,
+  quick: `Morning Word gives you one line to say out loud each morning. Imagination Nights are ${NIGHTS} whispered sleep sessions built around a scene. The chat talks things through calmly; with a paid plan it is private.`,
   bestFor: "people who want affirmations, visualization and a private place to think, in one calm app.",
   sections: [
     ["Morning Word · Daily Declarations", `<p>One short line to say out loud each morning, and again at night, such as ${say("mindset.calm.1")} or ${say("mindset.confidence.2")} The daily line is free. A plan adds topics: ${TOPICS("en")}. There is at most one gentle reminder a day, and you can turn it off.</p>`],
@@ -1252,7 +1252,7 @@ const HUB_EN = {
 </ul>`],
     ["What is free, and what a plan adds", `<ul>
 <li><strong>Free, for good:</strong> the daily declaration, your first Imagination Night then one a week, one chat a day, and a journal that stays on your phone. No ads.</li>
-<li><strong>A plan (${F.monthly} a month or ${F.yearly} a year):</strong> private chat that remembers what you share, a session every night plus ones made for you, declaration topics and offline downloads. No trial; cancel in two taps.</li>
+<li><strong>A plan (${F.monthly} a month or ${F.yearly} a year):</strong> private chat that remembers what you share, a session every night plus ones made for you, declaration topics and offline downloads. No trial; cancel any time from the paid screen.</li>
 </ul>`],
   ],
   faq: [
@@ -1271,7 +1271,7 @@ const HUB_ES = {
   h1: "Mentalidad: palabras para el día, noches tranquilas y un chat tuyo",
   indexLabel: "Mentalidad: qué trae la segunda puerta", indexNote: "Morning Word, Imagination Nights y el chat de Mentalidad.",
   definition: "Mentalidad es una de las dos puertas de Peace Be Still, para palabras tranquilas en la mañana e imaginación en la noche, sin contenido religioso. Tiene tres partes: Morning Word · Daily Declarations, Imagination Nights y un chat de Mentalidad, todo en español.",
-  quick: `Morning Word te da una frase para decir en voz alta, de mañana y de noche. Imagination Nights son ${NIGHTS} sesiones susurradas para dormir alrededor de una escena. El chat conversa contigo con calma; con un plan de pago es privado.`,
+  quick: `Morning Word te da una frase para decir en voz alta cada mañana. Imagination Nights son ${NIGHTS} sesiones susurradas para dormir alrededor de una escena. El chat conversa contigo con calma; con un plan de pago es privado.`,
   bestFor: "quien quiere afirmaciones, visualización y un lugar privado para pensar, en una sola app tranquila.",
   sections: [
     ["Morning Word · Daily Declarations", `<p>Una frase corta para decir en voz alta cada mañana, y otra vez en la noche, como ${say("mindset.calm.1", "es")} o ${say("mindset.confidence.2", "es")} La frase diaria es gratis. Un plan suma temas: ${TOPICS("es")}. Hay como mucho un recordatorio suave al día, y se puede apagar.</p>`],
@@ -1283,7 +1283,7 @@ const HUB_ES = {
 </ul>`],
     ["Qué es gratis y qué suma un plan", `<ul>
 <li><strong>Gratis, para siempre:</strong> la declaración diaria, tu primera Imagination Night y luego una por semana, un chat al día y un diario que se queda en tu teléfono. Sin anuncios.</li>
-<li><strong>Un plan (${F.monthly} al mes o ${F.yearly} al año):</strong> chat privado que recuerda lo que compartes, una sesión cada noche y otras hechas para ti, temas de declaraciones y descargas sin conexión. Sin prueba; se cancela en dos toques.</li>
+<li><strong>Un plan (${F.monthly} al mes o ${F.yearly} al año):</strong> chat privado que recuerda lo que compartes, una sesión cada noche y otras hechas para ti, temas de declaraciones y descargas sin conexión. Sin prueba; se cancela cuando quieras desde la pantalla de pago.</li>
 </ul>`],
   ],
   faq: [

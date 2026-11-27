@@ -78,7 +78,7 @@ ${V("PSA 121:7-8")}`],
 </ul>
 ${V("NUM 6:24-26")}`],
       ["Is it okay to fall asleep listening to the Bible?", `<p>Yes. Plenty of families play a short passage or a psalm after prayer and let it run while children drift off. Use a sleep timer so the audio stops on its own, and turn off autoplay so a new video does not start.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has a daily Bible story to read or hear and Psalm Nights, a whispered King James psalm with a sleep timer. Chat is not offered under 13. The free version includes today's story and the whole King James Bible to read and hear.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has a daily Bible story to read or hear and Psalm Nights, a whispered King James psalm with a sleep timer. Chat is not offered under 13. The free version includes today's story and the whole King James Bible to read, and nearly every chapter read aloud.</p>`],
     ],
     faq: [
       ["What is a good bedtime prayer for kids?", "A short one they can say alone: “Thank you, God, for today. Please keep me safe tonight. Bless my family. Amen.” Let them add one thing they are thankful for and the names of people they love."],
@@ -163,7 +163,7 @@ ${V("MAR 4:39")}`],
 <li>If you woke at 3 a.m.: Psalm 63:6.</li>
 </ul>`],
       ["Is it okay to fall asleep listening to the Bible?", `<p>Yes. Many people play a psalm or a short passage read softly and fall asleep before it ends. Use a sleep timer so it stops on its own, keep the screen dark, and make sure nothing new starts playing.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has the whole King James Bible free to read, with a growing set of chapters read aloud, and Psalm Nights: a psalm whispered on an always-dark screen with a sleep timer that fades out. First night free, then one a week in the free version, or every night on a paid plan ($7.99 a month or $39.99 a year, no trial).</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has the whole King James Bible free to read, with nearly every chapter read aloud, and Psalm Nights: a psalm whispered on an always-dark screen with a sleep timer that fades out. First night free, then one a week in the free version, or every night on a paid plan ($7.99 a month or $39.99 a year, no trial).</p>`],
     ],
     faq: [
       ["What is the best Bible verse for sleep?", `Psalm 4:8 is the verse most people choose: ${Q("PSA 4:8")} Proverbs 3:24 is a close second because it says ${F("PRO 3:24", "thy sleep shall be sweet")}.`],
@@ -279,7 +279,7 @@ ${P("PSA 4:1-8")}`],
 ${V("1KI 19:5")}`],
       ["Are there Bible stories for adults to listen to?", `<p>Yes. The simplest way is to listen to the passage itself read aloud: any of the stories above takes five to ten minutes. Many free audio Bibles read the King James Version, which is in the public domain in the United States.</p>`],
       ["What is the best Bible story to fall asleep to?", `<p>Pick a quiet one, not a battle. Jesus calming the storm (Mark 4:35-41) is short and ends in ${F("MAR 4:39", "a great calm")}. Ruth and Naomi and the road to Emmaus are gentle too. Leave Jericho and Goliath for the morning.</p>`],
-      ["Is there a free audio Bible story app?", `<p>Peace Be Still, {{stores.tag}}, gives a daily Bible story to read or hear in the free version, along with the whole King James Bible to read and hear. Its launch library holds 60 stories, including most of the ones above, each told with the King James text beside it. A paid plan ($7.99 a month or $39.99 a year, no trial) adds every past story.</p>`],
+      ["Is there a free audio Bible story app?", `<p>Peace Be Still, {{stores.tag}}, gives a daily Bible story to read or hear in the free version, along with the whole King James Bible to read, and nearly every chapter read aloud. Its launch library holds 60 stories, including most of the ones above, each told with the King James text beside it. A paid plan ($7.99 a month or $39.99 a year, no trial) adds every past story.</p>`],
     ],
     faq: [
       ["What Bible stories are good for adults?", "Stories with grown-up struggles: Job's grief, Hannah's longing, Elijah's exhaustion (1 Kings 19), the prodigal son and his older brother (Luke 15), Ruth and Naomi after loss, and Joseph forgiving his brothers."],

@@ -14,7 +14,7 @@ Peace Be Still es un rincón de calma para cerrar el día y empezar el siguiente
 
 Elige tu camino: la Palabra de Dios, o mente e imaginación. Cada uno es su propio espacio, y puedes cambiar cuando quieras en Ajustes.
 
-Gratis, y sigue gratis: toda la Biblia para leer, y capítulos en voz alta (por ahora en inglés), con capítulos nuevos cada semana. La historia de hoy. Un chat al día, de hasta 5 mensajes. Tu primera noche para dormir, y luego una por semana. Una palabra para cada mañana. Planes básicos de 7 días, versículos guardados, un diario, una racha que nunca regaña, tarjetas para compartir y, si lo quieres, un recordatorio suave al día.
+Gratis, y sigue gratis: toda la Biblia para leer, y casi todos los capítulos en voz alta. La historia de hoy. Un chat al día, de hasta 5 mensajes. Tu primera noche para dormir, y luego una por semana. Una palabra para cada mañana. Planes básicos de 7 días, versículos guardados, un diario, una racha que nunca regaña, tarjetas para compartir y, si lo quieres, un recordatorio suave al día.
 
 Un plan de pago suma chat bíblico ilimitado, un chat que recuerda lo que cargas, una sesión cada noche, sesiones hechas para ti, todas las historias anteriores, planes más largos, temas para las declaraciones y escuchar sin conexión. Chat bíblico ilimitado. Privado en los primeros 50 mensajes de cada día; después, el chat sigue, pero ya no es privado. Los chats privados nunca se usan para entrenar IA.
 

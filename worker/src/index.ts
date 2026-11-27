@@ -268,7 +268,7 @@ function parseChat(body: unknown): ChatRequest | null {
     messages.push({ role: t.role, text: t.text });
   }
   if (messages[messages.length - 1].role !== 'user') return null;
-  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, scripture: b.scripture === true, freeConsent: b.freeConsent === true, overflowConsent: b.overflowConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
+  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, freeConsent: b.freeConsent === true, overflowConsent: b.overflowConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
 }
 
 /** Who is a teen for routing and rules: the age band inside the SIGNED token, never a request field.
