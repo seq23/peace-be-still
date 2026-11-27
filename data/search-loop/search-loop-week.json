@@ -2,7 +2,7 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W48",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-27T18:08:26.604Z",
+  "generated_at": "2026-11-27T19:42:50.789Z",
   "state": "slow",
   "published": 3,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
@@ -13,7 +13,7 @@
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 18,
+  "held_by_cap": 0,
   "redirected": [
     {
       "query": "what is the bible verse for prayer before sleeping",
@@ -44,17 +44,43 @@
       "strengthen": "https://peacebestillapp.com/questions/does-the-holy-bible-app-cost-money/",
       "matched_by": "high token overlap (0.80 >= 0.6)",
       "at": "2026-11-21"
+    },
+    {
+      "query": "creed bible app cost",
+      "strengthen": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how much is the creed bible app",
+      "strengthen": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how to pray for peaceful sleep",
+      "strengthen": "https://peacebestillapp.com/questions/prayer-for-sleep/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "prayer for sleep and peace",
+      "strengthen": "https://peacebestillapp.com/questions/prayer-for-sleep/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-27"
     }
   ],
   "cap": {
-    "max_live_pages": 10,
+    "max_live_pages": 17,
     "live": 10,
-    "room": 0,
-    "why": "held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data"
+    "room": 7,
+    "why": "up from 15 to 17: Google impressions 856 in the last 28 days beat 0 in the 28 before (Search Console has no rows for 2026-09-30..2026-10-27: the site had no impressions before 2026-10-28)"
   },
   "notes": [
     "site config lowers the mode to slow",
-    "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data); 3 more page(s) today would have gone over it, those searches stay queued",
+    "cap: up from 15 to 17: Google impressions 856 in the last 28 days beat 0 in the 28 before (Search Console has no rows for 2026-09-30..2026-10-27: the site had no impressions before 2026-10-28)",
+    "BUILD distinct gate: 4 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD published 0 of quota 3: 7 draft(s) failed the gate and were dropped; 0 got no answer from the free model and stay queued",
     "CHECK runs weekly in mode=slow; last ran 2026-11-24"
   ],
   "lanes": {
@@ -123,6 +149,50 @@
     "could_not_tell": 5
   },
   "comparison": "not read: FIND has not run since v1.16.0",
-  "seeds": "not read: this site has no seeds in its config",
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/46047147322"
+  "seeds": {
+    "configured": 9,
+    "built": [],
+    "strengthened": [],
+    "answered_by": [],
+    "refused": [],
+    "queued": [
+      {
+        "query": "christian app for falling asleep to scripture",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "free bible app to fall asleep to with the kjv read softly",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "free app with bedtime bible stories for adults",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "christian alternative to the calm app for sleep",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "bible app for black christians",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "sleep app that reads king james bible in soft calm voice",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "bedtime bible stories for adults to fall asleep",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "short prayers and bible verses for anxiety at 3am",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "free christian sleep and prayer app no free trial",
+        "reason": "FIND has not read this seed yet"
+      }
+    ]
+  },
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/46057984251"
 }

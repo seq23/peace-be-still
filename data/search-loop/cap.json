@@ -1,36 +1,27 @@
 {
   "schema": "search-loop-cap-v1",
-  "max_live_pages": 10,
-  "config_value": 10,
-  "reason": "held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data",
+  "max_live_pages": 17,
+  "config_value": 15,
+  "reason": "up from 15 to 17: Google impressions 856 in the last 28 days beat 0 in the 28 before (Search Console has no rows for 2026-09-30..2026-10-27: the site had no impressions before 2026-10-28)",
   "last_eval_week": "2026-W48",
   "history": [
     {
-      "at": "2026-11-18T17:02:11.222Z",
+      "at": "2026-11-27T19:57:51.415Z",
       "from": null,
-      "to": 10,
-      "reason": "set from the site config (cap.max_live_pages 10)"
+      "to": 15,
+      "reason": "set from the site config (cap.max_live_pages 15)"
     },
     {
-      "at": "2026-11-18T17:02:11.065Z",
-      "week": "2026-W47",
-      "from": 10,
-      "to": 10,
-      "reason": "held at 10: no Search Console numbers to judge results (Search Console: HTTP 403 User does not have sufficient permission for site 'sc-domain:peacebestillapp.com'. See also: https:/); the cap never grows without data"
-    },
-    {
-      "at": "2026-11-23T18:58:35.980Z",
+      "at": "2026-11-27T19:42:50.789Z",
       "week": "2026-W48",
-      "from": 10,
-      "to": 10,
-      "reason": "held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data"
+      "from": 15,
+      "to": 17,
+      "reason": "up from 15 to 17: Google impressions 856 in the last 28 days beat 0 in the 28 before (Search Console has no rows for 2026-09-30..2026-10-27: the site had no impressions before 2026-10-28)"
     }
   ],
-  "held": {
-    "2026-11-23": 6,
-    "2026-11-24": 3,
-    "2026-11-25": 3,
-    "2026-11-26": 3,
-    "2026-11-27": 3
+  "held": {},
+  "impressions": {
+    "last_28": 856,
+    "prev_28": 0
   }
 }

@@ -1983,6 +1983,42 @@
   ],
   "strengthen": [
     {
+      "query": "prayer for sleep and peace",
+      "page": "/questions/prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/prayer-for-sleep/",
+      "score": 25,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how to pray for peaceful sleep",
+      "page": "/questions/prayer-for-sleep/",
+      "url": "https://peacebestillapp.com/questions/prayer-for-sleep/",
+      "score": 30,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how much is the creed bible app",
+      "page": "/questions/is-creed-bible-app-free/",
+      "url": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+      "score": 59,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "creed bible app cost",
+      "page": "/questions/is-creed-bible-app-free/",
+      "url": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+      "score": 16,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
       "query": "is haven bible app free",
       "variants": [
         "is the haven bible app free"

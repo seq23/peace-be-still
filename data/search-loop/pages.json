@@ -709,6 +709,76 @@
       "reason": [
         "off-audience: This search query does not fit the specific focus of the Peace Be Still app, which centres on adult scripture reading, w"
       ]
+    },
+    {
+      "query": "how to pray before sleep christian",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 29 words (aim 40-60): \"Is it better to pray out loud or silently in bed?\"",
+        "b5 FAQ answer is 27 words (aim 40-60): \"Can I use whispered audio to help me wind down?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://www.nhlbi.nih.gov/health/sleep/why-matters (HTTP 404)"
+      ]
+    },
+    {
+      "query": "do you have to pay for creed bible app",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "off-audience: Search refers to a different app name (Creed) that is not part of Peace Be Still."
+      ]
+    },
+    {
+      "query": "how to prayer before sleep",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0); these failed the check, replace each with a page that exists: https://www.cdc.gov/sleep/data-and-statistics/index.html (HTTP 404); https://www.nhlbi.nih.gov/health/sleep/get-enough-sleep (HTTP 404)",
+        "a claim this site never makes: \"cure\"",
+        "a claim this site never makes: \"heal\"",
+        "health: outcome or treatment claim \"cure\""
+      ]
+    },
+    {
+      "query": "how to pray for good night sleep",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 29 words (aim 40-60): \"Is Peace Be Still available on Android?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://www.nhlbi.nih.gov/health/sleep/stages (HTTP 404)",
+        "invented: unsourced price \"For those who want uninterrupted access to every journey, the paid plan costs $7.99 a month or $39.9\" (drop the amount, or move it into \"facts\" with a dated source that states it)",
+        "a claim this site never makes: \"cure\"",
+        "a claim this site never makes: \"insomnia\""
+      ]
+    },
+    {
+      "query": "how to pray before sleeping at night",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 23 words (aim 40-60): \"Is there an Android version of Peace Be Still?\"",
+        "invented: unsourced price \"The paid plan costs $7.99 a month or $39.99 a year; there is no free trial, no weekly plan and no ad\" (drop the amount, or move it into \"facts\" with a dated source that states it)",
+        "a claim this site never makes: \"cure\"",
+        "a claim this site never makes: \"heal\"",
+        "health: outcome or treatment claim \"cure\""
+      ]
+    },
+    {
+      "query": "prayer for sleep protection",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0); these failed the check, replace each with a page that exists: https://www.cdc.gov/sleep/about_sleep/key_to_healthy_sleep.html (HTTP 404); https://www.nhlbi.nih.gov/health/sleep/health-tips (HTTP 404)",
+        "invented: unsourced price \"The paid plan costs $7.99 a month or $39.99 a year with no free trial, no weekly plan and no ads, an\" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      ]
+    },
+    {
+      "query": "prayer for sleep and anxiety",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "off-audience: Peace Be Still is a quiet app for scripture reading and prayer, not a medical treatment for anxiety."
+      ]
     }
   ],
   "redirected": [
@@ -1190,6 +1260,46 @@
       "kind": "engine",
       "matched_by": "high token overlap (0.80 >= 0.6)",
       "matched_text": "does the holy bible app cost money",
+      "stage": "search"
+    },
+    {
+      "query": "creed bible app cost",
+      "at": "2026-11-27",
+      "url": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+      "route": "/questions/is-creed-bible-app-free/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "Is the Creed Bible app free? · Peace Be Still",
+      "stage": "search"
+    },
+    {
+      "query": "how much is the creed bible app",
+      "at": "2026-11-27",
+      "url": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
+      "route": "/questions/is-creed-bible-app-free/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "Is the Creed Bible app free? · Peace Be Still",
+      "stage": "search"
+    },
+    {
+      "query": "how to pray for peaceful sleep",
+      "at": "2026-11-27",
+      "url": "https://peacebestillapp.com/questions/prayer-for-sleep/",
+      "route": "/questions/prayer-for-sleep/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "matched_text": "A prayer for sleep you can pray tonight",
+      "stage": "draft"
+    },
+    {
+      "query": "prayer for sleep and peace",
+      "at": "2026-11-27",
+      "url": "https://peacebestillapp.com/questions/prayer-for-sleep/",
+      "route": "/questions/prayer-for-sleep/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "matched_text": "A prayer for sleep you can pray tonight",
       "stage": "search"
     }
   ]
