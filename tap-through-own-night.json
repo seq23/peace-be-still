@@ -30,7 +30,7 @@
       "storage": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } },
       "steps": [
         { "fill": "What do you hope for?", "value": "TEST tap-through wish: a small house with a yellow kitchen" },
-        { "tap": "Write my moment", "then": "Before your first moment", "id": "consent" },
+        { "tap": "Write my moment", "then": "/A safety model on Cloudflare Workers AI reads it first/", "id": "consent" },
         { "tap": "Agree and write my moment", "then": "Written with AI. Every word is yours to change.", "id": "scene" },
         { "sweep": true },
         { "tap": "My voice" },
