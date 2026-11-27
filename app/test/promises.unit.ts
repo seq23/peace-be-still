@@ -72,7 +72,7 @@ test('journey names, subtitles and purpose lines shown beyond adults never promi
   for (const file of langs) {
     const strings = JSON.parse(readFileSync(new URL(`../src/i18n/${file}`, import.meta.url), 'utf8'));
     for (const j of journeys.filter(x => !x.ages || x.ages.some(a => a !== 'adult'))) {
-      for (const key of [j.name, j.subtitle, j.purpose].filter((k): k is string => !!k)) {
+      for (const key of [j.name, j.subtitle, j.purpose].filter(Boolean).map(String)) {
         assert.ok(typeof strings[key] === 'string', `${file} has no ${key}`);
         read++;
         assert.doesNotMatch(strings[key], sells, `${file} ${j.id} ${key}: ${strings[key]}`);
