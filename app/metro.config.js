@@ -12,7 +12,8 @@ config.resolver.resolveRequest = (context, name, platform) => {
   return (resolve ?? context.resolveRequest)(context, name, platform);
 };
 // The 66-book list is shared with the audio and import scripts (content/bible/books.json).
-config.watchFolders = [...(config.watchFolders ?? []), path.resolve(__dirname, '../content/bible')];
+// The chat Worker's fixed Korean and Chinese replies are the preview's crisis text too (src/madeForYou/crisis.ts).
+config.watchFolders = [...(config.watchFolders ?? []), path.resolve(__dirname, '../content/bible'), path.resolve(__dirname, '../worker/src')];
 // The dev server serves the page cross-origin isolated, as the preview host does (require-corp, not credentialless,
 // which iPhone Safari lacks), so the local page behaves like the preview.
 const enhance = config.server.enhanceMiddleware;

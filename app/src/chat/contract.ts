@@ -1,6 +1,6 @@
 // The one chat contract between the app and the Worker (worker/src/index.ts imports these types).
 // A request is built from phase 1's Settings, so the door, voice and language ids cannot drift.
-import { contentLanguage } from '../i18n';
+import type { Translation } from '../bible/core';
 import type { Settings } from '../model';
 
 export type ChatTurn = { role: 'user' | 'assistant'; text: string };
@@ -18,7 +18,7 @@ export type ChatRequest = {
   /** The phone's region (ISO alpha-2, from its settings): which crisis lines reach her. */
   region?: string;
 };
-export type ChatScripture = { ref: string; translation: 'KJV' | 'RV1909'; text: string; book: string; chapter: number; verse: number; endVerse?: number };
+export type ChatScripture = { ref: string; translation: Translation; text: string; book: string; chapter: number; verse: number; endVerse?: number };
 // consent: free chat needs her one-time yes first. paused: chat is paused on this install (operator or
 // abuse throttle). overflow_consent: a paid user's private messages for today (or this month) are used;
 // she may keep chatting on the free lane (not private) once she accepts, or wait. Nothing was sent.
@@ -58,8 +58,8 @@ export function buildChatRequest(settings: Settings, conversation: string, messa
     messages: messages.slice(-12),
     door: settings.door,
     voice: settings.age === 'teen' ? 'teen' : settings.voice,
-    // The chat worker answers in English or Spanish today; a Korean or Chinese phone is sent as English.
-    language: contentLanguage(settings.language),
+    // The screen language: chat answers in it, quoting that language's Bible (KJV, RV1909, 개역한글, 1919 和合本).
+    language: settings.language,
     ...(settings.journey ? { journey: settings.journey } : {}),
     ...(freeConsent ? { freeConsent: true } : {}),
     ...(overflowConsent ? { overflowConsent: true } : {}),

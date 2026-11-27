@@ -46,11 +46,42 @@ test('the crisis line follows the phone region, never the language: a Korean or 
   for (const language of ['ko', 'zh-Hans', 'zh-Hant'] as const) {
     setLanguage(language);
     assert.equal(regionHelp('US').text, 'chat.help.us');
-    assert.equal(regionHelp(null).text, 'chat.help.us');
     assert.match(t(regionHelp('US').text), /988/);
-    assert.match(t(regionHelp('KR').text), /findahelpline\.com/);
+    // No region (an unreadable phone setting) or one with no row: findahelpline, never a US-only number.
+    for (const region of [null, 'FR', 'MO']) assert.equal(regionHelp(region, language).text, 'chat.help.other', String(region));
   }
   setLanguage('en');
+});
+
+test('every region in every language: its own line from the one table, one [link] per number, no 988 outside the US', () => {
+  const lines: Record<string, RegExp> = { MX: /800 911 2000.*911/, ES: /024.*112/, KR: /109.*119/, TW: /1925.*119/, HK: /2389 2222.*999/, CN: /12356.*120/ };
+  for (const language of ['en', 'es', 'ko', 'zh-Hans', 'zh-Hant'] as const) {
+    for (const region of ['US', 'MX', 'ES', 'KR', 'TW', 'HK', 'CN', 'FR', null]) {
+      const help = regionHelp(region, language);
+      const shown = t(help.text, { ...help.values, locale: language });
+      const tag = `${language} ${region}`;
+      assert.equal((shown.match(/\[[^\]]+\]/g) ?? []).length, help.links.length, tag);
+      assert.ok(!shown.includes('%{'), `${tag}: ${shown}`);
+      for (const link of help.links) assert.ok(!t(link.label, { ...link.values, locale: language }).includes('%{'), tag);
+      if (region && lines[region]) { assert.match(shown, lines[region], tag); assert.ok(!/988/.test(shown), tag); }
+      if (region === 'US') assert.match(shown, /988/, tag);
+    }
+  }
+});
+
+test('the crisis card buttons follow the reply text, in its order, from the same table', () => {
+  const { crisisLinks } = require('../src/chat/crisisLines') as typeof import('../src/chat/crisisLines');
+  const urls = (text: string) => crisisLinks(text, 'en').map(l => l.url);
+  assert.deepEqual(urls('지금 바로 자살예방상담전화 109에 전화해 주세요. 24시간 언제든 받아요. 지금 위험하다면 119에 전화하세요.'), ['tel:109', 'tel:119']);
+  assert.deepEqual(urls('請現在就撥打安心專線1925，免費，24 小時都有人接聽。如果你現在有危險，請撥打 119。'), ['tel:1925', 'tel:119']);
+  assert.deepEqual(urls('请现在就拨打心理援助热线12356。如果你现在有危险，请拨打 120。'), ['tel:12356', 'tel:120']);
+  assert.deepEqual(urls('Please call Línea de la Vida at 800 911 2000, free, any time. If you are in danger right now, call 911.'), ['tel:8009112000', 'tel:911']);
+  assert.deepEqual(urls('Please reach out right now to the 988 Suicide & Crisis Lifeline. If you are in danger this minute, call 911.'), ['tel:988', 'sms:988']);
+  assert.deepEqual(urls("Please don't take any extra. call Poison Control now at 1-800-222-1222. call 911 now. call or text 988."), ['tel:18002221222', 'tel:911', 'tel:988', 'sms:988']);
+  assert.deepEqual(urls('Please reach a crisis line where you live: findahelpline.com lists free ones.'), ['https://findahelpline.com']);
+  // A KR reply never offers a US button, and a phone number that merely contains a line's digits is not that line.
+  assert.ok(!urls('지금 바로 109에 전화해 주세요. 지금 위험하다면 119에 전화하세요.').some(u => u.includes('988') || u.includes('911')));
+  assert.deepEqual(urls('Please call 1-800-799-7233. If you ever think about ending your life, call or text 988. If you are in danger this minute, call 911.'), ['tel:18007997233', 'sms:88788?body=START', 'tel:988', 'sms:988']);
 });
 
 test('each language reads its own Bible, and a Korean or Chinese verse always carries its credit line', () => {

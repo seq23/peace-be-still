@@ -1,22 +1,14 @@
-import { t, type Key, type Language } from '../i18n';
+import type { Language } from '../i18n';
+import ko from '../../../worker/src/replies.ko.json';
+import zhHans from '../../../worker/src/replies.zh-Hans.json';
+import zhHant from '../../../worker/src/replies.zh-Hant.json';
 
-// One-tap help under a crisis reply, the same lines as chat's crisisLinks (phase 3,
-// app/src/chat/ChatScreen.tsx) read from the same fixed crisis text: the hotline the reply leads with
-// first, then 911 when the reply names it, then 988 always. INTEGRATION: once chat is on main, import
-// chat's crisisLinks here (one list for both) and delete this file.
-export function crisisLinks(text: string, lang: Language): Array<{ label: string; url: string }> {
-  const say = (key: Key) => t(key, { locale: lang });
-  const links: Array<{ label: string; url: string }> = [];
-  if (text.includes('1-800-222-1222')) links.push({ label: say('chat.call.poison'), url: 'tel:18002221222' });
-  if (text.includes('911')) links.push({ label: say('chat.call.911'), url: 'tel:911' });
-  if (text.includes('1-800-422-4453')) links.push({ label: say('chat.call.childhelp'), url: 'tel:18004224453' }, { label: say('chat.text.childhelp'), url: 'sms:18004224453' });
-  if (text.includes('1-800-799-7233')) links.push({ label: say('chat.call.dv'), url: 'tel:18007997233' }, { label: say('chat.text.dv'), url: 'sms:88788?body=START' });
-  links.push({ label: say('chat.call.988'), url: 'tel:988' }, { label: say('chat.text.988'), url: 'sms:988' });
-  return links;
-}
-
-/** The chat's own fixed 988 reply (phase 3 worker/src/replies.ts), for the preview's crisis screen. */
-export const previewCrisisText: Record<'en' | 'es', string> = {
+/** The chat's own fixed 988 reply (worker/src/replies.ts lifeline; Korean and Chinese from the Worker's own reply
+ *  files), for the web preview's crisis screen in every screen language. */
+export const previewCrisisText: Record<Language, string> = {
   en: 'Please reach out right now to the 988 Suicide & Crisis Lifeline. Call or text 988, any time, day or night.',
   es: 'Por favor, comunícate ahora con la Línea 988 de Prevención del Suicidio y Crisis. Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, a cualquier hora.',
+  ko: ko.lifeline,
+  'zh-Hans': zhHans.lifeline,
+  'zh-Hant': zhHant.lifeline,
 };

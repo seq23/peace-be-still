@@ -1671,8 +1671,8 @@ test('a crisis note gets the chat’s fixed reply with one-tap 988 help, and not
     assert.ok(texts(tree).includes(replies[lang]));
     const links = host(tree, 'Pressable').filter(n => n.props.accessibilityRole === 'link').map(textOf).filter(label => /988|911/.test(label));
     assert.deepEqual(links, lang === 'es'
-      ? [es['chat.call.911'], es['chat.call.988'], es['chat.text.988']]
-      : ['Call 911', 'Call 988', 'Text 988']);
+      ? [es['chat.call.988'], es['chat.text.988']]
+      : ['Call 988', 'Text 988']);
     await press(tree, lang === 'es' ? 'Llamar al 988' : 'Call 988');
     await press(tree, lang === 'es' ? es['chat.text.988'] : 'Text 988');
     assert.deepEqual(opened, ['tel:988', 'sms:988']);
@@ -2788,7 +2788,7 @@ test('For when you\'ve lost someone: free stored verses and gentle lines, a past
       // The phone's region picks the line, never its language: Mexico gets Línea de la Vida; a Korean phone in the US 988.
       (globalThis as any).__pbsRegion = 'MX';
       tree = await mount('grief', person);
-      assert.deepEqual(links(), [en['chat.call.mx'], en['chat.call.911']], 'a phone in Mexico');
+      assert.deepEqual(links(), ['Call Línea de la Vida 800 911 2000', 'Call 911'], 'a phone in Mexico');
       await act(async () => tree.unmount());
       (globalThis as any).__pbsRegion = 'US';
       tree = await mount('grief', { ...person, language: 'ko' });

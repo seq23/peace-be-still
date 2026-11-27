@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Loads the chat Worker's verse table (D1 bible_verses) from the app's own Bible files,
-// app/src/bible/data/{kjv,rv1909}.db (built from content/bible/*.gz by scripts/import-bibles.py).
+// app/src/bible/data/{kjv,rv1909,krv,cuvs,cuvt}.db (built from content/bible/*.gz by scripts/import-bibles.py):
+// chat quotes the Bible of her screen language, so the Korean and Chinese ones are loaded too.
 // One source, no copy in git. Skips a translation whose version is already loaded.
 // Usage: node scripts/worker-bible-load.mjs --local | --remote
 import { DatabaseSync } from 'node:sqlite';
@@ -14,7 +15,7 @@ if (!where) { console.error('usage: worker-bible-load.mjs --local | --remote'); 
 const wrangler = (...args) => execFileSync('npx', ['--prefix', 'worker', 'wrangler', 'd1', 'execute', 'peace-be-still-chat', '--config', 'worker/wrangler.jsonc', where, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
 const q = s => `'${String(s).replace(/'/g, "''")}'`;
 let loaded = 0;
-for (const [translation, file] of [['KJV', 'kjv'], ['RV1909', 'rv1909']]) {
+for (const [translation, file] of [['KJV', 'kjv'], ['RV1909', 'rv1909'], ['KRV', 'krv'], ['CUVS', 'cuvs'], ['CUVT', 'cuvt']]) {
   const db = new DatabaseSync(`app/src/bible/data/${file}.db`, { readOnly: true });
   const version = db.prepare("SELECT value FROM meta WHERE key = 'version'").get().value;
   const current = JSON.parse(wrangler('--json', '--command', `SELECT version FROM bible_meta WHERE translation = ${q(translation)}`))[0]?.results?.[0]?.version;

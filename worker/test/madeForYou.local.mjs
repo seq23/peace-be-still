@@ -106,6 +106,11 @@ test('requests are paid-only, crisis-checked first, one a day, and promised a re
   for (const text of ['fixture floor', 'fixture model']) {
     assert.deepEqual(await (await call(id.owner, { body: { ...note, text } })).json(), { status: 'crisis', kind: text, text: 'Fixed safety reply' });
   }
+  // A Korean or Chinese screen gets the crisis lines in its own language (the session itself stays English or Spanish);
+  // a language the app does not have falls back to the session's, never an error that hides the lines.
+  for (const shown of ['ko', 'zh-Hans', 'zh-Hant'])
+    assert.equal((await (await call(id.owner, { body: { ...note, text: 'fixture floor', shown } })).json()).text, `Fixed safety reply (${shown})`, shown);
+  assert.equal((await (await call(id.owner, { body: { ...note, text: 'fixture floor', shown: 'fr' } })).json()).text, 'Fixed safety reply');
   assert.equal((await call(id.owner, { body: { ...note, text: 'fixture unavailable' } })).status, 503);
   assert.equal((await call(id.owner, { body: { ...note, door: 'mindset' } })).status, 400);
   assert.equal((await call(id.owner, { body: { ...note, text: 'a'.repeat(501) } })).status, 400);

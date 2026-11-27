@@ -2,14 +2,16 @@
 // Code handles structure and the hard floors; a free-model judge reads meaning for the
 // C06/C07 red lines afterwards (judge.ts). A problem means one regeneration with the
 // objection, then the fixed fallback reply. Nothing here keeps or logs the text.
-import { banned, bookCode, fold, parseReference, type Translation } from '../shared';
+import { banned, bookCode, fold, parseReference, type Language, type Translation } from '../shared';
 import { faithContentIssues } from '../../../app/src/model';
 import { chapterVerses, lookup, type Scripture } from '../scripture';
 import type { Reference } from '../shared';
 
 export type Draft = { text: string; references: string[] };
 // userText is the newest message; afterCrisis says an earlier message in this chat was answered with the crisis lines.
-export type GateContext = { db: D1Database; lang: 'en' | 'es'; translation: Translation; teen: boolean; door: 'faith' | 'mindset'; userText: string; afterCrisis?: boolean };
+// lang is the prompt's language (English or Spanish); shown is the language she reads (Korean or Chinese answers come
+// from the English prompt); line is the crisis line for her region that an answer after a crisis must name.
+export type GateContext = { db: D1Database; lang: 'en' | 'es'; shown?: Language; line?: string; translation: Translation; teen: boolean; door: 'faith' | 'mindset'; userText: string; afterCrisis?: boolean };
 export type GateResult =
   | { ok: true; text: string; scripture: Scripture[]; notes: string[] }
   | { ok: false; problems: string[] };
@@ -218,10 +220,19 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (MEDS_Q.test(asked) && !DOCTOR.test(n)) problems.push('missing_doctor');
   const cutOff = CUT_OFF_ASKED.test(asked) || scripture.some(s => CUT_OFF_REFS.some(r => overlaps(s, r))) || refsInText(ctx.userText).some(x => CUT_OFF_REFS.some(r => r.book === x.book && r.chapter === x.chapter && x.verse >= r.verse! && x.verse <= (r.endVerse ?? r.verse!)));
   if (cutOff && !NOT_LITERAL.test(n)) problems.push('missing_not_literal');
-  if (ctx.afterCrisis && !text.includes('988')) problems.push('missing_988');
+  if (ctx.afterCrisis && !text.includes(ctx.line ?? '988')) problems.push('missing_988');
   if (!ctx.teen && TRUSTED_ADULT.test(n)) problems.push('trusted_adult_for_adult');
   const end = lastSentence(text);
-  if (text && (words(end).length < 3 || !/[.!]["'”’)]*$/.test(end))) problems.push('broken_ending');
+  const cjk = ctx.shown === 'ko' || ctx.shown === 'zh-Hans' || ctx.shown === 'zh-Hant';
+  if (text && !cjk && (words(end).length < 3 || !/[.!]["'”’)]*$/.test(end))) problems.push('broken_ending');
+  // Korean and Chinese: a sentence ends on . ! 。 or ！ (Chinese has no spaces to count words by).
+  if (text && cjk && !/[.!。！]["'”’)」』]*$/u.test(text.replace(/\s*[(（][^)）]*\d+:\d+[^)）]*[)）]\s*[.。]?\s*$/u, '。').trim())) problems.push('broken_ending');
+  // C12 for Korean and Chinese: the letters are her script (Hangul, or Han characters), not English.
+  if (text && cjk) {
+    const letters = [...text.replace(REF_IN_TEXT, ' ').replace(/\d+:\d+/g, ' ')].filter(ch => /\p{L}/u.test(ch));
+    const own = letters.filter(ch => (ctx.shown === 'ko' ? /[\p{Script=Hangul}\p{Script=Han}]/u : /\p{Script=Han}/u).test(ch)).length;
+    if (letters.length && own / letters.length < 0.9) problems.push('not_her_language');
+  }
 
   // C12: 95%+ Spanish words outside references.
   if (ctx.lang === 'es') {

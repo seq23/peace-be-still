@@ -8,7 +8,7 @@ import { BackLink, Body, Card, Label, PillButton, Screen, TextLink, Title, usePa
 import { madeForYouApi, SessionError, type Ready, type SessionContext, type Shelf } from './api';
 import { playedSessionKey } from './played';
 import { madeForYouCopy, readyWhen } from './copy';
-import { crisisLinks } from './crisis';
+import { crisisLinks } from '../chat/crisisLines';
 
 type Props = {
   paid: boolean;
@@ -140,7 +140,7 @@ function Sessions({ context, close, play, api, crisis: shownCrisis, ui }: Pick<P
       {/* The same one-tap help as chat: nobody in crisis at bedtime should have to copy a number. */}
       {crisisLinks(crisis, ui).map(link => <Pressable key={link.url} accessibilityRole="link" onPress={() => void Linking.openURL(link.url)}
         style={{ minHeight: 48, justifyContent: 'center', paddingHorizontal: 18, borderWidth: 1, borderColor: palette.accent, borderRadius: 24 }}>
-        <Text style={{ color: palette.ink, fontFamily: fonts.strong, fontSize: 16 }}>{link.label}</Text>
+        <Text style={{ color: palette.ink, fontFamily: fonts.strong, fontSize: 16 }}>{t(link.label, { ...link.values, locale: ui })}</Text>
       </Pressable>)}
       {/* A way back for a reply that fired on the wrong words: nothing was kept, and she can write again. */}
       <Body>{copy('crisisNothingSaved')}</Body>

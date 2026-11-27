@@ -8,7 +8,7 @@ Peace Be Still es una app de Spry Labs, el nombre comercial de Redwood Reserve H
 
 ## No es un servicio de emergencias
 
-Si está en peligro inmediato, llame al 911. En los Estados Unidos, llame o envíe un mensaje de texto al 988 para comunicarse con la Línea de Prevención del Suicidio y Crisis (Suicide & Crisis Lifeline); para español, llame al 988 y oprima el 2. La Línea Nacional sobre la Violencia Doméstica (National Domestic Violence Hotline) es el 1-800-799-7233, y Childhelp es el 1-800-422-4453. Cuando la app reconoce que un mensaje del chat trata de autolesiones o abuso, muestra estos números en lugar de una respuesta de IA.
+Si está en peligro inmediato, llame al 911. En los Estados Unidos, llame o envíe un mensaje de texto al 988 para comunicarse con la Línea de Prevención del Suicidio y Crisis (Suicide & Crisis Lifeline); para español, llame al 988 y oprima el 2. La Línea Nacional sobre la Violencia Doméstica (National Domestic Violence Hotline) es el 1-800-799-7233, y Childhelp es el 1-800-422-4453. Cuando la app reconoce que un mensaje del chat trata de autolesiones o abuso, muestra estos números en lugar de una respuesta de IA; fuera de Estados Unidos muestra la línea de crisis de la región configurada en el teléfono (México, España, Corea del Sur, Taiwán, Hong Kong y China continental), o findahelpline.com, que reúne líneas gratuitas de otros países.
 
 ## El chat es IA, no una persona
 

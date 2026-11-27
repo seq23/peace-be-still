@@ -23,8 +23,8 @@ export default function MadeForYouRoute() {
   const { age, door } = settings;
   const kind = door === 'faith' ? 'psalm' : 'imagination';
   return <MadeForYouScreen key={`${age}:${door}:${locale}:${paid}:${previewState ?? ''}`} paid={paid && previewState !== 'locked'} api={api} ui={locale}
-    crisis={previewState === 'crisis' ? previewCrisisText[contentLanguage(locale)] : undefined}
-    context={{ age, door, kind, lang: contentLanguage(locale) }}
+    crisis={previewState === 'crisis' ? previewCrisisText[locale] : undefined}
+    context={{ age, door, kind, lang: contentLanguage(locale), shown: locale }}
     close={() => router.canGoBack() ? router.back() : router.replace('/nights')}
     plans={() => router.push('/paid')}
     play={row => router.push({ pathname: '/listen/[track]', params: { track: `made-for-you-${row.id}` } })} />;

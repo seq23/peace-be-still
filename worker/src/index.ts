@@ -33,10 +33,11 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { chatJudgeListSchema, chatJudgeSchema, chatJudgeVerdict, judgeMessages, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
+import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang, type ReplyLang, answerLanguage } from './replies';
+import { CRISIS_LINES } from '../../app/src/chat/crisisLines';
 import { parseReport, REPORT_REASONS, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
-import { fold, parseReference, type Reference } from './shared';
+import { fold, parseReference, TRANSLATION_OF, type Reference } from './shared';
 import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY, providers, teenProviders, type Translation } from './shared';
 import { issueToken, RENEW_GRACE_DAYS, verifyToken, type Install } from './token';
 
@@ -90,6 +91,7 @@ const OBJECTIONS: Record<string, string> = {
   non_store_scripture: 'It put Bible words in quotation marks or after "says" that are not the printed King James text. Do not retell any verse: name it by its reference and say in your own words what it means here.',
   missing_doctor: 'The question is about medicine: say plainly, in your own words, to talk with their doctor before changing anything.',
   missing_not_literal: 'Say plainly that Jesus is not speaking literally here and that God never wants anyone to hurt their body.',
+  not_her_language: 'It was not all written in the language named above: write all of "text" in it, not one English word.',
   missing_988: 'An earlier message in this chat was about their safety: include the line that they can call or text 988 any time.',
   trusted_adult_for_adult: 'It told a grown adult to find a "trusted adult"; say "someone you trust" instead.',
   broken_ending: 'It ended on a fragment or a bare name; end on one whole sentence of your own.',
@@ -182,6 +184,11 @@ const PAID_UNCAPPED = 1_000_000;
 /** A teen's model answers a day off the paid lane (her ruling 23 Nov 2026: "it should just be 1 free answer a day then for each"). */
 const TEEN_AI_ANSWERS_DAILY = 1;
 const SHORT_ANSWER = { en: 'Keep this answer brief: three or four short sentences.', es: 'Responde breve: tres o cuatro frases cortas.' } as const;
+const BIBLE_NAME: Partial<Record<Translation, string>> = { KRV: 'the Korean Revised Version (개역한글, 1961)', CUVS: 'the 1919 Chinese Union Version (和合本), in Simplified characters', CUVT: 'the 1919 Chinese Union Version (和合本), in Traditional characters' };
+/** A Korean or Chinese phone: the voice prompt stays, the answer is written in her language and her Bible is printed. */
+export function answerIn(tongue: string, translation: Translation): string {
+  return `Write "text" only in natural, warm ${tongue}: not one English word, and no romanized words. Keep each of "references" in English book names, like "Psalm 46:1": the app prints that verse from ${BIBLE_NAME[translation] ?? translation}, word for word, not the King James. When "text" names a verse, write the book in ${tongue}.`;
+}
 async function check<T>(env: Env, now: number, chain: LadderRung | LadderRung[], messages: ReturnType<typeof riskMessages>, schema: Record<string, unknown>, maxTokens: number, read: (d: unknown) => T, ok: (v: T) => boolean, down: T, backup = true, teen = false): Promise<T> {
   const metrics: Metrics = new Map();
   // The backup reads the same words the risk read does, which may be about a crisis: only the
@@ -259,7 +266,7 @@ function parseChat(body: unknown): ChatRequest | null {
   if (typeof b.conversation !== 'string' || !UUID.test(b.conversation)) return null;
   if (b.door !== 'faith' && b.door !== 'mindset') return null;
   if (typeof b.voice !== 'string' || !VOICES.has(b.voice)) return null;
-  if (b.language !== 'en' && b.language !== 'es') return null;
+  if (typeof b.language !== 'string' || !Object.hasOwn(TRANSLATION_OF, b.language)) return null;
   if (b.journey !== undefined && (typeof b.journey !== 'string' || b.journey.length > 60)) return null;
   if (!Array.isArray(b.messages) || b.messages.length < 1 || b.messages.length > 40) return null;
   const messages: ChatRequest['messages'] = [];
@@ -270,7 +277,7 @@ function parseChat(body: unknown): ChatRequest | null {
     messages.push({ role: t.role, text: t.text });
   }
   if (messages[messages.length - 1].role !== 'user') return null;
-  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language, journey: b.journey as string | undefined, freeConsent: b.freeConsent === true, overflowConsent: b.overflowConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
+  return { conversation: b.conversation, messages, door: b.door, voice: b.voice as ChatRequest['voice'], language: b.language as ChatRequest['language'], journey: b.journey as string | undefined, freeConsent: b.freeConsent === true, overflowConsent: b.overflowConsent === true, region: typeof b.region === 'string' && /^[A-Z]{2}$/.test(b.region) ? b.region : undefined };
 }
 
 /** Who is a teen for routing and rules: the age band inside the SIGNED token, never a request field.
@@ -280,13 +287,17 @@ export const teenInstall = (install: Pick<Install, 'age'>) => install.age !== 'a
 export const teenRoute = (install: Pick<Install, 'age'>, raw: Record<string, unknown> | null, req: Pick<ChatRequest, 'voice'>) =>
   teenInstall(install) || req.voice === 'teen' || raw?.age === 'teen' || raw?.ageBand === 'teen';
 
-/** Mi Refugio, the Spanish voice or a Spanish phone: Spanish and the Reina-Valera 1909. Teens keep the teen rules in their language. */
-export function voiceFor(req: ChatRequest, install: Install): { lang: Lang; translation: Translation; prompt: PromptId; teen: boolean } {
-  const lang: Lang = req.journey === 'mi-refugio' || req.journey === 'Mi Refugio' || req.voice === 'spanish' || req.language === 'es' ? 'es' : 'en';
+/** Mi Refugio, the Spanish voice or a Spanish phone: Spanish and the Reina-Valera 1909. A Korean or Chinese phone: the
+ *  English prompt (base) told to answer in her language, quoting 개역한글 or the 1919 和合本, and every fixed reply
+ *  in her language (lang). Teens keep the teen rules in their language. */
+export function voiceFor(req: ChatRequest, install: Install): { lang: ReplyLang; base: Lang; translation: Translation; prompt: PromptId; teen: boolean } {
+  const spanish = req.journey === 'mi-refugio' || req.journey === 'Mi Refugio' || req.voice === 'spanish' || req.language === 'es';
+  const lang: ReplyLang = spanish ? 'es' : req.language === 'ko' || req.language === 'zh-Hans' || req.language === 'zh-Hant' ? req.language : 'en';
+  const base: Lang = lang === 'es' ? 'es' : 'en';
   const teen = teenInstall(install);
   // The Mindset door keeps its own prompt for teens too (F8: no faith words); the teen rules are added to it.
-  const prompt: PromptId = req.door === 'mindset' ? 'mindset' : teen ? (lang === 'es' ? 'teen-es' : 'teen') : lang === 'es' ? 'spanish' : req.voice === 'church' ? 'church' : 'plain';
-  return { lang, translation: lang === 'es' ? 'RV1909' : 'KJV', prompt, teen };
+  const prompt: PromptId = req.door === 'mindset' ? 'mindset' : teen ? (base === 'es' ? 'teen-es' : 'teen') : base === 'es' ? 'spanish' : req.voice === 'church' ? 'church' : 'plain';
+  return { lang, base, translation: TRANSLATION_OF[lang], prompt, teen };
 }
 
 async function token(request: Request, env: Env, deps: Deps): Promise<Response> {
@@ -617,9 +628,12 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Her memory note is private: never sent on the free lane she chose after her private messages.
   const memory = paid.paid && lane !== 'free' ? await readMemory(env.DB, me.installId) : null;
   const system: Message[] = [{ role: 'system', content: v.prompt === 'mindset' ? [prompts.mindset, v.teen ? mindsetTeen : '', v.lang === 'es' ? spanishOnly : ''].filter(Boolean).join('\n') : prompts[v.prompt] }];
+  // A Korean or Chinese phone: the English prompt, told to answer in her language and quote her Bible by reference only.
+  const tongue = answerLanguage(v.lang);
+  if (tongue) system.push({ role: 'system', content: answerIn(tongue, v.translation) });
   // Fixed text first (the voice prompt, then the risk tag), so the route's prompt cache covers it; her memory note last.
   system.push({ role: 'system', content: RISK_TAG });
-  if (memory) system.push({ role: 'system', content: memoryBlock(memory, v.lang) });
+  if (memory) system.push({ role: 'system', content: memoryBlock(memory, v.base) });
   // Only the last CHAT_HISTORY_TURNS turns travel to the model (a paid user's memory note carries the rest).
   // On the free lane she chose after her private messages, only the new message travels: the earlier turns were private.
   const history: Message[] = (lane === 'free' && (overflow || firstHistory) ? turns.slice(-1) : turns.slice(-int(env.CHAT_HISTORY_TURNS, 6))).map(t => ({ role: t.role, content: t.text }));
@@ -631,9 +645,9 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   // Gemini, and at 350 it stopped mid-answer on 12 of 127 (run 12). Only tokens used are billed.
   const cap = lane === 'paid' ? int(env.PAID_ANSWER_MAX_TOKENS, int(env.ANSWER_MAX_TOKENS, 350)) : int(env.ANSWER_MAX_TOKENS, 350);
   const answerTokens = (short && lane === 'paid' ? Math.round(cap / 2) : cap) + (lane === 'crisis' ? CRISIS_THINKING_HEADROOM : 0);
-  if (short && lane === 'paid') system.push({ role: 'system', content: SHORT_ANSWER[v.lang] });
+  if (short && lane === 'paid') system.push({ role: 'system', content: SHORT_ANSWER[v.base] });
   const earlierTurns = turns.slice(0, -1).filter(t => t.role === 'user');
-  const gate = { db: env.DB, lang: v.lang, translation: v.translation, teen: v.teen, door: ask.door, userText: last, afterCrisis: (sticky && state?.asked === 1) || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
+  const gate = { db: env.DB, lang: v.base, shown: v.lang, line: region === 'US' ? '988' : region === 'other' ? 'findahelpline.com' : CRISIS_LINES[region].line, translation: v.translation, teen: v.teen, door: ask.door, userText: last, afterCrisis: (sticky && state?.asked === 1) || earlierTurns.some(t => t.text === CRISIS_NOTE) } as const;
   // The newest message plus her earlier ones: an echo of what she wrote ("I called 988") is not a tripwire.
   const herWords = turns.filter(t => t.role === 'user').map(t => t.text).join('\n');
 
@@ -664,7 +678,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
   const spares: Array<{ text: string; scripture: Scripture[]; shape: Shape; judged: boolean }> = [];
   // Three tries, then a fixed reply. Measured round 3: with two tries 4 of 45 answers fell back.
   // Two human-written answers in this voice go in first, as an earlier exchange (one counter picks them).
-  const examples = examplesFor(sampleSet(v.prompt, v.lang), v.lang, await nextSeq(env.DB, v.lang === 'es' ? 'es' : mind ? 'mindset' : 'en'));
+  const examples = examplesFor(sampleSet(v.prompt, v.base), v.base, await nextSeq(env.DB, v.base === 'es' ? 'es' : mind ? 'mindset' : 'en'));
   // A teen's model answers off the paid lane (Workers AI; her ruling 23 Nov 2026, "yes, 1 each"): one a day per
   // install, the identity the device limit uses, claimed before any answer call so the shared pool is never
   // drained by one person. Kept in the per-device day counter (chat_short_day) under a "teen:" key, cleaned with
@@ -785,7 +799,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (problems.some(p => RED_LINES.has(p))) tally(metrics, 'red_line');
     for (const p of problems) tally(metrics, `gate:${p}`);
     logCode('CHAT_GATE', { attempt, problems: problems.join(',') });
-    objection = variety || problems.map(objectionText).join(' ');
+    objection = variety || problems.map(p => p === 'missing_988' && gate.line !== '988' ? `An earlier message in this chat was about their safety: include the free crisis line where they are, ${gate.line}.` : objectionText(p)).join(' ');
     // One cheap edit per answer: an edit that still repeats gets three fresh versions next time
     // (red team 24 Nov 2026: with every variety retry a single edit, 9 of 58 shown answers repeated; bar 2).
     variety0 = !!variety && !edited;

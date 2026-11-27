@@ -4,7 +4,8 @@
 import { getLocales } from 'expo-localization';
 import React, { useEffect, useRef, useState } from 'react';
 import { Linking, Pressable, Text, TextInput, View } from 'react-native';
-import { crisisLinks } from '../madeForYou/crisis';
+import { t as say } from '../i18n';
+import { crisisLinks } from '../chat/crisisLines';
 import { PAID_CHAT_MESSAGES } from '../gates';
 import { useT } from '../settings';
 import { fonts } from '../theme/tokens';
@@ -181,7 +182,7 @@ function Editor({ draft: start, write, report, consent, saved, count, done }: { 
     <Text accessibilityRole="alert" style={{ color: c.ink, fontFamily: fonts.body, fontSize: 17, lineHeight: 25 }}>{crisis}</Text>
     {crisisLinks(crisis, d.lang).map(link => <Pressable key={link.url} accessibilityRole="link" onPress={() => void Linking.openURL(link.url)}
       style={{ minHeight: 48, justifyContent: 'center', paddingHorizontal: 18, borderWidth: 1, borderColor: c.accent, borderRadius: 24 }}>
-      <Text style={{ color: c.ink, fontFamily: fonts.strong, fontSize: 16 }}>{link.label}</Text>
+      <Text style={{ color: c.ink, fontFamily: fonts.strong, fontSize: 16 }}>{say(link.label, { ...link.values, locale: d.lang })}</Text>
     </Pressable>)}
     <Body>{t('ownNight.crisisNothingSaved')}</Body>
     <TextLink onPress={() => { setCrisis(''); set({ wish: '', who: '' }); }}>{t('ownNight.writeAgain')}</TextLink>
