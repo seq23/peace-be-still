@@ -7,8 +7,8 @@
  "simplified": "opencc-js@1.4.2 t→cn, then the VARIANTS map in scripts/content/import-cuv.mjs",
  "fetched": "2026-11-22",
  "verses": 31032,
- "sha256": "ffe4b93df19073b9a0c92c7a1e971255fe545f5e69b76be686418bc76c22672c",
- "sha256_simplified": "b993d560a29d25508ccb1880639bd8fc3b576cdbab3cdfc36554417f6c27253a",
+ "sha256": "59c2f3fd59b5d9d78f30cb4ce67f6ffc436213ad5a5414c749846a89d852f35a",
+ "sha256_simplified": "62bbd760e3941859e88851926b0b1377313e6019929efe895470b5c62bb54422",
  "joined_note": "the 1919 text prints these verses as one; stored once, under the first number, as printed",
  "joined": [
   "GEN 24:29-30",

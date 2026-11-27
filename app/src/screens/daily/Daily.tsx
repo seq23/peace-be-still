@@ -1,3 +1,4 @@
+import { isCjk, type Language } from '../../i18n';
 import React, { useState } from 'react';
 import { TextInput, View } from 'react-native';
 import { formatReference, parseReference } from '../../bible/core';
@@ -60,7 +61,7 @@ export function useDeclaration(now: Date) {
   return declarationFor(settings, t.locale, now, topic);
 }
 
-export function declarationFor(settings: Pick<Settings, 'door'>, locale: 'en' | 'es', now: Date, topic?: TopicId) {
+export function declarationFor(settings: Pick<Settings, 'door'>, locale: Language, now: Date, topic?: TopicId) {
   if (settings.door === 'mindset') {
     const chosen = topic ? mindsetDeclarations.filter(item => item.topic === topic) : [];
     const list = chosen.length ? chosen : mindsetDeclarations;
@@ -69,6 +70,9 @@ export function declarationFor(settings: Pick<Settings, 'door'>, locale: 'en' | 
     return { key: list[index % list.length].line, text: undefined, passage: undefined, topic };
   }
   const item = dailyDeclaration(locale, now, topic && (faithTopics as string[]).includes(topic) ? topic : undefined);
+  // The 365 written declarations are English and Spanish; a Korean or Chinese screen shows the day's verse in
+  // its own Bible with the fixed prayer key instead, never an English line.
+  if (isCjk(locale)) return { key: 'daily.prayer' as const, text: undefined, passage: item.ref, topic };
   return { key: undefined, text: item.text, passage: item.ref, topic };
 }
 

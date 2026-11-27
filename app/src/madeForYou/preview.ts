@@ -1,3 +1,4 @@
+import { contentLanguage } from '../i18n';
 import { madeForYouApi, type Ready, type SessionContext, type Shelf } from './api';
 
 // Public excerpts of the approved stock Kokoro voices. The neutral scene stays
@@ -9,7 +10,7 @@ const clips = {
   'scene-es': { seconds: 8.512000, sha256: '5c3639605d1728b429cf54d6d219d84394fa34ce2628bd1d982561789e800794' },
 } as const;
 
-const clipOf = ({ kind, lang }: Pick<SessionContext, 'kind' | 'lang'>) => `${kind === 'psalm' ? 'psalm' : 'scene'}-${lang}` as const;
+const clipOf = ({ kind, lang }: Pick<SessionContext, 'kind' | 'lang'>) => `${kind === 'psalm' ? 'psalm' : 'scene'}-${contentLanguage(lang)}` as const;
 export const previewClipPath = (context: Pick<SessionContext, 'kind' | 'lang'>) => `/made-for-you-preview/${clipOf(context)}.mp3`;
 function sample(context: SessionContext): Ready {
   // The shelf shows a real session's length (11 min 30 s); the player plays the short public excerpt.

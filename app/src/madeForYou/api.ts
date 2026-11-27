@@ -1,4 +1,4 @@
-import type { Age, Door, Language } from '../model';
+import type { Age, Door } from '../model';
 import { madeForYouToken } from './paidStub';
 
 export type Kind = 'psalm' | 'imagination';
@@ -17,7 +17,8 @@ export type Shelf = {
   next: number | null;
 };
 export type Submission = ({ status: 'pending'; dueAt: number } & Receipt) | { status: 'crisis'; kind: string; text: string } | { status: 'preview' };
-export type SessionContext = { age: Age; door: Door; lang: Language; kind: Kind };
+/** lang is the voiced library's language (i18n contentLanguage): sessions are made in English or Spanish. */
+export type SessionContext = { age: Age; door: Door; lang: 'en' | 'es'; kind: Kind };
 /** The chat's report reasons (one report path, POST /api/report). */
 export type ReportReason = 'hurtful' | 'wrong' | 'unsafe' | 'other';
 

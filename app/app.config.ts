@@ -31,10 +31,14 @@ if (stop) throw new Error(stop);
 
 const PROJECT_ID = 'e23117dc-4272-4aaa-b88e-662733141a5c';
 
-/** The iPhone's microphone question, in English and Spanish (./locales/es.json carries the Spanish one). */
+/** The iPhone's microphone question, in every app language (./locales/<lang>.json carries each one but English;
+ *  test/i18n.unit.ts checks each file says exactly this). */
 export const MICROPHONE = {
   en: 'Peace Be Still uses the microphone only when you record your moment for Write your own night. The recording stays on this phone and is never uploaded.',
   es: 'Peace Be Still usa el micrófono solo cuando grabas tu momento para Escribe tu propia noche. La grabación se queda en este teléfono y nunca se sube.',
+  ko: 'Peace Be Still은 나만의 밤 쓰기에서 나의 순간을 녹음할 때만 마이크를 사용해요. 녹음은 이 휴대폰에 남고 절대 업로드되지 않아요.',
+  'zh-Hans': 'Peace Be Still 只在你为“写下你自己的夜晚”录下你的片刻时使用麦克风。录音留在这部手机上，永远不会上传。',
+  'zh-Hant': 'Peace Be Still 只在你為「寫下你自己的夜晚」錄下你的片刻時使用麥克風。錄音留在這支手機上，永遠不會上傳。',
 } as const;
 
 const config: ExpoConfig = {
@@ -59,7 +63,7 @@ const config: ExpoConfig = {
   // Only HTTPS and Apple's own encryption: exempt, so no export-compliance question on each upload.
   ios: { bundleIdentifier: 'com.peacebestillapp.mobile', infoPlist: { ITSAppUsesNonExemptEncryption: false, CFBundleAllowMixedLocalizations: true } },
   // The Spanish Info.plist strings (the microphone question), so a Spanish iPhone asks in Spanish.
-  locales: { es: './locales/es.json' },
+  locales: { es: './locales/es.json', ko: './locales/ko.json', 'zh-Hans': './locales/zh-Hans.json', 'zh-Hant': './locales/zh-Hant.json' },
   android: {
     package: 'com.peacebestillapp.mobile',
     // The dark tile: the approved mark (assets/brand/pbs-mark-dark.svg, rendered with resvg: docs/OPERATIONS.md) on the night colour.

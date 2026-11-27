@@ -7,7 +7,7 @@ import versions from '../src/bible/data/versions.json';
 import { BOOKS, bookCode, createBible, openCurrent, displayRuns, formatReference, parseReference, startsParagraph, type Translation, type Verse } from '../src/bible/core';
 
 // The committed eBible files are the one source; the app's SQLite files must hold them exactly.
-const sources: Record<Translation, string> = { KJV: 'kjv', RV1909: 'rv1909' };
+const sources: Record<Translation, string> = { KJV: 'kjv', RV1909: 'rv1909', KRV: 'krv', CUVS: 'cuvs', CUVT: 'cuv' };
 const canon = new Set(BOOKS.map(book => book.code));
 function source(translation: Translation): Map<string, string> {
   const lines = gunzipSync(readFileSync(`../content/bible/${sources[translation]}_vpl.txt.gz`)).toString('utf8').replace(/^﻿/, '').split('\n');

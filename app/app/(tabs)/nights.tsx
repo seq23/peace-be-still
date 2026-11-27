@@ -1,3 +1,4 @@
+import { contentLanguage } from '../../src/i18n';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { View } from 'react-native';
@@ -24,7 +25,7 @@ export default function Nights() {
   // One row per script: a re-voiced night or story shows its newest playable file, falling back to the older one.
   const visible = onePerScript(listenTracks().filter(track => track.lang === t.locale && trackBelongsToDoor(track, settings.door)), playable);
   const psalms = visible.filter(track => shelfOf(track) === 'psalms').sort(byChapter);
-  const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), t.locale);
+  const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), contentLanguage(t.locale));
   const stories = visible.filter(track => shelfOf(track) === (t.locale === 'es' ? 'miRefugio' : 'hushHarbor'));
   // The plain tellings are English only (Spanish phones get Mi Refugio), and listed only once their audio is
   // published: a voiced-but-unpublished story is not shown, and the shelf itself waits for its first story.
@@ -35,7 +36,7 @@ export default function Nights() {
   // In the small hours the tab is only the one back-to-sleep button (until she asks for everything).
   const smallHours = useSmallHours();
   const [showAll, setShowAll] = useState(false);
-  const hush = smallHours ? backToSleepTrack(listenTracks(), t.locale, settings.door, clock.now(), playable) : null;
+  const hush = smallHours ? backToSleepTrack(listenTracks(), contentLanguage(t.locale), settings.door, clock.now(), playable) : null;
 
   function row(track: Track) {
     const canPlay = playable(track);
@@ -44,7 +45,7 @@ export default function Nights() {
       <Card key={track.file} onPress={open}>
         <View style={styles.row}>
           <View style={styles.grow}>
-            <Body muted={false}>{trackTitle(track, t.locale)}</Body>
+            <Body muted={false}>{trackTitle(track, contentLanguage(t.locale))}</Body>
             {!canPlay && <Body size={14}>{t('listen.notReady')}</Body>}
           </View>
           {canPlay && <Chevron />}

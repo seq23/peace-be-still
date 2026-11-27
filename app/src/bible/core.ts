@@ -2,10 +2,28 @@
 // The app opens the bundled files with expo-sqlite (index.ts); the tests use node:sqlite on the
 // same files. Stored text is never changed: displayRuns only splits it for the reader.
 import books from '../../../content/bible/books.json';
+import type { Language } from '../i18n';
 
-export type Translation = 'KJV' | 'RV1909';
-export type Language = 'en' | 'es';
-export type Book = { code: string; usfm: string; en: string; es: string; aliases?: string[] };
+export type { Language };
+export type Translation = 'KJV' | 'RV1909' | 'KRV' | 'CUVS' | 'CUVT';
+export type Book = { code: string; usfm: string; aliases?: string[] } & Record<Language, string>;
+
+/** Each screen language reads one Bible, word for word: KJV, Reina-Valera 1909, 개역한글 (1961), and the
+ *  1919 和合本 in Simplified or Traditional characters (never the 1988 edition). */
+export const TRANSLATION_OF: Record<Language, Translation> = { en: 'KJV', es: 'RV1909', ko: 'KRV', 'zh-Hans': 'CUVS', 'zh-Hant': 'CUVT' };
+export function translationFor(language: string): Translation {
+  return TRANSLATION_OF[language as Language] ?? 'KJV';
+}
+
+/** The short name shown after every reference and on every share card ("시편 23:1 · 개역한글"). */
+export const TRANSLATION_NAME: Record<Translation, string> = { KJV: 'KJV', RV1909: 'RV 1909', KRV: '개역한글', CUVS: '和合本', CUVT: '和合本' };
+
+/** The credit line under Korean and Chinese verses, from content/bible/{krv,cuv}_source.json. */
+export const TRANSLATION_CREDIT: Partial<Record<Translation, string>> = {
+  KRV: '개역한글판 (대한성서공회 번역, 1961)',
+  CUVS: '和合本（1919年版，公有领域）',
+  CUVT: '和合本（1919年版，公有領域）',
+};
 export type Verse = { book: string; chapter: number; verse: number; text: string };
 export type Reference = { book: string; chapter: number; verse?: number; endVerse?: number };
 export type Run = { text: string; italic: boolean };
@@ -183,3 +201,10 @@ export function createBible(driver: Driver) {
   };
 }
 export type Bible = ReturnType<typeof createBible>;
+
+/** "시편 23:1 · 개역한글", then the translation's credit line on its own line when it has one. Every verse
+ *  screen and share card cites through this, so a Korean or Chinese verse never shows without its credit. */
+export function citation(reference: string, translation: Translation): string {
+  const credit = TRANSLATION_CREDIT[translation];
+  return `${reference} · ${TRANSLATION_NAME[translation]}${credit ? `\n${credit}` : ''}`;
+}

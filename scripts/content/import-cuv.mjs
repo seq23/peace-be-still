@@ -170,6 +170,15 @@ async function main() {
     await new Promise((r) => setTimeout(r, 700));
   }
   if (lines.length < 31000) throw new Error(`NAMED STOP [CUV_SHORT] only ${lines.length} verses`);
+  // The Wikisource page carries one later-edition reading: 她 (a character first printed in the 1920s) at LUK 1:45.
+  // The 1919 text reads 他 there (FHL 官話和合本, bible.fhl.net/json/qb.php?chineses=路&chap=1&sec=45&version=cumv,
+  // read 27 Nov 2026). app/test/i18n.unit.ts fails on any 她 in either store.
+  const CORRECTIONS = { "LUK 1:45": ["她", "他"] };
+  for (const [ref, [from, to]] of Object.entries(CORRECTIONS)) {
+    const i = lines.findIndex((l) => l.startsWith(`${ref} `));
+    if (i < 0 || !lines[i].includes(from)) throw new Error(`NAMED STOP [CUV_CORRECTION] ${ref} no longer reads ${from}`);
+    lines[i] = lines[i].replace(from, to);
+  }
   const trad = lines.join("\n") + "\n";
   const variant = new RegExp(`[${Object.keys(VARIANTS).join("")}]`, "gu");
   const simp = lines.map((l) => { const [code, cv] = l.split(" ", 2); return `${code} ${cv} ${t2s(l.slice(code.length + cv.length + 2)).replace(variant, (ch) => VARIANTS[ch])}`; }).join("\n") + "\n";

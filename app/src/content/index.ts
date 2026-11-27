@@ -1,5 +1,6 @@
 // Stories and Morning Word declarations as the app serves them: which telling a person reads, what her age band
 // may see, which story is today's, every past one, and the declarations behind each topic.
+import { contentLanguage } from '../i18n';
 import type { Age, JourneyId, Language } from '../model';
 import raw from './library.json';
 import type { Declaration, GriefLine, Library, Story, Telling } from './types';
@@ -52,7 +53,7 @@ export function pastStories(list: readonly Story[], date: Date): { story: Story;
 }
 
 export function declarations(language: Language): readonly Declaration[] {
-  return library.declarations[language];
+  return library.declarations[contentLanguage(language)];
 }
 
 /** The free daily declaration follows the day of the year; with a paid topic chosen, it comes from that topic. */
@@ -67,7 +68,7 @@ export function dailyDeclaration(language: Language, date: Date, topic?: Topic):
 
 /** "For when you've lost someone": every line, in order. Free; the same for every age band. */
 export function griefLines(language: Language): readonly GriefLine[] {
-  return library.grief[language];
+  return library.grief[contentLanguage(language)];
 }
 
 export function byTopic(language: Language, topic: Topic): Declaration[] {

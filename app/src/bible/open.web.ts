@@ -10,6 +10,9 @@ import { createBible, type Bible, type Translation } from './core';
 const assets: Record<Translation, number> = {
   KJV: require('./data/kjv.db'),
   RV1909: require('./data/rv1909.db'),
+  KRV: require('./data/krv.db'),
+  CUVS: require('./data/cuvs.db'),
+  CUVT: require('./data/cuvt.db'),
 };
 const wasm: number = require('sql.js/dist/sql-wasm.wasm');
 

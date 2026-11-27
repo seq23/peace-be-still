@@ -1,4 +1,5 @@
 // Today keeps the date, week dots and the three daily cards in the shell's order.
+import { contentLanguage } from '../../src/i18n';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
@@ -38,7 +39,7 @@ export default function Today() {
   const published = usePublishedAudio(smallHours && faith);
   const [showAll, setShowAll] = useState(false);
   const playable = (track: Track) => isPreviewSample(track) || published?.get(track.file) === track.sha256;
-  const hush = smallHours ? backToSleepTrack(listenTracks(), t.locale, settings.door, clock.now(), playable) : null;
+  const hush = smallHours ? backToSleepTrack(listenTracks(), contentLanguage(t.locale), settings.door, clock.now(), playable) : null;
 
   const item = (label: Key, text: string, extra?: React.ReactNode, done = false) => (
     <Card>

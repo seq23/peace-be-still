@@ -1,5 +1,6 @@
 // The one chat contract between the app and the Worker (worker/src/index.ts imports these types).
 // A request is built from phase 1's Settings, so the door, voice and language ids cannot drift.
+import { contentLanguage } from '../i18n';
 import type { Settings } from '../model';
 
 export type ChatTurn = { role: 'user' | 'assistant'; text: string };
@@ -57,7 +58,8 @@ export function buildChatRequest(settings: Settings, conversation: string, messa
     messages: messages.slice(-12),
     door: settings.door,
     voice: settings.age === 'teen' ? 'teen' : settings.voice,
-    language: settings.language,
+    // The chat worker answers in English or Spanish today; a Korean or Chinese phone is sent as English.
+    language: contentLanguage(settings.language),
     ...(settings.journey ? { journey: settings.journey } : {}),
     ...(freeConsent ? { freeConsent: true } : {}),
     ...(overflowConsent ? { overflowConsent: true } : {}),

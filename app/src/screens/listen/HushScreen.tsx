@@ -1,5 +1,6 @@
 // The small-hours screen for "3 AM, back to sleep" (the rule is in hush.ts): night, one large calm button, one quiet
 // line, and a way back to the usual screen. Nothing else bright or busy.
+import { contentLanguage } from '../../i18n';
 import { useIsFocused, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { AppState, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -30,7 +31,7 @@ export function BackToSleep({ track, showAll }: { track: Track; showAll: () => v
   const router = useRouter();
   const minutes = Math.max(1, Math.round(track.seconds / 60));
   const ref = track.scriptureRef && parseReference(track.scriptureRef);
-  const detail = t('hush.detail', { minutes, ref: ref ? formatReference(ref, t.locale) : trackTitle(track, t.locale) });
+  const detail = t('hush.detail', { minutes, ref: ref ? formatReference(ref, t.locale) : trackTitle(track, contentLanguage(t.locale)) });
   return (
     <SafeAreaView edges={['top']} style={styles.screen}>
       <View style={styles.middle}>
