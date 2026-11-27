@@ -6,9 +6,10 @@ import { View } from 'react-native';
 import { useCanUse } from '../purchases/provider';
 import { useSettings, useT } from '../settings';
 import { Body, Card, Chevron, Label, styles } from '../ui';
+import { ownNightSupported } from './adapters';
 
-/** Who is shown the entry at all: adults on the Mindset door. */
-export const showsOwnNight = (settings: { age: string | null; door: string | null }) => settings.age === 'adult' && settings.door === 'mindset';
+/** Who is shown the entry at all: adults on the Mindset door, on a binary that has the phone voice and microphone question. */
+export const showsOwnNight = (settings: { age: string | null; door: string | null }) => settings.age === 'adult' && settings.door === 'mindset' && ownNightSupported();
 
 export function OwnNightEntry() {
   const { settings } = useSettings();

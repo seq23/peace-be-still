@@ -194,7 +194,7 @@
         { "tap": "Use the TEST recording (preview)", "then": "Your recording is ready.", "id": "recorded" },
         { "tap": "Save this night", "then": "1 of 20 saved on this phone", "id": "saved" },
         { "tap": "/^TEST moment/", "then": "Start the night", "id": "player" },
-        { "tap": "Start the night", "then": "/the sound fades out at/", "id": "playing" },
+        { "tap": "Start the night", "then": "/then the sound fades out/", "id": "playing" },
         { "tap": "Stop the night", "then": "Start the night", "id": "stopped" }
       ]
     },

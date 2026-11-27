@@ -164,6 +164,7 @@ function Editor({ draft: start, write, saved, count, done }: { draft: Draft; wri
     : t(({ busy: 'ownNight.busy', offline: 'ownNight.offline', saveFailed: 'ownNight.saveFailed', needRecording: 'ownNight.needRecording' } as const)[notice]);
 
   if (crisis) return <Screen>
+    <BackLink onPress={() => void cancel()}>{t('common.back')}</BackLink>
     <Title>{t('ownNight.title')}</Title>
     <Text accessibilityRole="alert" style={{ color: c.ink, fontFamily: fonts.body, fontSize: 17, lineHeight: 25 }}>{crisis}</Text>
     {crisisLinks(crisis, d.lang).map(link => <Pressable key={link.url} accessibilityRole="link" onPress={() => void Linking.openURL(link.url)}
@@ -189,7 +190,7 @@ function Editor({ draft: start, write, saved, count, done }: { draft: Draft; wri
       {notice && ['busy', 'offline', 'limit'].includes(notice) && alert(noticeText)}
       {d.ai && <Body size={14}>{t('ownNight.writtenWithAi')}</Body>}
       <TextInput accessibilityLabel={t('ownNight.scene')} multiline maxLength={SCENE_MAX} value={d.scene}
-        onChangeText={scene => set({ scene })} style={[input, { minHeight: 140, fontFamily: fonts.serif, fontSize: 19, lineHeight: 27 }]} />
+        onChangeText={scene => set({ scene })} style={[input, { minHeight: 236, fontFamily: fonts.serif, fontSize: 19, lineHeight: 27 }]} />
       <Body size={14}>{t('ownNight.sceneHint')}</Body>
       {remaining !== null && <Body size={13}>{t('ownNight.remaining', { count: remaining })}</Body>}
     </>}

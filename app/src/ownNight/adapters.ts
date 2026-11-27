@@ -4,7 +4,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from 'expo-audio';
 import { Directory, File, Paths } from 'expo-file-system';
-import * as Speech from 'expo-speech';
+import { requireOptionalNativeModule } from 'expo-modules-core';
 import { Platform } from 'react-native';
 import { prepareAudioSession } from '../player/adapters';
 import { isOwnNightPreview } from './api';
@@ -42,12 +42,21 @@ export function bedOutput(title: string): BedOutput {
   };
 }
 
+/**
+ * Whether this binary has what the feature needs. An over-the-air update reaches every phone of the same app
+ * version (scripts/ota-update.sh): a binary built before Write your own night has no ExpoSpeech module and no
+ * microphone question, so asking for either there would crash. Such a phone never shows the entry or the route.
+ */
+export const ownNightSupported = () => Platform.OS === 'web' || !!requireOptionalNativeModule('ExpoSpeech');
+// Loaded on first use only, never at startup, so an older binary that reached this code by update never loads it.
+const speech = () => require('expo-speech') as typeof import('expo-speech'); // eslint-disable-line @typescript-eslint/no-require-imports
+
 export function phoneVoice(scene: string, lang: 'en' | 'es'): VoiceOutput {
   return {
     say: volume => new Promise<void>((resolve, reject) => {
-      Speech.speak(scene, { language: speechLanguage(lang), ...PHONE_VOICE, volume, onDone: () => resolve(), onStopped: () => resolve(), onError: error => reject(error) });
+      speech().speak(scene, { language: speechLanguage(lang), ...PHONE_VOICE, volume, onDone: () => resolve(), onStopped: () => resolve(), onError: error => reject(error) });
     }),
-    stop: () => { void Speech.stop(); },
+    stop: () => { void speech().stop(); },
   };
 }
 
@@ -93,9 +102,10 @@ export function keepRecording(from: string, nightId: string): string {
   return target.uri;
 }
 
-/** Deletes a recording file on this phone. Only files under the app's own folder are ever touched. */
+/** Deletes a recording file on this phone. Only files in the app's own own-nights folder are ever touched. */
 export const removeRecording: RemoveFile = async uri => {
   if (!uri.startsWith('file:')) return; // the preview's TEST recording is a web address: nothing on the phone
+  if (!uri.includes('/own-nights/')) throw new Error('NOT_OUR_FILE');
   const file = new File(uri);
   if (file.exists) file.delete();
 };

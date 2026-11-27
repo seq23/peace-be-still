@@ -499,7 +499,7 @@
   "ownNight.player": "Tu noche",
   "ownNight.start": "Empezar la noche",
   "ownNight.stopNight": "Detener la noche",
-  "ownNight.endsAt": "La voz se va haciendo más suave, y el sonido se apaga a las %{time}.",
+  "ownNight.endsAt": "Hasta las %{time}, la voz se va haciendo más suave y luego el sonido se apaga.",
   "ownNight.ready": "Tu momento se dice con suavidad, luego un largo silencio, y otra vez, un poco más suave cada vez, durante %{minutes} minutos.",
   "ownNight.voiceFailed": "La voz dejó de funcionar. El sonido tranquilo sigue hasta el final.",
   "ownNight.ended": "Tu noche terminó.",

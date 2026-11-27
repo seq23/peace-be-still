@@ -499,7 +499,7 @@
   "ownNight.player": "Your night",
   "ownNight.start": "Start the night",
   "ownNight.stopNight": "Stop the night",
-  "ownNight.endsAt": "The voice grows quieter, and the sound fades out at %{time}.",
+  "ownNight.endsAt": "Until %{time}, the voice grows quieter, then the sound fades out.",
   "ownNight.ready": "Your moment is said softly, then long quiet, then again, a little softer each time, for %{minutes} minutes.",
   "ownNight.voiceFailed": "The voice stopped working. The quiet sound keeps going until the end.",
   "ownNight.ended": "Your night has ended.",

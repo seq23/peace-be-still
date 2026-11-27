@@ -2927,6 +2927,25 @@ async function typeInto(tree: ReactTestRenderer, label: string, value: string) {
   await act(async () => field.props.onChangeText(value));
 }
 const ownNightsSaved = () => JSON.parse(local.get(OWN_NIGHTS) ?? '[]') as Array<Record<string, unknown>>;
+// A phone binary built with Write your own night has the ExpoSpeech native module (the phone voice).
+beforeEach(() => { (globalThis as any).__pbsNative = { ExpoSpeech: {} }; });
+
+test('Write your own night: a phone on an older binary (no phone-voice module, no microphone question) never shows it, even when updated over the air', async () => {
+  (globalThis as any).__pbsNative = {};
+  const tree = await asPaid(() => mount('nights', mindsetAdult));
+  assert.doesNotMatch(strings(tree), /Write your own night/);
+  await act(async () => tree.unmount());
+  const route = await asPaid(() => mount('ownNight', mindsetAdult));
+  assert.equal(host(route, 'Redirect')[0]?.props.href, '/nights');
+  await act(async () => route.unmount());
+  const price = await mountPaid(mindsetAdult);
+  assert.doesNotMatch(strings(price), /Write your own night/);
+  await act(async () => price.unmount());
+  (globalThis as any).__pbsNative = { ExpoSpeech: {} };
+  const updated = await asPaid(() => mount('nights', mindsetAdult));
+  assert.match(strings(updated), /Write your own night/);
+  await act(async () => updated.unmount());
+});
 
 test('Write your own night: a free adult sees the entry marked for a paid plan, the explanation and the existing price screen', async () => {
   local.delete(OWN_NIGHTS);
@@ -3113,7 +3132,7 @@ test('the night screen: on night, the scene shown, Start runs the night through 
   assert.match(strings(tree), /20 min · Phone voice · Written with AI/);
   await press(tree, 'Start the night');
   assert.deepEqual(bed, ['start']);
-  assert.match(strings(tree), /the sound fades out at/);
+  assert.match(strings(tree), /then the sound fades out\./);
   await press(tree, 'Stop the night');
   assert.deepEqual(bed, ['start', 'stop']);
   await act(async () => tree.unmount());
@@ -3167,5 +3186,15 @@ test('web preview only: the marked TEST recording and the ?state= replies; never
   assert.equal(ownNightsSaved()[0].recording, 'https://preview.example/own-night-preview/test-recording-en.mp3');
   assert.equal(sceneRequests.length, before, 'the preview never calls the Worker');
   await act(async () => tree.unmount());
+  local.delete(OWN_NIGHTS);
+});
+
+test('Write your own night deletes only its own recordings: a file outside its folder is refused, and the night stays listed', async () => {
+  const { removeRecording, savedNights } = require('../src/ownNight/adapters') as typeof import('../src/ownNight/adapters');
+  await assert.rejects(removeRecording('file:///var/mobile/Containers/Data/Documents/audio/psalm-23.m4a'), /NOT_OUR_FILE/);
+  await removeRecording('https://preview.example/own-night-preview/test-recording-en.mp3'); // a web address: nothing on the phone
+  local.set(OWN_NIGHTS, JSON.stringify([{ id: 'x1', scene: 'I am home. It is quiet.', wish: 'TEST', who: '', lang: 'en', minutes: 20, voice: 'mine', recording: 'file:///var/mobile/Documents/audio/psalm-23.m4a', recordingSeconds: 9, savedAt: 1 }]));
+  assert.deepEqual(await savedNights.remove('x1'), { ok: false, reason: 'failed' });
+  assert.equal(ownNightsSaved().length, 1);
   local.delete(OWN_NIGHTS);
 });
