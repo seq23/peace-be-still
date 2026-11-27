@@ -2,61 +2,19 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W48",
   "site": "peacebestillapp.com",
-  "generated_at": "2026-11-26T19:46:51.278Z",
+  "generated_at": "2026-11-27T18:08:26.604Z",
   "state": "slow",
-  "published": 4,
+  "published": 3,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 3,
   "ai_visitors": 0,
-  "ai_bot_hits": 315,
+  "ai_bot_hits": 332,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 15,
+  "held_by_cap": 18,
   "redirected": [
-    {
-      "query": "daily devotional books for black women",
-      "strengthen": "https://peacebestillapp.com/questions/free-daily-devotional-for-black-women/",
-      "matched_by": "high token overlap (0.80 >= 0.6)",
-      "at": "2026-11-20"
-    },
-    {
-      "query": "daily prayer for black women",
-      "strengthen": "https://peacebestillapp.com/questions/free-daily-devotional-for-black-women/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-20"
-    },
-    {
-      "query": "free bible chat app no subscription",
-      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
-      "matched_by": "same 3 intent words plus modifiers",
-      "at": "2026-11-20"
-    },
-    {
-      "query": "free bible chat app",
-      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-20"
-    },
-    {
-      "query": "free bible talk app",
-      "strengthen": "https://peacebestillapp.com/questions/is-creed-bible-app-free/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-20"
-    },
-    {
-      "query": "free bible ai chat app",
-      "strengthen": "https://peacebestillapp.com/free-bible-chat/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-20"
-    },
-    {
-      "query": "haven bible chat app free",
-      "strengthen": "https://peacebestillapp.com/questions/is-the-haven-bible-app-free/",
-      "matched_by": "high token overlap (0.80 >= 0.6)",
-      "at": "2026-11-20"
-    },
     {
       "query": "what is the bible verse for prayer before sleeping",
       "strengthen": "https://peacebestillapp.com/questions/what-is-the-bible-verse-for-sleep-prayer/",
@@ -96,7 +54,6 @@
   },
   "notes": [
     "site config lowers the mode to slow",
-    "not read: AI answer misses (no BOSS_OPEN_LOOPS_TOKEN in this run (pass it in the caller's secrets: block)); could not tell this run",
     "BUILD held by the cap: 10 live engine page(s), cap 10 (held at 10: no Search Console numbers to judge results (Search Console has no rows for 2026-09-26..2026-10-23, so there is nothing to compare the last 28 days with); the cap never grows without data); 3 more page(s) today would have gone over it, those searches stay queued",
     "CHECK runs weekly in mode=slow; last ran 2026-11-24"
   ],
@@ -127,14 +84,45 @@
     "competition": "ok: 15 top-10 read(s) via brave"
   },
   "ai_misses": {
-    "read": "not read: no BOSS_OPEN_LOOPS_TOKEN in this run (pass it in the caller's secrets: block)",
-    "week": null,
-    "misses": 0,
+    "read": "ok",
+    "week": "2026-W48",
+    "misses": 7,
     "strengthened": [],
     "new_candidates": [],
-    "skipped": [],
+    "skipped": [
+      {
+        "id": "1533e5176bf70e30f0275743bff04908b97ef34c",
+        "reason": "CHECK runs weekly in mode=slow and did not run today"
+      },
+      {
+        "id": "2a4a07b6d8aa434e8173b4d079511d775d815aa9",
+        "reason": "CHECK runs weekly in mode=slow and did not run today"
+      },
+      {
+        "id": "675d80b6387907d431c171a6ece9e1a1322e89cd",
+        "reason": "CHECK runs weekly in mode=slow and did not run today"
+      },
+      {
+        "id": "b022671e5127a093601e21081da7e59434b4eeef",
+        "reason": "CHECK runs weekly in mode=slow and did not run today"
+      },
+      {
+        "id": "c5a2df520ef68acfa6cce3fddd7c543444498ebb",
+        "reason": "CHECK runs weekly in mode=slow and did not run today"
+      },
+      {
+        "id": "f025ec5599d62fd1262c4d251f3fd404d156d448",
+        "reason": "CHECK runs weekly in mode=slow and did not run today"
+      },
+      {
+        "id": "f3d7e985d2949ac18d87baa81203f8f35fd53113",
+        "reason": "CHECK runs weekly in mode=slow and did not run today"
+      }
+    ],
     "rejected": [],
     "could_not_tell": 5
   },
-  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/45886148485"
+  "comparison": "not read: FIND has not run since v1.16.0",
+  "seeds": "not read: this site has no seeds in its config",
+  "run_url": "https://github.com/seq23/peace-be-still/actions/runs/46047147322"
 }
