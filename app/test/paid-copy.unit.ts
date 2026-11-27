@@ -179,7 +179,8 @@ test('every selling line on the paywall is mapped to a tap-through step, and its
   const keys = [...new Set([...block.matchAll(/'(paid\.[A-Za-z.]+)'/g), ...faith.matchAll(/'(paid\.[A-Za-z.]+)'/g)].map(m => m[1]))]
     .filter(k => k !== 'paid.chatHeadlineMindset');
   assert.ok(keys.length >= 8, `only ${keys.length} selling lines read from the paywall`);
-  const mapped = (flow.promises as Array<{ text: string; on: string; built?: string; native_only?: string }>).filter(p => p.on === 'paywall:plans');
+  // The faith door's price screen (paywall) and the Mindset door's (paywall-mindset: Write your own night, adults only).
+  const mapped = (flow.promises as Array<{ text: string; on: string; built?: string; native_only?: string }>).filter(p => p.on === 'paywall:plans' || p.on === 'paywall-mindset:plans');
   const steps = new Set((flow.journeys as Array<{ name: string; steps: Array<{ id?: string }> }>).flatMap(j => j.steps.filter(s => s.id).map(s => `${j.name}:${s.id}`)));
   for (const key of keys) {
     const line = String(strings.en[key]).replace('%{count}', String(PAID_CHAT_MESSAGES)).replace(/’/g, "'");

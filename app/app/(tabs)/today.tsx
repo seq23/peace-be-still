@@ -18,6 +18,7 @@ import { usePublishedAudio } from '../../src/screens/listen/availability';
 import { BackToSleep, useSmallHours } from '../../src/screens/listen/HushScreen';
 import { backToSleepTrack } from '../../src/screens/listen/hush';
 import type { Track } from '../../src/player/library';
+import { OwnNightEntry } from '../../src/ownNight/Entry';
 
 export default function Today() {
   const { settings } = useSettings();
@@ -65,6 +66,7 @@ export default function Today() {
       {faith && canUse(pages.story.feature) && story && item('today.story.label', story.title,
         <TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink>)}
       {!faith && canUse(pages.journal.feature) && item('today.scene.label', t('today.scene.text'), <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>)}
+      {settings.journey === 'living-in-the-end' && <OwnNightEntry />}
       <Card style={{ paddingVertical: 12 }}>
         <View style={styles.row}>
           <View style={{ width: 24, height: 24, borderRadius: 12, borderWidth: 2, borderColor: c.line }} />

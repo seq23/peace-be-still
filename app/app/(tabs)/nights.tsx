@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { MadeForYouEntry } from '../../src/madeForYou/Entry';
+import { OwnNightEntry } from '../../src/ownNight/Entry';
 import { useSettings, useT } from '../../src/settings';
 import { isPreviewSample, listenTracks } from '../../src/screens/listen/preview';
 import { onePerScript, trackTitle, type Track } from '../../src/player/library';
@@ -58,6 +59,7 @@ export default function Nights() {
     <Screen edges={['top']}>
       <Title>{t('tabs.nights')}</Title>
       <MadeForYouEntry />
+      <OwnNightEntry />
       {settings.door === 'mindset' ?
         <Shelf title={t('journey.imaginationNights.name')} detail={t('listen.nights', { count: imagination.length })}>{imagination.map(row)}</Shelf> : <>
           <Shelf title={t('journey.psalmNights.name')} detail={t('listen.whisperedNights', { count: psalms.length })}>{psalms.map(row)}</Shelf>

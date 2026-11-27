@@ -11,6 +11,7 @@ import type { Key } from '../../src/i18n';
 import { useSettings, useT } from '../../src/settings';
 import { fonts } from '../../src/theme/tokens';
 import { Body, Card, PillButton, Screen, TextLink, Title, styles, usePalette } from '../../src/ui';
+import { showsOwnNight } from '../../src/ownNight/Entry';
 
 const planOrder = ['yearly', 'monthly'] as const;
 const planCopy = {
@@ -114,6 +115,8 @@ export default function PaidScreen() {
             your prompts ... or responses to improve our products". Gemini is the paid backup and the crisis model. */}
         <Body size={14} muted={false}>{t('paid.noTraining')}</Body>
         {benefits[settings.door === 'mindset' ? 'mindset' : 'faith'].map(key => <Body key={key} size={15} muted={false}>{t(key)}</Body>)}
+        {/* Write your own night: Mindset door, 18 and over, on a binary that has it (a teen is never sold what a teen never gets). */}
+        {showsOwnNight(settings) && <Body size={15} muted={false}>{t('paid.ownNight')}</Body>}
         {/* "Private" is the chat's promise, not Made for you's: its notes go to free models first (her ruling 21 Nov 2026). */}
         <Body size={13}>{t('paid.madeForYouNote')}</Body>
       </View>

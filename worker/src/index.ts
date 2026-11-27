@@ -1,4 +1,5 @@
-// Peace Be Still chat Worker: POST /api/token, POST /api/chat, POST /api/report, GET and DELETE /api/memory, hourly cleanup.
+// Peace Be Still chat Worker: POST /api/token, POST /api/chat, POST /api/report, GET and DELETE /api/memory,
+// POST /api/own-night/scene (Write your own night: ownNight.ts), hourly cleanup.
 // Order for a chat message: region -> signed token (age band inside) -> burst limit -> body ->
 // crisis (floor, then the model risk read on EVERY message; no read = no answer) -> paid status
 // (RevenueCat) -> daily admission (D1) -> free ladder -> crisis tripwire on the draft -> answer gate
@@ -11,7 +12,7 @@
 import './env';
 import { cleanup } from './cleanup';
 import { addUserSpend, appSpendMonth, blockFor, capAlert, openRouterHeadroom, safetyBudgetLeft, safetyMicro, spendStatus, liftBlock, resetsOn, setBlock, throttle, userCeilingUsd, userSpend } from './controls';
-import { bump, logCode, reserve } from './counts';
+import { bump, logCode, refundMessage, reserve } from './counts';
 import { aboutScripture, CRISIS_THINKING_HEADROOM, confirmRisk, crisisLevel, crisisPrompt, crisisSchema, crisisWords, distress, floor, phraseHit, saysNotSafe, saysSafe, RISK_TAG, riskMessages, riskSchema, riskVerdict, tripwire, type CrisisKind, type CrisisLevel, type RiskVerdict, type Turn } from './crisis';
 import { centralDay, pacificDay, utcDay } from './day';
 import { paidStatus, recheckMemory, type Paid } from './entitlement';
@@ -19,6 +20,7 @@ import { reviewOpen, reviewStatus, reviewUnlock } from './review';
 import { storyArt } from './storyart';
 import { appleDeviceCheck, countFirstMessage, decideFirst, endFirst, firstActive, firstRow, type DeviceBit } from './firstprivate';
 import { madeForYou } from './madeForYou.mount';
+import { ownNightScene } from './ownNight';
 import { ipHash } from './iphash';
 import { runLadder, tally, type LadderResult, type LadderRung, type Metrics } from './ladder';
 import { deleteMemory, markCrisis, readMemory, saveMemory } from './memory';
@@ -32,7 +34,7 @@ import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutT
 import { examplesFor, sampleSet } from './voice/samples';
 import { chatJudgeListSchema, chatJudgeSchema, chatJudgeVerdict, judgeMessages, type JudgeInput, type JudgeVerdict } from './quality/judge';
 import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang } from './replies';
-import { parseReport, REPORTS_DAILY, saveReport } from './report';
+import { parseReport, REPORT_REASONS, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
 import { fold, parseReference, type Reference } from './shared';
 import { excludedTerritories, FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES, PAID_SHORT_ANSWERS_DAILY, providers, teenProviders, type Translation } from './shared';
@@ -329,15 +331,6 @@ async function renew(request: Request, env: Env, deps: Deps): Promise<Response> 
     const issued = await issueToken({ kid: env.CHAT_TOKEN_KID, secret: env.CHAT_TOKEN_SECRET }, who.age, now, who.installId);
     return json({ token: issued.token, installId: issued.installId });
   } catch { return fail('CHAT_TOKEN_SECRET_MISSING', 503); }
-}
-
-/** Gives back a message admitted but never answered (busy, or every rung out): she is not charged for it. */
-async function refund(db: D1Database, day: string, device: string, hash: string): Promise<void> {
-  await db.batch([
-    db.prepare('UPDATE chat_device_day SET messages = max(0, messages - 1) WHERE day = ? AND device = ?').bind(day, device),
-    db.prepare('UPDATE chat_ip_day SET messages = max(0, messages - 1) WHERE day = ? AND ip_hash = ?').bind(day, hash),
-    db.prepare('UPDATE chat_global_day SET messages = max(0, messages - 1) WHERE day = ?').bind(day),
-  ]);
 }
 
 async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Deps): Promise<Response> {
@@ -690,7 +683,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
       : await runLadder(env.DB, rungs, messages, answerSchema, answerTokens, metrics, isAnswer);
     if ('empty' in out) {
       if (attempt === 0) {
-        await refund(env.DB, day, me.installId, hash);
+        await refundMessage(env.DB, day, me.installId, hash);
         if (teenSlot === 'claimed') await releaseTeenAnswer();
         // A message on the crisis lane is never told chat is resting or busy: if the crisis model
         // gives nothing, she gets the fixed check-in and her region's lines (review of c7910f6, F2).
@@ -889,6 +882,16 @@ async function report(request: Request, env: Env, deps: Deps): Promise<Response>
   if (!who) return json({ error: 'UNAUTHORIZED' }, 401);
   if (!(await env.CHAT_BURST.limit({ key: who.installId })).success) return json({ error: 'SLOW_DOWN' }, 429);
   const raw = await request.json().catch(() => null);
+  // "Report this moment" (Write your own night): the reason only, as a count. The moment was written from her
+  // private wish, so no word of it is kept (ownNight.ts keeps nothing she wrote).
+  if (raw && typeof raw === 'object' && 'ownNight' in raw) {
+    const reason = (raw as { reason?: unknown }).reason;
+    if (typeof reason !== 'string' || !(REPORT_REASONS as readonly string[]).includes(reason)) return fail('BAD_REQUEST', 400);
+    if (!(await reserve(env.DB, centralDay(now), 'reports', REPORTS_DAILY))) { logCode('REPORT_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+    await bump(env.DB, centralDay(now), `own_night_report:${reason}`, 1);
+    logCode('OWN_NIGHT_REPORTED', { reason });
+    return json({ reported: true });
+  }
   // "Report this session" (Made for you): the same token, burst and daily checks, then its own store.
   const session = !!raw && typeof raw === 'object' && 'session' in raw;
   const body = session ? null : parseReport(raw);
@@ -916,6 +919,7 @@ export function createApp(deps: Deps = realDeps) {
         if (pathname === '/api/report' && request.method === 'POST') return await report(request, env, deps);
         if (pathname.startsWith('/api/story-art/') && request.method === 'GET') return await storyArt(pathname, env.STORY_ART);
         if (pathname === '/api/chat/first' && request.method === 'POST') return await first(request, env, deps);
+        if (pathname === '/api/own-night/scene' && request.method === 'POST') return await ownNightScene(request, env, ctx, deps, install);
         if (pathname.startsWith('/api/made-for-you')) {
           const answered = await madeForYou(env, deps, install, RENEW_GRACE_DAYS).fetch(request);
           if (answered) return answered;

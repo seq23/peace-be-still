@@ -137,6 +137,8 @@ const screens = {
   dailyPage: require('../app/today/[page]').default,
   nights: require('../app/(tabs)/nights').default,
   madeForYou: require('../app/made-for-you').default,
+  ownNight: require('../app/own-night/index').default,
+  ownNightPlay: require('../app/own-night/play').default,
   listen: require('../app/listen/[track]').default,
   more: require('../app/(tabs)/more').default,
   settings: require('../app/settings').default,
@@ -180,7 +182,19 @@ let artManifest: { version: number; ids: string[] } = { version: 0, ids: [] };
 let reviewWindow = false;
 let reviewAnswer: () => Response | Promise<Response> = () => new Response('{}', { status: 404 });
 const reviewCodes: string[] = [];
+// Write your own night (POST /api/own-night/scene): every request is recorded; the test sets the answer.
+const sceneRequests: Array<{ auth: string | null; body: Record<string, unknown> }> = [];
+const reportRequests: Array<Record<string, unknown>> = [];
+let sceneAnswer: () => Response | Promise<Response> = () => Response.json({ error: 'NOT_SET' }, { status: 500 });
 mock.method(globalThis, 'fetch', async (url: string, init?: RequestInit) => {
+  if (url.endsWith('/api/report') && String(init?.body).includes('"ownNight"')) {
+    reportRequests.push(JSON.parse(String(init?.body)));
+    return Response.json({ reported: true });
+  }
+  if (url.endsWith('/api/own-night/scene')) {
+    sceneRequests.push({ auth: new Headers(init?.headers).get('authorization'), body: JSON.parse(String(init?.body)) });
+    return sceneAnswer();
+  }
   if (url.endsWith('/api/review')) return reviewWindow ? Response.json({ open: true }) : Response.json({ error: 'NOT_FOUND' }, { status: 404 });
   if (url.endsWith('/api/review/unlock')) {
     assert.equal(new Headers(init?.headers).get('authorization'), 'Bearer render-token');
@@ -2905,4 +2919,292 @@ test('"What the chat remembers" in Spanish, light and dark', async t => {
     assert.doesNotMatch(strings(tree), /What the chat|Delete what/);
     await act(async () => tree.unmount());
   }
+});
+
+// Write your own night (Living in the end, Mindset door): adults on a paid plan only. ---------------------------
+const mindsetAdult: Settings = { door: 'mindset', age: 'adult', ageSetAt: 0, voice: 'plain', language: 'en', journey: 'living-in-the-end' };
+const OWN_NIGHTS = 'peace-be-still-own-nights';
+const sceneText = 'I am standing in my own kitchen on a slow Sunday. The new keys are warm in my hand. Everything is quiet and done.';
+const inputs = (tree: ReactTestRenderer) => host(tree, 'TextInput');
+async function typeInto(tree: ReactTestRenderer, label: string, value: string) {
+  const field = inputs(tree).find(n => n.props.accessibilityLabel === label);
+  assert.ok(field, `no field ${label} in: ${strings(tree)}`);
+  await act(async () => field.props.onChangeText(value));
+}
+const ownNightsSaved = () => JSON.parse(local.get(OWN_NIGHTS) ?? '[]') as Array<Record<string, unknown>>;
+// A phone binary built with Write your own night has the ExpoSpeech native module (the phone voice).
+beforeEach(() => { (globalThis as any).__pbsNative = { ExpoSpeech: {} }; });
+
+test('Write your own night: a phone on an older binary (no phone-voice module, no microphone question) never shows it, even when updated over the air', async () => {
+  (globalThis as any).__pbsNative = {};
+  const tree = await asPaid(() => mount('nights', mindsetAdult));
+  assert.doesNotMatch(strings(tree), /Write your own night/);
+  await act(async () => tree.unmount());
+  const route = await asPaid(() => mount('ownNight', mindsetAdult));
+  assert.equal(host(route, 'Redirect')[0]?.props.href, '/nights');
+  await act(async () => route.unmount());
+  const price = await mountPaid(mindsetAdult);
+  assert.doesNotMatch(strings(price), /Write your own night/);
+  await act(async () => price.unmount());
+  (globalThis as any).__pbsNative = { ExpoSpeech: {} };
+  const updated = await asPaid(() => mount('nights', mindsetAdult));
+  assert.match(strings(updated), /Write your own night/);
+  await act(async () => updated.unmount());
+});
+
+test('Write your own night: a free adult sees the entry marked for a paid plan, the explanation and the existing price screen', async () => {
+  local.delete(OWN_NIGHTS);
+  for (const name of ['nights', 'today'] as const) {
+    const tree = await mount(name, mindsetAdult);
+    assert.match(strings(tree), /Write your own night/, name);
+    assert.match(strings(tree), /Paid plan/, name);
+    await press(tree, 'Write your own night');
+    assert.deepEqual(calls.pop(), ['push', '/own-night']);
+    await act(async () => tree.unmount());
+  }
+  const locked = await mount('ownNight', mindsetAdult);
+  assert.match(strings(locked), new RegExp(en['ownNight.locked'].slice(0, 40).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  assert.equal(inputs(locked).length, 0, 'no editor without a paid plan');
+  await press(locked, 'See plans');
+  assert.deepEqual(calls.pop(), ['push', '/paid']);
+  assert.equal(sceneRequests.length, 0);
+  await act(async () => locked.unmount());
+  // The price screen names it on the Mindset door for an adult, and never for a teen or on the faith door.
+  const adultPrice = await mountPaid(mindsetAdult);
+  assert.match(strings(adultPrice), /Write your own night: your moment, read softly as you fall asleep\./);
+  await act(async () => adultPrice.unmount());
+  for (const value of [{ ...mindsetAdult, age: 'teen' }, { ...base, journey: 'psalm-nights' }] as Settings[]) {
+    const price = await mountPaid(value);
+    assert.doesNotMatch(strings(price), /Write your own night/, JSON.stringify(value));
+    await act(async () => price.unmount());
+  }
+});
+
+test('Write your own night: a teen (paid or not), a child and the faith door never see the entry, and a direct link sends them away', async () => {
+  const teen: Settings = { ...mindsetAdult, age: 'teen', voice: 'teen' };
+  for (const paid of [false, true]) {
+    for (const name of ['nights', 'today'] as const) {
+      const tree = paid ? await asPaid(() => mount(name, teen)) : await mount(name, teen);
+      assert.doesNotMatch(strings(tree), /Write your own night|Escribe tu propia noche/, `${name} paid=${paid}`);
+      await act(async () => tree.unmount());
+    }
+    const route = paid ? await asPaid(() => mount('ownNight', teen)) : await mount('ownNight', teen);
+    assert.equal(host(route, 'Redirect')[0]?.props.href, '/nights');
+    assert.equal(inputs(route).length, 0);
+    const play = paid ? await asPaid(() => mount('ownNightPlay', teen, { id: 'x' })) : await mount('ownNightPlay', teen, { id: 'x' });
+    assert.equal(host(play, 'Redirect')[0]?.props.href, '/nights');
+  }
+  const child = await mount('ownNight', { ...mindsetAdult, age: 'child', journey: 'imagination-nights' });
+  assert.equal(host(child, 'Redirect')[0]?.props.href, '/nights');
+  const faith = await asPaid(() => mount('nights', { ...base, journey: 'psalm-nights' }));
+  assert.doesNotMatch(strings(faith), /Write your own night/);
+  const faithRoute = await asPaid(() => mount('ownNight', { ...base, journey: 'psalm-nights' }));
+  assert.equal(host(faithRoute, 'Redirect')[0]?.props.href, '/nights');
+  assert.equal(sceneRequests.length, 0, 'no wish ever left the phone');
+});
+
+test('Write your own night, paid: write -> change a word -> save; the wish goes once to the Worker with her token, and the night is kept on the phone', async () => {
+  local.delete(OWN_NIGHTS);
+  sceneRequests.length = 0;
+  sceneAnswer = () => Response.json({ kind: 'scene', scene: sceneText, remaining: 49 });
+  const tree = await asPaid(() => mount('ownNight', mindsetAdult));
+  assert.match(strings(tree), /No nights saved yet\./);
+  await press(tree, 'Write a new night');
+  assert.match(strings(tree), /sent once to our private AI service/);
+  await typeInto(tree, 'What do you hope for?', 'TEST a cabin by the lake with a blue door');
+  await typeInto(tree, 'Who is with you? (optional)', 'my sister');
+  await press(tree, '90 min');
+  await press(tree, 'Write my moment');
+  assert.equal(sceneRequests.length, 1);
+  assert.equal(sceneRequests[0].auth, 'Bearer render-token');
+  assert.deepEqual(sceneRequests[0].body, { wish: 'TEST a cabin by the lake with a blue door', who: 'my sister', lang: 'en', region: 'US' });
+  const scene = inputs(tree).find(n => n.props.accessibilityLabel === 'Your moment')!;
+  assert.equal(scene.props.value, sceneText);
+  assert.match(strings(tree), /Written with AI\. Every word is yours to change\./);
+  assert.match(strings(tree), /49 private messages left today\./);
+  // App Review 1.2: the AI-written moment can be reported; only the reason leaves the phone.
+  await press(tree, 'Report this moment');
+  await press(tree, 'Hurtful or unkind');
+  assert.deepEqual(reportRequests.pop(), { ownNight: true, reason: 'hurtful' });
+  assert.match(strings(tree), /No words from your moment were sent with it\./);
+  await typeInto(tree, 'Your moment', sceneText.replace('slow Sunday', 'bright Saturday'));
+  await press(tree, 'Save this night');
+  const kept = ownNightsSaved();
+  assert.equal(kept.length, 1);
+  assert.match(String(kept[0].scene), /bright Saturday/);
+  assert.equal(kept[0].minutes, 90);
+  assert.equal(kept[0].voice, 'phone');
+  assert.match(strings(tree), /1 of 20 saved on this phone/);
+  await press(tree, /bright Saturday/);
+  assert.deepEqual(calls.pop(), ['push', { pathname: '/own-night/play', params: { id: kept[0].id } }]);
+  // Delete asks first, then removes it from the phone.
+  await press(tree, 'Delete');
+  assert.match(strings(tree), /Delete this night and its recording from this phone\?/);
+  await press(tree, 'Delete it');
+  assert.deepEqual(ownNightsSaved(), []);
+  assert.match(strings(tree), /No nights saved yet\./);
+  await act(async () => tree.unmount());
+});
+
+test('Write your own night: offline, busy, a refusal of who she is, and today\'s limit all leave the editor open to write it herself, never a blank scene', async () => {
+  const cases: Array<[string, () => Response | Promise<Response>, RegExp]> = [
+    ['offline', () => { throw new TypeError('Network request failed'); }, /You're offline, so I can't write it now\. You can write it yourself below\./],
+    ['500', () => new Response('nope', { status: 500 }), /I couldn't write it right now\. You can write it yourself below\./],
+    ['busy', () => Response.json({ kind: 'unavailable', reason: 'busy' }), /I couldn't write it right now/],
+    ['limit', () => Response.json({ kind: 'unavailable', reason: 'limit' }), /Today's 50 private messages are used/],
+    ['402', () => Response.json({ error: 'PAID_ONLY' }, { status: 402 }), /I couldn't write it right now/],
+    ['junk', () => Response.json({ kind: 'scene', scene: '' }), /I couldn't write it right now/],
+  ];
+  for (const [name, answer, line] of cases) {
+    local.delete(OWN_NIGHTS);
+    sceneAnswer = answer;
+    const tree = await asPaid(() => mount('ownNight', mindsetAdult));
+    await press(tree, 'Write a new night');
+    await typeInto(tree, 'What do you hope for?', 'TEST a steady job I like');
+    await press(tree, 'Write my moment');
+    assert.match(strings(tree), line, name);
+    const scene = inputs(tree).find(n => n.props.accessibilityLabel === 'Your moment');
+    assert.ok(scene, `${name}: the editor is open`);
+    assert.equal(scene.props.value, '', `${name}: never a made-up scene`);
+    const save = host(tree, 'Pressable').find(n => textOf(n).includes('Save this night'))!;
+    assert.equal(save.props.disabled, true, `${name}: nothing to save yet`);
+    await typeInto(tree, 'Your moment', 'I am at my new desk by the window. The work is mine and it is good.');
+    await press(tree, 'Save this night');
+    assert.equal(ownNightsSaved().length, 1, `${name}: her own words saved`);
+    await act(async () => tree.unmount());
+  }
+});
+
+test('Write your own night: a crisis reply shows the card and one-tap lines, keeps nothing, and a refusal keeps her on the wish', async () => {
+  local.delete(OWN_NIGHTS);
+  sceneAnswer = () => Response.json({ kind: 'crisis', crisis: 'selfharm', text: 'Please reach out right now to the 988 Suicide & Crisis Lifeline. Call or text 988, any time, day or night.' });
+  const tree = await asPaid(() => mount('ownNight', mindsetAdult));
+  await press(tree, 'Write a new night');
+  await typeInto(tree, 'What do you hope for?', 'TEST crisis words');
+  await press(tree, 'Write my moment');
+  assert.match(strings(tree), /988/);
+  assert.ok(host(tree, 'Pressable').some(n => textOf(n) === 'Call 988'));
+  assert.match(strings(tree), /Nothing you wrote was kept\./);
+  assert.deepEqual(ownNightsSaved(), []);
+  await act(async () => tree.unmount());
+  sceneAnswer = () => Response.json({ kind: 'refused', text: "I can't write that one as a night scene. Try a moment from your own life, just after what you hope for has happened." });
+  const refused = await asPaid(() => mount('ownNight', mindsetAdult));
+  await press(refused, 'Write a new night');
+  await typeInto(refused, 'What do you hope for?', 'TEST make him leave her');
+  await press(refused, 'Write my moment');
+  assert.match(strings(refused), /I can't write that one as a night scene/);
+  assert.ok(inputs(refused).some(n => n.props.accessibilityLabel === 'What do you hope for?'), 'still on the wish');
+  assert.ok(!inputs(refused).some(n => n.props.accessibilityLabel === 'Your moment'));
+  await act(async () => refused.unmount());
+});
+
+test('Write your own night: 20 saved nights is the limit; the 21st cannot be started', async () => {
+  const nights = Array.from({ length: 20 }, (_, i) => ({ id: `n${i}`, scene: `I am home. Night ${i} is calm.`, wish: 'TEST', who: '', lang: 'en', minutes: 20, voice: 'phone', savedAt: i }));
+  local.set(OWN_NIGHTS, JSON.stringify(nights));
+  const tree = await asPaid(() => mount('ownNight', mindsetAdult));
+  assert.match(strings(tree), /You have 20 saved nights\. Delete one to save another\./);
+  assert.ok(!host(tree, 'Pressable').some(n => textOf(n).includes('Write a new night')));
+  await act(async () => tree.unmount());
+  local.delete(OWN_NIGHTS);
+});
+
+test('Write your own night in Spanish, light and dark: every line Spanish, no faith or manifest words', async () => {
+  local.delete(OWN_NIGHTS);
+  sceneAnswer = () => Response.json({ kind: 'scene', scene: 'Estoy en mi propia cocina. Las llaves están en mi mano. Todo está en calma.', remaining: 10 });
+  for (const scheme of ['light', 'dark']) {
+    (globalThis as any).__pbsScheme = scheme;
+    const spanish = { ...mindsetAdult, language: 'es' as const };
+    const tree = await asPaid(() => mount('ownNight', spanish));
+    await press(tree, 'Escribir una noche nueva');
+    await typeInto(tree, '¿Qué esperas?', 'PRUEBA una casa pequeña');
+    await press(tree, 'Escribir mi momento');
+    assert.equal(sceneRequests.at(-1)!.body.lang, 'es');
+    const shown = strings(tree);
+    assert.match(shown, /Tu momento/);
+    assert.doesNotMatch(shown, /Write|Your moment|Save this/);
+    assert.deepEqual(faithContentIssues(shown), []);
+    await act(async () => tree.unmount());
+  }
+});
+
+test('the night screen: on night, the scene shown, Start runs the night through the one gate, Stop stops it', async () => {
+  const { OwnNightPlay } = require('../src/ownNight/Play') as typeof import('../src/ownNight/Play');
+  const { createNight } = require('../src/ownNight/night') as typeof import('../src/ownNight/night');
+  const said: number[] = [];
+  const bed: string[] = [];
+  const nightRow = { id: 'n1', scene: sceneText, wish: 'TEST', who: '', lang: 'en' as const, minutes: 20 as const, voice: 'phone' as const, ai: true, savedAt: 1 };
+  const make = () => createNight({ sayS: 5, every: () => () => undefined,
+    bed: { start: () => bed.push('start'), setVolume: () => undefined, stop: () => bed.push('stop') },
+    voice: { say: async v => { said.push(v); }, stop: () => undefined } });
+  const Screen = () => <OwnNightPlay night={nightRow} close={() => calls.push(['close'])} make={make} />;
+  const tree = await asPaid(() => mount('today', mindsetAdult, {}, Screen));
+  assert.ok(texts(tree).includes(sceneText));
+  assert.match(strings(tree), /20 min · Phone voice · Written with AI/);
+  await press(tree, 'Start the night');
+  assert.deepEqual(bed, ['start']);
+  assert.match(strings(tree), /then the sound fades out\./);
+  await press(tree, 'Stop the night');
+  assert.deepEqual(bed, ['start', 'stop']);
+  await act(async () => tree.unmount());
+  // A free adult who reaches the screen some other way cannot start it: the gate says no.
+  storePaid = false;
+  listeners = new Set();
+  const free = await mount('today', mindsetAdult, {}, Screen);
+  const start = host(free, 'Pressable').find(n => textOf(n).includes('Start the night'))!;
+  assert.equal(start.props.disabled, true);
+  await act(async () => free.unmount());
+});
+
+test('web preview only: the marked TEST recording and the ?state= replies; never on a phone build', async t => {
+  const { previewRecording } = require('../src/ownNight/adapters') as typeof import('../src/ownNight/adapters');
+  const { isOwnNightPreview } = require('../src/ownNight/api') as typeof import('../src/ownNight/api');
+  const previous = process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  const location = Object.getOwnPropertyDescriptor(globalThis, 'location');
+  const page = { origin: 'https://preview.example', search: '' };
+  const browser = new Map<string, string>();
+  Object.defineProperty(globalThis, 'location', { configurable: true, value: page });
+  Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: { getItem: (k: string) => browser.get(k) ?? null, setItem: (k: string, v: string) => void browser.set(k, v), removeItem: (k: string) => void browser.delete(k) } });
+  t.after(() => {
+    if (previous === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW; else process.env.EXPO_PUBLIC_PBS_PREVIEW = previous;
+    if (location) Object.defineProperty(globalThis, 'location', location); else Reflect.deleteProperty(globalThis, 'location');
+    Reflect.deleteProperty(globalThis, 'localStorage');
+  });
+  delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+  assert.equal(previewRecording('en'), null, 'a store build has no TEST recording');
+  assert.equal(isOwnNightPreview(), false);
+  process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+  (globalThis as any).__pbsPlatform = 'ios';
+  assert.equal(previewRecording('en'), null, 'a phone build with the switch set still refuses it');
+  (globalThis as any).__pbsPlatform = 'web';
+  assert.deepEqual(previewRecording('es'), { uri: 'https://preview.example/own-night-preview/test-recording-es.mp3', seconds: 11 });
+  for (const lang of ['en', 'es']) assert.ok(readFileSync(`public/own-night-preview/test-recording-${lang}.mp3`).length > 10_000);
+  // ?state=scene: the editor opens with the TEST moment, no network.
+  local.delete(OWN_NIGHTS);
+  const before = sceneRequests.length;
+  // Locked without the preview's own ?paid=1, like a free phone; then the ?state= replies.
+  const lockedPreview = await mount('ownNight', mindsetAdult, { state: 'scene' });
+  assert.match(strings(lockedPreview), /See plans/);
+  await act(async () => lockedPreview.unmount());
+  page.search = '?paid=1';
+  const tree = await mount('ownNight', mindsetAdult, { state: 'scene' });
+  await typeInto(tree, 'What do you hope for?', 'TEST tap-through wish');
+  await press(tree, 'Write my moment');
+  assert.match(String(inputs(tree).find(n => n.props.accessibilityLabel === 'Your moment')?.props.value), /^TEST moment\./);
+  await press(tree, 'My voice');
+  await press(tree, 'Use the TEST recording (preview)');
+  await press(tree, 'Save this night');
+  assert.equal(ownNightsSaved()[0].recording, 'https://preview.example/own-night-preview/test-recording-en.mp3');
+  assert.equal(sceneRequests.length, before, 'the preview never calls the Worker');
+  await act(async () => tree.unmount());
+  local.delete(OWN_NIGHTS);
+});
+
+test('Write your own night deletes only its own recordings: a file outside its folder is refused, and the night stays listed', async () => {
+  const { removeRecording, savedNights } = require('../src/ownNight/adapters') as typeof import('../src/ownNight/adapters');
+  await assert.rejects(removeRecording('file:///var/mobile/Containers/Data/Documents/audio/psalm-23.m4a'), /NOT_OUR_FILE/);
+  await removeRecording('https://preview.example/own-night-preview/test-recording-en.mp3'); // a web address: nothing on the phone
+  local.set(OWN_NIGHTS, JSON.stringify([{ id: 'x1', scene: 'I am home. It is quiet.', wish: 'TEST', who: '', lang: 'en', minutes: 20, voice: 'mine', recording: 'file:///var/mobile/Documents/audio/psalm-23.m4a', recordingSeconds: 9, savedAt: 1 }]));
+  assert.deepEqual(await savedNights.remove('x1'), { ok: false, reason: 'failed' });
+  assert.equal(ownNightsSaved().length, 1);
+  local.delete(OWN_NIGHTS);
 });

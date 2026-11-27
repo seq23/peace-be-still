@@ -13,3 +13,12 @@ export async function reserve(db: D1Database, day: string, metric: string, cap: 
 export function logCode(code: string, extra: Record<string, string | number | boolean> = {}): void {
   console.log(JSON.stringify({ code, ...extra }));
 }
+/** Gives back messages admitted but never answered (busy, or every rung out): she is not charged for them.
+ *  Chat and "Write your own night" share it (one write is SCENE_MESSAGE_COST messages). */
+export async function refundMessage(db: D1Database, day: string, device: string, hash: string, n = 1): Promise<void> {
+  await db.batch([
+    db.prepare('UPDATE chat_device_day SET messages = max(0, messages - ?) WHERE day = ? AND device = ?').bind(n, day, device),
+    db.prepare('UPDATE chat_ip_day SET messages = max(0, messages - ?) WHERE day = ? AND ip_hash = ?').bind(n, day, hash),
+    db.prepare('UPDATE chat_global_day SET messages = max(0, messages - ?) WHERE day = ?').bind(n, day),
+  ]);
+}
