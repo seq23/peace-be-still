@@ -3056,6 +3056,16 @@ test('Write your own night, paid: write -> change a word -> save; the wish goes 
   // Apple 5.1.2(i): the first wish waits for her yes, naming every service that reads it; nothing is sent before.
   await press(tree, 'Write my moment');
   assert.equal(sceneRequests.length, 0, 'sent before her yes');
+  // The consent is the whole screen, read from the top (#153 review N4: under the form it opened below the fold).
+  const wishBox = () => inputs(tree).find(n => n.props.accessibilityLabel === 'What do you hope for?');
+  assert.equal(wishBox(), undefined, 'the form is still above the consent');
+  const seen = texts(tree);
+  assert.ok(/Back to my hope$/.test(seen[0]) && seen[1] === 'Before your first moment', `the consent is not at the top: ${seen.slice(0, 3).join(' | ')}`);
+  assert.ok(!seen.includes('What do you hope for?'), 'the wish form shows above the consent');
+  await press(tree, 'Back to my hope');
+  assert.equal(wishBox()?.props.value, 'TEST a cabin by the lake with a blue door', 'her words were lost behind the consent');
+  await press(tree, 'Write my moment');
+  assert.equal(sceneRequests.length, 0, 'sent before her yes');
   for (const name of ['Cloudflare Workers AI', 'DeepSeek V4.1 Flash', 'OpenRouter', 'DeepInfra, Together or Fireworks', 'Google Gemini'])
     assert.ok(strings(tree).includes(name), `the consent does not name ${name}`);
   const opened: string[] = [];
