@@ -48,7 +48,7 @@ ${V("PSA 4:8")}`],
 <li>Keep the same passage for a few nights. Familiar words are easier to rest in.</li>
 </ol>`],
       ["Which translation is best for a whispered reading?", `<p>Many listeners choose the King James Version for bedtime because its rhythm is slow and familiar, and it is in the public domain in the United States, so it can be read and shared freely. Whatever translation you choose, the reading should be word for word, with the book, chapter and verse said or shown.</p>`],
-      ["How does Peace Be Still do it?", `<p>Peace Be Still is a phone app {{stores.tag}}. Its Psalm Nights journey is whispered scripture for sleep: a King James psalm read in a whisper on an always-dark screen that dims after ten seconds, with a sleep timer that fades out. Your first night is free, then one a week in the free version; a paid plan ($7.99 a month or $39.99 a year, no trial) opens a session every night.</p>`],
+      ["How does Peace Be Still do it?", `<p>Peace Be Still is a phone app {{stores.tag}}. Its Psalm Nights journey is whispered scripture for sleep: a King James psalm read in a whisper on an always-dark screen that dims after fifteen seconds, with a sleep timer that fades out. Your first night is free, then one a week in the free version; a paid plan ($7.99 a month or $39.99 a year, no trial) opens a session every night.</p>`],
     ],
     faq: [
       ["Is listening to the Bible at night good for sleep?", "Many people find it calming to end the day with scripture, and a quiet voice with a sleep timer avoids the bright screens and autoplay that keep people up. It is a nightly practice, not a treatment; if sleep problems last, talk to a doctor."],
@@ -189,9 +189,9 @@ ${V("PSA 4:8")}`],
 <li><strong>Call and response.</strong> Each story has one “say it with me” moment, like “God is good” and “all the time”, with a pause for you to answer.</li>
 <li><strong>The King James Version, word for word.</strong> The AI never writes a verse from memory. It names the reference; the app pastes the stored King James text.</li>
 </ul>`],
-      ["Is the Black Bible chat a real pastor?", `<p>No. It is an AI helper, and it says so on every answer. It is not a pastor, a prophet or a person, and it never speaks as God or Jesus. Before your first chat, the app tells you that what you type goes to free AI providers that may learn from it, so leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows the 988 Suicide &amp; Crisis Lifeline and other help straight away.</p>`],
+      ["Is the Black Bible chat a real pastor?", `<p>No. It is an AI helper, and it says so on every answer. It is not a pastor, a prophet or a person, and it never speaks as God or Jesus. Before your first free chat, the app tells you that what you type goes to free AI providers that may learn from it, so leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows the 988 Suicide &amp; Crisis Lifeline and other help straight away.</p>`],
       ["What does it cost?", `<p>The free version stays free: the whole King James Bible to read, and nearly every chapter read aloud, today's story, one chat a day of up to 5 messages, and a daily declaration. The paid plan is $7.99 a month or $39.99 a year and adds unlimited chat, chat that remembers what you are carrying, and every past story. ${claimText("en")} There is no trial, no weekly plan and no ads, and you can cancel any time from the paid screen.</p>`],
-      ["Is the black version of Bible chat a different Bible?", `<p>No. The Bible is the same King James Version in every journey. What changes is the voice of the chat and of the stories. The words of scripture are never changed.</p>
+      ["Is the black version of Bible chat a different Bible?", `<p>No. The Bible is the same in every journey: the King James Version in English, and the Reina-Valera 1909 in Spanish. What changes is the voice of the chat and of the stories. The words of scripture are never changed.</p>
 ${V("MAR 4:39")}`],
     ],
     faq: [

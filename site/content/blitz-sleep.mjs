@@ -34,7 +34,7 @@ ${V("PSA 127:2")}`],
 <li>If a task comes to mind, write it on paper by the bed and go back to the line.</li>
 <li>If you would rather listen than speak, play a psalm read softly with a sleep timer.</li>
 </ul>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still is a phone app {{stores.tag}}. Its Psalm Nights read a King James psalm in a whisper on a dark screen that dims after ten seconds, with a sleep timer that fades out. Your first night is free, then one a week in the free version; a paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still is a phone app {{stores.tag}}. Its Psalm Nights read a King James psalm in a whisper on a dark screen that dims after fifteen seconds, with a sleep timer that fades out. Your first night is free, then one a week in the free version; a paid plan ($7.99 a month or $39.99 a year, no trial) opens one every night.</p>`],
     ],
     faq: [
       ["What is the best prayer for sleep?", `The one you will actually pray. Short is better: thank God for one thing, hand over one worry, ask for rest. Many people end with Psalm 4:8: ${Q("PSA 4:8")}`],
@@ -363,7 +363,7 @@ ${V("JOH 14:1")}`],
 <li>Keep the volume low enough that you have to stay still to hear it.</li>
 </ol>`],
       ["Is it okay to fall asleep listening to the Bible?", `<p>Yes. Scripture does not need you awake to be true, and many believers end the day this way. It is a nightly practice, not a promise of sleep.</p>`],
-      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has Psalm Nights: real whispered readings of King James psalms, on a screen that goes dark after ten seconds, with a sleep timer that fades out. No ads, ever, and nothing plays after. Your first night is free, then one a week in the free version.</p>`],
+      ["Where Peace Be Still fits", `<p>Peace Be Still, {{stores.tag}}, has Psalm Nights: whispered readings of King James psalms, on a screen that goes dark after ten seconds, with a sleep timer that fades out. No ads, ever, and nothing plays after. Your first night is free, then one a week in the free version.</p>`],
     ],
     faq: [
       ["What is Bible ASMR?", "Scripture read in a whisper or very soft voice, close to the microphone, with gentle pauses. People listen to it at bedtime to wind down. A good reading keeps the words exact and names the book, chapter and verse."],

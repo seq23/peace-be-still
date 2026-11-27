@@ -338,7 +338,7 @@ ${V("ISA 55:1")}`],
 <li>Check that each answer is marked as AI.</li>
 </ol>`],
       ["Is Bible chat free?", `<p>Many are free to download and paid to use. Peace Be Still's free version gives one chat a day of up to 5 messages, for good, with no trial. See <a href="/free-bible-chat/">exactly what stays free</a>.</p>`],
-      ["Where do my words go?", `<p>Before your first chat, Peace Be Still tells you that what you type goes to free AI providers that may learn from it, and to leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows 988 and other help straight away.</p>`],
+      ["Where do my words go?", `<p>Before your first free chat, Peace Be Still tells you that what you type goes to free AI providers that may learn from it, and to leave out names. If you mention self-harm or abuse, the app does not send it to the AI; it shows 988 and other help straight away.</p>`],
     ],
     faq: [
       ["Is there an AI that answers Bible questions?", "Yes, several apps do. Peace Be Still, {{stores.short}}, answers with King James verses pasted from a stored copy, labels every answer as AI, and never speaks as God."],
@@ -380,7 +380,7 @@ ${V("ISA 55:1")}`],
     faq: [
       ["Can AI give me a Bible verse for my situation?", "Yes. Describe the situation and ask for one verse with its reference. Then read the verse in its chapter; the AI chooses, but you decide whether it fits."],
       ["Is it okay to use AI to find Bible verses?", "Many Christians use concordances, topic indexes and search tools; an AI is another kind of index. Treat its picks as suggestions, and keep reading scripture itself."],
-      ["Should I tell an AI Bible app personal details?", "Share the situation, not names or details that identify anyone. Peace Be Still tells you before your first chat that what you type goes to free AI providers that may learn from it."],
+      ["Should I tell an AI Bible app personal details?", "Share the situation, not names or details that identify anyone. Peace Be Still tells you before your first free chat that what you type goes to free AI providers that may learn from it."],
     ],
     sources: [bg("Psalm 34:18", "Psalm 34:18 (KJV), Bible Gateway"), bg("Joshua 1:9", "Joshua 1:9 (KJV), Bible Gateway")],
     related: ["/ai-bible/", "/christian-ai/", "/questions/bible-verses-for-anxiety/", "/free-bible-chat/"],
@@ -476,7 +476,7 @@ ${V("EST 4:14")}`],
     indexLabel: "Bible app for teens",
     indexNote: "A parent's checklist, and Young Faith for ages 13 to 17.",
     definition: "A good Bible app for a teenager gives plain answers to real questions, quotes scripture exactly, keeps stories short, has no ads, and keeps parents in charge of purchases. Peace Be Still, {{stores.short}}, has Young Faith · Bible for Teens for ages 13 to 17, with upgrades through Apple's Ask to Buy and no chat at all under 13.",
-    quick: "Check: an age gate (no AI chat under 13), exact verses, no ads, purchases that need your approval, and a clear note about where typed words go. Young Faith has a 3-minute story, a declaration and plain answers, every verse from the King James Bible.",
+    quick: "Check: an age gate (no AI chat under 13), exact verses, no ads, purchases that need your approval, and a clear note about where typed words go. Young Faith has a short story, a declaration and plain answers, every verse from the King James Bible.",
     bestFor: "parents and youth pastors choosing a Bible app for 13 to 17 year olds.",
     pick: PICK_EN("Our pick for a teen Bible app: Peace Be Still's Young Faith, for ages 13 to 17."),
     sections: [
@@ -487,7 +487,7 @@ ${V("EST 4:14")}`],
 <li><strong>Purchases.</strong> Can a teen buy without you? On iPhone, Family Sharing's Ask to Buy sends you the request.</li>
 <li><strong>Crisis help.</strong> Does the app show real help, such as 988, if a teen types something worrying?</li>
 </ol>`],
-      ["What is Young Faith · Bible for Teens?", `<p>A journey inside Peace Be Still for ages 13 to 17: a 3-minute Bible story, a declaration, and plain answers to real questions in a teen voice, every verse from the King James Bible. Upgrades go through Ask to Buy. Under 13, the app has no chat at all.</p>
+      ["What is Young Faith · Bible for Teens?", `<p>A journey inside Peace Be Still for ages 13 to 17: a short Bible story, a declaration, and plain answers to real questions in a teen voice, every verse from the King James Bible. Upgrades go through Ask to Buy. Under 13, the app has no chat at all.</p>
 ${V("1TI 4:12")}`],
       ["Is there a free Bible app with no ads?", `<p>Peace Be Still has no ads. Its free version includes the whole King James Bible to read, and nearly every chapter read aloud, today's story, one chat a day (up to 5 messages from age 18; one answer a day for ages 13 to 17), and a daily declaration.</p>`],
       ["Which Bible app reads the Bible aloud?", `<p>Peace Be Still reads nearly every chapter of the King James Bible aloud in the free version, which helps teens who would rather listen than read.</p>`],
