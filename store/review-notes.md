@@ -28,7 +28,7 @@ WRITE YOUR OWN NIGHT (new in 1.0.1; paid, 18 and over, English and Spanish)
 13. Under 18, or on a Korean or Chinese phone, it is never shown.
 
 KOREAN AND CHINESE (new in 1.0.1)
-14. iPhone Settings > General > Language & Region (or More > Settings > Language in the app): 한국어, 简体中文 or 繁體中文. Screens, the Bible and chat change language; the audio and stories stay English and the app says so.
+14. iPhone Settings > General > Language & Region (or More > Settings > Language in the app): 한국어, 简体中文 or 繁體中文. Screens, the Bible and chat change language; the whispered audio and the stories stay English and the app says so.
 15. 새벽기도 (Korean only): with Korean set, choose "With God's Word", birth year 1990, then 새벽기도 in the list. Today shows day 1 of 40: a 개역한글 verse, a prayer, a reminder time and a KakaoTalk card.
 
 AI CONTENT (1.2, 5.1.2)
@@ -36,7 +36,7 @@ AI CONTENT (1.2, 5.1.2)
 - Scripture in answers is inserted word for word from the app's own Bibles; a made-up reference is dropped.
 
 CRISIS SAFETY
-- A message about self-harm, suicide or abuse gets a fixed reply with the crisis line for the phone's region (US 988 with Call and Text buttons; Mexico, Spain, Korea, Taiwan, Hong Kong have their own) and never reaches an AI model. Less clear distress is read by a safety model and answered on the private lane.
+- A message about self-harm, suicide or abuse gets a fixed reply with the crisis line for the phone's region (US 988 with Call and Text buttons; Mexico, Spain, Korea, Taiwan, Hong Kong have their own) and never reaches an AI model. Less clear distress is read by a safety model and answered by the private paid model.
 
 AGE
 - Birth year first. Under 13: no chat, no made-for-you. 13 to 17: Young Faith; purchases through Ask to Buy.

@@ -387,3 +387,37 @@ test('every EAS build profile pins the iOS image to the proven Xcode 26.6 image'
   assert.ok(profiles.length >= 3 && 'production' in eas.build, 'no build profiles read');
   for (const [name, profile] of profiles) assert.equal(profile.ios?.image, 'macos-tahoe-26.5-xcode-26.6', `${name}: iOS image not pinned`);
 });
+
+// Store screenshots (scripts/store-shots/shots.mjs, from a main web preview): Apple's two iPhone sizes for every store
+// language, no alpha channel (App Store Connect refuses it), and Write your own night (adults, Mindset door) only on
+// the Imagination Nights custom page, never on a default page a teen sees.
+const APPLE_SIZES = { APP_IPHONE_67: [1320, 2868], APP_IPHONE_65: [1284, 2778] } as const;
+function png(path: string) {
+  const b = readFileSync(join(ROOT, path));
+  assert.equal(b.subarray(1, 4).toString(), 'PNG', `${path} is not a PNG`);
+  return { w: b.readUInt32BE(16), h: b.readUInt32BE(20), alpha: b[25] === 4 || b[25] === 6 };
+}
+test('screenshots: both iPhone sizes in every store language, exact pixels, no alpha; own night only on its custom page', () => {
+  const shotsDir = 'store/app-store';
+  const sets: string[][] = [];
+  for (const locale of Object.keys(listings)) {
+    const names = Object.keys(APPLE_SIZES).map(type => readdirSync(join(ROOT, shotsDir, locale, type)).filter(f => f.endsWith('.png')).sort());
+    assert.deepEqual(names[0], names[1], `${locale}: the two sizes hold different shots`);
+    assert.ok(names[0].length >= 3 && names[0].length <= 10, `${locale}: ${names[0].length} shots`);
+    for (const [type, [w, h]] of Object.entries(APPLE_SIZES)) for (const f of names[0]) {
+      const p = png(`${shotsDir}/${locale}/${type}/${f}`);
+      assert.deepEqual([p.w, p.h, p.alpha], [w, h, false], `${locale}/${type}/${f}`);
+    }
+    sets.push(names[0]);
+  }
+  assert.equal(sets.length, 5);
+  const record = JSON.parse(read(`${shotsDir}/shots.json`)) as { bad: unknown[]; log: { id: string; text: string; caption: string }[] };
+  assert.deepEqual(record.bad, [], 'the capture run named a bad screen');
+  const titles = ['en', 'es', 'ko', 'zh-Hans', 'zh-Hant'].map(l => (JSON.parse(read(`app/src/i18n/${l}.json`)) as Record<string, string>)['ownNight.title']);
+  const defaults = record.log.filter(l => !l.id.startsWith('imagination-nights-'));
+  assert.equal(defaults.length, sets.flat().length, 'shots.json covers every default-page shot');
+  for (const l of defaults) for (const title of titles) assert.ok(!l.text.includes(title) && !l.caption.includes(title), `${l.id} shows ${title} on a default page`);
+  const own = record.log.filter(l => l.id.startsWith('imagination-nights-'));
+  assert.ok(own.length === 1 && own[0].text.includes(titles[0]), 'the Imagination Nights page has the own-night shot');
+  for (const [type, [w, h]] of Object.entries(APPLE_SIZES)) assert.deepEqual(Object.values(png(`${shotsDir}/custom/imagination-nights/en-US/${type}/02-own-night.png`)), [w, h, false]);
+});
