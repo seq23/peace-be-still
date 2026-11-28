@@ -107,6 +107,12 @@ const ATTRIBUTED = /\b(?:says|said|saith|it is written|is written|declares|promi
 // the run ends at the sentence's end or a quotation mark.
 const ATTRIBUTED_CJK = /《?(?:圣经|聖經|经上|經上|经文|經文|神|上帝|主|耶稣|耶穌|基督|圣灵|聖靈|保罗|保羅|大卫|大衛|先知|使徒|诗篇|詩篇|箴言|以赛亚书?|以賽亞書?|\d+\s*[:：]\s*\d+)》?(?:的话|的話|的话语|的話語)?(?:里|裡|裏|中|上)?(?:也|又)?(?:说|說|记着|記著|记载|記載|写着|寫著|写道|寫道|应许|應許|宣告|告诉我们|告訴我們)(?:说|說)?\s*[:：,，]?\s*([^。！？!?\n"“”「」『』]{3,})|(?:말씀하시기를|말하기를|기록되기를|기록되었으되|이르시되|가라사대|이렇게 말씀합니다|이렇게 말씀하셨어요|이렇게 말해요)\s*[:,]?\s*([^.!?。\n"“”]{3,})/gu;
 
+// Any of the 66 books as the speaker ("约翰福音说", "《罗马书》告诉我们"): the run of Han characters before the
+// verb is a speaker only when a tail of it is a book name bookCode() knows (recheck 27 Nov 2026: a fixed list of
+// three books let "《约翰福音》说，…" through). Same verbs and end of run as ATTRIBUTED_CJK.
+const ATTRIBUTED_BOOK_CJK = /《?(\p{Script=Han}{2,12}?)》?(?:的话|的話|的话语|的話語)?(?:里|裡|裏|中|上)?(?:也|又)?(?:说|說|记着|記著|记载|記載|写着|寫著|写道|寫道|应许|應許|宣告|告诉我们|告訴我們)(?:说|說)?\s*[:：,，]?\s*([^。！？!?\n"“”「」『』]{3,})/gu;
+const endsInBook = (run: string) => { const ch = [...run]; for (let i = 0; i < ch.length - 1; i++) if (bookCode(ch.slice(i).join(''))) return true; return false; };
+
 function refsInText(text: string): Array<{ raw: string; book: string | null; name: string; chapter: number; verse: number; end?: number }> {
   const found = [];
   for (const m of text.matchAll(REF_IN_TEXT)) {
@@ -226,6 +232,11 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   const hersCompact = compact(ctx.userText);
   for (const m of text.matchAll(ATTRIBUTED_CJK)) {
     const run = m[1] ?? m[2] ?? '';
+    if (!stored(run) && !faithful(run) && !hersCompact.includes(compact(run).slice(0, 6))) unsourced.push(m[0]);
+  }
+  for (const m of text.matchAll(ATTRIBUTED_BOOK_CJK)) {
+    if (!endsInBook(m[1])) continue;
+    const run = m[2];
     if (!stored(run) && !faithful(run) && !hersCompact.includes(compact(run).slice(0, 6))) unsourced.push(m[0]);
   }
   // Bible words that are not the printed text of a verse it cites (from memory, another translation, or
