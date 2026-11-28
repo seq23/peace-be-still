@@ -757,6 +757,14 @@ test('Korean and Chinese screens never show English silently: English audio and 
     for (const key of ['paid.nights', 'paid.stories', 'today.tonight.faith', 'today.tonight.mindset']) assert.match(String(files[language][key]), /영어|英语|英語|英文/, `${language} ${key}`);
   }
   assert.deepEqual(leaks, []);
+  // The declaration card says the day's prayer once, in every language: on Korean and Chinese the prayer is the
+  // card's line (no written declaration), so it is not printed again under the verse (#162 review).
+  for (const language of ['en', 'es', 'ko', 'zh-Hans', 'zh-Hant'] as const) {
+    const prayer = String((language === 'en' ? en : language === 'es' ? require('../src/i18n/es.json') : language === 'ko' ? ko : files[language])['daily.prayer']);
+    const card = texts(await mount('dailyPage', { ...base, language, journey: 'psalm-nights' }, { page: 'declaration' }));
+    assert.equal(card.filter(text => text === prayer).length, 1, `${language}: the prayer is shown ${card.filter(text => text === prayer).length} times`);
+    assert.ok(card.length > 4, `${language}: declaration card read`);
+  }
   // Psalm Nights on a Korean phone: the shelf holds the English Psalms, and a row opens the player.
   const korean = await mount('nights', { ...base, language: 'ko', journey: 'psalm-nights' });
   const count = audioTracks.filter(track => shelfOf(track) === 'psalms' && track.lang === 'en').length;
