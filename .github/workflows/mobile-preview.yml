@@ -107,3 +107,10 @@ jobs:
       target: ${{ needs.preview.outputs.url }}
       flow_file: tap-through-zh.json
       label: ${{ github.run_id }}-zh
+  tap-through-zh-hant:
+    needs: preview
+    uses: seq23/boss-os/.github/workflows/tap-through.yml@main
+    with:
+      target: ${{ needs.preview.outputs.url }}
+      flow_file: tap-through-zh-hant.json
+      label: ${{ github.run_id }}-zh-hant

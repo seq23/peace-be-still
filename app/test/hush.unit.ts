@@ -1,7 +1,7 @@
 // "3 AM, back to sleep" and the grief nights, the rules on their own (her brief 21 Nov 2026), with a fake clock.
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { inSmallHours } from '../src/clock';
+import { inSmallHours, previewHour, PREVIEW_HOUR_KEY } from '../src/clock';
 import { backToSleepTrack, isBackToSleep } from '../src/screens/listen/hush';
 import { shelfOf, trackBelongsToDoor } from '../src/screens/listen/catalog';
 import { isSleepSession } from '../src/screens/listen/nights';
@@ -17,6 +17,42 @@ const night = (journey: Track['journey'], lang: 'en' | 'es' = 'en', n = 'a'): Tr
 test('the small hours are 12 AM to 4:59 AM, phone time: never 10 PM, 11:59 PM, 5 AM or 6 AM', () => {
   for (const [h, m] of [[0, 0], [1, 30], [3, 0], [4, 59]]) assert.ok(inSmallHours(at(h, m)), `${h}:${m}`);
   for (const [h, m] of [[22, 0], [23, 59], [5, 0], [6, 0], [12, 0], [21, 0]]) assert.ok(!inSmallHours(at(h, m)), `${h}:${m}`);
+});
+
+test('새벽기도: the small hours end at her dawn time when it is before 5:00, and never run past 5:00', () => {
+  const dawn = { hour: 4, minute: 30 };
+  for (const [h, m] of [[0, 0], [3, 59], [4, 29]]) assert.ok(inSmallHours(at(h, m), dawn), `${h}:${m} before her 4:30`);
+  for (const [h, m] of [[4, 30], [4, 45], [5, 0], [6, 0]]) assert.ok(!inSmallHours(at(h, m), dawn), `${h}:${m} from her 4:30`);
+  assert.ok(inSmallHours(at(4, 59), { hour: 5, minute: 0 }), 'the 5:00 default changes nothing');
+  assert.ok(inSmallHours(at(4, 59), { hour: 6, minute: 0 }), 'a 6:00 reminder keeps the usual end');
+  assert.ok(!inSmallHours(at(5, 30), { hour: 6, minute: 0 }), 'and never stretches the small hours past 5:00');
+});
+
+test('the preview hour: ?hour= wins, else the flow\'s stated hour in storage; never on a phone or a store build', () => {
+  const g = globalThis as Record<string, unknown>;
+  const saved = { env: process.env.EXPO_PUBLIC_PBS_PREVIEW, location: g.location, localStorage: g.localStorage };
+  const stored = new Map<string, string>();
+  try {
+    process.env.EXPO_PUBLIC_PBS_PREVIEW = '1';
+    g.localStorage = { getItem: (k: string) => stored.get(k) ?? null };
+    g.location = { search: '' };
+    assert.equal(previewHour(), null, 'nothing stated: the real clock');
+    stored.set(PREVIEW_HOUR_KEY, '21');
+    assert.equal(previewHour(), 21, 'the flow states 9 PM');
+    g.location = { search: '?hour=3' };
+    assert.equal(previewHour(), 3, '?hour= wins over storage');
+    g.location = { search: '' };
+    for (const bad of ['24', '-1', '9.5', 'x', '']) { stored.set(PREVIEW_HOUR_KEY, bad); assert.equal(previewHour(), null, `"${bad}" is no hour`); }
+    stored.set(PREVIEW_HOUR_KEY, '21');
+    g.location = undefined;
+    assert.equal(previewHour(), null, 'a phone has no page address');
+    g.location = { search: '' };
+    delete process.env.EXPO_PUBLIC_PBS_PREVIEW;
+    assert.equal(previewHour(), null, 'a store build never reads it');
+  } finally {
+    if (saved.env === undefined) delete process.env.EXPO_PUBLIC_PBS_PREVIEW; else process.env.EXPO_PUBLIC_PBS_PREVIEW = saved.env;
+    g.location = saved.location; g.localStorage = saved.localStorage;
+  }
 });
 
 test('the back-to-sleep button is offered at 3 AM only, only when published, only on the God\'s Word door, in her language', () => {
