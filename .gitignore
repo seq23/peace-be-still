@@ -9,6 +9,10 @@ node_modules
 *.wav
 *.m4a
 *.mp3
+# ...except the one quiet sound bed under "Write your own night" (made in code with ffmpeg, our own, 27 Nov 2026).
+# The exception lives HERE, not in app/assets/audio/.gitignore: eas-cli copies the project for a store build with its
+# own ignore rules, where a parent's *.mp3 beats a child folder's exception (app/test/storeArchive.unit.ts).
+!app/assets/audio/night-bed.mp3
 *.opus
 __pycache__/
 
