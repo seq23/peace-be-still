@@ -571,5 +571,7 @@
   "madeForYou.deleteFailed": "We couldn’t delete it. Try again.",
   "madeForYou.settingsDelete": "Delete my made-for-you sessions",
   "madeForYou.settingsAsk": "Delete every session made for you? This can’t be undone.",
-  "madeForYou.settingsDone": "Your made-for-you sessions were deleted."
+  "madeForYou.settingsDone": "Your made-for-you sessions were deleted.",
+  "content.audioInEnglish": "The audio is in English.",
+  "content.storyInEnglish": "This story is in English."
 }

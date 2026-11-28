@@ -571,5 +571,7 @@
   "madeForYou.deleteFailed": "No pudimos borrarla. Inténtalo de nuevo.",
   "madeForYou.settingsDelete": "Borrar mis sesiones de Para ti",
   "madeForYou.settingsAsk": "¿Borrar todas las sesiones preparadas para ti? No se puede deshacer.",
-  "madeForYou.settingsDone": "Se borraron tus sesiones de Para ti."
+  "madeForYou.settingsDone": "Se borraron tus sesiones de Para ti.",
+  "content.audioInEnglish": "El audio está en inglés.",
+  "content.storyInEnglish": "Esta historia está en inglés."
 }

@@ -1,4 +1,4 @@
-import { contentLanguage } from '../../src/i18n';
+import { contentLanguage, isCjk } from '../../src/i18n';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { View } from 'react-native';
@@ -23,13 +23,15 @@ export default function Nights() {
   const user = useOffline(settings.age);
   const playable = (track: Track) => isPreviewSample(track) || published?.get(track.file) === track.sha256 || downloadAvailable(track, user);
   // One row per script: a re-voiced night or story shows its newest playable file, falling back to the older one.
-  const visible = onePerScript(listenTracks().filter(track => track.lang === t.locale && trackBelongsToDoor(track, settings.door)), playable);
+  // The voiced library is English and Spanish: a Korean or Chinese phone lists the English audio and says so.
+  const audioLang = contentLanguage(t.locale);
+  const visible = onePerScript(listenTracks().filter(track => track.lang === audioLang && trackBelongsToDoor(track, settings.door)), playable);
   const psalms = visible.filter(track => shelfOf(track) === 'psalms').sort(byChapter);
   const bible = groupBible(visible.filter(track => shelfOf(track) === 'bible'), contentLanguage(t.locale));
   const stories = visible.filter(track => shelfOf(track) === (t.locale === 'es' ? 'miRefugio' : 'hushHarbor'));
   // The plain tellings are English only (Spanish phones get Mi Refugio), and listed only once their audio is
   // published: a voiced-but-unpublished story is not shown, and the shelf itself waits for its first story.
-  const plainStories = t.locale === 'en' ? visible.filter(track => shelfOf(track) === 'bibleStories' && playable(track)) : [];
+  const plainStories = audioLang === 'en' ? visible.filter(track => shelfOf(track) === 'bibleStories' && playable(track)) : [];
   const imagination = visible.filter(track => shelfOf(track) === 'imagination');
   // "For when you've lost someone": its nights are listed only once published, like the plain stories.
   const grief = visible.filter(track => shelfOf(track) === 'grief' && playable(track));
@@ -59,6 +61,7 @@ export default function Nights() {
   return (
     <Screen edges={['top']}>
       <Title>{t('tabs.nights')}</Title>
+      {isCjk(t.locale) && <Body>{t('content.audioInEnglish')}</Body>}
       <MadeForYouEntry />
       <OwnNightEntry />
       {settings.door === 'mindset' ?

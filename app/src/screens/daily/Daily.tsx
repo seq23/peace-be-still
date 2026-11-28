@@ -115,13 +115,15 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
   const story: Story | undefined = past && canUse('pastStories') ? past : stories.today;
   const topicList = topicsFor(settings.door);
   const topicLines = word.topic
-    ? faith ? byTopic(t.locale, word.topic).map(item => ({ id: item.id, text: item.text, passage: item.ref }))
+    // The written declarations are English and Spanish: a Korean or Chinese screen lists each one's verse only.
+    ? faith ? byTopic(t.locale, word.topic).map(item => ({ id: item.id, text: isCjk(t.locale) ? '' : item.text, passage: item.ref }))
       : mindsetDeclarations.filter(item => item.topic === word.topic).map(item => ({ id: item.line, text: t(item.line), passage: undefined }))
     : [];
 
   return <Screen>
     <TextLink onPress={back}>{t('common.back')}</TextLink>
     <Title>{page === 'story' && story ? story.title : page === 'plans' && plan ? t(plan.title) : t(pages[page].title)}</Title>
+    {(page === 'story' || page === 'stories') && isCjk(t.locale) && <Body>{t('content.storyInEnglish')}</Body>}
     {state.failed && <Body>{t('reader.storageError')}</Body>}
     {state.failed && !state.ready && <TextLink onPress={() => void state.retry()}>{t('reader.retry')}</TextLink>}
     {page === 'declaration' && <Card>
@@ -149,7 +151,7 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
       {word.topic && <>
         <Label>{t('declaration.inTopic', { topic: t(topicNames[word.topic]) })}</Label>
         {topicLines.map(item => <Card key={item.id} style={{ gap: 4 }}>
-          <Body muted={false} style={{ fontFamily: fonts.serif }}>{item.text}</Body>
+          {!!item.text && <Body muted={false} style={{ fontFamily: fonts.serif }}>{item.text}</Body>}
           {item.passage && link(item.passage)}
         </Card>)}
       </>}

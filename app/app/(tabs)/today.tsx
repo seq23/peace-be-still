@@ -1,5 +1,5 @@
 // Today keeps the date, week dots and the three daily cards in the shell's order.
-import { contentLanguage } from '../../src/i18n';
+import { contentLanguage, isCjk } from '../../src/i18n';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
@@ -64,8 +64,10 @@ export default function Today() {
         {word.passage && <DeclarationVerse passage={word.passage} />}
         <TextLink onPress={() => open('declaration')}>{t('daily.openDeclaration')}</TextLink>
       </>, record.value.declarations.includes(dayKey(now)))}
-      {faith && canUse(pages.story.feature) && story && item('today.story.label', story.title,
-        <TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink>)}
+      {faith && canUse(pages.story.feature) && story && item('today.story.label', story.title, <>
+        {isCjk(t.locale) && <Body size={14}>{t('content.storyInEnglish')}</Body>}
+        <TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink>
+      </>)}
       {!faith && canUse(pages.journal.feature) && item('today.scene.label', t('today.scene.text'), <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>)}
       {settings.journey === 'living-in-the-end' && <OwnNightEntry />}
       <Card style={{ paddingVertical: 12 }}>

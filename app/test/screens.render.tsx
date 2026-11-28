@@ -8,7 +8,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { gunzipSync } from 'node:zlib';
 import { displayRuns, formatReference, parseReference } from '../src/bible/core';
 import { mindsetDeclarations, mindsetTopics, plans } from '../src/screens/daily/content';
-import { byTopic, dailyDeclaration, pastStories, shelf, storyFor, tellingFor, topics } from '../src/content';
+import { byTopic, dailyDeclaration, griefLines, pastStories, shelf, storyFor, tellingFor, topics } from '../src/content';
 import type { DailyPage } from '../src/screens/daily/Daily';
 import { test, beforeEach, mock } from 'node:test';
 import { strict as assert } from 'node:assert';
@@ -718,6 +718,52 @@ test('Spanish screens show no English: no rendered text is an English string tha
     }
   }
   assert.deepEqual(leaks, []);
+});
+
+test('Korean and Chinese screens never show English silently: English audio and stories say so, the grief lines are hidden, and Nights lists the real nights', async () => {
+  const files: Record<string, Record<string, unknown>> = { ko, 'zh-Hans': require('../src/i18n/zh-Hans.json'), 'zh-Hant': require('../src/i18n/zh-Hant.json') };
+  // Names that are English in every language (the app, the journeys, stores); a reference ("Psalm 23") is two words.
+  const names = /Peace Be Still|Hush Harbor|Mi Refugio|Imagination Nights|Morning Word|Young Faith|Línea de la Vida|App Store|Google Play|Español \(Mi Refugio\)|English|Español/g;
+  const englishRun = /[A-Za-z]{2,}(?:[\s'’,.:;!?-]+[A-Za-z]{2,}){2,}/;
+  const leaks: string[] = [];
+  for (const language of ['ko', 'zh-Hans', 'zh-Hant'] as const) {
+    const said = [files[language]['content.audioInEnglish'], files[language]['content.storyInEnglish']] as string[];
+    const people = [{ ...base, language, journey: 'psalm-nights' }, { ...base, language, voice: 'church', journey: 'hush-harbor' }, { ...base, language, door: 'mindset', journey: 'imagination-nights' }];
+    for (const person of people) {
+      const pages: Array<[Name, Record<string, string>]> = person.door === 'mindset' ? [['today', {}], ['nights', {}]] : [['today', {}], ['nights', {}], ['grief', {}], ['dailyPage', { page: 'story' }]];
+      for (const [name, params] of pages) {
+        const tree = await mount(name, person, params);
+        const shown = texts(tree);
+        const english = shown.filter(text => englishRun.test(text.replace(names, ' ')));
+        if (english.length && !said.some(note => shown.includes(note))) leaks.push(`${language} ${person.journey} ${name}: ${english.slice(0, 2).join(' / ')}`);
+        // The quiet lines are written in English and Spanish only: the verse shows alone (a note about the English audio below never excuses them).
+        if (name === 'grief') for (const line of griefLines('en')) assert.ok(!shown.includes(line.text), `${language} grief shows English: ${line.text}`);
+        if (name === 'today' && person.door !== 'mindset') assert.ok(shown.includes(said[1]), `${language} Today says the story is in English`);
+        if (name === 'nights') {
+          // The shelves list the English audio the library has (never "audio is not ready" on every shelf).
+          const empty = shown.filter(text => text === files[language]['listen.emptyShelf']).length;
+          assert.ok(empty < 2, `${language} ${person.journey} nights: ${empty} empty shelves`);
+          assert.ok(shown.includes(said[0]), `${language} nights says the audio is in English`);
+        }
+      }
+    }
+    // The paid lane and Today sell English audio and stories as English.
+    for (const key of ['paid.nights', 'paid.stories', 'today.tonight.faith', 'today.tonight.mindset']) assert.match(String(files[language][key]), /영어|英语|英語|英文/, `${language} ${key}`);
+  }
+  assert.deepEqual(leaks, []);
+  // Psalm Nights on a Korean phone: the shelf holds the English Psalms, and a row opens the player.
+  const korean = await mount('nights', { ...base, language: 'ko', journey: 'psalm-nights' });
+  const count = audioTracks.filter(track => shelfOf(track) === 'psalms' && track.lang === 'en').length;
+  assert.ok(count > 0);
+  assert.ok(strings(korean).includes(i18n.t('listen.whisperedNights', { locale: 'ko', count })), strings(korean).slice(0, 300));
+  // A paid topic of declarations lists each one's verse, never the English line.
+  const word = await asPaid(() => mount('dailyPage', { ...base, language: 'ko', journey: 'psalm-nights' }, { page: 'declaration' }));
+  try {
+    await press(word, ko['declaration.topic.workMoney']);
+    const inTopic = byTopic('ko', 'work-money');
+    assert.ok(inTopic.length > 0);
+    for (const item of inTopic) assert.ok(!strings(word).includes(item.text), item.id);
+  } finally { await closePaid(word); }
 });
 
 test('the Mindset door never shows the dawn accent (dark mode); God\'s Word does, on night tiles only', async () => {

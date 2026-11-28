@@ -148,3 +148,11 @@ test('values and plurals: the week count and the Start button', () => {
   assert.equal(t('journeys.start', { name: 'Mi Refugio', locale: 'es' }), 'Comenzar Mi Refugio');
   assert.equal(t('journeys.intro', { locale: 'es' }), 'Empieza con uno. Puedes cambiarlo cuando quieras en Ajustes.');
 });
+
+test('Traditional strings use Taiwan usage OpenCC misses: 帳戶/帳號, and 「」 quotation marks, never “”', () => {
+  const hant = readFileSync('src/i18n/zh-Hant.json', 'utf8');
+  for (const simplifiedUsage of ['賬戶', '賬號', '“', '”']) assert.ok(!hant.includes(simplifiedUsage), simplifiedUsage);
+  const values = JSON.parse(hant) as Record<string, unknown>;
+  assert.match(String(values['paid.apple']), /Apple 帳戶/);
+  assert.match(String(values['paid.madeForYouNote']), /「為你定製」/);
+});
