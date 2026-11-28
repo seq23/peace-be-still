@@ -42,6 +42,38 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 24 }
       - run: node --test scripts/test/tap-through-flows.test.mjs
+      # The PR app check's locked-file step (scripts/leave-out-locked.mjs) leaves out ciphertext only.
+      - run: node --test scripts/test/leave-out-locked.test.mjs
+  # The app's typecheck and tests on a pull request that touches the app (or the Worker files it shares), so a PR
+  # is not first tested on main (#153 review). No key and no environment: the git-crypt key stays with reviewed
+  # main (#140), so the encrypted app file (test/chat.render.tsx) is named and left out here and runs on main.
+  # The Worker's tests are all encrypted (worker/test/*.test.ts) and stay main-only for the same reason.
+  app-pr:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false, fetch-depth: 2 }
+      - id: area
+        run: |
+          if git diff --name-only HEAD^1 HEAD | grep -qE '^(app/|worker/src/|worker/wrangler\.jsonc|content/bible/|\.github/workflows/ci\.yml)'; then echo "changed=yes" >> "$GITHUB_OUTPUT"; else echo "changed=no" >> "$GITHUB_OUTPUT"; echo "no app or shared Worker file changed: nothing to test here"; fi
+      - if: steps.area.outputs.changed == 'yes'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - if: steps.area.outputs.changed == 'yes'
+        run: npm ci --no-audit --no-fund
+      # Ciphertext cannot be typechecked or run: each locked app file is named, then left out of this checkout only.
+      - if: steps.area.outputs.changed == 'yes'
+        run: node ../scripts/leave-out-locked.mjs
+      - if: steps.area.outputs.changed == 'yes'
+        run: npm run typecheck && npm test
   # The chat prompts, test question sets and crisis lists are committed only encrypted (scripts/check-encrypted.mjs).
   encrypted:
     if: github.ref == 'refs/heads/main'

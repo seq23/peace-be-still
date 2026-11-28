@@ -187,7 +187,20 @@ function Editor({ draft: start, write, report, consent, saved, count, done }: { 
     <TextLink onPress={() => { setCrisis(''); set({ wish: '', who: '' }); }}>{t('ownNight.writeAgain')}</TextLink>
   </Screen>;
 
-  return <Screen>
+  // Apple 5.1.2(i): her first wish waits on this, so it is the whole screen, read from the top at any width (#153
+  // review N4: below the form it opened under the fold at 390x844). Her words stay in the form behind it.
+  if (step === 'ask' && asking) return <Screen key="consent">
+    <BackLink onPress={() => setAsking(false)}>{t('ownNight.consent.back')}</BackLink>
+    <Title>{t('ownNight.consent.title')}</Title>
+    <Card style={{ gap: 10 }}>
+      <Body muted={false} size={15}>{t('ownNight.consent.body')}</Body>
+      <TextLink onPress={() => void Linking.openURL(POLICY[d.lang])}>{t('ownNight.consent.policy')}</TextLink>
+    </Card>
+    <PillButton onPress={() => { agreed.current = true; setAsking(false); void consent.give().catch(() => undefined); void ask(); }}>{t('ownNight.consent.agree')}</PillButton>
+    <TextLink onPress={() => { setAsking(false); setNotice(null); setStep('scene'); }}>{t('ownNight.consent.no')}</TextLink>
+  </Screen>;
+
+  return <Screen key="form">
     <BackLink onPress={() => void cancel()}>{t('ownNight.cancel')}</BackLink>
     <Title>{t('ownNight.title')}</Title>
     {step === 'ask' ? <>
@@ -219,15 +232,7 @@ function Editor({ draft: start, write, report, consent, saved, count, done }: { 
     {step === 'ask' && <Body size={14}>{t('ownNight.privacy')}</Body>}
     {refused ? alert(refused) : null}
     {notice && !['busy', 'offline', 'limit'].includes(notice) && alert(noticeText)}
-    {step === 'ask' && asking
-      ? <Card style={{ gap: 10 }}>
-          <Label>{t('ownNight.consent.title')}</Label>
-          <Body muted={false} size={15}>{t('ownNight.consent.body')}</Body>
-          <TextLink onPress={() => void Linking.openURL(POLICY[d.lang])}>{t('ownNight.consent.policy')}</TextLink>
-          <PillButton onPress={() => { agreed.current = true; setAsking(false); void consent.give().catch(() => undefined); void ask(); }}>{t('ownNight.consent.agree')}</PillButton>
-          <TextLink onPress={() => { setAsking(false); setNotice(null); setStep('scene'); }}>{t('ownNight.consent.no')}</TextLink>
-        </Card>
-      : step === 'ask'
+    {step === 'ask'
       ? <>{sending ? <Body>{t('ownNight.writing')}</Body> : <PillButton disabled={!d.wish.trim()} onPress={() => void ask()}>{t('ownNight.write')}</PillButton>}
           {!sending && <TextLink onPress={() => { setNotice(null); setStep('scene'); }}>{t('ownNight.myself')}</TextLink>}</>
       : <PillButton disabled={!d.scene.trim()} onPress={() => void save()}>{t('ownNight.save')}</PillButton>}

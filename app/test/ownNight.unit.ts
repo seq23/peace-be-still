@@ -267,4 +267,15 @@ test('the own-night consent names every service the Worker sends a wish to, from
     for (const lang of ['en', 'es'] as const) assert.ok(String(strings[lang]['ownNight.consent.body']).includes(lang === 'en' ? hit![1] : es[hit![1]]), `${lang} consent does not name ${hit![1]} (${key})`);
   }
   for (const lang of ['en', 'es'] as const) assert.ok(String(strings[lang]['ownNight.privacy']).includes('Cloudflare Workers AI'), `${lang} privacy line hides the safety model`);
+  // The hosts OpenRouter may run the model on (PAID_HOSTS, read by worker/src/index.ts openRouterPrivate), both ways:
+  // every host in the config is named, and no host is named that the config no longer allows (#153 review N2).
+  const HOSTS: Record<string, string> = { deepinfra: 'DeepInfra', together: 'Together', fireworks: 'Fireworks', novita: 'Novita', baseten: 'Baseten', parasail: 'Parasail', chutes: 'Chutes', groq: 'Groq', nebius: 'Nebius', lambda: 'Lambda', hyperbolic: 'Hyperbolic', siliconflow: 'SiliconFlow', atlascloud: 'AtlasCloud' };
+  const hosts = (v('PAID_HOSTS') ?? '').split(',').map(h => h.trim()).filter(Boolean);
+  assert.ok(hosts.length, 'PAID_HOSTS is empty: the private route would run on any host');
+  for (const lang of ['en', 'es'] as const) {
+    const body = String(strings[lang]['ownNight.consent.body']);
+    for (const h of hosts) assert.ok(HOSTS[h], `PAID_HOSTS has ${h}: name it in ownNight.consent.body (every language) and add it to HOSTS here`);
+    for (const h of hosts) assert.ok(body.includes(HOSTS[h]), `${lang} consent does not name ${HOSTS[h]} (PAID_HOSTS)`);
+    for (const [id, name] of Object.entries(HOSTS)) if (!hosts.includes(id)) assert.ok(!body.includes(name), `${lang} consent names ${name}, which PAID_HOSTS no longer allows`);
+  }
 });
