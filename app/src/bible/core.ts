@@ -203,9 +203,18 @@ export function createBible(driver: Driver) {
 }
 export type Bible = ReturnType<typeof createBible>;
 
-/** "시편 23:1 · 개역한글", then the translation's credit line on its own line when it has one. Every verse
- *  screen and share card cites through this, so a Korean or Chinese verse never shows without its credit. */
+/** "Psalm 23:1 · KJV"; a translation with a credit line names itself there once ("시편 23:1", then
+ *  "개역한글판 (대한성서공회 번역, 1961)" on its own line), never twice. Every verse screen and share card cites
+ *  through this, so a Korean or Chinese verse never shows without its credit. */
 export function citation(reference: string, translation: Translation): string {
   const credit = TRANSLATION_CREDIT[translation];
-  return `${reference} · ${TRANSLATION_NAME[translation]}${credit ? `\n${credit}` : ''}`;
+  return credit ? `${reference}\n${credit}` : `${reference} · ${TRANSLATION_NAME[translation]}`;
+}
+
+/** Korean and Chinese letters are never spaced apart: the small-caps letter-spacing of a label is for Latin
+ *  letters only ("새 벽 말 씀" reads as four words). True when any text inside has a Han or Hangul letter. */
+export function hasCjk(node: unknown): boolean {
+  if (typeof node === 'string') return /[\p{Script=Han}\p{Script=Hangul}]/u.test(node);
+  if (Array.isArray(node)) return node.some(hasCjk);
+  return false;
 }

@@ -720,6 +720,7 @@ test('Spanish screens show no English: no rendered text is an English string tha
   assert.deepEqual(leaks, []);
 });
 
+const flatStyle = (style: unknown): Record<string, number | string | undefined> => Array.isArray(style) ? Object.assign({}, ...style.map(flatStyle)) : style && typeof style === 'object' ? style as Record<string, number> : {};
 test('Korean and Chinese screens never show English silently: English audio and stories say so, the grief lines are hidden, and Nights lists the real nights', async () => {
   const files: Record<string, Record<string, unknown>> = { ko, 'zh-Hans': require('../src/i18n/zh-Hans.json'), 'zh-Hant': require('../src/i18n/zh-Hant.json') };
   // Names that are English in every language (the app, the journeys, stores); a reference ("Psalm 23") is two words.
@@ -734,6 +735,11 @@ test('Korean and Chinese screens never show English silently: English audio and 
       for (const [name, params] of pages) {
         const tree = await mount(name, person, params);
         const shown = texts(tree);
+        // No letter-spacing on Korean or Chinese letters: a label's tracking spreads "새벽 말씀" apart (#157 review).
+        for (const node of tree.root.findAll(n => (n.type as unknown) === 'Text')) {
+          const own = node.children.filter(x => typeof x === 'string').join('');
+          if (/[\p{Script=Han}\p{Script=Hangul}]/u.test(own) && Number(flatStyle(node.props.style).letterSpacing ?? 0) > 0) leaks.push(`${language} ${name}: letter-spaced "${own}"`);
+        }
         const english = shown.filter(text => englishRun.test(text.replace(names, ' ')));
         if (english.length && !said.some(note => shown.includes(note))) leaks.push(`${language} ${person.journey} ${name}: ${english.slice(0, 2).join(' / ')}`);
         // The quiet lines are written in English and Spanish only: the verse shows alone (a note about the English audio below never excuses them).

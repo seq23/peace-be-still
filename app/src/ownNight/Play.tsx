@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState, useSyncExternalStore } from 'react
 import { AppState, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { canUse } from '../gates';
+import { noTracking } from '../ui';
 import { expoBrightness } from '../player/adapters';
 import { createDimmer } from '../player/dimmer';
 import { usePlayer } from '../player/usePlayer';
@@ -55,7 +56,7 @@ export function OwnNightPlay({ night, close, make = makeNight }: { night: SavedN
         <Text style={s.link}>{t('listen.close')}</Text>
       </Pressable>
       <View style={s.heading}>
-        <Text style={s.tag}>{t('journey.livingInTheEnd.name')}</Text>
+        <Text style={[s.tag, noTracking(t('journey.livingInTheEnd.name'))]}>{t('journey.livingInTheEnd.name')}</Text>
         <Text accessibilityRole="header" style={s.title}>{t('ownNight.player')}</Text>
         <Text style={s.note}>{[t('listen.minutes', { minutes: night.minutes }), voiceLabel, ...(night.ai ? [t('ownNight.aiLabel')] : [])].join(' · ')}</Text>
       </View>

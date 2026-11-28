@@ -8,6 +8,7 @@ import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Linking, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { displayRuns, TRANSLATION_CREDIT, TRANSLATION_NAME } from '../bible/core';
+import { noTracking } from '../ui';
 import type { Key, Language } from '../i18n';
 import { crisisLinks as linksFor, type HelpLink } from './crisisLines';
 import { FREE_CHAT_MESSAGES } from '../gates';
@@ -136,7 +137,7 @@ export default function ChatScreen() {
   // the private way. No free chat without it (the Worker refuses one too: kind 'consent').
   if (!paid && !freeOk && !firstPrivate) {
     return <View testID="free-consent" style={[s.card, { backgroundColor: c.card, borderColor: c.line }]}>
-      <Text style={[s.label, { color: c.muted }]}>{t('chat.free.label')}</Text>
+      <Text style={[s.label, { color: c.muted }, noTracking(t('chat.free.label'))]}>{t('chat.free.label')}</Text>
       {disclosure}
       <Text style={[s.title, { color: c.ink }]}>{t('chat.free.title')}</Text>
       <Text style={[s.body, { color: c.ink }]}>{t('chat.free.body')}</Text>
@@ -152,7 +153,7 @@ export default function ChatScreen() {
   }
   if (!accepted) {
     return <View style={[s.card, { backgroundColor: c.card, borderColor: c.line }]}>
-      <Text style={[s.label, { color: c.muted }]}>{t('chat.disclosure.label')}</Text>
+      <Text style={[s.label, { color: c.muted }, noTracking(t('chat.disclosure.label'))]}>{t('chat.disclosure.label')}</Text>
       {disclosure}
       <Text style={[s.body, { color: c.ink }]}>{t('chat.paid.private')}</Text>
       <HelpLine region={phoneRegion()} t={t} style={[s.body, { color: c.ink }]} link={c.accent} />
@@ -219,9 +220,9 @@ export default function ChatScreen() {
     <View style={[s.head, { borderColor: c.line }]}>
       <View style={{ flex: 1 }}>
         <Text style={[s.headTitle, { color: c.ink }]}>{t('tabs.chat')}</Text>
-        <Text style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : spanish ? 'chat.ai.rv' : 'chat.ai.kjv')}</Text>
-        {notPrivateNow && <Text testID="not-private" style={[s.ai, { color: c.accent }]}>{t('chat.free.notPrivate')}</Text>}
-        {!paid && firstPrivate && <Text testID="first-private" style={[s.ai, { color: c.accent }]}>{t('chat.firstPrivate')}</Text>}
+        <Text style={[s.ai, { color: c.muted }, noTracking(t('chat.ai.mindset'))]}>{t(mind ? 'chat.ai.mindset' : spanish ? 'chat.ai.rv' : 'chat.ai.kjv')}</Text>
+        {notPrivateNow && <Text testID="not-private" style={[s.ai, { color: c.accent }, noTracking(t('chat.free.notPrivate'))]}>{t('chat.free.notPrivate')}</Text>}
+        {!paid && firstPrivate && <Text testID="first-private" style={[s.ai, { color: c.accent }, noTracking(t('chat.firstPrivate'))]}>{t('chat.firstPrivate')}</Text>}
       </View>
       <Pressable accessibilityRole="button" onPress={() => { setConversation(randomUUID()); setEntries([]); }}><Text style={[s.small, { color: c.accent }]}>{t('chat.new')}</Text></Pressable>
     </View>
@@ -234,18 +235,19 @@ export default function ChatScreen() {
           <NoteHelp region={e.region} c={c} t={t} />
         </View>
         : <View key={i} testID={`reply-${e.res.kind}`} style={[s.bot, { backgroundColor: c.card, borderColor: c.line }]}>
-          {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
-          {e.res.notPrivate && <Text testID="answer-not-private" style={[s.ai, { color: c.accent }]}>{t('chat.free.notPrivate')}</Text>}
+          {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }, noTracking(t('chat.ai.faith'))]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
+          {e.res.notPrivate && <Text testID="answer-not-private" style={[s.ai, { color: c.accent }, noTracking(t('chat.free.notPrivate'))]}>{t('chat.free.notPrivate')}</Text>}
           {e.res.reminder && <Text style={[s.body, { color: c.ink }]}>{t('chat.reminder')}</Text>}
           {e.res.checkIn && <>
-            {e.res.checkIn.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
+            {e.res.checkIn.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }, noTracking(t('chat.ai.faith'))]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
             <Text testID="check-in" style={[s.body, { color: c.ink, fontFamily: 'Figtree_600SemiBold' }]}>{e.res.checkIn.text}</Text>
           </>}
           <Text style={[s.body, { color: c.ink }]}>{e.res.text}</Text>
           {e.res.scripture.map(v => <View key={v.ref} style={s.verse}>
-            <Text style={s.ref}>{`${v.ref} · ${TRANSLATION_NAME[v.translation]}`}</Text>
+            {/* A translation with a credit line names itself once, in the credit under the verse. */}
+            <Text style={[s.ref, noTracking(v.ref)]}>{TRANSLATION_CREDIT[v.translation] ? v.ref : `${v.ref} · ${TRANSLATION_NAME[v.translation]}`}</Text>
             <Text style={s.verseText}>{displayRuns(v.text).map((r, j) => <Text key={j} style={r.italic ? { fontStyle: 'italic' } : undefined}>{r.text}</Text>)}</Text>
-            {TRANSLATION_CREDIT[v.translation] ? <Text style={s.ref}>{TRANSLATION_CREDIT[v.translation]}</Text> : null}
+            {TRANSLATION_CREDIT[v.translation] ? <Text style={[s.ref, noTracking(TRANSLATION_CREDIT[v.translation])]}>{TRANSLATION_CREDIT[v.translation]}</Text> : null}
           </View>)}
           {(e.res.kind === 'crisis' || e.res.helpLines) && crisisLinks(e.res, t.locale).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
             <Text style={[s.linkText, { color: c.accent }]}>{t(l.label, l.values)}</Text>

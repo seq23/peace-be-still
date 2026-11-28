@@ -93,7 +93,9 @@ test('each language reads its own Bible, and a Korean or Chinese verse always ca
   const cuv = JSON.parse(readFileSync('../content/bible/cuv_source.json', 'utf8'));
   assert.equal(TRANSLATION_CREDIT.KRV, krv.credit);
   assert.equal(TRANSLATION_CREDIT.CUVS, cuv.credit);
-  assert.equal(citation('시편 23:1', 'KRV'), `시편 23:1 · 개역한글\n${krv.credit}`);
+  // The credit names the version once: never "시편 23:1 · 개역한글" above "개역한글판 (…)" (#157 review).
+  assert.equal(citation('시편 23:1', 'KRV'), `시편 23:1\n${krv.credit}`);
+  for (const [ref, tr] of [['시편 23:1', 'KRV'], ['诗篇 23:1', 'CUVS'], ['詩篇 23:1', 'CUVT']] as const) assert.equal(citation(ref, tr).split(/개역한글|和合本/).length - 1, 1, `${tr}: ${citation(ref, tr)}`);
   assert.match(citation('詩篇 23:1', 'CUVT'), /和合本（1919年版，公有領域）/);
   assert.equal(citation('Psalm 23:1', 'KJV'), 'Psalm 23:1 · KJV');
 });
