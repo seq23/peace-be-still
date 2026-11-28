@@ -1,7 +1,7 @@
 {
   "app": "Peace Be Still",
   "brand": "every-tongue",
-  "about": "The Korean screens (ko), on a phone set to ko-KR: both doors, the price screen, a paid chat's privacy line, the grief card's crisis line (the phone region's, never the language's) and the Nights tab (the English audio, said in Korean). Same preview switches as tap-through.json.",
+  "about": "The Korean screens (ko), on a phone set to ko-KR: both doors, the price screen, a paid chat's privacy line, the grief card's crisis line (the phone region's, never the language's) and the Nights tab (the English audio, said in Korean). Same preview switches as tap-through.json; and 새벽기도, the Korean dawn-prayer journey: picked from the faith door's list, day 1 of 40 on Today, its page with the stored 개역한글 verse, the prayer, the dawn reminder and the KakaoTalk card.",
   "locale": "ko-KR",
   "route_storage": {
     "peace-be-still-settings": {
@@ -196,6 +196,61 @@
         {
           "tap": "시편의 밤",
           "id": "psalm-shelf"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "dawn-prayer-ko",
+      "start": "/",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "plain",
+          "language": "ko"
+        }
+      },
+      "steps": [
+        {
+          "see": "새벽마다 개역한글 말씀 한 구절과 짧은 기도. 원하는 시간에 알림을 받아요",
+          "id": "picker"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "새벽마다 개역한글 말씀 한 구절과 짧은 기도. 원하는 시간에 알림을 받아요",
+          "id": "pick"
+        },
+        {
+          "tap": "새벽기도 시작하기",
+          "id": "start"
+        },
+        {
+          "see": "새벽 말씀 열기",
+          "id": "today"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "새벽 말씀 열기",
+          "id": "open"
+        },
+        {
+          "see": "오늘의 새벽 말씀",
+          "id": "page"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "카카오톡 공유 카드",
+          "id": "card"
         },
         {
           "sweep": true

@@ -6,7 +6,7 @@ import { Text, View } from 'react-native';
 import { chooseJourney, journeysFor, type Door, type JourneyId } from '../../src/model';
 import { useSettings, useT } from '../../src/settings';
 import { JourneyArt } from '../../src/ui/art';
-import { BackLink, Body, Card, Label, PillButton, Screen, Title, styles, usePalette } from '../../src/ui';
+import { BackLink, Body, Card, Label, PillButton, Screen, Title, hangulWords, styles, usePalette } from '../../src/ui';
 
 export default function JourneysScreen() {
   const { settings, save } = useSettings();
@@ -17,7 +17,7 @@ export default function JourneysScreen() {
   const param = params.door;
   const changing = params.change === '1';
   const door: Door = param === 'faith' || param === 'mindset' ? param : settings.door ?? 'faith';
-  const options = journeysFor(door, settings.age);
+  const options = journeysFor(door, settings.age, settings.language);
   const [tapped, setPicked] = useState<JourneyId>();
   const picked = [tapped, settings.journey].find(id => options.some(j => j.id === id));
   const chosen = options.find(j => j.id === picked);
@@ -44,7 +44,7 @@ export default function JourneysScreen() {
             <View style={styles.row}>
               <JourneyArt id={journey.id} door={door} />
               <View style={styles.grow}>
-                <Text style={[styles.t3, { color: c.ink }]}>{journey.subtitle ? `${t(journey.name)} · ${t(journey.subtitle)}` : t(journey.name)}</Text>
+                <JourneyName>{journey.subtitle ? `${t(journey.name)} · ${t(journey.subtitle)}` : t(journey.name)}</JourneyName>
                 <Body size={14}>{t(journey.purpose)}</Body>
               </View>
             </View>
@@ -53,4 +53,10 @@ export default function JourneysScreen() {
       </View>
     </Screen>
   );
+}
+
+function JourneyName({ children }: { children: string }) {
+  const c = usePalette();
+  const words = hangulWords(children);
+  return <Text lineBreakStrategyIOS={words.lineBreakStrategyIOS} style={[styles.t3, { color: c.ink }, words.style]}>{children}</Text>;
 }

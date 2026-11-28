@@ -132,15 +132,16 @@ test('local only: no code asks for a push token, so nothing leaves the phone and
   assert.match(readFileSync('app.config.ts', 'utf8'), /'expo-notifications', \{ enableRemoteNotifications: false \}/);
 });
 
-test('the default time and the words follow the journey: Morning Word in the morning, every other journey in the evening (EN and ES)', async () => {
+test('the default time and the words follow the journey: 새벽기도 at dawn, Morning Word in the morning, every other journey in the evening (EN and ES)', async () => {
   const { journeys } = await import('../src/model');
-  const want: Record<string, 'morning' | 'evening'> = {
-    'morning-word': 'morning', 'morning-word-mindset': 'morning',
+  const want: Record<string, 'dawn' | 'morning' | 'evening'> = {
+    saebyeok: 'dawn', 'morning-word': 'morning', 'morning-word-mindset': 'morning',
     'bible-chat': 'evening', 'psalm-nights': 'evening', 'imagination-nights': 'evening', 'hush-harbor': 'evening', 'mi-refugio': 'evening',
     'young-faith': 'evening', 'living-in-the-end': 'evening',
   };
   assert.deepEqual(Object.fromEntries(journeys.map((j: { id: string }) => [j.id, reminderKind(j.id)])), want, 'every journey has its kind');
   assert.equal(reminderKind(undefined), 'evening');
+  assert.deepEqual(timeOf(initialReminder, 'dawn'), { hour: 5, minute: 0 });
   assert.deepEqual(timeOf(initialReminder, 'morning'), { hour: 7, minute: 0 });
   assert.deepEqual(timeOf(initialReminder, 'evening'), { hour: 20, minute: 30 });
   assert.deepEqual(timeOf(withTime(initialReminder, 6, 15), 'evening'), { hour: 6, minute: 15 }, 'a picked time wins over the default');

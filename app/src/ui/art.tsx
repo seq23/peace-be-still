@@ -15,6 +15,8 @@ const ART: Record<JourneyId, Stroke[]> = {
   'mi-refugio': [{ d: 'M10 24V11h4V7h4v4h2V7h4v4h4v13', accent: true, width: 2 }, { d: 'M4 26h30' }],
   'psalm-nights': [{ d: 'M3 12c5-6 9 6 16 0s11 6 16 0' }, { d: 'M3 22h32', accent: true, width: 2 }],
   'morning-word': [{ d: 'M6 24V12M19 24V6M32 24V14', accent: true, width: 2 }, { d: 'M3 26h32' }],
+  // 새벽기도: the sun just under the horizon, before it is light.
+  'saebyeok': [{ d: 'M11 22a8 8 0 0 1 16 0', accent: true, width: 2 }, { d: 'M3 22h32' }, { d: 'M19 7v3M9.5 11l2 2M28.5 11l-2 2' }],
   'young-faith': [{ d: 'M8 22l11-14 11 14', accent: true, width: 2 }, { d: 'M3 26h32' }],
   'imagination-nights': [{ d: 'M3 12c5-6 9 6 16 0s11 6 16 0' }, { d: 'M3 22h32', accent: true, width: 2 }],
   'living-in-the-end': [{ d: 'M11 5h16a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2z', accent: true, width: 2 }, { d: 'M13 11h12M13 16h8' }],

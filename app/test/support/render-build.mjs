@@ -41,6 +41,7 @@ const MOCKS = {
       get exists() { return files().has(this.uri); }
       textSync() { if (!files().has(this.uri)) throw new Error('no file'); return files().get(this.uri); }
       writeSync(text) { files().set(this.uri, String(text)); }
+      write(text) { files().set(this.uri, String(text)); }
       delete() { files().delete(this.uri); }
       move(target) { files().set(target.uri, files().get(this.uri) ?? ''); files().delete(this.uri); this.uri = target.uri; }
     }
@@ -92,6 +93,9 @@ const MOCKS = {
     for (const name of ['getPermissionsAsync', 'requestPermissionsAsync', 'cancelAllScheduledNotificationsAsync', 'scheduleNotificationAsync'])
       exports[name] = (...args) => n()[name](...args);`,
   'expo-brightness': '',
+  // The phone's share sheet (a share card's picture): the test's fake records what was handed to it.
+  'expo-sharing': `exports.isAvailableAsync = async () => globalThis.__pbsSharing?.available ?? true;
+    exports.shareAsync = async (uri, options) => { if (!globalThis.__pbsSharing) throw new Error('no share sheet'); globalThis.__pbsSharing.shared.push([uri, options]); };`,
   // Lane 4S: the player hook reads the test's fake player.
   'player-hook': `const React = require('react');
     exports.tracks = require('./src/player/library.json');
@@ -116,7 +120,7 @@ for (const file of files) await build({
     b.onResolve({ filter: /\/player\/usePlayer$/ }, () => ({ path: 'player-hook', namespace: 'mock' }));
     b.onResolve({ filter: /\.(db|wasm|mp3)$/ }, args => ({ path: args.path.split('/').at(-1), namespace: 'bible-asset' }));
     b.onLoad({ filter: /.*/, namespace: 'bible-asset' }, args => ({ contents: `module.exports = ${JSON.stringify(args.path)}` }));
-    b.onResolve({ filter: /^(expo-image|expo-modules-core|@react-native-community\/datetimepicker|expo-notifications|expo-audio|expo-speech|expo-brightness|expo-asset|expo-file-system|sql\.js|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|expo-crypto|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
+    b.onResolve({ filter: /^(expo-image|expo-modules-core|@react-native-community\/datetimepicker|expo-notifications|expo-audio|expo-speech|expo-brightness|expo-sharing|expo-asset|expo-file-system|sql\.js|react-native|react-native-safe-area-context|react-native-svg|expo-router|expo-constants|expo-font|expo-localization|expo-crypto|@react-native-async-storage\/async-storage|react-native-purchases|@expo-google-fonts\/.*)$/ }, args => ({ path: args.path, namespace: 'mock' }));
     b.onLoad({ filter: /.*/, namespace: 'mock' }, args => ({
       contents: MOCKS[args.path] ?? `module.exports = new Proxy({}, { get: (_, key) => key === '__esModule' ? false : String(key) });`,
       loader: 'js', resolveDir: process.cwd(),
