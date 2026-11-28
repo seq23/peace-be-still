@@ -1,8 +1,10 @@
 # What's new in 1.0.1
 
-App Store "What's New in This Version" per locale, and Google Play release notes (the same words; Play allows 500
-characters each). app/test/releaseGate.unit.ts checks each one with the listing rules. Write your own night is never
-named on Korean or Chinese pages: those phones do not show it in 1.0.1.
+App Store "What's New in This Version" per locale (## en-US … ## zh-Hant), and Google Play release notes: Play's own
+en-US and es-MX notes (## play-en-US, ## play-es-MX), because Android cannot record a voice (recording is iPhone only);
+Play's ko, zh-CN and zh-TW notes are the ko, zh-Hans and zh-Hant words. Play allows 500 characters each.
+app/test/releaseGate.unit.ts checks each one with the listing rules. Write your own night is never named on Korean or
+Chinese pages: those phones do not show it in 1.0.1.
 
 ## en-US
 Write your own night: with a paid plan, adults (18 and over) can write a moment from their own life and fall asleep to it, in the phone's voice or their own recording, which stays on the phone. Korean and Chinese: the screens, the whole Bible and chat now speak your language, quoting the 개역한글 or the 1919 Chinese Union Version. 새벽기도: 40 Korean dawn mornings, each with a verse, a short prayer and a reminder at the hour you pick. Crisis lines now follow the country your phone is set to.
@@ -18,3 +20,9 @@ Escribe tu propia noche: con un plan de pago, los adultos (mayores de 18) escrib
 
 ## zh-Hant
 現在可以用中文了。介面、整本聖經和聖經聊天都用中文，經文引用 1919 年和合本。危機求助熱線會按手機設定的國家或地區顯示。
+
+## play-en-US
+Write your own night: with a paid plan, adults (18 and over) can write a moment from their own life and fall asleep to it, read in the phone's voice. Korean and Chinese: the screens, the whole Bible and chat now speak your language, quoting the 개역한글 or the 1919 Chinese Union Version. 새벽기도: 40 Korean dawn mornings, each with a verse, a short prayer and a reminder at the hour you pick. Crisis lines now follow the country your phone is set to.
+
+## play-es-MX
+Escribe tu propia noche: con un plan de pago, los adultos (mayores de 18) escriben un momento de su propia vida y se duermen escuchándolo, leído con la voz del teléfono. Coreano y chino: las pantallas, toda la Biblia y el chat en tu idioma. 새벽기도: 40 madrugadas de oración en coreano, con un versículo, una oración breve y un recordatorio a la hora que elijas. Las líneas de crisis ahora siguen el país de tu teléfono.

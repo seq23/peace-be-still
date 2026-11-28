@@ -15,6 +15,7 @@ import { verses } from '../../scripts/content/lib.mjs';
 import { providers } from '../../worker/src/providers.mjs';
 import { esListingLegal } from '../../site/content/legal.mjs';
 import { FREE_CHAT_MESSAGES, PAID_CHAT_MESSAGES } from '../src/gates';
+import { CRISIS_LINES } from '../src/chat/crisisLines';
 
 const ROOT = join(process.cwd(), '..');
 const read = (path: string) => readFileSync(join(ROOT, path), 'utf8');
@@ -129,6 +130,10 @@ const playFieldsOf = (text: string) => ({ title: field(text, 'Title') ?? '', sho
 const playListings = { 'en-US': playFieldsOf(read('store/google-play/listing-en.md')), 'es-US': playFieldsOf(read('store/google-play/listing-es.md')), 'ko-KR': playFieldsOf(read('store/google-play/listing-ko.md')), 'zh-CN': playFieldsOf(read('store/google-play/listing-zh-CN.md')), 'zh-TW': playFieldsOf(read('store/google-play/listing-zh-TW.md')) };
 // What's new in this version (App Store and Google Play release notes), per locale.
 const whatsNew = Object.fromEntries([...read('store/whats-new.md').matchAll(/^## (\S+)\n([\s\S]+?)(?=\n## |$)/gm)].map(m => [m[1], m[2].trim()]));
+// Google Play's release notes per Play locale: its own en/es words (Android cannot record), the ko/zh words as is.
+const playNotes: Record<keyof typeof playListings, string> = { 'en-US': whatsNew['play-en-US'], 'es-US': whatsNew['play-es-MX'], 'ko-KR': whatsNew.ko, 'zh-CN': whatsNew['zh-Hans'], 'zh-TW': whatsNew['zh-Hant'] };
+// Recording your own voice is iPhone only (app.config.ts blocks RECORD_AUDIO; ownNight canRecord is iOS only).
+const RECORDING = /\brecord(?!atorio)|grabaci[oó]n|grabar|녹음|录音|錄音/i;
 const events = read('store/events.md').split(/^## /m).slice(1).map(block => ({ name: block.split('\n')[0].trim(), block }));
 const legal = ['privacy', 'terms', 'disclaimer'].map(name => ({ name, text: read(`legal/${name}.md`) }));
 
@@ -251,6 +256,9 @@ test('each Google Play listing fits Play\'s limits and promises nothing the Andr
     assert.match(f.full, /Google Play/, locale);
     assert.match(f.full, es ? /https:\/\/peacebestillapp\.com\/es\/privacidad/ : /https:\/\/peacebestillapp\.com\/privacy/, locale);
     assert.doesNotMatch(f.full, /\$\s?\d/, `${locale}: prices are Google Play's to show per country`);
+    assert.doesNotMatch(Object.values(f).join('\n'), RECORDING, `${locale}: Android cannot record a voice`);
+    assert.ok([...(playNotes[locale as keyof typeof playNotes] ?? '')].length >= 40, `${locale}: Play release notes read`);
+    assert.doesNotMatch(playNotes[locale as keyof typeof playNotes], RECORDING, `${locale}: Play release notes promise a recording Android cannot make`);
   }
 });
 
@@ -266,9 +274,9 @@ test('every listing, App Store and Google Play, in every language, states the fr
 });
 
 test('what\'s new: every store language, within Play\'s 500 characters, and never Write your own night where phones do not show it', () => {
-  assert.deepEqual(Object.keys(whatsNew).sort(), ['en-US', 'es-MX', 'ko', 'zh-Hans', 'zh-Hant']);
+  assert.deepEqual(Object.keys(whatsNew).sort(), ['en-US', 'es-MX', 'ko', 'play-en-US', 'play-es-MX', 'zh-Hans', 'zh-Hant']);
   const ownNight = ['en', 'es', 'ko', 'zh-Hans', 'zh-Hant'].map(l => (JSON.parse(read(`app/src/i18n/${l}.json`)) as Record<string, string>)['ownNight.title']);
-  assert.ok(ownNight.every(Boolean) && whatsNew['en-US'].includes(ownNight[0]) && whatsNew['es-MX'].includes(ownNight[1]), 'the en/es notes name the new feature by its screen title');
+  assert.ok(ownNight.every(Boolean) && whatsNew['en-US'].includes(ownNight[0]) && whatsNew['es-MX'].includes(ownNight[1]) && whatsNew['play-en-US'].includes(ownNight[0]) && whatsNew['play-es-MX'].includes(ownNight[1]), 'the en/es notes name the new feature by its screen title');
   for (const [locale, text] of Object.entries(whatsNew)) {
     assert.ok([...text].length >= 40 && [...text].length <= 500, `${locale}: ${[...text].length} characters`);
     if (/^(?:ko|zh)/.test(locale)) for (const title of ownNight) assert.ok(!text.includes(title), `${locale} names ${title}, which Korean and Chinese phones never show`);
@@ -286,6 +294,15 @@ test('review notes: within the 4,000 characters, no review code in the repo, and
   const named = [...asc.matchAll(/"([^"]+)"/g)].filter(m => !/for example "$/.test(asc.slice(0, m.index! + 1))).map(m => m[1]);
   assert.ok(named.length >= 10, `read only ${named.length} quoted words`);
   assert.deepEqual(named.filter(w => !en.some(v => v.replace(/[’]/g, "'").replace(/\s*›$/, '') === w)), [], 'quoted words in the notes that no English screen shows');
+});
+
+test('review notes name the crisis line of every region the app has a line for, and no more', () => {
+  const notes = read('store/review-notes.md');
+  const crisis = notes.split('CRISIS SAFETY\n')[1]?.split('\n\n')[0] ?? '';
+  assert.ok(crisis.length > 100, 'CRISIS SAFETY read');
+  const NAMES: Record<string, string> = { US: 'US 988', MX: 'Mexico', ES: 'Spain', KR: 'Korea', TW: 'Taiwan', HK: 'Hong Kong', CN: 'mainland China' };
+  assert.deepEqual(Object.keys(NAMES).filter(r => r !== 'US').sort(), Object.keys(CRISIS_LINES).sort(), 'a region was added to or taken from crisisLines.ts: name it here');
+  for (const [region, name] of Object.entries(NAMES)) assert.ok(crisis.includes(name), `the notes leave out ${region} (${name})`);
 });
 
 test('the es-MX listing links the legal pages its one switch names (site/config/store.json)', () => {

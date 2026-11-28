@@ -36,7 +36,7 @@ AI CONTENT (1.2, 5.1.2)
 - Scripture in answers is inserted word for word from the app's own Bibles; a made-up reference is dropped.
 
 CRISIS SAFETY
-- A message about self-harm, suicide or abuse gets a fixed reply with the crisis line for the phone's region (US 988 with Call and Text buttons; Mexico, Spain, Korea, Taiwan, Hong Kong have their own) and never reaches an AI model. Less clear distress is read by a safety model and answered by the private paid model.
+- A message with clear self-harm or suicide wording gets a fixed reply with the crisis line for the phone's region and never reaches an AI model. Any other message about safety is read first by a private safety model; a high reading gets the same card and line (adults also get two or three sentences from the private crisis model; teens get the fixed words only). Lines: US 988 with Call and Text, Mexico, Spain, Korea, Taiwan, Hong Kong, mainland China.
 
 AGE
 - Birth year first. Under 13: no chat, no made-for-you. 13 to 17: Young Faith; purchases through Ask to Buy.
@@ -53,4 +53,4 @@ The paid plan has no account. To review it without buying:
 1. Tap "With God's Word" (or "With mindset & imagination" for Write your own night), enter birth year 1990, pick any start.
 2. More > Settings > A paid plan. Under the plans, tap "Have a review code?".
 3. Type the 10-digit code: PBS_PLAY_REVIEW_CODE (vault; pasted here in Play Console, never in this file). The paid plan opens for 7 days on that device.
-Then follow steps 7 to 15 above (Write your own night, Korean and Chinese and 새벽기도 work the same on Android).
+Then follow steps 7 to 15 above (Write your own night, Korean and Chinese and 새벽기도 work the same on Android; recording your own voice is iPhone only, so Android reads the moment in the phone's voice).

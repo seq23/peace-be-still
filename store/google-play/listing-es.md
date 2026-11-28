@@ -10,7 +10,7 @@ Short description: Sesiones susurradas para dormir, una palabra para la mañana 
 Full description:
 Una gran calma, cada noche.
 
-Peace Be Still es un rincón de calma para cerrar el día y empezar el siguiente: sesiones susurradas para dormir, una palabra para la mañana y un chat sereno para platicar. Una rutina sencilla antes de dormir, en español o en inglés.
+Peace Be Still es un rincón de calma para cerrar el día y empezar el siguiente: sesiones susurradas para dormir, una palabra para la mañana y un chat sereno para platicar. Una rutina sencilla antes de dormir.
 
 Elige tu camino: la Palabra de Dios, o mente e imaginación. Cada uno es su propio espacio, y puedes cambiar cuando quieras en Ajustes.
 
