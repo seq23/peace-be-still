@@ -436,5 +436,17 @@ test('screenshots: both iPhone sizes in every store language, exact pixels, no a
   for (const l of defaults) for (const title of titles) assert.ok(!l.text.includes(title) && !l.caption.includes(title), `${l.id} shows ${title} on a default page`);
   const own = record.log.filter(l => l.id.startsWith('imagination-nights-'));
   assert.ok(own.length === 1 && own[0].text.includes(titles[0]), 'the Imagination Nights page has the own-night shot');
+  // Own night is adults only (the worker refuses anyone else) and the custom page is reachable from a 13+ listing.
+  assert.match(own[0].caption, /\(paid, 18\+\)/, 'the own-night caption says it is paid and 18+');
   for (const [type, [w, h]] of Object.entries(APPLE_SIZES)) assert.deepEqual(Object.values(png(`${shotsDir}/custom/imagination-nights/en-US/${type}/02-own-night.png`)), [w, h, false]);
+});
+
+test('a sleep session is 助眠音频 / 音频 in every Chinese store file and shot, never 时段 ("time slot"), as in the app', () => {
+  const files = ['store/listing-zh-Hans.md', 'store/listing-zh-Hant.md', 'store/google-play/listing-zh-CN.md', 'store/google-play/listing-zh-TW.md', 'store/whats-new.md'];
+  for (const f of files) assert.doesNotMatch(read(f), /[时時]段/, f);
+  const record = JSON.parse(read('store/app-store/shots.json')) as { log: { id: string; text: string; caption: string }[] };
+  const zh = record.log.filter(l => /zh-Han[st]/.test(l.id));
+  assert.equal(zh.length, 8, 'shots.json has the 8 Chinese screens');
+  for (const l of zh) assert.doesNotMatch(`${l.caption}\n${l.text}`, /[时時]段/, l.id);
+  for (const f of files.slice(0, 4)) assert.match(read(f), /助眠音[频訊頻]/, `${f} names the sleep audio`);
 });
