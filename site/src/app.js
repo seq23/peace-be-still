@@ -12,7 +12,7 @@
 //    /api/go/google-play, which adds 1 to D1 table store_taps (day, source, store) and 302s to the listing built
 //    by site/content/store-links.mjs from site/config/store.json only (Apple pt/ct/mt=8 and Play referrer= kept).
 //    The source is the page the person tapped on: its own ?utm_source=/?src= tag (the same-origin Referer
-//    carries it), else a Threads/Instagram/Facebook Referer, else "direct". A ct or ppid that is not ours
+//    carries it), else a Threads/Instagram/Facebook Referer, else "direct". A ct, ppid or Play listing that is not ours
 //    is dropped, so the target never carries anything else from the request. While a store has no URL, /api/go/
 //    answers 302 to /#get-the-app and counts nothing. /api/go/ is never a page view (4). A failed count never
 //    stops the 302. GET /api/social-visits answers the 28-day taps in its "store" block.
@@ -162,7 +162,7 @@ export const TAP_SOURCES = [...SOCIAL, "direct"];
 export function goTarget(url, store = STORE, campaigns = CAMPAIGNS) {
   const kind = GO_PATHS[url.pathname.replace(/\/+$/, "")];
   if (!kind) return null;
-  const target = storeTarget(kind, store, { ct: url.searchParams.get("ct") || "", ppid: url.searchParams.get("ppid") || "" }, campaigns);
+  const target = storeTarget(kind, store, { ct: url.searchParams.get("ct") || "", ppid: url.searchParams.get("ppid") || "", listing: url.searchParams.get("listing") || "" }, campaigns);
   return { kind, target, location: target ?? `https://${APEX}/#get-the-app` };
 }
 

@@ -4,7 +4,7 @@
 // app/src/quality/banned.json (UI words) and scripts/content/rules.mjs (door and brand rules).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import banned from '../src/quality/banned.json';
@@ -124,7 +124,7 @@ const LISTING_WORDS: Record<string, { free: RegExp; paid: RegExp; ai: RegExp }> 
   'zh-Hant': { free: new RegExp(`最多 ${FREE_CHAT_MESSAGES} 條訊息`), paid: new RegExp(`每天前 ${PAID_CHAT_MESSAGES} 條訊息是私密的`), ai: /AI[^\n]*免費 AI 服務/ },
 };
 const wordsFor = (locale: string) => LISTING_WORDS[locale.startsWith('es') ? 'es' : locale.startsWith('en') ? 'en' : locale.startsWith('ko') ? 'ko' : /^zh-(?:Hant|TW)/.test(locale) ? 'zh-Hant' : 'zh-Hans'];
-// Google Play has one default listing (no custom pages), so its text is checked like the App Store's neutral lines.
+// Google Play's default listing is checked like the App Store's neutral lines; its custom listings (store/google-play/custom) below.
 // Play shows the same listing in English (default) and Spanish (es-US translation); both are checked.
 const playFieldsOf = (text: string) => ({ title: field(text, 'Title') ?? '', short: field(text, 'Short description') ?? '', full: text.split('Full description:\n')[1]?.trim() ?? '' });
 const playListings = { 'en-US': playFieldsOf(read('store/google-play/listing-en.md')), 'es-US': playFieldsOf(read('store/google-play/listing-es.md')), 'ko-KR': playFieldsOf(read('store/google-play/listing-ko.md')), 'zh-CN': playFieldsOf(read('store/google-play/listing-zh-CN.md')), 'zh-TW': playFieldsOf(read('store/google-play/listing-zh-TW.md')) };
@@ -132,6 +132,51 @@ const playListings = { 'en-US': playFieldsOf(read('store/google-play/listing-en.
 const whatsNew = Object.fromEntries([...read('store/whats-new.md').matchAll(/^## (\S+)\n([\s\S]+?)(?=\n## |$)/gm)].map(m => [m[1], m[2].trim()]));
 // Google Play's release notes per Play locale: its own en/es words (Android cannot record), the ko/zh words as is.
 const playNotes: Record<keyof typeof playListings, string> = { 'en-US': whatsNew['play-en-US'], 'es-US': whatsNew['play-es-MX'], 'ko-KR': whatsNew.ko, 'zh-CN': whatsNew['zh-Hans'], 'zh-TW': whatsNew['zh-Hant'] };
+// Google Play custom store listings (store/google-play/custom/<page>.md, one per App Store custom product page): each
+// listing's text per Play language, its door, and its unique-URL parameter (Play: lowercase letters, digits, . - _ ~).
+type PlayCustom = { slug: string; door: string; param: string; url: string; lang: string; pictures: string; sections: { locale: string; title: string; short: string; full: string }[] };
+const PLAY_CUSTOM_DIR = 'store/google-play/custom';
+const playCustomOf = (slug: string, text: string): PlayCustom => ({
+  slug, door: field(text, 'Door') ?? '', param: field(text, 'URL parameter') ?? '', url: field(text, 'Listing URL') ?? '',
+  // A listing written in one language for every slot (Mi Refugio: Spanish) names it; its pictures come from that slot.
+  lang: (field(text, 'Text language') ?? '').split(' ')[0], pictures: field(text, 'Pictures') ?? '',
+  sections: text.split(/^## /m).slice(1).map(sec => ({ locale: sec.split('\n')[0].trim(), ...playFieldsOf(sec) })),
+});
+const playCustom: PlayCustom[] = readdirSync(join(ROOT, PLAY_CUSTOM_DIR)).filter(f => f.endsWith('.md') && f !== 'README.md')
+  .map(f => playCustomOf(f.replace(/\.md$/, ''), read(`${PLAY_CUSTOM_DIR}/${f}`)));
+// Words only Apple's store has: Android buys through Google Play, has no Ask to Buy and no private first chat.
+const APPLE_ONLY = /\bApple\b|App Store|iPhone|\biOS\b|Ask to Buy|Restore Purchases|Restaurar compras|first chat is private|primer chat es privado|tap your name|toca tu nombre/i;
+// Play's title rules (doc 9898842): no emoji, no price or promotion, no ranking words, no repeated special characters.
+const PLAY_TITLE_BAD = /\p{Extended_Pictographic}|\bfree\b|\bgratis\b|\bsale\b|\boferta\b|\bbest\b|\bmejor\b|\btop\b|#1|\bno\.? ?1\b|[!?.*·:|-]{2,}/iu;
+const PLAY_LOCALES = ['en-US', 'es-US'];
+type PlayShot = { id: string; play: string; locale: string; url: string; caption: string; onScreen: string };
+const playShots = JSON.parse(read(`${PLAY_CUSTOM_DIR}/shots.json`)) as { log: PlayShot[]; art: { id: string }[]; bad: unknown[] };
+function playCustomIssues(l: PlayCustom): string[] {
+  const out: string[] = [];
+  if (!/^(?:God's Word|Mindset)$/.test(l.door)) out.push('door');
+  if (!/^[a-z0-9._~-]+$/.test(l.param) || l.param !== l.slug) out.push(`URL parameter ${l.param}`);
+  if (l.url !== `https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=${l.param}`) out.push('listing URL');
+  if (!l.sections.length) out.push('no language section');
+  for (const s of l.sections) {
+    const at = `${l.slug} ${s.locale}`, es = l.lang ? l.lang === 'es' : s.locale.startsWith('es'), all = `${s.title}\n${s.short}\n${s.full}`;
+    if (!PLAY_LOCALES.includes(s.locale)) out.push(`${at}: not a Play language here`);
+    if (!s.title || [...s.title].length > 30) out.push(`${at}: title ${[...s.title].length}/30`);
+    if (PLAY_TITLE_BAD.test(s.title)) out.push(`${at}: title breaks Play's title rules`);
+    if ([...s.short].length < 20 || [...s.short].length > 80) out.push(`${at}: short description ${[...s.short].length}/80`);
+    if ([...s.full].length < 400 || [...s.full].length > 4000) out.push(`${at}: full description ${[...s.full].length}/4000`);
+    if (APPLE_ONLY.test(all)) out.push(`${at}: Apple-only words on Android: ${all.match(APPLE_ONLY)?.[0]}`);
+    if (RECORDING.test(all)) out.push(`${at}: promises a recording Android cannot make`);
+    if (/\$\s?\d/.test(all)) out.push(`${at}: a price (Google Play shows it per country)`);
+    if (!/Google Play/.test(s.full)) out.push(`${at}: no Google Play billing line`);
+    if (!(es ? /https:\/\/peacebestillapp\.com\/es\/privacidad/ : /https:\/\/peacebestillapp\.com\/privacy/).test(s.full)) out.push(`${at}: privacy link`);
+    // Paid chat is sold as unlimited with the private count as its small print; a teen page never sells it
+    // (teen chat gets no paid capacity, her ruling 23 Nov 2026).
+    if (/unlimited|ilimitado/i.test(all) && !wordsFor(es ? 'es' : s.locale).paid.test(s.full)) out.push(`${at}: unlimited chat without its private count`);
+    if (l.slug === 'young-faith' && /unlimited|ilimitado|chat that remembers/i.test(all)) out.push(`${at}: sells teens chat they do not get`);
+  }
+  return out;
+}
+
 // Recording your own voice is iPhone only (app.config.ts blocks RECORD_AUDIO; ownNight canRecord is iOS only).
 const RECORDING = /\brecord(?!atorio)|grabaci[oó]n|grabar|녹음|录音|錄音/i;
 const events = read('store/events.md').split(/^## /m).slice(1).map(block => ({ name: block.split('\n')[0].trim(), block }));
@@ -160,6 +205,11 @@ function visibleItems(): Item[] {
     }
   }
   for (const [locale, f] of Object.entries(playListings)) items.push({ where: `Play ${locale} title`, text: f.title, kind: 'neutral' }, { where: `Play ${locale} short description`, text: f.short, kind: 'neutral' }, { where: `Play ${locale} full description`, text: f.full, kind: 'neutral' });
+  for (const l of playCustom) for (const sec of l.sections) {
+    const kind: Kind = l.door === 'Mindset' ? 'mindset' : 'faith';
+    items.push({ where: `Play custom ${l.slug} ${sec.locale} title`, text: sec.title, kind }, { where: `Play custom ${l.slug} ${sec.locale} short description`, text: sec.short, kind }, { where: `Play custom ${l.slug} ${sec.locale} full description`, text: sec.full, kind });
+  }
+  for (const shot of playShots.log) items.push({ where: `Play shot ${shot.id} caption`, text: shot.caption, kind: playCustom.find(l => l.slug === shot.play)?.door === 'Mindset' ? 'mindset' : 'faith' });
   for (const [locale, text] of Object.entries(whatsNew)) items.push({ where: `what's new ${locale}`, text, kind: 'body' });
   for (const l of legal) items.push({ where: `legal/${l.name}.md`, text: l.text, kind: 'legal' });
   items.push({ where: 'store/privacy-label.md', text: read('store/privacy-label.md'), kind: 'legal' });
@@ -449,4 +499,61 @@ test('a sleep session is 助眠音频 / 音频 in every Chinese store file and s
   assert.equal(zh.length, 8, 'shots.json has the 8 Chinese screens');
   for (const l of zh) assert.doesNotMatch(`${l.caption}\n${l.text}`, /[时時]段/, l.id);
   for (const f of files.slice(0, 4)) assert.match(read(f), /助眠音[频訊頻]/, `${f} names the sleep audio`);
+});
+
+test('Google Play custom listings: one per App Store custom page, true on Android, inside Play\'s limits', () => {
+  // The rules catch what they name (a 31-character title, Apple's words, a promotion in the title, a teen sold chat).
+  const good = playCustom.find(l => l.slug === 'grief')!;
+  assert.deepEqual(playCustomIssues(good), []);
+  const bent = (patch: Partial<PlayCustom['sections'][number]>, l: PlayCustom = good) => playCustomIssues({ ...l, sections: [{ ...l.sections[0], ...patch }] });
+  assert.ok(bent({ title: 'x'.repeat(31) }).length, '31-character title');
+  assert.ok(bent({ short: 'x'.repeat(81) }).length, '81-character short description');
+  assert.ok(bent({ full: `${good.sections[0].full}\nUpgrades can go through Ask to Buy.` }).length, 'Ask to Buy');
+  assert.ok(bent({ short: 'Restore Purchases from your Apple Account any time.' }).length, 'Apple words');
+  assert.ok(bent({ title: 'Grief Verses Free' }).length, 'Free in the title');
+  assert.ok(bent({ full: good.sections[0].full.replace(/Private for your first \d+ messages each day/, 'Private') }).length, 'unlimited without its count');
+  assert.ok(bent({ full: `${good.sections[0].full}\nRecord it in your own voice.` }).length, 'a recording');
+  assert.ok(playCustomIssues({ ...good, param: 'Grief Page' }).length, 'bad URL parameter');
+  assert.ok(bent({ full: `${good.sections[0].full}\nUnlimited Bible chat.` }, { ...good, slug: 'young-faith', param: 'young-faith', url: good.url.replace('grief', 'young-faith') }).length, 'teen sold chat');
+  // Every App Store custom page has its Play listing, and each listing passes.
+  assert.deepEqual(playCustom.map(l => l.slug).sort(), pages.map(p => p.slug).sort());
+  assert.deepEqual(playCustom.flatMap(playCustomIssues), []);
+  for (const l of playCustom) assert.equal(l.door, pages.find(p => p.slug === l.slug)!.door, `${l.slug}: door differs from the App Store page`);
+  // Listings are not machine-translated (Play doc 9867158) and the default slot is always the app's en-US: Mi Refugio
+  // carries the same Spanish text in both slots, and every other listing's en-US slot is English.
+  const mi = playCustom.find(l => l.slug === 'mi-refugio')!;
+  assert.equal(mi.lang, 'es');
+  assert.deepEqual(mi.sections.map(s => s.locale), ['en-US', 'es-US']);
+  assert.deepEqual(mi.sections[0], { ...mi.sections[1], locale: 'en-US' }, 'Mi Refugio: both slots carry the same Spanish text');
+  for (const l of playCustom.filter(x => !x.lang)) assert.match(l.sections.find(s => s.locale === 'en-US')!.full, /Terms: https:\/\/peacebestillapp\.com\/terms/, `${l.slug}: the en-US slot is English`);
+  assert.equal(new Set(playCustom.map(l => l.param)).size, playCustom.length, 'URL parameters are unique');
+});
+
+test('Google Play custom listing pictures: 2-8 phone shots at 1080x1920, a feature graphic, the icon; no price screen, no iPhone-only word', () => {
+  const MB = 1024 * 1024;
+  let shots = 0;
+  for (const l of playCustom) for (const sec of l.sections.filter(s => !l.pictures || s.locale === l.pictures)) {
+    const dir = `${PLAY_CUSTOM_DIR}/${l.slug}/${sec.locale}`;
+    const names = readdirSync(join(ROOT, dir, 'phone')).filter(f => f.endsWith('.png')).sort();
+    assert.ok(names.length >= 2 && names.length <= 8, `${dir}: ${names.length} phone shots (Play takes 2 to 8)`);
+    for (const f of names) {
+      assert.deepEqual(Object.values(png(`${dir}/phone/${f}`)), [1080, 1920, false], `${dir}/phone/${f}`);
+      assert.ok(statSync(join(ROOT, dir, 'phone', f)).size <= 8 * MB, `${dir}/phone/${f} over 8 MB`);
+      assert.ok(playShots.log.some(s => s.id === `${l.slug}-${sec.locale}-${f.replace(/\.png$/, '')}`), `${dir}/phone/${f} has no capture record`);
+    }
+    assert.deepEqual(Object.values(png(`${dir}/feature-graphic.png`)), [1024, 500, false], `${dir}/feature-graphic.png`);
+    shots += names.length;
+  }
+  assert.deepEqual(Object.values(png(`${PLAY_CUSTOM_DIR}/icon-512.png`)), [512, 512, true], 'icon: 512x512 with alpha');
+  assert.ok(statSync(join(ROOT, PLAY_CUSTOM_DIR, 'icon-512.png')).size <= 1024 * 1024, 'icon over 1,024 KB');
+  // The capture record: nothing bad, one entry per picture, and no screen Android does not show.
+  assert.deepEqual(playShots.bad, [], 'the capture run named a bad screen');
+  assert.equal(playShots.log.length, shots, 'shots.json covers every Play shot');
+  assert.ok(shots >= 2 * playCustom.length);
+  for (const s of playShots.log) {
+    assert.ok(s.onScreen?.trim(), `${s.id}: no screen text recorded`);
+    assert.doesNotMatch(new URL(s.url).pathname, /^\/paid/, `${s.id}: the price screen prints Apple's billing words in the web preview`);
+    assert.doesNotMatch(`${s.caption}\n${s.onScreen}`, APPLE_ONLY, `${s.id}: Apple-only words`);
+    assert.doesNotMatch(`${s.caption}\n${s.onScreen}`, /My voice|Mi voz/, `${s.id}: recording is iPhone only`);
+  }
 });

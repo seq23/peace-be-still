@@ -1,16 +1,17 @@
 {
   "why": "One source of truth for the store buttons on every page (owner 18 Nov 2026: no waitlist; 'look for it in the Apple App Store and Google Play ... flip a switch'). null = 'coming soon' text for that store; a URL = that store's official badge linking to the listing. Set by hand the day a store approves: npm run store:set -- --ios <url> --play <url>, then land the PR as usual.",
   "app_store_url": "https://apps.apple.com/us/app/peace-be-still/id6837331126",
-  "play_url": null,
+  "play_url": "https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile",
   "es_listing_spanish_legal": true,
   "es_listing_spanish_legal_why": "ON since the owner's yes on 20 Nov 2026 (commit f26135d): the es-MX store listing links the Spanish legal pages (/es/privacidad, /es/terminos), and the release gate fails if store/listing-es.md disagrees. To go back to the English pages marked (en inglés): npm run store:set -- --es-legal off, then land the PR as usual.",
   "app_store_pt": null,
   "app_store_pt_why": "Her App Store Connect provider token (App Analytics > Campaigns): with it, each page's ct= tag on the App Store link is credited to that page. null until she sets it; the ct tag is on the links either way.",
-  "custom_pages_why": "Apple custom product pages (App Store Connect, 21 Nov 2026). paths: exact landing pages (a trailing slash means that folder's index.html) whose App Store link opens the page (?ppid=), next to the page's own ct= tag. doors: every page of that door (its <meta name=\"pbs:door\">), so each new Mindset page opens Imagination Nights without a hand edit. prefixes: a whole folder (the Spanish site). An exact path wins, then the door, then the longest prefix; unlisted pages link the default product page. Only used once app_store_url is set.",
+  "custom_pages_why": "Apple custom product pages (App Store Connect, 21 Nov 2026). paths: exact landing pages (a trailing slash means that folder's index.html) whose App Store link opens the page (?ppid=), next to the page's own ct= tag. doors: every page of that door (its <meta name=\"pbs:door\">), so each new Mindset page opens Imagination Nights without a hand edit. prefixes: a whole folder (the Spanish site). An exact path wins, then the door, then the longest prefix; unlisted pages link the default product page. Only used once app_store_url is set. play_listing: the page's Google Play custom store listing (its unique-URL parameter in Play Console, store/google-play/custom/<page>.md), opened with &listing= on play_url; used only once play_url is set.",
   "custom_pages": [
     {
       "page": "hush-harbor",
       "ppid": "24801b20-7b5b-47ce-81b5-75f38079dc3f",
+      "play_listing": "hush-harbor",
       "paths": [
         "black-bible-chat/",
         "black-bible-app/",
@@ -34,6 +35,7 @@
     {
       "page": "psalm-nights",
       "ppid": "4a6c0868-3270-4b00-9661-1fae58d06f0d",
+      "play_listing": "psalm-nights",
       "paths": [
         "questions/psalms-for-sleep/",
         "questions/bible-verses-for-sleep/",
@@ -52,6 +54,7 @@
     {
       "page": "whispered-bible",
       "ppid": "bbc9e16c-da97-47dc-98d5-758642c2897e",
+      "play_listing": "whispered-bible",
       "paths": [
         "questions/bible-asmr/",
         "questions/whispered-bible-for-sleep/"
@@ -60,6 +63,7 @@
     {
       "page": "imagination-nights",
       "ppid": "9c612e62-45f0-4dcc-965d-aabfc6b98dfa",
+      "play_listing": "imagination-nights",
       "paths": [
         "questions/law-of-assumption-sleep-meditation/"
       ],
@@ -70,6 +74,7 @@
     {
       "page": "grief",
       "ppid": "0c89f8e1-c5b6-4355-937d-af27c07ea8e3",
+      "play_listing": "grief",
       "paths": [
         "questions/bible-verses-for-grief/",
         "es/preguntas/versiculos-para-el-duelo/"
@@ -78,6 +83,7 @@
     {
       "page": "mi-refugio",
       "ppid": "5024fe1b-bc53-44f3-b837-af95f26bc385",
+      "play_listing": "mi-refugio",
       "paths": [],
       "prefixes": [
         "es/"
@@ -86,6 +92,7 @@
     {
       "page": "morning-word",
       "ppid": "4887be8a-83b8-4b18-a3b6-3e93766d0240",
+      "play_listing": "morning-word",
       "paths": [
         "questions/daily-bible-declarations/"
       ]
@@ -93,6 +100,7 @@
     {
       "page": "young-faith",
       "ppid": "210c4cf6-e468-401b-b5af-2b2f90f12903",
+      "play_listing": "young-faith",
       "paths": [
         "bible-app-for-teens/"
       ]
