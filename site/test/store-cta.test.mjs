@@ -129,6 +129,30 @@ test("a landing page's App Store link opens its custom product page and names th
   assert.equal(appStoreHref({ ...store, app_store_url: null }, rel), null);
 });
 
+test("a landing page's Google Play link opens its custom store listing, and stays off while Play has no URL", () => {
+  const custom_pages = [
+    { page: "grief", ppid: "g-1", play_listing: "grief", paths: ["questions/bible-verses-for-grief/"] },
+    { page: "mi-refugio", ppid: "m-1", play_listing: "mi-refugio", paths: [], prefixes: ["es/"] },
+  ];
+  const store = { app_store_url: IOS, play_url: PLAY, custom_pages };
+  const rel = "questions/bible-verses-for-grief/index.html";
+  const [, play] = hrefs(storeCtaHtml("en", store, sourceOf(rel), rel));
+  assert.equal(play, "/api/go/google-play?ct=questions-bible-verses-for-grief&listing=grief");
+  assert.equal(follow(play, store), `${PLAY}&listing=grief&referrer=utm_source%3Dpeacebestillapp.com%26utm_medium%3Dsite%26utm_campaign%3Dquestions-bible-verses-for-grief`);
+  assert.equal(listingHref("play", store, "", "es/preguntas/salmos-para-dormir/index.html"), `${PLAY}&listing=mi-refugio`);
+  assert.equal(listingHref("play", store, "", "questions/hallow-app-cost/index.html"), PLAY, "an unlisted page opens the main listing");
+  assert.equal(listingHref("play", { ...store, play_url: null }, "", rel), null);
+});
+
+test("every Play listing a page links is one of our custom store listings (store/google-play/custom), one per App Store page", () => {
+  const { custom_pages: pages } = storeConfig();
+  const dir = new URL("../../store/google-play/custom/", import.meta.url).pathname;
+  for (const c of pages) {
+    assert.equal(c.play_listing, c.page, `${c.page}: Play listing parameter`);
+    assert.match(readFileSync(join(dir, `${c.play_listing}.md`), "utf8"), new RegExp(`^URL parameter: ${c.play_listing}$`, "m"), c.page);
+  }
+});
+
 test("every custom product page mapping lands on a real page", () => {
   const pub = new URL("../public/", import.meta.url).pathname;
   const { custom_pages: pages } = storeConfig();
@@ -246,7 +270,7 @@ test("every live badge on every built page goes through /api/go/ to that page's 
 });
 
 test("/api/go/ never carries anything from the request but our own campaign and custom page ids", () => {
-  const store = { app_store_url: IOS, play_url: PLAY, custom_pages: [{ page: "grief", ppid: "0c89f8e1-c5b6-4355-937d-af27c07ea8e3", paths: [] }] };
+  const store = { app_store_url: IOS, play_url: PLAY, custom_pages: [{ page: "grief", ppid: "0c89f8e1-c5b6-4355-937d-af27c07ea8e3", play_listing: "grief", paths: [] }] };
   for (const [href, want] of [
     ["/api/go/app-store?ct=home&ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3", `${IOS}?ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3&ct=home&mt=8`],
     ["/api/go/app-store?ppid=00000000-0000-0000-0000-000000000000&ct=home", `${IOS}?ct=home&mt=8`], // a ppid that is not ours
@@ -256,6 +280,10 @@ test("/api/go/ never carries anything from the request but our own campaign and 
     ["/api/go/google-play?ct=spam-campaign", PLAY],
     ["/api/go/app-store?ct=%3Cscript%3E&next=https://evil.example&url=//evil.example", IOS],
     ["/api/go/google-play?ct=home&ppid=0c89f8e1-c5b6-4355-937d-af27c07ea8e3", `${PLAY}&referrer=utm_source%3Dpeacebestillapp.com%26utm_medium%3Dsite%26utm_campaign%3Dhome`], // ppid is App Store only
+    ["/api/go/google-play?ct=home&listing=grief", `${PLAY}&listing=grief&referrer=utm_source%3Dpeacebestillapp.com%26utm_medium%3Dsite%26utm_campaign%3Dhome`], // our own Play listing
+    ["/api/go/google-play?listing=not-ours", PLAY], // a listing that is not ours
+    ["/api/go/google-play?listing=grief%26id%3Dcom.evil.app", PLAY], // a forged listing
+    ["/api/go/app-store?listing=grief", IOS], // a Play listing is Play only
     ["/api/go/app-store/", IOS],
   ]) {
     const to = follow(href, store);

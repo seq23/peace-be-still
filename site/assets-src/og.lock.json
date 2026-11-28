@@ -1,25 +1,25 @@
 {
-  "state": "ios",
+  "state": "both",
   "pictures": {
     "og.png": {
-      "line": "Now on the App Store for iPhone. Coming soon to Google Play",
-      "sha256": "81f8c9363344f5ea9b553f651377e54219b16dafafb0eac61e565732ccfff934"
+      "line": "On the App Store and Google Play",
+      "sha256": "d5403f06bb070ba0406772976b965eb231882a26e24fbe778038ce9603303adb"
     },
     "og-es.png": {
-      "line": "Ya está en el App Store para iPhone. Llega muy pronto a Google Play",
-      "sha256": "a03c85dfb9714ad95fc9ec286a0ecb446113537e6ffab1517f2c8ae4d1a89ebd"
+      "line": "Ya está en el App Store y en Google Play",
+      "sha256": "c781d6347531afa24670a87e89b10a4093f8c7a0daabb48ee4b2d933f1981c8d"
     },
     "og-ko.png": {
-      "line": "지금 App Store에 있어요",
-      "sha256": "fe0a1c8b4ce534caa8a46383f197a7969b97660fc2f34edc9b44ae3b119ae4f8"
+      "line": "App Store와 Google Play에 있어요",
+      "sha256": "80fe85df6af2f825cee21655d729e90920a2441eb70e4d696efef4f7e2ed83cf"
     },
     "og-zh.png": {
-      "line": "已在 App Store 上架",
-      "sha256": "a2f748b283f9f71ccc0d354867f578e1084d6df17b5c3c8f33ad37ac582d48b2"
+      "line": "已在 App Store 和 Google Play 上架",
+      "sha256": "d117232b5cc9988d4035998c03ba5b0b7e4e3ae65074b816cecb0eab868fdbbc"
     },
     "og-prayer-points.png": {
-      "line": "Now on the App Store for iPhone. Coming soon to Google Play",
-      "sha256": "38cb4aace16bd505d9b1e9a0e5c0d90375032d4ca99614434d9d3b1fbb5a60fa"
+      "line": "On the App Store and Google Play",
+      "sha256": "84073db2b82ad10192a9b1d84dd07f09a7c527d40c7d01fefec5a5949d7b61c6"
     }
   }
 }
