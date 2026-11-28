@@ -23,7 +23,7 @@ PAID FEATURES
 
 WRITE YOUR OWN NIGHT (new in 1.0.1; paid, 18 and over, English and Spanish)
 10. Delete and reinstall (or More > Settings to change the door). Tap "With mindset & imagination", enter birth year 1990, pick any start.
-11. Nights tab > "Write your own night" (marked Paid plan). Its screen explains it and opens the price screen; buy with the sandbox Apple ID.
+11. Nights tab > "Write your own night" (marked Paid plan). Its screen explains it; "See plans" opens the price screen. Buy with the sandbox Apple ID.
 12. Type a hope (for example "a quiet morning in a new apartment"), tap "Write my moment". The first time, a screen names every service that reads it (Cloudflare Workers AI safety model, then DeepSeek V4.1 Flash via OpenRouter, Google Gemini as fallback; none trains on it); tap "Agree and write my moment". Change any word, then "Start the night" with the phone voice, or record your own voice (the recording stays on the phone and is left out of iCloud backup).
 13. Under 18, or on a Korean or Chinese phone, it is never shown.
 
