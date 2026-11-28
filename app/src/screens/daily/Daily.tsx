@@ -140,7 +140,8 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
       <Body muted={false} size={21} style={{ fontFamily: fonts.serif }}>{line}</Body>
       {word.passage && <>
         <DeclarationVerse passage={word.passage} />
-        <Body>{t('daily.prayer')}</Body>
+        {/* A Korean or Chinese card's line already is the prayer: it is said once, never twice. */}
+        {word.key !== 'daily.prayer' && <Body>{t('daily.prayer')}</Body>}
       </>}
       {state.value.declarations.includes(today) ? <Label>{t('daily.done')}</Label> : state.ready && <PillButton onPress={said}>{t('daily.said')}</PillButton>}
       {canUse('shareCards') && !share && <TextLink onPress={() => setShare(true)}>{t('share.title')}</TextLink>}
