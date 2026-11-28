@@ -32,7 +32,7 @@ test('the copy rules are eas-cli\'s own: a parent *.mp3 beats a child folder\'s 
 
 test('the rules are written for the eas-cli both store workflows run', () => {
   for (const wf of ['ios-store-build.yml', 'android-store-build.yml'])
-    assert.match(readFileSync(join(ROOT, '.github/workflows', wf), 'utf8'), new RegExp(`EAS_CLI: ${EAS_CLI_RULES_FOR.replace(/\./g, '\\.')}\\n`), wf);
+    assert.ok(readFileSync(join(ROOT, '.github/workflows', wf), 'utf8').split('\n').some((line) => line.trim() === `EAS_CLI: ${EAS_CLI_RULES_FOR}`), wf);
   const pkg = JSON.parse(readFileSync(join(APP, 'package.json'), 'utf8'));
   assert.equal(pkg.devDependencies.ignore, '5.3.0', 'eas-cli 27.11.0 pins ignore 5.3.0');
 });
