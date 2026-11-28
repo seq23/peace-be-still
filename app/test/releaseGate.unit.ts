@@ -134,10 +134,12 @@ const whatsNew = Object.fromEntries([...read('store/whats-new.md').matchAll(/^##
 const playNotes: Record<keyof typeof playListings, string> = { 'en-US': whatsNew['play-en-US'], 'es-US': whatsNew['play-es-MX'], 'ko-KR': whatsNew.ko, 'zh-CN': whatsNew['zh-Hans'], 'zh-TW': whatsNew['zh-Hant'] };
 // Google Play custom store listings (store/google-play/custom/<page>.md, one per App Store custom product page): each
 // listing's text per Play language, its door, and its unique-URL parameter (Play: lowercase letters, digits, . - _ ~).
-type PlayCustom = { slug: string; door: string; param: string; url: string; sections: { locale: string; title: string; short: string; full: string }[] };
+type PlayCustom = { slug: string; door: string; param: string; url: string; lang: string; pictures: string; sections: { locale: string; title: string; short: string; full: string }[] };
 const PLAY_CUSTOM_DIR = 'store/google-play/custom';
 const playCustomOf = (slug: string, text: string): PlayCustom => ({
   slug, door: field(text, 'Door') ?? '', param: field(text, 'URL parameter') ?? '', url: field(text, 'Listing URL') ?? '',
+  // A listing written in one language for every slot (Mi Refugio: Spanish) names it; its pictures come from that slot.
+  lang: (field(text, 'Text language') ?? '').split(' ')[0], pictures: field(text, 'Pictures') ?? '',
   sections: text.split(/^## /m).slice(1).map(sec => ({ locale: sec.split('\n')[0].trim(), ...playFieldsOf(sec) })),
 });
 const playCustom: PlayCustom[] = readdirSync(join(ROOT, PLAY_CUSTOM_DIR)).filter(f => f.endsWith('.md') && f !== 'README.md')
@@ -156,7 +158,7 @@ function playCustomIssues(l: PlayCustom): string[] {
   if (l.url !== `https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=${l.param}`) out.push('listing URL');
   if (!l.sections.length) out.push('no language section');
   for (const s of l.sections) {
-    const at = `${l.slug} ${s.locale}`, es = s.locale.startsWith('es'), all = `${s.title}\n${s.short}\n${s.full}`;
+    const at = `${l.slug} ${s.locale}`, es = l.lang ? l.lang === 'es' : s.locale.startsWith('es'), all = `${s.title}\n${s.short}\n${s.full}`;
     if (!PLAY_LOCALES.includes(s.locale)) out.push(`${at}: not a Play language here`);
     if (!s.title || [...s.title].length > 30) out.push(`${at}: title ${[...s.title].length}/30`);
     if (PLAY_TITLE_BAD.test(s.title)) out.push(`${at}: title breaks Play's title rules`);
@@ -169,7 +171,7 @@ function playCustomIssues(l: PlayCustom): string[] {
     if (!(es ? /https:\/\/peacebestillapp\.com\/es\/privacidad/ : /https:\/\/peacebestillapp\.com\/privacy/).test(s.full)) out.push(`${at}: privacy link`);
     // Paid chat is sold as unlimited with the private count as its small print; a teen page never sells it
     // (teen chat gets no paid capacity, her ruling 23 Nov 2026).
-    if (/unlimited|ilimitado/i.test(all) && !wordsFor(s.locale).paid.test(s.full)) out.push(`${at}: unlimited chat without its private count`);
+    if (/unlimited|ilimitado/i.test(all) && !wordsFor(es ? 'es' : s.locale).paid.test(s.full)) out.push(`${at}: unlimited chat without its private count`);
     if (l.slug === 'young-faith' && /unlimited|ilimitado|chat that remembers/i.test(all)) out.push(`${at}: sells teens chat they do not get`);
   }
   return out;
@@ -517,15 +519,20 @@ test('Google Play custom listings: one per App Store custom page, true on Androi
   assert.deepEqual(playCustom.map(l => l.slug).sort(), pages.map(p => p.slug).sort());
   assert.deepEqual(playCustom.flatMap(playCustomIssues), []);
   for (const l of playCustom) assert.equal(l.door, pages.find(p => p.slug === l.slug)!.door, `${l.slug}: door differs from the App Store page`);
-  // Listings are not machine-translated (Play doc 9867158): Mi Refugio's default language is Spanish.
-  assert.deepEqual(playCustom.find(l => l.slug === 'mi-refugio')!.sections.map(s => s.locale), ['es-US']);
+  // Listings are not machine-translated (Play doc 9867158) and the default slot is always the app's en-US: Mi Refugio
+  // carries the same Spanish text in both slots, and every other listing's en-US slot is English.
+  const mi = playCustom.find(l => l.slug === 'mi-refugio')!;
+  assert.equal(mi.lang, 'es');
+  assert.deepEqual(mi.sections.map(s => s.locale), ['en-US', 'es-US']);
+  assert.deepEqual(mi.sections[0], { ...mi.sections[1], locale: 'en-US' }, 'Mi Refugio: both slots carry the same Spanish text');
+  for (const l of playCustom.filter(x => !x.lang)) assert.match(l.sections.find(s => s.locale === 'en-US')!.full, /Terms: https:\/\/peacebestillapp\.com\/terms/, `${l.slug}: the en-US slot is English`);
   assert.equal(new Set(playCustom.map(l => l.param)).size, playCustom.length, 'URL parameters are unique');
 });
 
 test('Google Play custom listing pictures: 2-8 phone shots at 1080x1920, a feature graphic, the icon; no price screen, no iPhone-only word', () => {
   const MB = 1024 * 1024;
   let shots = 0;
-  for (const l of playCustom) for (const sec of l.sections) {
+  for (const l of playCustom) for (const sec of l.sections.filter(s => !l.pictures || s.locale === l.pictures)) {
     const dir = `${PLAY_CUSTOM_DIR}/${l.slug}/${sec.locale}`;
     const names = readdirSync(join(ROOT, dir, 'phone')).filter(f => f.endsWith('.png')).sort();
     assert.ok(names.length >= 2 && names.length <= 8, `${dir}: ${names.length} phone shots (Play takes 2 to 8)`);
