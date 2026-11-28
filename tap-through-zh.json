@@ -1,7 +1,7 @@
 {
   "app": "Peace Be Still",
   "brand": "every-tongue",
-  "about": "The Chinese screens on a phone set to zh-CN: Simplified (zh-Hans) and Traditional (zh-Hant, every word read from zh-Hant.json), each with both doors, the price screen, a paid chat's privacy line, the grief card's crisis line (the phone region's, never the language's: this phone is in mainland China, so both get its line; Taiwan's 1925 is pinned in app/test) and the Nights tab (the English audio, said in Chinese). Same preview switches as tap-through.json. One flow file, so it needs no new workflow call. Every journey states its hour (pbs-preview-hour 21, 9 PM): the robot's browser runs on UTC, so without it a run between 6 and 11 PM Central met the small hours.",
+  "about": "The Chinese screens on a phone set to zh-CN: Simplified (zh-Hans) and Traditional (zh-Hant, every word read from zh-Hant.json), each with both doors, the price screen, a paid chat's privacy line, the grief card's crisis line (the phone region's, never the language's: this phone is in mainland China, so both get its line; Taiwan's 1925 is pinned in app/test) and the Nights tab (the English audio, said in Chinese). A fresh install on this zh-CN phone opens in Simplified (the phone picks the language; zh-TW to Traditional is pinned in app/test/i18n.unit.ts), so the Traditional front door is walked with Traditional already chosen and no door yet (door-zh-hant). Same preview switches as tap-through.json. One flow file, so it needs no new workflow call. Every journey states its hour (pbs-preview-hour 21, 9 PM): the robot's browser runs on UTC, so without it a run between 6 and 11 PM Central met the small hours.",
   "locale": "zh-CN",
   "route_storage": {
     "peace-be-still-settings": {
@@ -214,7 +214,7 @@
       ]
     },
     {
-      "name": "first-open-zh-hant",
+      "name": "door-zh-hant",
       "start": "/",
       "steps": [
         {
@@ -233,6 +233,9 @@
         }
       ],
       "storage": {
+        "peace-be-still-settings": {
+          "language": "zh-Hant"
+        },
         "pbs-preview-hour": "21"
       }
     },
