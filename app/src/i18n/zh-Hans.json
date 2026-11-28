@@ -460,6 +460,7 @@
   "ownNight.privacy": "你在这里写的内容会发送一次给我们的私密 AI 服务，用来写出你的片刻。我们不会保留，也永远不会用来训练 AI。你的夜晚和录音都留在这部手机上。",
   "ownNight.consent.title": "写下第一个时刻之前",
   "ownNight.consent.body": "你在这里写下的内容（你的盼望，以及你若添加了的、与你同在的人）会从这部手机发送到 Peace Be Still 服务。首先由 Cloudflare Workers AI 上的安全模型读取。然后由 DeepSeek V4.1 Flash 写下并检查你的时刻；它经由 OpenRouter 连接，由美国的 DeepInfra、Together 或 Fireworks 运行。如果它们无法使用，则由付费方案的 Google Gemini 完成。它们都不会用这些内容训练 AI，我们的服务也不会保存。",
+  "ownNight.consent.back": "回到我盼望的事",
   "ownNight.consent.agree": "同意，写下我的时刻",
   "ownNight.consent.no": "暂时不用，我自己写",
   "ownNight.consent.policy": "隐私政策",

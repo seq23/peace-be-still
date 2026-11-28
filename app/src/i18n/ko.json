@@ -460,6 +460,7 @@
   "ownNight.privacy": "여기에 쓴 내용은 순간을 쓰기 위해 비공개 AI 서비스로 한 번 보내져요. 우리는 보관하지 않고, AI 학습에도 절대 쓰지 않아요. 나의 밤과 녹음은 이 휴대폰에 남아요.",
   "ownNight.consent.title": "첫 순간을 쓰기 전에",
   "ownNight.consent.body": "여기에 쓰는 내용(바라는 것, 그리고 적었다면 함께 있는 사람)은 이 휴대폰에서 Peace Be Still 서비스로 전송됩니다. 먼저 Cloudflare Workers AI의 안전 모델이 읽습니다. 그다음 OpenRouter를 통해 연결되고 미국의 DeepInfra, Together 또는 Fireworks가 운영하는 DeepSeek V4.1 Flash가 순간을 쓰고 확인합니다. 이들을 쓸 수 없을 때는 유료 요금제의 Google Gemini가 대신합니다. 어느 곳도 이 내용을 AI 학습에 쓰지 않으며, 저희 서비스도 보관하지 않습니다.",
+  "ownNight.consent.back": "내가 바라는 것으로 돌아가기",
   "ownNight.consent.agree": "동의하고 내 순간 쓰기",
   "ownNight.consent.no": "지금은 아니요, 직접 쓸게요",
   "ownNight.consent.policy": "개인정보 처리방침",
