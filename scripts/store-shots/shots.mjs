@@ -4,6 +4,8 @@
 // build), captured at 390x800 @3x in a phone locale and region, then set under its caption in the brand's type.
 // Two calls are answered here, never invented by the app: the token and one "Write your own night" moment. The
 // moment is a real model output saved from the 27 Nov 2026 prompt run (~/Work/tasks/logs/own-night-a2-r2/ok-son-exam.json).
+// The wish typed to get there is our own paraphrase, never the test fixture's words: those stay encrypted
+// (scripts/check-encrypted.mjs COPY), and the wish is not on the final screen.
 // Usage: PW_DIR=<dir with playwright-core> node scripts/store-shots/shots.mjs <preview url> <out dir>
 // Output: <out>/<locale>/<DISPLAY_TYPE>/NN-key.png (the layout pbs-submit reads) and <out>/custom/..., plus
 // <out>/shots.json (every screen's visible text). Exits 1 (NAMED STOP STORE_SHOTS_BAD) on a missing line, an error
@@ -55,7 +57,7 @@ const SHOTS = [
   { locale: 'zh-Hant', n: '04', key: 'grief', route: '/grief', scheme: 'light', caption: '失去親人的日子裡', must: '詩篇 34:18' },
   // Imagination Nights custom page, screenshot 2 (store/custom/imagination-nights.md): adults on the Mindset door only.
   { locale: 'en-US', page: 'imagination-nights', n: '02', key: 'own-night', route: '/own-night?paid=1', scheme: 'dark', caption: 'Write your own night (paid, 18+). Fall asleep to it.', must: 'Every word is yours to change',
-    settings: { door: 'mindset', ...adult, voice: 'plain', language: 'en', journey: 'living-in-the-end' }, wish: 'my son passing his nursing exam and calling me happy' },
+    settings: { door: 'mindset', ...adult, voice: 'plain', language: 'en', journey: 'living-in-the-end' }, wish: 'my son calling to tell me about his new hospital job' },
 ];
 
 const PREVIEW_LABEL = /^(Preview|Vista previa|미리보기|预览|預覽) · /;
