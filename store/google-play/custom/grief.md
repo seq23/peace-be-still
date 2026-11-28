@@ -3,7 +3,7 @@
 Door: God's Word
 URL parameter: grief
 Listing URL: https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=grief
-App Store page: store/custom/grief.md
+Source page: store/custom/grief.md
 
 ## en-US
 Title: Grief · Bible Verses for Loss

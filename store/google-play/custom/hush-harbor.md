@@ -3,7 +3,7 @@
 Door: God's Word
 URL parameter: hush-harbor
 Listing URL: https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=hush-harbor
-App Store page: store/custom/hush-harbor.md
+Source page: store/custom/hush-harbor.md
 
 ## en-US
 Title: Peace Be Still: Hush Harbor

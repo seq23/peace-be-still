@@ -3,7 +3,7 @@
 Door: God's Word
 URL parameter: young-faith
 Listing URL: https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=young-faith
-App Store page: store/custom/young-faith.md
+Source page: store/custom/young-faith.md
 
 ## en-US
 Title: Young Faith · Bible for Teens

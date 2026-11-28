@@ -3,7 +3,7 @@
 Door: God's Word
 URL parameter: mi-refugio
 Listing URL: https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=mi-refugio
-App Store page: store/custom/mi-refugio.md
+Source page: store/custom/mi-refugio.md
 
 ## es-US
 Title: Mi Refugio · Biblia en Español

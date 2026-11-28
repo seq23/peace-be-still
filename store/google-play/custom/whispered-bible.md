@@ -3,7 +3,7 @@
 Door: God's Word
 URL parameter: whispered-bible
 Listing URL: https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=whispered-bible
-App Store page: store/custom/whispered-bible.md
+Source page: store/custom/whispered-bible.md
 
 ## en-US
 Title: Whispered Bible for Sleep

@@ -3,7 +3,7 @@
 Door: Mindset
 URL parameter: imagination-nights
 Listing URL: https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=imagination-nights
-App Store page: store/custom/imagination-nights.md
+Source page: store/custom/imagination-nights.md
 
 ## en-US
 Title: Imagination Nights

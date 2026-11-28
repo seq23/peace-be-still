@@ -3,7 +3,7 @@
 Door: God's Word
 URL parameter: morning-word
 Listing URL: https://play.google.com/store/apps/details?id=com.peacebestillapp.mobile&listing=morning-word
-App Store page: store/custom/morning-word.md
+Source page: store/custom/morning-word.md
 
 ## en-US
 Title: Morning Word · Declarations
