@@ -103,8 +103,9 @@ const QUOTED = /"([^"]{3,}?)"|“([^”]{3,}?)”|«([^»]{3,}?)»|‘([^’]{3,
 const ATTRIBUTED = /\b(?:says|said|saith|it is written|is written|declares|promises|dice|dijo|declara|promete|est[aá] escrito|escrito est[aá])\s*[:,]?\s+([^.!?\n"“«‘]{3,})/giu;
 // Chinese and Korean put no space before the verb (JS \b is ASCII-only): "圣经说：…", "經上記著說，…", "예수님이
 // 말씀하시기를 …". Chinese "说" is everyday speech, so only Scripture as the speaker counts (a book, a reference,
-// God, Jesus, an apostle); the run ends at the sentence's end or a quotation mark.
-const ATTRIBUTED_CJK = /(?:圣经|聖經|经上|經上|经文|經文|神|上帝|主|耶稣|耶穌|基督|圣灵|聖靈|保罗|保羅|大卫|大衛|先知|使徒|诗篇|詩篇|箴言|以赛亚书?|以賽亞書?|\d+\s*[:：]\s*\d+)(?:里|裡|裏|中|上)?(?:也|又)?(?:说|說|记着|記著|记载|記載|写着|寫著|写道|寫道|应许|應許|宣告|告诉我们|告訴我們)(?:说|說)?\s*[:：,，]?\s*([^。！？!?\n"“”「」『』]{3,})|(?:말씀하시기를|말하기를|기록되기를|기록되었으되|이르시되|가라사대|이렇게 말씀합니다|이렇게 말씀하셨어요|이렇게 말해요)\s*[:,]?\s*([^.!?。\n"“”]{3,})/gu;
+// God, Jesus, an apostle), with or without book-title marks (《圣经》说) or as "God's word" (神的话告诉我们);
+// the run ends at the sentence's end or a quotation mark.
+const ATTRIBUTED_CJK = /《?(?:圣经|聖經|经上|經上|经文|經文|神|上帝|主|耶稣|耶穌|基督|圣灵|聖靈|保罗|保羅|大卫|大衛|先知|使徒|诗篇|詩篇|箴言|以赛亚书?|以賽亞書?|\d+\s*[:：]\s*\d+)》?(?:的话|的話|的话语|的話語)?(?:里|裡|裏|中|上)?(?:也|又)?(?:说|說|记着|記著|记载|記載|写着|寫著|写道|寫道|应许|應許|宣告|告诉我们|告訴我們)(?:说|說)?\s*[:：,，]?\s*([^。！？!?\n"“”「」『』]{3,})|(?:말씀하시기를|말하기를|기록되기를|기록되었으되|이르시되|가라사대|이렇게 말씀합니다|이렇게 말씀하셨어요|이렇게 말해요)\s*[:,]?\s*([^.!?。\n"“”]{3,})/gu;
 
 function refsInText(text: string): Array<{ raw: string; book: string | null; name: string; chapter: number; verse: number; end?: number }> {
   const found = [];
