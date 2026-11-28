@@ -54,7 +54,9 @@ const config: ExpoConfig = {
     ['expo-notifications', { enableRemoteNotifications: false }],
     'expo-updates',
     // Write your own night's folder stays out of Google backup and device transfer (the iPhone marks it at run time).
-    './plugins/own-night-backup'],
+    './plugins/own-night-backup',
+    // Gradle gets enough Metaspace for the release build (from 24 Nov 2026 it hung out of memory until the timeout).
+    './plugins/gradle-memory'],
   // Over-the-air fixes (EAS Update, free tier): a phone checks at launch and uses a new JS bundle on the next
   // launch. An update only reaches builds of the SAME app version (runtimeVersion = appVersion), so a native change
   // ships as a new store version, never over the air. Publish only with scripts/ota-update.sh (it refuses a bundle
