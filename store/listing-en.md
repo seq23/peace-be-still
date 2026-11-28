@@ -20,7 +20,7 @@ Free, and it stays free: the whole Bible to read, and nearly every chapter read 
 
 A paid plan adds unlimited Bible chat, chat that remembers what you are carrying, a session every night, sessions made for you, a night you write yourself to fall asleep to (18 and over), every past story, longer plans, declaration topics and offline listening. Unlimited Bible chat. Private for your first 50 messages each day; after that, chat keeps going, just not private. Your private chats are never used to train AI.
 
-Scripture is quoted word for word from the King James Version, and the Reina-Valera 1909 in Spanish.
+Scripture is quoted word for word from the King James Version; in Spanish from the Reina-Valera 1909, in Korean from the 개역한글 (1961) and in Chinese from the 1919 Chinese Union Version. The screens and chat also speak Korean and Chinese; the whispered audio and the stories are in English and Spanish.
 
 Chat answers are written by AI and marked AI; what you type goes to free AI providers that may learn from it.
 

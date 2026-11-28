@@ -26,7 +26,11 @@ const LAUNCH_PAGES = ['hush-harbor', 'psalm-nights', 'whispered-bible', 'mi-refu
 
 // Rules ------------------------------------------------------------------------------------
 const UI = new RegExp(`${words(banned.ui).source}|[—!]|\\p{Extended_Pictographic}`, 'iu');
-const FAITH_WORDS = words(banned.faith);
+const CJK = /[\p{Script=Hangul}\p{Script=Han}]/u;
+const FAITH_WORDS = words(banned.faith.filter(term => !CJK.test(term)));
+// Korean and Chinese faith-door words (banned.json): \b is ASCII-only, so they match anywhere, NFKD like app/src/model.ts.
+const CJK_FAITH = new RegExp(banned.faith.filter(term => CJK.test(term)).map(term => term.normalize('NFKD')).join('|'), 'u');
+const cjkFaith = (text: string) => CJK_FAITH.test(text.normalize('NFKD'));
 // Locked 18 Nov 2026 in the App Store strings (default description, line 3); "space" in the
 // UI list targets filler like "a safe space", not this sentence.
 const LOCKED_UI_EXCEPTIONS = ['Each one is its own space'];
@@ -55,7 +59,7 @@ function issues({ text, kind }: Item): string[] {
   if (NEVER.test(text)) out.push('never-word');
   if (kind !== 'legal') out.push(...truthIssues(text));
   if (UI.test(uiText)) out.push('UI word, em dash, exclamation or emoji');
-  if ((kind === 'faith' || kind === 'body' || kind === 'legal') && (MINDSET.test(text) || FAITH_WORDS.test(text))) out.push('mindset word where the God\'s Word door can see it');
+  if ((kind === 'faith' || kind === 'body' || kind === 'legal') && (MINDSET.test(text) || FAITH_WORDS.test(text) || cjkFaith(text))) out.push('mindset word where the God\'s Word door can see it');
   if (kind === 'mindset' && FAITH_LINK.test(text)) out.push('God\'s Word word on the Mindset page');
   if (/\bdraft\b|must be (?:confirmed|reconciled)|to be confirmed|\bTBD\b|\bTODO\b|placeholder|\bverify\b|undetermined/i.test(text)) out.push('unfinished wording');
   return out;
@@ -69,7 +73,7 @@ function keywordIssues(keywords: string, name: string, subtitle: string): string
   if (/\s/.test(keywords)) out.push('space in the keyword field');
   if (new Set(list).size !== list.length) out.push('repeated keyword');
   for (const w of list) {
-    if ([...w].length <= 2) out.push(`too short: ${w}`);
+    if ([...w].length <= (CJK.test(w) ? 1 : 2)) out.push(`too short: ${w}`);
     if (title.has(w.toLocaleLowerCase())) out.push(`already in name or subtitle: ${w}`);
   }
   return out;
@@ -108,11 +112,23 @@ const pages: Page[] = pageFiles.map(file => {
 });
 const storeConfig = JSON.parse(read('site/config/store.json'));
 const esLegal = esListingLegal(storeConfig.es_listing_spanish_legal);
-const listings = { 'en-US': read('store/listing-en.md'), 'es-MX': read('store/listing-es.md') };
+const listings = { 'en-US': read('store/listing-en.md'), 'es-MX': read('store/listing-es.md'), ko: read('store/listing-ko.md'), 'zh-Hans': read('store/listing-zh-Hans.md'), 'zh-Hant': read('store/listing-zh-Hant.md') };
+// What the app's own screens say about the free and paid chat counts and the AI providers, per store language
+// (the price screen's paid.fairUse and the free chat's count, app/src/i18n), so a listing says what the app says.
+const LISTING_WORDS: Record<string, { free: RegExp; paid: RegExp; ai: RegExp }> = {
+  en: { free: new RegExp(`up to ${FREE_CHAT_MESSAGES} messages\\b`), paid: new RegExp(`Private for your first ${PAID_CHAT_MESSAGES} messages each day`), ai: /\bAI\b[^\n]*\bproviders\b/ },
+  es: { free: new RegExp(`de hasta ${FREE_CHAT_MESSAGES} mensajes\\b`), paid: new RegExp(`Privado en los primeros ${PAID_CHAT_MESSAGES} mensajes de cada día`), ai: /\bIA\b[^\n]*\bproveedores\b/ },
+  ko: { free: new RegExp(`메시지 ${FREE_CHAT_MESSAGES}개까지`), paid: new RegExp(`매일 처음 ${PAID_CHAT_MESSAGES}개의 메시지는 비공개예요`), ai: /AI[^\n]*무료 AI 서비스/ },
+  'zh-Hans': { free: new RegExp(`最多 ${FREE_CHAT_MESSAGES} 条消息`), paid: new RegExp(`每天前 ${PAID_CHAT_MESSAGES} 条消息是私密的`), ai: /AI[^\n]*免费 AI 服务/ },
+  'zh-Hant': { free: new RegExp(`最多 ${FREE_CHAT_MESSAGES} 條訊息`), paid: new RegExp(`每天前 ${PAID_CHAT_MESSAGES} 條訊息是私密的`), ai: /AI[^\n]*免費 AI 服務/ },
+};
+const wordsFor = (locale: string) => LISTING_WORDS[locale.startsWith('es') ? 'es' : locale.startsWith('en') ? 'en' : locale.startsWith('ko') ? 'ko' : /^zh-(?:Hant|TW)/.test(locale) ? 'zh-Hant' : 'zh-Hans'];
 // Google Play has one default listing (no custom pages), so its text is checked like the App Store's neutral lines.
 // Play shows the same listing in English (default) and Spanish (es-US translation); both are checked.
 const playFieldsOf = (text: string) => ({ title: field(text, 'Title') ?? '', short: field(text, 'Short description') ?? '', full: text.split('Full description:\n')[1]?.trim() ?? '' });
-const playListings = { 'en-US': playFieldsOf(read('store/google-play/listing-en.md')), 'es-US': playFieldsOf(read('store/google-play/listing-es.md')) };
+const playListings = { 'en-US': playFieldsOf(read('store/google-play/listing-en.md')), 'es-US': playFieldsOf(read('store/google-play/listing-es.md')), 'ko-KR': playFieldsOf(read('store/google-play/listing-ko.md')), 'zh-CN': playFieldsOf(read('store/google-play/listing-zh-CN.md')), 'zh-TW': playFieldsOf(read('store/google-play/listing-zh-TW.md')) };
+// What's new in this version (App Store and Google Play release notes), per locale.
+const whatsNew = Object.fromEntries([...read('store/whats-new.md').matchAll(/^## (\S+)\n([\s\S]+?)(?=\n## |$)/gm)].map(m => [m[1], m[2].trim()]));
 const events = read('store/events.md').split(/^## /m).slice(1).map(block => ({ name: block.split('\n')[0].trim(), block }));
 const legal = ['privacy', 'terms', 'disclaimer'].map(name => ({ name, text: read(`legal/${name}.md`) }));
 
@@ -139,6 +155,7 @@ function visibleItems(): Item[] {
     }
   }
   for (const [locale, f] of Object.entries(playListings)) items.push({ where: `Play ${locale} title`, text: f.title, kind: 'neutral' }, { where: `Play ${locale} short description`, text: f.short, kind: 'neutral' }, { where: `Play ${locale} full description`, text: f.full, kind: 'neutral' });
+  for (const [locale, text] of Object.entries(whatsNew)) items.push({ where: `what's new ${locale}`, text, kind: 'body' });
   for (const l of legal) items.push({ where: `legal/${l.name}.md`, text: l.text, kind: 'legal' });
   items.push({ where: 'store/privacy-label.md', text: read('store/privacy-label.md'), kind: 'legal' });
   return items;
@@ -218,7 +235,7 @@ test('listings have every App Store field, the subscription disclosures and the 
     assert.ok([...text.split('Description first 3 lines:\n')[1]].length <= 4000, `${locale}: description over 4000`);
     const legalLinks = locale === 'es-MX' ? [esLegal['Privacy policy URL'], esLegal.body.split(' · ')[0].split(': ')[1]] : ['https://peacebestillapp.com/privacy', 'https://peacebestillapp.com/terms'];
     for (const link of legalLinks) assert.ok(body.includes(link), `${locale}: legal link ${link}`);
-    assert.match(body, /\b(?:AI|IA)\b[^\n]*\b(?:providers|proveedores)\b/, `${locale}: AI disclosure`);
+    assert.match(body, wordsFor(locale).ai, `${locale}: AI disclosure`);
     assert.doesNotMatch(body, /\$\s?\d/, `${locale}: prices are Apple's to show per storefront`);
   }
 });
@@ -237,14 +254,38 @@ test('each Google Play listing fits Play\'s limits and promises nothing the Andr
   }
 });
 
-test('all four listings (App Store en-US/es-MX, Google Play en-US/es-US) state the free and paid counts the app enforces', () => {
-  const four: [string, string][] = [['apple en-US', listings['en-US']], ['apple es-MX', listings['es-MX']], ['play en-US', playListings['en-US'].full], ['play es-US', playListings['es-US'].full]];
-  for (const [where, text] of four) {
-    const es = where.endsWith('es-MX') || where.endsWith('es-US');
-    assert.ok(text.length > 500, `${where}: listing text read`);
-    assert.match(text, new RegExp(es ? `de hasta ${FREE_CHAT_MESSAGES} mensajes\\b` : `up to ${FREE_CHAT_MESSAGES} messages\\b`), where);
-    assert.match(text, new RegExp(es ? `Privado en los primeros ${PAID_CHAT_MESSAGES} mensajes de cada día` : `Private for your first ${PAID_CHAT_MESSAGES} messages each day`), where);
+test('every listing, App Store and Google Play, in every language, states the free and paid counts the app enforces', () => {
+  const all: [string, string][] = [...Object.entries(listings).map(([l, t]) => [`apple ${l}`, t] as [string, string]), ...Object.entries(playListings).map(([l, f]) => [`play ${l}`, f.full] as [string, string])];
+  assert.equal(all.length, 10, 'five App Store and five Google Play listings');
+  for (const [where, text] of all) {
+    const want = wordsFor(where.split(' ')[1]);
+    assert.ok(text.length > 400, `${where}: listing text read`);
+    assert.match(text, want.free, where);
+    assert.match(text, want.paid, where);
   }
+});
+
+test('what\'s new: every store language, within Play\'s 500 characters, and never Write your own night where phones do not show it', () => {
+  assert.deepEqual(Object.keys(whatsNew).sort(), ['en-US', 'es-MX', 'ko', 'zh-Hans', 'zh-Hant']);
+  const ownNight = ['en', 'es', 'ko', 'zh-Hans', 'zh-Hant'].map(l => (JSON.parse(read(`app/src/i18n/${l}.json`)) as Record<string, string>)['ownNight.title']);
+  assert.ok(ownNight.every(Boolean) && whatsNew['en-US'].includes(ownNight[0]) && whatsNew['es-MX'].includes(ownNight[1]), 'the en/es notes name the new feature by its screen title');
+  for (const [locale, text] of Object.entries(whatsNew)) {
+    assert.ok([...text].length >= 40 && [...text].length <= 500, `${locale}: ${[...text].length} characters`);
+    if (/^(?:ko|zh)/.test(locale)) for (const title of ownNight) assert.ok(!text.includes(title), `${locale} names ${title}, which Korean and Chinese phones never show`);
+  }
+});
+
+test('review notes: within the 4,000 characters, no review code in the repo, and every button they name is a button in the app', () => {
+  const notes = read('store/review-notes.md');
+  const asc = notes.split('## App Store notes\n')[1]?.split('\n## ')[0]?.trim() ?? '';
+  assert.ok(asc.length > 1500 && asc.length <= 4000, `App Store notes: ${asc.length} characters`);
+  assert.doesNotMatch(notes, /\b\d{10}\b/, 'a 10-digit review code is written in a public file');
+  assert.match(notes, /PBS_PLAY_REVIEW_CODE/);
+  const strings = (v: unknown): string[] => typeof v === 'string' ? [v] : v && typeof v === 'object' ? Object.values(v).flatMap(strings) : [];
+  const en = strings(JSON.parse(read('app/src/i18n/en.json')));
+  const named = [...asc.matchAll(/"([^"]+)"/g)].filter(m => !/for example "$/.test(asc.slice(0, m.index! + 1))).map(m => m[1]);
+  assert.ok(named.length >= 10, `read only ${named.length} quoted words`);
+  assert.deepEqual(named.filter(w => !en.some(v => v.replace(/[’]/g, "'").replace(/\s*›$/, '') === w)), [], 'quoted words in the notes that no English screen shows');
 });
 
 test('the es-MX listing links the legal pages its one switch names (site/config/store.json)', () => {
