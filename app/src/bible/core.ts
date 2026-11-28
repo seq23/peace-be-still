@@ -55,7 +55,8 @@ function bookKey(name: string): string {
 
 const names = new Map<string, string>();
 for (const book of BOOKS) {
-  for (const name of [book.code, book.usfm, book.en, book.es, ...(book.aliases ?? [])]) {
+  // Korean and Chinese names too: a reference an answer writes in her Bible's names ("시편 151:2") is checked like any other.
+  for (const name of [book.code, book.usfm, book.en, book.es, book.ko, book['zh-Hans'], book['zh-Hant'], ...(book.aliases ?? [])]) {
     const key = bookKey(name);
     const other = names.get(key);
     if (other && other !== book.code) throw new Error(`books.json: "${name}" names both ${other} and ${book.code}`);
@@ -63,7 +64,7 @@ for (const book of BOOKS) {
   }
 }
 
-/** The file code (as stored, e.g. JOH) for an English or Spanish name, a USFM code (JHN) or a file code. */
+/** The file code (as stored, e.g. JOH) for an English, Spanish, Korean or Chinese name, a USFM code (JHN) or a file code. */
 export function bookCode(name: string): string | null {
   return names.get(bookKey(name)) ?? null;
 }

@@ -33,7 +33,7 @@ import { checkAnswer } from './quality/answer';
 import { hashShape, nextSeq, recentShapes, repeats, saveShape, shapeOf, withoutTopic, varietyObjection, type Shape } from './quality/variety';
 import { examplesFor, sampleSet } from './voice/samples';
 import { chatJudgeListSchema, chatJudgeSchema, chatJudgeVerdict, judgeMessages, type JudgeInput, type JudgeVerdict } from './quality/judge';
-import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereSafeText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang, type ReplyLang, answerLanguage } from './replies';
+import { busyText, shortBusyText, checkInQuestion, checkInText, teenDailyText, teenStillHereText, consentText, crisisText, overflowText, freeRestingText, paidDownText, pausedText, slowText, MINDSET_FAITH_ASK, mindsetFaithAskText, ROLE_SWAP, ROLE_VERSE, roleText, fallbackMindsetText, fallbackText, fallbackTopic, regionOf, identityMindsetText, identityText, limitText, noFreeModelMindsetText, noFreeModelText, oneTranslationText, topicText, type Lang, type ReplyLang, answerLanguage } from './replies';
 import { CRISIS_LINES } from '../../app/src/chat/crisisLines';
 import { parseReport, REPORT_REASONS, REPORTS_DAILY, saveReport } from './report';
 import { lookup, refugeVerse, type Scripture } from './scripture';
@@ -713,7 +713,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
           tally(metrics, 'crisis_lane_down_teen_followup'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty, teen: true });
           const safe = saysSafe(lastAssistant, last);
           if (safe || (c?.level === 'none' && c.read !== 'down')) await calmTurn();
-          return reply({ kind: 'busy', ai: false, fixed: true, text: (safe ? teenStillHereSafeText : teenStillHereText)[v.lang], scripture: [], remaining: null, limit: null, reminder });
+          return reply({ kind: 'busy', ai: false, fixed: true, text: teenStillHereText(v.lang, region, safe), scripture: [], remaining: null, limit: null, reminder });
         }
         if (lane === 'crisis') { tally(metrics, 'crisis_lane_down'); logCode('CHAT_CRISIS_LANE_DOWN', { empty: out.empty }); return crisisReply(c && c.level !== 'none' ? c.kind : 'selfharm', 'lane_down'); }
         // A paid user on free chat after her private messages never meets "resting": the private model answers, briefly.
@@ -799,7 +799,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (problems.some(p => RED_LINES.has(p))) tally(metrics, 'red_line');
     for (const p of problems) tally(metrics, `gate:${p}`);
     logCode('CHAT_GATE', { attempt, problems: problems.join(',') });
-    objection = variety || problems.map(p => p === 'missing_988' && gate.line !== '988' ? `An earlier message in this chat was about their safety: include the free crisis line where they are, ${gate.line}.` : objectionText(p)).join(' ');
+    objection = variety || problems.map(p => p === 'missing_988' && gate.line !== '988' ? `An earlier message in this chat was about their safety: include the crisis line where they are, ${gate.line}.` : objectionText(p)).join(' ');
     // One cheap edit per answer: an edit that still repeats gets three fresh versions next time
     // (red team 24 Nov 2026: with every variety retry a single edit, 9 of 58 shown answers repeated; bar 2).
     variety0 = !!variety && !edited;

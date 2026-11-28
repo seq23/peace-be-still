@@ -162,8 +162,29 @@ export const checkInText = say('checkIn', "It sounds like you're carrying someth
 // A teen's conversation after the card, when Workers AI (her only chat route) has no answer (her ruling
 // 23 Nov 2026: no extra capacity for teens): written by people, no faith words, never the card or the
 // question again. The first when her last words told the check-in she is safe.
-export const teenStillHereSafeText = say('teenStillHereSafe', "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and the lines on the card above are free any time if things feel heavy again.", 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y las líneas de la tarjeta de arriba son gratuitas a cualquier hora si todo vuelve a sentirse pesado.');
-export const teenStillHereText = say('teenStillHere', "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above are free any time, and a real person there will listen. An adult you trust can sit with you today, too.", 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba son gratuitas a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.');
+// What a follow-up may say of her region's lines, from the table row: "free" and "any time" only where the line's
+// official source says so (988 is both; findahelpline lists many lines, so it promises neither).
+export type LinePromise = 'freeAnyTime' | 'anyTime' | 'plain';
+export function linePromise(region: Region): LinePromise {
+  if (region === 'US') return 'freeAnyTime';
+  if (region === 'other') return 'plain';
+  const row = CRISIS_LINES[region];
+  return row.free && row.anyTime ? 'freeAnyTime' : row.anyTime ? 'anyTime' : 'plain';
+}
+const teenStillHereSafe: Record<LinePromise, Record<ReplyLang, string>> = {
+  freeAnyTime: say('teenStillHereSafe', "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and the lines on the card above are free any time if things feel heavy again.", 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y las líneas de la tarjeta de arriba son gratuitas a cualquier hora si todo vuelve a sentirse pesado.'),
+  anyTime: say('teenStillHereSafe.anyTime', "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and the lines on the card above answer any time if things feel heavy again.", 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y las líneas de la tarjeta de arriba atienden a cualquier hora si todo vuelve a sentirse pesado.'),
+  plain: say('teenStillHereSafe.plain', "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and you can call the lines on the card above if things feel heavy again.", 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y puedes llamar a las líneas de la tarjeta de arriba si todo vuelve a sentirse pesado.'),
+};
+const teenStillHere: Record<LinePromise, Record<ReplyLang, string>> = {
+  freeAnyTime: say('teenStillHere', "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above are free any time, and a real person there will listen. An adult you trust can sit with you today, too.", 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba son gratuitas a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.'),
+  anyTime: say('teenStillHere.anyTime', "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above answer any time, and a real person there will listen. An adult you trust can sit with you today, too.", 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba atienden a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.'),
+  plain: say('teenStillHere.plain', "I'm still here with you. Chat can't write a longer reply right now, but you can call the lines on the card above, and a real person there will listen. An adult you trust can sit with you today, too.", 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero puedes llamar a las líneas de la tarjeta de arriba, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.'),
+};
+/** The teen follow-up after the card when no model can answer; safe: her last words told the check-in she is safe. */
+export function teenStillHereText(lang: ReplyLang, region: Region, safe: boolean): string {
+  return (safe ? teenStillHereSafe : teenStillHere)[linePromise(region)][lang];
+}
 // A teen past her one model answer today (her ruling 23 Nov 2026, "yes, 1 each"). No model reads her next
 // messages, so this reply never asks her to say she is unsafe: it carries the free crisis lines for her
 // region itself, every time (the card's own lines; the app shows them as call and text buttons).
@@ -171,12 +192,16 @@ const teenDailyOpen = {
   faith: say('teenDailyOpen.faith', "That was today's chat answer. Chat answers again tomorrow, and your Bible, today's story and the night sessions are here any time.", 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y tu Biblia, la historia de hoy y las sesiones de la noche están aquí cuando quieras.'),
   mindset: say('teenDailyOpen.mindset', "That was today's chat answer. Chat answers again tomorrow, and the night sessions are here any time.", 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y las sesiones de la noche están aquí cuando quieras.'),
 };
-const helpOpen = say('helpOpen', 'If things feel heavy or you are not safe, free help is there any time.', 'Si todo se siente pesado o no estás a salvo, hay ayuda gratuita a cualquier hora.');
+const helpOpen: Record<LinePromise, Record<ReplyLang, string>> = {
+  freeAnyTime: say('helpOpen', 'If things feel heavy or you are not safe, free help is there any time.', 'Si todo se siente pesado o no estás a salvo, hay ayuda gratuita a cualquier hora.'),
+  anyTime: say('helpOpen.anyTime', 'If things feel heavy or you are not safe, help is there any time.', 'Si todo se siente pesado o no estás a salvo, hay ayuda a cualquier hora.'),
+  plain: say('helpOpen.plain', 'If things feel heavy or you are not safe, help is there for you.', 'Si todo se siente pesado o no estás a salvo, hay ayuda para ti.'),
+};
 const helpUs = say('helpUs', 'Call or text 988, the Suicide & Crisis Lifeline, day or night. If you are in danger this minute, call 911.', 'Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, la Línea de Prevención del Suicidio y Crisis, de día o de noche. Si estás en peligro en este momento, llama al 911.');
-/** Her region's free crisis lines, in the one form every reply outside the card uses (the teen daily limit and
+/** Her region's crisis lines, in the one form every reply outside the card uses (the teen daily limit and
  *  the free day's wall). The app shows each number as call and text buttons when the reply says helpLines. */
 export function helpLinesText(lang: ReplyLang, region: Region): string {
-  return [helpOpen[lang], region === 'US' ? helpUs[lang] : regionalText(region, lang)].join(' ');
+  return [helpOpen[linePromise(region)][lang], region === 'US' ? helpUs[lang] : regionalText(region, lang)].join(' ');
 }
 export function teenDailyText(lang: ReplyLang, region: Region, door: Door = 'faith'): string {
   return [teenDailyOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], helpLinesText(lang, region)].join(' ');
