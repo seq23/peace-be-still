@@ -3,6 +3,7 @@
   "brand": "every-tongue",
   "about": "Write your own night and the Mindset door price screen, split from tap-through.json on 27 Nov 2026 because one flow holds at most 40 steps (boss-os MAX_STEPS). Preview switches only: ?paid=1 (preview paid access, no purchase), /own-night?state=scene|busy|limit|refused|crisis (Write your own night's server replies, fixed TEST words, no network). Journeys seed the settings onboarding writes (an adult, or a teen, on the Mindset door). No account exists; every request that is not a read is blocked.",
   "route_storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+  "route_storage_for": { "/own-night": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } }, "/own-night/play": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } } },
   "journeys": [
     {
       "name": "paywall-mindset",

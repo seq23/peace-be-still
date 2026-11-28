@@ -3,6 +3,7 @@
   "brand": "every-tongue",
   "about": "The app's own robot walk for every PR that changes a screen (boss-os scripts/ops/tap-through.mjs, ship-ready app-review.md). Preview switches only: ?paid=1 (preview paid access, no purchase), ?nights=used (a used week), ?hour=3 (3 AM), /own-night?state=scene|busy|limit|refused|crisis (Write your own night's server replies, fixed TEST words, no network). Each paid line on /paid is mapped to the screen behind it, opened directly with ?paid=1 and checked by text a free screen does not show. Onboarded journeys seed the settings onboarding writes (an adult on the God's Word door, Hush Harbor). No account exists; every request that is not a read is blocked. Write your own night and the Mindset door price screen are in tap-through-own-night.json (one flow holds at most 40 steps).",
   "route_storage": { "peace-be-still-settings": { "door": "faith", "age": "adult", "ageSetAt": 0, "voice": "church", "language": "en", "journey": "hush-harbor" } },
+  "route_storage_for": { "/own-night": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } }, "/own-night/play": { "peace-be-still-settings": { "door": "mindset", "age": "adult", "ageSetAt": 0, "voice": "plain", "language": "en", "journey": "living-in-the-end" } } },
   "journeys": [
     {
       "name": "first-open",

@@ -460,6 +460,7 @@
   "ownNight.privacy": "Lo que escribes aquí lo lee primero un modelo de seguridad en Cloudflare Workers AI y luego se envía una sola vez a nuestro servicio privado de IA para escribir tu momento. No lo guardamos y nunca se usa para entrenar IA. Tus noches y grabaciones se quedan en este teléfono, fuera de sus copias de seguridad.",
   "ownNight.consent.title": "Antes de tu primer momento",
   "ownNight.consent.body": "Lo que escribes aquí (lo que esperas y, si lo agregas, quién está contigo) va de este teléfono al servicio de Peace Be Still. Primero lo lee un modelo de seguridad en Cloudflare Workers AI. Después DeepSeek V4.1 Flash, al que se llega por medio de OpenRouter y que atienden DeepInfra, Together o Fireworks en Estados Unidos, escribe tu momento y lo revisa; si no están disponibles, lo hace Google Gemini en un plan de pago. Ninguno lo usa para entrenar IA, y nuestro servicio no lo guarda.",
+  "ownNight.consent.back": "Volver a lo que espero",
   "ownNight.consent.agree": "Acepto, escribe mi momento",
   "ownNight.consent.no": "Ahora no, lo escribo yo",
   "ownNight.consent.policy": "Política de privacidad",
