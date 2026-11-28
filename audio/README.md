@@ -42,7 +42,14 @@ checks, shelved, status, voice).
   new file, by the next route (whole verses, then sentences); when every route has failed it is `held` with
   its reason (the app never lists it; a note in the census line), and tried again when its words or the judge change.
 - **Spoken text**: stored text word for word; `[ ]`/`( )` marks dropped, ALL-CAPS said as words,
-  names respelled from `pronunciations.json` (`engine`).
+  names respelled from `pronunciations.json` (`engine` for Kokoro, checked with `espeak-ng --ipa`; `clone` for
+  Chatterbox).
+- **Judge r2** (27 Nov 2026, the 32 files held on 24 Nov; the bars did not move, `tests/test_held_audio.py`): a long
+  file is heard in parts of whole verses (about 90 s, at most 60 names each, cut in the quiet after a verse), each
+  part told its own names, and the transcripts are scored together as before; two-letter ("Uz") and hyphenated
+  ("Lo-debar") names are told too; the KJV's and British spellings of the same sound score alike (valour/valor,
+  bare/bear, O/Oh, "eleven hundred"/1,100), never two words that sound different (thee/the, man/men). A row's
+  `judge` is `large-v3-turbo r2`; a file held under the old judge is tried again first by itself.
 - **The bars are targets, with a margin** (the owner's rule, 21 Nov 2026: "a reasonable margin of error
   in all these things"): `qa.judge` fails a file only about 25% outside a bar (loudness 2.5 LU past the
   band, true peak 1 dB over the ceiling and never above 0 dBTP, over 25 clipped samples, word accuracy
