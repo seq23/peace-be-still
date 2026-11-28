@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { randomUUID } from 'expo-crypto';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Linking, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { displayRuns, TRANSLATION_CREDIT, TRANSLATION_NAME } from '../bible/core';
 import { noTracking } from '../ui';
 import type { Key, Language } from '../i18n';
@@ -26,7 +26,7 @@ type Entry = { role: 'user'; text: string } | { role: 'reply'; res: ChatResponse
 export const FREE_CONSENT_KEY = 'peace-be-still-free-chat-consent';
 
 /** Tappable lines for a crisis reply: 988 always; the hotline the reply names (Poison Control and 911 first for medical danger). */
-import { HelpLine, phoneRegion } from './HelpLine';
+import { HelpLine, lineLinkProps, phoneRegion } from './HelpLine';
 export { regionHelp } from './regionHelp';
 
 /** The help line under an error note: muted, with its [bracketed] words as inline links. */
@@ -249,7 +249,7 @@ export default function ChatScreen() {
             <Text style={s.verseText}>{displayRuns(v.text).map((r, j) => <Text key={j} style={r.italic ? { fontStyle: 'italic' } : undefined}>{r.text}</Text>)}</Text>
             {TRANSLATION_CREDIT[v.translation] ? <Text style={[s.ref, noTracking(TRANSLATION_CREDIT[v.translation])]}>{TRANSLATION_CREDIT[v.translation]}</Text> : null}
           </View>)}
-          {(e.res.kind === 'crisis' || e.res.helpLines) && crisisLinks(e.res, t.locale).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
+          {(e.res.kind === 'crisis' || e.res.helpLines) && crisisLinks(e.res, t.locale).map(l => <Pressable key={l.url} accessibilityRole="link" {...lineLinkProps(l.url)} style={[s.link, { borderColor: c.accent }]}>
             <Text style={[s.linkText, { color: c.accent }]}>{t(l.label, l.values)}</Text>
           </Pressable>)}
           {/* Her ruling 21 Nov 2026: the free day's last message (FREE_CHAT_MESSAGES) always gets its full

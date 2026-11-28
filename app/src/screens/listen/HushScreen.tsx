@@ -16,14 +16,16 @@ import { fonts, night } from '../../theme/tokens';
  * Whether it is the small hours now, read again whenever the tab comes into view or the app comes back to the
  * front (waking the phone at 3 AM), so the button comes and goes without a timer running all night.
  */
-export function useSmallHours(): boolean {
+export function useSmallHours(endsAt?: { hour: number; minute: number }): boolean {
   const focused = useIsFocused();
-  const [small, setSmall] = useState(() => inSmallHours(clock.now()));
-  useEffect(() => { if (focused) setSmall(inSmallHours(clock.now())); }, [focused]);
+  const [hour, minute] = [endsAt?.hour, endsAt?.minute];
+  const check = () => inSmallHours(clock.now(), hour === undefined || minute === undefined ? undefined : { hour, minute });
+  const [small, setSmall] = useState(check);
+  useEffect(() => { if (focused) setSmall(check()); }, [focused, hour, minute]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const subscription = AppState.addEventListener('change', next => { if (next === 'active') setSmall(inSmallHours(clock.now())); });
+    const subscription = AppState.addEventListener('change', next => { if (next === 'active') setSmall(check()); });
     return () => subscription.remove();
-  }, []);
+  }, [hour, minute]); // eslint-disable-line react-hooks/exhaustive-deps
   return small;
 }
 

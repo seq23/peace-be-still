@@ -2962,6 +2962,28 @@ async function withTracks(extra: Track[], published: Track[], run: () => Promise
   }
 }
 
+test('새벽기도 at dawn: from her picked dawn time before 5:00, Today is her dawn page, not "back to sleep"', async () => {
+  const back = hushTrack();
+  const person = dawnPerson(new Date());
+  const at = (hour: number, minute: number) => { clock.now = () => { const d = realNow(); d.setHours(hour, minute, 0, 0); return d; }; };
+  await withTracks([back], [back], async () => {
+    for (const [hour, minute, picked, hush] of [[4, 45, { hour: 4, minute: 30 }, false], [4, 29, { hour: 4, minute: 30 }, true], [4, 45, null, true], [3, 0, { hour: 4, minute: 30 }, true]] as const) {
+      reopen();
+      if (picked) local.set(REMINDER_KEY, JSON.stringify({ on: true, firstValueAt: 1, ...picked })); else local.delete(REMINDER_KEY);
+      at(hour, minute);
+      const tree = await mount('today', person);
+      await settle(); await settle();
+      const where = `${hour}:${minute}, reminder ${picked ? `${picked.hour}:${picked.minute}` : 'default 5:00'}`;
+      try {
+        assert.equal(texts(tree).includes(i18n.t('hush.play', { locale: 'ko' })), hush, where);
+        assert.equal(strings(tree).includes(ko['dawn.open']), !hush, where);
+      } finally { await act(async () => tree.unmount()); }
+    }
+  });
+  clock.now = realNow;
+  local.delete(REMINDER_KEY);
+});
+
 test('3 AM: Nights and Today are one calm button on night; 10 PM and 6 AM never show it', async () => {
   const person = { ...base, journey: 'psalm-nights' };
   const back = hushTrack();
@@ -3037,6 +3059,31 @@ test('the back-to-sleep night starts from the one button, free even when the wee
     assert.ok(texts(tree).includes(en['hush.label']));
     assert.deepEqual(faithContentIssues(strings(tree)), []);
   } finally { await act(async () => tree.unmount()); await player.dispose(); }
+});
+
+test('a crisis line is a real link on the web preview (href tel:/sms:) that opens once, and a plain tap on a phone', async () => {
+  // 27 Nov 2026, tap-through run 46098333472: "Call 988" had a link role and no href, so the web preview's sweep read
+  // it as a dead button. The web gets the href; the tap still opens it once (the anchor's own navigation is cancelled).
+  const person = { ...base, journey: 'psalm-nights' };
+  const opened: string[] = [];
+  (globalThis as any).__pbsOpenURL = (url: string) => opened.push(url);
+  const links = (tree: ReactTestRenderer) => host(tree, 'Text').filter(n => n.props.accessibilityRole === 'link');
+  for (const platform of ['web', 'ios'] as const) {
+    (globalThis as any).__pbsPlatform = platform;
+    opened.length = 0;
+    const tree = await mount('grief', person);
+    try {
+      const [call, text] = links(tree);
+      assert.deepEqual([call, text].map(n => n.props.accessibilityLabel), [en['chat.call.988'], en['chat.text.988']]);
+      assert.deepEqual([call.props.href, text.props.href], platform === 'web' ? ['tel:988', 'sms:988'] : [undefined, undefined], platform);
+      let cancelled = 0;
+      await act(async () => call.props.onPress({ preventDefault: () => { cancelled++; } }));
+      await act(async () => text.props.onPress());
+      assert.deepEqual(opened, ['tel:988', 'sms:988'], `${platform}: each tap opens its line once`);
+      assert.equal(cancelled, 1, `${platform}: the anchor's own navigation is cancelled, so the dialer never opens twice`);
+    } finally { await act(async () => tree.unmount()); }
+  }
+  (globalThis as any).__pbsPlatform = 'web';
 });
 
 test('For when you\'ve lost someone: free stored verses and gentle lines, a pastor or counselor, nights only once published', async () => {

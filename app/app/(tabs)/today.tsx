@@ -12,7 +12,7 @@ import { daily, pages, useDeclaration, useStories, type DailyPage } from '../../
 import { DeclarationVerse } from '../../src/screens/daily/DeclarationVerse';
 import { dawnLabel } from '../../src/screens/daily/Dawn';
 import { WeekStrip } from '../../src/ui/week';
-import { ReminderOffer } from '../../src/reminders';
+import { ReminderOffer, useReminder } from '../../src/reminders';
 import { clock } from '../../src/clock';
 import { listenTracks, isPreviewSample } from '../../src/screens/listen/preview';
 import { usePublishedAudio } from '../../src/screens/listen/availability';
@@ -35,7 +35,9 @@ export default function Today() {
   const faith = settings.door !== 'mindset';
   const nights = faith ? journeyById('psalm-nights')! : journeyById('imagination-nights')!;
   // In the small hours Today is only the one back-to-sleep button, once its audio is published (the manifest is read then only).
-  const smallHours = useSmallHours();
+  // 새벽기도: the small hours end at her dawn time when she picked one before 5:00 (src/clock.ts inSmallHours).
+  const reminder = useReminder();
+  const smallHours = useSmallHours(settings.journey === 'saebyeok' ? reminder.time : undefined);
   const published = usePublishedAudio(smallHours && faith);
   const [showAll, setShowAll] = useState(false);
   const playable = (track: Track) => isPreviewSample(track) || published?.get(track.file) === track.sha256;

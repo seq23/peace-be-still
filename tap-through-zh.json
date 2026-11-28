@@ -1,7 +1,7 @@
 {
   "app": "Peace Be Still",
   "brand": "every-tongue",
-  "about": "The Simplified Chinese screens (zh-Hans), on a phone set to zh-CN: both doors, the price screen, a paid chat's privacy line, the grief card's crisis line (the phone region's, never the language's) and the Nights tab (the English audio, said in Chinese). Same preview switches as tap-through.json.",
+  "about": "The Chinese screens on a phone set to zh-CN: Simplified (zh-Hans) and Traditional (zh-Hant, every word read from zh-Hant.json), each with both doors, the price screen, a paid chat's privacy line, the grief card's crisis line (the phone region's, never the language's: this phone is in mainland China, so both get its line; Taiwan's 1925 is pinned in app/test) and the Nights tab (the English audio, said in Chinese). Same preview switches as tap-through.json. One flow file, so it needs no new workflow call. Every journey states its hour (pbs-preview-hour 21, 9 PM): the robot's browser runs on UTC, so without it a run between 6 and 11 PM Central met the small hours.",
   "locale": "zh-CN",
   "route_storage": {
     "peace-be-still-settings": {
@@ -11,11 +11,12 @@
       "voice": "church",
       "language": "zh-Hans",
       "journey": "psalm-nights"
-    }
+    },
+    "pbs-preview-hour": "21"
   },
   "journeys": [
     {
-      "name": "first-open-zh-Hans",
+      "name": "first-open-zh-hans",
       "start": "/",
       "steps": [
         {
@@ -32,10 +33,13 @@
         {
           "sweep": true
         }
-      ]
+      ],
+      "storage": {
+        "pbs-preview-hour": "21"
+      }
     },
     {
-      "name": "faith-today-zh-Hans",
+      "name": "faith-today-zh-hans",
       "start": "/",
       "storage": {
         "peace-be-still-settings": {
@@ -45,7 +49,8 @@
           "voice": "church",
           "language": "zh-Hans",
           "journey": "psalm-nights"
-        }
+        },
+        "pbs-preview-hour": "21"
       },
       "steps": [
         {
@@ -58,7 +63,7 @@
       ]
     },
     {
-      "name": "mindset-today-zh-Hans",
+      "name": "mindset-today-zh-hans",
       "start": "/",
       "storage": {
         "peace-be-still-settings": {
@@ -68,7 +73,8 @@
           "voice": "plain",
           "language": "zh-Hans",
           "journey": "imagination-nights"
-        }
+        },
+        "pbs-preview-hour": "21"
       },
       "steps": [
         {
@@ -81,7 +87,7 @@
       ]
     },
     {
-      "name": "paywall-zh-Hans",
+      "name": "paywall-zh-hans",
       "start": "/paid",
       "storage": {
         "peace-be-still-settings": {
@@ -91,7 +97,8 @@
           "voice": "church",
           "language": "zh-Hans",
           "journey": "psalm-nights"
-        }
+        },
+        "pbs-preview-hour": "21"
       },
       "steps": [
         {
@@ -104,7 +111,7 @@
       ]
     },
     {
-      "name": "paid-chat-zh-Hans",
+      "name": "paid-chat-zh-hans",
       "start": "/chat?paid=1",
       "storage": {
         "peace-be-still-settings": {
@@ -114,7 +121,8 @@
           "voice": "church",
           "language": "zh-Hans",
           "journey": "psalm-nights"
-        }
+        },
+        "pbs-preview-hour": "21"
       },
       "steps": [
         {
@@ -127,7 +135,7 @@
       ]
     },
     {
-      "name": "grief-zh-Hans",
+      "name": "grief-zh-hans",
       "start": "/grief",
       "storage": {
         "peace-be-still-settings": {
@@ -137,7 +145,8 @@
           "voice": "church",
           "language": "zh-Hans",
           "journey": "psalm-nights"
-        }
+        },
+        "pbs-preview-hour": "21"
       },
       "steps": [
         {
@@ -150,7 +159,7 @@
       ]
     },
     {
-      "name": "made-for-you-zh-Hans",
+      "name": "made-for-you-zh-hans",
       "start": "/made-for-you?paid=1&state=ready",
       "storage": {
         "peace-be-still-settings": {
@@ -160,7 +169,8 @@
           "voice": "church",
           "language": "zh-Hans",
           "journey": "psalm-nights"
-        }
+        },
+        "pbs-preview-hour": "21"
       },
       "steps": [
         {
@@ -183,7 +193,8 @@
           "voice": "church",
           "language": "zh-Hans",
           "journey": "psalm-nights"
-        }
+        },
+        "pbs-preview-hour": "21"
       },
       "steps": [
         {
@@ -201,6 +212,216 @@
           "sweep": true
         }
       ]
+    },
+    {
+      "name": "first-open-zh-hant",
+      "start": "/",
+      "steps": [
+        {
+          "see": "今晚你需要什麼？",
+          "id": "door"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "藉著神的話語",
+          "id": "after-door"
+        },
+        {
+          "sweep": true
+        }
+      ],
+      "storage": {
+        "pbs-preview-hour": "21"
+      }
+    },
+    {
+      "name": "faith-today-zh-hant",
+      "start": "/",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hant",
+          "journey": "psalm-nights"
+        },
+        "pbs-preview-hour": "21"
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "today"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "mindset-today-zh-hant",
+      "start": "/",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "mindset",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "plain",
+          "language": "zh-Hant",
+          "journey": "imagination-nights"
+        },
+        "pbs-preview-hour": "21"
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "today"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "paywall-zh-hant",
+      "start": "/paid",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hant",
+          "journey": "psalm-nights"
+        },
+        "pbs-preview-hour": "21"
+      },
+      "steps": [
+        {
+          "see": "付費方案",
+          "id": "plans"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "paid-chat-zh-hant",
+      "start": "/chat?paid=1",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hant",
+          "journey": "psalm-nights"
+        },
+        "pbs-preview-hour": "21"
+      },
+      "steps": [
+        {
+          "see": "你的聊天是私密的：付費 AI 服務不會用你輸入的內容來改進它的 AI。",
+          "id": "private"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "grief-zh-hant",
+      "start": "/grief",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hant",
+          "journey": "psalm-nights"
+        },
+        "pbs-preview-hour": "21"
+      },
+      "steps": [
+        {
+          "see": "找個人說說",
+          "id": "help"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "made-for-you-zh-hant",
+      "start": "/made-for-you?paid=1&state=ready",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hant",
+          "journey": "psalm-nights"
+        },
+        "pbs-preview-hour": "21"
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "mfy"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "nights-zh-hant",
+      "start": "/nights",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "zh-Hant",
+          "journey": "psalm-nights"
+        },
+        "pbs-preview-hour": "21"
+      },
+      "steps": [
+        {
+          "see": "音訊為英語朗讀。",
+          "id": "nights"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "詩篇之夜",
+          "id": "psalm-shelf"
+        },
+        {
+          "sweep": true
+        }
+      ]
     }
-  ]
+  ],
+  "route_storage_for": {
+    "/journeys": {
+      "peace-be-still-settings": {
+        "door": "faith",
+        "age": "adult",
+        "ageSetAt": 0,
+        "voice": "church",
+        "language": "zh-Hans"
+      },
+      "pbs-preview-hour": "21"
+    }
+  }
 }

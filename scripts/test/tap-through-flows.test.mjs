@@ -23,6 +23,26 @@ for (const file of files) {
     assert.ok(steps > 0, `${file} taps nothing`);
     assert.ok(steps <= MAX_STEPS, `${file} has ${steps} steps: split it into another tap-through-<name>.json`);
   });
+  // The runner's own flow rules (boss-os scripts/ops/tap-through.mjs flowProblems): a flow it refuses is a
+  // NAMED STOP [FLOW_INVALID] on main and no tap-through at all (27 Nov 2026: "first-open-zh-Hans").
+  test(`${file}: journey names are lower-case words joined by -, each once`, () => {
+    const names = flow.journeys.map(j => j.name);
+    for (const name of names) assert.match(name ?? '', /^[a-z0-9-]+$/, `journey "${name}": name must be lower-case words joined by -`);
+    assert.equal(new Set(names).size, names.length, `${file}: a journey name is listed twice`);
+    for (const [route, storage] of Object.entries(flow.route_storage_for ?? {})) {
+      assert.ok(route.startsWith('/'), `route_storage_for "${route}": the key is a route path`);
+      assert.ok(storage && typeof storage === 'object' && Object.keys(storage).length, `route_storage_for "${route}": no storage`);
+    }
+  });
+  // The robot's browser runs on the runner's clock (UTC): from 00:00 to 05:00 UTC (6 to 11 PM Central) Today and
+  // Nights are only "back to sleep", and a step on either never appears (27 Nov 2026, run 46098333472). Every journey
+  // and every swept route states its hour (app/src/clock.ts PREVIEW_HOUR_KEY) unless its own address sets ?hour=.
+  test(`${file}: every journey and swept route states the phone's hour`, () => {
+    const hour = storage => /^(?:[0-9]|1[0-9]|2[0-3])$/.test(storage?.['pbs-preview-hour'] ?? '');
+    for (const j of flow.journeys) assert.ok(/[?&]hour=\d/.test(j.start) || hour(j.storage), `${file} journey "${j.name}": no pbs-preview-hour in its storage`);
+    assert.ok(hour(flow.route_storage), `${file}: no pbs-preview-hour in route_storage`);
+    for (const [route, storage] of Object.entries(flow.route_storage_for ?? {})) assert.ok(hour(storage), `${file} route_storage_for "${route}": no pbs-preview-hour`);
+  });
   test(`${file}: every promise names steps in this same file`, () => {
     const ids = new Set(flow.journeys.flatMap(j => j.steps.filter(s => s.id).map(s => `${j.name}:${s.id}`)));
     const features = new Set((flow.native_only ?? []).map(n => n.feature));

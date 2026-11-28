@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { Linking, Pressable, Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 import { t, type Language } from '../i18n';
 import { fonts } from '../theme/tokens';
 import { BackLink, Body, Card, Label, PillButton, Screen, TextLink, Title, usePalette } from '../ui';
@@ -9,6 +9,7 @@ import { madeForYouApi, SessionError, type Ready, type SessionContext, type Shel
 import { playedSessionKey } from './played';
 import { madeForYouCopy, readyWhen } from './copy';
 import { crisisLinks } from '../chat/crisisLines';
+import { lineLinkProps } from '../chat/HelpLine';
 
 type Props = {
   paid: boolean;
@@ -138,7 +139,7 @@ function Sessions({ context, close, play, api, crisis: shownCrisis, ui }: Pick<P
     {crisis ? <View style={{ gap: 10 }}>
       <Text accessibilityRole="alert" style={{ color: palette.ink, fontFamily: fonts.body, fontSize: 17, lineHeight: 25 }}>{crisis}</Text>
       {/* The same one-tap help as chat: nobody in crisis at bedtime should have to copy a number. */}
-      {crisisLinks(crisis, ui).map(link => <Pressable key={link.url} accessibilityRole="link" onPress={() => void Linking.openURL(link.url)}
+      {crisisLinks(crisis, ui).map(link => <Pressable key={link.url} accessibilityRole="link" {...lineLinkProps(link.url)}
         style={{ minHeight: 48, justifyContent: 'center', paddingHorizontal: 18, borderWidth: 1, borderColor: palette.accent, borderRadius: 24 }}>
         <Text style={{ color: palette.ink, fontFamily: fonts.strong, fontSize: 16 }}>{t(link.label, { ...link.values, locale: ui })}</Text>
       </Pressable>)}
