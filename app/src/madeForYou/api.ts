@@ -1,4 +1,5 @@
-import type { Age, Door, Language } from '../model';
+import type { Language } from '../i18n';
+import type { Age, Door } from '../model';
 import { madeForYouToken } from './paidStub';
 
 export type Kind = 'psalm' | 'imagination';
@@ -17,7 +18,9 @@ export type Shelf = {
   next: number | null;
 };
 export type Submission = ({ status: 'pending'; dueAt: number } & Receipt) | { status: 'crisis'; kind: string; text: string } | { status: 'preview' };
-export type SessionContext = { age: Age; door: Door; lang: Language; kind: Kind };
+/** lang is the voiced library's language (i18n contentLanguage): sessions are made in English or Spanish. */
+/** shown is the screen language: a crisis reply is written in it (a Korean phone's sessions are English). */
+export type SessionContext = { age: Age; door: Door; lang: 'en' | 'es'; kind: Kind; shown?: Language };
 /** The chat's report reasons (one report path, POST /api/report). */
 export type ReportReason = 'hurtful' | 'wrong' | 'unsafe' | 'other';
 
@@ -30,7 +33,7 @@ const base = () => process.env.EXPO_PUBLIC_CHAT_API ?? 'https://peacebestillapp.
 export const madeForYouApi = {
   list: (context: SessionContext, signal?: AbortSignal) => request<Shelf>(context, { signal }),
   submit: (context: SessionContext, text: string) => request<Submission>(context, {
-    method: 'POST', body: JSON.stringify({ kind: context.kind, lang: context.lang, door: context.door, text }),
+    method: 'POST', body: JSON.stringify({ kind: context.kind, lang: context.lang, door: context.door, text, ...(context.shown ? { shown: context.shown } : {}) }),
   }),
   play: (context: SessionContext, id: string, signal?: AbortSignal) => request<{ url: string }>(context, { signal }, { play: id }),
   /** One session, or every session she has when no id is given. */

@@ -2,10 +2,28 @@
 // The app opens the bundled files with expo-sqlite (index.ts); the tests use node:sqlite on the
 // same files. Stored text is never changed: displayRuns only splits it for the reader.
 import books from '../../../content/bible/books.json';
+import type { Language } from '../i18n';
 
-export type Translation = 'KJV' | 'RV1909';
-export type Language = 'en' | 'es';
-export type Book = { code: string; usfm: string; en: string; es: string; aliases?: string[] };
+export type { Language };
+export type Translation = 'KJV' | 'RV1909' | 'KRV' | 'CUVS' | 'CUVT';
+export type Book = { code: string; usfm: string; aliases?: string[] } & Record<Language, string>;
+
+/** Each screen language reads one Bible, word for word: KJV, Reina-Valera 1909, 개역한글 (1961), and the
+ *  1919 和合本 in Simplified or Traditional characters (never the 1988 edition). */
+export const TRANSLATION_OF: Record<Language, Translation> = { en: 'KJV', es: 'RV1909', ko: 'KRV', 'zh-Hans': 'CUVS', 'zh-Hant': 'CUVT' };
+export function translationFor(language: string): Translation {
+  return TRANSLATION_OF[language as Language] ?? 'KJV';
+}
+
+/** The short name shown after every reference and on every share card ("시편 23:1 · 개역한글"). */
+export const TRANSLATION_NAME: Record<Translation, string> = { KJV: 'KJV', RV1909: 'RV1909', KRV: '개역한글', CUVS: '和合本', CUVT: '和合本' };
+
+/** The credit line under Korean and Chinese verses, from content/bible/{krv,cuv}_source.json. */
+export const TRANSLATION_CREDIT: Partial<Record<Translation, string>> = {
+  KRV: '개역한글판 (대한성서공회 번역, 1961)',
+  CUVS: '和合本（1919年版，公有领域）',
+  CUVT: '和合本（1919年版，公有領域）',
+};
 export type Verse = { book: string; chapter: number; verse: number; text: string };
 export type Reference = { book: string; chapter: number; verse?: number; endVerse?: number };
 export type Run = { text: string; italic: boolean };
@@ -37,7 +55,8 @@ function bookKey(name: string): string {
 
 const names = new Map<string, string>();
 for (const book of BOOKS) {
-  for (const name of [book.code, book.usfm, book.en, book.es, ...(book.aliases ?? [])]) {
+  // Korean and Chinese names too: a reference an answer writes in her Bible's names ("시편 151:2") is checked like any other.
+  for (const name of [book.code, book.usfm, book.en, book.es, book.ko, book['zh-Hans'], book['zh-Hant'], ...(book.aliases ?? [])]) {
     const key = bookKey(name);
     const other = names.get(key);
     if (other && other !== book.code) throw new Error(`books.json: "${name}" names both ${other} and ${book.code}`);
@@ -45,7 +64,7 @@ for (const book of BOOKS) {
   }
 }
 
-/** The file code (as stored, e.g. JOH) for an English or Spanish name, a USFM code (JHN) or a file code. */
+/** The file code (as stored, e.g. JOH) for an English, Spanish, Korean or Chinese name, a USFM code (JHN) or a file code. */
 export function bookCode(name: string): string | null {
   return names.get(bookKey(name)) ?? null;
 }
@@ -183,3 +202,19 @@ export function createBible(driver: Driver) {
   };
 }
 export type Bible = ReturnType<typeof createBible>;
+
+/** "Psalm 23:1 · KJV"; a translation with a credit line names itself there once ("시편 23:1", then
+ *  "개역한글판 (대한성서공회 번역, 1961)" on its own line), never twice. Every verse screen and share card cites
+ *  through this, so a Korean or Chinese verse never shows without its credit. */
+export function citation(reference: string, translation: Translation): string {
+  const credit = TRANSLATION_CREDIT[translation];
+  return credit ? `${reference}\n${credit}` : `${reference} · ${TRANSLATION_NAME[translation]}`;
+}
+
+/** Korean and Chinese letters are never spaced apart: the small-caps letter-spacing of a label is for Latin
+ *  letters only ("새 벽 말 씀" reads as four words). True when any text inside has a Han or Hangul letter. */
+export function hasCjk(node: unknown): boolean {
+  if (typeof node === 'string') return /[\p{Script=Han}\p{Script=Hangul}]/u.test(node);
+  if (Array.isArray(node)) return node.some(hasCjk);
+  return false;
+}

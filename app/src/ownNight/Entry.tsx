@@ -1,5 +1,6 @@
 // The way in to "Write your own night": 18 and over only (a teen or child never sees it at all), on the Mindset door.
 // A free adult sees it marked for a paid plan; the screen behind it explains and offers the existing price screen.
+import { isCjk, type Language } from '../i18n';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { View } from 'react-native';
@@ -9,7 +10,10 @@ import { Body, Card, Chevron, Label, styles } from '../ui';
 import { ownNightSupported } from './adapters';
 
 /** Who is shown the entry at all: adults on the Mindset door, on a binary that has the phone voice and microphone question. */
-export const showsOwnNight = (settings: { age: string | null; door: string | null }) => settings.age === 'adult' && settings.door === 'mindset' && ownNightSupported();
+// Korean and Chinese phones never see it in 1.0.1: the moment is written and read in English or Spanish only
+// (store/review notes say so). The route redirects on the same check.
+export const showsOwnNight = (settings: { age: string | null; door: string | null; language?: string }) =>
+  settings.age === 'adult' && settings.door === 'mindset' && ownNightSupported() && (settings.language === undefined || !isCjk(settings.language as Language));
 
 export function OwnNightEntry() {
   const { settings } = useSettings();

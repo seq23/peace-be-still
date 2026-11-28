@@ -1,3 +1,5 @@
+import { contentLanguage, isCjk } from '../../i18n';
+import { noTracking } from '../../ui';
 import { useIsFocused, useRouter } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -196,13 +198,13 @@ export function NowPlaying({ track, close, privateStream, autoplay = false }: {
         {/* Screen 4: the title block near the top, the verse under it, the controls at the foot. A track with
             no verse (Imagination Nights) centres its title instead of leaving a hole. */}
         <View style={[styles.heading, !excerptRef && styles.headingAlone]}>
-          <Text style={styles.tag}>{label}</Text>
-          <Text accessibilityRole="header" style={styles.title}>{trackTitle(track, t.locale)}</Text>
+          <Text style={[styles.tag, noTracking(label)]}>{label}</Text>
+          <Text accessibilityRole="header" style={styles.title}>{trackTitle(track, contentLanguage(t.locale))}</Text>
           <Text style={styles.note}>{`${t('listen.minutes', { minutes: Math.max(1, Math.round(track.seconds / 60)) })} · ${privateStream?.aiLabel ?? t('listen.aiVoice')}`}</Text>
         </View>
         {verse && <View style={styles.verse}>
           <ScriptureText text={verse.text} style={styles.verseText} testID="scripture-text" />
-          <Text style={styles.reference}>{track.kind === 'psalms' ? `${trackTitle(track, t.locale)}:${verse.verse}` : formatReference(verse, t.locale)} · {translation}</Text>
+          <Text style={[styles.reference, isCjk(t.locale) ? { letterSpacing: 0 } : undefined]}>{track.kind === 'psalms' ? `${trackTitle(track, contentLanguage(t.locale))}:${verse.verse}` : formatReference(verse, t.locale)} · {translation}</Text>
         </View>}
         {untimedResponses && <View style={styles.responses}>
           <Text style={styles.note}>{t('listen.respondDuringPauses')}</Text>

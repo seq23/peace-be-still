@@ -2,6 +2,7 @@
 import { Redirect, useRouter } from 'expo-router';
 import React from 'react';
 import { Text, View } from 'react-native';
+import { LANGUAGES } from '../src/i18n';
 import { onboarded, startRoute, voicesFor, type Language, type Voice } from '../src/model';
 import { useSettings, useT } from '../src/settings';
 import { BackLink, Card, Label, LinkRow, Screen, Title, usePalette } from '../src/ui';
@@ -42,7 +43,7 @@ export default function SettingsScreen() {
       <ReminderSettings />
       <View role="radiogroup" style={{ gap: 10, marginTop: 10 }}>
         <Label>{t('settings.language')}</Label>
-        {(['en', 'es'] as Language[]).map(language => radio(language, t(`language.${language}`), settings.language === language, () => save({ ...settings, language })))}
+        {LANGUAGES.map(language => radio(language, t(`language.${language}`), settings.language === language, () => save({ ...settings, language })))}
       </View>
       <MadeForYouSettings />
     </Screen>

@@ -6,6 +6,7 @@ import Svg, { Path, Rect } from 'react-native-svg';
 import { colors, dawn, fonts, MARK, night, type Palette } from '../theme/tokens';
 import type { Door } from '../model';
 import { clock, inSmallHours } from '../clock';
+import { hasCjk } from '../bible/core';
 
 export function usePalette(): Palette & { dark: boolean } {
   // In the small hours the whole app is night, whatever the phone's setting: no bright screen at 3 AM.
@@ -31,7 +32,12 @@ export function Screen({ children, footer, edges = ['top', 'bottom'], scrollRef 
 /** Every small label: Spline Sans Mono 12, uppercase, letter-spaced. */
 export function Label({ children, style }: { children: React.ReactNode; style?: StyleProp<TextStyle> }) {
   const c = usePalette();
-  return <Text style={[styles.label, { color: c.muted }, style]}>{children}</Text>;
+  return <Text style={[styles.label, { color: c.muted }, style, noTracking(children)]}>{children}</Text>;
+}
+
+/** No letter-spacing on Korean or Chinese text (a label's tracking spreads "새벽 말씀" into single letters). */
+export function noTracking(text: unknown): TextStyle | undefined {
+  return hasCjk(text) ? { letterSpacing: 0 } : undefined;
 }
 
 export function Title({ children }: { children: React.ReactNode }) {

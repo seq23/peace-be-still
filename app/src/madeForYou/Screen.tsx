@@ -2,13 +2,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Linking, Pressable, Text, TextInput, View } from 'react-native';
-import { t } from '../i18n';
+import { t, type Language } from '../i18n';
 import { fonts } from '../theme/tokens';
 import { BackLink, Body, Card, Label, PillButton, Screen, TextLink, Title, usePalette } from '../ui';
 import { madeForYouApi, SessionError, type Ready, type SessionContext, type Shelf } from './api';
 import { playedSessionKey } from './played';
 import { madeForYouCopy, readyWhen } from './copy';
-import { crisisLinks } from './crisis';
+import { crisisLinks } from '../chat/crisisLines';
 
 type Props = {
   paid: boolean;
@@ -19,23 +19,25 @@ type Props = {
   api?: typeof madeForYouApi;
   /** The crisis reply to show at once (the web preview's ?state=crisis). */
   crisis?: string;
+  /** The screen's language (Korean, Chinese...); context.lang is the session's own (English or Spanish audio). */
+  ui?: Language;
 };
 
-export function MadeForYouScreen({ paid, context, close, plans, play, api = madeForYouApi, crisis }: Props) {
-  const copy = madeForYouCopy(context.lang);
-  const back = t('common.back', { locale: context.lang });
+export function MadeForYouScreen({ paid, context, close, plans, play, api = madeForYouApi, crisis, ui = context.lang }: Props) {
+  const copy = madeForYouCopy(ui);
+  const back = t('common.back', { locale: ui });
   if (!paid) return <Screen>
     <BackLink onPress={close}>{back}</BackLink>
     <Title>{copy('title')}</Title>
     <Body>{copy('locked')}</Body>
     <PillButton onPress={plans}>{copy('plans')}</PillButton>
   </Screen>;
-  return <Sessions context={context} close={close} play={play} api={api} crisis={crisis} />;
+  return <Sessions context={context} close={close} play={play} api={api} crisis={crisis} ui={ui} />;
 }
 
-function Sessions({ context, close, play, api, crisis: shownCrisis }: Pick<Props, 'context' | 'close' | 'play' | 'crisis'> & { api: typeof madeForYouApi }) {
+function Sessions({ context, close, play, api, crisis: shownCrisis, ui }: Pick<Props, 'context' | 'close' | 'play' | 'crisis'> & { api: typeof madeForYouApi; ui: Language }) {
   const { age, door, kind, lang } = context;
-  const copy = madeForYouCopy(lang);
+  const copy = madeForYouCopy(ui);
   const palette = usePalette();
   const focused = useIsFocused();
   const [shelf, setShelf] = useState<Shelf | null>(null);
@@ -101,21 +103,21 @@ function Sessions({ context, close, play, api, crisis: shownCrisis }: Pick<Props
     }
   }
 
-  const journey = t(kind === 'psalm' ? 'journey.psalmNights.name' : 'journey.imaginationNights.name', { locale: lang });
-  const date = new Intl.DateTimeFormat(lang, { dateStyle: 'long', timeZone: 'UTC' });
-  const minutes = new Intl.NumberFormat(lang, { style: 'unit', unit: 'minute', unitDisplay: 'short' });
+  const journey = t(kind === 'psalm' ? 'journey.psalmNights.name' : 'journey.imaginationNights.name', { locale: ui });
+  const date = new Intl.DateTimeFormat(ui, { dateStyle: 'long', timeZone: 'UTC' });
+  const minutes = new Intl.NumberFormat(ui, { style: 'unit', unit: 'minute', unitDisplay: 'short' });
   const pending = shelf?.pending;
   const alert = (message: string) => <Text accessibilityRole="alert" style={{ color: palette.wine, fontFamily: fonts.body }}>{message}</Text>;
   // The form shows only when a request can really be taken: none waiting, none today, and a night with room.
   const canAsk = !!shelf && !pending && !shelf.requestedToday && shelf.next !== null;
 
   return <Screen>
-    <BackLink onPress={close}>{t('common.back', { locale: lang })}</BackLink>
+    <BackLink onPress={close}>{t('common.back', { locale: ui })}</BackLink>
     <Title>{copy('title')}</Title>
     <Label>{journey}</Label>
     {loadFailed && alert(copy('error'))}
     {pending && <Card>
-      <Body muted={false}>{pending.late ? copy('late') : copy('readyStatus', { when: readyWhen(pending.dueAt, lang) })}</Body>
+      <Body muted={false}>{pending.late ? copy('late') : copy('readyStatus', { when: readyWhen(pending.dueAt, ui) })}</Body>
       {!pending.late && <Body size={14}>{copy(pending.retrying ? 'retrying' : 'pendingDetail')}</Body>}
     </Card>}
     {!pending && shelf?.ended && <Card><Body muted={false}>{copy(shelf.ended)}</Body></Card>}
@@ -136,9 +138,9 @@ function Sessions({ context, close, play, api, crisis: shownCrisis }: Pick<Props
     {crisis ? <View style={{ gap: 10 }}>
       <Text accessibilityRole="alert" style={{ color: palette.ink, fontFamily: fonts.body, fontSize: 17, lineHeight: 25 }}>{crisis}</Text>
       {/* The same one-tap help as chat: nobody in crisis at bedtime should have to copy a number. */}
-      {crisisLinks(crisis, lang).map(link => <Pressable key={link.url} accessibilityRole="link" onPress={() => void Linking.openURL(link.url)}
+      {crisisLinks(crisis, ui).map(link => <Pressable key={link.url} accessibilityRole="link" onPress={() => void Linking.openURL(link.url)}
         style={{ minHeight: 48, justifyContent: 'center', paddingHorizontal: 18, borderWidth: 1, borderColor: palette.accent, borderRadius: 24 }}>
-        <Text style={{ color: palette.ink, fontFamily: fonts.strong, fontSize: 16 }}>{link.label}</Text>
+        <Text style={{ color: palette.ink, fontFamily: fonts.strong, fontSize: 16 }}>{t(link.label, { ...link.values, locale: ui })}</Text>
       </Pressable>)}
       {/* A way back for a reply that fired on the wrong words: nothing was kept, and she can write again. */}
       <Body>{copy('crisisNothingSaved')}</Body>
@@ -157,7 +159,7 @@ function Sessions({ context, close, play, api, crisis: shownCrisis }: Pick<Props
           }} />
         <Body size={14}>{copy('counter', { count: text.length })}</Body>
         <Body size={14}>{copy('privacy')}</Body>
-        <Body size={14}>{copy('formPromise', { when: readyWhen(shelf!.next!, lang) })}</Body>
+        <Body size={14}>{copy('formPromise', { when: readyWhen(shelf!.next!, ui) })}</Body>
         {notice === 'preview' ? <Body>{copy(notice)}</Body> : notice && alert(copy(notice))}
         {sending ? <Body>{copy('sending')}</Body> : !!text.trim() && <PillButton onPress={() => void submit()}>{copy('submit')}</PillButton>}
       </React.Fragment>}

@@ -2,14 +2,19 @@
 // Code handles structure and the hard floors; a free-model judge reads meaning for the
 // C06/C07 red lines afterwards (judge.ts). A problem means one regeneration with the
 // objection, then the fixed fallback reply. Nothing here keeps or logs the text.
-import { banned, bookCode, fold, parseReference, type Translation } from '../shared';
+import { banned, bookCode, fold, parseReference, type Language, type Translation } from '../shared';
 import { faithContentIssues } from '../../../app/src/model';
 import { chapterVerses, lookup, type Scripture } from '../scripture';
 import type { Reference } from '../shared';
+import zhScript from '../../../content/bible/zh_script.json';
+
+const TRAD_ONLY = new Set([...(zhScript as { tradOnly: string }).tradOnly]);
 
 export type Draft = { text: string; references: string[] };
 // userText is the newest message; afterCrisis says an earlier message in this chat was answered with the crisis lines.
-export type GateContext = { db: D1Database; lang: 'en' | 'es'; translation: Translation; teen: boolean; door: 'faith' | 'mindset'; userText: string; afterCrisis?: boolean };
+// lang is the prompt's language (English or Spanish); shown is the language she reads (Korean or Chinese answers come
+// from the English prompt); line is the crisis line for her region that an answer after a crisis must name.
+export type GateContext = { db: D1Database; lang: 'en' | 'es'; shown?: Language; line?: string; translation: Translation; teen: boolean; door: 'faith' | 'mindset'; userText: string; afterCrisis?: boolean };
 export type GateResult =
   | { ok: true; text: string; scripture: Scripture[]; notes: string[] }
   | { ok: false; problems: string[] };
@@ -68,6 +73,9 @@ const HARD_TOPIC = / (?:died|dies|death|dead|funeral|suicide|sex|sexual|girlfrie
 const TRUSTED = / (?:trusted adult|parent|parents|mom|dad|mother|father|counselor|pastor|youth (?:leader|pastor)|teacher|coach|adulto de confianza|tus papas|tu mama|tu papa|tus padres|consejer[oa]|maestr[oa]|lider de jovenes) /;
 
 const MINDSET_FAITH = / (?:god|gods|lord|jesus|christ|pray\w*|bible\w*|verse\w*|scripture\w*|kjv|pastor\w*|church\w*|dios|senor|jesucristo|orar|oracion\w*|biblia\w*|versiculo\w*|escritura\w*|iglesia\w*) /;
+// The same in Korean and Chinese, matched as written (NFC: NFD would split Hangul into jamo). A lone 神 is
+// left out (精神, 神经 are everyday words), and so is a bare 기도 (인기도, 시기도).
+const MINDSET_FAITH_CJK = /诗篇|詩篇|圣经|聖經|经文|經文|上帝|耶稣|耶穌|基督|祷告|禱告|教会|教會|牧师|牧師|主耶|天父|하나님|하느님|성경|시편|예수|교회|목사|기도하|기도해|기도를/u;
 // Hostile review of 25c474f, F4: pastor-level floors in code.
 // A question about medicine gets "talk with your doctor" (RT25 sent her only to her pastor).
 const MEDS_Q = / (?:meds|medication\w*|medicine\w*|pills|antidepressants?|prescription\w*|insulin|dose|doses|dosage|medicament\w*|medicinas?|pastillas|receta\w*|dosis) /;
@@ -88,9 +96,40 @@ const lastSentence = (text: string) => {
 };
 
 // "Psalm 46:1", "1 John 4:8", "Primera de Juan 4:8", "Salmos 23:1-3", "JHN 3:16".
-const REF_IN_TEXT = /((?:[123]\s+)?(?:\p{L}+\s+){0,3}\p{L}+\.?)\s+(\d{1,3})\s*:\s*(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?/gu;
-const QUOTED = /"([^"]{3,}?)"|“([^”]{3,}?)”|«([^»]{3,}?)»|‘([^’]{3,}?)’|(?<![\p{L}])'([^']{3,}?)'(?![\p{L}])/gu;
+// Chinese writes the book against the number ("诗篇34:18") and may use a full-width colon.
+const REF_IN_TEXT = /((?:[123]\s+)?(?:\p{L}+\s+){0,3}\p{L}+\.?)\s*(\d{1,3})\s*[:：]\s*(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?/gu;
+// 「」 and 『』 are the Chinese (and Taiwan's usual) quotation marks.
+const QUOTED = /"([^"]{3,}?)"|“([^”]{3,}?)”|«([^»]{3,}?)»|‘([^’]{3,}?)’|(?<![\p{L}])'([^']{3,}?)'(?![\p{L}])|「([^」]{3,}?)」|『([^』]{3,}?)』/gu;
 const ATTRIBUTED = /\b(?:says|said|saith|it is written|is written|declares|promises|dice|dijo|declara|promete|est[aá] escrito|escrito est[aá])\s*[:,]?\s+([^.!?\n"“«‘]{3,})/giu;
+// Chinese and Korean put no space before the verb (JS \b is ASCII-only): "圣经说：…", "經上記著說，…", "예수님이
+// 말씀하시기를 …". Chinese "说" is everyday speech, so only Scripture as the speaker counts (a book, a reference,
+// God, Jesus, an apostle), with or without book-title marks (《圣经》说) or as "God's word" (神的话告诉我们);
+// the run ends at the sentence's end or a quotation mark.
+const ATTRIBUTED_CJK = /《?(?:圣经|聖經|经上|經上|经文|經文|神|上帝|主|耶稣|耶穌|基督|圣灵|聖靈|保罗|保羅|大卫|大衛|先知|使徒|诗篇|詩篇|箴言|以赛亚书?|以賽亞書?|\d+\s*[:：]\s*\d+)》?(?:的话|的話|的话语|的話語)?(?:里|裡|裏|中|上)?(?:也|又)?(?:说|說|记着|記著|记载|記載|写着|寫著|写道|寫道|应许|應許|宣告|告诉我们|告訴我們)(?:说|說)?\s*[:：,，]?\s*([^。！？!?\n"“”「」『』]{3,})|(?:말씀하시기를|말하기를|기록되기를|기록되었으되|이르시되|가라사대|이렇게 말씀합니다|이렇게 말씀하셨어요|이렇게 말해요)\s*[:,]?\s*([^.!?。\n"“”]{3,})/gu;
+
+// Any of the 66 books as the speaker, wherever it sits in the sentence ("约翰福音说", "《罗马书》告诉我们",
+// "我想对你说，《罗马书》告诉我们，…", "《约翰福音》第三章说"): at every attribution verb, the 16 characters before it
+// are searched for a book name bookCode() knows, and the words after it up to the sentence's end are the run.
+// A scan, not one pattern, so an everyday "说" earlier never hides the book after it (recheck 27 Nov 2026, third
+// round: patterns kept missing a new word order).
+const CJK_VERB = /(?:说|說|记着|記著|记载|記載|写着|寫著|写道|寫道|应许|應許|宣告|告诉我们|告訴我們)(?:说|說)?\s*[:：,，]?\s*/gu;
+const bookBefore = (before: string) => {
+  const ch = [...before.slice(-16)];
+  for (let i = 0; i < ch.length - 1; i++) for (let j = Math.min(ch.length, i + 8); j > i + 1; j--) if (bookCode(ch.slice(i, j).join(''))) return true;
+  return false;
+};
+function bookAttributed(text: string): Array<{ whole: string; run: string }> {
+  const found = [];
+  for (const sentence of text.split(/(?<=[。！？!?\n])/u)) {
+    for (const v of sentence.matchAll(CJK_VERB)) {
+      const at = v.index ?? 0;
+      if (!bookBefore(sentence.slice(0, at))) continue;
+      const run = (sentence.slice(at + v[0].length).match(/^[^。！？!?\n"“”「」『』]{3,}/u) ?? [''])[0];
+      if (run) found.push({ whole: sentence.trim(), run });
+    }
+  }
+  return found;
+}
 
 function refsInText(text: string): Array<{ raw: string; book: string | null; name: string; chapter: number; verse: number; end?: number }> {
   const found = [];
@@ -98,6 +137,9 @@ function refsInText(text: string): Array<{ raw: string; book: string | null; nam
     const words = m[1].replace(/\.$/, '').split(/\s+/);
     let book: string | null = null;
     for (let i = 0; i < words.length && !book; i++) book = bookCode(words.slice(i).join(' '));
+    // No spaces in Chinese ("请读诗篇34:18"): the book is the end of the last run of characters.
+    const last = [...(words.at(-1) ?? '')];
+    if (!book && last.some(ch => /[\p{Script=Han}\p{Script=Hangul}]/u.test(ch))) for (let i = 0; i < last.length - 1 && !book; i++) book = bookCode(last.slice(i).join(''));
     found.push({ raw: m[0], book, name: words.at(-1) ?? '', chapter: Number(m[2]), verse: Number(m[3]), ...(m[4] ? { end: Number(m[4]) } : {}) });
   }
   return found;
@@ -105,6 +147,14 @@ function refsInText(text: string): Array<{ raw: string; book: string | null; nam
 
 export const DROPPED_NOTE = { en: '(I left out a verse reference that is not in the Bible.)', es: '(Quité una cita que no está en la Biblia.)' } as const;
 const words = (text: string) => fold(text).split(' ').filter(Boolean);
+// Chinese has no spaces and a Korean phrase is often one or two words, so a quotation there is measured in
+// characters (Han characters and Hangul syllables) and compared with the verse with spaces and punctuation gone.
+const CJK_CHAR = /[\p{Script=Han}\uAC00-\uD7A3]/gu;
+const cjkCount = (text: string) => (text.match(CJK_CHAR) ?? []).length;
+const compact = (text: string) => text.normalize('NFC').replace(/[^\p{L}\p{N}]+/gu, '').toLowerCase();
+const bigrams = (text: string) => { const c = [...compact(text)]; return c.slice(0, -1).map((ch, i) => ch + c[i + 1]); };
+/** A quotation long enough to be checked against the cited verses: six words, or eight Han or Hangul characters. */
+const long = (run: string) => words(run).length >= 6 || cjkCount(run) >= 8;
 
 export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<GateResult> {
   const problems: string[] = [];
@@ -157,14 +207,25 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
     if (rawRefs.length > 3) notes.push('over_3_refs');
   } else if (refsInText(text).some(r => r.book)) problems.push('scripture_in_mindset');
   // F8: the Mindset door has no faith words at all (run 44856144997 m04: "I cannot share Bible verses").
-  if (ctx.door === 'mindset' && MINDSET_FAITH.test(norm(text))) problems.push('faith_word_in_mindset');
+  if (ctx.door === 'mindset' && (MINDSET_FAITH.test(norm(text)) || MINDSET_FAITH_CJK.test(text.normalize('NFC')))) problems.push('faith_word_in_mindset');
 
   // C01: any quoted or attributed run of 6+ words must be the stored text of a cited verse.
   const cited = scripture.map(s => ` ${fold(s.text)} `);
-  const stored = (run: string) => { const w = words(run); return w.length < 6 || cited.some(c => c.includes(` ${w.join(' ')} `)); };
-  // Half its content words are the words of a verse the app prints under it.
+  const citedCompact = scripture.map(s => compact(s.text));
+  const cjkRun = (run: string) => cjkCount(run) >= 8;
+  const stored = (run: string) => {
+    if (!long(run)) return true;
+    if (cjkRun(run)) return citedCompact.some(c => c.includes(compact(run)));
+    const w = words(run);
+    return cited.some(c => c.includes(` ${w.join(' ')} `));
+  };
+  // Half its content words (Chinese and Korean: half its character pairs) are the words of a verse the app prints under it.
   const unsourced: string[] = [];
   const faithful = (run: string) => {
+    if (cjkRun(run)) {
+      const pairs = bigrams(run);
+      return pairs.length > 0 && citedCompact.some(c => pairs.filter(p => c.includes(p)).length / pairs.length >= 0.5);
+    }
     const content = words(run).filter(w => w.length > 3).map(w => w.slice(0, 4));
     return content.length > 0 && cited.some(c => content.filter(w => c.includes(` ${w}`)).length / content.length >= 0.5);
   };
@@ -173,7 +234,7 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   // RV1909 printed below. A quotation that matches no cited verse is written again.
   for (const m of text.matchAll(QUOTED)) {
     const run = m.slice(1).find(Boolean) ?? '';
-    if (words(run).length < 6) continue;
+    if (!long(run)) continue;
     if (stored(run)) text = text.replace(m[0], ''); // the app shows the stored text below
     else if (faithful(run)) { text = text.replace(m[0], ''); notes.push('misquote_replaced'); }
     else unsourced.push(m[0]);
@@ -186,6 +247,12 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   // the brokenhearted") is not a made-up quotation: half its content words are that verse's own.
   // Run 44856144997: 21 drafts were refused for exactly that shape.
   for (const m of text.matchAll(ATTRIBUTED)) if (!/^(?:that|que)\b/i.test(m[1]) && !stored(m[1]) && !faithful(m[1]) && !hers.includes(` ${words(m[1]).slice(0, 3).join(' ')} `)) unsourced.push(m[0]);
+  const hersCompact = compact(ctx.userText);
+  for (const m of text.matchAll(ATTRIBUTED_CJK)) {
+    const run = m[1] ?? m[2] ?? '';
+    if (!stored(run) && !faithful(run) && !hersCompact.includes(compact(run).slice(0, 6))) unsourced.push(m[0]);
+  }
+  for (const { whole, run } of bookAttributed(text)) if (!stored(run) && !faithful(run) && !hersCompact.includes(compact(run).slice(0, 6))) unsourced.push(whole);
   // Bible words that are not the printed text of a verse it cites (from memory, another translation, or
   // made up) go out with their sentence, so she never reads them as Scripture (run 12: 16 drafts were
   // rewritten for one such line). An answer with too little left is written again.
@@ -218,10 +285,25 @@ export async function checkAnswer(draft: unknown, ctx: GateContext): Promise<Gat
   if (MEDS_Q.test(asked) && !DOCTOR.test(n)) problems.push('missing_doctor');
   const cutOff = CUT_OFF_ASKED.test(asked) || scripture.some(s => CUT_OFF_REFS.some(r => overlaps(s, r))) || refsInText(ctx.userText).some(x => CUT_OFF_REFS.some(r => r.book === x.book && r.chapter === x.chapter && x.verse >= r.verse! && x.verse <= (r.endVerse ?? r.verse!)));
   if (cutOff && !NOT_LITERAL.test(n)) problems.push('missing_not_literal');
-  if (ctx.afterCrisis && !text.includes('988')) problems.push('missing_988');
+  if (ctx.afterCrisis && !text.includes(ctx.line ?? '988')) problems.push('missing_988');
   if (!ctx.teen && TRUSTED_ADULT.test(n)) problems.push('trusted_adult_for_adult');
   const end = lastSentence(text);
-  if (text && (words(end).length < 3 || !/[.!]["'”’)]*$/.test(end))) problems.push('broken_ending');
+  const cjk = ctx.shown === 'ko' || ctx.shown === 'zh-Hans' || ctx.shown === 'zh-Hant';
+  if (text && !cjk && (words(end).length < 3 || !/[.!]["'”’)]*$/.test(end))) problems.push('broken_ending');
+  // Korean and Chinese: a sentence ends on . ! 。 or ！ (Chinese has no spaces to count words by).
+  if (text && cjk && !/[.!。！]["'”’)」』]*$/u.test(text.replace(/\s*[(（][^)）]*\d+:\d+[^)）]*[)）]\s*[.。]?\s*$/u, '。').trim())) problems.push('broken_ending');
+  // C12 for Korean and Chinese: the letters are her script (Hangul, or Han characters), not English.
+  if (text && cjk) {
+    const letters = [...text.replace(REF_IN_TEXT, ' ').replace(/\d+:\d+/g, ' ')].filter(ch => /\p{L}/u.test(ch));
+    const own = letters.filter(ch => (ctx.shown === 'ko' ? /[\p{Script=Hangul}\p{Script=Han}]/u : /\p{Script=Han}/u).test(ch)).length;
+    if (letters.length && own / letters.length < 0.9) problems.push('not_her_language');
+    // Simplified on a Traditional phone, or the other way round: a Traditional answer of any length carries
+    // Traditional-only characters (們 這 說 個), a Simplified one none (the same OpenCC table the app's strings use).
+    const han = letters.filter(ch => /\p{Script=Han}/u.test(ch));
+    const trad = han.filter(ch => TRAD_ONLY.has(ch)).length;
+    if (ctx.shown === 'zh-Hant' && han.length >= 20 && trad === 0) problems.push('not_her_language');
+    if (ctx.shown === 'zh-Hans' && trad >= 3) problems.push('not_her_language');
+  }
 
   // C12: 95%+ Spanish words outside references.
   if (ctx.lang === 'es') {

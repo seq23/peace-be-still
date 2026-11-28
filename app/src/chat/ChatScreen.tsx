@@ -4,12 +4,13 @@
 // Every AI answer has "Report this answer" (Apple Guideline 1.2): the answer and a reason are sent.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { randomUUID } from 'expo-crypto';
-import { getLocales } from 'expo-localization';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Linking, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { displayRuns } from '../bible/core';
-import type { Key } from '../i18n';
+import { displayRuns, TRANSLATION_CREDIT, TRANSLATION_NAME } from '../bible/core';
+import { noTracking } from '../ui';
+import type { Key, Language } from '../i18n';
+import { crisisLinks as linksFor, type HelpLink } from './crisisLines';
 import { FREE_CHAT_MESSAGES } from '../gates';
 import { usePurchases } from '../purchases/provider';
 import { plansFrom } from '../purchases/revenuecat';
@@ -19,51 +20,23 @@ import { askFirstPrivate, ChatError, DISCLOSURE_KEY, reportAnswer, sendChat, typ
 import type { ChatResponse, ChatTurn } from './contract';
 
 type Palette = ReturnType<typeof usePalette>;
-type T = (key: Key, values?: Record<string, string | number>) => string;
+type T = ((key: Key, values?: Record<string, string | number>) => string) & { locale: Language };
 type Entry = { role: 'user'; text: string } | { role: 'reply'; res: ChatResponse } | { role: 'note'; text: string; region: string | null };
 /** Her one-time yes that free chat goes to a free AI service that may keep what she types (two lanes, 21 Nov 2026). */
 export const FREE_CONSENT_KEY = 'peace-be-still-free-chat-consent';
 
 /** Tappable lines for a crisis reply: 988 always; the hotline the reply names (Poison Control and 911 first for medical danger). */
-/**
- * Help when chat cannot answer at all (offline, a server error, too fast): the message that failed
- * may have been a crisis, so every error note carries the crisis line for her region (the server picks
- * the same lines by the same region; missing means US). It is one quiet line, not the crisis card's
- * buttons: each [bracketed] part of the text is a tappable link, in the order of `links`.
- */
-export function regionHelp(region: string | null): { text: Key; links: Array<{ label: Key; url: string }> } {
-  const r = region ?? 'US';
-  if (r === 'US') return { text: 'chat.help.us', links: [{ label: 'chat.call.988', url: 'tel:988' }, { label: 'chat.text.988', url: 'sms:988' }] };
-  if (r === 'MX') return { text: 'chat.help.mx', links: [{ label: 'chat.call.mx', url: 'tel:8009112000' }, { label: 'chat.call.911', url: 'tel:911' }] };
-  if (r === 'ES') return { text: 'chat.help.es', links: [{ label: 'chat.call.024', url: 'tel:024' }, { label: 'chat.call.112', url: 'tel:112' }] };
-  return { text: 'chat.help.other', links: [{ label: 'chat.findHelpline', url: 'https://findahelpline.com' }] };
-}
+import { HelpLine, phoneRegion } from './HelpLine';
+export { regionHelp } from './regionHelp';
 
 /** The help line under an error note: muted, with its [bracketed] words as inline links. */
 function NoteHelp({ region, c, t }: { region: string | null; c: Palette; t: T }) {
-  const help = regionHelp(region);
-  const parts = t(help.text).split(/\[([^\]]+)\]/);
-  return <Text testID="note-help" style={[s.note, { color: c.muted }]}>
-    {parts.map((part, j) => {
-      if (j % 2 === 0) return part;
-      const link = help.links[(j - 1) / 2];
-      return <Text key={j} accessibilityRole="link" accessibilityLabel={t(link.label)} onPress={() => void Linking.openURL(link.url)} style={{ color: c.accent, textDecorationLine: 'underline' }}>{part}</Text>;
-    })}
-  </Text>;
+  return <HelpLine testID="note-help" region={region} t={t} style={[s.note, { color: c.muted }]} link={c.accent} />;
 }
 
-export function crisisLinks(res: ChatResponse): Array<{ label: Key; url: string }> {
-  // The hotline the reply leads with comes first, as in the text.
-  const links: Array<{ label: Key; url: string }> = [];
-  if (res.text.includes('1-800-222-1222')) links.push({ label: 'chat.call.poison', url: 'tel:18002221222' }, { label: 'chat.call.911', url: 'tel:911' });
-  if (res.text.includes('1-800-422-4453')) links.push({ label: 'chat.call.childhelp', url: 'tel:18004224453' }, { label: 'chat.text.childhelp', url: 'sms:18004224453' });
-  if (res.text.includes('1-800-799-7233')) links.push({ label: 'chat.call.dv', url: 'tel:18007997233' }, { label: 'chat.text.dv', url: 'sms:88788?body=START' });
-  // Outside the US the card names the lines where she is (by the phone's region).
-  if (res.text.includes('800 911 2000')) links.push({ label: 'chat.call.mx', url: 'tel:8009112000' }, { label: 'chat.call.911', url: 'tel:911' });
-  if (/\b024\b/.test(res.text)) links.push({ label: 'chat.call.024', url: 'tel:024' }, { label: 'chat.call.112', url: 'tel:112' });
-  if (res.text.includes('findahelpline.com')) links.push({ label: 'chat.findHelpline', url: 'https://findahelpline.com' });
-  if (res.text.includes('988')) links.push({ label: 'chat.call.988', url: 'tel:988' }, { label: 'chat.text.988', url: 'sms:988' });
-  return links;
+/** The card's one-tap help, from the one list (./crisisLines.ts) Made for you and Write your own night use too. */
+export function crisisLinks(res: ChatResponse, lang: Language = 'en'): HelpLink[] {
+  return linksFor(res.text, lang);
 }
 
 const REASONS: Array<[ReportReason, Key]> = [['hurtful', 'chat.report.hurtful'], ['wrong', 'chat.report.wrong'], ['unsafe', 'chat.report.unsafe'], ['other', 'chat.report.other']];
@@ -164,12 +137,12 @@ export default function ChatScreen() {
   // the private way. No free chat without it (the Worker refuses one too: kind 'consent').
   if (!paid && !freeOk && !firstPrivate) {
     return <View testID="free-consent" style={[s.card, { backgroundColor: c.card, borderColor: c.line }]}>
-      <Text style={[s.label, { color: c.muted }]}>{t('chat.free.label')}</Text>
+      <Text style={[s.label, { color: c.muted }, noTracking(t('chat.free.label'))]}>{t('chat.free.label')}</Text>
       {disclosure}
       <Text style={[s.title, { color: c.ink }]}>{t('chat.free.title')}</Text>
       <Text style={[s.body, { color: c.ink }]}>{t('chat.free.body')}</Text>
       <Text testID={hadFirst ? 'free-had-private' : undefined} style={[s.body, { color: c.ink }]}>{hadFirst ? keepPrivate : t('chat.free.private')}</Text>
-      <Text style={[s.body, { color: c.ink }]}>{t('chat.disclosure.danger')}</Text>
+      <HelpLine region={phoneRegion()} t={t} style={[s.body, { color: c.ink }]} link={c.accent} />
       <Pressable accessibilityRole="button" testID="free-continue" onPress={() => { setFreeOk(true); setAccepted(true); void remember(FREE_CONSENT_KEY); void remember(DISCLOSURE_KEY); }} style={[s.button, { backgroundColor: c.accent }]}>
         <Text style={[s.buttonText, { color: c.on }]}>{t('chat.free.continue')}</Text>
       </Pressable>
@@ -180,10 +153,10 @@ export default function ChatScreen() {
   }
   if (!accepted) {
     return <View style={[s.card, { backgroundColor: c.card, borderColor: c.line }]}>
-      <Text style={[s.label, { color: c.muted }]}>{t('chat.disclosure.label')}</Text>
+      <Text style={[s.label, { color: c.muted }, noTracking(t('chat.disclosure.label'))]}>{t('chat.disclosure.label')}</Text>
       {disclosure}
       <Text style={[s.body, { color: c.ink }]}>{t('chat.paid.private')}</Text>
-      <Text style={[s.body, { color: c.ink }]}>{t('chat.disclosure.danger')}</Text>
+      <HelpLine region={phoneRegion()} t={t} style={[s.body, { color: c.ink }]} link={c.accent} />
       <Pressable accessibilityRole="button" onPress={() => { setAccepted(true); void remember(DISCLOSURE_KEY); }} style={[s.button, { backgroundColor: c.accent }]}>
         <Text style={[s.buttonText, { color: c.on }]}>{t('chat.disclosure.ok')}</Text>
       </Pressable>
@@ -211,8 +184,7 @@ export default function ChatScreen() {
   async function deliver(history: ChatTurn[], overflow: boolean, conv = conversation) {
     setSending(true);
     // The phone's region picks the crisis lines (988 in the US, Línea de la Vida in Mexico, 024 in Spain).
-    let region: string | null = null;
-    try { region = getLocales()[0]?.regionCode ?? null; } catch { region = null; }
+    const region = phoneRegion();
     try {
       const res = await sendChat(settings, conv, history, fetch, !paid && !!freeOk, region, overflow);
       if (res.kind === 'overflow_consent') setPending(history);
@@ -248,9 +220,9 @@ export default function ChatScreen() {
     <View style={[s.head, { borderColor: c.line }]}>
       <View style={{ flex: 1 }}>
         <Text style={[s.headTitle, { color: c.ink }]}>{t('tabs.chat')}</Text>
-        <Text style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : spanish ? 'chat.ai.rv' : 'chat.ai.kjv')}</Text>
-        {notPrivateNow && <Text testID="not-private" style={[s.ai, { color: c.accent }]}>{t('chat.free.notPrivate')}</Text>}
-        {!paid && firstPrivate && <Text testID="first-private" style={[s.ai, { color: c.accent }]}>{t('chat.firstPrivate')}</Text>}
+        <Text style={[s.ai, { color: c.muted }, noTracking(t('chat.ai.mindset'))]}>{t(mind ? 'chat.ai.mindset' : spanish ? 'chat.ai.rv' : 'chat.ai.kjv')}</Text>
+        {notPrivateNow && <Text testID="not-private" style={[s.ai, { color: c.accent }, noTracking(t('chat.free.notPrivate'))]}>{t('chat.free.notPrivate')}</Text>}
+        {!paid && firstPrivate && <Text testID="first-private" style={[s.ai, { color: c.accent }, noTracking(t('chat.firstPrivate'))]}>{t('chat.firstPrivate')}</Text>}
       </View>
       <Pressable accessibilityRole="button" onPress={() => { setConversation(randomUUID()); setEntries([]); }}><Text style={[s.small, { color: c.accent }]}>{t('chat.new')}</Text></Pressable>
     </View>
@@ -263,20 +235,22 @@ export default function ChatScreen() {
           <NoteHelp region={e.region} c={c} t={t} />
         </View>
         : <View key={i} testID={`reply-${e.res.kind}`} style={[s.bot, { backgroundColor: c.card, borderColor: c.line }]}>
-          {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
-          {e.res.notPrivate && <Text testID="answer-not-private" style={[s.ai, { color: c.accent }]}>{t('chat.free.notPrivate')}</Text>}
+          {e.res.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }, noTracking(t('chat.ai.faith'))]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
+          {e.res.notPrivate && <Text testID="answer-not-private" style={[s.ai, { color: c.accent }, noTracking(t('chat.free.notPrivate'))]}>{t('chat.free.notPrivate')}</Text>}
           {e.res.reminder && <Text style={[s.body, { color: c.ink }]}>{t('chat.reminder')}</Text>}
           {e.res.checkIn && <>
-            {e.res.checkIn.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
+            {e.res.checkIn.ai && <Text testID="ai-label" style={[s.ai, { color: c.muted }, noTracking(t('chat.ai.faith'))]}>{t(mind ? 'chat.ai.mindset' : 'chat.ai.faith')}</Text>}
             <Text testID="check-in" style={[s.body, { color: c.ink, fontFamily: 'Figtree_600SemiBold' }]}>{e.res.checkIn.text}</Text>
           </>}
           <Text style={[s.body, { color: c.ink }]}>{e.res.text}</Text>
           {e.res.scripture.map(v => <View key={v.ref} style={s.verse}>
-            <Text style={s.ref}>{`${v.ref} · ${v.translation === 'RV1909' ? 'RV1909' : 'KJV'}`}</Text>
+            {/* A translation with a credit line names itself once, in the credit under the verse. */}
+            <Text style={[s.ref, noTracking(v.ref)]}>{TRANSLATION_CREDIT[v.translation] ? v.ref : `${v.ref} · ${TRANSLATION_NAME[v.translation]}`}</Text>
             <Text style={s.verseText}>{displayRuns(v.text).map((r, j) => <Text key={j} style={r.italic ? { fontStyle: 'italic' } : undefined}>{r.text}</Text>)}</Text>
+            {TRANSLATION_CREDIT[v.translation] ? <Text style={[s.ref, noTracking(TRANSLATION_CREDIT[v.translation])]}>{TRANSLATION_CREDIT[v.translation]}</Text> : null}
           </View>)}
-          {(e.res.kind === 'crisis' || e.res.helpLines) && crisisLinks(e.res).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
-            <Text style={[s.linkText, { color: c.accent }]}>{t(l.label)}</Text>
+          {(e.res.kind === 'crisis' || e.res.helpLines) && crisisLinks(e.res, t.locale).map(l => <Pressable key={l.url} accessibilityRole="link" onPress={() => void Linking.openURL(l.url)} style={[s.link, { borderColor: c.accent }]}>
+            <Text style={[s.linkText, { color: c.accent }]}>{t(l.label, l.values)}</Text>
           </Pressable>)}
           {/* Her ruling 21 Nov 2026: the free day's last message (FREE_CHAT_MESSAGES) always gets its full
               answer; under it, what a plan adds at the store's own monthly price, and when the free ones come back. */}

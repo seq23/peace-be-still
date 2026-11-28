@@ -9,6 +9,9 @@ import { createBible, openCurrent, type Bible, type Translation } from './core';
 const assets: Record<Translation, number> = {
   KJV: require('./data/kjv.db'),
   RV1909: require('./data/rv1909.db'),
+  KRV: require('./data/krv.db'),
+  CUVS: require('./data/cuvs.db'),
+  CUVT: require('./data/cuvt.db'),
 };
 
 const version = (db: SQLiteDatabase) =>

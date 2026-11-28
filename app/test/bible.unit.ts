@@ -7,7 +7,12 @@ import versions from '../src/bible/data/versions.json';
 import { BOOKS, bookCode, createBible, openCurrent, displayRuns, formatReference, parseReference, startsParagraph, type Translation, type Verse } from '../src/bible/core';
 
 // The committed eBible files are the one source; the app's SQLite files must hold them exactly.
-const sources: Record<Translation, string> = { KJV: 'kjv', RV1909: 'rv1909' };
+const sources: Record<Translation, string> = { KJV: 'kjv', RV1909: 'rv1909', KRV: 'krv', CUVS: 'cuvs', CUVT: 'cuv' };
+// The app's file for each (CUVT's eBible source is "cuv"; its app file is cuvt.db).
+const dbs: Record<Translation, string> = { KJV: 'kjv', RV1909: 'rv1909', KRV: 'krv', CUVS: 'cuvs', CUVT: 'cuvt' };
+// Verses in each edition's own numbering: 개역한글 and the 1919 和合本 join some verses the KJV counts apart, so
+// a short count is the edition, never a lost verse (the stored text equals the source verse by verse below).
+const VERSES: Record<Translation, number> = { KJV: 31102, RV1909: 31102, KRV: 31081, CUVS: 31032, CUVT: 31032 };
 const canon = new Set(BOOKS.map(book => book.code));
 function source(translation: Translation): Map<string, string> {
   const lines = gunzipSync(readFileSync(`../content/bible/${sources[translation]}_vpl.txt.gz`)).toString('utf8').replace(/^﻿/, '').split('\n');
@@ -19,7 +24,7 @@ function source(translation: Translation): Map<string, string> {
   return verses;
 }
 function open(translation: Translation) {
-  const db = new DatabaseSync(`src/bible/data/${sources[translation].toLowerCase()}.db`, { readOnly: true });
+  const db = new DatabaseSync(`src/bible/data/${dbs[translation]}.db`, { readOnly: true });
   return { db, bible: createBible({ all: async <T>(sql: string, params: (string | number)[]) => db.prepare(sql).all(...params) as T[] }) };
 }
 
@@ -27,12 +32,12 @@ function open(translation: Translation) {
 const seed = Number(process.env.PBS_SEED ?? Date.now() % 2 ** 31);
 function random(state: number) { return () => { state = (state * 1103515245 + 12345) % 2 ** 31; return state / 2 ** 31; }; }
 
-for (const translation of ['KJV', 'RV1909'] as const) {
+for (const translation of ['KJV', 'RV1909', 'KRV', 'CUVS', 'CUVT'] as const) {
   test(`${translation}: every verse of the source equals the stored text, 66 books only`, () => {
     const { db } = open(translation);
     const expected = source(translation);
     const rows = db.prepare('SELECT book, chapter, verse, text FROM verses ORDER BY id').all() as Verse[];
-    assert.equal(expected.size, 31102);
+    assert.equal(expected.size, VERSES[translation]);
     assert.equal(rows.length, expected.size);
     for (const row of rows) assert.equal(row.text, expected.get(`${row.book} ${row.chapter}:${row.verse}`), `${row.book} ${row.chapter}:${row.verse}`);
     const books = db.prepare('SELECT DISTINCT book FROM verses ORDER BY id').all() as { book: string }[];

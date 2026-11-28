@@ -51,7 +51,7 @@ test('where recording is promised (App Store text, legal pages, app strings), th
   assert.ok(promised.includes('../legal/privacy.md') && promised.includes('../legal/es/privacidad.md'), `promised in: ${promised.join(', ')}`);
   const config = readFileSync('app.config.ts', 'utf8');
   assert.match(config, /microphonePermission: MICROPHONE\.en/);
-  assert.match(config, /locales: \{ es: '\.\/locales\/es\.json' \}/);
+  assert.match(config, /locales: \{ es: '\.\/locales\/es\.json', ko: '\.\/locales\/ko\.json', 'zh-Hans': '\.\/locales\/zh-Hans\.json', 'zh-Hant': '\.\/locales\/zh-Hant\.json' \}/);
   assert.match(JSON.parse(readFileSync('locales/es.json', 'utf8')).ios.NSMicrophoneUsageDescription, /micrófono.*nunca se sube/);
   assert.match(config, /'android\.permission\.RECORD_AUDIO'/);
   assert.match(config, /recordAudioAndroid: false/);

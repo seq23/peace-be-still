@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Text, TextInput, View, type LayoutChangeEvent, type ScrollView } from 'react-native';
-import { BOOKS, displayRuns, formatReference, parseReference, startsParagraph, type Bible, type Translation, type Verse } from '../../bible/core';
+import { BOOKS, TRANSLATION_CREDIT, citation, displayRuns, formatReference, parseReference, startsParagraph, translationFor, type Bible, type Translation, type Verse } from '../../bible/core';
 import { canUse } from '../../gates';
 import { useSettings, useT } from '../../settings';
 import { fonts } from '../../theme/tokens';
@@ -37,7 +37,7 @@ export function Reader({ page, location = home, open, go, back }: {
   const c = usePalette();
   const { settings } = useSettings();
   const user = { age: settings.age, paid: false };
-  const translation = t.locale === 'es' ? 'RV1909' : 'KJV';
+  const translation = translationFor(t.locale);
   const { book, chapter, verse: target } = location;
   const data = marks.useRecord();
   const [query, setQuery] = useState('');
@@ -102,7 +102,7 @@ export function Reader({ page, location = home, open, go, back }: {
   return (
     <Screen edges={back ? ['top', 'bottom'] : ['top']} scrollRef={scroll}>
       {back && <BackLink onPress={back}>{t('common.back')}</BackLink>}
-      <Label>{translation === 'RV1909' ? t('reader.rv') : t('reader.kjv')}</Label>
+      <Label>{translation === 'RV1909' ? t('reader.rv') : translation === 'KJV' ? t('reader.kjv') : TRANSLATION_CREDIT[translation]}</Label>
       <Title>{page === 'chapter' ? formatReference(location, t.locale) : t(`reader.${page}`)}</Title>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', columnGap: 18 }}>
         {page !== 'chapter' && <TextLink onPress={() => go('chapter', location)}>{t('reader.read')}</TextLink>}
@@ -135,7 +135,7 @@ export function Reader({ page, location = home, open, go, back }: {
             {savedAllowed && data.ready && <TextLink onPress={() => update(verse, 'highlight')}>{t(mark?.highlight ? 'reader.unhighlight' : 'reader.highlight')}</TextLink>}
             {canUse('shareCards', user) && <TextLink onPress={() => setShare(verse)}>{t('share.title')}</TextLink>}
           </View>}
-          {share === verse && <ShareCard text={displayRuns(verse.text).map(run => run.text).join('')} credit={`${formatReference(verse, t.locale)} · ${translation}`} close={() => setShare(undefined)} />}
+          {share === verse && <ShareCard text={displayRuns(verse.text).map(run => run.text).join('')} credit={citation(formatReference(verse, t.locale), translation)} close={() => setShare(undefined)} />}
         </View>;
       })}
       {page === 'chapter' && <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

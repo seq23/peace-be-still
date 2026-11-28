@@ -15,6 +15,8 @@
 // the nights' real capacity (sessionsPerNight, sessionMinutes). A request that fits neither tonight
 // nor tomorrow night is refused before anything is stored, and she keeps her request for the day.
 import config from './madeForYou.config.json';
+import type { ReplyLang } from './replies';
+import { TRANSLATION_OF } from './shared';
 import { fixedBlocks, MIDDLE_EXAMPLES } from './madeForYou.library';
 import { StorageConfigError } from './madeForYou.storage';
 
@@ -477,7 +479,7 @@ export type MadeForYouDependencies<CrisisKind = string> = {
   detectCrisis(turns: Turn[]): Promise<Crisis<CrisisKind>>;
   // The door matters: an Imagination (Mindset door) request never gets a faith reply. country: the network's
   // country (request.cf), so a teen in Mexico or Spain gets her own lines, never the US ones.
-  crisisText(kind: CrisisKind, lang: Lang, age: Install['age'], text: string, door: 'faith' | 'mindset', country: string | undefined): string;
+  crisisText(kind: CrisisKind, lang: ReplyLang, age: Install['age'], text: string, door: 'faith' | 'mindset', country: string | undefined): string;
   // runLadder(db, madeForYouRungs(realDeps.rungs(env, now), use, chatShare, signal), messages, schema, maxTokens, metrics, valid).
   /** paidOnly asks the private paid rung alone (config.escalate); with the paid rung at its cap it answers empty.
    *  teen keeps a teen's words off every free rung that may train (rungs(env, now, 'free', true)): Workers AI and the private paid rung only. */
@@ -970,7 +972,9 @@ export function createMadeForYou<CrisisKind>(deps: MadeForYouDependencies<Crisis
     const note = { kind: input.kind, lang: input.lang, text: input.text.trim(), teen: who.age !== 'adult' };
     // The chat's own crisis floor and safety read, before anything is stored.
     const safety = await deps.detectCrisis([{ role: 'user', text: note.text }]);
-    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, note.lang, who.age, note.text, note.kind === 'psalm' ? 'faith' : 'mindset', country) });
+    // The crisis lines are read in her screen language (a Korean phone's sessions are English; its crisis text is not).
+    const shown = typeof input.shown === 'string' && Object.hasOwn(TRANSLATION_OF, input.shown) ? input.shown as ReplyLang : note.lang;
+    if (safety.fired) return json({ status: 'crisis', kind: safety.kind, text: deps.crisisText(safety.kind, shown, who.age, note.text, note.kind === 'psalm' ? 'faith' : 'mindset', country) });
     if (safety.read === 'down') return error(503, 'SAFETY_UNAVAILABLE');
     const id = crypto.randomUUID();
     const day = deps.centralDay(now);

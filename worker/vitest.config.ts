@@ -21,10 +21,12 @@ function verses() {
   const heads: Array<[string, string, number, number, string]> = [];
   let s = seed;
   const rand = () => (s = (s * 48271) % 2147483647) / 2147483647;
-  for (const [translation, file] of [['KJV', 'kjv'], ['RV1909', 'rv1909']] as const) {
+  // Korean and Chinese chat quotes 개역한글 and the 1919 和合本: their cited chapters load too (no sample, no heading pass).
+  for (const [translation, file] of [['KJV', 'kjv'], ['RV1909', 'rv1909'], ['KRV', 'krv'], ['CUVS', 'cuvs'], ['CUVT', 'cuvt']] as const) {
     const db = new DatabaseSync(here(`../app/src/bible/data/${file}.db`), { readOnly: true });
     const q = db.prepare('SELECT book, chapter, verse, text FROM verses WHERE book = ? AND chapter = ?');
     for (const [book, chapter] of chapters) for (const r of q.all(book, chapter) as Array<{ book: string; chapter: number; verse: number; text: string }>) rows.push([translation, r.book, r.chapter, r.verse, r.text]);
+    if (translation !== 'KJV' && translation !== 'RV1909') { db.close(); continue; }
     const total = (db.prepare('SELECT max(id) AS n FROM verses').get() as { n: number }).n;
     const byId = db.prepare('SELECT book, chapter, verse, text FROM verses WHERE id = ?');
     for (let i = 0; i < 200; i++) { const r = byId.get(1 + Math.floor(rand() * total)) as { book: string; chapter: number; verse: number; text: string }; sample.push([translation, r.book, r.chapter, r.verse, r.text]); }

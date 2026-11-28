@@ -47,9 +47,9 @@ unset CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID T2R_CLOUDFLARE_WORKERS_AI_TOKEN
 export CI=1
 $W d1 migrations apply peace-be-still-chat --local $CFG </dev/null | tail -1
 count() { $W d1 execute peace-be-still-chat --local $CFG --json --command "SELECT count(*) AS n FROM bible_verses" 2>/dev/null </dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{console.log(JSON.parse(s)[0].results[0].n)}catch{console.log(0)}})'; }
-[ "$(count)" -ge 62000 ] || node scripts/worker-bible-load.mjs --local </dev/null
+[ "$(count)" -ge 155000 ] || node scripts/worker-bible-load.mjs --local </dev/null
 n=$(count)
-[ "$n" -ge 62000 ] || { echo "NAMED STOP BIBLE_NOT_LOADED: local D1 has $n verses"; exit 3; }
+[ "$n" -ge 155000 ] || { echo "NAMED STOP BIBLE_NOT_LOADED: local D1 has $n verses"; exit 3; }
 echo "worker:dev: D1 ready ($n verses); starting wrangler dev on https://localhost:8787 at nice 15"
 unset CI # wrangler dev itself stays interactive-safe without it
 # HTTPS: the Worker refuses plain HTTP (privacy policy), so the red team talks to it over TLS.

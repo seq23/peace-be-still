@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Build the app's two Bible files from the one committed source.
+"""Build the app's Bible files from the one committed source.
 
-Reads content/bible/{kjv,rv1909}_vpl.txt.gz with the shared parser and 66-book list (audio/lib/text.py,
-content/bible/books.json) and writes app/src/bible/data/{kjv,rv1909}.db: one SQLite file per
-translation that the app opens lazily with expo-sqlite.
+Reads content/bible/{kjv,rv1909,krv,cuvs,cuv}_vpl.txt.gz with the shared parser and 66-book list
+(audio/lib/text.py, content/bible/books.json) and writes app/src/bible/data/<translation>.db: one SQLite
+file per translation that the app opens lazily with expo-sqlite. KRV = 개역한글 (1961); CUVS / CUVT = the
+1919 和合本 in Simplified / Traditional (never the 1988 edition). FTS5's word tokenizer cannot split
+Chinese, so the Korean and Chinese files carry no verses_fts and the app searches them by scanning.
 
   verses(id, book, chapter, verse, text)   id = canonical order; (book, chapter, verse) is unique
   verses_fts                                FTS5 over verses.text, accents and case folded
@@ -23,17 +25,24 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from audio.lib.text import CODES, SCRIPTURE, TRANSLATION, load_bible  # noqa: E402
+import gzip  # noqa: E402
+
+from audio.lib.text import CODES, SCRIPTURE, parse_vpl  # noqa: E402
 
 OUT = ROOT / "app/src/bible/data"
 SCHEMA = 1
-TRANSLATIONS = {"KJV": "en", "RV1909": "es"}
+# name: (source file, has FTS5 word search)
+TRANSLATIONS = {
+    "KJV": ("kjv_vpl.txt.gz", True), "RV1909": ("rv1909_vpl.txt.gz", True),
+    "KRV": ("krv_vpl.txt.gz", False), "CUVS": ("cuvs_vpl.txt.gz", False), "CUVT": ("cuv_vpl.txt.gz", False),
+}
 
 
-def build(name: str, lang: str) -> str:
-    source = SCRIPTURE / TRANSLATION[lang][1]
+def build(name: str, file: str, fts: bool) -> str:
+    source = SCRIPTURE / file
     version = f"{SCHEMA}-{hashlib.sha256(source.read_bytes()).hexdigest()[:12]}"
-    bible = load_bible(lang)
+    with gzip.open(source, "rt", encoding="utf-8") as f:
+        bible = parse_vpl(f)
     if list(bible) != CODES:
         raise SystemExit(f"{name}: expected the 66 canonical books in order, found {len(bible)}")
     rows = []
@@ -47,7 +56,7 @@ def build(name: str, lang: str) -> str:
                     raise SystemExit(f"{name}: duplicate verse {book} {chapter}:{verse}")
                 seen.add(verse)
                 rows.append((book, chapter, verse, text))
-    if len(rows) < 31000:
+    if len(rows) < 30900:
         raise SystemExit(f"{name}: only {len(rows)} verses")
 
     path = OUT / f"{name.lower()}.db"
@@ -56,13 +65,16 @@ def build(name: str, lang: str) -> str:
     db.executescript("""
         CREATE TABLE verses(id INTEGER PRIMARY KEY, book TEXT NOT NULL, chapter INTEGER NOT NULL,
                             verse INTEGER NOT NULL, text TEXT NOT NULL, UNIQUE(book, chapter, verse));
-        CREATE VIRTUAL TABLE verses_fts USING fts5(text, content='verses', content_rowid='id',
-                                                   tokenize='unicode61 remove_diacritics 2');
         CREATE TABLE meta(key TEXT PRIMARY KEY, value TEXT NOT NULL);
     """)
     db.executemany("INSERT INTO verses(book, chapter, verse, text) VALUES (?, ?, ?, ?)", rows)
-    db.execute("INSERT INTO verses_fts(verses_fts) VALUES ('rebuild')")
-    db.execute("INSERT INTO verses_fts(verses_fts) VALUES ('optimize')")
+    if fts:
+        db.executescript("""
+            CREATE VIRTUAL TABLE verses_fts USING fts5(text, content='verses', content_rowid='id',
+                                                       tokenize='unicode61 remove_diacritics 2');
+            INSERT INTO verses_fts(verses_fts) VALUES ('rebuild');
+            INSERT INTO verses_fts(verses_fts) VALUES ('optimize');
+        """)
     db.executemany("INSERT INTO meta VALUES (?, ?)", [("version", version), ("translation", name)])
     db.commit()
     db.execute("VACUUM")
@@ -73,5 +85,5 @@ def build(name: str, lang: str) -> str:
 
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
-    versions = {name: build(name, lang) for name, lang in TRANSLATIONS.items()}
+    versions = {name: build(name, file, fts) for name, (file, fts) in TRANSLATIONS.items()}
     (OUT / "versions.json").write_text(json.dumps(versions, indent=2) + "\n")

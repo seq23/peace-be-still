@@ -92,3 +92,18 @@ jobs:
       target: ${{ needs.preview.outputs.url }}
       flow_file: tap-through-own-night.json
       label: ${{ github.run_id }}-own-night
+  # Korean and Chinese screens (JOB 3), each on a phone set to that language.
+  tap-through-ko:
+    needs: preview
+    uses: seq23/boss-os/.github/workflows/tap-through.yml@main
+    with:
+      target: ${{ needs.preview.outputs.url }}
+      flow_file: tap-through-ko.json
+      label: ${{ github.run_id }}-ko
+  tap-through-zh:
+    needs: preview
+    uses: seq23/boss-os/.github/workflows/tap-through.yml@main
+    with:
+      target: ${{ needs.preview.outputs.url }}
+      flow_file: tap-through-zh.json
+      label: ${{ github.run_id }}-zh

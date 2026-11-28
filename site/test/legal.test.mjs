@@ -36,6 +36,7 @@ const SPANISH = {
   United: /Estados Unidos|Reino Unido/, States: /Estados/, Kingdom: /Reino/, European: /Europeo/, Economic: /Económico/,
   Area: /Espacio/, Switzerland: /Suiza/, State: /Estado/, November: /noviembre/, Spanish: /español/,
   Scripture: /Escrituras/, Government: /Gobierno/,
+  Mexico: /México/, Spain: /España/, South: /del Sur/, Korea: /Corea/, Taiwan: /Taiwán/, Hong: /Hong Kong/, Kong: /Hong Kong/, China: /China/,
 };
 // A capitalised word counts as a name when it sits mid-sentence, or when the English texts never
 // use it in lower case (RevenueCat, Apple and Cloudflare often open a sentence). The few ordinary

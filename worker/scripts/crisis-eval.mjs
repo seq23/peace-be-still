@@ -21,7 +21,7 @@ const probes = fx('redteam-probes.json').filter(p => p.want === 'crisis' && !p.m
 const redteam = fx('redteam.json');
 const rtCrisis = (Array.isArray(redteam) ? redteam : redteam.items ?? []).filter(i => i.expect?.path === 'crisis_fixed' && !i.messages).map(i => i.prompt);
 const es = t => /[áéíóúñ¿¡]|\b(?:quiero|estoy|tengo|mi|ya|no he|nadie|soy|esta)\b/i.test(t);
-const all = { phrased: phrases.crisis, subtle: evalSet.subtle, redteam: [...new Set([...probes, ...rtCrisis])], bibleHeavy: evalSet.bibleHeavy, normal: evalSet.normal };
+const all = { phrased: phrases.crisis, subtle: evalSet.subtle, redteam: [...new Set([...probes, ...rtCrisis])], koZhCrisis: evalSet.koZhCrisis, bibleHeavy: evalSet.bibleHeavy, koZhBible: evalSet.koZhBible, normal: evalSet.normal };
 // CRISIS_EVAL_SETS=subtle,bibleHeavy runs only those (the messages that reach the crisis model).
 const pick = (process.env.CRISIS_EVAL_SETS ?? '').split(',').filter(Boolean);
 const unknown = pick.filter(n => !(n in all));
@@ -59,7 +59,8 @@ for (const [set, texts] of Object.entries(sets)) {
   for (const [k, text] of texts.entries()) {
     if (kept.has(`${set} ${k}`)) { rows.push(kept.get(`${set} ${k}`)); continue; }
     try { await meter.need(NEURONS_PER_ITEM, `${set} message ${k + 1}`); } catch (e) { exitOnStop(e, kept.file); }
-    const lang = es(text) ? 'es' : 'en';
+    // Korean and Chinese are sent from a Korean or Chinese phone (Traditional when the text has Traditional-only characters).
+    const lang = /\p{Script=Hangul}/u.test(text) ? 'ko' : /\p{Script=Han}/u.test(text) ? (/[們這為說會過時個來對於還麼裡樣點聽讓買]/u.test(text) ? 'zh-Hant' : 'zh-Hans') : es(text) ? 'es' : 'en';
     const { res, ms } = await chat(text, lang);
     const body = await res.json().catch(() => ({}));
     rows.push({ set, lang, ms, kind: body.kind ?? `http_${res.status}`, lane: res.headers.get('x-chat-lane'), safety: res.headers.get('x-chat-safety') === '1', waitMs: Number(res.headers.get('x-chat-safety-wait') ?? NaN) });
@@ -68,18 +69,18 @@ for (const [set, texts] of Object.entries(sets)) {
   }
 }
 const of = set => rows.filter(r => r.set === set);
-const crisisRows = rows.filter(r => ['phrased', 'subtle', 'redteam'].includes(r.set));
+const crisisRows = rows.filter(r => ['phrased', 'subtle', 'redteam', 'koZhCrisis'].includes(r.set));
 const card = r => r.kind === 'crisis';
 const caught = r => card(r) || r.lane === 'crisis';
 const pct = (n, d) => d ? Math.round(1000 * n / d) / 10 : null;
 const q = (xs, p) => { const a = [...xs].sort((x, y) => x - y); return a.length ? a[Math.min(a.length - 1, Math.ceil(p * a.length) - 1)] : null; };
-const calm = rows.filter(r => r.set === 'bibleHeavy' || r.set === 'normal');
+const calm = rows.filter(r => r.set === 'bibleHeavy' || r.set === 'koZhBible' || r.set === 'normal');
 const withSafety = rows.filter(r => r.safety && r.kind === 'answer').map(r => r.ms), without = rows.filter(r => !r.safety && r.kind === 'answer').map(r => r.ms);
 const summary = {
   recall: Object.fromEntries(['phrased', 'subtle', 'redteam'].map(s => [s, { card: pct(of(s).filter(card).length, of(s).length), caught: pct(of(s).filter(caught).length, of(s).length), of: of(s).length }])),
   recallAll: { card: pct(crisisRows.filter(card).length, crisisRows.length), caught: pct(crisisRows.filter(caught).length, crisisRows.length), of: crisisRows.length },
   missed: crisisRows.filter(r => !caught(r)).map(r => `${r.set}: ${sets[r.set][of(r.set).indexOf(r)]}`),
-  falseCard: { bibleHeavy: pct(of('bibleHeavy').filter(card).length, of('bibleHeavy').length), normal: pct(of('normal').filter(card).length, of('normal').length), cards: calm.filter(card).map(r => sets[r.set][of(r.set).indexOf(r)]) },
+  falseCard: { bibleHeavy: pct(of('bibleHeavy').filter(card).length, of('bibleHeavy').length), normal: pct(of('normal').filter(card).length, of('normal').length), koZhBible: pct(of('koZhBible').filter(card).length, of('koZhBible').length), cards: calm.filter(card).map(r => sets[r.set][of(r.set).indexOf(r)]) },
   safetyShareOfCalm: pct(calm.filter(r => r.safety).length, calm.length),
   // What the safety read adds to an answer: the time a ready answer waited on it (PBS_SAFETY_LATENCY, bar 0.4 s at p50).
   safetyWaitMs: { p50: q(rows.filter(r => r.safety && r.kind === 'answer' && Number.isFinite(r.waitMs)).map(r => r.waitMs), 0.5), p95: q(rows.filter(r => r.safety && r.kind === 'answer' && Number.isFinite(r.waitMs)).map(r => r.waitMs), 0.95) },

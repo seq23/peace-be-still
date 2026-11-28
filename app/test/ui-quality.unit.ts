@@ -9,7 +9,7 @@ const walk = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }
 
 test('every string a person can see avoids AI filler, em dashes, "!", emoji and the trademark phrase', () => {
   const screens = [...walk('app'), ...walk('src')].filter(file => file.endsWith('.tsx'));
-  const files = [...screens, 'src/i18n/en.json', 'src/i18n/es.json'];
+  const files = [...screens, ...['en', 'es', 'ko', 'zh-Hans', 'zh-Hant'].map(lang => `src/i18n/${lang}.json`)];
   const seen = files.flatMap(file => visibleStrings(file, readFileSync(file, 'utf8')));
   assert.ok(seen.length > 150, `only ${seen.length} visible strings found`);
   assert.deepEqual(files.flatMap(file => uiCopyIssues(file, readFileSync(file, 'utf8'))), []);
@@ -41,16 +41,21 @@ test('a "Soon" tag is refused anywhere a person can see it, in English and Spani
   assert.deepEqual(uiCopyIssues('fixture.json', JSON.stringify({ a: 'Soonest', b: 'Prontuario' })), []);
 });
 
-test('every English string has a Spanish one of the same shape', () => {
+test('every English string has a Spanish, Korean, Simplified and Traditional Chinese one of the same shape and values', () => {
   type Entry = string | Record<string, string>;
   const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, Entry>;
-  const es = JSON.parse(readFileSync('src/i18n/es.json', 'utf8')) as Record<string, Entry>;
   const forms = (entry: Entry | undefined) => typeof entry === 'string' ? [entry] : entry && typeof entry === 'object' ? [entry.one, entry.other] : [undefined];
-  assert.ok(Object.keys(en).length > 0);
-  assert.deepEqual(Object.keys(es).sort(), Object.keys(en).sort());
-  for (const key of Object.keys(en)) {
-    assert.equal(typeof es[key], typeof en[key], `Spanish entry has a different shape: ${key}`);
-    for (const value of [...forms(en[key]), ...forms(es[key])]) assert.ok(typeof value === 'string' && value.trim(), `Missing translation: ${key}`);
+  const values = (entry: Entry | undefined) => [...new Set(forms(entry).join(' ').match(/%\{\w+\}/g) ?? [])].sort();
+  assert.ok(Object.keys(en).length > 400);
+  for (const lang of ['es', 'ko', 'zh-Hans', 'zh-Hant']) {
+    const other = JSON.parse(readFileSync(`src/i18n/${lang}.json`, 'utf8')) as Record<string, Entry>;
+    assert.deepEqual(Object.keys(other).sort(), Object.keys(en).sort(), `${lang}.json keys differ from en.json`);
+    for (const key of Object.keys(en)) {
+      assert.equal(typeof other[key], typeof en[key], `${lang} entry has a different shape: ${key}`);
+      for (const value of [...forms(en[key]), ...forms(other[key])]) assert.ok(typeof value === 'string' && value.trim(), `Missing ${lang} translation: ${key}`);
+      // A dropped %{price} would show a sentence with no price; an extra one would show "%{price}" itself.
+      assert.deepEqual(values(other[key]), values(en[key]), `${lang} ${key} has different %{values}`);
+    }
   }
 });
 
@@ -59,6 +64,6 @@ test('every string in the files is used by a screen or the model', () => {
   const en = JSON.parse(readFileSync('src/i18n/en.json', 'utf8')) as Record<string, unknown>;
   // A key is used when it is written out, or built from a known prefix (`door.${id}.title`).
   const unused = Object.keys(en).filter(key => !code.includes(`'${key}'`) && !code.includes(`"${key}"`) &&
-    !/^(door\.(faith|mindset)\.(title|detail)|doorName\.|greeting\.|tabs\.|voice\.|language\.)/.test(key));
+    !/^(door\.(faith|mindset)\.(title|detail)|doorName\.|greeting\.|tabs\.|voice\.|language\.|madeForYou\.)/.test(key)); // madeForYou.* is built in madeForYou/copy.ts
   assert.deepEqual(unused, []);
 });

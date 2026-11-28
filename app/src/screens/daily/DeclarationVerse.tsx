@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, type StyleProp, type TextStyle } from 'react-native';
-import { bible, displayRuns, formatReference, parseReference, type Translation, type Verse } from '../../bible';
+import { bible, citation, displayRuns, formatReference, parseReference, translationFor, type Translation, type Verse } from '../../bible';
 import { useT } from '../../settings';
 import { Body } from '../../ui';
 
@@ -54,12 +54,12 @@ export function VerseText({ verses, style }: { verses: Verse[]; style?: StylePro
 
 export function DeclarationVerse({ passage }: { passage: string }) {
   const t = useT('journey');
-  const translation = t.locale === 'es' ? 'RV1909' : 'KJV';
+  const translation = translationFor(t.locale);
   const verses = useStoredVerses(passage, translation);
   if (verses === undefined) return <Body size={14}>{t('reader.loading')}</Body>;
   if (!verses) return <Body size={14}>{t('daily.verseUnavailable')}</Body>;
   return <Body size={14}>
     <VerseText verses={verses} />
-    {'\n'}{formatReference(parseReference(passage)!, t.locale)} · {translation}
+    {'\n'}{citation(formatReference(parseReference(passage)!, t.locale), translation)}
   </Body>;
 }

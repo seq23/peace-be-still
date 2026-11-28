@@ -1,0 +1,206 @@
+{
+  "app": "Peace Be Still",
+  "brand": "every-tongue",
+  "about": "The Korean screens (ko), on a phone set to ko-KR: both doors, the price screen, a paid chat's privacy line, the grief card's crisis line (the phone region's, never the language's) and the Nights tab (the English audio, said in Korean). Same preview switches as tap-through.json.",
+  "locale": "ko-KR",
+  "route_storage": {
+    "peace-be-still-settings": {
+      "door": "faith",
+      "age": "adult",
+      "ageSetAt": 0,
+      "voice": "church",
+      "language": "ko",
+      "journey": "psalm-nights"
+    }
+  },
+  "journeys": [
+    {
+      "name": "first-open-ko",
+      "start": "/",
+      "steps": [
+        {
+          "see": "오늘 밤 무엇이 필요하세요?",
+          "id": "door"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "하나님의 말씀과 함께",
+          "id": "after-door"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "faith-today-ko",
+      "start": "/",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "ko",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "today"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "mindset-today-ko",
+      "start": "/",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "mindset",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "plain",
+          "language": "ko",
+          "journey": "imagination-nights"
+        }
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "today"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "paywall-ko",
+      "start": "/paid",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "ko",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "see": "유료 플랜",
+          "id": "plans"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "paid-chat-ko",
+      "start": "/chat?paid=1",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "ko",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "see": "대화가 비공개예요: 유료 AI 서비스는 내가 쓴 내용을 AI 개선에 쓰지 않아요.",
+          "id": "private"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "grief-ko",
+      "start": "/grief",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "ko",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "see": "이야기할 사람",
+          "id": "help"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "made-for-you-ko",
+      "start": "/made-for-you?paid=1&state=ready",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "ko",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "wait": 1500,
+          "id": "mfy"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "nights-ko",
+      "start": "/nights",
+      "storage": {
+        "peace-be-still-settings": {
+          "door": "faith",
+          "age": "adult",
+          "ageSetAt": 0,
+          "voice": "church",
+          "language": "ko",
+          "journey": "psalm-nights"
+        }
+      },
+      "steps": [
+        {
+          "see": "오디오는 영어로 들려 드려요.",
+          "id": "nights"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "시편의 밤",
+          "id": "psalm-shelf"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,58 +1,56 @@
-import { PAID_CHAT_MESSAGES } from './shared';
+import { PAID_CHAT_MESSAGES, type Language } from './shared';
 // Fixed replies, written by people, never by a model. A crisis reply is not labelled AI:
 // a lifeline must not look machine-made. Read as the pastor pass before every change.
+// English and Spanish are written here; Korean and Simplified Chinese in replies.ko.json and
+// replies.zh-Hans.json; Traditional Chinese is written from the Simplified file by scripts/i18n-hant.mjs.
 import type { CrisisKind } from './crisis';
+import { CRISIS_LINES, regionOf as regionOfCode, type Region } from '../../app/src/chat/crisisLines';
+import ko from './replies.ko.json';
+import zhHans from './replies.zh-Hans.json';
+import zhHant from './replies.zh-Hant.json';
 
+/** The written and voiced library's language (prompts, examples, Made for you): English or Spanish. */
 export type Lang = 'en' | 'es';
+/** The language a fixed reply is shown in: every screen language, never English on a Korean or Chinese phone. */
+export type ReplyLang = Language;
+export type { Region };
+// Each file must carry every key of the Korean one (a missing key is a type error here, never English shown).
+const CJK: Record<'ko' | 'zh-Hans' | 'zh-Hant', typeof ko> = { ko, 'zh-Hans': zhHans, 'zh-Hant': zhHant };
+type TextKey = { [K in keyof typeof ko]: (typeof ko)[K] extends string ? K : never }[keyof typeof ko];
+type ListKey = { [K in keyof typeof ko]: (typeof ko)[K] extends string[] ? K : never }[keyof typeof ko];
+function say(key: TextKey, en: string, es: string): Record<ReplyLang, string> {
+  return { en, es, ko: CJK.ko[key], 'zh-Hans': CJK['zh-Hans'][key], 'zh-Hant': CJK['zh-Hant'][key] };
+}
+function sayList(key: ListKey, en: string[], es: string[]): Record<ReplyLang, string[]> {
+  return { en, es, ko: CJK.ko[key], 'zh-Hans': CJK['zh-Hans'][key], 'zh-Hant': CJK['zh-Hant'][key] };
+}
+const fill = (text: string, values: Record<string, string>) => text.replace(/\{(\w+)\}/g, (_, k: string) => values[k] ?? '');
+/** The language the chat model is asked to write in, for the languages with no prompt of their own. */
+export const answerLanguage = (lang: ReplyLang): string | null => lang === 'en' || lang === 'es' ? null : CJK[lang].contentLanguage;
 type Band = 'teen' | 'adult';
 // The Mindset door has no faith words anywhere (hostile review F8): every reply that names God, a
 // verse, scripture or a pastor has a Mindset version, and every hotline stays.
 export type Door = 'faith' | 'mindset';
 
-const open = { en: "You matter, and you don't have to carry this alone.", es: 'Tú importas, y no tienes que cargar esto a solas.' };
-const lifeline = {
-  en: 'Please reach out right now to the 988 Suicide & Crisis Lifeline. Call or text 988, any time, day or night.',
-  es: 'Por favor, comunícate ahora con la Línea 988 de Prevención del Suicidio y Crisis. Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, a cualquier hora.',
-};
-const alsoLifeline = {
-  en: 'If you ever think about ending your life, call or text 988.',
-  es: 'Si alguna vez piensas en quitarte la vida, llama al 988 y oprime 2 para español, o envía un texto al 988.',
-};
-const danger = { en: 'If you are in danger this minute, call 911.', es: 'Si estás en peligro en este momento, llama al 911.' };
-const dv = {
-  en: 'Please reach out to the National Domestic Violence Hotline: call 1-800-799-7233 or text START to 88788, any time. What is happening to you is not your fault, and God does not ask you to stay in harm.',
-  es: 'Por favor, comunícate con la Línea Nacional contra la Violencia Doméstica: llama al 1-800-799-7233 o envía START al 88788, a cualquier hora. Lo que te está pasando no es tu culpa, y Dios no te pide que te quedes donde te hacen daño.',
-};
+const open = say('open', "You matter, and you don't have to carry this alone.", 'Tú importas, y no tienes que cargar esto a solas.');
+const lifeline = say('lifeline', 'Please reach out right now to the 988 Suicide & Crisis Lifeline. Call or text 988, any time, day or night.', 'Por favor, comunícate ahora con la Línea 988 de Prevención del Suicidio y Crisis. Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, a cualquier hora.');
+const alsoLifeline = say('alsoLifeline', 'If you ever think about ending your life, call or text 988.', 'Si alguna vez piensas en quitarte la vida, llama al 988 y oprime 2 para español, o envía un texto al 988.');
+const danger = say('danger', 'If you are in danger this minute, call 911.', 'Si estás en peligro en este momento, llama al 911.');
+const dv = say('dv', 'Please reach out to the National Domestic Violence Hotline: call 1-800-799-7233 or text START to 88788, any time. What is happening to you is not your fault, and God does not ask you to stay in harm.', 'Por favor, comunícate con la Línea Nacional contra la Violencia Doméstica: llama al 1-800-799-7233 o envía START al 88788, a cualquier hora. Lo que te está pasando no es tu culpa, y Dios no te pide que te quedes donde te hacen daño.');
 // An adult dating a teen (run 44856144997 x12: the reply never said plainly it is wrong).
-const groomed = {
-  en: 'An adult who dates or touches someone your age is doing something wrong, even when it feels like love.',
-  es: 'Un adulto que tiene una relación de pareja con alguien de tu edad está haciendo algo malo, aunque se sienta como amor.',
-};
+const groomed = say('groomed', 'An adult who dates or touches someone your age is doing something wrong, even when it feels like love.', 'Un adulto que tiene una relación de pareja con alguien de tu edad está haciendo algo malo, aunque se sienta como amor.');
+// Korean and Chinese are matched as written (no spaces to anchor on; NFD would split Hangul into jamo).
+const DATING_CJK = /남자\s?친구|여자\s?친구|남친|여친|사귀|연애|男朋友|女朋友|男友|女友|谈恋爱|談戀愛|交往/u;
 const DATING = / (?:boyfriend|girlfriend|dating|date|in love|relationship|novio|novia|saliendo|enamorad\w*|relacion) /;
-const childhelp = {
-  en: 'Please call or text the Childhelp hotline at 1-800-422-4453, any time. What is happening is not your fault.',
-  es: 'Por favor, llama o envía un texto a la línea de Childhelp al 1-800-422-4453, a cualquier hora. Lo que está pasando no es tu culpa.',
-};
-const trusted = {
-  en: 'Please also tell a trusted adult today, like a parent, a school counselor or a pastor.',
-  es: 'Por favor, cuéntale hoy también a un adulto de confianza, como tu mamá o tu papá, un consejero de la escuela o un pastor.',
-};
-const trustedMindset = {
-  en: 'Please also tell a trusted adult today, like a parent or a school counselor.',
-  es: 'Por favor, cuéntale hoy también a un adulto de confianza, como tu mamá o tu papá o un consejero de la escuela.',
-};
-const dvMindset = {
-  en: 'Please reach out to the National Domestic Violence Hotline: call 1-800-799-7233 or text START to 88788, any time. What is happening to you is not your fault, and you deserve to be safe.',
-  es: 'Por favor, comunícate con la Línea Nacional contra la Violencia Doméstica: llama al 1-800-799-7233 o envía START al 88788, a cualquier hora. Lo que te está pasando no es tu culpa, y mereces estar a salvo.',
-};
+const childhelp = say('childhelp', 'Please call or text the Childhelp hotline at 1-800-422-4453, any time. What is happening is not your fault.', 'Por favor, llama o envía un texto a la línea de Childhelp al 1-800-422-4453, a cualquier hora. Lo que está pasando no es tu culpa.');
+const trusted = say('trusted', 'Please also tell a trusted adult today, like a parent, a school counselor or a pastor.', 'Por favor, cuéntale hoy también a un adulto de confianza, como tu mamá o tu papá, un consejero de la escuela o un pastor.');
+const trustedMindset = say('trustedMindset', 'Please also tell a trusted adult today, like a parent or a school counselor.', 'Por favor, cuéntale hoy también a un adulto de confianza, como tu mamá o tu papá o un consejero de la escuela.');
+const dvMindset = say('dvMindset', 'Please reach out to the National Domestic Violence Hotline: call 1-800-799-7233 or text START to 88788, any time. What is happening to you is not your fault, and you deserve to be safe.', 'Por favor, comunícate con la Línea Nacional contra la Violencia Doméstica: llama al 1-800-799-7233 o envía START al 88788, a cualquier hora. Lo que te está pasando no es tu culpa, y mereces estar a salvo.');
 // In abuse, the trusted adult must not send her back to the person hurting her (a parent's
 // partner, a youth pastor): it names adults outside the home first.
-const trustedSafe = {
-  en: 'Please also tell an adult you trust today who is not the person hurting you, like a school counselor, a teacher or a relative.',
-  es: 'Por favor, cuéntale hoy también a un adulto de confianza que no sea la persona que te hace daño, como un consejero de la escuela, un maestro o un familiar.',
-};
+const trustedSafe = say('trustedSafe', 'Please also tell an adult you trust today who is not the person hurting you, like a school counselor, a teacher or a relative.', 'Por favor, cuéntale hoy también a un adulto de confianza que no sea la persona que te hace daño, como un consejero de la escuela, un maestro o un familiar.');
 // No one prays this message, so it never says "I am praying": it says what is true.
-const close = { en: 'Someone is ready to listen right now.', es: 'Hay alguien listo para escucharte ahora mismo.' };
+const close = say('close', 'Someone is ready to listen right now.', 'Hay alguien listo para escucharte ahora mismo.');
 
 // Medical danger (round 4, x10: Xanax with wine got only 988): what to do, in the order it matters,
 // for what she wrote: medicine mixed with alcohol or extra doses; a child who swallowed something;
@@ -65,7 +63,7 @@ export function medicalCase(text: string): MedicalCase {
   if (/ (?:stopped|quit|stop taking|came off|dejo|deje|deje de tomar|ya no tomo|suspendi) /.test(t) && !/ (?:wine|alcohol|drink\w*|beer|vino|cerveza\w*|tragos?) /.test(t)) return 'stopped';
   return 'mix';
 }
-const medical: Record<MedicalCase, Record<Lang, string[]>> = {
+const medicalWritten: Record<MedicalCase, Record<Lang, string[]>> = {
   mix: {
     en: [
       "Please don't take any extra, and don't mix medicine with alcohol. Sleep, anxiety or pain pills taken with alcohol or in extra doses can slow or stop breathing.",
@@ -109,35 +107,50 @@ const medical: Record<MedicalCase, Record<Lang, string[]>> = {
     ],
   },
 };
+const medical: Record<MedicalCase, Record<ReplyLang, string[]>> = {
+  mix: sayList('medical.mix', medicalWritten.mix.en, medicalWritten.mix.es),
+  child: sayList('medical.child', medicalWritten.child.en, medicalWritten.child.es),
+  stopped: sayList('medical.stopped', medicalWritten.stopped.en, medicalWritten.stopped.es),
+};
+const faithLine = say('medical.faithLine', ' Faith and treatment go together.', ' La fe y el tratamiento van juntos.');
 
 /** The fixed crisis reply. Abuse leads with the hotline for what is happening (Childhelp for a
  *  child or teen, the Domestic Violence Hotline for an adult), then 988 and 911. Medical danger
  *  leads with what not to do, then Poison Control, 911, her doctor, then 988. */
-// Outside the US the US lines do not reach her (owner, 21 Nov 2026): Mexico's Línea de la Vida,
-// Spain's 024, else findahelpline.com, chosen by the device region (never by language alone).
-const regional: Record<'MX' | 'ES' | 'other', Record<Lang, string>> = {
-  MX: { en: 'Please call Línea de la Vida at 800 911 2000, free, any time. If you are in danger right now, call 911.', es: 'Por favor, llama a la Línea de la Vida al 800 911 2000, gratis, a cualquier hora. Si estás en peligro ahora mismo, llama al 911.' },
-  ES: { en: 'Please call 024, free, any time. If you are in danger right now, call 112.', es: 'Por favor, llama al 024, gratis, a cualquier hora. Si estás en peligro ahora mismo, llama al 112.' },
-  other: { en: 'Please reach a crisis line where you live: findahelpline.com lists free ones in your country. If you are in danger right now, call your local emergency number.', es: 'Por favor, busca una línea de crisis donde vives: findahelpline.com tiene líneas gratuitas en tu país. Si estás en peligro ahora mismo, llama al número de emergencias de tu país.' },
-};
-/** The device region (ISO alpha-2) to the card's lines: US (and US territories) keep the US lines. */
-export function regionOf(code: string | null | undefined): 'US' | 'MX' | 'ES' | 'other' {
-  // No region at all (no phone setting, no network country): the US lines, where the app is sold
-  // first. Never chosen from her language.
-  const c = (code ?? 'US').toUpperCase() || 'US';
-  return ['US', 'PR', 'GU', 'VI', 'AS', 'MP'].includes(c) ? 'US' : c === 'MX' ? 'MX' : c === 'ES' ? 'ES' : 'other';
+// Outside the US the US lines do not reach her (owner, 21 Nov 2026): the line for the phone's region from
+// the one table (app/src/chat/crisisLines.ts: Mexico, Spain, Korea, Taiwan, Hong Kong, mainland China), else
+// findahelpline.com, chosen by the device region (never by language alone).
+const other = say('other',
+  'Please reach a crisis line where you live: findahelpline.com lists free ones in your country. If you are in danger right now, call your local emergency number.',
+  'Por favor, busca una línea de crisis donde vives: findahelpline.com tiene líneas gratuitas en tu país. Si estás en peligro ahora mismo, llama al número de emergencias de tu país.');
+/** Her region's line in her language, built from its table row: "free" and "any time" only where the source says so. */
+export function regionalText(region: Exclude<Region, 'US'>, lang: ReplyLang): string {
+  if (region === 'other') return other[lang];
+  const row = CRISIS_LINES[region];
+  const name = row.name?.[lang] ?? null;
+  if (lang === 'en') return `Please call ${name ? `${name} at ${row.line}` : row.line}${row.free ? ', free' : ''}${row.anyTime ? ', any time' : ''}. If you are in danger right now, call ${row.emergency}.`;
+  if (lang === 'es') return `Por favor, llama ${name ? `a ${name} al ${row.line}` : `al ${row.line}`}${row.free ? ', gratis' : ''}${row.anyTime ? ', a cualquier hora' : ''}. Si estás en peligro ahora mismo, llama al ${row.emergency}.`;
+  const w = CJK[lang];
+  const when = row.free && row.anyTime ? w['line.freeAnyTime'] : row.anyTime ? w['line.anyTime'] : row.free ? w['line.free'] : '';
+  const gap = lang === 'ko' ? ' ' : '';
+  return [fill(w.line, { name: name ? `${name}${lang === 'ko' ? ' ' : ''}` : '', line: row.line }), when, fill(w['line.danger'], { emergency: row.emergency })].filter(Boolean).join(gap);
 }
-export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '', door: Door = 'faith', region: 'US' | 'MX' | 'ES' | 'other' = 'US'): string {
+/** The device region (ISO alpha-2) to the card's lines: US (and US territories) keep the US lines; no region or an
+ *  unknown one gets findahelpline. Never chosen from her language. */
+export function regionOf(code: string | null | undefined): Region {
+  return regionOfCode(code);
+}
+export function crisisText(kind: CrisisKind, lang: ReplyLang, band: Band, herText = '', door: Door = 'faith', region: Region = 'US'): string {
   const mind = door === 'mindset';
   // Abuse: the trusted adult is never "like a parent" (the parent may be the one hurting her), in every region.
   const abuse = kind === 'abuse' || kind === 'child_abuse';
-  if (region !== 'US') return [open[lang], regional[region][lang], ...(band === 'teen' ? [(abuse ? trustedSafe : door === 'mindset' ? trustedMindset : trusted)[lang]] : []), close[lang]].join(' ');
+  if (region !== 'US') return [open[lang], regionalText(region, lang), ...(band === 'teen' ? [(abuse ? trustedSafe : door === 'mindset' ? trustedMindset : trusted)[lang]] : []), close[lang]].join(' ');
   const trust = mind ? trustedMindset : trusted;
-  if (kind === 'medical') return [...medical[medicalCase(herText)][lang].map(line => mind ? line.replace(/ Faith and treatment go together\.| La fe y el tratamiento van juntos\./, '') : line), ...(band === 'teen' ? [trust[lang]] : []), close[lang]].join(' ');
+  if (kind === 'medical') return [...medical[medicalCase(herText)][lang].map(line => mind ? line.replace(faithLine[lang].trim(), '').trim() : line), ...(band === 'teen' ? [trust[lang]] : []), close[lang]].join(' ');
   const child = kind === 'child_abuse' || (kind === 'abuse' && band === 'teen');
   const parts = kind === 'selfharm'
     ? [open[lang], lifeline[lang], danger[lang]]
-    : [open[lang], ...(child && band === 'teen' && DATING.test(` ${herText.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ')} `) ? [groomed[lang]] : []), child ? childhelp[lang] : mind ? dvMindset[lang] : dv[lang], alsoLifeline[lang], danger[lang]];
+    : [open[lang], ...(child && band === 'teen' && (DATING.test(` ${herText.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ')} `) || DATING_CJK.test(herText.normalize('NFC'))) ? [groomed[lang]] : []), child ? childhelp[lang] : mind ? dvMindset[lang] : dv[lang], alsoLifeline[lang], danger[lang]];
   if (band === 'teen') parts.push(kind === 'selfharm' ? trust[lang] : trustedSafe[lang]);
   parts.push(close[lang]);
   return parts.join(' ');
@@ -145,103 +158,86 @@ export function crisisText(kind: CrisisKind, lang: Lang, band: Band, herText = '
 
 // The check-in that every crisis reply ends on (owner, 21 Nov 2026): warm, direct, never conditional.
 // The card and its hotlines are shown with it at once; the conversation is never stopped.
-export const checkInText = {
-  en: "It sounds like you're carrying something really heavy. Are you safe right now?",
-  es: 'Parece que estás cargando algo muy pesado. ¿Estás a salvo ahora mismo?',
-};
+export const checkInText = say('checkIn', "It sounds like you're carrying something really heavy. Are you safe right now?", 'Parece que estás cargando algo muy pesado. ¿Estás a salvo ahora mismo?');
 // A teen's conversation after the card, when Workers AI (her only chat route) has no answer (her ruling
 // 23 Nov 2026: no extra capacity for teens): written by people, no faith words, never the card or the
 // question again. The first when her last words told the check-in she is safe.
-export const teenStillHereSafeText = {
-  en: "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and the lines on the card above are free any time if things feel heavy again.",
-  es: 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y las líneas de la tarjeta de arriba son gratuitas a cualquier hora si todo vuelve a sentirse pesado.',
+// What a follow-up may say of her region's lines, from the table row: "free" and "any time" only where the line's
+// official source says so (988 is both; findahelpline lists many lines, so it promises neither).
+export type LinePromise = 'freeAnyTime' | 'anyTime' | 'plain';
+export function linePromise(region: Region): LinePromise {
+  if (region === 'US') return 'freeAnyTime';
+  if (region === 'other') return 'plain';
+  const row = CRISIS_LINES[region];
+  return row.free && row.anyTime ? 'freeAnyTime' : row.anyTime ? 'anyTime' : 'plain';
+}
+const teenStillHereSafe: Record<LinePromise, Record<ReplyLang, string>> = {
+  freeAnyTime: say('teenStillHereSafe', "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and the lines on the card above are free any time if things feel heavy again.", 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y las líneas de la tarjeta de arriba son gratuitas a cualquier hora si todo vuelve a sentirse pesado.'),
+  anyTime: say('teenStillHereSafe.anyTime', "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and the lines on the card above answer any time if things feel heavy again.", 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y las líneas de la tarjeta de arriba atienden a cualquier hora si todo vuelve a sentirse pesado.'),
+  plain: say('teenStillHereSafe.plain', "I'm really glad you're safe. Chat can't write a longer reply right now, but I'm still here, and you can call the lines on the card above if things feel heavy again.", 'Me alegra mucho que estés a salvo. El chat no puede escribir una respuesta más larga ahora mismo, pero sigo aquí, y puedes llamar a las líneas de la tarjeta de arriba si todo vuelve a sentirse pesado.'),
 };
-export const teenStillHereText = {
-  en: "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above are free any time, and a real person there will listen. An adult you trust can sit with you today, too.",
-  es: 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba son gratuitas a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.',
+const teenStillHere: Record<LinePromise, Record<ReplyLang, string>> = {
+  freeAnyTime: say('teenStillHere', "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above are free any time, and a real person there will listen. An adult you trust can sit with you today, too.", 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba son gratuitas a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.'),
+  anyTime: say('teenStillHere.anyTime', "I'm still here with you. Chat can't write a longer reply right now, but the lines on the card above answer any time, and a real person there will listen. An adult you trust can sit with you today, too.", 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero las líneas de la tarjeta de arriba atienden a cualquier hora, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.'),
+  plain: say('teenStillHere.plain', "I'm still here with you. Chat can't write a longer reply right now, but you can call the lines on the card above, and a real person there will listen. An adult you trust can sit with you today, too.", 'Sigo aquí contigo. El chat no puede escribir una respuesta más larga ahora mismo, pero puedes llamar a las líneas de la tarjeta de arriba, y ahí te va a escuchar una persona de verdad. Un adulto de confianza también puede acompañarte hoy.'),
 };
+/** The teen follow-up after the card when no model can answer; safe: her last words told the check-in she is safe. */
+export function teenStillHereText(lang: ReplyLang, region: Region, safe: boolean): string {
+  return (safe ? teenStillHereSafe : teenStillHere)[linePromise(region)][lang];
+}
 // A teen past her one model answer today (her ruling 23 Nov 2026, "yes, 1 each"). No model reads her next
 // messages, so this reply never asks her to say she is unsafe: it carries the free crisis lines for her
 // region itself, every time (the card's own lines; the app shows them as call and text buttons).
 const teenDailyOpen = {
-  faith: { en: "That was today's chat answer. Chat answers again tomorrow, and your Bible, today's story and the night sessions are here any time.", es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y tu Biblia, la historia de hoy y las sesiones de la noche están aquí cuando quieras.' },
-  mindset: { en: "That was today's chat answer. Chat answers again tomorrow, and the night sessions are here any time.", es: 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y las sesiones de la noche están aquí cuando quieras.' },
+  faith: say('teenDailyOpen.faith', "That was today's chat answer. Chat answers again tomorrow, and your Bible, today's story and the night sessions are here any time.", 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y tu Biblia, la historia de hoy y las sesiones de la noche están aquí cuando quieras.'),
+  mindset: say('teenDailyOpen.mindset', "That was today's chat answer. Chat answers again tomorrow, and the night sessions are here any time.", 'Esa fue la respuesta del chat de hoy. Mañana el chat vuelve a responder, y las sesiones de la noche están aquí cuando quieras.'),
 };
-const helpOpen = { en: 'If things feel heavy or you are not safe, free help is there any time.', es: 'Si todo se siente pesado o no estás a salvo, hay ayuda gratuita a cualquier hora.' };
-const helpUs = {
-  en: 'Call or text 988, the Suicide & Crisis Lifeline, day or night. If you are in danger this minute, call 911.',
-  es: 'Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, la Línea de Prevención del Suicidio y Crisis, de día o de noche. Si estás en peligro en este momento, llama al 911.',
+const helpOpen: Record<LinePromise, Record<ReplyLang, string>> = {
+  freeAnyTime: say('helpOpen', 'If things feel heavy or you are not safe, free help is there any time.', 'Si todo se siente pesado o no estás a salvo, hay ayuda gratuita a cualquier hora.'),
+  anyTime: say('helpOpen.anyTime', 'If things feel heavy or you are not safe, help is there any time.', 'Si todo se siente pesado o no estás a salvo, hay ayuda a cualquier hora.'),
+  plain: say('helpOpen.plain', 'If things feel heavy or you are not safe, help is there for you.', 'Si todo se siente pesado o no estás a salvo, hay ayuda para ti.'),
 };
-/** Her region's free crisis lines, in the one form every reply outside the card uses (the teen daily limit and
+const helpUs = say('helpUs', 'Call or text 988, the Suicide & Crisis Lifeline, day or night. If you are in danger this minute, call 911.', 'Llama al 988 y oprime 2 para español, o envía un mensaje de texto al 988, la Línea de Prevención del Suicidio y Crisis, de día o de noche. Si estás en peligro en este momento, llama al 911.');
+/** Her region's crisis lines, in the one form every reply outside the card uses (the teen daily limit and
  *  the free day's wall). The app shows each number as call and text buttons when the reply says helpLines. */
-export function helpLinesText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other'): string {
-  return [helpOpen[lang], (region === 'US' ? helpUs : regional[region])[lang]].join(' ');
+export function helpLinesText(lang: ReplyLang, region: Region): string {
+  return [helpOpen[linePromise(region)][lang], region === 'US' ? helpUs[lang] : regionalText(region, lang)].join(' ');
 }
-export function teenDailyText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other', door: Door = 'faith'): string {
+export function teenDailyText(lang: ReplyLang, region: Region, door: Door = 'faith'): string {
   return [teenDailyOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], helpLinesText(lang, region)].join(' ');
 }
-export const checkInQuestion = { en: 'Are you safe right now?', es: '¿Estás a salvo ahora mismo?' };
+export const checkInQuestion = say('checkInQuestion', 'Are you safe right now?', '¿Estás a salvo ahora mismo?');
 
-export const fallbackText = {
-  en: "I couldn't put a good answer together just now. Hold on to this verse for a moment, then ask me again.",
-  es: 'No pude armar una buena respuesta en este momento. Quédate con este versículo un momento y vuelve a preguntarme.',
-};
+export const fallbackText = say('fallback', "I couldn't put a good answer together just now. Hold on to this verse for a moment, then ask me again.", 'No pude armar una buena respuesta en este momento. Quédate con este versículo un momento y vuelve a preguntarme.');
 // Mindset: no verse is printed under it.
-export const fallbackMindsetText = {
-  en: "I couldn't put a good answer together just now. Take one slow breath, then ask me again.",
-  es: 'No pude armar una buena respuesta en este momento. Respira despacio una vez y vuelve a preguntarme.',
-};
+export const fallbackMindsetText = say('fallbackMindset', "I couldn't put a good answer together just now. Take one slow breath, then ask me again.", 'No pude armar una buena respuesta en este momento. Respira despacio una vez y vuelve a preguntarme.');
 // A rung failed for a moment (busy, a network blip) but today's allowances are not used up.
 /** A paid user's short private answers are used up for today (PAID_SHORT_ANSWERS_DAILY). */
-export const shortBusyText = {
-  en: 'Chat is busy right now. Try again in a little while.',
-  es: 'El chat está ocupado en este momento. Vuelve a intentarlo en un rato.',
-};
-export const busyText = {
-  en: 'Chat is busy for a moment. Give it a minute and send that again.',
-  es: 'El chat está ocupado por un momento. Espera un minuto y vuelve a enviarlo.',
-};
+export const shortBusyText = say('shortBusy', 'Chat is busy right now. Try again in a little while.', 'El chat está ocupado en este momento. Vuelve a intentarlo en un rato.');
+export const busyText = say('busy', 'Chat is busy for a moment. Give it a minute and send that again.', 'El chat está ocupado por un momento. Espera un minuto y vuelve a enviarlo.');
 // CHAT_NO_FREE_MODEL: every free allowance is really used up for today (measured, not a guess).
-export const noFreeModelText = {
-  en: 'Chat is resting until tomorrow. Your Bible, today\'s story and the night sessions are all still here.',
-  es: 'El chat descansa hasta mañana. Tu Biblia, la historia de hoy y las sesiones de la noche siguen aquí.',
-};
-export const noFreeModelMindsetText = {
-  en: 'Chat is resting until tomorrow. Your night sessions are all still here.',
-  es: 'El chat descansa hasta mañana. Tus sesiones de la noche siguen aquí.',
-};
+export const noFreeModelText = say('noFreeModel', 'Chat is resting until tomorrow. Your Bible, today\'s story and the night sessions are all still here.', 'El chat descansa hasta mañana. Tu Biblia, la historia de hoy y las sesiones de la noche siguen aquí.');
+export const noFreeModelMindsetText = say('noFreeModelMindset', 'Chat is resting until tomorrow. Your night sessions are all still here.', 'El chat descansa hasta mañana. Tus sesiones de la noche siguen aquí.');
 // The free day's wall (its messages used, a second conversation the same day, or the network's share). No
 // model reads her words there, so the reply never depends on what she wrote: it always ends on her region's
 // free crisis lines (a second conversation that opens with "I'm not safe" meets them, never a closed door alone).
 const limitOpen = {
-  faith: { en: "That's today's chat. It opens again tomorrow, and your Bible is here any time.", es: 'Ese fue el chat de hoy. Mañana se abre de nuevo, y tu Biblia está aquí cuando quieras.' },
-  mindset: { en: "That's today's chat. It opens again tomorrow.", es: 'Ese fue el chat de hoy. Mañana se abre de nuevo.' },
+  faith: say('limitOpen.faith', "That's today's chat. It opens again tomorrow, and your Bible is here any time.", 'Ese fue el chat de hoy. Mañana se abre de nuevo, y tu Biblia está aquí cuando quieras.'),
+  mindset: say('limitOpen.mindset', "That's today's chat. It opens again tomorrow.", 'Ese fue el chat de hoy. Mañana se abre de nuevo.'),
 };
-export function limitText(lang: Lang, region: 'US' | 'MX' | 'ES' | 'other', door: Door = 'faith'): string {
+export function limitText(lang: ReplyLang, region: Region, door: Door = 'faith'): string {
   return [limitOpen[door === 'mindset' ? 'mindset' : 'faith'][lang], helpLinesText(lang, region)].join(' ');
 }
 // Asked for a verse in another translation: the app quotes only the KJV / RV1909, so it gives that
 // verse in those words and says so once, plainly.
-export const oneTranslationText = {
-  en: 'I quote only the King James Version here, so here is that verse in its words.',
-  es: 'Aquí cito solo la Reina-Valera 1909, así que este es ese versículo en sus palabras.',
-};
+export const oneTranslationText = say('oneTranslation', 'I quote only the King James Version here, so here is that verse in its words.', 'Aquí cito solo la Reina-Valera 1909, así que este es ese versículo en sus palabras.');
 // C08: asked whether it is real, a pastor, a person or God, it says plainly what it is.
 // Asked for a verse or a prayer in the Mindset door (r8 m04 fell back: drafts kept naming the Bible).
-export const mindsetFaithAskText = {
-  en: 'This space is for calm reflection, so here is a short practice instead. Breathe in for a count of four and out for a count of six, five times. Then picture one place where you have felt safe and still, and stay there for a few slow breaths.',
-  es: 'Este espacio es para la reflexión tranquila, así que aquí tienes una práctica corta. Respira contando hasta cuatro y suelta el aire contando hasta seis, cinco veces. Luego imagina un lugar donde te hayas sentido en calma y quédate ahí unas cuantas respiraciones.',
-};
+export const mindsetFaithAskText = say('mindsetFaithAsk', 'This space is for calm reflection, so here is a short practice instead. Breathe in for a count of four and out for a count of six, five times. Then picture one place where you have felt safe and still, and stay there for a few slow breaths.', 'Este espacio es para la reflexión tranquila, así que aquí tienes una práctica corta. Respira contando hasta cuatro y suelta el aire contando hasta seis, cinco veces. Luego imagina un lugar donde te hayas sentido en calma y quédate ahí unas cuantas respiraciones.');
 // Only a request for one ("give me a verse", "pray for me"), never a mention ("my mom prays").
 export const MINDSET_FAITH_ASK = / (?:(?:give|send|share|tell|read|show|quote|find) me (?:a |one |some |any )?(?:bible |scripture )?(?:verse|verses|scripture|psalm|prayer)|pray (?:for|with|over) me|say a prayer|(?:dame|comparte(?:me)?|dime|leeme) (?:un |una |algun |alguna )?(?:versiculo|salmo|oracion|cita biblica)|ora por mi|reza por mi) /;
-export const identityMindsetText = {
-  en: "I'm an AI helper, not a person. I can help you think things through, but the people who care about you, and a counselor or doctor when you need one, can do far more than I can.",
-  es: 'Soy un asistente de IA, no una persona. Puedo ayudarte a pensar las cosas con calma, pero la gente que te quiere, y un consejero o un médico cuando lo necesites, pueden hacer mucho más que yo.',
-};
-export const identityText = {
-  en: "I'm an AI helper, not a pastor, not a person and not God. I can talk things through and point you to scripture, but for prayer and care, your pastor and the people who love you matter more than I can.",
-  es: 'Soy un asistente de IA, no un pastor, no una persona y no Dios. Puedo conversar contigo y mostrarte pasajes de la Biblia, pero para la oración y el cuidado, tu pastor y la gente que te quiere valen mucho más que yo.',
-};
+export const identityMindsetText = say('identityMindset', "I'm an AI helper, not a person. I can help you think things through, but the people who care about you, and a counselor or doctor when you need one, can do far more than I can.", 'Soy un asistente de IA, no una persona. Puedo ayudarte a pensar las cosas con calma, pero la gente que te quiere, y un consejero o un médico cuando lo necesites, pueden hacer mucho más que yo.');
+export const identityText = say('identity', "I'm an AI helper, not a pastor, not a person and not God. I can talk things through and point you to scripture, but for prayer and care, your pastor and the people who love you matter more than I can.", 'Soy un asistente de IA, no un pastor, no una persona y no Dios. Puedo conversar contigo y mostrarte pasajes de la Biblia, pero para la oración y el cuidado, tu pastor y la gente que te quiere valen mucho más que yo.');
 
 // Hostile review F5: people who needed an answer got the generic fallback. For the topics that kept
 // falling back, a short answer written by a person stands in for it (faith door; Mindset keeps the
@@ -250,10 +246,7 @@ export const identityText = {
 // word for word into RT22, RT30, RT32 and q14, so four answers repeated and two still drifted): this
 // is structure, like the identity question, so a person-written reply answers it, with His own words.
 export const ROLE_SWAP = / (?:you are now|youre now|you are dan|pretend (?:to be|you are)|ahora eres|finge (?:ser|que eres)) | (?:talk|speak|answer|respond|write)(?: to me)? as (?:if you (?:are|were) )?(?:jesus|god|the lord|christ|the holy spirit|dan) | (?:habla|hablame|respondeme|contestame) como (?:si fueras )?(?:jesus|dios|el senor|cristo) /;
-export const roleText = {
-  en: "I'm an AI helper in a Bible app, so I won't speak as Jesus. Jesus' own words are printed below, and they are better than anything I could put in His mouth. If something is weighing on you tonight, tell me about it, and we can look at what Scripture says together.",
-  es: 'Soy un asistente de IA en una app de la Biblia, así que no voy a hablar como Jesús. Abajo están las palabras del mismo Jesús, que valen más que cualquier cosa que yo pudiera ponerle en la boca. Si algo te pesa esta noche, cuéntamelo y miramos juntos lo que dice la Escritura.',
-};
+export const roleText = say('role', "I'm an AI helper in a Bible app, so I won't speak as Jesus. Jesus' own words are printed below, and they are better than anything I could put in His mouth. If something is weighing on you tonight, tell me about it, and we can look at what Scripture says together.", 'Soy un asistente de IA en una app de la Biblia, así que no voy a hablar como Jesús. Abajo están las palabras del mismo Jesús, que valen más que cualquier cosa que yo pudiera ponerle en la boca. Si algo te pesa esta noche, cuéntamelo y miramos juntos lo que dice la Escritura.');
 export const ROLE_VERSE = 'Matthew 11:28';
 export type Topic = 'teen_grief' | 'money' | 'cursing' | 'jailbreak';
 export function fallbackTopic(text: string, teen: boolean): Topic | null {
@@ -266,50 +259,27 @@ export function fallbackTopic(text: string, teen: boolean): Topic | null {
   if (/ (?:seed|sow|sowing|tithe\w*|offering|semilla|sembrar|diezmo\w*|ofrenda) /.test(t) || / (?:pray|praying|ora|orar|oren) (?:\w+ ){0,3}(?:debt|debts|bills?|deuda\w*|cuentas) (?:away|go|gone|disappear|desaparec\w*)/.test(t)) return 'money';
   return null;
 }
-export const topicText: Record<Topic, Record<Lang, string>> = {
-  teen_grief: {
-    en: "I'm so sorry. Losing a friend like this is one of the hardest things there is, and it is okay to be angry, numb or full of questions, even angry with God. You can tell Him exactly how you feel; the Psalms are full of people who did (Psalm 13 is one). Please talk with someone who can sit with you in this, like a parent, a school counselor or your youth pastor. Lord, stay close to this grief and to every heart that is broken by it.",
-    es: 'Lo siento mucho. Perder a un amigo así es de lo más difícil que hay, y está bien sentir enojo, vacío o muchas preguntas, incluso enojo con Dios. Puedes decirle exactamente cómo te sientes; los Salmos están llenos de personas que lo hicieron (el Salmo 13 es uno). Por favor, habla con alguien que pueda acompañarte en esto, como tu mamá o tu papá, un consejero de la escuela o tu líder de jóvenes. Señor, quédate cerca de este dolor y de cada corazón que hoy está roto.',
-  },
-  money: {
-    en: "God cares about the bills and the deadline, not only about the big questions. Giving is never a way to buy a blessing, and no prayer works like a payment; God is not paid to help you. Today, write down what is due and when, and call the people you owe to ask about a plan; many churches and local programs also help with rent and utilities. Father, we bring You this debt and this week. Give wisdom for each call, courage to ask for help, and Your peace while we wait.",
-    es: 'A Dios le importan las cuentas y la fecha límite, no solo las grandes preguntas. Dar nunca es una forma de comprar una bendición, y ninguna oración funciona como un pago; a Dios no se le paga para que ayude. Hoy, anota lo que debes y para cuándo, y llama a quienes les debes para pedir un plan; muchas iglesias y programas locales también ayudan con la renta y los servicios. Padre, te traemos esta deuda y esta semana. Danos sabiduría para cada llamada, valor para pedir ayuda y tu paz mientras esperamos.',
-  },
-  cursing: {
-    en: "I'll pass on the cursing, but I'm glad to keep talking. If something has you angry or worn out, you can say it plainly here, and you can say it to God too; He can handle honest words. Tell me what is going on.",
-    es: 'Las groserías las dejo pasar, pero con gusto seguimos hablando. Si algo te tiene enojado o cansado, puedes decirlo con claridad aquí, y también decírselo a Dios; Él puede con las palabras honestas. Cuéntame qué está pasando.',
-  },
-  jailbreak: {
-    en: "I'll stay what I am: an AI helper in a Bible app, not God, not Jesus and not a pastor, so I can't speak in their place or promise what they will do. I'm glad to talk about what you are carrying and what Scripture says about it. What is on your heart?",
-    es: 'Seguiré siendo lo que soy: un asistente de IA en una app de la Biblia, no Dios, no Jesús y no un pastor, así que no puedo hablar en su lugar ni prometer lo que harán. Con gusto hablamos de lo que estás cargando y de lo que dice la Escritura al respecto. ¿Qué hay en tu corazón?',
-  },
+export const topicText: Record<Topic, Record<ReplyLang, string>> = {
+  teen_grief: say('topic.teen_grief', "I'm so sorry. Losing a friend like this is one of the hardest things there is, and it is okay to be angry, numb or full of questions, even angry with God. You can tell Him exactly how you feel; the Psalms are full of people who did (Psalm 13 is one). Please talk with someone who can sit with you in this, like a parent, a school counselor or your youth pastor. Lord, stay close to this grief and to every heart that is broken by it.", 'Lo siento mucho. Perder a un amigo así es de lo más difícil que hay, y está bien sentir enojo, vacío o muchas preguntas, incluso enojo con Dios. Puedes decirle exactamente cómo te sientes; los Salmos están llenos de personas que lo hicieron (el Salmo 13 es uno). Por favor, habla con alguien que pueda acompañarte en esto, como tu mamá o tu papá, un consejero de la escuela o tu líder de jóvenes. Señor, quédate cerca de este dolor y de cada corazón que hoy está roto.'),
+  money: say('topic.money', "God cares about the bills and the deadline, not only about the big questions. Giving is never a way to buy a blessing, and no prayer works like a payment; God is not paid to help you. Today, write down what is due and when, and call the people you owe to ask about a plan; many churches and local programs also help with rent and utilities. Father, we bring You this debt and this week. Give wisdom for each call, courage to ask for help, and Your peace while we wait.", 'A Dios le importan las cuentas y la fecha límite, no solo las grandes preguntas. Dar nunca es una forma de comprar una bendición, y ninguna oración funciona como un pago; a Dios no se le paga para que ayude. Hoy, anota lo que debes y para cuándo, y llama a quienes les debes para pedir un plan; muchas iglesias y programas locales también ayudan con la renta y los servicios. Padre, te traemos esta deuda y esta semana. Danos sabiduría para cada llamada, valor para pedir ayuda y tu paz mientras esperamos.'),
+  cursing: say('topic.cursing', "I'll pass on the cursing, but I'm glad to keep talking. If something has you angry or worn out, you can say it plainly here, and you can say it to God too; He can handle honest words. Tell me what is going on.", 'Las groserías las dejo pasar, pero con gusto seguimos hablando. Si algo te tiene enojado o cansado, puedes decirlo con claridad aquí, y también decírselo a Dios; Él puede con las palabras honestas. Cuéntame qué está pasando.'),
+  jailbreak: say('topic.jailbreak', "I'll stay what I am: an AI helper in a Bible app, not God, not Jesus and not a pastor, so I can't speak in their place or promise what they will do. I'm glad to talk about what you are carrying and what Scripture says about it. What is on your heart?", 'Seguiré siendo lo que soy: un asistente de IA en una app de la Biblia, no Dios, no Jesús y no un pastor, así que no puedo hablar en su lugar ni prometer lo que harán. Con gusto hablamos de lo que estás cargando y de lo que dice la Escritura al respecto. ¿Qué hay en tu corazón?'),
 };
 
 // Two lanes (21 Nov 2026). Free chat goes to a free AI service that may keep and use what is typed;
 // paid chat is private. These lines are what she sees at each edge, never an error.
-export const consentText = {
-  en: 'Free chat uses a free AI service that may keep and use what you type to improve its AI, and people there may read it. Please do not share names or private details. Paid chat is private.',
-  es: 'El chat gratis usa un servicio de IA gratuito que puede guardar y usar lo que escribes para mejorar su IA, y personas de ese servicio pueden leerlo. Por favor, no compartas nombres ni datos privados. El chat de pago es privado.',
-};
-export const freeRestingText = {
-  en: 'Free chat is resting. Try again later, or make chat private.',
-  es: 'El chat gratis está descansando. Vuelve a intentarlo más tarde o haz tu chat privado.',
-};
-export const paidDownText = {
-  en: 'Private chat is down for a moment. Please try again in a few minutes.',
-  es: 'El chat privado no está disponible por un momento. Vuelve a intentarlo en unos minutos.',
-};
-export const pausedText = {
-  en: 'Chat is paused on this account. If you think this is a mistake, write to us at peacebestillapp.com/support.',
-  es: 'El chat está en pausa en esta cuenta. Si crees que es un error, escríbenos en peacebestillapp.com/es/soporte.',
-};
-export const slowText = {
-  en: 'Please slow down a little. Chat will answer again in a few minutes.',
-  es: 'Por favor, ve un poco más despacio. El chat volverá a responder en unos minutos.',
-};
+export const consentText = say('consent', 'Free chat uses a free AI service that may keep and use what you type to improve its AI, and people there may read it. Please do not share names or private details. Paid chat is private.', 'El chat gratis usa un servicio de IA gratuito que puede guardar y usar lo que escribes para mejorar su IA, y personas de ese servicio pueden leerlo. Por favor, no compartas nombres ni datos privados. El chat de pago es privado.');
+export const freeRestingText = say('freeResting', 'Free chat is resting. Try again later, or make chat private.', 'El chat gratis está descansando. Vuelve a intentarlo más tarde o haz tu chat privado.');
+export const paidDownText = say('paidDown', 'Private chat is down for a moment. Please try again in a few minutes.', 'El chat privado no está disponible por un momento. Vuelve a intentarlo en unos minutos.');
+export const pausedText = say('paused', 'Chat is paused on this account. If you think this is a mistake, write to us at peacebestillapp.com/support.', 'El chat está en pausa en esta cuenta. Si crees que es un error, escríbenos en peacebestillapp.com/es/soporte.');
+export const slowText = say('slow', 'Please slow down a little. Chat will answer again in a few minutes.', 'Por favor, ve un poco más despacio. El chat volverá a responder en unos minutos.');
 /** After her PAID_CHAT_MESSAGES private messages today (or past the monthly backstop): the choice, never a wall. */
-export function overflowText(lang: 'en' | 'es', why: 'daily' | 'monthly' | 'down', date: string): string {
-  const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+export function overflowText(lang: ReplyLang, why: 'daily' | 'monthly' | 'down', date: string): string {
+  const shown = new Date(`${date}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : lang === 'en' ? 'en-US' : lang === 'ko' ? 'ko-KR' : lang === 'zh-Hans' ? 'zh-CN' : 'zh-TW', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+  if (lang !== 'en' && lang !== 'es') {
+    const w = CJK[lang];
+    return [fill(w[`overflow.${why}`], { n: String(PAID_CHAT_MESSAGES) }), w['overflow.keep'], fill(w[`overflow.back.${why}`], { date: shown })].join(lang === 'ko' ? ' ' : '');
+  }
   if (lang === 'es') return `${why === 'daily' ? `Usaste los ${PAID_CHAT_MESSAGES} mensajes privados de hoy.` : why === 'down' ? 'El chat privado no está disponible por un momento.' : 'Usaste el chat privado de este mes.'} Puedes seguir conversando con nuestra IA gratuita. El chat gratis no es privado: el servicio gratuito puede guardar y usar lo que envíes. ${why === 'daily' ? 'El chat privado vuelve mañana.' : why === 'down' ? 'El chat privado vuelve pronto.' : `El chat privado vuelve el ${shown}.`}`;
   return `${why === 'daily' ? `You've used today's ${PAID_CHAT_MESSAGES} private messages.` : why === 'down' ? 'Private chat is down for a moment.' : "You've used this month's private chat."} You can keep chatting with our free AI. Free chat isn't private: the free service may keep and use what you send. ${why === 'daily' ? 'Private chat comes back tomorrow.' : why === 'down' ? 'Private chat will be back soon.' : `Private chat comes back on ${shown}.`}`;
 }

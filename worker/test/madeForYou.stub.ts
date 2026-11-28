@@ -74,7 +74,8 @@ export default {
         if (text === 'fixture floor' || text === 'fixture model') return { fired: true, kind: text };
         return { fired: false, read: text === 'fixture unavailable' ? 'down' : 'none' };
       },
-      crisisText: () => 'Fixed safety reply',
+      // The language it was asked in shows only for a Korean or Chinese screen (tests that the screen language travels).
+      crisisText: (_kind: unknown, lang: string) => lang === 'en' || lang === 'es' ? 'Fixed safety reply' : `Fixed safety reply (${lang})`,
       // The chat's real ladder over the chat's real rung list, with made-for-you counters and caps.
       ladder: async (use, messages, schema, maxTokens, valid, signal, paidOnly, teen) => {
         const fixture = (rung: { id: string }) => async () => {

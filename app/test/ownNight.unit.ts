@@ -264,7 +264,8 @@ test('the own-night consent names every service the Worker sends a wish to, from
     assert.ok(value, `${key} is not in wrangler.jsonc`);
     const hit = Object.entries(map).find(([prefix]) => value!.startsWith(prefix));
     assert.ok(hit, `${key} is ${value}: name it in ownNight.consent.body (EN and ES) and add it here`);
-    for (const lang of ['en', 'es'] as const) assert.ok(String(strings[lang]['ownNight.consent.body']).includes(lang === 'en' ? hit![1] : es[hit![1]]), `${lang} consent does not name ${hit![1]} (${key})`);
+    // Every language's consent, Korean and Chinese too (own night is hidden on those phones today, and the words are ready).
+    for (const lang of Object.keys(strings) as Array<keyof typeof strings>) assert.ok(String(strings[lang]['ownNight.consent.body']).includes(es[hit![1]]), `${lang} consent does not name ${hit![1]} (${key})`);
   }
   for (const lang of ['en', 'es'] as const) assert.ok(String(strings[lang]['ownNight.privacy']).includes('Cloudflare Workers AI'), `${lang} privacy line hides the safety model`);
   // The hosts OpenRouter may run the model on (PAID_HOSTS, read by worker/src/index.ts openRouterPrivate), both ways:

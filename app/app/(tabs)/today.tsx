@@ -1,4 +1,5 @@
 // Today keeps the date, week dots and the three daily cards in the shell's order.
+import { contentLanguage, isCjk } from '../../src/i18n';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
@@ -38,7 +39,7 @@ export default function Today() {
   const published = usePublishedAudio(smallHours && faith);
   const [showAll, setShowAll] = useState(false);
   const playable = (track: Track) => isPreviewSample(track) || published?.get(track.file) === track.sha256;
-  const hush = smallHours ? backToSleepTrack(listenTracks(), t.locale, settings.door, clock.now(), playable) : null;
+  const hush = smallHours ? backToSleepTrack(listenTracks(), contentLanguage(t.locale), settings.door, clock.now(), playable) : null;
 
   const item = (label: Key, text: string, extra?: React.ReactNode, done = false) => (
     <Card>
@@ -63,8 +64,10 @@ export default function Today() {
         {word.passage && <DeclarationVerse passage={word.passage} />}
         <TextLink onPress={() => open('declaration')}>{t('daily.openDeclaration')}</TextLink>
       </>, record.value.declarations.includes(dayKey(now)))}
-      {faith && canUse(pages.story.feature) && story && item('today.story.label', story.title,
-        <TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink>)}
+      {faith && canUse(pages.story.feature) && story && item('today.story.label', story.title, <>
+        {isCjk(t.locale) && <Body size={14}>{t('content.storyInEnglish')}</Body>}
+        <TextLink onPress={() => open('story')}>{t('daily.openStory')}</TextLink>
+      </>)}
       {!faith && canUse(pages.journal.feature) && item('today.scene.label', t('today.scene.text'), <TextLink onPress={() => open('journal')}>{t('daily.title.journal')}</TextLink>)}
       {settings.journey === 'living-in-the-end' && <OwnNightEntry />}
       <Card style={{ paddingVertical: 12 }}>

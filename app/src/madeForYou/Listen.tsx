@@ -1,3 +1,4 @@
+import { contentLanguage } from '../i18n';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
@@ -23,13 +24,13 @@ export function MadeForYouListen({ id, age, door }: { id: string; age: Age; door
   const preview = isMadeForYouPreview();
   const api = preview ? previewPlayerApi : madeForYouApi;
   const kind = door === 'faith' ? 'psalm' : 'imagination';
-  const context: SessionContext = { age, door, kind, lang: locale };
+  const context: SessionContext = { age, door, kind, lang: contentLanguage(locale) };
   const [row, setRow] = useState<Ready | null | undefined>(undefined);
 
   useEffect(() => {
     if (!paid) return;
     const controller = new AbortController();
-    void api.list({ age, door, kind, lang: locale }, controller.signal).then(shelf => {
+    void api.list({ age, door, kind, lang: contentLanguage(locale) }, controller.signal).then(shelf => {
       if (!controller.signal.aborted) setRow(shelf.ready.find(item => item.id === id) ?? null);
     }, () => {
       if (!controller.signal.aborted) setRow(null);
@@ -58,7 +59,7 @@ export function MadeForYouListen({ id, age, door }: { id: string; age: Age; door
 
   const stopHere = async () => { if (playing) await player.pause(); };
   return <NowPlaying track={{
-    file: `made-for-you/${row.id}`, kind: 'made-for-you', ref: row.id, lang: locale, voice: 'AI',
+    file: `made-for-you/${row.id}`, kind: 'made-for-you', ref: row.id, lang: contentLanguage(locale), voice: 'AI',
     titles: { [locale]: copy('title') }, seconds: row.seconds, sha256: row.sha256,
   }} close={close} privateStream={{
     label: t(kind === 'psalm' ? 'journey.psalmNights.name' : 'journey.imaginationNights.name'),

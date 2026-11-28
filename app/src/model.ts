@@ -1,12 +1,13 @@
 // The app's product rules as data and pure functions: doors, age bands, journeys, chat voices,
 // where a returning person lands. Screens read these; nothing here knows about a page or a string.
 import banned from './quality/banned.json';
-import type { Key } from './i18n';
+import { isLanguage, type Key, type Language } from './i18n';
+
+export type { Language };
 
 export type Door = 'faith' | 'mindset';
 export type Age = 'child' | 'teen' | 'adult';
 export type Voice = 'plain' | 'church' | 'teen' | 'spanish';
-export type Language = 'en' | 'es';
 export type JourneyId =
   | 'bible-chat' | 'hush-harbor' | 'mi-refugio' | 'psalm-nights' | 'morning-word' | 'young-faith'
   | 'imagination-nights' | 'morning-word-mindset' | 'living-in-the-end';
@@ -89,7 +90,7 @@ export function migrateSettings(raw: unknown, now = Date.now()): Settings {
     ageSetAt: age ? (typeof saved.ageSetAt === 'number' ? saved.ageSetAt : now) : undefined,
     ageRaised: saved.ageRaised === true || undefined,
     voice: saved.voice === 'church' || saved.voice === 'teen' || saved.voice === 'spanish' ? saved.voice : 'plain',
-    language: saved.language === 'es' ? 'es' : 'en',
+    language: isLanguage(saved.language) ? saved.language : 'en',
     journey: journey && journey.door === door && allowedFor(journey, age) ? journey.id : undefined,
     opened: Array.isArray(saved.opened) ? saved.opened.filter(day => typeof day === 'string' && DAY.test(day)) : undefined,
   };
@@ -200,7 +201,10 @@ export function journeyLanguage(settings: Settings): Language {
 // Applied to faith-facing content, including future stories and chat.
 export function faithContentIssues(text: string): string[] {
   const normalized = text.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase();
-  const words = new RegExp(`\\b(?:${banned.faith.join('|')})\\b`, 'gu');
+  // \b is ASCII-only, so Korean and Chinese terms match anywhere (a Korean particle may follow: 시각화를).
+  const cjk = (term: string) => /[\p{Script=Hangul}\p{Script=Han}]/u.test(term);
+  const latin = banned.faith.filter(term => !cjk(term)), hanHangul = banned.faith.filter(cjk).map(term => term.normalize('NFKD'));
+  const words = new RegExp(`\\b(?:${latin.join('|')})\\b${hanHangul.length ? `|(?:${hanHangul.join('|')})` : ''}`, 'gu');
   const issues = [...normalized.matchAll(words)].map(match => match[0]);
   if (/\p{Extended_Pictographic}|[☀-➿]/u.test(text)) issues.push('emoji or decorative symbol');
   if (/sparkle|sparkles|sparkling|✨|✦|✧/iu.test(text)) issues.push('sparkle');
