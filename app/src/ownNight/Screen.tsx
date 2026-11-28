@@ -189,7 +189,7 @@ function Editor({ draft: start, write, report, consent, saved, count, done }: { 
 
   // Apple 5.1.2(i): her first wish waits on this, so it is the whole screen, read from the top at any width (#153
   // review N4: below the form it opened under the fold at 390x844). Her words stay in the form behind it.
-  if (step === 'ask' && asking) return <Screen>
+  if (step === 'ask' && asking) return <Screen key="consent">
     <BackLink onPress={() => setAsking(false)}>{t('ownNight.consent.back')}</BackLink>
     <Title>{t('ownNight.consent.title')}</Title>
     <Card style={{ gap: 10 }}>
@@ -200,7 +200,7 @@ function Editor({ draft: start, write, report, consent, saved, count, done }: { 
     <TextLink onPress={() => { setAsking(false); setNotice(null); setStep('scene'); }}>{t('ownNight.consent.no')}</TextLink>
   </Screen>;
 
-  return <Screen>
+  return <Screen key="form">
     <BackLink onPress={() => void cancel()}>{t('ownNight.cancel')}</BackLink>
     <Title>{t('ownNight.title')}</Title>
     {step === 'ask' ? <>
