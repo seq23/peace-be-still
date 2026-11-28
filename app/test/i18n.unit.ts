@@ -151,10 +151,21 @@ test('values and plurals: the week count and the Start button', () => {
   assert.equal(t('journeys.intro', { locale: 'es' }), 'Empieza con uno. Puedes cambiarlo cuando quieras en Ajustes.');
 });
 
-test('Traditional strings use Taiwan usage OpenCC misses: 帳戶/帳號, and 「」 quotation marks, never “”', () => {
+test('Traditional strings use Taiwan usage OpenCC misses: 帳戶/帳號, 訂製, 計畫, and 「」 quotation marks, never “”', () => {
   const hant = readFileSync('src/i18n/zh-Hant.json', 'utf8');
-  for (const simplifiedUsage of ['賬戶', '賬號', '“', '”']) assert.ok(!hant.includes(simplifiedUsage), simplifiedUsage);
+  for (const mainlandUsage of ['賬戶', '賬號', '定製', '計劃', '“', '”']) assert.ok(!hant.includes(mainlandUsage), mainlandUsage);
   const values = JSON.parse(hant) as Record<string, unknown>;
   assert.match(String(values['paid.apple']), /Apple 帳戶/);
-  assert.match(String(values['paid.madeForYouNote']), /「為你定製」/);
+  assert.match(String(values['paid.madeForYouNote']), /「為你訂製」/);
+  assert.equal(values['daily.title.plans'], '讀經計畫');
+});
+
+test('a sleep session is 助眠音频 / 音频 in Chinese, never 时段 ("time slot" to a native reader)', () => {
+  for (const file of ['src/i18n/zh-Hans.json', 'src/i18n/zh-Hant.json']) {
+    const values = JSON.parse(readFileSync(file, 'utf8')) as Record<string, string>;
+    assert.deepEqual(Object.keys(values).filter(key => /[时時]段/.test(values[key])), [], file);
+  }
+  const hans = JSON.parse(readFileSync('src/i18n/zh-Hans.json', 'utf8')) as Record<string, string>;
+  assert.equal(hans['paid.nights'], '每晚一段助眠音频，还有为你定制的音频（均为英语朗读）。');
+  assert.equal(hans['madeForYou.shelf'], '你的音频');
 });
