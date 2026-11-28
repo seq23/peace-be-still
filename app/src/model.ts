@@ -9,7 +9,7 @@ export type Door = 'faith' | 'mindset';
 export type Age = 'child' | 'teen' | 'adult';
 export type Voice = 'plain' | 'church' | 'teen' | 'spanish';
 export type JourneyId =
-  | 'bible-chat' | 'hush-harbor' | 'mi-refugio' | 'psalm-nights' | 'morning-word' | 'young-faith'
+  | 'bible-chat' | 'hush-harbor' | 'mi-refugio' | 'psalm-nights' | 'morning-word' | 'saebyeok' | 'young-faith'
   | 'imagination-nights' | 'morning-word-mindset' | 'living-in-the-end';
 
 export type Journey = {
@@ -26,6 +26,8 @@ export type Journey = {
   language?: Language;
   /** Only these age bands are offered it (Young Faith is for 13 to 17); absent means every band. */
   ages?: readonly Age[];
+  /** Offered only when the app speaks one of these (새벽기도 is for Korean readers); absent means every language. */
+  offeredIn?: readonly Language[];
 };
 
 export const journeys: readonly Journey[] = [
@@ -34,6 +36,7 @@ export const journeys: readonly Journey[] = [
   { id: 'mi-refugio', door: 'faith', name: 'journey.miRefugio.name', subtitle: 'journey.miRefugio.subtitle', purpose: 'journey.miRefugio.purpose', chat: true, voice: 'spanish', language: 'es' },
   { id: 'psalm-nights', door: 'faith', name: 'journey.psalmNights.name', subtitle: 'journey.psalmNights.subtitle', purpose: 'journey.psalmNights.purpose', chat: false },
   { id: 'morning-word', door: 'faith', name: 'journey.morningWord.name', subtitle: 'journey.morningWord.subtitle', purpose: 'journey.morningWord.purpose', chat: false },
+  { id: 'saebyeok', door: 'faith', name: 'journey.saebyeok.name', subtitle: 'journey.saebyeok.subtitle', purpose: 'journey.saebyeok.purpose', chat: false, language: 'ko', offeredIn: ['ko'] },
   { id: 'young-faith', door: 'faith', name: 'journey.youngFaith.name', subtitle: 'journey.youngFaith.subtitle', purpose: 'journey.youngFaith.purpose', chat: false, voice: 'teen', ages: ['teen'] },
   { id: 'imagination-nights', door: 'mindset', name: 'journey.imaginationNights.name', purpose: 'journey.imaginationNights.purpose', chat: false },
   { id: 'living-in-the-end', door: 'mindset', name: 'journey.livingInTheEnd.name', purpose: 'journey.livingInTheEnd.purpose', chat: false },
@@ -50,9 +53,10 @@ export function allowedFor(journey: Journey, age: Age | null): boolean {
   return !journey.ages || (!!age && journey.ages.includes(age));
 }
 
-/** The journeys this person may pick behind a door, the one made for their age band first (a teen opens on Young Faith). */
-export function journeysFor(door: Door, age: Age | null): Journey[] {
-  const allowed = journeys.filter(journey => journey.door === door && allowedFor(journey, age));
+/** The journeys this person may pick behind a door, the one made for their age band first (a teen opens on Young
+ * Faith). A journey for one language (새벽기도) is offered only when the app speaks it. */
+export function journeysFor(door: Door, age: Age | null, language: Language = 'en'): Journey[] {
+  const allowed = journeys.filter(journey => journey.door === door && allowedFor(journey, age) && (!journey.offeredIn || journey.offeredIn.includes(language)));
   return [...allowed.filter(journey => journey.ages), ...allowed.filter(journey => !journey.ages)];
 }
 
@@ -68,6 +72,8 @@ export type Settings = {
   journey?: JourneyId;
   /** The days (local YYYY-MM-DD) the app was opened this week; Today counts and fills these. */
   opened?: string[];
+  /** The day (local YYYY-MM-DD) 새벽기도 was picked: its day 1. */
+  dawnStart?: string;
 };
 
 export const initial: Settings = { door: null, age: null, voice: 'plain', language: 'en' };
@@ -93,6 +99,7 @@ export function migrateSettings(raw: unknown, now = Date.now()): Settings {
     language: isLanguage(saved.language) ? saved.language : 'en',
     journey: journey && journey.door === door && allowedFor(journey, age) ? journey.id : undefined,
     opened: Array.isArray(saved.opened) ? saved.opened.filter(day => typeof day === 'string' && DAY.test(day)) : undefined,
+    dawnStart: typeof saved.dawnStart === 'string' && DAY.test(saved.dawnStart) ? saved.dawnStart : undefined,
   };
 }
 
@@ -146,11 +153,13 @@ export function correctAge(settings: Settings, age: Age, now = Date.now()): Corr
   return { ok: true, settings: { ...withAge(settings, age, now), ageRaised: true } };
 }
 
-/** Picking a journey (and with it, from Settings, a door). */
-export function chooseJourney(settings: Settings, id: JourneyId): Settings {
+/** Picking a journey (and with it, from Settings, a door). Moving to 새벽기도 from another journey starts its day 1
+ * today; picking it again while on it keeps her day. */
+export function chooseJourney(settings: Settings, id: JourneyId, now = new Date()): Settings {
   const journey = journeyById(id);
   if (!journey || !settings.age || !allowedFor(journey, settings.age)) return settings;
-  return { ...settings, door: journey.door, journey: journey.id, voice: voiceFor(settings.age, journey, settings.voice) };
+  const dawnStart = journey.id === 'saebyeok' && (settings.journey !== 'saebyeok' || !settings.dawnStart) ? dayKey(now) : settings.dawnStart;
+  return { ...settings, door: journey.door, journey: journey.id, voice: voiceFor(settings.age, journey, settings.voice), ...(dawnStart ? { dawnStart } : {}) };
 }
 
 /** Under-13s have no chat, so no chat voice. */

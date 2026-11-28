@@ -573,5 +573,19 @@
   "madeForYou.settingsAsk": "Delete every session made for you? This can’t be undone.",
   "madeForYou.settingsDone": "Your made-for-you sessions were deleted.",
   "content.audioInEnglish": "The audio is in English.",
-  "content.storyInEnglish": "This story is in English."
+  "content.storyInEnglish": "This story is in English.",
+  "journey.saebyeok.name": "Dawn Prayer",
+  "journey.saebyeok.subtitle": "새벽기도 in Korean",
+  "journey.saebyeok.purpose": "Before dawn, in Korean: one verse from the 개역한글 and a short prayer, with a reminder at the hour you pick",
+  "dawn.title": "Today's dawn word",
+  "dawn.day": "Dawn word · day %{day} of %{total}",
+  "dawn.dayAgain": "Dawn word · starting again, day %{day} of %{total}",
+  "dawn.open": "Open the dawn word",
+  "dawn.prayed": "I prayed",
+  "dawn.share": "KakaoTalk card",
+  "dawn.reminder": "Dawn reminder",
+  "dawn.newYear": "The 6-day New Year dawn prayer, on our website",
+  "reminder.offer.title.dawn": "Would a quiet nudge before dawn help?",
+  "reminder.body.dawn": "This morning's dawn word is ready when you are.",
+  "reminder.settings.deniedInApp": "Without it, today's words are still here whenever you open the app."
 }

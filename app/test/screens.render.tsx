@@ -2711,6 +2711,230 @@ test('the offer and the default follow the journey: Morning Word asks for a 7:00
   await act(async () => refugio.unmount());
 });
 
+// 새벽기도 (the Korean dawn-prayer journey) on the real screens: offered on a Korean phone, its morning on Today and
+// on the page, the stored 개역한글 verse, "기도했어요", the KakaoTalk card through the phone's share sheet, the dawn
+// reminder at 5:00 or the time she picks, a phone that said no, and the link to the 6-day 신년 특새.
+const { dawnWords } = require('../src/content') as typeof import('../src/content');
+const { NEW_YEAR_DAWN_URL } = require('../src/screens/daily/Dawn') as typeof import('../src/screens/daily/Dawn');
+const krvVerses = (ref: string) => {
+  const db = new DatabaseSync('src/bible/data/krv.db', { readOnly: true });
+  try {
+    const parsed = parseReference(ref)!;
+    return (db.prepare('SELECT text FROM verses WHERE book = ? AND chapter = ? AND verse BETWEEN ? AND ? ORDER BY verse')
+      .all(parsed.book, parsed.chapter, parsed.verse!, parsed.endVerse ?? parsed.verse!) as Array<{ text: string }>).map(row => row.text);
+  } finally { db.close(); }
+};
+const dawnPerson = (start: Date) => ({ ...base, language: 'ko', journey: 'saebyeok', dawnStart: dayKey(start) });
+const dawnDaysAgo = (n: number) => { const d = new Date(); d.setDate(d.getDate() - n); return d; };
+/** The verses a screen shows, each scripture block as one line of text. */
+const versesShown = (tree: ReactTestRenderer) => host(tree, 'Text').filter(node => node.props.testID === 'scripture-text').map(node => textOf(node).replace(/\s+/g, ' ').trim());
+const koDay = (day: number, again = false) => i18n.t(again ? 'dawn.dayAgain' : 'dawn.day', { locale: 'ko', day, total: 40 });
+
+test('새벽기도 is offered on a Korean phone only; picking it starts day 1 today and its screens speak Korean', async () => {
+  const english = await mount('journeys', { ...base, language: 'en' }, { door: 'faith' });
+  assert.ok(!strings(english).includes(ko['journey.saebyeok.name']) && !strings(english).includes(en['journey.saebyeok.name']));
+  await act(async () => english.unmount());
+  const korean = await mount('journeys', { ...base, language: 'ko' }, { door: 'faith' });
+  assert.ok(strings(korean).includes(`${ko['journey.saebyeok.name']} · ${ko['journey.saebyeok.subtitle']}`));
+  assert.ok(strings(korean).includes(ko['journey.saebyeok.purpose']));
+  // Korean names break between words, never inside one (keep-all; iOS hangul-word); Chinese, with no spaces, never gets it.
+  const nameText = (tree: ReactTestRenderer, name: string) => host(tree, 'Text').find(n => n.children.join('') === name)!;
+  const koName = nameText(korean, `${ko['journey.saebyeok.name']} · ${ko['journey.saebyeok.subtitle']}`);
+  assert.equal(koName.props.lineBreakStrategyIOS, 'hangul-word');
+  assert.ok([koName.props.style].flat(Infinity).some((style: { wordBreak?: string } | undefined) => style?.wordBreak === 'keep-all'));
+  await press(korean, ko['journey.saebyeok.name']);
+  await press(korean, i18n.t('journeys.start', { locale: 'ko', name: ko['journey.saebyeok.name'] }));
+  assert.equal(store().journey, 'saebyeok');
+  assert.equal(store().dawnStart, dayKey(new Date()));
+  await act(async () => korean.unmount());
+  const zhHans = require('../src/i18n/zh-Hans.json');
+  const chinese = await mount('journeys', { ...base, language: 'zh-Hans' }, { door: 'faith' });
+  const zhName = nameText(chinese, zhHans['journey.bibleChat.name']);
+  assert.equal(zhName.props.lineBreakStrategyIOS, undefined);
+  assert.ok(![zhName.props.style].flat(Infinity).some((style: { wordBreak?: string } | undefined) => style?.wordBreak === 'keep-all'));
+  await act(async () => chinese.unmount());
+  // A Chinese line that names the Korean Bible (개역한글) is still Chinese: it keeps breaking between characters.
+  const { Body: UiBody } = require('../src/ui') as typeof import('../src/ui');
+  const mixed = await mount('today', base, {}, () => <UiBody>{zhHans['journey.saebyeok.purpose']}</UiBody>);
+  const mixedText = nameText(mixed, zhHans['journey.saebyeok.purpose']);
+  assert.match(zhHans['journey.saebyeok.purpose'], /개역한글/u);
+  assert.equal(mixedText.props.lineBreakStrategyIOS, undefined);
+  assert.ok(![mixedText.props.style].flat(Infinity).some((style: { wordBreak?: string } | undefined) => style?.wordBreak === 'keep-all'));
+  await act(async () => mixed.unmount());
+});
+
+test('새벽기도 Today and its page: day 1 of 40, the title, the stored 개역한글 verse word for word, the prayer, "기도했어요", the 신년 특새 link; no topics', async () => {
+  const first = dawnWords()[0];
+  const today = await mount('today', dawnPerson(new Date()));
+  await settle();
+  assert.ok(strings(today).includes(koDay(1)), strings(today));
+  assert.ok(strings(today).includes(first.title));
+  assert.ok(strings(today).includes(ko['dawn.open']));
+  assert.deepEqual(versesShown(today), [krvVerses(first.ref).join(' ')], 'the verse is the stored 개역한글');
+  // The reference, then the version's credit once (#155: the version is named once).
+  assert.ok(strings(today).includes('시편 5:3\n개역한글판 (대한성서공회 번역, 1961)'), strings(today));
+  await press(today, ko['dawn.open']);
+  assert.deepEqual(calls.at(-1), ['push', { pathname: '/today/[page]', params: { page: 'declaration' } }]);
+  await act(async () => today.unmount());
+  const links: string[] = [];
+  (globalThis as any).__pbsOpenURL = (url: string) => links.push(url);
+  const unsaid = new Date(2031, 1, 3, 5);
+  const page = await mount('dailyPage', { ...dawnPerson(unsaid) }, {}, () =>
+    <Daily page="declaration" now={unsaid} back={() => {}} read={() => {}} upgrade={() => {}} open={() => {}} />);
+  await settle();
+  try {
+    assert.ok(strings(page).includes(ko['dawn.title']));
+    assert.ok(strings(page).includes(first.prayer));
+    assert.deepEqual(versesShown(page), [krvVerses(first.ref).join(' ')]);
+    for (const key of ['declaration.topicsPaid', 'declaration.topics', 'daily.said', 'daily.prayer'] as const) assert.ok(!strings(page).includes(ko[key]), `no ${key} inside 새벽기도`);
+    assert.deepEqual(faithContentIssues(texts(page).join(' | ')), []);
+    await press(page, ko['dawn.prayed']);
+    assert.ok(strings(page).includes(ko['daily.done']));
+    assert.ok(JSON.parse(local.get('pbs-daily')!).declarations.includes(dayKey(unsaid)));
+    await press(page, ko['dawn.newYear']);
+    assert.deepEqual(links, [NEW_YEAR_DAWN_URL]);
+  } finally {
+    (globalThis as any).__pbsOpenURL = undefined;
+    await act(async () => page.unmount());
+  }
+});
+
+test('새벽기도 day 40 is the last morning, day 41 starts the 40 again, and every morning\'s verse is the stored 개역한글', async () => {
+  const last = await mount('today', dawnPerson(dawnDaysAgo(39)));
+  await settle();
+  assert.ok(strings(last).includes(koDay(40)));
+  assert.ok(strings(last).includes(dawnWords()[39].title));
+  await act(async () => last.unmount());
+  const again = await mount('today', dawnPerson(dawnDaysAgo(40)));
+  await settle();
+  assert.ok(strings(again).includes(koDay(1, true)));
+  assert.ok(strings(again).includes(dawnWords()[0].title));
+  await act(async () => again.unmount());
+  for (const [index, word] of dawnWords().entries()) {
+    const tree = await mount('today', dawnPerson(dawnDaysAgo(index)));
+    await settle();
+    assert.deepEqual(versesShown(tree), [krvVerses(word.ref).join(' ')], word.id);
+    await act(async () => tree.unmount());
+  }
+});
+
+test('the KakaoTalk card: the square picture with the day\'s title, the stored verse, its reference and the link, handed to the phone\'s share sheet on Android and iPhone', async () => {
+  const word = dawnWords()[0];
+  const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jR1sAAAAASUVORK5CYII=';
+  const captures: unknown[] = [];
+  (globalThis as any).__pbsCapture = (callback: (data: string) => void) => { captures.push(true); callback(png); };
+  try {
+    for (const os of ['android', 'ios'] as const) {
+      (globalThis as any).__pbsPlatform = os;
+      const sharing = { shared: [] as Array<[string, Record<string, string>]> };
+      (globalThis as any).__pbsSharing = sharing;
+      const page = await mount('dailyPage', dawnPerson(new Date()), { page: 'declaration' });
+      await settle();
+      await press(page, ko['dawn.share']);
+      const svg = host(page, 'Svg').find(node => node.props.viewBox === '0 0 520 520');
+      assert.ok(svg, 'a square card');
+      const drawn = host(page, 'SvgText').map(node => node.children.join(''));
+      assert.ok(drawn.includes(word.title), 'the title on top');
+      assert.equal(drawn.filter(line => !line.includes('·') && line !== word.title && line !== 'Peace Be Still' && line !== 'peacebestillapp.com/ko').join(' '), krvVerses(word.ref).join(' '));
+      assert.ok(drawn.includes('시편 5:3 · 개역한글') && drawn.includes('peacebestillapp.com/ko') && drawn.includes(ko['share.brand']));
+      await press(page, ko['share.render']);
+      await press(page, ko['share.send']);
+      await settle();
+      assert.equal(sharing.shared.length, 1, `${os}: the picture reaches the share sheet`);
+      assert.equal(sharing.shared[0][1].mimeType, 'image/png');
+      assert.equal((globalThis as any).__pbsFiles.get(sharing.shared[0][0]), png, 'the file handed over is the rendered picture');
+      assert.ok(!strings(page).includes(ko['share.error']));
+      await act(async () => page.unmount());
+    }
+    // No share sheet on the phone: it says so, nothing crashes.
+    (globalThis as any).__pbsSharing = { shared: [], available: false };
+    const none = await mount('dailyPage', dawnPerson(new Date()), { page: 'declaration' });
+    await settle();
+    await press(none, ko['dawn.share']);
+    await press(none, ko['share.render']);
+    await press(none, ko['share.send']);
+    await settle();
+    assert.ok(strings(none).includes(ko['share.error']));
+    await act(async () => none.unmount());
+  } finally {
+    (globalThis as any).__pbsPlatform = 'web';
+    (globalThis as any).__pbsSharing = undefined;
+  }
+});
+
+test('the dawn reminder: Today offers 오전 5:00 in Korean; on, it books 5:00 with the dawn words; the page moves it past midnight and back', async () => {
+  onPhone();
+  try {
+    const phone = notificationPhone();
+    local.set(REMINDER_KEY, JSON.stringify({ on: false, firstValueAt: 1 }));
+    const today = await mount('today', dawnPerson(new Date()));
+    await settle();
+    assert.ok(strings(today).includes(ko['reminder.offer.title.dawn']));
+    assert.ok(strings(today).includes(i18n.t('reminder.offer.body', { locale: 'ko', time: '오전 5:00' })));
+    await press(today, ko['reminder.offer.yes']);
+    await settle();
+    assert.deepEqual([...phone.schedule.values()].map(e => [e.trigger, e.content.body]), [[{ type: 'daily', hour: 5, minute: 0 }, ko['reminder.body.dawn']]]);
+    await act(async () => today.unmount());
+    const page = await mount('dailyPage', dawnPerson(new Date()), { page: 'declaration' });
+    await settle();
+    assert.ok(strings(page).includes(ko['dawn.reminder']));
+    assert.ok(strings(page).includes(i18n.t('reminder.settings.on', { locale: 'ko', time: '오전 5:00' })));
+    for (const [hour, minute, shown] of [[23, 40, '오후 11:40'], [0, 20, '오전 12:20'], [4, 30, '오전 4:30']] as const) {
+      await press(page, ko['reminder.settings.change']);
+      await act(async () => host(page, 'DateTimePicker')[0].props.onChange({ type: 'set' }, new Date(2026, 0, 1, hour, minute)));
+      await press(page, ko['reminder.settings.done']);
+      await settle();
+      assert.deepEqual([...phone.schedule.values()].map(e => e.trigger), [{ type: 'daily', hour, minute }], `${hour}:${minute}`);
+      assert.ok(strings(page).includes(shown));
+    }
+    await act(async () => page.unmount());
+  } finally { (globalThis as any).__pbsPlatform = 'web'; }
+});
+
+test('switching to 새벽기도 while the reminder is on re-books it at 5:00 with the dawn words, in the same app open (no restart)', async () => {
+  onPhone();
+  try {
+    const phone = notificationPhone('granted');
+    local.set(REMINDER_KEY, JSON.stringify({ on: true, firstValueAt: 1 }));
+    const evening = await mount('settings', { ...base, language: 'ko', journey: 'psalm-nights' });
+    await settle();
+    assert.deepEqual([...phone.schedule.values()].map(e => [e.trigger, e.content.body]), [[{ type: 'daily', hour: 20, minute: 30 }, ko['reminder.body.evening']]]);
+    await act(async () => evening.unmount());
+    const picker = await mount('journeys', { ...base, language: 'ko', journey: 'psalm-nights' }, { door: 'faith', change: '1' });
+    await press(picker, ko['journey.saebyeok.name']);
+    await press(picker, i18n.t('journeys.start', { locale: 'ko', name: ko['journey.saebyeok.name'] }));
+    const picked = store();
+    assert.equal(picked.journey, 'saebyeok');
+    await act(async () => picker.unmount());
+    const today = await mount('today', picked);
+    await settle();
+    assert.deepEqual([...phone.schedule.values()].map(e => [e.trigger, e.content.body]), [[{ type: 'daily', hour: 5, minute: 0 }, ko['reminder.body.dawn']]],
+      'the phone now rings at dawn with the dawn words, not at 8:30 PM');
+    assert.equal(phone.schedule.size, 1, 'still one reminder');
+    await act(async () => today.unmount());
+  } finally { (globalThis as any).__pbsPlatform = 'web'; }
+});
+
+test('a phone that said no to notifications: the dawn page says so in Korean, offers the phone\'s Settings, and the morning is still there to read', async () => {
+  onPhone();
+  try {
+    const phone = notificationPhone('denied');
+    local.set(REMINDER_KEY, JSON.stringify({ on: false, osDenied: true, firstValueAt: 1 }));
+    const page = await mount('dailyPage', dawnPerson(new Date()), { page: 'declaration' });
+    await settle();
+    const toggle = host(page, 'Pressable').find(n => n.props.role === 'switch' && n.props['aria-label'] === ko['reminder.settings.title'])!;
+    await act(async () => toggle.props.onPress());
+    await settle();
+    assert.equal(phone.asked, 0, 'never prompts again');
+    assert.equal(phone.schedule.size, 0);
+    assert.ok(strings(page).includes(ko['reminder.settings.denied']));
+    assert.ok(strings(page).includes(ko['reminder.settings.deniedInApp']), 'the in-app path is offered');
+    assert.ok(strings(page).includes(ko['reminder.settings.openPhone']));
+    assert.ok(strings(page).includes(dawnWords()[0].prayer), 'the morning is still on the page');
+    await act(async () => page.unmount());
+  } finally { (globalThis as any).__pbsPlatform = 'web'; }
+});
+
 // "3 AM, back to sleep" and "For when you've lost someone" (her brief 21 Nov 2026), on the real screens with a fake clock.
 const hushTrack = (lang: 'en' | 'es' = 'en'): Track => ({
   file: `${lang}/psalm-night/bs-01-psalm-4-0000000${lang === 'en' ? '1' : '2'}.m4a`, kind: 'psalm-night', lang, seconds: 372, voice: 'kokoro:af_nicole',

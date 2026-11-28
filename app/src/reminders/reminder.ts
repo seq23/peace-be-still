@@ -11,14 +11,16 @@ const DAY = 86_400_000;
 /** "Not now" on our own pre-ask: we don't offer again for at least this long. */
 export const ASK_AGAIN_MS = 7 * DAY;
 /**
- * The default time follows the journey: Morning Word is a morning practice (7:00 AM); every other journey leads to
- * the night session, so its reminder is early evening (8:30 PM), before bedtime, never at it. A time the person
- * picks replaces the default.
+ * The default time follows the journey: Morning Word is a morning practice (7:00 AM); 새벽기도 is the dawn prayer
+ * (5:00 AM, the hour Korean churches meet); every other journey leads to the night session, so its reminder is early
+ * evening (8:30 PM), before bedtime, never at it. A time the person picks replaces the default.
  */
-export type ReminderKind = 'morning' | 'evening';
-export const DEFAULT_TIMES: Record<ReminderKind, { hour: number; minute: number }> = { morning: { hour: 7, minute: 0 }, evening: { hour: 20, minute: 30 } };
+export type ReminderKind = 'dawn' | 'morning' | 'evening';
+export const DEFAULT_TIMES: Record<ReminderKind, { hour: number; minute: number }> = {
+  dawn: { hour: 5, minute: 0 }, morning: { hour: 7, minute: 0 }, evening: { hour: 20, minute: 30 },
+};
 export const reminderKind = (journey?: string | null): ReminderKind =>
-  journey === 'morning-word' || journey === 'morning-word-mindset' ? 'morning' : 'evening';
+  journey === 'saebyeok' ? 'dawn' : journey === 'morning-word' || journey === 'morning-word-mindset' ? 'morning' : 'evening';
 
 export type Permission = 'granted' | 'denied' | 'undetermined';
 
@@ -55,6 +57,11 @@ export type NotificationsApi = {
 
 const isTime = (hour: unknown, minute: unknown) =>
   Number.isInteger(hour) && Number.isInteger(minute) && (hour as number) >= 0 && (hour as number) < 24 && (minute as number) >= 0 && (minute as number) < 60;
+
+const CLOCK_LOCALE: Record<string, string> = { es: 'es-MX', ko: 'ko-KR', 'zh-Hans': 'zh-CN', 'zh-Hant': 'zh-TW' };
+/** The time as the phone shows it in the app's language (8:30 PM, 8:30 p.m., 오전 5:00, 上午5:00). */
+export const formatTime = (time: { hour: number; minute: number }, locale: string) =>
+  new Intl.DateTimeFormat(CLOCK_LOCALE[locale] ?? 'en-US', { hour: 'numeric', minute: '2-digit' }).format(new Date(2026, 0, 1, time.hour, time.minute));
 
 /** Reads what was saved; anything unreadable falls back to off at the default time. */
 export function parseReminder(raw: unknown): ReminderState {

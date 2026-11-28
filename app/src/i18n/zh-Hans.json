@@ -573,5 +573,19 @@
   "madeForYou.settingsAsk": "要删除所有为你制作的时段吗？此操作无法撤销。",
   "madeForYou.settingsDone": "你的“为你定制”时段已删除。",
   "content.audioInEnglish": "音频为英语朗读。",
-  "content.storyInEnglish": "故事为英文。"
+  "content.storyInEnglish": "故事为英文。",
+  "journey.saebyeok.name": "晨祷（韩语）",
+  "journey.saebyeok.subtitle": "새벽기도 · 韩语",
+  "journey.saebyeok.purpose": "黎明前，用韩语读一节개역한글经文和一段简短的祷告，在你选的时间提醒你",
+  "dawn.title": "今天的晨祷经文",
+  "dawn.day": "晨祷 · %{total}天中的第%{day}天",
+  "dawn.dayAgain": "晨祷 · 重新开始，%{total}天中的第%{day}天",
+  "dawn.open": "打开晨祷经文",
+  "dawn.prayed": "我祷告了",
+  "dawn.share": "KakaoTalk 分享卡",
+  "dawn.reminder": "晨祷提醒",
+  "dawn.newYear": "新年特别晨祷 6 天（网站）",
+  "reminder.offer.title.dawn": "每天黎明前的一个安静提醒，会有帮助吗？",
+  "reminder.body.dawn": "今天的晨祷经文已经准备好了。",
+  "reminder.settings.deniedInApp": "没有提醒，打开应用时今天的经文也一直在这里。"
 }

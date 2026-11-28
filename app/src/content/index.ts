@@ -3,9 +3,9 @@
 import { contentLanguage } from '../i18n';
 import type { Age, JourneyId, Language } from '../model';
 import raw from './library.json';
-import type { Declaration, GriefLine, Library, Story, Telling } from './types';
+import type { DawnWord, Declaration, GriefLine, Library, Story, Telling } from './types';
 
-export type { Block, Declaration, GriefLine, Story, Telling } from './types';
+export type { Block, DawnWord, Declaration, GriefLine, Story, Telling } from './types';
 
 const library = raw as unknown as Library;
 export const topics = library.topics;
@@ -73,4 +73,25 @@ export function griefLines(language: Language): readonly GriefLine[] {
 
 export function byTopic(language: Language, topic: Topic): Declaration[] {
   return declarations(language).filter(item => item.topic === topic);
+}
+
+/** The 새벽기도 journey's mornings, in day order. */
+export function dawnWords(): readonly DawnWord[] {
+  return library.dawn;
+}
+
+const DAY_KEY = /^(\d{4})-(\d{2})-(\d{2})$/;
+
+/**
+ * Today's morning of the 새벽기도 journey. Day 1 is the calendar day she picked the journey (`start`, local
+ * YYYY-MM-DD); each calendar day after is the next (dayNumber, so a clock change never skips or repeats a day).
+ * After the last day the mornings start again from day 1 (`round` 2, 3...). A start in the future (the phone's
+ * clock moved back) or unreadable counts as today. Undefined only when no morning passed the content gate.
+ */
+export function dawnFor(start: string | undefined, now: Date, list: readonly DawnWord[] = library.dawn): { word: DawnWord; day: number; round: number } | undefined {
+  if (!list.length) return undefined;
+  const match = start ? DAY_KEY.exec(start) : null;
+  const begun = match ? dayNumber(new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]))) : NaN;
+  const since = Number.isFinite(begun) ? Math.max(0, dayNumber(now) - begun) : 0;
+  return { word: list[since % list.length], day: (since % list.length) + 1, round: Math.floor(since / list.length) + 1 };
 }

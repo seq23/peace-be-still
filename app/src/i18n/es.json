@@ -573,5 +573,19 @@
   "madeForYou.settingsAsk": "¿Borrar todas las sesiones preparadas para ti? No se puede deshacer.",
   "madeForYou.settingsDone": "Se borraron tus sesiones de Para ti.",
   "content.audioInEnglish": "El audio está en inglés.",
-  "content.storyInEnglish": "Esta historia está en inglés."
+  "content.storyInEnglish": "Esta historia está en inglés.",
+  "journey.saebyeok.name": "Oración del alba",
+  "journey.saebyeok.subtitle": "새벽기도 en coreano",
+  "journey.saebyeok.purpose": "Antes del alba, en coreano: un versículo de la 개역한글 y una oración breve, con un aviso a la hora que elijas",
+  "dawn.title": "La palabra del alba de hoy",
+  "dawn.day": "Palabra del alba · día %{day} de %{total}",
+  "dawn.dayAgain": "Palabra del alba · de nuevo, día %{day} de %{total}",
+  "dawn.open": "Abrir la palabra del alba",
+  "dawn.prayed": "Ya oré",
+  "dawn.share": "Tarjeta para KakaoTalk",
+  "dawn.reminder": "Aviso del alba",
+  "dawn.newYear": "Los 6 días de oración del alba de Año Nuevo, en nuestra web",
+  "reminder.offer.title.dawn": "¿Te ayudaría un aviso suave antes del alba?",
+  "reminder.body.dawn": "La palabra del alba de hoy está lista cuando quieras.",
+  "reminder.settings.deniedInApp": "Sin el aviso, las palabras de hoy siguen aquí cada vez que abras la app."
 }

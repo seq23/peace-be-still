@@ -2,7 +2,7 @@ import { isCjk, type Language } from '../../i18n';
 import React, { useState } from 'react';
 import { TextInput, View } from 'react-native';
 import { formatReference, parseReference } from '../../bible/core';
-import { byTopic, dailyDeclaration, pastStories, shelf, storyFor, tellingFor, topics as faithTopics, type Story } from '../../content';
+import { byTopic, dailyDeclaration, dawnFor, dawnWords, pastStories, shelf, storyFor, tellingFor, topics as faithTopics, type Story } from '../../content';
 import type { Feature } from '../../gates';
 import { usePurchases, useCanUse } from '../../purchases/provider';
 import { useSettings, useT } from '../../settings';
@@ -12,6 +12,7 @@ import { ShareCard } from '../../share/ShareCard';
 import { dayKey, type Settings } from '../../model';
 import type { Key } from '../../i18n';
 import { DeclarationVerse } from './DeclarationVerse';
+import { DawnMorning, type Dawn } from './Dawn';
 import { StoryText } from './StoryText';
 import { StoryArt } from '../../story/StoryArt';
 import { artIds } from '../../story/art';
@@ -61,7 +62,13 @@ export function useDeclaration(now: Date) {
   return declarationFor(settings, t.locale, now, topic);
 }
 
-export function declarationFor(settings: Pick<Settings, 'door'>, locale: Language, now: Date, topic?: TopicId) {
+/** The day's word: a key or written text, its verse reference, the paid topic, and inside 새벽기도 the morning of the 40. */
+export type Word = { key?: Key; text?: string; passage?: string; topic?: TopicId; dawn?: Dawn };
+
+export function declarationFor(settings: Pick<Settings, 'door' | 'journey' | 'dawnStart'>, locale: Language, now: Date, topic?: TopicId): Word {
+  // 새벽기도 replaces the day's declaration with its own morning (no topics: the 40 run in order).
+  const dawn = settings.journey === 'saebyeok' ? dawnFor(settings.dawnStart, now) : undefined;
+  if (dawn) return { text: dawn.word.title, passage: dawn.word.ref, dawn: { ...dawn, total: dawnWords().length } };
   if (settings.door === 'mindset') {
     const chosen = topic ? mindsetDeclarations.filter(item => item.topic === topic) : [];
     const list = chosen.length ? chosen : mindsetDeclarations;
@@ -101,6 +108,8 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
   const [selectedPlan, setPlan] = useState<string | undefined>(page === 'plans' ? id : undefined);
   const plan = plans.find(item => item.id === selectedPlan && (!item.paid || canUse('longPlans')));
   const update = (change: (value: typeof state.value) => typeof state.value) => void daily.update(change);
+  /** The day's declaration said, or the dawn prayer prayed: today is done, and it counts as first value. */
+  const said = () => { update(value => ({ ...value, declarations: [...new Set([...value.declarations, today])] })); void markFirstValue(); };
   const link = (passage: string, label?: string) => {
     const ref = parseReference(passage);
     return ref && <TextLink onPress={() => read(ref.book, ref.chapter, ref.verse)}>{label ?? formatReference(ref, t.locale)}</TextLink>;
@@ -122,21 +131,22 @@ export function Daily({ page, back, read, upgrade, open, id, now = new Date() }:
 
   return <Screen>
     <TextLink onPress={back}>{t('common.back')}</TextLink>
-    <Title>{page === 'story' && story ? story.title : page === 'plans' && plan ? t(plan.title) : t(pages[page].title)}</Title>
+    <Title>{page === 'story' && story ? story.title : page === 'plans' && plan ? t(plan.title) : page === 'declaration' && word.dawn ? t('dawn.title') : t(pages[page].title)}</Title>
     {(page === 'story' || page === 'stories') && isCjk(t.locale) && <Body>{t('content.storyInEnglish')}</Body>}
     {state.failed && <Body>{t('reader.storageError')}</Body>}
     {state.failed && !state.ready && <TextLink onPress={() => void state.retry()}>{t('reader.retry')}</TextLink>}
-    {page === 'declaration' && <Card>
+    {page === 'declaration' && word.dawn && <DawnMorning dawn={word.dawn} done={state.value.declarations.includes(today)} ready={state.ready} prayed={said} />}
+    {page === 'declaration' && !word.dawn && <Card>
       <Body muted={false} size={21} style={{ fontFamily: fonts.serif }}>{line}</Body>
       {word.passage && <>
         <DeclarationVerse passage={word.passage} />
         <Body>{t('daily.prayer')}</Body>
       </>}
-      {state.value.declarations.includes(today) ? <Label>{t('daily.done')}</Label> : state.ready && <PillButton onPress={() => { update(value => ({ ...value, declarations: [...new Set([...value.declarations, today])] })); void markFirstValue(); }}>{t('daily.said')}</PillButton>}
+      {state.value.declarations.includes(today) ? <Label>{t('daily.done')}</Label> : state.ready && <PillButton onPress={said}>{t('daily.said')}</PillButton>}
       {canUse('shareCards') && !share && <TextLink onPress={() => setShare(true)}>{t('share.title')}</TextLink>}
     </Card>}
     {page === 'declaration' && share && <ShareCard text={line} credit={t('daily.title.declaration')} close={() => setShare(false)} />}
-    {page === 'declaration' && (canUse('declarationTopics') ? <View style={{ gap: 10 }}>
+    {page === 'declaration' && !word.dawn && (canUse('declarationTopics') ? <View style={{ gap: 10 }}>
       <Label>{t('declaration.topics')}</Label>
       <Body size={14}>{t('declaration.topicsHint')}</Body>
       <View role="radiogroup" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>

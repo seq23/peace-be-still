@@ -40,14 +40,28 @@ export function noTracking(text: unknown): TextStyle | undefined {
   return hasCjk(text) ? { letterSpacing: 0 } : undefined;
 }
 
+/**
+ * Korean is written with spaces between words, and a reader expects a line to break only there (CSS keep-all;
+ * iOS "hangul-word"), never inside a word. Only for Hangul with no Chinese characters: Chinese has no spaces, so
+ * keep-all would never break it. The words are read from the paragraph's own text (nested runs inherit it).
+ * Android's Text has no such setting, so there a line may still break inside a word.
+ */
+export function hangulWords(children: React.ReactNode): { lineBreakStrategyIOS?: 'hangul-word'; style?: TextStyle } {
+  const text = React.Children.toArray(children).filter(child => typeof child === 'string' || typeof child === 'number').join('');
+  return /\p{Script=Hangul}/u.test(text) && !/\p{Script=Han}/u.test(text)
+    ? { lineBreakStrategyIOS: 'hangul-word', style: { wordBreak: 'keep-all' } as TextStyle } : {};
+}
+
 export function Title({ children }: { children: React.ReactNode }) {
   const c = usePalette();
-  return <Text accessibilityRole="header" style={[styles.title, { color: c.ink }]}>{children}</Text>;
+  const words = hangulWords(children);
+  return <Text accessibilityRole="header" lineBreakStrategyIOS={words.lineBreakStrategyIOS} style={[styles.title, { color: c.ink }, words.style]}>{children}</Text>;
 }
 
 export function Body({ children, muted = true, size = 16, style }: { children: React.ReactNode; muted?: boolean; size?: number; style?: StyleProp<TextStyle> }) {
   const c = usePalette();
-  return <Text style={[{ fontFamily: fonts.body, fontSize: size, lineHeight: Math.round(size * 1.45), color: muted ? c.muted : c.ink }, style]}>{children}</Text>;
+  const words = hangulWords(children);
+  return <Text lineBreakStrategyIOS={words.lineBreakStrategyIOS} style={[{ fontFamily: fonts.body, fontSize: size, lineHeight: Math.round(size * 1.45), color: muted ? c.muted : c.ink }, words.style, style]}>{children}</Text>;
 }
 
 export function Card({ children, onPress, label, selected, expanded, role, style }: { children: React.ReactNode; onPress?: () => void; label?: string; selected?: boolean; expanded?: boolean; role?: 'button' | 'radio' | 'link'; style?: StyleProp<ViewStyle> }) {

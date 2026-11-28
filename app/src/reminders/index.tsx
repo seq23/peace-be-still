@@ -8,7 +8,7 @@ import { Body, Card, Label, PillButton, SwitchRow, TextLink, styles, usePalette 
 import { fonts } from '../theme/tokens';
 import { TimePicker, type Time } from './TimePicker';
 import {
-  REMINDER_KEY, initialReminder, reminderKind, timeOf, markFirstValue as withFirstValue, notNow as withNotNow, parseReminder,
+  REMINDER_KEY, formatTime, initialReminder, reminderKind, timeOf, markFirstValue as withFirstValue, notNow as withNotNow, parseReminder,
   shouldOffer, sync, withTime, turnOff, turnOn, type NotificationsApi, type Permission, type ReminderContent, type ReminderState,
 } from './reminder';
 
@@ -70,7 +70,7 @@ function load(): Promise<void> {
   return loaded;
 }
 /** Tests start each case from a clean phone. */
-export function resetReminderForTests() { current = initialReminder; loaded = null; synced = false; previewPermission = 'undetermined'; }
+export function resetReminderForTests() { current = initialReminder; loaded = null; syncedFor = null; previewPermission = 'undetermined'; }
 
 /** A finished session: a night played to the end, or the day's declaration said. Safe to call from anywhere. */
 export async function markFirstValue(now = Date.now()) {
@@ -79,10 +79,12 @@ export async function markFirstValue(now = Date.now()) {
 }
 
 const subscribe = (listener: () => void) => { listeners.add(listener); return () => { listeners.delete(listener); }; };
-let synced = false;
+/** The kind and language the phone's schedule was last made to match in this app open; null before the first. */
+let syncedFor: string | null = null;
 
 /** Each journey kind's own words, written out so every string is visibly used. */
 const WORDS = {
+  dawn: { offer: 'reminder.offer.title.dawn', body: 'reminder.body.dawn' },
   morning: { offer: 'reminder.offer.title.morning', body: 'reminder.body.morning' },
   evening: { offer: 'reminder.offer.title.evening', body: 'reminder.body.evening' },
 } as const;
@@ -93,20 +95,21 @@ export function useReminder() {
   const state = useSyncExternalStore(subscribe, () => current, () => current);
   const [ready, setReady] = useState(false);
   const api = reminderApi();
-  // Morning Word gets a morning reminder; the other journeys an evening one, each in its own words.
+  // 새벽기도 gets a dawn reminder, Morning Word a morning one, the other journeys an evening one, each in its own words.
   const kind = reminderKind(useSettings().settings.journey);
   const content: ReminderContent = { title: t('reminder.title'), body: t(WORDS[kind].body), kind };
   const time = timeOf(state, kind);
   useEffect(() => {
     let live = true;
     void load().then(async () => {
-      // Once per app open: the phone's schedule is made to match (clears anything stale, books the one reminder).
-      if (api && !synced) { synced = true; const next = await sync(api, current, content); if (next !== current) publish(next); }
+      // Once per app open, and again when the journey's kind or language changes (Psalm Nights' 8:30 PM to
+      // 새벽기도's 5:00): the phone's schedule is made to match (clears anything stale, books the one reminder).
+      const key = `${kind}|${t.locale}`;
+      if (api && syncedFor !== key) { syncedFor = key; const next = await sync(api, current, content); if (next !== current) publish(next); }
       if (live) setReady(true);
     });
     return () => { live = false; };
-    // The language can change the text; the next open books it in the new language.
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [kind, t.locale]); // eslint-disable-line react-hooks/exhaustive-deps
   const run = useCallback(async (change: (s: ReminderState) => Promise<ReminderState> | ReminderState) => publish(await change(current)), []);
   return {
     state, time, kind, ready, available: !!api,
@@ -121,9 +124,7 @@ export function useReminder() {
   };
 }
 
-/** The time as the phone shows it in the app's language (8:30 PM, 20:30). */
-export const formatTime = (time: Time, locale: string) =>
-  new Intl.DateTimeFormat(locale === 'es' ? 'es-MX' : 'en-US', { hour: 'numeric', minute: '2-digit' }).format(new Date(2026, 0, 1, time.hour, time.minute));
+export { formatTime } from './reminder';
 
 /** Our own calm pre-ask, shown after first value. "Turn on" leads to the phone's prompt; "Not now" waits 7 days. */
 export function ReminderOffer() {
@@ -161,6 +162,7 @@ export function ReminderSettings() {
       </Card>}
       {!state.on && state.osDenied && <Card>
         <Body>{t('reminder.settings.denied')}</Body>
+        <Body>{t('reminder.settings.deniedInApp')}</Body>
         <TextLink onPress={() => void Linking.openSettings()}>{t('reminder.settings.openPhone')}</TextLink>
       </Card>}
     </View>
