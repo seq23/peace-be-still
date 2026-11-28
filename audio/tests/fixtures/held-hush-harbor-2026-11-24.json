@@ -1,0 +1,229 @@
+{
+ "about": "Real transcripts (faster-whisper large-v3-turbo, the one judge) of the Hush Harbor clone sentences that held 19 stories on 24 Nov 2026, from the takes on the Drive work shelf, heard 27 Nov 2026. 'expect' is the r2 verdict: a spelling of the same sound passes; a different sound still fails.",
+ "sentences": [
+  {
+   "story": "core-004-jonah",
+   "turn": 4,
+   "sentence": 2,
+   "heard": "They rode hard to get back to land and the storm only got worse",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-013-job",
+   "turn": 0,
+   "sentence": 2,
+   "heard": "Job lived in the land of us.",
+   "expect": "bad",
+   "why": "a two-letter name the judge was never told (Uz heard \"us\")"
+  },
+  {
+   "story": "core-020-widow-zarephath",
+   "turn": 10,
+   "sentence": 13,
+   "heard": "This story tells what God did for one widow, one barrel, and one cruise.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-021-adam-eve",
+   "turn": 2,
+   "sentence": 1,
+   "heard": "Now the serpent was more subtle than any beast of the field which the Lord God had made made.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-024-through-the-roof",
+   "turn": 0,
+   "sentence": 4,
+   "heard": "And they come unto him, bringing one sick of the palsy, which was born of four.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-027-widows-oil",
+   "turn": 5,
+   "sentence": 0,
+   "heard": "Go, borrow the vessels abroad of all thy neighbors, even empty vessels, borrow not a few.",
+   "expect": "bad",
+   "why": "thee heard as the: a different sound"
+  },
+  {
+   "story": "core-033-gideon",
+   "turn": 0,
+   "sentence": 9,
+   "heard": "Somebody say, Mighty Man of Valor.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-033-gideon",
+   "turn": 2,
+   "sentence": 0,
+   "heard": "Mighty Men of Valor.",
+   "expect": "bad",
+   "why": "man heard as men: a different vowel"
+  },
+  {
+   "story": "core-033-gideon",
+   "turn": 5,
+   "sentence": 0,
+   "heard": "O my Lord, if the Lord be with us, why then is all this befallen us?",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-033-gideon",
+   "turn": 7,
+   "sentence": 0,
+   "heard": "O my Lord, wherewith shall I save Israel?",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-034-jairus",
+   "turn": 8,
+   "sentence": 13,
+   "heard": "Talitha Kumi",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-039-bartimaeus",
+   "turn": 8,
+   "sentence": 4,
+   "heard": "And they called the blind man, saying unto him,",
+   "expect": "bad",
+   "why": "call heard as called: a word added"
+  },
+  {
+   "story": "core-043-jericho",
+   "turn": 0,
+   "sentence": 3,
+   "heard": "Now Jericho was straightly shut up because of the children of Israel. None went out and none came in.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-046-still-small-voice",
+   "turn": 4,
+   "sentence": 11,
+   "heard": "And he looked, and behold, there was a cake baking on the coals, and a cruise of water at his head.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-046-still-small-voice",
+   "turn": 10,
+   "sentence": 10,
+   "heard": "And behold, there came a voice unto him, and said, What doest thou hear, Elijah?",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-049-samson",
+   "turn": 6,
+   "sentence": 1,
+   "heard": "1,100 pieces of silver from every one of those lords.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-050-wise-men",
+   "turn": 8,
+   "sentence": 4,
+   "heard": "Then Herod, when he had privily called the wise men, inquired of them diligently what time the star appeared.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-051-cana",
+   "turn": 8,
+   "sentence": 10,
+   "heard": "And they bear it.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-052-balaam",
+   "turn": 9,
+   "sentence": 1,
+   "heard": "Was I ever want to do so unto thee?",
+   "expect": "bad",
+   "why": "wont heard as want: a different vowel"
+  },
+  {
+   "story": "core-054-rachel-leah",
+   "turn": 1,
+   "sentence": 0,
+   "heard": "Because thou art my brother, shouldst thou therefore serve me for naught?",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-054-rachel-leah",
+   "turn": 2,
+   "sentence": 1,
+   "heard": "Leah was tender-eyed, but Rachel was beautiful and well-favored.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "core-060-emmaus",
+   "turn": 0,
+   "sentence": 7,
+   "heard": "but their eyes were holding that they should not know him.",
+   "expect": "bad",
+   "why": "holden heard as holding: a different ending"
+  },
+  {
+   "story": "fav-13-sweet-chariot",
+   "turn": 8,
+   "sentence": 1,
+   "heard": "And Elijah said unto him, Tarry, I pray thee, hear, for the Lord hath sent me to Jordan.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "fav-13-sweet-chariot",
+   "turn": 10,
+   "sentence": 0,
+   "heard": "And they, too, went on.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "fav-17-mephibosheth",
+   "turn": 9,
+   "sentence": 0,
+   "heard": "Behold, he is in the house of Meshir, the son of Ammiel in Lodibar.",
+   "expect": "bad",
+   "why": "Machir heard as Meshir: the clone said the name wrong"
+  },
+  {
+   "story": "fav-17-mephibosheth",
+   "turn": 10,
+   "sentence": 0,
+   "heard": "La Odi Baar.",
+   "expect": "bad",
+   "why": "Lo-debar heard as La Odi Baar: the clone said the name wrong"
+  },
+  {
+   "story": "fav-17-mephibosheth",
+   "turn": 10,
+   "sentence": 6,
+   "heard": "Then King David sent and fetched him out of the house of Machir, the son of Ammiel, from Lodibar.",
+   "expect": "ok",
+   "why": "the same words in another spelling"
+  },
+  {
+   "story": "fav-17-mephibosheth",
+   "turn": 17,
+   "sentence": 0,
+   "heard": "I have given unto thy master's son all that pertain to Saul and to all his house.",
+   "expect": "bad",
+   "why": "pertained heard as pertain: an ending dropped"
+  }
+ ]
+}

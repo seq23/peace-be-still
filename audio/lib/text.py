@@ -56,8 +56,9 @@ _PLAIN = {"á": "a", "é": "e", "ó": "o", "ú": "u", "Á": "A", "É": "E", "Ó"
 _CAPS = re.compile(r"\b([A-ZÁÉÍÓÚÑ]{2,})\b")
 
 
-def speech_text(text: str, lang: str, pron: dict) -> str:
-    """The words Kokoro is given for one stored verse (see the module note)."""
+def speech_text(text: str, lang: str, pron: dict, engine: str = "engine") -> str:
+    """The words the voice is given for one stored verse (see the module note). `engine` picks the respellings:
+    "engine" for Kokoro (espeak-ng reads them), "clone" for Chatterbox (it reads English spelling)."""
     # The KJV's paragraph mark is a mark on the page, never a word: the engine said "paragraph" aloud
     # (23 Nov 2026: Genesis 1 as published says "...the first day, paragraph, and God said").
     s = text.replace("¶", " ").replace("[", "").replace("]", "").replace("(", "").replace(")", "")
@@ -67,7 +68,7 @@ def speech_text(text: str, lang: str, pron: dict) -> str:
         # RV1909's old one-letter words (á, é, ó, ú) are said plainly: the engine reads a lone "á"
         # as "a acentuada" (Salmo 23, 18 Nov 2026).
         s = re.sub(r"(?<!\w)([áéóúÁÉÓÚ])(?!\w)", lambda m: _PLAIN[m.group(1)], s)
-    for word, said in (pron.get(lang, {}).get("engine") or {}).items():
+    for word, said in (pron.get(lang, {}).get(engine) or {}).items():
         s = re.sub(rf"\b{re.escape(word)}\b", said, s)
     return re.sub(r"\s+", " ", s).strip()
 
@@ -113,6 +114,10 @@ def number_words(n: int, lang: str) -> str:
     return str(n)
 
 
+_TEENS_TO_99 = {number_words(n, "en"): n for n in range(11, 100) if n % 10}
+_HUNDREDS_EN = re.compile(r"\b(" + "|".join(sorted(_TEENS_TO_99, key=len, reverse=True)) + r") hundred\b")
+
+
 def score_words(text: str, lang: str) -> list[str]:
     """Lower-case words without accents or punctuation; digits as words. Used on the script AND
     the transcript, so both are read the same way (RV1909's old "á" and today's "a" match)."""
@@ -123,19 +128,24 @@ def score_words(text: str, lang: str) -> list[str]:
     s = re.sub(r"(\d),(\d)", r"\1\2", s)
     s = re.sub(r"\d+", lambda m: " " + number_words(int(m.group()), lang) + " ", s)
     s = re.sub(r"[^a-z0-9 ]+", " ", s.replace("-", " "))
+    if lang == "en":
+        # "Eleven hundred" is how the KJV says 1,100; a transcript writes the digits, which read as "one
+        # thousand one hundred" (Samson, 24 Nov 2026). Both are said as the same number, so both score alike.
+        s = _HUNDREDS_EN.sub(lambda m: number_words(_TEENS_TO_99[m.group(1)] * 100, lang), s)
     s = re.sub(r"\bfor ever\b", "forever", s)
     s = re.sub(r"\bto (day|morrow)\b", r"to\1", s)   # KJV "to day" / "to morrow" are heard as one word
     s = re.sub(r"\bcheek bone\b", "cheekbone", s)
     return [SAME_WORD.get(w, w) for w in s.split()]
 
 
-_WORD = re.compile(r"[^\W\d_]+")
+# A word, or a name joined by hyphens ("Lo-debar", "Beth-lehem"): one name, so the judge is told it whole.
+_WORD = re.compile(r"[^\W\d_]+(?:-[^\W\d_]+)*")
 
 
 def names(text: str, lang: str) -> dict:
     """{score word: the word as written} for the script's names, in order: words written with a capital
     inside a sentence (never the first word after . ? ! or the start) that the script never writes in
-    lower case, three letters or more. The judge is told them, and may hear them a letter off. Pure."""
+    lower case, two letters or more ("Uz": a two-letter name untold was written "us", Job 1:1, 24 Nov 2026). The judge is told them, and may hear them a letter off. Pure."""
     caps, low = {}, set()
     for m in _WORD.finditer(text):
         w = m.group()
@@ -143,7 +153,7 @@ def names(text: str, lang: str) -> dict:
         starts = not before or before[-1] in ".?!¶" or before.endswith(("[", "(")) and before[:-1].rstrip()[-1:] in ".?!"
         if w.islower():
             low.update(score_words(w, lang))
-        elif w[0].isupper() and not w.isupper() and not starts and len(w) >= 3:
+        elif w[0].isupper() and not w.isupper() and not starts and len(w) >= 2:
             key = "".join(score_words(w, lang))
             caps.setdefault(key, w)
     return {k: v for k, v in caps.items() if k not in low}
@@ -158,3 +168,30 @@ SAME_WORD = {"haste": "hast", "shew": "show", "shewed": "showed", "shewn": "show
              # British spellings in the story scripts that a transcript writes the American way
              "honoured": "honored", "honour": "honor", "armour": "armor", "colour": "color", "neighbour": "neighbor",
              "labour": "labor", "favour": "favor", "saviour": "savior", "behaviour": "behavior"}
+
+
+# The British "-our" words of the KJV and the story scripts, in every form ("valour", "neighbours",
+# "well favoured"): a transcript writes them the American way (Hush Harbor, 24 Nov 2026: Gideon's "mighty man
+# of valour" and the widow's "neighbours" were held for the spelling alone).
+_OUR = ("valour", "neighbour", "favour", "honour", "labour", "saviour", "colour", "armour", "behaviour", "harbour",
+        "savour", "odour", "succour", "rumour", "vapour", "clamour", "endeavour", "splendour", "vigour", "rigour",
+        "humour", "parlour", "ardour", "fervour", "candour", "tumour", "dishonour", "flavour")
+for _w in _OUR:
+    for _end in ("", "s", "ed", "ing", "able", "ably", "eth", "est", "er", "ers", "ite", "ites", "hood", "ly"):
+        SAME_WORD.setdefault(_w + _end, _w[:-2] + "r" + _end)
+
+# The same word in another spelling: the KJV's (or British) form, and the form a transcript writes for the
+# same sound. Applied to the script AND the transcript, so a missing or a different word still never matches.
+# Only pairs that are said alike: words that sound different ("thee"/"the", "man"/"men", "call"/"called",
+# "wont"/"want", "holden"/"holding", "baken"/"baking") are not here, and stay misses (test_fill
+# KjvSpellings). Each pair below was heard written the second way in a held file (24 Nov 2026 reasons).
+SAME_WORD.update({
+    "enquire": "inquire", "enquired": "inquired", "enquireth": "inquireth", "enquiry": "inquiry", "enquiring": "inquiring",
+    "nought": "naught", "subtil": "subtle", "subtilty": "subtlety", "subtilly": "subtly",
+    "shouldest": "shouldst", "wouldest": "wouldst", "couldest": "couldst",
+    # Homophones the KJV spells the old way: the voice says them exactly as the modern word.
+    "bare": "bear", "borne": "born", "cruse": "cruise", "straitly": "straightly", "strait": "straight",
+    "o": "oh", "hear": "here", "rowed": "rode", "too": "two",
+    # A transliterated name the transcript spells another way (Mark 5:41)
+    "cumi": "kumi",
+})

@@ -311,8 +311,44 @@ def segments_of(item: dict, pron: dict, sentences: bool = False) -> list[dict]:
         parts = [x for x in _SENTENCE_END.split(said) if x.strip()] if sentences else [said]
         for k, part in enumerate(parts):
             last = k == len(parts) - 1
-            segs.append({"text": part, "gap": g if last else SENTENCE_GAP, **({"mark": True} if last and n in marks else {})})
+            segs.append({"text": part, "gap": g if last else SENTENCE_GAP, "verse": n,
+                         **({"mark": True} if last and n in marks else {})})
     return [s for s in segs if s["text"]]
+
+
+PART_S = 90.0   # the judge hears a long file in parts of about this long, cut between whole verses (qa.transcribe)
+
+
+def parts_of(item: dict, segs: list[dict], ends: list, lead: float = 0.6) -> list | None:
+    """[(start s, end s, stored words)] for the judge (qa.transcribe): whole verses in order (the heading with
+    the first), a part closed before the next verse would take it past PART_S or past HINT_NAMES names, each
+    cut halfway through the quiet after its last verse (so the encoder's few milliseconds never move a word
+    across a cut); the last runs to the end. None when the renderer's timings do not fit the segments: the
+    judge then hears the file whole, as before. Pure."""
+    import qa
+    if not segs or len(ends or []) != len(segs):
+        return None
+    verses: list[list] = []   # [verse, speech start, speech end, quiet after]
+    start = lead
+    for sg, e in zip(segs, ends):
+        v = sg.get("verse")
+        if verses and verses[-1][0] == v:
+            verses[-1][2:] = [float(e), sg["gap"]]
+        else:
+            verses.append([v, start, float(e), sg["gap"]])
+        start = float(e) + sg["gap"]
+
+    def words(vs):
+        return " ".join(item["heading"] if v is None else item["verses"][v] for v in vs)
+    out, cur, cut = [], [], 0.0
+    for k, (v, a, b, gap) in enumerate(verses):
+        if cur and (b - cut > PART_S or len(T.names(words(cur + [v]), item["lang"])) > qa.HINT_NAMES):
+            prev_end, prev_gap = verses[k - 1][2], verses[k - 1][3]
+            out.append((cut, prev_end + prev_gap / 2, words(cur)))
+            cur, cut = [], prev_end + prev_gap / 2
+        cur.append(v)
+    out.append((cut, verses[-1][2] + 3600.0, words(cur)))
+    return out
 
 
 def said_key(item: dict, pron: dict) -> str:
@@ -356,7 +392,7 @@ MAX_TRIES = 3                      # runs (crashes included) before a file is he
 
 def judge_now() -> str:
     import qa
-    return qa.JUDGE_MODEL
+    return qa.JUDGE
 
 
 def latest(rows: list[dict]) -> dict:
@@ -937,7 +973,8 @@ def make_one(item: dict, pron: dict, work: Path, route: str = ROUTES[0]) -> dict
             attempts += 1
             rendered = render(item, pron, wav, speed, sentences=route == "sentences")
             mastered = master(wav, out, item["level"])
-            result = qa.check(out, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []), strict_words=is_scripture_file(item))
+            result = qa.check(out, script, item["lang"], item["level"], quiet=sum(item.get("gaps") or []), strict_words=is_scripture_file(item),
+                              parts=parts_of(item, rendered.get("segs") or [], rendered.get("ends")))
             if item.get("min_seconds") and result["seconds"] < item["min_seconds"]:
                 result = {**result, "pass": False, "problems": [*result["problems"],
                           f"length {result['seconds']:.0f}s voiced is under the {item['min_seconds']}s floor"]}

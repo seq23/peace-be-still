@@ -874,7 +874,7 @@ class Mastering(unittest.TestCase):
                              "lufs": -17.0, "true_peak": -1.5, "clipped": 0, "asr": "base", "seconds": 60.0}
         with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as home, \
                 mock.patch.object(fill, "HOME", Path(home)), \
-                mock.patch.object(fill, "render", side_effect=lambda *a, **k: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
+                mock.patch.object(fill, "render", side_effect=lambda *a, **k: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"), {})[2]), \
                 mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg(calls)), \
                 mock.patch.object(qa, "loudness", side_effect=[x for l in louds for x in (self.WAV, *l)]), \
                 mock.patch.object(qa, "check", side_effect=[res(p) for p in checks]):
@@ -973,7 +973,7 @@ class Mastering(unittest.TestCase):
         res = {"pass": True, "problems": [], "accuracy": 0.98, "wpm": 114, "words": 700, "lufs": -22.0,
                "true_peak": -3.0, "clipped": 0, "asr": "base", "seconds": seconds}
         with tempfile.TemporaryDirectory() as d, \
-                mock.patch.object(fill, "render", side_effect=lambda *a, **k: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"))), \
+                mock.patch.object(fill, "render", side_effect=lambda *a, **k: (renders.append(a[3]), Path(a[2]).write_bytes(b"w"), {})[2]), \
                 mock.patch.object(fill.subprocess, "run", side_effect=self.fake_ffmpeg([])), \
                 mock.patch.object(qa, "loudness", return_value={"lufs": -22.0, "true_peak": -3.0}), \
                 mock.patch.object(qa, "check", return_value=res):

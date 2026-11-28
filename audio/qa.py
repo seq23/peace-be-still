@@ -88,6 +88,10 @@ _MODELS: dict = {}
 # large-v3-turbo told the psalm's names 0.973; Psalm 121 small cut "for evermore" (A07), turbo 0.992.
 # Measured on the Mac CPU: about 45 s for a 3-minute chapter, 1.9 GB peak.
 JUDGE_MODEL = "large-v3-turbo"
+# The judge's name in a manifest row (`judge`): the model AND its scoring rules. A held file is tried again by
+# itself whenever this changes (fill.is_held). r2 (27 Nov 2026): every name of a long chapter told to the judge
+# by its own part, two-letter and hyphenated names, the KJV's same-sounding spellings. The bars are unchanged.
+JUDGE = f"{JUDGE_MODEL} r2"
 NAME_LIKE = 0.8        # a name of THIS script heard within one letter or so (tiras/tiraz, azor/azur) is the name
 HINT_NAMES = 60        # names told to the judge (faster-whisper hotwords: a prompt, so it is kept short)
 
@@ -162,11 +166,21 @@ def hint(script: str, lang: str) -> str:
     return " ".join(list(T.names(script, lang).values())[:HINT_NAMES])
 
 
-def transcribe(path: Path, lang: str, hint_words: str = "") -> str:
-    """The judge hears the speech only (speech_only), told the script's names."""
-    segs, _ = judge_model().transcribe(speech_only(decode(path, 16000)), language=lang, beam_size=5,
-                                       condition_on_previous_text=False, hotwords=hint_words or None)
-    return " ".join(s.text.strip() for s in segs)
+def transcribe(path: Path, lang: str, hint_words: str = "", parts: list | None = None) -> str:
+    """The judge hears the speech only (speech_only), told the script's names. With `parts` (fill.parts_of:
+    [(start s, end s, the part's stored words)], cut in the quiet between whole verses), each part is heard
+    on its own, told ITS names, and the transcripts are joined in order: a name-list chapter (1 Chronicles 1
+    has over 200 names) has far more names than the HINT_NAMES a single hint can carry. Pure of the bars:
+    the joined transcript is scored against the whole script exactly as before."""
+    audio = decode(path, 16000)
+    pieces = [(audio, hint_words)] if not parts else [
+        (audio[int(a * 16000):int(b * 16000)], hint(words, lang)) for a, b, words in parts]
+    out = []
+    for x, h in pieces:
+        segs, _ = judge_model().transcribe(speech_only(x), language=lang, beam_size=5,
+                                           condition_on_previous_text=False, hotwords=h or None)
+        out += [s.text.strip() for s in segs]
+    return " ".join(out)
 
 
 def aligned(script: str, transcript: str, lang: str) -> tuple[list[str], list[str], list[int | None], int]:
@@ -184,6 +198,11 @@ def aligned(script: str, transcript: str, lang: str) -> tuple[list[str], list[st
             heard[a:b] = range(c, d)
             used += d - c
         elif op == "replace" and "".join(ref[a:b]) == "".join(hyp[c:d]):
+            heard[a:b] = [d - 1] * (b - a)
+            used += d - c
+        elif (op == "replace" and b - a > 1 and "".join(ref[a:b]) in names
+              and SequenceMatcher(None, "".join(ref[a:b]), "".join(hyp[c:d])).ratio() >= NAME_LIKE):
+            # a hyphenated name of THIS script ("Lo-debar" heard "Lodibar"): the one-name rule, the name whole
             heard[a:b] = [d - 1] * (b - a)
             used += d - c
         elif op == "replace" and b - a == d - c:
@@ -247,11 +266,12 @@ def judge(*, script: str, transcript: str, lang: str, level: str, seconds: float
             "lufs": lufs, "true_peak": true_peak, "clipped": clipped}
 
 
-def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0, strict_words: bool = False) -> dict:
+def check(path: Path, script: str, lang: str, level: str, quiet: float = 0.0, strict_words: bool = False,
+          parts: list | None = None) -> dict:
     seconds = ffprobe_seconds(path)
     loud = loudness(path)
     clipped = clipped_samples(path)
-    transcript = transcribe(path, lang, hint(script, lang))
+    transcript = transcribe(path, lang, hint(script, lang), parts)
     out = judge(script=script, transcript=transcript, lang=lang, level=level, seconds=seconds,
                 lufs=loud["lufs"], true_peak=loud["true_peak"], clipped=clipped, quiet=quiet, strict_words=strict_words)
     out["asr"] = JUDGE_MODEL

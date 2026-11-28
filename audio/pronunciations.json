@@ -1,5 +1,5 @@
 {
-  "about": "QUALITY.md A03/A04. 'guide' is the respelling a person checks against (from QUALITY.md). 'engine' is what Kokoro is actually given (espeak-ng reads it as the guide says; checked with espeak-ng --ipa on 18 Nov 2026). LORD and other ALL-CAPS words are said as ordinary words in code (lib/text.py speech_text). A name the engine already says right needs no engine entry.",
+  "about": "QUALITY.md A03/A04. 'guide' is the respelling a person checks against (from QUALITY.md). 'engine' is what Kokoro is actually given (espeak-ng reads it as the guide says; checked with espeak-ng --ipa on 18 Nov 2026). LORD and other ALL-CAPS words are said as ordinary words in code (lib/text.py speech_text). A name the engine already says right needs no engine entry. 'clone' is what Chatterbox (the Hush Harbor clone lane) is given: it reads English spelling, so its respellings are plain letters.",
   "en": {
     "guide": {
       "Melchizedek": "mel-KIZ-uh-dek", "Nebuchadnezzar": "neb-yoo-kud-NEZ-er", "Habakkuk": "huh-BAK-uk",
@@ -20,8 +20,12 @@
       "Ahasuerus": "Uh-hazyoo-eerus", "Bathsheba": "Bath-sheeba", "Job": "Jobe", "Rahab": "Rayhab", "Hagar": "Haygar",
       "Sisera": "Sissera", "Jael": "Jayul", "Uriah": "Yoo-rye-uh", "Gethsemane": "Geth-semmany",
       "Golgotha": "Golgutha", "Zacchaeus": "Zack-keyus", "Onesimus": "Oh-nessimus", "Tychicus": "Tickicus",
-      "Selah": "Seelah", "Isaiah": "Eye-zayuh"
-    }
+      "Selah": "Seelah", "Isaiah": "Eye-zayuh",
+      "Anah": "Aina", "Zibeon": "Zibbeeun", "Elon": "Eelon", "Zepho": "Zeefoe", "Gatam": "Gaytam", "Jaalam": "Jaylum",
+      "Onam": "Ohnum", "Aran": "Eighran", "Beor": "Beeore", "Husham": "Hooshum", "Pau": "Payoo", "Elah": "Eeluh",
+      "Pinon": "Pie-non", "Kenaz": "Keenaz", "Iram": "Eyeram", "Seir": "Seeer", "Dishon": "Dyeshon", "Dishan": "Dyeshan"
+    },
+    "clone": {"Machir": "May-keer", "Lo-debar": "Lo-deebar"}
   },
   "es": {
     "guide": {"Jehová": "je-o-VÁ", "Jesús": "je-SÚS", "Moisés": "moi-SÉS", "Sión": "SIÓN", "Getsemaní": "get-se-ma-NÍ",

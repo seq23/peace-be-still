@@ -53,6 +53,9 @@ CB_PY = os.environ.get("PBS_CHATTERBOX_PY", str(Path.home() / "GitHub/how-we-kno
 REF_DIR = fill.HOME / "hh-reference" / "clone"
 SENT_GAP = 0.3
 MAX_TRIES = 3
+# Names the clone says wrong, respelled for it (audio/pronunciations.json "clone"; 24 Nov 2026: Machir heard
+# "Meshir", Lo-debar "La Odi Baar" on every seed). Only these sentences are voiced again: a kept take stays.
+PRON = T.load_pronunciations()
 
 
 # ------------------------------------------------------------------ pure
@@ -278,7 +281,7 @@ def make_story(story: dict, work: Path, deadline: float | None = None) -> dict |
         for ti, st in enumerate(steps):
             for si, s in enumerate(st.get("sentences", [])):
                 out = work / f"t{ti:03d}-s{si:03d}.wav"
-                items.append({"ref": str(ref[st["role"]]), "text": T.speech_text(s, "en", {}), "out": str(out),
+                items.append({"ref": str(ref[st["role"]]), "text": T.speech_text(s, "en", PRON, "clone"), "out": str(out),
                               "seed": 7 + seed.get(out.name, 0)})
         # In batches of BATCH sentences, with the memory guard between (never mid-sentence: every
         # sentence is saved as it is made, so a pause or a stop loses nothing).
