@@ -46,15 +46,15 @@ const SHOTS = [
   { locale: 'ko', n: '03', key: 'bible', route: BIBLE_23, scheme: 'light', caption: '개역한글 성경 전체를 무료로', must: '여호와는 나의 목자시니' },
   { locale: 'ko', n: '04', key: 'grief', route: '/grief', scheme: 'light', caption: '사랑하는 사람을 잃은 날들에', must: '사랑하는 사람을 잃었을 때' },
   { locale: 'zh-Hans', n: '01', key: 'bible', route: BIBLE_23, scheme: 'light', caption: '整本和合本圣经，免费读', must: '耶和华是我的牧者' },
-  { locale: 'zh-Hans', n: '02', key: 'today', route: '/today', scheme: 'light', caption: '每天一句宣告，一节经文', must: '今日宣告' },
+  { locale: 'zh-Hans', n: '02', key: 'today', route: '/today', scheme: 'light', caption: '每天一节经文和一句祷告', must: '今日宣告' },
   { locale: 'zh-Hans', n: '03', key: 'private', route: '/paid', scheme: 'light', caption: '无限圣经聊天，保持私密', must: '每天前 50 条消息是私密的' },
   { locale: 'zh-Hans', n: '04', key: 'grief', route: '/grief', scheme: 'light', caption: '失去亲人的日子里', must: '诗篇 34:18' },
   { locale: 'zh-Hant', n: '01', key: 'bible', route: BIBLE_23, scheme: 'light', caption: '整本和合本聖經，免費讀', must: '耶和華是我的牧者' },
-  { locale: 'zh-Hant', n: '02', key: 'today', route: '/today', scheme: 'light', caption: '每天一句宣告，一節經文', must: '今日宣告' },
+  { locale: 'zh-Hant', n: '02', key: 'today', route: '/today', scheme: 'light', caption: '每天一節經文和一句禱告', must: '今日宣告' },
   { locale: 'zh-Hant', n: '03', key: 'private', route: '/paid', scheme: 'light', caption: '無限聖經聊天，保持私密', must: '每天前 50 條訊息是私密的' },
   { locale: 'zh-Hant', n: '04', key: 'grief', route: '/grief', scheme: 'light', caption: '失去親人的日子裡', must: '詩篇 34:18' },
   // Imagination Nights custom page, screenshot 2 (store/custom/imagination-nights.md): adults on the Mindset door only.
-  { locale: 'en-US', page: 'imagination-nights', n: '02', key: 'own-night', route: '/own-night?paid=1', scheme: 'dark', caption: 'Write your own night (paid plan). Fall asleep to it.', must: 'Every word is yours to change',
+  { locale: 'en-US', page: 'imagination-nights', n: '02', key: 'own-night', route: '/own-night?paid=1', scheme: 'dark', caption: 'Write your own night (paid, 18+). Fall asleep to it.', must: 'Every word is yours to change',
     settings: { door: 'mindset', ...adult, voice: 'plain', language: 'en', journey: 'living-in-the-end' }, wish: 'my son passing his nursing exam and calling me happy' },
 ];
 
