@@ -20,7 +20,7 @@ Gratis, y sigue gratis: toda la Biblia para leer, y casi todos los capítulos en
 
 Un plan de pago suma chat bíblico ilimitado, un chat que recuerda lo que cargas, una sesión cada noche, sesiones hechas para ti, una noche que escribes tú para dormirte escuchándola (mayores de 18), todas las historias anteriores, planes más largos, temas para las declaraciones y escuchar sin conexión. Chat bíblico ilimitado. Privado en los primeros 50 mensajes de cada día; después, el chat sigue, pero ya no es privado. Los chats privados nunca se usan para entrenar IA.
 
-Las Escrituras se citan palabra por palabra de la Reina-Valera 1909, y de la King James en inglés.
+Las Escrituras se citan palabra por palabra de la Reina-Valera 1909; en inglés, de la King James; en coreano, de la 개역한글 (1961); y en chino, de la Versión de la Unión China de 1919. Las pantallas y el chat también están en coreano y en chino; el audio susurrado y las historias están en español y en inglés.
 
 Las respuestas del chat las escribe una IA y van marcadas como IA; lo que escribes va a proveedores gratuitos de IA que pueden aprender de ello.
 
