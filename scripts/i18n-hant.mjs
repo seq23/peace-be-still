@@ -10,8 +10,8 @@ import { fileURLToPath } from "node:url";
 const root = fileURLToPath(new URL("..", import.meta.url));
 const OpenCC = await import("opencc-js");
 const opencc = OpenCC.Converter({ from: "cn", to: "twp" });
-// Taiwan usage OpenCC's twp table misses: 帳戶 (not 賬戶), and 「」『』 for quotation marks.
-const TAIWAN = [[/賬戶/g, "帳戶"], [/賬號/g, "帳號"], [/“/g, "「"], [/”/g, "」"], [/‘/g, "『"], [/’/g, "』"]];
+// Taiwan usage OpenCC's twp table misses: 帳戶 (not 賬戶), 訂製 (not 定製), 計畫 (not 計劃), and 「」『』 for quotation marks.
+const TAIWAN = [[/賬戶/g, "帳戶"], [/賬號/g, "帳號"], [/定製/g, "訂製"], [/計劃/g, "計畫"], [/“/g, "「"], [/”/g, "」"], [/‘/g, "『"], [/’/g, "』"]];
 const convert = (text) => TAIWAN.reduce((out, [from, to]) => out.replace(from, to), opencc(text));
 // Names and numbers stay as written: the brand, store names, and the ASCII inside every value are untouched by OpenCC.
 const hans = JSON.parse(readFileSync(`${root}app/src/i18n/zh-Hans.json`, "utf8"));
