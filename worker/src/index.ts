@@ -556,7 +556,7 @@ async function chat(request: Request, env: Env, ctx: ExecutionContext, deps: Dep
     if (code === 'CHAT_GLOBAL_LIMIT') { tally(metrics, 'no_free_model'); logCode('CHAT_NO_FREE_MODEL', { reason: 'global_ceiling' }); return reply({ kind: 'no_free_model', ai: false, text: (mind ? noFreeModelMindsetText : noFreeModelText)[v.lang], scripture: [], remaining: null, limit: null, reminder: false }); }
     // The free day's wall (her messages, a second conversation the same day, or the network's share): the
     // count stays enforced here at the server, whatever the request claims; only the words differ. Every wall
-    // reply names her region's free crisis lines (no model reads her words here, so nothing depends on what she
+    // reply names her region's crisis lines (no model reads her words here, so nothing depends on what she
     // wrote). A teen (no paid teen is walled) keeps chat open and sees no counter: her daily-limit reply once her
     // one answer came today; before it (Workers AI was out or busy when she asked) the limit words, which claim no answer.
     const door = mind ? 'mindset' : 'faith';
